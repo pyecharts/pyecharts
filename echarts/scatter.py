@@ -3,8 +3,8 @@ from echarts.base import Base
 
 class Scatter(Base):
 
-    def __init__(self, title="", subtitle="", *, width=800, height=440):
-        super().__init__(title, subtitle, width=width, height=height)
+    def __init__(self, title="", subtitle="", *, background="#fff", width=800, height=440):
+        super().__init__(title, subtitle, background=background, width=width, height=height)
         self._option.update(
             series={"type":"scatter"}
         )
@@ -76,7 +76,6 @@ v2 = [10, 20, 30, 40, 50, 60]
 
 if __name__ == "__main__":
     scatter = Scatter()
-    v1, v2 = scatter.draw(r"e:\cup.png")
     scatter.add(v1, v2)
     # scatter.show_config()
     scatter.render()

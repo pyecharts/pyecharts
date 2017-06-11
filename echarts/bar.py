@@ -2,8 +2,8 @@ from echarts.base import Base
 
 class Bar(Base):
 
-    def __init__(self, title="", subtitle="", *, width=800, height=440):
-        super().__init__(title, subtitle, width=width, height=height)
+    def __init__(self, title="", subtitle="", *, background="#fff", width=800, height=440):
+        super().__init__(title, subtitle, background=background, width=width, height=height)
         self._option.update(
             series={"type":"bar"}
         )
