@@ -23,52 +23,8 @@
 
         // 指定图表的配置项和数据
         var option = {
-    "backgroundColor": "#161627",
-    "radar": {
-        "indicator": [
-            {
-                "max": 300,
-                "name": "AQI"
-            },
-            {
-                "max": 250,
-                "name": "PM2.5"
-            },
-            {
-                "max": 300,
-                "name": "PM10"
-            },
-            {
-                "max": 5,
-                "name": "CO"
-            },
-            {
-                "max": 200,
-                "name": "NO2"
-            },
-            {
-                "max": 100,
-                "name": "SO2"
-            }
-        ],
-        "shape": "rect",
-        "splitArea": {
-            "show": false
-        },
-        "axisLine": {
-            "lineStyle": {
-                "color": "rgba(238, 197, 102, 1)"
-            }
-        },
-        "splitLine": {
-            "lineStyle": {
-                "color": "rgba(238, 197, 102, 0.5)"
-            }
-        }
-    },
     "series": [
         {
-            "type": "radar",
             "symbol": "none",
             "data": [
                 [
@@ -351,15 +307,15 @@
                     31
                 ]
             ],
-            "areaStyle": {
-                "normal": {
-                    "opacity": 0.1
-                }
-            },
             "lineStyle": {
                 "normal": {
                     "opacity": 0.8,
                     "width": 1
+                }
+            },
+            "areaStyle": {
+                "normal": {
+                    "opacity": 0.1
                 }
             },
             "name": "北京",
@@ -367,10 +323,10 @@
                 "normal": {
                     "color": "#F9713C"
                 }
-            }
+            },
+            "type": "radar"
         },
         {
-            "type": "radar",
             "symbol": "none",
             "data": [
                 [
@@ -653,15 +609,15 @@
                     31
                 ]
             ],
-            "areaStyle": {
-                "normal": {
-                    "opacity": 0.05
-                }
-            },
             "lineStyle": {
                 "normal": {
                     "opacity": 0.8,
                     "width": 1
+                }
+            },
+            "areaStyle": {
+                "normal": {
+                    "opacity": 0.05
                 }
             },
             "name": "上海",
@@ -669,13 +625,23 @@
                 "normal": {
                     "color": "#B3E4A1"
                 }
-            }
+            },
+            "type": "radar"
         }
     ],
+    "title": {
+        "left": "auto",
+        "text": "雷达图",
+        "subtext": "subTitle",
+        "textStyle": {
+            "color": "#000"
+        }
+    },
+    "backgroundColor": "#161627",
     "legend": {
         "textStyle": {
             "fontSize": 14,
-            "color": "$fff"
+            "color": "#fff"
         },
         "data": [
             "北京",
@@ -684,9 +650,47 @@
         "selectedMode": "single",
         "bottom": 8
     },
-    "title": {
-        "subtext": "",
-        "text": "雷达图"
+    "radar": {
+        "shape": "circle",
+        "axisLine": {
+            "lineStyle": {
+                "color": "rgba(238, 197, 102, 0.5)"
+            }
+        },
+        "indicator": [
+            {
+                "name": "AQI",
+                "max": 300
+            },
+            {
+                "name": "PM2.5",
+                "max": 250
+            },
+            {
+                "name": "PM10",
+                "max": 300
+            },
+            {
+                "name": "CO",
+                "max": 5
+            },
+            {
+                "name": "NO2",
+                "max": 200
+            },
+            {
+                "name": "SO2",
+                "max": 100
+            }
+        ],
+        "splitArea": {
+            "show": false
+        },
+        "splitLine": {
+            "lineStyle": {
+                "color": "rgba(238, 197, 102, 0.5)"
+            }
+        }
     }
 };
 

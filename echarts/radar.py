@@ -2,8 +2,10 @@ from echarts.base import Base
 
 class Radar(Base):
 
-    def __init__(self, title="", subtitle="", *, background="#fff", width=800, height=440):
-        super().__init__(title, subtitle, background=background, width=width, height=height)
+    def __init__(self, title="", subtitle="", *, title_pos="auto", title_color="#000",
+                 background="#fff", width=800, height=440):
+        super().__init__(title, subtitle, title_pos=title_pos, title_color=title_color,
+                         background=background, width=width, height=height)
         self._option.update(
             series=[]
         )
@@ -11,7 +13,7 @@ class Radar(Base):
             legend={"data":[], "bottom":8, "selectedMode":"single"}
         )
 
-    def config(self, indicator, splitArea=False, shape="circle",
+    def config(self, indicator, *, splitArea=False, shape="circle",
                axis_line_color="rgba(238, 197, 102, 0.5)", split_line_color='rgba(238, 197, 102, 0.5)'):
         indilst = [{"name":row[0], "max":row[1]} for row in indicator]
         self._option.update(radar={"indicator": indilst, "shape":shape,
@@ -19,8 +21,8 @@ class Radar(Base):
                                    "splitArea":{"show":splitArea},
                                    "axisLine":{"lineStyle":{"color":axis_line_color}}})
 
-    def add(self, name, value, text_color="$fff", text_size=14, item_color="",
-            area_opacity=0.1, line_opacity=0.8):
+    def add(self, name, value, *, text_color="#fff", text_size=14, item_color="",
+            area_opacity=0.1, line_opacity=0.8, line_width=1):
         self._option.get('legend').get('data').append(name)
         self._option.get("legend").update(
             textStyle={"color":text_color, "fontSize":text_size}
@@ -28,7 +30,7 @@ class Radar(Base):
         self._option.get('series').append({
             "name": name, "type": "radar", "data": value, "symbol":"none",
             "itemStyle":{"normal":{"color":item_color}},
-            "lineStyle":{"normal":{"width":1, "opacity":line_opacity}},
+            "lineStyle":{"normal":{"width":line_width, "opacity":line_opacity}},
             "areaStyle":{"normal":{"opacity":area_opacity}}
         })
 
@@ -103,9 +105,9 @@ value_sh = [
 r = [("AQI", 300), ("PM2.5", 250), ("PM10", 300), ("CO", 5), ("NO2", 200), ("SO2", 100)]
 
 if __name__ == "__main__":
-    radar = Radar("雷达图", background="#161627", width=1200, height=600)
-    radar.config(r, shape="rect")
+    radar = Radar("雷达图", "subTitle", background="#161627", width=1200, height=600)
+    radar.config(r)
     radar.add("北京", value_bj, item_color="#F9713C")
     radar.add("上海", value_sh, item_color="#B3E4A1", area_opacity=0.05)
-    radar.render(temple=r"..\radartemple.html")
+    radar.render()
     radar.show_config()
