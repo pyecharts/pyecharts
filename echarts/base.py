@@ -37,9 +37,12 @@ class Base():
         pprint(self._option)
 
     def render(self, path=r"..\render.html"):
-        temple=r"..\temple.html"
-        if self._option.get("series")[0].get("type") == "radar":
-            temple=r"..\radartemple.html"
+        temple = ""
+        try:
+            if self._option.get("series")[0].get("type") == "radar":
+                temple=r"..\radartemple.html"
+        except:
+            temple = r"..\temple.html"
         with open(temple, "r", encoding="utf-8") as f:
             my_option = json.dumps(self._option, indent=4, ensure_ascii=False)
             open(path, "w+", encoding="utf-8").write(f.read()
