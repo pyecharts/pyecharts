@@ -3,54 +3,35 @@ from echarts.base import Base
 
 class Scatter(Base):
 
-    def __init__(self, title="", subtitle="", *, title_pos ="auto", title_color="#000",
-                 background="#fff", width=800, height=440):
-        super().__init__(title, subtitle, title_pos=title_pos, title_color=title_color,
-                         background=background, width=width, height=height)
+    def __init__(self, title="", subtitle="", **kwargs):
+        super().__init__(title, subtitle, **kwargs)
         self._option.update(
             series={"type":"scatter"}
         )
 
-    def add(self, x_value, y_value, *, xaxis_name="", xaxis_name_pos="middle",
-            yaxis_name="", yaxis_name_pos="middle", interval="auto",
-            label_show=False, label_pos="top", label_text_color="#000",
-            label_text_size=12, label_color=None):
-
+    def add(self, x_value, y_value, **kwargs):
         if isinstance(x_value, list) and isinstance(y_value, list):
             assert len(x_value) == len(y_value)
-            if label_pos not in ("top", "left", "right", "bottom", "inside"):
-                label_pos = "top"
-            if xaxis_name_pos not in("start", "middle", "end"):
-                xaxis_name_pos = "middle"
-            if yaxis_name_pos not in("start", "middle", "end"):
-                yaxis_name_pos = "middle"
+            xaxis, yaxis = Base._xy_axis(**kwargs)
             self._option.update(
-                xAxis={"name": xaxis_name, "nameLocation": xaxis_name_pos,
-                       "nameGap":25, "nameTextStyle":{"fontSize":14},
-                       "axisLabel":{"interval": interval}}
-            )
-            self._option.update(
-                dimensions=[xaxis_name, yaxis_name],
-                yAxis={"name": yaxis_name, "nameLocation": yaxis_name_pos, "nameGap":25,
-                       "nameTextStyle": {"fontSize":14}}
+                xAxis=xaxis, yAxis=yaxis,
+                # dimensions
             )
             self._option.get("series").update(
                 data=[list(z) for z in zip(x_value, y_value)],
-                label={"normal": {"show": label_show, "position": label_pos,
-                                  "textStyle": {"color": label_text_color,
-                                                "fontSize": label_text_size}}}
+                label=Base._label(**kwargs)
             )
-            if label_color is not None:
-                for color in reversed(list(label_color)):
-                    self._colorlst.insert(0, color)
-                self._option.update(
-                    color=self._colorlst
-                )
+            self._option.update(color=Base._color(**kwargs))
         else:
             raise ValueError
 
     @staticmethod
     def draw(path, color=None):
+        """
+        :param path: 图片存放路径
+        :param color: 默认只画出非白色区域，可自行配置颜色
+        :return:
+        """
         if color is None:
             color = (255, 255, 255)
         im = Image.open(path)
@@ -60,8 +41,7 @@ class Scatter(Base):
         for x in range(width):
             for y in range(height):
                 if y < int(height / 2):
-                    imarray[x, y], imarray[x, height - y - 1] = imarray[x, height - y - 1], imarray[x, y]
-        # 默认只画出非白色区域，可自行配置颜色
+                    imarray[x, y], imarray[x, height-y-1] = imarray[x, height-y-1], imarray[x, y]
         result = []
         for x in range(width):
             for y in range(height):
@@ -79,5 +59,5 @@ v2 = [10, 20, 30, 40, 50, 60]
 if __name__ == "__main__":
     scatter = Scatter()
     scatter.add(v1, v2)
-    # scatter.show_config()
+    scatter.show_config()
     scatter.render()

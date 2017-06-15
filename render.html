@@ -18,60 +18,110 @@
 
         // 指定图表的配置项和数据
         var option = {
+    "yAxis": {
+        "nameLocation": "middle",
+        "nameTextStyle": {
+            "fontSize": 14
+        },
+        "name": "",
+        "nameGap": 25
+    },
+    "color": [
+        "#c23531",
+        "#2f4554",
+        "#61a0a8",
+        "#d48265",
+        "#749f83",
+        "#ca8622",
+        "#bda29a",
+        "#6e7074",
+        "#546570",
+        "#c4ccd3"
+    ],
+    "backgroundColor": "#fff",
+    "legend": {
+        "data": [
+            "商家A",
+            "商家B"
+        ]
+    },
+    "xAxis": {
+        "nameLocation": "middle",
+        "nameGap": 25,
+        "axisLabel": {
+            "interval": "auto"
+        },
+        "nameTextStyle": {
+            "fontSize": 14
+        },
+        "data": [
+            "衬衫",
+            "羊毛衫",
+            "雪纺衫",
+            "裤子",
+            "高跟鞋",
+            "袜子"
+        ],
+        "name": ""
+    },
     "title": {
         "textStyle": {
             "color": "#000"
         },
+        "text": "岗位地点分布折线图",
         "left": "auto",
-        "subtext": "[x, y] 包含边界值 x 和 y",
-        "text": "异地招聘-工资范围分布"
+        "subtext": ""
     },
-    "series": {
-        "roseType": false,
-        "data": [
-            {
-                "name": "90cm",
-                "value": 4382
-            },
-            {
-                "name": "75cm",
-                "value": 74499
-            },
-            {
-                "name": "95cm",
-                "value": 674
-            },
-            {
-                "name": "80cm",
-                "value": 56619
-            },
-            {
-                "name": "70cm",
-                "value": 32743
-            },
-            {
-                "name": "85cm",
-                "value": 31839
+    "series": [
+        {
+            "type": "line",
+            "name": "商家A",
+            "data": [
+                5,
+                20,
+                36,
+                10,
+                10,
+                100
+            ],
+            "smooth": true,
+            "label": {
+                "normal": {
+                    "formatter": null,
+                    "textStyle": {
+                        "fontSize": 12,
+                        "color": "#000"
+                    },
+                    "show": true,
+                    "position": "top"
+                }
             }
-        ],
-        "radius": [
-            "0%",
-            "75%"
-        ],
-        "type": "pie",
-        "label": {
-            "normal": {
-                "textStyle": {
-                    "color": "#000",
-                    "fontSize": 12
-                },
-                "position": "outside",
-                "formatter": "{b} {d}% ",
-                "show": true
+        },
+        {
+            "type": "line",
+            "name": "商家B",
+            "data": [
+                55,
+                60,
+                16,
+                14,
+                15,
+                80
+            ],
+            "smooth": true,
+            "label": {
+                "normal": {
+                    "formatter": null,
+                    "textStyle": {
+                        "fontSize": 12,
+                        "color": "#000"
+                    },
+                    "show": true,
+                    "position": "top"
+                }
             }
         }
-    },
-    "backgroundColor": "#fff"
+    ]
 };
 
         // 使用刚指定的配置项和数据显示图表。

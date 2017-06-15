@@ -3,22 +3,13 @@ import random
 
 class Pie(Base):
 
-    def __init__(self, title="", subtitle="", *, title_pos ="auto", title_color="#000",
-                 background="#fff", width=800, height=440):
-        super().__init__(title, subtitle, title_pos=title_pos, title_color=title_color,
-                         background=background, width=width, height=height)
-        self._option.update(
-            series={"type":"pie"}
-        )
+    def __init__(self, title="", subtitle="", **kwargs):
+        super().__init__(title, subtitle, **kwargs)
+        self._option.update(series={"type":"pie"})
 
-    def add(self, name, value, *, rad=None, rose_type=False,
-            formatter=("data_name", "percent"), label_show=False, label_pos="outside",
-            label_text_color="#000", label_text_size=12, label_color=None, rand_data=False):
-
+    def add(self, name, value, *, rad=None, rose_type=False, rand_data=False, **kwargs):
         if isinstance(name, list) and isinstance(value, list):
             assert len(name) == len(value)
-            if label_pos not in ("center", "outside", "inside"):
-                label_pos = "outside"
             data = [{"name":z[0], "value":z[1]} for z in zip(name, value)]
             if rand_data:
                 random.shuffle(data)
@@ -27,24 +18,14 @@ class Pie(Base):
             else:
                 rad = ["{}%".format(rad[0]), "{}%".format(rad[1])]
             if rose_type is True: rose_type = "radius"
-            fmat_result = ""
             fmat = {"series_name": "{a} ", "data_name": "{b} ", "data_value": "{c} ", "percent": "{d}% "}
-            for f in formatter:
-                fmat_result += fmat.get(f)
+            fmat_result = [fmat.get(f) for f in kwargs.get('formatter', ("data_name", "percent"))]
+            kwargs.update(formatter="".join(fmat_result))
             self._option.get("series").update(
-                data=data,
-                radius=rad,
-                roseType=rose_type,
-                label={"normal":{"show":label_show, "position":label_pos, "formatter":fmat_result,
-                                 "textStyle":{"color":label_text_color,
-                                              "fontSize":label_text_size}}}
+                data=data, radius=rad,
+                roseType=rose_type, label=Base._label("pie", **kwargs)
             )
-            if label_color is not None:
-                for color in reversed(list(label_color)):
-                    self._colorlst.insert(0, color)
-                self._option.update(
-                    color=self._colorlst,
-                )
+            self._option.update(color=Base._color(**kwargs))
         else:
             raise ValueError
 

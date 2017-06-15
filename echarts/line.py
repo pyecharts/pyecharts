@@ -2,52 +2,22 @@ from echarts.base import Base
 
 class Line(Base):
 
-    def __init__(self, title="", subtitle="", *, title_pos ="auto", title_color="#000",
-                 background="#fff", width=800, height=440):
-        super().__init__(title, subtitle, title_pos=title_pos, title_color=title_color,
-                         background=background, width=width, height=height)
-        self._option.update(
-            series=[]
-        )
-        self._option.update(
-            legend={"data":[]}
-        )
+    def __init__(self, title="", subtitle="", **kwargs):
+        super().__init__(title, subtitle, **kwargs)
+        self._option.update(series=[], legend={"data":[]})
 
-    def add(self, name, x_axis, value, *, xaxis_name="", yaxis_name="",
-            xaxis_name_pos="middle", yaxis_name_pos="middle", interval="auto",
-            label_show=False, label_pos="top", label_text_size=12,
-            label_text_color="#000", label_color=None):
-
+    def add(self, name, x_axis, value, **kwargs):
         if isinstance(x_axis, list) and isinstance(value, list):
             assert len(x_axis) == len(value)
-            if label_pos not in ("top", "left", "right", "bottom", "inside"):
-                label_pos = "top"
-            if xaxis_name_pos not in("start", "middle", "end"):
-                xaxis_name_pos = "middle"
-            if yaxis_name_pos not in("start", "middle", "end"):
-                yaxis_name_pos = "middle"
-            self._option.update(
-                xAxis={"data": x_axis, "name": xaxis_name, "nameLocation": xaxis_name_pos,
-                       "nameGap":25, "nameTextStyle":{"fontSize":14},
-                       "axisLabel": {"interval": interval}}
-            )
-            self._option.update(
-                yAxis={"name": yaxis_name, "nameLocation": yaxis_name_pos, "nameGap":25,
-                       "nameTextStyle": {"fontSize":14}}
-            )
+            kwargs.update(x_axis=x_axis)
+            xaxis, yaxis = Base._xy_axis(**kwargs)
+            self._option.update(xAxis=xaxis, yAxis=yaxis)
             self._option.get('legend').get('data').append(name)
             self._option.get('series').append({
                 "name":name, "smooth":True, "type":"line", "data":value,
-                "label": {"normal":{"show":label_show, "position":label_pos,
-                                    "textStyle":{"color":label_text_color,
-                                                 "fontSize":label_text_size}}}
+                "label":Base._label(**kwargs)
             })
-            if label_color is not None:
-                for color in reversed(list(label_color)):
-                    self._colorlst.insert(0, color)
-                self._option.update(
-                    color=self._colorlst
-                )
+            self._option.update(color=Base._color(**kwargs))
         else:
             raise ValueError
 
