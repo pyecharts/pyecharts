@@ -8,10 +8,11 @@ class Base():
         self._width = kwargs.get('width', 800)
         self._height = kwargs.get('height', 440)
         self._option.update(
-            title={"text":title, "subtext":subtitle,
-                   "left":kwargs.get('title_pos', 'auto'),
-                   "textStyle":{"color":kwargs.get('title_color', '#000')}
+            title={"text": title, "subtext": subtitle,
+                   "left": kwargs.get('title_pos', 'auto'),
+                   "textStyle": {"color": kwargs.get('title_color', '#000')}
                    },
+            tooltip={},
             backgroundColor=kwargs.get('background', '#fff')
         )
 
@@ -22,10 +23,11 @@ class Base():
         label_pos = "top"
         if type == "pie":
             label_pos = "outside"
-        label={"normal": {"show":kwargs.get('label_show', False),
-                          "position":label_pos, "formatter":kwargs.get('formatter', None),
-                          "textStyle":{"color":kwargs.get('label_text_color', '#000'),
-                                       "fontSize":kwargs.get('label_text_size', 12)}}
+        label={"normal": {"show": kwargs.get('label_show', False),
+                          "position": label_pos,
+                          "formatter": kwargs.get('formatter', None),
+                          "textStyle":{"color": kwargs.get('label_text_color', '#000'),
+                                       "fontSize": kwargs.get('label_text_size', 12)}}
                }
         return label
 
@@ -44,16 +46,38 @@ class Base():
         # xaxis_name_pos ("start", "middle", "end")
         fontsize = kwargs.get('xy_font_size', 14)
         namegap = kwargs.get('nameGap', 25)
-        xAxis = {"data":kwargs.get('x_axis'), "name":kwargs.get('xaxis_name', ""),
-                 "nameLocation":kwargs.get('xaxis_name_pos', "middle"),
-                 "nameGap":namegap, "nameTextStyle":{"fontSize":fontsize},
+        xAxis = {"name": kwargs.get('xaxis_name', ""),
+                 "nameLocation": kwargs.get('xaxis_name_pos', "middle"),
+                 "nameGap": namegap,
+                 "nameTextStyle": {"fontSize": fontsize},
                  "axisLabel": {"interval": kwargs.get('interval', "auto")}
                  }
-        yAxis = {"name":kwargs.get('yaxis_name', ""),
-                 "nameLocation":kwargs.get('yaxis_name_pos', "middle"),
-                 "nameGap":namegap, "nameTextStyle":{"fontSize":fontsize}
+        yAxis = {"name": kwargs.get('yaxis_name', ""),
+                 "nameLocation": kwargs.get('yaxis_name_pos', "middle"),
+                 "nameGap": namegap,
+                 "nameTextStyle": {"fontSize": fontsize}
                  }
+        if kwargs.get('exchange', False):
+            yAxis.update(data=kwargs.get('x_axis'), type="category")
+            xAxis.update(type="value")
+        else:
+            xAxis.update(data=kwargs.get('x_axis'), type="category")
+            yAxis.update(type="value")
         return xAxis, yAxis
+
+    @staticmethod
+    def _markpoint(**kwargs):
+        markpoint = {"data": []}
+        data = kwargs.get('markpoint', None)
+        if data is not None:
+            for d in list(data):
+                if "max" in d:
+                    markpoint.get("data").append({"type": "max", "name": "最大值"})
+                elif "min" in d:
+                    markpoint.get("data").append({"type": "min", "name": "最小值"})
+                elif "average" in d:
+                    markpoint.get("data").append({"type": "average", "name": "平均值"})
+        return markpoint
 
     @staticmethod
     def cast(seq):
@@ -77,11 +101,9 @@ class Base():
 
     def render(self, path=r"..\render.html"):
         temple = r"..\temple.html"
-        try:
-            if self._option.get("series")[0].get("type") == "radar":
-                temple = r"..\radartemple.html"
-        except:
-            pass
+        if self._option.get("series")[0].get("type", None) in ("radar", "graph") \
+                or self._option.get("series")[0].get('type', None) == "gauge":
+            temple = r"..\radartemple.html"
         with open(temple, "r", encoding="utf-8") as f:
             my_option = json.dumps(self._option, indent=4, ensure_ascii=False)
             open(path, "w+", encoding="utf-8").write(f.read()

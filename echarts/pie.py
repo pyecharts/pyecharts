@@ -22,8 +22,10 @@ class Pie(Base):
             fmat_result = [fmat.get(f) for f in kwargs.get('formatter', ("data_name", "percent"))]
             kwargs.update(formatter="".join(fmat_result))
             self._option.get("series").update(
-                data=data, radius=rad,
-                roseType=rose_type, label=Base._label("pie", **kwargs)
+                data=data,
+                radius=rad,
+                roseType=rose_type,
+                label=Base._label("pie", **kwargs)
             )
             self._option.update(color=Base._color(**kwargs))
         else:

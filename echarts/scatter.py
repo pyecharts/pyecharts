@@ -5,9 +5,7 @@ class Scatter(Base):
 
     def __init__(self, title="", subtitle="", **kwargs):
         super().__init__(title, subtitle, **kwargs)
-        self._option.update(
-            series={"type":"scatter"}
-        )
+        self._option.update(series={"type": "scatter"})
 
     def add(self, x_value, y_value, **kwargs):
         if isinstance(x_value, list) and isinstance(y_value, list):

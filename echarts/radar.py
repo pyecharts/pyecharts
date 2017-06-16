@@ -8,28 +8,31 @@ class Radar(Base):
             series=[]
         )
         self._option.update(
-            legend={"data":[], "bottom":8, "selectedMode":"single"}
+            legend={"data": [], "bottom": 8, "selectedMode": "single"}
         )
 
     def config(self, indicator, *, splitArea=False, shape="circle",
                axis_line_color="rgba(238, 197, 102, 0.5)", split_line_color='rgba(238, 197, 102, 0.5)'):
-        indilst = [{"name":row[0], "max":row[1]} for row in indicator]
-        self._option.update(radar={"indicator": indilst, "shape":shape,
-                                   "splitLine":{"lineStyle":{"color":split_line_color}},
-                                   "splitArea":{"show":splitArea},
-                                   "axisLine":{"lineStyle":{"color":axis_line_color}}})
+        indilst = [{"name": row[0], "max": row[1]} for row in indicator]
+        self._option.update(radar={"indicator": indilst, "shape": shape,
+                                   "splitLine": {"lineStyle": {"color": split_line_color}},
+                                   "splitArea": {"show": splitArea},
+                                   "axisLine": {"lineStyle": {"color": axis_line_color}}})
 
     def add(self, name, value, *, text_color="#fff", text_size=14, item_color="",
             area_opacity=0.1, line_opacity=0.8, line_width=1):
         self._option.get('legend').get('data').append(name)
         self._option.get("legend").update(
-            textStyle={"color":text_color, "fontSize":text_size}
+            textStyle={"color": text_color, "fontSize": text_size}
         )
         self._option.get('series').append({
-            "name": name, "type": "radar", "data": value, "symbol":"none",
-            "itemStyle":{"normal":{"color":item_color}},
-            "lineStyle":{"normal":{"width":line_width, "opacity":line_opacity}},
-            "areaStyle":{"normal":{"opacity":area_opacity}}
+            "name": name,
+            "type": "radar",
+            "data": value,
+            "symbol": "none",
+            "itemStyle": {"normal": {"color": item_color}},
+            "lineStyle": {"normal": {"width": line_width, "opacity": line_opacity}},
+            "areaStyle": {"normal": {"opacity": area_opacity}}
         })
 
 value_bj = [
