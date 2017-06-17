@@ -5,8 +5,13 @@
     <meta charset="utf-8">
     <title>ECharts</title>
     <!-- 引入 echarts.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/3.5.4/echarts.common.min.js"></script>
-
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts-all-3.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=ZUONbpqGBsYGXNIYHicvbAbM"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
 </head>
 
 <body>
@@ -18,151 +23,106 @@
 
         // 指定图表的配置项和数据
         var option = {
+    "series": [
+        {
+            "symbolSize": 50,
+            "layout": "force",
+            "data": [
+                {
+                    "name": "结点1"
+                },
+                {
+                    "name": "结点6"
+                },
+                {
+                    "name": "结点4"
+                },
+                {
+                    "name": "结点2"
+                },
+                {
+                    "name": "结点7"
+                },
+                {
+                    "name": "结点5"
+                },
+                {
+                    "name": "结点8"
+                },
+                {
+                    "name": "结点3"
+                }
+            ],
+            "circular": {
+                "rotateLabel": false
+            },
+            "label": {
+                "normal": {
+                    "textStyle": {
+                        "fontSize": 12,
+                        "color": "#fff"
+                    },
+                    "show": true,
+                    "position": "inside"
+                }
+            },
+            "links": [
+                {
+                    "source": "结点1",
+                    "target": "结点2"
+                },
+                {
+                    "source": "结点2",
+                    "target": "结点3"
+                },
+                {
+                    "source": "结点3",
+                    "target": "结点4"
+                },
+                {
+                    "source": "结点4",
+                    "target": "结点5"
+                },
+                {
+                    "source": "结点5",
+                    "target": "结点6"
+                },
+                {
+                    "source": "结点6",
+                    "target": "结点7"
+                },
+                {
+                    "source": "结点7",
+                    "target": "结点3"
+                },
+                {
+                    "source": "结点8",
+                    "target": "结点1"
+                },
+                {
+                    "source": "结点7",
+                    "target": "结点8"
+                }
+            ],
+            "force": {
+                "repulsion": 1000
+            },
+            "type": "graph"
+        }
+    ],
+    "backgroundColor": "#fff",
+    "legend": {
+        "data": []
+    },
     "title": {
+        "text": "",
         "textStyle": {
             "color": "#000"
         },
         "left": "auto",
-        "text": "",
         "subtext": ""
     },
-    "yAxis": {
-        "nameGap": 25,
-        "name": "",
-        "nameTextStyle": {
-            "fontSize": 14
-        },
-        "nameLocation": "middle",
-        "type": "value"
-    },
-    "legend": {
-        "data": [
-            "商家A",
-            "商家B"
-        ]
-    },
-    "tooltip": {},
-    "series": [
-        {
-            "name": "商家A",
-            "markLine": {
-                "data": []
-            },
-            "type": "line",
-            "label": {
-                "normal": {
-                    "textStyle": {
-                        "fontSize": 12,
-                        "color": "#000"
-                    },
-                    "position": "top",
-                    "formatter": null,
-                    "show": false
-                }
-            },
-            "data": [
-                5,
-                20,
-                36,
-                10,
-                10,
-                100
-            ],
-            "smooth": false,
-            "markPoint": {
-                "data": [
-                    {
-                        "name": "最大值",
-                        "type": "max"
-                    },
-                    {
-                        "name": "最小值",
-                        "type": "min"
-                    },
-                    {
-                        "name": "平均值",
-                        "type": "average"
-                    }
-                ]
-            }
-        },
-        {
-            "name": "商家B",
-            "markLine": {
-                "data": [
-                    {
-                        "name": "最大值",
-                        "type": "max"
-                    },
-                    {
-                        "name": "最小值",
-                        "type": "min"
-                    },
-                    {
-                        "name": "平均值",
-                        "type": "average"
-                    }
-                ]
-            },
-            "type": "line",
-            "label": {
-                "normal": {
-                    "textStyle": {
-                        "fontSize": 12,
-                        "color": "#000"
-                    },
-                    "position": "top",
-                    "formatter": null,
-                    "show": false
-                }
-            },
-            "data": [
-                55,
-                60,
-                16,
-                14,
-                15,
-                80
-            ],
-            "smooth": false,
-            "markPoint": {
-                "data": []
-            }
-        }
-    ],
-    "xAxis": {
-        "name": "",
-        "nameLocation": "middle",
-        "nameTextStyle": {
-            "fontSize": 14
-        },
-        "data": [
-            "衬衫",
-            "羊毛衫",
-            "雪纺衫",
-            "裤子",
-            "高跟鞋",
-            "袜子"
-        ],
-        "nameGap": 25,
-        "axisLabel": {
-            "interval": "auto"
-        },
-        "type": "category"
-    },
-    "backgroundColor": "#fff",
-    "color": [
-        "#c23531",
-        "#2f4554",
-        "#61a0a8",
-        "#d48265",
-        "#749f83",
-        "#ca8622",
-        "#bda29a",
-        "#6e7074",
-        "#546570",
-        "#c4ccd3"
-    ]
+    "tooltip": {}
 };
 
         // 使用刚指定的配置项和数据显示图表。

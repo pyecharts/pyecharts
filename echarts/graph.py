@@ -7,15 +7,8 @@ class Graph(Base):
         super().__init__(title, subtitle, **kwargs)
 
     def add(self, links, **kwargs):
-        data, _links = [], []
-        dataset = set()
-        for link in links:
-            dataset.add(link[0])
-            dataset.add(link[1])
-        for d in list(dataset):
-            data.append({"name": d})
-        for link in links:
-            _links.append({"source": link[0], "target": link[1]})
+        data = [{"name": d} for d in {_ for link in links for _ in link}]
+        _links = [{"source": link[0], "target": link[1]} for link in links]
         self._option.get('series').append({
             "type": "graph",
             "layout": kwargs.get('layout', "force"),
