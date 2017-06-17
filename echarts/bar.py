@@ -1,4 +1,5 @@
 from echarts.base import Base
+from echarts.option import Option
 
 class Bar(Base):
 
@@ -9,7 +10,7 @@ class Bar(Base):
         if isinstance(x_axis, list) and isinstance(y_axis, list):
             assert len(x_axis) == len(y_axis)
             kwargs.update(x_axis=x_axis)
-            xaxis, yaxis = Base._xy_axis(**kwargs)
+            xaxis, yaxis = Option.xy_axis(**kwargs)
             # dimensions
             self._option.update(xAxis=xaxis, yAxis=yaxis)
             self._option.get('legend').get('data').append(name)
@@ -18,10 +19,12 @@ class Bar(Base):
                 "smooth": True,
                 "type": "bar",
                 "data": y_axis,
-                "label": Base._label(**kwargs)
+                "label": Option.label(**kwargs),
+                "markPoint": Option.mark_point(**kwargs),
+                "markLine": Option.mark_line(**kwargs)
             })
             self._option.get('legend').update(orient=kwargs.get('orient', 'horizontal'))
-            self._option.update(color=Base._color(**kwargs))
+            self._option.update(color=Option.color(self._colorlst, **kwargs))
         else:
             raise ValueError
 
@@ -36,6 +39,6 @@ v2 = [10, 25, 8, 60, 50, 150]
 if __name__ == "__main__":
     bar = Bar()
     bar.add("A", attr, v1)
-    bar.add("B", attr, v2, orient="vertical")
+    bar.add("B", attr, v2, orient="vertical", mark_line=["average"])
     bar.show_config()
     bar.render()
