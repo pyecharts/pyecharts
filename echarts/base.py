@@ -13,6 +13,8 @@ class Base():
                    "textStyle": {"color": kwargs.get('title_color', '#000')}
                    },
             tooltip={},
+            series=[],
+            legend={"data": []},
             backgroundColor=kwargs.get('background', '#fff')
         )
 
@@ -23,12 +25,15 @@ class Base():
         label_pos = "top"
         if type == "pie":
             label_pos = "outside"
+        elif type == "graph":
+            label_pos = "inside"
         label={"normal": {"show": kwargs.get('label_show', False),
                           "position": label_pos,
-                          "formatter": kwargs.get('formatter', None),
                           "textStyle":{"color": kwargs.get('label_text_color', '#000'),
                                        "fontSize": kwargs.get('label_text_size', 12)}}
                }
+        if type != "graph":
+            label.get("normal").update(formatter=kwargs.get('formatter', None))
         return label
 
     @staticmethod
@@ -42,7 +47,7 @@ class Base():
         return colorlst
 
     @staticmethod
-    def _xy_axis(**kwargs):
+    def _xy_axis(type=None, **kwargs):
         # xaxis_name_pos ("start", "middle", "end")
         fontsize = kwargs.get('xy_font_size', 14)
         namegap = kwargs.get('nameGap', 25)
@@ -62,6 +67,9 @@ class Base():
             xAxis.update(type="value")
         else:
             xAxis.update(data=kwargs.get('x_axis'), type="category")
+            yAxis.update(type="value")
+        if type == "scatter":
+            xAxis.update(data=kwargs.get('x_axis'), type="value")
             yAxis.update(type="value")
         return xAxis, yAxis
 
@@ -101,9 +109,13 @@ class Base():
 
     def render(self, path=r"..\render.html"):
         temple = r"..\temple.html"
-        if self._option.get("series")[0].get("type", None) in ("radar", "graph") \
-                or self._option.get("series")[0].get('type', None) == "gauge":
-            temple = r"..\radartemple.html"
+        try:
+            if self._option.get("series")[0].get("type", None) in ("radar", "graph") \
+                    or self._option.get("series")[0].get('type', None) == "gauge":
+                temple = r"..\radartemple.html"
+        except:
+            pass
+        print(temple)
         with open(temple, "r", encoding="utf-8") as f:
             my_option = json.dumps(self._option, indent=4, ensure_ascii=False)
             open(path, "w+", encoding="utf-8").write(f.read()

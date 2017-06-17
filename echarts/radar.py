@@ -5,14 +5,14 @@ class Radar(Base):
     def __init__(self, title="", subtitle="", **kwargs):
         super().__init__(title, subtitle, **kwargs)
         self._option.update(
-            series=[]
-        )
-        self._option.update(
             legend={"data": [], "bottom": 8, "selectedMode": "single"}
         )
 
     def config(self, indicator, *, splitArea=False, shape="circle",
-               axis_line_color="rgba(238, 197, 102, 0.5)", split_line_color='rgba(238, 197, 102, 0.5)'):
+               axis_line_color=None, split_line_color=None):
+        color = "rgba(238, 197, 102, 0.5)"
+        axis_line_color = color if axis_line_color is None else axis_line_color
+        split_line_color = color if split_line_color is None else split_line_color
         indilst = [{"name": row[0], "max": row[1]} for row in indicator]
         self._option.update(radar={"indicator": indilst, "shape": shape,
                                    "splitLine": {"lineStyle": {"color": split_line_color}},

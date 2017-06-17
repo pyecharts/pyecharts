@@ -4,7 +4,6 @@ class Bar(Base):
 
     def __init__(self, title="", subtitle="", **kwargs):
         super().__init__(title, subtitle, **kwargs)
-        self._option.update(series=[], legend={"data": []})
 
     def add(self, name, x_axis, y_axis, **kwargs):
         if isinstance(x_axis, list) and isinstance(y_axis, list):
@@ -21,6 +20,7 @@ class Bar(Base):
                 "data": y_axis,
                 "label": Base._label(**kwargs)
             })
+            self._option.get('legend').update(orient=kwargs.get('orient', 'horizontal'))
             self._option.update(color=Base._color(**kwargs))
         else:
             raise ValueError
@@ -36,6 +36,6 @@ v2 = [10, 25, 8, 60, 50, 150]
 if __name__ == "__main__":
     bar = Bar()
     bar.add("A", attr, v1)
-    bar.add("B", attr, v2)
+    bar.add("B", attr, v2, orient="vertical")
     bar.show_config()
     bar.render()

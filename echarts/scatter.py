@@ -5,20 +5,19 @@ class Scatter(Base):
 
     def __init__(self, title="", subtitle="", **kwargs):
         super().__init__(title, subtitle, **kwargs)
-        self._option.update(series={"type": "scatter"})
 
-    def add(self, x_value, y_value, **kwargs):
+    def add(self, name, x_value, y_value, **kwargs):
         if isinstance(x_value, list) and isinstance(y_value, list):
             assert len(x_value) == len(y_value)
-            xaxis, yaxis = Base._xy_axis(**kwargs)
-            self._option.update(
-                xAxis=xaxis, yAxis=yaxis,
-                # dimensions
-            )
-            self._option.get("series").update(
-                data=[list(z) for z in zip(x_value, y_value)],
-                label=Base._label(**kwargs)
-            )
+            xaxis, yaxis = Base._xy_axis("scatter", **kwargs)
+            self._option.update(xAxis=xaxis, yAxis=yaxis)
+            self._option.get('legend').get('data').append(name)
+            self._option.get('series').append({
+                "name": name,
+                "type": "scatter",
+                "data": [list(z) for z in zip(x_value, y_value)],
+                "label": Base._label(**kwargs),
+            })
             self._option.update(color=Base._color(**kwargs))
         else:
             raise ValueError
@@ -30,8 +29,7 @@ class Scatter(Base):
         :param color: 默认只画出非白色区域，可自行配置颜色
         :return:
         """
-        if color is None:
-            color = (255, 255, 255)
+        color = color or (255, 255, 255)
         im = Image.open(path)
         width, height = im.size
         imarray = im.load()
@@ -56,6 +54,7 @@ v2 = [10, 20, 30, 40, 50, 60]
 
 if __name__ == "__main__":
     scatter = Scatter()
-    scatter.add(v1, v2)
+    scatter.add("a", v1, v2)
+    scatter.add("b", v1[::-1], v2)
     scatter.show_config()
     scatter.render()
