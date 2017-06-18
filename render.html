@@ -5,13 +5,8 @@
     <meta charset="utf-8">
     <title>ECharts</title>
     <!-- 引入 echarts.js -->
-    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts-all-3.js"></script>
-    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
-    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
-    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
-    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
-    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=ZUONbpqGBsYGXNIYHicvbAbM"></script>
-    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/3.5.4/echarts.common.min.js"></script>
+
 </head>
 
 <body>
@@ -25,104 +20,138 @@
         var option = {
     "series": [
         {
-            "symbolSize": 50,
-            "layout": "force",
             "data": [
-                {
-                    "name": "结点1"
-                },
-                {
-                    "name": "结点6"
-                },
-                {
-                    "name": "结点4"
-                },
-                {
-                    "name": "结点2"
-                },
-                {
-                    "name": "结点7"
-                },
-                {
-                    "name": "结点5"
-                },
-                {
-                    "name": "结点8"
-                },
-                {
-                    "name": "结点3"
-                }
+                [
+                    10,
+                    10
+                ],
+                [
+                    20,
+                    20
+                ],
+                [
+                    30,
+                    30
+                ],
+                [
+                    40,
+                    40
+                ],
+                [
+                    50,
+                    50
+                ],
+                [
+                    60,
+                    60
+                ]
             ],
-            "circular": {
-                "rotateLabel": false
-            },
+            "type": "scatter",
+            "name": "a",
             "label": {
                 "normal": {
                     "textStyle": {
-                        "fontSize": 12,
-                        "color": "#fff"
+                        "color": "#000",
+                        "fontSize": 12
                     },
-                    "show": true,
-                    "position": "inside"
+                    "position": "top",
+                    "show": false,
+                    "formatter": null
                 }
-            },
-            "links": [
-                {
-                    "source": "结点1",
-                    "target": "结点2"
-                },
-                {
-                    "source": "结点2",
-                    "target": "结点3"
-                },
-                {
-                    "source": "结点3",
-                    "target": "结点4"
-                },
-                {
-                    "source": "结点4",
-                    "target": "结点5"
-                },
-                {
-                    "source": "结点5",
-                    "target": "结点6"
-                },
-                {
-                    "source": "结点6",
-                    "target": "结点7"
-                },
-                {
-                    "source": "结点7",
-                    "target": "结点3"
-                },
-                {
-                    "source": "结点8",
-                    "target": "结点1"
-                },
-                {
-                    "source": "结点7",
-                    "target": "结点8"
-                }
+            }
+        },
+        {
+            "data": [
+                [
+                    60,
+                    10
+                ],
+                [
+                    50,
+                    20
+                ],
+                [
+                    40,
+                    30
+                ],
+                [
+                    30,
+                    40
+                ],
+                [
+                    20,
+                    50
+                ],
+                [
+                    10,
+                    60
+                ]
             ],
-            "force": {
-                "repulsion": 1000
-            },
-            "type": "graph"
+            "type": "scatter",
+            "name": "b",
+            "label": {
+                "normal": {
+                    "textStyle": {
+                        "color": "#000",
+                        "fontSize": 12
+                    },
+                    "position": "top",
+                    "show": false,
+                    "formatter": null
+                }
+            }
         }
     ],
+    "color": [
+        "#c23531",
+        "#2f4554",
+        "#61a0a8",
+        "#d48265",
+        "#749f83",
+        "#ca8622",
+        "#bda29a",
+        "#6e7074",
+        "#546570",
+        "#c4ccd3"
+    ],
+    "tooltip": {},
     "backgroundColor": "#fff",
+    "yAxis": {
+        "nameLocation": "middle",
+        "nameGap": 25,
+        "name": "",
+        "type": "value",
+        "nameTextStyle": {
+            "fontSize": 14
+        }
+    },
     "legend": {
-        "data": []
+        "data": [
+            "a",
+            "b"
+        ]
+    },
+    "xAxis": {
+        "nameLocation": "middle",
+        "nameGap": 25,
+        "name": "",
+        "data": null,
+        "type": "value",
+        "nameTextStyle": {
+            "fontSize": 14
+        },
+        "axisLabel": {
+            "interval": "auto"
+        }
     },
     "title": {
-        "text": "",
         "textStyle": {
             "color": "#000"
         },
-        "left": "auto",
-        "subtext": ""
-    },
-    "tooltip": {}
+        "text": "",
+        "subtext": "",
+        "left": "auto"
+    }
 };
 
         // 使用刚指定的配置项和数据显示图表。

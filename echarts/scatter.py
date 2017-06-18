@@ -1,6 +1,5 @@
 from PIL import Image
 from echarts.base import Base
-from echarts.option import Option
 
 class Scatter(Base):
 
@@ -10,21 +9,20 @@ class Scatter(Base):
     def add(self, name, x_value, y_value, **kwargs):
         if isinstance(x_value, list) and isinstance(y_value, list):
             assert len(x_value) == len(y_value)
-            xaxis, yaxis = Option.xy_axis("scatter", **kwargs)
+            xaxis, yaxis = self.Parms.xy_axis("scatter", **kwargs)
             self._option.update(xAxis=xaxis, yAxis=yaxis)
             self._option.get('legend').get('data').append(name)
             self._option.get('series').append({
                 "name": name,
                 "type": "scatter",
                 "data": [list(z) for z in zip(x_value, y_value)],
-                "label": Option.label(**kwargs),
+                "label": self.Parms.label(**kwargs),
             })
-            self._option.update(color=Option.color(self._colorlst, **kwargs))
+            self._option.update(color=self.Parms.color(self._colorlst, **kwargs))
         else:
             raise ValueError
 
-    @staticmethod
-    def draw(path, color=None):
+    def draw(self, path, color=None):
         """
         :param path: 图片存放路径
         :param color: 默认只画出非白色区域，可自行配置颜色
@@ -44,7 +42,7 @@ class Scatter(Base):
             for y in range(height):
                 if imarray[x, y] != color:
                     result.append((x, y))
-        return Option.cast(result)
+        return self.Parms.cast(result)
 
     def config(self):
         pass

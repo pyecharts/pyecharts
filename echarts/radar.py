@@ -1,5 +1,4 @@
 from echarts.base import Base
-from echarts.option import Option
 
 class Radar(Base):
 
@@ -11,9 +10,9 @@ class Radar(Base):
         self._option.update(radar={"indicator": indilst,
                                    "shape": kwargs.get("shape", ""),
                                    "name": {"textStyle": {"color": "#000"}},
-                                   "splitLine": Option.split_line(**kwargs),
-                                   "splitArea": Option.split_area(**kwargs),
-                                   "axisLine": Option.axis_line(**kwargs)})
+                                   "splitLine": self.Parms.split_line(**kwargs),
+                                   "splitArea": self.Parms.split_area(**kwargs),
+                                   "axisLine": self.Parms.axis_line(**kwargs)})
 
     def add(self, name, value, **kwargs):
         self._option.get('legend').get('data').append(name)
@@ -22,10 +21,10 @@ class Radar(Base):
             "type": "radar",
             "data": value,
             "symbol": None,
-            "lineStyle": Option.line_style(**kwargs),
+            "lineStyle": self.Parms.line_style(**kwargs),
             "areaStyle": {"normal": {"opacity": kwargs.get('area_opacity', 0)}}
         })
-        self._option.update(color=Option.color(self._colorlst, **kwargs))
+        self._option.update(color=self.Parms.color(self._colorlst, **kwargs))
 
 
 r = [("销售", 6500),

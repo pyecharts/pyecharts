@@ -1,5 +1,4 @@
 from echarts.base import Base
-from echarts.option import Option
 
 class Line(Base):
 
@@ -10,7 +9,7 @@ class Line(Base):
         if isinstance(x_axis, list) and isinstance(y_axis, list):
             assert len(x_axis) == len(y_axis)
             kwargs.update(x_axis=x_axis)
-            xaxis, yaxis = Option.xy_axis(**kwargs)
+            xaxis, yaxis = self.Parms.xy_axis(**kwargs)
             self._option.update(xAxis=xaxis, yAxis=yaxis)
             self._option.get('legend').get('data').append(name)
             self._option.get('series').append({
@@ -18,11 +17,11 @@ class Line(Base):
                 "smooth": kwargs.get('smooth', False),
                 "type": "line",
                 "data": y_axis,
-                "label": Option.label(**kwargs),
-                "markPoint": Option.mark_point(**kwargs),
-                "markLine": Option.mark_line(**kwargs)
+                "label": self.Parms.label(**kwargs),
+                "markPoint": self.Parms.mark_point(**kwargs),
+                "markLine": self.Parms.mark_line(**kwargs)
             })
-            self._option.update(color=Option.color(self._colorlst, **kwargs))
+            self._option.update(color=self.Parms.color(self._colorlst, **kwargs))
         else:
             raise ValueError
 

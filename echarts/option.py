@@ -1,10 +1,7 @@
 
 class Option():
 
-    @staticmethod
-    def label(type=None, **kwargs):
-        # Pie -> label_pos ("center", "outside", "inside"):
-        # Line/Scatter/Bar -> label_pos ("top", left", "right", "bottom", "inside"):
+    def label(self, type=None, **kwargs):
         label_pos = "top"
         if type == "pie":
             label_pos = "outside"
@@ -18,42 +15,35 @@ class Option():
             _label.get("normal").update(formatter=kwargs.get('formatter', None))
         return _label
 
-    @staticmethod
-    def color(colorlst, **kwargs):
+    def color(self, colorlst, **kwargs):
         lc = kwargs.get('label_color', None)
         if lc is not None:
             for color in reversed(list(lc)):
                 colorlst.insert(0, color)
         return colorlst
 
-    @staticmethod
-    def line_style(**kwargs):
+    def line_style(self, **kwargs):
         _line_style = {"normal": {"width": kwargs.get('line_width', 1),
                                   "opacity": kwargs.get('line_opacity', 1),
                                   "type": kwargs.get('line_type', "solid")}}
         return _line_style
 
-    @staticmethod
-    def split_line(**kwargs):
+    def split_line(self ,**kwargs):
         _split_line = {"show": kwargs.get('split_line_show', True),
-                       "lineStyle": Option.line_style(**kwargs)}
+                       "lineStyle": Option.line_style(self, **kwargs)}
         return _split_line
 
-    @staticmethod
-    def axis_line(**kwargs):
+    def axis_line(self, **kwargs):
         _axis_line = {"show": kwargs.get('axis_line_show', True),
-                      "lineStyle": Option.line_style(**kwargs)}
+                      "lineStyle": Option.line_style(self, **kwargs)}
         return _axis_line
 
-    @staticmethod
-    def split_area(**kwargs):
+    def split_area(self, **kwargs):
         _split_area = {"show": kwargs.get('split_area_show', False),
                        "areaStyle": {"opacity": kwargs.get('split_area_opacity', 1)}}
         return _split_area
 
-    @staticmethod
-    def xy_axis(type=None, **kwargs):
-        # xaxis_name_pos ("start", "middle", "end")
+    def xy_axis(self, type=None, **kwargs):
         fontsize = kwargs.get('xy_font_size', 14)
         namegap = kwargs.get('nameGap', 25)
         _xAxis = {"name": kwargs.get('xaxis_name', ""),
@@ -78,8 +68,7 @@ class Option():
             _yAxis.update(type="value")
         return _xAxis, _yAxis
 
-    @staticmethod
-    def _mark(data):
+    def _mark(self, data):
         mark = {"data": []}
         if data is not None:
             for d in list(data):
@@ -91,16 +80,13 @@ class Option():
                     mark.get("data").append({"type": "average", "name": "平均值"})
         return mark
 
-    @staticmethod
-    def mark_point(**kwargs):
-        return Option._mark(kwargs.get('mark_point', None))
+    def mark_point(self, **kwargs):
+        return self._mark(kwargs.get('mark_point', None))
 
-    @staticmethod
-    def mark_line(**kwargs):
-        return Option._mark(kwargs.get('mark_line', None))
+    def mark_line(self, **kwargs):
+        return self._mark(kwargs.get('mark_line', None))
 
-    @staticmethod
-    def cast(seq):
+    def cast(self, seq):
         k_lst, v_lst = [], []
         if isinstance(seq, list):
             for s in seq:

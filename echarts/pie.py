@@ -1,6 +1,5 @@
 import random
 from echarts.base import Base
-from echarts.option import Option
 
 class Pie(Base):
 
@@ -28,9 +27,9 @@ class Pie(Base):
                 "data": data,
                 "radius": rad,
                 "roseType": rose_type,
-                "label": Option.label(**kwargs),
+                "label": self.Parms.label(**kwargs),
             })
-            self._option.update(color=Option.color(self._colorlst, **kwargs))
+            self._option.update(color=self.Parms.color(self._colorlst, **kwargs))
         else:
             raise ValueError
 

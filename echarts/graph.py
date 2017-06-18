@@ -1,5 +1,4 @@
 from echarts.base import Base
-from echarts.option import Option
 
 class Graph(Base):
 
@@ -15,7 +14,7 @@ class Graph(Base):
             "circular": {"rotateLabel": False},
             "force": {"repulsion": 1000},
             "symbolSize": kwargs.get('symbol_size', 50),
-            "label": Option.label("graph", **kwargs),
+            "label": self.Parms.label("graph", **kwargs),
             "data":data,
             "links":_links
         })

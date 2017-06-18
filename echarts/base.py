@@ -1,9 +1,11 @@
 import json
 from pprint import pprint
+from echarts.api import Api
 
 class Base():
 
     def __init__(self, title, subtitle, **kwargs):
+        self.Parms = Api()
         self._option = {}
         self._width = kwargs.get('width', 800)
         self._height = kwargs.get('height', 440)
