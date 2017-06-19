@@ -15,14 +15,13 @@ class Bar(Base):
             self._option.get('legend').get('data').append(name)
             self._option.get('series').append({
                 "name": name,
-                "smooth": True,
                 "type": "bar",
                 "data": y_axis,
                 "label": self.Parms.label(**kwargs),
                 "markPoint": self.Parms.mark_point(**kwargs),
                 "markLine": self.Parms.mark_line(**kwargs)
             })
-            self._option.get('legend').update(orient=kwargs.get('orient', 'horizontal'))
+            self._option.get('legend').update(self.Parms.legend(**kwargs))
             self._option.update(color=self.Parms.color(self._colorlst, **kwargs))
         else:
             raise ValueError
@@ -37,7 +36,7 @@ v2 = [10, 25, 8, 60, 50, 150]
 
 if __name__ == "__main__":
     bar = Bar()
-    bar.add("A", attr, v1, label_text_size=20)
-    # bar.add("B", attr, v2, orient="vertical", mark_line=["average"])
+    bar.add("B", attr, v2, mark_line=["average"])
+    bar.add("A", attr, v1, label_text_size=20, legend_pos="left", legend_orient="vertical")
     bar.show_config()
     bar.render()

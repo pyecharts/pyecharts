@@ -27,11 +27,11 @@ class Base():
         pprint(self._option)
 
     def render(self, path=r"..\render.html"):
-        temple = r"..\temple.html"
+        temple = r"..\temple\temple.html"
         try:
             if self._option.get("series")[0].get("type", None) in ("radar", "graph") \
                     or self._option.get("series")[0].get('type', None) == "gauge":
-                temple = r"..\_temple.html"
+                temple = r"..\temple\_temple.html"
         except:
             pass
         with open(temple, "r", encoding="utf-8") as f:

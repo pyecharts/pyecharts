@@ -13,7 +13,8 @@ class Pie(Base):
             if rand_data:
                 random.shuffle(data)
             rad = ["0%", "75%"] if rad is None else ["{}%".format(rad[0]), "{}%".format(rad[1])]
-            if rose_type is True: rose_type = "radius"
+            if rose_type:
+                rose_type = "radius"
             fmat = {"series_name": "{a} ",
                     "data_name": "{b} ",
                     "data_value": "{c} ",
@@ -29,6 +30,8 @@ class Pie(Base):
                 "roseType": rose_type,
                 "label": self.Parms.label(**kwargs),
             })
+            self._option.get('tooltip').update(formatter='{b0}: {c0}')
+            self._option.get('legend').update(self.Parms.legend(**kwargs))
             self._option.update(color=self.Parms.color(self._colorlst, **kwargs))
         else:
             raise ValueError
@@ -42,6 +45,6 @@ value = [11, 12, 13, 10, 10, 10]
 
 if __name__ == "__main__":
     pie = Pie()
-    pie.add(attr, value, label_show=True, rand_data=True, rad=[30, 70])
+    pie.add(attr, value, label_show=True, rand_data=True, rad=[30, 70], rose_type=True)
     pie.show_config()
     pie.render()

@@ -21,6 +21,7 @@ class Line(Base):
                 "markPoint": self.Parms.mark_point(**kwargs),
                 "markLine": self.Parms.mark_line(**kwargs)
             })
+            self._option.get('legend').update(self.Parms.legend(**kwargs))
             self._option.update(color=self.Parms.color(self._colorlst, **kwargs))
         else:
             raise ValueError

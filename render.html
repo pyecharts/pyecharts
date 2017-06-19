@@ -18,88 +18,60 @@
 
         // 指定图表的配置项和数据
         var option = {
+    "backgroundColor": "#fff",
     "series": [
         {
             "data": [
-                [
-                    10,
-                    10
-                ],
-                [
-                    20,
-                    20
-                ],
-                [
-                    30,
-                    30
-                ],
-                [
-                    40,
-                    40
-                ],
-                [
-                    50,
-                    50
-                ],
-                [
-                    60,
-                    60
-                ]
+                {
+                    "value": 10,
+                    "name": "袜子"
+                },
+                {
+                    "value": 10,
+                    "name": "高跟鞋"
+                },
+                {
+                    "value": 11,
+                    "name": "衬衫"
+                },
+                {
+                    "value": 10,
+                    "name": "裤子"
+                },
+                {
+                    "value": 12,
+                    "name": "羊毛衫"
+                },
+                {
+                    "value": 13,
+                    "name": "雪纺衫"
+                }
             ],
-            "type": "scatter",
-            "name": "a",
+            "name": [
+                "衬衫",
+                "羊毛衫",
+                "雪纺衫",
+                "裤子",
+                "高跟鞋",
+                "袜子"
+            ],
+            "type": "pie",
+            "roseType": "radius",
             "label": {
                 "normal": {
+                    "position": "top",
+                    "show": true,
+                    "formatter": "{b} {d}% ",
                     "textStyle": {
                         "color": "#000",
                         "fontSize": 12
-                    },
-                    "position": "top",
-                    "show": false,
-                    "formatter": null
+                    }
                 }
-            }
-        },
-        {
-            "data": [
-                [
-                    60,
-                    10
-                ],
-                [
-                    50,
-                    20
-                ],
-                [
-                    40,
-                    30
-                ],
-                [
-                    30,
-                    40
-                ],
-                [
-                    20,
-                    50
-                ],
-                [
-                    10,
-                    60
-                ]
-            ],
-            "type": "scatter",
-            "name": "b",
-            "label": {
-                "normal": {
-                    "textStyle": {
-                        "color": "#000",
-                        "fontSize": 12
-                    },
-                    "position": "top",
-                    "show": false,
-                    "formatter": null
-                }
-            }
+            },
+            "radius": [
+                "30%",
+                "70%"
+            ]
         }
     ],
     "color": [
@@ -114,43 +86,31 @@
         "#546570",
         "#c4ccd3"
     ],
-    "tooltip": {},
-    "backgroundColor": "#fff",
-    "yAxis": {
-        "nameLocation": "middle",
-        "nameGap": 25,
-        "name": "",
-        "type": "value",
-        "nameTextStyle": {
-            "fontSize": 14
-        }
-    },
-    "legend": {
-        "data": [
-            "a",
-            "b"
-        ]
-    },
-    "xAxis": {
-        "nameLocation": "middle",
-        "nameGap": 25,
-        "name": "",
-        "data": null,
-        "type": "value",
-        "nameTextStyle": {
-            "fontSize": 14
-        },
-        "axisLabel": {
-            "interval": "auto"
-        }
-    },
     "title": {
+        "subtext": "",
         "textStyle": {
             "color": "#000"
         },
-        "text": "",
-        "subtext": "",
+        "left": "auto",
+        "text": ""
+    },
+    "legend": {
+        "orient": "horizontal",
+        "show": true,
+        "data": [
+            [
+                "衬衫",
+                "羊毛衫",
+                "雪纺衫",
+                "裤子",
+                "高跟鞋",
+                "袜子"
+            ]
+        ],
         "left": "auto"
+    },
+    "tooltip": {
+        "formatter": "{b0}: {c0}"
     }
 };
 

@@ -18,6 +18,8 @@ class Graph(Base):
             "data":data,
             "links":_links
         })
+        self._option.get('legend').update(self.Parms.legend(**kwargs))
+        self._option.update(color=self.Parms.color(self._colorlst, **kwargs))
 
 if __name__ == "__main__":
     links = [("结点1", "结点2"),

@@ -24,6 +24,7 @@ class Radar(Base):
             "lineStyle": self.Parms.line_style(**kwargs),
             "areaStyle": {"normal": {"opacity": kwargs.get('area_opacity', 0)}}
         })
+        self._option.get('legend').update(self.Parms.legend(**kwargs))
         self._option.update(color=self.Parms.color(self._colorlst, **kwargs))
 
 

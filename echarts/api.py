@@ -8,13 +8,8 @@ class Api():
     def label(self, type=None, **kwargs):
         """
 
-        :param type:
+        :param type: 图表类型
         :param kwargs:
-            :param formatter:
-            :param label_pos:
-            :param label_show:
-            :param label_text_color:
-            :param label_text_size:
         :return:
         """
         return self.config.label(type, **kwargs)
@@ -22,9 +17,8 @@ class Api():
     def color(self, colorlst, **kwargs):
         """
 
-        :param colorlst:
+        :param colorlst: 颜色列表
         :param kwargs:
-            :param label_color
         :return:
         """
         return self.config.color(colorlst, **kwargs)
@@ -33,9 +27,6 @@ class Api():
         """
 
         :param kwargs:
-            :param line_width
-            :param line_opacity
-            :param line_type
         :return:
         """
         return self.config.line_style(**kwargs)
@@ -44,7 +35,6 @@ class Api():
         """
 
         :param kwargs:
-            :param split_line_show
         :return:
         """
         return self.config.split_line(**kwargs)
@@ -53,7 +43,6 @@ class Api():
         """
 
         :param kwargs:
-            :param axis_line_show
         :return:
         """
         return self.config.axis_line(**kwargs)
@@ -62,8 +51,6 @@ class Api():
         """
 
         :param kwargs:
-            :param split_area_show
-            :param split_area_opacity
         :return:
         """
         return self.config.split_area(**kwargs)
@@ -71,18 +58,8 @@ class Api():
     def xy_axis(self, type=None, **kwargs):
         """
 
-        :param type:
+        :param type: 图表类型
         :param kwargs:
-            :param xy_font_size
-            :param nameGap
-            :param xaxis_name
-            :param xaxis_name_pos
-            :param fontSize
-            :param interval
-            :param yaxis_name
-            :param yaxis_name_pos
-            :param exchange
-            :param x_axis
         :return:
         """
         return self.config.xy_axis(type, **kwargs)
@@ -90,7 +67,7 @@ class Api():
     def _mark(self, data):
         """
 
-        :param data:
+        :param data: 标记数据
         :return:
         """
         return self.config._mark(data)
@@ -99,7 +76,6 @@ class Api():
         """
 
         :param kwargs:
-            :param mark_point
         :return:
         """
         return self.config.mark_point(**kwargs)
@@ -108,15 +84,22 @@ class Api():
         """
 
         :param kwargs:
-            :param mark_line
         :return:
         """
         return self.config.mark_line(**kwargs)
 
+    def legend(self, **kwargs):
+        """
+
+        :param kwargs:
+        :return:
+        """
+        return self.config.legend(**kwargs)
+
     def cast(self, seq):
         """
 
-        :param seq:
+        :param seq: 转换序列
         :return:
         """
         return self.config.cast(seq)

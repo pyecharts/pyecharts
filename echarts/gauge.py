@@ -15,7 +15,7 @@ class Gauge(Base):
         })
 
 if __name__ == "__main__":
-    gauge = Gauge("业务指标")
-    gauge.add("业务指标", 100, "是萌萌哒真爱的概率")
+    gauge = Gauge()
+    gauge.add("业务指标", 66.66, "完成率")
     gauge.show_config()
     gauge.render()
