@@ -3,6 +3,7 @@ class Option():
 
     def label(self,
               type=None,
+              emphasis=False,
               label_pos="top",
               label_show=False,
               label_text_color="#000",
@@ -27,7 +28,8 @@ class Option():
         _label = {"normal": {"show": label_show,
                              "position": label_pos,
                              "textStyle": {"color": label_text_color,
-                                           "fontSize": label_text_size}}}
+                                           "fontSize": label_text_size}},
+                  "emphasis": {"show": emphasis}}
         if type != "graph":
             _label.get("normal").update(formatter=formatter)
         return _label
@@ -198,7 +200,7 @@ class Option():
     def legend(self,
                legend_show=True,
                legend_orient="horizontal",
-               legend_pos="auto",
+               legend_pos="center",
                **kwargs):
         """
 
@@ -231,3 +233,6 @@ class Option():
                 k_lst.append(k)
                 v_lst.append(v)
         return k_lst, v_lst
+
+    def commad(self, s1=1,s2=2):
+        pass

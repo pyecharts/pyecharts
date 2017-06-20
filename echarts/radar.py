@@ -5,27 +5,30 @@ class Radar(Base):
     def __init__(self, title="", subtitle="", **kwargs):
         super().__init__(title, subtitle, **kwargs)
 
-    def config(self, indicator, **kwargs):
+    def config(self, indicator, shape="", rader_text_color="#000", **kwargs):
         indilst = [{"name": row[0], "max": row[1]} for row in indicator]
         self._option.update(radar={"indicator": indilst,
-                                   "shape": kwargs.get("shape", ""),
-                                   "name": {"textStyle": {"color": "#000"}},
-                                   "splitLine": self.Parms.split_line(**kwargs),
-                                   "splitArea": self.Parms.split_area(**kwargs),
-                                   "axisLine": self.Parms.axis_line(**kwargs)})
+                                   "shape": shape,
+                                   "name": {"textStyle": {"color": rader_text_color}},
+                                   "splitLine": self.Option.split_line(**kwargs),
+                                   "splitArea": self.Option.split_area(**kwargs),
+                                   "axisLine": self.Option.axis_line(**kwargs)})
 
-    def add(self, name, value, **kwargs):
+    def add(self, *args, **kwargs):
+        self._add(*args, **kwargs)
+
+    def _add(self, name, value, **kwargs):
         self._option.get('legend').get('data').append(name)
         self._option.get('series').append({
             "name": name,
             "type": "radar",
             "data": value,
             "symbol": None,
-            "lineStyle": self.Parms.line_style(**kwargs),
+            "lineStyle": self.Option.line_style(**kwargs),
             "areaStyle": {"normal": {"opacity": kwargs.get('area_opacity', 0)}}
         })
-        self._option.get('legend').update(self.Parms.legend(**kwargs))
-        self._option.update(color=self.Parms.color(self._colorlst, **kwargs))
+        self._option.get('legend').update(self.Option.legend(**kwargs))
+        self._option.update(color=self.Option.color(self._colorlst, **kwargs))
 
 
 r = [("销售", 6500),

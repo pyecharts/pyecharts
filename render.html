@@ -11,69 +11,117 @@
 
 <body>
     <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
-    <div id="main" style="width: 800px;height:440px;"></div>
+    <div id="main" style="width: 800px;height:400px;"></div>
     <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
         var myChart = echarts.init(document.getElementById('main'));
 
         // 指定图表的配置项和数据
         var option = {
-    "backgroundColor": "#fff",
     "series": [
         {
+            "type": "scatter",
             "data": [
-                {
-                    "value": 10,
-                    "name": "袜子"
-                },
-                {
-                    "value": 10,
-                    "name": "高跟鞋"
-                },
-                {
-                    "value": 11,
-                    "name": "衬衫"
-                },
-                {
-                    "value": 10,
-                    "name": "裤子"
-                },
-                {
-                    "value": 12,
-                    "name": "羊毛衫"
-                },
-                {
-                    "value": 13,
-                    "name": "雪纺衫"
-                }
+                [
+                    10,
+                    10
+                ],
+                [
+                    20,
+                    20
+                ],
+                [
+                    30,
+                    30
+                ],
+                [
+                    40,
+                    40
+                ],
+                [
+                    50,
+                    50
+                ],
+                [
+                    60,
+                    60
+                ]
             ],
-            "name": [
-                "衬衫",
-                "羊毛衫",
-                "雪纺衫",
-                "裤子",
-                "高跟鞋",
-                "袜子"
-            ],
-            "type": "pie",
-            "roseType": "radius",
+            "name": "a",
             "label": {
                 "normal": {
+                    "show": false,
                     "position": "top",
-                    "show": true,
-                    "formatter": "{b} {d}% ",
+                    "formatter": null,
                     "textStyle": {
                         "color": "#000",
                         "fontSize": 12
                     }
+                },
+                "emphasis": {
+                    "show": false
                 }
-            },
-            "radius": [
-                "30%",
-                "70%"
-            ]
+            }
+        },
+        {
+            "type": "scatter",
+            "data": [
+                [
+                    60,
+                    10
+                ],
+                [
+                    50,
+                    20
+                ],
+                [
+                    40,
+                    30
+                ],
+                [
+                    30,
+                    40
+                ],
+                [
+                    20,
+                    50
+                ],
+                [
+                    10,
+                    60
+                ]
+            ],
+            "name": "b",
+            "label": {
+                "normal": {
+                    "show": false,
+                    "position": "top",
+                    "formatter": null,
+                    "textStyle": {
+                        "color": "#000",
+                        "fontSize": 12
+                    }
+                },
+                "emphasis": {
+                    "show": false
+                }
+            }
         }
     ],
+    "title": {
+        "subtextStyle": {
+            "color": "#aaa",
+            "fontSize": 12
+        },
+        "subtext": "",
+        "left": "auto",
+        "textStyle": {
+            "color": "#000",
+            "fontSize": 18
+        },
+        "text": ""
+    },
+    "backgroundColor": "#fff",
     "color": [
         "#c23531",
         "#2f4554",
@@ -86,31 +134,37 @@
         "#546570",
         "#c4ccd3"
     ],
-    "title": {
-        "subtext": "",
-        "textStyle": {
-            "color": "#000"
+    "tooltip": {},
+    "yAxis": {
+        "nameLocation": "middle",
+        "name": "",
+        "type": "value",
+        "nameGap": 25,
+        "nameTextStyle": {
+            "fontSize": 14
+        }
+    },
+    "xAxis": {
+        "nameLocation": "middle",
+        "data": null,
+        "name": "",
+        "type": "value",
+        "nameGap": 25,
+        "nameTextStyle": {
+            "fontSize": 14
         },
-        "left": "auto",
-        "text": ""
+        "axisLabel": {
+            "interval": "auto"
+        }
     },
     "legend": {
-        "orient": "horizontal",
         "show": true,
         "data": [
-            [
-                "衬衫",
-                "羊毛衫",
-                "雪纺衫",
-                "裤子",
-                "高跟鞋",
-                "袜子"
-            ]
+            "a",
+            "b"
         ],
-        "left": "auto"
-    },
-    "tooltip": {
-        "formatter": "{b0}: {c0}"
+        "left": "center",
+        "orient": "horizontal"
     }
 };
 

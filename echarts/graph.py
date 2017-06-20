@@ -5,21 +5,24 @@ class Graph(Base):
     def __init__(self, title="", subtitle="", **kwargs):
         super().__init__(title, subtitle, **kwargs)
 
-    def add(self, links, **kwargs):
+    def add(self, *args, **kwargs):
+        self._add(*args, **kwargs)
+
+    def _add(self, links, layout="force", symbol_size=50, repulsion=1000, **kwargs):
         data = [{"name": d} for d in {_ for link in links for _ in link}]
         _links = [{"source": link[0], "target": link[1]} for link in links]
         self._option.get('series').append({
             "type": "graph",
-            "layout": kwargs.get('layout', "force"),
+            "layout": layout,
             "circular": {"rotateLabel": False},
-            "force": {"repulsion": 1000},
-            "symbolSize": kwargs.get('symbol_size', 50),
-            "label": self.Parms.label("graph", **kwargs),
+            "force": {"repulsion": repulsion},
+            "symbolSize": symbol_size,
+            "label": self.Option.label("graph", **kwargs),
             "data":data,
             "links":_links
         })
-        self._option.get('legend').update(self.Parms.legend(**kwargs))
-        self._option.update(color=self.Parms.color(self._colorlst, **kwargs))
+        self._option.get('legend').update(self.Option.legend(**kwargs))
+        self._option.update(color=self.Option.color(self._colorlst, **kwargs))
 
 if __name__ == "__main__":
     links = [("结点1", "结点2"),

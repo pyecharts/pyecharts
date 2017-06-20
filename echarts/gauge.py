@@ -5,7 +5,10 @@ class Gauge(Base):
     def __init__(self, title="", subtitle="", **kwargs):
         super().__init__(title, subtitle, **kwargs)
 
-    def add(self, name, value, value_name):
+    def add(self, *args, **kwargs):
+        self._add(*args, **kwargs)
+
+    def _add(self, name, value, value_name):
         self._option.update(tooltip={"formatter": "{a} <br/>{b} : {c}%"})
         self._option.get('series').append({
             "detail": {"formatter": '{value}%'},

@@ -6,20 +6,23 @@ class Scatter(Base):
     def __init__(self, title="", subtitle="", **kwargs):
         super().__init__(title, subtitle, **kwargs)
 
-    def add(self, name, x_value, y_value, **kwargs):
+    def add(self, *args, **kwargs):
+        self._add(*args, **kwargs)
+
+    def _add(self, name, x_value, y_value, **kwargs):
         if isinstance(x_value, list) and isinstance(y_value, list):
             assert len(x_value) == len(y_value)
-            xaxis, yaxis = self.Parms.xy_axis("scatter", **kwargs)
+            xaxis, yaxis = self.Option.xy_axis("scatter", **kwargs)
             self._option.update(xAxis=xaxis, yAxis=yaxis)
             self._option.get('legend').get('data').append(name)
             self._option.get('series').append({
                 "name": name,
                 "type": "scatter",
                 "data": [list(z) for z in zip(x_value, y_value)],
-                "label": self.Parms.label(**kwargs),
+                "label": self.Option.label(**kwargs),
             })
-            self._option.get('legend').update(self.Parms.legend(**kwargs))
-            self._option.update(color=self.Parms.color(self._colorlst, **kwargs))
+            self._option.get('legend').update(self.Option.legend(**kwargs))
+            self._option.update(color=self.Option.color(self._colorlst, **kwargs))
         else:
             raise ValueError
 
@@ -43,7 +46,7 @@ class Scatter(Base):
             for y in range(height):
                 if imarray[x, y] != color:
                     result.append((x, y))
-        return self.Parms.cast(result)
+        return self.Option.cast(result)
 
     def config(self):
         pass
