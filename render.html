@@ -18,110 +18,15 @@
 
         // 指定图表的配置项和数据
         var option = {
-    "series": [
-        {
-            "type": "scatter",
-            "data": [
-                [
-                    10,
-                    10
-                ],
-                [
-                    20,
-                    20
-                ],
-                [
-                    30,
-                    30
-                ],
-                [
-                    40,
-                    40
-                ],
-                [
-                    50,
-                    50
-                ],
-                [
-                    60,
-                    60
-                ]
-            ],
-            "name": "a",
-            "label": {
-                "normal": {
-                    "show": false,
-                    "position": "top",
-                    "formatter": null,
-                    "textStyle": {
-                        "color": "#000",
-                        "fontSize": 12
-                    }
-                },
-                "emphasis": {
-                    "show": false
-                }
-            }
+    "yAxis": {
+        "type": "value",
+        "name": "",
+        "nameLocation": "middle",
+        "nameTextStyle": {
+            "fontSize": 14
         },
-        {
-            "type": "scatter",
-            "data": [
-                [
-                    60,
-                    10
-                ],
-                [
-                    50,
-                    20
-                ],
-                [
-                    40,
-                    30
-                ],
-                [
-                    30,
-                    40
-                ],
-                [
-                    20,
-                    50
-                ],
-                [
-                    10,
-                    60
-                ]
-            ],
-            "name": "b",
-            "label": {
-                "normal": {
-                    "show": false,
-                    "position": "top",
-                    "formatter": null,
-                    "textStyle": {
-                        "color": "#000",
-                        "fontSize": 12
-                    }
-                },
-                "emphasis": {
-                    "show": false
-                }
-            }
-        }
-    ],
-    "title": {
-        "subtextStyle": {
-            "color": "#aaa",
-            "fontSize": 12
-        },
-        "subtext": "",
-        "left": "auto",
-        "textStyle": {
-            "color": "#000",
-            "fontSize": 18
-        },
-        "text": ""
+        "nameGap": 25
     },
-    "backgroundColor": "#fff",
     "color": [
         "#c23531",
         "#2f4554",
@@ -134,37 +39,133 @@
         "#546570",
         "#c4ccd3"
     ],
-    "tooltip": {},
-    "yAxis": {
-        "nameLocation": "middle",
-        "name": "",
-        "type": "value",
-        "nameGap": 25,
-        "nameTextStyle": {
-            "fontSize": 14
-        }
-    },
-    "xAxis": {
-        "nameLocation": "middle",
-        "data": null,
-        "name": "",
-        "type": "value",
-        "nameGap": 25,
-        "nameTextStyle": {
-            "fontSize": 14
+    "series": [
+        {
+            "type": "scatter",
+            "label": {
+                "emphasis": {
+                    "show": false
+                },
+                "normal": {
+                    "textStyle": {
+                        "color": "#000",
+                        "fontSize": 12
+                    },
+                    "formatter": null,
+                    "show": false,
+                    "position": "top"
+                }
+            },
+            "data": [
+                [
+                    10,
+                    10
+                ],
+                [
+                    20,
+                    20
+                ],
+                [
+                    30,
+                    30
+                ],
+                [
+                    40,
+                    40
+                ],
+                [
+                    50,
+                    50
+                ],
+                [
+                    60,
+                    60
+                ]
+            ],
+            "name": "a"
         },
-        "axisLabel": {
-            "interval": "auto"
+        {
+            "type": "scatter",
+            "label": {
+                "emphasis": {
+                    "show": false
+                },
+                "normal": {
+                    "textStyle": {
+                        "color": "#000",
+                        "fontSize": 12
+                    },
+                    "formatter": null,
+                    "show": false,
+                    "position": "top"
+                }
+            },
+            "data": [
+                [
+                    60,
+                    10
+                ],
+                [
+                    50,
+                    20
+                ],
+                [
+                    40,
+                    30
+                ],
+                [
+                    30,
+                    40
+                ],
+                [
+                    20,
+                    50
+                ],
+                [
+                    10,
+                    60
+                ]
+            ],
+            "name": "b"
         }
-    },
+    ],
     "legend": {
+        "orient": "horizontal",
         "show": true,
         "data": [
             "a",
             "b"
         ],
-        "left": "center",
-        "orient": "horizontal"
+        "left": "center"
+    },
+    "visualMap": {},
+    "tooltip": {},
+    "xAxis": {
+        "type": "value",
+        "data": null,
+        "name": "",
+        "nameLocation": "middle",
+        "axisLabel": {
+            "interval": "auto"
+        },
+        "nameGap": 25,
+        "nameTextStyle": {
+            "fontSize": 14
+        }
+    },
+    "backgroundColor": "#fff",
+    "title": {
+        "text": "",
+        "textStyle": {
+            "color": "#000",
+            "fontSize": 18
+        },
+        "subtext": "",
+        "subtextStyle": {
+            "color": "#aaa",
+            "fontSize": 12
+        },
+        "left": "auto"
     }
 };
 

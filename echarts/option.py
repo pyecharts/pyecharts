@@ -1,9 +1,10 @@
+import random
 
 class Option():
 
     def label(self,
               type=None,
-              emphasis=False,
+              isemphasis=False,
               label_pos="top",
               label_show=False,
               label_text_color="#000",
@@ -29,13 +30,14 @@ class Option():
                              "position": label_pos,
                              "textStyle": {"color": label_text_color,
                                            "fontSize": label_text_size}},
-                  "emphasis": {"show": emphasis}}
+                  "emphasis": {"show": isemphasis}}
         if type != "graph":
             _label.get("normal").update(formatter=formatter)
         return _label
 
     def color(self,
               colorlst,
+              israndom=False,
               label_color=None,
               **kwargs):
         """
@@ -48,6 +50,8 @@ class Option():
         if label_color is not None:
             for color in reversed(list(label_color)):
                 colorlst.insert(0, color)
+        if israndom:
+            random.shuffle(colorlst)
         return colorlst
 
     def line_style(self,
@@ -111,20 +115,20 @@ class Option():
 
     def xy_axis(self, type=None,
                 xy_font_size=14,
-                nameGap=25,
+                namegap=25,
                 xaxis_name="",
                 xaxis_name_pos="middle",
                 interval="auto",
                 yaxis_name="",
                 yaxis_name_pos="middle",
-                exchange=False,
+                isconvert=False,
                 x_axis=None,
                 **kwargs):
         """
 
         :param type:
         :param xy_font_size:
-        :param nameGap:
+        :param namegap:
         :param xaxis_name:
         :param xaxis_name_pos:
         :param interval:
@@ -137,16 +141,16 @@ class Option():
         """
         _xAxis = {"name": xaxis_name,
                   "nameLocation": xaxis_name_pos,
-                  "nameGap": nameGap,
+                  "nameGap": namegap,
                   "nameTextStyle": {"fontSize": xy_font_size},
                   "axisLabel": {"interval": interval}
                  }
         _yAxis = {"name": yaxis_name,
                   "nameLocation": yaxis_name_pos,
-                  "nameGap": nameGap,
+                  "nameGap": namegap,
                   "nameTextStyle": {"fontSize": xy_font_size}
                  }
-        if exchange:
+        if isconvert:
             _yAxis.update(data=x_axis, type="category")
             _xAxis.update(type="value")
         else:
@@ -212,27 +216,3 @@ class Option():
         """
         legend = {"show": legend_show, "left": legend_pos, "orient": legend_orient}
         return legend
-
-    def cast(self, seq):
-        """
-
-        :param seq:
-        :return:
-        """
-        k_lst, v_lst = [], []
-        if isinstance(seq, list):
-            for s in seq:
-                try:
-                    if isinstance(s, tuple):
-                        k_lst.append(s[0])
-                        v_lst.append(s[1])
-                except:
-                    raise ValueError
-        elif isinstance(seq, dict):
-            for k, v in seq.items():
-                k_lst.append(k)
-                v_lst.append(v)
-        return k_lst, v_lst
-
-    def commad(self, s1=1,s2=2):
-        pass

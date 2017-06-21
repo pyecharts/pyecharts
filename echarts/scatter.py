@@ -24,7 +24,7 @@ class Scatter(Base):
             self._option.get('legend').update(self.Option.legend(**kwargs))
             self._option.update(color=self.Option.color(self._colorlst, **kwargs))
         else:
-            raise ValueError
+            raise TypeError("x_axis and y_axis must be list")
 
     def draw(self, path, color=None):
         """
@@ -41,15 +41,9 @@ class Scatter(Base):
             for y in range(height):
                 if y < int(height / 2):
                     imarray[x, y], imarray[x, height-y-1] = imarray[x, height-y-1], imarray[x, y]
-        result = []
-        for x in range(width):
-            for y in range(height):
-                if imarray[x, y] != color:
-                    result.append((x, y))
-        return self.Option.cast(result)
 
-    def config(self):
-        pass
+        result = [(x, y) for x in range(width) for y in range(height) if imarray[x, y] != color]
+        return self.Option.cast(result)
 
 
 v1 = [10, 20, 30, 40, 50, 60]

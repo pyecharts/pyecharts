@@ -17,7 +17,7 @@ class Radar(Base):
     def add(self, *args, **kwargs):
         self._add(*args, **kwargs)
 
-    def _add(self, name, value, **kwargs):
+    def _add(self, name, value, area_opacity=0, **kwargs):
         self._option.get('legend').get('data').append(name)
         self._option.get('series').append({
             "name": name,
@@ -25,7 +25,7 @@ class Radar(Base):
             "data": value,
             "symbol": None,
             "lineStyle": self.Option.line_style(**kwargs),
-            "areaStyle": {"normal": {"opacity": kwargs.get('area_opacity', 0)}}
+            "areaStyle": {"normal": {"opacity": area_opacity}}
         })
         self._option.get('legend').update(self.Option.legend(**kwargs))
         self._option.update(color=self.Option.color(self._colorlst, **kwargs))

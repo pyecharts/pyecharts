@@ -23,10 +23,8 @@ class Funnel(Base):
             self._option.get('legend').update(self.Option.legend(**kwargs))
             self._option.update(color=self.Option.color(self._colorlst, **kwargs))
         else:
-            raise ValueError
+            raise TypeError("attr and value must be list")
 
-    def config(self):
-        pass
 
 attr = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
 value = [20, 40, 60, 80, 100, 120]
