@@ -5,7 +5,7 @@ class Option():
     def label(self,
               type=None,
               isemphasis=False,
-              label_pos="top",
+              label_pos=None,
               label_show=False,
               label_text_color="#000",
               label_text_size=12,
@@ -14,6 +14,7 @@ class Option():
         """
 
         :param type:
+        :param isemphasis:
         :param label_pos:
         :param label_show:
         :param label_text_color:
@@ -22,9 +23,9 @@ class Option():
         :param kwargs:
         :return:
         """
-        if type == "pie":
+        if type == "pie" and label_pos is None:
             label_pos = "outside"
-        elif type == "graph":
+        elif type == "graph"and label_pos is None:
             label_pos = "inside"
         _label = {"normal": {"show": label_show,
                              "position": label_pos,
@@ -43,6 +44,7 @@ class Option():
         """
 
         :param colorlst:
+        :param israndom:
         :param label_color:
         :param kwargs:
         :return:
@@ -57,18 +59,21 @@ class Option():
     def line_style(self,
                    line_width=1,
                    line_opacity=1,
+                   line_curve=0,
                    line_type="solid",
                    **kwargs):
         """
 
         :param line_width:
         :param line_opacity:
+        :param line_curve:
         :param line_type:
         :param kwargs:
         :return:
         """
         _line_style = {"normal": {"width": line_width,
                                   "opacity": line_opacity,
+                                  "curveness": line_curve,
                                   "type": line_type}}
         return _line_style
 
@@ -134,7 +139,7 @@ class Option():
         :param interval:
         :param yaxis_name:
         :param yaxis_name_pos:
-        :param exchange:
+        :param isconvert:
         :param x_axis:
         :param kwargs:
         :return:
@@ -247,3 +252,8 @@ class Option():
                      "left": "left",
                      "top": "bottom"}
         return visualmap
+
+    def gen_color(self):
+        return "rgb({},{},{})".format(random.randint(0, 160),
+                                      random.randint(0, 160),
+                                      random.randint(0, 160))

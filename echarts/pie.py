@@ -10,14 +10,14 @@ class Pie(Base):
         self._add(*args, **kwargs)
 
     def _add(self, name, attr, value, *,
-            radius=None, center=None, isrosetype=False, **kwargs):
+            radius=None, center=None, rosetype="radius", **kwargs):
         if isinstance(attr, list) and isinstance(value, list):
             assert len(attr) == len(value)
             data = [{"name":z[0], "value":z[1]} for z in zip(attr, value)]
             rad = ["0%", "75%"] if radius is None else ["{}%".format(radius[0]), "{}%".format(radius[1])]
             cent = ['50%', '50%'] if center is None else ["{}%".format(center[0]), "{}%".format(center[1])]
-            if isrosetype:
-                isrosetype = "radius"
+            if rosetype not in ("radius", "area"):
+                rosetype = "radius"
             fmat = {"series": "{a} ",
                     "name": "{b} ",
                     "value": "{c} ",
@@ -32,7 +32,7 @@ class Pie(Base):
                 "data": data,
                 "radius": rad,
                 "center": cent,
-                "roseType": isrosetype,
+                "roseType": rosetype,
                 "label": self.Option.label(**kwargs),
             })
             self._option.get('legend').update(self.Option.legend(**kwargs))

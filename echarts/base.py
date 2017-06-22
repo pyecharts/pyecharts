@@ -27,14 +27,13 @@ class Base():
                    "subtextStyle": {"color": subtitle_color, "fontSize": subtitle_text_size}
                   },
             tooltip={},
-            visualMap={},
             series=[],
             legend={"data": []},
             backgroundColor=background_color
         )
 
     def add(self,
-            label_show=None,            # All
+            label_show=None,            # for All
             label_pos=None,
             label_color=None,
             label_text_color=None,
@@ -44,18 +43,34 @@ class Base():
             legend_show=None,
             legend_pos=None,
             legend_orient=None,
-            line_width=None,            # Radar
+            visual_range=None,
+            visual_range_text=None,
+            visual_range_color=None,
+            iscalculable=None,
+            israndom=None,
+            isstack=None,               # only for Bar
+            layout=None,                # only for Graph
+            edge_length=None,
+            gravity=None,
+            repulsion=None,
+            issmooth=None,              # only for Line
+            isroam=None,                # only for Map
+            maptype=None,
+            radius=None,                # only for Pie
+            center=None,
+            rosetype=None,
+            line_width=None,            # only for Radar
             line_opacity=None,
             line_type=None,
+            line_curve=None,
             split_line_show=None,
             axis_line_show=None,
             split_area_show=None,
             split_area_opacity=None,
-            issmooth=None,              # Line
-            shape=None,                 # Radar
+            shape=None,                 # for Radar/WordCloud
             rader_text_color=None,
             area_opacity=None,
-            xy_font_size=None,          # Scatter/Bar/Line
+            xy_font_size=None,          # for Scatter/Bar/Line
             namegap=None,
             xaxis_name=None,
             xaxis_name_pos=None,
@@ -66,21 +81,9 @@ class Base():
             x_axis=None,
             mark_line=None,
             mark_point=None,
-            radius=None,                # Pie
-            center=None,
-            isrosetype=None,
-            israndom=None,
-            layout=None,                # Graph
-            symbol_size=None,
-            symbol_rate=None,
-            repulsion=None,
-            isstack=None,
-            visual_range=None,
-            visual_range_text=None,
-            visual_range_color=None,
-            iscalculable=None,
-            isroam=None,
-            maptype=None):
+            word_gap=None,             # only for WordCloud
+            word_size_range=None,
+            rotate_step=None):
         pass
 
     def custom(self, series):
@@ -112,6 +115,8 @@ class Base():
     def render(self, path=r"..\render.html"):
         temple = r"..\temple\_temple.html"
         try:
+            if self._option.get("series")[0].get("type", None) == "wordCloud":
+                temple = r"..\temple\_temple_wordcloud.html"
             if self._option.get("series")[0].get("type", None) in ("scatter", "pie", "bar", "line"):
                 temple = r"..\temple\temple.html"
         except:

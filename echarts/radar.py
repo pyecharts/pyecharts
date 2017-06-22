@@ -17,7 +17,7 @@ class Radar(Base):
     def add(self, *args, **kwargs):
         self._add(*args, **kwargs)
 
-    def _add(self, name, value, area_opacity=0, **kwargs):
+    def _add(self, name, value, *, area_opacity=0, **kwargs):
         self._option.get('legend').get('data').append(name)
         self._option.get('series').append({
             "name": name,
