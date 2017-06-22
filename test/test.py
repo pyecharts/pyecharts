@@ -9,18 +9,22 @@ from echarts.scatter import Scatter
 
 def test_bar():
     attr = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
-    v1 = [5, 20, 36, 10, 10, 100]
-    v2 = [10, 25, 8, 60, 50, 150]
-    bar = Bar()
-    bar.add("A", attr, v1, label_text_size=20)
-    bar.add("B", attr, v2, orient="vertical", mark_line=["average"])
+    v1 = [5, 20, 36, 10, 75, 90]
+    v2 = [10, 25, 8, 60, 20, 80]
+    v3 = [first + second + 35 for first, second in zip(v1, v2)]
+    bar = Bar("TITLE", "SUBTITLE")
+    bar.add("B", attr, v2, isstack=True)
+    bar.add("A", attr, v1, label_text_size=20, isstack=True)
+    line = Line()
+    line.add("C", attr, v3, label_text_size=20)
+    bar.custom(line.get_series())
     bar.show_config()
     bar.render()
 
 
 def test_gague():
-    gauge = Gauge("业务指标")
-    gauge.add("业务指标", 100, "是萌萌哒真爱的概率")
+    gauge = Gauge("")
+    gauge.add("业务指标", 66.66, "完成率")
     gauge.show_config()
     gauge.render()
 

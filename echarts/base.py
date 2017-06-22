@@ -74,7 +74,13 @@ class Base():
             symbol_size=None,
             symbol_rate=None,
             repulsion=None,
-            isstack=None):
+            isstack=None,
+            visual_range=None,
+            visual_range_text=None,
+            visual_range_color=None,
+            iscalculable=None,
+            isroam=None,
+            maptype=None):
         pass
 
     def custom(self, series):
