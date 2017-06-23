@@ -8,19 +8,23 @@ class Line(Base):
     def add(self, *args, **kwargs):
         self._add(*args, **kwargs)
 
-    def _add(self, name, x_axis, y_axis, *, issmooth=False, **kwargs):
+    def _add(self, name, x_axis, y_axis, *,
+             issmooth=False, isstep=False, isfill=False, **kwargs):
         if isinstance(x_axis, list) and isinstance(y_axis, list):
             assert len(x_axis) == len(y_axis)
             kwargs.update(x_axis=x_axis)
             xaxis, yaxis = self.Option.xy_axis(**kwargs)
+            _area_style = {"normal": self.Option.area_style(**kwargs)} if isfill else {}
             self._option.update(xAxis=xaxis, yAxis=yaxis)
             self._option.get('legend').get('data').append(name)
             self._option.get('series').append({
                 "name": name,
                 "smooth": issmooth,
                 "type": "line",
+                "step": isstep,
                 "data": y_axis,
                 "label": self.Option.label(**kwargs),
+                "areaStyle": _area_style,
                 "markPoint": self.Option.mark_point(**kwargs),
                 "markLine": self.Option.mark_line(**kwargs)
             })
@@ -36,7 +40,7 @@ value_B = [55, 60, 16, 14, 15, 80]
 
 if __name__ == "__main__":
     line = Line()
-    line.add("商家A", attr, value_A, mark_point=["max", "min", "average"])
-    line.add("商家B", attr, value_B, mark_line=["max", "min", "average"])
+    line.add("商家A", attr, value_A)
+    # line.add("商家B", attr, value_B, mark_line=["max", "min", "average"])
     line.show_config()
     line.render()

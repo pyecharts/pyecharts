@@ -26,6 +26,13 @@ class Base():
                    "textStyle": {"color": title_color, "fontSize": title_text_size},
                    "subtextStyle": {"color": subtitle_color, "fontSize": subtitle_text_size}
                   },
+            toolbox={
+                "show": True,
+                "orient": "vertical",
+                "left": "right",
+                "top": "center",
+                "feature": {"saveAsImage": {"show": True}}
+            },
             tooltip={},
             series=[],
             legend={"data": []},
@@ -54,6 +61,8 @@ class Base():
             gravity=None,
             repulsion=None,
             issmooth=None,              # only for Line
+            isfill=None,
+            isstep=None,
             isroam=None,                # only for Map
             maptype=None,
             radius=None,                # only for Pie
@@ -65,11 +74,11 @@ class Base():
             line_curve=None,
             split_line_show=None,
             axis_line_show=None,
-            split_area_show=None,
-            split_area_opacity=None,
+            area_show=None,
+            area_opacity=None,
+            area_color=None,
             shape=None,                 # for Radar/WordCloud
             rader_text_color=None,
-            area_opacity=None,
             xy_font_size=None,          # for Scatter/Bar/Line
             namegap=None,
             xaxis_name=None,
@@ -112,14 +121,14 @@ class Base():
                 v_lst.append(v)
         return k_lst, v_lst
 
-    def render(self, path=r"..\render.html"):
-        temple = r"..\temple\_temple.html"
+    def render(self, path=r"..\..\render.html"):
+        temple = r"..\..\temple\_temple.html"
         try:
             if self._option.get("series")[0].get("type", None) == "wordCloud":
-                temple = r"..\temple\_temple_wordcloud.html"
+                temple = r"..\..\temple\_temple_wordcloud.html"
             if self._option.get("series")[0].get("type", None) in ("scatter", "pie", "bar", "line"):
-                temple = r"..\temple\temple.html"
-        except KeyError:
+                temple = r"..\..\temple\temple.html"
+        except:
             pass
         with open(temple, "r", encoding="utf-8") as f:
             my_option = json.dumps(self._option, indent=4, ensure_ascii=False)

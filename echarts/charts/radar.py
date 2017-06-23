@@ -9,7 +9,7 @@ class Radar(Base):
         _indicator = []
         for indi in indicator:
             _name, _max = indi
-            _indicator.append({"name": _name, "value": _max})
+            _indicator.append({"name": _name, "max": _max})
         self._option.update(
             radar={"indicator": _indicator,
                    "shape": shape,
@@ -22,7 +22,7 @@ class Radar(Base):
     def add(self, *args, **kwargs):
         self._add(*args, **kwargs)
 
-    def _add(self, name, value, *, area_opacity=0, **kwargs):
+    def _add(self, name, value, **kwargs):
         self._option.get('legend').get('data').append(name)
         self._option.get('series').append({
             "name": name,
@@ -30,7 +30,7 @@ class Radar(Base):
             "data": value,
             "symbol": None,
             "lineStyle": self.Option.line_style(**kwargs),
-            "areaStyle": {"normal": {"opacity": area_opacity}}
+            "areaStyle": {"normal": self.Option.area_style(flag=True, **kwargs)}
         })
         self._option.get('legend').update(self.Option.legend(**kwargs))
         self._option.update(color=self.Option.color(self._colorlst, **kwargs))
@@ -47,8 +47,9 @@ v1 = [[4300, 10000, 28000, 35000, 50000, 19000]]
 v2 = [[5000, 14000, 28000, 31000, 42000, 21000]]
 
 if __name__ == "__main__":
+
     radar = Radar()
-    radar.config(r, split_area_show=True)
+    radar.config(r, area_show=True)
     radar.add("预算分配", v1, label_color=["#000"])
     radar.add("实际开销", v2, label_color=["#4e79a7"])
     radar.render()

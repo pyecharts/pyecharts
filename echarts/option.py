@@ -112,8 +112,7 @@ class Option():
         return _axis_line
 
     def split_area(self,
-                   split_area_show=False,
-                   split_area_opacity=1,
+                   area_show=False,
                    **kwargs):
         """
 
@@ -123,10 +122,23 @@ class Option():
         :return:
         """
         _split_area = {
-            "show": split_area_show,
-            "areaStyle": {"opacity": split_area_opacity}
+            "show": area_show,
+            "areaStyle": self.axis_line(**kwargs)
         }
         return _split_area
+
+    def area_style(self,
+                   flag=False,
+                   area_opacity=None,
+                   area_color=None,
+                   **kwargs):
+        if area_opacity is None:
+            area_opacity = 0 if flag else 1
+        _area_style = {
+            "opacity": area_opacity,
+            "color": area_color
+        }
+        return _area_style
 
     def xy_axis(self, type=None,
                 xy_font_size=14,
