@@ -1,3 +1,22 @@
+from echarts import Radar
+
+def test_radar():
+    r = [("销售", 6500),
+         ("管理", 16000),
+         ("信息技术", 30000),
+         ("客服", 38000),
+         ("研发", 52000),
+         ("市场", 25000)]
+
+    v1 = [[4300, 10000, 28000, 35000, 50000, 19000]]
+    v2 = [[5000, 14000, 28000, 31000, 42000, 21000]]
+    radar = Radar()
+    radar.config(r, split_area_show=True)
+    radar.add("预算分配", v1, label_color=["#000"])
+    radar.add("实际开销", v2, label_color=["#4e79a7"])
+    radar.render()
+    radar.show_config()
+
 value_bj = [
     [55, 9, 56, 0.46, 18, 6, 1],
     [25, 11, 21, 0.65, 34, 9, 2],

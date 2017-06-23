@@ -28,15 +28,15 @@ class Scatter(Base):
 
     def draw(self, path, color=None):
         """
-        :param path: 图片存放路径
-        :param color: 默认只画出非白色区域，可自行配置颜色
+        :param path:
+        :param color:
         :return:
         """
         color = color or (255, 255, 255)
         im = Image.open(path)
         width, height = im.size
         imarray = im.load()
-        # 垂直翻转图片
+        # Flip the picture vertically
         for x in range(width):
             for y in range(height):
                 if y < int(height / 2):

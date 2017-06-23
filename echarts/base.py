@@ -119,12 +119,11 @@ class Base():
                 temple = r"..\temple\_temple_wordcloud.html"
             if self._option.get("series")[0].get("type", None) in ("scatter", "pie", "bar", "line"):
                 temple = r"..\temple\temple.html"
-        except:
+        except KeyError:
             pass
         with open(temple, "r", encoding="utf-8") as f:
             my_option = json.dumps(self._option, indent=4, ensure_ascii=False)
             open(path, "w+", encoding="utf-8").write(
                 f.read().replace("myOption", my_option)
                 .replace("myWidth", str(self._width))
-                .replace("myHeight", str(self._height))
-            )
+                .replace("myHeight", str(self._height)))

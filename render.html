@@ -5,91 +5,50 @@
     <meta charset="utf-8">
     <title>ECharts</title>
     <!-- 引入 echarts.js -->
-    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts-all-3.js"></script>
-    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
-    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
-    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
-    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
-    <script type="text/javascript" src="http://oog4yfyu0.bkt.clouddn.com/wordcloud.js"></script>
-    <script type="text/javascript" src="http://oog4yfyu0.bkt.clouddn.com/anhui.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/aomen.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/beijing.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/chongqing.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/fujian.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/gansu.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/guangdong.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/guangxi.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/guizhou.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/hainan.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/hebei.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/heilongjiang.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/henan.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/hubei.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/hunan.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/jiangsu.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/jiangxi.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/jilin.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/liaoning.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/neimenggu.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/ningxia.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/qinghai.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/shangdong.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/shanghai.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/shanxi.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/sichuan.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/taiwan.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/tianjin.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/xianggang.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/xinjiang.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/xizang.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/yunnan.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/zhejiang.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/guangdong.js "></script>
-    <script type="text/javascript " src="http://api.map.baidu.com/api?v=2.0&ak=ZUONbpqGBsYGXNIYHicvbAbM "></script>
-    <script type="text/javascript " src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js "></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/3.5.4/echarts.common.min.js"></script>
+
 </head>
 
 <body>
     <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
-    <div id="main" style="width: 1200px;height:600px; "></div>
-    <script type="text/javascript ">
+    <div id="main" style="width: 800px;height:400px;"></div>
+    <script type="text/javascript">
         // 基于准备好的dom，初始化echarts实例
         var myChart = echarts.init(document.getElementById('main'));
 
         // 指定图表的配置项和数据
         var option = {
-    "title": {
-        "left": "auto",
-        "subtext": "",
-        "textStyle": {
-            "fontSize": 18,
-            "color": "#000"
+    "yAxis": {
+        "nameGap": 25,
+        "nameLocation": "middle",
+        "nameTextStyle": {
+            "fontSize": 14
         },
-        "subtextStyle": {
-            "fontSize": 12,
-            "color": "#aaa"
-        },
-        "text": ""
-    },
-    "visualMap": {
-        "inRange": {
-            "color": [
-                "#e0ffff",
-                "#006edd"
-            ]
-        },
-        "text": [
-            "low",
-            "hight"
-        ],
-        "left": "left",
-        "min": 0,
-        "top": "bottom",
-        "max": 100,
-        "calculable": true
+        "name": "",
+        "type": "value"
     },
     "tooltip": {},
     "backgroundColor": "#fff",
+    "xAxis": {
+        "name": "",
+        "axisLabel": {
+            "interval": "auto"
+        },
+        "type": "category",
+        "nameTextStyle": {
+            "fontSize": 14
+        },
+        "nameLocation": "middle",
+        "data": [
+            "衬衫",
+            "羊毛衫",
+            "雪纺衫",
+            "裤子",
+            "高跟鞋",
+            "袜子"
+        ],
+        "nameGap": 25
+    },
     "color": [
         "#c23531",
         "#2f4554",
@@ -102,32 +61,129 @@
         "#546570",
         "#c4ccd3"
     ],
-    "legend": {
-        "show": true,
-        "left": "center",
-        "data": [
-            "地图"
-        ],
-        "orient": "horizontal"
+    "title": {
+        "subtext": "SUBTITLE",
+        "left": "auto",
+        "textStyle": {
+            "fontSize": 18,
+            "color": "#000"
+        },
+        "text": "TITLE",
+        "subtextStyle": {
+            "fontSize": 12,
+            "color": "#aaa"
+        }
     },
     "series": [
         {
-            "data": [
-                {
-                    "name": "福州市",
-                    "value": 20
+            "label": {
+                "emphasis": {
+                    "show": false
                 },
-                {
-                    "name": "厦门市",
-                    "value": 190
+                "normal": {
+                    "position": null,
+                    "formatter": null,
+                    "show": false,
+                    "textStyle": {
+                        "fontSize": 12,
+                        "color": "#000"
+                    }
                 }
+            },
+            "stack": "stack",
+            "markLine": {
+                "data": []
+            },
+            "type": "bar",
+            "markPoint": {
+                "data": []
+            },
+            "data": [
+                10,
+                25,
+                8,
+                60,
+                20,
+                80
             ],
-            "name": "地图",
-            "roam": true,
-            "type": "map",
-            "mapType": "广东"
+            "name": "B"
+        },
+        {
+            "label": {
+                "emphasis": {
+                    "show": false
+                },
+                "normal": {
+                    "position": null,
+                    "formatter": null,
+                    "show": false,
+                    "textStyle": {
+                        "fontSize": 20,
+                        "color": "#000"
+                    }
+                }
+            },
+            "stack": "stack",
+            "markLine": {
+                "data": []
+            },
+            "type": "bar",
+            "markPoint": {
+                "data": []
+            },
+            "data": [
+                5,
+                20,
+                36,
+                10,
+                75,
+                90
+            ],
+            "name": "A"
+        },
+        {
+            "label": {
+                "emphasis": {
+                    "show": false
+                },
+                "normal": {
+                    "position": null,
+                    "formatter": null,
+                    "show": false,
+                    "textStyle": {
+                        "fontSize": 20,
+                        "color": "#000"
+                    }
+                }
+            },
+            "smooth": false,
+            "markLine": {
+                "data": []
+            },
+            "type": "line",
+            "markPoint": {
+                "data": []
+            },
+            "data": [
+                50,
+                80,
+                79,
+                105,
+                130,
+                205
+            ],
+            "name": "C"
         }
-    ]
+    ],
+    "legend": {
+        "left": "center",
+        "show": true,
+        "orient": "horizontal",
+        "data": [
+            "B",
+            "A"
+        ]
+    }
 };
 
         // 使用刚指定的配置项和数据显示图表。

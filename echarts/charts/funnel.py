@@ -11,13 +11,16 @@ class Funnel(Base):
     def _add(self, name, attr, value, **kwargs):
         if isinstance(attr, list) and isinstance(value, list):
             assert len(attr) == len(value)
-            data = [{"name":z[0], "value":z[1]} for z in zip(attr, value)]
+            _data = []
+            for data in zip(attr, value):
+                _name, _value = data
+                _data.append({"name": _name, "value": _value})
             for a in attr:
                 self._option.get('legend').get('data').append(a)
             self._option.get('series').append({
                 "name": name,
                 "type": "funnel",
-                "data": data,
+                "data": _data,
                 "label": self.Option.label(**kwargs),
             })
             self._option.get('legend').update(self.Option.legend(**kwargs))

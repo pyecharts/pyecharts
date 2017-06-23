@@ -6,13 +6,18 @@ class Radar(Base):
         super().__init__(title, subtitle, **kwargs)
 
     def config(self, indicator, shape="", rader_text_color="#000", **kwargs):
-        indilst = [{"name": row[0], "max": row[1]} for row in indicator]
-        self._option.update(radar={"indicator": indilst,
-                                   "shape": shape,
-                                   "name": {"textStyle": {"color": rader_text_color}},
-                                   "splitLine": self.Option.split_line(**kwargs),
-                                   "splitArea": self.Option.split_area(**kwargs),
-                                   "axisLine": self.Option.axis_line(**kwargs)})
+        _indicator = []
+        for indi in indicator:
+            _name, _max = indi
+            _indicator.append({"name": _name, "value": _max})
+        self._option.update(
+            radar={"indicator": _indicator,
+                   "shape": shape,
+                   "name": {"textStyle": {"color": rader_text_color}},
+                   "splitLine": self.Option.split_line(**kwargs),
+                   "splitArea": self.Option.split_area(**kwargs),
+                   "axisLine": self.Option.axis_line(**kwargs)}
+        )
 
     def add(self, *args, **kwargs):
         self._add(*args, **kwargs)

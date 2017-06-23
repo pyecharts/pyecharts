@@ -38,7 +38,7 @@ v2 = [10, 25, 8, 60, 20, 80]
 v3 = [first + second + 35 for first, second in zip(v1, v2)]
 
 if __name__ == "__main__":
-    from echarts.line import Line
+    from echarts.charts.line import Line
     bar = Bar("TITLE", "SUBTITLE")
     bar.add("B", attr, v2, isstack=True)
     bar.add("A", attr, v1, label_text_size=20, isstack=True)

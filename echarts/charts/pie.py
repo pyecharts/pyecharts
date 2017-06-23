@@ -13,25 +13,36 @@ class Pie(Base):
             radius=None, center=None, rosetype="radius", **kwargs):
         if isinstance(attr, list) and isinstance(value, list):
             assert len(attr) == len(value)
-            data = [{"name":z[0], "value":z[1]} for z in zip(attr, value)]
-            rad = ["0%", "75%"] if radius is None else ["{}%".format(radius[0]), "{}%".format(radius[1])]
-            cent = ['50%', '50%'] if center is None else ["{}%".format(center[0]), "{}%".format(center[1])]
+            _data = []
+            for data in zip(attr, value):
+                _name, _value = data
+                _data.append({"name": _name, "value": _value})
+            _rmin, _rmax = "0%", "75%"
+            if radius is not None:
+                if len(radius) == 2:
+                    _rmin, _rmax = ["{}%".format(r) for r in radius]
+            _cmin, _cmax = "50%", "50%"
+            if center is not None:
+                if len(center) == 2:
+                    _cmin, _cmax = ["{}%".format(c) for c in center]
             if rosetype not in ("radius", "area"):
                 rosetype = "radius"
-            fmat = {"series": "{a} ",
-                    "name": "{b} ",
-                    "value": "{c} ",
-                    "percent": "{d}% "}
-            fmat_result = [fmat.get(f) for f in kwargs.get('formatter', ("name", "percent"))]
-            kwargs.update(formatter="".join(fmat_result))
+            fmat = {
+                "series": "{a} ",
+                "name": "{b} ",
+                "value": "{c} ",
+                "percent": "{d}% "
+            }
+            _formatter = [fmat.get(f) for f in kwargs.get('formatter', ("name", "percent"))]
+            kwargs.update(formatter="".join(_formatter))
             for a in attr:
                 self._option.get('legend').get('data').append(a)
             self._option.get('series').append({
                 "name": name,
                 "type": "pie",
-                "data": data,
-                "radius": rad,
-                "center": cent,
+                "data": _data,
+                "radius": [_rmin, _rmax],
+                "center": [_cmin, _cmax],
                 "roseType": rosetype,
                 "label": self.Option.label(**kwargs),
             })

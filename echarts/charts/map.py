@@ -12,13 +12,16 @@ class Map(Base):
              isroam=True, maptype='china', **kwargs):
         if isinstance(attr, list) and isinstance(value, list):
             assert len(attr) == len(value)
-            data = [{"name": z[0], "value": z[1]} for z in zip(attr, value)]
+            _data = []
+            for data in zip(attr, value):
+                _name, _value = data
+                _data.append({"name": _name, "value": _value})
             self._option.get('legend').get('data').append(name)
             self._option.get('series').append({
                 "name": name,
                 "type": "map",
                 "mapType": maptype,
-                "data": data,
+                "data": _data,
                 "roam": isroam
             })
             self._option.update(visualMap=self.Option.visual_map(**kwargs))

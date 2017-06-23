@@ -10,8 +10,9 @@ class Graph(Base):
 
     def _add(self, nodes, links, categories=None, *,
              isroam=True, layout="force", edge_length=50, gravity=0.2, repulsion=50, **kwargs):
-        for c in categories:
-            self._option.get('legend').get('data').append(c)
+        if categories:
+            for c in categories:
+                self._option.get('legend').get('data').append(c)
         self._option.get('series').append({
             "type": "graph",
             "layout": layout,
@@ -23,7 +24,7 @@ class Graph(Base):
             "lineStyle": self.Option.line_style(**kwargs),
             "roam": isroam,
             "focusNodeAdjacency": True,
-            "data":nodes,
+            "data": nodes,
             "categories": categories,
             "links":links
         })
@@ -37,6 +38,6 @@ if __name__ == "__main__":
         j = json.load(f)
         nodes, links, categories, cont, mid, userl = j
     graph = Graph("微博转发关系图", width=1300, height=700)
-    graph.add(nodes, links, categories, label_pos="right", repulsion=50, legend_show=False, line_curve=0.2, label_text_color="")
+    graph.add(nodes, links, label_pos="right", repulsion=50, legend_show=False, line_curve=0.2, label_text_color="")
     graph.show_config()
     graph.render()

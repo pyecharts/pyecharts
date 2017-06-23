@@ -12,10 +12,15 @@ class WordCloud(Base):
              shape="circle", word_gap=20, word_size_range=None, rotate_step=45):
         if isinstance(attr, list) and isinstance(value, list):
             assert len(attr) == len(value)
-            data = [{"name": z[0],
-                     "value": z[1],
-                     "textStyle": {
-                         "normal": {"color": self.Option.gen_color()}}} for z in zip(attr, value)]
+            _data = []
+            for data in zip(attr, value):
+                _name, _value = data
+                _data.append({
+                    "name": _name,
+                    "value": _value,
+                    "textStyle": {
+                        "normal": {"color": self.Option.gen_color()}}
+                })
             _min, _max = 12, 60
             if word_size_range is not None:
                 if len(word_size_range) == 2:
@@ -33,7 +38,7 @@ class WordCloud(Base):
                 "rotationStep": rotate_step,
                 "girdSize": word_gap,
                 "sizeRange": [_min, _max],
-                "data": data
+                "data": _data
             })
 
 

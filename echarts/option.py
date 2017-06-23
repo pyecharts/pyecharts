@@ -27,11 +27,13 @@ class Option():
             label_pos = "outside"
         elif type == "graph"and label_pos is None:
             label_pos = "inside"
-        _label = {"normal": {"show": label_show,
-                             "position": label_pos,
-                             "textStyle": {"color": label_text_color,
-                                           "fontSize": label_text_size}},
-                  "emphasis": {"show": isemphasis}}
+        _label = {
+            "normal": {"show": label_show,
+                       "position": label_pos,
+                       "textStyle": {"color": label_text_color,
+                                     "fontSize": label_text_size}},
+            "emphasis": {"show": isemphasis}
+        }
         if type != "graph":
             _label.get("normal").update(formatter=formatter)
         return _label
@@ -49,7 +51,7 @@ class Option():
         :param kwargs:
         :return:
         """
-        if label_color is not None:
+        if label_color:
             for color in reversed(list(label_color)):
                 colorlst.insert(0, color)
         if israndom:
@@ -71,10 +73,12 @@ class Option():
         :param kwargs:
         :return:
         """
-        _line_style = {"normal": {"width": line_width,
-                                  "opacity": line_opacity,
-                                  "curveness": line_curve,
-                                  "type": line_type}}
+        _line_style = {
+            "normal": {"width": line_width,
+                       "opacity": line_opacity,
+                       "curveness": line_curve,
+                       "type": line_type}
+        }
         return _line_style
 
     def split_line(self,
@@ -86,8 +90,10 @@ class Option():
         :param kwargs:
         :return:
         """
-        _split_line = {"show": split_line_show,
-                       "lineStyle": self.line_style(**kwargs)}
+        _split_line = {
+            "show": split_line_show,
+            "lineStyle": self.line_style(**kwargs)
+        }
         return _split_line
 
     def axis_line(self,
@@ -99,8 +105,10 @@ class Option():
         :param kwargs:
         :return:
         """
-        _axis_line = {"show": axis_line_show,
-                      "lineStyle": self.line_style(**kwargs)}
+        _axis_line = {
+            "show": axis_line_show,
+            "lineStyle": self.line_style(**kwargs)
+        }
         return _axis_line
 
     def split_area(self,
@@ -114,8 +122,10 @@ class Option():
         :param kwargs:
         :return:
         """
-        _split_area = {"show": split_area_show,
-                       "areaStyle": {"opacity": split_area_opacity}}
+        _split_area = {
+            "show": split_area_show,
+            "areaStyle": {"opacity": split_area_opacity}
+        }
         return _split_area
 
     def xy_axis(self, type=None,
@@ -144,17 +154,19 @@ class Option():
         :param kwargs:
         :return:
         """
-        _xAxis = {"name": xaxis_name,
-                  "nameLocation": xaxis_name_pos,
-                  "nameGap": namegap,
-                  "nameTextStyle": {"fontSize": xy_font_size},
-                  "axisLabel": {"interval": interval}
-                 }
-        _yAxis = {"name": yaxis_name,
-                  "nameLocation": yaxis_name_pos,
-                  "nameGap": namegap,
-                  "nameTextStyle": {"fontSize": xy_font_size}
-                 }
+        _xAxis = {
+            "name": xaxis_name,
+            "nameLocation": xaxis_name_pos,
+            "nameGap": namegap,
+            "nameTextStyle": {"fontSize": xy_font_size},
+            "axisLabel": {"interval": interval}
+            }
+        _yAxis = {
+            "name": yaxis_name,
+            "nameLocation": yaxis_name_pos,
+            "nameGap": namegap,
+            "nameTextStyle": {"fontSize": xy_font_size}
+            }
         if isconvert:
             _yAxis.update(data=x_axis, type="category")
             _xAxis.update(type="value")
@@ -173,7 +185,7 @@ class Option():
         :return:
         """
         mark = {"data": []}
-        if data is not None:
+        if data:
             for d in list(data):
                 if "max" in d:
                     mark.get("data").append({"type": "max", "name": "最大值"})
@@ -219,8 +231,12 @@ class Option():
         :param kwargs:
         :return:
         """
-        legend = {"show": legend_show, "left": legend_pos, "orient": legend_orient}
-        return legend
+        _legend = {
+            "show": legend_show,
+            "left": legend_pos,
+            "orient": legend_orient
+        }
+        return _legend
 
     def visual_map(self,
                    visual_range=None,
@@ -230,28 +246,30 @@ class Option():
                    **kwargs):
 
         _min, _max = 0, 100
-        if visual_range is not None:
+        if visual_range:
             if len(visual_range) == 2:
                 _min, _max = visual_range
         _tlow, _thight = "low", "hight"
 
-        if visual_range_text is not None:
+        if visual_range_text:
             if len(visual_range_text) == 2:
                 _tlow, _thight = visual_range_text
         _clow, _chight = '#e0ffff', '#006edd'
 
-        if visual_range_color is not None:
+        if visual_range_color:
             if len(visual_range_color) == 2:
                 _clow, _chight = visual_range_color
 
-        visualmap = {"min": _min,
-                     "max": _max,
-                     "text": [_tlow, _thight],
-                     "inRange": {"color": [_clow, _chight]},
-                     "calculable": iscalculable,
-                     "left": "left",
-                     "top": "bottom"}
-        return visualmap
+        _visual_map = {
+            "min": _min,
+            "max": _max,
+            "text": [_tlow, _thight],
+            "inRange": {"color": [_clow, _chight]},
+            "calculable": iscalculable,
+            "left": "left",
+            "top": "bottom"
+        }
+        return _visual_map
 
     def gen_color(self):
         return "rgb({},{},{})".format(random.randint(0, 160),

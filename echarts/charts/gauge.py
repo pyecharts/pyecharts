@@ -8,17 +8,17 @@ class Gauge(Base):
     def add(self, *args, **kwargs):
         self._add(*args, **kwargs)
 
-    def _add(self, name, value, value_name):
+    def _add(self, name, attr, value):
         self._option.update(tooltip={"formatter": "{a} <br/>{b} : {c}%"})
         self._option.get('series').append({
             "detail": {"formatter": '{value}%'},
             "name": name,
             "type": "gauge",
-            "data": [{"value": value, "name": value_name}]
+            "data": [{"value": value, "name": attr}]
         })
 
 if __name__ == "__main__":
     gauge = Gauge()
-    gauge.add("业务指标", 66.66, "完成率")
+    gauge.add("业务指标", "完成率", 66.66)
     gauge.show_config()
     gauge.render()
