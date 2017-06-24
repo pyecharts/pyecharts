@@ -16,8 +16,9 @@ class Scatter(Base):
             self._option.update(xAxis=xaxis, yAxis=yaxis)
             self._option.get('legend').get('data').append(name)
             self._option.get('series').append({
-                "name": name,
                 "type": "scatter",
+                "name": name,
+                "symbol": self.Option.symbol(**kwargs),
                 "data": [list(z) for z in zip(x_value, y_value)],
                 "label": self.Option.label(**kwargs),
             })

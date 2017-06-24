@@ -25,10 +25,10 @@ class Radar(Base):
     def _add(self, name, value, **kwargs):
         self._option.get('legend').get('data').append(name)
         self._option.get('series').append({
-            "name": name,
             "type": "radar",
+            "name": name,
             "data": value,
-            "symbol": None,
+            "symbol": self.Option.symbol(**kwargs),
             "lineStyle": self.Option.line_style(**kwargs),
             "areaStyle": {"normal": self.Option.area_style(flag=True, **kwargs)}
         })
@@ -49,8 +49,8 @@ v2 = [[5000, 14000, 28000, 31000, 42000, 21000]]
 if __name__ == "__main__":
 
     radar = Radar()
-    radar.config(r, area_show=True)
+    radar.config(r)
     radar.add("预算分配", v1, label_color=["#000"])
-    radar.add("实际开销", v2, label_color=["#4e79a7"])
+    # radar.add("实际开销", v2, label_color=["#4e79a7"])
     radar.render()
     radar.show_config()

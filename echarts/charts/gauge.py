@@ -8,17 +8,30 @@ class Gauge(Base):
     def add(self, *args, **kwargs):
         self._add(*args, **kwargs)
 
-    def _add(self, name, attr, value):
+    def _add(self, name, attr, value, scale_range=None, angle_range=None):
         self._option.update(tooltip={"formatter": "{a} <br/>{b} : {c}%"})
+        _min, _max = 0, 100
+        if scale_range:
+            if len(scale_range) == 2:
+                _min, _max = scale_range
+        _start, _end = 225, -45
+        if angle_range:
+            if len(angle_range) == 2:
+                _start, _end = angle_range
+        self._option.get('legend').get('data').append(name)
         self._option.get('series').append({
+            "type": "gauge",
             "detail": {"formatter": '{value}%'},
             "name": name,
-            "type": "gauge",
+            "min": _min,
+            "max": _max,
+            "startAngle": _start,
+            "endAngle": _end,
             "data": [{"value": value, "name": attr}]
         })
 
 if __name__ == "__main__":
     gauge = Gauge()
-    gauge.add("业务指标", "完成率", 66.66)
+    gauge.add("业务指标", "完成率", 66.66, angle_range=[180, 0])
     gauge.show_config()
     gauge.render()

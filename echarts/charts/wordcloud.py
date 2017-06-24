@@ -31,8 +31,8 @@ class WordCloud(Base):
             else:
                 shape = "circle"
             self._option.get('series').append({
-                "name": name,
                 "type": "wordCloud",
+                "name": name,
                 "shape": shape,
                 "rotationRange": [_rmin, _rmax],
                 "rotationStep": rotate_step,

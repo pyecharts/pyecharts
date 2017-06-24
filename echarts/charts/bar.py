@@ -8,20 +8,19 @@ class Bar(Base):
     def add(self, *args, **kwargs):
         self._add(*args, **kwargs)
 
-    def _add(self, name, x_axis, y_axis, *, isstack=False, **kwargs):
+    def _add(self, name, x_axis, y_axis, *, is_stack=False, **kwargs):
         if isinstance(x_axis, list) and isinstance(y_axis, list):
             assert len(x_axis) == len(y_axis)
             kwargs.update(x_axis=x_axis)
-            isstack = "stack" if isstack else ""
+            is_stack = "stack" if is_stack else ""
             xaxis, yaxis = self.Option.xy_axis(**kwargs)
-            # dimensions
             self._option.update(xAxis=xaxis, yAxis=yaxis)
             self._option.get('legend').get('data').append(name)
             self._option.get('series').append({
-                "name": name,
                 "type": "bar",
+                "name": name,
                 "data": y_axis,
-                "stack": isstack,
+                "stack": is_stack,
                 "label": self.Option.label(**kwargs),
                 "markPoint": self.Option.mark_point(**kwargs),
                 "markLine": self.Option.mark_line(**kwargs)
@@ -40,10 +39,10 @@ v3 = [first + second + 35 for first, second in zip(v1, v2)]
 if __name__ == "__main__":
     from echarts.charts.line import Line
     bar = Bar("TITLE", "SUBTITLE")
-    bar.add("B", attr, v2, isstack=True)
-    bar.add("A", attr, v1, label_text_size=20, isstack=True)
+    bar.add("B", attr, v2, is_stack=True)
+    bar.add("A", attr, v1, is_stack=True)
     line = Line()
-    line.add("C", attr, v3, label_text_size=20)
+    line.add("C", attr, v3, is_label_show=True)
     bar.custom(line.get_series())
     bar.show_config()
     bar.render()

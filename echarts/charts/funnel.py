@@ -18,8 +18,8 @@ class Funnel(Base):
             for a in attr:
                 self._option.get('legend').get('data').append(a)
             self._option.get('series').append({
-                "name": name,
                 "type": "funnel",
+                "name": name,
                 "data": _data,
                 "label": self.Option.label(**kwargs),
             })

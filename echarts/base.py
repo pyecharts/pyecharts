@@ -1,3 +1,4 @@
+import os
 import json
 from pprint import pprint
 from echarts.option import Option
@@ -40,41 +41,45 @@ class Base():
         )
 
     def add(self,
-            label_show=None,            # for All
+            is_label_show=None,            # for All
             label_pos=None,
             label_color=None,
             label_text_color=None,
             label_text_size=None,
-            isemphasis=None,
+            is_emphasis=None,
             formatter=None,
-            legend_show=None,
+            is_legend_show=None,
             legend_pos=None,
             legend_orient=None,
             visual_range=None,
             visual_range_text=None,
             visual_range_color=None,
-            iscalculable=None,
-            israndom=None,
-            isstack=None,               # only for Bar
-            layout=None,                # only for Graph
+            is_calculable=None,
+            is_random=None,
+            is_symbol_show=None,
+            is_stack=None,                # only for Bar
+            layout=None,                  # only for Graph
+            is_focusnode=None,
+            is_rotatelabel=None,
             edge_length=None,
             gravity=None,
             repulsion=None,
-            issmooth=None,              # only for Line
-            isfill=None,
-            isstep=None,
-            isroam=None,                # only for Map
+            is_smooth=None,               # only for Line
+            is_fill=None,
+            is_step=None,
+            is_roam=None,                 # only for Map
             maptype=None,
-            radius=None,                # only for Pie
+            radius=None,                  # only for Pie
             center=None,
             rosetype=None,
-            line_width=None,            # only for Radar
+            line_width=None,              # only for Radar
+            symbol=None,
             line_opacity=None,
             line_type=None,
             line_curve=None,
-            split_line_show=None,
-            axis_line_show=None,
-            area_show=None,
+            is_splitline_show=None,
+            is_axisline_show=None,
+            is_area_show=None,
             area_opacity=None,
             area_color=None,
             shape=None,                 # for Radar/WordCloud
@@ -86,21 +91,26 @@ class Base():
             interval=None,
             yaxis_name=None,
             yaxis_name_pos=None,
-            isconvert=None,
+            is_convert=None,
             x_axis=None,
             mark_line=None,
             mark_point=None,
             word_gap=None,             # only for WordCloud
             word_size_range=None,
-            rotate_step=None):
+            rotate_step=None,
+            scale_range=None,
+            angle_range=None):
         pass
 
     def custom(self, series):
-        for s in series:
+        _name, _series = series
+        for n in _name:
+            self._option.get('legend').get('data').append(n)
+        for s in _series:
             self._option.get('series').append(s)
 
     def get_series(self):
-        return self._option.get('series')
+        return self._option.get('legend').get('data'), self._option.get('series')
 
     def show_config(self):
         pprint(self._option)
@@ -121,13 +131,13 @@ class Base():
                 v_lst.append(v)
         return k_lst, v_lst
 
-    def render(self, path=r"..\..\render.html"):
-        temple = r"..\..\temple\_temple.html"
+    def render(self, path=r"E:\Python\pyecharts\render.html"):
+        temple = r"E:\Python\pyecharts\temple\_temple.html"
         try:
             if self._option.get("series")[0].get("type", None) == "wordCloud":
-                temple = r"..\..\temple\_temple_wordcloud.html"
+                temple = r"E:\Python\pyecharts\temple\_temple_wordcloud.html"
             if self._option.get("series")[0].get("type", None) in ("scatter", "pie", "bar", "line"):
-                temple = r"..\..\temple\temple.html"
+                temple = r"E:\Python\pyecharts\temple\temple.html"
         except:
             pass
         with open(temple, "r", encoding="utf-8") as f:

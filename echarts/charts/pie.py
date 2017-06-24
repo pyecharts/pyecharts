@@ -27,24 +27,16 @@ class Pie(Base):
                     _cmin, _cmax = ["{}%".format(c) for c in center]
             if rosetype not in ("radius", "area"):
                 rosetype = "radius"
-            fmat = {
-                "series": "{a} ",
-                "name": "{b} ",
-                "value": "{c} ",
-                "percent": "{d}% "
-            }
-            _formatter = [fmat.get(f) for f in kwargs.get('formatter', ("name", "percent"))]
-            kwargs.update(formatter="".join(_formatter))
             for a in attr:
                 self._option.get('legend').get('data').append(a)
             self._option.get('series').append({
-                "name": name,
                 "type": "pie",
+                "name": name,
                 "data": _data,
                 "radius": [_rmin, _rmax],
                 "center": [_cmin, _cmax],
                 "roseType": rosetype,
-                "label": self.Option.label(**kwargs),
+                "label": self.Option.label("pie", **kwargs),
             })
             self._option.get('legend').update(self.Option.legend(**kwargs))
             self._option.update(color=self.Option.color(self._colorlst, **kwargs))
@@ -58,7 +50,7 @@ v2 = [19, 21, 32, 20, 20, 33]
 
 if __name__ == "__main__":
     pie = Pie()
-    pie.add("商品A", attr, v1, center=[25, 50], israndom=True, radius=[30, 75], isrosetype=True)
-    pie.add("商品B", attr, v2, center=[75, 50], israndom=True, radius=[30, 75], isrosetype=True)
+    pie.add("商品A", attr, v1, center=[25, 50], is_random=True, radius=[30, 75], rosetype=True, is_label_show=True)
+    pie.add("商品B", attr, v2, center=[75, 50], is_random=True, radius=[30, 75], rosetype=True)
     pie.show_config()
     pie.render()

@@ -58,18 +58,100 @@
 
         // 指定图表的配置项和数据
         var option = {
+    "series": [
+        {
+            "symbol": "circle",
+            "name": "预算分配",
+            "lineStyle": {
+                "normal": {
+                    "curveness": 0,
+                    "width": 1,
+                    "opacity": 1,
+                    "type": "solid"
+                }
+            },
+            "data": [
+                [
+                    4300,
+                    10000,
+                    28000,
+                    35000,
+                    50000,
+                    19000
+                ]
+            ],
+            "areaStyle": {
+                "normal": {
+                    "opacity": 0,
+                    "color": null
+                }
+            },
+            "type": "radar"
+        },
+        {
+            "symbol": "circle",
+            "name": "实际开销",
+            "lineStyle": {
+                "normal": {
+                    "curveness": 0,
+                    "width": 1,
+                    "opacity": 1,
+                    "type": "solid"
+                }
+            },
+            "data": [
+                [
+                    5000,
+                    14000,
+                    28000,
+                    31000,
+                    42000,
+                    21000
+                ]
+            ],
+            "areaStyle": {
+                "normal": {
+                    "opacity": 0,
+                    "color": null
+                }
+            },
+            "type": "radar"
+        }
+    ],
+    "tooltip": {},
+    "legend": {
+        "left": "center",
+        "orient": "horizontal",
+        "show": true,
+        "data": [
+            "预算分配",
+            "实际开销"
+        ]
+    },
+    "title": {
+        "subtextStyle": {
+            "fontSize": 12,
+            "color": "#aaa"
+        },
+        "left": "auto",
+        "text": "",
+        "textStyle": {
+            "fontSize": 18,
+            "color": "#000"
+        },
+        "subtext": ""
+    },
     "toolbox": {
+        "show": true,
+        "top": "center",
+        "left": "right",
         "feature": {
             "saveAsImage": {
                 "show": true
             }
         },
-        "show": true,
-        "left": "right",
-        "orient": "vertical",
-        "top": "center"
+        "orient": "vertical"
     },
-    "backgroundColor": "#fff",
     "color": [
         "#4e79a7",
         "#000",
@@ -84,111 +166,12 @@
         "#546570",
         "#c4ccd3"
     ],
-    "series": [
-        {
-            "data": [
-                [
-                    4300,
-                    10000,
-                    28000,
-                    35000,
-                    50000,
-                    19000
-                ]
-            ],
-            "lineStyle": {
-                "normal": {
-                    "curveness": 0,
-                    "opacity": 1,
-                    "width": 1,
-                    "type": "solid"
-                }
-            },
-            "areaStyle": {
-                "normal": {
-                    "opacity": 0,
-                    "color": null
-                }
-            },
-            "name": "预算分配",
-            "symbol": null,
-            "type": "radar"
-        },
-        {
-            "data": [
-                [
-                    5000,
-                    14000,
-                    28000,
-                    31000,
-                    42000,
-                    21000
-                ]
-            ],
-            "lineStyle": {
-                "normal": {
-                    "curveness": 0,
-                    "opacity": 1,
-                    "width": 1,
-                    "type": "solid"
-                }
-            },
-            "areaStyle": {
-                "normal": {
-                    "opacity": 0,
-                    "color": null
-                }
-            },
-            "name": "实际开销",
-            "symbol": null,
-            "type": "radar"
-        }
-    ],
-    "tooltip": {},
-    "legend": {
-        "show": true,
-        "orient": "horizontal",
-        "data": [
-            "预算分配",
-            "实际开销"
-        ],
-        "left": "center"
-    },
-    "title": {
-        "textStyle": {
-            "color": "#000",
-            "fontSize": 18
-        },
-        "subtext": "",
-        "subtextStyle": {
-            "color": "#aaa",
-            "fontSize": 12
-        },
-        "left": "auto",
-        "text": ""
-    },
+    "backgroundColor": "#fff",
     "radar": {
-        "axisLine": {
-            "lineStyle": {
-                "normal": {
-                    "curveness": 0,
-                    "opacity": 1,
-                    "width": 1,
-                    "type": "solid"
-                }
-            },
-            "show": true
-        },
-        "splitLine": {
-            "lineStyle": {
-                "normal": {
-                    "curveness": 0,
-                    "opacity": 1,
-                    "width": 1,
-                    "type": "solid"
-                }
-            },
-            "show": true
+        "name": {
+            "textStyle": {
+                "color": "#000"
+            }
         },
         "indicator": [
             {
@@ -216,26 +199,43 @@
                 "max": 25000
             }
         ],
+        "shape": "",
+        "splitLine": {
+            "show": true,
+            "lineStyle": {
+                "normal": {
+                    "curveness": 0,
+                    "width": 1,
+                    "opacity": 1,
+                    "type": "solid"
+                }
+            }
+        },
         "splitArea": {
             "show": true,
             "areaStyle": {
+                "show": true,
                 "lineStyle": {
                     "normal": {
                         "curveness": 0,
-                        "opacity": 1,
                         "width": 1,
+                        "opacity": 1,
                         "type": "solid"
                     }
-                },
-                "show": true
+                }
             }
         },
-        "name": {
-            "textStyle": {
-                "color": "#000"
+        "axisLine": {
+            "show": true,
+            "lineStyle": {
+                "normal": {
+                    "curveness": 0,
+                    "width": 1,
+                    "opacity": 1,
+                    "type": "solid"
+                }
             }
-        },
-        "shape": ""
+        }
     }
 };
 

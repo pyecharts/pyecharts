@@ -9,7 +9,7 @@ class Map(Base):
         self._add(*args, **kwargs)
 
     def _add(self, name, attr, value, *,
-             isroam=True, maptype='china', **kwargs):
+             is_roam=True, maptype='china', **kwargs):
         if isinstance(attr, list) and isinstance(value, list):
             assert len(attr) == len(value)
             _data = []
@@ -18,11 +18,12 @@ class Map(Base):
                 _data.append({"name": _name, "value": _value})
             self._option.get('legend').get('data').append(name)
             self._option.get('series').append({
-                "name": name,
                 "type": "map",
+                "name": name,
+                "symbol": self.Option.symbol(**kwargs),
                 "mapType": maptype,
                 "data": _data,
-                "roam": isroam
+                "roam": is_roam
             })
             self._option.update(visualMap=self.Option.visual_map(**kwargs))
             self._option.get('legend').update(self.Option.legend(**kwargs))

@@ -4,9 +4,9 @@ class Option():
 
     def label(self,
               type=None,
-              isemphasis=False,
+              is_emphasis=True,
               label_pos=None,
-              label_show=False,
+              is_label_show=False,
               label_text_color="#000",
               label_text_size=12,
               formatter=None,
@@ -14,39 +14,47 @@ class Option():
         """
 
         :param type:
-        :param isemphasis:
+        :param is_emphasis:
         :param label_pos:
-        :param label_show:
+        :param is_label_show:
         :param label_text_color:
         :param label_text_size:
         :param formatter:
         :param kwargs:
         :return:
         """
-        if type == "pie" and label_pos is None:
-            label_pos = "outside"
-        elif type == "graph"and label_pos is None:
-            label_pos = "inside"
+        if label_pos is None:
+            label_pos = "outside" if type in ["pie", "graph"] else "top"
         _label = {
-            "normal": {"show": label_show,
+            "normal": {"show": is_label_show,
                        "position": label_pos,
                        "textStyle": {"color": label_text_color,
                                      "fontSize": label_text_size}},
-            "emphasis": {"show": isemphasis}
+            "emphasis": {"show": is_emphasis}
         }
+        fmat = {
+            "series": "{a} ",
+            "name": "{b} ",
+            "value": "{c} ",
+            "percent": "{d}% "
+        }
+        if formatter is None:
+            _formatter = "{b} {d}%" if type == "pie" else None
+        else:
+            _formatter = "".join([fmat.get(f) for f in formatter if fmat.get(f, None)])
         if type != "graph":
-            _label.get("normal").update(formatter=formatter)
+            _label.get("normal").update(formatter=_formatter)
         return _label
 
     def color(self,
               colorlst,
-              israndom=False,
+              is_random=False,
               label_color=None,
               **kwargs):
         """
 
         :param colorlst:
-        :param israndom:
+        :param is_random:
         :param label_color:
         :param kwargs:
         :return:
@@ -54,7 +62,7 @@ class Option():
         if label_color:
             for color in reversed(list(label_color)):
                 colorlst.insert(0, color)
-        if israndom:
+        if is_random:
             random.shuffle(colorlst)
         return colorlst
 
@@ -82,47 +90,46 @@ class Option():
         return _line_style
 
     def split_line(self,
-                   split_line_show=True,
+                   is_splitline_show=True,
                    **kwargs):
         """
 
-        :param split_line_show:
+        :param is_splitline_show:
         :param kwargs:
         :return:
         """
         _split_line = {
-            "show": split_line_show,
+            "show": is_splitline_show,
             "lineStyle": self.line_style(**kwargs)
         }
         return _split_line
 
     def axis_line(self,
-                  axis_line_show=True,
+                  is_axisline_show=True,
                   **kwargs):
         """
 
-        :param axis_line_show:
+        :param is_axisline_show:
         :param kwargs:
         :return:
         """
         _axis_line = {
-            "show": axis_line_show,
+            "show": is_axisline_show,
             "lineStyle": self.line_style(**kwargs)
         }
         return _axis_line
 
     def split_area(self,
-                   area_show=False,
+                   is_area_show=True,
                    **kwargs):
         """
 
-        :param split_area_show:
-        :param split_area_opacity:
+        :param is_area_show:
         :param kwargs:
         :return:
         """
         _split_area = {
-            "show": area_show,
+            "show": is_area_show,
             "areaStyle": self.axis_line(**kwargs)
         }
         return _split_area
@@ -140,7 +147,8 @@ class Option():
         }
         return _area_style
 
-    def xy_axis(self, type=None,
+    def xy_axis(self,
+                type=None,
                 xy_font_size=14,
                 namegap=25,
                 xaxis_name="",
@@ -148,7 +156,7 @@ class Option():
                 interval="auto",
                 yaxis_name="",
                 yaxis_name_pos="middle",
-                isconvert=False,
+                is_convert=False,
                 x_axis=None,
                 **kwargs):
         """
@@ -161,7 +169,7 @@ class Option():
         :param interval:
         :param yaxis_name:
         :param yaxis_name_pos:
-        :param isconvert:
+        :param is_convert:
         :param x_axis:
         :param kwargs:
         :return:
@@ -179,7 +187,7 @@ class Option():
             "nameGap": namegap,
             "nameTextStyle": {"fontSize": xy_font_size}
             }
-        if isconvert:
+        if is_convert:
             _yAxis.update(data=x_axis, type="category")
             _xAxis.update(type="value")
         else:
@@ -231,20 +239,20 @@ class Option():
         return self._mark(mark_line)
 
     def legend(self,
-               legend_show=True,
+               is_legend_show=True,
                legend_orient="horizontal",
                legend_pos="center",
                **kwargs):
         """
 
-        :param legend_show:
+        :param is_legend_show:
         :param legend_orient:
         :param legend_pos:
         :param kwargs:
         :return:
         """
         _legend = {
-            "show": legend_show,
+            "show": is_legend_show,
             "left": legend_pos,
             "orient": legend_orient
         }
@@ -254,20 +262,20 @@ class Option():
                    visual_range=None,
                    visual_range_text=None,
                    visual_range_color=None,
-                   iscalculable=True,
+                   is_calculable=True,
                    **kwargs):
 
         _min, _max = 0, 100
         if visual_range:
             if len(visual_range) == 2:
                 _min, _max = visual_range
-        _tlow, _thight = "low", "hight"
 
+        _tlow, _thight = "low", "hight"
         if visual_range_text:
             if len(visual_range_text) == 2:
                 _tlow, _thight = visual_range_text
-        _clow, _chight = '#e0ffff', '#006edd'
 
+        _clow, _chight = '#e0ffff', '#006edd'
         if visual_range_color:
             if len(visual_range_color) == 2:
                 _clow, _chight = visual_range_color
@@ -277,7 +285,7 @@ class Option():
             "max": _max,
             "text": [_tlow, _thight],
             "inRange": {"color": [_clow, _chight]},
-            "calculable": iscalculable,
+            "calculable": is_calculable,
             "left": "left",
             "top": "bottom"
         }
@@ -287,3 +295,16 @@ class Option():
         return "rgb({},{},{})".format(random.randint(0, 160),
                                       random.randint(0, 160),
                                       random.randint(0, 160))
+
+    def symbol(self,
+               symbol=None,
+               **kwargs):
+        """
+
+        :param symbol:
+        :param kwargs:
+        :return:
+        """
+        if symbol not in ('rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow'):
+            symbol = 'circle'
+        return symbol
