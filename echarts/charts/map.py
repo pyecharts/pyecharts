@@ -6,9 +6,9 @@ class Map(Base):
         super().__init__(title, subtitle, **kwargs)
 
     def add(self, *args, **kwargs):
-        self._add(*args, **kwargs)
+        self.__add(*args, **kwargs)
 
-    def _add(self, name, attr, value, *,
+    def __add(self, name, attr, value, *,
              is_roam=True, maptype='china', **kwargs):
         if isinstance(attr, list) and isinstance(value, list):
             assert len(attr) == len(value)
@@ -32,7 +32,7 @@ class Map(Base):
 if __name__ == "__main__":
     value = [20, 190]
     attr = ['福州市', '厦门市']
-    map = Map(width=1200, height=600)
+    map = Map(width=1200, height=550)
     map.add("地图", attr, value, maptype='广东')
     map.show_config()
     map.render()

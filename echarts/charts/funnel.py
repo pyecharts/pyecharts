@@ -6,9 +6,9 @@ class Funnel(Base):
         super().__init__(title, subtitle, **kwargs)
 
     def add(self, *args, **kwargs):
-        self._add(*args, **kwargs)
+        self.__add(*args, **kwargs)
 
-    def _add(self, name, attr, value, **kwargs):
+    def __add(self, name, attr, value, **kwargs):
         if isinstance(attr, list) and isinstance(value, list):
             assert len(attr) == len(value)
             _data = []
@@ -35,6 +35,6 @@ value = [20, 40, 60, 80, 100, 120]
 if __name__ == "__main__":
 
     funnel = Funnel()
-    funnel.add("商品", attr, value, label_show=True, label_pos="inside", label_text_color="#fff")
+    funnel.add("商品", attr, value, is_label_show=True, label_pos="inside", label_text_color="#fff")
     funnel.show_config()
     funnel.render()

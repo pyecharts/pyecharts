@@ -297,7 +297,7 @@ class Option():
                                       random.randint(0, 160))
 
     def symbol(self,
-               symbol=None,
+               symbol="",
                **kwargs):
         """
 
@@ -305,6 +305,8 @@ class Option():
         :param kwargs:
         :return:
         """
-        if symbol not in ('rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow'):
+        if symbol is None:
+            symbol = 'none'
+        elif symbol not in ('rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow'):
             symbol = 'circle'
         return symbol

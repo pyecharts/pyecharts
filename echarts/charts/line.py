@@ -6,9 +6,9 @@ class Line(Base):
         super().__init__(title, subtitle, **kwargs)
 
     def add(self, *args, **kwargs):
-        self._add(*args, **kwargs)
+        self.__add(*args, **kwargs)
 
-    def _add(self, name, x_axis, y_axis, *,
+    def __add(self, name, x_axis, y_axis, *,
              is_symbol_show=True, is_smooth=False, is_stack=False, is_step=False, is_fill=False, **kwargs):
         if isinstance(x_axis, list) and isinstance(y_axis, list):
             assert len(x_axis) == len(y_axis)

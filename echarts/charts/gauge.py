@@ -6,9 +6,10 @@ class Gauge(Base):
         super().__init__(title, subtitle, **kwargs)
 
     def add(self, *args, **kwargs):
-        self._add(*args, **kwargs)
+        self.__add(*args, **kwargs)
 
-    def _add(self, name, attr, value, scale_range=None, angle_range=None):
+    def __add(self, name, attr, value, *,
+             scale_range=None, angle_range=None, **kwargs):
         self._option.update(tooltip={"formatter": "{a} <br/>{b} : {c}%"})
         _min, _max = 0, 100
         if scale_range:
@@ -29,6 +30,7 @@ class Gauge(Base):
             "endAngle": _end,
             "data": [{"value": value, "name": attr}]
         })
+        self._option.get('legend').update(self.Option.legend(**kwargs))
 
 if __name__ == "__main__":
     gauge = Gauge()

@@ -1,4 +1,3 @@
-import random
 from echarts.base import Base
 
 class Pie(Base):
@@ -7,9 +6,9 @@ class Pie(Base):
         super().__init__(title, subtitle, **kwargs)
 
     def add(self, *args, **kwargs):
-        self._add(*args, **kwargs)
+        self.__add(*args, **kwargs)
 
-    def _add(self, name, attr, value, *,
+    def __add(self, name, attr, value, *,
             radius=None, center=None, rosetype="radius", **kwargs):
         if isinstance(attr, list) and isinstance(value, list):
             assert len(attr) == len(value)

@@ -6,9 +6,9 @@ class Bar(Base):
         super().__init__(title, subtitle, **kwargs)
 
     def add(self, *args, **kwargs):
-        self._add(*args, **kwargs)
+        self.__add(*args, **kwargs)
 
-    def _add(self, name, x_axis, y_axis, *, is_stack=False, **kwargs):
+    def __add(self, name, x_axis, y_axis, *, is_stack=False, **kwargs):
         if isinstance(x_axis, list) and isinstance(y_axis, list):
             assert len(x_axis) == len(y_axis)
             kwargs.update(x_axis=x_axis)

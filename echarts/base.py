@@ -5,28 +5,41 @@ from echarts.option import Option
 
 class Base():
 
-    def __init__(self, title,
-                 subtitle,
-                 background_color="#fff",
+    def __init__(self, title, subtitle,
                  width=800,
                  height=400,
                  title_pos="auto",
                  title_color="#000",
                  subtitle_color="#aaa",
                  title_text_size=18,
-                 subtitle_text_size=12):
+                 subtitle_text_size=12,
+                 background_color="#fff"):
+        """
+
+        :param title:
+        :param subtitle:
+        :param background_color:
+        :param width:
+        :param height:
+        :param title_pos:
+        :param title_color:
+        :param subtitle_color:
+        :param title_text_size:
+        :param subtitle_text_size:
+        """
         self.Option = Option()
         self._option = {}
         self._width, self._height = width, height
         self._colorlst = ['#c23531', '#2f4554', '#61a0a8', '#d48265', '#749f83',
                           '#ca8622', '#bda29a', '#6e7074', '#546570', '#c4ccd3']
         self._option.update(
-            title={"text": title,
-                   "subtext": subtitle,
-                   "left": title_pos,
-                   "textStyle": {"color": title_color, "fontSize": title_text_size},
-                   "subtextStyle": {"color": subtitle_color, "fontSize": subtitle_text_size}
-                  },
+            title={
+                "text": title,
+                "subtext": subtitle,
+                "left": title_pos,
+                "textStyle": {"color": title_color, "fontSize": title_text_size},
+                "subtextStyle": {"color": subtitle_color, "fontSize": subtitle_text_size}
+            },
             toolbox={
                 "show": True,
                 "orient": "vertical",
@@ -57,7 +70,10 @@ class Base():
             is_calculable=None,
             is_random=None,
             is_symbol_show=None,
-            is_stack=None,                # only for Bar
+            symbol_size=None,
+            is_stack=None,                # for Bar/Line
+            scale_range=None,             # only for Gauge
+            angle_range=None,
             layout=None,                  # only for Graph
             is_focusnode=None,
             is_rotatelabel=None,
@@ -73,6 +89,7 @@ class Base():
             center=None,
             rosetype=None,
             line_width=None,              # only for Radar
+            item_color=None,
             symbol=None,
             line_opacity=None,
             line_type=None,
@@ -82,9 +99,9 @@ class Base():
             is_area_show=None,
             area_opacity=None,
             area_color=None,
-            shape=None,                 # for Radar/WordCloud
+            shape=None,                  # for Radar/WordCloud
             rader_text_color=None,
-            xy_font_size=None,          # for Scatter/Bar/Line
+            xy_font_size=None,           # for Scatter/Bar/Line
             namegap=None,
             xaxis_name=None,
             xaxis_name_pos=None,
@@ -95,11 +112,12 @@ class Base():
             x_axis=None,
             mark_line=None,
             mark_point=None,
-            word_gap=None,             # only for WordCloud
+            word_gap=None,              # only for WordCloud
             word_size_range=None,
             rotate_step=None,
-            scale_range=None,
-            angle_range=None):
+            effect_brushtype=None,
+            effect_scale=None,
+            effect_period=None):
         pass
 
     def custom(self, series):
@@ -133,13 +151,14 @@ class Base():
 
     def render(self, path=r"E:\Python\pyecharts\render.html"):
         temple = r"E:\Python\pyecharts\temple\_temple.html"
-        try:
-            if self._option.get("series")[0].get("type", None) == "wordCloud":
+        series = self._option.get("series")
+        for s in series:
+            if s.get('type') == "wordCloud":
                 temple = r"E:\Python\pyecharts\temple\_temple_wordcloud.html"
-            if self._option.get("series")[0].get("type", None) in ("scatter", "pie", "bar", "line"):
+                break
+            if s.get('type') in ("scatter", "pie", "bar", "line"):
                 temple = r"E:\Python\pyecharts\temple\temple.html"
-        except:
-            pass
+                break
         with open(temple, "r", encoding="utf-8") as f:
             my_option = json.dumps(self._option, indent=4, ensure_ascii=False)
             open(path, "w+", encoding="utf-8").write(

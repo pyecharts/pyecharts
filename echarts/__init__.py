@@ -1,5 +1,6 @@
 
 from .charts.bar import Bar
+from .charts.effectscatter import EffectScatter
 from .charts.funnel import Funnel
 from .charts.gauge import Gauge
 from .charts.graph import Graph

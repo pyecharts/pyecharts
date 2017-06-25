@@ -6,9 +6,9 @@ class WordCloud(Base):
         super().__init__(title, subtitle, **kwargs)
 
     def add(self, *args, **kwargs):
-        self._add(*args, **kwargs)
+        self.__add(*args, **kwargs)
 
-    def _add(self, name, attr, value, *,
+    def __add(self, name, attr, value, *,
              shape="circle", word_gap=20, word_size_range=None, rotate_step=45):
         if isinstance(attr, list) and isinstance(value, list):
             assert len(attr) == len(value)

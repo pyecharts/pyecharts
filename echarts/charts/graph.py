@@ -6,9 +6,9 @@ class Graph(Base):
         super().__init__(title, subtitle, **kwargs)
 
     def add(self, *args, **kwargs):
-        self._add(*args, **kwargs)
+        self.__add(*args, **kwargs)
 
-    def _add(self, nodes, links, categories=None, *,
+    def __add(self, nodes, links, categories=None, *,
              is_focusnode=True, is_roam=True, is_rotatelabel=False,
              layout="force", edge_length=50, gravity=0.2, repulsion=50, **kwargs):
         if categories:

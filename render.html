@@ -60,16 +60,23 @@
         var option = {
     "series": [
         {
-            "symbol": "circle",
-            "name": "预算分配",
             "lineStyle": {
                 "normal": {
-                    "curveness": 0,
+                    "type": "solid",
                     "width": 1,
                     "opacity": 1,
-                    "type": "solid"
+                    "curveness": 0
                 }
             },
+            "areaStyle": {
+                "normal": {
+                    "opacity": 0,
+                    "color": null
+                }
+            },
+            "name": "预算分配",
+            "symbol": "circle",
+            "type": "radar",
             "data": [
                 [
                     4300,
@@ -80,25 +87,30 @@
                     19000
                 ]
             ],
+            "itemStyle": {
+                "normal": {
+                    "color": null
+                }
+            }
+        },
+        {
+            "lineStyle": {
+                "normal": {
+                    "type": "solid",
+                    "width": 1,
+                    "opacity": 1,
+                    "curveness": 0
+                }
+            },
             "areaStyle": {
                 "normal": {
                     "opacity": 0,
                     "color": null
                 }
             },
-            "type": "radar"
-        },
-        {
-            "symbol": "circle",
             "name": "实际开销",
-            "lineStyle": {
-                "normal": {
-                    "curveness": 0,
-                    "width": 1,
-                    "opacity": 1,
-                    "type": "solid"
-                }
-            },
+            "symbol": "circle",
+            "type": "radar",
             "data": [
                 [
                     5000,
@@ -109,19 +121,29 @@
                     21000
                 ]
             ],
-            "areaStyle": {
+            "itemStyle": {
                 "normal": {
-                    "opacity": 0,
                     "color": null
                 }
-            },
-            "type": "radar"
+            }
         }
     ],
     "tooltip": {},
+    "backgroundColor": "#fff",
+    "toolbox": {
+        "left": "right",
+        "show": true,
+        "feature": {
+            "saveAsImage": {
+                "show": true
+            }
+        },
+        "top": "center",
+        "orient": "vertical"
+    },
     "legend": {
-        "left": "center",
         "orient": "horizontal",
+        "left": "center",
         "show": true,
         "data": [
             "预算分配",
@@ -129,28 +151,17 @@
         ]
     },
     "title": {
-        "subtextStyle": {
-            "fontSize": 12,
-            "color": "#aaa"
-        },
-        "left": "auto",
-        "text": "",
+        "subtext": "",
         "textStyle": {
             "fontSize": 18,
             "color": "#000"
         },
-        "subtext": ""
-    },
-    "toolbox": {
-        "show": true,
-        "top": "center",
-        "left": "right",
-        "feature": {
-            "saveAsImage": {
-                "show": true
-            }
+        "text": "",
+        "subtextStyle": {
+            "fontSize": 12,
+            "color": "#aaa"
         },
-        "orient": "vertical"
+        "left": "auto"
     },
     "color": [
         "#4e79a7",
@@ -166,48 +177,15 @@
         "#546570",
         "#c4ccd3"
     ],
-    "backgroundColor": "#fff",
     "radar": {
-        "name": {
-            "textStyle": {
-                "color": "#000"
-            }
-        },
-        "indicator": [
-            {
-                "name": "销售",
-                "max": 6500
-            },
-            {
-                "name": "管理",
-                "max": 16000
-            },
-            {
-                "name": "信息技术",
-                "max": 30000
-            },
-            {
-                "name": "客服",
-                "max": 38000
-            },
-            {
-                "name": "研发",
-                "max": 52000
-            },
-            {
-                "name": "市场",
-                "max": 25000
-            }
-        ],
-        "shape": "",
-        "splitLine": {
+        "axisLine": {
             "show": true,
             "lineStyle": {
                 "normal": {
-                    "curveness": 0,
+                    "type": "solid",
                     "width": 1,
                     "opacity": 1,
-                    "type": "solid"
+                    "curveness": 0
                 }
             }
         },
@@ -217,25 +195,57 @@
                 "show": true,
                 "lineStyle": {
                     "normal": {
-                        "curveness": 0,
+                        "type": "solid",
                         "width": 1,
                         "opacity": 1,
-                        "type": "solid"
+                        "curveness": 0
                     }
                 }
             }
         },
-        "axisLine": {
+        "name": {
+            "textStyle": {
+                "color": "#000"
+            }
+        },
+        "indicator": [
+            {
+                "max": 6500,
+                "name": "销售"
+            },
+            {
+                "max": 16000,
+                "name": "管理"
+            },
+            {
+                "max": 30000,
+                "name": "信息技术"
+            },
+            {
+                "max": 38000,
+                "name": "客服"
+            },
+            {
+                "max": 52000,
+                "name": "研发"
+            },
+            {
+                "max": 25000,
+                "name": "市场"
+            }
+        ],
+        "splitLine": {
             "show": true,
             "lineStyle": {
                 "normal": {
-                    "curveness": 0,
+                    "type": "solid",
                     "width": 1,
                     "opacity": 1,
-                    "type": "solid"
+                    "curveness": 0
                 }
             }
-        }
+        },
+        "shape": ""
     }
 };
 

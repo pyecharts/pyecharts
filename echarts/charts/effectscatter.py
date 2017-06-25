@@ -1,7 +1,6 @@
-from PIL import Image
-from echarts.base import Base
+from echarts.charts.scatter import Scatter
 
-class Scatter(Base):
+class EffectScatter(Scatter):
 
     def __init__(self, title="", subtitle="", **kwargs):
         super().__init__(title, subtitle, **kwargs)
@@ -9,15 +8,22 @@ class Scatter(Base):
     def add(self, *args, **kwargs):
         self.__add(*args, **kwargs)
 
-    def __add(self, name, x_value, y_value, *, symbol_size=10, **kwargs):
+    def __add(self, name, x_value, y_value, *, symbol_size=10,
+             effect_brushtype="stroke", effect_scale=2.5, effect_period=4, **kwargs):
         if isinstance(x_value, list) and isinstance(y_value, list):
             assert len(x_value) == len(y_value)
             xaxis, yaxis = self.Option.xy_axis("scatter", **kwargs)
             self._option.update(xAxis=xaxis, yAxis=yaxis)
             self._option.get('legend').get('data').append(name)
             self._option.get('series').append({
-                "type": "scatter",
+                "type": "effectScatter",
                 "name": name,
+                "showEffectOn":"render",
+                "rippleEffect":{
+                    "brushType": effect_brushtype,
+                    "scale": effect_scale,
+                    "period":effect_period
+                },
                 "symbol": self.Option.symbol(**kwargs),
                 "symbolSize": symbol_size,
                 "data": [list(z) for z in zip(x_value, y_value)],
@@ -28,32 +34,18 @@ class Scatter(Base):
         else:
             raise TypeError("x_axis and y_axis must be list")
 
-    def draw(self, path, color=None):
-        """
-        :param path:
-        :param color:
-        :return:
-        """
-        color = color or (255, 255, 255)
-        im = Image.open(path)
-        width, height = im.size
-        imarray = im.load()
-        # Flip the picture vertically
-        for x in range(width):
-            for y in range(height):
-                if y < int(height / 2):
-                    imarray[x, y], imarray[x, height-y-1] = imarray[x, height-y-1], imarray[x, y]
-
-        result = [(x, y) for x in range(width) for y in range(height) if imarray[x, y] != color]
-        return self.cast(result)
-
 
 v1 = [10, 20, 30, 40, 50, 60]
 v2 = [10, 20, 30, 40, 50, 60]
 
+v3 = [25, 20, 15, 10, 5]
+v4 = [25, 20, 15, 10, 5]
+
 if __name__ == "__main__":
-    scatter = Scatter()
-    scatter.add("a", v1, v2, symbol_size=40)
-    # scatter.add("b", v1[::-1], v2)
-    scatter.show_config()
-    scatter.render()
+    effectscatter = EffectScatter()
+    effectscatter.add("a",v3,v4,symbol_size=20, effect_scale=6, effect_period=10, symbol="pin")
+    # effectscatter.add("a", v1, v2, symbol_size=20)
+    # effectscatter.add("b", v1[::-1], v2, symbol_size=20)
+    effectscatter.add("b", v3[::-1], v4, symbol_size=20, effect_scale=6, effect_period=5, symbol="pin")
+    effectscatter.show_config()
+    effectscatter.render()
