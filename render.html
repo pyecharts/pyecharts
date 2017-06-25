@@ -58,195 +58,61 @@
 
         // 指定图表的配置项和数据
         var option = {
-    "series": [
-        {
-            "lineStyle": {
-                "normal": {
-                    "type": "solid",
-                    "width": 1,
-                    "opacity": 1,
-                    "curveness": 0
-                }
-            },
-            "areaStyle": {
-                "normal": {
-                    "opacity": 0,
-                    "color": null
-                }
-            },
-            "name": "预算分配",
-            "symbol": "circle",
-            "type": "radar",
-            "data": [
-                [
-                    4300,
-                    10000,
-                    28000,
-                    35000,
-                    50000,
-                    19000
-                ]
-            ],
-            "itemStyle": {
-                "normal": {
-                    "color": null
-                }
-            }
-        },
-        {
-            "lineStyle": {
-                "normal": {
-                    "type": "solid",
-                    "width": 1,
-                    "opacity": 1,
-                    "curveness": 0
-                }
-            },
-            "areaStyle": {
-                "normal": {
-                    "opacity": 0,
-                    "color": null
-                }
-            },
-            "name": "实际开销",
-            "symbol": "circle",
-            "type": "radar",
-            "data": [
-                [
-                    5000,
-                    14000,
-                    28000,
-                    31000,
-                    42000,
-                    21000
-                ]
-            ],
-            "itemStyle": {
-                "normal": {
-                    "color": null
-                }
-            }
-        }
-    ],
-    "tooltip": {},
-    "backgroundColor": "#fff",
+    "tooltip": {
+        "formatter": "{a} <br/>{b} : {c}%"
+    },
     "toolbox": {
+        "top": "center",
         "left": "right",
         "show": true,
+        "orient": "vertical",
         "feature": {
             "saveAsImage": {
                 "show": true
             }
-        },
-        "top": "center",
-        "orient": "vertical"
+        }
     },
-    "legend": {
-        "orient": "horizontal",
-        "left": "center",
-        "show": true,
-        "data": [
-            "预算分配",
-            "实际开销"
-        ]
-    },
+    "backgroundColor": "#fff",
     "title": {
-        "subtext": "",
-        "textStyle": {
-            "fontSize": 18,
-            "color": "#000"
-        },
-        "text": "",
         "subtextStyle": {
             "fontSize": 12,
             "color": "#aaa"
         },
-        "left": "auto"
+        "left": "auto",
+        "subtext": "",
+        "text": "",
+        "textStyle": {
+            "fontSize": 18,
+            "color": "#000"
+        }
     },
-    "color": [
-        "#4e79a7",
-        "#000",
-        "#c23531",
-        "#2f4554",
-        "#61a0a8",
-        "#d48265",
-        "#749f83",
-        "#ca8622",
-        "#bda29a",
-        "#6e7074",
-        "#546570",
-        "#c4ccd3"
-    ],
-    "radar": {
-        "axisLine": {
-            "show": true,
-            "lineStyle": {
-                "normal": {
-                    "type": "solid",
-                    "width": 1,
-                    "opacity": 1,
-                    "curveness": 0
+    "legend": {
+        "left": "center",
+        "show": true,
+        "orient": "horizontal",
+        "data": [
+            "业务指标"
+        ]
+    },
+    "series": [
+        {
+            "type": "gauge",
+            "detail": {
+                "formatter": "{value}%"
+            },
+            "max": 100,
+            "startAngle": 180,
+            "name": "业务指标",
+            "endAngle": 0,
+            "min": 0,
+            "data": [
+                {
+                    "name": "完成率",
+                    "value": 66.66
                 }
-            }
-        },
-        "splitArea": {
-            "show": true,
-            "areaStyle": {
-                "show": true,
-                "lineStyle": {
-                    "normal": {
-                        "type": "solid",
-                        "width": 1,
-                        "opacity": 1,
-                        "curveness": 0
-                    }
-                }
-            }
-        },
-        "name": {
-            "textStyle": {
-                "color": "#000"
-            }
-        },
-        "indicator": [
-            {
-                "max": 6500,
-                "name": "销售"
-            },
-            {
-                "max": 16000,
-                "name": "管理"
-            },
-            {
-                "max": 30000,
-                "name": "信息技术"
-            },
-            {
-                "max": 38000,
-                "name": "客服"
-            },
-            {
-                "max": 52000,
-                "name": "研发"
-            },
-            {
-                "max": 25000,
-                "name": "市场"
-            }
-        ],
-        "splitLine": {
-            "show": true,
-            "lineStyle": {
-                "normal": {
-                    "type": "solid",
-                    "width": 1,
-                    "opacity": 1,
-                    "curveness": 0
-                }
-            }
-        },
-        "shape": ""
-    }
+            ]
+        }
+    ]
 };
 
         // 使用刚指定的配置项和数据显示图表。
