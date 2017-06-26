@@ -152,10 +152,6 @@ class Base():
                         v_lst.append(_value)
                 except:
                     raise ValueError
-        elif isinstance(seq, dict):
-            for k, v in seq.items():
-                k_lst.append(k)
-                v_lst.append(v)
         return k_lst, v_lst
 
     def render(self, path=r"E:\Python\pyecharts\render.html"):
@@ -165,7 +161,7 @@ class Base():
             if s.get('type') == "wordCloud":
                 temple = r"E:\Python\pyecharts\temple\_temple_wordcloud.html"
                 break
-            if s.get('type') in ("scatter", "pie", "bar", "line") and s.get('coordinateSystem', None) != "geo":
+            if s.get('type') in ("scatter", "pie", "bar", "line") and 'coordinateSystem' not in s:
                 temple = r"E:\Python\pyecharts\temple\temple.html"
                 break
         with open(temple, "r", encoding="utf-8") as f:
