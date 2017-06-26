@@ -9,7 +9,11 @@ class Line(Base):
         self.__add(*args, **kwargs)
 
     def __add(self, name, x_axis, y_axis, *,
-             is_symbol_show=True, is_smooth=False, is_stack=False, is_step=False, is_fill=False, **kwargs):
+              is_symbol_show=True,
+              is_smooth=False,
+              is_stack=False,
+              is_step=False,
+              is_fill=False, **kwargs):
         if isinstance(x_axis, list) and isinstance(y_axis, list):
             assert len(x_axis) == len(y_axis)
             kwargs.update(x_axis=x_axis)

@@ -9,7 +9,8 @@ class Scatter(Base):
     def add(self, *args, **kwargs):
         self.__add(*args, **kwargs)
 
-    def __add(self, name, x_value, y_value, *, symbol_size=10, **kwargs):
+    def __add(self, name, x_value, y_value, *,
+              symbol_size=10, **kwargs):
         if isinstance(x_value, list) and isinstance(y_value, list):
             assert len(x_value) == len(y_value)
             xaxis, yaxis = self.Option.xy_axis("scatter", **kwargs)
@@ -50,10 +51,9 @@ class Scatter(Base):
 
 v1 = [10, 20, 30, 40, 50, 60]
 v2 = [10, 20, 30, 40, 50, 60]
-
 if __name__ == "__main__":
     scatter = Scatter()
-    scatter.add("a", v1, v2, symbol_size=40)
+    # scatter.add("a", v1, v2, symbol_size=40)
     # scatter.add("b", v1[::-1], v2)
     scatter.show_config()
     scatter.render()

@@ -3,6 +3,7 @@ from .charts.bar import Bar
 from .charts.effectscatter import EffectScatter
 from .charts.funnel import Funnel
 from .charts.gauge import Gauge
+from .charts.geo import Geo
 from .charts.graph import Graph
 from .charts.line import Line
 from .charts.map import Map

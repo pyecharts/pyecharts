@@ -9,7 +9,10 @@ class WordCloud(Base):
         self.__add(*args, **kwargs)
 
     def __add(self, name, attr, value, *,
-             shape="circle", word_gap=20, word_size_range=None, rotate_step=45):
+              shape="circle",
+              word_gap=20,
+              word_size_range=None,
+              rotate_step=45):
         if isinstance(attr, list) and isinstance(value, list):
             assert len(attr) == len(value)
             _data = []

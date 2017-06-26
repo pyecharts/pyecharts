@@ -9,7 +9,8 @@ class Gauge(Base):
         self.__add(*args, **kwargs)
 
     def __add(self, name, attr, value, *,
-             scale_range=None, angle_range=None, **kwargs):
+              scale_range=None,
+              angle_range=None, **kwargs):
         self._option.update(tooltip={"formatter": "{a} <br/>{b} : {c}%"})
         _min, _max = 0, 100
         if scale_range:

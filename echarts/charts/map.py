@@ -9,7 +9,8 @@ class Map(Base):
         self.__add(*args, **kwargs)
 
     def __add(self, name, attr, value, *,
-             is_roam=True, maptype='china', **kwargs):
+              is_roam=True,
+              maptype='china', **kwargs):
         if isinstance(attr, list) and isinstance(value, list):
             assert len(attr) == len(value)
             _data = []

@@ -64,6 +64,7 @@ class Base():
             legend_pos=None,
             legend_orient=None,
             visual_range=None,
+            visual_text_color=None,
             visual_range_text=None,
             visual_range_color=None,
             is_calculable=None,
@@ -116,7 +117,11 @@ class Base():
             rotate_step=None,
             effect_brushtype=None,
             effect_scale=None,
-            effect_period=None):
+            effect_period=None,
+            border_color=None,
+            geo_normal_color=None,
+            geo_emphasis_color=None,
+            is_visualmap=None):
         pass
 
     def custom(self, series):
@@ -138,8 +143,13 @@ class Base():
             for s in seq:
                 try:
                     if isinstance(s, tuple):
-                        k_lst.append(s[0])
-                        v_lst.append(s[1])
+                        _attr, _value = s
+                        k_lst.append(_attr)
+                        v_lst.append(_value)
+                    if isinstance(s, dict):
+                        _attr, _value = s.get('name', None), s.get('value', None)
+                        k_lst.append(_attr)
+                        v_lst.append(_value)
                 except:
                     raise ValueError
         elif isinstance(seq, dict):
@@ -155,7 +165,7 @@ class Base():
             if s.get('type') == "wordCloud":
                 temple = r"E:\Python\pyecharts\temple\_temple_wordcloud.html"
                 break
-            if s.get('type') in ("scatter", "pie", "bar", "line"):
+            if s.get('type') in ("scatter", "pie", "bar", "line") and s.get('coordinateSystem', None) != "geo":
                 temple = r"E:\Python\pyecharts\temple\temple.html"
                 break
         with open(temple, "r", encoding="utf-8") as f:

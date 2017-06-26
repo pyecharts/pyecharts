@@ -260,6 +260,7 @@ class Option():
 
     def visual_map(self,
                    visual_range=None,
+                   visual_text_color=None,
                    visual_range_text=None,
                    visual_range_color=None,
                    is_calculable=True,
@@ -275,16 +276,17 @@ class Option():
             if len(visual_range_text) == 2:
                 _tlow, _thight = visual_range_text
 
-        _clow, _chight = '#e0ffff', '#006edd'
+        inrange= ['#e0ffff', '#006edd']
         if visual_range_color:
-            if len(visual_range_color) == 2:
-                _clow, _chight = visual_range_color
+            if len(visual_range_color) >= 2:
+                inrange = visual_range_color
 
         _visual_map = {
             "min": _min,
             "max": _max,
-            "text": [_tlow, _thight],
-            "inRange": {"color": [_clow, _chight]},
+            "text": [_thight, _tlow],
+            "textStyle": {"color": visual_text_color},
+            "inRange": {"color": inrange},
             "calculable": is_calculable,
             "left": "left",
             "top": "bottom"

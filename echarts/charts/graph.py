@@ -9,8 +9,13 @@ class Graph(Base):
         self.__add(*args, **kwargs)
 
     def __add(self, nodes, links, categories=None, *,
-             is_focusnode=True, is_roam=True, is_rotatelabel=False,
-             layout="force", edge_length=50, gravity=0.2, repulsion=50, **kwargs):
+              is_focusnode=True,
+              is_roam=True,
+              is_rotatelabel=False,
+              layout="force",
+              edge_length=50,
+              gravity=0.2,
+              repulsion=50, **kwargs):
         if categories:
             for c in categories:
                 self._option.get('legend').get('data').append(c)

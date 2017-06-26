@@ -9,7 +9,9 @@ class Pie(Base):
         self.__add(*args, **kwargs)
 
     def __add(self, name, attr, value, *,
-            radius=None, center=None, rosetype="radius", **kwargs):
+              radius=None,
+              center=None,
+              rosetype="radius", **kwargs):
         if isinstance(attr, list) and isinstance(value, list):
             assert len(attr) == len(value)
             _data = []

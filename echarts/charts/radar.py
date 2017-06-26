@@ -5,7 +5,8 @@ class Radar(Base):
     def __init__(self, title="", subtitle="", **kwargs):
         super().__init__(title, subtitle, **kwargs)
 
-    def config(self, indicator, shape="", rader_text_color="#000", **kwargs):
+    def config(self, indicator, shape="", *,
+               rader_text_color="#000", **kwargs):
         _indicator = []
         for indi in indicator:
             _name, _max = indi

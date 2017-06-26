@@ -8,8 +8,11 @@ class EffectScatter(Scatter):
     def add(self, *args, **kwargs):
         self.__add(*args, **kwargs)
 
-    def __add(self, name, x_value, y_value, *, symbol_size=10,
-             effect_brushtype="stroke", effect_scale=2.5, effect_period=4, **kwargs):
+    def __add(self, name, x_value, y_value, *,
+              symbol_size=10,
+              effect_brushtype="stroke",
+              effect_scale=2.5,
+              effect_period=4, **kwargs):
         if isinstance(x_value, list) and isinstance(y_value, list):
             assert len(x_value) == len(y_value)
             xaxis, yaxis = self.Option.xy_axis("scatter", **kwargs)
