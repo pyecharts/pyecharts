@@ -11,6 +11,18 @@ class Scatter(Base):
 
     def __add(self, name, x_value, y_value, *,
               symbol_size=10, **kwargs):
+        """
+
+        :param name:
+            图例名称
+        :param x_axis:
+            x 坐标轴数据
+        :param y_axis:
+            y 坐标轴数据
+        :param symbol_size:
+            标记图形大小
+        :param kwargs:
+        """
         if isinstance(x_value, list) and isinstance(y_value, list):
             assert len(x_value) == len(y_value)
             xaxis, yaxis = self.Option.xy_axis("scatter", **kwargs)
@@ -29,16 +41,19 @@ class Scatter(Base):
             raise TypeError("x_axis and y_axis must be list")
 
     def draw(self, path, color=None):
-        """
+        """ 将图片上的像素点转换为数组，如 color 为 （255,255,255）时只保留非白色像素点的坐标信息
+
         :param path:
+            转换图片的地址
         :param color:
+            所要排除的颜色
         :return:
         """
         color = color or (255, 255, 255)
         im = Image.open(path)
         width, height = im.size
         imarray = im.load()
-        # Flip the picture vertically
+        # 垂直翻转图片
         for x in range(width):
             for y in range(height):
                 if y < int(height / 2):
@@ -46,13 +61,3 @@ class Scatter(Base):
 
         result = [(x, y) for x in range(width) for y in range(height) if imarray[x, y] != color]
         return self.cast(result)
-
-if __name__ == "__main__":
-    v1 = [10, 20, 30, 40, 50, 60]
-    v2 = [10, 20, 30, 40, 50, 60]
-
-    scatter = Scatter()
-    scatter.add("a", v1, v2, symbol_size=40)
-    # scatter.add("b", v1[::-1], v2)
-    scatter.show_config()
-    scatter.render()

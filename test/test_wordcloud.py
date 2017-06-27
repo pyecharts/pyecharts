@@ -12,5 +12,3 @@ def test_wordcloud():
     wordcloud.add("", name, value, word_size_range=[20, 100])
     wordcloud.show_config()
     wordcloud.render()
-
-test_wordcloud()

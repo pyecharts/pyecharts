@@ -16,15 +16,25 @@ class Base():
         """
 
         :param title:
+            主标题文本，支持 \n 换行
         :param subtitle:
-        :param background_color:
+            副标题文本，支持 \n 换行
         :param width:
+            画布宽度
         :param height:
+            画布高度
         :param title_pos:
+            标题位置，有 auto，left，right，center 可选
         :param title_color:
+            主标题文本颜色
         :param subtitle_color:
+            副标题文本颜色
         :param title_text_size:
+            主标题文本字体大小
         :param subtitle_text_size:
+            副标题文本字体大小
+        :param background_color:
+            画布背景颜色
         """
         self.Option = Option()
         self._option = {}
@@ -52,8 +62,7 @@ class Base():
             backgroundColor=background_color
         )
 
-    def add(self,
-            is_label_show=None,            # for All
+    def add(self, is_label_show=None,            # for All
             label_pos=None,
             label_color=None,
             label_text_color=None,
@@ -71,24 +80,26 @@ class Base():
             is_random=None,
             is_symbol_show=None,
             symbol_size=None,
-            is_stack=None,                # for Bar/Line
-            scale_range=None,             # only for Gauge
+            is_visualmap=None,
+            type=None,
+            is_stack=None,                  # for Bar/Line
+            scale_range=None,               # only for Gauge
             angle_range=None,
-            layout=None,                  # only for Graph
+            layout=None,                    # only for Graph
             is_focusnode=None,
             is_rotatelabel=None,
             edge_length=None,
             gravity=None,
             repulsion=None,
-            is_smooth=None,               # only for Line
+            is_smooth=None,                 # only for Line
             is_fill=None,
             is_step=None,
-            is_roam=None,                 # only for Map
+            is_roam=None,                   # only for Map
             maptype=None,
-            radius=None,                  # only for Pie
+            radius=None,                    # only for Pie
             center=None,
             rosetype=None,
-            line_width=None,              # only for Radar
+            line_width=None,                # only for Radar
             item_color=None,
             symbol=None,
             line_opacity=None,
@@ -121,16 +132,19 @@ class Base():
             border_color=None,
             geo_normal_color=None,
             geo_emphasis_color=None,
-            is_visualmap=None,
-            angle_data=None,
+            angle_data=None,            # only for polar
             radius_data=None,
             start_angle=None,
             boundary_gap=None,
-            type=None,
             clockwise=None):
+        """ base 父类的 add 方法只是为了提供提示选项 """
         pass
 
     def custom(self, series):
+        """ 追加自定义图表类型
+
+        :param series:
+        """
         _name, _series = series
         for n in _name:
             self._option.get('legend').get('data').append(n)
@@ -138,12 +152,20 @@ class Base():
             self._option.get('series').append(s)
 
     def get_series(self):
+        """ 获取图例的 series 数据 """
         return self._option.get('legend').get('data'), self._option.get('series')
 
     def show_config(self):
+        """ 打印输出 option 所有配置项 """
         pprint(self._option)
 
     def cast(self, seq):
+        """ 转换数据序列，将带字典和元祖类型的序列转换为符合要求的两个列表
+
+        :param seq:
+            转换的序列
+        :return:
+        """
         k_lst, v_lst = [], []
         if isinstance(seq, list):
             for s in seq:
@@ -161,12 +183,23 @@ class Base():
         return k_lst, v_lst
 
     def _legend_visualmap_colorlst(self, is_visualmap=False, **kwargs):
+        """ 配置 legend，visualmap 以及 colorlst
+
+        :param is_visualmap:
+            是否显示 visualmap 组件
+        :param kwargs:
+        """
         if is_visualmap:
             self._option.update(visualMap=self.Option.visual_map(**kwargs))
         self._option.get('legend').update(self.Option.legend(**kwargs))
         self._option.update(color=self.Option.color(self._colorlst, **kwargs))
 
     def render(self, path=r"E:\Python\pyecharts\render.html"):
+        """ 渲染数据项，生成 html 文件
+
+        :param path:
+            生成 html 文件保存路径
+        """
         temple = r"E:\Python\pyecharts\temple\_temple.html"
         series = self._option.get("series")
         for s in series:
@@ -185,6 +218,7 @@ class Base():
 
     @property
     def _geo_cities(self):
+        """ 返回 geo 组件中国各大城市经纬度 """
         return {
             "海门": [121.15, 31.89],
             "鄂尔多斯": [109.781327, 39.608266],

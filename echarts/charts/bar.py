@@ -10,6 +10,18 @@ class Bar(Base):
 
     def __add(self, name, x_axis, y_axis, *,
               is_stack=False, **kwargs):
+        """
+
+        :param name:
+            图例名称
+        :param x_axis:
+            x 坐标轴数据
+        :param y_axis:
+            y 坐标轴数据
+        :param is_stack:
+            数据堆叠，同个类目轴上系列配置相同的 stack 值可以堆叠放置
+        :param kwargs:
+        """
         if isinstance(x_axis, list) and isinstance(y_axis, list):
             assert len(x_axis) == len(y_axis)
             kwargs.update(x_axis=x_axis)
@@ -29,19 +41,3 @@ class Bar(Base):
             self._legend_visualmap_colorlst(**kwargs)
         else:
             raise TypeError("x_axis and y_axis must be list")
-
-if __name__ == "__main__":
-    attr = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
-    v1 = [5, 20, 36, 10, 75, 90]
-    v2 = [10, 25, 8, 60, 20, 80]
-    v3 = [first + second + 35 for first, second in zip(v1, v2)]
-
-    from echarts.charts.line import Line
-    bar = Bar("TITLE", "SUBTITLE")
-    bar.add("B", attr, v2, is_stack=True)
-    bar.add("A", attr, v1, is_stack=True)
-    line = Line()
-    line.add("C", attr, v3, is_label_show=True)
-    bar.custom(line.get_series())
-    bar.show_config()
-    bar.render()

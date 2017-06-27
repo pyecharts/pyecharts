@@ -11,6 +11,20 @@ class Gauge(Base):
     def __add(self, name, attr, value, *,
               scale_range=None,
               angle_range=None, **kwargs):
+        """
+
+        :param name:
+            图例名称
+        :param attr:
+            属性名称
+        :param value:
+            属性所对应的值
+        :param scale_range:
+            仪表盘数据范围
+        :param angle_range:
+            仪表盘角度范围
+        :param kwargs:
+        """
         self._option.update(tooltip={"formatter": "{a} <br/>{b} : {c}%"})
         _min, _max = 0, 100
         if scale_range:
@@ -32,9 +46,3 @@ class Gauge(Base):
             "data": [{"value": value, "name": attr}]
         })
         self._legend_visualmap_colorlst(**kwargs)
-
-if __name__ == "__main__":
-    gauge = Gauge()
-    gauge.add("业务指标", "完成率", 66.66, angle_range=[180, 0])
-    gauge.show_config()
-    gauge.render()

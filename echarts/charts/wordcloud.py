@@ -13,6 +13,24 @@ class WordCloud(Base):
               word_gap=20,
               word_size_range=None,
               rotate_step=45):
+        """
+
+        :param name:
+            图例名称
+        :param attr:
+            属性名称
+        :param value:
+            属性所对应的值
+        :param shape:
+            词云图轮廓，包括
+            cardioid, diamond, triangle-forward, triangle, pentagon, star
+        :param word_gap:
+            单词间间隔
+        :param word_size_range:
+            单词字体大小范围
+        :param rotate_step:
+            旋转单词角度，默认为 45 度
+        """
         if isinstance(attr, list) and isinstance(value, list):
             assert len(attr) == len(value)
             _data = []
@@ -43,16 +61,3 @@ class WordCloud(Base):
                 "sizeRange": [_min, _max],
                 "data": _data
             })
-
-if __name__ == "__main__":
-    name = ['Sam S Club', 'Macys', 'Amy Schumer', 'Jurassic World', 'Charter Communications',
-            'Chick Fil A', 'Planet Fitness', 'Pitch Perfect', 'Express', 'Home', 'Johnny Depp',
-            'Lena Dunham', 'Lewis Hamilton', 'KXAN', 'Mary Ellen Mark', 'Farrah Abraham',
-            'Rita Ora', 'Serena Williams', 'NCAA baseball tournament', 'Point Break']
-    value = [10000, 6181, 4386, 4055, 2467, 2244, 1898, 1484, 1112, 965, 847, 582, 555,
-             550, 462, 366, 360, 282, 273, 265]
-
-    wordcloud = WordCloud(width=1200, height=600)
-    wordcloud.add("", name, value, word_size_range=[20, 100])
-    wordcloud.show_config()
-    wordcloud.render()

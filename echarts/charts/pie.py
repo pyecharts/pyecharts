@@ -12,6 +12,27 @@ class Pie(Base):
               radius=None,
               center=None,
               rosetype="radius", **kwargs):
+        """
+
+        :param name:
+            图例名称
+        :param attr:
+            属性名称
+        :param value:
+            属性所对应的值
+        :param radius:
+            饼图的半径，数组的第一项是内半径，第二项是外半径
+            默认设置成百分比，相对于容器高宽中较小的一项的一半
+        :param center:
+            饼图的中心（圆心）坐标，数组的第一项是横坐标，第二项是纵坐标
+            默认设置成百分比，设置成百分比时第一项是相对于容器宽度，第二项是相对于容器高度
+        :param rosetype:
+            是否展示成南丁格尔图，通过半径区分数据大小
+            可选择两种模式：
+            radius：扇区圆心角展现数据的百分比，半径展现数据的大小
+            area：所有扇区圆心角相同，仅通过半径展现数据大小
+        :param kwargs:
+        """
         if isinstance(attr, list) and isinstance(value, list):
             assert len(attr) == len(value)
             _data = []
@@ -42,14 +63,3 @@ class Pie(Base):
             self._legend_visualmap_colorlst(**kwargs)
         else:
             raise TypeError("attr and value must be list")
-
-if __name__ == "__main__":
-    attr = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
-    v1 = [11, 12, 13, 10, 10, 10]
-    v2 = [19, 21, 32, 20, 20, 33]
-
-    pie = Pie()
-    # pie.add("商品A", attr, v1, center=[25, 50], is_random=True, radius=[30, 75], rosetype=True, is_label_show=True)
-    pie.add("商品B", attr, v2, center=[75, 50], is_random=True, radius=[30, 75], rosetype=True, is_legend_show=False)
-    pie.show_config()
-    pie.render()

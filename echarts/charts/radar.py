@@ -5,8 +5,19 @@ class Radar(Base):
     def __init__(self, title="", subtitle="", **kwargs):
         super().__init__(title, subtitle, **kwargs)
 
-    def config(self, indicator, shape="", *,
+    def config(self, indicator, *,
+               shape="",
                rader_text_color="#000", **kwargs):
+        """
+
+        :param indicator:
+            雷达图的指示器，用来指定雷达图中的多个变量（维度）
+        :param shape:
+            雷达图绘制类型，支持 polygon（多边形） 和 circle
+        :param rader_text_color:
+            雷达图数据项字体颜色
+        :param kwargs:
+        """
         _indicator = []
         for indi in indicator:
             _name, _max = indi
@@ -24,6 +35,16 @@ class Radar(Base):
         self.__add(*args, **kwargs)
 
     def __add(self, name, value, *, item_color=None, **kwargs):
+        """
+
+        :param name:
+            图例名称
+        :param value:
+            数据项，[[]]类型，包含列表的列表
+        :param item_color:
+            指定单图例颜色
+        :param kwargs:
+        """
         self._option.get('legend').get('data').append(name)
         self._option.get('series').append({
             "type": "radar",

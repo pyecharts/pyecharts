@@ -9,6 +9,16 @@ class Funnel(Base):
         self.__add(*args, **kwargs)
 
     def __add(self, name, attr, value, **kwargs):
+        """
+
+        :param name:
+            图例名称
+        :param attr:
+            属性名称
+        :param value:
+            属性所对应的值
+        :param kwargs:
+        """
         if isinstance(attr, list) and isinstance(value, list):
             assert len(attr) == len(value)
             _data = []
@@ -26,12 +36,3 @@ class Funnel(Base):
             self._legend_visualmap_colorlst(**kwargs)
         else:
             raise TypeError("attr and value must be list")
-
-if __name__ == "__main__":
-    attr = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
-    value = [20, 40, 60, 80, 100, 120]
-
-    funnel = Funnel()
-    funnel.add("商品", attr, value, is_label_show=True, label_pos="inside", label_text_color="#fff")
-    funnel.show_config()
-    funnel.render()

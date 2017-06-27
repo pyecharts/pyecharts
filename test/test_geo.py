@@ -193,6 +193,9 @@ def test_geo():
         {"name": "武汉", "value": 273},
         {"name": "大庆", "value": 279}]
 
+    # value = [20, 190, 10]
+    # attr = ['福州', '厦门', '汕头']
+
     geo = Geo("全国主要城市空气质量", "data from pm2.5",
               title_color="#fff", title_pos="center", width=1300, height=620, background_color='#404a59')
     attr, value = geo.cast(data)
@@ -201,3 +204,4 @@ def test_geo():
     geo.add("", attr[6:], value[6:], type="scatter", visual_range_color=['#50a3ba', '#eac763', '#d94e5d'])
     geo.show_config()
     geo.render()
+

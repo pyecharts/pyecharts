@@ -13,6 +13,24 @@ class EffectScatter(Scatter):
               effect_brushtype="stroke",
               effect_scale=2.5,
               effect_period=4, **kwargs):
+        """
+
+        :param name:
+            图例名称
+        :param x_axis:
+            x 坐标轴数据
+        :param y_axis:
+            y 坐标轴数据
+        :param symbol_size:
+            标记图形大小
+        :param effect_brushtype:
+            波纹绘制方式
+        :param effect_scale:
+            动画中波纹的最大缩放比例
+        :param effect_period:
+            动画的时间
+        :param kwargs:
+        """
         if isinstance(x_value, list) and isinstance(y_value, list):
             assert len(x_value) == len(y_value)
             xaxis, yaxis = self.Option.xy_axis("scatter", **kwargs)
@@ -35,17 +53,3 @@ class EffectScatter(Scatter):
             self._legend_visualmap_colorlst(**kwargs)
         else:
             raise TypeError("x_axis and y_axis must be list")
-
-if __name__ == "__main__":
-    v1 = [10, 20, 30, 40, 50, 60]
-    v2 = [10, 20, 30, 40, 50, 60]
-    v3 = [25, 20, 15, 10, 5]
-    v4 = [25, 20, 15, 10, 5]
-
-    effectscatter = EffectScatter()
-    effectscatter.add("a",v3,v4,symbol_size=20, effect_scale=6, effect_period=10, symbol="pin")
-    # effectscatter.add("a", v1, v2, symbol_size=20)
-    # effectscatter.add("b", v1[::-1], v2, symbol_size=20)
-    effectscatter.add("b", v3[::-1], v4, symbol_size=20, effect_scale=6, effect_period=5, symbol="pin")
-    effectscatter.show_config()
-    effectscatter.render()

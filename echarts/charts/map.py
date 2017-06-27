@@ -11,6 +11,21 @@ class Map(Base):
     def __add(self, name, attr, value, *,
               is_roam=True,
               maptype='china', **kwargs):
+        """
+
+        :param name:
+            图例名称
+        :param attr:
+            属性名称
+        :param value:
+            属性所对应的值
+        :param is_roam:
+            是否开启鼠标缩放和平移漫游。默认不开启
+            如果只想要开启缩放或者平移，可以设置成 'scale' 或者 'move'。设置成 true 为都开启
+        :param maptype:
+            地图类型，支持 china, world, 广东，福建，山东等...
+        :param kwargs:
+        """
         if isinstance(attr, list) and isinstance(value, list):
             assert len(attr) == len(value)
             _data = []
@@ -27,11 +42,3 @@ class Map(Base):
                 "roam": is_roam
             })
             self._legend_visualmap_colorlst(**kwargs)
-
-if __name__ == "__main__":
-    value = [20, 190]
-    attr = ['福州市', '厦门市']
-    map = Map(width=1200, height=550)
-    map.add("地图", attr, value, maptype='广东', is_visualmap=True)
-    map.show_config()
-    map.render()

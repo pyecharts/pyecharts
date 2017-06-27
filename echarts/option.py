@@ -13,12 +13,19 @@ class Option():
         """
 
         :param type:
+            图例类型
         :param is_emphasis:
+            是否高亮显示标签
         :param label_pos:
+            标签位置
         :param is_label_show:
+            是否正常显示标签
         :param label_text_color:
+            标签字体颜色
         :param label_text_size:
+            标签字体大小
         :param formatter:
+            标签内容格式器，有 series,name,value,percent 可选
         :param kwargs:
         :return:
         """
@@ -52,8 +59,11 @@ class Option():
         """
 
         :param colorlst:
+            全局颜色列表
         :param is_random:
+            是否随机排列颜色列表
         :param label_color:
+            追加颜色项
         :param kwargs:
         :return:
         """
@@ -72,9 +82,13 @@ class Option():
         """
 
         :param line_width:
+            线的宽度
         :param line_opacity:
+            线的透明度，0 为完全透明，1 为完全不透明
         :param line_curve:
+            线的弯曲程度，0 为完全不弯曲，1 为最弯曲
         :param line_type:
+            线的类型，有 solid，dashed，dotted
         :param kwargs:
         :return:
         """
@@ -90,6 +104,7 @@ class Option():
         """
 
         :param is_splitline_show:
+            是否显示分割线
         :param kwargs:
         :return:
         """
@@ -103,6 +118,7 @@ class Option():
         """
 
         :param is_axisline_show:
+            是否显示坐标轴线
         :param kwargs:
         :return:
         """
@@ -116,6 +132,7 @@ class Option():
         """
 
         :param is_area_show:
+            是否显示填充区域
         :param kwargs:
         :return:
         """
@@ -132,8 +149,11 @@ class Option():
         """
 
         :param flag:
+            图例类型标记位
         :param area_opacity:
+            填充区域透明度
         :param area_color:
+            填充区域颜色
         :param kwargs:
         :return:
         """
@@ -159,15 +179,28 @@ class Option():
         """
 
         :param type:
+            图例类型
         :param xy_font_size:
+            x 轴和 y 轴字体大小
         :param namegap:
+            坐标轴名称与轴线之间的距离
         :param xaxis_name:
+            x 轴名称
         :param xaxis_name_pos:
+            x 轴名称位置，有 start，middle，end 可选
         :param interval:
+            坐标轴刻度标签的显示间隔，在类目轴中有效
+            默认会采用标签不重叠的策略间隔显示标签
+            可以设置成 0 强制显示所有标签
+            如果设置为 1，表示『隔一个标签显示一个标签』，如果值为 2，表示隔两个标签显示一个标签，以此类推
         :param yaxis_name:
+            y 轴名称
         :param yaxis_name_pos:
+            y 轴名称位置，有 start，middle，end 可选
         :param is_convert:
+            是否交换 x 轴与 y 轴
         :param x_axis:
+            x 轴数据项
         :param kwargs:
         :return:
         """
@@ -199,6 +232,7 @@ class Option():
         """
 
         :param data:
+            标记数据项，有最小值，最大值，平均值可选
         :return:
         """
         mark = {"data": []}
@@ -216,6 +250,7 @@ class Option():
         """
 
         :param mark_point:
+            标记点，有最小值，最大值，平均值可选
         :param kwargs:
         :return:
         """
@@ -225,6 +260,7 @@ class Option():
         """
 
         :param mark_line:
+            标记线，有最小值，最大值，平均值可选
         :param kwargs:
         :return:
         """
@@ -238,8 +274,11 @@ class Option():
         """
 
         :param is_legend_show:
+            是否显示顶端图例
         :param legend_orient:
+            图例列表的布局朝向，有 horizontal，vertical 可选
         :param legend_pos:
+            图例位置，有 left, center, right 可选
         :param kwargs:
         :return:
         """
@@ -259,10 +298,15 @@ class Option():
         """
 
         :param visual_range:
+            指定组件的允许的最小值与最大值
         :param visual_text_color:
+            两端文本颜色
         :param visual_range_text:
+            两端文本
         :param visual_range_color:
+            过渡的颜色，列表类型
         :param is_calculable:
+            是否显示拖拽用的手柄（手柄能拖拽调整选中范围）
         :param kwargs:
         :return:
         """
@@ -307,6 +351,7 @@ class Option():
         """
 
         :param symbol:
+            标记类型
         :param kwargs:
         :return:
         """

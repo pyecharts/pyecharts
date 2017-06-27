@@ -18,6 +18,34 @@ class Geo(Base):
               effect_brushtype="stroke",
               effect_scale=2.5,
               effect_period=4, **kwargs):
+        """
+
+        :param name:
+            图例名称
+        :param attr:
+            属性名称
+        :param value:
+            属性所对应的值
+        :param type:
+            图例类型，有 scatter/effectscatter 可选
+        :param maptype:
+            地图类型，目前只有 china 可选
+        :param symbol_size:
+            标记图形大小
+        :param border_color:
+            地图边界颜色
+        :param geo_normal_color:
+            正常状态下地图区域的颜色
+        :param geo_emphasis_color:
+            高亮状态下地图区域的颜色
+        :param effect_brushtype:
+            波纹绘制方式
+        :param effect_scale:
+            动画中波纹的最大缩放比例
+        :param effect_period:
+            动画的时间
+        :param kwargs:
+        """
         if isinstance(attr, list) and isinstance(value, list):
             assert len(attr) == len(value)
             _data = []
@@ -50,7 +78,7 @@ class Geo(Base):
                 })
             elif type == "effectscatter":
                 self._option.get('series').append({
-                    "type": "effectScatter",
+                    "type": type,
                     "name": name,
                     "coordinateSystem": 'geo',
                     "showEffectOn": "render",
@@ -65,14 +93,4 @@ class Geo(Base):
                     "label": self.Option.label(**kwargs),
                 })
             self._legend_visualmap_colorlst(**kwargs)
-
-if __name__ == "__main__":
-    value = [20, 190, 10]
-    attr = ['福州', '厦门', '汕头']
-
-    geo = Geo("全国主要城市空气质量", "data from pm2.5",
-              title_color="#fff", title_pos="center", width=1300, height=620, background_color='#404a59')
-    geo.add("", attr, value)
-    geo.show_config()
-    geo.render()
 
