@@ -2,8 +2,7 @@ import random
 
 class Option():
 
-    def label(self,
-              type=None,
+    def label(self, type=None,
               is_emphasis=True,
               label_pos=None,
               is_label_show=False,
@@ -46,8 +45,7 @@ class Option():
             _label.get("normal").update(formatter=_formatter)
         return _label
 
-    def color(self,
-              colorlst,
+    def color(self, colorlst,
               is_random=False,
               label_color=None,
               **kwargs):
@@ -66,8 +64,7 @@ class Option():
             random.shuffle(colorlst)
         return colorlst
 
-    def line_style(self,
-                   line_width=1,
+    def line_style(self, line_width=1,
                    line_opacity=1,
                    line_curve=0,
                    line_type="solid",
@@ -89,9 +86,7 @@ class Option():
         }
         return _line_style
 
-    def split_line(self,
-                   is_splitline_show=True,
-                   **kwargs):
+    def split_line(self, is_splitline_show=True, **kwargs):
         """
 
         :param is_splitline_show:
@@ -104,9 +99,7 @@ class Option():
         }
         return _split_line
 
-    def axis_line(self,
-                  is_axisline_show=True,
-                  **kwargs):
+    def axis_line(self, is_axisline_show=True, **kwargs):
         """
 
         :param is_axisline_show:
@@ -119,9 +112,7 @@ class Option():
         }
         return _axis_line
 
-    def split_area(self,
-                   is_area_show=True,
-                   **kwargs):
+    def split_area(self, is_area_show=True, **kwargs):
         """
 
         :param is_area_show:
@@ -134,11 +125,18 @@ class Option():
         }
         return _split_area
 
-    def area_style(self,
-                   flag=False,
+    def area_style(self, flag=False,
                    area_opacity=None,
                    area_color=None,
                    **kwargs):
+        """
+
+        :param flag:
+        :param area_opacity:
+        :param area_color:
+        :param kwargs:
+        :return:
+        """
         if area_opacity is None:
             area_opacity = 0 if flag else 1
         _area_style = {
@@ -147,8 +145,7 @@ class Option():
         }
         return _area_style
 
-    def xy_axis(self,
-                type=None,
+    def xy_axis(self, type=None,
                 xy_font_size=14,
                 namegap=25,
                 xaxis_name="",
@@ -215,9 +212,7 @@ class Option():
                     mark.get("data").append({"type": "average", "name": "平均值"})
         return mark
 
-    def mark_point(self,
-                   mark_point=None,
-                   **kwargs):
+    def mark_point(self, mark_point=None, **kwargs):
         """
 
         :param mark_point:
@@ -226,9 +221,7 @@ class Option():
         """
         return self._mark(mark_point)
 
-    def mark_line(self,
-                  mark_line=None,
-                  **kwargs):
+    def mark_line(self, mark_line=None, **kwargs):
         """
 
         :param mark_line:
@@ -238,8 +231,7 @@ class Option():
 
         return self._mark(mark_line)
 
-    def legend(self,
-               is_legend_show=True,
+    def legend(self, is_legend_show=True,
                legend_orient="horizontal",
                legend_pos="center",
                **kwargs):
@@ -258,14 +250,22 @@ class Option():
         }
         return _legend
 
-    def visual_map(self,
-                   visual_range=None,
+    def visual_map(self, visual_range=None,
                    visual_text_color=None,
                    visual_range_text=None,
                    visual_range_color=None,
                    is_calculable=True,
                    **kwargs):
+        """
 
+        :param visual_range:
+        :param visual_text_color:
+        :param visual_range_text:
+        :param visual_range_color:
+        :param is_calculable:
+        :param kwargs:
+        :return:
+        """
         _min, _max = 0, 100
         if visual_range:
             if len(visual_range) == 2:
@@ -276,12 +276,13 @@ class Option():
             if len(visual_range_text) == 2:
                 _tlow, _thight = visual_range_text
 
-        inrange= ['#e0ffff', '#006edd']
+        inrange= ['#50a3ba', '#eac763', '#d94e5d']
         if visual_range_color:
             if len(visual_range_color) >= 2:
                 inrange = visual_range_color
 
         _visual_map = {
+            "type": "continuous",
             "min": _min,
             "max": _max,
             "text": [_thight, _tlow],
@@ -294,21 +295,25 @@ class Option():
         return _visual_map
 
     def gen_color(self):
+        """
+
+        :return:
+        """
         return "rgb({},{},{})".format(random.randint(0, 160),
                                       random.randint(0, 160),
                                       random.randint(0, 160))
 
-    def symbol(self,
-               symbol="",
-               **kwargs):
+    def symbol(self, type=None, symbol="", **kwargs):
         """
 
         :param symbol:
         :param kwargs:
         :return:
         """
-        if symbol is None:
+        if symbol is None:                      # Radar
             symbol = 'none'
+        elif type == "line" and symbol == "":   # Line
+            symbol = "emptyCircle"
         elif symbol not in ('rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow'):
             symbol = 'circle'
         return symbol

@@ -32,19 +32,16 @@ class EffectScatter(Scatter):
                 "data": [list(z) for z in zip(x_value, y_value)],
                 "label": self.Option.label(**kwargs),
             })
-            self._option.get('legend').update(self.Option.legend(**kwargs))
-            self._option.update(color=self.Option.color(self._colorlst, **kwargs))
+            self._legend_visualmap_colorlst(**kwargs)
         else:
             raise TypeError("x_axis and y_axis must be list")
 
-
-v1 = [10, 20, 30, 40, 50, 60]
-v2 = [10, 20, 30, 40, 50, 60]
-
-v3 = [25, 20, 15, 10, 5]
-v4 = [25, 20, 15, 10, 5]
-
 if __name__ == "__main__":
+    v1 = [10, 20, 30, 40, 50, 60]
+    v2 = [10, 20, 30, 40, 50, 60]
+    v3 = [25, 20, 15, 10, 5]
+    v4 = [25, 20, 15, 10, 5]
+
     effectscatter = EffectScatter()
     effectscatter.add("a",v3,v4,symbol_size=20, effect_scale=6, effect_period=10, symbol="pin")
     # effectscatter.add("a", v1, v2, symbol_size=20)

@@ -35,11 +35,9 @@ class Graph(Base):
             "categories": categories,
             "links":links
         })
-        self._option.get('legend').update(self.Option.legend(**kwargs))
-        self._option.update(color=self.Option.color(self._colorlst, **kwargs))
+        self._legend_visualmap_colorlst(**kwargs)
 
 if __name__ == "__main__":
-
     import json
     with open("..\..\json\weibo.json", "r", encoding="utf-8") as f:
         j = json.load(f)

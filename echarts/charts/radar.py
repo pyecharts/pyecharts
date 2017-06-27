@@ -34,23 +34,20 @@ class Radar(Base):
             "lineStyle": self.Option.line_style(**kwargs),
             "areaStyle": {"normal": self.Option.area_style(flag=True, **kwargs)}
         })
-        self._option.get('legend').update(self.Option.legend(**kwargs))
-        self._option.update(color=self.Option.color(self._colorlst, **kwargs))
-
-
-r = [("销售", 6500),
-     ("管理", 16000),
-     ("信息技术", 30000),
-     ("客服", 38000),
-     ("研发", 52000),
-     ("市场", 25000)]
-
-v1 = [(4300, 10000, 28000, 35000, 50000, 19000),
-      [5000, 14000, 28000, 31000, 42000, 21000],
-      [3000, 14000, 18000, 21000, 22000, 11000]]
-v2 = [[5000, 14000, 28000, 31000, 42000, 21000]]
+        self._legend_visualmap_colorlst(**kwargs)
 
 if __name__ == "__main__":
+    r = [("销售", 6500),
+         ("管理", 16000),
+         ("信息技术", 30000),
+         ("客服", 38000),
+         ("研发", 52000),
+         ("市场", 25000)]
+
+    v1 = [(4300, 10000, 28000, 35000, 50000, 19000),
+          [5000, 14000, 28000, 31000, 42000, 21000],
+          [3000, 14000, 18000, 21000, 22000, 11000]]
+    v2 = [[5000, 14000, 28000, 31000, 42000, 21000]]
 
     radar = Radar()
     radar.config(r)

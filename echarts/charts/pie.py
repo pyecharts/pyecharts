@@ -39,19 +39,17 @@ class Pie(Base):
                 "roseType": rosetype,
                 "label": self.Option.label("pie", **kwargs),
             })
-            self._option.get('legend').update(self.Option.legend(**kwargs))
-            self._option.update(color=self.Option.color(self._colorlst, **kwargs))
+            self._legend_visualmap_colorlst(**kwargs)
         else:
             raise TypeError("attr and value must be list")
 
-
-attr = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
-v1 = [11, 12, 13, 10, 10, 10]
-v2 = [19, 21, 32, 20, 20, 33]
-
 if __name__ == "__main__":
+    attr = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
+    v1 = [11, 12, 13, 10, 10, 10]
+    v2 = [19, 21, 32, 20, 20, 33]
+
     pie = Pie()
-    pie.add("商品A", attr, v1, center=[25, 50], is_random=True, radius=[30, 75], rosetype=True, is_label_show=True)
-    pie.add("商品B", attr, v2, center=[75, 50], is_random=True, radius=[30, 75], rosetype=True)
+    # pie.add("商品A", attr, v1, center=[25, 50], is_random=True, radius=[30, 75], rosetype=True, is_label_show=True)
+    pie.add("商品B", attr, v2, center=[75, 50], is_random=True, radius=[30, 75], rosetype=True, is_legend_show=False)
     pie.show_config()
     pie.render()

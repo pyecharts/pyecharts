@@ -24,8 +24,7 @@ class Scatter(Base):
                 "data": [list(z) for z in zip(x_value, y_value)],
                 "label": self.Option.label(**kwargs),
             })
-            self._option.get('legend').update(self.Option.legend(**kwargs))
-            self._option.update(color=self.Option.color(self._colorlst, **kwargs))
+            self._legend_visualmap_colorlst(**kwargs)
         else:
             raise TypeError("x_axis and y_axis must be list")
 
@@ -48,12 +47,12 @@ class Scatter(Base):
         result = [(x, y) for x in range(width) for y in range(height) if imarray[x, y] != color]
         return self.cast(result)
 
-
-v1 = [10, 20, 30, 40, 50, 60]
-v2 = [10, 20, 30, 40, 50, 60]
 if __name__ == "__main__":
+    v1 = [10, 20, 30, 40, 50, 60]
+    v2 = [10, 20, 30, 40, 50, 60]
+
     scatter = Scatter()
-    # scatter.add("a", v1, v2, symbol_size=40)
+    scatter.add("a", v1, v2, symbol_size=40)
     # scatter.add("b", v1[::-1], v2)
     scatter.show_config()
     scatter.render()

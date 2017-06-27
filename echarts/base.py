@@ -121,7 +121,13 @@ class Base():
             border_color=None,
             geo_normal_color=None,
             geo_emphasis_color=None,
-            is_visualmap=None):
+            is_visualmap=None,
+            angle_data=None,
+            radius_data=None,
+            start_angle=None,
+            boundary_gap=None,
+            type=None,
+            clockwise=None):
         pass
 
     def custom(self, series):
@@ -153,6 +159,12 @@ class Base():
                 except:
                     raise ValueError
         return k_lst, v_lst
+
+    def _legend_visualmap_colorlst(self, is_visualmap=False, **kwargs):
+        if is_visualmap:
+            self._option.update(visualMap=self.Option.visual_map(**kwargs))
+        self._option.get('legend').update(self.Option.legend(**kwargs))
+        self._option.update(color=self.Option.color(self._colorlst, **kwargs))
 
     def render(self, path=r"E:\Python\pyecharts\render.html"):
         temple = r"E:\Python\pyecharts\temple\_temple.html"

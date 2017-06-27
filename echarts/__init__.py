@@ -8,6 +8,7 @@ from .charts.graph import Graph
 from .charts.line import Line
 from .charts.map import Map
 from .charts.pie import Pie
+from .charts.polar import Polar
 from .charts.radar import Radar
 from .charts.scatter import Scatter
 from .charts.wordcloud import WordCloud

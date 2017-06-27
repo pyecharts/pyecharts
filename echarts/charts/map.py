@@ -26,14 +26,12 @@ class Map(Base):
                 "data": _data,
                 "roam": is_roam
             })
-            self._option.update(visualMap=self.Option.visual_map(**kwargs))
-            self._option.get('legend').update(self.Option.legend(**kwargs))
-            self._option.update(color=self.Option.color(self._colorlst, **kwargs))
+            self._legend_visualmap_colorlst(**kwargs)
 
 if __name__ == "__main__":
     value = [20, 190]
     attr = ['福州市', '厦门市']
     map = Map(width=1200, height=550)
-    map.add("地图", attr, value, maptype='广东')
+    map.add("地图", attr, value, maptype='广东', is_visualmap=True)
     map.show_config()
     map.render()

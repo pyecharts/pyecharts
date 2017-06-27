@@ -31,7 +31,7 @@ class Gauge(Base):
             "endAngle": _end,
             "data": [{"value": value, "name": attr}]
         })
-        self._option.get('legend').update(self.Option.legend(**kwargs))
+        self._legend_visualmap_colorlst(**kwargs)
 
 if __name__ == "__main__":
     gauge = Gauge()

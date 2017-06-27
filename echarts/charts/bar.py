@@ -26,18 +26,16 @@ class Bar(Base):
                 "markPoint": self.Option.mark_point(**kwargs),
                 "markLine": self.Option.mark_line(**kwargs)
             })
-            self._option.get('legend').update(self.Option.legend(**kwargs))
-            self._option.update(color=self.Option.color(self._colorlst, **kwargs))
+            self._legend_visualmap_colorlst(**kwargs)
         else:
             raise TypeError("x_axis and y_axis must be list")
 
-
-attr = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
-v1 = [5, 20, 36, 10, 75, 90]
-v2 = [10, 25, 8, 60, 20, 80]
-v3 = [first + second + 35 for first, second in zip(v1, v2)]
-
 if __name__ == "__main__":
+    attr = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
+    v1 = [5, 20, 36, 10, 75, 90]
+    v2 = [10, 25, 8, 60, 20, 80]
+    v3 = [first + second + 35 for first, second in zip(v1, v2)]
+
     from echarts.charts.line import Line
     bar = Bar("TITLE", "SUBTITLE")
     bar.add("B", attr, v2, is_stack=True)

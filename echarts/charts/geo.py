@@ -13,7 +13,6 @@ class Geo(Base):
               maptype='china',
               symbol_size=12,
               border_color="#111",
-              is_visualmap=True,
               geo_normal_color="#323c48",
               geo_emphasis_color="#2a333d",
               effect_brushtype="stroke",
@@ -65,18 +64,15 @@ class Geo(Base):
                     "data": _data,
                     "label": self.Option.label(**kwargs),
                 })
-            if is_visualmap:
-                self._option.update(visualMap=self.Option.visual_map(**kwargs))
-            self._option.get('legend').update(self.Option.legend(**kwargs))
-            self._option.update(color=self.Option.color(self._colorlst, **kwargs))
+            self._legend_visualmap_colorlst(**kwargs)
 
 if __name__ == "__main__":
     value = [20, 190, 10]
     attr = ['福州', '厦门', '汕头']
+
     geo = Geo("全国主要城市空气质量", "data from pm2.5",
               title_color="#fff", title_pos="center", width=1300, height=620, background_color='#404a59')
-    geo.add("", attr, value, visual_range_color=['#50a3ba', '#eac763', '#d94e5d'], visual_range=[0, 200]
-            ,visual_text_color="#fff", type="effectscatter", effect_scale=6, symbol_size=15)
+    geo.add("", attr, value)
     geo.show_config()
     geo.render()
 
