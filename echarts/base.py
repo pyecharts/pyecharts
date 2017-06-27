@@ -144,6 +144,7 @@ class Base():
         """ 追加自定义图表类型
 
         :param series:
+            追加图例类型的 series 数据
         """
         _name, _series = series
         for n in _name:
@@ -161,6 +162,8 @@ class Base():
 
     def cast(self, seq):
         """ 转换数据序列，将带字典和元祖类型的序列转换为符合要求的两个列表
+        1.[{name:xx, value:xx}] 列表转换为一个 name 列表和一个 value 列表，
+        2.[(a, b),(c, d)] 列表转换为 一个 tuple[0] 列表和一个 tuple[1] 列表
 
         :param seq:
             转换的序列

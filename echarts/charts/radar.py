@@ -8,7 +8,7 @@ class Radar(Base):
     def config(self, indicator, *,
                shape="",
                rader_text_color="#000", **kwargs):
-        """
+        """ 配置 rader 组件选项
 
         :param indicator:
             雷达图的指示器，用来指定雷达图中的多个变量（维度）
@@ -56,23 +56,3 @@ class Radar(Base):
             "areaStyle": {"normal": self.Option.area_style(flag=True, **kwargs)}
         })
         self._legend_visualmap_colorlst(**kwargs)
-
-if __name__ == "__main__":
-    r = [("销售", 6500),
-         ("管理", 16000),
-         ("信息技术", 30000),
-         ("客服", 38000),
-         ("研发", 52000),
-         ("市场", 25000)]
-
-    v1 = [(4300, 10000, 28000, 35000, 50000, 19000),
-          [5000, 14000, 28000, 31000, 42000, 21000],
-          [3000, 14000, 18000, 21000, 22000, 11000]]
-    v2 = [[5000, 14000, 28000, 31000, 42000, 21000]]
-
-    radar = Radar()
-    radar.config(r)
-    radar.add("预算分配", v1, item_color="#F9713C", line_opacity=0.5, symbol=None)
-    radar.add("实际开销", v2)
-    radar.render()
-    radar.show_config()
