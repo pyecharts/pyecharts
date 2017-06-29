@@ -343,9 +343,9 @@ class Option():
 
         :return:
         """
-        return "rgb({},{},{})".format(random.randint(0, 160),
-                                      random.randint(0, 160),
-                                      random.randint(0, 160))
+        return "rgb(%s,%s,%s)" % (random.randint(0, 160),
+                                  random.randint(0, 160),
+                                  random.randint(0, 160))
 
     def symbol(self, type=None, symbol="", **kwargs):
         """

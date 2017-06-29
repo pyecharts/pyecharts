@@ -45,11 +45,11 @@ class Pie(Base):
             _rmin, _rmax = "0%", "75%"
             if radius is not None:
                 if len(radius) == 2:
-                    _rmin, _rmax = ["{}%".format(r) for r in radius]
+                    _rmin, _rmax = ["%s" %r for r in radius]
             _cmin, _cmax = "50%", "50%"
             if center is not None:
                 if len(center) == 2:
-                    _cmin, _cmax = ["{}%".format(c) for c in center]
+                    _cmin, _cmax = ["%s" %c for c in center]
             if rosetype not in ("radius", "area"):
                 rosetype = "radius"
             for a in attr:

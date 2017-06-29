@@ -79,7 +79,7 @@ class Geo(Base):
                     "data": _data,
                     "label": self.Option.label(**kwargs),
                 })
-            elif type == "effectscatter":
+            elif type == "effectScatter":
                 self._option.get('series').append({
                     "type": type,
                     "name": name,

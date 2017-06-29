@@ -5,257 +5,124 @@
     <meta charset="utf-8">
     <title>ECharts</title>
     <!-- 引入 echarts.js -->
-    <script src='https://cdn.bootcss.com/echarts/3.2.2/echarts.simple.js'></script>
-    <script type="text/javascript" src="http://data-visual.cn/datav/src/js/echarts/extension/echarts-wordcloud.min.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts-all-3.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
+    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
+    <script type="text/javascript" src="http://oog4yfyu0.bkt.clouddn.com/wordcloud.js"></script>
+    <script type="text/javascript" src="http://oog4yfyu0.bkt.clouddn.com/anhui.js "></script>
+    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/aomen.js "></script>
+    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/beijing.js "></script>
+    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/chongqing.js "></script>
+    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/fujian.js "></script>
+    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/gansu.js "></script>
+    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/guangdong.js "></script>
+    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/guangxi.js "></script>
+    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/guizhou.js "></script>
+    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/hainan.js "></script>
+    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/hebei.js "></script>
+    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/heilongjiang.js "></script>
+    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/henan.js "></script>
+    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/hubei.js "></script>
+    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/hunan.js "></script>
+    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/jiangsu.js "></script>
+    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/jiangxi.js "></script>
+    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/jilin.js "></script>
+    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/liaoning.js "></script>
+    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/neimenggu.js "></script>
+    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/ningxia.js "></script>
+    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/qinghai.js "></script>
+    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/shangdong.js "></script>
+    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/shanghai.js "></script>
+    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/shanxi.js "></script>
+    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/sichuan.js "></script>
+    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/taiwan.js "></script>
+    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/tianjin.js "></script>
+    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/xianggang.js "></script>
+    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/xinjiang.js "></script>
+    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/xizang.js "></script>
+    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/yunnan.js "></script>
+    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/zhejiang.js "></script>
+    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/guangdong.js "></script>
+    <script type="text/javascript " src="http://api.map.baidu.com/api?v=2.0&ak=ZUONbpqGBsYGXNIYHicvbAbM "></script>
+    <script type="text/javascript " src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js "></script>
 </head>
 
 <body>
-    <style>
-        html,
-        body,
-        #main {
-            width: 100%;
-            height: 100%;
-            margin: 0;
-        }
-    </style>
     <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
-    <div id="main" style="width: 1200px;height:600px; ">
-    </div>
+    <div id="main" style="width: 1200px;height:600px; "></div>
     <script type="text/javascript ">
         // 基于准备好的dom，初始化echarts实例
         var myChart = echarts.init(document.getElementById('main'));
 
         // 指定图表的配置项和数据
         var option = {
-    "legend": {
-        "data": []
-    },
-    "tooltip": {},
-    "series": [
-        {
-            "data": [
-                {
-                    "value": 10000,
-                    "textStyle": {
-                        "normal": {
-                            "color": "rgb(89,37,157)"
-                        }
-                    },
-                    "name": "Sam S Club"
-                },
-                {
-                    "value": 6181,
-                    "textStyle": {
-                        "normal": {
-                            "color": "rgb(46,75,33)"
-                        }
-                    },
-                    "name": "Macys"
-                },
-                {
-                    "value": 4386,
-                    "textStyle": {
-                        "normal": {
-                            "color": "rgb(39,104,94)"
-                        }
-                    },
-                    "name": "Amy Schumer"
-                },
-                {
-                    "value": 4055,
-                    "textStyle": {
-                        "normal": {
-                            "color": "rgb(64,133,123)"
-                        }
-                    },
-                    "name": "Jurassic World"
-                },
-                {
-                    "value": 2467,
-                    "textStyle": {
-                        "normal": {
-                            "color": "rgb(150,106,10)"
-                        }
-                    },
-                    "name": "Charter Communications"
-                },
-                {
-                    "value": 2244,
-                    "textStyle": {
-                        "normal": {
-                            "color": "rgb(8,40,25)"
-                        }
-                    },
-                    "name": "Chick Fil A"
-                },
-                {
-                    "value": 1898,
-                    "textStyle": {
-                        "normal": {
-                            "color": "rgb(10,133,146)"
-                        }
-                    },
-                    "name": "Planet Fitness"
-                },
-                {
-                    "value": 1484,
-                    "textStyle": {
-                        "normal": {
-                            "color": "rgb(39,72,50)"
-                        }
-                    },
-                    "name": "Pitch Perfect"
-                },
-                {
-                    "value": 1112,
-                    "textStyle": {
-                        "normal": {
-                            "color": "rgb(132,146,126)"
-                        }
-                    },
-                    "name": "Express"
-                },
-                {
-                    "value": 965,
-                    "textStyle": {
-                        "normal": {
-                            "color": "rgb(150,99,59)"
-                        }
-                    },
-                    "name": "Home"
-                },
-                {
-                    "value": 847,
-                    "textStyle": {
-                        "normal": {
-                            "color": "rgb(65,144,25)"
-                        }
-                    },
-                    "name": "Johnny Depp"
-                },
-                {
-                    "value": 582,
-                    "textStyle": {
-                        "normal": {
-                            "color": "rgb(144,97,12)"
-                        }
-                    },
-                    "name": "Lena Dunham"
-                },
-                {
-                    "value": 555,
-                    "textStyle": {
-                        "normal": {
-                            "color": "rgb(21,10,32)"
-                        }
-                    },
-                    "name": "Lewis Hamilton"
-                },
-                {
-                    "value": 550,
-                    "textStyle": {
-                        "normal": {
-                            "color": "rgb(88,61,157)"
-                        }
-                    },
-                    "name": "KXAN"
-                },
-                {
-                    "value": 462,
-                    "textStyle": {
-                        "normal": {
-                            "color": "rgb(71,38,65)"
-                        }
-                    },
-                    "name": "Mary Ellen Mark"
-                },
-                {
-                    "value": 366,
-                    "textStyle": {
-                        "normal": {
-                            "color": "rgb(109,109,140)"
-                        }
-                    },
-                    "name": "Farrah Abraham"
-                },
-                {
-                    "value": 360,
-                    "textStyle": {
-                        "normal": {
-                            "color": "rgb(126,110,58)"
-                        }
-                    },
-                    "name": "Rita Ora"
-                },
-                {
-                    "value": 282,
-                    "textStyle": {
-                        "normal": {
-                            "color": "rgb(10,5,42)"
-                        }
-                    },
-                    "name": "Serena Williams"
-                },
-                {
-                    "value": 273,
-                    "textStyle": {
-                        "normal": {
-                            "color": "rgb(126,49,70)"
-                        }
-                    },
-                    "name": "NCAA baseball tournament"
-                },
-                {
-                    "value": 265,
-                    "textStyle": {
-                        "normal": {
-                            "color": "rgb(58,14,154)"
-                        }
-                    },
-                    "name": "Point Break"
-                }
-            ],
-            "sizeRange": [
-                20,
-                100
-            ],
-            "rotationStep": 45,
-            "name": "",
-            "shape": "circle",
-            "rotationRange": [
-                -90,
-                90
-            ],
-            "girdSize": 20,
-            "type": "wordCloud"
-        }
-    ],
-    "backgroundColor": "#fff",
-    "toolbox": {
-        "top": "center",
-        "show": true,
-        "orient": "vertical",
-        "left": "right",
-        "feature": {
-            "saveAsImage": {
-                "show": true
-            }
-        }
-    },
     "title": {
-        "text": "",
         "subtextStyle": {
             "fontSize": 12,
             "color": "#aaa"
         },
-        "left": "auto",
-        "subtext": "",
         "textStyle": {
             "fontSize": 18,
             "color": "#000"
+        },
+        "left": "auto",
+        "text": "",
+        "subtext": ""
+    },
+    "series": [
+        {
+            "type": "map",
+            "data": [
+                {
+                    "value": 20,
+                    "name": "福州市"
+                },
+                {
+                    "value": 190,
+                    "name": "厦门市"
+                }
+            ],
+            "name": "地图",
+            "symbol": "circle",
+            "roam": true,
+            "mapType": "福建"
         }
-    }
+    ],
+    "toolbox": {
+        "top": "center",
+        "feature": {
+            "saveAsImage": {
+                "show": true
+            }
+        },
+        "left": "right",
+        "show": true,
+        "orient": "vertical"
+    },
+    "legend": {
+        "left": "center",
+        "data": [
+            "地图"
+        ],
+        "show": true,
+        "orient": "horizontal"
+    },
+    "backgroundColor": "#fff",
+    "tooltip": {},
+    "color": [
+        "#c23531",
+        "#2f4554",
+        "#61a0a8",
+        "#d48265",
+        "#749f83",
+        "#ca8622",
+        "#bda29a",
+        "#6e7074",
+        "#546570",
+        "#c4ccd3"
+    ]
 };
 
         // 使用刚指定的配置项和数据显示图表。

@@ -1,6 +1,10 @@
 import json
 from pprint import pprint
 from echarts.option import Option
+try:
+    import configparser as Parser
+except ImportError:
+    import ConfigParser as Parser
 
 class Base():
 
@@ -198,14 +202,18 @@ class Base():
         :param path:
             生成 html 文件保存路径
         """
-        temple = r"E:\Python\pyecharts\temple\_temple.html"
+        cf = Parser.ConfigParser()
+        with open('..\config.cfg', 'r') as cfgfile:
+            cf.read_file(cfgfile)
+            cfgpath = cf.get('option', 'path')
+        temple = r"%s\_temple.html" %cfgpath
         series = self._option.get("series")
         for s in series:
             if s.get('type') == "wordCloud":
-                temple = r"E:\Python\pyecharts\temple\_temple_wordcloud.html"
+                temple = r"%s\_temple_wordcloud.html" % cfgpath
                 break
             if s.get('type') in ("scatter", "pie", "bar", "line") and 'coordinateSystem' not in s:
-                temple = r"E:\Python\pyecharts\temple\temple.html"
+                temple = r"%s\temple.html" % cfgpath
                 break
         with open(temple, "r", encoding="utf-8") as f:
             my_option = json.dumps(self._option, indent=4, ensure_ascii=False)
