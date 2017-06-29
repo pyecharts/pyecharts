@@ -1,7 +1,10 @@
 from echarts.base import Base
 
 class Map(Base):
-
+    """
+    <<< 地图 >>>
+    地图主要用于地理区域数据的可视化。
+    """
     def __init__(self, title="", subtitle="", **kwargs):
         super().__init__(title, subtitle, **kwargs)
 

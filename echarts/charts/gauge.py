@@ -1,7 +1,9 @@
 from echarts.base import Base
 
 class Gauge(Base):
-
+    """
+    <<< 仪表盘 >>>
+    """
     def __init__(self, title="", subtitle="", **kwargs):
         super().__init__(title, subtitle, **kwargs)
 

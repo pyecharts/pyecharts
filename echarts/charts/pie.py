@@ -1,7 +1,10 @@
 from echarts.base import Base
 
 class Pie(Base):
-
+    """
+    <<< 饼图 >>>
+    饼图主要用于表现不同类目的数据在总和中的占比。每个的弧度表示数据数量的比例。
+    """
     def __init__(self, title="", subtitle="", **kwargs):
         super().__init__(title, subtitle, **kwargs)
 

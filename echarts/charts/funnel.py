@@ -1,7 +1,9 @@
 from echarts.base import Base
 
 class Funnel(Base):
-
+    """
+    <<< 漏斗图 >>>
+    """
     def __init__(self, title="", subtitle="", **kwargs):
         super().__init__(title, subtitle, **kwargs)
 

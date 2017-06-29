@@ -1,7 +1,10 @@
 from echarts.base import Base
 
 class Geo(Base):
-
+    """
+    <<< 地理坐标系组件 >>>
+    地理坐标系组件用于地图的绘制，支持在地理坐标系上绘制散点图，线集。
+    """
     def __init__(self, title="", subtitle="", **kwargs):
         super().__init__(title, subtitle, **kwargs)
 
@@ -63,7 +66,7 @@ class Geo(Base):
                     "itemStyle": {"normal": {
                         "areaColor": geo_normal_color,
                         "borderColor": border_color},
-                                  "emphasis":{"areaColor": geo_emphasis_color}}
+                        "emphasis":{"areaColor": geo_emphasis_color}}
                 })
             self._option.get('legend').get('data').append(name)
             if type == "scatter":

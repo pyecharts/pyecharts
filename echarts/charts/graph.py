@@ -1,7 +1,10 @@
 from echarts.base import Base
 
 class Graph(Base):
-
+    """
+    <<< 关系图 >>>
+    用于展现节点以及节点之间的关系数据。
+    """
     def __init__(self, title="", subtitle="", **kwargs):
         super().__init__(title, subtitle, **kwargs)
 

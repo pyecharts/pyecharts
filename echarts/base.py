@@ -62,81 +62,82 @@ class Base():
             backgroundColor=background_color
         )
 
-    def add(self, is_label_show=None,            # for All
-            label_pos=None,
+    def add(self,angle_data=None,
+            angle_range=None,
+            area_color=None,
+            area_opacity=None,
+            border_color=None,
+            boundary_gap=None,
+            center=None,
+            clockwise=None,
+            edge_length=None,
+            effect_brushtype=None,
+            effect_period=None,
+            effect_scale=None,
+            formatter=None,
+            geo_emphasis_color=None,
+            geo_normal_color=None,
+            gravity=None,
+            interval=None,
+            is_area_show=None,
+            is_axisline_show=None,
+            is_calculable=None,
+            is_convert=None,
+            is_emphasis=None,
+            is_fill=None,
+            is_focusnode=None,
+            is_label_show=None,
+            is_legend_show=None,
+            is_random=None,
+            is_roam=None,
+            is_rotatelabel=None,
+            is_smooth=None,
+            is_splitline_show=None,
+            is_stack=None,
+            is_step=None,
+            is_symbol_show=None,
+            is_visualmap=None,
+            item_color=None,
             label_color=None,
+            label_pos=None,
             label_text_color=None,
             label_text_size=None,
-            is_emphasis=None,
-            formatter=None,
-            is_legend_show=None,
-            legend_pos=None,
+            layout=None,
             legend_orient=None,
-            visual_range=None,
-            visual_text_color=None,
-            visual_range_text=None,
-            visual_range_color=None,
-            is_calculable=None,
-            is_random=None,
-            is_symbol_show=None,
-            symbol_size=None,
-            is_visualmap=None,
-            type=None,
-            is_stack=None,                  # for Bar/Line
-            scale_range=None,               # only for Gauge
-            angle_range=None,
-            layout=None,                    # only for Graph
-            is_focusnode=None,
-            is_rotatelabel=None,
-            edge_length=None,
-            gravity=None,
-            repulsion=None,
-            is_smooth=None,                 # only for Line
-            is_fill=None,
-            is_step=None,
-            is_roam=None,                   # only for Map
-            maptype=None,
-            radius=None,                    # only for Pie
-            center=None,
-            rosetype=None,
-            line_width=None,                # only for Radar
-            item_color=None,
-            symbol=None,
+            legend_pos=None,
+            line_curve=None,
             line_opacity=None,
             line_type=None,
-            line_curve=None,
-            is_splitline_show=None,
-            is_axisline_show=None,
-            is_area_show=None,
-            area_opacity=None,
-            area_color=None,
-            shape=None,                  # for Radar/WordCloud
-            rader_text_color=None,
-            xy_font_size=None,           # for Scatter/Bar/Line
-            namegap=None,
-            xaxis_name=None,
-            xaxis_name_pos=None,
-            interval=None,
-            yaxis_name=None,
-            yaxis_name_pos=None,
-            is_convert=None,
-            x_axis=None,
+            line_width=None,
+            maptype=None,
             mark_line=None,
             mark_point=None,
-            word_gap=None,              # only for WordCloud
-            word_size_range=None,
-            rotate_step=None,
-            effect_brushtype=None,
-            effect_scale=None,
-            effect_period=None,
-            border_color=None,
-            geo_normal_color=None,
-            geo_emphasis_color=None,
-            angle_data=None,            # only for polar
+            namegap=None,
+            rader_text_color=None,
             radius_data=None,
+            radius=None,
+            repulsion=None,
+            rosetype=None,
+            rotate_step=None,
+            scale_range=None,
+            shape=None,
             start_angle=None,
-            boundary_gap=None,
-            clockwise=None):
+            symbol_size=None,
+            symbol=None,
+            type=None,
+            visual_range_color=None,
+            visual_range_text=None,
+            visual_range=None,
+            visual_text_color=None,
+            word_gap=None,
+            word_size_range=None,
+            x_axis=None,
+            xaxis_name_pos=None,
+            xaxis_name=None,
+            xy_font_size=None,
+            yaxis_name_pos=None,
+            yaxis_name=None,
+            ):
         """ base 父类的 add 方法只是为了提供提示选项 """
         pass
 
@@ -144,7 +145,7 @@ class Base():
         """ 追加自定义图表类型
 
         :param series:
-            追加图例类型的 series 数据
+            追加图表类型的 series 数据
         """
         _name, _series = series
         for n in _name:
@@ -153,7 +154,7 @@ class Base():
             self._option.get('series').append(s)
 
     def get_series(self):
-        """ 获取图例的 series 数据 """
+        """ 获取图表的 series 数据 """
         return self._option.get('legend').get('data'), self._option.get('series')
 
     def show_config(self):
@@ -161,9 +162,7 @@ class Base():
         pprint(self._option)
 
     def cast(self, seq):
-        """ 转换数据序列，将带字典和元祖类型的序列转换为符合要求的两个列表
-        1.[{name:xx, value:xx}] 列表转换为一个 name 列表和一个 value 列表，
-        2.[(a, b),(c, d)] 列表转换为 一个 tuple[0] 列表和一个 tuple[1] 列表
+        """ 转换数据序列，将带字典和元祖类型的序列转换为 k_lst,v_lst 的两个列表
 
         :param seq:
             转换的序列
@@ -175,10 +174,6 @@ class Base():
                 try:
                     if isinstance(s, tuple):
                         _attr, _value = s
-                        k_lst.append(_attr)
-                        v_lst.append(_value)
-                    if isinstance(s, dict):
-                        _attr, _value = s.get('name', None), s.get('value', None)
                         k_lst.append(_attr)
                         v_lst.append(_value)
                 except:

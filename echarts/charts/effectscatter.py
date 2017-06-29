@@ -1,7 +1,10 @@
 from echarts.charts.scatter import Scatter
 
 class EffectScatter(Scatter):
-
+    """
+    <<< 带有涟漪特效动画的散点图 >>>
+    利用动画特效可以将某些想要突出的数据进行视觉突出。
+    """
     def __init__(self, title="", subtitle="", **kwargs):
         super().__init__(title, subtitle, **kwargs)
 

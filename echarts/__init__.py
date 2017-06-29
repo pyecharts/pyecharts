@@ -7,6 +7,7 @@ from .charts.geo import Geo
 from .charts.graph import Graph
 from .charts.line import Line
 from .charts.map import Map
+from .charts.parallel import Parallel
 from .charts.pie import Pie
 from .charts.polar import Polar
 from .charts.radar import Radar

@@ -1,6 +1,10 @@
 from echarts.base import Base
 
 class Bar(Base):
+    """
+    <<< 柱状/条形图 >>>
+    柱状/条形图 通过 柱形的高度/条形的宽度 来表现数据的大小。
+    """
 
     def __init__(self, title="", subtitle="", **kwargs):
         super().__init__(title, subtitle, **kwargs)

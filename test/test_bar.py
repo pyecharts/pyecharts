@@ -5,6 +5,7 @@ def test_bar():
     v1 = [5, 20, 36, 10, 75, 90]
     v2 = [10, 25, 8, 60, 20, 80]
     v3 = [first + second + 35 for first, second in zip(v1, v2)]
+
     bar = Bar("TITLE", "SUBTITLE")
     bar.add("B", attr, v2, isstack=True)
     bar.add("A", attr, v1, label_text_size=20, isstack=True)

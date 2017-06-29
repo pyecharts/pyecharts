@@ -7,6 +7,7 @@ from .test_geo import test_geo
 from .test_graph import test_graph
 from .test_line import test_line
 from .test_map import test_map
+from .test_parallel import test_parallel
 from .test_pie import test_pie
 from .test_polar import test_polar
 from .test_radar import test_radar

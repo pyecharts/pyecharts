@@ -1,7 +1,10 @@
 from echarts.base import Base
 
 class Polar(Base):
-
+    """
+    <<< 极坐标系 >>>
+    可以用于散点图和折线图。
+    """
     def __init__(self, title="", subtitle="", **kwargs):
         super().__init__(title, subtitle, **kwargs)
 

@@ -1,7 +1,10 @@
 from echarts.base import Base
 
 class Line(Base):
-
+    """
+    <<< 折线/面积图 >>>
+    折线图是用折线将各个数据点标志连接起来的图表，用于展现数据的变化趋势。
+    """
     def __init__(self, title="", subtitle="", **kwargs):
         super().__init__(title, subtitle, **kwargs)
 

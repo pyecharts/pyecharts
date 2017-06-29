@@ -2,7 +2,10 @@ from PIL import Image
 from echarts.base import Base
 
 class Scatter(Base):
-
+    """
+    <<< 散点图 >>>
+    直角坐标系上的散点图可以用来展现数据的 x，y 之间的关系，如果数据项有多个维度，可以用颜色来表现，利用 geo 组件。
+    """
     def __init__(self, title="", subtitle="", **kwargs):
         super().__init__(title, subtitle, **kwargs)
 
@@ -58,6 +61,5 @@ class Scatter(Base):
             for y in range(height):
                 if y < int(height / 2):
                     imarray[x, y], imarray[x, height-y-1] = imarray[x, height-y-1], imarray[x, y]
-
-        result = [(x, y) for x in range(width) for y in range(height) if imarray[x, y] != color]
+        result = [(x, y) for x in range(width) for y in range(height) if imarray[x, y][:3] != color]
         return self.cast(result)
