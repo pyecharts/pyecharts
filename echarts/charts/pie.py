@@ -1,4 +1,5 @@
 from echarts.base import Base
+from echarts.option import get_all_options
 
 class Pie(Base):
     """
@@ -30,13 +31,14 @@ class Pie(Base):
             饼图的中心（圆心）坐标，数组的第一项是横坐标，第二项是纵坐标
             默认设置成百分比，设置成百分比时第一项是相对于容器宽度，第二项是相对于容器高度
         :param rosetype:
-            是否展示成南丁格尔图，通过半径区分数据大小
-            可选择两种模式：
+            是否展示成南丁格尔图，通过半径区分数据大小，可选择两种模式：
             radius：扇区圆心角展现数据的百分比，半径展现数据的大小
             area：所有扇区圆心角相同，仅通过半径展现数据大小
         :param kwargs:
         """
         if isinstance(attr, list) and isinstance(value, list):
+            kwargs.update(type="pie")
+            chart = get_all_options(**kwargs)
             assert len(attr) == len(value)
             _data = []
             for data in zip(attr, value):
@@ -61,7 +63,7 @@ class Pie(Base):
                 "radius": [_rmin, _rmax],
                 "center": [_cmin, _cmax],
                 "roseType": rosetype,
-                "label": self.Option.label("pie", **kwargs),
+                "label": chart['label'],
             })
             self._legend_visualmap_colorlst(**kwargs)
         else:

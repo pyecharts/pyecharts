@@ -27,7 +27,6 @@ class Gauge(Base):
             仪表盘角度范围
         :param kwargs:
         """
-        self._option.update(tooltip={"formatter": "{a} <br/>{b} : {c}%"})
         _min, _max = 0, 100
         if scale_range:
             if len(scale_range) == 2:
@@ -47,4 +46,5 @@ class Gauge(Base):
             "endAngle": _end,
             "data": [{"value": value, "name": attr}]
         })
+        self._option.update(tooltip={"formatter": "{a} <br/>{b} : {c}%"})
         self._legend_visualmap_colorlst(**kwargs)

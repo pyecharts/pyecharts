@@ -1,4 +1,5 @@
 from echarts.base import Base
+from echarts.option import get_all_options
 
 class Bar(Base):
     """
@@ -29,8 +30,9 @@ class Bar(Base):
         if isinstance(x_axis, list) and isinstance(y_axis, list):
             assert len(x_axis) == len(y_axis)
             kwargs.update(x_axis=x_axis)
+            chart = get_all_options(**kwargs)
             is_stack = "stack" if is_stack else ""
-            xaxis, yaxis = self.Option.xy_axis(**kwargs)
+            xaxis, yaxis = chart['xy_axis']
             self._option.update(xAxis=xaxis, yAxis=yaxis)
             self._option.get('legend').get('data').append(name)
             self._option.get('series').append({
@@ -38,9 +40,9 @@ class Bar(Base):
                 "name": name,
                 "data": y_axis,
                 "stack": is_stack,
-                "label": self.Option.label(**kwargs),
-                "markPoint": self.Option.mark_point(**kwargs),
-                "markLine": self.Option.mark_line(**kwargs)
+                "label": chart['label'],
+                "markPoint": chart['mark_point'],
+                "markLine": chart['mark_line']
             })
             self._legend_visualmap_colorlst(**kwargs)
         else:

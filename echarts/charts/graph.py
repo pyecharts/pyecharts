@@ -1,4 +1,5 @@
 from echarts.base import Base
+from echarts.option import get_all_options
 
 class Graph(Base):
     """
@@ -51,7 +52,8 @@ class Graph(Base):
             是否旋转标签，默认不旋转
         :param layout:
             关系图布局 'none' 不采用任何布局，使用节点中提供的 x， y 作为节点的位置
-            'circular' 采用环形布局，'force' 采用力引导布局
+            circular：采用环形布局，
+            force：采用力引导布局
         :param edge_length:
             力布局下边的两个节点之间的距离，这个距离也会受 repulsion 影响
             支持设置成数组表达边长的范围，此时不同大小的值会线性映射到不同的长度。值越小则长度越长
@@ -65,16 +67,18 @@ class Graph(Base):
         if categories:
             for c in categories:
                 self._option.get('legend').get('data').append(c)
+        kwargs.update(type="graph")
+        chart = get_all_options(**kwargs)
         self._option.get('series').append({
             "type": "graph",
             "layout": layout,
-            "symbol": self.Option.symbol(**kwargs),
+            "symbol": chart['symbol'],
             "circular": {"rotateLabel": is_rotatelabel},
             "force": {"repulsion": repulsion,
                       "edgeLength": edge_length,
                       "gravity": gravity},
-            "label": self.Option.label("graph", **kwargs),
-            "lineStyle": self.Option.line_style(**kwargs),
+            "label": chart['label'],
+            "lineStyle": chart['line_style'],
             "roam": is_roam,
             "focusNodeAdjacency": is_focusnode,
             "data": nodes,

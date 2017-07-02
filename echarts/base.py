@@ -1,10 +1,11 @@
-import json
-from pprint import pprint
-from echarts.option import Option
+
 try:
     import configparser as Parser
 except ImportError:
     import ConfigParser as Parser
+import json
+from pprint import pprint
+from echarts.option import get_all_options
 
 class Base():
 
@@ -40,7 +41,6 @@ class Base():
         :param background_color:
             画布背景颜色
         """
-        self.Option = Option()
         self._option = {}
         self._width, self._height = width, height
         self._colorlst = ['#c23531', '#2f4554', '#61a0a8', '#d48265', '#749f83',
@@ -66,7 +66,7 @@ class Base():
             backgroundColor=background_color
         )
 
-    def add(self,angle_data=None,
+    def add(self, angle_data=None,
             angle_range=None,
             area_color=None,
             area_opacity=None,
@@ -140,8 +140,7 @@ class Base():
             xaxis_name=None,
             xy_font_size=None,
             yaxis_name_pos=None,
-            yaxis_name=None,
-            ):
+            yaxis_name=None):
         """ base 父类的 add 方法只是为了提供提示选项 """
         pass
 
@@ -191,10 +190,12 @@ class Base():
             是否显示 visualmap 组件
         :param kwargs:
         """
+        kwargs.update(colorlst=self._colorlst)
+        chart = get_all_options(**kwargs)
         if is_visualmap:
-            self._option.update(visualMap=self.Option.visual_map(**kwargs))
-        self._option.get('legend').update(self.Option.legend(**kwargs))
-        self._option.update(color=self.Option.color(self._colorlst, **kwargs))
+            self._option.update(visualMap=chart['visual_map'])
+        self._option.get('legend').update(chart['legend'])
+        self._option.update(color=chart['color'])
 
     def render(self, path=r"E:\Python\pyecharts\render.html"):
         """ 渲染数据项，生成 html 文件
@@ -203,10 +204,10 @@ class Base():
             生成 html 文件保存路径
         """
         cf = Parser.ConfigParser()
-        with open('..\config.cfg', 'r') as cfgfile:
+        with open(r'..\config.cfg', 'r') as cfgfile:
             cf.read_file(cfgfile)
             cfgpath = cf.get('option', 'path')
-        temple = r"%s\_temple.html" %cfgpath
+        temple = r"%s\_temple.html" % cfgpath
         series = self._option.get("series")
         for s in series:
             if s.get('type') == "wordCloud":

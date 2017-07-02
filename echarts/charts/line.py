@@ -1,5 +1,5 @@
 from echarts.base import Base
-
+from echarts.option import get_all_options
 class Line(Base):
     """
     <<< 折线/面积图 >>>
@@ -33,33 +33,34 @@ class Line(Base):
             数据堆叠，同个类目轴上系列配置相同的 stack 值可以堆叠放置
         :param is_step:
             是否是阶梯线图。可以设置为 true 显示成阶梯线图。
-            也支持设置成 'start', 'middle', 'end' 分别配置在当前点，当前点与下个点的中间点，下个点拐弯。
+            也支持设置成 start, middle, end 分别配置在当前点，当前点与下个点的中间点，下个点拐弯。
         :param is_fill:
             是否填充曲线所绘制面积
         :param kwargs:
         """
         if isinstance(x_axis, list) and isinstance(y_axis, list):
             assert len(x_axis) == len(y_axis)
-            kwargs.update(x_axis=x_axis)
-            xaxis, yaxis = self.Option.xy_axis(**kwargs)
+            kwargs.update(x_axis=x_axis, type="line")
+            chart = get_all_options(**kwargs)
+            xaxis, yaxis = chart['xy_axis']
             is_stack = "stack" if is_stack else ""
-            _area_style = {"normal": self.Option.area_style(**kwargs)} if is_fill else {}
+            _area_style = {"normal": chart['area_style']} if is_fill else {}
             self._option.update(xAxis=xaxis, yAxis=yaxis)
             self._option.get('legend').get('data').append(name)
             self._option.get('series').append({
                 "type": "line",
                 "name": name,
-                "symbol": self.Option.symbol("line", **kwargs),
+                "symbol": chart['symbol'],
                 "smooth": is_smooth,
                 "step": is_step,
                 "stack": is_stack,
                 "showSymbol": is_symbol_show,
                 "data": y_axis,
-                "label": self.Option.label(**kwargs),
-                "lineStyle": self.Option.line_style(**kwargs),
+                "label": chart['label'],
+                "lineStyle": chart['line_style'],
                 "areaStyle": _area_style,
-                "markPoint": self.Option.mark_point(**kwargs),
-                "markLine": self.Option.mark_line(**kwargs)
+                "markPoint": chart['mark_point'],
+                "markLine": chart['mark_line']
             })
             self._legend_visualmap_colorlst(**kwargs)
         else:

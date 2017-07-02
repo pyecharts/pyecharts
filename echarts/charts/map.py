@@ -1,4 +1,5 @@
 from echarts.base import Base
+from echarts.option import get_all_options
 
 class Map(Base):
     """
@@ -24,12 +25,13 @@ class Map(Base):
             属性所对应的值
         :param is_roam:
             是否开启鼠标缩放和平移漫游。默认不开启
-            如果只想要开启缩放或者平移，可以设置成 'scale' 或者 'move'。设置成 true 为都开启
+            如果只想要开启缩放或者平移，可以设置成 scale 或者 move。设置成 true 为都开启
         :param maptype:
             地图类型，支持 china, world, 广东，福建，山东等...
         :param kwargs:
         """
         if isinstance(attr, list) and isinstance(value, list):
+            chart = get_all_options(**kwargs)
             assert len(attr) == len(value)
             _data = []
             for data in zip(attr, value):
@@ -39,7 +41,7 @@ class Map(Base):
             self._option.get('series').append({
                 "type": "map",
                 "name": name,
-                "symbol": self.Option.symbol(**kwargs),
+                "symbol": chart['symbol'],
                 "mapType": maptype,
                 "data": _data,
                 "roam": is_roam

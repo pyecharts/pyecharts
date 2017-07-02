@@ -1,4 +1,5 @@
 from echarts.base import Base
+from echarts.option import get_all_options
 
 class Funnel(Base):
     """
@@ -23,6 +24,7 @@ class Funnel(Base):
         """
         if isinstance(attr, list) and isinstance(value, list):
             assert len(attr) == len(value)
+            chart = get_all_options(**kwargs)
             _data = []
             for data in zip(attr, value):
                 _name, _value = data
@@ -33,7 +35,7 @@ class Funnel(Base):
                 "type": "funnel",
                 "name": name,
                 "data": _data,
-                "label": self.Option.label(**kwargs),
+                "label": chart['label'],
             })
             self._legend_visualmap_colorlst(**kwargs)
         else:

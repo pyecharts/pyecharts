@@ -1,5 +1,6 @@
 from PIL import Image
 from echarts.base import Base
+from echarts.option import get_all_options
 
 class Scatter(Base):
     """
@@ -28,16 +29,18 @@ class Scatter(Base):
         """
         if isinstance(x_value, list) and isinstance(y_value, list):
             assert len(x_value) == len(y_value)
-            xaxis, yaxis = self.Option.xy_axis("scatter", **kwargs)
+            kwargs.update(type="scatter")
+            chart = get_all_options(**kwargs)
+            xaxis, yaxis = chart['xy_axis']
             self._option.update(xAxis=xaxis, yAxis=yaxis)
             self._option.get('legend').get('data').append(name)
             self._option.get('series').append({
                 "type": "scatter",
                 "name": name,
-                "symbol": self.Option.symbol(**kwargs),
+                "symbol": chart['symbol'],
                 "symbolSize": symbol_size,
                 "data": [list(z) for z in zip(x_value, y_value)],
-                "label": self.Option.label(**kwargs),
+                "label": chart['label'],
             })
             self._legend_visualmap_colorlst(**kwargs)
         else:

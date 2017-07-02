@@ -3,7 +3,7 @@ from echarts.base import Base
 class Parallel(Base):
     """
     <<< 平行坐标系 >>>
-    平行坐标系（Parallel Coordinates） 是一种常用的可视化高维数据的图表。
+    平行坐标系是一种常用的可视化高维数据的图表。
     """
     def __init__(self, title="", subtitle="", **kwargs):
         super().__init__(title, subtitle, **kwargs)
@@ -36,13 +36,7 @@ class Parallel(Base):
         :param kwargs:
         :return:
         """
-        self._option.update(
-            parallel={
-                "left": "5%",
-                "right": "13%",
-                "bottom": "10%",
-                "top": "20%"
-            })
+        self._option.update(parallel={"left": "5%", "right": "13%", "bottom": "10%", "top": "20%"})
         self._option.get('legend').get('data').append(name)
         self._option.get('series').append({
             "type": "parallel",

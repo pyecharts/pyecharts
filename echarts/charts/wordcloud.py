@@ -1,4 +1,5 @@
 from echarts.base import Base
+from echarts.option import gen_color
 
 class WordCloud(Base):
     """
@@ -42,7 +43,7 @@ class WordCloud(Base):
                     "name": _name,
                     "value": _value,
                     "textStyle": {
-                        "normal": {"color": self.Option.gen_color()}}
+                        "normal": {"color": gen_color()}}
                 })
             _min, _max = 12, 60
             if word_size_range is not None:

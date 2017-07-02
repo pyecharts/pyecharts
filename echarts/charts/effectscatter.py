@@ -1,4 +1,5 @@
 from echarts.charts.scatter import Scatter
+from echarts.option import get_all_options
 
 class EffectScatter(Scatter):
     """
@@ -27,7 +28,7 @@ class EffectScatter(Scatter):
         :param symbol_size:
             标记图形大小
         :param effect_brushtype:
-            波纹绘制方式
+            波纹绘制方式，有 stroke/fill 可选
         :param effect_scale:
             动画中波纹的最大缩放比例
         :param effect_period:
@@ -36,7 +37,9 @@ class EffectScatter(Scatter):
         """
         if isinstance(x_value, list) and isinstance(y_value, list):
             assert len(x_value) == len(y_value)
-            xaxis, yaxis = self.Option.xy_axis("scatter", **kwargs)
+            kwargs.update(type="scatter")
+            chart = get_all_options(**kwargs)
+            xaxis, yaxis = chart['xy_axis']
             self._option.update(xAxis=xaxis, yAxis=yaxis)
             self._option.get('legend').get('data').append(name)
             self._option.get('series').append({
@@ -48,10 +51,10 @@ class EffectScatter(Scatter):
                     "scale": effect_scale,
                     "period":effect_period
                 },
-                "symbol": self.Option.symbol(**kwargs),
+                "symbol": chart['symbol'],
                 "symbolSize": symbol_size,
                 "data": [list(z) for z in zip(x_value, y_value)],
-                "label": self.Option.label(**kwargs),
+                "label": chart['label'],
             })
             self._legend_visualmap_colorlst(**kwargs)
         else:

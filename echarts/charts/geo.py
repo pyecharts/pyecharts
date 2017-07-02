@@ -1,4 +1,5 @@
 from echarts.base import Base
+from echarts.option import get_all_options
 
 class Geo(Base):
     """
@@ -42,7 +43,7 @@ class Geo(Base):
         :param geo_emphasis_color:
             高亮状态下地图区域的颜色
         :param effect_brushtype:
-            波纹绘制方式
+            波纹绘制方式，有 stroke/fill 可选
         :param effect_scale:
             动画中波纹的最大缩放比例
         :param effect_period:
@@ -51,6 +52,7 @@ class Geo(Base):
         """
         if isinstance(attr, list) and isinstance(value, list):
             assert len(attr) == len(value)
+            chart = get_all_options(**kwargs)
             _data = []
             for data in zip(attr, value):
                 _name, _value = data
@@ -74,10 +76,10 @@ class Geo(Base):
                     "type": type,
                     "name": name,
                     "coordinateSystem": 'geo',
-                    "symbol": self.Option.symbol(**kwargs),
+                    "symbol": chart['symbol'],
                     "symbolSize": symbol_size,
                     "data": _data,
-                    "label": self.Option.label(**kwargs),
+                    "label": chart['label'],
                 })
             elif type == "effectScatter":
                 self._option.get('series').append({
@@ -90,10 +92,9 @@ class Geo(Base):
                         "scale": effect_scale,
                         "period": effect_period
                     },
-                    "symbol": self.Option.symbol(**kwargs),
+                    "symbol": chart['symbol'],
                     "symbolSize": symbol_size,
                     "data": _data,
-                    "label": self.Option.label(**kwargs),
+                    "label": chart['label'],
                 })
             self._legend_visualmap_colorlst(**kwargs)
-

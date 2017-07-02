@@ -1,4 +1,5 @@
 from echarts.base import Base
+from echarts.option import get_all_options
 
 class Radar(Base):
     """
@@ -24,6 +25,7 @@ class Radar(Base):
             雷达图数据项字体颜色
         :param kwargs:
         """
+        chart = get_all_options(**kwargs)
         indicator = []
         if schema:
             for s in schema:
@@ -36,9 +38,9 @@ class Radar(Base):
                 "indicator": indicator,
                 "shape": shape,
                 "name": {"textStyle": {"color": rader_text_color}},
-                "splitLine": self.Option.split_line(**kwargs),
-                "splitArea": self.Option.split_area(**kwargs),
-                "axisLine": self.Option.axis_line(**kwargs)}
+                "splitLine": chart['split_line'],
+                "splitArea": chart['split_area'],
+                "axisLine": chart['axis_line']}
         )
 
     def add(self, *args, **kwargs):
@@ -55,14 +57,16 @@ class Radar(Base):
             指定单图例颜色
         :param kwargs:
         """
+        kwargs.update(flag=True)
+        chart = get_all_options(**kwargs)
         self._option.get('legend').get('data').append(name)
         self._option.get('series').append({
             "type": "radar",
             "name": name,
             "data": value,
-            "symbol": self.Option.symbol(**kwargs),
+            "symbol": chart['symbol'],
             "itemStyle": {"normal": {"color": item_color}},
-            "lineStyle": self.Option.line_style(**kwargs),
-            "areaStyle": {"normal": self.Option.area_style(flag=True, **kwargs)}
+            "lineStyle": chart['line_style'],
+            "areaStyle": {"normal": chart['area_style']}
         })
         self._legend_visualmap_colorlst(**kwargs)

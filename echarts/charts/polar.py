@@ -1,4 +1,5 @@
 from echarts.base import Base
+from echarts.option import get_all_options
 
 class Polar(Base):
     """
@@ -48,8 +49,15 @@ class Polar(Base):
             默认为 true，这时候刻度只是作为分隔线，标签和数据点都会在两个刻度之间的带(band)中间
         :param clockwise:
             刻度增长是否按顺时针，默认顺时针
+        :param effect_brushtype:
+            波纹绘制方式，有 stroke/fill 可选
+        :param effect_scale:
+            动画中波纹的最大缩放比例
+        :param effect_period:
+            动画的时间
         :param kwargs:
         """
+        chart = get_all_options(**kwargs)
         polar_type = 'value' if type == "line" else "category"
         self._option.get('legend').get('data').append(name)
         if type in ("scatter", "line"):
@@ -57,12 +65,12 @@ class Polar(Base):
                 "type": type,
                 "name": name,
                 "coordinateSystem": 'polar',
-                "symbol": self.Option.symbol(type, **kwargs),
+                "symbol": chart['symbol'],
                 "symbolSize": symbol_size,
                 "data": data,
-                "label": self.Option.label(**kwargs),
+                "label": chart['label'],
             })
-        elif type == "effectscatter":
+        elif type == "effectScatter":
             self._option.get('series').append({
                 "type": type,
                 "name": name,
@@ -73,10 +81,10 @@ class Polar(Base):
                     "scale": effect_scale,
                     "period": effect_period
                 },
-                "symbol": self.Option.symbol(**kwargs),
+                "symbol": chart['symbol'],
                 "symbolSize": symbol_size,
                 "data": data,
-                "label": self.Option.label(**kwargs),
+                "label": chart['label'],
             })
         self._option.update(
             angleAxis={
@@ -85,15 +93,15 @@ class Polar(Base):
                 "clockwise": clockwise,
                 "startAngle": start_angle,
                 "boundaryGap": boundary_gap,
-                "splitLine": self.Option.split_line(**kwargs),
-                "axisLine": self.Option.axis_line(**kwargs)
+                "splitLine": chart['split_line'],
+                "axisLine": chart['axis_line']
             }
         )
         self._option.update(
             radiusAxis={
                 "type": polar_type,
                 "data": radius_data,
-                "axisLine": self.Option.axis_line(**kwargs),
+                "axisLine": chart['axis_line'],
                 "axisLabel": {"rotate": rotate_step}
             }
         )
