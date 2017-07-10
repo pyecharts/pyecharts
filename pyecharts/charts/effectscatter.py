@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 from pyecharts.charts.scatter import Scatter
 from pyecharts.option import get_all_options
 
@@ -14,9 +17,7 @@ class EffectScatter(Scatter):
 
     def __add(self, name, x_value, y_value, *,
               symbol_size=10,
-              effect_brushtype="stroke",
-              effect_scale=2.5,
-              effect_period=4, **kwargs):
+              **kwargs):
         """
 
         :param name:
@@ -27,12 +28,6 @@ class EffectScatter(Scatter):
             y 坐标轴数据
         :param symbol_size:
             标记图形大小
-        :param effect_brushtype:
-            波纹绘制方式，有 stroke/fill 可选
-        :param effect_scale:
-            动画中波纹的最大缩放比例
-        :param effect_period:
-            动画的时间
         :param kwargs:
         """
         if isinstance(x_value, list) and isinstance(y_value, list):
@@ -46,11 +41,7 @@ class EffectScatter(Scatter):
                 "type": "effectScatter",
                 "name": name,
                 "showEffectOn":"render",
-                "rippleEffect":{
-                    "brushType": effect_brushtype,
-                    "scale": effect_scale,
-                    "period":effect_period
-                },
+                "rippleEffect": chart['effect'],
                 "symbol": chart['symbol'],
                 "symbolSize": symbol_size,
                 "data": [list(z) for z in zip(x_value, y_value)],

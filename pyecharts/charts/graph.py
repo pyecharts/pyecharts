@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 from pyecharts.base import Base
 from pyecharts.option import get_all_options
 
@@ -19,7 +22,8 @@ class Graph(Base):
               layout="force",
               edge_length=50,
               gravity=0.2,
-              repulsion=50, **kwargs):
+              repulsion=50,
+              **kwargs):
         """
 
         :param nodes:

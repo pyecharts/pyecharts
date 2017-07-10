@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 from pyecharts.base import Base
 from pyecharts.option import get_all_options
 
@@ -14,7 +17,8 @@ class Map(Base):
 
     def __add(self, name, attr, value, *,
               is_roam=True,
-              maptype='china', **kwargs):
+              maptype='china',
+              **kwargs):
         """
 
         :param name:
@@ -47,3 +51,5 @@ class Map(Base):
                 "roam": is_roam
             })
             self._legend_visualmap_colorlst(**kwargs)
+        else:
+            raise TypeError("attr and value must be list")

@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 from pyecharts.base import Base
 from pyecharts.option import gen_color
 
@@ -28,7 +31,7 @@ class WordCloud(Base):
             词云图轮廓，包括
             cardioid, diamond, triangle-forward, triangle, pentagon, star
         :param word_gap:
-            单词间间隔
+            单词间隔
         :param word_size_range:
             单词字体大小范围
         :param rotate_step:
@@ -50,6 +53,7 @@ class WordCloud(Base):
                 if len(word_size_range) == 2:
                     _min, _max = word_size_range
             _rmin, _rmax = -90, 90
+            # 确保选择形状时能够生效，需使字体不旋转
             if shape in ("cardioid", "diamond", "triangle-forward", "triangle", "pentagon", "star"):
                 _rmin = _rmax = 0
             else:
@@ -64,3 +68,5 @@ class WordCloud(Base):
                 "sizeRange": [_min, _max],
                 "data": _data
             })
+        else:
+            raise TypeError("attr and value must be list")

@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 from pyecharts.base import Base
 from pyecharts.option import get_all_options
 
@@ -12,7 +15,8 @@ class Radar(Base):
     def config(self, schema=None, *,
                c_schema=None,
                shape="",
-               rader_text_color="#000", **kwargs):
+               rader_text_color="#000",
+               **kwargs):
         """ 配置 rader 组件选项
 
         :param schema:

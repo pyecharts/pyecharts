@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 from pyecharts.base import Base
 from pyecharts.option import get_all_options
 
@@ -17,7 +20,8 @@ class Line(Base):
               is_smooth=False,
               is_stack=False,
               is_step=False,
-              is_fill=False, **kwargs):
+              is_fill=False,
+              **kwargs):
         """
 
         :param name:

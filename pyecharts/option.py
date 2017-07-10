@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 import random
 
 fs = []
@@ -336,16 +339,17 @@ def visual_map(visual_range=None,
     :param kwargs:
     :return:
     """
+    # 组件允许的最大值最小值默认为 [0,100]
     _min, _max = 0, 100
     if visual_range:
         if len(visual_range) == 2:
             _min, _max = visual_range
-
+    # 两端文本默认值为 ['low','hight']
     _tlow, _thight = "low", "hight"
     if visual_range_text:
         if len(visual_range_text) == 2:
             _tlow, _thight = visual_range_text
-
+    # 过渡颜色默认为 ['#50a3ba', '#eac763', '#d94e5d']
     inrange = ['#50a3ba', '#eac763', '#d94e5d']
     if visual_range_color:
         if len(visual_range_color) >= 2:
@@ -366,7 +370,7 @@ def visual_map(visual_range=None,
 
 
 def gen_color():
-    """
+    """ 随机生成颜色，用于词云图
 
     :return:
     """
@@ -393,7 +397,36 @@ def symbol(type=None, symbol="", **kwargs):
     return symbol
 
 
+@collectfuncs
+def effect(effect_brushtype="stroke",
+           effect_scale=2.5,
+           effect_period=4,
+           **kwargs):
+    """
+
+    :param effect_brushtype:
+        波纹绘制方式，有 stroke/fill 可选
+    :param effect_scale:
+        动画中波纹的最大缩放比例
+    :param effect_period:
+        动画持续的时间
+    :param kwargs:
+    :return:
+    """
+    _effect = {
+        "brushType": effect_brushtype,
+        "scale": effect_scale,
+        "period":effect_period
+    }
+    return _effect
+
+
 def get_all_options(**kwargs):
+    """ 返回所有配置项
+
+    :param kwargs:
+    :return:
+    """
     _funcs = {}
     for f in fs:
         _funcs[f.__name__] = f(**kwargs)

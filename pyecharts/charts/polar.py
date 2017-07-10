@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 from pyecharts.base import Base
 from pyecharts.option import get_all_options
 
@@ -21,9 +24,7 @@ class Polar(Base):
               rotate_step=0,
               boundary_gap=True,
               clockwise=True,
-              effect_brushtype="stroke",
-              effect_scale=2.5,
-              effect_period=4, **kwargs):
+              **kwargs):
         """
 
         :param name:
@@ -49,12 +50,6 @@ class Polar(Base):
             默认为 true，这时候刻度只是作为分隔线，标签和数据点都会在两个刻度之间的带(band)中间
         :param clockwise:
             刻度增长是否按顺时针，默认顺时针
-        :param effect_brushtype:
-            波纹绘制方式，有 stroke/fill 可选
-        :param effect_scale:
-            动画中波纹的最大缩放比例
-        :param effect_period:
-            动画的时间
         :param kwargs:
         """
         chart = get_all_options(**kwargs)
@@ -76,11 +71,7 @@ class Polar(Base):
                 "name": name,
                 "coordinateSystem": 'polar',
                 "showEffectOn": "render",
-                "rippleEffect": {
-                    "brushType": effect_brushtype,
-                    "scale": effect_scale,
-                    "period": effect_period
-                },
+                "rippleEffect": chart['effect'],
                 "symbol": chart['symbol'],
                 "symbolSize": symbol_size,
                 "data": data,

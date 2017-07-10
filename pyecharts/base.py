@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
 import json
 
@@ -205,7 +207,7 @@ class Base():
         self._option.get('legend').update(chart['legend'])
         self._option.update(color=chart['color'])
 
-    def render(self, path=r"E:\Python\pyecharts\render.html"):
+    def render(self, path="render.html"):
         """ 渲染数据项，生成 html 文件
 
         :param path:

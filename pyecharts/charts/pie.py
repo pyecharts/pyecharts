@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 from pyecharts.base import Base
 from pyecharts.option import get_all_options
 
@@ -15,7 +18,8 @@ class Pie(Base):
     def __add(self, name, attr, value, *,
               radius=None,
               center=None,
-              rosetype="radius", **kwargs):
+              rosetype="radius",
+              **kwargs):
         """
 
         :param name:

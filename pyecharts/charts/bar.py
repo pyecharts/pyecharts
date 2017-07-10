@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 from pyecharts.base import Base
 from pyecharts.option import get_all_options
 
@@ -14,7 +17,8 @@ class Bar(Base):
         self.__add(*args, **kwargs)
 
     def __add(self, name, x_axis, y_axis, *,
-              is_stack=False, **kwargs):
+              is_stack=False,
+              **kwargs):
         """
 
         :param name:

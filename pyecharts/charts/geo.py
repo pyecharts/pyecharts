@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 from pyecharts.base import Base
 from pyecharts.option import get_all_options
 
@@ -19,9 +22,7 @@ class Geo(Base):
               border_color="#111",
               geo_normal_color="#323c48",
               geo_emphasis_color="#2a333d",
-              effect_brushtype="stroke",
-              effect_scale=2.5,
-              effect_period=4, **kwargs):
+              **kwargs):
         """
 
         :param name:
@@ -42,12 +43,6 @@ class Geo(Base):
             正常状态下地图区域的颜色
         :param geo_emphasis_color:
             高亮状态下地图区域的颜色
-        :param effect_brushtype:
-            波纹绘制方式，有 stroke/fill 可选
-        :param effect_scale:
-            动画中波纹的最大缩放比例
-        :param effect_period:
-            动画的时间
         :param kwargs:
         """
         if isinstance(attr, list) and isinstance(value, list):
@@ -87,14 +82,12 @@ class Geo(Base):
                     "name": name,
                     "coordinateSystem": 'geo',
                     "showEffectOn": "render",
-                    "rippleEffect": {
-                        "brushType": effect_brushtype,
-                        "scale": effect_scale,
-                        "period": effect_period
-                    },
+                    "rippleEffect": chart['effect'],
                     "symbol": chart['symbol'],
                     "symbolSize": symbol_size,
                     "data": _data,
                     "label": chart['label'],
                 })
             self._legend_visualmap_colorlst(**kwargs)
+        else:
+            raise TypeError("attr and value must be list")

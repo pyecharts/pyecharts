@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
 from pyecharts.charts.bar import Bar
 from pyecharts.charts.effectscatter import EffectScatter

@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 from pyecharts.base import Base
 
 class Gauge(Base):
@@ -12,7 +15,8 @@ class Gauge(Base):
 
     def __add(self, name, attr, value, *,
               scale_range=None,
-              angle_range=None, **kwargs):
+              angle_range=None,
+              **kwargs):
         """
 
         :param name:
@@ -27,10 +31,12 @@ class Gauge(Base):
             仪表盘角度范围
         :param kwargs:
         """
+        # 数据范围默认为 [0,100]
         _min, _max = 0, 100
         if scale_range:
             if len(scale_range) == 2:
                 _min, _max = scale_range
+        # 角度范围默认为 [225,-45]
         _start, _end = 225, -45
         if angle_range:
             if len(angle_range) == 2:

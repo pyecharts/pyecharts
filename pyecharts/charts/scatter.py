@@ -1,4 +1,8 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 from PIL import Image
+
 from pyecharts.base import Base
 from pyecharts.option import get_all_options
 
@@ -14,7 +18,8 @@ class Scatter(Base):
         self.__add(*args, **kwargs)
 
     def __add(self, name, x_value, y_value, *,
-              symbol_size=10, **kwargs):
+              symbol_size=10,
+              **kwargs):
         """
 
         :param name:
@@ -47,7 +52,7 @@ class Scatter(Base):
             raise TypeError("x_axis and y_axis must be list")
 
     def draw(self, path, color=None):
-        """ 将图片上的像素点转换为数组，如 color 为 （255,255,255）时只保留非白色像素点的坐标信息
+        """ 将图片上的像素点转换为数组，如 color 为（255,255,255）时只保留非白色像素点的坐标信息
 
         :param path:
             转换图片的地址
@@ -64,5 +69,6 @@ class Scatter(Base):
             for y in range(height):
                 if y < int(height / 2):
                     imarray[x, y], imarray[x, height-y-1] = imarray[x, height-y-1], imarray[x, y]
+        # [:3] 为 r,g,b
         result = [(x, y) for x in range(width) for y in range(height) if imarray[x, y][:3] != color]
         return self.cast(result)

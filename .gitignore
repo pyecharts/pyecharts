@@ -10,7 +10,7 @@ __pycache__/
 .Python
 /json/
 /js/
-/_images/
+/images_/
 env/
 build/
 develop-eggs/
