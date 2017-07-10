@@ -1,4 +1,4 @@
-from echarts import Graph
+from pyecharts import Graph
 
 def test_graph():
     import json

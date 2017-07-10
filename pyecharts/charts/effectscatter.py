@@ -1,5 +1,5 @@
-from echarts.charts.scatter import Scatter
-from echarts.option import get_all_options
+from pyecharts.charts.scatter import Scatter
+from pyecharts.option import get_all_options
 
 class EffectScatter(Scatter):
     """

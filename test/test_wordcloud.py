@@ -1,4 +1,4 @@
-from echarts import WordCloud
+from pyecharts import WordCloud
 
 def test_wordcloud():
     name = ['Sam S Club', 'Macys', 'Amy Schumer', 'Jurassic World', 'Charter Communications',

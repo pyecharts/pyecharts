@@ -1,4 +1,4 @@
-from echarts import Polar
+from pyecharts import Polar
 
 def test_polar():
     import math

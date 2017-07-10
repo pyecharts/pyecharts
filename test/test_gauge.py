@@ -1,4 +1,4 @@
-from echarts import Gauge
+from pyecharts import Gauge
 
 def test_gague():
     gauge = Gauge()

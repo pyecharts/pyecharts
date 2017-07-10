@@ -1,5 +1,5 @@
-from echarts.base import Base
-from echarts.option import get_all_options
+from pyecharts.base import Base
+from pyecharts.option import get_all_options
 
 class Graph(Base):
     """
@@ -64,11 +64,11 @@ class Graph(Base):
             支持设置成数组表达斥力的范围，此时不同大小的值会线性映射到不同的斥力。值越大则斥力越大
         :param kwargs:
         """
+        kwargs.update(type="graph")
+        chart = get_all_options(**kwargs)
         if categories:
             for c in categories:
                 self._option.get('legend').get('data').append(c)
-        kwargs.update(type="graph")
-        chart = get_all_options(**kwargs)
         self._option.get('series').append({
             "type": "graph",
             "layout": layout,

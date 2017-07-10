@@ -1,0 +1,15 @@
+
+from pyecharts.charts.bar import Bar
+from pyecharts.charts.effectscatter import EffectScatter
+from pyecharts.charts.funnel import Funnel
+from pyecharts.charts.gauge import Gauge
+from pyecharts.charts.geo import Geo
+from pyecharts.charts.graph import Graph
+from pyecharts.charts.line import Line
+from pyecharts.charts.map import Map
+from pyecharts.charts.parallel import Parallel
+from pyecharts.charts.pie import Pie
+from pyecharts.charts.polar import Polar
+from pyecharts.charts.radar import Radar
+from pyecharts.charts.scatter import Scatter
+from pyecharts.charts.wordcloud import WordCloud

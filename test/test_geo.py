@@ -1,4 +1,4 @@
-from echarts import Geo
+from pyecharts import Geo
 
 def test_geo():
     data = [
@@ -201,7 +201,7 @@ def test_geo():
               title_color="#fff", title_pos="center", width=1300, height=620, background_color='#404a59')
     attr, value = geo.cast(data)
     geo.add("", attr[:6], value[:6], type="effectScatter", visual_range_color=['#50a3ba', '#eac763', '#d94e5d'])
-    geo.add("", attr[:100], value[:100], visual_range_color=['#50a3ba', '#eac763', '#d94e5d'], visual_range=[0, 200]
+    geo.add("", attr, value, visual_range_color=['#50a3ba', '#eac763', '#d94e5d'], visual_range=[0, 200]
             , visual_text_color="#fff", type="scatter", effect_scale=6, symbol_size=15, is_visualmap=True)
     geo.show_config()
     geo.render()

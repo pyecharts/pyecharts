@@ -1,6 +1,6 @@
 from PIL import Image
-from echarts.base import Base
-from echarts.option import get_all_options
+from pyecharts.base import Base
+from pyecharts.option import get_all_options
 
 class Scatter(Base):
     """

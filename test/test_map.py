@@ -1,4 +1,4 @@
-from echarts import Map
+from pyecharts import Map
 
 def test_map():
     value = [20, 190]

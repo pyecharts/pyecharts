@@ -1,4 +1,4 @@
-from echarts import Radar
+from pyecharts import Radar
 
 def test_radar():
     schema = [

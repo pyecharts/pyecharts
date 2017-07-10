@@ -1,4 +1,4 @@
-from echarts.base import Base
+from pyecharts.base import Base
 
 class Gauge(Base):
     """

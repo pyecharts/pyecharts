@@ -1,4 +1,4 @@
-from echarts import Scatter
+from pyecharts import Scatter
 
 def test_scatter():
     v1 = [10, 20, 30, 40, 50, 60]

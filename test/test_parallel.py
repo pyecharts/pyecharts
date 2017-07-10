@@ -1,4 +1,4 @@
-from echarts import Parallel
+from pyecharts import Parallel
 
 def test_parallel():
     schema = ["data", "AQI", "PM2.5", "PM10", "CO", "NO2", "SO2", "等级"]

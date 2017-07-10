@@ -1,5 +1,5 @@
-from echarts.base import Base
-from echarts.option import gen_color
+from pyecharts.base import Base
+from pyecharts.option import gen_color
 
 class WordCloud(Base):
     """

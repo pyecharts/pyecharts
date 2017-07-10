@@ -1,4 +1,4 @@
-from echarts import EffectScatter
+from pyecharts import EffectScatter
 
 def test_effectscatter():
     v1 = [10, 20, 30, 40, 50, 60]

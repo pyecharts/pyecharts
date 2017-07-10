@@ -1,11 +1,8 @@
 
-try:
-    import configparser as Parser
-except ImportError:
-    import ConfigParser as Parser
 import json
+
 from pprint import pprint
-from echarts.option import get_all_options
+from pyecharts.option import get_all_options
 
 class Base():
 
@@ -165,7 +162,10 @@ class Base():
         pprint(self._option)
 
     def cast(self, seq):
-        """ 转换数据序列，将带字典和元祖类型的序列转换为 k_lst,v_lst 的两个列表
+        """ 转换数据序列，将带字典和元祖类型的序列转换为 k_lst,v_lst 两个列表
+        1.[(A1, B1),(A2, B2),(A3, B3),(A4, B4)] --> k_lst[A[i1,i2...]], v_lst[B[i1,i2...]]
+        2.[{A1: B1},{A2: B2},{A3: B3},{A4: B4}] --> k_lst[A[i1,i2...]], v_lst[B[i1,i2...]]
+        3.{A1: B1, A2: B2, A3: B3, A4: B4} -- > k_lst[A[i1,i2...]], v_lst[B[i1,i2...]]
 
         :param seq:
             转换的序列
@@ -179,8 +179,16 @@ class Base():
                         _attr, _value = s
                         k_lst.append(_attr)
                         v_lst.append(_value)
+                    elif isinstance(s, dict):
+                        for k, v in s.items():
+                            k_lst.append(k)
+                            v_lst.append(v)
                 except:
-                    raise ValueError
+                    raise
+        elif isinstance(seq, dict):
+            for k, v in seq.items():
+                k_lst.append(k)
+                v_lst.append(v)
         return k_lst, v_lst
 
     def _legend_visualmap_colorlst(self, is_visualmap=False, **kwargs):
@@ -203,25 +211,23 @@ class Base():
         :param path:
             生成 html 文件保存路径
         """
-        cf = Parser.ConfigParser()
-        with open(r'..\config.cfg', 'r') as cfgfile:
-            cf.read_file(cfgfile)
-            cfgpath = cf.get('option', 'path')
-        temple = r"%s\_temple.html" % cfgpath
+        from pyecharts import temple as Tp
+        temple = Tp._temple
         series = self._option.get("series")
         for s in series:
             if s.get('type') == "wordCloud":
-                temple = r"%s\_temple_wordcloud.html" % cfgpath
+                temple = Tp._temple_wd
                 break
             if s.get('type') in ("scatter", "pie", "bar", "line") and 'coordinateSystem' not in s:
-                temple = r"%s\temple.html" % cfgpath
+                temple = Tp.temple
                 break
-        with open(temple, "r", encoding="utf-8") as f:
-            my_option = json.dumps(self._option, indent=4, ensure_ascii=False)
-            open(path, "w+", encoding="utf-8").write(
-                f.read().replace("myOption", my_option)
-                .replace("myWidth", str(self._width))
-                .replace("myHeight", str(self._height)))
+        my_option = json.dumps(self._option, indent=4, ensure_ascii=False)
+        __op = temple\
+            .replace("myOption", my_option)\
+            .replace("myWidth", str(self._width))\
+            .replace("myHeight", str(self._height))
+        with open(path, "w+", encoding="utf-8") as f:
+            f.write(__op)
 
     @property
     def _geo_cities(self):

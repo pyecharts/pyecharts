@@ -2,12 +2,12 @@ import random
 
 fs = []
 
-def collectfuns(func):
+def collectfuncs(func):
     fs.append(func)
     return func
 
 
-@collectfuns
+@collectfuncs
 def label(type=None,
           is_emphasis=True,
           label_pos=None,
@@ -54,7 +54,7 @@ def label(type=None,
     return _label
 
 
-@collectfuns
+@collectfuncs
 def color(colorlst=None,
           is_random=False,
           label_color=None,
@@ -80,7 +80,7 @@ def color(colorlst=None,
     return colorlst
 
 
-@collectfuns
+@collectfuncs
 def line_style(line_width=1,
                line_opacity=1,
                line_curve=0,
@@ -108,7 +108,7 @@ def line_style(line_width=1,
     return _line_style
 
 
-@collectfuns
+@collectfuncs
 def split_line(is_splitline_show=True, **kwargs):
     """
 
@@ -124,7 +124,7 @@ def split_line(is_splitline_show=True, **kwargs):
     return _split_line
 
 
-@collectfuns
+@collectfuncs
 def axis_line(is_axisline_show=True, **kwargs):
     """
 
@@ -140,7 +140,7 @@ def axis_line(is_axisline_show=True, **kwargs):
     return _axis_line
 
 
-@collectfuns
+@collectfuncs
 def split_area(is_area_show=True, **kwargs):
     """
 
@@ -156,7 +156,7 @@ def split_area(is_area_show=True, **kwargs):
     return _split_area
 
 
-@collectfuns
+@collectfuncs
 def area_style(flag=False,
                area_opacity=None,
                area_color=None,
@@ -181,7 +181,7 @@ def area_style(flag=False,
     return _area_style
 
 
-@collectfuns
+@collectfuncs
 def xy_axis(type=None,
             xy_font_size=14,
             namegap=25,
@@ -265,7 +265,7 @@ def _mark(data):
     return mark
 
 
-@collectfuns
+@collectfuncs
 def mark_point(mark_point=None, **kwargs):
     """
 
@@ -277,7 +277,7 @@ def mark_point(mark_point=None, **kwargs):
     return _mark(mark_point)
 
 
-@collectfuns
+@collectfuncs
 def mark_line(mark_line=None, **kwargs):
     """
 
@@ -290,7 +290,7 @@ def mark_line(mark_line=None, **kwargs):
     return _mark(mark_line)
 
 
-@collectfuns
+@collectfuncs
 def legend(is_legend_show=True,
            legend_orient="horizontal",
            legend_pos="center",
@@ -314,7 +314,7 @@ def legend(is_legend_show=True,
     return _legend
 
 
-@collectfuns
+@collectfuncs
 def visual_map(visual_range=None,
                visual_text_color=None,
                visual_range_text=None,
@@ -375,7 +375,7 @@ def gen_color():
                               random.randint(0, 160))
 
 
-@collectfuns
+@collectfuncs
 def symbol(type=None, symbol="", **kwargs):
     """
 

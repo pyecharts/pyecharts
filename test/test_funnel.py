@@ -1,4 +1,4 @@
-from echarts import Funnel
+from pyecharts import Funnel
 
 def test_funnel():
     attr = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]

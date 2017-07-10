@@ -1,5 +1,6 @@
-from echarts.base import Base
-from echarts.option import get_all_options
+from pyecharts.base import Base
+from pyecharts.option import get_all_options
+
 class Line(Base):
     """
     <<< 折线/面积图 >>>

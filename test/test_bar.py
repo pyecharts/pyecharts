@@ -1,4 +1,4 @@
-from echarts import Bar, Line
+from pyecharts import Bar, Line
 
 def test_bar():
     attr = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
