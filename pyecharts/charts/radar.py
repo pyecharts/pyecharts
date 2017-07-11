@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+#coding=utf-8
 
 from pyecharts.base import Base
 from pyecharts.option import get_all_options
@@ -10,9 +11,9 @@ class Radar(Base):
     雷达图主要用于表现多变量的数据。
     """
     def __init__(self, title="", subtitle="", **kwargs):
-        super().__init__(title, subtitle, **kwargs)
+        super(Radar, self).__init__(title, subtitle, **kwargs)
 
-    def config(self, schema=None, *,
+    def config(self, schema=None,
                c_schema=None,
                shape="",
                rader_text_color="#000",
@@ -50,7 +51,7 @@ class Radar(Base):
     def add(self, *args, **kwargs):
         self.__add(*args, **kwargs)
 
-    def __add(self, name, value, *, item_color=None, **kwargs):
+    def __add(self, name, value, item_color=None, **kwargs):
         """
 
         :param name:

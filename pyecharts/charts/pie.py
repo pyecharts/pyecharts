@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+#coding=utf-8
 
 from pyecharts.base import Base
 from pyecharts.option import get_all_options
@@ -10,12 +11,12 @@ class Pie(Base):
     饼图主要用于表现不同类目的数据在总和中的占比。每个的弧度表示数据数量的比例。
     """
     def __init__(self, title="", subtitle="", **kwargs):
-        super().__init__(title, subtitle, **kwargs)
+        super(Pie, self).__init__(title, subtitle, **kwargs)
 
     def add(self, *args, **kwargs):
         self.__add(*args, **kwargs)
 
-    def __add(self, name, attr, value, *,
+    def __add(self, name, attr, value,
               radius=None,
               center=None,
               rosetype="radius",

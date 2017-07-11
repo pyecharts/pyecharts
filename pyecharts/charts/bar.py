@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+#coding=utf-8
 
 from pyecharts.base import Base
 from pyecharts.option import get_all_options
@@ -11,12 +12,12 @@ class Bar(Base):
     """
 
     def __init__(self, title="", subtitle="", **kwargs):
-        super().__init__(title, subtitle, **kwargs)
+        super(Bar, self).__init__(title, subtitle, **kwargs)
 
     def add(self, *args, **kwargs):
         self.__add(*args, **kwargs)
 
-    def __add(self, name, x_axis, y_axis, *,
+    def __add(self, name, x_axis, y_axis,
               is_stack=False,
               **kwargs):
         """

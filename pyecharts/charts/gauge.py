@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+#coding=utf-8
 
 from pyecharts.base import Base
 
@@ -8,12 +9,12 @@ class Gauge(Base):
     <<< 仪表盘 >>>
     """
     def __init__(self, title="", subtitle="", **kwargs):
-        super().__init__(title, subtitle, **kwargs)
+        super(Gauge, self).__init__(title, subtitle, **kwargs)
 
     def add(self, *args, **kwargs):
         self.__add(*args, **kwargs)
 
-    def __add(self, name, attr, value, *,
+    def __add(self, name, attr, value,
               scale_range=None,
               angle_range=None,
               **kwargs):

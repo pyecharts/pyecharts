@@ -13,4 +13,4 @@ def test_bar():
     line.add("C", attr, v3, label_text_size=20)
     bar.custom(line.get_series())
     bar.show_config()
-    bar.render()
+    bar.render("e:/xx.html")

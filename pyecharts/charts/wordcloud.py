@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+#coding=utf-8
 
 from pyecharts.base import Base
 from pyecharts.option import gen_color
@@ -9,12 +10,12 @@ class WordCloud(Base):
     <<< 词云图 >>>
     """
     def __init__(self, title="", subtitle="", **kwargs):
-        super().__init__(title, subtitle, **kwargs)
+        super(WordCloud, self).__init__(title, subtitle, **kwargs)
 
     def add(self, *args, **kwargs):
         self.__add(*args, **kwargs)
 
-    def __add(self, name, attr, value, *,
+    def __add(self, name, attr, value,
               shape="circle",
               word_gap=20,
               word_size_range=None,

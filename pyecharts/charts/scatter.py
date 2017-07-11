@@ -1,7 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+#coding=utf-8
 
-from PIL import Image
+try:
+    from PIL import Image
+except ImportError:
+    import Image
 
 from pyecharts.base import Base
 from pyecharts.option import get_all_options
@@ -12,12 +16,12 @@ class Scatter(Base):
     直角坐标系上的散点图可以用来展现数据的 x，y 之间的关系，如果数据项有多个维度，可以用颜色来表现，利用 geo 组件。
     """
     def __init__(self, title="", subtitle="", **kwargs):
-        super().__init__(title, subtitle, **kwargs)
+        super(Scatter, self).__init__(title, subtitle, **kwargs)
 
     def add(self, *args, **kwargs):
         self.__add(*args, **kwargs)
 
-    def __add(self, name, x_value, y_value, *,
+    def __add(self, name, x_value, y_value,
               symbol_size=10,
               **kwargs):
         """

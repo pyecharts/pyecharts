@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+#coding=utf-8
 
 from pyecharts.base import Base
 from pyecharts.option import get_all_options
@@ -10,12 +11,12 @@ class Polar(Base):
     可以用于散点图和折线图。
     """
     def __init__(self, title="", subtitle="", **kwargs):
-        super().__init__(title, subtitle, **kwargs)
+        super(Polar, self).__init__(title, subtitle, **kwargs)
 
     def add(self, *args, **kwargs):
         self.__add(*args, **kwargs)
 
-    def __add(self, name, data, *,
+    def __add(self, name, data,
               angle_data=None,
               radius_data=None,
               type='line',

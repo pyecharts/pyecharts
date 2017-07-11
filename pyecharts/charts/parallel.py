@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+#coding=utf-8
 
 from pyecharts.base import Base
 
@@ -9,12 +10,12 @@ class Parallel(Base):
     平行坐标系是一种常用的可视化高维数据的图表。
     """
     def __init__(self, title="", subtitle="", **kwargs):
-        super().__init__(title, subtitle, **kwargs)
+        super(Parallel, self).__init__(title, subtitle, **kwargs)
 
     def add(self, *args, **kwargs):
         self.__add(*args, **kwargs)
 
-    def config(self, schema=None, *, c_schema=None):
+    def config(self, schema=None, c_schema=None):
         """
 
         :param schema:

@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+#coding=utf-8
 
 from pyecharts.base import Base
 from pyecharts.option import get_all_options
@@ -10,12 +11,12 @@ class Graph(Base):
     用于展现节点以及节点之间的关系数据。
     """
     def __init__(self, title="", subtitle="", **kwargs):
-        super().__init__(title, subtitle, **kwargs)
+        super(Graph, self).__init__(title, subtitle, **kwargs)
 
     def add(self, *args, **kwargs):
         self.__add(*args, **kwargs)
 
-    def __add(self, nodes, links, categories=None, *,
+    def __add(self, nodes, links, categories=None,
               is_focusnode=True,
               is_roam=True,
               is_rotatelabel=False,

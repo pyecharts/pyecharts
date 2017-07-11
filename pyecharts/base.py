@@ -1,12 +1,14 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+#coding=utf-8
 
 import json
 
 from pprint import pprint
 from pyecharts.option import get_all_options
 
-class Base():
+
+class Base(object):
 
     def __init__(self, title, subtitle,
                  width=800,
@@ -228,7 +230,7 @@ class Base():
             .replace("myOption", my_option)\
             .replace("myWidth", str(self._width))\
             .replace("myHeight", str(self._height))
-        with open(path, "w+", encoding="utf-8") as f:
+        with open(path, "w+") as f:
             f.write(__op)
 
     @property

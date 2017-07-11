@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+#coding=utf-8
 
 from pyecharts.base import Base
 from pyecharts.option import get_all_options
@@ -10,12 +11,12 @@ class Geo(Base):
     地理坐标系组件用于地图的绘制，支持在地理坐标系上绘制散点图，线集。
     """
     def __init__(self, title="", subtitle="", **kwargs):
-        super().__init__(title, subtitle, **kwargs)
+        super(Geo, self).__init__(title, subtitle, **kwargs)
 
     def add(self, *args, **kwargs):
         self.__add(*args, **kwargs)
 
-    def __add(self, name, attr, value, *,
+    def __add(self, name, attr, value,
               type="scatter",
               maptype='china',
               symbol_size=12,

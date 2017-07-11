@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+#coding=utf-8
 
 from pyecharts.base import Base
 from pyecharts.option import get_all_options
@@ -10,12 +11,12 @@ class Line(Base):
     折线图是用折线将各个数据点标志连接起来的图表，用于展现数据的变化趋势。
     """
     def __init__(self, title="", subtitle="", **kwargs):
-        super().__init__(title, subtitle, **kwargs)
+        super(Line, self).__init__(title, subtitle, **kwargs)
 
     def add(self, *args, **kwargs):
         self.__add(*args, **kwargs)
 
-    def __add(self, name, x_axis, y_axis, *,
+    def __add(self, name, x_axis, y_axis,
               is_symbol_show=True,
               is_smooth=False,
               is_stack=False,
