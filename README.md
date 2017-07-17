@@ -6,6 +6,7 @@ pyecharts 是百度 echarts 的 Python 接口。
 
 # 安装  
 pyecharts 兼容 Python2 和 Python3。Version 0.1.2
+```python
 pip install pyecharts
 ```
 
@@ -174,7 +175,7 @@ bar.add("商家A", attr, v1, is_stack=True)
 bar.add("商家B", attr, v2, is_stack=True)
 bar.render()
 ```
-![bar-0](bar-0.gif)  
+![bar-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/bar-0.gif)  
 
 ```python
 from pyecharts import Bar
@@ -378,7 +379,8 @@ data = [
     ("湘潭", 154),("金华", 157),("岳阳", 169),("长沙", 175),("衢州", 177),("廊坊", 193),
     ("菏泽", 194),("合肥", 229),("武汉", 273),("大庆", 279)]
 
-geo = Geo("全国主要城市空气质量", "data from pm2.5", title_color="#fff", title_pos="center", width=1200, height=600, background_color='#404a59')
+geo = Geo("全国主要城市空气质量", "data from pm2.5", title_color="#fff", title_pos="center",
+width=1200, height=600, background_color='#404a59')
 attr, value = geo.cast(data)
 geo.add("", attr, value, visual_range=[0, 200], visual_text_color="#fff", symbol_size=15, is_visualmap=True)
 geo.show_config()
@@ -404,7 +406,8 @@ visualmap：是视觉映射组件，用于进行『视觉编码』，也就是�
 from pyecharts import Geo
 
 data = [("海门", 9), ("鄂尔多斯", 12), ("招远", 12), ("舟山", 12), ("齐齐哈尔", 14), ("盐城", 15)]
-geo = Geo("全国主要城市空气质量", "data from pm2.5", title_color="#fff", title_pos="center", width=1200, height=600, background_color='#404a59')
+geo = Geo("全国主要城市空气质量", "data from pm2.5", title_color="#fff", title_pos="center",
+          width=1200, height=600, background_color='#404a59')
 attr, value = geo.cast(data)
 geo.add("", attr, value, type="effectScatter", is_random=True, effect_scale=5)
 geo.show_config()
@@ -498,7 +501,8 @@ with open("..\json\weibo.json", "r", encoding="utf-8") as f:
     j = json.load(f)
     nodes, links, categories, cont, mid, userl = j
 graph = Graph("微博转发关系图", width=1200, height=600)
-graph.add("", nodes, links, categories, label_pos="right", repulsion=50, is_legend_show=False, line_curve=0.2, label_text_color=None)
+graph.add("", nodes, links, categories, label_pos="right", repulsion=50, is_legend_show=False,
+          line_curve=0.2, label_text_color=None)
 graph.show_config()
 graph.render()
 ```
@@ -510,7 +514,8 @@ graph.render()
 ## Line（折线/面积图）
 Line.add() 方法签名
 ```python
-add(name, x_axis, y_axis, is_symbol_show=True, is_smooth=False, is_stack=False, is_step=False, is_fill=False, **kwargs)
+add(name, x_axis, y_axis, is_symbol_show=True, is_smooth=False, is_stack=False,
+    is_step=False, is_fill=False, **kwargs)
 ```
 * name -> str  
     图例名称
@@ -586,7 +591,8 @@ line.render()
 ## Liquid（水球图）
 Liquid.add() 方法签名
 ```python
-add(name, data, shape='circle', liquid_color=None, is_liquid_animation=True, is_liquid_outline_show=True, **kwargs):
+add(name, data, shape='circle', liquid_color=None, is_liquid_animation=True,
+    is_liquid_outline_show=True, **kwargs)
 ```
 * name -> str  
     图例名称
@@ -828,7 +834,8 @@ from pyecharts import Pie
 attr = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
 v1 = [11, 12, 13, 10, 10, 10]
 pie = Pie("饼图-圆环图示例", title_pos='center')
-pie.add("", attr, v1, radius=[40, 75], label_text_color=None, is_label_show=True, legend_orient='vertical',legend_pos='left')
+pie.add("", attr, v1, radius=[40, 75], label_text_color=None, is_label_show=True,
+        legend_orient='vertical', legend_pos='left')
 pie.show_config()
 pie.render()
 ```
@@ -842,7 +849,8 @@ v1 = [11, 12, 13, 10, 10, 10]
 v2 = [19, 21, 32, 20, 20, 33]
 pie = Pie("饼图-玫瑰图示例", title_pos='center', width=900)
 pie.add("商品A", attr, v1, center=[25, 50], is_random=True, radius=[30, 75], rosetype='radius')
-pie.add("商品B", attr, v2, center=[75, 50], is_random=True, radius=[30, 75], rosetype='area', is_legend_show=False,is_label_show=True)
+pie.add("商品B", attr, v2, center=[75, 50], is_random=True, radius=[30, 75], rosetype='area',
+        is_legend_show=False, is_label_show=True)
 pie.show_config() 
 pie.render()
 ```
@@ -852,7 +860,8 @@ pie.render()
 ## Polar（极坐标系）
 Polar.add() 方法签名
 ```python
-add(name, data, angle_data=None, radius_data=None, type='line', symbol_size=4, start_angle=90, rotate_step=0, boundary_gap=True, clockwise=True, **kwargs)
+add(name, data, angle_data=None, radius_data=None, type='line', symbol_size=4, start_angle=90,
+    rotate_step=0, boundary_gap=True, clockwise=True, **kwargs)
 ```
 * name -> str  
     图例名称
