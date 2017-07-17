@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 #coding=utf-8
 
 _temple = """
@@ -9,7 +8,6 @@ _temple = """
 <head>
     <meta charset="utf-8">
     <title>ECharts</title>
-    <!-- 引入 echarts.js -->
     <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts-all-3.js"></script>
     <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
     <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
@@ -55,16 +53,10 @@ _temple = """
 </head>
 
 <body>
-    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
     <div id="main" style="width: myWidthpx;height:myHeightpx; "></div>
     <script type="text/javascript ">
-        // 基于准备好的dom，初始化echarts实例
         var myChart = echarts.init(document.getElementById('main'));
-
-        // 指定图表的配置项和数据
         var option = myOption;
-
-        // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
     </script>
 </body>
@@ -79,7 +71,6 @@ _temple_wd = """
 <head>
     <meta charset="utf-8">
     <title>ECharts</title>
-    <!-- 引入 echarts.js -->
     <script src='https://cdn.bootcss.com/echarts/3.2.2/echarts.simple.js'></script>
     <script type="text/javascript" src="http://data-visual.cn/datav/src/js/echarts/extension/echarts-wordcloud.min.js"></script>
 </head>
@@ -94,17 +85,34 @@ _temple_wd = """
             margin: 0;
         }
     </style>
-    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
     <div id="main" style="width: myWidthpx;height:myHeightpx; ">
     </div>
     <script type="text/javascript ">
-        // 基于准备好的dom，初始化echarts实例
         var myChart = echarts.init(document.getElementById('main'));
-
-        // 指定图表的配置项和数据
         var option = myOption;
+        myChart.setOption(option);
+    </script>
+</body>
 
-        // 使用刚指定的配置项和数据显示图表。
+</html>
+"""
+
+_temple_lq = """
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>ECharts</title>
+    <script src='https://cdn.bootcss.com/echarts/3.2.2/echarts.js'></script>
+    <script src='http://oog4yfyu0.bkt.clouddn.com/liquidfill.js'></script>
+</head>
+
+<body>
+    <div id="main" style="width: myWidthpx;height:myHeightpx;"></div>
+    <script type="text/javascript">
+        var myChart = echarts.init(document.getElementById('main'));
+        var option = myOption;
         myChart.setOption(option);
     </script>
 </body>
@@ -119,22 +127,15 @@ temple = """
 <head>
     <meta charset="utf-8">
     <title>ECharts</title>
-    <!-- 引入 echarts.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/3.5.4/echarts.common.min.js"></script>
 
 </head>
 
 <body>
-    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
     <div id="main" style="width: myWidthpx;height:myHeightpx;"></div>
     <script type="text/javascript">
-        // 基于准备好的dom，初始化echarts实例
         var myChart = echarts.init(document.getElementById('main'));
-
-        // 指定图表的配置项和数据
         var option = myOption;
-
-        // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
     </script>
 </body>
