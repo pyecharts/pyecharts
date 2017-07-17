@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 #coding=utf-8
 
 from pyecharts.base import Base
@@ -29,8 +28,7 @@ class WordCloud(Base):
         :param value:
             属性所对应的值
         :param shape:
-            词云图轮廓，包括
-            cardioid, diamond, triangle-forward, triangle, pentagon, star
+            词云图轮廓，有'circle', 'cardioid', 'diamond', 'triangle-forward', 'triangle', 'pentagon', 'star'可选
         :param word_gap:
             单词间隔
         :param word_size_range:
