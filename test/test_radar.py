@@ -1,24 +1,22 @@
+#!/usr/bin/env python
+#coding=utf-8
+
 from pyecharts import Radar
 
 def test_radar():
-    schema = [
-        ("销售", 6500),
-        ("管理", 16000),
-        ("信息技术", 30000),
-        ("客服", 38000),
-        ("研发", 52000),
-        ("市场", 25000)
-    ]
+
+    # radar_0
+    schema = [("销售", 6500), ("管理", 16000), ("信息技术", 30000), ("客服", 38000), ("研发", 52000), ("市场", 25000)]
     v1 = [[4300, 10000, 28000, 35000, 50000, 19000]]
     v2 = [[5000, 14000, 28000, 31000, 42000, 21000]]
-
     radar = Radar()
-    radar.config(schema, split_area_show=True)
-    radar.add("预算分配", v1, label_color=["#000"])
-    radar.add("实际开销", v2, label_color=["#4e79a7"])
+    radar.config(schema)
+    radar.add("预算分配", v1, is_splitline=True, is_axisline_show=True)
+    radar.add("实际开销", v2, label_color=["#4e79a7"], is_area_show=False)
     radar.show_config()
     radar.render()
 
+    # radar_1
     value_bj = [
         [55, 9, 56, 0.46, 18, 6, 1],
         [25, 11, 21, 0.65, 34, 9, 2],
@@ -85,11 +83,16 @@ def test_radar():
         [174, 131, 174, 1.55, 108, 50, 30],
         [187, 143, 201, 1.39, 89, 53, 31]
         ]
-    schema = [("AQI", 300), ("PM2.5", 250), ("PM10", 300), ("CO", 5), ("NO2", 200), ("SO2", 100)]
+    c_schema = [{"name":"AQI", "max": 300, "min": 5},
+              {"name":"PM2.5", "max": 250, "min": 20},
+                {"name":"PM10", "max":300, "min": 5},
+                {"name":"CO", "max":5},
+                {"name":"NO2", "max":200},
+                {"name":"SO2", "max":100}]
 
-    radar2 = Radar()
-    radar2.config(schema)
-    radar2.add("北京", value_bj, item_color="#f9713c", symbol=None)
-    radar2.add("上海", value_sh, item_color="#b3e4a1", symbol=None)
-    radar2.show_config()
-    radar2.render()
+    radar = Radar()
+    radar.config(c_schema=c_schema, shape='circle')
+    radar.add("北京", value_bj, item_color="#f9713c", symbol=None)
+    radar.add("上海", value_sh, item_color="#b3e4a1", symbol=None)
+    radar.show_config()
+    radar.render()
