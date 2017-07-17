@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 #coding=utf-8
 
 from pyecharts.base import Base
@@ -24,6 +23,9 @@ class Radar(Base):
             默认雷达图的指示器，用来指定雷达图中的多个维度，会对数据处理成 {name:xx, value:xx} 的字典
         :param c_schema:
             用户自定义雷达图的指示器，用来指定雷达图中的多个维度
+            name: 指示器名称
+            min: 指示器最小值
+            max: 指示器最大值
         :param shape:
             雷达图绘制类型，支持 polygon（多边形） 和 circle
         :param rader_text_color:
@@ -62,7 +64,7 @@ class Radar(Base):
             指定单图例颜色
         :param kwargs:
         """
-        kwargs.update(flag=True)
+        kwargs.update(flag=True, type='radar')
         chart = get_all_options(**kwargs)
         self._option.get('legend').get('data').append(name)
         self._option.get('series').append({

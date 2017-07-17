@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 #coding=utf-8
 
 import json
@@ -71,6 +70,7 @@ class Base(object):
             angle_range=None,
             area_color=None,
             area_opacity=None,
+            axis_range=None,
             border_color=None,
             boundary_gap=None,
             center=None,
@@ -93,6 +93,8 @@ class Base(object):
             is_focusnode=None,
             is_label_show=None,
             is_legend_show=None,
+            is_liquid_animation=None,
+            is_liquid_outline_show=None,
             is_random=None,
             is_roam=None,
             is_rotatelabel=None,
@@ -114,6 +116,7 @@ class Base(object):
             line_opacity=None,
             line_type=None,
             line_width=None,
+            liquid_color=None,
             maptype=None,
             mark_line=None,
             mark_point=None,
@@ -139,7 +142,8 @@ class Base(object):
             x_axis=None,
             xaxis_name_pos=None,
             xaxis_name=None,
-            xy_font_size=None,
+            xy_text_size=None,
+            yaxis_formatter=None,
             yaxis_name_pos=None,
             yaxis_name=None):
         """ base 父类的 add 方法只是为了提供提示选项 """
@@ -165,7 +169,8 @@ class Base(object):
         """ 打印输出 option 所有配置项 """
         pprint(self._option)
 
-    def cast(self, seq):
+    @staticmethod
+    def cast(seq):
         """ 转换数据序列，将带字典和元祖类型的序列转换为 k_lst,v_lst 两个列表
         1.[(A1, B1),(A2, B2),(A3, B3),(A4, B4)] --> k_lst[A[i1,i2...]], v_lst[B[i1,i2...]]
         2.[{A1: B1},{A2: B2},{A3: B3},{A4: B4}] --> k_lst[A[i1,i2...]], v_lst[B[i1,i2...]]
@@ -222,6 +227,9 @@ class Base(object):
             if s.get('type') == "wordCloud":
                 temple = Tp._temple_wd
                 break
+            if s.get('type') == "liquidFill":
+                temple = Tp._temple_lq
+                break
             if s.get('type') in ("scatter", "pie", "bar", "line") and 'coordinateSystem' not in s:
                 temple = Tp.temple
                 break
@@ -230,8 +238,12 @@ class Base(object):
             .replace("myOption", my_option)\
             .replace("myWidth", str(self._width))\
             .replace("myHeight", str(self._height))
-        with open(path, "w+") as f:
-            f.write(__op)
+        try:        # for Python3
+            with open(path, "w+", encoding="utf-8") as fout:
+                fout.write(__op)
+        except:     # for Python2
+            with open(path, "w+") as fout:
+                fout.write(__op)
 
     @property
     def _geo_cities(self):

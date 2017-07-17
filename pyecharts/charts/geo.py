@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 #coding=utf-8
 
 from pyecharts.base import Base
@@ -33,7 +32,7 @@ class Geo(Base):
         :param value:
             属性所对应的值
         :param type:
-            图例类型，有 scatter/effectscatter 可选
+            图例类型，有'scatter', 'effectscatter'可选
         :param maptype:
             地图类型，目前只有 china 可选
         :param symbol_size:

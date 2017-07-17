@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 #coding=utf-8
 
 from pyecharts.base import Base
@@ -16,7 +15,7 @@ class Graph(Base):
     def add(self, *args, **kwargs):
         self.__add(*args, **kwargs)
 
-    def __add(self, nodes, links, categories=None,
+    def __add(self, name, nodes, links, categories=None,
               is_focusnode=True,
               is_roam=True,
               is_rotatelabel=False,
@@ -26,7 +25,8 @@ class Graph(Base):
               repulsion=50,
               **kwargs):
         """
-
+        :param name:
+            图例名称
         :param nodes:
             关系图结点，包含的数据项有
             # 必须！！
@@ -76,6 +76,7 @@ class Graph(Base):
                 self._option.get('legend').get('data').append(c)
         self._option.get('series').append({
             "type": "graph",
+            "name": name,
             "layout": layout,
             "symbol": chart['symbol'],
             "circular": {"rotateLabel": is_rotatelabel},

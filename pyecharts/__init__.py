@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 #coding=utf-8
 
 from pyecharts.charts.bar import Bar
@@ -9,6 +8,7 @@ from pyecharts.charts.gauge import Gauge
 from pyecharts.charts.geo import Geo
 from pyecharts.charts.graph import Graph
 from pyecharts.charts.line import Line
+from pyecharts.charts.liquid import Liquid
 from pyecharts.charts.map import Map
 from pyecharts.charts.parallel import Parallel
 from pyecharts.charts.pie import Pie

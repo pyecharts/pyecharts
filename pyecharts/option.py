@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 #coding=utf-8
 
 import random
@@ -14,28 +13,28 @@ def collectfuncs(func):
 @collectfuncs
 def label(type=None,
           is_emphasis=True,
-          label_pos=None,
           is_label_show=False,
+          label_pos=None,
           label_text_color="#000",
           label_text_size=12,
           formatter=None,
           **kwargs):
-    """
+    """ 图形上的文本标签，可用于说明图形的一些数据信息，比如值，名称等。
 
     :param type:
         图例类型
     :param is_emphasis:
         是否高亮显示标签
-    :param label_pos:
-        标签位置
     :param is_label_show:
         是否正常显示标签
+    :param label_pos:
+        标签位置
     :param label_text_color:
         标签字体颜色
     :param label_text_size:
         标签字体大小
     :param formatter:
-        标签内容格式器，有 series,name,value,percent 可选
+        标签内容格式器，有'series', 'name', 'value', 'percent'可选
     :param kwargs:
     :return:
     """
@@ -99,7 +98,7 @@ def line_style(line_width=1,
     :param line_curve:
         线的弯曲程度，0 为完全不弯曲，1 为最弯曲
     :param line_type:
-        线的类型，有 solid，dashed，dotted
+        线的类型，有'solid', 'dashed', 'dotted'可选
     :param kwargs:
     :return:
     """
@@ -155,7 +154,7 @@ def split_area(is_area_show=True, **kwargs):
     """
     _split_area = {
         "show": is_area_show,
-        "areaStyle": axis_line(**kwargs)
+        "areaStyle": area_style(**kwargs)
     }
     return _split_area
 
@@ -187,7 +186,7 @@ def area_style(flag=False,
 
 @collectfuncs
 def xy_axis(type=None,
-            xy_font_size=14,
+            xy_text_size=14,
             namegap=25,
             xaxis_name="",
             xaxis_name_pos="middle",
@@ -196,19 +195,20 @@ def xy_axis(type=None,
             yaxis_name_pos="middle",
             is_convert=False,
             x_axis=None,
+            yaxis_formatter="",
             **kwargs):
     """
 
     :param type:
         图例类型
-    :param xy_font_size:
+    :param xy_text_size:
         x 轴和 y 轴字体大小
     :param namegap:
         坐标轴名称与轴线之间的距离
     :param xaxis_name:
         x 轴名称
     :param xaxis_name_pos:
-        x 轴名称位置，有 start，middle，end 可选
+        x 轴名称位置，有'start'，'middle'，'end'可选
     :param interval:
         坐标轴刻度标签的显示间隔，在类目轴中有效
         默认会采用标签不重叠的策略间隔显示标签
@@ -217,11 +217,13 @@ def xy_axis(type=None,
     :param yaxis_name:
         y 轴名称
     :param yaxis_name_pos:
-        y 轴名称位置，有 start，middle，end 可选
+        y 轴名称位置，有'start', 'middle'，'end'可选
     :param is_convert:
         是否交换 x 轴与 y 轴
     :param x_axis:
         x 轴数据项
+    :param yaxis_formatter:
+        y 轴标签格式器
     :param kwargs:
     :return:
     """
@@ -229,14 +231,15 @@ def xy_axis(type=None,
         "name": xaxis_name,
         "nameLocation": xaxis_name_pos,
         "nameGap": namegap,
-        "nameTextStyle": {"fontSize": xy_font_size},
+        "nameTextStyle": {"fontSize": xy_text_size},
         "axisLabel": {"interval": interval}
     }
     _yAxis = {
         "name": yaxis_name,
         "nameLocation": yaxis_name_pos,
         "nameGap": namegap,
-        "nameTextStyle": {"fontSize": xy_font_size}
+        "nameTextStyle": {"fontSize": xy_text_size},
+        "axisLabel": {"formatter": "{value} " + yaxis_formatter}
     }
     if is_convert:
         _yAxis.update(data=x_axis, type="category")
@@ -254,7 +257,7 @@ def _mark(data):
     """
 
     :param data:
-        标记数据项，有最小值，最大值，平均值可选
+        标记数据项，有'min', 'max', 'average'可选
     :return:
     """
     mark = {"data": []}
@@ -274,7 +277,7 @@ def mark_point(mark_point=None, **kwargs):
     """
 
     :param mark_point:
-        标记点，有最小值，最大值，平均值可选
+        标记点，有'min', 'max', 'average'可选
     :param kwargs:
     :return:
     """
@@ -286,7 +289,7 @@ def mark_line(mark_line=None, **kwargs):
     """
 
     :param mark_line:
-        标记线，有最小值，最大值，平均值可选
+        标记线，有'min', 'max', 'average'可选
     :param kwargs:
     :return:
     """
@@ -295,22 +298,29 @@ def mark_line(mark_line=None, **kwargs):
 
 
 @collectfuncs
-def legend(is_legend_show=True,
+def legend(type=None,
+           is_legend_show=True,
            legend_orient="horizontal",
            legend_pos="center",
            **kwargs):
-    """
-
+    """ 图例组件。
+        图例组件展现了不同系列的标记(symbol)，颜色和名字。可以通过点击图例控制哪些系列不显示。
+    :param type:
+        图例类型
     :param is_legend_show:
         是否显示顶端图例
     :param legend_orient:
-        图例列表的布局朝向，有 horizontal，vertical 可选
+        图例列表的布局朝向，有'horizontal', 'vertical'可选
     :param legend_pos:
-        图例位置，有 left, center, right 可选
+        图例位置，有'left', 'center', 'right'可选
     :param kwargs:
     :return:
     """
+    selected_mode = True
+    if type == 'radar':
+        selected_mode = 'single'
     _legend = {
+        "selectedMode":selected_mode,
         "show": is_legend_show,
         "left": legend_pos,
         "orient": legend_orient
@@ -325,7 +335,7 @@ def visual_map(visual_range=None,
                visual_range_color=None,
                is_calculable=True,
                **kwargs):
-    """
+    """ 是视觉映射组件，用于进行『视觉编码』，也就是将数据映射到视觉元素（视觉通道）。
 
     :param visual_range:
         指定组件的允许的最小值与最大值
@@ -406,7 +416,7 @@ def effect(effect_brushtype="stroke",
     """
 
     :param effect_brushtype:
-        波纹绘制方式，有 stroke/fill 可选
+        波纹绘制方式，有'stroke', 'fill'可选
     :param effect_scale:
         动画中波纹的最大缩放比例
     :param effect_period:
