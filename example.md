@@ -1,3 +1,6 @@
+# 更多图表示例尽在此
+
+用极坐标系画出一个爱心
 ```python
 import math
 from pyecharts import Polar
@@ -15,6 +18,7 @@ polar.render()
 ```
 ![example-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/example-0.png)
 
+用极坐标系画出一朵小花
 ```python
 import math
 from pyecharts import Polar
@@ -31,6 +35,7 @@ polar.render()
 ```
 ![example-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/example-1.png)
 
+用散点图画出一个爱心
 ```python
 from pyecharts import Scatter
 
@@ -41,6 +46,7 @@ scatter.render()
 ```
 ![example-2](https://github.com/chenjiandongx/pyecharts/blob/master/images/example-2.png)
 
+用散点图画出一个火辣的 Bra
 ```python
 from pyecharts import Scatter
 
@@ -51,6 +57,7 @@ scatter.render()
 ```
 ![example-3](https://github.com/chenjiandongx/pyecharts/blob/master/images/example-3.png)
 
+用散点图画出一个性感的 Bra
 ```python
 from pyecharts import Scatter
 
