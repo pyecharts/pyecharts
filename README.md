@@ -275,7 +275,8 @@ funnel.render()
 
 ```python
 funnel = Funnel("漏斗图示例", width=600, height=400, title_pos='center')
-funnel.add("商品", attr, value, is_label_show=True, label_pos="outside", legend_orient='vertical', legend_pos='left')
+funnel.add("商品", attr, value, is_label_show=True, label_pos="outside", legend_orient='vertical',
+           legend_pos='left')
 funnel.show_config()
 funnel.render()
 ```
@@ -765,7 +766,8 @@ c_schema = [
     {"dim": 4, "name": "CO"},
     {"dim": 5, "name": "NO2"},
     {"dim": 6, "name": "CO2"},
-    {"dim": 7, "name": "等级", "type": "category", "data": ['优', '良', '轻度污染', '中度污染', '重度污染', '严重污染']}
+    {"dim": 7, "name": "等级",
+    "type": "category", "data": ['优', '良', '轻度污染', '中度污染', '重度污染', '严重污染']}
 ]
 data = [
     [1, 91, 45, 125, 0.82, 34, 23, "良"],
