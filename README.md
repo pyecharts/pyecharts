@@ -5,8 +5,7 @@ pyecharts 是百度 echarts 的 Python 接口。
 
 
 # 安装  
-pyecharts 兼容 Python2 和 Python3。Version 0.1.1
-```
+pyecharts 兼容 Python2 和 Python3。Version 0.1.2
 pip install pyecharts
 ```
 
