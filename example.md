@@ -68,6 +68,7 @@ scatter.render()
 ```
 ![example-4](https://github.com/chenjiandongx/pyecharts/blob/master/images/example-4.png)
 
+某地最低温和最高气温折线图
 ```python
 from pyecharts import Line
 
@@ -80,6 +81,7 @@ line.render()
 ```
 ![example-5](https://github.com/chenjiandongx/pyecharts/blob/master/images/example-5.gif)
 
+饼图嵌套
 ```python
 from pyecharts import Pie
 
@@ -91,6 +93,7 @@ pie.render()
 ```
 ![example-6](https://github.com/chenjiandongx/pyecharts/blob/master/images/example-6.png)
 
+饼图再嵌套
 ```python
 import random
 from pyecharts import Pie
@@ -106,6 +109,7 @@ pie.render()
 ```
 ![example-7](https://github.com/chenjiandongx/pyecharts/blob/master/images/example-7.gif)
 
+某地的降水量和蒸发量柱状图
 ```python
 from pyecharts import Bar
 
