@@ -302,6 +302,7 @@ def legend(type=None,
            is_legend_show=True,
            legend_orient="horizontal",
            legend_pos="center",
+           legend_top='top',
            **kwargs):
     """ 图例组件。
         图例组件展现了不同系列的标记(symbol)，颜色和名字。可以通过点击图例控制哪些系列不显示。
@@ -312,7 +313,9 @@ def legend(type=None,
     :param legend_orient:
         图例列表的布局朝向，有'horizontal', 'vertical'可选
     :param legend_pos:
-        图例位置，有'left', 'center', 'right'可选
+        图例组件离容器左侧的距离，有'left', 'center', 'right'可选
+    :param legend_pos:
+        图例组件离容器上侧的距离，有'top', 'center', 'bottom'可选
     :param kwargs:
     :return:
     """
@@ -323,6 +326,7 @@ def legend(type=None,
         "selectedMode":selected_mode,
         "show": is_legend_show,
         "left": legend_pos,
+        "top": legend_top,
         "orient": legend_orient
     }
     return _legend
