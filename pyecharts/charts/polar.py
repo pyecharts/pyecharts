@@ -26,6 +26,8 @@ class Polar(Base):
               clockwise=True,
               is_stack=False,
               axis_range=None,
+              is_angleaxis_show=True,
+              is_radiusaxis_show=True,
               **kwargs):
         """
 
@@ -56,6 +58,10 @@ class Polar(Base):
             数据堆叠，同个类目轴上系列配置相同的 stack 值可以堆叠放置
         :param axis_range:
             坐标轴刻度范围。
+        :param is_angleaxis_show:
+            是否显示极坐标系的角度轴，默认为 True
+        :param is_radiusaxis_show:
+            是否显示极坐标系的径向轴，默认为 True
         :param kwargs:
         """
         chart = get_all_options(**kwargs)
@@ -67,6 +73,9 @@ class Polar(Base):
         if axis_range:
             if len(axis_range) == 2:
                 _amin, _amax = axis_range
+        _area_style = {"normal": chart['area_style']}
+        if kwargs.get('area_color', None) is None:
+            _area_style = None
         if type in ("scatter", "line"):
             self._option.get('series').append({
                 "type": type,
@@ -76,6 +85,7 @@ class Polar(Base):
                 "symbolSize": symbol_size,
                 "data": data,
                 "label": chart['label'],
+                "areaStyle": _area_style
             })
         elif type == "effectScatter":
             self._option.get('series').append({
@@ -122,6 +132,7 @@ class Polar(Base):
         if type not in ("barAngle", "barRadius"):
             self._option.update(
                 angleAxis={
+                    "show":is_angleaxis_show,
                     "type": polar_type,
                     "data": angle_data,
                     "clockwise": clockwise,
@@ -133,6 +144,7 @@ class Polar(Base):
             )
             self._option.update(
                 radiusAxis={
+                    "show": is_radiusaxis_show,
                     "type": polar_type,
                     "data": radius_data,
                     "min": _amin,
