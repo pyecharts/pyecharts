@@ -1,16 +1,47 @@
-# 概况  
+# 目录
+
+* [项目概况](https://github.com/chenjiandongx/pyecharts/blob/master/README.md#项目概况)
+* [如何安装](https://github.com/chenjiandongx/pyecharts/blob/master/README.md#如何安装)
+* [开始使用](https://github.com/chenjiandongx/pyecharts/blob/master/README.md#开始使用)
+* [通用配置项](https://github.com/chenjiandongx/pyecharts/blob/master/README.md#通用配置项)
+    * xyAxis：直角坐标系中的 x、y 轴(Line、Bar、Scatter、EffectScatter)
+    * legend：图例组件。图例组件展现了不同系列的标记(symbol)，颜色和名字。可以通过点击图例控制哪些系列不显示。
+    * label：图形上的文本标签，可用于说明图形的一些数据信息，比如值，名称等。
+    * lineStyle：带线图形的线的风格选项(Line、Polar、Radar、Graph、Parallel)
+* [图表详细](https://github.com/chenjiandongx/pyecharts/blob/master/README.md#图表详细)
+    * [ar（柱状图/条形图）
+    * EffectScatter（带有涟漪特效动画的散点图）
+    * Funnel（漏斗图）
+    * Gauge（仪表盘）
+    * Geo（地理坐标系）
+    * Graph（关系图）
+    * Line（折线/面积图）
+    * Liquid（水球图）
+    * Map（地图）
+    * Parallel（平行坐标系）
+    * Pie（饼图）
+    * Polar（极坐标系）
+    * Radar（雷达图）
+    * Scatter（散点图）
+    * WordCloud（词云图）
+* [用户自定义](https://github.com/chenjiandongx/pyecharts/blob/master/README.md#用户自定义)
+* [更多示例](https://github.com/chenjiandongx/pyecharts/blob/master/README.md#更多示例)
+* [关于项目](https://github.com/chenjiandongx/pyecharts/blob/master/README.md#关于项目)
+
+
+# 项目概况  
 pyecharts 是一个用于生成 Echarts 图表的类库。 
 
 [Echarts](https://github.com/ecomfe/echarts) 是百度开源的一个数据可视化 JS 库。看了官方的介绍文档，觉得很不错，就想看看有没有人实现了 Python 库可以直接调用的。Github 上找到了一个 [echarts-python](https://github.com/yufeiminds/echarts-python) 不过这个项目已经很久没更新且也没什么介绍文档。借鉴了该项目，就自己动手实现一个，于是就有了 pyecharts。API 接口是从另外一个图表库 [pygal](https://github.com/Kozea/pygal) 中模仿的。
 
 
-# 安装  
-pyecharts 兼容 Python2 和 Python3。Version 0.1.2
+# 如何安装
+pyecharts 兼容 Python2 和 Python3。Current version 0.1.2
 ```python
 pip install pyecharts
 ```
 
-# 使用
+# 开始使用
 首先开始来绘制你的第一个图表
 ```python
 from pyecharts import Bar
@@ -112,7 +143,10 @@ legend：图例组件。图例组件展现了不同系列的标记(symbol)，颜
 * legend_orient -> str  
     图例列表的布局朝向，默认为'horizontal'，有'horizontal', 'vertical'可选
 * legend_pos -> str  
-    图例位置，默认为'center'，有'left', 'center', 'right'可选
+    图例组件离容器左侧的距离，默认为'center'，有'left', 'center', 'right'可选
+* legend_top -> str  
+    图例组件离容器上侧的距离，默认为'top'，有'top', 'center', 'bottom'可选
+    
 
 label：图形上的文本标签，可用于说明图形的一些数据信息，比如值，名称等。
 
@@ -891,6 +925,10 @@ add(name, data, angle_data=None, radius_data=None, type='line', symbol_size=4, s
     数据堆叠，同个类目轴上系列配置相同的 stack 值可以堆叠放置
 * axis_range -> list  
     坐标轴刻度范围。默认值为 [None, None]。
+* is_angleaxis_show -> bool  
+    是否显示极坐标系的角度轴，默认为 True
+* is_radiusaxis_show -> bool  
+    是否显示极坐标系的径向轴，默认为 True
 
 ```python
 from pyecharts import Polar
@@ -898,7 +936,8 @@ from pyecharts import Polar
 import random
 data = [(i, random.randint(1, 100)) for i in range(101)]
 polar = Polar("极坐标系-散点图示例")
-polar.add("", data, boundary_gap=False, type='scatter', is_splitline_show=False, is_axisline_show=True)
+polar.add("", data, boundary_gap=False, type='scatter', is_splitline_show=False,
+          area_color=None, is_axisline_show=True)
 polar.show_config()
 polar.render()
 ```
@@ -908,6 +947,10 @@ polar.render()
     是否显示分割线，默认为 True
 * is_axisline_show -> bool  
     是否显示坐标轴线，默认为 True
+* area_opacity -> float  
+    填充区域透明度
+* area_color -> str  
+    填充区域颜色
 
 **Tip：** 可配置 **lineStyle** 参数
 
@@ -1214,7 +1257,9 @@ bar.render()
 # 更多示例
 
 * 更多示例请参考 [example.md](https://github.com/chenjiandongx/pyecharts/blob/master/example.md)
+* 欢迎大家补充
 
-# 最后
+# 关于项目
 
 * 欢迎大家使用及提出意见
+* // Todo

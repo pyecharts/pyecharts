@@ -18,6 +18,7 @@ polar.render()
 ```
 ![example-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/example-0.png)
 
+
 用极坐标系画出一朵小花
 ```python
 import math
@@ -35,6 +36,26 @@ polar.render()
 ```
 ![example-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/example-1.png)
 
+
+还可以给小花涂上颜色
+```python
+import math
+from pyecharts import Polar
+
+data = []
+for i in range(361):
+    t = i / 180 * math.pi
+    r = math.sin(2 * t) * math.cos(2 * t)
+    data.append([r, i])
+polar = Polar("极坐标系示例", width=1200, height=600)
+polar.add("Color-Flower", data, start_angle=0, symbol=None, axis_range=[0, None],
+          area_color="#f71f24", area_opacity=0.6)
+polar.show_config()
+polar.render()
+```
+![example-1-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/example-1-1.png)
+
+
 用散点图画出一个爱心
 ```python
 from pyecharts import Scatter
@@ -45,6 +66,7 @@ scatter.add("Love", v1, v2)
 scatter.render()
 ```
 ![example-2](https://github.com/chenjiandongx/pyecharts/blob/master/images/example-2.png)
+
 
 用散点图画出一个火辣的 Bra
 ```python
@@ -57,6 +79,7 @@ scatter.render()
 ```
 ![example-3](https://github.com/chenjiandongx/pyecharts/blob/master/images/example-3.png)
 
+
 用散点图画出一个性感的 Bra
 ```python
 from pyecharts import Scatter
@@ -67,6 +90,7 @@ scatter.add("Cup", v1, v2, label_color=["#000"])
 scatter.render()
 ```
 ![example-4](https://github.com/chenjiandongx/pyecharts/blob/master/images/example-4.png)
+
 
 某地最低温和最高气温折线图
 ```python
@@ -81,6 +105,7 @@ line.render()
 ```
 ![example-5](https://github.com/chenjiandongx/pyecharts/blob/master/images/example-5.gif)
 
+
 饼图嵌套
 ```python
 from pyecharts import Pie
@@ -92,6 +117,7 @@ pie.show_config()
 pie.render()
 ```
 ![example-6](https://github.com/chenjiandongx/pyecharts/blob/master/images/example-6.png)
+
 
 饼图再嵌套
 ```python
@@ -109,6 +135,7 @@ pie.render()
 ```
 ![example-7](https://github.com/chenjiandongx/pyecharts/blob/master/images/example-7.gif)
 
+
 某地的降水量和蒸发量柱状图
 ```python
 from pyecharts import Bar
@@ -123,3 +150,55 @@ bar.show_config()
 bar.render()
 ```
 ![example-8](https://github.com/chenjiandongx/pyecharts/blob/master/images/example-8.png)
+
+
+各类电影中"好片"所占的比例
+```python
+from pyecharts import Pie
+
+pie = Pie('各类电影中"好片"所占的比例', "数据来着豆瓣", title_pos='center')
+pie.add("", ["剧情", ""], [25, 75], center=[10, 30], radius=[18, 24],
+        label_pos='center', is_label_show=True, label_text_color=None, )
+pie.add("", ["奇幻", ""], [24, 76], center=[30, 30], radius=[18, 24],
+        label_pos='center', is_label_show=True, label_text_color=None, legend_pos='left')
+pie.add("", ["爱情", ""], [14, 86], center=[50, 30], radius=[18, 24],
+        label_pos='center', is_label_show=True, label_text_color=None)
+pie.add("", ["惊悚", ""], [11, 89], center=[70, 30], radius=[18, 24],
+        label_pos='center', is_label_show=True, label_text_color=None)
+pie.add("", ["冒险", ""], [27, 73], center=[90, 30], radius=[18, 24],
+        label_pos='center', is_label_show=True, label_text_color=None)
+pie.add("", ["动作", ""], [15, 85], center=[10, 70], radius=[18, 24],
+        label_pos='center', is_label_show=True, label_text_color=None)
+pie.add("", ["喜剧", ""], [54, 46], center=[30, 70], radius=[18, 24],
+        label_pos='center', is_label_show=True, label_text_color=None)
+pie.add("", ["科幻", ""], [26, 74], center=[50, 70], radius=[18, 24],
+        label_pos='center', is_label_show=True, label_text_color=None)
+pie.add("", ["悬疑", ""], [25, 75], center=[70, 70], radius=[18, 24],
+        label_pos='center', is_label_show=True, label_text_color=None)
+pie.add("", ["犯罪", ""], [28, 72], center=[90, 70], radius=[18, 24],
+        label_pos='center', is_label_show=True, label_text_color=None, is_legend_show=True, legend_top="center")
+pie.show_config()
+pie.render()
+```
+![example-9](https://github.com/chenjiandongx/pyecharts/blob/master/images/example-9.png)
+
+
+用极坐标系画出一个蜗牛壳
+```python
+import math
+from pyecharts import Polar
+
+data = []
+for i in range(5):
+    for j in range(101):
+        theta = j / 100 * 360
+        alpha = i * 360 + theta
+        r = math.pow(math.e, 0.003 * alpha)
+        data.append([r, theta])
+polar = Polar("极坐标系示例")
+polar.add("", data, symbol_size=0, symbol='circle', start_angle=-25, is_radiusaxis_show=False,
+          area_color="#f3c5b3", area_opacity=0.5, is_angleaxis_show=False)
+polar.show_config()
+polar.render()
+```
+![example-10](https://github.com/chenjiandongx/pyecharts/blob/master/images/example-10.png)
