@@ -9,7 +9,7 @@
     * label：图形上的文本标签，可用于说明图形的一些数据信息，比如值，名称等。
     * lineStyle：带线图形的线的风格选项(Line、Polar、Radar、Graph、Parallel)
 * [图表详细](https://github.com/chenjiandongx/pyecharts/blob/master/README.md#图表详细)
-    * [ar（柱状图/条形图）
+    * Bar（柱状图/条形图）
     * EffectScatter（带有涟漪特效动画的散点图）
     * Funnel（漏斗图）
     * Gauge（仪表盘）
