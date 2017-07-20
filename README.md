@@ -36,7 +36,14 @@ pyecharts 是一个用于生成 Echarts 图表的类库。
 
 
 # 如何安装
-pyecharts 兼容 Python2 和 Python3。Current version 0.1.2
+pyecharts 兼容 Python2 和 Python3。当前版本为 0.1.3
+
+* Python2
+```
+pip install Image
+pip install pyecharts
+```
+* Python3
 ```python
 pip install pyecharts
 ```
