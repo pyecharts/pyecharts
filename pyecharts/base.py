@@ -75,6 +75,8 @@ class Base(object):
             boundary_gap=None,
             center=None,
             clockwise=None,
+            datazoom_type=None,
+            datazoom_range=None,
             edge_length=None,
             effect_brushtype=None,
             effect_period=None,
@@ -89,6 +91,7 @@ class Base(object):
             is_axisline_show=None,
             is_calculable=None,
             is_convert=None,
+            is_datazoom_show=None,
             is_emphasis=None,
             is_fill=None,
             is_focusnode=None,
@@ -216,6 +219,8 @@ class Base(object):
             self._option.update(visualMap=chart['visual_map'])
         self._option.get('legend').update(chart['legend'])
         self._option.update(color=chart['color'])
+        if kwargs.get('is_datazoom_show', None) is True:
+            self._option.update(dataZoom=chart['datazoom'])
 
     def render(self, path="render.html"):
         """ 渲染数据项，生成 html 文件
