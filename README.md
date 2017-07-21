@@ -1222,7 +1222,7 @@ wordcloud.render()
 
 
 # 用户自定义
-用户还可以自定义结合 Line/Bar 图表  
+用户还可以自定义结合 Line/Bar, Scatter/EffectScatter 图表  
 需使用 ```get_series()``` 和 ```custom()``` 方法  
 
 ```python
@@ -1238,6 +1238,7 @@ custom(series)
 
 先用 ```get_series()``` 获取数据，再使用 ```custom()``` 将图表结合在一起  
 
+Line + Bar
 ```python
 from pyecharts import Bar, Line
 
@@ -1254,6 +1255,27 @@ bar.show_config()
 bar.render()
 ```
 ![custom-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/custom-0.gif)
+
+Scatter + EffectScatter
+```python
+from pyecharts import Scatter, EffectScatter
+
+v1 = [10, 20, 30, 40, 50, 60]
+v2 = [30, 30, 30, 30, 30, 30]
+v3 = [50, 50, 50, 50, 50, 50]
+v4 = [10, 10, 10, 10, 10, 10]
+es = EffectScatter("Scatter - EffectScatter 示例")
+es.add("es", v1, v2)
+scatter = Scatter()
+scatter.add("scatter", v1, v3)
+es.custom(scatter.get_series())
+es_1 = EffectScatter()
+es_1.add("es_1", v1, v4, symbol='pin', effect_scale=5)
+es.custom(es_1.get_series())
+es.show_config()
+es.render()
+```
+![custom-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/custom-1.gif)
 
 # 更多示例
 
