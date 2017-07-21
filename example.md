@@ -153,6 +153,18 @@ bar.render()
 ![example-8](https://github.com/chenjiandongx/pyecharts/blob/master/images/example-8.png)
 
 
+加个 datazoom
+```python
+bar = Bar("柱状图示例")
+bar.add("蒸发量", attr, v1, mark_line=["average"], mark_point=["max", "min"])
+bar.add("降水量", attr, v2, mark_line=["average"], mark_point=["max", "min"],
+        is_datazoom_show=True, datazoom_range=[50, 80])
+bar.show_config()
+bar.render()
+```
+![example-8-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/example-8-1.gif)
+
+
 各类电影中"好片"所占的比例
 ```python
 from pyecharts import Pie
