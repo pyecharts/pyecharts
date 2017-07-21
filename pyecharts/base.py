@@ -233,9 +233,6 @@ class Base(object):
             if s.get('type') == "liquidFill":
                 temple = Tp._temple_lq
                 break
-            if s.get('type') in ("scatter", "pie", "bar", "line") and 'coordinateSystem' not in s:
-                temple = Tp.temple
-                break
         my_option = json.dumps(self._option, indent=4, ensure_ascii=False)
         __op = temple\
             .replace("myOption", my_option)\
