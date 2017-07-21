@@ -599,7 +599,7 @@ add(name, x_axis, y_axis, **kwargs)
     图例名称
 * x_axis -> list  
     x 坐标轴数据
-* y_axis -> [list],包含列表的列表 
+* y_axis -> [list],包含列表的列表   
     y 坐标轴数据。数据中，每一行是一个『数据项』，每一列属于一个『维度』。
     数据项具体为 [open, close, lowest, highest] （即：[开盘值, 收盘值, 最低值, 最高值]）
 ```python
