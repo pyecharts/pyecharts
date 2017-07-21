@@ -137,6 +137,17 @@ xyAxis：直角坐标系中的 x、y 轴(Line、Bar、Scatter、EffectScatter)
     设置成 0 强制显示所有标签  
     设置为 1，表示『隔一个标签显示一个标签』，如果值为 2，表示隔两个标签显示一个标签，以此推
 
+
+dataZoom：dataZoom 组件 用于区域缩放，从而能自由关注细节的数据信息，或者概览数据整体，或者去除离群点的影响。(Line、Bar、Scatter、EffectScatter)
+
+* is_datazoom_show -> bool  
+    是否使用区域缩放组件，默认为 False
+* datazoom_type -> str    
+    区域缩放组件类型，默认为'slider'，有'slider', 'inside'可选
+* datazoom_range -> list    
+    区域缩放的范围，默认为[50, 100]
+
+
 legend：图例组件。图例组件展现了不同系列的标记(symbol)，颜色和名字。可以通过点击图例控制哪些系列不显示。
 
 * is_legend_show -> bool  
@@ -172,7 +183,9 @@ label：图形上的文本标签，可用于说明图形的一些数据信息，
     * value：数据项值
     * percent：数据的百分比（主要用于饼图）
 
+
 lineStyle：带线图形的线的风格选项(Line、Polar、Radar、Graph、Parallel)
+
 * line_width -> int    
     线的宽度，默认为 1
 * line_opacity -> float    
@@ -211,6 +224,7 @@ bar.add("商家B", attr, v2, is_stack=True)
 bar.render()
 ```
 ![bar-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/bar-0.gif)  
+**Tip：** 全局配置项要在最后一个 ```add()``` 上设置，否侧设置会被冲刷掉。
 
 ```python
 from pyecharts import Bar
@@ -236,6 +250,32 @@ bar.add("商家B", attr, v2, is_convert=True)
 bar.render()
 ```
 ![bar-2](https://github.com/chenjiandongx/pyecharts/blob/master/images/bar-2.png)
+
+dataZoom 效果，'slider' 类型
+```python
+import random
+
+attr = ["{}天".format(i) for i in range(30)]
+v1 = [random.randint(1, 30) for _ in range(30)]
+bar = Bar("Bar - datazoom - slider 示例")
+bar.add("", attr, v1, is_label_show=True, is_datazoom_show=True)
+bar.show_config()
+bar.render()
+```
+![bar-4](https://github.com/chenjiandongx/pyecharts/blob/master/images/bar-4.gif)
+
+'inside' 类型
+```python
+attr = ["{}天".format(i) for i in range(30)]
+v1 = [random.randint(1, 30) for _ in range(30)]
+bar = Bar("Bar - datazoom - inside 示例")
+bar.add("", attr, v1, is_datazoom_show=True, datazoom_type='inside', datazoom_range=[10, 25])
+bar.show_config()
+bar.render()
+```
+![bar-5](https://github.com/chenjiandongx/pyecharts/blob/master/images/bar-5.gif)  
+
+**Tip：** datazoom 适合所有平面直角坐标系图形，也就是(Line、Bar、Scatter、EffectScatter)
 
 
 ## EffectScatter（带有涟漪特效动画的散点图）

@@ -32,6 +32,33 @@ def test_bar():
     v2 = [2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3]
     bar = Bar("柱状图示例")
     bar.add("蒸发量", attr, v1, mark_line=["average"], mark_point=["max", "min"])
-    bar.add("降水量", attr, v2, mark_line=["average"], mark_point=["max", "min"])
+    bar.add("降水量", attr, v2, mark_line=["average"], mark_point=["max", "min"],
+            is_datazoom_show=True, datazoom_range=[20, 60], datazoom_type='inside')
+    bar.show_config()
+    bar.render()
+
+    # bar_3_1
+    bar = Bar("柱状图示例")
+    bar.add("蒸发量", attr, v1, mark_line=["average"], mark_point=["max", "min"])
+    bar.add("降水量", attr, v2, mark_line=["average"], mark_point=["max", "min"],
+            is_datazoom_show=True, datazoom_range=[50, 80])
+    bar.show_config()
+    bar.render()
+
+    # bar_4
+    import random
+
+    attr = ["{}天".format(i) for i in range(30)]
+    v1 = [random.randint(1, 30) for _ in range(30)]
+    bar = Bar("Bar - datazoom - slider 示例")
+    bar.add("", attr, v1, is_label_show=True, is_datazoom_show=True)
+    bar.show_config()
+    bar.render()
+
+    # bar_5
+    attr = ["{}天".format(i) for i in range(30)]
+    v1 = [random.randint(1, 30) for _ in range(30)]
+    bar = Bar("Bar - datazoom - inside 示例")
+    bar.add("", attr, v1, is_datazoom_show=True, datazoom_type='inside', datazoom_range=[10, 25])
     bar.show_config()
     bar.render()
