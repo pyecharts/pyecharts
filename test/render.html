@@ -5,279 +5,252 @@
 <head>
     <meta charset="utf-8">
     <title>ECharts</title>
-    <script src="http://oog4yfyu0.bkt.clouddn.com/echarts.min.js"></script>
-    <script type="text/javascript " src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
-    <script type="text/javascript " src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/wordcloud.js"></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/anhui.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/aomen.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/beijing.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/chongqing.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/fujian.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/gansu.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/guangdong.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/guangxi.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/guizhou.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/hainan.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/hebei.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/heilongjiang.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/henan.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/hubei.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/hunan.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/jiangsu.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/jiangxi.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/jilin.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/liaoning.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/neimenggu.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/ningxia.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/qinghai.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/shangdong.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/shanghai.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/shanxi.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/sichuan.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/taiwan.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/tianjin.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/xianggang.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/xinjiang.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/xizang.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/yunnan.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/zhejiang.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/guangdong.js "></script>
-    <script type="text/javascript " src="http://api.map.baidu.com/api?v=2.0&ak=ZUONbpqGBsYGXNIYHicvbAbM "></script>
-    <script type="text/javascript " src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js "></script>
+    <script src='https://cdn.bootcss.com/echarts/3.2.2/echarts.simple.js'></script>
+    <script type="text/javascript" src="http://data-visual.cn/datav/src/js/echarts/extension/echarts-wordcloud.min.js"></script>
 </head>
 
 <body>
-    <div id="main" style="width: 800px;height:400px;"></div>
-    <script type="text/javascript">
+    <style>
+        html,
+        body,
+        #main {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+        }
+    </style>
+    <div id="main" style="width: 1300px;height:620px; ">
+    </div>
+    <script type="text/javascript ">
         var myChart = echarts.init(document.getElementById('main'));
         var option = {
+    "legend": {
+        "data": []
+    },
+    "tooltip": {},
+    "title": {
+        "left": "auto",
+        "textStyle": {
+            "color": "#000",
+            "fontSize": 18
+        },
+        "subtextStyle": {
+            "color": "#aaa",
+            "fontSize": 12
+        },
+        "text": "",
+        "subtext": ""
+    },
+    "backgroundColor": "#fff",
+    "series": [
+        {
+            "rotationStep": 45,
+            "type": "wordCloud",
+            "shape": "diamond",
+            "girdSize": 20,
+            "data": [
+                {
+                    "textStyle": {
+                        "normal": {
+                            "color": "rgb(135,47,10)"
+                        }
+                    },
+                    "value": 10000,
+                    "name": "Sam S Club"
+                },
+                {
+                    "textStyle": {
+                        "normal": {
+                            "color": "rgb(65,131,56)"
+                        }
+                    },
+                    "value": 6181,
+                    "name": "Macys"
+                },
+                {
+                    "textStyle": {
+                        "normal": {
+                            "color": "rgb(92,24,69)"
+                        }
+                    },
+                    "value": 4386,
+                    "name": "Amy Schumer"
+                },
+                {
+                    "textStyle": {
+                        "normal": {
+                            "color": "rgb(100,103,50)"
+                        }
+                    },
+                    "value": 4055,
+                    "name": "Jurassic World"
+                },
+                {
+                    "textStyle": {
+                        "normal": {
+                            "color": "rgb(46,2,53)"
+                        }
+                    },
+                    "value": 2467,
+                    "name": "Charter Communications"
+                },
+                {
+                    "textStyle": {
+                        "normal": {
+                            "color": "rgb(122,38,82)"
+                        }
+                    },
+                    "value": 2244,
+                    "name": "Chick Fil A"
+                },
+                {
+                    "textStyle": {
+                        "normal": {
+                            "color": "rgb(126,143,6)"
+                        }
+                    },
+                    "value": 1898,
+                    "name": "Planet Fitness"
+                },
+                {
+                    "textStyle": {
+                        "normal": {
+                            "color": "rgb(107,31,148)"
+                        }
+                    },
+                    "value": 1484,
+                    "name": "Pitch Perfect"
+                },
+                {
+                    "textStyle": {
+                        "normal": {
+                            "color": "rgb(115,1,148)"
+                        }
+                    },
+                    "value": 1112,
+                    "name": "Express"
+                },
+                {
+                    "textStyle": {
+                        "normal": {
+                            "color": "rgb(134,69,129)"
+                        }
+                    },
+                    "value": 965,
+                    "name": "Home"
+                },
+                {
+                    "textStyle": {
+                        "normal": {
+                            "color": "rgb(142,105,43)"
+                        }
+                    },
+                    "value": 847,
+                    "name": "Johnny Depp"
+                },
+                {
+                    "textStyle": {
+                        "normal": {
+                            "color": "rgb(4,141,1)"
+                        }
+                    },
+                    "value": 582,
+                    "name": "Lena Dunham"
+                },
+                {
+                    "textStyle": {
+                        "normal": {
+                            "color": "rgb(57,43,125)"
+                        }
+                    },
+                    "value": 555,
+                    "name": "Lewis Hamilton"
+                },
+                {
+                    "textStyle": {
+                        "normal": {
+                            "color": "rgb(121,67,67)"
+                        }
+                    },
+                    "value": 550,
+                    "name": "KXAN"
+                },
+                {
+                    "textStyle": {
+                        "normal": {
+                            "color": "rgb(74,151,122)"
+                        }
+                    },
+                    "value": 462,
+                    "name": "Mary Ellen Mark"
+                },
+                {
+                    "textStyle": {
+                        "normal": {
+                            "color": "rgb(123,88,66)"
+                        }
+                    },
+                    "value": 366,
+                    "name": "Farrah Abraham"
+                },
+                {
+                    "textStyle": {
+                        "normal": {
+                            "color": "rgb(77,86,11)"
+                        }
+                    },
+                    "value": 360,
+                    "name": "Rita Ora"
+                },
+                {
+                    "textStyle": {
+                        "normal": {
+                            "color": "rgb(57,116,129)"
+                        }
+                    },
+                    "value": 282,
+                    "name": "Serena Williams"
+                },
+                {
+                    "textStyle": {
+                        "normal": {
+                            "color": "rgb(27,103,116)"
+                        }
+                    },
+                    "value": 273,
+                    "name": "NCAA baseball tournament"
+                },
+                {
+                    "textStyle": {
+                        "normal": {
+                            "color": "rgb(44,17,134)"
+                        }
+                    },
+                    "value": 265,
+                    "name": "Point Break"
+                }
+            ],
+            "rotationRange": [
+                0,
+                0
+            ],
+            "sizeRange": [
+                30,
+                100
+            ],
+            "name": ""
+        }
+    ],
     "toolbox": {
         "top": "center",
-        "left": "right",
-        "show": true,
+        "orient": "vertical",
         "feature": {
             "saveAsImage": {
                 "show": true
             }
         },
-        "orient": "vertical"
-    },
-    "yAxis": {
-        "name": "",
-        "type": "value",
-        "nameLocation": "middle",
-        "axisLabel": {
-            "formatter": "{value} "
-        },
-        "nameGap": 25,
-        "nameTextStyle": {
-            "fontSize": 14
-        }
-    },
-    "color": [
-        "#c23531",
-        "#2f4554",
-        "#61a0a8",
-        "#d48265",
-        "#749f83",
-        "#ca8622",
-        "#bda29a",
-        "#6e7074",
-        "#546570",
-        "#c4ccd3"
-    ],
-    "backgroundColor": "#fff",
-    "tooltip": {},
-    "legend": {
-        "show": true,
-        "data": [
-            "es",
-            "scatter",
-            "es_1"
-        ],
-        "top": "top",
-        "selectedMode": true,
-        "left": "center",
-        "orient": "horizontal"
-    },
-    "title": {
-        "subtextStyle": {
-            "color": "#aaa",
-            "fontSize": 12
-        },
-        "text": "Scatter - EffectScatter 示例",
-        "textStyle": {
-            "color": "#000",
-            "fontSize": 18
-        },
-        "left": "auto",
-        "subtext": ""
-    },
-    "series": [
-        {
-            "name": "es",
-            "symbol": "circle",
-            "label": {
-                "normal": {
-                    "position": "top",
-                    "formatter": null,
-                    "show": false,
-                    "textStyle": {
-                        "color": "#000",
-                        "fontSize": 12
-                    }
-                },
-                "emphasis": {
-                    "show": true
-                }
-            },
-            "showEffectOn": "render",
-            "type": "effectScatter",
-            "symbolSize": 10,
-            "data": [
-                [
-                    10,
-                    30
-                ],
-                [
-                    20,
-                    30
-                ],
-                [
-                    30,
-                    30
-                ],
-                [
-                    40,
-                    30
-                ],
-                [
-                    50,
-                    30
-                ],
-                [
-                    60,
-                    30
-                ]
-            ],
-            "rippleEffect": {
-                "brushType": "stroke",
-                "period": 4,
-                "scale": 2.5
-            }
-        },
-        {
-            "name": "scatter",
-            "symbol": "circle",
-            "label": {
-                "normal": {
-                    "position": "top",
-                    "formatter": null,
-                    "show": false,
-                    "textStyle": {
-                        "color": "#000",
-                        "fontSize": 12
-                    }
-                },
-                "emphasis": {
-                    "show": true
-                }
-            },
-            "data": [
-                [
-                    10,
-                    50
-                ],
-                [
-                    20,
-                    50
-                ],
-                [
-                    30,
-                    50
-                ],
-                [
-                    40,
-                    50
-                ],
-                [
-                    50,
-                    50
-                ],
-                [
-                    60,
-                    50
-                ]
-            ],
-            "type": "scatter",
-            "symbolSize": 10
-        },
-        {
-            "name": "es_1",
-            "symbol": "pin",
-            "label": {
-                "normal": {
-                    "position": "top",
-                    "formatter": null,
-                    "show": false,
-                    "textStyle": {
-                        "color": "#000",
-                        "fontSize": 12
-                    }
-                },
-                "emphasis": {
-                    "show": true
-                }
-            },
-            "showEffectOn": "render",
-            "type": "effectScatter",
-            "symbolSize": 10,
-            "data": [
-                [
-                    10,
-                    10
-                ],
-                [
-                    20,
-                    10
-                ],
-                [
-                    30,
-                    10
-                ],
-                [
-                    40,
-                    10
-                ],
-                [
-                    50,
-                    10
-                ],
-                [
-                    60,
-                    10
-                ]
-            ],
-            "rippleEffect": {
-                "brushType": "stroke",
-                "period": 4,
-                "scale": 5
-            }
-        }
-    ],
-    "xAxis": {
-        "name": "",
-        "data": null,
-        "type": "value",
-        "nameLocation": "middle",
-        "axisLabel": {
-            "interval": "auto"
-        },
-        "nameGap": 25,
-        "nameTextStyle": {
-            "fontSize": 14
-        }
+        "left": "right",
+        "show": true
     }
 };
         myChart.setOption(option);

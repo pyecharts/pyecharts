@@ -436,6 +436,37 @@ def effect(effect_brushtype="stroke",
     return _effect
 
 
+@collectfuncs
+def datazoom(is_datazoom_show=False,
+             datazoom_type='slider',
+             datazoom_range=None,
+             **kwargs):
+    """
+
+    :param is_datazoom_show:
+        是否使用区域缩放组件
+    :param datazoom_type:
+        区域缩放组件类型，默认为'slider'，有'slider', 'inside'可选
+    :param datazoom_range:
+        区域缩放的范围
+    :param kwargs:
+    :return:
+    """
+    _min, _max = 50, 100
+    if datazoom_range:
+        if len(datazoom_range) == 2:
+            _min, _max = datazoom_range
+    if datazoom_type not in ("slider", "inside"):
+        datazoom_type = "slider"
+    _datazoom = {
+        "show": is_datazoom_show,
+        "type": datazoom_type,
+        "start": _min,
+        "end": _max,
+    }
+    return [_datazoom]
+
+
 def get_all_options(**kwargs):
     """ 返回所有配置项
 
