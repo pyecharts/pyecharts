@@ -4,7 +4,7 @@
 * [如何安装](https://github.com/chenjiandongx/pyecharts/blob/master/README.md#如何安装)
 * [开始使用](https://github.com/chenjiandongx/pyecharts/blob/master/README.md#开始使用)
 * [通用配置项](https://github.com/chenjiandongx/pyecharts/blob/master/README.md#通用配置项)
-    * xyAxis：直角坐标系中的 x、y 轴(Line、Bar、Scatter、EffectScatter)
+    * xyAxis：直角坐标系中的 x、y 轴(Line、Bar、Scatter、EffectScatter、Kline)
     * dataZoom：dataZoom 组件 用于区域缩放，从而能自由关注细节的数据信息，或者概览数据整体，或者去除离群点的影响。(Line、Bar、Scatter、EffectScatter)
     * legend：图例组件。图例组件展现了不同系列的标记(symbol)，颜色和名字。可以通过点击图例控制哪些系列不显示。
     * label：图形上的文本标签，可用于说明图形的一些数据信息，比如值，名称等。
@@ -1313,7 +1313,7 @@ wordcloud.render()
 
 
 # 用户自定义
-用户还可以自定义结合 Line/Bar, Scatter/EffectScatter 图表  
+用户还可以自定义结合 Line/Bar/Kline, Scatter/EffectScatter 图表  
 需使用 ```get_series()``` 和 ```custom()``` 方法  
 
 ```python
