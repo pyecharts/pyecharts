@@ -253,22 +253,51 @@ def xy_axis(type=None,
     return _xAxis, _yAxis
 
 
-def _mark(data):
+def _mark(data,
+          mark_point_symbol='pin',
+          mark_point_symbolsize=50,
+          mark_point_textcolor='#fff',
+          _is_markline=False,
+          **kwargs):
     """
 
     :param data:
         标记数据项，有'min', 'max', 'average'可选
+    :param mark_point_symbol:
+        标记点图形
+    :param mark_point_symbolsize:
+        标记点图形大小
+    :param mark_point_textcolor:
+        标记点字体颜色
+    :param _is_markline:
+        判断是否为 markline
     :return:
     """
     mark = {"data": []}
     if data:
         for d in list(data):
+            _type, _name = "", ""
             if "max" in d:
-                mark.get("data").append({"type": "max", "name": "最大值"})
+                _type, _name = "max", "最大值"
             elif "min" in d:
-                mark.get("data").append({"type": "min", "name": "最小值"})
+                _type, _name = "min", "最小值"
             elif "average" in d:
-                mark.get("data").append({"type": "average", "name": "平均值"})
+                _type, _name = "average", "平均値"
+            if _is_markline:
+                _m = {
+                    "type": _type,
+                    "name": _name,
+                }
+            else:
+                _m = {
+                    "type": _type,
+                    "name": _name,
+                    "symbol": mark_point_symbol,
+                    "symbolSize": mark_point_symbolsize,
+                    "label": {"normal": {"textStyle": {"color": mark_point_textcolor}}}
+                }
+            if type:
+                mark.get("data").append(_m)
     return mark
 
 
@@ -281,7 +310,7 @@ def mark_point(mark_point=None, **kwargs):
     :param kwargs:
     :return:
     """
-    return _mark(mark_point)
+    return _mark(mark_point, **kwargs)
 
 
 @collectfuncs
@@ -293,8 +322,7 @@ def mark_line(mark_line=None, **kwargs):
     :param kwargs:
     :return:
     """
-
-    return _mark(mark_line)
+    return _mark(mark_line, _is_markline=True)
 
 
 @collectfuncs
@@ -369,7 +397,6 @@ def visual_map(visual_range=None,
     if visual_range_color:
         if len(visual_range_color) >= 2:
             inrange = visual_range_color
-
     _visual_map = {
         "type": "continuous",
         "min": _min,

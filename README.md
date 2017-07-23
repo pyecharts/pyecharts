@@ -5,7 +5,7 @@
 * [开始使用](https://github.com/chenjiandongx/pyecharts/blob/master/README.md#开始使用)
 * [通用配置项](https://github.com/chenjiandongx/pyecharts/blob/master/README.md#通用配置项)
     * xyAxis：直角坐标系中的 x、y 轴(Line、Bar、Scatter、EffectScatter、Kline)
-    * dataZoom：dataZoom 组件 用于区域缩放，从而能自由关注细节的数据信息，或者概览数据整体，或者去除离群点的影响。(Line、Bar、Scatter、EffectScatter)
+    * dataZoom：dataZoom 组件 用于区域缩放，从而能自由关注细节的数据信息，或者概览数据整体，或者去除离群点的影响。(Line、Bar、Scatter、EffectScatter、Kline)
     * legend：图例组件。图例组件展现了不同系列的标记(symbol)，颜色和名字。可以通过点击图例控制哪些系列不显示。
     * label：图形上的文本标签，可用于说明图形的一些数据信息，比如值，名称等。
     * lineStyle：带线图形的线的风格选项(Line、Polar、Radar、Graph、Parallel)
@@ -242,6 +242,12 @@ bar.render()
     标记点，有'min', 'max', 'average'可选
 * mark_line  -> list  
     标记线，有'min', 'max', 'average'可选
+* mark_point_symbol -> str  
+    标记点图形，，默认为'pin'，有'circle', 'rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow'可选
+* mark_point_symbolsize -> int  
+    标记点图形大小，默认为 50
+* mark_point_textcolor -> str  
+    标记点字体颜色，默认为'#fff'
 
 ```python
 from pyecharts import Bar
@@ -680,6 +686,24 @@ line.render()
     标记点，有'min', 'max', 'average'可选
 * mark_line  -> list  
     标记线，有'min', 'max', 'average'可选
+* mark_point_symbol -> str  
+    标记点图形，，默认为'pin'，有'circle', 'rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow'可选
+* mark_point_symbolsize -> int  
+    标记点图形大小，默认为 50
+* mark_point_textcolor -> str  
+    标记点字体颜色，默认为'#fff'
+
+标记点其他配置
+```python
+line = Line("折线图示例")
+line.add("商家A", attr, v1, mark_point=["average", "max", "min"],
+         mark_point_symbol='diamond', mark_point_textcolor='#40ff27')
+line.add("商家B", attr, v2, mark_point=["average", "max", "min"],
+         mark_point_symbol='arrow', mark_point_symbolsize=40)
+line.show_config()
+line.render()
+```
+![line-0-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/line-0-1.png)
 
 ```python
 line = Line("折线图-数据堆叠示例")
