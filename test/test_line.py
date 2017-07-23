@@ -15,6 +15,15 @@ def test_line():
     line.show_config()
     line.render()
 
+    # line_0_1
+    line = Line("折线图示例")
+    line.add("商家A", attr, v1, mark_point=["average", "max", "min"],
+             mark_point_symbol='diamond', mark_point_textcolor='#40ff27')
+    line.add("商家B", attr, v2, mark_point=["average", "max", "min"],
+             mark_point_symbol='arrow', mark_point_symbolsize=40)
+    line.show_config()
+    line.render()
+
     # line_1
     line = Line("折线图-数据堆叠示例")
     line.add("商家A", attr, v1, is_stack=True, is_label_show=True)
