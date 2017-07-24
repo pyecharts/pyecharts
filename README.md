@@ -1,4 +1,4 @@
-# 目录
+# 阅读指南
 
 * [项目概况](https://github.com/chenjiandongx/pyecharts/blob/master/README.md#项目概况)
 * [如何安装](https://github.com/chenjiandongx/pyecharts/blob/master/README.md#如何安装)
@@ -16,6 +16,7 @@
     * Gauge（仪表盘）
     * Geo（地理坐标系）
     * Graph（关系图）
+    * HeatMap（热力图）
     * Kline（K线图）
     * Line（折线/面积图）
     * Liquid（水球图）
@@ -32,7 +33,7 @@
 
 
 # 项目概况  
-pyecharts 是一个用于生成 Echarts 图表的类库。 
+pyecharts 是一个用于生成 Echarts 图表的类库。实际上就是 Echarts 与 Python 的对接。
 
 [Echarts](https://github.com/ecomfe/echarts) 是百度开源的一个数据可视化 JS 库。看了官方的介绍文档，觉得很不错，就想看看有没有人实现了 Python 库可以直接调用的。Github 上找到了一个 [echarts-python](https://github.com/yufeiminds/echarts-python) 不过这个项目已经很久没更新且也没什么介绍文档。借鉴了该项目，就自己动手实现一个，于是就有了 pyecharts。API 接口是从另外一个图表库 [pygal](https://github.com/Kozea/pygal) 中模仿的。
 
@@ -185,6 +186,8 @@ label：图形上的文本标签，可用于说明图形的一些数据信息，
     * value：数据项值
     * percent：数据的百分比（主要用于饼图）
 
+**Tip：** is_random 可随机打乱图例颜色列表，算是切换风格？
+
 
 lineStyle：带线图形的线的风格选项(Line、Polar、Radar、Graph、Parallel)
 
@@ -201,6 +204,8 @@ lineStyle：带线图形的线的风格选项(Line、Polar、Radar、Graph、Par
 # 图表详细  
 
 ## Bar（柱状图/条形图）
+> 柱状/条形图，通过柱形的高度/条形的宽度来表现数据的大小。
+
 Bar.add() 方法签名
 ```python
 add(name, x_axis, y_axis, is_stack=False, **kwargs)
@@ -287,6 +292,8 @@ bar.render()
 
 
 ## EffectScatter（带有涟漪特效动画的散点图）
+> 利用动画特效可以将某些想要突出的数据进行视觉突出。
+
 EffectScatter.add() 方法签名
 ```python
 add(name, x_value, y_value, symbol_size=10, **kwargs)
@@ -402,6 +409,8 @@ gauge.render()
 
 
 ## Geo（地理坐标系）
+> 地理坐标系组件用于地图的绘制，支持在地理坐标系上绘制散点图，线集。
+
 Geo.add() 方法签名
 ```python
 add(name, attr, value, type="scatter", maptype='china', symbol_size=12, border_color="#111",
@@ -414,7 +423,7 @@ add(name, attr, value, type="scatter", maptype='china', symbol_size=12, border_c
 * value -> list   
     属性所对应的值
 * type -> str  
-    图例类型，有'scatter', 'effectscatter'可选。默认为 'scatter'
+    图例类型，有'scatter', 'effectscatter', 'heatmap'可选。默认为 'scatter'
 * maptype -> str  
     地图类型，目前只有 'china' 可选
 * symbol_size -> int  
@@ -426,6 +435,7 @@ add(name, attr, value, type="scatter", maptype='china', symbol_size=12, border_c
 * geo_emphasis_color -> str  
     高亮状态下地图区域的颜色。默认为 '#2a333d'
 
+Scatter 类型
 ```python
 from pyecharts import Geo
 
@@ -472,7 +482,7 @@ geo.render()
 ```
 ![geo-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/geo-0.gif)
 
-visualmap：是视觉映射组件，用于进行『视觉编码』，也就是将数据映射到视觉元素（视觉通道）
+visualMap：是视觉映射组件，用于进行『视觉编码』，也就是将数据映射到视觉元素（视觉通道）
 * is_visualmap -> bool  
     是否使用视觉映射组件
 * visual_range -> list  
@@ -483,9 +493,23 @@ visualmap：是视觉映射组件，用于进行『视觉编码』，也就是�
     两端文本。默认为 ['low', 'hight']
 * visual_range_color -> list  
     过渡颜色。默认为 ['#50a3ba', '#eac763', '#d94e5d']
+* visual_orient -> str  
+    visualMap 组件条的方向，默认为'vertical'，有'vertical', 'horizontal'可选。
 * is_calculable -> bool  
     是否显示拖拽用的手柄（手柄能拖拽调整选中范围）。默认为 True
 
+HeatMap 类型
+```python
+geo = Geo("全国主要城市空气质量", "data from pm2.5", title_color="#fff", title_pos="center", width=1200, height=600,
+          background_color='#404a59')
+attr, value = geo.cast(data)
+geo.add("", attr, value, type="heatmap", is_visualmap=True, visual_range=[0, 300], visual_text_color='#fff')
+geo.show_config()
+geo.render()
+```
+![geo-0-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/geo-0-1.gif)
+
+EffectScatter 类型
 ```python
 from pyecharts import Geo
 
@@ -501,6 +525,8 @@ geo.render()
 
 
 ## Graph（关系图）
+> 用于展现节点以及节点之间的关系数据。
+
 Graph.add() 方法签名
 ```python
 add(name, nodes, links, categories=None, is_focusnode=True, is_roam=True, is_rotatelabel=False,
@@ -595,12 +621,45 @@ graph.render()
 **Tip：** 可配置 **lineStyle** 参数
 
 
+# HeatMap（热力图）
+> 热力图主要通过颜色去表现数值的大小，必须要配合 visualMap 组件使用。直角坐标系上必须要使用两个类目轴。
+
+HeatMap.add() 方法签名
+```python
+add(name, x_axis, y_axis, data, **kwargs)
+```
+* name -> str  
+    图例名称
+* x_axis -> str  
+    x 坐标轴数据。需为类目轴，也就是不能是数值。
+* y_axis -> str  
+    y 坐标轴数据。需为类目轴，也就是不能是数值。
+* data -> [list],包含列表的列表    
+    数据项，数据中，每一行是一个『数据项』，每一列属于一个『维度』
+```python
+import random
+x_axis = ["12a", "1a", "2a", "3a", "4a", "5a", "6a", "7a", "8a", "9a", "10a", "11a",
+          "12p", "1p", "2p", "3p", "4p", "5p", "6p", "7p", "8p", "9p", "10p", "11p"]
+y_aixs = ["Saturday", "Friday", "Thursday", "Wednesday", "Tuesday", "Monday", "Sunday"]
+data = [[i, j, random.randint(0, 50)] for i in range(24) for j in range(7)]
+heatmap = HeatMap()
+heatmap.add("热力图直角坐标系", x_axis, y_aixs, data, is_visualmap=True,
+            visual_text_color="#000", visual_orient='horizontal')
+heatmap.show_config()
+heatmap.render()
+```
+![heatmap-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/heatmap-0.gif)
+
+**Tip：** 热力图必须配合 VisualMap 使用才有效果。
+
+
 ## Kline（K线图）
+> 红涨蓝跌
+
 Kline.add() 方法签名
 ```python
 add(name, x_axis, y_axis, **kwargs)
 ```
-**Tip：** 红涨蓝跌
 * name -> str  
     图例名称
 * x_axis -> list  
@@ -645,6 +704,8 @@ kline.render()
 
 
 ## Line（折线/面积图）
+> 折线图是用折线将各个数据点标志连接起来的图表，用于展现数据的变化趋势。
+
 Line.add() 方法签名
 ```python
 add(name, x_axis, y_axis, is_symbol_show=True, is_smooth=False, is_stack=False,
@@ -740,6 +801,8 @@ line.render()
 
 
 ## Liquid（水球图）
+> 主要用来突出数据的百分比。
+
 Liquid.add() 方法签名
 ```python
 add(name, data, shape='circle', liquid_color=None, is_liquid_animation=True,
@@ -789,6 +852,8 @@ liquid.render()
 ![liquid-2](https://github.com/chenjiandongx/pyecharts/blob/master/images/liquid-2.png)
 
 ## Map（地图）
+> 地图主要用于地理区域数据的可视化。
+
 Map.add() 方法签名
 ```python
 add(name, attr, value, is_roam=True, maptype='china', **kwargs)
@@ -830,7 +895,7 @@ map.render()
 ```
 ![map-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/map-1.gif)
 
-**Tip：** 可结合 visualmap 组件进行设置
+**Tip：** 可结合 visualMap 组件进行设置
 
 ```python
 from pyecharts import Map
@@ -846,6 +911,8 @@ map.render()
 
 
 ## Parallel（平行坐标系）
+> 平行坐标系是一种常用的可视化高维数据的图表。
+
 Parallel.add() 方法签名
 ```python
 add(name, data, **kwargs)
@@ -947,6 +1014,8 @@ parallel.render()
 
 
 ## Pie（饼图）
+> 饼图主要用于表现不同类目的数据在总和中的占比。每个的弧度表示数据数量的比例。
+
 Pie.add() 方法签名
 ```python
 add(name, attr, value, radius=None, center=None, rosetype=None, **kwargs)
@@ -1010,6 +1079,8 @@ pie.render()
 
 
 ## Polar（极坐标系）
+> 可以用于散点图和折线图。
+
 Polar.add() 方法签名
 ```python
 add(name, data, angle_data=None, radius_data=None, type='line', symbol_size=4, start_angle=90,
@@ -1124,6 +1195,8 @@ polar.render()
 
 
 ## Radar（雷达图）
+> 雷达图主要用于表现多变量的数据。
+
 Radar.add() 方法签名
 ```python
 add(name, value, item_color=None, **kwargs)
@@ -1234,6 +1307,8 @@ radar.render()
 
 
 ## Scatter（散点图）
+> 直角坐标系上的散点图可以用来展现数据的 x，y 之间的关系，如果数据项有多个维度，可以用颜色来表现，利用 geo 组件。
+
 Scatter.add() 方法签名
 ```python
 add(name, x_value, y_value, symbol_size=10, **kwargs)

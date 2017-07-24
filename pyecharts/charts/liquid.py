@@ -6,7 +6,7 @@ from pyecharts.base import Base
 class Liquid(Base):
     """
     <<< 水球图 >>>
-    主要用来突出数据的百分比
+    主要用来突出数据的百分比。
     """
     def __init__(self, title="", subtitle="", **kwargs):
         super(Liquid, self).__init__(title, subtitle, **kwargs)

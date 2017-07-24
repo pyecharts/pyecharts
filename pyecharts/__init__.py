@@ -7,6 +7,7 @@ from pyecharts.charts.funnel import Funnel
 from pyecharts.charts.gauge import Gauge
 from pyecharts.charts.geo import Geo
 from pyecharts.charts.graph import Graph
+from pyecharts.charts.heatmap import HeatMap
 from pyecharts.charts.kline import Kline
 from pyecharts.charts.line import Line
 from pyecharts.charts.liquid import Liquid
