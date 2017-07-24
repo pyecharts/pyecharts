@@ -39,7 +39,7 @@ pyecharts 是一个用于生成 Echarts 图表的类库。实际上就是 Echart
 
 
 # 如何安装
-pyecharts 兼容 Python2 和 Python3。当前版本为 0.1.6
+pyecharts 兼容 Python2 和 Python3。当前版本为 0.1.6，关于版本信息请查看 [changelog.md](https://github.com/chenjiandongx/pyecharts/blob/master/changelog.md)
 
 ```python
 pip install pyecharts
@@ -178,7 +178,7 @@ label：图形上的文本标签，可用于说明图形的一些数据信息，
 * is_random -> bool  
     是否随机排列颜色列表，默认为 False
 * label_color -> list  
-    自定义标签颜色。
+    自定义标签颜色。全局颜色列表，所有图表的图例颜色均在这里修改。如 Bar 的柱状颜色，Line 的线条颜色等等。
 * formatter -> list  
     标签内容格式器，有'series', 'name', 'value', 'percent'可选。如 ["name", "value"]
     * series：图例名称
@@ -288,8 +288,8 @@ bar.render()
 ```
 ![bar-5](https://github.com/chenjiandongx/pyecharts/blob/master/images/bar-5.gif)  
 
-**Tip：** datazoom 适合所有平面直角坐标系图形，也就是(Line、Bar、Scatter、EffectScatter、Kline)
-
+**Tip：** datazoom 适合所有平面直角坐标系图形，也就是(Line、Bar、Scatter、EffectScatter、Kline)  
+**Tip：** 可以通过 label_color 来设置柱状的颜色，如 ['#eee', '#000']，所有的图表类型的图例颜色都可通过 label_color 来修改。
 
 ## EffectScatter（带有涟漪特效动画的散点图）
 > 利用动画特效可以将某些想要突出的数据进行视觉突出。
@@ -800,6 +800,7 @@ line.render()
     填充区域颜色
 
 **Tip：** 可配置 **lineStyle** 参数
+**Tip：** 可以通过 label_color 来设置线条颜色，如 ['#eee', '#000']，所有的图表类型的图例颜色都可通过 label_color 来修改。
 
 
 ## Liquid（水球图）
