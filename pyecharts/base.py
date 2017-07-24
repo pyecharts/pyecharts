@@ -6,6 +6,9 @@ import json
 from pprint import pprint
 from pyecharts.option import get_all_options
 
+from jinja2 import Template
+import datetime
+
 
 class Base(object):
 
@@ -228,6 +231,35 @@ class Base(object):
         self._option.update(color=chart['color'])
         if kwargs.get('is_datazoom_show', None) is True:
             self._option.update(dataZoom=chart['datazoom'])
+
+    def render2(self):
+        # 这里必须生成唯一的chart div id ，否则无法在jupyter notebook 里显示多个图表
+        # todo 最好在这里能直接调用 notebook 核心显示方法，不用显式调用
+        divid = datetime.datetime.now()
+        my_option = json.dumps(self._option, indent=4)
+
+        s = '''
+        <div id="{{ chartid }}" style="width:800px; height:600px;"></div>
+        <script>
+            require.config({
+                 paths:{
+                    echarts: '//cdn.bootcss.com/echarts/3.2.3/echarts.min',
+                    china: '//echarts.baidu.com/gallery/vendors/echarts/map/js/china',
+                 }
+            });
+            require(['echarts','china'],function(ec){
+            var myChart = ec.init(document.getElementById('{{ chartid }}'));
+                       var option =  {{ opt }};
+                        myChart.setOption(option);
+            });
+        </script>'''
+
+        # 这里使用 jinjia2 做模板，比单纯替换要好一些
+        tmp = Template(s)
+        html = tmp.render(opt=my_option.decode('utf8'), chartid=divid)
+
+        return html
+
 
     def render(self, path="render.html"):
         """ 渲染数据项，生成 html 文件
