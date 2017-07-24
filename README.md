@@ -1512,4 +1512,8 @@ kline.render()
 # 关于项目
 
 * 欢迎大家使用及提出意见
-* // Todo
+
+# todo
+1. 增加jupyter display 内建支持，不用显式的调用HTML方法
+2. 做成一个restfull web服务，提供标准的图表渲染服务
+3. 结合jupyter widget ，在细节上做更多可交互的功能
