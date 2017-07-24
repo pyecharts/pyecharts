@@ -39,7 +39,7 @@ pyecharts 是一个用于生成 Echarts 图表的类库。实际上就是 Echart
 
 
 # 如何安装
-pyecharts 兼容 Python2 和 Python3。当前版本为 0.1.5
+pyecharts 兼容 Python2 和 Python3。当前版本为 0.1.6
 
 ```python
 pip install pyecharts
@@ -638,6 +638,8 @@ add(name, x_axis, y_axis, data, **kwargs)
     数据项，数据中，每一行是一个『数据项』，每一列属于一个『维度』
 ```python
 import random
+from pyecharts import HeatMap
+
 x_axis = ["12a", "1a", "2a", "3a", "4a", "5a", "6a", "7a", "8a", "9a", "10a", "11a",
           "12p", "1p", "2p", "3p", "4p", "5p", "6p", "7p", "8p", "9p", "10p", "11p"]
 y_aixs = ["Saturday", "Friday", "Thursday", "Wednesday", "Tuesday", "Monday", "Sunday"]
