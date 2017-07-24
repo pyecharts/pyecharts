@@ -264,7 +264,7 @@ def _mark(data,
     :param data:
         标记数据项，有'min', 'max', 'average'可选
     :param mark_point_symbol:
-        标记点图形
+        标记点图形，有'circle', 'rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow'可选
     :param mark_point_symbolsize:
         标记点图形大小
     :param mark_point_textcolor:
@@ -365,6 +365,7 @@ def visual_map(visual_range=None,
                visual_text_color=None,
                visual_range_text=None,
                visual_range_color=None,
+               visual_orient='vertical',
                is_calculable=True,
                **kwargs):
     """ 是视觉映射组件，用于进行『视觉编码』，也就是将数据映射到视觉元素（视觉通道）。
@@ -377,26 +378,31 @@ def visual_map(visual_range=None,
         两端文本
     :param visual_range_color:
         过渡的颜色，列表类型
+    :param visual_orient:
+        visualmap 组件条的方向，默认为'vertical'，有'vertical', 'horizontal'可选。
     :param is_calculable:
         是否显示拖拽用的手柄（手柄能拖拽调整选中范围）
     :param kwargs:
     :return:
     """
-    # 组件允许的最大值最小值默认为 [0,100]
+    # 组件允许的最大值最小值默认为 [0, 100]
     _min, _max = 0, 100
     if visual_range:
         if len(visual_range) == 2:
             _min, _max = visual_range
-    # 两端文本默认值为 ['low','hight']
+
+    # 两端文本默认值为 ['low', 'hight']
     _tlow, _thight = "low", "hight"
     if visual_range_text:
         if len(visual_range_text) == 2:
             _tlow, _thight = visual_range_text
+
     # 过渡颜色默认为 ['#50a3ba', '#eac763', '#d94e5d']
     inrange = ['#50a3ba', '#eac763', '#d94e5d']
     if visual_range_color:
         if len(visual_range_color) >= 2:
             inrange = visual_range_color
+
     _visual_map = {
         "type": "continuous",
         "min": _min,
@@ -405,6 +411,7 @@ def visual_map(visual_range=None,
         "textStyle": {"color": visual_text_color},
         "inRange": {"color": inrange},
         "calculable": is_calculable,
+        "orient": visual_orient,
         "left": "left",
         "top": "bottom"
     }

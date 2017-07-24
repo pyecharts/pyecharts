@@ -5,295 +5,253 @@
 <head>
     <meta charset="utf-8">
     <title>ECharts</title>
-    <script src="http://oog4yfyu0.bkt.clouddn.com/echarts.min.js"></script>
-    <script type="text/javascript " src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
-    <script type="text/javascript " src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/wordcloud.js"></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/anhui.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/aomen.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/beijing.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/chongqing.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/fujian.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/gansu.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/guangdong.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/guangxi.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/guizhou.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/hainan.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/hebei.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/heilongjiang.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/henan.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/hubei.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/hunan.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/jiangsu.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/jiangxi.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/jilin.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/liaoning.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/neimenggu.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/ningxia.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/qinghai.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/shangdong.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/shanghai.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/shanxi.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/sichuan.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/taiwan.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/tianjin.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/xianggang.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/xinjiang.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/xizang.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/yunnan.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/zhejiang.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/guangdong.js "></script>
-    <script type="text/javascript " src="http://api.map.baidu.com/api?v=2.0&ak=ZUONbpqGBsYGXNIYHicvbAbM "></script>
-    <script type="text/javascript " src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js "></script>
+    <script src='https://cdn.bootcss.com/echarts/3.2.2/echarts.simple.js'></script>
+    <script type="text/javascript" src="http://data-visual.cn/datav/src/js/echarts/extension/echarts-wordcloud.min.js"></script>
 </head>
 
 <body>
-    <div id="main" style="width: 800px;height:400px;"></div>
-    <script type="text/javascript">
+    <style>
+        html,
+        body,
+        #main {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+        }
+    </style>
+    <div id="main" style="width: 1300px;height:620px; ">
+    </div>
+    <script type="text/javascript ">
         var myChart = echarts.init(document.getElementById('main'));
         var option = {
-    "xAxis": {
-        "nameTextStyle": {
-            "fontSize": 14
-        },
-        "data": [
-            "周一",
-            "周二",
-            "周三",
-            "周四",
-            "周五",
-            "周六",
-            "周日"
-        ],
-        "nameGap": 25,
-        "name": "",
-        "type": "category",
-        "nameLocation": "middle",
-        "axisLabel": {
-            "interval": "auto"
-        }
-    },
     "tooltip": {},
-    "title": {
-        "textStyle": {
-            "fontSize": 18,
-            "color": "#000"
-        },
-        "subtext": "",
-        "left": "auto",
-        "subtextStyle": {
-            "fontSize": 12,
-            "color": "#aaa"
-        },
-        "text": "折线图示例"
-    },
-    "legend": {
-        "show": true,
-        "orient": "horizontal",
-        "left": "center",
-        "selectedMode": true,
-        "data": [
-            "最高气温",
-            "最低气温"
-        ],
-        "top": "top"
-    },
-    "color": [
-        "#c23531",
-        "#2f4554",
-        "#61a0a8",
-        "#d48265",
-        "#749f83",
-        "#ca8622",
-        "#bda29a",
-        "#6e7074",
-        "#546570",
-        "#c4ccd3"
-    ],
-    "backgroundColor": "#fff",
-    "series": [
-        {
-            "areaStyle": {},
-            "markPoint": {
-                "data": [
-                    {
-                        "name": "最大值",
-                        "label": {
-                            "normal": {
-                                "textStyle": {
-                                    "color": "#fff"
-                                }
-                            }
-                        },
-                        "type": "max",
-                        "symbol": "pin",
-                        "symbolSize": 50
-                    },
-                    {
-                        "name": "最小值",
-                        "label": {
-                            "normal": {
-                                "textStyle": {
-                                    "color": "#fff"
-                                }
-                            }
-                        },
-                        "type": "min",
-                        "symbol": "pin",
-                        "symbolSize": 50
-                    }
-                ]
-            },
-            "step": false,
-            "showSymbol": true,
-            "type": "line",
-            "label": {
-                "emphasis": {
-                    "show": true
-                },
-                "normal": {
-                    "show": false,
-                    "textStyle": {
-                        "fontSize": 12,
-                        "color": "#000"
-                    },
-                    "position": "top",
-                    "formatter": null
-                }
-            },
-            "name": "最高气温",
-            "markLine": {
-                "data": [
-                    {
-                        "name": "平均値",
-                        "type": "average"
-                    }
-                ]
-            },
-            "smooth": false,
-            "data": [
-                11,
-                11,
-                15,
-                13,
-                12,
-                13,
-                10
-            ],
-            "lineStyle": {
-                "normal": {
-                    "curveness": 0,
-                    "width": 1,
-                    "type": "solid",
-                    "opacity": 1
-                }
-            },
-            "stack": "",
-            "symbol": "emptyCircle"
-        },
-        {
-            "areaStyle": {},
-            "markPoint": {
-                "data": [
-                    {
-                        "name": "最大值",
-                        "label": {
-                            "normal": {
-                                "textStyle": {
-                                    "color": "#fff"
-                                }
-                            }
-                        },
-                        "type": "max",
-                        "symbol": "pin",
-                        "symbolSize": 50
-                    },
-                    {
-                        "name": "最小值",
-                        "label": {
-                            "normal": {
-                                "textStyle": {
-                                    "color": "#fff"
-                                }
-                            }
-                        },
-                        "type": "min",
-                        "symbol": "pin",
-                        "symbolSize": 50
-                    }
-                ]
-            },
-            "step": false,
-            "showSymbol": true,
-            "type": "line",
-            "label": {
-                "emphasis": {
-                    "show": true
-                },
-                "normal": {
-                    "show": false,
-                    "textStyle": {
-                        "fontSize": 12,
-                        "color": "#000"
-                    },
-                    "position": "top",
-                    "formatter": null
-                }
-            },
-            "name": "最低气温",
-            "markLine": {
-                "data": [
-                    {
-                        "name": "平均値",
-                        "type": "average"
-                    }
-                ]
-            },
-            "smooth": false,
-            "data": [
-                1,
-                -2,
-                2,
-                5,
-                3,
-                2,
-                0
-            ],
-            "lineStyle": {
-                "normal": {
-                    "curveness": 0,
-                    "width": 1,
-                    "type": "solid",
-                    "opacity": 1
-                }
-            },
-            "stack": "",
-            "symbol": "emptyCircle"
-        }
-    ],
     "toolbox": {
-        "show": true,
         "orient": "vertical",
         "feature": {
             "saveAsImage": {
                 "show": true
             }
         },
-        "left": "right",
-        "top": "center"
+        "show": true,
+        "top": "center",
+        "left": "right"
     },
-    "yAxis": {
-        "nameTextStyle": {
-            "fontSize": 14
+    "legend": {
+        "data": []
+    },
+    "title": {
+        "textStyle": {
+            "color": "#000",
+            "fontSize": 18
         },
-        "nameGap": 25,
-        "name": "",
-        "type": "value",
-        "nameLocation": "middle",
-        "axisLabel": {
-            "formatter": "{value} "
+        "text": "",
+        "subtext": "",
+        "subtextStyle": {
+            "color": "#aaa",
+            "fontSize": 12
+        },
+        "left": "auto"
+    },
+    "backgroundColor": "#fff",
+    "series": [
+        {
+            "shape": "diamond",
+            "type": "wordCloud",
+            "sizeRange": [
+                30,
+                100
+            ],
+            "data": [
+                {
+                    "name": "Sam S Club",
+                    "value": 10000,
+                    "textStyle": {
+                        "normal": {
+                            "color": "rgb(143,28,69)"
+                        }
+                    }
+                },
+                {
+                    "name": "Macys",
+                    "value": 6181,
+                    "textStyle": {
+                        "normal": {
+                            "color": "rgb(63,129,81)"
+                        }
+                    }
+                },
+                {
+                    "name": "Amy Schumer",
+                    "value": 4386,
+                    "textStyle": {
+                        "normal": {
+                            "color": "rgb(43,122,124)"
+                        }
+                    }
+                },
+                {
+                    "name": "Jurassic World",
+                    "value": 4055,
+                    "textStyle": {
+                        "normal": {
+                            "color": "rgb(4,35,102)"
+                        }
+                    }
+                },
+                {
+                    "name": "Charter Communications",
+                    "value": 2467,
+                    "textStyle": {
+                        "normal": {
+                            "color": "rgb(53,123,88)"
+                        }
+                    }
+                },
+                {
+                    "name": "Chick Fil A",
+                    "value": 2244,
+                    "textStyle": {
+                        "normal": {
+                            "color": "rgb(105,139,28)"
+                        }
+                    }
+                },
+                {
+                    "name": "Planet Fitness",
+                    "value": 1898,
+                    "textStyle": {
+                        "normal": {
+                            "color": "rgb(54,64,49)"
+                        }
+                    }
+                },
+                {
+                    "name": "Pitch Perfect",
+                    "value": 1484,
+                    "textStyle": {
+                        "normal": {
+                            "color": "rgb(47,48,121)"
+                        }
+                    }
+                },
+                {
+                    "name": "Express",
+                    "value": 1112,
+                    "textStyle": {
+                        "normal": {
+                            "color": "rgb(33,43,79)"
+                        }
+                    }
+                },
+                {
+                    "name": "Home",
+                    "value": 965,
+                    "textStyle": {
+                        "normal": {
+                            "color": "rgb(121,11,93)"
+                        }
+                    }
+                },
+                {
+                    "name": "Johnny Depp",
+                    "value": 847,
+                    "textStyle": {
+                        "normal": {
+                            "color": "rgb(132,157,51)"
+                        }
+                    }
+                },
+                {
+                    "name": "Lena Dunham",
+                    "value": 582,
+                    "textStyle": {
+                        "normal": {
+                            "color": "rgb(120,32,160)"
+                        }
+                    }
+                },
+                {
+                    "name": "Lewis Hamilton",
+                    "value": 555,
+                    "textStyle": {
+                        "normal": {
+                            "color": "rgb(131,85,91)"
+                        }
+                    }
+                },
+                {
+                    "name": "KXAN",
+                    "value": 550,
+                    "textStyle": {
+                        "normal": {
+                            "color": "rgb(87,34,11)"
+                        }
+                    }
+                },
+                {
+                    "name": "Mary Ellen Mark",
+                    "value": 462,
+                    "textStyle": {
+                        "normal": {
+                            "color": "rgb(151,80,4)"
+                        }
+                    }
+                },
+                {
+                    "name": "Farrah Abraham",
+                    "value": 366,
+                    "textStyle": {
+                        "normal": {
+                            "color": "rgb(104,136,94)"
+                        }
+                    }
+                },
+                {
+                    "name": "Rita Ora",
+                    "value": 360,
+                    "textStyle": {
+                        "normal": {
+                            "color": "rgb(69,157,59)"
+                        }
+                    }
+                },
+                {
+                    "name": "Serena Williams",
+                    "value": 282,
+                    "textStyle": {
+                        "normal": {
+                            "color": "rgb(106,58,15)"
+                        }
+                    }
+                },
+                {
+                    "name": "NCAA baseball tournament",
+                    "value": 273,
+                    "textStyle": {
+                        "normal": {
+                            "color": "rgb(119,156,75)"
+                        }
+                    }
+                },
+                {
+                    "name": "Point Break",
+                    "value": 265,
+                    "textStyle": {
+                        "normal": {
+                            "color": "rgb(63,148,40)"
+                        }
+                    }
+                }
+            ],
+            "name": "",
+            "girdSize": 20,
+            "rotationRange": [
+                0,
+                0
+            ],
+            "rotationStep": 45
         }
-    }
+    ]
 };
         myChart.setOption(option);
     </script>
