@@ -2,6 +2,7 @@
 #coding=utf-8
 
 import json
+import random
 
 from pprint import pprint
 from pyecharts.option import get_all_options
@@ -13,11 +14,13 @@ class Base(object):
                  width=800,
                  height=400,
                  title_pos="auto",
+                 title_top="auto",
                  title_color="#000",
                  subtitle_color="#aaa",
                  title_text_size=18,
                  subtitle_text_size=12,
-                 background_color="#fff"):
+                 background_color="#fff",
+                 is_grid=False):
         """
 
         :param title:
@@ -29,7 +32,9 @@ class Base(object):
         :param height:
             画布高度
         :param title_pos:
-            标题位置，有'auto', 'left', 'right', 'center'可选
+            标题距离左侧距离，有'auto', 'left', 'right', 'center'可选，也可为百分比
+        :param title_top:
+            标题距离顶部距离，有'top', 'middle', 'bottom'可选，也可为百分比
         :param title_color:
             主标题文本颜色
         :param subtitle_color:
@@ -40,8 +45,12 @@ class Base(object):
             副标题文本字体大小
         :param background_color:
             画布背景颜色
+        :param is_grid:
+            是否使用 grid 组件，用于并行显示图表。
         """
         self._option = {}
+        if is_grid:
+            self._option.update(grid=[])
         self._width, self._height = width, height
         self._colorlst = ['#c23531', '#2f4554', '#61a0a8', '#d48265', '#749f83',
                           '#ca8622', '#bda29a', '#6e7074', '#546570', '#c4ccd3',
@@ -49,13 +58,14 @@ class Base(object):
                           '#2a5caa', '#444693', '#726930', '#b2d235', '#6d8346',
                           '#ac6767', '#1d953f', '#6950a1', '#918597', '#f6f5ec']
         self._option.update(
-            title={
+            title=[{
                 "text": title,
                 "subtext": subtitle,
                 "left": title_pos,
+                "top": title_top,
                 "textStyle": {"color": title_color, "fontSize": title_text_size},
                 "subtextStyle": {"color": subtitle_color, "fontSize": subtitle_text_size}
-            },
+            }],
             toolbox={
                 "show": True,
                 "orient": "vertical",
@@ -63,9 +73,10 @@ class Base(object):
                 "top": "center",
                 "feature": {"saveAsImage": {"show": True}}
             },
+            _index_flag=random.randint(1000000, 2000000),
             tooltip={},
             series=[],
-            legend={"data": []},
+            legend=[{"data": []}],
             backgroundColor=background_color
         )
 
@@ -87,6 +98,12 @@ class Base(object):
             formatter=None,
             geo_emphasis_color=None,
             geo_normal_color=None,
+            grid_width=None,
+            grid_height=None,
+            grid_top=None,
+            grid_bottom=None,
+            grid_left=None,
+            grid_right=None,
             gravity=None,
             interval=None,
             is_angleaxis_show=None,
@@ -150,6 +167,8 @@ class Base(object):
             visual_range_text=None,
             visual_range=None,
             visual_text_color=None,
+            visual_pos=None,
+            visual_top=None,
             word_gap=None,
             word_size_range=None,
             x_axis=None,
@@ -168,15 +187,82 @@ class Base(object):
         :param series:
             追加图表类型的 series 数据
         """
-        _name, _series = series
+        _name, _series, _xaxis, _yaxis, _legend, _title = series
         for n in _name:
-            self._option.get('legend').get('data').append(n)
+            self._option.get('legend')[0].get('data').append(n)
         for s in _series:
             self._option.get('series').append(s)
 
+    def __custom_for_grid(self, series):
+        """
+
+        :param series:
+            追加图表类型的 series 数据
+        :return:
+        """
+        _name, _series, _xaxis, _yaxis, _legend, _title = series
+        for s in _series:
+            self._option.get('series').append(s)
+        return len(self._option.get('series')), len(_series), _xaxis, _yaxis, _legend, _title
+
+    def grid(self, series,
+             grid_width=None,
+             grid_height=None,
+             grid_top=None,
+             grid_bottom=None,
+             grid_left=None,
+             grid_right=None):
+        """ 并行显示图表
+
+        :param series:
+            追加图表类型的 series 数据
+        :param grid_width:
+            grid 组件的宽度。默认自适应。
+        :param grid_height:
+            grid 组件的高度。默认自适应。
+        :param grid_top:
+            grid 组件离容器顶部的距离。
+        :param grid_bottom:
+            grid 组件离容器底部的距离。
+        :param grid_left:
+            grid 组件离容器左侧的距离。
+        :param grid_right:
+            grid 组件离容器右侧的距离。
+        :return:
+        """
+        from pyecharts.option import grid
+        _index, _index_once, _xaxis, _yaxis, _legned, _title = self.__custom_for_grid(series)
+        self._option.get('legend').append(_legned)
+        self._option.get('title').append(_title)
+        if _xaxis and _yaxis is not None:
+            try:
+                _xaxis[0].update(gridIndex=_index - 1)
+                _yaxis[0].update(gridIndex=_index - 1)
+                self._option.get('xAxis').append(_xaxis[0])
+                self._option.get('yAxis').append(_yaxis[0])
+            except:
+                pass
+            # indexflag 为每个图例唯一标识
+            _flag = self._option.get('series')[0].get('indexflag')
+            _series_index = 0
+            for s in self._option.get('series'):
+                if _flag == s.get('indexflag'):
+                    s.update(xAxisIndex=_series_index, yAxisIndex=_series_index)
+                else:
+                    _series_index += 1
+                    s.update(xAxisIndex=_series_index, yAxisIndex=_series_index)
+                _flag = s.get('indexflag')
+
+        _grid = grid(grid_width, grid_height, grid_top,
+                     grid_bottom, grid_left, grid_right)
+        for _ in range(_index_once):
+            self._option.get('grid').append(_grid)
+
     def get_series(self):
         """ 获取图表的 series 数据 """
-        return self._option.get('legend').get('data'), self._option.get('series')
+        return self._option.get('legend')[0].get('data'), self._option.get('series'),\
+               self._option.get('xAxis', None), self._option.get('yAxis', None),\
+               self._option.get('legend')[0], self._option.get('title')[0]
 
     def show_config(self):
         """ 打印输出 option 所有配置项 """
@@ -224,7 +310,9 @@ class Base(object):
         chart = get_all_options(**kwargs)
         if is_visualmap:
             self._option.update(visualMap=chart['visual_map'])
-        self._option.get('legend').update(chart['legend'])
+        self._option.get('legend')[0].update(chart['legend'])
+        if chart['grid']:
+            self._option.get('grid').append(chart['grid'])
         self._option.update(color=chart['color'])
         if kwargs.get('is_datazoom_show', None) is True:
             self._option.update(dataZoom=chart['datazoom'])
