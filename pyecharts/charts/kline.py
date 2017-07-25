@@ -30,22 +30,23 @@ class Kline(Base):
         """
         chart = get_all_options(**kwargs)
         self._option.update(
-            xAxis={
+            xAxis=[{
                 "type": "category",
                 "data": x_axis,
                 "scale": True,
                 "boundaryGap": False
-            },
-            yAxis={
+            }],
+            yAxis=[{
                 "scale": True,
                 "splitArea": {"show": True}
-            })
-        self._option.get('legend').get('data').append(name)
+            }])
+        self._option.get('legend')[0].get('data').append(name)
         self._option.get('series').append({
             "type": "candlestick",
             "name": name,
             "data": y_axis,
             "markPoint": chart['mark_point'],
-            "markLine": chart['mark_line']
+            "markLine": chart['mark_line'],
+            "indexflag": self._option.get('_index_flag')
         })
         self._legend_visualmap_colorlst(**kwargs)
