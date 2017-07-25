@@ -49,11 +49,11 @@ class Parallel(Base):
         :return:
         """
         self._option.update(parallel={"left": "5%", "right": "13%", "bottom": "10%", "top": "20%"})
-        self._option.get('legend').get('data').append(name)
+        self._option.get('legend')[0].get('data').append(name)
         self._option.get('series').append({
             "type": "parallel",
             "coordinateSystem": "parallel",
             "name": name,
-            "data": data
+            "data": data,
         })
         self._legend_visualmap_colorlst(**kwargs)
