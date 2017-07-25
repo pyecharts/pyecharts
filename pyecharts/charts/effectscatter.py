@@ -36,7 +36,7 @@ class EffectScatter(Scatter):
             chart = get_all_options(**kwargs)
             xaxis, yaxis = chart['xy_axis']
             self._option.update(xAxis=xaxis, yAxis=yaxis)
-            self._option.get('legend').get('data').append(name)
+            self._option.get('legend')[0].get('data').append(name)
             self._option.get('series').append({
                 "type": "effectScatter",
                 "name": name,
@@ -46,6 +46,7 @@ class EffectScatter(Scatter):
                 "symbolSize": symbol_size,
                 "data": [list(z) for z in zip(x_value, y_value)],
                 "label": chart['label'],
+                "indexflag": self._option.get('_index_flag')
             })
             self._legend_visualmap_colorlst(**kwargs)
         else:

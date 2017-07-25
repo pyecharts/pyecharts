@@ -30,26 +30,23 @@ class HeatMap(Base):
         :return:
         """
         chart = get_all_options(**kwargs)
-        self._option.get('legend').get('data').append(name)
+        self._option.get('legend')[0].get('data').append(name)
         self._option.update(
-            grid={
-                "left": '15%',
-                "bottom": '20%'
-            },
-            xAxis={
+            xAxis=[{
                 "type": "category",
                 "data": x_axis,
                 "splitArea": {"show": True},
-            },
-            yAxis={
+            }],
+            yAxis=[{
                 "type": "category",
                 "data": y_axis,
                 "splitArea": {"show": True}
-            })
+            }])
         self._option.get('series').append({
             "type": "heatmap",
             "name": name,
             "data": data,
             "label": chart['label'],
+            "indexflag": self._option.get('_index_flag')
         })
         self._legend_visualmap_colorlst(**kwargs)
