@@ -41,7 +41,7 @@ class Map(Base):
             for data in zip(attr, value):
                 _name, _value = data
                 _data.append({"name": _name, "value": _value})
-            self._option.get('legend').get('data').append(name)
+            self._option.get('legend')[0].get('data').append(name)
             self._option.get('series').append({
                 "type": "map",
                 "name": name,

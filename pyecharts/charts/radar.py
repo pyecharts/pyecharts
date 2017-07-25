@@ -66,7 +66,7 @@ class Radar(Base):
         """
         kwargs.update(flag=True, type='radar')
         chart = get_all_options(**kwargs)
-        self._option.get('legend').get('data').append(name)
+        self._option.get('legend')[0].get('data').append(name)
         self._option.get('series').append({
             "type": "radar",
             "name": name,
@@ -74,6 +74,6 @@ class Radar(Base):
             "symbol": chart['symbol'],
             "itemStyle": {"normal": {"color": item_color}},
             "lineStyle": chart['line_style'],
-            "areaStyle": {"normal": chart['area_style']}
+            "areaStyle": {"normal": chart['area_style']},
         })
         self._legend_visualmap_colorlst(**kwargs)
