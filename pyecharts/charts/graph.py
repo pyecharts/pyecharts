@@ -73,7 +73,7 @@ class Graph(Base):
         chart = get_all_options(**kwargs)
         if categories:
             for c in categories:
-                self._option.get('legend').get('data').append(c)
+                self._option.get('legend')[0].get('data').append(c)
         self._option.get('series').append({
             "type": "graph",
             "name": name,
@@ -89,6 +89,6 @@ class Graph(Base):
             "focusNodeAdjacency": is_focusnode,
             "data": nodes,
             "categories": categories,
-            "links":links
+            "links":links,
         })
         self._legend_visualmap_colorlst(**kwargs)
