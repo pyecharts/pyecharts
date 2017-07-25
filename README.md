@@ -1499,7 +1499,7 @@ line_1.add("line-1", attr, [random.randint(2400, 2500) for _ in range(31)])
 line_2 = Line()
 line_2.add("line-2", attr, [random.randint(2400, 2500) for _ in range(31)])
 kline.custom(line_1.get_series())
-klidne.custom(line_2.get_series())
+kline.custom(line_2.get_series())
 kline.show_config()
 kline.render()
 ```
