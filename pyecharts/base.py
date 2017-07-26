@@ -32,9 +32,9 @@ class Base(object):
         :param height:
             画布高度
         :param title_pos:
-            标题距离左侧距离，有'auto', 'left', 'right', 'center'可选，也可为百分比
+            标题距离左侧距离，有'auto', 'left', 'right', 'center'可选，也可为百分比或整数
         :param title_top:
-            标题距离顶部距离，有'top', 'middle', 'bottom'可选，也可为百分比
+            标题距离顶部距离，有'top', 'middle', 'bottom'可选，也可为百分比或整数
         :param title_color:
             主标题文本颜色
         :param subtitle_color:
