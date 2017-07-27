@@ -14,8 +14,9 @@
     增加并行显示图表功能
 
 * version 0.1.8（当前版本）  
-    新增在 Jupyter Notebook 中展示图表功能  
+    * 新增在 Jupyter Notebook 中展示图表功能  
     特别感谢 [@ygw365](https://github.com/ygw365) 提供这部分的代码模板 和 [muxuezi](https://github.com/muxuezi) 协助对代码进行改进!
+    * 新增对自定义地图的使用说明  
 
 ## 项目期待
 
