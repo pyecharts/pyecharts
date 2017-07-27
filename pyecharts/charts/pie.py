@@ -64,7 +64,9 @@ class Pie(Base):
                     rosetype = "radius"
             for a in attr:
                 self._option.get('legend')[0].get('data').append(a)
-            _dset = set(self._option.get('legend')[0].get('data'))
+            _dlst = self._option.get('legend')[0].get('data')
+            _dset = list(set(_dlst))
+            _dset.sort(key=_dlst.index)
             self._option.get('legend')[0].update(data=list(_dset))
             self._option.get('series').append({
                 "type": "pie",
