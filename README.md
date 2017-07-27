@@ -86,6 +86,19 @@ cast(seq)
 3. 字典  
     {A1: B1, A2: B2, A3: B3, A4: B4} -- > k_lst[ A[i1, i2...] ], v_lst[ B[i1, i2...] ]
 
+**当然你也可以采用更加酷炫的方式，使用 Jupyter Notebook 来展示图表，matplotlib 有的，pyecharts 也会有的**  
+比如这样  
+
+![jupyter-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/jupyter-0.gif)
+
+还有这样
+
+![jupyter-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/jupyter-1.gif)
+
+**Tip：** 该功能在 0.1.8 版本中正式加入，要使用请升级到最新版本。
+
+这里只是举两个例子。如需使用 Jupyter Notebook 来展示图表，只需要调用 ```render_notebook()``` 即可，同时兼容 Python2 和 Python3 的 Jupyter Notebook 环境。所有图表均可正常显示。这下展示报告连 PPT 都省了！！  
+> 在这里要特别感谢 [@ygw365](https://github.com/ygw365) 提供这部分的代码模板 和 [muxuezi](https://github.com/muxuezi) 协助对代码进行改进，特此感谢！也欢迎其他开发者参与到项目的开发中来。一起完善这个项目！
 
 图表类初始化所接受的参数（所有类型的图表都一样）。
 
@@ -919,6 +932,15 @@ map.show_config()
 map.render()
 ```
 ![map-2](https://github.com/chenjiandongx/pyecharts/blob/master/images/map-2.gif)
+
+### 关于自定义地图
+因为地图涉及范围太广，项目不可能涵盖所有的地图，不过不用担心。Echarts 官方提供了自己定制地图的功能 [echart-map](http://echarts.baidu.com/download-map.html)，根据自己所需制定相应的地图，下载成 JS 文件格式。
+
+打开安装目录下的 pyecharts/temple.py 文件，在 _temple 变量下对应的增加类似一行  
+ ```<script type="text/javascript " src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>```  
+而对应的 Jupyter Notebook 下的就在 _mapindex 变量下新增类似一行  
+```"北京": "beijing: '//oog4yfyu0.bkt.clouddn.com/beijing'"```   
+然后就可以在项目中使用自定义的地图了！Js 的引入方式由自己决定，能被项目所找到就行！
 
 
 ## Parallel（平行坐标系）
