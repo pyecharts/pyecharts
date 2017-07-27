@@ -3,9 +3,12 @@
 
 import json
 import random
+import datetime
 
 from pprint import pprint
+from jinja2 import Template
 from pyecharts.option import get_all_options
+from pyecharts import temple as Tp
 
 
 class Base(object):
@@ -323,7 +326,6 @@ class Base(object):
         :param path:
             生成 html 文件保存路径
         """
-        from pyecharts import temple as Tp
         temple = Tp._temple
         series = self._option.get("series")
         for s in series:
@@ -334,16 +336,43 @@ class Base(object):
                 temple = Tp._temple_lq
                 break
         my_option = json.dumps(self._option, indent=4, ensure_ascii=False)
-        __op = temple\
-            .replace("myOption", my_option)\
-            .replace("myWidth", str(self._width))\
-            .replace("myHeight", str(self._height))
+        tmp = Template(temple)
+        html = tmp.render(myOption=my_option, myWidth=self._width, myHeight=self._height)
         try:        # for Python3
             with open(path, "w+", encoding="utf-8") as fout:
-                fout.write(__op)
+                fout.write(html)
         except:     # for Python2
             with open(path, "w+") as fout:
-                fout.write(__op)
+                fout.write(html)
+
+    def render_notebook(self):
+        """ 渲染数据项，在 notebook 中显示
+
+        :return:
+        """
+        from IPython.display import HTML
+
+        divid = datetime.datetime.now()
+        my_option = json.dumps(self._option, indent=4)
+        temple = Tp._temple_notebook
+        series = self._option.get("series")
+        for s in series:
+            if s.get('type') == "wordCloud":
+                temple = Tp._temple_wd_notebook
+                break
+            if s.get('type') == "liquidFill":
+                temple = Tp._temple_lq_notebook
+                break
+            if s.get('type') == 'map':
+                temple = Tp.get_map(self._option.get('series')[0].get('mapType'))
+                break
+        tmp = Template(temple)
+        try:
+            html = tmp.render(myOption=my_option, chartId=divid, myWidth=self._width, myHeight=self._height)
+        except:
+            html = tmp.render(mtOption=my_option.decode('utf8'), chartId=divid, myWidth=self._width,
+                              myHeight=self._height)
+        return HTML(html)
 
     @property
     def _geo_cities(self):

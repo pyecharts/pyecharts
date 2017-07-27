@@ -5,513 +5,258 @@
 <head>
     <meta charset="utf-8">
     <title>ECharts</title>
-    <script src="http://oog4yfyu0.bkt.clouddn.com/echarts.min.js"></script>
-    <script type="text/javascript " src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
-    <script type="text/javascript " src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/wordcloud.js"></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/anhui.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/aomen.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/beijing.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/chongqing.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/fujian.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/gansu.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/guangdong.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/guangxi.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/guizhou.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/hainan.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/hebei.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/heilongjiang.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/henan.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/hubei.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/hunan.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/jiangsu.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/jiangxi.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/jilin.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/liaoning.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/neimenggu.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/ningxia.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/qinghai.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/shangdong.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/shanghai.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/shanxi.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/sichuan.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/taiwan.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/tianjin.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/xianggang.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/xinjiang.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/xizang.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/yunnan.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/zhejiang.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/guangdong.js "></script>
-    <script type="text/javascript " src="http://api.map.baidu.com/api?v=2.0&ak=ZUONbpqGBsYGXNIYHicvbAbM "></script>
-    <script type="text/javascript " src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js "></script>
+    <script src='https://cdn.bootcss.com/echarts/3.2.2/echarts.simple.js'></script>
+    <script type="text/javascript" src="http://data-visual.cn/datav/src/js/echarts/extension/echarts-wordcloud.min.js"></script>
 </head>
 
 <body>
-    <div id="main" style="width: 800px;height:400px;"></div>
-    <script type="text/javascript">
+    <style>
+        html,
+        body,
+        #main {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+        }
+    </style>
+    <div id="main" style="width:1300px;height:620px; ">
+    </div>
+    <script type="text/javascript ">
         var myChart = echarts.init(document.getElementById('main'));
         var option = {
-    "series": [
-        {
-            "label": {
-                "emphasis": {
-                    "show": true
-                },
-                "normal": {
-                    "formatter": "{b} {d}%",
-                    "textStyle": {
-                        "fontSize": 12,
-                        "color": null
-                    },
-                    "show": true,
-                    "position": "center"
-                }
-            },
-            "data": [
-                {
-                    "name": "剧情",
-                    "value": 25
-                },
-                {
-                    "name": "",
-                    "value": 75
-                }
-            ],
-            "type": "pie",
-            "radius": [
-                "18%",
-                "24%"
-            ],
-            "indexflag": 1166490,
-            "roseType": null,
-            "name": "",
-            "center": [
-                "10%",
-                "30%"
-            ]
-        },
-        {
-            "label": {
-                "emphasis": {
-                    "show": true
-                },
-                "normal": {
-                    "formatter": "{b} {d}%",
-                    "textStyle": {
-                        "fontSize": 12,
-                        "color": null
-                    },
-                    "show": true,
-                    "position": "center"
-                }
-            },
-            "data": [
-                {
-                    "name": "奇幻",
-                    "value": 24
-                },
-                {
-                    "name": "",
-                    "value": 76
-                }
-            ],
-            "type": "pie",
-            "radius": [
-                "18%",
-                "24%"
-            ],
-            "indexflag": 1166490,
-            "roseType": null,
-            "name": "",
-            "center": [
-                "30%",
-                "30%"
-            ]
-        },
-        {
-            "label": {
-                "emphasis": {
-                    "show": true
-                },
-                "normal": {
-                    "formatter": "{b} {d}%",
-                    "textStyle": {
-                        "fontSize": 12,
-                        "color": null
-                    },
-                    "show": true,
-                    "position": "center"
-                }
-            },
-            "data": [
-                {
-                    "name": "爱情",
-                    "value": 14
-                },
-                {
-                    "name": "",
-                    "value": 86
-                }
-            ],
-            "type": "pie",
-            "radius": [
-                "18%",
-                "24%"
-            ],
-            "indexflag": 1166490,
-            "roseType": null,
-            "name": "",
-            "center": [
-                "50%",
-                "30%"
-            ]
-        },
-        {
-            "label": {
-                "emphasis": {
-                    "show": true
-                },
-                "normal": {
-                    "formatter": "{b} {d}%",
-                    "textStyle": {
-                        "fontSize": 12,
-                        "color": null
-                    },
-                    "show": true,
-                    "position": "center"
-                }
-            },
-            "data": [
-                {
-                    "name": "惊悚",
-                    "value": 11
-                },
-                {
-                    "name": "",
-                    "value": 89
-                }
-            ],
-            "type": "pie",
-            "radius": [
-                "18%",
-                "24%"
-            ],
-            "indexflag": 1166490,
-            "roseType": null,
-            "name": "",
-            "center": [
-                "70%",
-                "30%"
-            ]
-        },
-        {
-            "label": {
-                "emphasis": {
-                    "show": true
-                },
-                "normal": {
-                    "formatter": "{b} {d}%",
-                    "textStyle": {
-                        "fontSize": 12,
-                        "color": null
-                    },
-                    "show": true,
-                    "position": "center"
-                }
-            },
-            "data": [
-                {
-                    "name": "冒险",
-                    "value": 27
-                },
-                {
-                    "name": "",
-                    "value": 73
-                }
-            ],
-            "type": "pie",
-            "radius": [
-                "18%",
-                "24%"
-            ],
-            "indexflag": 1166490,
-            "roseType": null,
-            "name": "",
-            "center": [
-                "90%",
-                "30%"
-            ]
-        },
-        {
-            "label": {
-                "emphasis": {
-                    "show": true
-                },
-                "normal": {
-                    "formatter": "{b} {d}%",
-                    "textStyle": {
-                        "fontSize": 12,
-                        "color": null
-                    },
-                    "show": true,
-                    "position": "center"
-                }
-            },
-            "data": [
-                {
-                    "name": "动作",
-                    "value": 15
-                },
-                {
-                    "name": "",
-                    "value": 85
-                }
-            ],
-            "type": "pie",
-            "radius": [
-                "18%",
-                "24%"
-            ],
-            "indexflag": 1166490,
-            "roseType": null,
-            "name": "",
-            "center": [
-                "10%",
-                "70%"
-            ]
-        },
-        {
-            "label": {
-                "emphasis": {
-                    "show": true
-                },
-                "normal": {
-                    "formatter": "{b} {d}%",
-                    "textStyle": {
-                        "fontSize": 12,
-                        "color": null
-                    },
-                    "show": true,
-                    "position": "center"
-                }
-            },
-            "data": [
-                {
-                    "name": "喜剧",
-                    "value": 54
-                },
-                {
-                    "name": "",
-                    "value": 46
-                }
-            ],
-            "type": "pie",
-            "radius": [
-                "18%",
-                "24%"
-            ],
-            "indexflag": 1166490,
-            "roseType": null,
-            "name": "",
-            "center": [
-                "30%",
-                "70%"
-            ]
-        },
-        {
-            "label": {
-                "emphasis": {
-                    "show": true
-                },
-                "normal": {
-                    "formatter": "{b} {d}%",
-                    "textStyle": {
-                        "fontSize": 12,
-                        "color": null
-                    },
-                    "show": true,
-                    "position": "center"
-                }
-            },
-            "data": [
-                {
-                    "name": "科幻",
-                    "value": 26
-                },
-                {
-                    "name": "",
-                    "value": 74
-                }
-            ],
-            "type": "pie",
-            "radius": [
-                "18%",
-                "24%"
-            ],
-            "indexflag": 1166490,
-            "roseType": null,
-            "name": "",
-            "center": [
-                "50%",
-                "70%"
-            ]
-        },
-        {
-            "label": {
-                "emphasis": {
-                    "show": true
-                },
-                "normal": {
-                    "formatter": "{b} {d}%",
-                    "textStyle": {
-                        "fontSize": 12,
-                        "color": null
-                    },
-                    "show": true,
-                    "position": "center"
-                }
-            },
-            "data": [
-                {
-                    "name": "悬疑",
-                    "value": 25
-                },
-                {
-                    "name": "",
-                    "value": 75
-                }
-            ],
-            "type": "pie",
-            "radius": [
-                "18%",
-                "24%"
-            ],
-            "indexflag": 1166490,
-            "roseType": null,
-            "name": "",
-            "center": [
-                "70%",
-                "70%"
-            ]
-        },
-        {
-            "label": {
-                "emphasis": {
-                    "show": true
-                },
-                "normal": {
-                    "formatter": "{b} {d}%",
-                    "textStyle": {
-                        "fontSize": 12,
-                        "color": null
-                    },
-                    "show": true,
-                    "position": "center"
-                }
-            },
-            "data": [
-                {
-                    "name": "犯罪",
-                    "value": 28
-                },
-                {
-                    "name": "",
-                    "value": 72
-                }
-            ],
-            "type": "pie",
-            "radius": [
-                "18%",
-                "24%"
-            ],
-            "indexflag": 1166490,
-            "roseType": null,
-            "name": "",
-            "center": [
-                "90%",
-                "70%"
-            ]
-        }
-    ],
-    "_index_flag": 1166490,
-    "backgroundColor": "#fff",
     "title": [
         {
-            "left": "center",
             "top": "auto",
-            "subtext": "数据来着豆瓣",
             "subtextStyle": {
-                "fontSize": 12,
-                "color": "#aaa"
+                "color": "#aaa",
+                "fontSize": 12
             },
+            "text": "",
             "textStyle": {
-                "fontSize": 18,
-                "color": "#000"
+                "color": "#000",
+                "fontSize": 18
             },
-            "text": "各类电影中\"好片\"所占的比例"
+            "subtext": "",
+            "left": "auto"
         }
     ],
     "legend": [
         {
-            "left": "center",
-            "top": "center",
-            "data": [
-                "",
-                "科幻",
-                "犯罪",
-                "动作",
-                "剧情",
-                "喜剧",
-                "冒险",
-                "悬疑",
-                "奇幻",
-                "爱情",
-                "惊悚"
-            ],
-            "show": true,
-            "orient": "horizontal",
-            "selectedMode": true
+            "data": []
         }
     ],
-    "tooltip": {},
     "toolbox": {
-        "left": "right",
         "top": "center",
+        "orient": "vertical",
+        "left": "right",
         "show": true,
         "feature": {
             "saveAsImage": {
                 "show": true
             }
-        },
-        "orient": "vertical"
+        }
     },
-    "color": [
-        "#c23531",
-        "#2f4554",
-        "#61a0a8",
-        "#d48265",
-        "#749f83",
-        "#ca8622",
-        "#bda29a",
-        "#6e7074",
-        "#546570",
-        "#c4ccd3",
-        "#f05b72",
-        "#ef5b9c",
-        "#f47920",
-        "#905a3d",
-        "#fab27b",
-        "#2a5caa",
-        "#444693",
-        "#726930",
-        "#b2d235",
-        "#6d8346",
-        "#ac6767",
-        "#1d953f",
-        "#6950a1",
-        "#918597",
-        "#f6f5ec"
+    "tooltip": {},
+    "_index_flag": 1530709,
+    "backgroundColor": "#fff",
+    "series": [
+        {
+            "shape": "diamond",
+            "rotationRange": [
+                0,
+                0
+            ],
+            "girdSize": 20,
+            "name": "",
+            "rotationStep": 45,
+            "type": "wordCloud",
+            "sizeRange": [
+                30,
+                100
+            ],
+            "data": [
+                {
+                    "name": "Sam S Club",
+                    "value": 10000,
+                    "textStyle": {
+                        "normal": {
+                            "color": "rgb(83,109,4)"
+                        }
+                    }
+                },
+                {
+                    "name": "Macys",
+                    "value": 6181,
+                    "textStyle": {
+                        "normal": {
+                            "color": "rgb(33,128,11)"
+                        }
+                    }
+                },
+                {
+                    "name": "Amy Schumer",
+                    "value": 4386,
+                    "textStyle": {
+                        "normal": {
+                            "color": "rgb(115,45,0)"
+                        }
+                    }
+                },
+                {
+                    "name": "Jurassic World",
+                    "value": 4055,
+                    "textStyle": {
+                        "normal": {
+                            "color": "rgb(50,2,23)"
+                        }
+                    }
+                },
+                {
+                    "name": "Charter Communications",
+                    "value": 2467,
+                    "textStyle": {
+                        "normal": {
+                            "color": "rgb(14,76,147)"
+                        }
+                    }
+                },
+                {
+                    "name": "Chick Fil A",
+                    "value": 2244,
+                    "textStyle": {
+                        "normal": {
+                            "color": "rgb(144,45,33)"
+                        }
+                    }
+                },
+                {
+                    "name": "Planet Fitness",
+                    "value": 1898,
+                    "textStyle": {
+                        "normal": {
+                            "color": "rgb(22,79,107)"
+                        }
+                    }
+                },
+                {
+                    "name": "Pitch Perfect",
+                    "value": 1484,
+                    "textStyle": {
+                        "normal": {
+                            "color": "rgb(74,126,22)"
+                        }
+                    }
+                },
+                {
+                    "name": "Express",
+                    "value": 1112,
+                    "textStyle": {
+                        "normal": {
+                            "color": "rgb(36,15,132)"
+                        }
+                    }
+                },
+                {
+                    "name": "Home",
+                    "value": 965,
+                    "textStyle": {
+                        "normal": {
+                            "color": "rgb(83,83,34)"
+                        }
+                    }
+                },
+                {
+                    "name": "Johnny Depp",
+                    "value": 847,
+                    "textStyle": {
+                        "normal": {
+                            "color": "rgb(31,35,70)"
+                        }
+                    }
+                },
+                {
+                    "name": "Lena Dunham",
+                    "value": 582,
+                    "textStyle": {
+                        "normal": {
+                            "color": "rgb(39,154,90)"
+                        }
+                    }
+                },
+                {
+                    "name": "Lewis Hamilton",
+                    "value": 555,
+                    "textStyle": {
+                        "normal": {
+                            "color": "rgb(85,131,104)"
+                        }
+                    }
+                },
+                {
+                    "name": "KXAN",
+                    "value": 550,
+                    "textStyle": {
+                        "normal": {
+                            "color": "rgb(22,126,97)"
+                        }
+                    }
+                },
+                {
+                    "name": "Mary Ellen Mark",
+                    "value": 462,
+                    "textStyle": {
+                        "normal": {
+                            "color": "rgb(51,98,62)"
+                        }
+                    }
+                },
+                {
+                    "name": "Farrah Abraham",
+                    "value": 366,
+                    "textStyle": {
+                        "normal": {
+                            "color": "rgb(56,47,96)"
+                        }
+                    }
+                },
+                {
+                    "name": "Rita Ora",
+                    "value": 360,
+                    "textStyle": {
+                        "normal": {
+                            "color": "rgb(89,19,114)"
+                        }
+                    }
+                },
+                {
+                    "name": "Serena Williams",
+                    "value": 282,
+                    "textStyle": {
+                        "normal": {
+                            "color": "rgb(94,100,146)"
+                        }
+                    }
+                },
+                {
+                    "name": "NCAA baseball tournament",
+                    "value": 273,
+                    "textStyle": {
+                        "normal": {
+                            "color": "rgb(44,93,136)"
+                        }
+                    }
+                },
+                {
+                    "name": "Point Break",
+                    "value": 265,
+                    "textStyle": {
+                        "normal": {
+                            "color": "rgb(107,21,123)"
+                        }
+                    }
+                }
+            ]
+        }
     ]
 };
         myChart.setOption(option);

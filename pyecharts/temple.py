@@ -2,6 +2,89 @@
 #coding=utf-8
 
 
+_temple_notebook = """
+<div id="{{ chartId }}" style="width:{{ myWidth }}px; height:{{ myHeight }}px;"></div>
+<script>
+    require.config({
+         paths:{
+            echarts: '//cdn.bootcss.com/echarts/3.6.2/echarts.min',
+            china: '//echarts.baidu.com/gallery/vendors/echarts/map/js/china',
+         }
+    });
+    require(['echarts', 'china'],function(ec){
+    var myChart = ec.init(document.getElementById('{{ chartId }}'));
+               var option =  {{ myOption }};
+               myChart.setOption(option);
+    });
+</script>
+"""
+
+
+_temple_map_notebook = """
+<div id="{{ chartId }}" style="width:{{ myWidth }}px; height:{{ myHeight }}px;"></div>
+<script>
+    require.config({
+         paths:{
+            echarts: '//cdn.bootcss.com/echarts/3.6.2/echarts.min',
+            china: '//echarts.baidu.com/gallery/vendors/echarts/map/js/china',
+            ##locationJs
+         }
+    });
+    require(['echarts', 'china', '##location'],function(ec){
+    var myChart = ec.init(document.getElementById('{{ chartId }}'));
+               var option =  {{ myOption }};
+               myChart.setOption(option);
+    });
+</script>
+"""
+
+
+_temple_lq_notebook = '''
+<div id="{{ chartId }}" style="width:{{ myWidth }}px; height:{{ myHeight }}px;"></div>
+<script>
+    require.config({
+         paths:{
+           echarts: '//cdn.bootcss.com/echarts/3.2.2/echarts',
+           liquidFill: '//oog4yfyu0.bkt.clouddn.com/liquidfill'
+         }
+    });
+    require(['echarts','liquidFill'],function(ec){
+    var myChart = ec.init(document.getElementById('{{ chartId }}'));
+               var option =  {{ myOption }};
+               myChart.setOption(option);
+    });
+</script>'''
+
+
+_temple_wd_notebook = '''
+<body>
+    <style>
+        html,
+        body,
+        # {{ chartId }} {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+        }
+    </style>
+<div id="{{ chartId }}" style="width:{{ myWidth }}px; height:{{ myHeight }}px;"></div>
+<script>
+    require.config({
+        paths:{
+        echarts: '//cdn.bootcss.com/echarts/3.2.2/echarts.simple',
+        wordCloud: '//data-visual.cn/datav/src/js/echarts/extension/echarts-wordcloud.min'
+        }
+    });
+    require(['echarts','wordCloud'],function(ec){
+    var myChart = ec.init(document.getElementById('{{ chartId }}'));
+            var option =  {{ myOption }};
+            myChart.setOption(option);
+    });
+</script>
+</body>
+'''
+
+
 _temple_wd = """
 <!DOCTYPE html>
 <html>
@@ -23,11 +106,11 @@ _temple_wd = """
             margin: 0;
         }
     </style>
-    <div id="main" style="width: myWidthpx;height:myHeightpx; ">
+    <div id="main" style="width:{{ myWidth }}px;height:{{ myHeight }}px; ">
     </div>
     <script type="text/javascript ">
         var myChart = echarts.init(document.getElementById('main'));
-        var option = myOption;
+        var option = {{ myOption }};
         myChart.setOption(option);
     </script>
 </body>
@@ -47,10 +130,10 @@ _temple_lq = """
 </head>
 
 <body>
-    <div id="main" style="width: myWidthpx;height:myHeightpx;"></div>
+    <div id="main" style="width:{{ myWidth }}px;height:{{ myHeight }}px;"></div>
     <script type="text/javascript">
         var myChart = echarts.init(document.getElementById('main'));
-        var option = myOption;
+        var option = {{ myOption }};
         myChart.setOption(option);
     </script>
 </body>
@@ -103,19 +186,67 @@ _temple="""
     <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/xizang.js "></script>
     <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/yunnan.js "></script>
     <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/zhejiang.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/guangdong.js "></script>
-    <script type="text/javascript " src="http://api.map.baidu.com/api?v=2.0&ak=ZUONbpqGBsYGXNIYHicvbAbM "></script>
-    <script type="text/javascript " src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js "></script>
 </head>
 
 <body>
-    <div id="main" style="width: myWidthpx;height:myHeightpx;"></div>
+    <div id="main" style="width:{{ myWidth }}px;height:{{ myHeight }}px;"></div>
     <script type="text/javascript">
         var myChart = echarts.init(document.getElementById('main'));
-        var option = myOption;
+        var option = {{ myOption }};
         myChart.setOption(option);
     </script>
 </body>
 
 </html>
 """
+
+
+_mapindex = {
+    "安徽": "anhui: '//oog4yfyu0.bkt.clouddn.com/anhui'",
+    "澳门": "aomen: '//oog4yfyu0.bkt.clouddn.com/aomen'",
+    "北京": "beijing: '//oog4yfyu0.bkt.clouddn.com/beijing'",
+    "重庆": "chongqing: '//oog4yfyu0.bkt.clouddn.com/chongqing'",
+    "福建": "fujian: '//oog4yfyu0.bkt.clouddn.com/fujian'",
+    "甘肃": "gansu: '//oog4yfyu0.bkt.clouddn.com/gansu'",
+    "广东": "guangdong: '//oog4yfyu0.bkt.clouddn.com/guangdong'",
+    "广西": "guangxi: '//oog4yfyu0.bkt.clouddn.com/guangxi'",
+    "贵州": "guizhou: '//oog4yfyu0.bkt.clouddn.com/guizhou'",
+    "海南": "hainan: '//oog4yfyu0.bkt.clouddn.com/hainan'",
+    "河北": "hebei: '//oog4yfyu0.bkt.clouddn.com/hebei'",
+    "黑龙江": "heilongjiang: '//oog4yfyu0.bkt.clouddn.com/heilongjiang'",
+    "河南": "henan: '//oog4yfyu0.bkt.clouddn.com/henan'",
+    "湖北": "hubei: '//oog4yfyu0.bkt.clouddn.com/hubei'",
+    "湖南": "hunan: '//oog4yfyu0.bkt.clouddn.com/hunan'",
+    "江苏": "jiangsu: '//oog4yfyu0.bkt.clouddn.com/jiangsu'",
+    "江西": "jiangxi: '//oog4yfyu0.bkt.clouddn.com/jiangxi'",
+    "吉林": "jilin: '//oog4yfyu0.bkt.clouddn.com/jilin'",
+    "辽宁": "liaoning: '//oog4yfyu0.bkt.clouddn.com/liaoning'",
+    "内蒙古": "neimenggu: '//oog4yfyu0.bkt.clouddn.com/neimenggu'",
+    "宁夏": "ningxia: '//oog4yfyu0.bkt.clouddn.com/ningxia'",
+    "青海": "qinghai: '//oog4yfyu0.bkt.clouddn.com/qinghai'",
+    "山东": "shangdong: '//oog4yfyu0.bkt.clouddn.com/shangdong'",
+    "上海": "shanghai: '//oog4yfyu0.bkt.clouddn.com/shanghai'",
+    "山西": "shanxi: '//oog4yfyu0.bkt.clouddn.com/shanxi'",
+    "四川": "sichuan: '//oog4yfyu0.bkt.clouddn.com/sichuan'",
+    "台湾": "taiwan: '//oog4yfyu0.bkt.clouddn.com/taiwan'",
+    "天津": "tianjin: '//oog4yfyu0.bkt.clouddn.com/tianjin'",
+    "香港": "xianggang: '//oog4yfyu0.bkt.clouddn.com/xianggang'",
+    "新疆": "xinjiang: '//oog4yfyu0.bkt.clouddn.com/xinjiang'",
+    "西藏": "xizang: '//oog4yfyu0.bkt.clouddn.com/xizang'",
+    "云南": "yunnan: '//oog4yfyu0.bkt.clouddn.com/yunnan'",
+    "浙江": "zhejiang: '//oog4yfyu0.bkt.clouddn.com/zhejiang'"
+}
+
+def get_map(map_name):
+    """
+
+    :param map_name:
+    :return:
+    """
+    _location_js = _mapindex.get(map_name, "")
+    _location = ""
+    try:
+        _location = _location_js.split(":")[0]
+    except:
+        pass
+    return _temple_map_notebook.replace('##locationJs', _location_js).replace('##location', _location)
