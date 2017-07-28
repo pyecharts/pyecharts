@@ -6,8 +6,9 @@ from pyecharts.option import get_all_options
 
 class Radar(Base):
     """
-    <<< 雷达图 >>>
-    雷达图主要用于表现多变量的数据。
+    <<< Radar chart >>>
+    Radar chart is mainly used to show multi-variable data,
+    such as the analysis of a football player's varied attributes. It relies radar component.
     """
     def __init__(self, title="", subtitle="", **kwargs):
         super(Radar, self).__init__(title, subtitle, **kwargs)
@@ -17,19 +18,20 @@ class Radar(Base):
                shape="",
                rader_text_color="#000",
                **kwargs):
-        """ 配置 rader 组件选项
+        """ config rader component options
 
         :param schema:
-            默认雷达图的指示器，用来指定雷达图中的多个维度，会对数据处理成 {name:xx, value:xx} 的字典
+            The default radar map indicator, used to specify multiple dimensions in the radar map,
+            will process the data into a dictionary of {name: xx, value: xx}
         :param c_schema:
-            用户自定义雷达图的指示器，用来指定雷达图中的多个维度
-            name: 指示器名称
-            min: 指示器最小值
-            max: 指示器最大值
+            Indicator of radar chart, which is used to assign multiple variables(dimensions) in radar chart.
+            name: Indicator's name.
+            min: The maximum value of indicator. It is an optional configuration, but we recommend to set it manually.
+            max: The maximum value of indicator. It is an optional configuration, but we recommend to set it manually.
         :param shape:
-            雷达图绘制类型，支持 polygon（多边形） 和 circle
+            Radar render type, in which 'polygon' and 'circle' are supported.
         :param rader_text_color:
-            雷达图数据项字体颜色
+            Radar chart data item font color
         :param kwargs:
         """
         chart = get_all_options(**kwargs)
@@ -57,11 +59,12 @@ class Radar(Base):
         """
 
         :param name:
-            图例名称
+            Series name used for displaying in tooltip and filtering with legend,
+            or updaing data and configuration with setOption.
         :param value:
-            数据项，类型为包含列表的列表 [[]]。数据中，每一行是一个『数据项』，每一列属于一个『维度』
+            data array of series, it is represented by a two-dimension array -> [[],[]]
         :param item_color:
-            指定单图例颜色
+            Specify a single legend color
         :param kwargs:
         """
         kwargs.update(flag=True, type='radar')
