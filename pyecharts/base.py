@@ -398,7 +398,11 @@ class Base(object):
                 break
         tmp = Template(temple)
         try:
-            html = tmp.render(myOption=my_option, chartId=divid, myWidth=self._width, myHeight=self._height)
+            html = tmp.render(myOption=my_option,
+                              chartId=divid,
+                              myWidth=self._width,
+                              myHeight=self._height,
+                              html_title=self._title)
         except:
             html = tmp.render(mtOption=my_option.decode('utf8'), chartId=divid, myWidth=self._width,
                               myHeight=self._height)
