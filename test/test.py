@@ -6,6 +6,8 @@ from test.test_funnel import test_funnel
 from test.test_gauge import test_gague
 from test.test_geo import test_geo
 from test.test_graph import test_graph
+from test.test_grid import test_grid
+from test.test_heatmap import test_heatmap
 from test.test_kline import test_kline
 from test.test_line import test_line
 from test.test_liquid import test_liquid

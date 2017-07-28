@@ -32,7 +32,7 @@ class Geo(Base):
         :param value:
             属性所对应的值
         :param type:
-            图例类型，有'scatter', 'effectscatter'可选
+            图例类型，有'scatter', 'effectscatter', 'heatmap'可选
         :param maptype:
             地图类型，目前只有 china 可选
         :param symbol_size:
@@ -65,7 +65,7 @@ class Geo(Base):
                         "borderColor": border_color},
                         "emphasis":{"areaColor": geo_emphasis_color}}
                 })
-            self._option.get('legend').get('data').append(name)
+            self._option.get('legend')[0].get('data').append(name)
             if type == "scatter":
                 self._option.get('series').append({
                     "type": type,
@@ -87,6 +87,13 @@ class Geo(Base):
                     "symbolSize": symbol_size,
                     "data": _data,
                     "label": chart['label'],
+                })
+            elif type == "heatmap":
+                self._option.get('series').append({
+                    "type": type,
+                    "name": name,
+                    "coordinateSystem": 'geo',
+                    "data": _data,
                 })
             self._legend_visualmap_colorlst(**kwargs)
         else:
