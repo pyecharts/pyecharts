@@ -500,13 +500,13 @@ add(name, attr, value, type="scatter", maptype='china', symbol_size=12, border_c
     default -> 12  
     symbol size
 * border_color -> str  
-    default -> '#111'
+    default -> '#111'  
     color of map border
 * geo_normal_color -> str  
     default -> '#323c48'  
     The color of the map area in normal state
 * geo_emphasis_color -> str  
-    default -> '#2a333d'
+    default -> '#2a333d'  
     The color of the map area in emphasis state
 
 Scatter 类型
@@ -568,27 +568,19 @@ visualMap：visualMap is a type of component for visual encoding, which maps the
     The label text on both ends, such as ['High', 'Low']
 * visual_range_color -> list  
     default ->  ['#50a3ba', '#eac763', '#d94e5d']  
-    For visual channel color, array is used, like: ['#333', '#78ab23', 'blue'],  
-    which means a color ribbon is formed based on the three color stops,  
-    and dataValues will be mapped to the ribbon. Specifically,  
-    the dataValue that equals to visualMap.min will be mapped onto '#333',  
-    the dataValue that equals to visualMap.max will be mapped onto 'blue',  
-    and other dataValues will be piecewisely interpolated to get the final color.  
+    For visual channel color, array is used, like: ['#333', '#78ab23', 'blue'],which means a color ribbon is formed based on the three color stops,and dataValues will be mapped to the ribbon.  
+    Specifically,the dataValue that equals to visualMap.min will be mapped onto '#333',the dataValue that equals to visualMap.max will be mapped onto 'blue',and other dataValues will be piecewisely interpolated to get the final color.  
 * visual_orient -> str  
     default -> 'vertical'  
     How to layout the visualMap component, 'horizontal' or 'vertical'.
 * visual_pos -> str/int  
     default -> 'left'
     Distance between visualMap component and the left side of the container.  
-    visual_pos value can be instant pixel value like 20;  
-    it can also be percentage value relative to container width like '20%';  
-    and it can also be 'left', 'center', or 'right'.  
+    visual_pos value can be instant pixel value like 20;it can also be percentage value relative to container width like '20%';and it can also be 'left', 'center', or 'right'.  
 * visual_top -> str/int  
     default -> 'top'  
     Distance between visualMap component and the top side of the container.  
-    visual_top value can be instant pixel value like 20;  
-    it can also be percentage value relative to container width like '20%';  
-    and it can also be 'top', 'middle', or 'bottom'.  
+    visual_top value can be instant pixel value like 20;it can also be percentage value relative to container width like '20%';and it can also be 'top', 'middle', or 'bottom'.  
 * is_calculable -> bool  
     default -> True  
     Whether show handles, which can be dragged to adjust "selected range".
@@ -740,7 +732,7 @@ add(name, x_axis, y_axis, data, **kwargs)
     data of xAxis, it must be catagory axis.
 * y_axis -> str  
     data of yAxis, it must be catagory axis.
-* data -> [[],[]]      
+* data -> [[],[]]    
     data array of series, it is represented by a two-dimension array
 ```python
 import random
@@ -773,8 +765,7 @@ add(name, x_axis, y_axis, **kwargs)
 * x_axis -> list  
     data of xAxis
 * y_axis -> [[], []]   
-    data pf yAxis
-    Data should be the two-dimensional array shown as follow.  
+    data pf yAxis.Data should be the two-dimensional array shown as follow.  
     Every data item (each line in the example above) represents a box, which contains 4 values. They are: [open, close, lowest, highest]  (namely: [opening value, closing value, lowest value, highest value])
 ```python
 from pyecharts import Kline
@@ -838,8 +829,7 @@ add(name, x_axis, y_axis, is_symbol_show=True, is_smooth=False, is_stack=False,
     It specifies whether to stack category axis.
 * is_step -> bool/str  
     default -> False  
-    Whether to show as a step line.  
-    It can be true, false. Or 'start', 'middle', 'end'.Which will configure the turn point of step line.
+    Whether to show as a step line.It can be true, false. Or 'start', 'middle', 'end'.Which will configure the turn point of step line.
 * is_fill -> bool  
     default -> False  
     Whether to fill area.
@@ -869,7 +859,7 @@ line.render()
     default -> 50  
     mark symbol size
 * mark_point_textcolor -> str  
-    default -> '#fff'
+    default -> '#fff'  
     mark point text color
 
 标记点其他配置
@@ -1168,7 +1158,7 @@ add(name, attr, value, radius=None, center=None, rosetype=None, **kwargs)
     Center position of Pie chart, the first of which is the horizontal position,and the second is the vertical position.  
     Percentage is supported. When set in percentage, the item is relative to the container width,and the second item to the height.
 * rosetype -> str  
-    default -> 'radius'
+    default -> 'radius'  
     Whether to show as Nightingale chart, which distinguishs data through radius. There are 2 optional modes:
     * radius：Use central angle to show the percentage of data, radius to show data size.
     * area：All the sectors will share the same central angle, the data size is shown only through radiuses.
@@ -1277,7 +1267,7 @@ polar.render()
 ```
 ![polar-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/polar-0.png)
 
-* is_splitline_show  -> bool  
+* is_splitline_show -> bool  
     default -> True  
     It specifies whether to show split line.
 * is_axisline_show -> bool  
