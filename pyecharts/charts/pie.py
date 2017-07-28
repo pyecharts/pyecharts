@@ -63,9 +63,11 @@ class Pie(Base):
                 if rosetype not in ("radius", "area"):
                     rosetype = "radius"
             for a in attr:
-                self._option.get('legend').get('data').append(a)
-            _dset = set(self._option.get('legend').get('data'))
-            self._option.get('legend').update(data=list(_dset))
+                self._option.get('legend')[0].get('data').append(a)
+            _dlst = self._option.get('legend')[0].get('data')
+            _dset = list(set(_dlst))
+            _dset.sort(key=_dlst.index)
+            self._option.get('legend')[0].update(data=list(_dset))
             self._option.get('series').append({
                 "type": "pie",
                 "name": name,
@@ -74,6 +76,7 @@ class Pie(Base):
                 "center": [_cmin, _cmax],
                 "roseType": rosetype,
                 "label": chart['label'],
+                "indexflag": self._option.get('_index_flag')
             })
             self._legend_visualmap_colorlst(**kwargs)
         else:

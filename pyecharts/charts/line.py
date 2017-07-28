@@ -51,7 +51,7 @@ class Line(Base):
             is_stack = "stack" if is_stack else ""
             _area_style = {"normal": chart['area_style']} if is_fill else {}
             self._option.update(xAxis=xaxis, yAxis=yaxis)
-            self._option.get('legend').get('data').append(name)
+            self._option.get('legend')[0].get('data').append(name)
             self._option.get('series').append({
                 "type": "line",
                 "name": name,
@@ -65,7 +65,8 @@ class Line(Base):
                 "lineStyle": chart['line_style'],
                 "areaStyle": _area_style,
                 "markPoint": chart['mark_point'],
-                "markLine": chart['mark_line']
+                "markLine": chart['mark_line'],
+                "indexflag": self._option.get('_index_flag')
             })
             self._legend_visualmap_colorlst(**kwargs)
         else:

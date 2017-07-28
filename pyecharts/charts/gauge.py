@@ -41,7 +41,7 @@ class Gauge(Base):
         if angle_range:
             if len(angle_range) == 2:
                 _start, _end = angle_range
-        self._option.get('legend').get('data').append(name)
+        self._option.get('legend')[0].get('data').append(name)
         self._option.get('series').append({
             "type": "gauge",
             "detail": {"formatter": '{value}%'},
