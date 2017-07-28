@@ -397,11 +397,11 @@ def visual_map(visual_range=None,
         if len(visual_range) == 2:
             _min, _max = visual_range
 
-    # 两端文本默认值为 ['low', 'hight']
-    _tlow, _thight = "low", "hight"
+    # 两端文本默认值为 ['low','high']
+    _tlow, _thigh = "low", "high"
     if visual_range_text:
         if len(visual_range_text) == 2:
-            _tlow, _thight = visual_range_text
+            _tlow, _thigh = visual_range_text
 
     # 过渡颜色默认为 ['#50a3ba', '#eac763', '#d94e5d']
     inrange = ['#50a3ba', '#eac763', '#d94e5d']
@@ -413,7 +413,7 @@ def visual_map(visual_range=None,
         "type": "continuous",
         "min": _min,
         "max": _max,
-        "text": [_thight, _tlow],
+        "text": [_thigh, _tlow],
         "textStyle": {"color": visual_text_color},
         "inRange": {"color": inrange},
         "calculable": is_calculable,
