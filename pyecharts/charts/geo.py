@@ -6,8 +6,9 @@ from pyecharts.option import get_all_options
 
 class Geo(Base):
     """
-    <<< 地理坐标系组件 >>>
-    地理坐标系组件用于地图的绘制，支持在地理坐标系上绘制散点图，线集。
+    <<< Geo component >>>
+    Geographic coorinate system component.
+    Geographic coorinate system component is used to draw maps, which also supports scatter series, and line series.
     """
     def __init__(self, title="", subtitle="", **kwargs):
         super(Geo, self).__init__(title, subtitle, **kwargs)
@@ -26,23 +27,24 @@ class Geo(Base):
         """
 
         :param name:
-            图例名称
+            Series name used for displaying in tooltip and filtering with legend,
+            or updaing data and configuration with setOption.
         :param attr:
-            属性名称
+            name of attribute
         :param value:
-            属性所对应的值
+            value of attribute
         :param type:
-            图例类型，有'scatter', 'effectscatter', 'heatmap'可选
+            chart type, it can be 'scatter', 'effectscatter', 'heatmap'
         :param maptype:
-            地图类型，目前只有 china 可选
+            type of map, it only supports 'china' temporarily.
         :param symbol_size:
-            标记图形大小
+            symbol size
         :param border_color:
-            地图边界颜色
+            color of map border
         :param geo_normal_color:
-            正常状态下地图区域的颜色
+            The color of the map area in normal state
         :param geo_emphasis_color:
-            高亮状态下地图区域的颜色
+            The color of the map area in emphasis state
         :param kwargs:
         """
         if isinstance(attr, list) and isinstance(value, list):

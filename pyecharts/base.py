@@ -27,29 +27,42 @@ class Base(object):
         """
 
         :param title:
-            主标题文本，支持 \n 换行
+            The main title text, supporting for \n for newlines.
         :param subtitle:
-            副标题文本，支持 \n 换行
+            Subtitle text, supporting for \n for newlines.
         :param width:
-            画布宽度
+            Canvas width
         :param height:
-            画布高度
+            Canvas height
         :param title_pos:
-            标题距离左侧距离，有'auto', 'left', 'right', 'center'可选，也可为百分比或整数
+            Distance between grid component and the left side of the container.
+            title_pos value can be instant pixel value like 20;
+            it can also be percentage value relative to container width like '20%';
+            it can also be 'left', 'center', or 'right'.
+            If the title_pos value is set to be 'left', 'center', or 'right',
+            then the component will be aligned automatically based on position.
         :param title_top:
-            标题距离顶部距离，有'top', 'middle', 'bottom'可选，也可为百分比或整数
+            Distance between grid component and the top side of the container.
+            top value can be instant pixel value like 20;
+            it can also be percentage value relative to container width like '20%';
+            it can also be 'top', 'middle', or 'bottom'.
+            If the left value is set to be 'top', 'middle', or 'bottom',
+            then the component will be aligned automatically based on position.
         :param title_color:
-            主标题文本颜色
+            main title text color.
         :param subtitle_color:
-            副标题文本颜色
+            subtitle text color.
         :param title_text_size:
-            主标题文本字体大小
+            main title font size
         :param subtitle_text_size:
-            副标题文本字体大小
+            subtitle font size
         :param background_color:
-            画布背景颜色
+            Background color of title, which is transparent by default.
+            Color can be represented in RGB, for example 'rgb(128, 128, 128)'.
+            RGBA can be used when you need alpha channel, for example 'rgba(128, 128, 128, 0.5)'.
+            You may also use hexadecimal format, for example '#ccc'.
         :param is_grid:
-            是否使用 grid 组件，用于并行显示图表。
+            It specifies whether to use the grid component.
         """
         self._option = {}
         if is_grid:
@@ -181,14 +194,14 @@ class Base(object):
             yaxis_formatter=None,
             yaxis_name_pos=None,
             yaxis_name=None):
-        """ base 父类的 add 方法只是为了提供提示选项 """
+        """ The base class's add() is just to provide a hint option """
         pass
 
     def custom(self, series):
-        """ 追加自定义图表类型
+        """ Appends the data for the series of the chart type
 
         :param series:
-            追加图表类型的 series 数据
+            series data
         """
         _name, _series, _xaxis, _yaxis, _legend, _title = series
         for n in _name:
@@ -200,7 +213,7 @@ class Base(object):
         """
 
         :param series:
-            追加图表类型的 series 数据
+            series data
         :return:
         """
         _name, _series, _xaxis, _yaxis, _legend, _title = series
@@ -215,22 +228,36 @@ class Base(object):
              grid_bottom=None,
              grid_left=None,
              grid_right=None):
-        """ 并行显示图表
+        """ Concurrently show charts
 
         :param series:
-            追加图表类型的 series 数据
+            append other chart series data
         :param grid_width:
-            grid 组件的宽度。默认自适应。
+            Width of grid component. Adaptive by default.
         :param grid_height:
-            grid 组件的高度。默认自适应。
+            Height of grid component. Adaptive by default.
         :param grid_top:
-            grid 组件离容器顶部的距离。
+            Distance between grid component and the top side of the container.
+            grid_top value can be instant pixel value like 20;
+            it can also be percentage value relative to container width like '20%';
+            and it can also be 'top', 'middle', or 'bottom'.
+            If the grid_top value is set to be 'top', 'middle', or 'bottom',
+            then the component will be aligned automatically based on position.
         :param grid_bottom:
-            grid 组件离容器底部的距离。
+            Distance between grid component and the bottom side of the container.
+            grid_bottom value can be instant pixel value like 20;
+            it can also be percentage value relative to container width like '20%'.
         :param grid_left:
-            grid 组件离容器左侧的距离。
+            Distance between grid component and the left side of the container.
+            grid_left value can be instant pixel value like 20;
+            it can also be percentage value relative to container width like '20%';
+            and it can also be 'left', 'center', or 'right'.
+            If the grid_left value is set to be 'left', 'center', or 'right',
+            then the component will be aligned automatically based on position.
         :param grid_right:
-            grid 组件离容器右侧的距离。
+            Distance between grid component and the right side of the container.
+            grid_right value can be instant pixel value like 20;
+            it can also be percentage value relative to container width like '20%'.
         :return:
         """
         from pyecharts.option import grid
@@ -245,7 +272,7 @@ class Base(object):
                 self._option.get('yAxis').append(_yaxis[0])
             except:
                 pass
-            # indexflag 为每个图例唯一标识
+            # indexflag is only identify for every series
             _flag = self._option.get('series')[0].get('indexflag')
             _series_index = 0
             for s in self._option.get('series'):
@@ -262,24 +289,24 @@ class Base(object):
             self._option.get('grid').append(_grid)
 
     def get_series(self):
-        """ 获取图表的 series 数据 """
+        """ Get chart series data """
         return self._option.get('legend')[0].get('data'), self._option.get('series'),\
                self._option.get('xAxis', None), self._option.get('yAxis', None),\
                self._option.get('legend')[0], self._option.get('title')[0]
 
     def show_config(self):
-        """ 打印输出 option 所有配置项 """
+        """ Print all options of charts"""
         pprint(self._option)
 
     @staticmethod
     def cast(seq):
-        """ 转换数据序列，将带字典和元祖类型的序列转换为 k_lst,v_lst 两个列表
+        """ Convert the data sequence, convert the sequence with the dictionary and tuple type into k_lst, v_lst.
         1.[(A1, B1),(A2, B2),(A3, B3),(A4, B4)] --> k_lst[A[i1,i2...]], v_lst[B[i1,i2...]]
         2.[{A1: B1},{A2: B2},{A3: B3},{A4: B4}] --> k_lst[A[i1,i2...]], v_lst[B[i1,i2...]]
         3.{A1: B1, A2: B2, A3: B3, A4: B4} -- > k_lst[A[i1,i2...]], v_lst[B[i1,i2...]]
 
         :param seq:
-            转换的序列
+            data sequence
         :return:
         """
         k_lst, v_lst = [], []
@@ -303,10 +330,10 @@ class Base(object):
         return k_lst, v_lst
 
     def _legend_visualmap_colorlst(self, is_visualmap=False, **kwargs):
-        """ 配置 legend，visualmap 以及 colorlst
+        """ config legend，visualmap and colorlst component.
 
         :param is_visualmap:
-            是否显示 visualmap 组件
+            It specifies whether to use the viusalmap component.
         :param kwargs:
         """
         kwargs.update(colorlst=self._colorlst)
@@ -321,10 +348,10 @@ class Base(object):
             self._option.update(dataZoom=chart['datazoom'])
 
     def render(self, path="render.html"):
-        """ 渲染数据项，生成 html 文件
+        """ Render the options string, generate the html file
 
         :param path:
-            生成 html 文件保存路径
+            path of render html file
         """
         temple = Tp._temple
         series = self._option.get("series")
@@ -346,7 +373,7 @@ class Base(object):
                 fout.write(html)
 
     def render_notebook(self):
-        """ 渲染数据项，在 notebook 中显示
+        """ Render the options string, displayed in the jupyter notebook
 
         :return:
         """
@@ -376,7 +403,7 @@ class Base(object):
 
     @property
     def _geo_cities(self):
-        """ 返回 geo 组件中国各大城市经纬度 """
+        """ Return China's major cities latitude and longitude -> Geo Chart """
         return {
             "海门": [121.15, 31.89],
             "鄂尔多斯": [109.781327, 39.608266],

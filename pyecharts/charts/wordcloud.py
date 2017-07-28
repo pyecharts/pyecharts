@@ -6,7 +6,7 @@ from pyecharts.option import gen_color
 
 class WordCloud(Base):
     """
-    <<< 词云图 >>>
+    <<< WordCloud chart >>>
     """
     def __init__(self, title="", subtitle="", **kwargs):
         super(WordCloud, self).__init__(title, subtitle, **kwargs)
@@ -22,19 +22,24 @@ class WordCloud(Base):
         """
 
         :param name:
-            图例名称
+            Series name used for displaying in tooltip and filtering with legend,
+            or updaing data and configuration with setOption.
         :param attr:
-            属性名称
+            name of attribute
         :param value:
-            属性所对应的值
+            value of attribute
         :param shape:
-            词云图轮廓，有'circle', 'cardioid', 'diamond', 'triangle-forward', 'triangle', 'pentagon', 'star'可选
+            shape of wordcloud
+            It can be 'circle', 'cardioid', 'diamond', 'triangle-forward', 'triangle', 'pentagon', 'star'
         :param word_gap:
-            单词间隔
+            Gap of word
+            size of the grid in pixels for marking the availability of the canvas
+            the larger the grid size, the bigger the gap between words.
         :param word_size_range:
-            单词字体大小范围
+            Text size range which the value in data will be mapped to.
+            Default to have minimum 12px and maximum 60px size.
         :param rotate_step:
-            旋转单词角度，默认为 45 度
+            Text rotation range and step in degree. Text will be rotated randomly in range [-90, 90] by rotationStep 45
         """
         if isinstance(attr, list) and isinstance(value, list):
             assert len(attr) == len(value)
@@ -51,8 +56,9 @@ class WordCloud(Base):
             if word_size_range is not None:
                 if len(word_size_range) == 2:
                     _min, _max = word_size_range
+
             _rmin, _rmax = -90, 90
-            # 确保选择形状时能够生效，需使字体不旋转
+            # make sure shape valid, need to set ratated range [-90, 90]
             if shape in ("cardioid", "diamond", "triangle-forward", "triangle", "pentagon", "star"):
                 _rmin = _rmax = 0
             else:

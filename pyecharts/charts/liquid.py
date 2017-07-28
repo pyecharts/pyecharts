@@ -5,8 +5,8 @@ from pyecharts.base import Base
 
 class Liquid(Base):
     """
-    <<< 水球图 >>>
-    主要用来突出数据的百分比。
+    <<< Liquid chart >>>
+    Liquid chart is usually used to represent data in percentage.
     """
     def __init__(self, title="", subtitle="", **kwargs):
         super(Liquid, self).__init__(title, subtitle, **kwargs)
@@ -23,17 +23,20 @@ class Liquid(Base):
         """
 
         :param name:
-            图例名称
+            Series name used for displaying in tooltip and filtering with legend,
+            or updaing data and configuration with setOption.
         :param data:
-            数据项
+            data of liquid,
+            [0.6, 0.5, 0.4, 0.3] -> This creates a chart wit waves at position of 60%, 50%, 40%, and 30%.
         :param shape:
-            水球外形，有'circle', 'rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow'可选
+            Shape of water fill chart.
+            It can be one of the default symbols: 'circle', 'rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow'
         :param liquid_color:
-            波浪颜色
+            To set colors for liquid fill chart series, set color to be an array of colors.
         :param is_liquid_animation:
-            是否显示波浪动画
+            Whether disable animation.
         :param is_liquid_outline_show:
-            是否显示边框
+            whether hide the outline
         :param kwargs:
         :return:
         """

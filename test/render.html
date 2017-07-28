@@ -5,258 +5,170 @@
 <head>
     <meta charset="utf-8">
     <title>ECharts</title>
-    <script src='https://cdn.bootcss.com/echarts/3.2.2/echarts.simple.js'></script>
-    <script type="text/javascript" src="http://data-visual.cn/datav/src/js/echarts/extension/echarts-wordcloud.min.js"></script>
+    <script src="http://oog4yfyu0.bkt.clouddn.com/echarts.min.js"></script>
+    <script type="text/javascript " src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
+    <script type="text/javascript " src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
+    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/wordcloud.js"></script>
+    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/anhui.js "></script>
+    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/aomen.js "></script>
+    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/beijing.js "></script>
+    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/chongqing.js "></script>
+    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/fujian.js "></script>
+    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/gansu.js "></script>
+    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/guangdong.js "></script>
+    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/guangxi.js "></script>
+    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/guizhou.js "></script>
+    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/hainan.js "></script>
+    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/hebei.js "></script>
+    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/heilongjiang.js "></script>
+    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/henan.js "></script>
+    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/hubei.js "></script>
+    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/hunan.js "></script>
+    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/jiangsu.js "></script>
+    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/jiangxi.js "></script>
+    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/jilin.js "></script>
+    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/liaoning.js "></script>
+    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/neimenggu.js "></script>
+    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/ningxia.js "></script>
+    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/qinghai.js "></script>
+    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/shangdong.js "></script>
+    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/shanghai.js "></script>
+    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/shanxi.js "></script>
+    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/sichuan.js "></script>
+    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/taiwan.js "></script>
+    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/tianjin.js "></script>
+    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/xianggang.js "></script>
+    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/xinjiang.js "></script>
+    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/xizang.js "></script>
+    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/yunnan.js "></script>
+    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/zhejiang.js "></script>
 </head>
 
 <body>
-    <style>
-        html,
-        body,
-        #main {
-            width: 100%;
-            height: 100%;
-            margin: 0;
-        }
-    </style>
-    <div id="main" style="width:1300px;height:620px; ">
-    </div>
-    <script type="text/javascript ">
+    <div id="main" style="width:1200px;height:600px;"></div>
+    <script type="text/javascript">
         var myChart = echarts.init(document.getElementById('main'));
         var option = {
+    "backgroundColor": "#404a59",
     "title": [
         {
-            "top": "auto",
             "subtextStyle": {
-                "color": "#aaa",
-                "fontSize": 12
+                "fontSize": 12,
+                "color": "#aaa"
             },
-            "text": "",
+            "text": "全国主要城市空气质量",
             "textStyle": {
-                "color": "#000",
-                "fontSize": 18
+                "fontSize": 18,
+                "color": "#fff"
             },
-            "subtext": "",
-            "left": "auto"
+            "subtext": "data from pm2.5",
+            "top": "auto",
+            "left": "center"
         }
     ],
+    "tooltip": {},
+    "_index_flag": 1583241,
     "legend": [
         {
-            "data": []
+            "show": true,
+            "selectedMode": true,
+            "data": [
+                ""
+            ],
+            "top": "top",
+            "left": "center",
+            "orient": "horizontal"
         }
     ],
     "toolbox": {
-        "top": "center",
-        "orient": "vertical",
-        "left": "right",
         "show": true,
+        "top": "center",
+        "left": "right",
         "feature": {
             "saveAsImage": {
                 "show": true
             }
-        }
+        },
+        "orient": "vertical"
     },
-    "tooltip": {},
-    "_index_flag": 1530709,
-    "backgroundColor": "#fff",
     "series": [
         {
-            "shape": "diamond",
-            "rotationRange": [
-                0,
-                0
-            ],
-            "girdSize": 20,
+            "showEffectOn": "render",
+            "coordinateSystem": "geo",
+            "symbol": "circle",
+            "symbolSize": 12,
             "name": "",
-            "rotationStep": 45,
-            "type": "wordCloud",
-            "sizeRange": [
-                30,
-                100
-            ],
             "data": [
                 {
-                    "name": "Sam S Club",
-                    "value": 10000,
-                    "textStyle": {
-                        "normal": {
-                            "color": "rgb(83,109,4)"
-                        }
-                    }
+                    "value": 9,
+                    "name": "汕头市"
                 },
                 {
-                    "name": "Macys",
-                    "value": 6181,
-                    "textStyle": {
-                        "normal": {
-                            "color": "rgb(33,128,11)"
-                        }
-                    }
-                },
-                {
-                    "name": "Amy Schumer",
-                    "value": 4386,
-                    "textStyle": {
-                        "normal": {
-                            "color": "rgb(115,45,0)"
-                        }
-                    }
-                },
-                {
-                    "name": "Jurassic World",
-                    "value": 4055,
-                    "textStyle": {
-                        "normal": {
-                            "color": "rgb(50,2,23)"
-                        }
-                    }
-                },
-                {
-                    "name": "Charter Communications",
-                    "value": 2467,
-                    "textStyle": {
-                        "normal": {
-                            "color": "rgb(14,76,147)"
-                        }
-                    }
-                },
-                {
-                    "name": "Chick Fil A",
-                    "value": 2244,
-                    "textStyle": {
-                        "normal": {
-                            "color": "rgb(144,45,33)"
-                        }
-                    }
-                },
-                {
-                    "name": "Planet Fitness",
-                    "value": 1898,
-                    "textStyle": {
-                        "normal": {
-                            "color": "rgb(22,79,107)"
-                        }
-                    }
-                },
-                {
-                    "name": "Pitch Perfect",
-                    "value": 1484,
-                    "textStyle": {
-                        "normal": {
-                            "color": "rgb(74,126,22)"
-                        }
-                    }
-                },
-                {
-                    "name": "Express",
-                    "value": 1112,
-                    "textStyle": {
-                        "normal": {
-                            "color": "rgb(36,15,132)"
-                        }
-                    }
-                },
-                {
-                    "name": "Home",
-                    "value": 965,
-                    "textStyle": {
-                        "normal": {
-                            "color": "rgb(83,83,34)"
-                        }
-                    }
-                },
-                {
-                    "name": "Johnny Depp",
-                    "value": 847,
-                    "textStyle": {
-                        "normal": {
-                            "color": "rgb(31,35,70)"
-                        }
-                    }
-                },
-                {
-                    "name": "Lena Dunham",
-                    "value": 582,
-                    "textStyle": {
-                        "normal": {
-                            "color": "rgb(39,154,90)"
-                        }
-                    }
-                },
-                {
-                    "name": "Lewis Hamilton",
-                    "value": 555,
-                    "textStyle": {
-                        "normal": {
-                            "color": "rgb(85,131,104)"
-                        }
-                    }
-                },
-                {
-                    "name": "KXAN",
-                    "value": 550,
-                    "textStyle": {
-                        "normal": {
-                            "color": "rgb(22,126,97)"
-                        }
-                    }
-                },
-                {
-                    "name": "Mary Ellen Mark",
-                    "value": 462,
-                    "textStyle": {
-                        "normal": {
-                            "color": "rgb(51,98,62)"
-                        }
-                    }
-                },
-                {
-                    "name": "Farrah Abraham",
-                    "value": 366,
-                    "textStyle": {
-                        "normal": {
-                            "color": "rgb(56,47,96)"
-                        }
-                    }
-                },
-                {
-                    "name": "Rita Ora",
-                    "value": 360,
-                    "textStyle": {
-                        "normal": {
-                            "color": "rgb(89,19,114)"
-                        }
-                    }
-                },
-                {
-                    "name": "Serena Williams",
-                    "value": 282,
-                    "textStyle": {
-                        "normal": {
-                            "color": "rgb(94,100,146)"
-                        }
-                    }
-                },
-                {
-                    "name": "NCAA baseball tournament",
-                    "value": 273,
-                    "textStyle": {
-                        "normal": {
-                            "color": "rgb(44,93,136)"
-                        }
-                    }
-                },
-                {
-                    "name": "Point Break",
-                    "value": 265,
-                    "textStyle": {
-                        "normal": {
-                            "color": "rgb(107,21,123)"
-                        }
-                    }
+                    "value": 12,
+                    "name": "肇庆市"
                 }
-            ]
+            ],
+            "type": "effectScatter",
+            "label": {
+                "normal": {
+                    "show": false,
+                    "position": "top",
+                    "formatter": null,
+                    "textStyle": {
+                        "fontSize": 12,
+                        "color": "#000"
+                    }
+                },
+                "emphasis": {
+                    "show": true
+                }
+            },
+            "rippleEffect": {
+                "period": 4,
+                "brushType": "stroke",
+                "scale": 5
+            }
         }
+    ],
+    "geo": {
+        "itemStyle": {
+            "normal": {
+                "borderColor": "#111",
+                "areaColor": "#323c48"
+            },
+            "emphasis": {
+                "areaColor": "#2a333d"
+            }
+        },
+        "label": {},
+        "map": "广东"
+    },
+    "color": [
+        "#61a0a8",
+        "#726930",
+        "#546570",
+        "#f05b72",
+        "#444693",
+        "#d48265",
+        "#918597",
+        "#c23531",
+        "#905a3d",
+        "#1d953f",
+        "#2f4554",
+        "#f6f5ec",
+        "#ef5b9c",
+        "#ac6767",
+        "#6950a1",
+        "#c4ccd3",
+        "#749f83",
+        "#2a5caa",
+        "#b2d235",
+        "#ca8622",
+        "#bda29a",
+        "#6d8346",
+        "#f47920",
+        "#fab27b",
+        "#6e7074"
     ]
 };
         myChart.setOption(option);

@@ -6,8 +6,10 @@ from pyecharts.option import get_all_options
 
 class Line(Base):
     """
-    <<< 折线/面积图 >>>
-    折线图是用折线将各个数据点标志连接起来的图表，用于展现数据的变化趋势。
+    <<< Broken Line >>>
+    Broken line chart relates all the data points symbol by broken lines,
+    which is used to show the trend of data changing.
+    It could be used in both rectangular coordinate and polar coordinate.
     """
     def __init__(self, title="", subtitle="", **kwargs):
         super(Line, self).__init__(title, subtitle, **kwargs)
@@ -25,22 +27,23 @@ class Line(Base):
         """
 
         :param name:
-            图例名称
+            Series name used for displaying in tooltip and filtering with legend,
+            or updaing data and configuration with setOption.
         :param x_axis:
-            x 坐标轴数据
+            data of xAxis
         :param y_axis:
-            y 坐标轴数据
+            data of yAxis
         :param is_symbol_show:
-            是否显示标记图形
+            It specifies whether to show the symbol.
         :param is_smooth:
-            是否平滑曲线显示
+            Whether to show as smooth curve.
         :param is_stack:
-            数据堆叠，同个类目轴上系列配置相同的 stack 值可以堆叠放置
+            It specifies whether to stack category axis.
         :param is_step:
-            是否是阶梯线图。可以设置为 true 显示成阶梯线图。
-            也支持设置成 start, middle, end 分别配置在当前点，当前点与下个点的中间点，下个点拐弯。
+            Whether to show as a step line. It can be true, false. Or 'start', 'middle', 'end'.
+            Which will configure the turn point of step line.
         :param is_fill:
-            是否填充曲线所绘制面积
+            Whether to fill area.
         :param kwargs:
         """
         if isinstance(x_axis, list) and isinstance(y_axis, list):
