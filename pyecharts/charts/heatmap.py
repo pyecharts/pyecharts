@@ -6,8 +6,10 @@ from pyecharts.option import get_all_options
 
 class HeatMap(Base):
     """
-    <<< 热力图>>>
-    热力图主要通过颜色去表现数值的大小，必须要配合 visualMap 组件使用。直角坐标系上必须要使用两个类目轴。
+    <<< HeatMap chart >>>
+    Heat map mainly use colors to represent values, which must be used along with visualMap component.
+    It can be used in either rectangular coordinate or geographic coordinate.
+    But the behaviour on them are quite different. Rectangular coordinate must have two catagories to use it.
     """
     def __init__(self, title="", subtitle="", **kwargs):
         super(HeatMap, self).__init__(title, subtitle, **kwargs)
@@ -19,13 +21,14 @@ class HeatMap(Base):
         """
 
         :param name:
-            图例名称
+            Series name used for displaying in tooltip and filtering with legend,
+            or updaing data and configuration with setOption.
         :param x_axis:
-            x 坐标轴数据。需为类目轴，也就是不能是数值。
+            data of xAxis, it must be catagory axis.
         :param y_axis:
-            y 坐标轴数据。需为类目轴，也就是不能是数值。
+            data of yAxis, it must be catagory axis.
         :param data:
-            数据项，类型为包含列表的列表 [[]]。数据中，每一行是一个『数据项』，每一列属于一个『维度』
+            data array of series, it is represented by a two-dimension array -> [[],[]]
         :param kwargs:
         :return:
         """

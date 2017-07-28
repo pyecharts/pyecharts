@@ -6,8 +6,8 @@ from pyecharts.option import get_all_options
 
 class Polar(Base):
     """
-    <<< 极坐标系 >>>
-    可以用于散点图和折线图。
+    <<< Polar component >>>
+    Polar coordinate can be used in scatter and line chart. Every polar coordinate has an angleAxis and a radiusAxis.
     """
     def __init__(self, title="", subtitle="", **kwargs):
         super(Polar, self).__init__(title, subtitle, **kwargs)
@@ -32,43 +32,48 @@ class Polar(Base):
         """
 
         :param name:
-            图例名称
+            Series name used for displaying in tooltip and filtering with legend,
+            or updaing data and configuration with setOption.
         :param data:
-            数据项 [极径，极角 [数据值]]
+            data of polar, [Polar radius, Polar angle, [value]]
+            it is represented by a two-dimension array -> [[],[]]
         :param angle_data:
-            角度类目数据
+            Category data for angle, available in type: 'category' axis.
         :param radius_data:
-            半径类目数据
+            Category data for radius, available in type: 'category' axis.
         :param type:
-            图例类型，有'scatter', 'effectScatter', 'barAngle', 'barRadius'可选
+            chart type，it can be 'scatter', 'effectScatter', 'barAngle', 'barRadius'
         :param symbol_size:
-            标记图形大小
+            symbol size
         :param start_angle:
-            起始刻度的角度，默认为 90 度，即圆心的正上方。0 度为圆心的正右方
+            Starting angle of axis. 90 degrees by default, standing for top position of center.
+            0 degree stands for right position of center.
         :param rotate_step:
-            刻度标签旋转的角度，在类目轴的类目标签显示不下的时候可以通过旋转防止标签之间重叠
-            旋转的角度从 -90 度到 90 度
+            Rotation degree of axis label, which is especially useful when there is no enough space for category axis.
+            Rotation degree is from -90 to 90.
         :param boundary_gap:
-            坐标轴两边留白策略
-            类目轴中 boundaryGap 可以配置为 True 和 False
-            默认为 true，这时候刻度只是作为分隔线，标签和数据点都会在两个刻度之间的带(band)中间
+            The boundary gap on both sides of a coordinate axis.
+            The setting and behavior of category axes and non-category axes are different.
+            The boundaryGap of category axis can be set to either true or false.
+            Default value is set to be true, in which case axisTick is served only as a separation line,
+            and labels and data appear only in the center part of two axis ticks, which is called band.
         :param clockwise:
-            刻度增长是否按顺时针，默认顺时针
+            Whether the positive position of axis is in clockwise. True for clockwise by default.
         :param is_stack:
-            数据堆叠，同个类目轴上系列配置相同的 stack 值可以堆叠放置
+            It specifies whether to stack category axis.
         :param axis_range:
-            坐标轴刻度范围。
+            axis scale range
         :param is_angleaxis_show:
-            是否显示极坐标系的角度轴，默认为 True
+            whether show angle axis.
         :param is_radiusaxis_show:
-            是否显示极坐标系的径向轴，默认为 True
+            whether show radius axis.
         :param kwargs:
         """
         chart = get_all_options(**kwargs)
         polar_type = 'value' if type == "line" else "category"
         is_stack = "stack" if is_stack else ""
         self._option.get('legend')[0].get('data').append(name)
-        # 坐标轴刻度范围默认为 [None, None]
+        # By defalut, axis scale range is [None, None]
         _amin, _amax = None, None
         if axis_range:
             if len(axis_range) == 2:

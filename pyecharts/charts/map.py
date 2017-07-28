@@ -6,8 +6,10 @@ from pyecharts.option import get_all_options
 
 class Map(Base):
     """
-    <<< 地图 >>>
-    地图主要用于地理区域数据的可视化。
+    <<< Map chart >>>
+    Map is maily used in the visulization of geographic area data,
+    which can be used with visualMap component to visualize the datas such as population distribution
+    density in diffrent areas.
     """
     def __init__(self, title="", subtitle="", **kwargs):
         super(Map, self).__init__(title, subtitle, **kwargs)
@@ -22,16 +24,20 @@ class Map(Base):
         """
 
         :param name:
-            图例名称
+            Series name used for displaying in tooltip and filtering with legend,
+            or updaing data and configuration with setOption.
         :param attr:
-            属性名称
+            name of attribute
         :param value:
-            属性所对应的值
+            value of attribute
         :param is_roam:
-            是否开启鼠标缩放和平移漫游。默认不开启
-            如果只想要开启缩放或者平移，可以设置成 scale 或者 move。设置成 true 为都开启
+            Whether to enable mouse zooming and translating. false by default.
+            If either zooming or translating is wanted,
+            it can be set to 'scale' or 'move'. Otherwise, set it to be true to enable both.
         :param maptype:
-            地图类型，支持 china, world, 广东，福建，山东等...
+            type of map, it supports
+            china、world、安徽、澳门、北京、重庆、福建、福建、甘肃、广东，广西、广州、海南、河北、黑龙江、河南、湖北、湖南、
+            江苏、江西、吉林、辽宁、内蒙古、宁夏、青海、山东、上海、陕西、四川、台湾、天津、香港、新疆、西藏、云南、浙江
         :param kwargs:
         """
         if isinstance(attr, list) and isinstance(value, list):

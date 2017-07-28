@@ -19,22 +19,24 @@ def label(type=None,
           label_text_size=12,
           formatter=None,
           **kwargs):
-    """ 图形上的文本标签，可用于说明图形的一些数据信息，比如值，名称等。
+    """ Text label of , to explain some data information about graphic item like value, name and so on.
+        In ECharts 3, to make the configuration structure flatter,
+        labelis taken to be at the same level with itemStyle, and has two status normal and emphasis as itemStyle does.
 
     :param type:
-        图例类型
+        Chart type
     :param is_emphasis:
-        是否高亮显示标签
+        It specifies whether to show laebl in emphasis status.
     :param is_label_show:
-        是否正常显示标签
+        It specifies whether to show laebl in normal status.
     :param label_pos:
-        标签位置
+        Label position.It can be 'top', 'left', 'right', 'bottom', 'inside','outside'
     :param label_text_color:
-        标签字体颜色
+        Label text color.
     :param label_text_size:
-        标签字体大小
+        Label font size.
     :param formatter:
-        标签内容格式器，有'series', 'name', 'value', 'percent'可选
+        Data label formatter,it can be 'series', 'name', 'value', 'precent' 
     :param kwargs:
     :return:
     """
@@ -65,11 +67,11 @@ def color(colorlst=None,
     """
 
     :param colorlst:
-        全局颜色列表
+        Global color list
     :param is_random:
-        是否随机排列颜色列表
+        It specifies whether to random global color list.
     :param label_color:
-        追加颜色项
+        color append to global color list
     :param kwargs:
     :return:
     """
@@ -92,13 +94,13 @@ def line_style(line_width=1,
     """
 
     :param line_width:
-        线的宽度
+        Line width.
     :param line_opacity:
-        线的透明度，0 为完全透明，1 为完全不透明
+        Opacity of the component. Supports value from 0 to 1, and the component will not be drawn when set to 0.
     :param line_curve:
-        线的弯曲程度，0 为完全不弯曲，1 为最弯曲
+        Edge curvature, which supports value from 0 to 1. The larger the value, the greater the curvature. -> Graph
     :param line_type:
-        线的类型，有'solid', 'dashed', 'dotted'可选
+        Line type,it can be 'solid', 'dashed', 'dotted'
     :param kwargs:
     :return:
     """
@@ -116,7 +118,7 @@ def split_line(is_splitline_show=True, **kwargs):
     """
 
     :param is_splitline_show:
-        是否显示分割线
+        It specifies whether to show split line.
     :param kwargs:
     :return:
     """
@@ -132,7 +134,7 @@ def axis_line(is_axisline_show=True, **kwargs):
     """
 
     :param is_axisline_show:
-        是否显示坐标轴线
+        It specifies whether to show axis line.
     :param kwargs:
     :return:
     """
@@ -148,7 +150,7 @@ def split_area(is_area_show=True, **kwargs):
     """
 
     :param is_area_show:
-        是否显示填充区域
+        It specifies whether to show split area.
     :param kwargs:
     :return:
     """
@@ -167,11 +169,11 @@ def area_style(flag=False,
     """
 
     :param flag:
-        图例类型标记位
+        chart type flag
     :param area_opacity:
-        填充区域透明度
+        Opacity of the component. Supports value from 0 to 1, and the component will not be drawn when set to 0.
     :param area_color:
-        填充区域颜色
+        Fill color.
     :param kwargs:
     :return:
     """
@@ -200,30 +202,31 @@ def xy_axis(type=None,
     """
 
     :param type:
-        图例类型
+        Chart type
     :param xy_text_size:
-        x 轴和 y 轴字体大小
+        axis name font size
     :param namegap:
-        坐标轴名称与轴线之间的距离
+        Gap between axis name and axis line.
     :param xaxis_name:
-        x 轴名称
+        Name of xAxis
     :param xaxis_name_pos:
-        x 轴名称位置，有'start'，'middle'，'end'可选
+        Location of xAxis name.It can be 'start'，'middle'，'end'
     :param interval:
-        坐标轴刻度标签的显示间隔，在类目轴中有效
-        默认会采用标签不重叠的策略间隔显示标签
-        可以设置成 0 强制显示所有标签
-        如果设置为 1，表示『隔一个标签显示一个标签』，如果值为 2，表示隔两个标签显示一个标签，以此类推
+        The display interval of the axis scale label is valid in the category axis.
+        By default, labels are displayed using labels that do not overlap the labels
+        Set to 0 to force all labels to be displayed
+        and label is one by one if setting as 1; If 2, it will be one label separates from each other, and so on.
     :param yaxis_name:
-        y 轴名称
+        Name of yAxis
     :param yaxis_name_pos:
-        y 轴名称位置，有'start', 'middle'，'end'可选
+        Location of yAxis name.It can be 'start'，'middle'，'end'
     :param is_convert:
-        是否交换 x 轴与 y 轴
+        It specifies whether to convert xAxis and yAxis.
     :param x_axis:
-        x 轴数据项
+        xAxis data
     :param yaxis_formatter:
-        y 轴标签格式器
+        Formatter of axis label, which supports string template and callback function.
+        example: '{value} kg'
     :param kwargs:
     :return:
     """
@@ -262,15 +265,15 @@ def _mark(data,
     """
 
     :param data:
-        标记数据项，有'min', 'max', 'average'可选
+        mark data, it can be 'min', 'max', 'average'
     :param mark_point_symbol:
-        标记点图形，有'circle', 'rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow'可选
+        mark symbol, it cna be 'circle', 'rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow'
     :param mark_point_symbolsize:
-        标记点图形大小
+        mark symbol size
     :param mark_point_textcolor:
-        标记点字体颜色
+        mark point text color
     :param _is_markline:
-        判断是否为 markline
+        It specifies whether is markline or not.
     :return:
     """
     mark = {"data": []}
@@ -306,7 +309,7 @@ def mark_point(mark_point=None, **kwargs):
     """
 
     :param mark_point:
-        标记点，有'min', 'max', 'average'可选
+        mark point data, it can be 'min', 'max', 'average'
     :param kwargs:
     :return:
     """
@@ -318,7 +321,7 @@ def mark_line(mark_line=None, **kwargs):
     """
 
     :param mark_line:
-        标记线，有'min', 'max', 'average'可选
+        mark line data,it can be 'min', 'max', 'average'
     :param kwargs:
     :return:
     """
@@ -332,18 +335,27 @@ def legend(type=None,
            legend_pos="center",
            legend_top='top',
            **kwargs):
-    """ 图例组件。
-        图例组件展现了不同系列的标记(symbol)，颜色和名字。可以通过点击图例控制哪些系列不显示。
+    """ Legend component.
+        Legend component shows symbol, color and name of different series.
+        You can click legends to toggle displaying series in the chart.
+        In ECharts 3, a single echarts instance may contain multiple legend components,
+        which makes it easier for the layout of multiple legend components.
     :param type:
-        图例类型
+        chart type
     :param is_legend_show:
-        是否显示顶端图例
+        It specifies whether to show the legend component.
     :param legend_orient:
-        图例列表的布局朝向，有'horizontal', 'vertical'可选
+        The layout orientation of legend.It can be 'horizontal', 'vertical'
     :param legend_pos:
-        图例组件离容器左侧的距离，有'left', 'center', 'right'可选，也可为百分数或整数。
-    :param legend_pos:
-        图例组件离容器上侧的距离，有'top', 'center', 'bottom'可选，也可为百分数或整数。
+        Distance between legend component and the left side of the container.
+        legend_pos value can be instant pixel value like 20;
+        it can also be percentage value relative to container width like '20%';
+        and it can also be 'left', 'center', or 'right'.
+    :param legend_top:
+        Distance between legend component and the top side of the container.
+        legend_top value can be instant pixel value like 20;
+        it can also be percentage value relative to container width like '20%';
+        and it can also be 'top', 'middle', or 'bottom'.
     :param kwargs:
     :return:
     """
@@ -370,40 +382,50 @@ def visual_map(visual_range=None,
                visual_top="bottom",
                is_calculable=True,
                **kwargs):
-    """ 是视觉映射组件，用于进行『视觉编码』，也就是将数据映射到视觉元素（视觉通道）。
+    """ visualMap is a type of component for visual encoding, which maps the data to visual channels
 
     :param visual_range:
-        指定组件的允许的最小值与最大值
+        pecify the min and max dataValue for the visualMap component.
     :param visual_text_color:
-        两端文本颜色
+        visualMap text color.
     :param visual_range_text:
-        两端文本
+        The label text on both ends, such as ['High', 'Low']
     :param visual_range_color:
-        过渡的颜色，列表类型
+        For visual channel color, array is used, like: ['#333', '#78ab23', 'blue'],
+        which means a color ribbon is formed based on the three color stops,
+        and dataValues will be mapped to the ribbon. Specifically,
+        the dataValue that equals to visualMap.min will be mapped onto '#333',
+        the dataValue that equals to visualMap.max will be mapped onto 'blue',
+        and other dataValues will be piecewisely interpolated to get the final color.
     :param visual_orient:
-        visualmap 组件条的方向，默认为'vertical'，有'vertical', 'horizontal'可选。
+        How to layout the visualMap component, 'horizontal' or 'vertical'.
     :param visual_pos:
-        visualmap 组件条距离左侧的位置，默认为'left'。有'right', 'center', 'right'可选，也可为百分数或整数。
+        Distance between visualMap component and the left side of the container.
+        visual_pos value can be instant pixel value like 20;
+        it can also be percentage value relative to container width like '20%';
+        and it can also be 'left', 'center', or 'right'.
     :param visual_top:
-        visualmap 组件条距离顶部的位置，默认为'top'。有'top', 'center', 'bottom'可选，也可为百分数或整数。
+        Distance between visualMap component and the top side of the container.
+        visual_top value can be instant pixel value like 20;
+        it can also be percentage value relative to container width like '20%';
+        and it can also be 'top', 'middle', or 'bottom'.
     :param is_calculable:
-        是否显示拖拽用的手柄（手柄能拖拽调整选中范围）
+        Whether show handles, which can be dragged to adjust "selected range".
     :param kwargs:
     :return:
     """
-    # 组件允许的最大值最小值默认为 [0, 100]
+    # defalut min and max value of visual_range is [0, 100]
     _min, _max = 0, 100
     if visual_range:
         if len(visual_range) == 2:
             _min, _max = visual_range
 
-    # 两端文本默认值为 ['low', 'hight']
-    _tlow, _thight = "low", "hight"
+    # defalut label text on both ends is ['low', 'high']
+    _tlow, _thigh = "low", "high"
     if visual_range_text:
         if len(visual_range_text) == 2:
-            _tlow, _thight = visual_range_text
+            _tlow, _thigh = visual_range_text
 
-    # 过渡颜色默认为 ['#50a3ba', '#eac763', '#d94e5d']
     inrange = ['#50a3ba', '#eac763', '#d94e5d']
     if visual_range_color:
         if len(visual_range_color) >= 2:
@@ -413,7 +435,7 @@ def visual_map(visual_range=None,
         "type": "continuous",
         "min": _min,
         "max": _max,
-        "text": [_thight, _tlow],
+        "text": [_thigh, _tlow],
         "textStyle": {"color": visual_text_color},
         "inRange": {"color": inrange},
         "calculable": is_calculable,
@@ -425,7 +447,7 @@ def visual_map(visual_range=None,
 
 
 def gen_color():
-    """ 随机生成颜色，用于词云图
+    """ random generation color -> WordCloud
 
     :return:
     """
@@ -439,7 +461,7 @@ def symbol(type=None, symbol="", **kwargs):
     """
 
     :param symbol:
-        标记类型
+        symbol type, it can be 'rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow'.
     :param kwargs:
     :return:
     """
@@ -460,11 +482,11 @@ def effect(effect_brushtype="stroke",
     """
 
     :param effect_brushtype:
-        波纹绘制方式，有'stroke', 'fill'可选
+        The brush type for ripples. options: 'stroke' and 'fill'.
     :param effect_scale:
-        动画中波纹的最大缩放比例
+        The maximum zooming scale of ripples in animation.
     :param effect_period:
-        动画持续的时间
+        The duration of animation.
     :param kwargs:
     :return:
     """
@@ -484,11 +506,11 @@ def datazoom(is_datazoom_show=False,
     """
 
     :param is_datazoom_show:
-        是否使用区域缩放组件
+        It specifies whether to use the datazoom component.
     :param datazoom_type:
-        区域缩放组件类型，默认为'slider'，有'slider', 'inside'可选
+        datazoom type, 'slider' or 'inside'
     :param datazoom_range:
-        区域缩放的范围
+        The range percentage of the window out of the data extent, in the range of 0 ~ 100.
     :param kwargs:
     :return:
     """
@@ -516,18 +538,34 @@ def grid(grid_width=None,
          grid_right=None,
          **kwargs):
     """
+    :param series:
+        other chart series data
     :param grid_width:
-        grid 组件的宽度。默认自适应。
+        Width of grid component. Adaptive by default.
     :param grid_height:
-        grid 组件的高度。默认自适应。
+        Height of grid component. Adaptive by default.
     :param grid_top:
-        grid 组件离容器顶部的距离。
+        Distance between grid component and the top side of the container.
+        grid_top value can be instant pixel value like 20;
+        it can also be percentage value relative to container width like '20%';
+        and it can also be 'top', 'middle', or 'bottom'.
+        If the grid_top value is set to be 'top', 'middle', or 'bottom',
+        then the component will be aligned automatically based on position.
     :param grid_bottom:
-        grid 组件离容器底部的距离。
+        Distance between grid component and the bottom side of the container.
+        grid_bottom value can be instant pixel value like 20;
+        it can also be percentage value relative to container width like '20%'.
     :param grid_left:
-        grid 组件离容器左侧的距离。
+        Distance between grid component and the left side of the container.
+        grid_left value can be instant pixel value like 20;
+        it can also be percentage value relative to container width like '20%';
+        and it can also be 'left', 'center', or 'right'.
+        If the grid_left value is set to be 'left', 'center', or 'right',
+        then the component will be aligned automatically based on position.
     :param grid_right:
-        grid 组件离容器右侧的距离。
+        Distance between grid component and the right side of the container.
+        grid_right value can be instant pixel value like 20;
+        it can also be percentage value relative to container width like '20%'.
     :return:
     """
     _grid = {}
@@ -547,7 +585,7 @@ def grid(grid_width=None,
 
 
 def get_all_options(**kwargs):
-    """ 返回所有配置项
+    """ Return all options of charts
 
     :param kwargs:
     :return:

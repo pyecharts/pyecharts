@@ -5,7 +5,7 @@ from pyecharts.base import Base
 
 class Gauge(Base):
     """
-    <<< 仪表盘 >>>
+    <<< Gauge chart >>>
     """
     def __init__(self, title="", subtitle="", **kwargs):
         super(Gauge, self).__init__(title, subtitle, **kwargs)
@@ -20,27 +20,32 @@ class Gauge(Base):
         """
 
         :param name:
-            图例名称
+            Series name used for displaying in tooltip and filtering with legend,
+            or updaing data and configuration with setOption.
         :param attr:
-            属性名称
+            name of attribute
         :param value:
-            属性所对应的值
+            value of attribute
         :param scale_range:
-            仪表盘数据范围
+            data range of guage
         :param angle_range:
-            仪表盘角度范围
+            angle range of guage
+            The direct right side of circle center is 0 degree,
+            the right above it is 90 degree, the direct left side of it is 180 degree.
         :param kwargs:
         """
-        # 数据范围默认为 [0,100]
+        # default data range is [0, 100]
         _min, _max = 0, 100
         if scale_range:
             if len(scale_range) == 2:
                 _min, _max = scale_range
-        # 角度范围默认为 [225,-45]
+
+        # defalut angle range is [225, -45]
         _start, _end = 225, -45
         if angle_range:
             if len(angle_range) == 2:
                 _start, _end = angle_range
+
         self._option.get('legend')[0].get('data').append(name)
         self._option.get('series').append({
             "type": "gauge",

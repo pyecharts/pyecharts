@@ -6,8 +6,8 @@ from pyecharts.option import get_all_options
 
 class Kline(Base):
     """
-    <<< K线图 >>>
-    红涨蓝跌。
+    <<< Kline(Candlestick) chart >>>
+    Kline chart use red to imply increasing with red and decreasing with blue
     """
     def __init__(self, title="", subtitle="", **kwargs):
         super(Kline, self).__init__(title, subtitle, **kwargs)
@@ -19,12 +19,15 @@ class Kline(Base):
         """
 
         :param name:
-            图例名称
+            Series name used for displaying in tooltip and filtering with legend,
+            or updaing data and configuration with setOption.
         :param x_axis:
-            x 坐标轴数据
+            data of xAxis
         :param y_axis:
-            y 坐标轴数据，类型为包含列表的列表 [[]]。数据中，每一行是一个『数据项』，每一列属于一个『维度』。
-            数据项具体为 [open, close, lowest, highest] （即：[开盘值, 收盘值, 最低值, 最高值]）
+            data pf yAxis
+            Data should be the two-dimensional array shown as follow. -> [[],[]]
+            Every data item (each line in the example above) represents a box, which contains 4 values. They are:
+            [open, close, lowest, highest]  (namely: [opening value, closing value, lowest value, highest value])
         :param kwargs:
         :return:
         """

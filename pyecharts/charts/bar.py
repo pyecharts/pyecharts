@@ -6,8 +6,9 @@ from pyecharts.option import get_all_options
 
 class Bar(Base):
     """
-    <<< 柱状/条形图 >>>
-    柱状/条形图 通过 柱形的高度/条形的宽度 来表现数据的大小。
+    <<< Bar chart >>>
+    Bar chart shows different data through the height of a bar,
+    which is used in rectangular coordinate with at least 1 category axis.
     """
 
     def __init__(self, title="", subtitle="", **kwargs):
@@ -22,13 +23,14 @@ class Bar(Base):
         """
 
         :param name:
-            图例名称
+            Series name used for displaying in tooltip and filtering with legend,
+            or updaing data and configuration with setOption.
         :param x_axis:
-            x 坐标轴数据
+            data of xAixs
         :param y_axis:
-            y 坐标轴数据
+            data of yAxis
         :param is_stack:
-            数据堆叠，同个类目轴上系列配置相同的 stack 值可以堆叠放置
+            It specifies whether to stack category axis.
         :param kwargs:
         """
         if isinstance(x_axis, list) and isinstance(y_axis, list):
