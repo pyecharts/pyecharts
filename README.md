@@ -1,4 +1,4 @@
-# 阅读指南
+# pyecharts 中文文档
 
 * [项目概况](https://github.com/chenjiandongx/pyecharts/blob/master/README.md#项目概况)
 * [如何安装](https://github.com/chenjiandongx/pyecharts/blob/master/README.md#如何安装)
@@ -158,7 +158,7 @@ xyAxis：直角坐标系中的 x、y 轴(Line、Bar、Scatter、EffectScatter、
 * interval -> int  
     坐标轴刻度标签的显示间隔，在类目轴中有效。默认会采用标签不重叠的策略间隔显示标签  
     设置成 0 强制显示所有标签  
-    设置为 1，表示『隔一个标签显示一个标签』，如果值为 2，表示隔两个标签显示一个标签，以此推
+    设置为 1，表示『隔一个标签显示一个标签』，如果值为 2，表示隔两个标签显示一个标签，以此类推
 
 
 dataZoom：dataZoom 组件 用于区域缩放，从而能自由关注细节的数据信息，或者概览数据整体，或者去除离群点的影响。(Line、Bar、Scatter、EffectScatter、Kline)
@@ -445,7 +445,7 @@ add(name, attr, value, type="scatter", maptype='china', symbol_size=12, border_c
 * type -> str  
     图例类型，有'scatter', 'effectscatter', 'heatmap'可选。默认为 'scatter'
 * maptype -> str  
-    地图类型，目前只有 'china' 可选
+    地图类型。目前只支持'china'。
 * symbol_size -> int  
     标记图形大小。默认为 12
 * border_color -> str  

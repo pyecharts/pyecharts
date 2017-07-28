@@ -11,8 +11,10 @@ from pyecharts.option import get_all_options
 
 class Scatter(Base):
     """
-    <<< 散点图 >>>
-    直角坐标系上的散点图可以用来展现数据的 x，y 之间的关系，如果数据项有多个维度，可以用颜色来表现，利用 geo 组件。
+    <<< Scatter chart >>>
+    The scatter chart in rectangular coordinate could be used to present the relation between x and y.
+    If data have multiple dimensions, the values of the other dimensions can be visualized through symbol with
+    various sizes and colors, which becomes a bubble chart. These can be done by using with visualMap component.
     """
     def __init__(self, title="", subtitle="", **kwargs):
         super(Scatter, self).__init__(title, subtitle, **kwargs)
@@ -26,13 +28,14 @@ class Scatter(Base):
         """
 
         :param name:
-            图例名称
+            Series name used for displaying in tooltip and filtering with legend,
+            or updaing data and configuration with setOption.
         :param x_axis:
-            x 坐标轴数据
+            data of xAxis
         :param y_axis:
-            y 坐标轴数据
+            data of yAxis
         :param symbol_size:
-            标记图形大小
+            symbol size
         :param kwargs:
         """
         if isinstance(x_value, list) and isinstance(y_value, list):
@@ -56,23 +59,23 @@ class Scatter(Base):
             raise TypeError("x_axis and y_axis must be list")
 
     def draw(self, path, color=None):
-        """ 将图片上的像素点转换为数组，如 color 为（255,255,255）时只保留非白色像素点的坐标信息
+        """ Converts the pixels on the image to an array
 
         :param path:
-            转换图片的地址
+            path of Image that want to draw
         :param color:
-            所要排除的颜色
+            select a color to exclude, (225, 225, 225) means Keep only white pixel information.
         :return:
         """
         color = color or (255, 255, 255)
         im = Image.open(path)
         width, height = im.size
         imarray = im.load()
-        # 垂直翻转图片
+        # flip vertical Images
         for x in range(width):
             for y in range(height):
                 if y < int(height / 2):
                     imarray[x, y], imarray[x, height-y-1] = imarray[x, height-y-1], imarray[x, y]
-        # [:3] 为 r,g,b
+        # [:3] is r,g,b
         result = [(x, y) for x in range(width) for y in range(height) if imarray[x, y][:3] != color]
         return self.cast(result)
