@@ -67,7 +67,7 @@ class Polar(Base):
         chart = get_all_options(**kwargs)
         polar_type = 'value' if type == "line" else "category"
         is_stack = "stack" if is_stack else ""
-        self._option.get('legend').get('data').append(name)
+        self._option.get('legend')[0].get('data').append(name)
         # 坐标轴刻度范围默认为 [None, None]
         _amin, _amax = None, None
         if axis_range:
