@@ -1,15 +1,15 @@
-# pyecharts English Documentation
+# Documentation
 
 * [Overview](https://github.com/chenjiandongx/pyecharts/blob/master/README.md#Overview)
 * [Installing](https://github.com/chenjiandongx/pyecharts/blob/master/README.md#Installing)
-* [First steps](https://github.com/chenjiandongx/pyecharts/blob/master/README.md#First steps)
-* [Global options](https://github.com/chenjiandongx/pyecharts/blob/master/README.md#Global options)
+* [First-steps](https://github.com/chenjiandongx/pyecharts/blob/master/README.md#First-steps)
+* [Global-options](https://github.com/chenjiandongx/pyecharts/blob/master/README.md#Global-options)
     * xyAxis：直角坐标系中的 x、y 轴(Line、Bar、Scatter、EffectScatter、Kline)
     * dataZoom：dataZoom 组件 用于区域缩放，从而能自由关注细节的数据信息，或者概览数据整体，或者去除离群点的影响。(Line、Bar、Scatter、EffectScatter、Kline)
     * legend：图例组件。图例组件展现了不同系列的标记(symbol)，颜色和名字。可以通过点击图例控制哪些系列不显示。
     * label：图形上的文本标签，可用于说明图形的一些数据信息，比如值，名称等。
     * lineStyle：带线图形的线的风格选项(Line、Polar、Radar、Graph、Parallel)
-* [Chart types](https://github.com/chenjiandongx/pyecharts/blob/master/README.md#Chart types)
+* [Chart-types](https://github.com/chenjiandongx/pyecharts/blob/master/README.md#Chart-types)
     * Bar
     * EffectScatter
     * Funnel
@@ -45,7 +45,7 @@ pyecharts 兼容 Python2 和 Python3。当前版本为 0.1.7，关于版本信�
 pip install pyecharts
 ```
 
-# First steps
+# First-steps
 Now, you are ready to make your first chart!
 ```python
 from pyecharts import Bar
@@ -148,7 +148,7 @@ cast(seq)
     defalut -> False  
     It specifies whether to use the grid component. Detail [Customize](https://github.com/chenjiandongx/pyecharts/blob/master/README.md#Customize)
 
-# Global options
+# Global-options
 **通用配置项均在 ```add()``` 中设置**
 
 xyAxis：直角坐标系中的 x、y 轴(Line、Bar、Scatter、EffectScatter、Kline)
@@ -258,7 +258,7 @@ lineStyle：带线图形的线的风格选项(Line、Polar、Radar、Graph、Par
     Line type,it can be 'solid', 'dashed', 'dotted'  
 
 
-# Chart types  
+# Chart-types  
 
 ## Bar
 > Bar chart shows different data through the height of a bar,which is used in rectangular coordinate with at least 1 category axis.
