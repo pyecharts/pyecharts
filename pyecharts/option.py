@@ -250,7 +250,7 @@ def xy_axis(type=None,
     if type == "scatter":
         _xAxis.update(data=x_axis, type="value")
         _yAxis.update(type="value")
-    return _xAxis, _yAxis
+    return [_xAxis], [_yAxis]
 
 
 def _mark(data,
@@ -264,7 +264,7 @@ def _mark(data,
     :param data:
         标记数据项，有'min', 'max', 'average'可选
     :param mark_point_symbol:
-        标记点图形
+        标记点图形，有'circle', 'rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow'可选
     :param mark_point_symbolsize:
         标记点图形大小
     :param mark_point_textcolor:
@@ -341,9 +341,9 @@ def legend(type=None,
     :param legend_orient:
         图例列表的布局朝向，有'horizontal', 'vertical'可选
     :param legend_pos:
-        图例组件离容器左侧的距离，有'left', 'center', 'right'可选
+        图例组件离容器左侧的距离，有'left', 'center', 'right'可选，也可为百分数或整数。
     :param legend_pos:
-        图例组件离容器上侧的距离，有'top', 'center', 'bottom'可选
+        图例组件离容器上侧的距离，有'top', 'center', 'bottom'可选，也可为百分数或整数。
     :param kwargs:
     :return:
     """
@@ -365,6 +365,9 @@ def visual_map(visual_range=None,
                visual_text_color=None,
                visual_range_text=None,
                visual_range_color=None,
+               visual_orient='vertical',
+               visual_pos="left",
+               visual_top="bottom",
                is_calculable=True,
                **kwargs):
     """ 是视觉映射组件，用于进行『视觉编码』，也就是将数据映射到视觉元素（视觉通道）。
@@ -377,26 +380,35 @@ def visual_map(visual_range=None,
         两端文本
     :param visual_range_color:
         过渡的颜色，列表类型
+    :param visual_orient:
+        visualmap 组件条的方向，默认为'vertical'，有'vertical', 'horizontal'可选。
+    :param visual_pos:
+        visualmap 组件条距离左侧的位置，默认为'left'。有'right', 'center', 'right'可选，也可为百分数或整数。
+    :param visual_top:
+        visualmap 组件条距离顶部的位置，默认为'top'。有'top', 'center', 'bottom'可选，也可为百分数或整数。
     :param is_calculable:
         是否显示拖拽用的手柄（手柄能拖拽调整选中范围）
     :param kwargs:
     :return:
     """
-    # 组件允许的最大值最小值默认为 [0,100]
+    # 组件允许的最大值最小值默认为 [0, 100]
     _min, _max = 0, 100
     if visual_range:
         if len(visual_range) == 2:
             _min, _max = visual_range
+
     # 两端文本默认值为 ['low','high']
     _tlow, _thigh = "low", "high"
     if visual_range_text:
         if len(visual_range_text) == 2:
             _tlow, _thigh = visual_range_text
+
     # 过渡颜色默认为 ['#50a3ba', '#eac763', '#d94e5d']
     inrange = ['#50a3ba', '#eac763', '#d94e5d']
     if visual_range_color:
         if len(visual_range_color) >= 2:
             inrange = visual_range_color
+
     _visual_map = {
         "type": "continuous",
         "min": _min,
@@ -405,8 +417,9 @@ def visual_map(visual_range=None,
         "textStyle": {"color": visual_text_color},
         "inRange": {"color": inrange},
         "calculable": is_calculable,
-        "left": "left",
-        "top": "bottom"
+        "orient": visual_orient,
+        "left": visual_pos,
+        "top": visual_top
     }
     return _visual_map
 
@@ -492,6 +505,45 @@ def datazoom(is_datazoom_show=False,
         "end": _max,
     }
     return [_datazoom]
+
+
+@collectfuncs
+def grid(grid_width=None,
+         grid_height=None,
+         grid_top=None,
+         grid_bottom=None,
+         grid_left=None,
+         grid_right=None,
+         **kwargs):
+    """
+    :param grid_width:
+        grid 组件的宽度。默认自适应。
+    :param grid_height:
+        grid 组件的高度。默认自适应。
+    :param grid_top:
+        grid 组件离容器顶部的距离。
+    :param grid_bottom:
+        grid 组件离容器底部的距离。
+    :param grid_left:
+        grid 组件离容器左侧的距离。
+    :param grid_right:
+        grid 组件离容器右侧的距离。
+    :return:
+    """
+    _grid = {}
+    if grid_width is not None:
+        _grid.update(width=grid_width)
+    if grid_height is not None:
+        _grid.update(height=grid_height)
+    if grid_top is not None:
+        _grid.update(top=grid_top)
+    if grid_bottom is not None:
+        _grid.update(bottom=grid_bottom)
+    if grid_left is not None:
+        _grid.update(left=grid_left)
+    if grid_right is not None:
+        _grid.update(right=grid_right)
+    return _grid
 
 
 def get_all_options(**kwargs):
