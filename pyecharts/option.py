@@ -502,6 +502,7 @@ def effect(effect_brushtype="stroke",
 def datazoom(is_datazoom_show=False,
              datazoom_type='slider',
              datazoom_range=None,
+             datazoom_orient='horizontal',
              **kwargs):
     """
 
@@ -511,6 +512,10 @@ def datazoom(is_datazoom_show=False,
         datazoom type, 'slider' or 'inside'
     :param datazoom_range:
         The range percentage of the window out of the data extent, in the range of 0 ~ 100.
+    :param datazoom_orient:
+        Specify whether the layout of dataZoom component is horizontal or vertical.'horizontal' or 'vertical'
+        What's more,it indicates whether the horizontal axis or vertical axis is controlled
+        by default in catesian coordinate system.
     :param kwargs:
     :return:
     """
@@ -525,6 +530,7 @@ def datazoom(is_datazoom_show=False,
         "type": datazoom_type,
         "start": _min,
         "end": _max,
+        "orient": datazoom_orient
     }
     return [_datazoom]
 
