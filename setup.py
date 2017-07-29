@@ -4,9 +4,7 @@
 try:
     from setuptools import setup
 except ImportError:
-    from ez_setup import use_setuptools
-    use_setuptools()
-    from setuptools import setup
+    from distutils.core import setup
 
 __title__ = 'pyecharts'
 __description__ = 'Python echarts, make charting easier'
