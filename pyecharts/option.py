@@ -590,6 +590,37 @@ def grid(grid_width=None,
     return _grid
 
 
+@collectfuncs
+def grid3D(grid3D_width=100,
+           grid3D_height=100,
+           grid3D_depth=100,
+           grid3D_rotate_speed=10,
+           grid3D_rotate_sensitivity=1,
+           is_grid3D_rotate=False,
+           **kwargs):
+    """
+
+    :param grid3D_width:
+    :param grid3D_height:
+    :param grid3D_depth:
+    :param grid3D_rotate_speed:
+    :param is_grid3D_rotate:
+    :param kwargs:
+    :return:
+    """
+    _grid3D = {
+        "boxWidth": grid3D_width,
+        "boxHeight": grid3D_height,
+        "boxDepth": grid3D_depth,
+        "viewControl": {
+            "autoRotate": is_grid3D_rotate,
+            "autoRotateSpeed": grid3D_rotate_speed,
+            "rotateSensitivity": grid3D_rotate_sensitivity
+        }
+    }
+    return _grid3D
+
+
 def get_all_options(**kwargs):
     """ Return all options of charts
 
