@@ -49,126 +49,150 @@
     <script type="text/javascript">
         var myChart = echarts.init(document.getElementById('main'));
         var option = {
-    "backgroundColor": "#404a59",
-    "title": [
-        {
-            "subtextStyle": {
-                "fontSize": 12,
-                "color": "#aaa"
-            },
-            "text": "全国主要城市空气质量",
-            "textStyle": {
-                "fontSize": 18,
-                "color": "#fff"
-            },
-            "subtext": "data from pm2.5",
-            "top": "auto",
-            "left": "center"
-        }
-    ],
-    "tooltip": {},
-    "_index_flag": 1583241,
-    "legend": [
-        {
-            "show": true,
-            "selectedMode": true,
-            "data": [
-                ""
-            ],
-            "top": "top",
-            "left": "center",
-            "orient": "horizontal"
-        }
-    ],
     "toolbox": {
-        "show": true,
-        "top": "center",
         "left": "right",
+        "orient": "vertical",
+        "top": "center",
         "feature": {
             "saveAsImage": {
                 "show": true
             }
         },
-        "orient": "vertical"
+        "show": true
     },
+    "backgroundColor": "#404a59",
+    "legend": [
+        {
+            "data": [
+                ""
+            ],
+            "top": "top",
+            "left": "center",
+            "selectedMode": true,
+            "orient": "horizontal",
+            "show": true
+        }
+    ],
+    "_index_flag": 1939247,
+    "geo": {
+        "label": {},
+        "itemStyle": {
+            "emphasis": {
+                "areaColor": "#2a333d"
+            },
+            "normal": {
+                "areaColor": "#323c48",
+                "borderColor": "#111"
+            }
+        },
+        "map": "china"
+    },
+    "tooltip": {},
+    "color": [
+        "#f47920",
+        "#d48265",
+        "#6d8346",
+        "#444693",
+        "#918597",
+        "#6950a1",
+        "#b2d235",
+        "#c23531",
+        "#f05b72",
+        "#2f4554",
+        "#bda29a",
+        "#1d953f",
+        "#f6f5ec",
+        "#749f83",
+        "#6e7074",
+        "#2a5caa",
+        "#ef5b9c",
+        "#fab27b",
+        "#ca8622",
+        "#ac6767",
+        "#61a0a8",
+        "#905a3d",
+        "#726930",
+        "#c4ccd3",
+        "#546570"
+    ],
     "series": [
         {
-            "showEffectOn": "render",
-            "coordinateSystem": "geo",
             "symbol": "circle",
             "symbolSize": 12,
-            "name": "",
-            "data": [
-                {
-                    "value": 9,
-                    "name": "汕头市"
-                },
-                {
-                    "value": 12,
-                    "name": "肇庆市"
-                }
-            ],
             "type": "effectScatter",
             "label": {
+                "emphasis": {
+                    "show": true
+                },
                 "normal": {
-                    "show": false,
-                    "position": "top",
-                    "formatter": null,
                     "textStyle": {
                         "fontSize": 12,
                         "color": "#000"
-                    }
-                },
-                "emphasis": {
-                    "show": true
+                    },
+                    "formatter": null,
+                    "position": "top",
+                    "show": false
                 }
             },
+            "data": [
+                {
+                    "value": 9,
+                    "name": "海门"
+                },
+                {
+                    "value": [
+                        109.781327,
+                        39.608266,
+                        12
+                    ],
+                    "name": "鄂尔多斯"
+                },
+                {
+                    "value": 12,
+                    "name": "招远"
+                },
+                {
+                    "value": 12,
+                    "name": "舟山"
+                },
+                {
+                    "value": 14,
+                    "name": "齐齐哈尔"
+                },
+                {
+                    "value": [
+                        120.13,
+                        33.38,
+                        15
+                    ],
+                    "name": "盐城"
+                }
+            ],
             "rippleEffect": {
-                "period": 4,
                 "brushType": "stroke",
-                "scale": 5
-            }
+                "scale": 5,
+                "period": 4
+            },
+            "coordinateSystem": "geo",
+            "showEffectOn": "render",
+            "name": ""
         }
     ],
-    "geo": {
-        "itemStyle": {
-            "normal": {
-                "borderColor": "#111",
-                "areaColor": "#323c48"
+    "title": [
+        {
+            "textStyle": {
+                "fontSize": 18,
+                "color": "#fff"
             },
-            "emphasis": {
-                "areaColor": "#2a333d"
-            }
-        },
-        "label": {},
-        "map": "广东"
-    },
-    "color": [
-        "#61a0a8",
-        "#726930",
-        "#546570",
-        "#f05b72",
-        "#444693",
-        "#d48265",
-        "#918597",
-        "#c23531",
-        "#905a3d",
-        "#1d953f",
-        "#2f4554",
-        "#f6f5ec",
-        "#ef5b9c",
-        "#ac6767",
-        "#6950a1",
-        "#c4ccd3",
-        "#749f83",
-        "#2a5caa",
-        "#b2d235",
-        "#ca8622",
-        "#bda29a",
-        "#6d8346",
-        "#f47920",
-        "#fab27b",
-        "#6e7074"
+            "top": "auto",
+            "subtextStyle": {
+                "fontSize": 12,
+                "color": "#aaa"
+            },
+            "left": "center",
+            "text": "全国主要城市空气质量",
+            "subtext": "data from pm2.5"
+        }
     ]
 };
         myChart.setOption(option);
