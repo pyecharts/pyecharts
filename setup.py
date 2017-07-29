@@ -5,20 +5,31 @@ try:
     from setuptools import setup
 except ImportError:
     from distutils.core import setup
-import pyecharts.__version__ as about
+
+__title__ = 'pyecharts'
+__description__ = 'Python echarts, make charting easier'
+__url__ = 'https://github.com/chenjiandongx/pyecharts'
+__version__ = '0.1.8'
+__author__ = 'chenjiandongx'
+__author_email__ = 'chenjiandongx@qq.com'
+__license__ = 'MIT'
+__requires__ = ['pprint', 'Image', 'jinja2']
+__packages__ = ['pyecharts', 'pyecharts/charts']
+__keywords__ = ['echarts', 'charts']
 
 
 setup(
-    name=about.__title__,
-    version=about.__version__,
-    description=about.__description__,
-    url=about.__url__,
-    author=about.__author__,
-    author_email=about.__author_email__,
-    license=about.__license__,
-    packages=about.__packages__,
-    keywords=about.__keywords__,
-    install_requires=about.__requires__,
+    name=__title__,
+    version=__version__,
+    description=__description__,
+    url=__url__,
+    author=__author__,
+    author_email=__author_email__,
+    license=__license__,
+    packages=__packages__,
+    keywords=__keywords__,
+    install_requires=__requires__,
+    zip_safe=False,
     classifiers=[
         'Development Status :: 4 - Beta',
         'Environment :: Console',
