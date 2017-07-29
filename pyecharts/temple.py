@@ -91,7 +91,7 @@ _temple_wd = """
 
 <head>
     <meta charset="utf-8">
-    <title>ECharts</title>
+    <title>{{html_title}}</title>
     <script src='https://cdn.bootcss.com/echarts/3.2.2/echarts.simple.js'></script>
     <script type="text/javascript" src="http://data-visual.cn/datav/src/js/echarts/extension/echarts-wordcloud.min.js"></script>
 </head>
@@ -124,7 +124,7 @@ _temple_lq = """
 
 <head>
     <meta charset="utf-8">
-    <title>ECharts</title>
+    <title>{{html_title}}</title>
     <script src='https://cdn.bootcss.com/echarts/3.2.2/echarts.js'></script>
     <script src='http://oog4yfyu0.bkt.clouddn.com/liquidfill.js'></script>
 </head>
@@ -148,7 +148,7 @@ _temple="""
 
 <head>
     <meta charset="utf-8">
-    <title>ECharts</title>
+    <title>{{html_title}}</title>
     <script src="http://oog4yfyu0.bkt.clouddn.com/echarts.min.js"></script>
     <script type="text/javascript " src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
     <script type="text/javascript " src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>

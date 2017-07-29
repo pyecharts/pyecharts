@@ -65,6 +65,7 @@ class Base(object):
         :param is_grid:
             It specifies whether to use the grid component.
         """
+        self._title = title
         self._option = {}
         if is_grid:
             self._option.update(grid=[])
@@ -392,12 +393,14 @@ class Base(object):
         if kwargs.get('is_datazoom_show', None) is True:
             self._option.update(dataZoom=chart['datazoom'])
 
-    def render(self, path="render.html"):
+    def render(self, path=None):
         """ Render the options string, generate the html file
 
         :param path:
             path of render html file
         """
+        if not path:
+            path = '{}.html'.format(self._title)
         temple = Tp._temple
         series = self._option.get("series")
         for s in series:
@@ -409,7 +412,10 @@ class Base(object):
                 break
         my_option = json.dumps(self._option, indent=4, ensure_ascii=False)
         tmp = Template(temple)
-        html = tmp.render(myOption=my_option, myWidth=self._width, myHeight=self._height)
+        html = tmp.render(myOption=my_option,
+                          myWidth=self._width,
+                          myHeight=self._height,
+                          html_title=self._title)
         try:        # for Python3
             with open(path, "w+", encoding="utf-8") as fout:
                 fout.write(html)
@@ -440,7 +446,10 @@ class Base(object):
                 break
         tmp = Template(temple)
         try:
-            html = tmp.render(myOption=my_option, chartId=divid, myWidth=self._width, myHeight=self._height)
+            html = tmp.render(myOption=my_option,
+                              chartId=divid,
+                              myWidth=self._width,
+                              myHeight=self._height)
         except:
             html = tmp.render(mtOption=my_option.decode('utf8'), chartId=divid, myWidth=self._width,
                               myHeight=self._height)
