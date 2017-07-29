@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 #coding=utf-8
 
+__version__ = '0.1.8'
+__author__ = 'chenjiandongx'
+
 from pyecharts.charts.bar import Bar
 from pyecharts.charts.effectscatter import EffectScatter
 from pyecharts.charts.funnel import Funnel
