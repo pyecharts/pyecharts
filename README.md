@@ -1,4 +1,4 @@
-# pyecharts 中文文档
+# pyecharts 文档
 
 * [项目概况](https://github.com/chenjiandongx/pyecharts/blob/master/README.md#项目概况)
 * [如何安装](https://github.com/chenjiandongx/pyecharts/blob/master/README.md#如何安装)
