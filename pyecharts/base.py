@@ -6,7 +6,7 @@ import random
 import datetime
 
 from pprint import pprint
-import pandas
+import pandas, numpy
 from jinja2 import Template
 from pyecharts.option import get_all_options
 from pyecharts import temple as Tp
@@ -331,12 +331,26 @@ class Base(object):
         return k_lst, v_lst
 
     @staticmethod
+    def npcast(npdata):
+        """ Convert the Numpy data into list type
+        :param npdata:
+            Numpy data -> ndarray
+        :return:
+        """
+        _np = npdata
+        if isinstance(npdata, numpy.ndarray):
+            if npdata.ndim == 1:
+                return list(_np)
+            return [list(d) for d in _np]
+
+    @staticmethod
     def pdcast(pddata):
-        """ Convert the pandas data into list type
+        """ Convert the Pandas data into list type
             Series.index -> attr(str/int)
             Series.value -> value(str/int)
             DataFrame -> [[], []], can be used on Radar chart or Parallel chart.
         :param pddata:
+            Pandas data -> Series or DataFrame
         :return:
         """
         if isinstance(pddata, pandas.DataFrame):
@@ -344,21 +358,20 @@ class Base(object):
         if isinstance(pddata, pandas.Series):
             _pdattr, _pdvalue = [], []
             try:
-                for s in pddata:
-                    _pdvalue.append(int(s))
+                for v in pddata:
+                    _pdvalue.append(int(v))
             except:
                 _pdvalue = []
-                for s in pddata:
-                    _pdvalue.append(str(s))
+                for v in pddata:
+                    _pdvalue.append(str(v))
             try:
-                for i in pddata.index:
-                    _pdattr.append(int(i))
+                for a in pddata.index:
+                    _pdattr.append(int(a))
             except:
                 _pdattr = []
-                for i in pddata.index:
-                    _pdattr.append(str(i))
+                for a in pddata.index:
+                    _pdattr.append(str(a))
             return _pdattr, _pdvalue
-        return None
 
     def _legend_visualmap_colorlst(self, is_visualmap=False, **kwargs):
         """ config legend，visualmap and colorlst component.
