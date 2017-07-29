@@ -1,4 +1,4 @@
-# Documentation
+# pyecharts Documentation
 
 * [Overview](https://github.com/chenjiandongx/pyecharts/blob/master/README.md#Overview)
 * [Installing](https://github.com/chenjiandongx/pyecharts/blob/master/README.md#Installing)
@@ -77,7 +77,7 @@ bar.render()
 ```python
 @staticmethod
 cast(seq)
-``` Convert the data sequence, convert the sequence with the dictionary and tuple type into k_lst, v_lst. ``` 
+``` Convert the sequence with the dictionary and tuple type into k_lst, v_lst. ``` 
 ```
 1. 元组列表  
     [(A1, B1), (A2, B2), (A3, B3), (A4, B4)] --> k_lst[ A[i1, i2...] ], v_lst[ B[i1, i2...] ]
