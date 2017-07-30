@@ -1673,6 +1673,8 @@ line.render()
 ```
 ![grid-3](https://github.com/chenjiandongx/pyecharts/blob/master/images/grid-3.png)
 
+**Tip：** 可以通过设置 center 参数改变 Pie 图的位置，如 [v1, v2]， 要求 v1 > v2。
+
 Line + Kline
 ```python
 from pyecharts import Line, Kline
