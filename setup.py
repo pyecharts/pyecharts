@@ -9,7 +9,7 @@ except ImportError:
 __title__ = 'pyecharts'
 __description__ = 'Python echarts, make charting easier'
 __url__ = 'https://github.com/chenjiandongx/pyecharts'
-__version__ = '0.1.8'
+__version__ = '0.1.9'
 __author__ = 'chenjiandongx'
 __author_email__ = 'chenjiandongx@qq.com'
 __license__ = 'MIT'
