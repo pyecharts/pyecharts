@@ -349,8 +349,22 @@ class Base(object):
         _np = npdata
         if isinstance(npdata, numpy.ndarray):
             if npdata.ndim == 1:
-                return list(_np)
-            return [list(d) for d in _np]
+                try:
+                    _npvalue = [float(v) for v in _np]
+                except:
+                    _npvalue = [str(v) for v in _np]
+            else:
+                try:
+                    _npvalue = []
+                    for _n in _np:
+                        _lst = [float(v) for v in _n]
+                        _npvalue.append(_lst)
+                except:
+                    _npvalue = []
+                    for _n in _np:
+                        _lst = [str(v) for v in _n]
+                        _npvalue.append(_lst)
+            return _npvalue
 
     @staticmethod
     def pdcast(pddata):
@@ -363,23 +377,26 @@ class Base(object):
         :return:
         """
         if isinstance(pddata, pandas.DataFrame):
-            return [list(dt) for dt in pddata.values]
+            try:
+                _dtvalue = []
+                for value in pddata.values:
+                    _lst = [float(v) for v in value]
+                    _dtvalue.append(_lst)
+            except:
+                _dtvalue = []
+                for value in pddata.values:
+                    _lst = [str(v) for v in value]
+                    _dtvalue.append(_lst)
+            return _dtvalue
         if isinstance(pddata, pandas.Series):
-            _pdattr, _pdvalue = [], []
             try:
-                for v in pddata:
-                    _pdvalue.append(int(v))
+                _pdvalue = [float(v) for v in pddata]
             except:
-                _pdvalue = []
-                for v in pddata:
-                    _pdvalue.append(str(v))
+                _pdvalue = [str(v) for v in pddata]
             try:
-                for a in pddata.index:
-                    _pdattr.append(int(a))
+                _pdattr = [float(v) for v in pddata.index]
             except:
-                _pdattr = []
-                for a in pddata.index:
-                    _pdattr.append(str(a))
+                _pdattr = [str(v) for v in pddata.index]
             return _pdattr, _pdvalue
 
     def _legend_visualmap_colorlst(self, is_visualmap=False, **kwargs):
