@@ -85,7 +85,7 @@ bar.render()
     打印输出图表的所有配置项
 * ```render()```  
     默认将会在根目录下生成一个 render.html 的文件，支持 path 参数，设置文件保存位置，如 render(r"e:\my_first_chart.html")，文件用浏览器打开。  
-    默认的编码类型为 UTF-8，在 Python3 中是没什么问题的，Python3 对中文的支持好很多。但是在 Python2 中，编码的处理是个很头疼的问题，Please use include this statement before any code:
+    默认的编码类型为 UTF-8，在 Python3 中是没什么问题的，Python3 对中文的支持好很多。但是在 Python2 中，请应用下面的语句，保证没有编码问题:
 
 ```
 #!/usr/bin/python
@@ -93,7 +93,7 @@ bar.render()
 from __future__ import unicode_literals
 ```
 
-For the first two lines, please refer to [PEP-0263](https://www.python.org/dev/peps/pep-0263/). And for the last line, please refer to [unicode literals](http://python-future.org/unicode_literals.html).
+前两句告知你的编辑器你用UTF-8([PEP-0263](https://www.python.org/dev/peps/pep-0263/)). 最后一句告知Python所有字符是UTF-8([unicode literals](http://python-future.org/unicode_literals.html))
 
 基本上所有的图表类型都是这样绘制的：
 1. ```chart_name = Type()``` 初始化具体类型图表。
