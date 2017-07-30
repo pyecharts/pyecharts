@@ -13,4 +13,4 @@ python:
 before_install:
   - pip install -r test/requirements.txt
 script:
-  - nosetests test
+  - make test
