@@ -1,3 +1,15 @@
+# 关于作者想说的
+作为 pyecharts 的作者，很高兴看到 pyecharts 最近这么受欢迎，一度冲上了 Python daily trending 和 weekly trending 前三名。大家对这个项目的反馈也都不错，在这里我真诚的感谢大家对这个项目的支持。  
+随着使用项目的人越来越多，已经收到了不少希望推出一份英文文档的请求，但是大家提新需求的速度已经远远快于我的开发速度......我还要测试以及解决提出的 issue，实在是没什么时间（加上我英语水平不高这点我是不会告诉你的）。
+### 所以，划重点！！！
+在这里，我诚恳地向各位对这个项目感兴趣，想参与到项目中来的开发者发出邀请，希望你们可以参与到英文文档的编写中来，成为这个项目的贡献者，一起推动这个项目的发展。英文文档在这里 [doc_en_US.md](https://github.com/chenjiandongx/pyecharts/blob/master/document/doc_en_US.md) ，我已经写了一些，但是还差挺多的。别犹豫了，来吧！
+### 接着，划重点！！！
+想参与到英文文档开发中来的开发者，请联系我邮箱，chenjiandongx@qq.com，或者加入下面这个微信群，我们可以来具体讨论。不然直接 fork 一份，编写后提交 PR 也行，我看到了会及时 merge 的。
+
+![wechat](https://github.com/chenjiandongx/pyecharts/blob/master/images/wechat.png)
+### 最后，划重点！！！
+接下来我就暂时不更新版本了，因为作者要出去玩耍几天了，不然感觉这样下去的话我这个暑假就没了！！！也写了好多天代码了，是该出去玩一下了！！！
+
 # pyecharts 文档
 
 * [项目概况](https://github.com/chenjiandongx/pyecharts/blob/master/README.md#项目概况)
@@ -11,6 +23,7 @@
     * lineStyle：带线图形的线的风格选项(Line、Polar、Radar、Graph、Parallel)
 * [图表详细](https://github.com/chenjiandongx/pyecharts/blob/master/README.md#图表详细)
     * Bar（柱状图/条形图）
+    * Bar3D（3D 柱状图）
     * EffectScatter（带有涟漪特效动画的散点图）
     * Funnel（漏斗图）
     * Gauge（仪表盘）
@@ -19,6 +32,7 @@
     * HeatMap（热力图）
     * Kline（K线图）
     * Line（折线/面积图）
+    * Line3D（3D 折线图）
     * Liquid（水球图）
     * Map（地图）
     * Parallel（平行坐标系）
@@ -26,6 +40,7 @@
     * Polar（极坐标系）
     * Radar（雷达图）
     * Scatter（散点图）
+    * Scatter3D（3D 散点图）
     * WordCloud（词云图）
 * [用户自定义](https://github.com/chenjiandongx/pyecharts/blob/master/README.md#用户自定义)
 * [更多示例](https://github.com/chenjiandongx/pyecharts/blob/master/README.md#更多示例)
@@ -39,7 +54,8 @@ pyecharts 是一个用于生成 Echarts 图表的类库。实际上就是 Echart
 
 
 # 如何安装
-pyecharts 兼容 Python2 和 Python3。当前版本为 0.1.7，关于版本信息请查看 [changelog.md](https://github.com/chenjiandongx/pyecharts/blob/master/changelog.md)，一定要看一下阿！
+pyecharts 兼容 Python2 和 Python3。当前版本为 0.1.9，关于版本信息请查看 [changelog.md](https://github.com/chenjiandongx/pyecharts/blob/master/changelog.md)，一定要看一下阿！  
+**温馨提醒，要使用文档中的所有功能，请及时更新到最新版本**
 
 ```python
 pip install pyecharts
@@ -72,7 +88,8 @@ bar.render()
 2. ```add()``` 添加数据及配置项。
 3. ```render()``` 生成 .html 文件。  
 
-```add()``` 数据一般为两个列表（长度一致），如果你的数据是字典或者是带元组的字典。可利用 ```cast()``` 方法转换。
+```add()``` 数据一般为两个列表（长度一致）。  
+如果你的数据是字典或者是带元组的字典。可利用 ```cast()``` 方法转换。
 
 ```python
 @staticmethod
@@ -86,6 +103,25 @@ cast(seq)
 3. 字典  
     {A1: B1, A2: B2, A3: B3, A4: B4} -- > k_lst[ A[i1, i2...] ], v_lst[ B[i1, i2...] ]
 
+如果使用的是 Numpy 或者 Pandas，直接将数据放入 ```add()``` 方法也可能会出现问题，因为 ```add()``` 方法接受的是两个 list 列表。最后所有的配置项都是要经过 JSON 序列化的，像 int64 这种类型的数据在这个过程是会报错的。  
+在这里提供了 ```pdcast(pddata)``` 和 ``` npcast(npdata)``` 两个方法，用于这两个库数据类型的处理。
+
+pdcast()，接受的参数可以为 Series 或者 DataFrame 类型。
+```python
+@staticmethod
+pdcast(pddata)
+``` 用于处理 Pandas 中的 Series 和 DataFrame 类型，返回 value_lst, index_list 两个列表 ```
+```
+1. 传入的类型为 Series 的话，pdcast() 会返回两个确保类型正确的列表（整个列表的数据类型为 float 或者 str，会先尝试转换为数值类型的 float，出现异常再尝试转换为 str 类型），value_lst 和 index_lst，分别为 Series.values 和 Series.index 列表。
+2. 传入的类型为 DataFrame 的话，pdcast() 会返回一个确保类型正确的列表（整个列表的数据类型为 float 或者 str，会先尝试转换为数值类型的 float，出现异常再尝试转换为 str 类型），为 DataFrame.values 列表。多个维度时返回一个嵌套列表。比较适合像 Radar, Parallel, HeatMap 这些需要传入嵌套列表（[[ ], [ ]]）数据的图表。
+
+npcast()，接受的参数为 Numpy.array 类型。
+```python
+@staticmethod
+npcast(npdata)
+``` 用于处理 Numpy 中的 ndarray 类型，返回一个确保类型正确的列表。如果多个维度的话返回嵌套列表。```
+```
+
 **当然你也可以采用更加酷炫的方式，使用 Jupyter Notebook 来展示图表，matplotlib 有的，pyecharts 也会有的**  
 
 比如这样  
@@ -98,10 +134,9 @@ cast(seq)
 
 ![jupyter-2](https://github.com/chenjiandongx/pyecharts/blob/master/images/jupyter-2.gif)
 
-**Tip：** 该功能在 0.1.8 版本中正式加入，要使用请升级到最新版本。
 
-这里只是举几个例子。如需使用 Jupyter Notebook 来展示图表，只需要调用 ```render_notebook()``` 即可，同时兼容 Python2 和 Python3 的 Jupyter Notebook 环境。所有图表均可正常显示，与浏览器一致的交互体验，这下展示报告连 PPT 都省了！！  
-> 在这里要特别感谢 [@ygw365](https://github.com/ygw365) 提供这部分的代码模板 和 [muxuezi](https://github.com/muxuezi) 协助对代码进行改进，特此感谢！也欢迎其他开发者参与到项目的开发中来。一起完善这个项目！
+这里只是举几个例子。如需使用 Jupyter Notebook 来展示图表，只需要调用 ```render_notebook()``` 即可，同时兼容 Python2 和 Python3 的 Jupyter Notebook 环境。所有图表均可正常显示（除了 3D 图），与浏览器一致的交互体验，这下展示报告连 PPT 都省了！！  
+> 在这里要特别感谢 [@ygw365](https://github.com/ygw365) 提供这部分的代码模板 和 [@muxuezi](https://github.com/muxuezi) 协助对代码进行改进，特此感谢！
 
 图表类初始化所接受的参数（所有类型的图表都一样）。
 
@@ -169,6 +204,8 @@ dataZoom：dataZoom 组件 用于区域缩放，从而能自由关注细节的�
     区域缩放组件类型，默认为'slider'，有'slider', 'inside'可选
 * datazoom_range -> list    
     区域缩放的范围，默认为[50, 100]
+* datazoom_orient -> str  
+    datazomm 组件在直角坐标系中的方向，默认为 'horizontal'，效果显示在 x 轴。如若设置为 'vertical' 的话效果显示在 y 轴。
 
 
 legend：图例组件。图例组件展现了不同系列的标记(symbol)，颜色和名字。可以通过点击图例控制哪些系列不显示。
@@ -219,6 +256,21 @@ lineStyle：带线图形的线的风格选项(Line、Polar、Radar、Graph、Par
     线的弯曲程度，0 为完全不弯曲，1 为最弯曲。默认为 0
 * line_type -> str  
     线的类型，有'solid', 'dashed', 'dotted'可选。默认为'solid'
+
+grid3D：3D笛卡尔坐标系组配置项，适用于 3D 图形。（Bar3D, Line3D, Scatter3D)
+
+* grid3D_width -> int  
+    三维笛卡尔坐标系组件在三维场景中的高度。默认为 100
+* grid3D_height -> int  
+    三维笛卡尔坐标系组件在三维场景中的高度。默认为 100
+* grid3D_depth -> int  
+    三维笛卡尔坐标系组件在三维场景中的高度。默认为 100
+* is_grid3D_rotate -> bool  
+    是否开启视角绕物体的自动旋转查看。默认为 False
+* grid3D_rotate_speed -> int  
+    物体自传的速度。单位为角度 / 秒，默认为 10 ，也就是 36 秒转一圈。
+* grid3D_rotate_sensitivity -> int  
+    旋转操作的灵敏度，值越大越灵敏。默认为 1, 设置为 0 后无法旋转。
 
 
 # 图表详细  
@@ -310,6 +362,101 @@ bar.render()
 
 **Tip：** datazoom 适合所有平面直角坐标系图形，也就是(Line、Bar、Scatter、EffectScatter、Kline)  
 **Tip：** 可以通过 label_color 来设置柱状的颜色，如 ['#eee', '#000']，所有的图表类型的图例颜色都可通过 label_color 来修改。
+
+
+## Bar3D（3D 柱状图）
+
+Bar3D.add() 方法签名
+```python
+add(name, x_axis, y_axis, data, grid3D_opacity=1, grid3D_shading='color', **kwargs)
+```
+* name -> str  
+    图例名称
+* x_axis -> str  
+    x 坐标轴数据。需为类目轴，也就是不能是数值。
+* y_axis -> str  
+    y 坐标轴数据。需为类目轴，也就是不能是数值。
+* data -> [list],包含列表的列表  
+    数据项，数据中，每一行是一个『数据项』，每一列属于一个『维度』
+* grid3D_opacity -> int  
+    3D 笛卡尔坐标系组的透明度（柱状的透明度），默认为 1，完全不透明。
+* grid3D_shading -> str  
+    三维柱状图中三维图形的着色效果。
+    * color：只显示颜色，不受光照等其它因素的影响。
+    * lambert：通过经典的 lambert 着色表现光照带来的明暗。
+    * realistic：真实感渲染，配合 light.ambientCubemap 和 postEffect 使用可以让展示的画面效果和质感有质的提升。ECharts GL 中使用了基于物理的渲染（PBR) 来表现真实感材质。
+
+```python
+from pyecharts import Bar3D
+
+bar3d = Bar3D("3D 柱状图示例", width=1200, height=600)
+x_axis = ["12a", "1a", "2a", "3a", "4a", "5a", "6a", "7a", "8a", "9a", "10a", "11a",
+          "12p", "1p", "2p", "3p", "4p", "5p", "6p", "7p", "8p", "9p", "10p", "11p"]
+y_aixs = ["Saturday", "Friday", "Thursday", "Wednesday", "Tuesday", "Monday", "Sunday"]
+data = [[0, 0, 5], [0, 1, 1], [0, 2, 0], [0, 3, 0], [0, 4, 0], [0, 5, 0], [0, 6, 0], [0, 7, 0],
+        [0, 8, 0],[0, 9, 0], [0, 10, 0], [0, 11, 2], [0, 12, 4], [0, 13, 1], [0, 14, 1], [0, 15, 3],
+        [0, 16, 4], [0, 17, 6], [0, 18, 4], [0, 19, 4], [0, 20, 3], [0, 21, 3], [0, 22, 2], [0, 23, 5],
+        [1, 0, 7], [1, 1, 0], [1, 2, 0], [1, 3, 0], [1, 4, 0], [1, 5, 0], [1, 6, 0], [1, 7, 0], [1, 8, 0],
+        [1, 9, 0], [1, 10, 5], [1, 11, 2], [1, 12, 2], [1, 13, 6], [1, 14, 9], [1, 15, 11], [1, 16, 6], [1, 17, 7],
+        [1, 18, 8], [1, 19, 12], [1, 20, 5], [1, 21, 5], [1, 22, 7], [1, 23, 2], [2, 0, 1], [2, 1, 1],
+        [2, 2, 0], [2, 3, 0], [2, 4, 0], [2, 5, 0], [2, 6, 0], [2, 7, 0], [2, 8, 0], [2, 9, 0], [2, 10, 3],
+        [2, 11, 2], [2, 12, 1], [2, 13, 9], [2, 14, 8], [2, 15, 10], [2, 16, 6], [2, 17, 5], [2, 18, 5],
+        [2, 19, 5], [2, 20, 7], [2, 21, 4], [2, 22, 2], [2, 23, 4], [3, 0, 7], [3, 1, 3], [3, 2, 0], [3, 3, 0],
+        [3, 4, 0], [3, 5, 0], [3, 6, 0], [3, 7, 0], [3, 8, 1], [3, 9, 0], [3, 10, 5], [3, 11, 4], [3, 12, 7],
+        [3, 13, 14], [3, 14, 13], [3, 15, 12], [3, 16, 9], [3, 17, 5], [3, 18, 5], [3, 19, 10], [3, 20, 6],
+        [3, 21, 4], [3, 22, 4], [3, 23, 1], [4, 0, 1], [4, 1, 3], [4, 2, 0], [4, 3, 0], [4, 4, 0], [4, 5, 1],
+        [4, 6, 0], [4, 7, 0], [4, 8, 0], [4, 9, 2], [4, 10, 4], [4, 11, 4], [4, 12, 2], [4, 13, 4], [4, 14, 4],
+        [4, 15, 14], [4, 16, 12], [4, 17, 1], [4, 18, 8], [4, 19, 5], [4, 20, 3], [4, 21, 7], [4, 22, 3],
+        [4, 23, 0], [5, 0, 2], [5, 1, 1], [5, 2, 0], [5, 3, 3], [5, 4, 0], [5, 5, 0], [5, 6, 0], [5, 7, 0],
+        [5, 8, 2], [5, 9, 0], [5, 10, 4], [5, 11, 1], [5, 12, 5], [5, 13, 10], [5, 14, 5], [5, 15, 7], [5, 16, 11],
+        [5, 17, 6], [5, 18, 0], [5, 19, 5], [5, 20, 3], [5, 21, 4], [5, 22, 2], [5, 23, 0], [6, 0, 1], [6, 1, 0],
+        [6, 2, 0], [6, 3, 0], [6, 4, 0], [6, 5, 0], [6, 6, 0], [6, 7, 0], [6, 8, 0], [6, 9, 0], [6, 10, 1],
+        [6, 11, 0], [6, 12, 2], [6, 13, 1], [6, 14, 3], [6, 15, 4], [6, 16, 0], [6, 17, 0], [6, 18, 0], [6, 19, 0],
+        [6, 20, 1], [6, 21, 2], [6, 22, 2], [6, 23, 6]]
+range_color = ['#313695', '#4575b4', '#74add1', '#abd9e9', '#e0f3f8', '#ffffbf',
+               '#fee090', '#fdae61', '#f46d43', '#d73027', '#a50026']
+bar3d.add("", x_axis, y_aixs, [[d[1], d[0], d[2]] for d in data], is_visualmap=True,
+          visual_range=[0, 20], visual_range_color=range_color, grid3D_width=200, grid3D_depth=80)
+bar3d.show_config()
+bar3d.render()
+```
+![bar3D-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/bar3D-0.gif)
+
+设置 ``` grid3D_shading``` 可以让柱状更真实  
+```python
+bar3d = Bar3D("3D 柱状图示例", width=1200, height=600)
+bar3d.add("", x_axis, y_aixs, [[d[1], d[0], d[2]] for d in data], is_visualmap=True,
+          visual_range=[0, 20], visual_range_color=range_color, grid3D_width=200, grid3D_depth=80,
+          grid3D_shading='lambert')
+bar3d.show_config()
+bar3d.render()
+```
+![bar3D-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/bar3D-1.gif)
+
+设置 ```is_grid3D_rotate``` 启动自动旋转功能
+```python
+bar3d = Bar3D("3D 柱状图示例", width=1200, height=600)
+bar3d.add("", x_axis, y_aixs, [[d[1], d[0], d[2]] for d in data], is_visualmap=True,
+          visual_range=[0, 20], visual_range_color=range_color, grid3D_width=200, grid3D_depth=80,
+          is_grid3D_rotate=True)
+bar3d.show_config()
+bar3d.render()
+```
+![bar3D-2](https://github.com/chenjiandongx/pyecharts/blob/master/images/bar3D-2.gif)
+
+设置 ``` grid3D_rotate_speed``` 调节旋转速度
+```python
+bar3d = Bar3D("3D 柱状图示例", width=1200, height=600)
+bar3d.add("", x_axis, y_aixs, [[d[1], d[0], d[2]] for d in data], is_visualmap=True,
+          visual_range=[0, 20], visual_range_color=range_color, grid3D_width=200, grid3D_depth=80,
+          is_grid3D_rotate=True, grid3D_rotate_speed=180)
+bar3d.show_config()
+bar3d.render()
+```
+![bar3D-3](https://github.com/chenjiandongx/pyecharts/blob/master/images/bar3D-3.gif)
+
+**Tip：** 关于 gird3D 部分的设置，请参照通用配置项中的介绍 [通用配置项](https://github.com/chenjiandongx/pyecharts/blob/master/README.md#通用配置项)  
+
 
 ## EffectScatter（带有涟漪特效动画的散点图）
 > 利用动画特效可以将某些想要突出的数据进行视觉突出。
@@ -728,6 +875,16 @@ kline.render()
 ```
 ![kline-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/kline-1.gif)
 
+dataZoom 效果加在纵坐标轴上
+```python
+kline = Kline("K 线图示例")
+kline.add("日K", ["2017/7/{}".format(i + 1) for i in range(31)], v1, mark_point=["max"],
+          is_datazoom_show=True, datazoom_orient='vertical')
+kline.show_config()
+kline.render()
+```
+![kline-2](https://github.com/chenjiandongx/pyecharts/blob/master/images/kline-2.gif)
+
 
 ## Line（折线/面积图）
 > 折线图是用折线将各个数据点标志连接起来的图表，用于展现数据的变化趋势。
@@ -825,6 +982,64 @@ line.render()
 
 **Tip：** 可配置 **lineStyle** 参数
 **Tip：** 可以通过 label_color 来设置线条颜色，如 ['#eee', '#000']，所有的图表类型的图例颜色都可通过 label_color 来修改。
+
+
+## Line3D（3D 折线图）
+
+Line3D.add() 方法签名
+```python
+add(name, data, grid3D_opacity=1, **kwargs)
+```
+* name -> str  
+    图例名称
+* data -> [list],包含列表的列表  
+    数据项，数据中，每一行是一个『数据项』，每一列属于一个『维度』
+* grid3D_opacity -> int  
+    3D 笛卡尔坐标系组的透明度（线的透明度），默认为 1，完全不透明。
+
+画个弹簧
+```python
+from pyecharts import Line3D
+
+import math
+_data = []
+for t in range(0, 25000):
+    _t = t / 1000
+    x = (1 + 0.25 * math.cos(75 * _t)) * math.cos(_t)
+    y = (1 + 0.25 * math.cos(75 * _t)) * math.sin(_t)
+    z = _t + 2.0 * math.sin(75 * _t)
+    _data.append([x, y, z])
+range_color = ['#313695', '#4575b4', '#74add1', '#abd9e9', '#e0f3f8', '#ffffbf',
+               '#fee090', '#fdae61', '#f46d43', '#d73027', '#a50026']
+line3d = Line3D("3D 折线图示例", width=1200, height=600)
+line3d.add("", _data, is_visualmap=True, visual_range_color=range_color, visual_range=[0, 30],
+           grid3D_rotate_sensitivity=5)
+line3d.render()
+```
+![line3D-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/line3D-0.gif)
+
+旋转弹簧
+```python
+from pyecharts import Line3D
+
+import math
+_data = []
+for t in range(0, 25000):
+    _t = t / 1000
+    x = (1 + 0.25 * math.cos(75 * _t)) * math.cos(_t)
+    y = (1 + 0.25 * math.cos(75 * _t)) * math.sin(_t)
+    z = _t + 2.0 * math.sin(75 * _t)
+    _data.append([x, y, z])
+range_color = ['#313695', '#4575b4', '#74add1', '#abd9e9', '#e0f3f8', '#ffffbf',
+               '#fee090', '#fdae61', '#f46d43', '#d73027', '#a50026']
+line3d = Line3D("3D 折线图示例", width=1200, height=600)
+line3d.add("", _data, is_visualmap=True, visual_range_color=range_color, visual_range=[0, 30],
+           is_grid3D_rotate=True, grid3D_rotate_speed=180)
+line3d.render()
+```
+![line3D-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/line3D-1.gif)
+
+**Tip：** 关于 gird3D 部分的设置，请参照通用配置项中的介绍 [通用配置项](https://github.com/chenjiandongx/pyecharts/blob/master/README.md#通用配置项)  
 
 
 ## Liquid（水球图）
@@ -1398,6 +1613,35 @@ scatter.show_config()
 scatter.render()
 ```
 ![pyecharts-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/pyecharts-1.png)
+
+
+## Scatter3D（3D 散点图）
+
+Scatter3D.add() 方法签名
+```python
+add(name, data, grid3D_opacity=1, **kwargs)
+```
+* name -> str  
+    图例名称
+* data -> [list],包含列表的列表  
+    数据项，数据中，每一行是一个『数据项』，每一列属于一个『维度』
+* grid3D_opacity -> int  
+    3D 笛卡尔坐标系组的透明度（点的透明度），默认为 1，完全不透明。
+
+```python
+from pyecharts import Scatter3D
+
+import random
+data = [[random.randint(0, 100), random.randint(0, 100), random.randint(0, 100)] for _ in range(80)]
+range_color = ['#313695', '#4575b4', '#74add1', '#abd9e9', '#e0f3f8', '#ffffbf',
+               '#fee090', '#fdae61', '#f46d43', '#d73027', '#a50026']
+scatter3D = Scatter3D("3D 散点图示例", width=1200, height=600)
+scatter3D.add("", data, is_visualmap=True, visual_range_color=range_color)
+scatter3D.render()
+```
+![scatter3D-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/scatter3D-0.gif)
+
+**Tip：** 关于 gird3D 部分的设置，请参照通用配置项中的介绍 [通用配置项](https://github.com/chenjiandongx/pyecharts/blob/master/README.md#通用配置项)  
 
 
 ## WordCloud（词云图）

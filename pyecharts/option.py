@@ -601,10 +601,17 @@ def grid3D(grid3D_width=100,
     """
 
     :param grid3D_width:
+        3D axis width
     :param grid3D_height:
+        3D axis height
     :param grid3D_depth:
+        3D axis depth
     :param grid3D_rotate_speed:
+        3D charts rotate speed
     :param is_grid3D_rotate:
+        whether rotate 3D charts
+    :param grid3D_rotate_sensitivity:
+        3D charts rotete sensitivity, The greater the value, the more sensitive.
     :param kwargs:
     :return:
     """
