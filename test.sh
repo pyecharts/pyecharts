@@ -1,2 +1,2 @@
 cd test
-nosetests
+nosetests --with-coverage --cover-package pyecharts --cover-package test

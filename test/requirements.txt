@@ -1,1 +1,3 @@
 nose
+codecov
+coverage
