@@ -36,8 +36,8 @@ def test_bar3D():
                    '#fee090', '#fdae61', '#f46d43', '#d73027', '#a50026']
     bar3d.add("", x_axis, y_aixs, [[d[1], d[0], d[2]] for d in data], is_visualmap=True,
               visual_range=[0, 20], visual_range_color=range_color, grid3D_width=200, grid3D_depth=80)
-    # bar3d.show_config()
-    # bar3d.render()
+    bar3d.show_config()
+    bar3d.render()
 
     # bar3D_2
     bar3d = Bar3D(width=1200, height=600)
