@@ -2,7 +2,7 @@
 #coding=utf-8
 
 
-_temple_notebook = """
+_template_notebook = """
 <div id="{{ chartId }}" style="width:{{ myWidth }}px; height:{{ myHeight }}px;"></div>
 <script>
     require.config({
@@ -20,7 +20,7 @@ _temple_notebook = """
 """
 
 
-_temple_map_notebook = """
+_template_map_notebook = """
 <div id="{{ chartId }}" style="width:{{ myWidth }}px; height:{{ myHeight }}px;"></div>
 <script>
     require.config({
@@ -39,7 +39,7 @@ _temple_map_notebook = """
 """
 
 
-_temple_lq_notebook = '''
+_template_lq_notebook = '''
 <div id="{{ chartId }}" style="width:{{ myWidth }}px; height:{{ myHeight }}px;"></div>
 <script>
     require.config({
@@ -56,7 +56,7 @@ _temple_lq_notebook = '''
 </script>'''
 
 
-_temple_wd_notebook = '''
+_template_wd_notebook = '''
 <body>
     <style>
         html,
@@ -85,7 +85,7 @@ _temple_wd_notebook = '''
 '''
 
 
-_temple_wd = """
+_template_wd = """
 <!DOCTYPE html>
 <html>
 
@@ -118,7 +118,7 @@ _temple_wd = """
 </html>
 """
 
-_temple_lq = """
+_template_lq = """
 <!DOCTYPE html>
 <html>
 
@@ -142,7 +142,7 @@ _temple_lq = """
 """
 
 
-_temple="""
+_template="""
 <!DOCTYPE html>
 <html>
 
@@ -250,4 +250,4 @@ def get_map(map_name):
         _location = _location_js.split(":")[0]
     except:
         pass
-    return _temple_map_notebook.replace('##locationJs', _location_js).replace('##location', _location)
+    return _template_map_notebook.replace('##locationJs', _location_js).replace('##location', _location)
