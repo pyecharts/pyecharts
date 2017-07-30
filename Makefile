@@ -1,4 +1,4 @@
-all: test
+all: tests
 
-test:
+tests:
 	bash test.sh
