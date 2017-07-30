@@ -272,6 +272,27 @@ grid3D：3D笛卡尔坐标系组配置项，适用于 3D 图形。（Bar3D, Line
 * grid3D_rotate_sensitivity -> int  
     旋转操作的灵敏度，值越大越灵敏。默认为 1, 设置为 0 后无法旋转。
 
+visualMap：是视觉映射组件，用于进行『视觉编码』，也就是将数据映射到视觉元素（视觉通道）
+
+* is_visualmap -> bool  
+    是否使用视觉映射组件
+* visual_range -> list  
+    指定组件的允许的最小值与最大值。默认为 [0, 100]
+* visual_text_color -> list  
+    两端文本颜色。
+* visual_range_text -> list  
+    两端文本。默认为 ['low', 'hight']
+* visual_range_color -> list  
+    过渡颜色。默认为 ['#50a3ba', '#eac763', '#d94e5d']
+* visual_orient -> str  
+    visualMap 组件条的方向，默认为'vertical'，有'vertical', 'horizontal'可选。
+* visual_pos -> str/int  
+    visualmap 组件条距离左侧的位置，默认为'left'。有'right', 'center', 'right'可选，也可为百分数或整数。
+* visual_top -> str/int  
+    visualmap 组件条距离顶部的位置，默认为'top'。有'top', 'center', 'bottom'可选，也可为百分数或整数。
+* is_calculable -> bool  
+    是否显示拖拽用的手柄（手柄能拖拽调整选中范围）。默认为 True
+
 
 # 图表详细  
 
@@ -649,25 +670,7 @@ geo.render()
 ```
 ![geo-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/geo-0.gif)
 
-visualMap：是视觉映射组件，用于进行『视觉编码』，也就是将数据映射到视觉元素（视觉通道）
-* is_visualmap -> bool  
-    是否使用视觉映射组件
-* visual_range -> list  
-    指定组件的允许的最小值与最大值。默认为 [0, 100]
-* visual_text_color -> list  
-    两端文本颜色。
-* visual_range_text -> list  
-    两端文本。默认为 ['low', 'hight']
-* visual_range_color -> list  
-    过渡颜色。默认为 ['#50a3ba', '#eac763', '#d94e5d']
-* visual_orient -> str  
-    visualMap 组件条的方向，默认为'vertical'，有'vertical', 'horizontal'可选。
-* visual_pos -> str/int  
-    visualmap 组件条距离左侧的位置，默认为'left'。有'right', 'center', 'right'可选，也可为百分数或整数。
-* visual_top -> str/int  
-    visualmap 组件条距离顶部的位置，默认为'top'。有'top', 'center', 'bottom'可选，也可为百分数或整数。
-* is_calculable -> bool  
-    是否显示拖拽用的手柄（手柄能拖拽调整选中范围）。默认为 True
+**Tip：** 请配合 [通用配置项](https://github.com/chenjiandongx/pyecharts/blob/master/README.md#通用配置项) 中的 Visualmap 使用
 
 HeatMap 类型
 ```python
@@ -823,7 +826,7 @@ heatmap.render()
 ```
 ![heatmap-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/heatmap-0.gif)
 
-**Tip：** 热力图必须配合 VisualMap 使用才有效果。
+**Tip：** 热力图必须配合 [通用配置项](https://github.com/chenjiandongx/pyecharts/blob/master/README.md#通用配置项) 中的 VisualMap 使用才有效果。
 
 
 ## Kline（K线图）
@@ -1137,7 +1140,7 @@ map.render()
 ```
 ![map-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/map-1.gif)
 
-**Tip：** 可结合 visualMap 组件进行设置
+**Tip：** 请配合 [通用配置项](https://github.com/chenjiandongx/pyecharts/blob/master/README.md#通用配置项) 中的 Visualmap 使用
 
 ```python
 from pyecharts import Map
