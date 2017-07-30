@@ -6,7 +6,7 @@ from pyecharts.option import get_all_options
 
 class Scatter3D(Base):
     """
-    <<< Scatter chart >>>
+    <<< Scatter3D chart >>>
     """
 
     def __init__(self, title="", subtitle="", **kwargs):
