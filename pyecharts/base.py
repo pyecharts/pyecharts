@@ -9,7 +9,7 @@ from pprint import pprint
 import pandas, numpy
 from jinja2 import Template
 from pyecharts.option import get_all_options
-from pyecharts import temple as Tp
+from pyecharts import template as Tp
 
 
 class Base(object):
@@ -423,14 +423,14 @@ class Base(object):
         :param path:
             path of render html file
         """
-        temple = Tp._temple
+        temple = Tp._template
         series = self._option.get("series")
         for s in series:
             if s.get('type') == "wordCloud":
-                temple = Tp._temple_wd
+                temple = Tp._template_wd
                 break
             if s.get('type') == "liquidFill":
-                temple = Tp._temple_lq
+                temple = Tp._template_lq
                 break
         my_option = json.dumps(self._option, indent=4, ensure_ascii=False)
         tmp = Template(temple)
@@ -451,14 +451,14 @@ class Base(object):
 
         divid = datetime.datetime.now()
         my_option = json.dumps(self._option, indent=4)
-        temple = Tp._temple_notebook
+        temple = Tp._template_notebook
         series = self._option.get("series")
         for s in series:
             if s.get('type') == "wordCloud":
-                temple = Tp._temple_wd_notebook
+                temple = Tp._template_wd_notebook
                 break
             if s.get('type') == "liquidFill":
-                temple = Tp._temple_lq_notebook
+                temple = Tp._template_lq_notebook
                 break
             if s.get('type') == 'map':
                 temple = Tp.get_map(self._option.get('series')[0].get('mapType'))
