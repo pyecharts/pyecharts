@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 #coding=utf-8
 
+import os
 from pyecharts import Graph
 
 def test_graph():
@@ -31,7 +32,7 @@ def test_graph():
 
     # graph_2
     import json
-    with open("..\json\weibo.json", "r", encoding="utf-8") as f:
+    with open(os.path.join("..", "json", "weibo.json"), "r", encoding="utf-8") as f:
         j = json.load(f)
         nodes, links, categories, cont, mid, userl = j
     graph = Graph("微博转发关系图", width=1200, height=600)
