@@ -6,7 +6,7 @@ from pyecharts import Bar3D
 def test_bar3D():
 
     # bar3D_0
-    bar3d = Bar3D(width=1200, height=600)
+    bar3d = Bar3D("3D 柱状图示例", width=1200, height=600)
     x_axis = ["12a", "1a", "2a", "3a", "4a", "5a", "6a", "7a", "8a", "9a", "10a", "11a",
               "12p", "1p", "2p", "3p", "4p", "5p", "6p", "7p", "8p", "9p", "10p", "11p"]
     y_aixs = ["Saturday", "Friday", "Thursday", "Wednesday", "Tuesday", "Monday", "Sunday"]
@@ -39,26 +39,26 @@ def test_bar3D():
     bar3d.show_config()
     bar3d.render()
 
-    # bar3D_2
-    bar3d = Bar3D(width=1200, height=600)
+    # bar3D_1
+    bar3d = Bar3D("3D 柱状图示例", width=1200, height=600)
     bar3d.add("", x_axis, y_aixs, [[d[1], d[0], d[2]] for d in data], is_visualmap=True,
               visual_range=[0, 20], visual_range_color=range_color, grid3D_width=200, grid3D_depth=80,
               grid3D_shading='lambert')
     bar3d.show_config()
     bar3d.render()
 
-    # bar3D_3
-    bar3d = Bar3D(width=1200, height=600)
+    # bar3D_2
+    bar3d = Bar3D("3D 柱状图示例", width=1200, height=600)
     bar3d.add("", x_axis, y_aixs, [[d[1], d[0], d[2]] for d in data], is_visualmap=True,
               visual_range=[0, 20], visual_range_color=range_color, grid3D_width=200, grid3D_depth=80,
               is_grid3D_rotate=True)
     bar3d.show_config()
     bar3d.render()
 
-    # bar3D_4
-    bar3d = Bar3D(width=1200, height=600)
+    # bar3D_3
+    bar3d = Bar3D("3D 柱状图示例", width=1200, height=600)
     bar3d.add("", x_axis, y_aixs, [[d[1], d[0], d[2]] for d in data], is_visualmap=True,
               visual_range=[0, 20], visual_range_color=range_color, grid3D_width=200, grid3D_depth=80,
-              grid3D_rotate_speed=180)
+              is_grid3D_rotate=True, grid3D_rotate_speed=180)
     bar3d.show_config()
     bar3d.render()
