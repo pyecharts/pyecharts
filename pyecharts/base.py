@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 #coding=utf-8
 
+import sys
 import json
 import random
 import datetime
@@ -10,6 +11,9 @@ import pandas, numpy
 from jinja2 import Template
 from pyecharts.option import get_all_options
 from pyecharts import template as Tp
+
+
+PY2 = sys.version_info[0] == 2
 
 
 class Base(object):
@@ -435,12 +439,12 @@ class Base(object):
         my_option = json.dumps(self._option, indent=4, ensure_ascii=False)
         tmp = Template(temple)
         html = tmp.render(myOption=my_option, myWidth=self._width, myHeight=self._height)
-        try:        # for Python3
-            with open(path, "w+", encoding="utf-8") as fout:
-                fout.write(html)
-        except:     # for Python2
-            with open(path, "w+") as fout:
-                fout.write(html)
+
+        if PY2:
+            html = html.encode('utf-8')
+
+        with open(path, "w+") as fout:
+            fout.write(html)
 
     def render_notebook(self):
         """ Render the options string, displayed in the jupyter notebook

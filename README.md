@@ -15,6 +15,7 @@
 [![Build Status](https://travis-ci.org/pyexcel/pyecharts.svg?branch=master)](https://travis-ci.org/pyexcel/pyecharts)
 
 
+
 * [项目概况](https://github.com/chenjiandongx/pyecharts/blob/master/README.md#项目概况)
 * [如何安装](https://github.com/chenjiandongx/pyecharts/blob/master/README.md#如何安装)
 * [开始使用](https://github.com/chenjiandongx/pyecharts/blob/master/README.md#开始使用)
@@ -84,7 +85,15 @@ bar.render()
     打印输出图表的所有配置项
 * ```render()```  
     默认将会在根目录下生成一个 render.html 的文件，支持 path 参数，设置文件保存位置，如 render(r"e:\my_first_chart.html")，文件用浏览器打开。  
-    默认的编码类型为 UTF-8，在 Python3 中是没什么问题的，Python3 对中文的支持好很多。但是在 Python2 中，编码的处理是个很头疼的问题，暂时没能找到完美的解决方法，目前只能通过文本编辑器自己进行二次编码，我用的是 Visual Studio Code，先通过 Gbk 编码重新打开，然后再用 UTF-8 重新保存，这样用浏览器打开的话就不会出现中文乱码问题了。  
+    默认的编码类型为 UTF-8，在 Python3 中是没什么问题的，Python3 对中文的支持好很多。但是在 Python2 中，编码的处理是个很头疼的问题，Please use include this statement before any code:
+
+```
+#!/usr/bin/python
+# -*- coding: <encoding name> -*-
+from __future__ import unicode_literals
+```
+
+For the first two lines, please refer to [PEP-0263](https://www.python.org/dev/peps/pep-0263/). And for the last line, please refer to [unicode literals](http://python-future.org/unicode_literals.html).
 
 基本上所有的图表类型都是这样绘制的：
 1. ```chart_name = Type()``` 初始化具体类型图表。
