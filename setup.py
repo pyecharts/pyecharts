@@ -13,7 +13,7 @@ __version__ = '0.1.9'
 __author__ = 'chenjiandongx'
 __author_email__ = 'chenjiandongx@qq.com'
 __license__ = 'MIT'
-__requires__ = ['pprint', 'Image', 'jinja2', 'pandas', 'numpy', 'future']
+__requires__ = ['pprint', 'Image', 'jinja2', 'future']
 __packages__ = ['pyecharts', 'pyecharts/charts']
 __keywords__ = ['echarts', 'charts']
 
