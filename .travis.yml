@@ -1,7 +1,8 @@
 sudo: false
 language: python
 notifications:
-  email: false
+  email:
+    - chenjiandongx@qq.com
 python:
   - 3.6
   - 3.5
