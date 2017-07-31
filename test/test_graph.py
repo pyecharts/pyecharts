@@ -1,7 +1,14 @@
 #!/usr/bin/env python
 #coding=utf-8
+from __future__ import unicode_literals
 
+import os
+import sys
 from pyecharts import Graph
+
+
+PY2 = sys.version_info[0] == 2
+
 
 def test_graph():
 
@@ -31,9 +38,14 @@ def test_graph():
 
     # graph_2
     import json
-    with open("..\json\weibo.json", "r", encoding="utf-8") as f:
-        j = json.load(f)
-        nodes, links, categories, cont, mid, userl = j
+    if PY2:
+        import codecs
+        with codecs.open(os.path.join("..", "json", "weibo.json"), "rb") as f:
+            j = json.load(f)
+    else:
+        with open(os.path.join("..", "json", "weibo.json"), "r", encoding="utf-8") as f:
+            j = json.load(f)
+    nodes, links, categories, cont, mid, userl = j
     graph = Graph("微博转发关系图", width=1200, height=600)
     graph.add("", nodes, links, categories, label_pos="right", repulsion=50, is_legend_show=False, line_curve=0.2,
               label_text_color=None)
