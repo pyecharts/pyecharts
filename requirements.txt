@@ -1,5 +1,4 @@
 Image==1.5.7
 pprint==0.1
 jinja2==2.8
-pandas>=0.18.1
 future
