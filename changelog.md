@@ -23,6 +23,10 @@
     * 增加了对 Pandas 和 Numpy 数据的简单处理。解决直接传入 Pandas 和 Numpy 数据类型出错的问题。（参见开始使用）
     * 增加 Bar3D, Line3D, Scatter3D 三种 3D 立体图表。
 
+* version 0.1.9.1
+    * 加入 Travis-CI 自动化测试。感谢 [@chfw](https://github.com/chfw) 提供的代码。  
+    * legend 增加 legend_selectedmode 参数，图例可以设置为单例或者多例。（参见 Radar 图）
+
 ## 项目期待
 
 * 视项目情况考虑增加一份英文文档

@@ -12,7 +12,7 @@ def test_radar():
     radar = Radar("雷达图示例")
     radar.config(schema)
     radar.add("预算分配", v1, is_splitline=True, is_axisline_show=True)
-    radar.add("实际开销", v2, label_color=["#4e79a7"], is_area_show=False)
+    radar.add("实际开销", v2, label_color=["#4e79a7"], is_area_show=False, legend_selectedmode='single')
     radar.show_config()
     radar.render()
 
@@ -90,6 +90,14 @@ def test_radar():
                 {"name":"NO2", "max":200},
                 {"name":"SO2", "max":100}]
 
+    radar = Radar("雷达图示例")
+    radar.config(c_schema=c_schema, shape='circle')
+    radar.add("北京", value_bj, item_color="#f9713c", symbol=None)
+    radar.add("上海", value_sh, item_color="#b3e4a1", symbol=None, legend_selectedmode='signle')
+    radar.show_config()
+    radar.render()
+
+    # radar_2
     radar = Radar("雷达图示例")
     radar.config(c_schema=c_schema, shape='circle')
     radar.add("北京", value_bj, item_color="#f9713c", symbol=None)

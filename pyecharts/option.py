@@ -330,19 +330,17 @@ def mark_line(mark_line=None, **kwargs):
 
 
 @collectfuncs
-def legend(type=None,
-           is_legend_show=True,
+def legend(is_legend_show=True,
            legend_orient="horizontal",
            legend_pos="center",
            legend_top='top',
+           legend_selectedmode='multiple',
            **kwargs):
     """ Legend component.
         Legend component shows symbol, color and name of different series.
         You can click legends to toggle displaying series in the chart.
         In ECharts 3, a single echarts instance may contain multiple legend components,
         which makes it easier for the layout of multiple legend components.
-    :param type:
-        chart type
     :param is_legend_show:
         It specifies whether to show the legend component.
     :param legend_orient:
@@ -357,14 +355,13 @@ def legend(type=None,
         legend_top value can be instant pixel value like 20;
         it can also be percentage value relative to container width like '20%';
         and it can also be 'top', 'middle', or 'bottom'.
+    :param legend_selectedmode:
+        State table of selected legend. 'single' or 'multiple'
     :param kwargs:
     :return:
     """
-    selected_mode = True
-    if type == 'radar':
-        selected_mode = 'single'
     _legend = {
-        "selectedMode":selected_mode,
+        "selectedMode": legend_selectedmode,
         "show": is_legend_show,
         "left": legend_pos,
         "top": legend_top,
@@ -374,10 +371,12 @@ def legend(type=None,
 
 
 @collectfuncs
-def visual_map(visual_range=None,
+def visual_map(visual_type='color',
+               visual_range=None,
                visual_text_color=None,
                visual_range_text=None,
                visual_range_color=None,
+               visual_range_size=None,
                visual_orient='vertical',
                visual_pos="left",
                visual_top="bottom",
@@ -385,19 +384,22 @@ def visual_map(visual_range=None,
                **kwargs):
     """ visualMap is a type of component for visual encoding, which maps the data to visual channels
 
+    :param visual_type:
+        visual map type, 'color' or 'size'
+        color: For visual channel color, array is used, like: ['#333', '#78ab23', 'blue'],
+        which means a color ribbon is formed based on the three color stops,and dataValues will be mapped to the ribbon.
+        size: For visual channel size, array is used, like: [20, 50],
+        which means a size ribbon is formed based on the two value stops, and dataValues will be mapped to the ribbon.
     :param visual_range:
         pecify the min and max dataValue for the visualMap component.
     :param visual_text_color:
         visualMap text color.
     :param visual_range_text:
         The label text on both ends, such as ['High', 'Low']
+    :param visual_range_size:
+        For visual channel size, array is used, like: [20, 50].
     :param visual_range_color:
-        For visual channel color, array is used, like: ['#333', '#78ab23', 'blue'],
-        which means a color ribbon is formed based on the three color stops,
-        and dataValues will be mapped to the ribbon. Specifically,
-        the dataValue that equals to visualMap.min will be mapped onto '#333',
-        the dataValue that equals to visualMap.max will be mapped onto 'blue',
-        and other dataValues will be piecewisely interpolated to get the final color.
+        For visual channel color, array is used, like: ['#333', '#78ab23', 'blue'].
     :param visual_orient:
         How to layout the visualMap component, 'horizontal' or 'vertical'.
     :param visual_pos:
@@ -427,10 +429,20 @@ def visual_map(visual_range=None,
         if len(visual_range_text) == 2:
             _tlow, _thigh = visual_range_text
 
-    inrange = ['#50a3ba', '#eac763', '#d94e5d']
-    if visual_range_color:
-        if len(visual_range_color) >= 2:
-            inrange = visual_range_color
+    _inrange_op = {}
+    if visual_type == 'color':
+        range_color = ['#50a3ba', '#eac763', '#d94e5d']
+        if visual_range_color:
+            if len(visual_range_color) >= 2:
+                range_color = visual_range_color
+        _inrange_op.update(color=range_color)
+
+    if visual_type == 'size':
+        range_size = [20, 50]
+        if visual_range_size:
+            if len(visual_range_size) >= 2:
+                range_size = visual_range_size
+        _inrange_op.update(symbolSize=range_size)
 
     _visual_map = {
         "type": "continuous",
@@ -438,7 +450,7 @@ def visual_map(visual_range=None,
         "max": _max,
         "text": [_thigh, _tlow],
         "textStyle": {"color": visual_text_color},
-        "inRange": {"color": inrange},
+        "inRange": _inrange_op,
         "calculable": is_calculable,
         "orient": visual_orient,
         "left": visual_pos,
