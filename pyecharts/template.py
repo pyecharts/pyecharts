@@ -250,4 +250,4 @@ def get_map(map_name):
         _location = _location_js.split(":")[0]
     except:
         pass
-    return _template_map_notebook.replace('##locationJs', _location_js).replace('##location', _location)
+    return __template_map_notebook.replace('##locationJs', _location_js).replace('##location', _location)
