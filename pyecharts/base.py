@@ -7,7 +7,6 @@ import random
 import datetime
 
 from pprint import pprint
-import pandas, numpy
 from jinja2 import Template
 from pyecharts.option import get_all_options
 from pyecharts import template as Tp
