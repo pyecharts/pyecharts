@@ -167,6 +167,7 @@ class Base(object):
             legend_orient=None,
             legend_pos=None,
             legend_top=None,
+            legend_selectedmode=None,
             line_curve=None,
             line_opacity=None,
             line_type=None,
@@ -193,11 +194,13 @@ class Base(object):
             type=None,
             visual_orient=None,
             visual_range_color=None,
+            visual_range_size=None,
             visual_range_text=None,
             visual_range=None,
             visual_text_color=None,
             visual_pos=None,
             visual_top=None,
+            visual_type=None,
             word_gap=None,
             word_size_range=None,
             x_axis=None,
@@ -369,13 +372,12 @@ class Base(object):
             _dtvalue = pddata.values.astype(float).tolist()
         except:
             _dtvalue = pddata.values.astype(str).tolist()
-        if isinstance(pddata, pandas.DataFrame):
             return _dtvalue
         try:
             _pdattr = pddata.index.astype(float).tolist()
         except:
             _pdattr = pddata.index.astype(str).tolist()
-        return _pdattr, _dtvalue
+        return _dtvalue, _pdattr
 
     def _legend_visualmap_colorlst(self, is_visualmap=False, **kwargs):
         """ config legend，visualmap and colorlst component.
@@ -389,9 +391,11 @@ class Base(object):
         if is_visualmap:
             self._option.update(visualMap=chart['visual_map'])
         self._option.get('legend')[0].update(chart['legend'])
+        self._option.update(color=chart['color'])
+        # grid component
         if chart['grid']:
             self._option.get('grid').append(chart['grid'])
-        self._option.update(color=chart['color'])
+        # datazoom component
         if kwargs.get('is_datazoom_show', None) is True:
             self._option.update(dataZoom=chart['datazoom'])
 
@@ -413,12 +417,13 @@ class Base(object):
         my_option = json.dumps(self._option, indent=4, ensure_ascii=False)
         tmp = Template(temple)
         html = tmp.render(myOption=my_option, myWidth=self._width, myHeight=self._height)
-
         if PY2:
             html = html.encode('utf-8')
-
-        with open(path, "w+") as fout:
-            fout.write(html)
+            with open(path, "w+") as fout:
+                fout.write(html)
+        else:
+            with open(path, "w+", encoding="utf-8") as fout:
+                fout.write(html)
 
     def render_notebook(self):
         """ Render the options string, displayed in the jupyter notebook
@@ -438,6 +443,7 @@ class Base(object):
             if s.get('type') == "liquidFill":
                 temple = Tp._template_lq_notebook
                 break
+            # Avoid loading too many maps at once, make sure notebook can show map chart normally.
             if s.get('type') == 'map':
                 temple = Tp.get_map(self._option.get('series')[0].get('mapType'))
                 break

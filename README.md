@@ -85,15 +85,15 @@ bar.render()
     打印输出图表的所有配置项
 * ```render()```  
     默认将会在根目录下生成一个 render.html 的文件，支持 path 参数，设置文件保存位置，如 render(r"e:\my_first_chart.html")，文件用浏览器打开。  
-    默认的编码类型为 UTF-8，在 Python3 中是没什么问题的，Python3 对中文的支持好很多。但是在 Python2 中，请应用下面的语句，保证没有编码问题:
 
+### Python2 编码问题
+默认的编码类型为 UTF-8，在 Python3 中是没什么问题的，Python3 对中文的支持好很多。但是在 Python2 中，请应用下面的语句，保证没有编码问题:
 ```
 #!/usr/bin/python
-# -*- coding: <encoding name> -*-
+#coding=utf-8
 from __future__ import unicode_literals
 ```
-
-前两句告知你的编辑器你用UTF-8([PEP-0263](https://www.python.org/dev/peps/pep-0263/)). 最后一句告知Python所有字符是UTF-8([unicode literals](http://python-future.org/unicode_literals.html))
+前两句告知你的编辑器你用 UTF-8 ([PEP-0263](https://www.python.org/dev/peps/pep-0263/)). 最后一句告知 Python 所有字符是 UTF-8 ([unicode literals](http://python-future.org/unicode_literals.html))
 
 基本上所有的图表类型都是这样绘制的：
 1. ```chart_name = Type()``` 初始化具体类型图表。
@@ -230,6 +230,8 @@ legend：图例组件。图例组件展现了不同系列的标记(symbol)，颜
     图例组件离容器左侧的距离，默认为'center'，有'left', 'center', 'right'可选
 * legend_top -> str  
     图例组件离容器上侧的距离，默认为'top'，有'top', 'center', 'bottom'可选
+* legend_selectedmode -> str/bool  
+    图例选择的模式，控制是否可以通过点击图例改变系列的显示状态。默认为'multiple'，可以设成 'single' 或者 'multiple' 使用单选或者多选模式。也可以设置为 False 关闭显示状态。
     
 
 label：图形上的文本标签，可用于说明图形的一些数据信息，比如值，名称等。
@@ -288,6 +290,8 @@ visualMap：是视觉映射组件，用于进行『视觉编码』，也就是�
 
 * is_visualmap -> bool  
     是否使用视觉映射组件
+* visual_type -> str  
+    制定组件映射方式，默认为'color‘，即通过颜色来映射数值。有'color', 'size'可选。'szie'通过数值点的大小，也就是图形点的大小来映射数值。
 * visual_range -> list  
     指定组件的允许的最小值与最大值。默认为 [0, 100]
 * visual_text_color -> list  
@@ -296,6 +300,8 @@ visualMap：是视觉映射组件，用于进行『视觉编码』，也就是�
     两端文本。默认为 ['low', 'hight']
 * visual_range_color -> list  
     过渡颜色。默认为 ['#50a3ba', '#eac763', '#d94e5d']
+* visual_range_size -> list  
+    数值映射的范围，也就是图形点大小的范围。默认为 [20, 50]
 * visual_orient -> str  
     visualMap 组件条的方向，默认为'vertical'，有'vertical', 'horizontal'可选。
 * visual_pos -> str/int  
@@ -1500,7 +1506,7 @@ v2 = [[5000, 14000, 28000, 31000, 42000, 21000]]
 radar = Radar()
 radar.config(schema)
 radar.add("预算分配", v1, is_splitline=True, is_axisline_show=True)
-radar.add("实际开销", v2, label_color=["#4e79a7"], is_area_show=False)
+radar.add("实际开销", v2, label_color=["#4e79a7"], is_area_show=False, legend_selectedmode='signle')
 radar.show_config()
 radar.render()
 ```
@@ -1563,13 +1569,24 @@ c_schema= [{"name": "AQI", "max": 300, "min": 5},
 radar = Radar()
 radar.config(c_schema=c_schema, shape='circle')
 radar.add("北京", value_bj, item_color="#f9713c", symbol=None)
-radar.add("上海", value_sh, item_color="#b3e4a1", symbol=None)
+radar.add("上海", value_sh, item_color="#b3e4a1", symbol=None, legend_selectedmode='signle')
 radar.show_config()
 radar.render()
 ```
 ![radar-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/radar-1.gif)
 
 **Tip：** symblo=None 可隐藏标记图形（小圆圈）
+
+图例多例模式。
+```python
+radar = Radar()
+radar.config(c_schema=c_schema, shape='circle')
+radar.add("北京", value_bj, item_color="#f9713c", symbol=None)
+radar.add("上海", value_sh, item_color="#b3e4a1", symbol=None)
+radar.show_config()
+radar.render()
+```
+![radar-2](https://github.com/chenjiandongx/pyecharts/blob/master/images/radar-2.gif)
 
 
 ## Scatter（散点图）
@@ -1600,6 +1617,28 @@ scatter.show_config()
 scatter.render()
 ```
 ![scatter-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/scatter-0.png)
+
+利用 Visualmap 组件，通过颜色映射数值。
+```python
+scatter = Scatter("散点图示例")
+scatter.add("A", v1, v2)
+scatter.add("B", v1[::-1], v2, is_visualmap=True)
+scatter.show_config()
+scatter.render()
+```
+![scatter-0-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/scatter-0-1.gif)
+
+利用 Visualmap 组件，通过图形点大小映射数值。
+```python
+scatter = Scatter("散点图示例")
+scatter.add("A", v1, v2)
+scatter.add("B", v1[::-1], v2, is_visualmap=True, visual_type='size', visual_range_size=[20, 80])
+scatter.show_config()
+scatter.render()
+```
+![scatter-0-2](https://github.com/chenjiandongx/pyecharts/blob/master/images/scatter-0-2.gif)
+
+**Tip：** 请配合 [通用配置项](https://github.com/chenjiandongx/pyecharts/blob/master/README.md#通用配置项) 中的 Visualmap 使用
 
 Scatter 还内置了画画方法
 ```python
