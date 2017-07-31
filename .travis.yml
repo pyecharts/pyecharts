@@ -2,7 +2,10 @@ sudo: false
 language: python
 notifications:
   email:
-    - chenjiandongx@qq.com
+    recipients:
+      - chenjiandongx@qq.com
+    on_success: always # default: change
+    on_failure: always # default: always
 python:
   - 3.6
   - 3.5

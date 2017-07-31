@@ -12,7 +12,7 @@
 
 # pyecharts 文档
 
-[![Build Status](https://travis-ci.org/pyexcel/pyecharts.svg?branch=master)](https://travis-ci.org/pyexcel/pyecharts)
+[![Build Status](https://travis-ci.org/chenjiandongx/pyecharts.svg?branch=master)](https://travis-ci.org/chenjiandongx/pyecharts)
 
 
 
