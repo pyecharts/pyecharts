@@ -25,6 +25,9 @@
     * legend：图例组件。图例组件展现了不同系列的标记(symbol)，颜色和名字。可以通过点击图例控制哪些系列不显示。
     * label：图形上的文本标签，可用于说明图形的一些数据信息，比如值，名称等。
     * lineStyle：带线图形的线的风格选项(Line、Polar、Radar、Graph、Parallel)
+    * grid3D：3D笛卡尔坐标系组配置项，适用于 3D 图形。（Bar3D, Line3D, Scatter3D)
+    * visualMap：是视觉映射组件，用于进行『视觉编码』，也就是将数据映射到视觉元素（视觉通道）
+
 * [图表详细](https://github.com/chenjiandongx/pyecharts/blob/master/README.md#图表详细)
     * Bar（柱状图/条形图）
     * Bar3D（3D 柱状图）
