@@ -1,0 +1,15 @@
+<div id="{{ chartId }}" style="width:{{ myWidth }}px; height:{{ myHeight }}px;"></div>
+<script>
+    require.config({
+         paths:{
+            echarts: '//cdn.bootcss.com/echarts/3.6.2/echarts.min',
+            china: '//echarts.baidu.com/gallery/vendors/echarts/map/js/china'
+            {%if location_js %}, {{location_js}} {% endif %}
+         }
+    });
+    require(['echarts', 'china' {% if location %}, '{{location}}'{% endif %}],function(ec){
+    var myChart = ec.init(document.getElementById('{{ chartId }}'));
+               var option =  {{ myOption }};
+               myChart.setOption(option);
+    });
+</script>
