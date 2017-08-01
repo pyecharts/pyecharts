@@ -1,0 +1,4 @@
+include README.md
+include changelog.md
+include pyecharts/templates/*.html
+include pyecharts/templates/js/*.js
