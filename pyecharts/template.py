@@ -176,7 +176,7 @@ _template="""
     <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/neimenggu.js "></script>
     <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/ningxia.js "></script>
     <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/qinghai.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/shangdong.js "></script>
+    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/shandong.js "></script>
     <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/shanghai.js "></script>
     <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/shanxi.js "></script>
     <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/sichuan.js "></script>
@@ -225,7 +225,7 @@ _mapindex = {
     "内蒙古": "neimenggu: '//oog4yfyu0.bkt.clouddn.com/neimenggu'",
     "宁夏": "ningxia: '//oog4yfyu0.bkt.clouddn.com/ningxia'",
     "青海": "qinghai: '//oog4yfyu0.bkt.clouddn.com/qinghai'",
-    "山东": "shangdong: '//oog4yfyu0.bkt.clouddn.com/shangdong'",
+    "山东": "shandong: '//oog4yfyu0.bkt.clouddn.com/shandong'",
     "上海": "shanghai: '//oog4yfyu0.bkt.clouddn.com/shanghai'",
     "山西": "shanxi: '//oog4yfyu0.bkt.clouddn.com/shanxi'",
     "四川": "sichuan: '//oog4yfyu0.bkt.clouddn.com/sichuan'",
