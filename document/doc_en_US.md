@@ -1,15 +1,15 @@
 # pyecharts Documentation
 
-* [Overview](https://github.com/chenjiandongx/pyecharts/blob/master/README.md#Overview)
-* [Installing](https://github.com/chenjiandongx/pyecharts/blob/master/README.md#Installing)
-* [First-steps](https://github.com/chenjiandongx/pyecharts/blob/master/README.md#First-steps)
-* [Global-options](https://github.com/chenjiandongx/pyecharts/blob/master/README.md#Global-options)
-    * xyAxis：直角坐标系中的 x、y 轴(Line、Bar、Scatter、EffectScatter、Kline)
-    * dataZoom：dataZoom 组件 用于区域缩放，从而能自由关注细节的数据信息，或者概览数据整体，或者去除离群点的影响。(Line、Bar、Scatter、EffectScatter、Kline)
-    * legend：图例组件。图例组件展现了不同系列的标记(symbol)，颜色和名字。可以通过点击图例控制哪些系列不显示。
-    * label：图形上的文本标签，可用于说明图形的一些数据信息，比如值，名称等。
-    * lineStyle：带线图形的线的风格选项(Line、Polar、Radar、Graph、Parallel)
-* [Chart-types](https://github.com/chenjiandongx/pyecharts/blob/master/README.md#Chart-types)
+* [Overview](https://github.com/chenjiandongx/pyecharts/blob/master/document/doc_en_US.md#Overview)
+* [Installing](https://github.com/chenjiandongx/pyecharts/blob/master/document/doc_en_US.md#Installing)
+* [First-steps](https://github.com/chenjiandongx/pyecharts/blob/master/document/doc_en_US.md#First-steps)
+* [Global-options](https://github.com/chenjiandongx/pyecharts/blob/master/document/doc_en_US.md#Global-options)
+    * xyAxis：x, y axis in cartesian coordinate system(Line、Bar、Scatter、EffectScatter、Kline)
+    * dataZoom：dataZoom components for zoom-in and zoom-out. With them, it is possible to magnify a small area, to see the overall picture or to stay away from scattered points(Line、Bar、Scatter、EffectScatter、Kline)
+    * legend：legend component has different symbol, colour and name,  and provide the interactive clicking functions to show or hide its associated data series.
+    * label：text string on the chart, for marking the charts with sensible details, such as value, name.
+    * lineStyle：line style for Line、Polar、Radar、Graph、Parallel.
+* [Chart-types](https://github.com/chenjiandongx/pyecharts/blob/master/document/doc_en_US.md#Chart-types)
     * Bar
     * EffectScatter
     * Funnel
@@ -27,19 +27,20 @@
     * Radar
     * Scatter
     * WordCloud
-* [Customize](https://github.com/chenjiandongx/pyecharts/blob/master/README.md#Customize)
-* [Example](https://github.com/chenjiandongx/pyecharts/blob/master/README.md#Example)
-* [About](https://github.com/chenjiandongx/pyecharts/blob/master/README.md#About)
+* [Customize](https://github.com/chenjiandongx/pyecharts/blob/master/document/doc_en_US.md#Customize)
+* [Example](https://github.com/chenjiandongx/pyecharts/blob/master/document/doc_en_US.md#Example)
+* [About](https://github.com/chenjiandongx/pyecharts/blob/master/document/doc_en_US.md#About)
 
 
 # Overview  
-pyecharts 是一个用于生成 Echarts 图表的类库。实际上就是 Echarts 与 Python 的对接。
+pyecharts is a library to generate charts using Echarts. It simply provides the interface between Echarts and Python. 
 
-[Echarts](https://github.com/ecomfe/echarts) 是百度开源的一个数据可视化 JS 库。看了官方的介绍文档，觉得很不错，就想看看有没有人实现了 Python 库可以直接调用的。Github 上找到了一个 [echarts-python](https://github.com/yufeiminds/echarts-python) 不过这个项目已经很久没更新且也没什么介绍文档。借鉴了该项目，就自己动手实现一个，于是就有了 pyecharts。API 接口是从另外一个图表库 [pygal](https://github.com/Kozea/pygal) 中模仿的。
+[Echarts](https://github.com/ecomfe/echarts) is an open source library from Baidu for data visualization in javascript. It has awesome demo pages so I started to look out for an
+interface library so that I could use it in Python. I ended up with [echarts-python](https://github.com/yufeiminds/echarts-python) on github but it lacks of documentation and was not updated for a while. Just like many other Python projects, I started my own project, pyecharts, referencing echarts-python and another library [pygal](https://github.com/Kozea/pygal). 
 
 
 # Installing
-pyecharts 兼容 Python2 和 Python3。当前版本为 0.1.7，关于版本信息请查看 [changelog.md](https://github.com/chenjiandongx/pyecharts/blob/master/changelog.md)，一定要看一下阿！
+pyecharts works on Python2 and Python3. The latest release is 0.1.9.1. For more information please refer to [changelog.md](https://github.com/chenjiandongx/pyecharts/blob/master/changelog.md)
 
 ```python
 pip install pyecharts
@@ -146,7 +147,7 @@ cast(seq)
     You may also use hexadecimal format, for example '#ccc'.  
 * is_grid -> bool  
     defalut -> False  
-    It specifies whether to use the grid component. Detail [Customize](https://github.com/chenjiandongx/pyecharts/blob/master/README.md#Customize)
+    It specifies whether to use the grid component. Detail [Customize](https://github.com/chenjiandongx/pyecharts/blob/master/document/doc_en_US.md#Customize)
 
 # Global-options
 **通用配置项均在 ```add()``` 中设置**
