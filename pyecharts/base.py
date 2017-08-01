@@ -422,6 +422,7 @@ class Base(object):
         my_option = json.dumps(self._option, indent=4, ensure_ascii=False)
         tmp = self._jinja2_env.get_template(temple)
         html = tmp.render(myOption=my_option, myWidth=self._width, myHeight=self._height)
+        html = template.freeze_js(html)
         if PY2:
             html = html.encode('utf-8')
             with open(path, "w+") as fout:

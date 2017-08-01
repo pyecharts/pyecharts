@@ -1,6 +1,38 @@
 #!/usr/bin/env python
 #coding=utf-8
 import os
+import re
+
+
+JS_PATTERN = re.compile(r'<!-- build -->(.*)<!-- endbuild -->',
+                        re.IGNORECASE | re.MULTILINE | re.DOTALL)
+JS_SRC_PATTERN = re.compile(r'src=\"(.*?)\"')
+
+
+def freeze_js(html_content):
+    matches = JS_PATTERN.finditer(html_content)
+
+    if not matches:
+        return html_content
+
+    for match in reversed(tuple(matches)):
+        # JS file block
+        src_matches = JS_SRC_PATTERN.findall(match.group(1))
+
+        js_content = ""
+        for src in src_matches:
+            file_path = os.path.join(get_resource_dir('templates'), src.strip())
+
+            with open(file_path, "r") as f:
+                js_content += f.read() + '\n'
+        # Replace matched string with inline JS
+        fmt = '<script type="text/javascript">{}</script>'
+        js_content = fmt.format(js_content)
+        html_content = (html_content[:match.start()] + js_content +
+                        html_content[match.end():])
+
+    return html_content
+
 
 _mapindex = {
     "安徽": "anhui: '//oog4yfyu0.bkt.clouddn.com/anhui'",
