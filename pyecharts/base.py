@@ -7,9 +7,9 @@ import random
 import datetime
 
 from pprint import pprint
-from jinja2 import Template
+from jinja2 import Environment, FileSystemLoader
 from pyecharts.option import get_all_options
-from pyecharts import template as Tp
+from pyecharts import template
 
 
 PY2 = sys.version_info[0] == 2
@@ -99,6 +99,11 @@ class Base(object):
             legend=[{"data": []}],
             backgroundColor=background_color
         )
+        file_loader = FileSystemLoader(template.get_resource_dir('templates'))
+        self._jinja2_env = Environment(loader=file_loader,
+                                       keep_trailing_newline=True,
+                                       trim_blocks=True,
+                                       lstrip_blocks=True)
 
     def add(self, angle_data=None,
             angle_range=None,
@@ -405,17 +410,17 @@ class Base(object):
         :param path:
             path of render html file
         """
-        temple = Tp._template
+        temple = "template.html"
         series = self._option.get("series")
         for s in series:
             if s.get('type') == "wordCloud":
-                temple = Tp._template_wd
+                temple = "wd.html"
                 break
             if s.get('type') == "liquidFill":
-                temple = Tp._template_lq
+                temple = "lq.html"
                 break
         my_option = json.dumps(self._option, indent=4, ensure_ascii=False)
-        tmp = Template(temple)
+        tmp = self._jinja2_env.get_template(temple)
         html = tmp.render(myOption=my_option, myWidth=self._width, myHeight=self._height)
         if PY2:
             html = html.encode('utf-8')
@@ -434,25 +439,31 @@ class Base(object):
 
         divid = datetime.datetime.now()
         my_option = json.dumps(self._option, indent=4)
-        temple = Tp._template_notebook
+        temple = 'notebook.html'
         series = self._option.get("series")
+        map_keywords = {}
         for s in series:
             if s.get('type') == "wordCloud":
-                temple = Tp._template_wd_notebook
+                temple = 'wd_notebook.html'
                 break
             if s.get('type') == "liquidFill":
-                temple = Tp._template_lq_notebook
+                temple = 'lq_notebook.html'
                 break
             # Avoid loading too many maps at once, make sure notebook can show map chart normally.
             if s.get('type') == 'map':
-                temple = Tp.get_map(self._option.get('series')[0].get('mapType'))
+                temple = "map_notebook.html"
+                map_keywords = template.get_map(
+                    self._option.get('series')[0].get('mapType'))
                 break
-        tmp = Template(temple)
+        tmp = self._jinja2_env.get_template(temple)
         try:
-            html = tmp.render(myOption=my_option, chartId=divid, myWidth=self._width, myHeight=self._height)
+            html = tmp.render(
+                myOption=my_option, chartId=divid, myWidth=self._width,
+                myHeight=self._height, **map_keywords)
         except:
-            html = tmp.render(mtOption=my_option.decode('utf8'), chartId=divid, myWidth=self._width,
-                              myHeight=self._height)
+            html = tmp.render(
+                mtOption=my_option.decode('utf8'), chartId=divid,
+                myWidth=self._width, myHeight=self._height, **map_keywords)
         return HTML(html)
 
     @property
