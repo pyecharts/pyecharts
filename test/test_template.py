@@ -13,4 +13,3 @@ def test_freeze_js():
     html_content = freeze_js(html_content)
     assert 'exports.echarts' in html_content
     assert 'echarts-wordcloud' in html_content
-

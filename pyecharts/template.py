@@ -1,8 +1,10 @@
 #!/usr/bin/env python
 #coding=utf-8
+from __future__ import unicode_literals
+
 import os
 import re
-
+import codecs
 
 JS_PATTERN = re.compile(r'<!-- build -->(.*)<!-- endbuild -->',
                         re.IGNORECASE | re.MULTILINE | re.DOTALL)
@@ -21,9 +23,10 @@ def freeze_js(html_content):
 
         js_content = ""
         for src in src_matches:
-            file_path = os.path.join(get_resource_dir('templates'), src.strip())
+            file_path = os.path.join(
+                get_resource_dir('templates'), src.strip())
 
-            with open(file_path, "r") as f:
+            with codecs.open(file_path, "r", "utf-8") as f:
                 js_content += f.read() + '\n'
         # Replace matched string with inline JS
         fmt = '<script type="text/javascript">{}</script>'
