@@ -6,11 +6,14 @@
 * [Global-options](https://github.com/chenjiandongx/pyecharts/blob/master/document/doc_en_US.md#Global-options)
     * xyAxis：x, y axis in cartesian coordinate system(Line、Bar、Scatter、EffectScatter、Kline)
     * dataZoom：dataZoom components for zoom-in and zoom-out. With them, it is possible to magnify a small area, to see the overall picture or to stay away from scattered points(Line、Bar、Scatter、EffectScatter、Kline)
-    * legend：legend component has different symbol, colour and name,  and provide the interactive clicking functions to show or hide its associated data series.
+    * legend：legend component has different symbol, colour and name, and provide the interactive clicking functions to show or hide its associated data series.
     * label：text string on the chart, for marking the charts with sensible details, such as value, name.
     * lineStyle：line style for Line、Polar、Radar、Graph、Parallel.
+    * grid3D：gird3D components in cartesian coordinate system(Bar3D, Line3D, Scatter3D)
+    * visualMap：It is a type of component for visual encoding, which maps the data to visual channels
 * [Chart-types](https://github.com/chenjiandongx/pyecharts/blob/master/document/doc_en_US.md#Chart-types)
     * Bar
+    * Bar3D
     * EffectScatter
     * Funnel
     * Gauge
@@ -19,6 +22,7 @@
     * HeatMap
     * Kline
     * Line
+    * Line3D
     * Liquid
     * Map
     * Parallel
@@ -26,6 +30,7 @@
     * Polar
     * Radar
     * Scatter
+    * Scatter3D
     * WordCloud
 * [Customize](https://github.com/chenjiandongx/pyecharts/blob/master/document/doc_en_US.md#Customize)
 * [Example](https://github.com/chenjiandongx/pyecharts/blob/master/document/doc_en_US.md#Example)
@@ -66,7 +71,16 @@ bar.render()
     打印输出图表的所有配置项
 * ```render()```  
     默认将会在根目录下生成一个 render.html 的文件，支持 path 参数，设置文件保存位置，如 render(r"e:\my_first_chart.html")，文件用浏览器打开。  
-    默认的编码类型为 UTF-8，在 Python3 中是没什么问题的，Python3 对中文的支持好很多。但是在 Python2 中，编码的处理是个很头疼的问题，暂时没能找到完美的解决方法，目前只能通过文本编辑器自己进行二次编码，我用的是 Visual Studio Code，先通过 Gbk 编码重新打开，然后再用 UTF-8 重新保存，这样用浏览器打开的话就不会出现中文乱码问题了。  
+
+### Python2 编码问题
+默认的编码类型为 UTF-8，在 Python3 中是没什么问题的，Python3 对中文的支持好很多。但是在 Python2 中，请应用下面的语句，保证没有编码问题:
+```
+#!/usr/bin/python
+#coding=utf-8
+from __future__ import unicode_literals
+```
+前两句告知你的编辑器你用 UTF-8 ([PEP-0263](https://www.python.org/dev/peps/pep-0263/)). 最后一句告知 Python 所有字符是 UTF-8 ([unicode literals](http://python-future.org/unicode_literals.html))
+
 
 基本上所有的图表类型都是这样绘制的：
 1. ```chart_name = Type()``` 初始化具体类型图表。
@@ -99,7 +113,7 @@ cast(seq)
 
 ![jupyter-2](https://github.com/chenjiandongx/pyecharts/blob/master/images/jupyter-2.gif)
 
-**Tip：** 该功能在 0.1.8 版本中正式加入，要使用请升级到最新版本。
+**Tip：** 该功能在 0.1.9.1 版本中正式加入，要使用请升级到最新版本。
 
 这里只是举几个例子。如需使用 Jupyter Notebook 来展示图表，只需要调用 ```render_notebook()``` 即可，同时兼容 Python2 和 Python3 的 Jupyter Notebook 环境。所有图表均可正常显示，与浏览器一致的交互体验，这下展示报告连 PPT 都省了！！  
 > 在这里要特别感谢 [@ygw365](https://github.com/ygw365) 提供这部分的代码模板 和 [muxuezi](https://github.com/muxuezi) 协助对代码进行改进，特此感谢！也欢迎其他开发者参与到项目的开发中来。一起完善这个项目！
@@ -152,7 +166,7 @@ cast(seq)
 # Global-options
 **通用配置项均在 ```add()``` 中设置**
 
-xyAxis：直角坐标系中的 x、y 轴(Line、Bar、Scatter、EffectScatter、Kline)
+xyAxis：x, y axis in cartesian coordinate system(Line、Bar、Scatter、EffectScatter、Kline)
 
 * is_convert -> bool  
     It specifies whether to convert xAxis and yAxis.
@@ -181,7 +195,7 @@ xyAxis：直角坐标系中的 x、y 轴(Line、Bar、Scatter、EffectScatter、
     Set to 0 to force all labels to be displayed and label is one by one if setting as 1; If 2, it will be one label separates from each other, and so on.
 
 
-dataZoom：dataZoom 组件 用于区域缩放，从而能自由关注细节的数据信息，或者概览数据整体，或者去除离群点的影响。(Line、Bar、Scatter、EffectScatter、Kline)
+dataZoom：dataZoom components for zoom-in and zoom-out. With them, it is possible to magnify a small area, to see the overall picture or to stay away from scattered points(Line、Bar、Scatter、EffectScatter、Kline)
 
 * is_datazoom_show -> bool  
     defalut -> False  
@@ -192,9 +206,12 @@ dataZoom：dataZoom 组件 用于区域缩放，从而能自由关注细节的�
 * datazoom_range -> list  
     defalut -> [50, 100]  
     The range percentage of the window out of the data extent, in the range of 0 ~ 100.
+* datazoom_orient -> str  
+    Specify whether the layout of dataZoom component is horizontal or vertical.'horizontal' or 'vertical'  
+    What's more,it indicates whether the horizontal axis or vertical axis is controlled,by default in catesian coordinate system.
 
 
-legend：图例组件。图例组件展现了不同系列的标记(symbol)，颜色和名字。可以通过点击图例控制哪些系列不显示。
+legend：legend component has different symbol, colour and name, and provide the interactive clicking functions to show or hide its associated data series.
 
 * is_legend_show -> bool  
     defalut -> True  
@@ -214,9 +231,11 @@ legend：图例组件。图例组件展现了不同系列的标记(symbol)，颜
     legend_top value can be instant pixel value like 20;  
     it can also be percentage value relative to container width like '20%';  
     and it can also be 'top', 'middle', or 'bottom'.  
+* legend_selectedmode -> str/bool  
+    State table of selected legend. 'single' or 'multiple'.or use False to disable it.
     
 
-label：图形上的文本标签，可用于说明图形的一些数据信息，比如值，名称等。
+label：text string on the chart, for marking the charts with sensible details, such as value, name.
 
 * is_label_show -> bool  
     defalut -> False  
@@ -244,7 +263,7 @@ label：图形上的文本标签，可用于说明图形的一些数据信息，
 **Tip：** is_random 可随机打乱图例颜色列表，算是切换风格？建议试一试！
 
 
-lineStyle：带线图形的线的风格选项(Line、Polar、Radar、Graph、Parallel)
+lineStyle：line style for Line、Polar、Radar、Graph、Parallel.
 
 * line_width -> int  
     default -> 1  
@@ -257,6 +276,54 @@ lineStyle：带线图形的线的风格选项(Line、Polar、Radar、Graph、Par
     Edge curvature, which supports value from 0 to 1. The larger the value, the greater the curvature. -> Graph  
 * line_type -> str  
     Line type,it can be 'solid', 'dashed', 'dotted'  
+
+grid3D：gird3D components in cartesian coordinate system(Bar3D, Line3D, Scatter3D)
+
+* grid_width -> int  
+        Width of grid component. Adaptive by default.
+* grid_height:
+    Height of grid component. Adaptive by default.
+* grid_top -> int/str  
+    Distance between grid component and the top side of the container.  
+    grid_top value can be instant pixel value like 20;it can also be percentage value relative to container width like '20%';and it can also be 'top', 'middle', or 'bottom'.  
+    If the grid_top value is set to be 'top', 'middle', or 'bottom',then the component will be aligned automatically based on position.
+* grid_bottom -> int/str  
+    Distance between grid component and the bottom side of the container.  
+    grid_bottom value can be instant pixel value like 20;it can also be percentage value relative to container width like '20%'.
+* grid_left -> int/str  
+    Distance between grid component and the left side of the container.  
+    grid_left value can be instant pixel value like 20;it can also be percentage value relative to container width like '20%';and it can also be 'left', 'center', or 'right'.  
+    If the grid_left value is set to be 'left', 'center', or 'right',then the component will be aligned automatically based on position.
+* grid_right -> int/str  
+    Distance between grid component and the right side of the container.  
+    grid_right value can be instant pixel value like 20;it can also be percentage value relative to container width like '20%'.
+
+visualMap：It is a type of component for visual encoding, which maps the data to visual channels.
+
+* visual_type -> str  
+    visual map type, 'color' or 'size'  
+    color: For visual channel color, array is used, like: ['#333', '#78ab23', 'blue'],which means a color ribbon is formed based on the three color stops,and dataValues will be mapped to the ribbon.  
+    size: For visual channel size, array is used, like: [20, 50],which means a size ribbon is formed based on the two value stops, and dataValues will be mapped to the ribbon.
+* visual_range -> list  
+    pecify the min and max dataValue for the visualMap component.
+* visual_text_color -> str   
+    visualMap text color.
+* visual_range_text -> list  
+    The label text on both ends, such as ['High', 'Low']
+* visual_range_size -> list  
+    For visual channel size, array is used, like: [20, 50].
+* visual_range_color -> list  
+    For visual channel color, array is used, like: ['#333', '#78ab23', 'blue'].
+* visual_orient -> str  
+    How to layout the visualMap component, 'horizontal' or 'vertical'.
+* visual_pos -> str  
+    Distance between visualMap component and the left side of the container.  
+    visual_pos value can be instant pixel value like 20;it can also be percentage value relative to container width like '20%';and it can also be 'left', 'center', or 'right'.
+* visual_top -> str  
+    Distance between visualMap component and the top side of the container.  
+    visual_top value can be instant pixel value like 20;it can also be percentage value relative to container width like '20%';and it can also be 'top', 'middle', or 'bottom'.
+* is_calculable -> bool  
+    Whether show handles, which can be dragged to adjust "selected range".
 
 
 # Chart-types  
@@ -352,6 +419,10 @@ bar.render()
 
 **Tip：** datazoom 适合所有平面直角坐标系图形，也就是(Line、Bar、Scatter、EffectScatter、Kline)  
 **Tip：** 可以通过 label_color 来设置柱状的颜色，如 ['#eee', '#000']，所有的图表类型的图例颜色都可通过 label_color 来修改。
+
+
+## Bar3D
+
 
 ## EffectScatter
 > The scatter graph with ripple animation. The special animation effect can visually highlights some data.
@@ -908,6 +979,10 @@ line.render()
 
 **Tip：** 可配置 **lineStyle** 参数
 **Tip：** 可以通过 label_color 来设置线条颜色，如 ['#eee', '#000']，所有的图表类型的图例颜色都可通过 label_color 来修改。
+
+
+# Line3D
+
 
 
 ## Liquid
@@ -1509,6 +1584,9 @@ scatter.render()
 ![pyecharts-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/pyecharts-1.png)
 
 
+# Scatter3D
+
+
 ## WordCloud
 WordCloud.add() signatures
 ```python
@@ -1857,12 +1935,12 @@ Bar 会受 HeatMap 影响，很有趣。
 
 # 更多示例
 
-* 更多示例请参考 [example.md](https://github.com/chenjiandongx/pyecharts/blob/master/example.md)
-* 欢迎大家补充示例
+* More examples refer to [example.md](https://github.com/chenjiandongx/pyecharts/blob/master/example.md)
+* Welcome to provide more examples.
 
 # 关于项目
 
-* 欢迎大家使用 pyecharts
-* 有什么建议或者想法可以开个 issue 讨论，有什么小错误的也可以直接提交 PR。
-* 如有想单独讨论的话可以使用邮箱 -> chenjiandongx@qq.com
-* 关注 [changelog.md](https://github.com/chenjiandongx/pyecharts/blob/master/changelog.md)
+* Enjoy pyecharts!
+* Welcome to discuss on issue, or commit PR directly.
+* If you want to discuss with me alone, use the emali -> chenjiandongx@qq.com
+* Show solicitude for [changelog.md](https://github.com/chenjiandongx/pyecharts/blob/master/changelog.md)
