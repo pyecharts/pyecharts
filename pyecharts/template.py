@@ -1,206 +1,6 @@
 #!/usr/bin/env python
 #coding=utf-8
-
-
-_template_notebook = """
-<div id="{{ chartId }}" style="width:{{ myWidth }}px; height:{{ myHeight }}px;"></div>
-<script>
-    require.config({
-         paths:{
-            echarts: '//cdn.bootcss.com/echarts/3.6.2/echarts.min',
-            china: '//echarts.baidu.com/gallery/vendors/echarts/map/js/china',
-         }
-    });
-    require(['echarts', 'china'],function(ec){
-    var myChart = ec.init(document.getElementById('{{ chartId }}'));
-               var option =  {{ myOption }};
-               myChart.setOption(option);
-    });
-</script>
-"""
-
-
-_template_map_notebook = """
-<div id="{{ chartId }}" style="width:{{ myWidth }}px; height:{{ myHeight }}px;"></div>
-<script>
-    require.config({
-         paths:{
-            echarts: '//cdn.bootcss.com/echarts/3.6.2/echarts.min',
-            china: '//echarts.baidu.com/gallery/vendors/echarts/map/js/china',
-            ##locationJs
-         }
-    });
-    require(['echarts', 'china', '##location'],function(ec){
-    var myChart = ec.init(document.getElementById('{{ chartId }}'));
-               var option =  {{ myOption }};
-               myChart.setOption(option);
-    });
-</script>
-"""
-
-
-_template_lq_notebook = '''
-<div id="{{ chartId }}" style="width:{{ myWidth }}px; height:{{ myHeight }}px;"></div>
-<script>
-    require.config({
-         paths:{
-           echarts: '//cdn.bootcss.com/echarts/3.2.2/echarts',
-           liquidFill: '//oog4yfyu0.bkt.clouddn.com/liquidfill'
-         }
-    });
-    require(['echarts','liquidFill'],function(ec){
-    var myChart = ec.init(document.getElementById('{{ chartId }}'));
-               var option =  {{ myOption }};
-               myChart.setOption(option);
-    });
-</script>'''
-
-
-_template_wd_notebook = '''
-<body>
-    <style>
-        html,
-        body,
-        # {{ chartId }} {
-            width: 100%;
-            height: 100%;
-            margin: 0;
-        }
-    </style>
-<div id="{{ chartId }}" style="width:{{ myWidth }}px; height:{{ myHeight }}px;"></div>
-<script>
-    require.config({
-        paths:{
-        echarts: '//cdn.bootcss.com/echarts/3.2.2/echarts.simple',
-        wordCloud: '//data-visual.cn/datav/src/js/echarts/extension/echarts-wordcloud.min'
-        }
-    });
-    require(['echarts','wordCloud'],function(ec){
-    var myChart = ec.init(document.getElementById('{{ chartId }}'));
-            var option =  {{ myOption }};
-            myChart.setOption(option);
-    });
-</script>
-</body>
-'''
-
-
-_template_wd = """
-<!DOCTYPE html>
-<html>
-
-<head>
-    <meta charset="utf-8">
-    <title>ECharts</title>
-    <script src='https://cdn.bootcss.com/echarts/3.2.2/echarts.simple.js'></script>
-    <script type="text/javascript" src="http://data-visual.cn/datav/src/js/echarts/extension/echarts-wordcloud.min.js"></script>
-</head>
-
-<body>
-    <style>
-        html,
-        body,
-        #main {
-            width: 100%;
-            height: 100%;
-            margin: 0;
-        }
-    </style>
-    <div id="main" style="width:{{ myWidth }}px;height:{{ myHeight }}px; ">
-    </div>
-    <script type="text/javascript ">
-        var myChart = echarts.init(document.getElementById('main'));
-        var option = {{ myOption }};
-        myChart.setOption(option);
-    </script>
-</body>
-
-</html>
-"""
-
-_template_lq = """
-<!DOCTYPE html>
-<html>
-
-<head>
-    <meta charset="utf-8">
-    <title>ECharts</title>
-    <script src='https://cdn.bootcss.com/echarts/3.2.2/echarts.js'></script>
-    <script src='http://oog4yfyu0.bkt.clouddn.com/liquidfill.js'></script>
-</head>
-
-<body>
-    <div id="main" style="width:{{ myWidth }}px;height:{{ myHeight }}px;"></div>
-    <script type="text/javascript">
-        var myChart = echarts.init(document.getElementById('main'));
-        var option = {{ myOption }};
-        myChart.setOption(option);
-    </script>
-</body>
-
-</html>
-"""
-
-
-_template="""
-<!DOCTYPE html>
-<html>
-
-<head>
-    <meta charset="utf-8">
-    <title>ECharts</title>
-    <script src="http://oog4yfyu0.bkt.clouddn.com/echarts.min.js"></script>
-    <script src="http://oog4yfyu0.bkt.clouddn.com/echarts-gl.js"></script>
-    <script type="text/javascript " src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
-    <script type="text/javascript " src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/wordcloud.js"></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/anhui.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/aomen.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/beijing.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/chongqing.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/fujian.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/gansu.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/guangdong.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/guangxi.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/guizhou.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/hainan.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/hebei.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/heilongjiang.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/henan.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/hubei.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/hunan.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/jiangsu.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/jiangxi.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/jilin.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/liaoning.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/neimenggu.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/ningxia.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/qinghai.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/shandong.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/shanghai.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/shanxi.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/sichuan.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/taiwan.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/tianjin.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/xianggang.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/xinjiang.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/xizang.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/yunnan.js "></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/zhejiang.js "></script>
-</head>
-
-<body>
-    <div id="main" style="width:{{ myWidth }}px;height:{{ myHeight }}px;"></div>
-    <script type="text/javascript">
-        var myChart = echarts.init(document.getElementById('main'));
-        var option = {{ myOption }};
-        myChart.setOption(option);
-    </script>
-</body>
-
-</html>
-"""
-
+import os
 
 _mapindex = {
     "安徽": "anhui: '//oog4yfyu0.bkt.clouddn.com/anhui'",
@@ -238,6 +38,7 @@ _mapindex = {
     "浙江": "zhejiang: '//oog4yfyu0.bkt.clouddn.com/zhejiang'"
 }
 
+
 def get_map(map_name):
     """
 
@@ -250,4 +51,13 @@ def get_map(map_name):
         _location = _location_js.split(":")[0]
     except:
         pass
-    return __template_map_notebook.replace('##locationJs', _location_js).replace('##location', _location)
+    return dict(
+        location_js=_location_js,
+        location=_location
+        )
+
+
+def get_resource_dir(folder):
+    current_path = os.path.dirname(__file__)
+    resource_path = os.path.join(current_path, folder)
+    return resource_path
