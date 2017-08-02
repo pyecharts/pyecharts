@@ -150,7 +150,7 @@ npcast(npdata)
 ![jupyter-2](https://github.com/chenjiandongx/pyecharts/blob/master/images/jupyter-2.gif)
 
 
-这里只是举几个例子。如需使用 Jupyter Notebook 来展示图表，只需要调用 ```render_notebook()``` 即可，同时兼容 Python2 和 Python3 的 Jupyter Notebook 环境。所有图表均可正常显示（除了 3D 图），与浏览器一致的交互体验，这下展示报告连 PPT 都省了！！  
+这里只是举几个例子。如需使用 Jupyter Notebook 来展示图表，只需要调用自己即可([详情请看](https://github.com/pyexcel/pyecharts/blob/master/document/notebook-use-case.ipynb))，同时兼容 Python2 和 Python3 的 Jupyter Notebook 环境。所有图表均可正常显示（除了 3D 图），与浏览器一致的交互体验，这下展示报告连 PPT 都省了！！  
 > 在这里要特别感谢 [@ygw365](https://github.com/ygw365) 提供这部分的代码模板 和 [@muxuezi](https://github.com/muxuezi) 协助对代码进行改进，特此感谢！
 
 图表类初始化所接受的参数（所有类型的图表都一样）。
