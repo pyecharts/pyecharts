@@ -37,6 +37,7 @@ bar.render()
 ```
 
 It will creat a file named render.html in the root directory, open file with your borwser.  
+
 ![usage](https://github.com/chenjiandongx/pyecharts/blob/master/images/usage.gif)
 
 ## Documentation

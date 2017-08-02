@@ -408,6 +408,26 @@ bar.render()
 
 
 ## Bar3D
+Bar3D.add() signatures
+```
+add(name, x_axis, y_axis, data, grid3D_opacity=1, grid3D_shading='color', **kwargs)
+```
+* name -> str  
+    Series name used for displaying in tooltip and filtering with legend,or updaing data and configuration with setOption.
+* x_axis -> list  
+    xAxis data
+* y_axis -> list  
+    yAxis data
+* data -> [[], []]
+    zAxis data, it is represented by a two-dimension array.
+* grid3D_opacity -> float  
+    default -> 1  
+    opacity of gird3D item
+* grid3D_shading -> str  
+    3D graphics coloring effect  
+    * 'color': Only show color, not affected by lighting and other factors.
+    * 'lambert': Through the classic lambert coloring to show the light and shade.
+    * 'realistic': Realistic rendering.
 
 
 ## EffectScatter
@@ -1538,10 +1558,9 @@ scatter.render()
 Scatter also built-in draw method.
 ```python
 draw(path, color=None)
-'''
-convert pixels on the image into array ,when colour is （255,255,255）only retain non white pixels' coordinate information.
-output two k_lst, v_lst list can just as the data item of scatter plot.
-'''
+```
+convert pixels on the image into array ,when colour is （255,255,255）only retain non white pixels' coordinate information. output two k_lst, v_lst list can just as the data item of scatter plot.
+
 ```
 * path -> str  
     path of Image that want to draw
