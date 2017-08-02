@@ -1,7 +1,9 @@
 # pyecharts Documentation
 
-* [Overview](https://github.com/chenjiandongx/pyecharts/blob/master/document/doc_en_US.md#Overview)
-* [Installing](https://github.com/chenjiandongx/pyecharts/blob/master/document/doc_en_US.md#Installing)
+pyecharts is a library to generate charts using Echarts. It simply provides the interface between Echarts and Python.
+
+[![Build Status](https://travis-ci.org/chenjiandongx/pyecharts.svg?branch=master)](https://travis-ci.org/chenjiandongx/pyecharts)  
+
 * [First-steps](https://github.com/chenjiandongx/pyecharts/blob/master/document/doc_en_US.md#First-steps)
 * [Global-options](https://github.com/chenjiandongx/pyecharts/blob/master/document/doc_en_US.md#Global-options)
     * xyAxis：x, y axis in cartesian coordinate system(Line、Bar、Scatter、EffectScatter、Kline)
@@ -37,20 +39,8 @@
 * [About](https://github.com/chenjiandongx/pyecharts/blob/master/document/doc_en_US.md#About)
 
 
-# Overview
-pyecharts is a library to generate charts using Echarts. It simply provides the interface between Echarts and Python.
-
-[Echarts](https://github.com/ecomfe/echarts) is an open source library from Baidu for data visualization in javascript. It has awesome demo pages so I started to look out for an interface library so that I could use it in Python. I ended up with [echarts-python](https://github.com/yufeiminds/echarts-python) on github but it lacks of documentation and was not updated for a while. Just like many other Python projects, I started my own project, pyecharts, referencing echarts-python and another library [pygal](https://github.com/Kozea/pygal).
-
-
-# Installing
-pyecharts works on Python2 and Python3. The latest release is 0.1.9.1. For more information please refer to [changelog.md](https://github.com/chenjiandongx/pyecharts/blob/master/changelog.md)
-
-```python
-pip install pyecharts
-```
-
 # First-steps
+### Make sure you have installed the latest version pyecharts
 Now, you are ready to make your first chart!
 ```python
 from pyecharts import Bar
@@ -1940,6 +1930,6 @@ Bar will influenced by HeatMap,it's funy.
 # About The Project
 
 * Enjoy pyecharts!
-* Welcome to discuss on issue, or commit PR directly.
+* If you have any question or want to improve this repository, welcome to create an issue or pull requests .
 * If you want to discuss with me alone, use the emali -> chenjiandongx@qq.com
 * Show solicitude for [changelog.md](https://github.com/chenjiandongx/pyecharts/blob/master/changelog.md)
