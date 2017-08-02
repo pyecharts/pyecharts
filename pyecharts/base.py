@@ -400,9 +400,11 @@ class Base(object):
             self._option.update(visualMap=chart['visual_map'])
         self._option.get('legend')[0].update(chart['legend'])
         self._option.update(color=chart['color'])
+
         # grid component
         if chart['grid']:
             self._option.get('grid').append(chart['grid'])
+
         # datazoom component
         if kwargs.get('is_datazoom_show', None) is True:
             self._option.update(dataZoom=chart['datazoom'])
@@ -474,7 +476,7 @@ class Base(object):
         :return:
         """
         warnings.warn(
-            "This function is deprecated since 0.1.9.1." +
+            "This function is deprecated since 0.1.9.1" +
             " Simply passing the chart instance is enough")
         from IPython.display import HTML
         return HTML(self._repr_html_())
