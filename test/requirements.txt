@@ -1,3 +1,8 @@
 nose
 codecov
 coverage
+jupyter;python_version>"2"
+jupyter-client;python_version>"2"
+nbformat;python_version>"2"
+nbconvert;python_version>"2"
+.
