@@ -8,7 +8,7 @@
 
 ![wechat](https://github.com/chenjiandongx/pyecharts/blob/master/images/wechat.png)
 ### 最后，划重点！！！
-接下来我就暂时不更新版本了，因为作者要出去玩耍几天了，不然感觉这样下去的话我这个暑假就没了！！！也写了好多天代码了，是该出去玩一下了！！！
+接下来我就暂时不更新版本了，因为作者要出去玩耍几天了，不然感觉这样下去的话我这个暑假就没了！
 
 # pyecharts 文档
 
@@ -197,6 +197,8 @@ xyAxis：直角坐标系中的 x、y 轴(Line、Bar、Scatter、EffectScatter、
     x 轴名称
 * xaxis_name_pos -> str  
     x 轴名称位置，有'start'，'middle'，'end'可选
+* xaxis_rotate -> int  
+    刻度标签旋转的角度，在类目轴的类目标签显示不下的时候可以通过旋转防止标签之间重叠。默认为 0，即不旋转。旋转的角度从 -90 度到 90 度。
 * y_axis -> list  
     y 坐标轴数据
 * yaxis_formatter -> str  
@@ -205,10 +207,11 @@ xyAxis：直角坐标系中的 x、y 轴(Line、Bar、Scatter、EffectScatter、
     y 轴名称
 * yaxis_name_pos -> str  
     y 轴名称位置，有'start', 'middle'，'end'可选
+* yaxis_rotate -> int  
+    刻度标签旋转的角度，在类目轴的类目标签显示不下的时候可以通过旋转防止标签之间重叠。默认为 0，即不旋转。旋转的角度从 -90 度到 90 度。
 * interval -> int  
     坐标轴刻度标签的显示间隔，在类目轴中有效。默认会采用标签不重叠的策略间隔显示标签  
-    设置成 0 强制显示所有标签  
-    设置为 1，表示『隔一个标签显示一个标签』，如果值为 2，表示隔两个标签显示一个标签，以此类推
+    设置成 0 强制显示所有标签。设置为 1，表示『隔一个标签显示一个标签』，如果值为 2，表示隔两个标签显示一个标签，以此类推
 
 
 dataZoom：dataZoom 组件 用于区域缩放，从而能自由关注细节的数据信息，或者概览数据整体，或者去除离群点的影响。(Line、Bar、Scatter、EffectScatter、Kline)

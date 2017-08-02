@@ -193,9 +193,11 @@ def xy_axis(type=None,
             namegap=25,
             xaxis_name="",
             xaxis_name_pos="middle",
+            xaxis_rotate=0,
             interval="auto",
             yaxis_name="",
             yaxis_name_pos="middle",
+            yaxis_rotate=0,
             is_convert=False,
             x_axis=None,
             yaxis_formatter="",
@@ -212,6 +214,9 @@ def xy_axis(type=None,
         Name of xAxis
     :param xaxis_name_pos:
         Location of xAxis name.It can be 'start'，'middle'，'end'
+    :param xaxis_rotate:
+        Rotation degree of xaxis label, which is especially useful when there is no enough space for category axis.
+        Rotation degree is from -90 to 90.
     :param interval:
         The display interval of the axis scale label is valid in the category axis.
         By default, labels are displayed using labels that do not overlap the labels
@@ -221,6 +226,9 @@ def xy_axis(type=None,
         Name of yAxis
     :param yaxis_name_pos:
         Location of yAxis name.It can be 'start'，'middle'，'end'
+    :param yaxis_rotate:
+        Rotation degree of yaxis label, which is especially useful when there is no enough space for category axis.
+        Rotation degree is from -90 to 90.
     :param is_convert:
         It specifies whether to convert xAxis and yAxis.
     :param x_axis:
@@ -236,14 +244,20 @@ def xy_axis(type=None,
         "nameLocation": xaxis_name_pos,
         "nameGap": namegap,
         "nameTextStyle": {"fontSize": xy_text_size},
-        "axisLabel": {"interval": interval}
+        "axisLabel": {
+            "interval": interval,
+            "rotate": xaxis_rotate,
+        },
     }
     _yAxis = {
         "name": yaxis_name,
         "nameLocation": yaxis_name_pos,
         "nameGap": namegap,
         "nameTextStyle": {"fontSize": xy_text_size},
-        "axisLabel": {"formatter": "{value} " + yaxis_formatter}
+        "axisLabel": {
+            "formatter": "{value} " + yaxis_formatter,
+            "rotate": yaxis_rotate,
+        }
     }
     if is_convert:
         _yAxis.update(data=x_axis, type="category")
