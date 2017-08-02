@@ -12,6 +12,11 @@ JS_SRC_PATTERN = re.compile(r'src=\"(.*?)\"')
 
 
 def freeze_js(html_content):
+    """
+
+    :param html_content:
+    :return:
+    """
     matches = JS_PATTERN.finditer(html_content)
 
     if not matches:
@@ -93,6 +98,11 @@ def get_map(map_name):
 
 
 def get_resource_dir(folder):
+    """
+
+    :param folder:
+    :return:
+    """
     current_path = os.path.dirname(__file__)
     resource_path = os.path.join(current_path, folder)
     return resource_path
