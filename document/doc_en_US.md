@@ -109,144 +109,141 @@ They are just some examples.If you want use Jupyter Notebook to show your chart,
 
 The parameter a chart type initialize accept（the same to all the chart type）.
 
-* title -> str
-    default -> ''
+* title -> str  
+    default -> ''  
     The main title text, supporting for \n for newlines.
-* subtitle -> str
-    defalut -> ''
+* subtitle -> str  
+    defalut -> ''  
     Subtitle text, supporting for \n for newlines.
-* width -> int
-    defalut -> 800(px)
+* width -> int  
+    defalut -> 800(px)  
     Canvas width
-* height -> int
-    defalut -> 400(px)
+* height -> int  
+    defalut -> 400(px)  
     Canvas height
-* title_pos -> str/int
-    defalut => 'left'
-    Distance between grid component and the left side of the container.title_pos value can be instant pixel value like 20;
-    it can also be percentage value relative to container width like '20%';it can also be 'left', 'center', or 'right'.
+* title_pos -> str/int  
+    defalut => 'left'  
+    Distance between grid component and the left side of the container.title_pos value can be instant pixel value like 20;  
+    it can also be percentage value relative to container width like '20%';it can also be 'left', 'center', or 'right'.  
     If the title_pos value is set to be 'left', 'center', or 'right',then the component will be aligned automatically based on position.
-* title_top -> str/int
-    default -> 'top'
-    Distance between grid component and the top side of the container.top value can be instant pixel value like 20;
-    it can also be percentage value relative to container width like '20%';it can also be 'top', 'middle', or 'bottom'.
+* title_top -> str/int  
+    default -> 'top'  
+    Distance between grid component and the top side of the container.top value can be instant pixel value like 20;  
+    it can also be percentage value relative to container width like '20%';it can also be 'top', 'middle', or 'bottom'.  
     If the left value is set to be 'top', 'middle', or 'bottom',then the component will be aligned automatically based on position.
-* title_color -> str
-    defalut -> '#000'
-    main title text color.
-* subtitle_color -> str
-    defalut -> '#aaa'
+* title_color -> str  
+    defalut -> '#000'  
+    main title text color.  
+* subtitle_color -> str  
+    defalut -> '#aaa'  
     subtitle text color.
-* title_text_size -> int
-    defalut -> 18
+* title_text_size -> int  
+    defalut -> 18  
     main title font size
-* subtitle_text_size -> int
-    defalut -> 12
+* subtitle_text_size -> int  
+    defalut -> 12  
     subtitle text color.
-* background_color -> str
-    defalut -> '#fff'
-    Background color of title, which is transparent by default.
+* background_color -> str  
+    defalut -> '#fff'  
+    Background color of title, which is transparent by default.  
     Color can be represented in RGB, for example 'rgb(128, 128, 128)'.RGBA can be used when you need alpha channel, for example 'rgba(128, 128, 128, 0.5)'.
     You may also use hexadecimal format, for example '#ccc'.
-* is_grid -> bool
-    defalut -> False
+* is_grid -> bool  
+    defalut -> False  
     It specifies whether to use the grid component. Detail [Customize](https://github.com/chenjiandongx/pyecharts/blob/master/document/doc_en_US.md#Customize)
 
 # Global-options
-**Sitting general configuration in```add()``` **
+**Sitting general configuration in```add()```**
 
 xyAxis：x, y axis in cartesian coordinate system(Line、Bar、Scatter、EffectScatter、Kline)
 
-* is_convert -> bool
+* is_convert -> bool  
     It specifies whether to convert xAxis and yAxis.
-* xy_text_size -> int
+* xy_text_size -> int  
     axis name font size
-* namegap -> int
+* namegap -> int  
     Gap between axis name and axis line.
-* x_axis -> list
+* x_axis -> list  
     xAxis data
-* xaxis_name -> str
+* xaxis_name -> str  
     Name of xAxis
-* xaxis_name_pos -> str
+* xaxis_name_pos -> str  
     Location of xAxis name.It can be 'start'，'middle'，'end'
-* y_axis -> list
+* y_axis -> list  
     yAxis data
-* yaxis_formatter -> str
-    Formatter of axis label, which supports string template and callback function.
-    example: '{value} kg'
-* yaxis_name -> str
+* yaxis_formatter -> str  
+    Formatter of axis label, which supports string template and callback function.example: '{value} kg'
+* yaxis_name -> str  
     Name of yAxis
-* yaxis_name_pos -> str
+* yaxis_name_pos -> str  
     Location of yAxis name.It can be 'start'，'middle'，'end'
-* interval -> int
-    The display interval of the axis scale label is valid in the category axis.
-    By default, labels are displayed using labels that do not overlap the labels.
+* interval -> int  
+    The display interval of the axis scale label is valid in the category axis.  
+    By default, labels are displayed using labels that do not overlap the labels.  
     Set to 0 to force all labels to be displayed and label is one by one if setting as 1; If 2, it will be one label separates from each other, and so on.
 
 
 dataZoom：dataZoom components for zoom-in and zoom-out. With them, it is possible to magnify a small area, to see the overall picture or to stay away from scattered points(Line、Bar、Scatter、EffectScatter、Kline)
 
-* is_datazoom_show -> bool
-    defalut -> False
+* is_datazoom_show -> bool  
+    defalut -> False  
     It specifies whether to use the datazoom component.
-* datazoom_type -> str
-    defalut -> 'slider'
+* datazoom_type -> str  
+    defalut -> 'slider'  
     datazoom type, 'slider' or 'inside'
-* datazoom_range -> list
-    defalut -> [50, 100]
+* datazoom_range -> list  
+    defalut -> [50, 100]  
     The range percentage of the window out of the data extent, in the range of 0 ~ 100.
-* datazoom_orient -> str
-    Specify whether the layout of dataZoom component is horizontal or vertical.'horizontal' or 'vertical'
+* datazoom_orient -> str  
+    Specify whether the layout of dataZoom component is horizontal or vertical.'horizontal' or 'vertical'  
     What's more,it indicates whether the horizontal axis or vertical axis is controlled,by default in catesian coordinate system.
 
 
 legend：legend component has different symbol, colour and name, and provide the interactive clicking functions to show or hide its associated data series.
 
-* is_legend_show -> bool
-    defalut -> True
+* is_legend_show -> bool  
+    defalut -> True  
     It specifies whether to show the legend component.
-* legend_orient -> str
-    defalut -> 'horizontal'
+* legend_orient -> str  
+    defalut -> 'horizontal'  
     The layout orientation of legend.It can be 'horizontal', 'vertical'
-* legend_pos -> str
-    defalut -> 'center'
-    Distance between legend component and the left side of the container.
-    legend_pos value can be instant pixel value like 20;
-    it can also be percentage value relative to container width like '20%';
+* legend_pos -> str  
+    defalut -> 'center'  
+    Distance between legend component and the left side of the container.  
+    legend_pos value can be instant pixel value like 20;it can also be percentage value relative to container width like '20%';
     and it can also be 'left', 'center', or 'right'.
-* legend_top -> str
-    defalut -> 'top'
-    Distance between legend component and the top side of the container.
-    legend_top value can be instant pixel value like 20;
-    it can also be percentage value relative to container width like '20%';
+* legend_top -> str  
+    defalut -> 'top'  
+    Distance between legend component and the top side of the container.  
+    legend_top value can be instant pixel value like 20;it can also be percentage value relative to container width like '20%';
     and it can also be 'top', 'middle', or 'bottom'.
-* legend_selectedmode -> str/bool
+* legend_selectedmode -> str/bool  
     State table of selected legend. 'single' or 'multiple'.or use False to disable it.
 
 
 label：text string on the chart, for marking the charts with sensible details, such as value, name.
 
-* is_label_show -> bool
+* is_label_show -> bool  
     defalut -> False
     It specifies whether to show laebl in normal status.
-* is_emphasis -> bool
-    defalut ->
+* is_emphasis -> bool  
+    defalut -> False  
     It specifies whether to show laebl in emphasis status.
-* label_pos -> str
-    defalut -> 'top'
+* label_pos -> str  
+    defalut -> 'top'  
     Label position.It can be 'top', 'left', 'right', 'bottom', 'inside','outside'
-* label_text_color -> str
-    defalut -> '#000'
+* label_text_color -> str  
+    defalut -> '#000'  
     Label text color.
-* label_text_size -> int
-    defalut -> 12
+* label_text_size -> int  
+    defalut -> 12  
     Label font size.
-* is_random -> bool
-    defalut -> False
+* is_random -> bool  
+    defalut -> False  
     It specifies whether to random global color list.
-* label_color -> list
+* label_color -> list  
     Customize the label color. It will modify Global color list, and all chart legend colors can be config here. Such as Bar's columnar color, Line's line color, and so on.
-* formatter -> list
+* formatter -> list  
     Data label formatter,it can be 'series', 'name', 'value', 'precent'
 
 **Tip：** is_random random disorganize legend colour and list,it's kind of switch style? try it.
@@ -254,64 +251,64 @@ label：text string on the chart, for marking the charts with sensible details, 
 
 lineStyle：line style for Line、Polar、Radar、Graph、Parallel.
 
-* line_width -> int
+* line_width -> int  
     default -> 1
     Line width.
-* line_opacity -> float
-    default -> 1
+* line_opacity -> float  
+    default -> 1  
     Opacity of the component. Supports value from 0 to 1, and the component will not be drawn when set to 0.
-* line_curve -> float
-    default -> 0
+* line_curve -> float  
+    default -> 0  
     Edge curvature, which supports value from 0 to 1. The larger the value, the greater the curvature. -> Graph
-* line_type -> str
+* line_type -> str  
     Line type,it can be 'solid', 'dashed', 'dotted'
 
 grid3D：gird3D components in cartesian coordinate system(Bar3D, Line3D, Scatter3D)
 
-* grid_width -> int
-        Width of grid component. Adaptive by default.
-* grid_height:
+* grid_width -> int  
+    Width of grid component. Adaptive by default.
+* grid_height -> int  
     Height of grid component. Adaptive by default.
-* grid_top -> int/str
-    Distance between grid component and the top side of the container.
-    grid_top value can be instant pixel value like 20;it can also be percentage value relative to container width like '20%';and it can also be 'top', 'middle', or 'bottom'.
+* grid_top -> int/str  
+    Distance between grid component and the top side of the container.  
+    grid_top value can be instant pixel value like 20;it can also be percentage value relative to container width like '20%';and it can also be 'top', 'middle', or 'bottom'.  
     If the grid_top value is set to be 'top', 'middle', or 'bottom',then the component will be aligned automatically based on position.
-* grid_bottom -> int/str
-    Distance between grid component and the bottom side of the container.
+* grid_bottom -> int/str  
+    Distance between grid component and the bottom side of the container.  
     grid_bottom value can be instant pixel value like 20;it can also be percentage value relative to container width like '20%'.
-* grid_left -> int/str
-    Distance between grid component and the left side of the container.
-    grid_left value can be instant pixel value like 20;it can also be percentage value relative to container width like '20%';and it can also be 'left', 'center', or 'right'.
+* grid_left -> int/str  
+    Distance between grid component and the left side of the container.  
+    grid_left value can be instant pixel value like 20;it can also be percentage value relative to container width like '20%';and it can also be 'left', 'center', or 'right'.  
     If the grid_left value is set to be 'left', 'center', or 'right',then the component will be aligned automatically based on position.
-* grid_right -> int/str
-    Distance between grid component and the right side of the container.
+* grid_right -> int/str  
+    Distance between grid component and the right side of the container.  
     grid_right value can be instant pixel value like 20;it can also be percentage value relative to container width like '20%'.
 
 visualMap：It is a type of component for visual encoding, which maps the data to visual channels.
 
-* visual_type -> str
-    visual map type, 'color' or 'size'
-    color: For visual channel color, array is used, like: ['#333', '#78ab23', 'blue'],which means a color ribbon is formed based on the three color stops,and dataValues will be mapped to the ribbon.
+* visual_type -> str  
+    visual map type, 'color' or 'size'  
+    color: For visual channel color, array is used, like: ['#333', '#78ab23', 'blue'],which means a color ribbon is formed based on the three color stops,and dataValues will be mapped to the ribbon.  
     size: For visual channel size, array is used, like: [20, 50],which means a size ribbon is formed based on the two value stops, and dataValues will be mapped to the ribbon.
-* visual_range -> list
+* visual_range -> list  
     pecify the min and max dataValue for the visualMap component.
-* visual_text_color -> str
+* visual_text_color -> str  
     visualMap text color.
-* visual_range_text -> list
+* visual_range_text -> list  
     The label text on both ends, such as ['High', 'Low']
-* visual_range_size -> list
+* visual_range_size -> list  
     For visual channel size, array is used, like: [20, 50].
-* visual_range_color -> list
+* visual_range_color -> list  
     For visual channel color, array is used, like: ['#333', '#78ab23', 'blue'].
-* visual_orient -> str
+* visual_orient -> str  
     How to layout the visualMap component, 'horizontal' or 'vertical'.
-* visual_pos -> str
-    Distance between visualMap component and the left side of the container.
+* visual_pos -> str  
+    Distance between visualMap component and the left side of the container.  
     visual_pos value can be instant pixel value like 20;it can also be percentage value relative to container width like '20%';and it can also be 'left', 'center', or 'right'.
-* visual_top -> str
-    Distance between visualMap component and the top side of the container.
+* visual_top -> str  
+    Distance between visualMap component and the top side of the container.  
     visual_top value can be instant pixel value like 20;it can also be percentage value relative to container width like '20%';and it can also be 'top', 'middle', or 'bottom'.
-* is_calculable -> bool
+* is_calculable -> bool  
     Whether show handles, which can be dragged to adjust "selected range".
 
 
@@ -324,14 +321,14 @@ Bar.add() signatures
 ```python
 add(name, x_axis, y_axis, is_stack=False, **kwargs)
 ```
-* name -> str
+* name -> str  
     Series name used for displaying in tooltip and filtering with legend,or updaing data and configuration with setOption.
-* x_axis -> list
+* x_axis -> list  
     data of xAixs
-* y_axis -> list
+* y_axis -> list  
     data of yAxis
-* is_stack -> bool
-    defalut -> False
+* is_stack -> bool  
+    defalut -> False  
     It specifies whether to stack category axis.
 
 ```python
@@ -358,18 +355,18 @@ bar.render()
 ```
 ![bar-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/bar-1.gif)
 
-* mark_point  -> list
+* mark_point -> list  
     mark point data, it can be 'min', 'max', 'average'
-* mark_line  -> list
+* mark_line  -> list  
     mark line data, it can be 'min', 'max', 'average'
-* mark_point_symbol -> str
-    default -> pin
+* mark_point_symbol -> str  
+    default -> 'pin'  
     mark symbol, it cna be 'circle', 'rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow'
-* mark_point_symbolsize -> int
-    default -> 50
+* mark_point_symbolsize -> int  
+    default -> 50  
     mark symbol size
-* mark_point_textcolor -> str
-    default -> '#fff'
+* mark_point_textcolor -> str  
+    default -> '#fff'  
     mark point text color
 
 ```python
@@ -420,15 +417,14 @@ EffectScatter.add() signatures
 ```python
 add(name, x_value, y_value, symbol_size=10, **kwargs)
 ```
-* name -> str
-    Series name used for displaying in tooltip and filtering with legend,
-    or updaing data and configuration with setOption.
-* x_axis -> list
+* name -> str  
+    Series name used for displaying in tooltip and filtering with legend,or updaing data and configuration with setOption.
+* x_axis -> list  
     data of xAxis
-* y_axis -> list
-    data of yAxis
-* symbol_size -> int
-    default -> 10
+* y_axis -> list  
+    data of yAxis  
+* symbol_size -> int  
+    default -> 10  
     symbol size
 
 ```python
@@ -454,16 +450,16 @@ es.render()
 ```
 ![effectscatter-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/effectscatter-1.gif)
 
-* symbol -> str
+* symbol -> str  
     symbol shape, it can be 'rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow'
-* effect_brushtype -> str
-    default -> 'stroke'
+* effect_brushtype -> str   
+    default -> 'stroke'  
     The brush type for ripples. options: 'stroke' and 'fill'.
-* effect_scale -> float
-    default -> 2.5
+* effect_scale -> float  
+    default -> 2.5  
     The maximum zooming scale of ripples in animation.
-* effect_period -> float
-    default -> 4(s)
+* effect_period -> float  
+    default -> 4(s)  
     The duration of animation.
 
 
@@ -472,11 +468,11 @@ Funnel.add() signatures
 ```python
 add(name, attr, value, **kwargs)
 ```
-* name -> str
+* name -> str  
     Series name used for displaying in tooltip and filtering with legend,or updaing data and configuration with setOption.
-* attr -> list
+* attr -> list  
     name of attribute
-* value -> list
+* value -> list  
     value of attribute
 
 ```python
@@ -505,19 +501,18 @@ Gauge.add() signatures
 ```python
 add(name, attr, value, scale_range=None, angle_range=None, **kwargs)
 ```
-* name -> str
+* name -> str  
     Series name used for displaying in tooltip and filtering with legend,or updaing data and configuration with setOption.
-* attr -> list
+* attr -> list  
     name of attribute
-* value -> list
+* value -> list  
     value of attribute
-* scale_range -> list
-    default -> [0, 100]
+* scale_range -> list  
+    default -> [0, 100]  
     data range of guage
-* angle_range -> list
-    default -> [225, -45]
-    angle range of guage.The direct right side of circle center is 0 degree,
-    the right above it is 90 degree, the direct left side of it is 180 degree.
+* angle_range -> list  
+    default -> [225, -45]  
+    angle range of guage.The direct right side of circle center is 0 degree,the right above it is 90 degree, the direct left side of it is 180 degree.
 
 ```python
 from pyecharts import Gauge
@@ -546,28 +541,28 @@ Geo.add() signatures
 add(name, attr, value, type="scatter", maptype='china', symbol_size=12, border_color="#111",
     geo_normal_color="#323c48", geo_emphasis_color="#2a333d", **kwargs)
 ```
-* name -> str
+* name -> str  
     Series name used for displaying in tooltip and filtering with legend,or updaing data and configuration with setOption.
-* attr -> list
+* attr -> list  
     name of attribute
-* value -> list
+* value -> list  
     value of attribute
-* type -> str
-    default -> 'scatter'
+* type -> str  
+    default -> 'scatter'  
     chart type, it can be 'scatter', 'effectscatter', 'heatmap'
-* maptype -> str
+* maptype -> str  
     type of map, it only supports 'china' temporarily.
-* symbol_size -> int
-    default -> 12
+* symbol_size -> int  
+    default -> 12  
     symbol size
-* border_color -> str
-    default -> '#111'
+* border_color -> str  
+    default -> '#111'  
     color of map border
-* geo_normal_color -> str
-    default -> '#323c48'
+* geo_normal_color -> str  
+    default -> '#323c48'  
     The color of the map area in normal state
-* geo_emphasis_color -> str
-    default -> '#2a333d'
+* geo_emphasis_color -> str  
+    default -> '#2a333d'  
     The color of the map area in emphasis state
 
 Scatter type
@@ -618,32 +613,32 @@ geo.render()
 ![geo-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/geo-0.gif)
 
 visualMap：visualMap is a type of component for visual encoding, which maps the data to visual channels
-* is_visualmap -> bool
+* is_visualmap -> bool  
     It specifies whether to use the datazoom component.
-* visual_range -> list
-    default -> [0, 100]
+* visual_range -> list  
+    default -> [0, 100]  
     pecify the min and max dataValue for the visualMap component.
-* visual_text_color -> list
+* visual_text_color -> list  
     visualMap text color.
-* visual_range_text -> list
+* visual_range_text -> list  
     The label text on both ends, such as ['High', 'Low']
-* visual_range_color -> list
-    default ->  ['#50a3ba', '#eac763', '#d94e5d']
-    For visual channel color, array is used, like: ['#333', '#78ab23', 'blue'],which means a color ribbon is formed based on the three color stops,and dataValues will be mapped to the ribbon.
+* visual_range_color -> list  
+    default ->  ['#50a3ba', '#eac763', '#d94e5d']  
+    For visual channel color, array is used, like: ['#333', '#78ab23', 'blue'],which means a color ribbon is formed based on the three color stops,and dataValues will be mapped to the ribbon.  
     Specifically,the dataValue that equals to visualMap.min will be mapped onto '#333',the dataValue that equals to visualMap.max will be mapped onto 'blue',and other dataValues will be piecewisely interpolated to get the final color.
-* visual_orient -> str
-    default -> 'vertical'
+* visual_orient -> str  
+    default -> 'vertical'  
     How to layout the visualMap component, 'horizontal' or 'vertical'.
-* visual_pos -> str/int
-    default -> 'left'
-    Distance between visualMap component and the left side of the container.
+* visual_pos -> str/int  
+    default -> 'left'  
+    Distance between visualMap component and the left side of the container.  
     visual_pos value can be instant pixel value like 20;it can also be percentage value relative to container width like '20%';and it can also be 'left', 'center', or 'right'.
-* visual_top -> str/int
-    default -> 'top'
-    Distance between visualMap component and the top side of the container.
+* visual_top -> str/int  
+    default -> 'top'  
+    Distance between visualMap component and the top side of the container.  
     visual_top value can be instant pixel value like 20;it can also be percentage value relative to container width like '20%';and it can also be 'top', 'middle', or 'bottom'.
-* is_calculable -> bool
-    default -> True
+* is_calculable -> bool  
+    default -> True  
     Whether show handles, which can be dragged to adjust "selected range".
 
 HeatMap type
@@ -680,9 +675,9 @@ Graph.add() signatures
 add(name, nodes, links, categories=None, is_focusnode=True, is_roam=True, is_rotatelabel=False,
     layout="force", edge_length=50, gravity=0.2, repulsion=50, **kwargs)
 ```
-* name -> str
+* name -> str  
     Series name used for displaying in tooltip and filtering with legend,or updaing data and configuration with setOption.
-* nodes -> dict
+* nodes -> dict  
     Relational nodes data
     * name：Name of data item.     # required！！
     * x：x value of node position.
@@ -691,43 +686,40 @@ add(name, nodes, links, categories=None, is_focusnode=True, is_roam=True, is_rot
     * category：Index of category which the data item belongs to.
     * symbol：Symbol of node of this category.Includes 'circle', 'rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow'
     * symbolSize：symbol size
-* links -> dict
+* links -> dict  
     Relational data between nodes
     * source：name of source node on edge      # required！！
     * target：name of target node on edge      # required！！
     * vaule：value of edge,It can be used in the force layout to map to the length of the edge
-* categories -> list
+* categories -> list  
     Name of category, which is used to correspond with legend and the content of tooltip.
-* is_focusnode -> bool
-    defalut -> True
+* is_focusnode -> bool  
+    defalut -> True  
     Whether to focus/highlight the hover node and it's adjacencies.
-* is_roam -> bool/str
-    default -> True
-    Whether to enable mouse zooming and translating.
-    If either zooming or translating is wanted,
-    it can be set to 'scale' or 'move'. Otherwise, set it to be true to enable both.
-* is_rotatelabel -> bool
-    default -> False
+* is_roam -> bool/str  
+    default -> True  
+    Whether to enable mouse zooming and translating.  
+    If either zooming or translating is wanted,it can be set to 'scale' or 'move'. Otherwise, set it to be true to enable both.
+* is_rotatelabel -> bool  
+    default -> False  
     Whether to rotate the label automatically.
-* layout -> str
-    Graph layout.
-    default -> 'force'
+* layout -> str  
+    Graph layout.  
+    default -> 'force'  
     * none：No any layout, use x, y provided in node as the position of node.
     * circular：Adopt circular layout, see the example Les Miserables.
     * force：Adopt force-directed layout, see the example Force,the detail about configrations of layout are in graph.force
-* edge_length -> int
-    default -> 50
-    The distance between 2 nodes on edge. This distance is also affected by repulsion.
-    It can be an array to represent the range of edge length.In this case edge with
-    larger value will be shorter, which means two nodes are closer. And edge with smaller value will be longer.
-* gravity -> int/float
-    default -> 0.2
-    The gravity factor enforcing nodes approach to the center.
-    The nodes will be closer to the center as the value becomes larger.
-* repulsion -> int
-    default -> 50
+* edge_length -> int  
+    default -> 50  
+    The distance between 2 nodes on edge. This distance is also affected by repulsion.  
+    It can be an array to represent the range of edge length.In this case edge with larger value will be shorter, which means two nodes are closer. And edge with smaller value will be longer.
+* gravity -> int/float  
+    default -> 0.2  
+    The gravity factor enforcing nodes approach to the center.The nodes will be closer to the center as the value becomes larger.
+* repulsion -> int  
+    default -> 50  
     The repulsion factor between nodes. The repulsion will be stronger and the distance between 2 nodes becomes further as this value becomes larger.
-    It can be an array to represent the range of repulsion.
+    It can be an array to represent the range of repulsion.  
     In this case larger value have larger repulsion and smaller value will have smaller repulsion.
 
 ```python
@@ -787,13 +779,13 @@ HeatMap.add() signatures
 ```python
 add(name, x_axis, y_axis, data, **kwargs)
 ```
-* name -> str
+* name -> str  
     Series name used for displaying in tooltip and filtering with legend,or updaing data and configuration with setOption.
-* x_axis -> str
+* x_axis -> str  
     data of xAxis, it must be catagory axis.
-* y_axis -> str
+* y_axis -> str  
     data of yAxis, it must be catagory axis.
-* data -> [[],[]]
+* data -> [[],[]]  
     data array of series, it is represented by a two-dimension array
 ```python
 import random
@@ -821,12 +813,12 @@ Kline.add() signatures
 ```python
 add(name, x_axis, y_axis, **kwargs)
 ```
-* name -> str
+* name -> str  
     Series name used for displaying in tooltip and filtering with legend,or updaing data and configuration with setOption.
-* x_axis -> list
+* x_axis -> list  
     data of xAxis
-* y_axis -> [[], []]
-    data pf yAxis.Data should be the two-dimensional array shown as follow.
+* y_axis -> [[], []]  
+    data pf yAxis.Data should be the two-dimensional array shown as follow.  
     Every data item (each line in the example above) represents a box, which contains 4 values. They are: [open, close, lowest, highest]  (namely: [opening value, closing value, lowest value, highest value])
 ```python
 from pyecharts import Kline
@@ -873,26 +865,26 @@ Line.add() signatures
 add(name, x_axis, y_axis, is_symbol_show=True, is_smooth=False, is_stack=False,
     is_step=False, is_fill=False, **kwargs)
 ```
-* name -> str
+* name -> str  
     Series name used for displaying in tooltip and filtering with legend,or updaing data and configuration with setOption.
-* x_axis -> list
+* x_axis -> list  
     data of xAxis
-* y_axis -> list
+* y_axis -> list  
     data of yAxis
-* is_symbol_show -> bool
-    default -> True
+* is_symbol_show -> bool  
+    default -> True  
     It specifies whether to show the symbol.
 * is_smooth -> bool
     default -> False
     Whether to show as smooth curve.
-* is_stack -> bool
-    default -> Flase
+* is_stack -> bool  
+    default -> Flase  
     It specifies whether to stack category axis.
-* is_step -> bool/str
-    default -> False
+* is_step -> bool/str  
+    default -> False  
     Whether to show as a step line.It can be true, false. Or 'start', 'middle', 'end'.Which will configure the turn point of step line.
-* is_fill -> bool
-    default -> False
+* is_fill -> bool  
+    default -> False  
     Whether to fill area.
 
 ```python
@@ -909,18 +901,18 @@ line.render()
 ```
 ![line-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/line-0.gif)
 
-* mark_point  -> list
+* mark_point -> list  
     mark point data, it can be 'min', 'max', 'average'
-* mark_line  -> list
+* mark_line  -> list  
     mark line data, it can be 'min', 'max', 'average'
-* mark_point_symbol -> str
-    default -> pin
+* mark_point_symbol -> str  
+    default -> 'pin'  
     mark symbol, it cna be 'circle', 'rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow'
-* mark_point_symbolsize -> int
-    default -> 50
+* mark_point_symbolsize -> int  
+    default -> 50  
     mark symbol size
-* mark_point_textcolor -> str
-    default -> '#fff'
+* mark_point_textcolor -> str  
+    default -> '#fff'  
     mark point text color
 
 Other Configurations Of Marker Point
@@ -961,9 +953,9 @@ line.render()
 ```
 ![line-3](https://github.com/chenjiandongx/pyecharts/blob/master/images/line-3.png)
 
-* area_opacity -> float
+* area_opacity -> float  
     Opacity of the component. Supports value from 0 to 1, and the component will not be drawn when set to 0.
-* area_color -> str
+* area_color -> str  
     Fill color.
 
 **Tip：** **lineStyle** Parameter is Configurable
@@ -982,20 +974,20 @@ Liquid.add() signatures
 add(name, data, shape='circle', liquid_color=None, is_liquid_animation=True,
     is_liquid_outline_show=True, **kwargs)
 ```
-* name -> str
+* name -> str  
     Series name used for displaying in tooltip and filtering with legend,or updaing data and configuration with setOption.
-* data -> list
+* data -> list  
     data of liquid,[0.6, 0.5, 0.4, 0.3] -> This creates a chart wit waves at position of 60%, 50%, 40%, and 30%.
-* shape -> str
+* shape -> str  
     Shape of water fill chart.It can be one of the default symbols: 'circle', 'rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow'
-* liquid_color -> list
-    default -> ['#294D99', '#156ACF', '#1598ED', '#45BDFF']
+* liquid_color -> list  
+    default -> ['#294D99', '#156ACF', '#1598ED', '#45BDFF']  
     To set colors for liquid fill chart series, set color to be an array of colors.
-* is_liquid_animation -> bool
-    default -> True
+* is_liquid_animation -> bool  
+    default -> True  
     Whether disable animation.
-* is_liquid_outline_show -> bool
-    default -> True
+* is_liquid_outline_show -> bool  
+    default -> True  
     whether hide the outline
 
 ```python
@@ -1035,17 +1027,16 @@ Map.add() signatures
 ```python
 add(name, attr, value, is_roam=True, maptype='china', **kwargs)
 ```
-* name -> str
+* name -> str  
     Series name used for displaying in tooltip and filtering with legend,or updaing data and configuration with setOption.
-* attr -> list
+* attr -> list  
     name of attribute
-* value -> list
+* value -> list  
     value of attribute
-* is_roam -> bool/str
-    default -> True
-    Whether to enable mouse zooming and translating.
-    If either zooming or translating is wanted,it can be set to 'scale' or 'move'. Otherwise, set it to be true to enable both.
-* maptype -> str
+* is_roam -> bool/str  
+    default -> True  
+    Whether to enable mouse zooming and translating.If either zooming or translating is wanted,it can be set to 'scale' or 'move'. Otherwise, set it to be true to enable both.
+* maptype -> str  
    type of map, it supports china、world、安徽、澳门、北京、重庆、福建、福建、甘肃、广东，广西、广州、海南、河北、黑龙江、河南、湖北、湖南、江苏、江西、吉林、辽宁、内蒙古、宁夏、青海、山东、上海、陕西、四川、台湾、天津、香港、新疆、西藏、云南、浙江
 
 ```python
@@ -1103,36 +1094,36 @@ Parallel.add() signatures
 ```python
 add(name, data, **kwargs)
 ```
-* name -> str
+* name -> str  
     Series name used for displaying in tooltip and filtering with legend,or updaing data and configuration with setOption.
-* data -> [[],[]]
+* data -> [[],[]]  
     data array of series, it is represented by a two-dimension array.
 
 Parallel.config() signatures
 ```python
 config(schema=None, c_schema=None)
 ```
-* schema
-    Dimension index of coordinate axis.
+* schema  
+    Dimension index of coordinate axis.  
     a axis name list, like ['apple', 'orange', 'watermelon']
-* c_schema
+* c_schema  
     User customize coordinate axis for parallel coordinate.
-    * dim -> int
+    * dim -> int  
         Dimension index of coordinate axis.
-    * name > str
+    * name > str  
         Name of axis.
-    * type -> str
-        Type of axis
-        value：Numerical axis, suitable for continuous data.
+    * type -> str  
+        Type of axis  
+        value：Numerical axis, suitable for continuous data.  
         category：Category axis, suitable for discrete category data.Data should only be set via data for this type.
-    * min -> int
+    * min -> int  
         The minimun value of axis.
-    * max -> int
+    * max -> int  
         The maximum value of axis.
-    * inverse - bool
-        default -> False
+    * inverse - bool  
+        default -> False  
         Whether axis is inversed.
-    * nameLocation -> str
+    * nameLocation -> str  
         Location of axis name. it can be 'start', 'middle', 'end'.
 
 ```python
@@ -1208,22 +1199,22 @@ Pie.add() signatures
 ```python
 add(name, attr, value, radius=None, center=None, rosetype=None, **kwargs)
 ```
-* name -> str
+* name -> str  
     Series name used for displaying in tooltip and filtering with legend,or updaing data and configuration with setOption.
-* attr -> list
+* attr -> list  
     name of attribute
-* value -> list
+* value -> list  
     value of attribute
-* radius -> list
-    default -> [0, 75]
-    Radius of Pie chart, the first of which is inner radius, and the second is outer radius.
+* radius -> list  
+    default -> [0, 75]  
+    Radius of Pie chart, the first of which is inner radius, and the second is outer radius.  
     Percentage is supported. When set in percentage,it's relative to the smaller size between height and width of the container.
 * center -> list
-    default -> [50, 50]
-    Center position of Pie chart, the first of which is the horizontal position,and the second is the vertical position.
+    default -> [50, 50]  
+    Center position of Pie chart, the first of which is the horizontal position,and the second is the vertical position.  
     Percentage is supported. When set in percentage, the item is relative to the container width,and the second item to the height.
-* rosetype -> str
-    default -> 'radius'
+* rosetype -> str  
+    default -> 'radius'  
     Whether to show as Nightingale chart, which distinguishs data through radius. There are 2 optional modes:
     * radius：Use central angle to show the percentage of data, radius to show data size.
     * area：All the sectors will share the same central angle, the data size is shown only through radiuses.
@@ -1277,46 +1268,46 @@ Polar.add() signatures
 add(name, data, angle_data=None, radius_data=None, type='line', symbol_size=4, start_angle=90,
     rotate_step=0, boundary_gap=True, clockwise=True, **kwargs)
 ```
-* name -> str
+* name -> str  
     Series name used for displaying in tooltip and filtering with legend,or updaing data and configuration with setOption.
-* data -> [[],[]]
+* data -> [[],[]]  
     data of polar, [Polar radius, Polar angle,it is represented by a two-dimension array.
-* angle_data -> list
+* angle_data -> list  
     Category data for angle, available in type: 'category' axis.
-* radius_data -> list
+* radius_data -> list  
     Category data for radius, available in type: 'category' axis.
-* type -> str
-    default -> 'line'
+* type -> str  
+    default -> 'line'  
     chart type，it can be 'scatter', 'effectScatter', 'barAngle', 'barRadius'
-* symbol_size -> int
-    default -> 4
+* symbol_size -> int  
+    default -> 4  
     symbol size
-* start_angle -> int
-    default -> 90
+* start_angle -> int  
+    default -> 90  
     Starting angle of axis.standing for top position of center.0 degree stands for right position of center.
-* rotate_step -> int
-    default -> 0
+* rotate_step -> int  
+    default -> 0  
     Rotation degree of axis label, which is especially useful when there is no enough space for category axis.
     Rotation degree is from -90 to 90.
-* boundary_gap -> bool
-    default -> True
-    The boundary gap on both sides of a coordinate axis.
-    The setting and behavior of category axes and non-category axes are different.
-    The boundaryGap of category axis can be set to either true or false.
+* boundary_gap -> bool  
+    default -> True  
+    The boundary gap on both sides of a coordinate axis.  
+    The setting and behavior of category axes and non-category axes are different.  
+    The boundaryGap of category axis can be set to either true or false.  
     Default value is set to be true, in which case axisTick is served only as a separation line,and labels and data appear only in the center part of two axis ticks, which is called band.
-* clockwise -> bool
-    default -> True
+* clockwise -> bool  
+    default -> True  
     Whether the positive position of axis is in clockwise. True for clockwise by default.
-* is_stack -> bool
+* is_stack -> bool  
     It specifies whether to stack category axis.
-* axis_range -> list
-    default -> [None, None]
+* axis_range -> list  
+    default -> [None, None]  
     axis scale range
-* is_angleaxis_show -> bool
-    default -> True
+* is_angleaxis_show -> bool  
+    default -> True  
     whether show angle axis.
-* is_radiusaxis_show -> bool
-    default -> True
+* is_radiusaxis_show -> bool  
+    default -> True  
     whether show radius axis.
 
 ```python
@@ -1332,15 +1323,15 @@ polar.render()
 ```
 ![polar-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/polar-0.png)
 
-* is_splitline_show -> bool
-    default -> True
+* is_splitline_show -> bool  
+    default -> True  
     It specifies whether to show split line.
-* is_axisline_show -> bool
-    default -> True
+* is_axisline_show -> bool  
+    default -> True  
     It specifies whether to show axis line.
-* area_opacity -> float
+* area_opacity -> float  
     Opacity of the component. Supports value from 0 to 1, and the component will not be drawn when set to 0.
-* area_color -> str
+* area_color -> str  
     Fill color.
 
 **Tip：** **lineStyle** Parameter is Configurable
@@ -1405,11 +1396,11 @@ Radar.add() signatures
 ```python
 add(name, value, item_color=None, **kwargs)
 ```
-* name -> list
+* name -> list  
     Series name used for displaying in tooltip and filtering with legend,or updaing data and configuration with setOption.
-* value -> [[],[]]
+* value -> [[],[]]  
     data array of series, it is represented by a two-dimension array.
-* item_color -> str
+* item_color -> str  
     Specify a single legend color
 
 Radar.config() signatures
@@ -1418,15 +1409,15 @@ config(schema=None, c_schema=None, shape="", rader_text_color="#000", **kwargs):
 ```
 * schema -> list
     The default radar map indicator, used to specify multiple dimensions in the radar map,will process the data into a dictionary of {name: xx, value: xx}
-* c_schema -> dict
+* c_schema -> dict  
     Indicator of radar chart, which is used to assign multiple variables(dimensions) in radar chart.
     * name: Indicator's name.
     * min: The maximum value of indicator. It is an optional configuration, but we recommend to set it manually.
     * max: The maximum value of indicator. It is an optional configuration, but we recommend to set it manually.
-* shape -> str
+* shape -> str  
     Radar render type, in which 'polygon' and 'circle' are supported.
-* rader_text_color -> str
-    default -> '#000'
+* rader_text_color -> str  
+    default -> '#000'  
     Radar chart data item font color
 
 ```python
@@ -1445,17 +1436,17 @@ radar.render()
 ```
 ![radar-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/radar-0.gif)
 
-* is_area_show -> bool
+* is_area_show -> bool  
     It specifies whether to show split area.
-* area_opacity -> float
+* area_opacity -> float  
     Opacity of the component. Supports value from 0 to 1, and the component will not be drawn when set to 0.
-* area_color -> str
+* area_color -> str  
     Fill color.
-* is_splitline_show  -> bool
+* is_splitline_show  -> bool  
     default -> True
     It specifies whether to show split line.
-* is_axisline_show -> bool
-    default -> True
+* is_axisline_show -> bool  
+    default -> True  
     It specifies whether to show axis line.
 
 **Tip：** **lineStyle** Parameter is Configurable
@@ -1521,14 +1512,14 @@ Scatter.add() signatures
 ```python
 add(name, x_value, y_value, symbol_size=10, **kwargs)
 ```
-* name -> str
+* name -> str  
     Series name used for displaying in tooltip and filtering with legend,or updaing data and configuration with setOption.
-* x_axis -> list
+* x_axis -> list  
     data of xAxis
-* y_axis -> list
+* y_axis -> list  
     data of yAxis
-* symbol_size -> int
-    default -> 10
+* symbol_size -> int  
+    default -> 10  
     symbol size
 
 ```python
@@ -1552,9 +1543,9 @@ convert pixels on the image into array ,when colour is （255,255,255）only ret
 output two k_lst, v_lst list can just as the data item of scatter plot.
 '''
 ```
-* path -> str
+* path -> str  
     path of Image that want to draw
-* color -> str
+* color -> str  
     select a color to exclude, (225, 225, 225) means Keep only white pixel information.
 
 First of all ,you need to prepare a picture,like
@@ -1581,22 +1572,22 @@ WordCloud.add() signatures
 ```python
 add(name, attr, value, shape="circle", word_gap=20, word_size_range=None, rotate_step=45)
 ```
-* name -> str
+* name -> str  
     Series name used for displaying in tooltip and filtering with legend,or updaing data and configuration with setOption.
-* attr -> list
+* attr -> list  
     name of attribute
-* value -> list
+* value -> list  
     value of attribute
-* shape -> list
+* shape -> list  
     shape of wordcloud.It can be 'circle', 'cardioid', 'diamond', 'triangle-forward', 'triangle', 'pentagon', 'star'
-* word_gap -> int
-    default -> 20
+* word_gap -> int  
+    default -> 20  
     Gap of word.size of the grid in pixels for marking the availability of the canvas,the larger the grid size, the bigger the gap between words.
-* word_size_range -> list
-    default -> [12, 60]
+* word_size_range -> list  
+    default -> [12, 60]  
     Text size range which the value in data will be mapped to.
-* rotate_step -> int
-    default -> 45
+* rotate_step -> int  
+    default -> 45  
     Text rotation range and step in degree. Text will be rotated randomly in range [-90, 90].
 
 ```python
@@ -1738,27 +1729,25 @@ get_series()
 grid(series，grid_width, grid_height, grid_top, grid_bottom, grid_left, grid_right)
 ''' Concurrently show charts '''
 ```
-* series -> dict
+* series -> dict  
     other chart series data
-* grid_width -> str/int
+* grid_width -> str/int  
     Width of grid component. Adaptive by default.
-* grid_height -> str/int
+* grid_height -> str/int  
     Height of grid component. Adaptive by default.
-* grid_top -> str/int
-    Distance between grid component and the top side of the container.
-    grid_top value can be instant pixel value like 20;
-    it can also be percentage value relative to container width like '20%';and it can also be 'top', 'middle', or 'bottom'.
+* grid_top -> str/int  
+    Distance between grid component and the top side of the container.  
+    grid_top value can be instant pixel value like 20;it can also be percentage value relative to container width like '20%';and it can also be 'top', 'middle', or 'bottom'.  
     If the grid_top value is set to be 'top', 'middle', or 'bottom',then the component will be aligned automatically based on position.
-* grid_bottom -> str/int
-    Distance between grid component and the bottom side of the container.
+* grid_bottom -> str/int  
+    Distance between grid component and the bottom side of the container.  
     grid_bottom value can be instant pixel value like 20;it can also be percentage value relative to container width like '20%'.
-* grid_left -> str/int
-    Distance between grid component and the left side of the container.
-    grid_left value can be instant pixel value like 20;
-    it can also be percentage value relative to container width like '20%';and it can also be 'left', 'center', or 'right'.
+* grid_left -> str/int  
+    Distance between grid component and the left side of the container.  
+    grid_left value can be instant pixel value like 20;it can also be percentage value relative to container width like '20%';and it can also be 'left', 'center', or 'right'.  
     If the grid_left value is set to be 'left', 'center', or 'right',then the component will be aligned automatically based on position.
-* grid_right -> str/int
-    Distance between grid component and the right side of the container.
+* grid_right -> str/int  
+    Distance between grid component and the right side of the container.  
     grid_right value can be instant pixel value like 20;it can also be percentage value relative to container width like '20%'.
 
 irst use ```get_series()``` get data，then use ```grid()``` combine the charts
