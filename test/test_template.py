@@ -6,7 +6,7 @@ def test_freeze_js():
         </style>
         <!-- build -->
         <script src="js/echarts.min.js"></script>
-        <script src="js/wordcloud.js"></script>
+        <script src="js/echarts-wordcloud.min.js"></script>
         <!-- endbuild -->
     </head><body>"""
 
