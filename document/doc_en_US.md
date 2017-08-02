@@ -40,8 +40,7 @@
 # Overview
 pyecharts is a library to generate charts using Echarts. It simply provides the interface between Echarts and Python.
 
-[Echarts](https://github.com/ecomfe/echarts) is an open source library from Baidu for data visualization in javascript. It has awesome demo pages so I started to look out for an
-interface library so that I could use it in Python. I ended up with [echarts-python](https://github.com/yufeiminds/echarts-python) on github but it lacks of documentation and was not updated for a while. Just like many other Python projects, I started my own project, pyecharts, referencing echarts-python and another library [pygal](https://github.com/Kozea/pygal).
+[Echarts](https://github.com/ecomfe/echarts) is an open source library from Baidu for data visualization in javascript. It has awesome demo pages so I started to look out for an interface library so that I could use it in Python. I ended up with [echarts-python](https://github.com/yufeiminds/echarts-python) on github but it lacks of documentation and was not updated for a while. Just like many other Python projects, I started my own project, pyecharts, referencing echarts-python and another library [pygal](https://github.com/Kozea/pygal).
 
 
 # Installing
@@ -70,7 +69,7 @@ bar.render()
 * ```show_config()```
     print and output all options of the chart
 * ```render()```
-    creat a file named render.html in the root directory defaultly,which support path parameter and set the location the file save in,for instance render(r"e:\my_first_chart.html")，open file with your browser.
+    creat a file named render.html in the root directory defaultly,which supports path parameter and set the location the file save in,for instance render(r"e:\my_first_chart.html")，open file with your browser.
 
 ### Python2 Coding Problem
 default code type is UTF-8, there's no problem in Python3, because Python3 have a good support in chinese. But in Python2, please use the following sentence to ensure avoiding wrong coding problem:
