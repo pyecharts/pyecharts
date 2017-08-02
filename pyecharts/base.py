@@ -5,6 +5,7 @@ import sys
 import json
 import random
 import datetime
+import warnings
 
 from pprint import pprint
 from jinja2 import Environment, FileSystemLoader
@@ -431,13 +432,11 @@ class Base(object):
             with open(path, "w+", encoding="utf-8") as fout:
                 fout.write(html)
 
-    def render_notebook(self):
+    def _repr_html_(self):
         """ Render the options string, displayed in the jupyter notebook
 
         :return:
         """
-        from IPython.display import HTML
-
         divid = datetime.datetime.now()
         my_option = json.dumps(self._option, indent=4)
         temple = 'notebook.html'
@@ -465,7 +464,18 @@ class Base(object):
             html = tmp.render(
                 mtOption=my_option.decode('utf8'), chartId=divid,
                 myWidth=self._width, myHeight=self._height, **map_keywords)
-        return HTML(html)
+        return html
+
+    def render_notebook(self):
+        """ Render the options string, displayed in the jupyter notebook
+
+        :return:
+        """
+        warnings.warn(
+            "This function is deprecated since 0.1.9.1." +
+            " Simply passing the chart instance is enough")
+        from IPython.display import HTML
+        return HTML(self._repr_html_())
 
     @property
     def _geo_cities(self):
