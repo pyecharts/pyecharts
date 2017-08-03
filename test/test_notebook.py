@@ -46,3 +46,7 @@ def _verify_ipynb(ipynb_file):
 
 def test_notebook_use_case():
     _verify_ipynb('../document/notebook-use-case.ipynb')
+
+
+def test_scatter_3d():
+    _verify_ipynb('../document/scatter3d.ipynb')
