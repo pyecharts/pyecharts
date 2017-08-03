@@ -1,6 +1,6 @@
-<div id="main" style="width:{{ myWidth }}px;height:{{ myHeight }}px;"></div>
+<div id="{{chart_id}}" style="width:{{ myWidth }}px;height:{{ myHeight }}px;"></div>
 <script type="text/javascript">
-    var myChart = echarts.init(document.getElementById('main'));
-    var option = {{ myOption }};
-    myChart.setOption(option);
+    var myChart_{{chart_id}} = echarts.init(document.getElementById('{{chart_id}}'));
+    var option_{{chart_id}} = {{ myOption }};
+    myChart_{{chart_id}}.setOption(option_{{chart_id}});
 </script>
