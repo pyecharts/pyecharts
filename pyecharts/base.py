@@ -3,6 +3,7 @@
 
 import sys
 import json
+import uuid
 import random
 import datetime
 import warnings
@@ -420,6 +421,7 @@ class Base(object):
         template = self._jinja2_env.get_template(embed)
         my_option = json.dumps(self._option, indent=4, ensure_ascii=False)
         html = template.render(myOption=my_option,
+                               chart_id=uuid.uuid4().hex,
                                myWidth=self._width, myHeight=self._height)
         return html
 
@@ -441,6 +443,7 @@ class Base(object):
         my_option = json.dumps(self._option, indent=4, ensure_ascii=False)
         tmp = self._jinja2_env.get_template(temple)
         html = tmp.render(myOption=my_option,
+                          chart_id=uuid.uuid4().hex,
                           myWidth=self._width, myHeight=self._height)
         html = template.freeze_js(html)
         if PY2:
