@@ -63,62 +63,62 @@ bar.render()
 ```
 ![guide-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/guide-0.png)
 
-**Tip：** 可以按右边的下载按钮将图片下载到本地  
+**Tip：**  You can download the picture with the download button on your right. 
 
 * ```add()```  
-    主要方法，用于添加图表的数据和设置各种配置项  
+    main method, add data and all settings of the chart.  
 * ```show_config()```  
-    打印输出图表的所有配置项
+    print all settings with the chart
 * ```render()```  
-    默认将会在根目录下生成一个 render.html 的文件，支持 path 参数，设置文件保存位置，如 render(r"e:\my_first_chart.html")，文件用浏览器打开。  
+    It will generate a file which names render.heml, support path. You can set the save path, like render(r"e:\my_first_chart.html"), open the file with web browser.  
 
-### Python2 编码问题
-默认的编码类型为 UTF-8，在 Python3 中是没什么问题的，Python3 对中文的支持好很多。但是在 Python2 中，请应用下面的语句，保证没有编码问题:
+### Python2 code problem
+The Default encoding type is UTF-8, Python3 is friendly to Chinese. If in Python2, you should use the following sentences to ensure none code problem.
 ```
 #!/usr/bin/python
 #coding=utf-8
 from __future__ import unicode_literals
 ```
-前两句告知你的编辑器你用 UTF-8 ([PEP-0263](https://www.python.org/dev/peps/pep-0263/)). 最后一句告知 Python 所有字符是 UTF-8 ([unicode literals](http://python-future.org/unicode_literals.html))
+First two sentences tells your text-editor are using UTF-8 ([PEP-0263](https://www.python.org/dev/peps/pep-0263/)). Last sentences shows all codes in Python are UTF-8 ([unicode literals](http://python-future.org/unicode_literals.html))
 
 
-基本上所有的图表类型都是这样绘制的：
-1. ```chart_name = Type()``` 初始化具体类型图表。
-2. ```add()``` 添加数据及配置项。
-3. ```render()``` 生成 .html 文件。  
+Basically, all charts can be drawed like this:
+1. ```chart_name = Type()``` Initialize the specific chart.
+2. ```add()``` add data and setting.
+3. ```render()``` generate .html file.  
 
-```add()``` 数据一般为两个列表（长度一致），如果你的数据是字典或者是带元组的字典。可利用 ```cast()``` 方法转换。
+```add()``` generally data are two lists(same length), if your data is dict or tuple. you can use```cast()```methed.
 
 ```python
 @staticmethod
 cast(seq)
-``` Convert the sequence with the dictionary and tuple type into k_lst, v_lst. ``` 
+​``` Convert the sequence with the dictionary and tuple type into k_lst, v_lst. ``` 
 ```
-1. 元组列表  
+1. tuple list  
     [(A1, B1), (A2, B2), (A3, B3), (A4, B4)] --> k_lst[ A[i1, i2...] ], v_lst[ B[i1, i2...] ]
-2. 字典列表  
+2. dict list  
     [{A1: B1}, {A2: B2}, {A3: B3}, {A4: B4}] --> k_lst[ A[i1, i2...] ], v_lst[ B[i1, i2...] ]
-3. 字典  
+3. dict  
     {A1: B1, A2: B2, A3: B3, A4: B4} -- > k_lst[ A[i1, i2...] ], v_lst[ B[i1, i2...] ]
 
-**当然你也可以采用更加酷炫的方式，使用 Jupyter Notebook 来展示图表，matplotlib 有的，pyecharts 也会有的**  
+**Of course, you can use Jupyter Notebook to show your chart. If there is something in matplotlib, there will be in pyecharts.**  
 
-比如这样  
+Like this  
 
 ![jupyter-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/jupyter-0.gif)
 
-还有这样
+And this
 
 ![jupyter-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/jupyter-1.gif)
 
 ![jupyter-2](https://github.com/chenjiandongx/pyecharts/blob/master/images/jupyter-2.gif)
 
-**Tip：** 该功能在 0.1.9.1 版本中正式加入，要使用请升级到最新版本。
+**Tip：** This function is offered in 0.1.9.1, please update the version.
 
-这里只是举几个例子。如需使用 Jupyter Notebook 来展示图表，只需要调用 ```render_notebook()``` 即可，同时兼容 Python2 和 Python3 的 Jupyter Notebook 环境。所有图表均可正常显示，与浏览器一致的交互体验，这下展示报告连 PPT 都省了！！  
-> 在这里要特别感谢 [@ygw365](https://github.com/ygw365) 提供这部分的代码模板 和 [muxuezi](https://github.com/muxuezi) 协助对代码进行改进，特此感谢！也欢迎其他开发者参与到项目的开发中来。一起完善这个项目！
+Take a few i.e. If you want to show with Jupyter Notebook, just use ```render_notebook()```, it's compatible with Python2 and Python3. All charts can be showed, just like browser interaction experience. It amazing to report without PPT! 
+> Thanks to  [@ygw365](https://github.com/ygw365) who offered code template and [muxuezi](https://github.com/muxuezi) who imporveed the code!Thanks a lot! Welcome to the development of this project, imporve it with each other!
 
-图表类初始化所接受的参数（所有类型的图表都一样）。
+Parameters that accepted when chart initializeed(In all charts)
 
 * title -> str   
     default -> ''    
@@ -164,7 +164,7 @@ cast(seq)
     It specifies whether to use the grid component. Detail [Customize](https://github.com/chenjiandongx/pyecharts/blob/master/document/doc_en_US.md#Customize)
 
 # Global-options
-**通用配置项均在 ```add()``` 中设置**
+**General configuration is in ```add()``` **
 
 xyAxis：x, y axis in cartesian coordinate system(Line、Bar、Scatter、EffectScatter、Kline)
 
@@ -233,7 +233,7 @@ legend：legend component has different symbol, colour and name, and provide the
     and it can also be 'top', 'middle', or 'bottom'.  
 * legend_selectedmode -> str/bool  
     State table of selected legend. 'single' or 'multiple'.or use False to disable it.
-    
+
 
 label：text string on the chart, for marking the charts with sensible details, such as value, name.
 
@@ -441,7 +441,7 @@ add(name, x_value, y_value, symbol_size=10, **kwargs)
 * symbol_size -> int  
     default -> 10  
     symbol size
-    
+
 ```python
 from pyecharts import EffectScatter
 
@@ -529,7 +529,7 @@ add(name, attr, value, scale_range=None, angle_range=None, **kwargs)
     default -> [225, -45]
     angle range of guage.The direct right side of circle center is 0 degree,  
     the right above it is 90 degree, the direct left side of it is 180 degree.  
-    
+
 ```python
 from pyecharts import Gauge
 
