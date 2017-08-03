@@ -2,11 +2,12 @@
 <script>
     require.config({
          paths:{
-            echarts: '//cdn.bootcss.com/echarts/3.6.2/echarts.min',
+            echarts: '//oog4yfyu0.bkt.clouddn.com/echarts.min',
+            echartsgl: '//oog4yfyu0.bkt.clouddn.com/echarts-gl',
             china: '//echarts.baidu.com/gallery/vendors/echarts/map/js/china',
          }
     });
-    require(['echarts', 'china'],function(ec){
+    require(['echarts', 'echartsgl', 'china'],function(ec){
     var myChart = ec.init(document.getElementById('{{ chartId }}'));
                var option =  {{ myOption }};
                myChart.setOption(option);
