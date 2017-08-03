@@ -409,6 +409,20 @@ class Base(object):
         if kwargs.get('is_datazoom_show', None) is True:
             self._option.update(dataZoom=chart['datazoom'])
 
+    def render_embed(self):
+        """
+        Render the chart component and its options
+
+        You can include it into your web pages. And you will
+        provide all dependent echarts javascript libraries.
+        """
+        embed = 'chart_component.html'
+        template = self._jinja2_env.get_template(embed)
+        my_option = json.dumps(self._option, indent=4, ensure_ascii=False)
+        html = template.render(myOption=my_option,
+                               myWidth=self._width, myHeight=self._height)
+        return html
+
     def render(self, path="render.html"):
         """ Render the options string, generate the html file
 
@@ -426,7 +440,8 @@ class Base(object):
                 break
         my_option = json.dumps(self._option, indent=4, ensure_ascii=False)
         tmp = self._jinja2_env.get_template(temple)
-        html = tmp.render(myOption=my_option, myWidth=self._width, myHeight=self._height)
+        html = tmp.render(myOption=my_option,
+                          myWidth=self._width, myHeight=self._height)
         html = template.freeze_js(html)
         if PY2:
             html = html.encode('utf-8')
