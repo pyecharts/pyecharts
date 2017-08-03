@@ -260,7 +260,7 @@ label：text string on the chart, for marking the charts with sensible details, 
 * formatter -> list  
     Data label formatter,it can be 'series', 'name', 'value', 'precent'  
 
-**Tip：** is_random 可随机打乱图例颜色列表，算是切换风格？建议试一试！
+**Tip：** is_random can randomize legend color list, like a kind of style switch. Try it!
 
 
 lineStyle：line style for Line、Polar、Radar、Graph、Parallel.
@@ -357,7 +357,7 @@ bar.add("商家B", attr, v2, is_stack=True)
 bar.render()
 ```
 ![bar-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/bar-0.gif)  
-**Tip：** 全局配置项要在最后一个 ```add()``` 上设置，否侧设置会被冲刷掉。
+**Tip：** Global Configuration should be setted in last ```add()``` , or it will be refreshed.
 
 ```python
 from pyecharts import Bar
@@ -393,7 +393,7 @@ bar.render()
 ```
 ![bar-2](https://github.com/chenjiandongx/pyecharts/blob/master/images/bar-2.png)
 
-dataZoom 效果，'slider' 类型
+dataZoom effect，'slider' type
 ```python
 import random
 
@@ -406,7 +406,7 @@ bar.render()
 ```
 ![bar-4](https://github.com/chenjiandongx/pyecharts/blob/master/images/bar-4.gif)
 
-'inside' 类型
+'inside' type
 ```python
 attr = ["{}天".format(i) for i in range(30)]
 v1 = [random.randint(1, 30) for _ in range(30)]
@@ -417,8 +417,8 @@ bar.render()
 ```
 ![bar-5](https://github.com/chenjiandongx/pyecharts/blob/master/images/bar-5.gif)  
 
-**Tip：** datazoom 适合所有平面直角坐标系图形，也就是(Line、Bar、Scatter、EffectScatter、Kline)  
-**Tip：** 可以通过 label_color 来设置柱状的颜色，如 ['#eee', '#000']，所有的图表类型的图例颜色都可通过 label_color 来修改。
+**Tip：** datazoom fits all  rectangular coordinate system pictures, which are (Line、Bar、Scatter、EffectScatter、Kline)  
+**Tip：** can use ```label_color``` to set color, like ['#eee', '#000'], all kinds of color legend can be setted with ``` label_color ```.
 
 
 ## Bar3D
@@ -657,7 +657,7 @@ visualMap：visualMap is a type of component for visual encoding, which maps the
     default -> True  
     Whether show handles, which can be dragged to adjust "selected range".
 
-HeatMap 类型
+HeatMap type
 ```python
 geo = Geo("全国主要城市空气质量", "data from pm2.5", title_color="#fff", title_pos="center", width=1200, height=600,
           background_color='#404a59')
@@ -668,7 +668,7 @@ geo.render()
 ```
 ![geo-0-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/geo-0-1.gif)
 
-EffectScatter 类型
+EffectScatter type
 ```python
 from pyecharts import Geo
 
@@ -787,7 +787,7 @@ graph.render()
 ```
 ![graph-2](https://github.com/chenjiandongx/pyecharts/blob/master/images/graph-2.gif)
 
-**Tip：** 可配置 **lineStyle** 参数
+**Tip：** can edit **lineStyle** configuration parameter
 
 
 # HeatMap
@@ -822,7 +822,7 @@ heatmap.render()
 ```
 ![heatmap-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/heatmap-0.gif)
 
-**Tip：** 热力图必须配合 VisualMap 使用才有效果。
+**Tip：** heat map must cooperate with VisualMap.
 
 
 ## Kline
@@ -934,7 +934,7 @@ line.render()
     default -> '#fff'  
     mark point text color
 
-标记点其他配置
+mark other configurations of points
 ```python
 line = Line("折线图示例")
 line.add("商家A", attr, v1, mark_point=["average", "max", "min"],
@@ -977,8 +977,8 @@ line.render()
 * area_color -> str  
     Fill color.
 
-**Tip：** 可配置 **lineStyle** 参数
-**Tip：** 可以通过 label_color 来设置线条颜色，如 ['#eee', '#000']，所有的图表类型的图例颜色都可通过 label_color 来修改。
+**Tip：** can edit **lineStyle** configuration parameter
+**Tip：** can use **label_color** to set the color of line, like ['#eee', '#000']. Also worked on all kinds of color lenged.
 
 
 # Line3D
@@ -1083,7 +1083,7 @@ map.render()
 ```
 ![map-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/map-1.gif)
 
-**Tip：** 可结合 visualMap 组件进行设置
+**Tip：** can set with **visualMap** components
 
 ```python
 from pyecharts import Map
@@ -1209,7 +1209,7 @@ parallel.render()
 ```
 ![parallel-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/parallel-1.png)
 
-**Tip：** 可配置 **lineStyle** 参数
+**Tip：** can set **lineStyle** parameter configuration
 
 
 ## Pie
@@ -1354,7 +1354,7 @@ polar.render()
 * area_color -> str  
     Fill color.
 
-**Tip：** 可配置 **lineStyle** 参数
+**Tip：** can set **lineStyle** parameter configuration
 
 ```python
 from pyecharts import Polar
@@ -1469,7 +1469,7 @@ radar.render()
     default -> True  
     It specifies whether to show axis line.
 
-**Tip：** 可配置 **lineStyle** 参数
+**Tip：** can set **lineStyle** parameter configuration
 
 ```python
 value_bj = [
@@ -1521,7 +1521,7 @@ radar.render()
 ```
 ![radar-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/radar-1.gif)
 
-**Tip：** symblo=None 可隐藏标记图形（小圆圈）
+**Tip：** symblo=None means symblo can be invisiable(little circle)
 
 
 ## Scatter
@@ -1555,7 +1555,7 @@ scatter.render()
 ```
 ![scatter-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/scatter-0.png)
 
-Scatter 还内置了画画方法
+Scatter:Drawing method is build-in
 ```python
 draw(path, color=None)
 ''' 
@@ -1568,7 +1568,7 @@ draw(path, color=None)
 * color -> str  
     select a color to exclude, (225, 225, 225) means Keep only white pixel information.
 
-首先你需要准备一张图片，如
+First, you need a picture, like
 
 ![pyecharts-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/pyecharts-0.png)
 
@@ -1795,7 +1795,7 @@ bar.render()
 ```
 ![grid-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/grid-0.gif)
 
-**再次Tip：** ```bar.grid(line.get_series(), grid_top="60%")``` 不要写成 ```bar.grid(bar.get_series())``` 不然会陷入无限递归中  
+**Tip Again：** ```bar.grid(line.get_series(), grid_top="60%")``` 不要写成 ```bar.grid(bar.get_series())``` 不然会陷入无限递归中  
 
 具体流程如下：
 1. 在第一个图表初始化的时候制定 is_grid=True，说明要使用 grid 组件。
@@ -1804,7 +1804,7 @@ bar.render()
 4. 调用第一个图表的 grid() 方法逐个添加，并且设置 grid_* 参数，必须指定，至少一个。
 5. 调用第一个图表的 render() 方法。
 
-左右类型，Scatter + EffectScatter  
+Kind of left and right, Scatter + EffectScatter  
 ```python
 from pyecharts import Scatter, EffectScatter
 
@@ -1821,7 +1821,7 @@ scatter.render()
 ```
 ![grid-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/grid-1.gif)
 
-上下左右类型，Bar + Line + Scatter + EffectScatter  
+Kind of up down left and right, Bar + Line + Scatter + EffectScatter  
 ```python
 from pyecharts import Bar, Line, Scatter, EffectScatter  
 
@@ -1931,14 +1931,14 @@ heatmap.show_config()
 heatmap.render()
 ```
 ![grid-5](https://github.com/chenjiandongx/pyecharts/blob/master/images/grid-5.gif)  
-Bar 会受 HeatMap 影响，很有趣。
+Bar will be influenced by HeatMap , really interesting.
 
-# 更多示例
+# More examples
 
 * More examples refer to [example.md](https://github.com/chenjiandongx/pyecharts/blob/master/example.md)
 * Welcome to provide more examples.
 
-# 关于项目
+# About Projects
 
 * Enjoy pyecharts!
 * Welcome to discuss on issue, or commit PR directly.
