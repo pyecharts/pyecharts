@@ -35,6 +35,12 @@ $ python setup.py install
 	bar.add("evaporation", attr, v2, mark_line=["average"], mark_point=["max", "min"])
 	bar.render()
 
+
+
+It will creat a file named render.html in the root directory, open file with your borwser.  
+
+![usage](https://github.com/chenjiandongx/pyecharts/blob/master/images/usage.gif)
+
 ## Working with pandas & numpy
 
 	import pandas as pd
@@ -56,10 +62,6 @@ $ python setup.py install
 	bar.add('precipitation', pdattr1,  dtvalue1, mark_line=['average'], mark_point=['max', 'min'])
 	bar.add('evaporation', pdattr2,  dtvalue2, mark_line=['average'], mark_point=['max', 'min'])
 	bar.render()
-
-It will creat a file named render.html in the root directory, open file with your borwser.  
-
-![usage](https://github.com/chenjiandongx/pyecharts/blob/master/images/usage.gif)
 
 ## Documentation
 * [中文档案](https://github.com/chenjiandongx/pyecharts/blob/master/document/doc_zh_CN.md)
