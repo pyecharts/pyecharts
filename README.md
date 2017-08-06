@@ -46,14 +46,13 @@ It will creat a file named render.html in the root directory, open file with you
 	import pandas as pd
 	import numpy as np
 	from pyecharts import Bar
-	from pyecharts.base import Base
 
 	index = pd.date_range('3/8/2017', periods=6, freq='M')
 	df1 = pd.DataFrame(np.random.randn(6), index=index)
-	dtvalue1, pdattr1 = Base.pdcast(df1)
+	dtvalue1, pdattr1 = Bar.pdcast(df1)
 
 	df2 = pd.DataFrame(np.random.randn(6), index=index)
-	dtvalue2, pdattr2 = Base.pdcast(df2)
+	dtvalue2, pdattr2 = Bar.pdcast(df2)
 
 	dtvalue1 = [i[0] for i in dtvalue1]
 	dtvalue2 = [i[0] for i in dtvalue2]
