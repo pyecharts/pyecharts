@@ -46,31 +46,28 @@ class Line(Base):
             Whether to fill area.
         :param kwargs:
         """
-        if isinstance(x_axis, list) and isinstance(y_axis, list):
-            assert len(x_axis) == len(y_axis)
-            kwargs.update(x_axis=x_axis, type="line")
-            chart = get_all_options(**kwargs)
-            xaxis, yaxis = chart['xy_axis']
-            is_stack = "stack" if is_stack else ""
-            _area_style = {"normal": chart['area_style']} if is_fill else {}
-            self._option.update(xAxis=xaxis, yAxis=yaxis)
-            self._option.get('legend')[0].get('data').append(name)
-            self._option.get('series').append({
-                "type": "line",
-                "name": name,
-                "symbol": chart['symbol'],
-                "smooth": is_smooth,
-                "step": is_step,
-                "stack": is_stack,
-                "showSymbol": is_symbol_show,
-                "data": y_axis,
-                "label": chart['label'],
-                "lineStyle": chart['line_style'],
-                "areaStyle": _area_style,
-                "markPoint": chart['mark_point'],
-                "markLine": chart['mark_line'],
-                "indexflag": self._option.get('_index_flag')
-            })
-            self._legend_visualmap_colorlst(**kwargs)
-        else:
-            raise TypeError("x_axis and y_axis must be list")
+        assert len(x_axis) == len(y_axis)
+        kwargs.update(x_axis=x_axis, type="line")
+        chart = get_all_options(**kwargs)
+        xaxis, yaxis = chart['xy_axis']
+        is_stack = "stack" if is_stack else ""
+        _area_style = {"normal": chart['area_style']} if is_fill else {}
+        self._option.update(xAxis=xaxis, yAxis=yaxis)
+        self._option.get('legend')[0].get('data').append(name)
+        self._option.get('series').append({
+            "type": "line",
+            "name": name,
+            "symbol": chart['symbol'],
+            "smooth": is_smooth,
+            "step": is_step,
+            "stack": is_stack,
+            "showSymbol": is_symbol_show,
+            "data": y_axis,
+            "label": chart['label'],
+            "lineStyle": chart['line_style'],
+            "areaStyle": _area_style,
+            "markPoint": chart['mark_point'],
+            "markLine": chart['mark_line'],
+            "indexflag": self._option.get('_index_flag')
+        })
+        self._legend_visualmap_colorlst(**kwargs)
