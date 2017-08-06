@@ -1,16 +1,5 @@
-# 关于作者想说的
-作为 pyecharts 的作者，很高兴看到 pyecharts 最近这么受欢迎，一度冲上了 Python daily trending 和 weekly trending 前三名。大家对这个项目的反馈也都不错，在这里我真诚的感谢大家对这个项目的支持。  
-随着使用项目的人越来越多，已经收到了不少希望推出一份英文文档的请求，但是大家提新需求的速度已经远远快于我的开发速度......我还要测试以及解决提出的 issue，实在是没什么时间（加上我英语水平不高这点我是不会告诉你的）。
-### 所以，划重点！！！
-在这里，我诚恳地向各位对这个项目感兴趣，想参与到项目中来的开发者发出邀请，希望你们可以参与到英文文档的编写中来，成为这个项目的贡献者，一起推动这个项目的发展。英文文档在这里 [doc_en_US.md](https://github.com/chenjiandongx/pyecharts/blob/master/document/doc_en_US.md) ，我已经写了一些，但是还差挺多的。别犹豫了，来吧！
-### 接着，划重点！！！
-想参与到英文文档开发中来的开发者，请联系我邮箱，chenjiandongx@qq.com，或者加入下面这个微信群，我们可以来具体讨论。不然直接 fork 一份，编写后提交 PR 也行，我看到了会及时 merge 的。
-
-![wechat](https://github.com/chenjiandongx/pyecharts/blob/master/images/wechat.png)
-### 最后，划重点！！！
-接下来我就暂时不更新版本了，因为作者要出去玩耍几天了，不然感觉这样下去的话我这个暑假就没了！
-
 # pyecharts 文档
+
 pyecharts 是一个用于生成 Echarts 图表的类库。实际上就是 Echarts 与 Python 的对接。  
 
 [![Build Status](https://travis-ci.org/chenjiandongx/pyecharts.svg?branch=master)](https://travis-ci.org/chenjiandongx/pyecharts)  
@@ -112,8 +101,35 @@ pdcast()，接受的参数可以为 Series 或者 DataFrame 类型。
 pdcast(pddata)
 ``` 用于处理 Pandas 中的 Series 和 DataFrame 类型，返回 value_lst, index_list 两个列表 ```
 ```
-1. 传入的类型为 Series 的话，pdcast() 会返回两个确保类型正确的列表（整个列表的数据类型为 float 或者 str，会先尝试转换为数值类型的 float，出现异常再尝试转换为 str 类型），value_lst 和 index_lst，分别为 Series.values 和 Series.index 列表。
-2. 传入的类型为 DataFrame 的话，pdcast() 会返回一个确保类型正确的列表（整个列表的数据类型为 float 或者 str，会先尝试转换为数值类型的 float，出现异常再尝试转换为 str 类型），为 DataFrame.values 列表。多个维度时返回一个嵌套列表。比较适合像 Radar, Parallel, HeatMap 这些需要传入嵌套列表（[[ ], [ ]]）数据的图表。
+传入的类型为 Series、DataFrame 的话，pdcast() 会返回两个确保类型正确的列表（整个列表的数据类型为 float 或者 str，会先尝试转换为数值类型的 float，出现异常再尝试转换为 str 类型），value_lst 和 index_lst，分别为 Series.values/DataFrame.values 和 Series.index/DataFrame.index 列表。再将得到的数据传入 ```add()``` 方法即可（DataFrame 多个维度时返回一个嵌套列表。比较适合像 Radar, Parallel, HeatMap 这些需要传入嵌套列表（[[ ], [ ]]）数据的图表。）
+
+Series 类型
+```python
+from pyecharts import Bar
+import pandas as pd
+
+pddata = pd.Series([1, 2, 3, 4], index=[1, 'b', 'c', 'd'])
+vlst, ilst = Bar.pdcast(pddata)
+
+print(vlst)
+>>> [1.0, 2.0, 3.0, 4.0] 
+print(ilst)
+>>> ['1', 'b', 'c', 'd']
+```
+
+DataFrame 类型
+```python
+from pyecharts import Bar
+import pandas as pd
+
+pddt = pd.DataFrame([[1, 2, 3, 4], [2, 3, 4, 5], [4.1, 5.2, 6.3, 7.4]], index=["A", "B", "C"])
+vlst, ilst = Bar.pdcast(pddata)
+
+print(vlst)
+>>> [[1.0, 2.0, 3.0, 4.0], [2.0, 3.0, 4.0, 5.0], [4.1, 5.2, 6.3, 7.4]]
+print(ilst)
+>>> ['A', 'B', 'C']
+```
 
 npcast()，接受的参数为 Numpy.array 类型。
 ```python
@@ -122,21 +138,30 @@ npcast(npdata)
 ``` 用于处理 Numpy 中的 ndarray 类型，返回一个确保类型正确的列表。如果多个维度的话返回嵌套列表。```
 ```
 
+Numpy.array 类型
+```python
+from pyecharts import Bar
+import numpy ad np
+
+npdata = np.array([[1, 2, 3, 4], [2, 4, 5.0, 6.3]])
+print(npdata)
+>>> [[1.0, 2.0, 3.0, 4.0], [2.0, 4.0, 5.0, 6.3]]
+```
+
 **当然你也可以采用更加酷炫的方式，使用 Jupyter Notebook 来展示图表，matplotlib 有的，pyecharts 也会有的**  
 
 比如这样  
 
-![jupyter-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/jupyter-0.gif)
+![notebook-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/notebook-0.gif)
 
 还有这样
 
-![jupyter-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/jupyter-1.gif)
+![notebook-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/notebook-1.gif)
 
-![jupyter-2](https://github.com/chenjiandongx/pyecharts/blob/master/images/jupyter-2.gif)
+更多 Jupyter notebook 的例子请参考 [notebook-use-cases](https://github.com/chenjiandongx/pyecharts/blob/master/document/notebook-use-cases.ipynb)。可下载后运行看看。
 
-
-这里只是举几个例子。如需使用 Jupyter Notebook 来展示图表，只需要调用 ```render_notebook()``` 即可，同时兼容 Python2 和 Python3 的 Jupyter Notebook 环境。所有图表均可正常显示（除了 3D 图），与浏览器一致的交互体验，这下展示报告连 PPT 都省了！！  
-> 在这里要特别感谢 [@ygw365](https://github.com/ygw365) 提供这部分的代码模板 和 [@muxuezi](https://github.com/muxuezi) 协助对代码进行改进，特此感谢！
+如需使用 Jupyter Notebook 来展示图表，只需要调用自身实例即可，同时兼容 Python2 和 Python3 的 Jupyter Notebook 环境。所有图表均可正常显示，与浏览器一致的交互体验，这下展示报告连 PPT 都省了！！  
+**Tip：** 从 0.1.9.2 版本开始，不再使用 ```render_notebook()``` 方法，现已采用更加 pythonic 的做法。直接调用本身实例就可以了。
 
 图表类初始化所接受的参数（所有类型的图表都一样）。
 
@@ -184,6 +209,10 @@ xyAxis：直角坐标系中的 x、y 轴(Line、Bar、Scatter、EffectScatter、
     x 轴名称位置，有'start'，'middle'，'end'可选
 * xaxis_rotate -> int  
     刻度标签旋转的角度，在类目轴的类目标签显示不下的时候可以通过旋转防止标签之间重叠。默认为 0，即不旋转。旋转的角度从 -90 度到 90 度。
+* xaxis_min -> int/float  
+    x 坐标轴刻度最小值，默认为自适应。
+* xaxis_max -> int/float  
+    x 坐标轴刻度最大值，默认为自适应。
 * y_axis -> list  
     y 坐标轴数据
 * yaxis_formatter -> str  
@@ -192,6 +221,10 @@ xyAxis：直角坐标系中的 x、y 轴(Line、Bar、Scatter、EffectScatter、
     y 轴名称
 * yaxis_name_pos -> str  
     y 轴名称位置，有'start', 'middle'，'end'可选
+* yaxis_min -> int/float  
+    y 坐标轴刻度最小值，默认为自适应。
+* yaxis_max -> int/float  
+    y 坐标轴刻度最大值，默认为自适应。
 * yaxis_rotate -> int  
     刻度标签旋转的角度，在类目轴的类目标签显示不下的时候可以通过旋转防止标签之间重叠。默认为 0，即不旋转。旋转的角度从 -90 度到 90 度。
 * interval -> int  
@@ -391,7 +424,20 @@ bar.render()
 ![bar-5](https://github.com/chenjiandongx/pyecharts/blob/master/images/bar-5.gif)  
 
 **Tip：** datazoom 适合所有平面直角坐标系图形，也就是(Line、Bar、Scatter、EffectScatter、Kline)  
-**Tip：** 可以通过 label_color 来设置柱状的颜色，如 ['#eee', '#000']，所有的图表类型的图例颜色都可通过 label_color 来修改。
+
+当 x 轴或者 y 轴的标签因为过于密集而导致全部显示出来会重叠的话，可采用使标签旋转的方法。
+```python
+attr = ["{}天".format(i) for i in range(20)]
+v1 = [random.randint(1, 20) for _ in range(20)]
+bar = Bar("坐标轴标签旋转示例")
+bar.add("", attr, v1, interval=0, xaxis_rotate=30, yaxis_rotate=30)
+bar.show_config()
+bar.render()
+```
+![bar-6](https://github.com/chenjiandongx/pyecharts/blob/master/images/bar-6.png) 
+
+**Tip：** 可通过设置 xaxis_min/xaxis_max/yaxis_min/yaxis_max 来调整 x 轴和 y 轴上的最大最小值。针对数值轴有效！  
+**Tip：** 可以通过 label_color 来设置柱状的颜色，如 ['#eee', '#000']，所有的图表类型的图例颜色都可通过 label_color 来修改。  
 
 
 ## Bar3D（3D 柱状图）
