@@ -90,16 +90,9 @@ cast(seq)
 3. Dictionaries
     {A1: B1, A2: B2, A3: B3, A4: B4} -- > k_lst[ A[i1, i2...] ], v_lst[ B[i1, i2...] ]
 
-如果使用的是 Numpy 或者 Pandas，直接将数据放入 ```add()``` 方法也可能会出现问题，因为 ```add()``` 方法接受的是两个 list 列表。最后所有的配置项都是要经过 JSON 序列化的，像 int64 这种类型的数据在这个过程是会报错的。  
-it provides ```pdcast(pddata)``` and ``` npcast(npdata)``` methods to handle numpy & pandas data。
+In the context of Numpy and/or Pandas, ```pdcast(pddata)``` and ``` npcast(npdata)``` methods, provided in 0.19.2 are no log required. Please see the advanced example in README.
 
-pdcast()，It accepts Series or DataFrame types.
-```python
-@staticmethod
-pdcast(pddata)
-``` handle Series and DataFrame type in pandas, return value_lst and index_list ```
-```
-传入的类型为 Series、DataFrame 的话，pdcast() 会返回两个确保类型正确的列表（整个列表的数据类型为 float 或者 str，会先尝试转换为数值类型的 float，出现异常再尝试转换为 str 类型），value_lst 和 index_lst，分别为 Series.values/DataFrame.values 和 Series.index/DataFrame.index 列表。再将得到的数据传入 ```add()``` 方法即可（DataFrame 多个维度时返回一个嵌套列表。比较适合像 Radar, Parallel, HeatMap 这些需要传入嵌套列表（[[ ], [ ]]）数据的图表。）
+If your DataFrame returns a transposed list(such as, [ [1], [2], [3] ]), you have to tranpose it by yourself (make it like [ 1, 2, 3 ] ). This transpose operation applies to Radar, Parallel, HeatMap.
 
 Series type
 ```python

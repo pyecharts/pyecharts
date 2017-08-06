@@ -49,17 +49,15 @@ from pyecharts import Bar
 
 index = pd.date_range('3/8/2017', periods=6, freq='M')
 df1 = pd.DataFrame(np.random.randn(6), index=index)
-dtvalue1, pdattr1 = Bar.pdcast(df1)
 
 df2 = pd.DataFrame(np.random.randn(6), index=index)
-dtvalue2, pdattr2 = Bar.pdcast(df2)
 
 dtvalue1 = [i[0] for i in dtvalue1]
 dtvalue2 = [i[0] for i in dtvalue2]
 
 bar = Bar('Bar chart', 'Profit and loss situation')
-bar.add('profit', pdattr1,  dtvalue1)
-bar.add('loss', pdattr2,  dtvalue2)
+bar.add('profit', df1.index, df1.values)
+bar.add('loss', df2.index,  df2.values)
 bar.render()
 ```
 ![usage-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/usage-1.png)
