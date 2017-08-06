@@ -23,22 +23,44 @@ $ python setup.py install
 ```
 
 ## Basic Usage
-```python
-from pyecharts import Bar
 
-attr = ["{}month".format(i) for i in range(1, 13)]
-attr = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
-v1 = [2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3]
-v2 = [2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3]
-bar = Bar("Bar chart", "precipitation and evaporation one year")
-bar.add("precipitation", attr, v1, mark_line=["average"], mark_point=["max", "min"])
-bar.add("evaporation", attr, v2, mark_line=["average"], mark_point=["max", "min"])
-bar.render()
-```
+	from pyecharts import Bar
+
+	attr = ["{}month".format(i) for i in range(1, 13)]
+	attr = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+	v1 = [2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3]
+	v2 = [2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3]
+	bar = Bar("Bar chart", "precipitation and evaporation one year")
+	bar.add("precipitation", attr, v1, mark_line=["average"], mark_point=["max", "min"])
+	bar.add("evaporation", attr, v2, mark_line=["average"], mark_point=["max", "min"])
+	bar.render()
+
+
 
 It will creat a file named render.html in the root directory, open file with your borwser.  
 
 ![usage](https://github.com/chenjiandongx/pyecharts/blob/master/images/usage.gif)
+
+## Working with pandas & numpy
+
+	import pandas as pd
+	import numpy as np
+	from pyecharts import Bar
+
+	index = pd.date_range('3/8/2017', periods=6, freq='M')
+	df1 = pd.DataFrame(np.random.randn(6), index=index)
+	dtvalue1, pdattr1 = Bar.pdcast(df1)
+
+	df2 = pd.DataFrame(np.random.randn(6), index=index)
+	dtvalue2, pdattr2 = Bar.pdcast(df2)
+
+	dtvalue1 = [i[0] for i in dtvalue1]
+	dtvalue2 = [i[0] for i in dtvalue2]
+
+	bar = Bar('MyBar', 'precipitation and evaporation one year')
+	bar.add('precipitation', pdattr1,  dtvalue1, mark_line=['average'], mark_point=['max', 'min'])
+	bar.add('evaporation', pdattr2,  dtvalue2, mark_line=['average'], mark_point=['max', 'min'])
+	bar.render()
 
 ## Documentation
 * [中文档案](https://github.com/chenjiandongx/pyecharts/blob/master/document/doc_zh_CN.md)
