@@ -8,7 +8,7 @@ pyecharts is a library to generate charts using Echarts. It simply provides the 
 [Echarts](https://github.com/ecomfe/echarts) is an open source library from Baidu for data visualization in javascript. It has awesome demo pages so I started to look out for an interface library so that I could use it in Python. I ended up with [echarts-python](https://github.com/yufeiminds/echarts-python) on github but it lacks of documentation and was not updated for a while. Just like many other Python projects, I started my own project, pyecharts, referencing echarts-python and another library [pygal](https://github.com/Kozea/pygal).
 
 ## Instatllation
-pyecharts works on Python2 and Python3. The latest release is 0.1.9.1. For more information please refer to [changelog.md](https://github.com/chenjiandongx/pyecharts/blob/master/changelog.md)  
+pyecharts works on Python2 and Python3. The latest release is 0.1.9.2. For more information please refer to [changelog.md](https://github.com/chenjiandongx/pyecharts/blob/master/changelog.md)  
 
 You can install it via pip
 ```
@@ -38,7 +38,31 @@ bar.render()
 
 It will creat a file named render.html in the root directory, open file with your borwser.  
 
-![usage](https://github.com/chenjiandongx/pyecharts/blob/master/images/usage.gif)
+![usage-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/usage-0.gif)
+
+## Working with pandas & numpy
+```python
+import pandas as pd
+import numpy as np
+
+from pyecharts import Bar
+
+index = pd.date_range('3/8/2017', periods=6, freq='M')
+df1 = pd.DataFrame(np.random.randn(6), index=index)
+dtvalue1, pdattr1 = Bar.pdcast(df1)
+
+df2 = pd.DataFrame(np.random.randn(6), index=index)
+dtvalue2, pdattr2 = Bar.pdcast(df2)
+
+dtvalue1 = [i[0] for i in dtvalue1]
+dtvalue2 = [i[0] for i in dtvalue2]
+
+bar = Bar('Bar chart', 'Profit and loss situation')
+bar.add('profit', pdattr1,  dtvalue1)
+bar.add('loss', pdattr2,  dtvalue2)
+bar.render()
+```
+![usage-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/usage-1.png)
 
 ## Documentation
 * [中文档案](https://github.com/chenjiandongx/pyecharts/blob/master/document/doc_zh_CN.md)

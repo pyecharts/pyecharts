@@ -63,3 +63,11 @@ def test_bar():
     bar.add("", attr, v1, is_datazoom_show=True, datazoom_type='inside', datazoom_range=[10, 25])
     bar.show_config()
     bar.render()
+
+    # bar_6
+    attr = ["{}天".format(i) for i in range(20)]
+    v1 = [random.randint(1, 20) for _ in range(20)]
+    bar = Bar("坐标轴标签旋转示例")
+    bar.add("", attr, v1, interval=0, xaxis_rotate=30, yaxis_rotate=30)
+    bar.show_config()
+    bar.render()
