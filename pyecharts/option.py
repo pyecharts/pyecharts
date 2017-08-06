@@ -194,10 +194,14 @@ def xy_axis(type=None,
             xaxis_name="",
             xaxis_name_pos="middle",
             xaxis_rotate=0,
+            xaxis_min=None,
+            xaxis_max=None,
             interval="auto",
             yaxis_name="",
             yaxis_name_pos="middle",
             yaxis_rotate=0,
+            yaxis_min=None,
+            yaxis_max=None,
             is_convert=False,
             x_axis=None,
             yaxis_formatter="",
@@ -217,6 +221,10 @@ def xy_axis(type=None,
     :param xaxis_rotate:
         Rotation degree of xaxis label, which is especially useful when there is no enough space for category axis.
         Rotation degree is from -90 to 90.
+    :param xaxis_min:
+        The minimun value of xaxis.
+    :param xaxis_max:
+        The maximun value of xaxis.
     :param interval:
         The display interval of the axis scale label is valid in the category axis.
         By default, labels are displayed using labels that do not overlap the labels
@@ -229,6 +237,10 @@ def xy_axis(type=None,
     :param yaxis_rotate:
         Rotation degree of yaxis label, which is especially useful when there is no enough space for category axis.
         Rotation degree is from -90 to 90.
+    :param yaxis_min:
+        The minimun value of yaxis.
+    :param yaxis_max:
+        The maximun value of yaxis.
     :param is_convert:
         It specifies whether to convert xAxis and yAxis.
     :param x_axis:
@@ -248,6 +260,8 @@ def xy_axis(type=None,
             "interval": interval,
             "rotate": xaxis_rotate,
         },
+        "min": xaxis_min,
+        "max": xaxis_max
     }
     _yAxis = {
         "name": yaxis_name,
@@ -257,7 +271,9 @@ def xy_axis(type=None,
         "axisLabel": {
             "formatter": "{value} " + yaxis_formatter,
             "rotate": yaxis_rotate,
-        }
+        },
+        "min": yaxis_min,
+        "max": yaxis_max
     }
     if is_convert:
         _yAxis.update(data=x_axis, type="category")

@@ -112,14 +112,51 @@ pdcast()，接受的参数可以为 Series 或者 DataFrame 类型。
 pdcast(pddata)
 ``` 用于处理 Pandas 中的 Series 和 DataFrame 类型，返回 value_lst, index_list 两个列表 ```
 ```
-1. 传入的类型为 Series 的话，pdcast() 会返回两个确保类型正确的列表（整个列表的数据类型为 float 或者 str，会先尝试转换为数值类型的 float，出现异常再尝试转换为 str 类型），value_lst 和 index_lst，分别为 Series.values 和 Series.index 列表。
-2. 传入的类型为 DataFrame 的话，pdcast() 会返回一个确保类型正确的列表（整个列表的数据类型为 float 或者 str，会先尝试转换为数值类型的 float，出现异常再尝试转换为 str 类型），为 DataFrame.values 列表。多个维度时返回一个嵌套列表。比较适合像 Radar, Parallel, HeatMap 这些需要传入嵌套列表（[[ ], [ ]]）数据的图表。
+传入的类型为 Series、DataFrame 的话，pdcast() 会返回两个确保类型正确的列表（整个列表的数据类型为 float 或者 str，会先尝试转换为数值类型的 float，出现异常再尝试转换为 str 类型），value_lst 和 index_lst，分别为 Series.values/DataFrame.values 和 Series.index/DataFrame.index 列表。再将得到的数据传入 ```add()``` 方法即可（DataFrame 多个维度时返回一个嵌套列表。比较适合像 Radar, Parallel, HeatMap 这些需要传入嵌套列表（[[ ], [ ]]）数据的图表。）
+
+Series 类型
+```python
+from pyecharts import Bar
+import pandas as pd
+
+pddata = pd.Series([1, 2, 3, 4], index=[1, 'b', 'c', 'd'])
+vlst, ilst = Bar.pdcast(pddata)
+
+print(vlst)
+>>> [1.0, 2.0, 3.0, 4.0] 
+print(ilst)
+>>> ['1', 'b', 'c', 'd']
+```
+
+DataFrame 类型
+```python
+from pyecharts import Bar
+import pandas as pd
+
+pddt = pd.DataFrame([[1, 2, 3, 4], [2, 3, 4, 5], [4.1, 5.2, 6.3, 7.4]], index=["A", "B", "C"])
+vlst, ilst = Bar.pdcast(pddata)
+
+print(vlst)
+>>> [[1.0, 2.0, 3.0, 4.0], [2.0, 3.0, 4.0, 5.0], [4.1, 5.2, 6.3, 7.4]]
+print(ilst)
+>>> ['A', 'B', 'C']
+```
 
 npcast()，接受的参数为 Numpy.array 类型。
 ```python
 @staticmethod
 npcast(npdata)
 ``` 用于处理 Numpy 中的 ndarray 类型，返回一个确保类型正确的列表。如果多个维度的话返回嵌套列表。```
+```
+
+Numpy.array 类型
+```python
+from pyecharts import Bar
+import numpy ad np
+
+npdata = np.array([[1, 2, 3, 4], [2, 4, 5.0, 6.3]])
+print(npdata)
+>>> [[1.0, 2.0, 3.0, 4.0], [2.0, 4.0, 5.0, 6.3]]
 ```
 
 **当然你也可以采用更加酷炫的方式，使用 Jupyter Notebook 来展示图表，matplotlib 有的，pyecharts 也会有的**  
@@ -184,6 +221,10 @@ xyAxis：直角坐标系中的 x、y 轴(Line、Bar、Scatter、EffectScatter、
     x 轴名称位置，有'start'，'middle'，'end'可选
 * xaxis_rotate -> int  
     刻度标签旋转的角度，在类目轴的类目标签显示不下的时候可以通过旋转防止标签之间重叠。默认为 0，即不旋转。旋转的角度从 -90 度到 90 度。
+* xaxis_min -> int/float  
+    x 坐标轴刻度最小值，默认为自适应。
+* xaxis_max -> int/float  
+    x 坐标轴刻度最大值，默认为自适应。
 * y_axis -> list  
     y 坐标轴数据
 * yaxis_formatter -> str  
@@ -192,6 +233,10 @@ xyAxis：直角坐标系中的 x、y 轴(Line、Bar、Scatter、EffectScatter、
     y 轴名称
 * yaxis_name_pos -> str  
     y 轴名称位置，有'start', 'middle'，'end'可选
+* yaxis_min -> int/float  
+    y 坐标轴刻度最小值，默认为自适应。
+* yaxis_max -> int/float  
+    y 坐标轴刻度最大值，默认为自适应。
 * yaxis_rotate -> int  
     刻度标签旋转的角度，在类目轴的类目标签显示不下的时候可以通过旋转防止标签之间重叠。默认为 0，即不旋转。旋转的角度从 -90 度到 90 度。
 * interval -> int  
@@ -391,7 +436,20 @@ bar.render()
 ![bar-5](https://github.com/chenjiandongx/pyecharts/blob/master/images/bar-5.gif)  
 
 **Tip：** datazoom 适合所有平面直角坐标系图形，也就是(Line、Bar、Scatter、EffectScatter、Kline)  
-**Tip：** 可以通过 label_color 来设置柱状的颜色，如 ['#eee', '#000']，所有的图表类型的图例颜色都可通过 label_color 来修改。
+
+当 x 轴或者 y 轴的标签因为过于密集而导致全部显示出来会重叠的话，可采用使标签旋转的方法。
+```python
+attr = ["{}天".format(i) for i in range(20)]
+v1 = [random.randint(1, 20) for _ in range(20)]
+bar = Bar("坐标轴标签旋转示例")
+bar.add("", attr, v1, interval=0, xaxis_rotate=30, yaxis_rotate=30)
+bar.show_config()
+bar.render()
+```
+![bar-6](https://github.com/chenjiandongx/pyecharts/blob/master/images/bar-6.png) 
+
+**Tip：** 可通过设置 xaxis_min/xaxis_max/yaxis_min/yaxis_max 来调整 x 轴和 y 轴上的最大最小值。针对数值轴有效！  
+**Tip：** 可以通过 label_color 来设置柱状的颜色，如 ['#eee', '#000']，所有的图表类型的图例颜色都可通过 label_color 来修改。  
 
 
 ## Bar3D（3D 柱状图）
