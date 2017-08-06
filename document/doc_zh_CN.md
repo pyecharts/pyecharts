@@ -1497,7 +1497,7 @@ v2 = [[5000, 14000, 28000, 31000, 42000, 21000]]
 radar = Radar()
 radar.config(schema)
 radar.add("预算分配", v1, is_splitline=True, is_axisline_show=True)
-radar.add("实际开销", v2, label_color=["#4e79a7"], is_area_show=False, legend_selectedmode='signle')
+radar.add("实际开销", v2, label_color=["#4e79a7"], is_area_show=False, legend_selectedmode='single')
 radar.show_config()
 radar.render()
 ```
