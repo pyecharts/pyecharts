@@ -90,22 +90,77 @@ cast(seq)
 3. Dictionaries
     {A1: B1, A2: B2, A3: B3, A4: B4} -- > k_lst[ A[i1, i2...] ], v_lst[ B[i1, i2...] ]
 
+如果使用的是 Numpy 或者 Pandas，直接将数据放入 ```add()``` 方法也可能会出现问题，因为 ```add()``` 方法接受的是两个 list 列表。最后所有的配置项都是要经过 JSON 序列化的，像 int64 这种类型的数据在这个过程是会报错的。  
+it provides ```pdcast(pddata)``` and ``` npcast(npdata)``` methods to handle numpy & pandas data。
+
+pdcast()，It accepts Series or DataFrame types.
+```python
+@staticmethod
+pdcast(pddata)
+``` handle Series and DataFrame type in pandas, return value_lst and index_list ```
+```
+传入的类型为 Series、DataFrame 的话，pdcast() 会返回两个确保类型正确的列表（整个列表的数据类型为 float 或者 str，会先尝试转换为数值类型的 float，出现异常再尝试转换为 str 类型），value_lst 和 index_lst，分别为 Series.values/DataFrame.values 和 Series.index/DataFrame.index 列表。再将得到的数据传入 ```add()``` 方法即可（DataFrame 多个维度时返回一个嵌套列表。比较适合像 Radar, Parallel, HeatMap 这些需要传入嵌套列表（[[ ], [ ]]）数据的图表。）
+
+Series type
+```python
+from pyecharts import Bar
+import pandas as pd
+
+pddata = pd.Series([1, 2, 3, 4], index=[1, 'b', 'c', 'd'])
+vlst, ilst = Bar.pdcast(pddata)
+
+print(vlst)
+>>> [1.0, 2.0, 3.0, 4.0] 
+print(ilst)
+>>> ['1', 'b', 'c', 'd']
+```
+
+DataFrame type
+```python
+from pyecharts import Bar
+import pandas as pd
+
+pddt = pd.DataFrame([[1, 2, 3, 4], [2, 3, 4, 5], [4.1, 5.2, 6.3, 7.4]], index=["A", "B", "C"])
+vlst, ilst = Bar.pdcast(pddata)
+
+print(vlst)
+>>> [[1.0, 2.0, 3.0, 4.0], [2.0, 3.0, 4.0, 5.0], [4.1, 5.2, 6.3, 7.4]]
+print(ilst)
+>>> ['A', 'B', 'C']
+```
+
+npcast()，It accepts numpy.array type.
+```python
+@staticmethod
+npcast(npdata)
+``` handle the ndarray type in Numpy, return a list that ensures the correct type. Returns the nested list if there are multiple dimensions.```
+```
+
+Numpy.array type
+```python
+from pyecharts import Bar
+import numpy ad np
+
+npdata = np.array([[1, 2, 3, 4], [2, 4, 5.0, 6.3]])
+print(npdata)
+>>> [[1.0, 2.0, 3.0, 4.0], [2.0, 4.0, 5.0, 6.3]]
+```
+
 **Of course you can use the cooler way,use Jupyter Notebook to show the chart.But what matplotlib have，so do pyecharts**
 
 like this
 
-![jupyter-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/jupyter-0.gif)
+![notebook-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/notebook-0.gif)
 
 and this
 
-![jupyter-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/jupyter-1.gif)
+![notebook-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/notebook-1.gif)
 
-![jupyter-2](https://github.com/chenjiandongx/pyecharts/blob/master/images/jupyter-2.gif)
+more Jupyter notebook examples, please refer to [notebook-use-cases](https://github.com/chenjiandongx/pyecharts/blob/master/document/notebook-use-cases.ipynb)。you could download and run it on your notebook.
 
-**Tip：** The function was official added in 0.1.9.1 version,please update the newest version to use it.
+**Tip：** The function was official added in 0.1.9.2 version,please update the newest version to use it.
 
-They are just some examples.If you want use Jupyter Notebook to show your chart,just call ```render_notebook()``` ,compatible with Python2 and Python3's Jupyter Notebook environment at sametime.All the chart can display normaly,the same interaction experience to browser,there's no need to make a complex powerpoint!!
-> Special thanks to [@ygw365](https://github.com/ygw365) for provide code templates and special thanks to [muxuezi](https://github.com/muxuezi) for help of improving the code.Special thanks!And welcome developers to join us.We make the program improved and perfetcted together!
+If you want use Jupyter Notebook to show your chart,just call Chart instance,compatible with Python2 and Python3's Jupyter Notebook environment at sametime.All the chart can display normaly,the same interaction experience to browser,there's no need to make a complex powerpoint!!
 
 The parameter a chart type initialize accept（the same to all the chart type）.
 
@@ -169,6 +224,12 @@ xyAxis：x, y axis in cartesian coordinate system(Line、Bar、Scatter、EffectS
     Name of xAxis
 * xaxis_name_pos -> str  
     Location of xAxis name.It can be 'start'，'middle'，'end'
+* xaxis_rotate -> int  
+    Rotation degree of xaxis label, which is especially useful when there is no enough space for category axis.Rotation degree is from -90 to 90.
+* xaxis_min -> int/float  
+    The minimun value of xaxis.
+* xaxis_max -> int/float  
+    The maximun value of xaxis.
 * y_axis -> list  
     yAxis data
 * yaxis_formatter -> str  
@@ -177,9 +238,14 @@ xyAxis：x, y axis in cartesian coordinate system(Line、Bar、Scatter、EffectS
     Name of yAxis
 * yaxis_name_pos -> str  
     Location of yAxis name.It can be 'start'，'middle'，'end'
+* yaxis_rotate -> int  
+    Rotation degree of xaxis label, which is especially useful when there is no enough space for category axis.Rotation degree is from -90 to 90.
+* yaxis_min -> int/float  
+    The minimun value of yaxis.
+* yaxis_max -> int/float  
+    The maximun value of yaxis.
 * interval -> int  
-    The display interval of the axis scale label is valid in the category axis.  
-    By default, labels are displayed using labels that do not overlap the labels.  
+    The display interval of the axis scale label is valid in the category axis.By default, labels are displayed using labels that do not overlap the labels.  
     Set to 0 to force all labels to be displayed and label is one by one if setting as 1; If 2, it will be one label separates from each other, and so on.
 
 
@@ -428,6 +494,77 @@ add(name, x_axis, y_axis, data, grid3D_opacity=1, grid3D_shading='color', **kwar
     * 'color': Only show color, not affected by lighting and other factors.
     * 'lambert': Through the classic lambert coloring to show the light and shade.
     * 'realistic': Realistic rendering.
+
+```python
+from pyecharts import Bar3D
+
+bar3d = Bar3D("3D 柱状图示例", width=1200, height=600)
+x_axis = ["12a", "1a", "2a", "3a", "4a", "5a", "6a", "7a", "8a", "9a", "10a", "11a",
+          "12p", "1p", "2p", "3p", "4p", "5p", "6p", "7p", "8p", "9p", "10p", "11p"]
+y_aixs = ["Saturday", "Friday", "Thursday", "Wednesday", "Tuesday", "Monday", "Sunday"]
+data = [[0, 0, 5], [0, 1, 1], [0, 2, 0], [0, 3, 0], [0, 4, 0], [0, 5, 0], [0, 6, 0], [0, 7, 0],
+        [0, 8, 0],[0, 9, 0], [0, 10, 0], [0, 11, 2], [0, 12, 4], [0, 13, 1], [0, 14, 1], [0, 15, 3],
+        [0, 16, 4], [0, 17, 6], [0, 18, 4], [0, 19, 4], [0, 20, 3], [0, 21, 3], [0, 22, 2], [0, 23, 5],
+        [1, 0, 7], [1, 1, 0], [1, 2, 0], [1, 3, 0], [1, 4, 0], [1, 5, 0], [1, 6, 0], [1, 7, 0], [1, 8, 0],
+        [1, 9, 0], [1, 10, 5], [1, 11, 2], [1, 12, 2], [1, 13, 6], [1, 14, 9], [1, 15, 11], [1, 16, 6], [1, 17, 7],
+        [1, 18, 8], [1, 19, 12], [1, 20, 5], [1, 21, 5], [1, 22, 7], [1, 23, 2], [2, 0, 1], [2, 1, 1],
+        [2, 2, 0], [2, 3, 0], [2, 4, 0], [2, 5, 0], [2, 6, 0], [2, 7, 0], [2, 8, 0], [2, 9, 0], [2, 10, 3],
+        [2, 11, 2], [2, 12, 1], [2, 13, 9], [2, 14, 8], [2, 15, 10], [2, 16, 6], [2, 17, 5], [2, 18, 5],
+        [2, 19, 5], [2, 20, 7], [2, 21, 4], [2, 22, 2], [2, 23, 4], [3, 0, 7], [3, 1, 3], [3, 2, 0], [3, 3, 0],
+        [3, 4, 0], [3, 5, 0], [3, 6, 0], [3, 7, 0], [3, 8, 1], [3, 9, 0], [3, 10, 5], [3, 11, 4], [3, 12, 7],
+        [3, 13, 14], [3, 14, 13], [3, 15, 12], [3, 16, 9], [3, 17, 5], [3, 18, 5], [3, 19, 10], [3, 20, 6],
+        [3, 21, 4], [3, 22, 4], [3, 23, 1], [4, 0, 1], [4, 1, 3], [4, 2, 0], [4, 3, 0], [4, 4, 0], [4, 5, 1],
+        [4, 6, 0], [4, 7, 0], [4, 8, 0], [4, 9, 2], [4, 10, 4], [4, 11, 4], [4, 12, 2], [4, 13, 4], [4, 14, 4],
+        [4, 15, 14], [4, 16, 12], [4, 17, 1], [4, 18, 8], [4, 19, 5], [4, 20, 3], [4, 21, 7], [4, 22, 3],
+        [4, 23, 0], [5, 0, 2], [5, 1, 1], [5, 2, 0], [5, 3, 3], [5, 4, 0], [5, 5, 0], [5, 6, 0], [5, 7, 0],
+        [5, 8, 2], [5, 9, 0], [5, 10, 4], [5, 11, 1], [5, 12, 5], [5, 13, 10], [5, 14, 5], [5, 15, 7], [5, 16, 11],
+        [5, 17, 6], [5, 18, 0], [5, 19, 5], [5, 20, 3], [5, 21, 4], [5, 22, 2], [5, 23, 0], [6, 0, 1], [6, 1, 0],
+        [6, 2, 0], [6, 3, 0], [6, 4, 0], [6, 5, 0], [6, 6, 0], [6, 7, 0], [6, 8, 0], [6, 9, 0], [6, 10, 1],
+        [6, 11, 0], [6, 12, 2], [6, 13, 1], [6, 14, 3], [6, 15, 4], [6, 16, 0], [6, 17, 0], [6, 18, 0], [6, 19, 0],
+        [6, 20, 1], [6, 21, 2], [6, 22, 2], [6, 23, 6]]
+range_color = ['#313695', '#4575b4', '#74add1', '#abd9e9', '#e0f3f8', '#ffffbf',
+               '#fee090', '#fdae61', '#f46d43', '#d73027', '#a50026']
+bar3d.add("", x_axis, y_aixs, [[d[1], d[0], d[2]] for d in data], is_visualmap=True,
+          visual_range=[0, 20], visual_range_color=range_color, grid3D_width=200, grid3D_depth=80)
+bar3d.show_config()
+bar3d.render()
+```
+![bar3D-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/bar3D-0.gif)
+
+``` grid3D_shading``` could make bar look more real  
+```python
+bar3d = Bar3D("3D 柱状图示例", width=1200, height=600)
+bar3d.add("", x_axis, y_aixs, [[d[1], d[0], d[2]] for d in data], is_visualmap=True,
+          visual_range=[0, 20], visual_range_color=range_color, grid3D_width=200, grid3D_depth=80,
+          grid3D_shading='lambert')
+bar3d.show_config()
+bar3d.render()
+```
+![bar3D-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/bar3D-1.gif)
+
+```is_grid3D_rotate``` could let it rotate automatically
+```python
+bar3d = Bar3D("3D 柱状图示例", width=1200, height=600)
+bar3d.add("", x_axis, y_aixs, [[d[1], d[0], d[2]] for d in data], is_visualmap=True,
+          visual_range=[0, 20], visual_range_color=range_color, grid3D_width=200, grid3D_depth=80,
+          is_grid3D_rotate=True)
+bar3d.show_config()
+bar3d.render()
+```
+![bar3D-2](https://github.com/chenjiandongx/pyecharts/blob/master/images/bar3D-2.gif)
+
+set ``` grid3D_rotate_speed``` to adjust the rotation speed  
+```python
+bar3d = Bar3D("3D 柱状图示例", width=1200, height=600)
+bar3d.add("", x_axis, y_aixs, [[d[1], d[0], d[2]] for d in data], is_visualmap=True,
+          visual_range=[0, 20], visual_range_color=range_color, grid3D_width=200, grid3D_depth=80,
+          is_grid3D_rotate=True, grid3D_rotate_speed=180)
+bar3d.show_config()
+bar3d.render()
+```
+![bar3D-3](https://github.com/chenjiandongx/pyecharts/blob/master/images/bar3D-3.gif)
+
+**Tip：** more details aboutt gird3D，please refer to [Global-options](https://github.com/chenjiandongx/pyecharts/blob/master/document/doc_en_US.md#Global-options)
 
 
 ## EffectScatter
@@ -983,8 +1120,61 @@ line.render()
 
 
 # Line3D
+Line3D.add() signatures
+```python
+add(name, data, grid3D_opacity=1, **kwargs)
+```
+* name -> str
+    Series name used for displaying in tooltip and filtering with legend,or updaing data and configuration with setOption.
+* data -> [[], []]  
+    data of line3D
+* grid3D_opacity -> float  
+    default -> 1  
+    opacity of gird3D item
 
+draw a spring
+```python
+from pyecharts import Line3D
 
+import math
+_data = []
+for t in range(0, 25000):
+    _t = t / 1000
+    x = (1 + 0.25 * math.cos(75 * _t)) * math.cos(_t)
+    y = (1 + 0.25 * math.cos(75 * _t)) * math.sin(_t)
+    z = _t + 2.0 * math.sin(75 * _t)
+    _data.append([x, y, z])
+range_color = ['#313695', '#4575b4', '#74add1', '#abd9e9', '#e0f3f8', '#ffffbf',
+               '#fee090', '#fdae61', '#f46d43', '#d73027', '#a50026']
+line3d = Line3D("3D 折线图示例", width=1200, height=600)
+line3d.add("", _data, is_visualmap=True, visual_range_color=range_color, visual_range=[0, 30],
+           grid3D_rotate_sensitivity=5)
+line3d.render()
+```
+![line3D-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/line3D-0.gif)
+
+rotating spring
+```python
+from pyecharts import Line3D
+
+import math
+_data = []
+for t in range(0, 25000):
+    _t = t / 1000
+    x = (1 + 0.25 * math.cos(75 * _t)) * math.cos(_t)
+    y = (1 + 0.25 * math.cos(75 * _t)) * math.sin(_t)
+    z = _t + 2.0 * math.sin(75 * _t)
+    _data.append([x, y, z])
+range_color = ['#313695', '#4575b4', '#74add1', '#abd9e9', '#e0f3f8', '#ffffbf',
+               '#fee090', '#fdae61', '#f46d43', '#d73027', '#a50026']
+line3d = Line3D("3D 折线图示例", width=1200, height=600)
+line3d.add("", _data, is_visualmap=True, visual_range_color=range_color, visual_range=[0, 30],
+           is_grid3D_rotate=True, grid3D_rotate_speed=180)
+line3d.render()
+```
+![line3D-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/line3D-1.gif)
+
+**Tip：** more details aboutt gird3D，please refer to [Global-options](https://github.com/chenjiandongx/pyecharts/blob/master/document/doc_en_US.md#Global-options)
 
 ## Liquid
 > Liquid chart is usually used to represent data in percentage.
@@ -1584,7 +1774,32 @@ scatter.render()
 
 
 # Scatter3D
+Scatter3D.add() signatures
+```python
+add(name, data, grid3D_opacity=1, **kwargs)
+```
+* name -> str
+    Series name used for displaying in tooltip and filtering with legend,or updaing data and configuration with setOption.
+* data -> [[], []]  
+    data of line3D
+* grid3D_opacity -> float  
+    default -> 1  
+    opacity of gird3D item
 
+```python
+from pyecharts import Scatter3D
+
+import random
+data = [[random.randint(0, 100), random.randint(0, 100), random.randint(0, 100)] for _ in range(80)]
+range_color = ['#313695', '#4575b4', '#74add1', '#abd9e9', '#e0f3f8', '#ffffbf',
+               '#fee090', '#fdae61', '#f46d43', '#d73027', '#a50026']
+scatter3D = Scatter3D("3D 散点图示例", width=1200, height=600)
+scatter3D.add("", data, is_visualmap=True, visual_range_color=range_color)
+scatter3D.render()
+```
+![scatter3D-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/scatter3D-0.gif)
+
+**Tip：** more details aboutt gird3D，please refer to [Global-options](https://github.com/chenjiandongx/pyecharts/blob/master/document/doc_en_US.md#Global-options)
 
 ## WordCloud
 WordCloud.add() signatures
