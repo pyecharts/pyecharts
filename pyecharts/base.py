@@ -214,9 +214,13 @@ class Base(object):
             xaxis_name_pos=None,
             xaxis_name=None,
             xaxis_rotate=None,
+            xaxis_min=None,
+            xaxis_max=None,
             xy_text_size=None,
             yaxis_formatter=None,
             yaxis_rotate=None,
+            yaxis_min=None,
+            yaxis_max=None,
             yaxis_name_pos=None,
             yaxis_name=None):
         """ The base class's add() is just to provide a hint option """
@@ -381,7 +385,6 @@ class Base(object):
             _dtvalue = pddata.values.astype(float).tolist()
         except:
             _dtvalue = pddata.values.astype(str).tolist()
-            return _dtvalue
         try:
             _pdattr = pddata.index.astype(float).tolist()
         except:
@@ -440,7 +443,7 @@ class Base(object):
             if s.get('type') == "liquidFill":
                 temple = "lq.html"
                 break
-        my_option = json.dumps(self._option, indent=4, ensure_ascii=False)
+        my_option = json.dumps(self._option, indent=4)
         tmp = self._jinja2_env.get_template(temple)
         html = tmp.render(myOption=my_option,
                           chart_id=uuid.uuid4().hex,
@@ -493,9 +496,8 @@ class Base(object):
 
         :return:
         """
-        warnings.warn(
-            "This function is deprecated since 0.1.9.1" +
-            " Simply passing the chart instance is enough")
+        warnings.warn("\n" + "This function is deprecated since 0.1.9.1" +
+                      " Simply passing the chart instance is enough")
         from IPython.display import HTML
         return HTML(self._repr_html_())
 
