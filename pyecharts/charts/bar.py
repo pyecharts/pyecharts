@@ -4,6 +4,7 @@
 from pyecharts.base import Base
 from pyecharts.option import get_all_options
 
+
 class Bar(Base):
     """
     <<< Bar chart >>>
@@ -33,24 +34,21 @@ class Bar(Base):
             It specifies whether to stack category axis.
         :param kwargs:
         """
-        if isinstance(x_axis, list) and isinstance(y_axis, list):
-            assert len(x_axis) == len(y_axis)
-            kwargs.update(x_axis=x_axis)
-            chart = get_all_options(**kwargs)
-            is_stack = "stack" if is_stack else ""
-            xaxis, yaxis = chart['xy_axis']
-            self._option.update(xAxis=xaxis, yAxis=yaxis)
-            self._option.get('legend')[0].get('data').append(name)
-            self._option.get('series').append({
-                "type": "bar",
-                "name": name,
-                "data": y_axis,
-                "stack": is_stack,
-                "label": chart['label'],
-                "markPoint": chart['mark_point'],
-                "markLine": chart['mark_line'],
-                "indexflag": self._option.get('_index_flag')
-            })
-            self._legend_visualmap_colorlst(**kwargs)
-        else:
-            raise TypeError("x_axis and y_axis must be list")
+        assert len(x_axis) == len(y_axis)
+        kwargs.update(x_axis=x_axis)
+        chart = get_all_options(**kwargs)
+        is_stack = "stack" if is_stack else ""
+        xaxis, yaxis = chart['xy_axis']
+        self._option.update(xAxis=xaxis, yAxis=yaxis)
+        self._option.get('legend')[0].get('data').append(name)
+        self._option.get('series').append({
+            "type": "bar",
+            "name": name,
+            "data": y_axis,
+            "stack": is_stack,
+            "label": chart['label'],
+            "markPoint": chart['mark_point'],
+            "markLine": chart['mark_line'],
+            "indexflag": self._option.get('_index_flag')
+        })
+        self._legend_visualmap_colorlst(**kwargs)
