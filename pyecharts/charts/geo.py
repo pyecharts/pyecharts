@@ -47,56 +47,54 @@ class Geo(Base):
             The color of the map area in emphasis state
         :param kwargs:
         """
-        if isinstance(attr, list) and isinstance(value, list):
-            assert len(attr) == len(value)
-            chart = get_all_options(**kwargs)
-            _data = []
-            for data in zip(attr, value):
-                _name, _value = data
-                if _name in self._geo_cities:
-                    _v = self._geo_cities.get(_name)
-                    _v.append(_value)
-                    _value = list(_v)
-                _data.append({"name": _name, "value": _value})
-            self._option.update(
-                geo={
-                    "map": maptype,
-                    "label": {},
-                    "itemStyle": {"normal": {
-                        "areaColor": geo_normal_color,
-                        "borderColor": border_color},
-                        "emphasis":{"areaColor": geo_emphasis_color}}
-                })
-            self._option.get('legend')[0].get('data').append(name)
-            if type == "scatter":
-                self._option.get('series').append({
-                    "type": type,
-                    "name": name,
-                    "coordinateSystem": 'geo',
-                    "symbol": chart['symbol'],
-                    "symbolSize": symbol_size,
-                    "data": _data,
-                    "label": chart['label'],
-                })
-            elif type == "effectScatter":
-                self._option.get('series').append({
-                    "type": type,
-                    "name": name,
-                    "coordinateSystem": 'geo',
-                    "showEffectOn": "render",
-                    "rippleEffect": chart['effect'],
-                    "symbol": chart['symbol'],
-                    "symbolSize": symbol_size,
-                    "data": _data,
-                    "label": chart['label'],
-                })
-            elif type == "heatmap":
-                self._option.get('series').append({
-                    "type": type,
-                    "name": name,
-                    "coordinateSystem": 'geo',
-                    "data": _data,
-                })
-            self._legend_visualmap_colorlst(**kwargs)
-        else:
-            raise TypeError("attr and value must be list")
+        assert len(attr) == len(value)
+        chart = get_all_options(**kwargs)
+        _data = []
+        for data in zip(attr, value):
+            _name, _value = data
+            if _name in self._geo_cities:
+                _v = self._geo_cities.get(_name)
+                _v.append(_value)
+                _value = list(_v)
+            _data.append({"name": _name, "value": _value})
+        self._option.update(
+            geo={
+                "map": maptype,
+                "label": {},
+                "itemStyle": {"normal": {
+                    "areaColor": geo_normal_color,
+                    "borderColor": border_color},
+                    "emphasis":{"areaColor": geo_emphasis_color}}
+            })
+        self._option.get('legend')[0].get('data').append(name)
+        if type == "scatter":
+            self._option.get('series').append({
+                "type": type,
+                "name": name,
+                "coordinateSystem": 'geo',
+                "symbol": chart['symbol'],
+                "symbolSize": symbol_size,
+                "data": _data,
+                "label": chart['label'],
+            })
+        elif type == "effectScatter":
+            self._option.get('series').append({
+                "type": type,
+                "name": name,
+                "coordinateSystem": 'geo',
+                "showEffectOn": "render",
+                "rippleEffect": chart['effect'],
+                "symbol": chart['symbol'],
+                "symbolSize": symbol_size,
+                "data": _data,
+                "label": chart['label'],
+            })
+        elif type == "heatmap":
+            self._option.get('series').append({
+                "type": type,
+                "name": name,
+                "coordinateSystem": 'geo',
+                "data": _data,
+            })
+        self._legend_visualmap_colorlst(**kwargs)
+
