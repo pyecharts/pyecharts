@@ -37,4 +37,4 @@
 
 ## 项目期待
 
-    * 更好地集成到 Django + Flask 中。
+* 更好地集成到 Django + Flask 中。
