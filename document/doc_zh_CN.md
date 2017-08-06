@@ -1,16 +1,5 @@
-# 关于作者想说的
-作为 pyecharts 的作者，很高兴看到 pyecharts 最近这么受欢迎，一度冲上了 Python daily trending 和 weekly trending 前三名。大家对这个项目的反馈也都不错，在这里我真诚的感谢大家对这个项目的支持。  
-随着使用项目的人越来越多，已经收到了不少希望推出一份英文文档的请求，但是大家提新需求的速度已经远远快于我的开发速度......我还要测试以及解决提出的 issue，实在是没什么时间（加上我英语水平不高这点我是不会告诉你的）。
-### 所以，划重点！！！
-在这里，我诚恳地向各位对这个项目感兴趣，想参与到项目中来的开发者发出邀请，希望你们可以参与到英文文档的编写中来，成为这个项目的贡献者，一起推动这个项目的发展。英文文档在这里 [doc_en_US.md](https://github.com/chenjiandongx/pyecharts/blob/master/document/doc_en_US.md) ，我已经写了一些，但是还差挺多的。别犹豫了，来吧！
-### 接着，划重点！！！
-想参与到英文文档开发中来的开发者，请联系我邮箱，chenjiandongx@qq.com，或者加入下面这个微信群，我们可以来具体讨论。不然直接 fork 一份，编写后提交 PR 也行，我看到了会及时 merge 的。
-
-![wechat](https://github.com/chenjiandongx/pyecharts/blob/master/images/wechat.png)
-### 最后，划重点！！！
-接下来我就暂时不更新版本了，因为作者要出去玩耍几天了，不然感觉这样下去的话我这个暑假就没了！
-
 # pyecharts 文档
+
 pyecharts 是一个用于生成 Echarts 图表的类库。实际上就是 Echarts 与 Python 的对接。  
 
 [![Build Status](https://travis-ci.org/chenjiandongx/pyecharts.svg?branch=master)](https://travis-ci.org/chenjiandongx/pyecharts)  
