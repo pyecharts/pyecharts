@@ -6,3 +6,5 @@ jupyter-client;python_version>"2"
 nbformat;python_version>"2"
 nbconvert;python_version>"2"
 .
+pandas
+numpy
