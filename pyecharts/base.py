@@ -3,6 +3,7 @@
 
 import sys
 import json
+import uuid
 import random
 import datetime
 import warnings
@@ -357,39 +358,6 @@ class Base(object):
                 v_lst.append(v)
         return k_lst, v_lst
 
-    @staticmethod
-    def npcast(npdata):
-        """ Convert the Numpy data into list type
-        :param npdata:
-            Numpy data -> ndarray
-        :return:
-        """
-        try:
-            _npvalue = npdata.astype(float).tolist()
-        except:
-            _npvalue = npdata.astype(str).tolist()
-        return _npvalue
-
-    @staticmethod
-    def pdcast(pddata):
-        """ Convert the Pandas data into list type
-            Series.index -> attr(str/int)
-            Series.value -> value(str/int)
-            DataFrame -> [[], []], can be used on Radar chart or Parallel chart.
-        :param pddata:
-            Pandas data -> Series or DataFrame
-        :return:
-        """
-        try:
-            _dtvalue = pddata.values.astype(float).tolist()
-        except:
-            _dtvalue = pddata.values.astype(str).tolist()
-        try:
-            _pdattr = pddata.index.astype(float).tolist()
-        except:
-            _pdattr = pddata.index.astype(str).tolist()
-        return _dtvalue, _pdattr
-
     def _legend_visualmap_colorlst(self, is_visualmap=False, **kwargs):
         """ config legend，visualmap and colorlst component.
 
@@ -412,6 +380,21 @@ class Base(object):
         if kwargs.get('is_datazoom_show', None) is True:
             self._option.update(dataZoom=chart['datazoom'])
 
+    def render_embed(self):
+        """
+        Render the chart component and its options
+
+        You can include it into your web pages. And you will
+        provide all dependent echarts javascript libraries.
+        """
+        embed = 'chart_component.html'
+        template = self._jinja2_env.get_template(embed)
+        my_option = json_dumps(self._option, indent=4)
+        html = template.render(myOption=my_option,
+                               chart_id=uuid.uuid4().hex,
+                               myWidth=self._width, myHeight=self._height)
+        return html
+
     def render(self, path="render.html"):
         """ Render the options string, generate the html file
 
@@ -427,9 +410,11 @@ class Base(object):
             if s.get('type') == "liquidFill":
                 temple = "lq.html"
                 break
-        my_option = json.dumps(self._option, indent=4)
+        my_option = json_dumps(self._option, indent=4)
         tmp = self._jinja2_env.get_template(temple)
-        html = tmp.render(myOption=my_option, myWidth=self._width, myHeight=self._height)
+        html = tmp.render(myOption=my_option,
+                          chart_id=uuid.uuid4().hex,
+                          myWidth=self._width, myHeight=self._height)
         html = template.freeze_js(html)
         if PY2:
             html = html.encode('utf-8')
@@ -445,7 +430,7 @@ class Base(object):
         :return:
         """
         divid = datetime.datetime.now()
-        my_option = json.dumps(self._option, indent=4)
+        my_option = json_dumps(self._option, indent=4)
         temple = 'notebook.html'
         series = self._option.get("series")
         map_keywords = {}
@@ -1135,3 +1120,18 @@ class Base(object):
             '荆州': [112.239741, 30.335165],
             '廊坊': [116.7, 39.53],
         }
+
+
+class PandasNumpyTypeEncoder(json.JSONEncoder):
+    def default(self, obj):
+        try:
+            return obj.astype(float).tolist()
+        except:
+            try:
+                return obj.astype(str).tolist()
+            except:
+                return json.JSONEncoder.default(self, obj)
+
+
+def json_dumps(data, indent=0):
+    return json.dumps(data, indent=indent, cls=PandasNumpyTypeEncoder)

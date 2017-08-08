@@ -40,22 +40,19 @@ class Map(Base):
             江苏、江西、吉林、辽宁、内蒙古、宁夏、青海、山东、上海、陕西、四川、台湾、天津、香港、新疆、西藏、云南、浙江
         :param kwargs:
         """
-        if isinstance(attr, list) and isinstance(value, list):
-            chart = get_all_options(**kwargs)
-            assert len(attr) == len(value)
-            _data = []
-            for data in zip(attr, value):
-                _name, _value = data
-                _data.append({"name": _name, "value": _value})
-            self._option.get('legend')[0].get('data').append(name)
-            self._option.get('series').append({
-                "type": "map",
-                "name": name,
-                "symbol": chart['symbol'],
-                "mapType": maptype,
-                "data": _data,
-                "roam": is_roam
-            })
-            self._legend_visualmap_colorlst(**kwargs)
-        else:
-            raise TypeError("attr and value must be list")
+        chart = get_all_options(**kwargs)
+        assert len(attr) == len(value)
+        _data = []
+        for data in zip(attr, value):
+            _name, _value = data
+            _data.append({"name": _name, "value": _value})
+        self._option.get('legend')[0].get('data').append(name)
+        self._option.get('series').append({
+            "type": "map",
+            "name": name,
+            "symbol": chart['symbol'],
+            "mapType": maptype,
+            "data": _data,
+            "roam": is_roam
+        })
+        self._legend_visualmap_colorlst(**kwargs)
