@@ -95,7 +95,7 @@ class Base(object):
                 "top": "center",
                 "feature": {"saveAsImage": {"show": True}}
             },
-            _index_flag=random.randint(1000000, 2000000),
+            _index_flag=random.randint(1, 2000000),
             tooltip={},
             series=[],
             legend=[{"data": []}],
@@ -396,7 +396,7 @@ class Base(object):
         return html
 
     def render(self, path="render.html"):
-        """ Render the options string, generate the html file
+        """ Render the options dict, generate the html file
 
         :param path:
             path of render html file
@@ -425,7 +425,7 @@ class Base(object):
                 fout.write(html)
 
     def _repr_html_(self):
-        """ Render the options string, displayed in the jupyter notebook
+        """ Render the options dict, displayed in the jupyter notebook
 
         :return:
         """
@@ -459,7 +459,7 @@ class Base(object):
         return html
 
     def render_notebook(self):
-        """ Render the options string, displayed in the jupyter notebook
+        """ Render the options dict, displayed in the jupyter notebook
 
         :return:
         """

@@ -16,7 +16,7 @@
         wordCloud: '//data-visual.cn/datav/src/js/echarts/extension/echarts-wordcloud.min'
         }
     });
-    require(['echarts','wordCloud'],function(ec){
+    require(['echarts', 'wordCloud'],function(ec){
     var myChart = ec.init(document.getElementById('{{ chartId }}'));
             var option =  {{ myOption }};
             myChart.setOption(option);
