@@ -26,7 +26,6 @@ $ python setup.py install
 ```python
 from pyecharts import Bar
 
-attr = ["{}month".format(i) for i in range(1, 13)]
 attr = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 v1 = [2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3]
 v2 = [2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3]
@@ -49,17 +48,15 @@ from pyecharts import Bar
 
 index = pd.date_range('3/8/2017', periods=6, freq='M')
 df1 = pd.DataFrame(np.random.randn(6), index=index)
-dtvalue1, pdattr1 = Bar.pdcast(df1)
 
 df2 = pd.DataFrame(np.random.randn(6), index=index)
-dtvalue2, pdattr2 = Bar.pdcast(df2)
 
 dtvalue1 = [i[0] for i in dtvalue1]
 dtvalue2 = [i[0] for i in dtvalue2]
 
 bar = Bar('Bar chart', 'Profit and loss situation')
-bar.add('profit', pdattr1,  dtvalue1)
-bar.add('loss', pdattr2,  dtvalue2)
+bar.add('profit', df1.index, dtvalue1)
+bar.add('loss', df2.index,  dtvalue2)
 bar.render()
 ```
 ![usage-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/usage-1.png)

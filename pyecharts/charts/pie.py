@@ -45,44 +45,41 @@ class Pie(Base):
             'area' All the sectors will share the same central angle, the data size is shown only through radiuses.
         :param kwargs:
         """
-        if isinstance(attr, list) and isinstance(value, list):
-            kwargs.update(type="pie")
-            chart = get_all_options(**kwargs)
-            assert len(attr) == len(value)
-            _data = []
-            for data in zip(attr, value):
-                _name, _value = data
-                _data.append({"name": _name, "value": _value})
+        kwargs.update(type="pie")
+        chart = get_all_options(**kwargs)
+        assert len(attr) == len(value)
+        _data = []
+        for data in zip(attr, value):
+            _name, _value = data
+            _data.append({"name": _name, "value": _value})
 
-            _rmin, _rmax = "0%", "75%"
-            if radius:
-                if len(radius) == 2:
-                    _rmin, _rmax = ["{}%".format(r) for r in radius]
+        _rmin, _rmax = "0%", "75%"
+        if radius:
+            if len(radius) == 2:
+                _rmin, _rmax = ["{}%".format(r) for r in radius]
 
-            _cmin, _cmax = "50%", "50%"
-            if center:
-                if len(center) == 2:
-                    _cmin, _cmax = ["{}%".format(c) for c in center]
+        _cmin, _cmax = "50%", "50%"
+        if center:
+            if len(center) == 2:
+                _cmin, _cmax = ["{}%".format(c) for c in center]
 
-            if rosetype:
-                if rosetype not in ("radius", "area"):
-                    rosetype = "radius"
-            for a in attr:
-                self._option.get('legend')[0].get('data').append(a)
-            _dlst = self._option.get('legend')[0].get('data')
-            _dset = list(set(_dlst))
-            _dset.sort(key=_dlst.index)
-            self._option.get('legend')[0].update(data=list(_dset))
-            self._option.get('series').append({
-                "type": "pie",
-                "name": name,
-                "data": _data,
-                "radius": [_rmin, _rmax],
-                "center": [_cmin, _cmax],
-                "roseType": rosetype,
-                "label": chart['label'],
-                "indexflag": self._option.get('_index_flag')
-            })
-            self._legend_visualmap_colorlst(**kwargs)
-        else:
-            raise TypeError("attr and value must be list")
+        if rosetype:
+            if rosetype not in ("radius", "area"):
+                rosetype = "radius"
+        for a in attr:
+            self._option.get('legend')[0].get('data').append(a)
+        _dlst = self._option.get('legend')[0].get('data')
+        _dset = list(set(_dlst))
+        _dset.sort(key=_dlst.index)
+        self._option.get('legend')[0].update(data=list(_dset))
+        self._option.get('series').append({
+            "type": "pie",
+            "name": name,
+            "data": _data,
+            "radius": [_rmin, _rmax],
+            "center": [_cmin, _cmax],
+            "roseType": rosetype,
+            "label": chart['label'],
+            "indexflag": self._option.get('_index_flag')
+        })
+        self._legend_visualmap_colorlst(**kwargs)
