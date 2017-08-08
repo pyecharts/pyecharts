@@ -92,7 +92,7 @@ cast(seq)
 3. 字典  
     {A1: B1, A2: B2, A3: B3, A4: B4} -- > k_lst[ A[i1, i2...] ], v_lst[ B[i1, i2...] ]
 
-如果使用的是 Numpy 或者 Pandas，0.19.2以前提供的 ```pdcast(pddata)``` 和 ``` npcast(npdata)``` 两个方法在0.19.3之后不需再用了，用于这两个库数据类型的处理。
+如果使用的是 Numpy 或者 Pandas，0.19.2以前提供的 ```pdcast(pddata)``` 和 ``` npcast(npdata)``` 两个方法在0.1.9.3之后不需再用了，用于这两个库数据类型的处理。
 DataFrame 多个维度时返回一个嵌套列表。比较适合像 Radar, Parallel, HeatMap 这些需要传入嵌套列表（[[ ], [ ]]）数据的图表。
 
 Series 类型
