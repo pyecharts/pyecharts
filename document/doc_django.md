@@ -47,7 +47,7 @@ INSTALLED_APPS = [
 ```
 
 And then let's create the urls.py which provides the url route to the request handler.
-And we will create the request handler views.py in next step
+And we will create the request handler views.py in step 3.
 
 ```python
 myfirstvis/urls.py
@@ -143,6 +143,9 @@ is the template file.
 </html>
 ```
 
+
+## Step 3: Now let's write up the view function
+
 Then copy the following code and save as `myfirstvis/views.py` 
 
 
@@ -179,6 +182,8 @@ def line3d():
                is_grid3D_rotate=True, grid3D_rotate_speed=180)
 	return line3d.render_embed()
 ```
+
+## Step 4: Run it
 
 Then let's bring up the django site:
 
