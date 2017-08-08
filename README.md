@@ -51,8 +51,8 @@ df1 = pd.DataFrame(np.random.randn(6), index=index)
 
 df2 = pd.DataFrame(np.random.randn(6), index=index)
 
-dtvalue1 = [i[0] for i in dtvalue1]
-dtvalue2 = [i[0] for i in dtvalue2]
+dtvalue1 = [i[0] for i in df1.values]
+dtvalue2 = [i[0] for i in df2.values]
 
 bar = Bar('Bar chart', 'Profit and loss situation')
 bar.add('profit', df1.index, dtvalue1)
