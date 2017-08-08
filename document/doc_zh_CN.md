@@ -92,7 +92,7 @@ cast(seq)
 3. 字典  
     {A1: B1, A2: B2, A3: B3, A4: B4} -- > k_lst[ A[i1, i2...] ], v_lst[ B[i1, i2...] ]
 
-如果使用的是 Numpy 或者 Pandas，0.19.2以前提供的 ```pdcast(pddata)``` 和 ``` npcast(npdata)``` 两个方法在0.1.9.3之后不需再用了，用于这两个库数据类型的处理。
+如果使用的是 Numpy 或者 Pandas，0.1.9.2 以前提供的 ```pdcast(pddata)``` 和 ``` npcast(npdata)``` 两个方法在 0.1.9.3 之后不需再用了，用于这两个库数据类型的处理。
 DataFrame 多个维度时返回一个嵌套列表。比较适合像 Radar, Parallel, HeatMap 这些需要传入嵌套列表（[[ ], [ ]]）数据的图表。
 
 Series 类型
@@ -1160,8 +1160,7 @@ add(name, attr, value, is_roam=True, maptype='china', **kwargs)
    是否开启鼠标缩放和平移漫游。默认为 True  
    如果只想要开启缩放或者平移，可以设置成'scale'或者'move'。设置成 True 为都开启
 * maptype -> str  
-   地图类型。
-   支持 china、world、安徽、澳门、北京、重庆、福建、福建、甘肃、广东，广西、广州、海南、河北、黑龙江、河南、湖北、湖南、江苏、江西、吉林、辽宁、内蒙古、宁夏、青海、山东、上海、陕西、四川、台湾、天津、香港、新疆、西藏、云南、浙江
+   地图类型。默认只提供了 'china' 和 'world'，即中国地图和世界地图。不用担心，这里说明了 [用户如何自定义地图](https://github.com/chenjiandongx/pyecharts/blob/master/document/user-customize-map.md)
 
 ```python
 from pyecharts import Map
@@ -1200,15 +1199,6 @@ map.show_config()
 map.render()
 ```
 ![map-2](https://github.com/chenjiandongx/pyecharts/blob/master/images/map-2.gif)
-
-### 关于自定义地图
-因为地图涉及范围太广，项目不可能涵盖所有的地图，不过不用担心。Echarts 官方提供了自己定制地图的功能 [echart-map](http://echarts.baidu.com/download-map.html)，根据自己所需制定相应的地图，下载成 JS 文件格式。
-
-打开安装目录下的 pyecharts/temple.py 文件，在 _temple 变量下对应的增加类似一行  
- ```<script type="text/javascript " src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>```  
-而对应的 Jupyter Notebook 下的就在 _mapindex 变量下新增类似一行  
-```"北京": "beijing: '//oog4yfyu0.bkt.clouddn.com/beijing'"```   
-然后就可以在项目中使用自定义的地图了！Js 的引入方式由自己决定，能被项目所找到就行！
 
 
 ## Parallel（平行坐标系）
