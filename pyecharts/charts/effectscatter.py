@@ -31,24 +31,21 @@ class EffectScatter(Scatter):
             symbol size
         :param kwargs:
         """
-        if isinstance(x_value, list) and isinstance(y_value, list):
-            assert len(x_value) == len(y_value)
-            kwargs.update(type="scatter")
-            chart = get_all_options(**kwargs)
-            xaxis, yaxis = chart['xy_axis']
-            self._option.update(xAxis=xaxis, yAxis=yaxis)
-            self._option.get('legend')[0].get('data').append(name)
-            self._option.get('series').append({
-                "type": "effectScatter",
-                "name": name,
-                "showEffectOn":"render",
-                "rippleEffect": chart['effect'],
-                "symbol": chart['symbol'],
-                "symbolSize": symbol_size,
-                "data": [list(z) for z in zip(x_value, y_value)],
-                "label": chart['label'],
-                "indexflag": self._option.get('_index_flag')
-            })
-            self._legend_visualmap_colorlst(**kwargs)
-        else:
-            raise TypeError("x_axis and y_axis must be list")
+        assert len(x_value) == len(y_value)
+        kwargs.update(type="scatter")
+        chart = get_all_options(**kwargs)
+        xaxis, yaxis = chart['xy_axis']
+        self._option.update(xAxis=xaxis, yAxis=yaxis)
+        self._option.get('legend')[0].get('data').append(name)
+        self._option.get('series').append({
+            "type": "effectScatter",
+            "name": name,
+            "showEffectOn":"render",
+            "rippleEffect": chart['effect'],
+            "symbol": chart['symbol'],
+            "symbolSize": symbol_size,
+            "data": [list(z) for z in zip(x_value, y_value)],
+            "label": chart['label'],
+            "indexflag": self._option.get('_index_flag')
+        })
+        self._legend_visualmap_colorlst(**kwargs)

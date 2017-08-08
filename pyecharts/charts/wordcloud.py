@@ -41,37 +41,34 @@ class WordCloud(Base):
         :param rotate_step:
             Text rotation range and step in degree. Text will be rotated randomly in range [-90, 90] by rotationStep 45
         """
-        if isinstance(attr, list) and isinstance(value, list):
-            assert len(attr) == len(value)
-            _data = []
-            for data in zip(attr, value):
-                _name, _value = data
-                _data.append({
-                    "name": _name,
-                    "value": _value,
-                    "textStyle": {
-                        "normal": {"color": gen_color()}}
-                })
-            _min, _max = 12, 60
-            if word_size_range is not None:
-                if len(word_size_range) == 2:
-                    _min, _max = word_size_range
-
-            _rmin, _rmax = -90, 90
-            # make sure shape valid, need to set ratated range [-90, 90]
-            if shape in ("cardioid", "diamond", "triangle-forward", "triangle", "pentagon", "star"):
-                _rmin = _rmax = 0
-            else:
-                shape = "circle"
-            self._option.get('series').append({
-                "type": "wordCloud",
-                "name": name,
-                "shape": shape,
-                "rotationRange": [_rmin, _rmax],
-                "rotationStep": rotate_step,
-                "girdSize": word_gap,
-                "sizeRange": [_min, _max],
-                "data": _data
+        assert len(attr) == len(value)
+        _data = []
+        for data in zip(attr, value):
+            _name, _value = data
+            _data.append({
+                "name": _name,
+                "value": _value,
+                "textStyle": {
+                    "normal": {"color": gen_color()}}
             })
+        _min, _max = 12, 60
+        if word_size_range is not None:
+            if len(word_size_range) == 2:
+                _min, _max = word_size_range
+
+        _rmin, _rmax = -90, 90
+        # make sure shape valid, need to set ratated range [-90, 90]
+        if shape in ("cardioid", "diamond", "triangle-forward", "triangle", "pentagon", "star"):
+            _rmin = _rmax = 0
         else:
-            raise TypeError("attr and value must be list")
+            shape = "circle"
+        self._option.get('series').append({
+            "type": "wordCloud",
+            "name": name,
+            "shape": shape,
+            "rotationRange": [_rmin, _rmax],
+            "rotationStep": rotate_step,
+            "girdSize": word_gap,
+            "sizeRange": [_min, _max],
+            "data": _data
+        })
