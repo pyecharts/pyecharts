@@ -6,8 +6,6 @@ gone through the tutorial at least.
 
 ## Step 0: Let's create a virtual environment and install pyecharts
 
-**The example code won't work on django version 1.11.3 or lower**.
-
 ```shell
 $ virtualenv --no-site-packages pyecharts-env
 $ source pyecharts-env/bin/activate
