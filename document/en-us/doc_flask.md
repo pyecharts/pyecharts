@@ -5,7 +5,7 @@
 Please create new directory for the new project
 
 ```shell
-$ make flask-echarts
+$ mkdir flask-echarts
 $ cd flask-echarts
 $ mkdir templates
 ```
@@ -79,6 +79,11 @@ $ flask run
 * Serving Flask app "server"
 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
 ```
+
+Here's what you will get:
+
+![flask-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/flask-0.gif)
+
 
 ## Conclusion
 
