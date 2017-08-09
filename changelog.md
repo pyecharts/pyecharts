@@ -35,6 +35,11 @@
     * render() 方法现在为离线模式，实现本地生成 .html 文件，加载速度更快。
     * 废弃 render_notebook() 方法，现可直接调用图形实例显示在 jupyter notebook 上。
 
+* version 0.1.9.3
+    * 新增 xaxis_type, yaxis_type 参数，可通过设置该参数指定直角坐标系数轴类型。（参见 Line，Scattre 图）
+    * 集成 Flask + Django
+
+
 ## 项目期待
 
-* 更好地集成到 Django + Flask 中。
+// Todo
