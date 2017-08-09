@@ -207,12 +207,14 @@ class Base(object):
             xaxis_rotate=None,
             xaxis_min=None,
             xaxis_max=None,
+            xaxis_type=None,
             xy_text_size=None,
             yaxis_formatter=None,
             yaxis_rotate=None,
             yaxis_min=None,
             yaxis_max=None,
             yaxis_name_pos=None,
+            yaxis_type=None,
             yaxis_name=None):
         """ The base class's add() is just to provide a hint option """
         pass
