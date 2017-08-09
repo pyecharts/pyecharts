@@ -38,10 +38,18 @@ def test_line():
     line.show_config()
     line.render()
 
-    # # line_3
+    # line_3
     line = Line("折线图-面积图示例")
     line.add("商家A", attr, v1, is_fill=True, line_opacity=0.2, area_opacity=0.4, symbol=None)
     line.add("商家B", attr, v2, is_fill=True, area_color='#000', area_opacity=0.3, is_smooth=True)
+    line.show_config()
+    line.render()
+
+    # line_3_1
+    import math, random
+    line = Line("折线图示例")
+    line.add("商家A", attr, [math.log10(random.randint(1, 99999)) for _ in range(6)])
+    line.add("商家B", attr, [math.log10(random.randint(1, 99999999)) for _ in range(6)], yaxis_type="log")
     line.show_config()
     line.render()
 
