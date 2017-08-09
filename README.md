@@ -48,7 +48,6 @@ from pyecharts import Bar
 
 index = pd.date_range('3/8/2017', periods=6, freq='M')
 df1 = pd.DataFrame(np.random.randn(6), index=index)
-
 df2 = pd.DataFrame(np.random.randn(6), index=index)
 
 dtvalue1 = [i[0] for i in df1.values]
@@ -62,8 +61,8 @@ bar.render()
 ![usage-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/usage-1.png)
 
 ## Documentation
-* [中文档案](https://github.com/chenjiandongx/pyecharts/blob/master/document/doc_zh_CN.md)
-* [English](https://github.com/chenjiandongx/pyecharts/blob/master/document/doc_en_US.md)
+* [中文档案](https://github.com/chenjiandongx/pyecharts/blob/master/document/zh-cn/documentation.md)
+* [English](https://github.com/chenjiandongx/pyecharts/blob/master/document/en-us/documentation.md)
 
 ## Author
 pyecharts is developed and maintained by chenjiandongx ([chenjiandongx@qq.com](chenjiandongx@qq.com))
