@@ -74,7 +74,7 @@ urlpatterns = [
 
 ## Step 2: 为项目提供自己的模板
 
-前面的步骤是按照 [tutorial part 1]([tutorials](https://docs.djangoproject.com/en/1.11/intro/tutorial01/)，接下来我们跳到 [tutorial part 3](https://docs.djangoproject.com/en/1.11/intro/tutorial03/)
+前面的步骤是按照 [tutorial part 1](https://docs.djangoproject.com/en/1.11/intro/tutorial01/)，接下来我们跳到 [tutorial part 3](https://docs.djangoproject.com/en/1.11/intro/tutorial03/)
 
 
 Linux/macos 系统
@@ -82,7 +82,7 @@ Linux/macos 系统
 $ mkdir templates/myfirstvis -p
 ```
 
-Windows 系统
+Windows 系统  
 在 myfirstvis 目录下，新建 templates/myfirstvis 子目录
 
 myfirstvis 目录
@@ -181,7 +181,8 @@ Starting development server at http://127.0.0.1:8000/
 Quit the server with CONTROL-C.
 ```
 
-访问 http://localhost:8000/myfirstvis/，你就可以看到酷炫的 3D 图了
+访问 [http://localhost:8000/myfirstvis/](http://localhost:8000/myfirstvis/)，你就可以看到酷炫的 3D 图了
+
 ![django-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/django-0.gif)
 
 
