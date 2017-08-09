@@ -169,7 +169,9 @@ Starting development server at http://127.0.0.1:8000/
 Quit the server with CONTROL-C.
 ```
 
-Please visit http://localhost:8000/myfirstvis/ for your first visualization via pyecharts.
+Please visit http://localhost:8000/myfirstvis/ for your first visualization via pyecharts. Here is your first 3D visualization:
+
+![django-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/django-0.gif)
 
 
 ## Conclusion
