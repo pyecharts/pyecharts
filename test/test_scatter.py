@@ -29,6 +29,13 @@ def test_scatter():
     scatter.show_config()
     scatter.render()
 
+    # scatter_0_3
+    scatter = Scatter("散点图示例")
+    scatter.add("A", ["a", "b", "c", "d", "e", "f"], v2)
+    scatter.add("B", ["a", "b", "c", "d", "e", "f"], v1[::-1], xaxis_type="category")
+    scatter.show_config()
+    scatter.render()
+
     # scatter_1
     scatter = Scatter("散点图示例")
     v1, v2 = scatter.draw("../images/pyecharts-0.png")

@@ -49,6 +49,6 @@ def test_pandas_dataframe():
 
     bar = Bar(title, 'Profit and loss situation')
     bar.add('profit', df1.index, dtvalue1)
-    bar.add('loss', df2.index,  dtvalue2)
+    bar.add('loss', df2.index, dtvalue2)
     html = bar.render_embed()
     assert title in html

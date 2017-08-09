@@ -8,7 +8,7 @@ pyecharts is a library to generate charts using Echarts. It simply provides the 
 [Echarts](https://github.com/ecomfe/echarts) is an open source library from Baidu for data visualization in javascript. It has awesome demo pages so I started to look out for an interface library so that I could use it in Python. I ended up with [echarts-python](https://github.com/yufeiminds/echarts-python) on github but it lacks of documentation and was not updated for a while. Just like many other Python projects, I started my own project, pyecharts, referencing echarts-python and another library [pygal](https://github.com/Kozea/pygal).
 
 ## Instatllation
-pyecharts works on Python2 and Python3. The latest release is 0.1.9.2. For more information please refer to [changelog.md](https://github.com/chenjiandongx/pyecharts/blob/master/changelog.md)  
+pyecharts works on Python2 and Python3. The latest release is 0.1.9.3. For more information please refer to [changelog.md](https://github.com/chenjiandongx/pyecharts/blob/master/changelog.md)  
 
 You can install it via pip
 ```
@@ -39,6 +39,7 @@ It will creat a file named render.html in the root directory, open file with you
 
 ![usage-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/usage-0.gif)
 
+
 ## Working with pandas & numpy
 ```python
 import pandas as pd
@@ -60,8 +61,26 @@ bar.render()
 ```
 ![usage-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/usage-1.png)
 
+
+## working with Flask & Django
+Flask
+
+![flask-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/flask-0.gif)
+
+Django
+
+![django-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/django-0.gif)
+
+* 中文文档
+    * [pyecharts + Flask](https://github.com/chenjiandongx/pyecharts/blob/master/document/zh-cn/doc_flask.md)
+    * [pyecharts + Django](https://github.com/chenjiandongx/pyecharts/blob/master/document/zh-cn/doc_django.md)
+* English
+    * [pyecharts + Flask](https://github.com/chenjiandongx/pyecharts/blob/master/document/en-us/doc_flask.md)
+    * [pyecharts + Django](https://github.com/chenjiandongx/pyecharts/blob/master/document/en-us/doc_django.md)
+
+
 ## Documentation
-* [中文档案](https://github.com/chenjiandongx/pyecharts/blob/master/document/zh-cn/documentation.md)
+* [中文文档](https://github.com/chenjiandongx/pyecharts/blob/master/document/zh-cn/documentation.md)
 * [English](https://github.com/chenjiandongx/pyecharts/blob/master/document/en-us/documentation.md)
 
 ## Author
