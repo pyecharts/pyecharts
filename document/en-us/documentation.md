@@ -4,8 +4,8 @@ pyecharts is a library to generate charts using Echarts. It simply provides the 
 
 [![Build Status](https://travis-ci.org/chenjiandongx/pyecharts.svg?branch=master)](https://travis-ci.org/chenjiandongx/pyecharts)  
 
-* [First-steps](https://github.com/chenjiandongx/pyecharts/blob/master/document/doc_en_US.md#First-steps)
-* [Global-options](https://github.com/chenjiandongx/pyecharts/blob/master/document/doc_en_US.md#Global-options)
+* [First-steps](https://github.com/chenjiandongx/pyecharts/blob/master/document/en-us/documentation.md#First-steps)
+* [Global-options](https://github.com/chenjiandongx/pyecharts/blob/master/document/en-us/documentation.md#Global-options)
     * xyAxis：x, y axis in cartesian coordinate system(Line、Bar、Scatter、EffectScatter、Kline)
     * dataZoom：dataZoom components for zoom-in and zoom-out. With them, it is possible to magnify a small area, to see the overall picture or to stay away from scattered points(Line、Bar、Scatter、EffectScatter、Kline)
     * legend：legend component has different symbol, colour and name, and provide the interactive clicking functions to show or hide its associated data series.
@@ -13,7 +13,7 @@ pyecharts is a library to generate charts using Echarts. It simply provides the 
     * lineStyle：line style for Line、Polar、Radar、Graph、Parallel.
     * grid3D：gird3D components in cartesian coordinate system(Bar3D, Line3D, Scatter3D)
     * visualMap：It is a type of component for visual encoding, which maps the data to visual channels
-* [Chart-types](https://github.com/chenjiandongx/pyecharts/blob/master/document/doc_en_US.md#Chart-types)
+* [Chart-types](https://github.com/chenjiandongx/pyecharts/blob/master/document/en-us/documentation.md#Chart-types)
     * Bar
     * Bar3D
     * EffectScatter
@@ -34,9 +34,9 @@ pyecharts is a library to generate charts using Echarts. It simply provides the 
     * Scatter
     * Scatter3D
     * WordCloud
-* [Customize](https://github.com/chenjiandongx/pyecharts/blob/master/document/doc_en_US.md#Customize)
-* [Example](https://github.com/chenjiandongx/pyecharts/blob/master/document/doc_en_US.md#Example)
-* [About](https://github.com/chenjiandongx/pyecharts/blob/master/document/doc_en_US.md#About)
+* [Customize](https://github.com/chenjiandongx/pyecharts/blob/master/document/en-us/documentation.md#Customize)
+* [Example](https://github.com/chenjiandongx/pyecharts/blob/master/document/en-us/documentation.md#Example)
+* [About](https://github.com/chenjiandongx/pyecharts/blob/master/document/en-us/documentation.md#About)
 
 
 # First-steps
@@ -198,7 +198,7 @@ The parameter a chart type initialize accept（the same to all the chart type）
     You may also use hexadecimal format, for example '#ccc'.
 * is_grid -> bool  
     defalut -> False  
-    It specifies whether to use the grid component. Detail [Customize](https://github.com/chenjiandongx/pyecharts/blob/master/document/doc_en_US.md#Customize)
+    It specifies whether to use the grid component. Detail [Customize](https://github.com/chenjiandongx/pyecharts/blob/master/document/en-us/documentation.md#Customize)
 
 # Global-options
 **Sitting general configuration in```add()```**
@@ -223,6 +223,12 @@ xyAxis：x, y axis in cartesian coordinate system(Line、Bar、Scatter、EffectS
     The minimun value of xaxis.
 * xaxis_max -> int/float  
     The maximun value of xaxis.
+* xaxis_type -> str  
+    Type of xaxis
+    * 'value': Numerical axis, suitable for continuous data.
+    * 'category': Category axis, suitable for discrete category data. Data should only be set via data for this type.
+    * 'time': Time axis, suitable for continuous time series data. As compared to value axis,it has a better formatting for time and a different tick calculation method. For example,it decides to use month, week, day or hour for tick based on the range of span.
+    * 'log': Log axis, suitable for log data.
 * y_axis -> list  
     yAxis data
 * yaxis_formatter -> str  
@@ -237,6 +243,12 @@ xyAxis：x, y axis in cartesian coordinate system(Line、Bar、Scatter、EffectS
     The minimun value of yaxis.
 * yaxis_max -> int/float  
     The maximun value of yaxis.
+* yaxis_type -> str  
+    Type of yaxis
+    * 'value': Numerical axis, suitable for continuous data.
+    * 'category': Category axis, suitable for discrete category data. Data should only be set via data for this type.
+    * 'time': Time axis, suitable for continuous time series data. As compared to value axis,it has a better formatting for time and a different tick calculation method. For example,it decides to use month, week, day or hour for tick based on the range of span.
+    * 'log': Log axis, suitable for log data.
 * interval -> int  
     The display interval of the axis scale label is valid in the category axis.By default, labels are displayed using labels that do not overlap the labels.  
     Set to 0 to force all labels to be displayed and label is one by one if setting as 1; If 2, it will be one label separates from each other, and so on.
@@ -557,7 +569,7 @@ bar3d.render()
 ```
 ![bar3D-3](https://github.com/chenjiandongx/pyecharts/blob/master/images/bar3D-3.gif)
 
-**Tip：** more details aboutt gird3D，please refer to [Global-options](https://github.com/chenjiandongx/pyecharts/blob/master/document/doc_en_US.md#Global-options)
+**Tip：** more details aboutt gird3D，please refer to [Global-options](https://github.com/chenjiandongx/pyecharts/blob/master/document/en-us/documentation.md#Global-options)
 
 
 ## EffectScatter
@@ -1167,7 +1179,7 @@ line3d.render()
 ```
 ![line3D-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/line3D-1.gif)
 
-**Tip：** more details aboutt gird3D，please refer to [Global-options](https://github.com/chenjiandongx/pyecharts/blob/master/document/doc_en_US.md#Global-options)
+**Tip：** more details aboutt gird3D，please refer to [Global-options](https://github.com/chenjiandongx/pyecharts/blob/master/document/en-us/documentation.md#Global-options)
 
 ## Liquid
 > Liquid chart is usually used to represent data in percentage.
@@ -1713,7 +1725,7 @@ radar.render()
 
 Scatter.add() signatures
 ```python
-add(name, x_value, y_value, symbol_size=10, **kwargs)
+add(name, x_axis, y_axis, symbol_size=10, **kwargs)
 ```
 * name -> str  
     Series name used for displaying in tooltip and filtering with legend,or updaing data and configuration with setOption.
@@ -1792,7 +1804,7 @@ scatter3D.render()
 ```
 ![scatter3D-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/scatter3D-0.gif)
 
-**Tip：** more details aboutt gird3D，please refer to [Global-options](https://github.com/chenjiandongx/pyecharts/blob/master/document/doc_en_US.md#Global-options)
+**Tip：** more details aboutt gird3D，please refer to [Global-options](https://github.com/chenjiandongx/pyecharts/blob/master/document/en-us/documentation.md#Global-options)
 
 ## WordCloud
 WordCloud.add() signatures

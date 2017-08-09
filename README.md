@@ -39,6 +39,7 @@ It will creat a file named render.html in the root directory, open file with you
 
 ![usage-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/usage-0.gif)
 
+
 ## Working with pandas & numpy
 ```python
 import pandas as pd
@@ -60,8 +61,24 @@ bar.render()
 ```
 ![usage-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/usage-1.png)
 
+
+## working with Flask & Django
+Flask
+![flask-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/flask-0.gif)
+
+Django
+![django-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/django-0.gif)
+
+* 中文文档
+    * [Flask](https://github.com/chenjiandongx/pyecharts/blob/master/document/zh-cn/doc_flask.md)
+    * [Django](https://github.com/chenjiandongx/pyecharts/blob/master/document/zh-cn/doc_django.md)
+* English
+    * [Flask](https://github.com/chenjiandongx/pyecharts/blob/master/document/en-us/doc_flask.md)
+    * [Django](https://github.com/chenjiandongx/pyecharts/blob/master/document/en-us/doc_django.md)
+
+
 ## Documentation
-* [中文档案](https://github.com/chenjiandongx/pyecharts/blob/master/document/zh-cn/documentation.md)
+* [中文文档](https://github.com/chenjiandongx/pyecharts/blob/master/document/zh-cn/documentation.md)
 * [English](https://github.com/chenjiandongx/pyecharts/blob/master/document/en-us/documentation.md)
 
 ## Author

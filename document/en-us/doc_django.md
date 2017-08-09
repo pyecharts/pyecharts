@@ -9,7 +9,7 @@ gone through the tutorial at least.
 ```shell
 $ virtualenv --no-site-packages pyecharts-env
 $ source pyecharts-env/bin/activate
-$ pip install django=1.11.4
+$ pip install django==1.11.4
 $ pip install pyecharts
 ```
 
@@ -18,7 +18,7 @@ Although current dependencies of pyecharts include django, the tutorial is writt
 ## Step 1: create a mini django site and the actual visualization app
 
 ```shell
-$ djangoadmin startproject myechartsite
+$ django-admin startproject myechartsite
 ```
 
 And start an app
@@ -125,9 +125,9 @@ from django.template import loader
 
 def index(request):
     template = loader.get_template('myfirstvis/pyecharts.html')
-	context = {
+    context = {
 	    "myechart": line3d()
-	}
+    }
     return HttpResponse(template.render(context, request))
 
 
@@ -147,7 +147,7 @@ def line3d():
     line3d = Line3D("3D 折线图示例", width=1200, height=600)
     line3d.add("", _data, is_visualmap=True, visual_range_color=range_color, visual_range=[0, 30],
                is_grid3D_rotate=True, grid3D_rotate_speed=180)
-	return line3d.render_embed()
+    return line3d.render_embed()
 ```
 
 ## Step 4: Run it
