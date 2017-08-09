@@ -196,12 +196,14 @@ def xy_axis(type=None,
             xaxis_rotate=0,
             xaxis_min=None,
             xaxis_max=None,
+            xaxis_type=None,
             interval="auto",
             yaxis_name="",
             yaxis_name_pos="middle",
             yaxis_rotate=0,
             yaxis_min=None,
             yaxis_max=None,
+            yaxis_type=None,
             is_convert=False,
             x_axis=None,
             yaxis_formatter="",
@@ -225,6 +227,14 @@ def xy_axis(type=None,
         The minimun value of xaxis.
     :param xaxis_max:
         The maximun value of xaxis.
+    :param xaxis_type:
+        Type of xaxis
+        'value' Numerical axis, suitable for continuous data.
+        'category' Category axis, suitable for discrete category data. Data should only be set via data for this type.
+        'time' Time axis, suitable for continuous time series data. As compared to value axis,
+               it has a better formatting for time and a different tick calculation method. For example,
+               it decides to use month, week, day or hour for tick based on the range of span.
+        'log' Log axis, suitable for log data.
     :param interval:
         The display interval of the axis scale label is valid in the category axis.
         By default, labels are displayed using labels that do not overlap the labels
@@ -241,6 +251,14 @@ def xy_axis(type=None,
         The minimun value of yaxis.
     :param yaxis_max:
         The maximun value of yaxis.
+    :param yaxis_type:
+        Type of yaxis
+        'value' Numerical axis, suitable for continuous data.
+        'category' Category axis, suitable for discrete category data. Data should only be set via data for this type.
+        'time' Time axis, suitable for continuous time series data. As compared to value axis,
+               it has a better formatting for time and a different tick calculation method. For example,
+               it decides to use month, week, day or hour for tick based on the range of span.
+        'log' Log axis, suitable for log data.
     :param is_convert:
         It specifies whether to convert xAxis and yAxis.
     :param x_axis:
@@ -275,15 +293,28 @@ def xy_axis(type=None,
         "min": yaxis_min,
         "max": yaxis_max
     }
-    if is_convert:
-        _yAxis.update(data=x_axis, type="category")
-        _xAxis.update(type="value")
-    else:
-        _xAxis.update(data=x_axis, type="category")
-        _yAxis.update(type="value")
+
     if type == "scatter":
-        _xAxis.update(data=x_axis, type="value")
-        _yAxis.update(type="value")
+        if xaxis_type is None:
+            xaxis_type = "value"
+        if yaxis_type is None:
+            yaxis_type = "value"
+    else:       # line/bar
+        if xaxis_type is None:
+            xaxis_type = "category"
+        if yaxis_type is None:
+            yaxis_type = "value"
+
+    if is_convert:
+        xaxis_type, yaxis_type = yaxis_type, xaxis_type
+        _xAxis.update(type=xaxis_type)
+        _yAxis.update(data=x_axis, type=yaxis_type)
+    else:
+        _xAxis.update(data=x_axis, type=xaxis_type)
+        _yAxis.update(type=yaxis_type)
+    if type == "scatter":
+        _xAxis.update(data=x_axis, type=xaxis_type)
+        _yAxis.update(type=yaxis_type)
     return [_xAxis], [_yAxis]
 
 
