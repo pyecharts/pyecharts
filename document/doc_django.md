@@ -13,7 +13,8 @@ $ pip install django=1.11.4
 $ pip install pyecharts
 ```
 
-Although current dependencies of pyecharts include django, the tutorial is written on top django version 1.11.4.
+Although current dependencies of pyecharts include django, the tutorial is written on top django version **1.11.4**.
+
 
 ## Step 1: create a mini django site and the actual visualization app
 
@@ -76,7 +77,7 @@ urlpatterns = [
 
 ## Step 2: Now let's create a template
 
-Previous steps follow the [tutorial part 1]([tutorials](https://docs.djangoproject.com/en/1.11/intro/tutorial01/). Now let's jump to [tutorial part 3](https://docs.djangoproject.com/en/1.11/intro/tutorial03/).
+Previous steps follow the [tutorial part 1](https://docs.djangoproject.com/en/1.11/intro/tutorial01/). Now let's jump to [tutorial part 3](https://docs.djangoproject.com/en/1.11/intro/tutorial03/).
 
 Please create a templates directory and save the following file into it.
 
@@ -117,6 +118,7 @@ Then copy the following code and save as `myfirstvis/views.py`
 
 
 ```python
+#coding=utf-8
 #myfirstvis/views.py
 from __future__ import unicode_literals
 from django.http import HttpResponse
