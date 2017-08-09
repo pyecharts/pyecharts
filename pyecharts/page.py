@@ -1,7 +1,7 @@
 from pyecharts import template
 
 
-class Layout(object):
+class Page(object):
     def __init__(self):
         self.__charts = []
 
