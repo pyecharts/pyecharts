@@ -120,6 +120,7 @@ Then copy the following code and save as `myfirstvis/views.py`
 
 
 ```python
+#coding=utf-8
 #myfirstvis/views.py
 from __future__ import unicode_literals
 from django.http import HttpResponse
