@@ -80,6 +80,11 @@ $ flask run
 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
 ```
 
+Here's what you will get:
+
+![flask-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/flask-0.gif)
+
+
 ## Conclusion
 
 It is extremely simple to include a pyexcharts instance in a Flask app. Please go
