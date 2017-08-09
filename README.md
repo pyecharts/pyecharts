@@ -64,17 +64,19 @@ bar.render()
 
 ## working with Flask & Django
 Flask
+
 ![flask-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/flask-0.gif)
 
 Django
+
 ![django-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/django-0.gif)
 
 * 中文文档
-    * [Flask](https://github.com/chenjiandongx/pyecharts/blob/master/document/zh-cn/doc_flask.md)
-    * [Django](https://github.com/chenjiandongx/pyecharts/blob/master/document/zh-cn/doc_django.md)
+    * [pyecharts + Flask](https://github.com/chenjiandongx/pyecharts/blob/master/document/zh-cn/doc_flask.md)
+    * [pyecharts + Django](https://github.com/chenjiandongx/pyecharts/blob/master/document/zh-cn/doc_django.md)
 * English
-    * [Flask](https://github.com/chenjiandongx/pyecharts/blob/master/document/en-us/doc_flask.md)
-    * [Django](https://github.com/chenjiandongx/pyecharts/blob/master/document/en-us/doc_django.md)
+    * [pyecharts + Flask](https://github.com/chenjiandongx/pyecharts/blob/master/document/en-us/doc_flask.md)
+    * [pyecharts + Django](https://github.com/chenjiandongx/pyecharts/blob/master/document/en-us/doc_django.md)
 
 
 ## Documentation
