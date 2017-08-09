@@ -95,4 +95,4 @@ $ flask run
 
 ## 小结
 
-可以看到，在 Flask app 中加入 pyecharts 图表只需要简单的几个步骤而已，欢迎尝试个更多的图表类型。具体文档可以参考 ```pyecharts/document```  文件夹。
+可以看到，在 Flask app 中加入 pyecharts 图表只需要简单的几个步骤而已，欢迎尝试更多的图表类型。具体文档可以参考 ```pyecharts/document```  文件夹。
