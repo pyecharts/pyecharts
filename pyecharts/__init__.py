@@ -24,3 +24,4 @@ from pyecharts.charts.radar import Radar
 from pyecharts.charts.scatter import Scatter
 from pyecharts.charts.scatter3D import Scatter3D
 from pyecharts.charts.wordcloud import WordCloud
+from pyecharts.page import Page
