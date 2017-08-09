@@ -4,7 +4,11 @@ from __future__ import unicode_literals
 
 import os
 import re
+import sys
 import codecs
+from jinja2 import Environment, FileSystemLoader
+
+PY2 = sys.version_info[0] == 2
 
 JS_PATTERN = re.compile(r'<!-- build -->(.*)<!-- endbuild -->',
                         re.IGNORECASE | re.MULTILINE | re.DOTALL)
@@ -106,3 +110,21 @@ def get_resource_dir(folder):
     current_path = os.path.dirname(__file__)
     resource_path = os.path.join(current_path, folder)
     return resource_path
+
+
+# Single Singleton Instance for jinja2
+JINJA2_ENV = Environment(
+    loader=FileSystemLoader(get_resource_dir('templates')),
+    keep_trailing_newline=True,
+    trim_blocks=True,
+    lstrip_blocks=True)
+
+
+def write_utf8_html_file(file_name, html_content):
+    if PY2:
+        html = html_content.encode('utf-8')
+        with open(file_name, "w+") as fout:
+            fout.write(html)
+    else:
+        with open(file_name, "w+", encoding="utf-8") as fout:
+            fout.write(html_content)
