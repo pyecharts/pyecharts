@@ -5,8 +5,8 @@ pyecharts 是一个用于生成 Echarts 图表的类库。实际上就是 Echart
 [![Build Status](https://travis-ci.org/chenjiandongx/pyecharts.svg?branch=master)](https://travis-ci.org/chenjiandongx/pyecharts)  
 
 
-* [开始使用](https://github.com/chenjiandongx/pyecharts/blob/master/README.md#开始使用)
-* [通用配置项](https://github.com/chenjiandongx/pyecharts/blob/master/README.md#通用配置项)
+* [开始使用](https://github.com/chenjiandongx/pyecharts/blob/master/document/zh-cn/documentation.md#开始使用)
+* [通用配置项](https://github.com/chenjiandongx/pyecharts/blob/master/document/zh-cn/documentation.md#通用配置项)
     * xyAxis：直角坐标系中的 x、y 轴(Line、Bar、Scatter、EffectScatter、Kline)
     * dataZoom：dataZoom 组件 用于区域缩放，从而能自由关注细节的数据信息，或者概览数据整体，或者去除离群点的影响。(Line、Bar、Scatter、EffectScatter、Kline)
     * legend：图例组件。图例组件展现了不同系列的标记(symbol)，颜色和名字。可以通过点击图例控制哪些系列不显示。
@@ -15,7 +15,7 @@ pyecharts 是一个用于生成 Echarts 图表的类库。实际上就是 Echart
     * grid3D：3D笛卡尔坐标系组配置项，适用于 3D 图形。（Bar3D, Line3D, Scatter3D)
     * visualMap：是视觉映射组件，用于进行『视觉编码』，也就是将数据映射到视觉元素（视觉通道）
 
-* [图表详细](https://github.com/chenjiandongx/pyecharts/blob/master/README.md#图表详细)
+* [图表详细](https://github.com/chenjiandongx/pyecharts/blob/master/document/zh-cn/documentation.md#图表详细)
     * Bar（柱状图/条形图）
     * Bar3D（3D 柱状图）
     * EffectScatter（带有涟漪特效动画的散点图）
@@ -36,9 +36,10 @@ pyecharts 是一个用于生成 Echarts 图表的类库。实际上就是 Echart
     * Scatter（散点图）
     * Scatter3D（3D 散点图）
     * WordCloud（词云图）
-* [用户自定义](https://github.com/chenjiandongx/pyecharts/blob/master/README.md#用户自定义)
-* [更多示例](https://github.com/chenjiandongx/pyecharts/blob/master/README.md#更多示例)
-* [关于项目](https://github.com/chenjiandongx/pyecharts/blob/master/README.md#关于项目)
+* [用户自定义](https://github.com/chenjiandongx/pyecharts/blob/master/document/zh-cn/documentation.md#用户自定义)
+* [集成Flask&Django](https://github.com/chenjiandongx/pyecharts/blob/master/document/zh-cn/documentation.md#集成Flask&Django)
+* [更多示例](https://github.com/chenjiandongx/pyecharts/blob/master/document/zh-cn/documentation.md#更多示例)
+* [关于项目](https://github.com/chenjiandongx/pyecharts/blob/master/document/zh-cn/documentation.md#关于项目)
 
 
 # 开始使用
@@ -92,8 +93,7 @@ cast(seq)
 3. 字典  
     {A1: B1, A2: B2, A3: B3, A4: B4} -- > k_lst[ A[i1, i2...] ], v_lst[ B[i1, i2...] ]
 
-如果使用的是 Numpy 或者 Pandas，0.1.9.2 以前提供的 ```pdcast(pddata)``` 和 ``` npcast(npdata)``` 两个方法在 0.1.9.3 之后不需再用了，用于这两个库数据类型的处理。
-DataFrame 多个维度时返回一个嵌套列表。比较适合像 Radar, Parallel, HeatMap 这些需要传入嵌套列表（[[ ], [ ]]）数据的图表。
+如果使用的是 Numpy 或者 Pandas，0.1.9.2 以前提供的 ```pdcast(pddata)``` 和 ``` npcast(npdata)``` 两个方法在 0.1.9.3 之后不需再用了。
 
 Series 类型
 ```python
@@ -180,7 +180,7 @@ print(npdata)
 * background_color -> str  
     画布背景颜色，默认为 '#fff'
 * is_grid -> bool  
-    是否使用 grid 组件，grid 组件用于并行显示图表。具体实现参见 [用户自定义](https://github.com/chenjiandongx/pyecharts/blob/master/README.md#用户自定义)
+    是否使用 grid 组件，grid 组件用于并行显示图表。具体实现参见 [用户自定义](https://github.com/chenjiandongx/pyecharts/blob/master/document/zh-cn/documentation.md#用户自定义)
     
 # 通用配置项
 **通用配置项均在 ```add()``` 中设置**
@@ -205,6 +205,12 @@ xyAxis：直角坐标系中的 x、y 轴(Line、Bar、Scatter、EffectScatter、
     x 坐标轴刻度最小值，默认为自适应。
 * xaxis_max -> int/float  
     x 坐标轴刻度最大值，默认为自适应。
+* xaxis_type -> str  
+    x 坐标轴类型  
+    * 'value'：数值轴，适用于连续数据。
+    * 'category'：类目轴，适用于离散的类目数据，为该类型时必须通过 data 设置类目数据。
+    * 'time'：时间轴，适用于连续的时序数据，与数值轴相比时间轴带有时间的格式化，在刻度计算上也有所不同，例如会根据跨度的范围来决定使用月，星期，日还是小时范围的刻度。
+    * 'log'：对数轴。适用于对数数据。
 * y_axis -> list  
     y 坐标轴数据
 * yaxis_formatter -> str  
@@ -217,6 +223,12 @@ xyAxis：直角坐标系中的 x、y 轴(Line、Bar、Scatter、EffectScatter、
     y 坐标轴刻度最小值，默认为自适应。
 * yaxis_max -> int/float  
     y 坐标轴刻度最大值，默认为自适应。
+* yaxis_type -> str  
+    y 坐标轴类型  
+    * 'value'：数值轴，适用于连续数据。
+    * 'category'：类目轴，适用于离散的类目数据，为该类型时必须通过 data 设置类目数据。
+    * 'time'：时间轴，适用于连续的时序数据，与数值轴相比时间轴带有时间的格式化，在刻度计算上也有所不同，例如会根据跨度的范围来决定使用月，星期，日还是小时范围的刻度。
+    * 'log'：对数轴。适用于对数数据。
 * yaxis_rotate -> int  
     刻度标签旋转的角度，在类目轴的类目标签显示不下的时候可以通过旋转防止标签之间重叠。默认为 0，即不旋转。旋转的角度从 -90 度到 90 度。
 * interval -> int  
@@ -523,7 +535,7 @@ bar3d.render()
 ```
 ![bar3D-3](https://github.com/chenjiandongx/pyecharts/blob/master/images/bar3D-3.gif)
 
-**Tip：** 关于 gird3D 部分的设置，请参照通用配置项中的介绍 [通用配置项](https://github.com/chenjiandongx/pyecharts/blob/master/README.md#通用配置项)  
+**Tip：** 关于 gird3D 部分的设置，请参照通用配置项中的介绍 [通用配置项](https://github.com/chenjiandongx/pyecharts/blob/master/document/zh-cn/documentation.md#通用配置项)  
 
 
 ## EffectScatter（带有涟漪特效动画的散点图）
@@ -717,7 +729,7 @@ geo.render()
 ```
 ![geo-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/geo-0.gif)
 
-**Tip：** 请配合 [通用配置项](https://github.com/chenjiandongx/pyecharts/blob/master/README.md#通用配置项) 中的 Visualmap 使用
+**Tip：** 请配合 [通用配置项](https://github.com/chenjiandongx/pyecharts/blob/master/document/zh-cn/documentation.md#通用配置项) 中的 Visualmap 使用
 
 HeatMap 类型
 ```python
@@ -873,7 +885,7 @@ heatmap.render()
 ```
 ![heatmap-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/heatmap-0.gif)
 
-**Tip：** 热力图必须配合 [通用配置项](https://github.com/chenjiandongx/pyecharts/blob/master/README.md#通用配置项) 中的 VisualMap 使用才有效果。
+**Tip：** 热力图必须配合 [通用配置项](https://github.com/chenjiandongx/pyecharts/blob/master/document/zh-cn/documentation.md#通用配置项) 中的 VisualMap 使用才有效果。
 
 
 ## Kline（K线图）
@@ -1030,8 +1042,19 @@ line.render()
 * area_color -> str  
     填充区域颜色
 
-**Tip：** 可配置 **lineStyle** 参数
+**Tip：** 可配置 **lineStyle** 参数  
 **Tip：** 可以通过 label_color 来设置线条颜色，如 ['#eee', '#000']，所有的图表类型的图例颜色都可通过 label_color 来修改。
+
+如果是对数数据，推荐使用 ```yaxis_type``` 参数来设置 y 坐标轴为对数轴
+```python
+import math, random
+line = Line("折线图示例")
+line.add("商家A", attr, [math.log10(random.randint(1, 99999)) for _ in range(6)])
+line.add("商家B", attr, [math.log10(random.randint(1, 99999999)) for _ in range(6)], yaxis_type="log")
+line.show_config()
+line.render()
+```
+![line-3-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/line-3-1.png)
 
 
 ## Line3D（3D 折线图）
@@ -1089,7 +1112,7 @@ line3d.render()
 ```
 ![line3D-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/line3D-1.gif)
 
-**Tip：** 关于 gird3D 部分的设置，请参照通用配置项中的介绍 [通用配置项](https://github.com/chenjiandongx/pyecharts/blob/master/README.md#通用配置项)  
+**Tip：** 关于 gird3D 部分的设置，请参照通用配置项中的介绍 [通用配置项](https://github.com/chenjiandongx/pyecharts/blob/master/document/zh-cn/documentation.md#通用配置项)  
 
 
 ## Liquid（水球图）
@@ -1160,7 +1183,7 @@ add(name, attr, value, is_roam=True, maptype='china', **kwargs)
    是否开启鼠标缩放和平移漫游。默认为 True  
    如果只想要开启缩放或者平移，可以设置成'scale'或者'move'。设置成 True 为都开启
 * maptype -> str  
-   地图类型。默认只提供了 'china' 和 'world'，即中国地图和世界地图。不用担心，这里说明了 [用户如何自定义地图](https://github.com/chenjiandongx/pyecharts/blob/master/document/user-customize-map.md)
+    地图类型。 支持 china、world、安徽、澳门、北京、重庆、福建、福建、甘肃、广东，广西、广州、海南、河北、黑龙江、河南、湖北、湖南、江苏、江西、吉林、辽宁、内蒙古、宁夏、青海、山东、上海、陕西、四川、台湾、天津、香港、新疆、西藏、云南、浙江。地图提供了自定义模式 [用户如何自定义地图](https://github.com/chenjiandongx/pyecharts/blob/master/document/zh-cn/user-customize-map.md)
 
 ```python
 from pyecharts import Map
@@ -1186,7 +1209,7 @@ map.render()
 ```
 ![map-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/map-1.gif)
 
-**Tip：** 请配合 [通用配置项](https://github.com/chenjiandongx/pyecharts/blob/master/README.md#通用配置项) 中的 Visualmap 使用
+**Tip：** 请配合 [通用配置项](https://github.com/chenjiandongx/pyecharts/blob/master/document/zh-cn/documentation.md#通用配置项) 中的 Visualmap 使用
 
 ```python
 from pyecharts import Map
@@ -1613,7 +1636,7 @@ radar.render()
 
 Scatter.add() 方法签名
 ```python
-add(name, x_value, y_value, symbol_size=10, **kwargs)
+add(name, x_axis, y_axis, symbol_size=10, **kwargs)
 ```
 * name -> str  
     图例名称
@@ -1657,7 +1680,17 @@ scatter.render()
 ```
 ![scatter-0-2](https://github.com/chenjiandongx/pyecharts/blob/master/images/scatter-0-2.gif)
 
-**Tip：** 请配合 [通用配置项](https://github.com/chenjiandongx/pyecharts/blob/master/README.md#通用配置项) 中的 Visualmap 使用
+**Tip：** 请配合 [通用配置项](https://github.com/chenjiandongx/pyecharts/blob/master/document/zh-cn/documentation.md#通用配置项) 中的 Visualmap 使用
+
+散点图默认的坐标轴都为数值轴，如果想实现横坐标为类目轴，可通过 ```xaxis_type``` 修改
+```python
+scatter = Scatter("散点图示例")
+scatter.add("A", ["a", "b", "c", "d", "e", "f"], v2)
+scatter.add("B", ["a", "b", "c", "d", "e", "f"], v1[::-1], xaxis_type="category")
+scatter.show_config()
+scatter.render()
+```
+![scatter-0-3](https://github.com/chenjiandongx/pyecharts/blob/master/images/scatter-0-3.png)
 
 Scatter 还内置了画画方法
 ```python
@@ -1714,7 +1747,7 @@ scatter3D.render()
 ```
 ![scatter3D-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/scatter3D-0.gif)
 
-**Tip：** 关于 gird3D 部分的设置，请参照通用配置项中的介绍 [通用配置项](https://github.com/chenjiandongx/pyecharts/blob/master/README.md#通用配置项)  
+**Tip：** 关于 gird3D 部分的设置，请参照通用配置项中的介绍 [通用配置项](https://github.com/chenjiandongx/pyecharts/blob/master/document/zh-cn/documentation.md#通用配置项)  
 
 
 ## WordCloud（词云图）
@@ -2054,10 +2087,18 @@ heatmap.render()
 ![grid-5](https://github.com/chenjiandongx/pyecharts/blob/master/images/grid-5.gif)  
 Bar 会受 HeatMap 影响，很有趣。
 
+
+# 集成Flask&Django
+
+* [pyecharts + Flask](https://github.com/chenjiandongx/pyecharts/blob/master/document/zh-cn/doc_flask.md)
+* [pyecharts + Django](https://github.com/chenjiandongx/pyecharts/blob/master/document/zh-cn/doc_django.md)
+
+
 # 更多示例
 
 * 更多示例请参考 [example.md](https://github.com/chenjiandongx/pyecharts/blob/master/example.md)
 * 欢迎大家补充示例
+
 
 # 关于项目
 
