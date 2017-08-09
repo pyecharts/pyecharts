@@ -9,12 +9,8 @@ import datetime
 import warnings
 
 from pprint import pprint
-from jinja2 import Environment, FileSystemLoader
 from pyecharts.option import get_all_options
 from pyecharts import template
-
-
-PY2 = sys.version_info[0] == 2
 
 
 class Base(object):
@@ -101,11 +97,6 @@ class Base(object):
             legend=[{"data": []}],
             backgroundColor=background_color
         )
-        file_loader = FileSystemLoader(template.get_resource_dir('templates'))
-        self._jinja2_env = Environment(loader=file_loader,
-                                       keep_trailing_newline=True,
-                                       trim_blocks=True,
-                                       lstrip_blocks=True)
 
     def add(self, angle_data=None,
             angle_range=None,
@@ -388,11 +379,11 @@ class Base(object):
         provide all dependent echarts javascript libraries.
         """
         embed = 'chart_component.html'
-        template = self._jinja2_env.get_template(embed)
+        temple = template.JINJA2_ENV.get_template(embed)
         my_option = json_dumps(self._option, indent=4)
-        html = template.render(myOption=my_option,
-                               chart_id=uuid.uuid4().hex,
-                               myWidth=self._width, myHeight=self._height)
+        html = temple.render(myOption=my_option,
+                             chart_id=uuid.uuid4().hex,
+                             myWidth=self._width, myHeight=self._height)
         return html
 
     def render(self, path="render.html"):
@@ -411,18 +402,12 @@ class Base(object):
                 temple = "lq.html"
                 break
         my_option = json_dumps(self._option, indent=4)
-        tmp = self._jinja2_env.get_template(temple)
+        tmp = template.JINJA2_ENV.get_template(temple)
         html = tmp.render(myOption=my_option,
                           chart_id=uuid.uuid4().hex,
                           myWidth=self._width, myHeight=self._height)
         html = template.freeze_js(html)
-        if PY2:
-            html = html.encode('utf-8')
-            with open(path, "w+") as fout:
-                fout.write(html)
-        else:
-            with open(path, "w+", encoding="utf-8") as fout:
-                fout.write(html)
+        template.write_utf8_html_file(path, html)
 
     def _repr_html_(self):
         """ Render the options dict, displayed in the jupyter notebook
@@ -447,7 +432,7 @@ class Base(object):
                 map_keywords = template.get_map(
                     self._option.get('series')[0].get('mapType'))
                 break
-        tmp = self._jinja2_env.get_template(temple)
+        tmp = template.JINJA2_ENV.get_template(temple)
         try:
             html = tmp.render(
                 myOption=my_option, chartId=divid, myWidth=self._width,
