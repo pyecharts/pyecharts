@@ -5,7 +5,7 @@
 Please create new directory for the new project
 
 ```shell
-$ make flask-echarts
+$ mkdir flask-echarts
 $ cd flask-echarts
 $ mkdir templates
 ```
