@@ -381,11 +381,11 @@ class Base(object):
         provide all dependent echarts javascript libraries.
         """
         embed = 'chart_component.html'
-        temple = template.JINJA2_ENV.get_template(embed)
+        tmp = template.JINJA2_ENV.get_template(embed)
         my_option = json_dumps(self._option, indent=4)
-        html = temple.render(myOption=my_option,
-                             chart_id=uuid.uuid4().hex,
-                             myWidth=self._width, myHeight=self._height)
+        html = tmp.render(myOption=my_option,
+                          chart_id=uuid.uuid4().hex,
+                          myWidth=self._width, myHeight=self._height)
         return html
 
     def render(self, path="render.html"):
@@ -394,17 +394,17 @@ class Base(object):
         :param path:
             path of render html file
         """
-        temple = "template.html"
+        _tmp = "template.html"
         series = self._option.get("series")
         for s in series:
             if s.get('type') == "wordCloud":
-                temple = "wd.html"
+                _tmp = "wd.html"
                 break
             if s.get('type') == "liquidFill":
-                temple = "lq.html"
+                _tmp = "lq.html"
                 break
         my_option = json_dumps(self._option, indent=4)
-        tmp = template.JINJA2_ENV.get_template(temple)
+        tmp = template.JINJA2_ENV.get_template(_tmp)
         html = tmp.render(myOption=my_option,
                           chart_id=uuid.uuid4().hex,
                           myWidth=self._width, myHeight=self._height)
@@ -418,23 +418,23 @@ class Base(object):
         """
         divid = datetime.datetime.now()
         my_option = json_dumps(self._option, indent=4)
-        temple = 'notebook.html'
+        _tmp = 'notebook.html'
         series = self._option.get("series")
         map_keywords = {}
         for s in series:
             if s.get('type') == "wordCloud":
-                temple = 'wd_notebook.html'
+                _tmp = 'wd_notebook.html'
                 break
             if s.get('type') == "liquidFill":
-                temple = 'lq_notebook.html'
+                _tmp = 'lq_notebook.html'
                 break
             # Avoid loading too many maps at once, make sure notebook can show map chart normally.
             if s.get('type') == 'map':
-                temple = "map_notebook.html"
+                _tmp = "map_notebook.html"
                 map_keywords = template.get_map(
                     self._option.get('series')[0].get('mapType'))
                 break
-        tmp = template.JINJA2_ENV.get_template(temple)
+        tmp = template.JINJA2_ENV.get_template(_tmp)
         try:
             html = tmp.render(
                 myOption=my_option, chartId=divid, myWidth=self._width,
