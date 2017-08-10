@@ -121,6 +121,12 @@ JINJA2_ENV = Environment(
 
 
 def write_utf8_html_file(file_name, html_content):
+    """
+
+    :param file_name:
+    :param html_content:
+    :return:
+    """
     if PY2:
         html = html_content.encode('utf-8')
         with open(file_name, "w+") as fout:
