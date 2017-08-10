@@ -2087,10 +2087,15 @@ heatmap.render()
 ![grid-5](https://github.com/chenjiandongx/pyecharts/blob/master/images/grid-5.gif)  
 Bar 会受 HeatMap 影响，很有趣。
 
+如果只是想在单个 .html 按顺序展示图表，推荐使用 ```Page()``` 类
 
-# 同一网页展示多图
+## 同一网页按顺序展示多图
 
-很简单，你只要引入`Page`类，然后往上加图，最后渲染。但是词云和水图不能加进来。下面这个程序教你如何做：
+1. 引入 `Page` 类
+2. 使用 Page.add() 增加图表
+3. 使用 Page.render() 渲染网页
+
+**Tip：** 词云图和水球图除外，其余图表均可正常显示
 
 ```python
 #coding=utf-8
@@ -2100,17 +2105,18 @@ from pyecharts import Bar, Scatter3D
 from pyecharts import Page
 
 
-page = Page()  # step 1
+page = Page()         # step 1
 
+# bar
 attr = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
 v1 = [5, 20, 36, 10, 75, 90]
 v2 = [10, 25, 8, 60, 20, 80]
 bar = Bar("柱状图数据堆叠示例")
 bar.add("商家A", attr, v1, is_stack=True)
 bar.add("商家B", attr, v2, is_stack=True)
-page.add(bar)  # step 2
+page.add(bar)         # step 2
 
-# scatter3D_0
+# scatter3D
 import random
 data = [[random.randint(0, 100), random.randint(0, 100), random.randint(0, 100)] for _ in range(80)]
 range_color = ['#313695', '#4575b4', '#74add1', '#abd9e9', '#e0f3f8', '#ffffbf',
@@ -2119,11 +2125,88 @@ scatter3D = Scatter3D("3D 散点图示例", width=1200, height=600)
 scatter3D.add("", data, is_visualmap=True, visual_range_color=range_color)
 page.add(scatter3D)  # step 2
 
-page.render()  # step 3
+page.render()        # step 3
 ```
-运行之后，你会发现render.html有两个图:
+运行之后，你会发现 render.html 已经按顺序显示了两个图:
 
 ![multiple-charts-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/multiple-charts-0.gif)
+
+当然，更多图也是可以的
+```python
+#coding=utf-8
+from __future__ import unicode_literals
+
+from pyecharts import Line, Pie, Kline, Radar
+from pyecharts import Page
+
+
+page = Page()
+
+# line
+attr = ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+line = Line("折线图示例")
+line.add("最高气温", attr, [11, 11, 15, 13, 12, 13, 10], mark_point=["max", "min"], mark_line=["average"])
+line.add("最低气温", attr, [1, -2, 2, 5, 3, 2, 0], mark_point=["max", "min"], mark_line=["average"])
+page.add(line)
+
+# pie
+attr = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
+v1 = [11, 12, 13, 10, 10, 10]
+pie = Pie("饼图-圆环图示例", title_pos='center')
+pie.add("", attr, v1, radius=[40, 75], label_text_color=None, is_label_show=True, legend_orient='vertical',
+        legend_pos='left')
+page.add(pie)
+
+# kline
+v1 = [[2320.26, 2320.26, 2287.3, 2362.94],
+      [2300, 2291.3, 2288.26, 2308.38],
+      [2295.35, 2346.5, 2295.35, 2345.92],
+      [2347.22, 2358.98, 2337.35, 2363.8],
+      [2360.75, 2382.48, 2347.89, 2383.76],
+      [2383.43, 2385.42, 2371.23, 2391.82],
+      [2377.41, 2419.02, 2369.57, 2421.15],
+      [2425.92, 2428.15, 2417.58, 2440.38],
+      [2411, 2433.13, 2403.3, 2437.42],
+      [2432.68, 2334.48, 2427.7, 2441.73],
+      [2430.69, 2418.53, 2394.22, 2433.89],
+      [2416.62, 2432.4, 2414.4, 2443.03],
+      [2441.91, 2421.56, 2418.43, 2444.8],
+      [2420.26, 2382.91, 2373.53, 2427.07],
+      [2383.49, 2397.18, 2370.61, 2397.94],
+      [2378.82, 2325.95, 2309.17, 2378.82],
+      [2322.94, 2314.16, 2308.76, 2330.88],
+      [2320.62, 2325.82, 2315.01, 2338.78],
+      [2313.74, 2293.34, 2289.89, 2340.71],
+      [2297.77, 2313.22, 2292.03, 2324.63],
+      [2322.32, 2365.59, 2308.92, 2366.16],
+      [2364.54, 2359.51, 2330.86, 2369.65],
+      [2332.08, 2273.4, 2259.25, 2333.54],
+      [2274.81, 2326.31, 2270.1, 2328.14],
+      [2333.61, 2347.18, 2321.6, 2351.44],
+      [2340.44, 2324.29, 2304.27, 2352.02],
+      [2326.42, 2318.61, 2314.59, 2333.67],
+      [2314.68, 2310.59, 2296.58, 2320.96],
+      [2309.16, 2286.6, 2264.83, 2333.29],
+      [2282.17, 2263.97, 2253.25, 2286.33],
+      [2255.77, 2270.28, 2253.31, 2276.22]]
+kline = Kline("K 线图示例")
+kline.add("日K", ["2017/7/{}".format(i + 1) for i in range(31)], v1)
+page.add(kline)
+
+# radar
+schema = [("销售", 6500), ("管理", 16000), ("信息技术", 30000), ("客服", 38000), ("研发", 52000), ("市场", 25000)]
+v1 = [[4300, 10000, 28000, 35000, 50000, 19000]]
+v2 = [[5000, 14000, 28000, 31000, 42000, 21000]]
+radar = Radar("雷达图示例")
+radar.config(schema)
+radar.add("预算分配", v1, is_splitline=True, is_axisline_show=True)
+radar.add("实际开销", v2, label_color=["#4e79a7"], is_area_show=False, legend_selectedmode='single')
+page.add(radar)
+
+page.render()
+```
+![multiple-charts-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/multiple-charts-1.gif)
+
 
 # 集成Flask&Django
 
