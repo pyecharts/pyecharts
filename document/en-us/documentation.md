@@ -6,11 +6,11 @@ pyecharts is a library to generate charts using Echarts. It simply provides the 
 
 * [First-steps](https://github.com/chenjiandongx/pyecharts/blob/master/document/en-us/documentation.md#First-steps)
 * [Global-options](https://github.com/chenjiandongx/pyecharts/blob/master/document/en-us/documentation.md#Global-options)
-    * xyAxis：x, y axis in cartesian coordinate system(Line、Bar、Scatter、EffectScatter、Kline)
-    * dataZoom：dataZoom components for zoom-in and zoom-out. With them, it is possible to magnify a small area, to see the overall picture or to stay away from scattered points(Line、Bar、Scatter、EffectScatter、Kline)
+    * xyAxis：x, y axis in cartesian coordinate system(Line, Bar, Scatter, EffectScatter, Kline)
+    * dataZoom：dataZoom components for zoom-in and zoom-out. With them, it is possible to magnify a small area, to see the overall picture or to stay away from scattered points(Line, Bar, Scatter, EffectScatter, Kline)
     * legend：legend component has different symbol, colour and name, and provide the interactive clicking functions to show or hide its associated data series.
     * label：text string on the chart, for marking the charts with sensible details, such as value, name.
-    * lineStyle：line style for Line、Polar、Radar、Graph、Parallel.
+    * lineStyle：line style for Line, Polar, Radar, Graph, Parallel.
     * grid3D：gird3D components in cartesian coordinate system(Bar3D, Line3D, Scatter3D)
     * visualMap：It is a type of component for visual encoding, which maps the data to visual channels
 * [Chart-types](https://github.com/chenjiandongx/pyecharts/blob/master/document/en-us/documentation.md#Chart-types)
@@ -203,7 +203,7 @@ The parameter a chart type initialize accept（the same to all the chart type）
 # Global-options
 **Sitting general configuration in```add()```**
 
-xyAxis：x, y axis in cartesian coordinate system(Line、Bar、Scatter、EffectScatter、Kline)
+xyAxis：x, y axis in cartesian coordinate system(Line, Bar, Scatter, EffectScatter, Kline)
 
 * is_convert -> bool  
     It specifies whether to convert xAxis and yAxis.
@@ -254,7 +254,7 @@ xyAxis：x, y axis in cartesian coordinate system(Line、Bar、Scatter、EffectS
     Set to 0 to force all labels to be displayed and label is one by one if setting as 1; If 2, it will be one label separates from each other, and so on.
 
 
-dataZoom：dataZoom components for zoom-in and zoom-out. With them, it is possible to magnify a small area, to see the overall picture or to stay away from scattered points(Line、Bar、Scatter、EffectScatter、Kline)
+dataZoom：dataZoom components for zoom-in and zoom-out. With them, it is possible to magnify a small area, to see the overall picture or to stay away from scattered points(Line, Bar, Scatter, EffectScatter, Kline)
 
 * is_datazoom_show -> bool  
     defalut -> False  
@@ -320,7 +320,7 @@ label：text string on the chart, for marking the charts with sensible details, 
 **Tip：** is_random random disorganize legend colour and list,it's kind of switch style? try it.
 
 
-lineStyle：line style for Line、Polar、Radar、Graph、Parallel.
+lineStyle：line style for Line, Polar, Radar, Graph, Parallel.
 
 * line_width -> int  
     default -> 1
@@ -474,7 +474,7 @@ bar.render()
 ```
 ![bar-5](https://github.com/chenjiandongx/pyecharts/blob/master/images/bar-5.gif)
 
-**Tip：** Datazoom fits all plane rectangular coordinate system figure,that's(Line、Bar、Scatter、EffectScatter、Kline)
+**Tip：** Datazoom fits all plane rectangular coordinate system figure,that's(Line, Bar, Scatter, EffectScatter, Kline)
 **Tip：** Through label_color to set column's colour,like ['#eee', '#000']，any type of chart's legend colour can revise by label_color .
 
 
@@ -1252,7 +1252,7 @@ add(name, attr, value, is_roam=True, maptype='china', **kwargs)
     default -> True  
     Whether to enable mouse zooming and translating.If either zooming or translating is wanted,it can be set to 'scale' or 'move'. Otherwise, set it to be true to enable both.
 * maptype -> str  
-   type of map, it supports china、world、安徽、澳门、北京、重庆、福建、福建、甘肃、广东，广西、广州、海南、河北、黑龙江、河南、湖北、湖南、江苏、江西、吉林、辽宁、内蒙古、宁夏、青海、山东、上海、陕西、四川、台湾、天津、香港、新疆、西藏、云南、浙江
+   type of map, it supports china, world, 安徽, 澳门, 北京, 重庆, 福建, 福建, 甘肃, 广东，广西, 广州, 海南, 河北, 黑龙江, 河南, 湖北, 湖南, 江苏, 江西, 吉林, 辽宁, 内蒙古, 宁夏, 青海, 山东, 上海, 陕西, 四川, 台湾, 天津, 香港, 新疆, 西藏, 云南, 浙江
 
 ```python
 from pyecharts import Map
