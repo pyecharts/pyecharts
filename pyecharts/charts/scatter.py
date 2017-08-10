@@ -5,6 +5,7 @@
 #     from PIL import Image
 # except ImportError:
 #     import Image
+
 from PIL import Image
 
 from pyecharts.base import Base
