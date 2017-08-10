@@ -2133,6 +2133,13 @@ page.render()        # step 3
 
 当然，更多图也是可以的
 ```python
+#coding=utf-8
+from __future__ import unicode_literals
+
+from pyecharts import Line, Pie, Kline, Radar
+from pyecharts import Page
+
+
 page = Page()
 
 # line
