@@ -1,4 +1,4 @@
-pprint==0.1
+pillow==4.2.1
 jinja2==2.8
 future
 pillow
