@@ -2110,8 +2110,6 @@ Bar 会受 HeatMap 影响，很有趣。
 2. 使用 Page.add() 增加图表
 3. 使用 Page.render() 渲染网页
 
-**Tip：** 词云图和水球图除外，其余图表均可正常显示
-
 ```python
 #coding=utf-8
 from __future__ import unicode_literals
