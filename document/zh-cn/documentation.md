@@ -93,7 +93,7 @@ cast(seq)
 3. 字典  
     {A1: B1, A2: B2, A3: B3, A4: B4} -- > k_lst[ A[i1, i2...] ], v_lst[ B[i1, i2...] ]
 
-如果使用的是 Numpy 或者 Pandas，0.1.9.2 以前提供的 ```pdcast(pddata)``` 和 ``` npcast(npdata)``` 两个方法在 0.1.9.3 之后不需再用了。
+如果使用的是 Numpy 或者 Pandas，0.1.9.2 以前提供的 ```pdcast(pddata)``` 和 ``` npcast(npdata)``` 两个方法在 0.1.9.3 之后不需再用了。0.1.9.3 开始内部已经封装了处理逻辑，直接调用 index 和 values 属性即可。
 
 Series 类型
 ```python
@@ -141,6 +141,7 @@ print(npdata)
 ```
 
 **当然你也可以采用更加酷炫的方式，使用 Jupyter Notebook 来展示图表，matplotlib 有的，pyecharts 也会有的**  
+**Tip：** 从 0.1.9.2 版本开始，不再使用 ```render_notebook()``` 方法，现已采用更加 pythonic 的做法。直接调用本身实例就可以了。  
 
 比如这样  
 
@@ -153,7 +154,6 @@ print(npdata)
 更多 Jupyter notebook 的例子请参考 [notebook-use-cases](https://github.com/chenjiandongx/pyecharts/blob/master/document/notebook-use-cases.ipynb)。可下载后运行看看。
 
 如需使用 Jupyter Notebook 来展示图表，只需要调用自身实例即可，同时兼容 Python2 和 Python3 的 Jupyter Notebook 环境。所有图表均可正常显示，与浏览器一致的交互体验，这下展示报告连 PPT 都省了！！  
-**Tip：** 从 0.1.9.2 版本开始，不再使用 ```render_notebook()``` 方法，现已采用更加 pythonic 的做法。直接调用本身实例就可以了。
 
 图表类初始化所接受的参数（所有类型的图表都一样）。
 
