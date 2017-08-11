@@ -737,6 +737,111 @@ def grid3D(grid3D_width=100,
     return _grid3D
 
 
+@collectfuncs
+def xaxis3D(xaxis3d_type=None,
+            xaxis3d_name="",
+            xaxis3d_name_size=16,
+            xaxis3d_name_gap=20,
+            xaxis3d_min=None,
+            xaxis3d_max=None,
+            xaxis3d_interval="auto",
+            xaxis3d_margin=8):
+    """
+
+    :param xaxis3d_type:
+    :param xaxis3d_name:
+    :param xaxis3d_name_size:
+    :param xaxis3d_name_gap:
+    :param xaxis3d_min:
+    :param xaxis3d_max:
+    :param xaxis3d_interval:
+    :param xaxis3d_margin:
+    :return:
+    """
+    _xaxis3D = {
+        "name": xaxis3d_name,
+        "nameGap": xaxis3d_name_gap,
+        "nameTextStyle": {"fontSize": xaxis3d_name_size},
+        "min": xaxis3d_min,
+        "max": xaxis3d_max,
+        "axisLabel": {
+            "margin": xaxis3d_margin,
+            "interval": xaxis3d_interval
+        }
+    }
+    return _xaxis3D
+
+
+@collectfuncs
+def yaxis3D(yaxis3d_type=None,
+            yaxis3d_name="",
+            yaxis3d_name_size=16,
+            yaxis3d_name_gap=20,
+            yaxis3d_min=None,
+            yaxis3d_max=None,
+            yaxis3d_interval="auto",
+            yaxis3d_margin=8):
+    """
+
+    :param yaxis3d_type:
+    :param yaxis3d_name:
+    :param yaxis3d_name_size:
+    :param yaxis3d_name_gap:
+    :param yaxis3d_min:
+    :param yaxis3d_max:
+    :param yaxis3d_interval:
+    :param yaxis3d_margin:
+    :return:
+    """
+    _yaxis3D = {
+        "name": yaxis3d_name,
+        "nameGap": yaxis3d_name_gap,
+        "nameTextStyle": {"fontSize": yaxis3d_name_size},
+        "min": yaxis3d_min,
+        "max": yaxis3d_max,
+        "axisLabel": {
+            "margin": yaxis3d_margin,
+            "interval": yaxis3d_interval
+        }
+    }
+    return _yaxis3D
+
+
+@collectfuncs
+def zaxis3D(zaxis3d_type=None,
+            zaxis3d_name="",
+            zaxis3d_name_size=16,
+            zaxis3d_name_gap=20,
+            zaxis3d_min=None,
+            zaxis3d_max=None,
+            zaxis3d_interval="auto",
+            zaxis3d_margin=8):
+    """
+
+    :param zaxis3d_type:
+    :param zaxis3d_name:
+    :param zaxis3d_name_size:
+    :param zaxis3d_name_gap:
+    :param zaxis3d_min:
+    :param zaxis3d_max:
+    :param zaxis3d_interval:
+    :param zaxis3d_margin:
+    :return:
+    """
+    _zaxis3D = {
+        "name": zaxis3d_name,
+        "nameGap": zaxis3d_name_gap,
+        "nameTextStyle": {"fontSize": zaxis3d_name_size},
+        "min": zaxis3d_min,
+        "max": zaxis3d_max,
+        "axisLabel": {
+            "margin": zaxis3d_margin,
+            "interval": zaxis3d_interval
+        }
+    }
+    return _zaxis3D
+
+
 def get_all_options(**kwargs):
     """ Return all options of charts
 

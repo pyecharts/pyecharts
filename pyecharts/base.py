@@ -90,7 +90,7 @@ class Base(object):
                 "top": "center",
                 "feature": {"saveAsImage": {"show": True}}
             },
-            _index_flag=random.randint(1, 2000000),
+            _index_flag=random.randint(1, 9000000),
             tooltip={},
             series=[],
             legend=[{"data": []}],
