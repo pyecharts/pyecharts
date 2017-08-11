@@ -6,6 +6,7 @@ from PIL import Image
 from pyecharts.base import Base
 from pyecharts.option import get_all_options
 
+
 class Scatter(Base):
     """
     <<< Scatter chart >>>
