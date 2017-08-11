@@ -189,33 +189,42 @@ def area_style(flag=False,
 
 @collectfuncs
 def xy_axis(type=None,
-            xy_text_size=14,
-            namegap=25,
+            x_axis=None,
+            xaxis_margin=8,
+            xaxis_name_size=14,
+            xaxis_name_gap=25,
             xaxis_name="",
             xaxis_name_pos="middle",
             xaxis_rotate=0,
             xaxis_min=None,
             xaxis_max=None,
             xaxis_type=None,
-            interval="auto",
+            xaxis_interval="auto",
+            yaxis_margin=8,
+            yaxis_name_size=14,
+            yaxis_name_gap=25,
             yaxis_name="",
             yaxis_name_pos="middle",
             yaxis_rotate=0,
             yaxis_min=None,
             yaxis_max=None,
             yaxis_type=None,
-            is_convert=False,
-            x_axis=None,
+            yaxis_interval="auto",
             yaxis_formatter="",
+            is_convert=False,
+            is_xaxislabel_align=False,
+            is_yaxislabel_align=False,
             **kwargs):
     """
 
     :param type:
         Chart type
-    :param xy_text_size:
-        axis name font size
-    :param namegap:
-        Gap between axis name and axis line.
+    :param x_axis:
+        xAxis data
+    :param xaxis_name_size:
+        xaxis name font size
+    :param xaxis_name_gap:
+        Gap between axis name and xaxis line.
     :param xaxis_name:
         Name of xAxis
     :param xaxis_name_pos:
@@ -227,6 +236,8 @@ def xy_axis(type=None,
         The minimun value of xaxis.
     :param xaxis_max:
         The maximun value of xaxis.
+    :param xaxis_margin:
+        The margin between the axis label and the xaxis line.
     :param xaxis_type:
         Type of xaxis
         'value' Numerical axis, suitable for continuous data.
@@ -235,18 +246,29 @@ def xy_axis(type=None,
                it has a better formatting for time and a different tick calculation method. For example,
                it decides to use month, week, day or hour for tick based on the range of span.
         'log' Log axis, suitable for log data.
-    :param interval:
-        The display interval of the axis scale label is valid in the category axis.
+    :param xaxis_interval:
+        The display interval of the axis scale label is valid in the category xaxis.
+        By default, labels are displayed using labels that do not overlap the labels
+        Set to 0 to force all labels to be displayed
+        and label is one by one if setting as 1; If 2, it will be one label separates from each other, and so on.
+    :param yaxis_interval:
+        The display interval of the axis scale label is valid in the category yaxis.
         By default, labels are displayed using labels that do not overlap the labels
         Set to 0 to force all labels to be displayed
         and label is one by one if setting as 1; If 2, it will be one label separates from each other, and so on.
     :param yaxis_name:
         Name of yAxis
+    :param yaxis_name_size:
+        yaxis name font size
+    :param yaxis_name_gap:
+        Gap between axis name and yaxis line.
     :param yaxis_name_pos:
         Location of yAxis name.It can be 'start'，'middle'，'end'
     :param yaxis_rotate:
         Rotation degree of yaxis label, which is especially useful when there is no enough space for category axis.
         Rotation degree is from -90 to 90.
+    :param yaxis_margin:
+        The margin between the axis label and the yaxis line.
     :param yaxis_min:
         The minimun value of yaxis.
     :param yaxis_max:
@@ -261,22 +283,28 @@ def xy_axis(type=None,
         'log' Log axis, suitable for log data.
     :param is_convert:
         It specifies whether to convert xAxis and yAxis.
-    :param x_axis:
-        xAxis data
     :param yaxis_formatter:
         Formatter of axis label, which supports string template and callback function.
         example: '{value} kg'
+    :param is_xaxislabel_align:
+        whether align xaxis tick with label
+    :param is_yaxislabel_align:
+        whether align yaxis tick with label
     :param kwargs:
     :return:
     """
     _xAxis = {
         "name": xaxis_name,
         "nameLocation": xaxis_name_pos,
-        "nameGap": namegap,
-        "nameTextStyle": {"fontSize": xy_text_size},
+        "nameGap": xaxis_name_gap,
+        "nameTextStyle": {"fontSize": xaxis_name_size},
         "axisLabel": {
-            "interval": interval,
+            "interval": xaxis_interval,
             "rotate": xaxis_rotate,
+            "margin": xaxis_margin
+        },
+        "axisTick": {
+            "alignWithLabel": is_xaxislabel_align
         },
         "min": xaxis_min,
         "max": xaxis_max
@@ -284,11 +312,16 @@ def xy_axis(type=None,
     _yAxis = {
         "name": yaxis_name,
         "nameLocation": yaxis_name_pos,
-        "nameGap": namegap,
-        "nameTextStyle": {"fontSize": xy_text_size},
+        "nameGap": yaxis_name_gap,
+        "nameTextStyle": {"fontSize": yaxis_name_size},
         "axisLabel": {
             "formatter": "{value} " + yaxis_formatter,
             "rotate": yaxis_rotate,
+            "interval": yaxis_interval,
+            "margin": yaxis_margin
+        },
+        "axisTick": {
+            "alignWithLabel": is_yaxislabel_align
         },
         "min": yaxis_min,
         "max": yaxis_max
@@ -312,9 +345,11 @@ def xy_axis(type=None,
     else:
         _xAxis.update(data=x_axis, type=xaxis_type)
         _yAxis.update(type=yaxis_type)
-    if type == "scatter":
-        _xAxis.update(data=x_axis, type=xaxis_type)
-        _yAxis.update(type=yaxis_type)
+
+    if type == "candlestick":
+        _xAxis.update(scale=True, boundaryGap=False)
+        _yAxis.update(scale=True, splitArea={"show": True})
+
     return [_xAxis], [_yAxis]
 
 
