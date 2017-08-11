@@ -31,18 +31,10 @@ class Kline(Base):
         :param kwargs:
         :return:
         """
+        kwargs.update(type="candlestick", x_axis=x_axis)
         chart = get_all_options(**kwargs)
-        self._option.update(
-            xAxis=[{
-                "type": "category",
-                "data": x_axis,
-                "scale": True,
-                "boundaryGap": False
-            }],
-            yAxis=[{
-                "scale": True,
-                "splitArea": {"show": True}
-            }])
+        xaxis, yaxis = chart['xy_axis']
+        self._option.update(xAxis=xaxis, yAxis=yaxis)
         self._option.get('legend')[0].get('data').append(name)
         self._option.get('series').append({
             "type": "candlestick",
