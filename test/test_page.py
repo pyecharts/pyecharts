@@ -3,9 +3,11 @@ from __future__ import unicode_literals
 
 from pyecharts import Bar, Scatter3D, Line, Pie, Kline, Radar
 from pyecharts import Page
+import codecs
+import json
 
 
-def test_two_bars():
+def create_two_bars():
     page = Page()
 
     # bar
@@ -25,7 +27,23 @@ def test_two_bars():
     scatter3D = Scatter3D("3D 散点图示例", width=1200, height=600)
     scatter3D.add("", data, is_visualmap=True, visual_range_color=range_color)
     page.add(scatter3D)
+    return page
+
+
+def test_two_bars():
+    page = create_two_bars()
     page.render()
+    with codecs.open('render.html', 'r', 'utf-8') as f:
+        actual_content = f.read()
+        assert json.dumps("柱状图数据堆叠示例") in actual_content
+        assert "<html>" in actual_content
+
+
+def test_page_embed():
+    page = create_two_bars()
+    html = page.render_embed()
+    assert '<html>' not in html
+    assert json.dumps("柱状图数据堆叠示例") in html
 
 
 def test_more():
