@@ -130,7 +130,6 @@ class Base(object):
             grid3D_rotate_speed=None,
             grid3D_rotate_sensitivity=None,
             gravity=None,
-            interval=None,
             is_angleaxis_show=None,
             is_area_show=None,
             is_axisline_show=None,
@@ -155,6 +154,8 @@ class Base(object):
             is_step=None,
             is_symbol_show=None,
             is_visualmap=None,
+            is_xaxislabel_align=None,
+            is_yaxislabel_align=None,
             item_color=None,
             label_color=None,
             label_pos=None,
@@ -176,7 +177,6 @@ class Base(object):
             mark_point_symbol=None,
             mark_point_symbolsize=None,
             mark_point_textcolor=None,
-            namegap=None,
             rader_text_color=None,
             radius_data=None,
             radius=None,
@@ -201,17 +201,24 @@ class Base(object):
             word_gap=None,
             word_size_range=None,
             x_axis=None,
+            xaxis_margin=None,
+            xaxis_interval=None,
+            xaxis_name_gap=None,
+            xaxis_name_size=None,
             xaxis_name_pos=None,
             xaxis_name=None,
             xaxis_rotate=None,
             xaxis_min=None,
             xaxis_max=None,
             xaxis_type=None,
-            xy_text_size=None,
+            yaxis_margin=None,
+            yaxis_interval=None,
             yaxis_formatter=None,
             yaxis_rotate=None,
             yaxis_min=None,
             yaxis_max=None,
+            yaxis_name_gap=None,
+            yaxis_name_size=None,
             yaxis_name_pos=None,
             yaxis_type=None,
             yaxis_name=None):
@@ -393,15 +400,8 @@ class Base(object):
         :param path:
             path of render html file
         """
-        _tmp = "template.html"
+        _tmp = "local.html"
         series = self._option.get("series")
-        for s in series:
-            if s.get('type') == "wordCloud":
-                _tmp = "wd.html"
-                break
-            if s.get('type') == "liquidFill":
-                _tmp = "lq.html"
-                break
         my_option = json_dumps(self._option, indent=4)
         tmp = template.JINJA2_ENV.get_template(_tmp)
         html = tmp.render(myOption=my_option,
@@ -421,15 +421,9 @@ class Base(object):
         series = self._option.get("series")
         map_keywords = {}
         for s in series:
-            if s.get('type') == "wordCloud":
-                _tmp = 'wd_notebook.html'
-                break
-            if s.get('type') == "liquidFill":
-                _tmp = 'lq_notebook.html'
-                break
             # Avoid loading too many maps at once, make sure notebook can show map chart normally.
             if s.get('type') == 'map':
-                _tmp = "map_notebook.html"
+                _tmp = "notebook_map.html"
                 map_keywords = template.get_map(
                     self._option.get('series')[0].get('mapType'))
                 break

@@ -25,23 +25,36 @@
 
 * version 0.1.9.1
     * 加入 Travis-CI 自动化测试。感谢 [@chfw](https://github.com/chfw) 提供的代码。  
-    * legend 增加 legend_selectedmode 参数，图例可以设置为单例或者多例。（参见 Radar 图）
-    * visualmap 组件增加 visual_map 和 visual_range_size 参数。现在支持映射到颜色和图形大小两种方式。（参见 Scatter 图）
+    * legend 增加 `legend_selectedmode` 参数，图例可以设置为单例或者多例。（参见 Radar 图）
+    * visualmap 组件增加 `visual_map` 和 `visual_range_size` 参数。现在支持映射到颜色和图形大小两种方式。（参见 Scatter 图）
 
 * version 0.1.9.2
-    * 新增 xaxis_rotate, yaxis_rotate 参数，可通过设置该参数解决强制显示所有坐标轴标签时因过于密集重叠的问题。参见（Bar 图）
-    * 新增 xaxis_min, xaxis_max. yaxis_min, yaxis_max 参数，可设置坐标轴上的最大最小值，针对数值轴有效。
+    * 新增 `xaxis_rotate`, `yaxis_rotate` 参数，可通过设置该参数解决强制显示所有坐标轴标签时因过于密集重叠的问题。参见（Bar 图）
+    * 新增 `xaxis_min`, `xaxis_max`. `yaxis_min`, `yaxis_max` 参数，可设置坐标轴上的最大最小值，针对数值轴有效。
     * 解决 3D 图形不能在 jupyter notebook 上正常显示的问题。
-    * render() 方法现在为离线模式，实现本地生成 .html 文件，加载速度更快。
-    * 废弃 render_notebook() 方法，现可直接调用图形实例显示在 jupyter notebook 上。
+    * `render()` 方法现在为离线模式，实现本地生成 .html 文件，加载速度更快。
+    * 废弃 `render_notebook()` 方法，现可直接调用图形实例显示在 jupyter notebook 上。
 
 * version 0.1.9.3
-    * 新增 xaxis_type, yaxis_type 参数，可通过设置该参数指定直角坐标系数轴类型。（参见 Line，Scattre 图）
+    * 新增 `xaxis_type`, `yaxis_type` 参数，可通过设置该参数指定直角坐标系数轴类型。（参见 Line，Scattre 图）
     * 集成 Flask + Django
 
 * version 0.1.9.4（当前版本）
     * 删除 Image 依赖模块，改为 pillow 模块
     * 新增 Page 类，现能同时在一个 html 页面内按顺序展示多个图形。（参见用户自定义）
+
+* version 0.1.9.5
+    * 废弃 xAxis，yAxis 中的 `interval`, `xy_font_size`, `namegap` 参数。新增以下参数
+        * xaxis_interval（取代 `interval` 参数）
+        * yaxis_interval（取代 `interval` 参数）
+        * xaxis_name_gap（取代 `namegap` 参数）
+        * yaxis_name_gap（取代 `namegap` 参数）
+        * xaxis_name_size（取代 `xy_font_size` 参数）
+        * yaxis_name_size（取代 `xy_font_size` 参数）
+        * xaxis_margin（x 轴与标签的距离）
+        * yaxis_margin（y 轴与标签的距离）
+        * is_xaxislabel_align（x 轴标签是否与刻度对齐）
+        * is_yaxislabel_align（y 轴标签是否与刻度对齐）
 
 
 ## 项目期待

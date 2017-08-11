@@ -189,18 +189,25 @@ xyAxis：直角坐标系中的 x、y 轴(Line、Bar、Scatter、EffectScatter、
 
 * is_convert -> bool  
     是否交换 x 轴与 y 轴
-* xy_text_size -> int  
-    x 轴和 y 轴字体大小
-* namegap -> int  
-    坐标轴名称与轴线之间的距离
+* is_xaxislabel_align -> bool  
+    x 轴刻度线和标签是否对齐，默认为 False
+* is_yaxislabel_align -> bool  
+    y 轴刻度线和标签是否对齐，默认为 False
 * x_axis -> list  
     x 轴数据项
+* xaxis_interval -> int  
+    x 轴刻度标签的显示间隔，在类目轴中有效。默认会采用标签不重叠的策略间隔显示标签。  
+    设置成 0 强制显示所有标签。设置为 1，表示『隔一个标签显示一个标签』，如果值为 2，表示隔两个标签显示一个标签，以此类推
+* xaxis_margin -> int  
+    x 轴刻度标签与轴线之间的距离。默认为 8
 * xaxis_name -> str  
     x 轴名称
+* xaxis_name_size -> int  
+    x 轴名称体大小，默认为 14
+* xaxis_name_gap -> int  
+    x 轴名称与轴线之间的距离，默认为 25
 * xaxis_name_pos -> str  
     x 轴名称位置，有'start'，'middle'，'end'可选
-* xaxis_rotate -> int  
-    刻度标签旋转的角度，在类目轴的类目标签显示不下的时候可以通过旋转防止标签之间重叠。默认为 0，即不旋转。旋转的角度从 -90 度到 90 度。
 * xaxis_min -> int/float  
     x 坐标轴刻度最小值，默认为自适应。
 * xaxis_max -> int/float  
@@ -211,12 +218,23 @@ xyAxis：直角坐标系中的 x、y 轴(Line、Bar、Scatter、EffectScatter、
     * 'category'：类目轴，适用于离散的类目数据，为该类型时必须通过 data 设置类目数据。
     * 'time'：时间轴，适用于连续的时序数据，与数值轴相比时间轴带有时间的格式化，在刻度计算上也有所不同，例如会根据跨度的范围来决定使用月，星期，日还是小时范围的刻度。
     * 'log'：对数轴。适用于对数数据。
+* xaxis_rotate -> int  
+    x 轴刻度标签旋转的角度，在类目轴的类目标签显示不下的时候可以通过旋转防止标签之间重叠。默认为 0，即不旋转。旋转的角度从 -90 度到 90 度。
 * y_axis -> list  
     y 坐标轴数据
+* yaxis_interval -> int  
+    y 轴刻度标签的显示间隔，在类目轴中有效。默认会采用标签不重叠的策略间隔显示标签。  
+    设置成 0 强制显示所有标签。设置为 1，表示『隔一个标签显示一个标签』，如果值为 2，表示隔两个标签显示一个标签，以此类推
+* yaxis_margin -> int  
+    y 轴刻度标签与轴线之间的距离。默认为 8
 * yaxis_formatter -> str  
     y 轴标签格式器，如 '天'，则 y 轴的标签为数据加'天'(3 天，4 天),默认为 ""
 * yaxis_name -> str  
     y 轴名称
+* yaxis_name_size -> int  
+    y 轴名称体大小，默认为 14
+* yaxis_name_gap -> int  
+    y 轴名称与轴线之间的距离，默认为 25
 * yaxis_name_pos -> str  
     y 轴名称位置，有'start', 'middle'，'end'可选
 * yaxis_min -> int/float  
@@ -230,10 +248,7 @@ xyAxis：直角坐标系中的 x、y 轴(Line、Bar、Scatter、EffectScatter、
     * 'time'：时间轴，适用于连续的时序数据，与数值轴相比时间轴带有时间的格式化，在刻度计算上也有所不同，例如会根据跨度的范围来决定使用月，星期，日还是小时范围的刻度。
     * 'log'：对数轴。适用于对数数据。
 * yaxis_rotate -> int  
-    刻度标签旋转的角度，在类目轴的类目标签显示不下的时候可以通过旋转防止标签之间重叠。默认为 0，即不旋转。旋转的角度从 -90 度到 90 度。
-* interval -> int  
-    坐标轴刻度标签的显示间隔，在类目轴中有效。默认会采用标签不重叠的策略间隔显示标签  
-    设置成 0 强制显示所有标签。设置为 1，表示『隔一个标签显示一个标签』，如果值为 2，表示隔两个标签显示一个标签，以此类推
+    y 轴刻度标签旋转的角度，在类目轴的类目标签显示不下的时候可以通过旋转防止标签之间重叠。默认为 0，即不旋转。旋转的角度从 -90 度到 90 度。
 
 
 dataZoom：dataZoom 组件 用于区域缩放，从而能自由关注细节的数据信息，或者概览数据整体，或者去除离群点的影响。(Line、Bar、Scatter、EffectScatter、Kline)
@@ -434,7 +449,7 @@ bar.render()
 attr = ["{}天".format(i) for i in range(20)]
 v1 = [random.randint(1, 20) for _ in range(20)]
 bar = Bar("坐标轴标签旋转示例")
-bar.add("", attr, v1, interval=0, xaxis_rotate=30, yaxis_rotate=30)
+bar.add("", attr, v1, xaxis_interval=0, xaxis_rotate=30, yaxis_rotate=30)
 bar.show_config()
 bar.render()
 ```
