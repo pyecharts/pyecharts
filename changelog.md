@@ -44,6 +44,8 @@
     * 新增 Page 类，现能同时在一个 html 页面内按顺序展示多个图形。（参见用户自定义）
 
 * version 0.1.9.5
+    * 删除冗余 js 文件，压缩项目体积。
+    * 为 3D 图新增参数用于配置坐标轴选项（参见通用配置项中的 axis3D）
     * 废弃 xAxis，yAxis 中的 `interval`, `xy_font_size`, `namegap` 参数。新增以下参数
         * xaxis_interval（取代 `interval` 参数）
         * yaxis_interval（取代 `interval` 参数）
@@ -55,6 +57,7 @@
         * yaxis_margin（y 轴与标签的距离）
         * is_xaxislabel_align（x 轴标签是否与刻度对齐）
         * is_yaxislabel_align（y 轴标签是否与刻度对齐）
+    
 
 
 ## 项目期待
