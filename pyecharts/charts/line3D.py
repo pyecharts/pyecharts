@@ -30,16 +30,13 @@ class Line3D(Base):
         :param kwargs:
         :return:
         """
+        kwargs.update(xaxis3d_type='value', yaxis3d_type='value', zaxis3d_type='value')
         chart = get_all_options(**kwargs)
         self._option.get('legend')[0].get('data').append(name)
         self._option.update(
-            xAxis3D={
-                "type": 'value',
-            },
-            yAxis3D={
-                "type": "value",
-            },
-            zAxis3D={"type": "value"},
+            xAxis3D=chart['xaxis3D'],
+            yAxis3D=chart['yaxis3D'],
+            zAxis3D=chart['zaxis3D'],
             grid3D=chart['grid3D']
         )
         self._option.get('series').append({
