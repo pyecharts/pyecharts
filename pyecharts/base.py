@@ -211,6 +211,13 @@ class Base(object):
             xaxis_min=None,
             xaxis_max=None,
             xaxis_type=None,
+            xaxis3d_name=None,
+            xaxis3d_name_size=None,
+            xaxis3d_name_gap=None,
+            xaxis3d_min=None,
+            xaxis3d_max=None,
+            xaxis3d_interval=None,
+            xaxis3d_margin=None,
             yaxis_margin=None,
             yaxis_interval=None,
             yaxis_formatter=None,
@@ -221,7 +228,20 @@ class Base(object):
             yaxis_name_size=None,
             yaxis_name_pos=None,
             yaxis_type=None,
-            yaxis_name=None):
+            yaxis_name=None,
+            yaxis3d_name=None,
+            yaxis3d_name_size=None,
+            yaxis3d_name_gap=None,
+            yaxis3d_min=None,
+            yaxis3d_max=None,
+            yaxis3d_interval=None,
+            yaxis3d_margin=None,
+            zaxis3d_name=None,
+            zaxis3d_name_size=None,
+            zaxis3d_name_gap=None,
+            zaxis3d_min=None,
+            zaxis3d_max=None,
+            zaxis3d_margin=None):
         """ The base class's add() is just to provide a hint option """
         pass
 
