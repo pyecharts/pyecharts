@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-#coding=utf-8
+# coding=utf-8
 
 import json
 import uuid
@@ -421,7 +421,6 @@ class Base(object):
             path of render html file
         """
         _tmp = "local.html"
-        series = self._option.get("series")
         my_option = json_dumps(self._option, indent=4)
         tmp = template.JINJA2_ENV.get_template(_tmp)
         html = tmp.render(myOption=my_option,
@@ -441,7 +440,8 @@ class Base(object):
         series = self._option.get("series")
         map_keywords = {}
         for s in series:
-            # Avoid loading too many maps at once, make sure notebook can show map chart normally.
+            # Avoid loading too many maps at once, make sure notebook can
+            # show map chart normally.
             if s.get('type') == 'map':
                 _tmp = "notebook_map.html"
                 map_keywords = template.get_map(
@@ -1108,17 +1108,6 @@ class Base(object):
             '江津市': [106.16, 29.18],
             '南川市': [107.05, 29.10],
             '永川市': [105.53, 29.23],
-            '鄂尔多斯': [109.781327, 39.608266],
-            '盐城': [120.13, 33.38],
-            '上海': [121.48, 31.22],
-            '连云港': [119.16, 34.59],
-            '重庆': [106.54, 29.59],
-            '句容': [119.16, 31.95],
-            '北京': [116.46, 39.92],
-            '临安': [119.72, 30.23],
-            '天津': [117.2, 39.13],
-            '荆州': [112.239741, 30.335165],
-            '廊坊': [116.7, 39.53],
         }
 
 
