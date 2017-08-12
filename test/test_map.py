@@ -22,10 +22,17 @@ def test_map():
     map.show_config()
     map.render()
 
-    # # map_2
+    # map_2
     value = [20, 190, 253, 77, 65]
     attr = ['汕头市', '汕尾市', '揭阳市', '阳江市', '肇庆市']
     map = Map("广东地图示例", width=1200, height=600)
     map.add("", attr, value, maptype='广东', is_visualmap=True, visual_text_color='#000')
     map.show_config()
+    map.render()
+
+    # map_3
+    value = [95.1, 23.2, 43.3, 66.4, 88.5]
+    attr= ["China", "Canada", "Brazil", "Russia", "United States"]
+    map = Map("世界地图示例", width=1200, height=600)
+    map.add("", attr, value, maptype="world", is_visualmap=True, visual_text_color='#000')
     map.render()
