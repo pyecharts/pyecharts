@@ -745,23 +745,36 @@ def xaxis3D(xaxis3d_type=None,
             xaxis3d_min=None,
             xaxis3d_max=None,
             xaxis3d_interval="auto",
-            xaxis3d_margin=8):
+            xaxis3d_margin=8,
+            **kwargs):
     """
 
     :param xaxis3d_type:
+        Type of 3d xaxis
     :param xaxis3d_name:
+        Name of 3d xaxis
     :param xaxis3d_name_size:
+        3d xaxis name font size
     :param xaxis3d_name_gap:
+        Gap between axis name and 3d xaxis line.
     :param xaxis3d_min:
+        The minimun value of 3d xaxis.
     :param xaxis3d_max:
+        The maximun value of 3d xaxis.
     :param xaxis3d_interval:
+        The display interval of the axis scale label is valid in the category 3d xaxis.
+        By default, labels are displayed using labels that do not overlap the labels
+        Set to 0 to force all labels to be displayed
+        and label is one by one if setting as 1; If 2, it will be one label separates from each other, and so on.
     :param xaxis3d_margin:
+        The margin between the axis label and the 3d xaxis line.
     :return:
     """
     _xaxis3D = {
         "name": xaxis3d_name,
         "nameGap": xaxis3d_name_gap,
         "nameTextStyle": {"fontSize": xaxis3d_name_size},
+        "type": xaxis3d_type,
         "min": xaxis3d_min,
         "max": xaxis3d_max,
         "axisLabel": {
@@ -780,23 +793,36 @@ def yaxis3D(yaxis3d_type=None,
             yaxis3d_min=None,
             yaxis3d_max=None,
             yaxis3d_interval="auto",
-            yaxis3d_margin=8):
+            yaxis3d_margin=8,
+            **kwargs):
     """
 
     :param yaxis3d_type:
+        Type of 3d yaxis
     :param yaxis3d_name:
+        Name of 3d yaxis
     :param yaxis3d_name_size:
+        3d yaxis name font size
     :param yaxis3d_name_gap:
+        Gap between axis name and 3d yaxis line.
     :param yaxis3d_min:
+        The minimun value of 3d yaxis.
     :param yaxis3d_max:
+        The maximun value of 3d yaxis.
     :param yaxis3d_interval:
+        The display interval of the axis scale label is valid in the category 3d yaxis.
+        By default, labels are displayed using labels that do not overlap the labels
+        Set to 0 to force all labels to be displayed
+        and label is one by one if setting as 1; If 2, it will be one label separates from each other, and so on.
     :param yaxis3d_margin:
+        The margin between the axis label and the 3d yaxis line.
     :return:
     """
     _yaxis3D = {
         "name": yaxis3d_name,
         "nameGap": yaxis3d_name_gap,
         "nameTextStyle": {"fontSize": yaxis3d_name_size},
+        "type": yaxis3d_type,
         "min": yaxis3d_min,
         "max": yaxis3d_max,
         "axisLabel": {
@@ -814,29 +840,35 @@ def zaxis3D(zaxis3d_type=None,
             zaxis3d_name_gap=20,
             zaxis3d_min=None,
             zaxis3d_max=None,
-            zaxis3d_interval="auto",
-            zaxis3d_margin=8):
+            zaxis3d_margin=8,
+            **kwargs):
     """
 
     :param zaxis3d_type:
+        Type of 3d zaxis
     :param zaxis3d_name:
+        Name of 3d zaxis
     :param zaxis3d_name_size:
+        3d zaxis name font size
     :param zaxis3d_name_gap:
+        Gap between axis name and 3d zaxis line.
     :param zaxis3d_min:
+        The minimun value of 3d zaxis.
     :param zaxis3d_max:
-    :param zaxis3d_interval:
+        The maximun value of 3d zaxis.
     :param zaxis3d_margin:
+        The margin between the axis label and the 3d zaxis line.
     :return:
     """
     _zaxis3D = {
         "name": zaxis3d_name,
         "nameGap": zaxis3d_name_gap,
         "nameTextStyle": {"fontSize": zaxis3d_name_size},
+        "type": zaxis3d_type,
         "min": zaxis3d_min,
         "max": zaxis3d_max,
         "axisLabel": {
             "margin": zaxis3d_margin,
-            "interval": zaxis3d_interval
         }
     }
     return _zaxis3D

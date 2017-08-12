@@ -40,20 +40,18 @@ class Bar3D(Base):
         :param kwargs:
         :return:
         """
+        kwargs.update(xaxis3d_type='category', yaxis3d_type='category', zaxis3d_type='value')
         chart = get_all_options(**kwargs)
         self._option.get('legend')[0].get('data').append(name)
         self._option.update(
-            xAxis3D={
-                "type": 'category',
-                "data": x_axis
-            },
-            yAxis3D={
-                "type": "category",
-                "data": y_axis
-            },
-            zAxis3D={"type": "value"},
+            xAxis3D=chart['xaxis3D'],
+            yAxis3D=chart['yaxis3D'],
+            zAxis3D=chart['zaxis3D'],
             grid3D=chart['grid3D']
         )
+        self._option.get('xAxis3D').update(data=x_axis)
+        self._option.get('yAxis3D').update(data=y_axis)
+
         self._option.get('series').append({
             "type": "bar3D",
             "name": name,

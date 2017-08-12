@@ -13,4 +13,5 @@ def test_scatter3D():
                    '#fee090', '#fdae61', '#f46d43', '#d73027', '#a50026']
     scatter3D = Scatter3D("3D 散点图示例", width=1200, height=600)
     scatter3D.add("", data, is_visualmap=True, visual_range_color=range_color)
+    scatter3D.show_config()
     scatter3D.render()

@@ -37,7 +37,7 @@ pyecharts 是一个用于生成 Echarts 图表的类库。实际上就是 Echart
     * Scatter3D（3D 散点图）
     * WordCloud（词云图）
 * [用户自定义](https://github.com/chenjiandongx/pyecharts/blob/master/document/zh-cn/documentation.md#用户自定义)
-* [集成Flask&Django](https://github.com/chenjiandongx/pyecharts/blob/master/document/zh-cn/documentation.md#集成Flask&Django)
+* [集成Flask和Django](https://github.com/chenjiandongx/pyecharts/blob/master/document/zh-cn/documentation.md#集成Flask和Django)
 * [更多示例](https://github.com/chenjiandongx/pyecharts/blob/master/document/zh-cn/documentation.md#更多示例)
 * [关于项目](https://github.com/chenjiandongx/pyecharts/blob/master/document/zh-cn/documentation.md#关于项目)
 
@@ -314,7 +314,8 @@ lineStyle：带线图形的线的风格选项(Line、Polar、Radar、Graph、Par
 * line_type -> str  
     线的类型，有'solid', 'dashed', 'dotted'可选。默认为'solid'
 
-grid3D：3D笛卡尔坐标系组配置项，适用于 3D 图形。（Bar3D, Line3D, Scatter3D)
+
+grid3D：3D 笛卡尔坐标系组配置项，适用于 3D 图形。（Bar3D, Line3D, Scatter3D)
 
 * grid3D_width -> int  
     三维笛卡尔坐标系组件在三维场景中的高度。默认为 100
@@ -328,6 +329,57 @@ grid3D：3D笛卡尔坐标系组配置项，适用于 3D 图形。（Bar3D, Line
     物体自传的速度。单位为角度 / 秒，默认为 10 ，也就是 36 秒转一圈。
 * grid3D_rotate_sensitivity -> int  
     旋转操作的灵敏度，值越大越灵敏。默认为 1, 设置为 0 后无法旋转。
+
+axis3D：3D 笛卡尔坐标系 X，Y，Z 轴配置项
+
+X 轴
+* xaxis3d_name -> str  
+    x 轴名称，默认为 ""
+* xaxis3d_name_size -> int  
+    x 轴名称体大小，默认为 16
+* xaxis3d_name_gap -> int  
+    x 轴名称与轴线之间的距离，默认为 25
+* xaxis3d_min -> int/float  
+    x 坐标轴刻度最小值，默认为自适应。
+* xaxis3d_max -> int/float  
+    x 坐标轴刻度最大值，默认为自适应。
+* xaxis3d_interval -> int  
+    x 轴刻度标签的显示间隔，在类目轴中有效。默认会采用标签不重叠的策略间隔显示标签。  
+    设置成 0 强制显示所有标签。设置为 1，表示『隔一个标签显示一个标签』，如果值为 2，表示隔两个标签显示一个标签，以此类推
+* xaxis3d_margin -> int  
+    x 轴刻度标签与轴线之间的距离。默认为 8
+
+Y 轴
+* yaxis3d_name -> str  
+    y 轴名称，默认为 ""
+* yaxis3d_name_size -> int  
+    y 轴名称体大小，默认为 16
+* yaxis3d_name_gap -> int  
+    y 轴名称与轴线之间的距离，默认为 25
+* yaxis3d_min -> int/float  
+    y 坐标轴刻度最小值，默认为自适应。
+* yaxis3d_max -> int/float  
+    y 坐标轴刻度最大值，默认为自适应。
+* yaxis3d_interval -> int  
+    y 轴刻度标签的显示间隔，在类目轴中有效。默认会采用标签不重叠的策略间隔显示标签。  
+    设置成 0 强制显示所有标签。设置为 1，表示『隔一个标签显示一个标签』，如果值为 2，表示隔两个标签显示一个标签，以此类推
+* yaxis3d_margin -> int  
+    y 轴刻度标签与轴线之间的距离。默认为 8
+
+Z 轴
+* zaxis3d_name -> str  
+    z 轴名称，默认为 ""
+* zaxis3d_name_size -> int  
+    z 轴名称体大小，默认为 16
+* zaxis3d_name_gap -> int  
+    z 轴名称与轴线之间的距离，默认为 25
+* zaxis3d_min -> int/float  
+    z 坐标轴刻度最小值，默认为自适应。
+* zaxis3d_max -> int/float  
+    z 坐标轴刻度最大值，默认为自适应。
+* zaxis3d_margin -> int  
+    z 轴刻度标签与轴线之间的距离。默认为 8
+
 
 visualMap：是视觉映射组件，用于进行『视觉编码』，也就是将数据映射到视觉元素（视觉通道）
 
@@ -516,6 +568,8 @@ bar3d.show_config()
 bar3d.render()
 ```
 ![bar3D-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/bar3D-0.gif)
+
+data 中，如 [1, 2, 3] 表示 x 轴的索引为 1，即 "1a"；y 轴的索引为 2，即 "Thursday"；z 轴的数值为 3
 
 设置 ``` grid3D_shading``` 可以让柱状更真实  
 ```python
@@ -2221,7 +2275,7 @@ page.render()
 ![multiple-charts-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/multiple-charts-1.gif)
 
 
-# 集成Flask&Django
+# 集成Flask和Django
 
 * [pyecharts + Flask](https://github.com/chenjiandongx/pyecharts/blob/master/document/zh-cn/doc_flask.md)
 * [pyecharts + Django](https://github.com/chenjiandongx/pyecharts/blob/master/document/zh-cn/doc_django.md)
