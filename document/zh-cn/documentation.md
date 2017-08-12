@@ -1293,6 +1293,14 @@ map.render()
 ```
 ![map-2](https://github.com/chenjiandongx/pyecharts/blob/master/images/map-2.gif)
 
+```python
+value = [95.1, 23.2, 43.3, 66.4, 88.5]
+attr= ["China", "Canada", "Brazil", "Russia", "United States"]
+map = Map("世界地图示例", width=1200, height=600)
+map.add("", attr, value, maptype="world", is_visualmap=True, visual_text_color='#000')
+map.render()
+```
+![map-3](https://github.com/chenjiandongx/pyecharts/blob/master/images/map-3.gif)
 
 ## Parallel（平行坐标系）
 > 平行坐标系是一种常用的可视化高维数据的图表。
