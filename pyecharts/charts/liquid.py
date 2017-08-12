@@ -18,8 +18,7 @@ class Liquid(Base):
               shape='circle',
               liquid_color=None,
               is_liquid_animation=True,
-              is_liquid_outline_show=True,
-              **kwargs):
+              is_liquid_outline_show=True):
         """
 
         :param name:
@@ -37,7 +36,6 @@ class Liquid(Base):
             Whether disable animation.
         :param is_liquid_outline_show:
             whether hide the outline
-        :param kwargs:
         :return:
         """
         _animation_dur, _animation_dur_update = 2000, 1000
