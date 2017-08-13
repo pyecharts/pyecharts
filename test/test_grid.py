@@ -3,44 +3,53 @@
 from __future__ import unicode_literals
 
 from pyecharts import Bar, Line, Scatter, EffectScatter, Pie, Kline, HeatMap
+from pyecharts import Grid
 
-def test_grid():
 
-    # grid_0
+def test_grid_0():
+
     attr = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
     v1 = [5, 20, 36, 10, 75, 90]
     v2 = [10, 25, 8, 60, 20, 80]
-    bar = Bar("柱状图示例", height=720, is_grid=True)
-    bar.add("商家A", attr, v1, is_stack=True, grid_bottom="60%")
-    bar.add("商家B", attr, v2, is_stack=True, grid_bottom="60%")
+    bar = Bar("柱状图示例", height=720)
+    bar.add("商家A", attr, v1, is_stack=True)
+    bar.add("商家B", attr, v2, is_stack=True)
     line = Line("折线图示例", title_top="50%")
     attr = ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
     line.add("最高气温", attr, [11, 11, 15, 13, 12, 13, 10], mark_point=["max", "min"], mark_line=["average"])
     line.add("最低气温", attr, [1, -2, 2, 5, 3, 2, 0], mark_point=["max", "min"],
              mark_line=["average"], legend_top="50%")
-    bar.grid(line.get_series(), grid_top="60%")
+    grid = Grid()
+    grid.add(bar, grid_bottom="60%")
+    grid.add(line, grid_top="60%")
     bar.show_config()
-    bar.render()
+    grid.render()
 
-    # grid_1
+
+def test_grid_1():
+
     v1 = [5, 20, 36, 10, 75, 90]
     v2 = [10, 25, 8, 60, 20, 80]
-    scatter = Scatter(width=1200, is_grid=True)
-    scatter.add("散点图示例", v1, v2, grid_left="60%", legend_pos="70%")
+    scatter = Scatter(width=1200)
+    scatter.add("散点图示例", v1, v2, legend_pos="70%")
     es = EffectScatter()
     es.add("动态散点图示例", [11, 11, 15, 13, 12, 13, 10], [1, -2, 2, 5, 3, 2, 0],
            effect_scale=6, legend_pos="20%")
-    scatter.grid(es.get_series(), grid_right="60%")
-    scatter.show_config()
-    scatter.render()
 
-    # grid_2
+    grid = Grid()
+    grid.add(scatter, grid_left="60%")
+    grid.add(es, grid_right="60%")
+    grid.render()
+
+
+def test_grid_2():
+
     attr = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
     v1 = [5, 20, 36, 10, 75, 90]
     v2 = [10, 25, 8, 60, 20, 80]
-    bar = Bar("柱状图示例", height=720, width=1200, title_pos="65%", is_grid=True)
-    bar.add("商家A", attr, v1, is_stack=True, grid_bottom="60%", grid_left="60%")
-    bar.add("商家B", attr, v2, is_stack=True, grid_bottom="60%", grid_left="60%", legend_pos="80%")
+    bar = Bar("柱状图示例", height=720, width=1200, title_pos="65%")
+    bar.add("商家A", attr, v1, is_stack=True)
+    bar.add("商家B", attr, v2, is_stack=True, legend_pos="80%")
     line = Line("折线图示例")
     attr = ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
     line.add("最高气温", attr, [11, 11, 15, 13, 12, 13, 10], mark_point=["max", "min"], mark_line=["average"])
@@ -53,36 +62,40 @@ def test_grid():
     es = EffectScatter("动态散点图示例", title_top="50%")
     es.add("es", [11, 11, 15, 13, 12, 13, 10], [1, -2, 2, 5, 3, 2, 0], effect_scale=6,
            legend_top="50%", legend_pos="20%")
-    bar.grid(line.get_series(), grid_bottom="60%", grid_right="60%")
-    bar.grid(scatter.get_series(), grid_top="60%", grid_left="60%")
-    bar.grid(es.get_series(), grid_top="60%", grid_right="60%")
-    bar.show_config()
-    bar.render()
 
-    # grid_3
-    line = Line("折线图示例", width=1200, is_grid=True)
+    grid = Grid()
+    grid.add(bar, grid_bottom="60%", grid_left="60%")
+    grid.add(line, grid_bottom="60%", grid_right="60%")
+    grid.add(scatter, grid_top="60%", grid_left="60%")
+    grid.add(es, grid_top="60%", grid_right="60%")
+    grid.render()
+
+
+def test_grid_3():
+
+    line = Line("折线图示例", width=1200)
     attr = ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
-    line.add("最高气温", attr, [11, 11, 15, 13, 12, 13, 10], mark_point=["max", "min"],
-             mark_line=["average"], grid_right="65%")
+    line.add("最高气温", attr, [11, 11, 15, 13, 12, 13, 10], mark_point=["max", "min"], mark_line=["average"])
     line.add("最低气温", attr, [1, -2, 2, 5, 3, 2, 0], mark_point=["max", "min"],
              mark_line=["average"], legend_pos="20%")
     attr = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
     v1 = [11, 12, 13, 10, 10, 10]
     pie = Pie("饼图示例", title_pos="45%")
     pie.add("", attr, v1, radius=[30, 55], legend_pos="65%", legend_orient='vertical')
-    line.grid(pie.get_series(), grid_left="60%")
-    line.show_config()
-    line.render()
 
-    # grid_4
-    line = Line("折线图示例", width=1200, is_grid=True)
+    grid = Grid()
+    grid.add(line, grid_right="65%")
+    grid.add(pie, grid_left="60%")
+    grid.render()
+
+
+def test_grid_4():
+
+    line = Line("折线图示例", width=1200)
     attr = ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
-    line.add("最高气温", attr, [11, 11, 15, 13, 12, 13, 10], mark_point=["max", "min"],
-             mark_line=["average"], grid_right="60%")
+    line.add("最高气温", attr, [11, 11, 15, 13, 12, 13, 10], mark_point=["max", "min"], mark_line=["average"])
     line.add("最低气温", attr, [1, -2, 2, 5, 3, 2, 0], mark_point=["max", "min"],
-             mark_line=["average"], legend_pos="20%", grid_right="60%")
-    attr = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
-    value = [20, 40, 60, 80, 100, 120]
+             mark_line=["average"], legend_pos="20%")
     v1 = [[2320.26, 2320.26, 2287.3, 2362.94],
           [2300, 2291.3, 2288.26, 2308.38],
           [2295.35, 2346.5, 2295.35, 2345.92],
@@ -116,25 +129,31 @@ def test_grid():
           [2255.77, 2270.28, 2253.31, 2276.22]]
     kline = Kline("K 线图示例", title_pos="60%")
     kline.add("日K", ["2017/7/{}".format(i + 1) for i in range(31)], v1, legend_pos="80%")
-    line.grid(kline.get_series(), grid_left="55%")
-    line.show_config()
-    line.render()
 
-    # grid_5
+    grid = Grid()
+    grid.add(line, grid_right="60%")
+    grid.add(kline, grid_left="55%")
+    grid.render()
+
+
+def test_grid_5():
+
     import random
     x_axis = ["12a", "1a", "2a", "3a", "4a", "5a", "6a", "7a", "8a", "9a", "10a", "11a",
               "12p", "1p", "2p", "3p", "4p", "5p", "6p", "7p", "8p", "9p", "10p", "11p"]
     y_aixs = ["Saturday", "Friday", "Thursday", "Wednesday", "Tuesday", "Monday", "Sunday"]
     data = [[i, j, random.randint(0, 50)] for i in range(24) for j in range(7)]
-    heatmap = HeatMap("热力图示例", height=700, is_grid=True)
+    heatmap = HeatMap("热力图示例", height=700)
     heatmap.add("热力图直角坐标系", x_axis, y_aixs, data, is_visualmap=True, visual_top="45%",
-                visual_text_color="#000", visual_orient='horizontal', grid_bottom="60%")
+                visual_text_color="#000", visual_orient='horizontal')
     attr = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
     v1 = [5, 20, 36, 10, 75, 90]
     v2 = [10, 25, 8, 60, 20, 80]
     bar = Bar("柱状图示例", title_top="52%")
     bar.add("商家A", attr, v1, is_stack=True)
     bar.add("商家B", attr, v2, is_stack=True, legend_top="50%")
-    heatmap.grid(bar.get_series(), grid_top="60%")
-    heatmap.show_config()
-    heatmap.render()
+
+    grid = Grid()
+    grid.add(heatmap, grid_bottom="60%")
+    grid.add(bar, grid_top="60%")
+    grid.render()
