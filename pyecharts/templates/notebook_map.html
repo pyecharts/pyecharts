@@ -4,11 +4,11 @@
          paths:{
             echarts: '//cdn.bootcss.com/echarts/3.6.2/echarts.min',
             china: '//echarts.baidu.com/gallery/vendors/echarts/map/js/china',
-            world: '//oog4yfyu0.bkt.clouddn.com/world',
-            {%if location_js %}, {{location_js}} {% endif %}
+            world: '//oog4yfyu0.bkt.clouddn.com/world'// Please do not add a comma here
+            {%if location_js %},/*here is the comma*/ {{location_js}} {% endif %}
          }
     });
-    require(['echarts', 'china', 'world' {% if location %}, '{{location}}'{% endif %}],function(ec){
+    require(['echarts', 'china', 'world' {% if location %}, /*same here*/'{{location}}'{% endif %}],function(ec){
     var myChart = ec.init(document.getElementById('{{ chartId }}'));
                var option =  {{ myOption }};
                myChart.setOption(option);
