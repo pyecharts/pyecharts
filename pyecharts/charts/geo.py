@@ -695,8 +695,10 @@ class Geo(Base):
         for name, value in zip(attr, value):
             if name in CITY_COORDINATES:
                 city_coordinate = CITY_COORDINATES.get(name)
-                value.append(city_coordinate)
-            _data.append({"name": name, "value": value})
+                city_coordinate.append(value)
+                _data.append({"name": name, "value": city_coordinate})
+            else:
+                print("%s coordinates is not found")
         self._option.update(
             geo={
                 "map": maptype,
