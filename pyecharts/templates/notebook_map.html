@@ -2,10 +2,10 @@
 <script>
     require.config({
          paths:{
-            echarts: '//cdn.bootcss.com/echarts/3.6.2/echarts.min',
-            china: '//echarts.baidu.com/gallery/vendors/echarts/map/js/china',
-            world: '//oog4yfyu0.bkt.clouddn.com/world',
-            {%if location_js %}, {{location_js}} {% endif %}
+             echarts: '//cdn.bootcss.com/echarts/3.6.2/echarts.min',
+             china: '//echarts.baidu.com/gallery/vendors/echarts/map/js/china',
+             world: '//oog4yfyu0.bkt.clouddn.com/world'
+             {%if location_js %}, {{location_js}} {% endif %}
          }
     });
     require(['echarts', 'china', 'world' {% if location %}, '{{location}}'{% endif %}],function(ec){
