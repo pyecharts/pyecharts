@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-#coding=utf-8
+# coding=utf-8
 
 import json
 import uuid
@@ -440,7 +440,8 @@ class Base(object):
         series = self._option.get("series")
         map_keywords = {}
         for s in series:
-            # Avoid loading too many maps at once, make sure notebook can show map chart normally.
+            # Avoid loading too many maps at once, make sure notebook can
+            # show map chart normally.
             if s.get('type') == 'map':
                 _tmp = "notebook_map.html"
                 map_keywords = template.get_map(
