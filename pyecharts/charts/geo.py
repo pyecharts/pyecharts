@@ -1,14 +1,16 @@
 #!/usr/bin/env python
-#coding=utf-8
+# coding=utf-8
 
 from pyecharts.base import Base
 from pyecharts.option import get_all_options
 
+
 class Geo(Base):
     """
-    <<< Geo component >>>
     Geographic coorinate system component.
-    Geographic coorinate system component is used to draw maps, which also supports scatter series, and line series.
+
+    It is used to draw maps, which also supports scatter series, and line
+    series.
     """
     def __init__(self, title="", subtitle="", **kwargs):
         super(Geo, self).__init__(title, subtitle, **kwargs)
@@ -27,8 +29,8 @@ class Geo(Base):
         """
 
         :param name:
-            Series name used for displaying in tooltip and filtering with legend,
-            or updaing data and configuration with setOption.
+            Series name used for displaying in tooltip and filtering with
+            legend, or updaing data and configuration with setOption.
         :param attr:
             name of attribute
         :param value:
@@ -50,13 +52,13 @@ class Geo(Base):
         assert len(attr) == len(value)
         chart = get_all_options(**kwargs)
         _data = []
-        for data in zip(attr, value):
-            _name, _value = data
-            if _name in self._geo_cities:
-                _v = self._geo_cities.get(_name)
-                _v.append(_value)
-                _value = list(_v)
-            _data.append({"name": _name, "value": _value})
+        for name, value in zip(attr, value):
+            if name in self._geo_cities:
+                city_coordinate = self._geo_cities.get(name)
+                city_coordinate.append(value)
+                _data.append({"name": name, "value": city_coordinate})
+            else:
+                print("%s coordinates is not found" % name)
         self._option.update(
             geo={
                 "map": maptype,
@@ -64,7 +66,7 @@ class Geo(Base):
                 "itemStyle": {"normal": {
                     "areaColor": geo_normal_color,
                     "borderColor": border_color},
-                    "emphasis":{"areaColor": geo_emphasis_color}}
+                    "emphasis": {"areaColor": geo_emphasis_color}}
             })
         self._option.get('legend')[0].get('data').append(name)
         if type == "scatter":
@@ -97,4 +99,3 @@ class Geo(Base):
                 "data": _data,
             })
         self._legend_visualmap_colorlst(**kwargs)
-
