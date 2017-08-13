@@ -421,7 +421,6 @@ class Base(object):
             path of render html file
         """
         _tmp = "local.html"
-        series = self._option.get("series")
         my_option = json_dumps(self._option, indent=4)
         tmp = template.JINJA2_ENV.get_template(_tmp)
         html = tmp.render(myOption=my_option,
