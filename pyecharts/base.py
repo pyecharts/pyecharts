@@ -23,8 +23,7 @@ class Base(object):
                  subtitle_color="#aaa",
                  title_text_size=18,
                  subtitle_text_size=12,
-                 background_color="#fff",
-                 is_grid=False):
+                 background_color="#fff"):
         """
 
         :param title:
@@ -62,12 +61,8 @@ class Base(object):
             Color can be represented in RGB, for example 'rgb(128, 128, 128)'.
             RGBA can be used when you need alpha channel, for example 'rgba(128, 128, 128, 0.5)'.
             You may also use hexadecimal format, for example '#ccc'.
-        :param is_grid:
-            It specifies whether to use the grid component.
         """
         self._option = {}
-        if is_grid:
-            self._option.update(grid=[])
         self._width, self._height = width, height
         self._colorlst = ['#c23531', '#2f4554', '#61a0a8', '#d48265', '#749f83',
                           '#ca8622', '#bda29a', '#6e7074', '#546570', '#c4ccd3',
@@ -245,103 +240,6 @@ class Base(object):
         """ The base class's add() is just to provide a hint option """
         pass
 
-    def custom(self, series):
-        """ Appends the data for the series of the chart type
-
-        :param series:
-            series data
-        """
-        _name, _series, _xaxis, _yaxis, _legend, _title = series
-        for n in _name:
-            self._option.get('legend')[0].get('data').append(n)
-        for s in _series:
-            self._option.get('series').append(s)
-
-    def __custom_for_grid(self, series):
-        """
-
-        :param series:
-            series data
-        :return:
-        """
-        _name, _series, _xaxis, _yaxis, _legend, _title = series
-        for s in _series:
-            self._option.get('series').append(s)
-        return len(self._option.get('series')), len(_series), _xaxis, _yaxis, _legend, _title
-
-    def grid(self, series,
-             grid_width=None,
-             grid_height=None,
-             grid_top=None,
-             grid_bottom=None,
-             grid_left=None,
-             grid_right=None):
-        """ Concurrently show charts
-
-        :param series:
-            append other chart series data
-        :param grid_width:
-            Width of grid component. Adaptive by default.
-        :param grid_height:
-            Height of grid component. Adaptive by default.
-        :param grid_top:
-            Distance between grid component and the top side of the container.
-            grid_top value can be instant pixel value like 20;
-            it can also be percentage value relative to container width like '20%';
-            and it can also be 'top', 'middle', or 'bottom'.
-            If the grid_top value is set to be 'top', 'middle', or 'bottom',
-            then the component will be aligned automatically based on position.
-        :param grid_bottom:
-            Distance between grid component and the bottom side of the container.
-            grid_bottom value can be instant pixel value like 20;
-            it can also be percentage value relative to container width like '20%'.
-        :param grid_left:
-            Distance between grid component and the left side of the container.
-            grid_left value can be instant pixel value like 20;
-            it can also be percentage value relative to container width like '20%';
-            and it can also be 'left', 'center', or 'right'.
-            If the grid_left value is set to be 'left', 'center', or 'right',
-            then the component will be aligned automatically based on position.
-        :param grid_right:
-            Distance between grid component and the right side of the container.
-            grid_right value can be instant pixel value like 20;
-            it can also be percentage value relative to container width like '20%'.
-        :return:
-        """
-        from pyecharts.option import grid
-        _index, _index_once, _xaxis, _yaxis, _legned, _title = self.__custom_for_grid(series)
-        self._option.get('legend').append(_legned)
-        self._option.get('title').append(_title)
-        if _xaxis and _yaxis is not None:
-            try:
-                _xaxis[0].update(gridIndex=_index - 1)
-                _yaxis[0].update(gridIndex=_index - 1)
-                self._option.get('xAxis').append(_xaxis[0])
-                self._option.get('yAxis').append(_yaxis[0])
-            except:
-                pass
-            # indexflag is only identify for every series
-            _flag = self._option.get('series')[0].get('indexflag')
-            _series_index = 0
-            for s in self._option.get('series'):
-                if _flag == s.get('indexflag'):
-                    s.update(xAxisIndex=_series_index, yAxisIndex=_series_index)
-                else:
-                    _series_index += 1
-                    s.update(xAxisIndex=_series_index, yAxisIndex=_series_index)
-                _flag = s.get('indexflag')
-
-        _grid = grid(grid_width, grid_height, grid_top,
-                     grid_bottom, grid_left, grid_right)
-        for _ in range(_index_once):
-            self._option.get('grid').append(_grid)
-
-    def get_series(self):
-        """ Get chart series data """
-        return self._option.get('legend')[0].get('data'), self._option.get('series'),\
-               self._option.get('xAxis', None), self._option.get('yAxis', None),\
-               self._option.get('legend')[0], self._option.get('title')[0]
-
     def show_config(self):
         """ Print all options of charts"""
         pprint(self._option)
@@ -390,10 +288,6 @@ class Base(object):
             self._option.update(visualMap=chart['visual_map'])
         self._option.get('legend')[0].update(chart['legend'])
         self._option.update(color=chart['color'])
-
-        # grid component
-        if chart['grid']:
-            self._option.get('grid').append(chart['grid'])
 
         # datazoom component
         if kwargs.get('is_datazoom_show', None) is True:
