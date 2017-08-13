@@ -2,11 +2,11 @@
 <script>
     require.config({
          paths:{
-             echarts: '//cdn.bootcss.com/echarts/3.6.2/echarts.min',
-             echartsgl: '//oog4yfyu0.bkt.clouddn.com/echarts-gl',
-             wordcloud: '//data-visual.cn/datav/src/js/echarts/extension/echarts-wordcloud.min',
-             liquidfill: '//oog4yfyu0.bkt.clouddn.com/liquidfill',
-             china: '//echarts.baidu.com/gallery/vendors/echarts/map/js/china'
+             echarts: '{{host}}/echarts.3.6.2.min',
+             echartsgl: '{{host}}/echarts-gl',
+             wordcloud: '{{host}}/echarts-wordcloud.min',
+             liquidfill: '{{host}}/echarts-liquidfill',
+             china: '{{host}}/china'
          }
     });
     require(['echarts', 'echartsgl', 'wordcloud', 'liquidfill', 'china'],function(ec){
