@@ -4,6 +4,7 @@
 __version__ = '0.1.9.4'
 __author__ = 'chenjiandongx'
 
+# chart
 from pyecharts.charts.bar import Bar
 from pyecharts.charts.bar3D import Bar3D
 from pyecharts.charts.effectscatter import EffectScatter
@@ -24,4 +25,9 @@ from pyecharts.charts.radar import Radar
 from pyecharts.charts.scatter import Scatter
 from pyecharts.charts.scatter3D import Scatter3D
 from pyecharts.charts.wordcloud import WordCloud
+
+# customize component
 from pyecharts.page import Page
+from pyecharts.grid import Grid
+from pyecharts.overlap import Overlap
+from pyecharts.timeline import Timeline
