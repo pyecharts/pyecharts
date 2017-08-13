@@ -58,7 +58,7 @@ class Geo(Base):
                 city_coordinate.append(value)
                 _data.append({"name": name, "value": city_coordinate})
             else:
-                print("%s coordinates is not found")
+                print("%s coordinates is not found" % name)
         self._option.update(
             geo={
                 "map": maptype,
