@@ -2283,6 +2283,8 @@ page.render()
 ```
 ![multiple-charts-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/multiple-charts-1.gif)
 
+**Tip：** Page 类也提供了 render_embed() 方法，同样可以在 Flask&Django 中使用。
+
 
 # 集成Flask&Django
 
