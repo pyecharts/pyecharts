@@ -5,7 +5,7 @@
             echarts: '{{host}}/echarts.3.6.2.min',
             china: '{{host}}/china',
             world: '{{host}}/world'// Please do not add a comma here
-            {%if location_js %},/*here is the comma*/ {{location}}: '{{host}}/{{location}}' {% endif %}
+            {%if location %},/*here is the comma*/ {{location}}: '{{host}}/{{location}}' {% endif %}
          }
     });
     require(['echarts', 'china', 'world' {% if location %}, /*same here*/'{{location}}'{% endif %}],function(ec){
