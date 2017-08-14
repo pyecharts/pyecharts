@@ -8,12 +8,14 @@ import random
 import datetime
 
 from pprint import pprint
+from pyecharts._version import __version__
 from pyecharts.option import get_all_options
 from pyecharts import template
 
 
 NBEXT_NAME = 'nbextensions'
 DEFAULT_HOST = '/%s' % NBEXT_NAME
+NBEXT_SIGNATURE = '.pyecharts.%s' % __version__
 
 
 class Base(object):
@@ -1020,18 +1022,21 @@ def install_echarts_if_needed():
     from jupyter_core.paths import jupyter_data_dir
 
     nbextension_path = os.path.join(jupyter_data_dir(), NBEXT_NAME)
-    pyecharts_signature = os.path.join(nbextension_path,
-                                       '.pyecharts.signature')
+    if os.path.exists(nbextension_path) is False:
+        os.mkdir(nbextension_path)
+    pyecharts_signature = os.path.join(
+        nbextension_path, NBEXT_SIGNATURE)
     if os.path.exists(pyecharts_signature) is False:
+        # site_packages/pyecharts/templates/js
         js_folder = template.get_resource_dir(
             os.path.join('templates', 'js'))
-        for js_file in os.listdir(js_folder):
+        all_js_files = os.listdir(js_folder)
+        for js_file in all_js_files:
             shutil.copy(os.path.join(js_folder, js_file),
                         os.path.join(nbextension_path, js_file))
-        __create_pyecharts_signature(pyecharts_signature)
+        __create_pyecharts_signature(pyecharts_signature, all_js_files)
 
 
-def __create_pyecharts_signature(signature_file):
+def __create_pyecharts_signature(signature_file, all_files):
     with open(signature_file, 'w') as f:
-        f.write(
-            'Delete me if you want to update echarts.js from pyecharts')
+        f.write('\n'.join(all_files))
