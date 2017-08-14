@@ -1,6 +1,7 @@
 nose
 codecov
 coverage
-.
 pandas
 numpy
+mock;python_version<"3"
+jupyter
