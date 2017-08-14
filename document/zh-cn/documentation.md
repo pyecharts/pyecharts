@@ -1897,6 +1897,7 @@ Grid 类中其他方法：
 * `show_config()`：打印输出所有配置项
 * `chart`：返回图形实例
 
+`add()` 接受的参数：
 * grid_width -> str/int  
     grid 组件的宽度。默认自适应。
 * grid_height -> str/int  
