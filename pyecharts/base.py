@@ -6,7 +6,6 @@ import json
 import uuid
 import random
 import datetime
-import warnings
 
 from pprint import pprint
 from pyecharts.option import get_all_options
