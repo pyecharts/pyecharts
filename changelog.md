@@ -37,6 +37,7 @@
 
 * version 0.1.9.3
     * 新增 `xaxis_type`, `yaxis_type` 参数，可通过设置该参数指定直角坐标系数轴类型。（参见 Line，Scattre 图）
+    * 废弃 `npcast()`, `pdcast()` 方法，新版本已经在内部封装了处理逻辑，直接在 `add()` 中传入 `numpy`, `pandas` 的 `index`，`values` 属性即可
     * 集成 Flask + Django
 
 * version 0.1.9.4（当前版本）
@@ -57,6 +58,13 @@
         * yaxis_margin（y 轴与标签的距离）
         * is_xaxislabel_align（x 轴标签是否与刻度对齐）
         * is_yaxislabel_align（y 轴标签是否与刻度对齐）
+    * 新增 Timeline 功能，支持轮播多张图表
+    * 修改自定义模块的接口，现自定义模块有以下 4 个类，具体用法参见文档
+        * Grid 类：并行显示多张图
+        * Overlap 类：结合不同类型图表叠加画在同张图上
+        * Page 类：同一网页按顺序展示多图
+        * Timeline 类：提供时间线轮播多张图
+    * jupyter notebook 现在也为离线模式，从本地加载项目所需 js 文件。至此 pyecharts 彻底实现本地化运行。速度更快，不再受网速影响。
     
 
 
