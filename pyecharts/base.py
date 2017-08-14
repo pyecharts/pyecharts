@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # coding=utf-8
 
+import os
 import json
 import uuid
 import random
@@ -10,6 +11,10 @@ import warnings
 from pprint import pprint
 from pyecharts.option import get_all_options
 from pyecharts import template
+
+
+NBEXT_NAME = 'nbextensions'
+DEFAULT_HOST = '/%s' % NBEXT_NAME
 
 
 class Base(object):
@@ -91,6 +96,7 @@ class Base(object):
             legend=[{"data": []}],
             backgroundColor=background_color
         )
+        self._jshost = DEFAULT_HOST
 
     def add(self, angle_data=None,
             angle_range=None,
@@ -328,6 +334,7 @@ class Base(object):
 
         :return:
         """
+        install_echarts_if_needed()
         divid = datetime.datetime.now()
         my_option = json_dumps(self._option, indent=4)
         _tmp = 'notebook.html'
@@ -338,18 +345,20 @@ class Base(object):
             # show map chart normally.
             if s.get('type') == 'map':
                 _tmp = "notebook_map.html"
-                map_keywords = template.get_map(
+                city_name_in_pinyin = template.CITY_NAME_PINYIN_MAP.get(
                     self._option.get('series')[0].get('mapType'))
+                map_keywords['location'] = city_name_in_pinyin
                 break
         tmp = template.JINJA2_ENV.get_template(_tmp)
         try:
             html = tmp.render(
                 myOption=my_option, chartId=divid, myWidth=self._width,
-                myHeight=self._height, **map_keywords)
+                myHeight=self._height, host=self._jshost, **map_keywords)
         except:
             html = tmp.render(
                 mtOption=my_option.decode('utf8'), chartId=divid,
-                myWidth=self._width, myHeight=self._height, **map_keywords)
+                myWidth=self._width, myHeight=self._height, host=self._jshost,
+                **map_keywords)
         return html
 
     def render_notebook(self):
@@ -1012,3 +1021,28 @@ class PandasNumpyTypeEncoder(json.JSONEncoder):
 
 def json_dumps(data, indent=0):
     return json.dumps(data, indent=indent, cls=PandasNumpyTypeEncoder)
+
+
+def install_echarts_if_needed():
+    """
+    Copy all echarts javascripts to jupyter_data_dir
+    """
+    import shutil
+    from jupyter_core.paths import jupyter_data_dir
+
+    nbextension_path = os.path.join(jupyter_data_dir(), NBEXT_NAME)
+    pyecharts_signature = os.path.join(nbextension_path,
+                                       '.pyecharts.signature')
+    if os.path.exists(pyecharts_signature) is False:
+        js_folder = template.get_resource_dir(
+            os.path.join('templates', 'js'))
+        for js_file in os.listdir(js_folder):
+            shutil.copy(os.path.join(js_folder, js_file),
+                        os.path.join(nbextension_path, js_file))
+        __create_pyecharts_signature(pyecharts_signature)
+
+
+def __create_pyecharts_signature(signature_file):
+    with open(signature_file, 'w') as f:
+        f.write(
+            'Delete me if you want to update echarts.js from pyecharts')
