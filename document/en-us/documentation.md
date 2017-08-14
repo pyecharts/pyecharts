@@ -61,6 +61,21 @@ bar.render()
 * ```render()```
     creat a file named render.html in the root directory defaultly,which supports path parameter and set the location the file save in,for instance render(r"e:\my_first_chart.html")，open file with your browser.
 
+### A note on Jupyter notebook
+
+To play with this new feature, it is recommended that 1) the old version must be uninstalled. 2) Your existing notebooks must be refreshed and re-ran. 3) to use your browser
+in privacy mode. Once you have verified all works, life will go as usual.
+
+The required echarts javascript libraries are copied into nbextensions directory. In order to find out where it is on your operating system, you can do these:
+
+```python
+from jupyter_core.paths import jupyter_data_dir
+print(jupyter_data_dir())
+```
+
+Should you enforce pyecharts to reload all echarts javascript libraries, you will need to delete the hidden signature file: <<jupyter data dir>>/nbextensions/.pyecharts.signature.
+Upon next rendering, all javascript libraries will be copied again.
+
 ### Python2 Coding Problem
 default code type is UTF-8, there's no problem in Python3, because Python3 have a good support in chinese. But in Python2, please use the following sentence to ensure avoiding wrong coding problem:
 ```
