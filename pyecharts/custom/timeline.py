@@ -118,3 +118,18 @@ class Timeline(object):
         """
         self._chart._option = self._timeline_options
         return self._chart.render_embed()
+
+    @property
+    def chart(self):
+        """
+
+        :return:
+        """
+        return self._chart
+
+    def __repr__(self):
+        """
+
+        :return:
+        """
+        return self._chart
