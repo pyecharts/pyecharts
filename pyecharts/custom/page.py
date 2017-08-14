@@ -11,6 +11,7 @@ class Page(object):
 
     def add(self, achart_or_charts):
         """
+        Append chart(s) to the rendering page
 
         :param achart_or_charts:
         :return:
@@ -22,6 +23,7 @@ class Page(object):
 
     def render(self, path="render.html"):
         """
+        Produce rendered charts in a html file
 
         :param path:
         :return:
@@ -35,6 +37,7 @@ class Page(object):
 
     def render_embed(self):
         """
+        Produce rendered charts in html for embedding purpose
 
         :return:
         """
