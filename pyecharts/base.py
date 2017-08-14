@@ -361,16 +361,6 @@ class Base(object):
                 **map_keywords)
         return html
 
-    def render_notebook(self):
-        """ Render the options dict, displayed in the jupyter notebook
-
-        :return:
-        """
-        warnings.warn("\n" + "This function is deprecated since 0.1.9.1" +
-                      " Simply passing the chart instance is enough")
-        from IPython.display import HTML
-        return HTML(self._repr_html_())
-
     @property
     def _geo_cities(self):
         """ Return China's major cities latitude and longitude -> Geo Chart """
