@@ -72,16 +72,7 @@ class Timeline(object):
         :return:
         """
         self._chart = chart
-        _grid = chart._option.get('grid', None)
-        if _grid:
-            self._timeline_options.get('baseOption').update(grid=_grid)
-        _xaxis = chart._option.get('xAxis', None)
-        if _xaxis:
-            self._timeline_options.get('baseOption').update(xAxis=_xaxis)
-        _yaxis = chart._option.get('yAxis', None)
-        if _yaxis:
-            self._timeline_options.get('baseOption').update(yAxis=_yaxis)
-
+        self.__check_components(chart)
         self._time_points.append(time_point)
         self._timeline_options.get('baseOption').update(
             legend=chart._option.get('legend'),
@@ -134,3 +125,52 @@ class Timeline(object):
         """
         return self._chart._repr_html_()
 
+    def __check_components(self, chart):
+        """
+
+        :param chart:
+        :return:
+        """
+        _grid = chart._option.get('grid', None)
+        if _grid is not None:
+            self._timeline_options.get('baseOption').update(grid=_grid)
+
+        _xaxis = chart._option.get('xAxis', None)
+        if _xaxis is not None:
+            self._timeline_options.get('baseOption').update(xAxis=_xaxis)
+
+        _yaxis = chart._option.get('yAxis', None)
+        if _yaxis is not None:
+            self._timeline_options.get('baseOption').update(yAxis=_yaxis)
+
+        _polar = chart._option.get('polar', None)
+        if _polar is not None:
+            self._timeline_options.get('baseOption').update(polar=_polar)
+
+        _radiusAxis = chart._option.get('radiusAxis', None)
+        if _radiusAxis is not None:
+            self._timeline_options.get('baseOption').update(radiusAxis=_radiusAxis)
+
+        _angleAxis = chart._option.get('angleAxis', None)
+        if _angleAxis is not None:
+            self._timeline_options.get('baseOption').update(angleAxis=_angleAxis)
+
+        _radar = chart._option.get('radar', None)
+        if _radar is not None:
+            self._timeline_options.get('baseOption').update(radar=_radar)
+
+        _visualMap = chart._option.get('visualMap', None)
+        if _visualMap is not None:
+            self._timeline_options.get('baseOption').update(visualMap=_visualMap)
+
+        _geo = chart._option.get('geo', None)
+        if _geo is not None:
+            self._timeline_options.get('baseOption').update(geo=_geo)
+
+        _datazoom = chart._option.get('dataZoom', None)
+        if _geo is not None:
+            self._timeline_options.get('baseOption').update(dataZoom=_datazoom)
+
+        _parallelAxis = chart._option.get('parallelAxis', None)
+        if _parallelAxis is not None:
+            self._timeline_options.get('baseOption').update(parallelAxis=_parallelAxis)
