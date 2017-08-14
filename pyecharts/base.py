@@ -1022,6 +1022,8 @@ def install_echarts_if_needed():
     from jupyter_core.paths import jupyter_data_dir
 
     nbextension_path = os.path.join(jupyter_data_dir(), NBEXT_NAME)
+    if os.path.exists(nbextension_path) is False:
+        os.mkdir(nbextension_path)
     pyecharts_signature = os.path.join(
         nbextension_path, NBEXT_SIGNATURE)
     if os.path.exists(pyecharts_signature) is False:
