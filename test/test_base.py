@@ -12,7 +12,7 @@ import numpy as np
 from mock import patch
 from nose.tools import eq_
 
-from pyecharts import Bar
+from pyecharts import Bar, __version__
 from pyecharts.base import install_echarts_if_needed
 
 
@@ -74,7 +74,7 @@ def test_echarts_installation(fake_jupyter_data_dir):
 
     # check if the signature file is there
     fake_signature_file = os.path.join(
-        fake_nbextension_folder, '.pyecharts.signature')
+        fake_nbextension_folder, '.pyecharts.%s' % __version__)
     assert os.path.exists(fake_signature_file), True
     all_files = os.listdir(fake_nbextension_folder)
     eq_(len(all_files), 40)

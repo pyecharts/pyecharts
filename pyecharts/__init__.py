@@ -1,8 +1,7 @@
 #!/usr/bin/env python
 #coding=utf-8
 
-__version__ = '0.1.9.4'
-__author__ = 'chenjiandongx'
+from pyecharts._version import __version__, __author__
 
 # chart
 from pyecharts.charts.bar import Bar
