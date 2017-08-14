@@ -127,9 +127,10 @@ class Timeline(object):
         """
         return self._chart
 
-    def __repr__(self):
+    def _repr_html_(self):
         """
 
         :return:
         """
-        return self._chart
+        return self._chart._repr_html_()
+
