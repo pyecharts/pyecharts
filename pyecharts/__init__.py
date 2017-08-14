@@ -3,7 +3,7 @@
 
 from pyecharts._version import __version__, __author__
 
-# chart
+# charts
 from pyecharts.charts.bar import Bar
 from pyecharts.charts.bar3D import Bar3D
 from pyecharts.charts.effectscatter import EffectScatter
@@ -30,3 +30,6 @@ from pyecharts.custom.grid import Grid
 from pyecharts.custom.overlap import Overlap
 from pyecharts.custom.page import Page
 from pyecharts.custom.timeline import Timeline
+
+# version
+from pyecharts._version import __version__
