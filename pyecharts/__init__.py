@@ -25,8 +25,8 @@ from pyecharts.charts.scatter import Scatter
 from pyecharts.charts.scatter3D import Scatter3D
 from pyecharts.charts.wordcloud import WordCloud
 
-# customize component
-from pyecharts.page import Page
-from pyecharts.grid import Grid
-from pyecharts.overlap import Overlap
-from pyecharts.timeline import Timeline
+# custom component
+from pyecharts.custom.grid import Grid
+from pyecharts.custom.overlap import Overlap
+from pyecharts.custom.page import Page
+from pyecharts.custom.timeline import Timeline
