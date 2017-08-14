@@ -9,7 +9,11 @@ import shutil
 import pandas as pd
 import numpy as np
 
-from mock import patch
+try:
+    from mock import patch
+except ImportError:
+    from unittest.mock import patch
+
 from nose.tools import eq_
 
 from pyecharts import Bar, __version__

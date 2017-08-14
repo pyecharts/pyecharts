@@ -38,6 +38,10 @@ pyecharts 是一个用于生成 Echarts 图表的类库。实际上就是 Echart
     * Scatter3D（3D 散点图）
     * WordCloud（词云图）
 * [用户自定义](https://github.com/chenjiandongx/pyecharts/blob/master/document/zh-cn/documentation.md#用户自定义)
+    * Grid 类：并行显示多张图
+    * Overlap 类：结合不同类型图表叠加画在同张图上
+    * Page 类：同一网页按顺序展示多图
+    * Timeline 类：提供时间线轮播多张图
 * [集成Flask&Django](https://github.com/chenjiandongx/pyecharts/blob/master/document/zh-cn/documentation.md#集成Flask&Django)
 * [更多示例](https://github.com/chenjiandongx/pyecharts/blob/master/document/zh-cn/documentation.md#更多示例)
 * [关于项目](https://github.com/chenjiandongx/pyecharts/blob/master/document/zh-cn/documentation.md#关于项目)
@@ -45,6 +49,8 @@ pyecharts 是一个用于生成 Echarts 图表的类库。实际上就是 Echart
 
 # 开始使用
 ### 确认你已安装了最新版本的 pyecharts
+> `print(pyecharts.__version__)` 可查看当前 pyecharts 版本
+
 首先开始来绘制你的第一个图表
 ```python
 from pyecharts import Bar
@@ -1877,118 +1883,21 @@ wordcloud.render()
 
 # 用户自定义
 
-## 结合不同类型图表画在一张图上
-用户可以自定义结合 Line/Bar/Kline, Scatter/EffectScatter 图表，将不同类型图表画在一张图上。利用第一个图表为基础，往后的数据都将会画在第一个图表上。   
-需使用 ```get_series()``` 和 ```custom()``` 方法  
+## Grid：并行显示多张图
+> 用户可以自定义结合 Line/Bar/Kline/Scatter/EffectScatter/Pie/HeatMap 图表，将不同类型图表画在多张图上。     
 
-```python
-get_series()
-""" 获取图表的 series 数据 """
-```
-```python
-custom(series)
-''' 追加自定义图表类型 '''
-```
-* series -> dict  
-    追加图表类型的 series 数据
+Grid 类的使用：
+1. 引入 `Grid` 类，`from pyecharts import Grid`
+2. 实例化 Grid 类，`grid = Grid()` 
+3. 使用 `add()` 向 `grid` 中添加图，至少需要设置一个 `grid_top`, `grid_bottom`, `grid_left`, `grid_right` 四个参数中的一个。`grid_width` 和 `grid_height` 一般不用设置，默认即可。
+4. 使用 `render()` 渲染生成 .html 文件
 
-先用 ```get_series()``` 获取数据，再使用 ```custom()``` 将图表结合在一起  
+Grid 类中其他方法：
+* `render_embed()`：在 Flask&Django 中可以使用该方法渲染
+* `show_config()`：打印输出所有配置项
+* `chart`：返回图形实例
 
-Line + Bar
-```python
-from pyecharts import Bar, Line
-
-attr = ['A', 'B', 'C', 'D', 'E', 'F']
-v1 = [10, 20, 30, 40, 50, 60]
-v2 = [15, 25, 35, 45, 55, 65]
-v3 = [38, 28, 58, 48, 78, 68]
-bar = Bar("Line - Bar 示例")
-bar.add("bar", attr, v1)
-line = Line()
-line.add("line", v2, v3)
-bar.custom(line.get_series())
-bar.show_config()
-bar.render()
-```
-![custom-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/custom-0.gif)
-
-具体流程如下：
-1. 初始化图表，正常添加配置项。
-2. 调用第一个图表的 custom(type.get_series()) 方法逐个添加。
-3. 调用第一个图表的 render() 方法。
-
-**Tip：** ```bar.custom(line.get_series())``` 这个一定要注意，利用第一个图表为基础。切记不要写成 ```bar.custom(bar.get_series())``` 不然会进入无限地自我调用的状态中，无限递归，最后可能导致死机。
-
-Scatter + EffectScatter
-```python
-from pyecharts import Scatter, EffectScatter
-
-v1 = [10, 20, 30, 40, 50, 60]
-v2 = [30, 30, 30, 30, 30, 30]
-v3 = [50, 50, 50, 50, 50, 50]
-v4 = [10, 10, 10, 10, 10, 10]
-es = EffectScatter("Scatter - EffectScatter 示例")
-es.add("es", v1, v2)
-scatter = Scatter()
-scatter.add("scatter", v1, v3)
-es.custom(scatter.get_series())
-es_1 = EffectScatter()
-es_1.add("es_1", v1, v4, symbol='pin', effect_scale=5)
-es.custom(es_1.get_series())
-es.show_config()
-es.render()
-```
-![custom-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/custom-1.gif)
-
-Kline + Line
-```python
-import random
-from pyecharts import Line, Kline
-
-v1 = [[2320.26, 2320.26, 2287.3, 2362.94], [2300, 2291.3, 2288.26, 2308.38],
-      [2295.35, 2346.5, 2295.35, 2345.92], [2347.22, 2358.98, 2337.35, 2363.8],
-      [2360.75, 2382.48, 2347.89, 2383.76], [2383.43, 2385.42, 2371.23, 2391.82],
-      [2377.41, 2419.02, 2369.57, 2421.15], [2425.92, 2428.15, 2417.58, 2440.38],
-      [2411, 2433.13, 2403.3, 2437.42], [2432.68, 2334.48, 2427.7, 2441.73],
-      [2430.69, 2418.53, 2394.22, 2433.89], [2416.62, 2432.4, 2414.4, 2443.03],
-      [2441.91, 2421.56, 2418.43, 2444.8], [2420.26, 2382.91, 2373.53, 2427.07],
-      [2383.49, 2397.18, 2370.61, 2397.94], [2378.82, 2325.95, 2309.17, 2378.82],
-      [2322.94, 2314.16, 2308.76, 2330.88], [2320.62, 2325.82, 2315.01, 2338.78],
-      [2313.74, 2293.34, 2289.89, 2340.71], [2297.77, 2313.22, 2292.03, 2324.63],
-      [2322.32, 2365.59, 2308.92, 2366.16], [2364.54, 2359.51, 2330.86, 2369.65],
-      [2332.08, 2273.4, 2259.25, 2333.54], [2274.81, 2326.31, 2270.1, 2328.14],
-      [2333.61, 2347.18, 2321.6, 2351.44], [2340.44, 2324.29, 2304.27, 2352.02],
-      [2326.42, 2318.61, 2314.59, 2333.67], [2314.68, 2310.59, 2296.58, 2320.96],
-      [2309.16, 2286.6, 2264.83, 2333.29], [2282.17, 2263.97, 2253.25, 2286.33],
-      [2255.77, 2270.28, 2253.31, 2276.22]]
-attr = ["2017/7/{}".format(i + 1) for i in range(31)]
-kline = Kline("Kline - Line 示例")
-kline.add("日K", attr, v1)
-line_1 = Line()
-line_1.add("line-1", attr, [random.randint(2400, 2500) for _ in range(31)])
-line_2 = Line()
-line_2.add("line-2", attr, [random.randint(2400, 2500) for _ in range(31)])
-kline.custom(line_1.get_series())
-kline.custom(line_2.get_series())
-kline.show_config()
-kline.render()
-```
-![custom-2](https://github.com/chenjiandongx/pyecharts/blob/master/images/custom-2.png)
-
-## 结合不同类型图表画在多张图上，并行显示图表
-用户可以自定义结合 Line/Bar/Kline/Scatter/EffectScatter/Pie/HeatMap 图表，将不同类型图表画在多张图上。同样也是要以某一张图表为基础。     
-需使用 ```get_series()``` 和 ```grid()``` 方法  
-
-```python
-get_series()
-""" 获取图表的 series 数据 """
-```
-```python
-grid(series，grid_width, grid_height, grid_top, grid_bottom, grid_left, grid_right)
-''' 并行显示图表 '''
-```
-* series -> dict  
-    追加图表类型的 series 数据
+`add()` 接受的参数：
 * grid_width -> str/int  
     grid 组件的宽度。默认自适应。
 * grid_height -> str/int  
@@ -2002,65 +1911,60 @@ grid(series，grid_width, grid_height, grid_top, grid_bottom, grid_left, grid_ri
 * grid_right -> str/int  
     grid 组件离容器右侧的距离。默认为 None, 有'left', 'center', 'right'可选，也可以为百分数或者整数
 
-先用 ```get_series()``` 获取数据，再使用 ```grid()``` 将图表结合在一起  
 
 上下类型，Bar + Line  
 ```python
-from pyecharts import Bar, Line
+from pyecharts import Bar, Line, Grid
 
 attr = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
 v1 = [5, 20, 36, 10, 75, 90]
 v2 = [10, 25, 8, 60, 20, 80]
-bar = Bar("柱状图示例", height=720, is_grid=True)
-bar.add("商家A", attr, v1, is_stack=True, grid_bottom="60%")
-bar.add("商家B", attr, v2, is_stack=True, grid_bottom="60%")
+bar = Bar("柱状图示例", height=720)
+bar.add("商家A", attr, v1, is_stack=True)
+bar.add("商家B", attr, v2, is_stack=True)
 line = Line("折线图示例", title_top="50%")
 attr = ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
 line.add("最高气温", attr, [11, 11, 15, 13, 12, 13, 10], mark_point=["max", "min"], mark_line=["average"])
 line.add("最低气温", attr, [1, -2, 2, 5, 3, 2, 0], mark_point=["max", "min"],
-         mark_line=["average"], legend_top="50%")
-bar.grid(line.get_series(), grid_top="60%")
+             mark_line=["average"], legend_top="50%")
+
+grid = Grid()
+grid.add(bar, grid_bottom="60%")
+grid.add(line, grid_top="60%")
 bar.show_config()
-bar.render()
+grid.render()
 ```
 ![grid-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/grid-0.gif)
 
-**再次Tip：** ```bar.grid(line.get_series(), grid_top="60%")``` 不要写成 ```bar.grid(bar.get_series())``` 不然会陷入无限递归中  
-
-具体流程如下：
-1. 在第一个图表初始化的时候制定 is_grid=True，说明要使用 grid 组件。
-2. 第一个表格的 add() 方法中要制定 grid_* 参数，必须制定，因为 grid_* 默认值都是为 None，不会添加到配置项中。最少指定一个。
-3. 初始化其他类型（同类型也可以），不用指定 grid_* 参数。
-4. 调用第一个图表的 grid() 方法逐个添加，并且设置 grid_* 参数，必须指定，至少一个。
-5. 调用第一个图表的 render() 方法。
-
 左右类型，Scatter + EffectScatter  
 ```python
-from pyecharts import Scatter, EffectScatter
+from pyecharts import Scatter, EffectScatter, Grid
 
 v1 = [5, 20, 36, 10, 75, 90]
 v2 = [10, 25, 8, 60, 20, 80]
-scatter = Scatter(width=1200, is_grid=True)
-scatter.add("散点图示例", v1, v2, grid_left="60%", legend_pos="70%")
+scatter = Scatter(width=1200)
+scatter.add("散点图示例", v1, v2, legend_pos="70%")
 es = EffectScatter()
 es.add("动态散点图示例", [11, 11, 15, 13, 12, 13, 10], [1, -2, 2, 5, 3, 2, 0],
-       effect_scale=6, legend_pos="20%")
-scatter.grid(es.get_series(), grid_right="60%")
-scatter.show_config()
-scatter.render()
+           effect_scale=6, legend_pos="20%")
+
+grid = Grid()
+grid.add(scatter, grid_left="60%")
+grid.add(es, grid_right="60%")
+grid.render()
 ```
 ![grid-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/grid-1.gif)
 
 上下左右类型，Bar + Line + Scatter + EffectScatter  
 ```python
-from pyecharts import Bar, Line, Scatter, EffectScatter  
+from pyecharts import Bar, Line, Scatter, EffectScatter, Grid  
 
 attr = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
 v1 = [5, 20, 36, 10, 75, 90]
 v2 = [10, 25, 8, 60, 20, 80]
-bar = Bar("柱状图示例", height=720, width=1200, title_pos="65%", is_grid=True)
-bar.add("商家A", attr, v1, is_stack=True, grid_bottom="60%", grid_left="60%")
-bar.add("商家B", attr, v2, is_stack=True, grid_bottom="60%", grid_left="60%", legend_pos="80%")
+bar = Bar("柱状图示例", height=720, width=1200, title_pos="65%")
+bar.add("商家A", attr, v1, is_stack=True)
+bar.add("商家B", attr, v2, is_stack=True, legend_pos="80%")
 line = Line("折线图示例")
 attr = ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
 line.add("最高气温", attr, [11, 11, 15, 13, 12, 13, 10], mark_point=["max", "min"], mark_line=["average"])
@@ -2072,32 +1976,35 @@ scatter = Scatter("散点图示例", title_top="50%", title_pos="65%")
 scatter.add("scatter", v1, v2, legend_top="50%", legend_pos="80%")
 es = EffectScatter("动态散点图示例", title_top="50%")
 es.add("es", [11, 11, 15, 13, 12, 13, 10], [1, -2, 2, 5, 3, 2, 0], effect_scale=6,
-       legend_top="50%", legend_pos="20%")
-bar.grid(line.get_series(), grid_bottom="60%", grid_right="60%")
-bar.grid(scatter.get_series(), grid_top="60%", grid_left="60%")
-bar.grid(es.get_series(), grid_top="60%", grid_right="60%")
-bar.show_config()
-bar.render()
+        legend_top="50%", legend_pos="20%")
+
+grid = Grid()
+grid.add(bar, grid_bottom="60%", grid_left="60%")
+grid.add(line, grid_bottom="60%", grid_right="60%")
+grid.add(scatter, grid_top="60%", grid_left="60%")
+grid.add(es, grid_top="60%", grid_right="60%")
+grid.render()
 ```
 ![grid-2](https://github.com/chenjiandongx/pyecharts/blob/master/images/grid-2.gif)
 
 Line +  Pie  
 ```python
-from pyecharts import Line, Pie
+from pyecharts import Line, Pie, Grid
 
-line = Line("折线图示例", width=1200, is_grid=True)
+line = Line("折线图示例", width=1200)
 attr = ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
-line.add("最高气温", attr, [11, 11, 15, 13, 12, 13, 10], mark_point=["max", "min"],
-         mark_line=["average"], grid_right="65%")
+line.add("最高气温", attr, [11, 11, 15, 13, 12, 13, 10], mark_point=["max", "min"], mark_line=["average"])
 line.add("最低气温", attr, [1, -2, 2, 5, 3, 2, 0], mark_point=["max", "min"],
          mark_line=["average"], legend_pos="20%")
 attr = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
 v1 = [11, 12, 13, 10, 10, 10]
 pie = Pie("饼图示例", title_pos="45%")
 pie.add("", attr, v1, radius=[30, 55], legend_pos="65%", legend_orient='vertical')
-line.grid(pie.get_series(), grid_left="60%")
-line.show_config()
-line.render()
+
+grid = Grid()
+grid.add(line, grid_right="65%")
+grid.add(pie, grid_left="60%")
+grid.render()
 ```
 ![grid-3](https://github.com/chenjiandongx/pyecharts/blob/master/images/grid-3.png)
 
@@ -2105,73 +2012,202 @@ line.render()
 
 Line + Kline
 ```python
-from pyecharts import Line, Kline
+from pyecharts import Line, Kline, Grid
 
-line = Line("折线图示例", width=1200, is_grid=True)
+line = Line("折线图示例", width=1200)
 attr = ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
-line.add("最高气温", attr, [11, 11, 15, 13, 12, 13, 10], mark_point=["max", "min"],
-         mark_line=["average"], grid_right="60%")
+line.add("最高气温", attr, [11, 11, 15, 13, 12, 13, 10], mark_point=["max", "min"], mark_line=["average"])
 line.add("最低气温", attr, [1, -2, 2, 5, 3, 2, 0], mark_point=["max", "min"],
-         mark_line=["average"], legend_pos="20%", grid_right="60%")
-attr = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
-value = [20, 40, 60, 80, 100, 120]
-v1 = [[2320.26, 2320.26, 2287.3, 2362.94], [2300, 2291.3, 2288.26, 2308.38],
-      [2295.35, 2346.5, 2295.35, 2345.92], [2347.22, 2358.98, 2337.35, 2363.8],
-      [2360.75, 2382.48, 2347.89, 2383.76], [2383.43, 2385.42, 2371.23, 2391.82],
-      [2377.41, 2419.02, 2369.57, 2421.15], [2425.92, 2428.15, 2417.58, 2440.38],
-      [2411, 2433.13, 2403.3, 2437.42], [2432.68, 2334.48, 2427.7, 2441.73],
-      [2430.69, 2418.53, 2394.22, 2433.89], [2416.62, 2432.4, 2414.4, 2443.03],
-      [2441.91, 2421.56, 2418.43, 2444.8], [2420.26, 2382.91, 2373.53, 2427.07],
-      [2383.49, 2397.18, 2370.61, 2397.94], [2378.82, 2325.95, 2309.17, 2378.82],
-      [2322.94, 2314.16, 2308.76, 2330.88], [2320.62, 2325.82, 2315.01, 2338.78],
-      [2313.74, 2293.34, 2289.89, 2340.71], [2297.77, 2313.22, 2292.03, 2324.63],
-      [2322.32, 2365.59, 2308.92, 2366.16], [2364.54, 2359.51, 2330.86, 2369.65],
-      [2332.08, 2273.4, 2259.25, 2333.54], [2274.81, 2326.31, 2270.1, 2328.14],
-      [2333.61, 2347.18, 2321.6, 2351.44], [2340.44, 2324.29, 2304.27, 2352.02],
-      [2326.42, 2318.61, 2314.59, 2333.67], [2314.68, 2310.59, 2296.58, 2320.96],
-      [2309.16, 2286.6, 2264.83, 2333.29], [2282.17, 2263.97, 2253.25, 2286.33],
+         mark_line=["average"], legend_pos="20%")
+v1 = [[2320.26, 2320.26, 2287.3, 2362.94],
+      [2300, 2291.3, 2288.26, 2308.38],
+      [2295.35, 2346.5, 2295.35, 2345.92],
+      [2347.22, 2358.98, 2337.35, 2363.8],
+      [2360.75, 2382.48, 2347.89, 2383.76],
+      [2383.43, 2385.42, 2371.23, 2391.82],
+      [2377.41, 2419.02, 2369.57, 2421.15],
+      [2425.92, 2428.15, 2417.58, 2440.38],
+      [2411, 2433.13, 2403.3, 2437.42],
+      [2432.68, 2334.48, 2427.7, 2441.73],
+      [2430.69, 2418.53, 2394.22, 2433.89],
+      [2416.62, 2432.4, 2414.4, 2443.03],
+      [2441.91, 2421.56, 2418.43, 2444.8],
+      [2420.26, 2382.91, 2373.53, 2427.07],
+      [2383.49, 2397.18, 2370.61, 2397.94],
+      [2378.82, 2325.95, 2309.17, 2378.82],
+      [2322.94, 2314.16, 2308.76, 2330.88],
+      [2320.62, 2325.82, 2315.01, 2338.78],
+      [2313.74, 2293.34, 2289.89, 2340.71],
+      [2297.77, 2313.22, 2292.03, 2324.63],
+      [2322.32, 2365.59, 2308.92, 2366.16],
+      [2364.54, 2359.51, 2330.86, 2369.65],
+      [2332.08, 2273.4, 2259.25, 2333.54],
+      [2274.81, 2326.31, 2270.1, 2328.14],
+      [2333.61, 2347.18, 2321.6, 2351.44],
+      [2340.44, 2324.29, 2304.27, 2352.02],
+      [2326.42, 2318.61, 2314.59, 2333.67],
+      [2314.68, 2310.59, 2296.58, 2320.96],
+      [2309.16, 2286.6, 2264.83, 2333.29],
+      [2282.17, 2263.97, 2253.25, 2286.33],
       [2255.77, 2270.28, 2253.31, 2276.22]]
 kline = Kline("K 线图示例", title_pos="60%")
 kline.add("日K", ["2017/7/{}".format(i + 1) for i in range(31)], v1, legend_pos="80%")
-line.grid(kline.get_series(), grid_left="55%")
-line.show_config()
-line.render()
+
+grid = Grid()
+grid.add(line, grid_right="60%")
+grid.add(kline, grid_left="55%")
+grid.render()
 ```
 ![grid-4](https://github.com/chenjiandongx/pyecharts/blob/master/images/grid-4.png)
 
 HeatMap + Bar  
 ```python
 import random
-
-from pyecharts import HeatMap, Bar  
-
 x_axis = ["12a", "1a", "2a", "3a", "4a", "5a", "6a", "7a", "8a", "9a", "10a", "11a",
           "12p", "1p", "2p", "3p", "4p", "5p", "6p", "7p", "8p", "9p", "10p", "11p"]
 y_aixs = ["Saturday", "Friday", "Thursday", "Wednesday", "Tuesday", "Monday", "Sunday"]
 data = [[i, j, random.randint(0, 50)] for i in range(24) for j in range(7)]
-heatmap = HeatMap("热力图示例", height=700, is_grid=True)
+heatmap = HeatMap("热力图示例", height=700)
 heatmap.add("热力图直角坐标系", x_axis, y_aixs, data, is_visualmap=True, visual_top="45%",
-            visual_text_color="#000", visual_orient='horizontal', grid_bottom="60%")
+            visual_text_color="#000", visual_orient='horizontal')
 attr = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
 v1 = [5, 20, 36, 10, 75, 90]
 v2 = [10, 25, 8, 60, 20, 80]
 bar = Bar("柱状图示例", title_top="52%")
 bar.add("商家A", attr, v1, is_stack=True)
 bar.add("商家B", attr, v2, is_stack=True, legend_top="50%")
-heatmap.grid(bar.get_series(), grid_top="60%")
-heatmap.show_config()
-heatmap.render()
+
+grid = Grid()
+grid.add(heatmap, grid_bottom="60%")
+grid.add(bar, grid_top="60%")
+grid.render()
 ```
 ![grid-5](https://github.com/chenjiandongx/pyecharts/blob/master/images/grid-5.gif)  
 Bar 会受 HeatMap 影响，很有趣。
 
+
+## Overlap：结合不同类型图表叠加画在同张图上
+
+> 用户可以自定义结合 Line/Bar/Kline, Scatter/EffectScatter 图表，将不同类型图表画在一张图上。利用第一个图表为基础，往后的数据都将会画在第一个图表上。   
+Overlap 类的使用：
+1. 引入 `Overlap` 类，`from pyecharts import Overlap`
+2. 实例化 `Overlap` 类，`overlap = Overlap()` 
+3. 使用 `add()` 向 `overlap` 中添加图
+4. 使用 `render()` 渲染生成 .html 文件
+
+Overlap 类中其他方法：
+* `render_embed()`：在 Flask&Django 中可以使用该方法渲染
+* `show_config()`：打印输出所有配置项
+* `chart`：返回图形实例
+
+Line + Bar
+```python
+from pyecharts import Bar, Line, Overlap
+
+attr = ['A', 'B', 'C', 'D', 'E', 'F']
+v1 = [10, 20, 30, 40, 50, 60]
+v2 = [38, 28, 58, 48, 78, 68]
+bar = Bar("Line - Bar 示例")
+bar.add("bar", attr, v1)
+line = Line()
+line.add("line", attr, v2)
+
+overlap = Overlap()
+overlap.add(bar)
+overlap.add(line)
+overlap.render()
+```
+![overlap-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/overlap-0.gif)
+
+Scatter + EffectScatter
+```python
+from pyecharts import Scatter, EffectScatter, Overlap
+
+v1 = [10, 20, 30, 40, 50, 60]
+v2 = [30, 30, 30, 30, 30, 30]
+v3 = [50, 50, 50, 50, 50, 50]
+v4 = [10, 10, 10, 10, 10, 10]
+es = EffectScatter("Scatter - EffectScatter 示例")
+es.add("es", v1, v2)
+scatter = Scatter()
+scatter.add("scatter", v1, v3)
+es_1 = EffectScatter()
+es_1.add("es_1", v1, v4, symbol='pin', effect_scale=5)
+
+overlap = Overlap()
+overlap.add(es)
+overlap.add(scatter)
+overlap.add(es_1)
+overlap.render()
+```
+![overlap-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/overlap-1.gif)
+
+Kline + Line
+```python
+import random
+from pyecharts import Line, Kline, Overlap
+
+v1 = [[2320.26, 2320.26, 2287.3, 2362.94],
+      [2300, 2291.3, 2288.26, 2308.38],
+      [2295.35, 2346.5, 2295.35, 2345.92],
+      [2347.22, 2358.98, 2337.35, 2363.8],
+      [2360.75, 2382.48, 2347.89, 2383.76],
+      [2383.43, 2385.42, 2371.23, 2391.82],
+      [2377.41, 2419.02, 2369.57, 2421.15],
+      [2425.92, 2428.15, 2417.58, 2440.38],
+      [2411, 2433.13, 2403.3, 2437.42],
+      [2432.68, 2334.48, 2427.7, 2441.73],
+      [2430.69, 2418.53, 2394.22, 2433.89],
+      [2416.62, 2432.4, 2414.4, 2443.03],
+      [2441.91, 2421.56, 2418.43, 2444.8],
+      [2420.26, 2382.91, 2373.53, 2427.07],
+      [2383.49, 2397.18, 2370.61, 2397.94],
+      [2378.82, 2325.95, 2309.17, 2378.82],
+      [2322.94, 2314.16, 2308.76, 2330.88],
+      [2320.62, 2325.82, 2315.01, 2338.78],
+      [2313.74, 2293.34, 2289.89, 2340.71],
+      [2297.77, 2313.22, 2292.03, 2324.63],
+      [2322.32, 2365.59, 2308.92, 2366.16],
+      [2364.54, 2359.51, 2330.86, 2369.65],
+      [2332.08, 2273.4, 2259.25, 2333.54],
+      [2274.81, 2326.31, 2270.1, 2328.14],
+      [2333.61, 2347.18, 2321.6, 2351.44],
+      [2340.44, 2324.29, 2304.27, 2352.02],
+      [2326.42, 2318.61, 2314.59, 2333.67],
+      [2314.68, 2310.59, 2296.58, 2320.96],
+      [2309.16, 2286.6, 2264.83, 2333.29],
+      [2282.17, 2263.97, 2253.25, 2286.33],
+      [2255.77, 2270.28, 2253.31, 2276.22]]
+attr = ["2017/7/{}".format(i + 1) for i in range(31)]
+kline = Kline("Kline - Line 示例")
+kline.add("日K", attr, v1)
+line_1 = Line()
+line_1.add("line-1", attr, [random.randint(2400, 2500) for _ in range(31)])
+line_2 = Line()
+line_2.add("line-2", attr, [random.randint(2400, 2500) for _ in range(31)])
+
+overlap = Overlap()
+overlap.add(kline)
+overlap.add(line_1)
+overlap.add(line_2)
+overlap.render()
+```
+![overlap-2](https://github.com/chenjiandongx/pyecharts/blob/master/images/overlap-2.png)
+
 如果只是想在单个 .html 按顺序展示图表，推荐使用 ```Page()``` 类
 
-## 同一网页按顺序展示多图
+## Page：同一网页按顺序展示多图
 
-1. 引入 `Page` 类
-2. 使用 Page.add() 增加图表
-3. 使用 Page.render() 渲染网页
+Page 类的使用：
+1. 引入 `Page` 类，`from pyecharts import Page`
+2. 实例化 `Page` 类，`page = Page()` 
+3. 使用 `add()` 向 `page` 中添加图
+4. 使用 `render()` 渲染生成 .html 文件
+
+Page 类中其他方法：
+* `render_embed()`：在 Flask&Django 中可以使用该方法渲染
+* `show_config()`：打印输出所有配置项
+* `chart`：返回图形实例
 
 ```python
 #coding=utf-8
@@ -2283,7 +2319,178 @@ page.render()
 ```
 ![multiple-charts-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/multiple-charts-1.gif)
 
-**Tip：** Page 类也提供了 render_embed() 方法，同样可以在 Flask&Django 中使用。
+
+## Timeline：提供时间线轮播多张图
+
+Timeline 类的使用：
+1. 引入 `Timeline` 类，`from pyecharts import Timeline`
+2. 实例化 `Timeline` 类，`timeline = Timeline()`
+3. 使用 `add()` 向 `timeline` 中添加图。如 `add(bar, '2013')` 接受两个参数，第一个为图实例，第二个为时间线的 ”时间点“。
+4. 使用 `render()` 渲染生成 .html 文件
+
+实例化 Timeline 类时接受设置参数：
+
+* is_auto_play -> bool  
+    是否自动播放，默认为 Flase
+* is_loop_play -> bool  
+    是否循环播放，默认为 True
+* is_rewind_play -> bool  
+    是否方向播放，默认为 Flase
+* is_timeline_show -> bool  
+    是否显示 timeline 组件。默认为 True，如果设置为false，不会显示，但是功能还存在。
+* timeline_play_interval -> int  
+    播放的速度（跳动的间隔），单位毫秒（ms）。
+* timeline_symbol -> str  
+    标记的图形。ECharts 提供的标记类型包括 'circle', 'rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow'
+* timeline_symbol_size -> int/list  
+    标记的图形大小，可以设置成诸如 10 这样单一的数字，也可以用数组分开表示宽和高，例如 [20, 10] 表示标记宽为 20，高为 10。
+* timeline_left -> int/str  
+    timeline 组件离容器左侧的距离。  
+    left 的值可以是像 20 这样的具体像素值，可以是像 '20%' 这样相对于容器高宽的百分比，也可以是 'left', 'center', 'right'。如果 left 的值为'left', 'center', 'right'，组件会根据相应的位置自动对齐。
+* timeline_right -> int/str  
+    timeline 组件离容器右侧的距离。同 left
+* timeline_top -> int/str  
+    timeline 组件离容器顶侧的距离。同 left
+* timeline_bottom -> int/str  
+    timeline 组件离容器底侧的距离。同 left
+
+Timeline 类中其他方法：
+* `render_embed()`：在 Flask&Django 中可以使用该方法渲染
+* `show_config()`：打印输出所有配置项
+* `chart`：返回图形实例
+
+```python
+from pyecharts import Bar, Timeline
+
+attr = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
+bar_1 = Bar("2012 年销量", "数据纯属虚构")
+bar_1.add("春季", attr, [randint(10, 100) for _ in range(6)])
+bar_1.add("夏季", attr, [randint(10, 100) for _ in range(6)])
+bar_1.add("秋季", attr, [randint(10, 100) for _ in range(6)])
+bar_1.add("冬季", attr, [randint(10, 100) for _ in range(6)])
+
+bar_2 = Bar("2013 年销量", "数据纯属虚构")
+bar_2.add("春季", attr, [randint(10, 100) for _ in range(6)])
+bar_2.add("夏季", attr, [randint(10, 100) for _ in range(6)])
+bar_2.add("秋季", attr, [randint(10, 100) for _ in range(6)])
+bar_2.add("冬季", attr, [randint(10, 100) for _ in range(6)])
+
+bar_3 = Bar("2014 年销量", "数据纯属虚构")
+bar_3.add("春季", attr, [randint(10, 100) for _ in range(6)])
+bar_3.add("夏季", attr, [randint(10, 100) for _ in range(6)])
+bar_3.add("秋季", attr, [randint(10, 100) for _ in range(6)])
+bar_3.add("冬季", attr, [randint(10, 100) for _ in range(6)])
+
+bar_4 = Bar("2015 年销量", "数据纯属虚构")
+bar_4.add("春季", attr, [randint(10, 100) for _ in range(6)])
+bar_4.add("夏季", attr, [randint(10, 100) for _ in range(6)])
+bar_4.add("秋季", attr, [randint(10, 100) for _ in range(6)])
+bar_4.add("冬季", attr, [randint(10, 100) for _ in range(6)])
+
+bar_5 = Bar("2016 年销量", "数据纯属虚构")
+bar_5.add("春季", attr, [randint(10, 100) for _ in range(6)])
+bar_5.add("夏季", attr, [randint(10, 100) for _ in range(6)])
+bar_5.add("秋季", attr, [randint(10, 100) for _ in range(6)])
+bar_5.add("冬季", attr, [randint(10, 100) for _ in range(6)], is_legend_show=True)
+
+timeline = Timeline(is_auto_play=True, timeline_bottom=0)
+timeline.add(bar_1, '2012 年')
+timeline.add(bar_2, '2013 年')
+timeline.add(bar_3, '2014 年')
+timeline.add(bar_4, '2015 年')
+timeline.add(bar_5, '2016 年')
+timeline.render()
+```
+![timeline-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/timeline-0.gif)
+
+```python
+from pyecharts import Pie, Timeline
+
+attr = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
+pie_1 = Pie("2012 年销量比例", "数据纯属虚构")
+pie_1.add("秋季", attr, [randint(10, 100) for _ in range(6)],
+          is_label_show=True, radius=[30, 55], rosetype='radius')
+
+pie_2 = Pie("2013 年销量比例", "数据纯属虚构")
+pie_2.add("秋季", attr, [randint(10, 100) for _ in range(6)],
+          is_label_show=True, radius=[30, 55], rosetype='radius')
+
+pie_3 = Pie("2014 年销量比例", "数据纯属虚构")
+pie_3.add("秋季", attr, [randint(10, 100) for _ in range(6)],
+          is_label_show=True, radius=[30, 55], rosetype='radius')
+
+pie_4 = Pie("2015 年销量比例", "数据纯属虚构")
+pie_4.add("秋季", attr, [randint(10, 100) for _ in range(6)],
+          is_label_show=True, radius=[30, 55], rosetype='radius')
+
+pie_5 = Pie("2016 年销量比例", "数据纯属虚构")
+pie_5.add("秋季", attr, [randint(10, 100) for _ in range(6)],
+          is_label_show=True, radius=[30, 55], rosetype='radius')
+
+timeline = Timeline(is_auto_play=True, timeline_bottom=0)
+timeline.add(pie_1, '2012 年')
+timeline.add(pie_2, '2013 年')
+timeline.add(pie_3, '2014 年')
+timeline.add(pie_4, '2015 年')
+timeline.add(pie_5, '2016 年')
+timeline.show_config()
+timeline.render()
+```
+![timeline-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/timeline-1.gif)
+
+```python
+from pyecharts import Bar, Line, Timeline, Overlap
+
+attr = ["{}月".format(i) for i in range(1, 7)]
+bar = Bar("1 月份数据", "数据纯属虚构")
+bar.add("bar", attr, [randint(10, 50) for _ in range(6)])
+line = Line()
+line.add("line", attr, [randint(50, 80) for _ in range(6)])
+overlap = Overlap()
+overlap.add(bar)
+overlap.add(line)
+
+bar_1 = Bar("2 月份数据", "数据纯属虚构")
+bar_1.add("bar", attr, [randint(10, 50) for _ in range(6)])
+line_1 = Line()
+line_1.add("line", attr, [randint(50, 80) for _ in range(6)])
+overlap_1 = Overlap()
+overlap_1.add(bar_1)
+overlap_1.add(line_1)
+
+bar_2 = Bar("3 月份数据", "数据纯属虚构")
+bar_2.add("bar", attr, [randint(10, 50) for _ in range(6)])
+line_2 = Line()
+line_2.add("line", attr, [randint(50, 80) for _ in range(6)])
+overlap_2 = Overlap()
+overlap_2.add(bar_2)
+overlap_2.add(line_2)
+
+bar_3 = Bar("4 月份数据", "数据纯属虚构")
+bar_3.add("bar", attr, [randint(10, 50) for _ in range(6)])
+line_3 = Line()
+line_3.add("line", attr, [randint(50, 80) for _ in range(6)])
+overlap_3 = Overlap()
+overlap_3.add(bar_3)
+overlap_3.add(line_3)
+
+bar_4 = Bar("5 月份数据", "数据纯属虚构")
+bar_4.add("bar", attr, [randint(10, 50) for _ in range(6)])
+line_4 = Line()
+line_4.add("line", attr, [randint(50, 80) for _ in range(6)])
+overlap_4 = Overlap()
+overlap_4.add(bar_4)
+overlap_4.add(line_4)
+
+timeline = Timeline(timeline_bottom=0)
+timeline.add(overlap.chart, '1 月')
+timeline.add(overlap_1.chart, '2 月')
+timeline.add(overlap_2.chart, '3 月')
+timeline.add(overlap_3.chart, '4 月')
+timeline.add(overlap_4.chart, '5 月')
+timeline.render()
+```
+![timeline-2](https://github.com/chenjiandongx/pyecharts/blob/master/images/timeline-2.gif)
 
 
 # 集成Flask&Django

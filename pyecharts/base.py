@@ -6,7 +6,6 @@ import json
 import uuid
 import random
 import datetime
-import warnings
 
 from pprint import pprint
 from pyecharts._version import __version__
@@ -362,16 +361,6 @@ class Base(object):
                 myWidth=self._width, myHeight=self._height, host=self._jshost,
                 **map_keywords)
         return html
-
-    def render_notebook(self):
-        """ Render the options dict, displayed in the jupyter notebook
-
-        :return:
-        """
-        warnings.warn("\n" + "This function is deprecated since 0.1.9.1" +
-                      " Simply passing the chart instance is enough")
-        from IPython.display import HTML
-        return HTML(self._repr_html_())
 
     @property
     def _geo_cities(self):

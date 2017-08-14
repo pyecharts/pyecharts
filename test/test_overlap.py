@@ -6,16 +6,15 @@ from pyecharts import Bar, Line, Scatter, EffectScatter, Kline
 from pyecharts import Overlap
 
 
-def test_custom_0():
+def test_overlap_0():
 
     attr = ['A', 'B', 'C', 'D', 'E', 'F']
     v1 = [10, 20, 30, 40, 50, 60]
-    v2 = [15, 25, 35, 45, 55, 65]
-    v3 = [38, 28, 58, 48, 78, 68]
+    v2 = [38, 28, 58, 48, 78, 68]
     bar = Bar("Line - Bar 示例")
     bar.add("bar", attr, v1)
     line = Line()
-    line.add("line", v2, v3)
+    line.add("line", attr, v2)
 
     overlap = Overlap()
     overlap.add(bar)
@@ -23,7 +22,7 @@ def test_custom_0():
     overlap.render()
 
 
-def test_custom_1():
+def test_overlap_1():
 
     v1 = [10, 20, 30, 40, 50, 60]
     v2 = [30, 30, 30, 30, 30, 30]
@@ -43,7 +42,7 @@ def test_custom_1():
     overlap.render()
 
 
-def test_custom_2():
+def test_overlap_2():
 
     import random
     v1 = [[2320.26, 2320.26, 2287.3, 2362.94],
