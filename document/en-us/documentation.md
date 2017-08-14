@@ -63,17 +63,16 @@ bar.render()
 
 ### A note on Jupyter notebook
 
-To play with this new feature, it is recommended that 1) the old version must be uninstalled. 2) Your existing notebooks must be refreshed and re-ran. 3) to use your browser
-in privacy mode. Once you have verified all works, life will go as usual.
+For existing users, in order to play with the offline mode coming with 0.1.9.5, it is recommended that 1) the old version must be uninstalled. 2) Your existing notebooks must be refreshed and re-ran. 
 
-The required echarts javascript libraries are copied into nbextensions directory. In order to find out where it is on your operating system, you can do these:
+How the offline mode works is: all echarts javascript libraries are copied into nbextensions directory. In order to find out where it is on your operating system, you can do these:
 
 ```python
 from jupyter_core.paths import jupyter_data_dir
 print(jupyter_data_dir())
 ```
 
-Should you enforce pyecharts to reload all echarts javascript libraries, you will need to delete the hidden signature file: <<jupyter data dir>>/nbextensions/.pyecharts.signature.
+Should you enforce pyecharts to reload all echarts javascript libraries, you will need to delete the hidden signature file: <<jupyter data dir>>/nbextensions/.pyecharts.<<version>>.
 Upon next rendering, all javascript libraries will be copied again.
 
 ### Python2 Coding Problem
