@@ -14,7 +14,7 @@ __author__ = 'chenjiandongx'
 __author_email__ = 'chenjiandongx@qq.com'
 __license__ = 'MIT'
 __requires__ = ['pillow', 'jinja2', 'future']
-__packages__ = ['pyecharts', 'pyecharts/charts']
+__packages__ = ['pyecharts', 'pyecharts/charts', 'pyecharts/custom']
 __keywords__ = ['echarts', 'charts']
 
 
