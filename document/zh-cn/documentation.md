@@ -102,53 +102,8 @@ cast(seq)
 
 如果使用的是 Numpy 或者 Pandas，0.1.9.2 以前提供的 ```pdcast(pddata)``` 和 ``` npcast(npdata)``` 两个方法在 0.1.9.3 之后不需再用了。0.1.9.3 开始内部已经封装了处理逻辑，直接调用 index 和 values 属性即可。
 
-Series 类型
-```python
-from pyecharts import Bar
-import pandas as pd
-
-pddata = pd.Series([1, 2, 3, 4], index=[1, 'b', 'c', 'd'])
-vlst, ilst = Bar.pdcast(pddata)
-
-print(vlst)
->>> [1.0, 2.0, 3.0, 4.0] 
-print(ilst)
->>> ['1', 'b', 'c', 'd']
-```
-
-DataFrame 类型
-```python
-from pyecharts import Bar
-import pandas as pd
-
-pddt = pd.DataFrame([[1, 2, 3, 4], [2, 3, 4, 5], [4.1, 5.2, 6.3, 7.4]], index=["A", "B", "C"])
-vlst, ilst = Bar.pdcast(pddata)
-
-print(vlst)
->>> [[1.0, 2.0, 3.0, 4.0], [2.0, 3.0, 4.0, 5.0], [4.1, 5.2, 6.3, 7.4]]
-print(ilst)
->>> ['A', 'B', 'C']
-```
-
-npcast()，接受的参数为 Numpy.array 类型。
-```python
-@staticmethod
-npcast(npdata)
-``` 用于处理 Numpy 中的 ndarray 类型，返回一个确保类型正确的列表。如果多个维度的话返回嵌套列表。```
-```
-
-Numpy.array 类型
-```python
-from pyecharts import Bar
-import numpy ad np
-
-npdata = np.array([[1, 2, 3, 4], [2, 4, 5.0, 6.3]])
-print(npdata)
->>> [[1.0, 2.0, 3.0, 4.0], [2.0, 4.0, 5.0, 6.3]]
-```
-
 **当然你也可以采用更加酷炫的方式，使用 Jupyter Notebook 来展示图表，matplotlib 有的，pyecharts 也会有的**  
-**Tip：** 从 0.1.9.2 版本开始，不再使用 ```render_notebook()``` 方法，现已采用更加 pythonic 的做法。直接调用本身实例就可以了。  
+**Tip：** 从 0.1.9.2 版本开始，废弃 ```render_notebook()``` 方法，现已采用更加 pythonic 的做法。直接调用本身实例就可以了。  
 
 比如这样  
 
@@ -157,6 +112,10 @@ print(npdata)
 还有这样
 
 ![notebook-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/notebook-1.gif)
+
+如果使用的是自定义类，直接调用自定义类示例即可
+
+![notebook-2](https://github.com/chenjiandongx/pyecharts/blob/master/images/notebook-2.gif)
 
 更多 Jupyter notebook 的例子请参考 [notebook-use-cases](https://github.com/chenjiandongx/pyecharts/blob/master/document/notebook-use-cases.ipynb)。可下载后运行看看。
 
@@ -189,6 +148,7 @@ print(npdata)
 * is_grid -> bool  
     是否使用 grid 组件，grid 组件用于并行显示图表。具体实现参见 [用户自定义](https://github.com/chenjiandongx/pyecharts/blob/master/document/zh-cn/documentation.md#用户自定义)
     
+
 # 通用配置项
 **通用配置项均在 ```add()``` 中设置**
 
@@ -336,6 +296,7 @@ print(npdata)
     物体自传的速度。单位为角度 / 秒，默认为 10 ，也就是 36 秒转一圈。
 * grid3D_rotate_sensitivity -> int  
     旋转操作的灵敏度，值越大越灵敏。默认为 1, 设置为 0 后无法旋转。
+
 
 **axis3D：3D 笛卡尔坐标系 X，Y，Z 轴配置项**
 
@@ -1895,7 +1856,7 @@ Grid 类的使用：
 Grid 类中其他方法：
 * `render_embed()`：在 Flask&Django 中可以使用该方法渲染
 * `show_config()`：打印输出所有配置项
-* `chart`：返回图形实例
+* `chart`：chart 属性返回图形实例
 
 `add()` 接受的参数：
 * grid_width -> str/int  
@@ -2207,7 +2168,7 @@ Page 类的使用：
 Page 类中其他方法：
 * `render_embed()`：在 Flask&Django 中可以使用该方法渲染
 * `show_config()`：打印输出所有配置项
-* `chart`：返回图形实例
+* `chart`：chart 属性返回图形实例
 
 ```python
 #coding=utf-8
@@ -2357,7 +2318,7 @@ Timeline 类的使用：
 Timeline 类中其他方法：
 * `render_embed()`：在 Flask&Django 中可以使用该方法渲染
 * `show_config()`：打印输出所有配置项
-* `chart`：返回图形实例
+* `chart`：chart 属性返回图形实例
 
 ```python
 from pyecharts import Bar, Timeline
