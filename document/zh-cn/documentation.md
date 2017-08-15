@@ -73,8 +73,9 @@ bar.render()
 
 
 ### Jupyter notebook 小贴士
-
-对本库的现有用户来说，新版本(0.1.9.5)的离线模式要求：1）老版本已完全卸载 2）你现有的notebook文档需要刷新并重新运行。
+对本库的现有用户来说，0.1.9.5 版本的离线模式要求：
+1）老版本已完全卸载 
+2）您现有的 notebook 文档需要刷新并重新运行。
 
 离线模式工作原理：pyecharts自动把echarts脚本文件装在了jupyter nbextensions文件夹下面。以下代码可以告诉你pyecharts网页脚本是否装到了Jupyter里面：
 
