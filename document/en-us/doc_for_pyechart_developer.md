@@ -26,8 +26,8 @@ Edit gulp.js
 ```
 ...
 FILES = [
-	'./node_modules/echarts/dist/echarts.min.js',
-	'./node_modules/echarts/map/js/china.js',
+    './node_modules/echarts/dist/echarts.min.js',
+    './node_modules/echarts/map/js/china.js',
     './node_modules/your_library/dist/min_version.js' <---
 ```
 
@@ -93,7 +93,3 @@ in front end engineer's head on daily basis.
 Above is a quick introduction to front end engineering. There are many excellent
 projects, tools and developers in node.js universe, waiting for you to find and
 meet.
-
-
-
-
