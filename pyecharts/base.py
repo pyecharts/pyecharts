@@ -14,7 +14,7 @@ from pyecharts import template
 
 
 NBEXT_NAME = 'nbextensions'
-DEFAULT_HOST = '/%s' % NBEXT_NAME
+DEFAULT_HOST = '/%s/echarts' % NBEXT_NAME
 NBEXT_SIGNATURE = '.pyecharts.%s' % __version__
 
 
