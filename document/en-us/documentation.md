@@ -63,17 +63,33 @@ bar.render()
 
 ### A note on Jupyter notebook
 
-For existing users, in order to play with the offline mode coming with 0.1.9.5, it is recommended that 1) the old version must be uninstalled. 2) Your existing notebooks must be refreshed and re-ran. 
+For existing users, in order to play with the offline mode coming with 0.1.9.5, it is recommended that 1) the old version must be uninstalled. 2) Your existing notebooks must be refreshed and re-ran.
 
-How the offline mode works is: all echarts javascript libraries are copied into nbextensions directory. In order to find out where it is on your operating system, you can do these:
+How the offline mode works is: all echarts javascript libraries are copied into nbextensions directory. The following command helps you find out whether jupyter-echarts echarts is installed or not
 
-```python
-from jupyter_core.paths import jupyter_data_dir
-print(jupyter_data_dir())
+```shell
+$ jupyter nbextension list                       
+Known nbextensions:
+  config dir: /Users/jaska/.jupyter/nbconfig
+    notebook section
+      echarts/main  enabled 
+      - Validating: OK
 ```
 
-Should you enforce pyecharts to reload all echarts javascript libraries, you will need to delete the hidden signature file: <<jupyter data dir>>/nbextensions/.pyecharts.<<version>>.
+Rarely, you would enforce pyecharts to reload all echarts javascript libraries. However if you intend to do so, you can issue these commands:
+
+```shell
+$ git clone https://github.com/chfw/jupyter-echarts.git
+$ cd jupyter-echarts
+$ jupyter nbextensions install echarts --user
+```
 Upon next rendering, all javascript libraries will be copied again.
+
+And rarely again unless you are a developer of pyecharts, you choose to remove the extension:
+
+```shell
+$ jupyter nbextensions uninstall echarts --user
+```
 
 ### Python2 Coding Problem
 default code type is UTF-8, there's no problem in Python3, because Python3 have a good support in chinese. But in Python2, please use the following sentence to ensure avoiding wrong coding problem:

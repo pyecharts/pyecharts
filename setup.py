@@ -1,10 +1,15 @@
 #!/usr/bin/env python
 #coding=utf-8
 
+from setuptools import setup
+from setuptools.command.install import install
+
 try:
-    from setuptools import setup
-except ImportError:
-    from distutils.core import setup
+    from jupyterpip import cmdclass
+except:
+    import pip, importlib
+    pip.main(['install', 'jupyter-pip']); cmdclass = importlib.import_module('jupyterpip').cmdclass
+
 
 __title__ = 'pyecharts'
 __description__ = 'Python echarts, make charting easier'
@@ -16,6 +21,7 @@ __license__ = 'MIT'
 __requires__ = ['pillow', 'jinja2', 'future']
 __packages__ = ['pyecharts', 'pyecharts/charts', 'pyecharts/custom']
 __keywords__ = ['echarts', 'charts']
+__jupyter_echarts__ = 'pyecharts/templates/js/echarts'
 
 
 setup(
@@ -31,6 +37,7 @@ setup(
     install_requires=__requires__,
     zip_safe=False,
     include_package_data=True,
+    cmdclass=cmdclass(__jupyter_echarts__, enable="echarts/main"),
     classifiers=[
         'Development Status :: 4 - Beta',
         'Environment :: Console',
