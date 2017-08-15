@@ -11,8 +11,8 @@ def test_freeze_js():
     html_content = """
         </style>
         <!-- build -->
-        <script src="js/echarts.3.6.2.min.js"></script>
-        <script src="js/echarts-wordcloud.min.js"></script>
+        <script src="js/echarts/echarts.min.js"></script>
+        <script src="js/echarts/echarts-wordcloud.min.js"></script>
         <!-- endbuild -->
     </head><body>"""
 
