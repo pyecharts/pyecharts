@@ -2,22 +2,12 @@
 # coding=utf-8
 from __future__ import unicode_literals
 
-import os
 import json
-import shutil
 
 import pandas as pd
 import numpy as np
 
-try:
-    from mock import patch
-except ImportError:
-    from unittest.mock import patch
-
-from nose.tools import eq_
-
-from pyecharts import Bar, __version__
-from pyecharts.base import install_echarts_if_needed
+from pyecharts import Bar
 
 
 def test_embed_option():
@@ -63,27 +53,3 @@ def test_pandas_dataframe():
     bar.add('loss', df2.index, dtvalue2)
     html = bar.render_embed()
     assert title in html
-
-
-@patch("jupyter_core.paths.jupyter_data_dir")
-def test_echarts_installation(fake_jupyter_data_dir):
-    # test preparation
-    fake_dir_name = 'fake_jupyter_data_dir'
-    fake_nbextension_folder = os.path.join(fake_dir_name, 'nbextensions')
-    os.makedirs(fake_nbextension_folder)
-
-    # install js files to the fake directory
-    fake_jupyter_data_dir.return_value = os.path.abspath(fake_dir_name)
-    install_echarts_if_needed()
-
-    # check if the signature file is there
-    fake_signature_file = os.path.join(
-        fake_nbextension_folder, '.pyecharts.%s' % __version__)
-    assert os.path.exists(fake_signature_file), True
-    all_files = os.listdir(fake_nbextension_folder)
-    eq_(len(all_files), 40)
-
-    # clean it up
-    for js in all_files:
-        os.unlink(os.path.join(fake_nbextension_folder, js))
-    shutil.rmtree(fake_dir_name)
