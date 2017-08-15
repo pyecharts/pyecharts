@@ -17,7 +17,7 @@ $ pip install pyecharts
 
 or clone it and install it
 ```
-$ git clone https://github.com/chenjiandongx/pyecharts.git
+$ git clone --recursive https://github.com/chenjiandongx/pyecharts.git
 $ cd pyecharts
 $ python setup.py install
 ```
