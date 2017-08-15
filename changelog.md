@@ -40,11 +40,11 @@
     * 废弃 `npcast()`, `pdcast()` 方法，新版本已经在内部封装了处理逻辑，直接在 `add()` 中传入 `numpy`, `pandas` 的 `index`，`values` 属性即可
     * 集成 Flask + Django
 
-* version 0.1.9.4（当前版本）
+* version 0.1.9.4
     * 删除 Image 依赖模块，改为 pillow 模块
     * 新增 Page 类，现能同时在一个 html 页面内按顺序展示多个图形。（参见用户自定义）
 
-* version 0.1.9.5
+* version 0.1.9.5（当前版本）
     * 删除冗余 js 文件，压缩项目体积。
     * 为 3D 图新增参数用于配置坐标轴选项（参见通用配置项中的 axis3D）
     * 废弃 xAxis，yAxis 中的 `interval`, `xy_font_size`, `namegap` 参数。新增以下参数
