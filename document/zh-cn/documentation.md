@@ -77,14 +77,32 @@ bar.render()
 1）老版本已完全卸载 
 2）您现有的 notebook 文档需要刷新并重新运行。
 
-离线模式工作原理：pyecharts 自动把 echarts 脚本文件装在了 jupyter_data_dir()/nbextensions 文件夹下面。以下代码可以查看 jupyter data dir 在您的操作系统里的具体位置：
+离线模式工作原理：pyecharts自动把echarts脚本文件装在了jupyter nbextensions文件夹下面。以下代码可以告诉你pyecharts网页脚本是否装到了Jupyter里面：
 
-```python
-from jupyter_core.paths import jupyter_data_dir
-print(jupyter_data_dir())
+
+```shell
+$ jupyter nbextension list
+Known nbextensions:
+  config dir: /Users/jaska/.jupyter/nbconfig
+    notebook section
+      echarts/main  enabled 
+      - Validating: OK
 ```
 
-如果您想要 pyecharts 更新所有的脚本文件的话，请删除 <<jupyter data dir>>/nbextensions/.pyecharts.<<version>>. 在下一个画图动作的时候，您的脚本文件会被更新。
+在罕见的情况下，如果你想要pyecharts更新所有的脚本文件的话，你可以运行下面的命令：
+
+```shell
+$ git clone https://github.com/chfw/jupyter-echarts.git
+$ cd jupyter-echarts
+$ jupyter nbextensions install echarts --user
+```
+在下一个画图动作的时候，您的脚本文件会被更新。
+
+下面这个删除命令估计只有参与pyecharts开发的同学会用到
+
+```shell
+$ jupyter nbextensions uninstall echarts --user
+```
 
 ### Python2 编码问题
 默认的编码类型为 UTF-8，在 Python3 中是没什么问题的，Python3 对中文的支持好很多。但是在 Python2 中，请应用下面的语句，保证没有编码问题:
