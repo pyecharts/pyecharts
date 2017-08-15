@@ -1,0 +1,3 @@
+[submodule "pyecharts/templates/js"]
+	path = pyecharts/templates/js
+	url = https://github.com/chfw/jupyter-echarts.git
