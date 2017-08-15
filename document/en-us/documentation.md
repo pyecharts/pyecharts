@@ -65,10 +65,10 @@ bar.render()
 
 For existing users, in order to play with the offline mode coming with 0.1.9.5, it is recommended that 1) the old version must be uninstalled. 2) Your existing notebooks must be refreshed and re-ran.
 
-How the offline mode works is: all echarts javascript libraries are copied into nbextensions directory. The following command helps you find out whether jupyter-echarts echarts is installed or not
+How the offline mode works is: all echarts javascript libraries are copied into nbextensions directory. The following command helps you find out whether pyecharts js components are installed or not
 
 ```shell
-$ jupyter nbextension list                       
+$ jupyter nbextension list
 Known nbextensions:
   config dir: /Users/jaska/.jupyter/nbconfig
     notebook section
