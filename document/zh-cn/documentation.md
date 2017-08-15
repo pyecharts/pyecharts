@@ -73,17 +73,18 @@ bar.render()
 
 
 ### Jupyter notebook 小贴士
+对本库的现有用户来说，0.1.9.5 版本的离线模式要求：
+1）老版本已完全卸载 
+2）您现有的 notebook 文档需要刷新并重新运行。
 
-对本库的现有用户来说，新版本(0.1.9.5)的离线模式要求1）老版本已完全卸载 2）您现有的notebook文档需要刷新并重新运行。
-
-离线模式工作原理：pyecharts自动把echarts脚本文件装在了jupyter_data_dir()/nbextensions文件夹下面。以下代码可以告诉你jupyter data dir在您的操作系统里的具体位置：
+离线模式工作原理：pyecharts 自动把 echarts 脚本文件装在了 jupyter_data_dir()/nbextensions 文件夹下面。以下代码可以查看 jupyter data dir 在您的操作系统里的具体位置：
 
 ```python
 from jupyter_core.paths import jupyter_data_dir
 print(jupyter_data_dir())
 ```
 
-如果您想要pyecharts更新所有的脚本文件的话，请删除<<jupyter data dir>>/nbextensions/.pyecharts.<<version>>. 在下一个画图动作的时候，您的脚本文件会被更新。
+如果您想要 pyecharts 更新所有的脚本文件的话，请删除 <<jupyter data dir>>/nbextensions/.pyecharts.<<version>>. 在下一个画图动作的时候，您的脚本文件会被更新。
 
 ### Python2 编码问题
 默认的编码类型为 UTF-8，在 Python3 中是没什么问题的，Python3 对中文的支持好很多。但是在 Python2 中，请应用下面的语句，保证没有编码问题:
