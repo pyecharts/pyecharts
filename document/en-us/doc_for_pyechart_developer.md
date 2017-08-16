@@ -3,9 +3,9 @@
 ## How to add more javascript libraries to pyecharts
 
 All javascript libraries are now managed in a [submodule](https://git-scm.com/docs/git-submodule) [jupyter-echarts](https://github.com/chfw/jupyter-echarts). It means
-new javascript library shall go through jupyter-charts.
+new javascript library shall go through jupyter-echarts.
 
-jupyter-charts is a front-end project. If you are new to front-end engineering, please find the crash course for you in the end.
+jupyter-echarts is a front-end project. If you are new to front-end engineering, please find the crash course for you in the end.
 
 # Step 1: add the library to jupyter-echarts
 
