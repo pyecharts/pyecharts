@@ -101,7 +101,7 @@ $ jupyter nbextensions install echarts --user
 下面这个删除命令估计只有参与 pyecharts 开发的同学会用到
 
 ```shell
-$ jupyter nbextensions uninstall echarts --user
+$ jupyter nbextension uninstall echarts --user
 ```
 
 ### Python2 编码问题
