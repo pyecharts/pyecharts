@@ -336,7 +336,7 @@ class Base(object):
             # Avoid loading too many maps at once, make sure notebook can
             # show map chart normally.
             if s.get('type') == 'map':
-                name_in_pinyin = template.CITY_NAME_PINYIN_MAP.get(
+                name_in_pinyin = constants.CITY_NAME_PINYIN_MAP.get(
                     self._option.get('series')[0].get('mapType'))
                 if name_in_pinyin:
                     self._js_dependencies.append(name_in_pinyin)
