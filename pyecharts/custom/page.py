@@ -2,7 +2,7 @@
 # coding=utf-8
 
 from pyecharts import template
-from pyecharts.base import DEFAULT_JS_LIBRARIES, DEFAULT_HOST
+from pyecharts.constants import DEFAULT_JS_LIBRARIES, DEFAULT_HOST
 
 
 class Page(object):
