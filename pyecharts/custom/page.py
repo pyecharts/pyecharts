@@ -56,9 +56,15 @@ class Page(object):
         for chart in self.__charts:
             doms += chart._render_notebook_dom_()
             components += chart._render_notebook_component_()
-            dependencies = dependencies.union(set(chart._js_dependencies))
+            dependencies = dependencies.union(chart._js_dependencies)
+
+        # make sure echarts is the item in the list
+        # require(['echarts'....], function(ec) {..}) need it to be first
+        # but dependencies is a set so has no sequence
+        dependencies = ['echarts'] + list(dependencies.remove('echarts'))
+
         require_conf_items = [
-            "%s: '%s/%s'" % (key, self._jshost, DEFAULT_JS_LIBRARIES.get(key, key))
+            "'%s': '%s/%s'" % (key, self._jshost, DEFAULT_JS_LIBRARIES.get(key, key))
             for key in dependencies]
         require_libraries = ["'%s'" % key for key in dependencies]
         tmp = template.JINJA2_ENV.get_template(_tmp)

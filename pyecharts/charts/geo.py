@@ -14,7 +14,7 @@ class Geo(Base):
     """
     def __init__(self, title="", subtitle="", **kwargs):
         super(Geo, self).__init__(title, subtitle, **kwargs)
-        self._js_dependencies.append('china')
+        self._js_dependencies.add('china')
 
     def add(self, *args, **kwargs):
         self.__add(*args, **kwargs)
