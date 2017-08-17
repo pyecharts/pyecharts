@@ -12,6 +12,14 @@ from pyecharts import template
 
 
 DEFAULT_HOST = '/nbextensions/echarts'
+DEFAULT_JS_LIBRARIES = dict(
+    echarts='echarts.min',
+    echartsgl='echarts-gl.min',
+    liquidfill='echarts-liquidfill.min',
+    world='world',
+    china='china',
+    wordcloud='echarts-wordcloud.min'
+)
 
 
 class Base(object):
@@ -94,6 +102,7 @@ class Base(object):
             backgroundColor=background_color
         )
         self._jshost = DEFAULT_HOST
+        self._js_dependencies = ['echarts']
 
     def add(self, angle_data=None,
             angle_range=None,
@@ -340,21 +349,24 @@ class Base(object):
             # Avoid loading too many maps at once, make sure notebook can
             # show map chart normally.
             if s.get('type') == 'map':
-                _tmp = "notebook_map.html"
-                city_name_in_pinyin = template.CITY_NAME_PINYIN_MAP.get(
+                name_in_pinyin = template.CITY_NAME_PINYIN_MAP.get(
                     self._option.get('series')[0].get('mapType'))
-                map_keywords['location'] = city_name_in_pinyin
-                break
+                if name_in_pinyin:
+                    self._js_dependencies.append(name_in_pinyin)
         tmp = template.JINJA2_ENV.get_template(_tmp)
+        require_conf_items = ["%s: '%s/%s'" % (key, self._jshost, DEFAULT_JS_LIBRARIES.get(key, key))
+                              for key in self._js_dependencies]
+        require_libraries = ["'%s'" % key for key in self._js_dependencies]
         try:
             html = tmp.render(
                 myOption=my_option, chartId=divid, myWidth=self._width,
-                myHeight=self._height, host=self._jshost, **map_keywords)
+                config_items=require_conf_items, libraries=require_libraries,
+                myHeight=self._height, **map_keywords)
         except:
             html = tmp.render(
                 mtOption=my_option.decode('utf8'), chartId=divid,
-                myWidth=self._width, myHeight=self._height, host=self._jshost,
-                **map_keywords)
+                config_items=require_conf_items, libraries=require_libraries,
+                myWidth=self._width, myHeight=self._height, **map_keywords)
         return html
 
     @property

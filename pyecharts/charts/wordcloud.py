@@ -4,12 +4,14 @@
 from pyecharts.base import Base
 from pyecharts.option import gen_color
 
+
 class WordCloud(Base):
     """
     <<< WordCloud chart >>>
     """
     def __init__(self, title="", subtitle="", **kwargs):
         super(WordCloud, self).__init__(title, subtitle, **kwargs)
+        self._js_dependencies.append('wordcloud')
 
     def add(self, *args, **kwargs):
         self.__add(*args, **kwargs)
