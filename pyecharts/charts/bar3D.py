@@ -42,7 +42,9 @@ class Bar3D(Base):
         :param kwargs:
         :return:
         """
-        kwargs.update(xaxis3d_type='category', yaxis3d_type='category', zaxis3d_type='value')
+        kwargs.update(xaxis3d_type='category',
+                      yaxis3d_type='category',
+                      zaxis3d_type='value')
         chart = get_all_options(**kwargs)
         self._option.get('legend')[0].get('data').append(name)
         self._option.update(
