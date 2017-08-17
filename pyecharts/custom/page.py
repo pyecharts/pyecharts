@@ -3,7 +3,7 @@
 
 from pyecharts import template
 from pyecharts.constants import DEFAULT_JS_LIBRARIES, DEFAULT_HOST
-
+from pyecharts.template import produce_require_configuration
 
 class Page(object):
 
@@ -63,12 +63,9 @@ class Page(object):
         # but dependencies is a set so has no sequence
         dependencies = ['echarts'] + list(dependencies.remove('echarts'))
 
-        require_conf_items = [
-            "'%s': '%s/%s'" % (key, self._jshost, DEFAULT_JS_LIBRARIES.get(key, key))
-            for key in dependencies]
-        require_libraries = ["'%s'" % key for key in dependencies]
+        require_config = produce_require_configuration(
+            self._js_dependencies, self._jshost)
         tmp = template.JINJA2_ENV.get_template(_tmp)
         html = tmp.render(
-            single_chart=components, dom=doms,
-            config_items=require_conf_items, libraries=require_libraries)
+            single_chart=components, dom=doms, **require_config)
         return html

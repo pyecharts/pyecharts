@@ -7,7 +7,7 @@ import re
 import sys
 import codecs
 from jinja2 import Environment, FileSystemLoader
-
+from pyecharts.constants import DEFAULT_JS_LIBRARIES
 
 PY2 = sys.version_info[0] == 2
 
@@ -80,3 +80,15 @@ def write_utf8_html_file(file_name, html_content):
     else:
         with open(file_name, "w+", encoding="utf-8") as fout:
             fout.write(html_content)
+
+
+def produce_require_configuration(dependencies, jshost):
+    # if no nick name register, we treat the location as location.js
+    require_conf_items = [
+        "'%s': '%s/%s'" % (key, jshost, DEFAULT_JS_LIBRARIES.get(key, key))
+        for key in dependencies]
+    require_libraries = ["'%s'" % key for key in dependencies]
+    return dict(
+        config_items=require_conf_items,
+        libraries=require_libraries
+    )
