@@ -341,10 +341,8 @@ class Base(object):
         :return:
         """
         divid = datetime.datetime.now()
-        my_option = json_dumps(self._option, indent=4)
         _tmp = 'notebook.html'
         series = self._option.get("series")
-        map_keywords = {}
         for s in series:
             # Avoid loading too many maps at once, make sure notebook can
             # show map chart normally.
@@ -353,21 +351,33 @@ class Base(object):
                     self._option.get('series')[0].get('mapType'))
                 if name_in_pinyin:
                     self._js_dependencies.append(name_in_pinyin)
-        tmp = template.JINJA2_ENV.get_template(_tmp)
-        require_conf_items = ["%s: '%s/%s'" % (key, self._jshost, DEFAULT_JS_LIBRARIES.get(key, key))
-                              for key in self._js_dependencies]
+        require_conf_items = [
+            "%s: '%s/%s'" % (key, self._jshost, DEFAULT_JS_LIBRARIES.get(key, key))
+            for key in self._js_dependencies]
         require_libraries = ["'%s'" % key for key in self._js_dependencies]
-        try:
-            html = tmp.render(
-                myOption=my_option, chartId=divid, myWidth=self._width,
-                config_items=require_conf_items, libraries=require_libraries,
-                myHeight=self._height, **map_keywords)
-        except:
-            html = tmp.render(
-                mtOption=my_option.decode('utf8'), chartId=divid,
-                config_items=require_conf_items, libraries=require_libraries,
-                myWidth=self._width, myHeight=self._height, **map_keywords)
+        dom = self._render_notebook_dom_(divid)
+        component = self._render_notebook_component_(divid)
+        tmp = template.JINJA2_ENV.get_template(_tmp)
+        html = tmp.render(
+            single_chart=component, dom=dom,
+            config_items=require_conf_items, libraries=require_libraries,
+            chart_height=self._height)
         return html
+
+    def _render_notebook_dom_(self, divid):
+        _tmp = "notebook_dom.html"
+        tmp = template.JINJA2_ENV.get_template(_tmp)
+        component = tmp.render(
+            chart_id=divid, chart_width=self._width, chart_height=self._height)
+        return component
+
+    def _render_notebook_component_(self, divid):
+        _tmp = "notebook_chart_component.html"
+        my_option = json_dumps(self._option, indent=4)
+        tmp = template.JINJA2_ENV.get_template(_tmp)
+        component = tmp.render(
+            my_option=my_option, chart_id=divid)
+        return component
 
     @property
     def _geo_cities(self):
