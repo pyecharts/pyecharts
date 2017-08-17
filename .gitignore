@@ -8,7 +8,6 @@ __pycache__/
 .idea
 # Distribution / packaging
 .Python
-/js/
 env/
 build/
 develop-eggs/

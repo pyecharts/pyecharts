@@ -19,7 +19,7 @@
 下面就以广东地图为例，说明如何自行添加地图。
 
 ### 保存地图文件
-我已经下载了广东地图的 JS 文件，文件名为 guangdong.js。将 guangdong.js 保存在项目安装目录下的 templates/js 文件夹中。Windows 下一般为 Lib/site-packages/pyecharts/templates/js/echarts
+我已经下载了广东地图的 JS 文件，文件名为 guangdong.js。将 guangdong.js 保存在项目安装目录下的 templates/js/echarts 文件夹中。Windows 下一般为 Lib/site-packages/pyecharts/templates/js/echarts
 
 ### 修改代码
 打开 templates 文件夹下的 base.html 文件，新增一行 ```<script type="text/javascript " src="js/guangdong.js "></script>```
@@ -47,7 +47,7 @@ _mapindex = {
 }
 ```
 
-然后查看jupyter-notebook的所有路径。下面是mac os的例子：
+然后查看 jupyter-notebook 的所有路径。下面是 mac os 的例子：
 
 ```
 $ jupyter --paths
@@ -65,6 +65,6 @@ runtime:
     /Users/jaska/Library/Jupyter/runtime
 ```
 
-你需要做的就是把guangdong.js拷贝到/Users/jaska/Library/Jupyter/nbextensions/echarts/.
+你需要做的就是把 guangdong.js 拷贝到 /Users/jaska/Library/Jupyter/nbextensions/echarts/.
 
 现在也能在 jupyter notebook 上展示你所属要的地图了。
