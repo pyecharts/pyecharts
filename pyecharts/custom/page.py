@@ -61,10 +61,12 @@ class Page(object):
         # make sure echarts is the item in the list
         # require(['echarts'....], function(ec) {..}) need it to be first
         # but dependencies is a set so has no sequence
-        dependencies = ['echarts'] + list(dependencies.remove('echarts'))
+        if len(dependencies) > 1:
+            dependencies.remove('echarts')
+            dependencies = ['echarts'] + list(dependencies)
 
         require_config = produce_require_configuration(
-            self._js_dependencies, self._jshost)
+            dependencies, self._jshost)
         tmp = template.JINJA2_ENV.get_template(_tmp)
         html = tmp.render(
             single_chart=components, dom=doms, **require_config)
