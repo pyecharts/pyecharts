@@ -1,7 +1,8 @@
 #!/usr/bin/env python
-#coding=utf-8
+# coding=utf-8
 
 from pyecharts.base import Base
+
 
 class Liquid(Base):
     """
@@ -10,6 +11,7 @@ class Liquid(Base):
     """
     def __init__(self, title="", subtitle="", **kwargs):
         super(Liquid, self).__init__(title, subtitle, **kwargs)
+        self._js_dependencies.append('liquidfill')
 
     def add(self, *args, **kwargs):
         self.__add(*args, **kwargs)

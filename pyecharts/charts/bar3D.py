@@ -1,8 +1,9 @@
 #!/usr/bin/env python
-#coding=utf-8
+# coding=utf-8
 
 from pyecharts.base import Base
 from pyecharts.option import get_all_options
+
 
 class Bar3D(Base):
     """
@@ -11,6 +12,7 @@ class Bar3D(Base):
 
     def __init__(self, title="", subtitle="", **kwargs):
         super(Bar3D, self).__init__(title, subtitle, **kwargs)
+        self._js_dependencies.append('echartsgl')
 
     def add(self, *args, **kwargs):
         self.__add(*args, **kwargs)
