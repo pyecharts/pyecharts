@@ -13,6 +13,7 @@ class Map(Base):
     """
     def __init__(self, title="", subtitle="", **kwargs):
         super(Map, self).__init__(title, subtitle, **kwargs)
+        self._js_dependencies.append('world')
 
     def add(self, *args, **kwargs):
         self.__add(*args, **kwargs)
