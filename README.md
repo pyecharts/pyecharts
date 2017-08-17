@@ -4,10 +4,12 @@ pyecharts is a library to generate charts using Echarts. It simply provides the 
 
 [![Build Status](https://travis-ci.org/chenjiandongx/pyecharts.svg?branch=master)](https://travis-ci.org/chenjiandongx/pyecharts)  
 
+[![codecov](https://codecov.io/gh/pyexcel/pyecharts/branch/master/graph/badge.svg)](https://codecov.io/gh/pyexcel/pyecharts)
+
 ## Introduction
 [Echarts](https://github.com/ecomfe/echarts) is an open source library from Baidu for data visualization in javascript. It has awesome demo pages so I started to look out for an interface library so that I could use it in Python. I ended up with [echarts-python](https://github.com/yufeiminds/echarts-python) on github but it lacks of documentation and was not updated for a while. Just like many other Python projects, I started my own project, pyecharts, referencing echarts-python and another library [pygal](https://github.com/Kozea/pygal).
 
-## Instatllation
+## Installation
 pyecharts works on Python2 and Python3. The latest release is 0.1.9.5. For more information please refer to [changelog.md](https://github.com/chenjiandongx/pyecharts/blob/master/changelog.md)  
 
 You can install it via pip
@@ -35,7 +37,7 @@ bar.add("evaporation", attr, v2, mark_line=["average"], mark_point=["max", "min"
 bar.render()
 ```
 
-It will creat a file named render.html in the root directory, open file with your borwser.  
+It will create a file named render.html in the root directory, open file with your borwser.  
 
 ![usage-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/usage-0.gif)
 
