@@ -77,7 +77,7 @@ bar.render()
 1）老版本已完全卸载 
 2）您现有的 notebook 文档需要刷新并重新运行。
 
-离线模式工作原理：pyecharts自动把echarts脚本文件装在了jupyter nbextensions文件夹下面。以下代码可以告诉你pyecharts网页脚本是否装到了Jupyter里面：
+离线模式工作原理：pyecharts 自动把 echarts 脚本文件装在了 jupyter nbextensions 文件夹下面。以下代码可以告诉你 pyecharts 网页脚本是否装到了 Jupyter 里面：
 
 
 ```shell
@@ -89,7 +89,7 @@ Known nbextensions:
       - Validating: OK
 ```
 
-在罕见的情况下，如果你想要pyecharts更新所有的脚本文件的话，你可以运行下面的命令：
+在罕见的情况下，如果你想要 pyecharts 更新所有的脚本文件的话，你可以运行下面的命令：
 
 ```shell
 $ git clone https://github.com/chfw/jupyter-echarts.git
@@ -98,10 +98,10 @@ $ jupyter nbextensions install echarts --user
 ```
 在下一个画图动作的时候，您的脚本文件会被更新。
 
-下面这个删除命令估计只有参与pyecharts开发的同学会用到
+下面这个删除命令估计只有参与 pyecharts 开发的同学会用到
 
 ```shell
-$ jupyter nbextensions uninstall echarts --user
+$ jupyter nbextension uninstall echarts --user
 ```
 
 ### Python2 编码问题
