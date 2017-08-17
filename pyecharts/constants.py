@@ -1,3 +1,5 @@
+# coding=utf-8
+
 DEFAULT_HOST = '/nbextensions/echarts'
 DEFAULT_JS_LIBRARIES = dict(
     echarts='echarts.min',
