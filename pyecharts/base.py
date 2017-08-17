@@ -338,16 +338,13 @@ class Base(object):
         :return:
         """
         _tmp = 'notebook.html'
-        require_conf_items = [
-            "'%s': '%s/%s'" % (key, self._jshost, constants.DEFAULT_JS_LIBRARIES.get(key, key))
-            for key in self._js_dependencies]
-        require_libraries = ["'%s'" % key for key in self._js_dependencies]
         dom = self._render_notebook_dom_()
         component = self._render_notebook_component_()
         tmp = template.JINJA2_ENV.get_template(_tmp)
+        require_config = template.produce_require_configuration(
+            self._js_dependencies, self._jshost)
         html = tmp.render(
-            single_chart=component, dom=dom,
-            config_items=require_conf_items, libraries=require_libraries)
+            single_chart=component, dom=dom, **require_config)
         return html
 
     def _render_notebook_dom_(self):
