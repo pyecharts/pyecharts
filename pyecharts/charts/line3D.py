@@ -23,8 +23,8 @@ class Line3D(Base):
         """
 
         :param name:
-            Series name used for displaying in tooltip and filtering with legend,
-            or updaing data and configuration with setOption.
+            Series name used for displaying in tooltip and filtering
+            with legend, or updaing data and configuration with setOption.
         :param data:
             data of line3D
         :param grid3D_opacity:
@@ -32,7 +32,9 @@ class Line3D(Base):
         :param kwargs:
         :return:
         """
-        kwargs.update(xaxis3d_type='value', yaxis3d_type='value', zaxis3d_type='value')
+        kwargs.update(xaxis3d_type='value',
+                      yaxis3d_type='value',
+                      zaxis3d_type='value')
         chart = get_all_options(**kwargs)
         self._option.get('legend')[0].get('data').append(name)
         self._option.update(
