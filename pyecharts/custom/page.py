@@ -45,3 +45,4 @@ class Page(object):
         for chart in self.__charts:
             chart_content += chart.render_embed()
         return chart_content
+
