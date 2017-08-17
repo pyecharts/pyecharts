@@ -1,4 +1,5 @@
 jinja2==2.8
 future
 pillow
+notebook
 jupyter-pip
