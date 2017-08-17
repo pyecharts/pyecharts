@@ -2,12 +2,14 @@
 # coding=utf-8
 
 from pyecharts import template
+from pyecharts.base import DEFAULT_JS_LIBRARIES, DEFAULT_HOST
 
 
 class Page(object):
 
     def __init__(self):
         self.__charts = []
+        self._jshost = DEFAULT_HOST
 
     def add(self, achart_or_charts):
         """
@@ -46,3 +48,21 @@ class Page(object):
             chart_content += chart.render_embed()
         return chart_content
 
+    def _repr_html_(self):
+        _tmp = "notebook.html"
+        doms = ""
+        components = ""
+        dependencies = set()
+        for chart in self.__charts:
+            doms += chart._render_notebook_dom_()
+            components += chart._render_notebook_component_()
+            dependencies = dependencies.union(set(chart._js_dependencies))
+        require_conf_items = [
+            "%s: '%s/%s'" % (key, self._jshost, DEFAULT_JS_LIBRARIES.get(key, key))
+            for key in dependencies]
+        require_libraries = ["'%s'" % key for key in dependencies]
+        tmp = template.JINJA2_ENV.get_template(_tmp)
+        html = tmp.render(
+            single_chart=components, dom=doms,
+            config_items=require_conf_items, libraries=require_libraries)
+        return html
