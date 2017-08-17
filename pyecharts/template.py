@@ -8,6 +8,7 @@ import sys
 import codecs
 from jinja2 import Environment, FileSystemLoader
 
+
 PY2 = sys.version_info[0] == 2
 
 JS_PATTERN = re.compile(r'<!-- build -->(.*)<!-- endbuild -->',

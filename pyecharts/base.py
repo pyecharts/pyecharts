@@ -63,19 +63,26 @@ class Base(object):
         """
         self._option = {}
         self._width, self._height = width, height
-        self._colorlst = ['#c23531', '#2f4554', '#61a0a8', '#d48265', '#749f83',
-                          '#ca8622', '#bda29a', '#6e7074', '#546570', '#c4ccd3',
-                          '#f05b72', '#ef5b9c', '#f47920', '#905a3d', '#fab27b',
-                          '#2a5caa', '#444693', '#726930', '#b2d235', '#6d8346',
-                          '#ac6767', '#1d953f', '#6950a1', '#918597', '#f6f5ec']
+        self._colorlst = [
+            '#c23531', '#2f4554', '#61a0a8', '#d48265', '#749f83',
+            '#ca8622', '#bda29a', '#6e7074', '#546570', '#c4ccd3',
+            '#f05b72', '#ef5b9c', '#f47920', '#905a3d', '#fab27b',
+            '#2a5caa', '#444693', '#726930', '#b2d235', '#6d8346',
+            '#ac6767', '#1d953f', '#6950a1', '#918597', '#f6f5ec']
         self._option.update(
             title=[{
                 "text": title,
                 "subtext": subtitle,
                 "left": title_pos,
                 "top": title_top,
-                "textStyle": {"color": title_color, "fontSize": title_text_size},
-                "subtextStyle": {"color": subtitle_color, "fontSize": subtitle_text_size}
+                "textStyle": {
+                    "color": title_color,
+                    "fontSize": title_text_size
+                },
+                "subtextStyle": {
+                    "color": subtitle_color,
+                    "fontSize": subtitle_text_size
+                }
             }],
             toolbox={
                 "show": True,
@@ -91,7 +98,7 @@ class Base(object):
             backgroundColor=background_color
         )
         self._jshost = constants.DEFAULT_HOST
-        self._js_dependencies = ['echarts']
+        self._js_dependencies = set(['echarts'])
         self._chart_id = uuid.uuid4().hex
 
     def add(self, angle_data=None,
@@ -331,17 +338,8 @@ class Base(object):
         :return:
         """
         _tmp = 'notebook.html'
-        series = self._option.get("series")
-        for s in series:
-            # Avoid loading too many maps at once, make sure notebook can
-            # show map chart normally.
-            if s.get('type') == 'map':
-                name_in_pinyin = constants.CITY_NAME_PINYIN_MAP.get(
-                    self._option.get('series')[0].get('mapType'))
-                if name_in_pinyin:
-                    self._js_dependencies.append(name_in_pinyin)
         require_conf_items = [
-            "%s: '%s/%s'" % (key, self._jshost, constants.DEFAULT_JS_LIBRARIES.get(key, key))
+            "'%s': '%s/%s'" % (key, self._jshost, constants.DEFAULT_JS_LIBRARIES.get(key, key))
             for key in self._js_dependencies]
         require_libraries = ["'%s'" % key for key in self._js_dependencies]
         dom = self._render_notebook_dom_()
