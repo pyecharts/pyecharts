@@ -11,7 +11,7 @@ class Liquid(Base):
     """
     def __init__(self, title="", subtitle="", **kwargs):
         super(Liquid, self).__init__(title, subtitle, **kwargs)
-        self._js_dependencies.append('liquidfill')
+        self._js_dependencies.add('liquidfill')
 
     def add(self, *args, **kwargs):
         self.__add(*args, **kwargs)
