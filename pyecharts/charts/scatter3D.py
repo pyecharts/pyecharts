@@ -12,7 +12,7 @@ class Scatter3D(Base):
 
     def __init__(self, title="", subtitle="", **kwargs):
         super(Scatter3D, self).__init__(title, subtitle, **kwargs)
-        self._js_dependencies.append('echartsgl')
+        self._js_dependencies.add('echartsgl')
 
     def add(self, *args, **kwargs):
         self.__add(*args, **kwargs)
