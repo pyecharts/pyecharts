@@ -103,6 +103,7 @@ class Base(object):
         )
         self._jshost = DEFAULT_HOST
         self._js_dependencies = ['echarts']
+        self._chart_id = uuid.uuid4().hex
 
     def add(self, angle_data=None,
             angle_range=None,
@@ -316,7 +317,7 @@ class Base(object):
         tmp = template.JINJA2_ENV.get_template(embed)
         my_option = json_dumps(self._option, indent=4)
         html = tmp.render(myOption=my_option,
-                          chart_id=uuid.uuid4().hex,
+                          chart_id=self._chart_id,
                           myWidth=self._width, myHeight=self._height)
         return html
 
@@ -330,7 +331,7 @@ class Base(object):
         my_option = json_dumps(self._option, indent=4)
         tmp = template.JINJA2_ENV.get_template(_tmp)
         html = tmp.render(myOption=my_option,
-                          chart_id=uuid.uuid4().hex,
+                          chart_id=self._chart_id,
                           myWidth=self._width, myHeight=self._height)
         html = template.freeze_js(html)
         template.write_utf8_html_file(path, html)
@@ -340,7 +341,6 @@ class Base(object):
 
         :return:
         """
-        divid = datetime.datetime.now()
         _tmp = 'notebook.html'
         series = self._option.get("series")
         for s in series:
@@ -355,28 +355,29 @@ class Base(object):
             "%s: '%s/%s'" % (key, self._jshost, DEFAULT_JS_LIBRARIES.get(key, key))
             for key in self._js_dependencies]
         require_libraries = ["'%s'" % key for key in self._js_dependencies]
-        dom = self._render_notebook_dom_(divid)
-        component = self._render_notebook_component_(divid)
+        dom = self._render_notebook_dom_()
+        component = self._render_notebook_component_()
         tmp = template.JINJA2_ENV.get_template(_tmp)
         html = tmp.render(
             single_chart=component, dom=dom,
-            config_items=require_conf_items, libraries=require_libraries,
-            chart_height=self._height)
+            config_items=require_conf_items, libraries=require_libraries)
         return html
 
-    def _render_notebook_dom_(self, divid):
+    def _render_notebook_dom_(self):
         _tmp = "notebook_dom.html"
         tmp = template.JINJA2_ENV.get_template(_tmp)
         component = tmp.render(
-            chart_id=divid, chart_width=self._width, chart_height=self._height)
+            chart_id=self._chart_id,
+            chart_width=self._width,
+            chart_height=self._height)
         return component
 
-    def _render_notebook_component_(self, divid):
+    def _render_notebook_component_(self):
         _tmp = "notebook_chart_component.html"
         my_option = json_dumps(self._option, indent=4)
         tmp = template.JINJA2_ENV.get_template(_tmp)
         component = tmp.render(
-            my_option=my_option, chart_id=divid)
+            my_option=my_option, chart_id=self._chart_id)
         return component
 
     @property
