@@ -1,17 +1,13 @@
-<div id="{{ chartId }}" style="width:{{ myWidth }}px; height:{{ myHeight }}px;"></div>
 <script>
     require.config({
          paths:{
-             echarts: '{{host}}/echarts.min',
-             echartsgl: '{{host}}/echarts-gl.min',
-             wordcloud: '{{host}}/echarts-wordcloud.min',
-             liquidfill: '{{host}}/echarts-liquidfill.min',
-             china: '{{host}}/china'
+           {{ config_items | join(', ') }}
          }
     });
-    require(['echarts', 'echartsgl', 'wordcloud', 'liquidfill', 'china'],function(ec){
-    var myChart = ec.init(document.getElementById('{{ chartId }}'));
-               var option =  {{ myOption }};
-               myChart.setOption(option);
+</script>
+{{ dom }}
+<script>
+    require([ {{ libraries | join(', ') }} ],function(ec){
+	{{ single_chart }}
     });
 </script>
