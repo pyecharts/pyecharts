@@ -18,7 +18,7 @@ pyecharts 是一个用于生成 Echarts 图表的类库。实际上就是 Echart
     * tooltip：提示框组件，用于移动或点击鼠标时弹出数据内容
 
 * [图表详细](https://github.com/chenjiandongx/pyecharts/blob/master/document/zh-cn/documentation.md#图表详细)
-    * [Bar(柱状图/条形图)](https://github.com/chenjiandongx/pyecharts/blob/master/document/zh-cn/documentation.md#Bar(柱状图/条形图))
+    * [Bar（柱状图/条形图）](https://github.com/chenjiandongx/pyecharts/blob/master/document/zh-cn/documentation.md#Bar)
     * Bar3D（3D 柱状图）
     * EffectScatter（带有涟漪特效动画的散点图）
     * Funnel（漏斗图）
@@ -441,7 +441,7 @@ cast(seq)
 
 # 图表详细  
 
-# Bar(柱状图/条形图)
+# Bar
 > 柱状/条形图，通过柱形的高度/条形的宽度来表现数据的大小。
 
 Bar.add() 方法签名
