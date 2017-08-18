@@ -7,6 +7,7 @@ import re
 import sys
 import codecs
 from jinja2 import Environment, FileSystemLoader
+from pyecharts.constants import DEFAULT_JS_LIBRARIES
 
 PY2 = sys.version_info[0] == 2
 
@@ -46,43 +47,6 @@ def freeze_js(html_content):
     return html_content
 
 
-CITY_NAME_PINYIN_MAP = {
-    "广东": "guangdong",
-    "安徽": "anhui",
-    "澳门": "aomen",
-    "北京": "beijing",
-    "重庆": "chongqing",
-    "福建": "fujian",
-    "甘肃": "gansu",
-    "广西": "guangxi",
-    "贵州": "guizhou",
-    "海南": "hainan",
-    "河北": "hebei",
-    "黑龙江": "heilongjiang",
-    "河南": "henan",
-    "湖北": "hubei",
-    "湖南": "hunan",
-    "江苏": "jiangsu",
-    "江西": "jiangxi",
-    "吉林": "jilin",
-    "辽宁": "liaoning",
-    "内蒙古": "neimenggu",
-    "宁夏": "ningxia",
-    "青海": "qinghai",
-    "山东": "shandong",
-    "上海": "shanghai",
-    "山西": "shanxi",
-    "四川": "sichuan",
-    "台湾": "taiwan",
-    "天津": "tianjin",
-    "香港": "xianggang",
-    "新疆": "xinjiang",
-    "西藏": "xizang",
-    "云南": "yunnan",
-    "浙江": "zhejiang"
-}
-
-
 def get_resource_dir(folder):
     """
 
@@ -116,3 +80,15 @@ def write_utf8_html_file(file_name, html_content):
     else:
         with open(file_name, "w+", encoding="utf-8") as fout:
             fout.write(html_content)
+
+
+def produce_require_configuration(dependencies, jshost):
+    # if no nick name register, we treat the location as location.js
+    require_conf_items = [
+        "'%s': '%s/%s'" % (key, jshost, DEFAULT_JS_LIBRARIES.get(key, key))
+        for key in dependencies]
+    require_libraries = ["'%s'" % key for key in dependencies]
+    return dict(
+        config_items=require_conf_items,
+        libraries=require_libraries
+    )
