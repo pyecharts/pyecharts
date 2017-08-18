@@ -15,6 +15,7 @@ pyecharts 是一个用于生成 Echarts 图表的类库。实际上就是 Echart
     * grid3D：3D笛卡尔坐标系组配置项，适用于 3D 图形。（Bar3D, Line3D, Scatter3D)
     * axis3D：3D 笛卡尔坐标系 X，Y，Z 轴配置项，适用于 3D 图形。（Bar3D, Line3D, Scatter3D)
     * visualMap：是视觉映射组件，用于进行『视觉编码』，也就是将数据映射到视觉元素（视觉通道）
+    * tooltip：提示框组件，用于移动或点击鼠标时弹出数据内容
 
 * [图表详细](https://github.com/chenjiandongx/pyecharts/blob/master/document/zh-cn/documentation.md#图表详细)
     * Bar（柱状图/条形图）
@@ -291,12 +292,13 @@ cast(seq)
     是否随机排列颜色列表，默认为 False
 * label_color -> list  
     自定义标签颜色。全局颜色列表，所有图表的图例颜色均在这里修改。如 Bar 的柱状颜色，Line 的线条颜色等等。
-* formatter -> list  
-    标签内容格式器，有'series', 'name', 'value', 'percent'可选。如 ["name", "value"]
-    * series：图例名称
-    * name：数据项名称
-    * value：数据项值
-    * percent：数据的百分比（主要用于饼图）
+* label_formatter -> str  
+    模板变量有 {a}, {b}，{c}，{d}，{e}，分别表示系列名，数据名，数据值等。  
+    在 trigger 为 'axis' 的时候，会有多个系列的数据，此时可以通过 {a0}, {a1}, {a2} 这种后面加索引的方式表示系列的索引。不同图表类型下的 {a}，{b}，{c}，{d} 含义不一样。 其中变量 {a}, {b}, {c}, {d} 在不同图表类型下代表数据含义为：
+    * 折线（区域）图、柱状（条形）图、K线图 : {a}（系列名称），{b}（类目值），{c}（数值）, {d}（无）
+    * 散点图（气泡）图 : {a}（系列名称），{b}（数据名称），{c}（数值数组）, {d}（无）
+    * 地图 : {a}（系列名称），{b}（区域名称），{c}（合并数值）, {d}（无）
+    * 饼图、仪表盘、漏斗图: {a}（系列名称），{b}（数据项名称），{c}（数值）, {d}（百分比）
 
 **Tip：** is_random 可随机打乱图例颜色列表，算是切换风格？建议试一试！
 
@@ -404,6 +406,37 @@ cast(seq)
     visualmap 组件条距离顶部的位置，默认为'top'。有'top', 'center', 'bottom'可选，也可为百分数或整数。
 * is_calculable -> bool  
     是否显示拖拽用的手柄（手柄能拖拽调整选中范围）。默认为 True
+
+
+**tooltip：提示框组件，用于移动或点击鼠标时弹出数据内容**
+
+* tooltip_tragger -> str  
+    触发类型。默认为 'item'  
+    * 'item': 数据项图形触发，主要在散点图，饼图等无类目轴的图表中使用。
+    * 'axis': 坐标轴触发，主要在柱状图，折线图等会使用类目轴的图表中使用。
+    * 'none': 什么都不触发。
+* tooltip_tragger_on -> str  
+    提示框触发的条件。默认为 "mousemove|click"
+    * 'mousemove': 鼠标移动时触发。
+    * 'click': 鼠标点击时触发。
+    * 'mousemove|click': 同时鼠标移动和点击时触发。
+    * 'none': 不在 'mousemove' 或 'click' 时触发
+* tooltip_axispointer_type -> line  
+    指示器类型。默认为 "line"  
+    * 'line': 直线指示器
+    * 'shadow': 阴影指示器
+    * 'cross': 十字准星指示器。其实是种简写，表示启用两个正交的轴的 axisPointer。
+* tooltip_formatter -> str  
+    模板变量有 {a}, {b}，{c}，{d}，{e}，分别表示系列名，数据名，数据值等。  
+    在 trigger 为 'axis' 的时候，会有多个系列的数据，此时可以通过 {a0}, {a1}, {a2} 这种后面加索引的方式表示系列的索引。不同图表类型下的 {a}，{b}，{c}，{d} 含义不一样。 其中变量 {a}, {b}, {c}, {d} 在不同图表类型下代表数据含义为：
+    * 折线（区域）图、柱状（条形）图、K线图 : {a}（系列名称），{b}（类目值），{c}（数值）, {d}（无）
+    * 散点图（气泡）图 : {a}（系列名称），{b}（数据名称），{c}（数值数组）, {d}（无）
+    * 地图 : {a}（系列名称），{b}（区域名称），{c}（合并数值）, {d}（无）
+    * 饼图、仪表盘、漏斗图: {a}（系列名称），{b}（数据项名称），{c}（数值）, {d}（百分比）
+* tooltip_text_color -> str  
+    提示框字体颜色，默认为 '#fff'
+* tooltip_font_size -> int  
+    提示框字体大小，默认为 14
 
 
 # 图表详细  

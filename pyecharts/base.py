@@ -116,7 +116,6 @@ class Base(object):
             effect_brushtype=None,
             effect_period=None,
             effect_scale=None,
-            formatter=None,
             geo_emphasis_color=None,
             geo_normal_color=None,
             graph_layout=None,
@@ -170,6 +169,7 @@ class Base(object):
             label_pos=None,
             label_text_color=None,
             label_text_size=None,
+            label_formatter=None,
             legend_orient=None,
             legend_pos=None,
             legend_top=None,
@@ -196,6 +196,12 @@ class Base(object):
             symbol_size=None,
             symbol=None,
             type=None,
+            tooltip_tragger=None,
+            tooltip_tragger_on=None,
+            tooltip_axispointer_type=None,
+            tooltip_formatter=None,
+            tooltip_text_color=None,
+            tooltip_font_size=None,
             visual_orient=None,
             visual_range_color=None,
             visual_range_size=None,
@@ -304,6 +310,9 @@ class Base(object):
         # datazoom component
         if kwargs.get('is_datazoom_show', None) is True:
             self._option.update(dataZoom=chart['datazoom'])
+
+        # tooltip component
+        self._option.update(tooltip=chart['tooltip'])
 
     def render_embed(self):
         """
