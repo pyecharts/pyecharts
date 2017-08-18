@@ -1896,7 +1896,12 @@ Grid 类中其他方法：
 * `show_config()`：打印输出所有配置项
 * `chart`：chart 属性返回图形实例
 
-`add()` 接受的参数：
+Grid.add() 方法签名 
+```python
+add(chart, grid_width=None, grid_height=None, grid_top=None, grid_bottom=None, grid_left=None, grid_right=None)
+```
+* chart -> chart instance  
+    图表示例
 * grid_width -> str/int  
     grid 组件的宽度。默认自适应。
 * grid_height -> str/int  
@@ -2227,7 +2232,7 @@ line.add("平均温度", attr, v3, yaxis_formatter=" °C")
 overlap = Overlap()
 # 默认不新增 x y 轴，并且 x y 轴的索引都为 0
 overlap.add(bar)
-# 新增一个 y 轴，此时 y 轴的数量变为 2，第二个 y 轴的索引为 1（索引从 0 开始），所以设置 yaxis_index = 1。
+# 新增一个 y 轴，此时 y 轴的数量为 2，第二个 y 轴的索引为 1（索引从 0 开始），所以设置 yaxis_index = 1
 # 由于使用的是同一个 x 轴，所以 x 轴部分不用做出改变
 overlap.add(line, yaxis_index=1, is_add_yaxis=True)
 overlap.render()
