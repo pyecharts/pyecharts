@@ -65,6 +65,13 @@
         * Page 类：同一网页按顺序展示多图
         * Timeline 类：提供时间线轮播多张图
     * jupyter notebook 现在也为离线模式，从本地加载项目所需 js 文件。至此 pyecharts 彻底实现本地化运行。速度更快，不再受网速影响。
+
+* version 0.1.9.6
+    * 更改通用配置项中的 label 的参数 formatter 为 label_formatter
+    * 更改 clockwise 参数为 is_clockwise
+    * 更改 Graph 图中的 repulsion, gravity, edge_length, layout 参数为 graph_repulsion, graph_gravity, graph_edge_length, graph_layout，并新增 graph_edge_symbol, graph_edge_symbolsize 参数
+    * 通用配置项中新增 tooltip 模块
+    * Overlap 中新增 xaxis_index, is_add_xaxis, yaxis_index, is_add_yaxis 参数，现支持多 Y 轴或多 X 轴
     
 
 
