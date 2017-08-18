@@ -34,6 +34,7 @@ class Gauge(Base):
             the right above it is 90 degree, the direct left side of it is 180 degree.
         :param kwargs:
         """
+        kwargs.update(type="gauge")
         # default data range is [0, 100]
         _min, _max = 0, 100
         if scale_range:
@@ -57,5 +58,4 @@ class Gauge(Base):
             "endAngle": _end,
             "data": [{"value": value, "name": attr}]
         })
-        self._option.update(tooltip={"formatter": "{a} <br/>{b} : {c}%"})
         self._legend_visualmap_colorlst(**kwargs)
