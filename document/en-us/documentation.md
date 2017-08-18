@@ -63,7 +63,7 @@ bar.render()
 
 ### A note on Jupyter notebook
 
-For existing users, in order to play with the offline mode coming with 0.1.9.5, it is recommended that 1) the old version must be uninstalled. 2) Your existing notebooks must be refreshed and re-ran.
+For existing users, in order to play with the offline mode coming with 0.1.9.5, it is recommended that 1) the old version must be uninstalled. 2) Your existing notebooks must be refreshed and re-ran. 3) You must have installed **jupyter**. This restriction will be gone when jupyter-pip will release its next version.
 
 How the offline mode works is: all echarts javascript libraries are copied into nbextensions directory. The following command helps you find out whether pyecharts js components are installed or not
 
