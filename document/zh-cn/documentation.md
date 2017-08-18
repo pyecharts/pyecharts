@@ -216,7 +216,6 @@ cast(seq)
     x 坐标轴类型  
     * 'value'：数值轴，适用于连续数据。
     * 'category'：类目轴，适用于离散的类目数据，为该类型时必须通过 data 设置类目数据。
-    * 'time'：时间轴，适用于连续的时序数据，与数值轴相比时间轴带有时间的格式化，在刻度计算上也有所不同，例如会根据跨度的范围来决定使用月，星期，日还是小时范围的刻度。
     * 'log'：对数轴。适用于对数数据。
 * xaxis_rotate -> int  
     x 轴刻度标签旋转的角度，在类目轴的类目标签显示不下的时候可以通过旋转防止标签之间重叠。默认为 0，即不旋转。旋转的角度从 -90 度到 90 度。
@@ -245,7 +244,6 @@ cast(seq)
     y 坐标轴类型  
     * 'value'：数值轴，适用于连续数据。
     * 'category'：类目轴，适用于离散的类目数据，为该类型时必须通过 data 设置类目数据。
-    * 'time'：时间轴，适用于连续的时序数据，与数值轴相比时间轴带有时间的格式化，在刻度计算上也有所不同，例如会根据跨度的范围来决定使用月，星期，日还是小时范围的刻度。
     * 'log'：对数轴。适用于对数数据。
 * yaxis_rotate -> int  
     y 轴刻度标签旋转的角度，在类目轴的类目标签显示不下的时候可以通过旋转防止标签之间重叠。默认为 0，即不旋转。旋转的角度从 -90 度到 90 度。
@@ -833,7 +831,7 @@ geo.render()
 Graph.add() 方法签名
 ```python
 add(name, nodes, links, categories=None, is_focusnode=True, is_roam=True, is_rotatelabel=False,
-    layout="force", edge_length=50, gravity=0.2, repulsion=50, **kwargs)
+    layout="force", graph_edge_length=50, graph_gravity=0.2, graph_repulsion=50, **kwargs)
 ```
 * name -> str  
     图例名称
@@ -861,19 +859,23 @@ add(name, nodes, links, categories=None, is_focusnode=True, is_roam=True, is_rot
     如果只想要开启缩放或者平移，可以设置成'scale'或者'move'。设置成 True 为都开启
 * is_rotatelabel -> bool  
     是否旋转标签，默认为 False
-* layout -> str  
+* graph_layout -> str  
     关系图布局，默认为 'force'
     * none：不采用任何布局，使用节点中必须提供的 x， y 作为节点的位置。
     * circular：采用环形布局
     * force：采用力引导布局
-* edge_length -> int  
+* graph_edge_length -> int  
     力布局下边的两个节点之间的距离，这个距离也会受 repulsion 影响。默认为 50  
     支持设置成数组表达边长的范围，此时不同大小的值会线性映射到不同的长度。值越小则长度越长
-* gravity -> int  
+* graph_gravity -> int  
     节点受到的向中心的引力因子。该值越大节点越往中心点靠拢。默认为 0.2
-* repulsion -> int  
+* graph_repulsion -> int  
     节点之间的斥力因子。默认为 50  
     支持设置成数组表达斥力的范围，此时不同大小的值会线性映射到不同的斥力。值越大则斥力越大
+* graph_edge_symbol -> str/list  
+    边两端的标记类型，可以是一个数组分别指定两端，也可以是单个统一指定。默认不显示标记，常见的可以设置为箭头，如下：edgeSymbol: ['circle', 'arrow']
+* graph_edge_symbolsize -> int/list  
+    边两端的标记大小，可以是一个数组分别指定两端，也可以是单个统一指定。
 
 ```python
 from pyecharts import Graph
@@ -900,7 +902,8 @@ graph.render()
 
 ```python
 graph = Graph("关系图-环形布局示例")
-graph.add("", nodes, links, is_label_show=True, repulsion=8000, layout='circular', label_text_color=None)
+graph.add("", nodes, links, is_label_show=True,
+          graph_repulsion=8000, layout='circular', label_text_color=None)
 graph.show_config()
 graph.render()
 ```
@@ -914,8 +917,8 @@ with open("..\json\weibo.json", "r", encoding="utf-8") as f:
     j = json.load(f)
     nodes, links, categories, cont, mid, userl = j
 graph = Graph("微博转发关系图", width=1200, height=600)
-graph.add("", nodes, links, categories, label_pos="right", repulsion=50, is_legend_show=False,
-          line_curve=0.2, label_text_color=None)
+graph.add("", nodes, links, categories, label_pos="right", graph_repulsion=50,
+          is_legend_show=False, line_curve=0.2, label_text_color=None)
 graph.show_config()
 graph.render()
 ```
@@ -1236,6 +1239,7 @@ liquid.render()
 ```
 ![liquid-2](https://github.com/chenjiandongx/pyecharts/blob/master/images/liquid-2.png)
 
+
 ## Map（地图）
 > 地图主要用于地理区域数据的可视化。
 
@@ -1301,6 +1305,7 @@ map.add("", attr, value, maptype="world", is_visualmap=True, visual_text_color='
 map.render()
 ```
 ![map-3](https://github.com/chenjiandongx/pyecharts/blob/master/images/map-3.gif)
+
 
 ## Parallel（平行坐标系）
 > 平行坐标系是一种常用的可视化高维数据的图表。
