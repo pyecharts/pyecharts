@@ -242,9 +242,6 @@ def xy_axis(type=None,
         Type of xaxis
         'value' Numerical axis, suitable for continuous data.
         'category' Category axis, suitable for discrete category data. Data should only be set via data for this type.
-        'time' Time axis, suitable for continuous time series data. As compared to value axis,
-               it has a better formatting for time and a different tick calculation method. For example,
-               it decides to use month, week, day or hour for tick based on the range of span.
         'log' Log axis, suitable for log data.
     :param xaxis_interval:
         The display interval of the axis scale label is valid in the category xaxis.
@@ -277,9 +274,6 @@ def xy_axis(type=None,
         Type of yaxis
         'value' Numerical axis, suitable for continuous data.
         'category' Category axis, suitable for discrete category data. Data should only be set via data for this type.
-        'time' Time axis, suitable for continuous time series data. As compared to value axis,
-               it has a better formatting for time and a different tick calculation method. For example,
-               it decides to use month, week, day or hour for tick based on the range of span.
         'log' Log axis, suitable for log data.
     :param is_convert:
         It specifies whether to convert xAxis and yAxis.
