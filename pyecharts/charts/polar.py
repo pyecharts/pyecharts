@@ -23,7 +23,7 @@ class Polar(Base):
               start_angle=90,
               rotate_step=0,
               boundary_gap=True,
-              clockwise=True,
+              is_clockwise=True,
               is_stack=False,
               axis_range=None,
               is_angleaxis_show=True,
@@ -57,7 +57,7 @@ class Polar(Base):
             The boundaryGap of category axis can be set to either true or false.
             Default value is set to be true, in which case axisTick is served only as a separation line,
             and labels and data appear only in the center part of two axis ticks, which is called band.
-        :param clockwise:
+        :param is_clockwise:
             Whether the positive position of axis is in clockwise. True for clockwise by default.
         :param is_stack:
             It specifies whether to stack category axis.
@@ -143,7 +143,7 @@ class Polar(Base):
                     "show":is_angleaxis_show,
                     "type": polar_type,
                     "data": angle_data,
-                    "clockwise": clockwise,
+                    "clockwise": is_clockwise,
                     "startAngle": start_angle,
                     "boundaryGap": boundary_gap,
                     "splitLine": chart['split_line'],
