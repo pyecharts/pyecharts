@@ -19,7 +19,7 @@ def test_line3D():
                    '#fee090', '#fdae61', '#f46d43', '#d73027', '#a50026']
     line3d = Line3D("3D 折线图示例", width=1200, height=600)
     line3d.add("", _data, is_visualmap=True, visual_range_color=range_color, visual_range=[0, 30],
-               grid3D_rotate_sensitivity=5)
+               grid3d_rotate_sensitivity=5)
     line3d.render()
 
     # line3D_1
@@ -35,6 +35,5 @@ def test_line3D():
                    '#fee090', '#fdae61', '#f46d43', '#d73027', '#a50026']
     line3d = Line3D("3D 折线图示例", width=1200, height=600)
     line3d.add("", _data, is_visualmap=True, visual_range_color=range_color, visual_range=[0, 30],
-               is_grid3D_rotate=True, grid3D_rotate_speed=180)
+               is_grid3d_rotate=True, grid3d_rotate_speed=180)
     line3d.render()
-

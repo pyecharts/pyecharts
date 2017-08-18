@@ -83,6 +83,12 @@ def write_utf8_html_file(file_name, html_content):
 
 
 def produce_require_configuration(dependencies, jshost):
+    """
+
+    :param dependencies:
+    :param jshost:
+    :return:
+    """
     # if no nick name register, we treat the location as location.js
     require_conf_items = [
         "'%s': '%s/%s'" % (key, jshost, DEFAULT_JS_LIBRARIES.get(key, key))

@@ -4,6 +4,7 @@
 import json
 import uuid
 import random
+import datetime
 
 from pprint import pprint
 from pyecharts.option import get_all_options
@@ -98,7 +99,7 @@ class Base(object):
             backgroundColor=background_color
         )
         self._jshost = constants.DEFAULT_HOST
-        self._js_dependencies = set(['echarts'])
+        self._js_dependencies = set('echarts')
         self._chart_id = uuid.uuid4().hex
 
     def add(self, angle_data=None,
@@ -126,13 +127,13 @@ class Base(object):
             grid_bottom=None,
             grid_left=None,
             grid_right=None,
-            grid3D_width=None,
-            grid3D_height=None,
-            grid3D_depth=None,
-            grid3D_opacity=None,
-            grid3D_shading=None,
-            grid3D_rotate_speed=None,
-            grid3D_rotate_sensitivity=None,
+            grid3d_width=None,
+            grid3d_height=None,
+            grid3d_depth=None,
+            grid3d_opacity=None,
+            grid3d_shading=None,
+            grid3d_rotate_speed=None,
+            grid3d_rotate_sensitivity=None,
             gravity=None,
             is_angleaxis_show=None,
             is_area_show=None,
@@ -143,7 +144,7 @@ class Base(object):
             is_emphasis=None,
             is_fill=None,
             is_focusnode=None,
-            is_grid3D_rotate=None,
+            is_grid3d_rotate=None,
             is_label_show=None,
             is_legend_show=None,
             is_liquid_animation=None,
@@ -348,6 +349,10 @@ class Base(object):
         return html
 
     def _render_notebook_dom_(self):
+        """
+
+        :return:
+        """
         _tmp = "notebook_dom.html"
         tmp = template.JINJA2_ENV.get_template(_tmp)
         component = tmp.render(
@@ -357,17 +362,16 @@ class Base(object):
         return component
 
     def _render_notebook_component_(self):
+        """
+
+        :return:
+        """
         _tmp = "notebook_chart_component.html"
         my_option = json_dumps(self._option, indent=4)
         tmp = template.JINJA2_ENV.get_template(_tmp)
         component = tmp.render(
             my_option=my_option, chart_id=self._chart_id)
         return component
-
-    @property
-    def _geo_cities(self):
-        """ Return China's major cities latitude and longitude -> Geo Chart """
-        return constants.CITY_GEO_COORDS
 
 
 class PandasNumpyTypeEncoder(json.JSONEncoder):
@@ -380,9 +384,22 @@ class PandasNumpyTypeEncoder(json.JSONEncoder):
             except:
                 return json.JSONEncoder.default(self, obj)
 
+
 def handle(obj):
+    """
+
+    :param obj:
+    :return:
+    """
     if isinstance(obj, (datetime.datetime, datetime.date)):
         return obj.isoformat()
 
+
 def json_dumps(data, indent=0):
+    """
+
+    :param data:
+    :param indent:
+    :return:
+    """
     return json.dumps(data, indent=indent, cls=PandasNumpyTypeEncoder, default=handle)

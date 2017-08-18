@@ -18,7 +18,7 @@ class Scatter3D(Base):
         self.__add(*args, **kwargs)
 
     def __add(self, name, data,
-              grid3D_opacity=1,
+              grid3d_opacity=1,
               **kwargs):
         """
 
@@ -27,7 +27,7 @@ class Scatter3D(Base):
             with legend, or updaing data and configuration with setOption.
         :param data:
             data of Scatter3D
-        :param grid3D_opacity:
+        :param grid3d_opacity:
             opacity of gird3D item
         :param kwargs:
         :return:
@@ -48,6 +48,6 @@ class Scatter3D(Base):
             "name": name,
             "data": data,
             "label": chart['label'],
-            "itemStyle": {"opacity": grid3D_opacity}
+            "itemStyle": {"opacity": grid3d_opacity}
         })
         self._legend_visualmap_colorlst(**kwargs)
