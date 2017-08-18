@@ -36,30 +36,30 @@ def test_bar3D():
     range_color = ['#313695', '#4575b4', '#74add1', '#abd9e9', '#e0f3f8', '#ffffbf',
                    '#fee090', '#fdae61', '#f46d43', '#d73027', '#a50026']
     bar3d.add("", x_axis, y_aixs, [[d[1], d[0], d[2]] for d in data], is_visualmap=True,
-              visual_range=[0, 20], visual_range_color=range_color, grid3D_width=200, grid3D_depth=80)
+              visual_range=[0, 20], visual_range_color=range_color, grid3d_width=200, grid3d_depth=80)
     bar3d.show_config()
     bar3d.render()
 
     # bar3D_1
     bar3d = Bar3D("3D 柱状图示例", width=1200, height=600)
     bar3d.add("", x_axis, y_aixs, [[d[1], d[0], d[2]] for d in data], is_visualmap=True,
-              visual_range=[0, 20], visual_range_color=range_color, grid3D_width=200, grid3D_depth=80,
-              grid3D_shading='lambert')
+              visual_range=[0, 20], visual_range_color=range_color, grid3d_width=200, grid3d_depth=80,
+              grid3d_shading='lambert')
     bar3d.show_config()
     bar3d.render()
 
     # bar3D_2
     bar3d = Bar3D("3D 柱状图示例", width=1200, height=600)
     bar3d.add("", x_axis, y_aixs, [[d[1], d[0], d[2]] for d in data], is_visualmap=True,
-              visual_range=[0, 20], visual_range_color=range_color, grid3D_width=200, grid3D_depth=80,
-              is_grid3D_rotate=True)
+              visual_range=[0, 20], visual_range_color=range_color, grid3d_width=200, grid3d_depth=80,
+              is_grid3d_rotate=True)
     bar3d.show_config()
     bar3d.render()
 
     # bar3D_3
     bar3d = Bar3D("3D 柱状图示例", width=1200, height=600)
     bar3d.add("", x_axis, y_aixs, [[d[1], d[0], d[2]] for d in data], is_visualmap=True,
-              visual_range=[0, 20], visual_range_color=range_color, grid3D_width=200, grid3D_depth=80,
-              is_grid3D_rotate=True, grid3D_rotate_speed=180)
+              visual_range=[0, 20], visual_range_color=range_color, grid3d_width=200, grid3d_depth=80,
+              is_grid3d_rotate=True, grid3d_rotate_speed=180)
     bar3d.show_config()
     bar3d.render()

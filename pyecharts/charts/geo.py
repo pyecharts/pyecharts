@@ -3,6 +3,7 @@
 
 from pyecharts.base import Base
 from pyecharts.option import get_all_options
+from pyecharts.constants import CITY_GEO_COORDS
 
 
 class Geo(Base):
@@ -54,8 +55,8 @@ class Geo(Base):
         chart = get_all_options(**kwargs)
         _data = []
         for name, value in zip(attr, value):
-            if name in self._geo_cities:
-                city_coordinate = self._geo_cities.get(name)
+            if name in CITY_GEO_COORDS:
+                city_coordinate = CITY_GEO_COORDS.get(name)
                 city_coordinate.append(value)
                 _data.append({"name": name, "value": city_coordinate})
             else:
@@ -70,6 +71,7 @@ class Geo(Base):
                     "emphasis": {"areaColor": geo_emphasis_color}}
             })
         self._option.get('legend')[0].get('data').append(name)
+
         if type == "scatter":
             self._option.get('series').append({
                 "type": type,
@@ -80,6 +82,7 @@ class Geo(Base):
                 "data": _data,
                 "label": chart['label'],
             })
+
         elif type == "effectScatter":
             self._option.get('series').append({
                 "type": type,
@@ -92,6 +95,7 @@ class Geo(Base):
                 "data": _data,
                 "label": chart['label'],
             })
+
         elif type == "heatmap":
             self._option.get('series').append({
                 "type": type,
@@ -100,3 +104,4 @@ class Geo(Base):
                 "data": _data,
             })
         self._legend_visualmap_colorlst(**kwargs)
+        self._option.get('tooltip').update(formatter='{b}: {c}')
