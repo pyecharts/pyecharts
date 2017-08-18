@@ -2,7 +2,7 @@
 # coding=utf-8
 
 from pyecharts import template
-from pyecharts.constants import DEFAULT_JS_LIBRARIES, DEFAULT_HOST
+from pyecharts.constants import DEFAULT_HOST
 from pyecharts.template import produce_require_configuration
 
 class Page(object):
@@ -49,6 +49,10 @@ class Page(object):
         return chart_content
 
     def _repr_html_(self):
+        """
+
+        :return:
+        """
         _tmp = "notebook.html"
         doms = ""
         components = ""

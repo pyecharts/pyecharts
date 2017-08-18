@@ -700,38 +700,38 @@ def grid(grid_width=None,
 
 
 @collectfuncs
-def grid3D(grid3D_width=100,
-           grid3D_height=100,
-           grid3D_depth=100,
-           grid3D_rotate_speed=10,
-           grid3D_rotate_sensitivity=1,
-           is_grid3D_rotate=False,
+def grid3D(grid3d_width=100,
+           grid3d_height=100,
+           grid3d_depth=100,
+           grid3d_rotate_speed=10,
+           grid3d_rotate_sensitivity=1,
+           is_grid3d_rotate=False,
            **kwargs):
     """
 
-    :param grid3D_width:
+    :param grid3d_width:
         3D axis width
-    :param grid3D_height:
+    :param grid3d_height:
         3D axis height
-    :param grid3D_depth:
+    :param grid3d_depth:
         3D axis depth
-    :param grid3D_rotate_speed:
+    :param grid3d_rotate_speed:
         3D charts rotate speed
-    :param is_grid3D_rotate:
+    :param is_grid3d_rotate:
         whether rotate 3D charts
-    :param grid3D_rotate_sensitivity:
+    :param grid3d_rotate_sensitivity:
         3D charts rotete sensitivity, The greater the value, the more sensitive.
     :param kwargs:
     :return:
     """
     _grid3D = {
-        "boxWidth": grid3D_width,
-        "boxHeight": grid3D_height,
-        "boxDepth": grid3D_depth,
+        "boxWidth": grid3d_width,
+        "boxHeight": grid3d_height,
+        "boxDepth": grid3d_depth,
         "viewControl": {
-            "autoRotate": is_grid3D_rotate,
-            "autoRotateSpeed": grid3D_rotate_speed,
-            "rotateSensitivity": grid3D_rotate_sensitivity
+            "autoRotate": is_grid3d_rotate,
+            "autoRotateSpeed": grid3d_rotate_speed,
+            "rotateSensitivity": grid3d_rotate_sensitivity
         }
     }
     return _grid3D

@@ -1,6 +1,8 @@
+#!/usr/bin/env python
 # coding=utf-8
 
 DEFAULT_HOST = '/nbextensions/echarts'
+
 DEFAULT_JS_LIBRARIES = dict(
     echarts='echarts.min',
     echartsgl='echarts-gl.min',
@@ -9,6 +11,7 @@ DEFAULT_JS_LIBRARIES = dict(
     china='china',
     wordcloud='echarts-wordcloud.min'
 )
+
 CITY_NAME_PINYIN_MAP = {
     "广东": "guangdong",
     "安徽": "anhui",
@@ -44,6 +47,7 @@ CITY_NAME_PINYIN_MAP = {
     "云南": "yunnan",
     "浙江": "zhejiang"
 }
+
 CITY_GEO_COORDS = {
     '阿城': [126.58, 45.32],
     '阿克苏': [80.19, 41.09],

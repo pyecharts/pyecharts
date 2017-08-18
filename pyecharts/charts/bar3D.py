@@ -18,8 +18,8 @@ class Bar3D(Base):
         self.__add(*args, **kwargs)
 
     def __add(self, name, x_axis, y_axis, data,
-              grid3D_opacity=1,
-              grid3D_shading='color',
+              grid3d_opacity=1,
+              grid3d_shading='color',
               **kwargs):
         """
 
@@ -32,9 +32,9 @@ class Bar3D(Base):
             yAxis data
         :param data:
             zAxis data
-        :param grid3D_opacity:
+        :param grid3d_opacity:
             opacity of gird3D item
-        :param grid3D_shading:
+        :param grid3d_shading:
             3D graphics coloring effect
             'color': Only show color, not affected by lighting and other factors.
             'lambert': Through the classic lambert coloring to show the light and shade.
@@ -61,7 +61,7 @@ class Bar3D(Base):
             "name": name,
             "data": data,
             "label": chart['label'],
-            "shading": grid3D_shading,
-            "itemStyle": {"opacity": grid3D_opacity}
+            "shading": grid3d_shading,
+            "itemStyle": {"opacity": grid3d_opacity}
         })
         self._legend_visualmap_colorlst(**kwargs)
