@@ -18,7 +18,7 @@ def label(type=None,
           label_pos=None,
           label_text_color="#000",
           label_text_size=12,
-          formatter=None,
+          label_formatter=None,
           **kwargs):
     """ Text label of , to explain some data information about graphic item like value, name and so on.
         In ECharts 3, to make the configuration structure flatter,
@@ -36,8 +36,17 @@ def label(type=None,
         Label text color.
     :param label_text_size:
         Label font size.
-    :param formatter:
-        Data label formatter,it can be 'series', 'name', 'value', 'precent' 
+    :param label_formatter:
+        The template variables are {a}, {b}, {c}, {d} and {e}, which stands for series name, data name
+        and data value and ect. When trigger is set to be 'axis', there may be data from multiple series.
+        In this time, series index can be refered as {a0}, {a1}, or {a2}.
+        {a}, {b}, {c}, {d} have different meanings for different series types:
+        Line: (area) charts, bar (column) charts,
+              K charts: {a} for series name, {b} for category name, {c} for data value, {d} for none;
+        Scatter: (bubble) charts: {a} for series name, {b} for data name, {c} for data value, {d} for none;
+        Map: {a} for series name, {b} for area name, {c} for merging data, {d} for none;
+        Pie: charts, gauge charts, funnel charts: {a} for series name,
+             {b} for data item name, {c} for data value, {d} for percentage.
     :param kwargs:
     :return:
     """
@@ -50,13 +59,12 @@ def label(type=None,
                                  "fontSize": label_text_size}},
         "emphasis": {"show": is_emphasis}
     }
-    fmat = {"series": "{a} ", "name": "{b} ", "value": "{c} ", "percent": "{d}% "}
-    if formatter is None:
-        _formatter = "{b} {d}%" if type == "pie" else None
-    else:
-        _formatter = "".join([fmat.get(f) for f in formatter if fmat.get(f, None)])
+
+    if label_formatter is None:
+        if type == "pie":
+            label_formatter = "{b}: {d}%"
     if type != "graph":
-        _label.get("normal").update(formatter=_formatter)
+        _label.get("normal").update(formatter=label_formatter)
     return _label
 
 
@@ -866,6 +874,70 @@ def zaxis3D(zaxis3d_type=None,
         }
     }
     return _zaxis3D
+
+
+@collectfuncs
+def tooltip(type=None,
+            tooltip_tragger="item",
+            tooltip_tragger_on="mousemove|click",
+            tooltip_axispointer_type="line",
+            tooltip_formatter=None,
+            tooltip_text_color="#fff",
+            tooltip_font_size=14,
+            **kwargs):
+    """
+
+    :param type:
+        chart type
+    :param tooltip_tragger:
+        Type of triggering.
+        Options:
+            'item': Triggered by data item, which is mainly used for charts that don't have a
+                    category axis like scatter charts or pie charts.
+            'axis': Triggered by axes, which is mainly used for charts that have category axes,
+                    like bar charts or line charts.
+            'none': Trigger nothing.
+    :param tooltip_tragger_on:
+        Conditions to trigger tooltip. Options:
+        Options:
+            'mousemove': Trigger when mouse moves.
+            'click': Trigger when mouse clicks.
+            'mousemove|click': Trigger when mouse clicks and moves.
+            'none': Do not triggered by 'mousemove' and 'click'.
+    :param tooltip_axispointer_type:
+        Indicator type.
+        Options:
+            'line': line indicator
+            'shadow': shadow crosshair indicator
+            'cross': crosshair indicator, which is actually the shortcut of enable two
+                     axisPointers of two orthometric axes.
+    :param tooltip_formatter:
+        The template variables are {a}, {b}, {c}, {d} and {e}, which stands for series name, data name
+        and data value and ect. When trigger is set to be 'axis', there may be data from multiple series.
+        In this time, series index can be refered as {a0}, {a1}, or {a2}.
+    :param tooltip_text_color:
+        text color.
+    :param tooltip_font_size:
+        font size
+    :return:
+    """
+    if tooltip_formatter is None:
+        if type == "gauge":
+            tooltip_formatter = "{a} <br/>{b} : {c}%"
+        elif type == "geo":
+            tooltip_formatter = "{b}: {c}"
+
+    _tooltip = {
+        "trigger": tooltip_tragger,
+        "triggerOn": tooltip_tragger_on,
+        "axisPointer": {"type": tooltip_axispointer_type},
+        "formatter": tooltip_formatter,
+        "textStyle": {
+            "color": tooltip_text_color,
+            "fontSize": tooltip_font_size
+        }
+    }
+    return _tooltip
 
 
 def get_all_options(**kwargs):
