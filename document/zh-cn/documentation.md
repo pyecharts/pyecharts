@@ -151,7 +151,7 @@ cast(seq)
 
 ![notebook-2](https://github.com/chenjiandongx/pyecharts/blob/master/images/notebook-2.gif)
 
-更多 Jupyter notebook 的例子请参考 [notebook-use-cases](https://github.com/chenjiandongx/pyecharts/blob/master/document/notebook-use-cases.ipynb)。可下载后运行看看。
+更多 Jupyter notebook 的例子请参考 [notebook-use-cases](https://github.com/chenjiandongx/pyecharts/blob/master/document/notebook-use-cases.zip)。可下载后运行看看。
 
 如需使用 Jupyter Notebook 来展示图表，只需要调用自身实例即可，同时兼容 Python2 和 Python3 的 Jupyter Notebook 环境。所有图表均可正常显示，与浏览器一致的交互体验，这下展示报告连 PPT 都省了！！  
 
