@@ -47,8 +47,8 @@ class Grid(object):
             self._chart._option.get('title').append(_title)
             if _xaxis and _yaxis is not None:
                 try:
-                    _xaxis[0].update(gridIndex=_index - 1)
-                    _yaxis[0].update(gridIndex=_index - 1)
+                    _xaxis[0].update(gridIndex=_index-1)
+                    _yaxis[0].update(gridIndex=_index-1)
                     self._chart._option.get('xAxis').append(_xaxis[0])
                     self._chart._option.get('yAxis').append(_yaxis[0])
                 except:

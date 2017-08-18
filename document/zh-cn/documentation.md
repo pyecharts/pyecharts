@@ -2094,6 +2094,21 @@ Overlap 类的使用：
 3. 使用 `add()` 向 `overlap` 中添加图
 4. 使用 `render()` 渲染生成 .html 文件
 
+Overlap.add() 方法签名  
+```python
+add(chart, xaxis_index=0, yaxis_index=0, is_add_xaxis=False, is_add_yaxis=False)
+```
+* chart -> chart instance  
+    图表示例
+* xaxis_index -> int  
+    x 坐标轴索引，默认为 0
+* yaxis_index -> int  
+    y 坐标轴索引，默认为 0
+* is_add_xaxis -> bool  
+    是否新增一个 x 坐标轴，默认为 False
+* is_add_yaxis -> bool  
+    是否新增一个 y 坐标轴，默认为 False
+
 Overlap 类中其他方法：
 * `render_embed()`：在 Flask&Django 中可以使用该方法渲染
 * `show_config()`：打印输出所有配置项
@@ -2192,6 +2207,32 @@ overlap.add(line_2)
 overlap.render()
 ```
 ![overlap-2](https://github.com/chenjiandongx/pyecharts/blob/master/images/overlap-2.png)
+
+如果想改变轴索引，使其有多 X 轴或者多 Y 轴的话。请看下面
+```python
+from pyecharts import Line, Bar, Overlap
+
+attr = ["{}月".format(i) for i in range(1, 13)]
+v1 = [2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3]
+v2 = [2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3]
+v3 = [2.0, 2.2, 3.3, 4.5, 6.3, 10.2, 20.3, 23.4, 23.0, 16.5, 12.0, 6.2]
+
+bar = Bar(width=1200, height=600)
+bar.add("蒸发量", attr, v1)
+bar.add("降水量", attr, v2, yaxis_formatter=" ml")
+
+line = Line()
+line.add("平均温度", attr, v3, yaxis_formatter=" °C")
+
+overlap = Overlap()
+# 默认不新增 x y 轴，并且 x y 轴的索引都为 0
+overlap.add(bar)
+# 新增一个 y 轴，此时 y 轴的数量变为 2，第二个 y 轴的索引为 1（索引从 0 开始），所以设置 yaxis_index = 1。
+# 由于使用的是同一个 x 轴，所以 x 轴部分不用做出改变
+overlap.add(line, yaxis_index=1, is_add_yaxis=True)
+overlap.render()
+```
+![overlap-3](https://github.com/chenjiandongx/pyecharts/blob/master/images/overlap-3.png)
 
 如果只是想在单个 .html 按顺序展示图表，推荐使用 ```Page()``` 类
 
