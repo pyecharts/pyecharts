@@ -421,7 +421,7 @@ cast(seq)
     * 'click': 鼠标点击时触发。
     * 'mousemove|click': 同时鼠标移动和点击时触发。
     * 'none': 不在 'mousemove' 或 'click' 时触发
-* tooltip_axispointer_type -> line  
+* tooltip_axispointer_type -> str  
     指示器类型。默认为 "line"  
     * 'line': 直线指示器
     * 'shadow': 阴影指示器
@@ -1928,6 +1928,7 @@ Grid 类中其他方法：
 * `render_embed()`：在 Flask&Django 中可以使用该方法渲染
 * `show_config()`：打印输出所有配置项
 * `chart`：chart 属性返回图形实例
+* 在 Jupyter-notebook 中直接调用 Grid 实例即可显示图表
 
 Grid.add() 方法签名 
 ```python
@@ -2151,6 +2152,7 @@ Overlap 类中其他方法：
 * `render_embed()`：在 Flask&Django 中可以使用该方法渲染
 * `show_config()`：打印输出所有配置项
 * `chart`：返回图形实例
+* 在 Jupyter-notebook 中直接调用 Overlap 实例即可显示图表
 
 Line + Bar
 ```python
@@ -2286,6 +2288,7 @@ Page 类中其他方法：
 * `render_embed()`：在 Flask&Django 中可以使用该方法渲染
 * `show_config()`：打印输出所有配置项
 * `chart`：chart 属性返回图形实例
+* 在 Jupyter-notebook 中直接调用 Page 实例即可显示图表
 
 ```python
 #coding=utf-8
@@ -2436,6 +2439,7 @@ Timeline 类中其他方法：
 * `render_embed()`：在 Flask&Django 中可以使用该方法渲染
 * `show_config()`：打印输出所有配置项
 * `chart`：chart 属性返回图形实例
+* Timeline 在 Jupyter-notebook 中显示有问题（无法正常显示动画）
 
 ```python
 from pyecharts import Bar, Timeline
