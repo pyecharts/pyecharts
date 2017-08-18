@@ -1004,6 +1004,9 @@ class PandasNumpyTypeEncoder(json.JSONEncoder):
             except:
                 return json.JSONEncoder.default(self, obj)
 
+def handle(obj):
+    if isinstance(obj, (datetime.datetime, datetime.date)):
+        return obj.isoformat()
 
 def json_dumps(data, indent=0):
-    return json.dumps(data, indent=indent, cls=PandasNumpyTypeEncoder)
+    return json.dumps(data, indent=indent, cls=PandasNumpyTypeEncoder, default=handle)
