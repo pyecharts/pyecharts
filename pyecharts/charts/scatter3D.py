@@ -1,8 +1,9 @@
 #!/usr/bin/env python
-#coding=utf-8
+# coding=utf-8
 
 from pyecharts.base import Base
 from pyecharts.option import get_all_options
+
 
 class Scatter3D(Base):
     """
@@ -11,6 +12,7 @@ class Scatter3D(Base):
 
     def __init__(self, title="", subtitle="", **kwargs):
         super(Scatter3D, self).__init__(title, subtitle, **kwargs)
+        self._js_dependencies.add('echartsgl')
 
     def add(self, *args, **kwargs):
         self.__add(*args, **kwargs)
@@ -21,8 +23,8 @@ class Scatter3D(Base):
         """
 
         :param name:
-            Series name used for displaying in tooltip and filtering with legend,
-            or updaing data and configuration with setOption.
+            Series name used for displaying in tooltip and filtering
+            with legend, or updaing data and configuration with setOption.
         :param data:
             data of Scatter3D
         :param grid3D_opacity:
@@ -30,7 +32,9 @@ class Scatter3D(Base):
         :param kwargs:
         :return:
         """
-        kwargs.update(xaxis3d_type='value', yaxis3d_type='value', zaxis3d_type='value')
+        kwargs.update(xaxis3d_type='value',
+                      yaxis3d_type='value',
+                      zaxis3d_type='value')
         chart = get_all_options(**kwargs)
         self._option.get('legend')[0].get('data').append(name)
         self._option.update(

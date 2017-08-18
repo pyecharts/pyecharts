@@ -1,13 +1,15 @@
 #coding=utf-8
 from __future__ import unicode_literals
 
-from pyecharts import Bar, Scatter3D, Line, Pie, Kline, Radar, WordCloud, Liquid
+from pyecharts import (
+    Bar, Scatter3D, Line, Pie, Map,
+    Kline, Radar, WordCloud, Liquid)
 from pyecharts import Page
 import codecs
 import json
 
 
-def create_two_bars():
+def create_three():
     page = Page()
 
     # bar
@@ -27,11 +29,20 @@ def create_two_bars():
     scatter3D = Scatter3D("3D 散点图示例", width=1200, height=600)
     scatter3D.add("", data, is_visualmap=True, visual_range_color=range_color)
     page.add(scatter3D)
+
+    # guangdong
+    value = [20, 190, 253, 77, 65]
+    attr = ['汕头市', '汕尾市', '揭阳市', '阳江市', '肇庆市']
+    map = Map("广东地图示例", width=1200, height=600)
+    map.add("", attr, value, maptype='广东', is_visualmap=True,
+            visual_text_color='#000')
+    page.add(map)
+
     return page
 
 
 def test_two_bars():
-    page = create_two_bars()
+    page = create_three()
     page.render()
     with codecs.open('render.html', 'r', 'utf-8') as f:
         actual_content = f.read()
@@ -40,10 +51,18 @@ def test_two_bars():
 
 
 def test_page_embed():
-    page = create_two_bars()
+    page = create_three()
     html = page.render_embed()
     assert '<html>' not in html
     assert json.dumps("柱状图数据堆叠示例") in html
+
+
+def test_page_in_notebook():
+    page = create_three()
+    html = page._repr_html_()
+    assert 'echartsgl' in html
+    assert 'echarts' in html
+    assert 'guangdong' in html
 
 
 def test_more():
