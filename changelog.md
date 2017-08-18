@@ -45,7 +45,14 @@
     * 新增 Page 类，现能同时在一个 html 页面内按顺序展示多个图形。（参见用户自定义）
 
 * version 0.1.9.5（当前版本）
+    * jupyter notebook 现在也为离线模式，从本地加载项目所需 js 文件。至此 pyecharts 彻底实现本地化运行。速度更快，不再受网速影响。
     * 删除冗余 js 文件，压缩项目体积。
+    * 新增 Timeline 功能，支持轮播多张图表
+    * 修改自定义模块的接口，现自定义模块有以下 4 个类，具体用法参见文档
+        * Grid 类：并行显示多张图
+        * Overlap 类：结合不同类型图表叠加画在同张图上
+        * Page 类：同一网页按顺序展示多图
+        * Timeline 类：提供时间线轮播多张图
     * 为 3D 图新增参数用于配置坐标轴选项（参见通用配置项中的 axis3D）
     * 废弃 xAxis，yAxis 中的 `interval`, `xy_font_size`, `namegap` 参数。新增以下参数
         * xaxis_interval（取代 `interval` 参数）
@@ -58,15 +65,9 @@
         * yaxis_margin（y 轴与标签的距离）
         * is_xaxislabel_align（x 轴标签是否与刻度对齐）
         * is_yaxislabel_align（y 轴标签是否与刻度对齐）
-    * 新增 Timeline 功能，支持轮播多张图表
-    * 修改自定义模块的接口，现自定义模块有以下 4 个类，具体用法参见文档
-        * Grid 类：并行显示多张图
-        * Overlap 类：结合不同类型图表叠加画在同张图上
-        * Page 类：同一网页按顺序展示多图
-        * Timeline 类：提供时间线轮播多张图
-    * jupyter notebook 现在也为离线模式，从本地加载项目所需 js 文件。至此 pyecharts 彻底实现本地化运行。速度更快，不再受网速影响。
 
 * version 0.1.9.6
+    * render() 方法现在为动态加入 js 文件，生成的 .html 文件体积更小
     * 更改通用配置项中的 label 的参数 formatter 为 label_formatter
     * 更改 clockwise 参数为 is_clockwise
     * 更改 Graph 图中的 repulsion, gravity, edge_length, layout 参数为 graph_repulsion, graph_gravity, graph_edge_length, graph_layout，并新增 graph_edge_symbol, graph_edge_symbolsize 参数
