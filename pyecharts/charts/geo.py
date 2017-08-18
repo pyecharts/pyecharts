@@ -52,6 +52,7 @@ class Geo(Base):
         :param kwargs:
         """
         assert len(attr) == len(value)
+        kwargs.update(type="geo")
         chart = get_all_options(**kwargs)
         _data = []
         for name, value in zip(attr, value):
@@ -104,4 +105,3 @@ class Geo(Base):
                 "data": _data,
             })
         self._legend_visualmap_colorlst(**kwargs)
-        self._option.get('tooltip').update(formatter='{b}: {c}')
