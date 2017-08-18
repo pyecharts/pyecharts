@@ -8,6 +8,7 @@
 ## 版本信息
 
 * version 0.1.9.6（下一版本）
+    * Page 类现在也支持在 jupyter-notebook 中显示了，直接调用 Page() 实例即可。
     * 更改通用配置项中的 label 的参数 formatter 为 label_formatter
     * 更改 clockwise 参数为 is_clockwise
     * 更改 Graph 图中的 repulsion, gravity, edge_length, layout 参数为 graph_repulsion, graph_gravity, graph_edge_length, graph_layout，并新增 graph_edge_symbol, graph_edge_symbolsize 参数
