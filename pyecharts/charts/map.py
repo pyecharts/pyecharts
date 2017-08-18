@@ -3,16 +3,19 @@
 
 from pyecharts.base import Base
 from pyecharts.option import get_all_options
+from pyecharts.constants import CITY_NAME_PINYIN_MAP
+
 
 class Map(Base):
     """
     <<< Map chart >>>
     Map is maily used in the visulization of geographic area data,
-    which can be used with visualMap component to visualize the datas such as population distribution
-    density in diffrent areas.
+    which can be used with visualMap component to visualize the datas such as
+    population distribution density in diffrent areas.
     """
     def __init__(self, title="", subtitle="", **kwargs):
         super(Map, self).__init__(title, subtitle, **kwargs)
+        self._js_dependencies.add('world')
 
     def add(self, *args, **kwargs):
         self.__add(*args, **kwargs)
@@ -24,8 +27,8 @@ class Map(Base):
         """
 
         :param name:
-            Series name used for displaying in tooltip and filtering with legend,
-            or updaing data and configuration with setOption.
+            Series name used for displaying in tooltip and filtering
+            with legend, or updaing data and configuration with setOption.
         :param attr:
             name of attribute
         :param value:
@@ -33,7 +36,8 @@ class Map(Base):
         :param is_roam:
             Whether to enable mouse zooming and translating. false by default.
             If either zooming or translating is wanted,
-            it can be set to 'scale' or 'move'. Otherwise, set it to be true to enable both.
+            it can be set to 'scale' or 'move'. Otherwise, set it to be true
+            to enable both.
         :param maptype:
             type of map, it supports
             china、world、...
@@ -54,4 +58,9 @@ class Map(Base):
             "data": _data,
             "roam": is_roam
         })
+        name_in_pinyin = CITY_NAME_PINYIN_MAP.get(
+            self._option.get('series')[0].get('mapType'))
+        if name_in_pinyin:
+            self._js_dependencies.add(name_in_pinyin)
+
         self._legend_visualmap_colorlst(**kwargs)
