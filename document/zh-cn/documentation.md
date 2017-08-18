@@ -317,17 +317,17 @@ cast(seq)
 
 **grid3D：3D 笛卡尔坐标系组配置项，适用于 3D 图形。（Bar3D, Line3D, Scatter3D)**
 
-* grid3D_width -> int  
+* grid3d_width -> int  
     三维笛卡尔坐标系组件在三维场景中的高度。默认为 100
-* grid3D_height -> int  
+* grid3d_height -> int  
     三维笛卡尔坐标系组件在三维场景中的高度。默认为 100
-* grid3D_depth -> int  
+* grid3d_depth -> int  
     三维笛卡尔坐标系组件在三维场景中的高度。默认为 100
-* is_grid3D_rotate -> bool  
+* is_grid3d_rotate -> bool  
     是否开启视角绕物体的自动旋转查看。默认为 False
-* grid3D_rotate_speed -> int  
+* grid3d_rotate_speed -> int  
     物体自传的速度。单位为角度 / 秒，默认为 10 ，也就是 36 秒转一圈。
-* grid3D_rotate_sensitivity -> int  
+* grid3d_rotate_sensitivity -> int  
     旋转操作的灵敏度，值越大越灵敏。默认为 1, 设置为 0 后无法旋转。
 
 
@@ -516,7 +516,7 @@ bar.render()
 
 Bar3D.add() 方法签名
 ```python
-add(name, x_axis, y_axis, data, grid3D_opacity=1, grid3D_shading='color', **kwargs)
+add(name, x_axis, y_axis, data, grid3d_opacity=1, grid3d_shading='color', **kwargs)
 ```
 * name -> str  
     图例名称
@@ -526,9 +526,9 @@ add(name, x_axis, y_axis, data, grid3D_opacity=1, grid3D_shading='color', **kwar
     y 坐标轴数据。需为类目轴，也就是不能是数值。
 * data -> [list],包含列表的列表  
     数据项，数据中，每一行是一个『数据项』，每一列属于一个『维度』
-* grid3D_opacity -> int  
+* grid3d_opacity -> int  
     3D 笛卡尔坐标系组的透明度（柱状的透明度），默认为 1，完全不透明。
-* grid3D_shading -> str  
+* grid3d_shading -> str  
     三维柱状图中三维图形的着色效果。
     * color：只显示颜色，不受光照等其它因素的影响。
     * lambert：通过经典的 lambert 着色表现光照带来的明暗。
@@ -564,7 +564,7 @@ data = [[0, 0, 5], [0, 1, 1], [0, 2, 0], [0, 3, 0], [0, 4, 0], [0, 5, 0], [0, 6,
 range_color = ['#313695', '#4575b4', '#74add1', '#abd9e9', '#e0f3f8', '#ffffbf',
                '#fee090', '#fdae61', '#f46d43', '#d73027', '#a50026']
 bar3d.add("", x_axis, y_aixs, [[d[1], d[0], d[2]] for d in data], is_visualmap=True,
-          visual_range=[0, 20], visual_range_color=range_color, grid3D_width=200, grid3D_depth=80)
+          visual_range=[0, 20], visual_range_color=range_color, grid3d_width=200, grid3d_depth=80)
 bar3d.show_config()
 bar3d.render()
 ```
@@ -572,34 +572,34 @@ bar3d.render()
 
 data 中，如 [1, 2, 3] 表示 x 轴的索引为 1，即 "1a"；y 轴的索引为 2，即 "Thursday"；z 轴的数值为 3
 
-设置 ``` grid3D_shading``` 可以让柱状更真实  
+设置 ``` grid3d_shading``` 可以让柱状更真实  
 ```python
 bar3d = Bar3D("3D 柱状图示例", width=1200, height=600)
 bar3d.add("", x_axis, y_aixs, [[d[1], d[0], d[2]] for d in data], is_visualmap=True,
-          visual_range=[0, 20], visual_range_color=range_color, grid3D_width=200, grid3D_depth=80,
-          grid3D_shading='lambert')
+          visual_range=[0, 20], visual_range_color=range_color, grid3d_width=200, grid3d_depth=80,
+          grid3d_shading='lambert')
 bar3d.show_config()
 bar3d.render()
 ```
 ![bar3D-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/bar3D-1.gif)
 
-设置 ```is_grid3D_rotate``` 启动自动旋转功能
+设置 ```is_grid3d_rotate``` 启动自动旋转功能
 ```python
 bar3d = Bar3D("3D 柱状图示例", width=1200, height=600)
 bar3d.add("", x_axis, y_aixs, [[d[1], d[0], d[2]] for d in data], is_visualmap=True,
-          visual_range=[0, 20], visual_range_color=range_color, grid3D_width=200, grid3D_depth=80,
-          is_grid3D_rotate=True)
+          visual_range=[0, 20], visual_range_color=range_color, grid3d_width=200, grid3d_depth=80,
+          is_grid3d_rotate=True)
 bar3d.show_config()
 bar3d.render()
 ```
 ![bar3D-2](https://github.com/chenjiandongx/pyecharts/blob/master/images/bar3D-2.gif)
 
-设置 ``` grid3D_rotate_speed``` 调节旋转速度
+设置 ``` grid3d_rotate_speed``` 调节旋转速度
 ```python
 bar3d = Bar3D("3D 柱状图示例", width=1200, height=600)
 bar3d.add("", x_axis, y_aixs, [[d[1], d[0], d[2]] for d in data], is_visualmap=True,
-          visual_range=[0, 20], visual_range_color=range_color, grid3D_width=200, grid3D_depth=80,
-          is_grid3D_rotate=True, grid3D_rotate_speed=180)
+          visual_range=[0, 20], visual_range_color=range_color, grid3d_width=200, grid3d_depth=80,
+          is_grid3d_rotate=True, grid3d_rotate_speed=180)
 bar3d.show_config()
 bar3d.render()
 ```
@@ -1131,13 +1131,13 @@ line.render()
 
 Line3D.add() 方法签名
 ```python
-add(name, data, grid3D_opacity=1, **kwargs)
+add(name, data, grid3d_opacity=1, **kwargs)
 ```
 * name -> str  
     图例名称
 * data -> [list],包含列表的列表  
     数据项，数据中，每一行是一个『数据项』，每一列属于一个『维度』
-* grid3D_opacity -> int  
+* grid3d_opacity -> int  
     3D 笛卡尔坐标系组的透明度（线的透明度），默认为 1，完全不透明。
 
 画个弹簧
@@ -1156,7 +1156,7 @@ range_color = ['#313695', '#4575b4', '#74add1', '#abd9e9', '#e0f3f8', '#ffffbf',
                '#fee090', '#fdae61', '#f46d43', '#d73027', '#a50026']
 line3d = Line3D("3D 折线图示例", width=1200, height=600)
 line3d.add("", _data, is_visualmap=True, visual_range_color=range_color, visual_range=[0, 30],
-           grid3D_rotate_sensitivity=5)
+           grid3d_rotate_sensitivity=5)
 line3d.render()
 ```
 ![line3D-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/line3D-0.gif)
@@ -1177,7 +1177,7 @@ range_color = ['#313695', '#4575b4', '#74add1', '#abd9e9', '#e0f3f8', '#ffffbf',
                '#fee090', '#fdae61', '#f46d43', '#d73027', '#a50026']
 line3d = Line3D("3D 折线图示例", width=1200, height=600)
 line3d.add("", _data, is_visualmap=True, visual_range_color=range_color, visual_range=[0, 30],
-           is_grid3D_rotate=True, grid3D_rotate_speed=180)
+           is_grid3d_rotate=True, grid3d_rotate_speed=180)
 line3d.render()
 ```
 ![line3D-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/line3D-1.gif)
@@ -1803,13 +1803,13 @@ scatter.render()
 
 Scatter3D.add() 方法签名
 ```python
-add(name, data, grid3D_opacity=1, **kwargs)
+add(name, data, grid3d_opacity=1, **kwargs)
 ```
 * name -> str  
     图例名称
 * data -> [list],包含列表的列表  
     数据项，数据中，每一行是一个『数据项』，每一列属于一个『维度』
-* grid3D_opacity -> int  
+* grid3d_opacity -> int  
     3D 笛卡尔坐标系组的透明度（点的透明度），默认为 1，完全不透明。
 
 ```python
