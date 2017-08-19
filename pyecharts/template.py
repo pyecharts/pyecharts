@@ -89,11 +89,12 @@ def produce_require_configuration(dependencies, jshost):
     :param jshost:
     :return:
     """
+    _d = ensure_echarts_is_in_the_front(dependencies)
     # if no nick name register, we treat the location as location.js
     require_conf_items = [
         "'%s': '%s/%s'" % (key, jshost, DEFAULT_JS_LIBRARIES.get(key, key))
-        for key in dependencies]
-    require_libraries = ["'%s'" % key for key in dependencies]
+        for key in _d]
+    require_libraries = ["'%s'" % key for key in _d]
     return dict(
         config_items=require_conf_items,
         libraries=require_libraries
@@ -101,7 +102,18 @@ def produce_require_configuration(dependencies, jshost):
 
 
 def produce_html_script_list(dependencies):
+    _d = ensure_echarts_is_in_the_front(dependencies)
     script_list = [
         '%s' % DEFAULT_JS_LIBRARIES.get(key, key)
-        for key in dependencies]
+        for key in _d]
     return script_list
+
+
+def ensure_echarts_is_in_the_front(dependencies):
+    # make sure echarts is the item in the list
+    # require(['echarts'....], function(ec) {..}) need it to be first
+    # but dependencies is a set so has no sequence
+    if len(dependencies) > 1:
+        dependencies.remove('echarts')
+        dependencies = ['echarts'] + list(dependencies)
+    return dependencies
