@@ -55,16 +55,16 @@ Django
 ![django-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/django-0.gif)
 
 * 中文文档
-    * [pyecharts + Flask](https://github.com/chenjiandongx/pyecharts/blob/master/document/zh-cn/doc_flask.md)
-    * [pyecharts + Django](https://github.com/chenjiandongx/pyecharts/blob/master/document/zh-cn/doc_django.md)
+    * [pyecharts + Flask](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/doc_flask.md)
+    * [pyecharts + Django](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/doc_django.md)
 * English
-    * [pyecharts + Flask](https://github.com/chenjiandongx/pyecharts/blob/master/document/en-us/doc_flask.md)
-    * [pyecharts + Django](https://github.com/chenjiandongx/pyecharts/blob/master/document/en-us/doc_django.md)
+    * [pyecharts + Flask](https://github.com/chenjiandongx/pyecharts/blob/master/docs/en-us/doc_flask.md)
+    * [pyecharts + Django](https://github.com/chenjiandongx/pyecharts/blob/master/docs/en-us/doc_django.md)
 
 
 ## Documentation
-* [中文文档](https://github.com/chenjiandongx/pyecharts/blob/master/document/zh-cn/documentation.md)
-* [English](https://github.com/chenjiandongx/pyecharts/blob/master/document/en-us/documentation.md)
+* [中文文档](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/documentation.md)
+* [English](https://github.com/chenjiandongx/pyecharts/blob/master/docs/en-us/documentation.md)
 
 ## Author
 pyecharts is developed and maintained by chenjiandongx ([chenjiandongx@qq.com](chenjiandongx@qq.com))
