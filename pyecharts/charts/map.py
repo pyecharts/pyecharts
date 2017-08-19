@@ -57,8 +57,6 @@ class Map(Base):
             "data": _data,
             "roam": is_roam
         })
-        map_type = self._option.get('series')[0].get('mapType')
-        name_in_pinyin = CITY_NAME_PINYIN_MAP.get(map_type, map_type)
+        name_in_pinyin = CITY_NAME_PINYIN_MAP.get(maptype, maptype)
         self._js_dependencies.add(name_in_pinyin)
-
         self._legend_visualmap_colorlst(**kwargs)
