@@ -14,11 +14,11 @@ except:
 __title__ = 'pyecharts'
 __description__ = 'Python echarts, make charting easier'
 __url__ = 'https://github.com/chenjiandongx/pyecharts'
-__version__ = '0.1.9.6'
+__version__ = '0.1.9.7'
 __author__ = 'chenjiandongx'
 __author_email__ = 'chenjiandongx@qq.com'
 __license__ = 'MIT'
-__requires__ = ['pillow', 'jinja2', 'future', 'jupyter-pip']
+__requires__ = ['pillow', 'jinja2', 'future', 'jupyter-pip==0.3.1']
 __packages__ = ['pyecharts', 'pyecharts/charts', 'pyecharts/custom']
 __keywords__ = ['echarts', 'charts']
 __jupyter_echarts__ = 'pyecharts/templates/js/echarts'
