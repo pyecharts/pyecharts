@@ -5,45 +5,9 @@
     <meta charset="utf-8">
     <title>ECharts</title>
 	<!-- build -->
-    <script src="js/echarts/echarts.min.js"></script>
-    <script src="js/echarts/echarts-gl.min.js"></script>
-    <script type="text/javascript " src="js/echarts/china.js"></script>
-    <script type="text/javascript " src="js/echarts/world.js"></script>
-    <script type="text/javascript " src="js/echarts/echarts-wordcloud.min.js"></script>
-    <script type="text/javascript " src="js/echarts/echarts-liquidfill.min.js"></script>
-    <script type="text/javascript " src="js/echarts/anhui.js "></script>
-    <script type="text/javascript " src="js/echarts/aomen.js "></script>
-    <script type="text/javascript " src="js/echarts/beijing.js "></script>
-    <script type="text/javascript " src="js/echarts/chongqing.js "></script>
-    <script type="text/javascript " src="js/echarts/fujian.js "></script>
-    <script type="text/javascript " src="js/echarts/gansu.js "></script>
-    <script type="text/javascript " src="js/echarts/guangdong.js "></script>
-    <script type="text/javascript " src="js/echarts/guangxi.js "></script>
-    <script type="text/javascript " src="js/echarts/guizhou.js "></script>
-    <script type="text/javascript " src="js/echarts/hainan.js "></script>
-    <script type="text/javascript " src="js/echarts/hebei.js "></script>
-    <script type="text/javascript " src="js/echarts/heilongjiang.js "></script>
-    <script type="text/javascript " src="js/echarts/henan.js "></script>
-    <script type="text/javascript " src="js/echarts/hubei.js "></script>
-    <script type="text/javascript " src="js/echarts/hunan.js "></script>
-    <script type="text/javascript " src="js/echarts/jiangsu.js "></script>
-    <script type="text/javascript " src="js/echarts/jiangxi.js "></script>
-    <script type="text/javascript " src="js/echarts/jilin.js "></script>
-    <script type="text/javascript " src="js/echarts/liaoning.js "></script>
-    <script type="text/javascript " src="js/echarts/neimenggu.js "></script>
-    <script type="text/javascript " src="js/echarts/ningxia.js "></script>
-    <script type="text/javascript " src="js/echarts/qinghai.js "></script>
-    <script type="text/javascript " src="js/echarts/shandong.js "></script>
-    <script type="text/javascript " src="js/echarts/shanghai.js "></script>
-    <script type="text/javascript " src="js/echarts/shanxi.js "></script>
-    <script type="text/javascript " src="js/echarts/sichuan.js "></script>
-    <script type="text/javascript " src="js/echarts/taiwan.js "></script>
-    <script type="text/javascript " src="js/echarts/tianjin.js "></script>
-    <script type="text/javascript " src="js/echarts/xianggang.js "></script>
-    <script type="text/javascript " src="js/echarts/xinjiang.js "></script>
-    <script type="text/javascript " src="js/echarts/xizang.js "></script>
-    <script type="text/javascript " src="js/echarts/yunnan.js "></script>
-    <script type="text/javascript " src="js/echarts/zhejiang.js "></script>
+	{% for jsfile_name in script_list %}
+    <script src="js/echarts/{{jsfile_name}}.js"></script>
+	{% endfor %}
 	<!-- endbuild -->
 </head>
 
