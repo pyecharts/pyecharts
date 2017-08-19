@@ -7,15 +7,17 @@
 
 ## 版本信息
 
-* version 0.1.9.6（下一版本）
+* version 0.1.9.6（当前版本）
     * Page 类现在也支持在 jupyter-notebook 中显示了，直接调用 Page() 实例即可。
+    * jupyter-notebook 和本地 render() 现在均采用动态加入 js 依赖文件的方法，生成文件体积大大缩小。
+    * 提供 pyecharts-snapshot 用于将生成的图片保存为 png 或 pdf 文件，仅静态图片生效。（3D 图和动态图不生效）
     * 更改通用配置项中的 label 的参数 formatter 为 label_formatter
     * 更改 clockwise 参数为 is_clockwise
     * 更改 Graph 图中的 repulsion, gravity, edge_length, layout 参数为 graph_repulsion, graph_gravity, graph_edge_length, graph_layout，并新增 graph_edge_symbol, graph_edge_symbolsize 参数
     * 通用配置项中新增 tooltip 模块
     * Overlap 中新增 xaxis_index, is_add_xaxis, yaxis_index, is_add_yaxis 参数，现支持多 Y 轴或多 X 轴
 
-* version 0.1.9.5（当前版本）
+* version 0.1.9.5
     * jupyter notebook 现在也为离线模式，从本地加载项目所需 js 文件。至此 pyecharts 彻底实现本地化运行。速度更快，不再受网速影响。
     * 删除冗余 js 文件，压缩项目体积。
     * 新增 Timeline 功能，支持轮播多张图表
