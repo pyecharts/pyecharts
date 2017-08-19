@@ -99,7 +99,7 @@ class Base(object):
             backgroundColor=background_color
         )
         self._jshost = constants.DEFAULT_HOST
-        self._js_dependencies = set('echarts')
+        self._js_dependencies = {'echarts'}
         self._chart_id = uuid.uuid4().hex
 
     def add(self, angle_data=None,

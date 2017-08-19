@@ -60,6 +60,7 @@ def test_page_embed():
 def test_page_in_notebook():
     page = create_three()
     html = page._repr_html_()
+
     assert 'echartsgl' in html
     assert 'echarts' in html
     assert 'guangdong' in html
