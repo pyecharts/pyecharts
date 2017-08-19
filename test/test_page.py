@@ -1,12 +1,12 @@
 #coding=utf-8
 from __future__ import unicode_literals
 
+import json
+import codecs
 from pyecharts import (
     Bar, Scatter3D, Line, Pie, Map,
     Kline, Radar, WordCloud, Liquid)
 from pyecharts import Page
-import codecs
-import json
 
 
 def create_three():
@@ -51,6 +51,9 @@ def test_two_bars():
         # test the optimization
         assert "registerMap('china'," not in actual_content
         assert "registerMap('world'," not in actual_content
+        echarts_position = actual_content.find('exports.echarts')
+        guangdong_position = actual_content.find(json.dumps('广东'))
+        assert echarts_position < guangdong_position
 
 
 def test_page_embed():
@@ -67,6 +70,11 @@ def test_page_in_notebook():
     assert 'echartsgl' in html
     assert 'echarts' in html
     assert 'guangdong' in html
+    # find the appearing postion of echarts.min in html
+    echarts_position = html.find('echarts.min')
+    # find the appearing postion of guangdong in html
+    guangdong_position = html.find('guangdong')
+    assert echarts_position < guangdong_position
 
 
 def test_more():
