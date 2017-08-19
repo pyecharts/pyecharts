@@ -7,7 +7,11 @@
 
 ## 版本信息
 
-* version 0.1.9.6（当前版本）
+* version 0.1.9.7（当前版本）
+    * 修复 requirements.txt 中 jupyter-pip 版本过旧问题
+    * 修复地图不能正常显示的问题
+
+* version 0.1.9.6
     * Page 类现在也支持在 jupyter-notebook 中显示了，直接调用 Page() 实例即可。
     * jupyter-notebook 和本地 render() 现在均采用动态加入 js 依赖文件的方法，生成文件体积大大缩小。
     * 提供 pyecharts-snapshot 用于将生成的图片保存为 png 或 pdf 文件，仅静态图片生效。（3D 图和动态图不生效）
