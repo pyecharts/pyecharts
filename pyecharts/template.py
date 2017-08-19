@@ -98,3 +98,10 @@ def produce_require_configuration(dependencies, jshost):
         config_items=require_conf_items,
         libraries=require_libraries
     )
+
+
+def produce_html_script_list(dependencies):
+    script_list = [
+        '%s' % DEFAULT_JS_LIBRARIES.get(key, key)
+        for key in dependencies]
+    return script_list

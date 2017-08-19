@@ -338,9 +338,12 @@ class Base(object):
         _tmp = "local.html"
         my_option = json_dumps(self._option, indent=4)
         tmp = template.JINJA2_ENV.get_template(_tmp)
-        html = tmp.render(myOption=my_option,
-                          chart_id=self._chart_id,
-                          myWidth=self._width, myHeight=self._height)
+        script_list = template.produce_html_script_list(self._js_dependencies)
+        html = tmp.render(
+            myOption=my_option,
+            chart_id=self._chart_id,
+            script_list=script_list,
+            myWidth=self._width, myHeight=self._height)
         html = template.freeze_js(html)
         template.write_utf8_html_file(path, html)
 
