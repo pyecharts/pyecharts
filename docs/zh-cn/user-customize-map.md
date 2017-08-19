@@ -16,7 +16,7 @@
 
 
 ## 如何手动添加(0.1.9.7+)
-下面就以广东地图为例，说明如何自行添加地图。
+下面就以太原地图为例，说明如何自行添加地图。
 
 ### 保存地图文件
 我已经下载了太原地图的 JS 文件，文件名为 taiyuan_detailed.js。将其保存在项目安装目录下的 templates/js/echarts 文件夹中。Windows 下一般为 Lib/site-packages/pyecharts/templates/js/echarts
@@ -29,7 +29,7 @@ import pyexcel.constants as constants
 constants.CITY_NAME_PINYIN_MAP['太原'] = 'taiyuan_detail'
 ```
 
-请注意格式：关键词是“太原”，对应的文件名是“taiyuan_detail"， 并且不加'js'后缀。
+请注意格式：关键词是“太原”，对应的文件名是“taiyuan_detail"， 并且不加'js'后缀。下面是所有的代码
 
 ```python
 from pyecharts import Map
@@ -56,6 +56,11 @@ Copying: .../echarts/taiyuan_detailed.js -> /.../jupyter/nbextensions/echarts/ta
           jupyter nbextension enable <the entry point>
 ```
 
-然后，让我们检查以下是否已经装上了，http://localhost:8889/nbextensions/echarts/taiyuan_details.js。 如果能下载到，那就祝贺你，成功了。否则，请检查你的步骤。
+然后，让我们检查以下是否已经装上了。请先运行Jupyter notebook，再打开这个链接：http://localhost:8889/nbextensions/echarts/taiyuan_details.js。 
+如果能下载到，那就祝贺你，成功了。否则，请检查你的步骤。
 
 ![customize-map-2](https://github.com/chenjiandongx/pyecharts/blob/master/images/customize-map-2.png)
+
+## 如何把手动加的地图变成自动的
+
+如果用户期望pyecharts支持自己的地图，请发请求然后再发来改动。
