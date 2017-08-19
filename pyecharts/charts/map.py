@@ -15,8 +15,6 @@ class Map(Base):
     """
     def __init__(self, title="", subtitle="", **kwargs):
         super(Map, self).__init__(title, subtitle, **kwargs)
-        self._js_dependencies.add('world')
-        self._js_dependencies.add('china')
 
     def add(self, *args, **kwargs):
         self.__add(*args, **kwargs)
@@ -59,9 +57,8 @@ class Map(Base):
             "data": _data,
             "roam": is_roam
         })
-        name_in_pinyin = CITY_NAME_PINYIN_MAP.get(
-            self._option.get('series')[0].get('mapType'))
-        if name_in_pinyin:
-            self._js_dependencies.add(name_in_pinyin)
+        map_type = self._option.get('series')[0].get('mapType')
+        name_in_pinyin = CITY_NAME_PINYIN_MAP.get(map_type, map_type)
+        self._js_dependencies.add(name_in_pinyin)
 
         self._legend_visualmap_colorlst(**kwargs)
