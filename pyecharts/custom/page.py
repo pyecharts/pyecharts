@@ -5,6 +5,7 @@ from pyecharts import template
 from pyecharts.constants import DEFAULT_HOST
 from pyecharts.template import produce_require_configuration
 
+
 class Page(object):
 
     def __init__(self):
