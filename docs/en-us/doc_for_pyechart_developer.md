@@ -1,5 +1,14 @@
 # Developer's Guide
 
+## How to merge chengjiandongx/master?
+
+Whenever you do the upstreaming, you are required to do an additional step because we have gotten a submodule:
+
+```
+git submodule update
+```
+
+
 ## How to add more javascript libraries to pyecharts
 
 All javascript libraries are now managed in a [submodule](https://git-scm.com/docs/git-submodule) [jupyter-echarts](https://github.com/chfw/jupyter-echarts). It means
