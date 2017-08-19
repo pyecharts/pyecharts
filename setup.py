@@ -18,7 +18,7 @@ __version__ = '0.1.9.6'
 __author__ = 'chenjiandongx'
 __author_email__ = 'chenjiandongx@qq.com'
 __license__ = 'MIT'
-__requires__ = ['pillow', 'jinja2', 'future', 'jupyter-pip']
+__requires__ = ['pillow', 'jinja2', 'future', 'jupyter-pip==0.3.1']
 __packages__ = ['pyecharts', 'pyecharts/charts', 'pyecharts/custom']
 __keywords__ = ['echarts', 'charts']
 __jupyter_echarts__ = 'pyecharts/templates/js/echarts'
