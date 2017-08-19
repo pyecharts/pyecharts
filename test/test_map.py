@@ -3,6 +3,9 @@
 from __future__ import unicode_literals
 
 from pyecharts import Map
+import json
+import codecs
+
 
 def test_map():
 
@@ -29,6 +32,11 @@ def test_map():
     map.add("", attr, value, maptype='广东', is_visualmap=True, visual_text_color='#000')
     map.show_config()
     map.render()
+    with codecs.open('render.html', 'r', 'utf-8') as f:
+        actual_content = f.read()
+        echarts_position = actual_content.find('exports.echarts')
+        guangdong_position = actual_content.find(json.dumps('广东'))
+        assert echarts_position < guangdong_position
 
     # map_3
     value = [95.1, 23.2, 43.3, 66.4, 88.5]
