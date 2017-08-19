@@ -3,7 +3,10 @@
 
 from pyecharts import template
 from pyecharts.constants import DEFAULT_HOST
-from pyecharts.template import produce_require_configuration
+from pyecharts.template import (
+    produce_require_configuration,
+    produce_html_script_list)
+
 
 
 class Page(object):
@@ -33,8 +36,11 @@ class Page(object):
         """
         template_name = "multicharts.html"
         chart_content = self.render_embed()
+        dependencies = self._merge_dependencies()
+        script_list = produce_html_script_list(dependencies)
         tmp = template.JINJA2_ENV.get_template(template_name)
-        html = tmp.render(multi_chart_content=chart_content)
+        html = tmp.render(multi_chart_content=chart_content,
+                          script_list=script_list)
         html = template.freeze_js(html)
         template.write_utf8_html_file(path, html)
 
@@ -57,18 +63,10 @@ class Page(object):
         _tmp = "notebook.html"
         doms = ""
         components = ""
-        dependencies = set()
+        dependencies = self._merge_dependencies()
         for chart in self.__charts:
             doms += chart._render_notebook_dom_()
             components += chart._render_notebook_component_()
-            dependencies = dependencies.union(chart._js_dependencies)
-
-        # make sure echarts is the item in the list
-        # require(['echarts'....], function(ec) {..}) need it to be first
-        # but dependencies is a set so has no sequence
-        if len(dependencies) > 1:
-            dependencies.remove('echarts')
-            dependencies = ['echarts'] + list(dependencies)
 
         require_config = produce_require_configuration(
             dependencies, self._jshost)
@@ -76,3 +74,15 @@ class Page(object):
         html = tmp.render(
             single_chart=components, dom=doms, **require_config)
         return html
+
+    def _merge_dependencies(self):
+        dependencies = set()
+        for chart in self.__charts:
+            dependencies = dependencies.union(chart._js_dependencies)
+        # make sure echarts is the item in the list
+        # require(['echarts'....], function(ec) {..}) need it to be first
+        # but dependencies is a set so has no sequence
+        if len(dependencies) > 1:
+            dependencies.remove('echarts')
+            dependencies = ['echarts'] + list(dependencies)
+        return dependencies
