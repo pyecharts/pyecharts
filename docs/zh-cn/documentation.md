@@ -72,6 +72,21 @@ bar.render()
 * ```render()```  
     默认将会在根目录下生成一个 render.html 的文件，支持 path 参数，设置文件保存位置，如 render(r"e:\my_first_chart.html")，文件用浏览器打开。  
 
+### 使用 pyecharts-snapshot 插件
+如果想直接将图片保存为 png 或者 pdf 格式的文件，可以使用 [pyecharts-snapshot](https://github.com/chfw/pyecharts-snapshot)。使用该插件请确保你的系统上已经安装了 node.js 环境，如果没有，请到这里下载 [https://nodejs.org/en/download/](https://nodejs.org/en/download/)
+
+1. 安装 phantomjs  
+    `npm install -g phantomjs-prebuilt`
+2. 安装 pyecharts-snapshot  
+    `pip install pyecharts-snapshot`
+3. 引入 pyecharts-snapshot  
+    `from pyecharts_snapshot.main import make_a_snapshot`
+4. 调用方法  
+    `make_a_snapshot('render.html', 'snapshot.png')`  
+    make_a_snapshot() 第一个参数为生成的 .html 文件，第二个参数为要保存的文件，可以为 png/pdf
+
+更多内容请移步至 [pyecharts-snapshot](https://github.com/chfw/pyecharts-snapshot)  
+
 
 ### Jupyter notebook 小贴士
 对本库的现有用户来说，0.1.9.5 版本的离线模式要求：
