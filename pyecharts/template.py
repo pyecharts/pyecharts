@@ -116,4 +116,9 @@ def ensure_echarts_is_in_the_front(dependencies):
     if len(dependencies) > 1:
         dependencies.remove('echarts')
         dependencies = ['echarts'] + list(dependencies)
+    elif len(dependencies) == 1:
+        # make a new list
+        dependencies = list(dependencies)
+    else:
+        raise Exception("No js library found. Nothing works!")
     return dependencies
