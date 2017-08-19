@@ -61,6 +61,22 @@ bar.render()
 * ```render()```
     creat a file named render.html in the root directory defaultly,which supports path parameter and set the location the file save in,for instance render(r"e:\my_first_chart.html")，open file with your browser.
 
+### The usge pyecharts-snapshot extension
+If you would to get png or pdf files instead of `render.html`, you can use [pyecharts-snapshot](https://github.com/chfw/pyecharts-snapshot)。However, node.js is required and can be downloaded from [https://nodejs.org/en/download/](https://nodejs.org/en/download/)
+
+1. Install phantomjs  
+    `npm install -g phantomjs-prebuilt`
+2. install pyecharts-snapshot  
+    `pip install pyecharts-snapshot`
+3. In your program, import pyecharts-snapshot  
+    `from pyecharts_snapshot.main import make_a_snapshot`
+4. Programmatical usage
+    `make_a_snapshot('render.html', 'snapshot.png')`  
+    where the frist parameter is the output file(by default, render.html), and the second one is output file with file extension as png or pdf.
+
+For more details, please refer to [pyecharts-snapshot](https://github.com/chfw/pyecharts-snapshot)  
+
+
 ### A note on Jupyter notebook
 
 For existing users, in order to play with the offline mode coming with 0.1.9.5, it is recommended that 1) the old version must be uninstalled. 2) Your existing notebooks must be refreshed and re-ran. 3) You must have installed **jupyter**. This restriction will be gone when jupyter-pip will release its next version.
