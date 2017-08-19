@@ -8,7 +8,7 @@ pyecharts is a library to generate charts using Echarts. It simply provides the 
 [Echarts](https://github.com/ecomfe/echarts) is an open source library from Baidu for data visualization in javascript. It has awesome demo pages so I started to look out for an interface library so that I could use it in Python. I ended up with [echarts-python](https://github.com/yufeiminds/echarts-python) on github but it lacks of documentation and was not updated for a while. Just like many other Python projects, I started my own project, pyecharts, referencing echarts-python and another library [pygal](https://github.com/Kozea/pygal).
 
 ## Installation
-pyecharts works on Python2 and Python3. The latest release is 0.1.9.5. For more information please refer to [changelog.md](https://github.com/chenjiandongx/pyecharts/blob/master/changelog.md)  
+pyecharts works on Python2 and Python3. The latest release is 0.1.9.6. For more information please refer to [changelog.md](https://github.com/chenjiandongx/pyecharts/blob/master/changelog.md)  
 
 You can install it via pip
 ```
@@ -41,25 +41,8 @@ It will create a file named render.html in the root directory, open file with yo
 
 
 ## Working with pandas & numpy
-```python
-import pandas as pd
-import numpy as np
 
-from pyecharts import Bar
-
-index = pd.date_range('3/8/2017', periods=6, freq='M')
-df1 = pd.DataFrame(np.random.randn(6), index=index)
-df2 = pd.DataFrame(np.random.randn(6), index=index)
-
-dtvalue1 = [i[0] for i in df1.values]
-dtvalue2 = [i[0] for i in df2.values]
-
-bar = Bar('Bar chart', 'Profit and loss situation')
-bar.add('profit', df1.index, dtvalue1)
-bar.add('loss', df2.index,  dtvalue2)
-bar.render()
-```
-![usage-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/usage-1.png)
+![pandas_numpy](https://github.com/chenjiandongx/pyecharts/blob/master/images/pandas_numpy.png)
 
 
 ## working with Flask & Django
