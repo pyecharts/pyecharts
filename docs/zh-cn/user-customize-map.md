@@ -24,7 +24,7 @@
 然后呢，在你的代码里需要加下面的两行
 
 ```
-import pyexcel.constants as constants
+import pyecharts.constants as constants
 
 constants.CITY_NAME_PINYIN_MAP['太原'] = 'taiyuan_detail'
 ```
@@ -54,6 +54,12 @@ Copying: .../echarts/taiyuan_detailed.js -> /.../jupyter/nbextensions/echarts/ta
     To initialize this nbextension in the browser every time the notebook (or other app) loads:
 
           jupyter nbextension enable <the entry point>
+```
+
+你可以选择性的执行下面的语句。如果你已经装了0.1.9.7在你现在的python环境，就可以跳过
+
+```
+jupyter nbextension enable echarts/main
 ```
 
 然后，让我们检查以下是否已经装上了。请先运行Jupyter notebook，再打开这个链接：http://localhost:8889/nbextensions/echarts/taiyuan_details.js。 
