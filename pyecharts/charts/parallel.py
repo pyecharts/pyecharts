@@ -48,7 +48,7 @@ class Parallel(Base):
 
         :param name:
             Series name used for displaying in tooltip and filtering with legend,
-            or updaing data and configuration with setOption.
+            or updating data and configuration with setOption.
         :param data:
             data array of series, it is represented by a two-dimension array -> [[],[]]
         :param kwargs:
