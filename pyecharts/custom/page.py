@@ -8,7 +8,6 @@ from pyecharts.template import (
     produce_html_script_list)
 
 
-
 class Page(object):
 
     def __init__(self):

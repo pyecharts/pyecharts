@@ -43,7 +43,8 @@ class Overlap(object):
         :param series:
             series data
         """
-        _name, _series, _xaxis, _yaxis, is_add_xaxis, is_add_yaxis, _xaxis_index, _yaxis_index = series
+        (_name, _series, _xaxis, _yaxis, is_add_xaxis, is_add_yaxis,
+         _xaxis_index, _yaxis_index) = series
         for n in _name:
             self._chart._option.get('legend')[0].get('data').append(n)
         for s in _series:

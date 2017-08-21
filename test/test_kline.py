@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 
 from pyecharts import Kline
 
+
 def test_kline():
 
     # kline_0

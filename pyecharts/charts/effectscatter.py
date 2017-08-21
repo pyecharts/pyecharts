@@ -1,13 +1,16 @@
 #!/usr/bin/env python
-#coding=utf-8
+# coding=utf-8
 
 from pyecharts.charts.scatter import Scatter
 from pyecharts.option import get_all_options
 
+
 class EffectScatter(Scatter):
     """
     <<< EffectScatter chart >>>
-    The scatter graph with ripple animation. The special animation effect can visually highlights some data.
+
+    The scatter graph with ripple animation.
+    The special animation effect can visually highlights some data.
     """
     def __init__(self, title="", subtitle="", **kwargs):
         super(EffectScatter, self).__init__(title, subtitle, **kwargs)

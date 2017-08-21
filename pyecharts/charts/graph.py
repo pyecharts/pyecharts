@@ -1,12 +1,14 @@
 #!/usr/bin/env python
-#coding=utf-8
+# coding=utf-8
 
 from pyecharts.base import Base
 from pyecharts.option import get_all_options
 
+
 class Graph(Base):
     """
     <<< Graph chart >>>
+
     Graph is a diagram to represent nodes and the links connecting nodes.
     """
     def __init__(self, title="", subtitle="", **kwargs):
@@ -64,15 +66,17 @@ class Graph(Base):
         :param graph_edge_length:
             The distance between 2 nodes on edge. This distance is also affected by repulsion.
             It can be an array to represent the range of edge length.In this case edge with
-            larger value will be shorter, which means two nodes are closer. And edge with smaller value will be longer.
+            larger value will be shorter, which means two nodes are closer.
+            And edge with smaller value will be longer.
         :param graph_gravity:
             The gravity factor enforcing nodes approach to the center.
             The nodes will be closer to the center as the value becomes larger.
         :param graph_repulsion:
-            The repulsion factor between nodes. The repulsion will be stronger and the distance between 2 nodes
-            becomes further as this value becomes larger.
+            The repulsion factor between nodes. The repulsion will be stronger and the
+            distance between 2 nodes becomes further as this value becomes larger.
             It can be an array to represent the range of repulsion.
-            In this case larger value have larger repulsion and smaller value will have smaller repulsion.
+            In this case larger value have larger repulsion and smaller value
+            will have smaller repulsion.
         :param graph_edge_symbol:
             Symbol of two ends of edge line.
             For example: edgeSymbol: ['circle', 'arrow']
@@ -94,10 +98,14 @@ class Graph(Base):
             "name": name,
             "layout": graph_layout,
             "symbol": chart['symbol'],
-            "circular": {"rotateLabel": is_rotatelabel},
-            "force": {"repulsion": graph_repulsion,
-                      "edgeLength": graph_edge_length,
-                      "gravity": graph_gravity},
+            "circular": {
+                "rotateLabel": is_rotatelabel
+            },
+            "force": {
+                "repulsion": graph_repulsion,
+                "edgeLength": graph_edge_length,
+                "gravity": graph_gravity
+            },
             "label": chart['label'],
             "lineStyle": chart['line_style'],
             "roam": is_roam,
