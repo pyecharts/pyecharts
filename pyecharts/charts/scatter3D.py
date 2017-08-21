@@ -48,6 +48,8 @@ class Scatter3D(Base):
             "name": name,
             "data": data,
             "label": chart['label'],
-            "itemStyle": {"opacity": grid3d_opacity}
+            "itemStyle": {
+                "opacity": grid3d_opacity
+            }
         })
         self._legend_visualmap_colorlst(**kwargs)

@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 
 from pyecharts import HeatMap
 
+
 def test_heatmap():
 
     # heatmap_0

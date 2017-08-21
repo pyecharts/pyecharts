@@ -66,10 +66,14 @@ class Geo(Base):
             geo={
                 "map": maptype,
                 "label": {},
-                "itemStyle": {"normal": {
-                    "areaColor": geo_normal_color,
-                    "borderColor": border_color},
-                    "emphasis": {"areaColor": geo_emphasis_color}}
+                "itemStyle": {
+                    "normal": {
+                        "areaColor": geo_normal_color,
+                        "borderColor": border_color
+                    },
+                    "emphasis": {
+                        "areaColor": geo_emphasis_color
+                    }}
             })
         self._option.get('legend')[0].get('data').append(name)
 

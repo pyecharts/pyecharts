@@ -1,15 +1,19 @@
 #!/usr/bin/env python
-#coding=utf-8
+# coding=utf-8
 
 from pyecharts.base import Base
 from pyecharts.option import get_all_options
 
+
 class HeatMap(Base):
     """
     <<< HeatMap chart >>>
-    Heat map mainly use colors to represent values, which must be used along with visualMap component.
+
+    Heat map mainly use colors to represent values， which must be used along
+    with visualMap component.
     It can be used in either rectangular coordinate or geographic coordinate.
-    But the behaviour on them are quite different. Rectangular coordinate must have two catagories to use it.
+    But the behaviour on them are quite different. Rectangular coordinate
+    must have two catagories to use it.
     """
     def __init__(self, title="", subtitle="", **kwargs):
         super(HeatMap, self).__init__(title, subtitle, **kwargs)

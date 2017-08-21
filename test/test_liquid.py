@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 
 from pyecharts import Liquid
 
+
 def test_liquid():
 
     # liquid_0

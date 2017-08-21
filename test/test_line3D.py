@@ -4,7 +4,8 @@ from __future__ import unicode_literals
 
 from pyecharts import Line3D
 
-def test_line3D():
+
+def test_line3d():
 
     # line3D_0
     import math

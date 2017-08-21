@@ -1,12 +1,15 @@
 #!/usr/bin/env python
-#coding=utf-8
+# coding=utf-8
 
 from pyecharts.base import Base
+
 
 class Parallel(Base):
     """
     <<< Parallel chart >>>
-    Parallel Coordinates is a common way of visualizing high-dimensional geometry and analyzing multivariate data.
+
+    Parallel Coordinates is a common way of visualizing high-dimensional geometry and
+    analyzing multivariate data.
     """
     def __init__(self, title="", subtitle="", **kwargs):
         super(Parallel, self).__init__(title, subtitle, **kwargs)
@@ -51,7 +54,13 @@ class Parallel(Base):
         :param kwargs:
         :return:
         """
-        self._option.update(parallel={"left": "5%", "right": "13%", "bottom": "10%", "top": "20%"})
+        self._option.update(
+            parallel={
+                "left": "5%",
+                "right": "13%",
+                "bottom": "10%",
+                "top": "20%"
+            })
         self._option.get('legend')[0].get('data').append(name)
         self._option.get('series').append({
             "type": "parallel",

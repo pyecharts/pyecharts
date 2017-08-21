@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-#coding=utf-8
+# coding=utf-8
 from __future__ import unicode_literals
 
 import os
@@ -102,6 +102,11 @@ def produce_require_configuration(dependencies, jshost):
 
 
 def produce_html_script_list(dependencies):
+    """
+
+    :param dependencies:
+    :return:
+    """
     _d = ensure_echarts_is_in_the_front(dependencies)
     script_list = [
         '%s' % DEFAULT_JS_LIBRARIES.get(key, key)
@@ -110,9 +115,14 @@ def produce_html_script_list(dependencies):
 
 
 def ensure_echarts_is_in_the_front(dependencies):
-    # make sure echarts is the item in the list
-    # require(['echarts'....], function(ec) {..}) need it to be first
-    # but dependencies is a set so has no sequence
+    """
+    make sure echarts is the item in the list
+    require(['echarts'....], function(ec) {..}) need it to be first
+    but dependencies is a set so has no sequence
+
+    :param dependencies:
+    :return:
+    """
     if len(dependencies) > 1:
         dependencies.remove('echarts')
         dependencies = ['echarts'] + list(dependencies)

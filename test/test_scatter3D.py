@@ -4,7 +4,8 @@ from __future__ import unicode_literals
 
 from pyecharts import Scatter3D
 
-def test_scatter3D():
+
+def test_scatter3d():
 
     # scatter3D_0
     import random

@@ -1,12 +1,14 @@
 #!/usr/bin/env python
-#coding=utf-8
+# coding=utf-8
 
 from pyecharts.base import Base
 from pyecharts.option import get_all_options
 
+
 class Kline(Base):
     """
     <<< Kline(Candlestick) chart >>>
+
     Kline chart use red to imply increasing with red and decreasing with blue
     """
     def __init__(self, title="", subtitle="", **kwargs):
@@ -26,8 +28,10 @@ class Kline(Base):
         :param y_axis:
             data pf yAxis
             Data should be the two-dimensional array shown as follow. -> [[],[]]
-            Every data item (each line in the example above) represents a box, which contains 4 values. They are:
-            [open, close, lowest, highest]  (namely: [opening value, closing value, lowest value, highest value])
+            Every data item (each line in the example above) represents a box,
+            which contains 4 values.
+            They are: [open, close, lowest, highest]
+            (namely: [opening value, closing value, lowest value, highest value])
         :param kwargs:
         :return:
         """
