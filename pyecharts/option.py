@@ -642,6 +642,8 @@ def datazoom(is_datazoom_show=False,
              datazoom_type='slider',
              datazoom_range=None,
              datazoom_orient='horizontal',
+             datazoom_xaxis_index=None,
+             datazoom_yaxis_index=None,
              **kwargs):
     """
 
@@ -655,6 +657,12 @@ def datazoom(is_datazoom_show=False,
         Specify whether the layout of dataZoom component is horizontal or vertical.
         'horizontal' or 'vertical'.What's more,it indicates whether the horizontal
         axis or vertical axis is controlled.by default in catesian coordinate system.
+    :param datazoom_xaxis_index:
+        Specify which xAxis is/are controlled by the dataZoom-inside when
+        catesian coordinate system is used.
+    :param datazoom_yaxis_index:
+        Specify which yAxis is/are controlled by the dataZoom-inside when
+        catesian coordinate system is used.
     :param kwargs:
     :return:
     """
@@ -669,7 +677,9 @@ def datazoom(is_datazoom_show=False,
         "type": datazoom_type,
         "start": _min,
         "end": _max,
-        "orient": datazoom_orient
+        "orient": datazoom_orient,
+        "xAxisIndex": datazoom_xaxis_index,
+        "yAxisIndex": datazoom_yaxis_index
     }
     return [_datazoom]
 
