@@ -1,12 +1,14 @@
 #!/usr/bin/env python
-#coding=utf-8
+# coding=utf-8
 
 from pyecharts.base import Base
 from pyecharts.option import get_all_options
 
+
 class Radar(Base):
     """
     <<< Radar chart >>>
+
     Radar chart is mainly used to show multi-variable data,
     such as the analysis of a football player's varied attributes. It relies radar component.
     """
@@ -24,10 +26,13 @@ class Radar(Base):
             The default radar map indicator, used to specify multiple dimensions in the radar map,
             will process the data into a dictionary of {name: xx, value: xx}
         :param c_schema:
-            Indicator of radar chart, which is used to assign multiple variables(dimensions) in radar chart.
+            Indicator of radar chart, which is used to assign multiple variables(dimensions)
+            in radar chart.
             name: Indicator's name.
-            min: The maximum value of indicator. It is an optional configuration, but we recommend to set it manually.
-            max: The maximum value of indicator. It is an optional configuration, but we recommend to set it manually.
+            min: The maximum value of indicator.
+                It is an optional configuration, but we recommend to set it manually.
+            max: The maximum value of indicator.
+                It is an optional configuration, but we recommend to set it manually.
         :param shape:
             Radar render type, in which 'polygon' and 'circle' are supported.
         :param rader_text_color:
@@ -75,8 +80,13 @@ class Radar(Base):
             "name": name,
             "data": value,
             "symbol": chart['symbol'],
-            "itemStyle": {"normal": {"color": item_color}},
+            "itemStyle": {
+                "normal": {
+                    "color": item_color
+                }},
             "lineStyle": chart['line_style'],
-            "areaStyle": {"normal": chart['area_style']},
+            "areaStyle": {
+                "normal": chart['area_style']
+            },
         })
         self._legend_visualmap_colorlst(**kwargs)

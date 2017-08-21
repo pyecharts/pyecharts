@@ -1,10 +1,11 @@
 #!/usr/bin/env python
-#coding=utf-8
+# coding=utf-8
 from __future__ import unicode_literals
 
 import random
 
 fs = []
+
 
 def collectfuncs(func):
     fs.append(func)
@@ -20,9 +21,10 @@ def label(type=None,
           label_text_size=12,
           label_formatter=None,
           **kwargs):
-    """ Text label of , to explain some data information about graphic item like value, name and so on.
-        In ECharts 3, to make the configuration structure flatter,
-        labelis taken to be at the same level with itemStyle, and has two status normal and emphasis as itemStyle does.
+    """ Text label of , to explain some data information about graphic item like value,
+        name and so on.In ECharts 3, to make the configuration structure flatter,
+        labelis taken to be at the same level with itemStyle, and has two status
+        normal and emphasis as itemStyle does.
 
     :param type:
         Chart type
@@ -37,16 +39,23 @@ def label(type=None,
     :param label_text_size:
         Label font size.
     :param label_formatter:
-        The template variables are {a}, {b}, {c}, {d} and {e}, which stands for series name, data name
-        and data value and ect. When trigger is set to be 'axis', there may be data from multiple series.
+        The template variables are {a}, {b}, {c}, {d} and {e}, which stands for series name,
+        data name and data value and ect. When trigger is set to be 'axis',
+        there may be data from multiple series.
         In this time, series index can be refered as {a0}, {a1}, or {a2}.
         {a}, {b}, {c}, {d} have different meanings for different series types:
-        Line: (area) charts, bar (column) charts,
-              K charts: {a} for series name, {b} for category name, {c} for data value, {d} for none;
-        Scatter: (bubble) charts: {a} for series name, {b} for data name, {c} for data value, {d} for none;
-        Map: {a} for series name, {b} for area name, {c} for merging data, {d} for none;
-        Pie: charts, gauge charts, funnel charts: {a} for series name,
-             {b} for data item name, {c} for data value, {d} for percentage.
+        Line:
+            (area) charts, bar (column) charts,
+              K charts:
+                {a} for series name, {b} for category name, {c} for data value, {d} for none;
+        Scatter:
+            (bubble) charts:
+                {a} for series name, {b} for data name, {c} for data value, {d} for none;
+        Map:
+            {a} for series name, {b} for area name, {c} for merging data, {d} for none;
+        Pie:
+            charts, gauge charts, funnel charts: {a} for series name,
+            {b} for data item name, {c} for data value, {d} for percentage.
     :param kwargs:
     :return:
     """
@@ -105,9 +114,11 @@ def line_style(line_width=1,
     :param line_width:
         Line width.
     :param line_opacity:
-        Opacity of the component. Supports value from 0 to 1, and the component will not be drawn when set to 0.
+        Opacity of the component.
+        Supports value from 0 to 1, and the component will not be drawn when set to 0.
     :param line_curve:
-        Edge curvature, which supports value from 0 to 1. The larger the value, the greater the curvature. -> Graph
+        Edge curvature, which supports value from 0 to 1.
+        The larger the value, the greater the curvature. -> Graph
     :param line_type:
         Line type,it can be 'solid', 'dashed', 'dotted'
     :param kwargs:
@@ -180,7 +191,8 @@ def area_style(flag=False,
     :param flag:
         chart type flag
     :param area_opacity:
-        Opacity of the component. Supports value from 0 to 1, and the component will not be drawn when set to 0.
+        Opacity of the component.
+        Supports value from 0 to 1, and the component will not be drawn when set to 0.
     :param area_color:
         Fill color.
     :param kwargs:
@@ -238,7 +250,8 @@ def xy_axis(type=None,
     :param xaxis_name_pos:
         Location of xAxis name.It can be 'start'，'middle'，'end'
     :param xaxis_rotate:
-        Rotation degree of xaxis label, which is especially useful when there is no enough space for category axis.
+        Rotation degree of xaxis label, which is especially useful when
+        there is no enough space for category axis.
         Rotation degree is from -90 to 90.
     :param xaxis_min:
         The minimun value of xaxis.
@@ -248,19 +261,25 @@ def xy_axis(type=None,
         The margin between the axis label and the xaxis line.
     :param xaxis_type:
         Type of xaxis
-        'value' Numerical axis, suitable for continuous data.
-        'category' Category axis, suitable for discrete category data. Data should only be set via data for this type.
-        'log' Log axis, suitable for log data.
+        'value':
+            Numerical axis, suitable for continuous data.
+        'category':
+            Category axis, suitable for discrete category data.
+            Data should only be set via data for this type.
+        'log':
+            Log axis, suitable for log data.
     :param xaxis_interval:
         The display interval of the axis scale label is valid in the category xaxis.
         By default, labels are displayed using labels that do not overlap the labels
         Set to 0 to force all labels to be displayed
-        and label is one by one if setting as 1; If 2, it will be one label separates from each other, and so on.
+        and label is one by one if setting as 1; If 2,
+        it will be one label separates from each other, and so on.
     :param yaxis_interval:
         The display interval of the axis scale label is valid in the category yaxis.
         By default, labels are displayed using labels that do not overlap the labels
         Set to 0 to force all labels to be displayed
-        and label is one by one if setting as 1; If 2, it will be one label separates from each other, and so on.
+        and label is one by one if setting as 1; If 2,
+        it will be one label separates from each other, and so on.
     :param yaxis_name:
         Name of yAxis
     :param yaxis_name_size:
@@ -270,7 +289,8 @@ def xy_axis(type=None,
     :param yaxis_name_pos:
         Location of yAxis name.It can be 'start'，'middle'，'end'
     :param yaxis_rotate:
-        Rotation degree of yaxis label, which is especially useful when there is no enough space for category axis.
+        Rotation degree of yaxis label, which is especially useful
+        when there is no enough space for category axis.
         Rotation degree is from -90 to 90.
     :param yaxis_margin:
         The margin between the axis label and the yaxis line.
@@ -280,9 +300,13 @@ def xy_axis(type=None,
         The maximun value of yaxis.
     :param yaxis_type:
         Type of yaxis
-        'value' Numerical axis, suitable for continuous data.
-        'category' Category axis, suitable for discrete category data. Data should only be set via data for this type.
-        'log' Log axis, suitable for log data.
+        'value':
+            Numerical axis, suitable for continuous data.
+        'category':
+            Category axis, suitable for discrete category data.
+            Data should only be set via data for this type.
+        'log':
+            Log axis, suitable for log data.
     :param is_convert:
         It specifies whether to convert xAxis and yAxis.
     :param yaxis_formatter:
@@ -484,10 +508,14 @@ def visual_map(visual_type='color',
 
     :param visual_type:
         visual map type, 'color' or 'size'
-        color: For visual channel color, array is used, like: ['#333', '#78ab23', 'blue'],
-        which means a color ribbon is formed based on the three color stops,and dataValues will be mapped to the ribbon.
-        size: For visual channel size, array is used, like: [20, 50],
-        which means a size ribbon is formed based on the two value stops, and dataValues will be mapped to the ribbon.
+        color:
+            For visual channel color, array is used, like: ['#333', '#78ab23', 'blue'],
+            which means a color ribbon is formed based on the three color stops,
+            and dataValues will be mapped to the ribbon.
+        size:
+            For visual channel size, array is used, like: [20, 50],
+            which means a size ribbon is formed based on the two value stops,
+            and dataValues will be mapped to the ribbon.
     :param visual_range:
         pecify the min and max dataValue for the visualMap component.
     :param visual_text_color:
@@ -624,9 +652,9 @@ def datazoom(is_datazoom_show=False,
     :param datazoom_range:
         The range percentage of the window out of the data extent, in the range of 0 ~ 100.
     :param datazoom_orient:
-        Specify whether the layout of dataZoom component is horizontal or vertical.'horizontal' or 'vertical'
-        What's more,it indicates whether the horizontal axis or vertical axis is controlled
-        by default in catesian coordinate system.
+        Specify whether the layout of dataZoom component is horizontal or vertical.
+        'horizontal' or 'vertical'.What's more,it indicates whether the horizontal
+        axis or vertical axis is controlled.by default in catesian coordinate system.
     :param kwargs:
     :return:
     """
@@ -767,7 +795,8 @@ def xaxis3D(xaxis3d_type=None,
         The display interval of the axis scale label is valid in the category 3d xaxis.
         By default, labels are displayed using labels that do not overlap the labels
         Set to 0 to force all labels to be displayed
-        and label is one by one if setting as 1; If 2, it will be one label separates from each other, and so on.
+        and label is one by one if setting as 1; If 2,
+        t will be one label separates from each other, and so on.
     :param xaxis3d_margin:
         The margin between the axis label and the 3d xaxis line.
     :return:
@@ -815,7 +844,8 @@ def yaxis3D(yaxis3d_type=None,
         The display interval of the axis scale label is valid in the category 3d yaxis.
         By default, labels are displayed using labels that do not overlap the labels
         Set to 0 to force all labels to be displayed
-        and label is one by one if setting as 1; If 2, it will be one label separates from each other, and so on.
+        and label is one by one if setting as 1;
+        If 2, it will be one label separates from each other, and so on.
     :param yaxis3d_margin:
         The margin between the axis label and the 3d yaxis line.
     :return:
@@ -912,8 +942,9 @@ def tooltip(type=None,
             'cross': crosshair indicator, which is actually the shortcut of enable two
                      axisPointers of two orthometric axes.
     :param tooltip_formatter:
-        The template variables are {a}, {b}, {c}, {d} and {e}, which stands for series name, data name
-        and data value and ect. When trigger is set to be 'axis', there may be data from multiple series.
+        The template variables are {a}, {b}, {c}, {d} and {e},
+        which stands for series name, data name and data value and ect.
+        When trigger is set to be 'axis', there may be data from multiple series.
         In this time, series index can be refered as {a0}, {a1}, or {a2}.
     :param tooltip_text_color:
         text color.

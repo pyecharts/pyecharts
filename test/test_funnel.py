@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 
 from pyecharts import Funnel
 
+
 def test_funnel():
 
     # funnel_0

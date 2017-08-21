@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 
 from pyecharts import Parallel
 
+
 def test_parallel():
 
     # parallel_0

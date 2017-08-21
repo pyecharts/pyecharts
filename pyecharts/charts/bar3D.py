@@ -36,9 +36,12 @@ class Bar3D(Base):
             opacity of gird3D item
         :param grid3d_shading:
             3D graphics coloring effect
-            'color': Only show color, not affected by lighting and other factors.
-            'lambert': Through the classic lambert coloring to show the light and shade.
-            'realistic': Realistic rendering.
+            'color':
+                Only show color, not affected by lighting and other factors.
+            'lambert':
+                Through the classic lambert coloring to show the light and shade.
+            'realistic':
+                ealistic rendering.
         :param kwargs:
         :return:
         """

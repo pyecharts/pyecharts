@@ -2,7 +2,6 @@
 #coding=utf-8
 
 from setuptools import setup
-from setuptools.command.install import install
 
 try:
     from jupyterpip import cmdclass

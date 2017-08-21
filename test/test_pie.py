@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 
 from pyecharts import Pie
 
+
 def test_pie():
 
     # pie_0

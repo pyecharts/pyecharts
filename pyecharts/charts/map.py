@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-#coding=utf-8
+# coding=utf-8
 
 from pyecharts.base import Base
 from pyecharts.option import get_all_options
@@ -9,6 +9,7 @@ from pyecharts.constants import CITY_NAME_PINYIN_MAP
 class Map(Base):
     """
     <<< Map chart >>>
+
     Map is maily used in the visulization of geographic area data,
     which can be used with visualMap component to visualize the datas such as
     population distribution density in diffrent areas.
