@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 from pyecharts import Radar
 
+
 def test_radar():
 
     # radar_0

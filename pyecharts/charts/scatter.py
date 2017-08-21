@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-#coding=utf-8
+# coding=utf-8
 
 from PIL import Image
 
@@ -10,9 +10,13 @@ from pyecharts.option import get_all_options
 class Scatter(Base):
     """
     <<< Scatter chart >>>
-    The scatter chart in rectangular coordinate could be used to present the relation between x and y.
-    If data have multiple dimensions, the values of the other dimensions can be visualized through symbol with
-    various sizes and colors, which becomes a bubble chart. These can be done by using with visualMap component.
+
+    The scatter chart in rectangular coordinate could be used to present the
+    relation between x and y.
+    If data have multiple dimensions, the values of the other dimensions can
+    be visualized through symbol with
+    various sizes and colors, which becomes a bubble chart.
+    These can be done by using with visualMap component.
     """
     def __init__(self, title="", subtitle="", **kwargs):
         super(Scatter, self).__init__(title, subtitle, **kwargs)

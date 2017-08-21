@@ -1,4 +1,8 @@
+#!/usr/bin/env python
+# coding=utf-8
+
 import pprint
+
 
 class Timeline(object):
 
@@ -28,7 +32,8 @@ class Timeline(object):
             Indicates play speed (gap time between two state), whose unit is millisecond.
         :param timeline_symbol:
             Symbol of timeline.
-            Icon types provided by ECharts includes 'circle', 'rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow'
+            Icon types provided by ECharts includes 'circle', 'rect', 'roundRect', 'triangle',
+            'diamond', 'pin', 'arrow'
         :param timeline_symbol_size:
             timeline symbol size.
             It can be set to single numbers like 10, or use an array to represent width and height.

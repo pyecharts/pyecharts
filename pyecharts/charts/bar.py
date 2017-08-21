@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-#coding=utf-8
+# coding=utf-8
 
 from pyecharts.base import Base
 from pyecharts.option import get_all_options
@@ -8,6 +8,7 @@ from pyecharts.option import get_all_options
 class Bar(Base):
     """
     <<< Bar chart >>>
+
     Bar chart shows different data through the height of a bar,
     which is used in rectangular coordinate with at least 1 category axis.
     """

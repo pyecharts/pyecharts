@@ -1,7 +1,8 @@
 #!/usr/bin/env python
-#coding=utf-8
+# coding=utf-8
 
 from pyecharts.base import Base
+
 
 class Gauge(Base):
     """
@@ -56,6 +57,9 @@ class Gauge(Base):
             "max": _max,
             "startAngle": _start,
             "endAngle": _end,
-            "data": [{"value": value, "name": attr}]
+            "data": [{
+                "value": value,
+                "name": attr
+            }]
         })
         self._legend_visualmap_colorlst(**kwargs)

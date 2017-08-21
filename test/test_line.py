@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 
 from pyecharts import Line
 
+
 def test_line():
 
     # line_0

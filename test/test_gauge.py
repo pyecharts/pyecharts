@@ -4,7 +4,8 @@ from __future__ import unicode_literals
 
 from pyecharts import Gauge
 
-def test_gague():
+
+def test_gauge():
 
     # gauge_0
     gauge = Gauge("仪表盘示例")

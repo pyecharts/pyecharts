@@ -3,6 +3,7 @@
 
 from pyecharts.option import grid
 
+
 class Grid(object):
 
     def __init__(self):
@@ -42,7 +43,14 @@ class Grid(object):
                 for _ in range(len(self._chart._option.get('series'))):
                     self._chart._option.get('grid').append(_grid)
         else:
-            _index, _index_once, _xaxis, _yaxis, _legned, _title = self.__custom(self.__get_series(chart))
+            _series = (
+                chart._option.get('series'),
+                chart._option.get('xAxis', None),
+                chart._option.get('yAxis', None),
+                chart._option.get('legend')[0],
+                chart._option.get('title')[0]
+            )
+            _index, _index_once, _xaxis, _yaxis, _legned, _title = self.__custom(_series)
             self._chart._option.get('legend').append(_legned)
             self._chart._option.get('title').append(_title)
             if _xaxis and _yaxis is not None:
@@ -68,17 +76,6 @@ class Grid(object):
             for _ in range(_index_once):
                 self._chart._option.get('grid').append(_grid)
 
-    def __get_series(self, chart):
-        """ Get chart series data """
-        return (
-            chart._option.get('legend')[0].get('data'),
-            chart._option.get('series'),
-            chart._option.get('xAxis', None),
-            chart._option.get('yAxis', None),
-            chart._option.get('legend')[0],
-            chart._option.get('title')[0]
-        )
-
     def __custom(self, series):
         """
 
@@ -86,7 +83,7 @@ class Grid(object):
             series data
         :return:
         """
-        _name, _series, _xaxis, _yaxis, _legend, _title = series
+        _series, _xaxis, _yaxis, _legend, _title = series
         for s in _series:
             self._chart._option.get('series').append(s)
         return len(self._chart._option.get('series')), len(_series), _xaxis, _yaxis, _legend, _title

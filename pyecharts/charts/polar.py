@@ -1,13 +1,16 @@
 #!/usr/bin/env python
-#coding=utf-8
+# coding=utf-8
 
 from pyecharts.base import Base
 from pyecharts.option import get_all_options
 
+
 class Polar(Base):
     """
     <<< Polar component >>>
-    Polar coordinate can be used in scatter and line chart. Every polar coordinate has an angleAxis and a radiusAxis.
+
+    Polar coordinate can be used in scatter and line chart.
+    Every polar coordinate has an angleAxis and a radiusAxis.
     """
     def __init__(self, title="", subtitle="", **kwargs):
         super(Polar, self).__init__(title, subtitle, **kwargs)
@@ -49,14 +52,16 @@ class Polar(Base):
             Starting angle of axis. 90 degrees by default, standing for top position of center.
             0 degree stands for right position of center.
         :param rotate_step:
-            Rotation degree of axis label, which is especially useful when there is no enough space for category axis.
+            Rotation degree of axis label, which is especially useful when
+            there is no enough space for category axis.
             Rotation degree is from -90 to 90.
         :param boundary_gap:
             The boundary gap on both sides of a coordinate axis.
             The setting and behavior of category axes and non-category axes are different.
             The boundaryGap of category axis can be set to either true or false.
-            Default value is set to be true, in which case axisTick is served only as a separation line,
-            and labels and data appear only in the center part of two axis ticks, which is called band.
+            Default value is set to be true, in which case axisTick is served
+            only as a separation line, and labels and data appear only in the
+            center part of two axis ticks, which is called band.
         :param is_clockwise:
             Whether the positive position of axis is in clockwise. True for clockwise by default.
         :param is_stack:
@@ -79,7 +84,9 @@ class Polar(Base):
         if axis_range:
             if len(axis_range) == 2:
                 _amin, _amax = axis_range
-        _area_style = {"normal": chart['area_style']}
+        _area_style = {
+            "normal": chart['area_style']
+        }
         if kwargs.get('area_color', None) is None:
             _area_style = None
 
@@ -94,6 +101,7 @@ class Polar(Base):
                 "label": chart['label'],
                 "areaStyle": _area_style
             })
+
         elif type == "effectScatter":
             self._option.get('series').append({
                 "type": type,
@@ -106,6 +114,7 @@ class Polar(Base):
                 "data": data,
                 "label": chart['label'],
             })
+
         elif type == "barRadius":
             self._option.get('series').append({
                 "type": "bar",
@@ -121,6 +130,7 @@ class Polar(Base):
                     "data": radius_data,
                     "z": 50,
                 })
+
         elif type == "barAngle":
             self._option.get('series').append({
                 "type": "bar",

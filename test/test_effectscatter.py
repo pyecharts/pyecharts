@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 
 from pyecharts import EffectScatter
 
+
 def test_effectscatter():
 
     # effectSactter_0

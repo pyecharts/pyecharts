@@ -29,7 +29,7 @@ import pyecharts.constants as constants
 constants.CITY_NAME_PINYIN_MAP['太原'] = 'taiyuan_detail'
 ```
 
-请注意格式：关键词是“太原”，对应的文件名是“taiyuan_detail"， 并且不加'js'后缀。下面是所有的代码
+请注意格式：关键词是“太原”，对应的文件名是"taiyuan_detail"， 并且不加'js'后缀。下面是所有的代码
 
 ```python
 from pyecharts import Map
@@ -44,7 +44,7 @@ map.add("", attr, value, maptype='太原', is_visualmap=True, visual_text_color=
 map.render()
 ```
 
-如果只是使用 render() 生成 .html 文件的话到这里就可以了。还想要在 jupyter notebook 上展示地图的话，还需要下面一个步骤。  
+如果只是使用 render() 生成 .html 文件的话到这里就可以了。还想要在 jupyter-notebook 上展示地图的话，还需要下面一个步骤。
 
 ```
 $ jupyter nbextensions install  [python lib dir]/site-packages/pyecharts/templates/js/echarts
@@ -56,17 +56,17 @@ Copying: .../echarts/taiyuan_detailed.js -> /.../jupyter/nbextensions/echarts/ta
           jupyter nbextension enable <the entry point>
 ```
 
-你可以选择性的执行下面的语句。如果你已经装了0.1.9.7在你现在的python环境，就可以跳过
+你可以选择性的执行下面的语句。如果你已经装了 0.1.9.7 在你现在的 Python 环境，就可以跳过
 
 ```
 jupyter nbextension enable echarts/main
 ```
 
-然后，让我们检查以下是否已经装上了。请先运行Jupyter notebook，再打开这个链接：http://localhost:8889/nbextensions/echarts/taiyuan_details.js。 
+然后，让我们检查以下是否已经装上了。请先运行 Jupyter-notebook，再打开这个链接：http://localhost:8889/nbextensions/echarts/taiyuan_details.js。
 如果能下载到，那就祝贺你，成功了。否则，请检查你的步骤。
 
 ![customize-map-2](https://github.com/chenjiandongx/pyecharts/blob/master/images/customize-map-2.png)
 
 ## 如何把手动加的地图变成自动的
 
-如果用户期望pyecharts支持自己的地图，请发请求然后再发来改动。
+如果用户期望 pyecharts 支持自己的地图，请发请求然后再发来改动。

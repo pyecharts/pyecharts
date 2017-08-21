@@ -3,6 +3,7 @@
 
 from pyecharts import WordCloud
 
+
 def test_wordcloud():
 
     # wordcloud_0

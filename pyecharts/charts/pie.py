@@ -1,12 +1,14 @@
 #!/usr/bin/env python
-#coding=utf-8
+# coding=utf-8
 
 from pyecharts.base import Base
 from pyecharts.option import get_all_options
 
+
 class Pie(Base):
     """
     <<< Pie chart >>>
+
     The pie chart is mainly used for showing proportion of different categories.
     Each arc length represents the proportion of data quantity.
     """
@@ -37,12 +39,16 @@ class Pie(Base):
         :param center:
             Center position of Pie chart, the first of which is the horizontal position,
             and the second is the vertical position.
-            Percentage is supported. When set in percentage, the item is relative to the container width,
-            and the second item to the height.
+            Percentage is supported. When set in percentage, the item is relative to the
+            container width, and the second item to the height.
         :param rosetype:
-            Whether to show as Nightingale chart, which distinguishs data through radius. There are 2 optional modes:
-            'radius' Use central angle to show the percentage of data, radius to show data size.
-            'area' All the sectors will share the same central angle, the data size is shown only through radiuses.
+            Whether to show as Nightingale chart, which distinguishs data through radius.
+            There are 2 optional modes:
+            'radius'
+                Use central angle to show the percentage of data, radius to show data size.
+            'area'
+                All the sectors will share the same central angle, the data size is shown
+                only through radiuses.
         :param kwargs:
         """
         kwargs.update(type="pie")
