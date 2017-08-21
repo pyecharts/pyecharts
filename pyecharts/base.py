@@ -113,6 +113,8 @@ class Base(object):
             datazoom_type=None,
             datazoom_range=None,
             datazoom_orient=None,
+            datazoom_xaxis_index=None,
+            datazoom_yaxis_index=None,
             effect_brushtype=None,
             effect_period=None,
             effect_scale=None,
