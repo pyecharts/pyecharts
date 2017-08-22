@@ -120,6 +120,40 @@ $ jupyter nbextensions install echarts --user
 $ jupyter nbextension uninstall echarts --user
 ```
 
+#### jupyter-notebook输出问题
+
+自0.1.9.7起，pyecharts已经进入全部离线模式，也就是没有网络，也能画图。jupyter notebook输出后，你的notebook离开了jupyter环境，图片就不能显示了。
+为了解决这个问题，再画图之前，你可以多加两个语句：
+
+```python
+...
+from pyecharts import online
+
+online()
+...
+```
+
+这样，所有的脚本会从http://chfw.github.io/jupyter-echarts/echarts下载。如果你联不上github, 你
+可以先把https://github.com/chfw/jupyter-echarts克隆一下。然后在你自己的服务器上，把整个
+echarts挂上去。比如，我可以这样简单地做一下：
+
+```
+$ cd jupyter-echarts/echarts
+$ python -m http.server # for python 2, use python -m SimpleHTTPServer
+Serving HTTP on 0.0.0.0 port 8000 ...
+```
+
+然后，再把本地服务器加进前面的语句：
+
+```python
+...
+from pyecharts import online
+
+online(host="http://localhost:8000)
+...
+```
+
+
 ### Python2 编码问题
 默认的编码类型为 UTF-8，在 Python3 中是没什么问题的，Python3 对中文的支持好很多。但是在 Python2 中，请应用下面的语句，保证没有编码问题:
 ```

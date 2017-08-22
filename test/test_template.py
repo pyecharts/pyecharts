@@ -2,6 +2,7 @@
 # coding=utf-8
 from __future__ import unicode_literals
 
+
 from nose.tools import eq_, raises
 from pyecharts.template import (
     freeze_js,
