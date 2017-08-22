@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-#coding=utf-8
+# coding=utf-8
 
 from pyecharts._version import __version__, __author__
 
@@ -33,3 +33,6 @@ from pyecharts.custom.timeline import Timeline
 
 # version
 from pyecharts._version import __version__
+
+# misc
+from pyecharts.template import online
