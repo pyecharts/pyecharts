@@ -1,6 +1,11 @@
 from __future__ import unicode_literals
+import math
+
 from django.http import HttpResponse
 from django.template import loader
+from pyecharts import Line3D
+
+from pyecharts.constants import DEFAULT_HOST
 
 
 def index(request):
@@ -8,16 +13,13 @@ def index(request):
     l3d = line3d()
     context = dict(
         myechart=l3d.render_embed(),
-        host="https://chfw.github.io/jupyter-echarts",
+        host=DEFAULT_HOST,
         script_list=l3d.get_js_dependencies()
     )
     return HttpResponse(template.render(context, request))
 
 
 def line3d():
-    from pyecharts import Line3D
-
-    import math
     _data = []
     for t in range(0, 25000):
         _t = t / 1000
