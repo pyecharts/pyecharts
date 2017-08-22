@@ -9,7 +9,7 @@ app = Flask(__name__)
 @app.route("/")
 def hello():
     s3d = scatter3d()
-    script_host = "https://jupyter-echarts.github.io/"
+    script_host = "https://chfw.github.io/jupyter-echarts"
     return render_template('pyecharts.html',
                            myechart=s3d.render_embed(),
                            host=script_host,
