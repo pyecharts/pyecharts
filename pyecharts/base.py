@@ -331,6 +331,12 @@ class Base(object):
                           myWidth=self._width, myHeight=self._height)
         return html
 
+    def get_js_dependencies(self):
+        """
+        Declare its javascript dependencies for embedding purpose
+        """
+        return template.produce_html_script_list(self._js_dependencies)
+
     def render(self, path="render.html"):
         """ Render the options dict, generate the html file
 
