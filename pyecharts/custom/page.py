@@ -54,6 +54,13 @@ class Page(object):
             chart_content += chart.render_embed()
         return chart_content
 
+    def get_js_dependencies(self):
+        """
+        Declare its javascript dependencies for embedding purpose
+        """
+        unordered_js_dependencies = self._merge_dependencies()
+        return produce_html_script_list(unordered_js_dependencies)
+
     def _repr_html_(self):
         """
 
