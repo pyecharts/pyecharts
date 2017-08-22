@@ -2,7 +2,7 @@
 # coding=utf-8
 
 from pyecharts import template
-from pyecharts.constants import DEFAULT_HOST
+import pyecharts.constants as constants
 from pyecharts.template import (
     produce_require_configuration,
     produce_html_script_list)
@@ -10,9 +10,9 @@ from pyecharts.template import (
 
 class Page(object):
 
-    def __init__(self):
+    def __init__(self, jshost=None):
         self.__charts = []
-        self._jshost = DEFAULT_HOST
+        self._jshost = jshost if jshost else constants.CONFIGURATION['HOST']
 
     def add(self, achart_or_charts):
         """

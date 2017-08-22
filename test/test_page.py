@@ -7,7 +7,8 @@ import codecs
 from pyecharts import (
     Bar, Scatter3D, Line, Pie, Map,
     Kline, Radar, WordCloud, Liquid)
-from pyecharts import Page
+from pyecharts import Page, online
+import pyecharts.constants as constants
 
 
 def create_three():

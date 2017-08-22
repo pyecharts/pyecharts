@@ -23,7 +23,8 @@ class Base(object):
                  subtitle_color="#aaa",
                  title_text_size=18,
                  subtitle_text_size=12,
-                 background_color="#fff"):
+                 background_color="#fff",
+                 jshost=None):
         """
 
         :param title:
@@ -98,7 +99,7 @@ class Base(object):
             legend=[{"data": []}],
             backgroundColor=background_color
         )
-        self._jshost = constants.DEFAULT_HOST
+        self._jshost = jshost if jshost else constants.CONFIGURATION['HOST']
         self._js_dependencies = {'echarts'}
         self._chart_id = uuid.uuid4().hex
 
