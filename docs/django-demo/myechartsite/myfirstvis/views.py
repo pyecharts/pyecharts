@@ -8,7 +8,7 @@ def index(request):
     l3d = line3d()
     context = dict(
         myechart=l3d.render_embed(),
-        host="https://jupyter-echarts.github.io/",
+        host="https://chfw.github.io/jupyter-echarts",
         script_list=l3d.get_js_dependencies()
     )
     return HttpResponse(template.render(context, request))
