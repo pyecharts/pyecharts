@@ -15,7 +15,7 @@ $ mkdir templates
 Please save the following template as pyecharts.html in `templates` folder
 
 ```html
-	<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 
 <head>
