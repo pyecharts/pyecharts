@@ -105,7 +105,7 @@ myfirstvis 目录
 
 
 ```html
-	<!-- myfirstvis/templates/pyecharts.html -->
+<!-- myfirstvis/templates/pyecharts.html -->
 <!DOCTYPE html>
 <html>
 
