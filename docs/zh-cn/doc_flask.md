@@ -18,7 +18,7 @@ $ mkdir templates
 将下面 html 模板代码保存为 pyecharts.html 文件并移至上一步新建的 templates 文件夹中。
 
 ```html
-	<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 
 <head>
