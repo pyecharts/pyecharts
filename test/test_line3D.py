@@ -24,7 +24,6 @@ def test_line3d():
     line3d.render()
 
     # line3D_1
-    import math
     _data = []
     for t in range(0, 25000):
         _t = t / 1000
