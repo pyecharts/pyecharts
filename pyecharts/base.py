@@ -60,8 +60,11 @@ class Base(object):
         :param background_color:
             Background color of title, which is transparent by default.
             Color can be represented in RGB, for example 'rgb(128, 128, 128)'.
-            RGBA can be used when you need alpha channel, for example 'rgba(128, 128, 128, 0.5)'.
+            RGBA can be used when you need alpha channel,
+            for example 'rgba(128, 128, 128, 0.5)'.
             You may also use hexadecimal format, for example '#ccc'.
+        :param jshost:
+            custom javascript host for the particular chart only
         """
         self._option = {}
         self._width, self._height = width, height
