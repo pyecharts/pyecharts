@@ -9,8 +9,8 @@ class Bar(Base):
     """
     <<< Bar chart >>>
 
-    Bar chart shows different data through the height of a bar,
-    which is used in rectangular coordinate with at least 1 category axis.
+    Bar chart shows different data through the height of a bar, which is used in
+    rectangular coordinate with at least 1 category axis.
     """
 
     def __init__(self, title="", subtitle="", **kwargs):
