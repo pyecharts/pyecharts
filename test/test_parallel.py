@@ -25,7 +25,6 @@ def test_parallel():
     parallel = Parallel("平行坐标系-默认指示器")
     parallel.config(schema)
     parallel.add("parallel", data, is_random=True)
-    parallel.show_config()
     parallel.render()
 
     # parallel_1
@@ -37,7 +36,8 @@ def test_parallel():
         {"dim": 4, "name": "CO"},
         {"dim": 5, "name": "NO2"},
         {"dim": 6, "name": "CO2"},
-        {"dim": 7, "name": "等级", "type": "category", "data": ['优', '良', '轻度污染', '中度污染', '重度污染', '严重污染']}
+        {"dim": 7, "name": "等级",
+         "type": "category", "data": ['优', '良', '轻度污染', '中度污染', '重度污染', '严重污染']}
     ]
     data = [
         [1, 91, 45, 125, 0.82, 34, 23, "良"],
@@ -58,5 +58,4 @@ def test_parallel():
     parallel = Parallel("平行坐标系-用户自定义指示器")
     parallel.config(c_schema=c_schema)
     parallel.add("parallel", data)
-    parallel.show_config()
     parallel.render()

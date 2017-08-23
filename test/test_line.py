@@ -14,7 +14,6 @@ def test_line():
     line = Line("折线图示例")
     line.add("商家A", attr, v1, mark_point=["average"])
     line.add("商家B", attr, v2, is_smooth=True, mark_line=["max", "average"])
-    line.show_config()
     line.render()
 
     # line_0_1
@@ -23,27 +22,23 @@ def test_line():
              mark_point_symbol='diamond', mark_point_textcolor='#40ff27')
     line.add("商家B", attr, v2, mark_point=["average", "max", "min"],
              mark_point_symbol='arrow', mark_point_symbolsize=40)
-    line.show_config()
     line.render()
 
     # line_1
     line = Line("折线图-数据堆叠示例")
     line.add("商家A", attr, v1, is_stack=True, is_label_show=True)
     line.add("商家B", attr, v2, is_stack=True, is_label_show=True)
-    line.show_config()
     line.render()
 
     # line_2
     line = Line("折线图-阶梯图示例")
     line.add("商家A", attr, v1, is_step=True, is_label_show=True)
-    line.show_config()
     line.render()
 
     # line_3
     line = Line("折线图-面积图示例")
     line.add("商家A", attr, v1, is_fill=True, line_opacity=0.2, area_opacity=0.4, symbol=None)
     line.add("商家B", attr, v2, is_fill=True, area_color='#000', area_opacity=0.3, is_smooth=True)
-    line.show_config()
     line.render()
 
     # line_3_1
@@ -51,7 +46,6 @@ def test_line():
     line = Line("折线图示例")
     line.add("商家A", attr, [math.log10(random.randint(1, 99999)) for _ in range(6)])
     line.add("商家B", attr, [math.log10(random.randint(1, 99999999)) for _ in range(6)], yaxis_type="log")
-    line.show_config()
     line.render()
 
     # line_4
@@ -59,5 +53,4 @@ def test_line():
     line = Line("折线图示例")
     line.add("最高气温", attr, [11, 11, 15, 13, 12, 13, 10], mark_point=["max", "min"], mark_line=["average"])
     line.add("最低气温", attr, [1, -2, 2, 5, 3, 2, 0], mark_point=["max", "min"], mark_line=["average"])
-    line.show_config()
     line.render()
