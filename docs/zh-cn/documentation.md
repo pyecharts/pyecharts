@@ -531,7 +531,6 @@ attr = ["{}天".format(i) for i in range(30)]
 v1 = [random.randint(1, 30) for _ in range(30)]
 bar = Bar("Bar - datazoom - slider 示例")
 bar.add("", attr, v1, is_label_show=True, is_datazoom_show=True)
-bar.show_config()
 bar.render()
 ```
 ![bar-4](https://github.com/chenjiandongx/pyecharts/blob/master/images/bar-4.gif)
@@ -542,7 +541,6 @@ attr = ["{}天".format(i) for i in range(30)]
 v1 = [random.randint(1, 30) for _ in range(30)]
 bar = Bar("Bar - datazoom - inside 示例")
 bar.add("", attr, v1, is_datazoom_show=True, datazoom_type='inside', datazoom_range=[10, 25])
-bar.show_config()
 bar.render()
 ```
 ![bar-5](https://github.com/chenjiandongx/pyecharts/blob/master/images/bar-5.gif)  
@@ -555,7 +553,6 @@ attr = ["{}天".format(i) for i in range(20)]
 v1 = [random.randint(1, 20) for _ in range(20)]
 bar = Bar("坐标轴标签旋转示例")
 bar.add("", attr, v1, xaxis_interval=0, xaxis_rotate=30, yaxis_rotate=30)
-bar.show_config()
 bar.render()
 ```
 ![bar-6](https://github.com/chenjiandongx/pyecharts/blob/master/images/bar-6.png) 
@@ -617,7 +614,6 @@ range_color = ['#313695', '#4575b4', '#74add1', '#abd9e9', '#e0f3f8', '#ffffbf',
                '#fee090', '#fdae61', '#f46d43', '#d73027', '#a50026']
 bar3d.add("", x_axis, y_aixs, [[d[1], d[0], d[2]] for d in data], is_visualmap=True,
           visual_range=[0, 20], visual_range_color=range_color, grid3d_width=200, grid3d_depth=80)
-bar3d.show_config()
 bar3d.render()
 ```
 ![bar3D-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/bar3D-0.gif)
@@ -630,7 +626,6 @@ bar3d = Bar3D("3D 柱状图示例", width=1200, height=600)
 bar3d.add("", x_axis, y_aixs, [[d[1], d[0], d[2]] for d in data], is_visualmap=True,
           visual_range=[0, 20], visual_range_color=range_color, grid3d_width=200, grid3d_depth=80,
           grid3d_shading='lambert')
-bar3d.show_config()
 bar3d.render()
 ```
 ![bar3D-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/bar3D-1.gif)
@@ -641,7 +636,6 @@ bar3d = Bar3D("3D 柱状图示例", width=1200, height=600)
 bar3d.add("", x_axis, y_aixs, [[d[1], d[0], d[2]] for d in data], is_visualmap=True,
           visual_range=[0, 20], visual_range_color=range_color, grid3d_width=200, grid3d_depth=80,
           is_grid3d_rotate=True)
-bar3d.show_config()
 bar3d.render()
 ```
 ![bar3D-2](https://github.com/chenjiandongx/pyecharts/blob/master/images/bar3D-2.gif)
@@ -652,7 +646,6 @@ bar3d = Bar3D("3D 柱状图示例", width=1200, height=600)
 bar3d.add("", x_axis, y_aixs, [[d[1], d[0], d[2]] for d in data], is_visualmap=True,
           visual_range=[0, 20], visual_range_color=range_color, grid3d_width=200, grid3d_depth=80,
           is_grid3d_rotate=True, grid3d_rotate_speed=180)
-bar3d.show_config()
 bar3d.render()
 ```
 ![bar3D-3](https://github.com/chenjiandongx/pyecharts/blob/master/images/bar3D-3.gif)
@@ -736,7 +729,6 @@ funnel.render()
 funnel = Funnel("漏斗图示例", width=600, height=400, title_pos='center')
 funnel.add("商品", attr, value, is_label_show=True, label_pos="outside", legend_orient='vertical',
            legend_pos='left')
-funnel.show_config()
 funnel.render()
 ```
 ![funnel-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/funnel-1.png)
@@ -763,7 +755,6 @@ from pyecharts import Gauge
 
 gauge = Gauge("仪表盘示例")
 gauge.add("业务指标", "完成率", 66.66)
-gauge.show_config()
 gauge.render()
 ```
 ![gauge-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/gauge-0.png)
@@ -771,7 +762,6 @@ gauge.render()
 ```python
 gauge = Gauge("仪表盘示例")
 gauge.add("业务指标", "完成率", 166.66, angle_range=[180, 0], scale_range=[0, 200], is_legend_show=False)
-gauge.show_config()
 gauge.render()
 ```
 ![gauge-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/gauge-1.png)
@@ -846,7 +836,6 @@ geo = Geo("全国主要城市空气质量", "data from pm2.5", title_color="#fff
 width=1200, height=600, background_color='#404a59')
 attr, value = geo.cast(data)
 geo.add("", attr, value, visual_range=[0, 200], visual_text_color="#fff", symbol_size=15, is_visualmap=True)
-geo.show_config()
 geo.render()
 ```
 ![geo-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/geo-0.gif)
@@ -859,7 +848,6 @@ geo = Geo("全国主要城市空气质量", "data from pm2.5", title_color="#fff
           background_color='#404a59')
 attr, value = geo.cast(data)
 geo.add("", attr, value, type="heatmap", is_visualmap=True, visual_range=[0, 300], visual_text_color='#fff')
-geo.show_config()
 geo.render()
 ```
 ![geo-0-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/geo-0-1.gif)
@@ -873,7 +861,6 @@ geo = Geo("全国主要城市空气质量", "data from pm2.5", title_color="#fff
           width=1200, height=600, background_color='#404a59')
 attr, value = geo.cast(data)
 geo.add("", attr, value, type="effectScatter", is_random=True, effect_scale=5)
-geo.show_config()
 geo.render()
 ```
 ![geo-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/geo-1.gif)
@@ -948,7 +935,6 @@ for i in nodes:
         links.append({"source": i.get('name'), "target": j.get('name')})
 graph = Graph("关系图-力引导布局示例")
 graph.add("", nodes, links, repulsion=8000)
-graph.show_config()
 graph.render()
 
 ```
@@ -958,7 +944,6 @@ graph.render()
 graph = Graph("关系图-环形布局示例")
 graph.add("", nodes, links, is_label_show=True,
           graph_repulsion=8000, layout='circular', label_text_color=None)
-graph.show_config()
 graph.render()
 ```
 ![graph-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/graph-1.png)
@@ -973,7 +958,6 @@ with open("..\json\weibo.json", "r", encoding="utf-8") as f:
 graph = Graph("微博转发关系图", width=1200, height=600)
 graph.add("", nodes, links, categories, label_pos="right", graph_repulsion=50,
           is_legend_show=False, line_curve=0.2, label_text_color=None)
-graph.show_config()
 graph.render()
 ```
 ![graph-2](https://github.com/chenjiandongx/pyecharts/blob/master/images/graph-2.gif)
@@ -1007,7 +991,6 @@ data = [[i, j, random.randint(0, 50)] for i in range(24) for j in range(7)]
 heatmap = HeatMap()
 heatmap.add("热力图直角坐标系", x_axis, y_aixs, data, is_visualmap=True,
             visual_text_color="#000", visual_orient='horizontal')
-heatmap.show_config()
 heatmap.render()
 ```
 ![heatmap-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/heatmap-0.gif)
@@ -1050,7 +1033,6 @@ v1 = [[2320.26, 2320.26, 2287.3, 2362.94], [2300, 2291.3, 2288.26, 2308.38],
       [2255.77, 2270.28, 2253.31, 2276.22]]
 kline = Kline("K 线图示例")
 kline.add("日K", ["2017/7/{}".format(i + 1) for i in range(31)], v1)
-kline.show_config()
 kline.render()
 ```
 ![kline-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/kline-0.png)
@@ -1059,7 +1041,6 @@ Kline + dataZoom
 ```python
 kline = Kline("K 线图示例")
 kline.add("日K", ["2017/7/{}".format(i + 1) for i in range(31)], v1, mark_point=["max"], is_datazoom_show=True)
-kline.show_config()
 kline.render()
 ```
 ![kline-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/kline-1.gif)
@@ -1069,7 +1050,6 @@ dataZoom 效果加在纵坐标轴上
 kline = Kline("K 线图示例")
 kline.add("日K", ["2017/7/{}".format(i + 1) for i in range(31)], v1, mark_point=["max"],
           is_datazoom_show=True, datazoom_orient='vertical')
-kline.show_config()
 kline.render()
 ```
 ![kline-2](https://github.com/chenjiandongx/pyecharts/blob/master/images/kline-2.gif)
@@ -1110,7 +1090,6 @@ v2 = [55, 60, 16, 20, 15, 80]
 line = Line("折线图示例")
 line.add("商家A", attr, v1, mark_point=["average"])
 line.add("商家B", attr, v2, is_smooth=True, mark_line=["max", "average"])
-line.show_config()
 line.render()
 ```
 ![line-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/line-0.gif)
@@ -1133,7 +1112,6 @@ line.add("商家A", attr, v1, mark_point=["average", "max", "min"],
          mark_point_symbol='diamond', mark_point_textcolor='#40ff27')
 line.add("商家B", attr, v2, mark_point=["average", "max", "min"],
          mark_point_symbol='arrow', mark_point_symbolsize=40)
-line.show_config()
 line.render()
 ```
 ![line-0-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/line-0-1.png)
@@ -1142,7 +1120,6 @@ line.render()
 line = Line("折线图-数据堆叠示例")
 line.add("商家A", attr, v1, is_stack=True, is_label_show=True)
 line.add("商家B", attr, v2, is_stack=True, is_label_show=True)
-line.show_config()
 line.render()
 ```
 ![line-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/line-1.gif)
@@ -1150,7 +1127,6 @@ line.render()
 ```python
 line = Line("折线图-阶梯图示例")
 line.add("商家A", attr, v1, is_step=True, is_label_show=True)
-line.show_config()
 line.render()
 ```
 ![line-2](https://github.com/chenjiandongx/pyecharts/blob/master/images/line-2.png)
@@ -1159,7 +1135,6 @@ line.render()
 line = Line("折线图-面积图示例")
 line.add("商家A", attr, v1, is_fill=True, line_opacity=0.2, area_opacity=0.4, symbol=None)
 line.add("商家B", attr, v2, is_fill=True, area_color='#000', area_opacity=0.3, is_smooth=True)
-line.show_config()
 line.render()
 ```
 ![line-3](https://github.com/chenjiandongx/pyecharts/blob/master/images/line-3.png)
@@ -1178,7 +1153,6 @@ import math, random
 line = Line("折线图示例")
 line.add("商家A", attr, [math.log10(random.randint(1, 99999)) for _ in range(6)])
 line.add("商家B", attr, [math.log10(random.randint(1, 99999999)) for _ in range(6)], yaxis_type="log")
-line.show_config()
 line.render()
 ```
 ![line-3-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/line-3-1.png)
@@ -1268,7 +1242,6 @@ from pyecharts import Liquid
 
 liquid = Liquid("水球图示例")
 liquid.add("Liquid", [0.6])
-liquid.show_config()
 liquid.render()
 ```
 ![liquid-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/liquid-0.gif)
@@ -1278,7 +1251,6 @@ from pyecharts import Liquid
 
 liquid = Liquid("水球图示例")
 liquid.add("Liquid", [0.6, 0.5, 0.4, 0.3], is_liquid_outline_show=False)
-liquid.show_config()
 liquid.render()
 ```
 ![liquid-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/liquid-1.gif)
@@ -1288,7 +1260,6 @@ from pyecharts import Liquid
 
 liquid = Liquid("水球图示例")
 liquid.add("Liquid", [0.6, 0.5, 0.4, 0.3], is_liquid_animation=False, shape='diamond')
-liquid.show_config()
 liquid.render()
 ```
 ![liquid-2](https://github.com/chenjiandongx/pyecharts/blob/master/images/liquid-2.png)
@@ -1320,7 +1291,6 @@ value = [155, 10, 66, 78]
 attr = ["福建", "山东", "北京", "上海"]
 map = Map("全国地图示例", width=1200, height=600)
 map.add("", attr, value, maptype='china')
-map.show_config()
 map.render()
 ```
 ![map-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/map-0.gif)
@@ -1332,7 +1302,6 @@ value = [155, 10, 66, 78, 33, 80, 190, 53, 49.6]
 attr = ["福建", "山东", "北京", "上海", "甘肃", "新疆", "河南", "广西", "西藏"]
 map = Map("Map 结合 VisualMap 示例", width=1200, height=600)
 map.add("", attr, value, maptype='china', is_visualmap=True, visual_text_color='#000')
-map.show_config()
 map.render()
 ```
 ![map-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/map-1.gif)
@@ -1346,7 +1315,6 @@ value = [20, 190, 253, 77, 65]
 attr = ['汕头市', '汕尾市', '揭阳市', '阳江市', '肇庆市']
 map = Map("广东地图示例", width=1200, height=600)
 map.add("", attr, value, maptype='广东', is_visualmap=True, visual_text_color='#000')
-map.show_config()
 map.render()
 ```
 ![map-2](https://github.com/chenjiandongx/pyecharts/blob/master/images/map-2.gif)
@@ -1418,7 +1386,6 @@ data = [
 parallel = Parallel("平行坐标系-默认指示器")
 parallel.config(schema) 
 parallel.add("parallel", data, is_random=True)
-parallel.show_config()
 parallel.render()
 ```
 ![parallel-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/parallel-0.png)
@@ -1456,7 +1423,6 @@ data = [
 parallel = Parallel("平行坐标系-用户自定义指示器")
 parallel.config(c_schema=c_schema)
 parallel.add("parallel", data)
-parallel.show_config()
 parallel.render()
 ```
 ![parallel-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/parallel-1.png)
@@ -1495,7 +1461,6 @@ attr = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
 v1 = [11, 12, 13, 10, 10, 10]
 pie = Pie("饼图示例")
 pie.add("", attr, v1, is_label_show=True)
-pie.show_config()
 pie.render()
 ```
 ![pie-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/pie-0.gif)
@@ -1508,7 +1473,6 @@ v1 = [11, 12, 13, 10, 10, 10]
 pie = Pie("饼图-圆环图示例", title_pos='center')
 pie.add("", attr, v1, radius=[40, 75], label_text_color=None, is_label_show=True,
         legend_orient='vertical', legend_pos='left')
-pie.show_config()
 pie.render()
 ```
 ![pie-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/pie-1.png)
@@ -1523,7 +1487,6 @@ pie = Pie("饼图-玫瑰图示例", title_pos='center', width=900)
 pie.add("商品A", attr, v1, center=[25, 50], is_random=True, radius=[30, 75], rosetype='radius')
 pie.add("商品B", attr, v2, center=[75, 50], is_random=True, radius=[30, 75], rosetype='area',
         is_legend_show=False, is_label_show=True)
-pie.show_config() 
 pie.render()
 ```
 ![pie-2](https://github.com/chenjiandongx/pyecharts/blob/master/images/pie-2.png)
@@ -1576,7 +1539,6 @@ data = [(i, random.randint(1, 100)) for i in range(101)]
 polar = Polar("极坐标系-散点图示例")
 polar.add("", data, boundary_gap=False, type='scatter', is_splitline_show=False,
           area_color=None, is_axisline_show=True)
-polar.show_config()
 polar.render()
 ```
 ![polar-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/polar-0.png)
@@ -1601,7 +1563,6 @@ data_2 = [(11, random.randint(1, 100)) for i in range(300)]
 polar = Polar("极坐标系-散点图示例", width=1200, height=600)
 polar.add("", data_1, type='scatter')
 polar.add("", data_2, type='scatter')
-polar.show_config()
 polar.render()
 ```
 ![polar-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/polar-1.png)
@@ -1613,7 +1574,6 @@ import random
 data = [(i, random.randint(1, 100)) for i in range(10)]
 polar = Polar("极坐标系-动态散点图示例", width=1200, height=600)
 polar.add("", data, type='effectScatter', effect_scale=10, effect_period=5)
-polar.show_config()
 polar.render()
 ```
 ![polar-2](https://github.com/chenjiandongx/pyecharts/blob/master/images/polar-2.gif)
@@ -1626,7 +1586,6 @@ polar = Polar("极坐标系-堆叠柱状图示例", width=1200, height=600)
 polar.add("A", [1, 2, 3, 4, 3, 5, 1], radius_data=radius, type='barRadius', is_stack=True)
 polar.add("B", [2, 4, 6, 1, 2, 3, 1], radius_data=radius, type='barRadius', is_stack=True)
 polar.add("C", [1, 2, 3, 4, 1, 2, 5], radius_data=radius, type='barRadius', is_stack=True)
-polar.show_config()
 polar.render()
 ```
 ![polar-3](https://github.com/chenjiandongx/pyecharts/blob/master/images/polar-3.gif)
@@ -1639,7 +1598,6 @@ polar = Polar("极坐标系-堆叠柱状图示例", width=1200, height=600)
 polar.add("", [1, 2, 3, 4, 3, 5, 1], radius_data=radius, type='barAngle', is_stack=True)
 polar.add("", [2, 4, 6, 1, 2, 3, 1], radius_data=radius, type='barAngle', is_stack=True)
 polar.add("", [1, 2, 3, 4, 1, 2, 5], radius_data=radius, type='barAngle', is_stack=True)
-polar.show_config()
 polar.render()
 ```
 ![polar-4](https://github.com/chenjiandongx/pyecharts/blob/master/images/polar-4.png)
@@ -1686,7 +1644,6 @@ radar = Radar()
 radar.config(schema)
 radar.add("预算分配", v1, is_splitline=True, is_axisline_show=True)
 radar.add("实际开销", v2, label_color=["#4e79a7"], is_area_show=False, legend_selectedmode='single')
-radar.show_config()
 radar.render()
 ```
 ![radar-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/radar-0.gif)
@@ -1749,7 +1706,6 @@ radar = Radar()
 radar.config(c_schema=c_schema, shape='circle')
 radar.add("北京", value_bj, item_color="#f9713c", symbol=None)
 radar.add("上海", value_sh, item_color="#b3e4a1", symbol=None, legend_selectedmode='signle')
-radar.show_config()
 radar.render()
 ```
 ![radar-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/radar-1.gif)
@@ -1762,7 +1718,6 @@ radar = Radar()
 radar.config(c_schema=c_schema, shape='circle')
 radar.add("北京", value_bj, item_color="#f9713c", symbol=None)
 radar.add("上海", value_sh, item_color="#b3e4a1", symbol=None)
-radar.show_config()
 radar.render()
 ```
 ![radar-2](https://github.com/chenjiandongx/pyecharts/blob/master/images/radar-2.gif)
@@ -1792,7 +1747,6 @@ v2 = [10, 20, 30, 40, 50, 60]
 scatter = Scatter("散点图示例")
 scatter.add("A", v1, v2)
 scatter.add("B", v1[::-1], v2)
-scatter.show_config()
 scatter.render()
 ```
 ![scatter-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/scatter-0.png)
@@ -1802,7 +1756,6 @@ scatter.render()
 scatter = Scatter("散点图示例")
 scatter.add("A", v1, v2)
 scatter.add("B", v1[::-1], v2, is_visualmap=True)
-scatter.show_config()
 scatter.render()
 ```
 ![scatter-0-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/scatter-0-1.gif)
@@ -1812,7 +1765,6 @@ scatter.render()
 scatter = Scatter("散点图示例")
 scatter.add("A", v1, v2)
 scatter.add("B", v1[::-1], v2, is_visualmap=True, visual_type='size', visual_range_size=[20, 80])
-scatter.show_config()
 scatter.render()
 ```
 ![scatter-0-2](https://github.com/chenjiandongx/pyecharts/blob/master/images/scatter-0-2.gif)
@@ -1824,7 +1776,6 @@ scatter.render()
 scatter = Scatter("散点图示例")
 scatter.add("A", ["a", "b", "c", "d", "e", "f"], v2)
 scatter.add("B", ["a", "b", "c", "d", "e", "f"], v1[::-1], xaxis_type="category")
-scatter.show_config()
 scatter.render()
 ```
 ![scatter-0-3](https://github.com/chenjiandongx/pyecharts/blob/master/images/scatter-0-3.png)
@@ -1852,7 +1803,6 @@ from pyecharts import Scatter
 scatter = Scatter("散点图示例")
 v1, v2 = scatter.draw("../images/pyecharts-0.png")
 scatter.add("pyecharts", v1, v2, is_random=True)
-scatter.show_config()
 scatter.render()
 ```
 ![pyecharts-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/pyecharts-1.png)
@@ -1918,7 +1868,6 @@ value = [10000, 6181, 4386, 4055, 2467, 2244, 1898, 1484, 1112, 965, 847, 582, 5
          550, 462, 366, 360, 282, 273, 265]
 wordcloud = WordCloud(width=1300, height=620)
 wordcloud.add("", name, value, word_size_range=[20, 100])
-wordcloud.show_config()
 wordcloud.render()
 ```
 ![wordcloud-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/wordcloud-0.png)
@@ -1926,7 +1875,6 @@ wordcloud.render()
 ```python
 wordcloud = WordCloud(width=1300, height=620)
 wordcloud.add("", name, value, word_size_range=[30, 100], shape='diamond')
-wordcloud.show_config()
 wordcloud.render()
 ```
 ![wordcloud-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/wordcloud-1.png)
@@ -1990,7 +1938,6 @@ line.add("最低气温", attr, [1, -2, 2, 5, 3, 2, 0], mark_point=["max", "min"]
 grid = Grid()
 grid.add(bar, grid_bottom="60%")
 grid.add(line, grid_top="60%")
-bar.show_config()
 grid.render()
 ```
 ![grid-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/grid-0.gif)
@@ -2584,7 +2531,6 @@ timeline.add(pie_2, '2013 年')
 timeline.add(pie_3, '2014 年')
 timeline.add(pie_4, '2015 年')
 timeline.add(pie_5, '2016 年')
-timeline.show_config()
 timeline.render()
 ```
 ![timeline-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/timeline-1.gif)
