@@ -2,7 +2,12 @@
 # coding=utf-8
 from __future__ import unicode_literals
 
-DEFAULT_HOST = '/nbextensions/echarts'
+
+DEFAULT_HOST = 'https://chfw.github.io/jupyter-echarts/echarts'
+
+CONFIGURATION = dict(
+    HOST='/nbextensions/echarts'
+)
 
 DEFAULT_JS_LIBRARIES = dict(
     echarts='echarts.min',

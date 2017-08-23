@@ -7,6 +7,7 @@ import json
 import pandas as pd
 import numpy as np
 
+from nose.tools import eq_
 from pyecharts import Bar
 
 
@@ -59,6 +60,14 @@ def test_notebook_component():
     assert json_encoded_title in html
     assert "myChart" in html
     assert bar._chart_id in html
+
+
+def test_base_get_js_dependencies():
+
+    bar = create_a_bar(TITLE)
+    dependencies = bar.get_js_dependencies()
+    expected = ['echarts.min']
+    eq_(dependencies, expected)
 
 
 def test_numpy_array():

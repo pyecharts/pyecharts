@@ -3,6 +3,7 @@
 from __future__ import unicode_literals
 import codecs
 
+
 from nose.tools import eq_, raises
 from pyecharts.template import (
     freeze_js,
