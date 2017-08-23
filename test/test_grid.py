@@ -16,13 +16,13 @@ def test_grid_0():
     bar.add("商家B", attr, v2, is_stack=True)
     line = Line("折线图示例", title_top="50%")
     attr = ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
-    line.add("最高气温", attr, [11, 11, 15, 13, 12, 13, 10], mark_point=["max", "min"], mark_line=["average"])
+    line.add("最高气温", attr, [11, 11, 15, 13, 12, 13, 10], mark_point=["max", "min"],
+             mark_line=["average"])
     line.add("最低气温", attr, [1, -2, 2, 5, 3, 2, 0], mark_point=["max", "min"],
              mark_line=["average"], legend_top="50%")
     grid = Grid()
     grid.add(bar, grid_bottom="60%")
     grid.add(line, grid_top="60%")
-    bar.show_config()
     grid.render()
 
 
@@ -52,7 +52,8 @@ def test_grid_2():
     bar.add("商家B", attr, v2, is_stack=True, legend_pos="80%")
     line = Line("折线图示例")
     attr = ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
-    line.add("最高气温", attr, [11, 11, 15, 13, 12, 13, 10], mark_point=["max", "min"], mark_line=["average"])
+    line.add("最高气温", attr, [11, 11, 15, 13, 12, 13, 10], mark_point=["max", "min"],
+             mark_line=["average"])
     line.add("最低气温", attr, [1, -2, 2, 5, 3, 2, 0], mark_point=["max", "min"],
              mark_line=["average"], legend_pos="20%")
     v1 = [5, 20, 36, 10, 75, 90]
@@ -75,7 +76,8 @@ def test_grid_3():
 
     line = Line("折线图示例", width=1200)
     attr = ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
-    line.add("最高气温", attr, [11, 11, 15, 13, 12, 13, 10], mark_point=["max", "min"], mark_line=["average"])
+    line.add("最高气温", attr, [11, 11, 15, 13, 12, 13, 10], mark_point=["max", "min"],
+             mark_line=["average"])
     line.add("最低气温", attr, [1, -2, 2, 5, 3, 2, 0], mark_point=["max", "min"],
              mark_line=["average"], legend_pos="20%")
     attr = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
@@ -93,7 +95,8 @@ def test_grid_4():
 
     line = Line("折线图示例", width=1200)
     attr = ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
-    line.add("最高气温", attr, [11, 11, 15, 13, 12, 13, 10], mark_point=["max", "min"], mark_line=["average"])
+    line.add("最高气温", attr, [11, 11, 15, 13, 12, 13, 10], mark_point=["max", "min"],
+             mark_line=["average"])
     line.add("最低气温", attr, [1, -2, 2, 5, 3, 2, 0], mark_point=["max", "min"],
              mark_line=["average"], legend_pos="20%")
     v1 = [[2320.26, 2320.26, 2287.3, 2362.94],
@@ -141,10 +144,10 @@ def test_grid_5():
     import random
     x_axis = ["12a", "1a", "2a", "3a", "4a", "5a", "6a", "7a", "8a", "9a", "10a", "11a",
               "12p", "1p", "2p", "3p", "4p", "5p", "6p", "7p", "8p", "9p", "10p", "11p"]
-    y_aixs = ["Saturday", "Friday", "Thursday", "Wednesday", "Tuesday", "Monday", "Sunday"]
+    y_axis = ["Saturday", "Friday", "Thursday", "Wednesday", "Tuesday", "Monday", "Sunday"]
     data = [[i, j, random.randint(0, 50)] for i in range(24) for j in range(7)]
     heatmap = HeatMap("热力图示例", height=700)
-    heatmap.add("热力图直角坐标系", x_axis, y_aixs, data, is_visualmap=True, visual_top="45%",
+    heatmap.add("热力图直角坐标系", x_axis, y_axis, data, is_visualmap=True, visual_top="45%",
                 visual_text_color="#000", visual_orient='horizontal')
     attr = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
     v1 = [5, 20, 36, 10, 75, 90]
@@ -163,7 +166,8 @@ def test_grid_6():
 
     line = Line("折线图示例", width=1200, height=700)
     attr = ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
-    line.add("最高气温", attr, [11, 11, 15, 13, 12, 13, 10], mark_point=["max", "min"], mark_line=["average"])
+    line.add("最高气温", attr, [11, 11, 15, 13, 12, 13, 10], mark_point=["max", "min"],
+             mark_line=["average"])
     line.add("最低气温", attr, [1, -2, 2, 5, 3, 2, 0], mark_point=["max", "min"], legend_top="50%",
              mark_line=["average"], is_datazoom_show=True, datazoom_xaxis_index=[0, 1])
 
