@@ -1,5 +1,13 @@
 # Developer's Guide
 
+## Why pyechars/templates/js is empty?
+
+It is because your git did not update the submodule. Please issue the following command:
+
+```
+git submodule update --init --recursive
+```
+
 ## How to merge chengjiandongx/master?
 
 Whenever you do the upstreaming, you are required to do an additional step because we have gotten a submodule:

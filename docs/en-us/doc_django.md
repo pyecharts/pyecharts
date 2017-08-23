@@ -74,8 +74,60 @@ urlpatterns = [
 ]
 ```
 
+## Step 2: Now let's write up the view function
 
-## Step 2: Now let's create a template
+Then copy the following code and save as `myfirstvis/views.py` 
+
+
+```python
+from __future__ import unicode_literals
+import math
+
+from django.http import HttpResponse
+from django.template import loader
+from pyecharts import Line3D
+
+from pyecharts.constants import DEFAULT_HOST
+
+
+def index(request):
+    template = loader.get_template('myfirstvis/pyecharts.html')
+    l3d = line3d()
+    context = dict(
+        myechart=l3d.render_embed(),
+        host=DEFAULT_HOST,
+        script_list=l3d.get_js_dependencies()
+    )
+    return HttpResponse(template.render(context, request))
+
+
+def line3d():
+    _data = []
+    for t in range(0, 25000):
+        _t = t / 1000
+        x = (1 + 0.25 * math.cos(75 * _t)) * math.cos(_t)
+        y = (1 + 0.25 * math.cos(75 * _t)) * math.sin(_t)
+        z = _t + 2.0 * math.sin(75 * _t)
+        _data.append([x, y, z])
+    range_color = [
+        '#313695', '#4575b4', '#74add1', '#abd9e9', '#e0f3f8', '#ffffbf',
+        '#fee090', '#fdae61', '#f46d43', '#d73027', '#a50026']
+    line3d = Line3D("3D line plot demo", width=1200, height=600)
+    line3d.add("", _data, is_visualmap=True,
+               visual_range_color=range_color, visual_range=[0, 30],
+               is_grid3D_rotate=True, grid3D_rotate_speed=180)
+    return line3d
+```
+
+`script_list` is a list of echarts libraries that are required for the chart rendering.
+The number of libraries varies according to the dependency requirements of the charts
+to be rendered.
+
+`host` refers the host for echarts libraries. The default host is
+http://chfw.github.io/jupyter-echarts/echarts. You can change them if you wish.
+
+
+## Step 3: Now let's create a template
 
 Previous steps follow the [tutorial part 1](https://docs.djangoproject.com/en/1.11/intro/tutorial01/). Now let's jump to [tutorial part 3](https://docs.djangoproject.com/en/1.11/intro/tutorial03/).
 
@@ -90,18 +142,16 @@ is the template file.
 
 
 ```html
-<!-- myfirstvis/templates/myfirstvis/pyecharts.html -->
+<!-- myfirstvis/templates/pyecharts.html -->
 <!DOCTYPE html>
 <html>
 
 <head>
     <meta charset="utf-8">
-    <title>ECharts</title>
-    <script src="http://oog4yfyu0.bkt.clouddn.com/echarts.min.js"></script>
-    <script src="http://oog4yfyu0.bkt.clouddn.com/echarts-gl.js"></script>
-    <script type="text/javascript " src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
-    <script type="text/javascript " src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/wordcloud.js"></script>
+    <title>Proudly presented by PycCharts</title>
+	{% for jsfile_name in script_list %}
+    <script src="{{host}}/{{jsfile_name}}.js"></script>
+    {% endfor %}
 </head>
 
 <body>
@@ -109,47 +159,6 @@ is the template file.
 </body>
 
 </html>
-```
-
-
-## Step 3: Now let's write up the view function
-
-Then copy the following code and save as `myfirstvis/views.py` 
-
-
-```python
-#coding=utf-8
-#myfirstvis/views.py
-from __future__ import unicode_literals
-from django.http import HttpResponse
-from django.template import loader
-
-
-def index(request):
-    template = loader.get_template('myfirstvis/pyecharts.html')
-    context = {
-	    "myechart": line3d()
-    }
-    return HttpResponse(template.render(context, request))
-
-
-def line3d():
-    from pyecharts import Line3D
-    
-    import math
-    _data = []
-    for t in range(0, 25000):
-        _t = t / 1000
-        x = (1 + 0.25 * math.cos(75 * _t)) * math.cos(_t)
-        y = (1 + 0.25 * math.cos(75 * _t)) * math.sin(_t)
-        z = _t + 2.0 * math.sin(75 * _t)
-        _data.append([x, y, z])
-    range_color = ['#313695', '#4575b4', '#74add1', '#abd9e9', '#e0f3f8', '#ffffbf',
-                   '#fee090', '#fdae61', '#f46d43', '#d73027', '#a50026']
-    line3d = Line3D("3D 折线图示例", width=1200, height=600)
-    line3d.add("", _data, is_visualmap=True, visual_range_color=range_color, visual_range=[0, 30],
-               is_grid3D_rotate=True, grid3D_rotate_speed=180)
-    return line3d.render_embed()
 ```
 
 ## Step 4: Run it
