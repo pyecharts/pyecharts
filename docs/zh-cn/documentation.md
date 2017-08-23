@@ -1994,7 +1994,7 @@ wordcloud.render()
 # 用户自定义
 
 ## Grid：并行显示多张图
-> 用户可以自定义结合 Line/Bar/Kline/Scatter/EffectScatter/Pie/HeatMap 图表，将不同类型图表画在多张图上。     
+> 用户可以自定义结合 Line/Bar/Kline/Scatter/EffectScatter/Pie/HeatMap 图表，将不同类型图表画在多张图上。第一个图需为 有 x/y 轴的图，即不能为 Pie，其他位置顺序任意。
 
 Grid 类的使用：
 1. 引入 `Grid` 类，`from pyecharts import Grid`
