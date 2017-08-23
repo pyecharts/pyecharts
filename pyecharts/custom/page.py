@@ -2,17 +2,25 @@
 # coding=utf-8
 
 from pyecharts import template
-from pyecharts.constants import DEFAULT_HOST
+import pyecharts.constants as constants
 from pyecharts.template import (
     produce_require_configuration,
     produce_html_script_list)
 
 
 class Page(object):
+    """
+    A composite object to present multiple charts vertically in a single page
+    """
+    def __init__(self, jshost=None):
+        """
+        Constructor
 
-    def __init__(self):
+        :param jshost:
+            custom javascript host for the particular chart only
+        """
         self.__charts = []
-        self._jshost = DEFAULT_HOST
+        self._jshost = jshost if jshost else constants.CONFIGURATION['HOST']
 
     def add(self, achart_or_charts):
         """
@@ -53,6 +61,13 @@ class Page(object):
         for chart in self.__charts:
             chart_content += chart.render_embed()
         return chart_content
+
+    def get_js_dependencies(self):
+        """
+        Declare its javascript dependencies for embedding purpose
+        """
+        unordered_js_dependencies = self._merge_dependencies()
+        return produce_html_script_list(unordered_js_dependencies)
 
     def _repr_html_(self):
         """
