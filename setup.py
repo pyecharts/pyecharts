@@ -6,8 +6,11 @@ from setuptools import setup
 try:
     from jupyterpip import cmdclass
 except:
-    import pip, importlib
-    pip.main(['install', 'jupyter-pip']); cmdclass = importlib.import_module('jupyterpip').cmdclass
+    import pip
+    import importlib
+
+    pip.main(['install', 'jupyter-pip'])
+    cmdclass = importlib.import_module('jupyterpip').cmdclass
 
 
 __title__ = 'pyecharts'
