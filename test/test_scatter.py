@@ -12,35 +12,30 @@ def test_scatter():
     scatter = Scatter("散点图示例")
     scatter.add("A", v1, v2)
     scatter.add("B", v1[::-1], v2)
-    scatter.show_config()
     scatter.render()
 
     # scatter_0_1
     scatter = Scatter("散点图示例")
     scatter.add("A", v1, v2)
     scatter.add("B", v1[::-1], v2, is_visualmap=True)
-    scatter.show_config()
     scatter.render()
 
     # scatter_0_2
     scatter = Scatter("散点图示例")
     scatter.add("A", v1, v2)
     scatter.add("B", v1[::-1], v2, is_visualmap=True, visual_type='size', visual_range_size=[20, 80])
-    scatter.show_config()
     scatter.render()
 
     # scatter_0_3
     scatter = Scatter("散点图示例")
     scatter.add("A", ["a", "b", "c", "d", "e", "f"], v2)
     scatter.add("B", ["a", "b", "c", "d", "e", "f"], v1[::-1], xaxis_type="category")
-    scatter.show_config()
     scatter.render()
 
     # scatter_1
     scatter = Scatter("散点图示例")
     v1, v2 = scatter.draw("../images/pyecharts-0.png")
     scatter.add("pyecharts", v1, v2, is_random=True)
-    scatter.show_config()
     scatter.render()
 
     # scatter_2

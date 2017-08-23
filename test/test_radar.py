@@ -8,14 +8,16 @@ from pyecharts import Radar
 def test_radar():
 
     # radar_0
-    schema = [("销售", 6500), ("管理", 16000), ("信息技术", 30000), ("客服", 38000), ("研发", 52000), ("市场", 25000)]
+    schema = [
+        ("销售", 6500), ("管理", 16000), ("信息技术", 30000),
+        ("客服", 38000), ("研发", 52000), ("市场", 25000)
+    ]
     v1 = [[4300, 10000, 28000, 35000, 50000, 19000]]
     v2 = [[5000, 14000, 28000, 31000, 42000, 21000]]
     radar = Radar("雷达图示例")
     radar.config(schema)
     radar.add("预算分配", v1, is_splitline=True, is_axisline_show=True)
     radar.add("实际开销", v2, label_color=["#4e79a7"], is_area_show=False, legend_selectedmode='single')
-    radar.show_config()
     radar.render()
 
     # radar_1
@@ -86,7 +88,7 @@ def test_radar():
         [187, 143, 201, 1.39, 89, 53, 31]
         ]
     c_schema = [{"name":"AQI", "max": 300, "min": 5},
-              {"name":"PM2.5", "max": 250, "min": 20},
+                {"name":"PM2.5", "max": 250, "min": 20},
                 {"name":"PM10", "max":300, "min": 5},
                 {"name":"CO", "max":5},
                 {"name":"NO2", "max":200},
@@ -96,7 +98,6 @@ def test_radar():
     radar.config(c_schema=c_schema, shape='circle')
     radar.add("北京", value_bj, item_color="#f9713c", symbol=None)
     radar.add("上海", value_sh, item_color="#b3e4a1", symbol=None, legend_selectedmode='signle')
-    radar.show_config()
     radar.render()
 
     # radar_2
@@ -104,5 +105,4 @@ def test_radar():
     radar.config(c_schema=c_schema, shape='circle')
     radar.add("北京", value_bj, item_color="#f9713c", symbol=None)
     radar.add("上海", value_sh, item_color="#b3e4a1", symbol=None)
-    radar.show_config()
     radar.render()

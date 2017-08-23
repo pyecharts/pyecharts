@@ -16,11 +16,9 @@ def test_wordcloud():
 
     wordcloud = WordCloud(width=1300, height=620)
     wordcloud.add("", name, value, word_size_range=[30, 100], rotate_step=66)
-    wordcloud.show_config()
     wordcloud.render()
 
     # wordcloud_1
     wordcloud = WordCloud(width=1300, height=620)
     wordcloud.add("", name, value, word_size_range=[30, 100], shape='diamond')
-    wordcloud.show_config()
     wordcloud.render()
