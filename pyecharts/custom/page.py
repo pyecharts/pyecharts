@@ -9,8 +9,16 @@ from pyecharts.template import (
 
 
 class Page(object):
-
+    """
+    A composite object to present multiple charts vertically in a single page
+    """
     def __init__(self, jshost=None):
+        """
+        Constructor
+
+        :param jshost:
+            custom javascript host for the particular chart only
+        """
         self.__charts = []
         self._jshost = jshost if jshost else constants.CONFIGURATION['HOST']
 
