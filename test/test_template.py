@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 # coding=utf-8
 from __future__ import unicode_literals
+import codecs
 
 from nose.tools import eq_, raises
 from pyecharts.template import (
     freeze_js,
     write_utf8_html_file,
     ensure_echarts_is_in_the_front)
-import codecs
 
 
 def test_freeze_js():

@@ -14,7 +14,6 @@ def test_map():
     attr = ["福建", "山东", "北京", "上海"]
     map = Map("全国地图示例", width=1200, height=600)
     map.add("", attr, value, maptype='china')
-    map.show_config()
     map.render()
 
     # map_1
@@ -22,7 +21,6 @@ def test_map():
     attr = ["福建", "山东", "北京", "上海", "甘肃", "新疆", "河南", "广西", "西藏"]
     map = Map("Map 结合 VisualMap 示例", width=1200, height=600)
     map.add("", attr, value, maptype='china', is_visualmap=True, visual_text_color='#000')
-    map.show_config()
     map.render()
 
     # map_2
@@ -30,7 +28,6 @@ def test_map():
     attr = ['汕头市', '汕尾市', '揭阳市', '阳江市', '肇庆市']
     map = Map("广东地图示例", width=1200, height=600)
     map.add("", attr, value, maptype='广东', is_visualmap=True, visual_text_color='#000')
-    map.show_config()
     map.render()
     with codecs.open('render.html', 'r', 'utf-8') as f:
         actual_content = f.read()

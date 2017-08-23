@@ -79,7 +79,6 @@ def test_timeline_pie():
     timeline.add(pie_3, '2014 年')
     timeline.add(pie_4, '2015 年')
     timeline.add(pie_5, '2016 年')
-    timeline.show_config()
     timeline.render()
 
 
