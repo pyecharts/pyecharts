@@ -119,12 +119,13 @@ def line3d():
     return line3d
 ```
 
-`script_list` is a list of echarts libraries that are required for the chart rendering.
+`script_list` is a list of echarts libraries that are required for the chart rendering on the page.
 The number of libraries varies according to the dependency requirements of the charts
 to be rendered.
 
-`host` refers the host for echarts libraries. The default host is
-http://chfw.github.io/jupyter-echarts/echarts. You can change them if you wish.
+`host` refers to the host for echarts libraries. The default host is
+http://chfw.github.io/jupyter-echarts/echarts. You can change them if you wish. And if you do so,
+please clone https://github.com/chfw/jupyter-echarts. Then, place `echarts` folder onto your own server.
 
 
 ## Step 3: Now let's create a template
