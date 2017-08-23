@@ -7,6 +7,9 @@
 
 ## 版本信息
 
+* version 0.2.0
+    * 新增 datazoom_xaxis_index, datazoom_yaxis_index，可使 datazoom 组件同时控制多个 x y 轴。
+
 * version 0.1.9.7（当前版本）
     * 修复 requirements.txt 中 jupyter-pip 版本过旧问题
     * 修复地图不能正常显示的问题
