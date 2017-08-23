@@ -13,7 +13,6 @@ for i in range(101):
 hour = [i for i in range(1, 25)]
 polar = Polar("极坐标系示例", width=1200, height=600)
 polar.add("Love", data, angle_data=hour, boundary_gap=False,start_angle=0)
-polar.show_config()
 polar.render()
 ```
 ![example-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/example-0.png)
@@ -31,7 +30,6 @@ for i in range(361):
     data.append([r, i])
 polar = Polar("极坐标系示例", width=1200, height=600)
 polar.add("Flower", data, start_angle=0, symbol=None, axis_range=[0, None])
-polar.show_config()
 polar.render()
 ```
 ![example-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/example-1.png)
@@ -50,7 +48,6 @@ for i in range(361):
 polar = Polar("极坐标系示例", width=1200, height=600)
 polar.add("Color-Flower", data, start_angle=0, symbol=None, axis_range=[0, None],
           area_color="#f71f24", area_opacity=0.6)
-polar.show_config()
 polar.render()
 ```
 ![example-1-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/example-1-1.png)
@@ -114,7 +111,6 @@ from pyecharts import Pie
 pie = Pie("饼图示例", title_pos='center', width=1000, height=600)
 pie.add("", ['A', 'B', 'C', 'D', 'E', 'F'], [335, 321, 234, 135, 251, 148], radius=[40, 55],is_label_show=True)
 pie.add("", ['H', 'I', 'J'], [335, 679, 204], radius=[0, 30], legend_orient='vertical', legend_pos='left')
-pie.show_config()
 pie.render()
 ```
 ![example-6](https://github.com/chenjiandongx/pyecharts/blob/master/images/example-6.png)
@@ -131,7 +127,6 @@ pie.add("", attr, [random.randint(0, 100) for _ in range(6)], radius=[50, 55], c
 pie.add("", attr, [random.randint(20, 100) for _ in range(6)], radius=[0, 45], center=[25, 50],rosetype='area')
 pie.add("", attr, [random.randint(0, 100) for _ in range(6)], radius=[50, 55], center=[65, 50],is_random=True)
 pie.add("", attr, [random.randint(20, 100) for _ in range(6)], radius=[0, 45], center=[65, 50],rosetype='radius')
-pie.show_config()
 pie.render()
 ```
 ![example-7](https://github.com/chenjiandongx/pyecharts/blob/master/images/example-7.gif)
@@ -147,7 +142,6 @@ v2 = [2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3]
 bar = Bar("柱状图示例")
 bar.add("蒸发量", attr, v1, mark_line=["average"], mark_point=["max", "min"])
 bar.add("降水量", attr, v2, mark_line=["average"], mark_point=["max", "min"])
-bar.show_config()
 bar.render()
 ```
 ![example-8](https://github.com/chenjiandongx/pyecharts/blob/master/images/example-8.png)
@@ -159,7 +153,6 @@ bar = Bar("柱状图示例")
 bar.add("蒸发量", attr, v1, mark_line=["average"], mark_point=["max", "min"])
 bar.add("降水量", attr, v2, mark_line=["average"], mark_point=["max", "min"],
         is_datazoom_show=True, datazoom_range=[50, 80])
-bar.show_config()
 bar.render()
 ```
 ![example-8-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/example-8-1.gif)
@@ -190,7 +183,6 @@ pie.add("", ["悬疑", ""], [25, 75], center=[70, 70], radius=[18, 24],
         label_pos='center', is_label_show=True, label_text_color=None)
 pie.add("", ["犯罪", ""], [28, 72], center=[90, 70], radius=[18, 24],
         label_pos='center', is_label_show=True, label_text_color=None, is_legend_show=True, legend_top="center")
-pie.show_config()
 pie.render()
 ```
 ![example-9](https://github.com/chenjiandongx/pyecharts/blob/master/images/example-9.png)
@@ -211,7 +203,6 @@ for i in range(5):
 polar = Polar("极坐标系示例")
 polar.add("", data, symbol_size=0, symbol='circle', start_angle=-25, is_radiusaxis_show=False,
           area_color="#f3c5b3", area_opacity=0.5, is_angleaxis_show=False)
-polar.show_config()
 polar.render()
 ```
 ![example-10](https://github.com/chenjiandongx/pyecharts/blob/master/images/example-10.png)

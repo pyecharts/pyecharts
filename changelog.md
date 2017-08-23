@@ -7,6 +7,12 @@
 
 ## 版本信息
 
+* version 0.2.0
+    * 新增 datazoom_xaxis_index, datazoom_yaxis_index，可使 datazoom 组件同时控制多个 x y 轴。
+    * 提供 jupyter-notebook 中的 js host 选项，用户可自行决定使用本地后者网络 js 文件，方便转移 notebook 时保证图形可正常显示
+    * 修改 Flask&Django 模板，加载文件的体积大大减小，出图速度更快。
+    * 新增图形种类 Boxplot（箱形图）
+
 * version 0.1.9.7（当前版本）
     * 修复 requirements.txt 中 jupyter-pip 版本过旧问题
     * 修复地图不能正常显示的问题

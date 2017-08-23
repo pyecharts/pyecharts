@@ -18,7 +18,7 @@ class EffectScatter(Scatter):
     def add(self, *args, **kwargs):
         self.__add(*args, **kwargs)
 
-    def __add(self, name, x_value, y_value,
+    def __add(self, name, x_axis, y_axis,
               symbol_size=10,
               **kwargs):
         """
@@ -34,7 +34,7 @@ class EffectScatter(Scatter):
             symbol size
         :param kwargs:
         """
-        assert len(x_value) == len(y_value)
+        assert len(x_axis) == len(y_axis)
         kwargs.update(type="scatter")
         chart = get_all_options(**kwargs)
         xaxis, yaxis = chart['xy_axis']
@@ -47,7 +47,7 @@ class EffectScatter(Scatter):
             "rippleEffect": chart['effect'],
             "symbol": chart['symbol'],
             "symbolSize": symbol_size,
-            "data": [list(z) for z in zip(x_value, y_value)],
+            "data": [list(z) for z in zip(x_axis, y_axis)],
             "label": chart['label'],
             "indexflag": self._option.get('_index_flag')
         })

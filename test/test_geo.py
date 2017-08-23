@@ -205,7 +205,6 @@ def test_geo():
     attr, value = geo.cast(data)
     geo.add("", attr, value, visual_range=[0, 200], visual_text_color="#fff",
             symbol_size=15, is_visualmap=True)
-    geo.show_config()
     geo.render()
 
     # geo_0_1
@@ -214,7 +213,6 @@ def test_geo():
     attr, value = geo.cast(data)
     geo.add("", attr, value, type="heatmap", is_visualmap=True, visual_range=[0, 300],
             visual_text_color='#fff')
-    geo.show_config()
     geo.render()
 
     # geo_1
@@ -223,7 +221,6 @@ def test_geo():
               width=1200, height=600, background_color='#404a59')
     attr, value = geo.cast(data)
     geo.add("", attr, value, type="effectScatter", is_random=True, effect_scale=5)
-    geo.show_config()
     geo.render()
 
     # geo_with_noexist_city
@@ -232,5 +229,4 @@ def test_geo():
               width=1200, height=600, background_color='#404a59')
     attr, value = geo.cast(data)
     geo.add("", attr, value, type="effectScatter", is_random=True, effect_scale=5)
-    geo.show_config()
     geo.render()

@@ -8,6 +8,7 @@ class Grid(object):
 
     def __init__(self):
         self._chart = None
+        self._js_dependencies = set()
 
     def add(self, chart,
             grid_width=None,
@@ -37,6 +38,7 @@ class Grid(object):
         if self._chart is None:
             self._chart = chart
             self._chart._option.update(grid=[])
+            self._js_dependencies = chart._js_dependencies
 
             _grid = grid(grid_width, grid_height, grid_top, grid_bottom, grid_left, grid_right)
             if _grid:
@@ -75,6 +77,7 @@ class Grid(object):
             _grid = grid(grid_width, grid_height, grid_top, grid_bottom, grid_left, grid_right)
             for _ in range(_index_once):
                 self._chart._option.get('grid').append(_grid)
+            self._js_dependencies.union(chart._js_dependencies)
 
     def __custom(self, series):
         """
