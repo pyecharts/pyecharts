@@ -1,6 +1,6 @@
 # Developer's Guide
 
-## Why pyechars/templates/js is empty?
+## Why the folder `pyecharts/templates/js` is empty?
 
 It is because your git did not update the submodule. Please issue the following command:
 
