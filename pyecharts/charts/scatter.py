@@ -14,9 +14,8 @@ class Scatter(Base):
     The scatter chart in rectangular coordinate could be used to present the
     relation between x and y.
     If data have multiple dimensions, the values of the other dimensions can
-    be visualized through symbol with
-    various sizes and colors, which becomes a bubble chart.
-    These can be done by using with visualMap component.
+    be visualized through symbol with various sizes and colors,which becomes
+    a bubble chart. These can be done by using with visualMap component.
     """
     def __init__(self, title="", subtitle="", **kwargs):
         super(Scatter, self).__init__(title, subtitle, **kwargs)
