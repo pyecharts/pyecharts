@@ -90,7 +90,7 @@ is the template file.
 
 
 ```html
-	<!-- myfirstvis/templates/pyecharts.html -->
+<!-- myfirstvis/templates/pyecharts.html -->
 <!DOCTYPE html>
 <html>
 
