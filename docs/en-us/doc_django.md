@@ -90,18 +90,16 @@ is the template file.
 
 
 ```html
-<!-- myfirstvis/templates/myfirstvis/pyecharts.html -->
+	<!-- myfirstvis/templates/pyecharts.html -->
 <!DOCTYPE html>
 <html>
 
 <head>
     <meta charset="utf-8">
-    <title>ECharts</title>
-    <script src="http://oog4yfyu0.bkt.clouddn.com/echarts.min.js"></script>
-    <script src="http://oog4yfyu0.bkt.clouddn.com/echarts-gl.js"></script>
-    <script type="text/javascript " src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
-    <script type="text/javascript " src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
-    <script type="text/javascript " src="http://oog4yfyu0.bkt.clouddn.com/wordcloud.js"></script>
+    <title>Proudly presented by PycCharts</title>
+	{% for jsfile_name in script_list %}
+    <script src="{{host}}/{{jsfile_name}}.js"></script>
+    {% endfor %}
 </head>
 
 <body>
