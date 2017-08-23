@@ -49,6 +49,7 @@ class Timeline(object):
         """
 
         self._chart = None
+        self._js_dependencies = set()
         self._time_points = []
         self._timeline_options = {
             "baseOption": {
@@ -77,6 +78,7 @@ class Timeline(object):
         :return:
         """
         self._chart = chart
+        self._js_dependencies.union(chart._js_dependencies)
         self.__check_components(chart)
         self._time_points.append(time_point)
         self._timeline_options.get('baseOption').update(
