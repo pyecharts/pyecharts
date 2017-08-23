@@ -7,7 +7,8 @@ import re
 import sys
 import codecs
 from jinja2 import Environment, FileSystemLoader
-from pyecharts.constants import DEFAULT_JS_LIBRARIES
+import pyecharts.constants as constants
+
 
 PY2 = sys.version_info[0] == 2
 
@@ -92,7 +93,9 @@ def produce_require_configuration(dependencies, jshost):
     _d = ensure_echarts_is_in_the_front(dependencies)
     # if no nick name register, we treat the location as location.js
     require_conf_items = [
-        "'%s': '%s/%s'" % (key, jshost, DEFAULT_JS_LIBRARIES.get(key, key))
+        "'%s': '%s/%s'" % (key,
+                           jshost,
+                           constants.DEFAULT_JS_LIBRARIES.get(key, key))
         for key in _d]
     require_libraries = ["'%s'" % key for key in _d]
     return dict(
@@ -109,7 +112,7 @@ def produce_html_script_list(dependencies):
     """
     _d = ensure_echarts_is_in_the_front(dependencies)
     script_list = [
-        '%s' % DEFAULT_JS_LIBRARIES.get(key, key)
+        '%s' % constants.DEFAULT_JS_LIBRARIES.get(key, key)
         for key in _d]
     return script_list
 
@@ -132,3 +135,7 @@ def ensure_echarts_is_in_the_front(dependencies):
     else:
         raise Exception("No js library found. Nothing works!")
     return dependencies
+
+
+def online(host=constants.DEFAULT_HOST):
+    constants.CONFIGURATION['HOST'] = host

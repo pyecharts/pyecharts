@@ -8,6 +8,7 @@ from pyecharts import (
     Bar, Scatter3D, Line, Pie, Map,
     Kline, Radar, WordCloud, Liquid)
 from pyecharts import Page
+from nose.tools import eq_
 
 
 def create_three():
@@ -55,6 +56,13 @@ def test_two_bars():
         echarts_position = actual_content.find('exports.echarts')
         guangdong_position = actual_content.find(json.dumps('广东'))
         assert echarts_position < guangdong_position
+
+
+def test_page_get_js_dependencies():
+    page = create_three()
+    dependencies = page.get_js_dependencies()
+    expected = ['echarts.min', 'guangdong', 'echarts-gl.min']
+    eq_(dependencies, expected)
 
 
 def test_page_embed():
