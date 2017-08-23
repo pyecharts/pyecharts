@@ -23,7 +23,8 @@ class Base(object):
                  subtitle_color="#aaa",
                  title_text_size=18,
                  subtitle_text_size=12,
-                 background_color="#fff"):
+                 background_color="#fff",
+                 jshost=None):
         """
 
         :param title:
@@ -59,8 +60,11 @@ class Base(object):
         :param background_color:
             Background color of title, which is transparent by default.
             Color can be represented in RGB, for example 'rgb(128, 128, 128)'.
-            RGBA can be used when you need alpha channel, for example 'rgba(128, 128, 128, 0.5)'.
+            RGBA can be used when you need alpha channel,
+            for example 'rgba(128, 128, 128, 0.5)'.
             You may also use hexadecimal format, for example '#ccc'.
+        :param jshost:
+            custom javascript host for the particular chart only
         """
         self._option = {}
         self._width, self._height = width, height
@@ -98,7 +102,7 @@ class Base(object):
             legend=[{"data": []}],
             backgroundColor=background_color
         )
-        self._jshost = constants.DEFAULT_HOST
+        self._jshost = jshost if jshost else constants.CONFIGURATION['HOST']
         self._js_dependencies = {'echarts'}
         self._chart_id = uuid.uuid4().hex
 
@@ -330,6 +334,12 @@ class Base(object):
                           chart_id=self._chart_id,
                           myWidth=self._width, myHeight=self._height)
         return html
+
+    def get_js_dependencies(self):
+        """
+        Declare its javascript dependencies for embedding purpose
+        """
+        return template.produce_html_script_list(self._js_dependencies)
 
     def render(self, path="render.html"):
         """ Render the options dict, generate the html file
