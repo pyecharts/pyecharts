@@ -202,6 +202,8 @@ class Base(object):
             start_angle=None,
             symbol_size=None,
             symbol=None,
+            sankey_node_width=None,
+            sankey_node_gap=None,
             type=None,
             tooltip_tragger=None,
             tooltip_tragger_on=None,
