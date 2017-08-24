@@ -22,6 +22,7 @@ from pyecharts.charts.parallel import Parallel
 from pyecharts.charts.pie import Pie
 from pyecharts.charts.polar import Polar
 from pyecharts.charts.radar import Radar
+from pyecharts.charts.sankey import Sankey
 from pyecharts.charts.scatter import Scatter
 from pyecharts.charts.scatter3D import Scatter3D
 from pyecharts.charts.wordcloud import WordCloud
