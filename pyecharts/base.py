@@ -184,6 +184,7 @@ class Base(object):
             line_opacity=None,
             line_type=None,
             line_width=None,
+            line_color=None,
             liquid_color=None,
             maptype=None,
             mark_line=None,
