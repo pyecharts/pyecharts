@@ -8,7 +8,7 @@ pyecharts 是一个用于生成 Echarts 图表的类库。实际上就是 Echart
 * [开始使用](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/documentation.md#开始使用)
 * [通用配置项](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/documentation.md#通用配置项)
     * xyAxis：直角坐标系中的 x、y 轴(Line、Bar、Scatter、EffectScatter、Kline)
-    * dataZoom：dataZoom 组件 用于区域缩放，从而能自由关注细节的数据信息，或者概览数据整体，或者去除离群点的影响。(Line、Bar、Scatter、EffectScatter、Kline)
+    * dataZoom：dataZoom 组件 用于区域缩放，从而能自由关注细节的数据信息，或者概览数据整体，或者去除离群点的影响。(Line、Bar、Scatter、EffectScatter、Kline、Boxplot)
     * legend：图例组件。图例组件展现了不同系列的标记(symbol)，颜色和名字。可以通过点击图例控制哪些系列不显示。
     * label：图形上的文本标签，可用于说明图形的一些数据信息，比如值，名称等。
     * lineStyle：带线图形的线的风格选项(Line、Polar、Radar、Graph、Parallel)
@@ -36,6 +36,7 @@ pyecharts 是一个用于生成 Echarts 图表的类库。实际上就是 Echart
     * Pie（饼图）
     * Polar（极坐标系）
     * Radar（雷达图）
+    * Sankey（桑基图）
     * Scatter（散点图）
     * Scatter3D（3D 散点图）
     * WordCloud（词云图）
@@ -369,6 +370,8 @@ cast(seq)
     线的弯曲程度，0 为完全不弯曲，1 为最弯曲。默认为 0
 * line_type -> str  
     线的类型，有'solid', 'dashed', 'dotted'可选。默认为'solid'
+* line_color -> str  
+    线的颜色
 
 
 **grid3D：3D 笛卡尔坐标系组配置项，适用于 3D 图形。（Bar3D, Line3D, Scatter3D)**
@@ -1832,6 +1835,76 @@ radar.render()
 ![radar-2](https://github.com/chenjiandongx/pyecharts/blob/master/images/radar-2.gif)
 
 
+## Sankey（桑基图）
+> 是一种特殊的流图, 它主要用来表示原材料、能量等如何从初始形式经过中间过程的加工、转化到达最终形式。
+
+Sankey.add() 方法签名
+```python
+add(name, nodes, links, sankey_node_width=20, sankey_node_gap=8, **kwargs)
+```
+* name -> str  
+     图例名称
+* nodes -> list  
+    桑基图结点，必须包含的数据项有：
+    * name：数据项名称
+    * value：数据项数值
+* links -> list  
+    桑基图结点关系
+    * source：边的源节点名称（必须有！）
+    * target：边的目标节点名称（必须有！）
+    * vaule：边的数值，决定边的宽度。
+ * sankey_node_width -> int  
+    图中每个矩形节点的宽度。默认为 20
+ * sankey_node_gap -> int  
+    图中每一列任意两个矩形节点之间的间隔。默认为 8
+
+先来个简单示例
+```python
+from pyecharts import Sankey
+
+nodes = [
+    {'name': 'category1'}, {'name': 'category2'}, {'name': 'category3'},
+    {'name': 'category4'}, {'name': 'category5'}, {'name': 'category6'},
+]
+
+links = [
+    {'source': 'category1', 'target': 'category2', 'value': 10},
+    {'source': 'category2', 'target': 'category3', 'value': 15},
+    {'source': 'category3', 'target': 'category4', 'value': 20},
+    {'source': 'category5', 'target': 'category6', 'value': 25}
+]
+sankey = Sankey("桑基图示例", width=1200, height=600)
+sankey.add("sankey", nodes, links, line_opacity=0.2,
+           line_curve=0.5, line_color='source', is_label_show=True, label_pos='right')
+sankey.render()
+```
+![sankey-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/sankey-0.png)
+
+使用官方提供的 json 数据
+```python
+import sys
+import os
+import json
+
+from pyecharts import Sankey
+
+PY2 = sys.version_info[0] == 2
+
+if PY2:
+    import codecs
+    with codecs.open(os.path.join("..", "json", "energy.json"), "rb") as f:
+        j = json.load(f)
+else:
+    with open(os.path.join("..", "json", "energy.json"), "r", encoding="utf-8") as f:
+        j = json.load(f)
+sankey = Sankey("桑基图示例", width=1200, height=600)
+sankey.add("sankey", nodes=j['nodes'], links=j['links'], line_opacity=0.2,
+           line_curve=0.5, line_color='source', is_label_show=True, label_pos='right')
+sankey.render()
+```
+![sankey-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/sankey-1.png)
+
+
 ## Scatter（散点图）
 > 直角坐标系上的散点图可以用来展现数据的 x，y 之间的关系，如果数据项有多个维度，可以用颜色来表现，利用 geo 组件。
 
@@ -1994,7 +2067,7 @@ wordcloud.render()
 # 用户自定义
 
 ## Grid：并行显示多张图
-> 用户可以自定义结合 Line/Bar/Kline/Scatter/EffectScatter/Pie/HeatMap 图表，将不同类型图表画在多张图上。第一个图需为 有 x/y 轴的图，即不能为 Pie，其他位置顺序任意。
+> 用户可以自定义结合 Line/Bar/Kline/Scatter/EffectScatter/Pie/HeatMap/Boxplot 图表，将不同类型图表画在多张图上。第一个图需为 有 x/y 轴的图，即不能为 Pie，其他位置顺序任意。
 
 Grid 类的使用：
 1. 引入 `Grid` 类，`from pyecharts import Grid`

@@ -62,10 +62,13 @@ def label(type=None,
     if label_pos is None:
         label_pos = "outside" if type in ["pie", "graph"] else "top"
     _label = {
-        "normal": {"show": is_label_show,
-                   "position": label_pos,
-                   "textStyle": {"color": label_text_color,
-                                 "fontSize": label_text_size}},
+        "normal": {
+            "show": is_label_show,
+            "position": label_pos,
+            "textStyle": {
+                "color": label_text_color,
+                "fontSize": label_text_size
+            }},
         "emphasis": {"show": is_emphasis}
     }
 
@@ -108,6 +111,7 @@ def line_style(line_width=1,
                line_opacity=1,
                line_curve=0,
                line_type="solid",
+               line_color=None,
                **kwargs):
     """
 
@@ -121,14 +125,19 @@ def line_style(line_width=1,
         The larger the value, the greater the curvature. -> Graph
     :param line_type:
         Line type,it can be 'solid', 'dashed', 'dotted'
+    :param line_color:
+        color of line
     :param kwargs:
     :return:
     """
     _line_style = {
-        "normal": {"width": line_width,
-                   "opacity": line_opacity,
-                   "curveness": line_curve,
-                   "type": line_type}
+        "normal": {
+            "width": line_width,
+            "opacity": line_opacity,
+            "curveness": line_curve,
+            "type": line_type,
+            "color": line_color
+        }
     }
     return _line_style
 
