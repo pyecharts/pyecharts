@@ -2461,10 +2461,10 @@ v3 = [2.0, 2.2, 3.3, 4.5, 6.3, 10.2, 20.3, 23.4, 23.0, 16.5, 12.0, 6.2]
 
 bar = Bar(width=1200, height=600)
 bar.add("蒸发量", attr, v1)
-bar.add("降水量", attr, v2, yaxis_formatter=" ml")
+bar.add("降水量", attr, v2, yaxis_formatter=" ml", yaxis_interval=50, yaxis_max=250)
 
 line = Line()
-line.add("平均温度", attr, v3, yaxis_formatter=" °C")
+line.add("平均温度", attr, v3, yaxis_formatter=" °C", yaxis_interval=5)
 
 overlap = Overlap()
 # 默认不新增 x y 轴，并且 x y 轴的索引都为 0
@@ -2474,7 +2474,7 @@ overlap.add(bar)
 overlap.add(line, yaxis_index=1, is_add_yaxis=True)
 overlap.render()
 ```
-![overlap-3](https://github.com/chenjiandongx/pyecharts/blob/master/images/overlap-3.png)
+![overlap-3](https://github.com/chenjiandongx/pyecharts/blob/master/images/overlap-3.gif)
 
 如果只是想在单个 .html 按顺序展示图表，推荐使用 ```Page()``` 类
 
