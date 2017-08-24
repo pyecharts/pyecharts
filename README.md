@@ -42,7 +42,7 @@ It will create a file named render.html in the root directory, open file with yo
 
 ## Working with pandas & numpy
 
-![pandas_numpy](https://github.com/chenjiandongx/pyecharts/blob/master/images/pandas_numpy.png)
+![pandas_numpy](https://github.com/chenjiandongx/pyecharts/blob/master/images/pandas-numpy.png)
 
 
 ## working with Flask & Django
