@@ -185,6 +185,7 @@ cast(seq)
 3. 字典  
     {A1: B1, A2: B2, A3: B3, A4: B4} -- > k_lst[ A[i1, i2...] ], v_lst[ B[i1, i2...] ]
 
+### Pandas&Numpy 简单示例
 如果使用的是 Numpy 或者 Pandas，可以参考这个示例
 
 ![pandas-numpy](https://github.com/chenjiandongx/pyecharts/blob/master/images/pandas-numpy.png)
