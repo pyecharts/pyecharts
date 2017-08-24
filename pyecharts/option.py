@@ -328,6 +328,7 @@ def xy_axis(type=None,
     :return:
     """
     _xAxis = {
+        "interval": xaxis_interval,
         "name": xaxis_name,
         "nameLocation": xaxis_name_pos,
         "nameGap": xaxis_name_gap,
@@ -344,6 +345,7 @@ def xy_axis(type=None,
         "max": xaxis_max
     }
     _yAxis = {
+        "interval": yaxis_interval,
         "name": yaxis_name,
         "nameLocation": yaxis_name_pos,
         "nameGap": yaxis_name_gap,

@@ -101,10 +101,10 @@ def test_overlap_3():
 
     bar = Bar(width=1200, height=600)
     bar.add("蒸发量", attr, v1)
-    bar.add("降水量", attr, v2, yaxis_formatter=" ml")
+    bar.add("降水量", attr, v2, yaxis_formatter=" ml", yaxis_interval=50, yaxis_max=250)
 
     line = Line()
-    line.add("平均温度", attr, v3, yaxis_formatter=" °C")
+    line.add("平均温度", attr, v3, yaxis_formatter=" °C", yaxis_interval=5)
 
     overlap = Overlap()
     overlap.add(bar)
