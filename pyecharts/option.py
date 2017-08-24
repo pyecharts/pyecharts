@@ -245,11 +245,12 @@ def xy_axis(type=None,
             is_yaxislabel_align=False,
             **kwargs):
     """
-
     :param type:
         Chart type
     :param x_axis:
         xAxis data
+    :param xaxis_margin:
+        The margin between the axis label and the xaxis line.
     :param xaxis_name_size:
         xaxis name font size
     :param xaxis_name_gap:
@@ -266,8 +267,6 @@ def xy_axis(type=None,
         The minimun value of xaxis.
     :param xaxis_max:
         The maximun value of xaxis.
-    :param xaxis_margin:
-        The margin between the axis label and the xaxis line.
     :param xaxis_type:
         Type of xaxis
         'value':
@@ -283,26 +282,20 @@ def xy_axis(type=None,
         Set to 0 to force all labels to be displayed
         and label is one by one if setting as 1; If 2,
         it will be one label separates from each other, and so on.
-    :param yaxis_interval:
-        The display interval of the axis scale label is valid in the category yaxis.
-        By default, labels are displayed using labels that do not overlap the labels
-        Set to 0 to force all labels to be displayed
-        and label is one by one if setting as 1; If 2,
-        it will be one label separates from each other, and so on.
-    :param yaxis_name:
-        Name of yAxis
+    :param yaxis_margin:
+        The margin between the axis label and the yaxis line.
     :param yaxis_name_size:
         yaxis name font size
     :param yaxis_name_gap:
         Gap between axis name and yaxis line.
+    :param yaxis_name:
+        Name of yAxis
     :param yaxis_name_pos:
         Location of yAxis name.It can be 'start'，'middle'，'end'
     :param yaxis_rotate:
         Rotation degree of yaxis label, which is especially useful
         when there is no enough space for category axis.
         Rotation degree is from -90 to 90.
-    :param yaxis_margin:
-        The margin between the axis label and the yaxis line.
     :param yaxis_min:
         The minimun value of yaxis.
     :param yaxis_max:
@@ -316,11 +309,17 @@ def xy_axis(type=None,
             Data should only be set via data for this type.
         'log':
             Log axis, suitable for log data.
-    :param is_convert:
-        It specifies whether to convert xAxis and yAxis.
+    :param yaxis_interval:
+        The display interval of the axis scale label is valid in the category yaxis.
+        By default, labels are displayed using labels that do not overlap the labels
+        Set to 0 to force all labels to be displayed
+        and label is one by one if setting as 1; If 2,
+        it will be one label separates from each other, and so on.
     :param yaxis_formatter:
         Formatter of axis label, which supports string template and callback function.
         example: '{value} kg'
+    :param is_convert:
+        It specifies whether to convert xAxis and yAxis.
     :param is_xaxislabel_align:
         whether align xaxis tick with label
     :param is_yaxislabel_align:
