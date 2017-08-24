@@ -185,7 +185,9 @@ cast(seq)
 3. 字典  
     {A1: B1, A2: B2, A3: B3, A4: B4} -- > k_lst[ A[i1, i2...] ], v_lst[ B[i1, i2...] ]
 
-如果使用的是 Numpy 或者 Pandas，0.1.9.2 以前提供的 ```pdcast(pddata)``` 和 ``` npcast(npdata)``` 两个方法在 0.1.9.3 之后不需再用了。0.1.9.3 开始内部已经封装了处理逻辑，直接调用 index 和 values 属性即可。
+如果使用的是 Numpy 或者 Pandas，可以参考这个示例
+
+![pandas-numpy](https://github.com/chenjiandongx/pyecharts/blob/master/images/pandas-numpy.png)
 
 **当然你也可以采用更加酷炫的方式，使用 Jupyter Notebook 来展示图表，matplotlib 有的，pyecharts 也会有的**  
 **Note：** 从 0.1.9.2 版本开始，废弃 ```render_notebook()``` 方法，现已采用更加 pythonic 的做法。直接调用本身实例就可以了。  
