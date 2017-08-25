@@ -7,6 +7,10 @@
 
 ## 版本信息
 
+* version 0.2.1 (dev)
+
+    * 更改 freeze_js [#130] (https://github.com/chenjiandongx/pyecharts/issues/130)
+
 * version 0.2.0（当前版本）
     * 新增 datazoom_xaxis_index, datazoom_yaxis_index，可使 datazoom 组件同时控制多个 x y 轴。
     * 提供 jupyter-notebook 中的 js host 选项，用户可自行决定使用本地后者网络 js 文件，方便转移 notebook 时保证图形可正常显示
@@ -14,6 +18,7 @@
     * 修复 Page 类于其他自定义类共用出现问题的 bug
     * 新增图形种类 Boxplot（箱形图）
     * 新增图形种类 Sankey（桑基图）
+    * 更新 echarts 到 3.7.0
 
 * version 0.1.9.7
     * 修复 requirements.txt 中 jupyter-pip 版本过旧问题
