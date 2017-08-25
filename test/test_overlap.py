@@ -39,7 +39,6 @@ def test_overlap_1():
     overlap.add(es)
     overlap.add(scatter)
     overlap.add(es_1)
-    overlap.show_config()
     overlap.render()
 
 
