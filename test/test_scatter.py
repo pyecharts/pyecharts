@@ -23,7 +23,8 @@ def test_scatter():
     # scatter_0_2
     scatter = Scatter("散点图示例")
     scatter.add("A", v1, v2)
-    scatter.add("B", v1[::-1], v2, is_visualmap=True, visual_type='size', visual_range_size=[20, 80])
+    scatter.add("B", v1[::-1], v2, is_visualmap=True, visual_type='size',
+                visual_range_size=[20, 80])
     scatter.render()
 
     # scatter_0_3

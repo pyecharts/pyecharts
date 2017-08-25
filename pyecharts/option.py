@@ -122,7 +122,7 @@ def line_style(line_width=1,
         Supports value from 0 to 1, and the component will not be drawn when set to 0.
     :param line_curve:
         Edge curvature, which supports value from 0 to 1.
-        The larger the value, the greater the curvature. -> Graph
+        The larger the value, the greater the curvature. -> Graph、Sankey
     :param line_type:
         Line type,it can be 'solid', 'dashed', 'dotted'
     :param line_color:
@@ -280,8 +280,8 @@ def xy_axis(type=None,
         The display interval of the axis scale label is valid in the category xaxis.
         By default, labels are displayed using labels that do not overlap the labels
         Set to 0 to force all labels to be displayed
-        and label is one by one if setting as 1; If 2,
-        it will be one label separates from each other, and so on.
+        and label is one by one if setting as 1; If 2,it will be one label separates
+        from each other, and so on.
     :param yaxis_margin:
         The margin between the axis label and the yaxis line.
     :param yaxis_name_size:
@@ -313,8 +313,8 @@ def xy_axis(type=None,
         The display interval of the axis scale label is valid in the category yaxis.
         By default, labels are displayed using labels that do not overlap the labels
         Set to 0 to force all labels to be displayed
-        and label is one by one if setting as 1; If 2,
-        it will be one label separates from each other, and so on.
+        and label is one by one if setting as 1; If 2,it will be one label separates
+        from each other, and so on.
     :param yaxis_formatter:
         Formatter of axis label, which supports string template and callback function.
         example: '{value} kg'
@@ -468,11 +468,11 @@ def legend(is_legend_show=True,
            legend_top='top',
            legend_selectedmode='multiple',
            **kwargs):
-    """ Legend component.
-        Legend component shows symbol, color and name of different series.
+    """ Legend component shows symbol, color and name of different series.
         You can click legends to toggle displaying series in the chart.
         In ECharts 3, a single echarts instance may contain multiple legend components,
         which makes it easier for the layout of multiple legend components.
+
     :param is_legend_show:
         It specifies whether to show the legend component.
     :param legend_orient:
@@ -815,8 +815,8 @@ def xaxis3D(xaxis3d_type=None,
         The display interval of the axis scale label is valid in the category 3d xaxis.
         By default, labels are displayed using labels that do not overlap the labels
         Set to 0 to force all labels to be displayed
-        and label is one by one if setting as 1; If 2,
-        t will be one label separates from each other, and so on.
+        and label is one by one if setting as 1; If 2,it will be one label separates
+        from each other, and so on.
     :param xaxis3d_margin:
         The margin between the axis label and the 3d xaxis line.
     :return:
@@ -864,8 +864,8 @@ def yaxis3D(yaxis3d_type=None,
         The display interval of the axis scale label is valid in the category 3d yaxis.
         By default, labels are displayed using labels that do not overlap the labels
         Set to 0 to force all labels to be displayed
-        and label is one by one if setting as 1;
-        If 2, it will be one label separates from each other, and so on.
+        and label is one by one if setting as 1;If 2, it will be one label separates
+        from each other, and so on.
     :param yaxis3d_margin:
         The margin between the axis label and the 3d yaxis line.
     :return:

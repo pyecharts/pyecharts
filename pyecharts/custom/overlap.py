@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # coding=utf-8
 
+from pyecharts import template
+
 
 class Overlap(object):
 
@@ -96,3 +98,9 @@ class Overlap(object):
         :return:
         """
         return self._chart._repr_html_()
+
+    def get_js_dependencies(self):
+        """
+        Declare its javascript dependencies for embedding purpose
+        """
+        return template.produce_html_script_list(self._js_dependencies)

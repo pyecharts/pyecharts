@@ -2,6 +2,7 @@
 # coding=utf-8
 
 from pyecharts.option import grid
+from pyecharts import template
 
 
 class Grid(object):
@@ -128,3 +129,9 @@ class Grid(object):
         :return:
         """
         return self._chart._repr_html_()
+
+    def get_js_dependencies(self):
+        """
+        Declare its javascript dependencies for embedding purpose
+        """
+        return template.produce_html_script_list(self._js_dependencies)
