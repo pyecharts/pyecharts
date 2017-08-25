@@ -92,9 +92,33 @@ class Base(object):
             toolbox={
                 "show": True,
                 "orient": "vertical",
-                "left": "right",
+                "left": "95%",
                 "top": "center",
-                "feature": {"saveAsImage": {"show": True}}
+                "feature": {
+                    "saveAsImage": {
+                        "show": True,
+                        "title": "下载图片"
+                    },
+                    "magicType": {
+                        "show": True,
+                        "type": ['line', 'bar', 'stack', 'tiled'],
+                        "title": {
+                            "line": "折线图",
+                            "bar": "柱状图",
+                            "stack": "堆叠",
+                            "tiled": "平铺"
+                        }
+                    },
+                    "restore": {"show": True},
+                    "dataView": {"show": True},
+                    "dataZoom": {
+                        "show": True,
+                        "title": {
+                            "zoom": "区域缩放",
+                            "back": "缩放还原"
+                        }
+                    }
+                }
             },
             _index_flag=random.randint(1, 9000000),
             tooltip={},
