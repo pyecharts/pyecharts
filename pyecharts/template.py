@@ -34,8 +34,10 @@ def freeze_js(html_content):
 
         js_content = ""
         for src in src_matches:
+            src = src.strip()
+            src = src.split('/')
             file_path = os.path.join(
-                get_resource_dir('templates'), src.strip())
+                get_resource_dir('templates'), *src)
 
             with codecs.open(file_path, "r", "utf-8") as f:
                 js_content += f.read() + '\n'
@@ -139,3 +141,4 @@ def ensure_echarts_is_in_the_front(dependencies):
 
 def online(host=constants.DEFAULT_HOST):
     constants.CONFIGURATION['HOST'] = host
+
