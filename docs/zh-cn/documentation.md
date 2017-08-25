@@ -52,7 +52,7 @@ pyecharts 是一个用于生成 Echarts 图表的类库。实际上就是 Echart
 
 # 开始使用
 ### 确认你已安装了最新版本的 pyecharts
-> `print(pyecharts.__version__)` 可查看当前 pyecharts 版本
+> `print(pyecharts.__version__)` 可查看当前 pyecharts 版本，更多版本信息请查看 [changelog.md](https://github.com/chenjiandongx/pyecharts/blob/master/changelog.md)
 
 首先开始来绘制你的第一个图表
 ```python
