@@ -2,6 +2,7 @@
 # coding=utf-8
 
 import pprint
+from pyecharts import template
 
 
 class Timeline(object):
@@ -131,6 +132,12 @@ class Timeline(object):
         :return:
         """
         return self._chart._repr_html_()
+
+    def get_js_dependencies(self):
+        """
+        Declare its javascript dependencies for embedding purpose
+        """
+        return template.produce_html_script_list(self._js_dependencies)
 
     def __check_components(self, chart):
         """
