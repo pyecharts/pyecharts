@@ -190,6 +190,8 @@ cast(seq)
 
 ![pandas-numpy](https://github.com/chenjiandongx/pyecharts/blob/master/images/pandas-numpy.png)
 
+**Note：** 使用 Pandas&Numpy 时，整数类型请确保为 int，而不是 numpy.int32
+
 **当然你也可以采用更加酷炫的方式，使用 Jupyter Notebook 来展示图表，matplotlib 有的，pyecharts 也会有的**  
 **Note：** 从 0.1.9.2 版本开始，废弃 ```render_notebook()``` 方法，现已采用更加 pythonic 的做法。直接调用本身实例就可以了。  
 
