@@ -142,6 +142,3 @@ def ensure_echarts_is_in_the_front(dependencies):
 def online(host=constants.DEFAULT_HOST):
     constants.CONFIGURATION['HOST'] = host
 
-
-def make_path_os_independent(html_path_string):
-    tokens = html_path_string.split('/')
