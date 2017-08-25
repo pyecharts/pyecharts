@@ -7,13 +7,21 @@
 
 ## 版本信息
 
-* ### version 0.2.1 (Dev)
+* ### version 0.2.2 (Dev)
+    * Todo
+
+
+* ### version 0.2.1 - 2017.8.25（Current）
+
+    #### Added
+    * [issue#127](https://github.com/chenjiandongx/pyecharts/issues/127) 新增数据图切换按钮（只针对部分图有效）
 
     #### Fixed
     * [issue#130](https://github.com/chenjiandongx/pyecharts/issues/130) 更改 freeze_js，更正文件路径表示方法
+    * 修复直角坐标系的标签显示问题
 
 
-* ### version 0.2.0 - 2017.8.25（Current）
+* ### version 0.2.0 - 2017.8.25
 
     #### Added
     * [issue#118](https://github.com/chenjiandongx/pyecharts/issues/118) 新增 `datazoom_xaxis_index`, `datazoom_yaxis_index`，可使 datazoom 组件同时控制多个 x y 轴。
