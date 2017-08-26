@@ -29,6 +29,7 @@ class Funnel(Base):
         """
         assert len(attr) == len(value)
         chart = get_all_options(**kwargs)
+
         _data = []
         for data in zip(attr, value):
             _name, _value = data

@@ -86,6 +86,7 @@ class Graph(Base):
         """
         kwargs.update(type="graph")
         chart = get_all_options(**kwargs)
+
         if categories:
             for c in categories:
                 self._option.get('legend')[0].get('data').append(c)
