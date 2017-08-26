@@ -26,7 +26,9 @@ def create_three():
     # scatter3D
     import random
     data = [
-        [random.randint(0, 100), random.randint(0, 100), random.randint(0, 100)] for _ in range(80)
+        [random.randint(0, 100),
+         random.randint(0, 100),
+         random.randint(0, 100)] for _ in range(80)
     ]
     range_color = ['#313695', '#4575b4', '#74add1', '#abd9e9', '#e0f3f8', '#ffffbf',
                    '#fee090', '#fdae61', '#f46d43', '#d73027', '#a50026']
@@ -146,20 +148,24 @@ def test_more():
 
     # radar
     schema = [
-        ("销售", 6500), ("管理", 16000), ("信息技术", 30000), ("客服", 38000), ("研发", 52000), ("市场", 25000)
+        ("销售", 6500), ("管理", 16000), ("信息技术", 30000),
+        ("客服", 38000), ("研发", 52000), ("市场", 25000)
     ]
     v1 = [[4300, 10000, 28000, 35000, 50000, 19000]]
     v2 = [[5000, 14000, 28000, 31000, 42000, 21000]]
     radar = Radar("雷达图示例")
     radar.config(schema)
     radar.add("预算分配", v1, is_splitline=True, is_axisline_show=True)
-    radar.add("实际开销", v2, label_color=["#4e79a7"], is_area_show=False, legend_selectedmode='single')
+    radar.add("实际开销", v2, label_color=["#4e79a7"], is_area_show=False,
+              legend_selectedmode='single')
     page.add(radar)
 
     # scatter3d
     import random
     data = [
-        [random.randint(0, 100), random.randint(0, 100), random.randint(0, 100)] for _ in range(80)
+        [random.randint(0, 100),
+         random.randint(0, 100),
+         random.randint(0, 100)] for _ in range(80)
     ]
     range_color = ['#313695', '#4575b4', '#74add1', '#abd9e9', '#e0f3f8', '#ffffbf',
                    '#fee090', '#fdae61', '#f46d43', '#d73027', '#a50026']
