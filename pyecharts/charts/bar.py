@@ -38,6 +38,7 @@ class Bar(Base):
         assert len(x_axis) == len(y_axis)
         kwargs.update(x_axis=x_axis)
         chart = get_all_options(**kwargs)
+
         is_stack = "stack" + str(self._option['_index_flag']) if is_stack else ""
         xaxis, yaxis = chart['xy_axis']
         self._option.update(xAxis=xaxis, yAxis=yaxis)

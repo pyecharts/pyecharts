@@ -32,8 +32,8 @@ def test_graph():
 
     # graph_1
     graph = Graph("关系图-环形布局示例")
-    graph.add("", nodes, links, is_label_show=True,
-              graph_repulsion=8000, graph_layout='circular', label_text_color=None)
+    graph.add("", nodes, links, is_label_show=True, graph_repulsion=8000,
+              graph_layout='circular', label_text_color=None)
     graph.render()
 
     # graph_2
