@@ -35,6 +35,7 @@ class Boxplot(Base):
         assert len(x_axis) == len(y_axis)
         kwargs.update(x_axis=x_axis)
         chart = get_all_options(**kwargs)
+
         xaxis, yaxis = chart['xy_axis']
         self._option.update(xAxis=xaxis, yAxis=yaxis)
         self._option.get('legend')[0].get('data').append(name)
