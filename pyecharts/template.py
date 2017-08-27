@@ -107,7 +107,7 @@ def produce_require_configuration(dependencies, jshost):
     require_conf_items = [
         "'%s': '%s/%s'" % (key,
                            jshost,
-                           constants.DEFAULT_JS_LIBRARIES.get(key, key))
+                           DEFAULT_JS_LIBRARIES.get(key, key))
         for key in _d]
     require_libraries = ["'%s'" % key for key in _d]
     return dict(
