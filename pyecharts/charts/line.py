@@ -51,6 +51,7 @@ class Line(Base):
         assert len(x_axis) == len(y_axis)
         kwargs.update(x_axis=x_axis, type="line")
         chart = get_all_options(**kwargs)
+
         xaxis, yaxis = chart['xy_axis']
         is_stack = "stack" + str(self._option['_index_flag']) if is_stack else ""
         _area_style = {"normal": chart['area_style']} if is_fill else {}

@@ -54,6 +54,7 @@ class Geo(Base):
         assert len(attr) == len(value)
         kwargs.update(type="geo")
         chart = get_all_options(**kwargs)
+
         _data = []
         for name, value in zip(attr, value):
             if name in CITY_GEO_COORDS:

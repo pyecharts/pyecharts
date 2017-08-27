@@ -45,12 +45,15 @@ def test_line():
     import math, random
     line = Line("折线图示例")
     line.add("商家A", attr, [math.log10(random.randint(1, 99999)) for _ in range(6)])
-    line.add("商家B", attr, [math.log10(random.randint(1, 99999999)) for _ in range(6)], yaxis_type="log")
+    line.add("商家B", attr, [math.log10(random.randint(1, 99999999)) for _ in range(6)],
+             yaxis_type="log")
     line.render()
 
     # line_4
     attr = ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
     line = Line("折线图示例")
-    line.add("最高气温", attr, [11, 11, 15, 13, 12, 13, 10], mark_point=["max", "min"], mark_line=["average"])
-    line.add("最低气温", attr, [1, -2, 2, 5, 3, 2, 0], mark_point=["max", "min"], mark_line=["average"])
+    line.add("最高气温", attr, [11, 11, 15, 13, 12, 13, 10],
+             mark_point=["max", "min"], mark_line=["average"])
+    line.add("最低气温", attr, [1, -2, 2, 5, 3, 2, 0],
+             mark_point=["max", "min"], mark_line=["average"])
     line.render()
