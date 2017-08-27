@@ -49,6 +49,7 @@ class Bar3D(Base):
                       yaxis3d_type='category',
                       zaxis3d_type='value')
         chart = get_all_options(**kwargs)
+
         self._option.get('legend')[0].get('data').append(name)
         self._option.update(
             xAxis3D=chart['xaxis3D'],
