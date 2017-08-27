@@ -8,7 +8,28 @@ import sys
 import codecs
 from jinja2 import Environment, FileSystemLoader
 import pyecharts.constants as constants
+import json
 
+
+def get_resource_dir(folder):
+    """
+
+    :param folder:
+    :return:
+    """
+    current_path = os.path.dirname(__file__)
+    resource_path = os.path.join(current_path, folder)
+    return resource_path
+
+
+#with codecs.open(os.path.join(get_resource_dir('templates'), 'js', 'echarts', 'registry.json'), 'r', 'utf-8') as f:
+with open(os.path.join(get_resource_dir('templates'), 'js', 'echarts', 'registry.json'), 'rb') as f:
+    content = f.read().decode('utf-8')
+    CONFIG = json.loads(content)
+
+DEFAULT_JS_LIBRARIES = CONFIG['FILE_MAP']
+
+CITY_NAME_PINYIN_MAP = CONFIG['PINYIN_MAP']
 
 PY2 = sys.version_info[0] == 2
 
@@ -48,17 +69,6 @@ def freeze_js(html_content):
                         html_content[match.end():])
 
     return html_content
-
-
-def get_resource_dir(folder):
-    """
-
-    :param folder:
-    :return:
-    """
-    current_path = os.path.dirname(__file__)
-    resource_path = os.path.join(current_path, folder)
-    return resource_path
 
 
 # Single Singleton Instance for jinja2
@@ -114,7 +124,7 @@ def produce_html_script_list(dependencies):
     """
     _d = ensure_echarts_is_in_the_front(dependencies)
     script_list = [
-        '%s' % constants.DEFAULT_JS_LIBRARIES.get(key, key)
+        '%s' % DEFAULT_JS_LIBRARIES.get(key, key)
         for key in _d]
     return script_list
 
@@ -141,4 +151,3 @@ def ensure_echarts_is_in_the_front(dependencies):
 
 def online(host=constants.DEFAULT_HOST):
     constants.CONFIGURATION['HOST'] = host
-
