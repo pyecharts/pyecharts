@@ -428,7 +428,9 @@ def _mark(data,
                     "name": _name,
                     "symbol": mark_point_symbol,
                     "symbolSize": mark_point_symbolsize,
-                    "label": {"normal": {"textStyle": {"color": mark_point_textcolor}}}
+                    "label": {
+                        "normal": {"textStyle": {"color": mark_point_textcolor}}
+                    }
                 }
             if type:
                 mark.get("data").append(_m)
@@ -990,7 +992,7 @@ def tooltip(type=None,
 
 
 def get_all_options(**kwargs):
-    """ Return all options of charts
+    """ Return all component options of charts
 
     :param kwargs:
     :return:
