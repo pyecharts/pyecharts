@@ -677,8 +677,8 @@ data 中，如 [1, 2, 3] 表示 x 轴的索引为 1，即 "1a"；y 轴的索引�
 ```python
 bar3d = Bar3D("3D 柱状图示例", width=1200, height=600)
 bar3d.add("", x_axis, y_axis, [[d[1], d[0], d[2]] for d in data], is_visualmap=True,
-          visual_range=[0, 20], visual_range_color=range_color, grid3d_width=200, grid3d_depth=80,
-          grid3d_shading='lambert')
+          visual_range=[0, 20], visual_range_color=range_color, grid3d_width=200,
+          grid3d_depth=80, grid3d_shading='lambert')
 bar3d.render()
 ```
 ![bar3D-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/bar3D-1.gif)
@@ -687,8 +687,8 @@ bar3d.render()
 ```python
 bar3d = Bar3D("3D 柱状图示例", width=1200, height=600)
 bar3d.add("", x_axis, y_axis, [[d[1], d[0], d[2]] for d in data], is_visualmap=True,
-          visual_range=[0, 20], visual_range_color=range_color, grid3d_width=200, grid3d_depth=80,
-          is_grid3d_rotate=True)
+          visual_range=[0, 20], visual_range_color=range_color, grid3d_width=200,
+          grid3d_depth=80, is_grid3d_rotate=True)
 bar3d.render()
 ```
 ![bar3D-2](https://github.com/chenjiandongx/pyecharts/blob/master/images/bar3D-2.gif)
@@ -697,8 +697,8 @@ bar3d.render()
 ```python
 bar3d = Bar3D("3D 柱状图示例", width=1200, height=600)
 bar3d.add("", x_axis, y_axis, [[d[1], d[0], d[2]] for d in data], is_visualmap=True,
-          visual_range=[0, 20], visual_range_color=range_color, grid3d_width=200, grid3d_depth=80,
-          is_grid3d_rotate=True, grid3d_rotate_speed=180)
+          visual_range=[0, 20], visual_range_color=range_color, grid3d_width=200,
+          grid3d_depth=80, is_grid3d_rotate=True, grid3d_rotate_speed=180)
 bar3d.render()
 ```
 ![bar3D-3](https://github.com/chenjiandongx/pyecharts/blob/master/images/bar3D-3.gif)
@@ -844,8 +844,8 @@ funnel.render()
 
 ```python
 funnel = Funnel("漏斗图示例", width=600, height=400, title_pos='center')
-funnel.add("商品", attr, value, is_label_show=True, label_pos="outside", legend_orient='vertical',
-           legend_pos='left')
+funnel.add("商品", attr, value, is_label_show=True, label_pos="outside",
+           legend_orient='vertical', legend_pos='left')
 funnel.render()
 ```
 ![funnel-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/funnel-1.png)
@@ -878,7 +878,8 @@ gauge.render()
 
 ```python
 gauge = Gauge("仪表盘示例")
-gauge.add("业务指标", "完成率", 166.66, angle_range=[180, 0], scale_range=[0, 200], is_legend_show=False)
+gauge.add("业务指标", "完成率", 166.66, angle_range=[180, 0], scale_range=[0, 200],
+          is_legend_show=False)
 gauge.render()
 ```
 ![gauge-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/gauge-1.png)
@@ -952,7 +953,8 @@ data = [
 geo = Geo("全国主要城市空气质量", "data from pm2.5", title_color="#fff", title_pos="center",
 width=1200, height=600, background_color='#404a59')
 attr, value = geo.cast(data)
-geo.add("", attr, value, visual_range=[0, 200], visual_text_color="#fff", symbol_size=15, is_visualmap=True)
+geo.add("", attr, value, visual_range=[0, 200], visual_text_color="#fff",
+        symbol_size=15, is_visualmap=True)
 geo.render()
 ```
 ![geo-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/geo-0.gif)
@@ -961,10 +963,11 @@ geo.render()
 
 HeatMap 类型
 ```python
-geo = Geo("全国主要城市空气质量", "data from pm2.5", title_color="#fff", title_pos="center", width=1200, height=600,
-          background_color='#404a59')
+geo = Geo("全国主要城市空气质量", "data from pm2.5", title_color="#fff", title_pos="center",
+          width=1200, height=600, background_color='#404a59')
 attr, value = geo.cast(data)
-geo.add("", attr, value, type="heatmap", is_visualmap=True, visual_range=[0, 300], visual_text_color='#fff')
+geo.add("", attr, value, type="heatmap", is_visualmap=True, visual_range=[0, 300],
+        visual_text_color='#fff')
 geo.render()
 ```
 ![geo-0-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/geo-0-1.gif)
@@ -1157,7 +1160,8 @@ kline.render()
 Kline + dataZoom
 ```python
 kline = Kline("K 线图示例")
-kline.add("日K", ["2017/7/{}".format(i + 1) for i in range(31)], v1, mark_point=["max"], is_datazoom_show=True)
+kline.add("日K", ["2017/7/{}".format(i + 1) for i in range(31)], v1,
+          mark_point=["max"], is_datazoom_show=True)
 kline.render()
 ```
 ![kline-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/kline-1.gif)
@@ -1269,7 +1273,8 @@ line.render()
 import math, random
 line = Line("折线图示例")
 line.add("商家A", attr, [math.log10(random.randint(1, 99999)) for _ in range(6)])
-line.add("商家B", attr, [math.log10(random.randint(1, 99999999)) for _ in range(6)], yaxis_type="log")
+line.add("商家B", attr, [math.log10(random.randint(1, 99999999)) for _ in range(6)],
+         yaxis_type="log")
 line.render()
 ```
 ![line-3-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/line-3-1.png)
@@ -1754,13 +1759,16 @@ config(schema=None, c_schema=None, shape="", rader_text_color="#000", **kwargs):
 from pyecharts import Radar
 
 schema = [ 
-    ("销售", 6500), ("管理", 16000), ("信息技术", 30000), ("客服", 38000), ("研发", 52000), ("市场", 25000)]
+    ("销售", 6500), ("管理", 16000), ("信息技术", 30000),
+    ("客服", 38000), ("研发", 52000), ("市场", 25000)
+]
 v1 = [[4300, 10000, 28000, 35000, 50000, 19000]]
 v2 = [[5000, 14000, 28000, 31000, 42000, 21000]]
 radar = Radar()
 radar.config(schema)
 radar.add("预算分配", v1, is_splitline=True, is_axisline_show=True)
-radar.add("实际开销", v2, label_color=["#4e79a7"], is_area_show=False, legend_selectedmode='single')
+radar.add("实际开销", v2, label_color=["#4e79a7"], is_area_show=False,
+          legend_selectedmode='single')
 radar.render()
 ```
 ![radar-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/radar-0.gif)
@@ -2012,7 +2020,11 @@ add(name, data, grid3d_opacity=1, **kwargs)
 from pyecharts import Scatter3D
 
 import random
-data = [[random.randint(0, 100), random.randint(0, 100), random.randint(0, 100)] for _ in range(80)]
+data = [
+    [random.randint(0, 100),
+    random.randint(0, 100),
+    random.randint(0, 100)] for _ in range(80)
+]
 range_color = ['#313695', '#4575b4', '#74add1', '#abd9e9', '#e0f3f8', '#ffffbf',
                '#fee090', '#fdae61', '#f46d43', '#d73027', '#a50026']
 scatter3D = Scatter3D("3D 散点图示例", width=1200, height=600)
@@ -2118,9 +2130,10 @@ bar.add("商家A", attr, v1, is_stack=True)
 bar.add("商家B", attr, v2, is_stack=True)
 line = Line("折线图示例", title_top="50%")
 attr = ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
-line.add("最高气温", attr, [11, 11, 15, 13, 12, 13, 10], mark_point=["max", "min"], mark_line=["average"])
+line.add("最高气温", attr, [11, 11, 15, 13, 12, 13, 10],
+         mark_point=["max", "min"], mark_line=["average"])
 line.add("最低气温", attr, [1, -2, 2, 5, 3, 2, 0], mark_point=["max", "min"],
-             mark_line=["average"], legend_top="50%")
+         mark_line=["average"], legend_top="50%")
 
 grid = Grid()
 grid.add(bar, grid_bottom="60%")
@@ -2160,7 +2173,8 @@ bar.add("商家A", attr, v1, is_stack=True)
 bar.add("商家B", attr, v2, is_stack=True, legend_pos="80%")
 line = Line("折线图示例")
 attr = ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
-line.add("最高气温", attr, [11, 11, 15, 13, 12, 13, 10], mark_point=["max", "min"], mark_line=["average"])
+line.add("最高气温", attr, [11, 11, 15, 13, 12, 13, 10],
+         mark_point=["max", "min"], mark_line=["average"])
 line.add("最低气温", attr, [1, -2, 2, 5, 3, 2, 0], mark_point=["max", "min"],
          mark_line=["average"], legend_pos="20%")
 v1 = [5, 20, 36, 10, 75, 90]
@@ -2211,7 +2225,8 @@ from pyecharts import Line, Kline, Grid
 
 line = Line("折线图示例", width=1200)
 attr = ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
-line.add("最高气温", attr, [11, 11, 15, 13, 12, 13, 10], mark_point=["max", "min"], mark_line=["average"])
+line.add("最高气温", attr, [11, 11, 15, 13, 12, 13, 10],
+         mark_point=["max", "min"], mark_line=["average"])
 line.add("最低气温", attr, [1, -2, 2, 5, 3, 2, 0], mark_point=["max", "min"],
          mark_line=["average"], legend_pos="20%")
 v1 = [[2320.26, 2320.26, 2287.3, 2362.94],
@@ -2284,7 +2299,8 @@ datazoom 组件同时控制多个图
 ```python
 line = Line("折线图示例", width=1200, height=700)
 attr = ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
-line.add("最高气温", attr, [11, 11, 15, 13, 12, 13, 10], mark_point=["max", "min"], mark_line=["average"])
+line.add("最高气温", attr, [11, 11, 15, 13, 12, 13, 10],
+         mark_point=["max", "min"], mark_line=["average"])
 line.add("最低气温", attr, [1, -2, 2, 5, 3, 2, 0], mark_point=["max", "min"], legend_top="50%",
          mark_line=["average"], is_datazoom_show=True, datazoom_xaxis_index=[0, 1])
 
@@ -2516,7 +2532,11 @@ page.add(bar)         # step 2
 
 # scatter3D
 import random
-data = [[random.randint(0, 100), random.randint(0, 100), random.randint(0, 100)] for _ in range(80)]
+data = [
+    [random.randint(0, 100),
+    random.randint(0, 100),
+    random.randint(0, 100)] for _ in range(80)
+]
 range_color = ['#313695', '#4575b4', '#74add1', '#abd9e9', '#e0f3f8', '#ffffbf',
                '#fee090', '#fdae61', '#f46d43', '#d73027', '#a50026']
 scatter3D = Scatter3D("3D 散点图示例", width=1200, height=600)
@@ -2543,16 +2563,18 @@ page = Page()
 # line
 attr = ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
 line = Line("折线图示例")
-line.add("最高气温", attr, [11, 11, 15, 13, 12, 13, 10], mark_point=["max", "min"], mark_line=["average"])
-line.add("最低气温", attr, [1, -2, 2, 5, 3, 2, 0], mark_point=["max", "min"], mark_line=["average"])
+line.add("最高气温", attr, [11, 11, 15, 13, 12, 13, 10],
+         mark_point=["max", "min"], mark_line=["average"])
+line.add("最低气温", attr, [1, -2, 2, 5, 3, 2, 0],
+         mark_point=["max", "min"], mark_line=["average"])
 page.add(line)
 
 # pie
 attr = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
 v1 = [11, 12, 13, 10, 10, 10]
 pie = Pie("饼图-圆环图示例", title_pos='center')
-pie.add("", attr, v1, radius=[40, 75], label_text_color=None, is_label_show=True, legend_orient='vertical',
-        legend_pos='left')
+pie.add("", attr, v1, radius=[40, 75], label_text_color=None, is_label_show=True,
+        legend_orient='vertical', legend_pos='left')
 page.add(pie)
 
 # kline
@@ -2592,13 +2614,17 @@ kline.add("日K", ["2017/7/{}".format(i + 1) for i in range(31)], v1)
 page.add(kline)
 
 # radar
-schema = [("销售", 6500), ("管理", 16000), ("信息技术", 30000), ("客服", 38000), ("研发", 52000), ("市场", 25000)]
+schema = [
+    ("销售", 6500), ("管理", 16000), ("信息技术", 30000),
+    ("客服", 38000), ("研发", 52000), ("市场", 25000)
+]
 v1 = [[4300, 10000, 28000, 35000, 50000, 19000]]
 v2 = [[5000, 14000, 28000, 31000, 42000, 21000]]
 radar = Radar("雷达图示例")
 radar.config(schema)
 radar.add("预算分配", v1, is_splitline=True, is_axisline_show=True)
-radar.add("实际开销", v2, label_color=["#4e79a7"], is_area_show=False, legend_selectedmode='single')
+radar.add("实际开销", v2, label_color=["#4e79a7"], is_area_show=False,
+          legend_selectedmode='single')
 page.add(radar)
 
 page.render()
