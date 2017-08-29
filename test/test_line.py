@@ -57,18 +57,3 @@ def test_line():
     line.add("最低气温", attr, [1, -2, 2, 5, 3, 2, 0],
              mark_point=["max", "min"], mark_line=["average"])
     line.render()
-
-    # line_4
-    attr = ['{}天'.format(i) for i in range(1, 31)]
-    line_top = Line("折线图示例", width=1200, height=700)
-    line_top.add("最高气温", attr, [random.randint(20, 100) for i in range(30)],
-                 mark_point=["max", "min"], mark_line=["average"], legend_pos='38%')
-    line_bottom = Line()
-    line_bottom.add("最低气温", attr, [random.randint(20, 100) for i in range(30)],
-                    mark_point=["max", "min"], mark_line=["average"],
-                    is_yaxis_inverse=True, xaxis_pos='top')
-
-    ol = Grid()
-    ol.add(line_top, grid_bottom='60%')
-    ol.add(line_bottom, grid_top='50%')
-    ol.render()
