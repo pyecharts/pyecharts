@@ -8,7 +8,12 @@
 ## 版本信息
 
 * ### version 0.2.2 (Dev)
-    * Todo
+    #### Added
+    * [issue#138](https://github.com/chenjiandongx/pyecharts/issues/138) 新增 `is_xaxis_inverse`, `is_yaxis_inverse`, `xaxis_pos`, `yaxis_pos` 参数，提供倒映直角坐标系功能
+    * Map 图新增 label 模块，现可以利用标签显示地区名称。
+
+    #### Fixed
+    * [issue#133](https://github.com/chenjiandongx/pyecharts/issues/133) 回退 Echarts 版本，解决标签不能正常显示的 bug
 
 
 * ### version 0.2.1 - 2017.8.25（Current）
