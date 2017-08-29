@@ -250,6 +250,10 @@ cast(seq)
     x 轴刻度线和标签是否对齐，默认为 False
 * is_yaxislabel_align -> bool  
     y 轴刻度线和标签是否对齐，默认为 False
+* is_xaxis_inverse -> bool  
+    是否反向 x 坐标轴，默认为 False
+* is_yaxis_inverse -> bool  
+    是否反向 y 坐标轴，默认为 False
 * x_axis -> list  
     x 轴数据项
 * xaxis_interval -> int  
@@ -269,6 +273,8 @@ cast(seq)
     x 坐标轴刻度最小值，默认为自适应。
 * xaxis_max -> int/float  
     x 坐标轴刻度最大值，默认为自适应。
+* xaxis_pos -> str  
+    x 坐标轴位置，有'top','bottom'可选
 * xaxis_type -> str  
     x 坐标轴类型  
     * 'value'：数值轴，适用于连续数据。
@@ -297,6 +303,8 @@ cast(seq)
     y 坐标轴刻度最小值，默认为自适应。
 * yaxis_max -> int/float  
     y 坐标轴刻度最大值，默认为自适应。
+* yaxis_pos -> str  
+    y 坐标轴位置，有'left','right'可选
 * yaxis_type -> str  
     y 坐标轴类型  
     * 'value'：数值轴，适用于连续数据。
@@ -1417,6 +1425,18 @@ map.render()
 ```
 ![map-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/map-0.gif)
 
+显示各区域名称
+```python
+from pyecharts import Map
+
+value = [155, 10, 66, 78]
+attr = ["福建", "山东", "北京", "上海"]
+map = Map("全国地图示例", width=1200, height=600)
+map.add("", attr, value, maptype='china', is_label_show=True)
+map.render()
+```
+![map-0-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/map-0-1.png)
+
 ```python
 from pyecharts import Map
 
@@ -2004,7 +2024,6 @@ scatter.render()
 
 
 ## Scatter3D（3D 散点图）
-
 Scatter3D.add() 方法签名
 ```python
 add(name, data, grid3d_opacity=1, **kwargs)
@@ -2345,8 +2364,28 @@ grid.render()
 ```
 ![grid-6](https://github.com/chenjiandongx/pyecharts/blob/master/images/grid-6.gif)  
 
-## Overlap：结合不同类型图表叠加画在同张图上
+倒映直角坐标系
+```python
+import random
 
+attr = ['{}天'.format(i) for i in range(1, 31)]
+line_top = Line("折线图示例", width=1200, height=700)
+line_top.add("最高气温", attr, [random.randint(20, 100) for i in range(30)],
+             mark_point=["max", "min"], mark_line=["average"], legend_pos='38%')
+line_bottom = Line()
+line_bottom.add("最低气温", attr, [random.randint(20, 100) for i in range(30)],
+                mark_point=["max", "min"], mark_line=["average"],
+                is_yaxis_inverse=True, xaxis_pos='top')
+
+grid = Grid()
+grid.add(line_top, grid_bottom='60%')
+grid.add(line_bottom, grid_top='50%')
+grid.render()
+```
+![grid-7](https://github.com/chenjiandongx/pyecharts/blob/master/images/grid-7.gif)  
+
+
+## Overlap：结合不同类型图表叠加画在同张图上
 > 用户可以自定义结合 Line/Bar/Kline, Scatter/EffectScatter 图表，将不同类型图表画在一张图上。利用第一个图表为基础，往后的数据都将会画在第一个图表上。   
 Overlap 类的使用：
 1. 引入 `Overlap` 类，`from pyecharts import Overlap`
