@@ -54,6 +54,7 @@ class Map(Base):
             "type": "map",
             "name": name,
             "symbol": chart['symbol'],
+            "label": chart['label'],
             "mapType": maptype,
             "data": _data,
             "roam": is_roam
