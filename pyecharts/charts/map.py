@@ -4,7 +4,7 @@ import sys
 
 from pyecharts.base import Base
 from pyecharts.option import get_all_options
-from pyecharts.template import CITY_NAME_PINYIN_MAP
+from pyecharts.constants import CITY_NAME_PINYIN_MAP
 
 PY2 = sys.version_info[0] == 2
 
@@ -63,8 +63,6 @@ class Map(Base):
             "data": _data,
             "roam": is_roam
         })
-        if PY2:
-            maptype = maptype.decode('utf-8')
         name_in_pinyin = CITY_NAME_PINYIN_MAP.get(maptype, maptype)
         self._js_dependencies.add(name_in_pinyin)
         self._config_components(**kwargs)
