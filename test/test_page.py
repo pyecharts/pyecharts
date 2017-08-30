@@ -30,8 +30,9 @@ def create_three():
          random.randint(0, 100),
          random.randint(0, 100)] for _ in range(80)
     ]
-    range_color = ['#313695', '#4575b4', '#74add1', '#abd9e9', '#e0f3f8', '#ffffbf',
-                   '#fee090', '#fdae61', '#f46d43', '#d73027', '#a50026']
+    range_color = [
+        '#313695', '#4575b4', '#74add1', '#abd9e9', '#e0f3f8', '#ffffbf',
+        '#fee090', '#fdae61', '#f46d43', '#d73027', '#a50026']
     scatter3d = Scatter3D("3D 散点图示例", width=1200, height=600)
     scatter3d.add("", data, is_visualmap=True, visual_range_color=range_color)
     page.add(scatter3d)
@@ -98,7 +99,8 @@ def test_more():
     # line
     attr = ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
     line = Line("折线图示例")
-    line.add("最高气温", attr, [11, 11, 15, 13, 12, 13, 10], mark_point=["max", "min"],
+    line.add("最高气温", attr, [11, 11, 15, 13, 12, 13, 10],
+             mark_point=["max", "min"],
              mark_line=["average"])
     line.add("最低气温", attr, [1, -2, 2, 5, 3, 2, 0], mark_point=["max", "min"],
              mark_line=["average"])
@@ -108,8 +110,8 @@ def test_more():
     attr = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
     v1 = [11, 12, 13, 10, 10, 10]
     pie = Pie("饼图-圆环图示例", title_pos='center')
-    pie.add("", attr, v1, radius=[40, 75], label_text_color=None, is_label_show=True,
-            legend_orient='vertical', legend_pos='left')
+    pie.add("", attr, v1, radius=[40, 75], label_text_color=None,
+            is_label_show=True, legend_orient='vertical', legend_pos='left')
     page.add(pie)
 
     # kline
