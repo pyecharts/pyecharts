@@ -20,7 +20,7 @@ class Funnel(Base):
 
         :param name:
             Series name used for displaying in tooltip and filtering with legend,
-            or updaing data and configuration with setOption.
+            or updating data and configuration with setOption.
         :param attr:
             name of attribute
         :param value:
@@ -38,10 +38,11 @@ class Funnel(Base):
             self._option.get('legend')[0].get('data').append(a)
         _dset = set(self._option.get('legend')[0].get('data'))
         self._option.get('legend')[0].update(data=list(_dset))
+
         self._option.get('series').append({
             "type": "funnel",
             "name": name,
             "data": _data,
             "label": chart['label']
         })
-        self._legend_visualmap_colorlst(**kwargs)
+        self._config_components(**kwargs)

@@ -49,6 +49,7 @@ class Sankey(Base):
         """
         chart = get_all_options(**kwargs)
         self._option.get('legend')[0].get('data').append(name)
+
         self._option.get('series').append({
             "type": "sankey",
             "name": name,
@@ -60,4 +61,4 @@ class Sankey(Base):
             "label": chart['label'],
             "lineStyle": chart['line_style'],
         })
-        self._legend_visualmap_colorlst(**kwargs)
+        self._config_components(**kwargs)

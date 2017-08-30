@@ -68,6 +68,7 @@ class WordCloud(Base):
             _rmin = _rmax = 0
         else:
             shape = "circle"
+
         self._option.get('series').append({
             "type": "wordCloud",
             "name": name,

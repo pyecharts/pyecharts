@@ -31,7 +31,7 @@ class Graph(Base):
         """
         :param name:
             Series name used for displaying in tooltip and filtering with legend,
-            or updaing data and configuration with setOption.
+            or updating data and configuration with setOption.
         :param nodes:
             Relational nodes data
             name：Name of data item.     # required！！
@@ -117,4 +117,4 @@ class Graph(Base):
             "edgeSymbolSize": graph_edge_symbolsize,
             "links":links,
         })
-        self._legend_visualmap_colorlst(**kwargs)
+        self._config_components(**kwargs)
