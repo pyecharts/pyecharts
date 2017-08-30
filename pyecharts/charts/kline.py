@@ -22,15 +22,14 @@ class Kline(Base):
 
         :param name:
             Series name used for displaying in tooltip and filtering with legend,
-            or updaing data and configuration with setOption.
+            or updating data and configuration with setOption.
         :param x_axis:
             data of xAxis
         :param y_axis:
             data pf yAxis
             Data should be the two-dimensional array shown as follow. -> [[],[]]
             Every data item (each line in the example above) represents a box,
-            which contains 4 values.
-            They are: [open, close, lowest, highest]
+            which contains 4 values. They are: [open, close, lowest, highest]
             (namely: [opening value, closing value, lowest value, highest value])
         :param kwargs:
         :return:
@@ -41,6 +40,7 @@ class Kline(Base):
         xaxis, yaxis = chart['xy_axis']
         self._option.update(xAxis=xaxis, yAxis=yaxis)
         self._option.get('legend')[0].get('data').append(name)
+
         self._option.get('series').append({
             "type": "candlestick",
             "name": name,
@@ -49,4 +49,4 @@ class Kline(Base):
             "markLine": chart['mark_line'],
             "indexflag": self._option.get('_index_flag')
         })
-        self._legend_visualmap_colorlst(**kwargs)
+        self._config_components(**kwargs)
