@@ -27,8 +27,8 @@ class Map(Base):
         """
 
         :param name:
-            Series name used for displaying in tooltip and filtering
-            with legend, or updaing data and configuration with setOption.
+            Series name used for displaying in tooltip and filtering with legend,
+            or updating data and configuration with setOption.
         :param attr:
             name of attribute
         :param value:
@@ -50,6 +50,7 @@ class Map(Base):
             _name, _value = data
             _data.append({"name": _name, "value": _value})
         self._option.get('legend')[0].get('data').append(name)
+
         self._option.get('series').append({
             "type": "map",
             "name": name,
@@ -61,4 +62,4 @@ class Map(Base):
         })
         name_in_pinyin = CITY_NAME_PINYIN_MAP.get(maptype, maptype)
         self._js_dependencies.add(name_in_pinyin)
-        self._legend_visualmap_colorlst(**kwargs)
+        self._config_components(**kwargs)
