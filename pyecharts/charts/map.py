@@ -30,8 +30,8 @@ class Map(Base):
         """
 
         :param name:
-            Series name used for displaying in tooltip and filtering with legend,
-            or updating data and configuration with setOption.
+            Series name used for displaying in tooltip and filtering with
+            legend, or updating data and configuration with setOption.
         :param attr:
             name of attribute
         :param value:

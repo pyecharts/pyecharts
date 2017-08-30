@@ -2,6 +2,7 @@
 # coding=utf-8
 
 from pyecharts import template
+from pyecharts import utils
 import pyecharts.constants as constants
 from pyecharts.template import (
     produce_require_configuration,
@@ -48,8 +49,8 @@ class Page(object):
         tmp = template.JINJA2_ENV.get_template(template_name)
         html = tmp.render(multi_chart_content=chart_content,
                           script_list=script_list)
-        html = template.freeze_js(html)
-        template.write_utf8_html_file(path, html)
+        html = utils.freeze_js(html)
+        utils.write_utf8_html_file(path, html)
 
     def render_embed(self):
         """
