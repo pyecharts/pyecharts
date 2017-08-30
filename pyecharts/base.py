@@ -298,6 +298,11 @@ class Base(object):
         """ Print all options of charts"""
         pprint(self._option)
 
+    @property
+    def options(self):
+        """ Expose public interface options """
+        return self._option
+
     @staticmethod
     def cast(seq):
         """ Convert the sequence with the dictionary and tuple type into k_lst, v_lst.
