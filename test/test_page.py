@@ -65,8 +65,10 @@ def test_two_bars():
 def test_page_get_js_dependencies():
     page = create_three()
     dependencies = page.get_js_dependencies()
-    expected = ['echarts.min', 'guangdong', 'echarts-gl.min']
-    eq_(dependencies, expected)
+    eq_(dependencies[0], 'echarts.min')
+    assert 'guangdong' in dependencies
+    assert 'echarts-gl.min' in dependencies
+    eq_(len(dependencies), 3)
 
 
 def test_page_embed():
