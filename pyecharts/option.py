@@ -229,6 +229,7 @@ def xy_axis(type=None,
             xaxis_max=None,
             xaxis_type=None,
             xaxis_interval="auto",
+            xaxis_pos=None,
             yaxis_margin=8,
             yaxis_name_size=14,
             yaxis_name_gap=25,
@@ -239,8 +240,11 @@ def xy_axis(type=None,
             yaxis_max=None,
             yaxis_type=None,
             yaxis_interval="auto",
+            yaxis_pos=None,
             yaxis_formatter="",
             is_convert=False,
+            is_xaxis_inverse=False,
+            is_yaxis_inverse=False,
             is_xaxislabel_align=False,
             is_yaxislabel_align=False,
             **kwargs):
@@ -282,6 +286,11 @@ def xy_axis(type=None,
         Set to 0 to force all labels to be displayed
         and label is one by one if setting as 1; If 2,it will be one label separates
         from each other, and so on.
+    :param xaxis_pos:
+        The position of x axis.
+        options: 'top' or 'bottom'
+        The first x axis in grid defaults to be on the bottom of the grid, and
+        the second x axis is on the other side against the first x axis.
     :param yaxis_margin:
         The margin between the axis label and the yaxis line.
     :param yaxis_name_size:
@@ -315,11 +324,20 @@ def xy_axis(type=None,
         Set to 0 to force all labels to be displayed
         and label is one by one if setting as 1; If 2,it will be one label separates
         from each other, and so on.
+    :param yaxis_pos:
+        the position of y axis.
+        options: 'left' or 'right'
+        The first y axis in grid defaults to be the left ('left') of the grid, and
+        the second y axis is on the other side against the first y axis.
     :param yaxis_formatter:
         Formatter of axis label, which supports string template and callback function.
         example: '{value} kg'
     :param is_convert:
         It specifies whether to convert xAxis and yAxis.
+    :param is_xaxis_inverse:
+        Whether xaxis is inversed
+    :param is_yaxis_inverse:
+        Whether yaxis is inversed
     :param is_xaxislabel_align:
         whether align xaxis tick with label
     :param is_yaxislabel_align:
@@ -340,6 +358,8 @@ def xy_axis(type=None,
         "axisTick": {
             "alignWithLabel": is_xaxislabel_align
         },
+        "inverse": is_xaxis_inverse,
+        "position": xaxis_pos,
         "min": xaxis_min,
         "max": xaxis_max
     }
@@ -357,6 +377,8 @@ def xy_axis(type=None,
         "axisTick": {
             "alignWithLabel": is_yaxislabel_align
         },
+        "inverse": is_yaxis_inverse,
+        "position": yaxis_pos,
         "min": yaxis_min,
         "max": yaxis_max
     }

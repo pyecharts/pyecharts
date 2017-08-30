@@ -26,7 +26,7 @@ class Liquid(Base):
 
         :param name:
             Series name used for displaying in tooltip and filtering with legend,
-            or updaing data and configuration with setOption.
+            or updating data and configuration with setOption.
         :param data:
             data of liquid, [0.6, 0.5, 0.4, 0.3]: This creates a chart wit waves at
             position of 60%, 50%, 40%, and 30%.

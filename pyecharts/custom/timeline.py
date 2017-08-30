@@ -126,6 +126,14 @@ class Timeline(object):
         """
         return self._chart
 
+    @property
+    def options(self):
+        """
+
+        :return:
+        """
+        return self._timeline_options
+
     def _repr_html_(self):
         """
 

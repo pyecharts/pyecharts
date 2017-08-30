@@ -25,7 +25,7 @@ class Bar3D(Base):
 
         :param name:
             Series name used for displaying in tooltip and filtering with legend,
-            or updaing data and configuration with setOption.
+            or updating data and configuration with setOption.
         :param x_axis:
             xAxis data
         :param y_axis:
@@ -68,4 +68,4 @@ class Bar3D(Base):
             "shading": grid3d_shading,
             "itemStyle": {"opacity": grid3d_opacity}
         })
-        self._legend_visualmap_colorlst(**kwargs)
+        self._config_components(**kwargs)

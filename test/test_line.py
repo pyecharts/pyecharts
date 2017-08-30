@@ -2,7 +2,7 @@
 # coding=utf-8
 from __future__ import unicode_literals
 
-from pyecharts import Line
+from pyecharts import Line, Grid
 
 
 def test_line():
