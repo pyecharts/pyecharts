@@ -65,7 +65,7 @@ class Radar(Base):
 
         :param name:
             Series name used for displaying in tooltip and filtering with legend,
-            or updaing data and configuration with setOption.
+            or updating data and configuration with setOption.
         :param value:
             data array of series, it is represented by a two-dimension array -> [[],[]]
         :param item_color:
@@ -75,6 +75,7 @@ class Radar(Base):
         kwargs.update(flag=True, type='radar')
         chart = get_all_options(**kwargs)
         self._option.get('legend')[0].get('data').append(name)
+
         self._option.get('series').append({
             "type": "radar",
             "name": name,
@@ -89,4 +90,4 @@ class Radar(Base):
                 "normal": chart['area_style']
             },
         })
-        self._legend_visualmap_colorlst(**kwargs)
+        self._config_components(**kwargs)

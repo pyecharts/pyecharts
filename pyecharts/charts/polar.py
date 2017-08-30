@@ -36,7 +36,7 @@ class Polar(Base):
 
         :param name:
             Series name used for displaying in tooltip and filtering with legend,
-            or updaing data and configuration with setOption.
+            or updating data and configuration with setOption.
         :param data:
             data of polar, [Polar radius, Polar angle, [value]]
             it is represented by a two-dimension array -> [[],[]]
@@ -172,4 +172,4 @@ class Polar(Base):
                 }
             )
         self._option.update(polar={})
-        self._legend_visualmap_colorlst(**kwargs)
+        self._config_components(**kwargs)

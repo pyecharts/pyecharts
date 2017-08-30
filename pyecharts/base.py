@@ -99,25 +99,8 @@ class Base(object):
                         "show": True,
                         "title": "下载图片"
                     },
-                    "magicType": {
-                        "show": True,
-                        "type": ['line', 'bar', 'stack', 'tiled'],
-                        "title": {
-                            "line": "折线图",
-                            "bar": "柱状图",
-                            "stack": "堆叠",
-                            "tiled": "平铺"
-                        }
-                    },
                     "restore": {"show": True},
                     "dataView": {"show": True},
-                    "dataZoom": {
-                        "show": True,
-                        "title": {
-                            "zoom": "区域缩放",
-                            "back": "缩放还原"
-                        }
-                    }
                 }
             },
             _index_flag=random.randint(1, 9000000),
@@ -182,6 +165,7 @@ class Base(object):
             is_legend_show=None,
             is_liquid_animation=None,
             is_liquid_outline_show=None,
+            is_more_utils=None,
             is_radiusaxis_show=None,
             is_random=None,
             is_roam=None,
@@ -334,26 +318,52 @@ class Base(object):
                 v_lst.append(v)
         return k_lst, v_lst
 
-    def _legend_visualmap_colorlst(self, is_visualmap=False, **kwargs):
-        """ config legend，visualmap and colorlst component.
+    def _config_components(self,is_visualmap=False,
+                           is_datazoom_show=False,
+                           is_more_utils=False,
+                           **kwargs):
+        """ config components of chart
 
         :param is_visualmap:
-            It specifies whether to use the viusalmap component.
+            It specifies whether to use the visualMap component.
+        :param is_datazoom_show:
+            It specifies whether to show the dataZoom component.
+        :param is_more_utils:
+            It specifies whether to show more utils in toolbox component.
         :param kwargs:
         """
         kwargs.update(colorlst=self._colorlst)
         chart = get_all_options(**kwargs)
-        if is_visualmap:
-            self._option.update(visualMap=chart['visual_map'])
-        self._option.get('legend')[0].update(chart['legend'])
         self._option.update(color=chart['color'])
 
-        # datazoom component
-        if kwargs.get('is_datazoom_show', None) is True:
-            self._option.update(dataZoom=chart['datazoom'])
-
+        # legend component
+        self._option.get('legend')[0].update(chart['legend'])
         # tooltip component
         self._option.update(tooltip=chart['tooltip'])
+
+        # visualMap component
+        if is_visualmap:
+            self._option.update(visualMap=chart['visual_map'])
+        # dataZoom component
+        if is_datazoom_show:
+            self._option.update(dataZoom=chart['datazoom'])
+        # toolbox component
+        if is_more_utils:
+            self._option.get('toolbox').get('feature').update(
+                magicType={
+                    "show": True,
+                    "type": ['line', 'bar', 'stack', 'tiled'],
+                    "title": {
+                        "line": "折线图",
+                        "bar": "柱状图",
+                        "stack": "堆叠",
+                        "tiled": "平铺"}},
+                dataZoom={
+                    "show": True,
+                    "title": {
+                        "zoom": "区域缩放",
+                        "back": "缩放还原"}}
+            )
 
     def render_embed(self):
         """
