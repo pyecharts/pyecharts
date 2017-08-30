@@ -62,15 +62,3 @@ def test_province_names():
     for key, value in CITY_NAME_PINYIN_MAP.items():
         assert key in constants.CITY_NAME_PINYIN_MAP
         eq_(value, constants.CITY_NAME_PINYIN_MAP[key])
-
-
-def test_map():
-    from pyecharts import Map
-
-    value = [1]
-    attr = ["渝水区"]
-    map = Map("新余地图示例", width=1200, height=600)
-    map.add("", attr, value, maptype='新余', is_visualmap=True,
-            visual_text_color='#000')
-    # To avoid potential pinyin crash, all cities have a province prefix
-    assert "jiang1_xi1_xin1_yu2" in map._repr_html_()
