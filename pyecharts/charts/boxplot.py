@@ -24,7 +24,7 @@ class Boxplot(Base):
 
         :param name:
             Series name used for displaying in tooltip and filtering with legend,
-            or updaing data and configuration with setOption.
+            or updating data and configuration with setOption.
         :param x_axis:
             data of xAixs
         :param y_axis:
@@ -39,6 +39,7 @@ class Boxplot(Base):
         xaxis, yaxis = chart['xy_axis']
         self._option.update(xAxis=xaxis, yAxis=yaxis)
         self._option.get('legend')[0].get('data').append(name)
+
         self._option.get('series').append({
             "type": "boxplot",
             "name": name,
@@ -48,7 +49,7 @@ class Boxplot(Base):
             "markLine": chart['mark_line'],
             "indexflag": self._option.get('_index_flag')
         })
-        self._legend_visualmap_colorlst(**kwargs)
+        self._config_components(**kwargs)
 
     @staticmethod
     def prepare_data(data):

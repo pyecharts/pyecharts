@@ -4,6 +4,7 @@
 from pyecharts.base import Base
 from pyecharts.option import get_all_options
 from pyecharts.constants import CITY_GEO_COORDS
+from pyecharts.constants import CITY_NAME_PINYIN_MAP
 
 
 class Geo(Base):
@@ -15,7 +16,6 @@ class Geo(Base):
     """
     def __init__(self, title="", subtitle="", **kwargs):
         super(Geo, self).__init__(title, subtitle, **kwargs)
-        self._js_dependencies.add('china')
 
     def add(self, *args, **kwargs):
         self.__add(*args, **kwargs)
@@ -32,7 +32,7 @@ class Geo(Base):
 
         :param name:
             Series name used for displaying in tooltip and filtering with
-            legend, or updaing data and configuration with setOption.
+            legend, or updating data and configuration with setOption.
         :param attr:
             name of attribute
         :param value:
@@ -109,4 +109,6 @@ class Geo(Base):
                 "coordinateSystem": 'geo',
                 "data": _data,
             })
-        self._legend_visualmap_colorlst(**kwargs)
+        name_in_pinyin = CITY_NAME_PINYIN_MAP.get(maptype, maptype)
+        self._js_dependencies.add(name_in_pinyin)
+        self._config_components(**kwargs)
