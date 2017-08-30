@@ -216,7 +216,9 @@ def test_geo():
     geo.render()
 
     # geo_1
-    data = [("海门", 9), ("鄂尔多斯", 12), ("招远", 12), ("舟山", 12), ("齐齐哈尔", 14), ("盐城", 15)]
+    data = [
+        ("海门", 9), ("鄂尔多斯", 12), ("招远", 12), ("舟山", 12), ("齐齐哈尔", 14), ("盐城", 15)
+    ]
     geo = Geo("全国主要城市空气质量", "data from pm2.5", title_color="#fff", title_pos="center",
               width=1200, height=600, background_color='#404a59')
     attr, value = geo.cast(data)
@@ -224,9 +226,22 @@ def test_geo():
     geo.render()
 
     # geo_with_noexist_city
-    data = [("海门", 9), ("鄂尔多斯", 12), ("招远", 12), ("舟山", 12), ("齐齐哈尔", 14), ("伦敦", 15)]
+    data = [
+        ("海门", 9), ("鄂尔多斯", 12), ("招远", 12), ("舟山", 12), ("齐齐哈尔", 14), ("伦敦", 15)
+    ]
     geo = Geo("全国主要城市空气质量", "data from pm2.5", title_color="#fff", title_pos="center",
               width=1200, height=600, background_color='#404a59')
     attr, value = geo.cast(data)
     geo.add("", attr, value, type="effectScatter", is_random=True, effect_scale=5)
+    geo.render()
+
+    # geo_guangdong_province
+    data =[
+        ('汕头市', 50), ('汕尾市', 60), ('揭阳市', 35), ('阳江市', 44), ('肇庆市', 72)
+    ]
+    geo = Geo("广东城市空气质量", "data from pm2.5", title_color="#fff", title_pos="center",
+              width=1200, height=600, background_color='#404a59')
+    attr, value = geo.cast(data)
+    geo.add("", attr, value, maptype='广东', type="effectScatter",
+            is_random=True, effect_scale=5, is_legend_show=False)
     geo.render()

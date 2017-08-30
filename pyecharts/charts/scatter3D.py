@@ -23,8 +23,8 @@ class Scatter3D(Base):
         """
 
         :param name:
-            Series name used for displaying in tooltip and filtering
-            with legend, or updaing data and configuration with setOption.
+            Series name used for displaying in tooltip and filtering with legend,
+            or updating data and configuration with setOption.
         :param data:
             data of Scatter3D
         :param grid3d_opacity:
@@ -44,6 +44,7 @@ class Scatter3D(Base):
             zAxis3D=chart['zaxis3D'],
             grid3D=chart['grid3D']
         )
+
         self._option.get('series').append({
             "type": "scatter3D",
             "name": name,
@@ -53,4 +54,4 @@ class Scatter3D(Base):
                 "opacity": grid3d_opacity
             }
         })
-        self._legend_visualmap_colorlst(**kwargs)
+        self._config_components(**kwargs)

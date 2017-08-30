@@ -26,7 +26,7 @@ class HeatMap(Base):
 
         :param name:
             Series name used for displaying in tooltip and filtering with legend,
-            or updaing data and configuration with setOption.
+            or updating data and configuration with setOption.
         :param x_axis:
             data of xAxis, it must be catagory axis.
         :param y_axis:
@@ -49,6 +49,7 @@ class HeatMap(Base):
                 "data": y_axis,
                 "splitArea": {"show": True}
             }])
+
         self._option.get('series').append({
             "type": "heatmap",
             "name": name,
@@ -56,4 +57,4 @@ class HeatMap(Base):
             "label": chart['label'],
             "indexflag": self._option.get('_index_flag')
         })
-        self._legend_visualmap_colorlst(**kwargs)
+        self._config_components(**kwargs)

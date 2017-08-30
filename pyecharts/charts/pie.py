@@ -27,7 +27,7 @@ class Pie(Base):
 
         :param name:
             Series name used for displaying in tooltip and filtering with legend,
-            or updaing data and configuration with setOption.
+            or updating data and configuration with setOption.
         :param attr:
             name of attribute
         :param value:
@@ -72,12 +72,15 @@ class Pie(Base):
         if rosetype:
             if rosetype not in ("radius", "area"):
                 rosetype = "radius"
+
         for a in attr:
             self._option.get('legend')[0].get('data').append(a)
+
         _dlst = self._option.get('legend')[0].get('data')
         _dset = list(set(_dlst))
         _dset.sort(key=_dlst.index)
         self._option.get('legend')[0].update(data=list(_dset))
+
         self._option.get('series').append({
             "type": "pie",
             "name": name,
@@ -88,4 +91,4 @@ class Pie(Base):
             "label": chart['label'],
             "indexflag": self._option.get('_index_flag')
         })
-        self._legend_visualmap_colorlst(**kwargs)
+        self._config_components(**kwargs)

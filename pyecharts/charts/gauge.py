@@ -22,7 +22,7 @@ class Gauge(Base):
 
         :param name:
             Series name used for displaying in tooltip and filtering with legend,
-            or updaing data and configuration with setOption.
+            or updating data and configuration with setOption.
         :param attr:
             name of attribute
         :param value:
@@ -31,8 +31,8 @@ class Gauge(Base):
             data range of guage
         :param angle_range:
             angle range of guage
-            The direct right side of circle center is 0 degree,
-            the right above it is 90 degree, the direct left side of it is 180 degree.
+            The direct right side of circle center is 0 degree,the right above
+            it is 90 degree, the direct left side of it is 180 degree.
         :param kwargs:
         """
         kwargs.update(type="gauge")
@@ -49,6 +49,7 @@ class Gauge(Base):
                 _start, _end = angle_range
 
         self._option.get('legend')[0].get('data').append(name)
+
         self._option.get('series').append({
             "type": "gauge",
             "detail": {"formatter": '{value}%'},
@@ -62,4 +63,4 @@ class Gauge(Base):
                 "name": attr
             }]
         })
-        self._legend_visualmap_colorlst(**kwargs)
+        self._config_components(**kwargs)
