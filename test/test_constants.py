@@ -2,7 +2,7 @@
 
 from __future__ import unicode_literals
 
-import pyecharts.template as constants
+import pyecharts.constants as constants
 from nose.tools import eq_
 
 
