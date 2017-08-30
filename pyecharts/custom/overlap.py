@@ -81,8 +81,7 @@ class Overlap(object):
 
         :return:
         """
-        import pprint
-        return pprint.pprint(self._chart._option)
+        self._chart.show_config()
 
     @property
     def chart(self):
@@ -91,6 +90,14 @@ class Overlap(object):
         :return:
         """
         return self._chart
+
+    @property
+    def options(self):
+        """
+
+        :return:
+        """
+        return self._chart._option
 
     def _repr_html_(self):
         """
