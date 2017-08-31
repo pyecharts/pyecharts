@@ -9,6 +9,7 @@ import datetime
 from pprint import pprint
 from pyecharts.option import get_all_options
 from pyecharts import template
+from pyecharts import utils
 import pyecharts.constants as constants
 
 
@@ -401,8 +402,8 @@ class Base(object):
             chart_id=self._chart_id,
             script_list=script_list,
             myWidth=self._width, myHeight=self._height)
-        html = template.freeze_js(html)
-        template.write_utf8_html_file(path, html)
+        html = utils.freeze_js(html)
+        utils.write_utf8_html_file(path, html)
 
     def _repr_html_(self):
         """ Render the options dict, displayed in the jupyter notebook
