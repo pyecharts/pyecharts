@@ -26,14 +26,14 @@ def test_graph():
         for j in nodes:
             links.append({"source": i.get('name'), "target": j.get('name')})
     graph = Graph("关系图-力引导布局示例")
-    graph.add("", nodes, links, repulsion=8000)
+    graph.add("", nodes, links, repulsion=8000, line_color='#aaa')
     graph.show_config()
     graph.render()
 
     # graph_1
     graph = Graph("关系图-环形布局示例")
     graph.add("", nodes, links, is_label_show=True, graph_repulsion=8000,
-              graph_layout='circular', label_text_color=None)
+              graph_layout='circular', label_text_color=None, line_color='#aaa')
     graph.render()
 
     # graph_2
@@ -48,5 +48,6 @@ def test_graph():
     nodes, links, categories, cont, mid, userl = j
     graph = Graph("微博转发关系图", width=1200, height=600)
     graph.add("", nodes, links, categories, label_pos="right", graph_repulsion=50,
-              is_legend_show=False, line_curve=0.2, label_text_color=None)
+              is_legend_show=False, line_curve=0.2, label_text_color=None,
+              line_color='#aaa')
     graph.render()
