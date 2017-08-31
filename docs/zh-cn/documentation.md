@@ -511,6 +511,8 @@ cast(seq)
 * tooltip_font_size -> int  
     提示框字体大小，默认为 14
 
+**toolbox：设置 `is_more_utils` 为 True 可以提供更多的实用工具按钮**
+
 
 # 图表详细  
 
@@ -2127,6 +2129,7 @@ tr.add(['DQ', 'TY', 'SS', 'QG', 'SY', 'DD'], data, is_label_show=True)
 tr.render()
 ```
 ![themeriver-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/themeriver.gif)
+
 **Note：** 可以看到，每个数据项中的第三个数值就是该项的种类，而种类可以在 `add()` 第一个参数指定。
 
 
