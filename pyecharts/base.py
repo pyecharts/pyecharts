@@ -132,6 +132,7 @@ class Base(object):
             effect_scale=None,
             geo_emphasis_color=None,
             geo_normal_color=None,
+            geo_cities_coords=None,
             graph_layout=None,
             graph_gravity=None,
             graph_edge_length=None,
