@@ -2,9 +2,9 @@
 # coding=utf-8
 from __future__ import unicode_literals
 
-from pyecharts import Map
 import json
 import codecs
+from pyecharts import Map
 
 
 def test_map():
@@ -30,11 +30,20 @@ def test_map():
     map.add("", attr, value, maptype='china', is_visualmap=True, visual_text_color='#000')
     map.render()
 
-    # map_2
+    # map_3
+    value = [95.1, 23.2, 43.3, 66.4, 88.5]
+    attr= ["China", "Canada", "Brazil", "Russia", "United States"]
+    map = Map("世界地图示例", width=1200, height=600)
+    map.add("", attr, value, maptype="world", is_visualmap=True, visual_text_color='#000')
+    map.render()
+
+
+def test_echarts_position_in_render_html():
     value = [20, 190, 253, 77, 65]
     attr = ['汕头市', '汕尾市', '揭阳市', '阳江市', '肇庆市']
     map = Map("广东地图示例", width=1200, height=600)
-    map.add("", attr, value, maptype='广东', is_visualmap=True, visual_text_color='#000')
+    map.add("", attr, value, maptype='广东',
+            is_visualmap=True, visual_text_color='#000')
     map.render()
     with codecs.open('render.html', 'r', 'utf-8') as f:
         actual_content = f.read()
@@ -42,9 +51,12 @@ def test_map():
         guangdong_position = actual_content.find(json.dumps('广东'))
         assert echarts_position < guangdong_position
 
-    # map_3
-    value = [95.1, 23.2, 43.3, 66.4, 88.5]
-    attr= ["China", "Canada", "Brazil", "Russia", "United States"]
-    map = Map("世界地图示例", width=1200, height=600)
-    map.add("", attr, value, maptype="world", is_visualmap=True, visual_text_color='#000')
-    map.render()
+
+def test_city_map():
+    value = [1]
+    attr = ["渝水区"]
+    map = Map("新余地图示例", width=1200, height=600)
+    map.add("", attr, value, maptype='新余', is_visualmap=True,
+            visual_text_color='#000')
+    # To avoid potential pinyin crash, all cities have a province prefix
+    assert "jiang1_xi1_xin1_yu2" in map._repr_html_()
