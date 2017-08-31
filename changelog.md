@@ -7,7 +7,10 @@
 
 ## 版本信息
 
-* ### version 0.2.2 (Dev)
+* ### version 0.2.3（Dev）
+    * Todo
+
+* ### version 0.2.2 - 2017.8.31（Current）
     #### Added
     * Map 图和 Geo 图增加 [363个二线城市地图](https://github.com/chfw/echarts-china-cities-js#featuring-citiesor-for-single-download)
     * Map 图新增 label 模块，现可以利用标签显示地区名称
@@ -20,7 +23,7 @@
     #### Fixed
     * [issue#133](https://github.com/chenjiandongx/pyecharts/issues/133) 回退 Echarts 版本，从 v3.7.0 回退至原先的 v3.6.2，解决标签不能正常显示的 bug
 
-* ### version 0.2.1 - 2017.8.25（Current）
+* ### version 0.2.1 - 2017.8.25
 
     #### Added
     * [issue#127](https://github.com/chenjiandongx/pyecharts/issues/127) 新增数据图切换按钮（只针对部分图有效）
