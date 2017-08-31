@@ -245,3 +245,13 @@ def test_geo():
     geo.add("", attr, value, maptype='广东', type="effectScatter",
             is_random=True, effect_scale=5, is_legend_show=False)
     geo.render()
+
+    # geo_shantou_city
+    data = [
+        ('澄海区', 30), ('南澳县', 40), ('龙湖区', 50), ('金平区', 60)
+    ]
+    geo = Geo("汕头市地图示例", title_color="#fff", title_pos="center",
+              width=1200, height=600, background_color='#404a59')
+    attr, value = geo.cast(data)
+    geo.add("", attr, value, maptype="汕头", is_visualmap=True, is_legend_show=False)
+    geo.render()
