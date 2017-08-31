@@ -236,7 +236,7 @@ def test_geo():
     geo.render()
 
     # geo_guangdong_province
-    data =[
+    data = [
         ('汕头市', 50), ('汕尾市', 60), ('揭阳市', 35), ('阳江市', 44), ('肇庆市', 72)
     ]
     geo = Geo("广东城市空气质量", "data from pm2.5", title_color="#fff", title_pos="center",
