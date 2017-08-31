@@ -9,12 +9,15 @@
 
 * ### version 0.2.2 (Dev)
     #### Added
-    * 增加[363个二线城市地图](https://github.com/chfw/echarts-china-cities-js#featuring-citiesor-for-single-download)
+    * Map 图和 Geo 图增加 [363个二线城市地图](https://github.com/chfw/echarts-china-cities-js#featuring-citiesor-for-single-download)
+    * Map 图新增 label 模块，现可以利用标签显示地区名称
+    * 新增 3000+ 城市地区经纬度信息，现已基本覆盖全国各个地区
+    * 新增图形种类 ThemeRiver（主题河流图）
     * [issue#138](https://github.com/chenjiandongx/pyecharts/issues/138) 新增 `is_xaxis_inverse`, `is_yaxis_inverse`, `xaxis_pos`, `yaxis_pos` 参数，提供倒映直角坐标系功能
-    * Map 图新增 label 模块，现可以利用标签显示地区名称。
+    * [issue#140](https://github.com/chenjiandongx/pyecharts/issues/140) 为每种图形（包括 Overlap, Grid, Timeline）都提供 Public 的 `options` 属性，返回实例的 `self._option`
 
     #### Fixed
-    * [issue#133](https://github.com/chenjiandongx/pyecharts/issues/133) 回退 Echarts 3.6.2 版本，解决标签不能正常显示的 bug
+    * [issue#133](https://github.com/chenjiandongx/pyecharts/issues/133) 回退 Echarts 版本，从 v3.7.0 回退至原先的 v3.6.2，解决标签不能正常显示的 bug
 
 * ### version 0.2.1 - 2017.8.25（Current）
 
