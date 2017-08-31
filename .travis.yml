@@ -16,5 +16,6 @@ before_install:
 script:
   - make tests
 after_success:
-  codecov
+  - cd test
+  - codecov
 
