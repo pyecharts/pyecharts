@@ -1,18 +1,21 @@
 #!/usr/bin/env python
 # coding=utf-8
+import sys
 
 from pyecharts.base import Base
 from pyecharts.option import get_all_options
 from pyecharts.constants import CITY_NAME_PINYIN_MAP
+
+PY2 = sys.version_info[0] == 2
 
 
 class Map(Base):
     """
     <<< Map chart >>>
 
-    Map is maily used in the visulization of geographic area data,which can be used
-    with visualMap component to visualize the datas such as population
-    distribution density in diffrent areas.
+    Map is maily used in the visulization of geographic area data,which
+    can be used with visualMap component to visualize the datas such as
+    population distribution density in diffrent areas.
     """
     def __init__(self, title="", subtitle="", **kwargs):
         super(Map, self).__init__(title, subtitle, **kwargs)
@@ -27,8 +30,8 @@ class Map(Base):
         """
 
         :param name:
-            Series name used for displaying in tooltip and filtering with legend,
-            or updating data and configuration with setOption.
+            Series name used for displaying in tooltip and filtering with
+            legend, or updating data and configuration with setOption.
         :param attr:
             name of attribute
         :param value:
