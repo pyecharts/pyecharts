@@ -5,6 +5,7 @@ from __future__ import unicode_literals
 import os
 import json
 import codecs
+
 from pyecharts.utils import get_resource_dir
 
 
