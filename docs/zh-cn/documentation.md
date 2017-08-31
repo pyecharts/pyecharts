@@ -612,7 +612,22 @@ bar.render()
 ![bar-6](https://github.com/chenjiandongx/pyecharts/blob/master/images/bar-6.png) 
 
 **Note：** 可通过设置 xaxis_min/xaxis_max/yaxis_min/yaxis_max 来调整 x 轴和 y 轴上的最大最小值。针对数值轴有效！  
-**Note：** 可以通过 label_color 来设置柱状的颜色，如 ['#eee', '#000']，所有的图表类型的图例颜色都可通过 label_color 来修改。  
+**Note：** 可以通过 label_color 来设置柱状的颜色，如 ['#eee', '#000']，所有的图表类型的图例颜色都可通过 label_color 来修改。
+
+瀑布图示例
+```python
+from pyecharts import Bar
+
+attr = ["{}月".format(i) for i in range(1, 8)]
+v1 = [0, 100, 200, 300, 400, 220, 250]
+v2 = [1000, 800, 600, 500, 450, 400, 300]
+bar = Bar("瀑布图示例")
+# 利用第一个 add() 图例的颜色为透明，即 'rgba(0,0,0,0)'，并且设置 is_stack 标志为 True
+bar.add("", attr, v1, label_color=['rgba(0,0,0,0)'], is_stack=True)
+bar.add("月份", attr, v2, is_label_show=True, is_stack=True, label_pos='inside')
+bar.render()
+```
+![bar-7](https://github.com/chenjiandongx/pyecharts/blob/master/images/bar-7.png) 
 
 
 ## Bar3D（3D 柱状图）
@@ -902,7 +917,7 @@ gauge.render()
 Geo.add() 方法签名
 ```python
 add(name, attr, value, type="scatter", maptype='china', symbol_size=12, border_color="#111",
-    geo_normal_color="#323c48", geo_emphasis_color="#2a333d", **kwargs)
+    geo_normal_color="#323c48", geo_emphasis_color="#2a333d", geo_cities_coords=None, **kwargs)
 ```
 * name -> str  
     图例名称
@@ -922,6 +937,8 @@ add(name, attr, value, type="scatter", maptype='china', symbol_size=12, border_c
     正常状态下地图区域的颜色。默认为 '#323c48'
 * geo_emphasis_color -> str  
     高亮状态下地图区域的颜色。默认为 '#2a333d'
+* geo_cities_coords -> dict  
+    用户自定义地区经纬度，类似如 {'阿城': [126.58, 45.32],} 这样的字典，当用于提供了该参数时，将会覆盖原有预存的区域坐标信息。
 
 Scatter 类型
 ```python
