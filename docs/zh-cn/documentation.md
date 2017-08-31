@@ -511,7 +511,7 @@ cast(seq)
 * tooltip_font_size -> int  
     提示框字体大小，默认为 14
 
-**toolbox：设置 `is_more_utils` 为 True 可以提供更多的实用工具按钮**
+**toolbox：设置 `is_more_utils` 为 True 可以提供更多的实用工具按钮。默认只提供『数据视图』和『下载』按钮。**
 
 
 # 图表详细  
