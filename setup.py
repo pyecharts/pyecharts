@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 #coding=utf-8
 
+import os
 from setuptools import setup
 
 try:
@@ -16,8 +17,6 @@ except:
 __title__ = 'pyecharts'
 __description__ = 'Python echarts, make charting easier'
 __url__ = 'https://github.com/chenjiandongx/pyecharts'
-__version__ = '0.2.3'
-__author__ = 'chenjiandongx'
 __author_email__ = 'chenjiandongx@qq.com'
 __license__ = 'MIT'
 __requires__ = ['pillow', 'jinja2', 'future', 'jupyter-pip>=0.3.1']
@@ -25,13 +24,18 @@ __packages__ = ['pyecharts', 'pyecharts/charts', 'pyecharts/custom']
 __keywords__ = ['echarts', 'charts']
 __jupyter_echarts__ = 'pyecharts/templates/js/echarts'
 
+# Load the package's __version__.py module as a dictionary.
+here = os.path.abspath(os.path.dirname(__file__))
+about = {}
+with open(os.path.join(here, __title__, '_version.py')) as f:
+    exec(f.read(), about)
 
 setup(
     name=__title__,
-    version=__version__,
+    version=about['__version__'],
     description=__description__,
     url=__url__,
-    author=__author__,
+    author=about['__author__'],
     author_email=__author_email__,
     license=__license__,
     packages=__packages__,
