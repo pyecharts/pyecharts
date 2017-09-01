@@ -146,7 +146,8 @@ def test_more():
           [2282.17, 2263.97, 2253.25, 2286.33],
           [2255.77, 2270.28, 2253.31, 2276.22]]
     kline = Kline("K 线图示例")
-    kline.add("日K", ["2017/7/{}".format(i + 1) for i in range(31)], v1)
+    kline.add("日K", ["2017/7/{}".format(i + 1) for i in range(31)],
+              v1, is_datazoom_show=True)
     page.add(kline)
 
     # radar
