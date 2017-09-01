@@ -107,7 +107,8 @@ def color(colorlst=None,
 
 
 @collectfuncs
-def line_style(line_width=1,
+def line_style(type=None,
+               line_width=1,
                line_opacity=1,
                line_curve=0,
                line_type="solid",
@@ -115,6 +116,8 @@ def line_style(line_width=1,
                **kwargs):
     """
 
+    :param type:
+        Chart type
     :param line_width:
         Line width.
     :param line_opacity:
@@ -130,6 +133,9 @@ def line_style(line_width=1,
     :param kwargs:
     :return:
     """
+    if line_color is None and type == "graph":
+        line_color = '#aaa'
+
     _line_style = {
         "normal": {
             "width": line_width,
