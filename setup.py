@@ -17,7 +17,6 @@ except:
 __title__ = 'pyecharts'
 __description__ = 'Python echarts, make charting easier'
 __url__ = 'https://github.com/chenjiandongx/pyecharts'
-__version__ = '0.2.3'
 __author_email__ = 'chenjiandongx@qq.com'
 __license__ = 'MIT'
 __requires__ = ['pillow', 'jinja2', 'future', 'jupyter-pip>=0.3.1']
