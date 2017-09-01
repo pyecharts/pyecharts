@@ -2,15 +2,21 @@
 
 ## 项目期待
 
-* 更开放，更自由，更方便，更实用。
+* visualmap 将会支持连续和分段两种类型
 
 
 ## 版本信息
 
-* ### version 0.2.3（Dev）
+* ### version 0.2.4（Dev）
     * Todo
 
-* ### version 0.2.2 - 2017.8.31（Current）
+* ### version 0.2.3 - 2017.9.1（Current）
+
+    #### Fixed
+    * [issue#143](https://github.com/chenjiandongx/pyecharts/issues/143) [issue#146](https://github.com/chenjiandongx/pyecharts/issues/146) 修复默认状态下 Graph 不显示连线的 bug
+    * [issue#145](https://github.com/chenjiandongx/pyecharts/issues/145) 修复 dataZoom 无法正常使用的 bug
+
+* ### version 0.2.2 - 2017.8.31
     #### Added
     * Map 图和 Geo 图增加 [363个二线城市地图](https://github.com/chfw/echarts-china-cities-js#featuring-citiesor-for-single-download)
     * Map 图新增 label 模块，现可以利用标签显示地区名称
