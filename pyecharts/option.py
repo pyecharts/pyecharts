@@ -495,6 +495,8 @@ def legend(is_legend_show=True,
            legend_pos="center",
            legend_top='top',
            legend_selectedmode='multiple',
+           legend_text_size=12,
+           legend_text_color='#333',
            **kwargs):
     """ Legend component shows symbol, color and name of different series.
         You can click legends to toggle displaying series in the chart.
@@ -517,6 +519,10 @@ def legend(is_legend_show=True,
         and it can also be 'top', 'middle', or 'bottom'.
     :param legend_selectedmode:
         State table of selected legend. 'single' or 'multiple'
+    :param legend_text_size:
+        legend text size
+    :param legend_text_color:
+        legend text color
     :param kwargs:
     :return:
     """
@@ -525,7 +531,11 @@ def legend(is_legend_show=True,
         "show": is_legend_show,
         "left": legend_pos,
         "top": legend_top,
-        "orient": legend_orient
+        "orient": legend_orient,
+        "textStyle": {
+            "fontSize": legend_text_size,
+            "color": legend_text_color,
+        }
     }
     return _legend
 
@@ -540,7 +550,9 @@ def visual_map(visual_type='color',
                visual_orient='vertical',
                visual_pos="left",
                visual_top="bottom",
+               visual_split_number=5,
                is_calculable=True,
+               is_piecewise=False,
                **kwargs):
     """ visualMap is a type of component for visual encoding, which maps the data to visual channels
 
@@ -576,8 +588,13 @@ def visual_map(visual_type='color',
         visual_top value can be instant pixel value like 20;
         it can also be percentage value relative to container width like '20%';
         and it can also be 'top', 'middle', or 'bottom'.
+    :param visual_split_number:
+        Continuous data can be divide into pieces averagely according to splitNumber,
+        that is, if splitNumber is 5, data will be sliced into 5 pieces.
     :param is_calculable:
         Whether show handles, which can be dragged to adjust "selected range".
+    :param is_piecewise:
+        Used to determine it is a piecewise visualMap component.
     :param kwargs:
     :return:
     """
@@ -608,18 +625,24 @@ def visual_map(visual_type='color',
                 range_size = visual_range_size
         _inrange_op.update(symbolSize=range_size)
 
+    _type = "continuous"
+    if is_piecewise:
+        _type = "piecewise"
+
     _visual_map = {
-        "type": "continuous",
+        "type": _type,
         "min": _min,
         "max": _max,
         "text": [_thigh, _tlow],
         "textStyle": {"color": visual_text_color},
         "inRange": _inrange_op,
         "calculable": is_calculable,
+        "splitNumber": visual_split_number,
         "orient": visual_orient,
         "left": visual_pos,
         "top": visual_top
     }
+
     return _visual_map
 
 
