@@ -345,6 +345,10 @@ cast(seq)
     图例组件离容器上侧的距离，默认为'top'，有'top', 'center', 'bottom'可选
 * legend_selectedmode -> str/bool  
     图例选择的模式，控制是否可以通过点击图例改变系列的显示状态。默认为'multiple'，可以设成 'single' 或者 'multiple' 使用单选或者多选模式。也可以设置为 False 关闭显示状态。
+* legend_text_size -> int  
+    图例名称字体大小
+* legend_text_color -> str  
+    图例名称字体颜色
     
 
 **label：图形上的文本标签，可用于说明图形的一些数据信息，比如值，名称等。**
@@ -477,8 +481,12 @@ cast(seq)
     visualmap 组件条距离左侧的位置，默认为'left'。有'right', 'center', 'right'可选，也可为百分数或整数。
 * visual_top -> str/int  
     visualmap 组件条距离顶部的位置，默认为'top'。有'top', 'center', 'bottom'可选，也可为百分数或整数。
+* visual_split_number -> int  
+    分段型中分割的段数，在设置为分段型时生效。默认分为 5 段。
 * is_calculable -> bool  
     是否显示拖拽用的手柄（手柄能拖拽调整选中范围）。默认为 True
+* is_piecewise -> bool  
+    是否将组件转换为分段型（默认为连续型），默认为 False
 
 
 **tooltip：提示框组件，用于移动或点击鼠标时弹出数据内容**
@@ -940,7 +948,7 @@ add(name, attr, value, type="scatter", maptype='china', symbol_size=12, border_c
 * geo_cities_coords -> dict  
     用户自定义地区经纬度，类似如 {'阿城': [126.58, 45.32],} 这样的字典，当用于提供了该参数时，将会覆盖原有预存的区域坐标信息。
 
-Scatter 类型
+Scatter 类型（连续型）
 ```python
 from pyecharts import Geo
 
@@ -988,6 +996,17 @@ geo.render()
 ![geo-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/geo-0.gif)
 
 **Note：** 请配合 [通用配置项](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/documentation.md#通用配置项) 中的 Visualmap 使用
+
+Scatter 类型（分段型）
+```python
+geo = Geo("全国主要城市空气质量", "data from pm2.5", title_color="#fff", title_pos="center",
+width=1200, height=600, background_color='#404a59')
+attr, value = geo.cast(data)
+geo.add("", attr, value, visual_range=[0, 200], visual_text_color="#fff",
+        symbol_size=15, is_visualmap=True, is_piecewise=True, visual_split_number=6)
+geo.render()
+```
+![geo-0-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/geo-0-0.gif)
 
 HeatMap 类型
 ```python
