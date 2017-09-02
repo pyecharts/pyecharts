@@ -2,21 +2,35 @@
 
 ## 项目期待
 
-* 更开放，更自由，更方便，更实用。
+* visualmap 将会支持连续和分段两种类型
 
 
 ## 版本信息
 
-* ### version 0.2.2 (Dev)
-    #### Added
-    * 增加[363个二线城市地图](https://github.com/chfw/echarts-china-cities-js#featuring-citiesor-for-single-download)
-    * [issue#138](https://github.com/chenjiandongx/pyecharts/issues/138) 新增 `is_xaxis_inverse`, `is_yaxis_inverse`, `xaxis_pos`, `yaxis_pos` 参数，提供倒映直角坐标系功能
-    * Map 图新增 label 模块，现可以利用标签显示地区名称。
+* ### version 0.2.4（Dev）
+    * Todo
+
+* ### version 0.2.3 - 2017.9.1（Current）
 
     #### Fixed
-    * [issue#133](https://github.com/chenjiandongx/pyecharts/issues/133) 回退 Echarts 3.6.2 版本，解决标签不能正常显示的 bug
+    * [issue#143](https://github.com/chenjiandongx/pyecharts/issues/143) [issue#146](https://github.com/chenjiandongx/pyecharts/issues/146) 修复默认状态下 Graph 不显示连线的 bug
+    * [issue#145](https://github.com/chenjiandongx/pyecharts/issues/145) 修复 dataZoom 无法正常使用的 bug
 
-* ### version 0.2.1 - 2017.8.25（Current）
+* ### version 0.2.2 - 2017.8.31
+    #### Added
+    * Map 图和 Geo 图增加 [363个二线城市地图](https://github.com/chfw/echarts-china-cities-js#featuring-citiesor-for-single-download)
+    * Map 图新增 label 模块，现可以利用标签显示地区名称
+    * Geo 图新增 3000+ 城市地区经纬度信息，现已基本覆盖全国各个地区
+    * Geo 图新增 `geo_cities_coords` 参数，用户可以为自己所选地图提供地区经纬度坐标（这将会覆盖原来预存的城市坐标信息），即完全按照用户提供的坐标来定位。
+    * 新增图形种类 ThemeRiver（主题河流图）
+    * 新增 `is_more_utils` 参数，在 `add()` 中设置该标志位为 True 则会提供更多的实用工具按钮（建议在 Line, Kilne, Bar 等直角坐标图形中设置）。默认只提供『数据视图』和『下载』按钮。
+    * [issue#138](https://github.com/chenjiandongx/pyecharts/issues/138) 新增 `is_xaxis_inverse`, `is_yaxis_inverse`, `xaxis_pos`, `yaxis_pos` 参数，提供倒映直角坐标系功能
+    * [issue#140](https://github.com/chenjiandongx/pyecharts/issues/140) 为每种图形（包括 Overlap, Grid, Timeline）都提供 Public 的 `options` 属性，返回实例的 `self._option`
+
+    #### Fixed
+    * [issue#133](https://github.com/chenjiandongx/pyecharts/issues/133) 回退 Echarts 版本，从 v3.7.0 回退至原先的 v3.6.2，解决标签不能正常显示的 bug
+
+* ### version 0.2.1 - 2017.8.25
 
     #### Added
     * [issue#127](https://github.com/chenjiandongx/pyecharts/issues/127) 新增数据图切换按钮（只针对部分图有效）

@@ -27,6 +27,7 @@ class Geo(Base):
               border_color="#111",
               geo_normal_color="#323c48",
               geo_emphasis_color="#2a333d",
+              geo_cities_coords=None,
               **kwargs):
         """
 
@@ -49,16 +50,23 @@ class Geo(Base):
             The color of the map area in normal state
         :param geo_emphasis_color:
             The color of the map area in emphasis state
+        :param geo_cities_coords:
+            User define cities coords
         :param kwargs:
         """
         assert len(attr) == len(value)
         kwargs.update(type="geo")
         chart = get_all_options(**kwargs)
 
+        if geo_cities_coords:
+            _geo_cities_coords = geo_cities_coords
+        else:
+            _geo_cities_coords = CITY_GEO_COORDS
+
         _data = []
         for name, value in zip(attr, value):
-            if name in CITY_GEO_COORDS:
-                city_coordinate = CITY_GEO_COORDS.get(name)
+            if name in _geo_cities_coords:
+                city_coordinate = _geo_cities_coords.get(name)
                 city_coordinate.append(value)
                 _data.append({"name": name, "value": city_coordinate})
             else:

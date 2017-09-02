@@ -26,7 +26,7 @@ def test_graph():
         for j in nodes:
             links.append({"source": i.get('name'), "target": j.get('name')})
     graph = Graph("关系图-力引导布局示例")
-    graph.add("", nodes, links, repulsion=8000)
+    graph.add("", nodes, links, repulsion=8000, line_color='#aaa')
     graph.show_config()
     graph.render()
 
