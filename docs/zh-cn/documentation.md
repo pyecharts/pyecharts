@@ -39,6 +39,7 @@ pyecharts 是一个用于生成 Echarts 图表的类库。实际上就是 Echart
     * Sankey（桑基图）
     * Scatter（散点图）
     * Scatter3D（3D 散点图）
+    * ThemeRiver（主题河流图）
     * WordCloud（词云图）
 * [用户自定义](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/documentation.md#用户自定义)
     * Grid 类：并行显示多张图
@@ -65,7 +66,7 @@ bar.render()
 ```
 ![guide-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/guide-0.png)
 
-**Note：** 可以按右边的下载按钮将图片下载到本地  
+**Note：** 可以按右边的下载按钮将图片下载到本地，如果想要提供更多实用工具按钮，请在 `add()` 中设置 `is_more_utils` 为 True  
 
 * ```add()```  
     主要方法，用于添加图表的数据和设置各种配置项  
@@ -510,6 +511,8 @@ cast(seq)
 * tooltip_font_size -> int  
     提示框字体大小，默认为 14
 
+**toolbox：设置 `is_more_utils` 为 True 可以提供更多的实用工具按钮。默认只提供『数据视图』和『下载』按钮。**
+
 
 # 图表详细  
 
@@ -609,7 +612,22 @@ bar.render()
 ![bar-6](https://github.com/chenjiandongx/pyecharts/blob/master/images/bar-6.png) 
 
 **Note：** 可通过设置 xaxis_min/xaxis_max/yaxis_min/yaxis_max 来调整 x 轴和 y 轴上的最大最小值。针对数值轴有效！  
-**Note：** 可以通过 label_color 来设置柱状的颜色，如 ['#eee', '#000']，所有的图表类型的图例颜色都可通过 label_color 来修改。  
+**Note：** 可以通过 label_color 来设置柱状的颜色，如 ['#eee', '#000']，所有的图表类型的图例颜色都可通过 label_color 来修改。
+
+瀑布图示例
+```python
+from pyecharts import Bar
+
+attr = ["{}月".format(i) for i in range(1, 8)]
+v1 = [0, 100, 200, 300, 400, 220, 250]
+v2 = [1000, 800, 600, 500, 450, 400, 300]
+bar = Bar("瀑布图示例")
+# 利用第一个 add() 图例的颜色为透明，即 'rgba(0,0,0,0)'，并且设置 is_stack 标志为 True
+bar.add("", attr, v1, label_color=['rgba(0,0,0,0)'], is_stack=True)
+bar.add("月份", attr, v2, is_label_show=True, is_stack=True, label_pos='inside')
+bar.render()
+```
+![bar-7](https://github.com/chenjiandongx/pyecharts/blob/master/images/bar-7.png) 
 
 
 ## Bar3D（3D 柱状图）
@@ -899,7 +917,7 @@ gauge.render()
 Geo.add() 方法签名
 ```python
 add(name, attr, value, type="scatter", maptype='china', symbol_size=12, border_color="#111",
-    geo_normal_color="#323c48", geo_emphasis_color="#2a333d", **kwargs)
+    geo_normal_color="#323c48", geo_emphasis_color="#2a333d", geo_cities_coords=None, **kwargs)
 ```
 * name -> str  
     图例名称
@@ -910,7 +928,7 @@ add(name, attr, value, type="scatter", maptype='china', symbol_size=12, border_c
 * type -> str  
     图例类型，有'scatter', 'effectscatter', 'heatmap'可选。默认为 'scatter'
 * maptype -> str  
-    地图类型。目前只支持'china'。
+    地图类型。 支持 china、world、安徽、澳门、北京、重庆、福建、福建、甘肃、广东，广西、广州、海南、河北、黑龙江、河南、湖北、湖南、江苏、江西、吉林、辽宁、内蒙古、宁夏、青海、山东、上海、陕西、山西、四川、台湾、天津、香港、新疆、西藏、云南、浙江，以及 [363个二线城市地图](https://github.com/chfw/echarts-china-cities-js#featuring-citiesor-for-single-download)。提醒：在画市级地图的时候，城市名字后面的‘市’要省去了，比如，石家庄市的‘市’不要提，即‘石家庄’就可以了。
 * symbol_size -> int  
     标记图形大小。默认为 12
 * border_color -> str  
@@ -919,6 +937,8 @@ add(name, attr, value, type="scatter", maptype='china', symbol_size=12, border_c
     正常状态下地图区域的颜色。默认为 '#323c48'
 * geo_emphasis_color -> str  
     高亮状态下地图区域的颜色。默认为 '#2a333d'
+* geo_cities_coords -> dict  
+    用户自定义地区经纬度，类似如 {'阿城': [126.58, 45.32],} 这样的字典，当用于提供了该参数时，将会覆盖原有预存的区域坐标信息。
 
 Scatter 类型
 ```python
@@ -980,7 +1000,7 @@ geo.render()
 ```
 ![geo-0-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/geo-0-1.gif)
 
-EffectScatter 类型
+EffectScatter 类型（全国）
 ```python
 from pyecharts import Geo
 
@@ -992,6 +1012,22 @@ geo.add("", attr, value, type="effectScatter", is_random=True, effect_scale=5)
 geo.render()
 ```
 ![geo-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/geo-1.gif)
+
+EffectScatter 类型（广东）
+```python
+from pyecharts import Geo
+
+data =[
+    ('汕头市', 50), ('汕尾市', 60), ('揭阳市', 35), ('阳江市', 44), ('肇庆市', 72)
+]
+geo = Geo("广东城市空气质量", "data from pm2.5", title_color="#fff", title_pos="center",
+            width=1200, height=600, background_color='#404a59')
+attr, value = geo.cast(data)
+geo.add("", attr, value, maptype='广东', type="effectScatter",
+        is_random=True, effect_scale=5, is_legend_show=False)
+geo.render()
+```
+![geo-2](https://github.com/chenjiandongx/pyecharts/blob/master/images/geo-2.gif)
 
 
 ## Graph（关系图）
@@ -1412,7 +1448,7 @@ add(name, attr, value, is_roam=True, maptype='china', **kwargs)
    是否开启鼠标缩放和平移漫游。默认为 True  
    如果只想要开启缩放或者平移，可以设置成'scale'或者'move'。设置成 True 为都开启
 * maptype -> str  
-    地图类型。 支持 china、world、安徽、澳门、北京、重庆、福建、福建、甘肃、广东，广西、广州、海南、河北、黑龙江、河南、湖北、湖南、江苏、江西、吉林、辽宁、内蒙古、宁夏、青海、山东、上海、陕西、四川、台湾、天津、香港、新疆、西藏、云南、浙江，以及[363个二线城市地图](https://github.com/chfw/echarts-china-cities-js#featuring-citiesor-for-single-download)。提醒：在画城市图的时候，城市名字后面的‘市’被省去了，比如，石家庄市的‘市’不要提，即‘石家庄’就可以了。地图提供了自定义模式 [用户如何自定义地图](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/user-customize-map.md)
+    地图类型。 支持 china、world、安徽、澳门、北京、重庆、福建、福建、甘肃、广东，广西、广州、海南、河北、黑龙江、河南、湖北、湖南、江苏、江西、吉林、辽宁、内蒙古、宁夏、青海、山东、上海、陕西、山西、四川、台湾、天津、香港、新疆、西藏、云南、浙江，以及 [363个二线城市地图](https://github.com/chfw/echarts-china-cities-js#featuring-citiesor-for-single-download)。提醒：在画市级地图的时候，城市名字后面的‘市’要省去了，比如，石家庄市的‘市’不要提，即‘石家庄’就可以了。地图提供了自定义模式 [用户如何自定义地图](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/user-customize-map.md)
 
 ```python
 from pyecharts import Map
@@ -2053,6 +2089,65 @@ scatter3D.render()
 ![scatter3D-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/scatter3D-0.gif)
 
 **Note：** 关于 gird3D 部分的设置，请参照通用配置项中的介绍 [通用配置项](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/documentation.md#通用配置项)  
+
+
+## ThemeRiver（主题河流图）
+ThemeRiver.add() 方法签名
+```python
+add(name, data)
+```
+* name -> list  
+    图例名称，必须为 list 类型，list 中每个值为数据项中的种类。
+* data -> [list],包含列表的列表  
+    数据项，数据中，每一行是一个『数据项』，每一列属于一个『维度』。每个数据项至少需要三个维度，如 ['2015/11/08', 10, 'DQ']，分别为 [时间，数值，种类（图例名）]
+
+```python
+from pyecharts import ThemeRiver
+
+data = [
+    ['2015/11/08', 10, 'DQ'], ['2015/11/09', 15, 'DQ'], ['2015/11/10', 35, 'DQ'],
+    ['2015/11/14', 7, 'DQ'], ['2015/11/15', 2, 'DQ'], ['2015/11/16', 17, 'DQ'],
+    ['2015/11/17', 33, 'DQ'], ['2015/11/18', 40, 'DQ'], ['2015/11/19', 32, 'DQ'],
+    ['2015/11/20', 26, 'DQ'], ['2015/11/21', 35, 'DQ'], ['2015/11/22', 40, 'DQ'],
+    ['2015/11/23', 32, 'DQ'], ['2015/11/24', 26, 'DQ'], ['2015/11/25', 22, 'DQ'],
+    ['2015/11/08', 35, 'TY'], ['2015/11/09', 36, 'TY'], ['2015/11/10', 37, 'TY'],
+    ['2015/11/11', 22, 'TY'], ['2015/11/12', 24, 'TY'], ['2015/11/13', 26, 'TY'],
+    ['2015/11/14', 34, 'TY'], ['2015/11/15', 21, 'TY'], ['2015/11/16', 18, 'TY'],
+    ['2015/11/17', 45, 'TY'], ['2015/11/18', 32, 'TY'], ['2015/11/19', 35, 'TY'],
+    ['2015/11/20', 30, 'TY'], ['2015/11/21', 28, 'TY'], ['2015/11/22', 27, 'TY'],
+    ['2015/11/23', 26, 'TY'], ['2015/11/24', 15, 'TY'], ['2015/11/25', 30, 'TY'],
+    ['2015/11/26', 35, 'TY'], ['2015/11/27', 42, 'TY'], ['2015/11/28', 42, 'TY'],
+    ['2015/11/08', 21, 'SS'], ['2015/11/09', 25, 'SS'], ['2015/11/10', 27, 'SS'],
+    ['2015/11/11', 23, 'SS'], ['2015/11/12', 24, 'SS'], ['2015/11/13', 21, 'SS'],
+    ['2015/11/14', 35, 'SS'], ['2015/11/15', 39, 'SS'], ['2015/11/16', 40, 'SS'],
+    ['2015/11/17', 36, 'SS'], ['2015/11/18', 33, 'SS'], ['2015/11/19', 43, 'SS'],
+    ['2015/11/20', 40, 'SS'], ['2015/11/21', 34, 'SS'], ['2015/11/22', 28, 'SS'],
+    ['2015/11/14', 7, 'QG'], ['2015/11/15', 2, 'QG'], ['2015/11/16', 17, 'QG'],
+    ['2015/11/17', 33, 'QG'], ['2015/11/18', 40, 'QG'], ['2015/11/19', 32, 'QG'],
+    ['2015/11/20', 26, 'QG'], ['2015/11/21', 35, 'QG'], ['2015/11/22', 40, 'QG'],
+    ['2015/11/23', 32, 'QG'], ['2015/11/24', 26, 'QG'], ['2015/11/25', 22, 'QG'],
+    ['2015/11/26', 16, 'QG'], ['2015/11/27', 22, 'QG'], ['2015/11/28', 10, 'QG'],
+    ['2015/11/08', 10, 'SY'], ['2015/11/09', 15, 'SY'], ['2015/11/10', 35, 'SY'],
+    ['2015/11/11', 38, 'SY'], ['2015/11/12', 22, 'SY'], ['2015/11/13', 16, 'SY'],
+    ['2015/11/14', 7, 'SY'], ['2015/11/15', 2, 'SY'], ['2015/11/16', 17, 'SY'],
+    ['2015/11/17', 33, 'SY'], ['2015/11/18', 40, 'SY'], ['2015/11/19', 32, 'SY'],
+    ['2015/11/20', 26, 'SY'], ['2015/11/21', 35, 'SY'], ['2015/11/22', 4, 'SY'],
+    ['2015/11/23', 32, 'SY'], ['2015/11/24', 26, 'SY'], ['2015/11/25', 22, 'SY'],
+    ['2015/11/26', 16, 'SY'], ['2015/11/27', 22, 'SY'], ['2015/11/28', 10, 'SY'],
+    ['2015/11/08', 10, 'DD'], ['2015/11/09', 15, 'DD'], ['2015/11/10', 35, 'DD'],
+    ['2015/11/11', 38, 'DD'], ['2015/11/12', 22, 'DD'], ['2015/11/13', 16, 'DD'],
+    ['2015/11/14', 7, 'DD'], ['2015/11/15', 2, 'DD'], ['2015/11/16', 17, 'DD'],
+    ['2015/11/17', 33, 'DD'], ['2015/11/18', 4, 'DD'], ['2015/11/19', 32, 'DD'],
+    ['2015/11/20', 26, 'DD'], ['2015/11/21', 35, 'DD'], ['2015/11/22', 40, 'DD'],
+    ['2015/11/23', 32, 'DD'], ['2015/11/24', 26, 'DD'], ['2015/11/25', 22, 'DD']
+]
+tr = ThemeRiver("主题河流图示例图")
+tr.add(['DQ', 'TY', 'SS', 'QG', 'SY', 'DD'], data, is_label_show=True)
+tr.render()
+```
+![themeriver-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/themeriver.gif)
+
+**Note：** 可以看到，每个数据项中的第三个数值就是该项的种类，而种类可以在 `add()` 第一个参数指定。
 
 
 ## WordCloud（词云图）

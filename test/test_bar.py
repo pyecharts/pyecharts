@@ -67,3 +67,12 @@ def test_bar():
     bar = Bar("坐标轴标签旋转示例")
     bar.add("", attr, v1, xaxis_interval=0, xaxis_rotate=30, yaxis_rotate=30)
     bar.render()
+
+    # bar_7
+    attr = ["{}月".format(i) for i in range(1, 8)]
+    v1 = [0, 100, 200, 300, 400, 220, 250]
+    v2 = [1000, 800, 600, 500, 450, 400, 300]
+    bar = Bar("瀑布图示例")
+    bar.add("", attr, v1, label_color=['rgba(0,0,0,0)'], is_stack=True)
+    bar.add("月份", attr, v2, is_label_show=True, is_stack=True, label_pos='inside')
+    bar.render()

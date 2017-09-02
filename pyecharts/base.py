@@ -5,8 +5,8 @@ import json
 import uuid
 import random
 import datetime
-
 from pprint import pprint
+
 from pyecharts.option import get_all_options
 from pyecharts import template
 from pyecharts import utils
@@ -132,6 +132,7 @@ class Base(object):
             effect_scale=None,
             geo_emphasis_color=None,
             geo_normal_color=None,
+            geo_cities_coords=None,
             graph_layout=None,
             graph_gravity=None,
             graph_edge_length=None,
@@ -319,8 +320,7 @@ class Base(object):
                 v_lst.append(v)
         return k_lst, v_lst
 
-    def _config_components(self,is_visualmap=False,
-                           is_datazoom_show=False,
+    def _config_components(self, is_visualmap=False,
                            is_more_utils=False,
                            **kwargs):
         """ config components of chart
@@ -342,12 +342,12 @@ class Base(object):
         # tooltip component
         self._option.update(tooltip=chart['tooltip'])
 
+        # dataZoom component
+        if kwargs.get('is_datazoom_show', None) is True:    # do not change this line anymore
+            self._option.update(dataZoom=chart['datazoom'])
         # visualMap component
         if is_visualmap:
             self._option.update(visualMap=chart['visual_map'])
-        # dataZoom component
-        if is_datazoom_show:
-            self._option.update(dataZoom=chart['datazoom'])
         # toolbox component
         if is_more_utils:
             self._option.get('toolbox').get('feature').update(
