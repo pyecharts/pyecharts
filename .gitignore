@@ -8,6 +8,7 @@ __pycache__/
 .idea
 # Distribution / packaging
 .Python
+test/render.html
 env/
 build/
 develop-eggs/
