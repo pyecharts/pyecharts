@@ -100,10 +100,9 @@ def test_more():
     attr = ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
     line = Line("折线图示例")
     line.add("最高气温", attr, [11, 11, 15, 13, 12, 13, 10],
-             mark_point=["max", "min"],
-             mark_line=["average"])
-    line.add("最低气温", attr, [1, -2, 2, 5, 3, 2, 0], mark_point=["max", "min"],
-             mark_line=["average"])
+             mark_point=["max", "min"], mark_line=["average"])
+    line.add("最低气温", attr, [1, -2, 2, 5, 3, 2, 0],
+             mark_point=["max", "min"], mark_line=["average"])
     page.add(line)
 
     # pie
@@ -147,7 +146,8 @@ def test_more():
           [2282.17, 2263.97, 2253.25, 2286.33],
           [2255.77, 2270.28, 2253.31, 2276.22]]
     kline = Kline("K 线图示例")
-    kline.add("日K", ["2017/7/{}".format(i + 1) for i in range(31)], v1)
+    kline.add("日K", ["2017/7/{}".format(i + 1) for i in range(31)],
+              v1, is_datazoom_show=True)
     page.add(kline)
 
     # radar
