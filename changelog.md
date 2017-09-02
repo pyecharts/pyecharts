@@ -2,13 +2,16 @@
 
 ## 项目期待
 
-* visualmap 将会支持连续和分段两种类型
-
+* Todo
 
 ## 版本信息
 
 * ### version 0.2.4（Dev）
-    * Todo
+    
+    #### Added
+    * 为 Legend 通用配置项新增 `legend_text_color` 和 `legend_text_font` 参数
+    * 为 Radar.config() 新增 `legend_text_size` 参数
+    * 为 Visualmap 通用配置项新增 `is_piecewise` 和 `visual_split_number` 参数
 
 * ### version 0.2.3 - 2017.9.1（Current）
 
