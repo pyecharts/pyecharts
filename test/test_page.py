@@ -67,7 +67,7 @@ def test_page_get_js_dependencies():
     page = create_three()
     dependencies = page.get_js_dependencies()
     eq_(dependencies[0], 'echarts.min')
-    assert 'guangdong' in dependencies
+    assert 'guangdong.min' in dependencies
     assert 'echarts-gl.min' in dependencies
     eq_(len(dependencies), 3)
 
