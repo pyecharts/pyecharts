@@ -10,8 +10,8 @@ DEFAULT_JS_LIBRARIES = dict(
     echarts='echarts.min',
     echartsgl='echarts-gl.min',
     liquidfill='echarts-liquidfill.min',
-    world='world.min',
-    china='china.min',
+    world='world',
+    china='china',
     wordcloud='echarts-wordcloud.min'
 )
 
