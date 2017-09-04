@@ -78,7 +78,7 @@ class Grid(object):
             _grid = grid(grid_width, grid_height, grid_top, grid_bottom, grid_left, grid_right)
             for _ in range(_index_once):
                 self._chart._option.get('grid').append(_grid)
-            self._js_dependencies.union(chart._js_dependencies)
+            self._js_dependencies = self._js_dependencies.union(chart._js_dependencies)
 
     def __custom(self, series):
         """
@@ -101,40 +101,20 @@ class Grid(object):
         self._chart.render(path)
 
     def render_embed(self):
-        """
-
-        :return:
-        """
         return self._chart.render_embed()
 
     def show_config(self):
-        """
-
-        :return:
-        """
         self._chart.show_config()
 
     @property
     def chart(self):
-        """
-
-        :return:
-        """
         return self._chart
 
     @property
     def options(self):
-        """
-
-        :return:
-        """
         return self._chart._option
 
     def _repr_html_(self):
-        """
-
-        :return:
-        """
         return self._chart._repr_html_()
 
     def get_js_dependencies(self):

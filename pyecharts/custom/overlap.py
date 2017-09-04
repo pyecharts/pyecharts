@@ -40,7 +40,7 @@ class Overlap(object):
                 yaxis_index
             )
             self.__custom(_series)
-            self._js_dependencies.union(chart._js_dependencies)
+            self._js_dependencies = self._js_dependencies.union(chart._js_dependencies)
 
     def __custom(self, series):
         """ Appends the data for the series of the chart type
@@ -70,40 +70,20 @@ class Overlap(object):
         self._chart.render(path)
 
     def render_embed(self):
-        """
-
-        :return:
-        """
         return self._chart.render_embed()
 
     def show_config(self):
-        """
-
-        :return:
-        """
         self._chart.show_config()
 
     @property
     def chart(self):
-        """
-
-        :return:
-        """
         return self._chart
 
     @property
     def options(self):
-        """
-
-        :return:
-        """
         return self._chart._option
 
     def _repr_html_(self):
-        """
-
-        :return:
-        """
         return self._chart._repr_html_()
 
     def get_js_dependencies(self):
