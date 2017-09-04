@@ -15,6 +15,7 @@ pyecharts 是一个用于生成 Echarts 图表的类库。实际上就是 Echart
     * grid3D：3D笛卡尔坐标系组配置项，适用于 3D 图形。（Bar3D, Line3D, Scatter3D)
     * axis3D：3D 笛卡尔坐标系 X，Y，Z 轴配置项，适用于 3D 图形。（Bar3D, Line3D, Scatter3D)
     * visualMap：是视觉映射组件，用于进行『视觉编码』，也就是将数据映射到视觉元素（视觉通道）
+    * markLine&markPoint：图形标记组件，用于标记指定的特殊数据，又标记线和标记点两种。（Bar、Line、Kline）
     * tooltip：提示框组件，用于移动或点击鼠标时弹出数据内容
 
 * [图表详细](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/documentation.md#图表详细)
@@ -260,6 +261,9 @@ cast(seq)
 * xaxis_interval -> int  
     x 轴刻度标签的显示间隔，在类目轴中有效。默认会采用标签不重叠的策略间隔显示标签。  
     设置成 0 强制显示所有标签。设置为 1，表示『隔一个标签显示一个标签』，如果值为 2，表示隔两个标签显示一个标签，以此类推
+* xaxis_force_interval -> int/str  
+    强制设置 x 坐标轴分割间隔。如设置为 50 则刻度为 [0, 50, 150, ...]，设置为 "auto" 则只显示两个刻度。一般情况下不建议设置这个参数！！  
+    因为 splitNumber 是预估的值，实际根据策略计算出来的刻度可能无法达到想要的效果，这时候可以使用 interval 配合 min、max 强制设定刻度划分。在类目轴中无效。
 * xaxis_margin -> int  
     x 轴刻度标签与轴线之间的距离。默认为 8
 * xaxis_name -> str  
@@ -271,9 +275,9 @@ cast(seq)
 * xaxis_name_pos -> str  
     x 轴名称位置，有'start'，'middle'，'end'可选
 * xaxis_min -> int/float  
-    x 坐标轴刻度最小值，默认为自适应。
+    x 坐标轴刻度最小值，默认为自适应。使用特殊值 "dataMin" 可自定以数据中最小值为 x 轴最小值。
 * xaxis_max -> int/float  
-    x 坐标轴刻度最大值，默认为自适应。
+    x 坐标轴刻度最大值，默认为自适应。使用特殊值 "dataMax" 可自定以数据中最小值为 x 轴最大值。
 * xaxis_pos -> str  
     x 坐标轴位置，有'top','bottom'可选
 * xaxis_type -> str  
@@ -288,6 +292,9 @@ cast(seq)
 * yaxis_interval -> int  
     y 轴刻度标签的显示间隔，在类目轴中有效。默认会采用标签不重叠的策略间隔显示标签。  
     设置成 0 强制显示所有标签。设置为 1，表示『隔一个标签显示一个标签』，如果值为 2，表示隔两个标签显示一个标签，以此类推
+* yaxis_force_interval -> int/str  
+    强制设置 y 坐标轴分割间隔。如设置为 50 则刻度为 [0, 50, 150, ...]，设置为 "auto" 则只显示两个刻度。一般情况下不建议设置这个参数！！  
+    因为 splitNumber 是预估的值，实际根据策略计算出来的刻度可能无法达到想要的效果，这时候可以使用 interval 配合 min、max 强制设定刻度划分。在类目轴中无效。
 * yaxis_margin -> int  
     y 轴刻度标签与轴线之间的距离。默认为 8
 * yaxis_formatter -> str  
@@ -301,9 +308,9 @@ cast(seq)
 * yaxis_name_pos -> str  
     y 轴名称位置，有'start', 'middle'，'end'可选
 * yaxis_min -> int/float  
-    y 坐标轴刻度最小值，默认为自适应。
+    y 坐标轴刻度最小值，默认为自适应。使用特殊值 "dataMin" 可自定以数据中最小值为 y 轴最小值。
 * yaxis_max -> int/float  
-    y 坐标轴刻度最大值，默认为自适应。
+    y 坐标轴刻度最大值，默认为自适应。使用特殊值 "dataMax" 可自定以数据中最小值为 y 轴最大值。
 * yaxis_pos -> str  
     y 坐标轴位置，有'left','right'可选
 * yaxis_type -> str  
@@ -519,7 +526,22 @@ cast(seq)
 * tooltip_font_size -> int  
     提示框字体大小，默认为 14
 
-**toolbox：设置 `is_more_utils` 为 True 可以提供更多的实用工具按钮。默认只提供『数据视图』和『下载』按钮。**
+
+**markLine&markPoint：图形标记组件，用于标记指定的特殊数据，又标记线和标记点两种（Bar、Line、Kline）**
+
+* mark_point  -> list  
+    标记点，有'min', 'max', 'average'可选
+* mark_line  -> list  
+    标记线，有'min', 'max', 'average'可选
+* mark_point_symbol -> str  
+    标记点图形，，默认为'pin'，有'circle', 'rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow'可选
+* mark_point_symbolsize -> int  
+    标记点图形大小，默认为 50
+* mark_point_textcolor -> str  
+    标记点字体颜色，默认为'#fff'
+
+
+**toolbox：设置 `is_more_utils` 为 True 可以提供更多的实用工具按钮。默认只提供『数据视图』和『下载』按钮**
 
 
 # 图表详细  
@@ -563,17 +585,6 @@ bar.add("商家B", attr, v2, mark_line=["min", "max"])
 bar.render()
 ```
 ![bar-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/bar-1.gif)
-
-* mark_point  -> list  
-    标记点，有'min', 'max', 'average'可选
-* mark_line  -> list  
-    标记线，有'min', 'max', 'average'可选
-* mark_point_symbol -> str  
-    标记点图形，，默认为'pin'，有'circle', 'rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow'可选
-* mark_point_symbolsize -> int  
-    标记点图形大小，默认为 50
-* mark_point_textcolor -> str  
-    标记点字体颜色，默认为'#fff'
 
 ```python
 from pyecharts import Bar
@@ -1277,17 +1288,6 @@ line.add("商家B", attr, v2, is_smooth=True, mark_line=["max", "average"])
 line.render()
 ```
 ![line-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/line-0.gif)
-
-* mark_point  -> list  
-    标记点，有'min', 'max', 'average'可选
-* mark_line  -> list  
-    标记线，有'min', 'max', 'average'可选
-* mark_point_symbol -> str  
-    标记点图形，，默认为'pin'，有'circle', 'rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow'可选
-* mark_point_symbolsize -> int  
-    标记点图形大小，默认为 50
-* mark_point_textcolor -> str  
-    标记点字体颜色，默认为'#fff'
 
 标记点其他配置
 ```python
@@ -2651,6 +2651,7 @@ overlap.render()
 如果只是想在单个 .html 按顺序展示图表，推荐使用 ```Page()``` 类
 
 ## Page：同一网页按顺序展示多图
+> Grid/Timeline/Overlap 都可在 Page 中正常展示
 
 Page 类的使用：
 1. 引入 `Page` 类，`from pyecharts import Page`
