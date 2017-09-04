@@ -235,6 +235,7 @@ def xy_axis(type=None,
             xaxis_max=None,
             xaxis_type=None,
             xaxis_interval="auto",
+            xaxis_force_interval=None,
             xaxis_pos=None,
             yaxis_margin=8,
             yaxis_name_size=14,
@@ -246,6 +247,7 @@ def xy_axis(type=None,
             yaxis_max=None,
             yaxis_type=None,
             yaxis_interval="auto",
+            yaxis_force_interval=None,
             yaxis_pos=None,
             yaxis_formatter="",
             is_convert=False,
@@ -292,6 +294,12 @@ def xy_axis(type=None,
         Set to 0 to force all labels to be displayed
         and label is one by one if setting as 1; If 2,it will be one label separates
         from each other, and so on.
+    :param xaxis_force_interval:
+        Compulsively set segmentation interval for xaxis.
+        As splitNumber is a recommendation value, the calculated tick may not be
+        the same as expected. In this case, interval should be used along with
+        min and max to compulsively set tickings. But in most cases, we do not
+        suggest using this, out automatic calculation is enough for most situations.
     :param xaxis_pos:
         The position of x axis.
         options: 'top' or 'bottom'
@@ -330,6 +338,12 @@ def xy_axis(type=None,
         Set to 0 to force all labels to be displayed
         and label is one by one if setting as 1; If 2,it will be one label separates
         from each other, and so on.
+    :param yaxis_force_interval:
+        Compulsively set segmentation interval for yaxis.
+        As splitNumber is a recommendation value, the calculated tick may not be
+        the same as expected. In this case, interval should be used along with
+        min and max to compulsively set tickings. But in most cases, we do not
+        suggest using this, out automatic calculation is enough for most situations.
     :param yaxis_pos:
         the position of y axis.
         options: 'left' or 'right'
@@ -412,6 +426,11 @@ def xy_axis(type=None,
         _xAxis.update(scale=True, boundaryGap=False)
         _yAxis.update(scale=True, splitArea={"show": True})
 
+    if xaxis_force_interval is not None:
+        _xAxis.update(interval=xaxis_force_interval)
+    if yaxis_force_interval is not None:
+        _yAxis.update(interval=yaxis_force_interval)
+
     return [_xAxis], [_yAxis]
 
 
@@ -457,7 +476,8 @@ def _mark(data,
                     "symbol": mark_point_symbol,
                     "symbolSize": mark_point_symbolsize,
                     "label": {
-                        "normal": {"textStyle": {"color": mark_point_textcolor}}
+                        "normal": {
+                            "textStyle": {"color": mark_point_textcolor}}
                     }
                 }
             if type:
