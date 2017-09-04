@@ -79,7 +79,7 @@ class Timeline(object):
         :return:
         """
         self._chart = chart
-        self._js_dependencies.union(chart._js_dependencies)
+        self._js_dependencies = self._js_dependencies.union(chart._js_dependencies)
         self.__check_components(chart)
         self._time_points.append(time_point)
         self._timeline_options.get('baseOption').update(
@@ -95,10 +95,6 @@ class Timeline(object):
         })
 
     def show_config(self):
-        """
-
-        :return:
-        """
         pprint.pprint(self._timeline_options)
 
     def render(self, path="render.html"):
@@ -111,34 +107,18 @@ class Timeline(object):
         self._chart.render(path)
 
     def render_embed(self):
-        """
-
-        :return:
-        """
         self._chart._option = self._timeline_options
         return self._chart.render_embed()
 
     @property
     def chart(self):
-        """
-
-        :return:
-        """
         return self._chart
 
     @property
     def options(self):
-        """
-
-        :return:
-        """
         return self._timeline_options
 
     def _repr_html_(self):
-        """
-
-        :return:
-        """
         return self._chart._repr_html_()
 
     def get_js_dependencies(self):
