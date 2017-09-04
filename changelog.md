@@ -9,9 +9,13 @@
 * ### version 0.2.4（Dev）
     
     #### Added
-    * 为 Legend 通用配置项新增 `legend_text_color` 和 `legend_text_font` 参数
     * 为 Radar.config() 新增 `legend_text_size` 参数
+    * 为 Legend 通用配置项新增 `legend_text_color` 和 `legend_text_font` 参数
     * 为 Visualmap 通用配置项新增 `is_piecewise` 和 `visual_split_number` 参数
+    * 为 xyAxis 通用配置项新增 `xaxis_force_interval` 和 `yaxis_force_interval` 参数
+
+    #### Fixed
+    * 修复 Grid/Timeline/Overlap 在 Page 中不能正常使用的 bug
 
 * ### version 0.2.3 - 2017.9.1（Current）
 
