@@ -28,6 +28,7 @@ class Overlap(object):
         if self._chart is None:
             self._chart = chart
             self._js_dependencies = chart._js_dependencies
+            self._page_title = chart._page_title
         else:
             _series = (
                 chart._option.get('legend')[0].get('data'),
