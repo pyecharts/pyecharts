@@ -50,11 +50,13 @@ def create_three():
 
 def test_two_bars():
     page = create_three()
-    page.render()
+    test_page_title = 'custom-title'
+    page.render(title=test_page_title)
     with codecs.open('render.html', 'r', 'utf-8') as f:
         actual_content = f.read()
         assert json.dumps("柱状图数据堆叠示例") in actual_content
         assert "<html>" in actual_content
+        assert test_page_title in actual_content
         # test the optimization
         assert "registerMap('china'," not in actual_content
         assert "registerMap('world'," not in actual_content
