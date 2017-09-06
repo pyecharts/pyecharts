@@ -3,12 +3,13 @@
 from __future__ import unicode_literals
 
 import json
+import codecs
 
 import pandas as pd
 import numpy as np
 
 from nose.tools import eq_
-from pyecharts import Bar
+from pyecharts import Bar, Map
 
 
 TITLE = "柱状图数据堆叠示例"
@@ -97,3 +98,16 @@ def test_pandas_dataframe():
     html = bar.render_embed()
     assert title in html
     bar.render()
+
+
+def test_echarts_position_in_render_html():
+    test_page_title = 'hello world'
+    value = [20, 190, 253, 77, 65]
+    attr = ['汕头市', '汕尾市', '揭阳市', '阳江市', '肇庆市']
+    map = Map("广东地图示例", width=1200, height=600)
+    map.add("", attr, value, maptype='广东',
+            is_visualmap=True, visual_text_color='#000')
+    map.render(title=test_page_title)
+    with codecs.open('render.html', 'r', 'utf-8') as f:
+        actual_content = f.read()
+        assert test_page_title in actual_content
