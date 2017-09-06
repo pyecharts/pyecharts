@@ -25,6 +25,7 @@ class Base(object):
                  title_text_size=18,
                  subtitle_text_size=12,
                  background_color="#fff",
+                 page_title="Echarts",
                  jshost=None):
         """
 
@@ -64,11 +65,14 @@ class Base(object):
             RGBA can be used when you need alpha channel,
             for example 'rgba(128, 128, 128, 0.5)'.
             You may also use hexadecimal format, for example '#ccc'.
+        :param page_title:
+            specify html <title> value
         :param jshost:
             custom javascript host for the particular chart only
         """
         self._option = {}
         self._width, self._height = width, height
+        self._page_title = page_title
         self._colorlst = [
             '#c23531', '#2f4554', '#61a0a8', '#d48265', '#749f83',
             '#ca8622', '#bda29a', '#6e7074', '#546570', '#c4ccd3',
@@ -407,6 +411,7 @@ class Base(object):
             myOption=my_option,
             chart_id=self._chart_id,
             script_list=script_list,
+            pageTitle=self._page_title,
             myWidth=self._width, myHeight=self._height)
         html = utils.freeze_js(html)
         utils.write_utf8_html_file(path, html)
