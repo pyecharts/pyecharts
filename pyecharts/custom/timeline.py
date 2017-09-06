@@ -79,6 +79,7 @@ class Timeline(object):
         :return:
         """
         self._chart = chart
+        self._page_title = chart._page_title
         self._js_dependencies = self._js_dependencies.union(chart._js_dependencies)
         self.__check_components(chart)
         self._time_points.append(time_point)
