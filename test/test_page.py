@@ -94,7 +94,7 @@ def test_page_in_notebook():
 
 
 def test_more():
-    page = Page()
+    page = Page(page_title="my awesome chart")
 
     # line
     attr = ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
