@@ -237,6 +237,8 @@ cast(seq)
     副标题文本字体大小，默认为 12
 * background_color -> str  
     画布背景颜色，默认为 '#fff'
+* page_title -> str  
+    指定生成的 html 文件中 `<title>` 标签的值。默认为'Echarts'
 * jshost-> str    
     自定义每个实例的 JavaScript host
     
@@ -2648,6 +2650,8 @@ overlap.render()
 ```
 ![overlap-3](https://github.com/chenjiandongx/pyecharts/blob/master/images/overlap-3.gif)
 
+**Note：** 关于双 Y 轴对齐，可以使用 `yaxis_force_interval` 参数，强制分割成相同份数的刻度。这里有个小技巧，可以先设置 y 轴最大值。举个例子，如果双 y 轴一个最大值为 700，一个最大值为 400。那你可以把两个的 `yaxis_force_interval` 参数分别设置为 140 和 80，那就会都分成均等的 5 份了。
+
 如果只是想在单个 .html 按顺序展示图表，推荐使用 ```Page()``` 类
 
 ## Page：同一网页按顺序展示多图
@@ -2656,7 +2660,7 @@ overlap.render()
 Page 类的使用：
 1. 引入 `Page` 类，`from pyecharts import Page`
 2. 实例化 `Page` 类，`page = Page()` 
-3. 使用 `add()` 向 `page` 中添加图
+3. 使用 `add()` 向 `page` 中添加图，可以是单个图实例，也可以是一个图实例列表。
 4. 使用 `render()` 渲染生成 .html 文件
 
 Page 类中其他方法：
