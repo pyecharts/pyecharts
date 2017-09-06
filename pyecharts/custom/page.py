@@ -54,7 +54,7 @@ class Page(object):
         script_list = produce_html_script_list(dependencies)
         tmp = template.JINJA2_ENV.get_template(template_name)
         html = tmp.render(multi_chart_content=chart_content,
-                          pageTitle=self._page_title,
+                          page_title=self._page_title,
                           script_list=script_list)
         html = utils.freeze_js(html)
         utils.write_utf8_html_file(path, html)
