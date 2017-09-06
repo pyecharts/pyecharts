@@ -397,7 +397,7 @@ class Base(object):
         """
         return template.produce_html_script_list(self._js_dependencies)
 
-    def render(self, path="render.html"):
+    def render(self, path="render.html", title='Echarts'):
         """ Render the options dict, generate the html file
 
         :param path:
