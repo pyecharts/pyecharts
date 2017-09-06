@@ -13,14 +13,14 @@ class Page(object):
     """
     A composite object to present multiple charts vertically in a single page
     """
-    def __init__(self, jshost=None):
+    def __init__(self, jshost=None, page_title="Echarts"):
         """
 
         :param jshost:
             custom javascript host for the particular chart only
         """
         self.__charts = []
-        self._page_title = None
+        self._page_title = page_title
         self._jshost = jshost if jshost else constants.CONFIGURATION['HOST']
 
     def add(self, achart_or_charts):
@@ -34,12 +34,6 @@ class Page(object):
             self.__charts.extend(achart_or_charts)
         else:
             self.__charts.append(achart_or_charts)
-
-        if self._page_title is None:
-            try:
-                self._page_title = achart_or_charts._page_title
-            except:
-                self._page_title = achart_or_charts[0]._page_title
 
     def render(self, path="render.html"):
         """
