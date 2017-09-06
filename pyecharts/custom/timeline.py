@@ -7,7 +7,8 @@ from pyecharts import template
 
 class Timeline(object):
 
-    def __init__(self, is_auto_play=False,
+    def __init__(self, page_title="Echarts",
+                 is_auto_play=False,
                  is_loop_play=True,
                  is_rewind_play=False,
                  is_timeline_show=True,
@@ -50,6 +51,7 @@ class Timeline(object):
         """
 
         self._chart = None
+        self._page_title = page_title
         self._js_dependencies = set()
         self._time_points = []
         self._timeline_options = {
@@ -79,7 +81,6 @@ class Timeline(object):
         :return:
         """
         self._chart = chart
-        self._page_title = chart._page_title
         self._js_dependencies = self._js_dependencies.union(chart._js_dependencies)
         self.__check_components(chart)
         self._time_points.append(time_point)

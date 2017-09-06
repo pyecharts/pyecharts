@@ -7,9 +7,10 @@ from pyecharts import template
 
 class Grid(object):
 
-    def __init__(self):
+    def __init__(self, page_title='Echarts'):
         self._chart = None
         self._js_dependencies = set()
+        self._page_title = page_title
 
     def add(self, chart,
             grid_width=None,
@@ -40,7 +41,6 @@ class Grid(object):
             self._chart = chart
             self._chart._option.update(grid=[])
             self._js_dependencies = chart._js_dependencies
-            self._page_title = chart._page_title
 
             _grid = grid(grid_width, grid_height, grid_top, grid_bottom, grid_left, grid_right)
             if _grid:
