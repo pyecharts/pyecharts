@@ -40,6 +40,7 @@ class Grid(object):
             self._chart = chart
             self._chart._option.update(grid=[])
             self._js_dependencies = chart._js_dependencies
+            self._page_title = chart._page_title
 
             _grid = grid(grid_width, grid_height, grid_top, grid_bottom, grid_left, grid_right)
             if _grid:
