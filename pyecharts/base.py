@@ -25,7 +25,7 @@ class Base(object):
                  title_text_size=18,
                  subtitle_text_size=12,
                  background_color="#fff",
-                 page_title="Echarts",
+                 page_title=constants.PAGE_TITLE,
                  jshost=None):
         """
 
@@ -411,7 +411,7 @@ class Base(object):
             myOption=my_option,
             chart_id=self._chart_id,
             script_list=script_list,
-            pageTitle=self._page_title,
+            page_title=self._page_title,
             myWidth=self._width, myHeight=self._height)
         html = utils.freeze_js(html)
         utils.write_utf8_html_file(path, html)
