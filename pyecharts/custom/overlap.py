@@ -2,11 +2,12 @@
 # coding=utf-8
 
 from pyecharts import template
+from pyecharts.constants import PAGE_TITLE
 
 
 class Overlap(object):
 
-    def __init__(self, page_title="Echarts"):
+    def __init__(self, page_title=PAGE_TITLE):
         self._chart = None
         self._js_dependencies = set()
         self._page_title = page_title
