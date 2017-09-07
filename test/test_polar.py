@@ -6,16 +6,16 @@ from pyecharts import Polar
 
 
 def test_polar():
-
-    # polar_0
+    # polar type 'scatter'
     import random
     data = [(i, random.randint(1, 100)) for i in range(101)]
     polar = Polar("极坐标系-散点图示例")
-    polar.add("", data, boundary_gap=False, type='scatter', is_splitline_show=False,
-              is_axisline_show=True)
+    polar.add("", data, boundary_gap=False, type='scatter',
+              is_splitline_show=False, is_axisline_show=True)
+    assert '"type": "scatter"' in polar._repr_html_()
     polar.render()
 
-    # polar_1
+    # polar type 'scatter'
     data_1 = [(10, random.randint(1, 100)) for i in range(300)]
     data_2 = [(11, random.randint(1, 100)) for i in range(300)]
     polar = Polar("极坐标系-散点图示例", width=1200, height=600)
@@ -23,29 +23,39 @@ def test_polar():
     polar.add("", data_2, type='scatter')
     polar.render()
 
-    # porlar_2
+    # polar type 'effectScatter'
     data = [(i, random.randint(1, 100)) for i in range(10)]
     polar = Polar("极坐标系-动态散点图示例", width=1200, height=600)
-    polar.add("", data, type='effectScatter', effect_scale=10, effect_period=5)
+    polar.add("", data, type='effectScatter', effect_scale=10,
+              effect_period=5)
+    assert '"type": "effectScatter"' in polar._repr_html_()
     polar.render()
 
-    # polar_3
+    # polar type 'barRadius'
     radius = ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
     polar = Polar("极坐标系-堆叠柱状图示例", width=1200, height=600)
-    polar.add("A", [1, 2, 3, 4, 3, 5, 1], radius_data=radius, type='barRadius', is_stack=True)
-    polar.add("B", [2, 4, 6, 1, 2, 3, 1], radius_data=radius, type='barRadius', is_stack=True)
-    polar.add("C", [1, 2, 3, 4, 1, 2, 5], radius_data=radius, type='barRadius', is_stack=True)
+    polar.add("A", [1, 2, 3, 4, 3, 5, 1], radius_data=radius,
+              type='barRadius', is_stack=True)
+    polar.add("B", [2, 4, 6, 1, 2, 3, 1], radius_data=radius,
+              type='barRadius', is_stack=True)
+    polar.add("C", [1, 2, 3, 4, 1, 2, 5], radius_data=radius,
+              type='barRadius', is_stack=True)
     polar.render()
 
-    # polar_4
+    # polar type 'barAngle'
     radius = ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
     polar = Polar("极坐标系-堆叠柱状图示例", width=1200, height=600)
-    polar.add("", [1, 2, 3, 4, 3, 5, 1], radius_data=radius, type='barAngle', is_stack=True)
-    polar.add("", [2, 4, 6, 1, 2, 3, 1], radius_data=radius, type='barAngle', is_stack=True)
-    polar.add("", [1, 2, 3, 4, 1, 2, 5], radius_data=radius, type='barAngle', is_stack=True)
+    polar.add("", [1, 2, 3, 4, 3, 5, 1], radius_data=radius,
+              type='barAngle', is_stack=True)
+    polar.add("", [2, 4, 6, 1, 2, 3, 1], radius_data=radius,
+              type='barAngle', is_stack=True)
+    polar.add("", [1, 2, 3, 4, 1, 2, 5], radius_data=radius,
+              type='barAngle', is_stack=True)
     polar.render()
 
-    # polar_5
+
+def test_polar_draw():
+    # draw love
     import math
     data = []
     for i in range(101):
@@ -57,7 +67,7 @@ def test_polar():
     polar.add("Love", data, angle_data=hour, boundary_gap=False, start_angle=0)
     polar.render()
 
-    # polar_6
+    # draw flower
     data = []
     for i in range(361):
         t = i / 180 * math.pi
@@ -67,18 +77,18 @@ def test_polar():
     polar.add("Flower", data, start_angle=0, symbol=None, axis_range=[0, None])
     polar.render()
 
-    # polar_7
+    # draw color flower
     data = []
     for i in range(361):
         t = i / 180 * math.pi
         r = math.sin(2 * t) * math.cos(2 * t)
         data.append([r, i])
     polar = Polar("极坐标系示例", width=1200, height=600)
-    polar.add("Color-Flower", data, start_angle=0, symbol=None, axis_range=[0, None],
-              area_color="#f71f24", area_opacity=0.6)
+    polar.add("Color-Flower", data, start_angle=0, symbol=None,
+              axis_range=[0, None], area_color="#f71f24", area_opacity=0.6)
     polar.render()
 
-    # polar_8
+    # draw snail
     data = []
     for i in range(5):
         for j in range(101):
@@ -87,6 +97,7 @@ def test_polar():
             r = math.pow(math.e, 0.003 * alpha)
             data.append([r, theta])
     polar = Polar("极坐标系示例")
-    polar.add("", data, symbol_size=0, symbol='circle', start_angle=-25, is_radiusaxis_show=False,
-              area_color="#f3c5b3", area_opacity=0.5, is_angleaxis_show=False)
+    polar.add("", data, symbol_size=0, symbol='circle', start_angle=-25,
+              is_radiusaxis_show=False, area_color="#f3c5b3",
+              area_opacity=0.5, is_angleaxis_show=False)
     polar.render()

@@ -10,12 +10,13 @@ pyecharts is a library to generate charts using Echarts. It simply provides the 
 ## Installation
 pyecharts works on Python2 and Python3. For more information please refer to [changelog.md](https://github.com/chenjiandongx/pyecharts/blob/master/changelog.md)
 
+### Jupyter-Notebook
 Make sure you hava installed jupyter-notebook enviroment if you want to show your charts on notebook.   
-How to install jupyter-notebook?
+How to install it?
 ```
 $ pip install notebook
 ```
-
+### pyecharts
 You can install it via pip
 ```
 $ pip install pyecharts

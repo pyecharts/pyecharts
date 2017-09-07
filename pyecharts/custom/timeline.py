@@ -3,11 +3,13 @@
 
 import pprint
 from pyecharts import template
+from pyecharts.constants import PAGE_TITLE
 
 
 class Timeline(object):
 
-    def __init__(self, is_auto_play=False,
+    def __init__(self, page_title=PAGE_TITLE,
+                 is_auto_play=False,
                  is_loop_play=True,
                  is_rewind_play=False,
                  is_timeline_show=True,
@@ -50,6 +52,7 @@ class Timeline(object):
         """
 
         self._chart = None
+        self._page_title = page_title
         self._js_dependencies = set()
         self._time_points = []
         self._timeline_options = {
