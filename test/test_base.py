@@ -43,7 +43,6 @@ def test_notebook_render():
 
 
 def test_notebook_dom():
-
     bar = create_a_bar(TITLE)
     html = bar._render_notebook_dom_()
     assert bar._chart_id in html
@@ -53,7 +52,6 @@ def test_notebook_dom():
 
 
 def test_notebook_component():
-
     bar = create_a_bar(TITLE)
     html = bar._render_notebook_component_()
     json_encoded_title = json.dumps(TITLE)
@@ -63,7 +61,6 @@ def test_notebook_component():
 
 
 def test_base_get_js_dependencies():
-
     bar = create_a_bar(TITLE)
     dependencies = bar.get_js_dependencies()
     expected = ['echarts.min']
@@ -71,7 +68,6 @@ def test_base_get_js_dependencies():
 
 
 def test_numpy_array():
-
     attr = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
     v1 = np.array([5, 20, 36, 10, 75, 90])
     bar = Bar(TITLE)

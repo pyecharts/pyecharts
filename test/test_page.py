@@ -8,11 +8,12 @@ from pyecharts import (
     Bar, Scatter3D, Line, Pie, Map,
     Kline, Radar, WordCloud, Liquid)
 from pyecharts import Page
+from test.constants import RANGE_COLOR
 from nose.tools import eq_
 
 
 def create_three():
-    page = Page()
+    page = Page(page_title="my awesome chart")
 
     # bar
     attr = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
@@ -30,11 +31,8 @@ def create_three():
          random.randint(0, 100),
          random.randint(0, 100)] for _ in range(80)
     ]
-    range_color = [
-        '#313695', '#4575b4', '#74add1', '#abd9e9', '#e0f3f8', '#ffffbf',
-        '#fee090', '#fdae61', '#f46d43', '#d73027', '#a50026']
     scatter3d = Scatter3D("3D 散点图示例", width=1200, height=600)
-    scatter3d.add("", data, is_visualmap=True, visual_range_color=range_color)
+    scatter3d.add("", data, is_visualmap=True, visual_range_color=RANGE_COLOR)
     page.add(scatter3d)
 
     # guangdong
@@ -58,6 +56,7 @@ def test_two_bars():
         # test the optimization
         assert "registerMap('china'," not in actual_content
         assert "registerMap('world'," not in actual_content
+        assert "my awesome chart" in actual_content
         echarts_position = actual_content.find('exports.echarts')
         guangdong_position = actual_content.find(json.dumps('广东'))
         assert echarts_position < guangdong_position
@@ -171,20 +170,22 @@ def test_more():
          random.randint(0, 100),
          random.randint(0, 100)] for _ in range(80)
     ]
-    range_color = ['#313695', '#4575b4', '#74add1', '#abd9e9', '#e0f3f8', '#ffffbf',
-                   '#fee090', '#fdae61', '#f46d43', '#d73027', '#a50026']
     scatter3D = Scatter3D("3D 散点图示例", width=1200, height=600)
-    scatter3D.add("", data, is_visualmap=True, visual_range_color=range_color)
+    scatter3D.add("", data, is_visualmap=True, visual_range_color=RANGE_COLOR)
     page.add(scatter3D)
 
     # wordcloud
-    name = ['Sam S Club', 'Macys', 'Amy Schumer', 'Jurassic World', 'Charter Communications',
-            'Chick Fil A', 'Planet Fitness', 'Pitch Perfect', 'Express', 'Home', 'Johnny Depp',
-            'Lena Dunham', 'Lewis Hamilton', 'KXAN', 'Mary Ellen Mark', 'Farrah Abraham',
-            'Rita Ora', 'Serena Williams', 'NCAA baseball tournament', 'Point Break']
-    value = [10000, 6181, 4386, 4055, 2467, 2244, 1898, 1484, 1112, 965, 847, 582, 555,
-             550, 462, 366, 360, 282, 273, 265]
-
+    name = [
+        'Sam S Club', 'Macys', 'Amy Schumer', 'Jurassic World',
+        'Charter Communications', 'Chick Fil A', 'Planet Fitness',
+        'Pitch Perfect', 'Express', 'Home', 'Johnny Depp', 'Lena Dunham',
+        'Lewis Hamilton', 'KXAN', 'Mary Ellen Mark', 'Farrah Abraham',
+        'Rita Ora', 'Serena Williams', 'NCAA baseball tournament', 'Point Break'
+    ]
+    value = [
+        10000, 6181, 4386, 4055, 2467, 2244, 1898, 1484, 1112,
+        965, 847, 582, 555, 550, 462, 366, 360, 282, 273, 265
+    ]
     wordcloud = WordCloud(width=1300, height=620)
     wordcloud.add("", name, value, word_size_range=[30, 100], rotate_step=66)
     page.add(wordcloud)
@@ -193,5 +194,4 @@ def test_more():
     liquid = Liquid("水球图示例")
     liquid.add("Liquid", [0.6])
     page.add(liquid)
-
     page.render()

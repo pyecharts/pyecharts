@@ -6,18 +6,20 @@ from pyecharts import Liquid
 
 
 def test_liquid():
-
-    # liquid_0
+    # liquid default
     liquid = Liquid("水球图示例")
     liquid.add("Liquid", [0.6])
     liquid.render()
 
-    # liquid_1
+    # liquid multiple data
     liquid = Liquid("水球图示例")
     liquid.add("Liquid", [0.6, 0.5, 0.4, 0.3], is_liquid_outline_show=False)
+    assert "diamond" not in liquid._repr_html_()
     liquid.render()
 
-    # liquid_2
+    # liquid shape diamond
     liquid = Liquid("水球图示例")
-    liquid.add("Liquid", [0.6, 0.5, 0.4, 0.3], is_liquid_animation=False, shape='diamond')
+    liquid.add("Liquid", [0.6, 0.5, 0.4, 0.3], is_liquid_animation=False,
+               shape='diamond')
+    assert "diamond" in liquid._repr_html_()
     liquid.render()

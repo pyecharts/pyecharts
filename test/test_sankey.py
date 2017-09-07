@@ -10,8 +10,7 @@ PY2 = sys.version_info[0] == 2
 
 
 def test_sankey():
-
-    # sankey_0
+    # sankey default
     nodes = [
         {'name': 'category1'}, {'name': 'category2'}, {'name': 'category3'},
         {'name': 'category4'}, {'name': 'category5'}, {'name': 'category6'},
@@ -25,10 +24,11 @@ def test_sankey():
     ]
     sankey = Sankey("桑基图示例", width=1200, height=600)
     sankey.add("sankey", nodes, links, line_opacity=0.2,
-               line_curve=0.5, line_color='source', is_label_show=True, label_pos='right')
+               line_curve=0.5, line_color='source', is_label_show=True,
+               label_pos='right')
     sankey.render()
 
-    # sankey_1
+    # sankey official data
     import json
     if PY2:
         import codecs
@@ -39,5 +39,6 @@ def test_sankey():
             j = json.load(f)
     sankey = Sankey("桑基图示例", width=1200, height=600)
     sankey.add("sankey", nodes=j['nodes'], links=j['links'], line_opacity=0.2,
-               line_curve=0.5, line_color='source', is_label_show=True, label_pos='right')
+               line_curve=0.5, line_color='source',
+               is_label_show=True, label_pos='right')
     sankey.render()
