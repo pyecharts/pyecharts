@@ -25,7 +25,7 @@ class Base(object):
                  title_text_size=18,
                  subtitle_text_size=12,
                  background_color="#fff",
-                 page_title="Echarts",
+                 page_title=constants.PAGE_TITLE,
                  jshost=None):
         """
 

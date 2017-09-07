@@ -13,7 +13,7 @@ class Page(object):
     """
     A composite object to present multiple charts vertically in a single page
     """
-    def __init__(self, jshost=None, page_title="Echarts"):
+    def __init__(self, jshost=None, page_title=constants.PAGE_TITLE):
         """
 
         :param jshost:
