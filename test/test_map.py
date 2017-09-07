@@ -8,33 +8,19 @@ from pyecharts import Map
 
 
 def test_map():
-
-    # map_0
-    value = [155, 10, 66, 78]
-    attr = ["福建", "山东", "北京", "上海"]
-    map = Map("全国地图示例", width=1200, height=600)
-    map.add("", attr, value, maptype='china')
-    map.render()
-
-    # map_0_1
+    # show label
     value = [155, 10, 66, 78]
     attr = ["福建", "山东", "北京", "上海"]
     map = Map("全国地图示例", width=1200, height=600)
     map.add("", attr, value, maptype='china', is_label_show=True)
     map.render()
 
-    # map_1
+    # combine with visualMap
     value = [155, 10, 66, 78, 33, 80, 190, 53, 49.6]
     attr = ["福建", "山东", "北京", "上海", "甘肃", "新疆", "河南", "广西", "西藏"]
     map = Map("Map 结合 VisualMap 示例", width=1200, height=600)
-    map.add("", attr, value, maptype='china', is_visualmap=True, visual_text_color='#000')
-    map.render()
-
-    # map_3
-    value = [95.1, 23.2, 43.3, 66.4, 88.5]
-    attr= ["China", "Canada", "Brazil", "Russia", "United States"]
-    map = Map("世界地图示例", width=1200, height=600)
-    map.add("", attr, value, maptype="world", is_visualmap=True, visual_text_color='#000')
+    map.add("", attr, value, maptype='china', is_visualmap=True,
+            visual_text_color='#000')
     map.render()
 
 
@@ -60,3 +46,41 @@ def test_city_map():
             visual_text_color='#000')
     # To avoid potential pinyin crash, all cities have a province prefix
     assert "jiang1_xi1_xin1_yu2" in map._repr_html_()
+
+
+def test_world_map():
+    value = [95.1, 23.2, 43.3, 66.4, 88.5, 0.1]
+    attr = [
+        "China", "Canada", "Brazil", "Russia", "United States", "Unknown Country"
+    ]
+    map = Map("世界地图示例", width=1200, height=600)
+    map.add("", attr, value, maptype="world", is_visualmap=True,
+            visual_text_color='#000')
+    map.render()
+
+    with codecs.open('render.html', 'r', 'utf-8') as f:
+        actual_content = f.read()
+        # test register map
+        assert "registerMap('world', " in actual_content
+        assert "registerMap('china', " not in actual_content
+        # test non-existent country
+        assert "Russia" in actual_content
+        assert "Unknown Country', " not in actual_content
+
+
+def test_china_map():
+    value = [155, 10, 66, 78]
+    attr = ["福建", "山东", "北京", "上海"]
+    map = Map("全国地图示例", width=1200, height=600)
+    map.add("", attr, value, maptype='china')
+    map.render()
+
+    with codecs.open('render.html', 'r', 'utf-8') as f:
+        actual_content = f.read()
+        # test register map
+        assert "registerMap('china', " in actual_content
+        assert "registerMap('world', " not in actual_content
+        # fujian province
+        assert "\u798f\u5efa" in actual_content
+        # shanghai city
+        assert "\u4e0a\u6d77" in actual_content
