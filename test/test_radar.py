@@ -5,9 +5,7 @@ from __future__ import unicode_literals
 from pyecharts import Radar
 
 
-def test_radar():
-
-    # radar_0
+def test_radar_default_schema():
     schema = [
         ("销售", 6500), ("管理", 16000), ("信息技术", 30000),
         ("客服", 38000), ("研发", 52000), ("市场", 25000)
@@ -21,7 +19,8 @@ def test_radar():
               legend_selectedmode='single')
     radar.render()
 
-    # radar_1
+
+def test_radar_user_define_schema():
     value_bj = [
         [55, 9, 56, 0.46, 18, 6, 1],
         [25, 11, 21, 0.65, 34, 9, 2],
@@ -88,22 +87,30 @@ def test_radar():
         [174, 131, 174, 1.55, 108, 50, 30],
         [187, 143, 201, 1.39, 89, 53, 31]
         ]
-    c_schema = [{"name":"AQI", "max": 300, "min": 5},
-                {"name":"PM2.5", "max": 250, "min": 20},
-                {"name":"PM10", "max":300, "min": 5},
-                {"name":"CO", "max":5},
-                {"name":"NO2", "max":200},
-                {"name":"SO2", "max":100}]
+    c_schema = [
+        {"name": "AQI", "max": 300, "min": 5},
+        {"name": "PM2.5", "max": 250, "min": 20},
+        {"name": "PM10", "max": 300, "min": 5},
+        {"name": "CO", "max": 5},
+        {"name": "NO2", "max": 200},
+        {"name": "SO2", "max": 100}
+    ]
 
+    # legend selected mode 'single'
     radar = Radar("雷达图示例")
     radar.config(c_schema=c_schema, shape='circle')
     radar.add("北京", value_bj, item_color="#f9713c", symbol=None)
-    radar.add("上海", value_sh, item_color="#b3e4a1", symbol=None, legend_selectedmode='signle')
+    radar.add("上海", value_sh, item_color="#b3e4a1", symbol=None,
+              legend_selectedmode='single')
+    assert 'single' in radar._repr_html_()
+    assert 'multiple' not in radar._repr_html_()
     radar.render()
 
-    # radar_2
+    # legend selected mode 'single'
     radar = Radar("雷达图示例")
     radar.config(c_schema=c_schema, shape='circle')
     radar.add("北京", value_bj, item_color="#f9713c", symbol=None)
     radar.add("上海", value_sh, item_color="#b3e4a1", symbol=None)
+    assert 'multiple' in radar._repr_html_()
+    assert 'single' not in radar._repr_html_()
     radar.render()
