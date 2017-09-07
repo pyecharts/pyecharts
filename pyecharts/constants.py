@@ -23,8 +23,9 @@ with codecs.open(DEFAULT_ECHARTS_REGISTRY, 'r', 'utf-8') as f:
     CONFIG = json.loads(content)
 
 DEFAULT_JS_LIBRARIES = CONFIG['FILE_MAP']
-
 CITY_NAME_PINYIN_MAP = CONFIG['PINYIN_MAP']
+
+PAGE_TITLE = "Echarts"
 
 
 CITY_GEO_COORDS = {
