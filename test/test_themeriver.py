@@ -5,9 +5,7 @@ from __future__ import unicode_literals
 from pyecharts import ThemeRiver
 
 
-# themeriver_0
 def test_themeriver():
-
     data = [
         ['2015/11/08', 10, 'DQ'], ['2015/11/09', 15, 'DQ'], ['2015/11/10', 35, 'DQ'],
         ['2015/11/14', 7, 'DQ'], ['2015/11/15', 2, 'DQ'], ['2015/11/16', 17, 'DQ'],

@@ -6,15 +6,14 @@ from pyecharts import Pie
 
 
 def test_pie():
-
-    # pie_0
+    # pie default
     attr = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
     v1 = [11, 12, 13, 10, 10, 10]
     pie = Pie("饼图示例")
     pie.add("", attr, v1, is_label_show=True)
     pie.render()
 
-    # pie_1
+    # pie legend_orient 'vertical'&legend_pos 'left'
     attr = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
     v1 = [11, 12, 13, 10, 10, 10]
     pie = Pie("饼图-圆环图示例", title_pos='center')
@@ -22,17 +21,19 @@ def test_pie():
             legend_orient='vertical', legend_pos='left')
     pie.render()
 
-    # pie_2
+    # pie rose type
     attr = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
     v1 = [11, 12, 13, 10, 10, 10]
     v2 = [19, 21, 32, 20, 20, 33]
     pie = Pie("饼图-玫瑰图示例", title_pos='center', width=900)
-    pie.add("商品A", attr, v1, center=[25, 50], is_random=True, radius=[30, 75], rosetype='radius')
-    pie.add("商品B", attr, v2, center=[75, 50], is_random=True, radius=[30, 75], rosetype='area',
+    pie.add("商品A", attr, v1, center=[25, 50], is_random=True,
+            radius=[30, 75], rosetype='radius')
+    pie.add("商品B", attr, v2, center=[75, 50], is_random=True,
+            radius=[30, 75], rosetype='area',
             is_legend_show=False, is_label_show=True)
     pie.render()
 
-    # pie_3
+    # pie radius
     pie = Pie("饼图示例", title_pos='center', width=1000, height=600)
     pie.add("", ['A', 'B', 'C', 'D', 'E', 'F'], [335, 321, 234, 135, 251, 148],
             radius=[40, 55], is_label_show=True)
@@ -40,7 +41,7 @@ def test_pie():
             legend_orient='vertical', legend_pos='left')
     pie.render()
 
-    # pie_4
+    # pie multiple
     import random
     attr = ['A', 'B', 'C', 'D', 'E', 'F']
     pie = Pie("饼图示例", width=1000, height=600)
@@ -54,12 +55,13 @@ def test_pie():
             center=[65, 50], rosetype='radius')
     pie.render()
 
-    # Pie_5
+    # Pie multiple
     pie = Pie('各类电影中"好片"所占的比例', "数据来着豆瓣", title_pos='center')
     pie.add("", ["剧情", ""], [25, 75], center=[10, 30], radius=[18, 24],
             label_pos='center', is_label_show=True, label_text_color=None, )
     pie.add("", ["奇幻", ""], [24, 76], center=[30, 30], radius=[18, 24],
-            label_pos='center', is_label_show=True, label_text_color=None, legend_pos='left')
+            label_pos='center', is_label_show=True, label_text_color=None,
+            legend_pos='left')
     pie.add("", ["爱情", ""], [14, 86], center=[50, 30], radius=[18, 24],
             label_pos='center', is_label_show=True, label_text_color=None)
     pie.add("", ["惊悚", ""], [11, 89], center=[70, 30], radius=[18, 24],

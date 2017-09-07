@@ -6,8 +6,7 @@ from pyecharts import Parallel
 
 
 def test_parallel():
-
-    # parallel_0
+    # parallel base
     schema = ["data", "AQI", "PM2.5", "PM10", "CO", "NO2"]
     data = [
         [1, 91, 45, 125, 0.82, 34],
@@ -27,7 +26,7 @@ def test_parallel():
     parallel.add("parallel", data, is_random=True)
     parallel.render()
 
-    # parallel_1
+    # parallel user define
     c_schema = [
         {"dim": 0, "name": "data"},
         {"dim": 1, "name": "AQI"},
@@ -37,7 +36,8 @@ def test_parallel():
         {"dim": 5, "name": "NO2"},
         {"dim": 6, "name": "CO2"},
         {"dim": 7, "name": "等级",
-         "type": "category", "data": ['优', '良', '轻度污染', '中度污染', '重度污染', '严重污染']}
+         "type": "category",
+         "data": ['优', '良', '轻度污染', '中度污染', '重度污染', '严重污染']}
     ]
     data = [
         [1, 91, 45, 125, 0.82, 34, 23, "良"],
