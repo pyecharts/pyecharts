@@ -1,11 +1,5 @@
 # Version Log
 
-## 项目期待
-
-* Todo
-
-## 版本信息
-
 * ### version 0.2.4（Dev）
     
     #### Added
@@ -14,6 +8,9 @@
     * [issue#156](https://github.com/chenjiandongx/pyecharts/issues/156) 为 xyAxis 通用配置项新增 `xaxis_force_interval` 和 `yaxis_force_interval` 参数
     * 为 Visualmap 通用配置项新增 `is_piecewise` 和 `visual_split_number` 参数
     * [issue#160](https://github.com/chenjiandongx/pyecharts/issues/160) 为 Base 类新增 `page_title` 参数，初始化类实例的时候可指定生成的 html 文件 `<title>` 标签的值。自定义类 Grid/Overlap/Timeline/Page 以第一个添加的实例的 `page_title` 参数为准。
+
+    #### Changed
+    * 压缩 js 文件体积
 
     #### Fixed
     * [issue#158](https://github.com/chenjiandongx/pyecharts/issues/158) 修复 Grid/Timeline/Overlap 在 Page 中不能正常使用的 bug

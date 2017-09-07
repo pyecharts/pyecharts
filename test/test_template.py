@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 # coding=utf-8
 from __future__ import unicode_literals
-import codecs
-
 
 from nose.tools import eq_, raises
 from pyecharts.template import ensure_echarts_is_in_the_front
