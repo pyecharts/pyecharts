@@ -3,11 +3,12 @@
 
 import pprint
 from pyecharts import template
+from pyecharts.constants import PAGE_TITLE
 
 
 class Timeline(object):
 
-    def __init__(self, page_title="Echarts",
+    def __init__(self, page_title=PAGE_TITLE,
                  is_auto_play=False,
                  is_loop_play=True,
                  is_rewind_play=False,
