@@ -98,6 +98,10 @@ class Timeline(object):
         })
 
     def show_config(self):
+        """
+
+        :return:
+        """
         pprint.pprint(self._timeline_options)
 
     def render(self, path="render.html"):
@@ -110,18 +114,34 @@ class Timeline(object):
         self._chart.render(path)
 
     def render_embed(self):
+        """
+
+        :return:
+        """
         self._chart._option = self._timeline_options
         return self._chart.render_embed()
 
     @property
     def chart(self):
+        """
+
+        :return:
+        """
         return self._chart
 
     @property
     def options(self):
+        """
+
+        :return:
+        """
         return self._timeline_options
 
     def _repr_html_(self):
+        """
+
+        :return:
+        """
         return self._chart._repr_html_()
 
     def get_js_dependencies(self):
