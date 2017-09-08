@@ -88,6 +88,7 @@ class Radar(Base):
             "name": name,
             "data": value,
             "symbol": chart['symbol'],
+            "label": chart['label'],
             "itemStyle": {
                 "normal": {
                     "color": item_color
