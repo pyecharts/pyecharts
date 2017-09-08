@@ -32,7 +32,6 @@ class Boxplot(Base):
         :param kwargs:
         :return:
         """
-        assert len(x_axis) == len(y_axis)
         kwargs.update(x_axis=x_axis)
         chart = get_all_options(**kwargs)
 
