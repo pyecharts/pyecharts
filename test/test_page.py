@@ -60,7 +60,6 @@ def test_two_bars():
         # test the optimization
         assert "registerMap('china'," not in actual_content
         assert "registerMap('world'," not in actual_content
-        assert "my awesome chart" in actual_content
         echarts_position = actual_content.find('exports.echarts')
         guangdong_position = actual_content.find(json.dumps('广东'))
         assert echarts_position < guangdong_position
@@ -97,7 +96,7 @@ def test_page_in_notebook():
 
 
 def test_more():
-    page = Page(page_title="my awesome chart")
+    page = Page()
 
     # line
     attr = ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
