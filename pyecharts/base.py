@@ -25,6 +25,7 @@ class Base(object):
                  title_text_size=18,
                  subtitle_text_size=12,
                  background_color="#fff",
+                 page_title=constants.PAGE_TITLE,
                  jshost=None):
         """
 
@@ -64,11 +65,14 @@ class Base(object):
             RGBA can be used when you need alpha channel,
             for example 'rgba(128, 128, 128, 0.5)'.
             You may also use hexadecimal format, for example '#ccc'.
+        :param page_title:
+            specify html <title> value
         :param jshost:
             custom javascript host for the particular chart only
         """
         self._option = {}
         self._width, self._height = width, height
+        self._page_title = page_title
         self._colorlst = [
             '#c23531', '#2f4554', '#61a0a8', '#d48265', '#749f83',
             '#ca8622', '#bda29a', '#6e7074', '#546570', '#c4ccd3',
@@ -168,6 +172,7 @@ class Base(object):
             is_liquid_animation=None,
             is_liquid_outline_show=None,
             is_more_utils=None,
+            is_piecewise=None,
             is_radiusaxis_show=None,
             is_random=None,
             is_roam=None,
@@ -192,6 +197,8 @@ class Base(object):
             legend_pos=None,
             legend_top=None,
             legend_selectedmode=None,
+            legend_text_size=None,
+            legend_text_color=None,
             line_curve=None,
             line_opacity=None,
             line_type=None,
@@ -204,7 +211,6 @@ class Base(object):
             mark_point_symbol=None,
             mark_point_symbolsize=None,
             mark_point_textcolor=None,
-            rader_text_color=None,
             radius_data=None,
             radius=None,
             rosetype=None,
@@ -232,11 +238,13 @@ class Base(object):
             visual_pos=None,
             visual_top=None,
             visual_type=None,
+            visual_split_number=None,
             word_gap=None,
             word_size_range=None,
             x_axis=None,
             xaxis_margin=None,
             xaxis_interval=None,
+            xaxis_force_interval=None,
             xaxis_pos=None,
             xaxis_name_gap=None,
             xaxis_name_size=None,
@@ -254,6 +262,8 @@ class Base(object):
             xaxis3d_interval=None,
             xaxis3d_margin=None,
             yaxis_margin=None,
+            yaxis_interval=None,
+            yaxis_force_interval=None,
             yaxis_pos=None,
             yaxis_formatter=None,
             yaxis_rotate=None,
@@ -401,6 +411,7 @@ class Base(object):
             myOption=my_option,
             chart_id=self._chart_id,
             script_list=script_list,
+            page_title=self._page_title,
             myWidth=self._width, myHeight=self._height)
         html = utils.freeze_js(html)
         utils.write_utf8_html_file(path, html)

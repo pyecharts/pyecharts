@@ -11,8 +11,7 @@ PY2 = sys.version_info[0] == 2
 
 
 def test_graph():
-
-    # graph_0
+    # graph force layout
     nodes = [{"name": "结点1", "symbolSize": 10},
              {"name": "结点2", "symbolSize": 20},
              {"name": "结点3", "symbolSize": 30},
@@ -30,13 +29,13 @@ def test_graph():
     graph.show_config()
     graph.render()
 
-    # graph_1
+    # graph circular layout
     graph = Graph("关系图-环形布局示例")
     graph.add("", nodes, links, is_label_show=True, graph_repulsion=8000,
               graph_layout='circular', label_text_color=None)
     graph.render()
 
-    # graph_2
+    # graph official data
     import json
     if PY2:
         import codecs
@@ -45,7 +44,7 @@ def test_graph():
     else:
         with open(os.path.join("..", "json", "weibo.json"), "r", encoding="utf-8") as f:
             j = json.load(f)
-    nodes, links, categories, cont, mid, userl = j
+    nodes, links, categories, cont, mid, _ = j
     graph = Graph("微博转发关系图", width=1200, height=600)
     graph.add("", nodes, links, categories, label_pos="right", graph_repulsion=50,
               is_legend_show=False, line_curve=0.2, label_text_color=None)
