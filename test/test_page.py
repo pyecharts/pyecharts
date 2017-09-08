@@ -12,8 +12,11 @@ from test.constants import RANGE_COLOR
 from nose.tools import eq_
 
 
+TEST_PAGE_TITLE = "my awesome chart"
+
+
 def create_three():
-    page = Page(page_title="my awesome chart")
+    page = Page(page_title=TEST_PAGE_TITLE)
 
     # bar
     attr = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
@@ -53,6 +56,7 @@ def test_two_bars():
         actual_content = f.read()
         assert json.dumps("柱状图数据堆叠示例") in actual_content
         assert "<html>" in actual_content
+        assert TEST_PAGE_TITLE in actual_content
         # test the optimization
         assert "registerMap('china'," not in actual_content
         assert "registerMap('world'," not in actual_content
