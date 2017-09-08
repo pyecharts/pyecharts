@@ -1,6 +1,10 @@
 # Version Log
 
-* ### version 0.2.4（Dev）
+* ### version 0.2.5（Dev）
+
+    * Todo
+
+* ### version 0.2.4 - 2017.9.8（Current）
     
     #### Added
     * [issue#148](https://github.com/chenjiandongx/pyecharts/issues/148) 为 Radar.config() 新增 `legend_text_size` 参数
@@ -11,12 +15,12 @@
     * [issue#165](https://github.com/chenjiandongx/pyecharts/issues/165) 为 Radar 图新增 `label` 通用配置项，现可以展示 `label` 文字标签，但是建议在数据量少的时候使用（比如数据量为 1 的时候）
 
     #### Changed
-    * 压缩 js 文件体积
+    * 压缩 js 文件体积，总体体积减少约 0.3MB
 
     #### Fixed
     * [issue#158](https://github.com/chenjiandongx/pyecharts/issues/158) 修复 Grid/Timeline/Overlap 在 Page 中不能正常使用的 bug
 
-* ### version 0.2.3 - 2017.9.1（Current）
+* ### version 0.2.3 - 2017.9.1
 
     #### Fixed
     * [issue#143](https://github.com/chenjiandongx/pyecharts/issues/143) [issue#146](https://github.com/chenjiandongx/pyecharts/issues/146) 修复默认状态下 Graph 不显示连线的 bug
