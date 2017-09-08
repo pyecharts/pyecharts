@@ -6,8 +6,6 @@ from pyecharts import Kline
 
 
 def test_kline():
-
-    # kline_0
     v1 = [[2320.26, 2320.26, 2287.3, 2362.94],
           [2300, 2291.3, 2288.26, 2308.38],
           [2295.35, 2346.5, 2295.35, 2345.92],
@@ -39,18 +37,21 @@ def test_kline():
           [2309.16, 2286.6, 2264.83, 2333.29],
           [2282.17, 2263.97, 2253.25, 2286.33],
           [2255.77, 2270.28, 2253.31, 2276.22]]
+
+    # kline default
     kline = Kline("K 线图示例")
     kline.add("日K", ["2017/7/{}".format(i + 1) for i in range(31)], v1)
     kline.render()
 
-    # kline_1
+    # kline dataZoom orient 'horizontal'
     kline = Kline("K 线图示例")
     kline.add("日K", ["2017/7/{}".format(i + 1) for i in range(31)], v1,
               mark_point=["max"], is_datazoom_show=True)
     kline.render()
 
-    # kline_2
+    # kline dataZoom orient 'vertical'
     kline = Kline("K 线图示例")
-    kline.add("日K", ["2017/7/{}".format(i + 1) for i in range(31)], v1, mark_point=["max"],
-              is_datazoom_show=True, datazoom_orient='vertical')
+    kline.add("日K", ["2017/7/{}".format(i + 1) for i in range(31)],
+              v1, mark_point=["max"], is_datazoom_show=True,
+              datazoom_orient='vertical')
     kline.render()

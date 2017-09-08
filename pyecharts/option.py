@@ -235,6 +235,7 @@ def xy_axis(type=None,
             xaxis_max=None,
             xaxis_type=None,
             xaxis_interval="auto",
+            xaxis_force_interval=None,
             xaxis_pos=None,
             yaxis_margin=8,
             yaxis_name_size=14,
@@ -246,6 +247,7 @@ def xy_axis(type=None,
             yaxis_max=None,
             yaxis_type=None,
             yaxis_interval="auto",
+            yaxis_force_interval=None,
             yaxis_pos=None,
             yaxis_formatter="",
             is_convert=False,
@@ -292,6 +294,12 @@ def xy_axis(type=None,
         Set to 0 to force all labels to be displayed
         and label is one by one if setting as 1; If 2,it will be one label separates
         from each other, and so on.
+    :param xaxis_force_interval:
+        Compulsively set segmentation interval for xaxis.
+        As splitNumber is a recommendation value, the calculated tick may not be
+        the same as expected. In this case, interval should be used along with
+        min and max to compulsively set tickings. But in most cases, we do not
+        suggest using this, out automatic calculation is enough for most situations.
     :param xaxis_pos:
         The position of x axis.
         options: 'top' or 'bottom'
@@ -330,6 +338,12 @@ def xy_axis(type=None,
         Set to 0 to force all labels to be displayed
         and label is one by one if setting as 1; If 2,it will be one label separates
         from each other, and so on.
+    :param yaxis_force_interval:
+        Compulsively set segmentation interval for yaxis.
+        As splitNumber is a recommendation value, the calculated tick may not be
+        the same as expected. In this case, interval should be used along with
+        min and max to compulsively set tickings. But in most cases, we do not
+        suggest using this, out automatic calculation is enough for most situations.
     :param yaxis_pos:
         the position of y axis.
         options: 'left' or 'right'
@@ -412,6 +426,11 @@ def xy_axis(type=None,
         _xAxis.update(scale=True, boundaryGap=False)
         _yAxis.update(scale=True, splitArea={"show": True})
 
+    if xaxis_force_interval is not None:
+        _xAxis.update(interval=xaxis_force_interval)
+    if yaxis_force_interval is not None:
+        _yAxis.update(interval=yaxis_force_interval)
+
     return [_xAxis], [_yAxis]
 
 
@@ -457,7 +476,8 @@ def _mark(data,
                     "symbol": mark_point_symbol,
                     "symbolSize": mark_point_symbolsize,
                     "label": {
-                        "normal": {"textStyle": {"color": mark_point_textcolor}}
+                        "normal": {
+                            "textStyle": {"color": mark_point_textcolor}}
                     }
                 }
             if type:
@@ -495,6 +515,8 @@ def legend(is_legend_show=True,
            legend_pos="center",
            legend_top='top',
            legend_selectedmode='multiple',
+           legend_text_size=12,
+           legend_text_color='#333',
            **kwargs):
     """ Legend component shows symbol, color and name of different series.
         You can click legends to toggle displaying series in the chart.
@@ -517,6 +539,10 @@ def legend(is_legend_show=True,
         and it can also be 'top', 'middle', or 'bottom'.
     :param legend_selectedmode:
         State table of selected legend. 'single' or 'multiple'
+    :param legend_text_size:
+        legend text size
+    :param legend_text_color:
+        legend text color
     :param kwargs:
     :return:
     """
@@ -525,7 +551,11 @@ def legend(is_legend_show=True,
         "show": is_legend_show,
         "left": legend_pos,
         "top": legend_top,
-        "orient": legend_orient
+        "orient": legend_orient,
+        "textStyle": {
+            "fontSize": legend_text_size,
+            "color": legend_text_color,
+        }
     }
     return _legend
 
@@ -540,7 +570,9 @@ def visual_map(visual_type='color',
                visual_orient='vertical',
                visual_pos="left",
                visual_top="bottom",
+               visual_split_number=5,
                is_calculable=True,
+               is_piecewise=False,
                **kwargs):
     """ visualMap is a type of component for visual encoding, which maps the data to visual channels
 
@@ -576,8 +608,13 @@ def visual_map(visual_type='color',
         visual_top value can be instant pixel value like 20;
         it can also be percentage value relative to container width like '20%';
         and it can also be 'top', 'middle', or 'bottom'.
+    :param visual_split_number:
+        Continuous data can be divide into pieces averagely according to splitNumber,
+        that is, if splitNumber is 5, data will be sliced into 5 pieces.
     :param is_calculable:
         Whether show handles, which can be dragged to adjust "selected range".
+    :param is_piecewise:
+        Used to determine it is a piecewise visualMap component.
     :param kwargs:
     :return:
     """
@@ -608,18 +645,24 @@ def visual_map(visual_type='color',
                 range_size = visual_range_size
         _inrange_op.update(symbolSize=range_size)
 
+    _type = "continuous"
+    if is_piecewise:
+        _type = "piecewise"
+
     _visual_map = {
-        "type": "continuous",
+        "type": _type,
         "min": _min,
         "max": _max,
         "text": [_thigh, _tlow],
         "textStyle": {"color": visual_text_color},
         "inRange": _inrange_op,
         "calculable": is_calculable,
+        "splitNumber": visual_split_number,
         "orient": visual_orient,
         "left": visual_pos,
         "top": visual_top
     }
+
     return _visual_map
 
 

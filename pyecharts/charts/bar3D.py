@@ -37,11 +37,11 @@ class Bar3D(Base):
         :param grid3d_shading:
             3D graphics coloring effect
             'color':
-                Only show color, not affected by lighting and other factors.
+                Only show color, not affected by lighting and other factors. -default
             'lambert':
                 Through the classic lambert coloring to show the light and shade.
             'realistic':
-                ealistic rendering.
+                realistic rendering.
         :param kwargs:
         :return:
         """
