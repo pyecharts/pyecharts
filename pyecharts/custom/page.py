@@ -13,14 +13,14 @@ class Page(object):
     """
     A composite object to present multiple charts vertically in a single page
     """
-    def __init__(self, jshost=None):
+    def __init__(self, jshost=None, page_title=constants.PAGE_TITLE):
         """
-        Constructor
 
         :param jshost:
             custom javascript host for the particular chart only
         """
         self.__charts = []
+        self._page_title = page_title
         self._jshost = jshost if jshost else constants.CONFIGURATION['HOST']
 
     def add(self, achart_or_charts):
@@ -48,6 +48,7 @@ class Page(object):
         script_list = produce_html_script_list(dependencies)
         tmp = template.JINJA2_ENV.get_template(template_name)
         html = tmp.render(multi_chart_content=chart_content,
+                          page_title=self._page_title,
                           script_list=script_list)
         html = utils.freeze_js(html)
         utils.write_utf8_html_file(path, html)

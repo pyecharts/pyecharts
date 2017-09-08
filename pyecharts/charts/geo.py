@@ -74,7 +74,13 @@ class Geo(Base):
         self._option.update(
             geo={
                 "map": maptype,
-                "label": {},
+                "label": {
+                    "emphasis": {
+                        "show": True,
+                        "textStyle": {
+                            "color": "#eee"
+                        }
+                    }},
                 "itemStyle": {
                     "normal": {
                         "areaColor": geo_normal_color,

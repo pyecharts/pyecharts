@@ -3,13 +3,15 @@
 
 from pyecharts.option import grid
 from pyecharts import template
+from pyecharts.constants import PAGE_TITLE
 
 
 class Grid(object):
 
-    def __init__(self):
+    def __init__(self, page_title=PAGE_TITLE):
         self._chart = None
         self._js_dependencies = set()
+        self._page_title = page_title
 
     def add(self, chart,
             grid_width=None,
@@ -78,7 +80,7 @@ class Grid(object):
             _grid = grid(grid_width, grid_height, grid_top, grid_bottom, grid_left, grid_right)
             for _ in range(_index_once):
                 self._chart._option.get('grid').append(_grid)
-            self._js_dependencies.union(chart._js_dependencies)
+            self._js_dependencies = self._js_dependencies.union(chart._js_dependencies)
 
     def __custom(self, series):
         """

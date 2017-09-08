@@ -18,7 +18,8 @@ class Radar(Base):
     def config(self, schema=None,
                c_schema=None,
                shape="",
-               rader_text_color="#000",
+               radar_text_color="#333",
+               radar_text_size=12,
                **kwargs):
         """ config rader component options
 
@@ -35,8 +36,10 @@ class Radar(Base):
                 It is an optional configuration, but we recommend to set it manually.
         :param shape:
             Radar render type, in which 'polygon' and 'circle' are supported.
-        :param rader_text_color:
+        :param radar_text_color:
             Radar chart data item font color
+        :param radar_text_size:
+            Radar chart data item font size
         :param kwargs:
         """
         chart = get_all_options(**kwargs)
@@ -51,7 +54,11 @@ class Radar(Base):
             radar={
                 "indicator": indicator,
                 "shape": shape,
-                "name": {"textStyle": {"color": rader_text_color}},
+                "name": {
+                    "textStyle": {
+                        "color": radar_text_color,
+                        "fontSize": radar_text_size,
+                    }},
                 "splitLine": chart['split_line'],
                 "splitArea": chart['split_area'],
                 "axisLine": chart['axis_line']}
@@ -81,6 +88,7 @@ class Radar(Base):
             "name": name,
             "data": value,
             "symbol": chart['symbol'],
+            "label": chart['label'],
             "itemStyle": {
                 "normal": {
                     "color": item_color

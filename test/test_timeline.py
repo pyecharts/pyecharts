@@ -4,12 +4,11 @@ from __future__ import unicode_literals
 
 from random import randint
 
-from pyecharts import Bar, Pie, Line
+from pyecharts import Bar, Pie, Line, Overlap
 from pyecharts.custom.timeline import Timeline
 
 
-def test_timeline():
-
+def test_timeline_bar():
     attr = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
     bar_1 = Bar("2012 年销量", "数据纯属虚构")
     bar_1.add("春季", attr, [randint(10, 100) for _ in range(6)])
@@ -39,7 +38,8 @@ def test_timeline():
     bar_5.add("春季", attr, [randint(10, 100) for _ in range(6)])
     bar_5.add("夏季", attr, [randint(10, 100) for _ in range(6)])
     bar_5.add("秋季", attr, [randint(10, 100) for _ in range(6)])
-    bar_5.add("冬季", attr, [randint(10, 100) for _ in range(6)], is_legend_show=True)
+    bar_5.add("冬季", attr, [randint(10, 100) for _ in range(6)],
+              is_legend_show=True)
 
     timeline = Timeline(is_auto_play=True, timeline_bottom=0)
     timeline.add(bar_1, '2012 年')
@@ -51,7 +51,6 @@ def test_timeline():
 
 
 def test_timeline_pie():
-
     attr = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
     pie_1 = Pie("2012 年销量比例", "数据纯属虚构")
     pie_1.add("秋季", attr, [randint(10, 100) for _ in range(6)],
@@ -83,16 +82,14 @@ def test_timeline_pie():
 
 
 def test_timeline_bar_line():
-
-    from pyecharts import Overlap
     attr = ["{}月".format(i) for i in range(1, 7)]
     bar = Bar("1 月份数据", "数据纯属虚构")
     bar.add("bar", attr, [randint(10, 50) for _ in range(6)])
     line = Line()
     line.add("line", attr, [randint(50, 80) for _ in range(6)])
-    overlap = Overlap()
-    overlap.add(bar)
-    overlap.add(line)
+    overlap_0 = Overlap()
+    overlap_0.add(bar)
+    overlap_0.add(line)
 
     bar_1 = Bar("2 月份数据", "数据纯属虚构")
     bar_1.add("bar", attr, [randint(10, 50) for _ in range(6)])
@@ -127,7 +124,7 @@ def test_timeline_bar_line():
     overlap_4.add(line_4)
 
     timeline = Timeline(timeline_bottom=0)
-    timeline.add(overlap.chart, '1 月')
+    timeline.add(overlap_0.chart, '1 月')
     timeline.add(overlap_1.chart, '2 月')
     timeline.add(overlap_2.chart, '3 月')
     timeline.add(overlap_3.chart, '4 月')

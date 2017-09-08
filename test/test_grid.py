@@ -2,12 +2,14 @@
 # coding=utf-8
 from __future__ import unicode_literals
 
+import random
+
 from pyecharts import Bar, Line, Scatter, EffectScatter, Pie, Kline, HeatMap
 from pyecharts import Grid
+from test.constants import X_TIME, Y_WEEK
 
 
-def test_grid_0():
-
+def test_grid_top_bottom():
     attr = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
     v1 = [5, 20, 36, 10, 75, 90]
     v2 = [10, 25, 8, 60, 20, 80]
@@ -16,18 +18,18 @@ def test_grid_0():
     bar.add("商家B", attr, v2, is_stack=True)
     line = Line("折线图示例", title_top="50%")
     attr = ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
-    line.add("最高气温", attr, [11, 11, 15, 13, 12, 13, 10], mark_point=["max", "min"],
-             mark_line=["average"])
+    line.add("最高气温", attr, [11, 11, 15, 13, 12, 13, 10],
+             mark_point=["max", "min"], mark_line=["average"])
     line.add("最低气温", attr, [1, -2, 2, 5, 3, 2, 0], mark_point=["max", "min"],
              mark_line=["average"], legend_top="50%")
+
     grid = Grid()
     grid.add(bar, grid_bottom="60%")
     grid.add(line, grid_top="60%")
     grid.render()
 
 
-def test_grid_1():
-
+def test_grid_left_right():
     v1 = [5, 20, 36, 10, 75, 90]
     v2 = [10, 25, 8, 60, 20, 80]
     scatter = Scatter(width=1200)
@@ -42,8 +44,7 @@ def test_grid_1():
     grid.render()
 
 
-def test_grid_2():
-
+def test_grid_four_direction():
     attr = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
     v1 = [5, 20, 36, 10, 75, 90]
     v2 = [10, 25, 8, 60, 20, 80]
@@ -52,8 +53,8 @@ def test_grid_2():
     bar.add("商家B", attr, v2, is_stack=True, legend_pos="80%")
     line = Line("折线图示例")
     attr = ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
-    line.add("最高气温", attr, [11, 11, 15, 13, 12, 13, 10], mark_point=["max", "min"],
-             mark_line=["average"])
+    line.add("最高气温", attr, [11, 11, 15, 13, 12, 13, 10],
+             mark_point=["max", "min"], mark_line=["average"])
     line.add("最低气温", attr, [1, -2, 2, 5, 3, 2, 0], mark_point=["max", "min"],
              mark_line=["average"], legend_pos="20%")
     v1 = [5, 20, 36, 10, 75, 90]
@@ -61,8 +62,8 @@ def test_grid_2():
     scatter = Scatter("散点图示例", title_top="50%", title_pos="65%")
     scatter.add("scatter", v1, v2, legend_top="50%", legend_pos="80%")
     es = EffectScatter("动态散点图示例", title_top="50%")
-    es.add("es", [11, 11, 15, 13, 12, 13, 10], [1, -2, 2, 5, 3, 2, 0], effect_scale=6,
-           legend_top="50%", legend_pos="20%")
+    es.add("es", [11, 11, 15, 13, 12, 13, 10], [1, -2, 2, 5, 3, 2, 0],
+           effect_scale=6, legend_top="50%", legend_pos="20%")
 
     grid = Grid()
     grid.add(bar, grid_bottom="60%", grid_left="60%")
@@ -72,12 +73,11 @@ def test_grid_2():
     grid.render()
 
 
-def test_grid_3():
-
+def test_grid_line_pie():
     line = Line("折线图示例", width=1200)
     attr = ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
-    line.add("最高气温", attr, [11, 11, 15, 13, 12, 13, 10], mark_point=["max", "min"],
-             mark_line=["average"])
+    line.add("最高气温", attr, [11, 11, 15, 13, 12, 13, 10],
+             mark_point=["max", "min"], mark_line=["average"])
     line.add("最低气温", attr, [1, -2, 2, 5, 3, 2, 0], mark_point=["max", "min"],
              mark_line=["average"], legend_pos="20%")
     attr = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
@@ -92,12 +92,11 @@ def test_grid_3():
     grid.render()
 
 
-def test_grid_4():
-
+def test_grid_line_kline():
     line = Line("折线图示例", width=1200)
     attr = ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
-    line.add("最高气温", attr, [11, 11, 15, 13, 12, 13, 10], mark_point=["max", "min"],
-             mark_line=["average"])
+    line.add("最高气温", attr, [11, 11, 15, 13, 12, 13, 10],
+             mark_point=["max", "min"], mark_line=["average"])
     line.add("最低气温", attr, [1, -2, 2, 5, 3, 2, 0], mark_point=["max", "min"],
              mark_line=["average"], legend_pos="20%")
     v1 = [[2320.26, 2320.26, 2287.3, 2362.94],
@@ -132,7 +131,8 @@ def test_grid_4():
           [2282.17, 2263.97, 2253.25, 2286.33],
           [2255.77, 2270.28, 2253.31, 2276.22]]
     kline = Kline("K 线图示例", title_pos="60%")
-    kline.add("日K", ["2017/7/{}".format(i + 1) for i in range(31)], v1, legend_pos="80%")
+    kline.add("日K", ["2017/7/{}".format(i + 1) for i in range(31)], v1,
+              legend_pos="80%")
 
     grid = Grid()
     grid.add(line, grid_right="60%")
@@ -140,16 +140,12 @@ def test_grid_4():
     grid.render()
 
 
-def test_grid_5():
-
-    import random
-    x_axis = ["12a", "1a", "2a", "3a", "4a", "5a", "6a", "7a", "8a", "9a", "10a", "11a",
-              "12p", "1p", "2p", "3p", "4p", "5p", "6p", "7p", "8p", "9p", "10p", "11p"]
-    y_axis = ["Saturday", "Friday", "Thursday", "Wednesday", "Tuesday", "Monday", "Sunday"]
+def test_grid_heatmap_bar():
     data = [[i, j, random.randint(0, 50)] for i in range(24) for j in range(7)]
     heatmap = HeatMap("热力图示例", height=700)
-    heatmap.add("热力图直角坐标系", x_axis, y_axis, data, is_visualmap=True, visual_top="45%",
-                visual_text_color="#000", visual_orient='horizontal')
+    heatmap.add("热力图直角坐标系", X_TIME, Y_WEEK, data, is_visualmap=True,
+                visual_top="45%", visual_text_color="#000",
+                visual_orient='horizontal')
     attr = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
     v1 = [5, 20, 36, 10, 75, 90]
     v2 = [10, 25, 8, 60, 20, 80]
@@ -163,14 +159,14 @@ def test_grid_5():
     grid.render()
 
 
-def test_grid_6():
-
+def test_grid_multiple_datazoom_index():
     line = Line("折线图示例", width=1200, height=700)
     attr = ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
-    line.add("最高气温", attr, [11, 11, 15, 13, 12, 13, 10], mark_point=["max", "min"],
-             mark_line=["average"])
-    line.add("最低气温", attr, [1, -2, 2, 5, 3, 2, 0], mark_point=["max", "min"], legend_top="50%",
-             mark_line=["average"], is_datazoom_show=True, datazoom_xaxis_index=[0, 1])
+    line.add("最高气温", attr, [11, 11, 15, 13, 12, 13, 10],
+             mark_point=["max", "min"], mark_line=["average"])
+    line.add("最低气温", attr, [1, -2, 2, 5, 3, 2, 0], mark_point=["max", "min"],
+             legend_top="50%", mark_line=["average"], is_datazoom_show=True,
+             datazoom_xaxis_index=[0, 1])
 
     v1 = [[2320.26, 2320.26, 2287.3, 2362.94],
           [2300, 2291.3, 2288.26, 2308.38],
@@ -204,7 +200,8 @@ def test_grid_6():
           [2282.17, 2263.97, 2253.25, 2286.33],
           [2255.77, 2270.28, 2253.31, 2276.22]]
     kline = Kline("K 线图示例", title_top="50%")
-    kline.add("日K", ["2017/7/{}".format(i + 1) for i in range(31)], v1, is_datazoom_show=True)
+    kline.add("日K", ["2017/7/{}".format(i + 1) for i in range(31)], v1,
+              is_datazoom_show=True)
 
     grid = Grid()
     grid.add(line, grid_top="60%")
@@ -212,9 +209,7 @@ def test_grid_6():
     grid.render()
 
 
-def test_grid_7():
-    import random
-
+def test_grid_inverse_yaxis():
     attr = ['{}天'.format(i) for i in range(1, 31)]
     line_top = Line("折线图示例", width=1200, height=700)
     line_top.add("最高气温", attr, [random.randint(20, 100) for i in range(30)],
@@ -223,7 +218,6 @@ def test_grid_7():
     line_bottom.add("最低气温", attr, [random.randint(20, 100) for i in range(30)],
                     mark_point=["max", "min"], mark_line=["average"],
                     is_yaxis_inverse=True, xaxis_pos='top')
-
     grid = Grid()
     grid.add(line_top, grid_bottom='60%')
     grid.add(line_bottom, grid_top='50%')

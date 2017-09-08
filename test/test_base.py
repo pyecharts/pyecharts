@@ -3,12 +3,13 @@
 from __future__ import unicode_literals
 
 import json
+import codecs
 
 import pandas as pd
 import numpy as np
 
 from nose.tools import eq_
-from pyecharts import Bar
+from pyecharts import Bar, Map
 
 
 TITLE = "柱状图数据堆叠示例"
@@ -43,7 +44,6 @@ def test_notebook_render():
 
 
 def test_notebook_dom():
-
     bar = create_a_bar(TITLE)
     html = bar._render_notebook_dom_()
     assert bar._chart_id in html
@@ -53,7 +53,6 @@ def test_notebook_dom():
 
 
 def test_notebook_component():
-
     bar = create_a_bar(TITLE)
     html = bar._render_notebook_component_()
     json_encoded_title = json.dumps(TITLE)
@@ -63,7 +62,6 @@ def test_notebook_component():
 
 
 def test_base_get_js_dependencies():
-
     bar = create_a_bar(TITLE)
     dependencies = bar.get_js_dependencies()
     expected = ['echarts.min']
@@ -71,7 +69,6 @@ def test_base_get_js_dependencies():
 
 
 def test_numpy_array():
-
     attr = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
     v1 = np.array([5, 20, 36, 10, 75, 90])
     bar = Bar(TITLE)
@@ -97,3 +94,15 @@ def test_pandas_dataframe():
     html = bar.render_embed()
     assert title in html
     bar.render()
+
+
+def test_echarts_position_in_render_html():
+    value = [20, 190, 253, 77, 65]
+    attr = ['汕头市', '汕尾市', '揭阳市', '阳江市', '肇庆市']
+    map = Map("广东地图示例", width=1200, height=600, page_title=TITLE)
+    map.add("", attr, value, maptype='广东',
+            is_visualmap=True, visual_text_color='#000')
+    map.render()
+    with codecs.open('render.html', 'r', 'utf-8') as f:
+        actual_content = f.read()
+        assert TITLE in actual_content
