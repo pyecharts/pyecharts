@@ -2,13 +2,15 @@
 # coding=utf-8
 
 from pyecharts import template
+from pyecharts.constants import PAGE_TITLE
 
 
 class Overlap(object):
 
-    def __init__(self):
+    def __init__(self, page_title=PAGE_TITLE):
         self._chart = None
         self._js_dependencies = set()
+        self._page_title = page_title
 
     def add(self, chart, xaxis_index=0, yaxis_index=0, is_add_xaxis=False, is_add_yaxis=False):
         """
@@ -40,7 +42,7 @@ class Overlap(object):
                 yaxis_index
             )
             self.__custom(_series)
-            self._js_dependencies.union(chart._js_dependencies)
+            self._js_dependencies = self._js_dependencies.union(chart._js_dependencies)
 
     def __custom(self, series):
         """ Appends the data for the series of the chart type

@@ -6,8 +6,7 @@ from pyecharts import Bar, Line, Scatter, EffectScatter, Kline
 from pyecharts import Overlap
 
 
-def test_overlap_0():
-
+def test_overlap_bar_line():
     attr = ['A', 'B', 'C', 'D', 'E', 'F']
     v1 = [10, 20, 30, 40, 50, 60]
     v2 = [38, 28, 58, 48, 78, 68]
@@ -22,8 +21,7 @@ def test_overlap_0():
     overlap.render()
 
 
-def test_overlap_1():
-
+def test_overlap_es_scatter():
     v1 = [10, 20, 30, 40, 50, 60]
     v2 = [30, 30, 30, 30, 30, 30]
     v3 = [50, 50, 50, 50, 50, 50]
@@ -42,8 +40,7 @@ def test_overlap_1():
     overlap.render()
 
 
-def test_overlap_2():
-
+def test_overlap_kline_line():
     import random
     v1 = [[2320.26, 2320.26, 2287.3, 2362.94],
           [2300, 2291.3, 2288.26, 2308.38],
@@ -91,8 +88,7 @@ def test_overlap_2():
     overlap.render()
 
 
-def test_overlap_3():
-
+def test_overlap_two_yaxis():
     attr = ["{}月".format(i) for i in range(1, 13)]
     v1 = [2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3]
     v2 = [2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3]
@@ -100,10 +96,10 @@ def test_overlap_3():
 
     bar = Bar(width=1200, height=600)
     bar.add("蒸发量", attr, v1)
-    bar.add("降水量", attr, v2, yaxis_formatter=" ml", yaxis_interval=50, yaxis_max=250)
+    bar.add("降水量", attr, v2, yaxis_formatter=" ml", yaxis_max=250)
 
     line = Line()
-    line.add("平均温度", attr, v3, yaxis_formatter=" °C", yaxis_interval=5)
+    line.add("平均温度", attr, v3, yaxis_formatter=" °C")
 
     overlap = Overlap()
     overlap.add(bar)

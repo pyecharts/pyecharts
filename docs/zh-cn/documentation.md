@@ -2,7 +2,7 @@
 
 pyecharts 是一个用于生成 Echarts 图表的类库。实际上就是 Echarts 与 Python 的对接。  
 
-[![Build Status](https://travis-ci.org/chenjiandongx/pyecharts.svg?branch=master)](https://travis-ci.org/chenjiandongx/pyecharts) [![codecov](https://codecov.io/gh/chenjiandongx/pyecharts/branch/master/graph/badge.svg)](https://codecov.io/gh/chenjiandongx/pyecharts) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Build Status](https://travis-ci.org/chenjiandongx/pyecharts.svg?branch=master)](https://travis-ci.org/chenjiandongx/pyecharts) [![codecov](https://codecov.io/gh/chenjiandongx/pyecharts/branch/master/graph/badge.svg)](https://codecov.io/gh/chenjiandongx/pyecharts) [![PyPI version](https://badge.fury.io/py/pyecharts.svg)](https://badge.fury.io/py/pyecharts) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 
 * [开始使用](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/documentation.md#开始使用)
@@ -15,6 +15,7 @@ pyecharts 是一个用于生成 Echarts 图表的类库。实际上就是 Echart
     * grid3D：3D笛卡尔坐标系组配置项，适用于 3D 图形。（Bar3D, Line3D, Scatter3D)
     * axis3D：3D 笛卡尔坐标系 X，Y，Z 轴配置项，适用于 3D 图形。（Bar3D, Line3D, Scatter3D)
     * visualMap：是视觉映射组件，用于进行『视觉编码』，也就是将数据映射到视觉元素（视觉通道）
+    * markLine&markPoint：图形标记组件，用于标记指定的特殊数据，又标记线和标记点两种。（Bar、Line、Kline）
     * tooltip：提示框组件，用于移动或点击鼠标时弹出数据内容
 
 * [图表详细](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/documentation.md#图表详细)
@@ -236,6 +237,8 @@ cast(seq)
     副标题文本字体大小，默认为 12
 * background_color -> str  
     画布背景颜色，默认为 '#fff'
+* page_title -> str  
+    指定生成的 html 文件中 `<title>` 标签的值。默认为'Echarts'
 * jshost-> str    
     自定义每个实例的 JavaScript host
     
@@ -260,6 +263,9 @@ cast(seq)
 * xaxis_interval -> int  
     x 轴刻度标签的显示间隔，在类目轴中有效。默认会采用标签不重叠的策略间隔显示标签。  
     设置成 0 强制显示所有标签。设置为 1，表示『隔一个标签显示一个标签』，如果值为 2，表示隔两个标签显示一个标签，以此类推
+* xaxis_force_interval -> int/str  
+    强制设置 x 坐标轴分割间隔。如设置为 50 则刻度为 [0, 50, 150, ...]，设置为 "auto" 则只显示两个刻度。一般情况下不建议设置这个参数！！  
+    因为 splitNumber 是预估的值，实际根据策略计算出来的刻度可能无法达到想要的效果，这时候可以使用 interval 配合 min、max 强制设定刻度划分。在类目轴中无效。
 * xaxis_margin -> int  
     x 轴刻度标签与轴线之间的距离。默认为 8
 * xaxis_name -> str  
@@ -271,15 +277,15 @@ cast(seq)
 * xaxis_name_pos -> str  
     x 轴名称位置，有'start'，'middle'，'end'可选
 * xaxis_min -> int/float  
-    x 坐标轴刻度最小值，默认为自适应。
+    x 坐标轴刻度最小值，默认为自适应。使用特殊值 "dataMin" 可自定以数据中最小值为 x 轴最小值。
 * xaxis_max -> int/float  
-    x 坐标轴刻度最大值，默认为自适应。
+    x 坐标轴刻度最大值，默认为自适应。使用特殊值 "dataMax" 可自定以数据中最小值为 x 轴最大值。
 * xaxis_pos -> str  
     x 坐标轴位置，有'top','bottom'可选
 * xaxis_type -> str  
     x 坐标轴类型  
     * 'value'：数值轴，适用于连续数据。
-    * 'category'：类目轴，适用于离散的类目数据，为该类型时必须通过 data 设置类目数据。
+    * 'category'：类目轴，适用于离散的类目数据。
     * 'log'：对数轴。适用于对数数据。
 * xaxis_rotate -> int  
     x 轴刻度标签旋转的角度，在类目轴的类目标签显示不下的时候可以通过旋转防止标签之间重叠。默认为 0，即不旋转。旋转的角度从 -90 度到 90 度。
@@ -288,6 +294,9 @@ cast(seq)
 * yaxis_interval -> int  
     y 轴刻度标签的显示间隔，在类目轴中有效。默认会采用标签不重叠的策略间隔显示标签。  
     设置成 0 强制显示所有标签。设置为 1，表示『隔一个标签显示一个标签』，如果值为 2，表示隔两个标签显示一个标签，以此类推
+* yaxis_force_interval -> int/str  
+    强制设置 y 坐标轴分割间隔。如设置为 50 则刻度为 [0, 50, 150, ...]，设置为 "auto" 则只显示两个刻度。一般情况下不建议设置这个参数！！  
+    因为 splitNumber 是预估的值，实际根据策略计算出来的刻度可能无法达到想要的效果，这时候可以使用 interval 配合 min、max 强制设定刻度划分。在类目轴中无效。
 * yaxis_margin -> int  
     y 轴刻度标签与轴线之间的距离。默认为 8
 * yaxis_formatter -> str  
@@ -301,15 +310,15 @@ cast(seq)
 * yaxis_name_pos -> str  
     y 轴名称位置，有'start', 'middle'，'end'可选
 * yaxis_min -> int/float  
-    y 坐标轴刻度最小值，默认为自适应。
+    y 坐标轴刻度最小值，默认为自适应。使用特殊值 "dataMin" 可自定以数据中最小值为 y 轴最小值。
 * yaxis_max -> int/float  
-    y 坐标轴刻度最大值，默认为自适应。
+    y 坐标轴刻度最大值，默认为自适应。使用特殊值 "dataMax" 可自定以数据中最小值为 y 轴最大值。
 * yaxis_pos -> str  
     y 坐标轴位置，有'left','right'可选
 * yaxis_type -> str  
     y 坐标轴类型  
     * 'value'：数值轴，适用于连续数据。
-    * 'category'：类目轴，适用于离散的类目数据，为该类型时必须通过 data 设置类目数据。
+    * 'category'：类目轴，适用于离散的类目数据。
     * 'log'：对数轴。适用于对数数据。
 * yaxis_rotate -> int  
     y 轴刻度标签旋转的角度，在类目轴的类目标签显示不下的时候可以通过旋转防止标签之间重叠。默认为 0，即不旋转。旋转的角度从 -90 度到 90 度。
@@ -345,6 +354,10 @@ cast(seq)
     图例组件离容器上侧的距离，默认为'top'，有'top', 'center', 'bottom'可选
 * legend_selectedmode -> str/bool  
     图例选择的模式，控制是否可以通过点击图例改变系列的显示状态。默认为'multiple'，可以设成 'single' 或者 'multiple' 使用单选或者多选模式。也可以设置为 False 关闭显示状态。
+* legend_text_size -> int  
+    图例名称字体大小
+* legend_text_color -> str  
+    图例名称字体颜色
     
 
 **label：图形上的文本标签，可用于说明图形的一些数据信息，比如值，名称等。**
@@ -364,7 +377,7 @@ cast(seq)
 * label_color -> list  
     自定义标签颜色。全局颜色列表，所有图表的图例颜色均在这里修改。如 Bar 的柱状颜色，Line 的线条颜色等等。
 * label_formatter -> str  
-    模板变量有 {a}, {b}，{c}，{d}，{e}，分别表示系列名，数据名，数据值等。  
+    模板变量有 {a}, {b}，{c}，{d}，{e}，分别表示系列名，数据名，数据值等。使用示例，如 `label_formatter='{a}'`  
     在 trigger 为 'axis' 的时候，会有多个系列的数据，此时可以通过 {a0}, {a1}, {a2} 这种后面加索引的方式表示系列的索引。不同图表类型下的 {a}，{b}，{c}，{d} 含义不一样。 其中变量 {a}, {b}, {c}, {d} 在不同图表类型下代表数据含义为：
     * 折线（区域）图、柱状（条形）图、K线图 : {a}（系列名称），{b}（类目值），{c}（数值）, {d}（无）
     * 散点图（气泡）图 : {a}（系列名称），{b}（数据名称），{c}（数值数组）, {d}（无）
@@ -477,8 +490,12 @@ cast(seq)
     visualmap 组件条距离左侧的位置，默认为'left'。有'right', 'center', 'right'可选，也可为百分数或整数。
 * visual_top -> str/int  
     visualmap 组件条距离顶部的位置，默认为'top'。有'top', 'center', 'bottom'可选，也可为百分数或整数。
+* visual_split_number -> int  
+    分段型中分割的段数，在设置为分段型时生效。默认分为 5 段。
 * is_calculable -> bool  
     是否显示拖拽用的手柄（手柄能拖拽调整选中范围）。默认为 True
+* is_piecewise -> bool  
+    是否将组件转换为分段型（默认为连续型），默认为 False
 
 
 **tooltip：提示框组件，用于移动或点击鼠标时弹出数据内容**
@@ -511,7 +528,22 @@ cast(seq)
 * tooltip_font_size -> int  
     提示框字体大小，默认为 14
 
-**toolbox：设置 `is_more_utils` 为 True 可以提供更多的实用工具按钮。默认只提供『数据视图』和『下载』按钮。**
+
+**markLine&markPoint：图形标记组件，用于标记指定的特殊数据，又标记线和标记点两种（Bar、Line、Kline）**
+
+* mark_point  -> list  
+    标记点，有'min', 'max', 'average'可选
+* mark_line  -> list  
+    标记线，有'min', 'max', 'average'可选
+* mark_point_symbol -> str  
+    标记点图形，，默认为'pin'，有'circle', 'rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow'可选
+* mark_point_symbolsize -> int  
+    标记点图形大小，默认为 50
+* mark_point_textcolor -> str  
+    标记点字体颜色，默认为'#fff'
+
+
+**toolbox：设置 `is_more_utils` 为 True 可以提供更多的实用工具按钮。默认只提供『数据视图』和『下载』按钮**
 
 
 # 图表详细  
@@ -555,17 +587,6 @@ bar.add("商家B", attr, v2, mark_line=["min", "max"])
 bar.render()
 ```
 ![bar-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/bar-1.gif)
-
-* mark_point  -> list  
-    标记点，有'min', 'max', 'average'可选
-* mark_line  -> list  
-    标记线，有'min', 'max', 'average'可选
-* mark_point_symbol -> str  
-    标记点图形，，默认为'pin'，有'circle', 'rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow'可选
-* mark_point_symbolsize -> int  
-    标记点图形大小，默认为 50
-* mark_point_textcolor -> str  
-    标记点字体颜色，默认为'#fff'
 
 ```python
 from pyecharts import Bar
@@ -754,16 +775,16 @@ from pyecharts import Boxplot
 boxplot = Boxplot("箱形图")
 x_axis = ['expr1', 'expr2', 'expr3', 'expr4', 'expr5']
 y_axis = [
-    [850, 740, 900, 1070, 930, 850, 950, 980, 980, 880, 1000, 980, 930, 650, 760,
-     810, 1000, 1000, 960, 960],
-    [960, 940, 960, 940, 880, 800, 850, 880, 900, 840, 830, 790, 810, 880, 880, 830,
-     800, 790, 760, 800],
-    [880, 880, 880, 860, 720, 720, 620, 860, 970, 950, 880, 910, 850, 870, 840, 840,
-     850, 840, 840, 840],
-    [890, 810, 810, 820, 800, 770, 760, 740, 750, 760, 910, 920, 890, 860, 880, 720,
-     840, 850, 850, 780],
-    [890, 840, 780, 810, 760, 810, 790, 810, 820, 850, 870, 870, 810, 740, 810, 940,
-     950, 800, 810, 870]
+    [850, 740, 900, 1070, 930, 850, 950, 980, 980, 880,
+    1000, 980, 930, 650, 760, 810, 1000, 1000, 960, 960],
+    [960, 940, 960, 940, 880, 800, 850, 880, 900, 840,
+    830, 790, 810, 880, 880, 830, 800, 790, 760, 800],
+    [880, 880, 880, 860, 720, 720, 620, 860, 970, 950,
+    880, 910, 850, 870, 840, 840, 850, 840, 840, 840],
+    [890, 810, 810, 820, 800, 770, 760, 740, 750, 760,
+    910, 920, 890, 860, 880, 720, 840, 850, 850, 780],
+    [890, 840, 780, 810, 760, 810, 790, 810, 820, 850,
+    870, 870, 810, 740, 810, 940, 950, 800, 810, 870]
 ]
 _yaxis = boxplot.prepare_data(y_axis)       # 转换数据
 boxplot.add("boxplot", x_axis, _yaxis)
@@ -778,16 +799,16 @@ from pyecharts import Boxplot
 boxplot = Boxplot("箱形图")
 x_axis = ['expr1', 'expr2']
 y_axis1 = [
-    [850, 740, 900, 1070, 930, 850, 950, 980, 980, 880, 1000, 980, 930, 650, 760, 810,
-     1000, 1000, 960, 960],
-    [960, 940, 960, 940, 880, 800, 850, 880, 900, 840, 830, 790, 810, 880, 880, 830,
-     800, 790, 760, 800],
+    [850, 740, 900, 1070, 930, 850, 950, 980, 980, 880,
+    1000, 980, 930, 650, 760, 810, 1000, 1000, 960, 960],
+    [960, 940, 960, 940, 880, 800, 850, 880, 900, 840,
+    830, 790, 810, 880, 880, 830, 800, 790, 760, 800],
 ]
 y_axis2 = [
-    [890, 810, 810, 820, 800, 770, 760, 740, 750, 760, 910, 920, 890, 860, 880, 720,
-     840, 850, 850, 780],
-    [890, 840, 780, 810, 760, 810, 790, 810, 820, 850, 870, 870, 810, 740, 810, 940,
-     950, 800, 810, 870]
+    [890, 810, 810, 820, 800, 770, 760, 740, 750, 760,
+    910, 920, 890, 860, 880, 720, 840, 850, 850, 780],
+    [890, 840, 780, 810, 760, 810, 790, 810, 820, 850,
+    870, 870, 810, 740, 810, 940, 950, 800, 810, 870]
 ]
 boxplot.add("category1", x_axis, boxplot.prepare_data(y_axis1))
 boxplot.add("category2", x_axis, boxplot.prepare_data(y_axis2))
@@ -940,7 +961,7 @@ add(name, attr, value, type="scatter", maptype='china', symbol_size=12, border_c
 * geo_cities_coords -> dict  
     用户自定义地区经纬度，类似如 {'阿城': [126.58, 45.32],} 这样的字典，当用于提供了该参数时，将会覆盖原有预存的区域坐标信息。
 
-Scatter 类型
+Scatter 类型（连续型）
 ```python
 from pyecharts import Geo
 
@@ -988,6 +1009,17 @@ geo.render()
 ![geo-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/geo-0.gif)
 
 **Note：** 请配合 [通用配置项](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/documentation.md#通用配置项) 中的 Visualmap 使用
+
+Scatter 类型（分段型）
+```python
+geo = Geo("全国主要城市空气质量", "data from pm2.5", title_color="#fff", title_pos="center",
+width=1200, height=600, background_color='#404a59')
+attr, value = geo.cast(data)
+geo.add("", attr, value, visual_range=[0, 200], visual_text_color="#fff",
+        symbol_size=15, is_visualmap=True, is_piecewise=True, visual_split_number=6)
+geo.render()
+```
+![geo-0-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/geo-0-0.gif)
 
 HeatMap 类型
 ```python
@@ -1258,17 +1290,6 @@ line.add("商家B", attr, v2, is_smooth=True, mark_line=["max", "average"])
 line.render()
 ```
 ![line-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/line-0.gif)
-
-* mark_point  -> list  
-    标记点，有'min', 'max', 'average'可选
-* mark_line  -> list  
-    标记线，有'min', 'max', 'average'可选
-* mark_point_symbol -> str  
-    标记点图形，，默认为'pin'，有'circle', 'rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow'可选
-* mark_point_symbolsize -> int  
-    标记点图形大小，默认为 50
-* mark_point_textcolor -> str  
-    标记点字体颜色，默认为'#fff'
 
 标记点其他配置
 ```python
@@ -2202,7 +2223,7 @@ wordcloud.render()
 
 Grid 类的使用：
 1. 引入 `Grid` 类，`from pyecharts import Grid`
-2. 实例化 Grid 类，`grid = Grid()` 
+2. 实例化 Grid 类，`grid = Grid()` ，可指定 `page_title` 参数。
 3. 使用 `add()` 向 `grid` 中添加图，至少需要设置一个 `grid_top`, `grid_bottom`, `grid_left`, `grid_right` 四个参数中的一个。`grid_width` 和 `grid_height` 一般不用设置，默认即可。
 4. 使用 `render()` 渲染生成 .html 文件
 
@@ -2484,7 +2505,7 @@ grid.render()
 > 用户可以自定义结合 Line/Bar/Kline, Scatter/EffectScatter 图表，将不同类型图表画在一张图上。利用第一个图表为基础，往后的数据都将会画在第一个图表上。   
 Overlap 类的使用：
 1. 引入 `Overlap` 类，`from pyecharts import Overlap`
-2. 实例化 `Overlap` 类，`overlap = Overlap()` 
+2. 实例化 `Overlap` 类，`overlap = Overlap()`  ，可指定 `page_title` 参数。
 3. 使用 `add()` 向 `overlap` 中添加图
 4. 使用 `render()` 渲染生成 .html 文件
 
@@ -2629,14 +2650,17 @@ overlap.render()
 ```
 ![overlap-3](https://github.com/chenjiandongx/pyecharts/blob/master/images/overlap-3.gif)
 
+**Note：** 关于双 Y 轴对齐，可以使用 `yaxis_force_interval` 参数，强制分割成相同份数的刻度。这里有个小技巧，可以先设置 y 轴最大值。举个例子，如果双 y 轴一个最大值为 700，一个最大值为 400。那你可以把两个的 `yaxis_force_interval` 参数分别设置为 140 和 80，那就会都分成均等的 5 份了。
+
 如果只是想在单个 .html 按顺序展示图表，推荐使用 ```Page()``` 类
 
 ## Page：同一网页按顺序展示多图
+> Grid/Timeline/Overlap 都可在 Page 中正常展示
 
 Page 类的使用：
 1. 引入 `Page` 类，`from pyecharts import Page`
-2. 实例化 `Page` 类，`page = Page()` 
-3. 使用 `add()` 向 `page` 中添加图
+2. 实例化 `Page` 类，`page = Page()`  ，可指定 `page_title` 参数。
+3. 使用 `add()` 向 `page` 中添加图，可以是单个图实例，也可以是一个图实例列表。
 4. 使用 `render()` 渲染生成 .html 文件
 
 Page 类中其他方法：
@@ -2776,6 +2800,8 @@ Timeline 类的使用：
 
 实例化 Timeline 类时接受设置参数：
 
+* page_title -> str  
+    生成 html 文件的 `<title>` 标签的值，默认为'Echarts'
 * is_auto_play -> bool  
     是否自动播放，默认为 Flase
 * is_loop_play -> bool  
