@@ -61,8 +61,7 @@ def test_world_map():
     with codecs.open('render.html', 'r', 'utf-8') as f:
         actual_content = f.read()
         # test register map
-        assert "registerMap('world', " in actual_content
-        assert "registerMap('china', " not in actual_content
+        assert "registerMap(\"world\"," in actual_content
         # test non-existent country
         assert "Russia" in actual_content
         assert "Unknown Country', " not in actual_content
@@ -78,8 +77,7 @@ def test_china_map():
     with codecs.open('render.html', 'r', 'utf-8') as f:
         actual_content = f.read()
         # test register map
-        assert "registerMap('china', " in actual_content
-        assert "registerMap('world', " not in actual_content
+        assert "registerMap(\"china\"," in actual_content
         # fujian province
         assert "\u798f\u5efa" in actual_content
         # shanghai city
