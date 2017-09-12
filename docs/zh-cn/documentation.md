@@ -2227,6 +2227,8 @@ Grid 类的使用：
 3. 使用 `add()` 向 `grid` 中添加图，至少需要设置一个 `grid_top`, `grid_bottom`, `grid_left`, `grid_right` 四个参数中的一个。`grid_width` 和 `grid_height` 一般不用设置，默认即可。
 4. 使用 `render()` 渲染生成 .html 文件
 
+**Note：** `Overlap` 类不能放入 `Grid` 类中，建议改为 `Overlap`+`Page` 方案
+
 Grid 类中其他方法：
 * `render_embed()`：在 Flask&Django 中可以使用该方法渲染
 * `show_config()`：打印输出所有配置项
@@ -2655,7 +2657,7 @@ overlap.render()
 如果只是想在单个 .html 按顺序展示图表，推荐使用 ```Page()``` 类
 
 ## Page：同一网页按顺序展示多图
-> Grid/Timeline/Overlap 都可在 Page 中正常展示
+> Grid/Timeline/Overlap 都可在 Page 中正常展示，把其当做一个图加入到 Page 中即可
 
 Page 类的使用：
 1. 引入 `Page` 类，`from pyecharts import Page`
