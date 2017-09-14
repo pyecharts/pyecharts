@@ -187,6 +187,8 @@ class Base(object):
             is_yaxislabel_align=None,
             is_xaxis_inverse=None,
             is_yaxis_inverse=None,
+            is_xaxis_boundarygap=None,
+            is_yaxis_boundarygap=None,
             item_color=None,
             label_color=None,
             label_pos=None,
