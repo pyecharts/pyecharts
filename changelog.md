@@ -2,7 +2,8 @@
 
 * ### version 0.2.5（Dev）
 
-    * Todo
+    * [issue#173](https://github.com/chenjiandongx/pyecharts/issues/173) 为 xyAxis 通用配置项新增 `is_xaxis_boundarygap` 和 `is_yaxis_boundartgap` 参数
+    * 为 markPoint 新增自定义标记点功能
 
 * ### version 0.2.4 - 2017.9.8（Current）
     
