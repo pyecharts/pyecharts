@@ -255,6 +255,8 @@ def xy_axis(type=None,
             is_yaxis_inverse=False,
             is_xaxislabel_align=False,
             is_yaxislabel_align=False,
+            is_xaxis_boundarygap=True,
+            is_yaxis_boundarygap=True,
             **kwargs):
     """
     :param type:
@@ -362,6 +364,18 @@ def xy_axis(type=None,
         whether align xaxis tick with label
     :param is_yaxislabel_align:
         whether align yaxis tick with label
+    :param is_xaxis_boundarygap:
+        The boundary gap on both sides of a coordinate xAxis.
+        The boundaryGap of category axis can be set to either true or false.
+        Default value is set to be true, in which case axisTick is served
+        only as a separation line, and labels and data appear only in
+        the center part of two axis ticks, which is called band.
+    :param is_yaxis_boundarygap:
+        The boundary gap on both sides of a coordinate yAxis.
+        The boundaryGap of category axis can be set to either true or false.
+        Default value is set to be true, in which case axisTick is served
+        only as a separation line, and labels and data appear only in
+        the center part of two axis ticks, which is called band.
     :param kwargs:
     :return:
     """
@@ -380,6 +394,7 @@ def xy_axis(type=None,
         },
         "inverse": is_xaxis_inverse,
         "position": xaxis_pos,
+        "boundaryGap": is_xaxis_boundarygap,
         "min": xaxis_min,
         "max": xaxis_max
     }
@@ -399,20 +414,15 @@ def xy_axis(type=None,
         },
         "inverse": is_yaxis_inverse,
         "position": yaxis_pos,
+        "boundaryGap": is_yaxis_boundarygap,
         "min": yaxis_min,
         "max": yaxis_max
     }
 
-    if type == "scatter":
-        if xaxis_type is None:
-            xaxis_type = "value"
-        if yaxis_type is None:
-            yaxis_type = "value"
-    else:       # line/bar
-        if xaxis_type is None:
-            xaxis_type = "category"
-        if yaxis_type is None:
-            yaxis_type = "value"
+    if xaxis_type is None:
+        xaxis_type = "value" if type == "scatter" else "category"
+    if yaxis_type is None:
+        yaxis_type = "value"
 
     if is_convert:
         xaxis_type, yaxis_type = yaxis_type, xaxis_type
@@ -423,7 +433,7 @@ def xy_axis(type=None,
         _yAxis.update(type=yaxis_type)
 
     if type == "candlestick":
-        _xAxis.update(scale=True, boundaryGap=False)
+        _xAxis.update(scale=True)
         _yAxis.update(scale=True, splitArea={"show": True})
 
     if xaxis_force_interval is not None:
@@ -445,7 +455,8 @@ def _mark(data,
     :param data:
         mark data, it can be 'min', 'max', 'average'
     :param mark_point_symbol:
-        mark symbol, it cna be 'circle', 'rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow'
+        mark symbol, it can be 'circle', 'rect', 'roundRect', 'triangle',
+        'diamond', 'pin', 'arrow'
     :param mark_point_symbolsize:
         mark symbol size
     :param mark_point_textcolor:
@@ -457,31 +468,39 @@ def _mark(data,
     mark = {"data": []}
     if data:
         for d in list(data):
-            _type, _name = "", ""
-            if "max" in d:
-                _type, _name = "max", "最大值"
-            elif "min" in d:
-                _type, _name = "min", "最小值"
-            elif "average" in d:
-                _type, _name = "average", "平均値"
-            if _is_markline:
-                _m = {
-                    "type": _type,
-                    "name": _name,
-                }
-            else:
-                _m = {
-                    "type": _type,
-                    "name": _name,
+            # user-define markPoint
+            if isinstance(d, dict):
+                _coord = d.get('coord', None)
+                _pname = d.get('name', None)
+                _marktmp = {
+                    "coord": _coord,
+                    "name": _pname,
                     "symbol": mark_point_symbol,
                     "symbolSize": mark_point_symbolsize,
-                    "label": {
-                        "normal": {
+                    "label": {"normal": {
+                        "textStyle": {"color": mark_point_textcolor}}
+                    }}
+                mark.get("data").append(_marktmp)
+            # markPoint&markLine by default
+            else:
+                _type, _name = "", ""
+                if "max" in d:
+                    _type, _name = "max", "Maximum"
+                elif "min" in d:
+                    _type, _name = "min", "Minimum"
+                elif "average" in d:
+                    _type, _name = "average", "mean-Value"
+
+                _marktmp = {"type": _type, "name": _name}
+                if not _is_markline:
+                    _marktmp.update(
+                        symbol=mark_point_symbol,
+                        symbolSize=mark_point_symbolsize,
+                        label={"normal": {
                             "textStyle": {"color": mark_point_textcolor}}
-                    }
-                }
-            if type:
-                mark.get("data").append(_m)
+                        })
+                if _type:
+                    mark.get("data").append(_marktmp)
     return mark
 
 
@@ -574,7 +593,8 @@ def visual_map(visual_type='color',
                is_calculable=True,
                is_piecewise=False,
                **kwargs):
-    """ visualMap is a type of component for visual encoding, which maps the data to visual channels
+    """ visualMap is a type of component for visual encoding, which
+        maps the data to visual channels
 
     :param visual_type:
         visual map type, 'color' or 'size'
@@ -618,13 +638,13 @@ def visual_map(visual_type='color',
     :param kwargs:
     :return:
     """
-    # defalut min and max value of visual_range is [0, 100]
+    # default min and max value of visual_range is [0, 100]
     _min, _max = 0, 100
     if visual_range:
         if len(visual_range) == 2:
             _min, _max = visual_range
 
-    # defalut label text on both ends is ['low', 'high']
+    # default label text on both ends is ['low', 'high']
     _tlow, _thigh = "low", "high"
     if visual_range_text:
         if len(visual_range_text) == 2:
@@ -645,9 +665,7 @@ def visual_map(visual_type='color',
                 range_size = visual_range_size
         _inrange_op.update(symbolSize=range_size)
 
-    _type = "continuous"
-    if is_piecewise:
-        _type = "piecewise"
+    _type = "piecewise" if is_piecewise else "continuous"
 
     _visual_map = {
         "type": _type,
@@ -662,12 +680,11 @@ def visual_map(visual_type='color',
         "left": visual_pos,
         "top": visual_top
     }
-
     return _visual_map
 
 
 def gen_color():
-    """ random generation color -> WordCloud
+    """ random generation color for << WordCloud >>
 
     :return:
     """
