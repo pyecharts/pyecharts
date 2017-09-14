@@ -258,6 +258,10 @@ cast(seq)
     是否反向 x 坐标轴，默认为 False
 * is_yaxis_inverse -> bool  
     是否反向 y 坐标轴，默认为 False
+* is_xaxis_boundarygap -> bool  
+    x 轴两边留白策略，适用于类目轴。类目轴中 boundaryGap 可以配置为 True 和 False。默认为 True，这时候刻度只是作为分隔线，标签和数据点都会在两个刻度之间的带(band)中间，即两边留白。
+* is_yaxis_boundarygap -> bool  
+    y 轴两边留白策略，适用于类目轴。类目轴中 boundaryGap 可以配置为 True 和 False。默认为 True，这时候刻度只是作为分隔线，标签和数据点都会在两个刻度之间的带(band)中间，即两边留白。
 * x_axis -> list  
     x 轴数据项
 * xaxis_interval -> int  
@@ -531,10 +535,12 @@ cast(seq)
 
 **markLine&markPoint：图形标记组件，用于标记指定的特殊数据，又标记线和标记点两种（Bar、Line、Kline）**
 
-* mark_point  -> list  
-    标记点，有'min', 'max', 'average'可选
-* mark_line  -> list  
-    标记线，有'min', 'max', 'average'可选
+* mark_point -> list  
+    标记点，默认有'min', 'max', 'average'可选。支持自定义标记点，具体使用如下  
+    [{"coord": [a1, b1], "name": "first markpoint"}, {"coord": [a2, b2], "name": "second markpoint"}]  
+    需自己传入标记点字典，共有两个键值对，'coord' 对应为 x y 轴坐标， 'name' 为标记点名称
+* mark_line -> list  
+    标记线，默认有'min', 'max', 'average'可选
 * mark_point_symbol -> str  
     标记点图形，，默认为'pin'，有'circle', 'rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow'可选
 * mark_point_symbolsize -> int  
@@ -1301,6 +1307,18 @@ line.add("商家B", attr, v2, mark_point=["average", "max", "min"],
 line.render()
 ```
 ![line-0-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/line-0-1.png)
+
+```python
+line = Line("折线图示例")
+line.add("商家A", attr, v1,
+            mark_point=["average", {
+                "coord": ["裤子", 10], "name": "这是我想要的第一个标记点"}])
+line.add("商家B", attr, v2, is_smooth=True,
+            mark_point=[{
+                "coord": ["袜子", 80], "name": "这是我想要的第二个标记点"}])
+line.render()
+```
+![line-0-2](https://github.com/chenjiandongx/pyecharts/blob/master/images/line-0-2.gif)
 
 ```python
 line = Line("折线图-数据堆叠示例")
