@@ -450,7 +450,16 @@ def _mark(data,
     """
 
     :param data:
-        mark data, it can be 'min', 'max', 'average'
+        mark data, it can be 'min', 'max', 'average' or you cloud define by yourself
+        you need a dict contains coord and name,
+        coord: Coordinates of the starting point or ending point,
+            Notice: For axis with axis.type 'category':
+                If coord value is number, it represents index of axis.data.
+                If coord value is string, it represents concrete value in axis.data.
+                Please notice that in this case xAxis.data must not be written as
+                [number, number, ...],but can only be written [string, string, ...].
+                Otherwise it is not able to be located by markPoint / markLine.
+        name: Markpoint name
     :param mark_point_symbol:
         mark symbol, it can be 'circle', 'rect', 'roundRect', 'triangle',
         'diamond', 'pin', 'arrow'
@@ -467,15 +476,7 @@ def _mark(data,
         for d in list(data):
             # user-define markPoint
             if isinstance(d, dict):
-                # Coordinates of the starting point or ending point,
-                # Notice: For axis with axis.type 'category':
-                    # If coord value is number, it represents index of axis.data.
-                    # If coord value is string, it represents concrete value in axis.data.
-                    # Please notice that in this case xAxis.data must not be written as
-                    # [number, number, ...],but can only be written [string, string, ...].
-                    #  Otherwise it is not able to be located by markPoint / markLine.
                 _coord = d.get('coord', None)
-                # Mark point name.
                 _pname = d.get('name', None)
                 _marktmp = {
                     "coord": _coord,
@@ -593,6 +594,7 @@ def visual_map(visual_type='color',
                visual_pos="left",
                visual_top="bottom",
                visual_split_number=5,
+               visual_dimension=None,
                is_calculable=True,
                is_piecewise=False,
                **kwargs):
@@ -634,6 +636,9 @@ def visual_map(visual_type='color',
     :param visual_split_number:
         Continuous data can be divide into pieces averagely according to splitNumber,
         that is, if splitNumber is 5, data will be sliced into 5 pieces.
+    :param visual_dimension:
+        Specify which dimension should be used to fetch dataValue from series.data,
+        and then map them to visual channel.
     :param is_calculable:
         Whether show handles, which can be dragged to adjust "selected range".
     :param is_piecewise:
@@ -679,6 +684,7 @@ def visual_map(visual_type='color',
         "inRange": _inrange_op,
         "calculable": is_calculable,
         "splitNumber": visual_split_number,
+        "dimension": visual_dimension,
         "orient": visual_orient,
         "left": visual_pos,
         "top": visual_top
