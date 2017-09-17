@@ -496,6 +496,9 @@ cast(seq)
     visualmap 组件条距离顶部的位置，默认为'top'。有'top', 'center', 'bottom'可选，也可为百分数或整数。
 * visual_split_number -> int  
     分段型中分割的段数，在设置为分段型时生效。默认分为 5 段。
+* visual_dimension -> int  
+    指定用数据的『哪个维度』，映射到视觉元素上。默认映射到最后一个维度。索引从 0 开始。
+    在直角坐标系中，x 轴为第一个维度（0），y 轴为第二个维度（1）。
 * is_calculable -> bool  
     是否显示拖拽用的手柄（手柄能拖拽调整选中范围）。默认为 True
 * is_piecewise -> bool  
@@ -2018,7 +2021,7 @@ sankey.render()
 
 Scatter.add() 方法签名
 ```python
-add(name, x_axis, y_axis, symbol_size=10, **kwargs)
+add(name, x_axis, y_axis, extra_data=None, symbol_size=10, **kwargs)
 ```
 * name -> str  
     图例名称
@@ -2026,6 +2029,8 @@ add(name, x_axis, y_axis, symbol_size=10, **kwargs)
     x 坐标轴数据
 * y_axis -> list  
     y 坐标轴数据
+* extra_data -> int  
+    第三维度数据，x 轴为第一个维度，y 轴为第二个维度。（可在 visualmap 中将视图元素映射到第三维度）
 * symbol_size -> int  
     标记图形大小，默认为 10
 
@@ -2058,6 +2063,42 @@ scatter.add("B", v1[::-1], v2, is_visualmap=True, visual_type='size', visual_ran
 scatter.render()
 ```
 ![scatter-0-2](https://github.com/chenjiandongx/pyecharts/blob/master/images/scatter-0-2.gif)
+
+利用 Visualmap 组件映射到第三维度数据
+```python
+data = [
+        [28604, 77, 17096869],
+        [31163, 77.4, 27662440],
+        [1516, 68, 1154605773],
+        [13670, 74.7, 10582082],
+        [28599, 75, 4986705],
+        [29476, 77.1, 56943299],
+        [31476, 75.4, 78958237],
+        [28666, 78.1, 254830],
+        [1777, 57.7, 870601776],
+        [29550, 79.1, 122249285],
+        [2076, 67.9, 20194354],
+        [12087, 72, 42972254],
+        [24021, 75.4, 3397534],
+        [43296, 76.8, 4240375],
+        [10088, 70.8, 38195258],
+        [19349, 69.6, 147568552],
+        [10670, 67.3, 53994605],
+        [26424, 75.7, 57110117],
+        [37062, 75.4, 252847810]
+    ]
+
+x_lst = [v[0] for v in data]
+y_lst = [v[1] for v in data]
+extra_data = [v[2] for v in data]
+sc = Scatter()
+sc.add("scatter", x_lst, y_lst, extra_data=extra_data, is_visualmap=True,
+        visual_dimension=2, visual_orient='horizontal',
+        visual_type='size', visual_range=[254830, 1154605773],
+        visual_text_color='#000')
+sc.render()
+```
+![scatter-0-3](https://github.com/chenjiandongx/pyecharts/blob/master/images/scatter-0-3.gif)
 
 **Note：** 请配合 [通用配置项](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/documentation.md#通用配置项) 中的 Visualmap 使用
 
