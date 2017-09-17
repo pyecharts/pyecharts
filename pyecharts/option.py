@@ -44,17 +44,14 @@ def label(type=None,
         there may be data from multiple series.
         In this time, series index can be refered as {a0}, {a1}, or {a2}.
         {a}, {b}, {c}, {d} have different meanings for different series types:
-        Line:
-            (area) charts, bar (column) charts,
-              K charts:
+        Line: (area) charts, bar (column) charts,
+            K charts:
                 {a} for series name, {b} for category name, {c} for data value, {d} for none;
-        Scatter:
-            (bubble) charts:
-                {a} for series name, {b} for data name, {c} for data value, {d} for none;
+        Scatter: (bubble) charts:
+            {a} for series name, {b} for data name, {c} for data value, {d} for none;
         Map:
             {a} for series name, {b} for area name, {c} for merging data, {d} for none;
-        Pie:
-            charts, gauge charts, funnel charts: {a} for series name,
+        Pie: charts, gauge charts, funnel charts: {a} for series name,
             {b} for data item name, {c} for data value, {d} for percentage.
     :param kwargs:
     :return:
@@ -470,7 +467,15 @@ def _mark(data,
         for d in list(data):
             # user-define markPoint
             if isinstance(d, dict):
+                # Coordinates of the starting point or ending point,
+                # Notice: For axis with axis.type 'category':
+                    # If coord value is number, it represents index of axis.data.
+                    # If coord value is string, it represents concrete value in axis.data.
+                    # Please notice that in this case xAxis.data must not be written as
+                    # [number, number, ...],but can only be written [string, string, ...].
+                    #  Otherwise it is not able to be located by markPoint / markLine.
                 _coord = d.get('coord', None)
+                # Mark point name.
                 _pname = d.get('name', None)
                 _marktmp = {
                     "coord": _coord,
@@ -509,7 +514,7 @@ def mark_point(mark_point=None, **kwargs):
     """
 
     :param mark_point:
-        mark point data, it can be 'min', 'max', 'average'
+        mark point data, it can be 'min', 'max', 'average' or define by yourself
     :param kwargs:
     :return:
     """
@@ -539,8 +544,6 @@ def legend(is_legend_show=True,
            **kwargs):
     """ Legend component shows symbol, color and name of different series.
         You can click legends to toggle displaying series in the chart.
-        In ECharts 3, a single echarts instance may contain multiple legend components,
-        which makes it easier for the layout of multiple legend components.
 
     :param is_legend_show:
         It specifies whether to show the legend component.
@@ -698,7 +701,8 @@ def symbol(type=None, symbol="", **kwargs):
     """
 
     :param symbol:
-        symbol type, it can be 'rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow'.
+        symbol type, it can be 'rect', 'roundRect', 'triangle',
+        diamond', 'pin', 'arrow'.
     :param kwargs:
     :return:
     """
@@ -750,7 +754,8 @@ def datazoom(is_datazoom_show=False,
     :param datazoom_type:
         datazoom type, 'slider' or 'inside'
     :param datazoom_range:
-        The range percentage of the window out of the data extent, in the range of 0 ~ 100.
+        The range percentage of the window out of the data extent,in
+        the range of 0 ~ 100.
     :param datazoom_orient:
         Specify whether the layout of dataZoom component is horizontal or vertical.
         'horizontal' or 'vertical'.What's more,it indicates whether the horizontal
