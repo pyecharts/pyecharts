@@ -2,8 +2,11 @@
 
 * ### version 0.2.5（Dev）
 
+    #### Added
     * [issue#173](https://github.com/chenjiandongx/pyecharts/issues/173) 为 xyAxis 通用配置项新增 `is_xaxis_boundarygap` 和 `is_yaxis_boundartgap` 参数
+    * [issue#22](https://github.com/chenjiandongx/pyecharts/issues/22) 为散点图新增 `extra_data` 参数，可以为数据新增除 x y 轴外的其他维度
     * 为 markPoint 新增自定义标记点功能
+    * 为 visualMap 新增 `visual_dimension` 参数，可以指定 visualmap 映射到哪个数据维度
 
 * ### version 0.2.4 - 2017.9.8（Current）
     
