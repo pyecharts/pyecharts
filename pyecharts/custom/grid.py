@@ -43,7 +43,8 @@ class Grid(object):
             self._chart._option.update(grid=[])
             self._js_dependencies = chart._js_dependencies
 
-            _grid = grid(grid_width, grid_height, grid_top, grid_bottom, grid_left, grid_right)
+            _grid = grid(
+                grid_width, grid_height, grid_top, grid_bottom, grid_left, grid_right)
             if _grid:
                 for _ in range(len(self._chart._option.get('series'))):
                     self._chart._option.get('grid').append(_grid)
@@ -67,7 +68,7 @@ class Grid(object):
                 except:
                     pass
 
-                # indexflag is only identify for every series
+                # indexflag is the only identify for every series
                 _flag = self._chart._option.get('series')[0].get('indexflag')
                 _series_index = 0
                 for s in self._chart._option.get('series'):
@@ -77,7 +78,9 @@ class Grid(object):
                         _series_index += 1
                         s.update(xAxisIndex=_series_index, yAxisIndex=_series_index)
                     _flag = s.get('indexflag')
-            _grid = grid(grid_width, grid_height, grid_top, grid_bottom, grid_left, grid_right)
+
+            _grid = grid(
+                grid_width, grid_height, grid_top,grid_bottom, grid_left, grid_right)
             for _ in range(_index_once):
                 self._chart._option.get('grid').append(_grid)
             self._js_dependencies = self._js_dependencies.union(chart._js_dependencies)
@@ -92,7 +95,8 @@ class Grid(object):
         _series, _xaxis, _yaxis, _legend, _title = series
         for s in _series:
             self._chart._option.get('series').append(s)
-        return len(self._chart._option.get('series')), len(_series), _xaxis, _yaxis, _legend, _title
+        return len(self._chart._option.get('series')), len(_series), \
+               _xaxis, _yaxis, _legend, _title
 
     def render(self, path="render.html"):
         """
