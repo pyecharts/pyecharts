@@ -114,7 +114,7 @@ Known nbextensions:
 ```shell
 $ git clone https://github.com/chfw/jupyter-echarts.git
 $ cd jupyter-echarts
-$ jupyter nbextensions install echarts --user
+$ jupyter nbextension install echarts --user
 ```
 在下一个画图动作的时候，您的脚本文件会被更新。
 
