@@ -69,15 +69,15 @@ class Grid(object):
                     pass
 
                 # indexflag is the only identify for every series
-                _flag = self._chart._option.get('series')[0].get('indexflag')
+                _flag = self._chart._option.get('series')[0].get('seriesId')
                 _series_index = 0
                 for s in self._chart._option.get('series'):
-                    if _flag == s.get('indexflag'):
+                    if _flag == s.get('seriesId'):
                         s.update(xAxisIndex=_series_index, yAxisIndex=_series_index)
                     else:
                         _series_index += 1
                         s.update(xAxisIndex=_series_index, yAxisIndex=_series_index)
-                    _flag = s.get('indexflag')
+                    _flag = s.get('seriesId')
 
             _grid = grid(
                 grid_width, grid_height, grid_top,grid_bottom, grid_left, grid_right)

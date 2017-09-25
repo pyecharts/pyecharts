@@ -51,6 +51,6 @@ class EffectScatter(Scatter):
             "symbolSize": symbol_size,
             "data": [list(z) for z in zip(x_axis, y_axis)],
             "label": chart['label'],
-            "indexflag": self._option.get('_index_flag')
+            "seriesId": self._option.get('series_id'),
         })
         self._config_components(**kwargs)
