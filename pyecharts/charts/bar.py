@@ -39,7 +39,7 @@ class Bar(Base):
         kwargs.update(x_axis=x_axis)
         chart = get_all_options(**kwargs)
 
-        is_stack = "stack_" + str(self._option['_index_flag']) if is_stack else ""
+        is_stack = "stack_" + str(self._option['seriesId']) if is_stack else ""
         xaxis, yaxis = chart['xy_axis']
         self._option.update(xAxis=xaxis, yAxis=yaxis)
         self._option.get('legend')[0].get('data').append(name)
@@ -52,6 +52,6 @@ class Bar(Base):
             "label": chart['label'],
             "markPoint": chart['mark_point'],
             "markLine": chart['mark_line'],
-            "indexflag": self._option.get('_index_flag')
+            "seriesId": self._option.get('series_id'),
         })
         self._config_components(**kwargs)

@@ -108,7 +108,7 @@ class Base(object):
                     "dataView": {"show": True},
                 }
             },
-            _index_flag=random.randint(1, 9000000),
+            series_id = random.randint(1, 9000000),
             tooltip={},
             series=[],
             legend=[{"data": []}],

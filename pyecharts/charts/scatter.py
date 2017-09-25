@@ -61,7 +61,7 @@ class Scatter(Base):
             "symbolSize": symbol_size,
             "data": _data,
             "label": chart['label'],
-            "indexflag": self._option.get('_index_flag')
+            "seriesId": self._option.get('series_id'),
         })
         self._config_components(**kwargs)
 
