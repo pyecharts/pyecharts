@@ -7,7 +7,7 @@
     * [issue#22](https://github.com/chenjiandongx/pyecharts/issues/22) 为散点图新增 `extra_data` 参数，可以为数据新增除 x y 轴外的其他维度
     * 为 markPoint 新增自定义标记点功能
     * 为 visualMap 新增 `visual_dimension` 参数，可以指定 visualmap 映射到哪个数据维度
-    * 加入[212个国家和地区](https://github.com/chfw/echarts-countries-js#featuring-citiesor-for-single-download)。
+    * 为 Map 图新增 [212个国家和地区](https://github.com/chfw/echarts-countries-js#featuring-citiesor-for-single-download)。
 
 * ### version 0.2.4 - 2017.9.8（Current）
     
