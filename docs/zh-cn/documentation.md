@@ -1148,7 +1148,7 @@ graph.render()
 ```python
 graph = Graph("关系图-环形布局示例")
 graph.add("", nodes, links, is_label_show=True,
-          graph_repulsion=8000, layout='circular', label_text_color=None)
+          graph_repulsion=8000, graph_layout='circular', label_text_color=None)
 graph.render()
 ```
 ![graph-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/graph-1.png)
@@ -2286,7 +2286,7 @@ Grid 类的使用：
 3. 使用 `add()` 向 `grid` 中添加图，至少需要设置一个 `grid_top`, `grid_bottom`, `grid_left`, `grid_right` 四个参数中的一个。`grid_width` 和 `grid_height` 一般不用设置，默认即可。
 4. 使用 `render()` 渲染生成 .html 文件
 
-**Note：** `Overlap` 类不能放入 `Grid` 类中，建议改为 `Overlap`+`Page` 方案
+**Note：** `Overlap` 可类放入 `Grid` 类中，不过有个前提，`Overlap` 不可为多 x 轴或者多 y 轴，否则会出现坐标轴索引混乱问题
 
 Grid 类中其他方法：
 * `render_embed()`：在 Flask&Django 中可以使用该方法渲染
@@ -2560,6 +2560,34 @@ grid.add(line_bottom, grid_top='50%')
 grid.render()
 ```
 ![grid-7](https://github.com/chenjiandongx/pyecharts/blob/master/images/grid-7.gif)  
+
+Grid+Overlap
+```python
+from pyecharts import Overlap, Bar, Line, Grid
+
+grid = Grid()
+
+attr = ["{}月".format(i) for i in range(1, 13)]
+v1 = [2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3]
+v2 = [2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3]
+v3 = [2.0, 2.2, 3.3, 4.5, 6.3, 10.2, 20.3, 23.4, 23.0, 16.5, 12.0, 6.2]
+
+bar = Bar(width=1200, height=600, title="Overlap+Grid 示例", title_pos="40%")
+bar.add("蒸发量", attr, v1)
+bar.add("降水量", attr, v2, yaxis_formatter=" ml", yaxis_max=250,
+        legend_pos="85%", legend_orient="vertical", legend_top="45%")
+line = Line()
+line.add("平均温度", attr, v3, yaxis_formatter=" °C")
+overlap = Overlap()
+overlap.add(bar)
+overlap.add(line, is_add_yaxis=True, yaxis_index=1)
+
+grid.add(overlap, grid_right='20%')
+grid.render()
+```
+![grid-8](https://github.com/chenjiandongx/pyecharts/blob/master/images/grid-8.png)  
+
+**Note：** `Overlap` 放入 `Grid` 可以利用其 grid 网格调整布局，例如上图将图例放在右边，这种情况在**图例名字过长**时很有用。
 
 
 ## Overlap：结合不同类型图表叠加画在同张图上
