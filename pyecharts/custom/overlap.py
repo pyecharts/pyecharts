@@ -12,7 +12,11 @@ class Overlap(object):
         self._js_dependencies = set()
         self._page_title = page_title
 
-    def add(self, chart, xaxis_index=0, yaxis_index=0, is_add_xaxis=False, is_add_yaxis=False):
+    def add(self, chart,
+            xaxis_index=0,
+            yaxis_index=0,
+            is_add_xaxis=False,
+            is_add_yaxis=False):
         """
 
         :param chart:
@@ -29,6 +33,7 @@ class Overlap(object):
         """
         if self._chart is None:
             self._chart = chart
+            self._series_id = chart._option.get('series')[0].get('seriesId')
             self._js_dependencies = chart._js_dependencies
         else:
             _series = (
@@ -43,6 +48,7 @@ class Overlap(object):
             )
             self.__custom(_series)
             self._js_dependencies = self._js_dependencies.union(chart._js_dependencies)
+        self._option = self._chart._option
 
     def __custom(self, series):
         """ Appends the data for the series of the chart type
@@ -55,7 +61,8 @@ class Overlap(object):
         for n in _name:
             self._chart._option.get('legend')[0].get('data').append(n)
         for s in _series:
-            s.update(xAxisIndex=_xaxis_index, yAxisIndex=_yaxis_index)
+            s.update(xAxisIndex=_xaxis_index, yAxisIndex=_yaxis_index,
+                     seriesId=self._series_id)
             self._chart._option.get('series').append(s)
 
         if is_add_xaxis:
