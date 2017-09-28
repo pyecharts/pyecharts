@@ -23,7 +23,7 @@ class Scatter(Base):
     def add(self, *args, **kwargs):
         self.__add(*args, **kwargs)
 
-    def __add(self, name, x_axis, y_axis,
+    def __add(self, name, x_axis, y_axis, extra_data=None,
               symbol_size=10,
               **kwargs):
         """
@@ -35,6 +35,8 @@ class Scatter(Base):
             data of xAxis
         :param y_axis:
             data of yAxis
+        :param extra_data:
+            other dimension data
         :param symbol_size:
             symbol size
         :param kwargs:
@@ -47,14 +49,19 @@ class Scatter(Base):
         self._option.update(xAxis=xaxis, yAxis=yaxis)
         self._option.get('legend')[0].get('data').append(name)
 
+        if extra_data:
+            _data = [list(z) for z in zip(x_axis, y_axis, extra_data)]
+        else:
+            _data = [list(z) for z in zip(x_axis, y_axis)]
+
         self._option.get('series').append({
             "type": "scatter",
             "name": name,
             "symbol": chart['symbol'],
             "symbolSize": symbol_size,
-            "data": [list(z) for z in zip(x_axis, y_axis)],
+            "data": _data,
             "label": chart['label'],
-            "indexflag": self._option.get('_index_flag')
+            "seriesId": self._option.get('series_id'),
         })
         self._config_components(**kwargs)
 

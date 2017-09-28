@@ -39,7 +39,7 @@ class ThemeRiver(Base):
             "name": name,
             "data": data,
             "label": chart['label'],
-            "indexflag": self._option.get('_index_flag')
+            "seriesId": self._option.get('series_id'),
         })
 
         self._option.update(singleAxis={"type": "time"})

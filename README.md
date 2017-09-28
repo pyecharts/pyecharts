@@ -73,6 +73,13 @@ Django
 * [中文文档](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/documentation.md)
 * [English](https://github.com/chenjiandongx/pyecharts/blob/master/docs/en-us/documentation.md)
 
+
+## Test
+```shell
+$ cd test
+$ nosetests --with-coverage --cover-package pyecharts --cover-package test
+```
+
 ## Author
 pyecharts is developed and maintained by chenjiandongx ([chenjiandongx@qq.com](chenjiandongx@qq.com))
 
