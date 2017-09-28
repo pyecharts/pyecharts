@@ -1,10 +1,21 @@
 # Version Log
 
-* ### version 0.2.5（Dev）
+* ### version 0.2.6（Dev）
 
-    * Todo
+    * TODO
 
-* ### version 0.2.4 - 2017.9.8（Current）
+
+* ### version 0.2.5 - 2017.9.28（Current）
+
+    #### Added
+    * [issue#173](https://github.com/chenjiandongx/pyecharts/issues/173) 为 xyAxis 通用配置项新增 `is_xaxis_boundarygap` 和 `is_yaxis_boundartgap` 参数
+    * [issue#22](https://github.com/chenjiandongx/pyecharts/issues/22) 为散点图新增 `extra_data` 参数，可以为数据新增除 x y 轴外的其他维度
+    * 为 markPoint 新增自定义标记点功能
+    * 为 visualMap 新增 `visual_dimension` 参数，可以指定 visualmap 映射到哪个数据维度
+    * 为 Map 图新增 [212个国家和地区](https://github.com/chfw/echarts-countries-js#featuring-citiesor-for-single-download)
+    * 部分解决 Overlap 和 Grid 不能一起使用的问题（当 Overlap 为多 x 轴或多 y 轴的时候坐标轴索引仍会出现问题）
+
+* ### version 0.2.4 - 2017.9.8
     
     #### Added
     * [issue#148](https://github.com/chenjiandongx/pyecharts/issues/148) 为 Radar.config() 新增 `legend_text_size` 参数
