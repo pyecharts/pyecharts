@@ -9,7 +9,7 @@ from pyecharts.constants import CITY_NAME_PINYIN_MAP
 
 class Geo(Base):
     """
-    Geographic coorinate system component.
+    Geographic coordinate system component.
 
     It is used to draw maps, which also supports scatter series, and line
     series.
