@@ -57,6 +57,7 @@ class Page(object):
         chart_content = ""
         for chart in self.__charts:
             chart_content += chart.render_embed()
+            chart_content += '<br>'
         return chart_content
 
     def get_js_dependencies(self):
