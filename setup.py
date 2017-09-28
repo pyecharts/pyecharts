@@ -20,12 +20,15 @@ __url__ = 'https://github.com/chenjiandongx/pyecharts'
 __author_email__ = 'chenjiandongx@qq.com'
 __license__ = 'MIT'
 
-__requires__ = [
-    'pillow', 'jinja2', 'future', 'jupyter-pip>=0.3.1'
-]
-__keywords__ = [
-    'Echarts', 'charts', 'plotting-tool'
-]
+__requires__ = ['pillow',
+                'jinja2',
+                'future',
+                'jupyter-pip>=0.3.1']
+
+__keywords__ = ['Echarts',
+                'charts',
+                'plotting-tool']
+
 __jupyter_echarts__ = 'pyecharts/templates/js/echarts'
 
 # Load the package's _version.py module as a dictionary.
