@@ -9,7 +9,7 @@ class Sankey(Base):
     """
     <<< Sankey chart >>>
 
-    Sankey graphs are a specific type of streamgraphs, in which the width of each branch is
+    Sankey graphs are a specific type of stream graphs, in which the width of each branch is
     shown proportionally to the flow quantity. These graphs are typically used to
     visualize energy or material or cost transfers between processes.
     They can also visualize the energy accounts, material flow accounts on a regional or

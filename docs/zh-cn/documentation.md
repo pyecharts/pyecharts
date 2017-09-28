@@ -114,7 +114,7 @@ Known nbextensions:
 ```shell
 $ git clone https://github.com/chfw/jupyter-echarts.git
 $ cd jupyter-echarts
-$ jupyter nbextensions install echarts --user
+$ jupyter nbextension install echarts --user
 ```
 在下一个画图动作的时候，您的脚本文件会被更新。
 
@@ -258,6 +258,10 @@ cast(seq)
     是否反向 x 坐标轴，默认为 False
 * is_yaxis_inverse -> bool  
     是否反向 y 坐标轴，默认为 False
+* is_xaxis_boundarygap -> bool  
+    x 轴两边留白策略，适用于类目轴。类目轴中 boundaryGap 可以配置为 True 和 False。默认为 True，这时候刻度只是作为分隔线，标签和数据点都会在两个刻度之间的带(band)中间，即两边留白。
+* is_yaxis_boundarygap -> bool  
+    y 轴两边留白策略，适用于类目轴。类目轴中 boundaryGap 可以配置为 True 和 False。默认为 True，这时候刻度只是作为分隔线，标签和数据点都会在两个刻度之间的带(band)中间，即两边留白。
 * x_axis -> list  
     x 轴数据项
 * xaxis_interval -> int  
@@ -492,6 +496,9 @@ cast(seq)
     visualmap 组件条距离顶部的位置，默认为'top'。有'top', 'center', 'bottom'可选，也可为百分数或整数。
 * visual_split_number -> int  
     分段型中分割的段数，在设置为分段型时生效。默认分为 5 段。
+* visual_dimension -> int  
+    指定用数据的『哪个维度』，映射到视觉元素上。默认映射到最后一个维度。索引从 0 开始。  
+    在直角坐标系中，x 轴为第一个维度（0），y 轴为第二个维度（1）。
 * is_calculable -> bool  
     是否显示拖拽用的手柄（手柄能拖拽调整选中范围）。默认为 True
 * is_piecewise -> bool  
@@ -531,10 +538,12 @@ cast(seq)
 
 **markLine&markPoint：图形标记组件，用于标记指定的特殊数据，又标记线和标记点两种（Bar、Line、Kline）**
 
-* mark_point  -> list  
-    标记点，有'min', 'max', 'average'可选
-* mark_line  -> list  
-    标记线，有'min', 'max', 'average'可选
+* mark_point -> list  
+    标记点，默认有'min', 'max', 'average'可选。支持自定义标记点，具体使用如下  
+    [{"coord": [a1, b1], "name": "first markpoint"}, {"coord": [a2, b2], "name": "second markpoint"}]  
+    需自己传入标记点字典，共有两个键值对，'coord' 对应为 x y 轴坐标， 'name' 为标记点名称
+* mark_line -> list  
+    标记线，默认有'min', 'max', 'average'可选
 * mark_point_symbol -> str  
     标记点图形，，默认为'pin'，有'circle', 'rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow'可选
 * mark_point_symbolsize -> int  
@@ -1139,7 +1148,7 @@ graph.render()
 ```python
 graph = Graph("关系图-环形布局示例")
 graph.add("", nodes, links, is_label_show=True,
-          graph_repulsion=8000, layout='circular', label_text_color=None)
+          graph_repulsion=8000, graph_layout='circular', label_text_color=None)
 graph.render()
 ```
 ![graph-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/graph-1.png)
@@ -1301,6 +1310,18 @@ line.add("商家B", attr, v2, mark_point=["average", "max", "min"],
 line.render()
 ```
 ![line-0-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/line-0-1.png)
+
+```python
+line = Line("折线图示例")
+line.add("商家A", attr, v1,
+            mark_point=["average", {
+                "coord": ["裤子", 10], "name": "这是我想要的第一个标记点"}])
+line.add("商家B", attr, v2, is_smooth=True,
+            mark_point=[{
+                "coord": ["袜子", 80], "name": "这是我想要的第二个标记点"}])
+line.render()
+```
+![line-0-2](https://github.com/chenjiandongx/pyecharts/blob/master/images/line-0-2.gif)
 
 ```python
 line = Line("折线图-数据堆叠示例")
@@ -2000,7 +2021,7 @@ sankey.render()
 
 Scatter.add() 方法签名
 ```python
-add(name, x_axis, y_axis, symbol_size=10, **kwargs)
+add(name, x_axis, y_axis, extra_data=None, symbol_size=10, **kwargs)
 ```
 * name -> str  
     图例名称
@@ -2008,6 +2029,8 @@ add(name, x_axis, y_axis, symbol_size=10, **kwargs)
     x 坐标轴数据
 * y_axis -> list  
     y 坐标轴数据
+* extra_data -> int  
+    第三维度数据，x 轴为第一个维度，y 轴为第二个维度。（可在 visualmap 中将视图元素映射到第三维度）
 * symbol_size -> int  
     标记图形大小，默认为 10
 
@@ -2040,6 +2063,42 @@ scatter.add("B", v1[::-1], v2, is_visualmap=True, visual_type='size', visual_ran
 scatter.render()
 ```
 ![scatter-0-2](https://github.com/chenjiandongx/pyecharts/blob/master/images/scatter-0-2.gif)
+
+利用 Visualmap 组件映射到第三维度数据
+```python
+data = [
+        [28604, 77, 17096869],
+        [31163, 77.4, 27662440],
+        [1516, 68, 1154605773],
+        [13670, 74.7, 10582082],
+        [28599, 75, 4986705],
+        [29476, 77.1, 56943299],
+        [31476, 75.4, 78958237],
+        [28666, 78.1, 254830],
+        [1777, 57.7, 870601776],
+        [29550, 79.1, 122249285],
+        [2076, 67.9, 20194354],
+        [12087, 72, 42972254],
+        [24021, 75.4, 3397534],
+        [43296, 76.8, 4240375],
+        [10088, 70.8, 38195258],
+        [19349, 69.6, 147568552],
+        [10670, 67.3, 53994605],
+        [26424, 75.7, 57110117],
+        [37062, 75.4, 252847810]
+    ]
+
+x_lst = [v[0] for v in data]
+y_lst = [v[1] for v in data]
+extra_data = [v[2] for v in data]
+sc = Scatter()
+sc.add("scatter", x_lst, y_lst, extra_data=extra_data, is_visualmap=True,
+        visual_dimension=2, visual_orient='horizontal',
+        visual_type='size', visual_range=[254830, 1154605773],
+        visual_text_color='#000')
+sc.render()
+```
+![scatter-0-3](https://github.com/chenjiandongx/pyecharts/blob/master/images/scatter-0-3.gif)
 
 **Note：** 请配合 [通用配置项](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/documentation.md#通用配置项) 中的 Visualmap 使用
 
@@ -2226,6 +2285,8 @@ Grid 类的使用：
 2. 实例化 Grid 类，`grid = Grid()` ，可指定 `page_title` 参数。
 3. 使用 `add()` 向 `grid` 中添加图，至少需要设置一个 `grid_top`, `grid_bottom`, `grid_left`, `grid_right` 四个参数中的一个。`grid_width` 和 `grid_height` 一般不用设置，默认即可。
 4. 使用 `render()` 渲染生成 .html 文件
+
+**Note：** `Overlap` 可类放入 `Grid` 类中，不过有个前提，`Overlap` 不可为多 x 轴或者多 y 轴，否则会出现坐标轴索引混乱问题
 
 Grid 类中其他方法：
 * `render_embed()`：在 Flask&Django 中可以使用该方法渲染
@@ -2500,6 +2561,34 @@ grid.render()
 ```
 ![grid-7](https://github.com/chenjiandongx/pyecharts/blob/master/images/grid-7.gif)  
 
+Grid+Overlap
+```python
+from pyecharts import Overlap, Bar, Line, Grid
+
+grid = Grid()
+
+attr = ["{}月".format(i) for i in range(1, 13)]
+v1 = [2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3]
+v2 = [2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3]
+v3 = [2.0, 2.2, 3.3, 4.5, 6.3, 10.2, 20.3, 23.4, 23.0, 16.5, 12.0, 6.2]
+
+bar = Bar(width=1200, height=600, title="Overlap+Grid 示例", title_pos="40%")
+bar.add("蒸发量", attr, v1)
+bar.add("降水量", attr, v2, yaxis_formatter=" ml", yaxis_max=250,
+        legend_pos="85%", legend_orient="vertical", legend_top="45%")
+line = Line()
+line.add("平均温度", attr, v3, yaxis_formatter=" °C")
+overlap = Overlap()
+overlap.add(bar)
+overlap.add(line, is_add_yaxis=True, yaxis_index=1)
+
+grid.add(overlap, grid_right='20%')
+grid.render()
+```
+![grid-8](https://github.com/chenjiandongx/pyecharts/blob/master/images/grid-8.png)  
+
+**Note：** `Overlap` 放入 `Grid` 可以利用其 grid 网格调整布局，例如上图将图例放在右边，这种情况在**图例名字过长**时很有用。
+
 
 ## Overlap：结合不同类型图表叠加画在同张图上
 > 用户可以自定义结合 Line/Bar/Kline, Scatter/EffectScatter 图表，将不同类型图表画在一张图上。利用第一个图表为基础，往后的数据都将会画在第一个图表上。   
@@ -2655,7 +2744,7 @@ overlap.render()
 如果只是想在单个 .html 按顺序展示图表，推荐使用 ```Page()``` 类
 
 ## Page：同一网页按顺序展示多图
-> Grid/Timeline/Overlap 都可在 Page 中正常展示
+> Grid/Timeline/Overlap 都可在 Page 中正常展示，把其当做一个图加入到 Page 中即可
 
 Page 类的使用：
 1. 引入 `Page` 类，`from pyecharts import Page`

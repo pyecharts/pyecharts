@@ -15,6 +15,16 @@ def test_line():
     line.add("商家B", attr, v2, is_smooth=True, mark_line=["max", "average"])
     line.render()
 
+    # line user-define markPoint
+    line = Line("折线图示例")
+    line.add("商家A", attr, v1,
+             mark_point=["average", {
+                 "coord": ["裤子", 10], "name": "这是我想要的第一个标记点"}])
+    line.add("商家B", attr, v2, is_smooth=True,
+             mark_point=[{
+                 "coord": ["袜子", 80], "name": "这是我想要的第二个标记点"}])
+    line.render()
+
     # line user-define markLine&markPoint
     line = Line("折线图示例")
     line.add("商家A", attr, v1, mark_point=["average", "max", "min"],

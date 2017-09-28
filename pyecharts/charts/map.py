@@ -13,9 +13,9 @@ class Map(Base):
     """
     <<< Map chart >>>
 
-    Map is maily used in the visulization of geographic area data,which
-    can be used with visualMap component to visualize the datas such as
-    population distribution density in diffrent areas.
+    Map is mainly used in the visualization of geographic area data,which
+    can be used with visualMap component to visualize the data such as
+    population distribution density in different areas.
     """
     def __init__(self, title="", subtitle="", **kwargs):
         super(Map, self).__init__(title, subtitle, **kwargs)

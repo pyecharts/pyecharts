@@ -46,7 +46,7 @@ class Boxplot(Base):
             "label": chart['label'],
             "markPoint": chart['mark_point'],
             "markLine": chart['mark_line'],
-            "indexflag": self._option.get('_index_flag')
+            "seriesId": self._option.get('series_id'),
         })
         self._config_components(**kwargs)
 
