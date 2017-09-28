@@ -13,7 +13,7 @@ class HeatMap(Base):
     with visualMap component.
     It can be used in either rectangular coordinate or geographic coordinate.
     But the behaviour on them are quite different. Rectangular coordinate
-    must have two catagories to use it.
+    must have two categories to use it.
     """
     def __init__(self, title="", subtitle="", **kwargs):
         super(HeatMap, self).__init__(title, subtitle, **kwargs)
@@ -55,6 +55,6 @@ class HeatMap(Base):
             "name": name,
             "data": data,
             "label": chart['label'],
-            "indexflag": self._option.get('_index_flag')
+            "seriesId": self._option.get('series_id'),
         })
         self._config_components(**kwargs)

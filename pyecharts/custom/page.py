@@ -14,11 +14,6 @@ class Page(object):
     A composite object to present multiple charts vertically in a single page
     """
     def __init__(self, jshost=None, page_title=constants.PAGE_TITLE):
-        """
-
-        :param jshost:
-            custom javascript host for the particular chart only
-        """
         self.__charts = []
         self._page_title = page_title
         self._jshost = jshost if jshost else constants.CONFIGURATION['HOST']
@@ -62,6 +57,7 @@ class Page(object):
         chart_content = ""
         for chart in self.__charts:
             chart_content += chart.render_embed()
+            chart_content += '<br>'
         return chart_content
 
     def get_js_dependencies(self):

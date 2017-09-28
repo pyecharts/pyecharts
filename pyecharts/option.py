@@ -44,17 +44,14 @@ def label(type=None,
         there may be data from multiple series.
         In this time, series index can be refered as {a0}, {a1}, or {a2}.
         {a}, {b}, {c}, {d} have different meanings for different series types:
-        Line:
-            (area) charts, bar (column) charts,
-              K charts:
+        Line: (area) charts, bar (column) charts,
+            K charts:
                 {a} for series name, {b} for category name, {c} for data value, {d} for none;
-        Scatter:
-            (bubble) charts:
-                {a} for series name, {b} for data name, {c} for data value, {d} for none;
+        Scatter: (bubble) charts:
+            {a} for series name, {b} for data name, {c} for data value, {d} for none;
         Map:
             {a} for series name, {b} for area name, {c} for merging data, {d} for none;
-        Pie:
-            charts, gauge charts, funnel charts: {a} for series name,
+        Pie: charts, gauge charts, funnel charts: {a} for series name,
             {b} for data item name, {c} for data value, {d} for percentage.
     :param kwargs:
     :return:
@@ -255,6 +252,8 @@ def xy_axis(type=None,
             is_yaxis_inverse=False,
             is_xaxislabel_align=False,
             is_yaxislabel_align=False,
+            is_xaxis_boundarygap=True,
+            is_yaxis_boundarygap=True,
             **kwargs):
     """
     :param type:
@@ -362,6 +361,18 @@ def xy_axis(type=None,
         whether align xaxis tick with label
     :param is_yaxislabel_align:
         whether align yaxis tick with label
+    :param is_xaxis_boundarygap:
+        The boundary gap on both sides of a coordinate xAxis.
+        The boundaryGap of category axis can be set to either true or false.
+        Default value is set to be true, in which case axisTick is served
+        only as a separation line, and labels and data appear only in
+        the center part of two axis ticks, which is called band.
+    :param is_yaxis_boundarygap:
+        The boundary gap on both sides of a coordinate yAxis.
+        The boundaryGap of category axis can be set to either true or false.
+        Default value is set to be true, in which case axisTick is served
+        only as a separation line, and labels and data appear only in
+        the center part of two axis ticks, which is called band.
     :param kwargs:
     :return:
     """
@@ -380,6 +391,7 @@ def xy_axis(type=None,
         },
         "inverse": is_xaxis_inverse,
         "position": xaxis_pos,
+        "boundaryGap": is_xaxis_boundarygap,
         "min": xaxis_min,
         "max": xaxis_max
     }
@@ -399,20 +411,15 @@ def xy_axis(type=None,
         },
         "inverse": is_yaxis_inverse,
         "position": yaxis_pos,
+        "boundaryGap": is_yaxis_boundarygap,
         "min": yaxis_min,
         "max": yaxis_max
     }
 
-    if type == "scatter":
-        if xaxis_type is None:
-            xaxis_type = "value"
-        if yaxis_type is None:
-            yaxis_type = "value"
-    else:       # line/bar
-        if xaxis_type is None:
-            xaxis_type = "category"
-        if yaxis_type is None:
-            yaxis_type = "value"
+    if xaxis_type is None:
+        xaxis_type = "value" if type == "scatter" else "category"
+    if yaxis_type is None:
+        yaxis_type = "value"
 
     if is_convert:
         xaxis_type, yaxis_type = yaxis_type, xaxis_type
@@ -423,7 +430,7 @@ def xy_axis(type=None,
         _yAxis.update(type=yaxis_type)
 
     if type == "candlestick":
-        _xAxis.update(scale=True, boundaryGap=False)
+        _xAxis.update(scale=True)
         _yAxis.update(scale=True, splitArea={"show": True})
 
     if xaxis_force_interval is not None:
@@ -443,9 +450,19 @@ def _mark(data,
     """
 
     :param data:
-        mark data, it can be 'min', 'max', 'average'
+        mark data, it can be 'min', 'max', 'average' or you cloud define by yourself
+        you need a dict contains coord and name,
+        coord: Coordinates of the starting point or ending point,
+            Notice: For axis with axis.type 'category':
+                If coord value is number, it represents index of axis.data.
+                If coord value is string, it represents concrete value in axis.data.
+                Please notice that in this case xAxis.data must not be written as
+                [number, number, ...],but can only be written [string, string, ...].
+                Otherwise it is not able to be located by markPoint / markLine.
+        name: Markpoint name
     :param mark_point_symbol:
-        mark symbol, it cna be 'circle', 'rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow'
+        mark symbol, it can be 'circle', 'rect', 'roundRect', 'triangle',
+        'diamond', 'pin', 'arrow'
     :param mark_point_symbolsize:
         mark symbol size
     :param mark_point_textcolor:
@@ -457,31 +474,39 @@ def _mark(data,
     mark = {"data": []}
     if data:
         for d in list(data):
-            _type, _name = "", ""
-            if "max" in d:
-                _type, _name = "max", "最大值"
-            elif "min" in d:
-                _type, _name = "min", "最小值"
-            elif "average" in d:
-                _type, _name = "average", "平均値"
-            if _is_markline:
-                _m = {
-                    "type": _type,
-                    "name": _name,
-                }
-            else:
-                _m = {
-                    "type": _type,
-                    "name": _name,
+            # user-define markPoint
+            if isinstance(d, dict):
+                _coord = d.get('coord', None)
+                _pname = d.get('name', None)
+                _marktmp = {
+                    "coord": _coord,
+                    "name": _pname,
                     "symbol": mark_point_symbol,
                     "symbolSize": mark_point_symbolsize,
-                    "label": {
-                        "normal": {
+                    "label": {"normal": {
+                        "textStyle": {"color": mark_point_textcolor}}
+                    }}
+                mark.get("data").append(_marktmp)
+            # markPoint&markLine by default
+            else:
+                _type, _name = "", ""
+                if "max" in d:
+                    _type, _name = "max", "Maximum"
+                elif "min" in d:
+                    _type, _name = "min", "Minimum"
+                elif "average" in d:
+                    _type, _name = "average", "mean-Value"
+
+                _marktmp = {"type": _type, "name": _name}
+                if not _is_markline:
+                    _marktmp.update(
+                        symbol=mark_point_symbol,
+                        symbolSize=mark_point_symbolsize,
+                        label={"normal": {
                             "textStyle": {"color": mark_point_textcolor}}
-                    }
-                }
-            if type:
-                mark.get("data").append(_m)
+                        })
+                if _type:
+                    mark.get("data").append(_marktmp)
     return mark
 
 
@@ -490,7 +515,7 @@ def mark_point(mark_point=None, **kwargs):
     """
 
     :param mark_point:
-        mark point data, it can be 'min', 'max', 'average'
+        mark point data, it can be 'min', 'max', 'average' or define by yourself
     :param kwargs:
     :return:
     """
@@ -520,8 +545,6 @@ def legend(is_legend_show=True,
            **kwargs):
     """ Legend component shows symbol, color and name of different series.
         You can click legends to toggle displaying series in the chart.
-        In ECharts 3, a single echarts instance may contain multiple legend components,
-        which makes it easier for the layout of multiple legend components.
 
     :param is_legend_show:
         It specifies whether to show the legend component.
@@ -571,10 +594,12 @@ def visual_map(visual_type='color',
                visual_pos="left",
                visual_top="bottom",
                visual_split_number=5,
+               visual_dimension=None,
                is_calculable=True,
                is_piecewise=False,
                **kwargs):
-    """ visualMap is a type of component for visual encoding, which maps the data to visual channels
+    """ visualMap is a type of component for visual encoding, which
+        maps the data to visual channels
 
     :param visual_type:
         visual map type, 'color' or 'size'
@@ -611,6 +636,9 @@ def visual_map(visual_type='color',
     :param visual_split_number:
         Continuous data can be divide into pieces averagely according to splitNumber,
         that is, if splitNumber is 5, data will be sliced into 5 pieces.
+    :param visual_dimension:
+        Specify which dimension should be used to fetch dataValue from series.data,
+        and then map them to visual channel.
     :param is_calculable:
         Whether show handles, which can be dragged to adjust "selected range".
     :param is_piecewise:
@@ -618,13 +646,13 @@ def visual_map(visual_type='color',
     :param kwargs:
     :return:
     """
-    # defalut min and max value of visual_range is [0, 100]
+    # default min and max value of visual_range is [0, 100]
     _min, _max = 0, 100
     if visual_range:
         if len(visual_range) == 2:
             _min, _max = visual_range
 
-    # defalut label text on both ends is ['low', 'high']
+    # default label text on both ends is ['low', 'high']
     _tlow, _thigh = "low", "high"
     if visual_range_text:
         if len(visual_range_text) == 2:
@@ -645,9 +673,7 @@ def visual_map(visual_type='color',
                 range_size = visual_range_size
         _inrange_op.update(symbolSize=range_size)
 
-    _type = "continuous"
-    if is_piecewise:
-        _type = "piecewise"
+    _type = "piecewise" if is_piecewise else "continuous"
 
     _visual_map = {
         "type": _type,
@@ -658,16 +684,16 @@ def visual_map(visual_type='color',
         "inRange": _inrange_op,
         "calculable": is_calculable,
         "splitNumber": visual_split_number,
+        "dimension": visual_dimension,
         "orient": visual_orient,
         "left": visual_pos,
         "top": visual_top
     }
-
     return _visual_map
 
 
 def gen_color():
-    """ random generation color -> WordCloud
+    """ random generation color for << WordCloud >>
 
     :return:
     """
@@ -681,7 +707,8 @@ def symbol(type=None, symbol="", **kwargs):
     """
 
     :param symbol:
-        symbol type, it can be 'rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow'.
+        symbol type, it can be 'rect', 'roundRect', 'triangle',
+        diamond', 'pin', 'arrow'.
     :param kwargs:
     :return:
     """
@@ -733,7 +760,8 @@ def datazoom(is_datazoom_show=False,
     :param datazoom_type:
         datazoom type, 'slider' or 'inside'
     :param datazoom_range:
-        The range percentage of the window out of the data extent, in the range of 0 ~ 100.
+        The range percentage of the window out of the data extent,in
+        the range of 0 ~ 100.
     :param datazoom_orient:
         Specify whether the layout of dataZoom component is horizontal or vertical.
         'horizontal' or 'vertical'.What's more,it indicates whether the horizontal

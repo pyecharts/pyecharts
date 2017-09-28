@@ -53,7 +53,7 @@ class Line(Base):
         chart = get_all_options(**kwargs)
 
         xaxis, yaxis = chart['xy_axis']
-        is_stack = "stack_" + str(self._option['_index_flag']) if is_stack else ""
+        is_stack = "stack_" + str(self._option['series_id']) if is_stack else ""
         _area_style = {"normal": chart['area_style']} if is_fill else {}
         self._option.update(xAxis=xaxis, yAxis=yaxis)
         self._option.get('legend')[0].get('data').append(name)
@@ -72,6 +72,6 @@ class Line(Base):
             "areaStyle": _area_style,
             "markPoint": chart['mark_point'],
             "markLine": chart['mark_line'],
-            "indexflag": self._option.get('_index_flag')
+            "seriesId": self._option.get('series_id'),
         })
         self._config_components(**kwargs)

@@ -89,6 +89,6 @@ class Pie(Base):
             "center": [_cmin, _cmax],
             "roseType": rosetype,
             "label": chart['label'],
-            "indexflag": self._option.get('_index_flag')
+            "seriesId": self._option.get('series_id'),
         })
         self._config_components(**kwargs)
