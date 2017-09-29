@@ -26,6 +26,7 @@ class Map(Base):
     def __add(self, name, attr, value,
               is_roam=True,
               maptype='china',
+              show_legend_symbol=True,
               **kwargs):
         """
 
@@ -41,6 +42,9 @@ class Map(Base):
             If either zooming or translating is wanted,
             it can be set to 'scale' or 'move'. Otherwise, set it to be true
             to enable both.
+        :param show_legend_symbol:
+            Show or hide legend symbol in the map. Default to show a red dot.
+            False to hide it.
         :param maptype:
             type of map, it supports
             china、world、...
@@ -61,7 +65,8 @@ class Map(Base):
             "label": chart['label'],
             "mapType": maptype,
             "data": _data,
-            "roam": is_roam
+            "roam": is_roam,
+            "showLegendSymbol": show_legend_symbol
         })
         name_in_pinyin = CITY_NAME_PINYIN_MAP.get(maptype, maptype)
         self._js_dependencies.add(name_in_pinyin)
