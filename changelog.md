@@ -3,7 +3,8 @@
 * ### version 0.2.6（Dev）
 
     * TODO
-
+    #### Added
+    * `show_legend_symbol` 控制地图(map)[红点的显示](https://www.oschina.net/question/1416804_245423).
 
 * ### version 0.2.5 - 2017.9.28（Current）
 
@@ -16,7 +17,7 @@
     * 部分解决 Overlap 和 Grid 不能一起使用的问题（当 Overlap 为多 x 轴或多 y 轴的时候坐标轴索引仍会出现问题）
 
 * ### version 0.2.4 - 2017.9.8
-    
+
     #### Added
     * [issue#148](https://github.com/chenjiandongx/pyecharts/issues/148) 为 Radar.config() 新增 `legend_text_size` 参数
     * [issue#148](https://github.com/chenjiandongx/pyecharts/issues/148) 为 Legend 通用配置项新增 `legend_text_color` 和 `legend_text_font` 参数
@@ -92,7 +93,7 @@
     * Graph 图中新增 `graph_edge_symbol`, `graph_edge_symbolsize` 参数
     * [issue#94](https://github.com/chenjiandongx/pyecharts/issues/94) 提供 pyecharts-snapshot 用于将生成的图片保存为 png 或 pdf 文件，仅静态图片生效。（3D 图和动态图不生效）
     * [issue#98](https://github.com/chenjiandongx/pyecharts/issues/98) 通用配置项中新增 tooltip 模块
-    
+
     #### Changed
     * jupyter-notebook 和本地 render() 现在均采用动态加入 js 依赖文件的方法，生成文件体积大大缩小。
     * 更改通用配置项中的 label 的参数 `formatter` 为 `label_formatter`
@@ -103,9 +104,9 @@
 * ### version 0.1.9.5 - 2017.8.16
 
     #### Added
-    * 为 xyAxis 模块新增下列参数  
-     `xaxis_interval`, `xaxis_name_size`, `xaxis_name_gap`, `xaxis_margin`, `is_xaxislabel_align`  
-     `yaxis_interval`, `yaxis_name_size`, `yaxis_name_gap`, `yaxis_margin`, `is_yaxislabel_align` 
+    * 为 xyAxis 模块新增下列参数
+     `xaxis_interval`, `xaxis_name_size`, `xaxis_name_gap`, `xaxis_margin`, `is_xaxislabel_align`
+     `yaxis_interval`, `yaxis_name_size`, `yaxis_name_gap`, `yaxis_margin`, `is_yaxislabel_align`
     * [issue#86](https://github.com/chenjiandongx/pyecharts/issues/86) 为 3D 图新增参数用于配置坐标轴选项（参见通用配置项中的 axis3D）
     * 修改自定义模块的接口，现自定义模块有以下 4 个类，具体用法参见文档
         * Grid 类：并行显示多张图
@@ -113,7 +114,7 @@
         * Page 类：同一网页按顺序展示多图
         * Timeline 类：提供时间线轮播多张图
     * 新增 Timeline 功能，支持轮播多张图表
-    
+
     #### Changed
     * jupyter notebook 现在也为离线模式，从本地加载项目所需 js 文件。至此 pyecharts 彻底实现本地化运行。速度更快，不再受网速影响。
 
@@ -160,7 +161,7 @@
 * ### version 0.1.9.1 - 2017.7.31
 
     #### Added
-    * 加入 Travis-CI 自动化测试。 
+    * 加入 Travis-CI 自动化测试。
     * [issue#46](https://github.com/chenjiandongx/pyecharts/issues/46) legend 增加 `legend_selectedmode` 参数，图例可以设置为单例或者多例。（参见 Radar 图）
     * visualmap 组件增加 `visual_type` 和 `visual_range_size` 参数。现在支持映射到颜色和图形大小两种方式。（参见 Scatter 图）
 
@@ -180,7 +181,7 @@
 
     #### Added
     * [issue#05](https://github.com/chenjiandongx/pyecharts/issues/5) 新增在 Jupyter Notebook 中展示图表功能。感谢 [@ygw365](https://github.com/ygw365) 提供这部分的代码模板 和 [@muxuezi](https://github.com/muxuezi) 协助对代码进行改进!
-    * 新增对自定义地图的使用说明  
+    * 新增对自定义地图的使用说明
 
 
 * ### version 0.1.7 - 2017.7.26
