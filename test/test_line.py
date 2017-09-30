@@ -72,7 +72,9 @@ def test_line_type():
     import math
     import random
     line = Line("折线图示例")
-    line.add("商家A", attr, [math.log10(random.randint(1, 99999)) for _ in range(6)])
-    line.add("商家B", attr, [math.log10(random.randint(1, 99999999)) for _ in range(6)],
+    line.add("商家A", attr,
+             [math.log10(random.randint(1, 99999)) for _ in range(6)])
+    line.add("商家B", attr,
+             [math.log10(random.randint(1, 99999999)) for _ in range(6)],
              yaxis_type="log")
     line.render()

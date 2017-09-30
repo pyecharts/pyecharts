@@ -13,8 +13,11 @@ def test_page_grid_timeline_overlap():
     v1 = [5, 20, 36, 10, 75, 90]
     v2 = [10, 25, 8, 60, 20, 80]
     bar = Bar("柱状图示例", height=720, width=1200, title_pos="65%")
-    bar.add("商家A", attr, v1, is_stack=True)
-    bar.add("商家B", attr, v2, is_stack=True, legend_pos="80%")
+    bar.add("商家A", attr, v1,
+            is_stack=True)
+    bar.add("商家B", attr, v2,
+            is_stack=True,
+            legend_pos="80%")
     line = Line("折线图示例")
     attr = ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
     line.add("最高气温", attr, [11, 11, 15, 13, 12, 13, 10],

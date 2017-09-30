@@ -213,7 +213,8 @@ def test_grid_inverse_yaxis():
     attr = ['{}天'.format(i) for i in range(1, 31)]
     line_top = Line("折线图示例", width=1200, height=700)
     line_top.add("最高气温", attr, [random.randint(20, 100) for i in range(30)],
-                 mark_point=["max", "min"], mark_line=["average"], legend_pos='38%')
+                 mark_point=["max", "min"], mark_line=["average"],
+                 legend_pos='38%')
     line_bottom = Line()
     line_bottom.add("最低气温", attr, [random.randint(20, 100) for i in range(30)],
                     mark_point=["max", "min"], mark_line=["average"],
@@ -234,7 +235,7 @@ def test_grid_add_overlap():
     v2 = [2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3]
     v3 = [2.0, 2.2, 3.3, 4.5, 6.3, 10.2, 20.3, 23.4, 23.0, 16.5, 12.0, 6.2]
 
-    bar = Bar(width=1200, height=600, title="Overlap+Grid 示例", title_pos="40%")
+    bar = Bar("Overlap+Grid 示例", width=1200, height=600, title_pos="40%")
     bar.add("蒸发量", attr, v1)
     bar.add("降水量", attr, v2, yaxis_formatter=" ml", yaxis_max=250,
             legend_pos="85%", legend_orient="vertical", legend_top="45%")
