@@ -3,6 +3,7 @@
 * ### version 0.2.6（Dev）
 
     #### Added
+    * 为 [文档](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/documentation.md) 新增 [使用技巧](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/documentation.md#使用技巧) 介绍
     * [issue#194] 新增 `is_map_symbol_show` 参数，用于控制 Map 图[红点的显示](https://www.oschina.net/question/1416804_245423)
     * [issue#192] 新增 `label_emphasis_pos`, `label_emphasis_textsize`, `label_emphasis_textcolor` 参数，用于解决 Geo 图 tooltip 不能只显示城市名和数值的问题
     * [issue#132 ]新增图形类型树图
