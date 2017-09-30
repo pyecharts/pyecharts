@@ -28,7 +28,7 @@ def test_echarts_position_in_render_html():
     value = [20, 190, 253, 77, 65]
     attr = ['汕头市', '汕尾市', '揭阳市', '阳江市', '肇庆市']
     map = Map("广东地图示例", width=1200, height=600)
-    map.add("", attr, value, maptype='广东', is_show_mapsymbol=False,
+    map.add("", attr, value, maptype='广东', is_map_symbol_show=False,
             is_visualmap=True, visual_text_color='#000')
     map.render()
     with codecs.open('render.html', 'r', 'utf-8') as f:
