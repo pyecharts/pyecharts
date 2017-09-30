@@ -26,6 +26,7 @@ from pyecharts.charts.sankey import Sankey
 from pyecharts.charts.scatter import Scatter
 from pyecharts.charts.scatter3D import Scatter3D
 from pyecharts.charts.themeriver import ThemeRiver
+from pyecharts.charts.treemap import TreeMap
 from pyecharts.charts.wordcloud import WordCloud
 
 # custom component

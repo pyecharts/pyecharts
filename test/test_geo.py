@@ -203,8 +203,10 @@ def test_geo_china():
               title_pos="center", width=1200, height=600,
               background_color='#404a59')
     attr, value = geo.cast(data)
-    geo.add("", attr, value, visual_range=[0, 200], visual_text_color="#fff",
-            symbol_size=15, is_visualmap=True)
+    geo.add("", attr, value, visual_range=[0, 200],
+            visual_text_color="#fff", is_legend_show=False,
+            symbol_size=15, is_visualmap=True, tooltip_formatter='{b}',
+            label_emphasis_textsize=15, label_emphasis_pos='right')
     assert '"type": "scatter"' in geo._repr_html_()
     assert '"type": "heatmap"' not in geo._repr_html_()
     assert '"type": "effectScatter"' not in geo._repr_html_()
@@ -270,5 +272,6 @@ def test_geo_shantou_city():
               width=1200, height=600, background_color='#404a59')
     attr, value = geo.cast(data)
     geo.add("", attr, value, maptype="汕头", is_visualmap=True,
-            is_legend_show=False)
+            tooltip_formatter='{b}', is_legend_show=False,
+            label_emphasis_textsize=15, label_emphasis_pos='right')
     geo.render()
