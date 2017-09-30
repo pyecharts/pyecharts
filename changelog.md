@@ -4,7 +4,7 @@
 
     * TODO
     #### Added
-    * `show_legend_symbol` 控制地图(map)[红点的显示](https://www.oschina.net/question/1416804_245423).
+    * `is_show_mapsymbol` 控制地图(map)[红点的显示](https://www.oschina.net/question/1416804_245423).
 
 * ### version 0.2.5 - 2017.9.28（Current）
 
