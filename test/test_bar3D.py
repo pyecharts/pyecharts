@@ -41,7 +41,8 @@ def test_bar3d():
     ]
 
     bar3d.add("", X_TIME, Y_WEEK, [[d[1], d[0], d[2]] for d in data],
-              is_visualmap=True, visual_range=[0, 20], visual_range_color=RANGE_COLOR,
+              is_visualmap=True, visual_range=[0, 20],
+              visual_range_color=RANGE_COLOR,
               grid3d_width=200, grid3d_depth=80)
     assert "lambert" not in bar3d._repr_html_()
     bar3d.render()
@@ -49,22 +50,25 @@ def test_bar3d():
     # bar3D shading lambert
     bar3d = Bar3D("3D 柱状图示例", width=1200, height=600)
     bar3d.add("", X_TIME, Y_WEEK, [[d[1], d[0], d[2]] for d in data],
-              is_visualmap=True, visual_range=[0, 20], visual_range_color=RANGE_COLOR,
-              grid3d_width=200, grid3d_depth=80, grid3d_shading='lambert')
+              is_visualmap=True, visual_range=[0, 20],
+              visual_range_color=RANGE_COLOR, grid3d_width=200,
+              grid3d_depth=80, grid3d_shading='lambert')
     assert "lambert" in bar3d._repr_html_()
     bar3d.render()
 
     # bar3D rotate automatically
     bar3d = Bar3D("3D 柱状图示例", width=1200, height=600)
     bar3d.add("", X_TIME, Y_WEEK, [[d[1], d[0], d[2]] for d in data],
-              is_visualmap=True, visual_range=[0, 20], visual_range_color=RANGE_COLOR,
-              grid3d_width=200, grid3d_depth=80, is_grid3d_rotate=True)
+              is_visualmap=True, visual_range=[0, 20],
+              visual_range_color=RANGE_COLOR, grid3d_width=200,
+              grid3d_depth=80, is_grid3d_rotate=True)
     bar3d.render()
 
     # bar3D rotate automatically speedup
     bar3d = Bar3D("3D 柱状图示例", width=1200, height=600)
     bar3d.add("", X_TIME, Y_WEEK, [[d[1], d[0], d[2]] for d in data],
-              is_visualmap=True, visual_range=[0, 20], visual_range_color=RANGE_COLOR,
-              grid3d_width=200, grid3d_depth=80, is_grid3d_rotate=True,
+              is_visualmap=True, visual_range=[0, 20],
+              visual_range_color=RANGE_COLOR, grid3d_width=200,
+              grid3d_depth=80, is_grid3d_rotate=True,
               grid3d_rotate_speed=180)
     bar3d.render()
