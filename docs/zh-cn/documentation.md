@@ -41,12 +41,14 @@ pyecharts 是一个用于生成 Echarts 图表的类库。实际上就是 Echart
     * Scatter（散点图）
     * Scatter3D（3D 散点图）
     * ThemeRiver（主题河流图）
+    * TreeMap（树图）
     * WordCloud（词云图）
 * [用户自定义](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/documentation.md#用户自定义)
     * Grid 类：并行显示多张图
     * Overlap 类：结合不同类型图表叠加画在同张图上
     * Page 类：同一网页按顺序展示多图
     * Timeline 类：提供时间线轮播多张图
+* [使用技巧](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/documentation.md#使用技巧)
 * [集成Flask&Django](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/documentation.md#集成Flask&Django)
 * [更多示例](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/documentation.md#更多示例)
 * [关于项目](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/documentation.md#关于项目)
@@ -109,7 +111,7 @@ Known nbextensions:
       - Validating: OK
 ```
 
-在罕见的情况下，如果你想要 pyecharts 更新所有的脚本文件的话，你可以运行下面的命令：
+在特殊的情况下，如果你想要 pyecharts 更新所有的脚本文件的话，你可以运行下面的命令：
 
 ```shell
 $ git clone https://github.com/chfw/jupyter-echarts.git
@@ -118,7 +120,7 @@ $ jupyter nbextension install echarts --user
 ```
 在下一个画图动作的时候，您的脚本文件会被更新。
 
-下面这个删除命令估计只有参与 pyecharts 开发的同学会用到
+下面这个删除命令估计只有参与 pyecharts 开发者才会用到
 
 ```shell
 $ jupyter nbextension uninstall echarts --user
@@ -368,14 +370,20 @@ cast(seq)
 
 * is_label_show -> bool  
     是否正常显示标签，默认不显示。标签即各点的数据项信息  
-* is_emphasis -> bool  
+* is_label_emphasis -> bool  
     是否高亮显示标签，默认显示。高亮标签即选中数据时显示的信息项。
 * label_pos -> str  
     标签的位置，Bar 图默认为'top'。有'top', 'left', 'right', 'bottom', 'inside','outside'可选
+* label_emphasis_pos -> str  
+    高亮标签的位置，Bar 图默认为'top'。有'top', 'left', 'right', 'bottom', 'inside','outside'可选
 * label_text_color -> str  
     标签字体颜色，默认为 "#000"
+* label_emphasis_textcolor -> str  
+    高亮标签字体颜色，默认为 "#fff"
 * label_text_size -> int  
     标签字体大小，默认为 12
+* label_emphasis_textsize -> int  
+    高亮标签字体大小，默认为 12
 * is_random -> bool  
     是否随机排列颜色列表，默认为 False
 * label_color -> list  
@@ -2230,6 +2238,115 @@ tr.render()
 **Note：** 可以看到，每个数据项中的第三个数值就是该项的种类，而种类可以在 `add()` 第一个参数指定。
 
 
+## TreeMap（树图）
+TreeMap.add() 方法签名
+```python
+add(name, attr, value, shape="circle", word_gap=20, word_size_range=None, rotate_step=45)
+```
+* name -> str  
+    图例名称
+* data -> list  
+    ```
+    树图的数据项是 **一棵树**，每个节点包括`value`, `name`（可选）, `children`（也是树，可选）如下所示
+    [
+        {
+            value: 1212,    # 数值
+            # 子节点
+            children: [
+                {
+                    # 子节点数值
+                    value: 2323,
+                    # 子节点名
+                    name: 'description of this node',
+                    children: [...],
+                },
+                {
+                    value: 4545,
+                    name: 'description of this node',
+                    children: [
+                        {
+                            value: 5656,
+                            name: 'description of this node',
+                            children: [...]
+                        },
+                        ...
+                    ]
+                }
+            ]
+        },
+        ...
+    ]
+    ```
+* treemap_left_depth -> int  
+    leafDepth 表示『展示几层』，层次更深的节点则被隐藏起来。设置了 leafDepth 后，下钻（drill down）功能开启。drill down 功能即点击后才展示子层级。例如，leafDepth 设置为 1，表示展示一层节点。
+* treemap_drilldown_icon -> str  
+    当节点可以下钻时的提示符。只能是字符。默认为 '▶'
+* treemap_visible_min -> int  
+    如果某个节点的矩形的面积，小于这个数值（单位：px平方），这个节点就不显示。
+
+```python
+from pyecharts import TreeMap
+
+data = [
+    {
+        "value": 40,
+        "name": "我是A",
+    },
+    {
+        "value": 180,
+        "name": "我是B",
+        "children": [
+            {
+                "value": 76,
+                "name": "我是B.children",
+                "children": [
+                    {
+                        "value": 12,
+                        "name": "我是B.children.a",
+                    },
+                    {
+                        "value": 28,
+                        "name": "我是B.children.b",
+                    },
+                    {
+                        "value": 20,
+                        "name": "我是B.children.c",
+                    },
+                    {
+                        "value": 16,
+                        "name": "我是B.children.d",
+                    }]
+            }]}
+]
+
+treemap = TreeMap("树图-默认示例", width=1200, height=600)
+treemap.add("演示数据", data, is_label_show=True, label_pos='inside')
+treemap.render()
+```
+![treemap-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/treemap-0.png)
+
+```python
+treemap = TreeMap("树图-下钻示例", width=1200, height=600)
+treemap.add("演示数据", data, is_label_show=True, label_pos='inside',
+            treemap_left_depth=1)
+treemap.render()
+```
+![treemap-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/treemap-1.gif)
+
+```python
+from pyecharts import TreeMap
+
+treemap = TreeMap("树图示例", width=1200, height=600)
+import os
+import json
+with open(os.path.join("..", "json", "treemap.json"), "r", encoding="utf-8") as f:
+        data = json.load(f)
+treemap.add("演示数据", data, is_label_show=True, label_pos='inside')
+treemap.render()
+```
+![treemap-2](https://github.com/chenjiandongx/pyecharts/blob/master/images/treemap-2.gif)
+
+
 ## WordCloud（词云图）
 WordCloud.add() 方法签名
 ```python
@@ -3052,6 +3169,39 @@ timeline.add(overlap_4.chart, '5 月')
 timeline.render()
 ```
 ![timeline-2](https://github.com/chenjiandongx/pyecharts/blob/master/images/timeline-2.gif)
+
+
+# 使用技巧
+
+## 统一风格
+如果想在同一个图或者多个图内保持统一的风格，可以使用以下方式传参
+#### 初始化图时
+```python
+chart_init = {
+    "title_color": "#fff",
+    "title_pos": "center",
+    "width": 1100,
+    "height": 600,
+    "background_color": '#404a59'
+}
+geo = Geo("全国主要城市空气质量", "data from pm2.5", **chart_init)
+```
+
+#### 增加图例时
+```python
+pie = Pie('各类电影中"好片"所占的比例', "数据来着豆瓣", title_pos='center')
+pie_style = {
+    "radius": [18, 24],
+    "label_pos": "center",
+    "is_label_show": True,
+    "label_text_color": None
+}
+pie.add("", ["剧情", ""], [25, 75], center=[10, 30], **pie_style)
+pie.add("", ["奇幻", ""], [24, 76], center=[30, 30], **pie_style)
+pie.add("", ["爱情", ""], [14, 86], center=[50, 30], **pie_style)
+pie.add("", ["惊悚", ""], [11, 89], center=[70, 30], **pie_style)
+```
+这样会使得每个图例都会按照设定的风格
 
 
 # 集成Flask&Django

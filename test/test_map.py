@@ -81,7 +81,7 @@ def test_china_map():
         actual_content = f.read()
         # test register map
         assert "registerMap(\"china\"," in actual_content
-        # fujian province
+        # 福建省
         assert "\u798f\u5efa" in actual_content
-        # shanghai city
+        # 汕头市
         assert "\u4e0a\u6d77" in actual_content
