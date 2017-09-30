@@ -2,9 +2,13 @@
 
 * ### version 0.2.6（Dev）
 
-    * TODO
     #### Added
-    * `is_map_symbol_show` 控制地图(map)[红点的显示](https://www.oschina.net/question/1416804_245423).
+    * [issue#194] 新增 `is_map_symbol_show` 参数，用于控制 Map 图[红点的显示](https://www.oschina.net/question/1416804_245423)
+    * [issue#192] 新增 `label_emphasis_pos`, `label_emphasis_textsize`, `label_emphasis_textcolor` 参数，用于解决 Geo 图 tooltip 不能只显示城市名和数值的问题
+    * [issue#132 ]新增图形类型树图
+    
+    #### Changed
+    * 将 label 通用配置项的 `is_emphasis` 参数更改为 `is_label_emphasis`
 
 * ### version 0.2.5 - 2017.9.28（Current）
 

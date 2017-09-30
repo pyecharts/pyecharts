@@ -164,7 +164,6 @@ class Base(object):
             is_clockwise=None,
             is_convert=None,
             is_datazoom_show=None,
-            is_emphasis=None,
             is_fill=None,
             is_focusnode=None,
             is_grid3d_rotate=None,
@@ -298,7 +297,7 @@ class Base(object):
             zaxis3d_name_gap=None,
             zaxis3d_min=None,
             zaxis3d_max=None,
-            zaxis3d_margin=None, **keywords):
+            zaxis3d_margin=None, **kwargs):
         """ The base class's add() is just to provide a hint option"""
         pass
 
