@@ -17,7 +17,8 @@ def test_map():
 
     # combine with visualMap
     value = [155, 10, 66, 78, 33, 80, 190, 53, 49.6]
-    attr = ["福建", "山东", "北京", "上海", "甘肃", "新疆", "河南", "广西", "西藏"]
+    attr = ["福建", "山东", "北京", "上海", "甘肃",
+            "新疆", "河南", "广西", "西藏"]
     map = Map("Map 结合 VisualMap 示例", width=1200, height=600)
     map.add("", attr, value, maptype='china', is_visualmap=True,
             visual_text_color='#000')
@@ -51,7 +52,8 @@ def test_city_map():
 def test_world_map():
     value = [95.1, 23.2, 43.3, 66.4, 88.5, 0.1]
     attr = [
-        "China", "Canada", "Brazil", "Russia", "United States", "Unknown Country"
+        "China", "Canada", "Brazil", "Russia",
+        "United States", "Unknown Country"
     ]
     map = Map("世界地图示例", width=1200, height=600)
     map.add("", attr, value, maptype="world", is_visualmap=True,
