@@ -26,7 +26,7 @@ class Map(Base):
     def __add(self, name, attr, value,
               is_roam=True,
               maptype='china',
-              is_show_mapsymbol=True,
+              is_map_symbol_show=True,
               **kwargs):
         """
 
@@ -66,7 +66,7 @@ class Map(Base):
             "mapType": maptype,
             "data": _data,
             "roam": is_roam,
-            "showLegendSymbol": is_show_mapsymbol
+            "showLegendSymbol": is_map_symbol_show
         })
         name_in_pinyin = CITY_NAME_PINYIN_MAP.get(maptype, maptype)
         self._js_dependencies.add(name_in_pinyin)

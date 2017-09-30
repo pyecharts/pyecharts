@@ -183,6 +183,7 @@ class Base(object):
             is_stack=None,
             is_step=None,
             is_symbol_show=None,
+            is_map_symbol_show=None,
             is_visualmap=None,
             is_xaxislabel_align=None,
             is_yaxislabel_align=None,
@@ -290,8 +291,8 @@ class Base(object):
             zaxis3d_name_gap=None,
             zaxis3d_min=None,
             zaxis3d_max=None,
-            zaxis3d_margin=None):
-        """ The base class's add() is just to provide a hint option """
+            zaxis3d_margin=None, **keywords):
+        """ The base class's add() is just to provide a hint option"""
         pass
 
     def show_config(self):
