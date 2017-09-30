@@ -4,11 +4,11 @@ from __future__ import unicode_literals
 
 import json
 import codecs
+from test.constants import RANGE_COLOR
 from pyecharts import (
     Bar, Scatter3D, Line, Pie, Map,
     Kline, Radar, WordCloud, Liquid)
 from pyecharts import Page
-from test.constants import RANGE_COLOR
 from nose.tools import eq_
 
 
