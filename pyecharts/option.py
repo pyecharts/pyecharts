@@ -14,12 +14,15 @@ def collectfuncs(func):
 
 @collectfuncs
 def label(type=None,
-          is_emphasis=True,
           is_label_show=False,
+          is_label_emphasis=True,
           label_pos=None,
           label_text_color="#000",
           label_text_size=12,
           label_formatter=None,
+          label_emphasis_pos=None,
+          label_emphasis_textcolor='#fff',
+          label_emphasis_textsize=12,
           **kwargs):
     """ Text label of , to explain some data information about graphic item like value,
         name and so on.In ECharts 3, to make the configuration structure flatter,
@@ -28,7 +31,7 @@ def label(type=None,
 
     :param type:
         Chart type
-    :param is_emphasis:
+    :param is_label_emphasis:
         It specifies whether to show laebl in emphasis status.
     :param is_label_show:
         It specifies whether to show laebl in normal status.
@@ -53,6 +56,12 @@ def label(type=None,
             {a} for series name, {b} for area name, {c} for merging data, {d} for none;
         Pie: charts, gauge charts, funnel charts: {a} for series name,
             {b} for data item name, {c} for data value, {d} for percentage.
+    :param label_emphasis_pos:
+        Label emphasis position.It can be 'top', 'left', 'right', 'bottom', 'inside','outside'
+    :param label_emphasis_textcolor:
+        Label emphasis text color.
+    :param label_emphasis_textsize:
+        Label emphasis font size.
     :param kwargs:
     :return:
     """
@@ -66,7 +75,13 @@ def label(type=None,
                 "color": label_text_color,
                 "fontSize": label_text_size
             }},
-        "emphasis": {"show": is_emphasis}
+        "emphasis": {
+            "show": is_label_emphasis,
+            "position": label_emphasis_pos,
+            "textStyle": {
+                "color": label_emphasis_textcolor,
+                "fontSize": label_emphasis_textsize,
+            }}
     }
 
     if label_formatter is None:
