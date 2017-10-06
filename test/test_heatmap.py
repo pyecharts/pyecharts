@@ -11,5 +11,7 @@ def test_heatmap():
     data = [[i, j, random.randint(0, 50)] for i in range(24) for j in range(7)]
     heatmap = HeatMap("热力图示例")
     heatmap.add("热力图直角坐标系", X_TIME, Y_WEEK, data, is_visualmap=True,
-                visual_text_color="#000", visual_orient='horizontal')
+                visual_text_color="#000", visual_orient='horizontal',
+                xaxis_name='XNAME', yaxis_name='YNAME',
+                yaxis_name_pos='end', yaxis_name_gap=5)
     heatmap.render()
