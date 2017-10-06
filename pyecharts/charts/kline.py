@@ -39,6 +39,10 @@ class Kline(Base):
 
         xaxis, yaxis = chart['xy_axis']
         self._option.update(xAxis=xaxis, yAxis=yaxis)
+        self._option.get('xAxis')[0].update(scale=True)
+        self._option.get('yAxis')[0].update(
+            scale=True, splitArea={"show": True})
+
         self._option.get('legend')[0].get('data').append(name)
 
         self._option.get('series').append({
