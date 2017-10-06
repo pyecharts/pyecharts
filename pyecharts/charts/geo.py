@@ -28,6 +28,7 @@ class Geo(Base):
               geo_normal_color="#323c48",
               geo_emphasis_color="#2a333d",
               geo_cities_coords=None,
+              is_roam=True,
               **kwargs):
         """
 
@@ -74,6 +75,7 @@ class Geo(Base):
         self._option.update(
             geo={
                 "map": maptype,
+                "roam": is_roam,
                 "label": {
                     "emphasis": {
                         "show": True,
