@@ -444,10 +444,7 @@ def xy_axis(type=None,
         _xAxis.update(data=x_axis, type=xaxis_type)
         _yAxis.update(type=yaxis_type)
 
-    if type == "candlestick":
-        _xAxis.update(scale=True)
-        _yAxis.update(scale=True, splitArea={"show": True})
-
+    # 强制分割数值轴，在多 x、y 轴中可以使用强制分割使标刻线对齐
     if xaxis_force_interval is not None:
         _xAxis.update(interval=xaxis_force_interval)
     if yaxis_force_interval is not None:
