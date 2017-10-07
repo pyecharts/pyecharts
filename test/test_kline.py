@@ -52,6 +52,15 @@ def test_kline():
     # kline dataZoom orient 'vertical'
     kline = Kline("K 线图示例")
     kline.add("日K", ["2017/7/{}".format(i + 1) for i in range(31)],
-              v1, mark_point=["max"], is_datazoom_show=True,
-              datazoom_orient='vertical')
+              v1, mark_line=["max"], is_datazoom_show=True,
+              datazoom_orient='vertical',)
+    kline.show_config()
+    kline.render()
+
+    # kline markLine style
+    kline = Kline("K 线图示例")
+    kline.add("日K", ["2017/7/{}".format(i + 1) for i in range(31)],
+              v1, mark_line=["max"], mark_line_symbolsize=0,
+              datazoom_orient='vertical', mark_line_valuedim='close')
+    kline.show_config()
     kline.render()

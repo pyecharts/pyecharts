@@ -42,7 +42,7 @@ class Map(Base):
             If either zooming or translating is wanted,
             it can be set to 'scale' or 'move'. Otherwise, set it to be true
             to enable both.
-        :param is_show_mapsymbol:
+        :param is_map_symbol_show:
             Show or hide legend symbol in the map. Default to show a red dot.
             False to hide it.
         :param maptype:
