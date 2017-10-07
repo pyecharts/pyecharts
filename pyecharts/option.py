@@ -457,6 +457,8 @@ def _mark(data,
           mark_point_symbol='pin',
           mark_point_symbolsize=50,
           mark_point_textcolor='#fff',
+          mark_line_symbolsize=10,
+          mark_line_valuedim=None,
           _is_markline=False,
           **kwargs):
     """
@@ -476,9 +478,15 @@ def _mark(data,
         mark symbol, it can be 'circle', 'rect', 'roundRect', 'triangle',
         'diamond', 'pin', 'arrow'
     :param mark_point_symbolsize:
-        mark symbol size
+        markPoint symbol size
     :param mark_point_textcolor:
         mark point text color
+    :param mark_line_symbolsize:
+        markLine symbol size
+    :param mark_line_valuedim:
+        Works only when type is assigned. It is used to state the dimension used to
+        calculate maximum value or minimum value. It may be the direct name of a
+        dimension, like x, or angle for line charts, or open, or close for candlestick charts.
     :param _is_markline:
         It specifies whether is markline or not.
     :return:
@@ -509,16 +517,25 @@ def _mark(data,
                 elif "average" in d:
                     _type, _name = "average", "mean-Value"
 
-                _marktmp = {"type": _type, "name": _name}
-                if not _is_markline:
+                if _is_markline:
+                    _marktmp = {
+                        "type": _type,
+                        "name": _name,
+                        'valueDim': mark_line_valuedim,
+                    }
+                    if _type:
+                        mark.get("data").append(_marktmp)
+                        mark.update(symbolSize=mark_line_symbolsize)
+                else:
+                    _marktmp = {"type": _type, "name": _name}
                     _marktmp.update(
                         symbol=mark_point_symbol,
                         symbolSize=mark_point_symbolsize,
                         label={"normal": {
                             "textStyle": {"color": mark_point_textcolor}}
                         })
-                if _type:
-                    mark.get("data").append(_marktmp)
+                    if _type:
+                        mark.get("data").append(_marktmp)
     return mark
 
 
@@ -543,7 +560,7 @@ def mark_line(mark_line=None, **kwargs):
     :param kwargs:
     :return:
     """
-    return _mark(mark_line, _is_markline=True)
+    return _mark(mark_line, _is_markline=True, **kwargs)
 
 
 @collectfuncs
