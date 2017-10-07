@@ -214,6 +214,8 @@ class Base(object):
             liquid_color=None,
             maptype=None,
             mark_line=None,
+            mark_line_symbolsize=None,
+            mark_line_valuedim=None,
             mark_point=None,
             mark_point_symbol=None,
             mark_point_symbolsize=None,

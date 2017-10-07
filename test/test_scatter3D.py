@@ -5,6 +5,7 @@ from __future__ import unicode_literals
 from pyecharts import Scatter3D
 from test.constants import RANGE_COLOR
 
+
 def test_scatter3d():
     import random
     data = [

@@ -550,14 +550,18 @@ cast(seq)
     标记点，默认有'min', 'max', 'average'可选。支持自定义标记点，具体使用如下  
     [{"coord": [a1, b1], "name": "first markpoint"}, {"coord": [a2, b2], "name": "second markpoint"}]  
     需自己传入标记点字典，共有两个键值对，'coord' 对应为 x y 轴坐标， 'name' 为标记点名称
-* mark_line -> list  
-    标记线，默认有'min', 'max', 'average'可选
 * mark_point_symbol -> str  
     标记点图形，，默认为'pin'，有'circle', 'rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow'可选
 * mark_point_symbolsize -> int  
     标记点图形大小，默认为 50
 * mark_point_textcolor -> str  
     标记点字体颜色，默认为'#fff'
+* mark_line -> list  
+    标记线，默认有'min', 'max', 'average'可选
+* mark_line_symbolsize -> int  
+    标记线图形大小，默认为 15
+* mark_line_valuedim -> str  
+    指定在哪个维度上指定最大值最小值。这可以是维度的直接名称，Line 时可以是 x、angle 等、Kline 图时可以是 open、close、highest、lowest。
 
 
 **toolbox：设置 `is_more_utils` 为 True 可以提供更多的实用工具按钮。默认只提供『数据视图』和『下载』按钮**
@@ -1268,6 +1272,15 @@ kline.render()
 ```
 ![kline-2](https://github.com/chenjiandongx/pyecharts/blob/master/images/kline-2.gif)
 
+指定 markLine 位于开盘或者收盘上
+```python
+kline = Kline("K 线图示例")
+kline.add("日K", ["2017/7/{}".format(i + 1) for i in range(31)],
+          v1, mark_line=["max"], mark_line_symbolsize=0,
+          datazoom_orient='vertical', mark_line_valuedim='close')
+kline.render()
+```
+![kline-3](https://github.com/chenjiandongx/pyecharts/blob/master/images/kline-3.png)
 
 ## Line（折线/面积图）
 > 折线图是用折线将各个数据点标志连接起来的图表，用于展现数据的变化趋势。
