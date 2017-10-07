@@ -53,6 +53,11 @@ class Geo(Base):
             The color of the map area in emphasis state
         :param geo_cities_coords:
             User define cities coords
+        :param is_roam:
+            Whether to enable mouse zooming and translating. false by default.
+            If either zooming or translating is wanted,
+            it can be set to 'scale' or 'move'. Otherwise, set it to be true
+            to enable both.
         :param kwargs:
         """
         assert len(attr) == len(value)
