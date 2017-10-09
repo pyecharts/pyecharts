@@ -269,6 +269,8 @@ def xy_axis(type=None,
             is_yaxislabel_align=False,
             is_xaxis_boundarygap=True,
             is_yaxis_boundarygap=True,
+            is_xaxis_show=True,
+            is_yaxis_show=True,
             **kwargs):
     """
     :param type:
@@ -388,11 +390,16 @@ def xy_axis(type=None,
         Default value is set to be true, in which case axisTick is served
         only as a separation line, and labels and data appear only in
         the center part of two axis ticks, which is called band.
+    :param is_xaxis_show:
+        It specifies whether to show xAxis
+    :param is_yaxis_show:
+        It specifies whether to show yAxis
     :param kwargs:
     :return:
     """
     _xAxis = {
         "name": xaxis_name,
+        "show": is_xaxis_show,
         "nameLocation": xaxis_name_pos,
         "nameGap": xaxis_name_gap,
         "nameTextStyle": {"fontSize": xaxis_name_size},
@@ -412,6 +419,7 @@ def xy_axis(type=None,
     }
     _yAxis = {
         "name": yaxis_name,
+        "show": is_yaxis_show,
         "nameLocation": yaxis_name_pos,
         "nameGap": yaxis_name_gap,
         "nameTextStyle": {"fontSize": yaxis_name_size},
