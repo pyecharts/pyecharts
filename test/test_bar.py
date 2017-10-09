@@ -97,7 +97,7 @@ def test_bar_datazoom_inside():
     v1 = [random.randint(1, 30) for _ in range(30)]
     bar = Bar("Bar - datazoom - inside 示例")
     bar.add("", attr, v1, is_datazoom_show=True, datazoom_type='inside',
-            datazoom_range=[10, 25])
+            datazoom_range=[10, 25], is_xaxis_show=False, is_yaxis_show=False)
     assert ': "inside"' in bar._repr_html_()
     assert ': "slider"' not in bar._repr_html_()
     bar.render()
