@@ -21,6 +21,7 @@ class Bar(Base):
 
     def __add(self, name, x_axis, y_axis,
               is_stack=False,
+              bar_category_gap="20%",
               **kwargs):
         """
 
@@ -49,6 +50,7 @@ class Bar(Base):
             "name": name,
             "data": y_axis,
             "stack": is_stack,
+            "barCategoryGap": bar_category_gap,
             "label": chart['label'],
             "markPoint": chart['mark_point'],
             "markLine": chart['mark_line'],

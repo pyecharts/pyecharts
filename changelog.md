@@ -4,7 +4,7 @@
 
     #### Added
     * 为 [文档](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/documentation.md) 新增 [使用技巧](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/documentation.md#使用技巧) 介绍
-    * [issue#194](https://github.com/chenjiandongx/pyecharts/issues/194) 新增 `is_map_symbol_show` 参数，用于控制 Map 图[红点的显示](https://www.oschina.net/question/1416804_245423)
+    * [issue#194](https://github.com/chenjiandongx/pyecharts/issues/194) 新增 `is_map_symbol_show` 参数，用于控制 Map 图 [红点的显示](https://www.oschina.net/question/1416804_245423)
     * [issue#192](https://github.com/chenjiandongx/pyecharts/issues/192) 新增 `label_emphasis_pos`, `label_emphasis_textsize`, `label_emphasis_textcolor` 参数，用于解决 Geo 图 tooltip 不能只显示城市名和数值的问题
     * [issue#132](https://github.com/chenjiandongx/pyecharts/issues/132) 新增图形类型树图
     * [issue#181](https://github.com/chenjiandongx/pyecharts/issues/181) 为 Geo 图新增 `is_roam` 参数解决不能缩放和移动的问题
@@ -12,6 +12,8 @@
     
     #### Changed
     * 将 label 通用配置项的 `is_emphasis` 参数更改为 `is_label_emphasis`
+    * [issue#199](https://github.com/chenjiandongx/pyecharts/issues/199)
+    * [issue#199](https://github.com/chenjiandongx/pyecharts/issues/199)
 
     #### Fixed
     * [issue#195](https://github.com/chenjiandongx/pyecharts/issues/195) 修复 HeatMap 图配置 x、y 轴属性无效的问题
