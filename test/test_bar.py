@@ -53,51 +53,52 @@ def test_bar():
     bar.render()
 
 
-def test_bar_datazoom_slider():
-    attr = ["{}月".format(i) for i in range(1, 13)]
-    v1 = [2.0, 4.9, 7.0, 23.2, 25.6, 76.7,
-          135.6, 162.2, 32.6, 20.0, 6.4, 3.3]
-    v2 = [2.6, 5.9, 9.0, 26.4, 28.7, 70.7,
-          175.6, 182.2, 48.7, 18.8, 6.0, 2.3]
-    bar = Bar("柱状图示例")
-    bar.add("蒸发量", attr, v1, mark_line=["average"],
-            mark_point=["max", "min"])
-    bar.add("降水量", attr, v2, mark_line=["average"],
-            mark_point=["max", "min"], is_datazoom_show=True,
-            datazoom_range=[50, 80])
-    assert "dataZoom" in bar._repr_html_()
-    bar.render()
-
+def test_bar_datazoom_undefined():
+    # bar dataZoom undefined-type
     attr = ["{}天".format(i) for i in range(30)]
     v1 = [random.randint(1, 30) for _ in range(30)]
-    bar = Bar("Bar - datazoom - slider 示例")
+    bar = Bar("Bar - datazoom 默认 示例")
     bar.add("", attr, v1, is_label_show=True, is_datazoom_show=True)
-    assert ': "slider"' in bar._repr_html_()
-    assert ': "inside"' not in bar._repr_html_()
-    bar.render()
+    html_content = bar._repr_html_()
+    assert "dataZoom" in html_content
+    assert ': "slider"' in html_content
+    assert ': "inside"' not in html_content
+
+
+def test_bar_datazoom_slider():
+    # bar dataZoom slider-type
+    attr = ["{}天".format(i) for i in range(30)]
+    v1 = [random.randint(1, 30) for _ in range(30)]
+    bar = Bar("Bar - datazoom 默认 示例")
+    bar.add("", attr, v1, is_datazoom_show=True, datazoom_type='slider',
+            datazoom_range=[10, 25])
+    html_content = bar._repr_html_()
+    assert "dataZoom" in html_content
+    assert ': "slider"' in html_content
+    assert ': "inside"' not in html_content
 
 
 def test_bar_datazoom_inside():
     # bar dataZoom inside-type
-    attr = ["{}月".format(i) for i in range(1, 13)]
-    v1 = [2.0, 4.9, 7.0, 23.2, 25.6, 76.7,
-          135.6, 162.2, 32.6, 20.0, 6.4, 3.3]
-    v2 = [2.6, 5.9, 9.0, 26.4, 28.7, 70.7,
-          175.6, 182.2, 48.7, 18.8, 6.0, 2.3]
-    bar = Bar("柱状图示例")
-    bar.add("蒸发量", attr, v1, mark_line=["average"],
-            mark_point=["max", "min"])
-    bar.add("降水量", attr, v2, mark_line=["average"],
-            mark_point=["max", "min"], is_datazoom_show=True,
-            datazoom_range=[20, 60], datazoom_type='inside')
-    assert "dataZoom" in bar._repr_html_()
-    bar.render()
-
     attr = ["{}天".format(i) for i in range(30)]
     v1 = [random.randint(1, 30) for _ in range(30)]
     bar = Bar("Bar - datazoom - inside 示例")
     bar.add("", attr, v1, is_datazoom_show=True, datazoom_type='inside',
-            datazoom_range=[10, 25], is_xaxis_show=False, is_yaxis_show=False)
-    assert ': "inside"' in bar._repr_html_()
-    assert ': "slider"' not in bar._repr_html_()
-    bar.render()
+            datazoom_range=[10, 25])
+    html_content = bar._repr_html_()
+    assert "dataZoom" in html_content
+    assert ': "inside"' in html_content
+    assert ': "slider"' not in html_content
+
+
+def test_bar_datazoom_both():
+    # bar dataZoom both-type
+    attr = ["{}天".format(i) for i in range(30)]
+    v1 = [random.randint(1, 30) for _ in range(30)]
+    bar = Bar("Bar - datazoom - both 示例")
+    bar.add("", attr, v1, is_datazoom_show=True, datazoom_type='both',
+            datazoom_range=[10, 25])
+    html_content = bar._repr_html_()
+    assert "dataZoom" in html_content
+    assert ': "inside"' in html_content
+    assert ': "slider"' in html_content
