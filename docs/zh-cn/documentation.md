@@ -264,6 +264,10 @@ cast(seq)
     x 轴两边留白策略，适用于类目轴。类目轴中 boundaryGap 可以配置为 True 和 False。默认为 True，这时候刻度只是作为分隔线，标签和数据点都会在两个刻度之间的带(band)中间，即两边留白。
 * is_yaxis_boundarygap -> bool  
     y 轴两边留白策略，适用于类目轴。类目轴中 boundaryGap 可以配置为 True 和 False。默认为 True，这时候刻度只是作为分隔线，标签和数据点都会在两个刻度之间的带(band)中间，即两边留白。
+* is_xaxis_show -> bool  
+    是否显示 x 轴
+* is_yaxis_show -> bool  
+    是否显示 y 轴
 * x_axis -> list  
     x 轴数据项
 * xaxis_interval -> int  
@@ -574,7 +578,7 @@ cast(seq)
 
 Bar.add() 方法签名
 ```python
-add(name, x_axis, y_axis, is_stack=False, **kwargs)
+add(name, x_axis, y_axis, is_stack=False, bar_category_gap='20%', **kwargs)
 ```
 * name -> str  
     图例名称
@@ -584,6 +588,8 @@ add(name, x_axis, y_axis, is_stack=False, **kwargs)
     y 坐标轴数据  
 * is_stack -> bool  
     数据堆叠，同个类目轴上系列配置相同的 stack 值可以堆叠放置  
+* bar_category_gap -> int/str   
+    类目轴的柱状距离，当设置为 0 时柱状是紧挨着（直方图类型），默认为 '20%'
 
 ```python
 from pyecharts import Bar
