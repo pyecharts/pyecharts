@@ -340,7 +340,7 @@ dataZoom：dataZoom components for zoom-in and zoom-out. With them, it is possib
     It specifies whether to use the datazoom component.
 * datazoom_type -> str  
     defalut -> 'slider'  
-    datazoom type, 'slider' or 'inside'
+    datazoom type, 'slider', 'inside', or 'both'  
 * datazoom_range -> list  
     defalut -> [50, 100]  
     The range percentage of the window out of the data extent, in the range of 0 ~ 100.
