@@ -1,5 +1,13 @@
 # Developer's Guide
 
+## Pull request instructions
+
+`dev` branch is for the development of each new releases. `master` branch is reserved for released code only. What it means for contributors is:
+please checkout `dev` branch right after you have a clone of pyecharts. Then start your engineering effort. When you are ready, please submit a PR
+against `dev` branch too.
+
+If your PR has code changes, please include unit tests. If possible, please attach a screenshot on your contribution. It helps everyone to see your contribution.
+
 ## Why the folder `pyecharts/templates/js` is empty?
 
 It is because your git did not update the submodule. Please issue the following command:
@@ -20,11 +28,11 @@ git submodule update
 ## How to add more javascript libraries to pyecharts
 
 All javascript libraries are now managed in a [submodule](https://git-scm.com/docs/git-submodule) [jupyter-echarts](https://github.com/chfw/jupyter-echarts). It means
-new javascript library shall go through jupyter-echarts.
+new javascript library shall go through `jupyter-echarts`.
 
 jupyter-echarts is a front-end project. If you are new to front-end engineering, please find the crash course for you in the end.
 
-# Step 1: add the library to jupyter-echarts
+### Step 1: add the library to jupyter-echarts
 
 Checkout the repository:
 
@@ -46,6 +54,17 @@ FILES = [
     './node_modules/echarts/dist/echarts.min.js',
     './node_modules/echarts/map/js/china.js',
     './node_modules/your_library/dist/min_version.js' <---
+...
+FILE_MAP = [
+...
+    'nick_name': 'min_version' // note, please do not put .js suffix
+...
+]
+PROVINCE_PINYIN_MAP = [
+...
+    'chinese location name': 'nick_name', // note nick_name is the same as previous one
+...
+]
 ```
 
 Then run
@@ -57,8 +76,10 @@ $ gulp
 The most important thing is to do git commit. You will need to commit it
 to jupyter-echarts. If you do not have write access, please submit a PR.
 
+If your contribution become large, please reference: echarts-countries-js or
+echarts-china-cities-js.
 
-# Step 2: update pyecharts
+### Step 2: update pyecharts
 
 Once your previous commit is accepted in jupyter-notebooks, you could then
 checkout pyecharts::
@@ -86,7 +107,7 @@ $ git commit -am "pull latest changes from jupyter-echarts
 And then push your changes to pyecharts.
 
 
-## Front end engineering for backend Pythonistas
+## Front end engineering for Pythonistas
 
 In front end engineering field, no one manually downloads a javascript/css file
 and type the script tag into html file. To an extreme, no one writes html, css
