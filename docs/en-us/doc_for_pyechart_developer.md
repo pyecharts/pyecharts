@@ -6,6 +6,8 @@
 please checkout `dev` branch right after you have a clone of pyecharts. Then start your engineering effort. When you are ready, please submit a PR
 against `dev` branch too.
 
+If possible, please attach a screenshot on your contribution. It helps everyone to see your contribution.
+
 ## Why the folder `pyecharts/templates/js` is empty?
 
 It is because your git did not update the submodule. Please issue the following command:
