@@ -15,7 +15,7 @@ def test_funnel():
     funnel.render()
 
     # label_pos 'outside'&legend_orient 'vertical'
-    funnel = Funnel("漏斗图示例", width=600, height=400, title_pos='center')
+    funnel = Funnel("漏斗图示例", title_pos='center')
     funnel.add("商品", attr, value, is_label_show=True, label_pos="outside",
                legend_orient='vertical', legend_pos='left')
     funnel.render()

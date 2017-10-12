@@ -15,23 +15,21 @@ def test_bar():
     bar = Bar("柱状图数据堆叠示例")
     bar.add("商家A", attr, v1, is_stack=True)
     bar.add("商家B", attr, v2, is_stack=True)
-    assert "dataZoom" not in bar._repr_html_()
-    assert "stack_" in bar._repr_html_()
-    bar.render()
+    html_content = bar._repr_html_()
+    assert "dataZoom" not in html_content
+    assert "stack_" in html_content
 
     # bar markPoint&markLine
     bar = Bar("标记线和标记点示例")
     bar.add("商家A", attr, v1, mark_point=["average"])
     bar.add("商家B", attr, v2, mark_line=["min", "max"])
     assert '"average"' in bar._repr_html_()
-    bar.render()
 
     # bar convert xAxis-yAxis
     bar = Bar("x 轴和 y 轴交换")
     bar.add("商家A", attr, v1)
     bar.add("商家B", attr, v2, is_convert=True)
     assert "average" not in bar._repr_html_()
-    bar.render()
 
     # bar rotate label
     attr = ["{}天".format(i) for i in range(20)]
@@ -40,7 +38,6 @@ def test_bar():
     bar.add("", attr, v1, xaxis_interval=0, xaxis_rotate=30,
             yaxis_rotate=30)
     assert "stack_" not in bar._repr_html_()
-    bar.render()
 
     # bar waterfall
     attr = ["{}月".format(i) for i in range(1, 8)]

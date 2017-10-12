@@ -212,10 +212,10 @@ def test_geo_china():
             visual_text_color="#fff", is_legend_show=False,
             symbol_size=15, is_visualmap=True, tooltip_formatter='{b}',
             label_emphasis_textsize=15, label_emphasis_pos='right')
-    assert '"type": "scatter"' in geo._repr_html_()
-    assert '"type": "heatmap"' not in geo._repr_html_()
-    assert '"type": "effectScatter"' not in geo._repr_html_()
-    geo.render()
+    html_content = geo._repr_html_()
+    assert '"type": "scatter"' in html_content
+    assert '"type": "heatmap"' not in html_content
+    assert '"type": "effectScatter"' not in html_content
 
     # geo type 'heatmap'
     geo = Geo("全国主要城市空气质量", "data from pm2.5", **chart_init)
@@ -223,9 +223,9 @@ def test_geo_china():
     geo.add("", attr, value, type="heatmap", is_visualmap=True,
             visual_range=[0, 300], visual_text_color='#fff')
     assert '"type": "heatmap"' in geo._repr_html_()
-    geo.render()
 
-    # geo type 'effectScatter'
+
+def test_geo_type_effectscatter():
     data = [
         ("海门", 9), ("鄂尔多斯", 12), ("招远", 12),
         ("舟山", 12), ("齐齐哈尔", 14), ("盐城", 15)
@@ -235,9 +235,9 @@ def test_geo_china():
     geo.add("", attr, value, type="effectScatter", is_random=True,
             effect_scale=5)
     assert '"type": "effectScatter"' in geo._repr_html_()
-    geo.render()
 
-    # geo_with_noexist_city
+
+def test_geo_with_noexist_city():
     data = [
         ("海门", 9), ("鄂尔多斯", 12), ("招远", 12),
         ("舟山", 12), ("齐齐哈尔", 14), ("伦敦", 15)
