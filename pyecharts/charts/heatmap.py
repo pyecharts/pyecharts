@@ -21,7 +21,7 @@ class HeatMap(Base):
     def add(self, *args, **kwargs):
         self.__add(*args, **kwargs)
 
-    def __add(self, name, x_axis, y_axis, data, **kwargs):
+    def __add(self, *args, **kwargs):
         """
 
         :param name:
@@ -36,15 +36,13 @@ class HeatMap(Base):
         :param kwargs:
         :return:
         """
+        if kwargs.get('is_date_heatmap', None) is True:
+            name, data = args
+        else:
+            name, x_axis, y_axis, data = args
+
         chart = get_all_options(**kwargs)
         self._option.get('legend')[0].get('data').append(name)
-
-        xaxis, yaxis = chart['xy_axis']
-        self._option.update(xAxis=xaxis, yAxis=yaxis)
-        self._option.get('xAxis')[0].update(
-            type='category', data=x_axis, splitArea={"show": True})
-        self._option.get('yAxis')[0].update(
-            type='category', data=y_axis, splitArea={"show": True})
 
         self._option.get('series').append({
             "type": "heatmap",
@@ -53,4 +51,18 @@ class HeatMap(Base):
             "label": chart['label'],
             "seriesId": self._option.get('series_id'),
         })
+
+        if kwargs.get('is_date_heatmap', None) is True:
+            self._option.get('toolbox')['show'] = False
+            self._option.get('series')[0].update(coordinateSystem='calendar',
+                                                 calendarIndex=0)
+            self._option.update(calendar=chart['calendar'])
+        else:
+            xaxis, yaxis = chart['xy_axis']
+            self._option.update(xAxis=xaxis, yAxis=yaxis)
+            self._option.get('xAxis')[0].update(
+                type='category', data=x_axis, splitArea={"show": True})
+            self._option.get('yAxis')[0].update(
+                type='category', data=y_axis, splitArea={"show": True})
+
         self._config_components(**kwargs)
