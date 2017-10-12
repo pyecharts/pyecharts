@@ -53,7 +53,8 @@ def test_treemap():
                 treemap_left_depth=1)
     treemap.render()
 
-    # 官方数据
+
+def test_treemap_big_data():
     treemap = TreeMap("树图示例", width=1200, height=600)
     import os
     import json

@@ -13,7 +13,6 @@ def test_polar():
     polar.add("", data, boundary_gap=False, type='scatter',
               is_splitline_show=False, is_axisline_show=True)
     assert '"type": "scatter"' in polar._repr_html_()
-    polar.render()
 
     # polar type 'scatter'
     data_1 = [(10, random.randint(1, 100)) for i in range(300)]
@@ -29,7 +28,6 @@ def test_polar():
     polar.add("", data, type='effectScatter', effect_scale=10,
               effect_period=5)
     assert '"type": "effectScatter"' in polar._repr_html_()
-    polar.render()
 
     # polar type 'barRadius'
     radius = ['周一', '周二', '周三', '周四', '周五', '周六', '周日']

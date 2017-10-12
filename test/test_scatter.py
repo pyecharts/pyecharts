@@ -12,9 +12,9 @@ def test_scatter_xaxis_type():
     scatter = Scatter("散点图示例")
     scatter.add("A", v1, v2)
     scatter.add("B", v1[::-1], v2)
-    assert '"type": "value"' in scatter._repr_html_()
-    assert '"type": "category"' not in scatter._repr_html_()
-    scatter.render()
+    html_content = scatter._repr_html_()
+    assert '"type": "value"' in html_content
+    assert '"type": "category"' not in html_content
 
     # xAxis type 'category'
     scatter = Scatter("散点图示例")
@@ -22,7 +22,6 @@ def test_scatter_xaxis_type():
     scatter.add("B", ["a", "b", "c", "d", "e", "f"], v1[::-1],
                 xaxis_type="category")
     assert '"type": "category"' in scatter._repr_html_()
-    scatter.render()
 
 
 def test_scatter_visualmap():

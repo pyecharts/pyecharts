@@ -45,7 +45,6 @@ def test_bar3d():
               visual_range_color=RANGE_COLOR,
               grid3d_width=200, grid3d_depth=80)
     assert "lambert" not in bar3d._repr_html_()
-    bar3d.render()
 
     # bar3D shading lambert
     bar3d = Bar3D("3D 柱状图示例", width=1200, height=600)
@@ -54,7 +53,6 @@ def test_bar3d():
               visual_range_color=RANGE_COLOR, grid3d_width=200,
               grid3d_depth=80, grid3d_shading='lambert')
     assert "lambert" in bar3d._repr_html_()
-    bar3d.render()
 
     # bar3D rotate automatically
     bar3d = Bar3D("3D 柱状图示例", width=1200, height=600)

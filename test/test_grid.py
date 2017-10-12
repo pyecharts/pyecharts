@@ -55,8 +55,9 @@ def test_grid_four_direction():
     attr = ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
     line.add("最高气温", attr, [11, 11, 15, 13, 12, 13, 10],
              mark_point=["max", "min"], mark_line=["average"])
-    line.add("最低气温", attr, [1, -2, 2, 5, 3, 2, 0], mark_point=["max", "min"],
-             mark_line=["average"], legend_pos="20%")
+    line.add("最低气温", attr, [1, -2, 2, 5, 3, 2, 0],
+             mark_point=["max", "min"], mark_line=["average"],
+             legend_pos="20%")
     v1 = [5, 20, 36, 10, 75, 90]
     v2 = [10, 25, 8, 60, 20, 80]
     scatter = Scatter("散点图示例", title_top="50%", title_pos="65%")
@@ -78,13 +79,14 @@ def test_grid_line_pie():
     attr = ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
     line.add("最高气温", attr, [11, 11, 15, 13, 12, 13, 10],
              mark_point=["max", "min"], mark_line=["average"])
-    line.add("最低气温", attr, [1, -2, 2, 5, 3, 2, 0], mark_point=["max", "min"],
-             mark_line=["average"], legend_pos="20%")
+    line.add("最低气温", attr, [1, -2, 2, 5, 3, 2, 0],
+             mark_point=["max", "min"], mark_line=["average"],
+             legend_pos="20%")
     attr = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
     v1 = [11, 12, 13, 10, 10, 10]
     pie = Pie("饼图示例", title_pos="55%")
-    pie.add("", attr, v1, radius=[45, 65], center=[65, 50], legend_pos="80%",
-            legend_orient='vertical')
+    pie.add("", attr, v1, radius=[45, 65], center=[65, 50],
+            legend_pos="80%", legend_orient='vertical')
 
     grid = Grid()
     grid.add(line, grid_right="55%")
@@ -97,8 +99,9 @@ def test_grid_line_kline():
     attr = ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
     line.add("最高气温", attr, [11, 11, 15, 13, 12, 13, 10],
              mark_point=["max", "min"], mark_line=["average"])
-    line.add("最低气温", attr, [1, -2, 2, 5, 3, 2, 0], mark_point=["max", "min"],
-             mark_line=["average"], legend_pos="20%")
+    line.add("最低气温", attr, [1, -2, 2, 5, 3, 2, 0],
+             mark_point=["max", "min"], mark_line=["average"],
+             legend_pos="20%")
     v1 = [[2320.26, 2320.26, 2287.3, 2362.94],
           [2300, 2291.3, 2288.26, 2308.38],
           [2295.35, 2346.5, 2295.35, 2345.92],
@@ -164,8 +167,9 @@ def test_grid_multiple_datazoom_index():
     attr = ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
     line.add("最高气温", attr, [11, 11, 15, 13, 12, 13, 10],
              mark_point=["max", "min"], mark_line=["average"])
-    line.add("最低气温", attr, [1, -2, 2, 5, 3, 2, 0], mark_point=["max", "min"],
-             legend_top="50%", mark_line=["average"], is_datazoom_show=True,
+    line.add("最低气温", attr, [1, -2, 2, 5, 3, 2, 0],
+             mark_point=["max", "min"], legend_top="50%",
+             mark_line=["average"], is_datazoom_show=True,
              datazoom_xaxis_index=[0, 1])
 
     v1 = [[2320.26, 2320.26, 2287.3, 2362.94],
