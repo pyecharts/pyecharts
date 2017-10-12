@@ -1133,6 +1133,16 @@ def tooltip(type=None,
     return _tooltip
 
 
+@collectfuncs
+def calendar(date_range=None,
+             cellSize=['auto', 20], **kwargs):
+    _calendar = {
+        "range": date_range,
+        "cellSize": cellSize
+    }
+    return _calendar
+
+
 def get_all_options(**kwargs):
     """ Return all component options of charts
 
