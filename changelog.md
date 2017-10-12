@@ -9,11 +9,11 @@
     * [issue#132](https://github.com/chenjiandongx/pyecharts/issues/132) 新增图形类型树图
     * [issue#181](https://github.com/chenjiandongx/pyecharts/issues/181) 为 Geo 图新增 `is_roam` 参数解决不能缩放和移动的问题
     * [issue#199](https://github.com/chenjiandongx/pyecharts/issues/199) 为 markLine 新增 `mark_line_symbolsize` 和 `mark_line_valuedim` 参数，解决不能指定维度以及标记大小不能调整的问题
+    * [issue#200](https://github.com/chenjiandongx/pyecharts/issues/200) 为 xyAxis 通用配置项新增 `is_xaxis_show` 和 `is_yaxis_show` 参数，（控制是否显示 x 轴或 y 轴）解决设计可编辑文本的问题
+    * [issue#201](https://github.com/chenjiandongx/pyecharts/issues/201) 为 Bar 图新增 `bar_category_gap` 参数，提供绘制直方图的方案
     
     #### Changed
     * 将 label 通用配置项的 `is_emphasis` 参数更改为 `is_label_emphasis`
-    * [issue#199](https://github.com/chenjiandongx/pyecharts/issues/199)
-    * [issue#199](https://github.com/chenjiandongx/pyecharts/issues/199)
 
     #### Fixed
     * [issue#195](https://github.com/chenjiandongx/pyecharts/issues/195) 修复 HeatMap 图配置 x、y 轴属性无效的问题
