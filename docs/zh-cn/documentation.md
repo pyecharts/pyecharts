@@ -339,7 +339,7 @@ cast(seq)
 * is_datazoom_show -> bool  
     是否使用区域缩放组件，默认为 False
 * datazoom_type -> str    
-    区域缩放组件类型，默认为'slider'，有'slider', 'inside'可选
+    区域缩放组件类型，默认为'slider'，有'slider', 'inside', 'both'可选
 * datazoom_range -> list    
     区域缩放的范围，默认为[50, 100]
 * datazoom_orient -> str  
