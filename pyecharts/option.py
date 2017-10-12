@@ -724,7 +724,8 @@ def visual_map(visual_type='color',
         "dimension": visual_dimension,
         "orient": visual_orient,
         "left": visual_pos,
-        "top": visual_top
+        "top": visual_top,
+        "showLabel": True,
     }
     return _visual_map
 
@@ -1134,11 +1135,36 @@ def tooltip(type=None,
 
 
 @collectfuncs
-def calendar(date_range=None,
-             cellSize=['auto', 20], **kwargs):
+def calendar(calendar_date_range=None,
+             calendar_cell_size=None,
+             **kwargs):
+    """
+
+    :param calendar_date_range:
+        Required, range of Calendar coordinates, support multiple formats.
+        Examples:
+            # one year
+                range: 2017
+            # one month
+                range: '2017-02'
+            # a range
+                range: ['2017-01-02', '2017-02-23']
+            # note: they will be identified as ['2017-01-01', '2017-02-01']
+                range: ['2017-01', '2017-02']
+    :param calendar_cell_size:
+        The size of each rect of calendar coordinates, can be set to a single
+        value or array, the first element is width and the second element
+        is height.Support setting self-adaptation: "auto"
+    :param kwargs:
+    :return:
+    """
+
+    if calendar_cell_size is None:
+        calendar_cell_size = ['auto', 20]
+
     _calendar = {
-        "range": date_range,
-        "cellSize": cellSize
+        "range": calendar_date_range,
+        "cellSize": calendar_cell_size
     }
     return _calendar
 
