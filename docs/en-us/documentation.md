@@ -340,7 +340,7 @@ dataZoom：dataZoom components for zoom-in and zoom-out. With them, it is possib
     It specifies whether to use the datazoom component.
 * datazoom_type -> str  
     defalut -> 'slider'  
-    datazoom type, 'slider' or 'inside'
+    datazoom type, 'slider', 'inside', or 'both'  
 * datazoom_range -> list  
     defalut -> [50, 100]  
     The range percentage of the window out of the data extent, in the range of 0 ~ 100.
@@ -1028,6 +1028,12 @@ add(name, x_axis, y_axis, data, **kwargs)
     data of yAxis, it must be catagory axis.
 * data -> [[],[]]  
     data array of series, it is represented by a two-dimension array
+* is_date_heatmap -> bool  
+    default -> False
+    Whether it is a date heatmap
+* date_range -> str/list  
+    date range of date heatmap, "2016" is year 2016, ["2016-5-5", "2017-5-5"] is 2016/5/5-2017/5/5  
+
 ```python
 import random
 from pyecharts import HeatMap
@@ -1043,6 +1049,23 @@ heatmap.show_config()
 heatmap.render()
 ```
 ![heatmap-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/heatmap-0.gif)
+
+```python
+import datetime
+import random
+from pyecharts import HeatMap
+
+begin = datetime.date(2017, 1, 1)
+end = datetime.date(2017, 12, 31)
+data = [[str(begin + datetime.timedelta(days=i)),
+        random.randint(0, 100)] for i in range((end - begin).days+1)]
+heatmap = HeatMap("日历热力图示例")
+heatmap.add("日历热力图", data, date_range=["2017"], is_visualmap=True,
+            is_legend_show=False, is_date_heatmap=True, visual_orient="horizontal",
+            visual_pos="center", visual_top="top")
+heatmap.render()
+```
+![heatmap-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/heatmap-1.gif)
 
 **Tip：** Thermodynamic chart have to cooperate with VisualMap in use.
 
