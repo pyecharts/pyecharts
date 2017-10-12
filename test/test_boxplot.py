@@ -5,8 +5,7 @@ from __future__ import unicode_literals
 from pyecharts import Boxplot
 
 
-def test_boxplot():
-    # boxPlot default
+def test_boxplot_one_legend():
     boxplot = Boxplot("箱形图")
     x_axis = ['expr1', 'expr2', 'expr3', 'expr4', 'expr5']
     y_axis = [
@@ -25,7 +24,8 @@ def test_boxplot():
     boxplot.add("boxplot", x_axis, _yaxis)
     boxplot.render()
 
-    # boxPlot two category
+
+def test_boxplot_two_legend():
     boxplot = Boxplot("箱形图")
     x_axis = ['expr1', 'expr2']
     y_axis1 = [
@@ -42,6 +42,6 @@ def test_boxplot():
     ]
     boxplot.add("category1", x_axis, boxplot.prepare_data(y_axis1))
     boxplot.add("category2", x_axis, boxplot.prepare_data(y_axis2))
-    assert "category1" in boxplot._repr_html_()
-    assert "category2" in boxplot._repr_html_()
-    boxplot.render()
+    html_content = boxplot._repr_html_()
+    assert "category1" in html_content
+    assert "category2" in html_content

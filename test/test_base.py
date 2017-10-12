@@ -93,7 +93,6 @@ def test_pandas_dataframe():
     bar.add('loss', _index, dtvalue2)
     html = bar.render_embed()
     assert title in html
-    bar.render()
 
 
 def test_echarts_position_in_render_html():
