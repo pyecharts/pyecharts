@@ -14,7 +14,6 @@ def test_pie():
     pie.render()
 
     # pie legend_orient 'vertical'&legend_pos 'left'
-    attr = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
     v1 = [11, 12, 13, 10, 10, 10]
     pie = Pie("饼图-圆环图示例", title_pos='center')
     pie.add("", attr, v1, radius=[40, 75], label_text_color=None,
@@ -22,7 +21,6 @@ def test_pie():
     pie.render()
 
     # pie rose type
-    attr = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
     v1 = [11, 12, 13, 10, 10, 10]
     v2 = [19, 21, 32, 20, 20, 33]
     pie = Pie("饼图-玫瑰图示例", title_pos='center', width=900)
@@ -41,7 +39,8 @@ def test_pie():
             legend_orient='vertical', legend_pos='left')
     pie.render()
 
-    # pie multiple
+
+def test_pie_multiple():
     import random
     attr = ['A', 'B', 'C', 'D', 'E', 'F']
     pie = Pie("饼图示例", width=1000, height=600)
