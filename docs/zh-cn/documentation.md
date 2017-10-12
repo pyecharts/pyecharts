@@ -1203,6 +1203,11 @@ add(name, x_axis, y_axis, data, **kwargs)
     y 坐标轴数据。需为类目轴，也就是不能是数值。
 * data -> [list],包含列表的列表    
     数据项，数据中，每一行是一个『数据项』，每一列属于一个『维度』
+* is_date_heatmap -> bool  
+    是否是日历热力图，默认为 False
+* date_range -> str/list  
+    日历热力图的日期, "2016"表示2016年, ["2016-5-5", "2017-5-5"]表示2016年5月5日至2017年5月5日  
+
 ```python
 import random
 from pyecharts import HeatMap
@@ -1217,6 +1222,23 @@ heatmap.add("热力图直角坐标系", x_axis, y_axis, data, is_visualmap=True,
 heatmap.render()
 ```
 ![heatmap-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/heatmap-0.gif)
+
+```python
+import datetime
+import random
+from pyecharts import HeatMap
+
+begin = datetime.date(2017, 1, 1)
+end = datetime.date(2017, 12, 31)
+data = [[str(begin + datetime.timedelta(days=i)),
+        random.randint(0, 100)] for i in range((end - begin).days+1)]
+heatmap = HeatMap("日历热力图示例")
+heatmap.add("日历热力图", data, date_range=["2017"], is_visualmap=True,
+            is_legend_show=False, is_date_heatmap=True, visual_orient="horizontal",
+            visual_pos="center", visual_top="top")
+heatmap.render()
+```
+![heatmap-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/heatmap-1.gif)
 
 **Note：** 热力图必须配合 [通用配置项](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/documentation.md#通用配置项) 中的 VisualMap 使用才有效果。
 
