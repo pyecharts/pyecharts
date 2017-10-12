@@ -24,19 +24,28 @@ class HeatMap(Base):
     def __add(self, *args, **kwargs):
         """
 
-        :param name:
-            Series name used for displaying in tooltip and filtering with legend,
-            or updating data and configuration with setOption.
-        :param x_axis:
-            data of xAxis, it must be catagory axis.
-        :param y_axis:
-            data of yAxis, it must be catagory axis.
-        :param data:
-            data array of series, it is represented by a two-dimension array -> [[],[]]
+        :param args:
+            if kwargs has is_calendar_heatmap property:
+                :param name:
+                    Series name used for displaying in tooltip and filtering with legend,
+                    or updating data and configuration with setOption.
+                :param data:
+                    data array of series, it is represented by a two-dimension array -> [[],[]]
+            else:
+                :param name:
+                    Series name used for displaying in tooltip and filtering with legend,
+                    or updating data and configuration with setOption.
+                :param x_axis:
+                    data of xAxis, it must be catagory axis.
+                :param y_axis:
+                    data of yAxis, it must be catagory axis.
+                :param data:
+                    data array of series, it is represented by a two-dimension array -> [[],[]]
         :param kwargs:
         :return:
         """
-        if kwargs.get('is_date_heatmap', None) is True:
+        _is_calendar = kwargs.get('is_calendar_heatmap', None) is True
+        if _is_calendar:
             name, data = args
         else:
             name, x_axis, y_axis, data = args
@@ -52,10 +61,9 @@ class HeatMap(Base):
             "seriesId": self._option.get('series_id'),
         })
 
-        if kwargs.get('is_date_heatmap', None) is True:
+        if _is_calendar:
             self._option.get('toolbox')['show'] = False
-            self._option.get('series')[0].update(coordinateSystem='calendar',
-                                                 calendarIndex=0)
+            self._option.get('series')[0].update(coordinateSystem='calendar')
             self._option.update(calendar=chart['calendar'])
         else:
             xaxis, yaxis = chart['xy_axis']

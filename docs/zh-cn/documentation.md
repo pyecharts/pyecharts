@@ -690,7 +690,7 @@ add(name, x_axis, y_axis, data, grid3d_opacity=1, grid3d_shading='color', **kwar
     x 坐标轴数据。需为类目轴，也就是不能是数值。
 * y_axis -> str  
     y 坐标轴数据。需为类目轴，也就是不能是数值。
-* data -> [list],包含列表的列表  
+* data -> [list], 包含列表的列表  
     数据项，数据中，每一行是一个『数据项』，每一列属于一个『维度』
 * grid3d_opacity -> int  
     3D 笛卡尔坐标系组的透明度（柱状的透明度），默认为 1，完全不透明。
@@ -791,7 +791,7 @@ add(name, x_axis, y_axis, **kwargs)
     图例名称
 * x_axis -> list  
     x 坐标轴数据
-* y_axis -> [list],包含列表的列表   
+* y_axis -> [list], 包含列表的列表   
     y 坐标轴数据，二维数组的每一数组项（上例中的每行）是渲染一个 box，它含有五个量值，依次是：  
     [min,  Q1,  median (or Q2),  Q3,  max]
 
@@ -1193,21 +1193,29 @@ graph.render()
 
 HeatMap.add() 方法签名
 ```python
-add(name, x_axis, y_axis, data, **kwargs)
+add(*args, **kwargs)
 ```
+如果指定了 `is_calendar_heatmap`（使用日历热力图）为 True，则参数为
+* name -> str  
+    图例名称
+* data -> [list], 包含列表的列表  
+    数据项，数据中，每一行是一个『数据项』，每一列属于一个『维度』
+* calendar_date_range -> str/list  
+    日历热力图的日期, "2016" 表示 2016 年, ["2016-5-5", "2017-5-5"] 表示 2016 年 5 月 5 日至 2017 年 5 月 5 日  
+* calendar_cell_size -> list  
+    日历每格框的大小，可设置单值 或数组 第一个元素是宽 第二个元素是高，支持设置自适应 "auto"。默认为 ["auto", 20]
+
+默认为不指定，参数为
 * name -> str  
     图例名称
 * x_axis -> str  
     x 坐标轴数据。需为类目轴，也就是不能是数值。
 * y_axis -> str  
     y 坐标轴数据。需为类目轴，也就是不能是数值。
-* data -> [list],包含列表的列表    
+* data -> [list], 包含列表的列表  
     数据项，数据中，每一行是一个『数据项』，每一列属于一个『维度』
-* is_date_heatmap -> bool  
-    是否是日历热力图，默认为 False
-* date_range -> str/list  
-    日历热力图的日期, "2016"表示2016年, ["2016-5-5", "2017-5-5"]表示2016年5月5日至2017年5月5日  
 
+默认情况，不指定 `is_calendar_heatmap`
 ```python
 import random
 from pyecharts import HeatMap
@@ -1223,6 +1231,7 @@ heatmap.render()
 ```
 ![heatmap-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/heatmap-0.gif)
 
+使用日历热力图，指定 `is_calendar_heatmap` 为 True
 ```python
 import datetime
 import random
@@ -1231,14 +1240,17 @@ from pyecharts import HeatMap
 begin = datetime.date(2017, 1, 1)
 end = datetime.date(2017, 12, 31)
 data = [[str(begin + datetime.timedelta(days=i)),
-        random.randint(0, 100)] for i in range((end - begin).days+1)]
-heatmap = HeatMap("日历热力图示例")
-heatmap.add("日历热力图", data, date_range=["2017"], is_visualmap=True,
-            is_legend_show=False, is_date_heatmap=True, visual_orient="horizontal",
-            visual_pos="center", visual_top="top")
+        random.randint(1000, 25000)] for i in range((end - begin).days + 1)]
+heatmap = HeatMap("日历热力图示例", "某人 2017 年微信步数情况", width=1100)
+heatmap.add("", data, is_calendar_heatmap=True,
+            visual_text_color='#000', visual_range_text=['', ''],
+            visual_range=[1000, 25000], calendar_cell_size=['auto', 30],
+            is_visualmap=True, calendar_date_range="2017",
+            visual_orient="horizontal", visual_pos="center",
+            visual_top="80%", is_piecewise=True)
 heatmap.render()
 ```
-![heatmap-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/heatmap-1.gif)
+![heatmap-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/heatmap-1.gif)
 
 **Note：** 热力图必须配合 [通用配置项](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/documentation.md#通用配置项) 中的 VisualMap 使用才有效果。
 
@@ -1254,7 +1266,7 @@ add(name, x_axis, y_axis, **kwargs)
     图例名称
 * x_axis -> list  
     x 坐标轴数据
-* y_axis -> [list],包含列表的列表   
+* y_axis -> [list], 包含列表的列表   
     y 坐标轴数据。数据中，每一行是一个『数据项』，每一列属于一个『维度』。
     数据项具体为 [open, close, lowest, highest] （即：[开盘值, 收盘值, 最低值, 最高值]）
 ```python
@@ -1423,7 +1435,7 @@ add(name, data, grid3d_opacity=1, **kwargs)
 ```
 * name -> str  
     图例名称
-* data -> [list],包含列表的列表  
+* data -> [list], 包含列表的列表  
     数据项，数据中，每一行是一个『数据项』，每一列属于一个『维度』
 * grid3d_opacity -> int  
     3D 笛卡尔坐标系组的透明度（线的透明度），默认为 1，完全不透明。
@@ -1607,7 +1619,7 @@ add(name, data, **kwargs)
 ```
 * name -> str
     图例名称
-* data -> [list],包含列表的列表  
+* data -> [list], 包含列表的列表  
     数据项。数据中，每一行是一个『数据项』，每一列属于一个『维度』
 
 Parallel.config() 方法签名
@@ -1771,7 +1783,7 @@ add(name, data, angle_data=None, radius_data=None, type='line', symbol_size=4, s
 ```
 * name -> str  
     图例名称
-* data -> [list],包含列表的列表  
+* data -> [list], 包含列表的列表  
     数据项 [极径，极角 [数据值]]
 * angle_data -> list  
     角度类目数据
@@ -1881,7 +1893,7 @@ add(name, value, item_color=None, **kwargs)
 ```
 * name -> list  
     图例名称
-* value -> [list],包含列表的列表 
+* value -> [list], 包含列表的列表 
     数据项。数据中，每一行是一个『数据项』，每一列属于一个『维度』
 * item_color -> str  
     指定单图例颜色
@@ -2195,7 +2207,7 @@ add(name, data, grid3d_opacity=1, **kwargs)
 ```
 * name -> str  
     图例名称
-* data -> [list],包含列表的列表  
+* data -> [list], 包含列表的列表  
     数据项，数据中，每一行是一个『数据项』，每一列属于一个『维度』
 * grid3d_opacity -> int  
     3D 笛卡尔坐标系组的透明度（点的透明度），默认为 1，完全不透明。
@@ -2227,7 +2239,7 @@ add(name, data)
 ```
 * name -> list  
     图例名称，必须为 list 类型，list 中每个值为数据项中的种类。
-* data -> [list],包含列表的列表  
+* data -> [list], 包含列表的列表  
     数据项，数据中，每一行是一个『数据项』，每一列属于一个『维度』。每个数据项至少需要三个维度，如 ['2015/11/08', 10, 'DQ']，分别为 [时间，数值，种类（图例名）]
 
 ```python
