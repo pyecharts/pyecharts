@@ -102,15 +102,15 @@ def test_radar_user_define_schema():
     radar.add("北京", value_bj, item_color="#f9713c", symbol=None)
     radar.add("上海", value_sh, item_color="#b3e4a1", symbol=None,
               legend_selectedmode='single')
-    assert 'single' in radar._repr_html_()
-    assert 'multiple' not in radar._repr_html_()
-    radar.render()
+    html_content = radar._repr_html_()
+    assert 'single' in html_content
+    assert 'multiple' not in html_content
 
     # legend selected mode 'single'
     radar = Radar("雷达图示例")
     radar.config(c_schema=c_schema, shape='circle')
     radar.add("北京", value_bj, item_color="#f9713c", symbol=None)
     radar.add("上海", value_sh, item_color="#b3e4a1", symbol=None)
-    assert 'multiple' in radar._repr_html_()
-    assert 'single' not in radar._repr_html_()
-    radar.render()
+    html_content = radar._repr_html_()
+    assert 'multiple' in html_content
+    assert 'single' not in html_content

@@ -20,10 +20,8 @@ def test_wordcloud():
     wordcloud = WordCloud(width=1300, height=620)
     wordcloud.add("", name, value, word_size_range=[30, 100], rotate_step=66)
     assert "diamond" not in wordcloud._repr_html_()
-    wordcloud.render()
 
     # wordCloud shape diamond
     wordcloud = WordCloud(width=1300, height=620)
     wordcloud.add("", name, value, word_size_range=[30, 100], shape='diamond')
     assert "diamond" in wordcloud._repr_html_()
-    wordcloud.render()

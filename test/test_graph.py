@@ -26,7 +26,6 @@ def test_graph():
             links.append({"source": i.get('name'), "target": j.get('name')})
     graph = Graph("关系图-力引导布局示例")
     graph.add("", nodes, links, repulsion=8000, line_color='#aaa')
-    graph.show_config()
     graph.render()
 
     # graph circular layout
@@ -46,6 +45,7 @@ def test_graph():
             j = json.load(f)
     nodes, links, categories, cont, mid, _ = j
     graph = Graph("微博转发关系图", width=1200, height=600)
-    graph.add("", nodes, links, categories, label_pos="right", graph_repulsion=50,
-              is_legend_show=False, line_curve=0.2, label_text_color=None)
+    graph.add("", nodes, links, categories, label_pos="right",
+              graph_repulsion=50, is_legend_show=False,
+              line_curve=0.2, label_text_color=None)
     graph.render()

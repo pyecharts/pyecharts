@@ -22,8 +22,9 @@ def test_page_grid_timeline_overlap():
     attr = ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
     line.add("最高气温", attr, [11, 11, 15, 13, 12, 13, 10],
              mark_point=["max", "min"], mark_line=["average"])
-    line.add("最低气温", attr, [1, -2, 2, 5, 3, 2, 0], mark_point=["max", "min"],
-             mark_line=["average"], legend_pos="20%")
+    line.add("最低气温", attr, [1, -2, 2, 5, 3, 2, 0],
+             mark_point=["max", "min"], mark_line=["average"],
+             legend_pos="20%")
     v1 = [5, 20, 36, 10, 75, 90]
     v2 = [10, 25, 8, 60, 20, 80]
     scatter = Scatter("散点图示例", title_top="50%", title_pos="65%")
