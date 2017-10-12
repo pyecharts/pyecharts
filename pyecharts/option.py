@@ -795,7 +795,7 @@ def datazoom(is_datazoom_show=False,
     :param is_datazoom_show:
         It specifies whether to use the datazoom component.
     :param datazoom_type:
-        datazoom type, 'slider' or 'inside'
+        datazoom type, 'slider', 'inside', or 'both'
     :param datazoom_range:
         The range percentage of the window out of the data extent,in
         the range of 0 ~ 100.
@@ -816,18 +816,24 @@ def datazoom(is_datazoom_show=False,
     if datazoom_range:
         if len(datazoom_range) == 2:
             _min, _max = datazoom_range
-    if datazoom_type not in ("slider", "inside"):
+    if datazoom_type not in ("slider", "inside", "both"):
         datazoom_type = "slider"
-    _datazoom = {
+    _datazoom = []
+    _datazoom_config = {
         "show": is_datazoom_show,
-        "type": datazoom_type,
+        "type": "slider",
         "start": _min,
         "end": _max,
         "orient": datazoom_orient,
         "xAxisIndex": datazoom_xaxis_index,
         "yAxisIndex": datazoom_yaxis_index
     }
-    return [_datazoom]
+    if datazoom_type == "both":
+        _datazoom.append(_datazoom_config.copy())
+        datazoom_type = 'inside'
+    _datazoom_config['type'] = datazoom_type
+    _datazoom.append(_datazoom_config)
+    return _datazoom
 
 
 @collectfuncs
@@ -1125,6 +1131,16 @@ def tooltip(type=None,
         }
     }
     return _tooltip
+
+
+@collectfuncs
+def calendar(date_range=None,
+             cellSize=['auto', 20], **kwargs):
+    _calendar = {
+        "range": date_range,
+        "cellSize": cellSize
+    }
+    return _calendar
 
 
 def get_all_options(**kwargs):
