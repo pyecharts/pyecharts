@@ -98,3 +98,11 @@ class Page(object):
             dependencies.remove('echarts')
             dependencies = ['echarts'] + list(dependencies)
         return dependencies
+
+    @property
+    def charts(self):
+        return self.__charts
+
+    @property
+    def js_dependencies(self):
+        return self._merge_dependencies()
