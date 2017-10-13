@@ -20,8 +20,9 @@ def test_grid_top_bottom():
     attr = ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
     line.add("最高气温", attr, [11, 11, 15, 13, 12, 13, 10],
              mark_point=["max", "min"], mark_line=["average"])
-    line.add("最低气温", attr, [1, -2, 2, 5, 3, 2, 0], mark_point=["max", "min"],
-             mark_line=["average"], legend_top="50%")
+    line.add("最低气温", attr, [1, -2, 2, 5, 3, 2, 0],
+             mark_point=["max", "min"], mark_line=["average"],
+             legend_top="50%")
 
     grid = Grid()
     grid.add(bar, grid_bottom="60%")
@@ -144,7 +145,8 @@ def test_grid_line_kline():
 
 
 def test_grid_heatmap_bar():
-    data = [[i, j, random.randint(0, 50)] for i in range(24) for j in range(7)]
+    data = [[i, j, random.randint(0, 50)]
+            for i in range(24) for j in range(7)]
     heatmap = HeatMap("热力图示例", height=700)
     heatmap.add("热力图直角坐标系", X_TIME, Y_WEEK, data, is_visualmap=True,
                 visual_top="45%", visual_text_color="#000",

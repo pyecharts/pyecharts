@@ -7,7 +7,7 @@ import codecs
 from pyecharts import Map
 
 
-def test_map():
+def test_map_show_label():
     # show label
     value = [155, 10, 66, 78]
     attr = ["福建", "山东", "北京", "上海"]
@@ -15,7 +15,8 @@ def test_map():
     map.add("", attr, value, maptype='china', is_label_show=True)
     map.render()
 
-    # combine with visualMap
+
+def test_map_combine_with_visualmap():
     value = [155, 10, 66, 78, 33, 80, 190, 53, 49.6]
     attr = ["福建", "山东", "北京", "上海", "甘肃",
             "新疆", "河南", "广西", "西藏"]
