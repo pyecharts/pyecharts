@@ -129,12 +129,28 @@ class Grid(object):
         return self._chart
 
     @property
+    def chart_id(self):
+        """
+
+        :return:
+        """
+        return self._chart._chart_id
+
+    @property
     def options(self):
         """
 
         :return:
         """
         return self._chart._option
+
+    @property
+    def js_dependencies(self):
+        """
+
+        :return:
+        """
+        return self._js_dependencies
 
     def _repr_html_(self):
         """
