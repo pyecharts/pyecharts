@@ -13,9 +13,10 @@
     * [issue#201](https://github.com/chenjiandongx/pyecharts/issues/201) 为 Bar 图新增 `bar_category_gap` 参数，提供绘制直方图的方案
     * [issue#208](https://github.com/chenjiandongx/pyecharts/issues/208) 为 dataZoom 通用配置项 `datazoom_type` 新增类型 'both'（同时拥有 'slider' 以及 'inside')
     * [issue#208](https://github.com/chenjiandongx/pyecharts/issues/208) 为 HeatMap 图新增 **日历热力图**
-    
+
     #### Changed
     * 将 label 通用配置项的 `is_emphasis` 参数更改为 `is_label_emphasis`
+	* show_config() 修改用JSON显示
 
     #### Fixed
     * [issue#195](https://github.com/chenjiandongx/pyecharts/issues/195) 修复 HeatMap 图配置 x、y 轴属性无效的问题
