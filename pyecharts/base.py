@@ -5,7 +5,6 @@ import json
 import uuid
 import random
 import datetime
-from pprint import pprint
 
 from pyecharts.option import get_all_options
 from pyecharts import template
@@ -311,7 +310,7 @@ class Base(object):
 
     def show_config(self):
         """ Print all options of charts"""
-        pprint(self._option)
+        print(json_dumps(self._option, indent=4))
 
     @property
     def options(self):
