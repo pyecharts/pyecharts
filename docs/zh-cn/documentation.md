@@ -647,6 +647,17 @@ bar.render()
 ```
 ![bar-5](https://github.com/chenjiandongx/pyecharts/blob/master/images/bar-5.gif)  
 
+'both' 类型
+```python
+attr = ["{}天".format(i) for i in range(30)]
+v1 = [random.randint(1, 30) for _ in range(30)]
+bar = Bar("Bar - datazoom - inside 示例")
+bar.add("", attr, v1, is_datazoom_show=True, datazoom_type='both', datazoom_range=[10, 25])
+bar.render()
+```
+![bar-8](https://github.com/chenjiandongx/pyecharts/blob/master/images/bar-8.gif) 
+
+
 **Note：** datazoom 适合所有平面直角坐标系图形，也就是(Line、Bar、Scatter、EffectScatter、Kline)  
 
 当 x 轴或者 y 轴的标签因为过于密集而导致全部显示出来会重叠的话，可采用使标签旋转的方法。

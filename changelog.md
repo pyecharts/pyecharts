@@ -11,6 +11,8 @@
     * [issue#199](https://github.com/chenjiandongx/pyecharts/issues/199) 为 markLine 新增 `mark_line_symbolsize` 和 `mark_line_valuedim` 参数，解决不能指定维度以及标记大小不能调整的问题
     * [issue#200](https://github.com/chenjiandongx/pyecharts/issues/200) 为 xyAxis 通用配置项新增 `is_xaxis_show` 和 `is_yaxis_show` 参数，（控制是否显示 x 轴或 y 轴）解决设计可编辑文本的问题
     * [issue#201](https://github.com/chenjiandongx/pyecharts/issues/201) 为 Bar 图新增 `bar_category_gap` 参数，提供绘制直方图的方案
+    * [issue#208](https://github.com/chenjiandongx/pyecharts/issues/208) 为 dataZoom 通用配置项 `datazoom_type` 新增类型 'both'（同时拥有 'slider' 以及 'inside')
+    * [issue#208](https://github.com/chenjiandongx/pyecharts/issues/208) 为 HeatMap 图新增 **日历热力图**
     
     #### Changed
     * 将 label 通用配置项的 `is_emphasis` 参数更改为 `is_label_emphasis`
