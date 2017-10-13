@@ -2,6 +2,8 @@
 # coding=utf-8
 from __future__ import unicode_literals
 
+import os
+import sys
 import json
 import codecs
 
@@ -105,3 +107,24 @@ def test_echarts_position_in_render_html():
     with codecs.open('render.html', 'r', 'utf-8') as f:
         actual_content = f.read()
         assert TITLE in actual_content
+
+
+def test_show_config():
+    stdout_ = sys.stdout
+    captured_stdout = 'stdout.txt'
+    try:
+        with open(captured_stdout, 'w') as f:
+            sys.stdout = f
+            bar = create_a_bar("new")
+            bar.show_config()
+    except Exception as e:
+        # whatever happens, continue and restore stdout
+        print(e)
+    sys.stdout = stdout_
+    with open(captured_stdout, 'r') as f:
+        content = f.read()
+        assert 'None' not in content
+        assert 'null' in content
+        assert 'false' in content
+        assert 'False' not in content
+    os.unlink(captured_stdout)
