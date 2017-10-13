@@ -314,9 +314,25 @@ class Base(object):
         pprint(self._option)
 
     @property
+    def chart_id(self):
+        """
+
+        :return:
+        """
+        return self._chart_id
+
+    @property
     def options(self):
         """ Expose public interface options """
         return self._option
+
+    @property
+    def js_dependencies(self):
+        """
+
+        :return:
+        """
+        return self._js_dependencies
 
     @staticmethod
     def cast(seq):
