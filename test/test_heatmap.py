@@ -18,7 +18,7 @@ def test_heatmap():
     heatmap.render()
 
 
-def test_heatmap_date():
+def test_heatmap_calendar():
     import datetime
     begin = datetime.date(2017, 1, 1)
     end = datetime.date(2017, 12, 31)
