@@ -1,6 +1,9 @@
 # Version Log
 
-* ### version 0.2.6（Dev）
+* ### version 0.2.7（Dev）
+    * TODO
+
+* ### version 0.2.6 - 2017.10.14（Current）
 
     #### Added
     * 为 [文档](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/documentation.md) 新增 [使用技巧](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/documentation.md#使用技巧) 介绍
@@ -16,12 +19,12 @@
 
     #### Changed
     * 将 label 通用配置项的 `is_emphasis` 参数更改为 `is_label_emphasis`
-	* show_config() 修改用JSON显示
+	* show_config() 修改用 JSON 显示
 
     #### Fixed
     * [issue#195](https://github.com/chenjiandongx/pyecharts/issues/195) 修复 HeatMap 图配置 x、y 轴属性无效的问题
 
-* ### version 0.2.5 - 2017.9.28（Current）
+* ### version 0.2.5 - 2017.9.28
 
     #### Added
     * [issue#173](https://github.com/chenjiandongx/pyecharts/issues/173) 为 xyAxis 通用配置项新增 `is_xaxis_boundarygap` 和 `is_yaxis_boundartgap` 参数

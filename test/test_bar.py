@@ -95,7 +95,6 @@ def test_bar_datazoom_both():
     bar = Bar("Bar - datazoom - both 示例")
     bar.add("", attr, v1, is_datazoom_show=True, datazoom_type='both',
             datazoom_range=[10, 25])
-    bar.render()
     html_content = bar._repr_html_()
     assert "dataZoom" in html_content
     assert ': "inside"' in html_content
