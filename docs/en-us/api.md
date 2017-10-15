@@ -28,6 +28,14 @@ This table list properties for these chart classes.
 
 Data type:str.The identifier string for a chart. E.g.`'d2d9dcc4e28247518186c0882d356ba8'` 。
 
+**width**
+
+Data type:number.The width(px) of div container for a chart.
+
+**height**
+
+Data type:number.The height(px) of div container for a chart.
+
 **options**
 
 Data type:dict.The config options for a chart。Each chart has its own format and value.Please see more detail at ECharts document。

@@ -322,6 +322,22 @@ class Base(object):
         return self._chart_id
 
     @property
+    def width(self):
+        """
+
+        :return:
+        """
+        return self._width
+
+    @property
+    def height(self):
+        """
+
+        :return:
+        """
+        return self._height
+
+    @property
     def options(self):
         """ Expose public interface options """
         return self._option

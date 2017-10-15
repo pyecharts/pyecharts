@@ -109,6 +109,22 @@ class Overlap(object):
         return self._chart._chart_id
 
     @property
+    def width(self):
+        """
+
+        :return:
+        """
+        return self._chart._width
+
+    @property
+    def height(self):
+        """
+
+        :return:
+        """
+        return self._chart._height
+
+    @property
     def options(self):
         """
 
