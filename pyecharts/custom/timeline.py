@@ -1,12 +1,11 @@
 #!/usr/bin/env python
 # coding=utf-8
 
-import pprint
-from pyecharts import template
 from pyecharts.constants import PAGE_TITLE
+from pyecharts.custom.base import BaseCustom
 
 
-class Timeline(object):
+class Timeline(BaseCustom):
 
     def __init__(self, page_title=PAGE_TITLE,
                  is_auto_play=False,
@@ -51,9 +50,8 @@ class Timeline(object):
             Distance between timeline component and the bottom side of the container.
         """
 
-        self._chart = None
+        super(Timeline, self).__init__()
         self._page_title = page_title
-        self._js_dependencies = set()
         self._time_points = []
         self._timeline_options = {
             "baseOption": {
@@ -96,59 +94,7 @@ class Timeline(object):
             "series": chart._option.get('series'),
             "title": chart._option.get('title')
         })
-
-    def show_config(self):
-        """
-
-        :return:
-        """
-        pprint.pprint(self._timeline_options)
-
-    def render(self, path="render.html"):
-        """
-
-        :param path:
-        :return:
-        """
         self._chart._option = self._timeline_options
-        self._chart.render(path)
-
-    def render_embed(self):
-        """
-
-        :return:
-        """
-        self._chart._option = self._timeline_options
-        return self._chart.render_embed()
-
-    @property
-    def chart(self):
-        """
-
-        :return:
-        """
-        return self._chart
-
-    @property
-    def options(self):
-        """
-
-        :return:
-        """
-        return self._timeline_options
-
-    def _repr_html_(self):
-        """
-
-        :return:
-        """
-        return self._chart._repr_html_()
-
-    def get_js_dependencies(self):
-        """
-        Declare its javascript dependencies for embedding purpose
-        """
-        return template.produce_html_script_list(self._js_dependencies)
 
     def __check_components(self, chart):
         """
