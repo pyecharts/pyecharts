@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 # coding=utf-8
-
 from pyecharts import template
 from pyecharts import utils
 import pyecharts.constants as constants

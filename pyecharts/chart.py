@@ -1,18 +1,13 @@
-#!/usr/bin/env python
 # coding=utf-8
 
-import json
-import uuid
 import random
-import datetime
 
 from pyecharts.option import get_all_options
-from pyecharts import template
-from pyecharts import utils
+from pyecharts.base import Base
 import pyecharts.constants as constants
 
 
-class Base(object):
+class Chart(Base):
 
     def __init__(self, title, subtitle,
                  width=800,
@@ -69,9 +64,18 @@ class Base(object):
         :param jshost:
             custom javascript host for the particular chart only
         """
-        self._option = {}
-        self._width, self._height = width, height
-        self._page_title = page_title
+        super(Chart, self).__init__(
+            width=width, height=height,
+            title_pos=title_pos,
+            title_top=title_top,
+            title_color=title_color,
+            subtitle_color=subtitle_color,
+            title_text_size=title_text_size,
+            subtitle_text_size=subtitle_text_size,
+            background_color=background_color,
+            page_title=page_title,
+            jshost=jshost
+        )
         self._colorlst = [
             '#c23531', '#2f4554', '#61a0a8', '#d48265', '#749f83',
             '#ca8622', '#bda29a', '#6e7074', '#546570', '#c4ccd3',
@@ -107,15 +111,12 @@ class Base(object):
                     "dataView": {"show": True},
                 }
             },
-            series_id = random.randint(1, 9000000),
+            series_id=random.randint(1, 9000000),
             tooltip={},
             series=[],
             legend=[{"data": []}],
             backgroundColor=background_color
         )
-        self._jshost = jshost if jshost else constants.CONFIGURATION['HOST']
-        self._js_dependencies = {'echarts'}
-        self._chart_id = uuid.uuid4().hex
 
     def add(self, angle_data=None,
             angle_range=None,
@@ -308,15 +309,6 @@ class Base(object):
         """ The base class's add() is just to provide a hint option"""
         pass
 
-    def show_config(self):
-        """ Print all options of charts"""
-        print(json_dumps(self._option, indent=4))
-
-    @property
-    def options(self):
-        """ Expose public interface options """
-        return self._option
-
     @staticmethod
     def cast(seq):
         """ Convert the sequence with the dictionary and tuple type into k_lst, v_lst.
@@ -394,113 +386,3 @@ class Base(object):
                         "back": "缩放还原"}}
             )
 
-    def render_embed(self):
-        """
-        Render the chart component and its options
-
-        You can include it into your web pages. And you will
-        provide all dependent echarts javascript libraries.
-        """
-        embed = 'chart_component.html'
-        tmp = template.JINJA2_ENV.get_template(embed)
-        my_option = json_dumps(self._option, indent=4)
-        html = tmp.render(myOption=my_option,
-                          chart_id=self._chart_id,
-                          myWidth=self._width, myHeight=self._height)
-        return html
-
-    def get_js_dependencies(self):
-        """
-        Declare its javascript dependencies for embedding purpose
-        """
-        return template.produce_html_script_list(self._js_dependencies)
-
-    def render(self, path="render.html"):
-        """ Render the options dict, generate the html file
-
-        :param path:
-            path of render html file
-        """
-        _tmp = "local.html"
-        my_option = json_dumps(self._option, indent=4)
-        tmp = template.JINJA2_ENV.get_template(_tmp)
-        script_list = template.produce_html_script_list(self._js_dependencies)
-        html = tmp.render(
-            myOption=my_option,
-            chart_id=self._chart_id,
-            script_list=script_list,
-            page_title=self._page_title,
-            myWidth=self._width, myHeight=self._height)
-        html = utils.freeze_js(html)
-        utils.write_utf8_html_file(path, html)
-
-    def _repr_html_(self):
-        """ Render the options dict, displayed in the jupyter notebook
-
-        :return:
-        """
-        _tmp = 'notebook.html'
-        dom = self._render_notebook_dom_()
-        component = self._render_notebook_component_()
-        tmp = template.JINJA2_ENV.get_template(_tmp)
-        require_config = template.produce_require_configuration(
-            self._js_dependencies, self._jshost)
-        html = tmp.render(
-            single_chart=component, dom=dom, **require_config)
-        return html
-
-    def _render_notebook_dom_(self):
-        """
-
-        :return:
-        """
-        _tmp = "notebook_dom.html"
-        tmp = template.JINJA2_ENV.get_template(_tmp)
-        component = tmp.render(
-            chart_id=self._chart_id,
-            chart_width=self._width,
-            chart_height=self._height)
-        return component
-
-    def _render_notebook_component_(self):
-        """
-
-        :return:
-        """
-        _tmp = "notebook_chart_component.html"
-        my_option = json_dumps(self._option, indent=4)
-        tmp = template.JINJA2_ENV.get_template(_tmp)
-        component = tmp.render(
-            my_option=my_option, chart_id=self._chart_id)
-        return component
-
-
-class PandasNumpyTypeEncoder(json.JSONEncoder):
-    def default(self, obj):
-        try:
-            return obj.astype(float).tolist()
-        except:
-            try:
-                return obj.astype(str).tolist()
-            except:
-                return json.JSONEncoder.default(self, obj)
-
-
-def handle(obj):
-    """
-
-    :param obj:
-    :return:
-    """
-    if isinstance(obj, (datetime.datetime, datetime.date)):
-        return obj.isoformat()
-
-
-def json_dumps(data, indent=0):
-    """
-
-    :param data:
-    :param indent:
-    :return:
-    """
-    return json.dumps(data, indent=indent, cls=PandasNumpyTypeEncoder, default=handle)

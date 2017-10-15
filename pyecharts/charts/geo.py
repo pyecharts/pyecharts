@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 # coding=utf-8
 
-from pyecharts.base import Base
+from pyecharts.chart import Chart
 from pyecharts.option import get_all_options
 from pyecharts.constants import CITY_GEO_COORDS
 from pyecharts.constants import CITY_NAME_PINYIN_MAP
 
 
-class Geo(Base):
+class Geo(Chart):
     """
     Geographic coordinate system component.
 

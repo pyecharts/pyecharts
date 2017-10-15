@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 # coding=utf-8
 
-from pyecharts.base import Base
+from pyecharts.chart import Chart
 
 
-class Liquid(Base):
+class Liquid(Chart):
     """
     <<< Liquid chart >>>
 
