@@ -7,7 +7,6 @@ from pyecharts.constants import PAGE_TITLE
 
 
 class Timeline(object):
-
     def __init__(self, page_title=PAGE_TITLE,
                  is_auto_play=False,
                  is_loop_play=True,
@@ -70,7 +69,7 @@ class Timeline(object):
                     "right": timeline_right,
                     "top": timeline_top,
                     "bottom": timeline_bottom
-            }},
+                }},
             "options": []
         }
 
@@ -136,6 +135,22 @@ class Timeline(object):
         :return:
         """
         return self._chart._chart_id
+
+    @property
+    def width(self):
+        """
+
+        :return:
+        """
+        return self._chart._width
+
+    @property
+    def height(self):
+        """
+
+        :return:
+        """
+        return self._chart._height
 
     @property
     def options(self):

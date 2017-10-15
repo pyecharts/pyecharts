@@ -7,7 +7,6 @@ from pyecharts.constants import PAGE_TITLE
 
 
 class Grid(object):
-
     def __init__(self, page_title=PAGE_TITLE):
         self._chart = None
         self._js_dependencies = set()
@@ -80,7 +79,7 @@ class Grid(object):
                     _flag = s.get('seriesId')
 
             _grid = grid(
-                grid_width, grid_height, grid_top,grid_bottom, grid_left, grid_right)
+                grid_width, grid_height, grid_top, grid_bottom, grid_left, grid_right)
             for _ in range(_index_once):
                 self._chart._option.get('grid').append(_grid)
             self._js_dependencies = self._js_dependencies.union(chart._js_dependencies)
@@ -135,6 +134,22 @@ class Grid(object):
         :return:
         """
         return self._chart._chart_id
+
+    @property
+    def width(self):
+        """
+
+        :return:
+        """
+        return self._chart._width
+
+    @property
+    def height(self):
+        """
+
+        :return:
+        """
+        return self._chart._height
 
     @property
     def options(self):

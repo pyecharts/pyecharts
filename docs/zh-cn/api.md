@@ -17,6 +17,8 @@
 | 属性 | Base | Grid | Overlap | Timeline | Page |
 | ------ | ------ | ------ | ------ | ------ | ------ |
 | chart_id | ✓ | ✓ | ✓ | ✓ | |
+| width | ✓ | ✓ | ✓ | ✓ | |
+| heigth | ✓ | ✓ | ✓ | ✓ | |
 | options | ✓ | ✓ | ✓ | ✓ | |
 | js_dependencies | ✓ | ✓ | ✓ | ✓ | ✓ |
 | chart | | ✓ | ✓ | ✓ | |
@@ -25,6 +27,14 @@
 **chart_id**
 
 字符串类型(str)，图表唯一标识符，默认uuid格式的字符串，如 `'d2d9dcc4e28247518186c0882d356ba8'` 。
+
+**width**
+
+数字类型(number)。图表容器div的宽度，以px为单位。
+
+**height**
+
+数字类型(number)。图表容器div的高度，以px为单位。
 
 **options**
 
