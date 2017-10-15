@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 # coding=utf-8
 
-from pyecharts.base import Base
+from pyecharts.chart import Chart
 from pyecharts.option import get_all_options
 
 
-class Radar(Base):
+class Radar(Chart):
     """
     <<< Radar chart >>>
 
