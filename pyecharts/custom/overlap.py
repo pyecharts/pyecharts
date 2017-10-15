@@ -1,15 +1,14 @@
 #!/usr/bin/env python
 # coding=utf-8
 
-from pyecharts import template
 from pyecharts.constants import PAGE_TITLE
+from pyecharts.custom.base import BaseCustom
 
 
-class Overlap(object):
+class Overlap(BaseCustom):
 
     def __init__(self, page_title=PAGE_TITLE):
-        self._chart = None
-        self._js_dependencies = set()
+        super(Overlap, self).__init__()
         self._page_title = page_title
 
     def add(self, chart,
@@ -69,54 +68,3 @@ class Overlap(object):
             self._chart._option.get('xAxis').append(_xaxis)
         if is_add_yaxis:
             self._chart._option.get('yAxis').append(_yaxis)
-
-    def render(self, path="render.html"):
-        """
-
-        :param path:
-        :return:
-        """
-        self._chart.render(path)
-
-    def render_embed(self):
-        """
-
-        :return:
-        """
-        return self._chart.render_embed()
-
-    def show_config(self):
-        """
-
-        :return:
-        """
-        self._chart.show_config()
-
-    @property
-    def chart(self):
-        """
-
-        :return:
-        """
-        return self._chart
-
-    @property
-    def options(self):
-        """
-
-        :return:
-        """
-        return self._chart._option
-
-    def _repr_html_(self):
-        """
-
-        :return:
-        """
-        return self._chart._repr_html_()
-
-    def get_js_dependencies(self):
-        """
-        Declare its javascript dependencies for embedding purpose
-        """
-        return template.produce_html_script_list(self._js_dependencies)
