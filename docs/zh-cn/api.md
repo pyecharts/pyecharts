@@ -1,0 +1,118 @@
+# API
+
+本文档描述了 pyecharts 库一些公开的API，以供开发者之使用。
+
+## 图表类
+
+图表类是pyecharts库中最为核心的内容，每一个类代表了[Echarts](http://echarts.baidu.com/) 中一个图表类型。定义在以下包中：
+
+- `pyecharts.base.Base`
+- `pyecharts.charts.*`
+- `pyecharts.custom.*`
+
+### 属性
+
+图表类和属性表如下：
+
+| 属性 | Base | Grid | Overlap | Timeline | Page |
+| ------ | ------ | ------ | ------ | ------ | ------ |
+| chart_id | ✓ | ✓ | ✓ | ✓ | |
+| options | ✓ | ✓ | ✓ | ✓ | |
+| js_dependencies | ✓ | ✓ | ✓ | ✓ | ✓ |
+| chart | | ✓ | ✓ | ✓ | |
+| charts | | | | | ✓ |
+
+**chart_id**
+
+字符串类型(str)，图表唯一标识符，默认uuid格式的字符串，如 `'d2d9dcc4e28247518186c0882d356ba8'` 。
+
+**options**
+
+字典类型(dict)，echarts图表配置。不同图表类型具有不同数据格式。具体请参考 ECharts 文档。
+
+**js_dependencies**
+
+集合类型(set)，js依赖文件名称列表，元素不包含文件后缀(.js)，如 `{'echarts.min', 'fujian'}` 。
+
+**chart**
+
+复合图表中的源图表对象，`pyecharts.base.Base` 的子类对象。
+
+目前该属性仅存在下面三个类中定义：
+
+- `pyecharts.custom.grid.Grid`
+- `pyecharts.custom.overlap.Overlap`
+- `pyecharts.custom.timeline.Timeline`
+
+**charts**
+
+多图表对象中源图表对象列表，每个元素均为 `pyecharts.base.Base` 的子类对象。仅用于 `pyecharts.custom.page.Page` 类。
+
+### 方法
+
+**add(self)**
+
+
+添加图表配置和数据。具体请参考其子类定义。
+
+| 图表类 | 函数签名 |
+| ------ | ------ |
+| Base | `add(self, **echarts_options)` |
+| Grid | `add(self, grid_width=None, grid_height=None, grid_top=None, grid_bottom=None, grid_left=None, grid_right=None)` |
+| Overlap | `add(self, chart, xaix_index=0, yaix_index=0, id_add_xaxis=False, is_add_yaxis=False)` |
+| Timeline | `add(self, chart, time_point)` |
+| Page | `add(self, achart_or_charts)` |
+
+**get_js_dependencies(self)**
+
+获取js依赖文件列表。和 属性*js_dependencies* 不同， 这里的元素是包含了文件完整路径。
+
+**render(self, path='render.html')**
+
+渲染至指定的HTML页面，不同图表类型使用默认的模板文件。
+
+**render_embed(self)**
+
+渲染包含选项的js代码。
+
+**show_config(self)**
+
+使用 `pprint` 模块打印options属性。
+
+## 数据处理工具
+
+以下几个方法为数据处理的类方法，
+
+**cast**
+
+`pyecharts.base.cast(seq)`
+
+数据格式化处理函数，能够将源数据转化为符合pyecharts的数据。
+
+例子:
+
+```python
+o_data = [('A', '34'), ('B', '45'), ('C', '12')]
+x, y = Base.cast(o_data)
+print(x) # ['A', 'B', 'C']
+print(y) # ['34', '45', '12']
+```
+
+**json_dumps**
+
+`pyecharts.base.json_dumps(data, indent=0)`
+
+将data转换为JSON字符串，和默认的 `json.dumps` 方法增加了：
+
+- 将日期和时间转化为ISO8601字符串
+- 对于 numpy 数组，增加了类型强制转化，可参考 [astype](https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.astype.html) 和 [tolist](https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.tolist.html) .
+
+## 图表渲染
+
+**JINJA2_ENV**
+
+`pyecharts.templates.JINJA2_ENV`
+
+数据类型 `jinja2.Environment`。pyecharts内置了一个jinja2的模板渲染环境对象。
+
+- 该环境对象使用 *pyecharts/templates* 作为存放模板文件的目录，包含了 HTML 和 javascript 文件。
