@@ -688,6 +688,20 @@ bar.render()
 ```
 ![bar-7](https://github.com/chenjiandongx/pyecharts/blob/master/images/bar-7.png) 
 
+直方图示例
+```python
+from pyecharts import Bar
+
+attr = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
+v1 = [5, 20, 36, 10, 75, 90]
+v2 = [10, 25, 8, 60, 20, 80]
+bar = Bar("直方图示例")
+bar.add("", attr * 2, v1 + v2, bar_category_gap=0)
+bar.render()
+```
+![bar-9](https://github.com/chenjiandongx/pyecharts/blob/master/images/bar-9.png) 
+
+
 
 ## Bar3D（3D 柱状图）
 
@@ -2893,6 +2907,25 @@ overlap.add(line_2)
 overlap.render()
 ```
 ![overlap-2](https://github.com/chenjiandongx/pyecharts/blob/master/images/overlap-2.png)
+
+Line + EffectScatter
+```python
+from pyecharts import Line, EffectScatter, Overlap
+
+attr = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
+v1 = [5, 20, 36, 10, 10, 100]
+line = Line("line - es 示例")
+line.add("", attr, v1, is_random=True)
+es = EffectScatter()
+es.add("", attr, v1, effect_scale=8)
+
+overlap = Overlap()
+overlap.add(line)
+overlap.add(es)
+overlap.render()
+```
+![overlap-4](https://github.com/chenjiandongx/pyecharts/blob/master/images/overlap-4.gif)
+
 
 如果想改变轴索引，使其有多 X 轴或者多 Y 轴的话。请看下面
 ```python
