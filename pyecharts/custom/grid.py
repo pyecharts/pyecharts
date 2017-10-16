@@ -102,4 +102,4 @@ class Grid(Base):
         for s in _series:
             self._option.get('series').append(s)
         return len(self._option.get('series')), len(_series), \
-               _xaxis, _yaxis, _legend, _title
+            _xaxis, _yaxis, _legend, _title
