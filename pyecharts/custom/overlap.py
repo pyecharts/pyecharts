@@ -33,7 +33,7 @@ class Overlap(Base):
         if not self._option:
             self._option = copy.deepcopy(chart.options)
             self._series_id = self._option.get('series')[0].get('seriesId')
-            self._js_dependencies = chart._js_dependencies
+            self._js_dependencies = chart.js_dependencies
         else:
             _series = (
                 chart._option.get('legend')[0].get('data'),
@@ -46,7 +46,8 @@ class Overlap(Base):
                 yaxis_index
             )
             self.__custom(_series)
-            self._js_dependencies = self._js_dependencies.union(chart._js_dependencies)
+            self._js_dependencies = self._js_dependencies.union(
+                chart._js_dependencies)
 
     def __custom(self, series):
         """ Appends the data for the series of the chart type

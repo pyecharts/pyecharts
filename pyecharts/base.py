@@ -22,6 +22,45 @@ class Base(object):
                  background_color="#fff",
                  page_title=constants.PAGE_TITLE,
                  jshost=None):
+        """
+
+        :param width:
+            Canvas width
+        :param height:
+            Canvas height
+        :param title_pos:
+            Distance between grid component and the left side of the container.
+            title_pos value can be instant pixel value like 20,
+            percentage value relative to container width like '20%',
+            or a descriptive string: 'left', 'center', or 'right'.
+            If the title_pos value is set to be 'left', 'center', or 'right',
+            then the component will be aligned automatically based on position.
+        :param title_top:
+            Distance between grid component and the top side of the container.
+            top value can be instant pixel value like 20,
+            percentage value relative to container width like '20%',
+            or a descriptive string: 'top', 'middle', or 'bottom'.
+            If the left value is set to be 'top', 'middle', or 'bottom',
+            then the component will be aligned automatically based on position.
+        :param title_color:
+            main title text color.
+        :param subtitle_color:
+            subtitle text color.
+        :param title_text_size:
+            main title font size
+        :param subtitle_text_size:
+            subtitle font size
+        :param background_color:
+            Background color of title, which is transparent by default.
+            Color can be represented in RGB, for example 'rgb(128, 128, 128)'.
+            RGBA can be used when you need alpha channel,
+            for example 'rgba(128, 128, 128, 0.5)'.
+            You may also use hexadecimal format, for example '#ccc'.
+        :param page_title:
+            specify html <title> value
+        :param jshost:
+            custom javascript host for the particular chart only
+        """
         self._option = {}
         self._js_dependencies = set()
         self._chart_id = uuid.uuid4().hex
@@ -33,10 +72,16 @@ class Base(object):
     @property
     def options(self):
         """
-
-        :return:
+        chart configurations
         """
         return self._option
+
+    @property
+    def js_dependencies(self):
+        """
+        a list of dependent javascript libraries
+        """
+        return self._js_dependencies
 
     def show_config(self):
         """ Print all options of charts"""
@@ -85,9 +130,9 @@ class Base(object):
     @staticmethod
     def cast(seq):
         """ Convert the sequence with the dictionary and tuple type into k_lst, v_lst.
-        1.[(A1, B1),(A2, B2),(A3, B3),(A4, B4)] --> k_lst[A[i1,i2...]], v_lst[B[i1,i2...]]
-        2.[{A1: B1},{A2: B2},{A3: B3},{A4: B4}] --> k_lst[A[i1,i2...]], v_lst[B[i1,i2...]]
-        3.{A1: B1, A2: B2, A3: B3, A4: B4} -- > k_lst[A[i1,i2...]], v_lst[B[i1,i2...]]
+        1.[(A1, B1),(A2, B2),..] --> k_lst[A[i1,i2...]], v_lst[B[i1,i2...]]
+        2.[{A1: B1},{A2: B2},..] --> k_lst[A[i1,i2...]], v_lst[B[i1,i2...]]
+        3.{A1: B1, A2: B2, A3: B3} -- > k_lst[A[i1,i2...]], v_lst[B[i1,i2...]]
 
         :param seq:
             data sequence
