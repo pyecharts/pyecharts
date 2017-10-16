@@ -33,16 +33,16 @@ class Chart(Base):
             Canvas height
         :param title_pos:
             Distance between grid component and the left side of the container.
-            title_pos value can be instant pixel value like 20;
-            it can also be percentage value relative to container width like '20%';
-            it can also be 'left', 'center', or 'right'.
+            title_pos value can be instant pixel value like 20,
+            percentage value relative to container width like '20%',
+            or a descriptive string: 'left', 'center', or 'right'.
             If the title_pos value is set to be 'left', 'center', or 'right',
             then the component will be aligned automatically based on position.
         :param title_top:
             Distance between grid component and the top side of the container.
-            top value can be instant pixel value like 20;
-            it can also be percentage value relative to container width like '20%';
-            it can also be 'top', 'middle', or 'bottom'.
+            top value can be instant pixel value like 20,
+            percentage value relative to container width like '20%',
+            or a descriptive string: 'top', 'middle', or 'bottom'.
             If the left value is set to be 'top', 'middle', or 'bottom',
             then the component will be aligned automatically based on position.
         :param title_color:
@@ -309,37 +309,6 @@ class Chart(Base):
         """ The base class's add() is just to provide a hint option"""
         pass
 
-    @staticmethod
-    def cast(seq):
-        """ Convert the sequence with the dictionary and tuple type into k_lst, v_lst.
-        1.[(A1, B1),(A2, B2),(A3, B3),(A4, B4)] --> k_lst[A[i1,i2...]], v_lst[B[i1,i2...]]
-        2.[{A1: B1},{A2: B2},{A3: B3},{A4: B4}] --> k_lst[A[i1,i2...]], v_lst[B[i1,i2...]]
-        3.{A1: B1, A2: B2, A3: B3, A4: B4} -- > k_lst[A[i1,i2...]], v_lst[B[i1,i2...]]
-
-        :param seq:
-            data sequence
-        :return:
-        """
-        k_lst, v_lst = [], []
-        if isinstance(seq, list):
-            for s in seq:
-                try:
-                    if isinstance(s, tuple):
-                        _attr, _value = s
-                        k_lst.append(_attr)
-                        v_lst.append(_value)
-                    elif isinstance(s, dict):
-                        for k, v in s.items():
-                            k_lst.append(k)
-                            v_lst.append(v)
-                except:
-                    raise
-        elif isinstance(seq, dict):
-            for k, v in seq.items():
-                k_lst.append(k)
-                v_lst.append(v)
-        return k_lst, v_lst
-
     def _config_components(self, is_visualmap=False,
                            is_more_utils=False,
                            **kwargs):
@@ -363,7 +332,8 @@ class Chart(Base):
         self._option.update(tooltip=chart['tooltip'])
 
         # dataZoom component
-        if kwargs.get('is_datazoom_show', None) is True:    # do not change this line anymore
+        if kwargs.get('is_datazoom_show', None) is True:
+            # do not change this line anymore
             self._option.update(dataZoom=chart['datazoom'])
         # visualMap component
         if is_visualmap:
@@ -385,4 +355,3 @@ class Chart(Base):
                         "zoom": "区域缩放",
                         "back": "缩放还原"}}
             )
-
