@@ -105,3 +105,17 @@ def test_overlap_two_yaxis():
     overlap.add(bar)
     overlap.add(line, yaxis_index=1, is_add_yaxis=True)
     overlap.render()
+
+
+def test_line_es():
+    attr = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
+    v1 = [5, 20, 36, 10, 10, 100]
+    line = Line("line - es 示例")
+    line.add("", attr, v1, is_random=True)
+    es = EffectScatter()
+    es.add("", attr, v1, effect_scale=8)
+
+    overlap = Overlap()
+    overlap.add(line)
+    overlap.add(es)
+    overlap.render()
