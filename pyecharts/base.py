@@ -4,22 +4,15 @@ import uuid
 import json
 import datetime
 
+import pyecharts.utils as utils
+import pyecharts.template as template
 import pyecharts.constants as constants
-from pyecharts import template
-from pyecharts import utils
 
 
 class Base(object):
     def __init__(self,
                  width=800,
                  height=400,
-                 title_pos="auto",
-                 title_top="auto",
-                 title_color="#000",
-                 subtitle_color="#aaa",
-                 title_text_size=18,
-                 subtitle_text_size=12,
-                 background_color="#fff",
                  page_title=constants.PAGE_TITLE,
                  jshost=None):
         """
@@ -28,34 +21,6 @@ class Base(object):
             Canvas width
         :param height:
             Canvas height
-        :param title_pos:
-            Distance between grid component and the left side of the container.
-            title_pos value can be instant pixel value like 20,
-            percentage value relative to container width like '20%',
-            or a descriptive string: 'left', 'center', or 'right'.
-            If the title_pos value is set to be 'left', 'center', or 'right',
-            then the component will be aligned automatically based on position.
-        :param title_top:
-            Distance between grid component and the top side of the container.
-            top value can be instant pixel value like 20,
-            percentage value relative to container width like '20%',
-            or a descriptive string: 'top', 'middle', or 'bottom'.
-            If the left value is set to be 'top', 'middle', or 'bottom',
-            then the component will be aligned automatically based on position.
-        :param title_color:
-            main title text color.
-        :param subtitle_color:
-            subtitle text color.
-        :param title_text_size:
-            main title font size
-        :param subtitle_text_size:
-            subtitle font size
-        :param background_color:
-            Background color of title, which is transparent by default.
-            Color can be represented in RGB, for example 'rgb(128, 128, 128)'.
-            RGBA can be used when you need alpha channel,
-            for example 'rgba(128, 128, 128, 0.5)'.
-            You may also use hexadecimal format, for example '#ccc'.
         :param page_title:
             specify html <title> value
         :param jshost:
