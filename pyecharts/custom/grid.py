@@ -9,8 +9,12 @@ from pyecharts.base import Base
 
 class Grid(Base):
 
-    def __init__(self, page_title=PAGE_TITLE):
-        super(Grid, self).__init__()
+    def __init__(self, page_title=PAGE_TITLE,
+                 width=800,
+                 height=400):
+        super(Grid, self).__init__(
+            width=width, height=height
+        )
         self._page_title = page_title
 
     def add(self, chart,
@@ -51,11 +55,11 @@ class Grid(Base):
                     self._option.get('grid').append(_grid)
         else:
             _series = (
-                chart._option.get('series'),
-                chart._option.get('xAxis', None),
-                chart._option.get('yAxis', None),
-                chart._option.get('legend')[0],
-                chart._option.get('title')[0]
+                chart.options.get('series'),
+                chart.options.get('xAxis', None),
+                chart.options.get('yAxis', None),
+                chart.options.get('legend')[0],
+                chart.options.get('title')[0]
             )
             (_index, _index_once, _xaxis,
              _yaxis, _legend, _title) = self.__custom(_series)
