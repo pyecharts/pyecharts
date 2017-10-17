@@ -1,4 +1,4 @@
-# API
+# pyecharts API
 
 This document describes the public API for *pyecharts* library and it will be read by developers.
 
@@ -43,49 +43,39 @@ Data type:dict.The config options for a chart。Each chart has its own format an
 
 Data type:set.The js filename collections for a chart's dependencies.Every element do not contain the filename extension(.js).E.g `{'echarts.min', 'fujian'}` 。
 
-**chart**
-
-The origin chart object in some composite charts.It can be a instance of the subclass of `pyecharts.base.Base` .
-
-This property is available in the following classes:
-
-- `pyecharts.custom.grid.Grid`
-- `pyecharts.custom.overlap.Overlap`
-- `pyecharts.custom.timeline.Timeline`
-
 **charts**
 
 The origin chart  list in the class `pyecharts.custom.page.Page` .Each element can be a instance of the subclass of `pyecharts.base.Base` .
 
 ### Methods
 
-**add(self)**
+**add()**
 
 Add options and data to a chart.See the source code for more detail.
 
 | Chart Class | Function Sign                            |
 | ----------- | ---------------------------------------- |
-| Base        | `add(self, **echarts_options)`           |
-| Grid        | `add(self, grid_width=None, grid_height=None, grid_top=None, grid_bottom=None, grid_left=None, grid_right=None)` |
-| Overlap     | `add(self, chart, xaix_index=0, yaix_index=0, id_add_xaxis=False, is_add_yaxis=False)` |
-| Timeline    | `add(self, chart, time_point)`           |
-| Page        | `add(self, achart_or_charts)`            |
+| Base        | `add(**echarts_options)`           |
+| Grid        | `add(grid_width=None, grid_height=None, grid_top=None, grid_bottom=None, grid_left=None, grid_right=None)` |
+| Overlap     | `add(chart, xaix_index=0, yaix_index=0, id_add_xaxis=False, is_add_yaxis=False)` |
+| Timeline    | `add(chart, time_point)`           |
+| Page        | `add(achart_or_charts)`            |
 
-**get_js_dependencies(self)**
+**get_js_dependencies()**
 
 Gert the javascript dependencies of a chart.
 
-**render(self, path='render.html')**
+**render(path='render.html')**
 
 Render to a HTML page.
 
-**render_embed(self)**
+**render_embed()**
 
 Render javascript code fragment including options.
 
-**show_config(self)**
+**show_config()**
 
-Print the options using `pprint` .
+Print all options of charts
 
 ## Data Hanlder Methods
 
@@ -95,7 +85,7 @@ These methods are tool methods for data handlers.
 
 `pyecharts.base.Base.cast(seq)`
 
-Class method for formating and converting data.It can convert your origin data to the corresponding data for pyecharts library.
+Class method for formatting and converting data.It can convert your origin data to the corresponding data for pyecharts library.
 
 Example:
 
