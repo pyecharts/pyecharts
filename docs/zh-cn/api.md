@@ -4,25 +4,31 @@
 
 ## 图表类
 
-图表类是pyecharts库中最为核心的内容，每一个类代表了[Echarts](http://echarts.baidu.com/) 中一个图表类型。定义在以下包中：
+图表类是pyecharts库中最为核心的内容，每一个类代表了[Echarts](http://echarts.baidu.com/) 中一个图表类型。这些图表类继承层次如下列表所示。
 
-- `pyecharts.base.Base`
-- `pyecharts.charts.*`
-- `pyecharts.custom.*`
+- pyecharts.base.Base
+    - pyecharts.chart.Chart
+        - pyecharts.charts.foo_chart.FOO_CHART
+    - pyecharts.custom.grid.Grid
+    - pyecharts.custom.overlap.Overlap
+    - pyecharts.custom.timeline.Timeline
+- pyecharts.custom.page.Page
+
+备注：上述中，foo_chart/FOO_CHART代表了Bar/Bar3D等这一类图表类。
 
 ### 属性
 
 图表类和属性表如下：
 
-| 属性 | Base | Grid | Overlap | Timeline | Page |
-| ------ | ------ | ------ | ------ | ------ | ------ |
-| chart_id | ✓ | ✓ | ✓ | ✓ | |
-| width | ✓ | ✓ | ✓ | ✓ | |
-| heigth | ✓ | ✓ | ✓ | ✓ | |
-| options | ✓ | ✓ | ✓ | ✓ | |
-| js_dependencies | ✓ | ✓ | ✓ | ✓ | ✓ |
-| chart | | ✓ | ✓ | ✓ | |
-| charts | | | | | ✓ |
+| 属性/图表           | Base | Chart/FOO_CHART | Grid | Overlap | Timeline | Page |
+| --------------- | ---- | --------------- | ---- | ------- | -------- | ---- |
+| chart_id        | ✓    | ✓               | ✓    | ✓       | ✓        |      |
+| width           | ✓    | ✓               | ✓    | ✓       | ✓        |      |
+| heigth          | ✓    | ✓               | ✓    | ✓       | ✓        |      |
+| options         | ✓    | ✓               | ✓    | ✓       | ✓        |      |
+| js_dependencies | ✓    | ✓               | ✓    | ✓       | ✓        | ✓    |
+| chart           |      |                 |      |         |          |      |
+| charts          |      |                 |      |         |          | ✓    |
 
 **chart_id**
 
@@ -65,17 +71,17 @@
 
 添加图表配置和数据。具体请参考其子类定义。
 
-| 图表类 | 函数签名 |
-| ------ | ------ |
-| Base | `add(self, **echarts_options)` |
-| Grid | `add(self, grid_width=None, grid_height=None, grid_top=None, grid_bottom=None, grid_left=None, grid_right=None)` |
-| Overlap | `add(self, chart, xaix_index=0, yaix_index=0, id_add_xaxis=False, is_add_yaxis=False)` |
-| Timeline | `add(self, chart, time_point)` |
-| Page | `add(self, achart_or_charts)` |
+| 图表类      | 函数签名                                     |
+| -------- | ---------------------------------------- |
+| Base     | `add(self, **echarts_options)`           |
+| Grid     | `add(self, grid_width=None, grid_height=None, grid_top=None, grid_bottom=None, grid_left=None, grid_right=None)` |
+| Overlap  | `add(self, chart, xaix_index=0, yaix_index=0, id_add_xaxis=False, is_add_yaxis=False)` |
+| Timeline | `add(self, chart, time_point)`           |
+| Page     | `add(self, achart_or_charts)`            |
 
 **get_js_dependencies(self)**
 
-获取js依赖文件列表。和 属性*js_dependencies* 不同， 这里的元素是包含了文件完整路径。
+获取js依赖文件列表。和 属性 *js_dependencies* 不同， 这里的元素是包含了文件完整路径。
 
 **render(self, path='render.html')**
 

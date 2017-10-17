@@ -6,23 +6,29 @@ This document describes the public API for *pyecharts* library and it will be re
 
 Charts classes is the core component of this library.Each charts class represents the one kind of chart in [Echarts](http://echarts.baidu.com/) .
 
-These charts classes defines in the following packages:
+This lists the inherit tree for these charts classes.
 
-- `pyecharts.base.Base`
-- `pyecharts.charts.*`
-- `pyecharts.custom.*`
+- pyecharts.base.Base
+  - pyecharts.chart.Chart
+    - pyecharts.charts.foo_chart.FOO_CHART
+  - pyecharts.custom.grid.Grid
+  - pyecharts.custom.overlap.Overlap
+  - pyecharts.custom.timeline.Timeline
+- pyecharts.custom.page.Page
 
 ### Properties
 
 This table list properties for these chart classes.
 
-| Properties | Base | Grid | Overlap | Timeline | Page |
-| ------ | ------ | ------ | ------ | ------ | ------ |
-| chart_id | ✓ | ✓ | ✓ | ✓ | |
-| options | ✓ | ✓ | ✓ | ✓ | |
-| js_dependencies | ✓ | ✓ | ✓ | ✓ | ✓ |
-| chart | | ✓ | ✓ | ✓ | |
-| charts | | | | | ✓ |
+| Properites/Charts | Base | Chart/FOO_CHART | Grid | Overlap | Timeline | Page |
+| ----------------- | ---- | --------------- | ---- | ------- | -------- | ---- |
+| chart_id          | ✓    | ✓               | ✓    | ✓       | ✓        |      |
+| width             | ✓    | ✓               | ✓    | ✓       | ✓        |      |
+| heigth            | ✓    | ✓               | ✓    | ✓       | ✓        |      |
+| options           | ✓    | ✓               | ✓    | ✓       | ✓        |      |
+| js_dependencies   | ✓    | ✓               | ✓    | ✓       | ✓        | ✓    |
+| chart             |      |                 |      |         |          |      |
+| charts            |      |                 |      |         |          | ✓    |
 
 **chart_id**
 
@@ -64,13 +70,13 @@ The origin chart  list in the class `pyecharts.custom.page.Page` .Each element c
 
 Add options and data to a chart.See the source code for more detail.
 
-| Chart Class | Function Sign |
-| ------ | ------ |
-| Base | `add(self, **echarts_options)` |
-| Grid | `add(self, grid_width=None, grid_height=None, grid_top=None, grid_bottom=None, grid_left=None, grid_right=None)` |
-| Overlap | `add(self, chart, xaix_index=0, yaix_index=0, id_add_xaxis=False, is_add_yaxis=False)` |
-| Timeline | `add(self, chart, time_point)` |
-| Page | `add(self, achart_or_charts)` |
+| Chart Class | Function Sign                            |
+| ----------- | ---------------------------------------- |
+| Base        | `add(self, **echarts_options)`           |
+| Grid        | `add(self, grid_width=None, grid_height=None, grid_top=None, grid_bottom=None, grid_left=None, grid_right=None)` |
+| Overlap     | `add(self, chart, xaix_index=0, yaix_index=0, id_add_xaxis=False, is_add_yaxis=False)` |
+| Timeline    | `add(self, chart, time_point)`           |
+| Page        | `add(self, achart_or_charts)`            |
 
 **get_js_dependencies(self)**
 
