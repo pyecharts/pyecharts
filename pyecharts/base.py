@@ -10,7 +10,6 @@ import pyecharts.constants as constants
 
 
 class Base(object):
-
     def __init__(self,
                  width=800,
                  height=400,
@@ -34,6 +33,18 @@ class Base(object):
         self._page_title = page_title
         self._jshost = jshost if jshost else constants.CONFIGURATION['HOST']
         self._js_dependencies = {'echarts'}
+
+    @property
+    def chart_id(self):
+        return self._chart_id
+
+    @property
+    def width(self):
+        return self._width
+
+    @property
+    def height(self):
+        return self._height
 
     @property
     def options(self):
