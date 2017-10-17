@@ -4,18 +4,9 @@
 
 ## 图表类
 
-图表类是pyecharts库中最为核心的内容，每一个类代表了[Echarts](http://echarts.baidu.com/) 中一个图表类型。这些图表类继承层次如下列表所示。
+图表类是pyecharts库中最为核心的内容，每一个类代表了[Echarts](http://echarts.baidu.com/) 中一个图表类型。下表显示了这些图表的继承体系。
 
-- pyecharts.base.Base
-    - pyecharts.chart.Chart
-        - pyecharts.charts.foo_chart.FOO_CHART
-    - pyecharts.custom.grid.Grid
-    - pyecharts.custom.overlap.Overlap
-    - pyecharts.custom.timeline.Timeline
-- pyecharts.custom.page.Page
-
-备注：上述中，foo_chart/FOO_CHART代表了Bar/Bar3D等这一类图表类。
-
+![class-relationship-diagram](https://github.com/chenjiandongx/pyecharts/blob/master/images/class-relationship-diagram.png)
 ### 属性
 
 图表类和属性表如下：
@@ -27,7 +18,6 @@
 | heigth          | ✓    | ✓               | ✓    | ✓       | ✓        |      |
 | options         | ✓    | ✓               | ✓    | ✓       | ✓        |      |
 | js_dependencies | ✓    | ✓               | ✓    | ✓       | ✓        | ✓    |
-| chart           |      |                 |      |         |          |      |
 | charts          |      |                 |      |         |          | ✓    |
 
 **chart_id**
