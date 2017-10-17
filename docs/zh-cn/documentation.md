@@ -2477,7 +2477,7 @@ wordcloud.render()
 
 Grid 类的使用：
 1. 引入 `Grid` 类，`from pyecharts import Grid`
-2. 实例化 Grid 类，`grid = Grid()` ，可指定 `page_title` 参数。
+2. 实例化 Grid 类，`grid = Grid()` ，可指定 `page_title`, `width`, `height`, `jhost` 参数。
 3. 使用 `add()` 向 `grid` 中添加图，至少需要设置一个 `grid_top`, `grid_bottom`, `grid_left`, `grid_right` 四个参数中的一个。`grid_width` 和 `grid_height` 一般不用设置，默认即可。
 4. 使用 `render()` 渲染生成 .html 文件
 
@@ -2789,7 +2789,7 @@ grid.render()
 > 用户可以自定义结合 Line/Bar/Kline, Scatter/EffectScatter 图表，将不同类型图表画在一张图上。利用第一个图表为基础，往后的数据都将会画在第一个图表上。   
 Overlap 类的使用：
 1. 引入 `Overlap` 类，`from pyecharts import Overlap`
-2. 实例化 `Overlap` 类，`overlap = Overlap()`  ，可指定 `page_title` 参数。
+2. 实例化 `Overlap` 类，`overlap = Overlap()`  ，可指定 `page_title`, `width`, `height`, `jhost` 参数。
 3. 使用 `add()` 向 `overlap` 中添加图
 4. 使用 `render()` 渲染生成 .html 文件
 
@@ -2962,7 +2962,7 @@ overlap.render()
 
 Page 类的使用：
 1. 引入 `Page` 类，`from pyecharts import Page`
-2. 实例化 `Page` 类，`page = Page()`  ，可指定 `page_title` 参数。
+2. 实例化 `Page` 类，`page = Page()`  ，可指定 `page_title`, `jhost` 参数。
 3. 使用 `add()` 向 `page` 中添加图，可以是单个图实例，也可以是一个图实例列表。
 4. 使用 `render()` 渲染生成 .html 文件
 
@@ -3097,7 +3097,7 @@ page.render()
 
 Timeline 类的使用：
 1. 引入 `Timeline` 类，`from pyecharts import Timeline`
-2. 实例化 `Timeline` 类，`timeline = Timeline()`
+2. 实例化 `Timeline` 类，可指定 `page_title`, `width`, `height`, `jhost`  参数
 3. 使用 `add()` 向 `timeline` 中添加图。如 `add(bar, '2013')` 接受两个参数，第一个为图实例，第二个为时间线的 ”时间点“。
 4. 使用 `render()` 渲染生成 .html 文件
 

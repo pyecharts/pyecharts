@@ -7,6 +7,8 @@ from pyecharts.base import Base
 class Timeline(Base):
 
     def __init__(self, page_title=PAGE_TITLE,
+                 width=800,
+                 height=400,
                  is_auto_play=False,
                  is_loop_play=True,
                  is_rewind_play=False,
@@ -49,7 +51,9 @@ class Timeline(Base):
             Distance between timeline component and the bottom side of the container.
         """
 
-        super(Timeline, self).__init__()
+        super(Timeline, self).__init__(
+            width=width, height=height
+        )
         self._page_title = page_title
         self._time_points = []
         self._option = {
@@ -84,15 +88,15 @@ class Timeline(Base):
         self.__check_components(chart)
         self._time_points.append(time_point)
         self._option.get('baseOption').update(
-            legend=chart._option.get('legend'),
-            backgroundColor=chart._option.get('backgroundColor')
+            legend=chart.options.get('legend'),
+            backgroundColor=chart.options.get('backgroundColor')
         )
         self._option.get('baseOption').get('timeline').update(
             data=self._time_points
         )
         self._option.get('options').append({
-            "series": chart._option.get('series'),
-            "title": chart._option.get('title')
+            "series": chart.options.get('series'),
+            "title": chart.options.get('title')
         })
 
     def __check_components(self, chart):
@@ -101,46 +105,46 @@ class Timeline(Base):
         :param chart:
         :return:
         """
-        _grid = chart._option.get('grid', None)
+        _grid = chart.options.get('grid', None)
         if _grid is not None:
             self._option.get('baseOption').update(grid=_grid)
 
-        _xaxis = chart._option.get('xAxis', None)
+        _xaxis = chart.options.get('xAxis', None)
         if _xaxis is not None:
             self._option.get('baseOption').update(xAxis=_xaxis)
 
-        _yaxis = chart._option.get('yAxis', None)
+        _yaxis = chart.options.get('yAxis', None)
         if _yaxis is not None:
             self._option.get('baseOption').update(yAxis=_yaxis)
 
-        _polar = chart._option.get('polar', None)
+        _polar = chart.options.get('polar', None)
         if _polar is not None:
             self._option.get('baseOption').update(polar=_polar)
 
-        _radiusAxis = chart._option.get('radiusAxis', None)
+        _radiusAxis = chart.options.get('radiusAxis', None)
         if _radiusAxis is not None:
             self._option.get('baseOption').update(radiusAxis=_radiusAxis)
 
-        _angleAxis = chart._option.get('angleAxis', None)
+        _angleAxis = chart.options.get('angleAxis', None)
         if _angleAxis is not None:
             self._option.get('baseOption').update(angleAxis=_angleAxis)
 
-        _radar = chart._option.get('radar', None)
+        _radar = chart.options.get('radar', None)
         if _radar is not None:
             self._option.get('baseOption').update(radar=_radar)
 
-        _visualMap = chart._option.get('visualMap', None)
+        _visualMap = chart.options.get('visualMap', None)
         if _visualMap is not None:
             self._option.get('baseOption').update(visualMap=_visualMap)
 
-        _geo = chart._option.get('geo', None)
+        _geo = chart.options.get('geo', None)
         if _geo is not None:
             self._option.get('baseOption').update(geo=_geo)
 
-        _datazoom = chart._option.get('dataZoom', None)
+        _datazoom = chart.options.get('dataZoom', None)
         if _geo is not None:
             self._option.get('baseOption').update(dataZoom=_datazoom)
 
-        _parallelAxis = chart._option.get('parallelAxis', None)
+        _parallelAxis = chart.options.get('parallelAxis', None)
         if _parallelAxis is not None:
             self._option.get('baseOption').update(parallelAxis=_parallelAxis)

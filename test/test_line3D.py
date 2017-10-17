@@ -2,13 +2,13 @@
 # coding=utf-8
 from __future__ import unicode_literals
 
-from pyecharts import Line3D
+import math
+
 from test.constants import RANGE_COLOR
+from pyecharts import Line3D
 
 
-def test_line3d():
-    # line3d default
-    import math
+def test_line3d_default():
     _data = []
     for t in range(0, 25000):
         _t = t / 1000
@@ -21,7 +21,8 @@ def test_line3d():
                visual_range=[0, 30], grid3d_rotate_sensitivity=5)
     line3d.render()
 
-    # line3d rotate automatically speedup
+
+def test_line3d_rotate_automatically_speedup():
     _data = []
     for t in range(0, 25000):
         _t = t / 1000
