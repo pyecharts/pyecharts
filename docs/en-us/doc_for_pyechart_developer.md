@@ -8,6 +8,14 @@ against `dev` branch too.
 
 If your PR has code changes, please include unit tests. If possible, please attach a screenshot on your contribution. It helps everyone to see your contribution.
 
+## Generate uml diagram
+
+It uses plantuml and please get it from [its website](http://plantuml.com).
+
+```
+jar -jar plantuml.jar class-relationship-diagram.uml.
+```
+
 ## Why the folder `pyecharts/templates/js` is empty?
 
 It is because your git did not update the submodule. Please issue the following command:

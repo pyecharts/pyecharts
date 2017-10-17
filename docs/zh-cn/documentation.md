@@ -688,6 +688,20 @@ bar.render()
 ```
 ![bar-7](https://github.com/chenjiandongx/pyecharts/blob/master/images/bar-7.png) 
 
+直方图示例
+```python
+from pyecharts import Bar
+
+attr = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
+v1 = [5, 20, 36, 10, 75, 90]
+v2 = [10, 25, 8, 60, 20, 80]
+bar = Bar("直方图示例")
+bar.add("", attr * 2, v1 + v2, bar_category_gap=0)
+bar.render()
+```
+![bar-9](https://github.com/chenjiandongx/pyecharts/blob/master/images/bar-9.png) 
+
+
 
 ## Bar3D（3D 柱状图）
 
@@ -2463,7 +2477,7 @@ wordcloud.render()
 
 Grid 类的使用：
 1. 引入 `Grid` 类，`from pyecharts import Grid`
-2. 实例化 Grid 类，`grid = Grid()` ，可指定 `page_title` 参数。
+2. 实例化 Grid 类，`grid = Grid()` ，可指定 `page_title`, `width`, `height`, `jhost` 参数。
 3. 使用 `add()` 向 `grid` 中添加图，至少需要设置一个 `grid_top`, `grid_bottom`, `grid_left`, `grid_right` 四个参数中的一个。`grid_width` 和 `grid_height` 一般不用设置，默认即可。
 4. 使用 `render()` 渲染生成 .html 文件
 
@@ -2775,7 +2789,7 @@ grid.render()
 > 用户可以自定义结合 Line/Bar/Kline, Scatter/EffectScatter 图表，将不同类型图表画在一张图上。利用第一个图表为基础，往后的数据都将会画在第一个图表上。   
 Overlap 类的使用：
 1. 引入 `Overlap` 类，`from pyecharts import Overlap`
-2. 实例化 `Overlap` 类，`overlap = Overlap()`  ，可指定 `page_title` 参数。
+2. 实例化 `Overlap` 类，`overlap = Overlap()`  ，可指定 `page_title`, `width`, `height`, `jhost` 参数。
 3. 使用 `add()` 向 `overlap` 中添加图
 4. 使用 `render()` 渲染生成 .html 文件
 
@@ -2894,6 +2908,25 @@ overlap.render()
 ```
 ![overlap-2](https://github.com/chenjiandongx/pyecharts/blob/master/images/overlap-2.png)
 
+Line + EffectScatter
+```python
+from pyecharts import Line, EffectScatter, Overlap
+
+attr = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
+v1 = [5, 20, 36, 10, 10, 100]
+line = Line("line - es 示例")
+line.add("", attr, v1, is_random=True)
+es = EffectScatter()
+es.add("", attr, v1, effect_scale=8)
+
+overlap = Overlap()
+overlap.add(line)
+overlap.add(es)
+overlap.render()
+```
+![overlap-4](https://github.com/chenjiandongx/pyecharts/blob/master/images/overlap-4.gif)
+
+
 如果想改变轴索引，使其有多 X 轴或者多 Y 轴的话。请看下面
 ```python
 from pyecharts import Line, Bar, Overlap
@@ -2929,7 +2962,7 @@ overlap.render()
 
 Page 类的使用：
 1. 引入 `Page` 类，`from pyecharts import Page`
-2. 实例化 `Page` 类，`page = Page()`  ，可指定 `page_title` 参数。
+2. 实例化 `Page` 类，`page = Page()`  ，可指定 `page_title`, `jhost` 参数。
 3. 使用 `add()` 向 `page` 中添加图，可以是单个图实例，也可以是一个图实例列表。
 4. 使用 `render()` 渲染生成 .html 文件
 
@@ -3064,7 +3097,7 @@ page.render()
 
 Timeline 类的使用：
 1. 引入 `Timeline` 类，`from pyecharts import Timeline`
-2. 实例化 `Timeline` 类，`timeline = Timeline()`
+2. 实例化 `Timeline` 类，可指定 `page_title`, `width`, `height`, `jhost`  参数
 3. 使用 `add()` 向 `timeline` 中添加图。如 `add(bar, '2013')` 接受两个参数，第一个为图实例，第二个为时间线的 ”时间点“。
 4. 使用 `render()` 渲染生成 .html 文件
 
