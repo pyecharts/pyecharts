@@ -9,6 +9,7 @@ class Page(object):
     """
     A composite object to present multiple charts vertically in a single page
     """
+
     def __init__(self, jshost=None, page_title=constants.PAGE_TITLE):
         self.__charts = []
         self._page_title = page_title
