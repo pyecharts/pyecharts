@@ -31,6 +31,11 @@ def test_bar():
     bar.add("商家B", attr, v2, is_convert=True)
     assert "average" not in bar._repr_html_()
 
+    # histogram
+    bar = Bar("直方图示例")
+    bar.add("", attr * 2, v1 + v2, bar_category_gap=0)
+    bar.render()
+
     # bar rotate label
     attr = ["{}天".format(i) for i in range(20)]
     v1 = [random.randint(1, 20) for _ in range(20)]
@@ -51,7 +56,6 @@ def test_bar():
 
 
 def test_bar_datazoom_undefined():
-    # bar dataZoom undefined-type
     attr = ["{}天".format(i) for i in range(30)]
     v1 = [random.randint(1, 30) for _ in range(30)]
     bar = Bar("Bar - datazoom 默认 示例")
@@ -63,10 +67,9 @@ def test_bar_datazoom_undefined():
 
 
 def test_bar_datazoom_slider():
-    # bar dataZoom slider-type
     attr = ["{}天".format(i) for i in range(30)]
     v1 = [random.randint(1, 30) for _ in range(30)]
-    bar = Bar("Bar - datazoom 默认 示例")
+    bar = Bar("Bar - datazoom 示例")
     bar.add("", attr, v1, is_datazoom_show=True, datazoom_type='slider',
             datazoom_range=[10, 25])
     html_content = bar._repr_html_()
@@ -76,7 +79,6 @@ def test_bar_datazoom_slider():
 
 
 def test_bar_datazoom_inside():
-    # bar dataZoom inside-type
     attr = ["{}天".format(i) for i in range(30)]
     v1 = [random.randint(1, 30) for _ in range(30)]
     bar = Bar("Bar - datazoom - inside 示例")
@@ -89,13 +91,11 @@ def test_bar_datazoom_inside():
 
 
 def test_bar_datazoom_both():
-    # bar dataZoom both-type
     attr = ["{}天".format(i) for i in range(30)]
     v1 = [random.randint(1, 30) for _ in range(30)]
     bar = Bar("Bar - datazoom - both 示例")
     bar.add("", attr, v1, is_datazoom_show=True, datazoom_type='both',
             datazoom_range=[10, 25])
-    bar.render()
     html_content = bar._repr_html_()
     assert "dataZoom" in html_content
     assert ': "inside"' in html_content

@@ -3,11 +3,11 @@
 
 from PIL import Image
 
-from pyecharts.base import Base
+from pyecharts.chart import Chart
 from pyecharts.option import get_all_options
 
 
-class Scatter(Base):
+class Scatter(Chart):
     """
     <<< Scatter chart >>>
 
