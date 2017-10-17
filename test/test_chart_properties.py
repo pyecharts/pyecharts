@@ -16,7 +16,7 @@ def test_base_properties():
     eq_(b.width, 800)
     eq_(b.height, 400)
     eq_(len(b.options), 0)  # empty
-    eq_(len(b.js_dependencies), 0)  # empty
+    assert ('echarts' in b.js_dependencies) or ('echarts.min' in b.js_dependencies)
 
 
 def test_chart_properties():
@@ -51,6 +51,6 @@ def test_grid_properties():
     grid = Grid(width=1024, height=768)
     grid.add(bar, grid_bottom="60%")
     grid.add(line, grid_top="60%")
-    eq_(bar.width, 1024)
-    eq_(bar.height, 768)
+    eq_(grid.width, 1024)
+    eq_(grid.height, 768)
     assert ('echarts' in bar.js_dependencies) or ('echarts.min' in bar.js_dependencies)
