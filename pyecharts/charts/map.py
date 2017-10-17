@@ -2,14 +2,14 @@
 # coding=utf-8
 import sys
 
-from pyecharts.base import Base
+from pyecharts.chart import Chart
 from pyecharts.option import get_all_options
 from pyecharts.constants import CITY_NAME_PINYIN_MAP
 
 PY2 = sys.version_info[0] == 2
 
 
-class Map(Base):
+class Map(Chart):
     """
     <<< Map chart >>>
 
