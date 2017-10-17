@@ -6,15 +6,9 @@ This document describes the public API for *pyecharts* library and it will be re
 
 Charts classes is the core component of this library.Each charts class represents the one kind of chart in [Echarts](http://echarts.baidu.com/) .
 
-This lists the inherit tree for these charts classes.
+This pictures  the inherit tree for these charts classes.
 
-- pyecharts.base.Base
-  - pyecharts.chart.Chart
-    - pyecharts.charts.foo_chart.FOO_CHART
-  - pyecharts.custom.grid.Grid
-  - pyecharts.custom.overlap.Overlap
-  - pyecharts.custom.timeline.Timeline
-- pyecharts.custom.page.Page
+![class-relationship-diagram](https://github.com/chenjiandongx/pyecharts/blob/master/images/class-relationship-diagram.png)
 
 ### Properties
 
@@ -27,7 +21,6 @@ This table list properties for these chart classes.
 | heigth            | ✓    | ✓               | ✓    | ✓       | ✓        |      |
 | options           | ✓    | ✓               | ✓    | ✓       | ✓        |      |
 | js_dependencies   | ✓    | ✓               | ✓    | ✓       | ✓        | ✓    |
-| chart             |      |                 |      |         |          |      |
 | charts            |      |                 |      |         |          | ✓    |
 
 **chart_id**
