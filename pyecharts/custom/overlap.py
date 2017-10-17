@@ -7,8 +7,12 @@ from pyecharts.base import Base
 
 class Overlap(Base):
 
-    def __init__(self, page_title=PAGE_TITLE):
-        super(Overlap, self).__init__()
+    def __init__(self, page_title=PAGE_TITLE,
+                 width=800,
+                 height=400):
+        super(Overlap, self).__init__(
+            width=width, height=height
+        )
         self._page_title = page_title
 
     def add(self, chart,
@@ -36,10 +40,10 @@ class Overlap(Base):
             self._js_dependencies = chart.js_dependencies
         else:
             _series = (
-                chart._option.get('legend')[0].get('data'),
-                chart._option.get('series'),
-                chart._option.get('xAxis')[0],
-                chart._option.get('yAxis')[0],
+                chart.options.get('legend')[0].get('data'),
+                chart.options.get('series'),
+                chart.options.get('xAxis')[0],
+                chart.options.get('yAxis')[0],
                 is_add_xaxis,
                 is_add_yaxis,
                 xaxis_index,
@@ -47,7 +51,7 @@ class Overlap(Base):
             )
             self.__custom(_series)
             self._js_dependencies = self._js_dependencies.union(
-                chart._js_dependencies)
+                chart.js_dependencies)
 
     def __custom(self, series):
         """ Appends the data for the series of the chart type

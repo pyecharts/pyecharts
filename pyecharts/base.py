@@ -10,6 +10,7 @@ import pyecharts.constants as constants
 
 
 class Base(object):
+
     def __init__(self,
                  width=800,
                  height=400,
@@ -49,7 +50,9 @@ class Base(object):
         return self._js_dependencies
 
     def show_config(self):
-        """ Print all options of charts"""
+        """
+        Print all options of charts
+        """
         print(json_dumps(self._option, indent=4))
 
     def render_embed(self):
@@ -124,9 +127,8 @@ class Base(object):
         return k_lst, v_lst
 
     def _repr_html_(self):
-        """ Render the options dict, displayed in the jupyter notebook
-
-        :return:
+        """
+        Render the options dict, displayed in the jupyter notebook
         """
         _tmp = 'notebook.html'
         dom = self._render_notebook_dom_()
@@ -140,8 +142,7 @@ class Base(object):
 
     def _render_notebook_dom_(self):
         """
-
-        :return:
+        render dom template for notebook
         """
         _tmp = "notebook_dom.html"
         tmp = template.JINJA2_ENV.get_template(_tmp)
@@ -153,8 +154,7 @@ class Base(object):
 
     def _render_notebook_component_(self):
         """
-
-        :return:
+        render component template for notebook
         """
         _tmp = "notebook_chart_component.html"
         my_option = json_dumps(self._option, indent=4)

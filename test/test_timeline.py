@@ -72,7 +72,7 @@ def test_timeline_pie():
     pie_5 = Pie("2016 年销量比例", "数据纯属虚构")
     pie_5.add("秋季", attr, [randint(10, 100) for _ in range(6)], **style)
 
-    timeline = Timeline(is_auto_play=True, timeline_bottom=0)
+    timeline = Timeline(is_auto_play=True, timeline_bottom=0, width=1200, height=600)
     timeline.add(pie_1, '2012 年')
     timeline.add(pie_2, '2013 年')
     timeline.add(pie_3, '2014 年')
@@ -129,4 +129,4 @@ def test_timeline_bar_line():
     timeline.add(overlap_2, '3 月')
     timeline.add(overlap_3, '4 月')
     timeline.add(overlap_4, '5 月')
-    timeline.render()
+    # timeline.render()
