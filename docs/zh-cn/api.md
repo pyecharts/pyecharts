@@ -18,7 +18,6 @@
 | heigth          | ✓    | ✓               | ✓    | ✓       | ✓        |      |
 | options         | ✓    | ✓               | ✓    | ✓       | ✓        |      |
 | js_dependencies | ✓    | ✓               | ✓    | ✓       | ✓        | ✓    |
-| charts          |      |                 |      |         |          | ✓    |
 
 **chart_id**
 
@@ -74,6 +73,29 @@
 **show_config()**
 
 打印全部 options 属性。
+
+## 多图表
+
+`pyecharts.custom.page.Page` 用于在同一页面显示多个图表，也拥有上述的属性和方法。
+
+同时 `Page` 类继承自 `list` ，因此也支持长度计算(len)、迭代(iter)、索引(index)、切片(slice)、添加(append)、扩展(extend)等操作。
+
+例子：按顺序打印page中每个图表的echarts选项字典。
+
+```python
+page = Page()
+line = Line('Demo Line')
+# ... Add data to line
+page.add(line)
+kline = KLine('Demo kline')
+# ... Add data to kline
+page.append(kline)
+
+for chart in page:
+    chart.show_config()
+```
+
+
 
 ## 数据处理工具
 

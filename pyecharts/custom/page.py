@@ -5,13 +5,13 @@ import pyecharts.template as template
 import pyecharts.constants as constants
 
 
-class Page(object):
+class Page(list):
     """
     A composite object to present multiple charts vertically in a single page
     """
 
     def __init__(self, jshost=None, page_title=constants.PAGE_TITLE):
-        self.__charts = []
+        list.__init__([])
         self._page_title = page_title
         self._jshost = jshost if jshost else constants.CONFIGURATION['HOST']
 
@@ -23,9 +23,9 @@ class Page(object):
         :return:
         """
         if isinstance(achart_or_charts, list):
-            self.__charts.extend(achart_or_charts)
+            self.extend(achart_or_charts)
         else:
-            self.__charts.append(achart_or_charts)
+            self.append(achart_or_charts)
 
     def render(self, path="render.html"):
         """
@@ -52,7 +52,7 @@ class Page(object):
         :return:
         """
         chart_content = ""
-        for chart in self.__charts:
+        for chart in self:
             chart_content += chart.render_embed()
             chart_content += '<br>'
         return chart_content
@@ -73,7 +73,7 @@ class Page(object):
         doms = ""
         components = ""
         dependencies = self._merge_dependencies()
-        for chart in self.__charts:
+        for chart in self:
             doms += chart._render_notebook_dom_()
             components += chart._render_notebook_component_()
 
@@ -86,7 +86,7 @@ class Page(object):
 
     def _merge_dependencies(self):
         dependencies = set()
-        for chart in self.__charts:
+        for chart in self:
             dependencies = dependencies.union(chart._js_dependencies)
         # make sure echarts is the item in the list
         # require(['echarts'....], function(ec) {..}) need it to be first
@@ -95,10 +95,6 @@ class Page(object):
             dependencies.remove('echarts')
             dependencies = ['echarts'] + list(dependencies)
         return dependencies
-
-    @property
-    def charts(self):
-        return self.__charts
 
     @property
     def js_dependencies(self):
