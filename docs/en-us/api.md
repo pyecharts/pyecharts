@@ -21,7 +21,6 @@ This table list properties for these chart classes.
 | heigth            | ✓    | ✓               | ✓    | ✓       | ✓        |      |
 | options           | ✓    | ✓               | ✓    | ✓       | ✓        |      |
 | js_dependencies   | ✓    | ✓               | ✓    | ✓       | ✓        | ✓    |
-| charts            |      |                 |      |         |          | ✓    |
 
 **chart_id**
 
@@ -41,11 +40,7 @@ Data type:dict.The config options for a chart。Each chart has its own format an
 
 **js_dependencies**
 
-Data type:set.The js filename collections for a chart's dependencies.Every element do not contain the filename extension(.js).E.g `{'echarts.min', 'fujian'}` 。
-
-**charts**
-
-The origin chart  list in the class `pyecharts.custom.page.Page` .Each element can be a instance of the subclass of `pyecharts.base.Base` .
+Data type:set.The js filename collections for a chart's dependencies.Every element do not contain the filename extension(.js).E.g `{'echarts.min', 'fujian'}` .
 
 ### Methods
 
@@ -55,11 +50,11 @@ Add options and data to a chart.See the source code for more detail.
 
 | Chart Class | Function Sign                            |
 | ----------- | ---------------------------------------- |
-| Base        | `add(**echarts_options)`           |
+| Base        | `add(**echarts_options)`                 |
 | Grid        | `add(grid_width=None, grid_height=None, grid_top=None, grid_bottom=None, grid_left=None, grid_right=None)` |
 | Overlap     | `add(chart, xaix_index=0, yaix_index=0, id_add_xaxis=False, is_add_yaxis=False)` |
-| Timeline    | `add(chart, time_point)`           |
-| Page        | `add(achart_or_charts)`            |
+| Timeline    | `add(chart, time_point)`                 |
+| Page        | `add(achart_or_charts)`                  |
 
 **get_js_dependencies()**
 
@@ -76,6 +71,29 @@ Render javascript code fragment including options.
 **show_config()**
 
 Print all options of charts
+
+## Multiple Chart
+
+`pyecharts.custom.page.Page` is used to show multiple chart in a html page,which includes properties and methods above.
+
+Also, `Page` inherits built-in `list` and len,iter,index,splice,append,extend are supported.
+
+Example,print the option for each chart in a page object.
+
+```python
+page = Page()
+line = Line('Demo Line')
+# ... Add data to line
+page.add(line)
+kline = KLine('Demo kline')
+# ... Add data to kline
+page.append(kline)
+
+for chart in page:
+    chart.show_config()
+```
+
+
 
 ## Data Hanlder Methods
 
