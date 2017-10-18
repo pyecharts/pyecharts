@@ -197,6 +197,7 @@ def test_more():
     liquid = Liquid("水球图示例")
     liquid.add("Liquid", [0.6])
     page.add(liquid)
-    assert len(page.charts) == 7
+    assert len(page) == 7
+    assert isinstance(page[0], Line)
     assert ('echarts' in page.js_dependencies) or ('echarts.min' in page.js_dependencies)
     page.render()
