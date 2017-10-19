@@ -130,4 +130,4 @@ def test_timeline_bar_line():
     timeline.add(overlap_2, '3 月')
     timeline.add(overlap_3, '4 月')
     timeline.add(overlap_4, '5 月')
-    # timeline.render()
+    timeline.render()

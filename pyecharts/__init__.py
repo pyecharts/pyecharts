@@ -11,6 +11,7 @@ from pyecharts.charts.effectscatter import EffectScatter
 from pyecharts.charts.funnel import Funnel
 from pyecharts.charts.gauge import Gauge
 from pyecharts.charts.geo import Geo
+from pyecharts.charts.geolines import GeoLines
 from pyecharts.charts.graph import Graph
 from pyecharts.charts.heatmap import HeatMap
 from pyecharts.charts.kline import Kline
@@ -37,3 +38,4 @@ from pyecharts.custom.timeline import Timeline
 
 # misc
 from pyecharts.template import online
+from pyecharts.style import Style
