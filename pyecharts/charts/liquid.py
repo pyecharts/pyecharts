@@ -50,10 +50,6 @@ class Liquid(Chart):
         if liquid_color:
             _color = liquid_color
 
-        _shape = 'circle'
-        if shape in ('circle', 'rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow'):
-            _shape = shape
-
         self._option.get('series').append({
             "type": "liquidFill",
             "name": name,
@@ -62,7 +58,7 @@ class Liquid(Chart):
             "animationDuration": _animation_dur,
             "animationDurationUpdate": _animation_dur_update,
             "color": _color,
-            "shape": _shape,
+            "shape": shape,
             "outline": {
                 "show": is_liquid_outline_show
             }
