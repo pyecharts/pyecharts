@@ -9,8 +9,9 @@ chart_init = {
     "title_pos": "center",
     "width": 1200,
     "height": 600,
-    "background_color":'#404a59'
+    "background_color": '#404a59'
 }
+
 
 def test_geo_china():
     data = [
@@ -270,4 +271,17 @@ def test_geo_shantou_city():
     geo.add("", attr, value, maptype="汕头", is_visualmap=True,
             tooltip_formatter='{b}', is_legend_show=False,
             label_emphasis_textsize=15, label_emphasis_pos='right')
+    geo.render()
+
+
+def test_geo_coords():
+    coords = {
+        "0": [0.572430556, 19.246],
+        "1": [0.479039352, 1.863],
+        "2": [0.754143519, -20.579]
+    }
+
+    geo = Geo(**chart_init)
+    geo.add("", ["0", "1", "2"], [6, 5.8, 6.2], is_visualmap=True,
+            geo_cities_coords=coords, maptype="world")
     geo.render()
