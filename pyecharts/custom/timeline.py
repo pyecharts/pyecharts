@@ -105,46 +105,12 @@ class Timeline(Base):
         :param chart:
         :return:
         """
-        _grid = chart.options.get('grid', None)
-        if _grid is not None:
-            self._option.get('baseOption').update(grid=_grid)
+        _compoents = [
+            'gird', 'xAxis', 'yAxis', 'polar', 'radiusAxis', 'geo'
+            'angleAxis', 'radar', 'visualMap', 'dataZoom', 'parallelAxis'
+        ]
 
-        _xaxis = chart.options.get('xAxis', None)
-        if _xaxis is not None:
-            self._option.get('baseOption').update(xAxis=_xaxis)
-
-        _yaxis = chart.options.get('yAxis', None)
-        if _yaxis is not None:
-            self._option.get('baseOption').update(yAxis=_yaxis)
-
-        _polar = chart.options.get('polar', None)
-        if _polar is not None:
-            self._option.get('baseOption').update(polar=_polar)
-
-        _radiusAxis = chart.options.get('radiusAxis', None)
-        if _radiusAxis is not None:
-            self._option.get('baseOption').update(radiusAxis=_radiusAxis)
-
-        _angleAxis = chart.options.get('angleAxis', None)
-        if _angleAxis is not None:
-            self._option.get('baseOption').update(angleAxis=_angleAxis)
-
-        _radar = chart.options.get('radar', None)
-        if _radar is not None:
-            self._option.get('baseOption').update(radar=_radar)
-
-        _visualMap = chart.options.get('visualMap', None)
-        if _visualMap is not None:
-            self._option.get('baseOption').update(visualMap=_visualMap)
-
-        _geo = chart.options.get('geo', None)
-        if _geo is not None:
-            self._option.get('baseOption').update(geo=_geo)
-
-        _datazoom = chart.options.get('dataZoom', None)
-        if _geo is not None:
-            self._option.get('baseOption').update(dataZoom=_datazoom)
-
-        _parallelAxis = chart.options.get('parallelAxis', None)
-        if _parallelAxis is not None:
-            self._option.get('baseOption').update(parallelAxis=_parallelAxis)
+        for component in _compoents:
+            _c = chart.options.get(component, None)
+            if _c is not None:
+                self._option.get('baseOption').update({component: _c})
