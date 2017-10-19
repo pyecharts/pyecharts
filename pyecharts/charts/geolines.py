@@ -3,16 +3,15 @@
 
 from pyecharts.chart import Chart
 from pyecharts.option import get_all_options
-from pyecharts.constants import CITY_GEO_COORDS
-from pyecharts.constants import CITY_NAME_PINYIN_MAP
+from pyecharts.constants import (CITY_GEO_COORDS,
+                                 CITY_NAME_PINYIN_MAP, SYMBOL)
 
 
 class GeoLines(Chart):
     """
     Geographic coordinate system component.
 
-    It is used to draw maps, which also supports scatter series, and line
-    series.
+    It is used to draw maps, which also supports lines.
     """
     def __init__(self, title="", subtitle="", **kwargs):
         super(GeoLines, self).__init__(title, subtitle, **kwargs)
@@ -37,6 +36,27 @@ class GeoLines(Chart):
               is_geo_effect_show=True,
               is_roam=True,
               **kwargs):
+        """
+
+        :param name:
+        :param data:
+        :param maptype:
+        :param symbol:
+        :param symbol_size:
+        :param border_color:
+        :param geo_normal_color:
+        :param geo_emphasis_color:
+        :param geo_cities_coords:
+        :param geo_effect_period:
+        :param geo_effect_traillength:
+        :param geo_effect_color:
+        :param geo_effect_symbol:
+        :param geo_effect_symbolsize:
+        :param is_geo_effect_show:
+        :param is_roam:
+        :param kwargs:
+        :return:
+        """
 
         chart = get_all_options(**kwargs)
         self._zlevel += 1
@@ -44,6 +64,9 @@ class GeoLines(Chart):
             _geo_cities_coords = geo_cities_coords
         else:
             _geo_cities_coords = CITY_GEO_COORDS
+
+        if geo_effect_symbol == "plane":
+            geo_effect_symbol = SYMBOL['plane']
 
         _data_lines, _data_scatter = [], []
         for d in data:
