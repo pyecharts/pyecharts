@@ -21,7 +21,6 @@ This table list properties for these chart classes.
 | heigth            | ✓    | ✓               | ✓    | ✓       | ✓        |      |
 | options           | ✓    | ✓               | ✓    | ✓       | ✓        |      |
 | js_dependencies   | ✓    | ✓               | ✓    | ✓       | ✓        | ✓    |
-| charts            |      |                 |      |         |          | ✓    |
 
 **chart_id**
 
@@ -43,9 +42,6 @@ Data type:dict.The config options for a chart。Each chart has its own format an
 
 Data type:set.The js filename collections for a chart's dependencies.Every element do not contain the filename extension(.js).E.g `{'echarts.min', 'fujian'}` 。
 
-**charts**
-
-The origin chart  list in the class `pyecharts.custom.page.Page` .Each element can be a instance of the subclass of `pyecharts.base.Base` .
 
 ### Methods
 
