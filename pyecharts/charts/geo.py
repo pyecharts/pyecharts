@@ -70,13 +70,13 @@ class Geo(Chart):
             _geo_cities_coords = CITY_GEO_COORDS
 
         _data = []
-        for name, value in zip(attr, value):
-            if name in _geo_cities_coords:
-                city_coordinate = _geo_cities_coords.get(name)
-                city_coordinate.append(value)
-                _data.append({"name": name, "value": city_coordinate})
+        for _name, _value in zip(attr, value):
+            if _name in _geo_cities_coords:
+                city_coordinate = _geo_cities_coords.get(_name)
+                city_coordinate.append(_value)
+                _data.append({"name": _name, "value": city_coordinate})
             else:
-                print("%s coordinates is not found" % name)
+                print("%s coordinates is not found" % _name)
         self._option.update(
             geo={
                 "map": maptype,
