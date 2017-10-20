@@ -10,6 +10,7 @@ import pyecharts.constants as constants
 
 
 class Base(object):
+
     def __init__(self,
                  width=800,
                  height=400,
