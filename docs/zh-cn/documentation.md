@@ -3326,7 +3326,7 @@ page.render()
 
 Timeline 类的使用：
 1. 引入 `Timeline` 类，`from pyecharts import Timeline`
-2. 实例化 `Timeline` 类，可指定 `page_title`, `width`, `height`, `jhost`  参数
+2. 实例化 `Timeline` 类
 3. 使用 `add()` 向 `timeline` 中添加图。如 `add(bar, '2013')` 接受两个参数，第一个为图实例，第二个为时间线的 ”时间点“。
 4. 使用 `render()` 渲染生成 .html 文件
 
@@ -3334,6 +3334,12 @@ Timeline 类的使用：
 
 * page_title -> str  
     生成 html 文件的 `<title>` 标签的值，默认为'Echarts'
+* width -> int  
+    画布宽度，默认为 800
+* height -> int  
+    画布高度，默认为 400
+* jhost -> str  
+    自定义每个实例的 JavaScript host
 * is_auto_play -> bool  
     是否自动播放，默认为 Flase
 * is_loop_play -> bool  
