@@ -97,5 +97,9 @@ class Page(object):
         return dependencies
 
     @property
+    def charts(self):
+        return self.__charts
+
+    @property
     def js_dependencies(self):
         return self._merge_dependencies()

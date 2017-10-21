@@ -7,10 +7,9 @@ from pyecharts.option import get_all_options
 
 class EffectScatter(Scatter):
     """
-    <<< EffectScatter chart >>>
+    <<< 带有涟漪特效动画的散点图 >>>
 
-    The scatter graph with ripple animation.
-    The special animation effect can visually highlights some data.
+    利用动画特效可以将某些想要突出的数据进行视觉突出。
     """
     def __init__(self, title="", subtitle="", **kwargs):
         super(EffectScatter, self).__init__(title, subtitle, **kwargs)
@@ -24,14 +23,13 @@ class EffectScatter(Scatter):
         """
 
         :param name:
-            Series name used for displaying in tooltip and filtering with legend,
-            or updating data and configuration with setOption.
+            系列名称，用于 tooltip 的显示，legend 的图例筛选。
         :param x_axis:
-            data of xAxis
+            x 坐标轴数据。
         :param y_axis:
-            data of yAxis
+            y 坐标轴数据。
         :param symbol_size:
-            symbol size
+            标记图形大小。
         :param kwargs:
         """
         assert len(x_axis) == len(y_axis)
