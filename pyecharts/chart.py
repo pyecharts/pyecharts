@@ -24,49 +24,33 @@ class Chart(Base):
         """
 
         :param title:
-            chart title
+            主标题文本，支持 \n 换行，默认为 ""
         :param subtitle:
-            chart subtitle
+            副标题文本，支持 \n 换行，默认为 ""
         :param width:
-            Canvas width
+            画布宽度，默认为 800（px）
         :param height:
-            Canvas height
+            画布高度，默认为 400（px）
         :param title_pos:
-            Distance between grid component and the left side of the container.
-            title_pos value can be instant pixel value like 20,
-            percentage value relative to container width like '20%',
-            or a descriptive string: 'left', 'center', or 'right'.
-            If the title_pos value is set to be 'left', 'center', or 'right',
-            then the component will be aligned automatically based on position.
+            标题距离左侧距离，默认为'left'，有'auto', 'left', 'right',
+            'center'可选，也可为百分比或整数
         :param title_top:
-            Distance between grid component and the top side of the container.
-            top value can be instant pixel value like 20,
-            percentage value relative to container width like '20%',
-            or a descriptive string: 'top', 'middle', or 'bottom'.
-            If the left value is set to be 'top', 'middle', or 'bottom',
-            then the component will be aligned automatically based on position.
+            标题距离顶部距离，默认为'top'，有'top', 'middle', 'bottom'可选，
+            也可为百分比或整数
         :param title_color:
-            main title text color.
+            主标题文本颜色，默认为 '#000'
         :param subtitle_color:
-            subtitle text color.
+            副标题文本颜色，默认为 '#aaa'
         :param title_text_size:
-            main title font size
+            主标题文本字体大小，默认为 18
         :param subtitle_text_size:
-            subtitle font size
+            副标题文本字体大小，默认为 12
         :param background_color:
-            Background color of title, which is transparent by default.
-            Color can be represented in RGB, for example 'rgb(128, 128, 128)'.
-            RGBA can be used when you need alpha channel,
-            for example 'rgba(128, 128, 128, 0.5)'.
-            You may also use hexadecimal format, for example '#ccc'.
-        :param title:
-            The main title text, supporting for \n for newlines.
-        :param subtitle:
-            Subtitle text, supporting for \n for newlines.
+            画布背景颜色，默认为 '#fff'
         :param page_title:
-            specify html <title> value
+            指定生成的 html 文件中 <title> 标签的值。默认为'Echarts'
         :param jshost:
-            custom javascript host for the particular chart only
+            自定义每个实例的 JavaScript host
         """
         super(Chart, self).__init__(
             width=width, height=height,
@@ -310,39 +294,41 @@ class Chart(Base):
             zaxis3d_min=None,
             zaxis3d_max=None,
             zaxis3d_margin=None, **kwargs):
-        """ The base class's add() is just to provide a hint option"""
+        """ `add()` 方法只是用于提供自动参数补全 """
         pass
 
     def _config_components(self, is_visualmap=False,
                            is_more_utils=False,
                            **kwargs):
-        """ config components of chart
+        """ 图形组件配置项
 
         :param is_visualmap:
-            It specifies whether to use the visualMap component.
+            指定是否使用 visualMap 组件
         :param is_datazoom_show:
-            It specifies whether to show the dataZoom component.
+            指定是否使用 dataZoom 组件
         :param is_more_utils:
-            It specifies whether to show more utils in toolbox component.
+            指定是否提供更多的实用小工具
         :param kwargs:
         """
         kwargs.update(colorlst=self._colorlst)
         chart = get_all_options(**kwargs)
         self._option.update(color=chart['color'])
 
-        # legend component
+        # legend
         self._option.get('legend')[0].update(chart['legend'])
-        # tooltip component
+
+        # tooltip
         self._option.update(tooltip=chart['tooltip'])
 
-        # dataZoom component
+        # dataZoom，勿改动
         if kwargs.get('is_datazoom_show', None) is True:
-            # do not change this line anymore
             self._option.update(dataZoom=chart['datazoom'])
-        # visualMap component
+
+        # visualMap
         if is_visualmap:
             self._option.update(visualMap=chart['visual_map'])
-        # toolbox component
+
+        # toolbox
         if is_more_utils:
             self._option.get('toolbox').get('feature').update(
                 magicType={
@@ -352,10 +338,12 @@ class Chart(Base):
                         "line": "折线图",
                         "bar": "柱状图",
                         "stack": "堆叠",
-                        "tiled": "平铺"}},
+                        "tiled": "平铺"
+                    }},
                 dataZoom={
                     "show": True,
                     "title": {
                         "zoom": "区域缩放",
-                        "back": "缩放还原"}}
+                        "back": "缩放还原"
+                    }}
             )
