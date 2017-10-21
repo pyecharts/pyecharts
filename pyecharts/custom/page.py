@@ -1,18 +1,15 @@
-#!/usr/bin/env python
 # coding=utf-8
 
-from pyecharts import template
-from pyecharts import utils
+import pyecharts.utils as utils
+import pyecharts.template as template
 import pyecharts.constants as constants
-from pyecharts.template import (
-    produce_require_configuration,
-    produce_html_script_list)
 
 
 class Page(object):
     """
     A composite object to present multiple charts vertically in a single page
     """
+
     def __init__(self, jshost=None, page_title=constants.PAGE_TITLE):
         self.__charts = []
         self._page_title = page_title
@@ -40,7 +37,7 @@ class Page(object):
         template_name = "multicharts.html"
         chart_content = self.render_embed()
         dependencies = self._merge_dependencies()
-        script_list = produce_html_script_list(dependencies)
+        script_list = template.produce_html_script_list(dependencies)
         tmp = template.JINJA2_ENV.get_template(template_name)
         html = tmp.render(multi_chart_content=chart_content,
                           page_title=self._page_title,
@@ -65,7 +62,7 @@ class Page(object):
         Declare its javascript dependencies for embedding purpose
         """
         unordered_js_dependencies = self._merge_dependencies()
-        return produce_html_script_list(unordered_js_dependencies)
+        return template.produce_html_script_list(unordered_js_dependencies)
 
     def _repr_html_(self):
         """
@@ -80,7 +77,7 @@ class Page(object):
             doms += chart._render_notebook_dom_()
             components += chart._render_notebook_component_()
 
-        require_config = produce_require_configuration(
+        require_config = template.produce_require_configuration(
             dependencies, self._jshost)
         tmp = template.JINJA2_ENV.get_template(_tmp)
         html = tmp.render(
@@ -98,3 +95,11 @@ class Page(object):
             dependencies.remove('echarts')
             dependencies = ['echarts'] + list(dependencies)
         return dependencies
+
+    @property
+    def charts(self):
+        return self.__charts
+
+    @property
+    def js_dependencies(self):
+        return self._merge_dependencies()

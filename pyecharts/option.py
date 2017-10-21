@@ -24,46 +24,43 @@ def label(type=None,
           label_emphasis_textcolor='#fff',
           label_emphasis_textsize=12,
           **kwargs):
-    """ Text label of , to explain some data information about graphic item like value,
-        name and so on.In ECharts 3, to make the configuration structure flatter,
-        labelis taken to be at the same level with itemStyle, and has two status
-        normal and emphasis as itemStyle does.
+    """ 图形上的文本标签，可用于说明图形的一些数据信息，比如值，名称等。
 
     :param type:
-        Chart type
+        图形类型
     :param is_label_emphasis:
-        It specifies whether to show laebl in emphasis status.
+        是否高亮显示标签，默认显示。高亮标签即选中数据时显示的信息项。
     :param is_label_show:
-        It specifies whether to show laebl in normal status.
+        是否正常显示标签，默认不显示。标签即各点的数据项信息
     :param label_pos:
-        Label position.It can be 'top', 'left', 'right', 'bottom', 'inside','outside'
+        标签的位置，Bar 图默认为'top'。有'top', 'left', 'right', 'bottom',
+        'inside', 'outside'可选
     :param label_text_color:
-        Label text color.
+        标签字体颜色，默认为 "#000"
     :param label_text_size:
-        Label font size.
+        标签字体大小，默认为 12
     :param label_formatter:
-        The template variables are {a}, {b}, {c}, {d} and {e}, which stands for series name,
-        data name and data value and ect. When trigger is set to be 'axis',
-        there may be data from multiple series.
-        In this time, series index can be refered as {a0}, {a1}, or {a2}.
-        {a}, {b}, {c}, {d} have different meanings for different series types:
-        Line: (area) charts, bar (column) charts,
-            K charts:
-                {a} for series name, {b} for category name, {c} for data value, {d} for none;
-        Scatter: (bubble) charts:
-            {a} for series name, {b} for data name, {c} for data value, {d} for none;
-        Map:
-            {a} for series name, {b} for area name, {c} for merging data, {d} for none;
-        Pie: charts, gauge charts, funnel charts: {a} for series name,
-            {b} for data item name, {c} for data value, {d} for percentage.
+        模板变量有 {a}, {b}，{c}，{d}，{e}，分别表示系列名，数据名，数据值等。
+        使用示例，如 label_formatter='{a}'
+        在 trigger 为 'axis' 的时候，会有多个系列的数据，此时可以通过 {a0}, {a1}, {a2}
+        这种后面加索引的方式表示系列的索引。不同图表类型下的 {a}，{b}，{c}，{d} 含义不一样。
+        其中变量 {a}, {b}, {c}, {d} 在不同图表类型下代表数据含义为：
+            折线（区域）图、柱状（条形）图、K线图 :
+                {a}（系列名称），{b}（类目值），{c}（数值）, {d}（无）
+            散点图（气泡）图 :
+                {a}（系列名称），{b}（数据名称），{c}（数值数组）, {d}（无）
+            地图 :
+                {a}（系列名称），{b}（区域名称），{c}（合并数值）, {d}（无）
+            饼图、仪表盘、漏斗图:
+                {a}（系列名称），{b}（数据项名称），{c}（数值）, {d}（百分比）
     :param label_emphasis_pos:
-        Label emphasis position.It can be 'top', 'left', 'right', 'bottom', 'inside','outside'
+        高亮标签的位置，Bar 图默认为'top'。有'top', 'left', 'right', 'bottom',
+        'inside', 'outside'可选
     :param label_emphasis_textcolor:
-        Label emphasis text color.
+        高亮标签字体颜色，默认为 "#fff"
     :param label_emphasis_textsize:
-        Label emphasis font size.
+        高亮标签字体大小，默认为 12
     :param kwargs:
-    :return:
     """
     if label_pos is None:
         label_pos = "outside" if type in ["pie", "graph"] else "top"
@@ -100,13 +97,12 @@ def color(colorlst=None,
     """
 
     :param colorlst:
-        Global color list
+        全局颜色列表
     :param is_random:
-        It specifies whether to random global color list.
+        指定是否随机打乱全局颜色列表
     :param label_color:
-        color append to global color list
+        追加的颜色列表
     :param kwargs:
-    :return:
     """
     if colorlst is None:
         colorlst = []
@@ -126,24 +122,21 @@ def line_style(type=None,
                line_type="solid",
                line_color=None,
                **kwargs):
-    """
+    """ 带线图形的线的风格选项
 
     :param type:
-        Chart type
+        图形类型
     :param line_width:
-        Line width.
+        线的宽度，默认为 1
     :param line_opacity:
-        Opacity of the component.
-        Supports value from 0 to 1, and the component will not be drawn when set to 0.
+        线的透明度，0 为完全透明，1 为完全不透明。默认为 1
     :param line_curve:
-        Edge curvature, which supports value from 0 to 1.
-        The larger the value, the greater the curvature. -> Graph、Sankey
+        线的弯曲程度，0 为完全不弯曲，1 为最弯曲。默认为 0
     :param line_type:
-        Line type,it can be 'solid', 'dashed', 'dotted'
+        线的类型，有'solid', 'dashed', 'dotted'可选。默认为'solid'
     :param line_color:
-        color of line
+        线的颜色
     :param kwargs:
-    :return:
     """
     if line_color is None and type == "graph":
         line_color = '#aaa'
@@ -165,9 +158,8 @@ def split_line(is_splitline_show=True, **kwargs):
     """
 
     :param is_splitline_show:
-        It specifies whether to show split line.
+        指定是否显示分割线
     :param kwargs:
-    :return:
     """
     _split_line = {
         "show": is_splitline_show,
@@ -181,9 +173,8 @@ def axis_line(is_axisline_show=True, **kwargs):
     """
 
     :param is_axisline_show:
-        It specifies whether to show axis line.
+        指定是否显示坐标轴线
     :param kwargs:
-    :return:
     """
     _axis_line = {
         "show": is_axisline_show,
@@ -197,9 +188,8 @@ def split_area(is_area_show=True, **kwargs):
     """
 
     :param is_area_show:
-        It specifies whether to show split area.
+        指定是否显示标记区域
     :param kwargs:
-    :return:
     """
     _split_area = {
         "show": is_area_show,
@@ -216,14 +206,12 @@ def area_style(flag=False,
     """
 
     :param flag:
-        chart type flag
+        判断符
     :param area_opacity:
-        Opacity of the component.
-        Supports value from 0 to 1, and the component will not be drawn when set to 0.
+        区域透明度。支持从 0 到 1 的数字，为 0 时不绘制该图形。
     :param area_color:
-        Fill color.
+        填充的颜色
     :param kwargs:
-    :return:
     """
     if area_opacity is None:
         area_opacity = 0 if flag else 1
@@ -272,130 +260,107 @@ def xy_axis(type=None,
             is_xaxis_show=True,
             is_yaxis_show=True,
             **kwargs):
-    """
+    """ 直角坐标系中的 x、y 轴(Line、Bar、Scatter、EffectScatter、Kline)。
+
     :param type:
-        Chart type
+        图形类型。
     :param x_axis:
-        xAxis data
+        x 轴数据项。
     :param xaxis_margin:
-        The margin between the axis label and the xaxis line.
+        x 轴刻度标签与轴线之间的距离。默认为 8
     :param xaxis_name_size:
-        xaxis name font size
+        x 轴名称体大小，默认为 14
     :param xaxis_name_gap:
-        Gap between axis name and xaxis line.
+        x 轴名称与轴线之间的距离，默认为 25
     :param xaxis_name:
-        Name of xAxis
+        x 轴名称
     :param xaxis_name_pos:
-        Location of xAxis name.It can be 'start'，'middle'，'end'
+        x 轴名称位置，有'start'，'middle'，'end'可选
     :param xaxis_rotate:
-        Rotation degree of xaxis label, which is especially useful when
-        there is no enough space for category axis.
-        Rotation degree is from -90 to 90.
+        x 轴刻度标签旋转的角度，在类目轴的类目标签显示不下的时候可以通过旋转防止标
+        签之间重叠。默认为 0，即不旋转。旋转的角度从 -90 度到 90 度。
     :param xaxis_min:
-        The minimun value of xaxis.
+        x 坐标轴刻度最小值，默认为自适应。使用特殊值 "dataMin" 可自定以数
+        据中最小值为 x 轴最小值。
     :param xaxis_max:
-        The maximun value of xaxis.
+        x 坐标轴刻度最大值，默认为自适应。使用特殊值 "dataMax" 可自定以数
+        据中最小值为 x 轴最大值。
     :param xaxis_type:
-        Type of xaxis
-        'value':
-            Numerical axis, suitable for continuous data.
-        'category':
-            Category axis, suitable for discrete category data.
-            Data should only be set via data for this type.
-        'log':
-            Log axis, suitable for log data.
+        x 坐标轴类型
+            'value'：数值轴，适用于连续数据。
+            'category'：类目轴，适用于离散的类目数据。
+            'log'：对数轴。适用于对数数据。
     :param xaxis_interval:
-        The display interval of the axis scale label is valid in the category xaxis.
-        By default, labels are displayed using labels that do not overlap the labels
-        Set to 0 to force all labels to be displayed
-        and label is one by one if setting as 1; If 2,it will be one label separates
-        from each other, and so on.
+        x 轴刻度标签的显示间隔，在类目轴中有效。默认会采用标签不重叠的策略间隔显示标签。
+        设置成 0 强制显示所有标签。设置为 1，表示『隔一个标签显示一个标签』，
+        如果值为 2，表示隔两个标签显示一个标签，以此类推
     :param xaxis_force_interval:
-        Compulsively set segmentation interval for xaxis.
-        As splitNumber is a recommendation value, the calculated tick may not be
-        the same as expected. In this case, interval should be used along with
-        min and max to compulsively set tickings. But in most cases, we do not
-        suggest using this, out automatic calculation is enough for most situations.
+        强制设置 x 坐标轴分割间隔。如设置为 50 则刻度为 [0, 50, 150, ...]，设置为 "auto"
+        则只显示两个刻度。一般情况下不建议设置这个参数！！
+        因为 splitNumber 是预估的值，实际根据策略计算出来的刻度可能无法达到想要的效果，
+        这时候可以使用 interval 配合 min、max 强制设定刻度划分。在类目轴中无效。
     :param xaxis_pos:
-        The position of x axis.
-        options: 'top' or 'bottom'
-        The first x axis in grid defaults to be on the bottom of the grid, and
-        the second x axis is on the other side against the first x axis.
+        x 坐标轴位置，有'top','bottom'可选
     :param yaxis_margin:
-        The margin between the axis label and the yaxis line.
+        y 轴刻度标签与轴线之间的距离。默认为 8
     :param yaxis_name_size:
-        yaxis name font size
+        y 轴名称体大小，默认为 14
     :param yaxis_name_gap:
-        Gap between axis name and yaxis line.
+        y 轴名称与轴线之间的距离，默认为 25
     :param yaxis_name:
-        Name of yAxis
+        y 轴名称
     :param yaxis_name_pos:
-        Location of yAxis name.It can be 'start'，'middle'，'end'
+        y 轴名称位置，有'start', 'middle'，'end'可选
     :param yaxis_rotate:
-        Rotation degree of yaxis label, which is especially useful
-        when there is no enough space for category axis.
-        Rotation degree is from -90 to 90.
+        y 轴刻度标签旋转的角度，在类目轴的类目标签显示不下的时候可以通过旋转防止标
+        签之间重叠。默认为 0，即不旋转。旋转的角度从 -90 度到 90 度。
     :param yaxis_min:
-        The minimun value of yaxis.
+        y 坐标轴刻度最小值，默认为自适应。使用特殊值 "dataMin" 可自定以数
+        据中最小值为 y 轴最小值。
     :param yaxis_max:
-        The maximun value of yaxis.
+        y 坐标轴刻度最大值，默认为自适应。使用特殊值 "dataMax" 可自定以数
+        据中最小值为 y 轴最大值。
     :param yaxis_type:
-        Type of yaxis
-        'value':
-            Numerical axis, suitable for continuous data.
-        'category':
-            Category axis, suitable for discrete category data.
-            Data should only be set via data for this type.
-        'log':
-            Log axis, suitable for log data.
+        y 坐标轴类型
+            'value'：数值轴，适用于连续数据。
+            'category'：类目轴，适用于离散的类目数据。
+            'log'：对数轴。适用于对数数据。
     :param yaxis_interval:
-        The display interval of the axis scale label is valid in the category yaxis.
-        By default, labels are displayed using labels that do not overlap the labels
-        Set to 0 to force all labels to be displayed
-        and label is one by one if setting as 1; If 2,it will be one label separates
-        from each other, and so on.
+        y 轴刻度标签的显示间隔，在类目轴中有效。默认会采用标签不重叠的策略间隔显示标签。
+        设置成 0 强制显示所有标签。设置为 1，表示『隔一个标签显示一个标签』，
+        如果值为 2，表示隔两个标签显示一个标签，以此类推
     :param yaxis_force_interval:
-        Compulsively set segmentation interval for yaxis.
-        As splitNumber is a recommendation value, the calculated tick may not be
-        the same as expected. In this case, interval should be used along with
-        min and max to compulsively set tickings. But in most cases, we do not
-        suggest using this, out automatic calculation is enough for most situations.
+        强制设置 y 坐标轴分割间隔。如设置为 50 则刻度为 [0, 50, 150, ...]，设置为 "auto"
+        则只显示两个刻度。一般情况下不建议设置这个参数！！
+        因为 splitNumber 是预估的值，实际根据策略计算出来的刻度可能无法达到想要的效果，
+        这时候可以使用 interval 配合 min、max 强制设定刻度划分。在类目轴中无效。
     :param yaxis_pos:
-        the position of y axis.
-        options: 'left' or 'right'
-        The first y axis in grid defaults to be the left ('left') of the grid, and
-        the second y axis is on the other side against the first y axis.
+        y 坐标轴位置，有'left','right'可选
     :param yaxis_formatter:
-        Formatter of axis label, which supports string template and callback function.
-        example: '{value} kg'
+        y 轴标签格式器，如 '天'，则 y 轴的标签为数据加'天'(3 天，4 天),默认为 ""
     :param is_convert:
-        It specifies whether to convert xAxis and yAxis.
+        是否交换 x 轴与 y 轴
     :param is_xaxis_inverse:
-        Whether xaxis is inversed
+        是否反向 x 坐标轴，默认为 False
     :param is_yaxis_inverse:
-        Whether yaxis is inversed
+        是否反向 y 坐标轴，默认为 False
     :param is_xaxislabel_align:
-        whether align xaxis tick with label
+        x 轴刻度线和标签是否对齐，默认为 False
     :param is_yaxislabel_align:
-        whether align yaxis tick with label
+        y 轴刻度线和标签是否对齐，默认为 False
     :param is_xaxis_boundarygap:
-        The boundary gap on both sides of a coordinate xAxis.
-        The boundaryGap of category axis can be set to either true or false.
-        Default value is set to be true, in which case axisTick is served
-        only as a separation line, and labels and data appear only in
-        the center part of two axis ticks, which is called band.
+        x 轴两边留白策略，适用于类目轴。类目轴中 boundaryGap 可以配置为 True 和 False。
+        默认为 True，这时候刻度只是作为分隔线，标签和数据点都会在两个刻度之间的带(band)
+        中间，即两边留白。
     :param is_yaxis_boundarygap:
-        The boundary gap on both sides of a coordinate yAxis.
-        The boundaryGap of category axis can be set to either true or false.
-        Default value is set to be true, in which case axisTick is served
-        only as a separation line, and labels and data appear only in
-        the center part of two axis ticks, which is called band.
+        y 轴两边留白策略，适用于类目轴。类目轴中 boundaryGap 可以配置为 True 和 False。
+        默认为 True，这时候刻度只是作为分隔线，标签和数据点都会在两个刻度之间的带(band)
+        中间，即两边留白。
     :param is_xaxis_show:
-        It specifies whether to show xAxis
+        是否显示 x 轴
     :param is_yaxis_show:
-        It specifies whether to show yAxis
+        是否显示 y 轴
     :param kwargs:
-    :return:
     """
     _xAxis = {
         "name": xaxis_name,
@@ -469,40 +434,43 @@ def _mark(data,
           mark_line_valuedim=None,
           _is_markline=False,
           **kwargs):
-    """
+    """ 图形标记组件，用于标记指定的特殊数据，有标记线和标记点两种
 
     :param data:
-        mark data, it can be 'min', 'max', 'average' or you cloud define by yourself
-        you need a dict contains coord and name,
-        coord: Coordinates of the starting point or ending point,
-            Notice: For axis with axis.type 'category':
-                If coord value is number, it represents index of axis.data.
-                If coord value is string, it represents concrete value in axis.data.
-                Please notice that in this case xAxis.data must not be written as
-                [number, number, ...],but can only be written [string, string, ...].
-                Otherwise it is not able to be located by markPoint / markLine.
-        name: Markpoint name
+        标记点
+            默认有'min', 'max', 'average'可选。支持自定义标记点，具体使用如下
+            [
+                {
+                    "coord": [a1, b1],
+                    "name": "first markpoint"
+                },
+                {
+                    "coord": [a2, b2],
+                    "name": "second markpoint"
+                }
+            ]
+            需自己传入标记点字典，共有两个键值对，'coord' 对应为 x y 轴坐标，'name' 为标记点名称
+        标记线
+            只支持默认的 'min', 'max', 'average'
     :param mark_point_symbol:
-        mark symbol, it can be 'circle', 'rect', 'roundRect', 'triangle',
-        'diamond', 'pin', 'arrow'
+        标记点图形，，默认为'pin'，有'circle', 'rect', 'roundRect', 'triangle',
+        'diamond', 'pin', 'arrow'可选
     :param mark_point_symbolsize:
-        markPoint symbol size
+        标记点图形大小，默认为 50
     :param mark_point_textcolor:
-        mark point text color
+        标记点字体颜色，默认为'#fff'
     :param mark_line_symbolsize:
-        markLine symbol size
+        标记线图形大小，默认为 15
     :param mark_line_valuedim:
-        Works only when type is assigned. It is used to state the dimension used to
-        calculate maximum value or minimum value. It may be the direct name of a
-        dimension, like x, or angle for line charts, or open, or close for candlestick charts.
+        指定在哪个维度上指定最大值最小值。这可以是维度的直接名称，Line 时可以是 x、angle
+        等、Kline 图时可以是 open、close、highest、lowest。
     :param _is_markline:
-        It specifies whether is markline or not.
-    :return:
+        指定是否为 markline
     """
     mark = {"data": []}
     if data:
         for d in list(data):
-            # user-define markPoint
+            # 自定义坐标点数据
             if isinstance(d, dict):
                 _coord = d.get('coord', None)
                 _pname = d.get('name', None)
@@ -515,7 +483,6 @@ def _mark(data,
                         "textStyle": {"color": mark_point_textcolor}}
                     }}
                 mark.get("data").append(_marktmp)
-            # markPoint&markLine by default
             else:
                 _type, _name = "", ""
                 if "max" in d:
@@ -549,24 +516,33 @@ def _mark(data,
 
 @collectfuncs
 def mark_point(mark_point=None, **kwargs):
-    """
+    """ 标记点配置项
 
     :param mark_point:
-        mark point data, it can be 'min', 'max', 'average' or define by yourself
+        默认有'min', 'max', 'average'可选。支持自定义标记点，具体使用如下
+            [
+                {
+                    "coord": [a1, b1],
+                    "name": "first markpoint"
+                },
+                {
+                    "coord": [a2, b2],
+                    "name": "second markpoint"
+                }
+            ]
+            需自己传入标记点字典，共有两个键值对，'coord' 对应为 x y 轴坐标，'name' 为标记点名称
     :param kwargs:
-    :return:
     """
     return _mark(mark_point, **kwargs)
 
 
 @collectfuncs
 def mark_line(mark_line=None, **kwargs):
-    """
+    """ 标记线配置项
 
     :param mark_line:
-        mark line data,it can be 'min', 'max', 'average'
+        只支持默认的 'min', 'max', 'average'
     :param kwargs:
-    :return:
     """
     return _mark(mark_line, _is_markline=True, **kwargs)
 
@@ -580,31 +556,28 @@ def legend(is_legend_show=True,
            legend_text_size=12,
            legend_text_color='#333',
            **kwargs):
-    """ Legend component shows symbol, color and name of different series.
-        You can click legends to toggle displaying series in the chart.
+    """ 图例组件。图例组件展现了不同系列的标记(symbol)，颜色和名字。
+    可以通过点击图例控制哪些系列不显示。
 
     :param is_legend_show:
-        It specifies whether to show the legend component.
+        是否显示顶端图例，默认为 True
     :param legend_orient:
-        The layout orientation of legend.It can be 'horizontal', 'vertical'
+        图例列表的布局朝向，默认为'horizontal'，有'horizontal', 'vertical'可选
     :param legend_pos:
-        Distance between legend component and the left side of the container.
-        legend_pos value can be instant pixel value like 20;
-        it can also be percentage value relative to container width like '20%';
-        and it can also be 'left', 'center', or 'right'.
+        图例组件离容器左侧的距离，默认为'center'，有'left', 'center', 'right'可选，
+        也可以为百分数，如 "%60"
     :param legend_top:
-        Distance between legend component and the top side of the container.
-        legend_top value can be instant pixel value like 20;
-        it can also be percentage value relative to container width like '20%';
-        and it can also be 'top', 'middle', or 'bottom'.
+        图例组件离容器上侧的距离，默认为'top'，有'top', 'center', 'bottom'可选，
+        也可以为百分数，如 "%60"
     :param legend_selectedmode:
-        State table of selected legend. 'single' or 'multiple'
+        图例选择的模式，控制是否可以通过点击图例改变系列的显示状态。默认为'multiple'，
+        可以设成 'single' 或者 'multiple' 使用单选或者多选模式。
+        也可以设置为 False 关闭显示状态。
     :param legend_text_size:
-        legend text size
+        图例名称字体大小
     :param legend_text_color:
-        legend text color
+        图例名称字体颜色
     :param kwargs:
-    :return:
     """
     _legend = {
         "selectedMode": legend_selectedmode,
@@ -635,61 +608,45 @@ def visual_map(visual_type='color',
                is_calculable=True,
                is_piecewise=False,
                **kwargs):
-    """ visualMap is a type of component for visual encoding, which
-        maps the data to visual channels
+    """ 是视觉映射组件，用于进行『视觉编码』，也就是将数据映射到视觉元素（视觉通道）
 
     :param visual_type:
-        visual map type, 'color' or 'size'
-        color:
-            For visual channel color, array is used, like: ['#333', '#78ab23', 'blue'],
-            which means a color ribbon is formed based on the three color stops,
-            and dataValues will be mapped to the ribbon.
-        size:
-            For visual channel size, array is used, like: [20, 50],
-            which means a size ribbon is formed based on the two value stops,
-            and dataValues will be mapped to the ribbon.
+        制定组件映射方式，默认为'color‘，即通过颜色来映射数值。有'color', 'size'可选。
+        'size'通过数值点的大小，也就是图形点的大小来映射数值。
     :param visual_range:
-        pecify the min and max dataValue for the visualMap component.
+        指定组件的允许的最小值与最大值。默认为 [0, 100]
     :param visual_text_color:
-        visualMap text color.
+        两端文本颜色。
     :param visual_range_text:
-        The label text on both ends, such as ['High', 'Low']
+        两端文本。默认为 ['low', 'hight']
     :param visual_range_size:
-        For visual channel size, array is used, like: [20, 50].
+        数值映射的范围，也就是图形点大小的范围。默认为 [20, 50]
     :param visual_range_color:
-        For visual channel color, array is used, like: ['#333', '#78ab23', 'blue'].
+        过渡颜色。默认为 ['#50a3ba', '#eac763', '#d94e5d']
     :param visual_orient:
-        How to layout the visualMap component, 'horizontal' or 'vertical'.
+        visualMap 组件条的方向，默认为'vertical'，有'vertical', 'horizontal'可选。
     :param visual_pos:
-        Distance between visualMap component and the left side of the container.
-        visual_pos value can be instant pixel value like 20;
-        it can also be percentage value relative to container width like '20%';
-        and it can also be 'left', 'center', or 'right'.
+        visualmap 组件条距离左侧的位置，默认为'left'。有'right', 'center',
+        'right'可选，也可为百分数或整数。
     :param visual_top:
-        Distance between visualMap component and the top side of the container.
-        visual_top value can be instant pixel value like 20;
-        it can also be percentage value relative to container width like '20%';
-        and it can also be 'top', 'middle', or 'bottom'.
+        visualmap 组件条距离顶部的位置，默认为'top'。有'top', 'center',
+        'bottom'可选，也可为百分数或整数。
     :param visual_split_number:
-        Continuous data can be divide into pieces averagely according to splitNumber,
-        that is, if splitNumber is 5, data will be sliced into 5 pieces.
+        分段型中分割的段数，在设置为分段型时生效。默认分为 5 段。
     :param visual_dimension:
-        Specify which dimension should be used to fetch dataValue from series.data,
-        and then map them to visual channel.
+        指定用数据的『哪个维度』，映射到视觉元素上。默认映射到最后一个维度。索引从 0 开始。
+        在直角坐标系中，x 轴为第一个维度（0），y 轴为第二个维度（1）。
     :param is_calculable:
-        Whether show handles, which can be dragged to adjust "selected range".
+        是否显示拖拽用的手柄（手柄能拖拽调整选中范围）。默认为 True
     :param is_piecewise:
-        Used to determine it is a piecewise visualMap component.
+        是否将组件转换为分段型（默认为连续型），默认为 False
     :param kwargs:
-    :return:
     """
-    # default min and max value of visual_range is [0, 100]
     _min, _max = 0, 100
     if visual_range:
         if len(visual_range) == 2:
             _min, _max = visual_range
 
-    # default label text on both ends is ['low', 'high']
     _tlow, _thigh = "low", "high"
     if visual_range_text:
         if len(visual_range_text) == 2:
@@ -731,9 +688,7 @@ def visual_map(visual_type='color',
 
 
 def gen_color():
-    """ random generation color for << WordCloud >>
-
-    :return:
+    """ 为词云图生成随机颜色
     """
     return "rgb(%s,%s,%s)" % (random.randint(0, 160),
                               random.randint(0, 160),
@@ -745,10 +700,9 @@ def symbol(type=None, symbol="", **kwargs):
     """
 
     :param symbol:
-        symbol type, it can be 'rect', 'roundRect', 'triangle',
-        diamond', 'pin', 'arrow'.
+        标记类型, 有'rect', 'roundRect', 'triangle', 'diamond',
+         'pin', 'arrow'可选
     :param kwargs:
-    :return:
     """
     if symbol is None:  # Radar
         symbol = 'none'
@@ -764,16 +718,15 @@ def effect(effect_brushtype="stroke",
            effect_scale=2.5,
            effect_period=4,
            **kwargs):
-    """
+    """ 涟漪动画配置项
 
     :param effect_brushtype:
-        The brush type for ripples. options: 'stroke' and 'fill'.
+        波纹绘制方式，有'stroke', 'fill'可选。默认为'stroke'
     :param effect_scale:
-        The maximum zooming scale of ripples in animation.
+        动画中波纹的最大缩放比例。默认为 2.5
     :param effect_period:
-        The duration of animation.
+        动画持续的时间。默认为 4（s）
     :param kwargs:
-    :return:
     """
     _effect = {
         "brushType": effect_brushtype,
@@ -791,27 +744,27 @@ def datazoom(is_datazoom_show=False,
              datazoom_xaxis_index=None,
              datazoom_yaxis_index=None,
              **kwargs):
-    """
+    """ dataZoom 组件 用于区域缩放，从而能自由关注细节的数据信息，或者概览数据整
+    体，或者去除离群点的影响。
 
     :param is_datazoom_show:
-        It specifies whether to use the datazoom component.
+        是否使用区域缩放组件，默认为 False
     :param datazoom_type:
-        datazoom type, 'slider', 'inside', or 'both'
+        区域缩放组件类型，默认为'slider'，有'slider', 'inside', 'both'可选
     :param datazoom_range:
-        The range percentage of the window out of the data extent,in
-        the range of 0 ~ 100.
+        区域缩放的范围，默认为[50, 100]
     :param datazoom_orient:
-        Specify whether the layout of dataZoom component is horizontal or vertical.
-        'horizontal' or 'vertical'.What's more,it indicates whether the horizontal
-        axis or vertical axis is controlled.by default in catesian coordinate system.
+        datazoom 组件在直角坐标系中的方向，默认为 'horizontal'，效果显示在 x 轴。
+        如若设置为 'vertical' 的话效果显示在 y 轴。
     :param datazoom_xaxis_index:
-        Specify which xAxis is/are controlled by the dataZoom-inside when
-        catesian coordinate system is used.
+        datazoom 组件控制的 x 轴索引
+        默认控制第一个 x 轴，如没特殊需求无须显示指定。单个为 int 类型而控制多个为 list
+        类型，如 [0, 1] 表示控制第一个和第二个 x 轴。
     :param datazoom_yaxis_index:
-        Specify which yAxis is/are controlled by the dataZoom-inside when
-        catesian coordinate system is used.
+        datazoom 组件控制的 y 轴索引
+        默认控制第一个 y 轴，如没特殊需求无须显示指定。单个为 int 类型而控制多个为 list
+        类型，如 [0, 1] 表示控制第一个和第二个 x 轴。
     :param kwargs:
-    :return:
     """
     _min, _max = 50, 100
     if datazoom_range:
@@ -845,36 +798,24 @@ def grid(grid_width=None,
          grid_left=None,
          grid_right=None,
          **kwargs):
-    """
-    :param series:
-        other chart series data
+    """ Grid 类组件配置项
+
     :param grid_width:
-        Width of grid component. Adaptive by default.
+        grid 组件的宽度。默认自适应。
     :param grid_height:
-        Height of grid component. Adaptive by default.
+        grid 组件的高度。默认自适应。
     :param grid_top:
-        Distance between grid component and the top side of the container.
-        grid_top value can be instant pixel value like 20;
-        it can also be percentage value relative to container width like '20%';
-        and it can also be 'top', 'middle', or 'bottom'.
-        If the grid_top value is set to be 'top', 'middle', or 'bottom',
-        then the component will be aligned automatically based on position.
+         grid 组件离容器顶部的距离。默认为 None, 有'top', 'center', 'middle'可选，
+         也可以为百分数或者整数
     :param grid_bottom:
-        Distance between grid component and the bottom side of the container.
-        grid_bottom value can be instant pixel value like 20;
-        it can also be percentage value relative to container width like '20%'.
+        grid 组件离容器底部的距离。默认为 None, 有'top', 'center', 'middle'可选，
+        也可以为百分数或者整数
     :param grid_left:
-        Distance between grid component and the left side of the container.
-        grid_left value can be instant pixel value like 20;
-        it can also be percentage value relative to container width like '20%';
-        and it can also be 'left', 'center', or 'right'.
-        If the grid_left value is set to be 'left', 'center', or 'right',
-        then the component will be aligned automatically based on position.
+        grid 组件离容器左侧的距离。默认为 None, 有'left', 'center', 'right'可选，
+        也可以为百分数或者整数
     :param grid_right:
-        Distance between grid component and the right side of the container.
-        grid_right value can be instant pixel value like 20;
-        it can also be percentage value relative to container width like '20%'.
-    :return:
+        grid 组件离容器右侧的距离。默认为 None, 有'left', 'center', 'right'可选
+        也可以为百分数或者整数
     """
     _grid = {}
     if grid_width is not None:
@@ -900,22 +841,21 @@ def grid3D(grid3d_width=100,
            grid3d_rotate_sensitivity=1,
            is_grid3d_rotate=False,
            **kwargs):
-    """
+    """ 3D 笛卡尔坐标系组配置项，适用于 3D 图形。
 
     :param grid3d_width:
-        3D axis width
+        三维笛卡尔坐标系组件在三维场景中的高度。默认为 100
     :param grid3d_height:
-        3D axis height
+        三维笛卡尔坐标系组件在三维场景中的高度。默认为 100
     :param grid3d_depth:
-        3D axis depth
+        三维笛卡尔坐标系组件在三维场景中的高度。默认为 100
     :param grid3d_rotate_speed:
-        3D charts rotate speed
+        物体自传的速度。单位为角度 / 秒，默认为 10 ，也就是 36 秒转一圈。
     :param is_grid3d_rotate:
-        whether rotate 3D charts
+        是否开启视角绕物体的自动旋转查看。默认为 False
     :param grid3d_rotate_sensitivity:
-        3D charts rotete sensitivity, The greater the value, the more sensitive.
+        旋转操作的灵敏度，值越大越灵敏。默认为 1, 设置为 0 后无法旋转。
     :param kwargs:
-    :return:
     """
     _grid3D = {
         "boxWidth": grid3d_width,
@@ -940,29 +880,26 @@ def xaxis3D(xaxis3d_type=None,
             xaxis3d_interval="auto",
             xaxis3d_margin=8,
             **kwargs):
-    """
+    """ 3D x 轴配置项
 
     :param xaxis3d_type:
-        Type of 3d xaxis
+        3D x 轴类型
     :param xaxis3d_name:
-        Name of 3d xaxis
+        x 轴名称，默认为 ""
     :param xaxis3d_name_size:
-        3d xaxis name font size
+        x 轴名称体大小，默认为 16
     :param xaxis3d_name_gap:
-        Gap between axis name and 3d xaxis line.
+        x 轴名称与轴线之间的距离，默认为 25
     :param xaxis3d_min:
-        The minimun value of 3d xaxis.
+        x 坐标轴刻度最小值，默认为自适应。
     :param xaxis3d_max:
-        The maximun value of 3d xaxis.
+        x 坐标轴刻度最大值，默认为自适应。
     :param xaxis3d_interval:
-        The display interval of the axis scale label is valid in the category 3d xaxis.
-        By default, labels are displayed using labels that do not overlap the labels
-        Set to 0 to force all labels to be displayed
-        and label is one by one if setting as 1; If 2,it will be one label separates
-        from each other, and so on.
+        x 轴刻度标签的显示间隔，在类目轴中有效。默认会采用标签不重叠的策略间隔显示标签。
+        设置成 0 强制显示所有标签。设置为 1，表示『隔一个标签显示一个标签』，如果值
+        为 2，表示隔两个标签显示一个标签，以此类推
     :param xaxis3d_margin:
-        The margin between the axis label and the 3d xaxis line.
-    :return:
+        x 轴刻度标签与轴线之间的距离。默认为 8
     """
     _xaxis3D = {
         "name": xaxis3d_name,
@@ -989,29 +926,26 @@ def yaxis3D(yaxis3d_type=None,
             yaxis3d_interval="auto",
             yaxis3d_margin=8,
             **kwargs):
-    """
+    """ 3D y 轴配置项
 
     :param yaxis3d_type:
-        Type of 3d yaxis
+        3D x 轴类型
     :param yaxis3d_name:
-        Name of 3d yaxis
+        y 轴名称，默认为 ""
     :param yaxis3d_name_size:
-        3d yaxis name font size
+        y 轴名称体大小，默认为 16
     :param yaxis3d_name_gap:
-        Gap between axis name and 3d yaxis line.
+        y 轴名称与轴线之间的距离，默认为 25
     :param yaxis3d_min:
-        The minimun value of 3d yaxis.
+        y 坐标轴刻度最小值，默认为自适应。
     :param yaxis3d_max:
-        The maximun value of 3d yaxis.
+        y 坐标轴刻度最大值，默认为自适应。
     :param yaxis3d_interval:
-        The display interval of the axis scale label is valid in the category 3d yaxis.
-        By default, labels are displayed using labels that do not overlap the labels
-        Set to 0 to force all labels to be displayed
-        and label is one by one if setting as 1;If 2, it will be one label separates
-        from each other, and so on.
+        y 轴刻度标签的显示间隔，在类目轴中有效。默认会采用标签不重叠的策略间隔显示标签。
+        设置成 0 强制显示所有标签。设置为 1，表示『隔一个标签显示一个标签』，如果值
+        为 2，表示隔两个标签显示一个标签，以此类推
     :param yaxis3d_margin:
-        The margin between the axis label and the 3d yaxis line.
-    :return:
+        y 轴刻度标签与轴线之间的距离。默认为 8
     """
     _yaxis3D = {
         "name": yaxis3d_name,
@@ -1037,23 +971,22 @@ def zaxis3D(zaxis3d_type=None,
             zaxis3d_max=None,
             zaxis3d_margin=8,
             **kwargs):
-    """
+    """ 3D y 轴配置项
 
     :param zaxis3d_type:
-        Type of 3d zaxis
+        3D y 轴类型
     :param zaxis3d_name:
-        Name of 3d zaxis
+        z 轴名称，默认为 ""
     :param zaxis3d_name_size:
-        3d zaxis name font size
+        z 轴名称体大小，默认为 16
     :param zaxis3d_name_gap:
-        Gap between axis name and 3d zaxis line.
+        z 轴名称与轴线之间的距离，默认为 25
     :param zaxis3d_min:
-        The minimun value of 3d zaxis.
+        z 坐标轴刻度最小值，默认为自适应。
     :param zaxis3d_max:
-        The maximun value of 3d zaxis.
+        z 坐标轴刻度最大值，默认为自适应。
     :param zaxis3d_margin:
-        The margin between the axis label and the 3d zaxis line.
-    :return:
+        z 轴刻度标签与轴线之间的距离。默认为 8
     """
     _zaxis3D = {
         "name": zaxis3d_name,
@@ -1078,42 +1011,44 @@ def tooltip(type=None,
             tooltip_text_color="#fff",
             tooltip_font_size=14,
             **kwargs):
-    """
+    """ 提示框组件，用于移动或点击鼠标时弹出数据内容
 
     :param type:
-        chart type
+        图形类型
     :param tooltip_tragger:
-        Type of triggering.
-        Options:
-            'item': Triggered by data item, which is mainly used for charts that don't have a
-                    category axis like scatter charts or pie charts.
-            'axis': Triggered by axes, which is mainly used for charts that have category axes,
-                    like bar charts or line charts.
-            'none': Trigger nothing.
+        触发类型。默认为 'item'
+            'item': 数据项图形触发，主要在散点图，饼图等无类目轴的图表中使用。
+            'axis': 坐标轴触发，主要在柱状图，折线图等会使用类目轴的图表中使用。
+            'none': 什么都不触发。
     :param tooltip_tragger_on:
-        Conditions to trigger tooltip. Options:
-        Options:
-            'mousemove': Trigger when mouse moves.
-            'click': Trigger when mouse clicks.
-            'mousemove|click': Trigger when mouse clicks and moves.
-            'none': Do not triggered by 'mousemove' and 'click'.
+        提示框触发的条件。默认为 "mousemove|click"
+            'mousemove': 鼠标移动时触发。
+            'click': 鼠标点击时触发。
+            'mousemove|click': 同时鼠标移动和点击时触发。
+            'none': 不在 'mousemove' 或 'click' 时触发
     :param tooltip_axispointer_type:
-        Indicator type.
-        Options:
-            'line': line indicator
-            'shadow': shadow crosshair indicator
-            'cross': crosshair indicator, which is actually the shortcut of enable two
-                     axisPointers of two orthometric axes.
+        指示器类型。默认为 "line"
+            'line': 直线指示器
+            'shadow': 阴影指示器
+            'cross': 十字准星指示器。其实是种简写，表示启用两个正交的轴的 axisPointer。
     :param tooltip_formatter:
-        The template variables are {a}, {b}, {c}, {d} and {e},
-        which stands for series name, data name and data value and ect.
-        When trigger is set to be 'axis', there may be data from multiple series.
-        In this time, series index can be refered as {a0}, {a1}, or {a2}.
+        模板变量有 {a}, {b}，{c}，{d}，{e}，分别表示系列名，数据名，数据值等。
+        使用示例，如 label_formatter='{a}'
+        在 trigger 为 'axis' 的时候，会有多个系列的数据，此时可以通过 {a0}, {a1}, {a2}
+        这种后面加索引的方式表示系列的索引。不同图表类型下的 {a}，{b}，{c}，{d} 含义不一样。
+        其中变量 {a}, {b}, {c}, {d} 在不同图表类型下代表数据含义为：
+            折线（区域）图、柱状（条形）图、K线图 :
+                {a}（系列名称），{b}（类目值），{c}（数值）, {d}（无）
+            散点图（气泡）图 :
+                {a}（系列名称），{b}（数据名称），{c}（数值数组）, {d}（无）
+            地图 :
+                {a}（系列名称），{b}（区域名称），{c}（合并数值）, {d}（无）
+            饼图、仪表盘、漏斗图:
+                {a}（系列名称），{b}（数据项名称），{c}（数值）, {d}（百分比）
     :param tooltip_text_color:
-        text color.
+        提示框字体颜色，默认为 '#fff'
     :param tooltip_font_size:
-        font size
-    :return:
+        提示框字体大小，默认为 14
     """
     if tooltip_formatter is None:
         if type == "gauge":
@@ -1141,22 +1076,12 @@ def calendar(calendar_date_range=None,
     """
 
     :param calendar_date_range:
-        Required, range of Calendar coordinates, support multiple formats.
-        Examples:
-            # one year
-                range: 2017
-            # one month
-                range: '2017-02'
-            # a range
-                range: ['2017-01-02', '2017-02-23']
-            # note: they will be identified as ['2017-01-01', '2017-02-01']
-                range: ['2017-01', '2017-02']
+        日历热力图的日期, "2016" 表示 2016 年, ["2016-5-5", "2017-5-5"]
+        表示 2016 年 5 月 5 日至 2017 年 5 月 5 日
     :param calendar_cell_size:
-        The size of each rect of calendar coordinates, can be set to a single
-        value or array, the first element is width and the second element
-        is height.Support setting self-adaptation: "auto"
+        日历每格框的大小，可设置单值 或数组 第一个元素是宽 第二个元素是高，支持
+        设置自适应 "auto"。默认为 ["auto", 20]
     :param kwargs:
-    :return:
     """
 
     if calendar_cell_size is None:
@@ -1170,10 +1095,7 @@ def calendar(calendar_date_range=None,
 
 
 def get_all_options(**kwargs):
-    """ Return all component options of charts
-
-    :param kwargs:
-    :return:
+    """ 返回图形实例的所有配置项
     """
     _funcs = {}
     for f in fs:

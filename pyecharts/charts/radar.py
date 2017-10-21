@@ -1,16 +1,15 @@
 #!/usr/bin/env python
 # coding=utf-8
 
-from pyecharts.base import Base
+from pyecharts.chart import Chart
 from pyecharts.option import get_all_options
 
 
-class Radar(Base):
+class Radar(Chart):
     """
-    <<< Radar chart >>>
+    <<< 雷达图 >>>
 
-    Radar chart is mainly used to show multi-variable data,
-    such as the analysis of a football player's varied attributes. It relies radar component.
+    雷达图主要用于表现多变量的数据。
     """
     def __init__(self, title="", subtitle="", **kwargs):
         super(Radar, self).__init__(title, subtitle, **kwargs)
@@ -24,22 +23,19 @@ class Radar(Base):
         """ config rader component options
 
         :param schema:
-            The default radar map indicator, used to specify multiple dimensions in the radar map,
-            will process the data into a dictionary of {name: xx, value: xx}
+            默认雷达图的指示器，用来指定雷达图中的多个维度，会对数据处理成。
+            {name:xx, value:xx} 的字典
         :param c_schema:
-            Indicator of radar chart, which is used to assign multiple variables(dimensions)
-            in radar chart.
-            name: Indicator's name.
-            min: The maximum value of indicator.
-                It is an optional configuration, but we recommend to set it manually.
-            max: The maximum value of indicator.
-                It is an optional configuration, but we recommend to set it manually.
+            用户自定义雷达图的指示器，用来指定雷达图中的多个维度
+                name: 指示器名称
+                min: 指示器最小值
+                max: 指示器最大值
         :param shape:
-            Radar render type, in which 'polygon' and 'circle' are supported.
+            雷达图绘制类型，有'polygon'（多边形）和'circle'可选。
         :param radar_text_color:
-            Radar chart data item font color
+            雷达图数据项字体颜色，默认为'#000'。
         :param radar_text_size:
-            Radar chart data item font size
+            雷达图m数据项字体大小，默认为 12。
         :param kwargs:
         """
         chart = get_all_options(**kwargs)
@@ -71,12 +67,11 @@ class Radar(Base):
         """
 
         :param name:
-            Series name used for displaying in tooltip and filtering with legend,
-            or updating data and configuration with setOption.
+            系列名称，用于 tooltip 的显示，legend 的图例筛选
         :param value:
-            data array of series, it is represented by a two-dimension array -> [[],[]]
+            数据项。数据中，每一行是一个『数据项』，每一列属于一个『维度』
         :param item_color:
-            Specify a single legend color
+            指定单图例颜色
         :param kwargs:
         """
         kwargs.update(flag=True, type='radar')

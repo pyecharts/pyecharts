@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 # coding=utf-8
 
-from pyecharts.base import Base
+from pyecharts.chart import Chart
 from pyecharts.option import get_all_options
 
 
-class Funnel(Base):
+class Funnel(Chart):
     """
-    <<< Funnel chart >>>
+    <<< 漏斗图 >>>
     """
     def __init__(self, title="", subtitle="", **kwargs):
         super(Funnel, self).__init__(title, subtitle, **kwargs)
@@ -19,12 +19,11 @@ class Funnel(Base):
         """
 
         :param name:
-            Series name used for displaying in tooltip and filtering with legend,
-            or updating data and configuration with setOption.
+            系列名称，用于 tooltip 的显示，legend 的图例筛选。
         :param attr:
-            name of attribute
+            属性名称。
         :param value:
-            value of attribute
+            属性所对应的值。
         :param kwargs:
         """
         assert len(attr) == len(value)

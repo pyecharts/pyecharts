@@ -1,0 +1,29 @@
+@startuml
+Base <|-- Chart
+Base <|-- Timeline
+Base <|-- Grid
+Base <|-- Overlap
+Chart <|-- Bar
+Chart <|-- Bar3D
+Chart <|-- Boxplot
+Chart <|-- EffectScatter
+Chart <|-- Funnel
+Chart <|-- Geo
+Chart <|-- Graph
+Chart <|-- HeapMap
+Chart <|-- KLine
+Chart <|-- Line
+Chart <|-- Line3D
+Chart <|-- Liquid
+Chart <|-- Map
+Chart <|-- Parallel
+Chart <|-- Pie
+Chart <|-- Polar
+Chart <|-- Radar
+Chart <|-- Sankey
+Chart <|-- Scatter
+Chart <|-- Scatter3D
+Chart <|-- ThemeRiver
+Chart <|-- TreeMap
+Chart <|-- WorldCould
+@enduml

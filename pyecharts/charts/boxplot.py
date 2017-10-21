@@ -1,16 +1,16 @@
 #!/usr/bin/env python
 # coding=utf-8
 
-from pyecharts.base import Base
+from pyecharts.chart import Chart
 from pyecharts.option import get_all_options
 
 
-class Boxplot(Base):
+class Boxplot(Chart):
     """
-    <<< Boxplot chart >>>
+    <<< 箱形图 >>>
 
-    Boxplot is a convenient way of graphically depicting groups of numerical
-    data through their quartiles.
+    箱形图是一种用作显示一组数据分散情况资料的统计图。它能显示出一组数据
+    的最大值、最小值、中位数、下四分位数及上四分位数。
     """
 
     def __init__(self, title="", subtitle="", **kwargs):
@@ -23,14 +23,13 @@ class Boxplot(Base):
         """
 
         :param name:
-            Series name used for displaying in tooltip and filtering with legend,
-            or updating data and configuration with setOption.
+            系列名称，用于 tooltip 的显示，legend 的图例筛选。
         :param x_axis:
-            data of xAixs
+            x 坐标轴数据。
         :param y_axis:
-            data of yAxis
+            y 坐标轴数据，二维数组的每一数组项（上例中的每行）是渲染一个 box。
+            它含有五个量值，依次是：[min, Q1, median (or Q2), Q3, max]。
         :param kwargs:
-        :return:
         """
         kwargs.update(x_axis=x_axis)
         chart = get_all_options(**kwargs)
@@ -52,10 +51,12 @@ class Boxplot(Base):
 
     @staticmethod
     def prepare_data(data):
-        """
+        """ 将传入的嵌套列表中的数据转换为嵌套的 [min,  Q1,  median (or Q2),  Q3,  max]
 
         :param data:
+            待转换的数据列表
         :return:
+            转换后的数组
         """
         _data = []
         for d in data:
@@ -72,8 +73,8 @@ class Boxplot(Base):
                         _result.append(_d[int(n) - 1] * 0.5 + _d[int(n)] * 0.5)
                     elif m == 3 / 4:
                         _result.append(_d[int(n) - 1] * 0.25 + _d[int(n)] * 0.75)
-                _result.insert(0, _d[0])    # min
-                _result.append(_d[-1])      # max
+                _result.insert(0, _d[0])    # 最小值
+                _result.append(_d[-1])      # 最大值
                 _data.append(_result)
             except Exception:
                 pass
