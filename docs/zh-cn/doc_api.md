@@ -11,13 +11,14 @@
 
 图表类和属性表如下：
 
-| 属性/图表           | Base | Chart/FOO_CHART | Grid | Overlap | Timeline | Page |
+| 属性/图表        | Base | Chart/FOO_CHART | Grid | Overlap | Timeline | Page |
 | --------------- | ---- | --------------- | ---- | ------- | -------- | ---- |
 | chart_id        | ✓    | ✓               | ✓    | ✓       | ✓        |      |
 | width           | ✓    | ✓               | ✓    | ✓       | ✓        |      |
 | heigth          | ✓    | ✓               | ✓    | ✓       | ✓        |      |
 | options         | ✓    | ✓               | ✓    | ✓       | ✓        |      |
 | js_dependencies | ✓    | ✓               | ✓    | ✓       | ✓        | ✓    |
+| charts          |      |                 |      |         |          | ✓    |
 
 **chart_id**
 
@@ -38,6 +39,10 @@
 **js_dependencies**
 
 集合类型(set)，js 依赖文件名称列表，元素不包含文件后缀(.js)，如 `{'echarts.min', 'fujian'}` 。
+
+**charts**
+
+多图表对象中源图表对象列表，每个元素均为 `pyecharts.base.Base` 的子类对象。仅用于 `pyecharts.custom.page.Page` 类。
 
 ### 方法
 
