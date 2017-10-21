@@ -4,41 +4,40 @@ from __future__ import unicode_literals
 
 from random import randint
 
-from pyecharts import Bar, Pie, Line, Overlap
-from pyecharts.custom.timeline import Timeline
+from pyecharts import Bar, Pie, Line, Overlap, Timeline, Style
+from test.constants import CLOTHES
 
 
 def test_timeline_bar():
-    attr = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
     bar_1 = Bar("2012 年销量", "数据纯属虚构")
-    bar_1.add("春季", attr, [randint(10, 100) for _ in range(6)])
-    bar_1.add("夏季", attr, [randint(10, 100) for _ in range(6)])
-    bar_1.add("秋季", attr, [randint(10, 100) for _ in range(6)])
-    bar_1.add("冬季", attr, [randint(10, 100) for _ in range(6)])
+    bar_1.add("春季", CLOTHES, [randint(10, 100) for _ in range(6)])
+    bar_1.add("夏季", CLOTHES, [randint(10, 100) for _ in range(6)])
+    bar_1.add("秋季", CLOTHES, [randint(10, 100) for _ in range(6)])
+    bar_1.add("冬季", CLOTHES, [randint(10, 100) for _ in range(6)])
 
     bar_2 = Bar("2013 年销量", "数据纯属虚构")
-    bar_2.add("春季", attr, [randint(10, 100) for _ in range(6)])
-    bar_2.add("夏季", attr, [randint(10, 100) for _ in range(6)])
-    bar_2.add("秋季", attr, [randint(10, 100) for _ in range(6)])
-    bar_2.add("冬季", attr, [randint(10, 100) for _ in range(6)])
+    bar_2.add("春季", CLOTHES, [randint(10, 100) for _ in range(6)])
+    bar_2.add("夏季", CLOTHES, [randint(10, 100) for _ in range(6)])
+    bar_2.add("秋季", CLOTHES, [randint(10, 100) for _ in range(6)])
+    bar_2.add("冬季", CLOTHES, [randint(10, 100) for _ in range(6)])
 
     bar_3 = Bar("2014 年销量", "数据纯属虚构")
-    bar_3.add("春季", attr, [randint(10, 100) for _ in range(6)])
-    bar_3.add("夏季", attr, [randint(10, 100) for _ in range(6)])
-    bar_3.add("秋季", attr, [randint(10, 100) for _ in range(6)])
-    bar_3.add("冬季", attr, [randint(10, 100) for _ in range(6)])
+    bar_3.add("春季", CLOTHES, [randint(10, 100) for _ in range(6)])
+    bar_3.add("夏季", CLOTHES, [randint(10, 100) for _ in range(6)])
+    bar_3.add("秋季", CLOTHES, [randint(10, 100) for _ in range(6)])
+    bar_3.add("冬季", CLOTHES, [randint(10, 100) for _ in range(6)])
 
     bar_4 = Bar("2015 年销量", "数据纯属虚构")
-    bar_4.add("春季", attr, [randint(10, 100) for _ in range(6)])
-    bar_4.add("夏季", attr, [randint(10, 100) for _ in range(6)])
-    bar_4.add("秋季", attr, [randint(10, 100) for _ in range(6)])
-    bar_4.add("冬季", attr, [randint(10, 100) for _ in range(6)])
+    bar_4.add("春季", CLOTHES, [randint(10, 100) for _ in range(6)])
+    bar_4.add("夏季", CLOTHES, [randint(10, 100) for _ in range(6)])
+    bar_4.add("秋季", CLOTHES, [randint(10, 100) for _ in range(6)])
+    bar_4.add("冬季", CLOTHES, [randint(10, 100) for _ in range(6)])
 
     bar_5 = Bar("2016 年销量", "数据纯属虚构")
-    bar_5.add("春季", attr, [randint(10, 100) for _ in range(6)])
-    bar_5.add("夏季", attr, [randint(10, 100) for _ in range(6)])
-    bar_5.add("秋季", attr, [randint(10, 100) for _ in range(6)])
-    bar_5.add("冬季", attr, [randint(10, 100) for _ in range(6)],
+    bar_5.add("春季", CLOTHES, [randint(10, 100) for _ in range(6)])
+    bar_5.add("夏季", CLOTHES, [randint(10, 100) for _ in range(6)])
+    bar_5.add("秋季", CLOTHES, [randint(10, 100) for _ in range(6)])
+    bar_5.add("冬季", CLOTHES, [randint(10, 100) for _ in range(6)],
               is_legend_show=True)
 
     timeline = Timeline(is_auto_play=True, timeline_bottom=0)
@@ -51,26 +50,26 @@ def test_timeline_bar():
 
 
 def test_timeline_pie():
-    attr = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
-    style = {
-        "is_label_show": True,
-        "radius": [30, 55],
-        "rosetype": 'radius'
-    }
+    style = Style()
+    pie_style = style.add(
+        is_label_show=True,
+        radius=[30, 55],
+        rosetype="radius"
+    )
     pie_1 = Pie("2012 年销量比例", "数据纯属虚构")
-    pie_1.add("秋季", attr, [randint(10, 100) for _ in range(6)], **style)
+    pie_1.add("秋季", CLOTHES, [randint(10, 100) for _ in range(6)], **pie_style)
 
     pie_2 = Pie("2013 年销量比例", "数据纯属虚构")
-    pie_2.add("秋季", attr, [randint(10, 100) for _ in range(6)], **style)
+    pie_2.add("秋季", CLOTHES, [randint(10, 100) for _ in range(6)], **pie_style)
 
     pie_3 = Pie("2014 年销量比例", "数据纯属虚构")
-    pie_3.add("秋季", attr, [randint(10, 100) for _ in range(6)], **style)
+    pie_3.add("秋季", CLOTHES, [randint(10, 100) for _ in range(6)], **pie_style)
 
     pie_4 = Pie("2015 年销量比例", "数据纯属虚构")
-    pie_4.add("秋季", attr, [randint(10, 100) for _ in range(6)], **style)
+    pie_4.add("秋季", CLOTHES, [randint(10, 100) for _ in range(6)], **pie_style)
 
     pie_5 = Pie("2016 年销量比例", "数据纯属虚构")
-    pie_5.add("秋季", attr, [randint(10, 100) for _ in range(6)], **style)
+    pie_5.add("秋季", CLOTHES, [randint(10, 100) for _ in range(6)], **pie_style)
 
     timeline = Timeline(is_auto_play=True, timeline_bottom=0,
                         width=1200, height=600)
