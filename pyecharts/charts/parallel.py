@@ -6,10 +6,9 @@ from pyecharts.chart import Chart
 
 class Parallel(Chart):
     """
-    <<< Parallel chart >>>
+    <<< 平行坐标系 >>>
 
-    Parallel Coordinates is a common way of visualizing high-dimensional geometry and
-    analyzing multivariate data.
+    平行坐标系是一种常用的可视化高维数据的图表。
     """
     def __init__(self, title="", subtitle="", **kwargs):
         super(Parallel, self).__init__(title, subtitle, **kwargs)
@@ -21,21 +20,18 @@ class Parallel(Chart):
         """
 
         :param schema:
-            Dimension index of coordinate axis.
-            a axis name list, like ['apple', 'orange', 'watermelon']
+            默认平行坐标系的坐标轴信息，如 ["dim_name1", "dim_name2", "dim_name3"]。
         :param c_schema:
-            User customize coordinate axis for parallel coordinate.
-            dim: Dimension index of coordinate axis.
-            name: Name of axis.
-            type: Type of axis
-                value: Numerical axis, suitable for continuous data.
-                category: Category axis, suitable for discrete category data.
-                          Data should only be set via data for this type.
-            min: The minimun value of axis.
-            max: The maximum value of axis.
-            inverse: Whether axis is inversed.
-            nameLocation: Location of axis name. it can be 'start', 'middle', 'end'.
-        :return:
+            用户自定义平行坐标系的坐标轴信息。有以下属性可选。
+            dim：维度索引
+            name：维度名称
+            type：维度类型，有'value', 'category'可选
+                value：数值轴，适用于连续数据。
+                category： 类目轴，适用于离散的类目数据。
+            min：坐标轴刻度最小值。
+            max：坐标轴刻度最大值。
+            inverse：是否是反向坐标轴。默认为 False
+            nameLocation：坐标轴名称显示位置。有'start', 'middle', 'end'可选
         """
         if schema:
             _schema = [{"dim": i, "name": v} for i, v in enumerate(schema)]
@@ -47,12 +43,10 @@ class Parallel(Chart):
         """
 
         :param name:
-            Series name used for displaying in tooltip and filtering with legend,
-            or updating data and configuration with setOption.
+            系列名称，用于 tooltip 的显示，legend 的图例筛选。
         :param data:
-            data array of series, it is represented by a two-dimension array -> [[],[]]
+            数据项。数据中，每一行是一个『数据项』，每一列属于一个『维度』。
         :param kwargs:
-        :return:
         """
         self._option.update(
             parallel={

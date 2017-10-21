@@ -7,7 +7,7 @@ from pyecharts.option import gen_color
 
 class WordCloud(Chart):
     """
-    <<< WordCloud chart >>>
+    <<< 词云图 >>>
     """
     def __init__(self, title="", subtitle="", **kwargs):
         super(WordCloud, self).__init__(title, subtitle, **kwargs)
@@ -24,26 +24,20 @@ class WordCloud(Chart):
         """
 
         :param name:
-            Series name used for displaying in tooltip and filtering with legend,
-            or updaing data and configuration with setOption.
+            系列名称，用于 tooltip 的显示，legend 的图例筛选。
         :param attr:
-            name of attribute
+            属性名称。
         :param value:
-            value of attribute
+            属性所对应的值。
         :param shape:
-            shape of wordcloud
-            It can be 'circle', 'cardioid', 'diamond', 'triangle-forward', 'triangle',
-            'pentagon', 'star'
+            词云图轮廓，有'circle', 'cardioid', 'diamond', 'triangle-forward',
+            'triangle', 'pentagon', 'star'可选。
         :param word_gap:
-            Gap of word
-            size of the grid in pixels for marking the availability of the canvas
-            the larger the grid size, the bigger the gap between words.
+            单词间隔，默认为 20。
         :param word_size_range:
-            Text size range which the value in data will be mapped to.
-            Default to have minimum 12px and maximum 60px size.
+            单词字体大小范围，默认为 [12, 60]。
         :param rotate_step:
-            Text rotation range and step in degree.
-            Text will be rotated randomly in range [-90, 90] by rotationStep 45
+            旋转单词角度，默认为 45。
         """
         assert len(attr) == len(value)
         _data = []
