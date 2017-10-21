@@ -23,32 +23,32 @@ class Timeline(Base):
         """
 
         :param is_auto_play:
-            Whether to play automatically.
+            是否自动播放，默认为 Flase
         :param is_loop_play:
-            Whether to loop playing.
+            是否循环播放，默认为 True
         :param is_rewind_play:
-            Whether supports playing reversely.
+            是否方向播放，默认为 Flase
         :param is_timeline_show:
-            Whether to show the timeline component.
-            It would not show with a setting of false, but its functions still remain.
+            是否显示 timeline 组件。默认为 True，如果设置为false，不会显示，但是功能还存在。
         :param timeline_play_interval:
-            Indicates play speed (gap time between two state), whose unit is millisecond.
+            播放的速度（跳动的间隔），单位毫秒（ms）。
         :param timeline_symbol:
-            Symbol of timeline.
-            Icon types provided by ECharts includes 'circle', 'rect', 'roundRect', 'triangle',
-            'diamond', 'pin', 'arrow'
+            标记的图形。有'circle', 'rect', 'roundRect', 'triangle', 'diamond',
+            'pin', 'arrow'可选
         :param timeline_symbol_size:
-            timeline symbol size.
-            It can be set to single numbers like 10, or use an array to represent width and height.
-            For example, [20, 10] means symbol width is 20, and height is10.
+            标记的图形大小，可以设置成诸如 10 这样单一的数字，也可以用数组分开表示
+            宽和高，例如 [20, 10] 表示标记宽为 20，高为 10。
         :param timeline_left:
-            Distance between timeline component and the left side of the container.
+            timeline 组件离容器左侧的距离。
+            left 的值可以是像 20 这样的具体像素值，可以是像 '20%' 这样相对于容器高宽的百分比，
+            也可以是 'left', 'center', 'right'。如果 left 的值为'left', 'center', 'right'，
+            组件会根据相应的位置自动对齐。
         :param timeline_right:
-            Distance between timeline component and the right side of the container.
+            timeline 组件离容器右侧的距离。同 left
         :param timeline_top:
-            Distance between timeline component and the top side of the container.
+            timeline 组件离容器顶侧的距离。同 left
         :param timeline_bottom:
-            Distance between timeline component and the bottom side of the container.
+            timeline 组件离容器底侧的距离。同 left
         """
 
         super(Timeline, self).__init__(

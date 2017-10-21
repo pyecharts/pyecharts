@@ -23,16 +23,15 @@ class Overlap(Base):
         """
 
         :param chart:
-            chart instance
+            图形实例
         :param xaxis_index:
-            xAxis index
+            x 坐标轴索引，默认为 0
         :param yaxis_index:
-            yAxis index
+            y 坐标轴索引，默认为 0
         :param is_add_xaxis:
-            whether to add a new xaxis
+            是否新增一个 x 坐标轴，默认为 False
         :param is_add_yaxis:
-            whether to add a new yaxis
-        :return:
+            是否新增一个 y 坐标轴，默认为 False
         """
         if not self._option:
             self._option = copy.deepcopy(chart.options)

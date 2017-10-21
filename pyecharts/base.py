@@ -19,13 +19,13 @@ class Base(object):
         """
 
         :param width:
-            Canvas width
+            画布宽度，默认为 800（px）
         :param height:
-            Canvas height
+            画布高度，默认为 400（px）
         :param page_title:
-            specify html <title> value
+            指定生成的 html 文件中 <title> 标签的值。默认为'Echarts'
         :param jshost:
-            custom javascript host for the particular chart only
+            自定义每个实例的 JavaScript host
         """
         self._option = {}
         self._js_dependencies = set()
@@ -49,27 +49,23 @@ class Base(object):
 
     @property
     def options(self):
-        """
-        chart configurations
+        """ chart configurations
         """
         return self._option
 
     @property
     def js_dependencies(self):
-        """
-        a list of dependent javascript libraries
+        """ a list of dependent javascript libraries
         """
         return self._js_dependencies
 
     def show_config(self):
-        """
-        Print all options of charts
+        """ Print all options of charts
         """
         print(json_dumps(self._option, indent=4))
 
     def render_embed(self):
-        """
-        Render the chart component and its options
+        """ Render the chart component and its options
 
         You can include it into your web pages. And you will
         provide all dependent echarts javascript libraries.
@@ -83,8 +79,7 @@ class Base(object):
         return html
 
     def get_js_dependencies(self):
-        """
-        Declare its javascript dependencies for embedding purpose
+        """ Declare its javascript dependencies for embedding purpose
         """
         return template.produce_html_script_list(self._js_dependencies)
 
@@ -139,8 +134,7 @@ class Base(object):
         return k_lst, v_lst
 
     def _repr_html_(self):
-        """
-        Render the options dict, displayed in the jupyter notebook
+        """ Render the options dict, displayed in the jupyter notebook
         """
         _tmp = 'notebook.html'
         dom = self._render_notebook_dom_()
@@ -153,8 +147,7 @@ class Base(object):
         return html
 
     def _render_notebook_dom_(self):
-        """
-        render dom template for notebook
+        """ render dom template for notebook
         """
         _tmp = "notebook_dom.html"
         tmp = template.JINJA2_ENV.get_template(_tmp)
@@ -165,8 +158,7 @@ class Base(object):
         return component
 
     def _render_notebook_component_(self):
-        """
-        render component template for notebook
+        """ render component template for notebook
         """
         _tmp = "notebook_chart_component.html"
         my_option = json_dumps(self._option, indent=4)
