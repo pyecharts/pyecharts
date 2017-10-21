@@ -1,17 +1,16 @@
 #!/usr/bin/env python
 # coding=utf-8
 
-from pyecharts.base import Base
+from pyecharts.chart import Chart
 from pyecharts.option import get_all_options
 
 
-class TreeMap(Base):
+class TreeMap(Chart):
     """
-    <<< TreeMap >>>
+    <<< 树图 >>>
 
-    TreeMap is a common way to present "hierarchical data" or "tree data".
-    It primarily highlights the important nodes at all hierarchies in 『Tree』
-    with area.
+    树图是一种常见的表达『层级数据』『树状数据』的可视化形式。它主要用面积的方式，
+    便于突出展现出『树』的各层级中重要的节点。
     """
 
     def __init__(self, title="", subtitle="", **kwargs):
@@ -28,18 +27,19 @@ class TreeMap(Base):
         """
 
         :param name:
-            Series name used for displaying in tooltip and filtering with legend,
-            or updating data and configuration with setOption.
+            系列名称，用于 tooltip 的显示，legend 的图例筛选
         :param data:
-            the the data format of series-treemap.data is a forest. For example:
-            [ # Tips, the top level is a list.
+            树图的数据项是一棵树，每个节点包括`value`, `name`（可选）,
+            `children`（也是树，可选）如下所示
+            [
                 {
-                    value: 1212,
+                    value: 1212,    # 数值
+                    # 子节点
                     children: [
                         {
-                            # The value of this node, indicating the area size.
+                            # 子节点数值
                             value: 2323,
-                            # show the description text in rectangle.
+                            # 子节点名
                             name: 'description of this node',
                             children: [...],
                         },
@@ -60,20 +60,13 @@ class TreeMap(Base):
                 ...
             ]
         :param treemap_left_depth:
-            When leafDepth is set, the feature "drill down" is enabled, which means
-            when clicking a tree node, this node will be set as root and its
-            children will be shown.
-            leafDepth represents how many levels are shown at most. For example,
-            when leafDepth is set to 1, only one level will be shown.
+            leafDepth 表示『展示几层』，层次更深的节点则被隐藏起来。设置了 leafDepth 后，
+            下钻（drill down）功能开启。drill down 功能即点击后才展示子层级。
+            例如，leafDepth 设置为 1，表示展示一层节点。
         :param treemap_drilldown_icon:
-            Marker when the node is able to be drilled down.
+            当节点可以下钻时的提示符。只能是字符。默认为 '▶'
         :param treemap_visible_min:
-            A node will not be shown when its area size is smaller than this
-            value (unit: px square).
-            In this way, tiny nodes will be hidden, otherwise they will huddle
-            together. When user zoom the treemap, the area size will increase
-            and the rectangle will be shown if the area size is larger than
-            this threshold.
+            如果某个节点的矩形的面积，小于这个数值（单位：px平方），这个节点就不显示。
         :param kwargs:
         """
         chart = get_all_options(**kwargs)

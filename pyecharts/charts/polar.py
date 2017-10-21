@@ -1,16 +1,15 @@
 #!/usr/bin/env python
 # coding=utf-8
 
-from pyecharts.base import Base
+from pyecharts.chart import Chart
 from pyecharts.option import get_all_options
 
 
-class Polar(Base):
+class Polar(Chart):
     """
-    <<< Polar component >>>
+    <<< 极坐标系 >>>
 
-    Polar coordinate can be used in scatter and line chart.
-    Every polar coordinate has an angleAxis and a radiusAxis.
+    可以用于散点图和折线图。
     """
     def __init__(self, title="", subtitle="", **kwargs):
         super(Polar, self).__init__(title, subtitle, **kwargs)
@@ -35,43 +34,36 @@ class Polar(Base):
         """
 
         :param name:
-            Series name used for displaying in tooltip and filtering with legend,
-            or updating data and configuration with setOption.
+            系列名称，用于 tooltip 的显示，legend 的图例筛选。
         :param data:
-            data of polar, [Polar radius, Polar angle, [value]]
-            it is represented by a two-dimension array -> [[],[]]
+            数据项 [极径，极角 [数据值]]。
         :param angle_data:
-            Category data for angle, available in type: 'category' axis.
+            角度类目数据。
         :param radius_data:
-            Category data for radius, available in type: 'category' axis.
+            半径类目数据。
         :param type:
-            chart type，it can be 'scatter', 'effectScatter', 'barAngle', 'barRadius'
+            图例类型，有'line', 'scatter', 'effectScatter', 'barAngle', 'barRadius'
+            可选。默认为 'line'。
         :param symbol_size:
-            symbol size
+            标记图形大小，默认为 4。
         :param start_angle:
-            Starting angle of axis. 90 degrees by default, standing for top position of center.
-            0 degree stands for right position of center.
+            起始刻度的角度，默认为 90 度，即圆心的正上方。0 度为圆心的正右方。
         :param rotate_step:
-            Rotation degree of axis label, which is especially useful when
-            there is no enough space for category axis.
-            Rotation degree is from -90 to 90.
+            刻度标签旋转的角度，在类目轴的类目标签显示不下的时候可以通过旋转防止标签之间重叠
+            旋转的角度从 -90 度到 90 度。默认为 0
         :param boundary_gap:
-            The boundary gap on both sides of a coordinate axis.
-            The setting and behavior of category axes and non-category axes are different.
-            The boundaryGap of category axis can be set to either true or false.
-            Default value is set to be true, in which case axisTick is served
-            only as a separation line, and labels and data appear only in the
-            center part of two axis ticks, which is called band.
+            坐标轴两边留白策略
+            默认为 True，这时候刻度只是作为分隔线，标签和数据点都会在两个刻度之间的带(band)中间。
         :param is_clockwise:
-            Whether the positive position of axis is in clockwise. True for clockwise by default.
+            刻度增长是否按顺时针，默认 True
         :param is_stack:
-            It specifies whether to stack category axis.
+            数据堆叠，同个类目轴上系列配置相同的 stack 值可以堆叠放置。
         :param axis_range:
-            axis scale range
+            坐标轴刻度范围。默认值为 [None, None]。
         :param is_angleaxis_show:
-            whether show angle axis.
+            是否显示极坐标系的角度轴，默认为 True。
         :param is_radiusaxis_show:
-            whether show radius axis.
+            是否显示极坐标系的径向轴，默认为 True。
         :param kwargs:
         """
         chart = get_all_options(**kwargs)

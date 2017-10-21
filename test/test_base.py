@@ -12,18 +12,18 @@ import numpy as np
 
 from nose.tools import eq_
 from pyecharts import Bar, Map
+from test.constants import CLOTHES
 
 
 TITLE = "柱状图数据堆叠示例"
 
 
 def create_a_bar(title):
-    attr = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
     v1 = [5, 20, 36, 10, 75, 90]
     v2 = [10, 25, 8, 60, 20, 80]
     bar = Bar(title)
-    bar.add("商家A", attr, v1, is_stack=True)
-    bar.add("商家B", attr, v2, is_stack=True)
+    bar.add("商家A", CLOTHES, v1, is_stack=True)
+    bar.add("商家B", CLOTHES, v2, is_stack=True)
     return bar
 
 
@@ -71,10 +71,9 @@ def test_base_get_js_dependencies():
 
 
 def test_numpy_array():
-    attr = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
     v1 = np.array([5, 20, 36, 10, 75, 90])
     bar = Bar(TITLE)
-    bar.add("商家A", attr, v1, is_stack=True)
+    bar.add("商家A", CLOTHES, v1, is_stack=True)
     html = bar.render_embed()
     json_encoded_title = json.dumps(TITLE)
     assert json_encoded_title in html
