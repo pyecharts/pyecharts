@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 
 import json
 import codecs
-from test.constants import RANGE_COLOR
+from test.constants import RANGE_COLOR, CLOTHES, WEEK
 from pyecharts import (
     Bar, Scatter3D, Line, Pie, Map,
     Kline, Radar, WordCloud, Liquid)
@@ -19,12 +19,11 @@ def create_three():
     page = Page(page_title=TEST_PAGE_TITLE)
 
     # bar
-    attr = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
     v1 = [5, 20, 36, 10, 75, 90]
     v2 = [10, 25, 8, 60, 20, 80]
     bar = Bar("柱状图数据堆叠示例")
-    bar.add("商家A", attr, v1, is_stack=True)
-    bar.add("商家B", attr, v2, is_stack=True)
+    bar.add("商家A", CLOTHES, v1, is_stack=True)
+    bar.add("商家B", CLOTHES, v2, is_stack=True)
     page.add(bar)
 
     # scatter3D
@@ -99,19 +98,17 @@ def test_more():
     page = Page()
 
     # line
-    attr = ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
     line = Line("折线图示例")
-    line.add("最高气温", attr, [11, 11, 15, 13, 12, 13, 10],
+    line.add("最高气温", WEEK, [11, 11, 15, 13, 12, 13, 10],
              mark_point=["max", "min"], mark_line=["average"])
-    line.add("最低气温", attr, [1, -2, 2, 5, 3, 2, 0],
+    line.add("最低气温", WEEK, [1, -2, 2, 5, 3, 2, 0],
              mark_point=["max", "min"], mark_line=["average"])
     page.add(line)
 
     # pie
-    attr = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
     v1 = [11, 12, 13, 10, 10, 10]
     pie = Pie("饼图-圆环图示例", title_pos='center')
-    pie.add("", attr, v1, radius=[40, 75], label_text_color=None,
+    pie.add("", CLOTHES, v1, radius=[40, 75], label_text_color=None,
             is_label_show=True, legend_orient='vertical', legend_pos='left')
     page.add(pie)
 
@@ -198,5 +195,6 @@ def test_more():
     liquid.add("Liquid", [0.6])
     page.add(liquid)
     assert len(page.charts) == 7
-    assert ('echarts' in page.js_dependencies) or ('echarts.min' in page.js_dependencies)
+    assert ('echarts' in page.js_dependencies) or\
+           ('echarts.min' in page.js_dependencies)
     page.render()

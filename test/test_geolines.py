@@ -17,6 +17,8 @@ style_geo = style.add(
     is_label_show=True,
     line_curve=0.2,
     line_opacity=0.6,
+    legend_text_color="#eee",
+    legend_pos="right",
     geo_effect_symbol="plane",
     geo_effect_symbolsize=15,
     label_color=['#a6c84c', '#ffa022', '#46bee9'],
@@ -44,7 +46,8 @@ def test_geolines():
         ["北京", "兰州"],
         ["北京", "杭州"]
     ]
-    lines = GeoLines(**style.init_style)
+    lines = GeoLines("GeoLines 示例", **style.init_style)
     lines.add("从广州出发", data_guangzhou, **style_geo)
     lines.add("从北京出发", data_beijing, **style_geo)
+    lines.show_config()
     lines.render()
