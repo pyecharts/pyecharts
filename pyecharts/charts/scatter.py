@@ -3,19 +3,16 @@
 
 from PIL import Image
 
-from pyecharts.base import Base
+from pyecharts.chart import Chart
 from pyecharts.option import get_all_options
 
 
-class Scatter(Base):
+class Scatter(Chart):
     """
-    <<< Scatter chart >>>
+    <<< 散点图 >>>
 
-    The scatter chart in rectangular coordinate could be used to present the
-    relation between x and y.
-    If data have multiple dimensions, the values of the other dimensions can
-    be visualized through symbol with various sizes and colors,which becomes
-    a bubble chart. These can be done by using with visualMap component.
+    直角坐标系上的散点图可以用来展现数据的 x，y 之间的关系，如果数据项有多个维度，
+    可以用颜色来表现，利用 geo 组件。
     """
     def __init__(self, title="", subtitle="", **kwargs):
         super(Scatter, self).__init__(title, subtitle, **kwargs)
@@ -29,16 +26,16 @@ class Scatter(Base):
         """
 
         :param name:
-            Series name used for displaying in tooltip and filtering with legend,
-            or updating data and configuration with setOption.
+            系列名称，用于 tooltip 的显示，legend 的图例筛选。
         :param x_axis:
-            data of xAxis
+            x 坐标轴数据。
         :param y_axis:
-            data of yAxis
+            y 坐标轴数据。
         :param extra_data:
-            other dimension data
+            第三维度数据，x 轴为第一个维度，y 轴为第二个维度。（可在 visualmap 中
+            将视图元素映射到第三维度）。
         :param symbol_size:
-            symbol size
+            标记图形大小，默认为 10。
         :param kwargs:
         """
         assert len(x_axis) == len(y_axis)
@@ -66,23 +63,26 @@ class Scatter(Base):
         self._config_components(**kwargs)
 
     def draw(self, path, color=None):
-        """ Converts the pixels on the image to an array
+        """ 将图片上的像素点转换为数组，如 color 为（255,255,255）时只保留非白色像素点的
+        坐标信息返回两个 k_lst, v_lst 两个列表刚好作为散点图的数据项
 
         :param path:
-            path of Image that want to draw
+            转换图片的地址
         :param color:
-            select a color to exclude, (225, 225, 225) means Keep only white pixel information.
+            所要排除的颜色
         :return:
+            转换后的数组
         """
         color = color or (255, 255, 255)
         im = Image.open(path)
         width, height = im.size
         imarray = im.load()
-        # flip vertical Images
+        # 垂直翻转图片
         for x in range(width):
             for y in range(height):
                 if y < int(height / 2):
                     imarray[x, y], imarray[x, height-y-1] = imarray[x, height-y-1], imarray[x, y]
-        # [:3] is r,g,b
-        result = [(x, y) for x in range(width) for y in range(height) if imarray[x, y][:3] != color]
+        # [:3] 代表着 R, G, B 三原色
+        result = [(x, y) for x in range(width) for y in range(height)
+                  if imarray[x, y][:3] != color]
         return self.cast(result)

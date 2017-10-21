@@ -1,16 +1,15 @@
 #!/usr/bin/env python
 # coding=utf-8
 
-from pyecharts.base import Base
+from pyecharts.chart import Chart
 from pyecharts.option import get_all_options
 
 
-class Pie(Base):
+class Pie(Chart):
     """
-    <<< Pie chart >>>
+    <<< 饼图 >>>
 
-    The pie chart is mainly used for showing proportion of different categories.
-    Each arc length represents the proportion of data quantity.
+    饼图主要用于表现不同类目的数据在总和中的占比。每个的弧度表示数据数量的比例。
     """
     def __init__(self, title="", subtitle="", **kwargs):
         super(Pie, self).__init__(title, subtitle, **kwargs)
@@ -26,29 +25,22 @@ class Pie(Base):
         """
 
         :param name:
-            Series name used for displaying in tooltip and filtering with legend,
-            or updating data and configuration with setOption.
+            系列名称，用于 tooltip 的显示，legend 的图例筛选。
         :param attr:
-            name of attribute
+            属性名称。
         :param value:
-            value of attribute
+            属性所对应的值。
         :param radius:
-            Radius of Pie chart, the first of which is inner radius, and the second is outer radius.
-            Percentage is supported. When set in percentage,
-            it's relative to the smaller size between height and width of the container.
+            饼图的半径，数组的第一项是内半径，第二项是外半径，默认为 [0, 75]
+            默认设置成百分比，相对于容器高宽中较小的一项的一半。
         :param center:
-            Center position of Pie chart, the first of which is the horizontal position,
-            and the second is the vertical position.
-            Percentage is supported. When set in percentage, the item is relative to the
-            container width, and the second item to the height.
+            饼图的中心（圆心）坐标，数组的第一项是横坐标，第二项是纵坐标，默认为 [50, 50]
+            默认设置成百分比，设置成百分比时第一项是相对于容器宽度，第二项是相对于容器高度。
         :param rosetype:
-            Whether to show as Nightingale chart, which distinguishs data through radius.
-            There are 2 optional modes:
-            'radius'
-                Use central angle to show the percentage of data, radius to show data size.
-            'area'
-                All the sectors will share the same central angle, the data size is shown
-                only through radiuses.
+           是否展示成南丁格尔图，通过半径区分数据大小，有'radius'和'area'两种模式。
+           默认为'radius'
+                radius：扇区圆心角展现数据的百分比，半径展现数据的大小。
+                area：所有扇区圆心角相同，仅通过半径展现数据大小。
         :param kwargs:
         """
         kwargs.update(type="pie")

@@ -5,8 +5,7 @@ from __future__ import unicode_literals
 from pyecharts import Parallel
 
 
-def test_parallel():
-    # parallel base
+def test_parallel_default():
     schema = ["data", "AQI", "PM2.5", "PM10", "CO", "NO2"]
     data = [
         [1, 91, 45, 125, 0.82, 34],
@@ -26,7 +25,8 @@ def test_parallel():
     parallel.add("parallel", data, is_random=True)
     parallel.render()
 
-    # parallel user define
+
+def test_parallel_user_define():
     c_schema = [
         {"dim": 0, "name": "data"},
         {"dim": 1, "name": "AQI"},

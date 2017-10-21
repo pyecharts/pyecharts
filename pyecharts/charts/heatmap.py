@@ -1,19 +1,16 @@
 #!/usr/bin/env python
 # coding=utf-8
 
-from pyecharts.base import Base
+from pyecharts.chart import Chart
 from pyecharts.option import get_all_options
 
 
-class HeatMap(Base):
+class HeatMap(Chart):
     """
-    <<< HeatMap chart >>>
+    <<< 热力图 >>>
 
-    Heat map mainly use colors to represent values， which must be used along
-    with visualMap component.
-    It can be used in either rectangular coordinate or geographic coordinate.
-    But the behaviour on them are quite different. Rectangular coordinate
-    must have two categories to use it.
+    热力图主要通过颜色去表现数值的大小，必须要配合 visualMap 组件使用。
+    直角坐标系上必须要使用两个类目轴。
     """
     def __init__(self, title="", subtitle="", **kwargs):
         super(HeatMap, self).__init__(title, subtitle, **kwargs)
@@ -25,24 +22,21 @@ class HeatMap(Base):
         """
 
         :param args:
-            if kwargs has is_calendar_heatmap property:
+            如果指定；额 is_has_calendar_heatmap 属性为 True，则定义如下
                 :param name:
-                    Series name used for displaying in tooltip and filtering with legend,
-                    or updating data and configuration with setOption.
+                    系列名称，用于 tooltip 的显示，legend 的图例筛选。
                 :param data:
-                    data array of series, it is represented by a two-dimension array -> [[],[]]
-            else:
+                    数据项，数据中，每一行是一个『数据项』，每一列属于一个『维度』。
+            不指定，默认情况定义如下:
                 :param name:
-                    Series name used for displaying in tooltip and filtering with legend,
-                    or updating data and configuration with setOption.
+                    系列名称，用于 tooltip 的显示，legend 的图例筛选。
                 :param x_axis:
-                    data of xAxis, it must be catagory axis.
+                    x 坐标轴数据。需为类目轴，也就是不能是数值。
                 :param y_axis:
-                    data of yAxis, it must be catagory axis.
+                    y 坐标轴数据。需为类目轴，也就是不能是数值。
                 :param data:
-                    data array of series, it is represented by a two-dimension array -> [[],[]]
+                    数据项，数据中，每一行是一个『数据项』，每一列属于一个『维度』。
         :param kwargs:
-        :return:
         """
         _is_calendar = kwargs.get('is_calendar_heatmap', None) is True
         if _is_calendar:
