@@ -11,11 +11,9 @@ PY2 = sys.version_info[0] == 2
 
 class Map(Chart):
     """
-    <<< Map chart >>>
+    <<< 地图 >>>
 
-    Map is mainly used in the visualization of geographic area data,which
-    can be used with visualMap component to visualize the data such as
-    population distribution density in different areas.
+    地图主要用于地理区域数据的可视化。
     """
     def __init__(self, title="", subtitle="", **kwargs):
         super(Map, self).__init__(title, subtitle, **kwargs)
@@ -24,30 +22,33 @@ class Map(Chart):
         self.__add(*args, **kwargs)
 
     def __add(self, name, attr, value,
+              maptype="china",
               is_roam=True,
-              maptype='china',
               is_map_symbol_show=True,
               **kwargs):
         """
 
         :param name:
-            Series name used for displaying in tooltip and filtering with
-            legend, or updating data and configuration with setOption.
+            系列名称，用于 tooltip 的显示，legend 的图例筛选。
         :param attr:
-            name of attribute
+            属性名称。
         :param value:
-            value of attribute
-        :param is_roam:
-            Whether to enable mouse zooming and translating. false by default.
-            If either zooming or translating is wanted,
-            it can be set to 'scale' or 'move'. Otherwise, set it to be true
-            to enable both.
-        :param is_map_symbol_show:
-            Show or hide legend symbol in the map. Default to show a red dot.
-            False to hide it.
+            属性所对应的值。
         :param maptype:
-            type of map, it supports
-            china、world、...
+            地图类型。 支持 china、world、安徽、澳门、北京、重庆、福建、福建、甘肃、广东，
+            广西、广州、海南、河北、黑龙江、河南、湖北、湖南、江苏、江西、吉林、辽宁、
+            内蒙古、宁夏、青海、山东、上海、陕西、山西、四川、台湾、天津、香港、新疆、
+            西藏、云南、浙江，以及 [363个二线城市地图](https://github.com/chfw/echarts-
+            china-cities-js#featuring-citiesor-for-single-download)。
+            提醒：
+                在画市级地图的时候，城市名字后面的‘市’要省去了，比如，石家庄市的‘市’不要提，
+                即‘石家庄’就可以了。地图提供了自定义模式 [用户如何自定义地图](https://github.com/
+                chenjiandongx/pyecharts/blob/master/docs/zh-cn/user-customize-map.md)
+        :param is_roam:
+            是否开启鼠标缩放和平移漫游。默认为 True
+            如果只想要开启缩放或者平移，可以设置成'scale'或者'move'。设置成 True 为都开启。
+        :param is_map_symbol_show:
+            是否显示地图标记红点，默认为 True。
         :param kwargs:
         """
         assert len(attr) == len(value)

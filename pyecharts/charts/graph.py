@@ -7,9 +7,9 @@ from pyecharts.option import get_all_options
 
 class Graph(Chart):
     """
-    <<< Graph chart >>>
+    <<< 关系图 >>>
 
-    Graph is a diagram to represent nodes and the links connecting nodes.
+    用于展现节点以及节点之间的关系数据。
     """
     def __init__(self, title="", subtitle="", **kwargs):
         super(Graph, self).__init__(title, subtitle, **kwargs)
@@ -30,58 +30,53 @@ class Graph(Chart):
               **kwargs):
         """
         :param name:
-            Series name used for displaying in tooltip and filtering with legend,
-            or updating data and configuration with setOption.
+            系列名称，用于 tooltip 的显示，legend 的图例筛选。
         :param nodes:
-            Relational nodes data
-            name：Name of data item.     # required！！
-            x：x value of node position.
-            y：y value of node position.
-            value：value of data item.
-            category：Index of category which the data item belongs to.
-            symbol：Symbol of node of this category.
-                    Includes 'circle', 'rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow'
-            symbolSize：symbol size
+            关系图结点，包含的数据项有
+            name：结点名称（必须有！）。
+            x: 节点的初始 x 值。
+            y：节点的初始 y 值。
+            value：结点数值。
+            category：结点类目。
+            symbol：标记图形，有'circle', 'rect', 'roundRect', 'triangle',
+                    'diamond', 'pin', 'arrow'可选。
+            symbolSize：标记图形大小。
         :param links:
-            Relational data between nodes
-            source：name of source node on edge      # required！！
-            target：name of target node on edge      # required！！
-            value：value of edge,It can be used in the force layout to map to the length of the edge
+            结点间的关系数据，包含的数据项有
+            source：边的源节点名称的字符串，也支持使用数字表示源节点的索引（必须有！）
+            target：边的目标节点名称的字符串，也支持使用数字表示源节点的索引（必须有！）
+            value：边的数值，可以在力引导布局中用于映射到边的长度
         :param categories:
-            Name of category, which is used to correspond with legend and the content of tooltip.
+            结点分类的类目，结点可以指定分类，也可以不指定。
+            如果节点有分类的话可以通过 nodes[i].category 指定每个节点的类目，
+            类目的样式会被应用到节点样式上
         :param is_focusnode:
-            Whether to focus/highlight the hover node and it's adjacencies.
+            是否在鼠标移到节点上的时候突出显示节点以及节点的边和邻接节点
         :param is_roam:
-            Whether to enable mouse zooming and translating. false by default.
-            If either zooming or translating is wanted,
-            it can be set to 'scale' or 'move'. Otherwise, set it to be true to enable both.
+            是否开启鼠标缩放和平移漫游。
+            如果只想要开启缩放或者平移，可以设置成'scale'或者'move'。设置成 True 为都开启
         :param is_rotatelabel:
-            Whether to rotate the label automatically.
+            是否旋转标签
         :param graph_layout:
-            Graph layout.
-            'none': No any layout, use x, y provided in node as the position of node.
-            'circular': Adopt circular layout, see the example Les Miserables.
-            'force': Adopt force-directed layout, see the example Force,
-                     the detail about configrations of layout are in graph.force
+            关系图布局，默认为 'force'
+            none：不采用任何布局，使用节点中必须提供的 x， y 作为节点的位置。
+            circular：采用环形布局
+            force：采用力引导布局
         :param graph_edge_length:
-            The distance between 2 nodes on edge. This distance is also affected by repulsion.
-            It can be an array to represent the range of edge length.In this case edge with
-            larger value will be shorter, which means two nodes are closer.
-            And edge with smaller value will be longer.
+            力布局下边的两个节点之间的距离，这个距离也会受 repulsion 影响。
+            支持设置成数组表达边长的范围，此时不同大小的值会线性映射到不同的
+            长度。值越小则长度越长。
         :param graph_gravity:
-            The gravity factor enforcing nodes approach to the center.
-            The nodes will be closer to the center as the value becomes larger.
+            节点受到的向中心的引力因子。该值越大节点越往中心点靠拢。
         :param graph_repulsion:
-            The repulsion factor between nodes. The repulsion will be stronger and the
-            distance between 2 nodes becomes further as this value becomes larger.
-            It can be an array to represent the range of repulsion.
-            In this case larger value have larger repulsion and smaller value
-            will have smaller repulsion.
+            节点之间的斥力因子。默认为 50
+            支持设置成数组表达斥力的范围，此时不同大小的值会线性映射到不同的斥力。
+            值越大则斥力越大
         :param graph_edge_symbol:
-            Symbol of two ends of edge line.
-            For example: edgeSymbol: ['circle', 'arrow']
+            边两端的标记类型，可以是一个数组分别指定两端，也可以是单个统一指定。
+            默认不显示标记，常见的可以设置为箭头，如下：edgeSymbol: ['circle', 'arrow']。
         :param graph_edge_symbolsize:
-            Size of symbol of two ends of edge line. Can be an array or a single number.
+            边两端的标记大小，可以是一个数组分别指定两端，也可以是单个统一指定。
         :param kwargs:
         """
         kwargs.update(type="graph")
