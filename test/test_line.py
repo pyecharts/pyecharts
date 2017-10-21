@@ -3,7 +3,7 @@
 from __future__ import unicode_literals
 
 from pyecharts import Line
-from test.constants import CLOTHES
+from test.constants import CLOTHES, WEEK
 
 
 clothes_v1 = [5, 20, 36, 10, 10, 100]
@@ -41,11 +41,10 @@ def test_line_user_define_marks():
 
 
 def test_line_negative_value():
-    attr = ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
     line = Line("折线图示例")
-    line.add("最高气温", attr, [11, 11, 15, 13, 12, 13, 10],
+    line.add("最高气温", WEEK, [11, 11, 15, 13, 12, 13, 10],
              mark_point=["max", "min"], mark_line=["average"])
-    line.add("最低气温", attr, [1, -2, 2, 5, 3, 2, 0],
+    line.add("最低气温", WEEK, [1, -2, 2, 5, 3, 2, 0],
              mark_point=["max", "min"], mark_line=["average"])
     line.render()
 
