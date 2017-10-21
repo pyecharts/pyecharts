@@ -106,12 +106,12 @@ class GeoLines(Chart):
                     _geo_cities_coords.get(_to_name, [])
                 ]
             })
-            _from_v = _geo_cities_coords.get(_from_name, []).copy()
+            _from_v = _geo_cities_coords.get(_from_name, [])
             _data_scatter.append({
                 "name": _from_name,
                 "value": _from_v + [0]
             })
-            _to_v = _geo_cities_coords.get(_to_name, []).copy()
+            _to_v = _geo_cities_coords.get(_to_name, [])
             _data_scatter.append({
                 "name": _to_name,
                 "value": _to_v + [0]
