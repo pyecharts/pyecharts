@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# coding=utf-8
+from __future__ import unicode_literals
 
 RANGE_COLOR = [
     '#313695', '#4575b4', '#74add1', '#abd9e9', '#e0f3f8',
