@@ -6,21 +6,19 @@ import random
 
 from pyecharts import Bar, Line, Scatter, EffectScatter, Pie, Kline, HeatMap
 from pyecharts import Grid
-from test.constants import X_TIME, Y_WEEK
+from test.constants import X_TIME, Y_WEEK, CLOTHES, WEEK
 
 
 def test_grid_top_bottom():
-    attr = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
     v1 = [5, 20, 36, 10, 75, 90]
     v2 = [10, 25, 8, 60, 20, 80]
     bar = Bar("柱状图示例", height=720)
-    bar.add("商家A", attr, v1, is_stack=True)
-    bar.add("商家B", attr, v2, is_stack=True)
+    bar.add("商家A", CLOTHES, v1, is_stack=True)
+    bar.add("商家B", CLOTHES, v2, is_stack=True)
     line = Line("折线图示例", title_top="50%")
-    attr = ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
-    line.add("最高气温", attr, [11, 11, 15, 13, 12, 13, 10],
+    line.add("最高气温", WEEK, [11, 11, 15, 13, 12, 13, 10],
              mark_point=["max", "min"], mark_line=["average"])
-    line.add("最低气温", attr, [1, -2, 2, 5, 3, 2, 0],
+    line.add("最低气温", WEEK, [1, -2, 2, 5, 3, 2, 0],
              mark_point=["max", "min"], mark_line=["average"],
              legend_top="50%")
 
@@ -46,17 +44,15 @@ def test_grid_left_right():
 
 
 def test_grid_four_direction():
-    attr = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
     v1 = [5, 20, 36, 10, 75, 90]
     v2 = [10, 25, 8, 60, 20, 80]
     bar = Bar("柱状图示例", height=720, width=1200, title_pos="65%")
-    bar.add("商家A", attr, v1, is_stack=True)
-    bar.add("商家B", attr, v2, is_stack=True, legend_pos="80%")
+    bar.add("商家A", CLOTHES, v1, is_stack=True)
+    bar.add("商家B", CLOTHES, v2, is_stack=True, legend_pos="80%")
     line = Line("折线图示例")
-    attr = ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
-    line.add("最高气温", attr, [11, 11, 15, 13, 12, 13, 10],
+    line.add("最高气温", WEEK, [11, 11, 15, 13, 12, 13, 10],
              mark_point=["max", "min"], mark_line=["average"])
-    line.add("最低气温", attr, [1, -2, 2, 5, 3, 2, 0],
+    line.add("最低气温", WEEK, [1, -2, 2, 5, 3, 2, 0],
              mark_point=["max", "min"], mark_line=["average"],
              legend_pos="20%")
     v1 = [5, 20, 36, 10, 75, 90]
@@ -77,16 +73,14 @@ def test_grid_four_direction():
 
 def test_grid_line_pie():
     line = Line("折线图示例", width=1200)
-    attr = ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
-    line.add("最高气温", attr, [11, 11, 15, 13, 12, 13, 10],
+    line.add("最高气温", WEEK, [11, 11, 15, 13, 12, 13, 10],
              mark_point=["max", "min"], mark_line=["average"])
-    line.add("最低气温", attr, [1, -2, 2, 5, 3, 2, 0],
+    line.add("最低气温", WEEK, [1, -2, 2, 5, 3, 2, 0],
              mark_point=["max", "min"], mark_line=["average"],
              legend_pos="20%")
-    attr = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
     v1 = [11, 12, 13, 10, 10, 10]
     pie = Pie("饼图示例", title_pos="55%")
-    pie.add("", attr, v1, radius=[45, 65], center=[65, 50],
+    pie.add("", CLOTHES, v1, radius=[45, 65], center=[65, 50],
             legend_pos="80%", legend_orient='vertical')
 
     grid = Grid()
@@ -97,10 +91,9 @@ def test_grid_line_pie():
 
 def test_grid_line_kline():
     line = Line("折线图示例", width=1200)
-    attr = ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
-    line.add("最高气温", attr, [11, 11, 15, 13, 12, 13, 10],
+    line.add("最高气温", WEEK, [11, 11, 15, 13, 12, 13, 10],
              mark_point=["max", "min"], mark_line=["average"])
-    line.add("最低气温", attr, [1, -2, 2, 5, 3, 2, 0],
+    line.add("最低气温", WEEK, [1, -2, 2, 5, 3, 2, 0],
              mark_point=["max", "min"], mark_line=["average"],
              legend_pos="20%")
     v1 = [[2320.26, 2320.26, 2287.3, 2362.94],
@@ -151,12 +144,11 @@ def test_grid_heatmap_bar():
     heatmap.add("热力图直角坐标系", X_TIME, Y_WEEK, data, is_visualmap=True,
                 visual_top="45%", visual_text_color="#000",
                 visual_orient='horizontal')
-    attr = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
     v1 = [5, 20, 36, 10, 75, 90]
     v2 = [10, 25, 8, 60, 20, 80]
     bar = Bar("柱状图示例", title_top="52%")
-    bar.add("商家A", attr, v1, is_stack=True)
-    bar.add("商家B", attr, v2, is_stack=True, legend_top="50%")
+    bar.add("商家A", CLOTHES, v1, is_stack=True)
+    bar.add("商家B", CLOTHES, v2, is_stack=True, legend_top="50%")
 
     grid = Grid()
     grid.add(heatmap, grid_bottom="60%")
@@ -166,10 +158,9 @@ def test_grid_heatmap_bar():
 
 def test_grid_multiple_datazoom_index():
     line = Line("折线图示例", width=1200, height=700)
-    attr = ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
-    line.add("最高气温", attr, [11, 11, 15, 13, 12, 13, 10],
+    line.add("最高气温", WEEK, [11, 11, 15, 13, 12, 13, 10],
              mark_point=["max", "min"], mark_line=["average"])
-    line.add("最低气温", attr, [1, -2, 2, 5, 3, 2, 0],
+    line.add("最低气温", WEEK, [1, -2, 2, 5, 3, 2, 0],
              mark_point=["max", "min"], legend_top="50%",
              mark_line=["average"], is_datazoom_show=True,
              datazoom_xaxis_index=[0, 1])
