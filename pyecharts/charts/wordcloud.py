@@ -57,7 +57,7 @@ class WordCloud(Chart):
                 _min, _max = word_size_range
 
         _rmin, _rmax = -90, 90
-        # make sure shape valid, need to set ratated range [-90, 90]
+        # 确保设置的形状有效，单词的旋转角度应该设置在 [-90, 90]
         if shape in ("cardioid", "diamond", "triangle-forward", "triangle", "pentagon", "star"):
             _rmin = _rmax = 0
         else:
