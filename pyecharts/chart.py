@@ -8,7 +8,9 @@ import pyecharts.constants as constants
 
 
 class Chart(Base):
-
+    """
+    `Chart`类是所有非自定义类的基类，继承自 `Base` 类
+    """
     def __init__(self, title, subtitle,
                  width=800,
                  height=400,

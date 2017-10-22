@@ -5,8 +5,11 @@ from pyecharts.base import Base
 
 
 class Timeline(Base):
-
+    """
+    时间线轮播多张图
+    """
     def __init__(self, page_title=PAGE_TITLE,
+                 jshost=None,
                  width=800,
                  height=400,
                  is_auto_play=False,
@@ -52,7 +55,7 @@ class Timeline(Base):
         """
 
         super(Timeline, self).__init__(
-            width=width, height=height
+            width=width, height=height, jshost=jshost
         )
         self._page_title = page_title
         self._time_points = []
@@ -80,8 +83,9 @@ class Timeline(Base):
         """
 
         :param chart:
+            图形实例
         :param time_point:
-        :return:
+            指定时间点
         """
         self._js_dependencies = self._js_dependencies.union(
             chart.get_js_dependencies())
@@ -103,7 +107,7 @@ class Timeline(Base):
         """
 
         :param chart:
-        :return:
+            图形实例
         """
         _compoents = [
             'gird', 'xAxis', 'yAxis', 'polar', 'radiusAxis', 'geo'

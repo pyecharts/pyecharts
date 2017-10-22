@@ -10,7 +10,9 @@ import pyecharts.constants as constants
 
 
 class Base(object):
-
+    """
+    `Base`类是所有图形类的基类，提供部分初始化参数和基本的方法
+    """
     def __init__(self,
                  width=800,
                  height=400,
@@ -37,38 +39,42 @@ class Base(object):
 
     @property
     def chart_id(self):
+        """ 设置 chart_id 属性为可读
+        """
         return self._chart_id
 
     @property
     def width(self):
+        """ 设置 width 属性为可读
+        """
         return self._width
 
     @property
     def height(self):
+        """ 设置 height 属性为可读
+        """
         return self._height
 
     @property
     def options(self):
-        """ chart configurations
+        """ 设置 options 属性为可读
         """
         return self._option
 
     @property
     def js_dependencies(self):
-        """ a list of dependent javascript libraries
+        """ 依赖的 js 文件列表
         """
         return self._js_dependencies
 
     def show_config(self):
-        """ Print all options of charts
+        """ 打印输出图形所有配置项
         """
         print(json_dumps(self._option, indent=4))
 
     def render_embed(self):
-        """ Render the chart component and its options
-
-        You can include it into your web pages. And you will
-        provide all dependent echarts javascript libraries.
+        """ 渲染图表的所有配置项，为 web pages 服务，不过需先提供
+        所需要的js 依赖文件
         """
         embed = 'chart_component.html'
         tmp = template.JINJA2_ENV.get_template(embed)
@@ -79,15 +85,15 @@ class Base(object):
         return html
 
     def get_js_dependencies(self):
-        """ Declare its javascript dependencies for embedding purpose
+        """ 声明所有的 js 文件路径
         """
         return template.produce_html_script_list(self._js_dependencies)
 
     def render(self, path="render.html"):
-        """ Render the options dict, generate the html file
+        """ 渲染配置项并生成 html 文件
 
         :param path:
-            path of render html file
+            文件保存路径
         """
         _tmp = "local.html"
         my_option = json_dumps(self._option, indent=4)
@@ -104,13 +110,17 @@ class Base(object):
 
     @staticmethod
     def cast(seq):
-        """ Convert the sequence with the dictionary and tuple type into k_lst, v_lst.
-        1.[(A1, B1),(A2, B2),..] --> k_lst[A[i1,i2...]], v_lst[B[i1,i2...]]
-        2.[{A1: B1},{A2: B2},..] --> k_lst[A[i1,i2...]], v_lst[B[i1,i2...]]
-        3.{A1: B1, A2: B2, A3: B3} -- > k_lst[A[i1,i2...]], v_lst[B[i1,i2...]]
+        """ 转换数据序列，将带字典和元组类型的序列转换为 k_lst,v_lst 两个列表
+
+        元组列表
+            [(A1, B1), (A2, B2), ...] --> k_lst[ A[i1, i2...] ], v_lst[ B[i1, i2...] ]
+        字典列表
+            [{A1: B1}, {A2: B2}, ...] --> k_lst[ A[i1, i2...] ], v_lst[ B[i1, i2...] ]
+        字典
+            {A1: B1, A2: B2, ...} -- > k_lst[ A[i1, i2...] ], v_lst[ B[i1, i2...] ]
 
         :param seq:
-            data sequence
+            待转换的序列
         :return:
         """
         k_lst, v_lst = [], []
@@ -134,7 +144,7 @@ class Base(object):
         return k_lst, v_lst
 
     def _repr_html_(self):
-        """ Render the options dict, displayed in the jupyter notebook
+        """ 渲染配置项并将图形显示在 notebook 中
         """
         _tmp = 'notebook.html'
         dom = self._render_notebook_dom_()
@@ -147,7 +157,7 @@ class Base(object):
         return html
 
     def _render_notebook_dom_(self):
-        """ render dom template for notebook
+        """ 为 notebook 渲染 dom 模板
         """
         _tmp = "notebook_dom.html"
         tmp = template.JINJA2_ENV.get_template(_tmp)
@@ -158,7 +168,7 @@ class Base(object):
         return component
 
     def _render_notebook_component_(self):
-        """ render component template for notebook
+        """ 为 notebook 渲染组件模板
         """
         _tmp = "notebook_chart_component.html"
         my_option = json_dumps(self._option, indent=4)
@@ -169,11 +179,13 @@ class Base(object):
 
 
 class UnknownTypeEncoder(json.JSONEncoder):
+    """
+    `UnknownTypeEncoder`类用于处理数据的编码，使其能够被正常的序列化
+    """
     def default(self, obj):
         if isinstance(obj, (datetime.datetime, datetime.date)):
             return obj.isoformat()
         else:
-            # Pandas and Numpy lists
             try:
                 return obj.astype(float).tolist()
             except:
@@ -184,10 +196,10 @@ class UnknownTypeEncoder(json.JSONEncoder):
 
 
 def json_dumps(data, indent=0):
-    """
+    """ json 序列化编码处理
 
-    :param data:
-    :param indent:
+    :param data: 字典数据
+    :param indent: 缩进量
     :return:
     """
     return json.dumps(data, indent=indent,
