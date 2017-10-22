@@ -2,11 +2,13 @@
 # coding=utf-8
 from __future__ import unicode_literals
 
-import re
-import os
-import sys
 import codecs
+import os
+import re
+import sys
+from datetime import datetime
 
+import json
 
 PY2 = sys.version_info[0] == 2
 
@@ -73,3 +75,29 @@ def write_utf8_html_file(file_name, html_content):
     else:
         with open(file_name, "w+", encoding="utf-8") as fout:
             fout.write(html_content)
+
+
+class UnknownTypeEncoder(json.JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, (datetime.datetime, datetime.date)):
+            return obj.isoformat()
+        else:
+            # Pandas and Numpy lists
+            try:
+                return obj.astype(float).tolist()
+            except:
+                try:
+                    return obj.astype(str).tolist()
+                except:
+                    return json.JSONEncoder.default(self, obj)
+
+
+def json_dumps(data, indent=0):
+    """
+
+    :param data:
+    :param indent:
+    :return:
+    """
+    return json.dumps(data, indent=indent,
+                      cls=UnknownTypeEncoder)
