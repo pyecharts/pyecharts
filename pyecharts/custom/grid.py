@@ -8,12 +8,17 @@ from pyecharts.base import Base
 
 
 class Grid(Base):
-
+    """
+    用户可以自定义结合 Line/Bar/Kline/Scatter/EffectScatter/Pie/HeatMap
+    /Boxplot 图表，将不同类型图表画在多张图上。第一个图需为 有 x/y 轴的图，
+    即不能为 Pie，其他位置顺序任意。
+    """
     def __init__(self, page_title=PAGE_TITLE,
                  width=800,
-                 height=400):
+                 height=400,
+                 jshost=None):
         super(Grid, self).__init__(
-            width=width, height=height
+            width=width, height=height, jshost=jshost
         )
         self._page_title = page_title
 
