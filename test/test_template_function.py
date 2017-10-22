@@ -2,7 +2,9 @@
 
 from pyecharts.template import online
 from pyecharts import Bar
-from pyecharts.template import JINJA2_ENV,get_resource_dir
+from pyecharts.engine import EchartsEnvironment
+
+ECHARTS_ENV = EchartsEnvironment()
 
 
 def create_demo_bar(chart_id_demo=None):
@@ -19,7 +21,7 @@ def create_demo_bar(chart_id_demo=None):
 
 def test_echarts_js_dependencies():
     online('http://localhost/echarts')
-    tpl = JINJA2_ENV.from_string('{{ echarts_js_dependencies(bar) }}')
+    tpl = ECHARTS_ENV.from_string('{{ echarts_js_dependencies(bar) }}')
     bar = create_demo_bar()
     html = tpl.render(bar=bar)
     assert '<script type="text/javascript" src="http://localhost/echarts/echarts.js"></script>' == html
@@ -27,7 +29,7 @@ def test_echarts_js_dependencies():
 
 def test_echarts_js_dependencies_embed():
     online('https://chfw.github.io/jupyter-echarts/echarts')
-    tpl = JINJA2_ENV.from_string('{{ echarts_js_dependencies_embed("echarts.min") }}')
+    tpl = ECHARTS_ENV.from_string('{{ echarts_js_dependencies_embed("echarts.min") }}')
     bar = create_demo_bar()
     html = tpl.render(bar=bar)
     with open('_cf.html', 'wb') as f:
@@ -35,7 +37,7 @@ def test_echarts_js_dependencies_embed():
 
 
 def test_echarts_js_container():
-    tpl = JINJA2_ENV.from_string('{{ echarts_container(bar) }}')
+    tpl = ECHARTS_ENV.from_string('{{ echarts_container(bar) }}')
     bar = create_demo_bar('id_demo_chart')
     html = tpl.render(bar=bar)
     assert '<div id="id_demo_chart" style="width:800px;height:400px;"></div>' == html
@@ -47,7 +49,7 @@ def test_echarts_js_container():
 
 
 def test_echarts_js_content():
-    tpl = JINJA2_ENV.from_string('{{ echarts_js_content(bar) }}')
+    tpl = ECHARTS_ENV.from_string('{{ echarts_js_content(bar) }}')
     bar = create_demo_bar()
     html = tpl.render(bar=bar)
     # with open('_tmp.html', 'w') as f:
@@ -55,7 +57,7 @@ def test_echarts_js_content():
 
 
 def test_echarts_js_content_wrap():
-    tpl = JINJA2_ENV.from_string('{{ echarts_js_content_wrap(bar) }}')
+    tpl = ECHARTS_ENV.from_string('{{ echarts_js_content_wrap(bar) }}')
     bar = create_demo_bar()
     html = tpl.render(bar=bar)
     # with open('_tc.html', 'w') as f:
