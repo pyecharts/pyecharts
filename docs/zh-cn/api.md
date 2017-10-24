@@ -52,11 +52,11 @@
 
 | 图表类      | 函数签名                                     |
 | -------- | ---------------------------------------- |
-| Base     | `add(**echarts_options)`           |
+| Base     | `add(**echarts_options)`                 |
 | Grid     | `add(grid_width=None, grid_height=None, grid_top=None, grid_bottom=None, grid_left=None, grid_right=None)` |
 | Overlap  | `add(chart, xaix_index=0, yaix_index=0, id_add_xaxis=False, is_add_yaxis=False)` |
-| Timeline | `add(chart, time_point)`           |
-| Page     | `add(achart_or_charts)`            |
+| Timeline | `add(chart, time_point)`                 |
+| Page     | `add(achart_or_charts)`                  |
 
 **get_js_dependencies()**
 
@@ -134,3 +134,136 @@ print(y) # ['34', '45', '12']
 数据类型 `jinja2.Environment`。pyecharts 内置了一个 jinja2 的模板渲染环境对象。
 
 - 该环境对象使用 *pyecharts/templates* 作为存放模板文件的目录，包含了 HTML 和 javascript 文件。
+
+## 模板引擎
+
+### 概述
+
+pyecharts库使用 [Jinja2](http://jinja.pocoo.org/) 作为其默认模板渲染引擎，并添加了若干个 echarts 图表相关的模板函数。
+
+> 模板函数和模板标签是同一特性的不同术语，在Django模板系统中称为标签，Jinja2模板系统中称之为函数。二者语法形式也有所不同。
+
+### 引擎对象
+
+**EChartsEnvironment**
+
+`pyecharts.engine.EChartsEnvironment`
+
+EChartsEnvironment 类继承自 `Jinja2.Environment` 表示了
+
+### 模板函数
+
+EChartsEnvironment 引擎提供了一些模板函数，这些函数通常接收一个或多个的 `Chart` 或 `Page` 的参数，详细的调用形式见下表。
+
+| 标签/调用形式                       | F(chart) | F(page) | F(chart1,chart2,...)/F(*page) |
+| ----------------------------- | -------- | ------- | ----------------------------- |
+| echarts_js_dependencies       | ✓        | ✓       | ✓                             |
+| echarts_js_dependencies_embed | ✓        | ✓       | ✓                             |
+| echarts_container             | ✓        |         |                               |
+| echarts_js_content            | ✓        | ✓       | ✓                             |
+| echarts_js_content_wrap       | ✓        | ✓       | ✓                             |
+
+
+
+**echarts_js_dependencies**
+
+`pyecharts.template.echarts_js_dependencies(*args)`
+
+渲染包含图表所需要的 js 文件的 script 一个或多个节点，采用外部链接方式引入。
+
+例子
+
+```
+# Jinja2 Context function
+{{ echarts_js_dependencies('echarts') }}
+# Html Output
+<script type="text/javascript" src="js/echarts.js"></script>
+
+# Python
+bar = Bar('Demo Bar')
+# Jinja2 Context function
+{{ echarts_js_dependencies(bar) }}
+# Html Output
+<script type="text/javascript" src="js/echarts.js"></script>
+```
+
+
+
+**echarts_js_dependencies_embed**
+
+`pyecharts.template.echarts.js_dependencies_embed(*args)`
+
+渲染js的 script 一个或多个节点，采用内嵌方式引入。仅支持本地jshost。
+
+**echarts_container**
+
+`pyecharts.template.echarts_container(chart)`
+
+渲染图表容器，为一个 `<div></div>` 元素。
+
+例子
+
+```
+# Python Code
+bar = Bar('Demo Bar')
+# Jinjia2 Context Function
+{{ echarts_container(bar) }}
+# Html Output
+<div id="d09aa82b55384f84a33055f9878c3679" style="width:800px;height:400px;"></div>
+```
+
+
+
+**echarts_js_content**
+
+`pyecharts.template.echarts_container(*chart)`
+
+渲染js初始化代码片段，不包含`<script></script>`
+
+**echarts_js_content_wrap**
+
+`pyecharts.template.echarts_js_content_wrap(*args)`
+
+渲染js初始化代码片段，包含首尾的`<script></script>`。
+
+### 完整的例子
+
+使用模板函数和自定义模板的例子。
+
+demo.py
+
+```python
+from jinja2 import FileSystemLoader
+from pyecharts import Bar
+from pyecharts.engine import EchartsEnvironment
+from pyecharts.utils import write_utf8_html_file
+
+attr = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
+v1 = [5, 20, 36, 10, 75, 90]
+v2 = [10, 25, 8, 60, 20, 80]
+bar = Bar("柱状图数据堆叠示例", jshost='	https://cdn.bootcss.com/echarts/3.6.2')
+bar.add("商家A", attr, v1, is_stack=True)
+bar.add("商家B", attr, v2, is_stack=True)
+env = EchartsEnvironment(loader=FileSystemLoader('.'))
+tpl = env.get_template('demo.html')
+html = tpl.render(bar=bar)
+write_utf8_html_file('demo_gen.html', html)
+```
+
+demo.html模板
+
+```html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>自定义模板</title>
+    {{ echarts_js_dependencies(bar) }}
+</head>
+<body>
+{{ echarts_container(bar) }}
+{{ echarts_js_content(bar) }}
+</body>
+</html>
+```
+
