@@ -2,6 +2,7 @@
 
 #### [pyecharts 文档-预览篇](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/doc_prepare.md)
 #### [pyecharts 文档-API 篇](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/doc_api.md)
+#### [pyecharts 文档-版本篇](https://github.com/chenjiandongx/pyecharts/blob/dev/changelog.md)
 
 * [图形初始化](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/documentation.md#图形初始化)
 * [通用配置项](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/documentation.md#通用配置项)
@@ -1543,7 +1544,7 @@ add(name, data,
 * data -> list  
     数据项
 * shape -> str  
-    水球外形，有'circle', 'rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow'可选。默认'circle'
+    水球外形，有'circle', 'rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow'可选。默认'circle'。也可以为自定义的 SVG 路径。
 * liquid_color -> list  
     波浪颜色，默认的颜色列表为['#294D99', '#156ACF', '#1598ED', '#45BDFF']。
 * is_liquid_animation -> bool  
@@ -1577,6 +1578,33 @@ liquid.add("Liquid", [0.6, 0.5, 0.4, 0.3], is_liquid_animation=False, shape='dia
 liquid.render()
 ```
 ![liquid-2](https://github.com/chenjiandongx/pyecharts/blob/master/images/liquid-2.png)
+
+自定义 SVG 路径
+```python
+from pyecharts import Liquid
+
+shape = ("path://M367.855,428.202c-3.674-1.385-7.452-1.966-11.146-1"
+         ".794c0.659-2.922,0.844-5.85,0.58-8.719 c-0.937-10.407-7."
+         "663-19.864-18.063-23.834c-10.697-4.043-22.298-1.168-29.9"
+         "02,6.403c3.015,0.026,6.074,0.594,9.035,1.728 c13.626,5."
+         "151,20.465,20.379,15.32,34.004c-1.905,5.02-5.177,9.115-9"
+         ".22,12.05c-6.951,4.992-16.19,6.536-24.777,3.271 c-13.625"
+         "-5.137-20.471-20.371-15.32-34.004c0.673-1.768,1.523-3.423"
+         ",2.526-4.992h-0.014c0,0,0,0,0,0.014 c4.386-6.853,8.145-14"
+         ".279,11.146-22.187c23.294-61.505-7.689-130.278-69.215-153"
+         ".579c-61.532-23.293-130.279,7.69-153.579,69.202 c-6.371,"
+         "16.785-8.679,34.097-7.426,50.901c0.026,0.554,0.079,1.121,"
+         "0.132,1.688c4.973,57.107,41.767,109.148,98.945,130.793 c58."
+         "162,22.008,121.303,6.529,162.839-34.465c7.103-6.893,17.826"
+         "-9.444,27.679-5.719c11.858,4.491,18.565,16.6,16.719,28.643 "
+         "c4.438-3.126,8.033-7.564,10.117-13.045C389.751,449.992,"
+         "382.411,433.709,367.855,428.202z")
+liquid = Liquid("水球图示例", width=1000, height=600)
+liquid.add("Liquid", [0.6, 0.5, 0.4, 0.3],
+           shape=shape, is_liquid_outline_show=False)
+liquid.render()
+```
+![liquid-3](https://github.com/chenjiandongx/pyecharts/blob/master/images/liquid-3.gif)
 
 
 ## Map（地图）
@@ -1658,6 +1686,17 @@ map.add("", attr, value, maptype="world", is_visualmap=True, visual_text_color='
 map.render()
 ```
 ![map-3](https://github.com/chenjiandongx/pyecharts/blob/master/images/map-3.gif)
+
+设置 `is_map_symbol_show=False` 取消显示标记红点
+```python
+value = [95.1, 23.2, 43.3, 66.4, 88.5]
+attr= ["China", "Canada", "Brazil", "Russia", "United States"]
+map = Map("世界地图示例", width=1200, height=600)
+map.add("", attr, value, maptype="world", is_visualmap=True,
+        visual_text_color='#000', , is_map_symbol_show=False)
+map.render()
+```
+![map-4](https://github.com/chenjiandongx/pyecharts/blob/master/images/map-4.png)
 
 
 ## Parallel（平行坐标系）
@@ -1824,6 +1863,61 @@ pie.add("商品B", attr, v2, center=[75, 50], is_random=True, radius=[30, 75], r
 pie.render()
 ```
 ![pie-2](https://github.com/chenjiandongx/pyecharts/blob/master/images/pie-2.png)
+
+饼中饼
+```python
+import random
+from pyecharts import Pie
+
+attr = ['A', 'B', 'C', 'D', 'E', 'F']
+pie = Pie("饼图示例", width=1000, height=600)
+pie.add("", attr, [random.randint(0, 100) for _ in range(6)],
+        radius=[50, 55], center=[25, 50], is_random=True)
+pie.add("", attr, [random.randint(20, 100) for _ in range(6)],
+        radius=[0, 45], center=[25, 50], rosetype='area')
+pie.add("", attr, [random.randint(0, 100) for _ in range(6)],
+        radius=[50, 55], center=[65, 50], is_random=True)
+pie.add("", attr, [random.randint(20, 100) for _ in range(6)],
+        radius=[0, 45], center=[65, 50], rosetype='radius')
+pie.render()
+```
+![pie-3](https://github.com/chenjiandongx/pyecharts/blob/master/images/pie-3.gif)
+
+多个饼图画在一张图内
+```python
+from pyecharts import Pie
+
+pie = Pie('各类电影中"好片"所占的比例', "数据来着豆瓣", title_pos='center')
+style = Style()
+pie_style = style.add(
+    label_pos="center",
+    is_label_show=True,
+    label_text_color=None
+)
+
+pie.add("", ["剧情", ""], [25, 75], center=[10, 30],
+        radius=[18, 24], **pie_style)
+pie.add("", ["奇幻", ""], [24, 76], center=[30, 30],
+        radius=[18, 24], **pie_style)
+pie.add("", ["爱情", ""], [14, 86], center=[50, 30],
+        radius=[18, 24], **pie_style)
+pie.add("", ["惊悚", ""], [11, 89], center=[70, 30],
+        radius=[18, 24], **pie_style)
+pie.add("", ["冒险", ""], [27, 73], center=[90, 30],
+        radius=[18, 24], **pie_style)
+pie.add("", ["动作", ""], [15, 85], center=[10, 70],
+        radius=[18, 24], **pie_style)
+pie.add("", ["喜剧", ""], [54, 46], center=[30, 70],
+        radius=[18, 24], **pie_style)
+pie.add("", ["科幻", ""], [26, 74], center=[50, 70],
+        radius=[18, 24], **pie_style)
+pie.add("", ["悬疑", ""], [25, 75], center=[70, 70],
+        radius=[18, 24], **pie_style)
+pie.add("", ["犯罪", ""], [28, 72], center=[90, 70],
+        radius=[18, 24], legend_top="center", **pie_style)
+pie.render()
+```
+![pie-4](https://github.com/chenjiandongx/pyecharts/blob/master/images/pie-4.gif)
 
 
 ## Polar（极坐标系）
