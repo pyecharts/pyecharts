@@ -1,6 +1,7 @@
 # pyecharts 文档-图形篇
 
-### [pyecharts 文档-预览篇](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/doc_prepare.md)
+#### [pyecharts 文档-预览篇](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/doc_prepare.md)
+#### [pyecharts 文档-API 篇](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/doc_api.md)
 
 * [图形初始化](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/documentation.md#图形初始化)
 * [通用配置项](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/documentation.md#通用配置项)
@@ -12,7 +13,7 @@
     * grid3D：3D笛卡尔坐标系组配置项，适用于 3D 图形。（Bar3D, Line3D, Scatter3D)
     * axis3D：3D 笛卡尔坐标系 X，Y，Z 轴配置项，适用于 3D 图形。（Bar3D, Line3D, Scatter3D)
     * visualMap：是视觉映射组件，用于进行『视觉编码』，也就是将数据映射到视觉元素（视觉通道）
-    * markLine&markPoint：图形标记组件，用于标记指定的特殊数据，又标记线和标记点两种。（Bar、Line、Kline）
+    * markLine&markPoint：图形标记组件，用于标记指定的特殊数据，有标记线和标记点两种。（Bar、Line、Kline）
     * tooltip：提示框组件，用于移动或点击鼠标时弹出数据内容
 * [图表详细](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/documentation.md#图表详细)
     * Bar（柱状图/条形图）
