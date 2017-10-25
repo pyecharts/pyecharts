@@ -70,7 +70,14 @@ Django
 
 
 ## Documentation
-* [中文文档](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/documentation.md)
+* 中文文档
+    * [pyecharts 文档-预览篇](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/doc_prepare.md)
+    * [pyecharts 文档-图形篇](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/doc_charts.md)
+    * [pyecharts 文档-API 篇](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/doc_api.md)
+    * [pyecharts 文档-版本篇](https://github.com/chenjiandongx/pyecharts/blob/master/changelog.md)
+    * [pyecharts 文档-画廊篇](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/doc_gallery.md)
+    * [pyecharts 文档-FAQ 篇](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/doc_faq.md)
+
 * [English](https://github.com/chenjiandongx/pyecharts/blob/master/docs/en-us/documentation.md)
 
 
