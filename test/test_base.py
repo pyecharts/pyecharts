@@ -49,8 +49,8 @@ def test_notebook_dom():
     bar = create_a_bar(TITLE)
     html = bar._render_notebook_dom_()
     assert bar._chart_id in html
-    assert str(bar._width) in html
-    assert str(bar._height) in html
+    assert str(bar.width) in html
+    assert str(bar.height) in html
     assert "<div" in html
 
 
