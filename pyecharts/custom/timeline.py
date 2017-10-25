@@ -5,8 +5,11 @@ from pyecharts.base import Base
 
 
 class Timeline(Base):
-
+    """
+    时间线轮播多张图
+    """
     def __init__(self, page_title=PAGE_TITLE,
+                 jshost=None,
                  width=800,
                  height=400,
                  is_auto_play=False,
@@ -23,36 +26,36 @@ class Timeline(Base):
         """
 
         :param is_auto_play:
-            Whether to play automatically.
+            是否自动播放，默认为 Flase
         :param is_loop_play:
-            Whether to loop playing.
+            是否循环播放，默认为 True
         :param is_rewind_play:
-            Whether supports playing reversely.
+            是否方向播放，默认为 Flase
         :param is_timeline_show:
-            Whether to show the timeline component.
-            It would not show with a setting of false, but its functions still remain.
+            是否显示 timeline 组件。默认为 True，如果设置为false，不会显示，但是功能还存在。
         :param timeline_play_interval:
-            Indicates play speed (gap time between two state), whose unit is millisecond.
+            播放的速度（跳动的间隔），单位毫秒（ms）。
         :param timeline_symbol:
-            Symbol of timeline.
-            Icon types provided by ECharts includes 'circle', 'rect', 'roundRect', 'triangle',
-            'diamond', 'pin', 'arrow'
+            标记的图形。有'circle', 'rect', 'roundRect', 'triangle', 'diamond',
+            'pin', 'arrow'可选
         :param timeline_symbol_size:
-            timeline symbol size.
-            It can be set to single numbers like 10, or use an array to represent width and height.
-            For example, [20, 10] means symbol width is 20, and height is10.
+            标记的图形大小，可以设置成诸如 10 这样单一的数字，也可以用数组分开表示
+            宽和高，例如 [20, 10] 表示标记宽为 20，高为 10。
         :param timeline_left:
-            Distance between timeline component and the left side of the container.
+            timeline 组件离容器左侧的距离。
+            left 的值可以是像 20 这样的具体像素值，可以是像 '20%' 这样相对于容器高宽的百分比，
+            也可以是 'left', 'center', 'right'。如果 left 的值为'left', 'center', 'right'，
+            组件会根据相应的位置自动对齐。
         :param timeline_right:
-            Distance between timeline component and the right side of the container.
+            timeline 组件离容器右侧的距离。同 left
         :param timeline_top:
-            Distance between timeline component and the top side of the container.
+            timeline 组件离容器顶侧的距离。同 left
         :param timeline_bottom:
-            Distance between timeline component and the bottom side of the container.
+            timeline 组件离容器底侧的距离。同 left
         """
 
         super(Timeline, self).__init__(
-            width=width, height=height
+            width=width, height=height, jshost=jshost
         )
         self._page_title = page_title
         self._time_points = []
@@ -80,8 +83,9 @@ class Timeline(Base):
         """
 
         :param chart:
+            图形实例
         :param time_point:
-        :return:
+            指定时间点
         """
         self._js_dependencies = self._js_dependencies.union(
             chart.get_js_dependencies())
@@ -103,48 +107,14 @@ class Timeline(Base):
         """
 
         :param chart:
-        :return:
+            图形实例
         """
-        _grid = chart.options.get('grid', None)
-        if _grid is not None:
-            self._option.get('baseOption').update(grid=_grid)
+        _compoents = [
+            'gird', 'xAxis', 'yAxis', 'polar', 'radiusAxis', 'geo'
+            'angleAxis', 'radar', 'visualMap', 'dataZoom', 'parallelAxis'
+        ]
 
-        _xaxis = chart.options.get('xAxis', None)
-        if _xaxis is not None:
-            self._option.get('baseOption').update(xAxis=_xaxis)
-
-        _yaxis = chart.options.get('yAxis', None)
-        if _yaxis is not None:
-            self._option.get('baseOption').update(yAxis=_yaxis)
-
-        _polar = chart.options.get('polar', None)
-        if _polar is not None:
-            self._option.get('baseOption').update(polar=_polar)
-
-        _radiusAxis = chart.options.get('radiusAxis', None)
-        if _radiusAxis is not None:
-            self._option.get('baseOption').update(radiusAxis=_radiusAxis)
-
-        _angleAxis = chart.options.get('angleAxis', None)
-        if _angleAxis is not None:
-            self._option.get('baseOption').update(angleAxis=_angleAxis)
-
-        _radar = chart.options.get('radar', None)
-        if _radar is not None:
-            self._option.get('baseOption').update(radar=_radar)
-
-        _visualMap = chart.options.get('visualMap', None)
-        if _visualMap is not None:
-            self._option.get('baseOption').update(visualMap=_visualMap)
-
-        _geo = chart.options.get('geo', None)
-        if _geo is not None:
-            self._option.get('baseOption').update(geo=_geo)
-
-        _datazoom = chart.options.get('dataZoom', None)
-        if _geo is not None:
-            self._option.get('baseOption').update(dataZoom=_datazoom)
-
-        _parallelAxis = chart.options.get('parallelAxis', None)
-        if _parallelAxis is not None:
-            self._option.get('baseOption').update(parallelAxis=_parallelAxis)
+        for component in _compoents:
+            _c = chart.options.get(component, None)
+            if _c is not None:
+                self._option.get('baseOption').update({component: _c})

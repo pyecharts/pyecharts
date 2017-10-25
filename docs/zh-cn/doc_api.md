@@ -1,4 +1,10 @@
-# pyecharts API
+# pyecharts 文档-API 篇
+
+#### [pyecharts 文档-预览篇](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/doc_prepare.md)
+#### [pyecharts 文档-图形篇](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/doc_charts.md)
+#### [pyecharts 文档-版本篇](https://github.com/chenjiandongx/pyecharts/blob/master/changelog.md)
+#### [pyecharts 文档-画廊篇](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/doc_gallery.md)
+#### [pyecharts 文档-FAQ 篇](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/doc_faq.md)
 
 本文档描述了 pyecharts 库一些公开的 API，以供开发者之使用。
 
@@ -11,7 +17,7 @@
 
 图表类和属性表如下：
 
-| 属性/图表           | Base | Chart/FOO_CHART | Grid | Overlap | Timeline | Page |
+| 属性/图表        | Base | Chart/FOO_CHART | Grid | Overlap | Timeline | Page |
 | --------------- | ---- | --------------- | ---- | ------- | -------- | ---- |
 | chart_id        | ✓    | ✓               | ✓    | ✓       | ✓        |      |
 | width           | ✓    | ✓               | ✓    | ✓       | ✓        |      |

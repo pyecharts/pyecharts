@@ -1,7 +1,20 @@
-# Version Log
+# pyecharts 文档-版本篇
+
+#### [pyecharts 文档-预览篇](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/doc_prepare.md)
+#### [pyecharts 文档-图形篇](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/doc_charts.md)
+#### [pyecharts 文档-API 篇](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/doc_api.md)
+#### [pyecharts 文档-画廊篇](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/doc_gallery.md)
+#### [pyecharts 文档-FAQ 篇](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/doc_faq.md)
 
 * ### version 0.2.7（Dev）
-    * TODO
+
+    #### Added
+    * 新增 GeoLines（地理坐标系线图）
+    * 新增工具类 `Style`，用于简化代码编写和统一风格
+
+    #### Fixed
+    * 修复 Geo 系列名无法正常显示的问题
+    * [issue#229](https://github.com/chenjiandongx/pyecharts/issues/229) 修复水球图不能自定义图形的问题
 
 * ### version 0.2.6 - 2017.10.14（Current）
 
