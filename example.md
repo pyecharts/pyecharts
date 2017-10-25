@@ -1,4 +1,4 @@
-# More Example
+# pyecharts 文档-画廊篇
 
 用极坐标系画出一个爱心
 ```python
@@ -17,7 +17,6 @@ polar.render()
 ```
 ![example-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/example-0.png)
 
-
 用极坐标系画出一朵小花
 ```python
 import math
@@ -34,7 +33,6 @@ polar.render()
 ```
 ![example-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/example-1.png)
 
-
 还可以给小花涂上颜色
 ```python
 import math
@@ -50,7 +48,7 @@ polar.add("Color-Flower", data, start_angle=0, symbol=None, axis_range=[0, None]
           area_color="#f71f24", area_opacity=0.6)
 polar.render()
 ```
-![example-1-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/example-1-1.png)
+![example-2](https://github.com/chenjiandongx/pyecharts/blob/master/images/example-2.png)
 
 
 用散点图画出一个爱心
@@ -62,7 +60,7 @@ v1 ,v2 = scatter.draw("../images/love.png")
 scatter.add("Love", v1, v2)
 scatter.render()
 ```
-![example-2](https://github.com/chenjiandongx/pyecharts/blob/master/images/example-2.png)
+![example-3](https://github.com/chenjiandongx/pyecharts/blob/master/images/example-3.png)
 
 
 用散点图画出一个火辣的 Bra
@@ -74,7 +72,7 @@ v1 ,v2 = scatter.draw("../images/cup.png")
 scatter.add("Cup", v1, v2)
 scatter.render()
 ```
-![example-3](https://github.com/chenjiandongx/pyecharts/blob/master/images/example-3.png)
+![example-4](https://github.com/chenjiandongx/pyecharts/blob/master/images/example-4.png)
 
 
 用散点图画出一个性感的 Bra
@@ -86,49 +84,7 @@ v1 ,v2 = scatter.draw("../images/cup.png")
 scatter.add("Cup", v1, v2, label_color=["#000"])
 scatter.render()
 ```
-![example-4](https://github.com/chenjiandongx/pyecharts/blob/master/images/example-4.png)
-
-
-某地最低温和最高气温折线图
-```python
-from pyecharts import Line
-
-attr = ['周一', '周二', '周三', '周四', '周五', '周六', '周日', ]
-line = Line("折线图示例")
-line.add("最高气温", attr, [11, 11, 15, 13, 12, 13, 10], mark_point=["max", "min"],
-         mark_line=["average"])
-line.add("最低气温", attr, [1, -2, 2, 5, 3, 2, 0], mark_point=["max", "min"],
-         mark_line=["average"], yaxis_formatter="°C")
-line.show_config()
-line.render()
-```
-![example-5](https://github.com/chenjiandongx/pyecharts/blob/master/images/example-5.gif)
-
-
-某地的降水量和蒸发量柱状图
-```python
-from pyecharts import Bar
-
-attr = ["{}月".format(i) for i in range(1, 13)]
-v1 = [2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3]
-v2 = [2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3]
-bar = Bar("柱状图示例")
-bar.add("蒸发量", attr, v1, mark_line=["average"], mark_point=["max", "min"])
-bar.add("降水量", attr, v2, mark_line=["average"], mark_point=["max", "min"])
-bar.render()
-```
-![example-8](https://github.com/chenjiandongx/pyecharts/blob/master/images/example-8.png)
-
-
-加个 datazoom
-```python
-bar = Bar("柱状图示例")
-bar.add("蒸发量", attr, v1, mark_line=["average"], mark_point=["max", "min"])
-bar.add("降水量", attr, v2, mark_line=["average"], mark_point=["max", "min"],
-        is_datazoom_show=True, datazoom_range=[50, 80])
-bar.render()
-```
-![example-8-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/example-8-1.gif)
+![example-5](https://github.com/chenjiandongx/pyecharts/blob/master/images/example-5.png)
 
 
 用极坐标系画出一个蜗牛壳
@@ -148,4 +104,4 @@ polar.add("", data, symbol_size=0, symbol='circle', start_angle=-25, is_radiusax
           area_color="#f3c5b3", area_opacity=0.5, is_angleaxis_show=False)
 polar.render()
 ```
-![example-10](https://github.com/chenjiandongx/pyecharts/blob/master/images/example-10.png)
+![example-6](https://github.com/chenjiandongx/pyecharts/blob/master/images/example-6.png)

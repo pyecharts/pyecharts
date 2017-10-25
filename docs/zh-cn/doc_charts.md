@@ -543,7 +543,19 @@ bar.render()
 ```
 ![bar-9](https://github.com/chenjiandongx/pyecharts/blob/master/images/bar-9.png) 
 
+某地的降水量和蒸发量柱状图
+```python
+from pyecharts import Bar
 
+attr = ["{}月".format(i) for i in range(1, 13)]
+v1 = [2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3]
+v2 = [2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3]
+bar = Bar("柱状图示例")
+bar.add("蒸发量", attr, v1, mark_line=["average"], mark_point=["max", "min"])
+bar.add("降水量", attr, v2, mark_line=["average"], mark_point=["max", "min"])
+bar.render()
+```
+![bar-10](https://github.com/chenjiandongx/pyecharts/blob/master/images/bar-10.png)
 
 ## Bar3D（3D 柱状图）
 
@@ -1467,7 +1479,23 @@ line.add("商家B", attr, [math.log10(random.randint(1, 99999999)) for _ in rang
          yaxis_type="log")
 line.render()
 ```
-![line-3-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/line-3-1.png)
+![line-4](https://github.com/chenjiandongx/pyecharts/blob/master/images/line-4.png)
+
+某地最低温和最高气温折线图
+```python
+from pyecharts import Line
+
+attr = ['周一', '周二', '周三', '周四', '周五', '周六', '周日', ]
+line = Line("折线图示例")
+line.add("最高气温", attr, [11, 11, 15, 13, 12, 13, 10],
+         mark_point=["max", "min"], mark_line=["average"])
+line.add("最低气温", attr, [1, -2, 2, 5, 3, 2, 0],
+         mark_point=["max", "min"],  mark_line=["average"],
+         yaxis_formatter="°C")
+line.show_config()
+line.render()
+```
+![line-5](https://github.com/chenjiandongx/pyecharts/blob/master/images/line-5.gif)
 
 
 ## Line3D（3D 折线图）
