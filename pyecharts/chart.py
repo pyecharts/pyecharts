@@ -59,7 +59,6 @@ class Chart(Base):
             page_title=page_title,
             jshost=jshost
         )
-        self._width, self._height = width, height
         self._colorlst = [
             '#c23531', '#2f4554', '#61a0a8', '#d48265', '#749f83',
             '#ca8622', '#bda29a', '#6e7074', '#546570', '#c4ccd3',
