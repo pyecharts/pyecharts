@@ -32,7 +32,7 @@ class Base(object):
         self._option = {}
         self._js_dependencies = set()
         self._chart_id = uuid.uuid4().hex
-        self._width, self._height = width, height
+        self.width, self.height = width, height
         self._page_title = page_title
         self._jshost = jshost if jshost else constants.CONFIGURATION['HOST']
         self._js_dependencies = {'echarts'}
@@ -42,18 +42,6 @@ class Base(object):
         """ 设置 chart_id 属性为可读
         """
         return self._chart_id
-
-    @property
-    def width(self):
-        """ 设置 width 属性为可读
-        """
-        return self._width
-
-    @property
-    def height(self):
-        """ 设置 height 属性为可读
-        """
-        return self._height
 
     @property
     def options(self):
@@ -79,9 +67,10 @@ class Base(object):
         embed = 'chart_component.html'
         tmp = template.JINJA2_ENV.get_template(embed)
         my_option = json_dumps(self._option, indent=4)
-        html = tmp.render(myOption=my_option,
+        html = tmp.render(my_option=my_option,
                           chart_id=self._chart_id,
-                          myWidth=self._width, myHeight=self._height)
+                          my_width=self.width,
+                          my_height=self.height)
         return html
 
     def get_js_dependencies(self):
@@ -100,11 +89,12 @@ class Base(object):
         tmp = template.JINJA2_ENV.get_template(_tmp)
         script_list = template.produce_html_script_list(self._js_dependencies)
         html = tmp.render(
-            myOption=my_option,
+            my_option=my_option,
             chart_id=self._chart_id,
             script_list=script_list,
             page_title=self._page_title,
-            myWidth=self._width, myHeight=self._height)
+            my_width=self.width,
+            my_height=self.height)
         html = utils.freeze_js(html)
         utils.write_utf8_html_file(path, html)
 
@@ -163,8 +153,8 @@ class Base(object):
         tmp = template.JINJA2_ENV.get_template(_tmp)
         component = tmp.render(
             chart_id=self._chart_id,
-            chart_width=self._width,
-            chart_height=self._height)
+            chart_width=self.width,
+            chart_height=self.height)
         return component
 
     def _render_notebook_component_(self):
