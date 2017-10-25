@@ -1,7 +1,13 @@
 # Version Log
 
 * ### version 0.2.7（Dev）
-    * TODO
+
+    #### Added
+    * 新增 GeoLines（地理坐标系线图）
+    * 新增工具类 `Style`，用于简化代码编写和统一风格
+
+    #### Fixed
+    * 修复 Geo 系列名无法正常显示的问题
 
 * ### version 0.2.6 - 2017.10.14（Current）
 
