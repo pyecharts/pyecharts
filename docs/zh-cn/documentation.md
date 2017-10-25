@@ -2,6 +2,7 @@
 
 #### [pyecharts 文档-预览篇](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/doc_prepare.md)
 #### [pyecharts 文档-API 篇](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/doc_api.md)
+#### [pyecharts 文档-版本篇](https://github.com/chenjiandongx/pyecharts/blob/dev/changelog.md)
 
 * [图形初始化](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/documentation.md#图形初始化)
 * [通用配置项](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/documentation.md#通用配置项)
