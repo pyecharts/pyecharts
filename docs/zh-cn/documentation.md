@@ -2,8 +2,6 @@
 
 ### [pyecharts 文档-预览篇](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/doc_prepare.md)
 
-[![Build Status](https://travis-ci.org/chenjiandongx/pyecharts.svg?branch=master)](https://travis-ci.org/chenjiandongx/pyecharts) [![codecov](https://codecov.io/gh/chenjiandongx/pyecharts/branch/master/graph/badge.svg)](https://codecov.io/gh/chenjiandongx/pyecharts) [![PyPI version](https://badge.fury.io/py/pyecharts.svg)](https://badge.fury.io/py/pyecharts) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
 * [图形初始化](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/documentation.md#图形初始化)
 * [通用配置项](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/documentation.md#通用配置项)
     * xyAxis：直角坐标系中的 x、y 轴(Line、Bar、Scatter、EffectScatter、Kline)
@@ -3391,7 +3389,6 @@ pie.add("", ["惊悚", ""], [11, 89], center=[70, 30], **pie_style)
 
 # 关于项目
 
-* 欢迎大家使用 pyecharts
-* 有什么建议或者想法可以开个 issue 讨论，有什么小错误的也可以直接提交 PR。
+* 欢迎提交 ISSUE 和 PR
 * 如有想单独讨论的话可以使用邮箱 -> chenjiandongx@qq.com
 * 关注 [changelog.md](https://github.com/chenjiandongx/pyecharts/blob/master/changelog.md)
