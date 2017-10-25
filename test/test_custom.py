@@ -5,24 +5,20 @@ from random import randint
 
 from pyecharts import Bar, Line, Scatter, EffectScatter
 from pyecharts import Grid, Timeline, Overlap, Page
+from test.constants import CLOTHES, WEEK
 
 
 def test_page_grid_timeline_overlap():
     # Grid
-    attr = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
     v1 = [5, 20, 36, 10, 75, 90]
     v2 = [10, 25, 8, 60, 20, 80]
     bar = Bar("柱状图示例", height=720, width=1200, title_pos="65%")
-    bar.add("商家A", attr, v1,
-            is_stack=True)
-    bar.add("商家B", attr, v2,
-            is_stack=True,
-            legend_pos="80%")
+    bar.add("商家A", CLOTHES, v1, is_stack=True)
+    bar.add("商家B", CLOTHES, v2, is_stack=True, legend_pos="80%")
     line = Line("折线图示例")
-    attr = ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
-    line.add("最高气温", attr, [11, 11, 15, 13, 12, 13, 10],
+    line.add("最高气温", WEEK, [11, 11, 15, 13, 12, 13, 10],
              mark_point=["max", "min"], mark_line=["average"])
-    line.add("最低气温", attr, [1, -2, 2, 5, 3, 2, 0],
+    line.add("最低气温", WEEK, [1, -2, 2, 5, 3, 2, 0],
              mark_point=["max", "min"], mark_line=["average"],
              legend_pos="20%")
     v1 = [5, 20, 36, 10, 75, 90]
@@ -40,36 +36,35 @@ def test_page_grid_timeline_overlap():
     grid.add(es, grid_top="60%", grid_right="60%")
 
     # Timeline
-    attr = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
     bar_1 = Bar("2012 年销量", "数据纯属虚构")
-    bar_1.add("春季", attr, [randint(10, 100) for _ in range(6)])
-    bar_1.add("夏季", attr, [randint(10, 100) for _ in range(6)])
-    bar_1.add("秋季", attr, [randint(10, 100) for _ in range(6)])
-    bar_1.add("冬季", attr, [randint(10, 100) for _ in range(6)])
+    bar_1.add("春季", CLOTHES, [randint(10, 100) for _ in range(6)])
+    bar_1.add("夏季", CLOTHES, [randint(10, 100) for _ in range(6)])
+    bar_1.add("秋季", CLOTHES, [randint(10, 100) for _ in range(6)])
+    bar_1.add("冬季", CLOTHES, [randint(10, 100) for _ in range(6)])
 
     bar_2 = Bar("2013 年销量", "数据纯属虚构")
-    bar_2.add("春季", attr, [randint(10, 100) for _ in range(6)])
-    bar_2.add("夏季", attr, [randint(10, 100) for _ in range(6)])
-    bar_2.add("秋季", attr, [randint(10, 100) for _ in range(6)])
-    bar_2.add("冬季", attr, [randint(10, 100) for _ in range(6)])
+    bar_2.add("春季", CLOTHES, [randint(10, 100) for _ in range(6)])
+    bar_2.add("夏季", CLOTHES, [randint(10, 100) for _ in range(6)])
+    bar_2.add("秋季", CLOTHES, [randint(10, 100) for _ in range(6)])
+    bar_2.add("冬季", CLOTHES, [randint(10, 100) for _ in range(6)])
 
     bar_3 = Bar("2014 年销量", "数据纯属虚构")
-    bar_3.add("春季", attr, [randint(10, 100) for _ in range(6)])
-    bar_3.add("夏季", attr, [randint(10, 100) for _ in range(6)])
-    bar_3.add("秋季", attr, [randint(10, 100) for _ in range(6)])
-    bar_3.add("冬季", attr, [randint(10, 100) for _ in range(6)])
+    bar_3.add("春季", CLOTHES, [randint(10, 100) for _ in range(6)])
+    bar_3.add("夏季", CLOTHES, [randint(10, 100) for _ in range(6)])
+    bar_3.add("秋季", CLOTHES, [randint(10, 100) for _ in range(6)])
+    bar_3.add("冬季", CLOTHES, [randint(10, 100) for _ in range(6)])
 
     bar_4 = Bar("2015 年销量", "数据纯属虚构")
-    bar_4.add("春季", attr, [randint(10, 100) for _ in range(6)])
-    bar_4.add("夏季", attr, [randint(10, 100) for _ in range(6)])
-    bar_4.add("秋季", attr, [randint(10, 100) for _ in range(6)])
-    bar_4.add("冬季", attr, [randint(10, 100) for _ in range(6)])
+    bar_4.add("春季", CLOTHES, [randint(10, 100) for _ in range(6)])
+    bar_4.add("夏季", CLOTHES, [randint(10, 100) for _ in range(6)])
+    bar_4.add("秋季", CLOTHES, [randint(10, 100) for _ in range(6)])
+    bar_4.add("冬季", CLOTHES, [randint(10, 100) for _ in range(6)])
 
     bar_5 = Bar("2016 年销量", "数据纯属虚构", height=720, width=1200)
-    bar_5.add("春季", attr, [randint(10, 100) for _ in range(6)])
-    bar_5.add("夏季", attr, [randint(10, 100) for _ in range(6)])
-    bar_5.add("秋季", attr, [randint(10, 100) for _ in range(6)])
-    bar_5.add("冬季", attr, [randint(10, 100) for _ in range(6)],
+    bar_5.add("春季", CLOTHES, [randint(10, 100) for _ in range(6)])
+    bar_5.add("夏季", CLOTHES, [randint(10, 100) for _ in range(6)])
+    bar_5.add("秋季", CLOTHES, [randint(10, 100) for _ in range(6)])
+    bar_5.add("冬季", CLOTHES, [randint(10, 100) for _ in range(6)],
               is_legend_show=True)
 
     timeline = Timeline(is_auto_play=True, timeline_bottom=0)

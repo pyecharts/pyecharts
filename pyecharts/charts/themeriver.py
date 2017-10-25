@@ -7,10 +7,9 @@ from pyecharts.option import get_all_options
 
 class ThemeRiver(Chart):
     """
-    <<< Theme river >>>
+    <<< 主题河流图 >>>
 
-    It is a special flow graph which is mainly used to present the
-    changes of an event or theme during a period.
+    主题河流图是一种特殊的流图, 它主要用来表示事件或主题等在一段时间内的变化。
     """
     def __init__(self, title="", subtitle="", **kwargs):
         super(ThemeRiver, self).__init__(title, subtitle, **kwargs)
@@ -22,14 +21,12 @@ class ThemeRiver(Chart):
         """
 
         :param name:
-            Series name used for displaying in tooltip and filtering with legend,
-            or updating data and configuration with setOption.It must be a list.
+            系列名称，用于 tooltip 的显示，legend 的图例筛选。类型必须为 list。
         :param data:
-            data array of series, it is represented by a two-dimension array -> [[],[]]
-            every data item need three value, for example
-            ['2015/11/08',10,'DQ'] -> [time, value, legend(category)]
+            数据项，数据中，每一行是一个『数据项』，每一列属于一个『维度』。
+            每个数据项至少需要三个维度，如 ['2015/11/08', 10, 'DQ']，分别为
+            [时间，数值，种类（图例名）]。
         :param kwargs:
-        :return:
         """
         chart = get_all_options(**kwargs)
         self._option.get('legend')[0].get('data').extend(name)

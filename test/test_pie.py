@@ -2,36 +2,38 @@
 # coding=utf-8
 from __future__ import unicode_literals
 
-from pyecharts import Pie
+from pyecharts import Pie, Style
+from test.constants import CLOTHES
 
 
-def test_pie():
-    # pie default
-    attr = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
+def test_pie_default():
     v1 = [11, 12, 13, 10, 10, 10]
     pie = Pie("饼图示例")
-    pie.add("", attr, v1, is_label_show=True)
+    pie.add("", CLOTHES, v1, is_label_show=True)
     pie.render()
 
-    # pie legend_orient 'vertical'&legend_pos 'left'
+
+def test_pie_legend():
     v1 = [11, 12, 13, 10, 10, 10]
     pie = Pie("饼图-圆环图示例", title_pos='center')
-    pie.add("", attr, v1, radius=[40, 75], label_text_color=None,
+    pie.add("", CLOTHES, v1, radius=[40, 75], label_text_color=None,
             is_label_show=True, legend_orient='vertical', legend_pos='left')
     pie.render()
 
-    # pie rose type
+
+def test_pie_type_rose():
     v1 = [11, 12, 13, 10, 10, 10]
     v2 = [19, 21, 32, 20, 20, 33]
     pie = Pie("饼图-玫瑰图示例", title_pos='center', width=900)
-    pie.add("商品A", attr, v1, center=[25, 50], is_random=True,
+    pie.add("商品A", CLOTHES, v1, center=[25, 50], is_random=True,
             radius=[30, 75], rosetype='radius')
-    pie.add("商品B", attr, v2, center=[75, 50], is_random=True,
+    pie.add("商品B", CLOTHES, v2, center=[75, 50], is_random=True,
             radius=[30, 75], rosetype='area',
             is_legend_show=False, is_label_show=True)
     pie.render()
 
-    # pie radius
+
+def test_pie_type_radius():
     pie = Pie("饼图示例", title_pos='center', width=1000, height=600)
     pie.add("", ['A', 'B', 'C', 'D', 'E', 'F'], [335, 321, 234, 135, 251, 148],
             radius=[40, 55], is_label_show=True)
@@ -54,13 +56,16 @@ def test_pie_multiple():
             radius=[0, 45], center=[65, 50], rosetype='radius')
     pie.render()
 
-    # Pie multiple
+
+def test_pie_multiple_movie():
     pie = Pie('各类电影中"好片"所占的比例', "数据来着豆瓣", title_pos='center')
-    pie_style = {
-        "label_pos": "center",
-        "is_label_show": True,
-        "label_text_color": None
-    }
+    style = Style()
+    pie_style = style.add(
+        label_pos="center",
+        is_label_show=True,
+        label_text_color=None
+    )
+
     pie.add("", ["剧情", ""], [25, 75], center=[10, 30],
             radius=[18, 24], **pie_style)
     pie.add("", ["奇幻", ""], [24, 76], center=[30, 30],

@@ -9,8 +9,7 @@ from pyecharts import Sankey
 PY2 = sys.version_info[0] == 2
 
 
-def test_sankey():
-    # sankey default
+def test_sankey_default():
     nodes = [
         {'name': 'category1'}, {'name': 'category2'}, {'name': 'category3'},
         {'name': 'category4'}, {'name': 'category5'}, {'name': 'category6'},
@@ -28,14 +27,16 @@ def test_sankey():
                label_pos='right')
     sankey.render()
 
-    # sankey official data
+
+def test_sankey_official_data():
     import json
     if PY2:
         import codecs
         with codecs.open(os.path.join("..", "json", "energy.json"), "rb") as f:
             j = json.load(f)
     else:
-        with open(os.path.join("..", "json", "energy.json"), "r", encoding="utf-8") as f:
+        with open(os.path.join("..", "json", "energy.json"),
+                  "r", encoding="utf-8") as f:
             j = json.load(f)
     sankey = Sankey("桑基图示例", width=1200, height=600)
     sankey.add("sankey", nodes=j['nodes'], links=j['links'], line_opacity=0.2,
