@@ -2,7 +2,10 @@
 
 ### [pyecharts 文档-图形篇](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/documentation.md)
 
+
 pyecharts 是一个用于生成 Echarts 图表的类库。实际上就是 Echarts 与 Python 的对接。
+
+[![Build Status](https://travis-ci.org/chenjiandongx/pyecharts.svg?branch=master)](https://travis-ci.org/chenjiandongx/pyecharts) [![codecov](https://codecov.io/gh/chenjiandongx/pyecharts/branch/master/graph/badge.svg)](https://codecov.io/gh/chenjiandongx/pyecharts) [![PyPI version](https://badge.fury.io/py/pyecharts.svg)](https://badge.fury.io/py/pyecharts) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ### 确认你已安装了最新版本的 pyecharts
 > `pyecharts.__version__` 可查看当前 pyecharts 版本，更多版本信息请查看 [changelog.md](https://github.com/chenjiandongx/pyecharts/blob/master/changelog.md) **强烈推荐阅读**！
