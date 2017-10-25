@@ -6,12 +6,17 @@ from pyecharts.base import Base
 
 
 class Overlap(Base):
-
+    """
+    用户可以自定义结合 Line/Bar/Kline, Scatter/EffectScatter 图表，
+    将不同类型图表画在一张图上。利用第一个图表为基础，往后的数据都将
+    会画在第一个图表上。
+    """
     def __init__(self, page_title=PAGE_TITLE,
                  width=800,
-                 height=400):
+                 height=400,
+                 jshost=None):
         super(Overlap, self).__init__(
-            width=width, height=height
+            width=width, height=height, jshost=jshost
         )
         self._page_title = page_title
 
@@ -23,16 +28,15 @@ class Overlap(Base):
         """
 
         :param chart:
-            chart instance
+            图形实例
         :param xaxis_index:
-            xAxis index
+            x 坐标轴索引，默认为 0
         :param yaxis_index:
-            yAxis index
+            y 坐标轴索引，默认为 0
         :param is_add_xaxis:
-            whether to add a new xaxis
+            是否新增一个 x 坐标轴，默认为 False
         :param is_add_yaxis:
-            whether to add a new yaxis
-        :return:
+            是否新增一个 y 坐标轴，默认为 False
         """
         if not self._option:
             self._option = copy.deepcopy(chart.options)

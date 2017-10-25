@@ -6,9 +6,9 @@ from pyecharts.chart import Chart
 
 class Liquid(Chart):
     """
-    <<< Liquid chart >>>
+    <<< 水球图 >>>
 
-    Liquid chart is usually used to represent data in percentage.
+    主要用来突出数据的百分比。
     """
     def __init__(self, title="", subtitle="", **kwargs):
         super(Liquid, self).__init__(title, subtitle, **kwargs)
@@ -25,22 +25,19 @@ class Liquid(Chart):
         """
 
         :param name:
-            Series name used for displaying in tooltip and filtering with legend,
-            or updating data and configuration with setOption.
+            系列名称，用于 tooltip 的显示，legend 的图例筛选。
         :param data:
-            data of liquid, [0.6, 0.5, 0.4, 0.3]: This creates a chart wit waves at
-            position of 60%, 50%, 40%, and 30%.
+            数据项, 如：[0.6, 0.5, 0.4, 0.3]: 表示水波的高度分别在 60%,
+            50%, 40%, 和 30% 处。
         :param shape:
-            Shape of water fill chart.
-            It can be one of the default symbols: 'circle', 'rect', 'roundRect', 'triangle',
-            'diamond', 'pin', 'arrow'
+            水球外形，有'circle', 'rect', 'roundRect', 'triangle', 'diamond',
+            'pin', 'arrow'可选。默认'circle'。
         :param liquid_color:
-            To set colors for liquid fill chart series, set color to be an array of colors.
+            波浪颜色，默认的颜色列表为['#294D99', '#156ACF', '#1598ED', '#45BDFF']。
         :param is_liquid_animation:
-            Whether disable animation.
+            是否显示波浪动画，默认为 True。
         :param is_liquid_outline_show:
-            whether hide the outline
-        :return:
+            是否显示边框，默认为 True。
         """
         _animation_dur, _animation_dur_update = 2000, 1000
         if not is_liquid_animation:
@@ -50,10 +47,6 @@ class Liquid(Chart):
         if liquid_color:
             _color = liquid_color
 
-        _shape = 'circle'
-        if shape in ('circle', 'rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow'):
-            _shape = shape
-
         self._option.get('series').append({
             "type": "liquidFill",
             "name": name,
@@ -62,7 +55,7 @@ class Liquid(Chart):
             "animationDuration": _animation_dur,
             "animationDurationUpdate": _animation_dur_update,
             "color": _color,
-            "shape": _shape,
+            "shape": shape,
             "outline": {
                 "show": is_liquid_outline_show
             }

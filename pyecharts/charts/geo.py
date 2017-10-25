@@ -9,10 +9,9 @@ from pyecharts.constants import CITY_NAME_PINYIN_MAP
 
 class Geo(Chart):
     """
-    Geographic coordinate system component.
+    <<< 地理坐标系 >>>
 
-    It is used to draw maps, which also supports scatter series, and line
-    series.
+    地理坐标系组件用于地图的绘制，支持在地理坐标系上绘制散点图，线集。
     """
     def __init__(self, title="", subtitle="", **kwargs):
         super(Geo, self).__init__(title, subtitle, **kwargs)
@@ -33,31 +32,36 @@ class Geo(Chart):
         """
 
         :param name:
-            Series name used for displaying in tooltip and filtering with
-            legend, or updating data and configuration with setOption.
+            系列名称，用于 tooltip 的显示，legend 的图例筛选。
         :param attr:
-            name of attribute
+            属性名称。
         :param value:
-            value of attribute
+            属性所对应的值。
         :param type:
-            chart type, it can be 'scatter', 'effectscatter', 'heatmap'
+            图例类型，有'scatter', 'effectscatter', 'heatmap'可选。
         :param maptype:
-            type of map, it only supports 'china' temporarily.
+            地图类型。 支持 china、world、安徽、澳门、北京、重庆、福建、福建、甘肃、
+            广东，广西、广州、海南、河北、黑龙江、河南、湖北、湖南、江苏、江西、吉林、
+            辽宁、内蒙古、宁夏、青海、山东、上海、陕西、山西、四川、台湾、天津、香港、
+            新疆、西藏、云南、浙江，以及 [363个二线城市](https://github.com/chfw/
+            echarts-china-cities-js#featuring-citiesor-for-single-download]地图。
+            提醒：
+                在画市级地图的时候，城市名字后面的‘市’要省去了，比如，石家庄市的
+                ‘市’不要提，即‘石家庄’就可以了。
         :param symbol_size:
-            symbol size
+            标记图形大小。
         :param border_color:
-            color of map border
+            地图边界颜色。
         :param geo_normal_color:
-            The color of the map area in normal state
+            正常状态下地图区域的颜色。
         :param geo_emphasis_color:
-            The color of the map area in emphasis state
+            高亮状态下地图区域的颜色。
         :param geo_cities_coords:
-            User define cities coords
+            用户自定义地区经纬度，类似如 {'阿城': [126.58, 45.32],} 这样的字典，当用
+            于提供了该参数时，将会覆盖原有预存的区域坐标信息。
         :param is_roam:
-            Whether to enable mouse zooming and translating. false by default.
-            If either zooming or translating is wanted,
-            it can be set to 'scale' or 'move'. Otherwise, set it to be true
-            to enable both.
+            是否开启鼠标缩放和平移漫游。默认为 True。
+            如果只想要开启缩放或者平移，可以设置成'scale'或者'move'。设置成 True 为都开启。
         :param kwargs:
         """
         assert len(attr) == len(value)
@@ -70,13 +74,13 @@ class Geo(Chart):
             _geo_cities_coords = CITY_GEO_COORDS
 
         _data = []
-        for name, value in zip(attr, value):
-            if name in _geo_cities_coords:
-                city_coordinate = _geo_cities_coords.get(name)
-                city_coordinate.append(value)
-                _data.append({"name": name, "value": city_coordinate})
+        for _name, _value in zip(attr, value):
+            if _name in _geo_cities_coords:
+                city_coordinate = _geo_cities_coords.get(_name)
+                city_coordinate.append(_value)
+                _data.append({"name": _name, "value": city_coordinate})
             else:
-                print("%s coordinates is not found" % name)
+                print("%s coordinates is not found" % _name)
         self._option.update(
             geo={
                 "map": maptype,

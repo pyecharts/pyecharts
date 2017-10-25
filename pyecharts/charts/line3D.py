@@ -7,7 +7,7 @@ from pyecharts.option import get_all_options
 
 class Line3D(Chart):
     """
-    <<< Line3D chart >>>
+    <<< 3D 折线图 >>>
     """
 
     def __init__(self, title="", subtitle="", **kwargs):
@@ -23,14 +23,12 @@ class Line3D(Chart):
         """
 
         :param name:
-            Series name used for displaying in tooltip and filtering with legend,
-            or updating data and configuration with setOption.
+            系列名称，用于 tooltip 的显示，legend 的图例筛选。
         :param data:
-            data of line3D
+            数据项，数据中，每一行是一个『数据项』，每一列属于一个『维度』。
         :param grid3d_opacity:
-            opacity of gird3D item
+            3D 笛卡尔坐标系组的透明度（线的透明度），默认为 1，完全不透明。
         :param kwargs:
-        :return:
         """
         kwargs.update(xaxis3d_type='value',
                       yaxis3d_type='value',

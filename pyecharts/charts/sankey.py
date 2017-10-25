@@ -7,13 +7,10 @@ from pyecharts.option import get_all_options
 
 class Sankey(Chart):
     """
-    <<< Sankey chart >>>
+    <<< 桑基图  >>>
 
-    Sankey graphs are a specific type of stream graphs, in which the width of each branch is
-    shown proportionally to the flow quantity. These graphs are typically used to
-    visualize energy or material or cost transfers between processes.
-    They can also visualize the energy accounts, material flow accounts on a regional or
-    national level, and also the breakdown of cost of item or services.
+    桑基图是一种特殊的流图, 它主要用来表示原材料、能量等如何从初始形式经过中
+    间过程的加工、转化到达最终形式。
     """
 
     def __init__(self, title="", subtitle="", **kwargs):
@@ -29,23 +26,21 @@ class Sankey(Chart):
         """
 
         :param name:
-            Series name used for displaying in tooltip and filtering with legend,
-            or updating data and configuration with setOption.
+            系列名称，用于 tooltip 的显示，legend 的图例筛选。
         :param nodes:
-            Relational nodes data
-            name：Name of data item.         # required！！
-            value: Value of data item.       # required！！
+            桑基图结点，必须包含的数据项有：
+                name：数据项名称
+                value：数据项数值
         :param links:
-            Relational data between nodes
-            source：name of source node on edge      # required！！
-            target：name of target node on edge      # required！！
-            value：value of edge,It can be used in the force layout to map to the length of the edge
+            桑基图结点关系
+                source：边的源节点名称（必须有！）
+                target：边的目标节点名称（必须有！）
+                value：边的数值，决定边的宽度。
         :param sankey_node_width:
-            The node width of rectangle in graph.
+            图中每个矩形节点的宽度。默认为 20。
         :param sankey_node_gap:
-            The gap between any two regtangles in each column from the graph.
+            图中每一列任意两个矩形节点之间的间隔。默认为 8。
         :param kwargs:
-        :return:
         """
         chart = get_all_options(**kwargs)
         self._option.get('legend')[0].get('data').append(name)

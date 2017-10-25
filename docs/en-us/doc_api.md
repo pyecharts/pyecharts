@@ -42,6 +42,7 @@ Data type:dict.The config options for a chart。Each chart has its own format an
 
 Data type:set.The js filename collections for a chart's dependencies.Every element do not contain the filename extension(.js).E.g `{'echarts.min', 'fujian'}` .
 
+
 ### Methods
 
 **add()**

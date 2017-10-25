@@ -1,11 +1,12 @@
-# pyecharts 文档
+# pyecharts 文档-图形篇
 
-pyecharts 是一个用于生成 Echarts 图表的类库。实际上就是 Echarts 与 Python 的对接。  
+#### [pyecharts 文档-预览篇](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/doc_prepare.md)
+#### [pyecharts 文档-API 篇](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/doc_api.md)
+#### [pyecharts 文档-版本篇](https://github.com/chenjiandongx/pyecharts/blob/master/changelog.md)
+#### [pyecharts 文档-画廊篇](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/doc_gallery.md)
+#### [pyecharts 文档-FAQ 篇](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/doc_faq.md)
 
-[![Build Status](https://travis-ci.org/chenjiandongx/pyecharts.svg?branch=master)](https://travis-ci.org/chenjiandongx/pyecharts) [![codecov](https://codecov.io/gh/chenjiandongx/pyecharts/branch/master/graph/badge.svg)](https://codecov.io/gh/chenjiandongx/pyecharts) [![PyPI version](https://badge.fury.io/py/pyecharts.svg)](https://badge.fury.io/py/pyecharts) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
-
-* [开始使用](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/documentation.md#开始使用)
+* [图形初始化](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/documentation.md#图形初始化)
 * [通用配置项](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/documentation.md#通用配置项)
     * xyAxis：直角坐标系中的 x、y 轴(Line、Bar、Scatter、EffectScatter、Kline)
     * dataZoom：dataZoom 组件 用于区域缩放，从而能自由关注细节的数据信息，或者概览数据整体，或者去除离群点的影响。(Line、Bar、Scatter、EffectScatter、Kline、Boxplot)
@@ -15,9 +16,8 @@ pyecharts 是一个用于生成 Echarts 图表的类库。实际上就是 Echart
     * grid3D：3D笛卡尔坐标系组配置项，适用于 3D 图形。（Bar3D, Line3D, Scatter3D)
     * axis3D：3D 笛卡尔坐标系 X，Y，Z 轴配置项，适用于 3D 图形。（Bar3D, Line3D, Scatter3D)
     * visualMap：是视觉映射组件，用于进行『视觉编码』，也就是将数据映射到视觉元素（视觉通道）
-    * markLine&markPoint：图形标记组件，用于标记指定的特殊数据，又标记线和标记点两种。（Bar、Line、Kline）
+    * markLine&markPoint：图形标记组件，用于标记指定的特殊数据，有标记线和标记点两种。（Bar、Line、Kline）
     * tooltip：提示框组件，用于移动或点击鼠标时弹出数据内容
-
 * [图表详细](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/documentation.md#图表详细)
     * Bar（柱状图/条形图）
     * Bar3D（3D 柱状图）
@@ -26,6 +26,7 @@ pyecharts 是一个用于生成 Echarts 图表的类库。实际上就是 Echart
     * Funnel（漏斗图）
     * Gauge（仪表盘）
     * Geo（地理坐标系）
+    * GeoLines（地理坐标系线图）
     * Graph（关系图）
     * HeatMap（热力图）
     * Kline（K线图）
@@ -48,173 +49,12 @@ pyecharts 是一个用于生成 Echarts 图表的类库。实际上就是 Echart
     * Overlap 类：结合不同类型图表叠加画在同张图上
     * Page 类：同一网页按顺序展示多图
     * Timeline 类：提供时间线轮播多张图
-* [使用技巧](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/documentation.md#使用技巧)
+* [统一风格](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/documentation.md#统一风格)
 * [集成Flask&Django](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/documentation.md#集成Flask&Django)
-* [更多示例](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/documentation.md#更多示例)
 * [关于项目](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/documentation.md#关于项目)
 
 
-# 开始使用
-### 确认你已安装了最新版本的 pyecharts
-> `print(pyecharts.__version__)` 可查看当前 pyecharts 版本，更多版本信息请查看 [changelog.md](https://github.com/chenjiandongx/pyecharts/blob/master/changelog.md)
-
-首先开始来绘制你的第一个图表
-```python
-from pyecharts import Bar
-
-bar = Bar("我的第一个图表", "这里是副标题")
-bar.add("服装", ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"], [5, 20, 36, 10, 75, 90])
-bar.show_config()
-bar.render()
-```
-![guide-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/guide-0.png)
-
-**Note：** 可以按右边的下载按钮将图片下载到本地，如果想要提供更多实用工具按钮，请在 `add()` 中设置 `is_more_utils` 为 True  
-
-* ```add()```  
-    主要方法，用于添加图表的数据和设置各种配置项  
-* ```show_config()```  
-    打印输出图表的所有配置项
-* ```render()```  
-    默认将会在根目录下生成一个 render.html 的文件，支持 path 参数，设置文件保存位置，如 render(r"e:\my_first_chart.html")，文件用浏览器打开。  
-
-### 使用 pyecharts-snapshot 插件
-如果想直接将图片保存为 png 或者 pdf 格式的文件，可以使用 [pyecharts-snapshot](https://github.com/chfw/pyecharts-snapshot)。使用该插件请确保你的系统上已经安装了 node.js 环境，如果没有，请到这里下载 [https://nodejs.org/en/download/](https://nodejs.org/en/download/)
-
-1. 安装 phantomjs  
-    `npm install -g phantomjs-prebuilt`
-2. 安装 pyecharts-snapshot  
-    `pip install pyecharts-snapshot`
-3. 引入 pyecharts-snapshot  
-    `from pyecharts_snapshot.main import make_a_snapshot`
-4. 调用方法  
-    `make_a_snapshot('render.html', 'snapshot.png')`  
-    make_a_snapshot() 第一个参数为生成的 .html 文件，第二个参数为要保存的文件，可以为 png/pdf
-
-更多内容请移步至 [pyecharts-snapshot](https://github.com/chfw/pyecharts-snapshot)  
-
-
-### Jupyter notebook 小贴士
-对本库的现有用户来说，0.1.9.5 版本的离线模式要求：
-1）老版本已完全卸载 
-2）您现有的 notebook 文档需要刷新并重新运行。
-
-离线模式工作原理：pyecharts 自动把 echarts 脚本文件装在了 jupyter nbextensions 文件夹下面。以下代码可以告诉你 pyecharts 网页脚本是否装到了 Jupyter 里面：
-
-
-```shell
-$ jupyter nbextension list
-Known nbextensions:
-  config dir: /Users/jaska/.jupyter/nbconfig
-    notebook section
-      echarts/main  enabled 
-      - Validating: OK
-```
-
-在特殊的情况下，如果你想要 pyecharts 更新所有的脚本文件的话，你可以运行下面的命令：
-
-```shell
-$ git clone https://github.com/chfw/jupyter-echarts.git
-$ cd jupyter-echarts
-$ jupyter nbextension install echarts --user
-```
-在下一个画图动作的时候，您的脚本文件会被更新。
-
-下面这个删除命令估计只有参与 pyecharts 开发者才会用到
-
-```shell
-$ jupyter nbextension uninstall echarts --user
-```
-
-#### jupyter-notebook 输出问题
-
-自 0.1.9.7 起，pyecharts 已经进入全部离线模式，也就是没有网络，也能画图。jupyter notebook 输出后，你的 notebook 离开了本地 jupyter 环境，图片就不能显示了。
-为了解决这个问题，再画图之前，你可以多加两个语句：
-
-```python
-...
-from pyecharts import online
-
-online()
-...
-```
-
-这样，所有的脚本会从 http://chfw.github.io/jupyter-echarts/echarts 下载。如果你联不上 Github, 你可以先把 https://github.com/chfw/jupyter-echarts 克隆一下。然后在你自己的服务器上，把整个 echarts 挂上去。  
-
-下面我简单示范一下  
-
-```
-$ cd jupyter-echarts/echarts
-$ python -m http.server # for python 2, use python -m SimpleHTTPServer
-Serving HTTP on 0.0.0.0 port 8000 ...
-```
-
-然后，再把本地服务器加进前面的语句：
-
-```python
-...
-from pyecharts import online
-
-online(host="http://localhost:8000)
-...
-```
-
-
-### Python2 编码问题
-默认的编码类型为 UTF-8，在 Python3 中是没什么问题的，Python3 对中文的支持好很多。但是在 Python2 中，请应用下面的语句，保证没有编码问题:
-```
-#!/usr/bin/python
-#coding=utf-8
-from __future__ import unicode_literals
-```
-前两句告知你的编辑器你用 UTF-8 ([PEP-0263](https://www.python.org/dev/peps/pep-0263/)). 最后一句告知 Python 所有字符是 UTF-8 ([unicode literals](http://python-future.org/unicode_literals.html))
-
-基本上所有的图表类型都是这样绘制的：
-1. ```chart_name = Type()``` 初始化具体类型图表。
-2. ```add()``` 添加数据及配置项。
-3. ```render()``` 生成 .html 文件。  
-
-```add()``` 数据一般为两个列表（长度一致）。  
-如果你的数据是字典或者是带元组的字典。可利用 ```cast()``` 方法转换。
-
-```python
-@staticmethod
-cast(seq)
-``` 转换数据序列，将带字典和元组类型的序列转换为 k_lst,v_lst 两个列表 ``` 
-```
-1. 元组列表  
-    [(A1, B1), (A2, B2), (A3, B3), (A4, B4)] --> k_lst[ A[i1, i2...] ], v_lst[ B[i1, i2...] ]
-2. 字典列表  
-    [{A1: B1}, {A2: B2}, {A3: B3}, {A4: B4}] --> k_lst[ A[i1, i2...] ], v_lst[ B[i1, i2...] ]
-3. 字典  
-    {A1: B1, A2: B2, A3: B3, A4: B4} -- > k_lst[ A[i1, i2...] ], v_lst[ B[i1, i2...] ]
-
-### Pandas&Numpy 简单示例
-如果使用的是 Numpy 或者 Pandas，可以参考这个示例
-
-![pandas-numpy](https://github.com/chenjiandongx/pyecharts/blob/master/images/pandas-numpy.png)
-
-**Note：** 使用 Pandas&Numpy 时，整数类型请确保为 int，而不是 numpy.int32
-
-**当然你也可以采用更加酷炫的方式，使用 Jupyter Notebook 来展示图表，matplotlib 有的，pyecharts 也会有的**  
-**Note：** 从 0.1.9.2 版本开始，废弃 ```render_notebook()``` 方法，现已采用更加 pythonic 的做法。直接调用本身实例就可以了。  
-
-比如这样  
-
-![notebook-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/notebook-0.gif)
-
-还有这样
-
-![notebook-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/notebook-1.gif)
-
-如果使用的是自定义类，直接调用自定义类示例即可
-
-![notebook-2](https://github.com/chenjiandongx/pyecharts/blob/master/images/notebook-2.gif)
-
-更多 Jupyter notebook 的例子请参考 [notebook-use-cases](https://github.com/chenjiandongx/pyecharts/blob/master/docs/notebook-use-cases.zip)。可下载后运行看看。
-
-如需使用 Jupyter Notebook 来展示图表，只需要调用自身实例即可，同时兼容 Python2 和 Python3 的 Jupyter Notebook 环境。所有图表均可正常显示，与浏览器一致的交互体验，这下展示报告连 PPT 都省了！！  
-
+# 图形初始化
 图表类初始化所接受的参数（所有类型的图表都一样）。
 
 * title -> str   
@@ -359,9 +199,9 @@ cast(seq)
 * legend_orient -> str  
     图例列表的布局朝向，默认为'horizontal'，有'horizontal', 'vertical'可选
 * legend_pos -> str  
-    图例组件离容器左侧的距离，默认为'center'，有'left', 'center', 'right'可选
+    图例组件离容器左侧的距离，默认为'center'，有'left', 'center', 'right'可选，也可以为百分数，如"%60"
 * legend_top -> str  
-    图例组件离容器上侧的距离，默认为'top'，有'top', 'center', 'bottom'可选
+    图例组件离容器上侧的距离，默认为'top'，有'top', 'center', 'bottom'可选，也可以为百分数，如"%60"
 * legend_selectedmode -> str/bool  
     图例选择的模式，控制是否可以通过点击图例改变系列的显示状态。默认为'multiple'，可以设成 'single' 或者 'multiple' 使用单选或者多选模式。也可以设置为 False 关闭显示状态。
 * legend_text_size -> int  
@@ -489,7 +329,7 @@ cast(seq)
 * is_visualmap -> bool  
     是否使用视觉映射组件
 * visual_type -> str  
-    制定组件映射方式，默认为'color‘，即通过颜色来映射数值。有'color', 'size'可选。'szie'通过数值点的大小，也就是图形点的大小来映射数值。
+    制定组件映射方式，默认为'color‘，即通过颜色来映射数值。有'color', 'size'可选。'size'通过数值点的大小，也就是图形点的大小来映射数值。
 * visual_range -> list  
     指定组件的允许的最小值与最大值。默认为 [0, 100]
 * visual_text_color -> list  
@@ -548,7 +388,7 @@ cast(seq)
     提示框字体大小，默认为 14
 
 
-**markLine&markPoint：图形标记组件，用于标记指定的特殊数据，又标记线和标记点两种（Bar、Line、Kline）**
+**markLine&markPoint：图形标记组件，用于标记指定的特殊数据，有标记线和标记点两种（Bar、Line、Kline）**
 
 * mark_point -> list  
     标记点，默认有'min', 'max', 'average'可选。支持自定义标记点，具体使用如下  
@@ -578,7 +418,9 @@ cast(seq)
 
 Bar.add() 方法签名
 ```python
-add(name, x_axis, y_axis, is_stack=False, bar_category_gap='20%', **kwargs)
+add(name, x_axis, y_axis,
+    is_stack=False,
+    bar_category_gap='20%', **kwargs)
 ```
 * name -> str  
     图例名称
@@ -637,7 +479,7 @@ bar.render()
 ```
 ![bar-4](https://github.com/chenjiandongx/pyecharts/blob/master/images/bar-4.gif)
 
-'inside' 类型
+dataZoom 效果，'inside' 类型
 ```python
 attr = ["{}天".format(i) for i in range(30)]
 v1 = [random.randint(1, 30) for _ in range(30)]
@@ -647,7 +489,7 @@ bar.render()
 ```
 ![bar-5](https://github.com/chenjiandongx/pyecharts/blob/master/images/bar-5.gif)  
 
-'both' 类型
+dataZoom 效果，'both' 类型
 ```python
 attr = ["{}天".format(i) for i in range(30)]
 v1 = [random.randint(1, 30) for _ in range(30)]
@@ -701,13 +543,27 @@ bar.render()
 ```
 ![bar-9](https://github.com/chenjiandongx/pyecharts/blob/master/images/bar-9.png) 
 
+某地的降水量和蒸发量柱状图
+```python
+from pyecharts import Bar
 
+attr = ["{}月".format(i) for i in range(1, 13)]
+v1 = [2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3]
+v2 = [2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3]
+bar = Bar("柱状图示例")
+bar.add("蒸发量", attr, v1, mark_line=["average"], mark_point=["max", "min"])
+bar.add("降水量", attr, v2, mark_line=["average"], mark_point=["max", "min"])
+bar.render()
+```
+![bar-10](https://github.com/chenjiandongx/pyecharts/blob/master/images/bar-10.png)
 
 ## Bar3D（3D 柱状图）
 
 Bar3D.add() 方法签名
 ```python
-add(name, x_axis, y_axis, data, grid3d_opacity=1, grid3d_shading='color', **kwargs)
+add(name, x_axis, y_axis, data,
+    grid3d_opacity=1,
+    grid3d_shading='color', **kwargs)
 ```
 * name -> str  
     图例名称
@@ -874,7 +730,8 @@ boxplot.render()
 
 EffectScatter.add() 方法签名
 ```python
-add(name, x_axis, y_axis, symbol_size=10, **kwargs)
+add(name, x_axis, y_axis,
+    symbol_size=10, **kwargs)
 ```
 * name -> str  
     图例名称
@@ -921,7 +778,7 @@ es.render()
 ## Funnel（漏斗图）
 Funnel.add() 方法签名
 ```python
-add(self, name, attr, value, **kwargs)
+add(name, attr, value, **kwargs)
 ```
 * name -> str  
     图例名称
@@ -953,13 +810,15 @@ funnel.render()
 ## Gauge（仪表盘）
 Gauge.add() 方法签名
 ```python
-add(name, attr, value, scale_range=None, angle_range=None, **kwargs)
+add(name, attr, value,
+    scale_range=None,
+    angle_range=None, **kwargs)
 ```
 * name -> str  
     图例名称
 * attr -> list  
     属性名称
-* value -> list
+* value -> list  
     属性所对应的值
 * scale_range -> list  
     仪表盘数据范围。默认为 [0, 100]
@@ -989,8 +848,15 @@ gauge.render()
 
 Geo.add() 方法签名
 ```python
-add(name, attr, value, type="scatter", maptype='china', symbol_size=12, border_color="#111",
-    geo_normal_color="#323c48", geo_emphasis_color="#2a333d", geo_cities_coords=None, **kwargs)
+add(name, attr, value,
+    type="scatter",
+    maptype='china',
+    symbol_size=12,
+    border_color="#111",
+    geo_normal_color="#323c48",
+    geo_emphasis_color="#2a333d",
+    geo_cities_coords=None,
+    is_roam=True, **kwargs)
 ```
 * name -> str  
     图例名称
@@ -1012,6 +878,9 @@ add(name, attr, value, type="scatter", maptype='china', symbol_size=12, border_c
     高亮状态下地图区域的颜色。默认为 '#2a333d'
 * geo_cities_coords -> dict  
     用户自定义地区经纬度，类似如 {'阿城': [126.58, 45.32],} 这样的字典，当用于提供了该参数时，将会覆盖原有预存的区域坐标信息。
+* is_roam -> bool  
+    是否开启鼠标缩放和平移漫游。默认为 True  
+    如果只想要开启缩放或者平移，可以设置成'scale'或者'move'。设置成 True 为都开启
 
 Scatter 类型（连续型）
 ```python
@@ -1114,13 +983,170 @@ geo.render()
 ![geo-2](https://github.com/chenjiandongx/pyecharts/blob/master/images/geo-2.gif)
 
 
+## GeoLines（地理坐标系线图）
+> 用于带有起点和终点信息的线数据的绘制，主要用于地图上的航线，路线的可视化。
+
+GeoLines.add() 方法签名
+```python
+add(name, data,
+    maptype='china',
+    symbol=None,
+    symbol_size=12,
+    border_color="#111",
+    geo_normal_color="#323c48",
+    geo_emphasis_color="#2a333d",
+    geo_cities_coords=None,
+    geo_effect_period=6,
+    geo_effect_traillength=0,
+    geo_effect_color='#fff',
+    geo_effect_symbol='circle',
+    geo_effect_symbolsize=5,
+    is_geo_effect_show=True,
+    is_roam=True, **kwargs)
+```
+* name -> str  
+    图例名称
+* data -> [list], 包含列表的列表  
+    数据项，数据中，每一行是一个『数据项』，每一列属于一个『维度』。每一行包含两个数据, 如 ["广州", "北京"]，则指定从广州到北京。
+* maptype -> str  
+    地图类型。 支持 china、world、安徽、澳门、北京、重庆、福建、福建、甘肃、广东，广西、广州、海南、河北、黑龙江、河南、湖北、湖南、江苏、江西、吉林、辽宁、内蒙古、宁夏、青海、山东、上海、陕西、山西、四川、台湾、天津、香港、新疆、西藏、云南、浙江，以及 [363个二线城市地图](https://github.com/chfw/echarts-china-cities-js#featuring-citiesor-for-single-download)。提醒：在画市级地图的时候，城市名字后面的‘市’要省去了，比如，石家庄市的‘市’不要提，即‘石家庄’就可以了。
+* symbol -> str  
+    线两端的标记类型，可以是一个数组分别指定两端，也可以是单个统一指定。
+* symbol_size -> int  
+    线两端的标记大小，可以是一个数组分别指定两端，也可以是单个统一指定。
+* border_color -> str  
+    地图边界颜色。默认为 '#111'
+* geo_normal_color -> str  
+    正常状态下地图区域的颜色。默认为 '#323c48'
+* geo_emphasis_color -> str  
+    高亮状态下地图区域的颜色。默认为 '#2a333d'
+* geo_cities_coords -> dict  
+    用户自定义地区经纬度，类似如 {'阿城': [126.58, 45.32],} 这样的字典，当用于提供了该参数时，将会覆盖原有预存的区域坐标信息。
+* geo_effect_period -> int/float  
+    特效动画的时间，单位为 s，默认为 6s
+* geo_effect_traillength -> float  
+    特效尾迹的长度。取从 0 到 1 的值，数值越大尾迹越长。默认为 0
+* geo_effect_color -> str  
+    特效标记的颜色。默认为 '#fff'
+* geo_effect_symbol -> str  
+     特效图形的标记。有 'circle', 'rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow', 'plane' 可选。
+* geo_effect_symbolsize -> int/list  
+    特效标记的大小，可以设置成诸如 10 这样单一的数字，也可以用数组分开表示高和宽，例如 [20, 10] 表示标记宽为 20，高为 10。
+* is_geo_effect_show -> bool  
+    是否显示特效。
+* is_roam -> bool  
+    是否开启鼠标缩放和平移漫游。默认为 True  
+    如果只想要开启缩放或者平移，可以设置成'scale'或者'move'。设置成 True 为都开启
+
+默认效果
+```python
+from pyecharts import GeoLines, Style
+
+style = Style(
+    title_top="#fff",
+    title_pos = "center",
+    width=1200,
+    height=600,
+    background_color="#404a59"
+)
+
+data_guangzhou = [
+    ["广州", "上海"],
+    ["广州", "北京"],
+    ["广州", "南京"],
+    ["广州", "重庆"],
+    ["广州", "兰州"],
+    ["广州", "杭州"]
+]
+geolines = GeoLines("GeoLines 示例", **style.init_style)
+geolines.add("从广州出发", data_guangzhou, is_legend_show=False)
+geolines.render()
+```
+![geolines-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/geolines-0.gif)
+
+稍加配置
+```python
+from pyecharts import GeoLines, Style
+
+style_geo = style.add(
+    is_label_show=True,
+    line_curve=0.2,
+    line_opacity=0.6,
+    legend_text_color="#eee",
+    legend_pos="right",
+    geo_effect_symbol="plane",
+    geo_effect_symbolsize=15,
+    label_color=['#a6c84c', '#ffa022', '#46bee9'],
+    label_pos="right",
+    label_formatter="{b}",
+    label_text_color="#eee",
+)
+geolines = GeoLines("GeoLines 示例", **style.init_style)
+geolines.add("从广州出发", data_guangzhou, **style_geo)
+geolines.render()
+
+```
+![geolines-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/geolines-1.gif)
+
+多例模式
+```python
+from pyecharts import GeoLines, Style
+
+data_beijing = [
+    ["北京", "上海"],
+    ["北京", "广州"],
+    ["北京", "南京"],
+    ["北京", "重庆"],
+    ["北京", "兰州"],
+    ["北京", "杭州"]
+]
+geolines = GeoLines("GeoLines 示例", **style.init_style)
+geolines.add("从广州出发", data_guangzhou, **style_geo)
+geolines.add("从北京出发", data_beijing, **style_geo)
+geolines.render()
+```
+![geolines-2](https://github.com/chenjiandongx/pyecharts/blob/master/images/geolines-2.gif)
+
+单例模式，指定 `legend_selectedmode="single"`
+```python
+from pyecharts import GeoLines, Style
+
+style_geo = style.add(
+    is_label_show=True,
+    line_curve=0.2,
+    line_opacity=0.6,
+    legend_text_color="#eee",
+    legend_pos="right",
+    geo_effect_symbol="plane",
+    geo_effect_symbolsize=15,
+    label_color=['#a6c84c', '#ffa022', '#46bee9'],
+    label_pos="right",
+    label_formatter="{b}",
+    label_text_color="#eee",
+    legend_selectedmode="single", #指定单例模式
+)
+geolines = GeoLines("GeoLines 示例", **style.init_style)
+geolines.add("从广州出发", data_guangzhou, **style_geo)
+geolines.add("从北京出发", data_beijing, **style_geo)
+geolines.render()
+```
+![geolines-3](https://github.com/chenjiandongx/pyecharts/blob/master/images/geolines-3.gif)
+
+
 ## Graph（关系图）
 > 用于展现节点以及节点之间的关系数据。
 
 Graph.add() 方法签名
 ```python
-add(name, nodes, links, categories=None, is_focusnode=True, is_roam=True, is_rotatelabel=False,
-    layout="force", graph_edge_length=50, graph_gravity=0.2, graph_repulsion=50, **kwargs)
+add(name, nodes, links,
+    categories=None,
+    is_focusnode=True,
+    is_roam=True,
+    is_rotatelabel=False,
+    layout="force",
+    graph_edge_length=50,
+    graph_gravity=0.2,
+    graph_repulsion=50, **kwargs)
 ```
 * name -> str  
     图例名称
@@ -1137,7 +1163,7 @@ add(name, nodes, links, categories=None, is_focusnode=True, is_roam=True, is_rot
     结点间的关系数据，包含的数据项有  
     * source：边的源节点名称的字符串，也支持使用数字表示源节点的索引（必须有！）
     * target：边的目标节点名称的字符串，也支持使用数字表示源节点的索引（必须有！）
-    * vaule：边的数值，可以在力引导布局中用于映射到边的长度
+    * value：边的数值，可以在力引导布局中用于映射到边的长度
 * categories -> list  
     结点分类的类目，结点可以指定分类，也可以不指定。  
     如果节点有分类的话可以通过 nodes[i].category 指定每个节点的类目，类目的样式会被应用到节点样式上
@@ -1352,8 +1378,12 @@ kline.render()
 
 Line.add() 方法签名
 ```python
-add(name, x_axis, y_axis, is_symbol_show=True, is_smooth=False, is_stack=False,
-    is_step=False, is_fill=False, **kwargs)
+add(name, x_axis, y_axis,
+    is_symbol_show=True,
+    is_smooth=False,
+    is_stack=False,
+    is_step=False,
+    is_fill=False, **kwargs)
 ```
 * name -> str  
     图例名称
@@ -1449,14 +1479,31 @@ line.add("商家B", attr, [math.log10(random.randint(1, 99999999)) for _ in rang
          yaxis_type="log")
 line.render()
 ```
-![line-3-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/line-3-1.png)
+![line-4](https://github.com/chenjiandongx/pyecharts/blob/master/images/line-4.png)
+
+某地最低温和最高气温折线图
+```python
+from pyecharts import Line
+
+attr = ['周一', '周二', '周三', '周四', '周五', '周六', '周日', ]
+line = Line("折线图示例")
+line.add("最高气温", attr, [11, 11, 15, 13, 12, 13, 10],
+         mark_point=["max", "min"], mark_line=["average"])
+line.add("最低气温", attr, [1, -2, 2, 5, 3, 2, 0],
+         mark_point=["max", "min"],  mark_line=["average"],
+         yaxis_formatter="°C")
+line.show_config()
+line.render()
+```
+![line-5](https://github.com/chenjiandongx/pyecharts/blob/master/images/line-5.gif)
 
 
 ## Line3D（3D 折线图）
 
 Line3D.add() 方法签名
 ```python
-add(name, data, grid3d_opacity=1, **kwargs)
+add(name, data,
+    grid3d_opacity=1, **kwargs)
 ```
 * name -> str  
     图例名称
@@ -1515,7 +1562,10 @@ line3d.render()
 
 Liquid.add() 方法签名
 ```python
-add(name, data, shape='circle', liquid_color=None, is_liquid_animation=True,
+add(name, data,
+    shape='circle',
+    liquid_color=None,
+    is_liquid_animation=True,
     is_liquid_outline_show=True, **kwargs)
 ```
 * name -> str  
@@ -1523,7 +1573,7 @@ add(name, data, shape='circle', liquid_color=None, is_liquid_animation=True,
 * data -> list  
     数据项
 * shape -> str  
-    水球外形，有'circle', 'rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow'可选。默认'circle'
+    水球外形，有'circle', 'rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow'可选。默认'circle'。也可以为自定义的 SVG 路径。
 * liquid_color -> list  
     波浪颜色，默认的颜色列表为['#294D99', '#156ACF', '#1598ED', '#45BDFF']。
 * is_liquid_animation -> bool  
@@ -1558,13 +1608,43 @@ liquid.render()
 ```
 ![liquid-2](https://github.com/chenjiandongx/pyecharts/blob/master/images/liquid-2.png)
 
+自定义 SVG 路径
+```python
+from pyecharts import Liquid
+
+shape = ("path://M367.855,428.202c-3.674-1.385-7.452-1.966-11.146-1"
+         ".794c0.659-2.922,0.844-5.85,0.58-8.719 c-0.937-10.407-7."
+         "663-19.864-18.063-23.834c-10.697-4.043-22.298-1.168-29.9"
+         "02,6.403c3.015,0.026,6.074,0.594,9.035,1.728 c13.626,5."
+         "151,20.465,20.379,15.32,34.004c-1.905,5.02-5.177,9.115-9"
+         ".22,12.05c-6.951,4.992-16.19,6.536-24.777,3.271 c-13.625"
+         "-5.137-20.471-20.371-15.32-34.004c0.673-1.768,1.523-3.423"
+         ",2.526-4.992h-0.014c0,0,0,0,0,0.014 c4.386-6.853,8.145-14"
+         ".279,11.146-22.187c23.294-61.505-7.689-130.278-69.215-153"
+         ".579c-61.532-23.293-130.279,7.69-153.579,69.202 c-6.371,"
+         "16.785-8.679,34.097-7.426,50.901c0.026,0.554,0.079,1.121,"
+         "0.132,1.688c4.973,57.107,41.767,109.148,98.945,130.793 c58."
+         "162,22.008,121.303,6.529,162.839-34.465c7.103-6.893,17.826"
+         "-9.444,27.679-5.719c11.858,4.491,18.565,16.6,16.719,28.643 "
+         "c4.438-3.126,8.033-7.564,10.117-13.045C389.751,449.992,"
+         "382.411,433.709,367.855,428.202z")
+liquid = Liquid("水球图示例", width=1000, height=600)
+liquid.add("Liquid", [0.6, 0.5, 0.4, 0.3],
+           shape=shape, is_liquid_outline_show=False)
+liquid.render()
+```
+![liquid-3](https://github.com/chenjiandongx/pyecharts/blob/master/images/liquid-3.gif)
+
 
 ## Map（地图）
 > 地图主要用于地理区域数据的可视化。
 
 Map.add() 方法签名
 ```python
-add(name, attr, value, is_roam=True, maptype='china', **kwargs)
+add(name, attr, value,
+    maptype='china',
+    is_roam=True,
+    is_map_symbol_show=True, **kwargs)
 ```
 * name -> str  
     图例名称
@@ -1572,11 +1652,13 @@ add(name, attr, value, is_roam=True, maptype='china', **kwargs)
    属性名称
 * value -> list  
    属性所对应的值
-* is_roam -> bool/str
-   是否开启鼠标缩放和平移漫游。默认为 True  
-   如果只想要开启缩放或者平移，可以设置成'scale'或者'move'。设置成 True 为都开启
 * maptype -> str  
     地图类型。 支持 china、world、安徽、澳门、北京、重庆、福建、福建、甘肃、广东，广西、广州、海南、河北、黑龙江、河南、湖北、湖南、江苏、江西、吉林、辽宁、内蒙古、宁夏、青海、山东、上海、陕西、山西、四川、台湾、天津、香港、新疆、西藏、云南、浙江，以及 [363个二线城市地图](https://github.com/chfw/echarts-china-cities-js#featuring-citiesor-for-single-download)。提醒：在画市级地图的时候，城市名字后面的‘市’要省去了，比如，石家庄市的‘市’不要提，即‘石家庄’就可以了。地图提供了自定义模式 [用户如何自定义地图](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/user-customize-map.md)
+* is_roam -> bool/str  
+   是否开启鼠标缩放和平移漫游。默认为 True  
+   如果只想要开启缩放或者平移，可以设置成'scale'或者'move'。设置成 True 为都开启
+* is_map_symbol_show -> bool  
+    是否显示地图标记红点，默认为 True。
 
 ```python
 from pyecharts import Map
@@ -1634,6 +1716,17 @@ map.render()
 ```
 ![map-3](https://github.com/chenjiandongx/pyecharts/blob/master/images/map-3.gif)
 
+设置 `is_map_symbol_show=False` 取消显示标记红点
+```python
+value = [95.1, 23.2, 43.3, 66.4, 88.5]
+attr= ["China", "Canada", "Brazil", "Russia", "United States"]
+map = Map("世界地图示例", width=1200, height=600)
+map.add("", attr, value, maptype="world", is_visualmap=True,
+        visual_text_color='#000', , is_map_symbol_show=False)
+map.render()
+```
+![map-4](https://github.com/chenjiandongx/pyecharts/blob/master/images/map-4.png)
+
 
 ## Parallel（平行坐标系）
 > 平行坐标系是一种常用的可视化高维数据的图表。
@@ -1642,7 +1735,7 @@ Parallel.add() 方法签名
 ```python
 add(name, data, **kwargs)
 ```
-* name -> str
+* name -> str  
     图例名称
 * data -> [list], 包含列表的列表  
     数据项。数据中，每一行是一个『数据项』，每一列属于一个『维度』
@@ -1657,7 +1750,7 @@ config(schema=None, c_schema=None)
     用户自定义平行坐标系的坐标轴信息。
     * dim -> int   
         维度索引
-    * name > str  
+    * name -> str  
         维度名称
     * type -> str   
         维度类型，有'value', 'category'可选  
@@ -1741,7 +1834,10 @@ parallel.render()
 
 Pie.add() 方法签名
 ```python
-add(name, attr, value, radius=None, center=None, rosetype=None, **kwargs)
+add(name, attr, value,
+    radius=None,
+    center=None,
+    rosetype=None, **kwargs)
 ```
 * name -> str   
     图例名称
@@ -1797,14 +1893,76 @@ pie.render()
 ```
 ![pie-2](https://github.com/chenjiandongx/pyecharts/blob/master/images/pie-2.png)
 
+饼中饼
+```python
+import random
+from pyecharts import Pie
+
+attr = ['A', 'B', 'C', 'D', 'E', 'F']
+pie = Pie("饼图示例", width=1000, height=600)
+pie.add("", attr, [random.randint(0, 100) for _ in range(6)],
+        radius=[50, 55], center=[25, 50], is_random=True)
+pie.add("", attr, [random.randint(20, 100) for _ in range(6)],
+        radius=[0, 45], center=[25, 50], rosetype='area')
+pie.add("", attr, [random.randint(0, 100) for _ in range(6)],
+        radius=[50, 55], center=[65, 50], is_random=True)
+pie.add("", attr, [random.randint(20, 100) for _ in range(6)],
+        radius=[0, 45], center=[65, 50], rosetype='radius')
+pie.render()
+```
+![pie-3](https://github.com/chenjiandongx/pyecharts/blob/master/images/pie-3.gif)
+
+多个饼图画在一张图内
+```python
+from pyecharts import Pie
+
+pie = Pie('各类电影中"好片"所占的比例', "数据来着豆瓣", title_pos='center')
+style = Style()
+pie_style = style.add(
+    label_pos="center",
+    is_label_show=True,
+    label_text_color=None
+)
+
+pie.add("", ["剧情", ""], [25, 75], center=[10, 30],
+        radius=[18, 24], **pie_style)
+pie.add("", ["奇幻", ""], [24, 76], center=[30, 30],
+        radius=[18, 24], **pie_style)
+pie.add("", ["爱情", ""], [14, 86], center=[50, 30],
+        radius=[18, 24], **pie_style)
+pie.add("", ["惊悚", ""], [11, 89], center=[70, 30],
+        radius=[18, 24], **pie_style)
+pie.add("", ["冒险", ""], [27, 73], center=[90, 30],
+        radius=[18, 24], **pie_style)
+pie.add("", ["动作", ""], [15, 85], center=[10, 70],
+        radius=[18, 24], **pie_style)
+pie.add("", ["喜剧", ""], [54, 46], center=[30, 70],
+        radius=[18, 24], **pie_style)
+pie.add("", ["科幻", ""], [26, 74], center=[50, 70],
+        radius=[18, 24], **pie_style)
+pie.add("", ["悬疑", ""], [25, 75], center=[70, 70],
+        radius=[18, 24], **pie_style)
+pie.add("", ["犯罪", ""], [28, 72], center=[90, 70],
+        radius=[18, 24], legend_top="center", **pie_style)
+pie.render()
+```
+![pie-4](https://github.com/chenjiandongx/pyecharts/blob/master/images/pie-4.gif)
+
 
 ## Polar（极坐标系）
 > 可以用于散点图和折线图。
 
 Polar.add() 方法签名
 ```python
-add(name, data, angle_data=None, radius_data=None, type='line', symbol_size=4, start_angle=90,
-    rotate_step=0, boundary_gap=True, clockwise=True, **kwargs)
+add(name, data,
+    angle_data=None,
+    radius_data=None,
+    type='line',
+    symbol_size=4,
+    start_angle=90,
+    rotate_step=0,
+    boundary_gap=True,
+    clockwise=True, **kwargs)
 ```
 * name -> str  
     图例名称
@@ -1914,18 +2072,22 @@ polar.render()
 
 Radar.add() 方法签名
 ```python
-add(name, value, item_color=None, **kwargs)
+add(name, value,
+    item_color=None, **kwargs)
 ```
 * name -> list  
     图例名称
-* value -> [list], 包含列表的列表 
+* value -> [list], 包含列表的列表  
     数据项。数据中，每一行是一个『数据项』，每一列属于一个『维度』
 * item_color -> str  
     指定单图例颜色
 
 Radar.config() 方法签名
 ```python
-config(schema=None, c_schema=None, shape="", rader_text_color="#000", **kwargs):
+config(schema=None,
+    c_schema=None,
+    shape="",
+    rader_text_color="#000", **kwargs):
 ```
 * schema -> list  
     默认雷达图的指示器，用来指定雷达图中的多个维度，会对数据处理成 {name:xx, value:xx} 的字典
@@ -1938,6 +2100,8 @@ config(schema=None, c_schema=None, shape="", rader_text_color="#000", **kwargs):
     雷达图绘制类型，有'polygon'（多边形）和'circle'可选
 * rader_text_color -> str  
     雷达图数据项字体颜色，默认为'#000'
+* radar_text_size -> int  
+    雷达图m数据项字体大小，默认为 12
 
 ```python
 from pyecharts import Radar
@@ -2033,11 +2197,13 @@ radar.render()
 
 
 ## Sankey（桑基图）
-> 是一种特殊的流图, 它主要用来表示原材料、能量等如何从初始形式经过中间过程的加工、转化到达最终形式。
+> 桑基图是一种特殊的流图, 它主要用来表示原材料、能量等如何从初始形式经过中间过程的加工、转化到达最终形式。
 
 Sankey.add() 方法签名
 ```python
-add(name, nodes, links, sankey_node_width=20, sankey_node_gap=8, **kwargs)
+add(name, nodes, links,
+    sankey_node_width=20,
+    sankey_node_gap=8, **kwargs)
 ```
 * name -> str  
      图例名称
@@ -2049,7 +2215,7 @@ add(name, nodes, links, sankey_node_width=20, sankey_node_gap=8, **kwargs)
     桑基图结点关系
     * source：边的源节点名称（必须有！）
     * target：边的目标节点名称（必须有！）
-    * vaule：边的数值，决定边的宽度。
+    * value：边的数值，决定边的宽度。
  * sankey_node_width -> int  
     图中每个矩形节点的宽度。默认为 20
  * sankey_node_gap -> int  
@@ -2107,7 +2273,9 @@ sankey.render()
 
 Scatter.add() 方法签名
 ```python
-add(name, x_axis, y_axis, extra_data=None, symbol_size=10, **kwargs)
+add(name, x_axis, y_axis,
+    extra_data=None,
+    symbol_size=10, **kwargs)
 ```
 * name -> str  
     图例名称
@@ -2228,7 +2396,8 @@ scatter.render()
 ## Scatter3D（3D 散点图）
 Scatter3D.add() 方法签名
 ```python
-add(name, data, grid3d_opacity=1, **kwargs)
+add(name, data,
+    grid3d_opacity=1, **kwargs)
 ```
 * name -> str  
     图例名称
@@ -2258,6 +2427,7 @@ scatter3D.render()
 
 
 ## ThemeRiver（主题河流图）
+> 主题河流图是一种特殊的流图, 它主要用来表示事件或主题等在一段时间内的变化。
 ThemeRiver.add() 方法签名
 ```python
 add(name, data)
@@ -2311,21 +2481,26 @@ tr = ThemeRiver("主题河流图示例图")
 tr.add(['DQ', 'TY', 'SS', 'QG', 'SY', 'DD'], data, is_label_show=True)
 tr.render()
 ```
-![themeriver-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/themeriver.gif)
+![themeriver-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/themeriver-0.gif)
 
 **Note：** 可以看到，每个数据项中的第三个数值就是该项的种类，而种类可以在 `add()` 第一个参数指定。
 
 
 ## TreeMap（树图）
+> 树图是一种常见的表达『层级数据』『树状数据』的可视化形式。它主要用面积的方式，便于突出展现出『树』的各层级中重要的节点。
 TreeMap.add() 方法签名
 ```python
-add(name, attr, value, shape="circle", word_gap=20, word_size_range=None, rotate_step=45)
+add(name, attr, value,
+    shape="circle",
+    word_gap=20,
+    word_size_range=None,
+    rotate_step=45)
 ```
 * name -> str  
     图例名称
 * data -> list  
-    ```
     树图的数据项是 **一棵树**，每个节点包括`value`, `name`（可选）, `children`（也是树，可选）如下所示
+    ```
     [
         {
             value: 1212,    # 数值
@@ -2428,7 +2603,11 @@ treemap.render()
 ## WordCloud（词云图）
 WordCloud.add() 方法签名
 ```python
-add(name, attr, value, shape="circle", word_gap=20, word_size_range=None, rotate_step=45)
+add(name, attr, value,
+    shape="circle",
+    word_gap=20,
+    word_size_range=None,
+    rotate_step=45)
 ```
 * name -> str  
     图例名称
@@ -2491,10 +2670,16 @@ Grid 类中其他方法：
 
 Grid.add() 方法签名 
 ```python
-add(chart, grid_width=None, grid_height=None, grid_top=None, grid_bottom=None, grid_left=None, grid_right=None)
+add(chart,
+    grid_width=None,
+    grid_height=None,
+    grid_top=None,
+    grid_bottom=None,
+    grid_left=None,
+    grid_right=None)
 ```
 * chart -> chart instance  
-    图表示例
+    图表实例
 * grid_width -> str/int  
     grid 组件的宽度。默认自适应。
 * grid_height -> str/int  
@@ -2795,7 +2980,11 @@ Overlap 类的使用：
 
 Overlap.add() 方法签名  
 ```python
-add(chart, xaxis_index=0, yaxis_index=0, is_add_xaxis=False, is_add_yaxis=False)
+add(chart,
+    xaxis_index=0,
+    yaxis_index=0,
+    is_add_xaxis=False,
+    is_add_yaxis=False)
 ```
 * chart -> chart instance  
     图表示例
@@ -3097,7 +3286,7 @@ page.render()
 
 Timeline 类的使用：
 1. 引入 `Timeline` 类，`from pyecharts import Timeline`
-2. 实例化 `Timeline` 类，可指定 `page_title`, `width`, `height`, `jhost`  参数
+2. 实例化 `Timeline` 类
 3. 使用 `add()` 向 `timeline` 中添加图。如 `add(bar, '2013')` 接受两个参数，第一个为图实例，第二个为时间线的 ”时间点“。
 4. 使用 `render()` 渲染生成 .html 文件
 
@@ -3105,6 +3294,12 @@ Timeline 类的使用：
 
 * page_title -> str  
     生成 html 文件的 `<title>` 标签的值，默认为'Echarts'
+* width -> int  
+    画布宽度，默认为 800
+* height -> int  
+    画布高度，默认为 400
+* jhost -> str  
+    自定义每个实例的 JavaScript host
 * is_auto_play -> bool  
     是否自动播放，默认为 Flase
 * is_loop_play -> bool  
@@ -3268,30 +3463,33 @@ timeline.render()
 ![timeline-2](https://github.com/chenjiandongx/pyecharts/blob/master/images/timeline-2.gif)
 
 
-# 使用技巧
+# 统一风格
+> 为了简化配置项编写，提供了一个 Style 类，可用于在同一个图或者多个图内保持统一的风格
 
-## 统一风格
-如果想在同一个图或者多个图内保持统一的风格，可以使用以下方式传参
-#### 初始化图时
+### 初始化图时
 ```python
-chart_init = {
-    "title_color": "#fff",
-    "title_pos": "center",
-    "width": 1100,
-    "height": 600,
-    "background_color": '#404a59'
+from pyecharts import Style
+
+style = Style(
+    title_color="#fff",
+    title_pos="center",
+    width=1100,
+    height=600,
+    background_color='#404a59'
 }
-geo = Geo("全国主要城市空气质量", "data from pm2.5", **chart_init)
+# style,init_style 会返回类初始化的风格配置字典
+geo = Geo("全国主要城市空气质量", "data from pm2.5", **style.init_style)
 ```
 
-#### 增加图例时
+### 增加图例时
 ```python
 pie = Pie('各类电影中"好片"所占的比例', "数据来着豆瓣", title_pos='center')
-pie_style = {
-    "radius": [18, 24],
-    "label_pos": "center",
-    "is_label_show": True,
-    "label_text_color": None
+# 使用 Style.add() 可配置增加图例的风格配置字典
+pie_style = style.add(
+    radius=[18, 24],
+    label_pos="center",
+    is_label_show=True,
+    label_text_color=None
 }
 pie.add("", ["剧情", ""], [25, 75], center=[10, 30], **pie_style)
 pie.add("", ["奇幻", ""], [24, 76], center=[30, 30], **pie_style)
@@ -3307,15 +3505,8 @@ pie.add("", ["惊悚", ""], [11, 89], center=[70, 30], **pie_style)
 * [pyecharts + Django](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/doc_django.md)
 
 
-# 更多示例
-
-* 更多示例请参考 [example.md](https://github.com/chenjiandongx/pyecharts/blob/master/example.md)
-* 欢迎大家补充示例
-
-
 # 关于项目
 
-* 欢迎大家使用 pyecharts
-* 有什么建议或者想法可以开个 issue 讨论，有什么小错误的也可以直接提交 PR。
+* 欢迎提交 ISSUE 和 PR
 * 如有想单独讨论的话可以使用邮箱 -> chenjiandongx@qq.com
 * 关注 [changelog.md](https://github.com/chenjiandongx/pyecharts/blob/master/changelog.md)
