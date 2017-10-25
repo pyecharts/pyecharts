@@ -73,6 +73,8 @@ Django
 * 中文文档
     * [pyecharts 文档-预览篇](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/doc_prepare.md)
     * [pyecharts 文档-图形篇](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/documentation.md)
+    * [pyecharts 文档-API 篇](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/doc_api.md)
+
 * [English](https://github.com/chenjiandongx/pyecharts/blob/master/docs/en-us/documentation.md)
 
 
