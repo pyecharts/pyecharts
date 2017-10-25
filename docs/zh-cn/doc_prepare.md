@@ -1,6 +1,7 @@
 # pyecharts 文档-预览篇
 
-### [pyecharts 文档-图形篇](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/documentation.md)
+#### [pyecharts 文档-图形篇](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/documentation.md)
+#### [pyecharts 文档-API 篇](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/doc_api.md)
 
 
 pyecharts 是一个用于生成 Echarts 图表的类库。实际上就是 Echarts 与 Python 的对接。
