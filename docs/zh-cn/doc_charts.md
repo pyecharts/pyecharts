@@ -3,6 +3,7 @@
 #### [pyecharts 文档-预览篇](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/doc_prepare.md)
 #### [pyecharts 文档-API 篇](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/doc_api.md)
 #### [pyecharts 文档-版本篇](https://github.com/chenjiandongx/pyecharts/blob/master/changelog.md)
+#### [pyecharts 文档-画廊篇](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/doc_gallery.md)
 #### [pyecharts 文档-FAQ 篇](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/doc_faq.md)
 
 * [图形初始化](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/documentation.md#图形初始化)
@@ -50,7 +51,6 @@
     * Timeline 类：提供时间线轮播多张图
 * [统一风格](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/documentation.md#统一风格)
 * [集成Flask&Django](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/documentation.md#集成Flask&Django)
-* [更多示例](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/documentation.md#更多示例)
 * [关于项目](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/documentation.md#关于项目)
 
 
@@ -3503,12 +3503,6 @@ pie.add("", ["惊悚", ""], [11, 89], center=[70, 30], **pie_style)
 
 * [pyecharts + Flask](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/doc_flask.md)
 * [pyecharts + Django](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/doc_django.md)
-
-
-# 更多示例
-
-* 更多示例请参考 [example.md](https://github.com/chenjiandongx/pyecharts/blob/master/example.md)
-* 欢迎大家补充示例
 
 
 # 关于项目
