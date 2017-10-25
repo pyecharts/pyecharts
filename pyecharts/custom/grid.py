@@ -8,12 +8,17 @@ from pyecharts.base import Base
 
 
 class Grid(Base):
-
+    """
+    用户可以自定义结合 Line/Bar/Kline/Scatter/EffectScatter/Pie/HeatMap
+    /Boxplot 图表，将不同类型图表画在多张图上。第一个图需为 有 x/y 轴的图，
+    即不能为 Pie，其他位置顺序任意。
+    """
     def __init__(self, page_title=PAGE_TITLE,
                  width=800,
-                 height=400):
+                 height=400,
+                 jshost=None):
         super(Grid, self).__init__(
-            width=width, height=height
+            width=width, height=height, jshost=jshost
         )
         self._page_title = page_title
 
@@ -27,20 +32,23 @@ class Grid(Base):
         """
 
         :param chart:
-            chart instance
+            图形实例
         :param grid_width:
-            Width of grid component. Adaptive by default.
+            grid 组件的宽度。默认自适应。
         :param grid_height:
-            Height of grid component. Adaptive by default.
+            grid 组件的高度。默认自适应。
         :param grid_top:
-            Distance between grid component and the top of the container.
+            grid 组件离容器顶部的距离。默认为 None, 有'top', 'center',
+            'middle'可选，也可以为百分数或者整数
         :param grid_bottom:
-            Distance between grid component and the bottom of the container.
+            grid 组件离容器底部的距离。默认为 None, 有'top', 'center',
+            'middle'可选，也可以为百分数或者整数
         :param grid_left:
-            Distance between grid component and the left side of the container.
+            grid 组件离容器左侧的距离。默认为 None, 有'left', 'center',
+            'right'可选，也可以为百分数或者整数
         :param grid_right:
-            Distance between grid component and the right of the container.
-        :return:
+            grid 组件离容器右侧的距离。默认为 None, 有'left', 'center',
+            'right'可选，也可以为百分数或者整数
         """
         if not self._option:
             self._option = copy.deepcopy(chart.options)
