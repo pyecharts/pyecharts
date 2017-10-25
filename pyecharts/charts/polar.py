@@ -71,14 +71,12 @@ class Polar(Chart):
         is_stack = "stack" if is_stack else ""
         self._option.get('legend')[0].get('data').append(name)
 
-        # By defalut, axis scale range is [None, None]
         _amin, _amax = None, None
         if axis_range:
             if len(axis_range) == 2:
                 _amin, _amax = axis_range
-        _area_style = {
-            "normal": chart['area_style']
-        }
+
+        _area_style = {"normal": chart['area_style']}
         if kwargs.get('area_color', None) is None:
             _area_style = None
 
