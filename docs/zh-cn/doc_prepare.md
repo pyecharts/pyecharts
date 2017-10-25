@@ -26,7 +26,6 @@ bar.render()
 ```
 ![guide-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/guide-0.png)
 
-**Note：** 可以按右边的下载按钮将图片下载到本地，如果想要提供更多实用工具按钮，请在 `add()` 中设置 `is_more_utils` 为 True  
 
 * ```add()```  
     主要方法，用于添加图表的数据和设置各种配置项  
@@ -35,6 +34,17 @@ bar.render()
 * ```render()```  
     默认将会在根目录下生成一个 render.html 的文件，支持 path 参数，设置文件保存位置，如 render(r"e:\my_first_chart.html")，文件用浏览器打开。  
 
+**Note：** 可以按右边的下载按钮将图片下载到本地，如果想要提供更多实用工具按钮，请在 `add()` 中设置 `is_more_utils` 为 True  
+
+```python
+from pyecharts import Bar
+
+bar = Bar("我的第一个图表", "这里是副标题")
+bar.add("服装", ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"], [5, 20, 36, 10, 75, 90],
+        is_more_utils=True)
+bar.render()
+```
+![guide-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/guide-1.png)
 
 ### 使用 pyecharts-snapshot 插件
 如果想直接将图片保存为 png, pdf, gif 格式的文件，可以使用 [pyecharts-snapshot](https://github.com/chfw/pyecharts-snapshot)。使用该插件请确保你的系统上已经安装了 node.js 环境，如果没有，请到这里下载 [https://nodejs.org/en/download/](https://nodejs.org/en/download/)
