@@ -8,6 +8,7 @@
 
     #### Fixed
     * 修复 Geo 系列名无法正常显示的问题
+    * [issue#229](https://github.com/chenjiandongx/pyecharts/issues/229) 修复水球图不能自定义图形的问题
 
 * ### version 0.2.6 - 2017.10.14（Current）
 
