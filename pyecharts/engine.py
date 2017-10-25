@@ -2,8 +2,9 @@
 # coding=utf-8
 from __future__ import unicode_literals
 
-from jinja2 import Environment, FileSystemLoader, contextfunction
+from jinja2 import Environment, contextfunction
 from pyecharts.utils import get_resource_dir, json_dumps
+from pyecharts import constants
 
 
 @contextfunction
@@ -21,7 +22,7 @@ def echarts_js_dependencies(context, *args):
         else:
             dependencies.append(a)
 
-    jshost = args[0]._jshost
+    jshost = constants.CONFIGURATION['HOST']
     js_links = ['{}/{}.js'.format(jshost, x) for x in dependencies]
     return '\n'.join(['<script type="text/javascript" src="{}"></script>'.format(j) for j in js_links])
 
@@ -80,6 +81,12 @@ def echarts_container(context, chart):
 
 @contextfunction
 def echarts_js_content(context, chart):
+    """
+    Render script html node for echarts initial code.
+    :param context:
+    :param chart:
+    :return:
+    """
     content_fmt = '''
     var myChart_{chart_id} = echarts.init(document.getElementById('{chart_id}'));
     var option_{chart_id} = {options};
@@ -87,13 +94,19 @@ def echarts_js_content(context, chart):
     '''
     js_content = content_fmt.format(
         chart_id=chart.chart_id,
-        options=json_dumps(chart.options)
+        options=json_dumps(chart.options, indent=4)
     )
     return '<script type="text/javascript">\n{}\n</script>'.format(js_content)
 
 
 @contextfunction
 def echarts_js_content_wrap(context, chart):
+    """
+    Render echarts initial code for a chart.
+    :param context:
+    :param chart:
+    :return:
+    """
     content_fmt = '''
     var myChart_{chart_id} = echarts.init(document.getElementById('{chart_id}'));
     var option_{chart_id} = {options};
@@ -101,12 +114,15 @@ def echarts_js_content_wrap(context, chart):
     '''
     js_content = content_fmt.format(
         chart_id=chart.chart_id,
-        options=json_dumps(chart.options)
+        options=json_dumps(chart.options, indent=4)
     )
     return js_content
 
 
 class EchartsEnvironment(Environment):
+    """Built-in jinja2 template engine for pyecharts
+
+    """
     def __init__(self, *args, **kwargs):
         super(EchartsEnvironment, self).__init__(
             keep_trailing_newline=True,
@@ -122,3 +138,8 @@ class EchartsEnvironment(Environment):
             'echarts_js_content': echarts_js_content,
             'echarts_js_content_wrap': echarts_js_content_wrap
         })
+
+
+def configure(jshost=None, **kwargs):
+    if jshost:
+        constants.CONFIGURATION['HOST'] = jshost
