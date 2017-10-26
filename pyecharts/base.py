@@ -13,6 +13,7 @@ class Base(object):
     """
     `Base`类是所有图形类的基类，提供部分初始化参数和基本的方法
     """
+
     def __init__(self,
                  width=800,
                  height=400,
@@ -78,7 +79,18 @@ class Base(object):
         """
         return template.produce_html_script_list(self._js_dependencies)
 
-    def render(self, path="render.html"):
+    def render(self, path='render.html', new_version=False, template_name='simple_chart.html', object_name='chart'):
+        if new_version:
+            tpl = template.JINJA2_ENV.get_template(template_name)
+            context = {
+                object_name: self
+            }
+            html = tpl.render(**context)
+            utils.write_utf8_html_file(path, html)
+        else:
+            self._render(path=path)
+
+    def _render(self, path="render.html"):
         """ 渲染配置项并生成 html 文件
 
         :param path:
@@ -172,6 +184,7 @@ class UnknownTypeEncoder(json.JSONEncoder):
     """
     `UnknownTypeEncoder`类用于处理数据的编码，使其能够被正常的序列化
     """
+
     def default(self, obj):
         if isinstance(obj, (datetime.datetime, datetime.date)):
             return obj.isoformat()
