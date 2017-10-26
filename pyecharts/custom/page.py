@@ -27,7 +27,18 @@ class Page(list):
         else:
             self.append(achart_or_charts)
 
-    def render(self, path="render.html"):
+    def render(self, path='render.html', new_version=False, template_name='simple_page.html', object_name='page'):
+        if new_version:
+            tpl = template.JINJA2_ENV.get_template(template_name)
+            context = {
+                object_name: self
+            }
+            html = tpl.render(**context)
+            utils.write_utf8_html_file(path, html)
+        else:
+            self._render(path=path)
+
+    def _render(self, path="render.html"):
         """
         Produce rendered charts in a html file
 
@@ -99,3 +110,14 @@ class Page(list):
     @property
     def js_dependencies(self):
         return self._merge_dependencies()
+
+    @classmethod
+    def from_charts(cls, *args):
+        """
+        A shortcut class method for building page object from charts.
+        :param args:
+        :return:
+        """
+        p = cls()
+        p.extend(args)
+        return p
