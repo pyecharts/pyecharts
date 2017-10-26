@@ -2,16 +2,16 @@
 # coding=utf-8
 from __future__ import unicode_literals
 
-from jinja2 import Environment, FileSystemLoader
+from jinja2 import FileSystemLoader
+from pyecharts.engine import EchartsEnvironment
 import pyecharts.constants as constants
 from pyecharts.utils import get_resource_dir
+from pyecharts.conf import DEFAULT_CONFIG
 
 # Single Singleton Instance for jinja2
-JINJA2_ENV = Environment(
-    loader=FileSystemLoader(get_resource_dir('templates')),
-    keep_trailing_newline=True,
-    trim_blocks=True,
-    lstrip_blocks=True)
+JINJA2_ENV = EchartsEnvironment(
+    loader=FileSystemLoader([DEFAULT_CONFIG.echarts_template_dir, get_resource_dir('templates')])
+)
 
 
 def produce_require_configuration(dependencies, jshost):

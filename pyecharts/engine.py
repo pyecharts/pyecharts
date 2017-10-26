@@ -2,7 +2,7 @@
 # coding=utf-8
 from __future__ import unicode_literals
 
-from jinja2 import Environment, contextfunction
+from jinja2 import Environment, FileSystemLoader, contextfunction
 from pyecharts.utils import get_resource_dir, json_dumps
 from pyecharts import constants
 
@@ -123,6 +123,7 @@ class EchartsEnvironment(Environment):
     """Built-in jinja2 template engine for pyecharts
 
     """
+
     def __init__(self, *args, **kwargs):
         super(EchartsEnvironment, self).__init__(
             keep_trailing_newline=True,
