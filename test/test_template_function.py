@@ -42,8 +42,8 @@ def test_echarts_js_container():
     html = tpl.render(bar=bar)
     assert '<div id="id_demo_chart" style="width:800px;height:400px;"></div>' == html
 
-    bar._width = 1024
-    bar._height = 768
+    bar.width = 1024
+    bar.height = 768
     html = tpl.render(bar=bar)
     assert '<div id="id_demo_chart" style="width:1024px;height:768px;"></div>' == html
 
