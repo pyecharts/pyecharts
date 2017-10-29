@@ -2,16 +2,16 @@
 # coding=utf-8
 from __future__ import unicode_literals
 
-from jinja2 import Environment, FileSystemLoader, contextfunction
+from jinja2 import Environment, FileSystemLoader, contextfunction,environmentfunction
 from pyecharts.utils import get_resource_dir, json_dumps
 from pyecharts import constants
 
 
-@contextfunction
-def echarts_js_dependencies(context, *args):
+@environmentfunction
+def echarts_js_dependencies(env, *args):
     """
     Render script html nodes in external link mode.
-    :param context:
+    :param env:
     :param args:
     :return:
     """
@@ -27,11 +27,11 @@ def echarts_js_dependencies(context, *args):
     return '\n'.join(['<script type="text/javascript" src="{}"></script>'.format(j) for j in js_links])
 
 
-@contextfunction
-def echarts_js_dependencies_embed(context, *args):
+@environmentfunction
+def echarts_js_dependencies_embed(env, *args):
     """
     Render script html nodes in embed mode,Only used for local files.
-    :param context:
+    :param env:
     :param args:
     :return:
     """
@@ -52,11 +52,11 @@ def echarts_js_dependencies_embed(context, *args):
     return '\n'.join(['<script type="text/javascript">\n{}\n</script>'.format(c) for c in js_file_contents])
 
 
-@contextfunction
-def echarts_container(context, chart):
+@environmentfunction
+def echarts_container(env, chart):
     """
     Render a div html element for a chart.
-    :param context:
+    :param env:
     :param chart: A pyecharts.base.Base object
     :return:
     """
@@ -79,11 +79,11 @@ def echarts_container(context, chart):
     )
 
 
-@contextfunction
-def echarts_js_content(context, chart):
+@environmentfunction
+def echarts_js_content(env, chart):
     """
     Render script html node for echarts initial code.
-    :param context:
+    :param env:
     :param chart:
     :return:
     """
@@ -99,11 +99,11 @@ def echarts_js_content(context, chart):
     return '<script type="text/javascript">\n{}\n</script>'.format(js_content)
 
 
-@contextfunction
-def echarts_js_content_wrap(context, chart):
+@environmentfunction
+def echarts_js_content_wrap(env, chart):
     """
     Render echarts initial code for a chart.
-    :param context:
+    :param env:
     :param chart:
     :return:
     """
@@ -132,6 +132,7 @@ class EchartsEnvironment(Environment):
             *args,
             **kwargs)
 
+        # Add PyEChartsConfig
         self.globals.update({
             'echarts_js_dependencies': echarts_js_dependencies,
             'echarts_js_dependencies_embed': echarts_js_dependencies_embed,
