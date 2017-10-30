@@ -1,8 +1,8 @@
 # coding=utf8
 
-from pyecharts.template import online
+from pyecharts.utils import get_resource_dir
 from pyecharts import Bar
-from pyecharts.engine import EchartsEnvironment
+from pyecharts.engine import EchartsEnvironment, configure
 
 ECHARTS_ENV = EchartsEnvironment()
 
@@ -20,7 +20,7 @@ def create_demo_bar(chart_id_demo=None):
 
 
 def test_echarts_js_dependencies():
-    online('http://localhost/echarts')
+    configure(jshost='http://localhost/echarts')
     tpl = ECHARTS_ENV.from_string('{{ echarts_js_dependencies(bar) }}')
     bar = create_demo_bar()
     html = tpl.render(bar=bar)
@@ -28,12 +28,17 @@ def test_echarts_js_dependencies():
 
 
 def test_echarts_js_dependencies_embed():
-    online('https://chfw.github.io/jupyter-echarts/echarts')
-    tpl = ECHARTS_ENV.from_string('{{ echarts_js_dependencies("echarts.min") }}')
+    configure(jshost=get_resource_dir('templates', 'js', 'echarts'))
+    tpl = ECHARTS_ENV.from_string('{{ echarts_js_dependencies_embed("echarts.min") }}')
     bar = create_demo_bar()
     html = tpl.render(bar=bar)
-    with open('_cf.html', 'wb') as f:
-        f.write(html.encode('utf8'))
+    assert len(html) > 0
+
+    # echarts_js_dependencies equals echarts_js_dependencies_embed when use local host.
+    tpl2 = ECHARTS_ENV.from_string('{{ echarts_js_dependencies("echarts.min") }}')
+    html2 = tpl2.render(bar=bar)
+    assert len(html2) > 0
+    assert html == html2
 
 
 def test_echarts_js_container():
@@ -47,18 +52,21 @@ def test_echarts_js_container():
     html = tpl.render(bar=bar)
     assert '<div id="id_demo_chart" style="width:1024px;height:768px;"></div>' == html
 
+    bar.width = '1024px'
+    bar.height = '768px'
+    html = tpl.render(bar=bar)
+    assert '<div id="id_demo_chart" style="width:1024px;height:768px;"></div>' == html
+
 
 def test_echarts_js_content():
     tpl = ECHARTS_ENV.from_string('{{ echarts_js_content(bar) }}')
     bar = create_demo_bar()
     html = tpl.render(bar=bar)
-    # with open('_tmp.html', 'w') as f:
-    #     f.write(html)
+    assert len(html) > 0
 
 
 def test_echarts_js_content_wrap():
     tpl = ECHARTS_ENV.from_string('{{ echarts_js_content_wrap(bar) }}')
     bar = create_demo_bar()
     html = tpl.render(bar=bar)
-    # with open('_tc.html', 'w') as f:
-    #     f.write(html)
+    assert len(html) > 0

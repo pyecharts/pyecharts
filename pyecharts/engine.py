@@ -3,7 +3,7 @@
 from __future__ import unicode_literals
 
 from jinja2 import Environment, environmentfunction
-from pyecharts.utils import get_resource_dir, json_dumps
+from pyecharts.utils import json_dumps
 from pyecharts import constants
 from pyecharts.conf import DEFAULT_CONFIG
 
@@ -16,11 +16,17 @@ class Helpers(object):
         :return:
         """
         dependencies = []
+
+        def _add(_x):
+            if _x not in dependencies:
+                dependencies.append(_x)
+
         for a in args:
             if hasattr(a, 'js_dependencies'):
-                dependencies.extend(a.js_dependencies)
+                for d in a.js_dependencies:
+                    _add(d)
             else:
-                dependencies.append(a)
+                _add(a)
         return dependencies
 
     @staticmethod
@@ -92,43 +98,52 @@ def echarts_container(env, chart):
 
 
 @environmentfunction
-def echarts_js_content(env, chart):
+def echarts_js_content(env, *charts):
     """
     Render script html node for echarts initial code.
     :param env:
     :param chart:
     :return:
     """
-    content_fmt = '''
-    var myChart_{chart_id} = echarts.init(document.getElementById('{chart_id}'));
-    var option_{chart_id} = {options};
-    myChart_{chart_id}.setOption(option_{chart_id});
-    '''
-    js_content = content_fmt.format(
-        chart_id=chart.chart_id,
-        options=json_dumps(chart.options, indent=4)
-    )
-    return '<script type="text/javascript">\n{}\n</script>'.format(js_content)
+
+    print(charts)
+    contents = []
+    for chart in charts:
+        content_fmt = '''
+        var myChart_{chart_id} = echarts.init(document.getElementById('{chart_id}'));
+        var option_{chart_id} = {options};
+        myChart_{chart_id}.setOption(option_{chart_id});
+        '''
+        js_content = content_fmt.format(
+            chart_id=chart.chart_id,
+            options=json_dumps(chart.options, indent=4)
+        )
+        contents.append(js_content)
+    contents = '\n'.join(contents)
+    return '<script type="text/javascript">\n{}\n</script>'.format(contents)
 
 
 @environmentfunction
-def echarts_js_content_wrap(env, chart):
+def echarts_js_content_wrap(env, *charts):
     """
     Render echarts initial code for a chart.
     :param env:
-    :param chart:
+    :param charts:
     :return:
     """
-    content_fmt = '''
-    var myChart_{chart_id} = echarts.init(document.getElementById('{chart_id}'));
-    var option_{chart_id} = {options};
-    myChart_{chart_id}.setOption(option_{chart_id});
-    '''
-    js_content = content_fmt.format(
-        chart_id=chart.chart_id,
-        options=json_dumps(chart.options, indent=4)
-    )
-    return js_content
+    contents = []
+    for chart in charts:
+        content_fmt = '''
+        var myChart_{chart_id} = echarts.init(document.getElementById('{chart_id}'));
+        var option_{chart_id} = {options};
+        myChart_{chart_id}.setOption(option_{chart_id});
+        '''
+        js_content = content_fmt.format(
+            chart_id=chart.chart_id,
+            options=json_dumps(chart.options, indent=4)
+        )
+        contents.append(js_content)
+    return '\n'.join(contents)
 
 
 class EchartsEnvironment(Environment):
