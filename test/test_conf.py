@@ -22,3 +22,6 @@ def test_config():
     assert pec.js_embed
     pec.force_js_embed = False
     assert pec.js_embed
+
+    pec1 = PyEchartsConfig(jshost='http://demo/')
+    assert pec1.jshost == 'http://demo'

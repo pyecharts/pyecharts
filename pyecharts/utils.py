@@ -50,14 +50,14 @@ def freeze_js(html_content):
     return html_content
 
 
-def get_resource_dir(folder):
+def get_resource_dir(*paths):
     """
 
-    :param folder:
+    :param path:
     :return:
     """
     current_path = os.path.dirname(__file__)
-    resource_path = os.path.join(current_path, folder)
+    resource_path = os.path.join(current_path, *paths)
     return resource_path
 
 
