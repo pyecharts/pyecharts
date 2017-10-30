@@ -6,17 +6,24 @@
 #### [pyecharts 文档-画廊篇](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/doc_gallery.md)
 #### [pyecharts 文档-FAQ 篇](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/doc_faq.md)
 
-* ### version 0.2.7（Dev）
+
+* ### version 0.2.8 (dev)
+    * TODO
+
+* ### version 0.2.7 - 2017.10.27（Current）
 
     #### Added
     * 新增 GeoLines（地理坐标系线图）
-    * 新增工具类 `Style`，用于简化代码编写和统一风格
+    * [issue#230](https://github.com/chenjiandongx/pyecharts/issues/230) 新增工具类 `Style`，用于简化代码编写和统一风格
 
     #### Fixed
     * 修复 Geo 系列名无法正常显示的问题
     * [issue#229](https://github.com/chenjiandongx/pyecharts/issues/229) 修复水球图不能自定义图形的问题
 
-* ### version 0.2.6 - 2017.10.14（Current）
+    #### Changed
+    * [issue#232](https://github.com/chenjiandongx/pyecharts/issues/232) Grid, Overlap, Timeline 类初始化参数的变动
+
+* ### version 0.2.6 - 2017.10.14
 
     #### Added
     * 为 [文档](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/documentation.md) 新增 [使用技巧](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/documentation.md#使用技巧) 介绍
