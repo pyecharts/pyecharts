@@ -8,6 +8,33 @@
 
 本文档描述了 pyecharts 库一些公开的 API，以供开发者之使用。
 
+## pyecharts配置项
+
+从v0.2.8开始，所有的配置项将统一于类 `pyecharts.conf.PyEChartsConfig` 类中。一般在使用之前需要使用模块函数 `configure` 进行设置。
+
+```python
+import pyecharts
+pyecharts.configure(P1=V1, P2=V2,...)
+```
+
+### 配置列表
+
+**echarts_template_dir**
+
+模板文件目录，默认值：'.'（当前目录）。用于自定义模板文件，即 `render` 的template_name 参数构成全部的路径。
+
+**jshost**
+
+js文件仓库路径。可以设置本地或者远程地址。所有的远程地址必须以 `http://` 或者 `https://` 开头。
+
+也可以使用 `pyecharts.online()` 函数设置此选项。
+
+为了保持兼容性， jshost 并不是必须使用 '/' 等分隔符作为结尾。
+
+**force_js_embed**
+
+是否强制采用内部嵌入方式渲染js文件标签， `echarts_js_dependencies`  模板函数受此影响，具体可参考该函数。
+
 ## 图表类
 
 图表类是 pyecharts 库中最为核心的内容，每一个类代表了[Echarts](http://echarts.baidu.com/) 中一个图表类型。下表显示了这些图表的继承体系。
@@ -17,7 +44,7 @@
 
 图表类和属性表如下：
 
-| 属性/图表        | Base | Chart/FOO_CHART | Grid | Overlap | Timeline | Page |
+| 属性/图表           | Base | Chart/FOO_CHART | Grid | Overlap | Timeline | Page |
 | --------------- | ---- | --------------- | ---- | ------- | -------- | ---- |
 | chart_id        | ✓    | ✓               | ✓    | ✓       | ✓        |      |
 | width           | ✓    | ✓               | ✓    | ✓       | ✓        |      |
@@ -175,7 +202,12 @@ EChartsEnvironment 引擎提供了一些模板函数，这些函数通常接收�
 
 `pyecharts.template.echarts_js_dependencies(*args)`
 
-渲染包含图表所需要的 js 文件的 script 一个或多个节点，采用外部链接方式引入。
+渲染包含图表所需要的 js 文件的 script 一个或多个节点，采用内部嵌入或者外部链接，最终采用何种模板依据 jshost 和 force_js_embed 配置项决定的，具体可参考下表：
+
+| jshost/force_js_embed        | True | False |
+| ---------------------------- | ---- | ----- |
+| 本地                           | 内嵌   | 内嵌    |
+| 远程（以 http:// 或者 https:// 开头） | 内嵌   | 外链    |
 
 例子
 
