@@ -2,11 +2,13 @@
 # coding=utf-8
 from __future__ import unicode_literals
 
+from pyecharts.utils import get_resource_dir
+
 
 class PyEchartsConfig(object):
     def __init__(self, echarts_template_dir='.', jshost=None, force_js_embed=False):
         self.echarts_template_dir = echarts_template_dir
-        jshost = jshost or ''
+        jshost = jshost or get_resource_dir('templates', 'js', 'echarts')
         if jshost[-1:] in ('/', '\\'):
             jshost = jshost[:-1]
         self._jshost = jshost.rstrip('/')
