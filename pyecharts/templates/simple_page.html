@@ -9,6 +9,6 @@
 {% for chart in page %}
     {{ echarts_container(chart) }}
 {% endfor %}
-{{ echarts_js_content(page) }}
+{{ echarts_js_content(*page) }}
 </body>
 </html>
