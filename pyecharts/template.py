@@ -67,3 +67,4 @@ def ensure_echarts_is_in_the_front(dependencies):
 
 def online(host=constants.DEFAULT_HOST):
     constants.CONFIGURATION['HOST'] = host
+    DEFAULT_CONFIG.jshost = host

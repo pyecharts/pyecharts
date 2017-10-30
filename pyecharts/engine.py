@@ -2,9 +2,35 @@
 # coding=utf-8
 from __future__ import unicode_literals
 
-from jinja2 import Environment, FileSystemLoader, contextfunction,environmentfunction
+from jinja2 import Environment, environmentfunction
 from pyecharts.utils import get_resource_dir, json_dumps
 from pyecharts import constants
+from pyecharts.conf import DEFAULT_CONFIG
+
+
+class Helpers(object):
+    @staticmethod
+    def merge_js_dependencies(*args):
+        """Merge js dependencies to a list
+        :param args:
+        :return:
+        """
+        dependencies = []
+        for a in args:
+            if hasattr(a, 'js_dependencies'):
+                dependencies.extend(a.js_dependencies)
+            else:
+                dependencies.append(a)
+        return dependencies
+
+    @staticmethod
+    def get_js_file_contents(*paths):
+        contents = []
+        for path in paths:
+            with open(path, 'rb') as f:
+                c = f.read()
+                contents.append(c.decode('utf8'))
+        return contents
 
 
 @environmentfunction
@@ -15,16 +41,13 @@ def echarts_js_dependencies(env, *args):
     :param args:
     :return:
     """
-    dependencies = []
-    for a in args:
-        if hasattr(a, 'js_dependencies'):
-            dependencies.extend(a.js_dependencies)
-        else:
-            dependencies.append(a)
-
-    jshost = constants.CONFIGURATION['HOST']
-    js_links = ['{}/{}.js'.format(jshost, x) for x in dependencies]
-    return '\n'.join(['<script type="text/javascript" src="{}"></script>'.format(j) for j in js_links])
+    dependencies = Helpers.merge_js_dependencies(*args)
+    js_links = DEFAULT_CONFIG.generate_js_link(dependencies)
+    if DEFAULT_CONFIG.js_embed:
+        contents = Helpers.get_js_file_contents(*js_links)
+        return '\n'.join(['<script type="text/javascript">\n{}\n</script>'.format(c) for c in contents])
+    else:
+        return '\n'.join(['<script type="text/javascript" src="{}"></script>'.format(j) for j in js_links])
 
 
 @environmentfunction
@@ -35,21 +58,10 @@ def echarts_js_dependencies_embed(env, *args):
     :param args:
     :return:
     """
-    dependencies = []
-    for a in args:
-        if hasattr(a, 'js_dependencies'):
-            dependencies.extend(a.js_dependencies)
-        else:
-            dependencies.append(a)
-
-    local_host = get_resource_dir('templates\\js\\echarts')  # Now only local host
-    js_links = ['{}/{}.js'.format(local_host, x) for x in dependencies]
-    js_file_contents = []
-    for path in js_links:
-        with open(path, 'rb') as f:
-            c = f.read()
-            js_file_contents.append(c.decode('utf8'))
-    return '\n'.join(['<script type="text/javascript">\n{}\n</script>'.format(c) for c in js_file_contents])
+    dependencies = Helpers.merge_js_dependencies(*args)
+    js_links = DEFAULT_CONFIG.generate_js_link(dependencies)
+    contents = Helpers.get_js_file_contents(*js_links)
+    return '\n'.join(['<script type="text/javascript">\n{}\n</script>'.format(c) for c in contents])
 
 
 @environmentfunction
@@ -145,3 +157,4 @@ class EchartsEnvironment(Environment):
 def configure(jshost=None, **kwargs):
     if jshost:
         constants.CONFIGURATION['HOST'] = jshost
+        DEFAULT_CONFIG.jshost = jshost

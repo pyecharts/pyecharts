@@ -29,7 +29,7 @@ def test_echarts_js_dependencies():
 
 def test_echarts_js_dependencies_embed():
     online('https://chfw.github.io/jupyter-echarts/echarts')
-    tpl = ECHARTS_ENV.from_string('{{ echarts_js_dependencies_embed("echarts.min") }}')
+    tpl = ECHARTS_ENV.from_string('{{ echarts_js_dependencies("echarts.min") }}')
     bar = create_demo_bar()
     html = tpl.render(bar=bar)
     with open('_cf.html', 'wb') as f:
