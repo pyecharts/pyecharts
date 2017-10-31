@@ -129,12 +129,17 @@ class Polar(Chart):
                 "coordinateSystem": 'polar',
                 "data": data,
             })
-            self._option.update(radiusAxis={})
+            self._option.update(radiusAxis={
+                "show": is_radiusaxis_show,
+            })
             self._option.update(
                 angleAxis={
+                    "show": is_angleaxis_show,
                     "type": polar_type,
                     "data": radius_data,
-                    "z": 50
+                    "z": 50,
+                    "startAngle": start_angle,
+                    "splitLine": chart['split_line']
                 })
 
         if type not in ("barAngle", "barRadius"):
