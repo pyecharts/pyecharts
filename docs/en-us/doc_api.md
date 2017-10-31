@@ -1,6 +1,33 @@
-# pyecharts API
+pyecharts API
 
 This document describes the public API for *pyecharts* library and it will be read by developers.
+
+## pyecharts Config Items
+
+The class `pyecharts.conf.PyEChartsConfig`  contains all config items when using *pyecharts* library.Before building chart, you can use module function  `configure` to set all config items.
+
+```python
+import pyecharts
+pyecharts.configure(P1=V1, P2=V2,...)
+```
+
+### Config Item List
+
+**echarts_template_dir**
+
+The diretory of template files. Default value: '.'(current diretory).
+
+**jshost**
+
+The repository of js dependency files.You can set it with a local host url or remote host url(starts with `http://` or `https://` ).
+
+You can also use `pyecharts.online()`  to set this item.
+
+WIth the compatibility, this string value do not need `/` as its ending character.
+
+**force_js_embed**
+
+Whether to force to insert javascript file with internal embed mode.  This item will affect the function`echarts_js_dependencies`  . 
 
 ## Charts Classes
 
@@ -117,7 +144,7 @@ print(y) # ['34', '45', '12']
 
 **json_dumps**
 
-`pyecharts.base.json_dumps(data, indent=0)`
+`pyecharts.utils.json_dumps(data, indent=0)`
 
 Convert *data* to json string, and add encoding for some specified data type:
 
@@ -133,3 +160,141 @@ Convert *data* to json string, and add encoding for some specified data type:
 Data type `jinja2.Environment`。pyecharts provides a build-in environment object for rendering using Jinja2 engine。
 
 - This environment  use *pyecharts/templates* as its base directory to store HTML and  javascript files.
+
+## Template Engine
+
+### Overview
+
+*pyecharts* use  [Jinja2](http://jinja.pocoo.org/)  as its template engine, with some extra template functions.
+
+> *Tempate function* and *template tag* is the same feature in the area of template engine.In Django it is called *template tag* and it is called *template function* in jinja2.
+
+### Engine Class
+
+**EChartsEnvironment**
+
+`pyecharts.engine.EChartsEnvironment`
+
+EChartsEnvironment class inherits  `Jinja2.Environment` .
+
+### 模板函数
+
+EChartsEnvironment  contains some template functions, which receives a or some  `Chart`  /  `Page`  objects.See the following table.
+
+| 标签/调用形式                       | F(chart) | F(page) | F(chart1,chart2,...)/F(*page) |
+| ----------------------------- | -------- | ------- | ----------------------------- |
+| echarts_js_dependencies       | ✓        | ✓       | ✓                             |
+| echarts_js_dependencies_embed | ✓        | ✓       | ✓                             |
+| echarts_container             | ✓        |         |                               |
+| echarts_js_content            | ✓        | ✓       | ✓                             |
+| echarts_js_content_wrap       | ✓        | ✓       | ✓                             |
+
+
+
+**echarts_js_dependencies**
+
+`pyecharts.template.echarts_js_dependencies(*args)`
+
+Render script html nodes with internal embed mode or enternal link.The mode will follow this table.
+
+| jshost/force_js_embed | True           | False          |
+| --------------------- | -------------- | -------------- |
+| local host            | internal embed | internal embed |
+| remote host           | internal embed | enternal link  |
+
+Example
+
+```
+# Jinja2 Context function
+{{ echarts_js_dependencies('echarts') }}
+# Html Output
+<script type="text/javascript" src="js/echarts.js"></script>
+
+# Python
+bar = Bar('Demo Bar')
+# Jinja2 Context function
+{{ echarts_js_dependencies(bar) }}
+# Html Output
+<script type="text/javascript" src="js/echarts.js"></script>
+```
+
+
+
+**echarts_js_dependencies_embed**
+
+`pyecharts.template.echarts.js_dependencies_embed(*args)`
+
+Render script nodes in internal embed mode.Only support local host.
+
+**echarts_container**
+
+`pyecharts.template.echarts_container(chart)`
+
+Render the html node of container,output  `<div></div>` element.
+
+Example
+
+```
+# Python Code
+bar = Bar('Demo Bar')
+# Jinjia2 Context Function
+{{ echarts_container(bar) }}
+# Html Output
+<div id="d09aa82b55384f84a33055f9878c3679" style="width:800px;height:400px;"></div>
+```
+
+
+
+**echarts_js_content**
+
+`pyecharts.template.echarts_container(*chart)`
+
+Render the js initial code fragment without the  `<script></script>` .
+
+**echarts_js_content_wrap**
+
+`pyecharts.template.echarts_js_content_wrap(*args)`
+
+Render the js initial code fragment with the  `<script></script>` .
+
+### Example
+
+This is a full example.
+
+The pythonfile:demo.py
+
+```python
+from jinja2 import FileSystemLoader
+from pyecharts import Bar
+from pyecharts.engine import EchartsEnvironment
+from pyecharts.utils import write_utf8_html_file
+
+attr = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
+v1 = [5, 20, 36, 10, 75, 90]
+v2 = [10, 25, 8, 60, 20, 80]
+bar = Bar("柱状图数据堆叠示例", jshost='	https://cdn.bootcss.com/echarts/3.6.2')
+bar.add("商家A", attr, v1, is_stack=True)
+bar.add("商家B", attr, v2, is_stack=True)
+env = EchartsEnvironment(loader=FileSystemLoader('.'))
+tpl = env.get_template('demo.html')
+html = tpl.render(bar=bar)
+write_utf8_html_file('demo_gen.html', html)
+```
+
+The template file:demo.html
+
+```html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>自定义模板</title>
+    {{ echarts_js_dependencies(bar) }}
+</head>
+<body>
+{{ echarts_container(bar) }}
+{{ echarts_js_content(bar) }}
+</body>
+</html>
+```
+
