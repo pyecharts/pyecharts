@@ -11,7 +11,6 @@ from pyecharts import (
 from pyecharts import Page
 from nose.tools import eq_
 
-
 TEST_PAGE_TITLE = "my awesome chart"
 
 
@@ -32,7 +31,7 @@ def create_three():
         [random.randint(0, 100),
          random.randint(0, 100),
          random.randint(0, 100)] for _ in range(80)
-    ]
+        ]
     scatter3d = Scatter3D("3D 散点图示例", width=1200, height=600)
     scatter3d.add("", data, is_visualmap=True, visual_range_color=RANGE_COLOR)
     page.add(scatter3d)
@@ -103,14 +102,14 @@ def test_more():
              mark_point=["max", "min"], mark_line=["average"])
     line.add("最低气温", WEEK, [1, -2, 2, 5, 3, 2, 0],
              mark_point=["max", "min"], mark_line=["average"])
-    page.add(line)
 
     # pie
     v1 = [11, 12, 13, 10, 10, 10]
     pie = Pie("饼图-圆环图示例", title_pos='center')
     pie.add("", CLOTHES, v1, radius=[40, 75], label_text_color=None,
             is_label_show=True, legend_orient='vertical', legend_pos='left')
-    page.add(pie)
+    
+    page.add([line, pie])
 
     # kline
     v1 = [[2320.26, 2320.26, 2287.3, 2362.94],
@@ -169,7 +168,7 @@ def test_more():
         [random.randint(0, 100),
          random.randint(0, 100),
          random.randint(0, 100)] for _ in range(80)
-    ]
+        ]
     scatter3D = Scatter3D("3D 散点图示例", width=1200, height=600)
     scatter3D.add("", data, is_visualmap=True, visual_range_color=RANGE_COLOR)
     page.add(scatter3D)
