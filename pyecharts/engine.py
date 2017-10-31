@@ -38,6 +38,13 @@ class Helpers(object):
                 contents.append(c.decode('utf8'))
         return contents
 
+    @staticmethod
+    def get_local_js_names(dependencies):
+        return [
+            '{}/{}.js'.format(constants.LOCAL_TEMPLATE_DIR, constants.DEFAULT_JS_LIBRARIES.get(x, x)) for x in
+            dependencies
+            ]
+
 
 @environmentfunction
 def echarts_js_dependencies(env, *args):
@@ -48,11 +55,13 @@ def echarts_js_dependencies(env, *args):
     :return:
     """
     dependencies = Helpers.merge_js_dependencies(*args)
-    js_links = DEFAULT_CONFIG.generate_js_link(dependencies)
+
     if DEFAULT_CONFIG.js_embed:
+        js_links = Helpers.get_local_js_names(dependencies)
         contents = Helpers.get_js_file_contents(*js_links)
         return '\n'.join(['<script type="text/javascript">\n{}\n</script>'.format(c) for c in contents])
     else:
+        js_links = DEFAULT_CONFIG.generate_js_link(dependencies)
         return '\n'.join(['<script type="text/javascript" src="{}"></script>'.format(j) for j in js_links])
 
 
@@ -65,7 +74,7 @@ def echarts_js_dependencies_embed(env, *args):
     :return:
     """
     dependencies = Helpers.merge_js_dependencies(*args)
-    js_links = DEFAULT_CONFIG.generate_js_link(dependencies)
+    js_links = Helpers.get_local_js_names(dependencies)
     contents = Helpers.get_js_file_contents(*js_links)
     return '\n'.join(['<script type="text/javascript">\n{}\n</script>'.format(c) for c in contents])
 
