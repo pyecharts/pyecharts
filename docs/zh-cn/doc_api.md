@@ -95,9 +95,14 @@ js文件仓库路径。可以设置本地或者远程地址。所有的远程地
 
 获取 js 依赖文件列表。和 属性 *js_dependencies* 不同， 这里的元素是包含了文件完整路径。
 
-**render(path='render.html')**
+**render(path='render.html',template_name='simple_chart.html', object_name='chart', extra_context=None)**
 
-渲染至指定的 HTML 页面，不同图表类型使用默认的模板文件。
+渲染至指定的 HTML 页面，不同图表类型使用默认的模板文件。各参数意义如下：
+
+- path ：最终生成文件名称
+- template_name: 模板文件名称，其目录可通过 `pyecharts.configure()` 全局函数进行配置
+- object_name: 模板文件中，该图表类所使用变量的名称
+- extra_context 额外数据字典。
 
 **render_embed()**
 
@@ -128,8 +133,6 @@ for chart in page:
     chart.show_config()
 ```
 
-
-
 ## 数据处理工具
 
 以下几个方法为数据处理的类方法，
@@ -151,7 +154,7 @@ print(y) # ['34', '45', '12']
 
 **json_dumps**
 
-`pyecharts.base.json_dumps(data, indent=0)`
+`pyecharts.utils.json_dumps(data, indent=0)`
 
 将 data 转换为 JSON 字符串，和默认的 `json.dumps` 方法增加了：
 
@@ -182,7 +185,7 @@ pyecharts库使用 [Jinja2](http://jinja.pocoo.org/) 作为其默认模板渲染
 
 `pyecharts.engine.EChartsEnvironment`
 
-EChartsEnvironment 类继承自 `Jinja2.Environment` 表示了
+EChartsEnvironment 类继承自 `Jinja2.Environment` 。
 
 ### 模板函数
 
@@ -231,13 +234,13 @@ bar = Bar('Demo Bar')
 
 `pyecharts.template.echarts.js_dependencies_embed(*args)`
 
-渲染js的 script 一个或多个节点，采用内嵌方式引入。仅支持本地jshost。
+渲染 js 的 script  一个或多个节点，采用内嵌方式引入。仅支持本地 jshost 。
 
 **echarts_container**
 
 `pyecharts.template.echarts_container(chart)`
 
-渲染图表容器，为一个 `<div></div>` 元素。
+渲染图表容器，为一个  `<div></div>`  元素。
 
 例子
 
@@ -256,13 +259,13 @@ bar = Bar('Demo Bar')
 
 `pyecharts.template.echarts_container(*chart)`
 
-渲染js初始化代码片段，不包含`<script></script>`
+渲染js初始化代码片段，不包含 `<script></script>` 。
 
 **echarts_js_content_wrap**
 
 `pyecharts.template.echarts_js_content_wrap(*args)`
 
-渲染js初始化代码片段，包含首尾的`<script></script>`。
+渲染js初始化代码片段，包含首尾的 `<script></script>` 。
 
 ### 完整的例子
 
@@ -288,7 +291,7 @@ html = tpl.render(bar=bar)
 write_utf8_html_file('demo_gen.html', html)
 ```
 
-demo.html模板
+demo.html 模板
 
 ```html
 <!DOCTYPE html>
