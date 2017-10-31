@@ -27,12 +27,15 @@ class Page(list):
         else:
             self.append(achart_or_charts)
 
-    def render(self, path='render.html', new_version=False, template_name='simple_page.html', object_name='page'):
+    def render(self, path='render.html', new_version=False, template_name='simple_page.html', object_name='page',
+               extra_context=None):
         if new_version:
             tpl = template.JINJA2_ENV.get_template(template_name)
             context = {
                 object_name: self
             }
+            extra_context = extra_context or {}
+            context.update(extra_context)
             html = tpl.render(**context)
             utils.write_utf8_html_file(path, html)
         else:
