@@ -59,7 +59,7 @@ class Base(object):
     def show_config(self):
         """ 打印输出图形所有配置项
         """
-        print(json_dumps(self._option, indent=4))
+        print(utils.json_dumps(self._option, indent=4))
 
     def render_embed(self):
         """ 渲染图表的所有配置项，为 web pages 服务，不过需先提供
@@ -67,7 +67,7 @@ class Base(object):
         """
         embed = 'chart_component.html'
         tmp = template.JINJA2_ENV.get_template(embed)
-        my_option = json_dumps(self._option, indent=4)
+        my_option = utils.json_dumps(self._option, indent=4)
         html = tmp.render(my_option=my_option,
                           chart_id=self._chart_id,
                           my_width=self.width,
@@ -100,7 +100,7 @@ class Base(object):
             文件保存路径
         """
         _tmp = "local.html"
-        my_option = json_dumps(self._option, indent=4)
+        my_option = utils.json_dumps(self._option, indent=4)
         tmp = template.JINJA2_ENV.get_template(_tmp)
         script_list = template.produce_html_script_list(self._js_dependencies)
         html = tmp.render(
@@ -176,37 +176,8 @@ class Base(object):
         """ 为 notebook 渲染组件模板
         """
         _tmp = "notebook_chart_component.html"
-        my_option = json_dumps(self._option, indent=4)
+        my_option = utils.json_dumps(self._option, indent=4)
         tmp = template.JINJA2_ENV.get_template(_tmp)
         component = tmp.render(
             my_option=my_option, chart_id=self._chart_id)
         return component
-
-
-class UnknownTypeEncoder(json.JSONEncoder):
-    """
-    `UnknownTypeEncoder`类用于处理数据的编码，使其能够被正常的序列化
-    """
-
-    def default(self, obj):
-        if isinstance(obj, (datetime.datetime, datetime.date)):
-            return obj.isoformat()
-        else:
-            try:
-                return obj.astype(float).tolist()
-            except:
-                try:
-                    return obj.astype(str).tolist()
-                except:
-                    return json.JSONEncoder.default(self, obj)
-
-
-def json_dumps(data, indent=0):
-    """ json 序列化编码处理
-
-    :param data: 字典数据
-    :param indent: 缩进量
-    :return:
-    """
-    return json.dumps(data, indent=indent,
-                      cls=UnknownTypeEncoder)
