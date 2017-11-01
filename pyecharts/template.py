@@ -2,6 +2,8 @@
 # coding=utf-8
 from __future__ import unicode_literals
 
+import warnings
+
 from jinja2 import FileSystemLoader
 from pyecharts.engine import EchartsEnvironment
 import pyecharts.constants as constants
@@ -66,5 +68,6 @@ def ensure_echarts_is_in_the_front(dependencies):
 
 
 def online(host=constants.DEFAULT_HOST):
+    warnings.warn('The online will be deprecated,use "pyecharts.configure" instead.', DeprecationWarning)
     constants.CONFIGURATION['HOST'] = host
     DEFAULT_CONFIG.jshost = host
