@@ -55,9 +55,13 @@ def test_custom_template_for_chart():
         'name': '雪纺衫',
         'value': 36
     }]
+
+    data1 = {'衬衫': '34', '羊毛衫': 45, '雪纺衫': 40}
     names, values = Bar.cast(data)
+    names1, values1 = Bar.cast(data1)
     bar = Bar("柱状图数据堆叠示例")
     bar.add("商家A", names, values, is_stack=True)
+    bar.add("商家B", names1, values1, is_stack=True)
     bar.render(new_version=True, path='new_version_bar.html')
     with codecs.open('new_version_bar.html', 'r', 'utf-8') as f:
         actual_content = f.read()
