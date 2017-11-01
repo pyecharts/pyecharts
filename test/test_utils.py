@@ -3,13 +3,15 @@ from __future__ import unicode_literals
 
 import os
 import codecs
-
+from datetime import date
+import numpy as np
 
 from nose.tools import eq_
 from pyecharts.utils import (
     freeze_js,
     write_utf8_html_file,
-    get_resource_dir
+    get_resource_dir,
+    json_dumps
 )
 
 
@@ -40,3 +42,17 @@ def test_write_utf8_html_file():
     with codecs.open(file_name, 'r', 'utf-8') as f:
         actual_content = f.read()
         eq_(content, actual_content)
+
+
+def test_json_encoder():
+    data = date(2017, 1, 1)
+    expected = '{\n"date": "2017-01-01"\n}'
+    eq_(expected, json_dumps({'date': data}))
+
+    data2 = {'np_list': np.array(['a', 'b', 'c'])}
+    expected2 = '{\n"np_list": [\n"a",\n"b",\n"c"\n]\n}'
+    eq_(expected2, json_dumps(data2))
+
+    data3 = {'list': ['a', 'b', 'c']}
+    expected3 = '{\n"list": [\n"a",\n"b",\n"c"\n]\n}'
+    eq_(expected3, json_dumps(data3))
