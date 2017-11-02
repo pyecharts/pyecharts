@@ -1,6 +1,7 @@
 # coding=utf-8
 from __future__ import unicode_literals
 
+import json
 import os
 import codecs
 from datetime import date
@@ -45,14 +46,13 @@ def test_write_utf8_html_file():
 
 
 def test_json_encoder():
+    """
+    Test json encoder.
+    :return:
+    """
     data = date(2017, 1, 1)
-    v = json_dumps({'date': data, 'a': '1'})
-    print(v)
-    assert v in (
-        '{\n"a": "1",\n"date": "2017-01-01"\n}',
-        '{\n"date": "2017-01-01",\n"a": "1"\n}'
-    )
+    eq_(json.dumps({'date': '2017-01-01', 'a': '1'}, indent=0), json_dumps({'date': data, 'a': '1'}))
 
     data2 = {'np_list': np.array(['a', 'b', 'c'])}
     data2_e = {'np_list': ['a', 'b', 'c']}
-    eq_(json_dumps(data2_e), json_dumps(data2))
+    eq_(json.dumps(data2_e, indent=0), json_dumps(data2))
