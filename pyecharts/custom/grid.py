@@ -82,7 +82,7 @@ class Grid(Base):
                     _y.update(gridIndex=_index - 1)
                     self._option.get('yAxis').append(_y)
 
-                # series id is the only identify for every series
+                # series id 是每个图实例的唯一标识
                 _flag = self._option.get('series')[0].get('seriesId')
                 _series_index = 0
                 for s in self._option.get('series'):
