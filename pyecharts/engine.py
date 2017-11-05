@@ -115,7 +115,6 @@ def echarts_js_content(env, *charts):
     :return:
     """
 
-    print(charts)
     contents = []
     for chart in charts:
         content_fmt = '''
@@ -178,7 +177,24 @@ class EchartsEnvironment(Environment):
         })
 
 
-def configure(jshost=None, **kwargs):
+def configure(
+        jshost=None,
+        echarts_template_dir=None,
+        force_js_embed=None,
+        **kwargs
+):
+    """
+    Config all items for pyecharts.
+    :param jshost:
+    :param echarts_template_dir:
+    :param force_js_embed:
+    :param kwargs:
+    :return:
+    """
     if jshost:
         constants.CONFIGURATION['HOST'] = jshost
         DEFAULT_CONFIG.jshost = jshost
+    if echarts_template_dir:
+        DEFAULT_CONFIG.echarts_template_dir = echarts_template_dir
+    if force_js_embed is not None:
+        DEFAULT_CONFIG.force_js_embed = force_js_embed

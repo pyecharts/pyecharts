@@ -23,6 +23,8 @@ pyecharts.configure(P1=V1, P2=V2,...)
 
 模板文件目录，默认值：'.'（当前目录）。用于自定义模板文件，即 `render` 的template_name 参数构成全部的路径。
 
+ 需要注意的一点是： **echarts_template_dir 的配置必须在所有渲染函数调用之前，否则无效。**
+
 **jshost**
 
 js文件仓库路径。可以设置本地或者远程地址。所有的远程地址必须以 `http://` 或者 `https://` 开头。
