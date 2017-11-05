@@ -7,13 +7,17 @@ import warnings
 from jinja2 import FileSystemLoader
 from pyecharts.engine import EchartsEnvironment
 import pyecharts.constants as constants
-from pyecharts.utils import get_resource_dir
+from pyecharts.utils import get_resource_dir, LazyObject
 from pyecharts.conf import DEFAULT_CONFIG
 
-# Single Singleton Instance for jinja2
-JINJA2_ENV = EchartsEnvironment(
-    loader=FileSystemLoader([DEFAULT_CONFIG.echarts_template_dir, get_resource_dir('templates')])
-)
+
+def get_current_engine():
+    return EchartsEnvironment(
+        loader=FileSystemLoader([DEFAULT_CONFIG.echarts_template_dir, get_resource_dir('templates')])
+    )
+
+
+JINJA2_ENV = LazyObject(get_current_engine)
 
 
 def produce_require_configuration(dependencies, jshost):
