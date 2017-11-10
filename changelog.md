@@ -7,8 +7,8 @@
 #### [pyecharts 文档-FAQ 篇](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/doc_faq.md)
 
 
-* ### version 0.2.8 (dev)
-    * 新增 `xaxis_label_textsize`, `xaxis_label_textcolor`, `yaxis_label_textsize`, `yaxis_label_textcolor` 四个参数修改坐标轴标签的字体和颜色
+* ### version 0.3.0 (dev)
+    * [issue#252](https://github.com/chenjiandongx/pyecharts/issues/252) 新增 `xaxis_label_textsize`, `xaxis_label_textcolor`, `yaxis_label_textsize`, `yaxis_label_textcolor` 四个参数修改坐标轴标签的字体和颜色
 
 * ### version 0.2.7 - 2017.10.27（Current）
 
