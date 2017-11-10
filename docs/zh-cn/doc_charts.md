@@ -273,9 +273,9 @@
     旋转操作的灵敏度，值越大越灵敏。默认为 1, 设置为 0 后无法旋转。
 
 
-**axis3D：3D 笛卡尔坐标系 X，Y，Z 轴配置项**
+**axis3D：3D 笛卡尔坐标系 X，Y，Z 轴配置项，适用于 3D 图形。（Bar3D, Line3D, Scatter3D)**
 
-**X 轴**
+**3D X 轴**
 * xaxis3d_name -> str  
     x 轴名称，默认为 ""
 * xaxis3d_name_size -> int  
@@ -292,7 +292,7 @@
 * xaxis3d_margin -> int  
     x 轴刻度标签与轴线之间的距离。默认为 8
 
-**Y 轴**
+**3D Y 轴**
 * yaxis3d_name -> str  
     y 轴名称，默认为 ""
 * yaxis3d_name_size -> int  
@@ -309,7 +309,7 @@
 * yaxis3d_margin -> int  
     y 轴刻度标签与轴线之间的距离。默认为 8
 
-**Z 轴**
+**3D Z 轴**
 * zaxis3d_name -> str  
     z 轴名称，默认为 ""
 * zaxis3d_name_size -> int  
@@ -667,6 +667,7 @@ bar3d.render()
 ![bar3D-3](https://github.com/chenjiandongx/pyecharts/blob/master/images/bar3D-3.gif)
 
 **Note：** 关于 gird3D 部分的设置，请参照通用配置项中的介绍 [通用配置项](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/documentation.md#通用配置项)  
+**Note：** 可配合 axis3D [通用配置项](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/documentation.md#通用配置项) 一起使用 
 
 
 ## Boxplot（箱形图）
@@ -1589,6 +1590,7 @@ line3d.render()
 ![line3D-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/line3D-1.gif)
 
 **Note：** 关于 gird3D 部分的设置，请参照通用配置项中的介绍 [通用配置项](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/documentation.md#通用配置项)  
+**Note：** 可配合 axis3D [通用配置项](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/documentation.md#通用配置项) 一起使用 
 
 
 ## Liquid（水球图）
@@ -2479,6 +2481,7 @@ scatter3D.render()
 ![scatter3D-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/scatter3D-0.gif)
 
 **Note：** 关于 gird3D 部分的设置，请参照通用配置项中的介绍 [通用配置项](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/documentation.md#通用配置项)  
+**Note：** 可配合 axis3D [通用配置项](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/documentation.md#通用配置项) 一起使用 
 
 
 ## ThemeRiver（主题河流图）
