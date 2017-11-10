@@ -237,6 +237,8 @@ def xy_axis(type=None,
             xaxis_interval="auto",
             xaxis_force_interval=None,
             xaxis_pos=None,
+            xaxis_label_textsize=12,
+            xaxis_label_textcolor="#000",
             yaxis_margin=8,
             yaxis_name_size=14,
             yaxis_name_gap=25,
@@ -249,6 +251,8 @@ def xy_axis(type=None,
             yaxis_interval="auto",
             yaxis_force_interval=None,
             yaxis_pos=None,
+            yaxis_label_textsize=12,
+            yaxis_label_textcolor="#000",
             yaxis_formatter="",
             is_convert=False,
             is_xaxis_inverse=False,
@@ -301,6 +305,10 @@ def xy_axis(type=None,
         这时候可以使用 interval 配合 min、max 强制设定刻度划分。在类目轴中无效。
     :param xaxis_pos:
         x 坐标轴位置，有'top','bottom'可选
+    :param xaxis_label_textsize:
+        x 坐标轴标签字体大小
+    :param xaxis_label_textcolor:
+        x 坐标轴标签字体颜色
     :param yaxis_margin:
         y 轴刻度标签与轴线之间的距离。默认为 8
     :param yaxis_name_size:
@@ -336,6 +344,10 @@ def xy_axis(type=None,
         这时候可以使用 interval 配合 min、max 强制设定刻度划分。在类目轴中无效。
     :param yaxis_pos:
         y 坐标轴位置，有'left','right'可选
+    :param yaxis_label_textsize:
+        y 坐标轴标签字体大小
+    :param yaxis_label_textcolor:
+        y 坐标轴标签字体颜色
     :param yaxis_formatter:
         y 轴标签格式器，如 '天'，则 y 轴的标签为数据加'天'(3 天，4 天),默认为 ""
     :param is_convert:
@@ -371,7 +383,11 @@ def xy_axis(type=None,
         "axisLabel": {
             "interval": xaxis_interval,
             "rotate": xaxis_rotate,
-            "margin": xaxis_margin
+            "margin": xaxis_margin,
+            "textStyle": {
+                "fontSize": xaxis_label_textsize,
+                "color": xaxis_label_textcolor,
+            }
         },
         "axisTick": {
             "alignWithLabel": is_xaxislabel_align
@@ -392,7 +408,11 @@ def xy_axis(type=None,
             "formatter": "{value} " + yaxis_formatter,
             "rotate": yaxis_rotate,
             "interval": yaxis_interval,
-            "margin": yaxis_margin
+            "margin": yaxis_margin,
+            "textStyle": {
+                "fontSize": yaxis_label_textsize,
+                "color": yaxis_label_textcolor,
+            }
         },
         "axisTick": {
             "alignWithLabel": is_yaxislabel_align

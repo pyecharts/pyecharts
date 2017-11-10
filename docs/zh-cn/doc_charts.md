@@ -132,6 +132,10 @@
     x 坐标轴刻度最大值，默认为自适应。使用特殊值 "dataMax" 可自定以数据中最小值为 x 轴最大值。
 * xaxis_pos -> str  
     x 坐标轴位置，有'top','bottom'可选
+* xaxis_label_textsize -> int  
+    x 坐标轴标签字体大小，默认为 12
+* xaxis_label_textcolor -> str  
+    x 坐标轴标签字体颜色，默认为 "#000"
 * xaxis_type -> str  
     x 坐标轴类型  
     * 'value'：数值轴，适用于连续数据。
@@ -165,6 +169,10 @@
     y 坐标轴刻度最大值，默认为自适应。使用特殊值 "dataMax" 可自定以数据中最小值为 y 轴最大值。
 * yaxis_pos -> str  
     y 坐标轴位置，有'left','right'可选
+* yaxis_label_textsize -> int  
+    y 坐标轴标签字体大小，默认为 12
+* yaxis_label_textcolor -> str  
+    y 坐标轴标签字体颜色，默认为 "#000"
 * yaxis_type -> str  
     y 坐标轴类型  
     * 'value'：数值轴，适用于连续数据。
