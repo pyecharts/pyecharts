@@ -41,8 +41,9 @@ class Helpers(object):
     @staticmethod
     def get_local_js_names(dependencies):
         return [
-            '{}/{}.js'.format(constants.LOCAL_TEMPLATE_DIR, constants.DEFAULT_JS_LIBRARIES.get(x, x)) for x in
-            dependencies
+            '{}/{}.js'.format(
+                constants.LOCAL_TEMPLATE_DIR,
+                constants.DEFAULT_JS_LIBRARIES.get(x, x)) for x in dependencies
             ]
 
 
