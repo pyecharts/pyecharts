@@ -7,7 +7,7 @@ import datetime
 import pyecharts.utils as utils
 import pyecharts.template as template
 import pyecharts.constants as constants
-from pyecharts.engine import DEFAULT_CONFIG
+from pyecharts.engine import CURRENT_CONFIG
 
 
 class Base(object):
@@ -85,7 +85,7 @@ class Base(object):
                template_name='simple_chart.html',
                object_name='chart',
                extra_context=None):
-        tpl = template.JINJA2_ENV.get_template(template_name, parent=DEFAULT_CONFIG.echarts_template_dir)
+        tpl = template.JINJA2_ENV.get_template(template_name, parent=CURRENT_CONFIG.echarts_template_dir)
         context = {
             object_name: self
         }

@@ -8,12 +8,12 @@ from jinja2 import FileSystemLoader
 from pyecharts.engine import EchartsEnvironment
 import pyecharts.constants as constants
 from pyecharts.utils import get_resource_dir, LazyObject
-from pyecharts.conf import DEFAULT_CONFIG
+from pyecharts.conf import CURRENT_CONFIG
 
 
 def get_current_engine():
     return EchartsEnvironment(
-        loader=FileSystemLoader([DEFAULT_CONFIG.echarts_template_dir, get_resource_dir('templates')])
+        loader=FileSystemLoader([CURRENT_CONFIG.echarts_template_dir, get_resource_dir('templates')])
     )
 
 
@@ -74,4 +74,4 @@ def ensure_echarts_is_in_the_front(dependencies):
 def online(host=constants.DEFAULT_HOST):
     warnings.warn('The online will be deprecated,use "pyecharts.configure" instead.', DeprecationWarning)
     constants.CONFIGURATION['HOST'] = host
-    DEFAULT_CONFIG.jshost = host
+    CURRENT_CONFIG.jshost = host
