@@ -39,4 +39,4 @@ class PyEchartsConfig(object):
         return ['{}/{}.js'.format(self._jshost, x) for x in names]
 
 
-DEFAULT_CONFIG = PyEchartsConfig()
+CURRENT_CONFIG = PyEchartsConfig()
