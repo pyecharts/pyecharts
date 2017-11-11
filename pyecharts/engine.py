@@ -5,7 +5,7 @@ from __future__ import unicode_literals
 from jinja2 import Environment, environmentfunction
 from pyecharts.utils import json_dumps
 from pyecharts import constants
-from pyecharts.conf import DEFAULT_CONFIG
+from pyecharts.conf import CURRENT_CONFIG
 
 
 class Helpers(object):
@@ -43,7 +43,8 @@ class Helpers(object):
         return [
             '{}/{}.js'.format(
                 constants.LOCAL_TEMPLATE_DIR,
-                constants.DEFAULT_JS_LIBRARIES.get(x, x)) for x in dependencies
+                constants.DEFAULT_JS_LIBRARIES.get(x, x)
+            ) for x in dependencies
             ]
 
 
@@ -57,12 +58,12 @@ def echarts_js_dependencies(env, *args):
     """
     dependencies = Helpers.merge_js_dependencies(*args)
 
-    if DEFAULT_CONFIG.js_embed:
+    if CURRENT_CONFIG.js_embed:
         js_links = Helpers.get_local_js_names(dependencies)
         contents = Helpers.get_js_file_contents(*js_links)
         return '\n'.join(['<script type="text/javascript">\n{}\n</script>'.format(c) for c in contents])
     else:
-        js_links = DEFAULT_CONFIG.generate_js_link(dependencies)
+        js_links = CURRENT_CONFIG.generate_js_link(dependencies)
         return '\n'.join(['<script type="text/javascript" src="{}"></script>'.format(j) for j in js_links])
 
 
@@ -194,8 +195,8 @@ def configure(
     """
     if jshost:
         constants.CONFIGURATION['HOST'] = jshost
-        DEFAULT_CONFIG.jshost = jshost
+        CURRENT_CONFIG.jshost = jshost
     if echarts_template_dir:
-        DEFAULT_CONFIG.echarts_template_dir = echarts_template_dir
+        CURRENT_CONFIG.echarts_template_dir = echarts_template_dir
     if force_js_embed is not None:
-        DEFAULT_CONFIG.force_js_embed = force_js_embed
+        CURRENT_CONFIG.force_js_embed = force_js_embed
