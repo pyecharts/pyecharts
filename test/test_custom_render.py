@@ -38,7 +38,7 @@ def test_custom_templates():
     configure(jshost='https://chfw.github.io/jupyter-echarts/echarts')
     page = create_three()
     # page.js_dependencies = ['echarts.min']
-    page.render(new_version=True, path='new_version_page.html')
+    page.render(path='new_version_page.html')
     with codecs.open('new_version_page.html', 'r', 'utf-8') as f:
         actual_content = f.read()
         assert "</html>" in actual_content
@@ -62,7 +62,7 @@ def test_custom_template_for_chart():
     bar = Bar("柱状图数据堆叠示例")
     bar.add("商家A", names, values, is_stack=True)
     bar.add("商家B", names1, values1, is_stack=True)
-    bar.render(new_version=True, path='new_version_bar.html')
+    bar.render(path='new_version_bar.html')
     with codecs.open('new_version_bar.html', 'r', 'utf-8') as f:
         actual_content = f.read()
         assert "</html>" in actual_content

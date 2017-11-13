@@ -2,13 +2,13 @@
 # coding=utf-8
 from __future__ import unicode_literals
 
-from pyecharts.utils import get_resource_dir
+from pyecharts.constants import SCRIPT_LOCAL_JSHOST, JUPYTER_LOCAL_JSHOST, DEFAULT_HOST
 
 
 class PyEchartsConfig(object):
     def __init__(self, echarts_template_dir='.', jshost=None, force_js_embed=False):
         self.echarts_template_dir = echarts_template_dir
-        jshost = jshost or get_resource_dir('templates', 'js', 'echarts')
+        jshost = jshost or SCRIPT_LOCAL_JSHOST
         if jshost[-1:] in ('/', '\\'):
             jshost = jshost[:-1]
         self._jshost = jshost.rstrip('/')
@@ -22,7 +22,7 @@ class PyEchartsConfig(object):
         if self.force_js_embed:
             return True
         else:
-            return not self.is_remote_or_local()
+            return self._jshost in (SCRIPT_LOCAL_JSHOST, DEFAULT_HOST)
 
     @property
     def jshost(self):
@@ -35,8 +35,20 @@ class PyEchartsConfig(object):
             jshost = jshost[:-1]
         self._jshost = jshost.rstrip('/')
 
-    def generate_js_link(self, names):
-        return ['{}/{}.js'.format(self._jshost, x) for x in names]
+    def get_current_jshost_for_script(self, jshost=None):
+        if jshost:
+            return jshost
+        else:
+            return self.jshost
+
+    def get_current_jshost_for_jupyter(self, jshost=None):
+        if jshost:
+            return jshost
+        else:
+            if self.jshost == SCRIPT_LOCAL_JSHOST:
+                return JUPYTER_LOCAL_JSHOST
+            else:
+                return self.jshost
 
 
 CURRENT_CONFIG = PyEchartsConfig()

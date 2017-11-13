@@ -9,12 +9,12 @@ import codecs
 from pyecharts.utils import get_resource_dir
 
 DEFAULT_HOST = 'https://chfw.github.io/jupyter-echarts/echarts'
+SCRIPT_LOCAL_JSHOST = get_resource_dir('templates', 'js', 'echarts')
+JUPYTER_LOCAL_JSHOST = '/nbextensions/echarts'
 
 CONFIGURATION = dict(
     HOST='/nbextensions/echarts'
 )
-
-LOCAL_TEMPLATE_DIR = get_resource_dir('templates', 'js', 'echarts')
 
 DEFAULT_ECHARTS_REGISTRY = os.path.join(
     get_resource_dir('templates'), 'js', 'echarts', 'registry.json')

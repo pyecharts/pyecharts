@@ -57,6 +57,10 @@ class Base(object):
         """
         return self._js_dependencies
 
+    @property
+    def page_title(self):
+        return self._page_title
+
     def show_config(self):
         """ 打印输出图形所有配置项
         """
