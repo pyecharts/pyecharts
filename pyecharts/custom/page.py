@@ -114,6 +114,10 @@ class Page(list):
     def js_dependencies(self):
         return self._merge_dependencies()
 
+    @property
+    def page_title(self):
+        return self._page_title
+
     @classmethod
     def from_charts(cls, *args):
         """
