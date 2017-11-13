@@ -24,7 +24,7 @@ def test_echarts_js_dependencies():
     tpl = ECHARTS_ENV.from_string('{{ echarts_js_dependencies(bar) }}')
     bar = create_demo_bar()
     html = tpl.render(bar=bar)
-    assert '<script type="text/javascript" src="http://localhost/echarts/echarts.js"></script>' == html
+    assert '<script type="text/javascript" src="http://localhost/echarts/echarts.min.js"></script>' == html
 
 
 def test_echarts_js_dependencies_embed():

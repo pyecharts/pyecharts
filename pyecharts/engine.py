@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding=utf-8
 from __future__ import unicode_literals
-
+import os
 from jinja2 import Environment, environmentfunction
 from pyecharts.utils import json_dumps
 from pyecharts import constants
@@ -30,22 +30,18 @@ class Helpers(object):
         return dependencies
 
     @staticmethod
-    def get_js_file_contents(*paths):
+    def read_file_contents_from_local(js_names):
         contents = []
-        for path in paths:
+        for name in js_names:
+            path = os.path.join(constants.SCRIPT_LOCAL_JSHOST, name + '.js')
             with open(path, 'rb') as f:
                 c = f.read()
                 contents.append(c.decode('utf8'))
         return contents
 
     @staticmethod
-    def get_local_js_names(dependencies):
-        return [
-            '{}/{}.js'.format(
-                constants.LOCAL_TEMPLATE_DIR,
-                constants.DEFAULT_JS_LIBRARIES.get(x, x)
-            ) for x in dependencies
-            ]
+    def generate_js_link(jshost, js_names):
+        return ['{}/{}.js'.format(jshost, x) for x in js_names]
 
 
 @environmentfunction
@@ -57,13 +53,14 @@ def echarts_js_dependencies(env, *args):
     :return:
     """
     dependencies = Helpers.merge_js_dependencies(*args)
+    js_names = [constants.DEFAULT_JS_LIBRARIES.get(x, x) for x in dependencies]
 
     if CURRENT_CONFIG.js_embed:
-        js_links = Helpers.get_local_js_names(dependencies)
-        contents = Helpers.get_js_file_contents(*js_links)
+        contents = Helpers.read_file_contents_from_local(js_names)
         return '\n'.join(['<script type="text/javascript">\n{}\n</script>'.format(c) for c in contents])
     else:
-        js_links = CURRENT_CONFIG.generate_js_link(dependencies)
+        jshost = CURRENT_CONFIG.get_current_jshost_for_script()
+        js_links = Helpers.generate_js_link(jshost, js_names)
         return '\n'.join(['<script type="text/javascript" src="{}"></script>'.format(j) for j in js_links])
 
 
@@ -76,8 +73,8 @@ def echarts_js_dependencies_embed(env, *args):
     :return:
     """
     dependencies = Helpers.merge_js_dependencies(*args)
-    js_links = Helpers.get_local_js_names(dependencies)
-    contents = Helpers.get_js_file_contents(*js_links)
+    js_names = [constants.DEFAULT_JS_LIBRARIES.get(x, x) for x in dependencies]
+    contents = Helpers.read_file_contents_from_local(js_names)
     return '\n'.join(['<script type="text/javascript">\n{}\n</script>'.format(c) for c in contents])
 
 
