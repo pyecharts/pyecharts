@@ -9,16 +9,15 @@ class PyEchartsConfig(object):
     def __init__(self, echarts_template_dir='.', jshost=None, force_js_embed=False):
         self.echarts_template_dir = echarts_template_dir
         jshost = jshost or SCRIPT_LOCAL_JSHOST
-        if jshost[-1:] in ('/', '\\'):
-            jshost = jshost[:-1]
-        self._jshost = jshost.rstrip('/')
+        self._jshost = PyEchartsConfig.convert_jshost_string(jshost)
         self.force_js_embed = force_js_embed
-
-    def is_remote_or_local(self):
-        return self._jshost.startswith('http://') or self._jshost.startswith('https://')
 
     @property
     def js_embed(self):
+        """
+        Determine whether to use embed code in <script> tag.
+        :return:
+        """
         if self.force_js_embed:
             return True
         else:
@@ -30,10 +29,7 @@ class PyEchartsConfig(object):
 
     @jshost.setter
     def jshost(self, jshost):
-        jshost = jshost or ''
-        if jshost[-1:] in ('/', '\\'):
-            jshost = jshost[:-1]
-        self._jshost = jshost.rstrip('/')
+        self._jshost = PyEchartsConfig.convert_jshost_string(jshost)
 
     def get_current_jshost_for_script(self, jshost=None):
         if jshost:
@@ -42,13 +38,28 @@ class PyEchartsConfig(object):
             return self.jshost
 
     def get_current_jshost_for_jupyter(self, jshost=None):
-        if jshost:
-            return jshost
+        """
+        Get actual jshost in jupyter.
+        :param jshost:
+        :return:
+        """
+        jshost = jshost or self.jshost
+        if jshost == SCRIPT_LOCAL_JSHOST:
+            return JUPYTER_LOCAL_JSHOST
         else:
-            if self.jshost == SCRIPT_LOCAL_JSHOST:
-                return JUPYTER_LOCAL_JSHOST
-            else:
-                return self.jshost
+            return jshost
+
+    @staticmethod
+    def convert_jshost_string(jshost):
+        """
+        Delete the end separator character if exists.
+        :param jshost:
+        :return:
+        """
+        jshost = jshost or ''
+        if jshost[-1:] in ('/', '\\'):
+            jshost = jshost[:-1]
+        return jshost
 
 
 CURRENT_CONFIG = PyEchartsConfig()
