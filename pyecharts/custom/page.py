@@ -33,11 +33,8 @@ class Page(list):
                object_name='page',
                extra_context=None):
         tpl = template.JINJA2_ENV.get_template(template_name)
-        context = {
-            object_name: self
-        }
-        extra_context = extra_context or {}
-        context.update(extra_context)
+        context = {object_name: self}
+        context.update(extra_context or {})
         html = tpl.render(**context)
         utils.write_utf8_html_file(path, html)
 
@@ -65,11 +62,7 @@ class Page(list):
 
         :return:
         """
-        chart_content = ""
-        for chart in self:
-            chart_content += chart.render_embed()
-            chart_content += '<br>'
-        return chart_content
+        return '< br > '.join([chart.render_embed() for chart in self])
 
     def get_js_dependencies(self):
         """

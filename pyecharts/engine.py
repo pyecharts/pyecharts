@@ -105,36 +105,9 @@ def echarts_container(env, chart):
     )
 
 
-@environmentfunction
-def echarts_js_content(env, *charts):
+def generate_js_content(*charts):
     """
-    Render script html node for echarts initial code.
-    :param env:
-    :param chart:
-    :return:
-    """
-
-    contents = []
-    for chart in charts:
-        content_fmt = '''
-        var myChart_{chart_id} = echarts.init(document.getElementById('{chart_id}'));
-        var option_{chart_id} = {options};
-        myChart_{chart_id}.setOption(option_{chart_id});
-        '''
-        js_content = content_fmt.format(
-            chart_id=chart.chart_id,
-            options=json_dumps(chart.options, indent=4)
-        )
-        contents.append(js_content)
-    contents = '\n'.join(contents)
-    return '<script type="text/javascript">\n{}\n</script>'.format(contents)
-
-
-@environmentfunction
-def echarts_js_content_wrap(env, *charts):
-    """
-    Render echarts initial code for a chart.
-    :param env:
+    Generate the initial code fragment for one or some chart instances.
     :param charts:
     :return:
     """
@@ -150,7 +123,30 @@ def echarts_js_content_wrap(env, *charts):
             options=json_dumps(chart.options, indent=4)
         )
         contents.append(js_content)
-    return '\n'.join(contents)
+    contents = '\n'.join(contents)
+    return contents
+
+
+@environmentfunction
+def echarts_js_content(env, *charts):
+    """
+    Render script html node for echarts initial code.
+    :param env:
+    :param chart:
+    :return:
+    """
+    return '<script type="text/javascript">\n{}\n</script>'.format(generate_js_content(*charts))
+
+
+@environmentfunction
+def echarts_js_content_wrap(env, *charts):
+    """
+    Render echarts initial code for a chart.
+    :param env:
+    :param charts:
+    :return:
+    """
+    return generate_js_content(*charts)
 
 
 class EchartsEnvironment(Environment):

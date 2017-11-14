@@ -90,11 +90,8 @@ class Base(object):
                object_name='chart',
                extra_context=None):
         tpl = template.JINJA2_ENV.get_template(template_name, parent=CURRENT_CONFIG.echarts_template_dir)
-        context = {
-            object_name: self
-        }
-        extra_context = extra_context or {}
-        context.update(extra_context)
+        context = {object_name: self}
+        context.update(extra_context or {})
         html = tpl.render(**context)
         utils.write_utf8_html_file(path, html)
 
