@@ -1,16 +1,12 @@
 # coding=utf8
 from __future__ import unicode_literals
 
-import json
 import codecs
-from test.constants import RANGE_COLOR, CLOTHES, WEEK
-from pyecharts import (
-    Bar, Scatter3D, Line, Pie, Map,
-    Kline, Radar, WordCloud, Liquid)
+
+from pyecharts import (Bar, Scatter3D)
 from pyecharts import Page
-from pyecharts.utils import get_resource_dir
-from pyecharts.engine import configure
-from nose.tools import eq_
+from pyecharts.template import configure
+from test.constants import RANGE_COLOR, CLOTHES
 
 
 def create_three():
