@@ -32,6 +32,10 @@ class PyEchartsConfig(object):
         self._jshost = PyEchartsConfig.convert_jshost_string(jshost)
 
     def get_current_jshost_for_script(self, jshost=None):
+        """
+        :param jshost:
+        :return:
+        """
         if jshost:
             return jshost
         else:
