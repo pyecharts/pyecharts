@@ -49,6 +49,7 @@ def create_buildin_template_engine():
         loader=FileSystemLoader([CURRENT_CONFIG.echarts_template_dir, get_resource_dir('templates')])
     )
 
+# TODO Merge the following js functions to pyecharts.utils module or new one.
 
 def produce_require_configuration(dependencies, jshost):
     """

@@ -8,9 +8,27 @@
 
 本文档描述了 pyecharts 库一些公开的 API，以供开发者之使用。
 
+## 总体流程
+
+一个通用的 pyecharts 使用流程可描述如下：
+
+| 步骤       | 简略代码                                     | 备注   |
+| -------- | ---------------------------------------- | ---- |
+| 1 创建图表实例 | `bar = Bar()`                            |      |
+| 2 添加数据   | `bar.add(**kwargs)`                      |      |
+| 3 创建配置实例 | `config = PyEchartsConfig(**kwargs)`     |      |
+| 4 构建模板引擎 | `engine = EchartsEnvironment(pyecharts_config=config)` |      |
+| 5 获取模板文件 | `tpl = engine.get_template('demo_tpl.html')` |      |
+| 6 渲染     | `html = tpl.render(bar=bar)`             |      |
+| 7 写入目标文件 | `write_utf8_html_file('my_demo_chart.html', html)` |      |
+
+
+
 ## pyecharts配置项
 
-从v0.2.8开始，所有的配置项将统一于类 `pyecharts.conf.PyEChartsConfig` 类中。一般在使用之前需要使用模块函数 `configure` 进行设置。
+所有的配置项将统一于类 `pyecharts.conf.PyEChartsConfig` 类中。
+
+如果使用 `chart.render()` 这种方式，可以模块函数 `configure` 进行设置。
 
 ```python
 import pyecharts
@@ -22,8 +40,6 @@ pyecharts.configure(P1=V1, P2=V2,...)
 **echarts_template_dir**
 
 模板文件目录，默认值：'.'（当前目录）。用于自定义模板文件，即 `render` 的template_name 参数构成全部的路径。
-
- 需要注意的一点是： **echarts_template_dir 的配置必须在所有渲染函数调用之前，否则无效。**
 
 **jshost**
 
@@ -163,16 +179,6 @@ print(y) # ['34', '45', '12']
 - 将日期和时间转化为 ISO8601 字符串
 - 对于 numpy 数组，增加了类型强制转化，可参考 [astype](https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.astype.html) 和 [tolist](https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.tolist.html) .
 
-## 图表渲染
-
-**JINJA2_ENV**
-
-`pyecharts.templates.JINJA2_ENV`
-
-数据类型 `jinja2.Environment`。pyecharts 内置了一个 jinja2 的模板渲染环境对象。
-
-- 该环境对象使用 *pyecharts/templates* 作为存放模板文件的目录，包含了 HTML 和 javascript 文件。
-
 ## 模板引擎
 
 ### 概述
@@ -185,7 +191,7 @@ pyecharts库使用 [Jinja2](http://jinja.pocoo.org/) 作为其默认模板渲染
 
 **EChartsEnvironment**
 
-`pyecharts.engine.EChartsEnvironment`
+`pyecharts.engine.EChartsEnvironment(pyecharts_config=None, **kwargs)`
 
 EChartsEnvironment 类继承自 `Jinja2.Environment` 。
 
@@ -207,12 +213,33 @@ EChartsEnvironment 引擎提供了一些模板函数，这些函数通常接收�
 
 `pyecharts.template.echarts_js_dependencies(*args)`
 
-渲染包含图表所需要的 js 文件的 script 一个或多个节点，采用内部嵌入或者外部链接，最终采用何种模板依据 jshost 和 force_js_embed 配置项决定的，具体可参考下表：
+渲染包含图表所需要的 js 文件的 script 一个或多个节点，有内部嵌入或者外部链接两种结果。
 
-| jshost/force_js_embed        | True | False |
-| ---------------------------- | ---- | ----- |
-| 本地                           | 内嵌   | 内嵌    |
-| 远程（以 http:// 或者 https:// 开头） | 内嵌   | 外链    |
+内嵌模式
+
+```html
+<script type="text/javascript">
+    var a = 1;
+    console.log(a):
+</script>
+```
+
+外链模式
+
+```html
+<script type="text/javascript" src="/static/js/echarts.min.js"></script>
+```
+
+最终采用何种模板依据 PyEchartsConfig.jshost 和 PyEchartsConfig.force_js_embed 配置项决定的，具体可参考下表：
+
+| 取值                                       | script 模式 | 本地/远程                  | 使用场景          | 备注                 |
+| ---------------------------------------- | --------- | ---------------------- | ------------- | ------------------ |
+| `/template/js/echarts`                   | 本地        | 内嵌                     | 本地生成单一文件，直接移植 | 此为默认是设置            |
+| `'https://chfw.github.io/jupyter-echarts/echarts'` | 远程        | 内嵌                     | 生成单一文件        | 使用 `online` 可切换到此项 |
+| 其他本地模式 (如 `/static/js`)                  | 本地        | 外链，可以通过force_embed改成内嵌 | 可用于web框架整合    |                    |
+| 其他远程模式（如 `hthttps://cdn.bootcss.com/echarts/3.7.2`） | 远程        | 外链                     | 使用外部js，需依赖网络  |                    |
+
+
 
 例子
 
@@ -276,24 +303,28 @@ bar = Bar('Demo Bar')
 demo.py
 
 ```python
-from jinja2 import FileSystemLoader
+from __future__ import unicode_literals
+
 from pyecharts import Bar
+from pyecharts.conf import PyEchartsConfig
 from pyecharts.engine import EchartsEnvironment
 from pyecharts.utils import write_utf8_html_file
 
 attr = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
 v1 = [5, 20, 36, 10, 75, 90]
 v2 = [10, 25, 8, 60, 20, 80]
-bar = Bar("柱状图数据堆叠示例", jshost='	https://cdn.bootcss.com/echarts/3.6.2')
+bar = Bar("柱状图数据堆叠示例")
 bar.add("商家A", attr, v1, is_stack=True)
 bar.add("商家B", attr, v2, is_stack=True)
-env = EchartsEnvironment(loader=FileSystemLoader('.'))
-tpl = env.get_template('demo.html')
+config = PyEchartsConfig(echarts_template_dir='my_tpl', jshost='https://cdn.bootcss.com/echarts/3.6.2')
+env = EchartsEnvironment(pyecharts_config=config)
+tpl = env.get_template('tpl_demo.html')
 html = tpl.render(bar=bar)
-write_utf8_html_file('demo_gen.html', html)
+write_utf8_html_file('my_tpl_demo2.html', html)
+
 ```
 
-demo.html 模板
+tpl_demo.html 模板
 
 ```html
 <!DOCTYPE html>
