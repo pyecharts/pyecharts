@@ -102,12 +102,3 @@ def json_dumps(data, indent=0):
     """
     return json.dumps(data, indent=indent,
                       cls=UnknownTypeEncoder)
-
-
-def proxy_method(func):
-    def inner(self, *args):
-        if self._wrapped is None:
-            self._setup()
-        return func(self._wrapped, *args)
-
-    return inner
