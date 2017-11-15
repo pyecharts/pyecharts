@@ -12,4 +12,4 @@ v2 = [10, 25, 8, 60, 20, 80]
 bar = Bar("柱状图数据堆叠示例", jshost='	https://cdn.bootcss.com/echarts/3.6.2')
 bar.add("商家A", attr, v1, is_stack=True)
 bar.add("商家B", attr, v2, is_stack=True)
-bar.render(path='my_tpl_demo.html', template_name='tpl_demo.html', object_name='bar')
+bar.render(path='my_bar_demo.html', template_name='tpl_demo.html', object_name='bar')
