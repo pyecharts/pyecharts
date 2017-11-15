@@ -60,7 +60,7 @@ def echarts_js_dependencies(env, *args):
         contents = Helpers.read_file_contents_from_local(js_names)
         return '\n'.join(['<script type="text/javascript">\n{}\n</script>'.format(c) for c in contents])
     else:
-        jshost = current_config.get_current_jshost_for_script()
+        jshost = current_config.jshost
         js_links = Helpers.generate_js_link(jshost, js_names)
         return '\n'.join(['<script type="text/javascript" src="{}"></script>'.format(j) for j in js_links])
 
