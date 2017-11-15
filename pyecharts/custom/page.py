@@ -32,29 +32,12 @@ class Page(list):
                template_name='simple_page.html',
                object_name='page',
                extra_context=None):
-        tpl = template.create_buildin_template_engine().get_template(template_name)
+        tpl = template.create_buildin_template_engine().get_template(
+            template_name)
         context = {object_name: self}
         context.update(extra_context or {})
         html = tpl.render(**context)
         utils.write_utf8_html_file(path, html)
-
-    # def _render(self, path="render.html"):
-    #     """
-    #     Produce rendered charts in a html file
-    #
-    #     :param path:
-    #     :return:
-    #     """
-    #     template_name = "multicharts.html"
-    #     chart_content = self.render_embed()
-    #     dependencies = self._merge_dependencies()
-    #     script_list = template.produce_html_script_list(dependencies)
-    #     tmp = template.create_buildin_template_engine().get_template(template_name)
-    #     html = tmp.render(multi_chart_content=chart_content,
-    #                       page_title=self._page_title,
-    #                       script_list=script_list)
-    #     html = utils.freeze_js(html)
-    #     utils.write_utf8_html_file(path, html)
 
     def render_embed(self):
         """

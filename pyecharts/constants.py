@@ -17,10 +17,6 @@ JUPYTER_LOCAL_JSHOST = '/nbextensions/echarts'
 
 DEFAULT_TEMPLATE_DIR = get_resource_dir('templates')
 
-# CONFIGURATION = dict(
-#     HOST=JUPYTER_LOCAL_JSHOST  # TODO Delete this key from the dictionary
-# )
-
 # Load js & map file index into a dictionary.
 
 DEFAULT_ECHARTS_REGISTRY = os.path.join(

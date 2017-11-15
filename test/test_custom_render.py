@@ -31,7 +31,10 @@ def create_three():
 
 
 def test_custom_templates():
-    configure(jshost='https://chfw.github.io/jupyter-echarts/echarts', force_js_embed=False)
+    configure(
+        jshost='https://chfw.github.io/jupyter-echarts/echarts',
+        force_js_embed=False
+    )
     page = create_three()
     # page.js_dependencies = ['echarts.min']
     page.render(path='new_version_page.html')
