@@ -7,9 +7,9 @@ import warnings
 from jinja2 import FileSystemLoader
 
 import pyecharts.constants as constants
+from pyecharts.constants import DEFAULT_TEMPLATE_DIR
 from pyecharts.conf import PyEchartsConfig
 from pyecharts.engine import EchartsEnvironment
-from pyecharts.utils import get_resource_dir
 
 CURRENT_CONFIG = PyEchartsConfig()
 
@@ -29,7 +29,6 @@ def configure(
     :return:
     """
     if jshost:
-        constants.CONFIGURATION['HOST'] = jshost
         CURRENT_CONFIG.jshost = jshost
     if echarts_template_dir:
         CURRENT_CONFIG.echarts_template_dir = echarts_template_dir
@@ -39,15 +38,15 @@ def configure(
 
 def online(host=constants.DEFAULT_HOST):
     warnings.warn('The online will be deprecated,use "pyecharts.configure" instead.', DeprecationWarning)
-    constants.CONFIGURATION['HOST'] = host
     CURRENT_CONFIG.jshost = host
 
 
 def create_buildin_template_engine():
     return EchartsEnvironment(
         pyecharts_config=CURRENT_CONFIG,
-        loader=FileSystemLoader([CURRENT_CONFIG.echarts_template_dir, get_resource_dir('templates')])
+        loader=FileSystemLoader([CURRENT_CONFIG.echarts_template_dir, DEFAULT_TEMPLATE_DIR])
     )
+
 
 # TODO Merge the following js functions to pyecharts.utils module or new one.
 

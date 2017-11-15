@@ -13,7 +13,7 @@ class Page(list):
     def __init__(self, jshost=None, page_title=constants.PAGE_TITLE):
         list.__init__([])
         self._page_title = page_title
-        self._jshost = jshost if jshost else constants.CONFIGURATION['HOST']
+        self._jshost = jshost if jshost else constants.SCRIPT_LOCAL_JSHOST
 
     def add(self, achart_or_charts):
         """
@@ -38,23 +38,23 @@ class Page(list):
         html = tpl.render(**context)
         utils.write_utf8_html_file(path, html)
 
-    def _render(self, path="render.html"):
-        """
-        Produce rendered charts in a html file
-
-        :param path:
-        :return:
-        """
-        template_name = "multicharts.html"
-        chart_content = self.render_embed()
-        dependencies = self._merge_dependencies()
-        script_list = template.produce_html_script_list(dependencies)
-        tmp = template.create_buildin_template_engine().get_template(template_name)
-        html = tmp.render(multi_chart_content=chart_content,
-                          page_title=self._page_title,
-                          script_list=script_list)
-        html = utils.freeze_js(html)
-        utils.write_utf8_html_file(path, html)
+    # def _render(self, path="render.html"):
+    #     """
+    #     Produce rendered charts in a html file
+    #
+    #     :param path:
+    #     :return:
+    #     """
+    #     template_name = "multicharts.html"
+    #     chart_content = self.render_embed()
+    #     dependencies = self._merge_dependencies()
+    #     script_list = template.produce_html_script_list(dependencies)
+    #     tmp = template.create_buildin_template_engine().get_template(template_name)
+    #     html = tmp.render(multi_chart_content=chart_content,
+    #                       page_title=self._page_title,
+    #                       script_list=script_list)
+    #     html = utils.freeze_js(html)
+    #     utils.write_utf8_html_file(path, html)
 
     def render_embed(self):
         """
