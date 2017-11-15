@@ -2,7 +2,7 @@
 # coding=utf-8
 from __future__ import unicode_literals
 import os
-from jinja2 import Environment, environmentfunction
+from jinja2 import Environment, FileSystemLoader, environmentfunction
 from pyecharts.utils import json_dumps
 from pyecharts import constants
 from pyecharts.conf import PyEchartsConfig
@@ -157,10 +157,14 @@ class EchartsEnvironment(Environment):
 
     def __init__(self, pyecharts_config=None, *args, **kwargs):
         self._pyecharts_config = pyecharts_config or PyEchartsConfig()
+        loader = kwargs.pop('loader', None)
+        if loader is None:
+            loader = FileSystemLoader(self._pyecharts_config.echarts_template_dir)
         super(EchartsEnvironment, self).__init__(
             keep_trailing_newline=True,
             trim_blocks=True,
             lstrip_blocks=True,
+            loader=loader,
             *args,
             **kwargs)
 
