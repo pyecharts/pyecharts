@@ -1,12 +1,10 @@
 # coding=utf-8
 
 import uuid
-import json
-import datetime
 
-import pyecharts.utils as utils
-import pyecharts.template as template
 import pyecharts.constants as constants
+import pyecharts.template as template
+import pyecharts.utils as utils
 
 
 class Base(object):
@@ -35,7 +33,7 @@ class Base(object):
         self._chart_id = uuid.uuid4().hex
         self.width, self.height = width, height
         self._page_title = page_title
-        self._jshost = jshost if jshost else constants.CONFIGURATION['HOST']
+        self._jshost = jshost if jshost else constants.SCRIPT_LOCAL_JSHOST
         self._js_dependencies = {'echarts'}
 
     @property
@@ -96,26 +94,27 @@ class Base(object):
         html = tpl.render(**context)
         utils.write_utf8_html_file(path, html)
 
-    def _render(self, path="render.html"):
-        """ 渲染配置项并生成 html 文件
-
-        :param path:
-            文件保存路径
-        """
-        _tmp = "local.html"
-        my_option = utils.json_dumps(self._option, indent=4)
-        default_engine = template.create_buildin_template_engine()
-        tmp = default_engine.get_template(_tmp)
-        script_list = template.produce_html_script_list(self._js_dependencies)
-        html = tmp.render(
-            my_option=my_option,
-            chart_id=self._chart_id,
-            script_list=script_list,
-            page_title=self._page_title,
-            my_width=self.width,
-            my_height=self.height)
-        html = utils.freeze_js(html)
-        utils.write_utf8_html_file(path, html)
+    #
+    # def _render(self, path="render.html"):
+    #     """ 渲染配置项并生成 html 文件
+    #
+    #     :param path:
+    #         文件保存路径
+    #     """
+    #     _tmp = "local.html"
+    #     my_option = utils.json_dumps(self._option, indent=4)
+    #     default_engine = template.create_buildin_template_engine()
+    #     tmp = default_engine.get_template(_tmp)
+    #     script_list = template.produce_html_script_list(self._js_dependencies)
+    #     html = tmp.render(
+    #         my_option=my_option,
+    #         chart_id=self._chart_id,
+    #         script_list=script_list,
+    #         page_title=self._page_title,
+    #         my_width=self.width,
+    #         my_height=self.height)
+    #     html = utils.freeze_js(html)
+    #     utils.write_utf8_html_file(path, html)
 
     @staticmethod
     def cast(seq):
