@@ -58,11 +58,13 @@ def echarts_js_dependencies(env, *args):
 
     if current_config.js_embed:
         contents = Helpers.read_file_contents_from_local(js_names)
-        return '\n'.join(['<script type="text/javascript">\n{}\n</script>'.format(c) for c in contents])
+        embed_script_tpl_str = '<script type="text/javascript">\n{}\n</script>'
+        return '\n'.join([embed_script_tpl_str.format(c) for c in contents])
     else:
         jshost = current_config.jshost
         js_links = Helpers.generate_js_link(jshost, js_names)
-        return '\n'.join(['<script type="text/javascript" src="{}"></script>'.format(j) for j in js_links])
+        link_script_tpl_str = '<script type="text/javascript" src="{}"></script>'
+        return '\n'.join([link_script_tpl_str.format(j) for j in js_links])
 
 
 @environmentfunction
@@ -76,7 +78,8 @@ def echarts_js_dependencies_embed(env, *args):
     dependencies = Helpers.merge_js_dependencies(*args)
     js_names = [constants.DEFAULT_JS_LIBRARIES.get(x, x) for x in dependencies]
     contents = Helpers.read_file_contents_from_local(js_names)
-    return '\n'.join(['<script type="text/javascript">\n{}\n</script>'.format(c) for c in contents])
+    embed_script_tpl_str = '<script type="text/javascript">\n{}\n</script>'
+    return '\n'.join([embed_script_tpl_str.format(c) for c in contents])
 
 
 @environmentfunction
@@ -90,7 +93,7 @@ def echarts_container(env, chart):
 
     def ex_wh(x):
         """
-        Extend width/height to all values.See http://www.w3school.com.cn/cssref/pr_dim_width.asp
+        Extend width/height to all values.
         :param x:
         :return:
         """
@@ -136,7 +139,8 @@ def echarts_js_content(env, *charts):
     :param chart:
     :return:
     """
-    return '<script type="text/javascript">\n{}\n</script>'.format(generate_js_content(*charts))
+    return '<script type="text/javascript">\n{}\n</script>'.format(
+        generate_js_content(*charts))
 
 
 @environmentfunction
@@ -159,7 +163,8 @@ class EchartsEnvironment(Environment):
         self._pyecharts_config = pyecharts_config or PyEchartsConfig()
         loader = kwargs.pop('loader', None)
         if loader is None:
-            loader = FileSystemLoader(self._pyecharts_config.echarts_template_dir)
+            loader = FileSystemLoader(
+                self._pyecharts_config.echarts_template_dir)
         super(EchartsEnvironment, self).__init__(
             keep_trailing_newline=True,
             trim_blocks=True,

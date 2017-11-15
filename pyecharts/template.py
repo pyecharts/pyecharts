@@ -2,8 +2,6 @@
 # coding=utf-8
 from __future__ import unicode_literals
 
-import warnings
-
 from jinja2 import FileSystemLoader
 
 import pyecharts.constants as constants
@@ -37,14 +35,14 @@ def configure(
 
 
 def online(host=constants.DEFAULT_HOST):
-    warnings.warn('The online will be deprecated,use "pyecharts.configure" instead.', DeprecationWarning)
     CURRENT_CONFIG.jshost = host
 
 
 def create_buildin_template_engine():
     return EchartsEnvironment(
         pyecharts_config=CURRENT_CONFIG,
-        loader=FileSystemLoader([CURRENT_CONFIG.echarts_template_dir, DEFAULT_TEMPLATE_DIR])
+        loader=FileSystemLoader(
+            [CURRENT_CONFIG.echarts_template_dir, DEFAULT_TEMPLATE_DIR])
     )
 
 

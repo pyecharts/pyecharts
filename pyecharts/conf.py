@@ -2,11 +2,13 @@
 # coding=utf-8
 from __future__ import unicode_literals
 
-from pyecharts.constants import SCRIPT_LOCAL_JSHOST, JUPYTER_LOCAL_JSHOST, DEFAULT_HOST
+from pyecharts.constants import SCRIPT_LOCAL_JSHOST, JUPYTER_LOCAL_JSHOST, \
+    DEFAULT_HOST
 
 
 class PyEchartsConfig(object):
-    def __init__(self, echarts_template_dir='.', jshost=None, force_js_embed=False):
+    def __init__(self, echarts_template_dir='.', jshost=None,
+                 force_js_embed=False):
         self.echarts_template_dir = echarts_template_dir
         jshost = jshost or SCRIPT_LOCAL_JSHOST
         self._jshost = PyEchartsConfig.convert_jshost_string(jshost)
