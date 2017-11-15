@@ -94,28 +94,6 @@ class Base(object):
         html = tpl.render(**context)
         utils.write_utf8_html_file(path, html)
 
-    #
-    # def _render(self, path="render.html"):
-    #     """ 渲染配置项并生成 html 文件
-    #
-    #     :param path:
-    #         文件保存路径
-    #     """
-    #     _tmp = "local.html"
-    #     my_option = utils.json_dumps(self._option, indent=4)
-    #     default_engine = template.create_buildin_template_engine()
-    #     tmp = default_engine.get_template(_tmp)
-    #     script_list = template.produce_html_script_list(self._js_dependencies)
-    #     html = tmp.render(
-    #         my_option=my_option,
-    #         chart_id=self._chart_id,
-    #         script_list=script_list,
-    #         page_title=self._page_title,
-    #         my_width=self.width,
-    #         my_height=self.height)
-    #     html = utils.freeze_js(html)
-    #     utils.write_utf8_html_file(path, html)
-
     @staticmethod
     def cast(seq):
         """ 转换数据序列，将带字典和元组类型的序列转换为 k_lst,v_lst 两个列表
