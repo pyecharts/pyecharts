@@ -60,6 +60,3 @@ class PyEchartsConfig(object):
         if jshost[-1:] in ('/', '\\'):
             jshost = jshost[:-1]
         return jshost
-
-
-
