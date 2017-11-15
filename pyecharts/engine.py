@@ -5,7 +5,7 @@ import os
 from jinja2 import Environment, environmentfunction
 from pyecharts.utils import json_dumps
 from pyecharts import constants
-from pyecharts.conf import CURRENT_CONFIG
+from pyecharts.conf import PyEchartsConfig
 
 
 class Helpers(object):
@@ -52,14 +52,15 @@ def echarts_js_dependencies(env, *args):
     :param args:
     :return:
     """
+    current_config = env.pyecharts_config
     dependencies = Helpers.merge_js_dependencies(*args)
     js_names = [constants.DEFAULT_JS_LIBRARIES.get(x, x) for x in dependencies]
 
-    if CURRENT_CONFIG.js_embed:
+    if current_config.js_embed:
         contents = Helpers.read_file_contents_from_local(js_names)
         return '\n'.join(['<script type="text/javascript">\n{}\n</script>'.format(c) for c in contents])
     else:
-        jshost = CURRENT_CONFIG.get_current_jshost_for_script()
+        jshost = current_config.get_current_jshost_for_script()
         js_links = Helpers.generate_js_link(jshost, js_names)
         return '\n'.join(['<script type="text/javascript" src="{}"></script>'.format(j) for j in js_links])
 
@@ -154,7 +155,8 @@ class EchartsEnvironment(Environment):
 
     """
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, pyecharts_config=None, *args, **kwargs):
+        self._pyecharts_config = pyecharts_config or PyEchartsConfig()
         super(EchartsEnvironment, self).__init__(
             keep_trailing_newline=True,
             trim_blocks=True,
@@ -171,25 +173,10 @@ class EchartsEnvironment(Environment):
             'echarts_js_content_wrap': echarts_js_content_wrap
         })
 
+    @property
+    def pyecharts_config(self):
+        return self._pyecharts_config
 
-def configure(
-        jshost=None,
-        echarts_template_dir=None,
-        force_js_embed=None,
-        **kwargs
-):
-    """
-    Config all items for pyecharts.
-    :param jshost:
-    :param echarts_template_dir:
-    :param force_js_embed:
-    :param kwargs:
-    :return:
-    """
-    if jshost:
-        constants.CONFIGURATION['HOST'] = jshost
-        CURRENT_CONFIG.jshost = jshost
-    if echarts_template_dir:
-        CURRENT_CONFIG.echarts_template_dir = echarts_template_dir
-    if force_js_embed is not None:
-        CURRENT_CONFIG.force_js_embed = force_js_embed
+    def configure_pyecharts(self, **kwargs):
+        for k, v in kwargs.items():
+            setattr(self._pyecharts_config, k, v)

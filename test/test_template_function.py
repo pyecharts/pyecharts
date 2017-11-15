@@ -2,7 +2,7 @@
 
 from pyecharts.utils import get_resource_dir
 from pyecharts import Bar
-from pyecharts.engine import EchartsEnvironment, configure
+from pyecharts.engine import EchartsEnvironment
 
 ECHARTS_ENV = EchartsEnvironment()
 
@@ -20,7 +20,7 @@ def create_demo_bar(chart_id_demo=None):
 
 
 def test_echarts_js_dependencies():
-    configure(jshost='http://localhost/echarts')
+    ECHARTS_ENV.configure_pyecharts(jshost='http://localhost/echarts')
     tpl = ECHARTS_ENV.from_string('{{ echarts_js_dependencies(bar) }}')
     bar = create_demo_bar()
     html = tpl.render(bar=bar)
@@ -28,7 +28,7 @@ def test_echarts_js_dependencies():
 
 
 def test_echarts_js_dependencies_embed():
-    configure(jshost=get_resource_dir('templates', 'js', 'echarts'))
+    ECHARTS_ENV.configure_pyecharts(jshost=get_resource_dir('templates', 'js', 'echarts'))
     tpl = ECHARTS_ENV.from_string('{{ echarts_js_dependencies_embed("echarts.min") }}')
     bar = create_demo_bar()
     html = tpl.render(bar=bar)

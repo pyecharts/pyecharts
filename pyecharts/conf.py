@@ -62,4 +62,4 @@ class PyEchartsConfig(object):
         return jshost
 
 
-CURRENT_CONFIG = PyEchartsConfig()
+

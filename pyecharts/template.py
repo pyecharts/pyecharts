@@ -5,19 +5,49 @@ from __future__ import unicode_literals
 import warnings
 
 from jinja2 import FileSystemLoader
-from pyecharts.engine import EchartsEnvironment
+
 import pyecharts.constants as constants
-from pyecharts.utils import get_resource_dir, LazyObject
-from pyecharts.conf import CURRENT_CONFIG
+from pyecharts.conf import PyEchartsConfig
+from pyecharts.engine import EchartsEnvironment
+from pyecharts.utils import get_resource_dir
+
+CURRENT_CONFIG = PyEchartsConfig()
 
 
-def get_current_engine():
+def configure(
+        jshost=None,
+        echarts_template_dir=None,
+        force_js_embed=None,
+        **kwargs
+):
+    """
+    Config all items for pyecharts when use chart.render() or page.render().
+    :param jshost:
+    :param echarts_template_dir:
+    :param force_js_embed:
+    :param kwargs:
+    :return:
+    """
+    if jshost:
+        constants.CONFIGURATION['HOST'] = jshost
+        CURRENT_CONFIG.jshost = jshost
+    if echarts_template_dir:
+        CURRENT_CONFIG.echarts_template_dir = echarts_template_dir
+    if force_js_embed is not None:
+        CURRENT_CONFIG.force_js_embed = force_js_embed
+
+
+def online(host=constants.DEFAULT_HOST):
+    warnings.warn('The online will be deprecated,use "pyecharts.configure" instead.', DeprecationWarning)
+    constants.CONFIGURATION['HOST'] = host
+    CURRENT_CONFIG.jshost = host
+
+
+def create_buildin_template_engine():
     return EchartsEnvironment(
+        pyecharts_config=CURRENT_CONFIG,
         loader=FileSystemLoader([CURRENT_CONFIG.echarts_template_dir, get_resource_dir('templates')])
     )
-
-
-JINJA2_ENV = LazyObject(get_current_engine)
 
 
 def produce_require_configuration(dependencies, jshost):
@@ -69,9 +99,3 @@ def ensure_echarts_is_in_the_front(dependencies):
     else:
         raise Exception("No js library found. Nothing works!")
     return dependencies
-
-
-def online(host=constants.DEFAULT_HOST):
-    warnings.warn('The online will be deprecated,use "pyecharts.configure" instead.', DeprecationWarning)
-    constants.CONFIGURATION['HOST'] = host
-    CURRENT_CONFIG.jshost = host
