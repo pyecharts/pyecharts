@@ -35,10 +35,19 @@ def configure(
 
 
 def online(host=constants.DEFAULT_HOST):
+    """
+    Set the jshost
+    :param host:
+    :return:
+    """
     CURRENT_CONFIG.jshost = host
 
 
-def create_buildin_template_engine():
+def create_builtin_template_engine():
+    """
+    Create the builtin template engine.
+    :return:
+    """
     return EchartsEnvironment(
         pyecharts_config=CURRENT_CONFIG,
         loader=FileSystemLoader(
