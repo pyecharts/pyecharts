@@ -184,6 +184,10 @@ class EchartsEnvironment(Environment):
 
     @property
     def pyecharts_config(self):
+        """
+        Expose the config object.
+        :return:
+        """
         return self._pyecharts_config
 
     def configure_pyecharts(self, **kwargs):
