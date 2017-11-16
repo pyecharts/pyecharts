@@ -32,7 +32,7 @@ class Page(list):
                template_name='simple_page.html',
                object_name='page',
                extra_context=None):
-        tpl = template.create_buildin_template_engine().get_template(
+        tpl = template.create_builtin_template_engine().get_template(
             template_name)
         context = {object_name: self}
         context.update(extra_context or {})
@@ -45,7 +45,7 @@ class Page(list):
 
         :return:
         """
-        return '< br > '.join([chart.render_embed() for chart in self])
+        return '<br/> '.join([chart.render_embed() for chart in self])
 
     def get_js_dependencies(self):
         """
@@ -69,7 +69,7 @@ class Page(list):
 
         require_config = template.produce_require_configuration(
             dependencies, self._jshost)
-        tmp = template.create_buildin_template_engine().get_template(_tmp)
+        tmp = template.create_builtin_template_engine().get_template(_tmp)
         html = tmp.render(
             single_chart=components, dom=doms, **require_config)
         return html

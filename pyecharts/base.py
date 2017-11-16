@@ -68,7 +68,7 @@ class Base(object):
         所需要的js 依赖文件
         """
         embed = 'chart_component.html'
-        default_engine = template.create_buildin_template_engine()
+        default_engine = template.create_builtin_template_engine()
         tmp = default_engine.get_template(embed)
         my_option = utils.json_dumps(self._option, indent=4)
         html = tmp.render(my_option=my_option,
@@ -87,7 +87,7 @@ class Base(object):
                template_name='simple_chart.html',
                object_name='chart',
                extra_context=None):
-        default_engine = template.create_buildin_template_engine()
+        default_engine = template.create_builtin_template_engine()
         tpl = default_engine.get_template(template_name)
         context = {object_name: self}
         context.update(extra_context or {})
@@ -135,7 +135,7 @@ class Base(object):
         _tmp = 'notebook.html'
         dom = self._render_notebook_dom_()
         component = self._render_notebook_component_()
-        tmp = template.create_buildin_template_engine().get_template(_tmp)
+        tmp = template.create_builtin_template_engine().get_template(_tmp)
         require_config = template.produce_require_configuration(
             self._js_dependencies, self._jshost)
         html = tmp.render(
@@ -146,7 +146,7 @@ class Base(object):
         """ 为 notebook 渲染 dom 模板
         """
         _tmp = "notebook_dom.html"
-        tmp = template.create_buildin_template_engine().get_template(_tmp)
+        tmp = template.create_builtin_template_engine().get_template(_tmp)
         component = tmp.render(
             chart_id=self._chart_id,
             chart_width=self.width,
@@ -158,7 +158,7 @@ class Base(object):
         """
         _tmp = "notebook_chart_component.html"
         my_option = utils.json_dumps(self._option, indent=4)
-        tmp = template.create_buildin_template_engine().get_template(_tmp)
+        tmp = template.create_builtin_template_engine().get_template(_tmp)
         component = tmp.render(
             my_option=my_option, chart_id=self._chart_id)
         return component
