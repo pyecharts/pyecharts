@@ -110,6 +110,6 @@ class Graph(Chart):
             "categories": categories,
             "edgeSymbol": graph_edge_symbol,
             "edgeSymbolSize": graph_edge_symbolsize,
-            "links":links,
+            "links": links,
         })
         self._config_components(**kwargs)
