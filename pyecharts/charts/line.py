@@ -51,7 +51,10 @@ class Line(Chart):
         chart = get_all_options(**kwargs)
 
         xaxis, yaxis = chart['xy_axis']
-        is_stack = "stack_" + str(self._option['series_id']) if is_stack else ""
+        if is_stack:
+            is_stack = "stack_" + str(self._option['series_id'])
+        else:
+            is_stack = ""
         _area_style = {"normal": chart['area_style']} if is_fill else {}
         self._option.update(xAxis=xaxis, yAxis=yaxis)
         self._option.get('legend')[0].get('data').append(name)
