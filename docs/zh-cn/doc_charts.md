@@ -412,8 +412,14 @@
     标记线，默认有'min', 'max', 'average'可选
 * mark_line_symbolsize -> int  
     标记线图形大小，默认为 15
-* mark_line_valuedim -> str  
-    指定在哪个维度上指定最大值最小值。这可以是维度的直接名称，Line 时可以是 x、angle 等、Kline 图时可以是 open、close、highest、lowest。
+* mark_line_valuedim -> list  
+    标记线指定在哪个维度上指定最大值最小值。这可以是维度的直接名称，Line 时可以是 x、angle 等、Kline 图时可以是 open、close、highest、lowest。  
+    可同时制定多个维度，如:  
+    mark_line=['min', 'max'], mark_line_valuedim=['lowest', 'highest'] 则表示 min 使用 lowest 维度，max 使用 highest 维度，以此类推
+* mark_point_valuedim -> list  
+    标记线指定在哪个维度上指定最大值最小值。这可以是维度的直接名称，Line 时可以是 x、angle 等、Kline 图时可以是 open、close、highest、lowest。  
+    可同时制定多个维度，如:  
+    mark_point=['min', 'max'], mark_point_valuedim=['lowest', 'highest'] 则表示 min 使用 lowest 维度，max 使用 highest 维度，以此类推
 
 
 **toolbox：设置 `is_more_utils` 为 True 可以提供更多的实用工具按钮。默认只提供『数据视图』和『下载』按钮**

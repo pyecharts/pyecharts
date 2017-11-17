@@ -451,7 +451,8 @@ def _mark(data,
           mark_point_symbolsize=50,
           mark_point_textcolor='#fff',
           mark_line_symbolsize=10,
-          mark_line_valuedim=None,
+          mark_line_valuedim="",
+          mark_point_valuedim="",
           _is_markline=False,
           **kwargs):
     """ 图形标记组件，用于标记指定的特殊数据，有标记线和标记点两种
@@ -482,14 +483,26 @@ def _mark(data,
     :param mark_line_symbolsize:
         标记线图形大小，默认为 15
     :param mark_line_valuedim:
-        指定在哪个维度上指定最大值最小值。这可以是维度的直接名称，Line 时可以是 x、angle
-        等、Kline 图时可以是 open、close、highest、lowest。
+        标记线指定在哪个维度上指定最大值最小值。这可以是维度的直接名称，Line 时可以
+        是 x、angle 等、Kline 图时可以是 open、close、highest、lowest。
+        可同时制定多个维度，如
+            mark_line=['min', 'max'], mark_line_valuedim=['lowest', 'highest']
+            则表示 min 使用 lowest 维度，max 使用 highest 维度，以此类推
+    :param mark_point_valuedim:
+        编辑点指定在哪个维度上指定最大值最小值。这可以是维度的直接名称，Line 时可以
+        是 x、angle 等、Kline 图时可以是 open、close、highest、lowest。
+        可同时制定多个维度，如
+            mark_point=['min', 'max'], mark_point_valuedim=['lowest', 'highest']
+            则表示 min 使用 lowest 维度，max 使用 highest 维度，以此类推
     :param _is_markline:
         指定是否为 markline
     """
     mark = {"data": []}
     if data:
-        for d in list(data):
+        _markpv = _marklv = [None for _ in range(len(data))]
+        _markpv[: len(mark_point_valuedim)] = mark_point_valuedim
+        _marklv[: len(mark_line_valuedim)] = mark_line_valuedim
+        for index, d in enumerate(list(data)):
             # 自定义坐标点数据
             if isinstance(d, dict):
                 _coord = d.get('coord', None)
@@ -516,13 +529,17 @@ def _mark(data,
                     _marktmp = {
                         "type": _type,
                         "name": _name,
-                        'valueDim': mark_line_valuedim,
+                        'valueDim': _marklv[index],
                     }
                     if _type:
                         mark.get("data").append(_marktmp)
                         mark.update(symbolSize=mark_line_symbolsize)
                 else:
-                    _marktmp = {"type": _type, "name": _name}
+                    _marktmp = {
+                        "type": _type,
+                        "name": _name,
+                        'valueDim': _markpv[index],
+                    }
                     _marktmp.update(
                         symbol=mark_point_symbol,
                         symbolSize=mark_point_symbolsize,
