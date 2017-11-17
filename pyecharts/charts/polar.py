@@ -145,7 +145,7 @@ class Polar(Chart):
         if type not in ("barAngle", "barRadius"):
             self._option.update(
                 angleAxis={
-                    "show":is_angleaxis_show,
+                    "show": is_angleaxis_show,
                     "type": polar_type,
                     "data": angle_data,
                     "clockwise": is_clockwise,

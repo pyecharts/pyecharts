@@ -1,8 +1,10 @@
-#!/usr/bin/env python
 # coding=utf-8
 
 from pyecharts.chart import Chart
 from pyecharts.option import gen_color
+
+SHAPES = ("cardioid", "diamond", "triangle-forward",
+          "triangle", "pentagon", "star")
 
 
 class WordCloud(Chart):
@@ -58,7 +60,7 @@ class WordCloud(Chart):
 
         _rmin, _rmax = -90, 90
         # 确保设置的形状有效，单词的旋转角度应该设置在 [-90, 90]
-        if shape in ("cardioid", "diamond", "triangle-forward", "triangle", "pentagon", "star"):
+        if shape in SHAPES:
             _rmin = _rmax = 0
         else:
             shape = "circle"
