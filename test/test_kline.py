@@ -38,31 +38,35 @@ data = [
     [2282.17, 2263.97, 2253.25, 2286.33],
     [2255.77, 2270.28, 2253.31, 2276.22]]
 
+DATE = ["2017/7/{}".format(i + 1) for i in range(31)]
+
 
 def test_kline_default():
     kline = Kline("K 线图-默认示例")
-    kline.add("日K", ["2017/7/{}".format(i + 1) for i in range(31)], data)
+    kline.add("日K", DATE, data)
     kline.render()
 
 
 def test_kline_datazoom_horizontal():
     kline = Kline("K 线图-dataZoom 水平布局")
-    kline.add("日K", ["2017/7/{}".format(i + 1) for i in range(31)], data,
+    kline.add("日K", DATE, data,
               mark_point=["max"], is_datazoom_show=True)
     kline.render()
 
 
 def test_kline_datazoom_vertical():
     kline = Kline("K 线图-dataZoom 垂直布局")
-    kline.add("日K", ["2017/7/{}".format(i + 1) for i in range(31)],
-              data, mark_line=["max"], is_datazoom_show=True,
+    kline.add("日K", DATE, data, mark_line=["max"],
+              is_datazoom_show=True,
               datazoom_orient='vertical',)
     kline.render()
 
 
 def test_kline_user_define_markline_style():
-    kline = Kline("K 线图-自定义标记线风格")
-    kline.add("日K", ["2017/7/{}".format(i + 1) for i in range(31)],
-              data, mark_line=["max"], mark_line_symbolsize=0,
-              datazoom_orient='vertical', mark_line_valuedim='close')
+    kline = Kline("K 线图-自定义标记点风格")
+    kline.add("日K", DATE, data, mark_point=["min", "max"],
+              mark_point_symbolsize=80,
+              datazoom_orient='vertical',
+              mark_line_valuedim=['lowest', 'highest'])
+    kline.show_config()
     kline.render()
