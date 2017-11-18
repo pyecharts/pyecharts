@@ -2,7 +2,7 @@
 # coding=utf-8
 from __future__ import unicode_literals
 import os
-from jinja2 import Environment, FileSystemLoader, environmentfunction
+from jinja2 import Environment, FileSystemLoader, environmentfunction, Markup
 from pyecharts.utils import json_dumps
 from pyecharts import constants
 from pyecharts.conf import PyEchartsConfig
@@ -59,12 +59,16 @@ def echarts_js_dependencies(env, *args):
     if current_config.js_embed:
         contents = Helpers.read_file_contents_from_local(js_names)
         embed_script_tpl_str = '<script type="text/javascript">\n{}\n</script>'
-        return '\n'.join([embed_script_tpl_str.format(c) for c in contents])
+        return Markup(
+            '\n'.join([embed_script_tpl_str.format(c) for c in contents])
+        )
     else:
         jshost = current_config.jshost
         js_links = Helpers.generate_js_link(jshost, js_names)
         link_script_tpl_str = '<script type="text/javascript" src="{}"></script>'
-        return '\n'.join([link_script_tpl_str.format(j) for j in js_links])
+        return Markup(
+            '\n'.join([link_script_tpl_str.format(j) for j in js_links])
+        )
 
 
 @environmentfunction
@@ -79,7 +83,9 @@ def echarts_js_dependencies_embed(env, *args):
     js_names = [constants.DEFAULT_JS_LIBRARIES.get(x, x) for x in dependencies]
     contents = Helpers.read_file_contents_from_local(js_names)
     embed_script_tpl_str = '<script type="text/javascript">\n{}\n</script>'
-    return '\n'.join([embed_script_tpl_str.format(c) for c in contents])
+    return Markup(
+        '\n'.join([embed_script_tpl_str.format(c) for c in contents])
+    )
 
 
 @environmentfunction
@@ -102,11 +108,12 @@ def echarts_container(env, chart):
         else:
             return x
 
-    return '<div id="{chart_id}" style="width:{width};height:{height};"></div>'.format(
-        chart_id=chart.chart_id,
-        width=ex_wh(chart.width),
-        height=ex_wh(chart.height)
-    )
+    return Markup(
+        '<div id="{chart_id}" style="width:{width};height:{height};"></div>'.format(
+            chart_id=chart.chart_id,
+            width=ex_wh(chart.width),
+            height=ex_wh(chart.height)
+        ))
 
 
 def generate_js_content(*charts):
@@ -139,8 +146,8 @@ def echarts_js_content(env, *charts):
     :param chart:
     :return:
     """
-    return '<script type="text/javascript">\n{}\n</script>'.format(
-        generate_js_content(*charts))
+    return Markup('<script type="text/javascript">\n{}\n</script>'.format(
+        generate_js_content(*charts)))
 
 
 @environmentfunction
