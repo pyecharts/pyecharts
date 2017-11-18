@@ -127,3 +127,10 @@ def test_show_config():
         assert 'false' in content
         assert 'False' not in content
     os.unlink(captured_stdout)
+
+
+def test_base_cast_records():
+    records = [{"key": 1}, {"value": 2}]
+    keys, values = Bar.cast(records)
+    eq_(keys, ["key", "value"])
+    eq_(values, [1, 2])
