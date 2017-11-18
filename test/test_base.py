@@ -134,3 +134,10 @@ def test_base_cast_records():
     keys, values = Bar.cast(records)
     eq_(keys, ["key", "value"])
     eq_(values, [1, 2])
+
+
+def test_base_cast_dict():
+    adict = {"key": 1, "value": 2}
+    keys, values = Bar.cast(adict)
+    eq_(keys, ["key", "value"])
+    eq_(values, [1, 2])

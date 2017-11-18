@@ -128,9 +128,9 @@ class Base(object):
                         k_lst.append(k)
                         v_lst.append(v)
         elif isinstance(seq, dict):
-            for k, v in seq.items():
-                k_lst.append(k)
-                v_lst.append(v)
+            for key in sorted(list(seq.keys())):
+                k_lst.append(key)
+                v_lst.append(seq[key])
         return k_lst, v_lst
 
     def _repr_html_(self):
