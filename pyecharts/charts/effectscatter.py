@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # coding=utf-8
 
 from pyecharts.charts.scatter import Scatter
@@ -43,7 +42,7 @@ class EffectScatter(Scatter):
         self._option.get('series').append({
             "type": "effectScatter",
             "name": name,
-            "showEffectOn":"render",
+            "showEffectOn": "render",
             "rippleEffect": chart['effect'],
             "symbol": chart['symbol'],
             "symbolSize": symbol_size,
