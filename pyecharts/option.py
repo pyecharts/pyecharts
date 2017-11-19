@@ -1,10 +1,10 @@
-#!/usr/bin/env python
 # coding=utf-8
 from __future__ import unicode_literals
 
 import random
 
 fs = []
+SYMBOLS = ('rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow')
 
 
 def collectfuncs(func):
@@ -492,8 +492,8 @@ def _mark(data,
         编辑点指定在哪个维度上指定最大值最小值。这可以是维度的直接名称，Line 时可以
         是 x、angle 等、Kline 图时可以是 open、close、highest、lowest。
         可同时制定多个维度，如
-            mark_point=['min', 'max'], mark_point_valuedim=['lowest', 'highest']
-            则表示 min 使用 lowest 维度，max 使用 highest 维度，以此类推
+          mark_point=['min', 'max'], mark_point_valuedim=['lowest', 'highest']
+        则表示 min 使用 lowest 维度，max 使用 highest 维度，以此类推
     :param _is_markline:
         指定是否为 markline
     """
@@ -745,7 +745,7 @@ def symbol(type=None, symbol="", **kwargs):
         symbol = 'none'
     elif type == "line" and symbol == "":  # Line
         symbol = "emptyCircle"
-    elif symbol not in ('rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow'):
+    elif symbol not in SYMBOLS:
         symbol = 'circle'
     return symbol
 
@@ -768,7 +768,7 @@ def effect(effect_brushtype="stroke",
     _effect = {
         "brushType": effect_brushtype,
         "scale": effect_scale,
-        "period":effect_period
+        "period": effect_period
     }
     return _effect
 
