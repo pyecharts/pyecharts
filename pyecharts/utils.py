@@ -86,10 +86,10 @@ class UnknownTypeEncoder(json.JSONEncoder):
             # Pandas and Numpy lists
             try:
                 return obj.astype(float).tolist()
-            except:
+            except Exception:
                 try:
                     return obj.astype(str).tolist()
-                except:
+                except Exception:
                     return json.JSONEncoder.default(self, obj)
 
 
