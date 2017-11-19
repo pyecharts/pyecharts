@@ -99,11 +99,14 @@ class Base(object):
         """ 转换数据序列，将带字典和元组类型的序列转换为 k_lst,v_lst 两个列表
 
         元组列表
-            [(A1, B1), (A2, B2), ...] --> k_lst[ A[i1, i2...] ], v_lst[ B[i1, i2...] ]
+            [(A1, B1), (A2, B2), ...] -->
+                k_lst[ A[i1, i2...] ], v_lst[ B[i1, i2...] ]
         字典列表
-            [{A1: B1}, {A2: B2}, ...] --> k_lst[ A[i1, i2...] ], v_lst[ B[i1, i2...] ]
+            [{A1: B1}, {A2: B2}, ...] -->
+                k_lst[ A[i1, i2...] ], v_lst[ B[i1, i2...] ]
         字典
-            {A1: B1, A2: B2, ...} -- > k_lst[ A[i1, i2...] ], v_lst[ B[i1, i2...] ]
+            {A1: B1, A2: B2, ...} -- >
+                k_lst[ A[i1, i2...] ], v_lst[ B[i1, i2...] ]
 
         :param seq:
             待转换的序列
@@ -112,21 +115,18 @@ class Base(object):
         k_lst, v_lst = [], []
         if isinstance(seq, list):
             for s in seq:
-                try:
-                    if isinstance(s, tuple):
-                        _attr, _value = s
-                        k_lst.append(_attr)
-                        v_lst.append(_value)
-                    elif isinstance(s, dict):
-                        for k, v in s.items():
-                            k_lst.append(k)
-                            v_lst.append(v)
-                except:
-                    raise
+                if isinstance(s, tuple):
+                    _attr, _value = s
+                    k_lst.append(_attr)
+                    v_lst.append(_value)
+                elif isinstance(s, dict):
+                    for k, v in s.items():
+                        k_lst.append(k)
+                        v_lst.append(v)
         elif isinstance(seq, dict):
-            for k, v in seq.items():
-                k_lst.append(k)
-                v_lst.append(v)
+            for key in sorted(list(seq.keys())):
+                k_lst.append(key)
+                v_lst.append(seq[key])
         return k_lst, v_lst
 
     def _repr_html_(self):
