@@ -56,7 +56,8 @@ class HeatMap(Chart):
         })
 
         if _is_calendar:
-            self._option.get('toolbox')['show'] = False
+            self._option.get('toolbox').update(
+                left="98%", top="26%")
             self._option.get('series')[0].update(coordinateSystem='calendar')
             self._option.update(calendar=chart['calendar'])
         else:
