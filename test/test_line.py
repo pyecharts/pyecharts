@@ -37,6 +37,7 @@ def test_line_user_define_marks():
     line.add("商家B", CLOTHES, clothes_v2,
              mark_point=["average", "max", "min"],
              mark_point_symbol='arrow', mark_point_symbolsize=40)
+    line.show_config()
     line.render()
 
 

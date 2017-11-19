@@ -186,4 +186,4 @@ cast(seq)
 
 如需使用 Jupyter Notebook 来展示图表，只需要调用自身实例即可，同时兼容 Python2 和 Python3 的 Jupyter Notebook 环境。所有图表均可正常显示，与浏览器一致的交互体验，这下展示报告连 PPT 都省了！！  
 
-#### 您已经大概了解了 pyecharts 的概况，接下来请移步至 [pyecharts 文档-图形篇](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/documentation.md)
+#### 您已经大概了解了 pyecharts 的概况，接下来请移步至 [pyecharts 文档-图形篇](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/doc_charts.md)
