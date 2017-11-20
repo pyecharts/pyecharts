@@ -18,6 +18,7 @@
     * visualMap：是视觉映射组件，用于进行『视觉编码』，也就是将数据映射到视觉元素（视觉通道）
     * markLine&markPoint：图形标记组件，用于标记指定的特殊数据，有标记线和标记点两种。（Bar、Line、Kline）
     * tooltip：提示框组件，用于移动或点击鼠标时弹出数据内容
+    * toolbox：右侧实用工具箱
 * [图表详细](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/documentation.md#图表详细)
     * Bar（柱状图/条形图）
     * Bar3D（3D 柱状图）
@@ -422,7 +423,12 @@
     mark_point=['min', 'max'], mark_point_valuedim=['lowest', 'highest'] 则表示 min 使用 lowest 维度，max 使用 highest 维度，以此类推
 
 
-**toolbox：设置 `is_more_utils` 为 True 可以提供更多的实用工具按钮。默认只提供『数据视图』和『下载』按钮**
+**toolbox：右侧实用工具箱**
+
+* is_toolbox_show -> bool  
+    指定是否显示右侧实用工具箱，默认为 True。
+* is_more_utils -> bool  
+    指定是否提供更多的实用工具按钮。默认只提供『数据视图』和『下载』按钮
 
 
 # 图表详细  
