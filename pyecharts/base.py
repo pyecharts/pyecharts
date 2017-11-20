@@ -39,20 +39,14 @@ class Base(object):
 
     @property
     def chart_id(self):
-        """ 设置 chart_id 属性为可读
-        """
         return self._chart_id
 
     @property
     def options(self):
-        """ 设置 options 属性为可读
-        """
         return self._option
 
     @property
     def js_dependencies(self):
-        """ 依赖的 js 文件列表
-        """
         return self._js_dependencies
 
     def show_config(self):
@@ -190,7 +184,6 @@ def json_dumps(data, indent=0):
 
     :param data: 字典数据
     :param indent: 缩进量
-    :return:
     """
     return json.dumps(data, indent=indent,
                       cls=UnknownTypeEncoder)
