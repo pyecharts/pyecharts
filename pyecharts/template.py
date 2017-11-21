@@ -16,15 +16,14 @@ def configure(
         jshost=None,
         echarts_template_dir=None,
         force_js_embed=None,
-        **kwargs
-):
-    """
-    Config all items for pyecharts when use chart.render() or page.render().
+        **kwargs):
+    """ Config all items for pyecharts when use chart.render()
+    or page.render().
+
     :param jshost:
     :param echarts_template_dir:
     :param force_js_embed:
     :param kwargs:
-    :return:
     """
     if jshost:
         CURRENT_CONFIG.jshost = jshost
@@ -35,18 +34,15 @@ def configure(
 
 
 def online(host=constants.DEFAULT_HOST):
-    """
-    Set the jshost
+    """ Set the jshost
+
     :param host:
-    :return:
     """
     CURRENT_CONFIG.jshost = host
 
 
 def create_builtin_template_engine():
-    """
-    Create the builtin template engine.
-    :return:
+    """ Create the builtin template engine.
     """
     return EchartsEnvironment(
         pyecharts_config=CURRENT_CONFIG,
@@ -90,10 +86,10 @@ def produce_html_script_list(dependencies):
 
 
 def ensure_echarts_is_in_the_front(dependencies):
-    """
-    make sure echarts is the item in the list
-    require(['echarts'....], function(ec) {..}) need it to be first
-    but dependencies is a set so has no sequence
+    """ make sure echarts is the item in the list
+    require(['echarts'....], function(ec) {..}) need it to
+    be first but dependencies is a set so has no sequence
+
     :param dependencies:
     :return:
     """

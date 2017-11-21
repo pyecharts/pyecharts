@@ -4,7 +4,6 @@ from __future__ import unicode_literals
 
 import codecs
 import os
-import operator
 import re
 import sys
 import datetime
@@ -79,6 +78,9 @@ def write_utf8_html_file(file_name, html_content):
 
 
 class UnknownTypeEncoder(json.JSONEncoder):
+    """
+    UnknownTypeEncoder`类用于处理数据的编码，使其能够被正常的序列化
+    """
     def default(self, obj):
         if isinstance(obj, (datetime.datetime, datetime.date)):
             return obj.isoformat()
@@ -94,11 +96,9 @@ class UnknownTypeEncoder(json.JSONEncoder):
 
 
 def json_dumps(data, indent=0):
-    """
+    """ json 序列化编码处理
 
-    :param data:
-    :param indent:
-    :return:
+    :param data: 字典数据
+    :param indent: 缩进量
     """
-    return json.dumps(data, indent=indent,
-                      cls=UnknownTypeEncoder)
+    return json.dumps(data, indent=indent, cls=UnknownTypeEncoder)

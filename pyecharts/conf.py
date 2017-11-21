@@ -7,6 +7,7 @@ from pyecharts.constants import SCRIPT_LOCAL_JSHOST, JUPYTER_LOCAL_JSHOST, \
 
 
 class PyEchartsConfig(object):
+
     def __init__(self, echarts_template_dir='.', jshost=None,
                  force_js_embed=False):
         self.echarts_template_dir = echarts_template_dir
@@ -16,9 +17,7 @@ class PyEchartsConfig(object):
 
     @property
     def js_embed(self):
-        """
-        Determine whether to use embed code in <script> tag.
-        :return:
+        """ Determine whether to use embed code in <script> tag.
         """
         if self.force_js_embed:
             return True
@@ -36,7 +35,6 @@ class PyEchartsConfig(object):
     def get_current_jshost_for_script(self, jshost=None):
         """
         :param jshost:
-        :return:
         """
         if jshost:
             return jshost
@@ -44,10 +42,9 @@ class PyEchartsConfig(object):
             return self.jshost
 
     def get_current_jshost_for_jupyter(self, jshost=None):
-        """
-        Get actual jshost in jupyter.
+        """ Get actual jshost in jupyter.
+
         :param jshost:
-        :return:
         """
         jshost = jshost or self.jshost
         if jshost == SCRIPT_LOCAL_JSHOST:
@@ -57,10 +54,9 @@ class PyEchartsConfig(object):
 
     @staticmethod
     def convert_jshost_string(jshost):
-        """
-        Delete the end separator character if exists.
+        """ Delete the end separator character if exists.
+
         :param jshost:
-        :return:
         """
         jshost = jshost or ''
         if jshost[-1:] in ('/', '\\'):
