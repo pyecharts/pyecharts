@@ -1,6 +1,6 @@
 # pyecharts 文档 - 高级使用篇
 
-本文描述了v0.3.0 新引入的特性：
+本文描述了 v0.3.0 新引入的特性：
 
 - 自定义模板文件
 - 决定 script 标签的引入方式，即 **内嵌** 和 **外链** 两种方式。
@@ -30,7 +30,10 @@ V0.3.0 重写了部分底层代码，支持更多使用场景。
 第一步使用 `pyecharts.configure` 或者 `pyecharts.online` 进行配置。
 
 ```python
-configure(jshost=None, echarts_template_dir=None, force_js_embed=None, **kwargs)
+configure(jshost=None,
+          echarts_template_dir=None,
+          force_js_embed=None,
+          **kwargs)
 ```
 
 第二步，调用图表类的函数 `render` 方法，生成 HTML 文件。
@@ -38,13 +41,19 @@ configure(jshost=None, echarts_template_dir=None, force_js_embed=None, **kwargs)
 单图表 `render` 方法函数签名：
 
 ```python
-Chart.render(path='render.html', template_name='simple_chart.html', object_name='chart', extra_context=None)
+Chart.render(path='render.html',
+             template_name='simple_chart.html',
+             object_name='chart',
+             extra_context=None)
 ```
 
 多图表 `render` 方法签名：
 
 ```python
-Page.render(path='render.html', template='simple_page.html', object='page', extra_context=None)
+Page.render(path='render.html',
+            template='simple_page.html',
+            object='page',
+            extra_context=None)
 ```
 
 各参数意义如下：
@@ -123,9 +132,9 @@ app.run(port=10200)
     {{ echarts_js_dependencies(hm) }}
 </head>
 <body>
-<p>在 Flask 下使用 echarts_* 系列模板函数(Template Functions)渲染页面。</p>
-{{ echarts_container(hm) }}
-{{ echarts_js_content(hm) }}
+    <p>在 Flask 下使用 echarts_* 系列模板函数(Template Functions)渲染页面。</p>
+    {{ echarts_container(hm) }}
+    {{ echarts_js_content(hm) }}
 </body>
 </html>
 ```
