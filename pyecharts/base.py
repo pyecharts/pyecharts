@@ -38,20 +38,14 @@ class Base(object):
 
     @property
     def chart_id(self):
-        """ 设置 chart_id 属性为可读
-        """
         return self._chart_id
 
     @property
     def options(self):
-        """ 设置 options 属性为可读
-        """
         return self._option
 
     @property
     def js_dependencies(self):
-        """ 依赖的 js 文件列表
-        """
         return self._js_dependencies
 
     @property
@@ -162,3 +156,30 @@ class Base(object):
         component = tmp.render(
             my_option=my_option, chart_id=self._chart_id)
         return component
+
+
+class UnknownTypeEncoder(json.JSONEncoder):
+    """
+    `UnknownTypeEncoder`类用于处理数据的编码，使其能够被正常的序列化
+    """
+    def default(self, obj):
+        if isinstance(obj, (datetime.datetime, datetime.date)):
+            return obj.isoformat()
+        else:
+            try:
+                return obj.astype(float).tolist()
+            except Exception:
+                try:
+                    return obj.astype(str).tolist()
+                except Exception:
+                    return json.JSONEncoder.default(self, obj)
+
+
+def json_dumps(data, indent=0):
+    """ json 序列化编码处理
+
+    :param data: 字典数据
+    :param indent: 缩进量
+    """
+    return json.dumps(data, indent=indent,
+                      cls=UnknownTypeEncoder)
