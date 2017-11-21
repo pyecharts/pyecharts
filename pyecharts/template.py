@@ -2,22 +2,63 @@
 # coding=utf-8
 from __future__ import unicode_literals
 
-from jinja2 import Environment, FileSystemLoader
+from jinja2 import FileSystemLoader
+
 import pyecharts.constants as constants
-from pyecharts.utils import get_resource_dir
+from pyecharts.constants import DEFAULT_TEMPLATE_DIR
+from pyecharts.conf import PyEchartsConfig
+from pyecharts.engine import EchartsEnvironment
+
+CURRENT_CONFIG = PyEchartsConfig()
 
 
-# Single Singleton Instance for jinja2
-JINJA2_ENV = Environment(
-    loader=FileSystemLoader(get_resource_dir('templates')),
-    keep_trailing_newline=True,
-    trim_blocks=True,
-    lstrip_blocks=True)
+def configure(
+        jshost=None,
+        echarts_template_dir=None,
+        force_js_embed=None,
+        **kwargs
+):
+    """
+    Config all items for pyecharts when use chart.render() or page.render().
+    :param jshost:
+    :param echarts_template_dir:
+    :param force_js_embed:
+    :param kwargs:
+    :return:
+    """
+    if jshost:
+        CURRENT_CONFIG.jshost = jshost
+    if echarts_template_dir:
+        CURRENT_CONFIG.echarts_template_dir = echarts_template_dir
+    if force_js_embed is not None:
+        CURRENT_CONFIG.force_js_embed = force_js_embed
 
+
+def online(host=constants.DEFAULT_HOST):
+    """
+    Set the jshost
+    :param host:
+    :return:
+    """
+    CURRENT_CONFIG.jshost = host
+
+
+def create_builtin_template_engine():
+    """
+    Create the builtin template engine.
+    :return:
+    """
+    return EchartsEnvironment(
+        pyecharts_config=CURRENT_CONFIG,
+        loader=FileSystemLoader(
+            [CURRENT_CONFIG.echarts_template_dir, DEFAULT_TEMPLATE_DIR])
+    )
+
+
+# TODO Merge the following js functions to pyecharts.utils module or new one.
 
 def produce_require_configuration(dependencies, jshost):
     """
-
     :param dependencies:
     :param jshost:
     :return:
@@ -38,7 +79,6 @@ def produce_require_configuration(dependencies, jshost):
 
 def produce_html_script_list(dependencies):
     """
-
     :param dependencies:
     :return:
     """
@@ -54,7 +94,6 @@ def ensure_echarts_is_in_the_front(dependencies):
     make sure echarts is the item in the list
     require(['echarts'....], function(ec) {..}) need it to be first
     but dependencies is a set so has no sequence
-
     :param dependencies:
     :return:
     """
@@ -67,7 +106,3 @@ def ensure_echarts_is_in_the_front(dependencies):
     else:
         raise Exception("No js library found. Nothing works!")
     return dependencies
-
-
-def online(host=constants.DEFAULT_HOST):
-    constants.CONFIGURATION['HOST'] = host
