@@ -166,6 +166,7 @@ class Chart(Base):
             is_liquid_animation=None,
             is_liquid_outline_show=None,
             is_more_utils=None,
+            is_map_symbol_show=None,
             is_piecewise=None,
             is_radiusaxis_show=None,
             is_random=None,
@@ -176,7 +177,7 @@ class Chart(Base):
             is_stack=None,
             is_step=None,
             is_symbol_show=None,
-            is_map_symbol_show=None,
+            is_toolbox_show=None,
             is_visualmap=None,
             is_xaxislabel_align=None,
             is_yaxislabel_align=None,
@@ -305,6 +306,7 @@ class Chart(Base):
 
     def _config_components(self, is_visualmap=False,
                            is_more_utils=False,
+                           is_toolbox_show=True,
                            **kwargs):
         """ 图形组件配置项
 
@@ -314,6 +316,8 @@ class Chart(Base):
             指定是否使用 dataZoom 组件
         :param is_more_utils:
             指定是否提供更多的实用小工具
+        :param is_toolbox_show:
+            指定是否显示工具箱
         :param kwargs:
         """
         kwargs.update(colorlst=self._colorlst)
@@ -353,3 +357,6 @@ class Chart(Base):
                         "back": "缩放还原"
                     }}
             )
+
+        if not is_toolbox_show:
+            self._option.pop("toolbox")
