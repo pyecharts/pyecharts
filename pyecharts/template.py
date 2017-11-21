@@ -12,11 +12,10 @@ from pyecharts.engine import EchartsEnvironment
 CURRENT_CONFIG = PyEchartsConfig()
 
 
-def configure(
-        jshost=None,
-        echarts_template_dir=None,
-        force_js_embed=None,
-        **kwargs):
+def configure(jshost=None,
+              echarts_template_dir=None,
+              force_js_embed=None,
+              **kwargs):
     """ Config all items for pyecharts when use chart.render()
     or page.render().
 
@@ -55,6 +54,7 @@ def create_builtin_template_engine():
 
 def produce_require_configuration(dependencies, jshost):
     """
+
     :param dependencies:
     :param jshost:
     :return:
@@ -75,6 +75,7 @@ def produce_require_configuration(dependencies, jshost):
 
 def produce_html_script_list(dependencies):
     """
+
     :param dependencies:
     :return:
     """
