@@ -38,4 +38,5 @@ from pyecharts.custom.timeline import Timeline
 
 # misc
 from pyecharts.template import online
+from pyecharts.template import configure
 from pyecharts.style import Style
