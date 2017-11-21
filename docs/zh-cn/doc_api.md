@@ -213,6 +213,7 @@ EChartsEnvironment 引擎提供了一些模板函数，这些函数通常接收�
 * echarts_js_dependencies
 
     `pyecharts.template.echarts_js_dependencies(*args)`  
+    
     渲染包含图表所需要的 js 文件的 script 一个或多个节点，有内部嵌入或者外部链接两种结果。
 
     内嵌模式
@@ -259,11 +260,13 @@ EChartsEnvironment 引擎提供了一些模板函数，这些函数通常接收�
 * echarts_js_dependencies_embed
 
     `pyecharts.template.echarts.js_dependencies_embed(*args)`  
+
     渲染 js 的 script  一个或多个节点，采用内嵌方式引入。仅支持本地 jshost 。
 
 * echarts_container
 
     `pyecharts.template.echarts_container(chart)`  
+
     渲染图表容器，为一个  `<div></div>`  元素。
 
     例子
@@ -280,11 +283,13 @@ EChartsEnvironment 引擎提供了一些模板函数，这些函数通常接收�
 * echarts_js_content
 
     `pyecharts.template.echarts_container(*chart)`  
+
     渲染js初始化代码片段，不包含 `<script></script>` 。
 
 * echarts_js_content_wrap
 
     `pyecharts.template.echarts_js_content_wrap(*args)`  
+
     渲染js初始化代码片段，包含首尾的 `<script></script>` 。
 
 
