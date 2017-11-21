@@ -1,7 +1,9 @@
 #!/usr/bin/env python
 # coding=utf-8
 from __future__ import unicode_literals
+
 import os
+
 from jinja2 import Environment, FileSystemLoader, environmentfunction, Markup
 from pyecharts.utils import json_dumps
 from pyecharts import constants
@@ -11,7 +13,8 @@ from pyecharts.conf import PyEchartsConfig
 class Helpers(object):
     @staticmethod
     def merge_js_dependencies(*args):
-        """Merge js dependencies to a list
+        """ Merge js dependencies to a list
+
         :param args:
         :return:
         """
@@ -46,11 +49,10 @@ class Helpers(object):
 
 @environmentfunction
 def echarts_js_dependencies(env, *args):
-    """
-    Render script html nodes in external link mode.
+    """ Render script html nodes in external link mode.
+
     :param env:
     :param args:
-    :return:
     """
     current_config = env.pyecharts_config
     dependencies = Helpers.merge_js_dependencies(*args)
@@ -73,11 +75,10 @@ def echarts_js_dependencies(env, *args):
 
 @environmentfunction
 def echarts_js_dependencies_embed(env, *args):
-    """
-    Render script html nodes in embed mode,Only used for local files.
+    """ Render script html nodes in embed mode,Only used for local files.
+
     :param env:
     :param args:
-    :return:
     """
     dependencies = Helpers.merge_js_dependencies(*args)
     js_names = [constants.DEFAULT_JS_LIBRARIES.get(x, x) for x in dependencies]
@@ -90,11 +91,10 @@ def echarts_js_dependencies_embed(env, *args):
 
 @environmentfunction
 def echarts_container(env, chart):
-    """
-    Render a div html element for a chart.
+    """ Render a div html element for a chart.
+
     :param env:
     :param chart: A pyecharts.base.Base object
-    :return:
     """
 
     def ex_wh(x):
@@ -117,8 +117,8 @@ def echarts_container(env, chart):
 
 
 def generate_js_content(*charts):
-    """
-    Generate the initial code fragment for one or some chart instances.
+    """ Generate the initial code fragment for one or some chart instances.
+
     :param charts:
     :return:
     """
@@ -140,11 +140,10 @@ def generate_js_content(*charts):
 
 @environmentfunction
 def echarts_js_content(env, *charts):
-    """
-    Render script html node for echarts initial code.
+    """ Render script html node for echarts initial code.
+
     :param env:
     :param chart:
-    :return:
     """
     return Markup('<script type="text/javascript">\n{}\n</script>'.format(
         generate_js_content(*charts)))
@@ -152,18 +151,17 @@ def echarts_js_content(env, *charts):
 
 @environmentfunction
 def echarts_js_content_wrap(env, *charts):
-    """
-    Render echarts initial code for a chart.
+    """ Render echarts initial code for a chart.
+
     :param env:
     :param charts:
-    :return:
     """
     return generate_js_content(*charts)
 
 
 class EchartsEnvironment(Environment):
-    """Built-in jinja2 template engine for pyecharts
-
+    """
+    Built-in jinja2 template engine for pyecharts
     """
 
     def __init__(self, pyecharts_config=None, *args, **kwargs):
@@ -191,9 +189,7 @@ class EchartsEnvironment(Environment):
 
     @property
     def pyecharts_config(self):
-        """
-        Expose the config object.
-        :return:
+        """ Expose the config object.
         """
         return self._pyecharts_config
 
