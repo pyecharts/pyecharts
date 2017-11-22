@@ -167,7 +167,7 @@
 * yaxis_min -> int/float  
     y 坐标轴刻度最小值，默认为自适应。使用特殊值 "dataMin" 可自定以数据中最小值为 y 轴最小值。
 * yaxis_max -> int/float  
-    y 坐标轴刻度最大值，默认为自适应。使用特殊值 "dataMax" 可自定以数据中最小值为 y 轴最大值。
+    y 坐标轴刻度最大值，默认为自适应。使用特殊值 "dataMax" 可自定以数据中最大值为 y 轴最大值。
 * yaxis_pos -> str  
     y 坐标轴位置，有'left','right'可选
 * yaxis_label_textsize -> int  

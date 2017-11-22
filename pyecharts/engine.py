@@ -98,8 +98,8 @@ def echarts_container(env, chart):
     """
 
     def ex_wh(x):
-        """
-        Extend width/height to all values.
+        """ Extend width/height to all values.
+
         :param x:
         :return:
         """
