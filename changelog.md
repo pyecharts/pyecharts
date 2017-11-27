@@ -12,6 +12,10 @@
     * [issue#258](https://github.com/chenjiandongx/pyecharts/issues/258) 新增 `mark_point_valuedim` 参数，并将 `mark_line_valuedim` 和 `mark_point_valuedim` 参数类型修改为 list。 
     * [issue#260](https://github.com/chenjiandongx/pyecharts/issues/260) 新增 `is_toolbox_show` 参数用于控制是否显示右侧实用工具箱。
 
+    #### Updated
+    * jupyter-echarts 1.3.3. 
+
+
 * ### version 0.2.7 - 2017.10.27（Current）
 
     #### Added
