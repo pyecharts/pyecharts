@@ -8,6 +8,13 @@
 
 
 * ### version 0.3.0 (dev)
+    * 图表`render` 方法增加 `template_name` 、`object_name`、`extra_context` 等参数，全面支持自定义模板
+    * 重写底层逻辑，支持在模板文件中使用 `echarts_*` 系列模板函数，`render_embed` 方法不再推荐使用
+    * js 依赖文件支持外部链接方式引入。
+    * 新增统一配置函数 `pyecharts.configure` ，支持设置模板目录，JS文件仓库路径。
+    * `pyecharts.online` 全局函数不再推荐使用
+    * `pyecharts.custom.Page` 类实现 `list` 协议，支持迭代、索引、添加、扩展等操作。
+    * 图表 width 和 height 支持 '50%' 、'78px' 等其他 css 有效长度形式。
     * [issue#252](https://github.com/chenjiandongx/pyecharts/issues/252) 新增 `xaxis_label_textsize`, `xaxis_label_textcolor`, `yaxis_label_textsize`, `yaxis_label_textcolor` 四个参数修改坐标轴标签的字体和颜色
     * [issue#258](https://github.com/chenjiandongx/pyecharts/issues/258) 新增 `mark_point_valuedim` 参数，并将 `mark_line_valuedim` 和 `mark_point_valuedim` 参数类型修改为 list。 
     * [issue#260](https://github.com/chenjiandongx/pyecharts/issues/260) 新增 `is_toolbox_show` 参数用于控制是否显示右侧实用工具箱。
