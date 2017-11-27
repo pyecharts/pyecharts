@@ -33,7 +33,7 @@ class Base(object):
         self._chart_id = uuid.uuid4().hex
         self.width, self.height = width, height
         self._page_title = page_title
-        self._jshost = jshost if jshost else constants.SCRIPT_LOCAL_JSHOST
+        self._jshost = jshost if jshost else template.CURRENT_CONFIG.jshost
         self._js_dependencies = {'echarts'}
 
     @property
