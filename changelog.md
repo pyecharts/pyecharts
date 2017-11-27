@@ -13,8 +13,7 @@
     * [issue#260](https://github.com/chenjiandongx/pyecharts/issues/260) 新增 `is_toolbox_show` 参数用于控制是否显示右侧实用工具箱。
 
     #### Updated
-    * jupyter-echarts 1.3.3. 
-
+    * 更新jupyter-echarts 至1.3.3: [上海地图补了崇明区](https://github.com/chfw/jupyter-echarts/issues/9), [西藏地图补了山南市](https://github.com/chfw/jupyter-echarts/issues/7) 
 
 * ### version 0.2.7 - 2017.10.27（Current）
 
