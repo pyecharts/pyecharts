@@ -1,7 +1,13 @@
 # pyecharts + Flask 使用指南
 > 本指南会以一个小的 Flask 项目为例，说明如何在 Flask 中使用 pyecharts。请确保你已经安装 Flask，还没安装请执行 ```pip install flask``` 或其他方式安装。
 
-## Step 0: 首先新建一个 Flask 项目
+pyecharts 支持在 Flask 框架中使用，支持两种使用方式：
+
+## 第一种方式：直接渲染
+
+直接渲染方式是 V0.2.0 所使用的渲染方式。
+
+### Step 0: 首先新建一个 Flask 项目
 
 * Linux/macos 系统  
 ```shell
@@ -11,9 +17,9 @@ $ mkdir templates
 ```
 
 * Windows 系统  
-新建一个 flask-echarts 文件夹，在其下新建 templates 子文件夹。
+  新建一个 flask-echarts 文件夹，在其下新建 templates 子文件夹。
 
-## Step 1: 为项目提供自己的模板
+### Step 1: 为项目提供自己的模板
 
 将下面 html 模板代码保存为 pyecharts.html 文件并移至上一步新建的 templates 文件夹中。
 
@@ -36,7 +42,7 @@ $ mkdir templates
 </html>
 ```
 
-## Step 2: 调用 chart_instance.render_embed() 方法渲染图表 
+### Step 2: 调用 chart_instance.render_embed() 方法渲染图表 
 
 请将下面的代码保存为 server.py 文件并移至项目的根目录下。
 
@@ -86,7 +92,7 @@ def generate_3d_random_point():
 ```
 
 
-## Step 3: 运行项目
+### Step 3: 运行项目
 
 Linux/macos 系统
 ```shell
@@ -108,6 +114,75 @@ $ flask run
 
 ![flask-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/flask-0.gif)
 
-## 小结
+### 小结
 
 可以看到，在 Flask app 中加入 pyecharts 图表只需要简单的几个步骤而已，欢迎尝试更多的图表类型。具体文档可以参考 ```pyecharts/document```  文件夹。
+
+
+
+## 第二种方式：模板函数渲染
+
+自 V0.3.0 起， pyecharts 支持在 Flask 使用 `echarts_*` 系列模板函数。
+
+### 第一步：实现 Flask 应用的自定义模板引擎
+
+主要有三个要点：
+
+- 创建一个继承自 `flask.templating.Environment` 的模板引擎类`FlaskEchartsEnvironment` 。
+- 通过使用 `pyecharts.engine.PyEchartsConfigMixin` 提供一个配置对象 。
+- 在构造函数 `__init__` 中添加模板函数到全局字典中。
+
+```python
+from flask import Flask, render_template
+from flask.templating import Environment
+
+from pyecharts import HeatMap
+from pyecharts.engine import PyEchartsConfigMixin, ECHAERTS_TEMPLATE_FUNCTIONS
+from pyecharts.conf import PyEchartsConfig
+
+class FlaskEchartsEnvironment(Environment, PyEchartsConfigMixin):
+    pyecharts_config = PyEchartsConfig(
+        jshost='https://cdn.bootcss.com/echarts/3.7.2'
+    )
+
+    def __init__(self, *args, **kwargs):
+        super(FlaskEchartsEnvironment, self).__init__(*args, **kwargs)
+        self.globals.update(ECHAERTS_TEMPLATE_FUNCTIONS)
+
+class MyFlask(Flask):
+    jinja_environment = FlaskEchartsEnvironment
+
+
+app = MyFlask(__name__)
+```
+
+### 第二步：创建模板文件
+
+在同目录下 templates 文件夹创建 flask_demo.html 文件写入如下的代码。
+
+```html
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>自定义模板</title>
+    {{ echarts_js_dependencies(hm) }}
+</head>
+<body>
+    <p>在 Flask 下使用 echarts_* 系列模板函数(Template Functions)渲染页面。</p>
+    {{ echarts_container(hm) }}
+    {{ echarts_js_content(hm) }}
+</body>
+</html>
+```
+
+上述例子使用 boot CDN 的 js 文件，因此在最后生成 HTML 文件代码时，使用了下面的外链形式
+
+```html
+<script type="text/javascript" src=https://cdn.bootcss.com/echarts/3.7.2/echarts.min.js""></script>
+```
+
+使用外链形式优点在于：
+
+- 减少最后生成文件大小
+- 更容易与 web 框架整合，便于大型项目开发
