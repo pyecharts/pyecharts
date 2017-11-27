@@ -8,27 +8,28 @@ import random
 import datetime
 
 from flask import Flask, render_template
+from flask.templating import Environment
 
 from pyecharts import HeatMap
-from pyecharts.engine import EchartsEnvironment
+from pyecharts.engine import PyEchartsConfigMixin, ECHAERTS_TEMPLATE_FUNCTIONS
 from pyecharts.conf import PyEchartsConfig
 
 
 # ----- Adapter ---------
-class FlaskEchartsEnvironment(EchartsEnvironment):
-    def __init__(self, app, **kwargs):
-        EchartsEnvironment.__init__(self, **kwargs)
-        self.app = app
+class FlaskEchartsEnvironment(Environment, PyEchartsConfigMixin):
+    pyecharts_config = PyEchartsConfig(
+        jshost='https://cdn.bootcss.com/echarts/3.7.2'
+    )
+
+    def __init__(self, *args, **kwargs):
+        super(FlaskEchartsEnvironment, self).__init__(*args, **kwargs)
+        self.globals.update(ECHAERTS_TEMPLATE_FUNCTIONS)
 
 
 # ---User Code ----
 
 class MyFlask(Flask):
     jinja_environment = FlaskEchartsEnvironment
-    jinja_options = {'pyecharts_config': PyEchartsConfig(
-        jshost='https://cdn.bootcss.com/echarts/3.7.2',
-        echarts_template_dir='templates'
-    )}
 
 
 app = MyFlask(__name__)
