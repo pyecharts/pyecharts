@@ -1,14 +1,13 @@
-#!/usr/bin/env python
 # coding=utf-8
 from __future__ import unicode_literals
 
-import codecs
 import os
 import re
 import sys
+import json
+import codecs
 import datetime
 
-import json
 
 PY2 = sys.version_info[0] == 2
 
