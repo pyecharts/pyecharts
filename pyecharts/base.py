@@ -1,8 +1,6 @@
 # coding=utf-8
 
 import uuid
-import json
-import datetime
 
 import pyecharts.constants as constants
 import pyecharts.template as template
@@ -158,30 +156,3 @@ class Base(object):
         component = tmp.render(
             my_option=my_option, chart_id=self._chart_id)
         return component
-
-
-class UnknownTypeEncoder(json.JSONEncoder):
-    """
-    `UnknownTypeEncoder`类用于处理数据的编码，使其能够被正常的序列化
-    """
-    def default(self, obj):
-        if isinstance(obj, (datetime.datetime, datetime.date)):
-            return obj.isoformat()
-        else:
-            try:
-                return obj.astype(float).tolist()
-            except Exception:
-                try:
-                    return obj.astype(str).tolist()
-                except Exception:
-                    return json.JSONEncoder.default(self, obj)
-
-
-def json_dumps(data, indent=0):
-    """ json 序列化编码处理
-
-    :param data: 字典数据
-    :param indent: 缩进量
-    """
-    return json.dumps(data, indent=indent,
-                      cls=UnknownTypeEncoder)
