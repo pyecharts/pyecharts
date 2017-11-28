@@ -18,6 +18,7 @@ def test_with_default_value():
     eq_(SCRIPT_LOCAL_JSHOST, target_config.jshost)
     eq_(SCRIPT_LOCAL_JSHOST, target_config.get_current_jshost_for_script())
     eq_(JUPYTER_LOCAL_JSHOST, target_config.get_current_jshost_for_jupyter())
+    eq_('http://demo', target_config.get_current_jshost_for_script('http://demo'))
 
     assert target_config.js_embed
 
