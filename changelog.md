@@ -9,10 +9,9 @@
 
 * ### version 0.3.0 (dev)
     * 图表`render` 方法增加 `template_name` 、`object_name`、`extra_context` 等参数，全面支持自定义模板
-    * 重写底层逻辑，支持在模板文件中使用 `echarts_*` 系列模板函数，`render_embed` 方法不再推荐使用
+    * 重写底层逻辑，支持在模板文件中使用 `echarts_*` 系列模板函数
     * js 依赖文件支持外部链接方式引入。
     * 新增统一配置函数 `pyecharts.configure` ，支持设置模板目录，JS文件仓库路径。
-    * `pyecharts.online` 全局函数不再推荐使用
     * `pyecharts.custom.Page` 类实现 `list` 协议，支持迭代、索引、添加、扩展等操作。
     * 图表 width 和 height 支持 '50%' 、'78px' 等其他 css 有效长度形式。
     * [issue#252](https://github.com/chenjiandongx/pyecharts/issues/252) 新增 `xaxis_label_textsize`, `xaxis_label_textcolor`, `yaxis_label_textsize`, `yaxis_label_textcolor` 四个参数修改坐标轴标签的字体和颜色
@@ -48,7 +47,7 @@
 
     #### Changed
     * 将 label 通用配置项的 `is_emphasis` 参数更改为 `is_label_emphasis`
-	* show_config() 修改用 JSON 显示
+    * show_config() 修改用 JSON 显示
 
     #### Fixed
     * [issue#195](https://github.com/chenjiandongx/pyecharts/issues/195) 修复 HeatMap 图配置 x、y 轴属性无效的问题
@@ -152,8 +151,8 @@
 
     #### Added
     * 为 xyAxis 模块新增下列参数
-     `xaxis_interval`, `xaxis_name_size`, `xaxis_name_gap`, `xaxis_margin`, `is_xaxislabel_align`
-     `yaxis_interval`, `yaxis_name_size`, `yaxis_name_gap`, `yaxis_margin`, `is_yaxislabel_align`
+       `xaxis_interval`, `xaxis_name_size`, `xaxis_name_gap`, `xaxis_margin`, `is_xaxislabel_align`
+        `yaxis_interval`, `yaxis_name_size`, `yaxis_name_gap`, `yaxis_margin`, `is_yaxislabel_align`
     * [issue#86](https://github.com/chenjiandongx/pyecharts/issues/86) 为 3D 图新增参数用于配置坐标轴选项（参见通用配置项中的 axis3D）
     * 修改自定义模块的接口，现自定义模块有以下 4 个类，具体用法参见文档
         * Grid 类：并行显示多张图
