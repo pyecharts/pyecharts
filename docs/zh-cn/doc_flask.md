@@ -124,13 +124,14 @@ $ flask run
 
 自 V0.3.0 起， pyecharts 支持在 Flask 使用 `echarts_*` 系列模板函数。
 
-### 第一步：实现 Flask 应用的自定义模板引擎
+### Step 0：实现 Flask 应用的自定义模板引擎
 
 主要有三个要点：
 
 - 创建一个继承自 `flask.templating.Environment` 的模板引擎类`FlaskEchartsEnvironment` 。
 - 通过使用 `pyecharts.engine.PyEchartsConfigMixin` 提供一个配置对象 。
 - 在构造函数 `__init__` 中添加模板函数到全局字典中。
+- 在自己的 Flask 应用类中指定 `FlaskEchartsEnvironment` 为默认模板引擎。
 
 ```python
 from flask import Flask, render_template
@@ -154,9 +155,34 @@ class MyFlask(Flask):
 
 
 app = MyFlask(__name__)
+
+@app.route("/")
+def hello():
+    hm = create_heatmap()
+    return render_template('flask_tpl.html', hm=hm)
+
+
+def create_heatmap():
+    begin = datetime.date(2017, 1, 1)
+    end = datetime.date(2017, 12, 31)
+    data = [[str(begin + datetime.timedelta(days=i)),
+             random.randint(1000, 25000)] for i in
+            range((end - begin).days + 1)]
+    heatmap = HeatMap("日历热力图示例", "某人 2017 年微信步数情况", width=1100)
+    heatmap.add("", data, is_calendar_heatmap=True,
+                visual_text_color='#000', visual_range_text=['', ''],
+                visual_range=[1000, 25000], calendar_cell_size=['auto', 30],
+                is_visualmap=True, calendar_date_range="2017",
+                visual_orient="horizontal", visual_pos="center",
+                visual_top="80%", is_piecewise=True)
+    return heatmap
+
+app.run(port=10200)
 ```
 
-### 第二步：创建模板文件
+**注意的是：视图函数中 `render_template` 传给模板的是图表实例 hm ，而不再是其若干个属性，这是和第一种方式最大的区别之一。**
+
+### Step 1：创建模板文件
 
 在同目录下 templates 文件夹创建 flask_demo.html 文件写入如下的代码。
 
@@ -186,3 +212,7 @@ app = MyFlask(__name__)
 
 - 减少最后生成文件大小
 - 更容易与 web 框架整合，便于大型项目开发
+
+### Step 2: 运行
+
+之后脚本运行步骤同第一种方式。
