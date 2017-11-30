@@ -2,9 +2,25 @@ pyecharts API
 
 This document describes the public API for *pyecharts* library and it will be read by developers.
 
+## Total Proccess
+
+A common proccess can be listed as the following table:
+
+| Step                     | Code Demo                                | Remark |
+| ------------------------ | ---------------------------------------- | ------ |
+| 1 Create chart instance  | `bar = Bar()`                            |        |
+| 2 Add data               | `bar.add(**kwargs)`                      |        |
+| 3 Create config instance | `config = PyEchartsConfig(**kwargs)`     |        |
+| 4 Create template engine | `engine = EchartsEnvironment(pyecharts_config=config)` |        |
+| 5 Get template file      | `tpl = engine.get_template('demo_tpl.html')` |        |
+| 6 Render                 | `html = tpl.render(bar=bar)`             |        |
+| 7 Write to target file   | `write_utf8_html_file('my_demo_chart.html', html)` |        |
+
+
+
 ## pyecharts Config Items
 
-The class `pyecharts.conf.PyEChartsConfig`  contains all config items when using *pyecharts* library.Before building chart, you can use module function  `configure` to set all config items.
+pyecharts follows the principle of "Config-Use" . The class `pyecharts.conf.PyEChartsConfig`  contains all config items when using *pyecharts* library.Before building chart, you can use module function  `configure` to set all config items.
 
 ```python
 import pyecharts
@@ -55,11 +71,11 @@ Data type:str.The identifier string for a chart. E.g.`'d2d9dcc4e28247518186c0882
 
 **width**
 
-Data type:number.The width(px) of div container for a chart.
+Data type:number/str.A valid string for css length.The width(px) of div container for a chart.
 
 **height**
 
-Data type:number.The height(px) of div container for a chart.
+Data type:number/str.A valid string for css length.The height(px) of div container for a chart.
 
 **options**
 
@@ -171,11 +187,22 @@ Data type `jinja2.Environment`。pyecharts provides a build-in environment objec
 
 ### Engine Class
 
+**BaseEnvironment**
+
+`pyecharts.engine.BaseEnvironment`
+
+This class is the basic engine in pyecharts,and it inherits  `jinja2.Environment` .It has the following features:
+
+- Add *pyecharts_config* attribute
+- Add  `echarts_*`  template functions
+
+This class can be used for integration with web framework.
+
 **EChartsEnvironment**
 
 `pyecharts.engine.EChartsEnvironment`
 
-EChartsEnvironment class inherits  `Jinja2.Environment` .
+EChartsEnvironment class inherits  `BaseEnvironment` .And it use `pyecharts_config.echarts_template_dir` as the default value of template folder. 
 
 ### 模板函数
 
@@ -197,10 +224,29 @@ EChartsEnvironment  contains some template functions, which receives a or some  
 
 Render script html nodes with internal embed mode or enternal link.The mode will follow this table.
 
-| jshost/force_js_embed | True           | False          |
-| --------------------- | -------------- | -------------- |
-| local host            | internal embed | internal embed |
-| remote host           | internal embed | enternal link  |
+Internal Embed(IE)
+
+```html
+<script type="text/javascript">
+    var a = 1;
+    console.log(a):
+</script>
+```
+
+Enternal Link(EL)
+
+```html
+<script type="text/javascript" src="/static/js/echarts.min.js"></script>
+```
+
+Which mode is used is determined by the `PyEchartsConfig.jshost` and  `PyEchartsConfig.force_js_embed` .See this table.
+
+| Value                                    | local/remote | script mode | Use Case                  | Remark                |
+| ---------------------------------------- | ------------ | ----------- | ------------------------- | --------------------- |
+| `/template/js/echarts`                   | local        | IE          | Generate one file locally | Default value         |
+| `'https://chfw.github.io/jupyter-echarts/echarts'` | remote       | IE          | Generate on file          | switch using `online` |
+| 其他本地模式 (如 `/static/js`)                  | local        | EI          | Integrate with Web        |                       |
+| 其他远程模式（如 `hthttps://cdn.bootcss.com/echarts/3.7.2`） | remote       | EI          | Use remote JS             |                       |
 
 Example
 
