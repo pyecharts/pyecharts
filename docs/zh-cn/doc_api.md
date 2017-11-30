@@ -26,9 +26,9 @@
 
 ## pyecharts 配置项
 
-所有的配置项将统一于类 `pyecharts.conf.PyEChartsConfig` 类中。
+pyecharts 遵循 “先配置后使用” 的基本原则，所有的配置项将统一于类 `pyecharts.conf.PyEChartsConfig` 类中。
 
-如果使用 `chart.render()` 这种方式，可以模块函数 `configure` 进行设置。
+如果使用 `chart.render()` 这种渲染方式，可以通过模块函数 `configure` 进行修改 pyecharts 中默认的配置类。
 
 ```python
 import pyecharts
@@ -76,11 +76,11 @@ pyecharts.configure(P1=V1, P2=V2,...)
 
 * width
 
-    数字类型(number)。图表容器 div 的宽度，以 px 为单位。
+    数字类型(number)或字符串(str)。图表容器 div 的宽度，以 px 为单位。
 
 * height
 
-    数字类型(number)。图表容器 div 的高度，以 px 为单位。
+    数字类型(number)或字符串(str)。图表容器 div 的高度，以 px 为单位。
 
 * options
 
@@ -90,9 +90,6 @@ pyecharts.configure(P1=V1, P2=V2,...)
 
     集合类型(set)，js 依赖文件名称列表，元素不包含文件后缀(.js)，如 `{'echarts.min', 'fujian'}` 。
 
-* charts
-
-    多图表对象中源图表对象列表，每个元素均为 `pyecharts.base.Base` 的子类对象。仅用于 `pyecharts.custom.page.Page` 类。
 
 
 ### 方法
@@ -101,7 +98,7 @@ pyecharts.configure(P1=V1, P2=V2,...)
 
     添加图表配置和数据。具体请参考其子类定义。
 
-    | 图表类    | 函数签名                                     |
+    | 图表类      | 函数签名                                     |
     | -------- | ---------------------------------------- |
     | Base     | `add(**echarts_options)`                 |
     | Grid     | `add(grid_width=None, grid_height=None, grid_top=None, grid_bottom=None, grid_left=None, grid_right=None)` |
@@ -191,11 +188,22 @@ pyecharts库使用 [Jinja2](http://jinja.pocoo.org/) 作为其默认模板渲染
 
 ### 引擎对象
 
+**BaseEnvironment**
+
+`pyecharts.engine.BaseEnvironment`
+
+该类是 pyecharts 基本的模板引擎类，该类直接继承 `jinja2.Environment` ，并且：
+
+- 拥有 pyecharts_config 配置对象
+- 添加了 `echarts_*` 等模板函数
+
+该类可用于 web 框架整合。
+
 **EChartsEnvironment**
 
 `pyecharts.engine.EChartsEnvironment(pyecharts_config=None, **kwargs)`
 
-EChartsEnvironment 类继承自 `Jinja2.Environment` 。
+EChartsEnvironment 类继承自 `BaseEnvironment` 。并在此基础上改写了模板文件加载器(loader)的行为，默认使用 `pyecharts_config.echarts_template_dir` 作为模板文件目录。
 
 ### 模板函数
 
@@ -213,7 +221,7 @@ EChartsEnvironment 引擎提供了一些模板函数，这些函数通常接收�
 * echarts_js_dependencies
 
     `pyecharts.template.echarts_js_dependencies(*args)`  
-    
+
     渲染包含图表所需要的 js 文件的 script 一个或多个节点，有内部嵌入或者外部链接两种结果。
 
     内嵌模式
@@ -233,29 +241,30 @@ EChartsEnvironment 引擎提供了一些模板函数，这些函数通常接收�
 
     最终采用何种模板依据 PyEchartsConfig.jshost 和 PyEchartsConfig.force_js_embed 配置项决定的，具体可参考下表：
 
-    | 取值                                       | script 模式 | 本地/远程                  | 使用场景          | 备注                 |
-    | ---------------------------------------- | --------- | ---------------------- | ------------- | ------------------ |
-    | `/template/js/echarts`                   | 本地        | 内嵌                     | 本地生成单一文件，直接移植 | 此为默认是设置            |
-    | `'https://chfw.github.io/jupyter-echarts/echarts'` | 远程        | 内嵌                     | 生成单一文件        | 使用 `online` 可切换到此项 |
-    | 其他本地模式 (如 `/static/js`)                  | 本地        | 外链，可以通过force_embed改成内嵌 | 可用于web框架整合    |                    |
-    | 其他远程模式（如 `hthttps://cdn.bootcss.com/echarts/3.7.2`） | 远程        | 外链                     | 使用外部js，需依赖网络  |                    |
+    | 取值                                       | 本地/远程 | script 模式              | 使用场景          | 备注                 |
+    | ---------------------------------------- | ----- | ---------------------- | ------------- | ------------------ |
+    | `/template/js/echarts`                   | 本地    | 内嵌                     | 本地生成单一文件，直接移植 | 此为默认是设置            |
+    | `'https://chfw.github.io/jupyter-echarts/echarts'` | 远程    | 内嵌                     | 生成单一文件        | 使用 `online` 可切换到此项 |
+    | 其他本地模式 (如 `/static/js`)                  | 本地    | 外链，可以通过force_embed改成内嵌 | 可用于web框架整合    |                    |
+    | 其他远程模式（如 `hthttps://cdn.bootcss.com/echarts/3.7.2`） | 远程    | 外链                     | 使用外部js，需依赖网络  |                    |
 
 
-    例子
+例子：
 
-    ```
+
+    ​```
     # Jinja2 Context function
     {{ echarts_js_dependencies('echarts') }}
     # Html Output
     <script type="text/javascript" src="js/echarts.js"></script>
-
+    
     # Python
     bar = Bar('Demo Bar')
     # Jinja2 Context function
     {{ echarts_js_dependencies(bar) }}
     # Html Output
     <script type="text/javascript" src="js/echarts.js"></script>
-    ```
+    ​```
 
 * echarts_js_dependencies_embed
 
