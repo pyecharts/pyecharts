@@ -1,8 +1,6 @@
 # pyecharts integration with Flask
 
-## Way I:Directly Render
-
-### Step 0: let's create a mini flask project
+## Step 0: let's create a mini flask project
 
 Please create new directory for the new project
 
@@ -12,7 +10,7 @@ $ cd flask-echarts
 $ mkdir templates
 ```
 
-### Step 1: render your chart using chart_instance.render_embed()
+## Step 1: render your chart using chart_instance.render_embed()
 
 Please save the following python file as server.py under your project root directory.
 
@@ -59,7 +57,7 @@ to be rendered.
 http://chfw.github.io/jupyter-echarts/echarts. You can change them if you wish. And if you do so,
 please clone https://github.com/chfw/jupyter-echarts. Then, place `echarts` folder onto your own server.
 
-### Step 2: provide your own template
+## Step 2: provide your own template
 
 Please save the following template as pyecharts.html in `templates` folder
 
@@ -82,7 +80,7 @@ Please save the following template as pyecharts.html in `templates` folder
 </html>
 ```
 
-### Step 3: run it
+## Step 3: run it
 
 Now you shall have these:
 
@@ -93,7 +91,7 @@ $ ls templates
 pyecharts.html
 
 
-​```shell
+```shell
 $ pip install flask
 $ export FLASK_APP=server.py
 $ flask run
@@ -106,108 +104,9 @@ Here's what you will get:
 ![flask-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/flask-0.gif)
 
 
-### Conclusion
+## Conclusion
 
 It is extremely simple to include a pyexcharts instance in a Flask app. Please go
 ahead and put your own charts in flask.
 
 For your reference, please find the example code in `pyecharts/document` folder.
-
-
-
-## Way II :Render Using Template Functions
-
-From V0.3.0, pyecharts is support to use `echarts_*`  template functions in Flask web framework.
-
-### Step 0：Implement Custom Template Engine
-
-There are three key points:
-
-- Create a class named  `FlaskEchartsEnvironment`  implement `flask.templating.Environment` .
-- Assign a config  using  `pyecharts.engine.PyEchartsConfigMixin` .
-- Add temlate functions to the environment object in the method  `__init__` .
-- Se\pecified your custom Environment as Flask app instance's engine.
-
-```python
-from flask import Flask, render_template
-from flask.templating import Environment
-
-from pyecharts import HeatMap
-from pyecharts.engine import PyEchartsConfigMixin, ECHAERTS_TEMPLATE_FUNCTIONS
-from pyecharts.conf import PyEchartsConfig
-
-class FlaskEchartsEnvironment(Environment, PyEchartsConfigMixin):
-    pyecharts_config = PyEchartsConfig(
-        jshost='https://cdn.bootcss.com/echarts/3.7.2'
-    )
-
-    def __init__(self, *args, **kwargs):
-        super(FlaskEchartsEnvironment, self).__init__(*args, **kwargs)
-        self.globals.update(ECHAERTS_TEMPLATE_FUNCTIONS)
-
-class MyFlask(Flask):
-    jinja_environment = FlaskEchartsEnvironment
-
-
-app = MyFlask(__name__)
-
-@app.route("/")
-def hello():
-    hm = create_heatmap()
-    return render_template('flask_tpl.html', hm=hm)
-
-
-def create_heatmap():
-    begin = datetime.date(2017, 1, 1)
-    end = datetime.date(2017, 12, 31)
-    data = [[str(begin + datetime.timedelta(days=i)),
-             random.randint(1000, 25000)] for i in
-            range((end - begin).days + 1)]
-    heatmap = HeatMap("日历热力图示例", "某人 2017 年微信步数情况", width=1100)
-    heatmap.add("", data, is_calendar_heatmap=True,
-                visual_text_color='#000', visual_range_text=['', ''],
-                visual_range=[1000, 25000], calendar_cell_size=['auto', 30],
-                is_visualmap=True, calendar_date_range="2017",
-                visual_orient="horizontal", visual_pos="center",
-                visual_top="80%", is_piecewise=True)
-    return heatmap
-
-app.run(port=10200)
-```
-
-**NOTE: The view function `render_template` pass the chart instance to the template ,instead of their attributes,which is the main different from to Way I.**
-
-### Step 1：Create Template File
-
-Create flask_demo.html in the same dir templates.
-
-```html
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <title>自定义模板</title>
-    {{ echarts_js_dependencies(hm) }}
-</head>
-<body>
-    <p>在 Flask 下使用 echarts_* 系列模板函数(Template Functions)渲染页面。</p>
-    {{ echarts_container(hm) }}
-    {{ echarts_js_content(hm) }}
-</body>
-</html>
-```
-
-The boot CDN is used for js file in the above example,so the end html file generates the following code fragment.
-
-```html
-<script type="text/javascript" src=https://cdn.bootcss.com/echarts/3.7.2/echarts.min.js""></script>
-```
-
-使用外链形式优点在于：
-
-* Decrease the size of the template file.
-* It is more easily to integrate with web framework.
-
-### Step 2: Run
-
-The run steps is the same as the way I.

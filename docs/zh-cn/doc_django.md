@@ -1,12 +1,8 @@
 # pyecharts + Django 使用指南
 > 本指南按照 Django [官方教程](https://docs.djangoproject.com/en/1.11/intro/tutorial01/)，通过完成一个 Django 小项目来说明如何在 Django 中使用 pyecharts。如果对 Django 还不太熟悉的开发者，可仔细阅读官方提供的最新文档。
 
-## 第一种方式：直接渲染
 
-该方法直接使用依赖文件变量和选项文字。
-
-
-### Step 0: 使用新的 virtualenv 环境
+## Step 0: 使用新的 virtualenv 环境
 建议开发者使用 1.11.4 版本的 Django
 
 ```shell
@@ -17,7 +13,7 @@ $ pip install pyecharts
 ```
 
 
-### Step 1: 新建一个 django 项目
+## Step 1: 新建一个 django 项目
 
 ```shell
 $ django-admin startproject myechartsite
@@ -76,7 +72,7 @@ urlpatterns = [
 ```
 
 
-### Step 2: 处理视图功能部分
+## Step 2: 处理视图功能部分
 
 将下列代码保存到 `myfirstvis/views.py` 中。
 
@@ -125,7 +121,7 @@ def line3d():
 `host` 是 echarts js 库的地址，默认的地址为 http://chfw.github.io/jupyter-echarts/echarts  当然，如果你愿意你也可以改变这个地址，先克隆 https://github.com/chfw/jupyter-echarts  然后将 `echarts` 文件夹挂载在你自己的服务器上即可。
 
 
-### Step 3: 为项目提供自己的模板
+## Step 3: 为项目提供自己的模板
 
 前面的步骤是按照 [tutorial part 1](https://docs.djangoproject.com/en/1.11/intro/tutorial01/)，接下来我们跳到 [tutorial part 3](https://docs.djangoproject.com/en/1.11/intro/tutorial03/)
 
@@ -178,7 +174,7 @@ myfirstvis 目录
 ```
 
 
-### Step 4: 运行项目
+## Step 4: 运行项目
 
 ```shell
 $ cd myechartsite
@@ -198,46 +194,8 @@ Quit the server with CONTROL-C.
 ![django-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/django-0.gif)
 
 
-### 小结
+## 小结
 
 看到了吧，只需要简单的几步就可以使用 pyecharts 创建可视化的图表。Django 官方教程需要七步的这里我们三步就搞定了。
 
 具体文档可以参考 pyecharts/document 文件夹。
-
-## 第二种方式：jinja2模板引擎
-
-> 在使用本方式之前，应当对 Django 多模板引擎有所了解。请选认真阅读相关内容 [Django自定义模板引擎](https://docs.djangoproject.com/en/1.11/topics/templates/#django.template.backends.jinja2.Jinja2)
-
-该方法第一种方式最大的区别有：
-
-- 使用同一的配置，适用于所有的图表对象
-- 传给模板页面的是 chart 这个对象，而不再是由其属性(`js_dependencies` 、`options` 等)组成的一个字典。
-
-自 1.8 起，Django 模板支持多引擎，内置了对 Jinja2 的支持。pyecharts 内部也是使用 Jinja2 作为其默认的模板引擎。因此二者的整合是非常简单的。
-
-首先，需要实现一个返回一个 `jinja2.Environment` 对象的回调函数。下面是仿造 [官方例子](https://docs.djangoproject.com/en/1.11/topics/templates/#django.template.backends.jinja2.Jinja2) 实现的一个例子：
-
-```python
-from django.contrib.staticfiles.storage import staticfiles_storage
-from django.urls import reverse
-
-from pyecharts.conf import PyEchartsConfig
-from pyecharts.engine import BaseEnvironment
-
-
-def environment(**options):
-    env = BaseEnvironment(pyecharts_config=PyEchartsConfig(jshost='/static/'), **options)
-    # Add template functions to the environment object
-    env.globals.update({
-        'static': staticfiles_storage.url,
-        'url': reverse,
-    })
-    return env
-
-```
-
-其余按照 Django 文档配置 `settings.TEMPLATES` 等变量值。
-
- ## 第三种方式：django自带模板引擎
-
-此种方式请参考项目  [django-echarts](https://github.com/kinegratii/django-echarts) 。
