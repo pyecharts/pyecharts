@@ -126,33 +126,27 @@ class Base(object):
     def _repr_html_(self):
         """ 渲染配置项并将图形显示在 notebook 中
         """
-        _tmp = 'notebook.html'
         dom = self._render_notebook_dom_()
         component = self._render_notebook_component_()
-        tmp = template.create_builtin_template_engine().get_template(_tmp)
         require_config = template.produce_require_configuration(
             self._js_dependencies, self._jshost)
-        html = tmp.render(
-            single_chart=component, dom=dom, **require_config)
-        return html
+        return template.render('notebook.html',
+                               single_chart=component,
+                               dom=dom,
+                               **require_config)
 
     def _render_notebook_dom_(self):
         """ 为 notebook 渲染 dom 模板
         """
-        _tmp = "notebook_dom.html"
-        tmp = template.create_builtin_template_engine().get_template(_tmp)
-        component = tmp.render(
-            chart_id=self._chart_id,
-            chart_width=self.width,
-            chart_height=self.height)
-        return component
+        return template.render("notebook_dom.html",
+                               chart_id=self._chart_id,
+                               chart_width=self.width,
+                               chart_height=self.height)
 
     def _render_notebook_component_(self):
         """ 为 notebook 渲染组件模板
         """
-        _tmp = "notebook_chart_component.html"
         my_option = utils.json_dumps(self._option, indent=4)
-        tmp = template.create_builtin_template_engine().get_template(_tmp)
-        component = tmp.render(
-            my_option=my_option, chart_id=self._chart_id)
-        return component
+        return template.render("notebook_chart_component.html",
+                               my_option=my_option,
+                               chart_id=self._chart_id)
