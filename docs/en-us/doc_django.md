@@ -4,9 +4,7 @@ We are following the official django [tutorials](https://docs.djangoproject.com/
 gone through the tutorial at least.
 
 
-## Way I:Directly Render
-
-### Step 0: Let's create a virtual environment and install pyecharts
+## Step 0: Let's create a virtual environment and install pyecharts
 
 ```shell
 $ virtualenv --no-site-packages pyecharts-env
@@ -18,7 +16,7 @@ $ pip install pyecharts
 Although current dependencies of pyecharts include django, the tutorial is written on top django version **1.11.4**.
 
 
-###  Step 1: create a mini django site and the actual visualization app
+## Step 1: create a mini django site and the actual visualization app
 
 ```shell
 $ django-admin startproject myechartsite
@@ -76,7 +74,7 @@ urlpatterns = [
 ]
 ```
 
-### Step 2: Now let's write up the view function
+## Step 2: Now let's write up the view function
 
 Then copy the following code and save as `myfirstvis/views.py` 
 
@@ -130,7 +128,7 @@ http://chfw.github.io/jupyter-echarts/echarts. You can change them if you wish. 
 please clone https://github.com/chfw/jupyter-echarts. Then, place `echarts` folder onto your own server.
 
 
-### Step 3: Now let's create a template
+## Step 3: Now let's create a template
 
 Previous steps follow the [tutorial part 1](https://docs.djangoproject.com/en/1.11/intro/tutorial01/). Now let's jump to [tutorial part 3](https://docs.djangoproject.com/en/1.11/intro/tutorial03/).
 
@@ -164,7 +162,7 @@ is the template file.
 </html>
 ```
 
-### Step 4: Run it
+## Step 4: Run it
 
 Then let's bring up the django site:
 
@@ -186,46 +184,9 @@ Please visit http://localhost:8000/myfirstvis/ for your first visualization via 
 ![django-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/django-0.gif)
 
 
-### Conclusion
+## Conclusion
 
 As you can see, it is just a few steps to create a visual charts using pyecharts. Django tutorials has 7 parts and we only need 1st and 3rd parts to
 make the visualisation.
 
 For your reference, please find the example code in `pyecharts/document` folder.
-
-## Way II: Django with Jinja2 Template Engine
-
-> Before using this way,you should learn a lot about multiple-template-engine.see [Django Custom Template Engine](https://docs.djangoproject.com/en/1.11/topics/templates/#django.template.backends.jinja2.Jinja2)
-
-The different from Way I lists:
-
-- Use the same config to fit all chart
-
-From 1.8 Django supports multiple template engine, which includes Jinja2. So it is easy to integrate pyecharts with Django.
-
-Firstly,you need a callable which returns  `jinja2.Environment` object.Example:
-
-```python
-from django.contrib.staticfiles.storage import staticfiles_storage
-from django.urls import reverse
-
-from pyecharts.conf import PyEchartsConfig
-from pyecharts.engine import BaseEnvironment
-
-
-def environment(**options):
-    env = BaseEnvironment(pyecharts_config=PyEchartsConfig(jshost='/static/'), **options)
-    # Add template functions to the environment object
-    env.globals.update({
-        'static': staticfiles_storage.url,
-        'url': reverse,
-    })
-    return env
-
-```
-
-See Django document for more detail about `settings` module configure.
-
-## Way III：Render with Django Builtin Template Engine
-
-See project  [django-echarts](https://github.com/kinegratii/django-echarts)  for more detail.
