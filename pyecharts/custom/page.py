@@ -32,11 +32,9 @@ class Page(list):
                template_name='simple_page.html',
                object_name='page',
                extra_context=None):
-        tpl = template.create_builtin_template_engine().get_template(
-            template_name)
         context = {object_name: self}
         context.update(extra_context or {})
-        html = tpl.render(**context)
+        html = template.render(template_name, **context)
         utils.write_utf8_html_file(path, html)
 
     def render_embed(self):
@@ -59,7 +57,6 @@ class Page(list):
 
         :return:
         """
-        _tmp = "notebook.html"
         doms = ""
         components = ""
         dependencies = self._merge_dependencies()
@@ -69,10 +66,10 @@ class Page(list):
 
         require_config = template.produce_require_configuration(
             dependencies, self._jshost)
-        tmp = template.create_builtin_template_engine().get_template(_tmp)
-        html = tmp.render(
-            single_chart=components, dom=doms, **require_config)
-        return html
+        return template.render("notebook.html",
+                               single_chart=components,
+                               dom=doms,
+                               **require_config)
 
     def _merge_dependencies(self):
         dependencies = set()
