@@ -155,7 +155,7 @@ for chart in page:
 
 * cast
 
-    `pyecharts.base.cast(seq)`
+    `pyecharts.base.Base.cast(seq)`
 
     数据格式化处理函数，能够将源数据转化为符合 pyecharts 的数据。
 
@@ -188,14 +188,16 @@ pyecharts库使用 [Jinja2](http://jinja.pocoo.org/) 作为其默认模板渲染
 
 ### 引擎对象
 
+`pyecharts.engine` 定义了若干个继承自 `jinja2.Environment` 的模板引擎类，每个类都有其适合的使用场景。
+
 **BaseEnvironment**
 
 `pyecharts.engine.BaseEnvironment`
 
 该类是 pyecharts 基本的模板引擎类，该类直接继承 `jinja2.Environment` ，并且：
 
-- 拥有 pyecharts_config 配置对象
-- 添加了 `echarts_*` 等模板函数
+- 添加了 pyecharts_config 属性，这是一个 `PyEchartsConfig` 对象。
+- 添加了 `echarts_*` 等模板函数。
 
 该类可用于 web 框架整合。
 
@@ -205,9 +207,17 @@ pyecharts库使用 [Jinja2](http://jinja.pocoo.org/) 作为其默认模板渲染
 
 EChartsEnvironment 类继承自 `BaseEnvironment` 。并在此基础上改写了模板文件加载器(loader)的行为，默认使用 `pyecharts_config.echarts_template_dir` 作为模板文件目录。
 
+由于该类重写模板文件加载器的行为，因此不应当用于 web 整合。
+
+**ECHAERTS_TEMPLATE_FUNCTIONS**
+
+`pyecharts.engine.ECHAERTS_TEMPLATE_FUNCTIONS`
+
+包含模板函数的字典。可用于 web 框架整合。
+
 ### 模板函数
 
-EChartsEnvironment 引擎提供了一些模板函数，这些函数通常接收一个或多个的 `Chart` 或 `Page` 的参数，详细的调用形式见下表。
+pyecharts 内置的引擎提供了一些模板函数，这些函数通常接收一个或多个的 `Chart` 或 `Page` 的参数，详细的调用形式见下表。
 
 | 标签/调用形式                       | F(chart) | F(page) | F(chart1,chart2,...)/F(*page) |
 | ----------------------------- | -------- | ------- | ----------------------------- |
