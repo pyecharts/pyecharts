@@ -170,17 +170,13 @@ ECHAERTS_TEMPLATE_FUNCTIONS = {
 }
 
 
-class PyEchartsConfigMixin(object):
-    pyecharts_config = None
-
-
-class BaseEnvironment(Environment, PyEchartsConfigMixin):
+class BaseEnvironment(Environment):
     """
     Add config and echarts template functions to a Environment object.
     """
 
     def __init__(self, *args, **kwargs):
-        self.pyecharts_config = kwargs.pop('pyecharts_config', self.pyecharts_config)
+        self.pyecharts_config = kwargs.pop('pyecharts_config', None)
         if self.pyecharts_config is None:
             raise TypeError('no pyecharts_config for this environment specified')
         super(BaseEnvironment, self).__init__(*args, **kwargs)
