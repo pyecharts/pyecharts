@@ -1,6 +1,6 @@
 pyecharts API
 
-This document describes the public API for *pyecharts* library and it will be read by developers.
+This document describes the public API for *pyecharts* library and it will be read by users and developers.
 
 ## Total Proccess
 
@@ -167,16 +167,6 @@ Convert *data* to json string, and add encoding for some specified data type:
 - Convert Datetime and Time objects to ISO8601 format string.
 - Cast numpy arrays. See the document of  [astype](https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.astype.html) and [tolist](https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.tolist.html) .
 
-## Chart Rendering
-
-**JINJA2_ENV**
-
-`pyecharts.templates.JINJA2_ENV`
-
-Data type `jinja2.Environment`。pyecharts provides a build-in environment object for rendering using Jinja2 engine。
-
-- This environment  use *pyecharts/templates* as its base directory to store HTML and  javascript files.
-
 ## Template Engine
 
 ### Overview
@@ -187,13 +177,15 @@ Data type `jinja2.Environment`。pyecharts provides a build-in environment objec
 
 ### Engine Class
 
+`pyecharts.engine` module defines some engine class, which inherit from `jinja2.Environment`.Each class has different use case.
+
 **BaseEnvironment**
 
 `pyecharts.engine.BaseEnvironment`
 
-This class is the basic engine in pyecharts,and it inherits  `jinja2.Environment` .It has the following features:
+This class is the basic engine in pyecharts,and it inherits  `jinja2.Environment` .It has the following extra features:
 
-- Add *pyecharts_config* attribute
+- Add *pyecharts_config* attribute, it is a `PyEchartsConfig` object.
 - Add  `echarts_*`  template functions
 
 This class can be used for integration with web framework.
@@ -204,11 +196,19 @@ This class can be used for integration with web framework.
 
 EChartsEnvironment class inherits  `BaseEnvironment` .And it use `pyecharts_config.echarts_template_dir` as the default value of template folder. 
 
+This class should not be used in web integration because of overwriting the default behavior of template file loader.
+
+**ECHAERTS_TEMPLATE_FUNCTIONS**
+
+`pyecharts.engine.ECHAERTS_TEMPLATE_FUNCTIONS`
+
+The dictionary containing template functions.It can be used in web integration.
+
 ### 模板函数
 
-EChartsEnvironment  contains some template functions, which receives a or some  `Chart`  /  `Page`  objects.See the following table.
+ pyecharts contains some template functions, which receives a or some  `Chart`  /  `Page`  objects as its parameter.See the following table.
 
-| 标签/调用形式                       | F(chart) | F(page) | F(chart1,chart2,...)/F(*page) |
+| Function Name/Function Sign   | F(chart) | F(page) | F(chart1,chart2,...)/F(*page) |
 | ----------------------------- | -------- | ------- | ----------------------------- |
 | echarts_js_dependencies       | ✓        | ✓       | ✓                             |
 | echarts_js_dependencies_embed | ✓        | ✓       | ✓                             |
