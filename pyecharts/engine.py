@@ -189,7 +189,7 @@ class EchartsEnvironment(BaseEnvironment):
     """
 
     def __init__(self, pyecharts_config=None, *args, **kwargs):
-        pyecharts_config = pyecharts_config or self.pyecharts_config or PyEchartsConfig()
+        pyecharts_config = pyecharts_config or PyEchartsConfig()
         loader = kwargs.pop('loader', None)
         if loader is None:
             loader = FileSystemLoader(pyecharts_config.echarts_template_dir)
