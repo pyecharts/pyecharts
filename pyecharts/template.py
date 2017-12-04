@@ -39,6 +39,12 @@ def online(host=constants.DEFAULT_HOST):
     CURRENT_CONFIG.jshost = host
 
 
+def render(template_file, **context):
+    echarts_env = create_builtin_template_engine()
+    template = echarts_env.get_template(template_file)
+    return template.render(**context)
+
+
 def create_builtin_template_engine():
     """ Create the builtin template engine.
     """
