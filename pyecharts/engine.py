@@ -158,18 +158,42 @@ def echarts_js_content_wrap(env, *charts):
     return generate_js_content(*charts)
 
 
-class EchartsEnvironment(Environment):
+# Public API,see document for more detail.
+
+ECHAERTS_TEMPLATE_FUNCTIONS = {
+    'echarts_js_dependencies': echarts_js_dependencies,
+    'echarts_js_dependencies_embed': echarts_js_dependencies_embed,
+    'echarts_container': echarts_container,
+    'echarts_js_content': echarts_js_content,
+    'echarts_js_content_wrap': echarts_js_content_wrap
+}
+
+
+class BaseEnvironment(Environment):
+    """
+    Add config and echarts template functions to a Environment object.
+    """
+
+    def __init__(self, *args, **kwargs):
+        self.pyecharts_config = kwargs.pop('pyecharts_config', None)
+        if self.pyecharts_config is None:
+            raise TypeError('no pyecharts_config for this environment specified')
+        super(BaseEnvironment, self).__init__(*args, **kwargs)
+        self.globals.update(ECHAERTS_TEMPLATE_FUNCTIONS)
+
+
+class EchartsEnvironment(BaseEnvironment):
     """
     Built-in jinja2 template engine for pyecharts
     """
 
     def __init__(self, pyecharts_config=None, *args, **kwargs):
-        self._pyecharts_config = pyecharts_config or PyEchartsConfig()
+        pyecharts_config = pyecharts_config or PyEchartsConfig()
         loader = kwargs.pop('loader', None)
         if loader is None:
-            loader = FileSystemLoader(
-                self._pyecharts_config.echarts_template_dir)
+            loader = FileSystemLoader(pyecharts_config.echarts_template_dir)
         super(EchartsEnvironment, self).__init__(
+            pyecharts_config=pyecharts_config,
             keep_trailing_newline=True,
             trim_blocks=True,
             lstrip_blocks=True,
@@ -177,21 +201,6 @@ class EchartsEnvironment(Environment):
             *args,
             **kwargs)
 
-        # Add PyEChartsConfig
-        self.globals.update({
-            'echarts_js_dependencies': echarts_js_dependencies,
-            'echarts_js_dependencies_embed': echarts_js_dependencies_embed,
-            'echarts_container': echarts_container,
-            'echarts_js_content': echarts_js_content,
-            'echarts_js_content_wrap': echarts_js_content_wrap
-        })
-
-    @property
-    def pyecharts_config(self):
-        """ Expose the config object.
-        """
-        return self._pyecharts_config
-
     def configure_pyecharts(self, **kwargs):
         for k, v in kwargs.items():
-            setattr(self._pyecharts_config, k, v)
+            setattr(self.pyecharts_config, k, v)
