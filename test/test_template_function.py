@@ -1,8 +1,11 @@
 # coding=utf8
+import unittest
+
+from nose.tools import raises
 
 from pyecharts.utils import get_resource_dir
 from pyecharts import Bar
-from pyecharts.engine import EchartsEnvironment
+from pyecharts.engine import BaseEnvironment, EchartsEnvironment
 
 ECHARTS_ENV = EchartsEnvironment()
 
@@ -73,3 +76,8 @@ def test_echarts_js_content_wrap():
     bar = create_demo_bar()
     html = tpl.render(bar=bar)
     assert len(html) > 0
+
+
+@raises(TypeError)
+def test_create_environment_without_config():
+    be = BaseEnvironment()
