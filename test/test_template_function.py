@@ -1,10 +1,11 @@
 # coding=utf8
-import unittest
-
+"""
+Test cases for jinja2 template functions
+"""
 from nose.tools import raises
 
 from pyecharts.utils import get_resource_dir
-from pyecharts import Bar
+from pyecharts import Bar, Map
 from pyecharts.engine import BaseEnvironment, EchartsEnvironment
 
 ECHARTS_ENV = EchartsEnvironment()
@@ -81,3 +82,18 @@ def test_echarts_js_content_wrap():
 @raises(TypeError)
 def test_create_environment_without_config():
     be = BaseEnvironment()
+
+
+def test_echarts_js_in_first():
+    value = [20, 190, 253, 77, 65]
+    attr = ['汕头市', '汕尾市', '揭阳市', '阳江市', '肇庆市']
+    map = Map("广东地图示例", width=1200, height=600)
+    map.add("", attr, value, maptype='广东', is_visualmap=True, visual_text_color='#000')
+    ECHARTS_ENV.configure_pyecharts(jshost='http://localhost/echarts')
+    tpl = ECHARTS_ENV.from_string('{{ echarts_js_dependencies(m) }}')
+    html = tpl.render(m=map)
+    echarts_js_pos = html.find('echarts.min.js')
+    guangdong_js_pos = html.find('guangdong.js')
+    assert echarts_js_pos > -1
+    assert guangdong_js_pos > -1
+    assert echarts_js_pos < guangdong_js_pos
