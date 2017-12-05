@@ -2,6 +2,8 @@
 """
 Test cases for jinja2 template functions
 """
+
+from __future__ import unicode_literals
 from nose.tools import raises
 
 from pyecharts.utils import get_resource_dir
