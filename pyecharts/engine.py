@@ -29,6 +29,9 @@ class Helpers(object):
                     _add(d)
             else:
                 _add(a)
+        if len(dependencies) > 1:
+            dependencies.remove('echarts')
+            dependencies = ['echarts'] + list(dependencies)
         return dependencies
 
     @staticmethod
