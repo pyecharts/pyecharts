@@ -2,7 +2,7 @@
 
 > 阅读指引：
 >
-> 1. 本文所述的整合方式适用于 V0.3.0及其以上的版本。
+> 1. 本文所述的整合方式适用于 V0.3.0 及其以上的版本。
 > 2. 本文不是一个教程性质的文档，仅描述关键步骤和原理文档。因此在阅读之前，你应当对相关的web 框架有所了解或者参考示例项目。
 
 pyecharts 现在和 web 框架的整合工作变得十分容易，无论你是刚开始开发 web 项目还是整合已有的项目。这主要得益于 python 语言的灵活性和面向对象特点，使得整合工作不会破坏原有的功能和代码层次结构。
@@ -63,7 +63,7 @@ app = MyFlask(__name__)
 </html>
 ```
 
-上述例子使用 boot CDN 的 js 文件，因此在最后生成 HTML 文件代码时，使用了下面的外链形式
+上述例子使用 boot CDN 的 js 文件，因此在最后生成 HTML 文件代码时，使用了下面的外链形式。不过需要注意的是，最好请确保你挂载的的服务器有 pyecharts 所需要的所有 js 文件，如对应的地图，3D 图等的 js 文件，这些文件均在 pyecharts/template/js 文件夹里面。
 
 ```html
 <script type="text/javascript" src=https://cdn.bootcss.com/echarts/3.7.2/echarts.min.js""></script>
@@ -116,4 +116,4 @@ def environment(**options):
 
 ## 其他
 
-- 关于Django 使用了自己的模板引擎，可参考 [django-echarts](https://github.com/kinegratii/django-echarts) 项目。
+- 关于 Django 使用了自己的模板引擎，可参考 [django-echarts](https://github.com/kinegratii/django-echarts) 项目。
