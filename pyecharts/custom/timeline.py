@@ -110,7 +110,7 @@ class Timeline(Base):
             图形实例
         """
         _compoents = [
-            'gird', 'xAxis', 'yAxis', 'polar', 'radiusAxis', 'geo'
+            'grid', 'xAxis', 'yAxis', 'polar', 'radiusAxis', 'geo'
             'angleAxis', 'radar', 'visualMap', 'dataZoom', 'parallelAxis'
         ]
 
