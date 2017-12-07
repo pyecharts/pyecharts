@@ -1,10 +1,3 @@
-# pyecharts 文档-画廊篇
-
-#### [pyecharts 文档-预览篇](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/doc_prepare.md)
-#### [pyecharts 文档-图形篇](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/doc_charts.md)
-#### [pyecharts 文档-API 篇](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/doc_api.md)
-#### [pyecharts 文档-版本篇](https://github.com/chenjiandongx/pyecharts/blob/master/changelog.md)
-#### [pyecharts 文档-FAQ 篇](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/doc_faq.md)
 
 用极坐标系画出一个爱心
 ```python
@@ -21,7 +14,7 @@ polar = Polar("极坐标系示例", width=1200, height=600)
 polar.add("Love", data, angle_data=hour, boundary_gap=False,start_angle=0)
 polar.render()
 ```
-![example-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/example-0.png)
+![example-0](https://raw.githubusercontent.com/chenjiandongx/pyecharts/master/images/example-0.png)
 
 用极坐标系画出一朵小花
 ```python
@@ -37,7 +30,7 @@ polar = Polar("极坐标系示例", width=1200, height=600)
 polar.add("Flower", data, start_angle=0, symbol=None, axis_range=[0, None])
 polar.render()
 ```
-![example-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/example-1.png)
+![example-1](https://raw.githubusercontent.com/chenjiandongx/pyecharts/master/images/example-1.png)
 
 还可以给小花涂上颜色
 ```python
@@ -54,7 +47,7 @@ polar.add("Color-Flower", data, start_angle=0, symbol=None, axis_range=[0, None]
           area_color="#f71f24", area_opacity=0.6)
 polar.render()
 ```
-![example-2](https://github.com/chenjiandongx/pyecharts/blob/master/images/example-2.png)
+![example-2](https://raw.githubusercontent.com/chenjiandongx/pyecharts/master/images/example-2.png)
 
 
 用散点图画出一个爱心
@@ -66,7 +59,7 @@ v1 ,v2 = scatter.draw("../images/love.png")
 scatter.add("Love", v1, v2)
 scatter.render()
 ```
-![example-3](https://github.com/chenjiandongx/pyecharts/blob/master/images/example-3.png)
+![example-3](https://raw.githubusercontent.com/chenjiandongx/pyecharts/master/images/example-3.png)
 
 
 用散点图画出一个火辣的 Bra
@@ -78,7 +71,7 @@ v1 ,v2 = scatter.draw("../images/cup.png")
 scatter.add("Cup", v1, v2)
 scatter.render()
 ```
-![example-4](https://github.com/chenjiandongx/pyecharts/blob/master/images/example-4.png)
+![example-4](https://raw.githubusercontent.com/chenjiandongx/pyecharts/master/images/example-4.png)
 
 
 用散点图画出一个性感的 Bra
@@ -90,7 +83,7 @@ v1 ,v2 = scatter.draw("../images/cup.png")
 scatter.add("Cup", v1, v2, label_color=["#000"])
 scatter.render()
 ```
-![example-5](https://github.com/chenjiandongx/pyecharts/blob/master/images/example-5.png)
+![example-5](https://raw.githubusercontent.com/chenjiandongx/pyecharts/master/images/example-5.png)
 
 
 用极坐标系画出一个蜗牛壳
@@ -110,4 +103,4 @@ polar.add("", data, symbol_size=0, symbol='circle', start_angle=-25, is_radiusax
           area_color="#f3c5b3", area_opacity=0.5, is_angleaxis_show=False)
 polar.render()
 ```
-![example-6](https://github.com/chenjiandongx/pyecharts/blob/master/images/example-6.png)
+![example-6](https://raw.githubusercontent.com/chenjiandongx/pyecharts/master/images/example-6.png)

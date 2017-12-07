@@ -1,4 +1,3 @@
-# pyecharts + Django 使用指南
 > 本指南按照 Django [官方教程](https://docs.djangoproject.com/en/1.11/intro/tutorial01/)，通过完成一个 Django 小项目来说明如何在 Django 中使用 pyecharts。如果对 Django 还不太熟悉的开发者，可仔细阅读官方提供的最新文档。
 
 
@@ -153,7 +152,7 @@ myfirstvis 目录
 将下面 html 模板代码保存为 pyecharts.html，请确保 pyecharts.html 文件的绝对路径为 `<project root>/myfirstvis/templates/myfirstvis`
 
 
-```html
+```
 <!-- myfirstvis/templates/pyecharts.html -->
 <!DOCTYPE html>
 <html>
@@ -162,12 +161,12 @@ myfirstvis 目录
     <meta charset="utf-8">
     <title>Proudly presented by PycCharts</title>
 	{% for jsfile_name in script_list %}
-    <script src="{{host}}/{{jsfile_name}}.js"></script>
+        <script src="{{ host }}/{{ jsfile_name }}.js"></script>
     {% endfor %}
 </head>
 
 <body>
-  {{myechart|safe}}
+  { {myechart|safe }}
 </body>
 
 </html>
@@ -191,11 +190,11 @@ Quit the server with CONTROL-C.
 
 访问 [http://localhost:8000/myfirstvis/](http://localhost:8000/myfirstvis/)，你就可以看到酷炫的 3D 图了
 
-![django-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/django-0.gif)
+![django-0](https://raw.githubusercontent.com/chenjiandongx/pyecharts/master/images/django-0.gif)
 
 
 ## 小结
 
 看到了吧，只需要简单的几步就可以使用 pyecharts 创建可视化的图表。Django 官方教程需要七步的这里我们三步就搞定了。
 
-具体文档可以参考 pyecharts/document 文件夹。
+具体文档可以参考 pyecharts/docs 文件夹。
