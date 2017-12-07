@@ -1,6 +1,5 @@
-# pyecharts 开发者指南
-
 ## 如何在 pyecharts 中安装更多的 Javascript 库
+
 现在 pyecharts 所有的 js 库均已托管在 [submodule](https://git-scm.com/docs/git-submodule) [jupyter-echarts](https://github.com/chfw/jupyter-echarts). 也就是说现在所有 js 库的更新都要经过 jupyter-echarts。  
 
 jupyter-echarts 是一个前端项目，如果你对前端这方面还不太熟悉的话，建议找相关的教程学习一下。
