@@ -1,4 +1,3 @@
-# pyecharts + Flask 使用指南
 > 本指南会以一个小的 Flask 项目为例，说明如何在 Flask 中使用 pyecharts。请确保你已经安装 Flask，还没安装请执行 ```pip install flask``` 或其他方式安装。
 
 ## Step 0: 首先新建一个 Flask 项目

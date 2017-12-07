@@ -1,13 +1,4 @@
-# pyecharts 文档-预览篇
-
-#### [pyecharts 文档-图形篇](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/doc_charts.md)
-#### [pyecharts 文档-API 篇](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/doc_api.md)
-#### [pyecharts 文档-版本篇](https://github.com/chenjiandongx/pyecharts/blob/master/changelog.md)
-#### [pyecharts 文档-画廊篇](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/doc_gallery.md)
-#### [pyecharts 文档-FAQ 篇](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/doc_faq.md)
-
-
-pyecharts 是一个用于生成 Echarts 图表的类库。实际上就是 Echarts 与 Python 的对接。
+> pyecharts 是一个用于生成 Echarts 图表的类库。实际上就是 Echarts 与 Python 的对接。
 
 [![Build Status](https://travis-ci.org/chenjiandongx/pyecharts.svg?branch=master)](https://travis-ci.org/chenjiandongx/pyecharts) [![codecov](https://codecov.io/gh/chenjiandongx/pyecharts/branch/master/graph/badge.svg)](https://codecov.io/gh/chenjiandongx/pyecharts) [![PyPI version](https://badge.fury.io/py/pyecharts.svg)](https://badge.fury.io/py/pyecharts) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
@@ -25,7 +16,7 @@ bar.add("服装", ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "�
 bar.show_config()
 bar.render()
 ```
-![guide-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/guide-0.png)
+![guide-0](https://raw.githubusercontent.com/chenjiandongx/pyecharts/master/images/guide-0.png)
 
 
 * ```add()```  
@@ -45,7 +36,7 @@ bar.add("服装", ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "�
         is_more_utils=True)
 bar.render()
 ```
-![guide-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/guide-1.png)
+![guide-1](https://raw.githubusercontent.com/chenjiandongx/pyecharts/master/images/guide-1.png)
 
 ### 使用 pyecharts-snapshot 插件
 如果想直接将图片保存为 png, pdf, gif 格式的文件，可以使用 [pyecharts-snapshot](https://github.com/chfw/pyecharts-snapshot)。使用该插件请确保你的系统上已经安装了 node.js 环境，如果没有，请到这里下载 [https://nodejs.org/en/download/](https://nodejs.org/en/download/)
@@ -163,7 +154,7 @@ cast(seq)
 ### Pandas&Numpy 简单示例
 如果使用的是 Numpy 或者 Pandas，可以参考这个示例
 
-![pandas-numpy](https://github.com/chenjiandongx/pyecharts/blob/master/images/pandas-numpy.png)
+![pandas-numpy](https://raw.githubusercontent.com/chenjiandongx/pyecharts/master/images/pandas-numpy.png)
 
 **Note：** 使用 Pandas&Numpy 时，整数类型请确保为 int，而不是 numpy.int32
 
@@ -172,18 +163,16 @@ cast(seq)
 
 比如这样  
 
-![notebook-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/notebook-0.gif)
+![notebook-0](https://raw.githubusercontent.com/chenjiandongx/pyecharts/master/images/notebook-0.gif)
 
 还有这样
 
-![notebook-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/notebook-1.gif)
+![notebook-1](https://raw.githubusercontent.com/chenjiandongx/pyecharts/master/images/notebook-1.gif)
 
 如果使用的是自定义类，直接调用自定义类示例即可
 
-![notebook-2](https://github.com/chenjiandongx/pyecharts/blob/master/images/notebook-2.gif)
+![notebook-2](https://raw.githubusercontent.com/chenjiandongx/pyecharts/master/images/notebook-2.gif)
 
 更多 Jupyter notebook 的例子请参考 [notebook-use-cases](https://github.com/chenjiandongx/pyecharts/blob/master/docs/notebook-use-cases.zip)。可下载后运行看看。
 
 如需使用 Jupyter Notebook 来展示图表，只需要调用自身实例即可，同时兼容 Python2 和 Python3 的 Jupyter Notebook 环境。所有图表均可正常显示，与浏览器一致的交互体验，这下展示报告连 PPT 都省了！！  
-
-#### 您已经大概了解了 pyecharts 的概况，接下来请移步至 [pyecharts 文档-图形篇](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/doc_charts.md)

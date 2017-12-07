@@ -1,23 +1,21 @@
-# 用户自定义地图
-
-考虑到项目更好的通用性，以及更好可扩展性，所以决定对地图部分提供自定义模式。适用在pyecharts 0.1.9.7以后的版本。
+> 考虑到项目更好的通用性，以及更好可扩展性，所以决定对地图部分提供自定义模式。适用在pyecharts 0.1.9.7 以后的版本。
 
 ## 下载地图
 
 这里是 Echarts 官方地图下载地址 [download-map](http://echarts.baidu.com/download-map.html)
 
-![customize-map-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/customize-map-0.png)
+![customize-map-0](https://raw.githubusercontent.com/chenjiandongx/pyecharts/master/images/customize-map-0.png)
 
 除了官方提供的主要省份的地图，还可根据自己的需求自定义。
 
-![customize-map-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/customize-map-1.png)
+![customize-map-1](https://raw.githubusercontent.com/chenjiandongx/pyecharts/master/images/customize-map-1.png)
 
 所有地图均要下载成 JS 格式。
 
 请注意：
 
-#. 地图名称千万要把beijing变成中文的城市名称
-#. 2.2.0 之后，[363个二线城市地图](https://github.com/chfw/echarts-china-cities-js#featuring-citiesor-for-single-download)已经内嵌了，无需下载。
+* 地图名称千万要把beijing变成中文的城市名称
+* 2.2.0 之后，[363个二线城市地图](https://github.com/chfw/echarts-china-cities-js#featuring-citiesor-for-single-download)已经内嵌了，无需下载。
 
 
 ## 如何手动添加(0.1.9.7+)
@@ -75,7 +73,7 @@ jupyter nbextension enable echarts/main
 然后，让我们检查以下是否已经装上了。请先运行 Jupyter-notebook，再打开这个链接：http://localhost:8889/nbextensions/echarts/nanao.js。
 如果能下载到，那就祝贺你，成功了。否则，请检查你的步骤。
 
-![customize-map-2](https://github.com/chenjiandongx/pyecharts/blob/master/images/customize-map-2.png)
+![customize-map-2](https://raw.githubusercontent.com/chenjiandongx/pyecharts/master/images/customize-map-2.png)
 
 ## 如何把手动加的地图变成自动的
 
