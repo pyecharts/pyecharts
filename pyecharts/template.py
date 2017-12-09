@@ -3,11 +3,9 @@ from __future__ import unicode_literals
 
 import warnings
 
-from jinja2 import FileSystemLoader
 
 import pyecharts.constants as constants
-from pyecharts.conf import CURRENT_CONFIG, DEFAULT_TEMPLATE_DIR
-from pyecharts.engine import EchartsEnvironment
+from pyecharts.conf import CURRENT_CONFIG
 
 
 def configure(jshost=None,
