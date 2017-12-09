@@ -2,6 +2,7 @@
 
 import pyecharts.utils as utils
 import pyecharts.template as template
+import pyecharts.conf as conf
 import pyecharts.constants as constants
 
 
@@ -13,7 +14,7 @@ class Page(list):
     def __init__(self, jshost=None, page_title=constants.PAGE_TITLE):
         list.__init__([])
         self._page_title = page_title
-        self._jshost = jshost if jshost else constants.SCRIPT_LOCAL_JSHOST
+        self._jshost = jshost if jshost else conf.SCRIPT_LOCAL_JSHOST
 
     def add(self, achart_or_charts):
         """
