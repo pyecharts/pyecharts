@@ -43,7 +43,7 @@ def test_merge_js_dependencies():
     )
 
 
-@patch('pyecharts.engine.create_builtin_template_engine')
+@patch('pyecharts.engine.EchartsEnvironment')
 def test_template_render(fake_creator):
     fake_render = MagicMock(
         return_value='OK'
