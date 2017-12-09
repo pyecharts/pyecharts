@@ -89,5 +89,43 @@ class PyEchartsConfig(object):
     def chinese_to_pinyin(self, chinese):
         return CITY_NAME_PINYIN_MAP.get(chinese, chinese)
 
+    @staticmethod
+    def merge_js_dependencies(*args):
+        """ Merge js dependencies to a list
+
+        :param args:
+        :return:
+        """
+        dependencies = []
+
+        def _add(_x):
+            if _x not in dependencies:
+                dependencies.append(_x)
+
+        for a in args:
+            if hasattr(a, 'js_dependencies'):
+                for d in a.js_dependencies:
+                    _add(d)
+            else:
+                _add(a)
+        if len(dependencies) > 1:
+            dependencies.remove('echarts')
+            dependencies = ['echarts'] + list(dependencies)
+        return dependencies
+
+    @staticmethod
+    def read_file_contents_from_local(js_names):
+        contents = []
+        for name in js_names:
+            path = os.path.join(SCRIPT_LOCAL_JSHOST, name + '.js')
+            with open(path, 'rb') as f:
+                c = f.read()
+                contents.append(c.decode('utf8'))
+        return contents
+
+    @staticmethod
+    def generate_js_link(jshost, js_names):
+        return ['{}/{}.js'.format(jshost, x) for x in js_names]
+
 
 CURRENT_CONFIG = PyEchartsConfig()
