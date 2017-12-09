@@ -5,6 +5,7 @@ from __future__ import unicode_literals
 from pyecharts.conf import PyEchartsConfig
 
 from nose.tools import eq_
+from mock import patch, MagicMock
 
 
 def test_merge_js_dependencies():
@@ -40,3 +41,27 @@ def test_merge_js_dependencies():
         ['echarts', 'beijing'],
         PyEchartsConfig.merge_js_dependencies(*mock_page)
     )
+
+
+@patch('pyecharts.engine.create_builtin_template_engine')
+def test_template_render(fake_creator):
+    fake_render = MagicMock(
+        return_value='OK'
+    )
+    fake_get_template = MagicMock(
+        return_value=MagicMock(
+            render=fake_render
+        )
+    )
+    fake_env = MagicMock(
+        get_template=fake_get_template
+    )
+    fake_creator.return_value = fake_env
+
+    from pyecharts.engine import render
+
+    test_pills = dict(canIGet='The Pills Back',
+                      orCanINot='Get them back')
+    render('tmp', **test_pills)
+    fake_get_template.assert_called_with('tmp')
+    fake_render.assert_called_with(**test_pills)
