@@ -1,6 +1,8 @@
 # coding=utf-8
 from __future__ import unicode_literals
 
+import warnings
+
 from jinja2 import FileSystemLoader
 
 import pyecharts.constants as constants
@@ -36,6 +38,8 @@ def online(host=constants.DEFAULT_HOST):
 
     :param host:
     """
+    warnings.warn(
+        "Deprecated since 0.3.0! Please use pyecharts.configure() instead.")
     CURRENT_CONFIG.jshost = host
 
 
