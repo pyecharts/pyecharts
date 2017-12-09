@@ -69,9 +69,9 @@ class Page(list):
         require_config = template.produce_require_configuration(
             dependencies, self._jshost)
         return engine.render("notebook.html",
-                               single_chart=components,
-                               dom=doms,
-                               **require_config)
+                             single_chart=components,
+                             dom=doms,
+                             **require_config)
 
     def _merge_dependencies(self):
         dependencies = set()
