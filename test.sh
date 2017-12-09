@@ -1,2 +1,2 @@
 cd test
-nosetests --with-coverage --cover-package pyecharts --cover-package test && flake8 pyecharts --builtins=unicode,xrange,long
+nosetests --with-coverage --cover-package pyecharts --cover-package test && cd .. && flake8 --exclude test,docs --builtins=unicode,xrange,long
