@@ -8,9 +8,8 @@ from __future__ import unicode_literals
 
 from nose.tools import eq_
 
-from pyecharts.conf import PyEchartsConfig
-from pyecharts.constants import DEFAULT_HOST, SCRIPT_LOCAL_JSHOST, \
-    JUPYTER_LOCAL_JSHOST
+from pyecharts.conf import PyEchartsConfig, SCRIPT_LOCAL_JSHOST
+from pyecharts.constants import DEFAULT_HOST, JUPYTER_LOCAL_JSHOST
 
 
 def test_with_default_value():
@@ -18,7 +17,8 @@ def test_with_default_value():
     eq_(SCRIPT_LOCAL_JSHOST, target_config.jshost)
     eq_(SCRIPT_LOCAL_JSHOST, target_config.get_current_jshost_for_script())
     eq_(JUPYTER_LOCAL_JSHOST, target_config.get_current_jshost_for_jupyter())
-    eq_('http://demo', target_config.get_current_jshost_for_script('http://demo'))
+    eq_('http://demo',
+        target_config.get_current_jshost_for_script('http://demo'))
 
     assert target_config.js_embed
 

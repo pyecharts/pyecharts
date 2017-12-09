@@ -6,11 +6,8 @@ import warnings
 from jinja2 import FileSystemLoader
 
 import pyecharts.constants as constants
-from pyecharts.constants import DEFAULT_TEMPLATE_DIR
-from pyecharts.conf import PyEchartsConfig
+from pyecharts.conf import CURRENT_CONFIG, DEFAULT_TEMPLATE_DIR
 from pyecharts.engine import EchartsEnvironment
-
-CURRENT_CONFIG = PyEchartsConfig()
 
 
 def configure(jshost=None,
@@ -73,7 +70,7 @@ def produce_require_configuration(dependencies, jshost):
     require_conf_items = [
         "'%s': '%s/%s'" % (key,
                            jshost,
-                           constants.DEFAULT_JS_LIBRARIES.get(key, key))
+                           CURRENT_CONFIG.get_js_library(key))
         for key in _d]
     require_libraries = ["'%s'" % key for key in _d]
     return dict(
@@ -90,7 +87,7 @@ def produce_html_script_list(dependencies):
     """
     _d = ensure_echarts_is_in_the_front(dependencies)
     script_list = [
-        '%s' % constants.DEFAULT_JS_LIBRARIES.get(key, key)
+        '%s' % CURRENT_CONFIG.get_js_library(key)
         for key in _d]
     return script_list
 

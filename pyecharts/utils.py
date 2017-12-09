@@ -8,7 +8,6 @@ import json
 import codecs
 import datetime
 
-
 PY2 = sys.version_info[0] == 2
 
 JS_PATTERN = re.compile(r'<!-- build -->(.*)<!-- endbuild -->',

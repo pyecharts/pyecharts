@@ -2,8 +2,7 @@
 
 from pyecharts.chart import Chart
 from pyecharts.option import get_all_options
-from pyecharts.constants import (CITY_GEO_COORDS,
-                                 CITY_NAME_PINYIN_MAP, SYMBOL)
+from pyecharts.constants import (CITY_GEO_COORDS, SYMBOL)
 
 
 class GeoLines(Chart):
@@ -164,6 +163,5 @@ class GeoLines(Chart):
             "label": chart['label'],
         })
 
-        name_in_pinyin = CITY_NAME_PINYIN_MAP.get(maptype, maptype)
-        self._js_dependencies.add(name_in_pinyin)
+        self._add_chinese_map(maptype)
         self._config_components(**kwargs)
