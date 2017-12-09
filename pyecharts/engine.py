@@ -27,18 +27,18 @@ def echarts_js_dependencies(env, *args):
     :param args:
     """
     current_config = env.pyecharts_config
-    dependencies = merge_js_dependencies(*args)
+    dependencies = env.pyecharts_config.merge_js_dependencies(*args)
     js_names = [env.pyecharts_config.get_js_library(x) for x in dependencies]
 
     if current_config.js_embed:
-        contents = read_file_contents_from_local(js_names)
+        contents = env.pyecharts_config.read_file_contents_from_local(js_names)
 
         return Markup(
             '\n'.join([EMBED_SCRIPT_FORMATTER.format(c) for c in contents])
         )
     else:
         jshost = current_config.jshost
-        js_links = generate_js_link(jshost, js_names)
+        js_links = env.pyecharts_config.generate_js_link(jshost, js_names)
         return Markup(
             '\n'.join([LINK_SCRIPT_FORMATTER.format(j) for j in js_links])
         )
@@ -51,9 +51,9 @@ def echarts_js_dependencies_embed(env, *args):
     :param env:
     :param args:
     """
-    dependencies = merge_js_dependencies(*args)
+    dependencies = env.pyecharts_config.merge_js_dependencies(*args)
     js_names = [env.pyecharts_config.get_js_library(x) for x in dependencies]
-    contents = read_file_contents_from_local(js_names)
+    contents = env.pyecharts_config.read_file_contents_from_local(js_names)
     return Markup(
         '\n'.join([EMBED_SCRIPT_FORMATTER.format(c) for c in contents])
     )
@@ -170,41 +170,3 @@ class EchartsEnvironment(BaseEnvironment):
     def configure_pyecharts(self, **kwargs):
         for k, v in kwargs.items():
             setattr(self.pyecharts_config, k, v)
-
-
-def merge_js_dependencies(*args):
-    """ Merge js dependencies to a list
-
-    :param args:
-    :return:
-    """
-    dependencies = []
-
-    def _add(_x):
-        if _x not in dependencies:
-            dependencies.append(_x)
-
-    for a in args:
-        if hasattr(a, 'js_dependencies'):
-            for d in a.js_dependencies:
-                _add(d)
-        else:
-            _add(a)
-    if len(dependencies) > 1:
-        dependencies.remove('echarts')
-        dependencies = ['echarts'] + list(dependencies)
-    return dependencies
-
-
-def read_file_contents_from_local(js_names):
-    contents = []
-    for name in js_names:
-        path = os.path.join(conf.SCRIPT_LOCAL_JSHOST, name + '.js')
-        with open(path, 'rb') as f:
-            c = f.read()
-            contents.append(c.decode('utf8'))
-    return contents
-
-
-def generate_js_link(jshost, js_names):
-    return ['{}/{}.js'.format(jshost, x) for x in js_names]
