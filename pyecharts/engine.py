@@ -27,18 +27,18 @@ def echarts_js_dependencies(env, *args):
     :param args:
     """
     current_config = env.pyecharts_config
-    dependencies = env.pyecharts_config.merge_js_dependencies(*args)
-    js_names = [env.pyecharts_config.get_js_library(x) for x in dependencies]
+    dependencies = current_config.merge_js_dependencies(*args)
+    js_names = [current_config.get_js_library(x) for x in dependencies]
 
     if current_config.js_embed:
-        contents = env.pyecharts_config.read_file_contents_from_local(js_names)
+        contents = current_config.read_file_contents_from_local(js_names)
 
         return Markup(
             '\n'.join([EMBED_SCRIPT_FORMATTER.format(c) for c in contents])
         )
     else:
         jshost = current_config.jshost
-        js_links = env.pyecharts_config.generate_js_link(jshost, js_names)
+        js_links = current_config.generate_js_link(jshost, js_names)
         return Markup(
             '\n'.join([LINK_SCRIPT_FORMATTER.format(j) for j in js_links])
         )
@@ -51,9 +51,10 @@ def echarts_js_dependencies_embed(env, *args):
     :param env:
     :param args:
     """
-    dependencies = env.pyecharts_config.merge_js_dependencies(*args)
-    js_names = [env.pyecharts_config.get_js_library(x) for x in dependencies]
-    contents = env.pyecharts_config.read_file_contents_from_local(js_names)
+    current_config = env.pyecharts_config
+    dependencies = current_config.merge_js_dependencies(*args)
+    js_names = [current_config.get_js_library(x) for x in dependencies]
+    contents = current_config.read_file_contents_from_local(js_names)
     return Markup(
         '\n'.join([EMBED_SCRIPT_FORMATTER.format(c) for c in contents])
     )
