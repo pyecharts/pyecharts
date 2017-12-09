@@ -2,6 +2,7 @@
 
 import pyecharts.utils as utils
 import pyecharts.template as template
+import pyecharts.engine as engine
 import pyecharts.conf as conf
 import pyecharts.constants as constants
 
@@ -35,7 +36,7 @@ class Page(list):
                extra_context=None):
         context = {object_name: self}
         context.update(extra_context or {})
-        html = template.render(template_name, **context)
+        html = engine.render(template_name, **context)
         utils.write_utf8_html_file(path, html)
 
     def render_embed(self):
@@ -67,7 +68,7 @@ class Page(list):
 
         require_config = template.produce_require_configuration(
             dependencies, self._jshost)
-        return template.render("notebook.html",
+        return engine.render("notebook.html",
                                single_chart=components,
                                dom=doms,
                                **require_config)
