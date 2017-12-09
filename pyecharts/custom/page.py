@@ -1,7 +1,6 @@
 # coding=utf-8
 
 import pyecharts.utils as utils
-import pyecharts.template as template
 import pyecharts.engine as engine
 import pyecharts.conf as conf
 import pyecharts.constants as constants
@@ -52,21 +51,21 @@ class Page(list):
         Declare its javascript dependencies for embedding purpose
         """
         unordered_js_dependencies = self._merge_dependencies()
-        return template.produce_html_script_list(unordered_js_dependencies)
+        return conf.CURRENT_CONFIG.produce_html_script_list(
+            unordered_js_dependencies)
 
     def _repr_html_(self):
         """
 
         :return:
         """
-        doms = ""
-        components = ""
+        doms = components = ""
         dependencies = self._merge_dependencies()
         for chart in self:
             doms += chart._render_notebook_dom_()
             components += chart._render_notebook_component_()
 
-        require_config = template.produce_require_configuration(
+        require_config = conf.CURRENT_CONFIG.produce_require_configuration(
             dependencies, self._jshost)
         return engine.render("notebook.html",
                              single_chart=components,

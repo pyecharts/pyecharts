@@ -174,16 +174,11 @@ class EchartsEnvironment(BaseEnvironment):
 
 
 def render(template_file, **context):
-    echarts_env = create_builtin_template_engine()
-    template = echarts_env.get_template(template_file)
-    return template.render(**context)
-
-
-def create_builtin_template_engine():
-    """ Create the builtin template engine.
-    """
-    return EchartsEnvironment(
+    echarts_env = EchartsEnvironment(
         pyecharts_config=conf.CURRENT_CONFIG,
         loader=FileSystemLoader(
             [conf.CURRENT_CONFIG.echarts_template_dir, conf.DEFAULT_TEMPLATE_DIR])
     )
+    template = echarts_env.get_template(template_file)
+    return template.render(**context)
+
