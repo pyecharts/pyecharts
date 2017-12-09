@@ -3,7 +3,6 @@
 import uuid
 
 import pyecharts.constants as constants
-import pyecharts.template as template
 import pyecharts.engine as engine
 import pyecharts.utils as utils
 from pyecharts.conf import CURRENT_CONFIG
@@ -35,7 +34,7 @@ class Base(object):
         self._chart_id = uuid.uuid4().hex
         self.width, self.height = width, height
         self._page_title = page_title
-        self._jshost = jshost if jshost else template.CURRENT_CONFIG.jshost
+        self._jshost = jshost if jshost else CURRENT_CONFIG.jshost
         self._js_dependencies = {'echarts'}
 
     @property
@@ -74,7 +73,7 @@ class Base(object):
     def get_js_dependencies(self):
         """ 声明所有的 js 文件路径
         """
-        return template.produce_html_script_list(self._js_dependencies)
+        return CURRENT_CONFIG.produce_html_script_list(self._js_dependencies)
 
     def render(self,
                path='render.html',
@@ -126,7 +125,7 @@ class Base(object):
         """
         dom = self._render_notebook_dom_()
         component = self._render_notebook_component_()
-        require_config = template.produce_require_configuration(
+        require_config = CURRENT_CONFIG.produce_require_configuration(
             self._js_dependencies, self._jshost)
         return engine.render('notebook.html',
                              single_chart=component,
