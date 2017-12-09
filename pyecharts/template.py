@@ -40,24 +40,7 @@ def online(host=constants.DEFAULT_HOST):
     CURRENT_CONFIG.jshost = host
 
 
-def render(template_file, **context):
-    echarts_env = create_builtin_template_engine()
-    template = echarts_env.get_template(template_file)
-    return template.render(**context)
-
-
-def create_builtin_template_engine():
-    """ Create the builtin template engine.
-    """
-    return EchartsEnvironment(
-        pyecharts_config=CURRENT_CONFIG,
-        loader=FileSystemLoader(
-            [CURRENT_CONFIG.echarts_template_dir, DEFAULT_TEMPLATE_DIR])
-    )
-
-
 # TODO Merge the following js functions to pyecharts.utils module or new one.
-
 def produce_require_configuration(dependencies, jshost):
     """
 
