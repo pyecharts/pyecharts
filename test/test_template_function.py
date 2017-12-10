@@ -30,7 +30,7 @@ def test_echarts_js_dependencies():
     tpl = ECHARTS_ENV.from_string('{{ echarts_js_dependencies(bar) }}')
     bar = create_demo_bar()
     html = tpl.render(bar=bar)
-    assert '<script type="text/javascript" src="http://localhost/echarts/echarts.min.js"></script>' == html
+    assert '<script type="text/javascript" src="http://localhost/echarts/echarts.min.js"></script>' == html # flake8: noqa
 
 
 def test_echarts_js_dependencies_embed():
@@ -42,7 +42,8 @@ def test_echarts_js_dependencies_embed():
     html = tpl.render(bar=bar)
     assert len(html) > 0
 
-    # echarts_js_dependencies equals echarts_js_dependencies_embed when use local host.
+    # echarts_js_dependencies equals echarts_js_dependencies_
+    # embed when use local host.
     tpl2 = ECHARTS_ENV.from_string(
         '{{ echarts_js_dependencies("echarts.min") }}')
     html2 = tpl2.render(bar=bar)
@@ -54,17 +55,17 @@ def test_echarts_js_container():
     tpl = ECHARTS_ENV.from_string('{{ echarts_container(bar) }}')
     bar = create_demo_bar('id_demo_chart')
     html = tpl.render(bar=bar)
-    assert '<div id="id_demo_chart" style="width:800px;height:400px;"></div>' == html
+    assert '<div id="id_demo_chart" style="width:800px;height:400px;"></div>' == html # flake8: noqa
 
     bar.width = 1024
     bar.height = 768
     html = tpl.render(bar=bar)
-    assert '<div id="id_demo_chart" style="width:1024px;height:768px;"></div>' == html
+    assert '<div id="id_demo_chart" style="width:1024px;height:768px;"></div>' == html # flake8: noqa
 
     bar.width = '1024px'
     bar.height = '768px'
     html = tpl.render(bar=bar)
-    assert '<div id="id_demo_chart" style="width:1024px;height:768px;"></div>' == html
+    assert '<div id="id_demo_chart" style="width:1024px;height:768px;"></div>' == html # flake8: noqa
 
 
 def test_echarts_js_content():
