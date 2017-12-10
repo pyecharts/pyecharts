@@ -5,7 +5,7 @@ import codecs
 
 from pyecharts import (Bar, Scatter3D)
 from pyecharts import Page
-from pyecharts.template import configure, online
+from pyecharts.conf import configure, online
 from test.constants import RANGE_COLOR, CLOTHES
 
 
