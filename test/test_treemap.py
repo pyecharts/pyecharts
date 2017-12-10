@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # coding=utf-8
 from __future__ import unicode_literals
 
@@ -60,7 +59,8 @@ def test_treemap_offcical_data():
     import json
     if PY2:
         import codecs
-        with codecs.open(os.path.join("..", "json", "treemap.json"), "rb") as f:
+        test_fixture = os.path.join("..", "json", "treemap.json")
+        with codecs.open(test_fixture, "rb") as f:
             data = json.load(f)
     else:
         with open(os.path.join("..", "json", "treemap.json"),

@@ -24,7 +24,8 @@ def test_heatmap_calendar():
     begin = datetime.date(2017, 1, 1)
     end = datetime.date(2017, 12, 31)
     data = [[str(begin + datetime.timedelta(days=i)),
-            random.randint(1000, 25000)] for i in range((end - begin).days + 1)]
+             random.randint(1000, 25000)]
+            for i in range((end - begin).days + 1)]
     heatmap = HeatMap("日历热力图示例", "某人 2017 年微信步数情况", width=1100)
     heatmap.add("", data, is_calendar_heatmap=True,
                 visual_text_color='#000', visual_range_text=['', ''],
