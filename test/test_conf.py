@@ -6,11 +6,11 @@ Test Target: js_embed (should render <script> in embed mode)
 """
 from __future__ import unicode_literals
 
-from nose.tools import eq_
+from nose.tools import eq_, raises
 
-from pyecharts.conf import PyEchartsConfig
-from pyecharts.constants import DEFAULT_HOST, SCRIPT_LOCAL_JSHOST, \
-    JUPYTER_LOCAL_JSHOST
+from pyecharts.conf import _ensure_echarts_is_in_the_front
+from pyecharts.conf import PyEchartsConfig, SCRIPT_LOCAL_JSHOST
+from pyecharts.constants import DEFAULT_HOST, JUPYTER_LOCAL_JSHOST
 
 
 def test_with_default_value():
@@ -18,7 +18,8 @@ def test_with_default_value():
     eq_(SCRIPT_LOCAL_JSHOST, target_config.jshost)
     eq_(SCRIPT_LOCAL_JSHOST, target_config.get_current_jshost_for_script())
     eq_(JUPYTER_LOCAL_JSHOST, target_config.get_current_jshost_for_jupyter())
-    eq_('http://demo', target_config.get_current_jshost_for_script('http://demo'))
+    eq_('http://demo',
+        target_config.get_current_jshost_for_script('http://demo'))
 
     assert target_config.js_embed
 
@@ -75,3 +76,21 @@ def test_custom_remote_jshost():
     target_config.force_js_embed = True
 
     assert target_config.js_embed
+
+
+def test_echarts_postion_in_dependency_list():
+    test_sequence = set(['guangdong', 'shanghai', 'echarts'])
+    result = _ensure_echarts_is_in_the_front(test_sequence)
+    eq_(result[0], 'echarts')
+
+
+def test_echarts_postion_with_one_element_set():
+    test_sequence = set(['echarts'])
+    result = _ensure_echarts_is_in_the_front(test_sequence)
+    eq_(result[0], 'echarts')
+
+
+@raises(Exception)
+def test_echarts_postion_with_nothing():
+    test_sequence = set()
+    _ensure_echarts_is_in_the_front(test_sequence)
