@@ -51,7 +51,8 @@ def test_json_encoder():
     :return:
     """
     data = date(2017, 1, 1)
-    eq_(json.dumps({'date': '2017-01-01', 'a': '1'}, indent=0), json_dumps({'date': data, 'a': '1'}))
+    eq_(json.dumps({'date': '2017-01-01', 'a': '1'}, indent=0),
+        json_dumps({'date': data, 'a': '1'}))
 
     data2 = {'np_list': np.array(['a', 'b', 'c'])}
     data2_e = {'np_list': ['a', 'b', 'c']}

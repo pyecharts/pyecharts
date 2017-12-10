@@ -108,7 +108,7 @@ def test_more():
     pie = Pie("饼图-圆环图示例", title_pos='center')
     pie.add("", CLOTHES, v1, radius=[40, 75], label_text_color=None,
             is_label_show=True, legend_orient='vertical', legend_pos='left')
-    
+
     page.add([line, pie])
 
     # kline
@@ -179,7 +179,8 @@ def test_more():
         'Charter Communications', 'Chick Fil A', 'Planet Fitness',
         'Pitch Perfect', 'Express', 'Home', 'Johnny Depp', 'Lena Dunham',
         'Lewis Hamilton', 'KXAN', 'Mary Ellen Mark', 'Farrah Abraham',
-        'Rita Ora', 'Serena Williams', 'NCAA baseball tournament', 'Point Break'
+        'Rita Ora', 'Serena Williams', 'NCAA baseball tournament',
+        'Point Break'
     ]
     value = [
         10000, 6181, 4386, 4055, 2467, 2244, 1898, 1484, 1112,
@@ -195,5 +196,6 @@ def test_more():
     page.add(liquid)
     assert len(page) == 7
     assert isinstance(page[0], Line)
-    assert ('echarts' in page.js_dependencies) or ('echarts.min' in page.js_dependencies)
+    assert (('echarts' in page.js_dependencies) or
+            ('echarts.min' in page.js_dependencies))
     page.render()
