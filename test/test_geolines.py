@@ -7,7 +7,7 @@ from pyecharts import GeoLines, Style
 
 style = Style(
     title_top="#fff",
-    title_pos = "center",
+    title_pos="center",
     width=1200,
     height=600,
     background_color="#404a59"
