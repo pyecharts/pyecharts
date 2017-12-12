@@ -111,7 +111,7 @@ def echarts_js_content(env, *charts):
     :param env:
     :param chart:
     """
-    return Markup(LINK_SCRIPT_FORMATTER.format(generate_js_content(*charts)))
+    return Markup(EMBED_SCRIPT_FORMATTER.format(generate_js_content(*charts)))
 
 
 @environmentfunction
