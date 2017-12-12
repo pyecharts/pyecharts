@@ -121,7 +121,7 @@ def echarts_js_content_wrap(env, *charts):
     :param env:
     :param charts:
     """
-    return generate_js_content(*charts)
+    return Markup(generate_js_content(*charts))
 
 
 # Public API,see document for more detail.

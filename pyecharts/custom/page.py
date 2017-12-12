@@ -66,7 +66,7 @@ class Page(list):
             components += chart._render_notebook_component_()
 
         require_config = conf.CURRENT_CONFIG.produce_require_configuration(
-            dependencies, self._jshost)
+            dependencies, conf.CURRENT_CONFIG.get_current_jshost_for_jupyter(self._jshost))
         return engine.render("notebook.html",
                              single_chart=components,
                              dom=doms,
