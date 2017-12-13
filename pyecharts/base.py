@@ -126,7 +126,9 @@ class Base(object):
         dom = self._render_notebook_dom_()
         component = self._render_notebook_component_()
         require_config = CURRENT_CONFIG.produce_require_configuration(
-            self._js_dependencies, self._jshost)
+            self._js_dependencies,
+            CURRENT_CONFIG.get_current_jshost_for_jupyter(jshost=self._jshost)
+        )
         return engine.render('notebook.html',
                              single_chart=component,
                              dom=dom,

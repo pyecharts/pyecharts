@@ -27,7 +27,6 @@ CITY_NAME_PINYIN_MAP = CONFIG['PINYIN_MAP']  # {<Chinese Name>:<Pinyin>}
 
 
 class PyEchartsConfig(object):
-
     def __init__(self, echarts_template_dir='.', jshost=None,
                  force_js_embed=False):
         self.echarts_template_dir = echarts_template_dir
@@ -68,7 +67,8 @@ class PyEchartsConfig(object):
         :param jshost:
         """
         jshost = jshost or self.jshost
-        if jshost == SCRIPT_LOCAL_JSHOST:
+        if jshost is None or jshost == SCRIPT_LOCAL_JSHOST:
+            # Replace the path in site-packages with the path in nbextension.
             return constants.JUPYTER_LOCAL_JSHOST
         else:
             return jshost

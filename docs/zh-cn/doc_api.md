@@ -39,10 +39,23 @@ js 文件仓库路径。可以设置本地或者远程地址。所有的远程�
 也可以使用 `pyecharts.online()` 函数设置此选项。  
 为了保持兼容性， jshost 并不是必须使用 '/' 等分隔符作为结尾。
 
+注意的是，在 Jupyter Notebook 环境中，当使用
+
 **force_js_embed**
 
 是否强制采用内部嵌入方式渲染js文件标签， `echarts_js_dependencies`  模板函数受此影响，具体可参考该函数。
 
+### 配置方法
+
+类 `PyEchartsConfig` 拥有一些在实际运行过程中访问配置的方法。
+
+**get_current_jshost_for_script**
+
+获取纯 Python 环境下 jshost 的值。
+
+**get_current_jshost_for_jupyter**
+
+获取 Jupyter Notebook 环境中 jshost 的值。当 jshost 没有设置或者为本地路径时，返回路径将替换为 Jupyter Notebook nbextension 中的路径。
 
 ## 图表类
 
