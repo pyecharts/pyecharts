@@ -1,9 +1,13 @@
 # version log
 
-* ### version 0.3.1（dev）
-    * TODO 
+* ### version 0.3.2（dev）
+    * TODO
 
-* ### version 0.3.0 -2017.12.11（Current）
+* ### version 0.3.1 - 2017.12.13（Current）
+    * [issue#290](https://github.com/chenjiandongx/pyecharts/issues/290) 紧急修复 v0.3.0 版本不能正常显示图形的严重 bug
+    * [issue#296](https://github.com/chenjiandongx/pyecharts/issues/296) 修复 Timeline 不能在 notebook 中显示的 bug
+
+* ### version 0.3.0 - 2017.12.11
     * 图表 `render` 方法增加 `template_name` 、`object_name`、`extra_context` 等参数，全面支持自定义模板
     * 重写底层逻辑，支持在模板文件中使用 `echarts_*` 系列模板函数
     * js 依赖文件支持外部链接方式引入。

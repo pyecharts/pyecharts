@@ -70,7 +70,6 @@ Django
 
 ## Documentation
 * [中文文档](https://github.com/chenjiandongx/pyecharts/tree/master/docs/zh-cn)
-
 * [English](https://github.com/chenjiandongx/pyecharts/tree/master/docs/en-us)
 
 
