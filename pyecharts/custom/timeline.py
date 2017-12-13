@@ -88,7 +88,7 @@ class Timeline(Base):
             指定时间点
         """
         self._js_dependencies = self._js_dependencies.union(
-            chart.get_js_dependencies())
+            chart.js_dependencies)
         self.__check_components(chart)
         self._time_points.append(time_point)
         self._option.get('baseOption').update(
