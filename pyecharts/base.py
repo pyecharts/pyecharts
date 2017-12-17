@@ -5,7 +5,7 @@ import uuid
 import pyecharts.constants as constants
 import pyecharts.engine as engine
 import pyecharts.utils as utils
-from pyecharts.conf import CURRENT_CONFIG
+from pyecharts.conf import CURRENT_CONFIG, JUPYTER_CONFIG
 
 
 class Base(object):
@@ -16,8 +16,7 @@ class Base(object):
     def __init__(self,
                  width=800,
                  height=400,
-                 page_title=constants.PAGE_TITLE,
-                 jshost=None):
+                 page_title=constants.PAGE_TITLE):
         """
 
         :param width:
@@ -34,7 +33,6 @@ class Base(object):
         self._chart_id = uuid.uuid4().hex
         self.width, self.height = width, height
         self._page_title = page_title
-        self._jshost = jshost if jshost else CURRENT_CONFIG.jshost
         self._js_dependencies = {'echarts'}
 
     @property
@@ -125,30 +123,32 @@ class Base(object):
         """
         dom = self._render_notebook_dom_()
         component = self._render_notebook_component_()
-        require_config = CURRENT_CONFIG.produce_require_configuration(
-            self._js_dependencies,
-            CURRENT_CONFIG.get_current_jshost_for_jupyter(jshost=self._jshost)
+        require_config = JUPYTER_CONFIG.produce_require_configuration(
+            self._js_dependencies
         )
-        return engine.render('notebook.html',
-                             single_chart=component,
-                             dom=dom,
-                             **require_config)
+        return engine.render_notebook(
+            'notebook.html',
+            single_chart=component,
+            dom=dom,
+            **require_config)
 
     def _render_notebook_dom_(self):
         """ 为 notebook 渲染 dom 模板
         """
-        return engine.render("notebook_dom.html",
-                             chart_id=self._chart_id,
-                             chart_width=self.width,
-                             chart_height=self.height)
+        return engine.render_notebook(
+            "notebook_dom.html",
+            chart_id=self._chart_id,
+            chart_width=self.width,
+            chart_height=self.height)
 
     def _render_notebook_component_(self):
         """ 为 notebook 渲染组件模板
         """
         my_option = utils.json_dumps(self._option, indent=4)
-        return engine.render("notebook_chart_component.html",
-                             my_option=my_option,
-                             chart_id=self._chart_id)
+        return engine.render_notebook(
+            "notebook_chart_component.html",
+            my_option=my_option,
+            chart_id=self._chart_id)
 
     def _add_chinese_map(self, map_name_in_chinese):
         name_in_pinyin = CURRENT_CONFIG.chinese_to_pinyin(map_name_in_chinese)
