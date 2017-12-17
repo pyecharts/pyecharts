@@ -4,7 +4,6 @@ from __future__ import unicode_literals
 import os
 import json
 import codecs
-import warnings
 
 from pyecharts.utils import get_resource_dir
 import pyecharts.constants as constants
@@ -27,10 +26,9 @@ CITY_NAME_PINYIN_MAP = CONFIG['PINYIN_MAP']  # {<Chinese Name>:<Pinyin>}
 
 
 class PyEchartsConfig(object):
-    def __init__(self, echarts_template_dir='.', jshost=None,
+    def __init__(self, echarts_template_dir='.', jshost=SCRIPT_LOCAL_JSHOST,
                  force_js_embed=False):
         self.echarts_template_dir = echarts_template_dir
-        jshost = jshost or SCRIPT_LOCAL_JSHOST
         self._jshost = PyEchartsConfig.convert_jshost_string(jshost)
         self.force_js_embed = force_js_embed
 
@@ -51,27 +49,6 @@ class PyEchartsConfig(object):
     @jshost.setter
     def jshost(self, jshost):
         self._jshost = PyEchartsConfig.convert_jshost_string(jshost)
-
-    def get_current_jshost_for_script(self, jshost=None):
-        """
-        :param jshost:
-        """
-        if jshost:
-            return jshost
-        else:
-            return self.jshost
-
-    def get_current_jshost_for_jupyter(self, jshost=None):
-        """ Get actual jshost in jupyter.
-
-        :param jshost:
-        """
-        jshost = jshost or self.jshost
-        if jshost is None or jshost == SCRIPT_LOCAL_JSHOST:
-            # Replace the path in site-packages with the path in nbextension.
-            return constants.JUPYTER_LOCAL_JSHOST
-        else:
-            return jshost
 
     @staticmethod
     def convert_jshost_string(jshost):
@@ -128,8 +105,7 @@ class PyEchartsConfig(object):
     def generate_js_link(jshost, js_names):
         return ['{}/{}.js'.format(jshost, x) for x in js_names]
 
-    @staticmethod
-    def produce_require_configuration(dependencies, jshost):
+    def produce_require_configuration(self, dependencies):
         """
 
         :param dependencies:
@@ -140,8 +116,8 @@ class PyEchartsConfig(object):
         # if no nick name register, we treat the location as location.js
         require_conf_items = [
             "'%s': '%s/%s'" % (key,
-                               jshost,
-                               CURRENT_CONFIG.get_js_library(key))
+                               self.jshost,
+                               self.get_js_library(key))
             for key in _d]
         require_libraries = ["'%s'" % key for key in _d]
         return dict(
@@ -149,8 +125,7 @@ class PyEchartsConfig(object):
             libraries=require_libraries
         )
 
-    @staticmethod
-    def produce_html_script_list(dependencies):
+    def produce_html_script_list(self, dependencies):
         """
 
         :param dependencies:
@@ -158,12 +133,13 @@ class PyEchartsConfig(object):
         """
         _d = _ensure_echarts_is_in_the_front(dependencies)
         script_list = [
-            '%s' % CURRENT_CONFIG.get_js_library(key)
+            '%s' % self.get_js_library(key)
             for key in _d]
         return script_list
 
 
-CURRENT_CONFIG = PyEchartsConfig()
+CURRENT_CONFIG = PyEchartsConfig(jshost=SCRIPT_LOCAL_JSHOST)
+JUPYTER_CONFIG = PyEchartsConfig(jshost=constants.JUPYTER_LOCAL_JSHOST)
 
 
 def configure(jshost=None,
@@ -180,8 +156,10 @@ def configure(jshost=None,
     """
     if jshost:
         CURRENT_CONFIG.jshost = jshost
+        JUPYTER_CONFIG.jshost = jshost
     if echarts_template_dir:
         CURRENT_CONFIG.echarts_template_dir = echarts_template_dir
+        JUPYTER_CONFIG.echarts_template_dir = echarts_template_dir
     if force_js_embed is not None:
         CURRENT_CONFIG.force_js_embed = force_js_embed
 
@@ -191,9 +169,7 @@ def online(host=constants.DEFAULT_HOST):
 
     :param host:
     """
-    warnings.warn(
-        "Deprecated since 0.3.0! Please use pyecharts.configure() instead.")
-    CURRENT_CONFIG.jshost = host
+    configure(jshost=host)
 
 
 def _ensure_echarts_is_in_the_front(dependencies):
