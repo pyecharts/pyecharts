@@ -180,7 +180,7 @@ def render(template_file, notebook=False, **context):
     echarts_env = EchartsEnvironment(
         pyecharts_config=config,
         loader=FileSystemLoader(
-            [conf.PYTHON_CONFIG.echarts_template_dir, conf.DEFAULT_TEMPLATE_DIR])
+            [config.echarts_template_dir, conf.DEFAULT_TEMPLATE_DIR])
     )
     template = echarts_env.get_template(template_file)
     return template.render(**context)
