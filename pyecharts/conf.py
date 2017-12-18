@@ -29,7 +29,7 @@ class PyEchartsConfig(object):
     def __init__(self, echarts_template_dir='.', jshost=SCRIPT_FILE_PATH,
                  force_js_embed=False):
         self.echarts_template_dir = echarts_template_dir
-        self._jshost = PyEchartsConfig.convert_jshost_string(jshost)
+        self._jshost = remove_trailing_slashes(jshost)
         self.force_js_embed = force_js_embed
 
     @property
@@ -48,18 +48,7 @@ class PyEchartsConfig(object):
 
     @jshost.setter
     def jshost(self, jshost):
-        self._jshost = PyEchartsConfig.convert_jshost_string(jshost)
-
-    @staticmethod
-    def convert_jshost_string(jshost):
-        """ Delete the end separator character if exists.
-
-        :param jshost:
-        """
-        jshost = jshost or ''
-        if jshost[-1:] in ('/', '\\'):
-            jshost = jshost[:-1]
-        return jshost
+        self._jshost = remove_trailing_slashes(jshost)
 
     def get_js_library(self, pinyin):
         return DEFAULT_JS_LIBRARIES.get(pinyin, pinyin)
@@ -136,6 +125,17 @@ class PyEchartsConfig(object):
             '%s' % self.get_js_library(key)
             for key in _d]
         return script_list
+
+
+def remove_trailing_slashes(jshost):
+    """ Delete the end separator character if exists.
+
+    :param jshost:
+    """
+    if jshost and jshost[-1] in ('/', '\\'):
+        return jshost[:-1]
+    else:
+        return jshost
 
 
 PYTHON_CONFIG = PyEchartsConfig(jshost=SCRIPT_FILE_PATH)
