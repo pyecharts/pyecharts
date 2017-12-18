@@ -5,7 +5,7 @@ import uuid
 import pyecharts.constants as constants
 import pyecharts.engine as engine
 import pyecharts.utils as utils
-from pyecharts.conf import CURRENT_CONFIG, JUPYTER_CONFIG
+from pyecharts.conf import PYTHON_CONFIG, JUPYTER_CONFIG
 
 
 class Base(object):
@@ -71,7 +71,7 @@ class Base(object):
     def get_js_dependencies(self):
         """ 声明所有的 js 文件路径
         """
-        return CURRENT_CONFIG.produce_html_script_list(self._js_dependencies)
+        return PYTHON_CONFIG.produce_html_script_list(self._js_dependencies)
 
     def render(self,
                path='render.html',
@@ -151,5 +151,5 @@ class Base(object):
             chart_id=self._chart_id)
 
     def _add_chinese_map(self, map_name_in_chinese):
-        name_in_pinyin = CURRENT_CONFIG.chinese_to_pinyin(map_name_in_chinese)
+        name_in_pinyin = PYTHON_CONFIG.chinese_to_pinyin(map_name_in_chinese)
         self._js_dependencies.add(name_in_pinyin)
