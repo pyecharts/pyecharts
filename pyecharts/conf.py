@@ -138,7 +138,7 @@ class PyEchartsConfig(object):
         return script_list
 
 
-CURRENT_CONFIG = PyEchartsConfig(jshost=SCRIPT_FILE_PATH)
+PYTHON_CONFIG = PyEchartsConfig(jshost=SCRIPT_FILE_PATH)
 JUPYTER_CONFIG = PyEchartsConfig(jshost=constants.JUPYTER_LOCALHOST_URL)
 
 
@@ -155,13 +155,13 @@ def configure(jshost=None,
     :param kwargs:
     """
     if jshost:
-        CURRENT_CONFIG.jshost = jshost
+        PYTHON_CONFIG.jshost = jshost
         JUPYTER_CONFIG.jshost = jshost
     if echarts_template_dir:
-        CURRENT_CONFIG.echarts_template_dir = echarts_template_dir
+        PYTHON_CONFIG.echarts_template_dir = echarts_template_dir
         JUPYTER_CONFIG.echarts_template_dir = echarts_template_dir
     if force_js_embed is not None:
-        CURRENT_CONFIG.force_js_embed = force_js_embed
+        PYTHON_CONFIG.force_js_embed = force_js_embed
 
 
 def online(host=constants.DEFAULT_JUPYTER_GITHUB_URL):
