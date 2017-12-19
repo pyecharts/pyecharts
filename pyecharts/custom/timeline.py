@@ -9,7 +9,6 @@ class Timeline(Base):
     时间线轮播多张图
     """
     def __init__(self, page_title=PAGE_TITLE,
-                 jshost=None,
                  width=800,
                  height=400,
                  is_auto_play=False,
@@ -55,7 +54,7 @@ class Timeline(Base):
         """
 
         super(Timeline, self).__init__(
-            width=width, height=height, jshost=jshost
+            width=width, height=height
         )
         self._page_title = page_title
         self._time_points = []
