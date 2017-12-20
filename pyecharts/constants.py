@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 # Path constants for jshost
-DEFAULT_HOST = 'https://chfw.github.io/jupyter-echarts/echarts'
+DEFAULT_HOST = 'https://pyecharts.github.io/jupyter-echarts/echarts'
 JUPYTER_LOCAL_JSHOST = '/nbextensions/echarts'
 
 PAGE_TITLE = "Echarts"
