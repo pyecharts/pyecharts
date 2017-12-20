@@ -2,7 +2,7 @@
 
 import pyecharts.utils as utils
 import pyecharts.engine as engine
-import pyecharts.conf as conf
+from pyecharts.conf import PYTHON_CONFIG, JUPYTER_CONFIG
 import pyecharts.constants as constants
 
 
@@ -11,10 +11,9 @@ class Page(list):
     A composite object to present multiple charts vertically in a single page
     """
 
-    def __init__(self, jshost=None, page_title=constants.PAGE_TITLE):
+    def __init__(self, page_title=constants.PAGE_TITLE):
         list.__init__([])
         self._page_title = page_title
-        self._jshost = jshost if jshost else conf.SCRIPT_LOCAL_JSHOST
 
     def add(self, achart_or_charts):
         """
@@ -51,7 +50,7 @@ class Page(list):
         Declare its javascript dependencies for embedding purpose
         """
         unordered_js_dependencies = self._merge_dependencies()
-        return conf.CURRENT_CONFIG.produce_html_script_list(
+        return PYTHON_CONFIG.produce_html_script_list(
             unordered_js_dependencies)
 
     def _repr_html_(self):
@@ -65,14 +64,13 @@ class Page(list):
             doms += chart._render_notebook_dom_()
             components += chart._render_notebook_component_()
 
-        require_config = conf.CURRENT_CONFIG.produce_require_configuration(
-            dependencies,
-            conf.CURRENT_CONFIG.get_current_jshost_for_jupyter(self._jshost)
-        )
-        return engine.render("notebook.html",
-                             single_chart=components,
-                             dom=doms,
-                             **require_config)
+        require_config = JUPYTER_CONFIG.produce_require_configuration(
+            dependencies)
+        return engine.render_notebook(
+            "notebook.html",
+            single_chart=components,
+            dom=doms,
+            **require_config)
 
     def _merge_dependencies(self):
         dependencies = set()
