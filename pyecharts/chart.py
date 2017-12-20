@@ -355,4 +355,4 @@ class Chart(Base):
             )
 
         if not is_toolbox_show:
-            self._option.pop("toolbox")
+            self._option.pop("toolbox", None)
