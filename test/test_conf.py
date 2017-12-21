@@ -26,7 +26,8 @@ def test_with_default_value():
 
 def test_pyecharts_remote_jshost():
     target_config = PyEchartsConfig(jshost=DEFAULT_JUPYTER_GITHUB_URL)
-    eq_('https://chfw.github.io/jupyter-echarts/echarts', target_config.jshost)
+    eq_('https://pyecharts.github.io/jupyter-echarts/echarts',
+        target_config.jshost)
 
     assert target_config.js_embed
 
