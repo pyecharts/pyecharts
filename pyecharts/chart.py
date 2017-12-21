@@ -21,8 +21,7 @@ class Chart(Base):
                  title_text_size=18,
                  subtitle_text_size=12,
                  background_color="#fff",
-                 page_title=constants.PAGE_TITLE,
-                 jshost=None):
+                 page_title=constants.PAGE_TITLE):
         """
 
         :param title:
@@ -51,13 +50,10 @@ class Chart(Base):
             画布背景颜色，默认为 '#fff'
         :param page_title:
             指定生成的 html 文件中 <title> 标签的值。默认为'Echarts'
-        :param jshost:
-            自定义每个实例的 JavaScript host
         """
         super(Chart, self).__init__(
             width=width, height=height,
-            page_title=page_title,
-            jshost=jshost
+            page_title=page_title
         )
         self._colorlst = [
             '#c23531', '#2f4554', '#61a0a8', '#d48265', '#749f83',
