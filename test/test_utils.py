@@ -30,10 +30,9 @@ def test_freeze_js():
         <script src="js/echarts/echarts-wordcloud.min.js"></script>
         <!-- endbuild -->
     </head><body>"""
-
     html_content = freeze_js(html_content)
-    assert 'exports.echarts' in html_content
-    assert 'echarts-wordcloud' in html_content
+    assert 't.echarts' in html_content
+    assert 'wordcloud2.js' in html_content
 
 
 def test_write_utf8_html_file():
