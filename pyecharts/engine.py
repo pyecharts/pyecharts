@@ -4,46 +4,19 @@ from __future__ import unicode_literals
 import os
 
 from jinja2 import Environment, FileSystemLoader, environmentfunction, Markup
-from pyecharts.utils import json_dumps
-from pyecharts import constants
-from pyecharts.conf import PyEchartsConfig
+
+import pyecharts.utils as utils
+import pyecharts.conf as conf
 
 
-class Helpers(object):
-    @staticmethod
-    def merge_js_dependencies(*args):
-        """ Merge js dependencies to a list
-
-        :param args:
-        :return:
-        """
-        dependencies = []
-
-        def _add(_x):
-            if _x not in dependencies:
-                dependencies.append(_x)
-
-        for a in args:
-            if hasattr(a, 'js_dependencies'):
-                for d in a.js_dependencies:
-                    _add(d)
-            else:
-                _add(a)
-        return dependencies
-
-    @staticmethod
-    def read_file_contents_from_local(js_names):
-        contents = []
-        for name in js_names:
-            path = os.path.join(constants.SCRIPT_LOCAL_JSHOST, name + '.js')
-            with open(path, 'rb') as f:
-                c = f.read()
-                contents.append(c.decode('utf8'))
-        return contents
-
-    @staticmethod
-    def generate_js_link(jshost, js_names):
-        return ['{}/{}.js'.format(jshost, x) for x in js_names]
+LINK_SCRIPT_FORMATTER = '<script type="text/javascript" src="{}"></script>'
+EMBED_SCRIPT_FORMATTER = '<script type="text/javascript">\n{}\n</script>'
+CHART_DIV_FORMATTER = '<div id="{chart_id}" style="width:{width};height:{height};"></div>' # flake8: noqa
+CHART_CONFIG_FORMATTER = """
+var myChart_{chart_id} = echarts.init(document.getElementById('{chart_id}'));
+var option_{chart_id} = {options};
+myChart_{chart_id}.setOption(option_{chart_id});
+"""
 
 
 @environmentfunction
@@ -54,21 +27,20 @@ def echarts_js_dependencies(env, *args):
     :param args:
     """
     current_config = env.pyecharts_config
-    dependencies = Helpers.merge_js_dependencies(*args)
-    js_names = [constants.DEFAULT_JS_LIBRARIES.get(x, x) for x in dependencies]
+    dependencies = current_config.merge_js_dependencies(*args)
+    js_names = [current_config.get_js_library(x) for x in dependencies]
 
     if current_config.js_embed:
-        contents = Helpers.read_file_contents_from_local(js_names)
-        embed_script_tpl_str = '<script type="text/javascript">\n{}\n</script>'
+        contents = current_config.read_file_contents_from_local(js_names)
+
         return Markup(
-            '\n'.join([embed_script_tpl_str.format(c) for c in contents])
+            '\n'.join([EMBED_SCRIPT_FORMATTER.format(c) for c in contents])
         )
     else:
         jshost = current_config.jshost
-        js_links = Helpers.generate_js_link(jshost, js_names)
-        link_script_tpl_str = '<script type="text/javascript" src="{}"></script>'
+        js_links = current_config.generate_js_link(jshost, js_names)
         return Markup(
-            '\n'.join([link_script_tpl_str.format(j) for j in js_links])
+            '\n'.join([LINK_SCRIPT_FORMATTER.format(j) for j in js_links])
         )
 
 
@@ -79,12 +51,12 @@ def echarts_js_dependencies_embed(env, *args):
     :param env:
     :param args:
     """
-    dependencies = Helpers.merge_js_dependencies(*args)
-    js_names = [constants.DEFAULT_JS_LIBRARIES.get(x, x) for x in dependencies]
-    contents = Helpers.read_file_contents_from_local(js_names)
-    embed_script_tpl_str = '<script type="text/javascript">\n{}\n</script>'
+    current_config = env.pyecharts_config
+    dependencies = current_config.merge_js_dependencies(*args)
+    js_names = [current_config.get_js_library(x) for x in dependencies]
+    contents = current_config.read_file_contents_from_local(js_names)
     return Markup(
-        '\n'.join([embed_script_tpl_str.format(c) for c in contents])
+        '\n'.join([EMBED_SCRIPT_FORMATTER.format(c) for c in contents])
     )
 
 
@@ -108,7 +80,7 @@ def echarts_container(env, chart):
             return x
 
     return Markup(
-        '<div id="{chart_id}" style="width:{width};height:{height};"></div>'.format(
+        CHART_DIV_FORMATTER.format(
             chart_id=chart.chart_id,
             width=ex_wh(chart.width),
             height=ex_wh(chart.height)
@@ -123,14 +95,9 @@ def generate_js_content(*charts):
     """
     contents = []
     for chart in charts:
-        content_fmt = '''
-        var myChart_{chart_id} = echarts.init(document.getElementById('{chart_id}'));
-        var option_{chart_id} = {options};
-        myChart_{chart_id}.setOption(option_{chart_id});
-        '''
-        js_content = content_fmt.format(
+        js_content = CHART_CONFIG_FORMATTER.format(
             chart_id=chart.chart_id,
-            options=json_dumps(chart.options, indent=4)
+            options=utils.json_dumps(chart.options, indent=4)
         )
         contents.append(js_content)
     contents = '\n'.join(contents)
@@ -144,8 +111,7 @@ def echarts_js_content(env, *charts):
     :param env:
     :param chart:
     """
-    return Markup('<script type="text/javascript">\n{}\n</script>'.format(
-        generate_js_content(*charts)))
+    return Markup(EMBED_SCRIPT_FORMATTER.format(generate_js_content(*charts)))
 
 
 @environmentfunction
@@ -155,21 +121,46 @@ def echarts_js_content_wrap(env, *charts):
     :param env:
     :param charts:
     """
-    return generate_js_content(*charts)
+    return Markup(generate_js_content(*charts))
 
 
-class EchartsEnvironment(Environment):
+# Public API,see document for more detail.
+
+ECHAERTS_TEMPLATE_FUNCTIONS = {
+    'echarts_js_dependencies': echarts_js_dependencies,
+    'echarts_js_dependencies_embed': echarts_js_dependencies_embed,
+    'echarts_container': echarts_container,
+    'echarts_js_content': echarts_js_content,
+    'echarts_js_content_wrap': echarts_js_content_wrap
+}
+
+
+class BaseEnvironment(Environment):
+    """
+    Add config and echarts template functions to a Environment object.
+    """
+
+    def __init__(self, *args, **kwargs):
+        self.pyecharts_config = kwargs.pop('pyecharts_config', None)
+        if self.pyecharts_config is None:
+            raise TypeError(
+                'no pyecharts_config for this environment specified')
+        super(BaseEnvironment, self).__init__(*args, **kwargs)
+        self.globals.update(ECHAERTS_TEMPLATE_FUNCTIONS)
+
+
+class EchartsEnvironment(BaseEnvironment):
     """
     Built-in jinja2 template engine for pyecharts
     """
 
     def __init__(self, pyecharts_config=None, *args, **kwargs):
-        self._pyecharts_config = pyecharts_config or PyEchartsConfig()
+        pyecharts_config = pyecharts_config or conf.PyEchartsConfig()
         loader = kwargs.pop('loader', None)
         if loader is None:
-            loader = FileSystemLoader(
-                self._pyecharts_config.echarts_template_dir)
+            loader = FileSystemLoader(pyecharts_config.echarts_template_dir)
         super(EchartsEnvironment, self).__init__(
+            pyecharts_config=pyecharts_config,
             keep_trailing_newline=True,
             trim_blocks=True,
             lstrip_blocks=True,
@@ -177,21 +168,23 @@ class EchartsEnvironment(Environment):
             *args,
             **kwargs)
 
-        # Add PyEChartsConfig
-        self.globals.update({
-            'echarts_js_dependencies': echarts_js_dependencies,
-            'echarts_js_dependencies_embed': echarts_js_dependencies_embed,
-            'echarts_container': echarts_container,
-            'echarts_js_content': echarts_js_content,
-            'echarts_js_content_wrap': echarts_js_content_wrap
-        })
-
-    @property
-    def pyecharts_config(self):
-        """ Expose the config object.
-        """
-        return self._pyecharts_config
-
     def configure_pyecharts(self, **kwargs):
         for k, v in kwargs.items():
-            setattr(self._pyecharts_config, k, v)
+            setattr(self.pyecharts_config, k, v)
+
+
+def render(template_file, notebook=False, **context):
+    config = conf.PYTHON_CONFIG
+    if notebook:
+        config = conf.JUPYTER_CONFIG
+    echarts_env = EchartsEnvironment(
+        pyecharts_config=config,
+        loader=FileSystemLoader(
+            [config.echarts_template_dir, conf.DEFAULT_TEMPLATE_DIR])
+    )
+    template = echarts_env.get_template(template_file)
+    return template.render(**context)
+
+
+def render_notebook(template_file, **context):
+    return render(template_file, notebook=True, **context)

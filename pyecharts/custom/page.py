@@ -1,7 +1,8 @@
 # coding=utf-8
 
 import pyecharts.utils as utils
-import pyecharts.template as template
+import pyecharts.engine as engine
+from pyecharts.conf import PYTHON_CONFIG, JUPYTER_CONFIG
 import pyecharts.constants as constants
 
 
@@ -10,10 +11,9 @@ class Page(list):
     A composite object to present multiple charts vertically in a single page
     """
 
-    def __init__(self, jshost=None, page_title=constants.PAGE_TITLE):
+    def __init__(self, page_title=constants.PAGE_TITLE):
         list.__init__([])
         self._page_title = page_title
-        self._jshost = jshost if jshost else constants.SCRIPT_LOCAL_JSHOST
 
     def add(self, achart_or_charts):
         """
@@ -32,11 +32,9 @@ class Page(list):
                template_name='simple_page.html',
                object_name='page',
                extra_context=None):
-        tpl = template.create_builtin_template_engine().get_template(
-            template_name)
         context = {object_name: self}
         context.update(extra_context or {})
-        html = tpl.render(**context)
+        html = engine.render(template_name, **context)
         utils.write_utf8_html_file(path, html)
 
     def render_embed(self):
@@ -52,27 +50,27 @@ class Page(list):
         Declare its javascript dependencies for embedding purpose
         """
         unordered_js_dependencies = self._merge_dependencies()
-        return template.produce_html_script_list(unordered_js_dependencies)
+        return PYTHON_CONFIG.produce_html_script_list(
+            unordered_js_dependencies)
 
     def _repr_html_(self):
         """
 
         :return:
         """
-        _tmp = "notebook.html"
-        doms = ""
-        components = ""
+        doms = components = ""
         dependencies = self._merge_dependencies()
         for chart in self:
             doms += chart._render_notebook_dom_()
             components += chart._render_notebook_component_()
 
-        require_config = template.produce_require_configuration(
-            dependencies, self._jshost)
-        tmp = template.create_builtin_template_engine().get_template(_tmp)
-        html = tmp.render(
-            single_chart=components, dom=doms, **require_config)
-        return html
+        require_config = JUPYTER_CONFIG.produce_require_configuration(
+            dependencies)
+        return engine.render_notebook(
+            "notebook.html",
+            single_chart=components,
+            dom=doms,
+            **require_config)
 
     def _merge_dependencies(self):
         dependencies = set()

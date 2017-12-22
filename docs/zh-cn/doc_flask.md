@@ -1,4 +1,3 @@
-# pyecharts + Flask 使用指南
 > 本指南会以一个小的 Flask 项目为例，说明如何在 Flask 中使用 pyecharts。请确保你已经安装 Flask，还没安装请执行 ```pip install flask``` 或其他方式安装。
 
 ## Step 0: 首先新建一个 Flask 项目
@@ -108,6 +107,115 @@ $ flask run
 
 ![flask-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/flask-0.gif)
 
+## 模板扩展
+
+这里对模板进行一些说明，实际上 {{ myechart|safe }} 封装的是
+
+```html
+<div id="{{ chart_id }}" style="width:{{ my_width }}px;height:{{ my_height }}px;"></div>
+<script type="text/javascript">
+    var myChart_{{ chart_id }} = echarts.init(document.getElementById('{{ chart_id }}'));
+    var option_{{ chart_id }} = {{ my_option|safe }};
+    myChart_{{ chart_id }}.setOption(option_{{ chart_id }});
+</script>
+```
+
+所以实际组合起来的模板是这样的
+
+```html
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Proudly presented by ECharts</title>
+	{% for jsfile_name in script_list %}
+        <script src="{{ host }}/{{ jsfile_name }}.js"></script>
+    {% endfor %}
+</head>
+
+<body>
+  <div id="{{ chart_id }}" style="width:{{ my_width }}px;height:{{ my_height }}px;"></div>
+    <script type="text/javascript">
+        var myChart_{{ chart_id }} = echarts.init(document.getElementById('{{ chart_id }}'));
+        var option_{{ chart_id }} = {{ my_option|safe }};
+        myChart_{{ chart_id }}.setOption(option_{{ chart_id }});
+    </script>
+</body>
+
+</html>
+```
+
+有需要的开发者可以对模板进行更改，这里演示如何使 pyecharts 生成的图可自适应宽度，利用 `resize` 方法。模板修改为如下所示
+
+```html
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Proudly presented by ECharts</title>
+	{% for jsfile_name in script_list %}
+        <script src="{{ host }}/{{ jsfile_name }}.js"></script>
+    {% endfor %}
+</head>
+
+<body>
+  <div id="{{ chart_id }}" style="width:{{ my_width }};height:{{ my_height }}px;"></div>
+    <script type="text/javascript">
+        window.onload = function() {
+			setTimeout(function() {
+				var myChart_{{ chart_id }} = echarts.init(document.getElementById('{{ chart_id }}'));
+				var option_{{ chart_id }} = {{ my_option|safe }};
+				myChart_{{ chart_id }}.setOption(option_{{ chart_id }});
+				window.onresize = function() {
+					myChart_{{ chart_id }}.resize();
+				};
+			}, 1000);
+		};
+    </script>
+</body>
+
+</html>
+```
+
+代码修改为如下所示
+
+```python
+from pyecharts import Bar
+from pyecharts.constants import DEFAULT_HOST
+from pyecharts.utils import json_dumps
+from flask import Flask, render_template
+
+
+app = Flask(__name__)
+
+
+@app.route("/")
+def hello():
+    _bar = bar_chart()
+    return render_template('pyecharts.html',
+                           chart_id=_bar.chart_id,
+                           host=DEFAULT_HOST,
+                           my_width="100%",
+                           my_height=600,
+                           my_option=json_dumps(_bar.options),
+                           script_list=_bar.get_js_dependencies())
+
+
+def bar_chart():
+    bar = Bar("我的第一个图表", "这里是副标题")
+    bar.add("服装",
+            ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"],
+            [5, 20, 36, 10, 75, 90])
+    return bar
+
+```
+
+效果
+
+![flask-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/flask-1.gif)
+
 ## 小结
 
-可以看到，在 Flask app 中加入 pyecharts 图表只需要简单的几个步骤而已，欢迎尝试更多的图表类型。具体文档可以参考 ```pyecharts/document```  文件夹。
+可以看到，在 Flask app 中加入 pyecharts 图表只需要简单的几个步骤而已，欢迎尝试更多的图表类型。具体文档可以参考 ```pyecharts/docs```  文件夹。
