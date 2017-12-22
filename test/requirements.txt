@@ -4,3 +4,4 @@ coverage
 pandas
 numpy
 jupyter
+flake8

@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # coding=utf-8
 from __future__ import unicode_literals
 
@@ -8,12 +7,16 @@ import codecs
 
 from pyecharts.utils import get_resource_dir
 
-
+# Path constants for jshost
 DEFAULT_HOST = 'https://chfw.github.io/jupyter-echarts/echarts'
+SCRIPT_LOCAL_JSHOST = get_resource_dir('templates', 'js', 'echarts')
+JUPYTER_LOCAL_JSHOST = '/nbextensions/echarts'
 
-CONFIGURATION = dict(
-    HOST='/nbextensions/echarts'
-)
+# Path constants for template dir
+
+DEFAULT_TEMPLATE_DIR = get_resource_dir('templates')
+
+# Load js & map file index into a dictionary.
 
 DEFAULT_ECHARTS_REGISTRY = os.path.join(
     get_resource_dir('templates'), 'js', 'echarts', 'registry.json')
@@ -22,8 +25,8 @@ with codecs.open(DEFAULT_ECHARTS_REGISTRY, 'r', 'utf-8') as f:
     content = f.read()
     CONFIG = json.loads(content)
 
-DEFAULT_JS_LIBRARIES = CONFIG['FILE_MAP']
-CITY_NAME_PINYIN_MAP = CONFIG['PINYIN_MAP']
+DEFAULT_JS_LIBRARIES = CONFIG['FILE_MAP']  # {<Pinyin>:<Js File Name>}
+CITY_NAME_PINYIN_MAP = CONFIG['PINYIN_MAP']  # {<Chinese Name>:<Pinyin>}
 
 PAGE_TITLE = "Echarts"
 

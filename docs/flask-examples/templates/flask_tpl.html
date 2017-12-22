@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>自定义模板</title>
+    {{ echarts_js_dependencies(hm) }}
+</head>
+<body>
+<p>在 Flask 下使用 echarts_* 系列模板函数(Template Functions)渲染页面。</p>
+{{ echarts_container(hm) }}
+{{ echarts_js_content(hm) }}
+</body>
+</html>
