@@ -1,5 +1,5 @@
-#!/usr/bin/env python
 # coding=utf-8
+# flake8: noqa
 
 from pyecharts._version import __version__, __author__
 
@@ -38,4 +38,5 @@ from pyecharts.custom.timeline import Timeline
 
 # misc
 from pyecharts.template import online
+from pyecharts.template import configure
 from pyecharts.style import Style

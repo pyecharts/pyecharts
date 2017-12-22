@@ -58,6 +58,7 @@ def test_bar_waterfall():
     bar.add("", months, months_v1, label_color=['rgba(0,0,0,0)'], is_stack=True)
     bar.add("月份", months, months_v2, is_label_show=True, is_stack=True,
             label_pos='inside')
+    bar.show_config()
     bar.render()
 
 

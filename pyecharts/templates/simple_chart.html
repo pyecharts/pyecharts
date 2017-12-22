@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{{ chart.page_title }}</title>
+    {{ echarts_js_dependencies(chart) }}
+</head>
+<body>
+    {{ echarts_container(chart) }}
+    {{ echarts_js_content(chart) }}
+</body>
+</html>
