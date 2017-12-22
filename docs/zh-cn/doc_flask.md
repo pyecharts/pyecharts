@@ -25,12 +25,12 @@ $ mkdir templates
     <meta charset="utf-8">
     <title>Proudly presented by ECharts</title>
 	{% for jsfile_name in script_list %}
-    <script src="{{host}}/{{jsfile_name}}.js"></script>
+        <script src="{{ host }}/{{ jsfile_name }}.js"></script>
     {% endfor %}
 </head>
 
 <body>
-  {{myechart|safe}}
+  {{ myechart|safe }}
 </body>
 
 </html>
