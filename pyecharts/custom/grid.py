@@ -14,10 +14,9 @@ class Grid(Base):
     """
     def __init__(self, page_title=PAGE_TITLE,
                  width=800,
-                 height=400,
-                 jshost=None):
+                 height=400):
         super(Grid, self).__init__(
-            width=width, height=height, jshost=jshost
+            width=width, height=height
         )
         self._page_title = page_title
 
