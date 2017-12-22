@@ -2244,7 +2244,7 @@ radar = Radar()
 radar.config(c_schema=c_schema, shape='circle')
 radar.add("北京", value_bj, item_color="#f9713c", symbol=None)
 radar.add("上海", value_sh, item_color="#b3e4a1", symbol=None,
-          legend_selectedmode='signle')
+          legend_selectedmode='single')
 radar.render()
 ```
 ![radar-1](https://raw.githubusercontent.com/chenjiandongx/pyecharts/master/images/radar-1.gif)
