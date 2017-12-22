@@ -12,6 +12,7 @@ import numpy as np
 
 from nose.tools import eq_
 from pyecharts import Bar, Map
+import pyecharts.constants as constants
 from test.constants import CLOTHES
 
 
@@ -43,6 +44,7 @@ def test_notebook_render():
     assert json_encoded_title in html
     assert "require.config" in html
     assert "function(ec)" in html
+    assert constants.JUPYTER_LOCALHOST_URL in html
 
 
 def test_notebook_dom():
