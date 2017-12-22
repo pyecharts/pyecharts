@@ -166,6 +166,7 @@ class Chart(Base):
             is_liquid_animation=None,
             is_liquid_outline_show=None,
             is_more_utils=None,
+            is_map_symbol_show=None,
             is_piecewise=None,
             is_radiusaxis_show=None,
             is_random=None,
@@ -176,7 +177,7 @@ class Chart(Base):
             is_stack=None,
             is_step=None,
             is_symbol_show=None,
-            is_map_symbol_show=None,
+            is_toolbox_show=None,
             is_visualmap=None,
             is_xaxislabel_align=None,
             is_yaxislabel_align=None,
@@ -215,6 +216,7 @@ class Chart(Base):
             mark_point_symbol=None,
             mark_point_symbolsize=None,
             mark_point_textcolor=None,
+            mark_point_valuedim=None,
             radius_data=None,
             radius=None,
             rosetype=None,
@@ -262,6 +264,8 @@ class Chart(Base):
             xaxis_min=None,
             xaxis_max=None,
             xaxis_type=None,
+            xaxis_label_textsize=None,
+            xaxis_label_textcolor=None,
             xaxis3d_name=None,
             xaxis3d_name_size=None,
             xaxis3d_name_gap=None,
@@ -282,6 +286,8 @@ class Chart(Base):
             yaxis_name_pos=None,
             yaxis_type=None,
             yaxis_name=None,
+            yaxis_label_textsize=None,
+            yaxis_label_textcolor=None,
             yaxis3d_name=None,
             yaxis3d_name_size=None,
             yaxis3d_name_gap=None,
@@ -300,6 +306,7 @@ class Chart(Base):
 
     def _config_components(self, is_visualmap=False,
                            is_more_utils=False,
+                           is_toolbox_show=True,
                            **kwargs):
         """ 图形组件配置项
 
@@ -309,6 +316,8 @@ class Chart(Base):
             指定是否使用 dataZoom 组件
         :param is_more_utils:
             指定是否提供更多的实用小工具
+        :param is_toolbox_show:
+            指定是否显示工具箱
         :param kwargs:
         """
         kwargs.update(colorlst=self._colorlst)
@@ -348,3 +357,6 @@ class Chart(Base):
                         "back": "缩放还原"
                     }}
             )
+
+        if not is_toolbox_show:
+            self._option.pop("toolbox")

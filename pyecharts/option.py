@@ -1,10 +1,10 @@
-#!/usr/bin/env python
 # coding=utf-8
 from __future__ import unicode_literals
 
 import random
 
 fs = []
+SYMBOLS = ('rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow')
 
 
 def collectfuncs(func):
@@ -237,6 +237,8 @@ def xy_axis(type=None,
             xaxis_interval="auto",
             xaxis_force_interval=None,
             xaxis_pos=None,
+            xaxis_label_textsize=12,
+            xaxis_label_textcolor="#000",
             yaxis_margin=8,
             yaxis_name_size=14,
             yaxis_name_gap=25,
@@ -249,6 +251,8 @@ def xy_axis(type=None,
             yaxis_interval="auto",
             yaxis_force_interval=None,
             yaxis_pos=None,
+            yaxis_label_textsize=12,
+            yaxis_label_textcolor="#000",
             yaxis_formatter="",
             is_convert=False,
             is_xaxis_inverse=False,
@@ -301,6 +305,10 @@ def xy_axis(type=None,
         这时候可以使用 interval 配合 min、max 强制设定刻度划分。在类目轴中无效。
     :param xaxis_pos:
         x 坐标轴位置，有'top','bottom'可选
+    :param xaxis_label_textsize:
+        x 坐标轴标签字体大小
+    :param xaxis_label_textcolor:
+        x 坐标轴标签字体颜色
     :param yaxis_margin:
         y 轴刻度标签与轴线之间的距离。默认为 8
     :param yaxis_name_size:
@@ -336,6 +344,10 @@ def xy_axis(type=None,
         这时候可以使用 interval 配合 min、max 强制设定刻度划分。在类目轴中无效。
     :param yaxis_pos:
         y 坐标轴位置，有'left','right'可选
+    :param yaxis_label_textsize:
+        y 坐标轴标签字体大小
+    :param yaxis_label_textcolor:
+        y 坐标轴标签字体颜色
     :param yaxis_formatter:
         y 轴标签格式器，如 '天'，则 y 轴的标签为数据加'天'(3 天，4 天),默认为 ""
     :param is_convert:
@@ -371,7 +383,11 @@ def xy_axis(type=None,
         "axisLabel": {
             "interval": xaxis_interval,
             "rotate": xaxis_rotate,
-            "margin": xaxis_margin
+            "margin": xaxis_margin,
+            "textStyle": {
+                "fontSize": xaxis_label_textsize,
+                "color": xaxis_label_textcolor,
+            }
         },
         "axisTick": {
             "alignWithLabel": is_xaxislabel_align
@@ -392,7 +408,11 @@ def xy_axis(type=None,
             "formatter": "{value} " + yaxis_formatter,
             "rotate": yaxis_rotate,
             "interval": yaxis_interval,
-            "margin": yaxis_margin
+            "margin": yaxis_margin,
+            "textStyle": {
+                "fontSize": yaxis_label_textsize,
+                "color": yaxis_label_textcolor,
+            }
         },
         "axisTick": {
             "alignWithLabel": is_yaxislabel_align
@@ -431,7 +451,8 @@ def _mark(data,
           mark_point_symbolsize=50,
           mark_point_textcolor='#fff',
           mark_line_symbolsize=10,
-          mark_line_valuedim=None,
+          mark_line_valuedim="",
+          mark_point_valuedim="",
           _is_markline=False,
           **kwargs):
     """ 图形标记组件，用于标记指定的特殊数据，有标记线和标记点两种
@@ -462,14 +483,26 @@ def _mark(data,
     :param mark_line_symbolsize:
         标记线图形大小，默认为 15
     :param mark_line_valuedim:
-        指定在哪个维度上指定最大值最小值。这可以是维度的直接名称，Line 时可以是 x、angle
-        等、Kline 图时可以是 open、close、highest、lowest。
+        标记线指定在哪个维度上指定最大值最小值。这可以是维度的直接名称，Line 时可以
+        是 x、angle 等、Kline 图时可以是 open、close、highest、lowest。
+        可同时制定多个维度，如
+            mark_line=['min', 'max'], mark_line_valuedim=['lowest', 'highest']
+            则表示 min 使用 lowest 维度，max 使用 highest 维度，以此类推
+    :param mark_point_valuedim:
+        编辑点指定在哪个维度上指定最大值最小值。这可以是维度的直接名称，Line 时可以
+        是 x、angle 等、Kline 图时可以是 open、close、highest、lowest。
+        可同时制定多个维度，如
+          mark_point=['min', 'max'], mark_point_valuedim=['lowest', 'highest']
+        则表示 min 使用 lowest 维度，max 使用 highest 维度，以此类推
     :param _is_markline:
         指定是否为 markline
     """
     mark = {"data": []}
     if data:
-        for d in list(data):
+        _markpv = _marklv = [None for _ in range(len(data))]
+        _markpv[: len(mark_point_valuedim)] = mark_point_valuedim
+        _marklv[: len(mark_line_valuedim)] = mark_line_valuedim
+        for index, d in enumerate(list(data)):
             # 自定义坐标点数据
             if isinstance(d, dict):
                 _coord = d.get('coord', None)
@@ -496,13 +529,17 @@ def _mark(data,
                     _marktmp = {
                         "type": _type,
                         "name": _name,
-                        'valueDim': mark_line_valuedim,
+                        'valueDim': _marklv[index],
                     }
                     if _type:
                         mark.get("data").append(_marktmp)
                         mark.update(symbolSize=mark_line_symbolsize)
                 else:
-                    _marktmp = {"type": _type, "name": _name}
+                    _marktmp = {
+                        "type": _type,
+                        "name": _name,
+                        'valueDim': _markpv[index],
+                    }
                     _marktmp.update(
                         symbol=mark_point_symbol,
                         symbolSize=mark_point_symbolsize,
@@ -708,7 +745,7 @@ def symbol(type=None, symbol="", **kwargs):
         symbol = 'none'
     elif type == "line" and symbol == "":  # Line
         symbol = "emptyCircle"
-    elif symbol not in ('rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow'):
+    elif symbol not in SYMBOLS:
         symbol = 'circle'
     return symbol
 
@@ -731,7 +768,7 @@ def effect(effect_brushtype="stroke",
     _effect = {
         "brushType": effect_brushtype,
         "scale": effect_scale,
-        "period":effect_period
+        "period": effect_period
     }
     return _effect
 
