@@ -1,8 +1,7 @@
-# pyecharts
+# [pyecharts](https://github.com/chenjiandongx/pyecharts) [![Build Status](https://travis-ci.org/chenjiandongx/pyecharts.svg?branch=master)](https://travis-ci.org/chenjiandongx/pyecharts) [![codecov](https://codecov.io/gh/chenjiandongx/pyecharts/branch/master/graph/badge.svg)](https://codecov.io/gh/chenjiandongx/pyecharts) [![PyPI version](https://badge.fury.io/py/pyecharts.svg)](https://badge.fury.io/py/pyecharts) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-pyecharts is a library to generate charts using Echarts. It simply provides the interface between Echarts and Python.
+> pyecharts is a library to generate charts using Echarts. It simply provides the interface between Echarts and Python.
 
-[![Build Status](https://travis-ci.org/chenjiandongx/pyecharts.svg?branch=master)](https://travis-ci.org/chenjiandongx/pyecharts) [![codecov](https://codecov.io/gh/chenjiandongx/pyecharts/branch/master/graph/badge.svg)](https://codecov.io/gh/chenjiandongx/pyecharts) [![PyPI version](https://badge.fury.io/py/pyecharts.svg)](https://badge.fury.io/py/pyecharts) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## Introduction
 [Echarts](https://github.com/ecomfe/echarts) is an open source library from Baidu for data visualization in javascript. It has awesome demo pages so I started to look out for an interface library so that I could use it in Python. I ended up with [echarts-python](https://github.com/yufeiminds/echarts-python) on github but it lacks of documentation and was not updated for a while. Just like many other Python projects, I started my own project, pyecharts, referencing echarts-python and another library [pygal](https://github.com/Kozea/pygal).
@@ -19,13 +18,14 @@ $ pip install notebook
 ### pyecharts
 You can install it via pip
 ```
-$ pip install pyecharts
+$ pip install pyecharts -U
 ```
 
 or clone it and install it
 ```
 $ git clone --recursive https://github.com/chenjiandongx/pyecharts.git
 $ cd pyecharts
+$ pip install -r requirements.txt
 $ python setup.py install
 ```
 
@@ -48,11 +48,10 @@ It will create a file named render.html in the root directory, open file with yo
 
 
 ## Working with pandas & numpy
-
 ![pandas_numpy](https://github.com/chenjiandongx/pyecharts/blob/master/images/pandas-numpy.png)
 
 
-## working with Flask & Django
+## Working with Flask & Django
 Flask
 
 ![flask-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/flask-0.gif)
@@ -70,15 +69,8 @@ Django
 
 
 ## Documentation
-* 中文文档
-    * [pyecharts 文档-预览篇](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/doc_prepare.md)
-    * [pyecharts 文档-图形篇](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/doc_charts.md)
-    * [pyecharts 文档-API 篇](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/doc_api.md)
-    * [pyecharts 文档-版本篇](https://github.com/chenjiandongx/pyecharts/blob/master/changelog.md)
-    * [pyecharts 文档-画廊篇](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/doc_gallery.md)
-    * [pyecharts 文档-FAQ 篇](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/doc_faq.md)
-
-* [English](https://github.com/chenjiandongx/pyecharts/blob/master/docs/en-us/documentation.md)
+* [中文文档](https://github.com/chenjiandongx/pyecharts/tree/master/docs/zh-cn)
+* [English](https://github.com/chenjiandongx/pyecharts/tree/master/docs/en-us)
 
 
 ## Test
@@ -92,4 +84,3 @@ pyecharts is developed and maintained by chenjiandongx ([chenjiandongx@qq.com](c
 
 ## License
 pyecharts is released under the MIT License. See LICENSE for more information.
-
