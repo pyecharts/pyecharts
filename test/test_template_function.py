@@ -1,8 +1,14 @@
 # coding=utf8
+"""
+Test cases for jinja2 template functions
+"""
+
+from __future__ import unicode_literals
+from nose.tools import raises
 
 from pyecharts.utils import get_resource_dir
-from pyecharts import Bar
-from pyecharts.engine import EchartsEnvironment
+from pyecharts import Bar, Map
+from pyecharts.engine import BaseEnvironment, EchartsEnvironment
 
 ECHARTS_ENV = EchartsEnvironment()
 
@@ -24,7 +30,7 @@ def test_echarts_js_dependencies():
     tpl = ECHARTS_ENV.from_string('{{ echarts_js_dependencies(bar) }}')
     bar = create_demo_bar()
     html = tpl.render(bar=bar)
-    assert '<script type="text/javascript" src="http://localhost/echarts/echarts.min.js"></script>' == html
+    assert '<script type="text/javascript" src="http://localhost/echarts/echarts.min.js"></script>' == html # flake8: noqa
 
 
 def test_echarts_js_dependencies_embed():
@@ -36,7 +42,8 @@ def test_echarts_js_dependencies_embed():
     html = tpl.render(bar=bar)
     assert len(html) > 0
 
-    # echarts_js_dependencies equals echarts_js_dependencies_embed when use local host.
+    # echarts_js_dependencies equals echarts_js_dependencies_
+    # embed when use local host.
     tpl2 = ECHARTS_ENV.from_string(
         '{{ echarts_js_dependencies("echarts.min") }}')
     html2 = tpl2.render(bar=bar)
@@ -48,17 +55,17 @@ def test_echarts_js_container():
     tpl = ECHARTS_ENV.from_string('{{ echarts_container(bar) }}')
     bar = create_demo_bar('id_demo_chart')
     html = tpl.render(bar=bar)
-    assert '<div id="id_demo_chart" style="width:800px;height:400px;"></div>' == html
+    assert '<div id="id_demo_chart" style="width:800px;height:400px;"></div>' == html # flake8: noqa
 
     bar.width = 1024
     bar.height = 768
     html = tpl.render(bar=bar)
-    assert '<div id="id_demo_chart" style="width:1024px;height:768px;"></div>' == html
+    assert '<div id="id_demo_chart" style="width:1024px;height:768px;"></div>' == html # flake8: noqa
 
     bar.width = '1024px'
     bar.height = '768px'
     html = tpl.render(bar=bar)
-    assert '<div id="id_demo_chart" style="width:1024px;height:768px;"></div>' == html
+    assert '<div id="id_demo_chart" style="width:1024px;height:768px;"></div>' == html # flake8: noqa
 
 
 def test_echarts_js_content():
@@ -73,3 +80,23 @@ def test_echarts_js_content_wrap():
     bar = create_demo_bar()
     html = tpl.render(bar=bar)
     assert len(html) > 0
+
+
+@raises(TypeError)
+def test_create_environment_without_config():
+    be = BaseEnvironment()
+
+
+def test_echarts_js_in_first():
+    value = [20, 190, 253, 77, 65]
+    attr = ['汕头市', '汕尾市', '揭阳市', '阳江市', '肇庆市']
+    map = Map("广东地图示例", width=1200, height=600)
+    map.add("", attr, value, maptype='广东', is_visualmap=True, visual_text_color='#000')
+    ECHARTS_ENV.configure_pyecharts(jshost='http://localhost/echarts')
+    tpl = ECHARTS_ENV.from_string('{{ echarts_js_dependencies(m) }}')
+    html = tpl.render(m=map)
+    echarts_js_pos = html.find('echarts.min.js')
+    guangdong_js_pos = html.find('guangdong.js')
+    assert echarts_js_pos > -1
+    assert guangdong_js_pos > -1
+    assert echarts_js_pos < guangdong_js_pos

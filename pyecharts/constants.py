@@ -1,32 +1,12 @@
 # coding=utf-8
 from __future__ import unicode_literals
 
-import os
-import json
-import codecs
-
-from pyecharts.utils import get_resource_dir
-
+# for backward compatibility
+DEFAULT_HOST = 'https://pyecharts.github.io/jupyter-echarts/echarts'
 # Path constants for jshost
-DEFAULT_HOST = 'https://chfw.github.io/jupyter-echarts/echarts'
-SCRIPT_LOCAL_JSHOST = get_resource_dir('templates', 'js', 'echarts')
-JUPYTER_LOCAL_JSHOST = '/nbextensions/echarts'
+DEFAULT_JUPYTER_GITHUB_URL = DEFAULT_HOST  # Why? it was too long, says flake8
 
-# Path constants for template dir
-
-DEFAULT_TEMPLATE_DIR = get_resource_dir('templates')
-
-# Load js & map file index into a dictionary.
-
-DEFAULT_ECHARTS_REGISTRY = os.path.join(
-    get_resource_dir('templates'), 'js', 'echarts', 'registry.json')
-
-with codecs.open(DEFAULT_ECHARTS_REGISTRY, 'r', 'utf-8') as f:
-    content = f.read()
-    CONFIG = json.loads(content)
-
-DEFAULT_JS_LIBRARIES = CONFIG['FILE_MAP']  # {<Pinyin>:<Js File Name>}
-CITY_NAME_PINYIN_MAP = CONFIG['PINYIN_MAP']  # {<Chinese Name>:<Pinyin>}
+JUPYTER_LOCALHOST_URL = '/nbextensions/echarts'
 
 PAGE_TITLE = "Echarts"
 
@@ -670,6 +650,18 @@ CITY_GEO_COORDS = {
     '邹城': [116.58, 35.24],
     '遵化': [117.58, 40.11],
     '遵义': [106.9, 27.7],
+    '晋中': [112.75, 37.68],
+    '吕梁': [111.13, 37.52],
+    '呼伦贝尔': [119.77, 49.22],
+    '巴彦淖尔': [107.42, 40.75],
+    '抚州': [116.35, 28.0],
+    '襄阳': [112.2, 32.08],
+    '黄冈': [114.87, 30.45],
+    '红河': [103.4, 23.37],
+    '文山': [104.25, 23.37],
+    '商洛': [109.93, 33.87],
+    '定西': [104.62, 35.58],
+    '陇南': [104.92, 33.4],
     '北京市': [116.4, 39.9],
     '天安门': [116.38, 39.9],
     '东城区': [116.42, 39.93],

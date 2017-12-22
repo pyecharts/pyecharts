@@ -3,8 +3,9 @@
 import uuid
 
 import pyecharts.constants as constants
-import pyecharts.template as template
+import pyecharts.engine as engine
 import pyecharts.utils as utils
+from pyecharts.conf import PYTHON_CONFIG, JUPYTER_CONFIG
 
 
 class Base(object):
@@ -15,8 +16,7 @@ class Base(object):
     def __init__(self,
                  width=800,
                  height=400,
-                 page_title=constants.PAGE_TITLE,
-                 jshost=None):
+                 page_title=constants.PAGE_TITLE):
         """
 
         :param width:
@@ -33,7 +33,6 @@ class Base(object):
         self._chart_id = uuid.uuid4().hex
         self.width, self.height = width, height
         self._page_title = page_title
-        self._jshost = jshost if jshost else template.CURRENT_CONFIG.jshost
         self._js_dependencies = {'echarts'}
 
     @property
@@ -61,31 +60,27 @@ class Base(object):
         """ 渲染图表的所有配置项，为 web pages 服务，不过需先提供
         所需要的js 依赖文件
         """
-        embed = 'chart_component.html'
-        default_engine = template.create_builtin_template_engine()
-        tmp = default_engine.get_template(embed)
         my_option = utils.json_dumps(self._option, indent=4)
-        html = tmp.render(my_option=my_option,
-                          chart_id=self._chart_id,
-                          my_width=self.width,
-                          my_height=self.height)
+        html = engine.render('chart_component.html',
+                             my_option=my_option,
+                             chart_id=self._chart_id,
+                             my_width=self.width,
+                             my_height=self.height)
         return html
 
     def get_js_dependencies(self):
         """ 声明所有的 js 文件路径
         """
-        return template.produce_html_script_list(self._js_dependencies)
+        return PYTHON_CONFIG.produce_html_script_list(self._js_dependencies)
 
     def render(self,
                path='render.html',
                template_name='simple_chart.html',
                object_name='chart',
                extra_context=None):
-        default_engine = template.create_builtin_template_engine()
-        tpl = default_engine.get_template(template_name)
         context = {object_name: self}
         context.update(extra_context or {})
-        html = tpl.render(**context)
+        html = engine.render(template_name, **context)
         utils.write_utf8_html_file(path, html)
 
     @staticmethod
@@ -126,33 +121,35 @@ class Base(object):
     def _repr_html_(self):
         """ 渲染配置项并将图形显示在 notebook 中
         """
-        _tmp = 'notebook.html'
         dom = self._render_notebook_dom_()
         component = self._render_notebook_component_()
-        tmp = template.create_builtin_template_engine().get_template(_tmp)
-        require_config = template.produce_require_configuration(
-            self._js_dependencies, self._jshost)
-        html = tmp.render(
-            single_chart=component, dom=dom, **require_config)
-        return html
+        require_config = JUPYTER_CONFIG.produce_require_configuration(
+            self._js_dependencies
+        )
+        return engine.render_notebook(
+            'notebook.html',
+            single_chart=component,
+            dom=dom,
+            **require_config)
 
     def _render_notebook_dom_(self):
         """ 为 notebook 渲染 dom 模板
         """
-        _tmp = "notebook_dom.html"
-        tmp = template.create_builtin_template_engine().get_template(_tmp)
-        component = tmp.render(
+        return engine.render_notebook(
+            "notebook_dom.html",
             chart_id=self._chart_id,
             chart_width=self.width,
             chart_height=self.height)
-        return component
 
     def _render_notebook_component_(self):
         """ 为 notebook 渲染组件模板
         """
-        _tmp = "notebook_chart_component.html"
         my_option = utils.json_dumps(self._option, indent=4)
-        tmp = template.create_builtin_template_engine().get_template(_tmp)
-        component = tmp.render(
-            my_option=my_option, chart_id=self._chart_id)
-        return component
+        return engine.render_notebook(
+            "notebook_chart_component.html",
+            my_option=my_option,
+            chart_id=self._chart_id)
+
+    def _add_chinese_map(self, map_name_in_chinese):
+        name_in_pinyin = PYTHON_CONFIG.chinese_to_pinyin(map_name_in_chinese)
+        self._js_dependencies.add(name_in_pinyin)
