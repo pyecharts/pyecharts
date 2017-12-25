@@ -8,7 +8,7 @@ import codecs
 from pyecharts.utils import get_resource_dir
 import pyecharts.constants as constants
 
-SCRIPT_LOCAL_JSHOST = get_resource_dir('templates', 'js', 'echarts')
+SCRIPT_FILE_PATH = get_resource_dir('templates', 'js', 'echarts')
 # Path constants for template dir
 
 DEFAULT_TEMPLATE_DIR = get_resource_dir('templates')
@@ -26,10 +26,10 @@ CITY_NAME_PINYIN_MAP = CONFIG['PINYIN_MAP']  # {<Chinese Name>:<Pinyin>}
 
 
 class PyEchartsConfig(object):
-    def __init__(self, echarts_template_dir='.', jshost=SCRIPT_LOCAL_JSHOST,
+    def __init__(self, echarts_template_dir='.', jshost=SCRIPT_FILE_PATH,
                  force_js_embed=False):
         self.echarts_template_dir = echarts_template_dir
-        self._jshost = PyEchartsConfig.convert_jshost_string(jshost)
+        self._jshost = remove_trailing_slashes(jshost)
         self.force_js_embed = force_js_embed
 
     @property
@@ -40,7 +40,7 @@ class PyEchartsConfig(object):
             return True
         else:
             return self._jshost in (
-                SCRIPT_LOCAL_JSHOST, constants.DEFAULT_HOST)
+                SCRIPT_FILE_PATH, constants.DEFAULT_JUPYTER_GITHUB_URL)
 
     @property
     def jshost(self):
@@ -48,18 +48,7 @@ class PyEchartsConfig(object):
 
     @jshost.setter
     def jshost(self, jshost):
-        self._jshost = PyEchartsConfig.convert_jshost_string(jshost)
-
-    @staticmethod
-    def convert_jshost_string(jshost):
-        """ Delete the end separator character if exists.
-
-        :param jshost:
-        """
-        jshost = jshost or ''
-        if jshost[-1:] in ('/', '\\'):
-            jshost = jshost[:-1]
-        return jshost
+        self._jshost = remove_trailing_slashes(jshost)
 
     def get_js_library(self, pinyin):
         return DEFAULT_JS_LIBRARIES.get(pinyin, pinyin)
@@ -95,7 +84,7 @@ class PyEchartsConfig(object):
     def read_file_contents_from_local(js_names):
         contents = []
         for name in js_names:
-            path = os.path.join(SCRIPT_LOCAL_JSHOST, name + '.js')
+            path = os.path.join(SCRIPT_FILE_PATH, name + '.js')
             with open(path, 'rb') as f:
                 c = f.read()
                 contents.append(c.decode('utf8'))
@@ -138,8 +127,19 @@ class PyEchartsConfig(object):
         return script_list
 
 
-CURRENT_CONFIG = PyEchartsConfig(jshost=SCRIPT_LOCAL_JSHOST)
-JUPYTER_CONFIG = PyEchartsConfig(jshost=constants.JUPYTER_LOCAL_JSHOST)
+def remove_trailing_slashes(jshost):
+    """ Delete the end separator character if exists.
+
+    :param jshost:
+    """
+    if jshost and jshost[-1] in ('/', '\\'):
+        return jshost[:-1]
+    else:
+        return jshost
+
+
+PYTHON_CONFIG = PyEchartsConfig(jshost=SCRIPT_FILE_PATH)
+JUPYTER_CONFIG = PyEchartsConfig(jshost=constants.JUPYTER_LOCALHOST_URL)
 
 
 def configure(jshost=None,
@@ -155,16 +155,16 @@ def configure(jshost=None,
     :param kwargs:
     """
     if jshost:
-        CURRENT_CONFIG.jshost = jshost
+        PYTHON_CONFIG.jshost = jshost
         JUPYTER_CONFIG.jshost = jshost
     if echarts_template_dir:
-        CURRENT_CONFIG.echarts_template_dir = echarts_template_dir
+        PYTHON_CONFIG.echarts_template_dir = echarts_template_dir
         JUPYTER_CONFIG.echarts_template_dir = echarts_template_dir
     if force_js_embed is not None:
-        CURRENT_CONFIG.force_js_embed = force_js_embed
+        PYTHON_CONFIG.force_js_embed = force_js_embed
 
 
-def online(host=constants.DEFAULT_HOST):
+def online(host=constants.DEFAULT_JUPYTER_GITHUB_URL):
     """ Set the jshost
 
     :param host:
