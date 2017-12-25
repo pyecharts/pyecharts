@@ -105,8 +105,9 @@ class Timeline(Base):
             "title": chart.options.get('title')
         })
         _tmp_series = copy.deepcopy(chart.options.get('series'))
-        _tmp_series[0].pop("data")
-        self._option.get("baseOption").get("series").append(_tmp_series[0])
+        for _s in _tmp_series:
+            _s.pop("data")
+            self._option.get("baseOption").get("series").append(_s)
 
     def __check_components(self, chart):
         """
