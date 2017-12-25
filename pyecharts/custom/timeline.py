@@ -1,5 +1,7 @@
 # coding=utf-8
 
+import copy
+
 from pyecharts.constants import PAGE_TITLE
 from pyecharts.base import Base
 
@@ -73,9 +75,10 @@ class Timeline(Base):
                     "right": timeline_right,
                     "top": timeline_top,
                     "bottom": timeline_bottom
-                }
+                },
+                "series": [],
             },
-            "options": []
+            "options": [],
         }
 
     def add(self, chart, time_point):
@@ -101,6 +104,9 @@ class Timeline(Base):
             "series": chart.options.get('series'),
             "title": chart.options.get('title')
         })
+        _tmp_series = copy.deepcopy(chart.options.get('series'))
+        _tmp_series[0].pop("data")
+        self._option.get("baseOption").get("series").append(_tmp_series[0])
 
     def __check_components(self, chart):
         """
