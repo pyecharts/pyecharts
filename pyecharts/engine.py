@@ -174,13 +174,13 @@ class EchartsEnvironment(BaseEnvironment):
 
 
 def render(template_file, notebook=False, **context):
-    config = conf.CURRENT_CONFIG
+    config = conf.PYTHON_CONFIG
     if notebook:
         config = conf.JUPYTER_CONFIG
     echarts_env = EchartsEnvironment(
         pyecharts_config=config,
         loader=FileSystemLoader(
-            [conf.CURRENT_CONFIG.echarts_template_dir, conf.DEFAULT_TEMPLATE_DIR])
+            [config.echarts_template_dir, conf.DEFAULT_TEMPLATE_DIR])
     )
     template = echarts_env.get_template(template_file)
     return template.render(**context)
