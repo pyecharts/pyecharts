@@ -1,4 +1,4 @@
 [submodule "pyecharts/templates/js"]
 	path = pyecharts/templates/js
-	url = https://github.com/chfw/jupyter-echarts.git
+	url = https://github.com/pyecharts/jupyter-echarts.git
 	branch = master
