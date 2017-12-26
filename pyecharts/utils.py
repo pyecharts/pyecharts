@@ -10,43 +10,6 @@ import datetime
 
 PY2 = sys.version_info[0] == 2
 
-JS_PATTERN = re.compile(r'<!-- build -->(.*)<!-- endbuild -->',
-                        re.IGNORECASE | re.MULTILINE | re.DOTALL)
-JS_SRC_PATTERN = re.compile(r'src=\"(.*?)\"')
-
-
-def freeze_js(html_content):
-    """
-
-    :param html_content:
-    :return:
-    """
-    matches = JS_PATTERN.finditer(html_content)
-
-    if not matches:
-        return html_content
-
-    for match in reversed(tuple(matches)):
-        # JS file block
-        src_matches = JS_SRC_PATTERN.findall(match.group(1))
-
-        js_content = ""
-        for src in src_matches:
-            src = src.strip()
-            src = src.split('/')
-            file_path = os.path.join(
-                get_resource_dir('templates'), *src)
-
-            with codecs.open(file_path, "r", "utf-8") as f:
-                js_content += f.read() + '\n'
-        # Replace matched string with inline JS
-        fmt = '<script type="text/javascript">{}</script>'
-        js_content = fmt.format(js_content)
-        html_content = (html_content[:match.start()] + js_content +
-                        html_content[match.end():])
-
-    return html_content
-
 
 def get_resource_dir(*paths):
     """
@@ -79,6 +42,7 @@ class UnknownTypeEncoder(json.JSONEncoder):
     """
     UnknownTypeEncoder`类用于处理数据的编码，使其能够被正常的序列化
     """
+
     def default(self, obj):
         if isinstance(obj, (datetime.datetime, datetime.date)):
             return obj.isoformat()
