@@ -85,9 +85,9 @@ class PyEchartsConfig(object):
         contents = []
         for name in js_names:
             path = os.path.join(SCRIPT_FILE_PATH, name + '.js')
-            with open(path, 'rb') as f:
-                c = f.read()
-                contents.append(c.decode('utf8'))
+            with codecs.open(path, 'r', encoding='utf-8') as pf:
+                c = pf.read()
+                contents.append(c)
         return contents
 
     @staticmethod
