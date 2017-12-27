@@ -5,7 +5,11 @@ from __future__ import unicode_literals
 from pyecharts.conf import PyEchartsConfig
 
 from nose.tools import eq_
-from mock import patch, MagicMock
+
+try:
+    from unittest.mock import patch, MagicMock
+except ImportError:
+    from mock import patch, MagicMock
 
 
 def test_merge_js_dependencies():

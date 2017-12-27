@@ -1,14 +1,10 @@
 # coding=utf-8
 from __future__ import unicode_literals
 
-import os
-import re
-import sys
-import json
 import codecs
 import datetime
-
-PY2 = sys.version_info[0] == 2
+import os
+import json
 
 
 def get_resource_dir(*paths):
@@ -29,13 +25,8 @@ def write_utf8_html_file(file_name, html_content):
     :param html_content:
     :return:
     """
-    if PY2:
-        html = html_content.encode('utf-8')
-        with open(file_name, "w+") as fout:
-            fout.write(html)
-    else:
-        with open(file_name, "w+", encoding="utf-8") as fout:
-            fout.write(html_content)
+    with codecs.open(file_name, 'w+', encoding='utf8') as f:
+        f.write(html_content)
 
 
 class UnknownTypeEncoder(json.JSONEncoder):
