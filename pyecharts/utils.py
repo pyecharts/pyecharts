@@ -25,7 +25,7 @@ def write_utf8_html_file(file_name, html_content):
     :param html_content:
     :return:
     """
-    with codecs.open(file_name, 'w+', encoding='utf8') as f:
+    with codecs.open(file_name, 'w+', encoding='utf-8') as f:
         f.write(html_content)
 
 
