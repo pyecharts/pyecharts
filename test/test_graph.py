@@ -6,7 +6,6 @@ import os
 import sys
 from pyecharts import Graph
 
-
 PY2 = sys.version_info[0] == 2
 
 nodes = [
@@ -45,10 +44,10 @@ def test_graph_official_data():
     import json
     if PY2:
         import codecs
-        with codecs.open(os.path.join("..", "json", "weibo.json"), "rb") as f:
+        with codecs.open(os.path.join("fixtures", "weibo.json"), "rb") as f:
             j = json.load(f)
     else:
-        with open(os.path.join("..", "json", "weibo.json"),
+        with open(os.path.join("fixtures", "weibo.json"),
                   "r", encoding="utf-8") as f:
             j = json.load(f)
     nodes, links, categories, cont, mid, _ = j
