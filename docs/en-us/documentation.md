@@ -998,7 +998,7 @@ graph.render()
 from pyecharts import Graph
 
 import json
-with open("..\json\weibo.json", "r", encoding="utf-8") as f:
+with open("data\weibo.json", "r", encoding="utf-8") as f:
     j = json.load(f)
     nodes, links, categories, cont, mid, userl = j
 graph = Graph("微博转发关系图", width=1200, height=600)
