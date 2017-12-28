@@ -32,10 +32,10 @@ def test_sankey_official_data():
     import json
     if PY2:
         import codecs
-        with codecs.open(os.path.join("..", "json", "energy.json"), "rb") as f:
+        with codecs.open(os.path.join("fixtures", "energy.json"), "rb") as f:
             j = json.load(f)
     else:
-        with open(os.path.join("..", "json", "energy.json"),
+        with open(os.path.join("fixtures", "energy.json"),
                   "r", encoding="utf-8") as f:
             j = json.load(f)
     sankey = Sankey("桑基图示例", width=1200, height=600)
