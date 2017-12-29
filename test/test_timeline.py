@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 
 from random import randint
 
-from pyecharts import Bar, Pie, Line, Overlap, Timeline, Style
+from pyecharts import Bar, Pie, Line, Overlap, Timeline, Style, Map
 from test.constants import CLOTHES
 
 
@@ -136,7 +136,6 @@ def test_timeline_bar_line():
 
 
 def test_timeline_map():
-    from pyecharts import Map
     timeline = Timeline(timeline_bottom=0)
     value = [155, 10, 66, 78, 33, 80, 190, 53, 49.6]
     attr = ["福建", "山东", "北京", "上海", "甘肃",
