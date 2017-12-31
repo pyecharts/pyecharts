@@ -8,6 +8,7 @@ import codecs
 from pyecharts.utils import get_resource_dir
 import pyecharts.constants as constants
 
+PYECHARTS_DIR = '.pyecharts'
 SCRIPT_FILE_PATH = get_resource_dir('templates', 'js', 'echarts')
 # Path constants for template dir
 
@@ -16,11 +17,37 @@ DEFAULT_ECHARTS_REGISTRY = os.path.join(
     get_resource_dir('templates'), 'js', 'echarts', 'registry.json')
 # Load js & map file index into a dictionary.
 
+CONFIG = {
+    'FILE_MAP': {},
+    'PINYIN_MAP': {}
+}
 
-with codecs.open(DEFAULT_ECHARTS_REGISTRY, 'r', 'utf-8') as f:
-    content = f.read()
-    CONFIG = json.loads(content)
 
+def _get_pyecharts_dir():
+    user_home = os.path.expanduser('~')
+    package_home = os.path.join(user_home, PYECHARTS_DIR)
+    return package_home
+
+
+def read_a_map_registry(registry_json):
+    with codecs.open(registry_json, 'r', 'utf-8') as f:
+        content = f.read()
+        return json.loads(content)
+
+
+def read_all_registries(global_conf):
+    pyecharts_dir = _get_pyecharts_dir()
+    registries = [DEFAULT_ECHARTS_REGISTRY]
+    for adir in os.listdir(pyecharts_dir):
+        registries.append(
+            os.path.join(pyecharts_dir, adir, 'dist', 'config.json'))
+    for registry_json in registries:
+        config = read_a_map_registry(registry_json)
+        global_conf['FILE_MAP'].update(config['FILE_MAP'])
+        global_conf['PINYIN_MAP'].update(config['PINYIN_MAP'])
+
+
+read_all_registries(CONFIG)
 DEFAULT_JS_LIBRARIES = CONFIG['FILE_MAP']  # {<Pinyin>:<Js File Name>}
 CITY_NAME_PINYIN_MAP = CONFIG['PINYIN_MAP']  # {<Chinese Name>:<Pinyin>}
 
