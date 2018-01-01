@@ -64,6 +64,7 @@ def test_world_map():
 
     with codecs.open('render.html', 'r', 'utf-8') as f:
         actual_content = f.read()
+        print(actual_content)
         # test register map
         assert "registerMap(\"world\"," in actual_content
         # test non-existent country
