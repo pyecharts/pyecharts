@@ -1,12 +1,10 @@
 # coding=utf-8
 from __future__ import unicode_literals
 
-import os
-
 from jinja2 import Environment, FileSystemLoader, environmentfunction, Markup
 
-import pyecharts.utils as utils
 import pyecharts.conf as conf
+import pyecharts.utils as utils
 
 
 LINK_SCRIPT_FORMATTER = '<script type="text/javascript" src="{}"></script>'
