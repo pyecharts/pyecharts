@@ -74,6 +74,11 @@ Django
 
 
 ## Test
+
+If you work on Python2.7, please install `mock` library manually.
+
+Run as the following commands.
+
 ```shell
 $ cd test
 $ nosetests --with-coverage --cover-package pyecharts --cover-package test

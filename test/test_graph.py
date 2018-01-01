@@ -3,11 +3,10 @@
 from __future__ import unicode_literals
 
 import os
-import sys
+import json
+import codecs
 from pyecharts import Graph
 
-
-PY2 = sys.version_info[0] == 2
 
 nodes = [
     {"name": "结点1", "symbolSize": 10},
@@ -42,15 +41,9 @@ def test_graph_circular_layout():
 
 
 def test_graph_official_data():
-    import json
-    if PY2:
-        import codecs
-        with codecs.open(os.path.join("..", "json", "weibo.json"), "rb") as f:
-            j = json.load(f)
-    else:
-        with open(os.path.join("..", "json", "weibo.json"),
-                  "r", encoding="utf-8") as f:
-            j = json.load(f)
+    with codecs.open(os.path.join("fixtures", "weibo.json"), "r",
+                     encoding='utf-8') as f:
+        j = json.load(f)
     nodes, links, categories, cont, mid, _ = j
     graph = Graph("微博转发关系图", width=1200, height=600)
     graph.add("", nodes, links, categories, label_pos="right",

@@ -1265,7 +1265,7 @@ graph.render()
 from pyecharts import Graph
 
 import json
-with open("..\json\weibo.json", "r", encoding="utf-8") as f:
+with open("data\weibo.json", "r", encoding="utf-8") as f:
     j = json.load(f)
     nodes, links, categories, cont, mid, userl = j
 graph = Graph("微博转发关系图", width=1200, height=600)
@@ -2312,21 +2312,13 @@ sankey.render()
 
 使用官方提供的 json 数据
 ```python
-import sys
 import os
 import json
 
 from pyecharts import Sankey
 
-PY2 = sys.version_info[0] == 2
-
-if PY2:
-    import codecs
-    with codecs.open(os.path.join("..", "json", "energy.json"), "rb") as f:
-        j = json.load(f)
-else:
-    with open(os.path.join("..", "json", "energy.json"), "r", encoding="utf-8") as f:
-        j = json.load(f)
+with codecs.open(os.path.join("fixtures", "energy.json"), "r", encoding="utf-8") as f:
+    j = json.load(f)
 sankey = Sankey("桑基图示例", width=1200, height=600)
 sankey.add("sankey", nodes=j['nodes'], links=j['links'],
            line_opacity=0.2, line_curve=0.5, line_color='source',
