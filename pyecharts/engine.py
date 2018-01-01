@@ -28,17 +28,15 @@ def echarts_js_dependencies(env, *args):
     """
     current_config = env.pyecharts_config
     dependencies = current_config.merge_js_dependencies(*args)
-    js_names = [current_config.get_js_library(x) for x in dependencies]
 
     if current_config.js_embed:
-        contents = current_config.read_file_contents_from_local(js_names)
+        contents = current_config.read_file_contents_from_local(dependencies)
 
         return Markup(
             '\n'.join([EMBED_SCRIPT_FORMATTER.format(c) for c in contents])
         )
     else:
-        jshost = current_config.jshost
-        js_links = current_config.generate_js_link(jshost, js_names)
+        js_links = current_config.generate_js_link(dependencies)
         return Markup(
             '\n'.join([LINK_SCRIPT_FORMATTER.format(j) for j in js_links])
         )
@@ -53,8 +51,7 @@ def echarts_js_dependencies_embed(env, *args):
     """
     current_config = env.pyecharts_config
     dependencies = current_config.merge_js_dependencies(*args)
-    js_names = [current_config.get_js_library(x) for x in dependencies]
-    contents = current_config.read_file_contents_from_local(js_names)
+    contents = current_config.read_file_contents_from_local(dependencies)
     return Markup(
         '\n'.join([EMBED_SCRIPT_FORMATTER.format(c) for c in contents])
     )
