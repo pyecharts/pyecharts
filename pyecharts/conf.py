@@ -1,51 +1,18 @@
 # coding=utf-8
 from __future__ import unicode_literals
 
-import os
-import json
-import codecs
-
-from pyecharts.utils import get_resource_dir
 import pyecharts.constants as constants
+from pyecharts.js_extension import load_all_extensions
+from pyecharts.utils import get_resource_dir
 
-PYECHARTS_DIR = '.pyecharts'
 # Path constants for template dir
-
 DEFAULT_TEMPLATE_DIR = get_resource_dir('templates')
-DEFAULT_ECHARTS_REGISTRY = os.path.join(
-    get_resource_dir('templates'), 'js', 'echarts', 'registry.json')
+
 # Load js & map file index into a dictionary.
 
-DEFAULT_JS_LIBRARIES = []
+JS_EXTENSIONS = []  # [JsExtension..]
 CITY_NAME_PINYIN_MAP = {}  # {<Chinese Name>:<Pinyin>}
-
-
-def _get_pyecharts_dir():
-    user_home = os.path.expanduser('~')
-    package_home = os.path.join(user_home, PYECHARTS_DIR)
-    return package_home
-
-
-def read_a_map_registry(registry_json):
-    with codecs.open(registry_json, 'r', 'utf-8') as f:
-        content = f.read()
-        return json.loads(content)
-
-
-def read_all_registries(global_conf, pinyin_db):
-    pyecharts_dir = _get_pyecharts_dir()
-    registries = [DEFAULT_ECHARTS_REGISTRY]
-    for adir in os.listdir(pyecharts_dir):
-        registries.append(
-            os.path.join(pyecharts_dir, adir, 'dist', 'config.json'))
-    for registry_json in registries:
-        config = read_a_map_registry(registry_json)
-        config['LOCAL_PATH'] = os.path.dirname(registry_json)
-        pinyin_db.update(config.pop('PINYIN_MAP'))
-        global_conf.append(config)
-
-
-read_all_registries(DEFAULT_JS_LIBRARIES, CITY_NAME_PINYIN_MAP)
+JS_EXTENSIONS, CITY_NAME_PINYIN_MAP = load_all_extensions()
 
 
 class PyEchartsConfig(object):
@@ -74,9 +41,11 @@ class PyEchartsConfig(object):
         self._jshost = remove_trailing_slashes(jshost)
 
     def get_js_library(self, pinyin):
-        for library in DEFAULT_JS_LIBRARIES:
-            file_map = library.get('FILE_MAP')
-            return file_map.get(pinyin, pinyin)
+        for extension in JS_EXTENSIONS:
+            library = extension.get_js_library(pinyin)
+            if library is not None:
+                return library
+        return None
 
     def chinese_to_pinyin(self, chinese):
         return CITY_NAME_PINYIN_MAP.get(chinese, chinese)
@@ -109,33 +78,22 @@ class PyEchartsConfig(object):
     def read_file_contents_from_local(js_names):
         contents = []
         for name in js_names:
-            for library in DEFAULT_JS_LIBRARIES:
-                file_map = library.get('FILE_MAP')
-                filename = file_map.get(name)
-                if filename:
-                    path = os.path.join(library.get('LOCAL_PATH'),
-                                        filename + '.js')
-                    with open(path, 'rb') as f:
-                        c = f.read()
-                        contents.append(c.decode('utf8'))
+            for extension in JS_EXTENSIONS:
+                filecontent = extension.read_js_library(name)
+                if filecontent:
+                    contents.append(filecontent)
+                    break
         return contents
 
     def generate_js_link(self, js_names):
         links = []
         for name in js_names:
-            for library in DEFAULT_JS_LIBRARIES:
-                file_map = library.get('FILE_MAP')
-                filename = file_map.get(name)
-                if filename:
-                    if self.jshost is None:
-                        if self.hosted_on_github:
-                            jshost = library['GITHUB_URL']
-                        else:
-                            jshost = library['JUPYTER_URL']
-                    else:
-                        jshost = self.jshost
-                    link = '{}/{}.js'.format(jshost, filename)
-                    links.append(link)
+            for extension in JS_EXTENSIONS:
+                js_link = extension.get_js_link(
+                    name, jshost=self.jshost, use_github=self.hosted_on_github)
+                if js_link:
+                    links.append(js_link)
+                    break
         return links
 
     def produce_require_configuration(self, dependencies):
@@ -150,18 +108,10 @@ class PyEchartsConfig(object):
         require_conf_items = []
 
         for name in _d:
-            for library in DEFAULT_JS_LIBRARIES:
-                file_map = library.get('FILE_MAP')
-                filename = file_map.get(name)
-                if filename:
-                    if self.hosted_on_github:
-                        jshost = library['GITHUB_URL']
-                    else:
-                        jshost = library['JUPYTER_URL']
-                    item = "'%s': '%s/%s'" % (name,
-                                              jshost,
-                                              filename)
-                    require_conf_items.append(item)
+            for extension in JS_EXTENSIONS:
+                config_item = extension.produce_require_config_syntax(name)
+                if config_item:
+                    require_conf_items.append(config_item)
         require_libraries = ["'%s'" % key for key in _d]
         return dict(
             config_items=require_conf_items,
