@@ -54,7 +54,7 @@ CITY_NAME_PINYIN_MAP = {
 
 def test_core_js_libraries():
     for key, value in DEFAULT_JS_LIBRARIES.items():
-        default_file_map = conf.DEFAULT_JS_LIBRARIES[0].get('FILE_MAP')
+        default_file_map = conf.JS_EXTENSIONS[0].registry.get('FILE_MAP')
         eq_(value, default_file_map[key])
 
 
