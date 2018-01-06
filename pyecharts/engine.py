@@ -6,10 +6,9 @@ from jinja2 import Environment, FileSystemLoader, environmentfunction, Markup
 import pyecharts.conf as conf
 import pyecharts.utils as utils
 
-
 LINK_SCRIPT_FORMATTER = '<script type="text/javascript" src="{}"></script>'
 EMBED_SCRIPT_FORMATTER = '<script type="text/javascript">\n{}\n</script>'
-CHART_DIV_FORMATTER = '<div id="{chart_id}" style="width:{width};height:{height};"></div>' # flake8: noqa
+CHART_DIV_FORMATTER = '<div id="{chart_id}" style="width:{width};height:{height};"></div>'  # flake8: noqa
 CHART_CONFIG_FORMATTER = """
 var myChart_{chart_id} = echarts.init(document.getElementById('{chart_id}'));
 var option_{chart_id} = {options};
@@ -25,7 +24,7 @@ def echarts_js_dependencies(env, *args):
     :param args:
     """
     current_config = env.pyecharts_config
-    dependencies = current_config.merge_js_dependencies(*args)
+    dependencies = utils.merge_js_dependencies(*args)
     js_names = [current_config.get_js_library(x) for x in dependencies]
 
     if current_config.js_embed:
@@ -50,7 +49,7 @@ def echarts_js_dependencies_embed(env, *args):
     :param args:
     """
     current_config = env.pyecharts_config
-    dependencies = current_config.merge_js_dependencies(*args)
+    dependencies = utils.merge_js_dependencies(*args)
     js_names = [current_config.get_js_library(x) for x in dependencies]
     contents = current_config.read_file_contents_from_local(js_names)
     return Markup(

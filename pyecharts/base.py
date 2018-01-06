@@ -49,7 +49,7 @@ class Base(object):
 
     @property
     def js_dependencies(self):
-        return self._js_dependencies
+        return utils.merge_js_dependencies(self._js_dependencies)
 
     @property
     def page_title(self):
