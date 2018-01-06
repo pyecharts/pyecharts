@@ -65,22 +65,11 @@ def echarts_container(env, chart):
     :param chart: A pyecharts.base.Base object
     """
 
-    def ex_wh(x):
-        """ Extend width/height to all values.
-
-        :param x:
-        :return:
-        """
-        if isinstance(x, (int, float)):
-            return '{}px'.format(x)
-        else:
-            return x
-
     return Markup(
         CHART_DIV_FORMATTER.format(
             chart_id=chart.chart_id,
-            width=ex_wh(chart.width),
-            height=ex_wh(chart.height)
+            width=utils.to_css_length(chart.width),
+            height=utils.to_css_length(chart.height)
         ))
 
 
