@@ -4,6 +4,7 @@ import copy
 from pyecharts.option import grid
 from pyecharts.constants import PAGE_TITLE
 from pyecharts.base import Base
+from pyecharts.utils import merge_js_dependencies
 
 
 class Grid(Base):
@@ -12,6 +13,7 @@ class Grid(Base):
     /Boxplot 图表，将不同类型图表画在多张图上。第一个图需为 有 x/y 轴的图，
     即不能为 Pie，其他位置顺序任意。
     """
+
     def __init__(self, page_title=PAGE_TITLE,
                  width=800,
                  height=400):
@@ -98,8 +100,10 @@ class Grid(Base):
                 grid_top, grid_bottom, grid_left, grid_right)
             for _ in range(_index_once):
                 self._option.get('grid').append(_grid)
-            self._js_dependencies = self._js_dependencies.union(
-                chart.js_dependencies)
+            self._js_dependencies = merge_js_dependencies(
+                self._js_dependencies,
+                chart.js_dependencies
+            )
 
     def __custom(self, series):
         """
@@ -112,4 +116,4 @@ class Grid(Base):
         for s in _series:
             self._option.get('series').append(s)
         return len(self._option.get('series')), len(_series), \
-            _xaxis, _yaxis, _legend, _title
+               _xaxis, _yaxis, _legend, _title
