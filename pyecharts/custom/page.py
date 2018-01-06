@@ -73,7 +73,8 @@ class Page(list):
 
     @property
     def js_dependencies(self):
-        return utils.merge_js_dependencies(*self) # Treated as a list,not a page
+        # Treat self as a list,not a page
+        return utils.merge_js_dependencies(*self)
 
     @property
     def page_title(self):

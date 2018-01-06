@@ -77,7 +77,7 @@ def merge_js_dependencies(*chart_or_name_list):
     :param chart_or_name_list:
     :return: A list containing dependency items.
     """
-    front_must_items = ['echarts']
+    front_must_items = ['echarts']  # items which must be included.
     front_optional_items = ['echartsgl']
     dependencies = []
     fist_items = set()
@@ -99,6 +99,6 @@ def merge_js_dependencies(*chart_or_name_list):
                 _add(x)
         else:
             _add(d)
-    return front_must_items + \
-           [x for x in front_optional_items if x in fist_items] + \
-           dependencies
+    # items which should be included in front part.
+    fol = [x for x in front_optional_items if x in fist_items]
+    return front_must_items + fol + dependencies
