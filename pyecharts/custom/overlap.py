@@ -3,6 +3,7 @@
 import copy
 from pyecharts.constants import PAGE_TITLE
 from pyecharts.base import Base
+from pyecharts.utils import merge_js_dependencies
 
 
 class Overlap(Base):
@@ -11,6 +12,7 @@ class Overlap(Base):
     将不同类型图表画在一张图上。利用第一个图表为基础，往后的数据都将
     会画在第一个图表上。
     """
+
     def __init__(self, page_title=PAGE_TITLE,
                  width=800,
                  height=400):
@@ -53,8 +55,10 @@ class Overlap(Base):
                 yaxis_index
             )
             self.__custom(_series)
-            self._js_dependencies = self._js_dependencies.union(
-                chart.js_dependencies)
+            self._js_dependencies = merge_js_dependencies(
+                self._js_dependencies,
+                chart.js_dependencies
+            )
 
     def __custom(self, series):
         """ Appends the data for the series of the chart type

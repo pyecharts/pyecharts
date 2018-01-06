@@ -55,3 +55,37 @@ def json_dumps(data, indent=0):
     :param indent: 缩进量
     """
     return json.dumps(data, indent=indent, cls=UnknownTypeEncoder)
+
+
+def merge_js_dependencies(*chart_or_name_list):
+    """
+    Merge multiple dependencies to a total list.
+    This will ensure the order and unique in the items.
+    :param chart_or_name_list:
+    :return:
+    """
+    front_must_items = ['echarts']
+    front_optional_items = ['echartsgl']
+    dependencies = []
+    fist_items = set()
+
+    def _add(_d):
+        if _d in front_must_items:
+            pass
+        elif _d in front_optional_items:
+            fist_items.add(_d)
+        elif _d not in dependencies:
+            dependencies.append(_d)
+
+    for d in chart_or_name_list:
+        if hasattr(d, 'js_dependencies'):
+            for x in d.js_dependencies:
+                _add(x)
+        elif isinstance(d, (list, tuple, set)):
+            for x in d:
+                _add(x)
+        else:
+            _add(d)
+    return front_must_items + \
+           [x for x in front_optional_items if x in fist_items] + \
+           dependencies
