@@ -45,36 +45,52 @@ def test_json_encoder():
     eq_(json.dumps(data2_e, indent=0), json_dumps(data2))
 
 
+class MockChart(object):
+    """
+    A mock class for a Chart and Page
+    """
+
+    def __init__(self, js_dependencies):
+        self.js_dependencies = js_dependencies
+
+
 def test_merge_js_dependencies():
-    # PyEchartsConfig.merge_js_dependencies(str1, str2,...)
-    eq_(['echarts', 'fujian'],
-        merge_js_dependencies('echarts', 'fujian'))
+    # Prepare some kinds of charts or page.
 
-    # PyEchartsConfig.merge_js_dependencies(chart)
-    class MockChart(object):
-        def __init__(self, js_dependencies):
-            self.js_dependencies = js_dependencies
+    base_chart = MockChart(['echarts'])
+    map_chart = MockChart(['echarts', 'fujian'])
+    three_d_chart = MockChart(['echarts', 'echartsgl'])
 
+    # One chart or page
+    eq_(['echarts'], merge_js_dependencies(base_chart))
+    # A map chart
     ch1 = MockChart(['echarts', 'fujian', 'zhengjiang', 'anhui'])
     eq_(
         ['echarts', 'fujian', 'zhengjiang', 'anhui'],
         merge_js_dependencies(ch1)
     )
 
-    # PyEchartsConfig.merge_js_dependencies(chart1, chart2 )
-    ch1 = MockChart(['echarts'])
-    ch2 = MockChart(['echarts', 'beijing'])
+    # Multiple charts
     eq_(
-        ['echarts', 'beijing'],
-        merge_js_dependencies(ch1, ch2)
+        ['echarts', 'fujian'],
+        merge_js_dependencies(base_chart, map_chart)
+    )
+    eq_(
+        ['echarts', 'echartsgl', 'fujian'],
+        merge_js_dependencies(base_chart, map_chart, three_d_chart)
     )
 
-    # PyEchartsConfig.merge_js_dependencies(*chart_list)
+    # Mixed charts and string
 
-    mock_page = [ch1, ch2]
-    ch1 = MockChart(['echarts'])
-    ch2 = MockChart(['echarts', 'beijing'])
     eq_(
-        ['echarts', 'beijing'],
-        merge_js_dependencies(*mock_page)
+        ['echarts', 'zhejiang'],
+        merge_js_dependencies('echarts', 'zhejiang')
+    )
+    eq_(
+        ['echarts', 'zhejiang'],
+        merge_js_dependencies(['echarts', 'zhejiang'])
+    )
+    eq_(
+        ['echarts', 'fujian'],
+        merge_js_dependencies('echarts', map_chart)
     )
