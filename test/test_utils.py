@@ -1,13 +1,14 @@
 # coding=utf-8
 from __future__ import unicode_literals
 
+import codecs
 import json
 import os
-import codecs
 from datetime import date
-import numpy as np
 
+import numpy as np
 from nose.tools import eq_
+
 from pyecharts.utils import (
     write_utf8_html_file,
     get_resource_dir,
@@ -54,12 +55,10 @@ class MockChart(object):
         self.js_dependencies = js_dependencies
 
 
-def test_merge_js_dependencies():
+def test_merge_js_dependencies_with_one_chart():
     # Prepare some kinds of charts or page.
 
     base_chart = MockChart(['echarts'])
-    map_chart = MockChart(['echarts', 'fujian'])
-    three_d_chart = MockChart(['echarts', 'echartsgl'])
 
     # One chart or page
     eq_(['echarts'], merge_js_dependencies(base_chart))
@@ -70,6 +69,11 @@ def test_merge_js_dependencies():
         merge_js_dependencies(ch1)
     )
 
+
+def test_merge_js_dependencies_with_multiple_charts():
+    base_chart = MockChart(['echarts'])
+    map_chart = MockChart(['echarts', 'fujian'])
+    three_d_chart = MockChart(['echarts', 'echartsgl'])
     # Multiple charts
     eq_(
         ['echarts', 'fujian'],
@@ -80,7 +84,9 @@ def test_merge_js_dependencies():
         merge_js_dependencies(base_chart, map_chart, three_d_chart)
     )
 
-    # Mixed charts and string
+
+def test_merge_js_dependencies_with_mixed_chart_and_string():
+    map_chart = MockChart(['echarts', 'fujian'])
 
     eq_(
         ['echarts', 'zhejiang'],
