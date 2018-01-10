@@ -7,7 +7,6 @@ import random
 from pyecharts import Bar
 from test.constants import CLOTHES
 
-
 clothes_v1 = [5, 20, 36, 10, 75, 90]
 clothes_v2 = [10, 25, 8, 60, 20, 80]
 
@@ -16,7 +15,9 @@ def test_bar_stack():
     bar = Bar("柱状图数据堆叠示例")
     bar.add("商家A", CLOTHES, clothes_v1, is_stack=True)
     bar.add("商家B", CLOTHES, clothes_v2, is_stack=True)
+    bar.chart_id = 'id_chart_id'
     html_content = bar._repr_html_()
+    assert 'id_chart_id' == bar.chart_id
     assert "dataZoom" not in html_content
     assert "stack_" in html_content
 
