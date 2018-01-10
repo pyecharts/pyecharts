@@ -39,13 +39,17 @@ class Base(object):
     def chart_id(self):
         return self._chart_id
 
+    @chart_id.setter
+    def chart_id(self, chart_id):
+        self._chart_id = chart_id
+
     @property
     def options(self):
         return self._option
 
     @property
     def js_dependencies(self):
-        return self._js_dependencies
+        return utils.merge_js_dependencies(self._js_dependencies)
 
     @property
     def page_title(self):

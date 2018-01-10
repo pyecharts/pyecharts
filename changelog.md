@@ -5,8 +5,13 @@
     * 更新 jupyter-echarts 至 1.4.0: echarts 3.6.2 -> 3.8.5, echarts-gl 1.0.0-b4 -> 1.0.0-b6, echarts-liquidfill 1.0.5 -> 1.1.1, echarts-wordcloud 1.1.0 -> 1.1.2
 
 * ### version 0.3.2（dev）
+
     #### Updated
     * 更新 jupyter-echarts 至 1.3.6: [台湾地图补了市，县，岛](https://github.com/pyecharts/pyecharts/pull/316), [重庆地图补了开州区](https://github.com/pyecharts/pyecharts/pull/317)
+    * 示例移到新的代码仓库 [pyecharts-users-cases](https://github.com/pyecharts/pyecharts-users-cases)
+    * 优化图表API，图表 js_dependencies 属性返回有序列表
+    * 图表 chart_id 支持可设置
+    * 优化部分代码逻辑
 
 * ### version 0.3.1 - 2017.12.13（Current）
     * [issue#290](https://github.com/pyecharts/pyecharts/issues/290) 紧急修复 v0.3.0 版本不能正常显示图形的严重 bug
