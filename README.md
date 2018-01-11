@@ -1,4 +1,4 @@
-# [pyecharts](https://github.com/chenjiandongx/pyecharts) [![Build Status](https://travis-ci.org/chenjiandongx/pyecharts.svg?branch=master)](https://travis-ci.org/chenjiandongx/pyecharts) [![codecov](https://codecov.io/gh/chenjiandongx/pyecharts/branch/master/graph/badge.svg)](https://codecov.io/gh/chenjiandongx/pyecharts) [![PyPI version](https://badge.fury.io/py/pyecharts.svg)](https://badge.fury.io/py/pyecharts) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+# [pyecharts](https://github.com/pyecharts/pyecharts) [![Build Status](https://travis-ci.org/pyecharts/pyecharts.svg?branch=master)](https://travis-ci.org/chenjiandongx/pyecharts) [![codecov](https://codecov.io/gh/chenjiandongx/pyecharts/branch/master/graph/badge.svg)](https://codecov.io/gh/chenjiandongx/pyecharts) [![PyPI version](https://badge.fury.io/py/pyecharts.svg)](https://badge.fury.io/py/pyecharts) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 > pyecharts is a library to generate charts using Echarts. It simply provides the interface between Echarts and Python.
 
@@ -23,13 +23,16 @@ $ pip install pyecharts -U
 
 or clone it and install it
 ```
-$ git clone --recursive https://github.com/chenjiandongx/pyecharts.git
+$ git clone --recursive https://github.com/pyecharts/pyecharts.git
 $ cd pyecharts
 $ pip install -r requirements.txt
 $ python setup.py install
 ```
 
 ## Basic Usage
+
+### Render To Local Html File
+
 ```python
 from pyecharts import Bar
 
@@ -42,42 +45,72 @@ bar.add("evaporation", attr, v2, mark_line=["average"], mark_point=["max", "min"
 bar.render()
 ```
 
-It will create a file named render.html in the root directory, open file with your borwser.  
+It will create a file named *render.html* in the root directory, open file with your borwser.  
 
-![usage-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/usage-0.gif)
+![usage-0](https://github.com/pyecharts/pyecharts/blob/master/images/usage-0.gif)
 
+### Export as Images or Pdf
 
-## Working with pandas & numpy
-![pandas_numpy](https://github.com/chenjiandongx/pyecharts/blob/master/images/pandas-numpy.png)
+[pyecharts-snapshot](https://github.com/pyecharts/pyecharts-snapshot) is a library which renders the output of pyecharts as a png, jpeg, gif image or a pdf file at command line or in your code.
 
+See more detail at the repositoty.
 
-## Working with Flask & Django
+## Platform Support
+
+pyecharts exposes chart API and template API so that it can work on some common platforms.
+
+### Work on Jupyter Notebook
+
+In the Notebook cell ,you can simply call the instance itself to diplay the chart.
+
+All chart classes in pyecharts implement the `_repr_html_` interface about [IPython Rich Display](http://ipython.readthedocs.io/en/stable/config/integrating.html#rich-display) .
+
+### Integrate With Web Framework
+
+With the help of pyecharts API,it is easy to integrate pyecharts to your web projects, such as Flask and Django.
+
 Flask
 
-![flask-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/flask-0.gif)
+![flask-0](https://github.com/pyecharts/pyecharts/blob/master/images/flask-0.gif)
 
 Django
 
-![django-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/django-0.gif)
+![django-0](https://github.com/pyecharts/pyecharts/blob/master/images/django-0.gif)
 
-* 中文文档
-    * [pyecharts + Flask](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/doc_flask.md)
-    * [pyecharts + Django](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/doc_django.md)
-* English
-    * [pyecharts + Flask](https://github.com/chenjiandongx/pyecharts/blob/master/docs/en-us/doc_flask.md)
-    * [pyecharts + Django](https://github.com/chenjiandongx/pyecharts/blob/master/docs/en-us/doc_django.md)
+## Advance Topics
 
+### Working with pandas & numpy
+
+![pandas_numpy](https://github.com/pyecharts/pyecharts/blob/master/images/pandas-numpy.png)
+
+### Cusom Template FIles and Layout
+
+The `render` function support the *template_file* parameter so that you can custom your template file and integrate with CSS framework.
+
+In addition,pyecharts also ships a lot of jinja2 template functions used in template files.
+
+### Custom User Map
+
+All map is hosted by the repository [echarts-china-cities-js](https://github.com/pyecharts/echarts-china-cities-js) and [echarts-countries-js](https://github.com/pyecharts/echarts-countries-js)
 
 ## Documentation
-* [中文文档](https://github.com/chenjiandongx/pyecharts/tree/master/docs/zh-cn)
-* [English](https://github.com/chenjiandongx/pyecharts/tree/master/docs/en-us)
 
+* [中文文档](https://github.com/chenjiandongx/pyecharts/tree/master/docs/zh-cn)
+* [English Documentation](https://github.com/chenjiandongx/pyecharts/tree/master/docs/en-us)
+
+## Examples
+
+All examples is hosted on the repository [pyecharts-users-cases](https://github.com/pyecharts/pyecharts-users-cases)
 
 ## Test
 
-If you work on Python2.7, please install `mock` library manually.
+You should install the libraries in the requirements.txt files.
 
-Run as the following commands.
+```
+pip install -r test\requirements.txt
+```
+
+And run with the following commands.
 
 ```shell
 $ cd test
