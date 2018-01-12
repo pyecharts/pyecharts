@@ -98,13 +98,13 @@ class Timeline(Base):
         self.__check_components(chart)
         self._time_points.append(time_point)
         self._option.get('baseOption').update(
-            legend=chart.options.get('legend'),
             backgroundColor=chart.options.get('backgroundColor')
         )
         self._option.get('baseOption').get('timeline').update(
             data=self._time_points
         )
         self._option.get('options').append({
+            "legend": chart.options.get('legend'),
             "series": chart.options.get('series'),
             "title": chart.options.get('title')
         })
