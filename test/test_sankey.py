@@ -3,7 +3,8 @@
 from __future__ import unicode_literals
 import sys
 import os
-
+import codecs
+import json
 from pyecharts import Sankey
 
 PY2 = sys.version_info[0] == 2
@@ -27,17 +28,9 @@ def test_sankey_default():
                label_pos='right')
     sankey.render()
 
-
-def test_sankey_official_data():
-    import json
-    if PY2:
-        import codecs
-        with codecs.open(os.path.join("..", "json", "energy.json"), "rb") as f:
-            j = json.load(f)
-    else:
-        with open(os.path.join("..", "json", "energy.json"),
-                  "r", encoding="utf-8") as f:
-            j = json.load(f)
+    with codecs.open(os.path.join("fixtures", "energy.json"), "r",
+                     encoding='utf-8') as f:
+        j = json.load(f)
     sankey = Sankey("桑基图示例", width=1200, height=600)
     sankey.add("sankey", nodes=j['nodes'], links=j['links'], line_opacity=0.2,
                line_curve=0.5, line_color='source',

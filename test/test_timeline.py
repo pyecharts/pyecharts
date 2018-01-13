@@ -152,3 +152,25 @@ def test_timeline_map():
     timeline.add(map, "test2")
     assert len(timeline._option.get("baseOption").get("series")) == 2
     timeline.render()
+
+
+def test_timeline_different_legend():
+    bar_1 = Bar("2012 年销量", "数据纯属虚构")
+    bar_1.add("春季a", CLOTHES, [randint(10, 100) for _ in range(6)])
+    bar_1.add("夏季a", CLOTHES, [randint(10, 100) for _ in range(6)])
+    bar_1.add("秋季a", CLOTHES, [randint(10, 100) for _ in range(6)])
+    bar_1.add("冬季a", CLOTHES, [randint(10, 100) for _ in range(6)])
+
+    bar_2 = Bar("2013 年销量", "数据纯属虚构")
+    bar_2.add("春季b", CLOTHES, [randint(10, 100) for _ in range(6)])
+    bar_2.add("夏季b", CLOTHES, [randint(10, 100) for _ in range(6)])
+    bar_2.add("秋季b", CLOTHES, [randint(10, 100) for _ in range(6)])
+    bar_2.add("冬季b", CLOTHES, [randint(10, 100) for _ in range(6)],
+              is_legend_show=True)
+
+    timeline = Timeline(is_auto_play=True, timeline_bottom=0)
+    timeline.add(bar_1, '2012 年')
+    timeline.add(bar_2, '2013 年')
+    content = timeline._repr_html_()
+    assert "\\u6625\\u5b63a" in content      # 春季 a
+    assert "\\u6625\\u5b63b" in content      # 春季 b
