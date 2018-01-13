@@ -9,7 +9,7 @@ JS_EXTENSION_REGISTRY = 'registry.json'
 
 DEFAULT_TEMPLATE_DIR = get_resource_dir('templates')
 DEFAULT_ECHARTS_LOCATION = os.path.join(
-    get_resource_dir('templates'), 'js', 'echarts')
+    get_resource_dir('templates'), 'js')
 
 
 class JsExtension(object):
