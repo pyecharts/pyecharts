@@ -1,22 +1,20 @@
 > 地图自定义篇：考虑到项目更好的通用性，以及更好可扩展性，所以决定对地图部分提供自定义模式。适用在 pyecharts v0.1.9.7 以后的版本。
 
-## 下载地图
+> Echarts 官方地图下载地址 [download-map](http://echarts.baidu.com/download-map.html) 已经暂时关闭
 
-这里是 Echarts 官方地图下载地址 [download-map](http://echarts.baidu.com/download-map.html)
+## 如何获得更多地图
 
-![customize-map-0](https://raw.githubusercontent.com/chenjiandongx/pyecharts/master/images/customize-map-0.png)
+自从0.3.2开始，世界各国的地图(echarts-countries-js)变成了可选地图。需要这些地图的朋友，可以装pyecharts-cli命令行:
 
-除了官方提供的主要省份的地图，还可根据自己的需求自定义。
+```
+pip install pyecharts-cli
+```
 
-![customize-map-1](https://raw.githubusercontent.com/chenjiandongx/pyecharts/master/images/customize-map-1.png)
+然后再装世界地图:
 
-所有地图均要下载成 JS 格式。
-
-请注意：
-
-* 地图名称千万要把beijing变成中文的城市名称
-* 2.2.0 之后，[363个二线城市地图](https://github.com/chfw/echarts-china-cities-js#featuring-citiesor-for-single-download)已经内嵌了，无需下载。
-
+```
+pyecharts install echarts-countries-js
+```
 
 ## 如何手动添加(0.1.9.7+)
 下面就以广东省汕头市南澳县地图为例，说明如何自行添加地图。
@@ -78,3 +76,57 @@ jupyter nbextension enable echarts/main
 ## 如何把手动加的地图变成自动的
 
 如果用户期望 pyecharts 支持自己的地图，请发请求然后再发来改动。
+
+或者自己开发pyecharts的地图扩展
+
+
+## pyecharts的地图扩展
+
+首先，地图扩展必须是一个github的项目，并已经启动gh-pages来提供地图库。如果未启动gh-pages, 那么
+你的jupyter用户不能把ipynb下载成html，因为下载之后地图将无法显示。
+
+需要是这样一个结构：
+
+```
++ your-map-extension-js
+  + registry.json
+  + your-map-extension-js
+     + london.js
+     + manchester.js
+     + index.js
+  + other files
+```
+
+在registry.json里，需要填写这些项目:
+```
+{
+    "JUPYTER_URL": "/nbextensions/your-map-extension-js",
+    "GITHUB_URL": "https://your.github.io/your-map-extension-js/your-map-extensions-js",
+    "JUPYTER_ENTRY": "your-map-extension-js/index",
+    "JS_FOLDER": "your-map-extensions-js",
+    "PINYIN_MAP": {
+        "伦敦": "lundun",
+        "曼彻斯特": "manchesite"
+    },
+    "FILE_MAP": {
+        "lundun": "london",
+        "manchesite": "manchester"
+    }
+}
+```
+
+index.js 可以是这样：
+```
+define(["require", "exports"], function (require, exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    var version = '1.0.0';
+    function load_ipython_extension() {
+        console.log("your-map-extension-js " + version + " has been loaded");
+    }
+    exports.load_ipython_extension = load_ipython_extension;
+});
+
+```
+
+最后，就是通知我们把你的扩展加入pyecharts-cli的目录，方便你和其他人装你的地图扩展。
