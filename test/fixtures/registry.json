@@ -1,5 +1,5 @@
 {
-    "JUPYTER_URL": "/nbextensions/test-js/",
+    "JUPYTER_URL": "/nbextensions/test-js",
     "GITHUB_URL": "https://your.github.io/test-js/test-js",
     "JUPYTER_ENTRY": "test-js/index",
     "JS_FOLDER": "test-js",
