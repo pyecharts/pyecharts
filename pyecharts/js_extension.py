@@ -62,9 +62,11 @@ def load_all_extensions():
     pyecharts_dir = _get_pyecharts_dir()
     extensions = [JsExtension(DEFAULT_ECHARTS_LOCATION)]
     pinyin_db = {}
-    for adir in os.listdir(pyecharts_dir):
-        extensions.append(
-            JsExtension(os.path.join(pyecharts_dir, adir)))
+    if os.path.exists(pyecharts_dir):
+        for adir in os.listdir(pyecharts_dir):
+            extensions.append(
+                JsExtension(os.path.join(pyecharts_dir, adir)))
+
     for extension in extensions:
         pinyin_db.update(extension.registry.get('PINYIN_MAP'))
     return extensions, pinyin_db
