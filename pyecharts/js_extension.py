@@ -26,9 +26,8 @@ class JsExtension(object):
         filename = self.get_js_library(pinyin)
         if filename:
             abs_path = os.path.join(self.home, filename + '.js')
-            with open(abs_path, 'rb') as f:
-                c = f.read()
-                return c.decode('utf-8')
+            with codecs.open(path, 'r', encoding='utf-8') as pf:
+                return pf.read()
         else:
             return None
 

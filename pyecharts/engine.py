@@ -1,17 +1,14 @@
 # coding=utf-8
 from __future__ import unicode_literals
 
-import os
-
 from jinja2 import Environment, FileSystemLoader, environmentfunction, Markup
 
-import pyecharts.utils as utils
 import pyecharts.conf as conf
-
+import pyecharts.utils as utils
 
 LINK_SCRIPT_FORMATTER = '<script type="text/javascript" src="{}"></script>'
 EMBED_SCRIPT_FORMATTER = '<script type="text/javascript">\n{}\n</script>'
-CHART_DIV_FORMATTER = '<div id="{chart_id}" style="width:{width};height:{height};"></div>' # flake8: noqa
+CHART_DIV_FORMATTER = '<div id="{chart_id}" style="width:{width};height:{height};"></div>'  # flake8: noqa
 CHART_CONFIG_FORMATTER = """
 var myChart_{chart_id} = echarts.init(document.getElementById('{chart_id}'));
 var option_{chart_id} = {options};
@@ -27,7 +24,7 @@ def echarts_js_dependencies(env, *args):
     :param args:
     """
     current_config = env.pyecharts_config
-    dependencies = current_config.merge_js_dependencies(*args)
+    dependencies = utils.merge_js_dependencies(*args)
 
     if current_config.js_embed:
         contents = current_config.read_file_contents_from_local(dependencies)
@@ -50,7 +47,7 @@ def echarts_js_dependencies_embed(env, *args):
     :param args:
     """
     current_config = env.pyecharts_config
-    dependencies = current_config.merge_js_dependencies(*args)
+    dependencies = utils.merge_js_dependencies(*args)
     contents = current_config.read_file_contents_from_local(dependencies)
     return Markup(
         '\n'.join([EMBED_SCRIPT_FORMATTER.format(c) for c in contents])
@@ -65,22 +62,11 @@ def echarts_container(env, chart):
     :param chart: A pyecharts.base.Base object
     """
 
-    def ex_wh(x):
-        """ Extend width/height to all values.
-
-        :param x:
-        :return:
-        """
-        if isinstance(x, (int, float)):
-            return '{}px'.format(x)
-        else:
-            return x
-
     return Markup(
         CHART_DIV_FORMATTER.format(
             chart_id=chart.chart_id,
-            width=ex_wh(chart.width),
-            height=ex_wh(chart.height)
+            width=utils.to_css_length(chart.width),
+            height=utils.to_css_length(chart.height)
         ))
 
 
