@@ -22,6 +22,12 @@ def test_get_js_link():
     eq_(actual, './fixtures/test-js/the_js_file_name.js')
 
 
+def test_get_js_link_no_match():
+    test_extension = produce_test_js_extension()
+    actual = test_extension.get_js_link('missing')
+    assert actual is None
+
+
 def test_get_js_link_use_github():
     test_extension = produce_test_js_extension()
     actual = test_extension.get_js_link('pinyin', jshost='local/path')
@@ -31,7 +37,13 @@ def test_get_js_link_use_github():
 def test_require_config():
     test_extension = produce_test_js_extension()
     actual = test_extension.produce_require_config_syntax('pinyin')
-    eq_(actual, "'pinyin': '/nbextensions/test-js//the_js_file_name'")
+    eq_(actual, "'pinyin': '/nbextensions/test-js/the_js_file_name'")
+
+
+def test_require_config_no_match():
+    test_extension = produce_test_js_extension()
+    actual = test_extension.produce_require_config_syntax('missing')
+    assert actual is None
 
 
 def test_read_js_library():
@@ -42,3 +54,9 @@ def test_read_js_library():
     content = test_extension.read_js_library('pinyin')
     assert 'test_read_js_library' in content
     patcher.stop()
+
+
+def test_read_js_library_no_match():
+    test_extension = produce_test_js_extension()
+    content = test_extension.read_js_library('missing')
+    assert content is None
