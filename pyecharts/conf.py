@@ -66,7 +66,7 @@ class PyEchartsConfig(object):
         for name in js_names:
             for extension in JS_EXTENSIONS:
                 js_link = extension.get_js_link(
-                    name, jshost=self.jshost, use_github=self.hosted_on_github)
+                    name, jshost=self.jshost)
                 if js_link:
                     links.append(js_link)
                     break

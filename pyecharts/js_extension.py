@@ -34,10 +34,11 @@ class JsExtension(object):
         else:
             return None
 
-    def get_js_link(self, pinyin, jshost=None, use_github=False):
+    def get_js_link(self, pinyin, jshost=None):
         filename = self.get_js_library(pinyin)
         if filename:
-            jshost = self._resolve_jshost(jshost, use_github)
+            if jshost is None:
+                jshost = self.home
             return '%s/%s.js' % (jshost, filename)
         else:
             return None
