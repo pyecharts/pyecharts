@@ -6,7 +6,7 @@ from pyecharts.utils import get_resource_dir
 
 PYECHARTS_DIR = '.pyecharts'
 JS_EXTENSION_REGISTRY = 'registry.json'
-JS_FOLDER = 'DIST_FOLDER'
+JS_FOLDER = 'JS_FOLDER'
 
 DEFAULT_TEMPLATE_DIR = get_resource_dir('templates')
 DEFAULT_ECHARTS_LOCATION = os.path.join(
@@ -16,7 +16,7 @@ DEFAULT_ECHARTS_LOCATION = os.path.join(
 class JsExtension(object):
     def __init__(self, extension_installation_path):
         self.registry = read_a_map_registry(
-            os.path.join(self.home, JS_EXTENSION_REGISTRY))
+            os.path.join(extension_installation_path, JS_EXTENSION_REGISTRY))
         self.home = os.path.join(
             extension_installation_path,
             self.registry[JS_FOLDER])
