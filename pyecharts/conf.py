@@ -85,7 +85,10 @@ class PyEchartsConfig(object):
 
         for name in _d:
             for extension in JS_EXTENSIONS:
-                config_item = extension.produce_require_config_syntax(name)
+                config_item = extension.produce_require_config_syntax(
+                    name,
+                    jshost=self.jshost,
+                    use_github=self.hosted_on_github)
                 if config_item:
                     require_conf_items.append(config_item)
         require_libraries = ["'%s'" % key for key in _d]
