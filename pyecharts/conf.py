@@ -1,7 +1,6 @@
 # coding=utf-8
 from __future__ import unicode_literals
 
-import pyecharts.constants as constants
 from pyecharts.js_extension import load_all_extensions
 from pyecharts.utils import get_resource_dir
 
@@ -126,6 +125,7 @@ JUPYTER_CONFIG = PyEchartsConfig(jshost=None)
 
 
 def configure(jshost=None,
+              hosted_on_github=None,
               echarts_template_dir=None,
               force_js_embed=None,
               **kwargs):
@@ -138,12 +138,11 @@ def configure(jshost=None,
     :param kwargs:
     """
     if jshost:
-        if jshost == constants.GITHUB_HOST:
-            PYTHON_CONFIG.hosted_on_github = True
-            JUPYTER_CONFIG.hosted_on_github = True
-        else:
-            PYTHON_CONFIG.jshost = jshost
-            JUPYTER_CONFIG.jshost = jshost
+        PYTHON_CONFIG.jshost = jshost
+        JUPYTER_CONFIG.jshost = jshost
+    elif hosted_on_github is True:
+        PYTHON_CONFIG.hosted_on_github = True
+        JUPYTER_CONFIG.hosted_on_github = True
     if echarts_template_dir:
         PYTHON_CONFIG.echarts_template_dir = echarts_template_dir
         JUPYTER_CONFIG.echarts_template_dir = echarts_template_dir
@@ -151,12 +150,15 @@ def configure(jshost=None,
         PYTHON_CONFIG.force_js_embed = force_js_embed
 
 
-def online(host=constants.GITHUB_HOST):
+def online(host=None):
     """ Set the jshost
 
     :param host:
     """
-    configure(jshost=host)
+    if host is None:
+        configure(hosted_on_github=True)
+    else:
+        configure(jshost=host)
 
 
 def _ensure_echarts_is_in_the_front(dependencies):
