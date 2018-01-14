@@ -23,6 +23,12 @@ def test_custom_local_jshost():
     assert target_config.js_embed
 
 
+def test_get_js_library():
+    test_config = PyEchartsConfig()
+    actual = test_config.get_js_library('abc')
+    assert actual is None
+
+
 def test_custom_remote_jshost():
     target_config = PyEchartsConfig(
         jshost='https://cdn.bootcss.com/echarts/3.7.2/')
