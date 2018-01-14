@@ -2,7 +2,6 @@
 from __future__ import unicode_literals
 
 
-GITHUB_HOST = "USE GITHUB HOST"
 PAGE_TITLE = "Echarts"
 
 SYMBOL = {
