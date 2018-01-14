@@ -82,8 +82,8 @@ jupyter nbextension enable echarts/main
 
 ## pyecharts的地图扩展
 
-首先，地图扩展必须是一个github的项目，并已经启动gh-pages来提供地图库。如果未启动gh-pages, 那么
-你的jupyter用户不能把ipynb下载成html，因为下载之后地图将无法显示。
+首先，地图扩展必须是一个 github 的项目，并已经启动 gh-pages 来提供地图库。如果未启动 gh-pages , 那么
+你的 jupyter 用户不能把 ipynb 下载成 html ，因为下载之后地图将无法显示。
 
 需要是这样一个结构：
 
@@ -97,7 +97,7 @@ jupyter nbextension enable echarts/main
   + other files
 ```
 
-在registry.json里，需要填写这些项目:
+在 registry.json 里，需要填写这些项目:
 ```
 {
     "JUPYTER_URL": "/nbextensions/your-map-extension-js",
@@ -129,4 +129,4 @@ define(["require", "exports"], function (require, exports) {
 
 ```
 
-最后，就是通知我们把你的扩展加入pyecharts-cli的目录，方便你和其他人装你的地图扩展。
+最后，就是通知我们把你的扩展加入 pyecharts-cli 的目录，方便你和其他人装你的地图扩展。
