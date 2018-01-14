@@ -1,8 +1,8 @@
 import os
+from mock import patch
 from nose.tools import eq_
 
 from pyecharts.js_extension import JsExtension
-from mock import patch
 
 
 def produce_test_js_extension():
