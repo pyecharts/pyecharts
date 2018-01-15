@@ -7,7 +7,18 @@
 [Echarts](https://github.com/ecomfe/echarts) is an open source library from Baidu for data visualization in javascript. It has awesome demo pages so I started to look out for an interface library so that I could use it in Python. I ended up with [echarts-python](https://github.com/yufeiminds/echarts-python) on github but it lacks of documentation and was not updated for a while. Just like many other Python projects, I started my own project, pyecharts, referencing echarts-python and another library [pygal](https://github.com/Kozea/pygal).
 
 ## Installation
-pyecharts works on Python2 and Python3. For more information please refer to [changelog.md](https://github.com/chenjiandongx/pyecharts/blob/master/changelog.md)
+### Python Compatibility
+
+pyecharts works on Python2.7 and Python3.4+.
+
+pyecharts handles all strings and files with unicode encoding and you **MUST** use unicode string in your source code on Python 2.
+
+```python
+#coding=utf-8
+from __future__ import unicode_literals
+```
+
+ For more information please refer to [changelog.md](https://github.com/chenjiandongx/pyecharts/blob/master/changelog.md)
 
 ### Jupyter-Notebook
 Make sure you hava installed jupyter-notebook enviroment if you want to show your charts on notebook.   
@@ -65,6 +76,8 @@ In the Notebook cell ,you can simply call the instance itself to diplay the char
 
 All chart classes in pyecharts implement the `_repr_html_` interface about [IPython Rich Display](http://ipython.readthedocs.io/en/stable/config/integrating.html#rich-display) .
 
+In the case of online jshost mode,you can also download as some file formats (ipynb/py/html/pdf) and run without jupyter notebook enviromnment.
+
 ### Integrate With Web Framework
 
 With the help of pyecharts API,it is easy to integrate pyecharts to your web projects, such as Flask and Django.
@@ -85,13 +98,13 @@ Django
 
 ### Cusom Template FIles and Layout
 
-The `render` function support the *template_file* parameter so that you can custom your template file and integrate with CSS framework.
+The `render` function support the *template_file* parameter so that you can use your own template file and integrate with CSS framework.
 
 In addition,pyecharts also ships a lot of jinja2 template functions used in template files.
 
 ### Custom User Map
 
-All map is hosted by the repository [echarts-china-cities-js](https://github.com/pyecharts/echarts-china-cities-js) and [echarts-countries-js](https://github.com/pyecharts/echarts-countries-js)
+All map is hosted by the repository [echarts-china-cities-js](https://github.com/pyecharts/echarts-china-cities-js) and [echarts-countries-js](https://github.com/pyecharts/echarts-countries-js) .
 
 ## Documentation
 
@@ -100,7 +113,7 @@ All map is hosted by the repository [echarts-china-cities-js](https://github.com
 
 ## Examples
 
-All examples is hosted on the repository [pyecharts-users-cases](https://github.com/pyecharts/pyecharts-users-cases)
+All examples is hosted on the repository [pyecharts-users-cases](https://github.com/pyecharts/pyecharts-users-cases) .
 
 ## Test
 
@@ -110,7 +123,7 @@ You should install the libraries in the requirements.txt files.
 pip install -r test\requirements.txt
 ```
 
-And run with the following commands.
+And run with the [nose](https://nose.readthedocs.io/en/latest/) commands.
 
 ```shell
 $ cd test
