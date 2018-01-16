@@ -120,7 +120,7 @@ def remove_trailing_slashes(jshost):
         return jshost
 
 
-PYTHON_CONFIG = PyEchartsConfig()
+CURRENT_CONFIG = PyEchartsConfig()
 
 
 def configure(jshost=None,
@@ -137,13 +137,13 @@ def configure(jshost=None,
     :param kwargs:
     """
     if jshost:
-        PYTHON_CONFIG.jshost = jshost
+        CURRENT_CONFIG.jshost = jshost
     elif hosted_on_github is True:
-        PYTHON_CONFIG.hosted_on_github = True
+        CURRENT_CONFIG.hosted_on_github = True
     if echarts_template_dir:
-        PYTHON_CONFIG.echarts_template_dir = echarts_template_dir
+        CURRENT_CONFIG.echarts_template_dir = echarts_template_dir
     if force_js_embed is not None:
-        PYTHON_CONFIG.force_js_embed = force_js_embed
+        CURRENT_CONFIG.force_js_embed = force_js_embed
 
 
 def online(host=None):
