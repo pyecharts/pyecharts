@@ -90,7 +90,7 @@ class PyEchartsConfig(object):
                     use_github=self.hosted_on_github)
                 if config_item:
                     require_conf_items.append(config_item)
-        require_libraries = ["'%s'" % key for key in _d]
+        require_libraries = ["'%s'" % key for key in __dependencies__]
         return dict(
             config_items=require_conf_items,
             libraries=require_libraries
@@ -121,7 +121,6 @@ def remove_trailing_slashes(jshost):
 
 
 PYTHON_CONFIG = PyEchartsConfig()
-JUPYTER_CONFIG = PyEchartsConfig(jshost=None)
 
 
 def configure(jshost=None,
@@ -139,13 +138,10 @@ def configure(jshost=None,
     """
     if jshost:
         PYTHON_CONFIG.jshost = jshost
-        JUPYTER_CONFIG.jshost = jshost
     elif hosted_on_github is True:
         PYTHON_CONFIG.hosted_on_github = True
-        JUPYTER_CONFIG.hosted_on_github = True
     if echarts_template_dir:
         PYTHON_CONFIG.echarts_template_dir = echarts_template_dir
-        JUPYTER_CONFIG.echarts_template_dir = echarts_template_dir
     if force_js_embed is not None:
         PYTHON_CONFIG.force_js_embed = force_js_embed
 

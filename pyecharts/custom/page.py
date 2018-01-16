@@ -2,7 +2,7 @@
 
 import pyecharts.utils as utils
 import pyecharts.engine as engine
-from pyecharts.conf import PYTHON_CONFIG, JUPYTER_CONFIG
+from pyecharts.conf import PYTHON_CONFIG
 import pyecharts.constants as constants
 
 
@@ -63,7 +63,7 @@ class Page(list):
             doms += chart._render_notebook_dom_()
             components += chart._render_notebook_component_()
 
-        require_config = JUPYTER_CONFIG.produce_require_configuration(
+        require_config = PYTHON_CONFIG.produce_require_configuration(
             dependencies)
         return engine.render_notebook(
             "notebook.html",
