@@ -9,8 +9,8 @@ DEFAULT_TEMPLATE_DIR = get_resource_dir('templates')
 
 # Load js & map file index into a dictionary.
 
-JS_EXTENSIONS = []  # [JsExtension..]
-CITY_NAME_PINYIN_MAP = {}  # {<Chinese Name>:<Pinyin>}
+# JS_EXTENSIONS = [JsExtension..]
+# CITY_NAME_PINYIN_MAP = {<Chinese Name>:<Pinyin>}
 JS_EXTENSIONS, CITY_NAME_PINYIN_MAP = load_all_extensions()
 
 
