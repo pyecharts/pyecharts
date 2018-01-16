@@ -5,7 +5,7 @@ import uuid
 import pyecharts.constants as constants
 import pyecharts.engine as engine
 import pyecharts.utils as utils
-from pyecharts.conf import PYTHON_CONFIG, JUPYTER_CONFIG
+from pyecharts.conf import PYTHON_CONFIG
 
 
 class Base(object):
@@ -127,7 +127,7 @@ class Base(object):
         """
         dom = self._render_notebook_dom_()
         component = self._render_notebook_component_()
-        require_config = JUPYTER_CONFIG.produce_require_configuration(
+        require_config = PYTHON_CONFIG.produce_require_configuration(
             self._js_dependencies
         )
         return engine.render_notebook(
