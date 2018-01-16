@@ -6,7 +6,7 @@ import codecs
 from pyecharts import (Bar, Scatter3D)
 from pyecharts import Page
 from pyecharts.conf import configure, online
-from pyecharts.conf import PYTHON_CONFIG
+from pyecharts.conf import CURRENT_CONFIG
 from test.constants import RANGE_COLOR, CLOTHES
 
 
@@ -42,7 +42,7 @@ def test_custom_templates():
     with codecs.open('new_version_page.html', 'r', 'utf-8') as f:
         actual_content = f.read()
         assert "</html>" in actual_content
-    PYTHON_CONFIG.jshost = None
+    CURRENT_CONFIG.jshost = None
 
 
 def test_custom_template_for_chart():

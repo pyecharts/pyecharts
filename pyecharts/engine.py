@@ -157,7 +157,7 @@ class EchartsEnvironment(BaseEnvironment):
 
 
 def render(template_file, notebook=False, **context):
-    config = conf.PYTHON_CONFIG
+    config = conf.CURRENT_CONFIG
     echarts_env = EchartsEnvironment(
         pyecharts_config=config,
         loader=FileSystemLoader(
