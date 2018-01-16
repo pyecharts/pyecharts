@@ -78,11 +78,11 @@ class PyEchartsConfig(object):
         :param jshost:
         :return:
         """
-        _d = _ensure_echarts_is_in_the_front(dependencies)
+        __dependencies__ = _ensure_echarts_is_in_the_front(dependencies)
         # if no nick name register, we treat the location as location.js
         require_conf_items = []
 
-        for name in _d:
+        for name in __dependencies__:
             for extension in JS_EXTENSIONS:
                 config_item = extension.produce_require_config_syntax(
                     name,
@@ -102,10 +102,10 @@ class PyEchartsConfig(object):
         :param dependencies:
         :return:
         """
-        _d = _ensure_echarts_is_in_the_front(dependencies)
+        __dependencies__ = _ensure_echarts_is_in_the_front(dependencies)
         script_list = [
             '%s' % self.get_js_library(key)
-            for key in _d]
+            for key in __dependencies__]
         return script_list
 
 
