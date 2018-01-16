@@ -106,11 +106,11 @@ jupyter nbextension enable echarts/main
     "JS_FOLDER": "your-map-extensions-js",
     "PINYIN_MAP": {
         "伦敦": "lundun",
-        "曼彻斯特": "manchesite"
+        "曼彻斯特": "manqiesite"
     },
     "FILE_MAP": {
         "lundun": "london",
-        "manchesite": "manchester"
+        "manqiesite": "manchester"
     }
 }
 ```
