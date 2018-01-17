@@ -19,6 +19,10 @@
     * 移除所有图表构造函数中 `jshost` 参数，请使用全局统一配置函数 `pyecharts.configure`
     * 恢复 `pyecharts.online` 使用状态，依旧可以使用
 
+    #### Fixed
+
+    * [issue#322](https://github.com/pyecharts/pyecharts/issues/322) 修复在 timeline 中不能设置多个 legend 的 bug
+
 * ### version 0.3.1 - 2017.12.13（Current）
     * [issue#290](https://github.com/pyecharts/pyecharts/issues/290) 紧急修复 v0.3.0 版本不能正常显示图形的严重 bug
     * [issue#296](https://github.com/pyecharts/pyecharts/issues/296) 修复 Timeline 不能在 notebook 中显示的 bug

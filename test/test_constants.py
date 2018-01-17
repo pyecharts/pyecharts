@@ -54,11 +54,10 @@ CITY_NAME_PINYIN_MAP = {
 
 def test_core_js_libraries():
     for key, value in DEFAULT_JS_LIBRARIES.items():
-        assert key in conf.DEFAULT_JS_LIBRARIES, key
-        eq_(value, conf.DEFAULT_JS_LIBRARIES[key])
+        default_file_map = conf.JS_EXTENSIONS[0].registry.get('FILE_MAP')
+        eq_(value, default_file_map[key])
 
 
 def test_province_names():
     for key, value in CITY_NAME_PINYIN_MAP.items():
-        assert key in conf.CITY_NAME_PINYIN_MAP
         eq_(value, conf.CITY_NAME_PINYIN_MAP[key])

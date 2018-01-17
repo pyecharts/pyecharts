@@ -1,0 +1,12 @@
+{
+    "JUPYTER_URL": "/nbextensions/test-js",
+    "GITHUB_URL": "https://your.github.io/test-js/test-js",
+    "JUPYTER_ENTRY": "test-js/index",
+    "JS_FOLDER": "test-js",
+    "PINYIN_MAP": {
+        "Chinese": "pinyin"
+    },
+    "FILE_MAP": {
+        "pinyin": "the_js_file_name"
+    }
+}
