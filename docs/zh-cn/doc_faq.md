@@ -1,5 +1,15 @@
 > FAQ 篇：本文档主要介绍一些常见问题及解决方案
 
+### Q:在 Jupyter Notebook 使用 download-as 导出 ipynb/png/pdf 等文件后，图表无法显示？
+
+A:由于使用 download-as 后，便脱离了 Jupyter Notebook 的环境，无法引用其内的相关 js 文件，因此应当使用在线模式，引用来自 [jupyter-echarts](https://github.com/pyecharts/jupyter-echarts) 或其他有效的远程 js 库。
+
+```python
+from pyecharts import online
+
+online()
+```
+
 ### Q:克隆项目到本地后 template/js 文件夹为空，没有 js 文件？
 
 A: 请按照 README.md 中介绍的，使用 `git clone --recursive https://github.com/chenjiandongx/pyecharts.git`。因为 template/js 实际上是一个 git submodule，不递归克隆的话会遗漏该模块的内容。

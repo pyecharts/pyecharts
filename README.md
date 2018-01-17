@@ -29,7 +29,7 @@ $ pip install notebook
 ### pyecharts
 You can install it via pip
 ```
-$ pip install pyecharts -U
+$ pip install pyecharts
 ```
 
 or clone it and install it
