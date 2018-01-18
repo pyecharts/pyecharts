@@ -71,7 +71,7 @@ jupyter nbextension enable echarts/main
 然后，让我们检查以下是否已经装上了。请先运行 Jupyter-notebook，再打开这个链接：http://localhost:8889/nbextensions/echarts/nanao.js。
 如果能下载到，那就祝贺你，成功了。否则，请检查你的步骤。
 
-![customize-map-2](https://raw.githubusercontent.com/chenjiandongx/pyecharts/master/images/customize-map-2.png)
+![customize-map-2](https://user-images.githubusercontent.com/19553554/35104708-9d88455a-fca4-11e7-8fb1-1aff8e0066ef.png)
 
 ## 如何把手动加的地图变成自动的
 
