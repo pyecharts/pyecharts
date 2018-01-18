@@ -23,19 +23,6 @@ def test_get_resource_dir():
     eq_(path, os.path.abspath(expected))
 
 
-def test_freeze_js():
-    html_content = """
-        </style>
-        <!-- build -->
-        <script src="js/echarts/echarts.min.js"></script>
-        <script src="js/echarts/echarts-wordcloud.min.js"></script>
-        <!-- endbuild -->
-    </head><body>"""
-    html_content = freeze_js(html_content)
-    assert 't.echarts' in html_content
-    assert 'wordcloud2.js' in html_content
-
-
 def test_write_utf8_html_file():
     content = "柱状图数据堆叠示例"
     file_name = 'test.html'

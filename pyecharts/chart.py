@@ -21,7 +21,8 @@ class Chart(Base):
                  title_text_size=18,
                  subtitle_text_size=12,
                  background_color="#fff",
-                 page_title=constants.PAGE_TITLE):
+                 page_title=constants.PAGE_TITLE,
+                 renderer=constants.CANVAS_RENDERER):
         """
 
         :param title:
@@ -53,6 +54,7 @@ class Chart(Base):
         """
         super(Chart, self).__init__(
             width=width, height=height,
+            renderer=renderer,
             page_title=page_title
         )
         self._colorlst = [

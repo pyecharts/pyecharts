@@ -10,7 +10,7 @@ LINK_SCRIPT_FORMATTER = '<script type="text/javascript" src="{}"></script>'
 EMBED_SCRIPT_FORMATTER = '<script type="text/javascript">\n{}\n</script>'
 CHART_DIV_FORMATTER = '<div id="{chart_id}" style="width:{width};height:{height};"></div>'  # flake8: noqa
 CHART_CONFIG_FORMATTER = """
-var myChart_{chart_id} = echarts.init(document.getElementById('{chart_id}'));
+var myChart_{chart_id} = echarts.init(document.getElementById('{chart_id}', null, {{renderer: '{renderer}'}}));
 var option_{chart_id} = {options};
 myChart_{chart_id}.setOption(option_{chart_id});
 """
@@ -80,6 +80,7 @@ def generate_js_content(*charts):
     for chart in charts:
         js_content = CHART_CONFIG_FORMATTER.format(
             chart_id=chart.chart_id,
+            renderer=chart.renderer,
             options=utils.json_dumps(chart.options, indent=4)
         )
         contents.append(js_content)
