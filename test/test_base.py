@@ -33,6 +33,24 @@ def test_svg_option():
     assert "{renderer: 'svg'}" in html
 
 
+def test_svg_option_in_note_book():
+    bar = create_a_bar(TITLE, renderer='svg')
+    html = bar._repr_html_()
+    assert "{renderer: 'svg'}" in html
+
+
+def test_canvas_option():
+    bar = create_a_bar(TITLE)
+    html = bar.render_embed()
+    assert "{renderer: 'canvas'}" in html
+
+
+def test_canvas_option_in_notebook():
+    bar = create_a_bar(TITLE)
+    html = bar._repr_html_()
+    assert "{renderer: 'canvas'}" in html
+
+
 def test_embed_option():
     bar = create_a_bar(TITLE)
     html = bar.render_embed()
