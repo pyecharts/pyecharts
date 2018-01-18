@@ -13,7 +13,7 @@ SCRIPT_FILE_PATH = get_resource_dir('templates', 'js', 'echarts')
 
 DEFAULT_TEMPLATE_DIR = get_resource_dir('templates')
 DEFAULT_ECHARTS_REGISTRY = os.path.join(
-    get_resource_dir('templates'), 'js', 'echarts', 'registry.json')
+    get_resource_dir('templates'), 'js', 'registry.json')
 # Load js & map file index into a dictionary.
 
 
