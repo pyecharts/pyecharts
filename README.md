@@ -1,4 +1,4 @@
-# [pyecharts](https://github.com/chenjiandongx/pyecharts) [![Build Status](https://travis-ci.org/chenjiandongx/pyecharts.svg?branch=master)](https://travis-ci.org/chenjiandongx/pyecharts) [![codecov](https://codecov.io/gh/chenjiandongx/pyecharts/branch/master/graph/badge.svg)](https://codecov.io/gh/chenjiandongx/pyecharts) [![PyPI version](https://badge.fury.io/py/pyecharts.svg)](https://badge.fury.io/py/pyecharts) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+# [pyecharts](https://github.com/pyecharts/pyecharts) [![Build Status](https://travis-ci.org/pyecharts/pyecharts.svg?branch=master)](https://travis-ci.org/pyecharts/pyecharts) [![codecov](https://codecov.io/gh/pyecharts/pyecharts/branch/master/graph/badge.svg)](https://codecov.io/gh/pyecharts/pyecharts) [![PyPI version](https://badge.fury.io/py/pyecharts.svg)](https://badge.fury.io/py/pyecharts) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 > pyecharts is a library to generate charts using Echarts. It simply provides the interface between Echarts and Python.
 
@@ -7,7 +7,7 @@
 [Echarts](https://github.com/ecomfe/echarts) is an open source library from Baidu for data visualization in javascript. It has awesome demo pages so I started to look out for an interface library so that I could use it in Python. I ended up with [echarts-python](https://github.com/yufeiminds/echarts-python) on github but it lacks of documentation and was not updated for a while. Just like many other Python projects, I started my own project, pyecharts, referencing echarts-python and another library [pygal](https://github.com/Kozea/pygal).
 
 ## Installation
-pyecharts works on Python2 and Python3. For more information please refer to [changelog.md](https://github.com/chenjiandongx/pyecharts/blob/master/changelog.md)
+pyecharts works on Python2 and Python3. For more information please refer to [changelog.md](https://github.com/pyecharts/pyecharts/blob/master/changelog.md)
 
 ### Jupyter-Notebook
 Make sure you hava installed jupyter-notebook enviroment if you want to show your charts on notebook.   
@@ -23,7 +23,7 @@ $ pip install pyecharts -U
 
 or clone it and install it
 ```
-$ git clone --recursive https://github.com/chenjiandongx/pyecharts.git
+$ git clone --recursive https://github.com/pyecharts/pyecharts.git
 $ cd pyecharts
 $ pip install -r requirements.txt
 $ python setup.py install
@@ -44,33 +44,33 @@ bar.render()
 
 It will create a file named render.html in the root directory, open file with your borwser.  
 
-![usage-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/usage-0.gif)
+![usage-0](https://user-images.githubusercontent.com/19553554/35104516-036181b2-fca4-11e7-8008-4ff4044245ee.gif)
 
 
 ## Working with pandas & numpy
-![pandas_numpy](https://github.com/chenjiandongx/pyecharts/blob/master/images/pandas-numpy.png)
+![pandas-numpy](https://user-images.githubusercontent.com/19553554/35104252-3e36cee2-fca3-11e7-8e43-09bbe8dbbd1e.png)
 
 
 ## Working with Flask & Django
 Flask
 
-![flask-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/flask-0.gif)
+![flask-0](https://user-images.githubusercontent.com/19553554/35081158-3faa7c34-fc4d-11e7-80c9-2de79371374f.gif)
 
 Django
 
-![django-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/django-0.gif)
+![django-0](https://user-images.githubusercontent.com/19553554/35081440-21efcf58-fc4f-11e7-8427-ed73306533e8.gif)
 
 * 中文文档
-    * [pyecharts + Flask](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/doc_flask.md)
-    * [pyecharts + Django](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/doc_django.md)
+    * [pyecharts + Flask](https://github.com/pyecharts/pyecharts/blob/master/docs/zh-cn/doc_flask.md)
+    * [pyecharts + Django](https://github.com/pyecharts/pyecharts/blob/master/docs/zh-cn/doc_django.md)
 * English
-    * [pyecharts + Flask](https://github.com/chenjiandongx/pyecharts/blob/master/docs/en-us/doc_flask.md)
-    * [pyecharts + Django](https://github.com/chenjiandongx/pyecharts/blob/master/docs/en-us/doc_django.md)
+    * [pyecharts + Flask](https://github.com/pyecharts/pyecharts/blob/master/docs/en-us/doc_flask.md)
+    * [pyecharts + Django](https://github.com/pyecharts/pyecharts/blob/master/docs/en-us/doc_django.md)
 
 
 ## Documentation
-* [中文文档](https://github.com/chenjiandongx/pyecharts/tree/master/docs/zh-cn)
-* [English](https://github.com/chenjiandongx/pyecharts/tree/master/docs/en-us)
+* [中文文档](https://github.com/pyecharts/pyecharts/tree/master/docs/zh-cn)
+* [English](https://github.com/pyecharts/pyecharts/tree/master/docs/en-us)
 
 
 ## Test
