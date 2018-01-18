@@ -155,6 +155,7 @@ class Base(object):
         return engine.render_notebook(
             "notebook_chart_component.html",
             my_option=my_option,
+            renderer=self.renderer,
             chart_id=self._chart_id)
 
     def _add_chinese_map(self, map_name_in_chinese):
