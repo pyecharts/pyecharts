@@ -190,7 +190,7 @@ Quit the server with CONTROL-C.
 
 访问 [http://localhost:8000/myfirstvis/](http://localhost:8000/myfirstvis/)，你就可以看到酷炫的 3D 图了
 
-![django-0](https://raw.githubusercontent.com/chenjiandongx/pyecharts/master/images/django-0.gif)
+![django-0](https://user-images.githubusercontent.com/19553554/35081440-21efcf58-fc4f-11e7-8427-ed73306533e8.gif)
 
 
 ## 小结

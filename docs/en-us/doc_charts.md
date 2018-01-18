@@ -4,8 +4,8 @@ pyecharts is a library to generate charts using Echarts. It simply provides the 
 
 [![Build Status](https://travis-ci.org/chenjiandongx/pyecharts.svg?branch=master)](https://travis-ci.org/chenjiandongx/pyecharts) [![codecov](https://codecov.io/gh/chenjiandongx/pyecharts/branch/master/graph/badge.svg)](https://codecov.io/gh/chenjiandongx/pyecharts) [![PyPI version](https://badge.fury.io/py/pyecharts.svg)](https://badge.fury.io/py/pyecharts) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-* [First-steps](https://github.com/chenjiandongx/pyecharts/blob/master/document/en-us/documentation.md#First-steps)
-* [Global-options](https://github.com/chenjiandongx/pyecharts/blob/master/document/en-us/documentation.md#Global-options)
+* First-steps
+* Global-options
     * xyAxis：x, y axis in cartesian coordinate system(Line, Bar, Scatter, EffectScatter, Kline)
     * dataZoom：dataZoom components for zoom-in and zoom-out. With them, it is possible to magnify a small area, to see the overall picture or to stay away from scattered points(Line, Bar, Scatter, EffectScatter, Kline)
     * legend：legend component has different symbol, colour and name, and provide the interactive clicking functions to show or hide its associated data series.
@@ -13,7 +13,7 @@ pyecharts is a library to generate charts using Echarts. It simply provides the 
     * lineStyle：line style for Line, Polar, Radar, Graph, Parallel.
     * grid3D：gird3D components in cartesian coordinate system(Bar3D, Line3D, Scatter3D)
     * visualMap：It is a type of component for visual encoding, which maps the data to visual channels
-* [Chart-types](https://github.com/chenjiandongx/pyecharts/blob/master/document/en-us/documentation.md#Chart-types)
+* Chart-types
     * Bar
     * Bar3D
     * EffectScatter
@@ -34,9 +34,9 @@ pyecharts is a library to generate charts using Echarts. It simply provides the 
     * Scatter
     * Scatter3D
     * WordCloud
-* [Customize](https://github.com/chenjiandongx/pyecharts/blob/master/document/en-us/documentation.md#Customize)
-* [Example](https://github.com/chenjiandongx/pyecharts/blob/master/document/en-us/documentation.md#Example)
-* [About](https://github.com/chenjiandongx/pyecharts/blob/master/document/en-us/documentation.md#About)
+* Customize
+* Example
+* About
 
 
 # First-steps
@@ -50,7 +50,7 @@ bar.add("服装", ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "�
 bar.show_config()
 bar.render()
 ```
-![guide-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/guide-0.png)
+![guide-0](https://raw.githubusercontent.com/pyecharts/pyecharts/master/images/guide-0.png)
 
 **Tip：** You can click the download button on the right side to download the picture to your local disk.
 
@@ -222,11 +222,11 @@ print(npdata)
 
 like this
 
-![notebook-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/notebook-0.gif)
+![notebook-0](https://raw.githubusercontent.com/pyecharts/pyecharts/master/images/notebook-0.gif)
 
 and this
 
-![notebook-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/notebook-1.gif)
+![notebook-1](https://raw.githubusercontent.com/pyecharts/pyecharts/master/images/notebook-1.gif)
 
 more Jupyter notebook examples, please refer to [notebook-use-cases](https://github.com/chenjiandongx/pyecharts/blob/master/document/notebook-use-cases.ipynb)。you could download and run it on your notebook.
 
@@ -492,7 +492,7 @@ bar.add("商家A", attr, v1, is_stack=True)
 bar.add("商家B", attr, v2, is_stack=True)
 bar.render()
 ```
-![bar-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/bar-0.gif)
+![bar-0](https://raw.githubusercontent.com/pyecharts/pyecharts/master/images/bar-0.gif)
 **Tip：**  Global configuration item needs set in the last ```add()``` or the setting will lose efficacy.
 
 ```python
@@ -503,7 +503,7 @@ bar.add("商家A", attr, v1, mark_point=["average"])
 bar.add("商家B", attr, v2, mark_line=["min", "max"])
 bar.render()
 ```
-![bar-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/bar-1.gif)
+![bar-1](https://raw.githubusercontent.com/pyecharts/pyecharts/master/images/bar-1.gif)
 
 * mark_point -> list  
     mark point data, it can be 'min', 'max', 'average'
@@ -527,7 +527,7 @@ bar.add("商家A", attr, v1)
 bar.add("商家B", attr, v2, is_convert=True)
 bar.render()
 ```
-![bar-2](https://github.com/chenjiandongx/pyecharts/blob/master/images/bar-2.png)
+![bar-2](https://raw.githubusercontent.com/pyecharts/pyecharts/master/images/bar-2.png)
 
 dataZoom effect，'slider' type
 ```python
@@ -540,7 +540,7 @@ bar.add("", attr, v1, is_label_show=True, is_datazoom_show=True)
 bar.show_config()
 bar.render()
 ```
-![bar-4](https://github.com/chenjiandongx/pyecharts/blob/master/images/bar-4.gif)
+![bar-4](https://raw.githubusercontent.com/pyecharts/pyecharts/master/images/bar-4.gif)
 
 'inside' type
 ```python
@@ -551,7 +551,7 @@ bar.add("", attr, v1, is_datazoom_show=True, datazoom_type='inside', datazoom_ra
 bar.show_config()
 bar.render()
 ```
-![bar-5](https://github.com/chenjiandongx/pyecharts/blob/master/images/bar-5.gif)
+![bar-5](https://raw.githubusercontent.com/pyecharts/pyecharts/master/images/bar-5.gif)
 
 **Tip：** Datazoom fits all plane rectangular coordinate system figure,that's(Line, Bar, Scatter, EffectScatter, Kline)
 **Tip：** Through label_color to set column's colour,like ['#eee', '#000']，any type of chart's legend colour can revise by label_color .
@@ -613,7 +613,7 @@ bar3d.add("", x_axis, y_aixs, [[d[1], d[0], d[2]] for d in data], is_visualmap=T
 bar3d.show_config()
 bar3d.render()
 ```
-![bar3D-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/bar3D-0.gif)
+![bar3D-0](https://raw.githubusercontent.com/pyecharts/pyecharts/master/images/bar3D-0.gif)
 
 ``` grid3D_shading``` could make bar look more real  
 ```python
@@ -624,7 +624,7 @@ bar3d.add("", x_axis, y_aixs, [[d[1], d[0], d[2]] for d in data], is_visualmap=T
 bar3d.show_config()
 bar3d.render()
 ```
-![bar3D-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/bar3D-1.gif)
+![bar3D-1](https://raw.githubusercontent.com/pyecharts/pyecharts/master/images/bar3D-1.gif)
 
 ```is_grid3D_rotate``` could let it rotate automatically
 ```python
@@ -635,7 +635,7 @@ bar3d.add("", x_axis, y_aixs, [[d[1], d[0], d[2]] for d in data], is_visualmap=T
 bar3d.show_config()
 bar3d.render()
 ```
-![bar3D-2](https://github.com/chenjiandongx/pyecharts/blob/master/images/bar3D-2.gif)
+![bar3D-2](https://raw.githubusercontent.com/pyecharts/pyecharts/master/images/bar3D-2.gif)
 
 set ``` grid3D_rotate_speed``` to adjust the rotation speed  
 ```python
@@ -646,7 +646,7 @@ bar3d.add("", x_axis, y_aixs, [[d[1], d[0], d[2]] for d in data], is_visualmap=T
 bar3d.show_config()
 bar3d.render()
 ```
-![bar3D-3](https://github.com/chenjiandongx/pyecharts/blob/master/images/bar3D-3.gif)
+![bar3D-3](https://raw.githubusercontent.com/pyecharts/pyecharts/master/images/bar3D-3.gif)
 
 **Tip：** more details aboutt gird3D，please refer to [Global-options](https://github.com/chenjiandongx/pyecharts/blob/master/document/en-us/documentation.md#Global-options)
 
@@ -677,7 +677,7 @@ es = EffectScatter("动态散点图示例")
 es.add("effectScatter", v1, v2)
 es.render()
 ```
-![effectscatter-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/effectscatter-0.gif)
+![effectscatter-0](https://raw.githubusercontent.com/pyecharts/pyecharts/master/images/effectscatter-0.gif)
 
 ```python
 es = EffectScatter("动态散点图各种图形示例")
@@ -689,7 +689,7 @@ es.add("", [50], [50], symbol_size=16, effect_scale=5.5, effect_period=3,symbol=
 es.add("", [60], [60], symbol_size=6, effect_scale=2.5, effect_period=3,symbol="triangle")
 es.render()
 ```
-![effectscatter-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/effectscatter-1.gif)
+![effectscatter-1](https://raw.githubusercontent.com/pyecharts/pyecharts/master/images/effectscatter-1.gif)
 
 * symbol -> str  
     symbol shape, it can be 'rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow'
@@ -725,7 +725,7 @@ funnel = Funnel("漏斗图示例")
 funnel.add("商品", attr, value, is_label_show=True, label_pos="inside", label_text_color="#fff")
 funnel.render()
 ```
-![funnel-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/funnel-0.gif)
+![funnel-0](https://raw.githubusercontent.com/pyecharts/pyecharts/master/images/funnel-0.gif)
 
 ```python
 funnel = Funnel("漏斗图示例", width=600, height=400, title_pos='center')
@@ -734,7 +734,7 @@ funnel.add("商品", attr, value, is_label_show=True, label_pos="outside", legen
 funnel.show_config()
 funnel.render()
 ```
-![funnel-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/funnel-1.png)
+![funnel-1](https://raw.githubusercontent.com/pyecharts/pyecharts/master/images/funnel-1.png)
 
 
 ## Gauge
@@ -763,7 +763,7 @@ gauge.add("业务指标", "完成率", 66.66)
 gauge.show_config()
 gauge.render()
 ```
-![gauge-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/gauge-0.png)
+![gauge-0](https://raw.githubusercontent.com/pyecharts/pyecharts/master/images/gauge-0.png)
 
 ```python
 gauge = Gauge("仪表盘示例")
@@ -771,7 +771,7 @@ gauge.add("业务指标", "完成率", 166.66, angle_range=[180, 0], scale_range
 gauge.show_config()
 gauge.render()
 ```
-![gauge-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/gauge-1.png)
+![gauge-1](https://raw.githubusercontent.com/pyecharts/pyecharts/master/images/gauge-1.png)
 
 
 ## Geo
@@ -851,7 +851,7 @@ geo.add("", attr, value, visual_range=[0, 200], visual_text_color="#fff", symbol
 geo.show_config()
 geo.render()
 ```
-![geo-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/geo-0.gif)
+![geo-0](https://raw.githubusercontent.com/pyecharts/pyecharts/master/images/geo-0.gif)
 
 visualMap：visualMap is a type of component for visual encoding, which maps the data to visual channels
 * is_visualmap -> bool  
@@ -891,7 +891,7 @@ geo.add("", attr, value, type="heatmap", is_visualmap=True, visual_range=[0, 300
 geo.show_config()
 geo.render()
 ```
-![geo-0-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/geo-0-1.gif)
+![geo-0-1](https://raw.githubusercontent.com/pyecharts/pyecharts/master/images/geo-0-1.gif)
 
 EffectScatter type
 ```python
@@ -905,7 +905,7 @@ geo.add("", attr, value, type="effectScatter", is_random=True, effect_scale=5)
 geo.show_config()
 geo.render()
 ```
-![geo-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/geo-1.gif)
+![geo-1](https://raw.githubusercontent.com/pyecharts/pyecharts/master/images/geo-1.gif)
 
 
 ## Graph
@@ -984,7 +984,7 @@ graph.show_config()
 graph.render()
 
 ```
-![graph-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/graph-0.png)
+![graph-0](https://raw.githubusercontent.com/pyecharts/pyecharts/master/images/graph-0.png)
 
 ```python
 graph = Graph("关系图-环形布局示例")
@@ -992,7 +992,7 @@ graph.add("", nodes, links, is_label_show=True, repulsion=8000, layout='circular
 graph.show_config()
 graph.render()
 ```
-![graph-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/graph-1.png)
+![graph-1](https://raw.githubusercontent.com/pyecharts/pyecharts/master/images/graph-1.png)
 
 ```python
 from pyecharts import Graph
@@ -1007,12 +1007,12 @@ graph.add("", nodes, links, categories, label_pos="right", repulsion=50, is_lege
 graph.show_config()
 graph.render()
 ```
-![graph-2](https://github.com/chenjiandongx/pyecharts/blob/master/images/graph-2.gif)
+![graph-2](https://raw.githubusercontent.com/pyecharts/pyecharts/master/images/graph-2.gif)
 
 **Tip：** **lineStyle** parameter is configurable
 
 
-# HeatMap
+## HeatMap
 > Heat map mainly use colors to represent values, which must be used along with visualMap component.
 > It can be used in either rectangular coordinate or geographic coordinate.But the behaviour on them are quite different. Rectangular coordinate must have two catagories to use it.
 
@@ -1048,7 +1048,7 @@ heatmap.add("热力图直角坐标系", x_axis, y_aixs, data, is_visualmap=True,
 heatmap.show_config()
 heatmap.render()
 ```
-![heatmap-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/heatmap-0.gif)
+![heatmap-0](https://raw.githubusercontent.com/pyecharts/pyecharts/master/images/heatmap-0.gif)
 
 ```python
 import datetime
@@ -1065,7 +1065,7 @@ heatmap.add("日历热力图", data, date_range=["2017"], is_visualmap=True,
             visual_pos="center", visual_top="top")
 heatmap.render()
 ```
-![heatmap-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/heatmap-1.gif)
+![heatmap-0](https://raw.githubusercontent.com/pyecharts/pyecharts/master/images/heatmap-1.gif)
 
 **Tip：** Thermodynamic chart have to cooperate with VisualMap in use.
 
@@ -1108,7 +1108,7 @@ kline.add("日K", ["2017/7/{}".format(i + 1) for i in range(31)], v1)
 kline.show_config()
 kline.render()
 ```
-![kline-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/kline-0.png)
+![kline-0](https://raw.githubusercontent.com/pyecharts/pyecharts/master/images/kline-0.png)
 
 Kline + dataZoom
 ```python
@@ -1117,7 +1117,7 @@ kline.add("日K", ["2017/7/{}".format(i + 1) for i in range(31)], v1, mark_point
 kline.show_config()
 kline.render()
 ```
-![kline-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/kline-1.gif)
+![kline-1](https://raw.githubusercontent.com/pyecharts/pyecharts/master/images/kline-1.gif)
 
 
 ## Line
@@ -1163,7 +1163,7 @@ line.add("商家B", attr, v2, is_smooth=True, mark_line=["max", "average"])
 line.show_config()
 line.render()
 ```
-![line-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/line-0.gif)
+![line-0](https://raw.githubusercontent.com/pyecharts/pyecharts/master/images/line-0.gif)
 
 * mark_point -> list  
     mark point data, it can be 'min', 'max', 'average'
@@ -1189,7 +1189,7 @@ line.add("商家B", attr, v2, mark_point=["average", "max", "min"],
 line.show_config()
 line.render()
 ```
-![line-0-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/line-0-1.png)
+![line-0-1](https://raw.githubusercontent.com/pyecharts/pyecharts/master/images/line-0-1.png)
 
 ```python
 line = Line("折线图-数据堆叠示例")
@@ -1198,7 +1198,7 @@ line.add("商家B", attr, v2, is_stack=True, is_label_show=True)
 line.show_config()
 line.render()
 ```
-![line-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/line-1.gif)
+![line-1](https://raw.githubusercontent.com/pyecharts/pyecharts/master/images/line-1.gif)
 
 ```python
 line = Line("折线图-阶梯图示例")
@@ -1206,7 +1206,7 @@ line.add("商家A", attr, v1, is_step=True, is_label_show=True)
 line.show_config()
 line.render()
 ```
-![line-2](https://github.com/chenjiandongx/pyecharts/blob/master/images/line-2.png)
+![line-2](https://raw.githubusercontent.com/pyecharts/pyecharts/master/images/line-2.png)
 
 ```python
 line = Line("折线图-面积图示例")
@@ -1215,7 +1215,7 @@ line.add("商家B", attr, v2, is_fill=True, area_color='#000', area_opacity=0.3,
 line.show_config()
 line.render()
 ```
-![line-3](https://github.com/chenjiandongx/pyecharts/blob/master/images/line-3.png)
+![line-3](https://raw.githubusercontent.com/pyecharts/pyecharts/master/images/line-3.png)
 
 * area_opacity -> float  
     Opacity of the component. Supports value from 0 to 1, and the component will not be drawn when set to 0.
@@ -1226,7 +1226,7 @@ line.render()
 **Tip：** Setting line colour by label_color,like ['#eee', '#000'],all type of chart can revise label colour by label_color.
 
 
-# Line3D
+## Line3D
 Line3D.add() signatures
 ```python
 add(name, data, grid3D_opacity=1, **kwargs)
@@ -1258,7 +1258,7 @@ line3d.add("", _data, is_visualmap=True, visual_range_color=range_color, visual_
            grid3D_rotate_sensitivity=5)
 line3d.render()
 ```
-![line3D-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/line3D-0.gif)
+![line3D-0](https://raw.githubusercontent.com/pyecharts/pyecharts/master/images/line3D-0.gif)
 
 rotating spring
 ```python
@@ -1279,7 +1279,7 @@ line3d.add("", _data, is_visualmap=True, visual_range_color=range_color, visual_
            is_grid3D_rotate=True, grid3D_rotate_speed=180)
 line3d.render()
 ```
-![line3D-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/line3D-1.gif)
+![line3D-1](https://raw.githubusercontent.com/pyecharts/pyecharts/master/images/line3D-1.gif)
 
 **Tip：** more details aboutt gird3D，please refer to [Global-options](https://github.com/chenjiandongx/pyecharts/blob/master/document/en-us/documentation.md#Global-options)
 
@@ -1315,7 +1315,7 @@ liquid.add("Liquid", [0.6])
 liquid.show_config()
 liquid.render()
 ```
-![liquid-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/liquid-0.gif)
+![liquid-0](https://raw.githubusercontent.com/pyecharts/pyecharts/master/images/liquid-0.gif)
 
 ```python
 from pyecharts import Liquid
@@ -1325,7 +1325,7 @@ liquid.add("Liquid", [0.6, 0.5, 0.4, 0.3], is_liquid_outline_show=False)
 liquid.show_config()
 liquid.render()
 ```
-![liquid-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/liquid-1.gif)
+![liquid-1](https://raw.githubusercontent.com/pyecharts/pyecharts/master/images/liquid-1.gif)
 
 ```python
 from pyecharts import Liquid
@@ -1335,7 +1335,7 @@ liquid.add("Liquid", [0.6, 0.5, 0.4, 0.3], is_liquid_animation=False, shape='dia
 liquid.show_config()
 liquid.render()
 ```
-![liquid-2](https://github.com/chenjiandongx/pyecharts/blob/master/images/liquid-2.png)
+![liquid-2](https://raw.githubusercontent.com/pyecharts/pyecharts/master/images/liquid-2.png)
 
 ## Map
 > Map is maily used in the visulization of geographic area data,which can be used with visualMap component to visualize the datas such as population distribution density in diffrent areas.
@@ -1366,7 +1366,7 @@ map.add("", attr, value, maptype='china')
 map.show_config()
 map.render()
 ```
-![map-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/map-0.gif)
+![map-0](https://raw.githubusercontent.com/pyecharts/pyecharts/master/images/map-0.gif)
 
 ```python
 from pyecharts import Map
@@ -1378,7 +1378,7 @@ map.add("", attr, value, maptype='china', is_visualmap=True, visual_text_color='
 map.show_config()
 map.render()
 ```
-![map-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/map-1.gif)
+![map-1](https://raw.githubusercontent.com/pyecharts/pyecharts/master/images/map-1.gif)
 
 **Tip：** Settings can combine with visualMap component.
 
@@ -1392,7 +1392,7 @@ map.add("", attr, value, maptype='广东', is_visualmap=True, visual_text_color=
 map.show_config()
 map.render()
 ```
-![map-2](https://github.com/chenjiandongx/pyecharts/blob/master/images/map-2.gif)
+![map-2](https://raw.githubusercontent.com/pyecharts/pyecharts/master/images/map-2.gif)
 
 ### About Customized Map
 Because map contain large area,this program can't cover all the map,but don't worry about it.Echarts officially provide your own custom map [echart-map](http://echarts.baidu.com/download-map.html),this function allow you make map that you need,just download in JS file form.
@@ -1466,7 +1466,7 @@ parallel.add("parallel", data, is_random=True)
 parallel.show_config()
 parallel.render()
 ```
-![parallel-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/parallel-0.png)
+![parallel-0](https://raw.githubusercontent.com/pyecharts/pyecharts/master/images/parallel-0.png)
 
 ```python
 from pyecharts import Parallel
@@ -1504,7 +1504,7 @@ parallel.add("parallel", data)
 parallel.show_config()
 parallel.render()
 ```
-![parallel-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/parallel-1.png)
+![parallel-1](https://raw.githubusercontent.com/pyecharts/pyecharts/master/images/parallel-1.png)
 
 **Tip：** **lineStyle** Parameter is Configurable
 
@@ -1546,7 +1546,7 @@ pie.add("", attr, v1, is_label_show=True)
 pie.show_config()
 pie.render()
 ```
-![pie-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/pie-0.gif)
+![pie-0](https://raw.githubusercontent.com/pyecharts/pyecharts/master/images/pie-0.gif)
 
 ```python
 from pyecharts import Pie
@@ -1559,7 +1559,7 @@ pie.add("", attr, v1, radius=[40, 75], label_text_color=None, is_label_show=True
 pie.show_config()
 pie.render()
 ```
-![pie-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/pie-1.png)
+![pie-1](https://raw.githubusercontent.com/pyecharts/pyecharts/master/images/pie-1.png)
 
 ```python
 from pyecharts import Pie
@@ -1574,7 +1574,7 @@ pie.add("商品B", attr, v2, center=[75, 50], is_random=True, radius=[30, 75], r
 pie.show_config()
 pie.render()
 ```
-![pie-2](https://github.com/chenjiandongx/pyecharts/blob/master/images/pie-2.png)
+![pie-2](https://raw.githubusercontent.com/pyecharts/pyecharts/master/images/pie-2.png)
 
 
 ## Polar
@@ -1638,7 +1638,7 @@ polar.add("", data, boundary_gap=False, type='scatter', is_splitline_show=False,
 polar.show_config()
 polar.render()
 ```
-![polar-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/polar-0.png)
+![polar-0](https://raw.githubusercontent.com/pyecharts/pyecharts/master/images/polar-0.png)
 
 * is_splitline_show -> bool  
     default -> True  
@@ -1665,7 +1665,7 @@ polar.add("", data_2, type='scatter')
 polar.show_config()
 polar.render()
 ```
-![polar-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/polar-1.png)
+![polar-1](https://raw.githubusercontent.com/pyecharts/pyecharts/master/images/polar-1.png)
 
 ```python
 from pyecharts import Polar
@@ -1677,7 +1677,7 @@ polar.add("", data, type='effectScatter', effect_scale=10, effect_period=5)
 polar.show_config()
 polar.render()
 ```
-![polar-2](https://github.com/chenjiandongx/pyecharts/blob/master/images/polar-2.gif)
+![polar-2](https://raw.githubusercontent.com/pyecharts/pyecharts/master/images/polar-2.gif)
 
 ```python
 from pyecharts import Polar
@@ -1690,7 +1690,7 @@ polar.add("C", [1, 2, 3, 4, 1, 2, 5], radius_data=radius, type='barRadius', is_s
 polar.show_config()
 polar.render()
 ```
-![polar-3](https://github.com/chenjiandongx/pyecharts/blob/master/images/polar-3.gif)
+![polar-3](https://raw.githubusercontent.com/pyecharts/pyecharts/master/images/polar-3.gif)
 
 ```python
 from pyecharts import Polar
@@ -1703,7 +1703,7 @@ polar.add("", [1, 2, 3, 4, 1, 2, 5], radius_data=radius, type='barAngle', is_sta
 polar.show_config()
 polar.render()
 ```
-![polar-4](https://github.com/chenjiandongx/pyecharts/blob/master/images/polar-4.png)
+![polar-4](https://raw.githubusercontent.com/pyecharts/pyecharts/master/images/polar-4.png)
 
 
 ## Radar
@@ -1751,7 +1751,7 @@ radar.add("实际开销", v2, label_color=["#4e79a7"], is_area_show=False)
 radar.show_config()
 radar.render()
 ```
-![radar-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/radar-0.gif)
+![radar-0](https://raw.githubusercontent.com/pyecharts/pyecharts/master/images/radar-0.gif)
 
 * is_area_show -> bool  
     It specifies whether to show split area.
@@ -1816,7 +1816,7 @@ radar.add("上海", value_sh, item_color="#b3e4a1", symbol=None)
 radar.show_config()
 radar.render()
 ```
-![radar-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/radar-1.gif)
+![radar-1](https://raw.githubusercontent.com/pyecharts/pyecharts/master/images/radar-1.gif)
 
 **Tip：** symblo=None make marked graphic hiden(small circle)
 
@@ -1850,7 +1850,7 @@ scatter.add("B", v1[::-1], v2)
 scatter.show_config()
 scatter.render()
 ```
-![scatter-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/scatter-0.png)
+![scatter-0](https://raw.githubusercontent.com/pyecharts/pyecharts/master/images/scatter-0.png)
 
 Scatter also built-in draw method.
 ```python
@@ -1866,7 +1866,7 @@ convert pixels on the image into array ,when colour is （255,255,255）only ret
 
 First of all ,you need to prepare a picture,like
 
-![pyecharts-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/pyecharts-0.png)
+![pyecharts-0](https://raw.githubusercontent.com/pyecharts/pyecharts/master/images/pyecharts-0.png)
 
 ```python
 from pyecharts import Scatter
@@ -1877,10 +1877,10 @@ scatter.add("pyecharts", v1, v2, is_random=True)
 scatter.show_config()
 scatter.render()
 ```
-![pyecharts-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/pyecharts-1.png)
+![pyecharts-1](https://raw.githubusercontent.com/pyecharts/pyecharts/master/images/pyecharts-1.png)
 
 
-# Scatter3D
+## Scatter3D
 Scatter3D.add() signatures
 ```python
 add(name, data, grid3D_opacity=1, **kwargs)
@@ -1904,7 +1904,7 @@ scatter3D = Scatter3D("3D 散点图示例", width=1200, height=600)
 scatter3D.add("", data, is_visualmap=True, visual_range_color=range_color)
 scatter3D.render()
 ```
-![scatter3D-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/scatter3D-0.gif)
+![scatter3D-0](https://raw.githubusercontent.com/pyecharts/pyecharts/master/images/scatter3D-0.gif)
 
 **Tip：** more details aboutt gird3D，please refer to [Global-options](https://github.com/chenjiandongx/pyecharts/blob/master/document/en-us/documentation.md#Global-options)
 
@@ -1945,7 +1945,7 @@ wordcloud.add("", name, value, word_size_range=[20, 100])
 wordcloud.show_config()
 wordcloud.render()
 ```
-![wordcloud-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/wordcloud-0.png)
+![wordcloud-0](https://raw.githubusercontent.com/pyecharts/pyecharts/master/images/wordcloud-0.png)
 
 ```python
 wordcloud = WordCloud(width=1300, height=620)
@@ -1953,7 +1953,7 @@ wordcloud.add("", name, value, word_size_range=[30, 100], shape='diamond')
 wordcloud.show_config()
 wordcloud.render()
 ```
-![wordcloud-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/wordcloud-1.png)
+![wordcloud-1](https://raw.githubusercontent.com/pyecharts/pyecharts/master/images/wordcloud-1.png)
 
 **Tip：** if and only if shape is default'circle' the rotate_step parameter will take effect.
 
@@ -1993,7 +1993,7 @@ bar.custom(line.get_series())
 bar.show_config()
 bar.render()
 ```
-![custom-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/custom-0.gif)
+![custom-0](https://raw.githubusercontent.com/pyecharts/pyecharts/master/images/custom-0.gif)
 
 Specific procedure are as follows:
 1. initialize the chart,add normal configuration item.
@@ -2021,7 +2021,7 @@ es.custom(es_1.get_series())
 es.show_config()
 es.render()
 ```
-![custom-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/custom-1.gif)
+![custom-1](https://raw.githubusercontent.com/pyecharts/pyecharts/master/images/custom-1.gif)
 
 Kline + Line
 ```python
@@ -2056,7 +2056,7 @@ kline.custom(line_2.get_series())
 kline.show_config()
 kline.render()
 ```
-![custom-2](https://github.com/chenjiandongx/pyecharts/blob/master/images/custom-2.png)
+![custom-2](https://raw.githubusercontent.com/pyecharts/pyecharts/master/images/custom-2.png)
 
 ## Combination different types of chart and draw on multiple picture,the chart parallel disply.
 User Can Combination Custom  Line/Bar/Kline/Scatter/EffectScatter/Pie/HeatMap chart,draw different types of chart on multiple image.Using the first chart as basement
@@ -2112,7 +2112,7 @@ bar.grid(line.get_series(), grid_top="60%")
 bar.show_config()
 bar.render()
 ```
-![grid-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/grid-0.gif)
+![grid-0](https://raw.githubusercontent.com/pyecharts/pyecharts/master/images/grid-0.gif)
 
 **once more Tip：** ```bar.grid(line.get_series(), grid_top="60%")``` do not write ```bar.grid(bar.get_series())``` or get into edless recursion
 
@@ -2138,7 +2138,7 @@ scatter.grid(es.get_series(), grid_right="60%")
 scatter.show_config()
 scatter.render()
 ```
-![grid-1](https://github.com/chenjiandongx/pyecharts/blob/master/images/grid-1.gif)
+![grid-1](https://raw.githubusercontent.com/pyecharts/pyecharts/master/images/grid-1.gif)
 
 up,down,left and right type,Bar + Line + Scatter + EffectScatter
 ```python
@@ -2168,7 +2168,7 @@ bar.grid(es.get_series(), grid_top="60%", grid_right="60%")
 bar.show_config()
 bar.render()
 ```
-![grid-2](https://github.com/chenjiandongx/pyecharts/blob/master/images/grid-2.gif)
+![grid-2](https://raw.githubusercontent.com/pyecharts/pyecharts/master/images/grid-2.gif)
 
 Line +  Pie
 ```python
@@ -2188,7 +2188,7 @@ line.grid(pie.get_series(), grid_left="60%")
 line.show_config()
 line.render()
 ```
-![grid-3](https://github.com/chenjiandongx/pyecharts/blob/master/images/grid-3.png)
+![grid-3](https://raw.githubusercontent.com/pyecharts/pyecharts/master/images/grid-3.png)
 
 Line + Kline
 ```python
@@ -2224,7 +2224,7 @@ line.grid(kline.get_series(), grid_left="55%")
 line.show_config()
 line.render()
 ```
-![grid-4](https://github.com/chenjiandongx/pyecharts/blob/master/images/grid-4.png)
+![grid-4](https://raw.githubusercontent.com/pyecharts/pyecharts/master/images/grid-4.png)
 
 HeatMap + Bar
 ```python
@@ -2249,7 +2249,7 @@ heatmap.grid(bar.get_series(), grid_top="60%")
 heatmap.show_config()
 heatmap.render()
 ```
-![grid-5](https://github.com/chenjiandongx/pyecharts/blob/master/images/grid-5.gif)
+![grid-5](https://raw.githubusercontent.com/pyecharts/pyecharts/master/images/grid-5.gif)
 Bar will influenced by HeatMap,it's funy.
 
 # Multiple charts in one html page
@@ -2292,7 +2292,7 @@ page.render()  # step 3
 
 After executing above code, you will find two charts in render.html:
 
-![multiple-charts-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/multiple-charts-0.gif)
+![multiple-charts-0](https://raw.githubusercontent.com/pyecharts/pyecharts/master/images/multiple-charts-0.gif)
 
 # Flask and Django Integration Documentation
 
