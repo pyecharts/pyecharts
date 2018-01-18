@@ -1,5 +1,5 @@
 ### 确认你已安装了最新版本的 pyecharts
-> `pyecharts.__version__` 可查看当前 pyecharts 版本，更多版本信息请查看 [changelog.md](https://github.com/chenjiandongx/pyecharts/blob/master/changelog.md) **强烈推荐阅读**！
+> `pyecharts.__version__` 可查看当前 pyecharts 版本，更多版本信息请查看 [changelog.md](https://github.com/pyecharts/pyecharts/blob/master/changelog.md) **强烈推荐阅读**！
 
 **Note：** 推荐使用 pyecharts 的最新版本！！
 
@@ -12,7 +12,7 @@ bar.add("服装", ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "�
 bar.show_config()
 bar.render()
 ```
-![guide-0](https://raw.githubusercontent.com/pyecharts/pyecharts/master/images/guide-0.png)
+![guide-0](https://user-images.githubusercontent.com/19553554/35103909-3ee41ba2-fca2-11e7-87be-1a3585b9e0fa.png)
 
 
 * ```add()```  
@@ -32,7 +32,7 @@ bar.add("服装", ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "�
         is_more_utils=True)
 bar.render()
 ```
-![guide-1](https://raw.githubusercontent.com/pyecharts/pyecharts/master/images/guide-1.png)
+![guide-1](https://user-images.githubusercontent.com/19553554/35104150-f31e1b7c-fca2-11e7-81cf-a12bf1629e02.png)
 
 ### 使用 pyecharts-snapshot 插件
 如果想直接将图片保存为 png, pdf, gif 格式的文件，可以使用 [pyecharts-snapshot](https://github.com/pyecharts/pyecharts-snapshot)。使用该插件请确保你的系统上已经安装了 node.js 环境，如果没有，请到这里下载 [https://nodejs.org/en/download/](https://nodejs.org/en/download/)
@@ -150,7 +150,7 @@ cast(seq)
 ### Pandas&Numpy 简单示例
 如果使用的是 Numpy 或者 Pandas，可以参考这个示例
 
-![pandas-numpy](https://raw.githubusercontent.com/pyecharts/pyecharts/master/images/pandas-numpy.png)
+![pandas-numpy](https://user-images.githubusercontent.com/19553554/35104252-3e36cee2-fca3-11e7-8e43-09bbe8dbbd1e.png)
 
 **Note：** 使用 Pandas&Numpy 时，整数类型请确保为 int，而不是 numpy.int32
 
@@ -159,15 +159,15 @@ cast(seq)
 
 比如这样  
 
-![notebook-0](https://raw.githubusercontent.com/pyecharts/pyecharts/master/images/notebook-0.gif)
+![notebook-0](https://user-images.githubusercontent.com/19553554/35104153-f6256212-fca2-11e7-854c-bacc61eabf6f.gif)
 
 还有这样
 
-![notebook-1](https://raw.githubusercontent.com/pyecharts/pyecharts/master/images/notebook-1.gif)
+![notebook-1](https://user-images.githubusercontent.com/19553554/35104157-fa39e170-fca2-11e7-9738-1547e22914a6.gif)
 
 如果使用的是自定义类，直接调用自定义类示例即可
 
-![notebook-2](https://raw.githubusercontent.com/pyecharts/pyecharts/master/images/notebook-2.gif)
+![notebook-2](https://user-images.githubusercontent.com/19553554/35104165-fe9765da-fca2-11e7-8126-920158616b99.gif)
 
 更多 Jupyter notebook 的例子请参考 [notebook-use-cases](https://github.com/pyecharts/pyecharts-users-cases)。可下载后运行看看。
 
