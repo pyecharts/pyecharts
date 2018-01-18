@@ -1,4 +1,4 @@
-# [pyecharts](https://github.com/chenjiandongx/pyecharts) [![Build Status](https://travis-ci.org/chenjiandongx/pyecharts.svg?branch=master)](https://travis-ci.org/chenjiandongx/pyecharts) [![codecov](https://codecov.io/gh/chenjiandongx/pyecharts/branch/master/graph/badge.svg)](https://codecov.io/gh/chenjiandongx/pyecharts) [![PyPI version](https://badge.fury.io/py/pyecharts.svg)](https://badge.fury.io/py/pyecharts) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+# [pyecharts](https://github.com/chenjiandongx/pyecharts) [![Build Status](https://travis-ci.org/pyecharts/pyecharts.svg?branch=master)](https://travis-ci.org/pyecharts/pyecharts) [![codecov](https://codecov.io/gh/pyecharts/pyecharts/branch/master/graph/badge.svg)](https://codecov.io/gh/pyecharts/pyecharts) [![PyPI version](https://badge.fury.io/py/pyecharts.svg)](https://badge.fury.io/py/pyecharts) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 > pyecharts is a library to generate charts using Echarts. It simply provides the interface between Echarts and Python.
 
