@@ -1,17 +1,5 @@
 # Developer's Guide
 
-## Map extension architecture
-
-Due to size constraints, echarts-countries-js and other potential map extensions have been
-made optional. In order to cater edge use cases involving geo-map, this architecture
-helps developer to pick the map extension for their needs.
-
-![customize-map-0](https://raw.githubusercontent.com/chenjiandongx/pyecharts/master/images/map-extension-architecture.png)
-
-Internally, pyecharts will read built-in jupyter-echarts project from python's site packages and read optional map packages from user home's .pyecharts folder.
-![customize-map-0](https://raw.githubusercontent.com/chenjiandongx/pyecharts/master/images/installation-path.png)
-
-
 ## Pull request instructions
 
 `dev` branch is for the development of each new releases. `master` branch is reserved for released code only. What it means for contributors is:
