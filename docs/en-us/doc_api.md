@@ -83,7 +83,11 @@ Data type:dict.The config options for a chart。Each chart has its own format an
 
 **js_dependencies**
 
-Data type:set.The js filename collections for a chart's dependencies.Every element do not contain the filename extension(.js).E.g `{'echarts.min', 'fujian'}` .
+*Changed in v0.4*
+
+Data type:list.The js filename collections for a chart's dependencies.Every element do not contain the filename extension(.js).E.g `{'echarts.min', 'fujian'}` .
+
+> In previous v0.4, the js_dependencies returns a unordered set.
 
 
 ### Methods

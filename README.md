@@ -18,13 +18,8 @@ pyecharts handles all strings and files with unicode encoding and you **MUST** u
 from __future__ import unicode_literals
 ```
 
-### Jupyter Notebook
-Make sure you hava installed jupyter-notebook enviroment if you want to show your charts on notebook.   
-How to install it?
-```
-$ pip install notebook
-```
 ### pyecharts
+
 You can install it via pip
 ```
 $ pip install pyecharts
@@ -82,13 +77,9 @@ In the case of online jshost mode,you can also download as some file formats (ip
 
 With the help of pyecharts API,it is easy to integrate pyecharts to your web projects, such as Flask and Django.
 
-Flask
+Demo
 
 ![flask-0](https://github.com/pyecharts/pyecharts/blob/master/images/flask-0.gif)
-
-Django
-
-![django-0](https://github.com/pyecharts/pyecharts/blob/master/images/django-0.gif)
 
 ## Advance Topics
 
