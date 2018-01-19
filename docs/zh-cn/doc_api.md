@@ -45,18 +45,6 @@ js 文件仓库路径。可以设置本地或者远程地址。所有的远程�
 
 是否强制采用内部嵌入方式渲染js文件标签， `echarts_js_dependencies`  模板函数受此影响，具体可参考该函数。
 
-### 配置方法
-
-类 `PyEchartsConfig` 拥有一些在实际运行过程中访问配置的方法。
-
-**get_current_jshost_for_script**
-
-获取纯 Python 环境下 jshost 的值。
-
-**get_current_jshost_for_jupyter**
-
-获取 Jupyter Notebook 环境中 jshost 的值。当 jshost 没有设置或者为本地路径时，返回路径将替换为 Jupyter Notebook nbextension 中的路径。
-
 ## 图表类
 
 图表类是 pyecharts 库中最为核心的内容，每一个类代表了 [Echarts](http://echarts.baidu.com/) 中一个图表类型。下表显示了这些图表的继承体系。
@@ -81,11 +69,13 @@ js 文件仓库路径。可以设置本地或者远程地址。所有的远程�
 
 **width**
 
-数字类型(number)或字符串(str)。图表容器 div 的宽度，以 px 为单位。
+数字类型(number)或字符串(str)。图表容器 div 的宽度，接收一个有效 css 长度形式的字符串；如果是数字，以 px 为单位。
 
 **height**
 
-数字类型(number)或字符串(str)。图表容器 div 的高度，以 px 为单位。
+数字类型(number)或字符串(str)。图表容器 div 的高度，接收一个有效 css 长度形式的字符串；如果是数字，以 px 为单位。
+
+> chart_id、width、height 三个属性同时可设置。
 
 **options**
 
@@ -93,9 +83,9 @@ js 文件仓库路径。可以设置本地或者远程地址。所有的远程�
 
 **js_dependencies**
 
-集合类型(set)，js 依赖文件名称列表，元素不包含文件后缀(.js)，如 `{'echarts.min', 'fujian'}` 。
+列表类型(list)，js 依赖文件名称列表，元素不包含文件后缀(.js)，如 `{'echarts.min', 'fujian'}` 。
 
-
+> 从v0.4开始，pyecharts 重写了  `js_dependencies` 的生成逻辑，目前返回的是有序、元素唯一的列表对象。另外还可以通过 `pyecharts.utils.merge_js_dependencies` 函数合并若干个图表的 js 依赖文件。
 
 ### 方法
 
@@ -261,7 +251,7 @@ pyecharts 内置的引擎提供了一些模板函数，这些函数通常接收�
 | `/template/js/echarts`                   | 本地    | 内嵌                     | 本地生成单一文件，直接移植 | 此为默认是设置            |
 | `'https://chfw.github.io/jupyter-echarts/echarts'` | 远程    | 内嵌                     | 生成单一文件        | 使用 `online` 可切换到此项 |
 | 其他本地模式 (如 `/static/js`)                  | 本地    | 外链，可以通过force_embed改成内嵌 | 可用于web框架整合    |                    |
-| 其他远程模式（如 `hthttps://cdn.bootcss.com/echarts/3.7.2`） | 远程    | 外链                     | 使用外部js，需依赖网络  |                   |
+| 其他远程模式（如 `hthttps://cdn.bootcss.com/echarts/3.7.2`） | 远程    | 外链                     | 使用外部js，需依赖网络  |                    |
 
 
 例子
