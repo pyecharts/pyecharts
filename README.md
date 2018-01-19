@@ -49,7 +49,7 @@ bar.add("evaporation", attr, v2, mark_line=["average"], mark_point=["max", "min"
 bar.render()
 ```
 
-It will create a file named *render.html* in the root directory, open file with your borwser.  
+It will create a file named *render.html* in the root directory, open file with your borwser.
 
 ![usage-0](https://github.com/pyecharts/pyecharts/blob/master/images/usage-0.gif)
 
