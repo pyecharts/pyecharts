@@ -71,7 +71,7 @@ All chart classes in pyecharts implement the `_repr_html_` interface about [IPyt
 
 In the case of online jshost mode,you can also download as some file formats (ipynb/py/html/pdf) and run without jupyter notebook enviromnment.
 
-![pandas_numpy](https://github.com/pyecharts/pyecharts/blob/master/images/pandas-numpy.png)
+![pandas_numpy](https://user-images.githubusercontent.com/19553554/35104252-3e36cee2-fca3-11e7-8e43-09bbe8dbbd1e.png)
 
 ### Integrate With Web Framework
 
@@ -79,7 +79,7 @@ With the help of pyecharts API,it is easy to integrate pyecharts to your web pro
 
 Demo
 
-![flask-0](https://github.com/pyecharts/pyecharts/blob/master/images/flask-0.gif)
+![flask-0](https://user-images.githubusercontent.com/19553554/35081158-3faa7c34-fc4d-11e7-80c9-2de79371374f.gif)
 
 ## Advance Topics
 

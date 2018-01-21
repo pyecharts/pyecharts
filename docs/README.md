@@ -1,13 +1,8 @@
-# 文档
-
-
-**安装**
-
-安装 | Python兼容性
+# pyecharts文档
 
 **基本使用**
 
-[渲染图表](zh-cn/doc_prepare) | [图表配置](zh-cn/doc_charts)
+安装 | [渲染图表](zh-cn/doc_prepare) | [图表配置](zh-cn/doc_charts)
 
 **高级话题**
 
@@ -23,4 +18,4 @@
 
 **项目开发**
 
-版本日志 | [开发团队](https://github.com/pyecharts) | [FAQ](zh-cn/doc_faq)
+[版本日志](zh-cn/changelog) | [发布日志](zh-cn/release-note) | [开发团队](https://github.com/pyecharts) | [FAQ](zh-cn/doc_faq)
