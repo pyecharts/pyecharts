@@ -115,8 +115,7 @@ pip install -r test\requirements.txt
 And run with the [nose](https://nose.readthedocs.io/en/latest/) commands.
 
 ```shell
-$ cd test
-$ nosetests --with-coverage --cover-package pyecharts --cover-package test
+$ make
 ```
 
 ### Quality Assurance

@@ -6,7 +6,7 @@ You can show charts and export to some file formats in the Jupyter Notebook.
 
 ## Installation
 
-When install the *pyecharts* package using the following command, a jupyter nbextension named *echarts/mian* will be installed if jupyter exists.Or the nbextension installation will be skipped.
+When install the *pyecharts* package using the following command, a jupyter nbextension named *echarts/main* will be installed if jupyter exists.Or the nbextension installation will be skipped.
 
 ```shell
 pip install pyecharts
