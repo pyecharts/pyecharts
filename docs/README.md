@@ -10,7 +10,7 @@
 
 **平台支持**
 
-[Jupyter Notebook](zh-cn/doc_jupyter_notebook) | [Flask](zh-cn/doc_flask) | [Django](zh-cn/doc_django) | [web框架整合](zh-cn/doc_web_integration)
+[Jupyter Notebook](zh-cn/doc_jupyter_notebook) | [web框架整合](zh-cn/doc_web_integration)
 
 **其他资源**
 
