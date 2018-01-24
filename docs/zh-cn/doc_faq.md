@@ -1,6 +1,6 @@
 > FAQ 篇：本文档主要介绍一些常见问题及解决方案
 
-**Q:jupyter绘画大量图后，图表无法显示，并提示 temporarily stop sending output ？**
+**Q:jupyter 绘画大量图后，图表无法显示，并提示 temporarily stop sending output ？**
 
 A:jupyter-notebook console output 具体提示信息如下：
 
@@ -12,7 +12,7 @@ IOPub data rate exceeded.
     `--NotebookApp.iopub_data_rate_limit`.
 ```
 
-根据以上的提示，需要修改找到配置文件（通常为jupyter_notebook_config.py），并修改 iopub_data_rate_limit 为更大的数值。
+根据以上的提示，需要修改找到配置文件（通常为 jupyter_notebook_config.py），并修改 iopub_data_rate_limit 为更大的数值。
 
 ```
 ## (bytes/sec) Maximum rate at which messages can be sent on iopub before they
@@ -44,7 +44,7 @@ git submodule update
 
 **Q:pyecharts 是否支持  jupyterlab?**
 
-A: 暂不支持。 jupyterlab应该是下一代 jupyter notebook 的雏形。欢迎大家提交相关 PR。
+A: 暂不支持。 jupyterlab 应该是下一代 jupyter notebook 的雏形。欢迎大家提交相关 PR。
 
 **Q:怎么设置 echarts 主题？**
 
@@ -58,8 +58,7 @@ A: 目前暂时无法支持。因为暂无法将 python 函数通过 json 转换
 
 A:请检查是否将测试文件命名为 pyecharts.py，如若是请重命名该文件。
 
-**Q:使用pyinstaller的单文件模式打包后无法加载js等静态文件？**
+**Q:使用 pyinstaller 的单文件模式打包后无法加载 js 等静态文件？**
 
 A:目前 pyecharts 暂时未开放这部分的API，没有考虑到打包后的资源文件路径的兼容问题。建议使用文件夹/多文件模式。
-
 如果确实需要使用单文件模式，可参考 [《Python打包工具》](https://kinegratii.github.io/2016/04/23/python-package/) 这篇文章了解相关原理后进行源码修改。
