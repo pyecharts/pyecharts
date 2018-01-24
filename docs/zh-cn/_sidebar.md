@@ -4,5 +4,6 @@
 - [pyecharts+Flask](zh-cn/doc_flask)
 - [pyecharts+Django](zh-cn/doc_django)
 - [Web 整合](zh-cn/doc_web_integration)
+- [艺术展](zh-cn/doc_gallery)
 - [API](zh-cn/doc_api)
 - [FAQ](zh-cn/doc_faq)
