@@ -1,5 +1,7 @@
 - [Charts](en-us/doc_charts)
 - [pyecharts+Flask](en-us/doc_flask)
 - [pyecharts+Django](en-us/doc_django)
+- [pyecharts+Flask](en-us/doc_flask)
+- [pyecharts+Django](en-us/doc_django)
 - [Web integration](en-us/doc_web_integration)
 - [API](en-us/doc_api)

@@ -15,6 +15,7 @@ polar.render()
 ```
 ![example-0](https://user-images.githubusercontent.com/19553554/35080754-8a01a508-fc4a-11e7-8be4-5da46e27103d.png)
 
+
 用极坐标系画出一朵小花
 ```python
 import math
@@ -43,8 +44,8 @@ for i in range(361):
     r = math.sin(2 * t) * math.cos(2 * t)
     data.append([r, i])
 polar = Polar("极坐标系示例", width=1200, height=600)
-polar.add("Color-Flower", data, start_angle=0, symbol=None, axis_range=[0, None],
-          area_color="#f71f24", area_opacity=0.6)
+polar.add("Color-Flower", data, start_angle=0, symbol=None,
+          axis_range=[0, None], area_color="#f71f24", area_opacity=0.6)
 polar.render()
 ```
 ![example-2](https://user-images.githubusercontent.com/19553554/35080790-c61a8ac8-fc4a-11e7-9a47-8e352b944358.png)
@@ -99,9 +100,9 @@ for i in range(5):
         r = math.pow(math.e, 0.003 * alpha)
         data.append([r, theta])
 polar = Polar("极坐标系示例")
-polar.add("", data, symbol_size=0, symbol='circle', start_angle=-25, is_radiusaxis_show=False,
-          area_color="#f3c5b3", area_opacity=0.5, is_angleaxis_show=False)
+polar.add("", data, symbol_size=0, symbol='circle', start_angle=-25,
+          is_radiusaxis_show=False, area_color="#f3c5b3",
+          area_opacity=0.5, is_angleaxis_show=False)
 polar.render()
 ```
 ![example-6](https://user-images.githubusercontent.com/19553554/35080856-3cc8eaf2-fc4b-11e7-8ba8-5fdc9e3c64e8.png)
-
