@@ -32,12 +32,11 @@ Known nbextensions:
 ```
 
 
-
 ## 显示图表
 
 在 Cell 中，可以直接调用实例本身实例来显示图表，目前所有的类已经实现了  [IPython Rich Display](http://ipython.readthedocs.io/en/stable/config/integrating.html#rich-display) 的 `_repr_html_` 方法。
 
-![pandas_numpy](https://github.com/pyecharts/pyecharts/blob/master/images/pandas-numpy.png)
+![pandas-numpy](https://user-images.githubusercontent.com/19553554/35104252-3e36cee2-fca3-11e7-8e43-09bbe8dbbd1e.png)
 
 ## 导出功能
 
@@ -58,4 +57,3 @@ online(host='https://my-site.com')
 ## jupyterlab
 
 [jupyterlab](https://github.com/jupyterlab/jupyterlab) 是下一代 Jupyter Notebook ，目前尚处于发展的雏形之中。我们将进一步关注项目发展，尽可能第一时间实现 pyecharts 的适配，敬请期待。
-
