@@ -31,3 +31,6 @@
 * https://github.com/danyubaoqi
 * https://github.com/Rayww
 * https://github.com/Koooooo-7
+* https://github.com/morgengu
+* https://github.com/cmcc11
+
