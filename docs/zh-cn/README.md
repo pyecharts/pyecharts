@@ -6,9 +6,16 @@ pyecharts 是一个用于生成 Echarts 图表的类库。Echarts 是百度开�
 
 # pyecharts文档
 
+**安装**
+
+```
+pip install pyecharts
+```
+
+
 **基本使用**
 
-安装 | [渲染图表](zh-cn/doc_prepare) | [图表配置](zh-cn/doc_charts)
+[渲染图表](zh-cn/doc_prepare) | [图表配置](zh-cn/doc_charts)
 
 **高级话题**
 
@@ -16,7 +23,7 @@ pyecharts 是一个用于生成 Echarts 图表的类库。Echarts 是百度开�
 
 **平台支持**
 
-[Jupyter Notebook](zh-cn/doc_jupyter_notebook) | [web框架整合](zh-cn/doc_web_integration)
+[Jupyter Notebook](zh-cn/doc_jupyter_notebook) | [Flask](zh-cn/doc_flask) | [Django](zh-cn/doc_django) |  [web框架整合](zh-cn/doc_web_integration)
 
 **其他资源**
 

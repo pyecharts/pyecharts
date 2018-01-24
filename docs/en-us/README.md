@@ -16,7 +16,7 @@ Installation | [Chart Render](en-us/doc_prepare) | [Chart Options](en-us/doc_cha
 
 **Platform Support**
 
-[Jupyter Notebook](en-us/doc_jupyter_notebook) | [Web Integration](en-us/doc_web_integration)
+[Jupyter Notebook](en-us/doc_jupyter_notebook) | [Flask](en-us/doc_flask) | [Django](en-us/doc_django) | [Web Integration](en-us/doc_web_integration)
 
 **Other Resources**
 

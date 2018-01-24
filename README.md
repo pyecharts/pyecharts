@@ -128,7 +128,7 @@ The project is developed with [Travis CI](https://travis-ci.org/) .
 
 ## Author
 
-pyecharts is developed and maintained by chenjiandongx ([chenjiandongx@qq.com](chenjiandongx@qq.com))
+[![chenjiandongx](https://user-images.githubusercontent.com/19553554/35315207-02ea37ea-0106-11e8-9f9f-8fb26922c492.png)](https://github.com/chenjiandongx)  [![chfw](https://user-images.githubusercontent.com/19553554/35315208-032a38a4-0106-11e8-85f1-7f601330027f.png)](https://github.com/chfw)  [![kinegratii](https://user-images.githubusercontent.com/19553554/35315209-0368f8fa-0106-11e8-99f6-c71d7624a2c9.png)](https://github.com/kinegratii)
 
 ## License
 pyecharts is released under the MIT License. See LICENSE for more information.
