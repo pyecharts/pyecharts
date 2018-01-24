@@ -32,13 +32,12 @@ def test_line_user_define_markpoint():
 def test_line_user_define_marks():
     line = Line("折线图示例")
     line.add("商家A", CLOTHES, clothes_v1,
-             mark_point=["average", "max", "min"],
+             mark_point=["average", "max", "min"], symbol_size=50,
              mark_point_symbol='diamond', mark_point_textcolor='#40ff27')
     line.add("商家B", CLOTHES, clothes_v2,
              mark_point=["average", "max", "min"],
              mark_point_symbol='arrow', mark_point_symbolsize=40)
-    line.show_config()
-    line.render()
+    assert '"symbolSize":50' not in line._repr_html_()
 
 
 def test_line_negative_value():
