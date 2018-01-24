@@ -3,6 +3,6 @@
 - [地图自定义](zh-cn/doc_customize_map)
 - [pyecharts+Flask](zh-cn/doc_flask)
 - [pyecharts+Django](zh-cn/doc_django)
-- [Web整合](zh-cn/doc_web_integration)
+- [Web 整合](zh-cn/doc_web_integration)
 - [API](zh-cn/doc_api)
 - [FAQ](zh-cn/doc_faq)

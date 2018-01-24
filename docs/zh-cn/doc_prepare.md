@@ -94,7 +94,7 @@ online()
 ...
 ```
 
-这样，所有的脚本会从 http://pyecharts.github.io/jupyter-echarts/echarts 下载。如果你连不上 Github, 你可以先把 https://github.com/pyecharts/jupyter-echarts 克隆一下。然后在你自己的服务器上，把整个 echarts 挂上去。  
+这样，所有的脚本会从 https://pyecharts.github.io/jupyter-echarts/echarts 下载。如果你连不上 Github, 你可以先把 https://github.com/pyecharts/jupyter-echarts 克隆一下。然后在你自己的服务器上，把整个 echarts 挂上去。  
 
 下面我简单示范一下  
 
