@@ -4,19 +4,11 @@
 
 
 ## Introduction
-[Echarts](https://github.com/ecomfe/echarts) is an open source library from Baidu for data visualization in javascript. It has awesome demo pages so I started to look out for an interface library so that I could use it in Python. I ended up with [echarts-python](https://github.com/yufeiminds/echarts-python) on github but it lacks of documentation and was not updated for a while. Just like many other Python projects, I started my own project, pyecharts, referencing echarts-python and another library [pygal](https://github.com/Kozea/pygal).
+[Echarts](https://github.com/ecomfe/echarts) is an open source library from Baidu for data visualization tool written in javascript. It has awesome demo pages so I started to look out for an interface library so that I could use it in Python. I ended up with [echarts-python](https://github.com/yufeiminds/echarts-python) on github but it lacks of documentation and was not updated for a while. Just like many other Python projects, I started my own project, pyecharts, referencing echarts-python and another library [pygal](https://github.com/Kozea/pygal).
 
 ## Installation
-pyecharts works on Python2 and Python3. For more information please refer to [changelog.md](https://github.com/chenjiandongx/pyecharts/blob/master/changelog.md)
-
-### Jupyter-Notebook
-Make sure you hava installed jupyter-notebook enviroment if you want to show your charts on notebook.   
-How to install it?
-```
-$ pip install notebook
-```
-### pyecharts
-You can install it via pip
+Pyecharts works on Python2 and Python3. For more information please refer to [changelog.md](https://github.com/chenjiandongx/pyecharts/blob/master/changelog.md)
+### You can install it via pip
 ```
 $ pip install pyecharts -U
 ```
@@ -27,6 +19,13 @@ $ git clone --recursive https://github.com/chenjiandongx/pyecharts.git
 $ cd pyecharts
 $ pip install -r requirements.txt
 $ python setup.py install
+```
+
+### Jupyter-Notebook
+Make sure you hava installed jupyter-notebook enviroment if you want to show your charts on notebook.   
+How to install it?
+```
+$ pip install notebook
 ```
 
 ## Basic Usage
