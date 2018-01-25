@@ -1,10 +1,10 @@
 # [pyecharts](https://github.com/pyecharts/pyecharts) [![Build Status](https://travis-ci.org/pyecharts/pyecharts.svg?branch=master)](https://travis-ci.org/chenjiandongx/pyecharts) [![codecov](https://codecov.io/gh/chenjiandongx/pyecharts/branch/master/graph/badge.svg)](https://codecov.io/gh/chenjiandongx/pyecharts) [![PyPI version](https://badge.fury.io/py/pyecharts.svg)](https://badge.fury.io/py/pyecharts) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-> pyecharts is a library to generate charts using Echarts. It simply provides the interface of 28+ kinds of charts between Echarts and Python.
-
+> pyecharts is a Python library for Echarts by Baidu. It simply provides the morethan 28+ kinds of charts and more than 300+ maps of cities in China and 200+ countires and regions.
 
 ## Introduction
-[Echarts](https://github.com/ecomfe/echarts) is an open source library from Baidu for data visualization in javascript. It has awesome demo pages so I started to look out for an interface library so that I could use it in Python. I ended up with [echarts-python](https://github.com/yufeiminds/echarts-python) on github but it lacks of documentation and was not updated for a while. Just like many other Python projects, I started my own project, pyecharts, referencing echarts-python and another library [pygal](https://github.com/Kozea/pygal).
+[Echarts](https://github.com/ecomfe/echarts) is an open source library from Baidu for data visualization library written in JavaScript. It has awesome [demos](https://ecomfe.github.io/echarts-examples/public/index.html) so I started to look out for an library written in Python. I ended up with [echarts-python](https://github.com/yufeiminds/echarts-python) on github but it lacks of documentation and was not updated for a while. Just like many other Python projects, I started my own project, pyecharts, referencing echarts-python and another library [pygal](https://github.com/Kozea/pygal).
+
 
 ## Installation
 ### Python Compatibility
@@ -18,14 +18,12 @@ pyecharts handles all strings and files with unicode encoding and you **MUST** u
 from __future__ import unicode_literals
 ```
 
-### pyecharts
-
-You can install it via pip
+#### You can install it via pip
 ```
 $ pip install pyecharts
 ```
 
-or clone it and install it
+#### or clone it and install it
 ```
 $ git clone --recursive https://github.com/pyecharts/pyecharts.git
 $ cd pyecharts
@@ -35,7 +33,7 @@ $ python setup.py install
 
 ## Basic Usage
 
-### Render to Local Html File
+### Render to Local HTML File
 
 ```python
 from pyecharts import Bar
@@ -53,7 +51,7 @@ It will create a file named *render.html* in the root directory, open file with 
 
 ![usage-0](https://github.com/pyecharts/pyecharts/blob/master/images/usage-0.gif)
 
-### Export as Images or Pdf
+### Export to Image or PDF
 
 [pyecharts-snapshot](https://github.com/pyecharts/pyecharts-snapshot) is a library which renders the output of pyecharts as a png, jpeg, gif image or a pdf file at command line or in your code.
 
@@ -65,11 +63,11 @@ pyecharts exposes chart API and template API so that it can work on some common 
 
 ### Work on Jupyter Notebook
 
-In the Notebook cell ,you can simply call the instance itself to diplay the chart.
+In the Notebook cell, you can simply call the instance itself to diplay the chart.
 
 All chart classes in pyecharts implement the `_repr_html_` interface about [IPython Rich Display](http://ipython.readthedocs.io/en/stable/config/integrating.html#rich-display) .
 
-In the case of online jshost mode,you can also download as some file formats (ipynb/py/html/pdf) and run without jupyter notebook enviromnment.
+In the case of online jshost mode,you can also download as some file formats (ipynb/py/html/pdf) and run without Jupyter notebook enviromnment.
 
 ![pandas_numpy](https://user-images.githubusercontent.com/19553554/35104252-3e36cee2-fca3-11e7-8e43-09bbe8dbbd1e.png)
 
