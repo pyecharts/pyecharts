@@ -7,15 +7,15 @@
 
 **Basic Usage**
 
-Installation | [Chart Render](en-us/doc_prepare) | [Chart Options](en-us/doc_charts)
+Installation | [Chart Render](en-us/prepare) | [Chart Options](en-us/charts)
 
 **Advance Topics**
 
-[Chart API](en-us/doc_api) | [Custom Map](en-us/doc_customize_map)
+[Chart API](en-us/api) | [Custom Map](en-us/customize_map)
 
 **Platform Support**
 
-[Jupyter Notebook](en-us/doc_jupyter_notebook) | [Flask](en-us/doc_flask) | [Django](en-us/doc_django) | [Web Integration](en-us/doc_web_integration)
+[Jupyter Notebook](en-us/jupyter_notebook) | [Flask](en-us/flask) | [Django](en-us/django) | [Web Integration](en-us/web_integration)
 
 **Other Resources**
 
@@ -23,4 +23,4 @@ Installation | [Chart Render](en-us/doc_prepare) | [Chart Options](en-us/doc_cha
 
 **Development**
 
-[Changelog](en-us/changelog) | [Release Note](en-us/release-note) | [Team](https://github.com/pyecharts) | [FAQ](en-us/doc_faq)
+[Changelog](en-us/changelog) | [Release Note](en-us/release-note) | [Team](https://github.com/pyecharts) | [FAQ](en-us/faq)
