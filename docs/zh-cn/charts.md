@@ -3560,8 +3560,8 @@ style = Style(
     title_pos="center",
     width=1100,
     height=600,
-    background_color='#404a59'
-}
+    background_color='#404a59'
+)
 # style,init_style 会返回类初始化的风格配置字典
 geo = Geo("全国主要城市空气质量", "data from pm2.5", **style.init_style)
 ```
@@ -3575,7 +3575,7 @@ pie_style = style.add(
     label_pos="center",
     is_label_show=True,
     label_text_color=None
-}
+)
 pie.add("", ["剧情", ""], [25, 75], center=[10, 30], **pie_style)
 pie.add("", ["奇幻", ""], [24, 76], center=[30, 30], **pie_style)
 pie.add("", ["爱情", ""], [14, 86], center=[50, 30], **pie_style)
