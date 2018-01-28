@@ -2,3 +2,4 @@ jinja2>=2.8
 future
 pillow
 jupyter-pip>=0.3.1
+.
