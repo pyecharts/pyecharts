@@ -7,7 +7,7 @@
 
 **Basic Usage**
 
-Installation | [Chart Render](en-us/prepare) | [Chart Options](en-us/charts)
+[Chart Render](en-us/prepare) | [Chart Options](en-us/charts)
 
 **Advance Topics**
 
@@ -23,4 +23,4 @@ Installation | [Chart Render](en-us/prepare) | [Chart Options](en-us/charts)
 
 **Development**
 
-[Changelog](en-us/changelog) | [Release Note](en-us/release-note) | [Team](https://github.com/pyecharts) | [FAQ](en-us/faq)
+[Changelog](en-us/changelog) | [Release Note](en-us/release-note) | [Team](en-us/team) | [FAQ](en-us/faq)
