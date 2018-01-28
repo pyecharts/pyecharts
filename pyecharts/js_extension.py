@@ -43,8 +43,8 @@ class JsExtension(object):
         else:
             return None
 
-    def produce_require_config_syntax(self,
-                                      pinyin, jshost=None, use_github=False):
+    def produce_require_config_syntax(
+            self, pinyin, jshost=None, use_github=False):
         filename = self.get_js_library(pinyin)
         if filename:
             jshost = self._resolve_jshost(jshost, use_github)
@@ -64,12 +64,14 @@ class JsExtension(object):
 
 def load_all_extensions():
     pyecharts_dir = _get_pyecharts_dir()
-    extensions = [JsExtension(DEFAULT_ECHARTS_LOCATION)]
+    extensions = []
     pinyin_db = {}
     if os.path.exists(pyecharts_dir):
         for adir in os.listdir(pyecharts_dir):
             extensions.append(
                 JsExtension(os.path.join(pyecharts_dir, adir)))
+    else:
+        raise Exception("No javascripts library installed")
 
     for extension in extensions:
         pinyin_db.update(extension.registry.get('PINYIN_MAP'))
