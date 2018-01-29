@@ -16,23 +16,6 @@ It uses plantuml and please get it from [its website](http://plantuml.com).
 jar -jar plantuml.jar class-relationship-diagram.uml.
 ```
 
-## Why the folder `pyecharts/templates/js` is empty?
-
-It is because your git did not update the submodule. Please issue the following command:
-
-```
-git submodule update --init --recursive
-```
-
-## How to merge chengjiandongx/master?
-
-Whenever you do the upstreaming, you are required to do an additional step because we have gotten a submodule:
-
-```
-git submodule update
-```
-
-
 ## How to add more javascript libraries to pyecharts
 
 All javascript libraries are now managed in a [submodule](https://git-scm.com/docs/git-submodule) [jupyter-echarts](https://github.com/chfw/jupyter-echarts). It means
