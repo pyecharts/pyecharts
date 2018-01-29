@@ -1,37 +1,48 @@
-# version log
+# 版本日志
 
-* ### version 0.4.0 (echarts-3-8-5 branch)
-    #### Updated
-    * 更新 jupyter-echarts 至 1.4.0: echarts 3.6.2 -> 3.8.5, echarts-gl 1.0.0-b4 -> 1.0.0-b6, echarts-liquidfill 1.0.5 -> 1.1.1, echarts-wordcloud 1.1.0 -> 1.1.2
 
-* ### version 0.3.2（dev）
+* ### version 0.4.0 (development)
+    
+    * 更新 jupyter-echarts 至 1.4.0: echarts 3.6.2 -> 4.0.2, echarts-gl 1.0.0-b4 -> 1.0.0-b6, echarts-liquidfill 1.0.5 -> 1.1.1, 
 
-    #### Updated
-    * 更新 jupyter-echarts 至 1.3.6: [台湾地图补了市，县，岛](https://github.com/pyecharts/pyecharts/pull/316), [重庆地图补了开州区](https://github.com/pyecharts/pyecharts/pull/317)
-    * 示例移到新的代码仓库 [pyecharts-users-cases](https://github.com/pyecharts/pyecharts-users-cases)
-    * 优化图表API，图表 js_dependencies 属性返回有序列表
-    * 图表 chart_id 支持可设置
-    * 优化部分代码逻辑
+* ### version 0.3.2 (development)
+
+    #### Added
+    * 新增 chart_id 配置项，可设置图形 id，对应为每个图在 html 中的 div#id
 
     #### Fixed
     * [issue#322](https://github.com/pyecharts/pyecharts/issues/322) 修复在 timeline 中不能设置多个 legend 的 bug
+    * [issue#357](https://github.com/pyecharts/pyecharts/issues/357) 修复 Line 图 symbol 大小不能调整的 bug
+
+    #### Updated
+    * 更新 jupyter-echarts 至 1.4.0: echarts 3.6.2 -> 3.8.5, echarts-gl 1.0.0-b4 -> 1.0.0-b6, echarts-liquidfill 1.0.5 -> 1.1.1, echarts-wordcloud 1.1.0 -> 1.1.2
+    * 地图更新：[台湾地图补了市，县，岛](https://github.com/pyecharts/pyecharts/pull/316), [重庆地图补了开州区](https://github.com/pyecharts/pyecharts/pull/317)
+    * 优化图表 API，图表 js_dependencies 属性返回有序列表
+    * 优化部分代码逻辑
+
+    #### Changed
+    * 示例移到新的代码仓库 [pyecharts-users-cases](https://github.com/pyecharts/pyecharts-users-cases)
     
 * ### version 0.3.1 - 2017.12.13（Current）
+
+    #### Fixed
     * [issue#290](https://github.com/pyecharts/pyecharts/issues/290) 紧急修复 v0.3.0 版本不能正常显示图形的严重 bug
     * [issue#296](https://github.com/pyecharts/pyecharts/issues/296) 修复 Timeline 不能在 notebook 中显示的 bug
 
 * ### version 0.3.0 - 2017.12.11
+
+    #### Added
     * 图表 `render` 方法增加 `template_name` 、`object_name`、`extra_context` 等参数，全面支持自定义模板
-    * 重写底层逻辑，支持在模板文件中使用 `echarts_*` 系列模板函数
-    * js 依赖文件支持外部链接方式引入。
     * 新增统一配置函数 `pyecharts.configure` ，支持设置模板目录，JS 文件仓库路径。
-    * `pyecharts.custom.Page` 类实现 `list` 协议，支持迭代、索引、添加、扩展等操作。
-    * 图表 width 和 height 支持 '50%' 、'78px' 等其他 css 有效长度形式。
     * [issue#252](https://github.com/pyecharts/pyecharts/issues/252) 新增 `xaxis_label_textsize`, `xaxis_label_textcolor`, `yaxis_label_textsize`, `yaxis_label_textcolor` 四个参数修改坐标轴标签的字体和颜色
     * [issue#258](https://github.com/pyecharts/pyecharts/issues/258) 新增 `mark_point_valuedim` 参数，并将 `mark_line_valuedim` 和 `mark_point_valuedim` 参数类型修改为 list。 
     * [issue#260](https://github.com/pyecharts/pyecharts/issues/260) 新增 `is_toolbox_show` 参数用于控制是否显示右侧实用工具箱。
 
     #### Updated
+    * 重写底层逻辑，支持在模板文件中使用 `echarts_*` 系列模板函数
+    * js 依赖文件支持外部链接方式引入。
+    * `pyecharts.custom.Page` 类实现 `list` 协议，支持迭代、索引、添加、扩展等操作。
+    * 图表 width 和 height 支持 '50%' 、'78px' 等其他 css 有效长度形式。
     * 更新 jupyter-echarts 至 1.3.3: [上海地图补了崇明区](https://github.com/pyecharts/jupyter-echarts/issues/9), [西藏地图补了山南市](https://github.com/pyecharts/jupyter-echarts/issues/7) 
 
 * ### version 0.2.7 - 2017.10.27
@@ -40,12 +51,12 @@
     * 新增 GeoLines（地理坐标系线图）
     * [issue#230](https://github.com/pyecharts/pyecharts/issues/230) 新增工具类 `Style`，用于简化代码编写和统一风格
 
+    #### Changed
+    * [issue#232](https://github.com/pyecharts/pyecharts/issues/232) Grid, Overlap, Timeline 类初始化参数的变动
+
     #### Fixed
     * 修复 Geo 系列名无法正常显示的问题
     * [issue#229](https://github.com/pyecharts/pyecharts/issues/229) 修复水球图不能自定义图形的问题
-
-    #### Changed
-    * [issue#232](https://github.com/pyecharts/pyecharts/issues/232) Grid, Overlap, Timeline 类初始化参数的变动
 
 * ### version 0.2.6 - 2017.10.14
 

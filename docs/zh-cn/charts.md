@@ -2447,7 +2447,7 @@ draw(path, color=None)
 
 首先你需要准备一张图片，如
 
-![pyecharts-0](https://raw.githubusercontent.com/pyecharts/pyecharts/master/images/pyecharts-0.png)
+![pyecharts-0](https://user-images.githubusercontent.com/19553554/35104421-c25a02f2-fca3-11e7-868d-d70bd86fdd76.png)
 
 ```python
 from pyecharts import Scatter
@@ -2457,7 +2457,7 @@ v1, v2 = scatter.draw("../images/pyecharts-0.png")
 scatter.add("pyecharts", v1, v2, is_random=True)
 scatter.render()
 ```
-![pyecharts-1](https://raw.githubusercontent.com/pyecharts/pyecharts/master/images/pyecharts-1.png)
+![pyecharts-1](https://user-images.githubusercontent.com/19553554/35104426-c4ac81ce-fca3-11e7-9b46-7fd729ec3ece.png)
 
 
 ## Scatter3D（3D 散点图）
@@ -3282,7 +3282,7 @@ page.render()        # step 3
 ```
 运行之后，你会发现 render.html 已经按顺序显示了两个图:
 
-![multiple-charts-0](https://raw.githubusercontent.com/pyecharts/pyecharts/master/images/multiple-charts-0.gif)
+![multiple-charts-0](https://user-images.githubusercontent.com/19553554/35104303-658f9654-fca3-11e7-9a05-5e2e13d1a4c4.gif)
 
 当然，更多图也是可以的
 ```python
@@ -3364,7 +3364,7 @@ page.add(radar)
 
 page.render()
 ```
-![multiple-charts-1](https://raw.githubusercontent.com/pyecharts/pyecharts/master/images/multiple-charts-1.gif)
+![multiple-charts-1](https://user-images.githubusercontent.com/19553554/35104305-66f2a766-fca3-11e7-8ffd-8e85911fdea5.gif)
 
 
 ## Timeline：提供时间线轮播多张图
