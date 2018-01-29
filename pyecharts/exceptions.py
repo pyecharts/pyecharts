@@ -1,0 +1,2 @@
+class NoJsExtension(Exception):
+    pass
