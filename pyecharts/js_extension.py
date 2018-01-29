@@ -8,7 +8,12 @@ import pyecharts.exceptions as exceptions
 
 PYECHARTS_DIR = '.pyecharts'
 JS_EXTENSION_REGISTRY = 'registry.json'
-JS_FOLDER = 'JS_FOLDER'
+REGISTRY_JS_FOLDER = 'JS_FOLDER'
+REGISTRY_FILE_MAP = 'FILE_MAP'
+REGISTRY_GITHUB_URL = 'GITHUB_URL'
+REGISTRY_JUPYTER_URL = 'JUPYTER_URL'
+REGISTRY_PINYIN_MAP = 'PINYIN_MAP'
+
 
 DEFAULT_TEMPLATE_DIR = get_resource_dir('templates')
 DEFAULT_ECHARTS_LOCATION = os.path.join(
@@ -21,10 +26,10 @@ class JsExtension(object):
             os.path.join(extension_installation_path, JS_EXTENSION_REGISTRY))
         self.home = os.path.join(
             extension_installation_path,
-            self.registry[JS_FOLDER])
+            self.registry[REGISTRY_JS_FOLDER])
 
     def get_js_library(self, pinyin):
-        file_map = self.registry.get('FILE_MAP')
+        file_map = self.registry.get(REGISTRY_FILE_MAP)
         return file_map.get(pinyin)
 
     def read_js_library(self, pinyin):
@@ -58,9 +63,9 @@ class JsExtension(object):
         __jshost__ = jshost
         if jshost is None:
             if use_github:
-                __jshost__ = self.registry['GITHUB_URL']
+                __jshost__ = self.registry[REGISTRY_GITHUB_URL]
             else:
-                __jshost__ = self.registry['JUPYTER_URL']
+                __jshost__ = self.registry[REGISTRY_JUPYTER_URL]
         return __jshost__
 
 
@@ -76,7 +81,7 @@ def load_all_extensions():
         raise exceptions.NoJsExtension("No javascripts library installed")
 
     for extension in extensions:
-        pinyin_db.update(extension.registry.get('PINYIN_MAP'))
+        pinyin_db.update(extension.registry.get(REGISTRY_PINYIN_MAP, {}))
     return extensions, pinyin_db
 
 
