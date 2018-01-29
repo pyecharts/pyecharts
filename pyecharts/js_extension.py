@@ -3,6 +3,8 @@ import json
 import codecs
 
 from pyecharts.utils import get_resource_dir
+import pyecharts.exceptions as exceptions
+
 
 PYECHARTS_DIR = '.pyecharts'
 JS_EXTENSION_REGISTRY = 'registry.json'
@@ -71,7 +73,7 @@ def load_all_extensions():
             extensions.append(
                 JsExtension(os.path.join(pyecharts_dir, adir)))
     else:
-        raise Exception("No javascripts library installed")
+        raise exceptions.NoJsExtension("No javascripts library installed")
 
     for extension in extensions:
         pinyin_db.update(extension.registry.get('PINYIN_MAP'))
