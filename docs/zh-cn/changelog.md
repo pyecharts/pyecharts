@@ -13,6 +13,7 @@
     #### Fixed
     * [issue#322](https://github.com/pyecharts/pyecharts/issues/322) 修复在 timeline 中不能设置多个 legend 的 bug
     * [issue#357](https://github.com/pyecharts/pyecharts/issues/357) 修复 Line 图 symbol 大小不能调整的 bug
+    * [issue#371](https://github.com/pyecharts/pyecharts/issues/371) 修复 Parallel 图 Line 样式失效的 bug
 
     #### Updated
     * 更新 jupyter-echarts 至 1.4.0: echarts 3.6.2 -> 3.8.5, echarts-gl 1.0.0-b4 -> 1.0.0-b6, echarts-liquidfill 1.0.5 -> 1.1.1, echarts-wordcloud 1.1.0 -> 1.1.2
