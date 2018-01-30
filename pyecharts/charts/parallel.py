@@ -1,6 +1,7 @@
 # coding=utf-8
 
 from pyecharts.chart import Chart
+from pyecharts.option import get_all_options
 
 
 class Parallel(Chart):
@@ -47,6 +48,7 @@ class Parallel(Chart):
             数据项。数据中，每一行是一个『数据项』，每一列属于一个『维度』。
         :param kwargs:
         """
+        chart = get_all_options(**kwargs)
         self._option.update(
             parallel={
                 "left": "5%",
@@ -59,6 +61,7 @@ class Parallel(Chart):
         self._option.get('series').append({
             "type": "parallel",
             "coordinateSystem": "parallel",
+            "lineStyle": chart['line_style'],
             "name": name,
             "data": data,
         })
