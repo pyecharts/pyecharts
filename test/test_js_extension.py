@@ -19,7 +19,9 @@ def test_get_js_library():
 def test_get_js_link():
     test_extension = produce_test_js_extension()
     actual = test_extension.get_js_link('pinyin')
-    eq_(actual, './fixtures/test-js/the_js_file_name.js')
+    assert actual in (
+        './fixtures/test-js/the_js_file_name.js',
+        '.\\fixtures\\test-js/the_js_file_name.js')
 
 
 def test_get_js_link_no_match():
