@@ -78,7 +78,8 @@ def load_all_extensions():
             extensions.append(
                 JsExtension(os.path.join(pyecharts_dir, adir)))
     else:
-        raise exceptions.NoJsExtension("No javascripts library installed")
+        raise exceptions.NoJsExtensionFound(
+            "No javascripts library installed")
 
     for extension in extensions:
         pinyin_db.update(extension.registry.get(REGISTRY_PINYIN_MAP, {}))

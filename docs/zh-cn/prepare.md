@@ -176,7 +176,7 @@ cast(seq)
 
 ### 如果在没有互联网的情况下安装 pyecharts 0.3.2 +
 
-首先，您需要通过有互联网的计算机得到这三个包：pyecharts-cli, pyecharts, 和 jupyter-echarts-master.tar.gz. 前两个可以在 pypi 上下载。后者是在github下载： https://github.com/pyecharts/jupyter-echarts/archive/master.zip.
+首先，您需要通过有互联网的计算机得到这三个包：pyecharts-cli, pyecharts, 和 jupyter-echarts-master.tar.gz. 前两个可以在 pypi 上下载。后者是在 github 下载： https://github.com/pyecharts/jupyter-echarts/archive/master.zip.
 
 然后，按照这个顺序组装：
 

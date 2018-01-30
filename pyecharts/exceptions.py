@@ -1,2 +1,2 @@
-class NoJsExtension(Exception):
+class NoJsExtensionFound(Exception):
     pass
