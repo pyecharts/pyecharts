@@ -2,9 +2,15 @@
 
 ## 如何在 pyecharts 中安装更多的 Javascript 库
 
-现在 pyecharts 所有的 js 库均已托管在 [submodule](https://git-scm.com/docs/git-submodule) [jupyter-echarts](https://github.com/chfw/jupyter-echarts). 也就是说现在所有 js 库的更新都要经过 jupyter-echarts。  
+现在 pyecharts 所有的 js 库均由 [pyecharts-cli](https://github.com/pyecharts/pyecharts-cli) 也就是说现在所有 js 库的更新都要经过 pyecharts-cli 组装。
 
-jupyter-echarts 是一个前端项目，如果你对前端这方面还不太熟悉的话，建议找相关的教程学习一下。
+不过不用担心，`jupyeter-echarts` 会在 pyecharts 装机的时候，一齐装上。如果有更多需求，比如世界各国地图，可以用pyecharts-cli 查询和组装。
+
+```
+pyecharts-cli list
+```
+
+# jupyter-echarts 是一个前端项目，如果你对前端这方面还不太熟悉的话，建议找相关的教程学习一下。
 
 ## step 1：向 jupyter-echarts 中新增你的内容
 

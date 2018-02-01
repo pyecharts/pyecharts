@@ -24,6 +24,9 @@
     #### Changed
     * 示例移到新的代码仓库 [pyecharts-users-cases](https://github.com/pyecharts/pyecharts-users-cases)
     
+    #### Removed
+    * [PR#368](https://github.com/pyecharts/pyecharts/pull/368) `pyecharts/templates/js` 被删去了。`jupyter-echarts` 不再内嵌于 pyecharts 。
+
 * ### version 0.3.1 - 2017.12.13（Current）
 
     #### Fixed
