@@ -1,7 +1,7 @@
 # coding=utf-8
 from __future__ import unicode_literals
 
-from pyecharts.js_extension import load_all_extensions
+from pyecharts.js_extensions import load_all_extensions
 from pyecharts.utils import get_resource_dir
 
 # Path constants for template dir
