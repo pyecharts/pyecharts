@@ -5,8 +5,8 @@
 </div>
 
 <div align="center">
-<img width="231" height="265" alt="chfw-zhifubao" src="https://user-images.githubusercontent.com/4280312/35759159-cc5938ea-086f-11e8-892c-a9b60b4a8b3b.png">
-<img width="231" height="265" alt="chfw-wechat" src="https://user-images.githubusercontent.com/4280312/35759160-ce2aa3c0-086f-11e8-8715-b8696da60341.png">
+<img height="265" alt="chfw-zhifubao" src="https://user-images.githubusercontent.com/4280312/35767977-23c484ae-08ed-11e8-8985-30ec7fa1f10c.png">
+<img height="265" alt="chfw-wechat" src="https://user-images.githubusercontent.com/4280312/35759160-ce2aa3c0-086f-11e8-8715-b8696da60341.png">
 </div>
 
 这是这个项目的 [赞助者名单](zh-cn/donors)，你可以在赞助后将你的 Github 账号发邮件（chenjiandongx@qq.com, wangc_2011@hotmail.com）给作者，作者会将你的名字补充在名单上！
