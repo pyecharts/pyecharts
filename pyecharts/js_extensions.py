@@ -6,7 +6,6 @@ from lml.loader import scan_plugins
 from lml.plugin import PluginManager
 
 from pyecharts.utils import get_resource_dir
-import pyecharts.exceptions as exceptions
 
 
 PYECHARTS_DIR = '.pyecharts'
@@ -84,11 +83,10 @@ class JsExtensionManager(PluginManager):
 
 
 EXTENSION_MANAGER = JsExtensionManager()
+scan_plugins("pyecharts_", "pyecharts", white_list=OFFICIAL_PLUGINS)
 
 
 def load_all_extensions():
-    scan_plugins("pyecharts_", "pyecharts", white_list=OFFICIAL_PLUGINS)
-
     pinyin_db = {}
     print(list(EXTENSION_MANAGER.get_all_plugins()))
     for extension in EXTENSION_MANAGER.get_all_plugins():
