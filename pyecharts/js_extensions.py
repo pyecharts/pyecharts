@@ -75,23 +75,19 @@ class JsExtension(object):
 class JsExtensionManager(PluginManager):
     def __init__(self):
         super(JsExtensionManager, self).__init__('pyecharts_js_extension')
+        self.plugins = []
 
     def get_all_plugins(self):
-        for plugins in self.registry.values():
-            for plugin in plugins:
-                yield plugin.cls()
+        if len(self.plugins) == 0:
+            for plugins in self.registry.values():
+                for plugin in plugins:
+                    self.plugins.append(plugin.cls())
+        return self.plugins
 
 
 EXTENSION_MANAGER = JsExtensionManager()
+# Load js & map file index into a dictionary.
 scan_plugins("pyecharts_", "pyecharts", white_list=OFFICIAL_PLUGINS)
-
-
-def load_all_extensions():
-    pinyin_db = {}
-    print(list(EXTENSION_MANAGER.get_all_plugins()))
-    for extension in EXTENSION_MANAGER.get_all_plugins():
-        pinyin_db.update(extension.registry.get(REGISTRY_PINYIN_MAP, {}))
-    return pinyin_db
 
 
 def read_a_map_registry(registry_json):
