@@ -2,6 +2,9 @@ import os
 import json
 import codecs
 
+from lml.loader import scan_plugins
+from lml.plugin import PluginManager
+
 from pyecharts.utils import get_resource_dir
 import pyecharts.exceptions as exceptions
 
@@ -15,6 +18,7 @@ REGISTRY_JUPYTER_URL = 'JUPYTER_URL'
 REGISTRY_PINYIN_MAP = 'PINYIN_MAP'
 
 
+OFFICIAL_PLUGINS = ["jupyter_echarts_pypkg"]
 DEFAULT_TEMPLATE_DIR = get_resource_dir('templates')
 DEFAULT_ECHARTS_LOCATION = os.path.join(
     get_resource_dir('templates'), 'js')
@@ -69,21 +73,27 @@ class JsExtension(object):
         return __jshost__
 
 
-def load_all_extensions():
-    pyecharts_dir = _get_pyecharts_dir()
-    extensions = []
-    pinyin_db = {}
-    if os.path.exists(pyecharts_dir):
-        for adir in os.listdir(pyecharts_dir):
-            extensions.append(
-                JsExtension(os.path.join(pyecharts_dir, adir)))
-    else:
-        raise exceptions.NoJsExtensionFound(
-            "No javascripts library installed")
+class JsExtensionManager(PluginManager):
+    def __init__(self):
+        super(JsExtensionManager, self).__init__('pyecharts_js_extension')
 
-    for extension in extensions:
+    def get_all_plugins(self):
+        for plugins in self.registry.values():
+            for plugin in plugins:
+                yield plugin.cls()
+
+
+EXTENSION_MANAGER = JsExtensionManager()
+
+
+def load_all_extensions():
+    scan_plugins("pyecharts_", "pyecharts", white_list=OFFICIAL_PLUGINS)
+
+    pinyin_db = {}
+    print(list(EXTENSION_MANAGER.get_all_plugins()))
+    for extension in EXTENSION_MANAGER.get_all_plugins():
         pinyin_db.update(extension.registry.get(REGISTRY_PINYIN_MAP, {}))
-    return extensions, pinyin_db
+    return pinyin_db
 
 
 def read_a_map_registry(registry_json):
