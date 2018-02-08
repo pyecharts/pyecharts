@@ -1,17 +1,11 @@
 # coding=utf-8
 from __future__ import unicode_literals
 
-from pyecharts.js_extensions import load_all_extensions, EXTENSION_MANAGER
+from pyecharts.js_extensions import EXTENSION_MANAGER, REGISTRY_PINYIN_MAP
 from pyecharts.utils import get_resource_dir
 
 # Path constants for template dir
 DEFAULT_TEMPLATE_DIR = get_resource_dir('templates')
-
-# Load js & map file index into a dictionary.
-
-# JS_EXTENSIONS = [JsExtension..]
-# CITY_NAME_PINYIN_MAP = {<Chinese Name>:<Pinyin>}
-CITY_NAME_PINYIN_MAP = load_all_extensions()
 
 
 class PyEchartsConfig(object):
@@ -47,7 +41,14 @@ class PyEchartsConfig(object):
         return None
 
     def chinese_to_pinyin(self, chinese):
-        return CITY_NAME_PINYIN_MAP.get(chinese, chinese)
+        for extension in EXTENSION_MANAGER.get_all_plugins():
+            __PINYIN_MAP__ = extension.registry.get(REGISTRY_PINYIN_MAP, {})
+            __pinyin__ = __PINYIN_MAP__.get(chinese)
+            if __pinyin__:
+                return __pinyin__
+        else:
+            # no match found, i.e. 'world'
+            return chinese
 
     @staticmethod
     def read_file_contents_from_local(js_names):

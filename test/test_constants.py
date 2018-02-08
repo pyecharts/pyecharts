@@ -53,12 +53,14 @@ CITY_NAME_PINYIN_MAP = {
 
 
 def test_core_js_libraries():
-    JS_EXTENSIONS = list(conf.EXTENSION_MANAGER.get_all_plugins())
+    JS_EXTENSIONS = conf.EXTENSION_MANAGER.get_all_plugins()
     for key, value in DEFAULT_JS_LIBRARIES.items():
         default_file_map = JS_EXTENSIONS[0].registry.get('FILE_MAP')
         eq_(value, default_file_map[key])
 
 
 def test_province_names():
+    JS_EXTENSIONS = conf.EXTENSION_MANAGER.get_all_plugins()
+    __CITY_NAME_PINYIN_MAP__ = JS_EXTENSIONS[0].registry.get('PINYIN_MAP', {})
     for key, value in CITY_NAME_PINYIN_MAP.items():
-        eq_(value, conf.CITY_NAME_PINYIN_MAP[key])
+        eq_(value, __CITY_NAME_PINYIN_MAP__[key])
