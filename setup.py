@@ -1,16 +1,6 @@
 # coding=utf-8
-
 import os
 from setuptools import setup, find_packages
-
-try:
-    from pyecharts_cli import install_cmd_for
-except ImportError:
-    import pip
-    import importlib
-
-    pip.main(['install', 'pyecharts-cli'])
-    install_cmd_for = importlib.import_module('pyecharts_cli').install_cmd_for
 
 
 __title__ = 'pyecharts'
@@ -22,7 +12,7 @@ __license__ = 'MIT'
 __requires__ = ['pillow',
                 'jinja2',
                 'future',
-                'pyecharts-cli']
+                'lml']
 
 __keywords__ = ['Echarts',
                 'charts',
@@ -47,7 +37,6 @@ setup(
     install_requires=__requires__,
     zip_safe=False,
     include_package_data=True,
-    cmdclass=install_cmd_for('jupyter-echarts'),
     classifiers=[
         'Development Status :: 4 - Beta',
         'Environment :: Console',

@@ -1,7 +1,7 @@
 # coding=utf-8
 from __future__ import unicode_literals
 
-from pyecharts.js_extensions import load_all_extensions
+from pyecharts.js_extensions import load_all_extensions, EXTENSION_MANAGER
 from pyecharts.utils import get_resource_dir
 
 # Path constants for template dir
@@ -11,7 +11,7 @@ DEFAULT_TEMPLATE_DIR = get_resource_dir('templates')
 
 # JS_EXTENSIONS = [JsExtension..]
 # CITY_NAME_PINYIN_MAP = {<Chinese Name>:<Pinyin>}
-JS_EXTENSIONS, CITY_NAME_PINYIN_MAP = load_all_extensions()
+CITY_NAME_PINYIN_MAP = load_all_extensions()
 
 
 class PyEchartsConfig(object):
@@ -40,7 +40,7 @@ class PyEchartsConfig(object):
         self._jshost = remove_trailing_slashes(jshost)
 
     def get_js_library(self, pinyin):
-        for extension in JS_EXTENSIONS:
+        for extension in EXTENSION_MANAGER.get_all_plugins():
             library = extension.get_js_library(pinyin)
             if library is not None:
                 return library
@@ -53,7 +53,7 @@ class PyEchartsConfig(object):
     def read_file_contents_from_local(js_names):
         contents = []
         for name in js_names:
-            for extension in JS_EXTENSIONS:
+            for extension in EXTENSION_MANAGER.get_all_plugins():
                 filecontent = extension.read_js_library(name)
                 if filecontent:
                     contents.append(filecontent)
@@ -63,7 +63,7 @@ class PyEchartsConfig(object):
     def generate_js_link(self, js_names):
         links = []
         for name in js_names:
-            for extension in JS_EXTENSIONS:
+            for extension in EXTENSION_MANAGER.get_all_plugins():
                 js_link = extension.get_js_link(
                     name, jshost=self.jshost)
                 if js_link:
@@ -83,7 +83,7 @@ class PyEchartsConfig(object):
         require_conf_items = []
 
         for name in __dependencies__:
-            for extension in JS_EXTENSIONS:
+            for extension in EXTENSION_MANAGER.get_all_plugins():
                 config_item = extension.produce_require_config_syntax(
                     name,
                     jshost=self.jshost,
