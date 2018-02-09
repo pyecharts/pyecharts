@@ -1,7 +1,7 @@
 # coding=utf-8
 from __future__ import unicode_literals
 
-from pyecharts.js_extensions import EXTENSION_MANAGER, REGISTRY_PINYIN_MAP
+from pyecharts.js_extensions import EXTENSION_MANAGER
 from pyecharts.utils import get_resource_dir
 
 # Path constants for template dir
@@ -42,8 +42,7 @@ class PyEchartsConfig(object):
 
     def chinese_to_pinyin(self, chinese):
         for extension in EXTENSION_MANAGER.get_all_plugins():
-            __PINYIN_MAP__ = extension.registry.get(REGISTRY_PINYIN_MAP, {})
-            __pinyin__ = __PINYIN_MAP__.get(chinese)
+            __pinyin__ = extension.chinese_to_pinyin(chinese)
             if __pinyin__:
                 return __pinyin__
         else:
