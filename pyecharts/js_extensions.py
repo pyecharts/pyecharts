@@ -62,6 +62,10 @@ class JsExtension(object):
         else:
             return None
 
+    def chinese_to_pinyin(self, chinese):
+        __PINYIN_MAP__ = self.registry.get(REGISTRY_PINYIN_MAP, {})
+        return __PINYIN_MAP__.get(chinese)
+
     def _resolve_jshost(self, jshost, use_github=False):
         __jshost__ = jshost
         if jshost is None:
