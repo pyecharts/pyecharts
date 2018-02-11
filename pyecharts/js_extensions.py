@@ -7,8 +7,13 @@ from lml.plugin import PluginManager
 
 from pyecharts.utils import get_resource_dir
 
+# here are all plugins from pyecharts team
+OFFICIAL_PLUGINS = [
+    "jupyter_echarts_pypkg",
+    "echarts_china_cities_pypkg",
+    "echarts_countries_pypkg"
+]
 
-PYECHARTS_DIR = '.pyecharts'
 JS_EXTENSION_REGISTRY = 'registry.json'
 REGISTRY_JS_FOLDER = 'JS_FOLDER'
 REGISTRY_FILE_MAP = 'FILE_MAP'
@@ -17,7 +22,7 @@ REGISTRY_JUPYTER_URL = 'JUPYTER_URL'
 REGISTRY_PINYIN_MAP = 'PINYIN_MAP'
 
 
-OFFICIAL_PLUGINS = ["jupyter_echarts_pypkg"]
+THIRD_PARTY_PLUGIN_PREFIX = "pyecharts_"
 DEFAULT_TEMPLATE_DIR = get_resource_dir('templates')
 DEFAULT_ECHARTS_LOCATION = os.path.join(
     get_resource_dir('templates'), 'js')
@@ -91,16 +96,13 @@ class JsExtensionManager(PluginManager):
 
 EXTENSION_MANAGER = JsExtensionManager()
 # Load js & map file index into a dictionary.
-scan_plugins("pyecharts_", "pyecharts", white_list=OFFICIAL_PLUGINS)
+scan_plugins(
+    THIRD_PARTY_PLUGIN_PREFIX,
+    "pyecharts",  # <- useful for pyinstaller only
+    white_list=OFFICIAL_PLUGINS)
 
 
 def read_a_map_registry(registry_json):
     with codecs.open(registry_json, 'r', 'utf-8') as f:
         content = f.read()
         return json.loads(content)
-
-
-def _get_pyecharts_dir():
-    user_home = os.path.expanduser('~')
-    package_home = os.path.join(user_home, PYECHARTS_DIR)
-    return package_home
