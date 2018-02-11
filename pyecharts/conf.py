@@ -34,14 +34,14 @@ class PyEchartsConfig(object):
         self._jshost = remove_trailing_slashes(jshost)
 
     def get_js_library(self, pinyin):
-        for extension in EXTENSION_MANAGER.get_all_plugins():
+        for extension in EXTENSION_MANAGER.get_all_extensions():
             library = extension.get_js_library(pinyin)
             if library is not None:
                 return library
         return None
 
     def chinese_to_pinyin(self, chinese):
-        for extension in EXTENSION_MANAGER.get_all_plugins():
+        for extension in EXTENSION_MANAGER.get_all_extensions():
             __pinyin__ = extension.chinese_to_pinyin(chinese)
             if __pinyin__:
                 return __pinyin__
@@ -53,7 +53,7 @@ class PyEchartsConfig(object):
     def read_file_contents_from_local(js_names):
         contents = []
         for name in js_names:
-            for extension in EXTENSION_MANAGER.get_all_plugins():
+            for extension in EXTENSION_MANAGER.get_all_extensions():
                 filecontent = extension.read_js_library(name)
                 if filecontent:
                     contents.append(filecontent)
@@ -63,7 +63,7 @@ class PyEchartsConfig(object):
     def generate_js_link(self, js_names):
         links = []
         for name in js_names:
-            for extension in EXTENSION_MANAGER.get_all_plugins():
+            for extension in EXTENSION_MANAGER.get_all_extensions():
                 js_link = extension.get_js_link(
                     name, jshost=self.jshost)
                 if js_link:
@@ -83,7 +83,7 @@ class PyEchartsConfig(object):
         require_conf_items = []
 
         for name in __dependencies__:
-            for extension in EXTENSION_MANAGER.get_all_plugins():
+            for extension in EXTENSION_MANAGER.get_all_extensions():
                 config_item = extension.produce_require_config_syntax(
                     name,
                     jshost=self.jshost,
