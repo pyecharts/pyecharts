@@ -10,10 +10,11 @@
 
 ## pyecharts 0.3.2+ 的扩展包启动顺序
 
-lml 是支持松散包管理的 python 包。它的特点是支持扩展包搭积木式的架构：装了某包，就增加功能；不装，不影响主体库的运转。主体包启动的时候，lml 提供扩展包搜索程序，实现扩展包的动态合体。
+[lml](http://lml.readthedocs.io/en/latest/index.html) 是支持松散包管理的 python 包。它的特点是支持扩展包搭积木式的架构：装了某包，就增加功能；不装，不影响主体库的运转。主体包启动的时候，lml 提供扩展包搜索程序，实现扩展包的动态合体。
 
 ![map-extension-architecture-diagram](https://github.com/chenjiandongx/pyecharts/blob/master/images/loading_sequence.png)
 
+需要更多信息，请看[教学实例](http://lml.readthedocs.io/en/latest/api_tutorial.html)。
 
 # jupyter-echarts 是一个前端项目，如果你对前端这方面还不太熟悉的话，建议找相关的教程学习一下。
 
