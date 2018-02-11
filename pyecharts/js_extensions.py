@@ -29,12 +29,17 @@ DEFAULT_ECHARTS_LOCATION = os.path.join(
 
 
 class JsExtension(object):
-    def __init__(self, extension_installation_path):
-        self.registry = read_a_map_registry(
-            os.path.join(extension_installation_path, JS_EXTENSION_REGISTRY))
-        self.home = os.path.join(
-            extension_installation_path,
-            self.registry[REGISTRY_JS_FOLDER])
+    def __init__(self, extension_home, registry_content):
+        self.registry = registry_content
+        self.home = os.path.join(extension_home,
+                                 self.registry[REGISTRY_JS_FOLDER])
+
+    @classmethod
+    def from_registry_path(cls, extension_installation_path):
+        __registry_json__ = os.path.join(
+            extension_installation_path, JS_EXTENSION_REGISTRY)
+        registry = read_a_map_registry(__registry_json__)
+        return cls(extension_installation_path, registry)
 
     def get_js_library(self, pinyin):
         file_map = self.registry.get(REGISTRY_FILE_MAP)
@@ -84,14 +89,15 @@ class JsExtension(object):
 class JsExtensionManager(PluginManager):
     def __init__(self):
         super(JsExtensionManager, self).__init__('pyecharts_js_extension')
-        self.plugins = []
+        self.js_extensions = []
 
-    def get_all_plugins(self):
-        if len(self.plugins) == 0:
-            for plugins in self.registry.values():
-                for plugin in plugins:
-                    self.plugins.append(plugin.cls())
-        return self.plugins
+    def get_all_extensions(self):
+        if len(self.js_extensions) == 0:
+            for pypkgs in self.registry.values():
+                for pypkg_info in pypkgs:
+                    pypkg = pypkg_info.cls()
+                    self.js_extensions.append(pypkg.js_extension)
+        return self.js_extensions
 
 
 EXTENSION_MANAGER = JsExtensionManager()

@@ -7,7 +7,7 @@ from pyecharts.js_extensions import JsExtension
 
 def produce_test_js_extension():
     registry_path = os.path.join('.', 'fixtures')
-    return JsExtension(registry_path)
+    return JsExtension.from_registry_path(registry_path)
 
 
 def test_get_js_library():
