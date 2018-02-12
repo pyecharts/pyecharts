@@ -1,5 +1,14 @@
 > 开发者篇：本文档介绍了关于 pyecharts 开发的一些情况。
 
+## 开始研发 pyecharts
+
+请用下面命令
+```
+git clone https://github.com/pyecharts/pyecharts.git
+pip install -r requirements.txt
+python setup.py install
+```
+
 ## pyecharts 0.3.2+ 的扩展包
 
 现在 pyecharts 所有的 js 库均由 lml 管理，由 pip 组装。 Jupyter notebook 用户不用担心，javascript 库装机的时候，会被 pyecharts-jupyter-installer 一齐装上。
