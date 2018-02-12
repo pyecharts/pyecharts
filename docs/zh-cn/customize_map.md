@@ -4,16 +4,12 @@
 
 ## 如何获得更多地图
 
-自从 0.3.2 开始，[世界各国的地图](https://github.com/pyecharts/echarts-countries-js)变成了可选地图。需要这些地图的朋友，可以装 pyecharts-cli 命令行:
+自从 0.3.2 开始，[中国各城市地图](https://github.com/pyecharts/echarts-china-cities-js) 和
+[世界各国的地图](https://github.com/pyecharts/echarts-countries-js)变成了可选地图。需要这些地图的朋友，可以装 pip 命令行:
 
 ```
-pip install pyecharts-cli
-```
-
-然后再装世界地图:
-
-```
-pyecharts-cli install echarts-countries-js
+pip install echarts-china-cities-pypkg
+pip install echarts-countries-js
 ```
 
 ## 如何手动添加(0.1.9.7+)
