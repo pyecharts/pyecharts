@@ -5,14 +5,13 @@ import codecs
 from lml.loader import scan_plugins
 from lml.plugin import PluginManager
 
-from pyecharts.utils import get_resource_dir
-
 # here are all plugins from pyecharts team
 OFFICIAL_PLUGINS = [
     "jupyter_echarts_pypkg",
     "echarts_china_cities_pypkg",
     "echarts_countries_pypkg"
 ]
+THIRD_PARTY_PLUGIN_PREFIX = "pyecharts_"
 
 JS_EXTENSION_REGISTRY = 'registry.json'
 REGISTRY_JS_FOLDER = 'JS_FOLDER'
@@ -20,12 +19,6 @@ REGISTRY_FILE_MAP = 'FILE_MAP'
 REGISTRY_GITHUB_URL = 'GITHUB_URL'
 REGISTRY_JUPYTER_URL = 'JUPYTER_URL'
 REGISTRY_PINYIN_MAP = 'PINYIN_MAP'
-
-
-THIRD_PARTY_PLUGIN_PREFIX = "pyecharts_"
-DEFAULT_TEMPLATE_DIR = get_resource_dir('templates')
-DEFAULT_ECHARTS_LOCATION = os.path.join(
-    get_resource_dir('templates'), 'js')
 
 
 class JsExtension(object):
@@ -95,8 +88,10 @@ class JsExtensionManager(PluginManager):
         if len(self.js_extensions) == 0:
             for pypkgs in self.registry.values():
                 for pypkg_info in pypkgs:
-                    pypkg = pypkg_info.cls()
-                    self.js_extensions.append(pypkg.js_extension)
+                    __pypkg__ = pypkg_info.cls()
+                    __js_extension__ = JsExtension.from_registry_path(
+                        __pypkg__.js_extension_path)
+                    self.js_extensions.append(__js_extension__)
         return self.js_extensions
 
 
