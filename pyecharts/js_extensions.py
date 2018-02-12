@@ -5,6 +5,8 @@ import codecs
 from lml.loader import scan_plugins
 from lml.plugin import PluginManager
 
+import pyecharts.exceptions as exceptions
+
 # here are all plugins from pyecharts team
 OFFICIAL_PLUGINS = [
     "jupyter_echarts_pypkg",
@@ -31,8 +33,9 @@ class JsExtension(object):
     def from_registry_path(cls, extension_installation_path):
         __registry_json__ = os.path.join(
             extension_installation_path, JS_EXTENSION_REGISTRY)
-        registry = read_a_map_registry(__registry_json__)
-        return cls(extension_installation_path, registry)
+        __registry__ = read_a_map_registry(__registry_json__)
+        _validate_registry(__registry__)
+        return cls(extension_installation_path, __registry__)
 
     def get_js_library(self, pinyin):
         file_map = self.registry.get(REGISTRY_FILE_MAP)
@@ -107,3 +110,16 @@ def read_a_map_registry(registry_json):
     with codecs.open(registry_json, 'r', 'utf-8') as f:
         content = f.read()
         return json.loads(content)
+
+
+def _validate_registry(registry):
+    __registry_keys__ = [
+        REGISTRY_JS_FOLDER,
+        REGISTRY_FILE_MAP,
+        REGISTRY_GITHUB_URL,
+        REGISTRY_JUPYTER_URL,
+        REGISTRY_PINYIN_MAP
+    ]
+    for key in __registry_keys__:
+        if key not in registry:
+            raise exceptions.InvalidRegistry("%s is missing" % key)
