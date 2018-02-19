@@ -21,25 +21,57 @@ pip install echarts-countries-pypkg
 这个项目首先必须是一个 npm 的项目，并已经启动 gh-pages 来提供地图库。如果未启动 gh-pages , 那么
 你的 jupyter 用户不能把 ipynb 下载成 html ，因为下载之后地图将无法显示。
 
-需要是这样一个结构：
+首先，你需要得到以下的项目：
 
 ```
-+ your-map-extension-js
+pip install yehua
+git clone https://github.com/pyecharts/echarts-js-mobans.git
+export YEHUA_FILE=/ABSOLUTE/PATH/TO/echarts-js-mobans/yehua.yml
+```
+
+然后你需要移步到你的工作文件夹，以 echarts-united-kingdom-js 为例子运行这个命令
+
+```
+$ yh
+Yehua will walk you through creating a pyecharts js package.
+Press ^C to quit at any time.
+
+project name: echarts-united-kingdom-js
+description: UK maps for echarts
+license: MIT
+author: C.W.
+All done!! project echarts-united-kingdom-js is created
+```
+
+All is done. Let's see what was the output:
+
+```
+pyecharts-host:tmp chfw$ cd echarts-united-kingdom-js/
+pyecharts-host:echarts-united-kingdom-js chfw$ ls
+echarts-united-kingdom-js	package.json			registry.json
+```
+
+现在讲原理。一个 echarts-js 包需要以下的文件结构
+
+
+```
++ echarts-united-kingdom-js
   + registry.json
-  + your-map-extension-js
+  + package.json
+  + echarts-united-kingdom-js
      + london.js
      + manchester.js
      + index.js
   + other files
 ```
 
-在 registry.json 里，需要填写这些项目:
+在 registry.json 里，需要填写的东西是和 pyecharts 衔接的必要信息。
 ```
 {
-    "JUPYTER_URL": "/nbextensions/your-map-extension-js",
-    "GITHUB_URL": "https://your.github.io/your-map-extension-js/your-map-extensions-js",
-    "JUPYTER_ENTRY": "your-map-extension-js/index",
-    "JS_FOLDER": "your-map-extensions-js",
+    "JUPYTER_URL": "/nbextensions/echarts-united-kingdom-js",
+    "GITHUB_URL": "https://your.github.io/echarts-united-kingdom-js/echarts-united-kingdoms-js",
+    "JUPYTER_ENTRY": "echarts-united-kingdom-js/index",
+    "JS_FOLDER": "echarts-united-kingdoms-js",
     "PINYIN_MAP": {
         "伦敦": "lundun",
         "曼彻斯特": "manqiesite"
@@ -51,17 +83,19 @@ pip install echarts-countries-pypkg
 }
 ```
 
-index.js 可以是这样：
+index.js 只为 jupyter notebook 而存在
 ```
 define(["require", "exports"], function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var version = '1.0.0';
     function load_ipython_extension() {
-        console.log("your-map-extension-js " + version + " has been loaded");
+        console.log("echarts-united-kingdom-js " + version + " has been loaded");
     }
     exports.load_ipython_extension = load_ipython_extension;
 });
+
+好了，在 echarts-united-kingdom-js 子文件夹里就需要放地图文件了。每放一个呢，请记住更新 PINYI_MAP 和 FILE_MAP。
 
 ```
 
