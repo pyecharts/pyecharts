@@ -14,7 +14,7 @@ OFFICIAL_PLUGINS = [
     "echarts_china_cities_pypkg",
     "echarts_countries_pypkg"
 ]
-THIRD_PARTY_PLUGIN_PREFIX = "pyecharts_"
+THIRD_PARTY_PLUGIN_PREFIX = "echarts_"
 
 JS_EXTENSION_REGISTRY = 'registry.json'
 REGISTRY_JS_FOLDER = 'JS_FOLDER'
