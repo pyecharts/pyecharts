@@ -13,4 +13,4 @@ install:
 build: off
 
 test_script:
-  "%PYTHON%/Scripts/nosetests --with-coverage --cover-package pyecharts --cover-package test && cd .. && flake8 --exclude docs --builtins=unicode,xrange,long"
+  "%PYTHON%/Scripts/nosetests --with-coverage --cover-package pyecharts --cover-package test && cd .. && %PYTHON%/Scripts/flake8 --exclude docs --builtins=unicode,xrange,long"
