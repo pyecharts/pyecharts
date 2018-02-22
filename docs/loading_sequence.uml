@@ -1,0 +1,21 @@
+@startuml
+
+actor bob
+participant pyecharts
+participant lml
+participant "jupyter-echarts-pypkg"
+participant "echarts-china-cities-pypkg"
+participant "echarts-countries-pypkg"
+
+bob -> pyecharts : > draw world map
+pyecharts -> lml : scan for plugins.
+lml -> pyecharts: 3 packages found
+pyecharts -> "jupyter-echarts-pypkg" : read registry.json
+"jupyter-echarts-pypkg" --> pyecharts: here is my extension profile
+pyecharts -> "echarts-china-cities-pypkg" : read registry.json
+"echarts-china-cities-pypkg" --> pyecharts: here is my extension profile
+pyecharts -> "echarts-countries-pypkg" : read registry.json
+"echarts-countries-pypkg" --> pyecharts: here is my extension profile
+"jupyter-echarts-pypkg" -> pyecharts: here is the world map
+pyecharts -> bob: world map
+@enduml

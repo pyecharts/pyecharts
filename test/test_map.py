@@ -41,16 +41,6 @@ def test_echarts_position_in_render_html():
         assert '"showLegendSymbol": false' in actual_content
 
 
-def test_city_map():
-    value = [1]
-    attr = ["渝水区"]
-    map = Map("新余地图示例", width=1200, height=600)
-    map.add("", attr, value, maptype='新余', is_visualmap=True,
-            visual_text_color='#000')
-    # To avoid potential pinyin crash, all cities have a province prefix
-    assert "jiang1_xi1_xin1_yu2" in map._repr_html_()
-
-
 def test_world_map():
     value = [95.1, 23.2, 43.3, 66.4, 88.5, 0.1]
     attr = [

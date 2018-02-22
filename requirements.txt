@@ -1,5 +1,5 @@
 jinja2>=2.8
 future
 pillow
-jupyter-pip>=0.3.1
-pyecharts-cli
+lml
+jupyter-echarts-pypkg
