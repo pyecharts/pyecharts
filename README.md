@@ -142,7 +142,7 @@ $ make
 
 ### Continuous Integration
 
-The project is developed with [Travis CI](https://travis-ci.org/) .
+The project is developed with [Travis CI](https://travis-ci.org/) and [AppVeyor](https://ci.appveyor.com/).
 
 ## Author
 
