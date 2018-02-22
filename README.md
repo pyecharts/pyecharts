@@ -33,6 +33,24 @@ $ pip install -r requirements.txt
 $ python setup.py install
 ```
 
+Please note: since version 0.3.2, NO LONGER pyecharts comes with any map files. Please read next section for more informations.
+
+### map extensions
+
+Here is a list of map extensions from pyecharts dev team:
+
+1. [World countries include China map and World map](https://echarts-maps.github.io/echarts-countries-js/): [echarts-countries-pypkg](https://github.com/pyecharts/echarts-countries-pypkg) (1.9MB)
+2. [Chinese provinces and regions](https://echarts-maps.github.io/echarts-china-provinces-js/): [echarts-china-provinces-pypkg](https://github.com/pyecharts/echarts-china-provinces-pypkg) (730KB)
+3. [Chinese cities](https://echarts-maps.github.io/echarts-china-cities-js/): [echarts-china-cities-pypkg](https://github.com/pyecharts/echarts-china-cities-pypkg) (3.8MB)
+
+In order to install them, you can try one of them or all:
+
+```
+$ pip install echarts-countries-pypkg
+$ pip install echarts-china-provinces-pypkg
+$ pip install echarts-china-cities-pypkg
+```
+
 ## Basic Usage
 
 ### Render to Local Html File

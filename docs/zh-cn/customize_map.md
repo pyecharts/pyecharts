@@ -4,12 +4,13 @@
 
 ## 如何获得更多地图
 
-自从 0.3.2 开始，[中国各城市地图](https://github.com/pyecharts/echarts-china-cities-js) 和
+自从 0.3.2 开始，所有地图包括[中国各城市地图](https://github.com/pyecharts/echarts-china-cities-js) 和
 [世界各国的地图](https://github.com/pyecharts/echarts-countries-js)变成了可选地图。需要这些地图的朋友，可以装 pip 命令行:
 
 ```
-pip install echarts-china-cities-pypkg
 pip install echarts-countries-pypkg
+pip install echarts-china-provinces-pypkg
+pip install echarts-china-cities-pypkg
 ```
 
 ## 如何制作自己的地图扩展
@@ -25,7 +26,7 @@ pip install echarts-countries-pypkg
 
 ```
 pip install yehua
-git clone https://github.com/pyecharts/echarts-js-mobans.git
+git clone https://github.com/echarts-maps/echarts-js-mobans.git
 export YEHUA_FILE=/ABSOLUTE/PATH/TO/echarts-js-mobans/yehua.yml
 ```
 
@@ -33,7 +34,7 @@ export YEHUA_FILE=/ABSOLUTE/PATH/TO/echarts-js-mobans/yehua.yml
 
 ```
 $ yh
-Yehua will walk you through creating a pyecharts js package.
+Yehua will walk you through creating a echarts-maps js package.
 Press ^C to quit at any time.
 
 project name: echarts-united-kingdom-js
@@ -150,6 +151,7 @@ Please review changes before commit!
 ```
 pyecharts-host:tmp chfw$ cd echarts-united-kingdom-pypkg/
 git submodule add https://github.com/your/npm/project your_project_name_pypkg/resources
+git submodule init
 ```
 
 然后做:
