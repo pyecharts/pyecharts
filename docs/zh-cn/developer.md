@@ -1,18 +1,33 @@
 > 开发者篇：本文档介绍了关于 pyecharts 开发的一些情况。
 
-## 如何在 pyecharts 中安装更多的 Javascript 库
+## 开始研发 pyecharts
 
-现在 pyecharts 所有的 js 库均由 [pyecharts-cli](https://github.com/pyecharts/pyecharts-cli) 也就是说现在所有 js 库的更新都要经过 pyecharts-cli 组装。
-
-不过不用担心，`jupyeter-echarts` 会在 pyecharts 装机的时候，一齐装上。如果有更多需求，比如世界各国地图，可以用pyecharts-cli 查询和组装。
-
+请用下面命令
 ```
-pyecharts-cli list
+git clone https://github.com/pyecharts/pyecharts.git
+pip install -r requirements.txt
+python setup.py install
 ```
+
+## pyecharts 0.3.2+ 的扩展包
+
+现在 pyecharts 所有的 js 库均由 lml 管理，由 pip 组装。 Jupyter notebook 用户不用担心，javascript 库装机的时候，会被 pyecharts-jupyter-installer 一齐装上。
+
+![map-extension-architecture-diagram](https://github.com/chenjiandongx/pyecharts/blob/master/images/map-extension-architecture.png)
+
+如果有更多需求，比如世界各国地图，请关注本项目。
+
+## pyecharts 0.3.2+ 的扩展包启动顺序
+
+[lml](http://lml.readthedocs.io/en/latest/index.html) 是支持松散包管理的 python 包。它的特点是支持扩展包搭积木式的架构：装了某包，就增加功能；不装，不影响主体库的运转。主体包启动的时候，lml 提供扩展包搜索程序，实现扩展包的动态合体。
+
+![map-extension-architecture-diagram](https://github.com/chenjiandongx/pyecharts/blob/master/images/loading_sequence.png)
+
+需要更多信息，请看[教学实例](http://lml.readthedocs.io/en/latest/api_tutorial.html)。
 
 # jupyter-echarts 是一个前端项目，如果你对前端这方面还不太熟悉的话，建议找相关的教程学习一下。
 
-## step 1：向 jupyter-echarts 中新增你的内容
+## 向 jupyter-echarts 中新增你的内容
 
 克隆远程仓库
 
@@ -43,33 +58,6 @@ $ gulp
 ```
 
 最重要的是提交更新内容，你需要将它同步至 jupyter-echarts，如果没有权限的话，那就提交一个 PR 吧。
-
-
-## step 2：更新 pyecharts
-
-一旦你的提交被 jupyter-echarts 所接受，你就可以更新 pyecharts 了。
-```
-$ git clone --recursive https://github.com/chenjiandongx/pyecharts.git
-$ cd pyecharts/pyecharts/templates/js
-$ git pull
-remote: Counting objects: 7, done.
-remote: Compressing objects: 100% (2/2), done.
-remote: Total 7 (delta 4), reused 7 (delta 4), pack-reused 0
-Unpacking objects: 100% (7/7), done.
-From https://github.com/chfw/jupyter-echarts
-   af7184b..bb87949  master     -> origin/master
-Updating af7184b..bb87949
-Fast-forward
- echarts/main.js | 2 +-
- gulpfile.js     | 2 +-
- src/main.ts     | 2 +-
- 3 files changed, 3 insertions(+), 3 deletions(-)
-$ cd ../../../
-$ git commit -am "pull latest changes from jupyter-echarts
-```
-
-最后将你的更新推送至 pyecharts
-
 
 ## 前端编程与 Python
 
