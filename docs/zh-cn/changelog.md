@@ -12,7 +12,8 @@
     #### Added
     * 新增 `chart_id` 配置项，可设置图形 id，对应为每个图在 html 中的 div#id
     * 新增 jupyter-echarts-pypkg, echarts-china-provinces-pypkg, echarts-china-cities-pypkg 和 echarts-countries-pypkg。第一个是自带安装，后三个是可选安装。
-    * 新增 `is_splitline_show` 配置项，用于控制是否显示网格线
+    * [issue#395](https://github.com/pyecharts/pyecharts/issues/395) 新增 `is_splitline_show` 配置项，用于控制是否显示网格线
+    * 新增 AppVeyor CI，为 Windows OS 提供测试功能
 
     #### Fixed
     * [issue#322](https://github.com/pyecharts/pyecharts/issues/322) 修复在 timeline 中不能设置多个 legend 的 bug
@@ -25,6 +26,7 @@
     * 地图更新：[台湾地图补了市，县，岛](https://github.com/pyecharts/pyecharts/pull/316), [重庆地图补了开州区](https://github.com/pyecharts/pyecharts/pull/317)
     * 优化图表 API，图表 js_dependencies 属性返回有序列表
     * 优化部分代码逻辑
+    * [issue#377](https://github.com/pyecharts/pyecharts/issues/377) 为 Kline 提供 Candlestick 别名
 
     #### Changed
     * 示例移到新的代码仓库 [pyecharts-users-cases](https://github.com/pyecharts/pyecharts-users-cases)
