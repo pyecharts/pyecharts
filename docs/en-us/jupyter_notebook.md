@@ -15,9 +15,7 @@ pip install pyecharts
 In the development, you can also use the command to install manually jupyter nbextension.
 
 ```shell
-$ git clone https://github.com/pyecharts/jupyter-echarts.git
-$ cd jupyter-echarts
-$ jupyter nbextension install echarts --user
+$ pip install jupyter-echarts-pypkg
 ```
 
 You can check the jupyter nbextension using the *list* command.
