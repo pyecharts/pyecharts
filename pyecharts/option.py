@@ -263,6 +263,7 @@ def xy_axis(type=None,
             is_yaxis_boundarygap=True,
             is_xaxis_show=True,
             is_yaxis_show=True,
+            is_splitline_show=True,
             **kwargs):
     """ 直角坐标系中的 x、y 轴(Line、Bar、Scatter、EffectScatter、Kline)。
 
@@ -372,6 +373,8 @@ def xy_axis(type=None,
         是否显示 x 轴
     :param is_yaxis_show:
         是否显示 y 轴
+    :param is_splitline_show:
+        是否显示 y 轴网格线，默认为 True。
     :param kwargs:
     """
     _xAxis = {
@@ -421,7 +424,10 @@ def xy_axis(type=None,
         "position": yaxis_pos,
         "boundaryGap": is_yaxis_boundarygap,
         "min": yaxis_min,
-        "max": yaxis_max
+        "max": yaxis_max,
+        "splitLine": {
+            "show": is_splitline_show
+        }
     }
 
     if xaxis_type is None:
