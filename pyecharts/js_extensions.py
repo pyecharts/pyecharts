@@ -3,16 +3,14 @@ import json
 import codecs
 
 from lml.loader import scan_plugins
-from lml.plugin import PluginManager, PluginInfo
+from lml.plugin import PluginManager
 
 import pyecharts.exceptions as exceptions
 from pyecharts.utils import get_resource_dir
 
 # here are all plugins from pyecharts team
 OFFICIAL_PLUGINS = [
-    "jupyter_echarts_pypkg",
-    "echarts_china_cities_pypkg",
-    "echarts_countries_pypkg"
+    "jupyter_echarts_pypkg"
 ]
 THIRD_PARTY_PLUGIN_PREFIX = "echarts_"
 
@@ -97,13 +95,6 @@ class JsExtensionManager(PluginManager):
                         __pypkg__.js_extension_path)
                     self.js_extensions.append(__js_extension__)
         return self.js_extensions
-
-
-@PluginInfo('pyecharts_js_extension', tags=['built-in'])
-class Pypkg():
-    def __init__(self):
-        self.js_extension_path = get_resource_dir(
-            "templates", "jupyter-echarts")  # where the registry.json is
 
 
 EXTENSION_MANAGER = JsExtensionManager()
