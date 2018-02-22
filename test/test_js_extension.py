@@ -1,13 +1,14 @@
 import os
 from mock import patch
-from nose.tools import eq_
+from nose.tools import eq_, raises
 
 from pyecharts.js_extensions import JsExtension
+import pyecharts.exceptions as exceptions
 
 
 def produce_test_js_extension():
     registry_path = os.path.join('.', 'fixtures')
-    return JsExtension(registry_path)
+    return JsExtension.from_registry_path(registry_path)
 
 
 def test_get_js_library():
@@ -62,3 +63,10 @@ def test_read_js_library_no_match():
     test_extension = produce_test_js_extension()
     content = test_extension.read_js_library('missing')
     assert content is None
+
+
+@raises(exceptions.InvalidRegistry)
+def test_validate_registry():
+    from pyecharts.js_extensions import _validate_registry
+    test = {}
+    _validate_registry(test)

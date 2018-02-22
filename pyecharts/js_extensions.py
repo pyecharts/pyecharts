@@ -2,11 +2,17 @@ import os
 import json
 import codecs
 
-from pyecharts.utils import get_resource_dir
+from lml.loader import scan_plugins
+from lml.plugin import PluginManager
+
 import pyecharts.exceptions as exceptions
 
+# here are all plugins from pyecharts team
+OFFICIAL_PLUGINS = [
+    "jupyter_echarts_pypkg"
+]
+THIRD_PARTY_PLUGIN_PREFIX = "echarts_"
 
-PYECHARTS_DIR = '.pyecharts'
 JS_EXTENSION_REGISTRY = 'registry.json'
 REGISTRY_JS_FOLDER = 'JS_FOLDER'
 REGISTRY_FILE_MAP = 'FILE_MAP'
@@ -15,18 +21,19 @@ REGISTRY_JUPYTER_URL = 'JUPYTER_URL'
 REGISTRY_PINYIN_MAP = 'PINYIN_MAP'
 
 
-DEFAULT_TEMPLATE_DIR = get_resource_dir('templates')
-DEFAULT_ECHARTS_LOCATION = os.path.join(
-    get_resource_dir('templates'), 'js')
-
-
 class JsExtension(object):
-    def __init__(self, extension_installation_path):
-        self.registry = read_a_map_registry(
-            os.path.join(extension_installation_path, JS_EXTENSION_REGISTRY))
-        self.home = os.path.join(
-            extension_installation_path,
-            self.registry[REGISTRY_JS_FOLDER])
+    def __init__(self, extension_home, registry_content):
+        self.registry = registry_content
+        self.home = os.path.join(extension_home,
+                                 self.registry[REGISTRY_JS_FOLDER])
+
+    @classmethod
+    def from_registry_path(cls, extension_installation_path):
+        __registry_json__ = os.path.join(
+            extension_installation_path, JS_EXTENSION_REGISTRY)
+        __registry__ = read_a_map_registry(__registry_json__)
+        _validate_registry(__registry__)
+        return cls(extension_installation_path, __registry__)
 
     def get_js_library(self, pinyin):
         file_map = self.registry.get(REGISTRY_FILE_MAP)
@@ -59,6 +66,10 @@ class JsExtension(object):
         else:
             return None
 
+    def chinese_to_pinyin(self, chinese):
+        __PINYIN_MAP__ = self.registry.get(REGISTRY_PINYIN_MAP, {})
+        return __PINYIN_MAP__.get(chinese)
+
     def _resolve_jshost(self, jshost, use_github=False):
         __jshost__ = jshost
         if jshost is None:
@@ -69,21 +80,28 @@ class JsExtension(object):
         return __jshost__
 
 
-def load_all_extensions():
-    pyecharts_dir = _get_pyecharts_dir()
-    extensions = []
-    pinyin_db = {}
-    if os.path.exists(pyecharts_dir):
-        for adir in os.listdir(pyecharts_dir):
-            extensions.append(
-                JsExtension(os.path.join(pyecharts_dir, adir)))
-    else:
-        raise exceptions.NoJsExtensionFound(
-            "No javascripts library installed")
+class JsExtensionManager(PluginManager):
+    def __init__(self):
+        super(JsExtensionManager, self).__init__('pyecharts_js_extension')
+        self.js_extensions = []
 
-    for extension in extensions:
-        pinyin_db.update(extension.registry.get(REGISTRY_PINYIN_MAP, {}))
-    return extensions, pinyin_db
+    def get_all_extensions(self):
+        if len(self.js_extensions) == 0:
+            for pypkgs in self.registry.values():
+                for pypkg_info in pypkgs:
+                    __pypkg__ = pypkg_info.cls()
+                    __js_extension__ = JsExtension.from_registry_path(
+                        __pypkg__.js_extension_path)
+                    self.js_extensions.append(__js_extension__)
+        return self.js_extensions
+
+
+EXTENSION_MANAGER = JsExtensionManager()
+# Load js & map file index into a dictionary.
+scan_plugins(
+    THIRD_PARTY_PLUGIN_PREFIX,
+    "pyecharts",  # <- useful for pyinstaller only
+    white_list=OFFICIAL_PLUGINS)
 
 
 def read_a_map_registry(registry_json):
@@ -92,7 +110,14 @@ def read_a_map_registry(registry_json):
         return json.loads(content)
 
 
-def _get_pyecharts_dir():
-    user_home = os.path.expanduser('~')
-    package_home = os.path.join(user_home, PYECHARTS_DIR)
-    return package_home
+def _validate_registry(registry):
+    __registry_keys__ = [
+        REGISTRY_JS_FOLDER,
+        REGISTRY_FILE_MAP,
+        REGISTRY_GITHUB_URL,
+        REGISTRY_JUPYTER_URL,
+        REGISTRY_PINYIN_MAP
+    ]
+    for key in __registry_keys__:
+        if key not in registry:
+            raise exceptions.InvalidRegistry("%s is missing" % key)
