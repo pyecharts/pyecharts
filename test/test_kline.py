@@ -68,5 +68,14 @@ def test_kline_user_define_markline_style():
               mark_point_symbolsize=80,
               datazoom_orient='vertical',
               mark_line_valuedim=['lowest', 'highest'])
-    kline.show_config()
     kline.render()
+
+
+def test_kline_alias_Candlestick():
+    from pyecharts import Candlestick
+    candlestick = Candlestick("K 线图-自定义标记点风格")
+    candlestick.add("日K", DATE, data, mark_point=["min", "max"],
+                    mark_point_symbolsize=80,
+                    datazoom_orient='vertical',
+                    mark_line_valuedim=['lowest', 'highest'])
+    candlestick.render()
