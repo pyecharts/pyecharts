@@ -6,7 +6,6 @@ from lml.loader import scan_plugins
 from lml.plugin import PluginManager
 
 import pyecharts.exceptions as exceptions
-from pyecharts.utils import get_resource_dir
 
 # here are all plugins from pyecharts team
 OFFICIAL_PLUGINS = [
