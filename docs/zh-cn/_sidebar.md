@@ -7,3 +7,4 @@
 - [艺术展](zh-cn/gallery)
 - [API](zh-cn/api)
 - [FAQ](zh-cn/faq)
+- [捐赠](zh-cn/donate)
