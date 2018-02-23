@@ -1,36 +1,20 @@
 # coding=utf-8
 from __future__ import unicode_literals
 
-import os
-import json
-import codecs
-
+from pyecharts.js_extensions import EXTENSION_MANAGER
 from pyecharts.utils import get_resource_dir
-import pyecharts.constants as constants
 
-SCRIPT_FILE_PATH = get_resource_dir('templates', 'js', 'echarts')
 # Path constants for template dir
-
 DEFAULT_TEMPLATE_DIR = get_resource_dir('templates')
-DEFAULT_ECHARTS_REGISTRY = os.path.join(
-    get_resource_dir('templates'), 'js', 'registry.json')
-# Load js & map file index into a dictionary.
-
-
-with codecs.open(DEFAULT_ECHARTS_REGISTRY, 'r', 'utf-8') as f:
-    content = f.read()
-    CONFIG = json.loads(content)
-
-DEFAULT_JS_LIBRARIES = CONFIG['FILE_MAP']  # {<Pinyin>:<Js File Name>}
-CITY_NAME_PINYIN_MAP = CONFIG['PINYIN_MAP']  # {<Chinese Name>:<Pinyin>}
 
 
 class PyEchartsConfig(object):
-    def __init__(self, echarts_template_dir='.', jshost=SCRIPT_FILE_PATH,
+    def __init__(self, echarts_template_dir='.', jshost=None,
                  force_js_embed=False):
         self.echarts_template_dir = echarts_template_dir
         self._jshost = remove_trailing_slashes(jshost)
         self.force_js_embed = force_js_embed
+        self.hosted_on_github = False
 
     @property
     def js_embed(self):
@@ -39,8 +23,7 @@ class PyEchartsConfig(object):
         if self.force_js_embed:
             return True
         else:
-            return self._jshost in (
-                SCRIPT_FILE_PATH, constants.DEFAULT_JUPYTER_GITHUB_URL)
+            return self.jshost is None
 
     @property
     def jshost(self):
@@ -51,48 +34,42 @@ class PyEchartsConfig(object):
         self._jshost = remove_trailing_slashes(jshost)
 
     def get_js_library(self, pinyin):
-        return DEFAULT_JS_LIBRARIES.get(pinyin, pinyin)
+        for extension in EXTENSION_MANAGER.get_all_extensions():
+            library = extension.get_js_library(pinyin)
+            if library is not None:
+                return library
+        return None
 
     def chinese_to_pinyin(self, chinese):
-        return CITY_NAME_PINYIN_MAP.get(chinese, chinese)
-
-    @staticmethod
-    def merge_js_dependencies(*args):
-        """ Merge js dependencies to a list
-
-        :param args:
-        :return:
-        """
-        dependencies = []
-
-        def _add(_x):
-            if _x not in dependencies:
-                dependencies.append(_x)
-
-        for a in args:
-            if hasattr(a, 'js_dependencies'):
-                for d in a.js_dependencies:
-                    _add(d)
-            else:
-                _add(a)
-        if len(dependencies) > 1:
-            dependencies.remove('echarts')
-            dependencies = ['echarts'] + list(dependencies)
-        return dependencies
+        for extension in EXTENSION_MANAGER.get_all_extensions():
+            __pinyin__ = extension.chinese_to_pinyin(chinese)
+            if __pinyin__:
+                return __pinyin__
+        else:
+            # no match found, i.e. 'world'
+            return chinese
 
     @staticmethod
     def read_file_contents_from_local(js_names):
         contents = []
         for name in js_names:
-            path = os.path.join(SCRIPT_FILE_PATH, name + '.js')
-            with open(path, 'rb') as f:
-                c = f.read()
-                contents.append(c.decode('utf8'))
+            for extension in EXTENSION_MANAGER.get_all_extensions():
+                filecontent = extension.read_js_library(name)
+                if filecontent:
+                    contents.append(filecontent)
+                    break
         return contents
 
-    @staticmethod
-    def generate_js_link(jshost, js_names):
-        return ['{}/{}.js'.format(jshost, x) for x in js_names]
+    def generate_js_link(self, js_names):
+        links = []
+        for name in js_names:
+            for extension in EXTENSION_MANAGER.get_all_extensions():
+                js_link = extension.get_js_link(
+                    name, jshost=self.jshost)
+                if js_link:
+                    links.append(js_link)
+                    break
+        return links
 
     def produce_require_configuration(self, dependencies):
         """
@@ -101,14 +78,19 @@ class PyEchartsConfig(object):
         :param jshost:
         :return:
         """
-        _d = _ensure_echarts_is_in_the_front(dependencies)
+        __dependencies__ = _ensure_echarts_is_in_the_front(dependencies)
         # if no nick name register, we treat the location as location.js
-        require_conf_items = [
-            "'%s': '%s/%s'" % (key,
-                               self.jshost,
-                               self.get_js_library(key))
-            for key in _d]
-        require_libraries = ["'%s'" % key for key in _d]
+        require_conf_items = []
+
+        for name in __dependencies__:
+            for extension in EXTENSION_MANAGER.get_all_extensions():
+                config_item = extension.produce_require_config_syntax(
+                    name,
+                    jshost=self.jshost,
+                    use_github=self.hosted_on_github)
+                if config_item:
+                    require_conf_items.append(config_item)
+        require_libraries = ["'%s'" % key for key in __dependencies__]
         return dict(
             config_items=require_conf_items,
             libraries=require_libraries
@@ -120,10 +102,10 @@ class PyEchartsConfig(object):
         :param dependencies:
         :return:
         """
-        _d = _ensure_echarts_is_in_the_front(dependencies)
+        __dependencies__ = _ensure_echarts_is_in_the_front(dependencies)
         script_list = [
             '%s' % self.get_js_library(key)
-            for key in _d]
+            for key in __dependencies__]
         return script_list
 
 
@@ -138,11 +120,11 @@ def remove_trailing_slashes(jshost):
         return jshost
 
 
-PYTHON_CONFIG = PyEchartsConfig(jshost=SCRIPT_FILE_PATH)
-JUPYTER_CONFIG = PyEchartsConfig(jshost=constants.JUPYTER_LOCALHOST_URL)
+CURRENT_CONFIG = PyEchartsConfig()
 
 
 def configure(jshost=None,
+              hosted_on_github=None,
               echarts_template_dir=None,
               force_js_embed=None,
               **kwargs):
@@ -155,21 +137,24 @@ def configure(jshost=None,
     :param kwargs:
     """
     if jshost:
-        PYTHON_CONFIG.jshost = jshost
-        JUPYTER_CONFIG.jshost = jshost
+        CURRENT_CONFIG.jshost = jshost
+    elif hosted_on_github is True:
+        CURRENT_CONFIG.hosted_on_github = True
     if echarts_template_dir:
-        PYTHON_CONFIG.echarts_template_dir = echarts_template_dir
-        JUPYTER_CONFIG.echarts_template_dir = echarts_template_dir
+        CURRENT_CONFIG.echarts_template_dir = echarts_template_dir
     if force_js_embed is not None:
-        PYTHON_CONFIG.force_js_embed = force_js_embed
+        CURRENT_CONFIG.force_js_embed = force_js_embed
 
 
-def online(host=constants.DEFAULT_JUPYTER_GITHUB_URL):
+def online(host=None):
     """ Set the jshost
 
     :param host:
     """
-    configure(jshost=host)
+    if host is None:
+        configure(hosted_on_github=True)
+    else:
+        configure(jshost=host)
 
 
 def _ensure_echarts_is_in_the_front(dependencies):
