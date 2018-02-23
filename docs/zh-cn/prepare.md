@@ -172,3 +172,16 @@ cast(seq)
 更多 Jupyter notebook 的例子请参考 [notebook-use-cases](https://github.com/pyecharts/pyecharts-users-cases)。可下载后运行看看。
 
 如需使用 Jupyter Notebook 来展示图表，只需要调用自身实例即可，同时兼容 Python2 和 Python3 的 Jupyter Notebook 环境。所有图表均可正常显示，与浏览器一致的交互体验，这下展示报告连 PPT 都省了！！  
+
+
+### 如果在没有互联网的情况下安装 pyecharts 0.3.2 +
+
+首先，您需要通过有互联网的计算机得到这三个包：pyecharts-cli, pyecharts, 和 jupyter-echarts-master.tar.gz. 前两个可以在 pypi 上下载。后者是在 github 下载： https://github.com/pyecharts/jupyter-echarts/archive/master.zip.
+
+然后，按照这个顺序组装：
+
+```
+pip install pyecharts-cli
+pyecharts-cli install jupyter-echarts-master.tar.gz
+pip install pyecharts
+```
