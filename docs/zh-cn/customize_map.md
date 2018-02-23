@@ -4,17 +4,164 @@
 
 ## 如何获得更多地图
 
-自从 0.3.2 开始，[世界各国的地图](https://github.com/pyecharts/echarts-countries-js)变成了可选地图。需要这些地图的朋友，可以装 pyecharts-cli 命令行:
+自从 0.3.2 开始，所有地图包括[中国各城市地图](https://github.com/pyecharts/echarts-china-cities-js) 和
+[世界各国的地图](https://github.com/pyecharts/echarts-countries-js)变成了可选地图。需要这些地图的朋友，可以装 pip 命令行:
 
 ```
-pip install pyecharts-cli
+pip install echarts-countries-pypkg
+pip install echarts-china-provinces-pypkg
+pip install echarts-china-cities-pypkg
 ```
 
-然后再装世界地图:
+## 如何制作自己的地图扩展
+
+你需要做两个 github 项目：一个是 npm 项目，提供所有的 javascript 脚本；另一个是 python 项目，把前一个项目变成可以用 pip 装的 python 包。
+
+### npm 项目
+
+这个项目首先必须是一个 npm 的项目，并已经启动 gh-pages 来提供地图库。如果未启动 gh-pages , 那么
+你的 jupyter 用户不能把 ipynb 下载成 html ，因为下载之后地图将无法显示。
+
+首先，你需要得到以下的项目：
 
 ```
-pyecharts-cli install echarts-countries-js
+pip install yehua
+git clone https://github.com/echarts-maps/echarts-js-mobans.git
+export YEHUA_FILE=/ABSOLUTE/PATH/TO/echarts-js-mobans/yehua.yml
 ```
+
+然后你需要移步到你的工作文件夹，以 echarts-united-kingdom-js 为例子运行这个命令
+
+```
+$ yh
+Yehua will walk you through creating a echarts-maps js package.
+Press ^C to quit at any time.
+
+project name: echarts-united-kingdom-js
+description: UK maps for echarts
+license: MIT
+author: C.W.
+All done!! project echarts-united-kingdom-js is created
+```
+
+All is done. Let's see what was the output:
+
+```
+pyecharts-host:tmp chfw$ cd echarts-united-kingdom-js/
+pyecharts-host:echarts-united-kingdom-js chfw$ ls
+echarts-united-kingdom-js	package.json			registry.json
+```
+
+现在讲原理。一个 echarts-js 包需要以下的文件结构
+
+
+```
++ echarts-united-kingdom-js
+  + registry.json
+  + package.json
+  + echarts-united-kingdom-js
+     + london.js
+     + manchester.js
+     + index.js
+  + other files
+```
+
+在 registry.json 里，需要填写的东西是和 pyecharts 衔接的必要信息。
+```
+{
+    "JUPYTER_URL": "/nbextensions/echarts-united-kingdom-js",
+    "GITHUB_URL": "https://your.github.io/echarts-united-kingdom-js/echarts-united-kingdoms-js",
+    "JUPYTER_ENTRY": "echarts-united-kingdom-js/index",
+    "JS_FOLDER": "echarts-united-kingdoms-js",
+    "PINYIN_MAP": {
+        "伦敦": "lundun",
+        "曼彻斯特": "manqiesite"
+    },
+    "FILE_MAP": {
+        "lundun": "london",
+        "manqiesite": "manchester"
+    }
+}
+```
+
+index.js 只为 jupyter notebook 而存在
+```
+define(["require", "exports"], function (require, exports) {
+    "use strict";
+    Object.defineProperty(exports, "__esModule", { value: true });
+    var version = '1.0.0';
+    function load_ipython_extension() {
+        console.log("echarts-united-kingdom-js " + version + " has been loaded");
+    }
+    exports.load_ipython_extension = load_ipython_extension;
+});
+
+好了，在 echarts-united-kingdom-js 子文件夹里就需要放地图文件了。每放一个呢，请记住更新 PINYI_MAP 和 FILE_MAP。
+
+```
+
+### python 项目
+
+首先，你需要得到以下的项目：
+
+```
+pip install yehua
+git clone https://github.com/pyecharts/pypkg-mobans.git
+export YEHUA_FILE=/ABSOLUTE/PATH/TO/pypkg-mobans/yehua.yml
+```
+
+然后你需要移步到你的工作文件夹，以 echarts-united-kingdom-pykg 为例子运行这个命令
+
+```
+$ yh
+Yehua will walk you through creating a pyecharts pypkg package.
+Press ^C to quit at any time.
+
+project name: echarts-united-kingdom-pypkg
+npm project name: echarts-united-kingdom-js
+description: pyecharts map extension - united kingdom maps - python package
+license: MIT
+author: C.W.
+contact email: wangc_2011@hotmail.com
+github profile/organisation: chfw
+copyright owner: C.W.
+Cloning into 'mobans'...
+remote: Counting objects: 214, done.
+remote: Compressing objects: 100% (11/11), done.
+remote: Total 214 (delta 8), reused 12 (delta 5), pack-reused 198
+Receiving objects: 100% (214/214), 30.31 KiB | 17.00 KiB/s, done.
+Resolving deltas: 100% (126/126), done.
+Templating CUSTOM_README.rst.jj2 to README.rst
+Templating custom_setup.py.jj2 to setup.py
+Templating requirements.txt.jj2 to requirements.txt
+Templating tests/custom_requirements.txt.jj2 to tests/requirements.txt
+Templating docs/source/conf.py.jj2 to docs/source/conf.py
+Templating test.script.jj2 to test.sh
+Templating _version.py.jj2 to echarts_united_kingdom_pypkg/_version.py
+Templating gitignore.jj2 to .gitignore
+Templating travis.yml.jj2 to .travis.yml
+Templated 9 files.
+Initialized empty Git repository in /private/tmp/echarts-united-kingdom-pypkg/.git/
+Please review changes before commit!
+```
+
+这个时候，这个扩展包的骨架就已经做好了。我们现在做最后一步：
+
+
+```
+pyecharts-host:tmp chfw$ cd echarts-united-kingdom-pypkg/
+git submodule add https://github.com/your/npm/project your_project_name_pypkg/resources
+git submodule init
+```
+
+然后做:
+
+```
+git commit
+```
+
+这样呢，这个包就可以放在 github 上了。
+
 
 ## 如何手动添加(0.1.9.7+)
 下面就以广东省汕头市南澳县地图为例，说明如何自行添加地图。
@@ -73,60 +220,4 @@ jupyter nbextension enable echarts/main
 
 ![customize-map-2](https://user-images.githubusercontent.com/19553554/35104708-9d88455a-fca4-11e7-8fb1-1aff8e0066ef.png)
 
-## 如何把手动加的地图变成自动的
 
-如果用户期望 pyecharts 支持自己的地图，请发请求然后再发来改动。
-
-或者自己开发pyecharts的地图扩展
-
-
-## pyecharts 的地图扩展
-
-首先，地图扩展必须是一个 github 的项目，并已经启动 gh-pages 来提供地图库。如果未启动 gh-pages , 那么
-你的 jupyter 用户不能把 ipynb 下载成 html ，因为下载之后地图将无法显示。
-
-需要是这样一个结构：
-
-```
-+ your-map-extension-js
-  + registry.json
-  + your-map-extension-js
-     + london.js
-     + manchester.js
-     + index.js
-  + other files
-```
-
-在 registry.json 里，需要填写这些项目:
-```
-{
-    "JUPYTER_URL": "/nbextensions/your-map-extension-js",
-    "GITHUB_URL": "https://your.github.io/your-map-extension-js/your-map-extensions-js",
-    "JUPYTER_ENTRY": "your-map-extension-js/index",
-    "JS_FOLDER": "your-map-extensions-js",
-    "PINYIN_MAP": {
-        "伦敦": "lundun",
-        "曼彻斯特": "manqiesite"
-    },
-    "FILE_MAP": {
-        "lundun": "london",
-        "manqiesite": "manchester"
-    }
-}
-```
-
-index.js 可以是这样：
-```
-define(["require", "exports"], function (require, exports) {
-    "use strict";
-    Object.defineProperty(exports, "__esModule", { value: true });
-    var version = '1.0.0';
-    function load_ipython_extension() {
-        console.log("your-map-extension-js " + version + " has been loaded");
-    }
-    exports.load_ipython_extension = load_ipython_extension;
-});
-
-```
-
-最后，就是通知我们把你的扩展加入 pyecharts-cli 的目录，方便你和其他人装你的地图扩展。
