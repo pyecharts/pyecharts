@@ -2,27 +2,39 @@
 
 
 * ### version 0.4.0 (development)
-    
+
     * 更新 jupyter-echarts 至 1.4.0: echarts 3.6.2 -> 4.0.2, echarts-gl 1.0.0-b4 -> 1.0.0-b6, echarts-liquidfill 1.0.5 -> 1.1.1, 
 
 * ### version 0.3.2 (development)
 
+    从此版本开始，将不再自带地图 js 文件。有需要的开发人员，请自选安装。
+
     #### Added
-    * 新增 chart_id 配置项，可设置图形 id，对应为每个图在 html 中的 div#id
+    * 新增 `chart_id` 配置项，可设置图形 id，对应为每个图在 html 中的 div#id
+    * 新增 jupyter-echarts-pypkg, echarts-china-provinces-pypkg, echarts-china-cities-pypkg 和 echarts-countries-pypkg。第一个是自带安装，后三个是可选安装。
+    * [issue#395](https://github.com/pyecharts/pyecharts/issues/395) 新增 `is_splitline_show` 配置项，用于控制是否显示网格线
+    * 新增 AppVeyor CI，为 Windows OS 提供测试功能
 
     #### Fixed
     * [issue#322](https://github.com/pyecharts/pyecharts/issues/322) 修复在 timeline 中不能设置多个 legend 的 bug
     * [issue#357](https://github.com/pyecharts/pyecharts/issues/357) 修复 Line 图 symbol 大小不能调整的 bug
+    * [issue#371](https://github.com/pyecharts/pyecharts/issues/371) 修复 Parallel 图 Line 样式失效的 bug
+    * [issue#378](https://github.com/pyecharts/pyecharts/issues/378) 修复 Geo 图中当多次 render 时相同 value 值会被叠加的 bug
+    * [issue#338](https://github.com/pyecharts/pyecharts/issues/338) 修复 timeline 中 map 的 visualmap 组件不能正常显示的 bug
 
     #### Updated
-    * 更新 jupyter-echarts 至 1.4.0: echarts 3.6.2 -> 3.8.5, echarts-gl 1.0.0-b4 -> 1.0.0-b6, echarts-liquidfill 1.0.5 -> 1.1.1, echarts-wordcloud 1.1.0 -> 1.1.2
     * 地图更新：[台湾地图补了市，县，岛](https://github.com/pyecharts/pyecharts/pull/316), [重庆地图补了开州区](https://github.com/pyecharts/pyecharts/pull/317)
     * 优化图表 API，图表 js_dependencies 属性返回有序列表
     * 优化部分代码逻辑
+    * [issue#377](https://github.com/pyecharts/pyecharts/issues/377) 为 Kline 提供 Candlestick 别名
 
     #### Changed
     * 示例移到新的代码仓库 [pyecharts-users-cases](https://github.com/pyecharts/pyecharts-users-cases)
-    
+
+    #### Removed
+    * [PR#368](https://github.com/pyecharts/pyecharts/pull/368) `pyecharts/templates/js` 被删去了。`jupyter-echarts` 不再内嵌于 pyecharts 。
+    * echarts-china-cities-js 和 echarts-countries-js 不再是必选，而是可选图库。
+
 * ### version 0.3.1 - 2017.12.13（Current）
 
     #### Fixed
