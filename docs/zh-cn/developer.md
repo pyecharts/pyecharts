@@ -25,9 +25,9 @@ python setup.py install
 
 需要更多信息，请看[教学实例](http://lml.readthedocs.io/en/latest/api_tutorial.html)。
 
-# jupyter-echarts 是一个前端项目，如果你对前端这方面还不太熟悉的话，建议找相关的教程学习一下。
+jupyter-echarts 是一个前端项目，如果你对前端这方面还不太熟悉的话，建议找相关的教程学习一下。
 
-## 向 jupyter-echarts 中新增你的内容
+### 向 jupyter-echarts 中新增你的内容
 
 克隆远程仓库
 
