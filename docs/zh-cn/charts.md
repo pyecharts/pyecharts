@@ -24,7 +24,7 @@
     * GeoLines（地理坐标系线图）
     * Graph（关系图）
     * HeatMap（热力图）
-    * Kline（K线图）
+    * Kline/Candlestick（K线图）
     * Line（折线/面积图）
     * Line3D（3D 折线图）
     * Liquid（水球图）
@@ -102,6 +102,8 @@
     是否显示 x 轴
 * is_yaxis_show -> bool  
     是否显示 y 轴
+* is_splitline_show -> bool  
+    是否显示 y 轴网格线，默认为 True。
 * x_axis -> list  
     x 轴数据项
 * xaxis_interval -> int  
@@ -1352,7 +1354,7 @@ heatmap.render()
 **Note：** 热力图必须配合 通用配置项 中的 VisualMap 使用才有效果。
 
 
-## Kline（K线图）
+## Kline/Candlestick（K线图）
 > 红涨蓝跌
 
 Kline.add() 方法签名
@@ -3561,7 +3563,7 @@ style = Style(
     width=1100,
     height=600,
     background_color='#404a59'
-}
+)
 # style,init_style 会返回类初始化的风格配置字典
 geo = Geo("全国主要城市空气质量", "data from pm2.5", **style.init_style)
 ```
@@ -3575,7 +3577,7 @@ pie_style = style.add(
     label_pos="center",
     is_label_show=True,
     label_text_color=None
-}
+)
 pie.add("", ["剧情", ""], [25, 75], center=[10, 30], **pie_style)
 pie.add("", ["奇幻", ""], [24, 76], center=[30, 30], **pie_style)
 pie.add("", ["爱情", ""], [14, 86], center=[50, 30], **pie_style)
