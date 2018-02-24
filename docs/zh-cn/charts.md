@@ -24,7 +24,7 @@
     * GeoLines（地理坐标系线图）
     * Graph（关系图）
     * HeatMap（热力图）
-    * Kline（K线图）
+    * Kline/Candlestick（K线图）
     * Line（折线/面积图）
     * Line3D（3D 折线图）
     * Liquid（水球图）
@@ -102,6 +102,8 @@
     是否显示 x 轴
 * is_yaxis_show -> bool  
     是否显示 y 轴
+* is_splitline_show -> bool  
+    是否显示 y 轴网格线，默认为 True。
 * x_axis -> list  
     x 轴数据项
 * xaxis_interval -> int  
@@ -1352,7 +1354,7 @@ heatmap.render()
 **Note：** 热力图必须配合 通用配置项 中的 VisualMap 使用才有效果。
 
 
-## Kline（K线图）
+## Kline/Candlestick（K线图）
 > 红涨蓝跌
 
 Kline.add() 方法签名
