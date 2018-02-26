@@ -83,7 +83,9 @@ from django.http import HttpResponse
 from django.template import loader
 from pyecharts import Line3D
 
+
 REMOTE_HOST = "https://pyecharts.github.io/assets/js"
+
 
 def index(request):
     template = loader.get_template('myfirstvis/pyecharts.html')
@@ -117,6 +119,7 @@ def line3d():
 `script_list` 是 Page() 类渲染网页所需要依赖的 echarts js 库，依赖的库的数量取决于所要渲染的图形种类。
 
 `host` 是 echarts js 库的地址，默认提供的地址为 https://pyecharts.github.io/assets/js 当然，如果你愿意你也可以改变这个地址，先克隆 https://github.com/pyecharts/assets 然后将 `js` 文件夹挂载在你自己的服务器上即可。
+
 
 
 ## Step 3: 为项目提供自己的模板
