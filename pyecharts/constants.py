@@ -1,13 +1,6 @@
 # coding=utf-8
 from __future__ import unicode_literals
 
-# Path constants for jshost
-DEFAULT_JUPYTER_GITHUB_URL = 'https://chfw.github.io/jupyter-echarts/echarts'
-
-# for backward compatibility
-DEFAULT_HOST = DEFAULT_JUPYTER_GITHUB_URL
-
-JUPYTER_LOCALHOST_URL = '/nbextensions/echarts'
 
 PAGE_TITLE = "Echarts"
 

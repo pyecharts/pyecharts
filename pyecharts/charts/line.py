@@ -18,6 +18,7 @@ class Line(Chart):
 
     def __add(self, name, x_axis, y_axis,
               is_symbol_show=True,
+              symbol_size=4,
               is_smooth=False,
               is_stack=False,
               is_step=False,
@@ -62,6 +63,7 @@ class Line(Chart):
             "type": "line",
             "name": name,
             "symbol": chart['symbol'],
+            "symbolSize": symbol_size,
             "smooth": is_smooth,
             "step": is_step,
             "stack": is_stack,
