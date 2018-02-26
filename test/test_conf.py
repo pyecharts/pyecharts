@@ -9,30 +9,7 @@ from __future__ import unicode_literals
 from nose.tools import eq_, raises
 
 from pyecharts.conf import _ensure_echarts_is_in_the_front
-from pyecharts.conf import PyEchartsConfig, SCRIPT_FILE_PATH
-from pyecharts.constants import DEFAULT_JUPYTER_GITHUB_URL
-
-
-def test_with_default_value():
-    target_config = PyEchartsConfig()
-    eq_(SCRIPT_FILE_PATH, target_config.jshost)
-
-    assert target_config.js_embed
-
-    target_config.force_js_embed = True
-
-    assert target_config.js_embed
-
-
-def test_pyecharts_remote_jshost():
-    target_config = PyEchartsConfig(jshost=DEFAULT_JUPYTER_GITHUB_URL)
-    eq_('https://chfw.github.io/jupyter-echarts/echarts', target_config.jshost)
-
-    assert target_config.js_embed
-
-    target_config.force_js_embed = True
-
-    assert target_config.js_embed
+from pyecharts.conf import PyEchartsConfig
 
 
 def test_custom_local_jshost():
@@ -44,6 +21,12 @@ def test_custom_local_jshost():
     target_config.force_js_embed = True
 
     assert target_config.js_embed
+
+
+def test_get_js_library():
+    test_config = PyEchartsConfig()
+    actual = test_config.get_js_library('abc')
+    assert actual is None
 
 
 def test_custom_remote_jshost():

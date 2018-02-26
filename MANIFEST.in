@@ -1,5 +1,3 @@
 include README.md
 include changelog.md
 include pyecharts/templates/*.html
-include pyecharts/templates/js/echarts/*.js
-include pyecharts/templates/js/echarts/registry.json

@@ -10,17 +10,21 @@ DEFAULT_JS_LIBRARIES = dict(
     echarts='echarts.min',
     echartsgl='echarts-gl.min',
     liquidfill='echarts-liquidfill.min',
-    world='world',
-    china='china',
     wordcloud='echarts-wordcloud.min'
 )
 
 CITY_NAME_PINYIN_MAP = {
-    "广东": "guangdong",
-    "安徽": "anhui",
+    "重庆": "chongqing",
     "澳门": "aomen",
     "北京": "beijing",
-    "重庆": "chongqing",
+    "天津": "tianjin",
+    "香港": "xianggang",
+    "上海": "shanghai",
+}
+
+PROVINCE_NAME_PINYIN_MAP = {
+    "广东": "guangdong",
+    "安徽": "anhui",
     "福建": "fujian",
     "甘肃": "gansu",
     "广西": "guangxi",
@@ -39,12 +43,9 @@ CITY_NAME_PINYIN_MAP = {
     "宁夏": "ningxia",
     "青海": "qinghai",
     "山东": "shandong",
-    "上海": "shanghai",
     "山西": "shanxi",
     "四川": "sichuan",
     "台湾": "taiwan",
-    "天津": "tianjin",
-    "香港": "xianggang",
     "新疆": "xinjiang",
     "西藏": "xizang",
     "云南": "yunnan",
@@ -53,12 +54,30 @@ CITY_NAME_PINYIN_MAP = {
 
 
 def test_core_js_libraries():
+    JS_EXTENSIONS = conf.EXTENSION_MANAGER.get_all_extensions()
+    for extension in JS_EXTENSIONS:
+        if extension.registry['JS_FOLDER'] == 'echarts':
+            break
     for key, value in DEFAULT_JS_LIBRARIES.items():
-        assert key in conf.DEFAULT_JS_LIBRARIES, key
-        eq_(value, conf.DEFAULT_JS_LIBRARIES[key])
+        default_file_map = extension.registry.get('FILE_MAP')
+        eq_(value, default_file_map[key])
 
 
 def test_province_names():
+    JS_EXTENSIONS = conf.EXTENSION_MANAGER.get_all_extensions()
+    for extension in JS_EXTENSIONS:
+        if extension.registry['JS_FOLDER'] == 'echarts-china-provinces-js':
+            break
+    __PROVINCE_NAME_PINYIN_MAP__ = extension.registry.get('PINYIN_MAP', {})
+    for key, value in PROVINCE_NAME_PINYIN_MAP.items():
+        eq_(value, __PROVINCE_NAME_PINYIN_MAP__[key])
+
+
+def test_city_names():
+    JS_EXTENSIONS = conf.EXTENSION_MANAGER.get_all_extensions()
+    for extension in JS_EXTENSIONS:
+        if extension.registry['JS_FOLDER'] == 'echarts-china-cities-js':
+            break
+    __CITY_NAME_PINYIN_MAP__ = extension.registry.get('PINYIN_MAP', {})
     for key, value in CITY_NAME_PINYIN_MAP.items():
-        assert key in conf.CITY_NAME_PINYIN_MAP
-        eq_(value, conf.CITY_NAME_PINYIN_MAP[key])
+        eq_(value, __CITY_NAME_PINYIN_MAP__[key])

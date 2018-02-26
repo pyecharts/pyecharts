@@ -1,0 +1,38 @@
+@startuml
+
+cloud "pypi" {
+[pyecharts]
+[pyecharts-jupyter-installer]
+[jupyter notebook]
+
+[lml]
+
+[jupyter-echarts-pypkg]
+[echarts-countries-pypkg]
+[echarts-china-cities-pypkg]
+}
+
+cloud "github" {
+ [jupyter-echarts]
+ [echarts-countries-js]
+ [echarts-china-cities-js]
+}
+
+[jupyter-echarts]
+[echarts-china-cities-js]
+
+[jupyter-echarts-pypkg] ..> [jupyter-echarts] : packages
+[echarts-china-cities-pypkg] ..> [echarts-china-cities-js] : packages
+[echarts-countries-pypkg] ..> [echarts-countries-js] : packages
+[pyecharts] --> [lml] : finds extensions through
+[lml] --> [echarts-countries-pypkg] : links
+[lml] --> [echarts-china-cities-pypkg] : links
+[lml] --> [jupyter-echarts-pypkg] : links
+
+
+[jupyter-echarts-pypkg] --> [pyecharts-jupyter-installer] 
+[echarts-countries-pypkg] --> [pyecharts-jupyter-installer] 
+[echarts-china-cities-pypkg] --> [pyecharts-jupyter-installer]
+[pyecharts-jupyter-installer] --> [jupyter notebook] : installs javascript extensions to
+
+@enduml
