@@ -1,0 +1,17 @@
+environment:
+
+  matrix:
+    - PYTHON: "C:\\Python27-x64"
+    - PYTHON: "C:\\Python35-x64"
+    - PYTHON: "C:\\Python36-x64"
+
+install:
+  - "%PYTHON%\\python.exe -m pip install -r requirements.txt"
+  - cd test
+  - "%PYTHON%\\python.exe -m pip install -r requirements.txt"
+  - "%PYTHON%\\python.exe -m pip install mock"
+
+build: off
+
+test_script:
+  "%PYTHON%/Scripts/nosetests --with-coverage --cover-package pyecharts --cover-package test && cd .. && %PYTHON%/Scripts/flake8 --exclude docs --builtins=unicode,xrange,long"

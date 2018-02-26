@@ -1,51 +1,10 @@
 # coding=utf-8
 from __future__ import unicode_literals
 
-import os
-import re
-import sys
-import json
 import codecs
 import datetime
-
-PY2 = sys.version_info[0] == 2
-
-JS_PATTERN = re.compile(r'<!-- build -->(.*)<!-- endbuild -->',
-                        re.IGNORECASE | re.MULTILINE | re.DOTALL)
-JS_SRC_PATTERN = re.compile(r'src=\"(.*?)\"')
-
-
-def freeze_js(html_content):
-    """
-
-    :param html_content:
-    :return:
-    """
-    matches = JS_PATTERN.finditer(html_content)
-
-    if not matches:
-        return html_content
-
-    for match in reversed(tuple(matches)):
-        # JS file block
-        src_matches = JS_SRC_PATTERN.findall(match.group(1))
-
-        js_content = ""
-        for src in src_matches:
-            src = src.strip()
-            src = src.split('/')
-            file_path = os.path.join(
-                get_resource_dir('templates'), *src)
-
-            with codecs.open(file_path, "r", "utf-8") as f:
-                js_content += f.read() + '\n'
-        # Replace matched string with inline JS
-        fmt = '<script type="text/javascript">{}</script>'
-        js_content = fmt.format(js_content)
-        html_content = (html_content[:match.start()] + js_content +
-                        html_content[match.end():])
-
-    return html_content
+import os
+import json
 
 
 def get_resource_dir(*paths):
@@ -66,19 +25,15 @@ def write_utf8_html_file(file_name, html_content):
     :param html_content:
     :return:
     """
-    if PY2:
-        html = html_content.encode('utf-8')
-        with open(file_name, "w+") as fout:
-            fout.write(html)
-    else:
-        with open(file_name, "w+", encoding="utf-8") as fout:
-            fout.write(html_content)
+    with codecs.open(file_name, 'w+', encoding='utf-8') as f:
+        f.write(html_content)
 
 
 class UnknownTypeEncoder(json.JSONEncoder):
     """
     UnknownTypeEncoder`类用于处理数据的编码，使其能够被正常的序列化
     """
+
     def default(self, obj):
         if isinstance(obj, (datetime.datetime, datetime.date)):
             return obj.isoformat()
@@ -100,3 +55,50 @@ def json_dumps(data, indent=0):
     :param indent: 缩进量
     """
     return json.dumps(data, indent=indent, cls=UnknownTypeEncoder)
+
+
+def to_css_length(x):
+    """
+    Return the standard length string of css.
+    It's compatible with number values in old versions.
+    :param x:
+    :return:
+    """
+    if isinstance(x, (int, float)):
+        return '{}px'.format(x)
+    else:
+        return x
+
+
+def merge_js_dependencies(*chart_or_name_list):
+    """
+    Merge multiple dependencies to a total list.
+    This will ensure the order and unique in the items.
+    :param chart_or_name_list:
+    :return: A list containing dependency items.
+    """
+    front_must_items = ['echarts']  # items which must be included.
+    front_optional_items = ['echartsgl']
+    dependencies = []
+    fist_items = set()
+
+    def _add(_items):
+        if _items in front_must_items:
+            pass
+        elif _items in front_optional_items:
+            fist_items.add(_items)
+        elif _items not in dependencies:
+            dependencies.append(_items)
+
+    for d in chart_or_name_list:
+        if hasattr(d, 'js_dependencies'):
+            for x in d.js_dependencies:
+                _add(x)
+        elif isinstance(d, (list, tuple, set)):
+            for x in d:
+                _add(x)
+        else:
+            _add(d)
+    # items which should be included in front part.
+    fol = [x for x in front_optional_items if x in fist_items]
+    return front_must_items + fol + dependencies

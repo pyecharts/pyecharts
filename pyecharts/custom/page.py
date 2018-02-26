@@ -2,7 +2,7 @@
 
 import pyecharts.utils as utils
 import pyecharts.engine as engine
-from pyecharts.conf import PYTHON_CONFIG, JUPYTER_CONFIG
+from pyecharts.conf import CURRENT_CONFIG
 import pyecharts.constants as constants
 
 
@@ -49,9 +49,8 @@ class Page(list):
         """
         Declare its javascript dependencies for embedding purpose
         """
-        unordered_js_dependencies = self._merge_dependencies()
-        return PYTHON_CONFIG.produce_html_script_list(
-            unordered_js_dependencies)
+        return CURRENT_CONFIG.produce_html_script_list(
+            self.js_dependencies)
 
     def _repr_html_(self):
         """
@@ -59,12 +58,12 @@ class Page(list):
         :return:
         """
         doms = components = ""
-        dependencies = self._merge_dependencies()
+        dependencies = self.js_dependencies
         for chart in self:
             doms += chart._render_notebook_dom_()
             components += chart._render_notebook_component_()
 
-        require_config = JUPYTER_CONFIG.produce_require_configuration(
+        require_config = CURRENT_CONFIG.produce_require_configuration(
             dependencies)
         return engine.render_notebook(
             "notebook.html",
@@ -72,21 +71,10 @@ class Page(list):
             dom=doms,
             **require_config)
 
-    def _merge_dependencies(self):
-        dependencies = set()
-        for chart in self:
-            dependencies = dependencies.union(chart._js_dependencies)
-        # make sure echarts is the item in the list
-        # require(['echarts'....], function(ec) {..}) need it to be first
-        # but dependencies is a set so has no sequence
-        if len(dependencies) > 1:
-            dependencies.remove('echarts')
-            dependencies = ['echarts'] + list(dependencies)
-        return dependencies
-
     @property
     def js_dependencies(self):
-        return self._merge_dependencies()
+        # Treat self as a list,not a page
+        return utils.merge_js_dependencies(*self)
 
     @property
     def page_title(self):

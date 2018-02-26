@@ -1,13 +1,17 @@
 # coding=utf-8
 
+import copy
+
 from pyecharts.constants import PAGE_TITLE
 from pyecharts.base import Base
+from pyecharts.utils import merge_js_dependencies
 
 
 class Timeline(Base):
     """
     时间线轮播多张图
     """
+
     def __init__(self, page_title=PAGE_TITLE,
                  width=800,
                  height=400,
@@ -73,9 +77,10 @@ class Timeline(Base):
                     "right": timeline_right,
                     "top": timeline_top,
                     "bottom": timeline_bottom
-                }
+                },
+                "series": [],
             },
-            "options": []
+            "options": [],
         }
 
     def add(self, chart, time_point):
@@ -86,21 +91,27 @@ class Timeline(Base):
         :param time_point:
             指定时间点
         """
-        self._js_dependencies = self._js_dependencies.union(
-            chart.js_dependencies)
+        self._js_dependencies = merge_js_dependencies(
+            self._js_dependencies,
+            chart.js_dependencies
+        )
         self.__check_components(chart)
         self._time_points.append(time_point)
         self._option.get('baseOption').update(
-            legend=chart.options.get('legend'),
             backgroundColor=chart.options.get('backgroundColor')
         )
         self._option.get('baseOption').get('timeline').update(
             data=self._time_points
         )
         self._option.get('options').append({
+            "legend": chart.options.get('legend'),
             "series": chart.options.get('series'),
             "title": chart.options.get('title')
         })
+        _tmp_series = copy.deepcopy(chart.options.get('series'))
+        for _s in _tmp_series:
+            _s.pop("data", None)
+            self._option.get("baseOption").get("series").append(_s)
 
     def __check_components(self, chart):
         """
@@ -109,7 +120,7 @@ class Timeline(Base):
             图形实例
         """
         _compoents = [
-            'grid', 'xAxis', 'yAxis', 'polar', 'radiusAxis', 'geo'
+            'grid', 'xAxis', 'yAxis', 'polar', 'radiusAxis', 'geo',
             'angleAxis', 'radar', 'visualMap', 'dataZoom', 'parallelAxis'
         ]
 

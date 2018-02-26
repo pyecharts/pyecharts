@@ -37,18 +37,15 @@ def test_echarts_js_dependencies_embed():
     ECHARTS_ENV.configure_pyecharts(
         jshost=get_resource_dir('templates', 'js', 'echarts'))
     tpl = ECHARTS_ENV.from_string(
-        '{{ echarts_js_dependencies_embed("echarts.min") }}')
+        '{{ echarts_js_dependencies_embed("echarts") }}')
     bar = create_demo_bar()
     html = tpl.render(bar=bar)
     assert len(html) > 0
 
-    # echarts_js_dependencies equals echarts_js_dependencies_
+    # no longer echarts_js_dependencies equals echarts_js_dependencies_
     # embed when use local host.
-    tpl2 = ECHARTS_ENV.from_string(
-        '{{ echarts_js_dependencies("echarts.min") }}')
-    html2 = tpl2.render(bar=bar)
-    assert len(html2) > 0
-    assert html == html2
+    # because the js files is either in python path or user path
+    # hence it could not be simply judged.
 
 
 def test_echarts_js_container():
