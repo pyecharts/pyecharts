@@ -37,7 +37,7 @@ data = [
                         "name": "我是B.children.d",
                     }]
             }]}
-    ]
+]
 
 
 def test_treemap_default():
@@ -57,14 +57,9 @@ def test_treemap_offcical_data():
     treemap = TreeMap("树图-官方数据", width=1200, height=600)
     import os
     import json
-    if PY2:
-        import codecs
-        test_fixture = os.path.join("..", "json", "treemap.json")
-        with codecs.open(test_fixture, "rb") as f:
-            data = json.load(f)
-    else:
-        with open(os.path.join("..", "json", "treemap.json"),
-                  "r", encoding="utf-8") as f:
-            data = json.load(f)
+    import codecs
+    test_fixture = os.path.join("fixtures", "treemap.json")
+    with codecs.open(test_fixture, "r", encoding='utf-8') as f:
+        data = json.load(f)
     treemap.add("演示数据", data, is_label_show=True, label_pos='inside')
     treemap.render()

@@ -14,7 +14,10 @@ from pyecharts.charts.geo import Geo
 from pyecharts.charts.geolines import GeoLines
 from pyecharts.charts.graph import Graph
 from pyecharts.charts.heatmap import HeatMap
+
 from pyecharts.charts.kline import Kline
+Candlestick = Kline
+
 from pyecharts.charts.line import Line
 from pyecharts.charts.line3D import Line3D
 from pyecharts.charts.liquid import Liquid
@@ -40,3 +43,4 @@ from pyecharts.custom.timeline import Timeline
 from pyecharts.conf import online
 from pyecharts.conf import configure
 from pyecharts.style import Style
+
