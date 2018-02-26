@@ -54,30 +54,23 @@ PROVINCE_NAME_PINYIN_MAP = {
 
 
 def test_core_js_libraries():
-    JS_EXTENSIONS = conf.EXTENSION_MANAGER.get_all_extensions()
-    for extension in JS_EXTENSIONS:
-        if extension.registry['JS_FOLDER'] == 'echarts':
-            break
+    __jupyter_echarts__ = conf.EXTENSION_MANAGER.get_a_extension('echarts')
+    __file_map__ = __jupyter_echarts__.registry.get('FILE_MAP')
     for key, value in DEFAULT_JS_LIBRARIES.items():
-        default_file_map = extension.registry.get('FILE_MAP')
-        eq_(value, default_file_map[key])
+        eq_(value, __file_map__[key])
 
 
 def test_province_names():
-    JS_EXTENSIONS = conf.EXTENSION_MANAGER.get_all_extensions()
-    for extension in JS_EXTENSIONS:
-        if extension.registry['JS_FOLDER'] == 'echarts-china-provinces-js':
-            break
-    __PROVINCE_NAME_PINYIN_MAP__ = extension.registry.get('PINYIN_MAP', {})
+    __provinces__ = conf.EXTENSION_MANAGER.get_a_extension(
+        'echarts-china-provinces-js')
+    __pinyin_map__ = __provinces__.registry.get('PINYIN_MAP')
     for key, value in PROVINCE_NAME_PINYIN_MAP.items():
-        eq_(value, __PROVINCE_NAME_PINYIN_MAP__[key])
+        eq_(value, __pinyin_map__[key])
 
 
 def test_city_names():
-    JS_EXTENSIONS = conf.EXTENSION_MANAGER.get_all_extensions()
-    for extension in JS_EXTENSIONS:
-        if extension.registry['JS_FOLDER'] == 'echarts-china-cities-js':
-            break
-    __CITY_NAME_PINYIN_MAP__ = extension.registry.get('PINYIN_MAP', {})
+    __cities__ = conf.EXTENSION_MANAGER.get_a_extension(
+        'echarts-china-cities-js')
+    __pinyin_map__ = __cities__.registry.get('PINYIN_MAP', {})
     for key, value in CITY_NAME_PINYIN_MAP.items():
-        eq_(value, __CITY_NAME_PINYIN_MAP__[key])
+        eq_(value, __pinyin_map__[key])
