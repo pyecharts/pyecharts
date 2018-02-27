@@ -50,7 +50,7 @@ class Map(Chart):
         :param is_map_symbol_show:
             是否显示地图标记红点，默认为 True。
         :param name_map:
-            用自定义的地图名称
+            用自定义的地图名称。默认为 None，也就是用地图自带地名。
         :param kwargs:
         """
         assert len(attr) == len(value)
