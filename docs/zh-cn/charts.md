@@ -1718,6 +1718,7 @@ add(name, attr, value,
     是否显示地图标记红点，默认为 True。
 * name_map:
     [用自定义的地图名称](http://echarts.baidu.com/option.html#series-map.nameMap)
+
 ```python
 from pyecharts import Map
 
@@ -1789,7 +1790,6 @@ map.render()
 ```
 ![map-4](https://user-images.githubusercontent.com/19553554/35082387-7d35893e-fc54-11e7-8482-60dc23d31836.png)
 
-
 设置 `name_map=...` 采用自己地图名称
 
 原版：
@@ -1797,7 +1797,7 @@ map.render()
 <img width="382" alt="screen shot 2018-02-27 at 09 24 21" src="https://user-images.githubusercontent.com/4280312/36720467-16fb0a66-1ba0-11e8-8cbd-453d8f2462d3.png">
 </div>
     
-用name_map改动之后：
+用 `name_map` 改动之后：
 
 ```python
 #coding=utf-8
