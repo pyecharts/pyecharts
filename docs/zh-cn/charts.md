@@ -1716,7 +1716,8 @@ add(name, attr, value,
    如果只想要开启缩放或者平移，可以设置成'scale'或者'move'。设置成 True 为都开启
 * is_map_symbol_show -> bool  
     是否显示地图标记红点，默认为 True。
-
+* name_map:
+    [用自定义的地图名称](http://echarts.baidu.com/option.html#series-map.nameMap)
 ```python
 from pyecharts import Map
 
