@@ -1790,6 +1790,33 @@ map.render()
 ![map-4](https://user-images.githubusercontent.com/19553554/35082387-7d35893e-fc54-11e7-8482-60dc23d31836.png)
 
 
+设置 `name_map=...` 采用自己地图名称
+
+原版：
+<div align="center">
+<img width="382" alt="screen shot 2018-02-27 at 09 24 21" src="https://user-images.githubusercontent.com/4280312/36720467-16fb0a66-1ba0-11e8-8cbd-453d8f2462d3.png">
+</div>
+    
+用name_map改动之后：
+
+```python
+#coding=utf-8
+from __future__ import unicode_literals
+
+from pyecharts import Map
+from echarts_united_kingdom_pypkg import NM_WESTMINSTER_2016_UK
+
+value = []
+attr = []
+map = Map('United Kingdom', width=800, height=600)
+map.add('', attr, value, maptype='英国选区2016', is_visualmap=True, visual_text_color="#000", name_map=NM_WESTMINSTER_2016_UK)
+map.render()
+```
+<div align="center">
+<img width="449" alt="screen shot 2018-02-27 at 09 27 38" src="https://user-images.githubusercontent.com/4280312/36720626-803ff194-1ba0-11e8-998b-548afbedc18e.png">
+</div>
+这个方便画图，因为很多数据和地区号直接挂钩，同时也容易做本地化。
+
 ## Parallel（平行坐标系）
 > 平行坐标系是一种常用的可视化高维数据的图表。
 
