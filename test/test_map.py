@@ -7,6 +7,7 @@ from pyecharts import Map
 
 from test.utils import get_default_rendering_file_content
 
+
 def test_map_show_label():
     # show label
     value = [155, 10, 66, 78]
