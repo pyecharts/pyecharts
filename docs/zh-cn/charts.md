@@ -75,8 +75,6 @@
     画布背景颜色，默认为 '#fff'
 * page_title -> str  
     指定生成的 html 文件中 `<title>` 标签的值。默认为'Echarts'
-* jshost-> str    
-    自定义每个实例的 JavaScript host
     
 
 # 通用配置项
