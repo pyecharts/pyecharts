@@ -12,6 +12,12 @@
     
     * 新增 `name_map`， [允许用户采用自己地图名称](http://echarts.baidu.com/option.html#series-map.nameMap)。
 
+    #### Changed
+
+    * `Chart.render_embed` 返回 `jinja2.Markup` 实例
+    * `Base.show_config` 重命名为 `Base.print_echarts_options`
+    * 移除 `EchartsEnvironment.configure_pyecharts` 方法
+
 * ### version 0.3.2 2018.02.26
 
     从此版本开始，将不再自带地图 js 文件。有需要的开发人员，请自选安装。
