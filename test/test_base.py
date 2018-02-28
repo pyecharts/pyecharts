@@ -1,11 +1,9 @@
-#!/usr/bin/env python
 # coding=utf-8
 from __future__ import unicode_literals
 
 import os
 import sys
 import json
-import codecs
 
 import pandas as pd
 import numpy as np
@@ -13,6 +11,7 @@ import numpy as np
 from nose.tools import eq_
 from pyecharts import Bar, Map
 from test.constants import CLOTHES
+from test.utils import get_default_rendering_file_content
 
 
 TITLE = "柱状图数据堆叠示例"
@@ -104,9 +103,8 @@ def test_echarts_position_in_render_html():
     map.add("", attr, value, maptype='广东',
             is_visualmap=True, visual_text_color='#000')
     map.render()
-    with codecs.open('render.html', 'r', 'utf-8') as f:
-        actual_content = f.read()
-        assert TITLE in actual_content
+    actual_content = get_default_rendering_file_content()
+    assert TITLE in actual_content
 
 
 def test_show_config():
