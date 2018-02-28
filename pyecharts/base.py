@@ -2,6 +2,8 @@
 
 import uuid
 
+from jinja2 import Markup
+
 import pyecharts.constants as constants
 import pyecharts.engine as engine
 import pyecharts.utils as utils
@@ -70,7 +72,7 @@ class Base(object):
                              chart_id=self._chart_id,
                              my_width=self.width,
                              my_height=self.height)
-        return html
+        return Markup(html)
 
     def get_js_dependencies(self):
         """ 声明所有的 js 文件路径
