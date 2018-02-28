@@ -5,7 +5,14 @@
 
     * 更新 jupyter-echarts 至 1.4.0: echarts 3.6.2 -> 4.0.2, echarts-gl 1.0.0-b4 -> 1.0.0-b6, echarts-liquidfill 1.0.5 -> 1.1.1, 
 
-* ### version 0.3.2 (development)
+* ### version 0.3.3 2018.02.27
+
+    #### added
+    * 防止将来的依赖包影响 v0.3.2 的功能: lml==0.0.2, jupyter-echarts-pypkg==0.0.11
+    
+    * 新增 `name_map`， [允许用户采用自己地图名称](http://echarts.baidu.com/option.html#series-map.nameMap)。
+
+* ### version 0.3.2 2018.02.26
 
     从此版本开始，将不再自带地图 js 文件。有需要的开发人员，请自选安装。
 
