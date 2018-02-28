@@ -30,17 +30,47 @@ from pyecharts import online
 online()
 ```
 
-**Q:克隆项目到本地后 template/js 文件夹为空，没有 js 文件？**
+**jupyter-notebook 输出问题**
 
-A: pyecharts 项目使用了 submodule 特性，template/js 引用了另一个仓库的代码。
+jupyter notebook 输出后，你的 notebook 离开了本地 jupyter 环境，图片就不能显示了。
+为了解决这个问题，再画图之前，你可以多加两个语句：
 
-这时应当使用下面的命令更新 submodule 模块内容。
+```python
+...
+from pyecharts import online
+
+online()
+...
+```
+
+这样，所有的脚本会从 github 下载。如果你连不上 Github, 你可以先把 https://github.com/pyecharts/assets 克隆一下。然后在你自己的服务器上，把整个 js 文件夹挂上去。
+
+下面我简单示范一下  
 
 ```
-git submodule update
+$ git clone https://github.com/pyecharts/assets
+$ cd js
+$ python -m http.server # for python 2, use python -m SimpleHTTPServer
+Serving HTTP on 0.0.0.0 port 8000 ...
 ```
 
-或者删除原有代码后，使用 `git clone --recursive https://github.com/pyecharts/pyecharts.git` 重新克隆代码。
+然后，再把本地服务器加进前面的语句：
+
+```python
+...
+from pyecharts import online
+
+online(host="http://localhost:8000)
+...
+```
+**Python2 编码问题**
+默认的编码类型为 UTF-8，在 Python3 中是没什么问题的，Python3 对中文的支持好很多。但是在 Python2 中，请应用下面的语句，保证没有编码问题:
+```
+#!/usr/bin/python
+#coding=utf-8
+from __future__ import unicode_literals
+```
+前两句告知你的编辑器你用 UTF-8 ([PEP-0263](https://www.python.org/dev/peps/pep-0263/)). 最后一句告知 Python 所有字符是 UTF-8 ([unicode literals](http://python-future.org/unicode_literals.html))
 
 **Q:pyecharts 是否支持  jupyterlab?**
 

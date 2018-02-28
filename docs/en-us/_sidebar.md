@@ -1,7 +1,10 @@
+- [Quick Start](en-us/prepare)
 - [Charts](en-us/charts)
-- [pyecharts+Flask](en-us/flask)
-- [pyecharts+Django](en-us/django)
+- [Map extensions](en-us/customize_map)
 - [pyecharts+Flask](en-us/flask)
 - [pyecharts+Django](en-us/django)
 - [Web integration](en-us/web_integration)
+- [Screenshots](zh-en/gallery)
 - [API](en-us/api)
+- [FAQ](zh-cn/faq)
+
