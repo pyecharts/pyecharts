@@ -24,6 +24,7 @@ class Map(Chart):
               maptype="china",
               is_roam=True,
               is_map_symbol_show=True,
+              name_map=None,
               **kwargs):
         """
 
@@ -48,6 +49,8 @@ class Map(Chart):
             如果只想要开启缩放或者平移，可以设置成'scale'或者'move'。设置成 True 为都开启。
         :param is_map_symbol_show:
             是否显示地图标记红点，默认为 True。
+        :param name_map:
+            用自定义的地图名称。默认为 None，也就是用地图自带地名。
         :param kwargs:
         """
         assert len(attr) == len(value)
@@ -58,7 +61,7 @@ class Map(Chart):
             _data.append({"name": _name, "value": _value})
         self._option.get('legend')[0].get('data').append(name)
 
-        self._option.get('series').append({
+        __option__ = {
             "type": "map",
             "name": name,
             "symbol": chart['symbol'],
@@ -67,6 +70,9 @@ class Map(Chart):
             "data": _data,
             "roam": is_roam,
             "showLegendSymbol": is_map_symbol_show
-        })
+        }
+        if name_map:
+            __option__['nameMap'] = name_map
+        self._option.get('series').append(__option__)
         self._add_chinese_map(maptype)
         self._config_components(**kwargs)
