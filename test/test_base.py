@@ -116,7 +116,7 @@ def test_show_config():
         with open(captured_stdout, 'w') as f:
             sys.stdout = f
             bar = create_a_bar("new")
-            bar.show_config()
+            bar.print_echarts_options()
     except Exception as e:
         # whatever happens, continue and restore stdout
         print(e)
