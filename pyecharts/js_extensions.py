@@ -95,6 +95,14 @@ class JsExtensionManager(PluginManager):
                     self.js_extensions.append(__js_extension__)
         return self.js_extensions
 
+    def get_a_extension(self, name):
+        if len(self.js_extensions) == 0:
+            self.get_all_extensions()
+        for __extension__ in self.js_extensions:
+            if __extension__.registry['JS_FOLDER'] == name:
+                return __extension__
+        return None
+
 
 EXTENSION_MANAGER = JsExtensionManager()
 # Load js & map file index into a dictionary.
