@@ -4,14 +4,22 @@
 
 ## 如何获得更多地图
 
-自从 0.3.2 开始，所有地图包括[中国各城市地图](https://github.com/pyecharts/echarts-china-cities-js) 和
-[世界各国的地图](https://github.com/pyecharts/echarts-countries-js)变成了可选地图。需要这些地图的朋友，可以装 pip 命令行:
+自从 0.3.2 开始，为了缩减项目本身的体积以及维持 pyecharts 项目的轻量化运行，pyecharts 将不再自带地图 js 文件。如用户需要用到地图图表，可自行安装对应的地图文件包。下面介绍如何安装。
+
+1. [全球国家地图](https://echarts-maps.github.io/echarts-countries-js/): [echarts-countries-pypkg](https://github.com/pyecharts/echarts-countries-pypkg) (1.9MB)
+2. [中国省级地图](https://echarts-maps.github.io/echarts-china-provinces-js/): [echarts-china-provinces-pypkg](https://github.com/pyecharts/echarts-china-provinces-pypkg) (730KB)
+3. [中国市级地图](https://echarts-maps.github.io/echarts-china-cities-js/): [echarts-china-cities-pypkg](https://github.com/pyecharts/echarts-china-cities-pypkg) (3.8MB)
+
+需要这些地图的朋友，可以装 pip 命令行:
 
 ```
 pip install echarts-countries-pypkg
 pip install echarts-china-provinces-pypkg
 pip install echarts-china-cities-pypkg
 ```
+
+特别注明，中国地图在 echarts-countries-pypkg 里。
+
 
 ## 如何制作自己的地图扩展
 
