@@ -30,7 +30,7 @@ from pyecharts import online
 online()
 ```
 
-**jupyter-notebook 输出问题**
+**Q:jupyter-notebook 输出问题**
 
 jupyter notebook 输出后，你的 notebook 离开了本地 jupyter 环境，图片就不能显示了。
 为了解决这个问题，再画图之前，你可以多加两个语句：
@@ -63,7 +63,7 @@ from pyecharts import online
 online(host="http://localhost:8000)
 ...
 ```
-**Python2 编码问题**
+**Q:Python2 编码问题**
 默认的编码类型为 UTF-8，在 Python3 中是没什么问题的，Python3 对中文的支持好很多。但是在 Python2 中，请应用下面的语句，保证没有编码问题:
 ```
 #!/usr/bin/python
