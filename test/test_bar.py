@@ -60,7 +60,7 @@ def test_bar_waterfall():
             is_stack=True)
     bar.add("月份", months, months_v2, is_label_show=True, is_stack=True,
             label_pos='inside')
-    bar.show_config()
+    bar.print_echarts_options()
     bar.render()
 
 
