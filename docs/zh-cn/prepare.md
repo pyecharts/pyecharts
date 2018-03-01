@@ -62,7 +62,7 @@ bar.render()
 ```python
 @staticmethod
 cast(seq)
-``` 转换数据序列，将带字典和元组类型的序列转换为 k_lst,v_lst 两个列表 ``` 
+转换数据序列，将带字典和元组类型的序列转换为 k_lst,v_lst 两个列表 
 ```
 1. 元组列表  
     [(A1, B1), (A2, B2), (A3, B3), (A4, B4)] --> k_lst[ A[i1, i2...] ], v_lst[ B[i1, i2...] ]
