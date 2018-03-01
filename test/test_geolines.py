@@ -4,7 +4,6 @@ from __future__ import unicode_literals
 
 from pyecharts import GeoLines, Style
 
-
 style = Style(
     title_top="#fff",
     title_pos="center",
@@ -49,5 +48,5 @@ def test_geolines():
     lines = GeoLines("GeoLines 示例", **style.init_style)
     lines.add("从广州出发", data_guangzhou, **style_geo)
     lines.add("从北京出发", data_beijing, **style_geo)
-    lines.show_config()
+    lines.print_echarts_options()
     lines.render()
