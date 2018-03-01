@@ -162,7 +162,7 @@ git submodule add https://github.com/your/npm/project your_project_name_pypkg/re
 git submodule init
 ```
 
-请把需要的文件加如git, 然后做:
+请把需要的文件加入git, 然后做:
 
 ```
 git commit
