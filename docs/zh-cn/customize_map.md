@@ -52,7 +52,7 @@ author: C.W.
 All done!! project echarts-united-kingdom-js is created
 ```
 
-All is done. Let's see what was the output:
+文件已经产生了，让我们看看是哪些文件：
 
 ```
 pyecharts-host:tmp chfw$ cd echarts-united-kingdom-js/
@@ -162,7 +162,7 @@ git submodule add https://github.com/your/npm/project your_project_name_pypkg/re
 git submodule init
 ```
 
-然后做:
+请把需要的文件加如git, 然后做:
 
 ```
 git commit

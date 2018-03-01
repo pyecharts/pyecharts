@@ -23,4 +23,4 @@
 
 **Development**
 
-[Changelog](en-us/changelog) | [Release Note](en-us/release-note) | [Team](en-us/team) | [FAQ](en-us/faq)
+[Changelog](zh-cn/changelog) | [Release Note](zh-cn/release-note) | [Team](en-us/team) | [FAQ](en-us/faq)
