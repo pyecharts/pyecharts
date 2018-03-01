@@ -5,11 +5,10 @@
 
     * 更新 jupyter-echarts 至 1.4.0: echarts 3.6.2 -> 4.0.2, echarts-gl 1.0.0-b4 -> 1.0.0-b6, echarts-liquidfill 1.0.5 -> 1.1.1, 
 
-* ### version 0.3.3 2018.02.27
+* ### version 0.3.3 - 2018.03.01（Current）
 
-    #### added
+    #### Added
     * 防止将来的依赖包影响 v0.3.2 的功能: lml==0.0.2, jupyter-echarts-pypkg==0.0.11
-    
     * 新增 `name_map`， [允许用户采用自己地图名称](http://echarts.baidu.com/option.html#series-map.nameMap)。
 
     #### Changed
@@ -18,7 +17,7 @@
     * `Base.show_config` 重命名为 `Base.print_echarts_options`
     * 移除 `EchartsEnvironment.configure_pyecharts` 方法
 
-* ### version 0.3.2 2018.02.26
+* ### version 0.3.2 - 2018.02.26
 
     从此版本开始，将不再自带地图 js 文件。有需要的开发人员，请自选安装。
 
@@ -48,7 +47,7 @@
     * [PR#368](https://github.com/pyecharts/pyecharts/pull/368) `pyecharts/templates/js` 被删去了。`jupyter-echarts` 不再内嵌于 pyecharts 。
     * echarts-china-cities-js 和 echarts-countries-js 不再是必选，而是可选图库。
 
-* ### version 0.3.1 - 2017.12.13（Current）
+* ### version 0.3.1 - 2017.12.13
 
     #### Fixed
     * [issue#290](https://github.com/pyecharts/pyecharts/issues/290) 紧急修复 v0.3.0 版本不能正常显示图形的严重 bug
