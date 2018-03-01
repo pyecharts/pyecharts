@@ -1714,14 +1714,11 @@ add(name, attr, value,
    如果只想要开启缩放或者平移，可以设置成'scale'或者'move'。设置成 True 为都开启
 * is_map_symbol_show -> bool  
     是否显示地图标记红点，默认为 True。
-* name_map -> dict:
-    [用自定义的地图名称](http://echarts.baidu.com/option.html#series-map.nameMap). 有些地图提供行政区号，`name_map` 可以帮助把它们转换成用户满意的地名。比如英国选区地图，伦敦选区的行政区号是 E14000639 ，把它转换成可读地名就需要这么一个字典：
-
-```
-{
-    "E14000639": "Cities of London and Westminster"
-}
-```
+* name_map -> dict  
+    [用自定义的地图名称](http://echarts.baidu.com/option.html#series-map.nameMap). 有些地图提供行政区号，`name_map` 可以帮助把它们转换成用户满意的地名。比如英国选区地图，伦敦选区的行政区号是 E14000639 ，把它转换成可读地名就需要这么一个字典：  
+    ```
+    name_map = {"E14000639": "Cities of London and Westminster"}
+    ```
 
 以此类推，把英国选区所有的地名都转换一下，就需要个[更大一些的字典](https://github.com/chfw/echarts-united-kingdom-pypkg/blob/master/echarts_united_kingdom_pypkg/constants.py#L1)。
 
@@ -1815,7 +1812,9 @@ from echarts_united_kingdom_pypkg import NM_WESTMINSTER_2016_UK
 value = []
 attr = []
 map = Map('United Kingdom', width=800, height=600)
-map.add('', attr, value, maptype='英国选区2016', is_visualmap=True, visual_text_color="#000", name_map=NM_WESTMINSTER_2016_UK)
+map.add('', attr, value, maptype='英国选区2016',
+        is_visualmap=True, visual_text_color="#000",
+        name_map=NM_WESTMINSTER_2016_UK)
 map.render()
 ```
 <div align="center">
