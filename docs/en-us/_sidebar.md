@@ -4,7 +4,7 @@
 - [pyecharts+Flask](en-us/flask)
 - [pyecharts+Django](en-us/django)
 - [Web integration](en-us/web_integration)
-- [Screenshots](zh-en/gallery)
+- [Screenshots](zh-cn/gallery)
 - [API](en-us/api)
-- [FAQ](zh-cn/faq)
+- [FAQ](en-us/faq)
 
