@@ -13,7 +13,6 @@ from pyecharts import Bar, Map
 from test.constants import CLOTHES
 from test.utils import get_default_rendering_file_content
 
-
 TITLE = "柱状图数据堆叠示例"
 
 
@@ -33,34 +32,6 @@ def test_embed_option():
     assert json_encoded_title in html
     assert "<html>" not in html
     assert "<body>" not in html
-
-
-def test_notebook_render():
-    bar = create_a_bar(TITLE)
-    html = bar._repr_html_()
-    json_encoded_title = json.dumps(TITLE)
-    assert json_encoded_title in html
-    assert "require.config" in html
-    assert "function(ec)" in html
-    assert "nbextensions/echarts" in html
-
-
-def test_notebook_dom():
-    bar = create_a_bar(TITLE)
-    html = bar._render_notebook_dom_()
-    assert bar._chart_id in html
-    assert str(bar.width) in html
-    assert str(bar.height) in html
-    assert "<div" in html
-
-
-def test_notebook_component():
-    bar = create_a_bar(TITLE)
-    html = bar._render_notebook_component_()
-    json_encoded_title = json.dumps(TITLE)
-    assert json_encoded_title in html
-    assert "myChart" in html
-    assert bar._chart_id in html
 
 
 def test_base_get_js_dependencies():

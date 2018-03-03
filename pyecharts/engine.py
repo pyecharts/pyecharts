@@ -151,6 +151,25 @@ class EchartsEnvironment(BaseEnvironment):
             *args,
             **kwargs)
 
+    def generate_notebook(self, charts, **context):
+        context.update({'charts': charts})
+        tpl = self.get_template('notebook.html')
+        return tpl.render(**context)
+
+
+def create_default_environment():
+    """
+    Create environment object with pyecharts default single PyEchartsConfig.
+    :return:
+    """
+    config = conf.CURRENT_CONFIG
+    echarts_env = EchartsEnvironment(
+        pyecharts_config=config,
+        loader=FileSystemLoader(
+            [config.echarts_template_dir, conf.DEFAULT_TEMPLATE_DIR])
+    )
+    return echarts_env
+
 
 def render(template_file, notebook=False, **context):
     config = conf.CURRENT_CONFIG
@@ -161,7 +180,3 @@ def render(template_file, notebook=False, **context):
     )
     template = echarts_env.get_template(template_file)
     return template.render(**context)
-
-
-def render_notebook(template_file, **context):
-    return render(template_file, notebook=True, **context)

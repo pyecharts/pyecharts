@@ -59,19 +59,17 @@ class Page(list):
 
         :return:
         """
-        doms = components = ""
         dependencies = self.js_dependencies
-        for chart in self:
-            doms += chart._render_notebook_dom_()
-            components += chart._render_notebook_component_()
-
         require_config = CURRENT_CONFIG.produce_require_configuration(
             dependencies)
-        return engine.render_notebook(
-            "notebook.html",
-            single_chart=components,
-            dom=doms,
-            **require_config)
+        config_items = require_config['config_items']
+        libraries = require_config['libraries']
+        env = engine.create_default_environment()
+        return env.generate_notebook(
+            charts=self,
+            config_items=config_items,
+            libraries=libraries
+        )
 
     @property
     def js_dependencies(self):

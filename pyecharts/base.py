@@ -137,35 +137,21 @@ class Base(object):
 
     def _repr_html_(self):
         """ 渲染配置项并将图形显示在 notebook 中
+        chart/page => charts
+        chart.js_dependencies => require_config => config_items, libraries
+        :return A unicode string.
         """
-        dom = self._render_notebook_dom_()
-        component = self._render_notebook_component_()
         require_config = CURRENT_CONFIG.produce_require_configuration(
-            self._js_dependencies
+            self.js_dependencies
         )
-        return engine.render_notebook(
-            'notebook.html',
-            single_chart=component,
-            dom=dom,
-            **require_config)
-
-    def _render_notebook_dom_(self):
-        """ 为 notebook 渲染 dom 模板
-        """
-        return engine.render_notebook(
-            "notebook_dom.html",
-            chart_id=self._chart_id,
-            chart_width=self.width,
-            chart_height=self.height)
-
-    def _render_notebook_component_(self):
-        """ 为 notebook 渲染组件模板
-        """
-        my_option = utils.json_dumps(self._option, indent=4)
-        return engine.render_notebook(
-            "notebook_chart_component.html",
-            my_option=my_option,
-            chart_id=self._chart_id)
+        config_items = require_config['config_items']
+        libraries = require_config['libraries']
+        env = engine.create_default_environment()
+        return env.generate_notebook(
+            charts=(self,),
+            config_items=config_items,
+            libraries=libraries
+        )
 
     def _add_chinese_map(self, map_name_in_chinese):
         name_in_pinyin = CURRENT_CONFIG.chinese_to_pinyin(map_name_in_chinese)
