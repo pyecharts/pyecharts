@@ -60,7 +60,7 @@ def test_bar_waterfall():
             is_stack=True)
     bar.add("月份", months, months_v2, is_label_show=True, is_stack=True,
             label_pos='inside')
-    bar.show_config()
+    bar.print_echarts_options()
     bar.render()
 
 
@@ -104,7 +104,8 @@ def test_bar_datazoom_both():
     days_v1 = [random.randint(1, 30) for _ in range(30)]
     bar = Bar("Bar - datazoom - both 示例")
     bar.add("", days, days_v1, is_datazoom_show=True,
-            datazoom_type='both', datazoom_range=[10, 25])
+            datazoom_type='both', datazoom_range=[10, 25],
+            is_toolbox_show=False)
     html_content = bar._repr_html_()
     assert "dataZoom" in html_content
     assert ': "inside"' in html_content

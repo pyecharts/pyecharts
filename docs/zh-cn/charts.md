@@ -24,7 +24,7 @@
     * GeoLines（地理坐标系线图）
     * Graph（关系图）
     * HeatMap（热力图）
-    * Kline（K线图）
+    * Kline/Candlestick（K线图）
     * Line（折线/面积图）
     * Line3D（3D 折线图）
     * Liquid（水球图）
@@ -75,8 +75,6 @@
     画布背景颜色，默认为 '#fff'
 * page_title -> str  
     指定生成的 html 文件中 `<title>` 标签的值。默认为'Echarts'
-* jshost-> str    
-    自定义每个实例的 JavaScript host
     
 
 # 通用配置项
@@ -102,6 +100,8 @@
     是否显示 x 轴
 * is_yaxis_show -> bool  
     是否显示 y 轴
+* is_splitline_show -> bool  
+    是否显示 y 轴网格线，默认为 True。
 * x_axis -> list  
     x 轴数据项
 * xaxis_interval -> int  
@@ -1352,7 +1352,7 @@ heatmap.render()
 **Note：** 热力图必须配合 通用配置项 中的 VisualMap 使用才有效果。
 
 
-## Kline（K线图）
+## Kline/Candlestick（K线图）
 > 红涨蓝跌
 
 Kline.add() 方法签名
@@ -1714,6 +1714,13 @@ add(name, attr, value,
    如果只想要开启缩放或者平移，可以设置成'scale'或者'move'。设置成 True 为都开启
 * is_map_symbol_show -> bool  
     是否显示地图标记红点，默认为 True。
+* name_map -> dict  
+    [用自定义的地图名称](http://echarts.baidu.com/option.html#series-map.nameMap). 有些地图提供行政区号，`name_map` 可以帮助把它们转换成用户满意的地名。比如英国选区地图，伦敦选区的行政区号是 E14000639 ，把它转换成可读地名就需要这么一个字典：  
+    ```
+    name_map = {"E14000639": "Cities of London and Westminster"}
+    ```
+
+以此类推，把英国选区所有的地名都转换一下，就需要个[更大一些的字典](https://github.com/chfw/echarts-united-kingdom-pypkg/blob/master/echarts_united_kingdom_pypkg/constants.py#L1)。
 
 ```python
 from pyecharts import Map
@@ -1786,6 +1793,34 @@ map.render()
 ```
 ![map-4](https://user-images.githubusercontent.com/19553554/35082387-7d35893e-fc54-11e7-8482-60dc23d31836.png)
 
+设置 `name_map=...` 采用自己地图名称
+
+原版：
+<div align="center">
+<img width="382" alt="screen shot 2018-02-27 at 09 24 21" src="https://user-images.githubusercontent.com/4280312/36720467-16fb0a66-1ba0-11e8-8cbd-453d8f2462d3.png">
+</div>
+    
+用 `name_map` 改动之后：
+
+```python
+#coding=utf-8
+from __future__ import unicode_literals
+
+from pyecharts import Map
+from echarts_united_kingdom_pypkg import NM_WESTMINSTER_2016_UK
+
+value = []
+attr = []
+map = Map('United Kingdom', width=800, height=600)
+map.add('', attr, value, maptype='英国选区2016',
+        is_visualmap=True, visual_text_color="#000",
+        name_map=NM_WESTMINSTER_2016_UK)
+map.render()
+```
+<div align="center">
+<img width="449" alt="screen shot 2018-02-27 at 09 27 38" src="https://user-images.githubusercontent.com/4280312/36720626-803ff194-1ba0-11e8-998b-548afbedc18e.png">
+</div>
+这个方便画图，因为很多数据和地区号直接挂钩，同时也容易做本地化。
 
 ## Parallel（平行坐标系）
 > 平行坐标系是一种常用的可视化高维数据的图表。
@@ -3561,7 +3596,7 @@ style = Style(
     width=1100,
     height=600,
     background_color='#404a59'
-}
+)
 # style,init_style 会返回类初始化的风格配置字典
 geo = Geo("全国主要城市空气质量", "data from pm2.5", **style.init_style)
 ```
@@ -3575,7 +3610,7 @@ pie_style = style.add(
     label_pos="center",
     is_label_show=True,
     label_text_color=None
-}
+)
 pie.add("", ["剧情", ""], [25, 75], center=[10, 30], **pie_style)
 pie.add("", ["奇幻", ""], [24, 76], center=[30, 30], **pie_style)
 pie.add("", ["爱情", ""], [14, 86], center=[50, 30], **pie_style)

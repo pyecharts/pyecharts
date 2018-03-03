@@ -1,5 +1,7 @@
 # coding=utf-8
 
+from jinja2 import Markup
+
 import pyecharts.utils as utils
 import pyecharts.engine as engine
 from pyecharts.conf import CURRENT_CONFIG
@@ -43,7 +45,7 @@ class Page(list):
 
         :return:
         """
-        return '<br/> '.join([chart.render_embed() for chart in self])
+        return Markup('<br/> '.join([chart.render_embed() for chart in self]))
 
     def get_js_dependencies(self):
         """

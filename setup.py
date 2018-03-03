@@ -1,16 +1,6 @@
 # coding=utf-8
-
 import os
 from setuptools import setup, find_packages
-
-try:
-    from jupyterpip import cmdclass
-except ImportError:
-    import pip
-    import importlib
-
-    pip.main(['install', 'jupyter-pip'])
-    cmdclass = importlib.import_module('jupyterpip').cmdclass
 
 
 __title__ = 'pyecharts'
@@ -22,13 +12,12 @@ __license__ = 'MIT'
 __requires__ = ['pillow',
                 'jinja2',
                 'future',
-                'jupyter-pip>=0.3.1']
+                'jupyter-echarts-pypkg==0.0.11',
+                'lml==0.0.2']
 
 __keywords__ = ['Echarts',
                 'charts',
                 'plotting-tool']
-
-__jupyter_echarts__ = 'pyecharts/templates/js/echarts'
 
 # Load the package's _version.py module as a dictionary.
 here = os.path.abspath(os.path.dirname(__file__))
@@ -49,7 +38,6 @@ setup(
     install_requires=__requires__,
     zip_safe=False,
     include_package_data=True,
-    cmdclass=cmdclass(__jupyter_echarts__, enable="echarts/main"),
     classifiers=[
         'Development Status :: 4 - Beta',
         'Environment :: Console',

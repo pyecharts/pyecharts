@@ -152,10 +152,6 @@ class EchartsEnvironment(BaseEnvironment):
             *args,
             **kwargs)
 
-    def configure_pyecharts(self, **kwargs):
-        for k, v in kwargs.items():
-            setattr(self.pyecharts_config, k, v)
-
 
 def render(template_file, notebook=False, **context):
     config = conf.CURRENT_CONFIG

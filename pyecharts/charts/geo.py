@@ -1,5 +1,7 @@
 # coding=utf-8
 
+import copy
+
 from pyecharts.chart import Chart
 from pyecharts.option import get_all_options
 from pyecharts.constants import CITY_GEO_COORDS
@@ -67,9 +69,9 @@ class Geo(Chart):
         chart = get_all_options(**kwargs)
 
         if geo_cities_coords:
-            _geo_cities_coords = geo_cities_coords
+            _geo_cities_coords = copy.deepcopy(geo_cities_coords)
         else:
-            _geo_cities_coords = CITY_GEO_COORDS
+            _geo_cities_coords = copy.deepcopy(CITY_GEO_COORDS)
 
         _data = []
         for _name, _value in zip(attr, value):

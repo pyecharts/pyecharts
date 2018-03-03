@@ -2,8 +2,10 @@
 # coding=utf-8
 from __future__ import unicode_literals
 
+import json
 from pyecharts import Kline
 
+from test.utils import get_default_rendering_file_content
 
 data = [
     [2320.26, 2320.26, 2287.3, 2362.94],
@@ -63,10 +65,26 @@ def test_kline_datazoom_vertical():
 
 
 def test_kline_user_define_markline_style():
-    kline = Kline("K 线图-自定义标记点风格")
+    title = "K 线图-自定义标记点风格"
+    kline = Kline(title)
     kline.add("日K", DATE, data, mark_point=["min", "max"],
               mark_point_symbolsize=80,
               datazoom_orient='vertical',
               mark_line_valuedim=['lowest', 'highest'])
-    kline.show_config()
     kline.render()
+    actual_content = get_default_rendering_file_content()
+    assert 'lowest' in actual_content
+    assert 'highest' in actual_content
+    assert json.dumps(title) in actual_content
+
+
+def test_kline_alias_Candlestick():
+    from pyecharts import Candlestick
+    candlestick = Candlestick("K 线图-自定义标记点风格")
+    candlestick.add("日K", DATE, data, mark_point=["min", "max"],
+                    mark_point_symbolsize=80,
+                    datazoom_orient='vertical',
+                    mark_line_valuedim=['lowest', 'highest'])
+    candlestick.render()
+    actual_content = get_default_rendering_file_content()
+    assert 'candlestick' in actual_content

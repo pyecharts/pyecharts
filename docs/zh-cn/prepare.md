@@ -50,81 +50,6 @@ bar.render()
 更多内容请移步至 [pyecharts-snapshot](https://github.com/pyecharts/pyecharts-snapshot)  
 
 
-### Jupyter notebook 小贴士
-对本库的现有用户来说，v0.1.9.5 版本的离线模式要求：  
-1）老版本已完全卸载   
-2）您现有的 notebook 文档需要刷新并重新运行。
-
-离线模式工作原理：pyecharts 自动把 echarts 脚本文件装在了 jupyter nbextensions 文件夹下面。以下代码可以告诉你 pyecharts 网页脚本是否装到了 Jupyter 里面：
-
-
-```shell
-$ jupyter nbextension list
-Known nbextensions:
-  config dir: /Users/jaska/.jupyter/nbconfig
-    notebook section
-      echarts/main  enabled 
-      - Validating: OK
-```
-
-在特殊的情况下，如果你想要 pyecharts 更新所有的脚本文件的话，你可以运行下面的命令：
-
-```shell
-$ git clone https://github.com/pyecharts/jupyter-echarts.git
-$ cd jupyter-echarts
-$ jupyter nbextension install echarts --user
-```
-在下一个画图动作的时候，您的脚本文件会被更新。
-
-下面这个删除命令估计只有参与 pyecharts 开发者才会用到
-
-```shell
-$ jupyter nbextension uninstall echarts --user
-```
-
-#### jupyter-notebook 输出问题
-自 v0.1.9.7 起，pyecharts 已经进入全部离线模式，也就是没有网络，也能画图。jupyter notebook 输出后，你的 notebook 离开了本地 jupyter 环境，图片就不能显示了。
-为了解决这个问题，再画图之前，你可以多加两个语句：
-
-```python
-...
-from pyecharts import online
-
-online()
-...
-```
-
-这样，所有的脚本会从 http://pyecharts.github.io/jupyter-echarts/echarts 下载。如果你连不上 Github, 你可以先把 https://github.com/pyecharts/jupyter-echarts 克隆一下。然后在你自己的服务器上，把整个 echarts 挂上去。  
-
-下面我简单示范一下  
-
-```
-$ cd jupyter-echarts/echarts
-$ python -m http.server # for python 2, use python -m SimpleHTTPServer
-Serving HTTP on 0.0.0.0 port 8000 ...
-```
-
-然后，再把本地服务器加进前面的语句：
-
-```python
-...
-from pyecharts import online
-
-online(host="http://localhost:8000)
-...
-```
-
-
-### Python2 编码问题
-默认的编码类型为 UTF-8，在 Python3 中是没什么问题的，Python3 对中文的支持好很多。但是在 Python2 中，请应用下面的语句，保证没有编码问题:
-```
-#!/usr/bin/python
-#coding=utf-8
-from __future__ import unicode_literals
-```
-前两句告知你的编辑器你用 UTF-8 ([PEP-0263](https://www.python.org/dev/peps/pep-0263/)). 最后一句告知 Python 所有字符是 UTF-8 ([unicode literals](http://python-future.org/unicode_literals.html))
-
-
 ### 图形绘制过程
 基本上所有的图表类型都是这样绘制的：
 1. ```chart_name = Type()``` 初始化具体类型图表。
@@ -137,7 +62,7 @@ from __future__ import unicode_literals
 ```python
 @staticmethod
 cast(seq)
-``` 转换数据序列，将带字典和元组类型的序列转换为 k_lst,v_lst 两个列表 ``` 
+转换数据序列，将带字典和元组类型的序列转换为 k_lst,v_lst 两个列表 
 ```
 1. 元组列表  
     [(A1, B1), (A2, B2), (A3, B3), (A4, B4)] --> k_lst[ A[i1, i2...] ], v_lst[ B[i1, i2...] ]
@@ -172,3 +97,16 @@ cast(seq)
 更多 Jupyter notebook 的例子请参考 [notebook-use-cases](https://github.com/pyecharts/pyecharts-users-cases)。可下载后运行看看。
 
 如需使用 Jupyter Notebook 来展示图表，只需要调用自身实例即可，同时兼容 Python2 和 Python3 的 Jupyter Notebook 环境。所有图表均可正常显示，与浏览器一致的交互体验，这下展示报告连 PPT 都省了！！  
+
+
+### 如果在没有互联网的情况下安装 pyecharts 0.3.2 +
+
+首先，您需要通过有互联网的计算机得到这三个包：pyecharts, pyecharts-jupyter-installer, 和 jupyter-echarts-pypkg. 
+
+然后，按照这个顺序组装：
+
+```
+pip install pyecharts-jupyter-installer.tar.gz
+pip install jupyter-echarts-pypkg.tar.gz
+pip install pyecharts.tar.gz
+```

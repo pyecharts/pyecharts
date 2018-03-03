@@ -1,17 +1,11 @@
 # coding=utf-8
 from __future__ import unicode_literals
 
-from pyecharts.js_extension import load_all_extensions
+from pyecharts.js_extensions import EXTENSION_MANAGER
 from pyecharts.utils import get_resource_dir
 
 # Path constants for template dir
 DEFAULT_TEMPLATE_DIR = get_resource_dir('templates')
-
-# Load js & map file index into a dictionary.
-
-# JS_EXTENSIONS = [JsExtension..]
-# CITY_NAME_PINYIN_MAP = {<Chinese Name>:<Pinyin>}
-JS_EXTENSIONS, CITY_NAME_PINYIN_MAP = load_all_extensions()
 
 
 class PyEchartsConfig(object):
@@ -40,20 +34,26 @@ class PyEchartsConfig(object):
         self._jshost = remove_trailing_slashes(jshost)
 
     def get_js_library(self, pinyin):
-        for extension in JS_EXTENSIONS:
+        for extension in EXTENSION_MANAGER.get_all_extensions():
             library = extension.get_js_library(pinyin)
             if library is not None:
                 return library
         return None
 
     def chinese_to_pinyin(self, chinese):
-        return CITY_NAME_PINYIN_MAP.get(chinese, chinese)
+        for extension in EXTENSION_MANAGER.get_all_extensions():
+            __pinyin__ = extension.chinese_to_pinyin(chinese)
+            if __pinyin__:
+                return __pinyin__
+        else:
+            # no match found, i.e. 'world'
+            return chinese
 
     @staticmethod
     def read_file_contents_from_local(js_names):
         contents = []
         for name in js_names:
-            for extension in JS_EXTENSIONS:
+            for extension in EXTENSION_MANAGER.get_all_extensions():
                 filecontent = extension.read_js_library(name)
                 if filecontent:
                     contents.append(filecontent)
@@ -63,7 +63,7 @@ class PyEchartsConfig(object):
     def generate_js_link(self, js_names):
         links = []
         for name in js_names:
-            for extension in JS_EXTENSIONS:
+            for extension in EXTENSION_MANAGER.get_all_extensions():
                 js_link = extension.get_js_link(
                     name, jshost=self.jshost)
                 if js_link:
@@ -83,7 +83,7 @@ class PyEchartsConfig(object):
         require_conf_items = []
 
         for name in __dependencies__:
-            for extension in JS_EXTENSIONS:
+            for extension in EXTENSION_MANAGER.get_all_extensions():
                 config_item = extension.produce_require_config_syntax(
                     name,
                     jshost=self.jshost,

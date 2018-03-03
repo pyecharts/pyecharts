@@ -1,10 +1,11 @@
-#!/usr/bin/env python
 # coding=utf-8
 from __future__ import unicode_literals
 
 import json
 import codecs
 from pyecharts import Map
+
+from test.utils import get_default_rendering_file_content
 
 
 def test_map_show_label():
@@ -14,6 +15,19 @@ def test_map_show_label():
     map = Map("全国地图示例", width=1200, height=600)
     map.add("", attr, value, maptype='china', is_label_show=True)
     map.render()
+
+
+def test_map_with_custom_name_map():
+    # show label
+    value = [155, 10, 66, 78]
+    attr = ["福建", "山东", "北京", "上海"]
+    map = Map("全国地图示例", width=1200, height=600)
+    map.add("", attr, value, maptype='china', is_label_show=True,
+            name_map={'test': '--magic--'})
+    map.render()
+    content = get_default_rendering_file_content()
+    assert '--magic--' in content
+    assert 'nameMap' in content
 
 
 def test_map_combine_with_visualmap():
@@ -39,16 +53,6 @@ def test_echarts_position_in_render_html():
         guangdong_position = actual_content.find(json.dumps('广东'))
         assert echarts_position < guangdong_position
         assert '"showLegendSymbol": false' in actual_content
-
-
-def test_city_map():
-    value = [1]
-    attr = ["渝水区"]
-    map = Map("新余地图示例", width=1200, height=600)
-    map.add("", attr, value, maptype='新余', is_visualmap=True,
-            visual_text_color='#000')
-    # To avoid potential pinyin crash, all cities have a province prefix
-    assert "jiang1_xi1_xin1_yu2" in map._repr_html_()
 
 
 def test_world_map():

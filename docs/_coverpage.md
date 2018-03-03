@@ -2,10 +2,12 @@
 
 # pyecharts
 
-> pyecharts is a Python Echarts Plotting Library.
+> A Python Echarts Plotting Library.
 
- It simply provides the interface between Echarts and Python.
+* Chart: 28+ kinds of charts
+* Map: 300+ Chinese cities / 200+ countries and regions
+* Platforms: Pure Python / Jupyter Notebook / Web Framework
 
 
 [GitHub](https://github.com/pyecharts/pyecharts/)
-[Get Started](zh-cn/doc_prepare)
+[Get Started](zh-cn/prepare)

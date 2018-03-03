@@ -10,17 +10,21 @@ DEFAULT_JS_LIBRARIES = dict(
     echarts='echarts.min',
     echartsgl='echarts-gl.min',
     liquidfill='echarts-liquidfill.min',
-    world='world',
-    china='china',
     wordcloud='echarts-wordcloud.min'
 )
 
 CITY_NAME_PINYIN_MAP = {
-    "广东": "guangdong",
-    "安徽": "anhui",
+    "重庆": "chongqing",
     "澳门": "aomen",
     "北京": "beijing",
-    "重庆": "chongqing",
+    "天津": "tianjin",
+    "香港": "xianggang",
+    "上海": "shanghai",
+}
+
+PROVINCE_NAME_PINYIN_MAP = {
+    "广东": "guangdong",
+    "安徽": "anhui",
     "福建": "fujian",
     "甘肃": "gansu",
     "广西": "guangxi",
@@ -39,12 +43,9 @@ CITY_NAME_PINYIN_MAP = {
     "宁夏": "ningxia",
     "青海": "qinghai",
     "山东": "shandong",
-    "上海": "shanghai",
     "山西": "shanxi",
     "四川": "sichuan",
     "台湾": "taiwan",
-    "天津": "tianjin",
-    "香港": "xianggang",
     "新疆": "xinjiang",
     "西藏": "xizang",
     "云南": "yunnan",
@@ -53,11 +54,23 @@ CITY_NAME_PINYIN_MAP = {
 
 
 def test_core_js_libraries():
+    __jupyter_echarts__ = conf.EXTENSION_MANAGER.get_a_extension('echarts')
+    __file_map__ = __jupyter_echarts__.registry.get('FILE_MAP')
     for key, value in DEFAULT_JS_LIBRARIES.items():
-        default_file_map = conf.JS_EXTENSIONS[0].registry.get('FILE_MAP')
-        eq_(value, default_file_map[key])
+        eq_(value, __file_map__[key])
 
 
 def test_province_names():
+    __provinces__ = conf.EXTENSION_MANAGER.get_a_extension(
+        'echarts-china-provinces-js')
+    __pinyin_map__ = __provinces__.registry.get('PINYIN_MAP')
+    for key, value in PROVINCE_NAME_PINYIN_MAP.items():
+        eq_(value, __pinyin_map__[key])
+
+
+def test_city_names():
+    __cities__ = conf.EXTENSION_MANAGER.get_a_extension(
+        'echarts-china-cities-js')
+    __pinyin_map__ = __cities__.registry.get('PINYIN_MAP', {})
     for key, value in CITY_NAME_PINYIN_MAP.items():
-        eq_(value, conf.CITY_NAME_PINYIN_MAP[key])
+        eq_(value, __pinyin_map__[key])

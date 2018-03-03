@@ -1,6 +1,9 @@
 # coding=utf-8
 
 import uuid
+import warnings
+
+from jinja2 import Markup
 
 import pyecharts.constants as constants
 import pyecharts.engine as engine
@@ -57,10 +60,20 @@ class Base(object):
     def page_title(self):
         return self._page_title
 
-    def show_config(self):
+    def print_echarts_options(self):
         """ 打印输出图形所有配置项
         """
         print(utils.json_dumps(self._option, indent=4))
+
+    def show_config(self):
+        """ 打印输出图形所有配置项
+        """
+        deprecated_tpl = 'The {} is deprecated, please use {} instead!'
+        warnings.warn(
+            deprecated_tpl.format('show_config', 'print_echarts_options'),
+            DeprecationWarning
+        )
+        self.print_echarts_options()
 
     def render_embed(self):
         """ 渲染图表的所有配置项，为 web pages 服务，不过需先提供
@@ -73,7 +86,7 @@ class Base(object):
                              renderer=self.renderer,
                              my_width=self.width,
                              my_height=self.height)
-        return html
+        return Markup(html)
 
     def get_js_dependencies(self):
         """ 声明所有的 js 文件路径
