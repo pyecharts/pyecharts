@@ -10,15 +10,14 @@ def test_choropleth_map():
     # show label
     value = ['A', 'B', 'C', 'THIS_KEY_IS_NOT_IN_HTML', 'A']
     attr = ["福建", "山东", "北京", "上海", "西藏"]
-    legends = {
-        'A': 'test a',
-        'B': 'test b',
-        'C': 'test c',
-        'THIS_KEY_IS_NOT_IN_HTML': 'test d'
-    }
+    legends = [
+        {'tag': 'A', 'label': 'test a', 'color': 'blue'},
+        {'tag': 'B', 'label': 'test b', 'color': 'yellow'},
+        {'tag': 'C', 'label': 'test c', 'color': 'green'},
+        {'tag': 'THIS_KEY_IS_NOT_IN_HTML', 'label': 'test d', 'color': 'red'}
+    ]
     map = ChoroplethMap("Choropleth map - 等值区域图示例", width=1200, height=600)
     map.add("", attr, value, legends, maptype='china',
-            visual_range_color=['red', 'blue', 'yellow', 'green'],
             is_label_show=True)
     map.render()
     content = get_default_rendering_file_content()

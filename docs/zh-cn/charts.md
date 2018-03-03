@@ -1842,16 +1842,17 @@ add(name, attr, value, choropleth_legend,
     is_roam=True,
     is_map_symbol_show=True, **kwargs)
 ```
-等值区域图在用法上和 Map 相近，只是数值可以是字符串。
+等值区域图在用法上和 Map 相近，只是数值可以是字符串。不同的是等值区域图必用 piece wise 的 visual map。并且 visual_range_color 不起作用。
+而且 visual_range_text 默认是 ['Legend']，visual_text_color 默认是 ['black'], 不过用户可以改。千万别忘了用 
 
 * name -> str
    图例名称
 * attr -> list
    属性简短名称
-* choropleth_legend -> dict
-   属性的扩展名称。
 * value -> list
    属性所对应的值
+* choropleth_legend -> list
+   属性的扩展名称。它的数据结构是一个字典序列。字典的结构是这样的：{ 'tag': ‘前面 attr 的一个属性值’， ‘label’：‘属性的俗名’，‘color’：‘标注颜色’ }
 * maptype -> str
    地图类型。 具体请参照 Map 的 maptype 用法
 * is_roam -> bool/str

@@ -1,4 +1,4 @@
-#coding=utf-8
+# coding=utf-8
 from pyecharts.charts.map import Map
 
 
@@ -13,7 +13,7 @@ class ChoroplethMap(Map):
             name_map=None,
             **kwargs):
         """
-        等值区域图必用 piece wise 的 visual map。没有商量。
+        等值区域图必用 piece wise 的 visual map，并且 visual_range_color 不起作用。
         而且 visual_range_text 默认是 ['Legend']，
         visual_text_color 默认是 ['black'], 不过用户可以改。
 
@@ -37,29 +37,39 @@ class ChoroplethMap(Map):
         :param kwargs:
 
         """
-        all_unique_values = list(set(value))
-        new_values = []
-        for item in value:
-            index = all_unique_values.index(item)
-            new_values.append(index)
-        pieces = []
-        for key, value in choropleth_legend.items():
-            index = all_unique_values.index(key)
-            pieces.append({
-                "min": index,
-                "max": index + 0.1,
-                "label": value
+        __classes__ = list(set(value))
+        __class_indices__ = []
+        for __item__ in value:
+            # exchange text value with unique internal index
+            __index__ = __classes__.index(__item__)
+            __class_indices__.append(__index__)
+
+        __piece_specs__ = []
+        __piece_colors__ = []
+        for __label__ in choropleth_legend:
+            # associate label and color with the
+            # unique internal index
+            __index__ = __classes__.index(__label__['tag'])
+            __piece_specs__.append({
+                "min": __index__,
+                "max": __index__ + 0.1,
+                "label": __label__['label']
             })
+            __piece_colors__.append(__label__['color'])
+
+        # dictate the arguments for Map.add()
         kwargs['is_piecewise'] = True
         kwargs['is_visualmap'] = True
+        kwargs['visual_range_color'] = __piece_colors__
         if 'visual_range_text' not in kwargs:
             kwargs['visual_range_text'] = ['Legend']
         if 'visual_text_color' not in kwargs:
             kwargs['visual_text_color'] = ['black']
-        Map.add(self, name, attr, new_values,
+
+        Map.add(self, name, attr, __class_indices__,
                 maptype=maptype,
                 is_roam=is_roam,
                 is_map_symbol_show=is_map_symbol_show,
                 name_map=name_map,
-                pieces=pieces,
+                pieces=__piece_specs__,
                 **kwargs)
