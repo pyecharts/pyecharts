@@ -22,6 +22,7 @@ from pyecharts.charts.line import Line
 from pyecharts.charts.line3D import Line3D
 from pyecharts.charts.liquid import Liquid
 from pyecharts.charts.map import Map
+from pyecharts.charts.choropleth_map import ChoroplethMap
 from pyecharts.charts.parallel import Parallel
 from pyecharts.charts.pie import Pie
 from pyecharts.charts.polar import Polar
