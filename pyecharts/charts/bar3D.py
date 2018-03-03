@@ -2,6 +2,7 @@
 
 from pyecharts.chart import Chart
 from pyecharts.option import get_all_options
+import pyecharts.constants as constants
 
 
 class Bar3D(Chart):
@@ -10,6 +11,7 @@ class Bar3D(Chart):
     """
 
     def __init__(self, title="", subtitle="", **kwargs):
+        kwargs['renderer'] = constants.CANVAS_RENDERER
         super(Bar3D, self).__init__(title, subtitle, **kwargs)
         self._js_dependencies.add('echartsgl')
 

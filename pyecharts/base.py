@@ -19,6 +19,7 @@ class Base(object):
     def __init__(self,
                  width=800,
                  height=400,
+                 renderer=constants.CANVAS_RENDERER,
                  page_title=constants.PAGE_TITLE):
         """
 
@@ -35,6 +36,7 @@ class Base(object):
         self._js_dependencies = set()
         self._chart_id = uuid.uuid4().hex
         self.width, self.height = width, height
+        self.renderer = renderer
         self._page_title = page_title
         self._js_dependencies = {'echarts'}
 
@@ -81,6 +83,7 @@ class Base(object):
         html = engine.render('chart_component.html',
                              my_option=my_option,
                              chart_id=self._chart_id,
+                             renderer=self.renderer,
                              my_width=self.width,
                              my_height=self.height)
         return Markup(html)
@@ -165,6 +168,7 @@ class Base(object):
         return engine.render_notebook(
             "notebook_chart_component.html",
             my_option=my_option,
+            renderer=self.renderer,
             chart_id=self._chart_id)
 
     def _add_chinese_map(self, map_name_in_chinese):
