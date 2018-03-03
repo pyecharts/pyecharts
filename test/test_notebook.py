@@ -25,7 +25,7 @@ def create_a_bar(title):
 def test_single_chart():
     bar = create_a_bar(TITLE)
     html = bar._repr_html_()
-    write_utf8_html_file('cell.html', html)  # debug
+    write_utf8_html_file('cell_single_chart.html', html)  # debug
     json_encoded_title = json.dumps(TITLE)
     assert json_encoded_title in html
     assert "require.config" in html
@@ -75,7 +75,7 @@ def test_online_feature():
     online()
     bar = create_a_bar(TITLE)
     html = bar._repr_html_()
-    write_utf8_html_file('cell.html', html)  # debug
+    write_utf8_html_file('cell_online.html', html)  # debug
     expected_jshost = 'https://pyecharts.github.io/jupyter-echarts/echarts'
     assert expected_jshost in html
 
@@ -84,6 +84,6 @@ def test_online_with_custom_jshost():
     online(host='https://my-site.com/js')
     bar = create_a_bar(TITLE)
     html = bar._repr_html_()
-    write_utf8_html_file('cell.html', html)  # debug
+    write_utf8_html_file('cell_online_my.html', html)  # debug
     expected_jshost = 'https://my-site.com/js'
     assert expected_jshost in html
