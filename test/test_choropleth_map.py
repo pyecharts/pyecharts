@@ -21,7 +21,7 @@ def test_choropleth_map():
             is_label_show=True)
     map.render()
     content = get_default_rendering_file_content()
-    assert '"type": "piecewise"' in content
-    assert '"label": "test a",' in content
-    assert '"max": 2.1, ' in content
+    assert 'piecewise' in content
+    assert 'test a' in content
+    assert '2.1' in content
     assert 'THIS_KEY_IS_NOT_IN_HTML' not in content
