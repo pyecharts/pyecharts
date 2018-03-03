@@ -3,6 +3,7 @@
 from __future__ import unicode_literals
 
 from pyecharts import Bar3D
+from nose.tools import eq_
 from test.constants import RANGE_COLOR, X_TIME, Y_WEEK
 
 
@@ -73,3 +74,8 @@ def test_bar3d_rotate_automatically_speedup():
               grid3d_depth=80, is_grid3d_rotate=True,
               grid3d_rotate_speed=180)
     bar3d.render()
+
+
+def test_bar3d_must_use_canvas():
+    bar3d = Bar3D("3D 柱状图示例", width=1200, height=600)
+    eq_(bar3d.renderer, 'canvas')
