@@ -34,10 +34,14 @@ class Page(list):
                template_name='simple_page.html',
                object_name='page',
                extra_context=None):
-        context = {object_name: self}
-        context.update(extra_context or {})
-        html = engine.render(template_name, **context)
-        utils.write_utf8_html_file(path, html)
+        env = engine.create_default_environment()
+        env.render_chart_to_file(
+            chart=self,
+            object_name=object_name,
+            path=path,
+            template_name=template_name,
+            extra_context=extra_context
+        )
 
     def render_embed(self):
         """

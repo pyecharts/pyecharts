@@ -134,7 +134,8 @@ class BaseEnvironment(Environment):
 
 class EchartsEnvironment(BaseEnvironment):
     """
-    Built-in jinja2 template engine for pyecharts
+    Built-in jinja2 template engine for pyecharts.dd
+    This class provides some shortcut methods for rendering charts.
     """
 
     def __init__(self, pyecharts_config=None, *args, **kwargs):
@@ -150,6 +151,42 @@ class EchartsEnvironment(BaseEnvironment):
             loader=loader,
             *args,
             **kwargs)
+
+    def render_container_and_echarts_code_for_one_chart(self, chart):
+        """
+        Render code for a charts.
+        :param chart:
+        :return:
+        """
+        tpl_string = """
+        {{ echarts_container(chart) }}
+        {{ echarts_js_content(chart) }}
+        """
+        tpl = self.from_string(tpl_string)
+        return tpl.render(chart=chart)
+
+    def render_chart_to_file(
+            self,
+            chart,
+            object_name='chart',
+            path='render.html',
+            template_name='simple_chart.html',
+            extra_context=None
+    ):
+        """
+        Render a chart or page to local html files.
+        :param chart:
+        :param object_name:
+        :param path:
+        :param template_name:
+        :param extra_context:
+        :return:
+        """
+        context = {object_name: chart}
+        context.update(extra_context or {})
+        tpl = self.get_template(template_name)
+        html = tpl.render(**context)
+        utils.write_utf8_html_file(path, html)
 
     def generate_notebook(self, charts, **context):
         context.update({'charts': charts})
@@ -169,14 +206,3 @@ def create_default_environment():
             [config.echarts_template_dir, conf.DEFAULT_TEMPLATE_DIR])
     )
     return echarts_env
-
-
-def render(template_file, notebook=False, **context):
-    config = conf.CURRENT_CONFIG
-    echarts_env = EchartsEnvironment(
-        pyecharts_config=config,
-        loader=FileSystemLoader(
-            [config.echarts_template_dir, conf.DEFAULT_TEMPLATE_DIR])
-    )
-    template = echarts_env.get_template(template_file)
-    return template.render(**context)
