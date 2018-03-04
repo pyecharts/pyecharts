@@ -693,7 +693,8 @@ def visual_map(visual_type='color',
             {min: 310, max: 1000},
             {min: 200, max: 300},
             {min: 10, max: 200, label: '10 到 200（自定义label）'},
-            {value: 123, label: '123（自定义特殊颜色）', color: 'grey'}, // 表示 value 等于 123 的情况。
+            // 表示 value 等于 123 的情况。
+            {value: 123, label: '123（自定义特殊颜色）', color: 'grey'}
             {max: 5}     // 不指定 min，表示 min 为无限大（-Infinity）。
         ]
     :param kwargs:
