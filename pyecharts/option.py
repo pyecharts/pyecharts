@@ -685,7 +685,7 @@ def visual_map(visual_type='color',
     :param is_piecewise:
         是否将组件转换为分段型（默认为连续型），默认为 False
     :param pieces:
-        每一段的数值范围，默认为 None 。而且之后 is_piecewise=True 时起作用。
+        is_piecewise=True 时起作用。每一段的数值范围，默认为 None 。
     :param kwargs:
     """
     _min, _max = 0, 100

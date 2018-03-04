@@ -37,39 +37,39 @@ class ChoroplethMap(Map):
         :param kwargs:
 
         """
-        __classes__ = list(set(value))
-        __class_indices__ = []
+        _classes = list(set(value))
+        _class_indices = []
         for __item__ in value:
             # exchange text value with unique internal index
-            __index__ = __classes__.index(__item__)
-            __class_indices__.append(__index__)
+            __index__ = _classes.index(__item__)
+            _class_indices.append(__index__)
 
-        __piece_specs__ = []
-        __piece_colors__ = []
+        _piece_specs = []
+        _piece_colors = []
         for __label__ in choropleth_legend:
             # associate label and color with the
             # unique internal index
-            __index__ = __classes__.index(__label__['tag'])
-            __piece_specs__.append({
+            __index__ = _classes.index(__label__['tag'])
+            _piece_specs.append({
                 "min": __index__,
                 "max": __index__ + 0.1,
                 "label": __label__['label']
             })
-            __piece_colors__.append(__label__['color'])
+            _piece_colors.append(__label__['color'])
 
         # dictate the arguments for Map.add()
         kwargs['is_piecewise'] = True
         kwargs['is_visualmap'] = True
-        kwargs['visual_range_color'] = __piece_colors__
+        kwargs['visual_range_color'] = _piece_colors
         if 'visual_range_text' not in kwargs:
             kwargs['visual_range_text'] = ['Legend']
         if 'visual_text_color' not in kwargs:
             kwargs['visual_text_color'] = ['black']
 
-        Map.add(self, name, attr, __class_indices__,
+        Map.add(self, name, attr, _class_indices,
                 maptype=maptype,
                 is_roam=is_roam,
                 is_map_symbol_show=is_map_symbol_show,
                 name_map=name_map,
-                pieces=__piece_specs__,
+                pieces=_piece_specs,
                 **kwargs)

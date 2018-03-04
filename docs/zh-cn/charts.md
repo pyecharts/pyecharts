@@ -341,7 +341,7 @@
 * visual_text_color -> list  
     两端文本颜色。
 * visual_range_text -> list  
-    两端文本。默认为 ['low', 'hight']。可以只添一个。
+    两端文本。默认为 ['low', 'hight']。可以只添一个，比如 ['Legend'], 会把在 ‘high' 的位置显示 'Legend', 而在 'low' 的位置不显示任何字符串。
 * visual_range_color -> list  
     过渡颜色。默认为 ['#50a3ba', '#eac763', '#d94e5d']
 * visual_range_size -> list  
@@ -361,8 +361,8 @@
     是否显示拖拽用的手柄（手柄能拖拽调整选中范围）。默认为 True
 * is_piecewise -> bool  
     是否将组件转换为分段型（默认为连续型），默认为 False
-* pieces -> array
-    每一段的数值范围，默认为 None 。而且之后 is_piecewise=True 时起作用。数据结构为以字典为成员的数列。这个字典的结构是： { "min": small_value, "max": big_value, "label": "piece name" }.
+* pieces -> list
+    is_piecewise=True 时起作用。每一段的数值范围，默认为 None 。数据结构为以字典为成员的数列。这个字典的结构是： { "min": small_value, "max": big_value, "label": "piece name" }.
 
 
 **tooltip：提示框组件，用于移动或点击鼠标时弹出数据内容**
@@ -395,7 +395,7 @@
 * tooltip_font_size -> int  
     提示框字体大小，默认为 14
 * tooltip_background_color -> str
-    提示框背景颜色，默认 ‘rgba(50,50,50,0.7)’
+    提示框背景颜色，默认 ’rgba(50,50,50,0.7)‘
 * param tooltip_border_color -> str
     提示框边界颜色，默认 ‘#333’
 * tooltip_border_width -> str
