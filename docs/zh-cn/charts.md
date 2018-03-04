@@ -360,6 +360,21 @@
     是否显示拖拽用的手柄（手柄能拖拽调整选中范围）。默认为 True
 * is_piecewise -> bool  
     是否将组件转换为分段型（默认为连续型），默认为 False
+* pieces -> list  
+    自定义『分段式视觉映射组件（visualMapPiecewise）』的每一段的范围，  
+    以及每一段的文字，以及每一段的特别的样式。（仅在 is_piecewise 为 True 时生效）例如： 
+    ``` 
+    pieces: [
+        {min: 1500}, // 不指定 max，表示 max 为无限大（Infinity）。
+        {min: 900, max: 1500},
+        {min: 310, max: 1000},
+        {min: 200, max: 300},
+        {min: 10, max: 200, label: '10 到 200（自定义label）'},
+        // 表示 value 等于 123 的情况。
+        {value: 123, label: '123（自定义特殊颜色）', color: 'grey'}
+        {max: 5}     // 不指定 min，表示 min 为无限大（-Infinity）。
+    ]
+    ```
 
 
 **tooltip：提示框组件，用于移动或点击鼠标时弹出数据内容**
@@ -391,6 +406,12 @@
     提示框字体颜色，默认为 '#fff'
 * tooltip_font_size -> int  
     提示框字体大小，默认为 14
+* tooltip_background_color -> str  
+    提示框浮层的背景颜色。默认为 "rgba(50,50,50,0.7)"
+* tooltip_border_color -> str  
+    提示框浮层的边框颜色。默认为 "#333"
+* tooltip_border_width -> int/float  
+    提示框浮层的边框宽。默认为 0
 
 
 **markLine&markPoint：图形标记组件，用于标记指定的特殊数据，有标记线和标记点两种（Bar、Line、Kline）**
@@ -1794,7 +1815,6 @@ map.render()
 ![map-4](https://user-images.githubusercontent.com/19553554/35082387-7d35893e-fc54-11e7-8482-60dc23d31836.png)
 
 设置 `name_map=...` 采用自己地图名称
-
 原版：
 <div align="center">
 <img width="382" alt="screen shot 2018-02-27 at 09 24 21" src="https://user-images.githubusercontent.com/4280312/36720467-16fb0a66-1ba0-11e8-8cbd-453d8f2462d3.png">
@@ -1812,15 +1832,32 @@ from echarts_united_kingdom_pypkg import NM_WESTMINSTER_2016_UK
 value = []
 attr = []
 map = Map('United Kingdom', width=800, height=600)
-map.add('', attr, value, maptype='英国选区2016',
-        is_visualmap=True, visual_text_color="#000",
-        name_map=NM_WESTMINSTER_2016_UK)
+map.add('', attr, value, maptype='英国选区2016', is_visualmap=True,
+        visual_text_color="#000", name_map=NM_WESTMINSTER_2016_UK)
 map.render()
 ```
 <div align="center">
 <img width="449" alt="screen shot 2018-02-27 at 09 27 38" src="https://user-images.githubusercontent.com/4280312/36720626-803ff194-1ba0-11e8-998b-548afbedc18e.png">
 </div>
 这个方便画图，因为很多数据和地区号直接挂钩，同时也容易做本地化。
+
+设置 `pieces` 自定义 visualMap 组件标签
+```python
+value = [155, 10, 66, 78]
+attr = ["福建", "山东", "北京", "上海"]
+map = Map("全国地图示例", width=1200, height=600)
+map.add("", attr, value, maptype='china',
+        is_visualmap=True, is_piecewise=True,
+        visual_text_color="#000",
+        visual_range_text=["", ""],
+        pieces=[
+            {"max": 160, "min": 70, "label": "高数值"},
+            {"max": 69, "min": 0, "label": "低数值"},
+        ])
+map.render()
+```
+![map-5](https://user-images.githubusercontent.com/19553554/36943053-22748c70-1fbd-11e8-86dc-ac3d48f5c4e3.png)
+
 
 ## Parallel（平行坐标系）
 > 平行坐标系是一种常用的可视化高维数据的图表。
