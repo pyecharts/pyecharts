@@ -57,6 +57,8 @@ class Scatter(Chart):
             "symbolSize": symbol_size,
             "data": _data,
             "label": chart['label'],
+            "markPoint": chart['mark_point'],
+            "markLine": chart['mark_line'],
             "seriesId": self._option.get('series_id'),
         })
         self._config_components(**kwargs)

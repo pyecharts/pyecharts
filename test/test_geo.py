@@ -145,3 +145,23 @@ def test_geo_user_define_coords():
     geo.add("", ["0", "1", "2"], [6, 5.8, 6.2], is_visualmap=True,
             geo_cities_coords=coords, maptype="world")
     geo.render()
+
+
+def test_geo_visualmap_pieces():
+    data = [
+        ("海门", 9), ("鄂尔多斯", 12), ("招远", 12),
+        ("舟山", 12), ("齐齐哈尔", 14), ("盐城", 15)
+    ]
+    geo = Geo("全国主要城市空气质量", "data from pm2.5", **style.init_style)
+    attr, value = geo.cast(data)
+    geo.add("", attr, value, type="effectScatter", is_random=True,
+            is_visualmap=True, is_piecewise=True,
+            visual_text_color="#fff",
+            pieces=[
+                {"min": 0, "max": 13, "label": "0 < x < 13"},
+                {"min": 14, "max": 16, "label": "14 < x < 16"},
+            ],
+            effect_scale=5)
+    content = geo._repr_html_()
+    assert '"max": 13' in content
+    assert '"label": "14 < x < 16"' in content
