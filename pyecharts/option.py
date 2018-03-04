@@ -650,6 +650,7 @@ def visual_map(visual_type='color',
                visual_dimension=None,
                is_calculable=True,
                is_piecewise=False,
+               pieces=None,
                **kwargs):
     """ 是视觉映射组件，用于进行『视觉编码』，也就是将数据映射到视觉元素（视觉通道）
 
@@ -683,6 +684,8 @@ def visual_map(visual_type='color',
         是否显示拖拽用的手柄（手柄能拖拽调整选中范围）。默认为 True
     :param is_piecewise:
         是否将组件转换为分段型（默认为连续型），默认为 False
+    :param pieces:
+        is_piecewise=True 时起作用。每一段的数值范围，默认为 None 。
     :param kwargs:
     """
     _min, _max = 0, 100
@@ -727,6 +730,11 @@ def visual_map(visual_type='color',
         "top": visual_top,
         "showLabel": True,
     }
+    if is_piecewise:
+        _visual_map['pieces'] = pieces
+    if visual_range_text:
+        assert isinstance(visual_range_text, list)
+        _visual_map['text'] = visual_range_text
     return _visual_map
 
 
@@ -1053,6 +1061,9 @@ def tooltip(type=None,
             tooltip_formatter=None,
             tooltip_text_color="#fff",
             tooltip_font_size=14,
+            tooltip_background_color=None,
+            tooltip_border_color=None,
+            tooltip_border_width=None,
             **kwargs):
     """ 提示框组件，用于移动或点击鼠标时弹出数据内容
 
@@ -1092,6 +1103,12 @@ def tooltip(type=None,
         提示框字体颜色，默认为 '#fff'
     :param tooltip_font_size:
         提示框字体大小，默认为 14
+    :param tooltip_background_color:
+        提示框背景颜色，默认 ‘rgba(50,50,50,0.7)’
+    :param tooltip_border_color:
+        提示框边界颜色，默认 ‘#333’
+    :param tooltip_border_width:
+        提示框边界宽度，默认 ’0’
     """
     if tooltip_formatter is None:
         if type == "gauge":
@@ -1109,6 +1126,12 @@ def tooltip(type=None,
             "fontSize": tooltip_font_size
         }
     }
+    if tooltip_background_color:
+        _tooltip['backgroundColor'] = tooltip_background_color
+    if tooltip_border_color:
+        _tooltip['borderColor'] = tooltip_border_color
+    if tooltip_border_width:
+        _tooltip['borderWidth'] = tooltip_border_width
     return _tooltip
 
 

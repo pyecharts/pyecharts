@@ -29,6 +29,7 @@
     * Line3D（3D 折线图）
     * Liquid（水球图）
     * Map（地图）
+    * Choropleth Map (等值区域图)
     * Parallel（平行坐标系）
     * Pie（饼图）
     * Polar（极坐标系）
@@ -340,7 +341,7 @@
 * visual_text_color -> list  
     两端文本颜色。
 * visual_range_text -> list  
-    两端文本。默认为 ['low', 'hight']
+    两端文本。默认为 ['low', 'hight']。可以只添一个，比如 ['Legend'], 会把在 ‘high' 的位置显示 'Legend', 而在 'low' 的位置不显示任何字符串。
 * visual_range_color -> list  
     过渡颜色。默认为 ['#50a3ba', '#eac763', '#d94e5d']
 * visual_range_size -> list  
@@ -360,6 +361,8 @@
     是否显示拖拽用的手柄（手柄能拖拽调整选中范围）。默认为 True
 * is_piecewise -> bool  
     是否将组件转换为分段型（默认为连续型），默认为 False
+* pieces -> list
+    is_piecewise=True 时起作用。每一段的数值范围，默认为 None 。数据结构为以字典为成员的数列。这个字典的结构是： { "min": small_value, "max": big_value, "label": "piece name" }.
 
 
 **tooltip：提示框组件，用于移动或点击鼠标时弹出数据内容**
@@ -391,6 +394,12 @@
     提示框字体颜色，默认为 '#fff'
 * tooltip_font_size -> int  
     提示框字体大小，默认为 14
+* tooltip_background_color -> str
+    提示框背景颜色，默认 ’rgba(50,50,50,0.7)‘
+* param tooltip_border_color -> str
+    提示框边界颜色，默认 ‘#333’
+* tooltip_border_width -> str
+    提示框边界宽度，默认 ’0’
 
 
 **markLine&markPoint：图形标记组件，用于标记指定的特殊数据，有标记线和标记点两种（Bar、Line、Kline）**
@@ -1812,7 +1821,7 @@ from echarts_united_kingdom_pypkg import NM_WESTMINSTER_2016_UK
 value = []
 attr = []
 map = Map('United Kingdom', width=800, height=600)
-map.add('', attr, value, maptype='英国选区2016',
+map.add('', attr, value, maptype='UK_electoral_2016',
         is_visualmap=True, visual_text_color="#000",
         name_map=NM_WESTMINSTER_2016_UK)
 map.render()
@@ -1821,6 +1830,60 @@ map.render()
 <img width="449" alt="screen shot 2018-02-27 at 09 27 38" src="https://user-images.githubusercontent.com/4280312/36720626-803ff194-1ba0-11e8-998b-548afbedc18e.png">
 </div>
 这个方便画图，因为很多数据和地区号直接挂钩，同时也容易做本地化。
+
+##  Choropleth map（等值区域图）
+
+> 在地图学科或是测绘学科里，等值区域图是为了展现统计数据因为地理位置不通而变化的地图。在数据可视化学科里，等值区域图用来展示表述某些区域的共同属性。
+
+ChoroplethMap.add()  方法签名
+```python
+add(name, attr, value, choropleth_legend,
+    maptype='china',
+    is_roam=True,
+    is_map_symbol_show=True, **kwargs)
+```
+等值区域图在用法上和 Map 相近，只是数值可以是字符串。不同的是等值区域图必用 piece wise 的 visual map。并且 visual_range_color 不起作用。
+而且 visual_range_text 默认是 ['Legend']，visual_text_color 默认是 ['black'], 不过用户可以改。千万别忘了用 
+
+* name -> str
+   图例名称
+* attr -> list
+   属性简短名称
+* value -> list
+   属性所对应的值
+* choropleth_legend -> list
+   属性的扩展名称。它的数据结构是一个字典序列。字典的结构是这样的：{ 'tag': ‘前面 attr 的一个属性值’， ‘label’：‘属性的俗名’，‘color’：‘标注颜色’ }
+* maptype -> str
+   地图类型。 具体请参照 Map 的 maptype 用法
+* is_roam -> bool/str
+   是否开启鼠标缩放和平移漫游。默认为 True
+   如果只想要开启缩放或者平移，可以设置成'scale'或者'move'。设置成 True 为都开启
+* is_map_symbol_show -> bool
+    是否显示地图标记红点，默认为 True。
+* name_map -> dict
+    [用自定义的地图名称](http://echarts.baidu.com/option.html#series-map.nameMap). 具体请参照 Map 的 name_map 用法
+```python
+# coding=utf-8
+from __future__ import unicode_literals
+
+from pyecharts import ChoroplethMap
+value = ['A', 'B', 'C', 'THIS_KEY_IS_NOT_IN_HTML']
+attr = ["福建", "山东", "北京", "上海"]
+legends = {
+    'A': 'test a',
+    'B': 'test b',
+    'C': 'test c',
+    'THIS_KEY_IS_NOT_IN_HTML': 'test d'
+}
+map = ChoroplethMap("Choropleth map - 等值区域图示例", width=1200, height=600)
+map.add("", attr, value, legends, maptype='china',
+        visual_range_color=['red', 'blue', 'yellow', 'green'],
+        is_label_show=True)
+map.render()
+```
+
+![choroplethmap-0](https://user-images.githubusercontent.com/4280312/36940054-a8ac79f4-1f33-11e8-80f3-bfab5f1f5e65.png)
+
 
 ## Parallel（平行坐标系）
 > 平行坐标系是一种常用的可视化高维数据的图表。
