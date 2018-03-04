@@ -434,6 +434,8 @@
     标记线指定在哪个维度上指定最大值最小值。这可以是维度的直接名称，Line 时可以是 x、angle 等、Kline 图时可以是 open、close、highest、lowest。  
     可同时制定多个维度，如:  
     mark_line=['min', 'max'], mark_line_valuedim=['lowest', 'highest'] 则表示 min 使用 lowest 维度，max 使用 highest 维度，以此类推
+* mark_line_coords -> [list], 包含列表的列表  
+    标记线指定起点坐标和终点坐标，如 [[10, 10], [30, 30]]，两个点分别为横纵坐标轴点。
 * mark_point_valuedim -> list  
     标记线指定在哪个维度上指定最大值最小值。这可以是维度的直接名称，Line 时可以是 x、angle 等、Kline 图时可以是 open、close、highest、lowest。  
     可同时制定多个维度，如:  
