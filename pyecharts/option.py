@@ -686,7 +686,8 @@ def visual_map(visual_type='color',
         是否将组件转换为分段型（默认为连续型），默认为 False
     :param pieces:
         自定义『分段式视觉映射组件（visualMapPiecewise）』的每一段的范围，
-        以及每一段的文字，以及每一段的特别的样式。例如：
+        以及每一段的文字，以及每一段的特别的样式（仅在 is_piecewise 为 True
+        时生效）。例如：
         pieces: [
             {min: 1500}, // 不指定 max，表示 max 为无限大（Infinity）。
             {min: 900, max: 1500},
@@ -1069,6 +1070,9 @@ def tooltip(type=None,
             tooltip_formatter=None,
             tooltip_text_color="#fff",
             tooltip_font_size=14,
+            tooltip_background_color="rgba(50,50,50,0.7)",
+            tooltip_border_color="#333",
+            tooltip_border_width=0,
             **kwargs):
     """ 提示框组件，用于移动或点击鼠标时弹出数据内容
 
@@ -1108,6 +1112,12 @@ def tooltip(type=None,
         提示框字体颜色，默认为 '#fff'
     :param tooltip_font_size:
         提示框字体大小，默认为 14
+    :param tooltip_background_color:
+        提示框浮层的背景颜色。默认为 "rgba(50,50,50,0.7)"
+    :param tooltip_border_color:
+        提示框浮层的边框颜色。默认为 "#333"
+    :param tooltip_border_width:
+        提示框浮层的边框宽。默认为 0
     """
     if tooltip_formatter is None:
         if type == "gauge":
@@ -1123,7 +1133,10 @@ def tooltip(type=None,
         "textStyle": {
             "color": tooltip_text_color,
             "fontSize": tooltip_font_size
-        }
+        },
+        "backgroundColor": tooltip_background_color,
+        "borderColor": tooltip_border_color,
+        "borderWidth": tooltip_border_width
     }
     return _tooltip
 
