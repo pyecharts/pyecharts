@@ -458,6 +458,7 @@ def _mark(data,
           mark_point_textcolor='#fff',
           mark_line_symbolsize=10,
           mark_line_valuedim="",
+          mark_line_coords=None,
           mark_point_valuedim="",
           _is_markline=False,
           **kwargs):
@@ -494,8 +495,11 @@ def _mark(data,
         可同时制定多个维度，如
             mark_line=['min', 'max'], mark_line_valuedim=['lowest', 'highest']
             则表示 min 使用 lowest 维度，max 使用 highest 维度，以此类推
+    :param mark_line_coords:
+        标记线指定起点坐标和终点坐标，如 [[10, 10], [30, 30]]，两个点分别为横
+        纵坐标轴点。
     :param mark_point_valuedim:
-        编辑点指定在哪个维度上指定最大值最小值。这可以是维度的直接名称，Line 时可以
+        标记点指定在哪个维度上指定最大值最小值。这可以是维度的直接名称，Line 时可以
         是 x、angle 等、Kline 图时可以是 open、close、highest、lowest。
         可同时制定多个维度，如
           mark_point=['min', 'max'], mark_point_valuedim=['lowest', 'highest']
@@ -554,6 +558,15 @@ def _mark(data,
                         })
                     if _type:
                         mark.get("data").append(_marktmp)
+
+    if mark_line_coords and len(mark_line_coords) == 2:
+        return {
+            "data": [
+                [{"coord": mark_line_coords[0]},
+                 {"coord": mark_line_coords[1]}]
+            ]
+        }
+
     return mark
 
 

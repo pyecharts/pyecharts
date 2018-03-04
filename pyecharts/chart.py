@@ -210,6 +210,7 @@ class Chart(Base):
             mark_line=None,
             mark_line_symbolsize=None,
             mark_line_valuedim=None,
+            mark_line_coords=None,
             mark_point=None,
             mark_point_symbol=None,
             mark_point_symbolsize=None,
