@@ -116,9 +116,13 @@ Render to a HTML page.
 
 Render javascript code fragment including options.
 
+**print_echarts_options()**
+
+Print all options of charts.The new alias form `show_config`.
+
 **show_config()**
 
-Print all options of charts
+Print all options of charts.From v0.3.3,this method has been deprecated and use `print_echarts_options` instead.
 
 ## Multiple Chart
 

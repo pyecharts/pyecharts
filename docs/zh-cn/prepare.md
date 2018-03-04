@@ -1,5 +1,6 @@
-### 确认你已安装了最新版本的 pyecharts
-> `pyecharts.__version__` 可查看当前 pyecharts 版本，更多版本信息请查看 [changelog.md](https://github.com/pyecharts/pyecharts/blob/master/changelog.md) **强烈推荐阅读**！
+[TOC]
+
+### 第一个示例
 
 **Note：** 推荐使用 pyecharts 的最新版本！！
 
@@ -9,7 +10,7 @@ from pyecharts import Bar
 
 bar = Bar("我的第一个图表", "这里是副标题")
 bar.add("服装", ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"], [5, 20, 36, 10, 75, 90])
-bar.show_config()
+bar.print_echarts_options()
 bar.render()
 ```
 ![guide-0](https://user-images.githubusercontent.com/19553554/35103909-3ee41ba2-fca2-11e7-87be-1a3585b9e0fa.png)
@@ -70,6 +71,44 @@ cast(seq)
     [{A1: B1}, {A2: B2}, {A3: B3}, {A4: B4}] --> k_lst[ A[i1, i2...] ], v_lst[ B[i1, i2...] ]
 3. 字典  
     {A1: B1, A2: B2, A3: B3, A4: B4} -- > k_lst[ A[i1, i2...] ], v_lst[ B[i1, i2...] ]
+
+### 多次显示图表
+
+> v0.4.0 更新
+
+在 pyecharts 可以连续使用 `chart.render` 在同一个脚本中显示多个图表。
+
+```python
+from pyecharts import Bar, Line
+
+bar = Bar("直方图示例")
+bar.add()
+bar.render(path='bar.html')
+
+line = Line("测试图表")
+line.add()
+bar.render(path='line.html')
+```
+
+从 v0.4.0 开始，pyecharts 重构了渲染的内部逻辑，改善效率。推荐使用以下方式显示多个图表。
+
+```python
+from pyecharts import Bar, Line
+from pyecharts.engine import create_default_environment
+
+bar = Bar("直方图示例")
+bar.add()
+
+line = Line("测试图表")
+line.add()
+
+env = create_default_environment()
+
+env.render_chart_to_file(bar, path='bar.html')
+env.render_chart_to_file(line, path='line.html')
+```
+
+相比第一个例子，该代码只是使用同一个引擎对象，减少了部分重复操作，速度有所提高。
 
 
 ### Pandas&Numpy 简单示例

@@ -3,7 +3,10 @@
 
 * ### version 0.4.0 (development)
 
-    * 更新 jupyter-echarts 至 1.4.0: echarts 3.6.2 -> 4.0.2, echarts-gl 1.0.0-b4 -> 1.0.0-b6, echarts-liquidfill 1.0.5 -> 1.1.1, 
+    * 更新 jupyter-echarts 至 1.4.0: echarts 3.6.2 -> 4.0.2, echarts-gl 1.0.0-b4 -> 1.0.0-b6, echarts-liquidfill 1.0.5 -> 1.1.1,
+    * 优化内部渲染逻辑，提高渲染效率。
+    * `EchartsEnvironment` 类性增 `render_chart_to_file`
+    * 修正 width / height 在 Jupyter Notebook 渲染错误的 Bug
 
 * ### version 0.3.3 - 2018.03.01（Current）
 
