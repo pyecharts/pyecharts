@@ -215,6 +215,7 @@ class Chart(Base):
             mark_point_symbolsize=None,
             mark_point_textcolor=None,
             mark_point_valuedim=None,
+            pieces=None,
             radius_data=None,
             radius=None,
             rosetype=None,

@@ -650,6 +650,7 @@ def visual_map(visual_type='color',
                visual_dimension=None,
                is_calculable=True,
                is_piecewise=False,
+               pieces=None,
                **kwargs):
     """ 是视觉映射组件，用于进行『视觉编码』，也就是将数据映射到视觉元素（视觉通道）
 
@@ -683,6 +684,18 @@ def visual_map(visual_type='color',
         是否显示拖拽用的手柄（手柄能拖拽调整选中范围）。默认为 True
     :param is_piecewise:
         是否将组件转换为分段型（默认为连续型），默认为 False
+    :param pieces:
+        自定义『分段式视觉映射组件（visualMapPiecewise）』的每一段的范围，
+        以及每一段的文字，以及每一段的特别的样式。例如：
+        pieces: [
+            {min: 1500}, // 不指定 max，表示 max 为无限大（Infinity）。
+            {min: 900, max: 1500},
+            {min: 310, max: 1000},
+            {min: 200, max: 300},
+            {min: 10, max: 200, label: '10 到 200（自定义label）'},
+            {value: 123, label: '123（自定义特殊颜色）', color: 'grey'}, // 表示 value 等于 123 的情况。
+            {max: 5}     // 不指定 min，表示 min 为无限大（-Infinity）。
+        ]
     :param kwargs:
     """
     _min, _max = 0, 100
@@ -727,6 +740,8 @@ def visual_map(visual_type='color',
         "top": visual_top,
         "showLabel": True,
     }
+    if is_piecewise:
+        _visual_map.update(pieces=pieces)
     return _visual_map
 
 

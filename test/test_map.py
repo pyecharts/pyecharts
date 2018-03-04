@@ -90,3 +90,26 @@ def test_china_map():
         assert "\u798f\u5efa" in actual_content
         # 汕头市
         assert "\u4e0a\u6d77" in actual_content
+
+
+def test_visualmap_pieces():
+    value = [155, 10, 66, 78]
+    attr = ["福建", "山东", "北京", "上海"]
+    map = Map("全国地图示例", width=1200, height=600)
+    map.add("", attr, value, maptype='china',
+            is_visualmap=True, is_piecewise=True,
+            visual_text_color="#000",
+            visual_range_text=["", ""],
+            pieces=[
+                {
+                    "max": 160,
+                    "min": 70,
+                    "label": "高数值"
+                },
+                {
+                    "max": 69,
+                    "min": 0,
+                    "label": "低数值"
+                },
+            ])
+    map.render()
