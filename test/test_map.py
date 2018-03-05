@@ -2,7 +2,6 @@
 from __future__ import unicode_literals
 
 import json
-import codecs
 from pyecharts import Map
 
 from test.utils import get_default_rendering_file_content
@@ -47,12 +46,11 @@ def test_echarts_position_in_render_html():
     map.add("", attr, value, maptype='广东', is_map_symbol_show=False,
             is_visualmap=True, visual_text_color='#000')
     map.render()
-    with codecs.open('render.html', 'r', 'utf-8') as f:
-        actual_content = f.read()
-        echarts_position = actual_content.find('exports.echarts')
-        guangdong_position = actual_content.find(json.dumps('广东'))
-        assert echarts_position < guangdong_position
-        assert '"showLegendSymbol": false' in actual_content
+    content = get_default_rendering_file_content()
+    echarts_position = content.find('exports.echarts')
+    guangdong_position = content.find(json.dumps('广东'))
+    assert echarts_position < guangdong_position
+    assert '"showLegendSymbol": false' in content
 
 
 def test_world_map():
@@ -66,13 +64,12 @@ def test_world_map():
             visual_text_color='#000')
     map.render()
 
-    with codecs.open('render.html', 'r', 'utf-8') as f:
-        actual_content = f.read()
-        # test register map
-        assert "registerMap(\"world\"," in actual_content
-        # test non-existent country
-        assert "Russia" in actual_content
-        assert "Unknown Country', " not in actual_content
+    actual_content = get_default_rendering_file_content()
+    # test register map
+    assert "registerMap(\"world\"," in actual_content
+    # test non-existent country
+    assert "Russia" in actual_content
+    assert "Unknown Country', " not in actual_content
 
 
 def test_china_map():
@@ -82,11 +79,27 @@ def test_china_map():
     map.add("", attr, value, maptype='china')
     map.render()
 
-    with codecs.open('render.html', 'r', 'utf-8') as f:
-        actual_content = f.read()
-        # test register map
-        assert "registerMap(\"china\"," in actual_content
-        # 福建省
-        assert "\u798f\u5efa" in actual_content
-        # 汕头市
-        assert "\u4e0a\u6d77" in actual_content
+    actual_content = get_default_rendering_file_content()
+    # test register map
+    assert "registerMap(\"china\"," in actual_content
+    # 福建省
+    assert "\u798f\u5efa" in actual_content
+    # 汕头市
+    assert "\u4e0a\u6d77" in actual_content
+
+
+def test_map_visualmap_pieces():
+    value = [155, 10, 66, 78]
+    attr = ["福建", "山东", "北京", "上海"]
+    map = Map("全国地图示例", width=1200, height=600)
+    map.add("", attr, value, maptype='china',
+            is_visualmap=True, is_piecewise=True,
+            visual_text_color="#000",
+            visual_range_text=["", ""],
+            pieces=[
+                {"max": 160, "min": 70, "label": "高数值"},
+                {"max": 69, "min": 0, "label": "低数值"},
+            ])
+    content = map._repr_html_()
+    assert '"max": 160' in content
+    assert '"min": 0' in content

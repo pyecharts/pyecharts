@@ -458,6 +458,7 @@ def _mark(data,
           mark_point_textcolor='#fff',
           mark_line_symbolsize=10,
           mark_line_valuedim="",
+          mark_line_coords=None,
           mark_point_valuedim="",
           _is_markline=False,
           **kwargs):
@@ -494,8 +495,11 @@ def _mark(data,
         可同时制定多个维度，如
             mark_line=['min', 'max'], mark_line_valuedim=['lowest', 'highest']
             则表示 min 使用 lowest 维度，max 使用 highest 维度，以此类推
+    :param mark_line_coords:
+        标记线指定起点坐标和终点坐标，如 [[10, 10], [30, 30]]，两个点分别为横
+        纵坐标轴点。
     :param mark_point_valuedim:
-        编辑点指定在哪个维度上指定最大值最小值。这可以是维度的直接名称，Line 时可以
+        标记点指定在哪个维度上指定最大值最小值。这可以是维度的直接名称，Line 时可以
         是 x、angle 等、Kline 图时可以是 open、close、highest、lowest。
         可同时制定多个维度，如
           mark_point=['min', 'max'], mark_point_valuedim=['lowest', 'highest']
@@ -554,6 +558,15 @@ def _mark(data,
                         })
                     if _type:
                         mark.get("data").append(_marktmp)
+
+    if mark_line_coords and len(mark_line_coords) == 2:
+        return {
+            "data": [
+                [{"coord": mark_line_coords[0]},
+                 {"coord": mark_line_coords[1]}]
+            ]
+        }
+
     return mark
 
 
@@ -650,6 +663,7 @@ def visual_map(visual_type='color',
                visual_dimension=None,
                is_calculable=True,
                is_piecewise=False,
+               pieces=None,
                **kwargs):
     """ 是视觉映射组件，用于进行『视觉编码』，也就是将数据映射到视觉元素（视觉通道）
 
@@ -683,6 +697,20 @@ def visual_map(visual_type='color',
         是否显示拖拽用的手柄（手柄能拖拽调整选中范围）。默认为 True
     :param is_piecewise:
         是否将组件转换为分段型（默认为连续型），默认为 False
+    :param pieces:
+        自定义『分段式视觉映射组件（visualMapPiecewise）』的每一段的范围，
+        以及每一段的文字，以及每一段的特别的样式（仅在 is_piecewise 为 True
+        时生效）。例如：
+        pieces: [
+            {min: 1500}, // 不指定 max，表示 max 为无限大（Infinity）。
+            {min: 900, max: 1500},
+            {min: 310, max: 1000},
+            {min: 200, max: 300},
+            {min: 10, max: 200, label: '10 到 200（自定义label）'},
+            // 表示 value 等于 123 的情况。
+            {value: 123, label: '123（自定义特殊颜色）', color: 'grey'}
+            {max: 5}     // 不指定 min，表示 min 为无限大（-Infinity）。
+        ]
     :param kwargs:
     """
     _min, _max = 0, 100
@@ -727,6 +755,8 @@ def visual_map(visual_type='color',
         "top": visual_top,
         "showLabel": True,
     }
+    if is_piecewise:
+        _visual_map.update(pieces=pieces)
     return _visual_map
 
 
@@ -1053,6 +1083,9 @@ def tooltip(type=None,
             tooltip_formatter=None,
             tooltip_text_color="#fff",
             tooltip_font_size=14,
+            tooltip_background_color="rgba(50,50,50,0.7)",
+            tooltip_border_color="#333",
+            tooltip_border_width=0,
             **kwargs):
     """ 提示框组件，用于移动或点击鼠标时弹出数据内容
 
@@ -1092,6 +1125,12 @@ def tooltip(type=None,
         提示框字体颜色，默认为 '#fff'
     :param tooltip_font_size:
         提示框字体大小，默认为 14
+    :param tooltip_background_color:
+        提示框浮层的背景颜色。默认为 "rgba(50,50,50,0.7)"
+    :param tooltip_border_color:
+        提示框浮层的边框颜色。默认为 "#333"
+    :param tooltip_border_width:
+        提示框浮层的边框宽。默认为 0
     """
     if tooltip_formatter is None:
         if type == "gauge":
@@ -1107,7 +1146,10 @@ def tooltip(type=None,
         "textStyle": {
             "color": tooltip_text_color,
             "fontSize": tooltip_font_size
-        }
+        },
+        "backgroundColor": tooltip_background_color,
+        "borderColor": tooltip_border_color,
+        "borderWidth": tooltip_border_width
     }
     return _tooltip
 
