@@ -80,7 +80,7 @@ class Base(object):
         所需要的js 依赖文件
         """
         env = engine.create_default_environment()
-        html = env.render_container_and_echarts_code_for_one_chart(self)
+        html = env.render_container_and_echarts_code(self)
         return Markup(html)
 
     def get_js_dependencies(self):
@@ -149,7 +149,7 @@ class Base(object):
         config_items = require_config['config_items']
         libraries = require_config['libraries']
         env = engine.create_default_environment()
-        return env.generate_notebook(
+        return env.render_chart_to_notebook(
             charts=(self,),
             config_items=config_items,
             libraries=libraries

@@ -69,7 +69,7 @@ class Page(list):
         config_items = require_config['config_items']
         libraries = require_config['libraries']
         env = engine.create_default_environment()
-        return env.generate_notebook(
+        return env.render_chart_to_notebook(
             charts=self,
             config_items=config_items,
             libraries=libraries

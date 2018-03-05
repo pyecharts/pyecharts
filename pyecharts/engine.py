@@ -153,9 +153,9 @@ class EchartsEnvironment(BaseEnvironment):
             *args,
             **kwargs)
 
-    def render_container_and_echarts_code_for_one_chart(self, chart):
+    def render_container_and_echarts_code(self, chart):
         """
-        Render code for a charts.
+        Render <div> and <script> code fragment for a chart.
         :param chart:
         :return:
         """
@@ -176,11 +176,11 @@ class EchartsEnvironment(BaseEnvironment):
     ):
         """
         Render a chart or page to local html files.
-        :param chart:
-        :param object_name:
-        :param path:
-        :param template_name:
-        :param extra_context:
+        :param chart: A Chart or Page object
+        :param object_name: Variable name for chart/page used in template
+        :param path: The destination file which the html code write to
+        :param template_name: The name of template file.
+        :param extra_context: A dictionary containing extra data.
         :return:
         """
         context = {object_name: chart}
@@ -189,7 +189,7 @@ class EchartsEnvironment(BaseEnvironment):
         html = tpl.render(**context)
         utils.write_utf8_html_file(path, html)
 
-    def generate_notebook(self, charts, **context):
+    def render_chart_to_notebook(self, charts, **context):
         context.update({'charts': charts})
         tpl = self.get_template('notebook.html')
         return tpl.render(**context)
