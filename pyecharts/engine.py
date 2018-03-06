@@ -135,7 +135,7 @@ class BaseEnvironment(Environment):
 
 class EchartsEnvironment(BaseEnvironment):
     """
-    Built-in jinja2 template engine for pyecharts.dd
+    Built-in jinja2 template engine for pyecharts
     This class provides some shortcut methods for rendering charts.
     """
 
@@ -181,7 +181,7 @@ class EchartsEnvironment(BaseEnvironment):
         :param path: The destination file which the html code write to
         :param template_name: The name of template file.
         :param extra_context: A dictionary containing extra data.
-        :return:
+        :return: None
         """
         context = {object_name: chart}
         context.update(extra_context or {})
@@ -190,6 +190,12 @@ class EchartsEnvironment(BaseEnvironment):
         utils.write_utf8_html_file(path, html)
 
     def render_chart_to_notebook(self, charts, **context):
+        """
+        Return html string for rendering a chart/page to a notebook cell.
+        :param charts: A chart or a page object
+        :param context: A dictionary containing data.
+        :return: A unicode string that will be displayed in notebook cell.
+        """
         context.update({'charts': charts})
         tpl = self.get_template('notebook.html')
         return tpl.render(**context)
@@ -198,7 +204,7 @@ class EchartsEnvironment(BaseEnvironment):
 def create_default_environment():
     """
     Create environment object with pyecharts default single PyEchartsConfig.
-    :return:
+    :return: A new EchartsEnvironment object.
     """
     config = conf.CURRENT_CONFIG
     echarts_env = EchartsEnvironment(

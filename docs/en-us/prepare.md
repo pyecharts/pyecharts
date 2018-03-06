@@ -82,13 +82,13 @@ You can call `chart.render`  many times to show some charts in a script.
 ```python
 from pyecharts import Bar, Line
 
-bar = Bar("直方图示例")
-bar.add()
+bar = Bar("我的第一个图表", "这里是副标题")
+bar.add("服装", ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"], [5, 20, 36, 10, 75, 90])
 bar.render(path='bar.html')
 
-line = Line("测试图表")
-line.add()
-bar.render(path='line.html')
+line = Line("我的第一个图表", "这里是副标题")
+line.add("服装", ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"], [5, 20, 36, 10, 75, 90])
+line.render(path='line.html')
 ```
 
 In v0.4.0+, pyecharts refactors the internal logic and make render faster.The following code is recommended.
@@ -97,11 +97,11 @@ In v0.4.0+, pyecharts refactors the internal logic and make render faster.The fo
 from pyecharts import Bar, Line
 from pyecharts.engine import create_default_environment
 
-bar = Bar("直方图示例")
-bar.add()
+bar = Bar("我的第一个图表", "这里是副标题")
+bar.add("服装", ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"], [5, 20, 36, 10, 75, 90])
 
-line = Line("测试图表")
-line.add()
+line = Line("我的第一个图表", "这里是副标题")
+line.add("服装", ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"], [5, 20, 36, 10, 75, 90])
 
 env = create_default_environment()
 

@@ -81,13 +81,13 @@ cast(seq)
 ```python
 from pyecharts import Bar, Line
 
-bar = Bar("直方图示例")
-bar.add()
+bar = Bar("我的第一个图表", "这里是副标题")
+bar.add("服装", ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"], [5, 20, 36, 10, 75, 90])
 bar.render(path='bar.html')
 
-line = Line("测试图表")
-line.add()
-bar.render(path='line.html')
+line = Line("我的第一个图表", "这里是副标题")
+line.add("服装", ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"], [5, 20, 36, 10, 75, 90])
+line.render(path='line.html')
 ```
 
 从 v0.4.0 开始，pyecharts 重构了渲染的内部逻辑，改善效率。推荐使用以下方式显示多个图表。
@@ -96,11 +96,11 @@ bar.render(path='line.html')
 from pyecharts import Bar, Line
 from pyecharts.engine import create_default_environment
 
-bar = Bar("直方图示例")
-bar.add()
+bar = Bar("我的第一个图表", "这里是副标题")
+bar.add("服装", ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"], [5, 20, 36, 10, 75, 90])
 
-line = Line("测试图表")
-line.add()
+line = Line("我的第一个图表", "这里是副标题")
+line.add("服装", ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"], [5, 20, 36, 10, 75, 90])
 
 env = create_default_environment()
 
