@@ -7,7 +7,6 @@ from __future__ import unicode_literals
 import json
 
 from pyecharts import Bar, Line, Pie, Page, online
-from pyecharts.utils import write_utf8_html_file
 from test.constants import CLOTHES, WEEK
 
 TITLE = "柱状图数据堆叠示例"
@@ -25,7 +24,6 @@ def create_a_bar(title):
 def test_single_chart():
     bar = create_a_bar(TITLE)
     html = bar._repr_html_()
-    write_utf8_html_file('cell_single_chart.html', html)  # debug
     json_encoded_title = json.dumps(TITLE)
     assert json_encoded_title in html
     assert "require.config" in html
@@ -56,7 +54,6 @@ def test_page():
     page.add([line, pie, create_a_bar(TITLE)])
     # Start render and test
     html = page._repr_html_()
-    write_utf8_html_file('cell_page.html', html)  # debug
     # Test base html structure
     assert html.count('<script>') == html.count('</script>') == 2
     assert html.count('<div') == html.count('</div>') == 3
@@ -75,7 +72,6 @@ def test_online_feature():
     online()
     bar = create_a_bar(TITLE)
     html = bar._repr_html_()
-    write_utf8_html_file('cell_online.html', html)  # debug
     expected_jshost = 'https://pyecharts.github.io/jupyter-echarts/echarts'
     assert expected_jshost in html
 
@@ -84,6 +80,5 @@ def test_online_with_custom_jshost():
     online(host='https://my-site.com/js')
     bar = create_a_bar(TITLE)
     html = bar._repr_html_()
-    write_utf8_html_file('cell_online_my.html', html)  # debug
     expected_jshost = 'https://my-site.com/js'
     assert expected_jshost in html
