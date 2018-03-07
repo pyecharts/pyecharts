@@ -5,8 +5,8 @@ import codecs
 
 from pyecharts import (Bar, Scatter3D)
 from pyecharts import Page
-from pyecharts.conf import configure, online
 from pyecharts.conf import CURRENT_CONFIG
+from pyecharts.conf import configure
 from test.constants import RANGE_COLOR, CLOTHES
 
 
@@ -58,8 +58,6 @@ def test_custom_template_for_chart():
     }]
 
     configure(echarts_template_dir='.')
-
-    online()
 
     data1 = {'衬衫': '34', '羊毛衫': 45, '雪纺衫': 40}
     names, values = Bar.cast(data)
