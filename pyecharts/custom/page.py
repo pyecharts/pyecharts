@@ -34,10 +34,14 @@ class Page(list):
                template_name='simple_page.html',
                object_name='page',
                extra_context=None):
-        context = {object_name: self}
-        context.update(extra_context or {})
-        html = engine.render(template_name, **context)
-        utils.write_utf8_html_file(path, html)
+        env = engine.create_default_environment()
+        env.render_chart_to_file(
+            chart=self,
+            object_name=object_name,
+            path=path,
+            template_name=template_name,
+            extra_context=extra_context
+        )
 
     def render_embed(self):
         """
@@ -59,19 +63,17 @@ class Page(list):
 
         :return:
         """
-        doms = components = ""
         dependencies = self.js_dependencies
-        for chart in self:
-            doms += chart._render_notebook_dom_()
-            components += chart._render_notebook_component_()
-
         require_config = CURRENT_CONFIG.produce_require_configuration(
             dependencies)
-        return engine.render_notebook(
-            "notebook.html",
-            single_chart=components,
-            dom=doms,
-            **require_config)
+        config_items = require_config['config_items']
+        libraries = require_config['libraries']
+        env = engine.create_default_environment()
+        return env.render_chart_to_notebook(
+            charts=self,
+            config_items=config_items,
+            libraries=libraries
+        )
 
     @property
     def js_dependencies(self):
