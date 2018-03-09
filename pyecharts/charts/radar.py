@@ -88,8 +88,6 @@ class Radar(Chart):
                     "color": item_color
                 }},
             "lineStyle": chart['line_style'],
-            "areaStyle": {
-                "normal": chart['area_style']
-            },
+            "areaStyle": chart['area_style'],
         })
         self._config_components(**kwargs)

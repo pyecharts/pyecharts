@@ -116,9 +116,13 @@ js 文件仓库路径。可以设置本地或者远程地址。所有的远程�
 
 渲染包含选项的 js 代码。
 
-**show_config()**
+**print_echarts_options**
 
 打印全部 options 属性。
+
+**show_config()**
+
+打印全部 options 属性。自 v0.3.3 起。已废弃，应当使用 `print_echarts_options` 。
 
 
 ## 多图表

@@ -20,7 +20,8 @@ class Liquid(Chart):
               shape='circle',
               liquid_color=None,
               is_liquid_animation=True,
-              is_liquid_outline_show=True):
+              is_liquid_outline_show=True,
+              **kwargs):
         """
 
         :param name:
@@ -59,3 +60,4 @@ class Liquid(Chart):
                 "show": is_liquid_outline_show
             }
         })
+        self._config_components(**kwargs)

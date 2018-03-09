@@ -10,7 +10,7 @@ LINK_SCRIPT_FORMATTER = '<script type="text/javascript" src="{}"></script>'
 EMBED_SCRIPT_FORMATTER = '<script type="text/javascript">\n{}\n</script>'
 CHART_DIV_FORMATTER = '<div id="{chart_id}" style="width:{width};height:{height};"></div>'  # flake8: noqa
 CHART_CONFIG_FORMATTER = """
-var myChart_{chart_id} = echarts.init(document.getElementById('{chart_id}'));
+var myChart_{chart_id} = echarts.init(document.getElementById('{chart_id}'), null, {{renderer: '{renderer}'}});
 var option_{chart_id} = {options};
 myChart_{chart_id}.setOption(option_{chart_id});
 """
@@ -80,6 +80,7 @@ def generate_js_content(*charts):
     for chart in charts:
         js_content = CHART_CONFIG_FORMATTER.format(
             chart_id=chart.chart_id,
+            renderer=chart.renderer,
             options=utils.json_dumps(chart.options, indent=4)
         )
         contents.append(js_content)
@@ -135,6 +136,7 @@ class BaseEnvironment(Environment):
 class EchartsEnvironment(BaseEnvironment):
     """
     Built-in jinja2 template engine for pyecharts
+    This class provides some shortcut methods for rendering charts.
     """
 
     def __init__(self, pyecharts_config=None, *args, **kwargs):
@@ -151,17 +153,64 @@ class EchartsEnvironment(BaseEnvironment):
             *args,
             **kwargs)
 
+    def render_container_and_echarts_code(self, chart):
+        """
+        Render <div> and <script> code fragment for a chart.
+        :param chart:
+        :return:
+        """
+        tpl_string = """
+        {{ echarts_container(chart) }}
+        {{ echarts_js_content(chart) }}
+        """
+        tpl = self.from_string(tpl_string)
+        return tpl.render(chart=chart)
 
-def render(template_file, notebook=False, **context):
+    def render_chart_to_file(
+            self,
+            chart,
+            object_name='chart',
+            path='render.html',
+            template_name='simple_chart.html',
+            extra_context=None
+    ):
+        """
+        Render a chart or page to local html files.
+
+        :param chart: A Chart or Page object
+        :param object_name: Variable name for chart/page used in template
+        :param path: The destination file which the html code write to
+        :param template_name: The name of template file.
+        :param extra_context: A dictionary containing extra data.
+        :return: None
+        """
+        context = {object_name: chart}
+        context.update(extra_context or {})
+        tpl = self.get_template(template_name)
+        html = tpl.render(**context)
+        utils.write_utf8_html_file(path, html)
+
+    def render_chart_to_notebook(self, **context):
+        """
+        Return html string for rendering a chart/page to a notebook cell.
+
+        :param context: A dictionary containing data.
+        :return: A unicode string that will be displayed in notebook cell.
+        """
+        tpl = self.get_template('notebook.html')
+        return tpl.render(**context)
+
+
+def create_default_environment():
+    """
+    Create environment object with pyecharts default single PyEchartsConfig.
+
+    :return: A new EchartsEnvironment object.
+    """
     config = conf.CURRENT_CONFIG
     echarts_env = EchartsEnvironment(
         pyecharts_config=config,
         loader=FileSystemLoader(
             [config.echarts_template_dir, conf.DEFAULT_TEMPLATE_DIR])
     )
-    template = echarts_env.get_template(template_file)
-    return template.render(**context)
-
-
-def render_notebook(template_file, **context):
-    return render(template_file, notebook=True, **context)
+    return echarts_env

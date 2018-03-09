@@ -47,7 +47,7 @@ class Line(Chart):
         :param kwargs:
         """
         assert len(x_axis) == len(y_axis)
-        kwargs.update(x_axis=x_axis, type="line")
+        kwargs.update(x_axis=x_axis, type="line", flag=True)
         chart = get_all_options(**kwargs)
 
         xaxis, yaxis = chart['xy_axis']
@@ -55,7 +55,6 @@ class Line(Chart):
             is_stack = "stack_" + str(self._option['series_id'])
         else:
             is_stack = ""
-        _area_style = {"normal": chart['area_style']} if is_fill else {}
         self._option.update(xAxis=xaxis, yAxis=yaxis)
         self._option.get('legend')[0].get('data').append(name)
 
@@ -71,7 +70,7 @@ class Line(Chart):
             "data": y_axis,
             "label": chart['label'],
             "lineStyle": chart['line_style'],
-            "areaStyle": _area_style,
+            "areaStyle": chart['area_style'],
             "markPoint": chart['mark_point'],
             "markLine": chart['mark_line'],
             "seriesId": self._option.get('series_id'),
