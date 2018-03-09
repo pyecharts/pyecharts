@@ -22,7 +22,8 @@ class WordCloud(Chart):
               shape="circle",
               word_gap=20,
               word_size_range=None,
-              rotate_step=45):
+              rotate_step=45,
+              **kwargs):
         """
 
         :param name:
@@ -75,3 +76,4 @@ class WordCloud(Chart):
             "sizeRange": [_min, _max],
             "data": _data
         })
+        self._config_components(**kwargs)
