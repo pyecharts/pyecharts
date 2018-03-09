@@ -50,7 +50,10 @@ class Chart(Base):
         :param background_color:
             画布背景颜色，默认为 '#fff'
         :param page_title:
-            指定生成的 html 文件中 <title> 标签的值。默认为'Echarts'
+            指定生成的 html 文件中 <title> 标签的值。默认为 'Echarts'
+        :param renderer:
+            指定使用渲染方式，有 'svg' 和 'canvas' 可选，默认为 'canvas'。
+            3D 图仅能使用 'canvas'。
         """
         super(Chart, self).__init__(
             width=width, height=height,
