@@ -27,10 +27,11 @@ class Base(object):
             画布宽度，默认为 800（px）
         :param height:
             画布高度，默认为 400（px）
+        :param renderer:
+            指定使用渲染方式，有 'svg' 和 'canvas' 可选，默认为 'canvas'。
+            3D 图仅能使用 'canvas'。
         :param page_title:
-            指定生成的 html 文件中 <title> 标签的值。默认为'Echarts'
-        :param jshost:
-            自定义每个实例的 JavaScript host
+            指定生成的 html 文件中 <title> 标签的值。默认为 'Echarts'
         """
         self._option = {}
         self._js_dependencies = set()
