@@ -18,6 +18,7 @@
     
     #### Fixed
     * 修正 width / height 在 Jupyter Notebook 渲染错误的 Bug
+    * [issue#432](https://github.com/pyecharts/pyecharts/issues/432) 修复水球图和词云图不能指定 Toolbox 等选项的 Bug
 
 * ### version 0.3.3 - 2018.03.01（Current）
 
