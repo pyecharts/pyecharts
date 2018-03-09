@@ -19,6 +19,7 @@ class Base(object):
     def __init__(self,
                  width=800,
                  height=400,
+                 renderer=constants.CANVAS_RENDERER,
                  page_title=constants.PAGE_TITLE):
         """
 
@@ -26,15 +27,17 @@ class Base(object):
             画布宽度，默认为 800（px）
         :param height:
             画布高度，默认为 400（px）
+        :param renderer:
+            指定使用渲染方式，有 'svg' 和 'canvas' 可选，默认为 'canvas'。
+            3D 图仅能使用 'canvas'。
         :param page_title:
-            指定生成的 html 文件中 <title> 标签的值。默认为'Echarts'
-        :param jshost:
-            自定义每个实例的 JavaScript host
+            指定生成的 html 文件中 <title> 标签的值。默认为 'Echarts'
         """
         self._option = {}
         self._js_dependencies = set()
         self._chart_id = uuid.uuid4().hex
         self.width, self.height = width, height
+        self.renderer = renderer
         self._page_title = page_title
         self._js_dependencies = {'echarts'}
 
@@ -77,12 +80,8 @@ class Base(object):
         """ 渲染图表的所有配置项，为 web pages 服务，不过需先提供
         所需要的js 依赖文件
         """
-        my_option = utils.json_dumps(self._option, indent=4)
-        html = engine.render('chart_component.html',
-                             my_option=my_option,
-                             chart_id=self._chart_id,
-                             my_width=self.width,
-                             my_height=self.height)
+        env = engine.create_default_environment()
+        html = env.render_container_and_echarts_code(self)
         return Markup(html)
 
     def get_js_dependencies(self):
@@ -95,10 +94,14 @@ class Base(object):
                template_name='simple_chart.html',
                object_name='chart',
                extra_context=None):
-        context = {object_name: self}
-        context.update(extra_context or {})
-        html = engine.render(template_name, **context)
-        utils.write_utf8_html_file(path, html)
+        env = engine.create_default_environment()
+        env.render_chart_to_file(
+            chart=self,
+            object_name=object_name,
+            path=path,
+            template_name=template_name,
+            extra_context=extra_context
+        )
 
     @staticmethod
     def cast(seq):
@@ -137,35 +140,21 @@ class Base(object):
 
     def _repr_html_(self):
         """ 渲染配置项并将图形显示在 notebook 中
+        chart/page => charts
+        chart.js_dependencies => require_config => config_items, libraries
+        :return A unicode string.
         """
-        dom = self._render_notebook_dom_()
-        component = self._render_notebook_component_()
         require_config = CURRENT_CONFIG.produce_require_configuration(
-            self._js_dependencies
+            self.js_dependencies
         )
-        return engine.render_notebook(
-            'notebook.html',
-            single_chart=component,
-            dom=dom,
-            **require_config)
-
-    def _render_notebook_dom_(self):
-        """ 为 notebook 渲染 dom 模板
-        """
-        return engine.render_notebook(
-            "notebook_dom.html",
-            chart_id=self._chart_id,
-            chart_width=self.width,
-            chart_height=self.height)
-
-    def _render_notebook_component_(self):
-        """ 为 notebook 渲染组件模板
-        """
-        my_option = utils.json_dumps(self._option, indent=4)
-        return engine.render_notebook(
-            "notebook_chart_component.html",
-            my_option=my_option,
-            chart_id=self._chart_id)
+        config_items = require_config['config_items']
+        libraries = require_config['libraries']
+        env = engine.create_default_environment()
+        return env.render_chart_to_notebook(
+            charts=(self,),
+            config_items=config_items,
+            libraries=libraries
+        )
 
     def _add_chinese_map(self, map_name_in_chinese):
         name_in_pinyin = CURRENT_CONFIG.chinese_to_pinyin(map_name_in_chinese)

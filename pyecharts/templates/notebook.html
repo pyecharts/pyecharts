@@ -1,13 +1,17 @@
 <script>
     require.config({
-         paths:{
-           {{ config_items | join(', ') }}
-         }
+        paths: {
+            {{ config_items | join(', ') }}
+        }
     });
 </script>
-{{ dom }}
+{% for chart in charts %}
+    {{ echarts_container(chart) }}
+{% endfor %}
+
+
 <script>
-    require([ {{ libraries | join(', ') }} ],function(ec){
-	{{ single_chart }}
+    require([{{ libraries | join(', ') }}], function(echarts) {
+        {{ echarts_js_content_wrap(*charts) }}
     });
 </script>

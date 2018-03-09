@@ -61,6 +61,7 @@ def to_css_length(x):
     """
     Return the standard length string of css.
     It's compatible with number values in old versions.
+
     :param x:
     :return:
     """
@@ -74,6 +75,7 @@ def merge_js_dependencies(*chart_or_name_list):
     """
     Merge multiple dependencies to a total list.
     This will ensure the order and unique in the items.
+
     :param chart_or_name_list:
     :return: A list containing dependency items.
     """
