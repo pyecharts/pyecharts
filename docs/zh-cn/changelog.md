@@ -13,7 +13,7 @@
     * [issue#431](https://github.com/pyecharts/pyecharts/issues/431) 新增 `renderer` 参数用于指定渲染方式
 
     #### Updated
-    * 更新 jupyter-echarts 至 1.4.0: echarts 3.6.2 -> 4.0.2, echarts-gl 1.0.0-b4 -> 1.0.0-b6, echarts-liquidfill 1.0.5 -> 1.1.1, 
+    * 更新 jupyter-echarts 至 1.4.0: echarts 3.6.2 -> 4.0.4, echarts-gl 1.0.0-b4 -> 1.1.0, echarts-liquidfill 1.0.5 -> 2.0.0, echarts-wordcloud 1.1.0 -> 1.1.2
     * 优化内部渲染逻辑，提高渲染效率。
     
     #### Fixed
@@ -27,7 +27,6 @@
     * 新增 `name_map`， [允许用户采用自己地图名称](http://echarts.baidu.com/option.html#series-map.nameMap)。
 
     #### Changed
-
     * `Chart.render_embed` 返回 `jinja2.Markup` 实例
     * `Base.show_config` 重命名为 `Base.print_echarts_options`
     * 移除 `EchartsEnvironment.configure_pyecharts` 方法
