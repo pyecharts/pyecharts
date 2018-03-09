@@ -10,7 +10,7 @@
     * [issue#425](https://github.com/pyecharts/pyecharts/issues/425) 新增 `pieces` 配置项，为 visualMap 组件提供自定义分段标签的功能
     * 新增 `tooltip_border_width`, `tooltip_border_color`, `tooltip_background_color` 三个参数用与提示框背景颜色及边框的配置
     * [issue#376](https://github.com/pyecharts/pyecharts/issues/376) 新增 `mark_line_coords` 配置项用于指定标记线的起点和终点
-    * [issue#431](https://github.com/pyecharts/pyecharts/issues/431) 新增 `renderer` 参数用于指定渲染方式
+    * [issue#431](https://github.com/pyecharts/pyecharts/issues/431) pyecharts.Chart 图表类新增 renderer 参数，用于指定渲染方式，支持 canvas / svg 两种方式
 
     #### Updated
     * 更新 jupyter-echarts 至 1.4.0: echarts 3.6.2 -> 4.0.4, echarts-gl 1.0.0-b4 -> 1.1.0, echarts-liquidfill 1.0.5 -> 2.0.0, echarts-wordcloud 1.1.0 -> 1.1.2
