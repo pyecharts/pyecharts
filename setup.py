@@ -12,7 +12,7 @@ __license__ = 'MIT'
 __requires__ = ['pillow',
                 'jinja2',
                 'future',
-                'jupyter-echarts-pypkg==0.0.11',
+                'jupyter-echarts-pypkg==0.1.0',
                 'lml==0.0.2']
 
 __keywords__ = ['Echarts',
