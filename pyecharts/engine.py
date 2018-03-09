@@ -176,6 +176,7 @@ class EchartsEnvironment(BaseEnvironment):
     ):
         """
         Render a chart or page to local html files.
+
         :param chart: A Chart or Page object
         :param object_name: Variable name for chart/page used in template
         :param path: The destination file which the html code write to
@@ -192,6 +193,7 @@ class EchartsEnvironment(BaseEnvironment):
     def render_chart_to_notebook(self, **context):
         """
         Return html string for rendering a chart/page to a notebook cell.
+
         :param context: A dictionary containing data.
         :return: A unicode string that will be displayed in notebook cell.
         """
@@ -202,6 +204,7 @@ class EchartsEnvironment(BaseEnvironment):
 def create_default_environment():
     """
     Create environment object with pyecharts default single PyEchartsConfig.
+
     :return: A new EchartsEnvironment object.
     """
     config = conf.CURRENT_CONFIG
