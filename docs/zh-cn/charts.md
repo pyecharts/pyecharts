@@ -75,6 +75,8 @@
     画布背景颜色，默认为 '#fff'
 * page_title -> str  
     指定生成的 html 文件中 `<title>` 标签的值。默认为'Echarts'
+* renderer -> str
+    指定使用渲染方式，有 'svg' 和 'canvas' 可选，默认为 'canvas'。3D 图仅能使用 'canvas'。
     
 
 # 通用配置项
