@@ -75,7 +75,7 @@ class Polar(Chart):
             if len(axis_range) == 2:
                 _amin, _amax = axis_range
 
-        _area_style = {"normal": chart['area_style']}
+        _area_style = chart['area_style']
         if kwargs.get('area_color', None) is None:
             _area_style = None
 

@@ -86,3 +86,9 @@ def test_scatter_multi_dimension():
            visual_type='size', visual_range=[254830, 1154605773],
            visual_text_color='#000')
     sc.render()
+
+
+def test_scatter_markline_coords():
+    scatter = Scatter("散点图示例")
+    scatter.add("A", v1, v2, mark_line_coords=[[10, 10], [30, 30]])
+    assert '"coord": [' in scatter._repr_html_()

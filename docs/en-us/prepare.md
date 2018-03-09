@@ -59,12 +59,12 @@ almost all the chart type drawed like this:
 2. ```add()``` Add data and options.
 3. ```render()``` Creat .html file.
 
-```add()``` Data is two lists commonly(the same length),if your data is dictionary or dictionary with tuple,use ```cast()``` to convert.
+​```add()``` Data is two lists commonly(the same length),if your data is dictionary or dictionary with tuple,use ```cast()``` to convert.
 
-```python
+​```python
 @staticmethod
 cast(seq)
-``` Convert the sequence with the dictionary and tuple type into k_lst, v_lst. ```
+​``` Convert the sequence with the dictionary and tuple type into k_lst, v_lst. ```
 ```
 1. Tuple Lists
     [(A1, B1), (A2, B2), (A3, B3), (A4, B4)] --> k_lst[ A[i1, i2...] ], v_lst[ B[i1, i2...] ]
@@ -72,6 +72,44 @@ cast(seq)
     [{A1: B1}, {A2: B2}, {A3: B3}, {A4: B4}] --> k_lst[ A[i1, i2...] ], v_lst[ B[i1, i2...] ]
 3. Dictionaries
     {A1: B1, A2: B2, A3: B3, A4: B4} -- > k_lst[ A[i1, i2...] ], v_lst[ B[i1, i2...] ]
+
+### Render Charts Many Times
+
+> Update on v0.4.0
+
+You can call `chart.render`  many times to show some charts in a script.
+
+```python
+from pyecharts import Bar, Line
+
+bar = Bar("我的第一个图表", "这里是副标题")
+bar.add("服装", ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"], [5, 20, 36, 10, 75, 90])
+bar.render(path='bar.html')
+
+line = Line("我的第一个图表", "这里是副标题")
+line.add("服装", ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"], [5, 20, 36, 10, 75, 90])
+line.render(path='line.html')
+```
+
+In v0.4.0+, pyecharts refactors the internal logic and make render faster.The following code is recommended.
+
+```python
+from pyecharts import Bar, Line
+from pyecharts.engine import create_default_environment
+
+bar = Bar("我的第一个图表", "这里是副标题")
+bar.add("服装", ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"], [5, 20, 36, 10, 75, 90])
+
+line = Line("我的第一个图表", "这里是副标题")
+line.add("服装", ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"], [5, 20, 36, 10, 75, 90])
+
+env = create_default_environment()
+
+env.render_chart_to_file(bar, path='bar.html')
+env.render_chart_to_file(line, path='line.html')
+```
+
+This example use the only one engine object to render multiple charts.
 
 ### Pandas & Numpy examples
 
@@ -113,7 +151,7 @@ npcast()，It accepts numpy.array type.
 ```python
 @staticmethod
 npcast(npdata)
-``` handle the ndarray type in Numpy, return a list that ensures the correct type. Returns the nested list if there are multiple dimensions.```
+​``` handle the ndarray type in Numpy, return a list that ensures the correct type. Returns the nested list if there are multiple dimensions.```
 ```
 
 Numpy.array type
