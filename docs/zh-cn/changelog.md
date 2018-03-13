@@ -1,12 +1,15 @@
 # 版本日志
 
-* ### version 0.4.1 (development)
+* ### version 0.4.2
+    * TODO
+
+* ### version 0.4.1 - 2018.03.13（Current）
 
     #### Fixed
     * [issue#437](https://github.com/pyecharts/pyecharts/issues/437) 修复 Timeline 图累计多个 Bar 图会导致条形宽度压缩的 bug
     * [issue#437](https://github.com/pyecharts/pyecharts/issues/437) 修复 Timeline 图不能正常显示 Tooltip 组件的 bug
 
-* ### version 0.4.0 - 2018.03.09（Current）
+* ### version 0.4.0 - 2018.03.09
 
     #### Added
     * `EchartsEnvironment` 类性增 `render_chart_to_file`
