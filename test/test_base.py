@@ -32,6 +32,7 @@ def test_render_kwargs():
         extra="hello world")
     content = get_default_rendering_file_content()
     eq_(content, "hello world\n")
+    os.unlink('render.html')
 
 
 def test_svg_option():
