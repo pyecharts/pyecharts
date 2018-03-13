@@ -93,14 +93,14 @@ class Base(object):
                path='render.html',
                template_name='simple_chart.html',
                object_name='chart',
-               extra_context=None):
+               **kwargs):
         env = engine.create_default_environment()
         env.render_chart_to_file(
             chart=self,
             object_name=object_name,
             path=path,
             template_name=template_name,
-            extra_context=extra_context
+            **kwargs
         )
 
     @staticmethod
