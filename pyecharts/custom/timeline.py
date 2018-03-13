@@ -106,12 +106,14 @@ class Timeline(Base):
         self._option.get('options').append({
             "legend": chart.options.get('legend'),
             "series": chart.options.get('series'),
-            "title": chart.options.get('title')
+            "title": chart.options.get('title'),
+            "tooltip": chart.options.get('tooltip')
         })
         _tmp_series = copy.deepcopy(chart.options.get('series'))
         for _s in _tmp_series:
-            _s.pop("data", None)
-            self._option.get("baseOption").get("series").append(_s)
+            if _s.get("type") == "map":
+                _s.pop("data", None)
+                self._option.get("baseOption").get("series").append(_s)
 
     def __check_components(self, chart):
         """
