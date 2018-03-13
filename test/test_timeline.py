@@ -46,7 +46,7 @@ def test_timeline_bar():
     timeline.add(bar_3, '2014 年')
     timeline.add(bar_4, '2015 年')
     timeline.add(bar_5, '2016 年')
-    assert len(timeline._option.get("baseOption").get("series")) == 20
+    assert len(timeline.options.get("baseOption").get("series")) == 0
     timeline.render()
 
 
@@ -79,7 +79,7 @@ def test_timeline_pie():
     timeline.add(pie_3, '2014 年')
     timeline.add(pie_4, '2015 年')
     timeline.add(pie_5, '2016 年')
-    assert len(timeline._option.get("baseOption").get("series")) == 5
+    assert len(timeline.options.get("baseOption").get("series")) == 0
     timeline.render()
 
 
@@ -131,7 +131,6 @@ def test_timeline_bar_line():
     timeline.add(overlap_2, '3 月')
     timeline.add(overlap_3, '4 月')
     timeline.add(overlap_4, '5 月')
-    assert len(timeline._option.get("baseOption").get("series")) == 10
     timeline.render()
 
 
@@ -150,7 +149,7 @@ def test_timeline_map():
     map.add("", attr, value, maptype='china', is_visualmap=True,
             visual_text_color='#000', visual_top="30%")
     timeline.add(map, "test2")
-    assert len(timeline._option.get("baseOption").get("series")) == 2
+    assert len(timeline.options.get("baseOption").get("series")) == 2
     timeline.render()
 
 
