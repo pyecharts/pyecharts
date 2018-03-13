@@ -1,7 +1,10 @@
 # 版本日志
 
 * ### version 0.4.1 (development)
-    * TODO
+
+    #### Fixed
+    * [issue#437](https://github.com/pyecharts/pyecharts/issues/437) 修复 Timeline 图累计多个 Bar 图会导致条形宽度压缩的 bug
+    * [issue#437](https://github.com/pyecharts/pyecharts/issues/437) 修复 Timeline 图不能正常显示 Tooltip 组件的 bug
 
 * ### version 0.4.0 - 2018.03.09（Current）
 
