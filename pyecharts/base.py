@@ -156,6 +156,10 @@ class Base(object):
             libraries=libraries
         )
 
+    def _repr_png_(self):
+        env = engine.create_default_environment()
+        return env.render_chart_as_svg(self)
+
     def _add_chinese_map(self, map_name_in_chinese):
         name_in_pinyin = CURRENT_CONFIG.chinese_to_pinyin(map_name_in_chinese)
         self._js_dependencies.add(name_in_pinyin)

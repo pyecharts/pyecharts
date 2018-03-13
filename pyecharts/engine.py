@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 from jinja2 import Environment, FileSystemLoader, environmentfunction, Markup
 
+import codecs
 import pyecharts.conf as conf
 import pyecharts.utils as utils
 
@@ -198,8 +199,16 @@ class EchartsEnvironment(BaseEnvironment):
         :return: A unicode string that will be displayed in notebook cell.
         """
         tpl = self.get_template('notebook.html')
-        return tpl.render(**context)
+        return None
 
+    def render_chart_as_svg(self,
+                            chart, **keywords):
+        keywords['path'] = 'tmp.html'
+        self.render_chart_to_file(chart, **keywords);
+        from pyecharts_snapshot.main import make_a_snapshot
+        make_a_snapshot('tmp.html', 'tmp.png')
+        with open('tmp.png', 'rb') as f:
+            return f.read()
 
 def create_default_environment():
     """
