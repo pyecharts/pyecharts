@@ -25,6 +25,15 @@ def create_a_bar(title, renderer='canvas'):
     return bar
 
 
+def test_render_kwargs():
+    bar = create_a_bar(TITLE)
+    bar.render(
+        template_name=os.path.join('fixtures', 'test_chart.html'),
+        extra="hello world")
+    content = get_default_rendering_file_content()
+    eq_(content, "hello world\n")
+
+
 def test_svg_option():
     bar = create_a_bar(TITLE, renderer='svg')
     html = bar.render_embed()
