@@ -168,7 +168,7 @@ myfirstvis 目录
 </head>
 
 <body>
-  { {myechart|safe }}
+  {{ myechart|safe }}
 </body>
 
 </html>
