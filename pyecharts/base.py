@@ -157,12 +157,29 @@ class Base(object):
         )
 
     def _repr_svg_(self):
+        content = self._render_as_image('svg')
+        if content:
+            # fix alignment problem in notebook
+            content = content.replace('position: absolute;', '')
+        return content
+
+    def _repr_png_(self):
+        return self._render_as_image('png')
+
+    def _repr_jpeg_(self):
+        return self._render_as_image('jpeg')
+
+    def _render_as_image(self, image_type):
+        if CURRENT_CONFIG.jupyter_image_type != image_type:
+            return None
+
         env = engine.create_default_environment()
+        outfile = 'tmp.' + image_type
         content = env.render_chart_to_file(
             chart=self,
-            path='tmp.svg', verbose=False)
-        content = content.replace('position: absolute;', '')
-        os.unlink('tmp.svg')
+            path=outfile, verbose=False)
+        if content:
+            os.unlink(outfile)
         return content
 
     def _add_chinese_map(self, map_name_in_chinese):

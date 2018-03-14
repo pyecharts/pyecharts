@@ -16,6 +16,7 @@ class PyEchartsConfig(object):
         self.force_js_embed = force_js_embed
         self.hosted_on_github = False
         self.environment_type = 'default'
+        self.jupyter_image_type = None
 
     @property
     def js_embed(self):
@@ -133,9 +134,14 @@ def configure(jshost=None,
     """ Config all items for pyecharts when use chart.render()
     or page.render().
 
-    :param jshost:
-    :param echarts_template_dir:
-    :param force_js_embed:
+    :param jshost: the host for echarts related javascript libraries
+    :param echarts_template_dir: the directory for custom html templates
+    :param force_js_embed: embed javascript in html file or not
+    :param output_image: Non None value asks pyecharts to use
+                         pyecharts-snapshots to render as image directly.
+                         Values such as 'svg', 'jpeg', 'png' changes
+                         chart presentation in jupyter notebook to those image
+                         formats, instead of 'html' format.
     :param kwargs:
     """
     if jshost:
@@ -148,6 +154,8 @@ def configure(jshost=None,
         CURRENT_CONFIG.force_js_embed = force_js_embed
     if output_image is not None:
         CURRENT_CONFIG.environment_type = 'snapshot'
+        if output_image in ['svg', 'png', 'jpeg']:
+            CURRENT_CONFIG.jupyter_image_type = output_image
 
 
 def online(host=None):
