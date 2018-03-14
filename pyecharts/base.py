@@ -1,5 +1,5 @@
 # coding=utf-8
-
+import os
 import uuid
 import warnings
 
@@ -156,9 +156,12 @@ class Base(object):
             libraries=libraries
         )
 
-    def _repr_png_(self):
+    def _repr_svg_(self):
         env = engine.create_default_environment()
-        return env.render_chart_as_svg(self)
+        content = env.render_chart_to_file(
+            path='tmp.svg')
+        os.unlink('tmp.svg')
+        return content
 
     def _add_chinese_map(self, map_name_in_chinese):
         name_in_pinyin = CURRENT_CONFIG.chinese_to_pinyin(map_name_in_chinese)

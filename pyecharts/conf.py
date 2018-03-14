@@ -15,6 +15,7 @@ class PyEchartsConfig(object):
         self._jshost = remove_trailing_slashes(jshost)
         self.force_js_embed = force_js_embed
         self.hosted_on_github = False
+        self.environment_type = 'default'
 
     @property
     def js_embed(self):
@@ -127,6 +128,7 @@ def configure(jshost=None,
               hosted_on_github=None,
               echarts_template_dir=None,
               force_js_embed=None,
+              output_image=None,
               **kwargs):
     """ Config all items for pyecharts when use chart.render()
     or page.render().
@@ -144,7 +146,8 @@ def configure(jshost=None,
         CURRENT_CONFIG.echarts_template_dir = echarts_template_dir
     if force_js_embed is not None:
         CURRENT_CONFIG.force_js_embed = force_js_embed
-
+    if output_image is not None:
+        CURRENT_CONFIG.environment_type = 'snapshot'
 
 def online(host=None):
     """ Set the jshost

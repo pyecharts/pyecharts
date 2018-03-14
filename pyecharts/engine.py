@@ -7,6 +7,8 @@ import codecs
 import pyecharts.conf as conf
 import pyecharts.utils as utils
 
+from lml.plugin import PluginManager, PluginInfo
+
 LINK_SCRIPT_FORMATTER = '<script type="text/javascript" src="{}"></script>'
 EMBED_SCRIPT_FORMATTER = '<script type="text/javascript">\n{}\n</script>'
 CHART_DIV_FORMATTER = '<div id="{chart_id}" style="width:{width};height:{height};"></div>'  # flake8: noqa
@@ -134,6 +136,7 @@ class BaseEnvironment(Environment):
         self.globals.update(ECHAERTS_TEMPLATE_FUNCTIONS)
 
 
+@PluginInfo('pyecharts_environment', tags=['default'])
 class EchartsEnvironment(BaseEnvironment):
     """
     Built-in jinja2 template engine for pyecharts
@@ -198,7 +201,7 @@ class EchartsEnvironment(BaseEnvironment):
         :return: A unicode string that will be displayed in notebook cell.
         """
         tpl = self.get_template('notebook.html')
-        return None
+        return tpl.render(**context)
 
     def render_chart_as_svg(self,
                             chart, **keywords):
@@ -209,6 +212,19 @@ class EchartsEnvironment(BaseEnvironment):
         with open('tmp.png', 'rb') as f:
             return f.read()
 
+
+class EnvironmentManager(PluginManager):
+    def __init__(self):
+        super(EnvironmentManager, self).__init__('pyecharts_environment')
+
+    def get_a_environment(self, environment_type, **kwargs):
+        _a_echarts_env_cls = super(EnvironmentManager, self).load_me_now(key=environment_type)
+        return _a_echarts_env_cls(**kwargs)
+
+
+ENV_MANAGER = EnvironmentManager()
+
+
 def create_default_environment():
     """
     Create environment object with pyecharts default single PyEchartsConfig.
@@ -216,7 +232,7 @@ def create_default_environment():
     :return: A new EchartsEnvironment object.
     """
     config = conf.CURRENT_CONFIG
-    echarts_env = EchartsEnvironment(
+    echarts_env = ENV_MANAGER.get_a_environment(config.environment_type,
         pyecharts_config=config,
         loader=FileSystemLoader(
             [config.echarts_template_dir, conf.DEFAULT_TEMPLATE_DIR])
