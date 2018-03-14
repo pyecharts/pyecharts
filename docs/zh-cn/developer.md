@@ -17,6 +17,29 @@ python setup.py install
 
 如果有更多需求，比如世界各国地图，请关注本项目。
 
+## pyecharts 0.4.2+ 的 Environment 扩展
+
+由于 pyecharts-snapshot 有它的长处就是能把 pyecharts 的 html 输出转换成图片。自然地，把它变成 pyecharts 的 Environment 扩展之后，就可以用同样的语句直接生成图片了。下面是个例子：
+
+```
+#coding=utf-8
+from pyecharts import Map, configure
+
+configure(output_image=True)  # <-- 偷梁换柱：用 pyecharts-snapshot 来转换输出
+
+value = [1, 100]
+attr = ['Gujarat', 'Tamil Nadu']
+map = Map('India', width=800, height=600)
+map.add('', attr, value, maptype=u'印度', is_visualmap=True, visual_text_color="#000")
+map.render(path='map.png')  # <--- 直接生成图片
+```
+
+下面简单介绍一下架构：
+
+在 pyecharts 里，图标类和 EchartsEnvironment 之间引入了 EnvironmentManager 类。EchartsEnvironment 成了 EnvironmentManager 的下属的同时，EnvironmentManager 通过 lml 可以拥有其他的下属。这个时候，如果用户装了 pyecharts-snapshot 0.1.4，EnvironmentManager 通过 lml 可以得到 SnapshotEnvironment，换句话说 pyecharts 可以得到直接产生图片的功能扩展。
+
+![map-extension-architecture-diagram](https://github.com/chenjiandongx/pyecharts/blob/master/images/environment-extension-architecture.png)
+
 ## pyecharts 0.3.2+ 的扩展包启动顺序
 
 [lml](http://lml.readthedocs.io/en/latest/index.html) 是支持松散包管理的 python 包。它的特点是支持扩展包搭积木式的架构：装了某包，就增加功能；不装，不影响主体库的运转。主体包启动的时候，lml 提供扩展包搜索程序，实现扩展包的动态合体。
