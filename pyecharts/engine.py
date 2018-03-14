@@ -203,15 +203,6 @@ class EchartsEnvironment(BaseEnvironment):
         tpl = self.get_template('notebook.html')
         return tpl.render(**context)
 
-    def render_chart_as_svg(self,
-                            chart, **keywords):
-        keywords['path'] = 'tmp.html'
-        self.render_chart_to_file(chart, **keywords);
-        from pyecharts_snapshot.main import make_a_snapshot
-        make_a_snapshot('tmp.html', 'tmp.png')
-        with open('tmp.png', 'rb') as f:
-            return f.read()
-
 
 class EnvironmentManager(PluginManager):
     def __init__(self):

@@ -149,6 +149,7 @@ def configure(jshost=None,
     if output_image is not None:
         CURRENT_CONFIG.environment_type = 'snapshot'
 
+
 def online(host=None):
     """ Set the jshost
 

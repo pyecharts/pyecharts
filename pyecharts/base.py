@@ -159,7 +159,9 @@ class Base(object):
     def _repr_svg_(self):
         env = engine.create_default_environment()
         content = env.render_chart_to_file(
-            path='tmp.svg')
+            chart=self,
+            path='tmp.svg', verbose=False)
+        content = content.replace('position: absolute;', '')
         os.unlink('tmp.svg')
         return content
 
