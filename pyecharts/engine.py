@@ -172,7 +172,7 @@ class EchartsEnvironment(BaseEnvironment):
             object_name='chart',
             path='render.html',
             template_name='simple_chart.html',
-            extra_context=None
+            **kwargs
     ):
         """
         Render a chart or page to local html files.
@@ -184,10 +184,9 @@ class EchartsEnvironment(BaseEnvironment):
         :param extra_context: A dictionary containing extra data.
         :return: None
         """
-        context = {object_name: chart}
-        context.update(extra_context or {})
+        kwargs[object_name] = chart
         tpl = self.get_template(template_name)
-        html = tpl.render(**context)
+        html = tpl.render(**kwargs)
         utils.write_utf8_html_file(path, html)
 
     def render_chart_to_notebook(self, **context):
