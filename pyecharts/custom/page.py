@@ -40,7 +40,8 @@ class Page(list):
             object_name=object_name,
             path=path,
             template_name=template_name,
-            extra_context=extra_context)
+            extra_context=extra_context
+        )
 
     def render_embed(self):
         """

@@ -206,10 +206,25 @@ class EchartsEnvironment(BaseEnvironment):
 
 
 class EnvironmentManager(PluginManager):
+    """
+    Extend the rendering capability of pyecharts by having
+    loosely coupled environments
+    """
     def __init__(self):
+        """
+        Register with lml that this class manages 'pyecharts_environment'
+        extension
+        """
         super(EnvironmentManager, self).__init__('pyecharts_environment')
 
     def get_a_environment(self, environment_type, **kwargs):
+        """
+        Factory method to choose the default html rendering EchartsEnvironment
+        or image rendering SnapshotEnvironment from pyecharts-snapshot
+
+        :param environment_type: either 'default' or 'snapshot'
+        :param kwargs: the initialization parameters for Environment
+        """
         _a_echarts_env_cls = super(EnvironmentManager, self).load_me_now(key=environment_type)
         return _a_echarts_env_cls(**kwargs)
 
