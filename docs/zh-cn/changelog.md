@@ -1,7 +1,7 @@
 # 版本日志
 
 * ### version 0.4.2
-    * TODO
+    * [issue#331](https://github.com/pyecharts/pyecharts/issues/311) Jupyter Notebook导出为PDF没有图片
 
 * ### version 0.4.1 - 2018.03.13（Current）
 
