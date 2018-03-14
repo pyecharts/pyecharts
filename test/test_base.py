@@ -12,6 +12,7 @@ from nose.tools import eq_
 from pyecharts import Bar, Map
 from test.constants import CLOTHES
 from test.utils import get_default_rendering_file_content
+from test.utils import get_fixture
 
 TITLE = "柱状图数据堆叠示例"
 
@@ -23,16 +24,6 @@ def create_a_bar(title, renderer='canvas'):
     bar.add("商家A", CLOTHES, v1, is_stack=True)
     bar.add("商家B", CLOTHES, v2, is_stack=True)
     return bar
-
-
-def test_render_kwargs():
-    bar = create_a_bar(TITLE)
-    bar.render(
-        template_name=os.path.join('fixtures', 'test_chart.html'),
-        extra="hello world")
-    content = get_default_rendering_file_content()
-    eq_(content, "hello world\n")
-    os.unlink('render.html')
 
 
 def test_svg_option():

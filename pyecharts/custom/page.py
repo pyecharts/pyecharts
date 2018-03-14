@@ -33,14 +33,14 @@ class Page(list):
                path='render.html',
                template_name='simple_page.html',
                object_name='page',
-               **kwargs):
+               extra_context=None):
         env = engine.create_default_environment()
         env.render_chart_to_file(
             chart=self,
             object_name=object_name,
             path=path,
             template_name=template_name,
-            **kwargs)
+            extra_context=extra_context)
 
     def render_embed(self):
         """
