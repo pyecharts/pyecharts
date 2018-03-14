@@ -12,7 +12,6 @@ from nose.tools import eq_
 from pyecharts import Bar, Map
 from test.constants import CLOTHES
 from test.utils import get_default_rendering_file_content
-from test.utils import get_fixture
 
 TITLE = "柱状图数据堆叠示例"
 
