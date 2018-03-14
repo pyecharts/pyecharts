@@ -58,6 +58,21 @@ def test_embed_option():
     assert "<body>" not in html
 
 
+def test_jupyter_repr_png():
+    bar = create_a_bar(TITLE)
+    assert bar._repr_png_() is None
+
+
+def test_jupyter_repr_jpeg():
+    bar = create_a_bar(TITLE)
+    assert bar._repr_jpeg_() is None
+
+
+def test_jupyter_repr_svg():
+    bar = create_a_bar(TITLE)
+    assert bar._repr_svg_() is None
+
+
 def test_base_get_js_dependencies():
     bar = create_a_bar(TITLE)
     dependencies = bar.get_js_dependencies()
