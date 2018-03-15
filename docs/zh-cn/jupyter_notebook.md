@@ -37,7 +37,7 @@ Known nbextensions:
 
 ## 导出 html 功能
 
-可以使用 Notebook 默认的 "download as" 导出其他形式的文件，比如 ipynb或者图片。
+可以使用 Notebook 默认的 "download as" 导出其他形式的文件，比如 ipynb 或者图片。
 
 **重要** ：由于导出后的文件脱离了原有 Jupyter Notebook 环境，为了能够完整的显示图表，应当使用远程 jshost 库。
 
