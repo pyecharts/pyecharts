@@ -96,7 +96,6 @@ def test_render_as_svg_with_wrong_configuration():
     with jupyter_image('svg'):
         bar = create_a_bar('test')
         bar._repr_svg_()
-        configure(output_image='html')
 
 
 @raises(exceptions.InvalidConfiguration)
