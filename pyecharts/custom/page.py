@@ -36,7 +36,10 @@ class Page(list):
                **kwargs):
         _, ext = os.path.splitext(path)
         _file_type = ext[1:]
-        env = engine.create_default_environment(_file_type)
+        if _file_type != 'html':
+            raise NotImplementedError(
+                'Rendering Page instance as image is not supported!')
+        env = engine.create_default_environment('html')
         env.render_chart_to_file(
             chart=self,
             object_name=object_name,
