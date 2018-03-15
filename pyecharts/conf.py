@@ -151,8 +151,8 @@ def configure(jshost=None,
         CURRENT_CONFIG.echarts_template_dir = echarts_template_dir
     if force_js_embed is not None:
         CURRENT_CONFIG.force_js_embed = force_js_embed
-    if output_image in ['svg', 'png', 'jpeg']:
-            CURRENT_CONFIG.jupyter_image_type = output_image
+    if output_image in ['svg', 'png', 'jpeg', 'html']:
+        CURRENT_CONFIG.jupyter_image_type = output_image
 
 
 def online(host=None):

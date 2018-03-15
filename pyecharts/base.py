@@ -178,10 +178,9 @@ class Base(object):
     def _render_as_image(self, image_type):
         if CURRENT_CONFIG.jupyter_image_type != image_type:
             return None
-
         if self.renderer == constants.SVG_RENDERER:
             if image_type != 'svg':
-                raise exceptions.InvaldConfiguration(
+                raise exceptions.InvalidConfiguration(
                     "svg renderer produces only svg image.")
         elif image_type not in ['jpeg', 'png']:
             raise exceptions.InvalidConfiguration(
