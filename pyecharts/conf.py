@@ -15,7 +15,7 @@ class PyEchartsConfig(object):
         self._jshost = remove_trailing_slashes(jshost)
         self.force_js_embed = force_js_embed
         self.hosted_on_github = False
-        self.jupyter_image_type = None
+        self.jupyter_image_type = 'html'
 
     @property
     def js_embed(self):
