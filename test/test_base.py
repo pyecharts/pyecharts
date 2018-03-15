@@ -93,20 +93,17 @@ def test_render_as_svg(fake_unlink, fake_factory):
 
 @raises(exceptions.InvalidConfiguration)
 def test_render_as_svg_with_wrong_configuration():
-    from pyecharts.conf import configure
-    configure(output_image='svg')
-    bar = create_a_bar('test')
-    bar._repr_svg_()
-    configure(output_image='html')
+    with jupyter_image('svg'):
+        bar = create_a_bar('test')
+        bar._repr_svg_()
+        configure(output_image='html')
 
 
 @raises(exceptions.InvalidConfiguration)
 def test_render_as_png_with_wrong_configuration():
-    from pyecharts.conf import CURRENT_CONFIG
-    CURRENT_CONFIG.jupyter_image_type = 'png'
-    bar = create_a_bar('test', renderer='svg')
-    bar._repr_png_()
-    CURRENT_CONFIG.jupyter_image_type = 'html'
+    with jupyter_image('png'):
+        bar = create_a_bar('test', renderer='svg')
+        bar._repr_png_()
 
 
 def test_base_get_js_dependencies():
