@@ -15,7 +15,6 @@ class PyEchartsConfig(object):
         self._jshost = remove_trailing_slashes(jshost)
         self.force_js_embed = force_js_embed
         self.hosted_on_github = False
-        self.environment_type = 'default'
         self.jupyter_image_type = None
 
     @property
@@ -152,9 +151,7 @@ def configure(jshost=None,
         CURRENT_CONFIG.echarts_template_dir = echarts_template_dir
     if force_js_embed is not None:
         CURRENT_CONFIG.force_js_embed = force_js_embed
-    if output_image is not None:
-        CURRENT_CONFIG.environment_type = 'snapshot'
-        if output_image in ['svg', 'png', 'jpeg']:
+    if output_image in ['svg', 'png', 'jpeg']:
             CURRENT_CONFIG.jupyter_image_type = output_image
 
 

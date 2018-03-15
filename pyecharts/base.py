@@ -8,6 +8,7 @@ from jinja2 import Markup
 import pyecharts.constants as constants
 import pyecharts.engine as engine
 import pyecharts.utils as utils
+import pyecharts.exceptions as exceptions
 from pyecharts.conf import CURRENT_CONFIG
 
 
@@ -80,7 +81,7 @@ class Base(object):
         """ 渲染图表的所有配置项，为 web pages 服务，不过需先提供
         所需要的js 依赖文件
         """
-        env = engine.create_default_environment()
+        env = engine.create_default_environment('html')
         html = env.render_container_and_echarts_code(self)
         return Markup(html)
 
@@ -93,14 +94,16 @@ class Base(object):
                path='render.html',
                template_name='simple_chart.html',
                object_name='chart',
-               extra_context=None):
-        env = engine.create_default_environment()
+               **kwargs):
+        _, ext = os.path.splitext(path)
+        _file_type = ext[1:]
+        env = engine.create_default_environment(_file_type)
         env.render_chart_to_file(
             chart=self,
             object_name=object_name,
             path=path,
             template_name=template_name,
-            extra_context=extra_context
+            **kwargs
         )
 
     @staticmethod
@@ -144,12 +147,15 @@ class Base(object):
         chart.js_dependencies => require_config => config_items, libraries
         :return A unicode string.
         """
+        if CURRENT_CONFIG.jupyter_image_type != 'html':
+            return None
+
         require_config = CURRENT_CONFIG.produce_require_configuration(
             self.js_dependencies
         )
         config_items = require_config['config_items']
         libraries = require_config['libraries']
-        env = engine.create_default_environment()
+        env = engine.create_default_environment('html')
         return env.render_chart_to_notebook(
             charts=(self,),
             config_items=config_items,
@@ -173,7 +179,15 @@ class Base(object):
         if CURRENT_CONFIG.jupyter_image_type != image_type:
             return None
 
-        env = engine.create_default_environment()
+        if self.renderer == constants.SVG_RENDERER:
+            if image_type != 'svg':
+                raise exceptions.InvaldConfiguration(
+                    "svg renderer produces only svg image.")
+        elif image_type not in ['jpeg', 'png']:
+            raise exceptions.InvalidConfiguration(
+                "svg output requires svg renderer.")
+
+        env = engine.create_default_environment(image_type)
         outfile = 'tmp.' + image_type
         content = env.render_chart_to_file(
             chart=self,

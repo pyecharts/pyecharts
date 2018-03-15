@@ -136,7 +136,7 @@ class BaseEnvironment(Environment):
         self.globals.update(ECHAERTS_TEMPLATE_FUNCTIONS)
 
 
-@PluginInfo('pyecharts_environment', tags=['default'])
+@PluginInfo('pyecharts_environment', tags=['html'])
 class EchartsEnvironment(BaseEnvironment):
     """
     Built-in jinja2 template engine for pyecharts
@@ -176,7 +176,7 @@ class EchartsEnvironment(BaseEnvironment):
             object_name='chart',
             path='render.html',
             template_name='simple_chart.html',
-            extra_context=None
+            **kwargs
     ):
         """
         Render a chart or page to local html files.
@@ -188,10 +188,9 @@ class EchartsEnvironment(BaseEnvironment):
         :param extra_context: A dictionary containing extra data.
         :return: None
         """
-        context = {object_name: chart}
-        context.update(extra_context or {})
+        kwargs[object_name] = chart
         tpl = self.get_template(template_name)
-        html = tpl.render(**context)
+        html = tpl.render(**kwargs)
         utils.write_utf8_html_file(path, html)
 
     def render_chart_to_notebook(self, **context):
@@ -232,14 +231,14 @@ class EnvironmentManager(PluginManager):
 ENV_MANAGER = EnvironmentManager()
 
 
-def create_default_environment():
+def create_default_environment(file_type):
     """
     Create environment object with pyecharts default single PyEchartsConfig.
 
     :return: A new EchartsEnvironment object.
     """
     config = conf.CURRENT_CONFIG
-    echarts_env = ENV_MANAGER.get_a_environment(config.environment_type,
+    echarts_env = ENV_MANAGER.get_a_environment(file_type,
         pyecharts_config=config,
         loader=FileSystemLoader(
             [config.echarts_template_dir, conf.DEFAULT_TEMPLATE_DIR])

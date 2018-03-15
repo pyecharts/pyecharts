@@ -1,5 +1,5 @@
 # coding=utf-8
-
+import os
 from jinja2 import Markup
 
 import pyecharts.utils as utils
@@ -33,14 +33,16 @@ class Page(list):
                path='render.html',
                template_name='simple_page.html',
                object_name='page',
-               extra_context=None):
-        env = engine.create_default_environment()
+               **kwargs):
+        _, ext = os.path.splitext(path)
+        _file_type = ext[1:]
+        env = engine.create_default_environment(_file_type)
         env.render_chart_to_file(
             chart=self,
             object_name=object_name,
             path=path,
             template_name=template_name,
-            extra_context=extra_context
+            **kwargs
         )
 
     def render_embed(self):
@@ -68,7 +70,7 @@ class Page(list):
             dependencies)
         config_items = require_config['config_items']
         libraries = require_config['libraries']
-        env = engine.create_default_environment()
+        env = engine.create_default_environment('html')
         return env.render_chart_to_notebook(
             charts=self,
             config_items=config_items,
