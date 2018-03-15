@@ -15,9 +15,7 @@ pip install pyecharts
 在之后的开发中也可以使用下列的命令自行安装。
 
 ```shell
-$ git clone https://github.com/pyecharts/jupyter-echarts.git
-$ cd jupyter-echarts
-$ jupyter nbextension install echarts --user
+$ pip install jupyter-echarts-pypkg
 ```
 
 无论使用何种方式，均可通过以下的命令测试是否安装成功。
@@ -30,8 +28,6 @@ Known nbextensions:
       echarts/main  enabled 
       - Validating: OK
 ```
-
-
 
 ## 显示图表
 
@@ -48,7 +44,7 @@ Known nbextensions:
 ```python
 from pyecharts import online
 
-online(host='https://my-site.com')
+online()
 ```
 
 如果导出的 HTML 文件需要在没有网路的情况下显示图片，请考虑后面的介绍。
@@ -59,7 +55,7 @@ online(host='https://my-site.com')
 
 第一就是装 [pyecharts-snapshot 0.1.4+ 和 phanomjs-prebuilt](https://github.com/pyecharts/pyecharts-snapshot#installation)
 
-第二就是在 notebook 的最开始添上一下语句。这样就可以输出图片称 PDF 了。
+第二就是在 notebook 的最开始添上一下语句。这样就可以输出图片成 PDF 了。
 
 ```python
 from pyecharts import configure
