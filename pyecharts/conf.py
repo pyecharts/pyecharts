@@ -1,6 +1,7 @@
 # coding=utf-8
 from __future__ import unicode_literals
 
+from contextlib import contextmanager
 from pyecharts.js_extensions import EXTENSION_MANAGER
 from pyecharts.utils import get_resource_dir
 
@@ -164,6 +165,16 @@ def online(host=None):
         configure(hosted_on_github=True)
     else:
         configure(jshost=host)
+
+
+@contextmanager
+def jupyter_image(jupyter_image_type):
+    pr_type = CURRENT_CONFIG.jupyter_image_type
+    try:
+        CURRENT_CONFIG.jupyter_image_type = jupyter_image_type
+        yield
+    finally:
+        CURRENT_CONFIG.jupyter_image_type = pr_type
 
 
 def _ensure_echarts_is_in_the_front(dependencies):

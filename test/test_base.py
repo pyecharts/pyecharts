@@ -11,7 +11,7 @@ import numpy as np
 from nose.tools import eq_, raises
 from mock import patch, MagicMock
 
-from pyecharts import Bar, Map
+from pyecharts import Bar, Map, jupyter_image
 import pyecharts.exceptions as exceptions
 from test.constants import CLOTHES
 from test.utils import get_default_rendering_file_content
@@ -84,13 +84,11 @@ def test_render_as_svg(fake_unlink, fake_factory):
             return_value="fake svg"
         ))
     fake_factory.return_value = fake_env
-    from pyecharts.conf import CURRENT_CONFIG
-    CURRENT_CONFIG.jupyter_image_type = 'svg'
-    bar = create_a_bar('test', renderer='svg')
-    svg_content = bar._repr_svg_()
-    CURRENT_CONFIG.jupyter_image_type = 'html'
-    fake_unlink.assert_called()
-    eq_(svg_content, 'fake svg')
+    with jupyter_image('svg'):
+        bar = create_a_bar('test', renderer='svg')
+        svg_content = bar._repr_svg_()
+        fake_unlink.assert_called()
+        eq_(svg_content, 'fake svg')
 
 
 @raises(exceptions.InvalidConfiguration)
@@ -100,7 +98,7 @@ def test_render_as_svg_with_wrong_configuration():
     bar = create_a_bar('test')
     bar._repr_svg_()
     configure(output_image='html')
-    
+
 
 @raises(exceptions.InvalidConfiguration)
 def test_render_as_png_with_wrong_configuration():
