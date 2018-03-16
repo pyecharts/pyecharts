@@ -216,15 +216,15 @@ class EnvironmentManager(PluginManager):
         """
         super(EnvironmentManager, self).__init__('pyecharts_environment')
 
-    def get_a_environment(self, environment_type, **kwargs):
+    def get_a_environment(self, file_type, **kwargs):
         """
         Factory method to choose the default html rendering EchartsEnvironment
         or image rendering SnapshotEnvironment from pyecharts-snapshot
 
-        :param environment_type: either 'default' or 'snapshot'
+        :param file_type: 'html', 'svg', 'png', 'jpeg', 'gif' or 'pdf'
         :param kwargs: the initialization parameters for Environment
         """
-        _a_echarts_env_cls = super(EnvironmentManager, self).load_me_now(key=environment_type)
+        _a_echarts_env_cls = super(EnvironmentManager, self).load_me_now(key=file_type)
         return _a_echarts_env_cls(**kwargs)
 
 

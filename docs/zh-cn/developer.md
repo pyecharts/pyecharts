@@ -19,13 +19,11 @@ python setup.py install
 
 ## pyecharts 0.4.2+ 的 Environment 扩展
 
-由于 pyecharts-snapshot 有它的长处就是能把 pyecharts 的 html 输出转换成图片。自然地，把它变成 pyecharts 的 Environment 扩展之后，就可以用同样的语句直接生成图片了。下面是个例子：
+pyecharts-snapshot 能把 pyecharts 的 html 输出转换成图片，自然地，把它变成 pyecharts 的 Environment 扩展之后，就可以用同样的语句直接生成图片了。下面是个例子：
 
 ```
 #coding=utf-8
-from pyecharts import Map, configure
-
-configure(output_image=True)  # <-- 偷梁换柱：用 pyecharts-snapshot 来转换输出
+from pyecharts import Map
 
 value = [1, 100]
 attr = ['Gujarat', 'Tamil Nadu']
@@ -39,6 +37,10 @@ map.render(path='map.png')  # <--- 直接生成图片
 在 pyecharts 里，图标类和 EchartsEnvironment 之间引入了 EnvironmentManager 类。EchartsEnvironment 成了 EnvironmentManager 的下属的同时，EnvironmentManager 通过 lml 可以拥有其他的下属。这个时候，如果用户装了 pyecharts-snapshot 0.1.4，EnvironmentManager 通过 lml 可以得到 SnapshotEnvironment，换句话说 pyecharts 可以得到直接产生图片的功能扩展。
 
 ![map-extension-architecture-diagram](https://github.com/chenjiandongx/pyecharts/blob/master/images/environment-extension-architecture.png)
+
+### 局限性
+
+Page 类不能享受直接生成图片的功能。原因是 pyecharts-snapshot 还不能[抓多个图片](https://github.com/pyecharts/pyecharts-snapshot/issues/10)
 
 ## pyecharts 0.3.2+ 的扩展包启动顺序
 

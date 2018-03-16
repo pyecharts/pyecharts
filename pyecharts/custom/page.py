@@ -36,10 +36,10 @@ class Page(list):
                **kwargs):
         _, ext = os.path.splitext(path)
         _file_type = ext[1:]
-        if _file_type != 'html':
+        if _file_type != constants.DEFAULT_HTML:
             raise NotImplementedError(
                 'Rendering Page instance as image is not supported!')
-        env = engine.create_default_environment('html')
+        env = engine.create_default_environment(constants.DEFAULT_HTML)
         env.render_chart_to_file(
             chart=self,
             object_name=object_name,
@@ -65,15 +65,14 @@ class Page(list):
 
     def _repr_html_(self):
         """
-
-        :return:
+        :return: html content for jupyter
         """
         dependencies = self.js_dependencies
         require_config = CURRENT_CONFIG.produce_require_configuration(
             dependencies)
         config_items = require_config['config_items']
         libraries = require_config['libraries']
-        env = engine.create_default_environment('html')
+        env = engine.create_default_environment(constants.DEFAULT_HTML)
         return env.render_chart_to_notebook(
             charts=self,
             config_items=config_items,
@@ -93,9 +92,9 @@ class Page(list):
     def from_charts(cls, *args):
         """
         A shortcut class method for building page object from charts.
-        :param args:
-        :return:
+        :param args: page arguments
+        :return: Page instance
         """
-        p = cls()
-        p.extend(args)
-        return p
+        page = cls()
+        page.extend(args)
+        return page

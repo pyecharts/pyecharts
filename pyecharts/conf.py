@@ -4,6 +4,8 @@ from __future__ import unicode_literals
 from contextlib import contextmanager
 from pyecharts.js_extensions import EXTENSION_MANAGER
 from pyecharts.utils import get_resource_dir
+import pyecharts.constants as constants
+
 
 # Path constants for template dir
 DEFAULT_TEMPLATE_DIR = get_resource_dir('templates')
@@ -16,7 +18,7 @@ class PyEchartsConfig(object):
         self._jshost = remove_trailing_slashes(jshost)
         self.force_js_embed = force_js_embed
         self.hosted_on_github = False
-        self.jupyter_image_type = 'html'
+        self.jupyter_presentation = constants.DEFAULT_HTML
 
     @property
     def js_embed(self):
@@ -152,8 +154,8 @@ def configure(jshost=None,
         CURRENT_CONFIG.echarts_template_dir = echarts_template_dir
     if force_js_embed is not None:
         CURRENT_CONFIG.force_js_embed = force_js_embed
-    if output_image in ['svg', 'png', 'jpeg', 'html']:
-        CURRENT_CONFIG.jupyter_image_type = output_image
+    if output_image in constants.JUPYTER_PRESENTATIONS:
+        CURRENT_CONFIG.jupyter_presentation = output_image
 
 
 def online(host=None):
@@ -168,13 +170,16 @@ def online(host=None):
 
 
 @contextmanager
-def jupyter_image(jupyter_image_type):
-    pr_type = CURRENT_CONFIG.jupyter_image_type
+def jupyter_image(jupyter_presentation):
+    """
+    Temporarily change jupyter's default presentation
+    """
+    previous_presentation = CURRENT_CONFIG.jupyter_presentation
     try:
-        CURRENT_CONFIG.jupyter_image_type = jupyter_image_type
+        CURRENT_CONFIG.jupyter_presentation = jupyter_presentation
         yield
     finally:
-        CURRENT_CONFIG.jupyter_image_type = pr_type
+        CURRENT_CONFIG.jupyter_presentation = previous_presentation
 
 
 def _ensure_echarts_is_in_the_front(dependencies):

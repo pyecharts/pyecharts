@@ -5,6 +5,14 @@ CANVAS_RENDERER = "canvas"
 SVG_RENDERER = "svg"
 PAGE_TITLE = "Echarts"
 
+# presentation types for jupyter
+# output file types for pure python
+SVG = 'svg'
+PNG = 'png'
+JPEG = 'jpeg'
+DEFAULT_HTML = 'html'
+JUPYTER_PRESENTATIONS = [SVG, PNG, JPEG, DEFAULT_HTML]
+
 SYMBOL = {
     "plane": 'path://M1705.06,1318.313v-89.254l-319.9-221.799l0.073-208.'
              '063c0.521-84.662-26.629-121.796-63.961-121.491c-37.332-0.'
