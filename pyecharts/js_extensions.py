@@ -11,7 +11,7 @@ import pyecharts.exceptions as exceptions
 
 # here are all plugins from pyecharts team
 OFFICIAL_PLUGINS = [
-    "jupyter_echarts_pypkg"
+    "jupyter_echarts_pypkg", "pyecharts_snapshot"
 ]
 THIRD_PARTY_PLUGIN_PREFIX = "echarts_"
 

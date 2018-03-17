@@ -1,8 +1,11 @@
 # coding=utf-8
 from __future__ import unicode_literals
 
+from contextlib import contextmanager
 from pyecharts.js_extensions import EXTENSION_MANAGER
 from pyecharts.utils import get_resource_dir
+import pyecharts.constants as constants
+
 
 # Path constants for template dir
 DEFAULT_TEMPLATE_DIR = get_resource_dir('templates')
@@ -15,6 +18,7 @@ class PyEchartsConfig(object):
         self._jshost = remove_trailing_slashes(jshost)
         self.force_js_embed = force_js_embed
         self.hosted_on_github = False
+        self.jupyter_presentation = constants.DEFAULT_HTML
 
     @property
     def js_embed(self):
@@ -127,13 +131,19 @@ def configure(jshost=None,
               hosted_on_github=None,
               echarts_template_dir=None,
               force_js_embed=None,
+              output_image=None,
               **kwargs):
     """ Config all items for pyecharts when use chart.render()
     or page.render().
 
-    :param jshost:
-    :param echarts_template_dir:
-    :param force_js_embed:
+    :param jshost: the host for echarts related javascript libraries
+    :param echarts_template_dir: the directory for custom html templates
+    :param force_js_embed: embed javascript in html file or not
+    :param output_image: Non None value asks pyecharts to use
+                         pyecharts-snapshots to render as image directly.
+                         Values such as 'svg', 'jpeg', 'png' changes
+                         chart presentation in jupyter notebook to those image
+                         formats, instead of 'html' format.
     :param kwargs:
     """
     if jshost:
@@ -144,6 +154,8 @@ def configure(jshost=None,
         CURRENT_CONFIG.echarts_template_dir = echarts_template_dir
     if force_js_embed is not None:
         CURRENT_CONFIG.force_js_embed = force_js_embed
+    if output_image in constants.JUPYTER_PRESENTATIONS:
+        CURRENT_CONFIG.jupyter_presentation = output_image
 
 
 def online(host=None):
@@ -155,6 +167,19 @@ def online(host=None):
         configure(hosted_on_github=True)
     else:
         configure(jshost=host)
+
+
+@contextmanager
+def jupyter_image(jupyter_presentation):
+    """
+    Temporarily change jupyter's default presentation
+    """
+    previous_presentation = CURRENT_CONFIG.jupyter_presentation
+    try:
+        CURRENT_CONFIG.jupyter_presentation = jupyter_presentation
+        yield
+    finally:
+        CURRENT_CONFIG.jupyter_presentation = previous_presentation
 
 
 def _ensure_echarts_is_in_the_front(dependencies):
