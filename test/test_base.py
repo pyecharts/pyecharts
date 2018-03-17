@@ -8,8 +8,11 @@ import json
 import pandas as pd
 import numpy as np
 
-from nose.tools import eq_
-from pyecharts import Bar, Map
+from nose.tools import eq_, raises
+from mock import patch, MagicMock
+
+from pyecharts import Bar, Map, jupyter_image
+import pyecharts.exceptions as exceptions
 from test.constants import CLOTHES
 from test.utils import get_default_rendering_file_content
 
@@ -56,6 +59,50 @@ def test_embed_option():
     assert json_encoded_title in html
     assert "<html>" not in html
     assert "<body>" not in html
+
+
+def test_jupyter_repr_png():
+    bar = create_a_bar(TITLE)
+    assert bar._repr_png_() is None
+
+
+def test_jupyter_repr_jpeg():
+    bar = create_a_bar(TITLE)
+    assert bar._repr_jpeg_() is None
+
+
+def test_jupyter_repr_svg():
+    bar = create_a_bar(TITLE)
+    assert bar._repr_svg_() is None
+
+
+@patch('pyecharts.engine.create_default_environment')
+@patch('os.unlink')
+def test_render_as_svg(fake_unlink, fake_factory):
+    fake_env = MagicMock(
+        render_chart_to_file=MagicMock(
+            return_value="fake svg"
+        ))
+    fake_factory.return_value = fake_env
+    with jupyter_image('svg'):
+        bar = create_a_bar('test', renderer='svg')
+        svg_content = bar._repr_svg_()
+        fake_unlink.assert_called()
+        eq_(svg_content, 'fake svg')
+
+
+@raises(exceptions.InvalidConfiguration)
+def test_render_as_svg_with_wrong_configuration():
+    with jupyter_image('svg'):
+        bar = create_a_bar('test')
+        bar._repr_svg_()
+
+
+@raises(exceptions.InvalidConfiguration)
+def test_render_as_png_with_wrong_configuration():
+    with jupyter_image('png'):
+        bar = create_a_bar('test', renderer='svg')
+        bar._repr_png_()
 
 
 def test_base_get_js_dependencies():

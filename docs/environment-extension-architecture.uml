@@ -1,0 +1,28 @@
+@startuml
+
+package "pyecharts" {
+[charts] --> [EnvironmentManager]
+[EchartsEnvironment]
+}
+
+package "pyecharts-snapshot" {
+[SnapshotEnvironment] --> [snapshot utility]
+}
+
+
+[EnvironmentManager] --> [lml]
+[lml] --> [EchartsEnvironment]
+[lml] ..> [SnapshotEnvironment]
+[snapshot utility] --> ["phantomjs-prebuilt"]
+
+note bottom of [EnvironmentManager]
+Newly introduced component to have
+more than one rendering environment
+end note
+
+note left of [SnapshotEnvironment]
+As a extension to EchartsEnvironment,
+it renders the output as images
+end note
+
+@enduml
