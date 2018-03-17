@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # coding=utf-8
 from __future__ import unicode_literals
 
@@ -9,7 +8,7 @@ from pyecharts import (
     Bar, Scatter3D, Line, Pie, Map,
     Kline, Radar, WordCloud, Liquid)
 from pyecharts import Page
-from nose.tools import eq_
+from nose.tools import eq_, raises
 
 TEST_PAGE_TITLE = "my awesome chart"
 
@@ -45,6 +44,12 @@ def create_three():
     page.add(map)
 
     return page
+
+
+@raises(NotImplementedError)
+def test_no_image_rendering_for_page():
+    page = create_three()
+    page.render(path='page.png')
 
 
 def test_two_bars():
