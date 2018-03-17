@@ -1,5 +1,5 @@
 # coding=utf-8
-
+import os
 import uuid
 import warnings
 
@@ -8,6 +8,7 @@ from jinja2 import Markup
 import pyecharts.constants as constants
 import pyecharts.engine as engine
 import pyecharts.utils as utils
+import pyecharts.exceptions as exceptions
 from pyecharts.conf import CURRENT_CONFIG
 
 
@@ -80,7 +81,7 @@ class Base(object):
         """ 渲染图表的所有配置项，为 web pages 服务，不过需先提供
         所需要的js 依赖文件
         """
-        env = engine.create_default_environment()
+        env = engine.create_default_environment(constants.DEFAULT_HTML)
         html = env.render_container_and_echarts_code(self)
         return Markup(html)
 
@@ -93,14 +94,16 @@ class Base(object):
                path='render.html',
                template_name='simple_chart.html',
                object_name='chart',
-               extra_context=None):
-        env = engine.create_default_environment()
+               **kwargs):
+        _, ext = os.path.splitext(path)
+        _file_type = ext[1:]
+        env = engine.create_default_environment(_file_type)
         env.render_chart_to_file(
             chart=self,
             object_name=object_name,
             path=path,
             template_name=template_name,
-            extra_context=extra_context
+            **kwargs
         )
 
     @staticmethod
@@ -144,17 +147,60 @@ class Base(object):
         chart.js_dependencies => require_config => config_items, libraries
         :return A unicode string.
         """
+        if CURRENT_CONFIG.jupyter_presentation != constants.DEFAULT_HTML:
+            return None
+
         require_config = CURRENT_CONFIG.produce_require_configuration(
             self.js_dependencies
         )
         config_items = require_config['config_items']
         libraries = require_config['libraries']
-        env = engine.create_default_environment()
+        env = engine.create_default_environment(constants.DEFAULT_HTML)
         return env.render_chart_to_notebook(
             charts=(self,),
             config_items=config_items,
             libraries=libraries
         )
+
+    def _repr_svg_(self):
+        content = self._render_as_image(constants.SVG)
+        if content:
+            # fix alignment problem in notebook
+            content = content.replace('position: absolute;', '')
+        return content
+
+    def _repr_png_(self):
+        return self._render_as_image(constants.PNG)
+
+    def _repr_jpeg_(self):
+        return self._render_as_image(constants.JPEG)
+
+    def _render_as_image(self, file_type):
+        """
+        This is an internal function to serve _repr_jpeg_,
+        _repr_png_ and _repr_svg_.
+
+        :param file_type: the parameter is mostly image file types.
+        """
+        if CURRENT_CONFIG.jupyter_presentation != file_type:
+            return None
+        if self.renderer == constants.SVG_RENDERER:
+            if file_type != constants.SVG:
+                raise exceptions.InvalidConfiguration(
+                    "svg renderer produces only svg image.")
+        elif file_type not in [constants.JPEG, constants.PNG]:
+            # CANVAS_RENDERER here
+            raise exceptions.InvalidConfiguration(
+                "svg output requires svg renderer.")
+
+        env = engine.create_default_environment(file_type)
+        outfile = 'tmp.' + file_type
+        content = env.render_chart_to_file(
+            chart=self,
+            path=outfile, verbose=False)
+        if content:
+            os.unlink(outfile)
+        return content
 
     def _add_chinese_map(self, map_name_in_chinese):
         name_in_pinyin = CURRENT_CONFIG.chinese_to_pinyin(map_name_in_chinese)

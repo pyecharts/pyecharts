@@ -75,7 +75,7 @@ It will create a file named *render.html* in the root directory, open file with 
 
 [pyecharts-snapshot](https://github.com/pyecharts/pyecharts-snapshot) is a library which renders the output of pyecharts as a png, jpeg, gif image or a pdf file at command line or in your code.
 
-See more detail at the repositoty.
+See more detail at that repositoty.
 
 ## Platform Support
 
