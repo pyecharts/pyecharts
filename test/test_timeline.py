@@ -171,6 +171,34 @@ def test_timeline_different_legend():
     timeline.add(bar_1, '2012 年')
     timeline.add(bar_2, '2013 年')
     content = timeline._repr_html_()
-    assert '"color": [' in content
     assert "\\u6625\\u5b63a" in content      # 春季 a
     assert "\\u6625\\u5b63b" in content      # 春季 b
+
+
+def test_timeline_label_color():
+    attr = ["{}月".format(i) for i in range(1, 7)]
+    bar = Bar("1 月份数据", "数据纯属虚构")
+    bar.add("bar", attr, [randint(10, 50) for _ in range(6)],
+            label_color=['red', '#213', 'black'])
+    line = Line()
+    line.add("line", attr, [randint(50, 80) for _ in range(6)])
+    overlap_0 = Overlap()
+    overlap_0.add(bar)
+    overlap_0.add(line)
+
+    bar_1 = Bar("2 月份数据", "数据纯属虚构")
+    bar_1.add("bar", attr, [randint(10, 50) for _ in range(6)])
+    line_1 = Line()
+    line_1.add("line", attr, [randint(50, 80) for _ in range(6)])
+    overlap_1 = Overlap()
+    overlap_1.add(bar_1)
+    overlap_1.add(line_1)
+
+    timeline = Timeline(timeline_bottom=0)
+    timeline.add(overlap_0, '1 月')
+    timeline.add(overlap_1, '2 月')
+    content = timeline._repr_html_()
+    assert '"color": [' in content
+    assert "red" in content
+    assert "#213" in content
+    assert "black" in content
