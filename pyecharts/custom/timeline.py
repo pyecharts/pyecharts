@@ -104,6 +104,7 @@ class Timeline(Base):
             data=self._time_points
         )
         self._option.get('options').append({
+            "color": chart.options.get("color"),
             "legend": chart.options.get('legend'),
             "series": chart.options.get('series'),
             "title": chart.options.get('title'),

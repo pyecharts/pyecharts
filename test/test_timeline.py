@@ -171,5 +171,6 @@ def test_timeline_different_legend():
     timeline.add(bar_1, '2012 年')
     timeline.add(bar_2, '2013 年')
     content = timeline._repr_html_()
+    assert '"color": [' in content
     assert "\\u6625\\u5b63a" in content      # 春季 a
     assert "\\u6625\\u5b63b" in content      # 春季 b
