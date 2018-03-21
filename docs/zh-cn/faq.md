@@ -92,3 +92,7 @@ A:请检查是否将测试文件命名为 pyecharts.py，如若是请重命名�
 
 A:目前 pyecharts 暂时未开放这部分的API，没有考虑到打包后的资源文件路径的兼容问题。建议使用文件夹/多文件模式。
 如果确实需要使用单文件模式，可参考 [《Python打包工具》](https://kinegratii.github.io/2016/04/23/python-package/) 这篇文章了解相关原理后进行源码修改。
+
+**Q:为什么中国地图画出来只有南海诸岛？**
+
+A: 因为 china.js 没有加载成功。请检查 echarts-countries-pypkg 是不是已经装了。如果是 jupyter 的环境的话， 请检查 http://localhost:8888/nbextensions/echarts-countries-js/china.js 在你的浏览器里有没有文件返回。
