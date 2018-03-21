@@ -95,4 +95,6 @@ A:目前 pyecharts 暂时未开放这部分的API，没有考虑到打包后的�
 
 **Q:为什么中国地图画出来只有南海诸岛？**
 
+<img width="598" alt="wechatimg140" src="https://user-images.githubusercontent.com/4280312/37690316-08ef46e0-2ca2-11e8-9f2c-78c41a84bf57.png">
+
 A: 因为 china.js 没有加载成功。请检查 echarts-countries-pypkg 是不是已经装了。如果是 jupyter 的环境的话， 请检查 http://localhost:8888/nbextensions/echarts-countries-js/china.js 在你的浏览器里有没有文件返回。
