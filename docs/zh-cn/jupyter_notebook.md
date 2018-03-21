@@ -47,6 +47,7 @@ from pyecharts import online
 online()
 ```
 
+
 如果导出的 HTML 文件需要在没有网路的情况下显示图片，请考虑后面的介绍。
 
 ## 导出 PDF 功能
@@ -62,6 +63,8 @@ from pyecharts import configure
 
 configure(output_image='png')
 ```
+
+请看这个例子: [test.pdf](https://github.com/pyecharts/pyecharts/files/1813293/test.6.pdf)
 
 ## 导出的 HTML 文件， 在没有互联网，怎么样打开图片
 
