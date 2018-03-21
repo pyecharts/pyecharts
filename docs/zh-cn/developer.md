@@ -42,6 +42,11 @@ map.render(path='map.png')  # <--- 直接生成图片
 
 Page 类不能享受直接生成图片的功能。原因是 pyecharts-snapshot 还不能[抓多个图片](https://github.com/pyecharts/pyecharts-snapshot/issues/10)
 
+| 环境         | pyecharts-snapshot 启动方式 |文件格式                       |
+| ----------- | ---------------------------|------------------------------|
+| jupyter     | output_image               | svg, png, jpeg, html         |
+| pure python | 文件后缀                    |svg, png, jpeg, gif, pdf, html|
+
 ## pyecharts 0.3.2+ 的扩展包启动顺序
 
 [lml](http://lml.readthedocs.io/en/latest/index.html) 是支持松散包管理的 python 包。它的特点是支持扩展包搭积木式的架构：装了某包，就增加功能；不装，不影响主体库的运转。主体包启动的时候，lml 提供扩展包搜索程序，实现扩展包的动态合体。

@@ -42,6 +42,8 @@ Here is a list of map extensions from pyecharts dev team:
 1. [World countries include China map and World map](https://echarts-maps.github.io/echarts-countries-js/): [echarts-countries-pypkg](https://github.com/pyecharts/echarts-countries-pypkg) (1.9MB)
 2. [Chinese provinces and regions](https://echarts-maps.github.io/echarts-china-provinces-js/): [echarts-china-provinces-pypkg](https://github.com/pyecharts/echarts-china-provinces-pypkg) (730KB)
 3. [Chinese cities](https://echarts-maps.github.io/echarts-china-cities-js/): [echarts-china-cities-pypkg](https://github.com/pyecharts/echarts-china-cities-pypkg) (3.8MB)
+3. [Custom Chinese regions](https://echarts-maps.github.io/echarts-china-misc-js/): [echarts-china-cities-pypkg](https://github.com/pyecharts/echarts-china-misc-pypkg) (148KB)
+3. [United Kingdom map](https://echarts-maps.github.io/echarts-united-kingdom-js/): [echarts-china-cities-pypkg](https://github.com/pyecharts/echarts-united-kingdom-pypkg) (1MB)
 
 In order to install them, you can try one of them or all:
 
@@ -49,6 +51,8 @@ In order to install them, you can try one of them or all:
 $ pip install echarts-countries-pypkg
 $ pip install echarts-china-provinces-pypkg
 $ pip install echarts-china-cities-pypkg
+$ pip install echarts-china-misc-pypkg
+$ pip install echarts-united-kingdom-pypkg
 ```
 
 ## Basic Usage
@@ -73,7 +77,7 @@ It will create a file named *render.html* in the root directory, open file with 
 
 ### Export as Images or Pdf
 
-[pyecharts-snapshot](https://github.com/pyecharts/pyecharts-snapshot) is a library which renders the output of pyecharts as a png, jpeg, gif image or a pdf file at command line or in your code.
+[pyecharts-snapshot](https://github.com/pyecharts/pyecharts-snapshot) is [a command line utility](https://github.com/pyecharts/pyecharts-snapshot#usage) and [a library extension](https://github.com/pyecharts/pyecharts-snapshot#example-programs) which renders the output of pyecharts as a svg, png, jpeg, gif image or a pdf file.
 
 See more detail at that repositoty.
 
@@ -87,7 +91,7 @@ In the Notebook cell ,you can simply call the instance itself to diplay the char
 
 All chart classes in pyecharts implement the `_repr_html_` interface about [IPython Rich Display](http://ipython.readthedocs.io/en/stable/config/integrating.html#rich-display) .
 
-In the case of online jshost mode,you can also download as some file formats (ipynb/py/html/pdf) and run without jupyter notebook enviromnment.
+In the case of online jshost mode, you can also download as some file formats (ipynb/py/html/pdf) and run without jupyter notebook enviromnment.
 
 ![pandas_numpy](https://user-images.githubusercontent.com/19553554/35104252-3e36cee2-fca3-11e7-8e43-09bbe8dbbd1e.png)
 
@@ -107,9 +111,9 @@ pyecharts exposes engine API so that you can use your own template file and inte
 
 In addition,pyecharts also ships a lot of jinja2 template functions used in template files.
 
-### Custom Map Library
+### Custom Map Libraries
 
-All map is hosted by the repository [echarts-china-cities-js](https://github.com/pyecharts/echarts-china-cities-js) and [echarts-countries-js](https://github.com/pyecharts/echarts-countries-js) .
+All maps are developed and maintained by [echarts-maps](https://github.com/echarts-maps) github organisation.
 
 ## Documentation
 
