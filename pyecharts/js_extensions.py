@@ -8,6 +8,7 @@ from lml.loader import scan_plugins
 from lml.plugin import PluginManager
 
 import pyecharts.exceptions as exceptions
+import pyecharts.constants as constants
 
 # here are all plugins from pyecharts team
 OFFICIAL_PLUGINS = [
@@ -84,7 +85,8 @@ class JsExtension(object):
 
 class JsExtensionManager(PluginManager):
     def __init__(self):
-        super(JsExtensionManager, self).__init__('pyecharts_js_extension')
+        super(JsExtensionManager, self).__init__(
+            constants.JS_EXTENSION_PLUGIN_TYPE)
         self.js_extensions = []
 
     def get_all_extensions(self):
@@ -101,7 +103,7 @@ class JsExtensionManager(PluginManager):
         if len(self.js_extensions) == 0:
             self.get_all_extensions()
         for __extension__ in self.js_extensions:
-            if __extension__.registry['JS_FOLDER'] == name:
+            if __extension__.registry[REGISTRY_JS_FOLDER] == name:
                 return __extension__
         return None
 
