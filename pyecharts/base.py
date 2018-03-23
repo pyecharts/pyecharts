@@ -141,6 +141,11 @@ class Base(object):
                 v_lst.append(seq[key])
         return k_lst, v_lst
 
+    def render_notebook(self):
+        warnings.warn('Implementation has been removed. ' +
+                      'Please pass the chart instance directly to Jupyter.' +
+                      'If you need more help, please read documentation')
+
     def _repr_html_(self):
         """ 渲染配置项并将图形显示在 notebook 中
         chart/page => charts
