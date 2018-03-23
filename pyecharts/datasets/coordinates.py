@@ -6,20 +6,26 @@ from __future__ import unicode_literals
 
 
 def search_coordinates(name=None, func=None):
+    """
+    Search coordinates by city name
+    :param name: The keyword for fuzzy search
+    :param func: The filter call for search
+    :return: A dictionary like {<name>:[<longitude, latitude>]}
+    """
     if name:
-        func = lambda _k: _k.contains(name)
+        func = lambda _k: name in _k
     return dict(
         (k, v) for k, v in _COORDINATE_DATASET.items() if func(k)
     )
 
 
 def get_coordinate(name):
+    """
+    Return coordinate for the city name.
+    :param name: City name or any custom name string.
+    :return: A list like [longitude, latitude] or None
+    """
     return _COORDINATE_DATASET.get(name, None)
-
-
-def get_available_coordinates():
-    for name, coordinate in _COORDINATE_DATASET.items():
-        yield name, coordinate
 
 
 _COORDINATE_DATASET = {

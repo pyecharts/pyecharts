@@ -3,7 +3,7 @@
 from pyecharts.chart import Chart
 from pyecharts.option import get_all_options
 from pyecharts.datasets.coordinates import get_coordinate
-from pyecharts.constants import (CITY_GEO_COORDS, SYMBOL)
+from pyecharts.constants import SYMBOL
 
 
 class GeoLines(Chart):
