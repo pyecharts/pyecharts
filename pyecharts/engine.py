@@ -1,13 +1,15 @@
 # coding=utf-8
 from __future__ import unicode_literals
 
-from jinja2 import Environment, FileSystemLoader, environmentfunction, Markup
-
 import codecs
+
+from jinja2 import Environment, FileSystemLoader, environmentfunction, Markup
+from lml.plugin import PluginManager, PluginInfo
+
 import pyecharts.conf as conf
 import pyecharts.utils as utils
+import pyecharts.constants as constants
 
-from lml.plugin import PluginManager, PluginInfo
 
 LINK_SCRIPT_FORMATTER = '<script type="text/javascript" src="{}"></script>'
 EMBED_SCRIPT_FORMATTER = '<script type="text/javascript">\n{}\n</script>'
@@ -136,7 +138,8 @@ class BaseEnvironment(Environment):
         self.globals.update(ECHAERTS_TEMPLATE_FUNCTIONS)
 
 
-@PluginInfo('pyecharts_environment', tags=['html'])
+@PluginInfo(constants.ENVIRONMENT_PLUGIN_TYPE,
+            tags=[constants.DEFAULT_HTML])
 class EchartsEnvironment(BaseEnvironment):
     """
     Built-in jinja2 template engine for pyecharts
@@ -214,7 +217,8 @@ class EnvironmentManager(PluginManager):
         Register with lml that this class manages 'pyecharts_environment'
         extension
         """
-        super(EnvironmentManager, self).__init__('pyecharts_environment')
+        super(EnvironmentManager, self).__init__(
+            constants.ENVIRONMENT_PLUGIN_TYPE)
 
     def get_a_environment(self, file_type, **kwargs):
         """

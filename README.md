@@ -87,7 +87,7 @@ pyecharts exposes chart API and template API so that it can work on some common 
 
 ### Work on Jupyter Notebook
 
-In the Notebook cell ,you can simply call the instance itself to diplay the chart.
+In the Notebook cell, you can simply pass on chart instance itself to Jupyter, which will diplay the chart. Please note **render_notebook** function has been removed.
 
 All chart classes in pyecharts implement the `_repr_html_` interface about [IPython Rich Display](http://ipython.readthedocs.io/en/stable/config/integrating.html#rich-display) .
 
