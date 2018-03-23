@@ -26,15 +26,19 @@ class Geo(Chart):
         """
         self._coordinates.update({name: [longitude, latitude]})
 
-    def get_coordinate(self, name):
+    def get_coordinate(self, name, raise_exception=False):
         """
         Return coordinate for the city name.
         :param name: City name or any custom name string.
+        :param raise_exception: Whether to raise exception if not exist.
         :return: A list like [longitude, latitude] or None
         """
         if name in self._coordinates:
             return self._coordinates[name]
-        return get_coordinate(name)
+        coordinate = get_coordinate(name)
+        if coordinate is None and raise_exception:
+            raise ValueError('No coordinate is specified for {}'.format(name))
+        return coordinate
 
     def add(self, *args, **kwargs):
         self.__add(*args, **kwargs)
@@ -94,13 +98,9 @@ class Geo(Chart):
 
         _data = []
         for _name, _value in zip(attr, value):
-            _coordinate = self.get_coordinate(_name)
-            if _coordinate:
-                _data_value = [_coordinate[0], _coordinate[1], _value]
-                _data.append({"name": _name, "value": _data_value})
-            else:
-                ex_msg = 'No coordinate is specified for {}'.format(_name)
-                raise ValueError(ex_msg)
+            _coordinate = self.get_coordinate(_name, raise_exception=True)
+            _data_value = [_coordinate[0], _coordinate[1], _value]
+            _data.append({"name": _name, "value": _data_value})
         self._option.update(
             geo={
                 "map": maptype,

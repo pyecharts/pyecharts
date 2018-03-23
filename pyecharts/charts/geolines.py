@@ -28,15 +28,19 @@ class GeoLines(Chart):
         """
         self._coordinates.update({name: [longitude, latitude]})
 
-    def get_coordinate(self, name):
+    def get_coordinate(self, name, raise_exception=False):
         """
         Return coordinate for the city name.
         :param name: City name or any custom name string.
+        :param raise_exception: Whether to raise exception if not exist.
         :return: A list like [longitude, latitude] or None
         """
         if name in self._coordinates:
             return self._coordinates[name]
-        return get_coordinate(name)
+        coordinate = get_coordinate(name)
+        if coordinate is None and raise_exception:
+            raise ValueError('No coordinate is specified for {}'.format(name))
+        return coordinate
 
     def add(self, *args, **kwargs):
         self.__add(*args, **kwargs)
@@ -118,8 +122,9 @@ class GeoLines(Chart):
         _data_lines, _data_scatter = [], []
         for d in data:
             _from_name, _to_name = d
-            _from_coordinate = self.get_coordinate(_from_name)
-            _to_coordinate = self.get_coordinate(_to_name)
+            _from_coordinate = self.get_coordinate(_from_name,
+                                                   raise_exception=True)
+            _to_coordinate = self.get_coordinate(_to_name, raise_exception=True)
             _data_lines.append({
                 "fromName": _from_name,
                 "toName": _to_name,

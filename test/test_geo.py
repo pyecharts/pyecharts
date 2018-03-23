@@ -3,7 +3,7 @@
 from __future__ import unicode_literals
 
 from pyecharts import Geo, Style
-from nose.tools import raises
+from nose.tools import raises, assert_raises
 
 style = Style(
     title_color="#fff",
@@ -166,3 +166,28 @@ def test_geo_visualmap_pieces():
     content = geo._repr_html_()
     assert '"max": 13' in content
     assert '"label": "14 < x < 16"' in content
+
+
+def test_full_examplte():
+    data = [('广州', 45), ('漳州', 35), ('A市', 43)]
+    geo = Geo("全国主要城市空气质量", "data from pm2.5", **style.init_style)
+    attr, value = geo.cast(data)
+    with assert_raises(ValueError):
+        geo.add("", attr, value, type="effectScatter", is_random=True,
+                is_visualmap=True, is_piecewise=True,
+                visual_text_color="#fff",
+                pieces=[
+                    {"min": 0, "max": 13, "label": "0 < x < 13"},
+                    {"min": 14, "max": 16, "label": "14 < x < 16"},
+                ],
+                effect_scale=5)
+    geo.add_coordinate('A市', 119.3, 26.08)
+    geo.add("", attr, value, type="effectScatter", is_random=True,
+            is_visualmap=True, is_piecewise=True,
+            visual_text_color="#fff",
+            pieces=[
+                {"min": 0, "max": 13, "label": "0 < x < 13"},
+                {"min": 14, "max": 16, "label": "14 < x < 16"},
+            ],
+            effect_scale=5)
+    geo.render()
