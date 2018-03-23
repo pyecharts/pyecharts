@@ -3,6 +3,7 @@
 from __future__ import unicode_literals
 
 from pyecharts import Geo, Style
+from nose.tools import raises
 
 style = Style(
     title_color="#fff",
@@ -10,8 +11,7 @@ style = Style(
     width=1200,
     height=600,
     background_color='#404a59'
-    )
-
+)
 
 cities = [
     ("海门", 9), ("鄂尔多斯", 12), ("招远", 12), ("舟山", 12),
@@ -62,7 +62,7 @@ cities = [
     ("湘潭", 154), ("金华", 157), ("岳阳", 169), ("长沙", 175),
     ("衢州", 177), ("廊坊", 193), ("菏泽", 194), ("合肥", 229),
     ("武汉", 273), ("大庆", 279)
-    ]
+]
 
 
 def test_geo_china_scatter():
@@ -98,6 +98,7 @@ def test_geo_china_effectscatter():
     assert '"type": "effectScatter"' in geo._repr_html_()
 
 
+@raises(ValueError)
 def test_geo_with_noexist_city():
     data = [
         ("海门", 9), ("鄂尔多斯", 12), ("招远", 12),
@@ -138,7 +139,7 @@ def test_geo_user_define_coords():
     coords = {
         "0": [0.572430556, 19.246],
         "1": [0.479039352, 1.863],
-        "2": [0.754143519, -20.579]
+        "2": (0.754143519, -20.579)
     }
 
     geo = Geo(**style.init_style)

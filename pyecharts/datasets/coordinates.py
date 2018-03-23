@@ -1,46 +1,28 @@
-# coding=utf-8
+# coding=utf8
+"""
+The Raw Data and Access Interface for builtin coordinates.
+"""
 from __future__ import unicode_literals
-
-CANVAS_RENDERER = "canvas"
-SVG_RENDERER = "svg"
-PAGE_TITLE = "Echarts"
-
-# presentation types for jupyter
-# output file types for pure python
-SVG = 'svg'
-PNG = 'png'
-JPEG = 'jpeg'
-DEFAULT_HTML = 'html'
-JUPYTER_PRESENTATIONS = [SVG, PNG, JPEG, DEFAULT_HTML]
-
-SYMBOL = {
-    "plane": 'path://M1705.06,1318.313v-89.254l-319.9-221.799l0.073-208.'
-             '063c0.521-84.662-26.629-121.796-63.961-121.491c-37.332-0.'
-             '305-64.482,36.829-63.961,121.491l0.073,208.063l-319.9,221.'
-             '799v89.254l330.343-157.288l12.238,241.308l-134.449,92.931l0.'
-             '531,42.034l175.125-42.917l175.125,42.917l0.531-42.034l-134'
-             '.449-92.931l12.238-241.308L1705.06,1318.313z'
-}
 
 
 def search_coordinates(name=None, func=None):
     if name:
         func = lambda _k: _k.contains(name)
     return dict(
-        (k, v) for k, v in CITY_GEO_COORDS.items() if func(k)
+        (k, v) for k, v in _COORDINATE_DATASET.items() if func(k)
     )
 
 
 def get_coordinate(name):
-    return CITY_GEO_COORDS.get(name, None)
+    return _COORDINATE_DATASET.get(name, None)
 
 
 def get_available_coordinates():
-    for name, coordinate in CITY_GEO_COORDS.items():
+    for name, coordinate in _COORDINATE_DATASET.items():
         yield name, coordinate
 
 
-CITY_GEO_COORDS = {
+_COORDINATE_DATASET = {
     '阿城': [126.58, 45.32],
     '阿克苏': [80.19, 41.09],
     '阿勒泰': [88.12, 47.50],
