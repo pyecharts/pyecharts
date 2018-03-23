@@ -12,6 +12,8 @@ PNG = 'png'
 JPEG = 'jpeg'
 DEFAULT_HTML = 'html'
 JUPYTER_PRESENTATIONS = [SVG, PNG, JPEG, DEFAULT_HTML]
+ENVIRONMENT_PLUGIN_TYPE = 'pyecharts_environment'
+JS_EXTENSION_PLUGIN_TYPE = 'pyecharts_js_extension'
 
 SYMBOL = {
     "plane": 'path://M1705.06,1318.313v-89.254l-319.9-221.799l0.073-208.'
