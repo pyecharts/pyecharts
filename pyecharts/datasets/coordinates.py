@@ -3,17 +3,26 @@
 The Raw Data and Access Interface for builtin coordinates.
 """
 from __future__ import unicode_literals
+from functools import partial
+
+__all__ = ['search_coordinates', 'get_coordinate']
 
 
-def search_coordinates(name=None, func=None):
+def keyword_filter(name, keyword):
+    if not isinstance(keyword, (list, tuple, set)):
+        keyword = keyword,
+    return any([k in name for k in keyword])
+
+
+def search_coordinates(keyword=None, func=None):
     """
     Search coordinates by city name
-    :param name: The keyword for fuzzy search
+    :param keyword: The keyword for fuzzy search
     :param func: The filter call for search
     :return: A dictionary like {<name>:[<longitude, latitude>]}
     """
-    if name:
-        func = lambda _k: name in _k
+    if keyword:
+        func = partial(keyword_filter, keyword=keyword)
     return dict(
         (k, v) for k, v in _COORDINATE_DATASET.items() if func(k)
     )
