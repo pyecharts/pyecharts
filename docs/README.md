@@ -19,7 +19,7 @@ pyecharts 是一个用于生成 Echarts 图表的类库。Echarts 是百度开�
 
 **其他资源**
 
-[示例项目](https://github.com/pyecharts/pyecharts-users-cases) | [地图扩展项目](https://github.com/pyecharts/echarts-china-cities-js)
+[示例项目](https://github.com/pyecharts/pyecharts-users-cases) | [地理地图数据](zh-cn/datasets)
 
 **项目开发**
 
