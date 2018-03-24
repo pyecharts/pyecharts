@@ -124,7 +124,8 @@ class GeoLines(Chart):
             _from_name, _to_name = d
             _from_coordinate = self.get_coordinate(_from_name,
                                                    raise_exception=True)
-            _to_coordinate = self.get_coordinate(_to_name, raise_exception=True)
+            _to_coordinate = self.get_coordinate(_to_name,
+                                                 raise_exception=True)
             _data_lines.append({
                 "fromName": _from_name,
                 "toName": _to_name,
