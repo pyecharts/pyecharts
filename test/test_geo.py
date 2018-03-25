@@ -168,9 +168,13 @@ def test_geo_visualmap_pieces():
     assert '"label": "14 < x < 16"' in content
 
 
-def test_full_examplte():
+def test_full_example():
     data = [('广州', 45), ('漳州', 35), ('A市', 43)]
     geo = Geo("全国主要城市空气质量", "data from pm2.5", **style.init_style)
+    coordinate = geo.get_coordinate('广州')
+    assert 2 == len(coordinate)
+    with assert_raises(ValueError):
+        geo.get_coordinate('A市', raise_exception=True)
     attr, value = geo.cast(data)
     with assert_raises(ValueError):
         geo.add("", attr, value, type="effectScatter", is_random=True,

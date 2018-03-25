@@ -55,6 +55,30 @@ def test_geolines():
     lines.render()
 
 
+def test_with_custom_coordinates():
+    data_guangzhou = [
+        ["广州", "上海"],
+        ["广州", "北京"],
+        ["广州", "南京"],
+        ["广州", "重庆"],
+        ["广州", "兰州"],
+        ["广州", "A市"]
+    ]
+    lines = GeoLines("GeoLines 示例", **style.init_style)
+    coordinate = lines.get_coordinate('广州')
+    assert 2 == len(coordinate)
+    with assert_raises(ValueError):
+        lines.get_coordinate('A市', raise_exception=True)
+
+    lines.add(
+        "从广州出发",
+        data_guangzhou,
+        geo_cities_coords={'A市': (119.3, 26.08)},
+        **style_geo
+    )
+    lines.render()
+
+
 def test_with_full_example():
     line_data = [
         ["广州", "上海"],
