@@ -3,6 +3,7 @@
 from __future__ import unicode_literals
 
 from pyecharts import Geo, Style
+from nose.tools import raises, assert_raises
 
 style = Style(
     title_color="#fff",
@@ -10,8 +11,7 @@ style = Style(
     width=1200,
     height=600,
     background_color='#404a59'
-    )
-
+)
 
 cities = [
     ("海门", 9), ("鄂尔多斯", 12), ("招远", 12), ("舟山", 12),
@@ -62,7 +62,7 @@ cities = [
     ("湘潭", 154), ("金华", 157), ("岳阳", 169), ("长沙", 175),
     ("衢州", 177), ("廊坊", 193), ("菏泽", 194), ("合肥", 229),
     ("武汉", 273), ("大庆", 279)
-    ]
+]
 
 
 def test_geo_china_scatter():
@@ -98,6 +98,7 @@ def test_geo_china_effectscatter():
     assert '"type": "effectScatter"' in geo._repr_html_()
 
 
+@raises(ValueError)
 def test_geo_with_noexist_city():
     data = [
         ("海门", 9), ("鄂尔多斯", 12), ("招远", 12),
@@ -138,7 +139,7 @@ def test_geo_user_define_coords():
     coords = {
         "0": [0.572430556, 19.246],
         "1": [0.479039352, 1.863],
-        "2": [0.754143519, -20.579]
+        "2": (0.754143519, -20.579)
     }
 
     geo = Geo(**style.init_style)
@@ -165,3 +166,32 @@ def test_geo_visualmap_pieces():
     content = geo._repr_html_()
     assert '"max": 13' in content
     assert '"label": "14 < x < 16"' in content
+
+
+def test_full_example():
+    data = [('广州', 45), ('漳州', 35), ('A市', 43)]
+    geo = Geo("全国主要城市空气质量", "data from pm2.5", **style.init_style)
+    coordinate = geo.get_coordinate('广州')
+    assert 2 == len(coordinate)
+    with assert_raises(ValueError):
+        geo.get_coordinate('A市', raise_exception=True)
+    attr, value = geo.cast(data)
+    with assert_raises(ValueError):
+        geo.add("", attr, value, type="effectScatter", is_random=True,
+                is_visualmap=True, is_piecewise=True,
+                visual_text_color="#fff",
+                pieces=[
+                    {"min": 0, "max": 13, "label": "0 < x < 13"},
+                    {"min": 14, "max": 16, "label": "14 < x < 16"},
+                ],
+                effect_scale=5)
+    geo.add_coordinate('A市', 119.3, 26.08)
+    geo.add("", attr, value, type="effectScatter", is_random=True,
+            is_visualmap=True, is_piecewise=True,
+            visual_text_color="#fff",
+            pieces=[
+                {"min": 0, "max": 13, "label": "0 < x < 13"},
+                {"min": 14, "max": 16, "label": "14 < x < 16"},
+            ],
+            effect_scale=5)
+    geo.render()

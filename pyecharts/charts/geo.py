@@ -1,10 +1,8 @@
 # coding=utf-8
 
-import copy
-
 from pyecharts.chart import Chart
 from pyecharts.option import get_all_options
-from pyecharts.constants import CITY_GEO_COORDS
+from pyecharts.datasets.coordinates import get_coordinate
 
 
 class Geo(Chart):
@@ -13,8 +11,34 @@ class Geo(Chart):
 
     地理坐标系组件用于地图的绘制，支持在地理坐标系上绘制散点图，线集。
     """
+
     def __init__(self, title="", subtitle="", **kwargs):
         super(Geo, self).__init__(title, subtitle, **kwargs)
+        self._coordinates = {}
+
+    def add_coordinate(self, name, longitude, latitude):
+        """
+        Add a geo coordinate for a position.
+        :param name: The name of a position
+        :param longitude: The longitude of coordinate.
+        :param latitude: The latitude of coordinate.
+        :return:
+        """
+        self._coordinates.update({name: [longitude, latitude]})
+
+    def get_coordinate(self, name, raise_exception=False):
+        """
+        Return coordinate for the city name.
+        :param name: City name or any custom name string.
+        :param raise_exception: Whether to raise exception if not exist.
+        :return: A list like [longitude, latitude] or None
+        """
+        if name in self._coordinates:
+            return self._coordinates[name]
+        coordinate = get_coordinate(name)
+        if coordinate is None and raise_exception:
+            raise ValueError('No coordinate is specified for {}'.format(name))
+        return coordinate
 
     def add(self, *args, **kwargs):
         self.__add(*args, **kwargs)
@@ -69,18 +93,14 @@ class Geo(Chart):
         chart = get_all_options(**kwargs)
 
         if geo_cities_coords:
-            _geo_cities_coords = copy.deepcopy(geo_cities_coords)
-        else:
-            _geo_cities_coords = copy.deepcopy(CITY_GEO_COORDS)
+            for name, coord in geo_cities_coords.items():
+                self.add_coordinate(name, coord[0], coord[1])
 
         _data = []
         for _name, _value in zip(attr, value):
-            if _name in _geo_cities_coords:
-                city_coordinate = _geo_cities_coords.get(_name)
-                city_coordinate.append(_value)
-                _data.append({"name": _name, "value": city_coordinate})
-            else:
-                print("%s coordinates is not found" % _name)
+            _coordinate = self.get_coordinate(_name, raise_exception=True)
+            _data_value = [_coordinate[0], _coordinate[1], _value]
+            _data.append({"name": _name, "value": _data_value})
         self._option.update(
             geo={
                 "map": maptype,

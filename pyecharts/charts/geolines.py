@@ -2,7 +2,8 @@
 
 from pyecharts.chart import Chart
 from pyecharts.option import get_all_options
-from pyecharts.constants import (CITY_GEO_COORDS, SYMBOL)
+from pyecharts.datasets.coordinates import get_coordinate
+from pyecharts.constants import SYMBOL
 
 
 class GeoLines(Chart):
@@ -11,9 +12,35 @@ class GeoLines(Chart):
 
     用于带有起点和终点信息的线数据的绘制，主要用于地图上的航线，路线的可视化。
     """
+
     def __init__(self, title="", subtitle="", **kwargs):
         super(GeoLines, self).__init__(title, subtitle, **kwargs)
         self._zlevel = 1
+        self._coordinates = {}
+
+    def add_coordinate(self, name, longitude, latitude):
+        """
+        Add a geo coordinate for a position.
+        :param name: The name of a position
+        :param longitude: The longitude of coordinate.
+        :param latitude: The latitude of coordinate.
+        :return:
+        """
+        self._coordinates.update({name: [longitude, latitude]})
+
+    def get_coordinate(self, name, raise_exception=False):
+        """
+        Return coordinate for the city name.
+        :param name: City name or any custom name string.
+        :param raise_exception: Whether to raise exception if not exist.
+        :return: A list like [longitude, latitude] or None
+        """
+        if name in self._coordinates:
+            return self._coordinates[name]
+        coordinate = get_coordinate(name)
+        if coordinate is None and raise_exception:
+            raise ValueError('No coordinate is specified for {}'.format(name))
+        return coordinate
 
     def add(self, *args, **kwargs):
         self.__add(*args, **kwargs)
@@ -86,9 +113,8 @@ class GeoLines(Chart):
         chart = get_all_options(**kwargs)
         self._zlevel += 1
         if geo_cities_coords:
-            _geo_cities_coords = geo_cities_coords
-        else:
-            _geo_cities_coords = CITY_GEO_COORDS
+            for name, coord in geo_cities_coords.items():
+                self.add_coordinate(name, coord[0], coord[1])
 
         if geo_effect_symbol == "plane":
             geo_effect_symbol = SYMBOL['plane']
@@ -96,23 +122,25 @@ class GeoLines(Chart):
         _data_lines, _data_scatter = [], []
         for d in data:
             _from_name, _to_name = d
+            _from_coordinate = self.get_coordinate(_from_name,
+                                                   raise_exception=True)
+            _to_coordinate = self.get_coordinate(_to_name,
+                                                 raise_exception=True)
             _data_lines.append({
                 "fromName": _from_name,
                 "toName": _to_name,
                 "coords": [
-                    _geo_cities_coords.get(_from_name, []),
-                    _geo_cities_coords.get(_to_name, [])
+                    _from_coordinate,
+                    _to_coordinate
                 ]
             })
-            _from_v = _geo_cities_coords.get(_from_name, [])
             _data_scatter.append({
                 "name": _from_name,
-                "value": _from_v + [0]
+                "value": [_from_coordinate[0], _from_coordinate[1], 0]
             })
-            _to_v = _geo_cities_coords.get(_to_name, [])
             _data_scatter.append({
                 "name": _to_name,
-                "value": _to_v + [0]
+                "value": [_to_coordinate[0], _to_coordinate[1], 0]
             })
 
         self._option.update(
