@@ -5,7 +5,7 @@ from __future__ import unicode_literals
 from nose.tools import assert_raises
 
 from pyecharts import GeoLines, Style
-from pyecharts.datasets.coordinates import search_coordinates
+from pyecharts.datasets.coordinates import search_coordinates_by_keyword
 
 style = Style(
     title_top="#fff",
@@ -68,7 +68,7 @@ def test_with_full_example():
     with assert_raises(ValueError):
         lines.add("从广州出发", line_data, **style_geo)
 
-    assert 0 == len(search_coordinates(keyword='A市'))
+    assert 0 == len(search_coordinates_by_keyword('A市'))
 
     lines.add_coordinate('A市', 119.3, 26.08)
     lines.add("从广州出发", line_data, **style_geo)
