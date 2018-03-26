@@ -23,7 +23,6 @@ pip install echarts-china-counties-pypkg
 
 除此之外，[英国2016选区图](https://echarts-maps.github.io/echarts-united-kingdom-js/): [echarts-united-kingdom-pypkg](https://github.com/pyecharts/echarts-united-kingdom-pypkg) (1MB): 英国选区图可以用来画与政治经济相关的数据。
 
-
 ## 如何制作自己的地图扩展
 
 你需要做两个 github 项目：一个是 npm 项目，提供所有的 javascript 脚本；另一个是 python 项目，把前一个项目变成可以用 pip 装的 python 包。
