@@ -9,17 +9,19 @@
 1. [全球国家地图](https://echarts-maps.github.io/echarts-countries-js/): [echarts-countries-pypkg](https://github.com/pyecharts/echarts-countries-pypkg) (1.9MB): 世界地图和 213 个国家，包括中国地图
 2. [中国省级地图](https://echarts-maps.github.io/echarts-china-provinces-js/): [echarts-china-provinces-pypkg](https://github.com/pyecharts/echarts-china-provinces-pypkg) (730KB)：23 个省，5 个自治区
 3. [中国市级地图](https://echarts-maps.github.io/echarts-china-cities-js/): [echarts-china-cities-pypkg](https://github.com/pyecharts/echarts-china-cities-pypkg) (3.8MB)：370 个中国城市
+4. [中国县区级地图](https://echarts-maps.github.io/echarts-china-cities-js/): [echarts-china-cities-pypkg](https://github.com/pyecharts/echarts-china-cities-pypkg) (4.1MB)：2882 个中国县·区
+5. [中国区域地图](https://echarts-maps.github.io/echarts-china-cities-js/): [echarts-china-cities-pypkg](https://github.com/pyecharts/echarts-china-cities-pypkg) (148KB)：11 个中国区域地图，比如华南、华北。
 
-需要这些地图的朋友，可以装 pip 命令行:
+特别注明，中国地图在 echarts-countries-pypkg 里。需要这些地图的朋友，可以装 pip 命令行:
 
 ```
 pip install echarts-countries-pypkg
 pip install echarts-china-provinces-pypkg
 pip install echarts-china-cities-pypkg
+pip install echarts-china-counties-pypkg
 ```
 
-特别注明，中国地图在 echarts-countries-pypkg 里。
-
+除此之外，[英国2016选区图](https://echarts-maps.github.io/echarts-united-kingdom-js/): [echarts-united-kingdom-pypkg](https://github.com/pyecharts/echarts-united-kingdom-pypkg) (1MB): 英国选区图可以用来画与政治经济相关的数据。
 
 ## 如何制作自己的地图扩展
 
