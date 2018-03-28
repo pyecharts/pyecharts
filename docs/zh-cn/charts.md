@@ -139,6 +139,20 @@
     * 'log'：对数轴。适用于对数数据。
 * xaxis_rotate -> int  
     x 轴刻度标签旋转的角度，在类目轴的类目标签显示不下的时候可以通过旋转防止标签之间重叠。默认为 0，即不旋转。旋转的角度从 -90 度到 90 度。
+* xaxis_formatter -> str | function  
+    x 轴标签格式器，如 '天'，则 x 轴的标签为数据加'天'(3 天，4 天),默认为 ""
+
+```
+from pyecharts_javascripthon import Date
+
+def xaxis_formatter(value, index):
+    date = Date(value)
+    texts = [(date.getMonth() + 1), date.getDate()];
+    if index == 0:
+        texts.unshift(date.getYear())
+    return '/'.join(texts)
+```
+
 * y_axis -> list  
     y 坐标轴数据
 * yaxis_interval -> int  

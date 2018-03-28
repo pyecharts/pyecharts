@@ -5,6 +5,7 @@ from nose.tools import assert_raises
 from pyecharts import Bar
 from pyecharts.constants import PY35_ABOVE
 import pyecharts.exceptions as exceptions
+import pyecharts.javascript as javascript
 
 from test.utils import get_default_rendering_file_content
 
@@ -29,6 +30,7 @@ def test_label_formatter():
     else:
         with assert_raises(exceptions.JavascriptNotSupported):
             bar.render()
+        javascript.clear()
 
 
 def yaxis_formatter(value, index):
@@ -51,7 +53,7 @@ def test_yaxis_formatter():
     else:
         with assert_raises(exceptions.JavascriptNotSupported):
             bar.render()
-
+        javascript.clear()
 
 def xaxis_formatter(value, index):
     return value + index
@@ -73,6 +75,7 @@ def test_xaxis_formatter():
     else:
         with assert_raises(exceptions.JavascriptNotSupported):
             bar.render()
+        javascript.clear()
 
 
 def tooltip_formatter(params):
@@ -95,3 +98,4 @@ def test_tooltip_formatter():
     else:
         with assert_raises(exceptions.JavascriptNotSupported):
             bar.render()
+        javascript.clear()
