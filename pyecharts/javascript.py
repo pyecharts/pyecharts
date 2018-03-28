@@ -1,7 +1,3 @@
-import sys
-
-
-PY35_ABOVE = sys.version_info[0] == 3 and sys.version_info[1] > 4
 CUSTOM_FUNCTIONS = {}
 ERROR_MESSAGE = "You need python 3.5+ and pyecharts-javascripthon"
 # to escape javascript function in
@@ -16,9 +12,6 @@ def clear():
 
 
 def add_a_new_function(afunc):
-    if not PY35_ABOVE:
-        raise Exception(ERROR_MESSAGE)
-
     CUSTOM_FUNCTIONS[afunc.__name__] = afunc
     return FUNCTION_SIGNATURE % afunc.__name__
 

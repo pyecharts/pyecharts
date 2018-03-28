@@ -10,6 +10,10 @@ import pyecharts.conf as conf
 import pyecharts.utils as utils
 import pyecharts.constants as constants
 import pyecharts.javascript as javascript
+import sys
+
+
+PY35_ABOVE = sys.version_info[0] == 3 and sys.version_info[1] > 4
 
 LINK_SCRIPT_FORMATTER = '<script type="text/javascript" src="{}"></script>'
 EMBED_SCRIPT_FORMATTER = '<script type="text/javascript">\n{}\n</script>'
@@ -84,12 +88,17 @@ def generate_js_content(*charts):
     """
     contents = []
     for chart in charts:
-        js_content = CHART_CONFIG_FORMATTER.format(
+        kwargs = dict(
             chart_id=chart.chart_id,
             renderer=chart.renderer,
-            custom_function=javascript.compile(),
             options=utils.json_dumps(chart.options, indent=4)
         )
+        if PY35_ABOVE:
+            kwargs['custom_function'] = javascript.compile()
+        else:
+            kwargs['custom_function'] = ''
+        js_content = CHART_CONFIG_FORMATTER.format(**kwargs)
+
         contents.append(js_content)
     contents = '\n'.join(contents)
     return contents

@@ -245,6 +245,7 @@ def xy_axis(type=None,
             xaxis_pos=None,
             xaxis_label_textsize=12,
             xaxis_label_textcolor="#000",
+            xaxis_formatter=None,
             yaxis_margin=8,
             yaxis_name_size=14,
             yaxis_name_gap=25,
@@ -383,6 +384,14 @@ def xy_axis(type=None,
         是否显示 y 轴网格线，默认为 True。
     :param kwargs:
     """
+    if isinstance(xaxis_formatter, types.FunctionType):
+        xaxis_formatter = javascript.add_a_new_function(xaxis_formatter)
+
+    if isinstance(yaxis_formatter, types.FunctionType):
+        yaxis_formatter = javascript.add_a_new_function(yaxis_formatter)
+    else:
+        yaxis_formatter = "{value} " + yaxis_formatter
+
     _xAxis = {
         "name": xaxis_name,
         "show": is_xaxis_show,
@@ -391,6 +400,7 @@ def xy_axis(type=None,
         "nameTextStyle": {"fontSize": xaxis_name_size},
         "axisLabel": {
             "interval": xaxis_interval,
+            "formatter": xaxis_formatter,
             "rotate": xaxis_rotate,
             "margin": xaxis_margin,
             "textStyle": {
@@ -414,7 +424,7 @@ def xy_axis(type=None,
         "nameGap": yaxis_name_gap,
         "nameTextStyle": {"fontSize": yaxis_name_size},
         "axisLabel": {
-            "formatter": "{value} " + yaxis_formatter,
+            "formatter": yaxis_formatter,
             "rotate": yaxis_rotate,
             "interval": yaxis_interval,
             "margin": yaxis_margin,
@@ -1138,17 +1148,20 @@ def tooltip(type=None,
     :param tooltip_border_width:
         提示框浮层的边框宽。默认为 0
     """
+    _tmp_formatter = tooltip_formatter
     if tooltip_formatter is None:
         if type == "gauge":
-            tooltip_formatter = "{a} <br/>{b} : {c}%"
+            _tmp_formatter = "{a} <br/>{b} : {c}%"
         elif type == "geo":
-            tooltip_formatter = "{b}: {c}"
+            _tmp_formatter = "{b}: {c}"
+    elif isinstance(tooltip_formatter, types.FunctionType):
+        _tmp_formatter = javascript.add_a_new_function(tooltip_formatter)
 
     _tooltip = {
         "trigger": tooltip_tragger,
         "triggerOn": tooltip_tragger_on,
         "axisPointer": {"type": tooltip_axispointer_type},
-        "formatter": tooltip_formatter,
+        "formatter": _tmp_formatter,
         "textStyle": {
             "color": tooltip_text_color,
             "fontSize": tooltip_font_size

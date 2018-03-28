@@ -1,6 +1,7 @@
 # coding=utf-8
 from __future__ import unicode_literals
 
+
 CANVAS_RENDERER = "canvas"
 SVG_RENDERER = "svg"
 PAGE_TITLE = "Echarts"
