@@ -9,8 +9,8 @@ import pyecharts.exceptions as exceptions
 from test.utils import get_default_rendering_file_content
 
 
-def label_formatter(obj):
-    return obj.name + 'abc'
+def label_formatter(params):
+    return params.name + 'abc'
 
 
 def test_label_formatter():
@@ -22,8 +22,8 @@ def test_label_formatter():
     if PY35_ABOVE:
         bar.render()
         content = get_default_rendering_file_content()
-        assert 'function label_formatter(obj)' in content
-        assert 'obj.name + \"abc\"' in content
+        assert 'function label_formatter(params)' in content
+        assert 'params.name + \"abc\"' in content
         assert '"formatter": label_formatter' in content
         os.unlink('render.html')
     else:
@@ -31,8 +31,8 @@ def test_label_formatter():
             bar.render()
 
 
-def yaxis_formatter(obj):
-    return obj.name + 'abc'
+def yaxis_formatter(value, index):
+    return value + index
 
 
 def test_yaxis_formatter():
@@ -44,8 +44,8 @@ def test_yaxis_formatter():
     if PY35_ABOVE:
         bar.render()
         content = get_default_rendering_file_content()
-        assert 'function yaxis_formatter(obj)' in content
-        assert 'obj.name + \"abc\"' in content
+        assert 'function yaxis_formatter(value, index)' in content
+        assert 'value + index' in content
         assert '"formatter": yaxis_formatter' in content
         os.unlink('render.html')
     else:
@@ -53,8 +53,8 @@ def test_yaxis_formatter():
             bar.render()
 
 
-def xaxis_formatter(obj):
-    return obj.name + 'abc'
+def xaxis_formatter(value, index):
+    return value + index
 
 
 def test_xaxis_formatter():
@@ -66,8 +66,8 @@ def test_xaxis_formatter():
     if PY35_ABOVE:
         bar.render()
         content = get_default_rendering_file_content()
-        assert 'function xaxis_formatter(obj)' in content
-        assert 'obj.name + \"abc\"' in content
+        assert 'function xaxis_formatter(value, index)' in content
+        assert 'value + index' in content
         assert '"formatter": xaxis_formatter' in content
         os.unlink('render.html')
     else:
@@ -75,8 +75,8 @@ def test_xaxis_formatter():
             bar.render()
 
 
-def tooltip_formatter(obj):
-    return obj.name + 'abc'
+def tooltip_formatter(params):
+    return params.name + 'abc'
 
 
 def test_tooltip_formatter():
@@ -88,8 +88,8 @@ def test_tooltip_formatter():
     if PY35_ABOVE:
         bar.render()
         content = get_default_rendering_file_content()
-        assert 'function tooltip_formatter(obj)' in content
-        assert 'obj.name + \"abc\"' in content
+        assert 'function tooltip_formatter(params)' in content
+        assert 'params.name + \"abc\"' in content
         assert '"formatter": tooltip_formatter' in content
         os.unlink('render.html')
     else:
