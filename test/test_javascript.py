@@ -1,4 +1,5 @@
 import os
+import sys
 
 from nose.tools import assert_raises
 
@@ -8,6 +9,9 @@ import pyecharts.exceptions as exceptions
 import pyecharts.javascript as javascript
 
 from test.utils import get_default_rendering_file_content
+
+
+WINDOWS = sys.platform == 'win32'
 
 
 def label_formatter(params):
@@ -27,6 +31,10 @@ def test_label_formatter():
         assert 'params.name + \"abc\"' in content
         assert '"formatter": label_formatter' in content
         os.unlink('render.html')
+    elif WINDOWS:
+        with assert_raises(exceptions.ExtensionMissing):
+            bar.render()
+        javascript.clear()
     else:
         with assert_raises(exceptions.JavascriptNotSupported):
             bar.render()
@@ -50,6 +58,10 @@ def test_yaxis_formatter():
         assert 'value + index' in content
         assert '"formatter": yaxis_formatter' in content
         os.unlink('render.html')
+    elif WINDOWS:
+        with assert_raises(exceptions.ExtensionMissing):
+            bar.render()
+        javascript.clear()
     else:
         with assert_raises(exceptions.JavascriptNotSupported):
             bar.render()
@@ -73,6 +85,10 @@ def test_xaxis_formatter():
         assert 'value + index' in content
         assert '"formatter": xaxis_formatter' in content
         os.unlink('render.html')
+    elif WINDOWS:
+        with assert_raises(exceptions.ExtensionMissing):
+            bar.render()
+        javascript.clear()
     else:
         with assert_raises(exceptions.JavascriptNotSupported):
             bar.render()
@@ -96,6 +112,10 @@ def test_tooltip_formatter():
         assert 'params.name + \"abc\"' in content
         assert '"formatter": tooltip_formatter' in content
         os.unlink('render.html')
+    elif WINDOWS:
+        with assert_raises(exceptions.ExtensionMissing):
+            bar.render()
+        javascript.clear()
     else:
         with assert_raises(exceptions.JavascriptNotSupported):
             bar.render()
