@@ -13,8 +13,8 @@ install:
   - cd test
   - "%PYTHON%\\python.exe -m pip install -r requirements.txt"
   - "%PYTHON%\\python.exe -m pip install mock"
-  - if [%PYTHON_VERSION%]==[3.5] "%PYTHON%\\python.exe -m pip install https://github.com/pyecharts/pyecharts-javascripthon/archive/master.zip"
-  - if [%PYTHON_VERSION%]==[3.6] "%PYTHON%\\python.exe -m pip install https://github.com/pyecharts/pyecharts-javascripthon/archive/master.zip"
+  - if "%PYTHON_VERSION%" == "3.5" "%PYTHON%\\python.exe -m pip install https://github.com/pyecharts/pyecharts-javascripthon/archive/master.zip"
+  - if "%PYTHON_VERSION%" == "3.6" "%PYTHON%\\python.exe -m pip install https://github.com/pyecharts/pyecharts-javascripthon/archive/master.zip"
 build: off
 
 test_script:
