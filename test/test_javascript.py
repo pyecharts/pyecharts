@@ -55,6 +55,7 @@ def test_yaxis_formatter():
             bar.render()
         javascript.clear()
 
+
 def xaxis_formatter(value, index):
     return value + index
 
