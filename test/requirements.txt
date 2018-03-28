@@ -9,3 +9,4 @@ mock;python_version<"3"
 echarts-countries-pypkg
 echarts-china-cities-pypkg
 echarts-china-provinces-pypkg
+https://github.com/pyecharts/pyecharts-javascripthon/archive/master.zip;python_version>="3.5"

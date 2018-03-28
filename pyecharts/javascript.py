@@ -1,5 +1,8 @@
+import pyecharts.constants as constants
+import pyecharts.exceptions as exceptions
+
+
 CUSTOM_FUNCTIONS = {}
-ERROR_MESSAGE = "You need python 3.5+ and pyecharts-javascripthon"
 # to escape javascript function in
 # json dump
 FUNCTION_LEFT_ESCAPE = '"-=>'
@@ -23,7 +26,7 @@ def unescape_js_function(options_json):
     return json_with_function_names
 
 
-def isEmpty():
+def is_empty():
     return len(CUSTOM_FUNCTIONS) == 0
 
 
@@ -31,7 +34,7 @@ def compile():
     try:
         from pyecharts_javascripthon import Python2Javascript
     except ImportError:
-        raise Exception(ERROR_MESSAGE)
+        raise exceptions.ExtensionMissing(constants.ERROR_MESSAGE)
 
     content = []
     for func in CUSTOM_FUNCTIONS:
