@@ -6,6 +6,8 @@ import datetime
 import os
 import json
 
+import pyecharts.javascript as javascript
+
 
 def get_resource_dir(*paths):
     """
@@ -54,7 +56,9 @@ def json_dumps(data, indent=0):
     :param data: 字典数据
     :param indent: 缩进量
     """
-    return json.dumps(data, indent=indent, cls=UnknownTypeEncoder)
+    pure_json = json.dumps(data, indent=indent, cls=UnknownTypeEncoder)
+    json_with_function_names = javascript.unescape_js_function(pure_json)
+    return json_with_function_names
 
 
 def to_css_length(x):

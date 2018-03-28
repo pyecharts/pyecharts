@@ -2,6 +2,9 @@
 from __future__ import unicode_literals
 
 import random
+import types
+
+import pyecharts.javascript as javascript
 
 fs = []
 SYMBOLS = ('rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow')
@@ -81,11 +84,14 @@ def label(type=None,
             }}
     }
 
+    _tmp_formatter = label_formatter
     if label_formatter is None:
         if type == "pie":
-            label_formatter = "{b}: {d}%"
+            _tmp_formatter = "{b}: {d}%"
+    elif isinstance(label_formatter, types.FunctionType):
+        _tmp_formatter = javascript.add_a_new_function(label_formatter)
     if type != "graph":
-        _label.get("normal").update(formatter=label_formatter)
+        _label.get("normal").update(formatter=_tmp_formatter)
     return _label
 
 
