@@ -25,20 +25,20 @@ def test_label_formatter():
     bar.add("precipitation", attr, v1, mark_line=["average"],
             mark_point=["max", "min"], label_formatter=label_formatter)
     if PY35_ABOVE:
-        bar.render()
-        content = get_default_rendering_file_content()
-        assert 'function label_formatter(params)' in content
-        assert 'params.name + \"abc\"' in content
-        assert '"formatter": label_formatter' in content
-        os.unlink('render.html')
-    elif WINDOWS:
-        with assert_raises(exceptions.ExtensionMissing):
+        if WINDOWS:
+            with assert_raises(exceptions.ExtensionMissing):
+                bar.render()
+        else:
             bar.render()
-        javascript.clear()
+            content = get_default_rendering_file_content()
+            assert 'function label_formatter(params)' in content
+            assert 'params.name + \"abc\"' in content
+            assert '"formatter": label_formatter' in content
+            os.unlink('render.html')
     else:
         with assert_raises(exceptions.JavascriptNotSupported):
             bar.render()
-        javascript.clear()
+    javascript.clear()
 
 
 def yaxis_formatter(value, index):
@@ -52,20 +52,20 @@ def test_yaxis_formatter():
     bar.add("precipitation", attr, v1, mark_line=["average"],
             mark_point=["max", "min"], yaxis_formatter=yaxis_formatter)
     if PY35_ABOVE:
-        bar.render()
-        content = get_default_rendering_file_content()
-        assert 'function yaxis_formatter(value, index)' in content
-        assert 'value + index' in content
-        assert '"formatter": yaxis_formatter' in content
-        os.unlink('render.html')
-    elif WINDOWS:
-        with assert_raises(exceptions.ExtensionMissing):
+        if WINDOWS:
+            with assert_raises(exceptions.ExtensionMissing):
+                bar.render()
+        else:
             bar.render()
-        javascript.clear()
+            content = get_default_rendering_file_content()
+            assert 'function yaxis_formatter(value, index)' in content
+            assert 'value + index' in content
+            assert '"formatter": yaxis_formatter' in content
+            os.unlink('render.html')
     else:
         with assert_raises(exceptions.JavascriptNotSupported):
             bar.render()
-        javascript.clear()
+    javascript.clear()
 
 
 def xaxis_formatter(value, index):
@@ -79,20 +79,23 @@ def test_xaxis_formatter():
     bar.add("precipitation", attr, v1, mark_line=["average"],
             mark_point=["max", "min"], xaxis_formatter=xaxis_formatter)
     if PY35_ABOVE:
-        bar.render()
-        content = get_default_rendering_file_content()
-        assert 'function xaxis_formatter(value, index)' in content
-        assert 'value + index' in content
-        assert '"formatter": xaxis_formatter' in content
-        os.unlink('render.html')
+        if WINDOWS:
+            with assert_raises(exceptions.ExtensionMissing):
+                bar.render()
+        else:
+            bar.render()
+            content = get_default_rendering_file_content()
+            assert 'function xaxis_formatter(value, index)' in content
+            assert 'value + index' in content
+            assert '"formatter": xaxis_formatter' in content
+            os.unlink('render.html')
     elif WINDOWS:
         with assert_raises(exceptions.ExtensionMissing):
             bar.render()
-        javascript.clear()
     else:
         with assert_raises(exceptions.JavascriptNotSupported):
             bar.render()
-        javascript.clear()
+    javascript.clear()
 
 
 def tooltip_formatter(params):
@@ -106,17 +109,20 @@ def test_tooltip_formatter():
     bar.add("precipitation", attr, v1, mark_line=["average"],
             mark_point=["max", "min"], tooltip_formatter=tooltip_formatter)
     if PY35_ABOVE:
-        bar.render()
-        content = get_default_rendering_file_content()
-        assert 'function tooltip_formatter(params)' in content
-        assert 'params.name + \"abc\"' in content
-        assert '"formatter": tooltip_formatter' in content
-        os.unlink('render.html')
+        if WINDOWS:
+            with assert_raises(exceptions.ExtensionMissing):
+                bar.render()
+        else:
+            bar.render()
+            content = get_default_rendering_file_content()
+            assert 'function tooltip_formatter(params)' in content
+            assert 'params.name + \"abc\"' in content
+            assert '"formatter": tooltip_formatter' in content
+            os.unlink('render.html')
     elif WINDOWS:
         with assert_raises(exceptions.ExtensionMissing):
             bar.render()
-        javascript.clear()
     else:
         with assert_raises(exceptions.JavascriptNotSupported):
             bar.render()
-        javascript.clear()
+    javascript.clear()
