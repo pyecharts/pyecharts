@@ -2225,6 +2225,27 @@ add(name, data,
     是否显示极坐标系的角度轴，默认为 True
 * is_radiusaxis_show -> bool  
     是否显示极坐标系的径向轴，默认为 True
+* param render_item -> function
+    开发者自己提供图形渲染的逻辑, 这个渲染逻辑一般命名为 render_item
+
+```python
+def render_item(params, api):
+    values = [api.value(0), api.value(1)]
+    coord = api.coord(values)
+    size = api.size([1, 1], values)
+    return {
+        "type": 'sector',
+        "shape": {
+            "cx": params.coordSys.cx,
+            "cy": params.coordSys.cy,
+            "r0": coord[2] - size[0] / 2,
+            "r": coord[2] + size[0] / 2,
+            "startAngle": coord[3] - size[1] / 2,
+            "endAngle": coord[3] + size[1] / 2,
+        },
+        "style": api.style({"fill": api.visual('color')}),
+    }
+```
 
 ```python
 from pyecharts import Polar

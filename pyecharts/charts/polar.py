@@ -65,6 +65,8 @@ class Polar(Chart):
             是否显示极坐标系的角度轴，默认为 True。
         :param is_radiusaxis_show:
             是否显示极坐标系的径向轴，默认为 True。
+        :param render_item:
+            开发者自己提供图形渲染的逻辑
         :param kwargs:
         """
         chart = get_all_options(**kwargs)
