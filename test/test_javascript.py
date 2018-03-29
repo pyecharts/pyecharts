@@ -1,7 +1,10 @@
 import os
 import sys
+import json
+from datetime import date
+import numpy as np
 
-from nose.tools import assert_raises
+from nose.tools import assert_raises, eq_
 
 from pyecharts import Bar
 from pyecharts.constants import PY35_ABOVE
@@ -23,20 +26,18 @@ def generic_formatter_t_est(**keywords):
     v1 = [2.0, 4.9]
     bar = Bar("Bar chart", "precipitation and evaporation one year")
     if PY35_ABOVE:
+        bar.add("precipitation", attr, v1, mark_line=["average"],
+                mark_point=["max", "min"],
+                **keywords)
         if WINDOWS:
             with assert_raises(exceptions.ExtensionMissing):
-                bar.add("precipitation", attr, v1, mark_line=["average"],
-                        mark_point=["max", "min"],
-                        **keywords)
+                bar.render()
         else:
-            bar.add("precipitation", attr, v1, mark_line=["average"],
-                    mark_point=["max", "min"], **keywords)
             bar.render()
     else:
         with assert_raises(exceptions.JavascriptNotSupported):
             bar.add("precipitation", attr, v1, mark_line=["average"],
                     mark_point=["max", "min"], **keywords)
-
     javascript.clear()
 
 
@@ -90,3 +91,17 @@ def test_tooltip_formatter():
         assert 'params.name + \"abc\"' in content
         assert '"formatter": tooltip_formatter' in content
         os.unlink('render.html')
+
+
+def test_json_encoder():
+    """
+    Test json encoder.
+    :return:
+    """
+    data = date(2017, 1, 1)
+    eq_(json.dumps({'date': '2017-01-01', 'a': '1'}, indent=0),
+        javascript.translate_options({'date': data, 'a': '1'}))
+
+    data2 = {'np_list': np.array(['a', 'b', 'c'])}
+    data2_e = {'np_list': ['a', 'b', 'c']}
+    eq_(json.dumps(data2_e, indent=0), javascript.translate_options(data2))

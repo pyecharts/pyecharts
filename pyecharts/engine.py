@@ -90,10 +90,10 @@ def generate_js_content(*charts):
             chart_id=chart.chart_id,
             renderer=chart.renderer,
             custom_function='',
-            options=utils.json_dumps(chart.options, indent=4)
+            options=javascript.translate_options(chart.options, indent=4)
         )
         if javascript.has_functions():
-            kwargs['custom_function'] = javascript.compile()
+            kwargs['custom_function'] = javascript.translate_python_functions()
         js_content = CHART_CONFIG_FORMATTER.format(**kwargs)
 
         contents.append(js_content)
