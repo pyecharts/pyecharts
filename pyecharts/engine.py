@@ -91,11 +91,11 @@ def generate_js_content(*charts):
             renderer=chart.renderer,
             options=utils.json_dumps(chart.options, indent=4)
         )
-        if constants.PY35_ABOVE:
-            kwargs['custom_function'] = javascript.compile()
+        if javascript.is_empty():
+            kwargs['custom_function'] = ''
         else:
-            if javascript.is_empty():
-                kwargs['custom_function'] = ''
+            if constants.PY35_ABOVE:
+                kwargs['custom_function'] = javascript.compile()
             else:
                 raise exceptions.JavascriptNotSupported(constants.ERROR_MESSAGE)
         js_content = CHART_CONFIG_FORMATTER.format(**kwargs)
