@@ -56,9 +56,10 @@ def json_dumps(data, indent=0):
     :param data: 字典数据
     :param indent: 缩进量
     """
-    pure_json = json.dumps(data, indent=indent, cls=UnknownTypeEncoder)
-    json_with_function_names = javascript.unescape_js_function(pure_json)
-    return json_with_function_names
+    options_in_json = json.dumps(data, indent=indent, cls=UnknownTypeEncoder)
+    if javascript.has_functions():
+        options_in_json = javascript.unescape_js_function(options_in_json)
+    return options_in_json
 
 
 def to_css_length(x):

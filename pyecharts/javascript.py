@@ -26,8 +26,8 @@ def unescape_js_function(options_json):
     return json_with_function_names
 
 
-def is_empty():
-    return len(CUSTOM_FUNCTIONS) == 0
+def has_functions():
+    return len(CUSTOM_FUNCTIONS) > 0
 
 
 def compile():

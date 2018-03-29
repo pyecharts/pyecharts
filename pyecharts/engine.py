@@ -89,11 +89,10 @@ def generate_js_content(*charts):
         kwargs = dict(
             chart_id=chart.chart_id,
             renderer=chart.renderer,
+            custom_function='',
             options=utils.json_dumps(chart.options, indent=4)
         )
-        if javascript.is_empty():
-            kwargs['custom_function'] = ''
-        else:
+        if javascript.has_functions():
             if constants.PY35_ABOVE:
                 kwargs['custom_function'] = javascript.compile()
             else:
