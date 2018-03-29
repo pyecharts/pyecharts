@@ -6,7 +6,7 @@ import numpy as np
 
 from nose.tools import assert_raises, eq_
 
-from pyecharts import Bar
+from pyecharts import Bar, Polar
 from pyecharts.constants import PY35_ABOVE
 import pyecharts.exceptions as exceptions
 import pyecharts.javascript as javascript
@@ -91,6 +91,38 @@ def test_tooltip_formatter():
         assert 'params.name + \"abc\"' in content
         assert '"formatter": tooltip_formatter' in content
         os.unlink('render.html')
+
+
+def custom_polar_render_item(params, api):
+    return 'test'
+
+
+def test_polar_draw_snail():
+    data = []
+    polar = Polar("polar test")
+    if PY35_ABOVE:
+        polar.add("", data, symbol_size=0, symbol='circle',
+                  area_color="#f3c5b3", type='custom',
+                  render_item=custom_polar_render_item,
+                  area_opacity=0.5, is_angleaxis_show=False)
+        if WINDOWS:
+            with assert_raises(exceptions.ExtensionMissing):
+                polar.render()
+        else:
+            polar.render()
+            content = get_default_rendering_file_content()
+            assert 'function custom_polar_render_item(params, api)' in content
+            assert 'return "test"' in content
+            assert '"renderItem": custom_polar_render_item' in content
+            os.unlink('render.html')
+    else:
+        with assert_raises(exceptions.JavascriptNotSupported):
+            polar.add("", data, symbol_size=0, symbol='circle',
+                      start_angle=-25,
+                      area_color="#f3c5b3", type='custom',
+                      render_item=custom_polar_render_item,
+                      area_opacity=0.5, is_angleaxis_show=False)
+    javascript.clear()
 
 
 def test_json_encoder():

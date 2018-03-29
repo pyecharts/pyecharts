@@ -2,6 +2,7 @@
 
 from pyecharts.chart import Chart
 from pyecharts.option import get_all_options
+import pyecharts.javascript as javascript
 
 
 class Polar(Chart):
@@ -29,6 +30,7 @@ class Polar(Chart):
               axis_range=None,
               is_angleaxis_show=True,
               is_radiusaxis_show=True,
+              render_item=None,
               **kwargs):
         """
 
@@ -127,6 +129,27 @@ class Polar(Chart):
                 "name": name,
                 "coordinateSystem": 'polar',
                 "data": data,
+            })
+            self._option.update(radiusAxis={
+                "show": is_radiusaxis_show,
+            })
+            self._option.update(
+                angleAxis={
+                    "show": is_angleaxis_show,
+                    "type": polar_type,
+                    "data": radius_data,
+                    "z": 50,
+                    "startAngle": start_angle,
+                    "splitLine": chart['split_line']
+                })
+        elif type == "custom":
+            assert render_item is not None
+            self._option.get('series').append({
+                "type": "custom",
+                "name": name,
+                "coordinateSystem": 'polar',
+                "data": data,
+                "renderItem": javascript.add_a_new_function(render_item)
             })
             self._option.update(radiusAxis={
                 "show": is_radiusaxis_show,
