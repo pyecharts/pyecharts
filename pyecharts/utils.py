@@ -58,8 +58,11 @@ def json_dumps(data, indent=0):
     """
     options_in_json = json.dumps(data, indent=indent, cls=UnknownTypeEncoder)
     if javascript.has_functions():
-        options_in_json = javascript.unescape_js_function(options_in_json)
-    return options_in_json
+        options_with_js_functions = javascript.unescape_js_function(
+            options_in_json)
+        return options_with_js_functions
+    else:
+        return options_in_json
 
 
 def to_css_length(x):

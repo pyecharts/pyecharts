@@ -15,6 +15,8 @@ def clear():
 
 
 def add_a_new_function(afunc):
+    if not constants.PY35_ABOVE:
+        raise exceptions.JavascriptNotSupported(constants.ERROR_MESSAGE)
     CUSTOM_FUNCTIONS[afunc.__name__] = afunc
     return FUNCTION_SIGNATURE % afunc.__name__
 
