@@ -89,9 +89,6 @@ def test_xaxis_formatter():
             assert 'value + index' in content
             assert '"formatter": xaxis_formatter' in content
             os.unlink('render.html')
-    elif WINDOWS:
-        with assert_raises(exceptions.ExtensionMissing):
-            bar.render()
     else:
         with assert_raises(exceptions.JavascriptNotSupported):
             bar.render()
@@ -119,9 +116,6 @@ def test_tooltip_formatter():
             assert 'params.name + \"abc\"' in content
             assert '"formatter": tooltip_formatter' in content
             os.unlink('render.html')
-    elif WINDOWS:
-        with assert_raises(exceptions.ExtensionMissing):
-            bar.render()
     else:
         with assert_raises(exceptions.JavascriptNotSupported):
             bar.render()
