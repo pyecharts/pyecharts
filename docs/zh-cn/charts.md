@@ -2223,6 +2223,10 @@ add(name, data,
     坐标轴刻度范围。默认值为 [None, None]。
 * is_angleaxis_show -> bool  
     是否显示极坐标系的角度轴，默认为 True
+* radiusaxis_z_index -> int
+    radius 轴的 z 指数，默认为 50
+* angleaxis_z_index -> int
+    angel 轴的 z 指数，默认为 50
 * is_radiusaxis_show -> bool  
     是否显示极坐标系的径向轴，默认为 True
 * param render_item -> function
