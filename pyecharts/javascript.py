@@ -11,7 +11,7 @@ CUSTOM_FUNCTIONS = {}
 # json dump
 FUNCTION_LEFT_ESCAPE = '"-=>'
 FUNCTION_RIGHT_ESCAPE = '<=-"'
-FUNCTION_SIGNATURE = '-=>%s<=-'
+FUNCTION_SIGNATURE = '-=>{0}<=-'
 
 
 def clear():
@@ -23,7 +23,7 @@ def add_a_new_function(afunc):
         raise exceptions.JavascriptNotSupported(constants.ERROR_MESSAGE)
 
     CUSTOM_FUNCTIONS[afunc.__name__] = afunc
-    return FUNCTION_SIGNATURE % afunc.__name__
+    return FUNCTION_SIGNATURE.format(afunc.__name__)
 
 
 def unescape_js_function(options_json):
