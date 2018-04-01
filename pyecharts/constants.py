@@ -1,6 +1,9 @@
 # coding=utf-8
 from __future__ import unicode_literals
+import sys
 
+
+PY35_ABOVE = sys.version_info[0] == 3 and sys.version_info[1] > 4
 CANVAS_RENDERER = "canvas"
 SVG_RENDERER = "svg"
 PAGE_TITLE = "Echarts"
@@ -14,6 +17,8 @@ DEFAULT_HTML = 'html'
 JUPYTER_PRESENTATIONS = [SVG, PNG, JPEG, DEFAULT_HTML]
 ENVIRONMENT_PLUGIN_TYPE = 'pyecharts_environment'
 JS_EXTENSION_PLUGIN_TYPE = 'pyecharts_js_extension'
+
+ERROR_MESSAGE = "You need python 3.5+ and pyecharts-javascripthon"
 
 SYMBOL = {
     "plane": 'path://M1705.06,1318.313v-89.254l-319.9-221.799l0.073-208.'
