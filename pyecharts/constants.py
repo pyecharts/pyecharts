@@ -7,6 +7,13 @@ PY35_ABOVE = sys.version_info[0] == 3 and sys.version_info[1] > 4
 CANVAS_RENDERER = "canvas"
 SVG_RENDERER = "svg"
 PAGE_TITLE = "Echarts"
+JSON_INDENTATION = 4
+
+# to escape javascript function in
+# json dump
+FUNCTION_LEFT_ESCAPE = '"-=>'
+FUNCTION_RIGHT_ESCAPE = '<=-"'
+FUNCTION_SIGNATURE = '-=>{0}<=-'
 
 # presentation types for jupyter
 # output file types for pure python

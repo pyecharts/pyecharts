@@ -1,16 +1,40 @@
 # coding=utf-8
 import os
+import json
 import uuid
 import warnings
+import datetime
 
 from jinja2 import Markup
 
 import pyecharts.utils as utils
 import pyecharts.engine as engine
 import pyecharts.constants as constants
-import pyecharts.javascript as javascript
 import pyecharts.exceptions as exceptions
 from pyecharts.conf import CURRENT_CONFIG
+from pyecharts.option import extract_all_options
+
+
+class UnknownTypeEncoder(json.JSONEncoder):
+    """
+    UnknownTypeEncoder`类用于处理数据的编码，使其能够被正常的序列化
+    """
+
+    def default(self, obj):
+        if isinstance(obj, (datetime.datetime, datetime.date)):
+            return obj.isoformat()
+
+        else:
+            # Pandas and Numpy lists
+            try:
+                return obj.astype(float).tolist()
+
+            except Exception:
+                try:
+                    return obj.astype(str).tolist()
+
+                except Exception:
+                    return json.JSONEncoder.default(self, obj)
 
 
 class Base(object):
@@ -44,6 +68,7 @@ class Base(object):
         self.renderer = renderer
         self._page_title = page_title
         self._js_dependencies = {'echarts'}
+        self.functions = {}
 
     @property
     def chart_id(self):
@@ -68,7 +93,7 @@ class Base(object):
     def print_echarts_options(self):
         """ 打印输出图形所有配置项
         """
-        print(javascript.translate_options(self._option, indent=4))
+        print(self.translate_options())
 
     def show_config(self):
         """ 打印输出图形所有配置项
@@ -153,6 +178,53 @@ class Base(object):
             'If you need more help, please read documentation'
         )
 
+    def translate_python_functions(self):
+        if not self.has_functions():
+            return ''
+
+        try:
+            from pyecharts_javascripthon import Python2Javascript
+        except ImportError:
+            raise exceptions.ExtensionMissing(constants.ERROR_MESSAGE)
+
+        content = []
+        for func in self.functions:
+            javascript_function = Python2Javascript.translate(
+                self.functions[func]
+            )
+            content.append(javascript_function)
+        return ''.join(content)
+
+    def translate_options(self):
+        """ json 序列化编码处理
+
+        :param data: 字典数据
+        :param indent: 缩进量
+        """
+        options_in_json = json.dumps(
+            self._option,
+            indent=constants.JSON_INDENTATION,
+            cls=UnknownTypeEncoder,
+        )
+        options_with_js_functions = unescape_js_function(options_in_json)
+        return options_with_js_functions
+
+    def _add_a_python_function(self, a_function):
+        if not constants.PY35_ABOVE:
+            raise exceptions.JavascriptNotSupported(constants.ERROR_MESSAGE)
+
+        self.functions[a_function.__name__] = a_function
+        return constants.FUNCTION_SIGNATURE.format(a_function.__name__)
+
+    def has_functions(self):
+        return len(self.functions) > 0
+
+    def __del__(self):
+        self.functions.clear()
+
+    def _get_all_options(self, **kwargs):
+        return extract_all_options(chart_instance=self, **kwargs)
+
     def _repr_html_(self):
         """ 渲染配置项并将图形显示在 notebook 中
         chart/page => charts
@@ -219,3 +291,11 @@ class Base(object):
     def _add_chinese_map(self, map_name_in_chinese):
         name_in_pinyin = CURRENT_CONFIG.chinese_to_pinyin(map_name_in_chinese)
         self._js_dependencies.add(name_in_pinyin)
+
+
+def unescape_js_function(options_json):
+    unescaped_json = options_json.replace(constants.FUNCTION_LEFT_ESCAPE, '')
+    json_with_function_names = unescaped_json.replace(
+        constants.FUNCTION_RIGHT_ESCAPE, ''
+    )
+    return json_with_function_names

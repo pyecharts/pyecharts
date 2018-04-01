@@ -10,7 +10,6 @@ import pyecharts.conf as conf
 import pyecharts.utils as utils
 import pyecharts.constants as constants
 import pyecharts.exceptions as exceptions
-import pyecharts.javascript as javascript
 
 
 LINK_SCRIPT_FORMATTER = '<script type="text/javascript" src="{}"></script>'
@@ -88,15 +87,12 @@ def generate_js_content(*charts):
     """
     contents = []
     for chart in charts:
-        kwargs = dict(
+        js_content = CHART_CONFIG_FORMATTER.format(
             chart_id=chart.chart_id,
             renderer=chart.renderer,
-            custom_function='',
-            options=javascript.translate_options(chart.options, indent=4),
+            custom_function=chart.translate_python_functions(),
+            options=chart.translate_options(),
         )
-        if javascript.has_functions():
-            kwargs['custom_function'] = javascript.translate_python_functions()
-        js_content = CHART_CONFIG_FORMATTER.format(**kwargs)
 
         contents.append(js_content)
     contents = '\n'.join(contents)

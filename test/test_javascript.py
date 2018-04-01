@@ -9,7 +9,6 @@ from nose.tools import assert_raises, eq_
 from pyecharts import Bar, Polar
 from pyecharts.constants import PY35_ABOVE
 import pyecharts.exceptions as exceptions
-import pyecharts.javascript as javascript
 
 from test.utils import get_default_rendering_file_content
 
@@ -49,7 +48,6 @@ def generic_formatter_t_est(**keywords):
                 mark_point=["max", "min"],
                 **keywords
             )
-    javascript.clear()
 
 
 def test_label_formatter():
@@ -147,7 +145,6 @@ def test_polar_draw_snail():
                 area_opacity=0.5,
                 is_angleaxis_show=False,
             )
-    javascript.clear()
 
 
 def test_json_encoder():
@@ -156,11 +153,13 @@ def test_json_encoder():
     :return:
     """
     data = date(2017, 1, 1)
+    bar = Bar()
+    bar._option = {'date': data, 'a': '1'}
     eq_(
-        json.dumps({'date': '2017-01-01', 'a': '1'}, indent=0),
-        javascript.translate_options({'date': data, 'a': '1'}),
+        json.dumps({'date': '2017-01-01', 'a': '1'}, indent=4),
+        bar.translate_options()
     )
 
-    data2 = {'np_list': np.array(['a', 'b', 'c'])}
+    bar._option = {'np_list': np.array(['a', 'b', 'c'])}
     data2_e = {'np_list': ['a', 'b', 'c']}
-    eq_(json.dumps(data2_e, indent=0), javascript.translate_options(data2))
+    eq_(json.dumps(data2_e, indent=4), bar.translate_options())
