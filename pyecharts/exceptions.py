@@ -8,3 +8,11 @@ class InvalidRegistry(Exception):
 
 class InvalidConfiguration(Exception):
     pass
+
+
+class JavascriptNotSupported(Exception):
+    pass
+
+
+class ExtensionMissing(Exception):
+    pass
