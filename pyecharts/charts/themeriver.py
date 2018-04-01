@@ -10,6 +10,7 @@ class ThemeRiver(Chart):
 
     主题河流图是一种特殊的流图, 它主要用来表示事件或主题等在一段时间内的变化。
     """
+
     def __init__(self, title="", subtitle="", **kwargs):
         super(ThemeRiver, self).__init__(title, subtitle, **kwargs)
 
@@ -30,13 +31,15 @@ class ThemeRiver(Chart):
         chart = get_all_options(**kwargs)
         self._option.get('legend')[0].get('data').extend(name)
 
-        self._option.get('series').append({
-            "type": "themeRiver",
-            "name": name,
-            "data": data,
-            "label": chart['label'],
-            "seriesId": self._option.get('series_id'),
-        })
+        self._option.get('series').append(
+            {
+                "type": "themeRiver",
+                "name": name,
+                "data": data,
+                "label": chart['label'],
+                "seriesId": self._option.get('series_id'),
+            }
+        )
 
         self._option.update(singleAxis={"type": "time"})
         self._config_components(**kwargs)

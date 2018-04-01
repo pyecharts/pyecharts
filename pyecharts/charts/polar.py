@@ -11,29 +11,34 @@ class Polar(Chart):
 
     可以用于散点图和折线图。
     """
+
     def __init__(self, title="", subtitle="", **kwargs):
         super(Polar, self).__init__(title, subtitle, **kwargs)
 
     def add(self, *args, **kwargs):
         self.__add(*args, **kwargs)
 
-    def __add(self, name, data,
-              angle_data=None,
-              radius_data=None,
-              type='line',
-              symbol_size=4,
-              start_angle=90,
-              rotate_step=0,
-              boundary_gap=True,
-              is_clockwise=True,
-              is_stack=False,
-              axis_range=None,
-              is_angleaxis_show=True,
-              is_radiusaxis_show=True,
-              radiusaxis_z_index=50,
-              angleaxis_z_index=50,
-              render_item=None,
-              **kwargs):
+    def __add(
+        self,
+        name,
+        data,
+        angle_data=None,
+        radius_data=None,
+        type='line',
+        symbol_size=4,
+        start_angle=90,
+        rotate_step=0,
+        boundary_gap=True,
+        is_clockwise=True,
+        is_stack=False,
+        axis_range=None,
+        is_angleaxis_show=True,
+        is_radiusaxis_show=True,
+        radiusaxis_z_index=50,
+        angleaxis_z_index=50,
+        render_item=None,
+        **kwargs
+    ):
         """
 
         :param name:
@@ -90,57 +95,64 @@ class Polar(Chart):
             _area_style = None
 
         if type in ("scatter", "line"):
-            self._option.get('series').append({
-                "type": type,
-                "name": name,
-                "coordinateSystem": 'polar',
-                "symbol": chart['symbol'],
-                "symbolSize": symbol_size,
-                "data": data,
-                "label": chart['label'],
-                "areaStyle": _area_style
-            })
+            self._option.get('series').append(
+                {
+                    "type": type,
+                    "name": name,
+                    "coordinateSystem": 'polar',
+                    "symbol": chart['symbol'],
+                    "symbolSize": symbol_size,
+                    "data": data,
+                    "label": chart['label'],
+                    "areaStyle": _area_style,
+                }
+            )
 
         elif type == "effectScatter":
-            self._option.get('series').append({
-                "type": type,
-                "name": name,
-                "coordinateSystem": 'polar',
-                "showEffectOn": "render",
-                "rippleEffect": chart['effect'],
-                "symbol": chart['symbol'],
-                "symbolSize": symbol_size,
-                "data": data,
-                "label": chart['label'],
-            })
+            self._option.get('series').append(
+                {
+                    "type": type,
+                    "name": name,
+                    "coordinateSystem": 'polar',
+                    "showEffectOn": "render",
+                    "rippleEffect": chart['effect'],
+                    "symbol": chart['symbol'],
+                    "symbolSize": symbol_size,
+                    "data": data,
+                    "label": chart['label'],
+                }
+            )
 
         elif type == "barRadius":
-            self._option.get('series').append({
-                "type": "bar",
-                "stack": is_stack,
-                "name": name,
-                "coordinateSystem": 'polar',
-                "data": data,
-            })
+            self._option.get('series').append(
+                {
+                    "type": "bar",
+                    "stack": is_stack,
+                    "name": name,
+                    "coordinateSystem": 'polar',
+                    "data": data,
+                }
+            )
             self._option.update(angleAxis={})
             self._option.update(
                 radiusAxis={
                     "type": polar_type,
                     "data": radius_data,
                     "z": radiusaxis_z_index,
-                })
+                }
+            )
 
         elif type == "barAngle":
-            self._option.get('series').append({
-                "type": "bar",
-                "stack": is_stack,
-                "name": name,
-                "coordinateSystem": 'polar',
-                "data": data,
-            })
-            self._option.update(radiusAxis={
-                "show": is_radiusaxis_show,
-            })
+            self._option.get('series').append(
+                {
+                    "type": "bar",
+                    "stack": is_stack,
+                    "name": name,
+                    "coordinateSystem": 'polar',
+                    "data": data,
+                }
+            )
+            self._option.update(radiusAxis={"show": is_radiusaxis_show})
             self._option.update(
                 angleAxis={
                     "show": is_angleaxis_show,
@@ -148,17 +160,20 @@ class Polar(Chart):
                     "data": radius_data,
                     "z": angleaxis_z_index,
                     "startAngle": start_angle,
-                    "splitLine": chart['split_line']
-                })
+                    "splitLine": chart['split_line'],
+                }
+            )
         elif type == "custom":
             assert render_item is not None
-            self._option.get('series').append({
-                "type": "custom",
-                "name": name,
-                "coordinateSystem": 'polar',
-                "data": data,
-                "renderItem": javascript.add_a_new_function(render_item)
-            })
+            self._option.get('series').append(
+                {
+                    "type": "custom",
+                    "name": name,
+                    "coordinateSystem": 'polar',
+                    "data": data,
+                    "renderItem": javascript.add_a_new_function(render_item),
+                }
+            )
 
         if type not in ("barAngle", "barRadius"):
             self._option.update(
@@ -170,7 +185,7 @@ class Polar(Chart):
                     "startAngle": start_angle,
                     "boundaryGap": boundary_gap,
                     "splitLine": chart['split_line'],
-                    "axisLine": chart['axis_line']
+                    "axisLine": chart['axis_line'],
                 }
             )
             self._option.update(
@@ -182,7 +197,7 @@ class Polar(Chart):
                     "max": _amax,
                     "axisLine": chart['axis_line'],
                     "axisLabel": {"rotate": rotate_step},
-                    "z": radiusaxis_z_index
+                    "z": radiusaxis_z_index,
                 }
             )
         self._option.update(polar={})

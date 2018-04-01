@@ -18,11 +18,13 @@ class Base(object):
     `Base`类是所有图形类的基类，提供部分初始化参数和基本的方法
     """
 
-    def __init__(self,
-                 width=800,
-                 height=400,
-                 renderer=constants.CANVAS_RENDERER,
-                 page_title=constants.PAGE_TITLE):
+    def __init__(
+        self,
+        width=800,
+        height=400,
+        renderer=constants.CANVAS_RENDERER,
+        page_title=constants.PAGE_TITLE,
+    ):
         """
 
         :param width:
@@ -74,7 +76,7 @@ class Base(object):
         deprecated_tpl = 'The {} is deprecated, please use {} instead!'
         warnings.warn(
             deprecated_tpl.format('show_config', 'print_echarts_options'),
-            DeprecationWarning
+            DeprecationWarning,
         )
         self.print_echarts_options()
 
@@ -91,11 +93,13 @@ class Base(object):
         """
         return CURRENT_CONFIG.produce_html_script_list(self._js_dependencies)
 
-    def render(self,
-               path='render.html',
-               template_name='simple_chart.html',
-               object_name='chart',
-               **kwargs):
+    def render(
+        self,
+        path='render.html',
+        template_name='simple_chart.html',
+        object_name='chart',
+        **kwargs
+    ):
         _, ext = os.path.splitext(path)
         _file_type = ext[1:]
         env = engine.create_default_environment(_file_type)
@@ -143,9 +147,11 @@ class Base(object):
         return k_lst, v_lst
 
     def render_notebook(self):
-        warnings.warn('Implementation has been removed. ' +
-                      'Please pass the chart instance directly to Jupyter.' +
-                      'If you need more help, please read documentation')
+        warnings.warn(
+            'Implementation has been removed. ' +
+            'Please pass the chart instance directly to Jupyter.' +
+            'If you need more help, please read documentation'
+        )
 
     def _repr_html_(self):
         """ 渲染配置项并将图形显示在 notebook 中
@@ -163,9 +169,7 @@ class Base(object):
         libraries = require_config['libraries']
         env = engine.create_default_environment(constants.DEFAULT_HTML)
         return env.render_chart_to_notebook(
-            charts=(self,),
-            config_items=config_items,
-            libraries=libraries
+            charts=(self,), config_items=config_items, libraries=libraries
         )
 
     def _repr_svg_(self):
@@ -190,20 +194,24 @@ class Base(object):
         """
         if CURRENT_CONFIG.jupyter_presentation != file_type:
             return None
+
         if self.renderer == constants.SVG_RENDERER:
             if file_type != constants.SVG:
                 raise exceptions.InvalidConfiguration(
-                    "svg renderer produces only svg image.")
+                    "svg renderer produces only svg image."
+                )
+
         elif file_type not in [constants.JPEG, constants.PNG]:
             # CANVAS_RENDERER here
             raise exceptions.InvalidConfiguration(
-                "svg output requires svg renderer.")
+                "svg output requires svg renderer."
+            )
 
         env = engine.create_default_environment(file_type)
         outfile = 'tmp.' + file_type
         content = env.render_chart_to_file(
-            chart=self,
-            path=outfile, verbose=False)
+            chart=self, path=outfile, verbose=False
+        )
         if content:
             os.unlink(outfile)
         return content

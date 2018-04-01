@@ -10,15 +10,19 @@ class Radar(Chart):
 
     雷达图主要用于表现多变量的数据。
     """
+
     def __init__(self, title="", subtitle="", **kwargs):
         super(Radar, self).__init__(title, subtitle, **kwargs)
 
-    def config(self, schema=None,
-               c_schema=None,
-               shape="",
-               radar_text_color="#333",
-               radar_text_size=12,
-               **kwargs):
+    def config(
+        self,
+        schema=None,
+        c_schema=None,
+        shape="",
+        radar_text_color="#333",
+        radar_text_size=12,
+        **kwargs
+    ):
         """ config rader component options
 
         :param schema:
@@ -51,12 +55,13 @@ class Radar(Chart):
                 "shape": shape,
                 "name": {
                     "textStyle": {
-                        "color": radar_text_color,
-                        "fontSize": radar_text_size,
-                    }},
+                        "color": radar_text_color, "fontSize": radar_text_size
+                    }
+                },
                 "splitLine": chart['split_line'],
                 "splitArea": chart['split_area'],
-                "axisLine": chart['axis_line']}
+                "axisLine": chart['axis_line'],
+            }
         )
 
     def add(self, *args, **kwargs):
@@ -77,17 +82,16 @@ class Radar(Chart):
         chart = get_all_options(**kwargs)
         self._option.get('legend')[0].get('data').append(name)
 
-        self._option.get('series').append({
-            "type": "radar",
-            "name": name,
-            "data": value,
-            "symbol": chart['symbol'],
-            "label": chart['label'],
-            "itemStyle": {
-                "normal": {
-                    "color": item_color
-                }},
-            "lineStyle": chart['line_style'],
-            "areaStyle": chart['area_style'],
-        })
+        self._option.get('series').append(
+            {
+                "type": "radar",
+                "name": name,
+                "data": value,
+                "symbol": chart['symbol'],
+                "label": chart['label'],
+                "itemStyle": {"normal": {"color": item_color}},
+                "lineStyle": chart['line_style'],
+                "areaStyle": chart['area_style'],
+            }
+        )
         self._config_components(**kwargs)
