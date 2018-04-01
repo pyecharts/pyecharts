@@ -16,18 +16,34 @@ def test_page_grid_timeline_overlap():
     bar.add("商家A", CLOTHES, v1, is_stack=True)
     bar.add("商家B", CLOTHES, v2, is_stack=True, legend_pos="80%")
     line = Line("折线图示例")
-    line.add("最高气温", WEEK, [11, 11, 15, 13, 12, 13, 10],
-             mark_point=["max", "min"], mark_line=["average"])
-    line.add("最低气温", WEEK, [1, -2, 2, 5, 3, 2, 0],
-             mark_point=["max", "min"], mark_line=["average"],
-             legend_pos="20%")
+    line.add(
+        "最高气温",
+        WEEK,
+        [11, 11, 15, 13, 12, 13, 10],
+        mark_point=["max", "min"],
+        mark_line=["average"],
+    )
+    line.add(
+        "最低气温",
+        WEEK,
+        [1, -2, 2, 5, 3, 2, 0],
+        mark_point=["max", "min"],
+        mark_line=["average"],
+        legend_pos="20%",
+    )
     v1 = [5, 20, 36, 10, 75, 90]
     v2 = [10, 25, 8, 60, 20, 80]
     scatter = Scatter("散点图示例", title_top="50%", title_pos="65%")
     scatter.add("scatter", v1, v2, legend_top="50%", legend_pos="80%")
     es = EffectScatter("动态散点图示例", title_top="50%")
-    es.add("es", [11, 11, 15, 13, 12, 13, 10], [1, -2, 2, 5, 3, 2, 0],
-           effect_scale=6, legend_top="50%", legend_pos="20%")
+    es.add(
+        "es",
+        [11, 11, 15, 13, 12, 13, 10],
+        [1, -2, 2, 5, 3, 2, 0],
+        effect_scale=6,
+        legend_top="50%",
+        legend_pos="20%",
+    )
 
     grid = Grid()
     grid.add(bar, grid_bottom="60%", grid_left="60%")
@@ -64,8 +80,12 @@ def test_page_grid_timeline_overlap():
     bar_5.add("春季", CLOTHES, [randint(10, 100) for _ in range(6)])
     bar_5.add("夏季", CLOTHES, [randint(10, 100) for _ in range(6)])
     bar_5.add("秋季", CLOTHES, [randint(10, 100) for _ in range(6)])
-    bar_5.add("冬季", CLOTHES, [randint(10, 100) for _ in range(6)],
-              is_legend_show=True)
+    bar_5.add(
+        "冬季",
+        CLOTHES,
+        [randint(10, 100) for _ in range(6)],
+        is_legend_show=True,
+    )
 
     timeline = Timeline(is_auto_play=True, timeline_bottom=0)
     timeline.add(bar_1, '2012 年')
