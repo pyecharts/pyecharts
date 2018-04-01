@@ -9,6 +9,8 @@ from lml.plugin import PluginManager, PluginInfo
 import pyecharts.conf as conf
 import pyecharts.utils as utils
 import pyecharts.constants as constants
+import pyecharts.exceptions as exceptions
+import pyecharts.javascript as javascript
 
 
 LINK_SCRIPT_FORMATTER = '<script type="text/javascript" src="{}"></script>'
@@ -16,6 +18,7 @@ EMBED_SCRIPT_FORMATTER = '<script type="text/javascript">\n{}\n</script>'
 CHART_DIV_FORMATTER = '<div id="{chart_id}" style="width:{width};height:{height};"></div>'  # flake8: noqa
 CHART_CONFIG_FORMATTER = """
 var myChart_{chart_id} = echarts.init(document.getElementById('{chart_id}'), null, {{renderer: '{renderer}'}});
+{custom_function}
 var option_{chart_id} = {options};
 myChart_{chart_id}.setOption(option_{chart_id});
 """
@@ -83,11 +86,16 @@ def generate_js_content(*charts):
     """
     contents = []
     for chart in charts:
-        js_content = CHART_CONFIG_FORMATTER.format(
+        kwargs = dict(
             chart_id=chart.chart_id,
             renderer=chart.renderer,
-            options=utils.json_dumps(chart.options, indent=4)
+            custom_function='',
+            options=javascript.translate_options(chart.options, indent=4)
         )
+        if javascript.has_functions():
+            kwargs['custom_function'] = javascript.translate_python_functions()
+        js_content = CHART_CONFIG_FORMATTER.format(**kwargs)
+
         contents.append(js_content)
     contents = '\n'.join(contents)
     return contents

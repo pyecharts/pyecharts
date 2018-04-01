@@ -5,9 +5,10 @@ import warnings
 
 from jinja2 import Markup
 
-import pyecharts.constants as constants
-import pyecharts.engine as engine
 import pyecharts.utils as utils
+import pyecharts.engine as engine
+import pyecharts.constants as constants
+import pyecharts.javascript as javascript
 import pyecharts.exceptions as exceptions
 from pyecharts.conf import CURRENT_CONFIG
 
@@ -65,7 +66,7 @@ class Base(object):
     def print_echarts_options(self):
         """ 打印输出图形所有配置项
         """
-        print(utils.json_dumps(self._option, indent=4))
+        print(javascript.translate_options(self._option, indent=4))
 
     def show_config(self):
         """ 打印输出图形所有配置项

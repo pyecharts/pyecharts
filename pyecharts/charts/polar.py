@@ -2,6 +2,7 @@
 
 from pyecharts.chart import Chart
 from pyecharts.option import get_all_options
+import pyecharts.javascript as javascript
 
 
 class Polar(Chart):
@@ -29,6 +30,9 @@ class Polar(Chart):
               axis_range=None,
               is_angleaxis_show=True,
               is_radiusaxis_show=True,
+              radiusaxis_z_index=50,
+              angleaxis_z_index=50,
+              render_item=None,
               **kwargs):
         """
 
@@ -63,6 +67,12 @@ class Polar(Chart):
             是否显示极坐标系的角度轴，默认为 True。
         :param is_radiusaxis_show:
             是否显示极坐标系的径向轴，默认为 True。
+        :param radiusaxis_z_index:
+            radius 轴的 z 指数，默认为 50
+        :param angleaxis_z_index:
+            angel 轴的 z 指数，默认为 50
+        :param render_item:
+            开发者自己提供图形渲染的逻辑
         :param kwargs:
         """
         chart = get_all_options(**kwargs)
@@ -117,7 +127,7 @@ class Polar(Chart):
                 radiusAxis={
                     "type": polar_type,
                     "data": radius_data,
-                    "z": 50,
+                    "z": radiusaxis_z_index,
                 })
 
         elif type == "barAngle":
@@ -136,10 +146,19 @@ class Polar(Chart):
                     "show": is_angleaxis_show,
                     "type": polar_type,
                     "data": radius_data,
-                    "z": 50,
+                    "z": angleaxis_z_index,
                     "startAngle": start_angle,
                     "splitLine": chart['split_line']
                 })
+        elif type == "custom":
+            assert render_item is not None
+            self._option.get('series').append({
+                "type": "custom",
+                "name": name,
+                "coordinateSystem": 'polar',
+                "data": data,
+                "renderItem": javascript.add_a_new_function(render_item)
+            })
 
         if type not in ("barAngle", "barRadius"):
             self._option.update(
@@ -162,7 +181,8 @@ class Polar(Chart):
                     "min": _amin,
                     "max": _amax,
                     "axisLine": chart['axis_line'],
-                    "axisLabel": {"rotate": rotate_step}
+                    "axisLabel": {"rotate": rotate_step},
+                    "z": radiusaxis_z_index
                 }
             )
         self._option.update(polar={})
