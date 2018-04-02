@@ -3,7 +3,6 @@ import os
 import json
 import uuid
 import warnings
-import datetime
 
 from jinja2 import Markup
 
@@ -14,28 +13,6 @@ import pyecharts.exceptions as exceptions
 from pyecharts.conf import CURRENT_CONFIG
 from pyecharts.option import extract_all_options
 import pyecharts.javascript as javascript
-
-
-class UnknownTypeEncoder(json.JSONEncoder):
-    """
-    UnknownTypeEncoder`类用于处理数据的编码，使其能够被正常的序列化
-    """
-
-    def default(self, obj):
-        if isinstance(obj, (datetime.datetime, datetime.date)):
-            return obj.isoformat()
-
-        else:
-            # Pandas and Numpy lists
-            try:
-                return obj.astype(float).tolist()
-
-            except Exception:
-                try:
-                    return obj.astype(str).tolist()
-
-                except Exception:
-                    return json.JSONEncoder.default(self, obj)
 
 
 class Base(object):
@@ -188,7 +165,7 @@ class Base(object):
         options_in_json = json.dumps(
             self._option,
             indent=constants.JSON_INDENTATION,
-            cls=UnknownTypeEncoder,
+            cls=utils.UnknownTypeEncoder,
         )
         options_with_js_functions = javascript.unescape_js_function(
             options_in_json

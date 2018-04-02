@@ -1,8 +1,10 @@
 # coding=utf-8
 from __future__ import unicode_literals
 
-import codecs
 import os
+import json
+import codecs
+import datetime
 
 
 def get_resource_dir(*paths):
@@ -75,3 +77,25 @@ def merge_js_dependencies(*chart_or_name_list):
     # items which should be included in front part.
     fol = [x for x in front_optional_items if x in fist_items]
     return front_must_items + fol + dependencies
+
+
+class UnknownTypeEncoder(json.JSONEncoder):
+    """
+    UnknownTypeEncoder`类用于处理数据的编码，使其能够被正常的序列化
+    """
+
+    def default(self, obj):
+        if isinstance(obj, (datetime.datetime, datetime.date)):
+            return obj.isoformat()
+
+        else:
+            # Pandas and Numpy lists
+            try:
+                return obj.astype(float).tolist()
+
+            except Exception:
+                try:
+                    return obj.astype(str).tolist()
+
+                except Exception:
+                    return json.JSONEncoder.default(self, obj)
