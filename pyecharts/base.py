@@ -13,6 +13,7 @@ import pyecharts.constants as constants
 import pyecharts.exceptions as exceptions
 from pyecharts.conf import CURRENT_CONFIG
 from pyecharts.option import extract_all_options
+import pyecharts.javascript as javascript
 
 
 class UnknownTypeEncoder(json.JSONEncoder):
@@ -68,7 +69,7 @@ class Base(object):
         self.renderer = renderer
         self._page_title = page_title
         self._js_dependencies = {'echarts'}
-        self.functions = {}
+        self.callbacks = javascript.CallbackManager()
 
     @property
     def chart_id(self):
@@ -179,7 +180,7 @@ class Base(object):
         )
 
     def translate_python_functions(self):
-        if not self.has_functions():
+        if not self.callbacks.has_functions():
             return ''
 
         try:
@@ -188,9 +189,9 @@ class Base(object):
             raise exceptions.ExtensionMissing(constants.ERROR_MESSAGE)
 
         content = []
-        for func in self.functions:
+        for func in self.callbacks.functions:
             javascript_function = Python2Javascript.translate(
-                self.functions[func]
+                self.callbacks.functions[func]
             )
             content.append(javascript_function)
         return ''.join(content)
@@ -206,21 +207,12 @@ class Base(object):
             indent=constants.JSON_INDENTATION,
             cls=UnknownTypeEncoder,
         )
-        options_with_js_functions = unescape_js_function(options_in_json)
+        options_with_js_functions = javascript.unescape_js_function(
+            options_in_json)
         return options_with_js_functions
 
     def _add_a_python_function(self, a_function):
-        if not constants.PY35_ABOVE:
-            raise exceptions.JavascriptNotSupported(constants.ERROR_MESSAGE)
-
-        self.functions[a_function.__name__] = a_function
-        return constants.FUNCTION_SIGNATURE.format(a_function.__name__)
-
-    def has_functions(self):
-        return len(self.functions) > 0
-
-    def __del__(self):
-        self.functions.clear()
+        return self.callbacks.add_a_python_function(a_function)
 
     def _get_all_options(self, **kwargs):
         return extract_all_options(chart_instance=self, **kwargs)
@@ -291,11 +283,3 @@ class Base(object):
     def _add_chinese_map(self, map_name_in_chinese):
         name_in_pinyin = CURRENT_CONFIG.chinese_to_pinyin(map_name_in_chinese)
         self._js_dependencies.add(name_in_pinyin)
-
-
-def unescape_js_function(options_json):
-    unescaped_json = options_json.replace(constants.FUNCTION_LEFT_ESCAPE, '')
-    json_with_function_names = unescaped_json.replace(
-        constants.FUNCTION_RIGHT_ESCAPE, ''
-    )
-    return json_with_function_names
