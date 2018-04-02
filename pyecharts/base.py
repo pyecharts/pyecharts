@@ -196,11 +196,11 @@ class Base(object):
         return options_with_js_functions
 
     def _add_a_python_function(self, a_function):
-        if a_function.__name__ in javascript.GLOBAL_CALLBACKS.functions:
+        if javascript.GLOBAL_CALLBACKS.contains(a_function):
             return constants.FUNCTION_SIGNATURE.format(a_function.__name__)
 
         else:
-            return self.callbacks.add_a_python_function(a_function)
+            return self.callbacks.add(a_function)
 
     def _get_all_options(self, **kwargs):
         return extract_all_options(chart_instance=self, **kwargs)

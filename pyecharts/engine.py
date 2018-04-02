@@ -92,8 +92,8 @@ def generate_js_content(*charts):
         js_content = CHART_CONFIG_FORMATTER.format(
             chart_id=chart.chart_id,
             renderer=chart.renderer,
-            global_callbacks=GLOBAL_CALLBACKS.translate_python_functions(),
-            local_callbacks=chart.callbacks.translate_python_functions(),
+            global_callbacks=GLOBAL_CALLBACKS,
+            local_callbacks=chart.callbacks,
             options=chart.translate_options(),
         )
 

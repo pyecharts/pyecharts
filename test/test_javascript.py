@@ -158,7 +158,7 @@ def global_formatter_t_est(**keywords):
     v1 = [2.0, 4.9]
     bar = Bar("Bar chart", "precipitation and evaporation one year")
     if PY35_ABOVE:
-        GLOBAL_CALLBACKS.add_a_python_function(global_formatter)
+        GLOBAL_CALLBACKS.add(global_formatter)
         bar.add(
             "precipitation",
             attr,
@@ -174,7 +174,7 @@ def global_formatter_t_est(**keywords):
             bar.render()
     else:
         with assert_raises(exceptions.JavascriptNotSupported):
-            GLOBAL_CALLBACKS.add_a_python_function(global_formatter)
+            GLOBAL_CALLBACKS.add(global_formatter)
     GLOBAL_CALLBACKS.clear()
 
 

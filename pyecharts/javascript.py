@@ -7,17 +7,23 @@ class CallbackManager:
     def __init__(self):
         self.functions = {}
 
-    def add_a_python_function(self, a_function):
+    def add(self, a_function):
         if not constants.PY35_ABOVE:
             raise exceptions.JavascriptNotSupported(constants.ERROR_MESSAGE)
 
         self.functions[a_function.__name__] = a_function
         return constants.FUNCTION_SIGNATURE.format(a_function.__name__)
 
+    def contains(self, a_function):
+        return a_function.__name__ in self.functions
+
     def has_functions(self):
         return len(self.functions) > 0
 
-    def translate_python_functions(self):
+    def clear(self):
+        self.functions.clear()
+
+    def __repr__(self):
         if not self.has_functions():
             return ''
 
@@ -33,9 +39,6 @@ class CallbackManager:
             )
             content.append(javascript_function)
         return ''.join(content)
-
-    def clear(self):
-        self.functions.clear()
 
 
 def unescape_js_function(options_json):
