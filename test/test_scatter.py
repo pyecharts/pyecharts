@@ -21,8 +21,9 @@ def test_scatter_defualt():
 def test_scatter_xaxis_type_category():
     scatter = Scatter("散点图示例")
     scatter.add("A", ["a", "b", "c", "d", "e", "f"], v2)
-    scatter.add("B", ["a", "b", "c", "d", "e", "f"], v1[::-1],
-                xaxis_type="category")
+    scatter.add(
+        "B", ["a", "b", "c", "d", "e", "f"], v1[::-1], xaxis_type="category"
+    )
     assert '"type": "category"' in scatter._repr_html_()
 
 
@@ -35,8 +36,14 @@ def test_scatter_visualmap_default():
 
 def test_scatter_visualmap_type_size():
     scatter = Scatter("散点图示例")
-    scatter.add("B", v1[::-1], v2, is_visualmap=True, visual_type='size',
-                visual_range_size=[20, 80])
+    scatter.add(
+        "B",
+        v1[::-1],
+        v2,
+        is_visualmap=True,
+        visual_type='size',
+        visual_range_size=[20, 80],
+    )
     scatter.render()
 
 
@@ -74,17 +81,25 @@ def test_scatter_multi_dimension():
         [19349, 69.6, 147568552],
         [10670, 67.3, 53994605],
         [26424, 75.7, 57110117],
-        [37062, 75.4, 252847810]
+        [37062, 75.4, 252847810],
     ]
 
     x_lst = [v[0] for v in data]
     y_lst = [v[1] for v in data]
     extra_data = [v[2] for v in data]
     sc = Scatter()
-    sc.add("scatter", x_lst, y_lst, extra_data=extra_data, is_visualmap=True,
-           visual_dimension=2, visual_orient='horizontal',
-           visual_type='size', visual_range=[254830, 1154605773],
-           visual_text_color='#000')
+    sc.add(
+        "scatter",
+        x_lst,
+        y_lst,
+        extra_data=extra_data,
+        is_visualmap=True,
+        visual_dimension=2,
+        visual_orient='horizontal',
+        visual_type='size',
+        visual_range=[254830, 1154605773],
+        visual_text_color='#000',
+    )
     sc.render()
 
 

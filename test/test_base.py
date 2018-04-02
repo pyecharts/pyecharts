@@ -80,9 +80,8 @@ def test_jupyter_repr_svg():
 @patch('os.unlink')
 def test_render_as_svg(fake_unlink, fake_factory):
     fake_env = MagicMock(
-        render_chart_to_file=MagicMock(
-            return_value="fake svg"
-        ))
+        render_chart_to_file=MagicMock(return_value="fake svg")
+    )
     fake_factory.return_value = fake_env
     with jupyter_image('svg'):
         bar = create_a_bar('test', renderer='svg')
@@ -142,8 +141,14 @@ def test_echarts_position_in_render_html():
     value = [20, 190, 253, 77, 65]
     attr = ['汕头市', '汕尾市', '揭阳市', '阳江市', '肇庆市']
     map = Map("广东地图示例", width=1200, height=600, page_title=TITLE)
-    map.add("", attr, value, maptype='广东',
-            is_visualmap=True, visual_text_color='#000')
+    map.add(
+        "",
+        attr,
+        value,
+        maptype='广东',
+        is_visualmap=True,
+        visual_text_color='#000',
+    )
     map.render()
     actual_content = get_default_rendering_file_content()
     assert TITLE in actual_content

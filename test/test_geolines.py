@@ -12,7 +12,7 @@ style = Style(
     title_pos="center",
     width=1200,
     height=600,
-    background_color="#404a59"
+    background_color="#404a59",
 )
 
 style_geo = style.add(
@@ -38,7 +38,7 @@ def test_geolines():
         ["广州", "南京"],
         ["广州", "重庆"],
         ["广州", "兰州"],
-        ["广州", "杭州"]
+        ["广州", "杭州"],
     ]
     data_beijing = [
         ["北京", "上海"],
@@ -46,7 +46,7 @@ def test_geolines():
         ["北京", "南京"],
         ["北京", "重庆"],
         ["北京", "兰州"],
-        ["北京", "杭州"]
+        ["北京", "杭州"],
     ]
     lines = GeoLines("GeoLines 示例", **style.init_style)
     lines.add("从广州出发", data_guangzhou, **style_geo)
@@ -62,7 +62,7 @@ def test_with_custom_coordinates():
         ["广州", "南京"],
         ["广州", "重庆"],
         ["广州", "兰州"],
-        ["广州", "A市"]
+        ["广州", "A市"],
     ]
     lines = GeoLines("GeoLines 示例", **style.init_style)
     coordinate = lines.get_coordinate('广州')
@@ -80,12 +80,7 @@ def test_with_custom_coordinates():
 
 
 def test_with_full_example():
-    line_data = [
-        ["广州", "上海"],
-        ["广州", "北京"],
-        ["广州", "南京"],
-        ['广州', 'A市']
-    ]
+    line_data = [["广州", "上海"], ["广州", "北京"], ["广州", "南京"], ['广州', 'A市']]
 
     lines = GeoLines("GeoLines 示例", **style.init_style)
 
