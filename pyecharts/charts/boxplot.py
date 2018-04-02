@@ -1,7 +1,6 @@
 # coding=utf-8
 
 from pyecharts.chart import Chart
-from pyecharts.option import get_all_options
 
 
 class Boxplot(Chart):
@@ -31,7 +30,7 @@ class Boxplot(Chart):
         :param kwargs:
         """
         kwargs.update(x_axis=x_axis)
-        chart = get_all_options(**kwargs)
+        chart = self._get_all_options(**kwargs)
 
         xaxis, yaxis = chart['xy_axis']
         self._option.update(xAxis=xaxis, yAxis=yaxis)

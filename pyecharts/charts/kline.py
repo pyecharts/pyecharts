@@ -1,8 +1,6 @@
-#!/usr/bin/env python
 # coding=utf-8
 
 from pyecharts.chart import Chart
-from pyecharts.option import get_all_options
 
 
 class Kline(Chart):
@@ -32,7 +30,7 @@ class Kline(Chart):
         :param kwargs:
         """
         kwargs.update(type="candlestick", x_axis=x_axis)
-        chart = get_all_options(**kwargs)
+        chart = self._get_all_options(**kwargs)
 
         xaxis, yaxis = chart['xy_axis']
         self._option.update(xAxis=xaxis, yAxis=yaxis)

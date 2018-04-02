@@ -2,7 +2,6 @@
 import sys
 
 from pyecharts.chart import Chart
-from pyecharts.option import get_all_options
 
 
 PY2 = sys.version_info[0] == 2
@@ -60,7 +59,7 @@ class Map(Chart):
         :param kwargs:
         """
         assert len(attr) == len(value)
-        chart = get_all_options(**kwargs)
+        chart = self._get_all_options(**kwargs)
         _data = []
         for data in zip(attr, value):
             _name, _value = data

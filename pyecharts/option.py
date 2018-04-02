@@ -4,7 +4,6 @@ from __future__ import unicode_literals
 import random
 import types
 
-import pyecharts.javascript as javascript
 
 fs = []
 SYMBOLS = ('rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow')
@@ -27,6 +26,7 @@ def label(
     label_emphasis_pos=None,
     label_emphasis_textcolor='#fff',
     label_emphasis_textsize=12,
+    chart_instance=None,
     **kwargs
 ):
     """ 图形上的文本标签，可用于说明图形的一些数据信息，比如值，名称等。
@@ -92,7 +92,7 @@ def label(
         if type == "pie":
             _tmp_formatter = "{b}: {d}%"
     elif isinstance(label_formatter, types.FunctionType):
-        _tmp_formatter = javascript.add_a_new_function(label_formatter)
+        _tmp_formatter = chart_instance._add_a_python_function(label_formatter)
     if type != "graph":
         _label.get("normal").update(formatter=_tmp_formatter)
     return _label
@@ -261,6 +261,7 @@ def xy_axis(
     is_xaxis_show=True,
     is_yaxis_show=True,
     is_splitline_show=True,
+    chart_instance=None,
     **kwargs
 ):
     """ 直角坐标系中的 x、y 轴(Line、Bar、Scatter、EffectScatter、Kline)。
@@ -376,10 +377,14 @@ def xy_axis(
     :param kwargs:
     """
     if isinstance(xaxis_formatter, types.FunctionType):
-        xaxis_formatter = javascript.add_a_new_function(xaxis_formatter)
+        xaxis_formatter = chart_instance._add_a_python_function(
+            xaxis_formatter
+        )
 
     if isinstance(yaxis_formatter, types.FunctionType):
-        yaxis_formatter = javascript.add_a_new_function(yaxis_formatter)
+        yaxis_formatter = chart_instance._add_a_python_function(
+            yaxis_formatter
+        )
     else:
         yaxis_formatter = "{value} " + yaxis_formatter
 
@@ -1104,6 +1109,7 @@ def tooltip(
     tooltip_background_color="rgba(50,50,50,0.7)",
     tooltip_border_color="#333",
     tooltip_border_width=0,
+    chart_instance=None,
     **kwargs
 ):
     """ 提示框组件，用于移动或点击鼠标时弹出数据内容
@@ -1158,7 +1164,9 @@ def tooltip(
         elif type == "geo":
             _tmp_formatter = "{b}: {c}"
     elif isinstance(tooltip_formatter, types.FunctionType):
-        _tmp_formatter = javascript.add_a_new_function(tooltip_formatter)
+        _tmp_formatter = chart_instance._add_a_python_function(
+            tooltip_formatter
+        )
 
     _tooltip = {
         "trigger": tooltip_tragger,
@@ -1195,7 +1203,7 @@ def calendar(calendar_date_range=None, calendar_cell_size=None, **kwargs):
     return _calendar
 
 
-def get_all_options(**kwargs):
+def extract_all_options(**kwargs):
     """ 返回图形实例的所有配置项
     """
     _funcs = {}

@@ -1,5 +1,6 @@
 # coding=utf-8
 import os
+import json
 import uuid
 import warnings
 
@@ -8,9 +9,10 @@ from jinja2 import Markup
 import pyecharts.utils as utils
 import pyecharts.engine as engine
 import pyecharts.constants as constants
-import pyecharts.javascript as javascript
 import pyecharts.exceptions as exceptions
 from pyecharts.conf import CURRENT_CONFIG
+from pyecharts.option import extract_all_options
+import pyecharts.javascript as javascript
 
 
 class Base(object):
@@ -44,6 +46,7 @@ class Base(object):
         self.renderer = renderer
         self._page_title = page_title
         self._js_dependencies = {'echarts'}
+        self.callbacks = javascript.CallbackManager()
 
     @property
     def chart_id(self):
@@ -68,7 +71,7 @@ class Base(object):
     def print_echarts_options(self):
         """ 打印输出图形所有配置项
         """
-        print(javascript.translate_options(self._option, indent=4))
+        print(self.translate_options())
 
     def show_config(self):
         """ 打印输出图形所有配置项
@@ -152,6 +155,32 @@ class Base(object):
             'Please pass the chart instance directly to Jupyter.' +
             'If you need more help, please read documentation'
         )
+
+    def translate_options(self):
+        """ json 序列化编码处理
+
+        :param data: 字典数据
+        :param indent: 缩进量
+        """
+        options_in_json = json.dumps(
+            self._option,
+            indent=constants.JSON_INDENTATION,
+            cls=utils.UnknownTypeEncoder,
+        )
+        options_with_js_functions = javascript.unescape_js_function(
+            options_in_json
+        )
+        return options_with_js_functions
+
+    def _add_a_python_function(self, a_function):
+        if javascript.GLOBAL_CALLBACKS.contains(a_function):
+            return constants.FUNCTION_SIGNATURE.format(a_function.__name__)
+
+        else:
+            return self.callbacks.add(a_function)
+
+    def _get_all_options(self, **kwargs):
+        return extract_all_options(chart_instance=self, **kwargs)
 
     def _repr_html_(self):
         """ 渲染配置项并将图形显示在 notebook 中
