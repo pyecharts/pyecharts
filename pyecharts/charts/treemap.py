@@ -18,11 +18,15 @@ class TreeMap(Chart):
     def add(self, *args, **kwargs):
         self.__add(*args, **kwargs)
 
-    def __add(self, name, data,
-              treemap_left_depth=None,
-              treemap_drilldown_icon='▶',
-              treemap_visible_min=10,
-              **kwargs):
+    def __add(
+        self,
+        name,
+        data,
+        treemap_left_depth=None,
+        treemap_drilldown_icon='▶',
+        treemap_visible_min=10,
+        **kwargs
+    ):
         """
 
         :param name:
@@ -71,14 +75,16 @@ class TreeMap(Chart):
         chart = get_all_options(**kwargs)
         self._option.get('legend')[0].get('data').append(name)
 
-        self._option.get('series').append({
-            "type": "treemap",
-            "name": name,
-            "data": data,
-            "label": chart['label'],
-            "leafDepth": treemap_left_depth,
-            "drillDownIcon": treemap_drilldown_icon,
-            "visibleMin": treemap_visible_min,
-            "seriesId": self._option.get('series_id'),
-        })
+        self._option.get('series').append(
+            {
+                "type": "treemap",
+                "name": name,
+                "data": data,
+                "label": chart['label'],
+                "leafDepth": treemap_left_depth,
+                "drillDownIcon": treemap_drilldown_icon,
+                "visibleMin": treemap_visible_min,
+                "seriesId": self._option.get('series_id'),
+            }
+        )
         self._config_components(**kwargs)

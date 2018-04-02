@@ -40,16 +40,34 @@ def test_page():
     page = Page()
     line = Line("折线图示例")
     line.chart_id = 'id_my_cell_line'
-    line.add("最高气温", WEEK, [11, 11, 15, 13, 12, 13, 10],
-             mark_point=["max", "min"], mark_line=["average"])
-    line.add("最低气温", WEEK, [1, -2, 2, 5, 3, 2, 0],
-             mark_point=["max", "min"], mark_line=["average"])
+    line.add(
+        "最高气温",
+        WEEK,
+        [11, 11, 15, 13, 12, 13, 10],
+        mark_point=["max", "min"],
+        mark_line=["average"],
+    )
+    line.add(
+        "最低气温",
+        WEEK,
+        [1, -2, 2, 5, 3, 2, 0],
+        mark_point=["max", "min"],
+        mark_line=["average"],
+    )
 
     # pie
     v1 = [11, 12, 13, 10, 10, 10]
     pie = Pie("饼图-圆环图示例", title_pos='center', width='600px')
-    pie.add("", CLOTHES, v1, radius=[40, 75], label_text_color=None,
-            is_label_show=True, legend_orient='vertical', legend_pos='left')
+    pie.add(
+        "",
+        CLOTHES,
+        v1,
+        radius=[40, 75],
+        label_text_color=None,
+        is_label_show=True,
+        legend_orient='vertical',
+        legend_pos='left',
+    )
 
     page.add([line, pie, create_a_bar(TITLE)])
     # Start render and test

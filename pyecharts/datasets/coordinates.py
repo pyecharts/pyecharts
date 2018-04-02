@@ -7,7 +7,7 @@ from __future__ import unicode_literals
 __all__ = [
     'search_coordinates_by_filter',
     'search_coordinates_by_keyword',
-    'get_coordinate'
+    'get_coordinate',
 ]
 
 
@@ -17,9 +17,7 @@ def search_coordinates_by_filter(func):
     :param func: The filter call for search
     :return: A dictionary like {<name>:[<longitude>, <latitude>]}
     """
-    return dict(
-        (k, v) for k, v in _COORDINATE_DATASET.items() if func(k)
-    )
+    return dict((k, v) for k, v in _COORDINATE_DATASET.items() if func(k))
 
 
 def search_coordinates_by_keyword(*args):
@@ -3766,5 +3764,5 @@ _COORDINATE_DATASET = {
     '屏东县': [120.48, 22.67],
     '台东县': [121.15, 22.75],
     '花莲县': [121.6, 23.98],
-    '澎湖县': [119.58, 23.58]
+    '澎湖县': [119.58, 23.58],
 }
