@@ -179,23 +179,6 @@ class Base(object):
             'If you need more help, please read documentation'
         )
 
-    def translate_python_functions(self):
-        if not self.callbacks.has_functions():
-            return ''
-
-        try:
-            from pyecharts_javascripthon import Python2Javascript
-        except ImportError:
-            raise exceptions.ExtensionMissing(constants.ERROR_MESSAGE)
-
-        content = []
-        for func in self.callbacks.functions:
-            javascript_function = Python2Javascript.translate(
-                self.callbacks.functions[func]
-            )
-            content.append(javascript_function)
-        return ''.join(content)
-
     def translate_options(self):
         """ json 序列化编码处理
 
@@ -212,7 +195,10 @@ class Base(object):
         return options_with_js_functions
 
     def _add_a_python_function(self, a_function):
-        return self.callbacks.add_a_python_function(a_function)
+        if a_function.__name__ in javascript.GLOBAL_CALLBACKS.functions:
+            return constants.FUNCTION_SIGNATURE.format(a_function.__name__)
+        else:
+            return self.callbacks.add_a_python_function(a_function)
 
     def _get_all_options(self, **kwargs):
         return extract_all_options(chart_instance=self, **kwargs)

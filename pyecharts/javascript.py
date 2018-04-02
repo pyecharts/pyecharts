@@ -16,7 +16,24 @@ class CallbackManager:
     def has_functions(self):
         return len(self.functions) > 0
 
-    def __del__(self):
+    def translate_python_functions(self):
+        if not self.has_functions():
+            return ''
+
+        try:
+            from pyecharts_javascripthon import Python2Javascript
+        except ImportError:
+            raise exceptions.ExtensionMissing(constants.ERROR_MESSAGE)
+
+        content = []
+        for func in self.functions:
+            javascript_function = Python2Javascript.translate(
+                self.functions[func]
+            )
+            content.append(javascript_function)
+        return ''.join(content)
+
+    def clear(self):
         self.functions.clear()
 
 
@@ -26,3 +43,6 @@ def unescape_js_function(options_json):
         constants.FUNCTION_RIGHT_ESCAPE, ''
     )
     return json_with_function_names
+
+
+GLOBAL_CALLBACKS = CallbackManager()

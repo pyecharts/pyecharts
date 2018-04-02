@@ -10,6 +10,7 @@ import pyecharts.conf as conf
 import pyecharts.utils as utils
 import pyecharts.constants as constants
 import pyecharts.exceptions as exceptions
+from pyecharts.javascript import GLOBAL_CALLBACKS
 
 
 LINK_SCRIPT_FORMATTER = '<script type="text/javascript" src="{}"></script>'
@@ -17,7 +18,8 @@ EMBED_SCRIPT_FORMATTER = '<script type="text/javascript">\n{}\n</script>'
 CHART_DIV_FORMATTER = '<div id="{chart_id}" style="width:{width};height:{height};"></div>'  # flake8: noqa
 CHART_CONFIG_FORMATTER = """
 var myChart_{chart_id} = echarts.init(document.getElementById('{chart_id}'), null, {{renderer: '{renderer}'}});
-{custom_function}
+{global_callbacks}
+{local_callbacks}
 var option_{chart_id} = {options};
 myChart_{chart_id}.setOption(option_{chart_id});
 """
@@ -90,7 +92,8 @@ def generate_js_content(*charts):
         js_content = CHART_CONFIG_FORMATTER.format(
             chart_id=chart.chart_id,
             renderer=chart.renderer,
-            custom_function=chart.translate_python_functions(),
+            global_callbacks=GLOBAL_CALLBACKS.translate_python_functions(),
+            local_callbacks=chart.callbacks.translate_python_functions(),
             options=chart.translate_options(),
         )
 
