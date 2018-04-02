@@ -11,6 +11,7 @@ class HeatMap(Chart):
     热力图主要通过颜色去表现数值的大小，必须要配合 visualMap 组件使用。
     直角坐标系上必须要使用两个类目轴。
     """
+
     def __init__(self, title="", subtitle="", **kwargs):
         super(HeatMap, self).__init__(title, subtitle, **kwargs)
 
@@ -46,25 +47,28 @@ class HeatMap(Chart):
         chart = get_all_options(**kwargs)
         self._option.get('legend')[0].get('data').append(name)
 
-        self._option.get('series').append({
-            "type": "heatmap",
-            "name": name,
-            "data": data,
-            "label": chart['label'],
-            "seriesId": self._option.get('series_id'),
-        })
+        self._option.get('series').append(
+            {
+                "type": "heatmap",
+                "name": name,
+                "data": data,
+                "label": chart['label'],
+                "seriesId": self._option.get('series_id'),
+            }
+        )
 
         if _is_calendar:
-            self._option.get('toolbox').update(
-                left="98%", top="26%")
+            self._option.get('toolbox').update(left="98%", top="26%")
             self._option.get('series')[0].update(coordinateSystem='calendar')
             self._option.update(calendar=chart['calendar'])
         else:
             xaxis, yaxis = chart['xy_axis']
             self._option.update(xAxis=xaxis, yAxis=yaxis)
             self._option.get('xAxis')[0].update(
-                type='category', data=x_axis, splitArea={"show": True})
+                type='category', data=x_axis, splitArea={"show": True}
+            )
             self._option.get('yAxis')[0].update(
-                type='category', data=y_axis, splitArea={"show": True})
+                type='category', data=y_axis, splitArea={"show": True}
+            )
 
         self._config_components(**kwargs)

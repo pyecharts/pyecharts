@@ -37,15 +37,17 @@ class Boxplot(Chart):
         self._option.update(xAxis=xaxis, yAxis=yaxis)
         self._option.get('legend')[0].get('data').append(name)
 
-        self._option.get('series').append({
-            "type": "boxplot",
-            "name": name,
-            "data": y_axis,
-            "label": chart['label'],
-            "markPoint": chart['mark_point'],
-            "markLine": chart['mark_line'],
-            "seriesId": self._option.get('series_id'),
-        })
+        self._option.get('series').append(
+            {
+                "type": "boxplot",
+                "name": name,
+                "data": y_axis,
+                "label": chart['label'],
+                "markPoint": chart['mark_point'],
+                "markLine": chart['mark_line'],
+                "seriesId": self._option.get('series_id'),
+            }
+        )
         self._config_components(**kwargs)
 
     @staticmethod
@@ -68,14 +70,16 @@ class Boxplot(Chart):
                         _result.append(_d[int(n) - 1])
                     elif m == 1 / 4:
                         _result.append(
-                            _d[int(n) - 1] * 0.75 + _d[int(n)] * 0.25)
+                            _d[int(n) - 1] * 0.75 + _d[int(n)] * 0.25
+                        )
                     elif m == 1 / 2:
                         _result.append(_d[int(n) - 1] * 0.5 + _d[int(n)] * 0.5)
                     elif m == 3 / 4:
                         _result.append(
-                            _d[int(n) - 1] * 0.25 + _d[int(n)] * 0.75)
-                _result.insert(0, _d[0])    # 最小值
-                _result.append(_d[-1])      # 最大值
+                            _d[int(n) - 1] * 0.25 + _d[int(n)] * 0.75
+                        )
+                _result.insert(0, _d[0])  # 最小值
+                _result.append(_d[-1])  # 最大值
                 _data.append(_result)
             except Exception:
                 pass

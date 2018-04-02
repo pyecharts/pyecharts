@@ -10,7 +10,7 @@ DEFAULT_JS_LIBRARIES = dict(
     echarts='echarts.min',
     echartsgl='echarts-gl.min',
     liquidfill='echarts-liquidfill.min',
-    wordcloud='echarts-wordcloud.min'
+    wordcloud='echarts-wordcloud.min',
 )
 
 CITY_NAME_PINYIN_MAP = {
@@ -49,7 +49,7 @@ PROVINCE_NAME_PINYIN_MAP = {
     "新疆": "xinjiang",
     "西藏": "xizang",
     "云南": "yunnan",
-    "浙江": "zhejiang"
+    "浙江": "zhejiang",
 }
 
 
@@ -62,7 +62,8 @@ def test_core_js_libraries():
 
 def test_province_names():
     __provinces__ = conf.EXTENSION_MANAGER.get_a_extension(
-        'echarts-china-provinces-js')
+        'echarts-china-provinces-js'
+    )
     __pinyin_map__ = __provinces__.registry.get('PINYIN_MAP')
     for key, value in PROVINCE_NAME_PINYIN_MAP.items():
         eq_(value, __pinyin_map__[key])
@@ -70,7 +71,8 @@ def test_province_names():
 
 def test_city_names():
     __cities__ = conf.EXTENSION_MANAGER.get_a_extension(
-        'echarts-china-cities-js')
+        'echarts-china-cities-js'
+    )
     __pinyin_map__ = __cities__.registry.get('PINYIN_MAP', {})
     for key, value in CITY_NAME_PINYIN_MAP.items():
         eq_(value, __pinyin_map__[key])

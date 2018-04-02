@@ -139,6 +139,20 @@
     * 'log'：对数轴。适用于对数数据。
 * xaxis_rotate -> int  
     x 轴刻度标签旋转的角度，在类目轴的类目标签显示不下的时候可以通过旋转防止标签之间重叠。默认为 0，即不旋转。旋转的角度从 -90 度到 90 度。
+* xaxis_formatter -> str | function  
+    x 轴标签格式器，如 '天'，则 x 轴的标签为数据加'天'(3 天，4 天),默认为 ""
+
+```
+from pyecharts_javascripthon import Date
+
+def xaxis_formatter(value, index):
+    date = Date(value)
+    texts = [(date.getMonth() + 1), date.getDate()];
+    if index == 0:
+        texts.unshift(date.getYear())
+    return '/'.join(texts)
+```
+
 * y_axis -> list  
     y 坐标轴数据
 * yaxis_interval -> int  
@@ -149,8 +163,20 @@
     因为 splitNumber 是预估的值，实际根据策略计算出来的刻度可能无法达到想要的效果，这时候可以使用 interval 配合 min、max 强制设定刻度划分。在类目轴中无效。
 * yaxis_margin -> int  
     y 轴刻度标签与轴线之间的距离。默认为 8
-* yaxis_formatter -> str  
+* yaxis_formatter -> str | function  
     y 轴标签格式器，如 '天'，则 y 轴的标签为数据加'天'(3 天，4 天),默认为 ""
+
+```
+from pyecharts_javascripthon import Date
+
+def yaxis_formatter(value, index):
+    date = Date(value)
+    texts = [(date.getMonth() + 1), date.getDate()];
+    if index == 0:
+        texts.unshift(date.getYear())
+    return '/'.join(texts)
+```
+
 * yaxis_name -> str  
     y 轴名称
 * yaxis_name_size -> int  
@@ -236,13 +262,45 @@
     是否随机排列颜色列表，默认为 False
 * label_color -> list  
     自定义标签颜色。全局颜色列表，所有图表的图例颜色均在这里修改。如 Bar 的柱状颜色，Line 的线条颜色等等。
-* label_formatter -> str  
+* label_formatter -> str | function
     模板变量有 {a}, {b}，{c}，{d}，{e}，分别表示系列名，数据名，数据值等。使用示例，如 `label_formatter='{a}'`  
     在 trigger 为 'axis' 的时候，会有多个系列的数据，此时可以通过 {a0}, {a1}, {a2} 这种后面加索引的方式表示系列的索引。不同图表类型下的 {a}，{b}，{c}，{d} 含义不一样。 其中变量 {a}, {b}, {c}, {d} 在不同图表类型下代表数据含义为：
     * 折线（区域）图、柱状（条形）图、K线图 : {a}（系列名称），{b}（类目值），{c}（数值）, {d}（无）
     * 散点图（气泡）图 : {a}（系列名称），{b}（数据名称），{c}（数值数组）, {d}（无）
     * 地图 : {a}（系列名称），{b}（区域名称），{c}（合并数值）, {d}（无）
     * 饼图、仪表盘、漏斗图: {a}（系列名称），{b}（数据项名称），{c}（数值）, {d}（百分比）
+
+
+回调函数
+
+```
+def label_formatter(params):
+    ...
+```
+
+回调函数格式：
+(params: Object|Array) => string
+参数 params 是 formatter 需要的单个数据集。格式如下：
+{
+    componentType: 'series',
+    // 系列类型
+    seriesType: string,
+    // 系列在传入的 option.series 中的 index
+    seriesIndex: number,
+    // 系列名称
+    seriesName: string,
+    // 数据名，类目名
+    name: string,
+    // 数据在传入的 data 数组中的 index
+    dataIndex: number,
+    // 传入的原始数据项
+    data: Object,
+    // 传入的数据值
+    value: number|Array,
+    // 数据图形的颜色
+    color: string,
+
+}
 
 **Note：** is_random 可随机打乱图例颜色列表，算是切换风格？建议试一试！
 
@@ -397,13 +455,47 @@
     * 'line': 直线指示器
     * 'shadow': 阴影指示器
     * 'cross': 十字准星指示器。其实是种简写，表示启用两个正交的轴的 axisPointer。
-* tooltip_formatter -> str  
+* tooltip_formatter -> str | function
     模板变量有 {a}, {b}，{c}，{d}，{e}，分别表示系列名，数据名，数据值等。  
     在 trigger 为 'axis' 的时候，会有多个系列的数据，此时可以通过 {a0}, {a1}, {a2} 这种后面加索引的方式表示系列的索引。不同图表类型下的 {a}，{b}，{c}，{d} 含义不一样。 其中变量 {a}, {b}, {c}, {d} 在不同图表类型下代表数据含义为：
     * 折线（区域）图、柱状（条形）图、K线图 : {a}（系列名称），{b}（类目值），{c}（数值）, {d}（无）
     * 散点图（气泡）图 : {a}（系列名称），{b}（数据名称），{c}（数值数组）, {d}（无）
     * 地图 : {a}（系列名称），{b}（区域名称），{c}（合并数值）, {d}（无）
     * 饼图、仪表盘、漏斗图: {a}（系列名称），{b}（数据项名称），{c}（数值）, {d}（百分比）
+
+回调函数格式：
+
+```
+def tooltip_formatter(params):
+    ...
+```
+
+(params: Object|Array, ticket: string, callback: (ticket: string, html: string)) => string
+第一个参数 params 是 formatter 需要的数据集。格式如下：
+{
+    componentType: 'series',
+    // 系列类型
+    seriesType: string,
+    // 系列在传入的 option.series 中的 index
+    seriesIndex: number,
+    // 系列名称
+    seriesName: string,
+    // 数据名，类目名
+    name: string,
+    // 数据在传入的 data 数组中的 index
+    dataIndex: number,
+    // 传入的原始数据项
+    data: Object,
+    // 传入的数据值
+    value: number|Array,
+    // 数据图形的颜色
+    color: string,
+
+    // 饼图的百分比
+    percent: number,
+
+}
+
 * tooltip_text_color -> str  
     提示框字体颜色，默认为 '#fff'
 * tooltip_font_size -> int  
@@ -2131,8 +2223,33 @@ add(name, data,
     坐标轴刻度范围。默认值为 [None, None]。
 * is_angleaxis_show -> bool  
     是否显示极坐标系的角度轴，默认为 True
+* radiusaxis_z_index -> int
+    radius 轴的 z 指数，默认为 50
+* angleaxis_z_index -> int
+    angel 轴的 z 指数，默认为 50
 * is_radiusaxis_show -> bool  
     是否显示极坐标系的径向轴，默认为 True
+* param render_item -> function
+    开发者自己提供图形渲染的逻辑, 这个渲染逻辑一般命名为 render_item
+
+```python
+def render_item(params, api):
+    values = [api.value(0), api.value(1)]
+    coord = api.coord(values)
+    size = api.size([1, 1], values)
+    return {
+        "type": 'sector',
+        "shape": {
+            "cx": params.coordSys.cx,
+            "cy": params.coordSys.cy,
+            "r0": coord[2] - size[0] / 2,
+            "r": coord[2] + size[0] / 2,
+            "startAngle": coord[3] - size[1] / 2,
+            "endAngle": coord[3] + size[1] / 2,
+        },
+        "style": api.style({"fill": api.visual('color')}),
+    }
+```
 
 ```python
 from pyecharts import Polar

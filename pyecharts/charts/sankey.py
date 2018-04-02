@@ -18,10 +18,15 @@ class Sankey(Chart):
     def add(self, *args, **kwargs):
         self.__add(*args, **kwargs)
 
-    def __add(self, name, nodes, links,
-              sankey_node_width=20,
-              sankey_node_gap=8,
-              **kwargs):
+    def __add(
+        self,
+        name,
+        nodes,
+        links,
+        sankey_node_width=20,
+        sankey_node_gap=8,
+        **kwargs
+    ):
         """
 
         :param name:
@@ -44,15 +49,17 @@ class Sankey(Chart):
         chart = get_all_options(**kwargs)
         self._option.get('legend')[0].get('data').append(name)
 
-        self._option.get('series').append({
-            "type": "sankey",
-            "name": name,
-            "layout": None,
-            "data": nodes,
-            "links": links,
-            "nodeWidth": sankey_node_width,
-            "nodeGap": sankey_node_gap,
-            "label": chart['label'],
-            "lineStyle": chart['line_style'],
-        })
+        self._option.get('series').append(
+            {
+                "type": "sankey",
+                "name": name,
+                "layout": None,
+                "data": nodes,
+                "links": links,
+                "nodeWidth": sankey_node_width,
+                "nodeGap": sankey_node_gap,
+                "label": chart['label'],
+                "lineStyle": chart['line_style'],
+            }
+        )
         self._config_components(**kwargs)
