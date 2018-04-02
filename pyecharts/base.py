@@ -191,12 +191,14 @@ class Base(object):
             cls=UnknownTypeEncoder,
         )
         options_with_js_functions = javascript.unescape_js_function(
-            options_in_json)
+            options_in_json
+        )
         return options_with_js_functions
 
     def _add_a_python_function(self, a_function):
         if a_function.__name__ in javascript.GLOBAL_CALLBACKS.functions:
             return constants.FUNCTION_SIGNATURE.format(a_function.__name__)
+
         else:
             return self.callbacks.add_a_python_function(a_function)
 

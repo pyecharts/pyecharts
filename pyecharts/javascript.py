@@ -3,6 +3,7 @@ import pyecharts.exceptions as exceptions
 
 
 class CallbackManager:
+
     def __init__(self):
         self.functions = {}
 
