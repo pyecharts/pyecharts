@@ -7,6 +7,7 @@ class Style(Chart):
     """
     `Style`类可用于简化配置项编写，可用于在同一个图或者多个图内保持统一的风格
     """
+
     def __init__(self, title="", subtitle="", **kwargs):
         super(Style, self).__init__(title, subtitle, **kwargs)
         self._add_style = None

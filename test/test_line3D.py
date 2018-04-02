@@ -21,17 +21,29 @@ def create_line3d_data():
 def test_line3d_default():
     _data = list(create_line3d_data())
     line3d = Line3D("3D 折线图示例", width=1200, height=600)
-    line3d.add("", _data, is_visualmap=True, visual_range_color=RANGE_COLOR,
-               visual_range=[0, 30], grid3d_rotate_sensitivity=5)
+    line3d.add(
+        "",
+        _data,
+        is_visualmap=True,
+        visual_range_color=RANGE_COLOR,
+        visual_range=[0, 30],
+        grid3d_rotate_sensitivity=5,
+    )
     line3d.render()
 
 
 def test_line3d_rotate_automatically_speedup():
     _data = list(create_line3d_data())
     line3d = Line3D("3D 折线图示例", width=1200, height=600)
-    line3d.add("", _data, is_visualmap=True, visual_range_color=RANGE_COLOR,
-               visual_range=[0, 30], is_grid3d_rotate=True,
-               grid3d_rotate_speed=180)
+    line3d.add(
+        "",
+        _data,
+        is_visualmap=True,
+        visual_range_color=RANGE_COLOR,
+        visual_range=[0, 30],
+        is_grid3d_rotate=True,
+        grid3d_rotate_speed=180,
+    )
     line3d.render()
 
 

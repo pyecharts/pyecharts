@@ -7,9 +7,7 @@ import codecs
 from nose.tools import eq_
 
 from pyecharts.utils import (
-    write_utf8_html_file,
-    get_resource_dir,
-    merge_js_dependencies
+    write_utf8_html_file, get_resource_dir, merge_js_dependencies
 )
 
 
@@ -48,7 +46,7 @@ def test_merge_js_dependencies_with_one_chart():
     ch1 = MockChart(['echarts', 'fujian', 'zhengjiang', 'anhui'])
     eq_(
         ['echarts', 'fujian', 'zhengjiang', 'anhui'],
-        merge_js_dependencies(ch1)
+        merge_js_dependencies(ch1),
     )
 
 
@@ -57,28 +55,18 @@ def test_merge_js_dependencies_with_multiple_charts():
     map_chart = MockChart(['echarts', 'fujian'])
     three_d_chart = MockChart(['echarts', 'echartsgl'])
     # Multiple charts
-    eq_(
-        ['echarts', 'fujian'],
-        merge_js_dependencies(base_chart, map_chart)
-    )
+    eq_(['echarts', 'fujian'], merge_js_dependencies(base_chart, map_chart))
     eq_(
         ['echarts', 'echartsgl', 'fujian'],
-        merge_js_dependencies(base_chart, map_chart, three_d_chart)
+        merge_js_dependencies(base_chart, map_chart, three_d_chart),
     )
 
 
 def test_merge_js_dependencies_with_mixed_chart_and_string():
     map_chart = MockChart(['echarts', 'fujian'])
 
+    eq_(['echarts', 'zhejiang'], merge_js_dependencies('echarts', 'zhejiang'))
     eq_(
-        ['echarts', 'zhejiang'],
-        merge_js_dependencies('echarts', 'zhejiang')
+        ['echarts', 'zhejiang'], merge_js_dependencies(['echarts', 'zhejiang'])
     )
-    eq_(
-        ['echarts', 'zhejiang'],
-        merge_js_dependencies(['echarts', 'zhejiang'])
-    )
-    eq_(
-        ['echarts', 'fujian'],
-        merge_js_dependencies('echarts', map_chart)
-    )
+    eq_(['echarts', 'fujian'], merge_js_dependencies('echarts', map_chart))

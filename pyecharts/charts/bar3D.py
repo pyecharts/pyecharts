@@ -18,10 +18,16 @@ class Bar3D(Chart):
     def add(self, *args, **kwargs):
         self.__add(*args, **kwargs)
 
-    def __add(self, name, x_axis, y_axis, data,
-              grid3d_opacity=1,
-              grid3d_shading='color',
-              **kwargs):
+    def __add(
+        self,
+        name,
+        x_axis,
+        y_axis,
+        data,
+        grid3d_opacity=1,
+        grid3d_shading='color',
+        **kwargs
+    ):
         """
 
         :param name:
@@ -46,9 +52,11 @@ class Bar3D(Chart):
                 染（PBR）来表现真实感材质。
         :param kwargs:
         """
-        kwargs.update(xaxis3d_type='category',
-                      yaxis3d_type='category',
-                      zaxis3d_type='value')
+        kwargs.update(
+            xaxis3d_type='category',
+            yaxis3d_type='category',
+            zaxis3d_type='value',
+        )
         chart = get_all_options(**kwargs)
 
         self._option.get('legend')[0].get('data').append(name)
@@ -56,17 +64,19 @@ class Bar3D(Chart):
             xAxis3D=chart['xaxis3D'],
             yAxis3D=chart['yaxis3D'],
             zAxis3D=chart['zaxis3D'],
-            grid3D=chart['grid3D']
+            grid3D=chart['grid3D'],
         )
         self._option.get('xAxis3D').update(data=x_axis)
         self._option.get('yAxis3D').update(data=y_axis)
 
-        self._option.get('series').append({
-            "type": "bar3D",
-            "name": name,
-            "data": data,
-            "label": chart['label'],
-            "shading": grid3d_shading,
-            "itemStyle": {"opacity": grid3d_opacity}
-        })
+        self._option.get('series').append(
+            {
+                "type": "bar3D",
+                "name": name,
+                "data": data,
+                "label": chart['label'],
+                "shading": grid3d_shading,
+                "itemStyle": {"opacity": grid3d_opacity},
+            }
+        )
         self._config_components(**kwargs)

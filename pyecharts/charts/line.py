@@ -10,20 +10,26 @@ class Line(Chart):
 
     折线图是用折线将各个数据点标志连接起来的图表，用于展现数据的变化趋势。
     """
+
     def __init__(self, title="", subtitle="", **kwargs):
         super(Line, self).__init__(title, subtitle, **kwargs)
 
     def add(self, *args, **kwargs):
         self.__add(*args, **kwargs)
 
-    def __add(self, name, x_axis, y_axis,
-              is_symbol_show=True,
-              symbol_size=4,
-              is_smooth=False,
-              is_stack=False,
-              is_step=False,
-              is_fill=False,
-              **kwargs):
+    def __add(
+        self,
+        name,
+        x_axis,
+        y_axis,
+        is_symbol_show=True,
+        symbol_size=4,
+        is_smooth=False,
+        is_stack=False,
+        is_step=False,
+        is_fill=False,
+        **kwargs
+    ):
         """
 
         :param name:
@@ -58,21 +64,23 @@ class Line(Chart):
         self._option.update(xAxis=xaxis, yAxis=yaxis)
         self._option.get('legend')[0].get('data').append(name)
 
-        self._option.get('series').append({
-            "type": "line",
-            "name": name,
-            "symbol": chart['symbol'],
-            "symbolSize": symbol_size,
-            "smooth": is_smooth,
-            "step": is_step,
-            "stack": is_stack,
-            "showSymbol": is_symbol_show,
-            "data": y_axis,
-            "label": chart['label'],
-            "lineStyle": chart['line_style'],
-            "areaStyle": chart['area_style'],
-            "markPoint": chart['mark_point'],
-            "markLine": chart['mark_line'],
-            "seriesId": self._option.get('series_id'),
-        })
+        self._option.get('series').append(
+            {
+                "type": "line",
+                "name": name,
+                "symbol": chart['symbol'],
+                "symbolSize": symbol_size,
+                "smooth": is_smooth,
+                "step": is_step,
+                "stack": is_stack,
+                "showSymbol": is_symbol_show,
+                "data": y_axis,
+                "label": chart['label'],
+                "lineStyle": chart['line_style'],
+                "areaStyle": chart['area_style'],
+                "markPoint": chart['mark_point'],
+                "markLine": chart['mark_line'],
+                "seriesId": self._option.get('series_id'),
+            }
+        )
         self._config_components(**kwargs)

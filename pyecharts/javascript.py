@@ -29,7 +29,8 @@ def add_a_new_function(afunc):
 def unescape_js_function(options_json):
     unescaped_json = options_json.replace(FUNCTION_LEFT_ESCAPE, '')
     json_with_function_names = unescaped_json.replace(
-        FUNCTION_RIGHT_ESCAPE, '')
+        FUNCTION_RIGHT_ESCAPE, ''
+    )
     return json_with_function_names
 
 
@@ -46,7 +47,8 @@ def translate_python_functions():
     content = []
     for func in CUSTOM_FUNCTIONS:
         javascript_function = Python2Javascript.translate(
-            CUSTOM_FUNCTIONS[func])
+            CUSTOM_FUNCTIONS[func]
+        )
         content.append(javascript_function)
     return ''.join(content)
 
@@ -59,13 +61,16 @@ class UnknownTypeEncoder(json.JSONEncoder):
     def default(self, obj):
         if isinstance(obj, (datetime.datetime, datetime.date)):
             return obj.isoformat()
+
         else:
             # Pandas and Numpy lists
             try:
                 return obj.astype(float).tolist()
+
             except Exception:
                 try:
                     return obj.astype(str).tolist()
+
                 except Exception:
                     return json.JSONEncoder.default(self, obj)
 
@@ -78,8 +83,8 @@ def translate_options(data, indent=0):
     """
     options_in_json = json.dumps(data, indent=indent, cls=UnknownTypeEncoder)
     if has_functions():
-        options_with_js_functions = unescape_js_function(
-            options_in_json)
+        options_with_js_functions = unescape_js_function(options_in_json)
         return options_with_js_functions
+
     else:
         return options_in_json
