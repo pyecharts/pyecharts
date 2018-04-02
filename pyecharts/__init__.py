@@ -16,6 +16,7 @@ from pyecharts.charts.graph import Graph
 from pyecharts.charts.heatmap import HeatMap
 
 from pyecharts.charts.kline import Kline
+
 Candlestick = Kline
 
 from pyecharts.charts.line import Line

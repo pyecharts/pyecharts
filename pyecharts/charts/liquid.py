@@ -9,6 +9,7 @@ class Liquid(Chart):
 
     主要用来突出数据的百分比。
     """
+
     def __init__(self, title="", subtitle="", **kwargs):
         super(Liquid, self).__init__(title, subtitle, **kwargs)
         self._js_dependencies.add('liquidfill')
@@ -16,12 +17,16 @@ class Liquid(Chart):
     def add(self, *args, **kwargs):
         self.__add(*args, **kwargs)
 
-    def __add(self, name, data,
-              shape='circle',
-              liquid_color=None,
-              is_liquid_animation=True,
-              is_liquid_outline_show=True,
-              **kwargs):
+    def __add(
+        self,
+        name,
+        data,
+        shape='circle',
+        liquid_color=None,
+        is_liquid_animation=True,
+        is_liquid_outline_show=True,
+        **kwargs
+    ):
         """
 
         :param name:
@@ -47,17 +52,17 @@ class Liquid(Chart):
         if liquid_color:
             _color = liquid_color
 
-        self._option.get('series').append({
-            "type": "liquidFill",
-            "name": name,
-            "data": data,
-            "waveAnimation": is_liquid_animation,
-            "animationDuration": _animation_dur,
-            "animationDurationUpdate": _animation_dur_update,
-            "color": _color,
-            "shape": shape,
-            "outline": {
-                "show": is_liquid_outline_show
+        self._option.get('series').append(
+            {
+                "type": "liquidFill",
+                "name": name,
+                "data": data,
+                "waveAnimation": is_liquid_animation,
+                "animationDuration": _animation_dur,
+                "animationDurationUpdate": _animation_dur_update,
+                "color": _color,
+                "shape": shape,
+                "outline": {"show": is_liquid_outline_show},
             }
-        })
+        )
         self._config_components(**kwargs)

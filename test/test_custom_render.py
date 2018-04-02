@@ -20,11 +20,15 @@ def create_three():
 
     # scatter3D
     import random
+
     data = [
-        [random.randint(0, 100),
-         random.randint(0, 100),
-         random.randint(0, 100)] for _ in range(80)
+        [
+            random.randint(0, 100),
+            random.randint(0, 100),
+            random.randint(0, 100),
         ]
+        for _ in range(80)
+    ]
     scatter3d = Scatter3D("3D 散点图示例", width=1200, height=600)
     scatter3d.add("", data, is_visualmap=True, visual_range_color=RANGE_COLOR)
 
@@ -34,7 +38,7 @@ def create_three():
 def test_custom_templates():
     configure(
         jshost='https://chfw.github.io/jupyter-echarts/echarts',
-        force_js_embed=False
+        force_js_embed=False,
     )
     page = create_three()
     # page.js_dependencies = ['echarts.min']
@@ -46,16 +50,11 @@ def test_custom_templates():
 
 
 def test_custom_template_for_chart():
-    data = [{
-        'name': '衬衫',
-        'value': 5
-    }, {
-        'name': '羊毛衫',
-        'value': 20
-    }, {
-        'name': '雪纺衫',
-        'value': 36
-    }]
+    data = [
+        {'name': '衬衫', 'value': 5},
+        {'name': '羊毛衫', 'value': 20},
+        {'name': '雪纺衫', 'value': 36},
+    ]
 
     configure(echarts_template_dir='.')
 

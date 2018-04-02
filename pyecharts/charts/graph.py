@@ -10,23 +10,30 @@ class Graph(Chart):
 
     用于展现节点以及节点之间的关系数据。
     """
+
     def __init__(self, title="", subtitle="", **kwargs):
         super(Graph, self).__init__(title, subtitle, **kwargs)
 
     def add(self, *args, **kwargs):
         self.__add(*args, **kwargs)
 
-    def __add(self, name, nodes, links, categories=None,
-              is_focusnode=True,
-              is_roam=True,
-              is_rotatelabel=False,
-              graph_layout="force",
-              graph_edge_length=50,
-              graph_gravity=0.2,
-              graph_repulsion=50,
-              graph_edge_symbol=None,
-              graph_edge_symbolsize=10,
-              **kwargs):
+    def __add(
+        self,
+        name,
+        nodes,
+        links,
+        categories=None,
+        is_focusnode=True,
+        is_roam=True,
+        is_rotatelabel=False,
+        graph_layout="force",
+        graph_edge_length=50,
+        graph_gravity=0.2,
+        graph_repulsion=50,
+        graph_edge_symbol=None,
+        graph_edge_symbolsize=10,
+        **kwargs
+    ):
         """
         :param name:
             系列名称，用于 tooltip 的显示，legend 的图例筛选。
@@ -88,27 +95,27 @@ class Graph(Chart):
         if graph_edge_symbol is None:
             graph_edge_symbol = [None, None]
 
-        self._option.get('series').append({
-            "type": "graph",
-            "name": name,
-            "layout": graph_layout,
-            "symbol": chart['symbol'],
-            "circular": {
-                "rotateLabel": is_rotatelabel
-            },
-            "force": {
-                "repulsion": graph_repulsion,
-                "edgeLength": graph_edge_length,
-                "gravity": graph_gravity
-            },
-            "label": chart['label'],
-            "lineStyle": chart['line_style'],
-            "roam": is_roam,
-            "focusNodeAdjacency": is_focusnode,
-            "data": nodes,
-            "categories": categories,
-            "edgeSymbol": graph_edge_symbol,
-            "edgeSymbolSize": graph_edge_symbolsize,
-            "links": links,
-        })
+        self._option.get('series').append(
+            {
+                "type": "graph",
+                "name": name,
+                "layout": graph_layout,
+                "symbol": chart['symbol'],
+                "circular": {"rotateLabel": is_rotatelabel},
+                "force": {
+                    "repulsion": graph_repulsion,
+                    "edgeLength": graph_edge_length,
+                    "gravity": graph_gravity,
+                },
+                "label": chart['label'],
+                "lineStyle": chart['line_style'],
+                "roam": is_roam,
+                "focusNodeAdjacency": is_focusnode,
+                "data": nodes,
+                "categories": categories,
+                "edgeSymbol": graph_edge_symbol,
+                "edgeSymbolSize": graph_edge_symbolsize,
+                "links": links,
+            }
+        )
         self._config_components(**kwargs)

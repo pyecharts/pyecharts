@@ -35,24 +35,31 @@ class Geo(Chart):
         """
         if name in self._coordinates:
             return self._coordinates[name]
+
         coordinate = get_coordinate(name)
         if coordinate is None and raise_exception:
             raise ValueError('No coordinate is specified for {}'.format(name))
+
         return coordinate
 
     def add(self, *args, **kwargs):
         self.__add(*args, **kwargs)
 
-    def __add(self, name, attr, value,
-              type="scatter",
-              maptype='china',
-              symbol_size=12,
-              border_color="#111",
-              geo_normal_color="#323c48",
-              geo_emphasis_color="#2a333d",
-              geo_cities_coords=None,
-              is_roam=True,
-              **kwargs):
+    def __add(
+        self,
+        name,
+        attr,
+        value,
+        type="scatter",
+        maptype='china',
+        symbol_size=12,
+        border_color="#111",
+        geo_normal_color="#323c48",
+        geo_emphasis_color="#2a333d",
+        geo_cities_coords=None,
+        is_roam=True,
+        **kwargs
+    ):
         """
 
         :param name:
@@ -106,54 +113,56 @@ class Geo(Chart):
                 "map": maptype,
                 "roam": is_roam,
                 "label": {
-                    "emphasis": {
-                        "show": True,
-                        "textStyle": {
-                            "color": "#eee"
-                        }
-                    }},
+                    "emphasis": {"show": True, "textStyle": {"color": "#eee"}}
+                },
                 "itemStyle": {
                     "normal": {
                         "areaColor": geo_normal_color,
-                        "borderColor": border_color
+                        "borderColor": border_color,
                     },
-                    "emphasis": {
-                        "areaColor": geo_emphasis_color
-                    }}
-            })
+                    "emphasis": {"areaColor": geo_emphasis_color},
+                },
+            }
+        )
         self._option.get('legend')[0].get('data').append(name)
 
         if type == "scatter":
-            self._option.get('series').append({
-                "type": type,
-                "name": name,
-                "coordinateSystem": 'geo',
-                "symbol": chart['symbol'],
-                "symbolSize": symbol_size,
-                "data": _data,
-                "label": chart['label'],
-            })
+            self._option.get('series').append(
+                {
+                    "type": type,
+                    "name": name,
+                    "coordinateSystem": 'geo',
+                    "symbol": chart['symbol'],
+                    "symbolSize": symbol_size,
+                    "data": _data,
+                    "label": chart['label'],
+                }
+            )
 
         elif type == "effectScatter":
-            self._option.get('series').append({
-                "type": type,
-                "name": name,
-                "coordinateSystem": 'geo',
-                "showEffectOn": "render",
-                "rippleEffect": chart['effect'],
-                "symbol": chart['symbol'],
-                "symbolSize": symbol_size,
-                "data": _data,
-                "label": chart['label'],
-            })
+            self._option.get('series').append(
+                {
+                    "type": type,
+                    "name": name,
+                    "coordinateSystem": 'geo',
+                    "showEffectOn": "render",
+                    "rippleEffect": chart['effect'],
+                    "symbol": chart['symbol'],
+                    "symbolSize": symbol_size,
+                    "data": _data,
+                    "label": chart['label'],
+                }
+            )
 
         elif type == "heatmap":
-            self._option.get('series').append({
-                "type": type,
-                "name": name,
-                "coordinateSystem": 'geo',
-                "data": _data,
-            })
+            self._option.get('series').append(
+                {
+                    "type": type,
+                    "name": name,
+                    "coordinateSystem": 'geo',
+                    "data": _data,
+                }
+            )
 
         self._add_chinese_map(maptype)
         self._config_components(**kwargs)
