@@ -43,6 +43,7 @@ def generic_formatter_t_est(**keywords):
         with assert_raises(exceptions.JavascriptNotSupported):
             bar.render()
 
+
 def test_label_formatter():
     generic_formatter_t_est(label_formatter=label_formatter)
     if PY35_ABOVE and not WINDOWS:
