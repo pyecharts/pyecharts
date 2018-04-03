@@ -230,7 +230,7 @@ def xy_axis(
     xaxis_pos=None,
     xaxis_label_textsize=12,
     xaxis_label_textcolor="#000",
-    xaxis_formatter="",
+    xaxis_formatter=None,
     yaxis_margin=8,
     yaxis_name_size=14,
     yaxis_name_gap=25,
@@ -303,7 +303,7 @@ def xy_axis(
         x 坐标轴标签字体大小
     :param xaxis_label_textcolor:
         x 坐标轴标签字体颜色
-    :param axis_formatter:
+    :param xaxis_formatter:
         x 轴标签格式器，如 '天'，则 x 轴的标签为数据加'天'(3 天，4 天),默认为 ""
     :param yaxis_margin:
         y 轴刻度标签与轴线之间的距离。默认为 8
