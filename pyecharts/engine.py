@@ -96,6 +96,7 @@ def generate_js_content(*charts):
         )
         if javascript.has_functions():
             kwargs['custom_function'] = javascript.translate_python_functions()
+            javascript.clear()
         js_content = CHART_CONFIG_FORMATTER.format(**kwargs)
 
         contents.append(js_content)

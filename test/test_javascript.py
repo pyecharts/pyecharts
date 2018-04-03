@@ -25,15 +25,15 @@ def generic_formatter_t_est(**keywords):
     attr = ["Jan", "Feb"]
     v1 = [2.0, 4.9]
     bar = Bar("Bar chart", "precipitation and evaporation one year")
+    bar.add(
+        "precipitation",
+        attr,
+        v1,
+        mark_line=["average"],
+        mark_point=["max", "min"],
+        **keywords
+    )
     if PY35_ABOVE:
-        bar.add(
-            "precipitation",
-            attr,
-            v1,
-            mark_line=["average"],
-            mark_point=["max", "min"],
-            **keywords
-        )
         if WINDOWS:
             with assert_raises(exceptions.ExtensionMissing):
                 bar.render()
@@ -41,16 +41,7 @@ def generic_formatter_t_est(**keywords):
             bar.render()
     else:
         with assert_raises(exceptions.JavascriptNotSupported):
-            bar.add(
-                "precipitation",
-                attr,
-                v1,
-                mark_line=["average"],
-                mark_point=["max", "min"],
-                **keywords
-            )
-    javascript.clear()
-
+            bar.render()
 
 def test_label_formatter():
     generic_formatter_t_est(label_formatter=label_formatter)
@@ -140,14 +131,12 @@ def test_polar_draw_snail():
                 data,
                 symbol_size=0,
                 symbol='circle',
-                start_angle=-25,
                 area_color="#f3c5b3",
                 type='custom',
                 render_item=custom_polar_render_item,
                 area_opacity=0.5,
                 is_angleaxis_show=False,
             )
-    javascript.clear()
 
 
 def test_json_encoder():
