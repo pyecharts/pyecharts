@@ -88,6 +88,7 @@ def generate_js_content(*charts):
     """
     contents = []
     for chart in charts:
+        javascript.clear()
         kwargs = dict(
             chart_id=chart.chart_id,
             renderer=chart.renderer,
@@ -96,7 +97,6 @@ def generate_js_content(*charts):
         )
         if javascript.has_functions():
             kwargs['custom_function'] = javascript.translate_python_functions()
-            javascript.clear()
         js_content = CHART_CONFIG_FORMATTER.format(**kwargs)
 
         contents.append(js_content)
