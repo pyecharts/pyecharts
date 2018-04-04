@@ -1,5 +1,6 @@
 # coding=utf-8
 import json
+import types
 import datetime
 
 import pyecharts.constants as constants
@@ -61,7 +62,8 @@ class UnknownTypeEncoder(json.JSONEncoder):
     def default(self, obj):
         if isinstance(obj, (datetime.datetime, datetime.date)):
             return obj.isoformat()
-
+        if isinstance(obj, types.FunctionType):
+            return add_a_new_function(obj)
         else:
             # Pandas and Numpy lists
             try:

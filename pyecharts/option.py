@@ -1,10 +1,8 @@
 # coding=utf-8
 from __future__ import unicode_literals
 
-import random
 import types
-
-import pyecharts.javascript as javascript
+import random
 
 fs = []
 SYMBOLS = ('rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow')
@@ -87,14 +85,11 @@ def label(
         },
     }
 
-    _tmp_formatter = label_formatter
     if label_formatter is None:
         if type == "pie":
-            _tmp_formatter = "{b}: {d}%"
-    elif isinstance(label_formatter, types.FunctionType):
-        _tmp_formatter = javascript.add_a_new_function(label_formatter)
+            label_formatter = "{b}: {d}%"
     if type != "graph":
-        _label.get("normal").update(formatter=_tmp_formatter)
+        _label.get("normal").update(formatter=label_formatter)
     return _label
 
 
@@ -308,6 +303,8 @@ def xy_axis(
         x 坐标轴标签字体大小
     :param xaxis_label_textcolor:
         x 坐标轴标签字体颜色
+    :param xaxis_formatter:
+        x 轴标签格式器，如 '天'，则 x 轴的标签为数据加'天'(3 天，4 天),默认为 ""
     :param yaxis_margin:
         y 轴刻度标签与轴线之间的距离。默认为 8
     :param yaxis_name_size:
@@ -375,12 +372,7 @@ def xy_axis(
         是否显示 y 轴网格线，默认为 True。
     :param kwargs:
     """
-    if isinstance(xaxis_formatter, types.FunctionType):
-        xaxis_formatter = javascript.add_a_new_function(xaxis_formatter)
-
-    if isinstance(yaxis_formatter, types.FunctionType):
-        yaxis_formatter = javascript.add_a_new_function(yaxis_formatter)
-    else:
+    if not isinstance(yaxis_formatter, types.FunctionType):
         yaxis_formatter = "{value} " + yaxis_formatter
 
     _xAxis = {
@@ -1151,20 +1143,17 @@ def tooltip(
     :param tooltip_border_width:
         提示框浮层的边框宽。默认为 0
     """
-    _tmp_formatter = tooltip_formatter
     if tooltip_formatter is None:
         if type == "gauge":
-            _tmp_formatter = "{a} <br/>{b} : {c}%"
+            tooltip_formatter = "{a} <br/>{b} : {c}%"
         elif type == "geo":
-            _tmp_formatter = "{b}: {c}"
-    elif isinstance(tooltip_formatter, types.FunctionType):
-        _tmp_formatter = javascript.add_a_new_function(tooltip_formatter)
+            tooltip_formatter = "{b}: {c}"
 
     _tooltip = {
         "trigger": tooltip_tragger,
         "triggerOn": tooltip_tragger_on,
         "axisPointer": {"type": tooltip_axispointer_type},
-        "formatter": _tmp_formatter,
+        "formatter": tooltip_formatter,
         "textStyle": {
             "color": tooltip_text_color, "fontSize": tooltip_font_size
         },

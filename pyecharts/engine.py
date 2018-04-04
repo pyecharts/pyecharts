@@ -88,6 +88,7 @@ def generate_js_content(*charts):
     """
     contents = []
     for chart in charts:
+        javascript.clear()
         kwargs = dict(
             chart_id=chart.chart_id,
             renderer=chart.renderer,
