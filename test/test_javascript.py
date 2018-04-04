@@ -103,18 +103,18 @@ def custom_polar_render_item(params, api):
 def test_polar_draw_snail():
     data = []
     polar = Polar("polar test")
+    polar.add(
+        "",
+        data,
+        symbol_size=0,
+        symbol='circle',
+        area_color="#f3c5b3",
+        type='custom',
+        render_item=custom_polar_render_item,
+        area_opacity=0.5,
+        is_angleaxis_show=False,
+    )
     if PY35_ABOVE:
-        polar.add(
-            "",
-            data,
-            symbol_size=0,
-            symbol='circle',
-            area_color="#f3c5b3",
-            type='custom',
-            render_item=custom_polar_render_item,
-            area_opacity=0.5,
-            is_angleaxis_show=False,
-        )
         if WINDOWS:
             with assert_raises(exceptions.ExtensionMissing):
                 polar.render()
@@ -127,17 +127,7 @@ def test_polar_draw_snail():
             os.unlink('render.html')
     else:
         with assert_raises(exceptions.JavascriptNotSupported):
-            polar.add(
-                "",
-                data,
-                symbol_size=0,
-                symbol='circle',
-                area_color="#f3c5b3",
-                type='custom',
-                render_item=custom_polar_render_item,
-                area_opacity=0.5,
-                is_angleaxis_show=False,
-            )
+            polar.render()
 
 
 def test_json_encoder():
