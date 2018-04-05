@@ -8,9 +8,9 @@ from jinja2 import Markup
 import pyecharts.utils as utils
 import pyecharts.engine as engine
 import pyecharts.constants as constants
-import pyecharts.javascript as javascript
 import pyecharts.exceptions as exceptions
 from pyecharts.conf import CURRENT_CONFIG
+from pyecharts.translator.api import TRANSLATOR
 
 
 class Base(object):
@@ -19,11 +19,11 @@ class Base(object):
     """
 
     def __init__(
-        self,
-        width=800,
-        height=400,
-        renderer=constants.CANVAS_RENDERER,
-        page_title=constants.PAGE_TITLE,
+            self,
+            width=800,
+            height=400,
+            renderer=constants.CANVAS_RENDERER,
+            page_title=constants.PAGE_TITLE,
     ):
         """
 
@@ -68,7 +68,7 @@ class Base(object):
     def print_echarts_options(self):
         """ 打印输出图形所有配置项
         """
-        print(javascript.translate_options(self._option, indent=4))
+        print(TRANSLATOR.translate(self.options))
 
     def show_config(self):
         """ 打印输出图形所有配置项
@@ -94,11 +94,11 @@ class Base(object):
         return CURRENT_CONFIG.produce_html_script_list(self._js_dependencies)
 
     def render(
-        self,
-        path='render.html',
-        template_name='simple_chart.html',
-        object_name='chart',
-        **kwargs
+            self,
+            path='render.html',
+            template_name='simple_chart.html',
+            object_name='chart',
+            **kwargs
     ):
         _, ext = os.path.splitext(path)
         _file_type = ext[1:]

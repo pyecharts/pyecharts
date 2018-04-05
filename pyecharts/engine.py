@@ -1,17 +1,13 @@
 # coding=utf-8
 from __future__ import unicode_literals
 
-import codecs
-
 from jinja2 import Environment, FileSystemLoader, environmentfunction, Markup
 from lml.plugin import PluginManager, PluginInfo
 
 import pyecharts.conf as conf
-import pyecharts.utils as utils
 import pyecharts.constants as constants
-import pyecharts.exceptions as exceptions
-import pyecharts.javascript as javascript
-
+import pyecharts.utils as utils
+from pyecharts.translator.api import TRANSLATOR
 
 LINK_SCRIPT_FORMATTER = '<script type="text/javascript" src="{}"></script>'
 EMBED_SCRIPT_FORMATTER = '<script type="text/javascript">\n{}\n</script>'
@@ -87,15 +83,15 @@ def generate_js_content(*charts):
     :return:
     """
     contents = []
+
     for chart in charts:
+        javascript_snippet = TRANSLATOR.translate(chart.options)
         kwargs = dict(
             chart_id=chart.chart_id,
             renderer=chart.renderer,
-            custom_function='',
-            options=javascript.translate_options(chart.options, indent=4),
+            custom_function=javascript_snippet.function_snippet,
+            options=javascript_snippet.option_snippet
         )
-        if javascript.has_functions():
-            kwargs['custom_function'] = javascript.translate_python_functions()
         js_content = CHART_CONFIG_FORMATTER.format(**kwargs)
 
         contents.append(js_content)
@@ -186,12 +182,12 @@ class EchartsEnvironment(BaseEnvironment):
         return tpl.render(chart=chart)
 
     def render_chart_to_file(
-        self,
-        chart,
-        object_name='chart',
-        path='render.html',
-        template_name='simple_chart.html',
-        **kwargs
+            self,
+            chart,
+            object_name='chart',
+            path='render.html',
+            template_name='simple_chart.html',
+            **kwargs
     ):
         """
         Render a chart or page to local html files.
