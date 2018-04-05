@@ -2,7 +2,6 @@
 from __future__ import unicode_literals
 
 import random
-import types
 
 fs = []
 SYMBOLS = ('rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow')

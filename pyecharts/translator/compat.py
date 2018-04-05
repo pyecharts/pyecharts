@@ -2,8 +2,8 @@
 
 from __future__ import unicode_literals
 
-import sys
 import inspect
+import sys
 
 try:
     from metapensiero.pj.api import translates
@@ -13,28 +13,27 @@ except ImportError:
     def translates(_lines):
         return ''
 
-
     JAVASCRIPTHON_ENABLED = False
 
 
-class FunctionTranslatorNotSupported(Exception):
+class FunctionTranslatorDisabled(Exception):
     pass
 
 
 class TranslatorCompatAPI(object):
     @staticmethod
-    def check_supported(raise_exception=False):
+    def check_enabled(raise_exception=False):
         PY35 = sys.version_info[:2] >= (3, 5)
-        is_supported = PY35 and JAVASCRIPTHON_ENABLED
-        if not is_supported and raise_exception:
+        enabled = PY35 and JAVASCRIPTHON_ENABLED
+        if not enabled and raise_exception:
             if not PY35:
                 msg = "Python 3.5+ is required for function translator."
 
             else:
-                msg = "javascripthon library isn't installed. see more on document"
-            raise FunctionTranslatorNotSupported(msg)
+                msg = "javascripthon library isn't installed."
+            raise FunctionTranslatorDisabled(msg)
         else:
-            return PY35 and JAVASCRIPTHON_ENABLED
+            return enabled
 
     @staticmethod
     def translate_function(func):

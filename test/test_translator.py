@@ -11,11 +11,11 @@ from pyecharts import Bar, Polar
 from pyecharts.translator.api import TRANSLATOR
 from pyecharts.translator.compat import (
     TranslatorCompatAPI,
-    FunctionTranslatorNotSupported
+    FunctionTranslatorDisabled
 )
 from test.utils import get_default_rendering_file_content
 
-SHOULD_TEST_JS_TRANSLATE = TranslatorCompatAPI.check_supported()
+SHOULD_TEST_JS_TRANSLATE = TranslatorCompatAPI.check_enabled()
 SKIP_MESSAGE = 'Javascript-translate is not supported on current environment'
 
 
@@ -41,7 +41,7 @@ def test_basic_usage():
 
 @unittest.skipIf(SHOULD_TEST_JS_TRANSLATE, SKIP_MESSAGE)
 def test_usage_on_unsupported():
-    with assert_raises(FunctionTranslatorNotSupported):
+    with assert_raises(FunctionTranslatorDisabled):
         def my_fmt(x):
             return x + 5
 
@@ -85,7 +85,7 @@ def test_label_formatter_with_function():
 
 @unittest.skipIf(SHOULD_TEST_JS_TRANSLATE, SKIP_MESSAGE)
 def test_label_formatter_on_unsupported():
-    with assert_raises(FunctionTranslatorNotSupported):
+    with assert_raises(FunctionTranslatorDisabled):
         generic_formatter_t_est(label_formatter=label_formatter)
 
 
@@ -106,7 +106,7 @@ def test_xaxis_formatter_with_function():
 
 @unittest.skipIf(SHOULD_TEST_JS_TRANSLATE, SKIP_MESSAGE)
 def test_xaxis_formatter_on_unsupported():
-    with assert_raises(FunctionTranslatorNotSupported):
+    with assert_raises(FunctionTranslatorDisabled):
         generic_formatter_t_est(tooltip_formatter=tooltip_formatter)
 
 
@@ -144,5 +144,5 @@ def test_polar_draw_snail():
 
 @unittest.skipIf(SHOULD_TEST_JS_TRANSLATE, SKIP_MESSAGE)
 def test_polar_draw_snail_on_unsupported():
-    with assert_raises(FunctionTranslatorNotSupported):
+    with assert_raises(FunctionTranslatorDisabled):
         render_polar()

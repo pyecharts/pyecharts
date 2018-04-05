@@ -98,7 +98,7 @@ _FUNCTION_TRANSLATOR = FunctionTranslator()
 class DefaultJsonEncoder(json.JSONEncoder):
     def default(self, obj):
         if isinstance(obj, types.FunctionType):
-            TranslatorCompatAPI.check_supported(raise_exception=True)
+            TranslatorCompatAPI.check_enabled(raise_exception=True)
             return _FUNCTION_TRANSLATOR.feed(obj)
         if isinstance(obj, (datetime.datetime, datetime.date)):
             return obj.isoformat()
@@ -129,9 +129,6 @@ class EChartsTranslator(object):
         function_snippet = _FUNCTION_TRANSLATOR.translate()
         option_snippet = _FUNCTION_TRANSLATOR.handle_options(option_snippet)
         return JavascriptSnippet(function_snippet.as_snippet(), option_snippet)
-
-    def get_log_info(self):
-        pass
 
 
 TRANSLATOR = EChartsTranslator()
