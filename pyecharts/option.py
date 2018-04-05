@@ -14,17 +14,17 @@ def collectfuncs(func):
 
 @collectfuncs
 def label(
-        type=None,
-        is_label_show=False,
-        is_label_emphasis=True,
-        label_pos=None,
-        label_text_color="#000",
-        label_text_size=12,
-        label_formatter=None,
-        label_emphasis_pos=None,
-        label_emphasis_textcolor='#fff',
-        label_emphasis_textsize=12,
-        **kwargs
+    type=None,
+    is_label_show=False,
+    is_label_emphasis=True,
+    label_pos=None,
+    label_text_color="#000",
+    label_text_size=12,
+    label_formatter=None,
+    label_emphasis_pos=None,
+    label_emphasis_textcolor='#fff',
+    label_emphasis_textsize=12,
+    **kwargs
 ):
     """ 图形上的文本标签，可用于说明图形的一些数据信息，比如值，名称等。
 
@@ -117,13 +117,13 @@ def color(colorlst=None, is_random=False, label_color=None, **kwargs):
 
 @collectfuncs
 def line_style(
-        type=None,
-        line_width=1,
-        line_opacity=1,
-        line_curve=0,
-        line_type="solid",
-        line_color=None,
-        **kwargs
+    type=None,
+    line_width=1,
+    line_opacity=1,
+    line_curve=0,
+    line_type="solid",
+    line_color=None,
+    **kwargs
 ):
     """ 带线图形的线的风格选项
 
@@ -214,49 +214,49 @@ def area_style(flag=False, area_opacity=None, area_color=None, **kwargs):
 
 @collectfuncs
 def xy_axis(
-        type=None,
-        x_axis=None,
-        xaxis_margin=8,
-        xaxis_name_size=14,
-        xaxis_name_gap=25,
-        xaxis_name="",
-        xaxis_name_pos="middle",
-        xaxis_rotate=0,
-        xaxis_min=None,
-        xaxis_max=None,
-        xaxis_type=None,
-        xaxis_interval="auto",
-        xaxis_force_interval=None,
-        xaxis_pos=None,
-        xaxis_label_textsize=12,
-        xaxis_label_textcolor="#000",
-        xaxis_formatter=None,
-        yaxis_margin=8,
-        yaxis_name_size=14,
-        yaxis_name_gap=25,
-        yaxis_name="",
-        yaxis_name_pos="middle",
-        yaxis_rotate=0,
-        yaxis_min=None,
-        yaxis_max=None,
-        yaxis_type=None,
-        yaxis_interval="auto",
-        yaxis_force_interval=None,
-        yaxis_pos=None,
-        yaxis_label_textsize=12,
-        yaxis_label_textcolor="#000",
-        yaxis_formatter="",
-        is_convert=False,
-        is_xaxis_inverse=False,
-        is_yaxis_inverse=False,
-        is_xaxislabel_align=False,
-        is_yaxislabel_align=False,
-        is_xaxis_boundarygap=True,
-        is_yaxis_boundarygap=True,
-        is_xaxis_show=True,
-        is_yaxis_show=True,
-        is_splitline_show=True,
-        **kwargs
+    type=None,
+    x_axis=None,
+    xaxis_margin=8,
+    xaxis_name_size=14,
+    xaxis_name_gap=25,
+    xaxis_name="",
+    xaxis_name_pos="middle",
+    xaxis_rotate=0,
+    xaxis_min=None,
+    xaxis_max=None,
+    xaxis_type=None,
+    xaxis_interval="auto",
+    xaxis_force_interval=None,
+    xaxis_pos=None,
+    xaxis_label_textsize=12,
+    xaxis_label_textcolor="#000",
+    xaxis_formatter=None,
+    yaxis_margin=8,
+    yaxis_name_size=14,
+    yaxis_name_gap=25,
+    yaxis_name="",
+    yaxis_name_pos="middle",
+    yaxis_rotate=0,
+    yaxis_min=None,
+    yaxis_max=None,
+    yaxis_type=None,
+    yaxis_interval="auto",
+    yaxis_force_interval=None,
+    yaxis_pos=None,
+    yaxis_label_textsize=12,
+    yaxis_label_textcolor="#000",
+    yaxis_formatter="",
+    is_convert=False,
+    is_xaxis_inverse=False,
+    is_yaxis_inverse=False,
+    is_xaxislabel_align=False,
+    is_yaxislabel_align=False,
+    is_xaxis_boundarygap=True,
+    is_yaxis_boundarygap=True,
+    is_xaxis_show=True,
+    is_yaxis_show=True,
+    is_splitline_show=True,
+    **kwargs
 ):
     """ 直角坐标系中的 x、y 轴(Line、Bar、Scatter、EffectScatter、Kline)。
 
@@ -444,16 +444,16 @@ def xy_axis(
 
 
 def _mark(
-        data,
-        mark_point_symbol='pin',
-        mark_point_symbolsize=50,
-        mark_point_textcolor='#fff',
-        mark_line_symbolsize=10,
-        mark_line_valuedim="",
-        mark_line_coords=None,
-        mark_point_valuedim="",
-        _is_markline=False,
-        **kwargs
+    data,
+    mark_point_symbol='pin',
+    mark_point_symbolsize=50,
+    mark_point_textcolor='#fff',
+    mark_line_symbolsize=10,
+    mark_line_valuedim="",
+    mark_line_coords=None,
+    mark_point_valuedim="",
+    _is_markline=False,
+    **kwargs
 ):
     """ 图形标记组件，用于标记指定的特殊数据，有标记线和标记点两种
 
@@ -606,14 +606,14 @@ def mark_line(mark_line=None, **kwargs):
 
 @collectfuncs
 def legend(
-        is_legend_show=True,
-        legend_orient="horizontal",
-        legend_pos="center",
-        legend_top='top',
-        legend_selectedmode='multiple',
-        legend_text_size=12,
-        legend_text_color='#333',
-        **kwargs
+    is_legend_show=True,
+    legend_orient="horizontal",
+    legend_pos="center",
+    legend_top='top',
+    legend_selectedmode='multiple',
+    legend_text_size=12,
+    legend_text_color='#333',
+    **kwargs
 ):
     """ 图例组件。图例组件展现了不同系列的标记(symbol)，颜色和名字。
     可以通过点击图例控制哪些系列不显示。
@@ -653,21 +653,21 @@ def legend(
 
 @collectfuncs
 def visual_map(
-        visual_type='color',
-        visual_range=None,
-        visual_text_color=None,
-        visual_range_text=None,
-        visual_range_color=None,
-        visual_range_size=None,
-        visual_orient='vertical',
-        visual_pos="left",
-        visual_top="bottom",
-        visual_split_number=5,
-        visual_dimension=None,
-        is_calculable=True,
-        is_piecewise=False,
-        pieces=None,
-        **kwargs
+    visual_type='color',
+    visual_range=None,
+    visual_text_color=None,
+    visual_range_text=None,
+    visual_range_color=None,
+    visual_range_size=None,
+    visual_orient='vertical',
+    visual_pos="left",
+    visual_top="bottom",
+    visual_split_number=5,
+    visual_dimension=None,
+    is_calculable=True,
+    is_piecewise=False,
+    pieces=None,
+    **kwargs
 ):
     """ 是视觉映射组件，用于进行『视觉编码』，也就是将数据映射到视觉元素（视觉通道）
 
@@ -792,7 +792,7 @@ def symbol(type=None, symbol="", **kwargs):
 
 @collectfuncs
 def effect(
-        effect_brushtype="stroke", effect_scale=2.5, effect_period=4, **kwargs
+    effect_brushtype="stroke", effect_scale=2.5, effect_period=4, **kwargs
 ):
     """ 涟漪动画配置项
 
@@ -814,13 +814,13 @@ def effect(
 
 @collectfuncs
 def datazoom(
-        is_datazoom_show=False,
-        datazoom_type='slider',
-        datazoom_range=None,
-        datazoom_orient='horizontal',
-        datazoom_xaxis_index=None,
-        datazoom_yaxis_index=None,
-        **kwargs
+    is_datazoom_show=False,
+    datazoom_type='slider',
+    datazoom_range=None,
+    datazoom_orient='horizontal',
+    datazoom_xaxis_index=None,
+    datazoom_yaxis_index=None,
+    **kwargs
 ):
     """ dataZoom 组件 用于区域缩放，从而能自由关注细节的数据信息，或者概览数据整
     体，或者去除离群点的影响。
@@ -870,13 +870,13 @@ def datazoom(
 
 @collectfuncs
 def grid(
-        grid_width=None,
-        grid_height=None,
-        grid_top=None,
-        grid_bottom=None,
-        grid_left=None,
-        grid_right=None,
-        **kwargs
+    grid_width=None,
+    grid_height=None,
+    grid_top=None,
+    grid_bottom=None,
+    grid_left=None,
+    grid_right=None,
+    **kwargs
 ):
     """ Grid 类组件配置项
 
@@ -915,13 +915,13 @@ def grid(
 
 @collectfuncs
 def grid3D(
-        grid3d_width=100,
-        grid3d_height=100,
-        grid3d_depth=100,
-        grid3d_rotate_speed=10,
-        grid3d_rotate_sensitivity=1,
-        is_grid3d_rotate=False,
-        **kwargs
+    grid3d_width=100,
+    grid3d_height=100,
+    grid3d_depth=100,
+    grid3d_rotate_speed=10,
+    grid3d_rotate_sensitivity=1,
+    is_grid3d_rotate=False,
+    **kwargs
 ):
     """ 3D 笛卡尔坐标系组配置项，适用于 3D 图形。
 
@@ -954,15 +954,15 @@ def grid3D(
 
 @collectfuncs
 def xaxis3D(
-        xaxis3d_type=None,
-        xaxis3d_name="",
-        xaxis3d_name_size=16,
-        xaxis3d_name_gap=20,
-        xaxis3d_min=None,
-        xaxis3d_max=None,
-        xaxis3d_interval="auto",
-        xaxis3d_margin=8,
-        **kwargs
+    xaxis3d_type=None,
+    xaxis3d_name="",
+    xaxis3d_name_size=16,
+    xaxis3d_name_gap=20,
+    xaxis3d_min=None,
+    xaxis3d_max=None,
+    xaxis3d_interval="auto",
+    xaxis3d_margin=8,
+    **kwargs
 ):
     """ 3D x 轴配置项
 
@@ -999,15 +999,15 @@ def xaxis3D(
 
 @collectfuncs
 def yaxis3D(
-        yaxis3d_type=None,
-        yaxis3d_name="",
-        yaxis3d_name_size=16,
-        yaxis3d_name_gap=20,
-        yaxis3d_min=None,
-        yaxis3d_max=None,
-        yaxis3d_interval="auto",
-        yaxis3d_margin=8,
-        **kwargs
+    yaxis3d_type=None,
+    yaxis3d_name="",
+    yaxis3d_name_size=16,
+    yaxis3d_name_gap=20,
+    yaxis3d_min=None,
+    yaxis3d_max=None,
+    yaxis3d_interval="auto",
+    yaxis3d_margin=8,
+    **kwargs
 ):
     """ 3D y 轴配置项
 
@@ -1044,14 +1044,14 @@ def yaxis3D(
 
 @collectfuncs
 def zaxis3D(
-        zaxis3d_type=None,
-        zaxis3d_name="",
-        zaxis3d_name_size=16,
-        zaxis3d_name_gap=20,
-        zaxis3d_min=None,
-        zaxis3d_max=None,
-        zaxis3d_margin=8,
-        **kwargs
+    zaxis3d_type=None,
+    zaxis3d_name="",
+    zaxis3d_name_size=16,
+    zaxis3d_name_gap=20,
+    zaxis3d_min=None,
+    zaxis3d_max=None,
+    zaxis3d_margin=8,
+    **kwargs
 ):
     """ 3D y 轴配置项
 
@@ -1084,17 +1084,17 @@ def zaxis3D(
 
 @collectfuncs
 def tooltip(
-        type=None,
-        tooltip_tragger="item",
-        tooltip_tragger_on="mousemove|click",
-        tooltip_axispointer_type="line",
-        tooltip_formatter=None,
-        tooltip_text_color="#fff",
-        tooltip_font_size=14,
-        tooltip_background_color="rgba(50,50,50,0.7)",
-        tooltip_border_color="#333",
-        tooltip_border_width=0,
-        **kwargs
+    type=None,
+    tooltip_tragger="item",
+    tooltip_tragger_on="mousemove|click",
+    tooltip_axispointer_type="line",
+    tooltip_formatter=None,
+    tooltip_text_color="#fff",
+    tooltip_font_size=14,
+    tooltip_background_color="rgba(50,50,50,0.7)",
+    tooltip_border_color="#333",
+    tooltip_border_width=0,
+    **kwargs
 ):
     """ 提示框组件，用于移动或点击鼠标时弹出数据内容
 

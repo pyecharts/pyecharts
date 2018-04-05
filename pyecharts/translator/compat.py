@@ -10,6 +10,7 @@ try:
 
     JAVASCRIPTHON_ENABLED = True
 except ImportError:
+
     def translates(_lines):
         return ''
 
@@ -21,6 +22,7 @@ class FunctionTranslatorDisabled(Exception):
 
 
 class TranslatorCompatAPI(object):
+
     @staticmethod
     def check_enabled(raise_exception=False):
         PY35 = sys.version_info[:2] >= (3, 5)
@@ -32,6 +34,7 @@ class TranslatorCompatAPI(object):
             else:
                 msg = "javascripthon library isn't installed."
             raise FunctionTranslatorDisabled(msg)
+
         else:
             return enabled
 

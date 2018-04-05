@@ -14,6 +14,7 @@ from pyecharts.translator.compat import TranslatorCompatAPI
 
 
 class FunctionSnippet(object):
+
     def __init__(self):
         self._function_names = []  # js function name,not python function name
         self._function_codes = []
@@ -33,11 +34,13 @@ class FunctionSnippet(object):
         try:
             index = self._function_names.index(func_names)
             return self._function_codes[index]
+
         except ValueError:
             pass
 
 
 class JavascriptSnippet(object):
+
     def __init__(self, function_snippet, option_snippet):
         self.function_snippet = function_snippet
         self.option_snippet = option_snippet
@@ -47,21 +50,19 @@ class JavascriptSnippet(object):
 
 
 class FunctionTranslator(object):
+
     def __init__(self):
         self.left_delimiter = '-=>'
         self.right_delimiter = '<=-'
-        self.reference_str_format = ''.join([
-            self.left_delimiter,
-            '{name}',
-            self.right_delimiter])
+        self.reference_str_format = ''.join(
+            [self.left_delimiter, '{name}', self.right_delimiter]
+        )
         self._shared_function_snippet = FunctionSnippet()
 
         # Tmp Data for a render process
         self._func_store = {}  # {<name>:<func>}
         self._replace_items = []
-        self._log_info = {
-            'func_translated': 0
-        }
+        self._log_info = {'func_translated': 0}
 
     def reset(self):
         self._func_store = {}
@@ -96,12 +97,15 @@ _FUNCTION_TRANSLATOR = FunctionTranslator()
 
 
 class DefaultJsonEncoder(json.JSONEncoder):
+
     def default(self, obj):
         if isinstance(obj, types.FunctionType):
             TranslatorCompatAPI.check_enabled(raise_exception=True)
             return _FUNCTION_TRANSLATOR.feed(obj)
+
         if isinstance(obj, (datetime.datetime, datetime.date)):
             return obj.isoformat()
+
         else:
             # Pandas and Numpy lists
             try:
@@ -116,16 +120,13 @@ class DefaultJsonEncoder(json.JSONEncoder):
 
 
 class EChartsTranslator(object):
+
     def __init__(self, json_encoder=DefaultJsonEncoder):
         self.json_encoder = json_encoder
 
     def translate(self, options):
         _FUNCTION_TRANSLATOR.reset()
-        option_snippet = json.dumps(
-            options,
-            indent=4,
-            cls=self.json_encoder
-        )
+        option_snippet = json.dumps(options, indent=4, cls=self.json_encoder)
         function_snippet = _FUNCTION_TRANSLATOR.translate()
         option_snippet = _FUNCTION_TRANSLATOR.handle_options(option_snippet)
         return JavascriptSnippet(function_snippet.as_snippet(), option_snippet)

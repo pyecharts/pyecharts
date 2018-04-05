@@ -90,7 +90,7 @@ def generate_js_content(*charts):
             chart_id=chart.chart_id,
             renderer=chart.renderer,
             custom_function=javascript_snippet.function_snippet,
-            options=javascript_snippet.option_snippet
+            options=javascript_snippet.option_snippet,
         )
         js_content = CHART_CONFIG_FORMATTER.format(**kwargs)
 
@@ -182,12 +182,12 @@ class EchartsEnvironment(BaseEnvironment):
         return tpl.render(chart=chart)
 
     def render_chart_to_file(
-            self,
-            chart,
-            object_name='chart',
-            path='render.html',
-            template_name='simple_chart.html',
-            **kwargs
+        self,
+        chart,
+        object_name='chart',
+        path='render.html',
+        template_name='simple_chart.html',
+        **kwargs
     ):
         """
         Render a chart or page to local html files.
