@@ -37,10 +37,13 @@ class FunctionSnippet(object):
             pass
 
 
-class JavascriptSnippet:
+class JavascriptSnippet(object):
     def __init__(self, function_snippet, option_snippet):
         self.function_snippet = function_snippet
         self.option_snippet = option_snippet
+
+    def as_snippet(self):
+        return self.function_snippet + '\n' + self.option_snippet
 
 
 class FunctionTranslator(object):
@@ -112,7 +115,7 @@ class DefaultJsonEncoder(json.JSONEncoder):
                     return super(DefaultJsonEncoder, self).default(obj)
 
 
-class EChartsTranslator:
+class EChartsTranslator(object):
     def __init__(self, json_encoder=DefaultJsonEncoder):
         self.json_encoder = json_encoder
 

@@ -68,7 +68,8 @@ class Base(object):
     def print_echarts_options(self):
         """ 打印输出图形所有配置项
         """
-        print(TRANSLATOR.translate(self.options))
+        snippet = TRANSLATOR.translate(self.options)
+        print(snippet.as_snippet())
 
     def show_config(self):
         """ 打印输出图形所有配置项
