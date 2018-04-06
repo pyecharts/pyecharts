@@ -2,7 +2,6 @@
 
 from pyecharts.chart import Chart
 from pyecharts.option import get_all_options
-import pyecharts.javascript as javascript
 
 
 class Polar(Chart):
@@ -171,7 +170,7 @@ class Polar(Chart):
                     "name": name,
                     "coordinateSystem": 'polar',
                     "data": data,
-                    "renderItem": javascript.add_a_new_function(render_item),
+                    "renderItem": render_item,
                 }
             )
 
