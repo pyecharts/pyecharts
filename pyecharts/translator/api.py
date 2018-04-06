@@ -14,6 +14,7 @@ from pyecharts.translator.compat import TranslatorCompatAPI
 
 
 class FunctionSnippet(object):
+
     def __init__(self):
         self._function_names = []  # js function name,not python function name
         self._function_codes = []
@@ -33,6 +34,7 @@ class FunctionSnippet(object):
         try:
             index = self._function_names.index(func_names)
             return self._function_codes[index]
+
         except ValueError:
             pass
 
@@ -47,6 +49,7 @@ class JavascriptSnippet(object):
 
 
 class FunctionTranslator(object):
+
     def __init__(self):
         self.left_delimiter = '-=>'
         self.right_delimiter = '<=-'
@@ -80,6 +83,7 @@ class FunctionTranslator(object):
             else:
                 snippet = TranslatorCompatAPI.translate_function(func)
                 self._shared_function_snippet.add(snippet, name)
+                self._log_info['func_translated'] += 1
             fs.add(snippet, name)
         return fs
 
@@ -93,13 +97,16 @@ _FUNCTION_TRANSLATOR = FunctionTranslator()
 
 
 class DefaultJsonEncoder(json.JSONEncoder):
+
     def default(self, obj):
         if isinstance(obj, types.LambdaType):
             # Lambda expression is not supported
             return super(DefaultJsonEncoder, self).default(obj)
+
         if isinstance(obj, types.FunctionType):
             TranslatorCompatAPI.check_enabled(raise_exception=True)
             return _FUNCTION_TRANSLATOR.feed(obj)
+
         if isinstance(obj, (datetime.datetime, datetime.date)):
             return obj.isoformat()
         # Pandas and Numpy lists
@@ -115,16 +122,13 @@ class DefaultJsonEncoder(json.JSONEncoder):
 
 
 class EChartsTranslator(object):
+
     def __init__(self, json_encoder=DefaultJsonEncoder):
         self.json_encoder = json_encoder
 
     def translate(self, options):
         _FUNCTION_TRANSLATOR.reset()
-        option_snippet = json.dumps(
-            options,
-            indent=4,
-            cls=self.json_encoder
-        )
+        option_snippet = json.dumps(options, indent=4, cls=self.json_encoder)
         function_snippet = _FUNCTION_TRANSLATOR.translate()
         option_snippet = _FUNCTION_TRANSLATOR.handle_options(option_snippet)
         return JavascriptSnippet(function_snippet.as_snippet(), option_snippet)

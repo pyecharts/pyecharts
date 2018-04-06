@@ -18,25 +18,25 @@ class Polar(Chart):
         self.__add(*args, **kwargs)
 
     def __add(
-            self,
-            name,
-            data,
-            angle_data=None,
-            radius_data=None,
-            type='line',
-            symbol_size=4,
-            start_angle=90,
-            rotate_step=0,
-            boundary_gap=True,
-            is_clockwise=True,
-            is_stack=False,
-            axis_range=None,
-            is_angleaxis_show=True,
-            is_radiusaxis_show=True,
-            radiusaxis_z_index=50,
-            angleaxis_z_index=50,
-            render_item=None,
-            **kwargs
+        self,
+        name,
+        data,
+        angle_data=None,
+        radius_data=None,
+        type='line',
+        symbol_size=4,
+        start_angle=90,
+        rotate_step=0,
+        boundary_gap=True,
+        is_clockwise=True,
+        is_stack=False,
+        axis_range=None,
+        is_angleaxis_show=True,
+        is_radiusaxis_show=True,
+        radiusaxis_z_index=50,
+        angleaxis_z_index=50,
+        render_item=None,
+        **kwargs
     ):
         """
 
