@@ -83,7 +83,6 @@ class FunctionTranslator(object):
             else:
                 snippet = TranslatorCompatAPI.translate_function(func)
                 self._shared_function_snippet.add(snippet, name)
-                self._log_info['func_translated'] += 1
             fs.add(snippet, name)
         return fs
 
@@ -97,12 +96,7 @@ _FUNCTION_TRANSLATOR = FunctionTranslator()
 
 
 class DefaultJsonEncoder(json.JSONEncoder):
-
     def default(self, obj):
-        if isinstance(obj, types.LambdaType):
-            # Lambda expression is not supported
-            return super(DefaultJsonEncoder, self).default(obj)
-
         if isinstance(obj, types.FunctionType):
             TranslatorCompatAPI.check_enabled(raise_exception=True)
             return _FUNCTION_TRANSLATOR.feed(obj)
