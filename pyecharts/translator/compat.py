@@ -26,14 +26,13 @@ class TranslatorCompatAPI(object):
         PY35 = sys.version_info[:2] >= (3, 5)
         enabled = PY35 and JAVASCRIPTHON_ENABLED
         if not enabled and raise_exception:
+            # Don't check the order because of python version's precedence.
             if not PY35:
                 msg = "Python 3.5+ is required for function translator."
-
             else:
                 msg = "javascripthon library isn't installed."
             raise FunctionTranslatorDisabled(msg)
-        else:
-            return enabled
+        return enabled
 
     @staticmethod
     def translate_function(func):

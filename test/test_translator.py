@@ -38,6 +38,11 @@ def test_basic_usage():
     assert '"my_fmt2"' not in snippet.option_snippet
     assert '"-=>test<=-"' in snippet.option_snippet
 
+    source2 = {'e': my_fmt}
+    snippet = TRANSLATOR.translate(source2)
+    assert 'function my_fmt' in snippet.function_snippet
+    assert '"my_fmt"' not in snippet.option_snippet
+
 
 @unittest.skipIf(SHOULD_TEST_JS_TRANSLATE, SKIP_MESSAGE)
 def test_usage_on_unsupported():

@@ -47,21 +47,20 @@ class JavascriptSnippet(object):
 
 
 class FunctionTranslator(object):
+    # TODO Add support lambda function
     def __init__(self):
         self.left_delimiter = '-=>'
         self.right_delimiter = '<=-'
         self.reference_str_format = ''.join([
             self.left_delimiter,
             '{name}',
-            self.right_delimiter])
+            self.right_delimiter
+        ])
         self._shared_function_snippet = FunctionSnippet()
 
         # Tmp Data for a render process
         self._func_store = {}  # {<name>:<func>}
         self._replace_items = []
-        self._log_info = {
-            'func_translated': 0
-        }
 
     def reset(self):
         self._func_store = {}
@@ -82,7 +81,6 @@ class FunctionTranslator(object):
             else:
                 snippet = TranslatorCompatAPI.translate_function(func)
                 self._shared_function_snippet.add(snippet, name)
-                self._log_info['func_translated'] += 1
             fs.add(snippet, name)
         return fs
 
