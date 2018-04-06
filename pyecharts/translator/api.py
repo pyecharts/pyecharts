@@ -47,7 +47,6 @@ class JavascriptSnippet(object):
 
 
 class FunctionTranslator(object):
-    # TODO Add support lambda function
     def __init__(self):
         self.left_delimiter = '-=>'
         self.right_delimiter = '<=-'
@@ -95,22 +94,24 @@ _FUNCTION_TRANSLATOR = FunctionTranslator()
 
 class DefaultJsonEncoder(json.JSONEncoder):
     def default(self, obj):
+        if isinstance(obj, types.LambdaType):
+            # Lambda expression is not supported
+            return super(DefaultJsonEncoder, self).default(obj)
         if isinstance(obj, types.FunctionType):
             TranslatorCompatAPI.check_enabled(raise_exception=True)
             return _FUNCTION_TRANSLATOR.feed(obj)
         if isinstance(obj, (datetime.datetime, datetime.date)):
             return obj.isoformat()
-        else:
-            # Pandas and Numpy lists
+        # Pandas and Numpy lists
+        try:
+            return obj.astype(float).tolist()
+
+        except Exception:
             try:
-                return obj.astype(float).tolist()
+                return obj.astype(str).tolist()
 
             except Exception:
-                try:
-                    return obj.astype(str).tolist()
-
-                except Exception:
-                    return super(DefaultJsonEncoder, self).default(obj)
+                return super(DefaultJsonEncoder, self).default(obj)
 
 
 class EChartsTranslator(object):
