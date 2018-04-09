@@ -51,7 +51,7 @@ def _load_coordinates():
     Load the coordinate dataset into the dictionary.
     :return:
     """
-    with open(get_resource_dir('datasets', 'pyecharts_coordinates.json'),
+    with open(get_resource_dir('datasets', 'CityCoordinates.json'),
               encoding='utf8') as f:
         return json.load(f)
 
