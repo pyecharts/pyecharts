@@ -13,15 +13,16 @@ class Scatter(Chart):
     直角坐标系上的散点图可以用来展现数据的 x，y 之间的关系，如果数据项有多个维度，
     可以用颜色来表现，利用 geo 组件。
     """
+
     def __init__(self, title="", subtitle="", **kwargs):
         super(Scatter, self).__init__(title, subtitle, **kwargs)
 
     def add(self, *args, **kwargs):
         self.__add(*args, **kwargs)
 
-    def __add(self, name, x_axis, y_axis, extra_data=None,
-              symbol_size=10,
-              **kwargs):
+    def __add(
+        self, name, x_axis, y_axis, extra_data=None, symbol_size=10, **kwargs
+    ):
         """
 
         :param name:
@@ -50,17 +51,19 @@ class Scatter(Chart):
         else:
             _data = [list(z) for z in zip(x_axis, y_axis)]
 
-        self._option.get('series').append({
-            "type": "scatter",
-            "name": name,
-            "symbol": chart['symbol'],
-            "symbolSize": symbol_size,
-            "data": _data,
-            "label": chart['label'],
-            "markPoint": chart['mark_point'],
-            "markLine": chart['mark_line'],
-            "seriesId": self._option.get('series_id'),
-        })
+        self._option.get('series').append(
+            {
+                "type": "scatter",
+                "name": name,
+                "symbol": chart['symbol'],
+                "symbolSize": symbol_size,
+                "data": _data,
+                "label": chart['label'],
+                "markPoint": chart['mark_point'],
+                "markLine": chart['mark_line'],
+                "seriesId": self._option.get('series_id'),
+            }
+        )
         self._config_components(**kwargs)
 
     def draw(self, path, color=None):
@@ -82,9 +85,14 @@ class Scatter(Chart):
         for x in range(width):
             for y in range(height):
                 if y < int(height / 2):
-                    (imarray[x, y], imarray[x, height-y-1]) = (
-                        imarray[x, height-y-1], imarray[x, y])
+                    (imarray[x, y], imarray[x, height - y - 1]) = (
+                        imarray[x, height - y - 1], imarray[x, y]
+                    )
         # [:3] 代表着 R, G, B 三原色
-        result = [(x, y) for x in range(width) for y in range(height)
-                  if imarray[x, y][:3] != color]
+        result = [
+            (x, y)
+            for x in range(width)
+            for y in range(height)
+            if imarray[x, y][:3] != color
+        ]
         return self.cast(result)

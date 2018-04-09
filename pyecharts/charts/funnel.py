@@ -8,6 +8,7 @@ class Funnel(Chart):
     """
     <<< 漏斗图 >>>
     """
+
     def __init__(self, title="", subtitle="", **kwargs):
         super(Funnel, self).__init__(title, subtitle, **kwargs)
 
@@ -37,10 +38,12 @@ class Funnel(Chart):
         _dset = set(self._option.get('legend')[0].get('data'))
         self._option.get('legend')[0].update(data=list(_dset))
 
-        self._option.get('series').append({
-            "type": "funnel",
-            "name": name,
-            "data": _data,
-            "label": chart['label']
-        })
+        self._option.get('series').append(
+            {
+                "type": "funnel",
+                "name": name,
+                "data": _data,
+                "label": chart['label'],
+            }
+        )
         self._config_components(**kwargs)

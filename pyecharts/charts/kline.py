@@ -11,6 +11,7 @@ class Kline(Chart):
 
     红涨蓝跌
     """
+
     def __init__(self, title="", subtitle="", **kwargs):
         super(Kline, self).__init__(title, subtitle, **kwargs)
 
@@ -37,16 +38,19 @@ class Kline(Chart):
         self._option.update(xAxis=xaxis, yAxis=yaxis)
         self._option.get('xAxis')[0].update(scale=True)
         self._option.get('yAxis')[0].update(
-            scale=True, splitArea={"show": True})
+            scale=True, splitArea={"show": True}
+        )
 
         self._option.get('legend')[0].get('data').append(name)
 
-        self._option.get('series').append({
-            "type": "candlestick",
-            "name": name,
-            "data": y_axis,
-            "markPoint": chart['mark_point'],
-            "markLine": chart['mark_line'],
-            "seriesId": self._option.get('series_id'),
-        })
+        self._option.get('series').append(
+            {
+                "type": "candlestick",
+                "name": name,
+                "data": y_axis,
+                "markPoint": chart['mark_point'],
+                "markLine": chart['mark_line'],
+                "seriesId": self._option.get('series_id'),
+            }
+        )
         self._config_components(**kwargs)

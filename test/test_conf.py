@@ -31,7 +31,8 @@ def test_get_js_library():
 
 def test_custom_remote_jshost():
     target_config = PyEchartsConfig(
-        jshost='https://cdn.bootcss.com/echarts/3.7.2/')
+        jshost='https://cdn.bootcss.com/echarts/3.7.2/'
+    )
     eq_('https://cdn.bootcss.com/echarts/3.7.2', target_config.jshost)
 
     assert not target_config.js_embed

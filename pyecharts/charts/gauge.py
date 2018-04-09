@@ -7,16 +7,16 @@ class Gauge(Chart):
     """
     <<< 仪表盘 >>>
     """
+
     def __init__(self, title="", subtitle="", **kwargs):
         super(Gauge, self).__init__(title, subtitle, **kwargs)
 
     def add(self, *args, **kwargs):
         self.__add(*args, **kwargs)
 
-    def __add(self, name, attr, value,
-              scale_range=None,
-              angle_range=None,
-              **kwargs):
+    def __add(
+        self, name, attr, value, scale_range=None, angle_range=None, **kwargs
+    ):
         """
 
         :param name:
@@ -44,17 +44,16 @@ class Gauge(Chart):
 
         self._option.get('legend')[0].get('data').append(name)
 
-        self._option.get('series').append({
-            "type": "gauge",
-            "detail": {"formatter": '{value}%'},
-            "name": name,
-            "min": _min,
-            "max": _max,
-            "startAngle": _start,
-            "endAngle": _end,
-            "data": [{
-                "value": value,
-                "name": attr
-            }]
-        })
+        self._option.get('series').append(
+            {
+                "type": "gauge",
+                "detail": {"formatter": '{value}%'},
+                "name": name,
+                "min": _min,
+                "max": _max,
+                "startAngle": _start,
+                "endAngle": _end,
+                "data": [{"value": value, "name": attr}],
+            }
+        )
         self._config_components(**kwargs)

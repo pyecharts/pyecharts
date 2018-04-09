@@ -1,13 +1,10 @@
 # coding=utf-8
 from __future__ import unicode_literals
 
-import codecs
-
 from jinja2 import Environment, FileSystemLoader, environmentfunction, Markup
 from lml.plugin import PluginManager, PluginInfo
 
 import pyecharts.conf as conf
-import pyecharts.utils as utils
 import pyecharts.constants as constants
 
 LINK_SCRIPT_FORMATTER = '<script type="text/javascript" src="{}"></script>'
@@ -15,6 +12,7 @@ EMBED_SCRIPT_FORMATTER = '<script type="text/javascript">\n{}\n</script>'
 CHART_DIV_FORMATTER = '<div id="{chart_id}" style="width:{width};height:{height};"></div>'  # flake8: noqa
 CHART_CONFIG_FORMATTER = """
 var myChart_{chart_id} = echarts.init(document.getElementById('{chart_id}'), null, {{renderer: '{renderer}'}});
+{custom_function}
 var option_{chart_id} = {options};
 myChart_{chart_id}.setOption(option_{chart_id});
 """
@@ -36,6 +34,7 @@ def echarts_js_dependencies(env, *args):
         return Markup(
             '\n'.join([EMBED_SCRIPT_FORMATTER.format(c) for c in contents])
         )
+
     else:
         js_links = current_config.generate_js_link(dependencies)
         return Markup(
@@ -70,8 +69,9 @@ def echarts_container(env, chart):
         CHART_DIV_FORMATTER.format(
             chart_id=chart.chart_id,
             width=utils.to_css_length(chart.width),
-            height=utils.to_css_length(chart.height)
-        ))
+            height=utils.to_css_length(chart.height),
+        )
+    )
 
 
 def generate_js_content(*charts):
@@ -81,12 +81,17 @@ def generate_js_content(*charts):
     :return:
     """
     contents = []
+
     for chart in charts:
-        js_content = CHART_CONFIG_FORMATTER.format(
+        javascript_snippet = TRANSLATOR.translate(chart.options)
+        kwargs = dict(
             chart_id=chart.chart_id,
             renderer=chart.renderer,
-            options=utils.json_dumps(chart.options, indent=4)
+            custom_function=javascript_snippet.function_snippet,
+            options=javascript_snippet.option_snippet,
         )
+        js_content = CHART_CONFIG_FORMATTER.format(**kwargs)
+
         contents.append(js_content)
     contents = '\n'.join(contents)
     return contents
@@ -119,7 +124,7 @@ ECHAERTS_TEMPLATE_FUNCTIONS = {
     'echarts_js_dependencies_embed': echarts_js_dependencies_embed,
     'echarts_container': echarts_container,
     'echarts_js_content': echarts_js_content,
-    'echarts_js_content_wrap': echarts_js_content_wrap
+    'echarts_js_content_wrap': echarts_js_content_wrap,
 }
 
 
@@ -132,13 +137,14 @@ class BaseEnvironment(Environment):
         self.pyecharts_config = kwargs.pop('pyecharts_config', None)
         if self.pyecharts_config is None:
             raise TypeError(
-                'no pyecharts_config for this environment specified')
+                'no pyecharts_config for this environment specified'
+            )
+
         super(BaseEnvironment, self).__init__(*args, **kwargs)
         self.globals.update(ECHAERTS_TEMPLATE_FUNCTIONS)
 
 
-@PluginInfo(constants.ENVIRONMENT_PLUGIN_TYPE,
-            tags=[constants.DEFAULT_HTML])
+@PluginInfo(constants.ENVIRONMENT_PLUGIN_TYPE, tags=[constants.DEFAULT_HTML])
 class EchartsEnvironment(BaseEnvironment):
     """
     Built-in jinja2 template engine for pyecharts
@@ -157,7 +163,8 @@ class EchartsEnvironment(BaseEnvironment):
             lstrip_blocks=True,
             loader=loader,
             *args,
-            **kwargs)
+            **kwargs
+        )
 
     def render_container_and_echarts_code(self, chart):
         """
@@ -173,12 +180,12 @@ class EchartsEnvironment(BaseEnvironment):
         return tpl.render(chart=chart)
 
     def render_chart_to_file(
-            self,
-            chart,
-            object_name='chart',
-            path='render.html',
-            template_name='simple_chart.html',
-            **kwargs
+        self,
+        chart,
+        object_name='chart',
+        path='render.html',
+        template_name='simple_chart.html',
+        **kwargs
     ):
         """
         Render a chart or page to local html files.
@@ -218,7 +225,8 @@ class EnvironmentManager(PluginManager):
         extension
         """
         super(EnvironmentManager, self).__init__(
-            constants.ENVIRONMENT_PLUGIN_TYPE)
+            constants.ENVIRONMENT_PLUGIN_TYPE
+        )
 
     def get_a_environment(self, file_type, **kwargs):
         """

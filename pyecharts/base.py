@@ -5,11 +5,12 @@ import warnings
 
 from jinja2 import Markup
 
-import pyecharts.constants as constants
-import pyecharts.engine as engine
 import pyecharts.utils as utils
+import pyecharts.engine as engine
+import pyecharts.constants as constants
 import pyecharts.exceptions as exceptions
 from pyecharts.conf import CURRENT_CONFIG
+from pyecharts.translator.api import TRANSLATOR
 
 
 class Base(object):
@@ -17,11 +18,13 @@ class Base(object):
     `Base`类是所有图形类的基类，提供部分初始化参数和基本的方法
     """
 
-    def __init__(self,
-                 width=800,
-                 height=400,
-                 renderer=constants.CANVAS_RENDERER,
-                 page_title=constants.PAGE_TITLE):
+    def __init__(
+        self,
+        width=800,
+        height=400,
+        renderer=constants.CANVAS_RENDERER,
+        page_title=constants.PAGE_TITLE,
+    ):
         """
 
         :param width:
@@ -65,7 +68,8 @@ class Base(object):
     def print_echarts_options(self):
         """ 打印输出图形所有配置项
         """
-        print(utils.json_dumps(self._option, indent=4))
+        snippet = TRANSLATOR.translate(self.options)
+        print(snippet.as_snippet())
 
     def show_config(self):
         """ 打印输出图形所有配置项
@@ -73,7 +77,7 @@ class Base(object):
         deprecated_tpl = 'The {} is deprecated, please use {} instead!'
         warnings.warn(
             deprecated_tpl.format('show_config', 'print_echarts_options'),
-            DeprecationWarning
+            DeprecationWarning,
         )
         self.print_echarts_options()
 
@@ -90,11 +94,13 @@ class Base(object):
         """
         return CURRENT_CONFIG.produce_html_script_list(self._js_dependencies)
 
-    def render(self,
-               path='render.html',
-               template_name='simple_chart.html',
-               object_name='chart',
-               **kwargs):
+    def render(
+        self,
+        path='render.html',
+        template_name='simple_chart.html',
+        object_name='chart',
+        **kwargs
+    ):
         _, ext = os.path.splitext(path)
         _file_type = ext[1:]
         env = engine.create_default_environment(_file_type)
@@ -142,9 +148,11 @@ class Base(object):
         return k_lst, v_lst
 
     def render_notebook(self):
-        warnings.warn('Implementation has been removed. ' +
-                      'Please pass the chart instance directly to Jupyter.' +
-                      'If you need more help, please read documentation')
+        warnings.warn(
+            'Implementation has been removed. ' +
+            'Please pass the chart instance directly to Jupyter.' +
+            'If you need more help, please read documentation'
+        )
 
     def _repr_html_(self):
         """ 渲染配置项并将图形显示在 notebook 中
@@ -162,9 +170,7 @@ class Base(object):
         libraries = require_config['libraries']
         env = engine.create_default_environment(constants.DEFAULT_HTML)
         return env.render_chart_to_notebook(
-            charts=(self,),
-            config_items=config_items,
-            libraries=libraries
+            charts=(self,), config_items=config_items, libraries=libraries
         )
 
     def _repr_svg_(self):
@@ -189,20 +195,24 @@ class Base(object):
         """
         if CURRENT_CONFIG.jupyter_presentation != file_type:
             return None
+
         if self.renderer == constants.SVG_RENDERER:
             if file_type != constants.SVG:
                 raise exceptions.InvalidConfiguration(
-                    "svg renderer produces only svg image.")
+                    "svg renderer produces only svg image."
+                )
+
         elif file_type not in [constants.JPEG, constants.PNG]:
             # CANVAS_RENDERER here
             raise exceptions.InvalidConfiguration(
-                "svg output requires svg renderer.")
+                "svg output requires svg renderer."
+            )
 
         env = engine.create_default_environment(file_type)
         outfile = 'tmp.' + file_type
         content = env.render_chart_to_file(
-            chart=self,
-            path=outfile, verbose=False)
+            chart=self, path=outfile, verbose=False
+        )
         if content:
             os.unlink(outfile)
         return content

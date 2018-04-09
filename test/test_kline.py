@@ -38,7 +38,8 @@ data = [
     [2314.68, 2310.59, 2296.58, 2320.96],
     [2309.16, 2286.6, 2264.83, 2333.29],
     [2282.17, 2263.97, 2253.25, 2286.33],
-    [2255.77, 2270.28, 2253.31, 2276.22]]
+    [2255.77, 2270.28, 2253.31, 2276.22],
+]
 
 DATE = ["2017/7/{}".format(i + 1) for i in range(31)]
 
@@ -51,26 +52,35 @@ def test_kline_default():
 
 def test_kline_datazoom_horizontal():
     kline = Kline("K 线图-dataZoom 水平布局")
-    kline.add("日K", DATE, data,
-              mark_point=["max"], is_datazoom_show=True)
+    kline.add("日K", DATE, data, mark_point=["max"], is_datazoom_show=True)
     kline.render()
 
 
 def test_kline_datazoom_vertical():
     kline = Kline("K 线图-dataZoom 垂直布局")
-    kline.add("日K", DATE, data, mark_line=["max"],
-              is_datazoom_show=True,
-              datazoom_orient='vertical',)
+    kline.add(
+        "日K",
+        DATE,
+        data,
+        mark_line=["max"],
+        is_datazoom_show=True,
+        datazoom_orient='vertical',
+    )
     kline.render()
 
 
 def test_kline_user_define_markline_style():
     title = "K 线图-自定义标记点风格"
     kline = Kline(title)
-    kline.add("日K", DATE, data, mark_point=["min", "max"],
-              mark_point_symbolsize=80,
-              datazoom_orient='vertical',
-              mark_line_valuedim=['lowest', 'highest'])
+    kline.add(
+        "日K",
+        DATE,
+        data,
+        mark_point=["min", "max"],
+        mark_point_symbolsize=80,
+        datazoom_orient='vertical',
+        mark_line_valuedim=['lowest', 'highest'],
+    )
     kline.render()
     actual_content = get_default_rendering_file_content()
     assert 'lowest' in actual_content
@@ -80,11 +90,17 @@ def test_kline_user_define_markline_style():
 
 def test_kline_alias_Candlestick():
     from pyecharts import Candlestick
+
     candlestick = Candlestick("K 线图-自定义标记点风格")
-    candlestick.add("日K", DATE, data, mark_point=["min", "max"],
-                    mark_point_symbolsize=80,
-                    datazoom_orient='vertical',
-                    mark_line_valuedim=['lowest', 'highest'])
+    candlestick.add(
+        "日K",
+        DATE,
+        data,
+        mark_point=["min", "max"],
+        mark_point_symbolsize=80,
+        datazoom_orient='vertical',
+        mark_line_valuedim=['lowest', 'highest'],
+    )
     candlestick.render()
     actual_content = get_default_rendering_file_content()
     assert 'candlestick' in actual_content

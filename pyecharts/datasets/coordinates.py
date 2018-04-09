@@ -11,7 +11,7 @@ from pyecharts.utils import get_resource_dir, LazyObject
 __all__ = [
     'search_coordinates_by_filter',
     'search_coordinates_by_keyword',
-    'get_coordinate'
+    'get_coordinate',
 ]
 
 
@@ -21,9 +21,7 @@ def search_coordinates_by_filter(func):
     :param func: The filter call for search
     :return: A dictionary like {<name>:[<longitude>, <latitude>]}
     """
-    return dict(
-        (k, v) for k, v in _COORDINATE_DATASET.items() if func(k)
-    )
+    return dict((k, v) for k, v in _COORDINATE_DATASET.items() if func(k))
 
 
 def search_coordinates_by_keyword(*args):

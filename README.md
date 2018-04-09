@@ -42,8 +42,10 @@ Here is a list of map extensions from pyecharts dev team:
 1. [World countries include China map and World map](https://echarts-maps.github.io/echarts-countries-js/): [echarts-countries-pypkg](https://github.com/pyecharts/echarts-countries-pypkg) (1.9MB)
 2. [Chinese provinces and regions](https://echarts-maps.github.io/echarts-china-provinces-js/): [echarts-china-provinces-pypkg](https://github.com/pyecharts/echarts-china-provinces-pypkg) (730KB)
 3. [Chinese cities](https://echarts-maps.github.io/echarts-china-cities-js/): [echarts-china-cities-pypkg](https://github.com/pyecharts/echarts-china-cities-pypkg) (3.8MB)
-3. [Custom Chinese regions](https://echarts-maps.github.io/echarts-china-misc-js/): [echarts-china-cities-pypkg](https://github.com/pyecharts/echarts-china-misc-pypkg) (148KB)
-3. [United Kingdom map](https://echarts-maps.github.io/echarts-united-kingdom-js/): [echarts-china-cities-pypkg](https://github.com/pyecharts/echarts-united-kingdom-pypkg) (1MB)
+4. [Chinese counties](https://echarts-maps.github.io/echarts-china-counties-js/): [echarts-china-counties-pypkg](https://github.com/pyecharts/echarts-china-counties-pypkg) (4.1MB)
+5. [Custom Chinese regions](https://echarts-maps.github.io/echarts-china-misc-js/): [echarts-china-misc-pypkg](https://github.com/pyecharts/echarts-china-misc-pypkg) (148KB)
+6. [United Kingdom map](https://echarts-maps.github.io/echarts-united-kingdom-js/): [echarts-united-kingdom-pypkg](https://github.com/pyecharts/echarts-united-kingdom-pypkg) (1MB)
+
 
 In order to install them, you can try one of them or all:
 
@@ -51,6 +53,7 @@ In order to install them, you can try one of them or all:
 $ pip install echarts-countries-pypkg
 $ pip install echarts-china-provinces-pypkg
 $ pip install echarts-china-cities-pypkg
+$ pip install echarts-china-counties-pypkg
 $ pip install echarts-china-misc-pypkg
 $ pip install echarts-united-kingdom-pypkg
 ```

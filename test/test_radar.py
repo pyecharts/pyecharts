@@ -7,16 +7,25 @@ from pyecharts import Radar
 
 def test_radar_default_schema():
     schema = [
-        ("销售", 6500), ("管理", 16000), ("信息技术", 30000),
-        ("客服", 38000), ("研发", 52000), ("市场", 25000)
+        ("销售", 6500),
+        ("管理", 16000),
+        ("信息技术", 30000),
+        ("客服", 38000),
+        ("研发", 52000),
+        ("市场", 25000),
     ]
     v1 = [[4300, 10000, 28000, 35000, 50000, 19000]]
     v2 = [[5000, 14000, 28000, 31000, 42000, 21000]]
     radar = Radar("雷达图示例")
     radar.config(schema)
     radar.add("预算分配", v1, is_splitline=True, is_axisline_show=True)
-    radar.add("实际开销", v2, label_color=["#4e79a7"], is_area_show=False,
-              legend_selectedmode='single')
+    radar.add(
+        "实际开销",
+        v2,
+        label_color=["#4e79a7"],
+        is_area_show=False,
+        legend_selectedmode='single',
+    )
     radar.render()
 
 
@@ -51,8 +60,8 @@ value_bj = [
     [160, 120, 186, 2.77, 91, 50, 28],
     [134, 96, 165, 2.76, 83, 41, 29],
     [52, 24, 60, 1.03, 50, 21, 30],
-    [46, 5, 49, 0.28, 10, 6, 31]
-    ]
+    [46, 5, 49, 0.28, 10, 6, 31],
+]
 
 value_sh = [
     [91, 45, 125, 0.82, 34, 23, 1],
@@ -85,8 +94,8 @@ value_sh = [
     [93, 68, 96, 1.05, 79, 29, 28],
     [188, 143, 197, 1.66, 99, 51, 29],
     [174, 131, 174, 1.55, 108, 50, 30],
-    [187, 143, 201, 1.39, 89, 53, 31]
-    ]
+    [187, 143, 201, 1.39, 89, 53, 31],
+]
 
 c_schema = [
     {"name": "AQI", "max": 300, "min": 5},
@@ -94,16 +103,21 @@ c_schema = [
     {"name": "PM10", "max": 300, "min": 5},
     {"name": "CO", "max": 5},
     {"name": "NO2", "max": 200},
-    {"name": "SO2", "max": 100}
-    ]
+    {"name": "SO2", "max": 100},
+]
 
 
 def test_radar_user_define_schema_single():
     radar = Radar("雷达图示例")
     radar.config(c_schema=c_schema, shape='circle')
     radar.add("北京", value_bj, item_color="#f9713c", symbol=None)
-    radar.add("上海", value_sh, item_color="#b3e4a1", symbol=None,
-              legend_selectedmode='single')
+    radar.add(
+        "上海",
+        value_sh,
+        item_color="#b3e4a1",
+        symbol=None,
+        legend_selectedmode='single',
+    )
     html_content = radar._repr_html_()
     assert 'single' in html_content
     assert 'multiple' not in html_content
