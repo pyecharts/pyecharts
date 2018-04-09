@@ -7,12 +7,12 @@ import os
 
 def get_resource_dir(*paths):
     """
-
-    :param path:
+    Return absolute path for a directory or file inside the project.
+    :param paths: paths relative to project root dir.
     :return:
     """
-    current_path = os.path.dirname(__file__)
-    resource_path = os.path.join(current_path, *paths)
+    project_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    resource_path = os.path.join(project_dir, *paths)
     return resource_path
 
 

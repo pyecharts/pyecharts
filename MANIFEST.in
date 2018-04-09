@@ -1,3 +1,5 @@
+include pyecharts/datasets/CityCoordinates.json
+include pyecharts/templates/*.html
 include README.md
 include changelog.md
-include pyecharts/templates/*.html
+
