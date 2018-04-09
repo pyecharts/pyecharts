@@ -8,17 +8,16 @@ __all__ = ['LazyObject']
 
 PY2 = sys.version_info[0] == 2
 
+EMPTY = object()  # Used for that proxy has not executed.
+
 
 def proxy_method(func):
     def inner(self, *args):
-        if self._wrapped is None:
+        if self._wrapped is EMPTY:
             self._setup()
         return func(self._wrapped, *args)
 
     return inner
-
-
-EMPTY = object()
 
 
 class LazyObject(object):
