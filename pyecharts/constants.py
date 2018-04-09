@@ -1,9 +1,6 @@
 # coding=utf-8
 from __future__ import unicode_literals
-import sys
 
-
-PY35_ABOVE = sys.version_info[0] == 3 and sys.version_info[1] > 4
 CANVAS_RENDERER = "canvas"
 SVG_RENDERER = "svg"
 PAGE_TITLE = "Echarts"
