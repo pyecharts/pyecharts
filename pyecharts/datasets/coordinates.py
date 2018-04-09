@@ -6,7 +6,8 @@ from __future__ import unicode_literals
 
 import json
 from io import open
-from pyecharts.utils import get_resource_dir, LazyObject
+from pyecharts.utils import get_resource_dir
+from pyecharts.utils.lazy import LazyObject
 
 __all__ = [
     'search_coordinates_by_filter',
