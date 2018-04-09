@@ -6,6 +6,8 @@ from lml.plugin import PluginManager, PluginInfo
 
 import pyecharts.conf as conf
 import pyecharts.constants as constants
+import pyecharts.utils as utils
+from pyecharts.translator.api import TRANSLATOR
 
 LINK_SCRIPT_FORMATTER = '<script type="text/javascript" src="{}"></script>'
 EMBED_SCRIPT_FORMATTER = '<script type="text/javascript">\n{}\n</script>'
