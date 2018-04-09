@@ -238,9 +238,10 @@ class EnvironmentManager(PluginManager):
         :param file_type: 'html', 'svg', 'png', 'jpeg', 'gif' or 'pdf'
         :param kwargs: the initialization parameters for Environment
         """
-        _a_echarts_env_cls = super(EnvironmentManager, self).load_me_now(
-            key=file_type
-        )
+        _a_echarts_env_cls = super(
+            EnvironmentManager,
+            self
+        ).load_me_now(key=file_type)
         return _a_echarts_env_cls(**kwargs)
 
 
@@ -253,12 +254,13 @@ def create_default_environment(file_type):
 
     :return: A new EchartsEnvironment object.
     """
+    default_template_dir = utils.get_resource_dir('templates')
     config = conf.CURRENT_CONFIG
     echarts_env = ENV_MANAGER.get_a_environment(
         file_type,
         pyecharts_config=config,
         loader=FileSystemLoader(
-            [config.echarts_template_dir, conf.DEFAULT_TEMPLATE_DIR]
-        ),
+            [config.echarts_template_dir, default_template_dir]
+        )
     )
     return echarts_env
