@@ -2,17 +2,18 @@
 
 from __future__ import unicode_literals
 
-import inspect
 import sys
 
 try:
-    from metapensiero.pj.api import translates
+    from pyecharts_javascripthon import Python2Javascript
 
     JAVASCRIPTHON_ENABLED = True
 except ImportError:
 
-    def translates(_lines):
-        return ''
+    class Python2Javascript:
+        @staticmethod
+        def translates(_lines):
+            return ''
 
     JAVASCRIPTHON_ENABLED = False
 
@@ -43,6 +44,4 @@ class TranslatorCompatAPI(object):
         :param func:
         :return: A multi-line unicode string
         """
-        source_lines, _ = inspect.getsourcelines(func)
-        result = translates(source_lines)
-        return result[0]
+        return Python2Javascript.translate(func)
