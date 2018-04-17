@@ -2,8 +2,6 @@
 
 from __future__ import unicode_literals
 
-import sys
-
 from pyecharts_javascripthon import Python2Javascript
 
 JAVASCRIPTHON_ENABLED = True
