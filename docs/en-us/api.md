@@ -254,7 +254,7 @@ Which mode is used is determined by the `PyEchartsConfig.jshost` and  `PyEcharts
 | `/template/js/echarts`                   | local        | IE          | Generate one file locally | Default value         |
 | `'https://chfw.github.io/jupyter-echarts/echarts'` | remote       | IE          | Generate on file          | switch using `online` |
 | Other Local Host (E.g. `/static/js`)                  | local        | EL          | Integrate with Web        |                       |
-| Other Remote Host(E.g. `hthttps://cdn.bootcss.com/echarts/3.7.2`) | remote       | EL          | Use remote JS             |                       |
+| Other Remote Host(E.g. `https://cdn.bootcss.com/echarts/3.7.2`) | remote       | EL          | Use remote JS             |                       |
 
 Example
 
