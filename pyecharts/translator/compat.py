@@ -12,7 +12,7 @@ except ImportError:
 
     class Python2Javascript:
         @staticmethod
-        def translates(_lines):
+        def translate(_lines):
             return ''
 
     JAVASCRIPTHON_ENABLED = False
