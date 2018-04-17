@@ -253,7 +253,7 @@ pyecharts 内置的引擎提供了一些模板函数，这些函数通常接收�
 | `/template/js/echarts`                   | 本地    | 内嵌                     | 本地生成单一文件，直接移植 | 此为默认是设置            |
 | `'https://pyecharts.github.io/jupyter-echarts/echarts'` | 远程    | 内嵌                     | 生成单一文件        | 使用 `online` 可切换到此项 |
 | 其他本地模式 (如 `/static/js`)                  | 本地    | 外链，可以通过force_embed改成内嵌 | 可用于web框架整合    |                    |
-| 其他远程模式（如 `hthttps://cdn.bootcss.com/echarts/3.7.2`） | 远程    | 外链                     | 使用外部js，需依赖网络  |                    |
+| 其他远程模式（如 `https://cdn.bootcss.com/echarts/3.7.2`） | 远程    | 外链                     | 使用外部js，需依赖网络  |                    |
 
 
 例子
