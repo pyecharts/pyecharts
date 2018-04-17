@@ -4,18 +4,9 @@ from __future__ import unicode_literals
 
 import sys
 
-try:
-    from pyecharts_javascripthon import Python2Javascript
+from pyecharts_javascripthon import Python2Javascript
 
-    JAVASCRIPTHON_ENABLED = True
-except ImportError:
-
-    class Python2Javascript:
-        @staticmethod
-        def translate(_lines):
-            return ''
-
-    JAVASCRIPTHON_ENABLED = False
+JAVASCRIPTHON_ENABLED = True
 
 
 class FunctionTranslatorDisabled(Exception):
@@ -26,16 +17,7 @@ class TranslatorCompatAPI(object):
 
     @staticmethod
     def check_enabled(raise_exception=False):
-        PY35 = sys.version_info[:2] >= (3, 5)
-        enabled = PY35 and JAVASCRIPTHON_ENABLED
-        if not enabled and raise_exception:
-            # Don't check the order because of python version's precedence.
-            if not PY35:
-                msg = "Python 3.5+ is required for function translator."
-            else:
-                msg = "javascripthon library isn't installed."
-            raise FunctionTranslatorDisabled(msg)
-        return enabled
+        return True
 
     @staticmethod
     def translate_function(func):
