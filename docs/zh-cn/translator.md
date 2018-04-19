@@ -1,8 +1,8 @@
-> Translator 篇：ECharts 图表配置回调函数支持
+> Translator 篇：支持使用 ECharts 图表配置回调函数
 
 ## 概述
 
-[javascripthon](https://pypi.python.org/pypi/javascripthon) 是一个简单的 Python3.5 到 Javascript 的语言翻译器，它能够翻译 Python 中大部分的核心语义。使用 Javascription 翻译后的 Javascript 代码具有良好的可读性。
+[javascripthon](https://pypi.python.org/pypi/javascripthon) 是一个简单的 Python3.5+ 到 Javascript 的语言翻译器，它能够翻译 Python 中大部分的核心语义。使用 Javascription 翻译后的 Javascript 代码具有良好的可读性。
 
 在翻译的过程中，Javascripthon 尽可能使用 ES6 构建，以保证具有更好的跨浏览器和跨平台。
 
@@ -23,26 +23,26 @@ def add(x, y):
 翻译为以下 Javascript 函数。
 
 ```javascript
-function add(x, y){
+function add(x, y) {
     return (x + y);
 }
 ```
 
 ## 安装
 
-Javascripthon 要求 Python 的版本至少在 3 .5 以上，可以使用以下方式安装。
+Javascripthon 要求 Python 的版本至少为 3.5+，可以使用以下方式安装。
 
 ```shell
-pip install Javascripthon 
+$ pip install Javascripthon 
 ```
 
-> javascripthon 目前在 Windows  平台上可能无法正确安装。
+> javascripthon 目前在 Windows 平台上可能无法正确安装（要求 Microsoft Visual C++ 14.0）。
 
 可以使用以下代码验证当前环境是否可以使用 Function Translate 功能。
 
 ```shell
->>>from pyecharts.translator.compat import TranslatorCompatAPI
->>>TranslatorCompatAPI.check_enabled()
+>>> from pyecharts.translator.compat import TranslatorCompatAPI
+>>> TranslatorCompatAPI.check_enabled()
 True
 ```
 
@@ -52,7 +52,7 @@ pyecharts 已经封装了底层相关逻辑，对使用者是透明的。因此�
 
 - 使用 `def` 定义的命名函数
 
-注意的是目前暂不支持 `lambda` 表达式 。
+注意的是目前暂不支持 `lambda` 表达式。
 
 例子：
 
@@ -77,8 +77,8 @@ bar.render()
 
 第二，为了提高性能，pyecharts 作了以下几点处理：
 
-- 函数翻译的实际执行是在 `render` 函数调用时，而不是 `add` 函数
-- 对已经翻译完成的函数以 **函数名** 为索引进行缓存。
+- 函数翻译的实际执行是在 `render` 函数调用时，而不是 `add` 函数。
+- 对已经翻译完成的函数以 **函数名** 为索引进行缓存，避免多次渲染同名函数。
 
 因此应当避免同一个函数名多用，以下的情况可能无法获得预期的效果。
 
@@ -101,8 +101,3 @@ bar2 = Bar("Bar chart", "precipitation and evaporation one year")
 bar2.add("precipitation", attr, v1, label_formatter=label_formatter)
 bar2.render()
 ```
-
-
-
-
-

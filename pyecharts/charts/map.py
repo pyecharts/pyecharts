@@ -1,11 +1,6 @@
 # coding=utf-8
-import sys
-
 from pyecharts.chart import Chart
 from pyecharts.option import get_all_options
-
-
-PY2 = sys.version_info[0] == 2
 
 
 class Map(Chart):
