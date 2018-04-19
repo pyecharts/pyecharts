@@ -9,8 +9,6 @@ environment:
       PYTHON_VERSION: "3.6"
 
 install:
-  - if "%PYTHON_VERSION%" == "3.5" %PYTHON%\\python.exe -m pip install https://github.com/azazel75/metapensiero.pj/archive/master.zip
-  - if "%PYTHON_VERSION%" == "3.6" %PYTHON%\\python.exe -m pip install https://github.com/azazel75/metapensiero.pj/archive/master.zip
   - "%PYTHON%\\python.exe -m pip install -r requirements.txt"
   - cd test
   - "%PYTHON%\\python.exe -m pip install -r requirements.txt"
