@@ -3,4 +3,4 @@ future
 pillow
 lml>=0.0.2
 jupyter-echarts-pypkg>=0.1.0
-https://github.com/pyecharts/pyecharts-javascripthon/archive/master.zip
+
