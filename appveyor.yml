@@ -13,7 +13,6 @@ install:
   - cd test
   - "%PYTHON%\\python.exe -m pip install -r requirements.txt"
   - "%PYTHON%\\python.exe -m pip install mock"
-
 build: off
 
 test_script:
