@@ -10,7 +10,7 @@ import pyecharts.engine as engine
 import pyecharts.constants as constants
 import pyecharts.exceptions as exceptions
 from pyecharts.conf import CURRENT_CONFIG
-from pyecharts.translator.api import TRANSLATOR
+from pyecharts_javascripthon.api import TRANSLATOR
 
 
 class Base(object):
