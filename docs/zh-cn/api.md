@@ -8,11 +8,12 @@
 | -------- | ---------------------------------------- | ---- |
 | 1 创建图表实例 | `bar = Bar()`                            |      |
 | 2 添加数据   | `bar.add(**kwargs)`                      |      |
-| 3 创建配置实例 | `config = PyEchartsConfig(**kwargs)`     |      |
-| 4 构建模板引擎 | `engine = EchartsEnvironment(pyecharts_config=config)` |      |
-| 5 获取模板文件 | `tpl = engine.get_template('demo_tpl.html')` |      |
-| 6 渲染     | `html = tpl.render(bar=bar)`             |      |
-| 7 写入目标文件 | `write_utf8_html_file('my_demo_chart.html', html)` |      |
+| 3 添加事件处理   | `bar.on(event_name, handler)`             | added in v0.5.0    |
+| 4 创建配置实例 | `config = PyEchartsConfig(**kwargs)`     |      |
+| 5 构建模板引擎 | `engine = EchartsEnvironment(pyecharts_config=config)` |      |
+| 6 获取模板文件 | `tpl = engine.get_template('demo_tpl.html')` |      |
+| 7 渲染     | `html = tpl.render(bar=bar)`             |      |
+| 8 写入目标文件 | `write_utf8_html_file('my_demo_chart.html', html)` |      |
 
 
 
@@ -98,6 +99,114 @@ js 文件仓库路径。可以设置本地或者远程地址。所有的远程�
 | Overlap  | `add(chart, xaix_index=0, yaix_index=0, id_add_xaxis=False, is_add_yaxis=False)` |
 | Timeline | `add(chart, time_point)`                 |
 | Page     | `add(achart_or_charts)`                  |
+
+**on(event_name, handler)**
+
+添加[事件处理函数](http://echarts.baidu.com/api.html#events)。
+
+请注意，事件处理函数是在浏览器里运行，但是要求你用 Python 写哦。
+
+这是支持的所有事件
+
+```
+# Mouse Events
+
+MOUSE_CLICK = 'click'
+MOUSE_DBCLICK = 'dbclick'
+MOUSE_DOWN = 'mousedown'
+MOUSE_OVER = 'mouseover'
+MOUSE_GLOBALOUT = 'globalout'
+
+# Other Events
+
+LEGEND_SELECT_CHANGED = 'legendselectchanged'
+LEGEND_SELECTED = 'legendselected'
+LEGEND_UNSELECTAED = 'legendunselected'
+LEGEND_SCROLL = 'legendscroll'
+DATA_ZOOM = 'datazoom'
+DATA_RANGE_SELECTED = 'datarangeselected'
+TIMELINE_CHANGED = 'timelinechanged'
+TIMELINE_PLAY_CHANGED = 'timelineplaychanged'
+RESTORE = 'restore'
+DATA_VIEW_CHANGED = 'dataviewchanged'
+MAGIC_TYPE_CHANGED = 'magictypechanged'
+GEO_SELECT_CHANGED = 'geoselectchanged'
+GEO_SELECTED = 'geoselected'
+GEO_UNSELECTED = 'geounselected'
+PIE_SELECT_CHANGED = 'pieselectchanged'
+PIE_SELECTED = 'pieselected'
+PIE_UNSELECTED = 'pieunselected'
+MAP_SELECT_CHANGED = 'mapselectchanged'
+MAP_SELECTED = 'mapselected'
+MAP_UNSELECTED = 'mapunselected'
+AXIS_AREA_SELECTED = 'axisareaselected'
+FOCUS_NODE_ADJACENCY = 'focusnodeadjacency'
+UNFOCUS_NODE_ADJACENCY = 'unfocusnodeadjacency'
+BRUSH = 'brush'
+BRUSH_SELECTED = 'brushselected'
+```
+
+事件处理函数的原型:
+
+```
+def handler(params):
+    ...
+
+```
+
+此处 params 的结构与 echarts 的一模一样：
+
+```
+{
+    // 当前点击的图形元素所属的组件名称，
+    // 其值如 'series'、'markLine'、'markPoint'、'timeLine' 等。
+    componentType: string,
+    // 系列类型。值可能为：'line'、'bar'、'pie' 等。当 componentType 为 'series' 时有意义。
+    seriesType: string,
+    // 系列在传入的 option.series 中的 index。当 componentType 为 'series' 时有意义。
+    seriesIndex: number,
+    // 系列名称。当 componentType 为 'series' 时有意义。
+    seriesName: string,
+    // 数据名，类目名
+    name: string,
+    // 数据在传入的 data 数组中的 index
+    dataIndex: number,
+    // 传入的原始数据项
+    data: Object,
+    // sankey、graph 等图表同时含有 nodeData 和 edgeData 两种 data，
+    // dataType 的值会是 'node' 或者 'edge'，表示当前点击在 node 还是 edge 上。
+    // 其他大部分图表中只有一种 data，dataType 无意义。
+    dataType: string,
+    // 传入的数据值
+    value: number|Array
+    // 数据图形的颜色。当 componentType 为 'series' 时有意义。
+    color: string
+}
+```
+
+例子：
+
+```
+# coding=utf-8
+from __future__ import unicode_literals
+
+from pyecharts import Map
+import pyecharts.constants as constants
+from pyecharts_javascripthon.dom.functions import alert
+
+
+def on_click(params):
+    alert(params.name)
+
+value = [155, 10, 66, 78]
+attr = ["福建", "山东", "北京", "上海"]
+map = Map("全国地图示例", width=1200, height=600)
+map.add("", attr, value, maptype='china', is_label_show=True)
+map.on(constants.MOUSE_CLICK, on_click)
+map.render()
+```
+
+![2018-04-21 23_31_34](https://user-images.githubusercontent.com/4280312/39089412-88f0436e-45be-11e8-91b1-6617d795f26e.gif)
 
 **get_js_dependencies()**
 
