@@ -8,8 +8,8 @@ from pyecharts_javascripthon.dom.functions import alert
 from test.utils import get_default_rendering_file_content
 
 
-def on_click(event):
-    alert(event.name)
+def on_click(params):
+    alert(params.name)
 
 
 def test_map_show_label():
