@@ -21,5 +21,5 @@ def test_map_show_label():
     map.on(constants.MOUSE_CLICK, on_click)
     map.render()
     content = get_default_rendering_file_content()
-    assert 'function on_click(event) {' in content
+    assert 'function on_click(params) {' in content
     assert '("click", on_click);' in content
