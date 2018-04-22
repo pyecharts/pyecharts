@@ -44,6 +44,7 @@ class Base(object):
         self.renderer = renderer
         self._page_title = page_title
         self._js_dependencies = {'echarts'}
+        self.event_handlers = {}
 
     @property
     def chart_id(self):
@@ -64,6 +65,9 @@ class Base(object):
     @property
     def page_title(self):
         return self._page_title
+
+    def on(self, event_name, handler):
+        self.event_handlers[event_name] = handler
 
     def print_echarts_options(self):
         """ 打印输出图形所有配置项
