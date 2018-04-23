@@ -1,4 +1,4 @@
-from pyecharts.configuration.json_serializable import JsonSerializable
+from pyecharts.echarts.json_serializable import JsonSerializable
 
 
 class Line(JsonSerializable):

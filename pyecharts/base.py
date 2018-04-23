@@ -11,7 +11,7 @@ import pyecharts.constants as constants
 import pyecharts.exceptions as exceptions
 from pyecharts.conf import CURRENT_CONFIG
 from pyecharts_javascripthon.api import TRANSLATOR
-from pyecharts.option import extract_all_options
+from pyecharts.echarts.option import extract_all_options
 
 
 class Base(object):

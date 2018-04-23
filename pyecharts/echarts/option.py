@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 import random
 
-import pyecharts.configuration as option
+import pyecharts.echarts as option
 
 fs = []
 SYMBOLS = ('rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow')
@@ -742,14 +742,6 @@ def visual_map(
     if is_piecewise:
         _visual_map.update(pieces=pieces)
     return _visual_map
-
-
-def gen_color():
-    """ 为词云图生成随机颜色
-    """
-    return "rgb(%s,%s,%s)" % (
-        random.randint(0, 160), random.randint(0, 160), random.randint(0, 160)
-    )
 
 
 @collectfuncs

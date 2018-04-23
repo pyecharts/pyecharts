@@ -1,11 +1,19 @@
 # coding=utf-8
-
+import random
 from pyecharts.chart import Chart
-from pyecharts.option import gen_color
+
 
 SHAPES = (
     "cardioid", "diamond", "triangle-forward", "triangle", "pentagon", "star"
 )
+
+
+def gen_color():
+    """ 为词云图生成随机颜色
+    """
+    return "rgb(%s,%s,%s)" % (
+        random.randint(0, 160), random.randint(0, 160), random.randint(0, 160)
+    )
 
 
 class WordCloud(Chart):
