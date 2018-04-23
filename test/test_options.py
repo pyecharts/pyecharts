@@ -25,7 +25,8 @@ def test_polar_type_scatter_one(patched):
     )
     actual_options = json.dumps(polar.options, sort_keys=True, indent=4)
     expected = get_fixture_content('polar_options.json')
-    eq_(actual_options, expected)
+    for a, b in zip(actual_options.split('\n'), expected.split('\n')):
+        eq_(a.strip(), b.strip())
 
 
 DATE = ["2017/7/{}".format(i + 1) for i in range(31)]
@@ -71,4 +72,5 @@ def test_kline_default(patched):
     kline.add("日K", DATE, data)
     actual_options = json.dumps(kline.options, sort_keys=True, indent=4)
     expected = get_fixture_content('kline_options.json')
-    eq_(actual_options, expected)
+    for a, b in zip(actual_options.split('\n'), expected.split('\n')):
+        eq_(a.strip(), b.strip())
