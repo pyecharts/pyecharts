@@ -83,10 +83,10 @@ class Grid(Base):
 
             if _xaxis and _yaxis is not None:
                 for _x in _xaxis:
-                    _x.update(gridIndex=_index - 1)
+                    _x['gridIndex'] = _index - 1
                     self._option.get('xAxis').append(_x)
                 for _y in _yaxis:
-                    _y.update(gridIndex=_index - 1)
+                    _y['gridIndex'] = _index - 1
                     self._option.get('yAxis').append(_y)
 
                 # series id 是每个图实例的唯一标识

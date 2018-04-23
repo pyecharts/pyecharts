@@ -376,6 +376,7 @@ def xy_axis(
         is_xaxislabel_align,
         is_xaxis_inverse,
         value_range=[xaxis_min, xaxis_max],
+        chart_type=type,
     )
     _xAxis["axisLabel"] = option.XAxisLabel(
         xaxis_interval,
@@ -397,6 +398,7 @@ def xy_axis(
         is_yaxis_inverse,
         value_range=[yaxis_min, yaxis_max],
         split_line=is_splitline_show,
+        chart_type=type
     )
     _yAxis["axisLabel"] = option.YAxisLabel(
         yaxis_interval,

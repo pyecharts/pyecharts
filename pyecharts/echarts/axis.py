@@ -101,7 +101,6 @@ class Axis(JsonSerializable):
             "type": axis_type,
             "splitLine": {"show": split_line},
         }
-        print(self.config)
 
 
 class XAxis(Axis):
