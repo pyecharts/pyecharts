@@ -412,7 +412,7 @@ def xy_axis(
     )
 
     if is_convert:
-        xaxis_type, yaxis_type = _yAxis.config['type'], _xAxis.config['type']
+        xaxis_type, yaxis_type = _yAxis['type'], _xAxis['type']
         _xAxis.config.update(type=xaxis_type)
         _yAxis.config.update(data=x_axis, type=yaxis_type)
     else:

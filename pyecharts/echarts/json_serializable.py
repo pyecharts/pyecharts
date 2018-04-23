@@ -5,3 +5,6 @@ class JsonSerializable(object):
 
     def __setitem__(self, key, value):
         self.config[key] = value
+
+    def __getitem__(self, key):
+        return self.config.get(key)
