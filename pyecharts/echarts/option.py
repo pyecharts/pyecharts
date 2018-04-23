@@ -376,6 +376,7 @@ def xy_axis(
         is_xaxislabel_align,
         is_xaxis_inverse,
         value_range=[xaxis_min, xaxis_max],
+        axis_type=xaxis_type,
         chart_type=type,
     )
     _xAxis["axisLabel"] = option.XAxisLabel(
@@ -398,6 +399,7 @@ def xy_axis(
         is_yaxis_inverse,
         value_range=[yaxis_min, yaxis_max],
         split_line=is_splitline_show,
+        axis_type=yaxis_type,
         chart_type=type
     )
     _yAxis["axisLabel"] = option.YAxisLabel(
@@ -1157,7 +1159,7 @@ def calendar(calendar_date_range=None, calendar_cell_size=None, **kwargs):
     return _calendar
 
 
-def extract_all_options(**kwargs):
+def get_all_options(**kwargs):
     """ 返回图形实例的所有配置项
     """
     _funcs = {}
