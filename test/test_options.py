@@ -7,7 +7,7 @@ import json
 from pyecharts import Polar, Kline
 from nose.tools import eq_
 from mock import patch
-from test.utils import get_fixture_content, store_fixture_content
+from test.utils import get_fixture_content
 
 
 @patch('random.randint')
