@@ -216,7 +216,6 @@
                     }
                 }, 
                 "normal": {
-                    "formatter": null, 
                     "position": "top", 
                     "show": false, 
                     "textStyle": {

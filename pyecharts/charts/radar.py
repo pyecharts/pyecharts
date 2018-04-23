@@ -1,7 +1,6 @@
 # coding=utf-8
 
 from pyecharts.chart import Chart
-from pyecharts.option import get_all_options
 
 
 class Radar(Chart):
@@ -41,7 +40,7 @@ class Radar(Chart):
             雷达图m数据项字体大小，默认为 12。
         :param kwargs:
         """
-        chart = get_all_options(**kwargs)
+        chart = self._get_all_options(**kwargs)
         indicator = []
         if schema:
             for s in schema:
@@ -79,7 +78,7 @@ class Radar(Chart):
         :param kwargs:
         """
         kwargs.update(flag=True, type='radar')
-        chart = get_all_options(**kwargs)
+        chart = self._get_all_options(**kwargs)
         self._option.get('legend')[0].get('data').append(name)
 
         self._option.get('series').append(

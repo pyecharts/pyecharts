@@ -7,6 +7,7 @@ import json
 from pyecharts import Polar, Kline
 from nose.tools import eq_
 from mock import patch
+from pyecharts_javascripthon.api import DefaultJsonEncoder
 from test.utils import get_fixture_content
 
 
@@ -23,7 +24,8 @@ def test_polar_type_scatter_one(patched):
         is_splitline_show=False,
         is_axisline_show=True,
     )
-    actual_options = json.dumps(polar.options, sort_keys=True, indent=4)
+    actual_options = json.dumps(polar.options, sort_keys=True, indent=4,
+                                cls=DefaultJsonEncoder)
     expected = get_fixture_content('polar_options.json')
     for a, b in zip(actual_options.split('\n'), expected.split('\n')):
         eq_(a.strip(), b.strip())
@@ -70,7 +72,8 @@ def test_kline_default(patched):
     patched.return_value = "1"
     kline = Kline("K 线图-默认示例")
     kline.add("日K", DATE, data)
-    actual_options = json.dumps(kline.options, sort_keys=True, indent=4)
+    actual_options = json.dumps(kline.options, sort_keys=True, indent=4,
+                                cls=DefaultJsonEncoder)
     expected = get_fixture_content('kline_options.json')
     for a, b in zip(actual_options.split('\n'), expected.split('\n')):
         eq_(a.strip(), b.strip())

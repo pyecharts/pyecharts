@@ -355,6 +355,9 @@
             "position": null, 
             "scale": true, 
             "show": true, 
+            "splitLine": {
+                "show": true
+            }, 
             "type": "category"
         }
     ], 
