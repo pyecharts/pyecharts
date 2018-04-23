@@ -159,9 +159,11 @@ class YAxis(Axis):
         inverse,
         split_line=True,
         value_range=None,
-        axis_type="value",
+        axis_type=None,
         chart_type=None
     ):
+        if axis_type is None:
+            axis_type = "value"
         super(YAxis, self).__init__(
             name,
             visibility,
