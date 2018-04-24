@@ -26,7 +26,8 @@ class Label(JsonSerializable):
             self.config['formatter'] = formatter
 
 
-EmphasisLabel = Label
+class EmphasisLabel(Label):
+    pass
 
 
 class NormalLabel(Label):
