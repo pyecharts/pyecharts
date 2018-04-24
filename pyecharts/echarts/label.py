@@ -5,10 +5,10 @@ class Label(JsonSerializable):
 
     def __init__(
         self,
-        visibility,
-        position,
-        text_color,
-        text_size,
+        visibility=False,
+        position='inside',
+        text_color='#000',
+        text_size=12,
         formatter=None,
         chart_type=None,
     ):
@@ -32,22 +32,9 @@ class EmphasisLabel(Label):
 
 class NormalLabel(Label):
 
-    def __init__(
-        self,
-        visibility,
-        position,
-        text_color,
-        text_size,
-        formatter=None,
-        chart_type=None,
-    ):
+    def __init__(self, position=None, chart_type=None, **kwargs):
         if position is None:
             position = "outside" if chart_type in ["pie", "graph"] else "top"
         super(NormalLabel, self).__init__(
-            visibility,
-            position,
-            text_color,
-            text_size,
-            formatter=formatter,
-            chart_type=chart_type,
+            position=position, chart_type=chart_type, **kwargs
         )

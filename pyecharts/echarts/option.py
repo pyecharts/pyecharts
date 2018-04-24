@@ -68,18 +68,18 @@ def label(
     """
     _label = {
         "normal": option.NormalLabel(
-            is_label_show,
-            label_pos,
-            label_text_color,
-            label_text_size,
+            visibility=is_label_show,
+            position=label_pos,
+            text_color=label_text_color,
+            text_size=label_text_size,
             formatter=label_formatter,
             chart_type=type,
         ),
         "emphasis": option.EmphasisLabel(
-            is_label_emphasis,
-            label_emphasis_pos,
-            label_emphasis_textcolor,
-            label_emphasis_textsize,
+            visibility=is_label_emphasis,
+            position=label_emphasis_pos,
+            text_color=label_emphasis_textcolor,
+            text_size=label_emphasis_textsize,
             chart_type=type,
         ),
     }
@@ -140,11 +140,11 @@ def line_style(
 
     _line_style = {
         "normal": option.Line(
-            line_width,
-            line_opacity,
-            line_curve,
-            line_type,
-            line_color,
+            width=line_width,
+            opacity=line_opacity,
+            curve=line_curve,
+            line_type=line_type,
+            color=line_color,
             chart_type=type,
         )
     }
@@ -366,49 +366,49 @@ def xy_axis(
     :param kwargs:
     """
     _xAxis = option.XAxis(
-        xaxis_name,
-        is_xaxis_show,
-        xaxis_name_pos,
-        xaxis_name_gap,
-        xaxis_name_size,
-        xaxis_pos,
-        is_xaxis_boundarygap,
-        is_xaxislabel_align,
-        is_xaxis_inverse,
+        name=xaxis_name,
+        visibility=is_xaxis_show,
+        name_location=xaxis_name_pos,
+        name_gap=xaxis_name_gap,
+        name_size=xaxis_name_size,
+        position=xaxis_pos,
+        boundary_gap=is_xaxis_boundarygap,
+        label_alignment=is_xaxislabel_align,
+        inverse=is_xaxis_inverse,
         value_range=[xaxis_min, xaxis_max],
         axis_type=xaxis_type,
         chart_type=type,
     )
     _xAxis["axisLabel"] = option.XAxisLabel(
-        xaxis_interval,
-        xaxis_rotate,
-        xaxis_margin,
-        xaxis_label_textsize,
-        xaxis_label_textcolor,
-        xaxis_formatter,
+        interval=xaxis_interval,
+        rotate=xaxis_rotate,
+        margin=xaxis_margin,
+        text_size=xaxis_label_textsize,
+        text_color=xaxis_label_textcolor,
+        formatter=xaxis_formatter,
     )
     _yAxis = option.YAxis(
-        yaxis_name,
-        is_yaxis_show,
-        yaxis_name_pos,
-        yaxis_name_gap,
-        yaxis_name_size,
-        yaxis_pos,
-        is_yaxis_boundarygap,
-        is_yaxislabel_align,
-        is_yaxis_inverse,
+        name=yaxis_name,
+        visibility=is_yaxis_show,
+        name_location=yaxis_name_pos,
+        name_gap=yaxis_name_gap,
+        name_size=yaxis_name_size,
+        position=yaxis_pos,
+        boundary_gap=is_yaxis_boundarygap,
+        label_alignment=is_yaxislabel_align,
+        inverse=is_yaxis_inverse,
         value_range=[yaxis_min, yaxis_max],
         split_line=is_splitline_show,
         axis_type=yaxis_type,
         chart_type=type,
     )
     _yAxis["axisLabel"] = option.YAxisLabel(
-        yaxis_interval,
-        yaxis_rotate,
-        yaxis_margin,
-        yaxis_label_textsize,
-        yaxis_label_textcolor,
-        yaxis_formatter,
+        interval=yaxis_interval,
+        rotate=yaxis_rotate,
+        margin=yaxis_margin,
+        text_size=yaxis_label_textsize,
+        text_color=yaxis_label_textcolor,
+        formatter=yaxis_formatter,
     )
 
     if is_convert:
