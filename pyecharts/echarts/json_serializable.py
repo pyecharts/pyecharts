@@ -8,3 +8,6 @@ class JsonSerializable(object):
 
     def __getitem__(self, key):
         return self.config.get(key)
+
+    def update(self, **kwargs):
+        self.config.update(**kwargs)

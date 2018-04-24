@@ -413,16 +413,16 @@ def xy_axis(
 
     if is_convert:
         xaxis_type, yaxis_type = _yAxis['type'], _xAxis['type']
-        _xAxis.config.update(type=xaxis_type)
-        _yAxis.config.update(data=x_axis, type=yaxis_type)
+        _xAxis['type'] = xaxis_type
+        _yAxis.update(data=x_axis, type=yaxis_type)
     else:
-        _xAxis.config.update(data=x_axis)
+        _xAxis['data'] = x_axis
 
     # 强制分割数值轴，在多 x、y 轴中可以使用强制分割使标刻线对齐
     if xaxis_force_interval is not None:
-        _xAxis.config.update(interval=xaxis_force_interval)
+        _xAxis['interval'] = xaxis_force_interval
     if yaxis_force_interval is not None:
-        _yAxis.config.update(interval=yaxis_force_interval)
+        _yAxis['interval'] = yaxis_force_interval
 
     return [_xAxis], [_yAxis]
 

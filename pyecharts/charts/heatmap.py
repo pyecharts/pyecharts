@@ -63,10 +63,10 @@ class HeatMap(Chart):
         else:
             xaxis, yaxis = chart['xy_axis']
             self._option.update(xAxis=xaxis, yAxis=yaxis)
-            self._option.get('xAxis')[0].config.update(
+            self._option.get('xAxis')[0].update(
                 type='category', data=x_axis, splitArea={"show": True}
             )
-            self._option.get('yAxis')[0].config.update(
+            self._option.get('yAxis')[0].update(
                 type='category', data=y_axis, splitArea={"show": True}
             )
 
