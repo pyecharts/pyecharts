@@ -10,7 +10,7 @@ class Label(JsonSerializable):
         text_color,
         text_size,
         formatter=None,
-        chart_type=None
+        chart_type=None,
     ):
         self.config = {
             "show": visibility,
@@ -39,7 +39,7 @@ class NormalLabel(Label):
         text_color,
         text_size,
         formatter=None,
-        chart_type=None
+        chart_type=None,
     ):
         if position is None:
             position = "outside" if chart_type in ["pie", "graph"] else "top"
@@ -49,5 +49,5 @@ class NormalLabel(Label):
             text_color,
             text_size,
             formatter=formatter,
-            chart_type=chart_type
+            chart_type=chart_type,
         )

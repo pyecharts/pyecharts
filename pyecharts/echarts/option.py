@@ -73,14 +73,14 @@ def label(
             label_text_color,
             label_text_size,
             formatter=label_formatter,
-            chart_type=type
+            chart_type=type,
         ),
         "emphasis": option.EmphasisLabel(
             is_label_emphasis,
             label_emphasis_pos,
             label_emphasis_textcolor,
             label_emphasis_textsize,
-            chart_type=type
+            chart_type=type,
         ),
     }
 
@@ -385,7 +385,7 @@ def xy_axis(
         xaxis_margin,
         xaxis_label_textsize,
         xaxis_label_textcolor,
-        xaxis_formatter
+        xaxis_formatter,
     )
     _yAxis = option.YAxis(
         yaxis_name,
@@ -400,7 +400,7 @@ def xy_axis(
         value_range=[yaxis_min, yaxis_max],
         split_line=is_splitline_show,
         axis_type=yaxis_type,
-        chart_type=type
+        chart_type=type,
     )
     _yAxis["axisLabel"] = option.YAxisLabel(
         yaxis_interval,

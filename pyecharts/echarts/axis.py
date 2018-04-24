@@ -6,13 +6,7 @@ from pyecharts.echarts.json_serializable import JsonSerializable
 class AxisLabel(JsonSerializable):
 
     def __init__(
-        self,
-        interval,
-        rotate,
-        margin,
-        text_size,
-        text_color,
-        formatter
+        self, interval, rotate, margin, text_size, text_color, formatter
     ):
         self.config = {
             "interval": interval,
@@ -27,44 +21,22 @@ class AxisLabel(JsonSerializable):
 class XAxisLabel(AxisLabel):
 
     def __init__(
-        self,
-        interval,
-        rotate,
-        margin,
-        text_size,
-        text_color,
-        formatter
+        self, interval, rotate, margin, text_size, text_color, formatter
     ):
         super(XAxisLabel, self).__init__(
-            interval,
-            rotate,
-            margin,
-            text_size,
-            text_color,
-            formatter
+            interval, rotate, margin, text_size, text_color, formatter
         )
 
 
 class YAxisLabel(AxisLabel):
 
     def __init__(
-        self,
-        interval,
-        rotate,
-        margin,
-        text_size,
-        text_color,
-        formatter
+        self, interval, rotate, margin, text_size, text_color, formatter
     ):
         if not isinstance(formatter, types.FunctionType):
             formatter = "{value} " + formatter
         super(YAxisLabel, self).__init__(
-            interval,
-            rotate,
-            margin,
-            text_size,
-            text_color,
-            formatter
+            interval, rotate, margin, text_size, text_color, formatter
         )
 
 
@@ -84,7 +56,7 @@ class Axis(JsonSerializable):
         split_line=True,
         value_range=None,
         axis_type="value",
-        chart_type=None
+        chart_type=None,
     ):
         self.config = {
             "name": name,
@@ -119,7 +91,7 @@ class XAxis(Axis):
         split_line=True,
         value_range=None,
         axis_type=None,
-        chart_type=None
+        chart_type=None,
     ):
         if axis_type is None:
             if chart_type == "scatter":
@@ -140,7 +112,7 @@ class XAxis(Axis):
             split_line=split_line,
             value_range=value_range,
             axis_type=axis_type,
-            chart_type=chart_type
+            chart_type=chart_type,
         )
 
 
@@ -160,7 +132,7 @@ class YAxis(Axis):
         split_line=True,
         value_range=None,
         axis_type=None,
-        chart_type=None
+        chart_type=None,
     ):
         if axis_type is None:
             axis_type = "value"
@@ -177,5 +149,5 @@ class YAxis(Axis):
             split_line=split_line,
             value_range=value_range,
             axis_type=axis_type,
-            chart_type=chart_type
+            chart_type=chart_type,
         )
