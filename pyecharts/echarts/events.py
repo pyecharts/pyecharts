@@ -1,3 +1,4 @@
+# http://echarts.baidu.com/api.html#events
 # Mouse Events
 MOUSE_CLICK = "click"
 MOUSE_DBCLICK = "dbclick"
