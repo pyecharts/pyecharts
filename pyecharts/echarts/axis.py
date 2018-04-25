@@ -19,7 +19,6 @@ class AxisLabel(JsonSerializable):
             "formatter": formatter,
             "rotate": rotate,
             "margin": margin,
-            "formatter": formatter,
             "textStyle": {"fontSize": text_size, "color": text_color},
         }
 
