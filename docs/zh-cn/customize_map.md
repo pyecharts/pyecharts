@@ -4,7 +4,7 @@
 
 ## 如何获得更多地图
 
-自从 0.3.2 开始，为了缩减项目本身的体积以及维持 pyecharts 项目的轻量化运行，pyecharts 将不再自带地图 js 文件。如用户需要用到地图图表，可自行安装对应的地图文件包。下面介绍如何安装。
+自从 v0.3.2 开始，为了缩减项目本身的体积以及维持 pyecharts 项目的轻量化运行，pyecharts 将不再自带地图 js 文件。如用户需要用到地图图表，可自行安装对应的地图文件包。下面介绍如何安装。
 
 1. [全球国家地图](https://echarts-maps.github.io/echarts-countries-js/): [echarts-countries-pypkg](https://github.com/pyecharts/echarts-countries-pypkg) (1.9MB): 世界地图和 213 个国家，包括中国地图
 2. [中国省级地图](https://echarts-maps.github.io/echarts-china-provinces-js/): [echarts-china-provinces-pypkg](https://github.com/pyecharts/echarts-china-provinces-pypkg) (730KB)：23 个省，5 个自治区
@@ -14,11 +14,11 @@
 
 特别注明，中国地图在 echarts-countries-pypkg 里。需要这些地图的朋友，可以装 pip 命令行:
 
-```
-pip install echarts-countries-pypkg
-pip install echarts-china-provinces-pypkg
-pip install echarts-china-cities-pypkg
-pip install echarts-china-counties-pypkg
+``` bash
+$ pip install echarts-countries-pypkg
+$ pip install echarts-china-provinces-pypkg
+$ pip install echarts-china-cities-pypkg
+$ pip install echarts-china-counties-pypkg
 ```
 
 除此之外，[英国2016选区图](https://echarts-maps.github.io/echarts-united-kingdom-js/): [echarts-united-kingdom-pypkg](https://github.com/pyecharts/echarts-united-kingdom-pypkg) (1MB): 英国选区图可以用来画与政治经济相关的数据。
@@ -34,15 +34,15 @@ pip install echarts-china-counties-pypkg
 
 首先，你需要得到以下的项目：
 
-```
-pip install yehua
-git clone https://github.com/echarts-maps/echarts-js-mobans.git
-export YEHUA_FILE=/ABSOLUTE/PATH/TO/echarts-js-mobans/yehua.yml
+```bash
+$ pip install yehua
+$ git clone https://github.com/echarts-maps/echarts-js-mobans.git
+$ export YEHUA_FILE=/ABSOLUTE/PATH/TO/echarts-js-mobans/yehua.yml
 ```
 
 然后你需要移步到你的工作文件夹，以 echarts-united-kingdom-js 为例子运行这个命令
 
-```
+```bash
 $ yh
 Yehua will walk you through creating a echarts-maps js package.
 Press ^C to quit at any time.
@@ -56,9 +56,9 @@ All done!! project echarts-united-kingdom-js is created
 
 文件已经产生了，让我们看看是哪些文件：
 
-```
-pyecharts-host:tmp chfw$ cd echarts-united-kingdom-js/
-pyecharts-host:echarts-united-kingdom-js chfw$ ls
+```bash
+$ pyecharts-host:tmp chfw$ cd echarts-united-kingdom-js/
+$ pyecharts-host:echarts-united-kingdom-js chfw$ ls
 echarts-united-kingdom-js	package.json			registry.json
 ```
 
@@ -114,10 +114,10 @@ define(["require", "exports"], function (require, exports) {
 
 首先，你需要得到以下的项目：
 
-```
-pip install yehua
-git clone https://github.com/pyecharts/pypkg-mobans.git
-export YEHUA_FILE=/ABSOLUTE/PATH/TO/pypkg-mobans/yehua.yml
+```bash
+$ pip install yehua
+$ git clone https://github.com/pyecharts/pypkg-mobans.git
+$ export YEHUA_FILE=/ABSOLUTE/PATH/TO/pypkg-mobans/yehua.yml
 ```
 
 然后你需要移步到你的工作文件夹，以 echarts-united-kingdom-pykg 为例子运行这个命令
@@ -158,30 +158,32 @@ Please review changes before commit!
 这个时候，这个扩展包的骨架就已经做好了。我们现在做最后一步：
 
 
-```
-pyecharts-host:tmp chfw$ cd echarts-united-kingdom-pypkg/
-git submodule add https://github.com/your/npm/project your_project_name_pypkg/resources
-git submodule init
+```bash
+$ pyecharts-host:tmp chfw$ cd echarts-united-kingdom-pypkg/
+$ git submodule add https://github.com/your/npm/project your_project_name_pypkg/resources
+$ git submodule init
 ```
 
 请把需要的文件加入 git, 然后做:
 
-```
-git commit
+```bash
+$ git commit
 ```
 
 这样呢，这个包就可以放在 github 上了。
 
 
 ## 如何手动添加(0.1.9.7+)
+
 下面就以广东省汕头市南澳县地图为例，说明如何自行添加地图。
 
 ### 保存地图文件
+
 先下载南澳县地图的 JS 文件，请更名为 nanao.js。将其保存在项目安装目录下的 templates/js/echarts 文件夹中。Windows 下一般为 Lib/site-packages/pyecharts/templates/js/echarts
 
 然后呢，在你的代码里需要加下面的两行
 
-```
+```python
 import pyecharts.constants as constants
 
 constants.CITY_NAME_PINYIN_MAP['南澳县'] = 'nanao'
@@ -221,13 +223,11 @@ Copying: .../echarts/nanao.js -> /.../jupyter/nbextensions/echarts/nanao.js
 
 你可以选择性的执行下面的语句。如果你已经装了 0.1.9.7+ 在你现在的 Python 环境，就可以跳过
 
-```
-jupyter nbextension enable echarts/main
+```bash
+$ jupyter nbextension enable echarts/main
 ```
 
 然后，让我们检查以下是否已经装上了。请先运行 Jupyter-notebook，再打开这个链接：http://localhost:8889/nbextensions/echarts/nanao.js。
 如果能下载到，那就祝贺你，成功了。否则，请检查你的步骤。
 
 ![customize-map-2](https://user-images.githubusercontent.com/19553554/35104708-9d88455a-fca4-11e7-8fb1-1aff8e0066ef.png)
-
-
