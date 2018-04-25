@@ -38,7 +38,9 @@ def test_line_user_define_markpoint():
         is_smooth=True,
         mark_point=[{"coord": ["袜子", 80], "name": "这是我想要的第二个标记点"}],
     )
-    line.render()
+    html_content = line._repr_html_()
+    assert '"value": 80' in html_content
+    assert '"value": 10' in html_content
 
 
 def test_line_user_define_marks():
