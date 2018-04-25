@@ -11,6 +11,7 @@ import pyecharts.constants as constants
 import pyecharts.exceptions as exceptions
 from pyecharts.conf import CURRENT_CONFIG
 from pyecharts_javascripthon.api import TRANSLATOR
+from pyecharts.echarts.option import get_all_options
 
 
 class Base(object):
@@ -157,6 +158,9 @@ class Base(object):
             'Please pass the chart instance directly to Jupyter.' +
             'If you need more help, please read documentation'
         )
+
+    def _get_all_options(self, **kwargs):
+        return get_all_options(**kwargs)
 
     def _repr_html_(self):
         """ 渲染配置项并将图形显示在 notebook 中

@@ -10,7 +10,7 @@ __author_email__ = "chenjiandongx@qq.com"
 __license__ = "MIT"
 
 __requires__ = [
-    "pillow", "jinja2", "future", "jupyter-echarts-pypkg==0.1.0", "lml==0.0.2",
+    "pillow", "jinja2", "future", "jupyter-echarts-pypkg==0.1.1", "lml==0.0.2",
     "pyecharts-javascripthon"
 ]
 

@@ -1,7 +1,6 @@
 # coding=utf-8
 
 from pyecharts.chart import Chart
-from pyecharts.option import get_all_options
 
 
 class ThemeRiver(Chart):
@@ -28,7 +27,7 @@ class ThemeRiver(Chart):
             [时间，数值，种类（图例名）]。
         :param kwargs:
         """
-        chart = get_all_options(**kwargs)
+        chart = self._get_all_options(**kwargs)
         self._option.get('legend')[0].get('data').extend(name)
 
         self._option.get('series').append(
