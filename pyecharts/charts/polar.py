@@ -1,7 +1,6 @@
 # coding=utf-8
 
 from pyecharts.chart import Chart
-from pyecharts.option import get_all_options
 
 
 class Polar(Chart):
@@ -79,7 +78,7 @@ class Polar(Chart):
             开发者自己提供图形渲染的逻辑
         :param kwargs:
         """
-        chart = get_all_options(**kwargs)
+        chart = self._get_all_options(**kwargs)
         polar_type = 'value' if type == "line" else "category"
         is_stack = "stack" if is_stack else ""
         self._option.get('legend')[0].get('data').append(name)

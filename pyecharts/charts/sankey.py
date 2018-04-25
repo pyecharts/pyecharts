@@ -1,7 +1,6 @@
 # coding=utf-8
 
 from pyecharts.chart import Chart
-from pyecharts.option import get_all_options
 
 
 class Sankey(Chart):
@@ -46,7 +45,7 @@ class Sankey(Chart):
             图中每一列任意两个矩形节点之间的间隔。默认为 8。
         :param kwargs:
         """
-        chart = get_all_options(**kwargs)
+        chart = self._get_all_options(**kwargs)
         self._option.get('legend')[0].get('data').append(name)
 
         self._option.get('series').append(

@@ -1,7 +1,6 @@
 # coding=utf-8
 
 from pyecharts.charts.scatter import Scatter
-from pyecharts.option import get_all_options
 
 
 class EffectScatter(Scatter):
@@ -32,7 +31,7 @@ class EffectScatter(Scatter):
         """
         assert len(x_axis) == len(y_axis)
         kwargs.update(type="scatter")
-        chart = get_all_options(**kwargs)
+        chart = self._get_all_options(**kwargs)
 
         xaxis, yaxis = chart['xy_axis']
         self._option.update(xAxis=xaxis, yAxis=yaxis)

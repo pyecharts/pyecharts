@@ -9,6 +9,8 @@ from test.utils import get_default_rendering_file_content
 
 
 # ------ Test Cases for Chart Rendering -----
+
+
 def generic_formatter_t_est(**keywords):
     attr = ["Jan", "Feb"]
     v1 = [2.0, 4.9]

@@ -24,6 +24,7 @@ CHART_EVENT_FORMATTER = """
 myChart_{chart_id}.on("{event_name}", {handler_name});
 """
 
+
 @environmentfunction
 def echarts_js_dependencies(env, *args):
     """ Render script html nodes in external link mode.
@@ -106,7 +107,7 @@ def generate_js_content(*charts):
             event_args = dict(
                 event_name=event_name,
                 chart_id=chart.chart_id,
-                handler_name=handler.__name__
+                handler_name=handler.__name__,
             )
             js_content += CHART_EVENT_FORMATTER.format(**event_args)
 
@@ -254,10 +255,9 @@ class EnvironmentManager(PluginManager):
         :param file_type: 'html', 'svg', 'png', 'jpeg', 'gif' or 'pdf'
         :param kwargs: the initialization parameters for Environment
         """
-        _a_echarts_env_cls = super(
-            EnvironmentManager,
-            self
-        ).load_me_now(key=file_type)
+        _a_echarts_env_cls = super(EnvironmentManager, self).load_me_now(
+            key=file_type
+        )
         return _a_echarts_env_cls(**kwargs)
 
 
@@ -277,6 +277,6 @@ def create_default_environment(file_type):
         pyecharts_config=config,
         loader=FileSystemLoader(
             [config.echarts_template_dir, default_template_dir]
-        )
+        ),
     )
     return echarts_env
