@@ -9,7 +9,7 @@ v1 = [10, 20, 30, 40, 50, 60]
 v2 = [10, 20, 30, 40, 50, 60]
 
 
-def test_scatter_defualt():
+def test_scatter_default():
     scatter = Scatter("散点图示例")
     scatter.add("A", v1, v2)
     scatter.add("B", v1[::-1], v2)

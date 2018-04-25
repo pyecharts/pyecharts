@@ -1,7 +1,6 @@
 # coding=utf-8
 
 from pyecharts.chart import Chart
-from pyecharts.option import get_all_options
 
 
 class HeatMap(Chart):
@@ -44,7 +43,7 @@ class HeatMap(Chart):
         else:
             name, x_axis, y_axis, data = args
 
-        chart = get_all_options(**kwargs)
+        chart = self._get_all_options(**kwargs)
         self._option.get('legend')[0].get('data').append(name)
 
         self._option.get('series').append(

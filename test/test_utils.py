@@ -74,6 +74,7 @@ def test_merge_js_dependencies_with_mixed_chart_and_string():
 
 
 class MockPoint(object):
+
     def __init__(self, x, y):
         self.x = x
         self.y = y
