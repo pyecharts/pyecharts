@@ -2,7 +2,6 @@
 
 import random
 
-from pyecharts.option import get_all_options
 from pyecharts.base import Base
 import pyecharts.constants as constants
 
@@ -358,7 +357,7 @@ class Chart(Base):
         :param kwargs:
         """
         kwargs.update(colorlst=self._colorlst)
-        chart = get_all_options(**kwargs)
+        chart = self._get_all_options(**kwargs)
         self._option.update(color=chart['color'])
 
         # legend

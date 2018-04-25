@@ -7,7 +7,9 @@ from lml.plugin import PluginManager, PluginInfo
 import pyecharts.conf as conf
 import pyecharts.constants as constants
 import pyecharts.utils as utils
-from pyecharts.translator.api import TRANSLATOR
+from pyecharts_javascripthon.api import TRANSLATOR
+from pyecharts_javascripthon.api import FUNCTION_TRANSLATOR
+
 
 LINK_SCRIPT_FORMATTER = '<script type="text/javascript" src="{}"></script>'
 EMBED_SCRIPT_FORMATTER = '<script type="text/javascript">\n{}\n</script>'
@@ -17,6 +19,9 @@ var myChart_{chart_id} = echarts.init(document.getElementById('{chart_id}'), nul
 {custom_function}
 var option_{chart_id} = {options};
 myChart_{chart_id}.setOption(option_{chart_id});
+"""
+CHART_EVENT_FORMATTER = """
+myChart_{chart_id}.on("{event_name}", {handler_name});
 """
 
 
@@ -85,6 +90,10 @@ def generate_js_content(*charts):
     contents = []
 
     for chart in charts:
+        FUNCTION_TRANSLATOR.reset()
+        for handler in chart.event_handlers.values():
+            FUNCTION_TRANSLATOR.feed(handler)
+
         javascript_snippet = TRANSLATOR.translate(chart.options)
         kwargs = dict(
             chart_id=chart.chart_id,
@@ -93,6 +102,14 @@ def generate_js_content(*charts):
             options=javascript_snippet.option_snippet,
         )
         js_content = CHART_CONFIG_FORMATTER.format(**kwargs)
+        for event_name, handler in chart.event_handlers.items():
+            # please note handler has been translated in previous block
+            event_args = dict(
+                event_name=event_name,
+                chart_id=chart.chart_id,
+                handler_name=handler.__name__,
+            )
+            js_content += CHART_EVENT_FORMATTER.format(**event_args)
 
         contents.append(js_content)
     contents = '\n'.join(contents)
@@ -238,10 +255,9 @@ class EnvironmentManager(PluginManager):
         :param file_type: 'html', 'svg', 'png', 'jpeg', 'gif' or 'pdf'
         :param kwargs: the initialization parameters for Environment
         """
-        _a_echarts_env_cls = super(
-            EnvironmentManager,
-            self
-        ).load_me_now(key=file_type)
+        _a_echarts_env_cls = super(EnvironmentManager, self).load_me_now(
+            key=file_type
+        )
         return _a_echarts_env_cls(**kwargs)
 
 
@@ -261,6 +277,6 @@ def create_default_environment(file_type):
         pyecharts_config=config,
         loader=FileSystemLoader(
             [config.echarts_template_dir, default_template_dir]
-        )
+        ),
     )
     return echarts_env

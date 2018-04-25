@@ -1,7 +1,6 @@
 # coding=utf-8
 
 from pyecharts.chart import Chart
-from pyecharts.option import get_all_options
 
 
 class Graph(Chart):
@@ -86,7 +85,7 @@ class Graph(Chart):
         :param kwargs:
         """
         kwargs.update(type="graph")
-        chart = get_all_options(**kwargs)
+        chart = self._get_all_options(**kwargs)
 
         if categories:
             for c in categories:
