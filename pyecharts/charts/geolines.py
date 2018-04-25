@@ -1,7 +1,6 @@
 # coding=utf-8
 
 from pyecharts.chart import Chart
-from pyecharts.option import get_all_options
 from pyecharts.datasets.coordinates import get_coordinate
 from pyecharts.constants import SYMBOL
 
@@ -116,7 +115,7 @@ class GeoLines(Chart):
         :param kwargs:
         """
 
-        chart = get_all_options(**kwargs)
+        chart = self._get_all_options(**kwargs)
         self._zlevel += 1
         if geo_cities_coords:
             for name, coord in geo_cities_coords.items():

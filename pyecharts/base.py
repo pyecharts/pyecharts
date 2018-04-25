@@ -10,7 +10,8 @@ import pyecharts.engine as engine
 import pyecharts.constants as constants
 import pyecharts.exceptions as exceptions
 from pyecharts.conf import CURRENT_CONFIG
-from pyecharts.translator.api import TRANSLATOR
+from pyecharts_javascripthon.api import TRANSLATOR
+from pyecharts.echarts.option import get_all_options
 
 
 class Base(object):
@@ -44,6 +45,7 @@ class Base(object):
         self.renderer = renderer
         self._page_title = page_title
         self._js_dependencies = {'echarts'}
+        self.event_handlers = {}
 
     @property
     def chart_id(self):
@@ -64,6 +66,9 @@ class Base(object):
     @property
     def page_title(self):
         return self._page_title
+
+    def on(self, event_name, handler):
+        self.event_handlers[event_name] = handler
 
     def print_echarts_options(self):
         """ 打印输出图形所有配置项
@@ -153,6 +158,9 @@ class Base(object):
             'Please pass the chart instance directly to Jupyter.' +
             'If you need more help, please read documentation'
         )
+
+    def _get_all_options(self, **kwargs):
+        return get_all_options(**kwargs)
 
     def _repr_html_(self):
         """ 渲染配置项并将图形显示在 notebook 中
