@@ -31,4 +31,4 @@ def test_geo_formatter_func():
         effect_scale=5,
         is_legend_show=False,
     )
-    geo.render()
+    assert "function geo_formatter(" in geo._repr_html_()
