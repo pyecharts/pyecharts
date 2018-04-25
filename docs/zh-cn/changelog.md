@@ -4,10 +4,14 @@
 
     #### Added
     * [issue#311](https://github.com/pyecharts/pyecharts/issues/311) 提供 Jupyter Notebook 导出为 PDF 没有图片的解决方案
+    * 新增对 JavaScript 回调函数配置项的支持。详细内容请点击 []()。
 
     #### Fixed
     * [issue#448](https://github.com/pyecharts/pyecharts/issues/448) 修复 Timeline 中 Overlap 图的 label_color 配置项不生效的 bug
     * [issue#504](https://github.com/pyecharts/pyecharts/issues/504) 修复 markpoint 标记点标注不显示的 bug
+
+    #### Updated
+    * 重构底层 `option.py` 配置项代码，使其更加具有`面向对象`特征，相关文件转移至新 package echarts。
 
 * ### version 0.4.1 - 2018.03.13（Current）
 

@@ -142,12 +142,14 @@
 * xaxis_formatter -> str | function  
     x 轴标签格式器，如 '天'，则 x 轴的标签为数据加'天'(3 天，4 天),默认为 ""
 
-```
+`xaxis_formatter -> function`
+
+``` python
 from pyecharts_javascripthon import Date
 
 def xaxis_formatter(value, index):
     date = Date(value)
-    texts = [(date.getMonth() + 1), date.getDate()];
+    texts = [(date.getMonth() + 1), date.getDate()]
     if index == 0:
         texts.unshift(date.getYear())
     return '/'.join(texts)
@@ -166,12 +168,14 @@ def xaxis_formatter(value, index):
 * yaxis_formatter -> str | function  
     y 轴标签格式器，如 '天'，则 y 轴的标签为数据加'天'(3 天，4 天),默认为 ""
 
-```
+`yaxis_formatter -> function`
+
+``` python
 from pyecharts_javascripthon import Date
 
 def yaxis_formatter(value, index):
     date = Date(value)
-    texts = [(date.getMonth() + 1), date.getDate()];
+    texts = [(date.getMonth() + 1), date.getDate()]
     if index == 0:
         texts.unshift(date.getYear())
     return '/'.join(texts)
@@ -271,15 +275,14 @@ def yaxis_formatter(value, index):
     * 饼图、仪表盘、漏斗图: {a}（系列名称），{b}（数据项名称），{c}（数值）, {d}（百分比）
 
 
-回调函数
+`label_formatter -> function`
 
 ```
 def label_formatter(params):
-    ...
-```
 
 回调函数格式：
 (params: Object|Array) => string
+
 参数 params 是 formatter 需要的单个数据集。格式如下：
 {
     componentType: 'series',
@@ -301,7 +304,7 @@ def label_formatter(params):
     color: string,
 
 }
-
+```
 **Note：** is_random 可随机打乱图例颜色列表，算是切换风格？建议试一试！
 
 
@@ -463,14 +466,13 @@ def label_formatter(params):
     * 地图 : {a}（系列名称），{b}（区域名称），{c}（合并数值）, {d}（无）
     * 饼图、仪表盘、漏斗图: {a}（系列名称），{b}（数据项名称），{c}（数值）, {d}（百分比）
 
-回调函数格式：
+`tooltip_formatter -> function`
 
 ```
 def tooltip_formatter(params):
-    ...
-```
 
 (params: Object|Array, ticket: string, callback: (ticket: string, html: string)) => string
+
 第一个参数 params 是 formatter 需要的数据集。格式如下：
 {
     componentType: 'series',
@@ -495,7 +497,7 @@ def tooltip_formatter(params):
     percent: number,
 
 }
-
+```
 * tooltip_text_color -> str  
     提示框字体颜色，默认为 '#fff'
 * tooltip_font_size -> int  
