@@ -12,6 +12,7 @@ EMPTY = object()  # Used for that proxy has not executed.
 
 
 def proxy_method(func):
+
     def inner(self, *args):
         if self._wrapped is EMPTY:
             self._setup()
@@ -43,6 +44,7 @@ class LazyObject(object):
     def __delattr__(self, name):
         if name == "_wrapped":
             raise TypeError("can't delete _wrapped.")
+
         if self._wrapped is EMPTY:
             self._setup()
         delattr(self._wrapped, name)
