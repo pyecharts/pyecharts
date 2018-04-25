@@ -1,12 +1,13 @@
 # 版本日志
 
-* ### version 0.4.2
+* ### version 0.5.0
 
     #### Added
     * [issue#311](https://github.com/pyecharts/pyecharts/issues/311) 提供 Jupyter Notebook 导出为 PDF 没有图片的解决方案
 
     #### Fixed
     * [issue#448](https://github.com/pyecharts/pyecharts/issues/448) 修复 Timeline 中 Overlap 图的 label_color 配置项不生效的 bug
+    * [issue#504](https://github.com/pyecharts/pyecharts/issues/504) 修复 markpoint 标记点标注不显示的 bug
 
 * ### version 0.4.1 - 2018.03.13（Current）
 

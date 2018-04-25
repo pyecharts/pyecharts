@@ -496,6 +496,7 @@ def _mark(
                 _pname = d.get('name', None)
                 _marktmp = {
                     "coord": _coord,
+                    "value": _coord[1],
                     "name": _pname,
                     "symbol": mark_point_symbol,
                     "symbolSize": mark_point_symbolsize,
