@@ -145,7 +145,7 @@
 `xaxis_formatter -> function`
 
 ``` python
-from pyecharts_javascripthon import Date
+from pyecharts_javascripthon.dom import Date
 
 def xaxis_formatter(value, index):
     date = Date(value)
@@ -171,7 +171,7 @@ def xaxis_formatter(value, index):
 `yaxis_formatter -> function`
 
 ``` python
-from pyecharts_javascripthon import Date
+from pyecharts_javascripthon.dom import Date
 
 def yaxis_formatter(value, index):
     date = Date(value)
