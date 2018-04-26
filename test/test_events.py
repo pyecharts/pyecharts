@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 from pyecharts import Map
 import pyecharts.echarts.events as events
-from pyecharts_javascripthon.dom.functions import alert
+from pyecharts_javascripthon.dom import alert
 
 from test.utils import get_default_rendering_file_content
 
