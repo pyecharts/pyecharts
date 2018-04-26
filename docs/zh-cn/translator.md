@@ -49,19 +49,36 @@ pyecharts 已经封装了底层相关逻辑，对使用者是透明的。因此�
 ```python
 from pyecharts import Bar
 
+
 def label_formatter(params):
-    return params.name + 'abc'
+    return params.value + ' [Good!]'
+
 
 attr = ["Jan", "Feb"]
 v1 = [2.0, 4.9]
 bar = Bar("Bar chart", "precipitation and evaporation one year")
-bar.add("precipitation", attr, v1, label_formatter=label_formatter)
+bar.add(
+    "precipitation",
+    attr,
+    v1,
+    is_label_show=True,
+    label_formatter=label_formatter
+)
 bar.render()
+
 ```
+
+> 回调函数格式参考自 [series[i]-bar.label.formatter](http://echarts.baidu.com/option.html#series-bar.label.formatter) 。
+
+效果图
+
+![bar_with_callback](https://user-images.githubusercontent.com/9875406/38666230-07c1aa66-3e71-11e8-9e9f-43fb7d707a64.png)
 
 ##  注意
 
-为了提高性能，pyecharts 作了以下几点处理：
+第一，pyecharts 并不会检查 echarts 图表配置选项是否支持回调函数，关于这一部分可参考 ECharts 文档。
+
+第二，为了提高性能，pyecharts 作了以下几点处理：
 
 - 函数翻译的实际执行是在 `render` 函数调用时，而不是 `add` 函数。
 - 对已经翻译完成的函数以 **函数名** 为索引进行缓存，避免多次渲染同名函数。
@@ -72,18 +89,18 @@ bar.render()
 from pyecharts import Bar
 
 def label_formatter(params):
-    return params.name + 'abc'
+    return params.name + ' [Good!]'
 
 attr = ["Jan", "Feb"]
 v1 = [2.0, 4.9]
 bar = Bar("Bar chart", "precipitation and evaporation one year")
-bar.add("precipitation", attr, v1, label_formatter=label_formatter)
+bar.add("precipitation", attr, v1, is_label_show=True, label_formatter=label_formatter)
 bar.render()
 
 def label_formatter(params):
-    return params.name + 'test'
+    return params.name + '[OK!]'
 
 bar2 = Bar("Bar chart", "precipitation and evaporation one year")
-bar2.add("precipitation", attr, v1, label_formatter=label_formatter)
+bar2.add("precipitation", attr, v1, is_label_show=True, label_formatter=label_formatter)
 bar2.render()
 ```
