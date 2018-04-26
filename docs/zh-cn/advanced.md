@@ -1,51 +1,88 @@
 > 高级用法篇：本文档描述了 pyecharts 库的高级进阶用法。
 
+## 概述
+
+自 v0.5.0 开始， pyecharts 支持 *javascript 回调函数* 和 *echarts 事件处理函数* ，进一步覆盖 [ECharts](http://echarts.baidu.com/) 相关特性。为项目发展注入新的活力。
+
+在 Python-To-Javascript 语言翻译领域，[javascripthon](https://pypi.python.org/pypi/javascripthon)  是一个简单的 Python3.5+ 到 Javascript 的语言翻译器;  [dukpy](https://github.com/amol-/dukpy) 支持 Python2.7 和 Python 3.4 的语言翻译。
+
+基于以上事实，pyecharts 团队开发了  [pyecharts-javascripthon](https://github.com/pyecharts/pyecharts-javascripthon) 作为底层的 Python-To-Javascript 语言翻译库，封装了以上两个不同的翻译器，并提供若干个 Javascript 数据类型适配模块。
+
+pyecharts 目前仅使用了并封装一部分的 Javascripthon 的翻译规则，主要是 **函数翻译(Function Translate)** 。使用伪代码表示如下：
+
+```
+输入：一个 Python 的函数对象
+输出：一个多行的 unicode 字符串
+```
+
+比如能够将以下的 Python 函数：
+
+```
+def add(x, y):
+    return x + y
+```
+
+翻译为以下 Javascript 函数。
+
+```
+function add(x, y) {
+    return (x + y);
+}
+```
+
+对于 pyecharts 使用者来说，无需了解该翻译器具体的工作原理。
+
+## 安装
+
+### 基本安装
+
+pyecharts 默认已经安装了 pyecharts-javascripthon ，同时也可以通过 pip 安装。
+
+```
+$ pip install pyecharts-javascripthon 
+```
+
+### 环境限制
+
+由于 Javascripthon 要求 Python 的版本至少为 3.5+ 而 pyecharts 用户是 python 2.7, 3.4, 3.5 和 3.6, pyecharts-javascripthon 采用了双轨制：python 3.5+ 用户直接用 Javascripthon；python 2.7 和 3.4 的用户调用网络翻译服务 (software as a service)。同时，希望大家支持这个网络服务的运营费用。
+
+> 注意： Python2.7-3.4 的用户使用时请确保系统可以联网。
+
 ## 使用 JavaScript 回调函数
 
-v0.5.0 引入了新的 pyecharts 扩展包 [pyecharts-javascripthon](https://github.com/pyecharts/pyecharts-javascripthon)，该包的引入为 pyecharts 注入了新的活力。pyecharts-javascripthon 使用了一个优秀的第三方 Python 库 [metapensiero.pj](https://github.com/metapensiero/metapensiero.pj)，该库的官方介绍是 *Javascript for refined palates: a Python 3 to ES6 Javascript translator*，很明显了，这是一个用于将 Python 代码转换为 Javascript 代码的工具。
+### 基本使用
 
-下面是几个简单的示例，
+pyecharts 已经封装了底层相关逻辑，对使用者是透明的。因此你可以像之前一样的使用。将回函函数对象通过 `add` 方法赋值到 echarts 配置字典中，这里的回调函数需满足以下条件之一：
 
-python 代码
+- 使用 `def` 定义的命名函数
 
-``` python
-def foo(a, b, c):
-    pass
-```
-经转换，成为 JavaScript 代码
-``` js
-function foo(a, b, c) {
-}
-```
+注意的是目前暂不支持 `lambda` 表达式。
 
-python 代码
+例子：
 
 ```python
-def foo(a, b, c):
-    for i in range(a, b, c):
-        yield i
+from pyecharts import Bar
 
-for i in iterable(foo(0, 5, 2)):
-    print(i)
-```
-经转换，成为 JavaScript 代码
-``` js
-function* foo(a, b, c) {
-    for ... { // loop control omitted for brevity
-        yield i;
-    }
-}
 
-for (var i of foo(0, 5, 2)) {
-    console.log(i);
-}
+def label_formatter(params):
+    return params.value + ' [Good!]'
+
+
+attr = ["Jan", "Feb"]
+v1 = [2.0, 4.9]
+bar = Bar("Bar chart", "precipitation and evaporation one year")
+bar.add("precipitation", attr, v1, is_label_show=True, label_formatter=label_formatter)
+bar.render()
+
 ```
 
-想对这个库做进一步了解的话，可以阅读该 [官方文档](https://github.com/metapensiero/metapensiero.pj)。
+> 回调函数格式参考自  [series[i]-bar.label.formatter](http://echarts.baidu.com/option.html#series-bar.label.formatter) 。
 
-有了这个库后，从本版本开始，pyecharts 将支持在配置项中传入 Python Function 类型的参数，对应的 Function 将会在 render 时自动的被转换成 Javascript 代码写入到 html 文件中，这也解决了 pyecharts 一直以来的一个痛点，缺乏对回调函数的支持，类似 formatter 这样的配置项一直无法得到较好的支持。
+效果图
 
-**NOTE:** Python2.7-3.4 的用户使用时请确保系统可以联网。
+![bar-label-formatter-callback](https://user-images.githubusercontent.com/9875406/38666230-07c1aa66-3e71-11e8-9e9f-43fb7d707a64.png)
+
+### Tooltip 示例
 
 举个例子，pyecharts 用户经常会提问 Geo 图中如何在 tooltip 中只显示地图坐标名称和数值，不显示经纬度。
 
@@ -75,7 +112,7 @@ def geo_formatter(params):
 
 Echarts 本身提供了 [api/events](http://echarts.baidu.com/api.html#events) 事件处理函数，主要通过 on 方式实现。
 
-pyecharts 根据官方提供的 events 列表，提供了如下全局事件名变量。位于 `pyecharts.echarts.events` 包中。
+pyecharts 根据官方提供的 events 列表，提供了如下全局事件名变量。位于 `pyecharts.echarts.events` 模块中。
 
 ``` python
 # Mouse Events
@@ -143,3 +180,34 @@ def test_mouse_click():
 ### 更多示例
 
 // TODO
+
+## 注意
+
+第一，pyecharts 并不会检查 echarts 图表配置选项是否支持回调函数，关于这一部分可参考 ECharts 文档。
+
+第二，为了提高性能，pyecharts 作了以下几点处理：
+
+- 函数翻译的实际执行是在 `render` 函数调用时，而不是 `add` 函数。
+- 对已经翻译完成的函数以 **函数名** 为索引进行缓存，避免多次渲染同名函数。
+
+因此应当避免同一个函数名多用，以下的情况可能无法获得预期的效果。
+
+```python
+from pyecharts import Bar
+
+def label_formatter(params):
+    return params.name + ' [Good!]'
+
+attr = ["Jan", "Feb"]
+v1 = [2.0, 4.9]
+bar = Bar("Bar chart", "precipitation and evaporation one year")
+bar.add("precipitation", attr, v1, is_label_show=True, label_formatter=label_formatter)
+bar.render()
+
+def label_formatter(params):
+    return params.name + '[OK!]'
+
+bar2 = Bar("Bar chart", "precipitation and evaporation one year")
+bar2.add("precipitation", attr, v1, is_label_show=True, label_formatter=label_formatter)
+bar2.render()
+```
