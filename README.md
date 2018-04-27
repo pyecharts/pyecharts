@@ -82,7 +82,7 @@ It will create a file named *render.html* in the root directory, open file with 
 
 [pyecharts-snapshot](https://github.com/pyecharts/pyecharts-snapshot) is [a command line utility](https://github.com/pyecharts/pyecharts-snapshot#usage) and [a library extension](https://github.com/pyecharts/pyecharts-snapshot#example-programs) which renders the output of pyecharts as a svg, png, jpeg, gif image or a pdf file.
 
-After you will have installed pyecharts-snapshot, you can do modify previous example file slightly and get png output directly:
+After you will have installed pyecharts-snapshot, you can modify previous example file slightly and get png output directly:
 
 
 ```python
