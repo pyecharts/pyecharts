@@ -107,6 +107,8 @@ A: 因为 china.js 没有加载成功。请检查 echarts-countries-pypkg 是不
 
 **Q:如何离线安装 pyecharts？**
 
+自 v0.5.0 后，离线模式的要求改变了一下。如果你用的是 python 3.5+, 以下的指导就足够了。要是你用的是 python 2.7, 3.4, 请读补充提示。
+
 首先需要在一台可以联网的电脑上下载 [requirements.txt](https://github.com/pyecharts/pyecharts/blob/master/requirements.txt) 的依赖包，然后执行
 ``` shell
 $ mkdir pyecharts_requirements
@@ -135,3 +137,10 @@ Mode                LastWriteTime         Length Name
 $ pip install --no-index -f ./ -r r requirements.txt
 $ pip install ./pyecharts
 ```
+
+python 2.7, 3.4 用户提示：
+
+离线用法呢，你们有两个选择：
+
+1）拥抱 python 3.5+, 你们就不需要再做别的了
+2）在自己的机器上运行 [pyecharts-javascripthon-api-service](https://github.com/pyecharts/pyecharts-javascripthon-api-service). 这个服务呢，也是需要 python 3.5+ 的，所以如果你是个人用户的，可以就此打住，直接用 pip3 装 pyecharts v0.5.0 好了。
