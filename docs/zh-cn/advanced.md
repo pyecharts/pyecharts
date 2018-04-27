@@ -88,20 +88,55 @@ bar.render()
 
 像这样
 
+```python
+def test_geo_shantou_city():
+    data = [('澄海区', 30), ('南澳县', 40), ('龙湖区', 50), ('金平区', 60)]
+    geo = Geo("汕头市地图示例", **style.init_style)
+    attr, value = geo.cast(data)
+    geo.add(
+        "",
+        attr,
+        value,
+        maptype="汕头",
+        is_visualmap=True,
+        is_legend_show=False,
+        label_emphasis_textsize=15,
+        label_emphasis_pos='right',
+    )
+    geo.render()
+```
+得到
+
 ![](https://user-images.githubusercontent.com/19553554/39248236-186a50ae-48ce-11e8-84eb-e58ba17eca5c.png)
 
-而现在，你可以这么操作，先定义一个函数
+而现在，你可以这么操作，先定义一个 `geo_formatter` 函数
 
 ```python
 def geo_formatter(params):
     return params.name + ' : ' + params.value[2]
-```
 
-然后设置 `tooltip_formatter=geo_formatter`，就能得到这样的效果
+def test_geo_shantou_city():
+    data = [('澄海区', 30), ('南澳县', 40), ('龙湖区', 50), ('金平区', 60)]
+    geo = Geo("汕头市地图示例", **style.init_style)
+    attr, value = geo.cast(data)
+    geo.add(
+        "",
+        attr,
+        value,
+        maptype="汕头",
+        is_visualmap=True,
+        is_legend_show=False,
+        tooltip_formatter=geo_formatter,    # 重点在这里，将函数直接传递为参数。
+        label_emphasis_textsize=15,
+        label_emphasis_pos='right',
+    )
+    geo.render()
+```
+就可以看到下面的效果了。
 
 ![](https://user-images.githubusercontent.com/19553554/39248244-1be6da4a-48ce-11e8-931f-059879c5dcf4.png)
 
-本新功能需要用户对 metapensiero.pj 和 Echarts 官方配置项有一定的了解。
+本新功能属于进阶用法，需要用户对 metapensiero.pj 和 Echarts 官方配置项有一定的了解。
 
 ### 更多示例
 
@@ -158,7 +193,7 @@ from __future__ import unicode_literals
 
 import pyecharts.echarts.events as events
 from pyecharts import Bar
-from pyecharts_javascripthon.dom.functions import alert
+from pyecharts_javascripthon.dom import alert
 
 
 def on_click():
