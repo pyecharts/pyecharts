@@ -6,17 +6,60 @@
 
 由于 Javascripthon 要求 Python 的版本至少为 3.5+ 而 pyecharts 用户是 python 2.7, 3.4, 3.5 和 3.6, pyecharts-javascripthon 采用了双轨制：python 3.5+ 用户直接用 Javascripthon；python 2.7 和 3.4 的用户调用网络翻译服务 (software as a service)。同时，希望大家支持这个网络服务的运营费用。
 
-## 版本依赖
-
-
-
 ## 翻译器
 
-翻译器定义在 `pyecharts_javascripthon.api` 模块中。
+pyecharts-javascripthon 封装了一个 Python-To-Javascript 语言翻译器，定义在 `pyecharts_javascripthon.api` 模块。 
 
-### 翻译状态机
+### EChartsTranslator
 
-### 结果数据结构
+该类是翻译器的核心类，包含了一个方法 `translate` 。接口如下
+
+```python
+class EChartsTranslator:
+    def translate(self, options: dict) -> JavascriptSnippet
+        pass
+```
+
+### JavascriptSnippet & FunctionSnippet
+
+这两个类描述了 js 代码片段的数据结构，接口定义如下：
+
+```python
+class FunctionSnippet(OrderedDict):
+    def as_snippet(self) -> six.text_type
+        pass
+
+class JavascriptSnippet:
+    def __init__(self, function_snippet: FunctionSnippet, option_snippet: six.text_type):
+        pass
+    def as_snippet(self) -> six.text_type
+        pass
+```
+
+各自在展开之后代码的位置如下：
+
+```javascript
+
+var myChart_09de949b428d4e5db7782a12a7541e35 = echarts.init(document.getElementById('09de949b428d4e5db7782a12a7541e35'), null, {renderer: 'canvas'});
+
+// FunctionSnippet 片段开始
+function on_click() {
+    alert("\u70b9\u51fb\u4e8b\u4ef6\u89e6\u53d1");
+}
+function label_formatter(params) {
+    return (params.value + " [Good!]");
+}
+// FunctionSnippet 片段结束
+
+var option_09de949b428d4e5db7782a12a7541e35 = {
+  // 省略
+}; // option_snippet片段
+myChart_09de949b428d4e5db7782a12a7541e35.setOption(option_09de949b428d4e5db7782a12a7541e35);
+
+myChart_09de949b428d4e5db7782a12a7541e35.on("click", on_click);
+```
+
+
 
 
 
@@ -24,7 +67,7 @@
 
 这些 API 定义了 Javascript 的一些函数和对象的适配。
 
-## 使用规范
+### 使用规范
 
 这些函数或类应当使用
 
