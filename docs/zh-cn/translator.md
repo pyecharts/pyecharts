@@ -76,9 +76,17 @@ bar.render()
 
 ##  注意
 
-第一，pyecharts 并不会检查 echarts 图表配置选项是否支持回调函数，关于这一部分可参考 ECharts 文档。
+1. pyecharts 并不会检查 echarts 图表配置选项是否支持回调函数，关于这一部分可参考 ECharts 文档。
 
-第二，为了提高性能，pyecharts 作了以下几点处理：
+这里指的是，options 参数本身是否支持回调函数，比如
+```python
+def my_title():
+    return 'my_title'
+bar.add(my_title, [], [])
+```
+在 pyecharts 并不会出现渲染上的错误，但不符合 Echarts 中对 title 的要求.
+
+2. 为了提高性能，pyecharts 作了以下几点处理：
 
 - 函数翻译的实际执行是在 `render` 函数调用时，而不是 `add` 函数。
 - 对已经翻译完成的函数以 **函数名** 为索引进行缓存，避免多次渲染同名函数。
