@@ -74,7 +74,7 @@ myChart_09de949b428d4e5db7782a12a7541e35.on("click", on_click);
 - 以原名方式引入
 - 以函数或类名方式引入
 
-比如下列两种引入方式都是错误的。
+比如下列两种引入方式都是**错误**的。
 
 使用了别名引用
 
@@ -112,4 +112,4 @@ from pyecharts_javascripthon.dom import alert    # provide alert dialog to the u
 
 pyecharts 开发组为项目提供了一个在线转换的代码的功能，实际上就是把代码 post 到一台支持 metapensiero.pj 运行环境的服务器，再将转换后的代码返回。[pyecharts-javascripthon-api-service](https://github.com/pyecharts/pyecharts-javascripthon-api-service) 承担了这部分的工作，现已将该项目部署到了 [Heroku](https://www.heroku.com/)。
 
-如果想部署到自己服务器的开发者可以参考项目给出的 [文档](https://github.com/pyecharts/pyecharts-javascripthon-api-service/blob/master/README.md) 来操作。
+用户多了的话呢，免费资源会耗尽。如果想部署到自己服务器的开发者可以参考项目给出的 [文档](https://github.com/pyecharts/pyecharts-javascripthon-api-service/blob/master/README.md) 来操作。

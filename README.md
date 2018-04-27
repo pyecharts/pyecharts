@@ -82,7 +82,14 @@ It will create a file named *render.html* in the root directory, open file with 
 
 [pyecharts-snapshot](https://github.com/pyecharts/pyecharts-snapshot) is [a command line utility](https://github.com/pyecharts/pyecharts-snapshot#usage) and [a library extension](https://github.com/pyecharts/pyecharts-snapshot#example-programs) which renders the output of pyecharts as a svg, png, jpeg, gif image or a pdf file.
 
-See more detail at that repositoty.
+After you will have installed pyecharts-snapshot, you can do modify previous example file slightly and get png output directly:
+
+
+```python
+bar.render(path="render.png")
+```
+
+So please see installation instruction and other usage at that repositoty.
 
 ## Platform Support
 
@@ -100,7 +107,7 @@ In the case of online jshost mode, you can also download as some file formats (i
 
 ### Integrate With Web Framework
 
-With the help of pyecharts API,it is easy to integrate pyecharts to your web projects, such as Flask and Django.
+With the help of pyecharts API, it is easy to integrate pyecharts to your web projects, such as Flask and Django.
 
 Demo
 
@@ -108,7 +115,7 @@ Demo
 
 ## Advance Topics
 
-### Cusom Template FIles and Layout
+### Cusom Template Files and Layout
 
 pyecharts exposes engine API so that you can use your own template file and integrate with CSS framework.
 
