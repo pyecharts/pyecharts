@@ -92,3 +92,6 @@ ENV/
 
 # for mac
 .DS_store
+
+# for vscode
+.vscode/

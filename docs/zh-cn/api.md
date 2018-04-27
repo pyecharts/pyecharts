@@ -102,13 +102,13 @@ js 文件仓库路径。可以设置本地或者远程地址。所有的远程�
 
 **on(event_name, handler)**
 
-添加[事件处理函数](http://echarts.baidu.com/api.html#events)。
+添加 [事件处理函数](http://echarts.baidu.com/api.html#events)。
 
 请注意，事件处理函数是在浏览器里运行，但是要求你用 Python 写哦。
 
 这是支持的所有事件
 
-```
+``` python
 # Mouse Events
 
 MOUSE_CLICK = 'click'
@@ -148,10 +148,9 @@ BRUSH_SELECTED = 'brushselected'
 
 事件处理函数的原型:
 
-```
+``` python
 def handler(params):
     ...
-
 ```
 
 此处 params 的结构与 echarts 的一模一样：
@@ -186,7 +185,7 @@ def handler(params):
 
 例子：
 
-```
+``` python
 # coding=utf-8
 from __future__ import unicode_literals
 
@@ -206,7 +205,7 @@ map.on(events.MOUSE_CLICK, on_click)
 map.render()
 ```
 
-![2018-04-21 23_31_34](https://user-images.githubusercontent.com/4280312/39089412-88f0436e-45be-11e8-91b1-6617d795f26e.gif)
+![](https://user-images.githubusercontent.com/4280312/39089412-88f0436e-45be-11e8-91b1-6617d795f26e.gif)
 
 **get_js_dependencies()**
 
