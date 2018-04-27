@@ -138,10 +138,6 @@ def test_geo_shantou_city():
 
 本新功能属于进阶用法，需要用户对 metapensiero.pj 和 Echarts 官方配置项有一定的了解。
 
-### 更多示例
-
-// TODO
-
 
 ## 使用 JavaScript 事件处理函数
 
@@ -212,13 +208,18 @@ def test_mouse_click():
 
 ![](https://user-images.githubusercontent.com/19553554/39252189-b02b5420-48d7-11e8-9c53-6f0fb6d386c0.gif)
 
-### 更多示例
-
-// TODO
-
 ## 注意
 
 第一，pyecharts 并不会检查 echarts 图表配置选项是否支持回调函数，关于这一部分可参考 ECharts 文档。
+
+这里指的是，options 参数本身是否支持回调函数，比如
+```python
+def my_title():
+    return 'my_title'
+bar.add(my_title, [], [])
+```
+在 pyecharts 并不会出现渲染上的错误，但不符合 Echarts 中对 title 的要求.
+
 
 第二，为了提高性能，pyecharts 作了以下几点处理：
 
