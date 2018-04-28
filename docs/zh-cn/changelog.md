@@ -1,9 +1,24 @@
 # 版本日志
 
-* ### version 0.4.2
+* ### version 0.5.1（dev）
     * TODO
 
-* ### version 0.4.1 - 2018.03.13（Current）
+* ### version 0.5.0 - 2018.04.28（Current）
+
+    #### Added
+    * [issue#311](https://github.com/pyecharts/pyecharts/issues/311) 提供 Jupyter Notebook 导出为 PDF 没有图片的解决方案
+    * 新增对 JavaScript 回调函数配置项和事件绑定的支持。详细内容请移步至 [release-note/v050](zh-cn/release-note/v050)。
+
+    #### Fixed
+    * [issue#448](https://github.com/pyecharts/pyecharts/issues/448) 修复 Timeline 中 Overlap 图的 label_color 配置项不生效的 bug
+    * [issue#504](https://github.com/pyecharts/pyecharts/issues/504) 修复 markpoint 标记点标注不显示的 bug
+
+    #### Updated
+    * 重构底层 `option.py` 配置项代码，使其更加具有`面向对象`特征，相关文件转移至新 package echarts。
+    * 将地图数据及接口转移至 'pyecharts.datasets' 包，更多内容请参考 [地理地图数据](zh-cn/datasets)。
+    * `pyecharts.Geo` 和 `pyecharts.GeoLines` 新增 `add_coordinate` 方法用于新增一个自定义城市地理位置的功能。
+
+* ### version 0.4.1 - 2018.03.13
 
     #### Fixed
     * [issue#437](https://github.com/pyecharts/pyecharts/issues/437) 修复 Timeline 图累计多个 Bar 图会导致条形宽度压缩的 bug
@@ -21,7 +36,7 @@
     #### Updated
     * 更新 jupyter-echarts 至 1.4.0: echarts 3.6.2 -> 4.0.4, echarts-gl 1.0.0-b4 -> 1.1.0, echarts-liquidfill 1.0.5 -> 2.0.0, echarts-wordcloud 1.1.0 -> 1.1.2
     * 优化内部渲染逻辑，提高渲染效率。
-    
+
     #### Fixed
     * 修正 width / height 在 Jupyter Notebook 渲染错误的 Bug
     * [issue#432](https://github.com/pyecharts/pyecharts/issues/432) 修复水球图和词云图不能指定 Toolbox 等选项的 Bug
@@ -79,7 +94,7 @@
     * 图表 `render` 方法增加 `template_name` 、`object_name`、`extra_context` 等参数，全面支持自定义模板
     * 新增统一配置函数 `pyecharts.configure` ，支持设置模板目录，JS 文件仓库路径。
     * [issue#252](https://github.com/pyecharts/pyecharts/issues/252) 新增 `xaxis_label_textsize`, `xaxis_label_textcolor`, `yaxis_label_textsize`, `yaxis_label_textcolor` 四个参数修改坐标轴标签的字体和颜色
-    * [issue#258](https://github.com/pyecharts/pyecharts/issues/258) 新增 `mark_point_valuedim` 参数，并将 `mark_line_valuedim` 和 `mark_point_valuedim` 参数类型修改为 list。 
+    * [issue#258](https://github.com/pyecharts/pyecharts/issues/258) 新增 `mark_point_valuedim` 参数，并将 `mark_line_valuedim` 和 `mark_point_valuedim` 参数类型修改为 list。
     * [issue#260](https://github.com/pyecharts/pyecharts/issues/260) 新增 `is_toolbox_show` 参数用于控制是否显示右侧实用工具箱。
 
     #### Updated
@@ -87,7 +102,7 @@
     * js 依赖文件支持外部链接方式引入。
     * `pyecharts.custom.Page` 类实现 `list` 协议，支持迭代、索引、添加、扩展等操作。
     * 图表 width 和 height 支持 '50%' 、'78px' 等其他 css 有效长度形式。
-    * 更新 jupyter-echarts 至 1.3.3: [上海地图补了崇明区](https://github.com/pyecharts/jupyter-echarts/issues/9), [西藏地图补了山南市](https://github.com/pyecharts/jupyter-echarts/issues/7) 
+    * 更新 jupyter-echarts 至 1.3.3: [上海地图补了崇明区](https://github.com/pyecharts/jupyter-echarts/issues/9), [西藏地图补了山南市](https://github.com/pyecharts/jupyter-echarts/issues/7)
 
 * ### version 0.2.7 - 2017.10.27
 

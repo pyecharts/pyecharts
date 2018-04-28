@@ -16,6 +16,7 @@ from pyecharts.charts.graph import Graph
 from pyecharts.charts.heatmap import HeatMap
 
 from pyecharts.charts.kline import Kline
+
 Candlestick = Kline
 
 from pyecharts.charts.line import Line
@@ -42,5 +43,5 @@ from pyecharts.custom.timeline import Timeline
 # misc
 from pyecharts.conf import online
 from pyecharts.conf import configure
-from pyecharts.style import Style
-
+from pyecharts.echarts.style import Style
+from pyecharts.conf import jupyter_image

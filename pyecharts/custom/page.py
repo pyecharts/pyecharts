@@ -1,5 +1,5 @@
 # coding=utf-8
-
+import os
 from jinja2 import Markup
 
 import pyecharts.utils as utils
@@ -29,18 +29,27 @@ class Page(list):
         else:
             self.append(achart_or_charts)
 
-    def render(self,
-               path='render.html',
-               template_name='simple_page.html',
-               object_name='page',
-               extra_context=None):
-        env = engine.create_default_environment()
+    def render(
+        self,
+        path='render.html',
+        template_name='simple_page.html',
+        object_name='page',
+        **kwargs
+    ):
+        _, ext = os.path.splitext(path)
+        _file_type = ext[1:]
+        if _file_type != constants.DEFAULT_HTML:
+            raise NotImplementedError(
+                'Rendering Page instance as image is not supported!'
+            )
+
+        env = engine.create_default_environment(constants.DEFAULT_HTML)
         env.render_chart_to_file(
             chart=self,
             object_name=object_name,
             path=path,
             template_name=template_name,
-            extra_context=extra_context
+            **kwargs
         )
 
     def render_embed(self):
@@ -55,24 +64,21 @@ class Page(list):
         """
         Declare its javascript dependencies for embedding purpose
         """
-        return CURRENT_CONFIG.produce_html_script_list(
-            self.js_dependencies)
+        return CURRENT_CONFIG.produce_html_script_list(self.js_dependencies)
 
     def _repr_html_(self):
         """
-
-        :return:
+        :return: html content for jupyter
         """
         dependencies = self.js_dependencies
         require_config = CURRENT_CONFIG.produce_require_configuration(
-            dependencies)
+            dependencies
+        )
         config_items = require_config['config_items']
         libraries = require_config['libraries']
-        env = engine.create_default_environment()
+        env = engine.create_default_environment(constants.DEFAULT_HTML)
         return env.render_chart_to_notebook(
-            charts=self,
-            config_items=config_items,
-            libraries=libraries
+            charts=self, config_items=config_items, libraries=libraries
         )
 
     @property
@@ -88,9 +94,9 @@ class Page(list):
     def from_charts(cls, *args):
         """
         A shortcut class method for building page object from charts.
-        :param args:
-        :return:
+        :param args: page arguments
+        :return: Page instance
         """
-        p = cls()
-        p.extend(args)
-        return p
+        page = cls()
+        page.extend(args)
+        return page

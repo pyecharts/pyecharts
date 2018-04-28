@@ -12,20 +12,23 @@ class Timeline(Base):
     时间线轮播多张图
     """
 
-    def __init__(self, page_title=PAGE_TITLE,
-                 width=800,
-                 height=400,
-                 is_auto_play=False,
-                 is_loop_play=True,
-                 is_rewind_play=False,
-                 is_timeline_show=True,
-                 timeline_play_interval=2000,
-                 timeline_symbol="emptyCircle",
-                 timeline_symbol_size=10,
-                 timeline_left="auto",
-                 timeline_right="auto",
-                 timeline_top="auto",
-                 timeline_bottom="atuo"):
+    def __init__(
+        self,
+        page_title=PAGE_TITLE,
+        width=800,
+        height=400,
+        is_auto_play=False,
+        is_loop_play=True,
+        is_rewind_play=False,
+        is_timeline_show=True,
+        timeline_play_interval=2000,
+        timeline_symbol="emptyCircle",
+        timeline_symbol_size=10,
+        timeline_left="auto",
+        timeline_right="auto",
+        timeline_top="auto",
+        timeline_bottom="atuo",
+    ):
         """
 
         :param is_auto_play:
@@ -57,9 +60,7 @@ class Timeline(Base):
             timeline 组件离容器底侧的距离。同 left
         """
 
-        super(Timeline, self).__init__(
-            width=width, height=height
-        )
+        super(Timeline, self).__init__(width=width, height=height)
         self._page_title = page_title
         self._time_points = []
         self._option = {
@@ -76,7 +77,7 @@ class Timeline(Base):
                     "left": timeline_left,
                     "right": timeline_right,
                     "top": timeline_top,
-                    "bottom": timeline_bottom
+                    "bottom": timeline_bottom,
                 },
                 "series": [],
             },
@@ -92,8 +93,7 @@ class Timeline(Base):
             指定时间点
         """
         self._js_dependencies = merge_js_dependencies(
-            self._js_dependencies,
-            chart.js_dependencies
+            self._js_dependencies, chart.js_dependencies
         )
         self.__check_components(chart)
         self._time_points.append(time_point)
@@ -103,12 +103,15 @@ class Timeline(Base):
         self._option.get('baseOption').get('timeline').update(
             data=self._time_points
         )
-        self._option.get('options').append({
-            "legend": chart.options.get('legend'),
-            "series": chart.options.get('series'),
-            "title": chart.options.get('title'),
-            "tooltip": chart.options.get('tooltip')
-        })
+        self._option.get('options').append(
+            {
+                "color": chart.options.get("color"),
+                "legend": chart.options.get('legend'),
+                "series": chart.options.get('series'),
+                "title": chart.options.get('title'),
+                "tooltip": chart.options.get('tooltip'),
+            }
+        )
         _tmp_series = copy.deepcopy(chart.options.get('series'))
         for _s in _tmp_series:
             if _s.get("type") == "map":
@@ -122,8 +125,17 @@ class Timeline(Base):
             图形实例
         """
         _compoents = [
-            'grid', 'xAxis', 'yAxis', 'polar', 'radiusAxis', 'geo',
-            'angleAxis', 'radar', 'visualMap', 'dataZoom', 'parallelAxis'
+            'grid',
+            'xAxis',
+            'yAxis',
+            'polar',
+            'radiusAxis',
+            'geo',
+            'angleAxis',
+            'radar',
+            'visualMap',
+            'dataZoom',
+            'parallelAxis',
         ]
 
         for component in _compoents:
