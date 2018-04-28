@@ -1,2 +1,3 @@
+- [v0.5.0](zh-cn/release-note/v050)
 - [v0.3.2](zh-cn/release-note/v032)
 - [v0.3.0](zh-cn/release-note/v030)
