@@ -60,9 +60,6 @@ myChart_09de949b428d4e5db7782a12a7541e35.on("click", on_click);
 ```
 
 
-
-
-
 ## 模拟对象(dummy objects)
 
 这些 API 定义了 Javascript 的一些函数和对象的适配。
@@ -88,21 +85,23 @@ from pyecharts_javascripthon.dom import Date as JDate
 from pyecharts_javascripthon import dom
 ```
 
-
-
 ### DOM 对象
 
 [Date](https://www.w3schools.com/jsref/jsref_obj_date.asp), [Math](https://www.w3schools.com/jsref/jsref_obj_math.asp), [JSON](https://www.w3schools.com/jsref/jsref_obj_json.asp), [window](https://www.w3schools.com/jsref/obj_window.asp), [Document](https://www.w3schools.com/jsref/dom_obj_document.asp), [console](https://www.w3schools.com/jsref/obj_console.asp), [screen](https://www.w3schools.com/jsref/obj_screen.asp)
 
-```
+``` python
 from pyecharts_javascripthon.dom import window    # for window object
 from pyecharts_javascripthon.dom import Document  # for Document object
 from pyecharts_javascripthon.dom import Date      # for Date object
+from pyecharts_javascripthon.dom import Math      # for Math module
+from pyecharts_javascripthon.dom import JSON      # for JSON module
+from pyecharts_javascripthon.dom import screen    # for screen object
+from pyecharts_javascripthon.dom import console   # for console object
 ```
 
 ### 全局函数
 
-```
+```python
 from pyecharts_javascripthon.dom import alert    # provide alert dialog to the user
 ```
 

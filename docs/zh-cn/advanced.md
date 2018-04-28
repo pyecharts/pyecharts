@@ -17,14 +17,14 @@ pyecharts 目前仅使用了并封装一部分的 Javascripthon 的翻译规则�
 
 比如能够将以下的 Python 函数：
 
-```
+```python
 def add(x, y):
     return x + y
 ```
 
 翻译为以下 Javascript 函数。
 
-```
+```js
 function add(x, y) {
     return (x + y);
 }
@@ -38,7 +38,7 @@ function add(x, y) {
 
 pyecharts 默认已经安装了 pyecharts-javascripthon ，同时也可以通过 pip 安装。
 
-```
+```bash
 $ pip install pyecharts-javascripthon 
 ```
 
@@ -74,7 +74,6 @@ v1 = [2.0, 4.9]
 bar = Bar("Bar chart", "precipitation and evaporation one year")
 bar.add("precipitation", attr, v1, is_label_show=True, label_formatter=label_formatter)
 bar.render()
-
 ```
 
 > 回调函数格式参考自  [series[i]-bar.label.formatter](http://echarts.baidu.com/option.html#series-bar.label.formatter) 。
@@ -214,6 +213,7 @@ def test_mouse_click():
 第一，pyecharts 并不会检查 echarts 图表配置选项是否支持回调函数，关于这一部分可参考 ECharts 文档。
 
 这里指的是，options 参数本身是否支持回调函数，比如
+
 ```python
 def my_title():
     return 'my_title'
