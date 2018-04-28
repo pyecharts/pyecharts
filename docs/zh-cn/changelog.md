@@ -1,6 +1,9 @@
 # 版本日志
 
-* ### version 0.5.0
+* ### version 0.5.1（dev）
+    * TODO
+
+* ### version 0.5.0 - 2018.04.28（Current）
 
     #### Added
     * [issue#311](https://github.com/pyecharts/pyecharts/issues/311) 提供 Jupyter Notebook 导出为 PDF 没有图片的解决方案
@@ -12,8 +15,9 @@
 
     #### Updated
     * 重构底层 `option.py` 配置项代码，使其更加具有`面向对象`特征，相关文件转移至新 package echarts。
+    * 将地图数据及接口转移至 dataset package，更多内容请参考 [地理地图数据](zh-cn/datasets)。
 
-* ### version 0.4.1 - 2018.03.13（Current）
+* ### version 0.4.1 - 2018.03.13
 
     #### Fixed
     * [issue#437](https://github.com/pyecharts/pyecharts/issues/437) 修复 Timeline 图累计多个 Bar 图会导致条形宽度压缩的 bug
