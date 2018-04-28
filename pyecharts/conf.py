@@ -1,20 +1,21 @@
 # coding=utf-8
 from __future__ import unicode_literals
 
+from contextlib import contextmanager
 from pyecharts.js_extensions import EXTENSION_MANAGER
-from pyecharts.utils import get_resource_dir
-
-# Path constants for template dir
-DEFAULT_TEMPLATE_DIR = get_resource_dir('templates')
+import pyecharts.constants as constants
 
 
 class PyEchartsConfig(object):
-    def __init__(self, echarts_template_dir='.', jshost=None,
-                 force_js_embed=False):
+
+    def __init__(
+        self, echarts_template_dir='.', jshost=None, force_js_embed=False
+    ):
         self.echarts_template_dir = echarts_template_dir
         self._jshost = remove_trailing_slashes(jshost)
         self.force_js_embed = force_js_embed
         self.hosted_on_github = False
+        self.jupyter_presentation = constants.DEFAULT_HTML
 
     @property
     def js_embed(self):
@@ -22,6 +23,7 @@ class PyEchartsConfig(object):
         """
         if self.force_js_embed:
             return True
+
         else:
             return self.jshost is None
 
@@ -38,6 +40,7 @@ class PyEchartsConfig(object):
             library = extension.get_js_library(pinyin)
             if library is not None:
                 return library
+
         return None
 
     def chinese_to_pinyin(self, chinese):
@@ -45,6 +48,7 @@ class PyEchartsConfig(object):
             __pinyin__ = extension.chinese_to_pinyin(chinese)
             if __pinyin__:
                 return __pinyin__
+
         else:
             # no match found, i.e. 'world'
             return chinese
@@ -58,17 +62,18 @@ class PyEchartsConfig(object):
                 if filecontent:
                     contents.append(filecontent)
                     break
+
         return contents
 
     def generate_js_link(self, js_names):
         links = []
         for name in js_names:
             for extension in EXTENSION_MANAGER.get_all_extensions():
-                js_link = extension.get_js_link(
-                    name, jshost=self.jshost)
+                js_link = extension.get_js_link(name, jshost=self.jshost)
                 if js_link:
                     links.append(js_link)
                     break
+
         return links
 
     def produce_require_configuration(self, dependencies):
@@ -85,15 +90,13 @@ class PyEchartsConfig(object):
         for name in __dependencies__:
             for extension in EXTENSION_MANAGER.get_all_extensions():
                 config_item = extension.produce_require_config_syntax(
-                    name,
-                    jshost=self.jshost,
-                    use_github=self.hosted_on_github)
+                    name, jshost=self.jshost, use_github=self.hosted_on_github
+                )
                 if config_item:
                     require_conf_items.append(config_item)
         require_libraries = ["'%s'" % key for key in __dependencies__]
         return dict(
-            config_items=require_conf_items,
-            libraries=require_libraries
+            config_items=require_conf_items, libraries=require_libraries
         )
 
     def produce_html_script_list(self, dependencies):
@@ -104,8 +107,8 @@ class PyEchartsConfig(object):
         """
         __dependencies__ = _ensure_echarts_is_in_the_front(dependencies)
         script_list = [
-            '%s' % self.get_js_library(key)
-            for key in __dependencies__]
+            '%s' % self.get_js_library(key) for key in __dependencies__
+        ]
         return script_list
 
 
@@ -116,6 +119,7 @@ def remove_trailing_slashes(jshost):
     """
     if jshost and jshost[-1] in ('/', '\\'):
         return jshost[:-1]
+
     else:
         return jshost
 
@@ -123,17 +127,25 @@ def remove_trailing_slashes(jshost):
 CURRENT_CONFIG = PyEchartsConfig()
 
 
-def configure(jshost=None,
-              hosted_on_github=None,
-              echarts_template_dir=None,
-              force_js_embed=None,
-              **kwargs):
+def configure(
+    jshost=None,
+    hosted_on_github=None,
+    echarts_template_dir=None,
+    force_js_embed=None,
+    output_image=None,
+    **kwargs
+):
     """ Config all items for pyecharts when use chart.render()
     or page.render().
 
-    :param jshost:
-    :param echarts_template_dir:
-    :param force_js_embed:
+    :param jshost: the host for echarts related javascript libraries
+    :param echarts_template_dir: the directory for custom html templates
+    :param force_js_embed: embed javascript in html file or not
+    :param output_image: Non None value asks pyecharts to use
+                         pyecharts-snapshots to render as image directly.
+                         Values such as 'svg', 'jpeg', 'png' changes
+                         chart presentation in jupyter notebook to those image
+                         formats, instead of 'html' format.
     :param kwargs:
     """
     if jshost:
@@ -144,6 +156,8 @@ def configure(jshost=None,
         CURRENT_CONFIG.echarts_template_dir = echarts_template_dir
     if force_js_embed is not None:
         CURRENT_CONFIG.force_js_embed = force_js_embed
+    if output_image in constants.JUPYTER_PRESENTATIONS:
+        CURRENT_CONFIG.jupyter_presentation = output_image
 
 
 def online(host=None):
@@ -155,6 +169,20 @@ def online(host=None):
         configure(hosted_on_github=True)
     else:
         configure(jshost=host)
+
+
+@contextmanager
+def jupyter_image(jupyter_presentation):
+    """
+    Temporarily change jupyter's default presentation
+    """
+    previous_presentation = CURRENT_CONFIG.jupyter_presentation
+    try:
+        CURRENT_CONFIG.jupyter_presentation = jupyter_presentation
+        yield
+
+    finally:
+        CURRENT_CONFIG.jupyter_presentation = previous_presentation
 
 
 def _ensure_echarts_is_in_the_front(dependencies):
@@ -173,4 +201,5 @@ def _ensure_echarts_is_in_the_front(dependencies):
         dependencies = list(dependencies)
     else:
         raise Exception("No js library found. Nothing works!")
+
     return dependencies

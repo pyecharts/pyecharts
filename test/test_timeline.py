@@ -37,8 +37,12 @@ def test_timeline_bar():
     bar_5.add("春季", CLOTHES, [randint(10, 100) for _ in range(6)])
     bar_5.add("夏季", CLOTHES, [randint(10, 100) for _ in range(6)])
     bar_5.add("秋季", CLOTHES, [randint(10, 100) for _ in range(6)])
-    bar_5.add("冬季", CLOTHES, [randint(10, 100) for _ in range(6)],
-              is_legend_show=True)
+    bar_5.add(
+        "冬季",
+        CLOTHES,
+        [randint(10, 100) for _ in range(6)],
+        is_legend_show=True,
+    )
 
     timeline = Timeline(is_auto_play=True, timeline_bottom=0)
     timeline.add(bar_1, '2012 年')
@@ -53,9 +57,7 @@ def test_timeline_bar():
 def test_timeline_pie():
     style = Style()
     pie_style = style.add(
-        is_label_show=True,
-        radius=[30, 55],
-        rosetype="radius"
+        is_label_show=True, radius=[30, 55], rosetype="radius"
     )
     pie_1 = Pie("2012 年销量比例", "数据纯属虚构")
     pie_1.add("秋季", CLOTHES, [randint(10, 100) for _ in range(6)], **pie_style)
@@ -72,8 +74,9 @@ def test_timeline_pie():
     pie_5 = Pie("2016 年销量比例", "数据纯属虚构")
     pie_5.add("秋季", CLOTHES, [randint(10, 100) for _ in range(6)], **pie_style)
 
-    timeline = Timeline(is_auto_play=True, timeline_bottom=0,
-                        width=1200, height=600)
+    timeline = Timeline(
+        is_auto_play=True, timeline_bottom=0, width=1200, height=600
+    )
     timeline.add(pie_1, '2012 年')
     timeline.add(pie_2, '2013 年')
     timeline.add(pie_3, '2014 年')
@@ -137,17 +140,30 @@ def test_timeline_bar_line():
 def test_timeline_map():
     timeline = Timeline(timeline_bottom=0)
     value = [155, 10, 66, 78, 33, 80, 190, 53, 49.6]
-    attr = ["福建", "山东", "北京", "上海", "甘肃",
-            "新疆", "河南", "广西", "西藏"]
+    attr = ["福建", "山东", "北京", "上海", "甘肃", "新疆", "河南", "广西", "西藏"]
     map = Map("Map 结合 VisualMap 示例", width=1200, height=600)
-    map.add("", attr, value, maptype='china', is_visualmap=True,
-            visual_text_color='#000', visual_top="30%")
+    map.add(
+        "",
+        attr,
+        value,
+        maptype='china',
+        is_visualmap=True,
+        visual_text_color='#000',
+        visual_top="30%",
+    )
     timeline.add(map, "test1")
     value = [155, 10, 66, 78, 33]
     attr = ["福建", "山东", "北京", "上海", "甘肃"]
     map = Map("Map 结合 VisualMap 示例", width=1200, height=600)
-    map.add("", attr, value, maptype='china', is_visualmap=True,
-            visual_text_color='#000', visual_top="30%")
+    map.add(
+        "",
+        attr,
+        value,
+        maptype='china',
+        is_visualmap=True,
+        visual_text_color='#000',
+        visual_top="30%",
+    )
     timeline.add(map, "test2")
     assert len(timeline.options.get("baseOption").get("series")) == 2
     timeline.render()
@@ -164,12 +180,49 @@ def test_timeline_different_legend():
     bar_2.add("春季b", CLOTHES, [randint(10, 100) for _ in range(6)])
     bar_2.add("夏季b", CLOTHES, [randint(10, 100) for _ in range(6)])
     bar_2.add("秋季b", CLOTHES, [randint(10, 100) for _ in range(6)])
-    bar_2.add("冬季b", CLOTHES, [randint(10, 100) for _ in range(6)],
-              is_legend_show=True)
+    bar_2.add(
+        "冬季b",
+        CLOTHES,
+        [randint(10, 100) for _ in range(6)],
+        is_legend_show=True,
+    )
 
     timeline = Timeline(is_auto_play=True, timeline_bottom=0)
     timeline.add(bar_1, '2012 年')
     timeline.add(bar_2, '2013 年')
     content = timeline._repr_html_()
-    assert "\\u6625\\u5b63a" in content      # 春季 a
-    assert "\\u6625\\u5b63b" in content      # 春季 b
+    assert "\\u6625\\u5b63a" in content  # 春季 a
+    assert "\\u6625\\u5b63b" in content  # 春季 b
+
+
+def test_timeline_label_color():
+    attr = ["{}月".format(i) for i in range(1, 7)]
+    bar = Bar("1 月份数据", "数据纯属虚构")
+    bar.add(
+        "bar",
+        attr,
+        [randint(10, 50) for _ in range(6)],
+        label_color=['red', '#213', 'black'],
+    )
+    line = Line()
+    line.add("line", attr, [randint(50, 80) for _ in range(6)])
+    overlap_0 = Overlap()
+    overlap_0.add(bar)
+    overlap_0.add(line)
+
+    bar_1 = Bar("2 月份数据", "数据纯属虚构")
+    bar_1.add("bar", attr, [randint(10, 50) for _ in range(6)])
+    line_1 = Line()
+    line_1.add("line", attr, [randint(50, 80) for _ in range(6)])
+    overlap_1 = Overlap()
+    overlap_1.add(bar_1)
+    overlap_1.add(line_1)
+
+    timeline = Timeline(timeline_bottom=0)
+    timeline.add(overlap_0, '1 月')
+    timeline.add(overlap_1, '2 月')
+    content = timeline._repr_html_()
+    assert '"color": [' in content
+    assert "red" in content
+    assert "#213" in content
+    assert "black" in content

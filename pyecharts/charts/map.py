@@ -1,11 +1,5 @@
 # coding=utf-8
-import sys
-
 from pyecharts.chart import Chart
-from pyecharts.option import get_all_options
-
-
-PY2 = sys.version_info[0] == 2
 
 
 class Map(Chart):
@@ -14,18 +8,24 @@ class Map(Chart):
 
     地图主要用于地理区域数据的可视化。
     """
+
     def __init__(self, title="", subtitle="", **kwargs):
         super(Map, self).__init__(title, subtitle, **kwargs)
 
     def add(self, *args, **kwargs):
         self.__add(*args, **kwargs)
 
-    def __add(self, name, attr, value,
-              maptype="china",
-              is_roam=True,
-              is_map_symbol_show=True,
-              name_map=None,
-              **kwargs):
+    def __add(
+        self,
+        name,
+        attr,
+        value,
+        maptype="china",
+        is_roam=True,
+        is_map_symbol_show=True,
+        name_map=None,
+        **kwargs
+    ):
         """
 
         :param name:
@@ -54,7 +54,7 @@ class Map(Chart):
         :param kwargs:
         """
         assert len(attr) == len(value)
-        chart = get_all_options(**kwargs)
+        chart = self._get_all_options(**kwargs)
         _data = []
         for data in zip(attr, value):
             _name, _value = data
@@ -69,7 +69,7 @@ class Map(Chart):
             "mapType": maptype,
             "data": _data,
             "roam": is_roam,
-            "showLegendSymbol": is_map_symbol_show
+            "showLegendSymbol": is_map_symbol_show,
         }
         if name_map:
             __option__['nameMap'] = name_map

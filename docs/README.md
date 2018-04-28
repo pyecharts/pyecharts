@@ -11,7 +11,7 @@ pyecharts 是一个用于生成 Echarts 图表的类库。Echarts 是百度开�
 
 **高级话题**
 
-[图表 API](zh-cn/api) | [自定义地图](zh-cn/customize_map)
+[图表 API](zh-cn/api) | [自定义地图](zh-cn/customize_map) | [回调函数和事件处理](zh-cn/advanced) | [语言翻译扩展](zh-cn/translator)
 
 **平台支持**
 
@@ -19,8 +19,13 @@ pyecharts 是一个用于生成 Echarts 图表的类库。Echarts 是百度开�
 
 **其他资源**
 
-[示例项目](https://github.com/pyecharts/pyecharts-users-cases) | [地图扩展项目](https://github.com/pyecharts/echarts-china-cities-js)
+[示例项目](https://github.com/pyecharts/pyecharts-users-cases) | [地理地图数据](zh-cn/datasets)
+
+**项目发布**
+
+[版本日志](zh-cn/changelog) | [发布日志](zh-cn/release-note/)
 
 **项目开发**
 
-[版本日志](zh-cn/changelog) | [发布日志](zh-cn/release-note/) | [开发团队](zh-cn/team) | [赞助者名单](zh-cn/donors)  | [FAQ](zh-cn/faq)
+[技术文档](zh-cn/technical) |  [开发团队](zh-cn/team) | [赞助者名单](zh-cn/donors)  | [FAQ](zh-cn/faq)
+

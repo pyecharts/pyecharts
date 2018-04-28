@@ -1,7 +1,6 @@
 # coding=utf-8
 
 from pyecharts.chart import Chart
-from pyecharts.option import get_all_options
 
 
 class TreeMap(Chart):
@@ -18,11 +17,15 @@ class TreeMap(Chart):
     def add(self, *args, **kwargs):
         self.__add(*args, **kwargs)
 
-    def __add(self, name, data,
-              treemap_left_depth=None,
-              treemap_drilldown_icon='▶',
-              treemap_visible_min=10,
-              **kwargs):
+    def __add(
+        self,
+        name,
+        data,
+        treemap_left_depth=None,
+        treemap_drilldown_icon='▶',
+        treemap_visible_min=10,
+        **kwargs
+    ):
         """
 
         :param name:
@@ -68,17 +71,19 @@ class TreeMap(Chart):
             如果某个节点的矩形的面积，小于这个数值（单位：px平方），这个节点就不显示。
         :param kwargs:
         """
-        chart = get_all_options(**kwargs)
+        chart = self._get_all_options(**kwargs)
         self._option.get('legend')[0].get('data').append(name)
 
-        self._option.get('series').append({
-            "type": "treemap",
-            "name": name,
-            "data": data,
-            "label": chart['label'],
-            "leafDepth": treemap_left_depth,
-            "drillDownIcon": treemap_drilldown_icon,
-            "visibleMin": treemap_visible_min,
-            "seriesId": self._option.get('series_id'),
-        })
+        self._option.get('series').append(
+            {
+                "type": "treemap",
+                "name": name,
+                "data": data,
+                "label": chart['label'],
+                "leafDepth": treemap_left_depth,
+                "drillDownIcon": treemap_drilldown_icon,
+                "visibleMin": treemap_visible_min,
+                "seriesId": self._option.get('series_id'),
+            }
+        )
         self._config_components(**kwargs)

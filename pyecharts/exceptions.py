@@ -4,3 +4,15 @@ class NoJsExtensionFound(Exception):
 
 class InvalidRegistry(Exception):
     pass
+
+
+class InvalidConfiguration(Exception):
+    pass
+
+
+class JavascriptNotSupported(Exception):
+    pass
+
+
+class ExtensionMissing(Exception):
+    pass

@@ -3,6 +3,8 @@ from __future__ import unicode_literals
 
 import random
 
+import pyecharts.echarts as option
+
 fs = []
 SYMBOLS = ('rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow')
 
@@ -13,17 +15,19 @@ def collectfuncs(func):
 
 
 @collectfuncs
-def label(type=None,
-          is_label_show=False,
-          is_label_emphasis=True,
-          label_pos=None,
-          label_text_color="#000",
-          label_text_size=12,
-          label_formatter=None,
-          label_emphasis_pos=None,
-          label_emphasis_textcolor='#fff',
-          label_emphasis_textsize=12,
-          **kwargs):
+def label(
+    type=None,
+    is_label_show=False,
+    is_label_emphasis=True,
+    label_pos=None,
+    label_text_color="#000",
+    label_text_size=12,
+    label_formatter=None,
+    label_emphasis_pos=None,
+    label_emphasis_textcolor='#fff',
+    label_emphasis_textsize=12,
+    **kwargs
+):
     """ 图形上的文本标签，可用于说明图形的一些数据信息，比如值，名称等。
 
     :param type:
@@ -62,38 +66,29 @@ def label(type=None,
         高亮标签字体大小，默认为 12
     :param kwargs:
     """
-    if label_pos is None:
-        label_pos = "outside" if type in ["pie", "graph"] else "top"
     _label = {
-        "normal": {
-            "show": is_label_show,
-            "position": label_pos,
-            "textStyle": {
-                "color": label_text_color,
-                "fontSize": label_text_size
-            }},
-        "emphasis": {
-            "show": is_label_emphasis,
-            "position": label_emphasis_pos,
-            "textStyle": {
-                "color": label_emphasis_textcolor,
-                "fontSize": label_emphasis_textsize,
-            }}
+        "normal": option.NormalLabel(
+            visibility=is_label_show,
+            position=label_pos,
+            text_color=label_text_color,
+            text_size=label_text_size,
+            formatter=label_formatter,
+            chart_type=type,
+        ),
+        "emphasis": option.EmphasisLabel(
+            visibility=is_label_emphasis,
+            position=label_emphasis_pos,
+            text_color=label_emphasis_textcolor,
+            text_size=label_emphasis_textsize,
+            chart_type=type,
+        ),
     }
 
-    if label_formatter is None:
-        if type == "pie":
-            label_formatter = "{b}: {d}%"
-    if type != "graph":
-        _label.get("normal").update(formatter=label_formatter)
     return _label
 
 
 @collectfuncs
-def color(colorlst=None,
-          is_random=False,
-          label_color=None,
-          **kwargs):
+def color(colorlst=None, is_random=False, label_color=None, **kwargs):
     """
 
     :param colorlst:
@@ -115,13 +110,15 @@ def color(colorlst=None,
 
 
 @collectfuncs
-def line_style(type=None,
-               line_width=1,
-               line_opacity=1,
-               line_curve=0,
-               line_type="solid",
-               line_color=None,
-               **kwargs):
+def line_style(
+    type=None,
+    line_width=1,
+    line_opacity=1,
+    line_curve=0,
+    line_type="solid",
+    line_color=None,
+    **kwargs
+):
     """ 带线图形的线的风格选项
 
     :param type:
@@ -142,13 +139,14 @@ def line_style(type=None,
         line_color = '#aaa'
 
     _line_style = {
-        "normal": {
-            "width": line_width,
-            "opacity": line_opacity,
-            "curveness": line_curve,
-            "type": line_type,
-            "color": line_color
-        }
+        "normal": option.Line(
+            width=line_width,
+            opacity=line_opacity,
+            curve=line_curve,
+            line_type=line_type,
+            color=line_color,
+            chart_type=type,
+        )
     }
     return _line_style
 
@@ -162,8 +160,7 @@ def split_line(is_splitline_show=True, **kwargs):
     :param kwargs:
     """
     _split_line = {
-        "show": is_splitline_show,
-        "lineStyle": line_style(**kwargs)
+        "show": is_splitline_show, "lineStyle": line_style(**kwargs)
     }
     return _split_line
 
@@ -176,10 +173,7 @@ def axis_line(is_axisline_show=True, **kwargs):
         指定是否显示坐标轴线
     :param kwargs:
     """
-    _axis_line = {
-        "show": is_axisline_show,
-        "lineStyle": line_style(**kwargs)
-    }
+    _axis_line = {"show": is_axisline_show, "lineStyle": line_style(**kwargs)}
     return _axis_line
 
 
@@ -191,18 +185,12 @@ def split_area(is_area_show=True, **kwargs):
         指定是否显示标记区域
     :param kwargs:
     """
-    _split_area = {
-        "show": is_area_show,
-        "areaStyle": area_style(**kwargs)
-    }
+    _split_area = {"show": is_area_show, "areaStyle": area_style(**kwargs)}
     return _split_area
 
 
 @collectfuncs
-def area_style(flag=False,
-               area_opacity=None,
-               area_color=None,
-               **kwargs):
+def area_style(flag=False, area_opacity=None, area_color=None, **kwargs):
     """
 
     :param flag:
@@ -215,56 +203,56 @@ def area_style(flag=False,
     """
     if area_opacity is None:
         area_opacity = 0 if flag else 1
-    _area_style = {
-        "opacity": area_opacity,
-        "color": area_color
-    }
+    _area_style = {"opacity": area_opacity, "color": area_color}
     return _area_style
 
 
 @collectfuncs
-def xy_axis(type=None,
-            x_axis=None,
-            xaxis_margin=8,
-            xaxis_name_size=14,
-            xaxis_name_gap=25,
-            xaxis_name="",
-            xaxis_name_pos="middle",
-            xaxis_rotate=0,
-            xaxis_min=None,
-            xaxis_max=None,
-            xaxis_type=None,
-            xaxis_interval="auto",
-            xaxis_force_interval=None,
-            xaxis_pos=None,
-            xaxis_label_textsize=12,
-            xaxis_label_textcolor="#000",
-            yaxis_margin=8,
-            yaxis_name_size=14,
-            yaxis_name_gap=25,
-            yaxis_name="",
-            yaxis_name_pos="middle",
-            yaxis_rotate=0,
-            yaxis_min=None,
-            yaxis_max=None,
-            yaxis_type=None,
-            yaxis_interval="auto",
-            yaxis_force_interval=None,
-            yaxis_pos=None,
-            yaxis_label_textsize=12,
-            yaxis_label_textcolor="#000",
-            yaxis_formatter="",
-            is_convert=False,
-            is_xaxis_inverse=False,
-            is_yaxis_inverse=False,
-            is_xaxislabel_align=False,
-            is_yaxislabel_align=False,
-            is_xaxis_boundarygap=True,
-            is_yaxis_boundarygap=True,
-            is_xaxis_show=True,
-            is_yaxis_show=True,
-            is_splitline_show=True,
-            **kwargs):
+def xy_axis(
+    type=None,
+    x_axis=None,
+    xaxis_margin=8,
+    xaxis_name_size=14,
+    xaxis_name_gap=25,
+    xaxis_name="",
+    xaxis_name_pos="middle",
+    xaxis_rotate=0,
+    xaxis_min=None,
+    xaxis_max=None,
+    xaxis_type=None,
+    xaxis_interval="auto",
+    xaxis_force_interval=None,
+    xaxis_pos=None,
+    xaxis_label_textsize=12,
+    xaxis_label_textcolor="#000",
+    xaxis_formatter=None,
+    yaxis_margin=8,
+    yaxis_name_size=14,
+    yaxis_name_gap=25,
+    yaxis_name="",
+    yaxis_name_pos="middle",
+    yaxis_rotate=0,
+    yaxis_min=None,
+    yaxis_max=None,
+    yaxis_type=None,
+    yaxis_interval="auto",
+    yaxis_force_interval=None,
+    yaxis_pos=None,
+    yaxis_label_textsize=12,
+    yaxis_label_textcolor="#000",
+    yaxis_formatter="",
+    is_convert=False,
+    is_xaxis_inverse=False,
+    is_yaxis_inverse=False,
+    is_xaxislabel_align=False,
+    is_yaxislabel_align=False,
+    is_xaxis_boundarygap=True,
+    is_yaxis_boundarygap=True,
+    is_xaxis_show=True,
+    is_yaxis_show=True,
+    is_splitline_show=True,
+    **kwargs
+):
     """ 直角坐标系中的 x、y 轴(Line、Bar、Scatter、EffectScatter、Kline)。
 
     :param type:
@@ -377,91 +365,80 @@ def xy_axis(type=None,
         是否显示 y 轴网格线，默认为 True。
     :param kwargs:
     """
-    _xAxis = {
-        "name": xaxis_name,
-        "show": is_xaxis_show,
-        "nameLocation": xaxis_name_pos,
-        "nameGap": xaxis_name_gap,
-        "nameTextStyle": {"fontSize": xaxis_name_size},
-        "axisLabel": {
-            "interval": xaxis_interval,
-            "rotate": xaxis_rotate,
-            "margin": xaxis_margin,
-            "textStyle": {
-                "fontSize": xaxis_label_textsize,
-                "color": xaxis_label_textcolor,
-            }
-        },
-        "axisTick": {
-            "alignWithLabel": is_xaxislabel_align
-        },
-        "inverse": is_xaxis_inverse,
-        "position": xaxis_pos,
-        "boundaryGap": is_xaxis_boundarygap,
-        "min": xaxis_min,
-        "max": xaxis_max
-    }
-    _yAxis = {
-        "name": yaxis_name,
-        "show": is_yaxis_show,
-        "nameLocation": yaxis_name_pos,
-        "nameGap": yaxis_name_gap,
-        "nameTextStyle": {"fontSize": yaxis_name_size},
-        "axisLabel": {
-            "formatter": "{value} " + yaxis_formatter,
-            "rotate": yaxis_rotate,
-            "interval": yaxis_interval,
-            "margin": yaxis_margin,
-            "textStyle": {
-                "fontSize": yaxis_label_textsize,
-                "color": yaxis_label_textcolor,
-            }
-        },
-        "axisTick": {
-            "alignWithLabel": is_yaxislabel_align
-        },
-        "inverse": is_yaxis_inverse,
-        "position": yaxis_pos,
-        "boundaryGap": is_yaxis_boundarygap,
-        "min": yaxis_min,
-        "max": yaxis_max,
-        "splitLine": {
-            "show": is_splitline_show
-        }
-    }
-
-    if xaxis_type is None:
-        xaxis_type = "value" if type == "scatter" else "category"
-    if yaxis_type is None:
-        yaxis_type = "value"
+    _xAxis = option.XAxis(
+        name=xaxis_name,
+        visibility=is_xaxis_show,
+        name_location=xaxis_name_pos,
+        name_gap=xaxis_name_gap,
+        name_size=xaxis_name_size,
+        position=xaxis_pos,
+        boundary_gap=is_xaxis_boundarygap,
+        label_alignment=is_xaxislabel_align,
+        inverse=is_xaxis_inverse,
+        value_range=[xaxis_min, xaxis_max],
+        axis_type=xaxis_type,
+        chart_type=type,
+    )
+    _xAxis["axisLabel"] = option.XAxisLabel(
+        interval=xaxis_interval,
+        rotate=xaxis_rotate,
+        margin=xaxis_margin,
+        text_size=xaxis_label_textsize,
+        text_color=xaxis_label_textcolor,
+        formatter=xaxis_formatter,
+    )
+    _yAxis = option.YAxis(
+        name=yaxis_name,
+        visibility=is_yaxis_show,
+        name_location=yaxis_name_pos,
+        name_gap=yaxis_name_gap,
+        name_size=yaxis_name_size,
+        position=yaxis_pos,
+        boundary_gap=is_yaxis_boundarygap,
+        label_alignment=is_yaxislabel_align,
+        inverse=is_yaxis_inverse,
+        value_range=[yaxis_min, yaxis_max],
+        split_line=is_splitline_show,
+        axis_type=yaxis_type,
+        chart_type=type,
+    )
+    _yAxis["axisLabel"] = option.YAxisLabel(
+        interval=yaxis_interval,
+        rotate=yaxis_rotate,
+        margin=yaxis_margin,
+        text_size=yaxis_label_textsize,
+        text_color=yaxis_label_textcolor,
+        formatter=yaxis_formatter,
+    )
 
     if is_convert:
-        xaxis_type, yaxis_type = yaxis_type, xaxis_type
-        _xAxis.update(type=xaxis_type)
+        xaxis_type, yaxis_type = _yAxis['type'], _xAxis['type']
+        _xAxis['type'] = xaxis_type
         _yAxis.update(data=x_axis, type=yaxis_type)
     else:
-        _xAxis.update(data=x_axis, type=xaxis_type)
-        _yAxis.update(type=yaxis_type)
+        _xAxis['data'] = x_axis
 
     # 强制分割数值轴，在多 x、y 轴中可以使用强制分割使标刻线对齐
     if xaxis_force_interval is not None:
-        _xAxis.update(interval=xaxis_force_interval)
+        _xAxis['interval'] = xaxis_force_interval
     if yaxis_force_interval is not None:
-        _yAxis.update(interval=yaxis_force_interval)
+        _yAxis['interval'] = yaxis_force_interval
 
     return [_xAxis], [_yAxis]
 
 
-def _mark(data,
-          mark_point_symbol='pin',
-          mark_point_symbolsize=50,
-          mark_point_textcolor='#fff',
-          mark_line_symbolsize=10,
-          mark_line_valuedim="",
-          mark_line_coords=None,
-          mark_point_valuedim="",
-          _is_markline=False,
-          **kwargs):
+def _mark(
+    data,
+    mark_point_symbol='pin',
+    mark_point_symbolsize=50,
+    mark_point_textcolor='#fff',
+    mark_line_symbolsize=10,
+    mark_line_valuedim="",
+    mark_line_coords=None,
+    mark_point_valuedim="",
+    _is_markline=False,
+    **kwargs
+):
     """ 图形标记组件，用于标记指定的特殊数据，有标记线和标记点两种
 
     :param data:
@@ -510,8 +487,8 @@ def _mark(data,
     mark = {"data": []}
     if data:
         _markpv = _marklv = [None for _ in range(len(data))]
-        _markpv[: len(mark_point_valuedim)] = mark_point_valuedim
-        _marklv[: len(mark_line_valuedim)] = mark_line_valuedim
+        _markpv[:len(mark_point_valuedim)] = mark_point_valuedim
+        _marklv[:len(mark_line_valuedim)] = mark_line_valuedim
         for index, d in enumerate(list(data)):
             # 自定义坐标点数据
             if isinstance(d, dict):
@@ -519,12 +496,16 @@ def _mark(data,
                 _pname = d.get('name', None)
                 _marktmp = {
                     "coord": _coord,
+                    "value": _coord[1],
                     "name": _pname,
                     "symbol": mark_point_symbol,
                     "symbolSize": mark_point_symbolsize,
-                    "label": {"normal": {
-                        "textStyle": {"color": mark_point_textcolor}}
-                    }}
+                    "label": {
+                        "normal": {
+                            "textStyle": {"color": mark_point_textcolor}
+                        }
+                    },
+                }
                 mark.get("data").append(_marktmp)
             else:
                 _type, _name = "", ""
@@ -553,17 +534,22 @@ def _mark(data,
                     _marktmp.update(
                         symbol=mark_point_symbol,
                         symbolSize=mark_point_symbolsize,
-                        label={"normal": {
-                            "textStyle": {"color": mark_point_textcolor}}
-                        })
+                        label={
+                            "normal": {
+                                "textStyle": {"color": mark_point_textcolor}
+                            }
+                        },
+                    )
                     if _type:
                         mark.get("data").append(_marktmp)
 
     if mark_line_coords and len(mark_line_coords) == 2:
         return {
             "data": [
-                [{"coord": mark_line_coords[0]},
-                 {"coord": mark_line_coords[1]}]
+                [
+                    {"coord": mark_line_coords[0]},
+                    {"coord": mark_line_coords[1]},
+                ]
             ]
         }
 
@@ -604,14 +590,16 @@ def mark_line(mark_line=None, **kwargs):
 
 
 @collectfuncs
-def legend(is_legend_show=True,
-           legend_orient="horizontal",
-           legend_pos="center",
-           legend_top='top',
-           legend_selectedmode='multiple',
-           legend_text_size=12,
-           legend_text_color='#333',
-           **kwargs):
+def legend(
+    is_legend_show=True,
+    legend_orient="horizontal",
+    legend_pos="center",
+    legend_top='top',
+    legend_selectedmode='multiple',
+    legend_text_size=12,
+    legend_text_color='#333',
+    **kwargs
+):
     """ 图例组件。图例组件展现了不同系列的标记(symbol)，颜色和名字。
     可以通过点击图例控制哪些系列不显示。
 
@@ -642,29 +630,30 @@ def legend(is_legend_show=True,
         "top": legend_top,
         "orient": legend_orient,
         "textStyle": {
-            "fontSize": legend_text_size,
-            "color": legend_text_color,
-        }
+            "fontSize": legend_text_size, "color": legend_text_color
+        },
     }
     return _legend
 
 
 @collectfuncs
-def visual_map(visual_type='color',
-               visual_range=None,
-               visual_text_color=None,
-               visual_range_text=None,
-               visual_range_color=None,
-               visual_range_size=None,
-               visual_orient='vertical',
-               visual_pos="left",
-               visual_top="bottom",
-               visual_split_number=5,
-               visual_dimension=None,
-               is_calculable=True,
-               is_piecewise=False,
-               pieces=None,
-               **kwargs):
+def visual_map(
+    visual_type='color',
+    visual_range=None,
+    visual_text_color=None,
+    visual_range_text=None,
+    visual_range_color=None,
+    visual_range_size=None,
+    visual_orient='vertical',
+    visual_pos="left",
+    visual_top="bottom",
+    visual_split_number=5,
+    visual_dimension=None,
+    is_calculable=True,
+    is_piecewise=False,
+    pieces=None,
+    **kwargs
+):
     """ 是视觉映射组件，用于进行『视觉编码』，也就是将数据映射到视觉元素（视觉通道）
 
     :param visual_type:
@@ -760,14 +749,6 @@ def visual_map(visual_type='color',
     return _visual_map
 
 
-def gen_color():
-    """ 为词云图生成随机颜色
-    """
-    return "rgb(%s,%s,%s)" % (random.randint(0, 160),
-                              random.randint(0, 160),
-                              random.randint(0, 160))
-
-
 @collectfuncs
 def symbol(type=None, symbol="", **kwargs):
     """
@@ -787,10 +768,9 @@ def symbol(type=None, symbol="", **kwargs):
 
 
 @collectfuncs
-def effect(effect_brushtype="stroke",
-           effect_scale=2.5,
-           effect_period=4,
-           **kwargs):
+def effect(
+    effect_brushtype="stroke", effect_scale=2.5, effect_period=4, **kwargs
+):
     """ 涟漪动画配置项
 
     :param effect_brushtype:
@@ -804,19 +784,21 @@ def effect(effect_brushtype="stroke",
     _effect = {
         "brushType": effect_brushtype,
         "scale": effect_scale,
-        "period": effect_period
+        "period": effect_period,
     }
     return _effect
 
 
 @collectfuncs
-def datazoom(is_datazoom_show=False,
-             datazoom_type='slider',
-             datazoom_range=None,
-             datazoom_orient='horizontal',
-             datazoom_xaxis_index=None,
-             datazoom_yaxis_index=None,
-             **kwargs):
+def datazoom(
+    is_datazoom_show=False,
+    datazoom_type='slider',
+    datazoom_range=None,
+    datazoom_orient='horizontal',
+    datazoom_xaxis_index=None,
+    datazoom_yaxis_index=None,
+    **kwargs
+):
     """ dataZoom 组件 用于区域缩放，从而能自由关注细节的数据信息，或者概览数据整
     体，或者去除离群点的影响。
 
@@ -853,7 +835,7 @@ def datazoom(is_datazoom_show=False,
         "end": _max,
         "orient": datazoom_orient,
         "xAxisIndex": datazoom_xaxis_index,
-        "yAxisIndex": datazoom_yaxis_index
+        "yAxisIndex": datazoom_yaxis_index,
     }
     if datazoom_type == "both":
         _datazoom.append(_datazoom_config.copy())
@@ -864,13 +846,15 @@ def datazoom(is_datazoom_show=False,
 
 
 @collectfuncs
-def grid(grid_width=None,
-         grid_height=None,
-         grid_top=None,
-         grid_bottom=None,
-         grid_left=None,
-         grid_right=None,
-         **kwargs):
+def grid(
+    grid_width=None,
+    grid_height=None,
+    grid_top=None,
+    grid_bottom=None,
+    grid_left=None,
+    grid_right=None,
+    **kwargs
+):
     """ Grid 类组件配置项
 
     :param grid_width:
@@ -907,13 +891,15 @@ def grid(grid_width=None,
 
 
 @collectfuncs
-def grid3D(grid3d_width=100,
-           grid3d_height=100,
-           grid3d_depth=100,
-           grid3d_rotate_speed=10,
-           grid3d_rotate_sensitivity=1,
-           is_grid3d_rotate=False,
-           **kwargs):
+def grid3D(
+    grid3d_width=100,
+    grid3d_height=100,
+    grid3d_depth=100,
+    grid3d_rotate_speed=10,
+    grid3d_rotate_sensitivity=1,
+    is_grid3d_rotate=False,
+    **kwargs
+):
     """ 3D 笛卡尔坐标系组配置项，适用于 3D 图形。
 
     :param grid3d_width:
@@ -937,22 +923,24 @@ def grid3D(grid3d_width=100,
         "viewControl": {
             "autoRotate": is_grid3d_rotate,
             "autoRotateSpeed": grid3d_rotate_speed,
-            "rotateSensitivity": grid3d_rotate_sensitivity
-        }
+            "rotateSensitivity": grid3d_rotate_sensitivity,
+        },
     }
     return _grid3D
 
 
 @collectfuncs
-def xaxis3D(xaxis3d_type=None,
-            xaxis3d_name="",
-            xaxis3d_name_size=16,
-            xaxis3d_name_gap=20,
-            xaxis3d_min=None,
-            xaxis3d_max=None,
-            xaxis3d_interval="auto",
-            xaxis3d_margin=8,
-            **kwargs):
+def xaxis3D(
+    xaxis3d_type=None,
+    xaxis3d_name="",
+    xaxis3d_name_size=16,
+    xaxis3d_name_gap=20,
+    xaxis3d_min=None,
+    xaxis3d_max=None,
+    xaxis3d_interval="auto",
+    xaxis3d_margin=8,
+    **kwargs
+):
     """ 3D x 轴配置项
 
     :param xaxis3d_type:
@@ -981,24 +969,23 @@ def xaxis3D(xaxis3d_type=None,
         "type": xaxis3d_type,
         "min": xaxis3d_min,
         "max": xaxis3d_max,
-        "axisLabel": {
-            "margin": xaxis3d_margin,
-            "interval": xaxis3d_interval
-        }
+        "axisLabel": {"margin": xaxis3d_margin, "interval": xaxis3d_interval},
     }
     return _xaxis3D
 
 
 @collectfuncs
-def yaxis3D(yaxis3d_type=None,
-            yaxis3d_name="",
-            yaxis3d_name_size=16,
-            yaxis3d_name_gap=20,
-            yaxis3d_min=None,
-            yaxis3d_max=None,
-            yaxis3d_interval="auto",
-            yaxis3d_margin=8,
-            **kwargs):
+def yaxis3D(
+    yaxis3d_type=None,
+    yaxis3d_name="",
+    yaxis3d_name_size=16,
+    yaxis3d_name_gap=20,
+    yaxis3d_min=None,
+    yaxis3d_max=None,
+    yaxis3d_interval="auto",
+    yaxis3d_margin=8,
+    **kwargs
+):
     """ 3D y 轴配置项
 
     :param yaxis3d_type:
@@ -1027,23 +1014,22 @@ def yaxis3D(yaxis3d_type=None,
         "type": yaxis3d_type,
         "min": yaxis3d_min,
         "max": yaxis3d_max,
-        "axisLabel": {
-            "margin": yaxis3d_margin,
-            "interval": yaxis3d_interval
-        }
+        "axisLabel": {"margin": yaxis3d_margin, "interval": yaxis3d_interval},
     }
     return _yaxis3D
 
 
 @collectfuncs
-def zaxis3D(zaxis3d_type=None,
-            zaxis3d_name="",
-            zaxis3d_name_size=16,
-            zaxis3d_name_gap=20,
-            zaxis3d_min=None,
-            zaxis3d_max=None,
-            zaxis3d_margin=8,
-            **kwargs):
+def zaxis3D(
+    zaxis3d_type=None,
+    zaxis3d_name="",
+    zaxis3d_name_size=16,
+    zaxis3d_name_gap=20,
+    zaxis3d_min=None,
+    zaxis3d_max=None,
+    zaxis3d_margin=8,
+    **kwargs
+):
     """ 3D y 轴配置项
 
     :param zaxis3d_type:
@@ -1068,25 +1054,25 @@ def zaxis3D(zaxis3d_type=None,
         "type": zaxis3d_type,
         "min": zaxis3d_min,
         "max": zaxis3d_max,
-        "axisLabel": {
-            "margin": zaxis3d_margin,
-        }
+        "axisLabel": {"margin": zaxis3d_margin},
     }
     return _zaxis3D
 
 
 @collectfuncs
-def tooltip(type=None,
-            tooltip_tragger="item",
-            tooltip_tragger_on="mousemove|click",
-            tooltip_axispointer_type="line",
-            tooltip_formatter=None,
-            tooltip_text_color="#fff",
-            tooltip_font_size=14,
-            tooltip_background_color="rgba(50,50,50,0.7)",
-            tooltip_border_color="#333",
-            tooltip_border_width=0,
-            **kwargs):
+def tooltip(
+    type=None,
+    tooltip_tragger="item",
+    tooltip_tragger_on="mousemove|click",
+    tooltip_axispointer_type="line",
+    tooltip_formatter=None,
+    tooltip_text_color="#fff",
+    tooltip_font_size=14,
+    tooltip_background_color="rgba(50,50,50,0.7)",
+    tooltip_border_color="#333",
+    tooltip_border_width=0,
+    **kwargs
+):
     """ 提示框组件，用于移动或点击鼠标时弹出数据内容
 
     :param type:
@@ -1132,32 +1118,30 @@ def tooltip(type=None,
     :param tooltip_border_width:
         提示框浮层的边框宽。默认为 0
     """
+    _tmp_formatter = tooltip_formatter
     if tooltip_formatter is None:
         if type == "gauge":
-            tooltip_formatter = "{a} <br/>{b} : {c}%"
+            _tmp_formatter = "{a} <br/>{b} : {c}%"
         elif type == "geo":
-            tooltip_formatter = "{b}: {c}"
+            _tmp_formatter = "{b}: {c}"
 
     _tooltip = {
         "trigger": tooltip_tragger,
         "triggerOn": tooltip_tragger_on,
         "axisPointer": {"type": tooltip_axispointer_type},
-        "formatter": tooltip_formatter,
+        "formatter": _tmp_formatter,
         "textStyle": {
-            "color": tooltip_text_color,
-            "fontSize": tooltip_font_size
+            "color": tooltip_text_color, "fontSize": tooltip_font_size
         },
         "backgroundColor": tooltip_background_color,
         "borderColor": tooltip_border_color,
-        "borderWidth": tooltip_border_width
+        "borderWidth": tooltip_border_width,
     }
     return _tooltip
 
 
 @collectfuncs
-def calendar(calendar_date_range=None,
-             calendar_cell_size=None,
-             **kwargs):
+def calendar(calendar_date_range=None, calendar_cell_size=None, **kwargs):
     """
 
     :param calendar_date_range:
@@ -1172,10 +1156,7 @@ def calendar(calendar_date_range=None,
     if calendar_cell_size is None:
         calendar_cell_size = ['auto', 20]
 
-    _calendar = {
-        "range": calendar_date_range,
-        "cellSize": calendar_cell_size
-    }
+    _calendar = {"range": calendar_date_range, "cellSize": calendar_cell_size}
     return _calendar
 
 
