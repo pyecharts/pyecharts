@@ -1,7 +1,6 @@
 # coding=utf-8
 
 from pyecharts.chart import Chart
-from pyecharts.option import get_all_options
 
 
 class Parallel(Chart):
@@ -10,6 +9,7 @@ class Parallel(Chart):
 
     平行坐标系是一种常用的可视化高维数据的图表。
     """
+
     def __init__(self, title="", subtitle="", **kwargs):
         super(Parallel, self).__init__(title, subtitle, **kwargs)
 
@@ -48,21 +48,21 @@ class Parallel(Chart):
             数据项。数据中，每一行是一个『数据项』，每一列属于一个『维度』。
         :param kwargs:
         """
-        chart = get_all_options(**kwargs)
+        chart = self._get_all_options(**kwargs)
         self._option.update(
             parallel={
-                "left": "5%",
-                "right": "13%",
-                "bottom": "10%",
-                "top": "20%"
-            })
+                "left": "5%", "right": "13%", "bottom": "10%", "top": "20%"
+            }
+        )
         self._option.get('legend')[0].get('data').append(name)
 
-        self._option.get('series').append({
-            "type": "parallel",
-            "coordinateSystem": "parallel",
-            "lineStyle": chart['line_style'],
-            "name": name,
-            "data": data,
-        })
+        self._option.get('series').append(
+            {
+                "type": "parallel",
+                "coordinateSystem": "parallel",
+                "lineStyle": chart['line_style'],
+                "name": name,
+                "data": data,
+            }
+        )
         self._config_components(**kwargs)

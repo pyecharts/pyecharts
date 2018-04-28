@@ -1,8 +1,8 @@
 # coding=utf-8
 
 from pyecharts.chart import Chart
-from pyecharts.option import get_all_options
-from pyecharts.constants import (CITY_GEO_COORDS, SYMBOL)
+from pyecharts.datasets.coordinates import get_coordinate
+from pyecharts.constants import SYMBOL
 
 
 class GeoLines(Chart):
@@ -11,29 +11,61 @@ class GeoLines(Chart):
 
     用于带有起点和终点信息的线数据的绘制，主要用于地图上的航线，路线的可视化。
     """
+
     def __init__(self, title="", subtitle="", **kwargs):
         super(GeoLines, self).__init__(title, subtitle, **kwargs)
         self._zlevel = 1
+        self._coordinates = {}
+
+    def add_coordinate(self, name, longitude, latitude):
+        """
+        Add a geo coordinate for a position.
+        :param name: The name of a position
+        :param longitude: The longitude of coordinate.
+        :param latitude: The latitude of coordinate.
+        :return:
+        """
+        self._coordinates.update({name: [longitude, latitude]})
+
+    def get_coordinate(self, name, raise_exception=False):
+        """
+        Return coordinate for the city name.
+        :param name: City name or any custom name string.
+        :param raise_exception: Whether to raise exception if not exist.
+        :return: A list like [longitude, latitude] or None
+        """
+        if name in self._coordinates:
+            return self._coordinates[name]
+
+        coordinate = get_coordinate(name)
+        if coordinate is None and raise_exception:
+            raise ValueError('No coordinate is specified for {}'.format(name))
+
+        return coordinate
 
     def add(self, *args, **kwargs):
         self.__add(*args, **kwargs)
 
-    def __add(self, name, data,
-              maptype='china',
-              symbol=None,
-              symbol_size=12,
-              border_color="#111",
-              geo_normal_color="#323c48",
-              geo_emphasis_color="#2a333d",
-              geo_cities_coords=None,
-              geo_effect_period=6,
-              geo_effect_traillength=0,
-              geo_effect_color='#fff',
-              geo_effect_symbol='circle',
-              geo_effect_symbolsize=5,
-              is_geo_effect_show=True,
-              is_roam=True,
-              **kwargs):
+    def __add(
+        self,
+        name,
+        data,
+        maptype='china',
+        symbol=None,
+        symbol_size=12,
+        border_color="#111",
+        geo_normal_color="#323c48",
+        geo_emphasis_color="#2a333d",
+        geo_cities_coords=None,
+        geo_effect_period=6,
+        geo_effect_traillength=0,
+        geo_effect_color='#fff',
+        geo_effect_symbol='circle',
+        geo_effect_symbolsize=5,
+        is_geo_effect_show=True,
+        is_roam=True,
+        **kwargs
+    ):
         """
 
         :param name:
@@ -83,12 +115,11 @@ class GeoLines(Chart):
         :param kwargs:
         """
 
-        chart = get_all_options(**kwargs)
+        chart = self._get_all_options(**kwargs)
         self._zlevel += 1
         if geo_cities_coords:
-            _geo_cities_coords = geo_cities_coords
-        else:
-            _geo_cities_coords = CITY_GEO_COORDS
+            for name, coord in geo_cities_coords.items():
+                self.add_coordinate(name, coord[0], coord[1])
 
         if geo_effect_symbol == "plane":
             geo_effect_symbol = SYMBOL['plane']
@@ -96,72 +127,79 @@ class GeoLines(Chart):
         _data_lines, _data_scatter = [], []
         for d in data:
             _from_name, _to_name = d
-            _data_lines.append({
-                "fromName": _from_name,
-                "toName": _to_name,
-                "coords": [
-                    _geo_cities_coords.get(_from_name, []),
-                    _geo_cities_coords.get(_to_name, [])
-                ]
-            })
-            _from_v = _geo_cities_coords.get(_from_name, [])
-            _data_scatter.append({
-                "name": _from_name,
-                "value": _from_v + [0]
-            })
-            _to_v = _geo_cities_coords.get(_to_name, [])
-            _data_scatter.append({
-                "name": _to_name,
-                "value": _to_v + [0]
-            })
+            _from_coordinate = self.get_coordinate(
+                _from_name, raise_exception=True
+            )
+            _to_coordinate = self.get_coordinate(
+                _to_name, raise_exception=True
+            )
+            _data_lines.append(
+                {
+                    "fromName": _from_name,
+                    "toName": _to_name,
+                    "coords": [_from_coordinate, _to_coordinate],
+                }
+            )
+            _data_scatter.append(
+                {
+                    "name": _from_name,
+                    "value": [_from_coordinate[0], _from_coordinate[1], 0],
+                }
+            )
+            _data_scatter.append(
+                {
+                    "name": _to_name,
+                    "value": [_to_coordinate[0], _to_coordinate[1], 0],
+                }
+            )
 
         self._option.update(
             geo={
                 "map": maptype,
                 "roam": is_roam,
                 "label": {
-                    "emphasis": {
-                        "show": True,
-                        "textStyle": {
-                            "color": "#eee"
-                        }
-                    }},
+                    "emphasis": {"show": True, "textStyle": {"color": "#eee"}}
+                },
                 "itemStyle": {
                     "normal": {
                         "areaColor": geo_normal_color,
-                        "borderColor": border_color
+                        "borderColor": border_color,
                     },
-                    "emphasis": {
-                        "areaColor": geo_emphasis_color
-                    }}
-            })
+                    "emphasis": {"areaColor": geo_emphasis_color},
+                },
+            }
+        )
         self._option.get('legend')[0].get('data').append(name)
-        self._option.get('series').append({
-            "type": "lines",
-            "name": name,
-            "zlevel": self._zlevel,
-            "effect": {
-                "show": is_geo_effect_show,
-                "period": geo_effect_period,
-                "trailLength": geo_effect_traillength,
-                "color": geo_effect_color,
-                "symbol": geo_effect_symbol,
-                "symbolSize": geo_effect_symbolsize
-            },
-            "symbol": symbol or ["none", "arrow"],
-            "symbolSize": symbol_size,
-            "data": _data_lines,
-            "lineStyle": chart['line_style']
-        })
-        self._option.get('series').append({
-            "type": "scatter",
-            "name": name,
-            "zlevel": self._zlevel,
-            "coordinateSystem": 'geo',
-            "symbolSize": 10,
-            "data": _data_scatter,
-            "label": chart['label'],
-        })
+        self._option.get('series').append(
+            {
+                "type": "lines",
+                "name": name,
+                "zlevel": self._zlevel,
+                "effect": {
+                    "show": is_geo_effect_show,
+                    "period": geo_effect_period,
+                    "trailLength": geo_effect_traillength,
+                    "color": geo_effect_color,
+                    "symbol": geo_effect_symbol,
+                    "symbolSize": geo_effect_symbolsize,
+                },
+                "symbol": symbol or ["none", "arrow"],
+                "symbolSize": symbol_size,
+                "data": _data_lines,
+                "lineStyle": chart['line_style'],
+            }
+        )
+        self._option.get('series').append(
+            {
+                "type": "scatter",
+                "name": name,
+                "zlevel": self._zlevel,
+                "coordinateSystem": 'geo',
+                "symbolSize": 10,
+                "data": _data_scatter,
+                "label": chart['label'],
+            }
+        )
 
         self._add_chinese_map(maptype)
         self._config_components(**kwargs)

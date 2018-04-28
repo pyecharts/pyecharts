@@ -2,17 +2,26 @@
 from __future__ import unicode_literals
 
 from jinja2 import Environment, FileSystemLoader, environmentfunction, Markup
+from lml.plugin import PluginManager, PluginInfo
 
 import pyecharts.conf as conf
+import pyecharts.constants as constants
 import pyecharts.utils as utils
+from pyecharts_javascripthon.api import TRANSLATOR
+from pyecharts_javascripthon.api import FUNCTION_TRANSLATOR
+
 
 LINK_SCRIPT_FORMATTER = '<script type="text/javascript" src="{}"></script>'
 EMBED_SCRIPT_FORMATTER = '<script type="text/javascript">\n{}\n</script>'
 CHART_DIV_FORMATTER = '<div id="{chart_id}" style="width:{width};height:{height};"></div>'  # flake8: noqa
 CHART_CONFIG_FORMATTER = """
 var myChart_{chart_id} = echarts.init(document.getElementById('{chart_id}'), null, {{renderer: '{renderer}'}});
+{custom_function}
 var option_{chart_id} = {options};
 myChart_{chart_id}.setOption(option_{chart_id});
+"""
+CHART_EVENT_FORMATTER = """
+myChart_{chart_id}.on("{event_name}", {handler_name});
 """
 
 
@@ -32,6 +41,7 @@ def echarts_js_dependencies(env, *args):
         return Markup(
             '\n'.join([EMBED_SCRIPT_FORMATTER.format(c) for c in contents])
         )
+
     else:
         js_links = current_config.generate_js_link(dependencies)
         return Markup(
@@ -66,8 +76,9 @@ def echarts_container(env, chart):
         CHART_DIV_FORMATTER.format(
             chart_id=chart.chart_id,
             width=utils.to_css_length(chart.width),
-            height=utils.to_css_length(chart.height)
-        ))
+            height=utils.to_css_length(chart.height),
+        )
+    )
 
 
 def generate_js_content(*charts):
@@ -77,12 +88,29 @@ def generate_js_content(*charts):
     :return:
     """
     contents = []
+
     for chart in charts:
-        js_content = CHART_CONFIG_FORMATTER.format(
+        FUNCTION_TRANSLATOR.reset()
+        for handler in chart.event_handlers.values():
+            FUNCTION_TRANSLATOR.feed(handler)
+
+        javascript_snippet = TRANSLATOR.translate(chart.options)
+        kwargs = dict(
             chart_id=chart.chart_id,
             renderer=chart.renderer,
-            options=utils.json_dumps(chart.options, indent=4)
+            custom_function=javascript_snippet.function_snippet,
+            options=javascript_snippet.option_snippet,
         )
+        js_content = CHART_CONFIG_FORMATTER.format(**kwargs)
+        for event_name, handler in chart.event_handlers.items():
+            # please note handler has been translated in previous block
+            event_args = dict(
+                event_name=event_name,
+                chart_id=chart.chart_id,
+                handler_name=handler.__name__,
+            )
+            js_content += CHART_EVENT_FORMATTER.format(**event_args)
+
         contents.append(js_content)
     contents = '\n'.join(contents)
     return contents
@@ -115,7 +143,7 @@ ECHAERTS_TEMPLATE_FUNCTIONS = {
     'echarts_js_dependencies_embed': echarts_js_dependencies_embed,
     'echarts_container': echarts_container,
     'echarts_js_content': echarts_js_content,
-    'echarts_js_content_wrap': echarts_js_content_wrap
+    'echarts_js_content_wrap': echarts_js_content_wrap,
 }
 
 
@@ -128,11 +156,14 @@ class BaseEnvironment(Environment):
         self.pyecharts_config = kwargs.pop('pyecharts_config', None)
         if self.pyecharts_config is None:
             raise TypeError(
-                'no pyecharts_config for this environment specified')
+                'no pyecharts_config for this environment specified'
+            )
+
         super(BaseEnvironment, self).__init__(*args, **kwargs)
         self.globals.update(ECHAERTS_TEMPLATE_FUNCTIONS)
 
 
+@PluginInfo(constants.ENVIRONMENT_PLUGIN_TYPE, tags=[constants.DEFAULT_HTML])
 class EchartsEnvironment(BaseEnvironment):
     """
     Built-in jinja2 template engine for pyecharts
@@ -151,7 +182,8 @@ class EchartsEnvironment(BaseEnvironment):
             lstrip_blocks=True,
             loader=loader,
             *args,
-            **kwargs)
+            **kwargs
+        )
 
     def render_container_and_echarts_code(self, chart):
         """
@@ -167,12 +199,12 @@ class EchartsEnvironment(BaseEnvironment):
         return tpl.render(chart=chart)
 
     def render_chart_to_file(
-            self,
-            chart,
-            object_name='chart',
-            path='render.html',
-            template_name='simple_chart.html',
-            extra_context=None
+        self,
+        chart,
+        object_name='chart',
+        path='render.html',
+        template_name='simple_chart.html',
+        **kwargs
     ):
         """
         Render a chart or page to local html files.
@@ -184,10 +216,9 @@ class EchartsEnvironment(BaseEnvironment):
         :param extra_context: A dictionary containing extra data.
         :return: None
         """
-        context = {object_name: chart}
-        context.update(extra_context or {})
+        kwargs[object_name] = chart
         tpl = self.get_template(template_name)
-        html = tpl.render(**context)
+        html = tpl.render(**kwargs)
         utils.write_utf8_html_file(path, html)
 
     def render_chart_to_notebook(self, **context):
@@ -201,16 +232,51 @@ class EchartsEnvironment(BaseEnvironment):
         return tpl.render(**context)
 
 
-def create_default_environment():
+class EnvironmentManager(PluginManager):
+    """
+    Extend the rendering capability of pyecharts by having
+    loosely coupled environments
+    """
+
+    def __init__(self):
+        """
+        Register with lml that this class manages 'pyecharts_environment'
+        extension
+        """
+        super(EnvironmentManager, self).__init__(
+            constants.ENVIRONMENT_PLUGIN_TYPE
+        )
+
+    def get_a_environment(self, file_type, **kwargs):
+        """
+        Factory method to choose the default html rendering EchartsEnvironment
+        or image rendering SnapshotEnvironment from pyecharts-snapshot
+
+        :param file_type: 'html', 'svg', 'png', 'jpeg', 'gif' or 'pdf'
+        :param kwargs: the initialization parameters for Environment
+        """
+        _a_echarts_env_cls = super(EnvironmentManager, self).load_me_now(
+            key=file_type
+        )
+        return _a_echarts_env_cls(**kwargs)
+
+
+ENV_MANAGER = EnvironmentManager()
+
+
+def create_default_environment(file_type):
     """
     Create environment object with pyecharts default single PyEchartsConfig.
 
     :return: A new EchartsEnvironment object.
     """
+    default_template_dir = utils.get_resource_dir('templates')
     config = conf.CURRENT_CONFIG
-    echarts_env = EchartsEnvironment(
+    echarts_env = ENV_MANAGER.get_a_environment(
+        file_type,
         pyecharts_config=config,
         loader=FileSystemLoader(
-            [config.echarts_template_dir, conf.DEFAULT_TEMPLATE_DIR])
+            [config.echarts_template_dir, default_template_dir]
+        ),
     )
     return echarts_env

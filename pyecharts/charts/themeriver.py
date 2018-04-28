@@ -1,7 +1,6 @@
 # coding=utf-8
 
 from pyecharts.chart import Chart
-from pyecharts.option import get_all_options
 
 
 class ThemeRiver(Chart):
@@ -10,6 +9,7 @@ class ThemeRiver(Chart):
 
     主题河流图是一种特殊的流图, 它主要用来表示事件或主题等在一段时间内的变化。
     """
+
     def __init__(self, title="", subtitle="", **kwargs):
         super(ThemeRiver, self).__init__(title, subtitle, **kwargs)
 
@@ -27,16 +27,18 @@ class ThemeRiver(Chart):
             [时间，数值，种类（图例名）]。
         :param kwargs:
         """
-        chart = get_all_options(**kwargs)
+        chart = self._get_all_options(**kwargs)
         self._option.get('legend')[0].get('data').extend(name)
 
-        self._option.get('series').append({
-            "type": "themeRiver",
-            "name": name,
-            "data": data,
-            "label": chart['label'],
-            "seriesId": self._option.get('series_id'),
-        })
+        self._option.get('series').append(
+            {
+                "type": "themeRiver",
+                "name": name,
+                "data": data,
+                "label": chart['label'],
+                "seriesId": self._option.get('series_id'),
+            }
+        )
 
         self._option.update(singleAxis={"type": "time"})
         self._config_components(**kwargs)

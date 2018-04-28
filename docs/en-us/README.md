@@ -19,7 +19,7 @@
 
 **Other Resources**
 
-[Demo Projects](https://github.com/pyecharts/pyecharts-users-cases) | [Map Extension](https://github.com/pyecharts/echarts-china-cities-js)
+[Demo Projects](https://github.com/pyecharts/pyecharts-users-cases) | [Geography & Map](en-us/datasets)
 
 **Development**
 

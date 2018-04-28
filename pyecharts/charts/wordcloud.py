@@ -1,16 +1,26 @@
 # coding=utf-8
-
+import random
 from pyecharts.chart import Chart
-from pyecharts.option import gen_color
 
-SHAPES = ("cardioid", "diamond", "triangle-forward",
-          "triangle", "pentagon", "star")
+
+SHAPES = (
+    "cardioid", "diamond", "triangle-forward", "triangle", "pentagon", "star"
+)
+
+
+def gen_color():
+    """ 为词云图生成随机颜色
+    """
+    return "rgb(%s,%s,%s)" % (
+        random.randint(0, 160), random.randint(0, 160), random.randint(0, 160)
+    )
 
 
 class WordCloud(Chart):
     """
     <<< 词云图 >>>
     """
+
     def __init__(self, title="", subtitle="", **kwargs):
         super(WordCloud, self).__init__(title, subtitle, **kwargs)
         self._js_dependencies.add('wordcloud')
@@ -18,12 +28,17 @@ class WordCloud(Chart):
     def add(self, *args, **kwargs):
         self.__add(*args, **kwargs)
 
-    def __add(self, name, attr, value,
-              shape="circle",
-              word_gap=20,
-              word_size_range=None,
-              rotate_step=45,
-              **kwargs):
+    def __add(
+        self,
+        name,
+        attr,
+        value,
+        shape="circle",
+        word_gap=20,
+        word_size_range=None,
+        rotate_step=45,
+        **kwargs
+    ):
         """
 
         :param name:
@@ -46,14 +61,13 @@ class WordCloud(Chart):
         _data = []
         for data in zip(attr, value):
             _name, _value = data
-            _data.append({
-                "name": _name,
-                "value": _value,
-                "textStyle": {
-                    "normal": {
-                        "color": gen_color()
-                    }}
-            })
+            _data.append(
+                {
+                    "name": _name,
+                    "value": _value,
+                    "textStyle": {"normal": {"color": gen_color()}},
+                }
+            )
         _min, _max = 12, 60
         if word_size_range is not None:
             if len(word_size_range) == 2:
@@ -66,14 +80,16 @@ class WordCloud(Chart):
         else:
             shape = "circle"
 
-        self._option.get('series').append({
-            "type": "wordCloud",
-            "name": name,
-            "shape": shape,
-            "rotationRange": [_rmin, _rmax],
-            "rotationStep": rotate_step,
-            "girdSize": word_gap,
-            "sizeRange": [_min, _max],
-            "data": _data
-        })
+        self._option.get('series').append(
+            {
+                "type": "wordCloud",
+                "name": name,
+                "shape": shape,
+                "rotationRange": [_rmin, _rmax],
+                "rotationStep": rotate_step,
+                "girdSize": word_gap,
+                "sizeRange": [_min, _max],
+                "data": _data,
+            }
+        )
         self._config_components(**kwargs)

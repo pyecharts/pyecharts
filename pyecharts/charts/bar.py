@@ -1,7 +1,6 @@
 # coding=utf-8
 
 from pyecharts.chart import Chart
-from pyecharts.option import get_all_options
 
 
 class Bar(Chart):
@@ -17,10 +16,15 @@ class Bar(Chart):
     def add(self, *args, **kwargs):
         self.__add(*args, **kwargs)
 
-    def __add(self, name, x_axis, y_axis,
-              is_stack=False,
-              bar_category_gap="20%",
-              **kwargs):
+    def __add(
+        self,
+        name,
+        x_axis,
+        y_axis,
+        is_stack=False,
+        bar_category_gap="20%",
+        **kwargs
+    ):
         """
 
         :param name:
@@ -35,7 +39,7 @@ class Bar(Chart):
         """
         assert len(x_axis) == len(y_axis)
         kwargs.update(x_axis=x_axis)
-        chart = get_all_options(**kwargs)
+        chart = self._get_all_options(**kwargs)
 
         if is_stack:
             is_stack = "stack_" + str(self._option['series_id'])
@@ -45,15 +49,17 @@ class Bar(Chart):
         self._option.update(xAxis=xaxis, yAxis=yaxis)
         self._option.get('legend')[0].get('data').append(name)
 
-        self._option.get('series').append({
-            "type": "bar",
-            "name": name,
-            "data": y_axis,
-            "stack": is_stack,
-            "barCategoryGap": bar_category_gap,
-            "label": chart['label'],
-            "markPoint": chart['mark_point'],
-            "markLine": chart['mark_line'],
-            "seriesId": self._option.get('series_id'),
-        })
+        self._option.get('series').append(
+            {
+                "type": "bar",
+                "name": name,
+                "data": y_axis,
+                "stack": is_stack,
+                "barCategoryGap": bar_category_gap,
+                "label": chart['label'],
+                "markPoint": chart['mark_point'],
+                "markLine": chart['mark_line'],
+                "seriesId": self._option.get('series_id'),
+            }
+        )
         self._config_components(**kwargs)

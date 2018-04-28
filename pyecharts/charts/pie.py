@@ -1,7 +1,6 @@
 # coding=utf-8
 
 from pyecharts.chart import Chart
-from pyecharts.option import get_all_options
 
 
 class Pie(Chart):
@@ -10,17 +9,23 @@ class Pie(Chart):
 
     饼图主要用于表现不同类目的数据在总和中的占比。每个的弧度表示数据数量的比例。
     """
+
     def __init__(self, title="", subtitle="", **kwargs):
         super(Pie, self).__init__(title, subtitle, **kwargs)
 
     def add(self, *args, **kwargs):
         self.__add(*args, **kwargs)
 
-    def __add(self, name, attr, value,
-              radius=None,
-              center=None,
-              rosetype=None,
-              **kwargs):
+    def __add(
+        self,
+        name,
+        attr,
+        value,
+        radius=None,
+        center=None,
+        rosetype=None,
+        **kwargs
+    ):
         """
 
         :param name:
@@ -43,7 +48,7 @@ class Pie(Chart):
         :param kwargs:
         """
         kwargs.update(type="pie")
-        chart = get_all_options(**kwargs)
+        chart = self._get_all_options(**kwargs)
         assert len(attr) == len(value)
         _data = []
         for data in zip(attr, value):
@@ -72,14 +77,16 @@ class Pie(Chart):
         _dset.sort(key=_dlst.index)
         self._option.get('legend')[0].update(data=list(_dset))
 
-        self._option.get('series').append({
-            "type": "pie",
-            "name": name,
-            "data": _data,
-            "radius": [_rmin, _rmax],
-            "center": [_cmin, _cmax],
-            "roseType": rosetype,
-            "label": chart['label'],
-            "seriesId": self._option.get('series_id'),
-        })
+        self._option.get('series').append(
+            {
+                "type": "pie",
+                "name": name,
+                "data": _data,
+                "radius": [_rmin, _rmax],
+                "center": [_cmin, _cmax],
+                "roseType": rosetype,
+                "label": chart['label'],
+                "seriesId": self._option.get('series_id'),
+            }
+        )
         self._config_components(**kwargs)
