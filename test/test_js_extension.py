@@ -22,7 +22,8 @@ def test_get_js_link():
     actual = test_extension.get_js_link('pinyin')
     assert actual in (
         './fixtures/test-js/the_js_file_name.js',
-        '.\\fixtures\\test-js/the_js_file_name.js')
+        '.\\fixtures\\test-js/the_js_file_name.js',
+    )
 
 
 def test_get_js_link_no_match():
@@ -68,5 +69,6 @@ def test_read_js_library_no_match():
 @raises(exceptions.InvalidRegistry)
 def test_validate_registry():
     from pyecharts.js_extensions import _validate_registry
+
     test = {}
     _validate_registry(test)
