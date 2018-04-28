@@ -15,7 +15,8 @@
 
     #### Updated
     * 重构底层 `option.py` 配置项代码，使其更加具有`面向对象`特征，相关文件转移至新 package echarts。
-    * 将地图数据及接口转移至 dataset package，更多内容请参考 [地理地图数据](zh-cn/datasets)。
+    * 将地图数据及接口转移至 'pyecharts.datasets' 包，更多内容请参考 [地理地图数据](zh-cn/datasets)。
+    * `pyecharts.Geo` 和 `pyecharts.GeoLines` 新增 `add_coordinate` 方法用于新增一个自定义城市地理位置的功能。
 
 * ### version 0.4.1 - 2018.03.13
 
