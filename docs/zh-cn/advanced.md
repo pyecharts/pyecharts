@@ -6,7 +6,7 @@
 
 在 Python-To-Javascript 语言翻译领域，[javascripthon](https://pypi.python.org/pypi/javascripthon)  是一个简单的 Python3.5+ 到 Javascript 的语言翻译器;  [dukpy](https://github.com/amol-/dukpy) 支持 Python2.7 和 Python 3.4 的语言翻译。
 
-基于以上事实，pyecharts 团队开发了  [pyecharts-javascripthon](https://github.com/pyecharts/pyecharts-javascripthon) 作为底层的 Python-To-Javascript 语言翻译库，封装了以上两个不同的翻译器，并提供若干个 Javascript 数据类型适配模块。
+基于以上事实，pyecharts 团队开发了  [pyecharts-javascripthon](https://github.com/pyecharts/pyecharts-javascripthon) 作为底层的 Python-To-Javascript 语言翻译库，封装了以上两个不同的翻译器，并提供若干个 Javascript 数据类型适配模块。关于翻译器的更多内容，请移步至 [Translator 篇](zh-cn/translator)。
 
 pyecharts 目前仅使用了并封装一部分的 Javascripthon 的翻译规则，主要是 **函数翻译(Function Translate)** 。使用伪代码表示如下：
 
