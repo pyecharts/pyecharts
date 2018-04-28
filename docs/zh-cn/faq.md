@@ -36,18 +36,16 @@ jupyter notebook 输出后，你的 notebook 离开了本地 jupyter 环境，�
 为了解决这个问题，再画图之前，你可以多加两个语句：
 
 ```python
-...
 from pyecharts import online
 
 online()
-...
 ```
 
 这样，所有的脚本会从 github 下载。如果你连不上 Github, 你可以先把 https://github.com/pyecharts/assets 克隆一下。然后在你自己的服务器上，把整个 js 文件夹挂上去。
 
 下面我简单示范一下  
 
-```
+```bash
 $ git clone https://github.com/pyecharts/assets
 $ cd js
 $ python -m http.server # for python 2, use python -m SimpleHTTPServer
@@ -57,17 +55,16 @@ Serving HTTP on 0.0.0.0 port 8000 ...
 然后，再把本地服务器加进前面的语句：
 
 ```python
-...
 from pyecharts import online
 
 online(host="http://localhost:8000)
-...
 ```
 
 **Q:Python2 编码问题**
 
 默认的编码类型为 UTF-8，在 Python3 中是没什么问题的，Python3 对中文的支持好很多。但是在 Python2 中，请应用下面的语句，保证没有编码问题:
-```
+
+```python
 #!/usr/bin/python
 #coding=utf-8
 from __future__ import unicode_literals
@@ -133,6 +130,7 @@ Mode                LastWriteTime         Length Name
 -a----         2018/3/9     23:12             71 requirements.txt
 ```
 复制本文件夹到需要离线安装的电脑上，终端切换到该路径下
+
 ``` shell
 $ pip install --no-index -f ./ -r r requirements.txt
 $ pip install ./pyecharts
@@ -142,5 +140,5 @@ python 2.7, 3.4 用户提示：
 
 离线用法呢，你们有两个选择：
 
-1）拥抱 python 3.5+, 你们就不需要再做别的了
+1）拥抱 python 3.5+, 你们就不需要再做别的了  
 2）在自己的机器上运行 [pyecharts-javascripthon-api-service](https://github.com/pyecharts/pyecharts-javascripthon-api-service). 这个服务呢，也是需要 python 3.5+ 的，所以如果你是个人用户的，可以就此打住，直接用 pip3 装 pyecharts v0.5.0 好了。
