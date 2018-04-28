@@ -8,7 +8,7 @@ from pyecharts import Polar, Kline, Bar
 from nose.tools import eq_
 from mock import patch
 from pyecharts_javascripthon.api import DefaultJsonEncoder
-from test.utils import get_fixture_content, store_fixture_content
+from test.utils import get_fixture_content
 
 
 @patch('random.randint')
