@@ -34,6 +34,7 @@ setup(
     version=about["__version__"],
     description=__description__,
     long_description=read("README.md"),
+    long_description_content_type="text/markdown",
     url=__url__,
     author=about["__author__"],
     author_email=__author_email__,
