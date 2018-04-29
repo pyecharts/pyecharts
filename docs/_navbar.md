@@ -1,11 +1,11 @@
-- [主页](#/)
+- [主页](/)
 - 代码
   - [pyecharts](https://github.com/pyecharts/pyecharts)
   - [pyecharts-javascripthon](https://github.com/pyecharts/pyecharts-javascripthon)
   - [pyecharts-snapshot](https://github.com/pyecharts/pyecharts-snapshot)
   - [jupyter-echarts-pypkg](https://github.com/pyecharts/jupyter-echarts-pypkg)
-- 语言
-  - [中文](#/zh-cn)
-  - [English](#/en-us)
 - 团队
   - [开发团队](https://github.com/pyecharts)
+- 语言
+  - [中文](/zh-cn/)
+  - [English](/en-us/)
