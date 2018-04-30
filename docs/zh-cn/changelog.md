@@ -1,7 +1,7 @@
 # 版本日志
 
 * ### version 0.5.1（dev）
-    * TODO
+    * [issue#516](https://github.com/pyecharts/pyecharts/issues/516) X 轴的分隔线应该隐藏。
 
 * ### version 0.5.0 - 2018.04.28（Current）
 
