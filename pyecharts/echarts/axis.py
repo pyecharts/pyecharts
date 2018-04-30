@@ -74,14 +74,16 @@ class Axis(JsonSerializable):
 
 class XAxis(Axis):
 
-    def __init__(self, axis_type=None, chart_type=None, **kwargs):
+    def __init__(self, axis_type=None, chart_type=None, split_line=False,
+                 **kwargs):
         if axis_type is None:
             if chart_type == "scatter":
                 axis_type = "value"
             else:
                 axis_type = "category"
 
-        super(XAxis, self).__init__(axis_type=axis_type, **kwargs)
+        super(XAxis, self).__init__(axis_type=axis_type, split_line=split_line,
+                                    **kwargs)
 
 
 class YAxis(Axis):
