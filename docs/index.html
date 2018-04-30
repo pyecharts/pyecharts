@@ -25,6 +25,18 @@
         subMaxLevel: 2,
         auto2top: true,
         homepage: 'zh-cn/README.md',
+        search: {
+            placeholder: {
+                '/': '搜索',
+                '/zh-cn/': '搜索',
+                '/en-us/': 'Type to search'
+            },
+            noData: {
+                '/': '找不到结果',
+                '/zh-cn/': '找不到结果',
+                '/en-us/': 'No Results'
+            }
+        },
         plugins: [
             function (hook) {
                 var footer = [
@@ -43,6 +55,8 @@
     }
 </script>
 <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
+<script src="//unpkg.com/docsify/lib/plugins/search.js"></script>
+<script src="//unpkg.com/docsify/lib/plugins/zoom-image.js"></script>
 <script src="//unpkg.com/prismjs/components/prism-python.min.js"></script>
 </body>
 
