@@ -136,9 +136,6 @@ def test_geo_shantou_city():
 
 ![](https://user-images.githubusercontent.com/19553554/39248244-1be6da4a-48ce-11e8-931f-059879c5dcf4.png)
 
-本新功能属于进阶用法，需要用户对 metapensiero.pj 和 Echarts 官方配置项有一定的了解。
-
-
 ## 使用 JavaScript 事件处理函数
 
 Echarts 本身提供了 [api/events](http://echarts.baidu.com/api.html#events) 事件处理函数，主要通过 on 方式实现。
