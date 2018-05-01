@@ -15,6 +15,10 @@ JUPYTER_PRESENTATIONS = [SVG, PNG, JPEG, DEFAULT_HTML]
 ENVIRONMENT_PLUGIN_TYPE = 'pyecharts_environment'
 JS_EXTENSION_PLUGIN_TYPE = 'pyecharts_js_extension'
 
+# themes
+LIGHT_THEME = 'light'
+DARK_THEME = 'dark'
+
 ERROR_MESSAGE = "You need python 3.5+ and pyecharts-javascripthon"
 
 SYMBOL = {

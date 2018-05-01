@@ -1,5 +1,5 @@
 {
-    "backgroundColor": "#fff", 
+    "backgroundColor": null, 
     "color": [
         "#c23531", 
         "#2f4554", 
@@ -38,7 +38,7 @@
             "selectedMode": "multiple", 
             "show": true, 
             "textStyle": {
-                "color": "#333", 
+                "color": null, 
                 "fontSize": 12
             }, 
             "top": "top"
@@ -77,7 +77,7 @@
                     "position": null, 
                     "show": true, 
                     "textStyle": {
-                        "color": "#fff", 
+                        "color": null, 
                         "fontSize": 12
                     }
                 }, 
@@ -85,7 +85,7 @@
                     "position": "top", 
                     "show": false, 
                     "textStyle": {
-                        "color": "#000", 
+                        "color": null, 
                         "fontSize": 12
                     }
                 }
@@ -134,7 +134,7 @@
                     "position": null, 
                     "show": true, 
                     "textStyle": {
-                        "color": "#fff", 
+                        "color": null, 
                         "fontSize": 12
                     }
                 }, 
@@ -142,7 +142,7 @@
                     "position": "top", 
                     "show": false, 
                     "textStyle": {
-                        "color": "#000", 
+                        "color": null, 
                         "fontSize": 12
                     }
                 }
@@ -166,12 +166,12 @@
             "left": "auto", 
             "subtext": "", 
             "subtextStyle": {
-                "color": "#aaa", 
+                "color": null, 
                 "fontSize": 12
             }, 
             "text": "scatter test", 
             "textStyle": {
-                "color": "#000", 
+                "color": null, 
                 "fontSize": 18
             }, 
             "top": "auto"
@@ -204,7 +204,7 @@
         "borderWidth": 0, 
         "formatter": null, 
         "textStyle": {
-            "color": "#fff", 
+            "color": null, 
             "fontSize": 14
         }, 
         "trigger": "item", 
@@ -218,7 +218,7 @@
                 "margin": 8, 
                 "rotate": 0, 
                 "textStyle": {
-                    "color": "#000", 
+                    "color": null, 
                     "fontSize": 12
                 }
             }, 
@@ -259,7 +259,7 @@
                 "margin": 8, 
                 "rotate": 0, 
                 "textStyle": {
-                    "color": "#000", 
+                    "color": null, 
                     "fontSize": 12
                 }
             }, 

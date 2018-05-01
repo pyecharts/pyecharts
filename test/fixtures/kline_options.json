@@ -1,5 +1,5 @@
 {
-    "backgroundColor": "#fff", 
+    "backgroundColor": null, 
     "color": [
         "#c23531", 
         "#2f4554", 
@@ -37,7 +37,7 @@
             "selectedMode": "multiple", 
             "show": true, 
             "textStyle": {
-                "color": "#333", 
+                "color": null, 
                 "fontSize": 12
             }, 
             "top": "top"
@@ -250,12 +250,12 @@
             "left": "auto", 
             "subtext": "", 
             "subtextStyle": {
-                "color": "#aaa", 
+                "color": null, 
                 "fontSize": 12
             }, 
             "text": "K \u7ebf\u56fe-\u9ed8\u8ba4\u793a\u4f8b", 
             "textStyle": {
-                "color": "#000", 
+                "color": null, 
                 "fontSize": 18
             }, 
             "top": "auto"
@@ -288,7 +288,7 @@
         "borderWidth": 0, 
         "formatter": null, 
         "textStyle": {
-            "color": "#fff", 
+            "color": null, 
             "fontSize": 14
         }, 
         "trigger": "item", 
@@ -302,7 +302,7 @@
                 "margin": 8, 
                 "rotate": 0, 
                 "textStyle": {
-                    "color": "#000", 
+                    "color": null, 
                     "fontSize": 12
                 }
             }, 
@@ -369,7 +369,7 @@
                 "margin": 8, 
                 "rotate": 0, 
                 "textStyle": {
-                    "color": "#000", 
+                    "color": null, 
                     "fontSize": 12
                 }
             }, 

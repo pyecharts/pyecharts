@@ -46,6 +46,7 @@ class Base(object):
         self._page_title = page_title
         self._js_dependencies = {'echarts'}
         self.event_handlers = {}
+        self.theme = constants.LIGHT_THEME
 
     @property
     def chart_id(self):
@@ -66,6 +67,9 @@ class Base(object):
     @property
     def page_title(self):
         return self._page_title
+
+    def use_dark_theme(self):
+        self.theme = constants.DARK_THEME
 
     def on(self, event_name, handler):
         self.event_handlers[event_name] = handler
