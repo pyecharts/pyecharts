@@ -71,6 +71,12 @@ class Axis(JsonSerializable):
             "splitLine": {"show": split_line},
         }
 
+    def set_split_line_visibility(self, flag):
+        """
+        Set split line visibility
+        """
+        self.config["splitLine"]["show"] = flag
+
 
 class XAxis(Axis):
 

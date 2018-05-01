@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 
 import json
 
-from pyecharts import Polar, Kline, Bar
+from pyecharts import Polar, Kline, Bar, Scatter
 from nose.tools import eq_
 from mock import patch
 from pyecharts_javascripthon.api import DefaultJsonEncoder
@@ -119,5 +119,21 @@ def test_bar_default(patched):
         bar.options, sort_keys=True, indent=4, cls=DefaultJsonEncoder
     )
     expected = get_fixture_content('bar_options.json')
+    for a, b in zip(actual_options.split('\n'), expected.split('\n')):
+        eq_(a.strip(), b.strip())
+
+
+@patch('random.randint')
+def test_scatter_option(patched):
+    patched.return_value = "1"
+    v1 = [10, 20, 30, 40, 50, 60]
+    v2 = [10, 20, 30, 40, 50, 60]
+    scatter = Scatter("scatter test")
+    scatter.add("A", v1, v2)
+    scatter.add("B", v1[::-1], v2)
+    actual_options = json.dumps(
+        scatter.options, sort_keys=True, indent=4, cls=DefaultJsonEncoder
+    )
+    expected = get_fixture_content('scatter_options.json')
     for a, b in zip(actual_options.split('\n'), expected.split('\n')):
         eq_(a.strip(), b.strip())
