@@ -72,9 +72,6 @@ class Axis(JsonSerializable):
         }
 
     def set_split_line_visibility(self, flag):
-        """
-        Set split line visibility
-        """
         self.config["splitLine"]["show"] = flag
 
 
