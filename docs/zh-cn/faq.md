@@ -57,12 +57,16 @@ Serving HTTP on 0.0.0.0 port 8000 ...
 ```python
 from pyecharts import online
 
-online(host="http://localhost:8000)
+online(host="http://localhost:8000")
 ```
 
 **Q:Python2 编码问题**
 
-默认的编码类型为 UTF-8，在 Python3 中是没什么问题的，Python3 对中文的支持好很多。但是在 Python2 中，请应用下面的语句，保证没有编码问题:
+由于 pyecharts 包含了非 Ascii 字符 (Non Ascii Characters)，因此必须使用 UTF-8 编码处理文件和字符串等。
+ 
+在 Python3 中，默认的编码类型为 UTF-8，无需作更改。
+
+但是在 Python2 中，使用下面的语句设置编码:
 
 ```python
 #!/usr/bin/python
@@ -81,7 +85,7 @@ A: 主题功能暂时不支持。
 
 **Q:如何设置 tooltip 的 formatter 选项为回调函数？**
 
-A: 目前暂时无法支持。因为暂无法将 python 函数通过 json 转换对应的 js 函数。
+A: 在 v0.5.0 引入了 *选项回调函数* 支持，可查阅相关文档。
 
 **Q:为什么安装后还是无法 import Bar,Line 等图形**
 
