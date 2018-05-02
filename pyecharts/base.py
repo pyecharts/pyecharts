@@ -68,8 +68,12 @@ class Base(object):
     def page_title(self):
         return self._page_title
 
-    def use_dark_theme(self):
-        self.theme = constants.DARK_THEME
+    def use_theme(self, theme_name):
+        if theme_name in [constants.LIGHT_THEME, constants.DARK_THEME]:
+            self.theme = theme_name
+        else:
+            raise exceptions.InvalidTheme(
+                '{0} is not found'.format(theme_name))
 
     def on(self, event_name, handler):
         self.event_handlers[event_name] = handler
