@@ -160,7 +160,7 @@ def configure(
         CURRENT_CONFIG.force_js_embed = force_js_embed
     if output_image in constants.JUPYTER_PRESENTATIONS:
         CURRENT_CONFIG.jupyter_presentation = output_image
-    if global_theme in [constants.LIGHT_THEME, constants.DARK_THEME]:
+    if global_theme in constants.ALL_THEMES:
         CURRENT_CONFIG.theme = global_theme
 
 
