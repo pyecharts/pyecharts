@@ -273,16 +273,6 @@ print(x) # ['A', 'B', 'C']
 print(y) # ['34', '45', '12']
 ```
 
-**json_dumps**
-
-`pyecharts.utils.json_dumps(data, indent=0)`
-
-将 data 转换为 JSON 字符串，和默认的 `json.dumps` 方法增加了：
-
-- 将日期和时间转化为 ISO8601 字符串
-- 对于 numpy 数组，增加了类型强制转化，可参考 [astype](https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.astype.html) 和 [tolist](https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.tolist.html) .
-
-
 ## 模板引擎
 
 ### 概述

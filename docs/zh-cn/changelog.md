@@ -1,9 +1,17 @@
 # 版本日志
 
-* ### version 0.5.1（dev）
+* ### version 0.5.2（dev）
     * TODO
 
-* ### version 0.5.0 - 2018.04.28（Current）
+* ### version 0.5.1 - 2018.05.02（Current）
+
+    #### Fixed
+    * [issue#516](https://github.com/pyecharts/pyecharts/issues/516) 修复直角坐标系图 X 轴分隔符展示效果不一致的 bug
+
+    #### Update
+    * [issue#518](https://github.com/pyecharts/pyecharts/issues/518) 放弃 sdist 构建方式，使用 wheel 构建项目包，并在 PYPI 上为项目添加 description
+
+* ### version 0.5.0 - 2018.04.28
 
     #### Added
     * [issue#311](https://github.com/pyecharts/pyecharts/issues/311) 提供 Jupyter Notebook 导出为 PDF 没有图片的解决方案
