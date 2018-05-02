@@ -1,10 +1,20 @@
-- [Quick Start](en-us/prepare)
-- [Charts](en-us/charts)
-- [Map extensions](en-us/customize_map)
-- [pyecharts+Flask](en-us/flask)
-- [pyecharts+Django](en-us/django)
-- [Web integration](en-us/web_integration)
-- [Screenshots](zh-cn/gallery)
-- [API](en-us/api)
-- [FAQ](en-us/faq)
+- Basic Usage
+  - [Chart Render](en-us/prepare)
+  - [Chart Options](en-us/charts)
+- Advance Topics
+  - [Chart API](en-us/api)
+  - [Custom Map](en-us/customize_map)
+- Platform Support
+  - [Jupyter Notebook](en-us/jupyter_notebook)
+  - [Flask](en-us/flask)
+  - [Django](en-us/django)
+  - [Web Integration](en-us/web_integration)
+- Other Resources
+  - [Demo Projects](https://github.com/pyecharts/pyecharts-users-cases)
+  - [Geography & Map](en-us/datasets)
 
+- Development
+  - [Changelog](zh-cn/changelog)
+  - [Release Note](zh-cn/release-note)
+  - [Team](en-us/team)
+  - [FAQ](en-us/faq)
