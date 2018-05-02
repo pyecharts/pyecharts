@@ -1,8 +1,6 @@
-[TOC]
+> 基本用法篇：本文档描述了 pyecharts 库的基本使用用法。
 
 ### 第一个示例
-
-**Note：** 推荐使用 pyecharts 的最新版本！！
 
 首先开始来绘制你的第一个图表
 ```python
@@ -18,7 +16,7 @@ bar.render()
 
 * ```add()```  
     主要方法，用于添加图表的数据和设置各种配置项  
-* ```show_config()```  
+* ```print_echarts_options()```  
     打印输出图表的所有配置项
 * ```render()```  
     默认将会在根目录下生成一个 render.html 的文件，支持 path 参数，设置文件保存位置，如 render(r"e:\my_first_chart.html")，文件用浏览器打开。  

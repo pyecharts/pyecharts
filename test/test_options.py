@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 
 import json
 
-from pyecharts import Polar, Kline
+from pyecharts import Polar, Kline, Bar, Scatter
 from nose.tools import eq_
 from mock import patch
 from pyecharts_javascripthon.api import DefaultJsonEncoder
@@ -77,5 +77,63 @@ def test_kline_default(patched):
         kline.options, sort_keys=True, indent=4, cls=DefaultJsonEncoder
     )
     expected = get_fixture_content('kline_options.json')
+    for a, b in zip(actual_options.split('\n'), expected.split('\n')):
+        eq_(a.strip(), b.strip())
+
+
+@patch('random.randint')
+def test_bar_default(patched):
+    patched.return_value = "1"
+    attr = [
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec",
+    ]
+    v1 = [2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3]
+    v2 = [2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3]
+    bar = Bar("Bar chart", "precipitation and evaporation one year")
+    bar.add(
+        "precipitation",
+        attr,
+        v1,
+        mark_line=["average"],
+        mark_point=["max", "min"],
+    )
+    bar.add(
+        "evaporation",
+        attr,
+        v2,
+        mark_line=["average"],
+        mark_point=["max", "min"],
+    )
+    actual_options = json.dumps(
+        bar.options, sort_keys=True, indent=4, cls=DefaultJsonEncoder
+    )
+    expected = get_fixture_content('bar_options.json')
+    for a, b in zip(actual_options.split('\n'), expected.split('\n')):
+        eq_(a.strip(), b.strip())
+
+
+@patch('random.randint')
+def test_scatter_option(patched):
+    patched.return_value = "1"
+    v1 = [10, 20, 30, 40, 50, 60]
+    v2 = [10, 20, 30, 40, 50, 60]
+    scatter = Scatter("scatter test")
+    scatter.add("A", v1, v2)
+    scatter.add("B", v1[::-1], v2)
+    actual_options = json.dumps(
+        scatter.options, sort_keys=True, indent=4, cls=DefaultJsonEncoder
+    )
+    expected = get_fixture_content('scatter_options.json')
     for a, b in zip(actual_options.split('\n'), expected.split('\n')):
         eq_(a.strip(), b.strip())
