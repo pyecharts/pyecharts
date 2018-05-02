@@ -46,7 +46,7 @@ class Base(object):
         self._page_title = page_title
         self._js_dependencies = {'echarts'}
         self.event_handlers = {}
-        self.theme = constants.LIGHT_THEME
+        self.theme = CURRENT_CONFIG.theme
 
     @property
     def chart_id(self):
