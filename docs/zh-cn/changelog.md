@@ -9,7 +9,7 @@
     * [issue#516](https://github.com/pyecharts/pyecharts/issues/516) 修复直角坐标系图 X 轴分隔符展示效果不一致的 bug
 
     #### Update
-    * 放弃 sdist 构建方式，使用 wheel 构建项目包
+    * [issue#518](https://github.com/pyecharts/pyecharts/issues/518) 放弃 sdist 构建方式，使用 wheel 构建项目包，并在 PYPI 上为项目添加 description
 
 * ### version 0.5.0 - 2018.04.28
 
