@@ -3,7 +3,6 @@
 from __future__ import unicode_literals
 
 import json
-import math
 
 from pyecharts import Polar, Kline, Bar, Scatter, Line3D, Geo
 from pyecharts_javascripthon.api import DefaultJsonEncoder
@@ -144,11 +143,10 @@ def test_scatter_option(patched):
 
 
 def create_line3d_data():
-    for t in range(0, 25000):
-        _t = t / 1000
-        x = (1 + 0.25 * math.cos(75 * _t)) * math.cos(_t)
-        y = (1 + 0.25 * math.cos(75 * _t)) * math.sin(_t)
-        z = _t + 2.0 * math.sin(75 * _t)
+    for t in range(0, 1):
+        x = t
+        y = t
+        z = t
         yield [x, y, z]
 
 
