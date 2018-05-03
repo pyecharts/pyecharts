@@ -5,6 +5,7 @@ pandas
 numpy
 jupyter
 flake8
+mccabe
 mock;python_version<"3"
 echarts-countries-pypkg
 echarts-china-cities-pypkg
