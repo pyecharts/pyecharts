@@ -1,14 +1,32 @@
 # 版本日志
 
-* ### version 0.4.2
+* ### version 0.5.2（dev）
+    * TODO
+
+* ### version 0.5.1 - 2018.05.02（Current）
+
+    #### Fixed
+    * [issue#516](https://github.com/pyecharts/pyecharts/issues/516) 修复直角坐标系图 X 轴分隔符展示效果不一致的 bug
+
+    #### Update
+    * [issue#518](https://github.com/pyecharts/pyecharts/issues/518) 放弃 sdist 构建方式，使用 wheel 构建项目包，并在 PYPI 上为项目添加 description
+
+* ### version 0.5.0 - 2018.04.28
 
     #### Added
     * [issue#311](https://github.com/pyecharts/pyecharts/issues/311) 提供 Jupyter Notebook 导出为 PDF 没有图片的解决方案
+    * 新增对 JavaScript 回调函数配置项和事件绑定的支持。详细内容请移步至 [release-note/v050](zh-cn/release-note/v050)。
 
     #### Fixed
     * [issue#448](https://github.com/pyecharts/pyecharts/issues/448) 修复 Timeline 中 Overlap 图的 label_color 配置项不生效的 bug
+    * [issue#504](https://github.com/pyecharts/pyecharts/issues/504) 修复 markpoint 标记点标注不显示的 bug
 
-* ### version 0.4.1 - 2018.03.13（Current）
+    #### Updated
+    * 重构底层 `option.py` 配置项代码，使其更加具有`面向对象`特征，相关文件转移至新 package echarts。
+    * 将地图数据及接口转移至 'pyecharts.datasets' 包，更多内容请参考 [地理地图数据](zh-cn/datasets)。
+    * `pyecharts.Geo` 和 `pyecharts.GeoLines` 新增 `add_coordinate` 方法用于新增一个自定义城市地理位置的功能。
+
+* ### version 0.4.1 - 2018.03.13
 
     #### Fixed
     * [issue#437](https://github.com/pyecharts/pyecharts/issues/437) 修复 Timeline 图累计多个 Bar 图会导致条形宽度压缩的 bug

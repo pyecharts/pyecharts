@@ -3,12 +3,7 @@ from __future__ import unicode_literals
 
 from contextlib import contextmanager
 from pyecharts.js_extensions import EXTENSION_MANAGER
-from pyecharts.utils import get_resource_dir
 import pyecharts.constants as constants
-
-
-# Path constants for template dir
-DEFAULT_TEMPLATE_DIR = get_resource_dir('templates')
 
 
 class PyEchartsConfig(object):

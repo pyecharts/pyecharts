@@ -8,11 +8,12 @@
 | -------- | ---------------------------------------- | ---- |
 | 1 创建图表实例 | `bar = Bar()`                            |      |
 | 2 添加数据   | `bar.add(**kwargs)`                      |      |
-| 3 创建配置实例 | `config = PyEchartsConfig(**kwargs)`     |      |
-| 4 构建模板引擎 | `engine = EchartsEnvironment(pyecharts_config=config)` |      |
-| 5 获取模板文件 | `tpl = engine.get_template('demo_tpl.html')` |      |
-| 6 渲染     | `html = tpl.render(bar=bar)`             |      |
-| 7 写入目标文件 | `write_utf8_html_file('my_demo_chart.html', html)` |      |
+| 3 添加事件处理   | `bar.on(event_name, handler)`             | added in v0.5.0    |
+| 4 创建配置实例 | `config = PyEchartsConfig(**kwargs)`     |      |
+| 5 构建模板引擎 | `engine = EchartsEnvironment(pyecharts_config=config)` |      |
+| 6 获取模板文件 | `tpl = engine.get_template('demo_tpl.html')` |      |
+| 7 渲染     | `html = tpl.render(bar=bar)`             |      |
+| 8 写入目标文件 | `write_utf8_html_file('my_demo_chart.html', html)` |      |
 
 
 
@@ -99,6 +100,113 @@ js 文件仓库路径。可以设置本地或者远程地址。所有的远程�
 | Timeline | `add(chart, time_point)`                 |
 | Page     | `add(achart_or_charts)`                  |
 
+**on(event_name, handler)**
+
+添加 [事件处理函数](http://echarts.baidu.com/api.html#events)。
+
+请注意，事件处理函数是在浏览器里运行，但是要求你用 Python 写哦。
+
+这是支持的所有事件
+
+``` python
+# Mouse Events
+
+MOUSE_CLICK = 'click'
+MOUSE_DBCLICK = 'dbclick'
+MOUSE_DOWN = 'mousedown'
+MOUSE_OVER = 'mouseover'
+MOUSE_GLOBALOUT = 'globalout'
+
+# Other Events
+
+LEGEND_SELECT_CHANGED = 'legendselectchanged'
+LEGEND_SELECTED = 'legendselected'
+LEGEND_UNSELECTAED = 'legendunselected'
+LEGEND_SCROLL = 'legendscroll'
+DATA_ZOOM = 'datazoom'
+DATA_RANGE_SELECTED = 'datarangeselected'
+TIMELINE_CHANGED = 'timelinechanged'
+TIMELINE_PLAY_CHANGED = 'timelineplaychanged'
+RESTORE = 'restore'
+DATA_VIEW_CHANGED = 'dataviewchanged'
+MAGIC_TYPE_CHANGED = 'magictypechanged'
+GEO_SELECT_CHANGED = 'geoselectchanged'
+GEO_SELECTED = 'geoselected'
+GEO_UNSELECTED = 'geounselected'
+PIE_SELECT_CHANGED = 'pieselectchanged'
+PIE_SELECTED = 'pieselected'
+PIE_UNSELECTED = 'pieunselected'
+MAP_SELECT_CHANGED = 'mapselectchanged'
+MAP_SELECTED = 'mapselected'
+MAP_UNSELECTED = 'mapunselected'
+AXIS_AREA_SELECTED = 'axisareaselected'
+FOCUS_NODE_ADJACENCY = 'focusnodeadjacency'
+UNFOCUS_NODE_ADJACENCY = 'unfocusnodeadjacency'
+BRUSH = 'brush'
+BRUSH_SELECTED = 'brushselected'
+```
+
+事件处理函数的原型:
+
+``` python
+def handler(params):
+    ...
+```
+
+此处 params 的结构与 echarts 的一模一样：
+
+```
+{
+    // 当前点击的图形元素所属的组件名称，
+    // 其值如 'series'、'markLine'、'markPoint'、'timeLine' 等。
+    componentType: string,
+    // 系列类型。值可能为：'line'、'bar'、'pie' 等。当 componentType 为 'series' 时有意义。
+    seriesType: string,
+    // 系列在传入的 option.series 中的 index。当 componentType 为 'series' 时有意义。
+    seriesIndex: number,
+    // 系列名称。当 componentType 为 'series' 时有意义。
+    seriesName: string,
+    // 数据名，类目名
+    name: string,
+    // 数据在传入的 data 数组中的 index
+    dataIndex: number,
+    // 传入的原始数据项
+    data: Object,
+    // sankey、graph 等图表同时含有 nodeData 和 edgeData 两种 data，
+    // dataType 的值会是 'node' 或者 'edge'，表示当前点击在 node 还是 edge 上。
+    // 其他大部分图表中只有一种 data，dataType 无意义。
+    dataType: string,
+    // 传入的数据值
+    value: number|Array
+    // 数据图形的颜色。当 componentType 为 'series' 时有意义。
+    color: string
+}
+```
+
+例子：
+
+``` python
+# coding=utf-8
+from __future__ import unicode_literals
+
+from pyecharts import Map
+import pyecharts.events as events
+from pyecharts_javascripthon.dom.functions import alert
+
+
+def on_click(params):
+    alert(params.name)
+
+value = [155, 10, 66, 78]
+attr = ["福建", "山东", "北京", "上海"]
+map = Map("全国地图示例", width=1200, height=600)
+map.add("", attr, value, maptype='china', is_label_show=True)
+map.on(events.MOUSE_CLICK, on_click)
+map.render()
+```
+
+![](https://user-images.githubusercontent.com/4280312/39089412-88f0436e-45be-11e8-91b1-6617d795f26e.gif)
+
 **get_js_dependencies()**
 
 获取 js 依赖文件列表。和 属性 *js_dependencies* 不同， 这里的元素是包含了文件完整路径。
@@ -164,16 +272,6 @@ x, y = Base.cast(o_data)
 print(x) # ['A', 'B', 'C']
 print(y) # ['34', '45', '12']
 ```
-
-**json_dumps**
-
-`pyecharts.utils.json_dumps(data, indent=0)`
-
-将 data 转换为 JSON 字符串，和默认的 `json.dumps` 方法增加了：
-
-- 将日期和时间转化为 ISO8601 字符串
-- 对于 numpy 数组，增加了类型强制转化，可参考 [astype](https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.astype.html) 和 [tolist](https://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.tolist.html) .
-
 
 ## 模板引擎
 
@@ -253,7 +351,7 @@ pyecharts 内置的引擎提供了一些模板函数，这些函数通常接收�
 | `/template/js/echarts`                   | 本地    | 内嵌                     | 本地生成单一文件，直接移植 | 此为默认是设置            |
 | `'https://pyecharts.github.io/jupyter-echarts/echarts'` | 远程    | 内嵌                     | 生成单一文件        | 使用 `online` 可切换到此项 |
 | 其他本地模式 (如 `/static/js`)                  | 本地    | 外链，可以通过force_embed改成内嵌 | 可用于web框架整合    |                    |
-| 其他远程模式（如 `hthttps://cdn.bootcss.com/echarts/3.7.2`） | 远程    | 外链                     | 使用外部js，需依赖网络  |                    |
+| 其他远程模式（如 `https://cdn.bootcss.com/echarts/3.7.2`） | 远程    | 外链                     | 使用外部js，需依赖网络  |                    |
 
 
 例子

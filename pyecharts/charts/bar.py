@@ -1,7 +1,6 @@
 # coding=utf-8
 
 from pyecharts.chart import Chart
-from pyecharts.option import get_all_options
 
 
 class Bar(Chart):
@@ -40,7 +39,7 @@ class Bar(Chart):
         """
         assert len(x_axis) == len(y_axis)
         kwargs.update(x_axis=x_axis)
-        chart = get_all_options(**kwargs)
+        chart = self._get_all_options(**kwargs)
 
         if is_stack:
             is_stack = "stack_" + str(self._option['series_id'])

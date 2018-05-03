@@ -3,7 +3,6 @@
 from PIL import Image
 
 from pyecharts.chart import Chart
-from pyecharts.option import get_all_options
 
 
 class Scatter(Chart):
@@ -40,9 +39,11 @@ class Scatter(Chart):
         """
         assert len(x_axis) == len(y_axis)
         kwargs.update(type="scatter", x_axis=x_axis)
-        chart = get_all_options(**kwargs)
+        chart = self._get_all_options(**kwargs)
 
         xaxis, yaxis = chart['xy_axis']
+        # show split line, because by default split line is hidden for xaxis
+        xaxis[0].set_split_line_visibility(True)
         self._option.update(xAxis=xaxis, yAxis=yaxis)
         self._option.get('legend')[0].get('data').append(name)
 

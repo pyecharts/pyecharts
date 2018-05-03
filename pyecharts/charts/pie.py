@@ -1,7 +1,6 @@
 # coding=utf-8
 
 from pyecharts.chart import Chart
-from pyecharts.option import get_all_options
 
 
 class Pie(Chart):
@@ -49,7 +48,7 @@ class Pie(Chart):
         :param kwargs:
         """
         kwargs.update(type="pie")
-        chart = get_all_options(**kwargs)
+        chart = self._get_all_options(**kwargs)
         assert len(attr) == len(value)
         _data = []
         for data in zip(attr, value):

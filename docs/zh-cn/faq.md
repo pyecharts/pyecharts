@@ -36,18 +36,16 @@ jupyter notebook 输出后，你的 notebook 离开了本地 jupyter 环境，�
 为了解决这个问题，再画图之前，你可以多加两个语句：
 
 ```python
-...
 from pyecharts import online
 
 online()
-...
 ```
 
 这样，所有的脚本会从 github 下载。如果你连不上 Github, 你可以先把 https://github.com/pyecharts/assets 克隆一下。然后在你自己的服务器上，把整个 js 文件夹挂上去。
 
 下面我简单示范一下  
 
-```
+```bash
 $ git clone https://github.com/pyecharts/assets
 $ cd js
 $ python -m http.server # for python 2, use python -m SimpleHTTPServer
@@ -57,15 +55,20 @@ Serving HTTP on 0.0.0.0 port 8000 ...
 然后，再把本地服务器加进前面的语句：
 
 ```python
-...
 from pyecharts import online
 
-online(host="http://localhost:8000)
-...
+online(host="http://localhost:8000")
 ```
+
 **Q:Python2 编码问题**
-默认的编码类型为 UTF-8，在 Python3 中是没什么问题的，Python3 对中文的支持好很多。但是在 Python2 中，请应用下面的语句，保证没有编码问题:
-```
+
+由于 pyecharts 包含了非 Ascii 字符 (Non Ascii Characters)，因此必须使用 UTF-8 编码处理文件和字符串等。
+ 
+在 Python3 中，默认的编码类型为 UTF-8，无需作更改。
+
+但是在 Python2 中，使用下面的语句设置编码:
+
+```python
 #!/usr/bin/python
 #coding=utf-8
 from __future__ import unicode_literals
@@ -82,7 +85,7 @@ A: 主题功能暂时不支持。
 
 **Q:如何设置 tooltip 的 formatter 选项为回调函数？**
 
-A: 目前暂时无法支持。因为暂无法将 python 函数通过 json 转换对应的 js 函数。
+A: 在 v0.5.0 引入了 *选项回调函数* 支持，可查阅相关文档。
 
 **Q:为什么安装后还是无法 import Bar,Line 等图形**
 
@@ -99,7 +102,47 @@ A:目前 pyecharts 暂时未开放这部分的API，没有考虑到打包后的�
 
 A: 因为 china.js 没有加载成功。请检查 echarts-countries-pypkg 是不是已经装了，安装方法参考 [README](https://github.com/pyecharts/pyecharts/blob/master/README.md)。如果是 jupyter 的环境的话， 请检查能否正确访问 http://localhost:8888/nbextensions/echarts-countries-js/china.js
 
-
 如果你把地图全部装了的画，在你开新的 notebook 的时候， jupyter 的 javascript console 会有这个显示：
 
 ![](https://user-images.githubusercontent.com/4280312/37921785-a472a2b8-3122-11e8-8ee3-cc80a3901d9d.png)
+
+**Q:如何离线安装 pyecharts？**
+
+自 v0.5.0 后，离线模式的要求改变了一下。如果你用的是 python 3.5+, 以下的指导就足够了。要是你用的是 python 2.7, 3.4, 请读补充提示。
+
+首先需要在一台可以联网的电脑上下载 [requirements.txt](https://github.com/pyecharts/pyecharts/blob/master/requirements.txt) 的依赖包，然后执行
+``` shell
+$ mkdir pyecharts_requirements
+$ cd pyecharts_requirements
+$ # 将下载好的 requirement.txt 复制到本目录下
+$ pip download -r requirements.txt
+$ pip download pyecharts
+```
+然后就可以看到 pyecharts_requirements 文件夹下已经安装了所有需要的依赖包，包括 pyecharts
+``` shell
+$ ls
+Mode                LastWriteTime         Length Name
+----                -------------         ------ ----
+-a----        2018/4/19     19:58         824484 future-0.16.0.tar.gz
+-a----        2018/4/19     19:58         126381 Jinja2-2.10-py2.py3-none-any.whl
+-a----        2018/4/19     19:58         514596 jupyter-echarts-pypkg-0.1.0.tar.gz
+-a----        2018/4/19     19:58          10659 lml-0.0.2-py2.py3-none-any.whl
+-a----        2018/4/19     19:59          14356 MarkupSafe-1.0.tar.gz
+-a----        2018/4/19     19:58        1571935 Pillow-5.1.0-cp36-cp36m-win_amd64.whl
+-a----        2018/4/19     20:05         107681 pyecharts-0.4.1.tar.gz
+-a----        2018/4/19     19:59           4725 pyecharts_jupyter_installer-0.0.3-py2.py3-none-any.whl
+-a----         2018/3/9     23:12             71 requirements.txt
+```
+复制本文件夹到需要离线安装的电脑上，终端切换到该路径下
+
+``` shell
+$ pip install --no-index -f ./ -r r requirements.txt
+$ pip install ./pyecharts
+```
+
+python 2.7, 3.4 用户提示：
+
+离线用法呢，你们有两个选择：
+
+1）拥抱 python 3.5+, 你们就不需要再做别的了  
+2）在自己的机器上运行 [pyecharts-javascripthon-api-service](https://github.com/pyecharts/pyecharts-javascripthon-api-service). 这个服务呢，也是需要 python 3.5+ 的，所以如果你是个人用户的，可以就此打住，直接用 pip3 装 pyecharts v0.5.0 好了。

@@ -9,6 +9,7 @@ from nose.tools import eq_
 from pyecharts.utils import (
     write_utf8_html_file, get_resource_dir, merge_js_dependencies
 )
+from pyecharts.utils.lazy import LazyObject
 
 
 def test_get_resource_dir():
@@ -70,3 +71,21 @@ def test_merge_js_dependencies_with_mixed_chart_and_string():
         ['echarts', 'zhejiang'], merge_js_dependencies(['echarts', 'zhejiang'])
     )
     eq_(['echarts', 'fujian'], merge_js_dependencies('echarts', map_chart))
+
+
+class MockPoint(object):
+
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+
+def create_point():
+    return MockPoint(1, 2)
+
+
+def test_lazy_object():
+    p = LazyObject(create_point)
+    assert isinstance(p, LazyObject)
+    p.x = 3
+    assert isinstance(p, MockPoint)

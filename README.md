@@ -33,7 +33,7 @@ $ pip install -r requirements.txt
 $ python setup.py install
 ```
 
-Please note: since version 0.3.2, NO LONGER pyecharts comes with any map files. Please read next section for more informations.
+Please note: since version 0.3.2, **NO LONGER** pyecharts comes with any map files. Please read next section for more informations.
 
 ### map extensions
 
@@ -47,7 +47,7 @@ Here is a list of map extensions from pyecharts dev team:
 6. [United Kingdom map](https://echarts-maps.github.io/echarts-united-kingdom-js/): [echarts-united-kingdom-pypkg](https://github.com/pyecharts/echarts-united-kingdom-pypkg) (1MB)
 
 
-In order to install them, you can try one of them or all:
+In order to install them, you can try one or all of them below:
 
 ```
 $ pip install echarts-countries-pypkg
@@ -82,13 +82,20 @@ It will create a file named *render.html* in the root directory, open file with 
 
 [pyecharts-snapshot](https://github.com/pyecharts/pyecharts-snapshot) is [a command line utility](https://github.com/pyecharts/pyecharts-snapshot#usage) and [a library extension](https://github.com/pyecharts/pyecharts-snapshot#example-programs) which renders the output of pyecharts as a svg, png, jpeg, gif image or a pdf file.
 
-See more detail at that repositoty.
+After you will have installed pyecharts-snapshot, you can modify previous example file slightly and get png output directly:
+
+
+```python
+bar.render(path="render.png")
+```
+
+So please see installation instruction and other usage at that repository.
 
 ## Platform Support
 
-pyecharts exposes chart API and template API so that it can work on some common platforms.
+pyecharts exposes chart API and template API so that it can work on other python frameworks.
 
-### Work on Jupyter Notebook
+### Integration with Jupyter Notebook
 
 In the Notebook cell, you can simply pass on chart instance itself to Jupyter, which will diplay the chart. Please note **render_notebook** function has been removed.
 
@@ -100,19 +107,19 @@ In the case of online jshost mode, you can also download as some file formats (i
 
 ### Integrate With Web Framework
 
-With the help of pyecharts API,it is easy to integrate pyecharts to your web projects, such as Flask and Django.
+With the help of pyecharts API, it is easy to integrate pyecharts to your web projects, such as Flask and Django.
 
 Demo
 
 ![flask-0](https://user-images.githubusercontent.com/19553554/35081158-3faa7c34-fc4d-11e7-80c9-2de79371374f.gif)
 
-## Advance Topics
+## Advanced Topics
 
-### Cusom Template FIles and Layout
+### Custom Template Files and Layout
 
-pyecharts exposes engine API so that you can use your own template file and integrate with CSS framework.
+pyecharts exposes engine API so that you can use your own template file and custom CSS.
 
-In addition,pyecharts also ships a lot of jinja2 template functions used in template files.
+In addition, pyecharts also ships a lot of jinja2 template functions used in template files.
 
 ### Custom Map Libraries
 
@@ -125,7 +132,7 @@ All maps are developed and maintained by [echarts-maps](https://github.com/echar
 
 ## Examples
 
-All examples is hosted on the repository [pyecharts-users-cases](https://github.com/pyecharts/pyecharts-users-cases) .
+All examples is hosted on the repository [pyecharts-users-cases](https://github.com/pyecharts/pyecharts-users-cases).
 
 ## Test
 

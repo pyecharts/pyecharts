@@ -13,8 +13,6 @@ python:
   - 2.7
 before_install:
   - pip install -r test/requirements.txt
-  - if [[ $TRAVIS_PYTHON_VERSION == "3.6" ]]; then pip install https://github.com/pyecharts/pyecharts-javascripthon/archive/master.zip; fi  
-  - if [[ $TRAVIS_PYTHON_VERSION == "3.5" ]]; then pip install https://github.com/pyecharts/pyecharts-javascripthon/archive/master.zip; fi  
 script:
   - python setup.py install
   - make tests
