@@ -45,16 +45,16 @@ def to_css_length(x):
         return x
 
 
-def _flat(ele):
+def _flat(obj):
     """
-    :param ele:
+    :param obj:
     :return: Return a list
     """
-    if hasattr(ele, 'js_dependencies'):
-        return list(ele.js_dependencies)
-    if isinstance(ele, (list, tuple, set)):
-        return ele
-    return ele,
+    if hasattr(obj, 'js_dependencies'):
+        return list(obj.js_dependencies)
+    if isinstance(obj, (list, tuple, set)):
+        return obj
+    return obj,  # tuple
 
 
 def merge_js_dependencies(*chart_or_name_list):
