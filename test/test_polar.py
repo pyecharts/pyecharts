@@ -16,7 +16,7 @@ def test_polar_type_scatter_one():
         "",
         data,
         boundary_gap=False,
-        type='scatter',
+        type="scatter",
         is_splitline_show=False,
         is_axisline_show=True,
     )
@@ -27,15 +27,15 @@ def test_polar_type_scatter_more():
     data_1 = [(10, random.randint(1, 100)) for i in range(300)]
     data_2 = [(11, random.randint(1, 100)) for i in range(300)]
     polar = Polar("极坐标系-散点图示例", width=1200, height=600)
-    polar.add("", data_1, type='scatter')
-    polar.add("", data_2, type='scatter')
+    polar.add("", data_1, type="scatter")
+    polar.add("", data_2, type="scatter")
     polar.render()
 
 
 def test_polar_type_effectscatter():
     data = [(i, random.randint(1, 100)) for i in range(10)]
     polar = Polar("极坐标系-动态散点图示例", width=1200, height=600)
-    polar.add("", data, type='effectScatter', effect_scale=10, effect_period=5)
+    polar.add("", data, type="effectScatter", effect_scale=10, effect_period=5)
     assert '"type": "effectScatter"' in polar._repr_html_()
 
 
@@ -45,21 +45,21 @@ def test_polar_type_barradius():
         "A",
         [1, 2, 3, 4, 3, 5, 1],
         radius_data=WEEK,
-        type='barRadius',
+        type="barRadius",
         is_stack=True,
     )
     polar.add(
         "B",
         [2, 4, 6, 1, 2, 3, 1],
         radius_data=WEEK,
-        type='barRadius',
+        type="barRadius",
         is_stack=True,
     )
     polar.add(
         "C",
         [1, 2, 3, 4, 1, 2, 5],
         radius_data=WEEK,
-        type='barRadius',
+        type="barRadius",
         is_stack=True,
     )
     polar.render()
@@ -71,21 +71,21 @@ def test_polar_type_barangle():
         "",
         [1, 2, 3, 4, 3, 5, 1],
         radius_data=WEEK,
-        type='barAngle',
+        type="barAngle",
         is_stack=True,
     )
     polar.add(
         "",
         [2, 4, 6, 1, 2, 3, 1],
         radius_data=WEEK,
-        type='barAngle',
+        type="barAngle",
         is_stack=True,
     )
     polar.add(
         "",
         [1, 2, 3, 4, 1, 2, 5],
         radius_data=WEEK,
-        type='barAngle',
+        type="barAngle",
         is_stack=True,
     )
     polar.render()
@@ -146,7 +146,7 @@ def test_polar_draw_snail():
         "",
         data,
         symbol_size=0,
-        symbol='circle',
+        symbol="circle",
         start_angle=-25,
         is_radiusaxis_show=False,
         area_color="#f3c5b3",

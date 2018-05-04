@@ -39,7 +39,7 @@ def test_parallel_user_define():
             "dim": 7,
             "name": "等级",
             "type": "category",
-            "data": ['优', '良', '轻度污染', '中度污染', '重度污染', '严重污染'],
+            "data": ["优", "良", "轻度污染", "中度污染", "重度污染", "严重污染"],
         },
     ]
     data = [
