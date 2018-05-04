@@ -56,7 +56,7 @@ online()
 
 第一就是装 [pyecharts-snapshot 0.1.4+ 和 phanomjs-prebuilt](https://github.com/pyecharts/pyecharts-snapshot#installation)
 
-第二就是在 notebook 的最开始添上一下语句。这样就可以输出图片成 PDF 了。
+第二就是在 notebook 的最开始添上以下语句。这样就可以输出图片成 PDF 了。
 
 ```python
 from pyecharts import configure
@@ -81,6 +81,18 @@ configure(output_image='svg')
 ## 示例
 
 参见 [pyecharts示例](https://github.com/pyecharts/pyecharts-users-cases) 。
+
+## 主题
+
+自 pyecharts 0.5.2 之后，用户通过图表的 `use_theme` 函数，可以有自己的主体。可要是你想要最少的改动，一次性把 notebook 里的图表换主体，你可以在 notebook 的最开始添上以下语句：
+
+```python
+from pyecharts import configure
+
+configure(global_theme='dark')
+```
+
+然后在重新运行，奇迹就会发生。
 
 ## jupyterlab
 
