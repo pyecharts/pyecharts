@@ -8,17 +8,17 @@ from pyecharts import Bar
 
 bar = Bar("我的第一个图表", "这里是副标题")
 bar.add("服装", ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"], [5, 20, 36, 10, 75, 90])
-bar.print_echarts_options() # 该行只为了打印配置项，方便调试时使用
+# bar.print_echarts_options() # 该行只为了打印配置项，方便调试时使用
 bar.render()    # 生成本地 HTML 文件
 ```
 ![guide-0](https://user-images.githubusercontent.com/19553554/35103909-3ee41ba2-fca2-11e7-87be-1a3585b9e0fa.png)
 
 
-* ```add()```
+* ```add()```  
     主要方法，用于添加图表的数据和设置各种配置项
-* ```print_echarts_options()```
+* ```print_echarts_options()```  
     打印输出图表的所有配置项
-* ```render()```
+* ```render()```  
     默认将会在根目录下生成一个 render.html 的文件，支持 path 参数，设置文件保存位置，如 render(r"e:\my_first_chart.html")，文件用浏览器打开。
 
 **Note：** 可以按右边的下载按钮将图片下载到本地，如果想要提供更多实用工具按钮，请在 `add()` 中设置 `is_more_utils` 为 True
@@ -112,8 +112,8 @@ env.render_chart_to_file(line, path='line.html')
 
 相比第一个例子，该代码只是使用同一个引擎对象，减少了部分重复操作，速度有所提高。
 
-
 ### Pandas&Numpy 简单示例
+
 如果使用的是 Numpy 或者 Pandas，可以参考这个示例
 
 ![pandas-numpy](https://user-images.githubusercontent.com/19553554/35104252-3e36cee2-fca3-11e7-8e43-09bbe8dbbd1e.png)
