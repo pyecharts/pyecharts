@@ -10,9 +10,9 @@ from pyecharts.utils import get_resource_dir
 from pyecharts.utils.lazy import LazyObject
 
 __all__ = [
-    'search_coordinates_by_filter',
-    'search_coordinates_by_keyword',
-    'get_coordinate',
+    "search_coordinates_by_filter",
+    "search_coordinates_by_keyword",
+    "get_coordinate",
 ]
 
 
@@ -51,7 +51,7 @@ def _load_coordinates():
     :return:
     """
     with open(
-        get_resource_dir('datasets', 'city_coordinates.json'), encoding='utf8'
+        get_resource_dir("datasets", "city_coordinates.json"), encoding="utf8"
     ) as f:
         return json.load(f)
 

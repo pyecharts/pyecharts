@@ -24,9 +24,9 @@ def test_graph_force_layout():
     links = []
     for i in nodes:
         for j in nodes:
-            links.append({"source": i.get('name'), "target": j.get('name')})
+            links.append({"source": i.get("name"), "target": j.get("name")})
     graph = Graph("关系图-力引导布局示例")
-    graph.add("", nodes, links, repulsion=8000, line_color='#aaa')
+    graph.add("", nodes, links, repulsion=8000, line_color="#aaa")
     graph.render()
 
 
@@ -34,7 +34,7 @@ def test_graph_circular_layout():
     links = []
     for i in nodes:
         for j in nodes:
-            links.append({"source": i.get('name'), "target": j.get('name')})
+            links.append({"source": i.get("name"), "target": j.get("name")})
     graph = Graph("关系图-环形布局示例")
     graph.add(
         "",
@@ -42,7 +42,7 @@ def test_graph_circular_layout():
         links,
         is_label_show=True,
         graph_repulsion=8000,
-        graph_layout='circular',
+        graph_layout="circular",
         label_text_color=None,
     )
     graph.render()
@@ -50,7 +50,7 @@ def test_graph_circular_layout():
 
 def test_graph_official_data():
     with codecs.open(
-        os.path.join("fixtures", "weibo.json"), "r", encoding='utf-8'
+        os.path.join("fixtures", "weibo.json"), "r", encoding="utf-8"
     ) as f:
         j = json.load(f)
     nodes, links, categories, cont, mid, _ = j

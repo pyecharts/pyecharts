@@ -41,28 +41,28 @@ class Scatter(Chart):
         kwargs.update(type="scatter", x_axis=x_axis)
         chart = self._get_all_options(**kwargs)
 
-        xaxis, yaxis = chart['xy_axis']
+        xaxis, yaxis = chart["xy_axis"]
         # show split line, because by default split line is hidden for xaxis
         xaxis[0].set_split_line_visibility(True)
         self._option.update(xAxis=xaxis, yAxis=yaxis)
-        self._option.get('legend')[0].get('data').append(name)
+        self._option.get("legend")[0].get("data").append(name)
 
         if extra_data:
             _data = [list(z) for z in zip(x_axis, y_axis, extra_data)]
         else:
             _data = [list(z) for z in zip(x_axis, y_axis)]
 
-        self._option.get('series').append(
+        self._option.get("series").append(
             {
                 "type": "scatter",
                 "name": name,
-                "symbol": chart['symbol'],
+                "symbol": chart["symbol"],
                 "symbolSize": symbol_size,
                 "data": _data,
-                "label": chart['label'],
-                "markPoint": chart['mark_point'],
-                "markLine": chart['mark_line'],
-                "seriesId": self._option.get('series_id'),
+                "label": chart["label"],
+                "markPoint": chart["mark_point"],
+                "markLine": chart["mark_line"],
+                "seriesId": self._option.get("series_id"),
             }
         )
         self._config_components(**kwargs)

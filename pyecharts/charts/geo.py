@@ -37,7 +37,7 @@ class Geo(Chart):
 
         coordinate = get_coordinate(name)
         if coordinate is None and raise_exception:
-            raise ValueError('No coordinate is specified for {}'.format(name))
+            raise ValueError("No coordinate is specified for {}".format(name))
 
         return coordinate
 
@@ -50,7 +50,7 @@ class Geo(Chart):
         attr,
         value,
         type="scatter",
-        maptype='china',
+        maptype="china",
         symbol_size=12,
         border_color="#111",
         geo_normal_color="#323c48",
@@ -123,42 +123,42 @@ class Geo(Chart):
                 },
             }
         )
-        self._option.get('legend')[0].get('data').append(name)
+        self._option.get("legend")[0].get("data").append(name)
 
         if type == "scatter":
-            self._option.get('series').append(
+            self._option.get("series").append(
                 {
                     "type": type,
                     "name": name,
-                    "coordinateSystem": 'geo',
-                    "symbol": chart['symbol'],
+                    "coordinateSystem": "geo",
+                    "symbol": chart["symbol"],
                     "symbolSize": symbol_size,
                     "data": _data,
-                    "label": chart['label'],
+                    "label": chart["label"],
                 }
             )
 
         elif type == "effectScatter":
-            self._option.get('series').append(
+            self._option.get("series").append(
                 {
                     "type": type,
                     "name": name,
-                    "coordinateSystem": 'geo',
+                    "coordinateSystem": "geo",
                     "showEffectOn": "render",
-                    "rippleEffect": chart['effect'],
-                    "symbol": chart['symbol'],
+                    "rippleEffect": chart["effect"],
+                    "symbol": chart["symbol"],
                     "symbolSize": symbol_size,
                     "data": _data,
-                    "label": chart['label'],
+                    "label": chart["label"],
                 }
             )
 
         elif type == "heatmap":
-            self._option.get('series').append(
+            self._option.get("series").append(
                 {
                     "type": type,
                     "name": name,
-                    "coordinateSystem": 'geo',
+                    "coordinateSystem": "geo",
                     "data": _data,
                 }
             )

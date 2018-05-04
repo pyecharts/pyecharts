@@ -6,7 +6,7 @@ class Label(JsonSerializable):
     def __init__(
         self,
         visibility=False,
-        position='inside',
+        position="inside",
         text_color=None,
         text_size=12,
         formatter=None,
@@ -18,12 +18,12 @@ class Label(JsonSerializable):
             "textStyle": {"color": text_color, "fontSize": text_size},
         }
 
-        if chart_type != 'graph':
+        if chart_type != "graph":
             if formatter is None:
                 if type == "pie":
                     formatter = "{b}: {d}%"
         if formatter:
-            self.config['formatter'] = formatter
+            self.config["formatter"] = formatter
 
 
 class EmphasisLabel(Label):

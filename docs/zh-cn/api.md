@@ -48,7 +48,7 @@ js 文件仓库路径。可以设置本地或者远程地址。所有的远程�
 指定输出图片类型，有 'svg', 'jpeg', 'png' 可选
 
 * global_theme
-指定全局主题，目前提供的主题有 `vintage`, `macarons`, `infographic`, `shine` 和 `roma`。
+指定全局主题，目前提供的主题有 `dark`, `vintage`, `macarons`, `infographic`, `shine` 和 `roma`。
 
 
 ## 图表类

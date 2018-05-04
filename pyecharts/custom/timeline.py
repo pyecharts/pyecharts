@@ -97,22 +97,22 @@ class Timeline(Base):
         )
         self.__check_components(chart)
         self._time_points.append(time_point)
-        self._option.get('baseOption').update(
-            backgroundColor=chart.options.get('backgroundColor')
+        self._option.get("baseOption").update(
+            backgroundColor=chart.options.get("backgroundColor")
         )
-        self._option.get('baseOption').get('timeline').update(
+        self._option.get("baseOption").get("timeline").update(
             data=self._time_points
         )
-        self._option.get('options').append(
+        self._option.get("options").append(
             {
                 "color": chart.options.get("color"),
-                "legend": chart.options.get('legend'),
-                "series": chart.options.get('series'),
-                "title": chart.options.get('title'),
-                "tooltip": chart.options.get('tooltip'),
+                "legend": chart.options.get("legend"),
+                "series": chart.options.get("series"),
+                "title": chart.options.get("title"),
+                "tooltip": chart.options.get("tooltip"),
             }
         )
-        _tmp_series = copy.deepcopy(chart.options.get('series'))
+        _tmp_series = copy.deepcopy(chart.options.get("series"))
         for _s in _tmp_series:
             if _s.get("type") == "map":
                 _s.pop("data", None)
@@ -125,20 +125,20 @@ class Timeline(Base):
             图形实例
         """
         _compoents = [
-            'grid',
-            'xAxis',
-            'yAxis',
-            'polar',
-            'radiusAxis',
-            'geo',
-            'angleAxis',
-            'radar',
-            'visualMap',
-            'dataZoom',
-            'parallelAxis',
+            "grid",
+            "xAxis",
+            "yAxis",
+            "polar",
+            "radiusAxis",
+            "geo",
+            "angleAxis",
+            "radar",
+            "visualMap",
+            "dataZoom",
+            "parallelAxis",
         ]
 
         for component in _compoents:
             _c = chart.options.get(component, None)
             if _c is not None:
-                self._option.get('baseOption').update({component: _c})
+                self._option.get("baseOption").update({component: _c})

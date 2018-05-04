@@ -12,7 +12,7 @@ def test_map_show_label():
     value = [155, 10, 66, 78]
     attr = ["福建", "山东", "北京", "上海"]
     map = Map("全国地图示例", width=1200, height=600)
-    map.add("", attr, value, maptype='china', is_label_show=True)
+    map.add("", attr, value, maptype="china", is_label_show=True)
     map.render()
 
 
@@ -25,14 +25,14 @@ def test_map_with_custom_name_map():
         "",
         attr,
         value,
-        maptype='china',
+        maptype="china",
         is_label_show=True,
-        name_map={'test': '--magic--'},
+        name_map={"test": "--magic--"},
     )
     map.render()
     content = get_default_rendering_file_content()
-    assert '--magic--' in content
-    assert 'nameMap' in content
+    assert "--magic--" in content
+    assert "nameMap" in content
 
 
 def test_map_combine_with_visualmap():
@@ -43,30 +43,30 @@ def test_map_combine_with_visualmap():
         "",
         attr,
         value,
-        maptype='china',
+        maptype="china",
         is_visualmap=True,
-        visual_text_color='#000',
+        visual_text_color="#000",
     )
     map.render()
 
 
 def test_echarts_position_in_render_html():
     value = [20, 190, 253, 77, 65]
-    attr = ['汕头市', '汕尾市', '揭阳市', '阳江市', '肇庆市']
+    attr = ["汕头市", "汕尾市", "揭阳市", "阳江市", "肇庆市"]
     map = Map("广东地图示例", width=1200, height=600)
     map.add(
         "",
         attr,
         value,
-        maptype='广东',
+        maptype="广东",
         is_map_symbol_show=False,
         is_visualmap=True,
-        visual_text_color='#000',
+        visual_text_color="#000",
     )
     map.render()
     content = get_default_rendering_file_content()
-    echarts_position = content.find('exports.echarts')
-    guangdong_position = content.find(json.dumps('广东'))
+    echarts_position = content.find("exports.echarts")
+    guangdong_position = content.find(json.dumps("广东"))
     assert echarts_position < guangdong_position
     assert '"showLegendSymbol": false' in content
 
@@ -88,13 +88,13 @@ def test_world_map():
         value,
         maptype="world",
         is_visualmap=True,
-        visual_text_color='#000',
+        visual_text_color="#000",
     )
     map.render()
 
     actual_content = get_default_rendering_file_content()
     # test register map
-    assert "registerMap(\"world\"," in actual_content
+    assert 'registerMap("world",' in actual_content
     # test non-existent country
     assert "Russia" in actual_content
     assert "Unknown Country', " not in actual_content
@@ -104,12 +104,12 @@ def test_china_map():
     value = [155, 10, 66, 78]
     attr = ["福建", "山东", "北京", "上海"]
     map = Map("全国地图示例", width=1200, height=600)
-    map.add("", attr, value, maptype='china')
+    map.add("", attr, value, maptype="china")
     map.render()
 
     actual_content = get_default_rendering_file_content()
     # test register map
-    assert "registerMap(\"china\"," in actual_content
+    assert 'registerMap("china",' in actual_content
     # 福建省
     assert "\u798f\u5efa" in actual_content
     # 汕头市
@@ -124,7 +124,7 @@ def test_map_visualmap_pieces():
         "",
         attr,
         value,
-        maptype='china',
+        maptype="china",
         is_visualmap=True,
         is_piecewise=True,
         visual_text_color="#000",
