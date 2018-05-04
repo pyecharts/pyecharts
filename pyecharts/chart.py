@@ -19,11 +19,11 @@ class Chart(Base):
         height=400,
         title_pos="auto",
         title_top="auto",
-        title_color="#000",
-        subtitle_color="#aaa",
+        title_color=None,
+        subtitle_color=None,
         title_text_size=18,
         subtitle_text_size=12,
-        background_color="#fff",
+        background_color=None,
         page_title=constants.PAGE_TITLE,
         renderer=constants.CANVAS_RENDERER,
     ):
@@ -122,7 +122,7 @@ class Chart(Base):
             tooltip={},
             series=[],
             legend=[{"data": []}],
-            backgroundColor=background_color,
+            backgroundColor=background_color
         )
 
     def add(
@@ -356,7 +356,8 @@ class Chart(Base):
             指定是否显示工具箱
         :param kwargs:
         """
-        kwargs.update(colorlst=self._colorlst)
+        if self.theme == constants.LIGHT_THEME:
+            kwargs.update(colorlst=self._colorlst)
         chart = self._get_all_options(**kwargs)
         self._option.update(color=chart['color'])
 
