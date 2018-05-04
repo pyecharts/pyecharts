@@ -46,6 +46,8 @@ class Base(object):
         self._page_title = page_title
         self._js_dependencies = {'echarts'}
         self.event_handlers = {}
+        self.theme = None
+        self.use_theme(CURRENT_CONFIG.theme)
 
     @property
     def chart_id(self):
@@ -66,6 +68,15 @@ class Base(object):
     @property
     def page_title(self):
         return self._page_title
+
+    def use_theme(self, theme_name):
+        if theme_name in constants.ALL_THEMES:
+            self.theme = theme_name
+            if theme_name in constants.EXTERNAL_THEMES:
+                self._js_dependencies.add(self.theme)
+        else:
+            raise exceptions.InvalidTheme(
+                '{0} is not found'.format(theme_name))
 
     def on(self, event_name, handler):
         self.event_handlers[event_name] = handler

@@ -16,6 +16,7 @@ class PyEchartsConfig(object):
         self.force_js_embed = force_js_embed
         self.hosted_on_github = False
         self.jupyter_presentation = constants.DEFAULT_HTML
+        self.theme = constants.LIGHT_THEME
 
     @property
     def js_embed(self):
@@ -133,6 +134,7 @@ def configure(
     echarts_template_dir=None,
     force_js_embed=None,
     output_image=None,
+    global_theme=None,
     **kwargs
 ):
     """ Config all items for pyecharts when use chart.render()
@@ -158,6 +160,8 @@ def configure(
         CURRENT_CONFIG.force_js_embed = force_js_embed
     if output_image in constants.JUPYTER_PRESENTATIONS:
         CURRENT_CONFIG.jupyter_presentation = output_image
+    if global_theme in constants.ALL_THEMES:
+        CURRENT_CONFIG.theme = global_theme
 
 
 def online(host=None):
