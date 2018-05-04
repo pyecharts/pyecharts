@@ -47,7 +47,7 @@ bar.render()
 ```
 ![guide-2](https://user-images.githubusercontent.com/4280312/39617664-79789878-4f78-11e8-9f0e-c3a2c371b6cb.png)
 
-pyecharts 支持另外 5 个主体色系，请移步到主题色系获取更多配置信息。
+pyecharts 支持另外 5 个主体色系，[请移步到主题色系获取更多配置信息](zh-cn/themes)。
 
 
 ### 使用 pyecharts-snapshot 插件
