@@ -55,31 +55,31 @@ class Line(Chart):
         kwargs.update(x_axis=x_axis, type="line", flag=True)
         chart = self._get_all_options(**kwargs)
 
-        xaxis, yaxis = chart['xy_axis']
+        xaxis, yaxis = chart["xy_axis"]
         if is_stack:
-            is_stack = "stack_" + str(self._option['series_id'])
+            is_stack = "stack_" + str(self._option["series_id"])
         else:
             is_stack = ""
         self._option.update(xAxis=xaxis, yAxis=yaxis)
-        self._option.get('legend')[0].get('data').append(name)
+        self._option.get("legend")[0].get("data").append(name)
 
-        self._option.get('series').append(
+        self._option.get("series").append(
             {
                 "type": "line",
                 "name": name,
-                "symbol": chart['symbol'],
+                "symbol": chart["symbol"],
                 "symbolSize": symbol_size,
                 "smooth": is_smooth,
                 "step": is_step,
                 "stack": is_stack,
                 "showSymbol": is_symbol_show,
                 "data": y_axis,
-                "label": chart['label'],
-                "lineStyle": chart['line_style'],
-                "areaStyle": chart['area_style'],
-                "markPoint": chart['mark_point'],
-                "markLine": chart['mark_line'],
-                "seriesId": self._option.get('series_id'),
+                "label": chart["label"],
+                "lineStyle": chart["line_style"],
+                "areaStyle": chart["area_style"],
+                "markPoint": chart["mark_point"],
+                "markLine": chart["mark_line"],
+                "seriesId": self._option.get("series_id"),
             }
         )
         self._config_components(**kwargs)

@@ -51,15 +51,15 @@ def test_line_user_define_marks():
         clothes_v1,
         mark_point=["average", "max", "min"],
         symbol_size=50,
-        mark_point_symbol='diamond',
-        mark_point_textcolor='#40ff27',
+        mark_point_symbol="diamond",
+        mark_point_textcolor="#40ff27",
     )
     line.add(
         "商家B",
         CLOTHES,
         clothes_v2,
         mark_point=["average", "max", "min"],
-        mark_point_symbol='arrow',
+        mark_point_symbol="arrow",
         mark_point_symbolsize=40,
     )
     assert '"symbolSize":50' not in line._repr_html_()
@@ -113,7 +113,7 @@ def test_line_type_fil():
         CLOTHES,
         clothes_v2,
         is_fill=True,
-        area_color='#000',
+        area_color="#000",
         area_opacity=0.3,
         is_smooth=True,
     )

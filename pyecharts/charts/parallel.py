@@ -54,13 +54,13 @@ class Parallel(Chart):
                 "left": "5%", "right": "13%", "bottom": "10%", "top": "20%"
             }
         )
-        self._option.get('legend')[0].get('data').append(name)
+        self._option.get("legend")[0].get("data").append(name)
 
-        self._option.get('series').append(
+        self._option.get("series").append(
             {
                 "type": "parallel",
                 "coordinateSystem": "parallel",
-                "lineStyle": chart['line_style'],
+                "lineStyle": chart["line_style"],
                 "name": name,
                 "data": data,
             }
