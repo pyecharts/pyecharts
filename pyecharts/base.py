@@ -82,13 +82,15 @@ class Base(object):
         self.event_handlers[event_name] = handler
 
     def print_echarts_options(self):
-        """ 打印输出图形所有配置项
+        """
+        打印输出图形所有配置项
         """
         snippet = TRANSLATOR.translate(self.options)
         print(snippet.as_snippet())
 
     def show_config(self):
-        """ 打印输出图形所有配置项
+        """
+        打印输出图形所有配置项
         """
         deprecated_tpl = 'The {} is deprecated, please use {} instead!'
         warnings.warn(
@@ -98,15 +100,16 @@ class Base(object):
         self.print_echarts_options()
 
     def render_embed(self):
-        """ 渲染图表的所有配置项，为 web pages 服务，不过需先提供
-        所需要的js 依赖文件
+        """
+        渲染图表的所有配置项，为 web pages 服务，不过需先提供所需要的js 依赖文件
         """
         env = engine.create_default_environment(constants.DEFAULT_HTML)
         html = env.render_container_and_echarts_code(self)
         return Markup(html)
 
     def get_js_dependencies(self):
-        """ 声明所有的 js 文件路径
+        """
+        声明所有的 js 文件路径
         """
         return CURRENT_CONFIG.produce_html_script_list(self._js_dependencies)
 
@@ -130,7 +133,8 @@ class Base(object):
 
     @staticmethod
     def cast(seq):
-        """ 转换数据序列，将带字典和元组类型的序列转换为 k_lst,v_lst 两个列表
+        """
+        转换数据序列，将带字典和元组类型的序列转换为 k_lst,v_lst 两个列表
 
         元组列表
             [(A1, B1), (A2, B2), ...] -->
@@ -174,7 +178,9 @@ class Base(object):
         return get_all_options(**kwargs)
 
     def _repr_html_(self):
-        """ 渲染配置项并将图形显示在 notebook 中
+        """
+        渲染配置项并将图形显示在 notebook 中
+        
         chart/page => charts
         chart.js_dependencies => require_config => config_items, libraries
         :return A unicode string.

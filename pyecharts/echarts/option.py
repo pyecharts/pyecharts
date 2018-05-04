@@ -28,7 +28,8 @@ def label(
     label_emphasis_textsize=12,
     **kwargs
 ):
-    """ 图形上的文本标签，可用于说明图形的一些数据信息，比如值，名称等。
+    """
+    图形上的文本标签，可用于说明图形的一些数据信息，比如值，名称等。
 
     :param type:
         图形类型
@@ -119,7 +120,8 @@ def line_style(
     line_color=None,
     **kwargs
 ):
-    """ 带线图形的线的风格选项
+    """
+    带线图形的线的风格选项
 
     :param type:
         图形类型
@@ -253,7 +255,8 @@ def xy_axis(
     is_splitline_show=True,
     **kwargs
 ):
-    """ 直角坐标系中的 x、y 轴(Line、Bar、Scatter、EffectScatter、Kline)。
+    """
+    直角坐标系中的 x、y 轴(Line、Bar、Scatter、EffectScatter、Kline)。
 
     :param type:
         图形类型。
@@ -439,7 +442,8 @@ def _mark(
     _is_markline=False,
     **kwargs
 ):
-    """ 图形标记组件，用于标记指定的特殊数据，有标记线和标记点两种
+    """
+    图形标记组件，用于标记指定的特殊数据，有标记线和标记点两种
 
     :param data:
         标记点
@@ -558,7 +562,8 @@ def _mark(
 
 @collectfuncs
 def mark_point(mark_point=None, **kwargs):
-    """ 标记点配置项
+    """
+    标记点配置项
 
     :param mark_point:
         默认有'min', 'max', 'average'可选。支持自定义标记点，具体使用如下
@@ -600,8 +605,9 @@ def legend(
     legend_text_color=None,
     **kwargs
 ):
-    """ 图例组件。图例组件展现了不同系列的标记(symbol)，颜色和名字。
-    可以通过点击图例控制哪些系列不显示。
+    """
+    图例组件。图例组件展现了不同系列的标记(symbol)，颜色和名字。可以通过点击图例
+    控制哪些系列不显示。
 
     :param is_legend_show:
         是否显示顶端图例，默认为 True
@@ -654,7 +660,8 @@ def visual_map(
     pieces=None,
     **kwargs
 ):
-    """ 是视觉映射组件，用于进行『视觉编码』，也就是将数据映射到视觉元素（视觉通道）
+    """
+    是视觉映射组件，用于进行『视觉编码』，也就是将数据映射到视觉元素（视觉通道）
 
     :param visual_type:
         制定组件映射方式，默认为'color‘，即通过颜色来映射数值。有'color', 'size'可选。
@@ -771,7 +778,8 @@ def symbol(type=None, symbol="", **kwargs):
 def effect(
     effect_brushtype="stroke", effect_scale=2.5, effect_period=4, **kwargs
 ):
-    """ 涟漪动画配置项
+    """
+    涟漪动画配置项
 
     :param effect_brushtype:
         波纹绘制方式，有'stroke', 'fill'可选。默认为'stroke'
@@ -799,7 +807,8 @@ def datazoom(
     datazoom_yaxis_index=None,
     **kwargs
 ):
-    """ dataZoom 组件 用于区域缩放，从而能自由关注细节的数据信息，或者概览数据整
+    """
+    dataZoom 组件 用于区域缩放，从而能自由关注细节的数据信息，或者概览数据整
     体，或者去除离群点的影响。
 
     :param is_datazoom_show:
@@ -855,7 +864,8 @@ def grid(
     grid_right=None,
     **kwargs
 ):
-    """ Grid 类组件配置项
+    """
+    Grid 类组件配置项
 
     :param grid_width:
         grid 组件的宽度。默认自适应。
@@ -900,7 +910,8 @@ def grid3D(
     is_grid3d_rotate=False,
     **kwargs
 ):
-    """ 3D 笛卡尔坐标系组配置项，适用于 3D 图形。
+    """
+    3D 笛卡尔坐标系组配置项，适用于 3D 图形。
 
     :param grid3d_width:
         三维笛卡尔坐标系组件在三维场景中的高度。默认为 100
@@ -941,7 +952,8 @@ def xaxis3D(
     xaxis3d_margin=8,
     **kwargs
 ):
-    """ 3D x 轴配置项
+    """
+    3D x 轴配置项
 
     :param xaxis3d_type:
         3D x 轴类型
@@ -986,7 +998,8 @@ def yaxis3D(
     yaxis3d_margin=8,
     **kwargs
 ):
-    """ 3D y 轴配置项
+    """
+    3D y 轴配置项
 
     :param yaxis3d_type:
         3D x 轴类型
@@ -1030,7 +1043,8 @@ def zaxis3D(
     zaxis3d_margin=8,
     **kwargs
 ):
-    """ 3D y 轴配置项
+    """
+    3D y 轴配置项
 
     :param zaxis3d_type:
         3D y 轴类型
@@ -1073,7 +1087,8 @@ def tooltip(
     tooltip_border_width=0,
     **kwargs
 ):
-    """ 提示框组件，用于移动或点击鼠标时弹出数据内容
+    """
+    提示框组件，用于移动或点击鼠标时弹出数据内容
 
     :param type:
         图形类型
@@ -1161,7 +1176,8 @@ def calendar(calendar_date_range=None, calendar_cell_size=None, **kwargs):
 
 
 def get_all_options(**kwargs):
-    """ 返回图形实例的所有配置项
+    """
+    返回图形实例的所有配置项
     """
     _funcs = {}
     for f in fs:

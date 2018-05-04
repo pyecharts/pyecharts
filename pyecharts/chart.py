@@ -334,7 +334,9 @@ class Chart(Base):
         zaxis3d_margin=None,
         **kwargs
     ):
-        """ `add()` 方法只是用于提供自动参数补全 """
+        """
+        `add()` 方法只是用于提供自动参数补全
+        """
         pass
 
     def _config_components(
@@ -344,7 +346,8 @@ class Chart(Base):
         is_toolbox_show=True,
         **kwargs
     ):
-        """ 图形组件配置项
+        """
+        图形组件配置项
 
         :param is_visualmap:
             指定是否使用 visualMap 组件

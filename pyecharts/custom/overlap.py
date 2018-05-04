@@ -59,10 +59,10 @@ class Overlap(Base):
             )
 
     def __custom(self, series):
-        """ Appends the data for the series of the chart type
+        """
+        Appends the data for the series of the chart type
 
-        :param series:
-            series data
+        :param series: series data
         """
         (
             _name,

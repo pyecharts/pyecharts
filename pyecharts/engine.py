@@ -27,10 +27,8 @@ myChart_{chart_id}.on("{event_name}", {handler_name});
 
 @environmentfunction
 def echarts_js_dependencies(env, *args):
-    """ Render script html nodes in external link mode.
-
-    :param env:
-    :param args:
+    """
+    Render script html nodes in external link mode.
     """
     current_config = env.pyecharts_config
     dependencies = utils.merge_js_dependencies(*args)
@@ -51,10 +49,8 @@ def echarts_js_dependencies(env, *args):
 
 @environmentfunction
 def echarts_js_dependencies_embed(env, *args):
-    """ Render script html nodes in embed mode,Only used for local files.
-
-    :param env:
-    :param args:
+    """
+    Render script html nodes in embed mode,Only used for local files.
     """
     current_config = env.pyecharts_config
     dependencies = utils.merge_js_dependencies(*args)
@@ -66,7 +62,8 @@ def echarts_js_dependencies_embed(env, *args):
 
 @environmentfunction
 def echarts_container(env, chart):
-    """ Render a div html element for a chart.
+    """
+    Render a div html element for a chart.
 
     :param env:
     :param chart: A pyecharts.base.Base object
@@ -82,10 +79,8 @@ def echarts_container(env, chart):
 
 
 def generate_js_content(*charts):
-    """ Generate the initial code fragment for one or some chart instances.
-
-    :param charts:
-    :return:
+    """
+    Generate the initial code fragment for one or some chart instances.
     """
     contents = []
 
@@ -119,20 +114,16 @@ def generate_js_content(*charts):
 
 @environmentfunction
 def echarts_js_content(env, *charts):
-    """ Render script html node for echarts initial code.
-
-    :param env:
-    :param chart:
+    """
+    Render script html node for echarts initial code.
     """
     return Markup(EMBED_SCRIPT_FORMATTER.format(generate_js_content(*charts)))
 
 
 @environmentfunction
 def echarts_js_content_wrap(env, *charts):
-    """ Render echarts initial code for a chart.
-
-    :param env:
-    :param charts:
+    """
+    Render echarts initial code for a chart.
     """
     return Markup(generate_js_content(*charts))
 
@@ -189,8 +180,6 @@ class EchartsEnvironment(BaseEnvironment):
     def render_container_and_echarts_code(self, chart):
         """
         Render <div> and <script> code fragment for a chart.
-        :param chart:
-        :return:
         """
         tpl_string = """
         {{ echarts_container(chart) }}

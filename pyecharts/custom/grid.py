@@ -121,9 +121,7 @@ class Grid(Base):
     def __custom(self, series):
         """
 
-        :param series:
-            series data
-        :return:
+        :param series: series data
         """
         _series, _xaxis, _yaxis, _legend, _title = series
         for s in _series:

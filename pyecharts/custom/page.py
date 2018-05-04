@@ -20,9 +20,6 @@ class Page(list):
     def add(self, achart_or_charts):
         """
         Append chart(s) to the rendering page
-
-        :param achart_or_charts:
-        :return:
         """
         if isinstance(achart_or_charts, list):
             self.extend(achart_or_charts)
@@ -55,8 +52,6 @@ class Page(list):
     def render_embed(self):
         """
         Produce rendered charts in html for embedding purpose
-
-        :return:
         """
         return Markup('<br/> '.join([chart.render_embed() for chart in self]))
 
@@ -94,6 +89,7 @@ class Page(list):
     def from_charts(cls, *args):
         """
         A shortcut class method for building page object from charts.
+        
         :param args: page arguments
         :return: Page instance
         """
