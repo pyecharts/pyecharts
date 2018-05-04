@@ -1,7 +1,7 @@
 > 本指南按照 Django [官方教程](https://docs.djangoproject.com/en/1.11/intro/tutorial01/)，通过完成一个 Django 小项目来说明如何在 Django 中使用 pyecharts。如果对 Django 还不太熟悉的开发者，可仔细阅读官方提供的最新文档。
 
-
 ## Step 0: 使用新的 virtualenv 环境
+
 建议开发者使用 1.11.4 版本的 Django
 
 ```shell
@@ -30,7 +30,6 @@ db.sqlite3      manage.py       myechartsite    myfirstvis
 
 ```python
 # myechartsite/settings.py
-...
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -40,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'myfirstvis'  # <---
 ]
-...
 ```
 
 
@@ -121,13 +119,12 @@ def line3d():
 `host` 是 echarts js 库的地址，默认提供的地址为 https://pyecharts.github.io/assets/js 当然，如果你愿意你也可以改变这个地址，先克隆 https://github.com/pyecharts/assets 然后将 `js` 文件夹挂载在你自己的服务器上即可。
 
 
-
 ## Step 3: 为项目提供自己的模板
 
 前面的步骤是按照 [tutorial part 1](https://docs.djangoproject.com/en/1.11/intro/tutorial01/)，接下来我们跳到 [tutorial part 3](https://docs.djangoproject.com/en/1.11/intro/tutorial03/)
 
 
-Linux/macos 系统
+Linux/MacOS 系统
 ```shell
 $ mkdir templates/myfirstvis -p
 ```

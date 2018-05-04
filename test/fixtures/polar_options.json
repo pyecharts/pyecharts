@@ -31,7 +31,7 @@
         "startAngle": 90, 
         "type": "category"
     }, 
-    "backgroundColor": "#fff", 
+    "backgroundColor": null, 
     "color": [
         "#c23531", 
         "#2f4554", 
@@ -69,7 +69,7 @@
             "selectedMode": "multiple", 
             "show": true, 
             "textStyle": {
-                "color": "#333", 
+                "color": null, 
                 "fontSize": 12
             }, 
             "top": "top"
@@ -211,7 +211,7 @@
                     "position": null, 
                     "show": true, 
                     "textStyle": {
-                        "color": "#fff", 
+                        "color": null, 
                         "fontSize": 12
                     }
                 }, 
@@ -219,7 +219,7 @@
                     "position": "top", 
                     "show": false, 
                     "textStyle": {
-                        "color": "#000", 
+                        "color": null, 
                         "fontSize": 12
                     }
                 }
@@ -236,12 +236,12 @@
             "left": "auto", 
             "subtext": "", 
             "subtextStyle": {
-                "color": "#aaa", 
+                "color": null, 
                 "fontSize": 12
             }, 
             "text": "\u6781\u5750\u6807\u7cfb-\u6563\u70b9\u56fe\u793a\u4f8b", 
             "textStyle": {
-                "color": "#000", 
+                "color": null, 
                 "fontSize": 18
             }, 
             "top": "auto"
@@ -274,7 +274,7 @@
         "borderWidth": 0, 
         "formatter": null, 
         "textStyle": {
-            "color": "#fff", 
+            "color": null,
             "fontSize": 14
         }, 
         "trigger": "item", 
