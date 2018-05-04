@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 import sys
 import operator
 
-__all__ = ['LazyObject']
+__all__ = ["LazyObject"]
 
 PY2 = sys.version_info[0] == 2
 
@@ -25,7 +25,7 @@ class LazyObject(object):
     _wrapped = None
 
     def __init__(self, func):
-        self.__dict__['_setupfunc'] = func
+        self.__dict__["_setupfunc"] = func
         self._wrapped = EMPTY
 
     def _setup(self):
@@ -34,8 +34,8 @@ class LazyObject(object):
     __getattr__ = proxy_method(getattr)
 
     def __setattr__(self, key, value):
-        if key == '_wrapped':
-            self.__dict__['_wrapped'] = value
+        if key == "_wrapped":
+            self.__dict__["_wrapped"] = value
         else:
             if self._wrapped is EMPTY:
                 self._setup()
