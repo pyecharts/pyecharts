@@ -20,11 +20,11 @@ def label(
     is_label_show=False,
     is_label_emphasis=True,
     label_pos=None,
-    label_text_color="#000",
+    label_text_color=None,
     label_text_size=12,
     label_formatter=None,
     label_emphasis_pos=None,
-    label_emphasis_textcolor='#fff',
+    label_emphasis_textcolor=None,
     label_emphasis_textsize=12,
     **kwargs
 ):
@@ -224,7 +224,7 @@ def xy_axis(
     xaxis_force_interval=None,
     xaxis_pos=None,
     xaxis_label_textsize=12,
-    xaxis_label_textcolor="#000",
+    xaxis_label_textcolor=None,
     xaxis_formatter=None,
     yaxis_margin=8,
     yaxis_name_size=14,
@@ -239,7 +239,7 @@ def xy_axis(
     yaxis_force_interval=None,
     yaxis_pos=None,
     yaxis_label_textsize=12,
-    yaxis_label_textcolor="#000",
+    yaxis_label_textcolor=None,
     yaxis_formatter="",
     is_convert=False,
     is_xaxis_inverse=False,
@@ -597,7 +597,7 @@ def legend(
     legend_top='top',
     legend_selectedmode='multiple',
     legend_text_size=12,
-    legend_text_color='#333',
+    legend_text_color=None,
     **kwargs
 ):
     """ 图例组件。图例组件展现了不同系列的标记(symbol)，颜色和名字。
@@ -1066,7 +1066,7 @@ def tooltip(
     tooltip_tragger_on="mousemove|click",
     tooltip_axispointer_type="line",
     tooltip_formatter=None,
-    tooltip_text_color="#fff",
+    tooltip_text_color=None,
     tooltip_font_size=14,
     tooltip_background_color="rgba(50,50,50,0.7)",
     tooltip_border_color="#333",

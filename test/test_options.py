@@ -4,11 +4,14 @@ from __future__ import unicode_literals
 
 import json
 
-from pyecharts import Polar, Kline, Bar, Scatter
+from pyecharts import Polar, Kline, Bar, Scatter, Line3D, Geo
+from pyecharts_javascripthon.api import DefaultJsonEncoder
+
 from nose.tools import eq_
 from mock import patch
-from pyecharts_javascripthon.api import DefaultJsonEncoder
+
 from test.utils import get_fixture_content
+from test.constants import RANGE_COLOR
 
 
 @patch('random.randint')
@@ -135,5 +138,67 @@ def test_scatter_option(patched):
         scatter.options, sort_keys=True, indent=4, cls=DefaultJsonEncoder
     )
     expected = get_fixture_content('scatter_options.json')
+    for a, b in zip(actual_options.split('\n'), expected.split('\n')):
+        eq_(a.strip(), b.strip())
+
+
+def create_line3d_data():
+    for t in range(0, 1):
+        x = t
+        y = t
+        z = t
+        yield [x, y, z]
+
+
+@patch('random.randint')
+def test_line3d_default(patched):
+    patched.return_value = "1"
+    _data = list(create_line3d_data())
+    line3d = Line3D("3D 折线图示例", width=1200, height=600)
+    line3d.add(
+        "",
+        _data,
+        is_visualmap=True,
+        visual_range_color=RANGE_COLOR,
+        visual_range=[0, 30],
+        grid3d_rotate_sensitivity=5,
+    )
+    actual_options = json.dumps(
+        line3d.options, sort_keys=True, indent=4, cls=DefaultJsonEncoder
+    )
+    expected = get_fixture_content('line3d_options.json')
+    for a, b in zip(actual_options.split('\n'), expected.split('\n')):
+        eq_(a.strip(), b.strip())
+
+
+@patch('random.randint')
+def test_geo_china_scatter(patched):
+    patched.return_value = "1"
+    cities = [
+        ("鄂尔多斯", 12),
+        ("招远", 12),
+        ("舟山", 12),
+        ("齐齐哈尔", 14),
+        ("盐城", 15),
+    ]
+    geo = Geo("全国主要城市空气质量", "data from pm2.5")
+    attr, value = geo.cast(cities)
+    geo.add(
+        "",
+        attr,
+        value,
+        visual_range=[0, 200],
+        visual_text_color="#fff",
+        is_legend_show=False,
+        symbol_size=15,
+        is_visualmap=True,
+        tooltip_formatter='{b}',
+        label_emphasis_textsize=15,
+        label_emphasis_pos='right',
+    )
+    actual_options = json.dumps(
+        geo.options, sort_keys=True, indent=4, cls=DefaultJsonEncoder
+    )
+    expected = get_fixture_content('geo_options.json')
     for a, b in zip(actual_options.split('\n'), expected.split('\n')):
         eq_(a.strip(), b.strip())
