@@ -63,37 +63,37 @@ class Grid(Base):
                 grid_right,
             )
             if _grid:
-                for _ in range(len(self._option.get('series'))):
-                    self._option.get('grid').append(_grid)
+                for _ in range(len(self._option.get("series"))):
+                    self._option.get("grid").append(_grid)
         else:
             _series = (
-                chart.options.get('series'),
-                chart.options.get('xAxis', None),
-                chart.options.get('yAxis', None),
-                chart.options.get('legend')[0],
-                chart.options.get('title')[0],
+                chart.options.get("series"),
+                chart.options.get("xAxis", None),
+                chart.options.get("yAxis", None),
+                chart.options.get("legend")[0],
+                chart.options.get("title")[0],
             )
             (
                 _index, _index_once, _xaxis, _yaxis, _legend, _title
             ) = self.__custom(
                 _series
             )
-            self._option.get('legend').append(_legend)
-            self._option.get('title').append(_title)
+            self._option.get("legend").append(_legend)
+            self._option.get("title").append(_title)
 
             if _xaxis and _yaxis is not None:
                 for _x in _xaxis:
-                    _x['gridIndex'] = _index - 1
-                    self._option.get('xAxis').append(_x)
+                    _x["gridIndex"] = _index - 1
+                    self._option.get("xAxis").append(_x)
                 for _y in _yaxis:
-                    _y['gridIndex'] = _index - 1
-                    self._option.get('yAxis').append(_y)
+                    _y["gridIndex"] = _index - 1
+                    self._option.get("yAxis").append(_y)
 
                 # series id 是每个图实例的唯一标识
-                _flag = self._option.get('series')[0].get('seriesId')
+                _flag = self._option.get("series")[0].get("seriesId")
                 _series_index = 0
-                for s in self._option.get('series'):
-                    if _flag == s.get('seriesId'):
+                for s in self._option.get("series"):
+                    if _flag == s.get("seriesId"):
                         s.update(
                             xAxisIndex=_series_index, yAxisIndex=_series_index
                         )
@@ -102,7 +102,7 @@ class Grid(Base):
                         s.update(
                             xAxisIndex=_series_index, yAxisIndex=_series_index
                         )
-                    _flag = s.get('seriesId')
+                    _flag = s.get("seriesId")
 
             _grid = grid(
                 grid_width,
@@ -113,7 +113,7 @@ class Grid(Base):
                 grid_right,
             )
             for _ in range(_index_once):
-                self._option.get('grid').append(_grid)
+                self._option.get("grid").append(_grid)
             self._js_dependencies = merge_js_dependencies(
                 self._js_dependencies, chart.js_dependencies
             )
@@ -121,15 +121,13 @@ class Grid(Base):
     def __custom(self, series):
         """
 
-        :param series:
-            series data
-        :return:
+        :param series: series data
         """
         _series, _xaxis, _yaxis, _legend, _title = series
         for s in _series:
-            self._option.get('series').append(s)
+            self._option.get("series").append(s)
         return (
-            len(self._option.get('series')),
+            len(self._option.get("series")),
             len(_series),
             _xaxis,
             _yaxis,

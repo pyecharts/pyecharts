@@ -10,7 +10,7 @@ style = Style(
     title_pos="center",
     width=1200,
     height=600,
-    background_color='#404a59',
+    background_color="#404a59",
 )
 
 cities = [
@@ -219,9 +219,9 @@ def test_geo_china_scatter():
         is_legend_show=False,
         symbol_size=15,
         is_visualmap=True,
-        tooltip_formatter='{b}',
+        tooltip_formatter="{b}",
         label_emphasis_textsize=15,
-        label_emphasis_pos='right',
+        label_emphasis_pos="right",
     )
     html_content = geo._repr_html_()
     assert '"type": "scatter"' in html_content
@@ -239,7 +239,7 @@ def test_geo_china_heatmap():
         type="heatmap",
         is_visualmap=True,
         visual_range=[0, 300],
-        visual_text_color='#fff',
+        visual_text_color="#fff",
     )
     assert '"type": "heatmap"' in geo._repr_html_()
 
@@ -280,14 +280,14 @@ def test_geo_with_noexist_city():
 
 
 def test_geo_guangdong_province():
-    data = [('汕头市', 50), ('汕尾市', 60), ('揭阳市', 35), ('阳江市', 44), ('肇庆市', 72)]
+    data = [("汕头市", 50), ("汕尾市", 60), ("揭阳市", 35), ("阳江市", 44), ("肇庆市", 72)]
     geo = Geo("广东城市空气质量", "data from pm2.5", **style.init_style)
     attr, value = geo.cast(data)
     geo.add(
         "",
         attr,
         value,
-        maptype='广东',
+        maptype="广东",
         type="effectScatter",
         is_random=True,
         effect_scale=5,
@@ -297,7 +297,7 @@ def test_geo_guangdong_province():
 
 
 def test_geo_shantou_city():
-    data = [('澄海区', 30), ('南澳县', 40), ('龙湖区', 50), ('金平区', 60)]
+    data = [("澄海区", 30), ("南澳县", 40), ("龙湖区", 50), ("金平区", 60)]
     geo = Geo("汕头市地图示例", **style.init_style)
     attr, value = geo.cast(data)
     geo.add(
@@ -306,10 +306,10 @@ def test_geo_shantou_city():
         value,
         maptype="汕头",
         is_visualmap=True,
-        tooltip_formatter='{b}',
+        tooltip_formatter="{b}",
         is_legend_show=False,
         label_emphasis_textsize=15,
-        label_emphasis_pos='right',
+        label_emphasis_pos="right",
     )
     geo.render()
 
@@ -365,12 +365,12 @@ def test_geo_visualmap_pieces():
 
 
 def test_full_example():
-    data = [('广州', 45), ('漳州', 35), ('A市', 43)]
+    data = [("广州", 45), ("漳州", 35), ("A市", 43)]
     geo = Geo("全国主要城市空气质量", "data from pm2.5", **style.init_style)
-    coordinate = geo.get_coordinate('广州')
+    coordinate = geo.get_coordinate("广州")
     assert 2 == len(coordinate)
     with assert_raises(ValueError):
-        geo.get_coordinate('A市', raise_exception=True)
+        geo.get_coordinate("A市", raise_exception=True)
     attr, value = geo.cast(data)
     with assert_raises(ValueError):
         geo.add(
@@ -388,7 +388,7 @@ def test_full_example():
             ],
             effect_scale=5,
         )
-    geo.add_coordinate('A市', 119.3, 26.08)
+    geo.add_coordinate("A市", 119.3, 26.08)
     geo.add(
         "",
         attr,

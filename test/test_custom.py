@@ -88,11 +88,11 @@ def test_page_grid_timeline_overlap():
     )
 
     timeline = Timeline(is_auto_play=True, timeline_bottom=0)
-    timeline.add(bar_1, '2012 年')
-    timeline.add(bar_2, '2013 年')
-    timeline.add(bar_3, '2014 年')
-    timeline.add(bar_4, '2015 年')
-    timeline.add(bar_5, '2016 年')
+    timeline.add(bar_1, "2012 年")
+    timeline.add(bar_2, "2013 年")
+    timeline.add(bar_3, "2014 年")
+    timeline.add(bar_4, "2015 年")
+    timeline.add(bar_5, "2016 年")
 
     # Overlap
     attr = ["{}月".format(i) for i in range(1, 13)]

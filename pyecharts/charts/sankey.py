@@ -46,9 +46,9 @@ class Sankey(Chart):
         :param kwargs:
         """
         chart = self._get_all_options(**kwargs)
-        self._option.get('legend')[0].get('data').append(name)
+        self._option.get("legend")[0].get("data").append(name)
 
-        self._option.get('series').append(
+        self._option.get("series").append(
             {
                 "type": "sankey",
                 "name": name,
@@ -57,8 +57,8 @@ class Sankey(Chart):
                 "links": links,
                 "nodeWidth": sankey_node_width,
                 "nodeGap": sankey_node_gap,
-                "label": chart['label'],
-                "lineStyle": chart['line_style'],
+                "label": chart["label"],
+                "lineStyle": chart["line_style"],
             }
         )
         self._config_components(**kwargs)

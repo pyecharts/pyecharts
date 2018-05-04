@@ -4,8 +4,12 @@ from __future__ import unicode_literals
 import codecs
 import os
 
-__all__ = ['get_resource_dir', 'write_utf8_html_file', 'to_css_length',
-           'merge_js_dependencies']
+__all__ = [
+    "get_resource_dir",
+    "write_utf8_html_file",
+    "to_css_length",
+    "merge_js_dependencies",
+]
 
 
 def get_resource_dir(*paths):
@@ -26,7 +30,7 @@ def write_utf8_html_file(file_name, html_content):
     :param html_content:
     :return:
     """
-    with codecs.open(file_name, 'w+', encoding='utf-8') as f:
+    with codecs.open(file_name, "w+", encoding="utf-8") as f:
         f.write(html_content)
 
 
@@ -39,7 +43,7 @@ def to_css_length(x):
     :return:
     """
     if isinstance(x, (int, float)):
-        return '{}px'.format(x)
+        return "{}px".format(x)
 
     else:
         return x
@@ -50,10 +54,12 @@ def _flat(obj):
     :param obj:
     :return: Return a list
     """
-    if hasattr(obj, 'js_dependencies'):
+    if hasattr(obj, "js_dependencies"):
         return list(obj.js_dependencies)
+
     if isinstance(obj, (list, tuple, set)):
         return obj
+
     return obj,  # tuple
 
 
@@ -65,8 +71,8 @@ def merge_js_dependencies(*chart_or_name_list):
     :param chart_or_name_list:
     :return: A list containing dependency items.
     """
-    front_required_items = ['echarts']
-    front_optional_items = ['echartsgl']
+    front_required_items = ["echarts"]
+    front_optional_items = ["echartsgl"]
     dependencies = []
     fist_items = set()
 

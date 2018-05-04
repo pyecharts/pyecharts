@@ -27,10 +27,8 @@ myChart_{chart_id}.on("{event_name}", {handler_name});
 
 @environmentfunction
 def echarts_js_dependencies(env, *args):
-    """ Render script html nodes in external link mode.
-
-    :param env:
-    :param args:
+    """
+    Render script html nodes in external link mode.
     """
     current_config = env.pyecharts_config
     dependencies = utils.merge_js_dependencies(*args)
@@ -39,34 +37,33 @@ def echarts_js_dependencies(env, *args):
         contents = current_config.read_file_contents_from_local(dependencies)
 
         return Markup(
-            '\n'.join([EMBED_SCRIPT_FORMATTER.format(c) for c in contents])
+            "\n".join([EMBED_SCRIPT_FORMATTER.format(c) for c in contents])
         )
 
     else:
         js_links = current_config.generate_js_link(dependencies)
         return Markup(
-            '\n'.join([LINK_SCRIPT_FORMATTER.format(j) for j in js_links])
+            "\n".join([LINK_SCRIPT_FORMATTER.format(j) for j in js_links])
         )
 
 
 @environmentfunction
 def echarts_js_dependencies_embed(env, *args):
-    """ Render script html nodes in embed mode,Only used for local files.
-
-    :param env:
-    :param args:
+    """
+    Render script html nodes in embed mode,Only used for local files.
     """
     current_config = env.pyecharts_config
     dependencies = utils.merge_js_dependencies(*args)
     contents = current_config.read_file_contents_from_local(dependencies)
     return Markup(
-        '\n'.join([EMBED_SCRIPT_FORMATTER.format(c) for c in contents])
+        "\n".join([EMBED_SCRIPT_FORMATTER.format(c) for c in contents])
     )
 
 
 @environmentfunction
 def echarts_container(env, chart):
-    """ Render a div html element for a chart.
+    """
+    Render a div html element for a chart.
 
     :param env:
     :param chart: A pyecharts.base.Base object
@@ -82,10 +79,8 @@ def echarts_container(env, chart):
 
 
 def generate_js_content(*charts):
-    """ Generate the initial code fragment for one or some chart instances.
-
-    :param charts:
-    :return:
+    """
+    Generate the initial code fragment for one or some chart instances.
     """
     contents = []
 
@@ -113,26 +108,22 @@ def generate_js_content(*charts):
             js_content += CHART_EVENT_FORMATTER.format(**event_args)
 
         contents.append(js_content)
-    contents = '\n'.join(contents)
+    contents = "\n".join(contents)
     return contents
 
 
 @environmentfunction
 def echarts_js_content(env, *charts):
-    """ Render script html node for echarts initial code.
-
-    :param env:
-    :param chart:
+    """
+    Render script html node for echarts initial code.
     """
     return Markup(EMBED_SCRIPT_FORMATTER.format(generate_js_content(*charts)))
 
 
 @environmentfunction
 def echarts_js_content_wrap(env, *charts):
-    """ Render echarts initial code for a chart.
-
-    :param env:
-    :param charts:
+    """
+    Render echarts initial code for a chart.
     """
     return Markup(generate_js_content(*charts))
 
@@ -140,11 +131,11 @@ def echarts_js_content_wrap(env, *charts):
 # Public API,see document for more detail.
 
 ECHAERTS_TEMPLATE_FUNCTIONS = {
-    'echarts_js_dependencies': echarts_js_dependencies,
-    'echarts_js_dependencies_embed': echarts_js_dependencies_embed,
-    'echarts_container': echarts_container,
-    'echarts_js_content': echarts_js_content,
-    'echarts_js_content_wrap': echarts_js_content_wrap,
+    "echarts_js_dependencies": echarts_js_dependencies,
+    "echarts_js_dependencies_embed": echarts_js_dependencies_embed,
+    "echarts_container": echarts_container,
+    "echarts_js_content": echarts_js_content,
+    "echarts_js_content_wrap": echarts_js_content_wrap,
 }
 
 
@@ -154,10 +145,10 @@ class BaseEnvironment(Environment):
     """
 
     def __init__(self, *args, **kwargs):
-        self.pyecharts_config = kwargs.pop('pyecharts_config', None)
+        self.pyecharts_config = kwargs.pop("pyecharts_config", None)
         if self.pyecharts_config is None:
             raise TypeError(
-                'no pyecharts_config for this environment specified'
+                "no pyecharts_config for this environment specified"
             )
 
         super(BaseEnvironment, self).__init__(*args, **kwargs)
@@ -173,7 +164,7 @@ class EchartsEnvironment(BaseEnvironment):
 
     def __init__(self, pyecharts_config=None, *args, **kwargs):
         pyecharts_config = pyecharts_config or conf.PyEchartsConfig()
-        loader = kwargs.pop('loader', None)
+        loader = kwargs.pop("loader", None)
         if loader is None:
             loader = FileSystemLoader(pyecharts_config.echarts_template_dir)
         super(EchartsEnvironment, self).__init__(
@@ -189,8 +180,6 @@ class EchartsEnvironment(BaseEnvironment):
     def render_container_and_echarts_code(self, chart):
         """
         Render <div> and <script> code fragment for a chart.
-        :param chart:
-        :return:
         """
         tpl_string = """
         {{ echarts_container(chart) }}
@@ -202,9 +191,9 @@ class EchartsEnvironment(BaseEnvironment):
     def render_chart_to_file(
         self,
         chart,
-        object_name='chart',
-        path='render.html',
-        template_name='simple_chart.html',
+        object_name="chart",
+        path="render.html",
+        template_name="simple_chart.html",
         **kwargs
     ):
         """
@@ -229,7 +218,7 @@ class EchartsEnvironment(BaseEnvironment):
         :param context: A dictionary containing data.
         :return: A unicode string that will be displayed in notebook cell.
         """
-        tpl = self.get_template('notebook.html')
+        tpl = self.get_template("notebook.html")
         return tpl.render(**context)
 
 
@@ -271,7 +260,7 @@ def create_default_environment(file_type):
 
     :return: A new EchartsEnvironment object.
     """
-    default_template_dir = utils.get_resource_dir('templates')
+    default_template_dir = utils.get_resource_dir("templates")
     config = conf.CURRENT_CONFIG
     echarts_env = ENV_MANAGER.get_a_environment(
         file_type,
