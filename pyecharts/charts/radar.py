@@ -57,9 +57,9 @@ class Radar(Chart):
                         "color": radar_text_color, "fontSize": radar_text_size
                     }
                 },
-                "splitLine": chart['split_line'],
-                "splitArea": chart['split_area'],
-                "axisLine": chart['axis_line'],
+                "splitLine": chart["split_line"],
+                "splitArea": chart["split_area"],
+                "axisLine": chart["axis_line"],
             }
         )
 
@@ -77,20 +77,20 @@ class Radar(Chart):
             指定单图例颜色
         :param kwargs:
         """
-        kwargs.update(flag=True, type='radar')
+        kwargs.update(flag=True, type="radar")
         chart = self._get_all_options(**kwargs)
-        self._option.get('legend')[0].get('data').append(name)
+        self._option.get("legend")[0].get("data").append(name)
 
-        self._option.get('series').append(
+        self._option.get("series").append(
             {
                 "type": "radar",
                 "name": name,
                 "data": value,
-                "symbol": chart['symbol'],
-                "label": chart['label'],
+                "symbol": chart["symbol"],
+                "label": chart["label"],
                 "itemStyle": {"normal": {"color": item_color}},
-                "lineStyle": chart['line_style'],
-                "areaStyle": chart['area_style'],
+                "lineStyle": chart["line_style"],
+                "areaStyle": chart["area_style"],
             }
         )
         self._config_components(**kwargs)

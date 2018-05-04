@@ -33,21 +33,21 @@ class EffectScatter(Scatter):
         kwargs.update(type="scatter")
         chart = self._get_all_options(**kwargs)
 
-        xaxis, yaxis = chart['xy_axis']
+        xaxis, yaxis = chart["xy_axis"]
         self._option.update(xAxis=xaxis, yAxis=yaxis)
-        self._option.get('legend')[0].get('data').append(name)
+        self._option.get("legend")[0].get("data").append(name)
 
-        self._option.get('series').append(
+        self._option.get("series").append(
             {
                 "type": "effectScatter",
                 "name": name,
                 "showEffectOn": "render",
-                "rippleEffect": chart['effect'],
-                "symbol": chart['symbol'],
+                "rippleEffect": chart["effect"],
+                "symbol": chart["symbol"],
                 "symbolSize": symbol_size,
                 "data": [list(z) for z in zip(x_axis, y_axis)],
-                "label": chart['label'],
-                "seriesId": self._option.get('series_id'),
+                "label": chart["label"],
+                "seriesId": self._option.get("series_id"),
             }
         )
         self._config_components(**kwargs)

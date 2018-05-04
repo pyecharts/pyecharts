@@ -14,12 +14,12 @@ import pyecharts.constants as constants
 OFFICIAL_PLUGINS = ["jupyter_echarts_pypkg", "pyecharts_snapshot"]
 THIRD_PARTY_PLUGIN_PREFIX = "echarts_"
 
-JS_EXTENSION_REGISTRY = 'registry.json'
-REGISTRY_JS_FOLDER = 'JS_FOLDER'
-REGISTRY_FILE_MAP = 'FILE_MAP'
-REGISTRY_GITHUB_URL = 'GITHUB_URL'
-REGISTRY_JUPYTER_URL = 'JUPYTER_URL'
-REGISTRY_PINYIN_MAP = 'PINYIN_MAP'
+JS_EXTENSION_REGISTRY = "registry.json"
+REGISTRY_JS_FOLDER = "JS_FOLDER"
+REGISTRY_FILE_MAP = "FILE_MAP"
+REGISTRY_GITHUB_URL = "GITHUB_URL"
+REGISTRY_JUPYTER_URL = "JUPYTER_URL"
+REGISTRY_PINYIN_MAP = "PINYIN_MAP"
 
 
 class JsExtension(object):
@@ -46,8 +46,8 @@ class JsExtension(object):
     def read_js_library(self, pinyin):
         filename = self.get_js_library(pinyin)
         if filename:
-            abs_path = os.path.join(self.home, filename + '.js')
-            with codecs.open(abs_path, 'r', encoding='utf-8') as pf:
+            abs_path = os.path.join(self.home, filename + ".js")
+            with codecs.open(abs_path, "r", encoding="utf-8") as pf:
                 return pf.read()
 
         else:
@@ -58,7 +58,7 @@ class JsExtension(object):
         if filename:
             if jshost is None:
                 jshost = self.home
-            return '%s/%s.js' % (jshost, filename)
+            return "%s/%s.js" % (jshost, filename)
 
         else:
             return None
@@ -127,7 +127,7 @@ scan_plugins(
 
 
 def read_a_map_registry(registry_json):
-    with codecs.open(registry_json, 'r', 'utf-8') as f:
+    with codecs.open(registry_json, "r", "utf-8") as f:
         content = f.read()
         return json.loads(content)
 

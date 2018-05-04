@@ -24,7 +24,7 @@ def test_radar_default_schema():
         v2,
         label_color=["#4e79a7"],
         is_area_show=False,
-        legend_selectedmode='single',
+        legend_selectedmode="single",
     )
     radar.render()
 
@@ -109,25 +109,25 @@ c_schema = [
 
 def test_radar_user_define_schema_single():
     radar = Radar("雷达图示例")
-    radar.config(c_schema=c_schema, shape='circle')
+    radar.config(c_schema=c_schema, shape="circle")
     radar.add("北京", value_bj, item_color="#f9713c", symbol=None)
     radar.add(
         "上海",
         value_sh,
         item_color="#b3e4a1",
         symbol=None,
-        legend_selectedmode='single',
+        legend_selectedmode="single",
     )
     html_content = radar._repr_html_()
-    assert 'single' in html_content
-    assert 'multiple' not in html_content
+    assert "single" in html_content
+    assert "multiple" not in html_content
 
 
 def test_radar_user_define_schema_multiple():
     radar = Radar("雷达图示例")
-    radar.config(c_schema=c_schema, shape='circle')
+    radar.config(c_schema=c_schema, shape="circle")
     radar.add("北京", value_bj, item_color="#f9713c", symbol=None)
     radar.add("上海", value_sh, item_color="#b3e4a1", symbol=None)
     html_content = radar._repr_html_()
-    assert 'multiple' in html_content
-    assert 'single' not in html_content
+    assert "multiple" in html_content
+    assert "single" not in html_content

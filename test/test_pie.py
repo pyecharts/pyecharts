@@ -15,7 +15,7 @@ def test_pie_default():
 
 def test_pie_legend():
     v1 = [11, 12, 13, 10, 10, 10]
-    pie = Pie("饼图-圆环图示例", title_pos='center')
+    pie = Pie("饼图-圆环图示例", title_pos="center")
     pie.add(
         "",
         CLOTHES,
@@ -23,8 +23,8 @@ def test_pie_legend():
         radius=[40, 75],
         label_text_color=None,
         is_label_show=True,
-        legend_orient='vertical',
-        legend_pos='left',
+        legend_orient="vertical",
+        legend_pos="left",
     )
     pie.render()
 
@@ -32,7 +32,7 @@ def test_pie_legend():
 def test_pie_type_rose():
     v1 = [11, 12, 13, 10, 10, 10]
     v2 = [19, 21, 32, 20, 20, 33]
-    pie = Pie("饼图-玫瑰图示例", title_pos='center', width=900)
+    pie = Pie("饼图-玫瑰图示例", title_pos="center", width=900)
     pie.add(
         "商品A",
         CLOTHES,
@@ -40,7 +40,7 @@ def test_pie_type_rose():
         center=[25, 50],
         is_random=True,
         radius=[30, 75],
-        rosetype='radius',
+        rosetype="radius",
     )
     pie.add(
         "商品B",
@@ -49,7 +49,7 @@ def test_pie_type_rose():
         center=[75, 50],
         is_random=True,
         radius=[30, 75],
-        rosetype='area',
+        rosetype="area",
         is_legend_show=False,
         is_label_show=True,
     )
@@ -57,21 +57,21 @@ def test_pie_type_rose():
 
 
 def test_pie_type_radius():
-    pie = Pie("饼图示例", title_pos='center', width=1000, height=600)
+    pie = Pie("饼图示例", title_pos="center", width=1000, height=600)
     pie.add(
         "",
-        ['A', 'B', 'C', 'D', 'E', 'F'],
+        ["A", "B", "C", "D", "E", "F"],
         [335, 321, 234, 135, 251, 148],
         radius=[40, 55],
         is_label_show=True,
     )
     pie.add(
         "",
-        ['H', 'I', 'J'],
+        ["H", "I", "J"],
         [335, 679, 204],
         radius=[0, 30],
-        legend_orient='vertical',
-        legend_pos='left',
+        legend_orient="vertical",
+        legend_pos="left",
     )
     pie.render()
 
@@ -79,7 +79,7 @@ def test_pie_type_radius():
 def test_pie_multiple():
     import random
 
-    attr = ['A', 'B', 'C', 'D', 'E', 'F']
+    attr = ["A", "B", "C", "D", "E", "F"]
     pie = Pie("饼图示例", width=1000, height=600)
     pie.add(
         "",
@@ -95,7 +95,7 @@ def test_pie_multiple():
         [random.randint(20, 100) for _ in range(6)],
         radius=[0, 45],
         center=[25, 50],
-        rosetype='area',
+        rosetype="area",
     )
     pie.add(
         "",
@@ -111,13 +111,13 @@ def test_pie_multiple():
         [random.randint(20, 100) for _ in range(6)],
         radius=[0, 45],
         center=[65, 50],
-        rosetype='radius',
+        rosetype="radius",
     )
     pie.render()
 
 
 def test_pie_multiple_movie():
-    pie = Pie('各类电影中"好片"所占的比例', "数据来着豆瓣", title_pos='center')
+    pie = Pie('各类电影中"好片"所占的比例', "数据来着豆瓣", title_pos="center")
     style = Style()
     pie_style = style.add(
         label_pos="center", is_label_show=True, label_text_color=None

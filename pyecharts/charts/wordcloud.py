@@ -23,7 +23,7 @@ class WordCloud(Chart):
 
     def __init__(self, title="", subtitle="", **kwargs):
         super(WordCloud, self).__init__(title, subtitle, **kwargs)
-        self._js_dependencies.add('wordcloud')
+        self._js_dependencies.add("wordcloud")
 
     def add(self, *args, **kwargs):
         self.__add(*args, **kwargs)
@@ -80,7 +80,7 @@ class WordCloud(Chart):
         else:
             shape = "circle"
 
-        self._option.get('series').append(
+        self._option.get("series").append(
             {
                 "type": "wordCloud",
                 "name": name,

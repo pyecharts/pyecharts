@@ -10,9 +10,9 @@ class Bar3D(Chart):
     """
 
     def __init__(self, title="", subtitle="", **kwargs):
-        kwargs['renderer'] = constants.CANVAS_RENDERER
+        kwargs["renderer"] = constants.CANVAS_RENDERER
         super(Bar3D, self).__init__(title, subtitle, **kwargs)
-        self._js_dependencies.add('echartsgl')
+        self._js_dependencies.add("echartsgl")
 
     def add(self, *args, **kwargs):
         self.__add(*args, **kwargs)
@@ -24,7 +24,7 @@ class Bar3D(Chart):
         y_axis,
         data,
         grid3d_opacity=1,
-        grid3d_shading='color',
+        grid3d_shading="color",
         **kwargs
     ):
         """
@@ -52,28 +52,28 @@ class Bar3D(Chart):
         :param kwargs:
         """
         kwargs.update(
-            xaxis3d_type='category',
-            yaxis3d_type='category',
-            zaxis3d_type='value',
+            xaxis3d_type="category",
+            yaxis3d_type="category",
+            zaxis3d_type="value",
         )
         chart = self._get_all_options(**kwargs)
 
-        self._option.get('legend')[0].get('data').append(name)
+        self._option.get("legend")[0].get("data").append(name)
         self._option.update(
-            xAxis3D=chart['xaxis3D'],
-            yAxis3D=chart['yaxis3D'],
-            zAxis3D=chart['zaxis3D'],
-            grid3D=chart['grid3D'],
+            xAxis3D=chart["xaxis3D"],
+            yAxis3D=chart["yaxis3D"],
+            zAxis3D=chart["zaxis3D"],
+            grid3D=chart["grid3D"],
         )
-        self._option.get('xAxis3D').update(data=x_axis)
-        self._option.get('yAxis3D').update(data=y_axis)
+        self._option.get("xAxis3D").update(data=x_axis)
+        self._option.get("yAxis3D").update(data=y_axis)
 
-        self._option.get('series').append(
+        self._option.get("series").append(
             {
                 "type": "bar3D",
                 "name": name,
                 "data": data,
-                "label": chart['label'],
+                "label": chart["label"],
                 "shading": grid3d_shading,
                 "itemStyle": {"opacity": grid3d_opacity},
             }
