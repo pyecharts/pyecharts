@@ -1,12 +1,12 @@
 > 开发者篇：本文档介绍了关于 pyecharts 开发的一些情况。
 
-## 开始研发 pyecharts
+## 准备工作
 
-请用下面命令
+请用下面命令部署好环境
 ```
-git clone https://github.com/pyecharts/pyecharts.git
-pip install -r requirements.txt
-python setup.py install
+$ git clone https://github.com/pyecharts/pyecharts.git
+$ pip install -r requirements.txt
+$ python setup.py install
 ```
 
 ## pyecharts 0.3.2+ 的扩展包
@@ -21,7 +21,7 @@ python setup.py install
 
 pyecharts-snapshot 能把 pyecharts 的 html 输出转换成图片，自然地，把它变成 pyecharts 的 Environment 扩展之后，就可以用同样的语句直接生成图片了。下面是个例子：
 
-```
+```python
 #coding=utf-8
 from pyecharts import Map
 
@@ -61,20 +61,19 @@ jupyter-echarts 是一个前端项目，如果你对前端这方面还不太熟�
 
 克隆远程仓库
 
-```
-git clone https://github.com/chfw/jupyter-echarts.git
+```bash
+$ git clone https://github.com/chfw/jupyter-echarts.git
 ```
 
 然后执行
 
-```
-npm install --save your_javascript_library
+```bash
+$ npm install --save your_javascript_library
 ```
 
 编辑 gulp.js 文件
 
 ```
-...
 FILES = [
     './node_modules/echarts/dist/echarts.min.js',
     './node_modules/echarts/map/js/china.js',
