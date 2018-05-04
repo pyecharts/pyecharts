@@ -1,12 +1,33 @@
-# [pyecharts](https://github.com/pyecharts/pyecharts) [![Build Status](https://travis-ci.org/pyecharts/pyecharts.svg?branch=master)](https://travis-ci.org/pyecharts/pyecharts) [![Build status](https://ci.appveyor.com/api/projects/status/81cbsfjpfryv1cl8?svg=true)](https://ci.appveyor.com/project/chenjiandongx/pyecharts) [![codecov](https://codecov.io/gh/pyecharts/pyecharts/branch/master/graph/badge.svg)](https://codecov.io/gh/pyecharts/pyecharts) [![PyPI version](https://badge.fury.io/py/pyecharts.svg)](https://badge.fury.io/py/pyecharts) [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
-
-> pyecharts is a library to generate charts using Echarts. It simply provides the interface of 28+ kinds of charts between Echarts and Python.
-
+<p align="center">
+    <img src="https://user-images.githubusercontent.com/19553554/39612358-499eb2ae-4f91-11e8-8f56-179c4f0bf2df.png" alt="pyecharts logo" width=200 height=200 />
+</p>
+<h1 align="center">pyecharts</h1>
+<p align="center">
+    <em>pyecharts is a library to generate charts using Echarts. It simply provides the interface of 28+ kinds of charts between Echarts and Python.</em>
+</p>
+<p align="center">
+    <a href="https://travis-ci.org/pyecharts/pyecharts">
+        <img src="https://travis-ci.org/pyecharts/pyecharts.svg?branch=master" alt="Travis Build Status">
+    </a>
+    <a href="https://ci.appveyor.com/project/chenjiandongx/pyecharts">
+        <img src="https://ci.appveyor.com/api/projects/status/81cbsfjpfryv1cl8?svg=true" alt="Appveyor Build Status">
+    </a>
+    <a href="https://codecov.io/gh/pyecharts/pyecharts">
+        <img src="https://codecov.io/gh/pyecharts/pyecharts/branch/master/graph/badge.svg" alt="Codecov">
+    </a>
+    <a href="https://badge.fury.io/py/pyecharts">
+        <img src="https://badge.fury.io/py/pyecharts.svg" alt="Package version">
+    </a>
+    <a href="https://opensource.org/licenses/MIT">
+        <img src="https://img.shields.io/badge/License-MIT-green.svg" alt="LICENSE">
+    </a>
+</p>
 
 ## Introduction
 [Echarts](https://github.com/ecomfe/echarts) is an open source library from Baidu for data visualization in javascript. It has awesome demo pages so I started to look out for an interface library so that I could use it in Python. I ended up with [echarts-python](https://github.com/yufeiminds/echarts-python) on github but it lacks of documentation and was not updated for a while. Just like many other Python projects, I started my own project, pyecharts, referencing echarts-python and another library [pygal](https://github.com/Kozea/pygal).
 
 ## Installation
+
 ### Python Compatibility
 
 pyecharts works on Python2.7 and Python3.4+.
@@ -21,12 +42,12 @@ from __future__ import unicode_literals
 ### pyecharts
 
 You can install it via pip
-```
+```shell
 $ pip install pyecharts
 ```
 
 or clone it and install it
-```
+```shell
 $ git clone https://github.com/pyecharts/pyecharts.git
 $ cd pyecharts
 $ pip install -r requirements.txt
@@ -35,7 +56,7 @@ $ python setup.py install
 
 Please note: since version 0.3.2, **NO LONGER** pyecharts comes with any map files. Please read next section for more informations.
 
-### map extensions
+### Map extensions
 
 Here is a list of map extensions from pyecharts dev team:
 
@@ -49,7 +70,7 @@ Here is a list of map extensions from pyecharts dev team:
 
 In order to install them, you can try one or all of them below:
 
-```
+```shell
 $ pip install echarts-countries-pypkg
 $ pip install echarts-china-provinces-pypkg
 $ pip install echarts-china-cities-pypkg
@@ -76,7 +97,7 @@ bar.render()
 
 It will create a file named *render.html* in the root directory, open file with your borwser.
 
-![usage-0](https://user-images.githubusercontent.com/19553554/35388262-078a4afc-020e-11e8-8acc-cc7bc8a4e8a6.gif)
+![](https://user-images.githubusercontent.com/19553554/35388262-078a4afc-020e-11e8-8acc-cc7bc8a4e8a6.gif)
 
 ### Export as Images or Pdf
 
@@ -103,7 +124,7 @@ All chart classes in pyecharts implement the `_repr_html_` interface about [IPyt
 
 In the case of online jshost mode, you can also download as some file formats (ipynb/py/html/pdf) and run without jupyter notebook enviromnment.
 
-![pandas_numpy](https://user-images.githubusercontent.com/19553554/35104252-3e36cee2-fca3-11e7-8e43-09bbe8dbbd1e.png)
+![](https://user-images.githubusercontent.com/19553554/35104252-3e36cee2-fca3-11e7-8e43-09bbe8dbbd1e.png)
 
 ### Integrate With Web Framework
 
@@ -111,7 +132,7 @@ With the help of pyecharts API, it is easy to integrate pyecharts to your web pr
 
 Demo
 
-![flask-0](https://user-images.githubusercontent.com/19553554/35081158-3faa7c34-fc4d-11e7-80c9-2de79371374f.gif)
+![](https://user-images.githubusercontent.com/19553554/35081158-3faa7c34-fc4d-11e7-80c9-2de79371374f.gif)
 
 ## Advanced Topics
 
@@ -140,8 +161,8 @@ All examples is hosted on the repository [pyecharts-users-cases](https://github.
 
 You should install the libraries in the requirements.txt files.
 
-```
-pip install -r test\requirements.txt
+```shell
+$ pip install -r test\requirements.txt
 ```
 
 And run with the [nose](https://nose.readthedocs.io/en/latest/) commands.
@@ -152,7 +173,7 @@ $ make
 
 ### Quality Assurance
 
- [flake8](http://flake8.pycqa.org/en/latest/index.html) and [pylint](https://www.pylint.org/) are used to improve the quality of code.
+[flake8](http://flake8.pycqa.org/en/latest/index.html), [Codecov](https://codecov.io/) and [pylint](https://www.pylint.org/) are used to improve the quality of code.
 
 ### Continuous Integration
 

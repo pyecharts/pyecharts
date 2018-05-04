@@ -7,7 +7,7 @@ class Label(JsonSerializable):
         self,
         visibility=False,
         position='inside',
-        text_color='#000',
+        text_color=None,
         text_size=12,
         formatter=None,
         chart_type=None,

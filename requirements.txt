@@ -4,4 +4,3 @@ pillow
 lml>=0.0.2
 jupyter-echarts-pypkg>=0.1.1
 pyecharts-javascripthon
-

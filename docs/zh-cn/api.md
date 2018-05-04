@@ -16,7 +16,6 @@
 | 8 写入目标文件 | `write_utf8_html_file('my_demo_chart.html', html)` |      |
 
 
-
 ## pyecharts 配置项
 
 pyecharts 遵循 “先配置后使用” 的基本原则，所有的配置项将统一于类 `pyecharts.conf.PyEChartsConfig` 类中。
@@ -25,24 +24,32 @@ pyecharts 遵循 “先配置后使用” 的基本原则，所有的配置项�
 
 ```python
 import pyecharts
-pyecharts.configure(P1=V1, P2=V2,...)
+pyecharts.configure(
+    jshost=None,
+    echarts_template_dir=None,
+    force_js_embed=None,
+    output_image=None,
+    global_theme=None
+)
 ```
 
-### 配置列表
-
-**echarts_template_dir**
-
-模板文件目录，默认值：'.'（当前目录）。用于自定义模板文件，即 `render` 的 template_name 参数构成全部的路径。
-
-**jshost**
-
+* jshost
 js 文件仓库路径。可以设置本地或者远程地址。所有的远程地址必须以 `http://` 或者 `https://` 开头。  
 也可以使用 `pyecharts.online()` 函数设置此选项。  
 为了保持兼容性， jshost 并不是必须使用 '/' 等分隔符作为结尾。
 
-**force_js_embed**
+* echarts_template_dir
+模板文件目录，默认值：'.'（当前目录）。用于自定义模板文件，即 `render` 的 template_name 参数构成全部的路径。
 
+* force_js_embed
 是否强制采用内部嵌入方式渲染js文件标签， `echarts_js_dependencies`  模板函数受此影响，具体可参考该函数。
+
+* output_image
+指定输出图片类型，有 'svg', 'jpeg', 'png' 可选
+
+* global_theme
+指定全局主题，目前提供的主题有 `vintage`, `macarons`, `infographic`, `shine` 和 `roma`。
+
 
 ## 图表类
 
@@ -104,7 +111,9 @@ js 文件仓库路径。可以设置本地或者远程地址。所有的远程�
 
 添加 [事件处理函数](http://echarts.baidu.com/api.html#events)。
 
-请注意，事件处理函数是在浏览器里运行，但是要求你用 Python 写哦。
+* event_name：事件名称
+* handler：回调函数
+
 
 这是支持的所有事件
 
@@ -150,7 +159,7 @@ BRUSH_SELECTED = 'brushselected'
 
 ``` python
 def handler(params):
-    ...
+    pass
 ```
 
 此处 params 的结构与 echarts 的一模一样：
@@ -310,6 +319,15 @@ EChartsEnvironment 类继承自 `BaseEnvironment` 。并在此基础上改写了
 
 包含模板函数的字典。可用于 web 框架整合。
 
+### 引擎方法
+
+**create_default_environment(filet_ype)**
+
+* file_type: 输出文件类型，有 'html', 'svg', 'png', 'jpeg', 'gif'，'pdf' 可选
+
+为渲染创建一个默认配置环境
+
+
 ### 模板函数
 
 pyecharts 内置的引擎提供了一些模板函数，这些函数通常接收一个或多个的 `Chart` 或 `Page` 的参数，详细的调用形式见下表。
@@ -431,7 +449,6 @@ env = EchartsEnvironment(pyecharts_config=config)
 tpl = env.get_template('tpl_demo.html')
 html = tpl.render(bar=bar)
 write_utf8_html_file('my_tpl_demo2.html', html)
-
 ```
 
 tpl_demo.html 模板
