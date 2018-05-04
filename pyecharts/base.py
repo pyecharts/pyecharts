@@ -44,7 +44,7 @@ class Base(object):
         self.width, self.height = width, height
         self.renderer = renderer
         self._page_title = page_title
-        self._js_dependencies = {'echarts'}
+        self._js_dependencies = {"echarts"}
         self.event_handlers = {}
         self.theme = None
         self.use_theme(CURRENT_CONFIG.theme)
@@ -76,7 +76,8 @@ class Base(object):
                 self._js_dependencies.add(self.theme)
         else:
             raise exceptions.InvalidTheme(
-                '{0} is not found'.format(theme_name))
+                "{0} is not found".format(theme_name)
+            )
 
     def on(self, event_name, handler):
         self.event_handlers[event_name] = handler
@@ -92,9 +93,9 @@ class Base(object):
         """
         打印输出图形所有配置项
         """
-        deprecated_tpl = 'The {} is deprecated, please use {} instead!'
+        deprecated_tpl = "The {} is deprecated, please use {} instead!"
         warnings.warn(
-            deprecated_tpl.format('show_config', 'print_echarts_options'),
+            deprecated_tpl.format("show_config", "print_echarts_options"),
             DeprecationWarning,
         )
         self.print_echarts_options()
@@ -115,9 +116,9 @@ class Base(object):
 
     def render(
         self,
-        path='render.html',
-        template_name='simple_chart.html',
-        object_name='chart',
+        path="render.html",
+        template_name="simple_chart.html",
+        object_name="chart",
         **kwargs
     ):
         _, ext = os.path.splitext(path)
@@ -169,9 +170,9 @@ class Base(object):
 
     def render_notebook(self):
         warnings.warn(
-            'Implementation has been removed. ' +
-            'Please pass the chart instance directly to Jupyter.' +
-            'If you need more help, please read documentation'
+            "Implementation has been removed. "
+            + "Please pass the chart instance directly to Jupyter."
+            + "If you need more help, please read documentation"
         )
 
     def _get_all_options(self, **kwargs):
@@ -191,8 +192,8 @@ class Base(object):
         require_config = CURRENT_CONFIG.produce_require_configuration(
             self.js_dependencies
         )
-        config_items = require_config['config_items']
-        libraries = require_config['libraries']
+        config_items = require_config["config_items"]
+        libraries = require_config["libraries"]
         env = engine.create_default_environment(constants.DEFAULT_HTML)
         return env.render_chart_to_notebook(
             charts=(self,), config_items=config_items, libraries=libraries
@@ -202,7 +203,7 @@ class Base(object):
         content = self._render_as_image(constants.SVG)
         if content:
             # fix alignment problem in notebook
-            content = content.replace('position: absolute;', '')
+            content = content.replace("position: absolute;", "")
         return content
 
     def _repr_png_(self):
@@ -234,7 +235,7 @@ class Base(object):
             )
 
         env = engine.create_default_environment(file_type)
-        outfile = 'tmp.' + file_type
+        outfile = "tmp." + file_type
         content = env.render_chart_to_file(
             chart=self, path=outfile, verbose=False
         )

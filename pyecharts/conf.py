@@ -9,7 +9,7 @@ import pyecharts.constants as constants
 class PyEchartsConfig(object):
 
     def __init__(
-        self, echarts_template_dir='.', jshost=None, force_js_embed=False
+        self, echarts_template_dir=".", jshost=None, force_js_embed=False
     ):
         self.echarts_template_dir = echarts_template_dir
         self._jshost = remove_trailing_slashes(jshost)
@@ -98,7 +98,7 @@ class PyEchartsConfig(object):
     def produce_html_script_list(self, dependencies):
         __dependencies__ = _ensure_echarts_is_in_the_front(dependencies)
         script_list = [
-            '%s' % self.get_js_library(key) for key in __dependencies__
+            "%s" % self.get_js_library(key) for key in __dependencies__
         ]
         return script_list
 
@@ -107,7 +107,7 @@ def remove_trailing_slashes(jshost):
     """
     Delete the end separator character if exists.
     """
-    if jshost and jshost[-1] in ('/', '\\'):
+    if jshost and jshost[-1] in ("/", "\\"):
         return jshost[:-1]
 
     else:
@@ -186,8 +186,8 @@ def _ensure_echarts_is_in_the_front(dependencies):
     be first but dependencies is a set so has no sequence
     """
     if len(dependencies) > 1:
-        dependencies.remove('echarts')
-        dependencies = ['echarts'] + list(dependencies)
+        dependencies.remove("echarts")
+        dependencies = ["echarts"] + list(dependencies)
     elif len(dependencies) == 1:
         # make a new list
         dependencies = list(dependencies)

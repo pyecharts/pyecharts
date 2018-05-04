@@ -66,31 +66,31 @@ class Chart(Base):
             page_title=page_title,
         )
         self._colorlst = [
-            '#c23531',
-            '#2f4554',
-            '#61a0a8',
-            '#d48265',
-            '#749f83',
-            '#ca8622',
-            '#bda29a',
-            '#6e7074',
-            '#546570',
-            '#c4ccd3',
-            '#f05b72',
-            '#ef5b9c',
-            '#f47920',
-            '#905a3d',
-            '#fab27b',
-            '#2a5caa',
-            '#444693',
-            '#726930',
-            '#b2d235',
-            '#6d8346',
-            '#ac6767',
-            '#1d953f',
-            '#6950a1',
-            '#918597',
-            '#f6f5ec',
+            "#c23531",
+            "#2f4554",
+            "#61a0a8",
+            "#d48265",
+            "#749f83",
+            "#ca8622",
+            "#bda29a",
+            "#6e7074",
+            "#546570",
+            "#c4ccd3",
+            "#f05b72",
+            "#ef5b9c",
+            "#f47920",
+            "#905a3d",
+            "#fab27b",
+            "#2a5caa",
+            "#444693",
+            "#726930",
+            "#b2d235",
+            "#6d8346",
+            "#ac6767",
+            "#1d953f",
+            "#6950a1",
+            "#918597",
+            "#f6f5ec",
         ]
         self._option.update(
             title=[
@@ -122,7 +122,7 @@ class Chart(Base):
             tooltip={},
             series=[],
             legend=[{"data": []}],
-            backgroundColor=background_color
+            backgroundColor=background_color,
         )
 
     def add(
@@ -362,28 +362,28 @@ class Chart(Base):
         if self.theme == constants.LIGHT_THEME:
             kwargs.update(colorlst=self._colorlst)
         chart = self._get_all_options(**kwargs)
-        self._option.update(color=chart['color'])
+        self._option.update(color=chart["color"])
 
         # legend
-        self._option.get('legend')[0].update(chart['legend'])
+        self._option.get("legend")[0].update(chart["legend"])
 
         # tooltip
-        self._option.update(tooltip=chart['tooltip'])
+        self._option.update(tooltip=chart["tooltip"])
 
         # dataZoom，勿改动
-        if kwargs.get('is_datazoom_show', None) is True:
-            self._option.update(dataZoom=chart['datazoom'])
+        if kwargs.get("is_datazoom_show", None) is True:
+            self._option.update(dataZoom=chart["datazoom"])
 
         # visualMap
         if is_visualmap:
-            self._option.update(visualMap=chart['visual_map'])
+            self._option.update(visualMap=chart["visual_map"])
 
         # toolbox
         if is_more_utils:
-            self._option.get('toolbox').get('feature').update(
+            self._option.get("toolbox").get("feature").update(
                 magicType={
                     "show": True,
-                    "type": ['line', 'bar', 'stack', 'tiled'],
+                    "type": ["line", "bar", "stack", "tiled"],
                     "title": {
                         "line": "折线图",
                         "bar": "柱状图",
