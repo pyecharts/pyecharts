@@ -33,16 +33,16 @@ class Funnel(Chart):
             _name, _value = data
             _data.append({"name": _name, "value": _value})
         for a in attr:
-            self._option.get('legend')[0].get('data').append(a)
-        _dset = set(self._option.get('legend')[0].get('data'))
-        self._option.get('legend')[0].update(data=list(_dset))
+            self._option.get("legend")[0].get("data").append(a)
+        _dset = set(self._option.get("legend")[0].get("data"))
+        self._option.get("legend")[0].update(data=list(_dset))
 
-        self._option.get('series').append(
+        self._option.get("series").append(
             {
                 "type": "funnel",
                 "name": name,
                 "data": _data,
-                "label": chart['label'],
+                "label": chart["label"],
             }
         )
         self._config_components(**kwargs)

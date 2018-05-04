@@ -12,8 +12,8 @@ class Line(JsonSerializable):
         color=None,
         chart_type=None,
     ):
-        if color is None and chart_type == 'graph':
-            color = '#aaa'
+        if color is None and chart_type == "graph":
+            color = "#aaa"
         self.config = {
             "width": width,
             "opacity": opacity,

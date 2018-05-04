@@ -44,7 +44,7 @@ class Base(object):
         self.width, self.height = width, height
         self.renderer = renderer
         self._page_title = page_title
-        self._js_dependencies = {'echarts'}
+        self._js_dependencies = {"echarts"}
         self.event_handlers = {}
         self.theme = None
         self.use_theme(CURRENT_CONFIG.theme)
@@ -76,45 +76,49 @@ class Base(object):
                 self._js_dependencies.add(self.theme)
         else:
             raise exceptions.InvalidTheme(
-                '{0} is not found'.format(theme_name))
+                "{0} is not found".format(theme_name)
+            )
 
     def on(self, event_name, handler):
         self.event_handlers[event_name] = handler
 
     def print_echarts_options(self):
-        """ 打印输出图形所有配置项
+        """
+        打印输出图形所有配置项
         """
         snippet = TRANSLATOR.translate(self.options)
         print(snippet.as_snippet())
 
     def show_config(self):
-        """ 打印输出图形所有配置项
         """
-        deprecated_tpl = 'The {} is deprecated, please use {} instead!'
+        打印输出图形所有配置项
+        """
+        deprecated_tpl = "The {} is deprecated, please use {} instead!"
         warnings.warn(
-            deprecated_tpl.format('show_config', 'print_echarts_options'),
+            deprecated_tpl.format("show_config", "print_echarts_options"),
             DeprecationWarning,
         )
         self.print_echarts_options()
 
     def render_embed(self):
-        """ 渲染图表的所有配置项，为 web pages 服务，不过需先提供
-        所需要的js 依赖文件
+        """
+        渲染图表的所有配置项，为 web pages 服务，不过需先提供所需要的js 依赖文件
         """
         env = engine.create_default_environment(constants.DEFAULT_HTML)
         html = env.render_container_and_echarts_code(self)
         return Markup(html)
 
     def get_js_dependencies(self):
-        """ 声明所有的 js 文件路径
+        """
+        声明所有的 js 文件路径
         """
         return CURRENT_CONFIG.produce_html_script_list(self._js_dependencies)
 
     def render(
         self,
-        path='render.html',
-        template_name='simple_chart.html',
-        object_name='chart',
+        path="render.html",
+        template_name="simple_chart.html",
+        object_name="chart",
         **kwargs
     ):
         _, ext = os.path.splitext(path)
@@ -130,7 +134,8 @@ class Base(object):
 
     @staticmethod
     def cast(seq):
-        """ 转换数据序列，将带字典和元组类型的序列转换为 k_lst,v_lst 两个列表
+        """
+        转换数据序列，将带字典和元组类型的序列转换为 k_lst,v_lst 两个列表
 
         元组列表
             [(A1, B1), (A2, B2), ...] -->
@@ -165,16 +170,18 @@ class Base(object):
 
     def render_notebook(self):
         warnings.warn(
-            'Implementation has been removed. ' +
-            'Please pass the chart instance directly to Jupyter.' +
-            'If you need more help, please read documentation'
+            "Implementation has been removed. "
+            + "Please pass the chart instance directly to Jupyter."
+            + "If you need more help, please read documentation"
         )
 
     def _get_all_options(self, **kwargs):
         return get_all_options(**kwargs)
 
     def _repr_html_(self):
-        """ 渲染配置项并将图形显示在 notebook 中
+        """
+        渲染配置项并将图形显示在 notebook 中
+
         chart/page => charts
         chart.js_dependencies => require_config => config_items, libraries
         :return A unicode string.
@@ -185,8 +192,8 @@ class Base(object):
         require_config = CURRENT_CONFIG.produce_require_configuration(
             self.js_dependencies
         )
-        config_items = require_config['config_items']
-        libraries = require_config['libraries']
+        config_items = require_config["config_items"]
+        libraries = require_config["libraries"]
         env = engine.create_default_environment(constants.DEFAULT_HTML)
         return env.render_chart_to_notebook(
             charts=(self,), config_items=config_items, libraries=libraries
@@ -196,7 +203,7 @@ class Base(object):
         content = self._render_as_image(constants.SVG)
         if content:
             # fix alignment problem in notebook
-            content = content.replace('position: absolute;', '')
+            content = content.replace("position: absolute;", "")
         return content
 
     def _repr_png_(self):
@@ -228,7 +235,7 @@ class Base(object):
             )
 
         env = engine.create_default_environment(file_type)
-        outfile = 'tmp.' + file_type
+        outfile = "tmp." + file_type
         content = env.render_chart_to_file(
             chart=self, path=outfile, verbose=False
         )

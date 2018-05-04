@@ -30,7 +30,7 @@ data = [
 
 def test_treemap_default():
     treemap = TreeMap("树图-默认示例", width=1200, height=600)
-    treemap.add("演示数据", data, is_label_show=True, label_pos='inside')
+    treemap.add("演示数据", data, is_label_show=True, label_pos="inside")
     treemap.render()
 
 
@@ -40,7 +40,7 @@ def test_treemap_drilldown():
         "演示数据",
         data,
         is_label_show=True,
-        label_pos='inside',
+        label_pos="inside",
         treemap_left_depth=1,
     )
     treemap.render()
@@ -53,7 +53,7 @@ def test_treemap_offcical_data():
     import codecs
 
     test_fixture = os.path.join("fixtures", "treemap.json")
-    with codecs.open(test_fixture, "r", encoding='utf-8') as f:
+    with codecs.open(test_fixture, "r", encoding="utf-8") as f:
         data = json.load(f)
-    treemap.add("演示数据", data, is_label_show=True, label_pos='inside')
+    treemap.add("演示数据", data, is_label_show=True, label_pos="inside")
     treemap.render()

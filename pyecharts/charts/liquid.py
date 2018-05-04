@@ -12,7 +12,7 @@ class Liquid(Chart):
 
     def __init__(self, title="", subtitle="", **kwargs):
         super(Liquid, self).__init__(title, subtitle, **kwargs)
-        self._js_dependencies.add('liquidfill')
+        self._js_dependencies.add("liquidfill")
 
     def add(self, *args, **kwargs):
         self.__add(*args, **kwargs)
@@ -21,7 +21,7 @@ class Liquid(Chart):
         self,
         name,
         data,
-        shape='circle',
+        shape="circle",
         liquid_color=None,
         is_liquid_animation=True,
         is_liquid_outline_show=True,
@@ -48,11 +48,11 @@ class Liquid(Chart):
         if not is_liquid_animation:
             _animation_dur, _animation_dur_update = 0, 0
 
-        _color = ['#294D99', '#156ACF', '#1598ED', '#45BDFF']
+        _color = ["#294D99", "#156ACF", "#1598ED", "#45BDFF"]
         if liquid_color:
             _color = liquid_color
 
-        self._option.get('series').append(
+        self._option.get("series").append(
             {
                 "type": "liquidFill",
                 "name": name,

@@ -15,9 +15,9 @@ def test_bar_stack():
     bar = Bar("柱状图数据堆叠示例")
     bar.add("商家A", CLOTHES, clothes_v1, is_stack=True)
     bar.add("商家B", CLOTHES, clothes_v2, is_stack=True)
-    bar.chart_id = 'id_chart_id'
+    bar.chart_id = "id_chart_id"
     html_content = bar._repr_html_()
-    assert 'id_chart_id' == bar.chart_id
+    assert "id_chart_id" == bar.chart_id
     assert "dataZoom" not in html_content
     assert "stack_" in html_content
 
@@ -58,7 +58,7 @@ def test_bar_waterfall():
     months_v2 = [1000, 800, 600, 500, 450, 400, 300]
     bar = Bar("瀑布图示例")
     bar.add(
-        "", months, months_v1, label_color=['rgba(0,0,0,0)'], is_stack=True
+        "", months, months_v1, label_color=["rgba(0,0,0,0)"], is_stack=True
     )
     bar.add(
         "月份",
@@ -66,7 +66,7 @@ def test_bar_waterfall():
         months_v2,
         is_label_show=True,
         is_stack=True,
-        label_pos='inside',
+        label_pos="inside",
     )
     bar.render()
 
@@ -91,7 +91,7 @@ def test_bar_datazoom_slider():
         days,
         days_v1,
         is_datazoom_show=True,
-        datazoom_type='slider',
+        datazoom_type="slider",
         datazoom_range=[10, 25],
     )
     html_content = bar._repr_html_()
@@ -109,7 +109,7 @@ def test_bar_datazoom_inside():
         days,
         days_v1,
         is_datazoom_show=True,
-        datazoom_type='inside',
+        datazoom_type="inside",
         datazoom_range=[10, 25],
     )
     html_content = bar._repr_html_()
@@ -127,7 +127,7 @@ def test_bar_datazoom_both():
         days,
         days_v1,
         is_datazoom_show=True,
-        datazoom_type='both',
+        datazoom_type="both",
         datazoom_range=[10, 25],
         is_toolbox_show=False,
     )

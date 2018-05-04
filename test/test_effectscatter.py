@@ -48,7 +48,7 @@ def test_effectscatter_multiple_symbol_type():
         [40],
         symbol_size=10,
         effect_scale=6.5,
-        effect_brushtype='fill',
+        effect_brushtype="fill",
         symbol="diamond",
     )
     es.add(

@@ -19,7 +19,7 @@ from test.utils import get_default_rendering_file_content
 TITLE = "柱状图数据堆叠示例"
 
 
-def create_a_bar(title, renderer='canvas'):
+def create_a_bar(title, renderer="canvas"):
     v1 = [5, 20, 36, 10, 75, 90]
     v2 = [10, 25, 8, 60, 20, 80]
     bar = Bar(title, renderer=renderer)
@@ -29,26 +29,26 @@ def create_a_bar(title, renderer='canvas'):
 
 
 def test_theme_option():
-    bar = create_a_bar(TITLE, renderer='svg')
-    bar.use_theme('dark')
+    bar = create_a_bar(TITLE, renderer="svg")
+    bar.use_theme("dark")
     html = bar.render_embed()
     assert "'dark'" in html
 
 
 @raises(exceptions.InvalidTheme)
 def test_invalid_theme_option():
-    bar = create_a_bar(TITLE, renderer='svg')
-    bar.use_theme('brilliant')
+    bar = create_a_bar(TITLE, renderer="svg")
+    bar.use_theme("brilliant")
 
 
 def test_svg_option():
-    bar = create_a_bar(TITLE, renderer='svg')
+    bar = create_a_bar(TITLE, renderer="svg")
     html = bar.render_embed()
     assert "{renderer: 'svg'}" in html
 
 
 def test_svg_option_in_note_book():
-    bar = create_a_bar(TITLE, renderer='svg')
+    bar = create_a_bar(TITLE, renderer="svg")
     html = bar._repr_html_()
     assert "{renderer: 'svg'}" in html
 
@@ -89,38 +89,38 @@ def test_jupyter_repr_svg():
     assert bar._repr_svg_() is None
 
 
-@patch('pyecharts.engine.create_default_environment')
-@patch('os.unlink')
+@patch("pyecharts.engine.create_default_environment")
+@patch("os.unlink")
 def test_render_as_svg(fake_unlink, fake_factory):
     fake_env = MagicMock(
         render_chart_to_file=MagicMock(return_value="fake svg")
     )
     fake_factory.return_value = fake_env
-    with jupyter_image('svg'):
-        bar = create_a_bar('test', renderer='svg')
+    with jupyter_image("svg"):
+        bar = create_a_bar("test", renderer="svg")
         svg_content = bar._repr_svg_()
         fake_unlink.assert_called()
-        eq_(svg_content, 'fake svg')
+        eq_(svg_content, "fake svg")
 
 
 @raises(exceptions.InvalidConfiguration)
 def test_render_as_svg_with_wrong_configuration():
-    with jupyter_image('svg'):
-        bar = create_a_bar('test')
+    with jupyter_image("svg"):
+        bar = create_a_bar("test")
         bar._repr_svg_()
 
 
 @raises(exceptions.InvalidConfiguration)
 def test_render_as_png_with_wrong_configuration():
-    with jupyter_image('png'):
-        bar = create_a_bar('test', renderer='svg')
+    with jupyter_image("png"):
+        bar = create_a_bar("test", renderer="svg")
         bar._repr_png_()
 
 
 def test_base_get_js_dependencies():
     bar = create_a_bar(TITLE)
     dependencies = bar.get_js_dependencies()
-    expected = ['echarts.min']
+    expected = ["echarts.min"]
     eq_(dependencies, expected)
 
 
@@ -134,8 +134,8 @@ def test_numpy_array():
 
 
 def test_pandas_dataframe():
-    title = 'bar chart'
-    index = pd.date_range('3/8/2017', periods=6, freq='M')
+    title = "bar chart"
+    index = pd.date_range("3/8/2017", periods=6, freq="M")
     df1 = pd.DataFrame(np.random.randn(6), index=index)
     df2 = pd.DataFrame(np.random.randn(6), index=index)
 
@@ -143,24 +143,24 @@ def test_pandas_dataframe():
     dtvalue2 = [i[0] for i in df2.values]
     _index = [i for i in df1.index.format()]
 
-    bar = Bar(title, 'Profit and loss situation')
-    bar.add('profit', _index, dtvalue1)
-    bar.add('loss', _index, dtvalue2)
+    bar = Bar(title, "Profit and loss situation")
+    bar.add("profit", _index, dtvalue1)
+    bar.add("loss", _index, dtvalue2)
     html = bar.render_embed()
     assert title in html
 
 
 def test_echarts_position_in_render_html():
     value = [20, 190, 253, 77, 65]
-    attr = ['汕头市', '汕尾市', '揭阳市', '阳江市', '肇庆市']
+    attr = ["汕头市", "汕尾市", "揭阳市", "阳江市", "肇庆市"]
     map = Map("广东地图示例", width=1200, height=600, page_title=TITLE)
     map.add(
         "",
         attr,
         value,
-        maptype='广东',
+        maptype="广东",
         is_visualmap=True,
-        visual_text_color='#000',
+        visual_text_color="#000",
     )
     map.render()
     actual_content = get_default_rendering_file_content()
@@ -169,9 +169,9 @@ def test_echarts_position_in_render_html():
 
 def test_show_config():
     stdout_ = sys.stdout
-    captured_stdout = 'stdout.txt'
+    captured_stdout = "stdout.txt"
     try:
-        with open(captured_stdout, 'w') as f:
+        with open(captured_stdout, "w") as f:
             sys.stdout = f
             bar = create_a_bar("new")
             bar.print_echarts_options()
@@ -179,12 +179,12 @@ def test_show_config():
         # whatever happens, continue and restore stdout
         print(e)
     sys.stdout = stdout_
-    with open(captured_stdout, 'r') as f:
+    with open(captured_stdout, "r") as f:
         content = f.read()
-        assert 'None' not in content
-        assert 'null' in content
-        assert 'false' in content
-        assert 'False' not in content
+        assert "None" not in content
+        assert "null" in content
+        assert "false" in content
+        assert "False" not in content
     os.unlink(captured_stdout)
 
 
