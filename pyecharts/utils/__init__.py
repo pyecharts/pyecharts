@@ -4,6 +4,9 @@ from __future__ import unicode_literals
 import codecs
 import os
 
+__all__ = ['get_resource_dir', 'write_utf8_html_file', 'to_css_length',
+           'merge_js_dependencies']
+
 
 def get_resource_dir(*paths):
     """
@@ -42,6 +45,18 @@ def to_css_length(x):
         return x
 
 
+def _flat(obj):
+    """
+    :param obj:
+    :return: Return a list
+    """
+    if hasattr(obj, 'js_dependencies'):
+        return list(obj.js_dependencies)
+    if isinstance(obj, (list, tuple, set)):
+        return obj
+    return obj,  # tuple
+
+
 def merge_js_dependencies(*chart_or_name_list):
     """
     Merge multiple dependencies to a total list.
@@ -50,28 +65,21 @@ def merge_js_dependencies(*chart_or_name_list):
     :param chart_or_name_list:
     :return: A list containing dependency items.
     """
-    front_must_items = ['echarts']  # items which must be included.
+    front_required_items = ['echarts']
     front_optional_items = ['echartsgl']
     dependencies = []
     fist_items = set()
 
-    def _add(_items):
-        if _items in front_must_items:
+    def _add(_item):
+        if _item in front_required_items:
             pass
-        elif _items in front_optional_items:
-            fist_items.add(_items)
-        elif _items not in dependencies:
-            dependencies.append(_items)
+        elif _item in front_optional_items:
+            fist_items.add(_item)
+        elif _item not in dependencies:
+            dependencies.append(_item)
 
     for d in chart_or_name_list:
-        if hasattr(d, 'js_dependencies'):
-            for x in d.js_dependencies:
-                _add(x)
-        elif isinstance(d, (list, tuple, set)):
-            for x in d:
-                _add(x)
-        else:
-            _add(d)
-    # items which should be included in front part.
+        for _d in _flat(d):
+            _add(_d)
     fol = [x for x in front_optional_items if x in fist_items]
-    return front_must_items + fol + dependencies
+    return front_required_items + fol + dependencies

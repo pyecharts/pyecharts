@@ -1,9 +1,14 @@
 # 版本日志
 
-* ### version 0.5.2（dev）
-    * TODO
+* ### version 0.5.3（dev）
+    *  TODO
 
-* ### version 0.5.1 - 2018.05.02（Current）
+* ### version 0.5.2 - 2018.05.04（Current）
+
+    #### Added
+    * [issue#512](https://github.com/pyecharts/pyecharts/issues/512) 新增自定义主题功能
+
+* ### version 0.5.1 - 2018.05.02
 
     #### Fixed
     * [issue#516](https://github.com/pyecharts/pyecharts/issues/516) 修复直角坐标系图 X 轴分隔符展示效果不一致的 bug
