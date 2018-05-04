@@ -40,14 +40,14 @@ class Overlap(Base):
         """
         if not self._option:
             self._option = copy.deepcopy(chart.options)
-            self._series_id = self._option.get('series')[0].get('seriesId')
+            self._series_id = self._option.get("series")[0].get("seriesId")
             self._js_dependencies = chart.js_dependencies
         else:
             _series = (
-                chart.options.get('legend')[0].get('data'),
-                chart.options.get('series'),
-                chart.options.get('xAxis')[0],
-                chart.options.get('yAxis')[0],
+                chart.options.get("legend")[0].get("data"),
+                chart.options.get("series"),
+                chart.options.get("xAxis")[0],
+                chart.options.get("yAxis")[0],
                 is_add_xaxis,
                 is_add_yaxis,
                 xaxis_index,
@@ -75,16 +75,16 @@ class Overlap(Base):
             _yaxis_index,
         ) = series
         for n in _name:
-            self._option.get('legend')[0].get('data').append(n)
+            self._option.get("legend")[0].get("data").append(n)
         for s in _series:
             s.update(
                 xAxisIndex=_xaxis_index,
                 yAxisIndex=_yaxis_index,
                 seriesId=self._series_id,
             )
-            self._option.get('series').append(s)
+            self._option.get("series").append(s)
 
         if is_add_xaxis:
-            self._option.get('xAxis').append(_xaxis)
+            self._option.get("xAxis").append(_xaxis)
         if is_add_yaxis:
-            self._option.get('yAxis').append(_yaxis)
+            self._option.get("yAxis").append(_yaxis)

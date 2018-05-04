@@ -28,16 +28,16 @@ class Page(list):
 
     def render(
         self,
-        path='render.html',
-        template_name='simple_page.html',
-        object_name='page',
+        path="render.html",
+        template_name="simple_page.html",
+        object_name="page",
         **kwargs
     ):
         _, ext = os.path.splitext(path)
         _file_type = ext[1:]
         if _file_type != constants.DEFAULT_HTML:
             raise NotImplementedError(
-                'Rendering Page instance as image is not supported!'
+                "Rendering Page instance as image is not supported!"
             )
 
         env = engine.create_default_environment(constants.DEFAULT_HTML)
@@ -53,7 +53,7 @@ class Page(list):
         """
         Produce rendered charts in html for embedding purpose
         """
-        return Markup('<br/> '.join([chart.render_embed() for chart in self]))
+        return Markup("<br/> ".join([chart.render_embed() for chart in self]))
 
     def get_js_dependencies(self):
         """
@@ -69,8 +69,8 @@ class Page(list):
         require_config = CURRENT_CONFIG.produce_require_configuration(
             dependencies
         )
-        config_items = require_config['config_items']
-        libraries = require_config['libraries']
+        config_items = require_config["config_items"]
+        libraries = require_config["libraries"]
         env = engine.create_default_environment(constants.DEFAULT_HTML)
         return env.render_chart_to_notebook(
             charts=self, config_items=config_items, libraries=libraries
