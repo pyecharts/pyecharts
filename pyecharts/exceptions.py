@@ -16,3 +16,7 @@ class JavascriptNotSupported(Exception):
 
 class ExtensionMissing(Exception):
     pass
+
+
+class InvalidTheme(Exception):
+    pass
