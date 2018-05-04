@@ -23,7 +23,7 @@ style_geo = style.add(
     legend_pos="right",
     geo_effect_symbol="plane",
     geo_effect_symbolsize=15,
-    label_color=['#a6c84c', '#ffa022', '#46bee9'],
+    label_color=["#a6c84c", "#ffa022", "#46bee9"],
     label_pos="right",
     label_formatter="{b}",
     label_text_color="#eee",
@@ -65,30 +65,30 @@ def test_with_custom_coordinates():
         ["广州", "A市"],
     ]
     lines = GeoLines("GeoLines 示例", **style.init_style)
-    coordinate = lines.get_coordinate('广州')
+    coordinate = lines.get_coordinate("广州")
     assert 2 == len(coordinate)
     with assert_raises(ValueError):
-        lines.get_coordinate('A市', raise_exception=True)
+        lines.get_coordinate("A市", raise_exception=True)
 
     lines.add(
         "从广州出发",
         data_guangzhou,
-        geo_cities_coords={'A市': (119.3, 26.08)},
+        geo_cities_coords={"A市": (119.3, 26.08)},
         **style_geo
     )
     lines.render()
 
 
 def test_with_full_example():
-    line_data = [["广州", "上海"], ["广州", "北京"], ["广州", "南京"], ['广州', 'A市']]
+    line_data = [["广州", "上海"], ["广州", "北京"], ["广州", "南京"], ["广州", "A市"]]
 
     lines = GeoLines("GeoLines 示例", **style.init_style)
 
     with assert_raises(ValueError):
         lines.add("从广州出发", line_data, **style_geo)
 
-    assert 0 == len(search_coordinates_by_keyword('A市'))
+    assert 0 == len(search_coordinates_by_keyword("A市"))
 
-    lines.add_coordinate('A市', 119.3, 26.08)
+    lines.add_coordinate("A市", 119.3, 26.08)
     lines.add("从广州出发", line_data, **style_geo)
     lines.render()

@@ -7,7 +7,7 @@ from pyecharts import Boxplot
 
 def test_boxplot_one_legend():
     boxplot = Boxplot("箱形图")
-    x_axis = ['expr1', 'expr2', 'expr3', 'expr4', 'expr5']
+    x_axis = ["expr1", "expr2", "expr3", "expr4", "expr5"]
     y_axis = [
         [
             850,
@@ -127,7 +127,7 @@ def test_boxplot_one_legend():
 
 def test_boxplot_two_legend():
     boxplot = Boxplot("箱形图")
-    x_axis = ['expr1', 'expr2']
+    x_axis = ["expr1", "expr2"]
     y_axis1 = [
         [
             850,

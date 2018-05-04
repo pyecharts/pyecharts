@@ -32,22 +32,22 @@ class Kline(Chart):
         kwargs.update(type="candlestick", x_axis=x_axis)
         chart = self._get_all_options(**kwargs)
 
-        xaxis, yaxis = chart['xy_axis']
+        xaxis, yaxis = chart["xy_axis"]
         self._option.update(xAxis=xaxis, yAxis=yaxis)
-        self._option.get('xAxis')[0]['scale'] = True
-        self._option.get('yAxis')[0]['scale'] = True
-        self._option.get('yAxis')[0]['splitArea'] = {"show": True}
+        self._option.get("xAxis")[0]["scale"] = True
+        self._option.get("yAxis")[0]["scale"] = True
+        self._option.get("yAxis")[0]["splitArea"] = {"show": True}
 
-        self._option.get('legend')[0].get('data').append(name)
+        self._option.get("legend")[0].get("data").append(name)
 
-        self._option.get('series').append(
+        self._option.get("series").append(
             {
                 "type": "candlestick",
                 "name": name,
                 "data": y_axis,
-                "markPoint": chart['mark_point'],
-                "markLine": chart['mark_line'],
-                "seriesId": self._option.get('series_id'),
+                "markPoint": chart["mark_point"],
+                "markLine": chart["mark_line"],
+                "seriesId": self._option.get("series_id"),
             }
         )
         self._config_components(**kwargs)

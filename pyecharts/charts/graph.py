@@ -89,25 +89,25 @@ class Graph(Chart):
 
         if categories:
             for c in categories:
-                self._option.get('legend')[0].get('data').append(c)
+                self._option.get("legend")[0].get("data").append(c)
 
         if graph_edge_symbol is None:
             graph_edge_symbol = [None, None]
 
-        self._option.get('series').append(
+        self._option.get("series").append(
             {
                 "type": "graph",
                 "name": name,
                 "layout": graph_layout,
-                "symbol": chart['symbol'],
+                "symbol": chart["symbol"],
                 "circular": {"rotateLabel": is_rotatelabel},
                 "force": {
                     "repulsion": graph_repulsion,
                     "edgeLength": graph_edge_length,
                     "gravity": graph_gravity,
                 },
-                "label": chart['label'],
-                "lineStyle": chart['line_style'],
+                "label": chart["label"],
+                "lineStyle": chart["line_style"],
                 "roam": is_roam,
                 "focusNodeAdjacency": is_focusnode,
                 "data": nodes,

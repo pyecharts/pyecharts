@@ -8,7 +8,7 @@ from test.constants import CLOTHES
 
 
 def test_overlap_bar_line():
-    attr = ['A', 'B', 'C', 'D', 'E', 'F']
+    attr = ["A", "B", "C", "D", "E", "F"]
     v1 = [10, 20, 30, 40, 50, 60]
     v2 = [38, 28, 58, 48, 78, 68]
     bar = Bar("Line-Bar 示例")
@@ -32,7 +32,7 @@ def test_overlap_es_scatter():
     scatter = Scatter()
     scatter.add("scatter", v1, v3)
     es_1 = EffectScatter()
-    es_1.add("es_1", v1, v4, symbol='pin', effect_scale=5)
+    es_1.add("es_1", v1, v4, symbol="pin", effect_scale=5)
 
     overlap = Overlap()
     overlap.add(es)

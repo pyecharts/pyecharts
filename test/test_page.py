@@ -41,15 +41,15 @@ def create_three():
 
     # guangdong
     value = [20, 190, 253, 77, 65]
-    attr = ['汕头市', '汕尾市', '揭阳市', '阳江市', '肇庆市']
+    attr = ["汕头市", "汕尾市", "揭阳市", "阳江市", "肇庆市"]
     map = Map("广东地图示例", width=1200, height=600)
     map.add(
         "",
         attr,
         value,
-        maptype='广东',
+        maptype="广东",
         is_visualmap=True,
-        visual_text_color='#000',
+        visual_text_color="#000",
     )
     page.add(map)
 
@@ -59,13 +59,13 @@ def create_three():
 @raises(NotImplementedError)
 def test_no_image_rendering_for_page():
     page = create_three()
-    page.render(path='page.png')
+    page.render(path="page.png")
 
 
 def test_two_bars():
     page = create_three()
     page.render()
-    with codecs.open('render.html', 'r', 'utf-8') as f:
+    with codecs.open("render.html", "r", "utf-8") as f:
         actual_content = f.read()
         assert json.dumps("柱状图数据堆叠示例") in actual_content
         assert "<html>" in actual_content
@@ -73,24 +73,24 @@ def test_two_bars():
         # test the optimization
         assert "registerMap('china'," not in actual_content
         assert "registerMap('world'," not in actual_content
-        echarts_position = actual_content.find('exports.echarts')
-        guangdong_position = actual_content.find(json.dumps('广东'))
+        echarts_position = actual_content.find("exports.echarts")
+        guangdong_position = actual_content.find(json.dumps("广东"))
         assert echarts_position < guangdong_position
 
 
 def test_page_get_js_dependencies():
     page = create_three()
     dependencies = page.get_js_dependencies()
-    eq_(dependencies[0], 'echarts.min')
-    assert 'guangdong' in dependencies
-    assert 'echarts-gl.min' in dependencies
+    eq_(dependencies[0], "echarts.min")
+    assert "guangdong" in dependencies
+    assert "echarts-gl.min" in dependencies
     eq_(len(dependencies), 3)
 
 
 def test_page_embed():
     page = create_three()
     html = page.render_embed()
-    assert '<html>' not in html
+    assert "<html>" not in html
     assert json.dumps("柱状图数据堆叠示例") in html
 
 
@@ -98,13 +98,13 @@ def test_page_in_notebook():
     page = create_three()
     html = page._repr_html_()
 
-    assert 'echartsgl' in html
-    assert 'echarts' in html
-    assert 'guangdong' in html
+    assert "echartsgl" in html
+    assert "echarts" in html
+    assert "guangdong" in html
     # find the appearing postion of echarts.min in html
-    echarts_position = html.find('echarts.min')
+    echarts_position = html.find("echarts.min")
     # find the appearing postion of guangdong in html
-    guangdong_position = html.find('guangdong')
+    guangdong_position = html.find("guangdong")
     assert echarts_position < guangdong_position
 
 
@@ -130,7 +130,7 @@ def test_more():
 
     # pie
     v1 = [11, 12, 13, 10, 10, 10]
-    pie = Pie("饼图-圆环图示例", title_pos='center')
+    pie = Pie("饼图-圆环图示例", title_pos="center")
     pie.add(
         "",
         CLOTHES,
@@ -138,8 +138,8 @@ def test_more():
         radius=[40, 75],
         label_text_color=None,
         is_label_show=True,
-        legend_orient='vertical',
-        legend_pos='left',
+        legend_orient="vertical",
+        legend_pos="left",
     )
 
     page.add([line, pie])
@@ -206,7 +206,7 @@ def test_more():
         v2,
         label_color=["#4e79a7"],
         is_area_show=False,
-        legend_selectedmode='single',
+        legend_selectedmode="single",
     )
     page.add(radar)
 
@@ -227,26 +227,26 @@ def test_more():
 
     # wordcloud
     name = [
-        'Sam S Club',
-        'Macys',
-        'Amy Schumer',
-        'Jurassic World',
-        'Charter Communications',
-        'Chick Fil A',
-        'Planet Fitness',
-        'Pitch Perfect',
-        'Express',
-        'Home',
-        'Johnny Depp',
-        'Lena Dunham',
-        'Lewis Hamilton',
-        'KXAN',
-        'Mary Ellen Mark',
-        'Farrah Abraham',
-        'Rita Ora',
-        'Serena Williams',
-        'NCAA baseball tournament',
-        'Point Break',
+        "Sam S Club",
+        "Macys",
+        "Amy Schumer",
+        "Jurassic World",
+        "Charter Communications",
+        "Chick Fil A",
+        "Planet Fitness",
+        "Pitch Perfect",
+        "Express",
+        "Home",
+        "Johnny Depp",
+        "Lena Dunham",
+        "Lewis Hamilton",
+        "KXAN",
+        "Mary Ellen Mark",
+        "Farrah Abraham",
+        "Rita Ora",
+        "Serena Williams",
+        "NCAA baseball tournament",
+        "Point Break",
     ]
     value = [
         10000,
@@ -281,7 +281,7 @@ def test_more():
     assert len(page) == 7
     assert isinstance(page[0], Line)
     assert (
-        ('echarts' in page.js_dependencies)
-        or ('echarts.min' in page.js_dependencies)
+        ("echarts" in page.js_dependencies)
+        or ("echarts.min" in page.js_dependencies)
     )
     page.render()
