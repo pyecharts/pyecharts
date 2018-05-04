@@ -89,7 +89,7 @@ class Page(list):
     def from_charts(cls, *args):
         """
         A shortcut class method for building page object from charts.
-        
+
         :param args: page arguments
         :return: Page instance
         """

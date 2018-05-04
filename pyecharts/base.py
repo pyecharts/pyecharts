@@ -181,7 +181,7 @@ class Base(object):
     def _repr_html_(self):
         """
         渲染配置项并将图形显示在 notebook 中
-        
+
         chart/page => charts
         chart.js_dependencies => require_config => config_items, libraries
         :return A unicode string.
