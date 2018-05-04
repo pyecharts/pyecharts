@@ -6,7 +6,7 @@ import random
 import pyecharts.echarts as option
 
 fs = []
-SYMBOLS = ('rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow')
+SYMBOLS = ("rect", "roundRect", "triangle", "diamond", "pin", "arrow")
 
 
 def collectfuncs(func):
@@ -138,7 +138,7 @@ def line_style(
     :param kwargs:
     """
     if line_color is None and type == "graph":
-        line_color = '#aaa'
+        line_color = "#aaa"
 
     _line_style = {
         "normal": option.Line(
@@ -415,26 +415,26 @@ def xy_axis(
     )
 
     if is_convert:
-        xaxis_type, yaxis_type = _yAxis['type'], _xAxis['type']
-        _xAxis['type'] = xaxis_type
+        xaxis_type, yaxis_type = _yAxis["type"], _xAxis["type"]
+        _xAxis["type"] = xaxis_type
         _yAxis.update(data=x_axis, type=yaxis_type)
     else:
-        _xAxis['data'] = x_axis
+        _xAxis["data"] = x_axis
 
     # 强制分割数值轴，在多 x、y 轴中可以使用强制分割使标刻线对齐
     if xaxis_force_interval is not None:
-        _xAxis['interval'] = xaxis_force_interval
+        _xAxis["interval"] = xaxis_force_interval
     if yaxis_force_interval is not None:
-        _yAxis['interval'] = yaxis_force_interval
+        _yAxis["interval"] = yaxis_force_interval
 
     return [_xAxis], [_yAxis]
 
 
 def _mark(
     data,
-    mark_point_symbol='pin',
+    mark_point_symbol="pin",
     mark_point_symbolsize=50,
-    mark_point_textcolor='#fff',
+    mark_point_textcolor="#fff",
     mark_line_symbolsize=10,
     mark_line_valuedim="",
     mark_line_coords=None,
@@ -496,8 +496,8 @@ def _mark(
         for index, d in enumerate(list(data)):
             # 自定义坐标点数据
             if isinstance(d, dict):
-                _coord = d.get('coord', None)
-                _pname = d.get('name', None)
+                _coord = d.get("coord", None)
+                _pname = d.get("name", None)
                 _marktmp = {
                     "coord": _coord,
                     "value": _coord[1],
@@ -524,7 +524,7 @@ def _mark(
                     _marktmp = {
                         "type": _type,
                         "name": _name,
-                        'valueDim': _marklv[index],
+                        "valueDim": _marklv[index],
                     }
                     if _type:
                         mark.get("data").append(_marktmp)
@@ -533,7 +533,7 @@ def _mark(
                     _marktmp = {
                         "type": _type,
                         "name": _name,
-                        'valueDim': _markpv[index],
+                        "valueDim": _markpv[index],
                     }
                     _marktmp.update(
                         symbol=mark_point_symbol,
@@ -599,8 +599,8 @@ def legend(
     is_legend_show=True,
     legend_orient="horizontal",
     legend_pos="center",
-    legend_top='top',
-    legend_selectedmode='multiple',
+    legend_top="top",
+    legend_selectedmode="multiple",
     legend_text_size=12,
     legend_text_color=None,
     **kwargs
@@ -644,13 +644,13 @@ def legend(
 
 @collectfuncs
 def visual_map(
-    visual_type='color',
+    visual_type="color",
     visual_range=None,
     visual_text_color=None,
     visual_range_text=None,
     visual_range_color=None,
     visual_range_size=None,
-    visual_orient='vertical',
+    visual_orient="vertical",
     visual_pos="left",
     visual_top="bottom",
     visual_split_number=5,
@@ -720,14 +720,14 @@ def visual_map(
             _tlow, _thigh = visual_range_text
 
     _inrange_op = {}
-    if visual_type == 'color':
-        range_color = ['#50a3ba', '#eac763', '#d94e5d']
+    if visual_type == "color":
+        range_color = ["#50a3ba", "#eac763", "#d94e5d"]
         if visual_range_color:
             if len(visual_range_color) >= 2:
                 range_color = visual_range_color
         _inrange_op.update(color=range_color)
 
-    if visual_type == 'size':
+    if visual_type == "size":
         range_size = [20, 50]
         if visual_range_size:
             if len(visual_range_size) >= 2:
@@ -766,11 +766,11 @@ def symbol(type=None, symbol="", **kwargs):
     :param kwargs:
     """
     if symbol is None:  # Radar
-        symbol = 'none'
+        symbol = "none"
     elif type == "line" and symbol == "":  # Line
         symbol = "emptyCircle"
     elif symbol not in SYMBOLS:
-        symbol = 'circle'
+        symbol = "circle"
     return symbol
 
 
@@ -800,9 +800,9 @@ def effect(
 @collectfuncs
 def datazoom(
     is_datazoom_show=False,
-    datazoom_type='slider',
+    datazoom_type="slider",
     datazoom_range=None,
-    datazoom_orient='horizontal',
+    datazoom_orient="horizontal",
     datazoom_xaxis_index=None,
     datazoom_yaxis_index=None,
     **kwargs
@@ -848,8 +848,8 @@ def datazoom(
     }
     if datazoom_type == "both":
         _datazoom.append(_datazoom_config.copy())
-        datazoom_type = 'inside'
-    _datazoom_config['type'] = datazoom_type
+        datazoom_type = "inside"
+    _datazoom_config["type"] = datazoom_type
     _datazoom.append(_datazoom_config)
     return _datazoom
 
@@ -1169,7 +1169,7 @@ def calendar(calendar_date_range=None, calendar_cell_size=None, **kwargs):
     """
 
     if calendar_cell_size is None:
-        calendar_cell_size = ['auto', 20]
+        calendar_cell_size = ["auto", 20]
 
     _calendar = {"range": calendar_date_range, "cellSize": calendar_cell_size}
     return _calendar
