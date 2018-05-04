@@ -1,7 +1,28 @@
-# [pyecharts](https://github.com/pyecharts/pyecharts) [![Build Status](https://travis-ci.org/pyecharts/pyecharts.svg?branch=master)](https://travis-ci.org/pyecharts/pyecharts) [![Build status](https://ci.appveyor.com/api/projects/status/81cbsfjpfryv1cl8?svg=true)](https://ci.appveyor.com/project/chenjiandongx/pyecharts) [![codecov](https://codecov.io/gh/pyecharts/pyecharts/branch/master/graph/badge.svg)](https://codecov.io/gh/pyecharts/pyecharts) [![PyPI version](https://badge.fury.io/py/pyecharts.svg)](https://badge.fury.io/py/pyecharts) [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
-> pyecharts is a library to generate charts using Echarts. It simply provides the interface of 28+ kinds of charts between Echarts and Python.
-
+<p align="center">
+    <img src="https://user-images.githubusercontent.com/19553554/39612358-499eb2ae-4f91-11e8-8f56-179c4f0bf2df.png" alt="pyecharts logo" width=200 height=200 />
+</p>
+<h1 align="center" style="margin-top: -16px">pyecharts</h1>
+<p align="center">
+    <em>pyecharts is a library to generate charts using Echarts. It simply provides the interface of 28+ kinds of charts between Echarts and Python.</em>
+</p>
+<p align="center">
+    <a href="https://travis-ci.org/pyecharts/pyecharts">
+        <img src="https://travis-ci.org/pyecharts/pyecharts.svg?branch=master" alt="Travis Build Status">
+    </a>
+    <a href="https://ci.appveyor.com/project/chenjiandongx/pyecharts">
+        <img src="https://ci.appveyor.com/api/projects/status/81cbsfjpfryv1cl8?svg=true" alt="Appveyor Build Status">
+    </a>
+    <a href="https://codecov.io/gh/pyecharts/pyecharts">
+        <img src="https://codecov.io/gh/pyecharts/pyecharts/branch/master/graph/badge.svg" alt="Codecov">
+    </a>
+    <a href="https://badge.fury.io/py/pyecharts">
+        <img src="https://badge.fury.io/py/pyecharts.svg" alt="Package version">
+    </a>
+    <a href="https://opensource.org/licenses/MIT">
+        <img src="https://img.shields.io/badge/License-MIT-green.svg" alt="LICENSE">
+    </a>
+</p>
 
 ## Introduction
 [Echarts](https://github.com/ecomfe/echarts) is an open source library from Baidu for data visualization in javascript. It has awesome demo pages so I started to look out for an interface library so that I could use it in Python. I ended up with [echarts-python](https://github.com/yufeiminds/echarts-python) on github but it lacks of documentation and was not updated for a while. Just like many other Python projects, I started my own project, pyecharts, referencing echarts-python and another library [pygal](https://github.com/Kozea/pygal).
