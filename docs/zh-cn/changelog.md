@@ -1,7 +1,8 @@
 # 版本日志
 
 * ### version 0.5.2（dev）
-    * TODO
+    #### Added
+    * [issue#512](https://github.com/pyecharts/pyecharts/issues/512) 可以更换主题
 
 * ### version 0.5.1 - 2018.05.02（Current）
 
