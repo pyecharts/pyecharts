@@ -39,7 +39,7 @@ class GeoLines(Chart):
 
         coordinate = get_coordinate(name)
         if coordinate is None and raise_exception:
-            raise ValueError('No coordinate is specified for {}'.format(name))
+            raise ValueError("No coordinate is specified for {}".format(name))
 
         return coordinate
 
@@ -50,7 +50,7 @@ class GeoLines(Chart):
         self,
         name,
         data,
-        maptype='china',
+        maptype="china",
         symbol=None,
         symbol_size=12,
         border_color="#111",
@@ -59,8 +59,8 @@ class GeoLines(Chart):
         geo_cities_coords=None,
         geo_effect_period=6,
         geo_effect_traillength=0,
-        geo_effect_color='#fff',
-        geo_effect_symbol='circle',
+        geo_effect_color="#fff",
+        geo_effect_symbol="circle",
         geo_effect_symbolsize=5,
         is_geo_effect_show=True,
         is_roam=True,
@@ -122,7 +122,7 @@ class GeoLines(Chart):
                 self.add_coordinate(name, coord[0], coord[1])
 
         if geo_effect_symbol == "plane":
-            geo_effect_symbol = SYMBOL['plane']
+            geo_effect_symbol = SYMBOL["plane"]
 
         _data_lines, _data_scatter = [], []
         for d in data:
@@ -169,8 +169,8 @@ class GeoLines(Chart):
                 },
             }
         )
-        self._option.get('legend')[0].get('data').append(name)
-        self._option.get('series').append(
+        self._option.get("legend")[0].get("data").append(name)
+        self._option.get("series").append(
             {
                 "type": "lines",
                 "name": name,
@@ -186,18 +186,18 @@ class GeoLines(Chart):
                 "symbol": symbol or ["none", "arrow"],
                 "symbolSize": symbol_size,
                 "data": _data_lines,
-                "lineStyle": chart['line_style'],
+                "lineStyle": chart["line_style"],
             }
         )
-        self._option.get('series').append(
+        self._option.get("series").append(
             {
                 "type": "scatter",
                 "name": name,
                 "zlevel": self._zlevel,
-                "coordinateSystem": 'geo',
+                "coordinateSystem": "geo",
                 "symbolSize": 10,
                 "data": _data_scatter,
-                "label": chart['label'],
+                "label": chart["label"],
             }
         )
 

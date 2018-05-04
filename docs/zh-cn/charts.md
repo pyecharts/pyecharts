@@ -139,22 +139,37 @@
     * 'log'：对数轴。适用于对数数据。
 * xaxis_rotate -> int  
     x 轴刻度标签旋转的角度，在类目轴的类目标签显示不下的时候可以通过旋转防止标签之间重叠。默认为 0，即不旋转。旋转的角度从 -90 度到 90 度。
-* xaxis_formatter -> str | function  
-    x 轴标签格式器，如 '天'，则 x 轴的标签为数据加'天'(3 天，4 天),默认为 ""
-
-`xaxis_formatter -> function`
-
-``` python
-from pyecharts_javascripthon.dom import Date
-
-def xaxis_formatter(value, index):
-    date = Date(value)
-    texts = [(date.getMonth() + 1), date.getDate()]
-    if index == 0:
-        texts.unshift(date.getYear())
-    return '/'.join(texts)
-```
-
+* xaxis_formatter -> str  
+    x 轴标签格式器，如 '天'，则 x 轴的标签为数据加'天'(3 天，4 天),默认为 ""  
+    xaxis_formatter -> function  
+    ```python
+    def label_formatter(params):
+        return params.value + ' [Good!]'
+    ```
+    回调函数格式，更多内容请参考 [高级用法篇](zh-cn/advanced)
+    ```
+    (params: Object|Array) => string
+    参数 params 是 formatter 需要的单个数据集。格式如下：
+    {
+        componentType: 'series',
+        // 系列类型
+        seriesType: string,
+        // 系列在传入的 option.series 中的 index
+        seriesIndex: number,
+        // 系列名称
+        seriesName: string,
+        // 数据名，类目名
+        name: string,
+        // 数据在传入的 data 数组中的 index
+        dataIndex: number,
+        // 传入的原始数据项
+        data: Object,
+        // 传入的数据值
+        value: number|Array,
+        // 数据图形的颜色
+        color: string,
+    }
+    ```
 * y_axis -> list  
     y 坐标轴数据
 * yaxis_interval -> int  
@@ -165,22 +180,36 @@ def xaxis_formatter(value, index):
     因为 splitNumber 是预估的值，实际根据策略计算出来的刻度可能无法达到想要的效果，这时候可以使用 interval 配合 min、max 强制设定刻度划分。在类目轴中无效。
 * yaxis_margin -> int  
     y 轴刻度标签与轴线之间的距离。默认为 8
-* yaxis_formatter -> str | function  
+* yaxis_formatter -> str  
     y 轴标签格式器，如 '天'，则 y 轴的标签为数据加'天'(3 天，4 天),默认为 ""
-
-`yaxis_formatter -> function`
-
-``` python
-from pyecharts_javascripthon.dom import Date
-
-def yaxis_formatter(value, index):
-    date = Date(value)
-    texts = [(date.getMonth() + 1), date.getDate()]
-    if index == 0:
-        texts.unshift(date.getYear())
-    return '/'.join(texts)
-```
-
+    yaxis_formatter -> function  
+    ```python
+    def label_formatter(params):
+        return params.value + ' [Good!]'
+    ```
+    回调函数格式，更多内容请参考 [高级用法篇](zh-cn/advanced)
+    ```
+    (params: Object|Array) => string
+    参数 params 是 formatter 需要的单个数据集。格式如下：
+    {
+        componentType: 'series',
+        // 系列类型
+        seriesType: string,
+        // 系列在传入的 option.series 中的 index
+        seriesIndex: number,
+        // 系列名称
+        seriesName: string,
+        // 数据名，类目名
+        name: string,
+        // 数据在传入的 data 数组中的 index
+        dataIndex: number,
+        // 传入的原始数据项
+        data: Object,
+        // 传入的数据值
+        value: number|Array,
+        // 数据图形的颜色
+        color: string,
+    }
 * yaxis_name -> str  
     y 轴名称
 * yaxis_name_size -> int  
@@ -266,45 +295,17 @@ def yaxis_formatter(value, index):
     是否随机排列颜色列表，默认为 False
 * label_color -> list  
     自定义标签颜色。全局颜色列表，所有图表的图例颜色均在这里修改。如 Bar 的柱状颜色，Line 的线条颜色等等。
-* label_formatter -> str | function
+* label_formatter -> str  
     模板变量有 {a}, {b}，{c}，{d}，{e}，分别表示系列名，数据名，数据值等。使用示例，如 `label_formatter='{a}'`  
     在 trigger 为 'axis' 的时候，会有多个系列的数据，此时可以通过 {a0}, {a1}, {a2} 这种后面加索引的方式表示系列的索引。不同图表类型下的 {a}，{b}，{c}，{d} 含义不一样。 其中变量 {a}, {b}, {c}, {d} 在不同图表类型下代表数据含义为：
     * 折线（区域）图、柱状（条形）图、K线图 : {a}（系列名称），{b}（类目值），{c}（数值）, {d}（无）
     * 散点图（气泡）图 : {a}（系列名称），{b}（数据名称），{c}（数值数组）, {d}（无）
     * 地图 : {a}（系列名称），{b}（区域名称），{c}（合并数值）, {d}（无）
     * 饼图、仪表盘、漏斗图: {a}（系列名称），{b}（数据项名称），{c}（数值）, {d}（百分比）
+    
+    label_formatter -> function  
+    具体格式请参考 xaxis_formatter -> function
 
-
-`label_formatter -> function`
-
-```
-def label_formatter(params):
-
-回调函数格式：
-(params: Object|Array) => string
-
-参数 params 是 formatter 需要的单个数据集。格式如下：
-{
-    componentType: 'series',
-    // 系列类型
-    seriesType: string,
-    // 系列在传入的 option.series 中的 index
-    seriesIndex: number,
-    // 系列名称
-    seriesName: string,
-    // 数据名，类目名
-    name: string,
-    // 数据在传入的 data 数组中的 index
-    dataIndex: number,
-    // 传入的原始数据项
-    data: Object,
-    // 传入的数据值
-    value: number|Array,
-    // 数据图形的颜色
-    color: string,
-
-}
-```
 **Note：** is_random 可随机打乱图例颜色列表，算是切换风格？建议试一试！
 
 
@@ -439,7 +440,6 @@ def label_formatter(params):
     ]
     ```
 
-
 **tooltip：提示框组件，用于移动或点击鼠标时弹出数据内容**
 
 * tooltip_tragger -> str  
@@ -458,7 +458,7 @@ def label_formatter(params):
     * 'line': 直线指示器
     * 'shadow': 阴影指示器
     * 'cross': 十字准星指示器。其实是种简写，表示启用两个正交的轴的 axisPointer。
-* tooltip_formatter -> str | function
+* tooltip_formatter -> str  
     模板变量有 {a}, {b}，{c}，{d}，{e}，分别表示系列名，数据名，数据值等。  
     在 trigger 为 'axis' 的时候，会有多个系列的数据，此时可以通过 {a0}, {a1}, {a2} 这种后面加索引的方式表示系列的索引。不同图表类型下的 {a}，{b}，{c}，{d} 含义不一样。 其中变量 {a}, {b}, {c}, {d} 在不同图表类型下代表数据含义为：
     * 折线（区域）图、柱状（条形）图、K线图 : {a}（系列名称），{b}（类目值），{c}（数值）, {d}（无）
@@ -466,38 +466,8 @@ def label_formatter(params):
     * 地图 : {a}（系列名称），{b}（区域名称），{c}（合并数值）, {d}（无）
     * 饼图、仪表盘、漏斗图: {a}（系列名称），{b}（数据项名称），{c}（数值）, {d}（百分比）
 
-`tooltip_formatter -> function`
-
-```
-def tooltip_formatter(params):
-
-(params: Object|Array, ticket: string, callback: (ticket: string, html: string)) => string
-
-第一个参数 params 是 formatter 需要的数据集。格式如下：
-{
-    componentType: 'series',
-    // 系列类型
-    seriesType: string,
-    // 系列在传入的 option.series 中的 index
-    seriesIndex: number,
-    // 系列名称
-    seriesName: string,
-    // 数据名，类目名
-    name: string,
-    // 数据在传入的 data 数组中的 index
-    dataIndex: number,
-    // 传入的原始数据项
-    data: Object,
-    // 传入的数据值
-    value: number|Array,
-    // 数据图形的颜色
-    color: string,
-
-    // 饼图的百分比
-    percent: number,
-
-}
-```
+    tooltip_formatter -> function  
+    具体格式请参考 xaxis_formatter -> function
 * tooltip_text_color -> str  
     提示框字体颜色，默认为 '#fff'
 * tooltip_font_size -> int  
@@ -547,7 +517,6 @@ def tooltip_formatter(params):
 
 
 # 图表详细  
-
 
 ## Bar（柱状图/条形图）
 > 柱状/条形图，通过柱形的高度/条形的宽度来表现数据的大小。
@@ -695,8 +664,8 @@ bar.render()
 ```
 ![bar-10](https://user-images.githubusercontent.com/19553554/35081822-3e090748-fc51-11e7-8bba-b775d29671e4.png)
 
-## Bar3D（3D 柱状图）
 
+## Bar3D（3D 柱状图）
 Bar3D.add() 方法签名
 ```python
 add(name, x_axis, y_axis, data,
@@ -1019,7 +988,7 @@ add(name, attr, value,
 * type -> str  
     图例类型，有'scatter', 'effectScatter', 'heatmap'可选。默认为 'scatter'
 * maptype -> str  
-    地图类型。 支持 china、world、安徽、澳门、北京、重庆、福建、福建、甘肃、广东，广西、广州、海南、河北、黑龙江、河南、湖北、湖南、江苏、江西、吉林、辽宁、内蒙古、宁夏、青海、山东、上海、陕西、山西、四川、台湾、天津、香港、新疆、西藏、云南、浙江，以及 [363个二线城市地图](https://github.com/chfw/echarts-china-cities-js#featuring-citiesor-for-single-download)。提醒：在画市级地图的时候，城市名字后面的‘市’要省去了，比如，石家庄市的‘市’不要提，即‘石家庄’就可以了。
+    地图类型。 从 v0.3.2+ 起，地图已经变为扩展包，支持全国省份，全国城市，全国区县，全球国家等地图，具体请参考 [地图自定义篇](zh-cn/customize_map)
 * symbol_size -> int  
     标记图形大小。默认为 12
 * border_color -> str  
@@ -1170,7 +1139,7 @@ add(name, data,
 * data -> [list], 包含列表的列表  
     数据项，数据中，每一行是一个『数据项』，每一列属于一个『维度』。每一行包含两个数据, 如 ["广州", "北京"]，则指定从广州到北京。
 * maptype -> str  
-    地图类型。 支持 china、world、安徽、澳门、北京、重庆、福建、福建、甘肃、广东，广西、广州、海南、河北、黑龙江、河南、湖北、湖南、江苏、江西、吉林、辽宁、内蒙古、宁夏、青海、山东、上海、陕西、山西、四川、台湾、天津、香港、新疆、西藏、云南、浙江，以及 [363个二线城市地图](https://github.com/chfw/echarts-china-cities-js#featuring-citiesor-for-single-download)。提醒：在画市级地图的时候，城市名字后面的‘市’要省去了，比如，石家庄市的‘市’不要提，即‘石家庄’就可以了。
+    地图类型。 从 v0.3.2+ 起，地图已经变为扩展包，支持全国省份，全国城市，全国区县，全球国家等地图，具体请参考 [地图自定义篇](zh-cn/customize_map)
 * symbol -> str  
     线两端的标记类型，可以是一个数组分别指定两端，也可以是单个统一指定。
 * symbol_size -> int  
@@ -1668,7 +1637,6 @@ line.render()
 
 
 ## Line3D（3D 折线图）
-
 Line3D.add() 方法签名
 ```python
 add(name, data,
@@ -1827,7 +1795,7 @@ add(name, attr, value,
 * value -> list  
    属性所对应的值
 * maptype -> str  
-    地图类型。 支持 china、world、安徽、澳门、北京、重庆、福建、福建、甘肃、广东，广西、广州、海南、河北、黑龙江、河南、湖北、湖南、江苏、江西、吉林、辽宁、内蒙古、宁夏、青海、山东、上海、陕西、山西、四川、台湾、天津、香港、新疆、西藏、云南、浙江，以及 [363个二线城市地图](https://github.com/chfw/echarts-china-cities-js#featuring-citiesor-for-single-download)。提醒：在画市级地图的时候，城市名字后面的‘市’要省去了，比如，石家庄市的‘市’不要提，即‘石家庄’就可以了。地图提供了自定义模式 [用户如何自定义地图](https://github.com/chenjiandongx/pyecharts/blob/master/docs/zh-cn/user-customize-map.md)
+    地图类型。 从 v0.3.2+ 起，地图已经变为扩展包，支持全国省份，全国城市，全国区县，全球国家等地图，具体请参考 [地图自定义篇](zh-cn/customize_map)
 * is_roam -> bool/str  
    是否开启鼠标缩放和平移漫游。默认为 True  
    如果只想要开启缩放或者平移，可以设置成'scale'或者'move'。设置成 True 为都开启
@@ -1839,7 +1807,7 @@ add(name, attr, value,
     name_map = {"E14000639": "Cities of London and Westminster"}
     ```
 
-以此类推，把英国选区所有的地名都转换一下，就需要个[更大一些的字典](https://github.com/chfw/echarts-united-kingdom-pypkg/blob/master/echarts_united_kingdom_pypkg/constants.py#L1)。
+    以此类推，把英国选区所有的地名都转换一下，就需要个[更大一些的字典](https://github.com/chfw/echarts-united-kingdom-pypkg/blob/master/echarts_united_kingdom_pypkg/constants.py#L1)。
 
 ```python
 from pyecharts import Map
@@ -1914,9 +1882,7 @@ map.render()
 
 设置 `name_map=...` 采用自己地图名称
 原版：
-<div align="center">
-<img width="382" alt="screen shot 2018-02-27 at 09 24 21" src="https://user-images.githubusercontent.com/4280312/36720467-16fb0a66-1ba0-11e8-8cbd-453d8f2462d3.png">
-</div>
+![](https://user-images.githubusercontent.com/4280312/36720467-16fb0a66-1ba0-11e8-8cbd-453d8f2462d3.png)
     
 用 `name_map` 改动之后：
 
@@ -1934,9 +1900,8 @@ map.add('', attr, value, maptype='英国选区2016', is_visualmap=True,
         visual_text_color="#000", name_map=NM_WESTMINSTER_2016_UK)
 map.render()
 ```
-<div align="center">
-<img width="449" alt="screen shot 2018-02-27 at 09 27 38" src="https://user-images.githubusercontent.com/4280312/36720626-803ff194-1ba0-11e8-998b-548afbedc18e.png">
-</div>
+![](https://user-images.githubusercontent.com/4280312/36720626-803ff194-1ba0-11e8-998b-548afbedc18e.png)
+
 这个方便画图，因为很多数据和地区号直接挂钩，同时也容易做本地化。
 
 设置 `pieces` 自定义 visualMap 组件标签
@@ -3425,6 +3390,7 @@ overlap.render()
 
 如果只是想在单个 .html 按顺序展示图表，推荐使用 ```Page()``` 类
 
+
 ## Page：同一网页按顺序展示多图
 > Grid/Timeline/Overlap 都可在 Page 中正常展示，把其当做一个图加入到 Page 中即可
 
@@ -3563,7 +3529,6 @@ page.render()
 
 
 ## Timeline：提供时间线轮播多张图
-
 Timeline 类的使用：
 1. 引入 `Timeline` 类，`from pyecharts import Timeline`
 2. 实例化 `Timeline` 类
@@ -3778,8 +3743,4 @@ pie.add("", ["惊悚", ""], [11, 89], center=[70, 30], **pie_style)
 ```
 这样会使得每个图例都会按照设定的风格
 
-# 关于项目
-
-* 欢迎提交 ISSUE 和 PR
-* 如有想单独讨论的话可以使用邮箱 -> chenjiandongx@qq.com
-* 关注 [changelog.md](https://github.com/pyecharts/pyecharts/blob/master/changelog.md)
+**如果你已阅读完本篇文档，可以进一步阅读 [高级用法篇](zh-cn/advanced)**

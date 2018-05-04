@@ -28,18 +28,18 @@ class ThemeRiver(Chart):
         :param kwargs:
         """
         chart = self._get_all_options(**kwargs)
-        self._option.get('legend')[0].get('data').extend(name)
+        self._option.get("legend")[0].get("data").extend(name)
 
-        self._option.get('series').append(
+        self._option.get("series").append(
             {
                 "type": "themeRiver",
                 "name": name,
                 "data": data,
-                "label": chart['label'],
-                "seriesId": self._option.get('series_id'),
+                "label": chart["label"],
+                "seriesId": self._option.get("series_id"),
             }
         )
 
         self._option.update(singleAxis={"type": "time"})
         self._config_components(**kwargs)
-        self._option.get('tooltip').update(trigger='axis')
+        self._option.get("tooltip").update(trigger="axis")

@@ -22,7 +22,7 @@ class TreeMap(Chart):
         name,
         data,
         treemap_left_depth=None,
-        treemap_drilldown_icon='▶',
+        treemap_drilldown_icon="▶",
         treemap_visible_min=10,
         **kwargs
     ):
@@ -72,18 +72,18 @@ class TreeMap(Chart):
         :param kwargs:
         """
         chart = self._get_all_options(**kwargs)
-        self._option.get('legend')[0].get('data').append(name)
+        self._option.get("legend")[0].get("data").append(name)
 
-        self._option.get('series').append(
+        self._option.get("series").append(
             {
                 "type": "treemap",
                 "name": name,
                 "data": data,
-                "label": chart['label'],
+                "label": chart["label"],
                 "leafDepth": treemap_left_depth,
                 "drillDownIcon": treemap_drilldown_icon,
                 "visibleMin": treemap_visible_min,
-                "seriesId": self._option.get('series_id'),
+                "seriesId": self._option.get("series_id"),
             }
         )
         self._config_components(**kwargs)

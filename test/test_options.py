@@ -14,24 +14,24 @@ from test.utils import get_fixture_content
 from test.constants import RANGE_COLOR
 
 
-@patch('random.randint')
+@patch("random.randint")
 def test_polar_type_scatter_one(patched):
-    patched.return_value = '1'
+    patched.return_value = "1"
     data = [i for i in range(101)]
     polar = Polar("极坐标系-散点图示例")
     polar.add(
         "",
         data,
         boundary_gap=False,
-        type='scatter',
+        type="scatter",
         is_splitline_show=False,
         is_axisline_show=True,
     )
     actual_options = json.dumps(
         polar.options, sort_keys=True, indent=4, cls=DefaultJsonEncoder
     )
-    expected = get_fixture_content('polar_options.json')
-    for a, b in zip(actual_options.split('\n'), expected.split('\n')):
+    expected = get_fixture_content("polar_options.json")
+    for a, b in zip(actual_options.split("\n"), expected.split("\n")):
         eq_(a.strip(), b.strip())
 
 
@@ -71,7 +71,7 @@ data = [
 ]
 
 
-@patch('random.randint')
+@patch("random.randint")
 def test_kline_default(patched):
     patched.return_value = "1"
     kline = Kline("K 线图-默认示例")
@@ -79,12 +79,12 @@ def test_kline_default(patched):
     actual_options = json.dumps(
         kline.options, sort_keys=True, indent=4, cls=DefaultJsonEncoder
     )
-    expected = get_fixture_content('kline_options.json')
-    for a, b in zip(actual_options.split('\n'), expected.split('\n')):
+    expected = get_fixture_content("kline_options.json")
+    for a, b in zip(actual_options.split("\n"), expected.split("\n")):
         eq_(a.strip(), b.strip())
 
 
-@patch('random.randint')
+@patch("random.randint")
 def test_bar_default(patched):
     patched.return_value = "1"
     attr = [
@@ -121,12 +121,12 @@ def test_bar_default(patched):
     actual_options = json.dumps(
         bar.options, sort_keys=True, indent=4, cls=DefaultJsonEncoder
     )
-    expected = get_fixture_content('bar_options.json')
-    for a, b in zip(actual_options.split('\n'), expected.split('\n')):
+    expected = get_fixture_content("bar_options.json")
+    for a, b in zip(actual_options.split("\n"), expected.split("\n")):
         eq_(a.strip(), b.strip())
 
 
-@patch('random.randint')
+@patch("random.randint")
 def test_scatter_option(patched):
     patched.return_value = "1"
     v1 = [10, 20, 30, 40, 50, 60]
@@ -137,8 +137,8 @@ def test_scatter_option(patched):
     actual_options = json.dumps(
         scatter.options, sort_keys=True, indent=4, cls=DefaultJsonEncoder
     )
-    expected = get_fixture_content('scatter_options.json')
-    for a, b in zip(actual_options.split('\n'), expected.split('\n')):
+    expected = get_fixture_content("scatter_options.json")
+    for a, b in zip(actual_options.split("\n"), expected.split("\n")):
         eq_(a.strip(), b.strip())
 
 
@@ -150,7 +150,7 @@ def create_line3d_data():
         yield [x, y, z]
 
 
-@patch('random.randint')
+@patch("random.randint")
 def test_line3d_default(patched):
     patched.return_value = "1"
     _data = list(create_line3d_data())
@@ -166,21 +166,15 @@ def test_line3d_default(patched):
     actual_options = json.dumps(
         line3d.options, sort_keys=True, indent=4, cls=DefaultJsonEncoder
     )
-    expected = get_fixture_content('line3d_options.json')
-    for a, b in zip(actual_options.split('\n'), expected.split('\n')):
+    expected = get_fixture_content("line3d_options.json")
+    for a, b in zip(actual_options.split("\n"), expected.split("\n")):
         eq_(a.strip(), b.strip())
 
 
-@patch('random.randint')
+@patch("random.randint")
 def test_geo_china_scatter(patched):
     patched.return_value = "1"
-    cities = [
-        ("鄂尔多斯", 12),
-        ("招远", 12),
-        ("舟山", 12),
-        ("齐齐哈尔", 14),
-        ("盐城", 15),
-    ]
+    cities = [("鄂尔多斯", 12), ("招远", 12), ("舟山", 12), ("齐齐哈尔", 14), ("盐城", 15)]
     geo = Geo("全国主要城市空气质量", "data from pm2.5")
     attr, value = geo.cast(cities)
     geo.add(
@@ -192,13 +186,13 @@ def test_geo_china_scatter(patched):
         is_legend_show=False,
         symbol_size=15,
         is_visualmap=True,
-        tooltip_formatter='{b}',
+        tooltip_formatter="{b}",
         label_emphasis_textsize=15,
-        label_emphasis_pos='right',
+        label_emphasis_pos="right",
     )
     actual_options = json.dumps(
         geo.options, sort_keys=True, indent=4, cls=DefaultJsonEncoder
     )
-    expected = get_fixture_content('geo_options.json')
-    for a, b in zip(actual_options.split('\n'), expected.split('\n')):
+    expected = get_fixture_content("geo_options.json")
+    for a, b in zip(actual_options.split("\n"), expected.split("\n")):
         eq_(a.strip(), b.strip())

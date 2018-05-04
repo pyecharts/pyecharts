@@ -23,7 +23,7 @@ def test_liquid_diamond_shape():
         "Liquid",
         [0.6, 0.5, 0.4, 0.3],
         is_liquid_animation=False,
-        shape='diamond',
+        shape="diamond",
     )
     assert "diamond" in liquid._repr_html_()
 

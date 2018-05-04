@@ -49,4 +49,4 @@ def test_line3d_rotate_automatically_speedup():
 
 def test_line3d_must_use_canvas():
     line3d = Line3D("3D 折线图示例", width=1200, height=600)
-    eq_(line3d.renderer, 'canvas')
+    eq_(line3d.renderer, "canvas")
