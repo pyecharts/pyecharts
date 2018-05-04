@@ -1,8 +1,7 @@
-
 <p align="center">
     <img src="https://user-images.githubusercontent.com/19553554/39612358-499eb2ae-4f91-11e8-8f56-179c4f0bf2df.png" alt="pyecharts logo" width=200 height=200 />
 </p>
-<h1 align="center" style="margin-top: -16px">pyecharts</h1>
+<h1 align="center">pyecharts</h1>
 <p align="center">
     <em>pyecharts is a library to generate charts using Echarts. It simply provides the interface of 28+ kinds of charts between Echarts and Python.</em>
 </p>
@@ -57,7 +56,7 @@ $ python setup.py install
 
 Please note: since version 0.3.2, **NO LONGER** pyecharts comes with any map files. Please read next section for more informations.
 
-### map extensions
+### Map extensions
 
 Here is a list of map extensions from pyecharts dev team:
 
@@ -174,7 +173,7 @@ $ make
 
 ### Quality Assurance
 
-[flake8](http://flake8.pycqa.org/en/latest/index.html) and [pylint](https://www.pylint.org/) are used to improve the quality of code.
+[flake8](http://flake8.pycqa.org/en/latest/index.html), [Codecov](https://codecov.io/) and [pylint](https://www.pylint.org/) are used to improve the quality of code.
 
 ### Continuous Integration
 
