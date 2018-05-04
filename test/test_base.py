@@ -28,6 +28,19 @@ def create_a_bar(title, renderer='canvas'):
     return bar
 
 
+def test_theme_option():
+    bar = create_a_bar(TITLE, renderer='svg')
+    bar.use_theme('dark')
+    html = bar.render_embed()
+    assert "'dark'" in html
+
+
+@raises(exceptions.InvalidTheme)
+def test_invalid_theme_option():
+    bar = create_a_bar(TITLE, renderer='svg')
+    bar.use_theme('brilliant')
+
+
 def test_svg_option():
     bar = create_a_bar(TITLE, renderer='svg')
     html = bar.render_embed()
