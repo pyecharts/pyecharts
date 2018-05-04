@@ -16,7 +16,6 @@
 | 8 写入目标文件 | `write_utf8_html_file('my_demo_chart.html', html)` |      |
 
 
-
 ## pyecharts 配置项
 
 pyecharts 遵循 “先配置后使用” 的基本原则，所有的配置项将统一于类 `pyecharts.conf.PyEChartsConfig` 类中。
@@ -103,8 +102,6 @@ js 文件仓库路径。可以设置本地或者远程地址。所有的远程�
 **on(event_name, handler)**
 
 添加 [事件处理函数](http://echarts.baidu.com/api.html#events)。
-
-请注意，事件处理函数是在浏览器里运行，但是要求你用 Python 写哦。
 
 这是支持的所有事件
 
@@ -431,7 +428,6 @@ env = EchartsEnvironment(pyecharts_config=config)
 tpl = env.get_template('tpl_demo.html')
 html = tpl.render(bar=bar)
 write_utf8_html_file('my_tpl_demo2.html', html)
-
 ```
 
 tpl_demo.html 模板

@@ -2,15 +2,15 @@
 
 > Echarts 官方地图下载地址 [download-map](http://echarts.baidu.com/download-map.html) 已经暂时关闭
 
-## 如何获得更多地图
+## VERSION 0.3.2+
 
 自从 v0.3.2 开始，为了缩减项目本身的体积以及维持 pyecharts 项目的轻量化运行，pyecharts 将不再自带地图 js 文件。如用户需要用到地图图表，可自行安装对应的地图文件包。下面介绍如何安装。
 
 1. [全球国家地图](https://echarts-maps.github.io/echarts-countries-js/): [echarts-countries-pypkg](https://github.com/pyecharts/echarts-countries-pypkg) (1.9MB): 世界地图和 213 个国家，包括中国地图
 2. [中国省级地图](https://echarts-maps.github.io/echarts-china-provinces-js/): [echarts-china-provinces-pypkg](https://github.com/pyecharts/echarts-china-provinces-pypkg) (730KB)：23 个省，5 个自治区
 3. [中国市级地图](https://echarts-maps.github.io/echarts-china-cities-js/): [echarts-china-cities-pypkg](https://github.com/pyecharts/echarts-china-cities-pypkg) (3.8MB)：370 个中国城市
-4. [中国县区级地图](https://echarts-maps.github.io/echarts-china-cities-js/): [echarts-china-cities-pypkg](https://github.com/pyecharts/echarts-china-cities-pypkg) (4.1MB)：2882 个中国县·区
-5. [中国区域地图](https://echarts-maps.github.io/echarts-china-cities-js/): [echarts-china-cities-pypkg](https://github.com/pyecharts/echarts-china-cities-pypkg) (148KB)：11 个中国区域地图，比如华南、华北。
+4. [中国县区级地图](https://echarts-maps.github.io/echarts-china-counties-js/): [echarts-china-counties-pypkg](https://github.com/pyecharts/echarts-china-counties-pypkg) (4.1MB)：2882 个中国县·区
+5. [中国区域地图](https://echarts-maps.github.io/echarts-china-misc-js/): [echarts-china-misc-pypkg](https://github.com/pyecharts/echarts-china-misc-pypkg) (148KB)：11 个中国区域地图，比如华南、华北。
 
 特别注明，中国地图在 echarts-countries-pypkg 里。需要这些地图的朋友，可以装 pip 命令行:
 
@@ -19,13 +19,14 @@ $ pip install echarts-countries-pypkg
 $ pip install echarts-china-provinces-pypkg
 $ pip install echarts-china-cities-pypkg
 $ pip install echarts-china-counties-pypkg
+$ pip install echarts-china-misc-pypkg
 ```
 
 除此之外，[英国2016选区图](https://echarts-maps.github.io/echarts-united-kingdom-js/): [echarts-united-kingdom-pypkg](https://github.com/pyecharts/echarts-united-kingdom-pypkg) (1MB): 英国选区图可以用来画与政治经济相关的数据。
 
 ## 如何制作自己的地图扩展
 
-你需要做两个 github 项目：一个是 npm 项目，提供所有的 javascript 脚本；另一个是 python 项目，把前一个项目变成可以用 pip 装的 python 包。
+你需要做两个 Github 项目：一个是 npm 项目，提供所有的 javascript 脚本；另一个是 python 项目，把前一个项目变成可以用 pip 装的 python 包。
 
 ### npm 项目
 
@@ -63,7 +64,6 @@ echarts-united-kingdom-js	package.json			registry.json
 ```
 
 现在讲原理。一个 echarts-js 包需要以下的文件结构
-
 
 ```
 + echarts-united-kingdom-js
@@ -107,7 +107,6 @@ define(["require", "exports"], function (require, exports) {
 });
 
 好了，在 echarts-united-kingdom-js 子文件夹里就需要放地图文件了。每放一个呢，请记住更新 PINYI_MAP 和 FILE_MAP。
-
 ```
 
 ### python 项目
@@ -157,7 +156,6 @@ Please review changes before commit!
 
 这个时候，这个扩展包的骨架就已经做好了。我们现在做最后一步：
 
-
 ```bash
 $ pyecharts-host:tmp chfw$ cd echarts-united-kingdom-pypkg/
 $ git submodule add https://github.com/your/npm/project your_project_name_pypkg/resources
@@ -170,10 +168,10 @@ $ git submodule init
 $ git commit
 ```
 
-这样呢，这个包就可以放在 github 上了。
+这样呢，这个包就可以放在 Github 上了。
 
 
-## 如何手动添加(0.1.9.7+)
+## VERSION 0.1.9.X
 
 下面就以广东省汕头市南澳县地图为例，说明如何自行添加地图。
 
@@ -211,15 +209,13 @@ map.render()
 
 ```
 $ jupyter nbextensions install --user [python lib dir]/site-packages/pyecharts/templates/js/echarts
-...
 Copying: .../echarts/nanao.js -> /.../jupyter/nbextensions/echarts/nanao.js
-...
     To initialize this nbextension in the browser every time the notebook (or other app) loads:
 
           jupyter nbextension enable <the entry point>
 ```
 
-请特别注意，`[python lib dir]/site-packages/pyecharts/templates/js/echarts`路径后面不加`/`.
+请特别注意，`[python lib dir]/site-packages/pyecharts/templates/js/echarts` 路径后面不加`/`.
 
 你可以选择性的执行下面的语句。如果你已经装了 0.1.9.7+ 在你现在的 Python 环境，就可以跳过
 
