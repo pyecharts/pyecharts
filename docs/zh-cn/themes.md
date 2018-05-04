@@ -14,7 +14,7 @@ bar.render()
 
 ## 如何获得更多主题
 
-伴随 pyecharts v0.5.2, [echarts-themes-pypkg](https://github.com/pyecharts/echarts-themes-pypkg) 提供 vintage, macarons, infographic, shine 和 roma 主题。
+伴随 pyecharts v0.5.2, [echarts-themes-pypkg](https://github.com/pyecharts/echarts-themes-pypkg) 提供 dark, vintage, macarons, infographic, shine 和 roma 主题。
 
 ## 安装主题插件
 

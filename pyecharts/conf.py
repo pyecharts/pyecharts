@@ -9,7 +9,7 @@ import pyecharts.constants as constants
 class PyEchartsConfig(object):
 
     def __init__(
-        self, echarts_template_dir='.', jshost=None, force_js_embed=False
+        self, echarts_template_dir=".", jshost=None, force_js_embed=False
     ):
         self.echarts_template_dir = echarts_template_dir
         self._jshost = remove_trailing_slashes(jshost)
@@ -20,7 +20,8 @@ class PyEchartsConfig(object):
 
     @property
     def js_embed(self):
-        """ Determine whether to use embed code in <script> tag.
+        """
+        Determine whether to use embed code in <script> tag.
         """
         if self.force_js_embed:
             return True
@@ -78,12 +79,6 @@ class PyEchartsConfig(object):
         return links
 
     def produce_require_configuration(self, dependencies):
-        """
-
-        :param dependencies:
-        :param jshost:
-        :return:
-        """
         __dependencies__ = _ensure_echarts_is_in_the_front(dependencies)
         # if no nick name register, we treat the location as location.js
         require_conf_items = []
@@ -101,24 +96,18 @@ class PyEchartsConfig(object):
         )
 
     def produce_html_script_list(self, dependencies):
-        """
-
-        :param dependencies:
-        :return:
-        """
         __dependencies__ = _ensure_echarts_is_in_the_front(dependencies)
         script_list = [
-            '%s' % self.get_js_library(key) for key in __dependencies__
+            "%s" % self.get_js_library(key) for key in __dependencies__
         ]
         return script_list
 
 
 def remove_trailing_slashes(jshost):
-    """ Delete the end separator character if exists.
-
-    :param jshost:
     """
-    if jshost and jshost[-1] in ('/', '\\'):
+    Delete the end separator character if exists.
+    """
+    if jshost and jshost[-1] in ("/", "\\"):
         return jshost[:-1]
 
     else:
@@ -137,8 +126,8 @@ def configure(
     global_theme=None,
     **kwargs
 ):
-    """ Config all items for pyecharts when use chart.render()
-    or page.render().
+    """
+    Config all items for pyecharts when use chart.render() or page.render().
 
     :param jshost: the host for echarts related javascript libraries
     :param echarts_template_dir: the directory for custom html templates
@@ -165,9 +154,10 @@ def configure(
 
 
 def online(host=None):
-    """ Set the jshost
+    """
+    Set the jshost
 
-    :param host:
+    :param host: remote js host
     """
     if host is None:
         configure(hosted_on_github=True)
@@ -190,16 +180,14 @@ def jupyter_image(jupyter_presentation):
 
 
 def _ensure_echarts_is_in_the_front(dependencies):
-    """ make sure echarts is the item in the list
+    """
+    make sure echarts is the item in the list
     require(['echarts'....], function(ec) {..}) need it to
     be first but dependencies is a set so has no sequence
-
-    :param dependencies:
-    :return:
     """
     if len(dependencies) > 1:
-        dependencies.remove('echarts')
-        dependencies = ['echarts'] + list(dependencies)
+        dependencies.remove("echarts")
+        dependencies = ["echarts"] + list(dependencies)
     elif len(dependencies) == 1:
         # make a new list
         dependencies = list(dependencies)

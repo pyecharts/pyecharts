@@ -207,7 +207,7 @@ def test_bar3d_shading_lambert():
         visual_range_color=RANGE_COLOR,
         grid3d_width=200,
         grid3d_depth=80,
-        grid3d_shading='lambert',
+        grid3d_shading="lambert",
     )
     assert "lambert" in bar3d._repr_html_()
 
@@ -249,4 +249,4 @@ def test_bar3d_rotate_automatically_speedup():
 
 def test_bar3d_must_use_canvas():
     bar3d = Bar3D("3D 柱状图示例", width=1200, height=600)
-    eq_(bar3d.renderer, 'canvas')
+    eq_(bar3d.renderer, "canvas")

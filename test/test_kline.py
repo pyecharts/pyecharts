@@ -64,7 +64,7 @@ def test_kline_datazoom_vertical():
         data,
         mark_line=["max"],
         is_datazoom_show=True,
-        datazoom_orient='vertical',
+        datazoom_orient="vertical",
     )
     kline.render()
 
@@ -78,13 +78,13 @@ def test_kline_user_define_markline_style():
         data,
         mark_point=["min", "max"],
         mark_point_symbolsize=80,
-        datazoom_orient='vertical',
-        mark_line_valuedim=['lowest', 'highest'],
+        datazoom_orient="vertical",
+        mark_line_valuedim=["lowest", "highest"],
     )
     kline.render()
     actual_content = get_default_rendering_file_content()
-    assert 'lowest' in actual_content
-    assert 'highest' in actual_content
+    assert "lowest" in actual_content
+    assert "highest" in actual_content
     assert json.dumps(title) in actual_content
 
 
@@ -98,9 +98,9 @@ def test_kline_alias_Candlestick():
         data,
         mark_point=["min", "max"],
         mark_point_symbolsize=80,
-        datazoom_orient='vertical',
-        mark_line_valuedim=['lowest', 'highest'],
+        datazoom_orient="vertical",
+        mark_line_valuedim=["lowest", "highest"],
     )
     candlestick.render()
     actual_content = get_default_rendering_file_content()
-    assert 'candlestick' in actual_content
+    assert "candlestick" in actual_content

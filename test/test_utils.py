@@ -13,16 +13,16 @@ from pyecharts.utils.lazy import LazyObject
 
 
 def test_get_resource_dir():
-    path = get_resource_dir('templates')
-    expected = os.path.join(os.getcwd(), '..', 'pyecharts', 'templates')
+    path = get_resource_dir("templates")
+    expected = os.path.join(os.getcwd(), "..", "pyecharts", "templates")
     eq_(path, os.path.abspath(expected))
 
 
 def test_write_utf8_html_file():
     content = "柱状图数据堆叠示例"
-    file_name = 'test.html'
+    file_name = "test.html"
     write_utf8_html_file(file_name, content)
-    with codecs.open(file_name, 'r', 'utf-8') as f:
+    with codecs.open(file_name, "r", "utf-8") as f:
         actual_content = f.read()
         eq_(content, actual_content)
 
@@ -39,38 +39,38 @@ class MockChart(object):
 def test_merge_js_dependencies_with_one_chart():
     # Prepare some kinds of charts or page.
 
-    base_chart = MockChart(['echarts'])
+    base_chart = MockChart(["echarts"])
 
     # One chart or page
-    eq_(['echarts'], merge_js_dependencies(base_chart))
+    eq_(["echarts"], merge_js_dependencies(base_chart))
     # A map chart
-    ch1 = MockChart(['echarts', 'fujian', 'zhengjiang', 'anhui'])
+    ch1 = MockChart(["echarts", "fujian", "zhengjiang", "anhui"])
     eq_(
-        ['echarts', 'fujian', 'zhengjiang', 'anhui'],
+        ["echarts", "fujian", "zhengjiang", "anhui"],
         merge_js_dependencies(ch1),
     )
 
 
 def test_merge_js_dependencies_with_multiple_charts():
-    base_chart = MockChart(['echarts'])
-    map_chart = MockChart(['echarts', 'fujian'])
-    three_d_chart = MockChart(['echarts', 'echartsgl'])
+    base_chart = MockChart(["echarts"])
+    map_chart = MockChart(["echarts", "fujian"])
+    three_d_chart = MockChart(["echarts", "echartsgl"])
     # Multiple charts
-    eq_(['echarts', 'fujian'], merge_js_dependencies(base_chart, map_chart))
+    eq_(["echarts", "fujian"], merge_js_dependencies(base_chart, map_chart))
     eq_(
-        ['echarts', 'echartsgl', 'fujian'],
+        ["echarts", "echartsgl", "fujian"],
         merge_js_dependencies(base_chart, map_chart, three_d_chart),
     )
 
 
 def test_merge_js_dependencies_with_mixed_chart_and_string():
-    map_chart = MockChart(['echarts', 'fujian'])
+    map_chart = MockChart(["echarts", "fujian"])
 
-    eq_(['echarts', 'zhejiang'], merge_js_dependencies('echarts', 'zhejiang'))
+    eq_(["echarts", "zhejiang"], merge_js_dependencies("echarts", "zhejiang"))
     eq_(
-        ['echarts', 'zhejiang'], merge_js_dependencies(['echarts', 'zhejiang'])
+        ["echarts", "zhejiang"], merge_js_dependencies(["echarts", "zhejiang"])
     )
-    eq_(['echarts', 'fujian'], merge_js_dependencies('echarts', map_chart))
+    eq_(["echarts", "fujian"], merge_js_dependencies("echarts", map_chart))
 
 
 class MockPoint(object):

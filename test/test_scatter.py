@@ -41,7 +41,7 @@ def test_scatter_visualmap_type_size():
         v1[::-1],
         v2,
         is_visualmap=True,
-        visual_type='size',
+        visual_type="size",
         visual_range_size=[20, 80],
     )
     scatter.render()
@@ -95,10 +95,10 @@ def test_scatter_multi_dimension():
         extra_data=extra_data,
         is_visualmap=True,
         visual_dimension=2,
-        visual_orient='horizontal',
-        visual_type='size',
+        visual_orient="horizontal",
+        visual_type="size",
         visual_range=[254830, 1154605773],
-        visual_text_color='#000',
+        visual_text_color="#000",
     )
     sc.render()
 

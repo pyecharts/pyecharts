@@ -59,20 +59,20 @@ class Map(Chart):
         for data in zip(attr, value):
             _name, _value = data
             _data.append({"name": _name, "value": _value})
-        self._option.get('legend')[0].get('data').append(name)
+        self._option.get("legend")[0].get("data").append(name)
 
         __option__ = {
             "type": "map",
             "name": name,
-            "symbol": chart['symbol'],
-            "label": chart['label'],
+            "symbol": chart["symbol"],
+            "label": chart["label"],
             "mapType": maptype,
             "data": _data,
             "roam": is_roam,
             "showLegendSymbol": is_map_symbol_show,
         }
         if name_map:
-            __option__['nameMap'] = name_map
-        self._option.get('series').append(__option__)
+            __option__["nameMap"] = name_map
+        self._option.get("series").append(__option__)
         self._add_chinese_map(maptype)
         self._config_components(**kwargs)
