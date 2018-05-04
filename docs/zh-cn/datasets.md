@@ -45,7 +45,7 @@ print(coordinate1) # None
 
 `search_coordinates_by_keyword(*args)` 根据一个或多个关键字，返回一个匹配的字典对象。
 
-用法1：单个关键字模糊搜索
+用法 1：单个关键字模糊搜索
 
 ```python
 from pyecharts.datasets.coordinates import search_coordinates_by_keyword
@@ -54,7 +54,7 @@ result = search_coordinates_by_keyword('北京')
 print(result) # {'北京':[116.46, 39.92], '北京市': [116.4, 39.9]}
 ```
 
-用法2：多个关键字模糊搜索
+用法 2：多个关键字模糊搜索
 
 ```python
 from pyecharts.datasets.coordinates import search_coordinates_by_keyword
@@ -86,8 +86,6 @@ class Geo:
         pass
 ```
 
-
-
 整个使用例子如下：
 
 ```python
@@ -107,19 +105,15 @@ geo.add(
     is_piecewise=True,
     visual_text_color="#fff",
     pieces=[
-    {"min": 0, "max": 13, "label": "0 < x < 13"},
-    {"min": 14, "max": 16, "label": "14 < x < 16"},
+        {"min": 0, "max": 13, "label": "0 < x < 13"},
+        {"min": 14, "max": 16, "label": "14 < x < 16"},
     ],
     effect_scale=5,
 )
 geo.render()
 ```
 
-
-
 ## 地图数据
-
-
 
 以下是 pyecharts 开发组托管的地图扩展（map extension）:
 
@@ -134,7 +128,7 @@ geo.render()
 
 可以使用 *pip* 安装这些地图扩展。
 
-```
+```bash
 $ pip install echarts-countries-pypkg
 $ pip install echarts-china-provinces-pypkg
 $ pip install echarts-china-cities-pypkg

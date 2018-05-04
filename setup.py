@@ -3,6 +3,12 @@ import os
 import codecs
 from setuptools import setup, find_packages
 
+# RELEASE STEPS
+# $ python setup.py bdist_wheel
+# $ python twine upload dist/VX.Y.Z.whl
+# $ git tag -a VX.Y.Z -m "release version VX.Y.Z"
+# $ git push origin VX.Y.Z
+
 
 __title__ = "pyecharts"
 __description__ = "Python echarts, make charting easier"
@@ -11,8 +17,12 @@ __author_email__ = "chenjiandongx@qq.com"
 __license__ = "MIT"
 
 __requires__ = [
-    "pillow", "jinja2", "future", "jupyter-echarts-pypkg==0.1.1", "lml==0.0.2",
-    "pyecharts-javascripthon"
+    "pillow",
+    "jinja2",
+    "future",
+    "jupyter-echarts-pypkg==0.1.1",
+    "lml==0.0.2",
+    "pyecharts-javascripthon",
 ]
 
 __keywords__ = ["Echarts", "charts", "plotting-tool"]
@@ -24,8 +34,10 @@ with open(os.path.join(here, __title__, "_version.py")) as f:
 
 
 def read(afile):
-    """Read a file into setup"""
-    with codecs.open(afile, 'r', 'utf-8') as opened_file:
+    """
+    Read a file into setup
+    """
+    with codecs.open(afile, "r", "utf-8") as opened_file:
         return opened_file.read()
 
 
