@@ -1,6 +1,6 @@
 > 主题自定义篇：适用在 pyecharts v0.5.2 以后的版本。
 
-自 0.5.2 起，pyecharts 支持更换主体色系。下面是跟换为 'dark' 的例子：
+自 0.5.2+ 起，pyecharts 支持更换主体色系。下面是跟换为 'dark' 的例子：
 
 ```python
 from pyecharts import Bar
@@ -12,38 +12,40 @@ bar.render()
 ```
 ![guide-2](https://user-images.githubusercontent.com/4280312/39617664-79789878-4f78-11e8-9f0e-c3a2c371b6cb.png)
 
-## 如何获得跟多主题
+## 如何获得更多主题
 
-伴随 pyecharts 0.5.2, `echarts-themes-pypkg` 提供 vintage, macarons, infographic, shine 和 roma 主题。
+伴随 pyecharts v0.5.2, [echarts-themes-pypkg](https://github.com/pyecharts/echarts-themes-pypkg) 提供 vintage, macarons, infographic, shine 和 roma 主题。
+
+## 安装主题插件
+
+```shell
+$ pip install echarts-themes-pypkg
+```
+
+## 使用主题
+
+```python
+bar.use_theme('vintage')    # 更换为你喜欢的主题
+```
+
+## 示例
 
 ### vintage:
 
-![screen shot 2018-05-03 at 00 10 06](https://user-images.githubusercontent.com/4280312/39553641-8e54c766-4e66-11e8-9156-5b8fa13cb9f9.png)
+![vintage](https://user-images.githubusercontent.com/19553554/39620159-d42defa4-4fbc-11e8-8e8d-ea9158434ea0.png)
 
 ### macarons:
 
-![screen shot 2018-05-03 at 00 13 12](https://user-images.githubusercontent.com/4280312/39553690-cc3adffc-4e66-11e8-8423-eb39b5216329.png)
+![macarons](https://user-images.githubusercontent.com/19553554/39620161-d529169a-4fbc-11e8-9864-c246f9a2f677.png)
 
 ### infographic
-![screen shot 2018-05-03 at 00 13 59](https://user-images.githubusercontent.com/4280312/39553714-eb2e7d74-4e66-11e8-9985-0bb3f5dd6f57.png)
+
+![infographic](https://user-images.githubusercontent.com/19553554/39620158-d3e6bfc6-4fbc-11e8-9564-9d2d9f62b2be.png)
 
 ### shine:
 
-![screen shot 2018-05-03 at 00 14 59](https://user-images.githubusercontent.com/4280312/39553751-0f360778-4e67-11e8-8eea-0c2d6e3b91d9.png)
-
+![shine](https://user-images.githubusercontent.com/19553554/39620177-d6fd0a3a-4fbc-11e8-8abc-a99f6d1f9f74.png)
 
 ### roma:
 
-![screen shot 2018-05-03 at 00 17 27](https://user-images.githubusercontent.com/4280312/39553828-656680fa-4e67-11e8-8c3c-ff4ec71fb4db.png)
-
-你需要做的就是把 echarts-themes-pypkg 装上。
-
-```
-pip install echarts-themes-pypkg
-```
-
-然后在前面的例子里把 'dark' 换成你的新主题就可以了：
-
-```python
-bar.use_theme('vintage')
-```
+![roma](https://user-images.githubusercontent.com/19553554/39620162-d57380e0-4fbc-11e8-872b-2c1c43b7a1a4.png)
