@@ -1,6 +1,6 @@
 > 主题自定义篇：适用在 pyecharts v0.5.2 以后的版本。
 
-自 0.5.2+ 起，pyecharts 支持更换主体色系。下面是跟换为 'dark' 的例子：
+自 0.5.2+ 起，pyecharts 支持更换主体色系。下面是更换为 'dark' 的例子：
 
 ```python
 from pyecharts import Bar
