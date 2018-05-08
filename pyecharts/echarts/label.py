@@ -20,7 +20,7 @@ class Label(JsonSerializable):
 
         if chart_type != "graph":
             if formatter is None:
-                if type == "pie":
+                if chart_type == "pie":
                     formatter = "{b}: {d}%"
         if formatter:
             self.config["formatter"] = formatter
