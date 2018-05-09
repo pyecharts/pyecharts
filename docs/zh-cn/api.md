@@ -242,26 +242,36 @@ map.render()
 打印全部 options 属性。自 v0.3.3 起。已废弃，应当使用 `print_echarts_options` 。
 
 
-## 多图表
+## 多图表 Page
 
-`pyecharts.custom.page.Page` 用于在同一页面显示多个图表，也拥有上述的属性和方法。
+> 在 v0.5.3 变更，重写内部实现，新增图表命名名称。
 
-同时 `Page` 类继承自 `list` ，因此也支持长度计算(len)、迭代(iter)、索引(index)、切片(slice)、添加(append)、扩展(extend)等操作。
+由于无论是 Jinja2 模板还是 Django 模板，均不提倡使用 `{{ charts.1 }}` 形式访问列表中的某一个元素。因此在 v0.5.3 对 Page 进行重构，新增图表命名名称。
 
-例子：按顺序打印 page 中每个图表的 echarts 选项字典。
+在创建一个 `Page` 实例 page ，后，使用 `add_chart` 添加一个图表对象，可以使用 name 为之起一个引用名称，如果没有指定引用名称，则使用 c0,c1 命名。
+
 
 ```python
+
+from pyecharts import Page,Line, Bar
+
 page = Page()
 line = Line('Demo Line')
 # ... Add data to line
-page.add(line)
-kline = KLine('Demo kline')
-# ... Add data to kline
-page.append(kline)
-
-for chart in page:
-    chart.show_config()
+page.add_chart(line, name='line')
+bar = Bar('Demo kline')
+# ... Add data to bar
+page.add_chart(bar)
 ```
+
+图表访问方式
+
+| 项目 | Python 代码 | 模板代码 |
+| ------ | ------ | ------ |
+| line 实例 | `print(page['line'])` | `{{ page.line }}` |
+| bar 实例 | `print(page['c1'])` | `{{ page.c1 }}` |
+
+另外注意的是，Page 不再具有 list 的全部特性，因此 切片(slice)、添加(append)、扩展(extend) 不再支持。
 
 ## 数据处理工具
 

@@ -8,9 +8,30 @@ from pyecharts import (
     Bar, Scatter3D, Line, Pie, Map, Kline, Radar, WordCloud, Liquid
 )
 from pyecharts import Page
-from nose.tools import eq_, raises
+from nose.tools import eq_, assert_list_equal, raises
 
 TEST_PAGE_TITLE = "my awesome chart"
+
+
+class MockChart:
+    def __init__(self, page_title):
+        self.page_title = page_title
+
+
+def test_page_feature():
+    nc = Page().add_chart(
+        MockChart('Line Chart'), name='line'
+    ).add_chart(
+        MockChart('Bar Chart')
+    ).add_chart(
+        MockChart('Map Chart'), name='map'
+    )
+    eq_('Line Chart', nc['line'].page_title)
+    eq_('Bar Chart', nc['c1'].page_title)
+    assert_list_equal(
+        ['Line Chart', 'Bar Chart', 'Map Chart'],
+        [c.page_title for c in nc]
+    )
 
 
 def create_three():
@@ -34,7 +55,7 @@ def create_three():
             random.randint(0, 100),
         ]
         for _ in range(80)
-    ]
+        ]
     scatter3d = Scatter3D("3D 散点图示例", width=1200, height=600)
     scatter3d.add("", data, is_visualmap=True, visual_range_color=RANGE_COLOR)
     page.add(scatter3d)
@@ -220,7 +241,7 @@ def test_more():
             random.randint(0, 100),
         ]
         for _ in range(80)
-    ]
+        ]
     scatter3D = Scatter3D("3D 散点图示例", width=1200, height=600)
     scatter3D.add("", data, is_visualmap=True, visual_range_color=RANGE_COLOR)
     page.add(scatter3D)
