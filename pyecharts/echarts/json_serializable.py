@@ -12,6 +12,9 @@ class JsonSerializable(object):
     def __getitem__(self, key):
         return self._config.get(key)
 
+    def update(self, **kwargs):
+        self.config.update(**kwargs)
+
     @property
     def config(self):
         return remove_key_with_none_value(self._config)
