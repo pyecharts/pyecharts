@@ -115,6 +115,9 @@ def _clean(mydict):
                 else:
                     # delete key with empty dictionary
                     continue
+                if not value:
+                    # detete empty dictionary after cleanning
+                    continue
             elif isinstance(value, (list, tuple, set)):
                 if value:
                     value = list(_clean_array(value))
