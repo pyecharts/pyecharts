@@ -31,6 +31,7 @@
         "boxHeight": 100,
         "boxWidth": 100,
         "viewControl": {
+            "autoRotate": false,
             "autoRotateSpeed": 10,
             "rotateSensitivity": 5
         }
@@ -71,6 +72,7 @@
                 },
                 "normal": {
                     "position": "top",
+                    "show": false,
                     "textStyle": {
                         "fontSize": 12
                     }
@@ -117,6 +119,7 @@
         },
         "backgroundColor": "rgba(50,50,50,0.7)",
         "borderColor": "#333",
+        "borderWidth": 0,
         "textStyle": {
             "fontSize": 14
         },
@@ -142,6 +145,7 @@
         },
         "left": "left",
         "max": 30,
+        "min": 0,
         "orient": "vertical",
         "showLabel": true,
         "splitNumber": 5,

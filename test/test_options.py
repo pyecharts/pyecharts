@@ -81,7 +81,7 @@ def test_kline_default(patched):
     actual_options = json.dumps(
         kline.options, sort_keys=True, indent=4, cls=DefaultJsonEncoder
     )
-    expected = get_fixture_content("kline_options.json")
+    expected = get_fixture_content(fixture)
     for a, b in zip(actual_options.split("\n"), expected.split("\n")):
         eq_(a.strip(), b.strip())
 

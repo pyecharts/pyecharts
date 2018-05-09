@@ -3,6 +3,7 @@
         "axisLine": {
             "lineStyle": {
                 "normal": {
+                    "curveness": 0,
                     "opacity": 1,
                     "type": "solid",
                     "width": 1
@@ -10,16 +11,19 @@
             },
             "show": true
         },
+        "boundaryGap": false,
         "clockwise": true,
         "show": true,
         "splitLine": {
             "lineStyle": {
                 "normal": {
+                    "curveness": 0,
                     "opacity": 1,
                     "type": "solid",
                     "width": 1
                 }
-            }
+            },
+            "show": false
         },
         "startAngle": 90,
         "type": "category"
@@ -67,10 +71,13 @@
         }
     ],
     "radiusAxis": {
-        "axisLabel": {},
+        "axisLabel": {
+            "rotate": 0
+        },
         "axisLine": {
             "lineStyle": {
                 "normal": {
+                    "curveness": 0,
                     "opacity": 1,
                     "type": "solid",
                     "width": 1
@@ -197,6 +204,7 @@
                 },
                 "normal": {
                     "position": "top",
+                    "show": false,
                     "textStyle": {
                         "fontSize": 12
                     }
@@ -245,6 +253,7 @@
         },
         "backgroundColor": "rgba(50,50,50,0.7)",
         "borderColor": "#333",
+        "borderWidth": 0,
         "textStyle": {
             "fontSize": 14
         },
