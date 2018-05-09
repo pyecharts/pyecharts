@@ -115,18 +115,22 @@ def _clean(mydict):
                 else:
                     # delete key with empty dictionary
                     continue
+
                 if not value:
                     # detete empty dictionary after cleanning
                     continue
+
             elif isinstance(value, (list, tuple, set)):
                 if value:
                     value = list(_clean_array(value))
                 else:
                     # delete key with empty array
                     continue
+
             elif isinstance(value, string_type) and not value:
                 # delete key with empty string
                 continue
+
             yield (key, value)
 
 

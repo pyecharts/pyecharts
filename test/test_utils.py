@@ -97,10 +97,17 @@ def test_remove_key_with_none_value():
         "a": 1,
         "b": None,
         "nested": {"ac": 1, "bc": None, "nested": {"a": 1, "b": None}},
+        "empty_dict": {"data": []},
+        "empty_dict2": {"empty_dict": {}},
         "array": [
             1,
             {"nested": {"ac": 1, "bc": None, "nested": {"a": 1, "b": None}}},
-            {"normal": 1},
+            {
+                "normal": 1,
+                "empty_string": "",
+                "empty_array": [],
+                "empty_nested_dict": {},
+            },
         ],
     }
     result = remove_key_with_none_value(fixture)
