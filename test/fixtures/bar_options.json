@@ -68,6 +68,7 @@
                 },
                 "normal": {
                     "position": "top",
+                    "show": false,
                     "textStyle": {
                         "fontSize": 12
                     }
@@ -141,6 +142,7 @@
                 },
                 "normal": {
                     "position": "top",
+                    "show": false,
                     "textStyle": {
                         "fontSize": 12
                     }
@@ -229,6 +231,7 @@
         },
         "backgroundColor": "rgba(50,50,50,0.7)",
         "borderColor": "#333",
+        "borderWidth": 0,
         "textStyle": {
             "fontSize": 14
         },
@@ -240,11 +243,14 @@
             "axisLabel": {
                 "interval": "auto",
                 "margin": 8,
+                "rotate": 0,
                 "textStyle": {
                     "fontSize": 12
                 }
             },
-            "axisTick": {},
+            "axisTick": {
+                "alignWithLabel": false
+            },
             "boundaryGap": true,
             "data": [
                 "Jan",
@@ -260,13 +266,16 @@
                 "Nov",
                 "Dec"
             ],
+            "inverse": false,
             "nameGap": 25,
             "nameLocation": "middle",
             "nameTextStyle": {
                 "fontSize": 14
             },
             "show": true,
-            "splitLine": {},
+            "splitLine": {
+                "show": false
+            },
             "type": "category"
         }
     ],
@@ -276,12 +285,16 @@
                 "formatter": "{value} ",
                 "interval": "auto",
                 "margin": 8,
+                "rotate": 0,
                 "textStyle": {
                     "fontSize": 12
                 }
             },
-            "axisTick": {},
+            "axisTick": {
+                "alignWithLabel": false
+            },
             "boundaryGap": true,
+            "inverse": false,
             "nameGap": 25,
             "nameLocation": "middle",
             "nameTextStyle": {

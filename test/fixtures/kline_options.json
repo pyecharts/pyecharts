@@ -276,6 +276,7 @@
         },
         "backgroundColor": "rgba(50,50,50,0.7)",
         "borderColor": "#333",
+        "borderWidth": 0,
         "textStyle": {
             "fontSize": 14
         },
@@ -287,11 +288,14 @@
             "axisLabel": {
                 "interval": "auto",
                 "margin": 8,
+                "rotate": 0,
                 "textStyle": {
                     "fontSize": 12
                 }
             },
-            "axisTick": {},
+            "axisTick": {
+                "alignWithLabel": false
+            },
             "boundaryGap": true,
             "data": [
                 "2017/7/1",
@@ -326,6 +330,7 @@
                 "2017/7/30",
                 "2017/7/31"
             ],
+            "inverse": false,
             "nameGap": 25,
             "nameLocation": "middle",
             "nameTextStyle": {
@@ -333,7 +338,9 @@
             },
             "scale": true,
             "show": true,
-            "splitLine": {},
+            "splitLine": {
+                "show": false
+            },
             "type": "category"
         }
     ],
@@ -343,12 +350,16 @@
                 "formatter": "{value} ",
                 "interval": "auto",
                 "margin": 8,
+                "rotate": 0,
                 "textStyle": {
                     "fontSize": 12
                 }
             },
-            "axisTick": {},
+            "axisTick": {
+                "alignWithLabel": false
+            },
             "boundaryGap": true,
+            "inverse": false,
             "nameGap": 25,
             "nameLocation": "middle",
             "nameTextStyle": {

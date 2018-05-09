@@ -3,8 +3,17 @@ from __future__ import unicode_literals
 
 from future.utils import viewitems
 
-import codecs
 import os
+import sys
+import codecs
+
+PY3 = sys.version_info[0] == 3
+
+if PY3:
+    string_type = str
+else:
+    string_type = basestring
+
 
 __all__ = [
     "get_resource_dir",
@@ -99,11 +108,22 @@ def _expand(dict_generator):
 
 def _clean(mydict):
     for key, value in viewitems(mydict):
-        if value:
+        if value is not None:
             if isinstance(value, dict):
-                value = _expand(_clean(value))
+                if value:
+                    value = _expand(_clean(value))
+                else:
+                    # delete key with empty dictionary
+                    continue
             elif isinstance(value, (list, tuple, set)):
-                value = list(_clean_array(value))
+                if value:
+                    value = list(_clean_array(value))
+                else:
+                    # delete key with empty array
+                    continue
+            elif isinstance(value, string_type) and not value:
+                # delete key with empty string
+                continue
             yield (key, value)
 
 
