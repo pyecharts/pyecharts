@@ -10,6 +10,7 @@ from pyecharts.utils import (
     write_utf8_html_file, get_resource_dir, merge_js_dependencies
 )
 from pyecharts.utils.lazy import LazyObject
+from pyecharts.utils import remove_key_with_none_value
 
 
 def test_get_resource_dir():
@@ -89,3 +90,23 @@ def test_lazy_object():
     assert isinstance(p, LazyObject)
     p.x = 3
     assert isinstance(p, MockPoint)
+
+
+def test_remove_key_with_none_value():
+    fixture = {
+        "a": 1,
+        "b": None,
+        "nested": {"ac": 1, "bc": None, "nested": {"a": 1, "b": None}},
+        "array": [
+            1,
+            {"nested": {"ac": 1, "bc": None, "nested": {"a": 1, "b": None}}},
+            {"normal": 1},
+        ],
+    }
+    result = remove_key_with_none_value(fixture)
+    actual = {
+        'a': 1,
+        'nested': {'ac': 1, 'nested': {'a': 1}},
+        'array': [1, {'nested': {'ac': 1, 'nested': {'a': 1}}}, {'normal': 1}],
+    }
+    eq_(result, actual)

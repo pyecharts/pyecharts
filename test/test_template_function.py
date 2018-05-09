@@ -34,8 +34,8 @@ def test_echarts_js_dependencies():
     bar = create_demo_bar()
     html = tpl.render(bar=bar)
     assert (
-        '<script type="text/javascript" src="http://localhost/echarts/echarts.min.js"></script>'
-        == html
+        '<script type="text/javascript" src="http://localhost/echarts/echarts.min.js"></script>' ==
+        html
     )  # flake8: noqa
 
 
@@ -62,24 +62,24 @@ def test_echarts_js_container():
     bar = create_demo_bar("id_demo_chart")
     html = tpl.render(bar=bar)
     assert (
-        '<div id="id_demo_chart" style="width:800px;height:400px;"></div>'
-        == html
+        '<div id="id_demo_chart" style="width:800px;height:400px;"></div>' ==
+        html
     )  # flake8: noqa
 
     bar.width = 1024
     bar.height = 768
     html = tpl.render(bar=bar)
     assert (
-        '<div id="id_demo_chart" style="width:1024px;height:768px;"></div>'
-        == html
+        '<div id="id_demo_chart" style="width:1024px;height:768px;"></div>' ==
+        html
     )  # flake8: noqa
 
     bar.width = "1024px"
     bar.height = "768px"
     html = tpl.render(bar=bar)
     assert (
-        '<div id="id_demo_chart" style="width:1024px;height:768px;"></div>'
-        == html
+        '<div id="id_demo_chart" style="width:1024px;height:768px;"></div>' ==
+        html
     )  # flake8: noqa
 
 
