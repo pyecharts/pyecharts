@@ -102,7 +102,7 @@ def _clean(mydict):
         if value is not None:
             if isinstance(value, dict):
                 value = _expand(_clean(value))
-            elif isinstance(value, list):
+            elif isinstance(value, (list, tuple, set)):
                 value = list(_clean_array(value))
             yield (key, value)
 
@@ -112,7 +112,7 @@ def _clean_array(myarray):
         if isinstance(value, dict):
             yield _expand(_clean(value))
 
-        elif isinstance(value, list):
+        elif isinstance(value, (list, tuple, set)):
             yield list(_clean_array(value))
 
         else:
