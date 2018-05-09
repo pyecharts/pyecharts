@@ -1,6 +1,8 @@
 # coding=utf-8
 from __future__ import unicode_literals
 
+from future.utils import viewitems
+
 import codecs
 import os
 
@@ -89,3 +91,31 @@ def merge_js_dependencies(*chart_or_name_list):
             _add(_d)
     fol = [x for x in front_optional_items if x in fist_items]
     return front_required_items + fol + dependencies
+
+
+def _expand(dict_generator):
+    return dict(list(dict_generator))
+
+
+def _clean(mydict):
+    for key, value in viewitems(mydict):
+        if value is not None:
+            if isinstance(value, dict):
+                value = _expand(_clean(value))
+            elif isinstance(value, list):
+                value = list(_clean_array(value))
+            yield (key, value)
+
+
+def _clean_array(myarray):
+    for value in myarray:
+        if isinstance(value, dict):
+            yield _expand(_clean(value))
+        elif isinstance(value, list):
+            yield list(_clean_array(value))
+        else:
+            yield value
+
+
+def remove_key_with_none_value(incoming_dict):
+    return _expand(_clean(incoming_dict))
