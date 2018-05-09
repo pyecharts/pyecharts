@@ -1,7 +1,8 @@
 # 版本日志
 
 * ### version 0.5.3（dev）
-    *  TODO
+    #### Fixed
+    * [issue#544](https://github.com/pyecharts/pyecharts/issues/516) 主题颜色调整
 
 * ### version 0.5.2 - 2018.05.04（Current）
 
