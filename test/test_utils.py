@@ -110,10 +110,10 @@ def test_remove_key_with_none_value():
             },
         ],
     }
-    result = remove_key_with_none_value(fixture)
-    actual = {
+    actual_result = remove_key_with_none_value(fixture)
+    expected = {
         'a': 1,
         'nested': {'ac': 1, 'nested': {'a': 1}},
         'array': [1, {'nested': {'ac': 1, 'nested': {'a': 1}}}, {'normal': 1}],
     }
-    eq_(result, actual)
+    eq_(actual_result, expected)
