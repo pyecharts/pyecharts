@@ -10,7 +10,7 @@ from pyecharts_javascripthon.api import DefaultJsonEncoder
 from nose.tools import eq_
 from mock import patch
 
-from test.utils import get_fixture_content, store_fixture_content
+from test.utils import get_fixture_content
 from test.constants import RANGE_COLOR
 
 
@@ -31,7 +31,6 @@ def test_polar_type_scatter_one(patched):
     actual_options = json.dumps(
         polar.options, sort_keys=True, indent=4, cls=DefaultJsonEncoder
     )
-    store_fixture_content(fixture, actual_options)
     expected = get_fixture_content(fixture)
     for a, b in zip(actual_options.split("\n"), expected.split("\n")):
         eq_(a.strip(), b.strip())
@@ -82,7 +81,6 @@ def test_kline_default(patched):
     actual_options = json.dumps(
         kline.options, sort_keys=True, indent=4, cls=DefaultJsonEncoder
     )
-    store_fixture_content(fixture, actual_options)
     expected = get_fixture_content("kline_options.json")
     for a, b in zip(actual_options.split("\n"), expected.split("\n")):
         eq_(a.strip(), b.strip())
@@ -126,7 +124,6 @@ def test_bar_default(patched):
     actual_options = json.dumps(
         bar.options, sort_keys=True, indent=4, cls=DefaultJsonEncoder
     )
-    store_fixture_content(fixture, actual_options)
     expected = get_fixture_content(fixture)
     for a, b in zip(actual_options.split("\n"), expected.split("\n")):
         eq_(a.strip(), b.strip())
@@ -144,7 +141,6 @@ def test_scatter_option(patched):
     actual_options = json.dumps(
         scatter.options, sort_keys=True, indent=4, cls=DefaultJsonEncoder
     )
-    store_fixture_content(fixture, actual_options)
     expected = get_fixture_content(fixture)
     for a, b in zip(actual_options.split("\n"), expected.split("\n")):
         eq_(a.strip(), b.strip())
@@ -175,7 +171,6 @@ def test_line3d_default(patched):
     actual_options = json.dumps(
         line3d.options, sort_keys=True, indent=4, cls=DefaultJsonEncoder
     )
-    store_fixture_content(fixture, actual_options)
     expected = get_fixture_content(fixture)
     for a, b in zip(actual_options.split("\n"), expected.split("\n")):
         eq_(a.strip(), b.strip())
@@ -204,7 +199,6 @@ def test_geo_china_scatter(patched):
     actual_options = json.dumps(
         geo.options, sort_keys=True, indent=4, cls=DefaultJsonEncoder
     )
-    store_fixture_content(fixture, actual_options)
     expected = get_fixture_content(fixture)
     for a, b in zip(actual_options.split("\n"), expected.split("\n")):
         eq_(a.strip(), b.strip())
