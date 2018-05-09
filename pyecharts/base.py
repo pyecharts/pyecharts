@@ -59,7 +59,7 @@ class Base(object):
 
     @property
     def options(self):
-        return self._option
+        return utils.remove_key_with_none_value(self._option)
 
     @property
     def js_dependencies(self):
