@@ -111,8 +111,10 @@ def _clean_array(myarray):
     for value in myarray:
         if isinstance(value, dict):
             yield _expand(_clean(value))
+
         elif isinstance(value, list):
             yield list(_clean_array(value))
+
         else:
             yield value
 
