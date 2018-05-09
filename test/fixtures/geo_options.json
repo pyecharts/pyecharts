@@ -1,203 +1,203 @@
 {
     "color": [
-        "#c23531",
-        "#2f4554",
-        "#61a0a8",
-        "#d48265",
-        "#749f83",
-        "#ca8622",
-        "#bda29a",
-        "#6e7074",
-        "#546570",
-        "#c4ccd3",
-        "#f05b72",
-        "#ef5b9c",
-        "#f47920",
-        "#905a3d",
-        "#fab27b",
-        "#2a5caa",
-        "#444693",
-        "#726930",
-        "#b2d235",
-        "#6d8346",
-        "#ac6767",
-        "#1d953f",
-        "#6950a1",
-        "#918597",
+        "#c23531", 
+        "#2f4554", 
+        "#61a0a8", 
+        "#d48265", 
+        "#749f83", 
+        "#ca8622", 
+        "#bda29a", 
+        "#6e7074", 
+        "#546570", 
+        "#c4ccd3", 
+        "#f05b72", 
+        "#ef5b9c", 
+        "#f47920", 
+        "#905a3d", 
+        "#fab27b", 
+        "#2a5caa", 
+        "#444693", 
+        "#726930", 
+        "#b2d235", 
+        "#6d8346", 
+        "#ac6767", 
+        "#1d953f", 
+        "#6950a1", 
+        "#918597", 
         "#f6f5ec"
-    ],
+    ], 
     "geo": {
         "itemStyle": {
             "emphasis": {
                 "areaColor": "#2a333d"
-            },
+            }, 
             "normal": {
-                "areaColor": "#323c48",
+                "areaColor": "#323c48", 
                 "borderColor": "#111"
             }
-        },
+        }, 
         "label": {
             "emphasis": {
-                "show": true,
+                "show": true, 
                 "textStyle": {
                     "color": "#eee"
                 }
             }
-        },
-        "map": "china",
+        }, 
+        "map": "china", 
         "roam": true
-    },
+    }, 
     "legend": [
         {
             "data": [
                 ""
-            ],
-            "left": "center",
-            "orient": "horizontal",
-            "selectedMode": "multiple",
-            "show": false,
+            ], 
+            "left": "center", 
+            "orient": "horizontal", 
+            "selectedMode": "multiple", 
+            "show": false, 
             "textStyle": {
                 "fontSize": 12
-            },
+            }, 
             "top": "top"
         }
-    ],
+    ], 
     "series": [
         {
-            "coordinateSystem": "geo",
+            "coordinateSystem": "geo", 
             "data": [
                 {
-                    "name": "\u9102\u5c14\u591a\u65af",
+                    "name": "\u9102\u5c14\u591a\u65af", 
                     "value": [
-                        109.781327,
-                        39.608266,
+                        109.781327, 
+                        39.608266, 
                         12
                     ]
-                },
+                }, 
                 {
-                    "name": "\u62db\u8fdc",
+                    "name": "\u62db\u8fdc", 
                     "value": [
-                        120.38,
-                        37.35,
+                        120.38, 
+                        37.35, 
                         12
                     ]
-                },
+                }, 
                 {
-                    "name": "\u821f\u5c71",
+                    "name": "\u821f\u5c71", 
                     "value": [
-                        122.207216,
-                        29.985295,
+                        122.207216, 
+                        29.985295, 
                         12
                     ]
-                },
+                }, 
                 {
-                    "name": "\u9f50\u9f50\u54c8\u5c14",
+                    "name": "\u9f50\u9f50\u54c8\u5c14", 
                     "value": [
-                        123.97,
-                        47.33,
+                        123.97, 
+                        47.33, 
                         14
                     ]
-                },
+                }, 
                 {
-                    "name": "\u76d0\u57ce",
+                    "name": "\u76d0\u57ce", 
                     "value": [
-                        120.13,
-                        33.38,
+                        120.13, 
+                        33.38, 
                         15
                     ]
                 }
-            ],
+            ], 
             "label": {
                 "emphasis": {
-                    "position": "right",
-                    "show": true,
+                    "position": "right", 
+                    "show": true, 
                     "textStyle": {
                         "fontSize": 15
                     }
-                },
+                }, 
                 "normal": {
-                    "position": "top",
-                    "show": false,
+                    "position": "top", 
+                    "show": false, 
                     "textStyle": {
                         "fontSize": 12
                     }
                 }
-            },
-            "symbol": "circle",
-            "symbolSize": 15,
+            }, 
+            "symbol": "circle", 
+            "symbolSize": 15, 
             "type": "scatter"
         }
-    ],
-    "series_id": "1",
+    ], 
+    "series_id": "1", 
     "title": [
         {
-            "left": "auto",
-            "subtext": "data from pm2.5",
+            "left": "auto", 
+            "subtext": "data from pm2.5", 
             "subtextStyle": {
                 "fontSize": 12
-            },
-            "text": "\u5168\u56fd\u4e3b\u8981\u57ce\u5e02\u7a7a\u6c14\u8d28\u91cf",
+            }, 
+            "text": "\u5168\u56fd\u4e3b\u8981\u57ce\u5e02\u7a7a\u6c14\u8d28\u91cf", 
             "textStyle": {
                 "fontSize": 18
-            },
+            }, 
             "top": "auto"
         }
-    ],
+    ], 
     "toolbox": {
         "feature": {
             "dataView": {
                 "show": true
-            },
+            }, 
             "restore": {
                 "show": true
-            },
+            }, 
             "saveAsImage": {
-                "show": true,
+                "show": true, 
                 "title": "\u4e0b\u8f7d\u56fe\u7247"
             }
-        },
-        "left": "95%",
-        "orient": "vertical",
-        "show": true,
+        }, 
+        "left": "95%", 
+        "orient": "vertical", 
+        "show": true, 
         "top": "center"
-    },
+    }, 
     "tooltip": {
         "axisPointer": {
             "type": "line"
-        },
-        "backgroundColor": "rgba(50,50,50,0.7)",
-        "borderColor": "#333",
-        "borderWidth": 0,
-        "formatter": "{b}",
+        }, 
+        "backgroundColor": "rgba(50,50,50,0.7)", 
+        "borderColor": "#333", 
+        "borderWidth": 0, 
+        "formatter": "{b}", 
         "textStyle": {
             "fontSize": 14
-        },
-        "trigger": "item",
+        }, 
+        "trigger": "item", 
         "triggerOn": "mousemove|click"
-    },
+    }, 
     "visualMap": {
-        "calculable": true,
+        "calculable": true, 
         "inRange": {
             "color": [
-                "#50a3ba",
-                "#eac763",
+                "#50a3ba", 
+                "#eac763", 
                 "#d94e5d"
             ]
-        },
-        "left": "left",
-        "max": 200,
-        "min": 0,
-        "orient": "vertical",
-        "showLabel": true,
-        "splitNumber": 5,
+        }, 
+        "left": "left", 
+        "max": 200, 
+        "min": 0, 
+        "orient": "vertical", 
+        "showLabel": true, 
+        "splitNumber": 5, 
         "text": [
-            "high",
+            "high", 
             "low"
-        ],
+        ], 
         "textStyle": {
             "color": "#fff"
-        },
-        "top": "bottom",
+        }, 
+        "top": "bottom", 
         "type": "continuous"
     }
 }

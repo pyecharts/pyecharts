@@ -1,88 +1,88 @@
 {
     "color": [
-        "#c23531",
-        "#2f4554",
-        "#61a0a8",
-        "#d48265",
-        "#749f83",
-        "#ca8622",
-        "#bda29a",
-        "#6e7074",
-        "#546570",
-        "#c4ccd3",
-        "#f05b72",
-        "#ef5b9c",
-        "#f47920",
-        "#905a3d",
-        "#fab27b",
-        "#2a5caa",
-        "#444693",
-        "#726930",
-        "#b2d235",
-        "#6d8346",
-        "#ac6767",
-        "#1d953f",
-        "#6950a1",
-        "#918597",
+        "#c23531", 
+        "#2f4554", 
+        "#61a0a8", 
+        "#d48265", 
+        "#749f83", 
+        "#ca8622", 
+        "#bda29a", 
+        "#6e7074", 
+        "#546570", 
+        "#c4ccd3", 
+        "#f05b72", 
+        "#ef5b9c", 
+        "#f47920", 
+        "#905a3d", 
+        "#fab27b", 
+        "#2a5caa", 
+        "#444693", 
+        "#726930", 
+        "#b2d235", 
+        "#6d8346", 
+        "#ac6767", 
+        "#1d953f", 
+        "#6950a1", 
+        "#918597", 
         "#f6f5ec"
-    ],
+    ], 
     "legend": [
         {
             "data": [
-                "precipitation",
+                "precipitation", 
                 "evaporation"
-            ],
-            "left": "center",
-            "orient": "horizontal",
-            "selectedMode": "multiple",
-            "show": true,
+            ], 
+            "left": "center", 
+            "orient": "horizontal", 
+            "selectedMode": "multiple", 
+            "show": true, 
             "textStyle": {
                 "fontSize": 12
-            },
+            }, 
             "top": "top"
         }
-    ],
+    ], 
     "series": [
         {
-            "barCategoryGap": "20%",
+            "barCategoryGap": "20%", 
             "data": [
-                2.0,
-                4.9,
-                7.0,
-                23.2,
-                25.6,
-                76.7,
-                135.6,
-                162.2,
-                32.6,
-                20.0,
-                6.4,
+                2.0, 
+                4.9, 
+                7.0, 
+                23.2, 
+                25.6, 
+                76.7, 
+                135.6, 
+                162.2, 
+                32.6, 
+                20.0, 
+                6.4, 
                 3.3
-            ],
+            ], 
             "label": {
                 "emphasis": {
-                    "show": true,
+                    "show": true, 
                     "textStyle": {
                         "fontSize": 12
                     }
-                },
+                }, 
                 "normal": {
-                    "position": "top",
-                    "show": false,
+                    "position": "top", 
+                    "show": false, 
                     "textStyle": {
                         "fontSize": 12
                     }
                 }
-            },
+            }, 
             "markLine": {
                 "data": [
                     {
-                        "name": "mean-Value",
+                        "name": "mean-Value", 
                         "type": "average"
                     }
-                ],
+                ], 
                 "symbolSize": 10
-            },
+            }, 
             "markPoint": {
                 "data": [
                     {
@@ -92,12 +92,12 @@
                                     "color": "#fff"
                                 }
                             }
-                        },
-                        "name": "Maximum",
-                        "symbol": "pin",
-                        "symbolSize": 50,
+                        }, 
+                        "name": "Maximum", 
+                        "symbol": "pin", 
+                        "symbolSize": 50, 
                         "type": "max"
-                    },
+                    }, 
                     {
                         "label": {
                             "normal": {
@@ -105,58 +105,58 @@
                                     "color": "#fff"
                                 }
                             }
-                        },
-                        "name": "Minimum",
-                        "symbol": "pin",
-                        "symbolSize": 50,
+                        }, 
+                        "name": "Minimum", 
+                        "symbol": "pin", 
+                        "symbolSize": 50, 
                         "type": "min"
                     }
                 ]
-            },
-            "name": "precipitation",
-            "seriesId": "1",
+            }, 
+            "name": "precipitation", 
+            "seriesId": "1", 
             "type": "bar"
-        },
+        }, 
         {
-            "barCategoryGap": "20%",
+            "barCategoryGap": "20%", 
             "data": [
-                2.6,
-                5.9,
-                9.0,
-                26.4,
-                28.7,
-                70.7,
-                175.6,
-                182.2,
-                48.7,
-                18.8,
-                6.0,
+                2.6, 
+                5.9, 
+                9.0, 
+                26.4, 
+                28.7, 
+                70.7, 
+                175.6, 
+                182.2, 
+                48.7, 
+                18.8, 
+                6.0, 
                 2.3
-            ],
+            ], 
             "label": {
                 "emphasis": {
-                    "show": true,
+                    "show": true, 
                     "textStyle": {
                         "fontSize": 12
                     }
-                },
+                }, 
                 "normal": {
-                    "position": "top",
-                    "show": false,
+                    "position": "top", 
+                    "show": false, 
                     "textStyle": {
                         "fontSize": 12
                     }
                 }
-            },
+            }, 
             "markLine": {
                 "data": [
                     {
-                        "name": "mean-Value",
+                        "name": "mean-Value", 
                         "type": "average"
                     }
-                ],
+                ], 
                 "symbolSize": 10
-            },
+            }, 
             "markPoint": {
                 "data": [
                     {
@@ -166,12 +166,12 @@
                                     "color": "#fff"
                                 }
                             }
-                        },
-                        "name": "Maximum",
-                        "symbol": "pin",
-                        "symbolSize": 50,
+                        }, 
+                        "name": "Maximum", 
+                        "symbol": "pin", 
+                        "symbolSize": 50, 
                         "type": "max"
-                    },
+                    }, 
                     {
                         "label": {
                             "normal": {
@@ -179,131 +179,131 @@
                                     "color": "#fff"
                                 }
                             }
-                        },
-                        "name": "Minimum",
-                        "symbol": "pin",
-                        "symbolSize": 50,
+                        }, 
+                        "name": "Minimum", 
+                        "symbol": "pin", 
+                        "symbolSize": 50, 
                         "type": "min"
                     }
                 ]
-            },
-            "name": "evaporation",
-            "seriesId": "1",
+            }, 
+            "name": "evaporation", 
+            "seriesId": "1", 
             "type": "bar"
         }
-    ],
-    "series_id": "1",
+    ], 
+    "series_id": "1", 
     "title": [
         {
-            "left": "auto",
-            "subtext": "precipitation and evaporation one year",
+            "left": "auto", 
+            "subtext": "precipitation and evaporation one year", 
             "subtextStyle": {
                 "fontSize": 12
-            },
-            "text": "Bar chart",
+            }, 
+            "text": "Bar chart", 
             "textStyle": {
                 "fontSize": 18
-            },
+            }, 
             "top": "auto"
         }
-    ],
+    ], 
     "toolbox": {
         "feature": {
             "dataView": {
                 "show": true
-            },
+            }, 
             "restore": {
                 "show": true
-            },
+            }, 
             "saveAsImage": {
-                "show": true,
+                "show": true, 
                 "title": "\u4e0b\u8f7d\u56fe\u7247"
             }
-        },
-        "left": "95%",
-        "orient": "vertical",
-        "show": true,
+        }, 
+        "left": "95%", 
+        "orient": "vertical", 
+        "show": true, 
         "top": "center"
-    },
+    }, 
     "tooltip": {
         "axisPointer": {
             "type": "line"
-        },
-        "backgroundColor": "rgba(50,50,50,0.7)",
-        "borderColor": "#333",
-        "borderWidth": 0,
+        }, 
+        "backgroundColor": "rgba(50,50,50,0.7)", 
+        "borderColor": "#333", 
+        "borderWidth": 0, 
         "textStyle": {
             "fontSize": 14
-        },
-        "trigger": "item",
+        }, 
+        "trigger": "item", 
         "triggerOn": "mousemove|click"
-    },
+    }, 
     "xAxis": [
         {
             "axisLabel": {
-                "interval": "auto",
-                "margin": 8,
-                "rotate": 0,
+                "interval": "auto", 
+                "margin": 8, 
+                "rotate": 0, 
                 "textStyle": {
                     "fontSize": 12
                 }
-            },
+            }, 
             "axisTick": {
                 "alignWithLabel": false
-            },
-            "boundaryGap": true,
+            }, 
+            "boundaryGap": true, 
             "data": [
-                "Jan",
-                "Feb",
-                "Mar",
-                "Apr",
-                "May",
-                "Jun",
-                "Jul",
-                "Aug",
-                "Sep",
-                "Oct",
-                "Nov",
+                "Jan", 
+                "Feb", 
+                "Mar", 
+                "Apr", 
+                "May", 
+                "Jun", 
+                "Jul", 
+                "Aug", 
+                "Sep", 
+                "Oct", 
+                "Nov", 
                 "Dec"
-            ],
-            "inverse": false,
-            "nameGap": 25,
-            "nameLocation": "middle",
+            ], 
+            "inverse": false, 
+            "nameGap": 25, 
+            "nameLocation": "middle", 
             "nameTextStyle": {
                 "fontSize": 14
-            },
-            "show": true,
+            }, 
+            "show": true, 
             "splitLine": {
                 "show": false
-            },
+            }, 
             "type": "category"
         }
-    ],
+    ], 
     "yAxis": [
         {
             "axisLabel": {
-                "formatter": "{value} ",
-                "interval": "auto",
-                "margin": 8,
-                "rotate": 0,
+                "formatter": "{value} ", 
+                "interval": "auto", 
+                "margin": 8, 
+                "rotate": 0, 
                 "textStyle": {
                     "fontSize": 12
                 }
-            },
+            }, 
             "axisTick": {
                 "alignWithLabel": false
-            },
-            "boundaryGap": true,
-            "inverse": false,
-            "nameGap": 25,
-            "nameLocation": "middle",
+            }, 
+            "boundaryGap": true, 
+            "inverse": false, 
+            "nameGap": 25, 
+            "nameLocation": "middle", 
             "nameTextStyle": {
                 "fontSize": 14
-            },
-            "show": true,
+            }, 
+            "show": true, 
             "splitLine": {
                 "show": true
-            },
+            }, 
             "type": "value"
         }
     ]
