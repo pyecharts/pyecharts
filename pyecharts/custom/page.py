@@ -21,7 +21,19 @@ class Page(object):
         for k, v in kwargs.items():
             self.add_chart(chart=v, name=k)
 
+    def add(self, achart_or_charts):
+        if not isinstance(achart_or_charts, (list, tuple, set)):
+            achart_or_charts = achart_or_charts,  # Make it a sequence
+        for c in achart_or_charts:
+            self.add_chart(chart=c)
+
     def add_chart(self, chart, name=None):
+        """
+        Add a chart.New in v0.5.3
+        :param chart:
+        :param name:
+        :return:
+        """
         name = name or self._next_name()
         self._charts[name] = chart
         return self
@@ -50,14 +62,6 @@ class Page(object):
 
     def __setitem__(self, key, value):
         self._charts[key] = value
-
-    # Compatible
-
-    def add(self, achart_or_charts):
-        if not isinstance(achart_or_charts, (list, tuple, set)):
-            achart_or_charts = achart_or_charts,  # Make it a sequence
-        for c in achart_or_charts:
-            self.add_chart(chart=c)
 
     def render(
             self,

@@ -246,9 +246,11 @@ map.render()
 
 > 在 v0.5.3 变更，重写内部实现，新增图表命名名称。
 
+### 基本使用
+
 由于无论是 Jinja2 模板还是 Django 模板，均不提倡使用 `{{ charts.1 }}` 形式访问列表中的某一个元素。因此在 v0.5.3 对 Page 进行重构，新增图表命名名称。
 
-在创建一个 `Page` 实例 page ，后，使用 `add_chart` 添加一个图表对象，可以使用 name 为之起一个引用名称，如果没有指定引用名称，则使用 c0,c1 命名。
+在创建一个 `Page` 实例 page ，后，使用 `add_chart` 添加一个图表对象，可以使用 name 为之起一个引用名称。
 
 
 ```python
@@ -271,7 +273,35 @@ page.add_chart(bar)
 | line 实例 | `print(page['line'])` | `{{ page.line }}` |
 | bar 实例 | `print(page['c1'])` | `{{ page.c1 }}` |
 
+### 方法列表
+
 另外注意的是，Page 不再具有 list 的全部特性，因此 切片(slice)、添加(append)、扩展(extend) 不再支持。
+
+**add_chart(chart, name=None)**
+
+v0.5.3 新增。添加一个图表对象，如果如果没有指定  `name` 参数，默认使用类似 `'c0'` ，`'c1'` 等字符串命名。
+
+**add(achart_or_charts)**
+
+添加一个或多个图表对象，该函数使用默认的名称。
+
+**___**
+
+**cls.from_charts(*args)**
+
+从一个或多个图表实例，创建一个 `Page` 实例。
+
+### 图表方法
+
+准确来说， `Page` 并不是 ECharts 中的图表类型，所包含的图表也并不要求具有相关性。为了方便， `Page` 也具有相关的属性方法，包括：
+
+- `page_title`
+- `js_dependencies`
+- `render_embed()`
+- `get_js_dependencies()`
+- `_repr_html_()`
+
+这些方法的使用方法同 `Base` 类。
 
 ## 数据处理工具
 
