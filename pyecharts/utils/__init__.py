@@ -99,7 +99,7 @@ def _expand(dict_generator):
 
 def _clean(mydict):
     for key, value in viewitems(mydict):
-        if value is not None:
+        if value:
             if isinstance(value, dict):
                 value = _expand(_clean(value))
             elif isinstance(value, (list, tuple, set)):

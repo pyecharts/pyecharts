@@ -1,215 +1,188 @@
 {
-    "backgroundColor": null, 
     "color": [
-        "#c23531", 
-        "#2f4554", 
-        "#61a0a8", 
-        "#d48265", 
-        "#749f83", 
-        "#ca8622", 
-        "#bda29a", 
-        "#6e7074", 
-        "#546570", 
-        "#c4ccd3", 
-        "#f05b72", 
-        "#ef5b9c", 
-        "#f47920", 
-        "#905a3d", 
-        "#fab27b", 
-        "#2a5caa", 
-        "#444693", 
-        "#726930", 
-        "#b2d235", 
-        "#6d8346", 
-        "#ac6767", 
-        "#1d953f", 
-        "#6950a1", 
-        "#918597", 
+        "#c23531",
+        "#2f4554",
+        "#61a0a8",
+        "#d48265",
+        "#749f83",
+        "#ca8622",
+        "#bda29a",
+        "#6e7074",
+        "#546570",
+        "#c4ccd3",
+        "#f05b72",
+        "#ef5b9c",
+        "#f47920",
+        "#905a3d",
+        "#fab27b",
+        "#2a5caa",
+        "#444693",
+        "#726930",
+        "#b2d235",
+        "#6d8346",
+        "#ac6767",
+        "#1d953f",
+        "#6950a1",
+        "#918597",
         "#f6f5ec"
-    ], 
+    ],
     "grid3D": {
-        "boxDepth": 100, 
-        "boxHeight": 100, 
-        "boxWidth": 100, 
+        "boxDepth": 100,
+        "boxHeight": 100,
+        "boxWidth": 100,
         "viewControl": {
-            "autoRotate": false, 
-            "autoRotateSpeed": 10, 
+            "autoRotateSpeed": 10,
             "rotateSensitivity": 5
         }
-    }, 
+    },
     "legend": [
         {
             "data": [
                 ""
-            ], 
-            "left": "center", 
-            "orient": "horizontal", 
-            "selectedMode": "multiple", 
-            "show": true, 
+            ],
+            "left": "center",
+            "orient": "horizontal",
+            "selectedMode": "multiple",
+            "show": true,
             "textStyle": {
-                "color": null, 
                 "fontSize": 12
-            }, 
+            },
             "top": "top"
         }
-    ], 
+    ],
     "series": [
         {
             "data": [
                 [
-                    0, 
-                    0, 
+                    0,
+                    0,
                     0
                 ]
-            ], 
+            ],
             "itemStyle": {
                 "opacity": 1
-            }, 
+            },
             "label": {
                 "emphasis": {
-                    "position": null, 
-                    "show": true, 
+                    "show": true,
                     "textStyle": {
-                        "color": null, 
                         "fontSize": 12
                     }
-                }, 
+                },
                 "normal": {
-                    "position": "top", 
-                    "show": false, 
+                    "position": "top",
                     "textStyle": {
-                        "color": null, 
                         "fontSize": 12
                     }
                 }
-            }, 
-            "name": "", 
+            },
             "type": "line3D"
         }
-    ], 
-    "series_id": "1", 
+    ],
+    "series_id": "1",
     "title": [
         {
-            "left": "auto", 
-            "subtext": "", 
+            "left": "auto",
             "subtextStyle": {
-                "color": null, 
                 "fontSize": 12
-            }, 
-            "text": "3D \u6298\u7ebf\u56fe\u793a\u4f8b", 
+            },
+            "text": "3D \u6298\u7ebf\u56fe\u793a\u4f8b",
             "textStyle": {
-                "color": null, 
                 "fontSize": 18
-            }, 
+            },
             "top": "auto"
         }
-    ], 
+    ],
     "toolbox": {
         "feature": {
             "dataView": {
                 "show": true
-            }, 
+            },
             "restore": {
                 "show": true
-            }, 
+            },
             "saveAsImage": {
-                "show": true, 
+                "show": true,
                 "title": "\u4e0b\u8f7d\u56fe\u7247"
             }
-        }, 
-        "left": "95%", 
-        "orient": "vertical", 
-        "show": true, 
+        },
+        "left": "95%",
+        "orient": "vertical",
+        "show": true,
         "top": "center"
-    }, 
+    },
     "tooltip": {
         "axisPointer": {
             "type": "line"
-        }, 
-        "backgroundColor": "rgba(50,50,50,0.7)", 
-        "borderColor": "#333", 
-        "borderWidth": 0, 
-        "formatter": null, 
+        },
+        "backgroundColor": "rgba(50,50,50,0.7)",
+        "borderColor": "#333",
         "textStyle": {
-            "color": null, 
             "fontSize": 14
-        }, 
-        "trigger": "item", 
+        },
+        "trigger": "item",
         "triggerOn": "mousemove|click"
-    }, 
+    },
     "visualMap": {
-        "calculable": true, 
-        "dimension": null, 
+        "calculable": true,
         "inRange": {
             "color": [
-                "#313695", 
-                "#4575b4", 
-                "#74add1", 
-                "#abd9e9", 
-                "#e0f3f8", 
-                "#ffffbf", 
-                "#fee090", 
-                "#fdae61", 
-                "#f46d43", 
-                "#d73027", 
+                "#313695",
+                "#4575b4",
+                "#74add1",
+                "#abd9e9",
+                "#e0f3f8",
+                "#ffffbf",
+                "#fee090",
+                "#fdae61",
+                "#f46d43",
+                "#d73027",
                 "#a50026"
             ]
-        }, 
-        "left": "left", 
-        "max": 30, 
-        "min": 0, 
-        "orient": "vertical", 
-        "showLabel": true, 
-        "splitNumber": 5, 
+        },
+        "left": "left",
+        "max": 30,
+        "orient": "vertical",
+        "showLabel": true,
+        "splitNumber": 5,
         "text": [
-            "high", 
+            "high",
             "low"
-        ], 
-        "textStyle": {
-            "color": null
-        }, 
-        "top": "bottom", 
+        ],
+        "textStyle": {},
+        "top": "bottom",
         "type": "continuous"
-    }, 
+    },
     "xAxis3D": {
         "axisLabel": {
-            "interval": "auto", 
+            "interval": "auto",
             "margin": 8
-        }, 
-        "max": null, 
-        "min": null, 
-        "name": "", 
-        "nameGap": 20, 
+        },
+        "nameGap": 20,
         "nameTextStyle": {
             "fontSize": 16
-        }, 
+        },
         "type": "value"
-    }, 
+    },
     "yAxis3D": {
         "axisLabel": {
-            "interval": "auto", 
+            "interval": "auto",
             "margin": 8
-        }, 
-        "max": null, 
-        "min": null, 
-        "name": "", 
-        "nameGap": 20, 
+        },
+        "nameGap": 20,
         "nameTextStyle": {
             "fontSize": 16
-        }, 
+        },
         "type": "value"
-    }, 
+    },
     "zAxis3D": {
         "axisLabel": {
             "margin": 8
-        }, 
-        "max": null, 
-        "min": null, 
-        "name": "", 
-        "nameGap": 20, 
+        },
+        "nameGap": 20,
         "nameTextStyle": {
             "fontSize": 16
-        }, 
+        },
         "type": "value"
     }
 }

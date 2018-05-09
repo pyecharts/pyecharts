@@ -1,286 +1,243 @@
 {
-    "backgroundColor": null, 
     "color": [
-        "#c23531", 
-        "#2f4554", 
-        "#61a0a8", 
-        "#d48265", 
-        "#749f83", 
-        "#ca8622", 
-        "#bda29a", 
-        "#6e7074", 
-        "#546570", 
-        "#c4ccd3", 
-        "#f05b72", 
-        "#ef5b9c", 
-        "#f47920", 
-        "#905a3d", 
-        "#fab27b", 
-        "#2a5caa", 
-        "#444693", 
-        "#726930", 
-        "#b2d235", 
-        "#6d8346", 
-        "#ac6767", 
-        "#1d953f", 
-        "#6950a1", 
-        "#918597", 
+        "#c23531",
+        "#2f4554",
+        "#61a0a8",
+        "#d48265",
+        "#749f83",
+        "#ca8622",
+        "#bda29a",
+        "#6e7074",
+        "#546570",
+        "#c4ccd3",
+        "#f05b72",
+        "#ef5b9c",
+        "#f47920",
+        "#905a3d",
+        "#fab27b",
+        "#2a5caa",
+        "#444693",
+        "#726930",
+        "#b2d235",
+        "#6d8346",
+        "#ac6767",
+        "#1d953f",
+        "#6950a1",
+        "#918597",
         "#f6f5ec"
-    ], 
+    ],
     "legend": [
         {
             "data": [
-                "A", 
+                "A",
                 "B"
-            ], 
-            "left": "center", 
-            "orient": "horizontal", 
-            "selectedMode": "multiple", 
-            "show": true, 
+            ],
+            "left": "center",
+            "orient": "horizontal",
+            "selectedMode": "multiple",
+            "show": true,
             "textStyle": {
-                "color": null, 
                 "fontSize": 12
-            }, 
+            },
             "top": "top"
         }
-    ], 
+    ],
     "series": [
         {
             "data": [
                 [
-                    10, 
+                    10,
                     10
-                ], 
+                ],
                 [
-                    20, 
+                    20,
                     20
-                ], 
+                ],
                 [
-                    30, 
+                    30,
                     30
-                ], 
+                ],
                 [
-                    40, 
+                    40,
                     40
-                ], 
+                ],
                 [
-                    50, 
+                    50,
                     50
-                ], 
+                ],
                 [
-                    60, 
+                    60,
                     60
                 ]
-            ], 
+            ],
             "label": {
                 "emphasis": {
-                    "position": null, 
-                    "show": true, 
+                    "show": true,
                     "textStyle": {
-                        "color": null, 
                         "fontSize": 12
                     }
-                }, 
+                },
                 "normal": {
-                    "position": "top", 
-                    "show": false, 
+                    "position": "top",
                     "textStyle": {
-                        "color": null, 
                         "fontSize": 12
                     }
                 }
-            }, 
-            "markLine": {
-                "data": []
-            }, 
-            "markPoint": {
-                "data": []
-            }, 
-            "name": "A", 
-            "seriesId": "1", 
-            "symbol": "circle", 
-            "symbolSize": 10, 
+            },
+            "markLine": {},
+            "markPoint": {},
+            "name": "A",
+            "seriesId": "1",
+            "symbol": "circle",
+            "symbolSize": 10,
             "type": "scatter"
-        }, 
+        },
         {
             "data": [
                 [
-                    60, 
+                    60,
                     10
-                ], 
+                ],
                 [
-                    50, 
+                    50,
                     20
-                ], 
+                ],
                 [
-                    40, 
+                    40,
                     30
-                ], 
+                ],
                 [
-                    30, 
+                    30,
                     40
-                ], 
+                ],
                 [
-                    20, 
+                    20,
                     50
-                ], 
+                ],
                 [
-                    10, 
+                    10,
                     60
                 ]
-            ], 
+            ],
             "label": {
                 "emphasis": {
-                    "position": null, 
-                    "show": true, 
+                    "show": true,
                     "textStyle": {
-                        "color": null, 
                         "fontSize": 12
                     }
-                }, 
+                },
                 "normal": {
-                    "position": "top", 
-                    "show": false, 
+                    "position": "top",
                     "textStyle": {
-                        "color": null, 
                         "fontSize": 12
                     }
                 }
-            }, 
-            "markLine": {
-                "data": []
-            }, 
-            "markPoint": {
-                "data": []
-            }, 
-            "name": "B", 
-            "seriesId": "1", 
-            "symbol": "circle", 
-            "symbolSize": 10, 
+            },
+            "markLine": {},
+            "markPoint": {},
+            "name": "B",
+            "seriesId": "1",
+            "symbol": "circle",
+            "symbolSize": 10,
             "type": "scatter"
         }
-    ], 
-    "series_id": "1", 
+    ],
+    "series_id": "1",
     "title": [
         {
-            "left": "auto", 
-            "subtext": "", 
+            "left": "auto",
             "subtextStyle": {
-                "color": null, 
                 "fontSize": 12
-            }, 
-            "text": "scatter test", 
+            },
+            "text": "scatter test",
             "textStyle": {
-                "color": null, 
                 "fontSize": 18
-            }, 
+            },
             "top": "auto"
         }
-    ], 
+    ],
     "toolbox": {
         "feature": {
             "dataView": {
                 "show": true
-            }, 
+            },
             "restore": {
                 "show": true
-            }, 
+            },
             "saveAsImage": {
-                "show": true, 
+                "show": true,
                 "title": "\u4e0b\u8f7d\u56fe\u7247"
             }
-        }, 
-        "left": "95%", 
-        "orient": "vertical", 
-        "show": true, 
+        },
+        "left": "95%",
+        "orient": "vertical",
+        "show": true,
         "top": "center"
-    }, 
+    },
     "tooltip": {
         "axisPointer": {
             "type": "line"
-        }, 
-        "backgroundColor": "rgba(50,50,50,0.7)", 
-        "borderColor": "#333", 
-        "borderWidth": 0, 
-        "formatter": null, 
+        },
+        "backgroundColor": "rgba(50,50,50,0.7)",
+        "borderColor": "#333",
         "textStyle": {
-            "color": null, 
             "fontSize": 14
-        }, 
-        "trigger": "item", 
+        },
+        "trigger": "item",
         "triggerOn": "mousemove|click"
-    }, 
+    },
     "xAxis": [
         {
             "axisLabel": {
-                "formatter": null, 
-                "interval": "auto", 
-                "margin": 8, 
-                "rotate": 0, 
+                "interval": "auto",
+                "margin": 8,
                 "textStyle": {
-                    "color": null, 
                     "fontSize": 12
                 }
-            }, 
-            "axisTick": {
-                "alignWithLabel": false
-            }, 
-            "boundaryGap": true, 
+            },
+            "axisTick": {},
+            "boundaryGap": true,
             "data": [
-                60, 
-                50, 
-                40, 
-                30, 
-                20, 
+                60,
+                50,
+                40,
+                30,
+                20,
                 10
-            ], 
-            "inverse": false, 
-            "max": null, 
-            "min": null, 
-            "name": "", 
-            "nameGap": 25, 
-            "nameLocation": "middle", 
+            ],
+            "nameGap": 25,
+            "nameLocation": "middle",
             "nameTextStyle": {
                 "fontSize": 14
-            }, 
-            "position": null, 
-            "show": true, 
+            },
+            "show": true,
             "splitLine": {
                 "show": true
-            }, 
+            },
             "type": "value"
         }
-    ], 
+    ],
     "yAxis": [
         {
             "axisLabel": {
-                "formatter": "{value} ", 
-                "interval": "auto", 
-                "margin": 8, 
-                "rotate": 0, 
+                "formatter": "{value} ",
+                "interval": "auto",
+                "margin": 8,
                 "textStyle": {
-                    "color": null, 
                     "fontSize": 12
                 }
-            }, 
-            "axisTick": {
-                "alignWithLabel": false
-            }, 
-            "boundaryGap": true, 
-            "inverse": false, 
-            "max": null, 
-            "min": null, 
-            "name": "", 
-            "nameGap": 25, 
-            "nameLocation": "middle", 
+            },
+            "axisTick": {},
+            "boundaryGap": true,
+            "nameGap": 25,
+            "nameLocation": "middle",
             "nameTextStyle": {
                 "fontSize": 14
-            }, 
-            "position": null, 
-            "show": true, 
+            },
+            "show": true,
             "splitLine": {
                 "show": true
-            }, 
+            },
             "type": "value"
         }
     ]
