@@ -12,7 +12,7 @@ class Label(JsonSerializable):
         formatter=None,
         chart_type=None,
     ):
-        self.config = {
+        self._config = {
             "show": visibility,
             "position": position,
             "textStyle": {"color": text_color, "fontSize": text_size},
@@ -23,7 +23,7 @@ class Label(JsonSerializable):
                 if chart_type == "pie":
                     formatter = "{b}: {d}%"
         if formatter:
-            self.config["formatter"] = formatter
+            self._config["formatter"] = formatter
 
 
 class EmphasisLabel(Label):
