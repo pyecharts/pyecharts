@@ -26,6 +26,7 @@ class Page(object):
             achart_or_charts = achart_or_charts,  # Make it a sequence
         for c in achart_or_charts:
             self.add_chart(chart=c)
+        return self
 
     def add_chart(self, chart, name=None):
         """

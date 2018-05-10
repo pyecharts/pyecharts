@@ -275,19 +275,23 @@ page.add_chart(bar)
 
 ### 方法列表
 
-另外注意的是，Page 不再具有 list 的全部特性，因此 切片(slice)、添加(append)、扩展(extend) 不再支持。
+在创建一个 page 实例后，可以通过各种方法将现有的图表实例添加到该实例中。
 
-**add_chart(chart, name=None)**
+> Page 不再具有 list 的全部特性，因此 切片(slice)、添加(append)、扩展(extend) 等方法不再支持。
 
-v0.5.3 新增。添加一个图表对象，如果如果没有指定  `name` 参数，默认使用类似 `'c0'` ，`'c1'` 等字符串命名。
+**`__init__(page_title, **kwargs)`**
 
-**add(achart_or_charts)**
+构造函数，使用 `{<name>:<chart>}` 创建实例。根据 [PEP 468](https://www.python.org/dev/peps/pep-0468/)，仅在 Python 3.6+ 同时保证其顺序。
 
-添加一个或多个图表对象，该函数使用默认的名称。
+**`add_chart(chart, name=None)`**
 
-**___**
+v0.5.3 新增，可链式使用。添加一个图表对象，如果如果没有指定  `name` 参数，默认使用类似 `'c0'` ，`'c1'` 等字符串命名。
 
-**cls.from_charts(*args)**
+**`add(achart_or_charts)`**
+
+可链式使用。添加一个或多个图表对象，该函数使用默认的名称。
+
+**`cls.from_charts(*args)`**
 
 从一个或多个图表实例，创建一个 `Page` 实例。
 
