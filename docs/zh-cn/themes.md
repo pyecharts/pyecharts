@@ -35,8 +35,20 @@ $ pip install echarts-themes-pypkg
 
 ### 使用主题
 
+更换单个图形主题
 ```python
-bar.use_theme("vintage")    # 更换为你喜欢的主题
+bar.use_theme("vintage")
+```
+
+更换运行环境内所有图表主题
+```python
+from pyecharts import configure
+
+# 将这行代码置于首部
+configure(global_theme='dark')
+
+bar = Bar()
+....
 ```
 
 ### 示例
