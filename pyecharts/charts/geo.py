@@ -41,10 +41,7 @@ class Geo(Chart):
 
         return coordinate
 
-    def add(self, *args, **kwargs):
-        self.__add(*args, **kwargs)
-
-    def __add(
+    def add(
         self,
         name,
         attr,

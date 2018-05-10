@@ -5,7 +5,7 @@ from __future__ import unicode_literals
 import json
 
 from pyecharts import Polar, Kline, Bar, Scatter, Line3D, Geo
-from pyecharts import Scatter3D, Bar3D
+from pyecharts import Scatter3D, Bar3D, GeoLines, Style
 from pyecharts_javascripthon.api import DefaultJsonEncoder
 
 from nose.tools import eq_
@@ -239,6 +239,63 @@ def test_bar3d_default(patched):
     )
     actual_options = json.dumps(
         bar3d.options, sort_keys=True, indent=4, cls=DefaultJsonEncoder
+    )
+    expected = get_fixture_content(fixture)
+
+    for a, b in zip(actual_options.split("\n"), expected.split("\n")):
+        eq_(a.strip(), b.strip())
+
+
+style = Style(
+    title_top="#fff",
+    title_pos="center",
+    width=1200,
+    height=600,
+    background_color="#404a59",
+)
+
+style_geo = style.add(
+    is_label_show=True,
+    line_curve=0.2,
+    line_opacity=0.6,
+    legend_text_color="#eee",
+    legend_pos="right",
+    geo_effect_symbol="plane",
+    geo_effect_symbolsize=15,
+    label_color=["#a6c84c", "#ffa022", "#46bee9"],
+    label_pos="right",
+    label_formatter="{b}",
+    label_text_color="#eee",
+    legend_selectedmode="single",
+)
+
+
+@patch("random.randint")
+def test_geolines(patched):
+    fixture = "geolines.json"
+    patched.return_value = "1"
+    data_guangzhou = [
+        ["广州", "上海"],
+        ["广州", "北京"],
+        ["广州", "南京"],
+        ["广州", "重庆"],
+        ["广州", "兰州"],
+        ["广州", "杭州"],
+    ]
+    data_beijing = [
+        ["北京", "上海"],
+        ["北京", "广州"],
+        ["北京", "南京"],
+        ["北京", "重庆"],
+        ["北京", "兰州"],
+        ["北京", "杭州"],
+    ]
+    lines = GeoLines("GeoLines 示例", **style.init_style)
+    lines.add("从广州出发", data_guangzhou, **style_geo)
+    lines.add("从北京出发", data_beijing, **style_geo)
+
+    actual_options = json.dumps(
+        lines.options, sort_keys=True, indent=4, cls=DefaultJsonEncoder
     )
     expected = get_fixture_content(fixture)
 

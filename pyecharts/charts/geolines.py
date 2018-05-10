@@ -1,52 +1,21 @@
 # coding=utf-8
 
-from pyecharts.chart import Chart
-from pyecharts.datasets.coordinates import get_coordinate
+from pyecharts.charts.geo import Geo
 from pyecharts.constants import SYMBOL
 
 
-class GeoLines(Chart):
+class GeoLines(Geo):
     """
     <<< 地理坐标系线图 >>>
 
     用于带有起点和终点信息的线数据的绘制，主要用于地图上的航线，路线的可视化。
     """
 
-    def __init__(self, title="", subtitle="", **kwargs):
-        super(GeoLines, self).__init__(title, subtitle, **kwargs)
+    def __init__(self, *args, **kwargs):
+        super(GeoLines, self).__init__(*args, **kwargs)
         self._zlevel = 1
-        self._coordinates = {}
 
-    def add_coordinate(self, name, longitude, latitude):
-        """
-        Add a geo coordinate for a position.
-        :param name: The name of a position
-        :param longitude: The longitude of coordinate.
-        :param latitude: The latitude of coordinate.
-        :return:
-        """
-        self._coordinates.update({name: [longitude, latitude]})
-
-    def get_coordinate(self, name, raise_exception=False):
-        """
-        Return coordinate for the city name.
-        :param name: City name or any custom name string.
-        :param raise_exception: Whether to raise exception if not exist.
-        :return: A list like [longitude, latitude] or None
-        """
-        if name in self._coordinates:
-            return self._coordinates[name]
-
-        coordinate = get_coordinate(name)
-        if coordinate is None and raise_exception:
-            raise ValueError("No coordinate is specified for {}".format(name))
-
-        return coordinate
-
-    def add(self, *args, **kwargs):
-        self.__add(*args, **kwargs)
-
-    def __add(
+    def add(
         self,
         name,
         data,

@@ -29,4 +29,6 @@ Chart3D <|-- Bar3D
 Chart3D <|-- Line3D
 Chart3D <|-- Scatter3D
 
+Geo <|-- GeoLines
+
 @enduml
