@@ -1,5 +1,4 @@
 {
-    "backgroundColor": null, 
     "color": [
         "#c23531", 
         "#2f4554", 
@@ -47,7 +46,6 @@
             "selectedMode": "multiple", 
             "show": true, 
             "textStyle": {
-                "color": null, 
                 "fontSize": 12
             }, 
             "top": "top"
@@ -67,10 +65,8 @@
             }, 
             "label": {
                 "emphasis": {
-                    "position": null, 
                     "show": true, 
                     "textStyle": {
-                        "color": null, 
                         "fontSize": 12
                     }
                 }, 
@@ -78,12 +74,10 @@
                     "position": "top", 
                     "show": false, 
                     "textStyle": {
-                        "color": null, 
                         "fontSize": 12
                     }
                 }
             }, 
-            "name": "", 
             "type": "line3D"
         }
     ], 
@@ -91,14 +85,11 @@
     "title": [
         {
             "left": "auto", 
-            "subtext": "", 
             "subtextStyle": {
-                "color": null, 
                 "fontSize": 12
             }, 
             "text": "3D \u6298\u7ebf\u56fe\u793a\u4f8b", 
             "textStyle": {
-                "color": null, 
                 "fontSize": 18
             }, 
             "top": "auto"
@@ -129,9 +120,7 @@
         "backgroundColor": "rgba(50,50,50,0.7)", 
         "borderColor": "#333", 
         "borderWidth": 0, 
-        "formatter": null, 
         "textStyle": {
-            "color": null, 
             "fontSize": 14
         }, 
         "trigger": "item", 
@@ -139,7 +128,6 @@
     }, 
     "visualMap": {
         "calculable": true, 
-        "dimension": null, 
         "inRange": {
             "color": [
                 "#313695", 
@@ -165,9 +153,6 @@
             "high", 
             "low"
         ], 
-        "textStyle": {
-            "color": null
-        }, 
         "top": "bottom", 
         "type": "continuous"
     }, 
@@ -176,9 +161,6 @@
             "interval": "auto", 
             "margin": 8
         }, 
-        "max": null, 
-        "min": null, 
-        "name": "", 
         "nameGap": 20, 
         "nameTextStyle": {
             "fontSize": 16
@@ -190,9 +172,6 @@
             "interval": "auto", 
             "margin": 8
         }, 
-        "max": null, 
-        "min": null, 
-        "name": "", 
         "nameGap": 20, 
         "nameTextStyle": {
             "fontSize": 16
@@ -203,9 +182,6 @@
         "axisLabel": {
             "margin": 8
         }, 
-        "max": null, 
-        "min": null, 
-        "name": "", 
         "nameGap": 20, 
         "nameTextStyle": {
             "fontSize": 16

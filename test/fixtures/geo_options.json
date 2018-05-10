@@ -1,5 +1,4 @@
 {
-    "backgroundColor": null, 
     "color": [
         "#c23531", 
         "#2f4554", 
@@ -58,7 +57,6 @@
             "selectedMode": "multiple", 
             "show": false, 
             "textStyle": {
-                "color": null, 
                 "fontSize": 12
             }, 
             "top": "top"
@@ -114,7 +112,6 @@
                     "position": "right", 
                     "show": true, 
                     "textStyle": {
-                        "color": null, 
                         "fontSize": 15
                     }
                 }, 
@@ -122,12 +119,10 @@
                     "position": "top", 
                     "show": false, 
                     "textStyle": {
-                        "color": null, 
                         "fontSize": 12
                     }
                 }
             }, 
-            "name": "", 
             "symbol": "circle", 
             "symbolSize": 15, 
             "type": "scatter"
@@ -139,12 +134,10 @@
             "left": "auto", 
             "subtext": "data from pm2.5", 
             "subtextStyle": {
-                "color": null, 
                 "fontSize": 12
             }, 
             "text": "\u5168\u56fd\u4e3b\u8981\u57ce\u5e02\u7a7a\u6c14\u8d28\u91cf", 
             "textStyle": {
-                "color": null, 
                 "fontSize": 18
             }, 
             "top": "auto"
@@ -177,7 +170,6 @@
         "borderWidth": 0, 
         "formatter": "{b}", 
         "textStyle": {
-            "color": null, 
             "fontSize": 14
         }, 
         "trigger": "item", 
@@ -185,7 +177,6 @@
     }, 
     "visualMap": {
         "calculable": true, 
-        "dimension": null, 
         "inRange": {
             "color": [
                 "#50a3ba", 
