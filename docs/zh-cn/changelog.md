@@ -1,9 +1,14 @@
 # 版本日志
 
-* ### version 0.5.3（dev）
-    *  TODO
+* ### version 0.5.4（dev）
+    * TODO
 
-* ### version 0.5.2 - 2018.05.04（Current）
+* ### version 0.5.3 - 2018.05.10（current）
+
+    #### Fixed
+    * [issue#544](https://github.com/pyecharts/pyecharts/issues/544) 修复 v0.5.2 主题颜色默认颜色配置与前版本有差别太大的 bug
+
+* ### version 0.5.2 - 2018.05.04
 
     #### Added
     * [issue#512](https://github.com/pyecharts/pyecharts/issues/512) 新增自定义主题功能

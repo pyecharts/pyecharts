@@ -1,8 +1,19 @@
 # coding=utf-8
 from __future__ import unicode_literals
 
-import codecs
+from future.utils import viewitems
+
 import os
+import sys
+import codecs
+
+PY3 = sys.version_info[0] == 3
+
+if PY3:
+    string_type = str
+else:
+    string_type = basestring
+
 
 __all__ = [
     "get_resource_dir",
@@ -89,3 +100,52 @@ def merge_js_dependencies(*chart_or_name_list):
             _add(_d)
     fol = [x for x in front_optional_items if x in fist_items]
     return front_required_items + fol + dependencies
+
+
+def _expand(dict_generator):
+    return dict(list(dict_generator))
+
+
+def _clean_dict(mydict):
+    for key, value in viewitems(mydict):
+        if value is not None:
+            if isinstance(value, dict):
+                if value:
+                    value = _expand(_clean_dict(value))
+                else:
+                    # delete key with empty dictionary
+                    continue
+
+                if not value:
+                    # detete empty dictionary resulted by
+                    # previous cleanning function
+                    continue
+
+            elif isinstance(value, (list, tuple, set)):
+                if value:
+                    value = list(_clean_array(value))
+                else:
+                    # delete key with empty array
+                    continue
+
+            elif isinstance(value, string_type) and not value:
+                # delete key with empty string
+                continue
+
+            yield (key, value)
+
+
+def _clean_array(myarray):
+    for value in myarray:
+        if isinstance(value, dict):
+            yield _expand(_clean_dict(value))
+
+        elif isinstance(value, (list, tuple, set)):
+            yield list(_clean_array(value))
+
+        else:
+            yield value
+
+
+def remove_key_with_none_value(incoming_dict):
+    return _expand(_clean_dict(incoming_dict))
