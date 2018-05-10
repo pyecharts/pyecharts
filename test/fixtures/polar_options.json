@@ -3,7 +3,6 @@
         "axisLine": {
             "lineStyle": {
                 "normal": {
-                    "color": null, 
                     "curveness": 0, 
                     "opacity": 1, 
                     "type": "solid", 
@@ -14,12 +13,10 @@
         }, 
         "boundaryGap": false, 
         "clockwise": true, 
-        "data": null, 
         "show": true, 
         "splitLine": {
             "lineStyle": {
                 "normal": {
-                    "color": null, 
                     "curveness": 0, 
                     "opacity": 1, 
                     "type": "solid", 
@@ -31,7 +28,6 @@
         "startAngle": 90, 
         "type": "category"
     }, 
-    "backgroundColor": null, 
     "color": [
         "#c23531", 
         "#2f4554", 
@@ -69,13 +65,11 @@
             "selectedMode": "multiple", 
             "show": true, 
             "textStyle": {
-                "color": null, 
                 "fontSize": 12
             }, 
             "top": "top"
         }
     ], 
-    "polar": {}, 
     "radiusAxis": {
         "axisLabel": {
             "rotate": 0
@@ -83,7 +77,6 @@
         "axisLine": {
             "lineStyle": {
                 "normal": {
-                    "color": null, 
                     "curveness": 0, 
                     "opacity": 1, 
                     "type": "solid", 
@@ -92,16 +85,12 @@
             }, 
             "show": true
         }, 
-        "data": null, 
-        "max": null, 
-        "min": null, 
         "show": true, 
         "type": "category", 
         "z": 50
     }, 
     "series": [
         {
-            "areaStyle": null, 
             "coordinateSystem": "polar", 
             "data": [
                 0, 
@@ -208,10 +197,8 @@
             ], 
             "label": {
                 "emphasis": {
-                    "position": null, 
                     "show": true, 
                     "textStyle": {
-                        "color": null, 
                         "fontSize": 12
                     }
                 }, 
@@ -219,12 +206,10 @@
                     "position": "top", 
                     "show": false, 
                     "textStyle": {
-                        "color": null, 
                         "fontSize": 12
                     }
                 }
             }, 
-            "name": "", 
             "symbol": "circle", 
             "symbolSize": 4, 
             "type": "scatter"
@@ -234,14 +219,11 @@
     "title": [
         {
             "left": "auto", 
-            "subtext": "", 
             "subtextStyle": {
-                "color": null, 
                 "fontSize": 12
             }, 
             "text": "\u6781\u5750\u6807\u7cfb-\u6563\u70b9\u56fe\u793a\u4f8b", 
             "textStyle": {
-                "color": null, 
                 "fontSize": 18
             }, 
             "top": "auto"
@@ -272,9 +254,7 @@
         "backgroundColor": "rgba(50,50,50,0.7)", 
         "borderColor": "#333", 
         "borderWidth": 0, 
-        "formatter": null, 
         "textStyle": {
-            "color": null,
             "fontSize": 14
         }, 
         "trigger": "item", 
