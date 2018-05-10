@@ -398,3 +398,63 @@ class Chart(Base):
 
         if not is_toolbox_show:
             self._option.pop("toolbox", None)
+
+
+class Chart3D(Chart):
+    """
+    <<< 3D 折线图 >>>
+    """
+
+    def __init__(self, title="", subtitle="", **kwargs):
+        kwargs["renderer"] = constants.CANVAS_RENDERER
+        super(Chart3D, self).__init__(title, subtitle, **kwargs)
+        self._js_dependencies.add("echartsgl")
+        self._3d_chart_type = 'generic_3d_chart_dont_use_me_directly'
+
+    def add(
+        self,
+        name,
+        data,
+        grid3d_opacity=1,
+        grid3d_shading=None,
+        xaxis3d_type="value",
+        yaxis3d_type="value",
+        zaxis3d_type="value",
+        **kwargs
+    ):
+        """
+
+        :param name:
+            系列名称，用于 tooltip 的显示，legend 的图例筛选。
+        :param data:
+            数据项，数据中，每一行是一个『数据项』，每一列属于一个『维度』。
+        :param grid3d_opacity:
+            3D 笛卡尔坐标系组的透明度（线的透明度），默认为 1，完全不透明。
+        :param kwargs:
+        """
+        chart = self._get_all_options(
+            xaxis3d_type=xaxis3d_type,
+            yaxis3d_type=yaxis3d_type,
+            zaxis3d_type=zaxis3d_type,
+            **kwargs
+        )
+
+        self._option.get("legend")[0].get("data").append(name)
+        self._option.update(
+            xAxis3D=chart["xaxis3D"],
+            yAxis3D=chart["yaxis3D"],
+            zAxis3D=chart["zaxis3D"],
+            grid3D=chart["grid3D"],
+        )
+
+        self._option.get("series").append(
+            {
+                "type": self._3d_chart_type,
+                "name": name,
+                "data": data,
+                "label": chart["label"],
+                "shading": grid3d_shading,
+                "itemStyle": {"opacity": grid3d_opacity},
+            }
+        )
+        self._config_components(**kwargs)
