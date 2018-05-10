@@ -43,7 +43,7 @@ bar.use_theme("vintage")    # 更换为你喜欢的主题
 
 **vintage**
 
-![vintage](https://user-images.githubusercontent.com/19553554/39620159-d42defa4-4fbc-11e8-8e8d-ea9158434ea0.png)
+![vintage](https://user-images.githubusercontent.com/19553554/39868887-1bed3ae0-548e-11e8-99f5-8440ea578080.png)
 
 **macarons**
 
