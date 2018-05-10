@@ -1,5 +1,4 @@
 {
-    "backgroundColor": null, 
     "color": [
         "#c23531", 
         "#2f4554", 
@@ -38,7 +37,6 @@
             "selectedMode": "multiple", 
             "show": true, 
             "textStyle": {
-                "color": null, 
                 "fontSize": 12
             }, 
             "top": "top"
@@ -63,10 +61,8 @@
             ], 
             "label": {
                 "emphasis": {
-                    "position": null, 
                     "show": true, 
                     "textStyle": {
-                        "color": null, 
                         "fontSize": 12
                     }
                 }, 
@@ -74,7 +70,6 @@
                     "position": "top", 
                     "show": false, 
                     "textStyle": {
-                        "color": null, 
                         "fontSize": 12
                     }
                 }
@@ -83,8 +78,7 @@
                 "data": [
                     {
                         "name": "mean-Value", 
-                        "type": "average", 
-                        "valueDim": null
+                        "type": "average"
                     }
                 ], 
                 "symbolSize": 10
@@ -102,8 +96,7 @@
                         "name": "Maximum", 
                         "symbol": "pin", 
                         "symbolSize": 50, 
-                        "type": "max", 
-                        "valueDim": null
+                        "type": "max"
                     }, 
                     {
                         "label": {
@@ -116,14 +109,12 @@
                         "name": "Minimum", 
                         "symbol": "pin", 
                         "symbolSize": 50, 
-                        "type": "min", 
-                        "valueDim": null
+                        "type": "min"
                     }
                 ]
             }, 
             "name": "precipitation", 
             "seriesId": "1", 
-            "stack": "", 
             "type": "bar"
         }, 
         {
@@ -144,10 +135,8 @@
             ], 
             "label": {
                 "emphasis": {
-                    "position": null, 
                     "show": true, 
                     "textStyle": {
-                        "color": null, 
                         "fontSize": 12
                     }
                 }, 
@@ -155,7 +144,6 @@
                     "position": "top", 
                     "show": false, 
                     "textStyle": {
-                        "color": null, 
                         "fontSize": 12
                     }
                 }
@@ -164,8 +152,7 @@
                 "data": [
                     {
                         "name": "mean-Value", 
-                        "type": "average", 
-                        "valueDim": null
+                        "type": "average"
                     }
                 ], 
                 "symbolSize": 10
@@ -183,8 +170,7 @@
                         "name": "Maximum", 
                         "symbol": "pin", 
                         "symbolSize": 50, 
-                        "type": "max", 
-                        "valueDim": null
+                        "type": "max"
                     }, 
                     {
                         "label": {
@@ -197,14 +183,12 @@
                         "name": "Minimum", 
                         "symbol": "pin", 
                         "symbolSize": 50, 
-                        "type": "min", 
-                        "valueDim": null
+                        "type": "min"
                     }
                 ]
             }, 
             "name": "evaporation", 
             "seriesId": "1", 
-            "stack": "", 
             "type": "bar"
         }
     ], 
@@ -214,12 +198,10 @@
             "left": "auto", 
             "subtext": "precipitation and evaporation one year", 
             "subtextStyle": {
-                "color": null, 
                 "fontSize": 12
             }, 
             "text": "Bar chart", 
             "textStyle": {
-                "color": null, 
                 "fontSize": 18
             }, 
             "top": "auto"
@@ -250,9 +232,7 @@
         "backgroundColor": "rgba(50,50,50,0.7)", 
         "borderColor": "#333", 
         "borderWidth": 0, 
-        "formatter": null, 
         "textStyle": {
-            "color": null,
             "fontSize": 14
         }, 
         "trigger": "item", 
@@ -261,12 +241,10 @@
     "xAxis": [
         {
             "axisLabel": {
-                "formatter": null, 
                 "interval": "auto", 
                 "margin": 8, 
                 "rotate": 0, 
                 "textStyle": {
-                    "color": null, 
                     "fontSize": 12
                 }
             }, 
@@ -289,15 +267,11 @@
                 "Dec"
             ], 
             "inverse": false, 
-            "max": null, 
-            "min": null, 
-            "name": "", 
             "nameGap": 25, 
             "nameLocation": "middle", 
             "nameTextStyle": {
                 "fontSize": 14
             }, 
-            "position": null, 
             "show": true, 
             "splitLine": {
                 "show": false
@@ -313,7 +287,6 @@
                 "margin": 8, 
                 "rotate": 0, 
                 "textStyle": {
-                    "color": null, 
                     "fontSize": 12
                 }
             }, 
@@ -322,15 +295,11 @@
             }, 
             "boundaryGap": true, 
             "inverse": false, 
-            "max": null, 
-            "min": null, 
-            "name": "", 
             "nameGap": 25, 
             "nameLocation": "middle", 
             "nameTextStyle": {
                 "fontSize": 14
             }, 
-            "position": null, 
             "show": true, 
             "splitLine": {
                 "show": true
