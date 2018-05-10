@@ -14,7 +14,7 @@ class AxisLabel(JsonSerializable):
         text_color=None,
         formatter=None,
     ):
-        self.config = {
+        self._config = {
             "interval": interval,
             "formatter": formatter,
             "rotate": rotate,
@@ -55,7 +55,7 @@ class Axis(JsonSerializable):
         axis_type="value",
         chart_type=None,
     ):
-        self.config = {
+        self._config = {
             "name": name,
             "show": visibility,
             "nameLocation": name_location,
@@ -72,7 +72,7 @@ class Axis(JsonSerializable):
         }
 
     def set_split_line_visibility(self, flag):
-        self.config["splitLine"]["show"] = flag
+        self._config["splitLine"]["show"] = flag
 
 
 class XAxis(Axis):

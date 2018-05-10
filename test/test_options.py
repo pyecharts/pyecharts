@@ -16,6 +16,7 @@ from test.constants import RANGE_COLOR
 
 @patch("random.randint")
 def test_polar_type_scatter_one(patched):
+    fixture = "polar_options.json"
     patched.return_value = "1"
     data = [i for i in range(101)]
     polar = Polar("极坐标系-散点图示例")
@@ -30,7 +31,7 @@ def test_polar_type_scatter_one(patched):
     actual_options = json.dumps(
         polar.options, sort_keys=True, indent=4, cls=DefaultJsonEncoder
     )
-    expected = get_fixture_content("polar_options.json")
+    expected = get_fixture_content(fixture)
     for a, b in zip(actual_options.split("\n"), expected.split("\n")):
         eq_(a.strip(), b.strip())
 
@@ -73,19 +74,21 @@ data = [
 
 @patch("random.randint")
 def test_kline_default(patched):
+    fixture = "kline_options.json"
     patched.return_value = "1"
     kline = Kline("K 线图-默认示例")
     kline.add("日K", DATE, data)
     actual_options = json.dumps(
         kline.options, sort_keys=True, indent=4, cls=DefaultJsonEncoder
     )
-    expected = get_fixture_content("kline_options.json")
+    expected = get_fixture_content(fixture)
     for a, b in zip(actual_options.split("\n"), expected.split("\n")):
         eq_(a.strip(), b.strip())
 
 
 @patch("random.randint")
 def test_bar_default(patched):
+    fixture = "bar_options.json"
     patched.return_value = "1"
     attr = [
         "Jan",
@@ -121,13 +124,14 @@ def test_bar_default(patched):
     actual_options = json.dumps(
         bar.options, sort_keys=True, indent=4, cls=DefaultJsonEncoder
     )
-    expected = get_fixture_content("bar_options.json")
+    expected = get_fixture_content(fixture)
     for a, b in zip(actual_options.split("\n"), expected.split("\n")):
         eq_(a.strip(), b.strip())
 
 
 @patch("random.randint")
 def test_scatter_option(patched):
+    fixture = "scatter_options.json"
     patched.return_value = "1"
     v1 = [10, 20, 30, 40, 50, 60]
     v2 = [10, 20, 30, 40, 50, 60]
@@ -137,7 +141,7 @@ def test_scatter_option(patched):
     actual_options = json.dumps(
         scatter.options, sort_keys=True, indent=4, cls=DefaultJsonEncoder
     )
-    expected = get_fixture_content("scatter_options.json")
+    expected = get_fixture_content(fixture)
     for a, b in zip(actual_options.split("\n"), expected.split("\n")):
         eq_(a.strip(), b.strip())
 
@@ -152,6 +156,7 @@ def create_line3d_data():
 
 @patch("random.randint")
 def test_line3d_default(patched):
+    fixture = "line3d_options.json"
     patched.return_value = "1"
     _data = list(create_line3d_data())
     line3d = Line3D("3D 折线图示例", width=1200, height=600)
@@ -166,13 +171,14 @@ def test_line3d_default(patched):
     actual_options = json.dumps(
         line3d.options, sort_keys=True, indent=4, cls=DefaultJsonEncoder
     )
-    expected = get_fixture_content("line3d_options.json")
+    expected = get_fixture_content(fixture)
     for a, b in zip(actual_options.split("\n"), expected.split("\n")):
         eq_(a.strip(), b.strip())
 
 
 @patch("random.randint")
 def test_geo_china_scatter(patched):
+    fixture = "geo_options.json"
     patched.return_value = "1"
     cities = [("鄂尔多斯", 12), ("招远", 12), ("舟山", 12), ("齐齐哈尔", 14), ("盐城", 15)]
     geo = Geo("全国主要城市空气质量", "data from pm2.5")
@@ -193,6 +199,6 @@ def test_geo_china_scatter(patched):
     actual_options = json.dumps(
         geo.options, sort_keys=True, indent=4, cls=DefaultJsonEncoder
     )
-    expected = get_fixture_content("geo_options.json")
+    expected = get_fixture_content(fixture)
     for a, b in zip(actual_options.split("\n"), expected.split("\n")):
         eq_(a.strip(), b.strip())
