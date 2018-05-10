@@ -182,7 +182,7 @@ def test_show_config():
     with open(captured_stdout, "r") as f:
         content = f.read()
         assert "None" not in content
-        assert "null" in content
+        assert "null" not in content
         assert "false" in content
         assert "False" not in content
     os.unlink(captured_stdout)
