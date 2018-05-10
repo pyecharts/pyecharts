@@ -106,18 +106,19 @@ def _expand(dict_generator):
     return dict(list(dict_generator))
 
 
-def _clean(mydict):
+def _clean_dict(mydict):
     for key, value in viewitems(mydict):
         if value is not None:
             if isinstance(value, dict):
                 if value:
-                    value = _expand(_clean(value))
+                    value = _expand(_clean_dict(value))
                 else:
                     # delete key with empty dictionary
                     continue
 
                 if not value:
-                    # detete empty dictionary after cleanning
+                    # detete empty dictionary resulted by
+                    # previous cleanning function
                     continue
 
             elif isinstance(value, (list, tuple, set)):
@@ -137,7 +138,7 @@ def _clean(mydict):
 def _clean_array(myarray):
     for value in myarray:
         if isinstance(value, dict):
-            yield _expand(_clean(value))
+            yield _expand(_clean_dict(value))
 
         elif isinstance(value, (list, tuple, set)):
             yield list(_clean_array(value))
@@ -147,4 +148,4 @@ def _clean_array(myarray):
 
 
 def remove_key_with_none_value(incoming_dict):
-    return _expand(_clean(incoming_dict))
+    return _expand(_clean_dict(incoming_dict))
