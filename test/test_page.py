@@ -1,6 +1,7 @@
 # coding=utf-8
 from __future__ import unicode_literals
 
+import sys
 import json
 import codecs
 from test.constants import RANGE_COLOR, CLOTHES, WEEK
@@ -12,20 +13,32 @@ from nose.tools import eq_, assert_list_equal, raises
 
 TEST_PAGE_TITLE = "my awesome chart"
 
+PY36 = sys.version_info >= (3, 6)
+
 
 class MockChart:
     def __init__(self, page_title):
         self.page_title = page_title
 
 
-def test_page_feature():
+def test_page_init():
+    line = MockChart('Line-Chart')
+    bar = MockChart('Bar-Chart')
+    page = Page(line=line, bar=bar)
+    eq_('Line-Chart', page['line'].page_title)
+    assert 'line' in page
+    assert 'bar' in page
+    if PY36:
+        eq_('Line-Chart', page[0].page_title)
+
+
+def test_page_add_chart():
     nc = Page().add_chart(
         MockChart('Line Chart'), name='line'
     ).add_chart(
         MockChart('Bar Chart')
-    ).add_chart(
-        MockChart('Map Chart'), name='map'
     )
+    nc['map'] = MockChart('Map Chart')
     eq_('Line Chart', nc['line'].page_title)
     eq_('Bar Chart', nc['c1'].page_title)
     assert_list_equal(
