@@ -32,8 +32,8 @@ class Funnel(Chart):
         for data in zip(attr, value):
             _name, _value = data
             _data.append({"name": _name, "value": _value})
-        for a in attr:
-            self._option.get("legend")[0].get("data").append(a)
+        for element in attr:
+            self._option.get("legend")[0].get("data").append(element)
         _dset = set(self._option.get("legend")[0].get("data"))
         self._option.get("legend")[0].update(data=list(_dset))
 

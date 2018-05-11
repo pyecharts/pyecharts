@@ -35,15 +35,8 @@ class Map(Chart):
         :param value:
             属性所对应的值。
         :param maptype:
-            地图类型。 支持 china、world、安徽、澳门、北京、重庆、福建、福建、甘肃、广东，
-            广西、广州、海南、河北、黑龙江、河南、湖北、湖南、江苏、江西、吉林、辽宁、
-            内蒙古、宁夏、青海、山东、上海、陕西、山西、四川、台湾、天津、香港、新疆、
-            西藏、云南、浙江，以及 [363个二线城市地图](https://github.com/chfw/echarts-
-            china-cities-js#featuring-citiesor-for-single-download)。
-            提醒：
-                在画市级地图的时候，城市名字后面的‘市’要省去了，比如，石家庄市的‘市’不要提，
-                即‘石家庄’就可以了。地图提供了自定义模式 [用户如何自定义地图](https://github.com/
-                chenjiandongx/pyecharts/blob/master/docs/zh-cn/user-customize-map.md)
+            地图类型。 从 v0.3.2+ 起，地图已经变为扩展包，支持全国省份，全国城市，全国区县，
+            全球国家等地图，具体请参考 [地图自定义篇](zh-cn/customize_map)
         :param is_roam:
             是否开启鼠标缩放和平移漫游。默认为 True
             如果只想要开启缩放或者平移，可以设置成'scale'或者'move'。设置成 True 为都开启。

@@ -124,7 +124,6 @@ def configure(
     force_js_embed=None,
     output_image=None,
     global_theme=None,
-    **kwargs
 ):
     """
     Config all items for pyecharts when use chart.render() or page.render().
@@ -137,7 +136,6 @@ def configure(
                          Values such as 'svg', 'jpeg', 'png' changes
                          chart presentation in jupyter notebook to those image
                          formats, instead of 'html' format.
-    :param kwargs:
     """
     if jshost:
         CURRENT_CONFIG.jshost = jshost
