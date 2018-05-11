@@ -1,18 +1,16 @@
 # coding=utf-8
 
-from pyecharts.chart import Chart
-import pyecharts.constants as constants
+from pyecharts.chart import Chart3D
 
 
-class Bar3D(Chart):
+class Bar3D(Chart3D):
     """
     <<< 3D 柱状图 >>>
     """
 
-    def __init__(self, title="", subtitle="", **kwargs):
-        kwargs["renderer"] = constants.CANVAS_RENDERER
-        super(Bar3D, self).__init__(title, subtitle, **kwargs)
-        self._js_dependencies.add("echartsgl")
+    def __init__(self, *args, **kwargs):
+        super(Bar3D, self).__init__(*args, **kwargs)
+        self._3d_chart_type = "bar3D"
 
     def add(self, *args, **kwargs):
         self.__add(*args, **kwargs)
@@ -51,31 +49,16 @@ class Bar3D(Chart):
                 染（PBR）来表现真实感材质。
         :param kwargs:
         """
-        kwargs.update(
+        super(Bar3D, self).add(
+            name,
+            data,
+            grid3d_opacity=grid3d_opacity,
+            grid3d_shading=grid3d_shading,
             xaxis3d_type="category",
             yaxis3d_type="category",
             zaxis3d_type="value",
+            **kwargs
         )
-        chart = self._get_all_options(**kwargs)
 
-        self._option.get("legend")[0].get("data").append(name)
-        self._option.update(
-            xAxis3D=chart["xaxis3D"],
-            yAxis3D=chart["yaxis3D"],
-            zAxis3D=chart["zaxis3D"],
-            grid3D=chart["grid3D"],
-        )
         self._option.get("xAxis3D").update(data=x_axis)
         self._option.get("yAxis3D").update(data=y_axis)
-
-        self._option.get("series").append(
-            {
-                "type": "bar3D",
-                "name": name,
-                "data": data,
-                "label": chart["label"],
-                "shading": grid3d_shading,
-                "itemStyle": {"opacity": grid3d_opacity},
-            }
-        )
-        self._config_components(**kwargs)
