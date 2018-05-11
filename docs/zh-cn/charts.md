@@ -2,7 +2,7 @@
 
 * 图形初始化
 * 通用配置项
-    * xyAxis：直角坐标系中的 x、y 轴(Line、Bar、Scatter、EffectScatter、Kline)
+    * xyAxis：平面直角坐标系中的 x、y 轴。(Line、Bar、Scatter、EffectScatter、Kline)
     * dataZoom：dataZoom 组件 用于区域缩放，从而能自由关注细节的数据信息，或者概览数据整体，或者去除离群点的影响。(Line、Bar、Scatter、EffectScatter、Kline、Boxplot)
     * legend：图例组件。图例组件展现了不同系列的标记(symbol)，颜色和名字。可以通过点击图例控制哪些系列不显示。
     * label：图形上的文本标签，可用于说明图形的一些数据信息，比如值，名称等。
@@ -37,7 +37,7 @@
     * Scatter（散点图）
     * Scatter3D（3D 散点图）
     * ThemeRiver（主题河流图）
-    * TreeMap（树图）
+    * TreeMap（矩形树图）
     * WordCloud（词云图）
 * 用户自定义
     * Grid 类：并行显示多张图
@@ -45,7 +45,6 @@
     * Page 类：同一网页按顺序展示多图
     * Timeline 类：提供时间线轮播多张图
 * 统一风格
-* 关于项目
 
 
 # 图形初始化
@@ -75,14 +74,14 @@
     画布背景颜色，默认为 '#fff'
 * page_title -> str  
     指定生成的 html 文件中 `<title>` 标签的值。默认为'Echarts'
-* renderer -> str
+* renderer -> str  
     指定使用渲染方式，有 'svg' 和 'canvas' 可选，默认为 'canvas'。3D 图仅能使用 'canvas'。
     
 
 # 通用配置项
 **通用配置项均在 ```add()``` 中设置**
 
-**xyAxis：直角坐标系中的 x、y 轴(Line、Bar、Scatter、EffectScatter、Kline)**
+**xyAxis：平面直角坐标系中的 x、y 轴。(Line、Bar、Scatter、EffectScatter、Kline)**
 
 * is_convert -> bool  
     是否交换 x 轴与 y 轴
@@ -210,6 +209,7 @@
         // 数据图形的颜色
         color: string,
     }
+    ```
 * yaxis_name -> str  
     y 轴名称
 * yaxis_name_size -> int  
@@ -2715,8 +2715,8 @@ tr.render()
 **Note：** 可以看到，每个数据项中的第三个数值就是该项的种类，而种类可以在 `add()` 第一个参数指定。
 
 
-## TreeMap（树图）
-> 树图是一种常见的表达『层级数据』『树状数据』的可视化形式。它主要用面积的方式，便于突出展现出『树』的各层级中重要的节点。
+## TreeMap（矩形树图）
+> 矩形树图是一种常见的表达『层级数据』『树状数据』的可视化形式。它主要用面积的方式，便于突出展现出『树』的各层级中重要的节点。
 TreeMap.add() 方法签名
 ```python
 add(name, attr, value,
@@ -2728,7 +2728,7 @@ add(name, attr, value,
 * name -> str  
     图例名称
 * data -> list  
-    树图的数据项是 **一棵树**，每个节点包括`value`, `name`（可选）, `children`（也是树，可选）如下所示
+    矩形树图的数据项是 **一棵树**，每个节点包括`value`, `name`（可选）, `children`（也是树，可选）如下所示
     ```
     [
         {
@@ -2801,14 +2801,14 @@ data = [
             }]}
 ]
 
-treemap = TreeMap("树图-默认示例", width=1200, height=600)
+treemap = TreeMap("矩形树图-默认示例", width=1200, height=600)
 treemap.add("演示数据", data, is_label_show=True, label_pos='inside')
 treemap.render()
 ```
 ![treemap-0](https://user-images.githubusercontent.com/19553554/35082247-b6f5ff88-fc53-11e7-84ca-bcb1f621ec68.png)
 
 ```python
-treemap = TreeMap("树图-下钻示例", width=1200, height=600)
+treemap = TreeMap("矩形树图-下钻示例", width=1200, height=600)
 treemap.add("演示数据", data, is_label_show=True, label_pos='inside',
             treemap_left_depth=1)
 treemap.render()
@@ -2818,7 +2818,7 @@ treemap.render()
 ```python
 from pyecharts import TreeMap
 
-treemap = TreeMap("树图示例", width=1200, height=600)
+treemap = TreeMap("矩形树图示例", width=1200, height=600)
 import os
 import json
 with open(os.path.join("..", "json", "treemap.json"), "r", encoding="utf-8") as f:
