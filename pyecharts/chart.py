@@ -402,16 +402,19 @@ class Chart(Base):
 
 class Chart3D(Chart):
     """
-    <<< 3D 折线图 >>>
+    `Chart3D`类是所有 3D 类图表的基类，继承自 `Chart` 类
     """
 
     def __init__(self, title="", subtitle="", **kwargs):
         kwargs["renderer"] = constants.CANVAS_RENDERER
         super(Chart3D, self).__init__(title, subtitle, **kwargs)
         self._js_dependencies.add("echartsgl")
-        self._3d_chart_type = 'generic_3d_chart_dont_use_me_directly'
+        self._3d_chart_type = None  # generic 3d chart type, don't use it directly
 
-    def add(
+    def add(self, *args, **kwargs):
+        self.__chart3d_add(*args, **kwargs)
+
+    def __chart3d_add(
         self,
         name,
         data,
@@ -430,6 +433,22 @@ class Chart3D(Chart):
             数据项，数据中，每一行是一个『数据项』，每一列属于一个『维度』。
         :param grid3d_opacity:
             3D 笛卡尔坐标系组的透明度（线的透明度），默认为 1，完全不透明。
+        :param grid3d_shading:
+            三维柱状图中三维图形的着色效果。
+            color：
+                只显示颜色，不受光照等其它因素的影响。
+            lambert：
+                通过经典的 lambert 着色表现光照带来的明暗。
+            realistic：
+                真实感渲染，配合 light.ambientCubemap 和 postEffect 使用可以让
+                展示的画面效果和质感有质的提升。ECharts GL 中使用了基于物理的渲
+                染（PBR）来表现真实感材质。
+        :param xaxis3d_type:
+            空间直角 3D 图表 x 轴类型
+        :param yaxis3d_type:
+            空间直角 3D 图表 y 轴类型
+        :param zaxis3d_type:
+            空间直角 3D 图表 z 轴类型
         :param kwargs:
         """
         chart = self._get_all_options(
