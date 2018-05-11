@@ -409,7 +409,7 @@ class Chart3D(Chart):
         kwargs["renderer"] = constants.CANVAS_RENDERER
         super(Chart3D, self).__init__(title, subtitle, **kwargs)
         self._js_dependencies.add("echartsgl")
-        self._3d_chart_type = None  # generic 3d chart type, don't use it directly
+        self._3d_chart_type = None  # 3d chart type, don't use it directly
 
     def add(self, *args, **kwargs):
         self.__chart3d_add(*args, **kwargs)
