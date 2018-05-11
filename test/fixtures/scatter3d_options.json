@@ -33,7 +33,7 @@
         "viewControl": {
             "autoRotate": false, 
             "autoRotateSpeed": 10, 
-            "rotateSensitivity": 5
+            "rotateSensitivity": 1
         }
     }, 
     "legend": [
@@ -55,9 +55,19 @@
         {
             "data": [
                 [
-                    0, 
-                    0, 
-                    0
+                    1, 
+                    1, 
+                    1
+                ], 
+                [
+                    1, 
+                    1, 
+                    1
+                ], 
+                [
+                    1, 
+                    1, 
+                    1
                 ]
             ], 
             "itemStyle": {
@@ -78,7 +88,7 @@
                     }
                 }
             }, 
-            "type": "line3D"
+            "type": "scatter3D"
         }
     ], 
     "series_id": "1", 
@@ -88,7 +98,7 @@
             "subtextStyle": {
                 "fontSize": 12
             }, 
-            "text": "3D \u6298\u7ebf\u56fe\u793a\u4f8b", 
+            "text": "3D \u6563\u70b9\u56fe\u793a\u4f8b", 
             "textStyle": {
                 "fontSize": 18
             }, 
@@ -144,7 +154,7 @@
             ]
         }, 
         "left": "left", 
-        "max": 30, 
+        "max": 100, 
         "min": 0, 
         "orient": "vertical", 
         "showLabel": true, 

@@ -18,6 +18,7 @@ class Geo(Chart):
     def add_coordinate(self, name, longitude, latitude):
         """
         Add a geo coordinate for a position.
+
         :param name: The name of a position
         :param longitude: The longitude of coordinate.
         :param latitude: The latitude of coordinate.
@@ -28,6 +29,7 @@ class Geo(Chart):
     def get_coordinate(self, name, raise_exception=False):
         """
         Return coordinate for the city name.
+
         :param name: City name or any custom name string.
         :param raise_exception: Whether to raise exception if not exist.
         :return: A list like [longitude, latitude] or None
@@ -70,14 +72,8 @@ class Geo(Chart):
         :param type:
             图例类型，有'scatter', 'effectscatter', 'heatmap'可选。
         :param maptype:
-            地图类型。 支持 china、world、安徽、澳门、北京、重庆、福建、福建、甘肃、
-            广东，广西、广州、海南、河北、黑龙江、河南、湖北、湖南、江苏、江西、吉林、
-            辽宁、内蒙古、宁夏、青海、山东、上海、陕西、山西、四川、台湾、天津、香港、
-            新疆、西藏、云南、浙江，以及 [363个二线城市](https://github.com/chfw/
-            echarts-china-cities-js#featuring-citiesor-for-single-download]地图。
-            提醒：
-                在画市级地图的时候，城市名字后面的‘市’要省去了，比如，石家庄市的
-                ‘市’不要提，即‘石家庄’就可以了。
+            地图类型。 从 v0.3.2+ 起，地图已经变为扩展包，支持全国省份，全国城市，全国区县，
+            全球国家等地图，具体请参考 [地图自定义篇](zh-cn/customize_map)
         :param symbol_size:
             标记图形大小。
         :param border_color:

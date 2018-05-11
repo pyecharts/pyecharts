@@ -1,5 +1,4 @@
 {
-    "backgroundColor": null, 
     "color": [
         "#c23531", 
         "#2f4554", 
@@ -37,7 +36,6 @@
             "selectedMode": "multiple", 
             "show": true, 
             "textStyle": {
-                "color": null, 
                 "fontSize": 12
             }, 
             "top": "top"
@@ -233,12 +231,6 @@
                     2276.22
                 ]
             ], 
-            "markLine": {
-                "data": []
-            }, 
-            "markPoint": {
-                "data": []
-            }, 
             "name": "\u65e5K", 
             "seriesId": "1", 
             "type": "candlestick"
@@ -248,14 +240,11 @@
     "title": [
         {
             "left": "auto", 
-            "subtext": "", 
             "subtextStyle": {
-                "color": null, 
                 "fontSize": 12
             }, 
             "text": "K \u7ebf\u56fe-\u9ed8\u8ba4\u793a\u4f8b", 
             "textStyle": {
-                "color": null, 
                 "fontSize": 18
             }, 
             "top": "auto"
@@ -286,9 +275,7 @@
         "backgroundColor": "rgba(50,50,50,0.7)", 
         "borderColor": "#333", 
         "borderWidth": 0, 
-        "formatter": null, 
         "textStyle": {
-            "color": null, 
             "fontSize": 14
         }, 
         "trigger": "item", 
@@ -297,12 +284,10 @@
     "xAxis": [
         {
             "axisLabel": {
-                "formatter": null, 
                 "interval": "auto", 
                 "margin": 8, 
                 "rotate": 0, 
                 "textStyle": {
-                    "color": null, 
                     "fontSize": 12
                 }
             }, 
@@ -344,15 +329,11 @@
                 "2017/7/31"
             ], 
             "inverse": false, 
-            "max": null, 
-            "min": null, 
-            "name": "", 
             "nameGap": 25, 
             "nameLocation": "middle", 
             "nameTextStyle": {
                 "fontSize": 14
             }, 
-            "position": null, 
             "scale": true, 
             "show": true, 
             "splitLine": {
@@ -369,7 +350,6 @@
                 "margin": 8, 
                 "rotate": 0, 
                 "textStyle": {
-                    "color": null, 
                     "fontSize": 12
                 }
             }, 
@@ -378,15 +358,11 @@
             }, 
             "boundaryGap": true, 
             "inverse": false, 
-            "max": null, 
-            "min": null, 
-            "name": "", 
             "nameGap": 25, 
             "nameLocation": "middle", 
             "nameTextStyle": {
                 "fontSize": 14
             }, 
-            "position": null, 
             "scale": true, 
             "show": true, 
             "splitArea": {
