@@ -16,6 +16,11 @@ class Page(object):
     """
 
     def __init__(self, page_title='EChart', **kwargs):
+        """
+        Create a page instance.
+        :param page_title: The title of generated html file.
+        :param kwargs: named charts as {<name>:<chart>}
+        """
         self.page_title = page_title
         self._charts = OrderedDict()
         for k, v in kwargs.items():
@@ -30,7 +35,7 @@ class Page(object):
 
     def add_chart(self, chart, name=None):
         """
-        Add a chart.New in v0.5.3
+        Add a chart.New in v0.5.4
         :param chart:
         :param name:
         :return:
@@ -42,7 +47,7 @@ class Page(object):
     def _next_name(self):
         return 'c{}'.format(len(self._charts))
 
-    # List-like feature
+    # List-Like Feature
 
     def __iter__(self):
         for chart in self._charts.values():
@@ -51,18 +56,21 @@ class Page(object):
     def __len__(self):
         return len(self._charts)
 
-    # Dict-like feature
+    # Dict-Like Feature
 
     def __contains__(self, item):
         return item in self._charts
 
     def __getitem__(self, item):
         if isinstance(item, int):
+            # list index
             return list(self._charts.values())[item]
         return self._charts[item]
 
     def __setitem__(self, key, value):
         self._charts[key] = value
+
+    # Chart-Like Feature
 
     def render(
         self,
