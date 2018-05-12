@@ -65,11 +65,11 @@ class Page(object):
         self._charts[key] = value
 
     def render(
-            self,
-            path="render.html",
-            template_name="simple_page.html",
-            object_name="page",
-            **kwargs
+        self,
+        path="render.html",
+        template_name="simple_page.html",
+        object_name="page",
+        **kwargs
     ):
         _, ext = os.path.splitext(path)
         _file_type = ext[1:]

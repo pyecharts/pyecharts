@@ -255,7 +255,7 @@ map.render()
 
 ```python
 
-from pyecharts import Page,Line, Bar
+from pyecharts import Page, Line, Bar
 
 page = Page()
 line = Line('Demo Line')
