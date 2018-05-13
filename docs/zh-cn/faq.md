@@ -108,7 +108,7 @@ A: 因为 china.js 没有加载成功。请检查 echarts-countries-pypkg 是不
 
 **Q:为什么jupyter notebook图是空的？Why jupyter notebook chart is blank **
 
-请准从这个顺序排查问题：
+请按这个顺序排查问题：
 
 1）检查这个链接能拿到 echarts.min.js 么？ http://localhost:8888/nbextensions/echarts/echarts.min.js
 
