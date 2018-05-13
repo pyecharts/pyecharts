@@ -25,7 +25,7 @@ bar.render()
 
 ## 如何获得更多主题
 
-[echarts-themes-pypkg](https://github.com/pyecharts/echarts-themes-pypkg) 提供了 `dark`, `vintage`, `macarons`, `infographic`, `shine` 和 `roma` 主题。
+echarts 自带 `dark` 主题， pyecharts 也就自带了 `dark`。 [echarts-themes-pypkg](https://github.com/pyecharts/echarts-themes-pypkg) 提供了 `vintage`, `macarons`, `infographic`, `shine` 和 `roma` 主题。
 
 ### 安装主题插件
 
