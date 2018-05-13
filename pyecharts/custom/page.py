@@ -15,7 +15,7 @@ class Page(object):
     A composite object to present multiple charts vertically in a single page
     """
 
-    def __init__(self, page_title='EChart', **name_chart_pair):
+    def __init__(self, page_title="EChart", **name_chart_pair):
         """
         Create a page instance.
         :param page_title: The title of generated html file.
@@ -45,7 +45,7 @@ class Page(object):
         return self
 
     def _next_name(self):
-        return 'c{}'.format(len(self))
+        return "c{}".format(len(self))
 
     # List-Like Feature
 
