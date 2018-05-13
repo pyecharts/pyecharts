@@ -1,7 +1,7 @@
 # 版本日志
 
 * ### version 0.5.4（dev）
-    * TODO
+    * 重构`Page`类，新增图表命名名称引用。
 
 * ### version 0.5.3 - 2018.05.10（current）
 
