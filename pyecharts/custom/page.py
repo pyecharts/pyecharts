@@ -15,15 +15,15 @@ class Page(object):
     A composite object to present multiple charts vertically in a single page
     """
 
-    def __init__(self, page_title='EChart', **kwargs):
+    def __init__(self, page_title='EChart', **name_chart_pair):
         """
         Create a page instance.
         :param page_title: The title of generated html file.
-        :param kwargs: named charts as {<name>:<chart>}
+        :param name_chart_pair: named charts as {<name>:<chart>}
         """
         self.page_title = page_title
         self._charts = OrderedDict()
-        for k, v in kwargs.items():
+        for k, v in name_chart_pair.items():
             self.add_chart(chart=v, name=k)
 
     def add(self, achart_or_charts):
@@ -45,7 +45,7 @@ class Page(object):
         return self
 
     def _next_name(self):
-        return 'c{}'.format(len(self._charts))
+        return 'c{}'.format(len(self))
 
     # List-Like Feature
 
@@ -128,7 +128,7 @@ class Page(object):
         return utils.merge_js_dependencies(*self)
 
     @classmethod
-    def from_charts(cls, *args):
+    def from_charts(cls, *charts):
         """
         A shortcut class method for building page object from charts.
 
@@ -136,6 +136,6 @@ class Page(object):
         :return: Page instance
         """
         page = cls()
-        for c in args:
-            page.add_chart(c)
+        for chart in charts:
+            page.add_chart(chart)
         return page

@@ -279,7 +279,7 @@ page.add_chart(bar)
 
 > Page 不再具有 list 的全部特性，因此 切片(slice)、添加(append)、扩展(extend) 等方法不再支持。
 
-**`__init__(page_title, **kwargs)`**
+**`__init__(page_title, **name_chart_pair)`**
 
 构造函数，使用 `{<name>:<chart>}` 创建实例。根据 [PEP 468](https://www.python.org/dev/peps/pep-0468/)，仅在 Python 3.6+ 同时保证其顺序。
 
@@ -291,7 +291,7 @@ v0.5.4 新增，可链式使用。添加一个图表对象，如果如果没有�
 
 可链式使用。添加一个或多个图表对象，该函数使用默认的名称。
 
-**`cls.from_charts(*args)`**
+**`cls.from_charts(*charts)`**
 
 从一个或多个图表实例，创建一个 `Page` 实例。
 
