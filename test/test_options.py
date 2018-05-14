@@ -275,20 +275,10 @@ def test_geolines(patched):
     fixture = "geolines.json"
     patched.return_value = "1"
     data_guangzhou = [
-        ["广州", "上海"],
-        ["广州", "北京"],
-        ["广州", "南京"],
-        ["广州", "重庆"],
-        ["广州", "兰州"],
-        ["广州", "杭州"],
+        ["广州", "上海"]
     ]
     data_beijing = [
-        ["北京", "上海"],
-        ["北京", "广州"],
-        ["北京", "南京"],
-        ["北京", "重庆"],
-        ["北京", "兰州"],
-        ["北京", "杭州"],
+        ["北京", "上海"]
     ]
     lines = GeoLines("GeoLines 示例", **style.init_style)
     lines.add("从广州出发", data_guangzhou, **style_geo)
@@ -298,6 +288,5 @@ def test_geolines(patched):
         lines.options, sort_keys=True, indent=4, cls=DefaultJsonEncoder
     )
     expected = get_fixture_content(fixture)
-
     for a, b in zip(actual_options.split("\n"), expected.split("\n")):
         eq_(a.strip(), b.strip())
