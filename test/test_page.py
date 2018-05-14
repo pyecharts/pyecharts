@@ -6,15 +6,7 @@ import json
 import codecs
 from test.constants import RANGE_COLOR, CLOTHES, WEEK
 from pyecharts import (
-    Bar,
-    Scatter3D,
-    Line,
-    Pie,
-    Map,
-    Kline,
-    Radar,
-    WordCloud,
-    Liquid,
+    Bar, Scatter3D, Line, Pie, Map, Kline, Radar, WordCloud, Liquid
 )
 from pyecharts import Page
 

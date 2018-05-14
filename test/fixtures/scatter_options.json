@@ -85,6 +85,8 @@
                     }
                 }
             }, 
+            "markLine": {}, 
+            "markPoint": {}, 
             "name": "A", 
             "seriesId": "1", 
             "symbol": "circle", 
@@ -133,6 +135,8 @@
                     }
                 }
             }, 
+            "markLine": {}, 
+            "markPoint": {}, 
             "name": "B", 
             "seriesId": "1", 
             "symbol": "circle", 

@@ -113,7 +113,13 @@ def test_remove_key_with_none_value():
     actual_result = remove_key_with_none_value(fixture)
     expected = {
         "a": 1,
+        "empty_dict": {},
+        "array": [
+            1,
+            {"nested": {"ac": 1, "nested": {"a": 1}}},
+            {"normal": 1, "empty_nested_dict": {}},
+        ],
         "nested": {"ac": 1, "nested": {"a": 1}},
-        "array": [1, {"nested": {"ac": 1, "nested": {"a": 1}}}, {"normal": 1}],
+        "empty_dict2": {"empty_dict": {}},
     }
     eq_(actual_result, expected)

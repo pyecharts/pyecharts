@@ -154,6 +154,7 @@
             "high", 
             "low"
         ], 
+        "textStyle": {}, 
         "top": "bottom", 
         "type": "continuous"
     }, 

@@ -231,6 +231,8 @@
                     2276.22
                 ]
             ], 
+            "markLine": {}, 
+            "markPoint": {}, 
             "name": "\u65e5K", 
             "seriesId": "1", 
             "type": "candlestick"
