@@ -1,8 +1,12 @@
 # 版本日志
 
 * ### version 0.5.4（dev）
+    ### Updated
     * 重构`Page`类，新增图表命名名称引用。
 
+    ### Fixed
+    * [issue#555](https://github.com/pyecharts/pyecharts/issues/555) 修复 v0.5.3。Polar 不显示。
+ 
 * ### version 0.5.3 - 2018.05.10（current）
 
     #### Fixed
