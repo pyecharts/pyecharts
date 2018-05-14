@@ -106,19 +106,19 @@ A: 因为 china.js 没有加载成功。请检查 echarts-countries-pypkg 是不
 
 ![](https://user-images.githubusercontent.com/4280312/37921785-a472a2b8-3122-11e8-8ee3-cc80a3901d9d.png)
 
-**Q:为什么jupyter notebook图是空的？Why jupyter notebook chart is blank **
+**Q:为什么 jupyter notebook 图是空的？**
 
 请按这个顺序排查问题：
 
-1）检查这个链接能拿到 echarts.min.js 么？ http://localhost:8888/nbextensions/echarts/echarts.min.js
+1）检查能否访问 echarts.min.js？ http://localhost:8888/nbextensions/echarts/echarts.min.js
 
-如果不能，请检查 jupyter-echarts-pypkg 是否装好？在确认你已经装了 jupyter 的情况下，可以卸载 jupyter-echarts-pypkg 然后再装一遍。然后运行 jupyter notebook，再次查看 1）能拿到 echarts.min.js 么？
+如果不能，请检查 jupyter-echarts-pypkg 是否装好？在确认你已经装了 jupyter 的情况下，可以卸载 jupyter-echarts-pypkg 然后再装一遍。然后运行 jupyter notebook，再次查看 1）能否正确访问 echarts.min.js？
 
-如果能，请用鼠标右击输出的空白区域，在跳出的菜单处，点击 inspect 。在发展人员窗口里，请抓图 <script>...</script> 的区域.
+如果能，请右键打开开发者工具，截下 <script>...</script> 区域的截图.
 
 例子：
 
-![]("https://user-images.githubusercontent.com/4280312/29354092-4c4eecee-8264-11e7-98bb-06ec1b4c06b6.png")
+![](https://user-images.githubusercontent.com/4280312/29354092-4c4eecee-8264-11e7-98bb-06ec1b4c06b6.png)
 
 
 **Q:如何离线安装 pyecharts？**
