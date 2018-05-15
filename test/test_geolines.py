@@ -106,7 +106,6 @@ def test_geolines_value_and_formatter():
     lines.add(
         "从广州出发", data_guangzhou, tooltip_formatter="{a} : {c}", **style_geo
     )
-    lines.render()
     html_content = lines._repr_html_()
     assert '"value": 10' in html_content
     assert '"value": 60' in html_content
