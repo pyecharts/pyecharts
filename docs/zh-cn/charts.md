@@ -1137,7 +1137,7 @@ add(name, data,
 * name -> str  
     图例名称
 * data -> [list], 包含列表的列表  
-    数据项，数据中，每一行是一个『数据项』，每一列属于一个『维度』。每一行包含两个数据, 如 ["广州", "北京"]，则指定从广州到北京。
+    数据项，数据中，每一行是一个『数据项』，每一列属于一个『维度』。每一行包含两个或三个数据，如 ["广州", "北京"] 或 ["广州", "北京"，100]，则指定从广州到北京。第三个值用于表示该 line 的数值，该值可省略。
 * maptype -> str  
     地图类型。 从 v0.3.2+ 起，地图已经变为扩展包，支持全国省份，全国城市，全国区县，全球国家等地图，具体请参考 [地图自定义篇](zh-cn/customize_map)
 * symbol -> str  
@@ -1217,6 +1217,26 @@ geolines.render()
 
 ```
 ![geolines-1](https://user-images.githubusercontent.com/19553554/35082102-fd8d884a-fc52-11e7-9e40-5f94098d4493.gif)
+
+指定数值
+```python
+from pyecharts import GeoLines, Style
+
+data_guangzhou = [
+    ["广州", "上海", 10],
+    ["广州", "北京", 20],
+    ["广州", "南京", 30],
+    ["广州", "重庆", 40],
+    ["广州", "兰州", 50],
+    ["广州", "杭州", 60],
+]
+lines = GeoLines("GeoLines 示例", **style.init_style)
+lines.add(
+    "从广州出发", data_guangzhou, tooltip_formatter="{a} : {c}", **style_geo
+)
+lines.render()
+```
+![](https://user-images.githubusercontent.com/19553554/40048098-eaa7b3aa-5863-11e8-98cd-dcd8526fe820.gif)
 
 多例模式
 ```python
