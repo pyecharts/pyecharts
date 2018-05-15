@@ -1,9 +1,18 @@
 # 版本日志
 
-* ### version 0.5.4（dev）
+* ### version 0.5.5（dev）
     * TODO
 
-* ### version 0.5.3 - 2018.05.10（current）
+* ### version 0.5.4 - 2018.05.15（current）
+
+    ### Updated
+    * 重构 `Page` 类，新增图表命名名称引用。
+
+    ### Fixed
+    * [issue#555](https://github.com/pyecharts/pyecharts/issues/555) 修复 v0.5.3 Polar 图不能显示的 bug
+    * [issue#541](https://github.com/pyecharts/pyecharts/issues/541) 修复 v0.5.3 Django + pyecharts 不能正常导入的 bug
+ 
+* ### version 0.5.3 - 2018.05.10
 
     #### Fixed
     * [issue#544](https://github.com/pyecharts/pyecharts/issues/544) 修复 v0.5.2 主题颜色默认颜色配置与前版本有差别太大的 bug
