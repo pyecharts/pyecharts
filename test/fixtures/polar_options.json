@@ -70,6 +70,7 @@
             "top": "top"
         }
     ], 
+    "polar": {}, 
     "radiusAxis": {
         "axisLabel": {
             "rotate": 0
