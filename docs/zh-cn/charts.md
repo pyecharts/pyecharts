@@ -1218,6 +1218,26 @@ geolines.render()
 ```
 ![geolines-1](https://user-images.githubusercontent.com/19553554/35082102-fd8d884a-fc52-11e7-9e40-5f94098d4493.gif)
 
+指定数值
+```python
+from pyecharts import GeoLines, Style
+
+data_guangzhou = [
+    ["广州", "上海", 10],
+    ["广州", "北京", 20],
+    ["广州", "南京", 30],
+    ["广州", "重庆", 40],
+    ["广州", "兰州", 50],
+    ["广州", "杭州", 60],
+]
+lines = GeoLines("GeoLines 示例", **style.init_style)
+lines.add(
+    "从广州出发", data_guangzhou, tooltip_formatter="{a} : {c}", **style_geo
+)
+lines.render()
+```
+![](https://user-images.githubusercontent.com/19553554/40048098-eaa7b3aa-5863-11e8-98cd-dcd8526fe820.gif)
+
 多例模式
 ```python
 from pyecharts import GeoLines, Style
