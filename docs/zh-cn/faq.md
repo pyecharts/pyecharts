@@ -106,6 +106,21 @@ A: 因为 china.js 没有加载成功。请检查 echarts-countries-pypkg 是不
 
 ![](https://user-images.githubusercontent.com/4280312/37921785-a472a2b8-3122-11e8-8ee3-cc80a3901d9d.png)
 
+**Q:为什么 jupyter notebook 图是空的？**
+
+请按这个顺序排查问题：
+
+1）检查能否访问 echarts.min.js？ http://localhost:8888/nbextensions/echarts/echarts.min.js
+
+如果不能，请检查 jupyter-echarts-pypkg 是否装好？在确认你已经装了 jupyter 的情况下，可以卸载 jupyter-echarts-pypkg 然后再装一遍。然后运行 jupyter notebook，再次查看 1）能否正确访问 echarts.min.js？
+
+如果能，请右键打开开发者工具，截下 <script>...</script> 区域的截图.
+
+例子：
+
+![](https://user-images.githubusercontent.com/4280312/29354092-4c4eecee-8264-11e7-98bb-06ec1b4c06b6.png)
+
+
 **Q:如何离线安装 pyecharts？**
 
 自 v0.5.0 后，离线模式的要求改变了一下。如果你用的是 python 3.5+, 以下的指导就足够了。要是你用的是 python 2.7, 3.4, 请读补充提示。

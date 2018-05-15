@@ -4,7 +4,9 @@ Test Case for the acccess interface of coordinate dataset
 """
 from __future__ import unicode_literals
 from pyecharts.datasets.coordinates import (
-    get_coordinate, search_coordinates_by_keyword, search_coordinates_by_filter
+    get_coordinate,
+    search_coordinates_by_keyword,
+    search_coordinates_by_filter,
 )
 
 from nose.tools import assert_dict_equal

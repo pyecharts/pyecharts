@@ -7,7 +7,9 @@ import codecs
 from nose.tools import eq_
 
 from pyecharts.utils import (
-    write_utf8_html_file, get_resource_dir, merge_js_dependencies
+    write_utf8_html_file,
+    get_resource_dir,
+    merge_js_dependencies,
 )
 from pyecharts.utils.lazy import LazyObject
 from pyecharts.utils import remove_key_with_none_value
@@ -97,23 +99,16 @@ def test_remove_key_with_none_value():
         "a": 1,
         "b": None,
         "nested": {"ac": 1, "bc": None, "nested": {"a": 1, "b": None}},
-        "empty_dict": {"data": []},
-        "empty_dict2": {"empty_dict": {}},
         "array": [
             1,
             {"nested": {"ac": 1, "bc": None, "nested": {"a": 1, "b": None}}},
-            {
-                "normal": 1,
-                "empty_string": "",
-                "empty_array": [],
-                "empty_nested_dict": {},
-            },
+            {"normal": 1, "empty_string": ""},
         ],
     }
     actual_result = remove_key_with_none_value(fixture)
     expected = {
         "a": 1,
-        "nested": {"ac": 1, "nested": {"a": 1}},
         "array": [1, {"nested": {"ac": 1, "nested": {"a": 1}}}, {"normal": 1}],
+        "nested": {"ac": 1, "nested": {"a": 1}},
     }
     eq_(actual_result, expected)

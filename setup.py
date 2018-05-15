@@ -21,7 +21,7 @@ __requires__ = [
     "future",
     "jupyter-echarts-pypkg==0.1.1",
     "lml==0.0.2",
-    "pyecharts-javascripthon",
+    "pyecharts-javascripthon==0.0.6",
 ]
 
 __keywords__ = ["Echarts", "charts", "plotting-tool"]

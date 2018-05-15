@@ -4,7 +4,6 @@ Base <|-- Timeline
 Base <|-- Grid
 Base <|-- Overlap
 Chart <|-- Bar
-Chart <|-- Bar3D
 Chart <|-- Boxplot
 Chart <|-- EffectScatter
 Chart <|-- Funnel
@@ -13,7 +12,6 @@ Chart <|-- Graph
 Chart <|-- HeapMap
 Chart <|-- KLine
 Chart <|-- Line
-Chart <|-- Line3D
 Chart <|-- Liquid
 Chart <|-- Map
 Chart <|-- Parallel
@@ -22,8 +20,15 @@ Chart <|-- Polar
 Chart <|-- Radar
 Chart <|-- Sankey
 Chart <|-- Scatter
-Chart <|-- Scatter3D
 Chart <|-- ThemeRiver
 Chart <|-- TreeMap
 Chart <|-- WorldCould
+Chart <|-- Chart3D
+
+Chart3D <|-- Bar3D
+Chart3D <|-- Line3D
+Chart3D <|-- Scatter3D
+
+Geo <|-- GeoLines
+
 @enduml

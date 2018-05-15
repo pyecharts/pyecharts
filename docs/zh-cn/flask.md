@@ -2,14 +2,16 @@
 
 ## Step 0: 首先新建一个 Flask 项目
 
-* Linux/MacOS 系统  
+#### Linux/MacOS 系统
+
 ```shell
 $ mkdir flask-echarts
 $ cd flask-echarts
 $ mkdir templates
 ```
 
-* Windows 系统
+#### Windows 系统
+
 新建一个 flask-echarts 文件夹，在其下新建 templates 子文件夹。
 
 ## Step 1: 为项目提供自己的模板
@@ -101,7 +103,8 @@ def generate_3d_random_point():
 
 ## Step 3: 运行项目
 
-* Linux/MacOS 系统
+#### Linux/MacOS 系统
+
 ```shell
 $ export FLASK_APP=server.py
 $ flask run
@@ -109,7 +112,8 @@ $ flask run
 * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
 ```
 
-* Windows 系统
+#### Windows 系统
+
 ```shell
 $ set FLASK_APP=server.py
 $ flask run
