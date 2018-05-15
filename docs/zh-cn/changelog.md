@@ -1,7 +1,9 @@
 # 版本日志
 
 * ### version 0.5.5（dev）
-    * TODO
+
+    ### Added
+    * [issue#565](https://github.com/pyecharts/pyecharts/issues/565) Geolines 图数据项可以新增数值维度
 
 * ### version 0.5.4 - 2018.05.15（current）
 
