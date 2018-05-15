@@ -1,11 +1,11 @@
 # coding=utf-8
 from __future__ import unicode_literals
 
-from future.utils import viewitems
-
 import os
 import sys
 import codecs
+
+from future.utils import viewitems
 
 PY3 = sys.version_info[0] == 3
 
@@ -41,23 +41,23 @@ def write_utf8_html_file(file_name, html_content):
     :param html_content:
     :return:
     """
-    with codecs.open(file_name, "w+", encoding="utf-8") as f:
-        f.write(html_content)
+    with codecs.open(file_name, "w+", encoding="utf-8") as html_file:
+        html_file.write(html_content)
 
 
-def to_css_length(x):
+def to_css_length(pixcel_number):
     """
     Return the standard length string of css.
     It's compatible with number values in old versions.
 
-    :param x:
+    :param pixel_number:
     :return:
     """
-    if isinstance(x, (int, float)):
-        return "{}px".format(x)
+    if isinstance(pixcel_number, (int, float)):
+        return "{}px".format(pixcel_number)
 
     else:
-        return x
+        return pixcel_number
 
 
 def _flat(obj):
@@ -95,9 +95,9 @@ def merge_js_dependencies(*chart_or_name_list):
         elif _item not in dependencies:
             dependencies.append(_item)
 
-    for d in chart_or_name_list:
-        for _d in _flat(d):
-            _add(_d)
+    for dependency_list in chart_or_name_list:
+        for a_dependency in _flat(dependency_list):
+            _add(a_dependency)
     fol = [x for x in front_optional_items if x in fist_items]
     return front_required_items + fol + dependencies
 
@@ -110,23 +110,10 @@ def _clean_dict(mydict):
     for key, value in viewitems(mydict):
         if value is not None:
             if isinstance(value, dict):
-                if value:
-                    value = _expand(_clean_dict(value))
-                else:
-                    # delete key with empty dictionary
-                    continue
-
-                if not value:
-                    # detete empty dictionary resulted by
-                    # previous cleanning function
-                    continue
+                value = _expand(_clean_dict(value))
 
             elif isinstance(value, (list, tuple, set)):
-                if value:
-                    value = list(_clean_array(value))
-                else:
-                    # delete key with empty array
-                    continue
+                value = list(_clean_array(value))
 
             elif isinstance(value, string_type) and not value:
                 # delete key with empty string

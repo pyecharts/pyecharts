@@ -27,13 +27,13 @@
         "#f6f5ec"
     ], 
     "grid3D": {
-        "boxDepth": 100, 
+        "boxDepth": 80, 
         "boxHeight": 100, 
-        "boxWidth": 100, 
+        "boxWidth": 200, 
         "viewControl": {
             "autoRotate": false, 
             "autoRotateSpeed": 10, 
-            "rotateSensitivity": 5
+            "rotateSensitivity": 1
         }
     }, 
     "legend": [
@@ -55,9 +55,9 @@
         {
             "data": [
                 [
-                    0, 
-                    0, 
-                    0
+                    1, 
+                    1, 
+                    1
                 ]
             ], 
             "itemStyle": {
@@ -78,7 +78,8 @@
                     }
                 }
             }, 
-            "type": "line3D"
+            "shading": "color", 
+            "type": "bar3D"
         }
     ], 
     "series_id": "1", 
@@ -88,7 +89,7 @@
             "subtextStyle": {
                 "fontSize": 12
             }, 
-            "text": "3D \u6298\u7ebf\u56fe\u793a\u4f8b", 
+            "text": "3D \u67f1\u72b6\u56fe\u793a\u4f8b", 
             "textStyle": {
                 "fontSize": 18
             }, 
@@ -144,7 +145,7 @@
             ]
         }, 
         "left": "left", 
-        "max": 30, 
+        "max": 20, 
         "min": 0, 
         "orient": "vertical", 
         "showLabel": true, 
@@ -162,22 +163,57 @@
             "interval": "auto", 
             "margin": 8
         }, 
+        "data": [
+            "12a", 
+            "1a", 
+            "2a", 
+            "3a", 
+            "4a", 
+            "5a", 
+            "6a", 
+            "7a", 
+            "8a", 
+            "9a", 
+            "10a", 
+            "11a", 
+            "12p", 
+            "1p", 
+            "2p", 
+            "3p", 
+            "4p", 
+            "5p", 
+            "6p", 
+            "7p", 
+            "8p", 
+            "9p", 
+            "10p", 
+            "11p"
+        ], 
         "nameGap": 20, 
         "nameTextStyle": {
             "fontSize": 16
         }, 
-        "type": "value"
+        "type": "category"
     }, 
     "yAxis3D": {
         "axisLabel": {
             "interval": "auto", 
             "margin": 8
         }, 
+        "data": [
+            "Saturday", 
+            "Friday", 
+            "Thursday", 
+            "Wednesday", 
+            "Tuesday", 
+            "Monday", 
+            "Sunday"
+        ], 
         "nameGap": 20, 
         "nameTextStyle": {
             "fontSize": 16
         }, 
-        "type": "value"
+        "type": "category"
     }, 
     "zAxis3D": {
         "axisLabel": {

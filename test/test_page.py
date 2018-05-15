@@ -1,16 +1,54 @@
 # coding=utf-8
 from __future__ import unicode_literals
 
+import sys
 import json
 import codecs
 from test.constants import RANGE_COLOR, CLOTHES, WEEK
 from pyecharts import (
-    Bar, Scatter3D, Line, Pie, Map, Kline, Radar, WordCloud, Liquid
+    Bar,
+    Scatter3D,
+    Line,
+    Pie,
+    Map,
+    Kline,
+    Radar,
+    WordCloud,
+    Liquid,
 )
 from pyecharts import Page
-from nose.tools import eq_, raises
+
+from mock import MagicMock
+from nose.tools import eq_, assert_list_equal, raises
 
 TEST_PAGE_TITLE = "my awesome chart"
+
+PY36 = sys.version_info >= (3, 6)
+
+
+def test_page_init():
+    line = MagicMock(page_title="Line-Chart")
+    bar = MagicMock(page_title="Bar-Chart")
+    page = Page(line=line, bar=bar)
+    eq_("Line-Chart", page["line"].page_title)
+    assert "line" in page
+    assert "bar" in page
+    if PY36:
+        eq_("Line-Chart", page[0].page_title)
+
+
+def test_page_add_chart():
+    nc = Page().add_chart(
+        MagicMock(page_title="Line-Chart"), name="line"
+    ).add_chart(
+        MagicMock(page_title="Bar-Chart")
+    )
+    nc["map"] = MagicMock(page_title="Map-Chart")
+    eq_("Line-Chart", nc["line"].page_title)
+    eq_("Bar-Chart", nc["c1"].page_title)
+    assert_list_equal(
+        ["Line-Chart", "Bar-Chart", "Map-Chart"], [c.page_title for c in nc]
+    )
 
 
 def create_three():
