@@ -110,23 +110,10 @@ def _clean_dict(mydict):
     for key, value in viewitems(mydict):
         if value is not None:
             if isinstance(value, dict):
-                if value:
-                    value = _expand(_clean_dict(value))
-                else:
-                    # delete key with empty dictionary
-                    continue
-
-                if not value:
-                    # detete empty dictionary resulted by
-                    # previous cleanning function
-                    continue
+                value = _expand(_clean_dict(value))
 
             elif isinstance(value, (list, tuple, set)):
-                if value:
-                    value = list(_clean_array(value))
-                else:
-                    # delete key with empty array
-                    continue
+                value = list(_clean_array(value))
 
             elif isinstance(value, string_type) and not value:
                 # delete key with empty string

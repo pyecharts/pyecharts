@@ -65,6 +65,7 @@ class Page(object):
         if isinstance(item, int):
             # list index
             return list(self._charts.values())[item]
+
         return self._charts[item]
 
     def __setitem__(self, key, value):
