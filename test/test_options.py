@@ -274,12 +274,8 @@ style_geo = style.add(
 def test_geolines(patched):
     fixture = "geolines.json"
     patched.return_value = "1"
-    data_guangzhou = [
-        ["广州", "上海"]
-    ]
-    data_beijing = [
-        ["北京", "上海"]
-    ]
+    data_guangzhou = [["广州", "上海"]]
+    data_beijing = [["北京", "上海"]]
     lines = GeoLines("GeoLines 示例", **style.init_style)
     lines.add("从广州出发", data_guangzhou, **style_geo)
     lines.add("从北京出发", data_beijing, **style_geo)
