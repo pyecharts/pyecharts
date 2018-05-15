@@ -51,7 +51,6 @@ def test_geolines():
     lines = GeoLines("GeoLines 示例", **style.init_style)
     lines.add("从广州出发", data_guangzhou, **style_geo)
     lines.add("从北京出发", data_beijing, **style_geo)
-    lines.print_echarts_options()
     lines.render()
 
 
@@ -92,3 +91,22 @@ def test_with_full_example():
     lines.add_coordinate("A市", 119.3, 26.08)
     lines.add("从广州出发", line_data, **style_geo)
     lines.render()
+
+
+def test_geolines_value_and_formatter():
+    data_guangzhou = [
+        ["广州", "上海", 10],
+        ["广州", "北京", 20],
+        ["广州", "南京", 30],
+        ["广州", "重庆", 40],
+        ["广州", "兰州", 50],
+        ["广州", "杭州", 60],
+    ]
+    lines = GeoLines("GeoLines 示例", **style.init_style)
+    lines.add(
+        "从广州出发", data_guangzhou, tooltip_formatter="{a} : {c}", **style_geo
+    )
+    lines.render()
+    html_content = lines._repr_html_()
+    assert '"value": 10' in html_content
+    assert '"value": 60' in html_content

@@ -40,8 +40,9 @@ class GeoLines(Geo):
         :param name:
             系列名称，用于 tooltip 的显示，legend 的图例筛选。
         :param data:
-            数据项，数据中，每一行是一个『数据项』，每一列属于一个『维度』。每一行包含两个数据，
-            如 ["广州", "北京"]，则指定从广州到北京。
+            数据项，数据中，每一行是一个『数据项』，每一列属于一个『维度』。每一行包含两个或
+            三个数据，如 ["广州", "北京"] 或 ["广州", "北京"，100]，则指定从广州到北京。第
+            三个值用于表示该 line 的数值，该值可省略。
         :param maptype:
             地图类型。 从 v0.3.2+ 起，地图已经变为扩展包，支持全国省份，全国城市，全国区县，
             全球国家等地图，具体请参考 [地图自定义篇](zh-cn/customize_map)
@@ -88,8 +89,15 @@ class GeoLines(Geo):
             geo_effect_symbol = SYMBOL["plane"]
 
         _data_lines, _data_scatter = [], []
-        for d in data:
-            _from_name, _to_name = d
+        for element in data:
+            assert len(element) >= 2
+            _lines_value = None
+
+            if len(element) == 2:
+                _from_name, _to_name = element
+            else:
+                _from_name, _to_name, _lines_value = element
+
             _from_coordinate = self.get_coordinate(
                 _from_name, raise_exception=True
             )
@@ -100,6 +108,7 @@ class GeoLines(Geo):
                 {
                     "fromName": _from_name,
                     "toName": _to_name,
+                    "value": _lines_value,
                     "coords": [_from_coordinate, _to_coordinate],
                 }
             )
@@ -161,6 +170,7 @@ class GeoLines(Geo):
                 "symbolSize": 10,
                 "data": _data_scatter,
                 "label": chart["label"],
+                "tooltip": {"formatter": "{b}"},
             }
         )
 
