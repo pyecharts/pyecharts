@@ -91,12 +91,12 @@ class GeoLines(Geo):
         _data_lines, _data_scatter = [], []
         for element in data:
             assert len(element) >= 2
-            _lines_value = None
+            _line_value = None
 
             if len(element) == 2:
                 _from_name, _to_name = element
             else:
-                _from_name, _to_name, _lines_value = element
+                _from_name, _to_name, _line_value = element
 
             _from_coordinate = self.get_coordinate(
                 _from_name, raise_exception=True
@@ -108,7 +108,7 @@ class GeoLines(Geo):
                 {
                     "fromName": _from_name,
                     "toName": _to_name,
-                    "value": _lines_value,
+                    "value": _line_value,
                     "coords": [_from_coordinate, _to_coordinate],
                 }
             )
