@@ -193,4 +193,6 @@ def test_polor_custom_type():
         is_visualmap=True,
         visual_range=[0, 30]
     )
-    polar.render()
+    html_content = polar._repr_html_()
+    assert "function render_item(params, api) {" in html_content
+    assert '"type": "custom"' in html_content
