@@ -126,7 +126,7 @@ In the case of online jshost mode, you can also download as some file formats (i
 
 ![](https://user-images.githubusercontent.com/19553554/35104252-3e36cee2-fca3-11e7-8e43-09bbe8dbbd1e.png)
 
-Since pyecharts 0.5.5+, nteract is supported. Once the following two lines should added to your notebook, you could use pyecharts in nteract in the same way as in jupyter notebook.
+Since pyecharts 0.5.5+, [nteract](https://nteract.io) is supported. Once the following two lines should added to your notebook, you could use pyecharts in nteract in the same way as in jupyter notebook.
 
 ```
 from pyecharts import enable_nteract

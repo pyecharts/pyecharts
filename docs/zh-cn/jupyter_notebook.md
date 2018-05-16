@@ -96,7 +96,7 @@ configure(global_theme='dark')
 
 ## nteract
 
-从 pyecharts 0.5.5+ 开始，nteract 也可以使用 pyecharts 了。目前来说，nteract 用户必需在最开始的时候声明 `enable_nteract()` 才能顺利进行绘图。
+从 pyecharts 0.5.5+ 开始，[nteract](https://nteract.io) 也可以使用 pyecharts 了。目前来说，nteract 用户必需在最开始的时候声明 `enable_nteract()` 才能顺利进行绘图。
 
 
 ![nteract-demo](https://user-images.githubusercontent.com/4280312/40146181-75652024-595c-11e8-9a63-44fcfb8959c2.png)
