@@ -163,6 +163,13 @@ def online(host=None):
         configure(jshost=host)
 
 
+def enable_nteract(host=None):
+    configure(
+        output_image=constants.NTERACT,
+        jshost='https://pyecharts.github.io/assets/js',
+    )
+
+
 @contextmanager
 def jupyter_image(jupyter_presentation):
     """

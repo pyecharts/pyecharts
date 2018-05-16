@@ -186,18 +186,25 @@ class Base(object):
         chart.js_dependencies => require_config => config_items, libraries
         :return A unicode string.
         """
-        if CURRENT_CONFIG.jupyter_presentation != constants.DEFAULT_HTML:
-            return None
+        if CURRENT_CONFIG.jupyter_presentation == constants.DEFAULT_HTML:
+            require_config = CURRENT_CONFIG.produce_require_configuration(
+                self.js_dependencies
+            )
+            config_items = require_config["config_items"]
+            libraries = require_config["libraries"]
+            env = engine.create_default_environment(constants.DEFAULT_HTML)
+            return env.render_chart_to_notebook(
+                charts=(self,), config_items=config_items, libraries=libraries
+            )
 
-        require_config = CURRENT_CONFIG.produce_require_configuration(
-            self.js_dependencies
-        )
-        config_items = require_config["config_items"]
-        libraries = require_config["libraries"]
-        env = engine.create_default_environment(constants.DEFAULT_HTML)
-        return env.render_chart_to_notebook(
-            charts=(self,), config_items=config_items, libraries=libraries
-        )
+        elif CURRENT_CONFIG.jupyter_presentation == constants.NTERACT:
+            env = engine.create_default_environment(constants.DEFAULT_HTML)
+            return env.render_chart_to_notebook(
+                chart=self, template_name="nteract.html"
+            )
+
+        else:
+            return None
 
     def _repr_svg_(self):
         content = self._render_as_image(constants.SVG)
