@@ -166,7 +166,7 @@ def online(host=None):
 def enable_nteract(host=None):
     configure(
         output_image=constants.NTERACT,
-        jshost='https://pyecharts.github.io/assets/js',
+        jshost="https://pyecharts.github.io/assets/js",
     )
 
 

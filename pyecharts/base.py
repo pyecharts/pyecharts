@@ -171,9 +171,9 @@ class Base(object):
 
     def render_notebook(self):
         warnings.warn(
-            "Implementation has been removed. " +
-            "Please pass the chart instance directly to Jupyter." +
-            "If you need more help, please read documentation"
+            "Implementation has been removed. "
+            + "Please pass the chart instance directly to Jupyter."
+            + "If you need more help, please read documentation"
         )
 
     def _get_all_options(self, **kwargs):
