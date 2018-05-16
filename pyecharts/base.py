@@ -2,6 +2,7 @@
 import os
 import uuid
 import warnings
+from tempfile import mkstemp
 
 from jinja2 import Markup
 
@@ -242,12 +243,11 @@ class Base(object):
             )
 
         env = engine.create_default_environment(file_type)
-        outfile = "tmp." + file_type
+        tmp_file_handle, tmp_file_path = mkstemp(suffix=file_type)
         content = env.render_chart_to_file(
-            chart=self, path=outfile, verbose=False
+            chart=self, path=tmp_file_path, verbose=False
         )
-        if content:
-            os.unlink(outfile)
+        os.close(tmp_file_handle)
         return content
 
     def _add_chinese_map(self, map_name_in_chinese):
