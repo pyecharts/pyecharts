@@ -161,6 +161,7 @@ class Polar(Chart):
                     "splitLine": chart["split_line"],
                 }
             )
+
         elif type == "custom":
             assert render_item is not None
             self._option.get("series").append(
