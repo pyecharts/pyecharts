@@ -306,7 +306,7 @@
     label_formatter -> function  
     具体格式请参考 xaxis_formatter -> function
 
-**Note：** is_random 可随机打乱图例颜色列表，算是切换风格？建议试一试！
+**Note：** is_random 可随机打乱图例颜色列表。
 
 
 **lineStyle：带线图形的线的风格选项(Line、Polar、Radar、Graph、Parallel)**
@@ -538,6 +538,7 @@ add(name, x_axis, y_axis,
 * bar_category_gap -> int/str   
     类目轴的柱状距离，当设置为 0 时柱状是紧挨着（直方图类型），默认为 '20%'
 
+**is_stack 实现数据堆叠**
 ```python
 from pyecharts import Bar
 
@@ -549,9 +550,11 @@ bar.add("商家A", attr, v1, is_stack=True)
 bar.add("商家B", attr, v2, is_stack=True)
 bar.render()
 ```
-![bar-0](https://user-images.githubusercontent.com/19553554/35081597-0c3e7212-fc50-11e7-8f72-af6c552223e8.gif)
+![bar-demo](https://user-images.githubusercontent.com/19553554/35081597-0c3e7212-fc50-11e7-8f72-af6c552223e8.gif)
+
 **Note：** 全局配置项要在最后一个 ```add()``` 上设置，否侧设置会被冲刷掉。
 
+**使用标记点和标记线**
 ```python
 from pyecharts import Bar
 
@@ -560,8 +563,9 @@ bar.add("商家A", attr, v1, mark_point=["average"])
 bar.add("商家B", attr, v2, mark_line=["min", "max"])
 bar.render()
 ```
-![bar-1](https://user-images.githubusercontent.com/19553554/35081600-0ea23f0c-fc50-11e7-894b-65ad0f611a01.gif)
+![bar-demo](https://user-images.githubusercontent.com/19553554/35081600-0ea23f0c-fc50-11e7-894b-65ad0f611a01.gif)
 
+**is_convert 交换 XY 轴**
 ```python
 from pyecharts import Bar
 
@@ -570,9 +574,9 @@ bar.add("商家A", attr, v1)
 bar.add("商家B", attr, v2, is_convert=True)
 bar.render()
 ```
-![bar-2](https://user-images.githubusercontent.com/19553554/35081605-151472ce-fc50-11e7-8627-66929309b08c.png)
+![bar-demo](https://user-images.githubusercontent.com/19553554/35081605-151472ce-fc50-11e7-8627-66929309b08c.png)
 
-dataZoom 效果，'slider' 类型
+**dataZoom 效果，'slider' 类型**
 ```python
 import random
 
@@ -582,9 +586,9 @@ bar = Bar("Bar - datazoom - slider 示例")
 bar.add("", attr, v1, is_label_show=True, is_datazoom_show=True)
 bar.render()
 ```
-![bar-4](https://user-images.githubusercontent.com/19553554/35081742-ddcbf3e0-fc50-11e7-937e-f806fd12c83e.gif)
+![bar-demo](https://user-images.githubusercontent.com/19553554/35081742-ddcbf3e0-fc50-11e7-937e-f806fd12c83e.gif)
 
-dataZoom 效果，'inside' 类型
+**dataZoom 效果，'inside' 类型**
 ```python
 attr = ["{}天".format(i) for i in range(30)]
 v1 = [random.randint(1, 30) for _ in range(30)]
@@ -593,9 +597,9 @@ bar.add("", attr, v1, is_datazoom_show=True, datazoom_type='inside',
         datazoom_range=[10, 25])
 bar.render()
 ```
-![bar-5](https://user-images.githubusercontent.com/19553554/35081801-307b3d26-fc51-11e7-8ac7-eea2f2422402.gif)
+![bar-demo](https://user-images.githubusercontent.com/19553554/35081801-307b3d26-fc51-11e7-8ac7-eea2f2422402.gif)
 
-dataZoom 效果，'both' 类型
+**dataZoom 效果，'both' 类型**
 ```python
 attr = ["{}天".format(i) for i in range(30)]
 v1 = [random.randint(1, 30) for _ in range(30)]
@@ -604,12 +608,12 @@ bar.add("", attr, v1, is_datazoom_show=True, datazoom_type='both',
         datazoom_range=[10, 25])
 bar.render()
 ```
-![bar-8](https://user-images.githubusercontent.com/19553554/35081813-37fc4072-fc51-11e7-9b5c-a3ca2f0d1fef.gif)
+![bar-demo](https://user-images.githubusercontent.com/19553554/35081813-37fc4072-fc51-11e7-9b5c-a3ca2f0d1fef.gif)
 
 
 **Note：** datazoom 适合所有平面直角坐标系图形，也就是(Line、Bar、Scatter、EffectScatter、Kline)  
 
-当 x 轴或者 y 轴的标签因为过于密集而导致全部显示出来会重叠的话，可采用使标签旋转的方法。
+**当 x 轴或者 y 轴的标签因为过于密集而导致全部显示出来会重叠的话，可采用使标签旋转的方法**
 ```python
 attr = ["{}天".format(i) for i in range(20)]
 v1 = [random.randint(1, 20) for _ in range(20)]
@@ -617,12 +621,12 @@ bar = Bar("坐标轴标签旋转示例")
 bar.add("", attr, v1, xaxis_interval=0, xaxis_rotate=30, yaxis_rotate=30)
 bar.render()
 ```
-![bar-6](https://user-images.githubusercontent.com/19553554/35081805-3258a2be-fc51-11e7-9cb1-d99c1a707bc5.png)
+![bar-demo](https://user-images.githubusercontent.com/19553554/35081805-3258a2be-fc51-11e7-9cb1-d99c1a707bc5.png)
 
 **Note：** 可通过设置 xaxis_min/xaxis_max/yaxis_min/yaxis_max 来调整 x 轴和 y 轴上的最大最小值。针对数值轴有效！  
 **Note：** 可以通过 label_color 来设置柱状的颜色，如 ['#eee', '#000']，所有的图表类型的图例颜色都可通过 label_color 来修改。
 
-瀑布图示例
+**瀑布图示例**
 ```python
 from pyecharts import Bar
 
@@ -635,9 +639,9 @@ bar.add("", attr, v1, label_color=['rgba(0,0,0,0)'], is_stack=True)
 bar.add("月份", attr, v2, is_label_show=True, is_stack=True, label_pos='inside')
 bar.render()
 ```
-![bar-7](https://user-images.githubusercontent.com/19553554/35081807-34a5568e-fc51-11e7-8199-3c3f8f43ba98.png)
+![bar-demo](https://user-images.githubusercontent.com/19553554/35081807-34a5568e-fc51-11e7-8199-3c3f8f43ba98.png)
 
-直方图示例
+**直方图示例**
 ```python
 from pyecharts import Bar
 
@@ -648,9 +652,9 @@ bar = Bar("直方图示例")
 bar.add("", attr * 2, v1 + v2, bar_category_gap=0)
 bar.render()
 ```
-![bar-9](https://user-images.githubusercontent.com/19553554/35081820-3c6f2ad4-fc51-11e7-8600-9212e7e8b519.png)
+![bar-demo](https://user-images.githubusercontent.com/19553554/35081820-3c6f2ad4-fc51-11e7-8600-9212e7e8b519.png)
 
-某地的降水量和蒸发量柱状图
+**某地的降水量和蒸发量柱状图**
 ```python
 from pyecharts import Bar
 
@@ -662,7 +666,7 @@ bar.add("蒸发量", attr, v1, mark_line=["average"], mark_point=["max", "min"])
 bar.add("降水量", attr, v2, mark_line=["average"], mark_point=["max", "min"])
 bar.render()
 ```
-![bar-10](https://user-images.githubusercontent.com/19553554/35081822-3e090748-fc51-11e7-8bba-b775d29671e4.png)
+![bar-demo](https://user-images.githubusercontent.com/19553554/35081822-3e090748-fc51-11e7-8bba-b775d29671e4.png)
 
 
 ## Bar3D（3D 柱状图）
@@ -694,9 +698,11 @@ from pyecharts import Bar3D
 bar3d = Bar3D("3D 柱状图示例", width=1200, height=600)
 x_axis = [
     "12a", "1a", "2a", "3a", "4a", "5a", "6a", "7a", "8a", "9a", "10a", "11a",
-    "12p", "1p", "2p", "3p", "4p", "5p", "6p", "7p", "8p", "9p", "10p", "11p"]
+    "12p", "1p", "2p", "3p", "4p", "5p", "6p", "7p", "8p", "9p", "10p", "11p"
+    ]
 y_axis = [
-    "Saturday", "Friday", "Thursday", "Wednesday", "Tuesday", "Monday", "Sunday"]
+    "Saturday", "Friday", "Thursday", "Wednesday", "Tuesday", "Monday", "Sunday"
+    ]
 data = [
     [0, 0, 5], [0, 1, 1], [0, 2, 0], [0, 3, 0], [0, 4, 0], [0, 5, 0],
     [0, 6, 0], [0, 7, 0], [0, 8, 0], [0, 9, 0], [0, 10, 0], [0, 11, 2],
@@ -734,11 +740,11 @@ bar3d.add("", x_axis, y_axis, [[d[1], d[0], d[2]] for d in data],
           visual_range_color=range_color, grid3d_width=200, grid3d_depth=80)
 bar3d.render()
 ```
-![bar3d-0](https://user-images.githubusercontent.com/19553554/35081629-36a8e046-fc50-11e7-8910-e02bf24008d9.gif)
+![bar3d-demo](https://user-images.githubusercontent.com/19553554/35081629-36a8e046-fc50-11e7-8910-e02bf24008d9.gif)
 
 data 中，如 [1, 2, 3] 表示 x 轴的索引为 1，即 "1a"；y 轴的索引为 2，即 "Thursday"；z 轴的数值为 3
 
-设置 ``` grid3d_shading``` 可以让柱状更真实  
+**设置 ```grid3d_shading``` 可以让柱状更真实**
 ```python
 bar3d = Bar3D("3D 柱状图示例", width=1200, height=600)
 bar3d.add("", x_axis, y_axis, [[d[1], d[0], d[2]] for d in data],
@@ -747,9 +753,9 @@ bar3d.add("", x_axis, y_axis, [[d[1], d[0], d[2]] for d in data],
           grid3d_depth=80, grid3d_shading='lambert')
 bar3d.render()
 ```
-![bar3d-1](https://user-images.githubusercontent.com/19553554/35081631-38a0cb02-fc50-11e7-9f74-3d487bd98a3a.gif)
+![bar3d-demo](https://user-images.githubusercontent.com/19553554/35081631-38a0cb02-fc50-11e7-9f74-3d487bd98a3a.gif)
 
-设置 ```is_grid3d_rotate``` 启动自动旋转功能
+**设置 ```is_grid3d_rotate``` 启动自动旋转功能**
 ```python
 bar3d = Bar3D("3D 柱状图示例", width=1200, height=600)
 bar3d.add("", x_axis, y_axis, [[d[1], d[0], d[2]] for d in data],
@@ -758,9 +764,9 @@ bar3d.add("", x_axis, y_axis, [[d[1], d[0], d[2]] for d in data],
           grid3d_depth=80, is_grid3d_rotate=True)
 bar3d.render()
 ```
-![bar3d-2](https://user-images.githubusercontent.com/19553554/35081703-a70b544a-fc50-11e7-838a-53445cd8d203.gif)
+![bar3d-demo](https://user-images.githubusercontent.com/19553554/35081703-a70b544a-fc50-11e7-838a-53445cd8d203.gif)
 
-设置 ``` grid3d_rotate_speed``` 调节旋转速度
+**设置 ```grid3d_rotate_speed``` 调节旋转速度**
 ```python
 bar3d = Bar3D("3D 柱状图示例", width=1200, height=600)
 bar3d.add("", x_axis, y_axis, [[d[1], d[0], d[2]] for d in data],
@@ -769,9 +775,9 @@ bar3d.add("", x_axis, y_axis, [[d[1], d[0], d[2]] for d in data],
           grid3d_depth=80, is_grid3d_rotate=True, grid3d_rotate_speed=180)
 bar3d.render()
 ```
-![bar3d-3](https://user-images.githubusercontent.com/19553554/35081705-a92a878c-fc50-11e7-8427-9066456db54c.gif)
+![bar3d-demo](https://user-images.githubusercontent.com/19553554/35081705-a92a878c-fc50-11e7-8427-9066456db54c.gif)
 
-**Note：** 关于 gird3D 部分的设置，请参照 通用配置项 中的介绍
+**Note：** 关于 gird3D 部分的设置，请参照 **通用配置项** 中的介绍
 **Note：** 可配合 axis3D 通用配置项 一起使用 
 
 
@@ -812,9 +818,9 @@ _yaxis = boxplot.prepare_data(y_axis)       # 转换数据
 boxplot.add("boxplot", x_axis, _yaxis)
 boxplot.render()
 ```
-![boxplot-0](https://user-images.githubusercontent.com/19553554/35082364-4f4e98f8-fc54-11e7-9e53-1d6a66b67e46.png)
+![boxplot-demo](https://user-images.githubusercontent.com/19553554/35082364-4f4e98f8-fc54-11e7-9e53-1d6a66b67e46.png)
 
-或者直接在 add() 中转换
+**或者直接在 add() 中转换**
 ```python
 from pyecharts import Boxplot
 
@@ -836,7 +842,7 @@ boxplot.add("category1", x_axis, boxplot.prepare_data(y_axis1))
 boxplot.add("category2", x_axis, boxplot.prepare_data(y_axis2))
 boxplot.render()
 ```
-![boxplot-1](https://user-images.githubusercontent.com/19553554/35082365-511fcc38-fc54-11e7-9826-d16231a401f4.png)
+![boxplot-demo](https://user-images.githubusercontent.com/19553554/35082365-511fcc38-fc54-11e7-9826-d16231a401f4.png)
 
 
 ## EffectScatter（带有涟漪特效动画的散点图）
@@ -865,8 +871,9 @@ es = EffectScatter("动态散点图示例")
 es.add("effectScatter", v1, v2)
 es.render()
 ```
-![effectscatter-0](https://user-images.githubusercontent.com/19553554/35090528-e4c9a04c-fc74-11e7-938a-d348bb1fdbf8.gif)
+![effectscatter-demo](https://user-images.githubusercontent.com/19553554/35090528-e4c9a04c-fc74-11e7-938a-d348bb1fdbf8.gif)
 
+**动态散点图各种图形**
 ```python
 es = EffectScatter("动态散点图各种图形示例")
 es.add("", [10], [10], symbol_size=20, effect_scale=3.5,
@@ -883,7 +890,7 @@ es.add("", [60], [60], symbol_size=6, effect_scale=2.5,
        effect_period=3,symbol="triangle")
 es.render()
 ```
-![effectscatter-1](https://user-images.githubusercontent.com/19553554/35090533-e7330076-fc74-11e7-9ba0-7cc4ff80e030.gif)
+![effectscatter-demo](https://user-images.githubusercontent.com/19553554/35090533-e7330076-fc74-11e7-9ba0-7cc4ff80e030.gif)
 
 * symbol -> str  
     标记图形，有'rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow'可选
@@ -917,7 +924,7 @@ funnel.add("商品", attr, value, is_label_show=True,
            label_pos="inside", label_text_color="#fff")
 funnel.render()
 ```
-![funnel-0](https://user-images.githubusercontent.com/19553554/35090181-d6b0e886-fc73-11e7-8e00-dec8ac38c415.gif)
+![funnel-demo](https://user-images.githubusercontent.com/19553554/35090181-d6b0e886-fc73-11e7-8e00-dec8ac38c415.gif)
 
 ```python
 funnel = Funnel("漏斗图示例", width=600, height=400, title_pos='center')
@@ -925,7 +932,7 @@ funnel.add("商品", attr, value, is_label_show=True, label_pos="outside",
            legend_orient='vertical', legend_pos='left')
 funnel.render()
 ```
-![funnel-1](https://user-images.githubusercontent.com/19553554/35090186-d8f50db6-fc73-11e7-9b7e-947580a621de.png)
+![funnel-demo](https://user-images.githubusercontent.com/19553554/35090186-d8f50db6-fc73-11e7-9b7e-947580a621de.png)
 
 
 ## Gauge（仪表盘）
@@ -953,7 +960,7 @@ gauge = Gauge("仪表盘示例")
 gauge.add("业务指标", "完成率", 66.66)
 gauge.render()
 ```
-![gauge-0](https://user-images.githubusercontent.com/19553554/35090190-daa33eee-fc73-11e7-9710-7844b12d3e6b.png)
+![gauge-demo](https://user-images.githubusercontent.com/19553554/35090190-daa33eee-fc73-11e7-9710-7844b12d3e6b.png)
 
 ```python
 gauge = Gauge("仪表盘示例")
@@ -961,7 +968,7 @@ gauge.add("业务指标", "完成率", 166.66, angle_range=[180, 0],
           scale_range=[0, 200], is_legend_show=False)
 gauge.render()
 ```
-![gauge-1](https://user-images.githubusercontent.com/19553554/35090193-dc199d22-fc73-11e7-8f4d-22477a3a22be.png)
+![gauge-demo](https://user-images.githubusercontent.com/19553554/35090193-dc199d22-fc73-11e7-8f4d-22477a3a22be.png)
 
 
 ## Geo（地理坐标系）
@@ -1003,7 +1010,7 @@ add(name, attr, value,
     是否开启鼠标缩放和平移漫游。默认为 True  
     如果只想要开启缩放或者平移，可以设置成'scale'或者'move'。设置成 True 为都开启
 
-Scatter 类型（连续型）
+**Scatter 类型（连续型）**
 ```python
 from pyecharts import Geo
 
@@ -1049,11 +1056,11 @@ geo.add("", attr, value, visual_range=[0, 200], visual_text_color="#fff",
         symbol_size=15, is_visualmap=True)
 geo.render()
 ```
-![geo-0](https://user-images.githubusercontent.com/19553554/35089650-7f06172e-fc72-11e7-9d4b-14437fb0d8fe.gif)
+![geo-demo](https://user-images.githubusercontent.com/19553554/35089650-7f06172e-fc72-11e7-9d4b-14437fb0d8fe.gif)
 
-**Note：** 请配合 通用配置项 中的 Visualmap 使用
+**Note：** 请配合 **通用配置项** 中的 Visualmap 使用
 
-Scatter 类型（分段型）
+**Scatter 类型（分段型）**
 ```python
 geo = Geo("全国主要城市空气质量", "data from pm2.5", title_color="#fff",
           title_pos="center", width=1200,
@@ -1063,9 +1070,9 @@ geo.add("", attr, value, visual_range=[0, 200], visual_text_color="#fff",
         symbol_size=15, is_visualmap=True, is_piecewise=True, visual_split_number=6)
 geo.render()
 ```
-![geo-0-0](https://user-images.githubusercontent.com/19553554/35089651-80d259a0-fc72-11e7-8af9-d96df53c0d49.gif)
+![geo-demo](https://user-images.githubusercontent.com/19553554/35089651-80d259a0-fc72-11e7-8af9-d96df53c0d49.gif)
 
-HeatMap 类型
+**HeatMap 类型**
 ```python
 geo = Geo("全国主要城市空气质量", "data from pm2.5", title_color="#fff",
           title_pos="center", width=1200,
@@ -1075,9 +1082,9 @@ geo.add("", attr, value, type="heatmap", is_visualmap=True, visual_range=[0, 300
         visual_text_color='#fff')
 geo.render()
 ```
-![geo-0-1](https://user-images.githubusercontent.com/19553554/35089653-82498f88-fc72-11e7-9811-2aceccd4ed68.gif)
+![geo-demo](https://user-images.githubusercontent.com/19553554/35089653-82498f88-fc72-11e7-9811-2aceccd4ed68.gif)
 
-EffectScatter 类型（全国）
+**EffectScatter 类型（全国）**
 ```python
 from pyecharts import Geo
 
@@ -1092,9 +1099,9 @@ attr, value = geo.cast(data)
 geo.add("", attr, value, type="effectScatter", is_random=True, effect_scale=5)
 geo.render()
 ```
-![geo-1](https://user-images.githubusercontent.com/19553554/35089655-844c8902-fc72-11e7-8d1b-a0920ad5baa8.gif)
+![geo-demo](https://user-images.githubusercontent.com/19553554/35089655-844c8902-fc72-11e7-8d1b-a0920ad5baa8.gif)
 
-EffectScatter 类型（广东）
+**EffectScatter 类型（广东）**
 ```python
 from pyecharts import Geo
 
@@ -1110,7 +1117,7 @@ geo.add("", attr, value, maptype='广东', type="effectScatter",
         is_random=True, effect_scale=5, is_legend_show=False)
 geo.render()
 ```
-![geo-2](https://user-images.githubusercontent.com/19553554/35089657-85d0b7bc-fc72-11e7-8b3d-8127dbe8f780.gif)
+![geo-demo](https://user-images.githubusercontent.com/19553554/35089657-85d0b7bc-fc72-11e7-8b3d-8127dbe8f780.gif)
 
 
 ## GeoLines（地理坐标系线图）
@@ -1168,7 +1175,7 @@ add(name, data,
     是否开启鼠标缩放和平移漫游。默认为 True  
     如果只想要开启缩放或者平移，可以设置成'scale'或者'move'。设置成 True 为都开启
 
-默认效果
+**默认效果**
 ```python
 from pyecharts import GeoLines, Style
 
@@ -1192,9 +1199,9 @@ geolines = GeoLines("GeoLines 示例", **style.init_style)
 geolines.add("从广州出发", data_guangzhou, is_legend_show=False)
 geolines.render()
 ```
-![geolines-0](https://user-images.githubusercontent.com/19553554/35082101-fb57aeb6-fc52-11e7-92c9-3e9a024e5749.gif)
+![geolines-demo](https://user-images.githubusercontent.com/19553554/35082101-fb57aeb6-fc52-11e7-92c9-3e9a024e5749.gif)
 
-稍加配置
+**稍加配置**
 ```python
 from pyecharts import GeoLines, Style
 
@@ -1216,9 +1223,9 @@ geolines.add("从广州出发", data_guangzhou, **style_geo)
 geolines.render()
 
 ```
-![geolines-1](https://user-images.githubusercontent.com/19553554/35082102-fd8d884a-fc52-11e7-9e40-5f94098d4493.gif)
+![geolines-demo](https://user-images.githubusercontent.com/19553554/35082102-fd8d884a-fc52-11e7-9e40-5f94098d4493.gif)
 
-指定数值
+**指定数值**
 ```python
 from pyecharts import GeoLines, Style
 
@@ -1236,9 +1243,9 @@ lines.add(
 )
 lines.render()
 ```
-![](https://user-images.githubusercontent.com/19553554/40048098-eaa7b3aa-5863-11e8-98cd-dcd8526fe820.gif)
+![geolines-demo](https://user-images.githubusercontent.com/19553554/40048098-eaa7b3aa-5863-11e8-98cd-dcd8526fe820.gif)
 
-多例模式
+**多例模式**
 ```python
 from pyecharts import GeoLines, Style
 
@@ -1255,9 +1262,9 @@ geolines.add("从广州出发", data_guangzhou, **style_geo)
 geolines.add("从北京出发", data_beijing, **style_geo)
 geolines.render()
 ```
-![geolines-2](https://user-images.githubusercontent.com/19553554/35082103-ff1f2aba-fc52-11e7-97b2-edf837db113e.gif)
+![geolines-demo](https://user-images.githubusercontent.com/19553554/35082103-ff1f2aba-fc52-11e7-97b2-edf837db113e.gif)
 
-单例模式，指定 `legend_selectedmode="single"`
+**单例模式，指定 `legend_selectedmode="single"`**
 ```python
 from pyecharts import GeoLines, Style
 
@@ -1280,7 +1287,7 @@ geolines.add("从广州出发", data_guangzhou, **style_geo)
 geolines.add("从北京出发", data_beijing, **style_geo)
 geolines.render()
 ```
-![geolines-3](https://user-images.githubusercontent.com/19553554/35082105-00885b92-fc53-11e7-8803-adc054037285.gif)
+![geolines-demo](https://user-images.githubusercontent.com/19553554/35082105-00885b92-fc53-11e7-8803-adc054037285.gif)
 
 
 ## Graph（关系图）
@@ -1362,7 +1369,7 @@ graph.add("", nodes, links, repulsion=8000)
 graph.render()
 
 ```
-![graph-0](https://user-images.githubusercontent.com/19553554/35082109-05240854-fc53-11e7-9e92-dd9437c55383.png)
+![graph-demo](https://user-images.githubusercontent.com/19553554/35082109-05240854-fc53-11e7-9e92-dd9437c55383.png)
 
 ```python
 graph = Graph("关系图-环形布局示例")
@@ -1371,13 +1378,14 @@ graph.add("", nodes, links, is_label_show=True,
           label_text_color=None)
 graph.render()
 ```
-![graph-1](https://user-images.githubusercontent.com/19553554/35082112-07074726-fc53-11e7-9f28-2d3b39c5e162.png)
+![graph-demo](https://user-images.githubusercontent.com/19553554/35082112-07074726-fc53-11e7-9f28-2d3b39c5e162.png)
 
+**微博转发关系图**
 ```python
 from pyecharts import Graph
 
 import json
-with open("data\weibo.json", "r", encoding="utf-8") as f:
+with open(os.path.join("fixtures", "weibo.json"), "r", encoding="utf-8") as f:
     j = json.load(f)
     nodes, links, categories, cont, mid, userl = j
 graph = Graph("微博转发关系图", width=1200, height=600)
@@ -1386,7 +1394,7 @@ graph.add("", nodes, links, categories, label_pos="right",
           line_curve=0.2, label_text_color=None)
 graph.render()
 ```
-![graph-2](https://user-images.githubusercontent.com/19553554/35081908-bb313aba-fc51-11e7-8ef5-df20be445d72.gif)
+![graph-demo](https://user-images.githubusercontent.com/19553554/35081908-bb313aba-fc51-11e7-8ef5-df20be445d72.gif)
 
 **Note：** 可配置 **lineStyle** 参数
 
@@ -1418,7 +1426,7 @@ add(*args, **kwargs)
 * data -> [list], 包含列表的列表  
     数据项，数据中，每一行是一个『数据项』，每一列属于一个『维度』
 
-默认情况，不指定 `is_calendar_heatmap`
+**默认情况，不指定 `is_calendar_heatmap`**
 ```python
 import random
 from pyecharts import HeatMap
@@ -1434,9 +1442,9 @@ heatmap.add("热力图直角坐标系", x_axis, y_axis, data, is_visualmap=True,
             visual_text_color="#000", visual_orient='horizontal')
 heatmap.render()
 ```
-![heatmap-0](https://user-images.githubusercontent.com/19553554/35090544-f306fcb8-fc74-11e7-8b0a-0284632c3c4d.gif)
+![heatmap-demo](https://user-images.githubusercontent.com/19553554/35090544-f306fcb8-fc74-11e7-8b0a-0284632c3c4d.gif)
 
-使用日历热力图，指定 `is_calendar_heatmap` 为 True
+**使用日历热力图，指定 `is_calendar_heatmap` 为 True**
 ```python
 import datetime
 import random
@@ -1455,7 +1463,7 @@ heatmap.add("", data, is_calendar_heatmap=True,
             visual_top="80%", is_piecewise=True)
 heatmap.render()
 ```
-![heatmap-1](https://user-images.githubusercontent.com/19553554/35090548-f51dfe0c-fc74-11e7-8a97-012fec231b85.gif)
+![heatmap-demo](https://user-images.githubusercontent.com/19553554/35090548-f51dfe0c-fc74-11e7-8a97-012fec231b85.gif)
 
 **Note：** 热力图必须配合 通用配置项 中的 VisualMap 使用才有效果。
 
@@ -1498,18 +1506,18 @@ kline = Kline("K 线图示例")
 kline.add("日K", ["2017/7/{}".format(i + 1) for i in range(31)], v1)
 kline.render()
 ```
-![kline-0](https://user-images.githubusercontent.com/19553554/35090067-9a247694-fc73-11e7-88bb-3b0f019a5e90.png)
+![kline-demo](https://user-images.githubusercontent.com/19553554/35090067-9a247694-fc73-11e7-88bb-3b0f019a5e90.png)
 
-Kline + dataZoom
+**Kline + dataZoom**
 ```python
 kline = Kline("K 线图示例")
 kline.add("日K", ["2017/7/{}".format(i + 1) for i in range(31)], v1,
           mark_point=["max"], is_datazoom_show=True)
 kline.render()
 ```
-![kline-1](https://user-images.githubusercontent.com/19553554/35090072-9b6ca404-fc73-11e7-8abe-e5576d35c57a.gif)
+![kline-demo](https://user-images.githubusercontent.com/19553554/35090072-9b6ca404-fc73-11e7-8abe-e5576d35c57a.gif)
 
-dataZoom 效果加在纵坐标轴上
+**dataZoom 效果加在纵坐标轴上**
 ```python
 kline = Kline("K 线图示例")
 kline.add("日K", ["2017/7/{}".format(i + 1) for i in range(31)], v1,
@@ -1517,9 +1525,9 @@ kline.add("日K", ["2017/7/{}".format(i + 1) for i in range(31)], v1,
           datazoom_orient='vertical')
 kline.render()
 ```
-![kline-2](https://user-images.githubusercontent.com/19553554/35090075-9d14041e-fc73-11e7-8b89-437ee75a9296.gif)
+![kline-demo](https://user-images.githubusercontent.com/19553554/35090075-9d14041e-fc73-11e7-8b89-437ee75a9296.gif)
 
-指定 markLine 位于开盘或者收盘上
+**指定 markLine 位于开盘或者收盘上**
 ```python
 kline = Kline("K 线图示例")
 kline.add("日K", ["2017/7/{}".format(i + 1) for i in range(31)],
@@ -1527,7 +1535,7 @@ kline.add("日K", ["2017/7/{}".format(i + 1) for i in range(31)],
           datazoom_orient='vertical', mark_line_valuedim='close')
 kline.render()
 ```
-![kline-3](https://user-images.githubusercontent.com/19553554/35090078-9e901a44-fc73-11e7-835c-3408cc960bac.png)
+![kline-demo](https://user-images.githubusercontent.com/19553554/35090078-9e901a44-fc73-11e7-835c-3408cc960bac.png)
 
 ## Line（折线/面积图）
 > 折线图是用折线将各个数据点标志连接起来的图表，用于展现数据的变化趋势。
@@ -1570,9 +1578,9 @@ line.add("商家A", attr, v1, mark_point=["average"])
 line.add("商家B", attr, v2, is_smooth=True, mark_line=["max", "average"])
 line.render()
 ```
-![line-0](https://user-images.githubusercontent.com/19553554/35089953-4865fe2c-fc73-11e7-8c47-e917332d061c.gif)
+![line-demo](https://user-images.githubusercontent.com/19553554/35089953-4865fe2c-fc73-11e7-8c47-e917332d061c.gif)
 
-标记点其他配置
+**标记点其他配置**
 ```python
 line = Line("折线图示例")
 line.add("商家A", attr, v1, mark_point=["average", "max", "min"],
@@ -1581,7 +1589,7 @@ line.add("商家B", attr, v2, mark_point=["average", "max", "min"],
          mark_point_symbol='arrow', mark_point_symbolsize=40)
 line.render()
 ```
-![line-0-1](https://user-images.githubusercontent.com/19553554/35089954-49784dd8-fc73-11e7-8a5b-d9163857c4b1.png)
+![line-demo](https://user-images.githubusercontent.com/19553554/35089954-49784dd8-fc73-11e7-8a5b-d9163857c4b1.png)
 
 ```python
 line = Line("折线图示例")
@@ -1593,7 +1601,7 @@ line.add("商家B", attr, v2, is_smooth=True,
                 "coord": ["袜子", 80], "name": "这是我想要的第二个标记点"}])
 line.render()
 ```
-![line-0-2](https://user-images.githubusercontent.com/19553554/35089957-4af28598-fc73-11e7-967b-cb6a431ed542.gif)
+![line-demo](https://user-images.githubusercontent.com/19553554/35089957-4af28598-fc73-11e7-967b-cb6a431ed542.gif)
 
 ```python
 line = Line("折线图-数据堆叠示例")
@@ -1601,14 +1609,14 @@ line.add("商家A", attr, v1, is_stack=True, is_label_show=True)
 line.add("商家B", attr, v2, is_stack=True, is_label_show=True)
 line.render()
 ```
-![line-1](https://user-images.githubusercontent.com/19553554/35089965-4f880100-fc73-11e7-9861-c43bd4d4bbe1.gif)
+![line-demo](https://user-images.githubusercontent.com/19553554/35089965-4f880100-fc73-11e7-9861-c43bd4d4bbe1.gif)
 
 ```python
 line = Line("折线图-阶梯图示例")
 line.add("商家A", attr, v1, is_step=True, is_label_show=True)
 line.render()
 ```
-![line-2](https://user-images.githubusercontent.com/19553554/35089968-510f3304-fc73-11e7-9159-67ce6ace9fa3.png)
+![line-demo](https://user-images.githubusercontent.com/19553554/35089968-510f3304-fc73-11e7-9159-67ce6ace9fa3.png)
 
 ```python
 line = Line("折线图-面积图示例")
@@ -1618,7 +1626,7 @@ line.add("商家B", attr, v2, is_fill=True, area_color='#000',
          area_opacity=0.3, is_smooth=True)
 line.render()
 ```
-![line-3](https://user-images.githubusercontent.com/19553554/35089973-53868fd8-fc73-11e7-8ff6-bfb452954267.png)
+![line-demo](https://user-images.githubusercontent.com/19553554/35089973-53868fd8-fc73-11e7-8ff6-bfb452954267.png)
 
 * area_opacity -> float  
     填充区域透明度
@@ -1628,7 +1636,7 @@ line.render()
 **Note：** 可配置 **lineStyle** 参数  
 **Note：** 可以通过 label_color 来设置线条颜色，如 ['#eee', '#000']，所有的图表类型的图例颜色都可通过 label_color 来修改。
 
-如果是对数数据，推荐使用 ```yaxis_type``` 参数来设置 y 坐标轴为对数轴
+**如果是对数数据，推荐使用 ```yaxis_type``` 参数来设置 y 坐标轴为对数轴**
 ```python
 import math, random
 line = Line("折线图示例")
@@ -1637,23 +1645,22 @@ line.add("商家B", attr, [math.log10(random.randint(1, 99999999)) for _ in rang
          yaxis_type="log")
 line.render()
 ```
-![line-4](https://user-images.githubusercontent.com/19553554/35089976-5473125e-fc73-11e7-809c-adbfe6834b61.png)
+![line-demo](https://user-images.githubusercontent.com/19553554/35089976-5473125e-fc73-11e7-809c-adbfe6834b61.png)
 
-某地最低温和最高气温折线图
+**某地最低温和最高气温折线图**
 ```python
 from pyecharts import Line
 
-attr = ['周一', '周二', '周三', '周四', '周五', '周六', '周日', ]
+attr = ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
 line = Line("折线图示例")
 line.add("最高气温", attr, [11, 11, 15, 13, 12, 13, 10],
          mark_point=["max", "min"], mark_line=["average"])
 line.add("最低气温", attr, [1, -2, 2, 5, 3, 2, 0],
          mark_point=["max", "min"],  mark_line=["average"],
          yaxis_formatter="°C")
-line.show_config()
 line.render()
 ```
-![line-5](https://user-images.githubusercontent.com/19553554/35089980-5649aed0-fc73-11e7-9e8f-01ed75ad7418.gif)
+![line-demo](https://user-images.githubusercontent.com/19553554/35089980-5649aed0-fc73-11e7-9e8f-01ed75ad7418.gif)
 
 
 ## Line3D（3D 折线图）
@@ -1669,7 +1676,7 @@ add(name, data,
 * grid3d_opacity -> int  
     3D 笛卡尔坐标系组的透明度（线的透明度），默认为 1，完全不透明。
 
-画个弹簧
+**画个弹簧**
 ```python
 from pyecharts import Line3D
 
@@ -1689,9 +1696,9 @@ line3d.add("", _data, is_visualmap=True, visual_range_color=range_color,
            visual_range=[0, 30], grid3d_rotate_sensitivity=5)
 line3d.render()
 ```
-![line3d-0](https://user-images.githubusercontent.com/19553554/35081902-b0bed8c6-fc51-11e7-9b3a-1d138c4eba13.gif)
+![line3d-demo](https://user-images.githubusercontent.com/19553554/35081902-b0bed8c6-fc51-11e7-9b3a-1d138c4eba13.gif)
 
-旋转弹簧
+**旋转弹簧**
 ```python
 from pyecharts import Line3D
 
@@ -1712,7 +1719,7 @@ line3d.add("", _data, is_visualmap=True, visual_range_color=range_color,
            grid3d_rotate_speed=180)
 line3d.render()
 ```
-![line3d-1](https://user-images.githubusercontent.com/19553554/35081903-b3a4eada-fc51-11e7-97b1-33f1dd6ed79e.gif)
+![line3d-demo](https://user-images.githubusercontent.com/19553554/35081903-b3a4eada-fc51-11e7-97b1-33f1dd6ed79e.gif)
 
 **Note：** 关于 gird3D 部分的设置，请参照通用配置项中的介绍 通用配置项  
 **Note：** 可配合 axis3D 通用配置项 一起使用 
@@ -1749,7 +1756,7 @@ liquid = Liquid("水球图示例")
 liquid.add("Liquid", [0.6])
 liquid.render()
 ```
-![liquid-0](https://user-images.githubusercontent.com/19553554/35082172-536178a8-fc53-11e7-8c8b-1fa1312c8854.gif)
+![liquid-demo](https://user-images.githubusercontent.com/19553554/35082172-536178a8-fc53-11e7-8c8b-1fa1312c8854.gif)
 
 ```python
 from pyecharts import Liquid
@@ -1758,7 +1765,7 @@ liquid = Liquid("水球图示例")
 liquid.add("Liquid", [0.6, 0.5, 0.4, 0.3], is_liquid_outline_show=False)
 liquid.render()
 ```
-![liquid-1](https://user-images.githubusercontent.com/19553554/35082175-55337000-fc53-11e7-9e5b-24cd47288e8d.gif)
+![liquid-demo](https://user-images.githubusercontent.com/19553554/35082175-55337000-fc53-11e7-9e5b-24cd47288e8d.gif)
 
 ```python
 from pyecharts import Liquid
@@ -1768,9 +1775,9 @@ liquid.add("Liquid", [0.6, 0.5, 0.4, 0.3],
            is_liquid_animation=False, shape='diamond')
 liquid.render()
 ```
-![liquid-2](https://user-images.githubusercontent.com/19553554/35082178-567d2db6-fc53-11e7-965a-d60e72ab6bf4.png)
+![liquid-demo](https://user-images.githubusercontent.com/19553554/35082178-567d2db6-fc53-11e7-965a-d60e72ab6bf4.png)
 
-自定义 SVG 路径
+**自定义 SVG 路径**
 ```python
 from pyecharts import Liquid
 
@@ -1795,7 +1802,7 @@ liquid.add("Liquid", [0.6, 0.5, 0.4, 0.3],
            shape=shape, is_liquid_outline_show=False)
 liquid.render()
 ```
-![liquid-3](https://user-images.githubusercontent.com/19553554/35082181-5863dfda-fc53-11e7-9807-507ac5639638.gif)
+![liquid-demo](https://user-images.githubusercontent.com/19553554/35082181-5863dfda-fc53-11e7-9807-507ac5639638.gif)
 
 
 ## Map（地图）
@@ -1838,9 +1845,9 @@ map = Map("全国地图示例", width=1200, height=600)
 map.add("", attr, value, maptype='china')
 map.render()
 ```
-![map-0](https://user-images.githubusercontent.com/19553554/35082377-718385f0-fc54-11e7-88c2-bd1df8bf112b.gif)
+![map-demo](https://user-images.githubusercontent.com/19553554/35082377-718385f0-fc54-11e7-88c2-bd1df8bf112b.gif)
 
-显示各区域名称
+**显示各区域名称**
 ```python
 from pyecharts import Map
 
@@ -1850,20 +1857,21 @@ map = Map("全国地图示例", width=1200, height=600)
 map.add("", attr, value, maptype='china', is_label_show=True)
 map.render()
 ```
-![map-0-1](https://user-images.githubusercontent.com/19553554/35082379-7463a0f2-fc54-11e7-9bee-d71e8ec3acc8.png)
+![map-demo](https://user-images.githubusercontent.com/19553554/35082379-7463a0f2-fc54-11e7-9bee-d71e8ec3acc8.png)
 
 ```python
 from pyecharts import Map
 
 value = [155, 10, 66, 78, 33, 80, 190, 53, 49.6]
 attr = [
-    "福建", "山东", "北京", "上海", "甘肃", "新疆", "河南", "广西", "西藏"]
+    "福建", "山东", "北京", "上海", "甘肃", "新疆", "河南", "广西", "西藏"
+    ]
 map = Map("Map 结合 VisualMap 示例", width=1200, height=600)
 map.add("", attr, value, maptype='china', is_visualmap=True,
         visual_text_color='#000')
 map.render()
 ```
-![map-1](https://user-images.githubusercontent.com/19553554/35082380-75e1b89c-fc54-11e7-8169-75884ffb67fb.gif)
+![map-demo](https://user-images.githubusercontent.com/19553554/35082380-75e1b89c-fc54-11e7-8169-75884ffb67fb.gif)
 
 **Note：** 请配合 通用配置项 中的 Visualmap 使用
 
@@ -1877,7 +1885,7 @@ map.add("", attr, value, maptype='广东', is_visualmap=True,
         visual_text_color='#000')
 map.render()
 ```
-![map-2](https://user-images.githubusercontent.com/19553554/35082381-786c8542-fc54-11e7-8886-5e4047fbeefd.gif)
+![map-demo](https://user-images.githubusercontent.com/19553554/35082381-786c8542-fc54-11e7-8886-5e4047fbeefd.gif)
 
 ```python
 value = [95.1, 23.2, 43.3, 66.4, 88.5]
@@ -1887,9 +1895,9 @@ map.add("", attr, value, maptype="world", is_visualmap=True,
         visual_text_color='#000')
 map.render()
 ```
-![map-3](https://user-images.githubusercontent.com/19553554/35082382-7a37df3e-fc54-11e7-93e8-f9c02e465a2f.gif)
+![map-demo](https://user-images.githubusercontent.com/19553554/35082382-7a37df3e-fc54-11e7-93e8-f9c02e465a2f.gif)
 
-设置 `is_map_symbol_show=False` 取消显示标记红点
+**设置 `is_map_symbol_show=False` 取消显示标记红点**
 ```python
 value = [95.1, 23.2, 43.3, 66.4, 88.5]
 attr= ["China", "Canada", "Brazil", "Russia", "United States"]
@@ -1898,11 +1906,11 @@ map.add("", attr, value, maptype="world", is_visualmap=True,
         visual_text_color='#000', , is_map_symbol_show=False)
 map.render()
 ```
-![map-4](https://user-images.githubusercontent.com/19553554/35082387-7d35893e-fc54-11e7-8482-60dc23d31836.png)
+![map-demo](https://user-images.githubusercontent.com/19553554/35082387-7d35893e-fc54-11e7-8482-60dc23d31836.png)
 
-设置 `name_map=...` 采用自己地图名称
+**设置 `name_map` 采用自己地图名称**
 原版：
-![](https://user-images.githubusercontent.com/4280312/36720467-16fb0a66-1ba0-11e8-8cbd-453d8f2462d3.png)
+![map-demo](https://user-images.githubusercontent.com/4280312/36720467-16fb0a66-1ba0-11e8-8cbd-453d8f2462d3.png)
     
 用 `name_map` 改动之后：
 
@@ -1920,7 +1928,7 @@ map.add('', attr, value, maptype='英国选区2016', is_visualmap=True,
         visual_text_color="#000", name_map=NM_WESTMINSTER_2016_UK)
 map.render()
 ```
-![](https://user-images.githubusercontent.com/4280312/36720626-803ff194-1ba0-11e8-998b-548afbedc18e.png)
+![map-demo](https://user-images.githubusercontent.com/4280312/36720626-803ff194-1ba0-11e8-998b-548afbedc18e.png)
 
 这个方便画图，因为很多数据和地区号直接挂钩，同时也容易做本地化。
 
@@ -1939,7 +1947,7 @@ map.add("", attr, value, maptype='china',
         ])
 map.render()
 ```
-![map-5](https://user-images.githubusercontent.com/19553554/36943053-22748c70-1fbd-11e8-86dc-ac3d48f5c4e3.png)
+![map-demo](https://user-images.githubusercontent.com/19553554/36943053-22748c70-1fbd-11e8-86dc-ac3d48f5c4e3.png)
 
 
 ## Parallel（平行坐标系）
@@ -2001,7 +2009,7 @@ parallel.config(schema)
 parallel.add("parallel", data, is_random=True)
 parallel.render()
 ```
-![parallel-0](https://user-images.githubusercontent.com/19553554/35090275-17c3dcde-fc74-11e7-94d6-e497668dba0c.png)
+![parallel-demo](https://user-images.githubusercontent.com/19553554/35090275-17c3dcde-fc74-11e7-94d6-e497668dba0c.png)
 
 ```python
 from pyecharts import Parallel
@@ -2039,7 +2047,7 @@ parallel.config(c_schema=c_schema)
 parallel.add("parallel", data)
 parallel.render()
 ```
-![parallel-1](https://user-images.githubusercontent.com/19553554/35090278-19ac1674-fc74-11e7-9aa1-2662296d3e22.png)
+![parallel-demo](https://user-images.githubusercontent.com/19553554/35090278-19ac1674-fc74-11e7-9aa1-2662296d3e22.png)
 
 **Note：** 可配置 **lineStyle** 参数
 
@@ -2080,7 +2088,7 @@ pie = Pie("饼图示例")
 pie.add("", attr, v1, is_label_show=True)
 pie.render()
 ```
-![pie-0](https://user-images.githubusercontent.com/19553554/35089599-5eed1ef6-fc72-11e7-8740-601880be9e16.gif)
+![pie-demo](https://user-images.githubusercontent.com/19553554/35089599-5eed1ef6-fc72-11e7-8740-601880be9e16.gif)
 
 ```python
 from pyecharts import Pie
@@ -2093,7 +2101,7 @@ pie.add("", attr, v1, radius=[40, 75], label_text_color=None,
         legend_pos='left')
 pie.render()
 ```
-![pie-1](https://user-images.githubusercontent.com/19553554/35089631-70b6e7de-fc72-11e7-838d-f8b238bbc03f.png)
+![pie-demo](https://user-images.githubusercontent.com/19553554/35089631-70b6e7de-fc72-11e7-838d-f8b238bbc03f.png)
 
 ```python
 from pyecharts import Pie
@@ -2109,9 +2117,9 @@ pie.add("商品B", attr, v2, center=[75, 50], is_random=True,
         is_legend_show=False, is_label_show=True)
 pie.render()
 ```
-![pie-2](https://user-images.githubusercontent.com/19553554/35089635-72585da2-fc72-11e7-835d-c9b64750d19d.png)
+![pie-demo](https://user-images.githubusercontent.com/19553554/35089635-72585da2-fc72-11e7-835d-c9b64750d19d.png)
 
-饼中饼
+**饼中饼**
 ```python
 import random
 from pyecharts import Pie
@@ -2128,9 +2136,9 @@ pie.add("", attr, [random.randint(20, 100) for _ in range(6)],
         radius=[0, 45], center=[65, 50], rosetype='radius')
 pie.render()
 ```
-![pie-3](https://user-images.githubusercontent.com/19553554/35089639-73f0e2c4-fc72-11e7-9fba-84376a94314c.gif)
+![pie-demo](https://user-images.githubusercontent.com/19553554/35089639-73f0e2c4-fc72-11e7-9fba-84376a94314c.gif)
 
-多个饼图画在一张图内
+**多个饼图画在一张图内**
 ```python
 from pyecharts import Pie
 
@@ -2164,7 +2172,7 @@ pie.add("", ["犯罪", ""], [28, 72], center=[90, 70],
         radius=[18, 24], legend_top="center", **pie_style)
 pie.render()
 ```
-![pie-4](https://user-images.githubusercontent.com/19553554/35089644-76cbcb9e-fc72-11e7-8b9e-d5bebc78e8a1.gif)
+![pie-demo](https://user-images.githubusercontent.com/19553554/35089644-76cbcb9e-fc72-11e7-8b9e-d5bebc78e8a1.gif)
 
 
 ## Polar（极坐标系）
@@ -2216,27 +2224,8 @@ add(name, data,
     angel 轴的 z 指数，默认为 50
 * is_radiusaxis_show -> bool  
     是否显示极坐标系的径向轴，默认为 True
-* param render_item -> function
-    开发者自己提供图形渲染的逻辑, 这个渲染逻辑一般命名为 render_item
-
-```python
-def render_item(params, api):
-    values = [api.value(0), api.value(1)]
-    coord = api.coord(values)
-    size = api.size([1, 1], values)
-    return {
-        "type": 'sector',
-        "shape": {
-            "cx": params.coordSys.cx,
-            "cy": params.coordSys.cy,
-            "r0": coord[2] - size[0] / 2,
-            "r": coord[2] + size[0] / 2,
-            "startAngle": coord[3] - size[1] / 2,
-            "endAngle": coord[3] + size[1] / 2,
-        },
-        "style": api.style({"fill": api.visual('color')}),
-    }
-```
+* render_item -> function  
+    开发者自己提供图形渲染的逻辑, 这个渲染逻辑一般命名为 [render_item](http://echarts.baidu.com/option.html#series-custom.renderItem)，参考 [高级用法篇](zh-cn/advanced)
 
 ```python
 from pyecharts import Polar
@@ -2249,7 +2238,7 @@ polar.add("", data, boundary_gap=False, type='scatter',
           area_color=None, is_axisline_show=True)
 polar.render()
 ```
-![polar-0](https://user-images.githubusercontent.com/19553554/35090448-aaf0d5a2-fc74-11e7-83c4-7b2f55090e98.png)
+![polar-demo](https://user-images.githubusercontent.com/19553554/35090448-aaf0d5a2-fc74-11e7-83c4-7b2f55090e98.png)
 
 * is_splitline_show  -> bool  
     是否显示分割线，默认为 True
@@ -2273,7 +2262,7 @@ polar.add("", data_1, type='scatter')
 polar.add("", data_2, type='scatter')
 polar.render()
 ```
-![polar-1](https://user-images.githubusercontent.com/19553554/35090451-abf708e0-fc74-11e7-8814-25ba5e72f542.png)
+![polar-demo](https://user-images.githubusercontent.com/19553554/35090451-abf708e0-fc74-11e7-8814-25ba5e72f542.png)
 
 ```python
 from pyecharts import Polar
@@ -2284,7 +2273,7 @@ polar = Polar("极坐标系-动态散点图示例", width=1200, height=600)
 polar.add("", data, type='effectScatter', effect_scale=10, effect_period=5)
 polar.render()
 ```
-![polar-2](https://user-images.githubusercontent.com/19553554/35090453-ad2b4d52-fc74-11e7-8ecd-cb64546d0d40.gif)
+![polar-demo](https://user-images.githubusercontent.com/19553554/35090453-ad2b4d52-fc74-11e7-8ecd-cb64546d0d40.gif)
 
 ```python
 from pyecharts import Polar
@@ -2299,7 +2288,7 @@ polar.add("C", [1, 2, 3, 4, 1, 2, 5], radius_data=radius,
           type='barRadius', is_stack=True)
 polar.render()
 ```
-![polar-3](https://user-images.githubusercontent.com/19553554/35090457-afc0658e-fc74-11e7-9c58-24c780436287.gif)
+![polar-demo](https://user-images.githubusercontent.com/19553554/35090457-afc0658e-fc74-11e7-9c58-24c780436287.gif)
 
 ```python
 from pyecharts import Polar
@@ -2314,7 +2303,50 @@ polar.add("", [1, 2, 3, 4, 1, 2, 5], radius_data=radius,
           type='barAngle', is_stack=True)
 polar.render()
 ```
-![polar-4](https://user-images.githubusercontent.com/19553554/35090460-b11ab380-fc74-11e7-836c-2e8197e32723.png)
+![polar-demo](https://user-images.githubusercontent.com/19553554/35090460-b11ab380-fc74-11e7-836c-2e8197e32723.png)
+
+**自定义渲染逻辑示例**
+```python
+from pyecharts import Polar
+
+def render_item(params, api):
+    values = [api.value(0), api.value(1)]
+    coord = api.coord(values)
+    size = api.size([1, 1], values)
+    return {
+        "type": "sector",
+        "shape": {
+            "cx": params.coordSys.cx,
+            "cy": params.coordSys.cy,
+            "r0": coord[2] - size[0] / 2,
+            "r": coord[2] + size[0] / 2,
+            "startAngle": coord[3] - size[1] / 2,
+            "endAngle": coord[3] + size[1] / 2,
+        },
+        "style": api.style({"fill": api.visual("color")}),
+    }
+
+polar = Polar("自定义渲染逻辑示例", width=1200, height=600)
+polar.add(
+    "",
+    [
+        [
+            random.randint(0, 6),
+            random.randint(1, 24),
+            random.randint(1, 24),
+        ]
+        for _ in range(100)
+    ],
+    render_item=render_item,
+    type="custom",
+    angle_data=X_TIME,
+    radius_data=WEEK,
+    is_visualmap=True,
+    visual_range=[0, 30]
+)
+polar.render()
+```
+![polar-demo](https://user-images.githubusercontent.com/19553554/40104662-820a82ee-5923-11e8-8052-9bd8fcb70623.png)
 
 
 ## Radar（雷达图）
@@ -2369,7 +2401,7 @@ radar.add("实际开销", v2, label_color=["#4e79a7"], is_area_show=False,
           legend_selectedmode='single')
 radar.render()
 ```
-![radar-0](https://user-images.githubusercontent.com/19553554/35082333-20046172-fc54-11e7-944a-b6e25bf5dd2a.gif)
+![radar-demo](https://user-images.githubusercontent.com/19553554/35082333-20046172-fc54-11e7-944a-b6e25bf5dd2a.gif)
 
 * is_area_show -> bool  
     是否显示填充区域
@@ -2432,11 +2464,11 @@ radar.add("上海", value_sh, item_color="#b3e4a1", symbol=None,
           legend_selectedmode='single')
 radar.render()
 ```
-![radar-1](https://user-images.githubusercontent.com/19553554/35082335-224c23ca-fc54-11e7-910a-0914699ac06e.gif)
+![radar-demo](https://user-images.githubusercontent.com/19553554/35082335-224c23ca-fc54-11e7-910a-0914699ac06e.gif)
 
 **Note：** symblo=None 可隐藏标记图形（小圆圈）
 
-图例多例模式。
+**图例多例模式**
 ```python
 radar = Radar()
 radar.config(c_schema=c_schema, shape='circle')
@@ -2444,7 +2476,7 @@ radar.add("北京", value_bj, item_color="#f9713c", symbol=None)
 radar.add("上海", value_sh, item_color="#b3e4a1", symbol=None)
 radar.render()
 ```
-![radar-2](https://user-images.githubusercontent.com/19553554/35082343-269d9440-fc54-11e7-9675-4c125bbca75d.gif)
+![radar-demo](https://user-images.githubusercontent.com/19553554/35082343-269d9440-fc54-11e7-9675-4c125bbca75d.gif)
 
 
 ## Sankey（桑基图）
@@ -2472,7 +2504,7 @@ add(name, nodes, links,
  * sankey_node_gap -> int  
     图中每一列任意两个矩形节点之间的间隔。默认为 8
 
-先来个简单示例
+**简单示例**
 ```python
 from pyecharts import Sankey
 
@@ -2493,9 +2525,9 @@ sankey.add("sankey", nodes, links, line_opacity=0.2,
            is_label_show=True, label_pos='right')
 sankey.render()
 ```
-![sankey-0](https://user-images.githubusercontent.com/19553554/35090344-5b701286-fc74-11e7-8c53-9a5d0e6797e5.png)
+![sankey-demo](https://user-images.githubusercontent.com/19553554/35090344-5b701286-fc74-11e7-8c53-9a5d0e6797e5.png)
 
-使用官方提供的 json 数据
+**使用官方提供的 json 数据**
 ```python
 import os
 import json
@@ -2543,18 +2575,18 @@ scatter.add("A", v1, v2)
 scatter.add("B", v1[::-1], v2)
 scatter.render()
 ```
-![scatter-0](https://user-images.githubusercontent.com/19553554/35090352-5f4bae42-fc74-11e7-9158-6fa70e5abf5d.png)
+![scatter-demo](https://user-images.githubusercontent.com/19553554/35090352-5f4bae42-fc74-11e7-9158-6fa70e5abf5d.png)
 
-利用 Visualmap 组件，通过颜色映射数值。
+**利用 Visualmap 组件，通过颜色映射数值**
 ```python
 scatter = Scatter("散点图示例")
 scatter.add("A", v1, v2)
 scatter.add("B", v1[::-1], v2, is_visualmap=True)
 scatter.render()
 ```
-![scatter-0-1](https://user-images.githubusercontent.com/19553554/35090355-60bc82b0-fc74-11e7-8cc2-4f10c1c8193e.gif)
+![scatter-demo](https://user-images.githubusercontent.com/19553554/35090355-60bc82b0-fc74-11e7-8cc2-4f10c1c8193e.gif)
 
-利用 Visualmap 组件，通过图形点大小映射数值。
+**利用 Visualmap 组件，通过图形点大小映射数值**
 ```python
 scatter = Scatter("散点图示例")
 scatter.add("A", v1, v2)
@@ -2562,9 +2594,9 @@ scatter.add("B", v1[::-1], v2, is_visualmap=True,
             visual_type='size', visual_range_size=[20, 80])
 scatter.render()
 ```
-![scatter-0-2](https://user-images.githubusercontent.com/19553554/35090360-62d94cfe-fc74-11e7-869f-ae3a3281f27b.gif)
+![scatter-demo](https://user-images.githubusercontent.com/19553554/35090360-62d94cfe-fc74-11e7-869f-ae3a3281f27b.gif)
 
-利用 Visualmap 组件映射到第三维度数据
+**利用 Visualmap 组件映射到第三维度数据**
 ```python
 data = [
         [28604, 77, 17096869],
@@ -2598,21 +2630,21 @@ sc.add("scatter", x_lst, y_lst, extra_data=extra_data, is_visualmap=True,
         visual_text_color='#000')
 sc.render()
 ```
-![scatter-0-3](https://user-images.githubusercontent.com/19553554/35090364-63f2ef78-fc74-11e7-950b-75ebd13e1f03.gif)
+![scatter-demo](https://user-images.githubusercontent.com/19553554/35090364-63f2ef78-fc74-11e7-950b-75ebd13e1f03.gif)
 
 
 **Note：** 请配合 通用配置项 中的 Visualmap 使用
 
-散点图默认的坐标轴都为数值轴，如果想实现横坐标为类目轴，可通过 ```xaxis_type``` 修改
+**散点图默认的坐标轴都为数值轴，如果想实现横坐标为类目轴，可通过 `xaxis_type` 修改**
 ```python
 scatter = Scatter("散点图示例")
 scatter.add("A", ["a", "b", "c", "d", "e", "f"], v2)
 scatter.add("B", ["a", "b", "c", "d", "e", "f"], v1[::-1], xaxis_type="category")
 scatter.render()
 ```
-![scatter-0-3](https://user-images.githubusercontent.com/19553554/35090414-916add4e-fc74-11e7-83c1-d428387e8101.png)
+![scatter-demo](https://user-images.githubusercontent.com/19553554/35090414-916add4e-fc74-11e7-83c1-d428387e8101.png)
 
-Scatter 还内置了画画方法
+**Scatter 还内置了画画方法**
 ```python
 draw(path, color=None)
 ''' 
@@ -2627,7 +2659,7 @@ draw(path, color=None)
 
 首先你需要准备一张图片，如
 
-![pyecharts-0](https://user-images.githubusercontent.com/19553554/35104421-c25a02f2-fca3-11e7-868d-d70bd86fdd76.png)
+![pyecharts-text](https://user-images.githubusercontent.com/19553554/35104421-c25a02f2-fca3-11e7-868d-d70bd86fdd76.png)
 
 ```python
 from pyecharts import Scatter
@@ -2637,7 +2669,7 @@ v1, v2 = scatter.draw("../images/pyecharts-0.png")
 scatter.add("pyecharts", v1, v2, is_random=True)
 scatter.render()
 ```
-![pyecharts-1](https://user-images.githubusercontent.com/19553554/35104426-c4ac81ce-fca3-11e7-9b46-7fd729ec3ece.png)
+![pyecharts-render](https://user-images.githubusercontent.com/19553554/35104426-c4ac81ce-fca3-11e7-9b46-7fd729ec3ece.png)
 
 
 ## Scatter3D（3D 散点图）
@@ -2669,7 +2701,7 @@ scatter3D = Scatter3D("3D 散点图示例", width=1200, height=600)
 scatter3D.add("", data, is_visualmap=True, visual_range_color=range_color)
 scatter3D.render()
 ```
-![scatter3d-0](https://user-images.githubusercontent.com/19553554/35081974-1ece83ca-fc52-11e7-86d7-bec5c4d3e2c8.gif)
+![scatter3d-demo](https://user-images.githubusercontent.com/19553554/35081974-1ece83ca-fc52-11e7-86d7-bec5c4d3e2c8.gif)
 
 **Note：** 关于 gird3D 部分的设置，请参照通用配置项中的介绍 通用配置项  
 **Note：** 可配合 axis3D 通用配置项 一起使用 
@@ -2730,7 +2762,7 @@ tr = ThemeRiver("主题河流图示例图")
 tr.add(['DQ', 'TY', 'SS', 'QG', 'SY', 'DD'], data, is_label_show=True)
 tr.render()
 ```
-![themeriver-0](https://user-images.githubusercontent.com/19553554/35090642-3aaf6eba-fc75-11e7-8560-d36f1d225f6d.gif)
+![themeriver-demo](https://user-images.githubusercontent.com/19553554/35090642-3aaf6eba-fc75-11e7-8560-d36f1d225f6d.gif)
 
 **Note：** 可以看到，每个数据项中的第三个数值就是该项的种类，而种类可以在 `add()` 第一个参数指定。
 
@@ -2825,7 +2857,7 @@ treemap = TreeMap("矩形树图-默认示例", width=1200, height=600)
 treemap.add("演示数据", data, is_label_show=True, label_pos='inside')
 treemap.render()
 ```
-![treemap-0](https://user-images.githubusercontent.com/19553554/35082247-b6f5ff88-fc53-11e7-84ca-bcb1f621ec68.png)
+![treemap-demo](https://user-images.githubusercontent.com/19553554/35082247-b6f5ff88-fc53-11e7-84ca-bcb1f621ec68.png)
 
 ```python
 treemap = TreeMap("矩形树图-下钻示例", width=1200, height=600)
@@ -2833,7 +2865,7 @@ treemap.add("演示数据", data, is_label_show=True, label_pos='inside',
             treemap_left_depth=1)
 treemap.render()
 ```
-![treemap-1](https://user-images.githubusercontent.com/19553554/35082249-b862ecf0-fc53-11e7-85eb-8021de696a66.gif)
+![treemap-demo](https://user-images.githubusercontent.com/19553554/35082249-b862ecf0-fc53-11e7-85eb-8021de696a66.gif)
 
 ```python
 from pyecharts import TreeMap
@@ -2846,7 +2878,7 @@ with open(os.path.join("..", "json", "treemap.json"), "r", encoding="utf-8") as 
 treemap.add("演示数据", data, is_label_show=True, label_pos='inside')
 treemap.render()
 ```
-![treemap-2](https://user-images.githubusercontent.com/19553554/35082251-b9e23982-fc53-11e7-8341-e7da1842389f.gif)
+![treemap-demo](https://user-images.githubusercontent.com/19553554/35082251-b9e23982-fc53-11e7-8341-e7da1842389f.gif)
 
 
 ## WordCloud（词云图）
@@ -2888,7 +2920,7 @@ wordcloud = WordCloud(width=1300, height=620)
 wordcloud.add("", name, value, word_size_range=[20, 100])
 wordcloud.render()
 ```
-![wordcloud-0](https://user-images.githubusercontent.com/19553554/35081546-cfe57770-fc4f-11e7-878a-e76d274afcbd.png)
+![wordcloud-demo](https://user-images.githubusercontent.com/19553554/35081546-cfe57770-fc4f-11e7-878a-e76d274afcbd.png)
 
 ```python
 wordcloud = WordCloud(width=1300, height=620)
@@ -2896,7 +2928,7 @@ wordcloud.add("", name, value, word_size_range=[30, 100],
               shape='diamond')
 wordcloud.render()
 ```
-![wordcloud-1](https://user-images.githubusercontent.com/19553554/35081549-d2bde37e-fc4f-11e7-98b2-4cdc019433b1.png)
+![wordcloud-demo](https://user-images.githubusercontent.com/19553554/35081549-d2bde37e-fc4f-11e7-98b2-4cdc019433b1.png)
 
 **Note：** 当且仅当 shape 为默认的'circle'时 rotate_step 参数才生效
 
@@ -2946,7 +2978,7 @@ add(chart,
     grid 组件离容器右侧的距离。默认为 None, 有'left', 'center', 'right'可选，也可以为百分数或者整数
 
 
-上下类型，Bar + Line  
+**上下类型，Bar + Line**
 ```python
 from pyecharts import Bar, Line, Grid
 
@@ -2957,21 +2989,31 @@ bar = Bar("柱状图示例", height=720)
 bar.add("商家A", attr, v1, is_stack=True)
 bar.add("商家B", attr, v2, is_stack=True)
 line = Line("折线图示例", title_top="50%")
-attr = ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
-line.add("最高气温", attr, [11, 11, 15, 13, 12, 13, 10],
-         mark_point=["max", "min"], mark_line=["average"])
-line.add("最低气温", attr, [1, -2, 2, 5, 3, 2, 0],
-         mark_point=["max", "min"], mark_line=["average"],
-         legend_top="50%")
+attr = ["周一", "周二", "周三", "周四", "周五", "周六", "周日"]
+line.add(
+    "最高气温",
+    attr,
+    [11, 11, 15, 13, 12, 13, 10],
+    mark_point=["max", "min"],
+    mark_line=["average"],
+)
+line.add(
+    "最低气温",
+    attr,
+    [1, -2, 2, 5, 3, 2, 0],
+    mark_point=["max", "min"],
+    mark_line=["average"],
+    legend_top="50%",
+)
 
 grid = Grid()
 grid.add(bar, grid_bottom="60%")
 grid.add(line, grid_top="60%")
 grid.render()
 ```
-![grid-0](https://user-images.githubusercontent.com/19553554/35089722-c80f84fa-fc72-11e7-93b0-4fff14a371a5.gif)
+![grid-demo](https://user-images.githubusercontent.com/19553554/35089722-c80f84fa-fc72-11e7-93b0-4fff14a371a5.gif)
 
-左右类型，Scatter + EffectScatter  
+**左右类型，Scatter + EffectScatter**
 ```python
 from pyecharts import Scatter, EffectScatter, Grid
 
@@ -2980,19 +3022,24 @@ v2 = [10, 25, 8, 60, 20, 80]
 scatter = Scatter(width=1200)
 scatter.add("散点图示例", v1, v2, legend_pos="70%")
 es = EffectScatter()
-es.add("动态散点图示例", [11, 11, 15, 13, 12, 13, 10], [1, -2, 2, 5, 3, 2, 0],
-       effect_scale=6, legend_pos="20%")
+es.add(
+    "动态散点图示例",
+    [11, 11, 15, 13, 12, 13, 10],
+    [1, -2, 2, 5, 3, 2, 0],
+    effect_scale=6,
+    legend_pos="20%",
+)
 
 grid = Grid()
 grid.add(scatter, grid_left="60%")
 grid.add(es, grid_right="60%")
 grid.render()
 ```
-![grid-1](https://user-images.githubusercontent.com/19553554/35089730-ca173c70-fc72-11e7-915e-34ce5c79ead7.gif)
+![grid-demo](https://user-images.githubusercontent.com/19553554/35089730-ca173c70-fc72-11e7-915e-34ce5c79ead7.gif)
 
-上下左右类型，Bar + Line + Scatter + EffectScatter  
+**上下左右类型，Bar + Line + Scatter + EffectScatter**
 ```python
-from pyecharts import Bar, Line, Scatter, EffectScatter, Grid  
+from pyecharts import Bar, Line, Scatter, EffectScatter, Grid
 
 attr = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
 v1 = [5, 20, 36, 10, 75, 90]
@@ -3001,19 +3048,35 @@ bar = Bar("柱状图示例", height=720, width=1200, title_pos="65%")
 bar.add("商家A", attr, v1, is_stack=True)
 bar.add("商家B", attr, v2, is_stack=True, legend_pos="80%")
 line = Line("折线图示例")
-attr = ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
-line.add("最高气温", attr, [11, 11, 15, 13, 12, 13, 10],
-         mark_point=["max", "min"], mark_line=["average"])
-line.add("最低气温", attr, [1, -2, 2, 5, 3, 2, 0],
-         mark_point=["max", "min"], mark_line=["average"],
-         legend_pos="20%")
+attr = ["周一", "周二", "周三", "周四", "周五", "周六", "周日"]
+line.add(
+    "最高气温",
+    attr,
+    [11, 11, 15, 13, 12, 13, 10],
+    mark_point=["max", "min"],
+    mark_line=["average"],
+)
+line.add(
+    "最低气温",
+    attr,
+    [1, -2, 2, 5, 3, 2, 0],
+    mark_point=["max", "min"],
+    mark_line=["average"],
+    legend_pos="20%",
+)
 v1 = [5, 20, 36, 10, 75, 90]
 v2 = [10, 25, 8, 60, 20, 80]
 scatter = Scatter("散点图示例", title_top="50%", title_pos="65%")
 scatter.add("scatter", v1, v2, legend_top="50%", legend_pos="80%")
 es = EffectScatter("动态散点图示例", title_top="50%")
-es.add("es", [11, 11, 15, 13, 12, 13, 10], [1, -2, 2, 5, 3, 2, 0],
-       effect_scale=6, legend_top="50%", legend_pos="20%")
+es.add(
+    "es",
+    [11, 11, 15, 13, 12, 13, 10],
+    [1, -2, 2, 5, 3, 2, 0],
+    effect_scale=6,
+    legend_top="50%",
+    legend_pos="20%",
+)
 
 grid = Grid()
 grid.add(bar, grid_bottom="60%", grid_left="60%")
@@ -3022,100 +3085,170 @@ grid.add(scatter, grid_top="60%", grid_left="60%")
 grid.add(es, grid_top="60%", grid_right="60%")
 grid.render()
 ```
-![grid-2](https://user-images.githubusercontent.com/19553554/35089731-cb044614-fc72-11e7-930c-be269b1f1589.gif)
+![grid-demo](https://user-images.githubusercontent.com/19553554/35089731-cb044614-fc72-11e7-930c-be269b1f1589.gif)
 
-Line +  Pie  
+**Line + Pie**
 ```python
 from pyecharts import Line, Pie, Grid
 
 line = Line("折线图示例", width=1200)
-attr = ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
-line.add("最高气温", attr, [11, 11, 15, 13, 12, 13, 10],
-         mark_point=["max", "min"], mark_line=["average"])
-line.add("最低气温", attr, [1, -2, 2, 5, 3, 2, 0],
-         mark_point=["max", "min"], mark_line=["average"],
-         legend_pos="20%")
+attr = ["周一", "周二", "周三", "周四", "周五", "周六", "周日"]
+line.add(
+    "最高气温",
+    attr,
+    [11, 11, 15, 13, 12, 13, 10],
+    mark_point=["max", "min"],
+    mark_line=["average"],
+)
+line.add(
+    "最低气温",
+    attr,
+    [1, -2, 2, 5, 3, 2, 0],
+    mark_point=["max", "min"],
+    mark_line=["average"],
+    legend_pos="20%",
+)
 attr = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
 v1 = [11, 12, 13, 10, 10, 10]
 pie = Pie("饼图示例", title_pos="55%")
-pie.add("", attr, v1, radius=[45, 65], center=[65, 50],
-        legend_pos="80%", legend_orient='vertical')
+pie.add(
+    "",
+    attr,
+    v1,
+    radius=[45, 65],
+    center=[65, 50],
+    legend_pos="80%",
+    legend_orient="vertical",
+)
 
 grid = Grid()
 grid.add(line, grid_right="55%")
 grid.add(pie, grid_left="60%")
 grid.render()
 ```
-![grid-3](https://user-images.githubusercontent.com/19553554/35089737-ccc1c01c-fc72-11e7-874d-8ba8b89572eb.png)
+![grid-demo](https://user-images.githubusercontent.com/19553554/35089737-ccc1c01c-fc72-11e7-874d-8ba8b89572eb.png)
 
 **Note：** 可以通过设置 center 参数改变 Pie 图的位置，如 [v1, v2]， 要求 v1 > v2。
 
-Line + Kline
+**Line + Kline**
 ```python
 from pyecharts import Line, Kline, Grid
 
 line = Line("折线图示例", width=1200)
-attr = ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
-line.add("最高气温", attr, [11, 11, 15, 13, 12, 13, 10],
-         mark_point=["max", "min"], mark_line=["average"])
-line.add("最低气温", attr, [1, -2, 2, 5, 3, 2, 0],
-         mark_point=["max", "min"], mark_line=["average"],
-         legend_pos="20%")
-v1 = [[2320.26, 2320.26, 2287.3, 2362.94],
-      [2300, 2291.3, 2288.26, 2308.38],
-      [2295.35, 2346.5, 2295.35, 2345.92],
-      [2347.22, 2358.98, 2337.35, 2363.8],
-      [2360.75, 2382.48, 2347.89, 2383.76],
-      [2383.43, 2385.42, 2371.23, 2391.82],
-      [2377.41, 2419.02, 2369.57, 2421.15],
-      [2425.92, 2428.15, 2417.58, 2440.38],
-      [2411, 2433.13, 2403.3, 2437.42],
-      [2432.68, 2334.48, 2427.7, 2441.73],
-      [2430.69, 2418.53, 2394.22, 2433.89],
-      [2416.62, 2432.4, 2414.4, 2443.03],
-      [2441.91, 2421.56, 2418.43, 2444.8],
-      [2420.26, 2382.91, 2373.53, 2427.07],
-      [2383.49, 2397.18, 2370.61, 2397.94],
-      [2378.82, 2325.95, 2309.17, 2378.82],
-      [2322.94, 2314.16, 2308.76, 2330.88],
-      [2320.62, 2325.82, 2315.01, 2338.78],
-      [2313.74, 2293.34, 2289.89, 2340.71],
-      [2297.77, 2313.22, 2292.03, 2324.63],
-      [2322.32, 2365.59, 2308.92, 2366.16],
-      [2364.54, 2359.51, 2330.86, 2369.65],
-      [2332.08, 2273.4, 2259.25, 2333.54],
-      [2274.81, 2326.31, 2270.1, 2328.14],
-      [2333.61, 2347.18, 2321.6, 2351.44],
-      [2340.44, 2324.29, 2304.27, 2352.02],
-      [2326.42, 2318.61, 2314.59, 2333.67],
-      [2314.68, 2310.59, 2296.58, 2320.96],
-      [2309.16, 2286.6, 2264.83, 2333.29],
-      [2282.17, 2263.97, 2253.25, 2286.33],
-      [2255.77, 2270.28, 2253.31, 2276.22]]
+attr = ["周一", "周二", "周三", "周四", "周五", "周六", "周日"]
+line.add(
+    "最高气温",
+    attr,
+    [11, 11, 15, 13, 12, 13, 10],
+    mark_point=["max", "min"],
+    mark_line=["average"],
+)
+line.add(
+    "最低气温",
+    attr,
+    [1, -2, 2, 5, 3, 2, 0],
+    mark_point=["max", "min"],
+    mark_line=["average"],
+    legend_pos="20%",
+)
+v1 = [
+    [2320.26, 2320.26, 2287.3, 2362.94],
+    [2300, 2291.3, 2288.26, 2308.38],
+    [2295.35, 2346.5, 2295.35, 2345.92],
+    [2347.22, 2358.98, 2337.35, 2363.8],
+    [2360.75, 2382.48, 2347.89, 2383.76],
+    [2383.43, 2385.42, 2371.23, 2391.82],
+    [2377.41, 2419.02, 2369.57, 2421.15],
+    [2425.92, 2428.15, 2417.58, 2440.38],
+    [2411, 2433.13, 2403.3, 2437.42],
+    [2432.68, 2334.48, 2427.7, 2441.73],
+    [2430.69, 2418.53, 2394.22, 2433.89],
+    [2416.62, 2432.4, 2414.4, 2443.03],
+    [2441.91, 2421.56, 2418.43, 2444.8],
+    [2420.26, 2382.91, 2373.53, 2427.07],
+    [2383.49, 2397.18, 2370.61, 2397.94],
+    [2378.82, 2325.95, 2309.17, 2378.82],
+    [2322.94, 2314.16, 2308.76, 2330.88],
+    [2320.62, 2325.82, 2315.01, 2338.78],
+    [2313.74, 2293.34, 2289.89, 2340.71],
+    [2297.77, 2313.22, 2292.03, 2324.63],
+    [2322.32, 2365.59, 2308.92, 2366.16],
+    [2364.54, 2359.51, 2330.86, 2369.65],
+    [2332.08, 2273.4, 2259.25, 2333.54],
+    [2274.81, 2326.31, 2270.1, 2328.14],
+    [2333.61, 2347.18, 2321.6, 2351.44],
+    [2340.44, 2324.29, 2304.27, 2352.02],
+    [2326.42, 2318.61, 2314.59, 2333.67],
+    [2314.68, 2310.59, 2296.58, 2320.96],
+    [2309.16, 2286.6, 2264.83, 2333.29],
+    [2282.17, 2263.97, 2253.25, 2286.33],
+    [2255.77, 2270.28, 2253.31, 2276.22],
+]
 kline = Kline("K 线图示例", title_pos="60%")
-kline.add("日K", ["2017/7/{}".format(i + 1) for i in range(31)], v1,
-          legend_pos="80%")
+kline.add(
+    "日K", ["2017/7/{}".format(i + 1) for i in range(31)], v1, legend_pos="80%"
+)
 
 grid = Grid()
 grid.add(line, grid_right="60%")
 grid.add(kline, grid_left="55%")
 grid.render()
 ```
-![grid-4](https://user-images.githubusercontent.com/19553554/35089740-ce510c6c-fc72-11e7-84eb-6ae3dddece76.png)
+![grid-demo](https://user-images.githubusercontent.com/19553554/35089740-ce510c6c-fc72-11e7-84eb-6ae3dddece76.png)
 
-HeatMap + Bar  
+**HeatMap + Bar**
 ```python
 import random
+
+from pyecharts import HeatMap, Bar, Grid
+
 x_axis = [
-    "12a", "1a", "2a", "3a", "4a", "5a", "6a", "7a", "8a", "9a", "10a", "11a",
-    "12p", "1p", "2p", "3p", "4p", "5p", "6p", "7p", "8p", "9p", "10p", "11p"]
+    "12a",
+    "1a",
+    "2a",
+    "3a",
+    "4a",
+    "5a",
+    "6a",
+    "7a",
+    "8a",
+    "9a",
+    "10a",
+    "11a",
+    "12p",
+    "1p",
+    "2p",
+    "3p",
+    "4p",
+    "5p",
+    "6p",
+    "7p",
+    "8p",
+    "9p",
+    "10p",
+    "11p",
+]
 y_axis = [
-    "Saturday", "Friday", "Thursday", "Wednesday", "Tuesday", "Monday", "Sunday"]
+    "Saturday",
+    "Friday",
+    "Thursday",
+    "Wednesday",
+    "Tuesday",
+    "Monday",
+    "Sunday",
+]
 data = [[i, j, random.randint(0, 50)] for i in range(24) for j in range(7)]
 heatmap = HeatMap("热力图示例", height=700)
-heatmap.add("热力图直角坐标系", x_axis, y_axis, data, is_visualmap=True,
-            visual_top="45%", visual_text_color="#000",
-            visual_orient='horizontal')
+heatmap.add(
+    "热力图直角坐标系",
+    x_axis,
+    y_axis,
+    data,
+    is_visualmap=True,
+    visual_top="45%",
+    visual_text_color="#000",
+    visual_orient="horizontal",
+)
 attr = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
 v1 = [5, 20, 36, 10, 75, 90]
 v2 = [10, 25, 8, 60, 20, 80]
@@ -3128,83 +3261,117 @@ grid.add(heatmap, grid_bottom="60%")
 grid.add(bar, grid_top="60%")
 grid.render()
 ```
-![grid-5](https://user-images.githubusercontent.com/19553554/35089741-cfca19bc-fc72-11e7-8c3b-2f20d054d3fc.gif)  
+![grid-demo](https://user-images.githubusercontent.com/19553554/35089741-cfca19bc-fc72-11e7-8c3b-2f20d054d3fc.gif)  
 Bar 会受 HeatMap 影响，很有趣。
 
-datazoom 组件同时控制多个图
+**datazoom 组件同时控制多个图**
 ```python
-line = Line("折线图示例", width=1200, height=700)
-attr = ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
-line.add("最高气温", attr, [11, 11, 15, 13, 12, 13, 10],
-         mark_point=["max", "min"], mark_line=["average"])
-line.add("最低气温", attr, [1, -2, 2, 5, 3, 2, 0],
-         mark_point=["max", "min"], legend_top="50%", mark_line=["average"],
-         # 设置 dataZoom 控制索引为 0,1 的 x 轴，即第一个和第二个
-         is_datazoom_show=True, datazoom_xaxis_index=[0, 1])   
+from pyecharts import Line, Kline, Grid
 
-v1 = [[2320.26, 2320.26, 2287.3, 2362.94],
-      [2300, 2291.3, 2288.26, 2308.38],
-      [2295.35, 2346.5, 2295.35, 2345.92],
-      [2347.22, 2358.98, 2337.35, 2363.8],
-      [2360.75, 2382.48, 2347.89, 2383.76],
-      [2383.43, 2385.42, 2371.23, 2391.82],
-      [2377.41, 2419.02, 2369.57, 2421.15],
-      [2425.92, 2428.15, 2417.58, 2440.38],
-      [2411, 2433.13, 2403.3, 2437.42],
-      [2432.68, 2334.48, 2427.7, 2441.73],
-      [2430.69, 2418.53, 2394.22, 2433.89],
-      [2416.62, 2432.4, 2414.4, 2443.03],
-      [2441.91, 2421.56, 2418.43, 2444.8],
-      [2420.26, 2382.91, 2373.53, 2427.07],
-      [2383.49, 2397.18, 2370.61, 2397.94],
-      [2378.82, 2325.95, 2309.17, 2378.82],
-      [2322.94, 2314.16, 2308.76, 2330.88],
-      [2320.62, 2325.82, 2315.01, 2338.78],
-      [2313.74, 2293.34, 2289.89, 2340.71],
-      [2297.77, 2313.22, 2292.03, 2324.63],
-      [2322.32, 2365.59, 2308.92, 2366.16],
-      [2364.54, 2359.51, 2330.86, 2369.65],
-      [2332.08, 2273.4, 2259.25, 2333.54],
-      [2274.81, 2326.31, 2270.1, 2328.14],
-      [2333.61, 2347.18, 2321.6, 2351.44],
-      [2340.44, 2324.29, 2304.27, 2352.02],
-      [2326.42, 2318.61, 2314.59, 2333.67],
-      [2314.68, 2310.59, 2296.58, 2320.96],
-      [2309.16, 2286.6, 2264.83, 2333.29],
-      [2282.17, 2263.97, 2253.25, 2286.33],
-      [2255.77, 2270.28, 2253.31, 2276.22]]
+line = Line("折线图示例", width=1200, height=700)
+attr = ["周一", "周二", "周三", "周四", "周五", "周六", "周日"]
+line.add(
+    "最高气温",
+    attr,
+    [11, 11, 15, 13, 12, 13, 10],
+    mark_point=["max", "min"],
+    mark_line=["average"],
+)
+line.add(
+    "最低气温",
+    attr,
+    [1, -2, 2, 5, 3, 2, 0],
+    mark_point=["max", "min"],
+    legend_top="50%",
+    mark_line=["average"],
+    # 设置 dataZoom 控制索引为 0,1 的 x 轴，即第一个和第二个
+    is_datazoom_show=True,
+    datazoom_xaxis_index=[0, 1],
+)
+
+v1 = [
+    [2320.26, 2320.26, 2287.3, 2362.94],
+    [2300, 2291.3, 2288.26, 2308.38],
+    [2295.35, 2346.5, 2295.35, 2345.92],
+    [2347.22, 2358.98, 2337.35, 2363.8],
+    [2360.75, 2382.48, 2347.89, 2383.76],
+    [2383.43, 2385.42, 2371.23, 2391.82],
+    [2377.41, 2419.02, 2369.57, 2421.15],
+    [2425.92, 2428.15, 2417.58, 2440.38],
+    [2411, 2433.13, 2403.3, 2437.42],
+    [2432.68, 2334.48, 2427.7, 2441.73],
+    [2430.69, 2418.53, 2394.22, 2433.89],
+    [2416.62, 2432.4, 2414.4, 2443.03],
+    [2441.91, 2421.56, 2418.43, 2444.8],
+    [2420.26, 2382.91, 2373.53, 2427.07],
+    [2383.49, 2397.18, 2370.61, 2397.94],
+    [2378.82, 2325.95, 2309.17, 2378.82],
+    [2322.94, 2314.16, 2308.76, 2330.88],
+    [2320.62, 2325.82, 2315.01, 2338.78],
+    [2313.74, 2293.34, 2289.89, 2340.71],
+    [2297.77, 2313.22, 2292.03, 2324.63],
+    [2322.32, 2365.59, 2308.92, 2366.16],
+    [2364.54, 2359.51, 2330.86, 2369.65],
+    [2332.08, 2273.4, 2259.25, 2333.54],
+    [2274.81, 2326.31, 2270.1, 2328.14],
+    [2333.61, 2347.18, 2321.6, 2351.44],
+    [2340.44, 2324.29, 2304.27, 2352.02],
+    [2326.42, 2318.61, 2314.59, 2333.67],
+    [2314.68, 2310.59, 2296.58, 2320.96],
+    [2309.16, 2286.6, 2264.83, 2333.29],
+    [2282.17, 2263.97, 2253.25, 2286.33],
+    [2255.77, 2270.28, 2253.31, 2276.22],
+]
 kline = Kline("K 线图示例", title_top="50%")
-kline.add("日K", ["2017/7/{}".format(i + 1) for i in range(31)],
-          v1, is_datazoom_show=True)
+kline.add(
+    "日K",
+    ["2017/7/{}".format(i + 1) for i in range(31)],
+    v1,
+    is_datazoom_show=True,
+)
 
 grid = Grid()
 grid.add(line, grid_top="60%")
 grid.add(kline, grid_bottom="60%")
 grid.render()
 ```
-![grid-6](https://user-images.githubusercontent.com/19553554/35089743-d13a3502-fc72-11e7-9c6a-21aeb7415c2b.gif)  
+![grid-demo](https://user-images.githubusercontent.com/19553554/35089743-d13a3502-fc72-11e7-9c6a-21aeb7415c2b.gif)  
 
-倒映直角坐标系
+**倒映直角坐标系**
 ```python
+from pyecharts import Line, Grid
+
 import random
 
-attr = ['{}天'.format(i) for i in range(1, 31)]
+attr = ["{}天".format(i) for i in range(1, 31)]
 line_top = Line("折线图示例", width=1200, height=700)
-line_top.add("最高气温", attr, [random.randint(20, 100) for i in range(30)],
-             mark_point=["max", "min"], mark_line=["average"], legend_pos='38%')
+line_top.add(
+    "最高气温",
+    attr,
+    [random.randint(20, 100) for i in range(30)],
+    mark_point=["max", "min"],
+    mark_line=["average"],
+    legend_pos="38%",
+)
 line_bottom = Line()
-line_bottom.add("最低气温", attr, [random.randint(20, 100) for i in range(30)],
-                mark_point=["max", "min"], mark_line=["average"],
-                is_yaxis_inverse=True, xaxis_pos='top')
+line_bottom.add(
+    "最低气温",
+    attr,
+    [random.randint(20, 100) for i in range(30)],
+    mark_point=["max", "min"],
+    mark_line=["average"],
+    is_yaxis_inverse=True,
+    xaxis_pos="top",
+)
 
 grid = Grid()
-grid.add(line_top, grid_bottom='60%')
-grid.add(line_bottom, grid_top='50%')
+grid.add(line_top, grid_bottom="60%")
+grid.add(line_bottom, grid_top="50%")
 grid.render()
 ```
-![grid-7](https://user-images.githubusercontent.com/19553554/35089748-d2952178-fc72-11e7-9e1f-105733f793b9.gif)  
+![grid-demo](https://user-images.githubusercontent.com/19553554/35089748-d2952178-fc72-11e7-9e1f-105733f793b9.gif)  
 
-Grid+Overlap
+**Grid + Overlap**
 ```python
 from pyecharts import Overlap, Bar, Line, Grid
 
@@ -3217,18 +3384,26 @@ v3 = [2.0, 2.2, 3.3, 4.5, 6.3, 10.2, 20.3, 23.4, 23.0, 16.5, 12.0, 6.2]
 
 bar = Bar(width=1200, height=600, title="Overlap+Grid 示例", title_pos="40%")
 bar.add("蒸发量", attr, v1)
-bar.add("降水量", attr, v2, yaxis_formatter=" ml", yaxis_max=250,
-        legend_pos="85%", legend_orient="vertical", legend_top="45%")
+bar.add(
+    "降水量",
+    attr,
+    v2,
+    yaxis_formatter=" ml",
+    yaxis_max=250,
+    legend_pos="85%",
+    legend_orient="vertical",
+    legend_top="45%",
+)
 line = Line()
 line.add("平均温度", attr, v3, yaxis_formatter=" °C")
 overlap = Overlap()
 overlap.add(bar)
 overlap.add(line, is_add_yaxis=True, yaxis_index=1)
 
-grid.add(overlap, grid_right='20%')
+grid.add(overlap, grid_right="20%")
 grid.render()
 ```
-![grid-8](https://user-images.githubusercontent.com/19553554/35089754-d62726c4-fc72-11e7-836b-c8cd597e2b71.png)  
+![grid-demo](https://user-images.githubusercontent.com/19553554/35089754-d62726c4-fc72-11e7-836b-c8cd597e2b71.png)  
 
 **Note：** `Overlap` 放入 `Grid` 可以利用其 grid 网格调整布局，例如上图将图例放在右边，这种情况在**图例名字过长**时很有用。
 
@@ -3266,7 +3441,7 @@ Overlap 类中其他方法：
 * `chart`：返回图形实例
 * 在 Jupyter-notebook 中直接调用 Overlap 实例即可显示图表
 
-Line + Bar
+**Line + Bar**
 ```python
 from pyecharts import Bar, Line, Overlap
 
@@ -3283,9 +3458,9 @@ overlap.add(bar)
 overlap.add(line)
 overlap.render()
 ```
-![overlap-0](https://user-images.githubusercontent.com/19553554/35090251-0b4c6390-fc74-11e7-829c-079c9cd8c3e5.gif)
+![overlap-demo](https://user-images.githubusercontent.com/19553554/35090251-0b4c6390-fc74-11e7-829c-079c9cd8c3e5.gif)
 
-Scatter + EffectScatter
+**Scatter + EffectScatter**
 ```python
 from pyecharts import Scatter, EffectScatter, Overlap
 
@@ -3306,9 +3481,9 @@ overlap.add(scatter)
 overlap.add(es_1)
 overlap.render()
 ```
-![overlap-1](https://user-images.githubusercontent.com/19553554/35090256-0c49bf54-fc74-11e7-9422-da3296f842e4.gif)
+![overlap-demo](https://user-images.githubusercontent.com/19553554/35090256-0c49bf54-fc74-11e7-9422-da3296f842e4.gif)
 
-Kline + Line
+**Kline + Line**
 ```python
 import random
 from pyecharts import Line, Kline, Overlap
@@ -3358,9 +3533,9 @@ overlap.add(line_1)
 overlap.add(line_2)
 overlap.render()
 ```
-![overlap-2](https://user-images.githubusercontent.com/19553554/35090261-0e00e804-fc74-11e7-9cae-213f7ea73bd9.png)
+![overlap-demo](https://user-images.githubusercontent.com/19553554/35090261-0e00e804-fc74-11e7-9cae-213f7ea73bd9.png)
 
-Line + EffectScatter
+**Line + EffectScatter**
 ```python
 from pyecharts import Line, EffectScatter, Overlap
 
@@ -3376,10 +3551,9 @@ overlap.add(line)
 overlap.add(es)
 overlap.render()
 ```
-![overlap-4](https://user-images.githubusercontent.com/19553554/35090267-10e673fe-fc74-11e7-981d-7c9db110fbfb.gif)
+![overlap-demo](https://user-images.githubusercontent.com/19553554/35090267-10e673fe-fc74-11e7-981d-7c9db110fbfb.gif)
 
-
-如果想改变轴索引，使其有多 X 轴或者多 Y 轴的话。请看下面
+**如果想改变轴索引，使其有多 X 轴或者多 Y 轴的话。请看下面**
 ```python
 from pyecharts import Line, Bar, Overlap
 
@@ -3404,7 +3578,7 @@ overlap.add(bar)
 overlap.add(line, yaxis_index=1, is_add_yaxis=True)
 overlap.render()
 ```
-![overlap-3](https://user-images.githubusercontent.com/19553554/35090266-0f7d7d96-fc74-11e7-9851-d56777b4114d.gif)
+![overlap-demo](https://user-images.githubusercontent.com/19553554/35090266-0f7d7d96-fc74-11e7-9851-d56777b4114d.gif)
 
 **Note：** 关于双 Y 轴对齐，可以使用 `yaxis_force_interval` 参数，强制分割成相同份数的刻度。这里有个小技巧，可以先设置 y 轴最大值。举个例子，如果双 y 轴一个最大值为 700，一个最大值为 400。那你可以把两个的 `yaxis_force_interval` 参数分别设置为 140 和 80，那就会都分成均等的 5 份了。
 
@@ -3463,9 +3637,9 @@ page.render()        # step 3
 ```
 运行之后，你会发现 render.html 已经按顺序显示了两个图:
 
-![multiple-charts-0](https://user-images.githubusercontent.com/19553554/35104303-658f9654-fca3-11e7-9a05-5e2e13d1a4c4.gif)
+![page-demo](https://user-images.githubusercontent.com/19553554/35104303-658f9654-fca3-11e7-9a05-5e2e13d1a4c4.gif)
 
-当然，更多图也是可以的
+**当然，更多图也是可以的**
 ```python
 #coding=utf-8
 from __future__ import unicode_literals
@@ -3545,7 +3719,7 @@ page.add(radar)
 
 page.render()
 ```
-![multiple-charts-1](https://user-images.githubusercontent.com/19553554/35104305-66f2a766-fca3-11e7-8ffd-8e85911fdea5.gif)
+![page-demo](https://user-images.githubusercontent.com/19553554/35104305-66f2a766-fca3-11e7-8ffd-8e85911fdea5.gif)
 
 
 ## Timeline：提供时间线轮播多张图
@@ -3637,7 +3811,7 @@ timeline.add(bar_4, '2015 年')
 timeline.add(bar_5, '2016 年')
 timeline.render()
 ```
-![timeline-0](https://user-images.githubusercontent.com/19553554/35082279-e111743c-fc53-11e7-9362-580160593715.gif)
+![timeline-demo](https://user-images.githubusercontent.com/19553554/35082279-e111743c-fc53-11e7-9362-580160593715.gif)
 
 ```python
 from pyecharts import Pie, Timeline
@@ -3671,7 +3845,7 @@ timeline.add(pie_4, '2015 年')
 timeline.add(pie_5, '2016 年')
 timeline.render()
 ```
-![timeline-1](https://user-images.githubusercontent.com/19553554/35082282-e517c842-fc53-11e7-8727-0e53686c3703.gif)
+![timeline-demo](https://user-images.githubusercontent.com/19553554/35082282-e517c842-fc53-11e7-8727-0e53686c3703.gif)
 
 ```python
 from pyecharts import Bar, Line, Timeline, Overlap
@@ -3725,7 +3899,7 @@ timeline.add(overlap_3.chart, '4 月')
 timeline.add(overlap_4.chart, '5 月')
 timeline.render()
 ```
-![timeline-2](https://user-images.githubusercontent.com/19553554/35082284-e704cfa6-fc53-11e7-8790-f92eb6b2315f.gif)
+![timeline-demo](https://user-images.githubusercontent.com/19553554/35082284-e704cfa6-fc53-11e7-8790-f92eb6b2315f.gif)
 
 
 # 统一风格
