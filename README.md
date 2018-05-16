@@ -116,7 +116,7 @@ So please see installation instruction and other usage at that repository.
 
 pyecharts exposes chart API and template API so that it can work on other python frameworks.
 
-### Integration with Jupyter Notebook
+### Integration with Jupyter Notebook/nteract
 
 In the Notebook cell, you can simply pass on chart instance itself to Jupyter, which will diplay the chart. Please note **render_notebook** function has been removed.
 
@@ -125,6 +125,14 @@ All chart classes in pyecharts implement the `_repr_html_` interface about [IPyt
 In the case of online jshost mode, you can also download as some file formats (ipynb/py/html/pdf) and run without jupyter notebook enviromnment.
 
 ![](https://user-images.githubusercontent.com/19553554/35104252-3e36cee2-fca3-11e7-8e43-09bbe8dbbd1e.png)
+
+Since pyecharts 0.5.5+, nteract is supported. Once the following two lines should added to your notebook, you could use pyecharts in nteract in the same way as in jupyter notebook.
+
+```
+from pyecharts import enable_nteract
+
+enable_nteract()
+```
 
 ### Integrate With Web Framework
 

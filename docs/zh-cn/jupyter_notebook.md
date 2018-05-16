@@ -94,6 +94,19 @@ configure(global_theme='dark')
 
 然后在重新运行，奇迹就会发生。
 
+## nteract
+
+从 pyecharts 0.5.5+ 开始，nteract 也可以使用 pyecharts 了。目前来说，nteract 用户必需在最开始的时候声明 `enable_nteract()` 才能顺利进行绘图。
+
+
+```
+from pyecharts import enable_nteract
+
+enable_nteract()
+```
+
 ## jupyterlab
 
 [jupyterlab](https://github.com/jupyterlab/jupyterlab) 是下一代 Jupyter Notebook ，目前尚处于发展的雏形之中。我们将进一步关注项目发展，尽可能第一时间实现 pyecharts 的适配，敬请期待。
+
+
