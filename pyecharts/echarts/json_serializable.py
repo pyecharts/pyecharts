@@ -13,7 +13,7 @@ class JsonSerializable(object):
         return self._config.get(key)
 
     def update(self, **kwargs):
-        self.config.update(**kwargs)
+        self._config.update(**kwargs)
 
     @property
     def config(self):

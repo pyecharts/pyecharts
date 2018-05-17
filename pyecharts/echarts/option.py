@@ -487,6 +487,7 @@ def xy_axis(
     if yaxis_force_interval is not None:
         _yAxis["interval"] = yaxis_force_interval
 
+    # 返回字典
     return [_xAxis], [_yAxis]
 
 

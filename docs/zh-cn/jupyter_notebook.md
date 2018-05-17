@@ -92,12 +92,11 @@ from pyecharts import configure
 configure(global_theme='dark')
 ```
 
-然后在重新运行，奇迹就会发生。
+然后在重新运行，就可以看到主题已经被更换。
 
 ## nteract
 
 从 pyecharts 0.5.5+ 开始，[nteract](https://nteract.io) 也可以使用 pyecharts 了。目前来说，nteract 用户必需在最开始的时候声明 `enable_nteract()` 才能顺利进行绘图。而且，仅仅是在需要产生 html(js) 输出是需要调用 `enable_nteract()`。
-
 
 ![nteract-demo](https://user-images.githubusercontent.com/4280312/40146181-75652024-595c-11e8-9a63-44fcfb8959c2.png)
 
@@ -108,5 +107,3 @@ configure(global_theme='dark')
 ## jupyterlab
 
 [jupyterlab](https://github.com/jupyterlab/jupyterlab) 是下一代 Jupyter Notebook ，目前尚处于发展的雏形之中。我们将进一步关注项目发展，尽可能第一时间实现 pyecharts 的适配，敬请期待。
-
-
