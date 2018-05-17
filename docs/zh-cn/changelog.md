@@ -1,11 +1,18 @@
 # 版本日志
 
-* ### version 0.5.5（dev）
+* ### version 0.5.6（dev）
+    * TODO
+
+* ### version 0.5.5 - 2018.05.17（current）
 
     ### Added
     * [issue#565](https://github.com/pyecharts/pyecharts/issues/565) Geolines 图数据项可以新增数值维度
+    * [issue#573](https://github.com/pyecharts/pyecharts/issues/573) 新增对 jupyter notebook 家族的新成员 [nteract](https://nteract.io/) 的支持
 
-* ### version 0.5.4 - 2018.05.15（current）
+    ### Fixed
+    * [issue#572](https://github.com/pyecharts/pyecharts/issues/572) 修复 HeatMap 图纵坐标显示索引值，而非 data 值的 bug
+
+* ### version 0.5.4 - 2018.05.15
 
     ### Updated
     * 重构 `Page` 类，新增图表命名名称引用。
@@ -13,7 +20,7 @@
     ### Fixed
     * [issue#555](https://github.com/pyecharts/pyecharts/issues/555) 修复 v0.5.3 Polar 图不能显示的 bug
     * [issue#541](https://github.com/pyecharts/pyecharts/issues/541) 修复 v0.5.3 Django + pyecharts 不能正常导入的 bug
- 
+
 * ### version 0.5.3 - 2018.05.10
 
     #### Fixed
