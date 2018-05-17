@@ -487,7 +487,8 @@ def xy_axis(
     if yaxis_force_interval is not None:
         _yAxis["interval"] = yaxis_force_interval
 
-    return [_xAxis], [_yAxis]
+    # 返回字典
+    return [_xAxis.config], [_yAxis.config]
 
 
 def _mark(
