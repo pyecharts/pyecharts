@@ -6,7 +6,7 @@ import math
 import random
 
 from pyecharts import Polar
-from test.constants import WEEK
+from test.constants import WEEK, X_TIME
 
 
 def test_polar_type_scatter_one():
@@ -154,3 +154,45 @@ def test_polar_draw_snail():
         is_angleaxis_show=False,
     )
     polar.render()
+
+
+def test_polor_custom_type():
+
+    def render_item(params, api):
+        values = [api.value(0), api.value(1)]
+        coord = api.coord(values)
+        size = api.size([1, 1], values)
+        return {
+            "type": "sector",
+            "shape": {
+                "cx": params.coordSys.cx,
+                "cy": params.coordSys.cy,
+                "r0": coord[2] - size[0] / 2,
+                "r": coord[2] + size[0] / 2,
+                "startAngle": coord[3] - size[1] / 2,
+                "endAngle": coord[3] + size[1] / 2,
+            },
+            "style": api.style({"fill": api.visual("color")}),
+        }
+
+    polar = Polar("自定义渲染逻辑示例", width=1200, height=600)
+    polar.add(
+        "",
+        [
+            [
+                random.randint(0, 6),
+                random.randint(1, 24),
+                random.randint(1, 24),
+            ]
+            for _ in range(100)
+        ],
+        render_item=render_item,
+        type="custom",
+        angle_data=X_TIME,
+        radius_data=WEEK,
+        is_visualmap=True,
+        visual_range=[0, 30]
+    )
+    html_content = polar._repr_html_()
+    assert "function render_item(params, api) {" in html_content
+    assert '"type": "custom"' in html_content
