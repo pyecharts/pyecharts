@@ -7,6 +7,9 @@ from __future__ import unicode_literals
 import json
 
 from pyecharts import Bar, Line, Pie, Page, online
+from pyecharts import enable_nteract, configure
+import pyecharts.constants as constants
+from pyecharts.conf import CURRENT_CONFIG
 from test.constants import CLOTHES, WEEK
 
 TITLE = "柱状图数据堆叠示例"
@@ -92,6 +95,7 @@ def test_online_feature():
     html = bar._repr_html_()
     expected_jshost = "https://pyecharts.github.io/jupyter-echarts/echarts"
     assert expected_jshost in html
+    CURRENT_CONFIG.hosted_on_github = False
 
 
 def test_online_with_custom_jshost():
@@ -100,3 +104,15 @@ def test_online_with_custom_jshost():
     html = bar._repr_html_()
     expected_jshost = "https://my-site.com/js"
     assert expected_jshost in html
+    CURRENT_CONFIG.jshost = None
+
+
+def test_nteract_feature():
+    enable_nteract()
+    bar = create_a_bar(TITLE)
+    html = bar._repr_html_()
+    assert "https://pyecharts.github.io/assets/js/echarts.min.js" in html
+    assert "require" not in html
+    # restore configuration
+    configure(output_image=constants.DEFAULT_HTML)
+    CURRENT_CONFIG.jshost = None
