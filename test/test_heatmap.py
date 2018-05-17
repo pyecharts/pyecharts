@@ -24,7 +24,9 @@ def test_heatmap_default():
         yaxis_name_pos="end",
         yaxis_name_gap=5,
     )
-    heatmap.render()
+    html_content = heatmap._repr_html_()
+    assert "Saturday" in html_content
+    assert "Monday" in html_content
 
 
 def test_heatmap_calendar():
