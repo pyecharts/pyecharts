@@ -211,14 +211,16 @@ class EchartsEnvironment(BaseEnvironment):
         html = tpl.render(**kwargs)
         utils.write_utf8_html_file(path, html)
 
-    def render_chart_to_notebook(self, **context):
+    def render_chart_to_notebook(
+        self, template_name="notebook.html", **context
+    ):
         """
         Return html string for rendering a chart/page to a notebook cell.
 
         :param context: A dictionary containing data.
         :return: A unicode string that will be displayed in notebook cell.
         """
-        tpl = self.get_template("notebook.html")
+        tpl = self.get_template(template_name)
         return tpl.render(**context)
 
 
