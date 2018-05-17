@@ -301,6 +301,37 @@ def xy_axis(
         x 坐标轴标签字体大小
     :param xaxis_label_textcolor:
         x 坐标轴标签字体颜色
+    :param xaxis_formatter:
+        x 轴标签格式器，如 '天'，则 x 轴的标签为数据加'天'(3 天，4 天),默认为 ""
+        xaxis_formatter -> function
+        ```python
+        def label_formatter(params):
+            return params.value + ' [Good!]'
+        ```
+        回调函数格式，更多内容请参考 [高级用法篇](zh-cn/advanced)
+        ```
+        (params: Object|Array) => string
+        参数 params 是 formatter 需要的单个数据集。格式如下：
+        {
+            componentType: 'series',
+            // 系列类型
+            seriesType: string,
+            // 系列在传入的 option.series 中的 index
+            seriesIndex: number,
+            // 系列名称
+            seriesName: string,
+            // 数据名，类目名
+            name: string,
+            // 数据在传入的 data 数组中的 index
+            dataIndex: number,
+            // 传入的原始数据项
+            data: Object,
+            // 传入的数据值
+            value: number|Array,
+            // 数据图形的颜色
+            color: string,
+        }
+        ```
     :param yaxis_margin:
         y 轴刻度标签与轴线之间的距离。默认为 8
     :param yaxis_name_size:
@@ -342,6 +373,35 @@ def xy_axis(
         y 坐标轴标签字体颜色
     :param yaxis_formatter:
         y 轴标签格式器，如 '天'，则 y 轴的标签为数据加'天'(3 天，4 天),默认为 ""
+        yaxis_formatter -> function
+        ```python
+        def label_formatter(params):
+            return params.value + ' [Good!]'
+        ```
+        回调函数格式，更多内容请参考 [高级用法篇](zh-cn/advanced)
+        ```
+        (params: Object|Array) => string
+        参数 params 是 formatter 需要的单个数据集。格式如下：
+        {
+            componentType: 'series',
+            // 系列类型
+            seriesType: string,
+            // 系列在传入的 option.series 中的 index
+            seriesIndex: number,
+            // 系列名称
+            seriesName: string,
+            // 数据名，类目名
+            name: string,
+            // 数据在传入的 data 数组中的 index
+            dataIndex: number,
+            // 传入的原始数据项
+            data: Object,
+            // 传入的数据值
+            value: number|Array,
+            // 数据图形的颜色
+            color: string,
+        }
+        ```
     :param is_convert:
         是否交换 x 轴与 y 轴
     :param is_xaxis_inverse:
@@ -427,6 +487,7 @@ def xy_axis(
     if yaxis_force_interval is not None:
         _yAxis["interval"] = yaxis_force_interval
 
+    # 返回字典
     return [_xAxis], [_yAxis]
 
 

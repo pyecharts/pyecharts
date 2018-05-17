@@ -40,6 +40,7 @@ from pyecharts.custom.timeline import Timeline
 
 # misc
 from pyecharts.conf import online
+from pyecharts.conf import enable_nteract
 from pyecharts.conf import configure
 from pyecharts.echarts.style import Style
 from pyecharts.conf import jupyter_image
