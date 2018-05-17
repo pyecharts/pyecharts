@@ -3,6 +3,15 @@
 from pyecharts.chart import Chart
 
 
+def tooltip_formatter(params):
+    text = (params[0].seriesName + '<br/>' +
+            '- open:' + params[0].data[1] + '<br/>' +
+            '- close:' + params[0].data[2] + '<br/>' +
+            '- lowest:' + params[0].data[3] + '<br/>' +
+            '- highest:' + params[0].data[4])
+    return text
+
+
 class Kline(Chart):
     """
     <<< K 线图 >>>
@@ -51,3 +60,7 @@ class Kline(Chart):
             }
         )
         self._config_components(**kwargs)
+        self._option['tooltip'] = {
+            'trigger': 'axis',
+            'formatter': tooltip_formatter
+        }
