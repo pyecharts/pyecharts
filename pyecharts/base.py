@@ -2,6 +2,7 @@
 import os
 import uuid
 import warnings
+from tempfile import mkstemp
 
 from jinja2 import Markup
 
@@ -170,9 +171,9 @@ class Base(object):
 
     def render_notebook(self):
         warnings.warn(
-            "Implementation has been removed. " +
-            "Please pass the chart instance directly to Jupyter." +
-            "If you need more help, please read documentation"
+            "Implementation has been removed. "
+            + "Please pass the chart instance directly to Jupyter."
+            + "If you need more help, please read documentation"
         )
 
     def _get_all_options(self, **kwargs):
@@ -186,18 +187,25 @@ class Base(object):
         chart.js_dependencies => require_config => config_items, libraries
         :return A unicode string.
         """
-        if CURRENT_CONFIG.jupyter_presentation != constants.DEFAULT_HTML:
-            return None
+        if CURRENT_CONFIG.jupyter_presentation == constants.DEFAULT_HTML:
+            require_config = CURRENT_CONFIG.produce_require_configuration(
+                self.js_dependencies
+            )
+            config_items = require_config["config_items"]
+            libraries = require_config["libraries"]
+            env = engine.create_default_environment(constants.DEFAULT_HTML)
+            return env.render_chart_to_notebook(
+                charts=(self,), config_items=config_items, libraries=libraries
+            )
 
-        require_config = CURRENT_CONFIG.produce_require_configuration(
-            self.js_dependencies
-        )
-        config_items = require_config["config_items"]
-        libraries = require_config["libraries"]
-        env = engine.create_default_environment(constants.DEFAULT_HTML)
-        return env.render_chart_to_notebook(
-            charts=(self,), config_items=config_items, libraries=libraries
-        )
+        elif CURRENT_CONFIG.jupyter_presentation == constants.NTERACT:
+            env = engine.create_default_environment(constants.DEFAULT_HTML)
+            return env.render_chart_to_notebook(
+                chart=self, template_name="nteract.html"
+            )
+
+        else:
+            return None
 
     def _repr_svg_(self):
         content = self._render_as_image(constants.SVG)
@@ -235,12 +243,11 @@ class Base(object):
             )
 
         env = engine.create_default_environment(file_type)
-        outfile = "tmp." + file_type
+        tmp_file_handle, tmp_file_path = mkstemp(suffix="."+file_type)
         content = env.render_chart_to_file(
-            chart=self, path=outfile, verbose=False
+            chart=self, path=tmp_file_path, verbose=False
         )
-        if content:
-            os.unlink(outfile)
+        os.close(tmp_file_handle)
         return content
 
     def _add_chinese_map(self, map_name_in_chinese):
