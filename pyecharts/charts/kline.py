@@ -51,8 +51,8 @@ class Kline(Chart):
         kwargs.update(type="candlestick", x_axis=x_axis)
         if "tooltip_formatter" not in kwargs:
             kwargs["tooltip_formatter"] = kline_tooltip_formatter
-        if "tooltip_tragger" not in kwargs:
-            kwargs["tooltip_tragger"] = "axis"
+        if "tooltip_trigger" not in kwargs:
+            kwargs["tooltip_trigger"] = "axis"
         chart = self._get_all_options(**kwargs)
 
         xaxis, yaxis = chart["xy_axis"]

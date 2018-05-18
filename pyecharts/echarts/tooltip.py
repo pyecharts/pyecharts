@@ -7,8 +7,8 @@ class Tooltip(JsonSerializable):
     def __init__(
         self,
         type=None,
-        tooltip_tragger="item",
-        tooltip_tragger_on="mousemove|click",
+        tooltip_trigger="item",
+        tooltip_trigger_on="mousemove|click",
         tooltip_axispointer_type="line",
         tooltip_formatter=None,
         tooltip_text_color=None,
@@ -65,8 +65,8 @@ class Tooltip(JsonSerializable):
             提示框浮层的边框宽。默认为 0
         """
         self._config = {
-            "trigger": tooltip_tragger,
-            "triggerOn": tooltip_tragger_on,
+            "trigger": tooltip_trigger,
+            "triggerOn": tooltip_trigger_on,
             "axisPointer": {"type": tooltip_axispointer_type},
             "formatter": tooltip_formatter,
             "textStyle": {
