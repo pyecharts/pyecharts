@@ -61,4 +61,5 @@ class Kline(Chart):
         )
         self._config_components(**kwargs)
         self._option['tooltip']['trigger'] = 'axis'
-        self._option['tooltip']['formatter'] = tooltip_formatter
+        if self._option['tooltip']['formatter'] is None:
+            self._option['tooltip']['formatter'] = tooltip_formatter
