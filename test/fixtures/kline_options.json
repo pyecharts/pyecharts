@@ -281,7 +281,7 @@
         "backgroundColor": "rgba(50,50,50,0.7)", 
         "borderColor": "#333", 
         "borderWidth": 0, 
-        "formatter": "-=>tooltip_formatter<=-", 
+        "formatter": "-=>kline_tooltip_formatter<=-", 
         "textStyle": {
             "fontSize": 14
         }, 
