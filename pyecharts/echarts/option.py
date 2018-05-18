@@ -162,7 +162,8 @@ def split_line(is_splitline_show=True, **kwargs):
     :param kwargs:
     """
     _split_line = {
-        "show": is_splitline_show, "lineStyle": line_style(**kwargs)
+        "show": is_splitline_show,
+        "lineStyle": line_style(**kwargs),
     }
     return _split_line
 
@@ -552,8 +553,8 @@ def _mark(
     mark = {"data": []}
     if data:
         _markpv = _marklv = [None for _ in range(len(data))]
-        _markpv[:len(mark_point_valuedim)] = mark_point_valuedim
-        _marklv[:len(mark_line_valuedim)] = mark_line_valuedim
+        _markpv[: len(mark_point_valuedim)] = mark_point_valuedim
+        _marklv[: len(mark_line_valuedim)] = mark_line_valuedim
         for index, d in enumerate(list(data)):
             # 自定义坐标点数据
             if isinstance(d, dict):
@@ -697,7 +698,8 @@ def legend(
         "top": legend_top,
         "orient": legend_orient,
         "textStyle": {
-            "fontSize": legend_text_size, "color": legend_text_color
+            "fontSize": legend_text_size,
+            "color": legend_text_color,
         },
     }
     return _legend
@@ -1207,7 +1209,8 @@ def tooltip(
         "axisPointer": {"type": tooltip_axispointer_type},
         "formatter": _tmp_formatter,
         "textStyle": {
-            "color": tooltip_text_color, "fontSize": tooltip_font_size
+            "color": tooltip_text_color,
+            "fontSize": tooltip_font_size,
         },
         "backgroundColor": tooltip_background_color,
         "borderColor": tooltip_border_color,

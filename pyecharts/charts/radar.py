@@ -54,7 +54,8 @@ class Radar(Chart):
                 "shape": shape,
                 "name": {
                     "textStyle": {
-                        "color": radar_text_color, "fontSize": radar_text_size
+                        "color": radar_text_color,
+                        "fontSize": radar_text_size,
                     }
                 },
                 "splitLine": chart["split_line"],

@@ -74,10 +74,13 @@ class Grid(Base):
                 chart.options.get("title")[0],
             )
             (
-                _index, _index_once, _xaxis, _yaxis, _legend, _title
-            ) = self.__custom(
-                _series
-            )
+                _index,
+                _index_once,
+                _xaxis,
+                _yaxis,
+                _legend,
+                _title,
+            ) = self.__custom(_series)
             self._option.get("legend").append(_legend)
             self._option.get("title").append(_title)
 

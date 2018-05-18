@@ -51,7 +51,10 @@ class Parallel(Chart):
         chart = self._get_all_options(**kwargs)
         self._option.update(
             parallel={
-                "left": "5%", "right": "13%", "bottom": "10%", "top": "20%"
+                "left": "5%",
+                "right": "13%",
+                "bottom": "10%",
+                "top": "20%",
             }
         )
         self._option.get("legend")[0].get("data").append(name)
