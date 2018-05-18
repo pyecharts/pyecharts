@@ -13,7 +13,9 @@ from pyecharts_javascripthon.api import FUNCTION_TRANSLATOR
 
 LINK_SCRIPT_FORMATTER = '<script type="text/javascript" src="{}"></script>'
 EMBED_SCRIPT_FORMATTER = '<script type="text/javascript">\n{}\n</script>'
-CHART_DIV_FORMATTER = '<div id="{chart_id}" style="width:{width};height:{height};"></div>'  # flake8: noqa
+CHART_DIV_FORMATTER = (
+    '<div id="{chart_id}" style="width:{width};height:{height};"></div>'
+)  # flake8: noqa
 CHART_CONFIG_FORMATTER = """
 var myChart_{chart_id} = echarts.init(document.getElementById('{chart_id}'), '{theme}', {{renderer: '{renderer}'}});
 {custom_function}
