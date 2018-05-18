@@ -191,7 +191,7 @@ def test_polor_custom_type():
         angle_data=X_TIME,
         radius_data=WEEK,
         is_visualmap=True,
-        visual_range=[0, 30]
+        visual_range=[0, 30],
     )
     html_content = polar._repr_html_()
     assert "function render_item(params, api) {" in html_content
