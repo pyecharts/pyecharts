@@ -100,12 +100,10 @@ class Chart(Base):
                     "left": title_pos,
                     "top": title_top,
                     "textStyle": {
-                        "color": title_color,
-                        "fontSize": title_text_size,
+                        "color": title_color, "fontSize": title_text_size
                     },
                     "subtextStyle": {
-                        "color": subtitle_color,
-                        "fontSize": subtitle_text_size,
+                        "color": subtitle_color, "fontSize": subtitle_text_size
                     },
                 }
             ],
@@ -394,8 +392,7 @@ class Chart(Base):
                     },
                 },
                 dataZoom={
-                    "show": True,
-                    "title": {"zoom": "区域缩放", "back": "缩放还原"},
+                    "show": True, "title": {"zoom": "区域缩放", "back": "缩放还原"}
                 },
             )
 

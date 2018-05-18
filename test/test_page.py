@@ -39,9 +39,11 @@ def test_page_init():
 
 def test_page_add_chart():
     nc = (
-        Page()
-        .add_chart(MagicMock(page_title="Line-Chart"), name="line")
-        .add_chart(MagicMock(page_title="Bar-Chart"))
+        Page().add_chart(
+            MagicMock(page_title="Line-Chart"), name="line"
+        ).add_chart(
+            MagicMock(page_title="Bar-Chart")
+        )
     )
     nc["map"] = MagicMock(page_title="Map-Chart")
     eq_("Line-Chart", nc["line"].page_title)
@@ -318,7 +320,8 @@ def test_more():
     page.add(liquid)
     assert len(page) == 7
     assert isinstance(page[0], Line)
-    assert ("echarts" in page.js_dependencies) or (
-        "echarts.min" in page.js_dependencies
+    assert (
+        ("echarts" in page.js_dependencies)
+        or ("echarts.min" in page.js_dependencies)
     )
     page.render()
