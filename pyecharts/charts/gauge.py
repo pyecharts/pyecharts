@@ -32,6 +32,8 @@ class Gauge(Chart):
         :param kwargs:
         """
         kwargs.update(type="gauge")
+        if "tooltip_formatter" not in kwargs:
+            kwargs["tooltip_formatter"] = "{a} <br/>{b} : {c}%"
         _min, _max = 0, 100
         if scale_range:
             if len(scale_range) == 2:

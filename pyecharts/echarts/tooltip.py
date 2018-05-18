@@ -23,12 +23,12 @@ class Tooltip(JsonSerializable):
 
         :param type:
             图形类型
-        :param tooltip_tragger:
+        :param tooltip_trigger:
             触发类型。默认为 'item'
                 'item': 数据项图形触发，主要在散点图，饼图等无类目轴的图表中使用。
                 'axis': 坐标轴触发，主要在柱状图，折线图等会使用类目轴的图表中使用。
                 'none': 什么都不触发。
-        :param tooltip_tragger_on:
+        :param tooltip_trigger_on:
             提示框触发的条件。默认为 "mousemove|click"
                 'mousemove': 鼠标移动时触发。
                 'click': 鼠标点击时触发。
@@ -64,18 +64,11 @@ class Tooltip(JsonSerializable):
         :param tooltip_border_width:
             提示框浮层的边框宽。默认为 0
         """
-        _tmp_formatter = tooltip_formatter
-        if tooltip_formatter is None:
-            if type == "gauge":
-                _tmp_formatter = "{a} <br/>{b} : {c}%"
-            elif type == "geo":
-                _tmp_formatter = "{b}: {c}"
-
         self._config = {
             "trigger": tooltip_tragger,
             "triggerOn": tooltip_tragger_on,
             "axisPointer": {"type": tooltip_axispointer_type},
-            "formatter": _tmp_formatter,
+            "formatter": tooltip_formatter,
             "textStyle": {
                 "color": tooltip_text_color, "fontSize": tooltip_font_size
             },
