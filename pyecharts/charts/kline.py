@@ -60,7 +60,5 @@ class Kline(Chart):
             }
         )
         self._config_components(**kwargs)
-        self._option['tooltip'] = {
-            'trigger': 'axis',
-            'formatter': tooltip_formatter
-        }
+        self._option['tooltip']['trigger'] = 'axis'
+        self._option['tooltip']['formatter'] = tooltip_formatter
