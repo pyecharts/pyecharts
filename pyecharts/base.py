@@ -243,7 +243,7 @@ class Base(object):
             )
 
         env = engine.create_default_environment(file_type)
-        tmp_file_handle, tmp_file_path = mkstemp(suffix="."+file_type)
+        tmp_file_handle, tmp_file_path = mkstemp(suffix="." + file_type)
         content = env.render_chart_to_file(
             chart=self, path=tmp_file_path, verbose=False
         )
