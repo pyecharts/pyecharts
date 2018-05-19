@@ -28,7 +28,7 @@ class Page(object):
 
     def add(self, achart_or_charts):
         if not isinstance(achart_or_charts, (list, tuple, set)):
-            achart_or_charts = achart_or_charts,  # Make it a sequence
+            achart_or_charts = (achart_or_charts,)  # Make it a sequence
         for c in achart_or_charts:
             self.add_chart(chart=c)
         return self
