@@ -53,6 +53,34 @@ class Tooltip(JsonSerializable):
                     {a}（系列名称），{b}（区域名称），{c}（合并数值）, {d}（无）
                 饼图、仪表盘、漏斗图:
                     {a}（系列名称），{b}（数据项名称），{c}（数值）, {d}（百分比）
+            yaxis_formatter -> function
+
+            def tooltip_formatter(params):
+                return params.value + ' [Good!]'
+
+            回调函数格式，更多内容请参考 [高级用法篇](zh-cn/advanced)
+            ```
+            (params: Object|Array) => string
+            参数 params 是 formatter 需要的单个数据集。格式如下：
+            {
+                componentType: 'series',
+                // 系列类型
+                seriesType: string,
+                // 系列在传入的 option.series 中的 index
+                seriesIndex: number,
+                // 系列名称
+                seriesName: string,
+                // 数据名，类目名
+                name: string,
+                // 数据在传入的 data 数组中的 index
+                dataIndex: number,
+                // 传入的原始数据项
+                data: Object,
+                // 传入的数据值
+                value: number|Array,
+                // 数据图形的颜色
+                color: string,
+            }
         :param tooltip_text_color:
             提示框字体颜色，默认为 '#fff'
         :param tooltip_font_size:
