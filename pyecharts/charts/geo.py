@@ -97,8 +97,8 @@ class Geo(Chart):
         chart = self._get_all_options(**kwargs)
 
         if geo_cities_coords:
-            for name, coord in geo_cities_coords.items():
-                self.add_coordinate(name, coord[0], coord[1])
+            for city_name, city_coord in geo_cities_coords.items():
+                self.add_coordinate(city_name, city_coord[0], city_coord[1])
 
         _data = []
         for _name, _value in zip(attr, value):
