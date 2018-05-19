@@ -6,7 +6,6 @@ class Tooltip(JsonSerializable):
 
     def __init__(
         self,
-        type=None,
         tooltip_trigger="item",
         tooltip_trigger_on="mousemove|click",
         tooltip_axispointer_type="line",
@@ -21,8 +20,6 @@ class Tooltip(JsonSerializable):
         """
         提示框组件，用于移动或点击鼠标时弹出数据内容
 
-        :param type:
-            图形类型
         :param tooltip_trigger:
             触发类型。默认为 'item'
                 'item': 数据项图形触发，主要在散点图，饼图等无类目轴的图表中使用。
