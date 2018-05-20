@@ -442,12 +442,12 @@
 
 **tooltip：提示框组件，用于移动或点击鼠标时弹出数据内容**
 
-* tooltip_tragger -> str  
+* tooltip_trigger -> str  
     触发类型。默认为 'item'  
     * 'item': 数据项图形触发，主要在散点图，饼图等无类目轴的图表中使用。
     * 'axis': 坐标轴触发，主要在柱状图，折线图等会使用类目轴的图表中使用。
     * 'none': 什么都不触发。
-* tooltip_tragger_on -> str  
+* tooltip_trigger_on -> str  
     提示框触发的条件。默认为 "mousemove|click"
     * 'mousemove': 鼠标移动时触发。
     * 'click': 鼠标点击时触发。
