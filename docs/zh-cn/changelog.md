@@ -1,8 +1,12 @@
 # 版本日志
 
 * ### version 0.5.6（dev）
+
     #### Fixed
-    * [issue#452](https://github.com/pyecharts/pyecharts/issues/452) 修复 K 线图显示提示的【open, close, lowest, highest】
+    * [issue#452](https://github.com/pyecharts/pyecharts/issues/452) 修复 K 线图不能显示 tooltip【open, close, lowest, highest】的 bug
+
+    #### Updated
+    * 修正参数拼写，将 `tooltip_tragger`, `tooltip_tragger_on` 修正为 `tooltip_trigger`, `tooltip_trigger_on`
 
 * ### version 0.5.5 - 2018.05.17（current）
 
