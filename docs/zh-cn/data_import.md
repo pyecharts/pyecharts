@@ -1,4 +1,4 @@
-> 数据解析与导入篇：介绍了一些常用的数据处理模块和库。
+> 数据解析与导入篇：介绍了一些常用的数据处理模块和库。这些并不是 pyecharts 核心的部分。
 
 ## numpy 数据类型
 
@@ -31,21 +31,21 @@ line.render()
 
 ## Base.cast 函数
 
-`Base.cast` 函数
+数据格式化处理函数，能够将源数据转化为符合 pyecharts 的数据。
 
 ```python
-from pyecharts import Line
-
-t_data = [(21, '2017-12-01'), (19, '2017-12-02'), (20, '2017-12-03')]
-line = Line('High Temperature')
-hs, ds = line.cast(t_data)
-line.add('High', ds, hs)
-line.render()
+o_data = [('A', '34'), ('B', '45'), ('C', '12')]
+x, y = Base.cast(o_data)
+print(x) # ['A', 'B', 'C']
+print(y) # ['34', '45', '12']
 ```
 
+上述例子也可以直接使用 `zip` 函数。
 
 
 ## borax.fetch 模块
+
+> 项目地址： https://github.com/kinegratii/borax
 
 ### 安装
 
@@ -99,6 +99,8 @@ print(ages)
 ```
 
 ## networkx 库
+
+> 项目地址： https://github.com/networkx/networkx
 
 对于复杂的关系图，可以使用 [networkx](https://github.com/networkx/networkx) 库构建节点和连线，并传递给 add 函数。如下面的例子。
 
