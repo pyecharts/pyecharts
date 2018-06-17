@@ -2771,11 +2771,10 @@ tr.render()
 > 矩形树图是一种常见的表达『层级数据』『树状数据』的可视化形式。它主要用面积的方式，便于突出展现出『树』的各层级中重要的节点。
 TreeMap.add() 方法签名
 ```python
-add(name, attr, value,
-    shape="circle",
-    word_gap=20,
-    word_size_range=None,
-    rotate_step=45)
+add(name, data,
+    treemap_left_depth=None,
+    treemap_drilldown_icon="▶",
+    treemap_visible_min=10)
 ```
 * name -> str  
     图例名称
