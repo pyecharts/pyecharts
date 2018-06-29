@@ -90,6 +90,11 @@ class Base(object):
         snippet = TRANSLATOR.translate(self.options)
         print(snippet.as_snippet())
 
+    def get_echarts_options(self):
+        """ 返回图形所有配置项
+        """
+        return utils.json_dumps(self._option, indent=4)
+
     def show_config(self):
         """
         打印输出图形所有配置项
