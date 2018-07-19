@@ -1,8 +1,12 @@
 # 版本日志
 
 * ### version 0.5.6（dev）
+
     #### Fixed
-    * [issue#452](https://github.com/pyecharts/pyecharts/issues/452) 修复 K 线图显示提示的【open, close, lowest, highest】
+    * [issue#452](https://github.com/pyecharts/pyecharts/issues/452) 修复 K 线图不能显示 tooltip【open, close, lowest, highest】的 bug
+
+    #### Updated
+    * 修正参数拼写，将 `tooltip_tragger`, `tooltip_tragger_on` 修正为 `tooltip_trigger`, `tooltip_trigger_on`
 
 * ### version 0.5.5 - 2018.05.17（current）
 
@@ -78,7 +82,7 @@
     * 修正 width / height 在 Jupyter Notebook 渲染错误的 Bug
     * [issue#432](https://github.com/pyecharts/pyecharts/issues/432) 修复水球图和词云图不能指定 Toolbox 等选项的 Bug
 
-* ### version 0.3.3 - 2018.03.01（Current）
+* ### version 0.3.3 - 2018.03.01
 
     #### Added
     * 防止将来的依赖包影响 v0.3.2 的功能: lml==0.0.2, jupyter-echarts-pypkg==0.0.11

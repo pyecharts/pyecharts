@@ -7,7 +7,7 @@ pyecharts 是一个用于生成 Echarts 图表的类库。Echarts 是百度开�
 
 **基本使用**
 
-[渲染图表](zh-cn/prepare) | [图表配置](zh-cn/charts)
+[渲染图表](zh-cn/prepare) | [图表配置](zh-cn/charts) | [数据解析与导入](zh-cn/data_import)
 
 **高级话题**
 
@@ -23,7 +23,7 @@ pyecharts 是一个用于生成 Echarts 图表的类库。Echarts 是百度开�
 
 **项目发布**
 
-[版本日志](zh-cn/changelog) | [发布日志](zh-cn/release-note/)
+[版本日志](zh-cn/changelog) | [里程碑](zh-cn/release-note/)
 
 **项目开发**
 
