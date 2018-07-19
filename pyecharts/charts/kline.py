@@ -49,6 +49,10 @@ class Kline(Chart):
         :param kwargs:
         """
         kwargs.update(type="candlestick", x_axis=x_axis)
+        if "tooltip_formatter" not in kwargs:
+            kwargs["tooltip_formatter"] = kline_tooltip_formatter
+        if "tooltip_trigger" not in kwargs:
+            kwargs["tooltip_trigger"] = "axis"
         chart = self._get_all_options(**kwargs)
 
         xaxis, yaxis = chart["xy_axis"]
@@ -70,6 +74,3 @@ class Kline(Chart):
             }
         )
         self._config_components(**kwargs)
-        self._option["tooltip"]["trigger"] = "axis"
-        if self._option["tooltip"]["formatter"] is None:
-            self._option["tooltip"]["formatter"] = kline_tooltip_formatter
