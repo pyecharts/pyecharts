@@ -377,9 +377,9 @@ class Chart(Base):
         self._option.update(tooltip=chart["tooltip"])
 
         # dataZoom，勿改动
-        if kwargs.get("is_datazoom_show", None) is True:
+        if kwargs.get("is_datazoom_show", False) is True:
             self._option.update(dataZoom=chart["datazoom"])
-        if kwargs.get("is_datazoom_extra_show", None) is True:
+        if kwargs.get("is_datazoom_extra_show", False) is True:
             _dz = self._option.get("dataZoom", [])
             _dz.extend(chart["datazoom_extra"])
             self._option.update(dataZoom=_dz)
