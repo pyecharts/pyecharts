@@ -859,6 +859,30 @@ def effect(
 
 
 @collectfuncs
+def datazoom_extra(
+    is_datazoom_extra_show=False,
+    datazoom_extra_type="slider",
+    datazoom_extra_range=None,
+    datazoom_extra_orient="vertical",
+    datazoom_extra_xaxis_index=None,
+    datazoom_extra_yaxis_index=None,
+    **kwargs
+):
+    """
+    额外的 dataZoom 条，直接 X/Y 轴同时使用 dataZoom 效果
+    """
+    if is_datazoom_extra_show:
+        return datazoom(
+            is_datazoom_show=True,
+            datazoom_type=datazoom_extra_type,
+            datazoom_range=datazoom_extra_range,
+            datazoom_orient=datazoom_extra_orient,
+            datazoom_xaxis_index=datazoom_extra_xaxis_index,
+            datazoom_yaxis_index=datazoom_extra_yaxis_index,
+        )
+
+
+@collectfuncs
 def datazoom(
     is_datazoom_show=False,
     datazoom_type="slider",

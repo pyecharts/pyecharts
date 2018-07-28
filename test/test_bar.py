@@ -131,7 +131,34 @@ def test_bar_datazoom_both():
         datazoom_range=[10, 25],
         is_toolbox_show=False,
     )
+    assert len(bar.options.get("dataZoom")) == 2
     html_content = bar._repr_html_()
     assert "dataZoom" in html_content
     assert ': "inside"' in html_content
     assert ': "slider"' in html_content
+
+
+def test_bar_datazoom_xaxis_and_yaxis():
+    days = ["{}天".format(i) for i in range(30)]
+    days_v1 = [random.randint(1, 30) for _ in range(30)]
+    bar = Bar("Bar - datazoom - xaxis/yaxis 示例")
+    bar.add(
+        "",
+        days,
+        days_v1,
+        # 默认为 X 轴，横向
+        is_datazoom_show=True,
+        datazoom_type="slider",
+        datazoom_range=[10, 25],
+        # 新增额外的 dataZoom 控制条，纵向
+        is_datazoom_extra_show=True,
+        datazoom_extra_type="slider",
+        datazoom_extra_range=[10, 25],
+        is_toolbox_show=False,
+    )
+    assert len(bar.options.get("dataZoom")) == 2
+    html_content = bar._repr_html_()
+    assert "dataZoom" in html_content
+    assert ': "slider"' in html_content
+    assert ': "vertical"' in html_content
+    assert ': "horizontal"' in html_content
