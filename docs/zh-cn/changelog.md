@@ -1,6 +1,9 @@
 # 版本日志
 
-* ### version 0.5.6（dev）
+* ### version 0.5.6 - 2018.7.28（dev）
+    * TODO
+
+* ### version 0.5.6 - 2018.7.28（current）
 
     #### Fixed
     * [issue#452](https://github.com/pyecharts/pyecharts/issues/452) 修复 K 线图不能显示 tooltip【open, close, lowest, highest】的 bug
@@ -13,7 +16,7 @@
     * [issue#634](https://github.com/pyecharts/pyecharts/issues/634) 新增 `is_datazoom_extra_show`, `datazoom_extra_type`, `datazoom_extra_range`, `datazoom_extra_orient`, `datazoom_extra_xaxis_index`, `datazoom_extra_yaxis_index` 参数用于设置额外的 dataZoom 控制条，可将效果同时作用于 X、Y 轴
 
 
-* ### version 0.5.5 - 2018.05.17（current）
+* ### version 0.5.5 - 2018.05.17
 
     #### Added
     * [issue#565](https://github.com/pyecharts/pyecharts/issues/565) Geolines 图数据项可以新增数值维度
