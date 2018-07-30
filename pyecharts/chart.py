@@ -143,6 +143,11 @@ class Chart(Base):
         datazoom_orient=None,
         datazoom_xaxis_index=None,
         datazoom_yaxis_index=None,
+        datazoom_extra_type=None,
+        datazoom_extra_range=None,
+        datazoom_extra_orient=None,
+        datazoom_extra_xaxis_index=None,
+        datazoom_extra_yaxis_index=None,
         effect_brushtype=None,
         effect_period=None,
         effect_scale=None,
@@ -182,6 +187,7 @@ class Chart(Base):
         is_clockwise=None,
         is_convert=None,
         is_datazoom_show=None,
+        is_datazoom_extra_show=None,
         is_fill=None,
         is_focusnode=None,
         is_geo_effect_show=None,
@@ -257,8 +263,8 @@ class Chart(Base):
         sankey_node_width=None,
         sankey_node_gap=None,
         type=None,
-        tooltip_tragger=None,
-        tooltip_tragger_on=None,
+        tooltip_trigger=None,
+        tooltip_trigger_on=None,
         tooltip_axispointer_type=None,
         tooltip_formatter=None,
         tooltip_text_color=None,
@@ -371,8 +377,12 @@ class Chart(Base):
         self._option.update(tooltip=chart["tooltip"])
 
         # dataZoom，勿改动
-        if kwargs.get("is_datazoom_show", None) is True:
+        if kwargs.get("is_datazoom_show", False) is True:
             self._option.update(dataZoom=chart["datazoom"])
+        if kwargs.get("is_datazoom_extra_show", False) is True:
+            _dz = self._option.get("dataZoom", [])
+            _dz.extend(chart["datazoom_extra"])
+            self._option.update(dataZoom=_dz)
 
         # visualMap
         if is_visualmap:

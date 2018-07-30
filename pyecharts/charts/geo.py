@@ -4,6 +4,9 @@ from pyecharts.chart import Chart
 from pyecharts.datasets.coordinates import get_coordinate
 
 
+DEFAULT_GEO_TOOLTIP_FORMATTER = "{b}: {c}"
+
+
 class Geo(Chart):
     """
     <<< 地理坐标系 >>>
@@ -92,11 +95,13 @@ class Geo(Chart):
         """
         assert len(attr) == len(value)
         kwargs.update(type="geo")
+        if "tooltip_formatter" not in kwargs:
+            kwargs["tooltip_formatter"] = DEFAULT_GEO_TOOLTIP_FORMATTER
         chart = self._get_all_options(**kwargs)
 
         if geo_cities_coords:
-            for name, coord in geo_cities_coords.items():
-                self.add_coordinate(name, coord[0], coord[1])
+            for city_name, city_coord in geo_cities_coords.items():
+                self.add_coordinate(city_name, city_coord[0], city_coord[1])
 
         _data = []
         for _name, _value in zip(attr, value):
