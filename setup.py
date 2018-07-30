@@ -19,7 +19,7 @@ __requires__ = [
     "pillow",
     "jinja2",
     "future",
-    "jupyter-echarts-pypkg==0.1.1",
+    "jupyter-echarts-pypkg==0.1.2",
     "lml==0.0.2",
     "pyecharts-javascripthon==0.0.6",
 ]

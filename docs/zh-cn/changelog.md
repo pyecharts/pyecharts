@@ -1,23 +1,36 @@
 # 版本日志
 
-* ### version 0.5.6（dev）
+* ### version 0.5.6 - 2018.7.28（dev）
     * TODO
 
-* ### version 0.5.5 - 2018.05.17（current）
+* ### version 0.5.6 - 2018.7.28（current）
 
-    ### Added
+    #### Fixed
+    * [issue#452](https://github.com/pyecharts/pyecharts/issues/452) 修复 K 线图不能显示 tooltip【open, close, lowest, highest】的 bug
+    * [issue#639](https://github.com/pyecharts/pyecharts/issues/639) 修复 Line 图当 X 轴的类型设置为 'value' 的时候，X、Y 轴均显示 Y 轴数据的 bug
+    * [issue#636](https://github.com/pyecharts/pyecharts/issues/636) 修复 Geo/Geoline 图坐标地点名替换 Legend 的 bug
+
+    #### Updated
+    * 修正参数拼写，将 `tooltip_tragger`, `tooltip_tragger_on` 修正为 `tooltip_trigger`, `tooltip_trigger_on`
+    * 更新 echarts 及附属 js 文件版本 echarts 4.0.4 -> 4.1.0，echarts-gl 1.1.0 -> 1.1.1，echarts-liquidfill 2.0.0 -> 2.0.1
+    * [issue#634](https://github.com/pyecharts/pyecharts/issues/634) 新增 `is_datazoom_extra_show`, `datazoom_extra_type`, `datazoom_extra_range`, `datazoom_extra_orient`, `datazoom_extra_xaxis_index`, `datazoom_extra_yaxis_index` 参数用于设置额外的 dataZoom 控制条，可将效果同时作用于 X、Y 轴
+
+
+* ### version 0.5.5 - 2018.05.17
+
+    #### Added
     * [issue#565](https://github.com/pyecharts/pyecharts/issues/565) Geolines 图数据项可以新增数值维度
     * [issue#573](https://github.com/pyecharts/pyecharts/issues/573) 新增对 jupyter notebook 家族的新成员 [nteract](https://nteract.io/) 的支持
 
-    ### Fixed
+    #### Fixed
     * [issue#572](https://github.com/pyecharts/pyecharts/issues/572) 修复 HeatMap 图纵坐标显示索引值，而非 data 值的 bug
 
 * ### version 0.5.4 - 2018.05.15
 
-    ### Updated
+    #### Updated
     * 重构 `Page` 类，新增图表命名名称引用。
 
-    ### Fixed
+    #### Fixed
     * [issue#555](https://github.com/pyecharts/pyecharts/issues/555) 修复 v0.5.3 Polar 图不能显示的 bug
     * [issue#541](https://github.com/pyecharts/pyecharts/issues/541) 修复 v0.5.3 Django + pyecharts 不能正常导入的 bug
 
@@ -77,7 +90,7 @@
     * 修正 width / height 在 Jupyter Notebook 渲染错误的 Bug
     * [issue#432](https://github.com/pyecharts/pyecharts/issues/432) 修复水球图和词云图不能指定 Toolbox 等选项的 Bug
 
-* ### version 0.3.3 - 2018.03.01（Current）
+* ### version 0.3.3 - 2018.03.01
 
     #### Added
     * 防止将来的依赖包影响 v0.3.2 的功能: lml==0.0.2, jupyter-echarts-pypkg==0.0.11

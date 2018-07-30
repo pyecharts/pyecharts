@@ -3,6 +3,25 @@
 from pyecharts.chart import Chart
 
 
+def kline_tooltip_formatter(params):
+    text = (
+        params[0].seriesName
+        + "<br/>"
+        + "- open:"
+        + params[0].data[1]
+        + "<br/>"
+        + "- close:"
+        + params[0].data[2]
+        + "<br/>"
+        + "- lowest:"
+        + params[0].data[3]
+        + "<br/>"
+        + "- highest:"
+        + params[0].data[4]
+    )
+    return text
+
+
 class Kline(Chart):
     """
     <<< K 线图 >>>
@@ -30,6 +49,10 @@ class Kline(Chart):
         :param kwargs:
         """
         kwargs.update(type="candlestick", x_axis=x_axis)
+        if "tooltip_formatter" not in kwargs:
+            kwargs["tooltip_formatter"] = kline_tooltip_formatter
+        if "tooltip_trigger" not in kwargs:
+            kwargs["tooltip_trigger"] = "axis"
         chart = self._get_all_options(**kwargs)
 
         xaxis, yaxis = chart["xy_axis"]
