@@ -239,6 +239,7 @@
 
 **dataZoom：dataZoom 组件 用于区域缩放，从而能自由关注细节的数据信息，或者概览数据整体，或者去除离群点的影响。(Line、Bar、Scatter、EffectScatter、Kline)**
 
+默认的 dataZoom 控制条
 * is_datazoom_show -> bool  
     是否使用区域缩放组件，默认为 False
 * datazoom_type -> str    
@@ -252,6 +253,22 @@
     默认控制第一个 x 轴，如没特殊需求无须显示指定。单个为 int 类型而控制多个为 list 类型，如 [0, 1] 表示控制第一个和第二个 x 轴。
 * datazoom_yaxis_index -> int/list  
     datazoom 组件控制的 y 轴索引  
+    默认控制第一个 y 轴，如没特殊需求无须显示指定。单个为 int 类型而控制多个为 list 类型，如 [0, 1] 表示控制第一个和第二个 x 轴。
+
+额外的 dataZoom 控制条
+* is_datazoom_extrashow -> bool
+    是否使用额外区域缩放组件，默认为 False
+* datazoom_extra_type -> str
+    额外区域缩放组件类型，默认为'slider'，有'slider', 'inside', 'both'可选
+* datazoom_extra_range -> list
+    额外区域缩放的范围，默认为[50, 100]
+* datazoom_extra_orient -> str
+    额外 datazoom 组件在直角坐标系中的方向，默认为 'vertical'，效果显示在 y 轴。如若设置为 'horizontal' 的话效果显示在 x 轴。
+* datazoom_extra_xaxis_index -> int/list
+    额外 datazoom 组件控制的 x 轴索引
+    默认控制第一个 x 轴，如没特殊需求无须显示指定。单个为 int 类型而控制多个为 list 类型，如 [0, 1] 表示控制第一个和第二个 x 轴。
+* datazoom_extra_yaxis_index -> int/list
+    额外 datazoom 组件控制的 y 轴索引
     默认控制第一个 y 轴，如没特殊需求无须显示指定。单个为 int 类型而控制多个为 list 类型，如 [0, 1] 表示控制第一个和第二个 x 轴。
 
 
@@ -442,12 +459,12 @@
 
 **tooltip：提示框组件，用于移动或点击鼠标时弹出数据内容**
 
-* tooltip_tragger -> str  
+* tooltip_trigger -> str  
     触发类型。默认为 'item'  
     * 'item': 数据项图形触发，主要在散点图，饼图等无类目轴的图表中使用。
     * 'axis': 坐标轴触发，主要在柱状图，折线图等会使用类目轴的图表中使用。
     * 'none': 什么都不触发。
-* tooltip_tragger_on -> str  
+* tooltip_trigger_on -> str  
     提示框触发的条件。默认为 "mousemove|click"
     * 'mousemove': 鼠标移动时触发。
     * 'click': 鼠标点击时触发。
@@ -609,6 +626,29 @@ bar.add("", attr, v1, is_datazoom_show=True, datazoom_type='both',
 bar.render()
 ```
 ![bar-demo](https://user-images.githubusercontent.com/19553554/35081813-37fc4072-fc51-11e7-9b5c-a3ca2f0d1fef.gif)
+
+**多 dataZoom 效果，效果同时支持 X、Y 轴**
+```python
+days = ["{}天".format(i) for i in range(30)]
+days_v1 = [random.randint(1, 30) for _ in range(30)]
+bar = Bar("Bar - datazoom - xaxis/yaxis 示例")
+bar.add(
+    "",
+    days,
+    days_v1,
+    # 默认为 X 轴，横向
+    is_datazoom_show=True,
+    datazoom_type="slider",
+    datazoom_range=[10, 25],
+    # 新增额外的 dataZoom 控制条，纵向
+    is_datazoom_extra_show=True,
+    datazoom_extra_type="slider",
+    datazoom_extra_range=[10, 25],
+    is_toolbox_show=False,
+)
+bar.render()
+```
+![2018-07-28_10-19-17](https://user-images.githubusercontent.com/19553554/43352052-ec70fe82-924f-11e8-880b-832b8f95d701.gif)
 
 
 **Note：** datazoom 适合所有平面直角坐标系图形，也就是(Line、Bar、Scatter、EffectScatter、Kline)  

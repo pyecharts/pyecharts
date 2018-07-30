@@ -62,6 +62,9 @@ class Line(Chart):
             is_stack = ""
         self._option.update(xAxis=xaxis, yAxis=yaxis)
         self._option.get("legend")[0].get("data").append(name)
+        # 合并 x 和 y 轴数据，避免当 X 轴的类型设置为 'value' 的时候，
+        # X、Y 轴均显示 Y 轴数据
+        _data = [list(z) for z in zip(x_axis, y_axis)]
 
         self._option.get("series").append(
             {
@@ -73,7 +76,7 @@ class Line(Chart):
                 "step": is_step,
                 "stack": is_stack,
                 "showSymbol": is_symbol_show,
-                "data": y_axis,
+                "data": _data,
                 "label": chart["label"],
                 "lineStyle": chart["line_style"],
                 "areaStyle": chart["area_style"],

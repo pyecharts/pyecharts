@@ -71,7 +71,7 @@ def _flat(obj):
     if isinstance(obj, (list, tuple, set)):
         return obj
 
-    return obj,  # tuple
+    return (obj,)  # tuple
 
 
 def merge_js_dependencies(*chart_or_name_list):
