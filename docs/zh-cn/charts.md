@@ -256,18 +256,18 @@
     默认控制第一个 y 轴，如没特殊需求无须显示指定。单个为 int 类型而控制多个为 list 类型，如 [0, 1] 表示控制第一个和第二个 x 轴。
 
 额外的 dataZoom 控制条
-* is_datazoom_extrashow -> bool
+* is_datazoom_extrashow -> bool  
     是否使用额外区域缩放组件，默认为 False
-* datazoom_extra_type -> str
+* datazoom_extra_type -> str  
     额外区域缩放组件类型，默认为'slider'，有'slider', 'inside', 'both'可选
-* datazoom_extra_range -> list
+* datazoom_extra_range -> list  
     额外区域缩放的范围，默认为[50, 100]
-* datazoom_extra_orient -> str
+* datazoom_extra_orient -> str  
     额外 datazoom 组件在直角坐标系中的方向，默认为 'vertical'，效果显示在 y 轴。如若设置为 'horizontal' 的话效果显示在 x 轴。
-* datazoom_extra_xaxis_index -> int/list
+* datazoom_extra_xaxis_index -> int/list  
     额外 datazoom 组件控制的 x 轴索引
     默认控制第一个 x 轴，如没特殊需求无须显示指定。单个为 int 类型而控制多个为 list 类型，如 [0, 1] 表示控制第一个和第二个 x 轴。
-* datazoom_extra_yaxis_index -> int/list
+* datazoom_extra_yaxis_index -> int/list  
     额外 datazoom 组件控制的 y 轴索引
     默认控制第一个 y 轴，如没特殊需求无须显示指定。单个为 int 类型而控制多个为 list 类型，如 [0, 1] 表示控制第一个和第二个 x 轴。
 
@@ -3303,6 +3303,32 @@ grid.render()
 ```
 ![grid-demo](https://user-images.githubusercontent.com/19553554/35089741-cfca19bc-fc72-11e7-8c3b-2f20d054d3fc.gif)  
 Bar 会受 HeatMap 影响，很有趣。
+
+**利用 Grid 解决 dataZoom 与 X 轴标签重叠问题**
+```python
+from pyecharts imoprt Bar, Grid
+
+x = [
+    "名字很长的x轴1",
+    "名字很长的x轴2",
+    "名字很长的x轴3",
+    "名字很长的x轴4",
+    "名字很长的x轴5",
+    "名字很长的x轴6",
+    "名字很长的x轴7",
+    "名字很长的x轴8",
+    "名字很长的x轴9",
+]
+y = [10, 20, 30, 40, 50, 60, 70, 80, 90]
+
+grid = Grid()
+bar = Bar("利用 Grid 解决 dataZoom 与 X 轴标签重叠问题")
+bar.add("", x, y, is_datazoom_show=True, xaxis_interval=0, xaxis_rotate=30)
+# 把 bar 加入到 grid 中，并适当调整 grid_bottom 参数，使 bar 图整体上移
+grid.add(bar, grid_bottom="25%")
+grid.render()
+```
+![grid-demo](https://user-images.githubusercontent.com/19553554/43446550-c3756fde-94db-11e8-81fd-b7c202306858.gif)
 
 **datazoom 组件同时控制多个图**
 ```python
