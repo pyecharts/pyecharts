@@ -152,6 +152,7 @@ class Chart(Base):
         effect_period=None,
         effect_scale=None,
         extra_data=None,
+        extra_name=None,
         geo_emphasis_color=None,
         geo_normal_color=None,
         geo_cities_coords=None,
