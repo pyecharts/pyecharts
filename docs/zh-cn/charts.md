@@ -256,18 +256,18 @@
     默认控制第一个 y 轴，如没特殊需求无须显示指定。单个为 int 类型而控制多个为 list 类型，如 [0, 1] 表示控制第一个和第二个 x 轴。
 
 额外的 dataZoom 控制条
-* is_datazoom_extrashow -> bool
+* is_datazoom_extrashow -> bool  
     是否使用额外区域缩放组件，默认为 False
-* datazoom_extra_type -> str
+* datazoom_extra_type -> str  
     额外区域缩放组件类型，默认为'slider'，有'slider', 'inside', 'both'可选
-* datazoom_extra_range -> list
+* datazoom_extra_range -> list  
     额外区域缩放的范围，默认为[50, 100]
-* datazoom_extra_orient -> str
+* datazoom_extra_orient -> str  
     额外 datazoom 组件在直角坐标系中的方向，默认为 'vertical'，效果显示在 y 轴。如若设置为 'horizontal' 的话效果显示在 x 轴。
-* datazoom_extra_xaxis_index -> int/list
+* datazoom_extra_xaxis_index -> int/list  
     额外 datazoom 组件控制的 x 轴索引
     默认控制第一个 x 轴，如没特殊需求无须显示指定。单个为 int 类型而控制多个为 list 类型，如 [0, 1] 表示控制第一个和第二个 x 轴。
-* datazoom_extra_yaxis_index -> int/list
+* datazoom_extra_yaxis_index -> int/list  
     额外 datazoom 组件控制的 y 轴索引
     默认控制第一个 y 轴，如没特殊需求无须显示指定。单个为 int 类型而控制多个为 list 类型，如 [0, 1] 表示控制第一个和第二个 x 轴。
 
@@ -2600,8 +2600,10 @@ add(name, x_axis, y_axis,
     x 坐标轴数据
 * y_axis -> list  
     y 坐标轴数据
-* extra_data -> int  
+* extra_data -> list[int]  
     第三维度数据，x 轴为第一个维度，y 轴为第二个维度。（可在 visualmap 中将视图元素映射到第三维度）
+* extra_name -> list[str]  
+    额外的数据项的名称，可以为每个数据点指定一个名称。
 * symbol_size -> int  
     标记图形大小，默认为 10
 
@@ -2672,6 +2674,39 @@ sc.render()
 ```
 ![scatter-demo](https://user-images.githubusercontent.com/19553554/35090364-63f2ef78-fc74-11e7-950b-75ebd13e1f03.gif)
 
+**为每个坐标点指定一个名称，可用于 tooltip 展示**
+```python
+
+def custom_formatter(params):
+    return params.value[3]
+
+data = [
+    [28604, 77, 17096],
+    [31163, 77.4, 27662],
+    [1516, 68, 11546],
+]
+x_lst = [v[0] for v in data]
+y_lst = [v[1] for v in data]
+extra_data = [v[2] for v in data]
+extra_name = ["point A", "point B", "point C"]
+sc = Scatter()
+sc.add(
+    "scatter",
+    x_lst,
+    y_lst,
+    extra_data=extra_data,
+    extra_name=extra_name,
+    is_visualmap=True,
+    visual_dimension=2,
+    visual_orient="horizontal",
+    visual_type="size",
+    visual_range=[17000, 28000],
+    visual_text_color="#000",
+    tooltip_formatter=custom_formatter,
+)
+sc.render()
+```
+![scatter-demo](https://user-images.githubusercontent.com/19553554/43563684-e5e3cc34-9655-11e8-9792-0aa03a9233c6.gif)
 
 **Note：** 请配合 通用配置项 中的 Visualmap 使用
 
@@ -3303,6 +3338,32 @@ grid.render()
 ```
 ![grid-demo](https://user-images.githubusercontent.com/19553554/35089741-cfca19bc-fc72-11e7-8c3b-2f20d054d3fc.gif)  
 Bar 会受 HeatMap 影响，很有趣。
+
+**利用 Grid 解决 dataZoom 与 X 轴标签重叠问题**
+```python
+from pyecharts imoprt Bar, Grid
+
+x = [
+    "名字很长的x轴1",
+    "名字很长的x轴2",
+    "名字很长的x轴3",
+    "名字很长的x轴4",
+    "名字很长的x轴5",
+    "名字很长的x轴6",
+    "名字很长的x轴7",
+    "名字很长的x轴8",
+    "名字很长的x轴9",
+]
+y = [10, 20, 30, 40, 50, 60, 70, 80, 90]
+
+grid = Grid()
+bar = Bar("利用 Grid 解决 dataZoom 与 X 轴标签重叠问题")
+bar.add("", x, y, is_datazoom_show=True, xaxis_interval=0, xaxis_rotate=30)
+# 把 bar 加入到 grid 中，并适当调整 grid_bottom 参数，使 bar 图整体上移
+grid.add(bar, grid_bottom="25%")
+grid.render()
+```
+![grid-demo](https://user-images.githubusercontent.com/19553554/43446550-c3756fde-94db-11e8-81fd-b7c202306858.gif)
 
 **datazoom 组件同时控制多个图**
 ```python
