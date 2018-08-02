@@ -2600,8 +2600,10 @@ add(name, x_axis, y_axis,
     x 坐标轴数据
 * y_axis -> list  
     y 坐标轴数据
-* extra_data -> int  
+* extra_data -> list[int]  
     第三维度数据，x 轴为第一个维度，y 轴为第二个维度。（可在 visualmap 中将视图元素映射到第三维度）
+* extra_name -> list[str]  
+    额外的数据项的名称，可以为每个数据点指定一个名称。
 * symbol_size -> int  
     标记图形大小，默认为 10
 
@@ -2672,6 +2674,39 @@ sc.render()
 ```
 ![scatter-demo](https://user-images.githubusercontent.com/19553554/35090364-63f2ef78-fc74-11e7-950b-75ebd13e1f03.gif)
 
+**为每个坐标点指定一个名称，可用于 tooltip 展示**
+```python
+
+def custom_formatter(params):
+    return params.value[3]
+
+data = [
+    [28604, 77, 17096],
+    [31163, 77.4, 27662],
+    [1516, 68, 11546],
+]
+x_lst = [v[0] for v in data]
+y_lst = [v[1] for v in data]
+extra_data = [v[2] for v in data]
+extra_name = ["point A", "point B", "point C"]
+sc = Scatter()
+sc.add(
+    "scatter",
+    x_lst,
+    y_lst,
+    extra_data=extra_data,
+    extra_name=extra_name,
+    is_visualmap=True,
+    visual_dimension=2,
+    visual_orient="horizontal",
+    visual_type="size",
+    visual_range=[17000, 28000],
+    visual_text_color="#000",
+    tooltip_formatter=custom_formatter,
+)
+sc.render()
+```
+![scatter-demo](https://user-images.githubusercontent.com/19553554/43563684-e5e3cc34-9655-11e8-9792-0aa03a9233c6.gif)
 
 **Note：** 请配合 通用配置项 中的 Visualmap 使用
 

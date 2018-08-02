@@ -20,7 +20,14 @@ class Scatter(Chart):
         self.__add(*args, **kwargs)
 
     def __add(
-        self, name, x_axis, y_axis, extra_data=None, symbol_size=10, **kwargs
+        self,
+        name,
+        x_axis,
+        y_axis,
+        extra_data=None,
+        extra_name=None,
+        symbol_size=10,
+        **kwargs
     ):
         """
 
@@ -33,6 +40,8 @@ class Scatter(Chart):
         :param extra_data:
             第三维度数据，x 轴为第一个维度，y 轴为第二个维度。（可在 visualmap 中
             将视图元素映射到第三维度）。
+        :param extra_name:
+            额外的数据项的名称，可以为每个数据点指定一个名称。
         :param symbol_size:
             标记图形大小，默认为 10。
         :param kwargs:
@@ -47,10 +56,8 @@ class Scatter(Chart):
         self._option.update(xAxis=xaxis, yAxis=yaxis)
         self._option.get("legend")[0].get("data").append(name)
 
-        if extra_data:
-            _data = [list(z) for z in zip(x_axis, y_axis, extra_data)]
-        else:
-            _data = [list(z) for z in zip(x_axis, y_axis)]
+        zip_lst = [i for i in (x_axis, y_axis, extra_data, extra_name) if i]
+        _data = [list(z) for z in zip(*zip_lst)]
 
         self._option.get("series").append(
             {
