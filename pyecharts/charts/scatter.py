@@ -56,7 +56,12 @@ class Scatter(Chart):
         self._option.update(xAxis=xaxis, yAxis=yaxis)
         self._option.get("legend")[0].get("data").append(name)
 
-        zip_lst = [i for i in (x_axis, y_axis, extra_data, extra_name) if i]
+        zip_lst = [x_axis, y_axis]
+        for e in (extra_data, extra_name):
+            if e:
+                # 确保提供的额外的数据或名称长度相同
+                assert len(e) == len(x_axis)
+                zip_lst.append(e)
         _data = [list(z) for z in zip(*zip_lst)]
 
         self._option.get("series").append(
