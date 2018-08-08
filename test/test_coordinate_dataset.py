@@ -5,6 +5,7 @@ Test Case for the acccess interface of coordinate dataset
 from __future__ import unicode_literals
 from pyecharts.datasets.coordinates import (
     get_coordinate,
+    search_coordinates_by_country_and_keyword,
     search_coordinates_by_keyword,
     search_coordinates_by_filter,
 )
@@ -25,6 +26,13 @@ def test_get_coordinate_without_data():
 def test_search_coordinates():
     # search the city name containing '北京'
     result = search_coordinates_by_keyword("北京")
+    assert "北京" in result
+    assert "北京市" in result
+
+
+def test_search_coordinates_by_country():
+    # search the city name containing '北京'
+    result = search_coordinates_by_country_and_keyword("CN", "北京")
     assert "北京" in result
     assert "北京市" in result
 
