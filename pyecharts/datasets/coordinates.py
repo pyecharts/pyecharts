@@ -57,7 +57,9 @@ class GeoDataBank(PluginManager):
                 _data_bank = data_bank.cls()
                 _cities_in_a_country = _data_bank.get_cities_in_country(
                     country)
-                self.geo_coordinates[country].update(_cities_in_a_country)
+                if _cities_in_a_country:
+                    self.geo_coordinates[country].update(
+                        _cities_in_a_country)
 
 
 @PluginInfo(constants.GEO_DATA_PLUGIN_TYPE, tags=['builtin'])
