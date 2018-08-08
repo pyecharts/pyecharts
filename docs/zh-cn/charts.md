@@ -76,7 +76,9 @@
     指定生成的 html 文件中 `<title>` 标签的值。默认为'Echarts'
 * renderer -> str  
     指定使用渲染方式，有 'svg' 和 'canvas' 可选，默认为 'canvas'。3D 图仅能使用 'canvas'。
-    
+* extra_html_text_label -> list  
+    额外的 HTML 文本标签，(<p> 标签)。类型为 list，list[0] 为文本内容，list[1] 为字体风格样式（选填）。如 ["this is a p label", "color:red"]。**仅限于在单个图形或者 page 类时使用。**
+
 
 # 通用配置项
 **通用配置项均在 ```add()``` 中设置**
@@ -707,6 +709,18 @@ bar.add("降水量", attr, v2, mark_line=["average"], mark_point=["max", "min"])
 bar.render()
 ```
 ![bar-demo](https://user-images.githubusercontent.com/19553554/35081822-3e090748-fc51-11e7-8bba-b775d29671e4.png)
+
+
+**额外的文本标签**
+```python
+from pyecharts import Bar
+
+bar = Bar("柱状图", extra_html_text_label=["bar_extra_html_text_label", "color:red"])
+bar.add("商家A", CLOTHES, clothes_v1, is_stack=True)
+bar.add("商家B", CLOTHES, clothes_v2, is_stack=True)
+bar.render()
+```
+![bar-demo](https://user-images.githubusercontent.com/19553554/43812932-31f22e0a-9af6-11e8-8fbe-c62b65daec41.png)
 
 
 ## Bar3D（3D 柱状图）
@@ -3821,6 +3835,43 @@ page.add(radar)
 page.render()
 ```
 ![page-demo](https://user-images.githubusercontent.com/19553554/35104305-66f2a766-fca3-11e7-8ffd-8e85911fdea5.gif)
+
+**Page 类的额外的文本标签，由各图形本身携带**
+```python
+from pyecharts import *
+
+page = Page()
+line = Line("折线图示例", extra_html_text_label=["LINE TEXT LABEL", "color:red"])
+line.add(
+    "最高气温",
+    WEEK,
+    [11, 11, 15, 13, 12, 13, 10],
+    mark_point=["max", "min"],
+    mark_line=["average"],
+)
+page.add(line)
+
+v1 = [11, 12, 13, 10, 10, 10]
+pie = Pie("饼图-圆环图示例", title_pos="center", extra_html_text_label=["PIE TEXT LABEL"])
+pie.add(
+    "",
+    CLOTHES,
+    v1,
+    radius=[40, 75],
+    label_text_color=None,
+    is_label_show=True,
+    legend_orient="vertical",
+    legend_pos="left",
+)
+page.add(pie)
+
+v2 = [10, 25, 8, 60, 20, 80]
+bar = Bar("柱状图", extra_html_text_label=["BAR TEXT LABEL"])
+bar.add("商家B", CLOTHES, v2)
+page.add(bar)
+page.render()
+```
+![page-demo](https://user-images.githubusercontent.com/19553554/43813125-e4ef7e2c-9af6-11e8-96a0-a6b53b0c136f.gif)
 
 
 ## Timeline：提供时间线轮播多张图
