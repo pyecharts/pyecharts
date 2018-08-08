@@ -26,6 +26,7 @@ class Chart(Base):
         background_color=None,
         page_title=constants.PAGE_TITLE,
         renderer=constants.CANVAS_RENDERER,
+        extra_html_text_label=None,
     ):
         """
 
@@ -58,12 +59,16 @@ class Chart(Base):
         :param renderer:
             指定使用渲染方式，有 'svg' 和 'canvas' 可选，默认为 'canvas'。
             3D 图仅能使用 'canvas'。
+        :param extra_html_text_label:
+            额外的 HTML 文本标签，(<p> 标签)。类型为 list，list[0] 为文本内容，
+            list[1] 为字体风格样式（选填）。如 ["this is a p label", "color:red"]
         """
         super(Chart, self).__init__(
             width=width,
             height=height,
             renderer=renderer,
             page_title=page_title,
+            extra_html_text_label=extra_html_text_label,
         )
         self._colorlst = [
             "#c23531",

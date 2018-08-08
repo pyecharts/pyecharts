@@ -162,3 +162,11 @@ def test_bar_datazoom_xaxis_and_yaxis():
     assert ': "slider"' in html_content
     assert ': "vertical"' in html_content
     assert ': "horizontal"' in html_content
+
+
+def test_bar_extra_html_text_label():
+    bar = Bar("柱状图", extra_html_text_label=["bar_extra_html_text_label"])
+    bar.add("商家A", CLOTHES, clothes_v1, is_stack=True)
+    bar.add("商家B", CLOTHES, clothes_v2, is_stack=True)
+    html_content = bar._repr_html_()
+    assert '<p style="">bar_extra_html_text_label</p>' in html_content

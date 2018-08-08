@@ -25,6 +25,7 @@ myChart_{chart_id}.setOption(option_{chart_id});
 CHART_EVENT_FORMATTER = """
 myChart_{chart_id}.on("{event_name}", {handler_name});
 """
+EXTRA_TEXT_FORMATTER = """<p style="{style}">{text}</p>"""
 
 
 @environmentfunction
@@ -70,14 +71,22 @@ def echarts_container(env, chart):
     :param env:
     :param chart: A pyecharts.base.Base object
     """
-
-    return Markup(
-        CHART_DIV_FORMATTER.format(
-            chart_id=chart.chart_id,
-            width=utils.to_css_length(chart.width),
-            height=utils.to_css_length(chart.height),
-        )
+    _container_and_text = ""
+    _container_and_text += CHART_DIV_FORMATTER.format(
+        chart_id=chart.chart_id,
+        width=utils.to_css_length(chart.width),
+        height=utils.to_css_length(chart.height),
     )
+    _text_label = chart.extra_html_text_label
+    if _text_label:
+        if len(_text_label) == 1 and isinstance(_text_label, list):
+            _text_label.append("")
+        _text, _style = _text_label
+        _container_and_text += EXTRA_TEXT_FORMATTER.format(
+            text=_text,
+            style=_style
+        )
+    return Markup(_container_and_text)
 
 
 def generate_js_content(*charts):
