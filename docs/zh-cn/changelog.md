@@ -4,6 +4,8 @@
 
     #### Added
     * [issue#651](https://github.com/pyecharts/pyecharts/issues/651) Scatter 图新增 `extra_name` 参数，额外的数据项的名称，可以为每个数据点指定一个名称。
+    * [issue#657](https://github.com/pyecharts/pyecharts/issues/657) 基本图形新增 `extra_html_text_label` 参数用于显示额外的文本标签，仅限于在单图形或者 Page 时使用。
+
 
 * ### version 0.5.6 - 2018.7.28（current）
 
