@@ -8,6 +8,7 @@ import codecs
 from future.utils import viewitems
 
 PY3 = sys.version_info[0] == 3
+PY2 = sys.version_info[0] == 2
 
 if PY3:
     string_type = str
@@ -20,6 +21,8 @@ __all__ = [
     "write_utf8_html_file",
     "to_css_length",
     "merge_js_dependencies",
+    "is_ascii",
+    "PY2"
 ]
 
 
@@ -136,3 +139,7 @@ def _clean_array(myarray):
 
 def remove_key_with_none_value(incoming_dict):
     return _expand(_clean_dict(incoming_dict))
+
+
+def is_ascii(s):
+    return all(ord(c) < 128 for c in s)

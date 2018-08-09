@@ -99,7 +99,7 @@ class GeoLines(Geo):
                 _from_name, _to_name, _line_value = element
 
             _from_coordinate = self.get_coordinate(
-                _from_name, raise_exception=True
+                _from_name, maptype, raise_exception=True
             )
             _to_coordinate = self.get_coordinate(
                 _to_name, raise_exception=True

@@ -29,7 +29,7 @@ class Geo(Chart):
         """
         self._coordinates.update({name: [longitude, latitude]})
 
-    def get_coordinate(self, name, raise_exception=False):
+    def get_coordinate(self, name, maptype="中国", raise_exception=False):
         """
         Return coordinate for the city name.
 
@@ -40,7 +40,7 @@ class Geo(Chart):
         if name in self._coordinates:
             return self._coordinates[name]
 
-        coordinate = get_coordinate(name)
+        coordinate = get_coordinate(name, country=maptype)
         if coordinate is None and raise_exception:
             raise ValueError("No coordinate is specified for {}".format(name))
 
@@ -56,6 +56,7 @@ class Geo(Chart):
         value,
         type="scatter",
         maptype="china",
+        map_country="中国",
         symbol_size=12,
         border_color="#111",
         geo_normal_color="#323c48",
@@ -105,7 +106,8 @@ class Geo(Chart):
 
         _data = []
         for _name, _value in zip(attr, value):
-            _coordinate = self.get_coordinate(_name, raise_exception=True)
+            _coordinate = self.get_coordinate(
+                _name, map_country, raise_exception=True)
             _data_value = [_coordinate[0], _coordinate[1], _value]
             _data.append({"name": _name, "value": _data_value})
         self._option.update(
