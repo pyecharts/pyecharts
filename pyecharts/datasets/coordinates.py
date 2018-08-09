@@ -33,7 +33,6 @@ class GeoDataBank(PluginManager):
 
     def get_coordinate(self, city, country):
         country = self.ensure_two_digit_iso_code(country)
-        coordinates = None
         if country not in self.geo_coordinates:
             self._load_data_into_memory(country)
         coordinates = self.geo_coordinates[country].get(city)
@@ -58,10 +57,11 @@ class GeoDataBank(PluginManager):
 
     def ensure_two_digit_iso_code(self, country):
         two_digit_code = country
-        if is_ascii(country) and len(country) == 2:
-            pass
-        else:
-            two_digit_code = self._translate_country(country)
+        if country is not None:
+            if is_ascii(country) and len(country) == 2:
+                pass
+            else:
+                two_digit_code = self._translate_country(country)
         return two_digit_code
 
     def _load_data_into_memory(self, country):
