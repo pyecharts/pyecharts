@@ -113,7 +113,7 @@ geo.add(
 geo.render()
 ```
 
-## 国际城市地里坐标
+## 国际城市地理坐标
 
 自 v0.5.7 之后，[echarts-cities-pypkg](https://github.com/pyecharts/echarts-cities-pypkg) 给 pyecharts 补充了 [138,398 个城市地理坐标](https://github.com/echarts-maps/echarts-cities-js)，覆盖了200 多个国家。你可以配合 echarts-countries-pypkg 画地理散点图。
 

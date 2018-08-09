@@ -61,7 +61,7 @@ class GeoDataBank(PluginManager):
         if is_ascii(country) and len(country) == 2:
             pass
         else:
-            two_digit_code = self._translate_countries(country)
+            two_digit_code = self._translate_country(country)
         return two_digit_code
 
     def _load_data_into_memory(self, country):
@@ -75,7 +75,7 @@ class GeoDataBank(PluginManager):
                     self.geo_coordinates[country].update(
                         _cities_in_a_country)
 
-    def _translate_countries(self, country):
+    def _translate_country(self, country):
         if not self.country_dict:
             _country_dict = get_resource_dir("datasets",
                                              COUNTRY_DB)
@@ -87,7 +87,7 @@ class GeoDataBank(PluginManager):
 
 
 @PluginInfo(constants.GEO_DATA_PLUGIN_TYPE, tags=['builtin'])
-class DefaultChinaDataSet:
+class DefaultChinaDataBank:
 
     def get_cities_in_country(self, country):
 
@@ -107,6 +107,7 @@ def search_coordinates_by_filter(func, country="CN"):
     """
     Search coordinates by filter function
     :param func: The filter call for search
+    :param country: the country name
     :return: A dictionary like {<name>:[<longitude>, <latitude>]}
     """
     result = GEO_DATA_BANK.search_in_country_by_filter(country, func)
@@ -132,7 +133,7 @@ def search_coordinates_by_country_and_keyword(country, *args):
 
 def search_coordinates_by_keyword(*args):
     """
-    Search coordinates by city name
+    Search coordinates by city name in China
     :param args: The keywords for fuzzy search
     :return: A dictionary like {<name>:[<longitude>, <latitude>]}
     """
@@ -143,6 +144,7 @@ def get_coordinate(name, country="CN"):
     """
     Return coordinate for the city name.
     :param name: City name or any custom name string.
+    :param country: the country name
     :return: A list like [longitude, latitude] or None
     """
     return GEO_DATA_BANK.get_coordinate(name, country)

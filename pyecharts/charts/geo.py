@@ -29,7 +29,7 @@ class Geo(Chart):
         """
         self._coordinates.update({name: [longitude, latitude]})
 
-    def get_coordinate(self, name, maptype="中国", raise_exception=False):
+    def get_coordinate(self, name, country="中国", raise_exception=False):
         """
         Return coordinate for the city name.
 
@@ -40,7 +40,7 @@ class Geo(Chart):
         if name in self._coordinates:
             return self._coordinates[name]
 
-        coordinate = get_coordinate(name, country=maptype)
+        coordinate = get_coordinate(name, country=country)
         if coordinate is None and raise_exception:
             raise ValueError("No coordinate is specified for {}".format(name))
 
