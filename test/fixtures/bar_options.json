@@ -247,7 +247,12 @@
                 "textStyle": {
                     "fontSize": 12
                 }
-            }, 
+            },
+             "axisLine": {
+                "lineStyle": {
+                    "width": 1
+                }
+            },
             "axisTick": {
                 "alignWithLabel": false
             }, 
@@ -289,7 +294,12 @@
                 "textStyle": {
                     "fontSize": 12
                 }
-            }, 
+            },
+             "axisLine": {
+                "lineStyle": {
+                    "width": 1
+                }
+            },
             "axisTick": {
                 "alignWithLabel": false
             }, 
