@@ -1,4 +1,5 @@
 # coding=utf-8
+from __future__ import unicode_literals
 
 from pyecharts.charts.geo import Geo
 from pyecharts.constants import SYMBOL

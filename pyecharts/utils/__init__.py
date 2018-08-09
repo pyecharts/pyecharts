@@ -8,7 +8,6 @@ import codecs
 from future.utils import viewitems
 
 PY3 = sys.version_info[0] == 3
-PY2 = sys.version_info[0] == 2
 
 if PY3:
     string_type = str
@@ -21,8 +20,7 @@ __all__ = [
     "write_utf8_html_file",
     "to_css_length",
     "merge_js_dependencies",
-    "is_ascii",
-    "PY2"
+    "is_ascii"
 ]
 
 
