@@ -228,6 +228,8 @@ def xy_axis(
     xaxis_label_textsize=12,
     xaxis_label_textcolor=None,
     xaxis_formatter=None,
+    xaxis_line_color=None,
+    xaxis_line_width=1,
     yaxis_margin=8,
     yaxis_name_size=14,
     yaxis_name_gap=25,
@@ -243,6 +245,8 @@ def xy_axis(
     yaxis_label_textsize=12,
     yaxis_label_textcolor=None,
     yaxis_formatter="",
+    yaxis_line_color=None,
+    yaxis_line_width=1,
     is_convert=False,
     is_xaxis_inverse=False,
     is_yaxis_inverse=False,
@@ -332,6 +336,10 @@ def xy_axis(
             color: string,
         }
         ```
+    :param xaxis_line_color:
+        x 坐标轴线线的颜色，默认为 None
+    :param xaxis_line_width:
+        x 坐标轴线线的宽度，默认为 1
     :param yaxis_margin:
         y 轴刻度标签与轴线之间的距离。默认为 8
     :param yaxis_name_size:
@@ -401,7 +409,11 @@ def xy_axis(
             // 数据图形的颜色
             color: string,
         }
-        ```
+        ``
+    :param yaxis_line_color:
+        y 坐标轴线线的颜色，默认为 None
+    :param yaxis_line_width:
+        y 坐标轴线线的宽度，默认为 1
     :param is_convert:
         是否交换 x 轴与 y 轴
     :param is_xaxis_inverse:
@@ -440,6 +452,8 @@ def xy_axis(
         inverse=is_xaxis_inverse,
         value_range=[xaxis_min, xaxis_max],
         axis_type=xaxis_type,
+        axis_line_color=xaxis_line_color,
+        axis_line_width=xaxis_line_width,
         chart_type=type,
     )
     _xAxis["axisLabel"] = option.XAxisLabel(
@@ -463,6 +477,8 @@ def xy_axis(
         value_range=[yaxis_min, yaxis_max],
         split_line=is_splitline_show,
         axis_type=yaxis_type,
+        axis_line_color=yaxis_line_color,
+        axis_line_width=yaxis_line_width,
         chart_type=type,
     )
     _yAxis["axisLabel"] = option.YAxisLabel(
