@@ -620,8 +620,14 @@ bar.render()
 attr = ["{}天".format(i) for i in range(30)]
 v1 = [random.randint(1, 30) for _ in range(30)]
 bar = Bar("Bar - datazoom - inside 示例")
-bar.add("", attr, v1, is_datazoom_show=True, datazoom_type='inside',
-        datazoom_range=[10, 25])
+bar.add(
+    "",
+    attr,
+    v1,
+    is_datazoom_show=True,
+    datazoom_type="inside",
+    datazoom_range=[10, 25],
+)
 bar.render()
 ```
 ![bar-demo](https://user-images.githubusercontent.com/19553554/35081801-307b3d26-fc51-11e7-8ac7-eea2f2422402.gif)
@@ -631,8 +637,14 @@ bar.render()
 attr = ["{}天".format(i) for i in range(30)]
 v1 = [random.randint(1, 30) for _ in range(30)]
 bar = Bar("Bar - datazoom - inside 示例")
-bar.add("", attr, v1, is_datazoom_show=True, datazoom_type='both',
-        datazoom_range=[10, 25])
+bar.add(
+    "",
+    attr,
+    v1,
+    is_datazoom_show=True,
+    datazoom_type="both",
+    datazoom_range=[10, 25],
+)
 bar.render()
 ```
 ![bar-demo](https://user-images.githubusercontent.com/19553554/35081813-37fc4072-fc51-11e7-9b5c-a3ca2f0d1fef.gif)
@@ -985,18 +997,60 @@ es.render()
 **动态散点图各种图形**
 ```python
 es = EffectScatter("动态散点图各种图形示例")
-es.add("", [10], [10], symbol_size=20, effect_scale=3.5,
-       effect_period=3, symbol="pin")
-es.add("", [20], [20], symbol_size=12, effect_scale=4.5,
-       effect_period=4,symbol="rect")
-es.add("", [30], [30], symbol_size=30, effect_scale=5.5,
-       effect_period=5,symbol="roundRect")
-es.add("", [40], [40], symbol_size=10, effect_scale=6.5,
-       effect_brushtype='fill',symbol="diamond")
-es.add("", [50], [50], symbol_size=16, effect_scale=5.5,
-       effect_period=3,symbol="arrow")
-es.add("", [60], [60], symbol_size=6, effect_scale=2.5,
-       effect_period=3,symbol="triangle")
+es.add(
+    "",
+    [10],
+    [10],
+    symbol_size=20,
+    effect_scale=3.5,
+    effect_period=3,
+    symbol="pin",
+)
+es.add(
+    "",
+    [20],
+    [20],
+    symbol_size=12,
+    effect_scale=4.5,
+    effect_period=4,
+    symbol="rect",
+)
+es.add(
+    "",
+    [30],
+    [30],
+    symbol_size=30,
+    effect_scale=5.5,
+    effect_period=5,
+    symbol="roundRect",
+)
+es.add(
+    "",
+    [40],
+    [40],
+    symbol_size=10,
+    effect_scale=6.5,
+    effect_brushtype="fill",
+    symbol="diamond",
+)
+es.add(
+    "",
+    [50],
+    [50],
+    symbol_size=16,
+    effect_scale=5.5,
+    effect_period=3,
+    symbol="arrow",
+)
+es.add(
+    "",
+    [60],
+    [60],
+    symbol_size=6,
+    effect_scale=2.5,
+    effect_period=3,
+    symbol="triangle",
+)
 es.render()
 ```
 ![effectscatter-demo](https://user-images.githubusercontent.com/19553554/35090533-e7330076-fc74-11e7-9ba0-7cc4ff80e030.gif)
@@ -1029,16 +1083,29 @@ from pyecharts import Funnel
 attr = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
 value = [20, 40, 60, 80, 100, 120]
 funnel = Funnel("漏斗图示例")
-funnel.add("商品", attr, value, is_label_show=True,
-           label_pos="inside", label_text_color="#fff")
+funnel.add(
+    "商品",
+    attr,
+    value,
+    is_label_show=True,
+    label_pos="inside",
+    label_text_color="#fff",
+)
 funnel.render()
 ```
 ![funnel-demo](https://user-images.githubusercontent.com/19553554/35090181-d6b0e886-fc73-11e7-8e00-dec8ac38c415.gif)
 
 ```python
 funnel = Funnel("漏斗图示例", width=600, height=400, title_pos='center')
-funnel.add("商品", attr, value, is_label_show=True, label_pos="outside",
-           legend_orient='vertical', legend_pos='left')
+funnel.add(
+    "商品",
+    attr,
+    value,
+    is_label_show=True,
+    label_pos="outside",
+    legend_orient="vertical",
+    legend_pos="left",
+)
 funnel.render()
 ```
 ![funnel-demo](https://user-images.githubusercontent.com/19553554/35090186-d8f50db6-fc73-11e7-9b7e-947580a621de.png)
@@ -1073,8 +1140,14 @@ gauge.render()
 
 ```python
 gauge = Gauge("仪表盘示例")
-gauge.add("业务指标", "完成率", 166.66, angle_range=[180, 0],
-          scale_range=[0, 200], is_legend_show=False)
+gauge.add(
+    "业务指标",
+    "完成率",
+    166.66,
+    angle_range=[180, 0],
+    scale_range=[0, 200],
+    is_legend_show=False,
+)
 gauge.render()
 ```
 ![gauge-demo](https://user-images.githubusercontent.com/19553554/35090193-dc199d22-fc73-11e7-8f4d-22477a3a22be.png)
@@ -1618,8 +1691,15 @@ y_axis = [
     "Saturday", "Friday", "Thursday", "Wednesday", "Tuesday", "Monday", "Sunday"]
 data = [[i, j, random.randint(0, 50)] for i in range(24) for j in range(7)]
 heatmap = HeatMap()
-heatmap.add("热力图直角坐标系", x_axis, y_axis, data, is_visualmap=True,
-            visual_text_color="#000", visual_orient='horizontal')
+heatmap.add(
+    "热力图直角坐标系",
+    x_axis,
+    y_axis,
+    data,
+    is_visualmap=True,
+    visual_text_color="#000",
+    visual_orient="horizontal",
+)
 heatmap.render()
 ```
 ![heatmap-demo](https://user-images.githubusercontent.com/19553554/35090544-f306fcb8-fc74-11e7-8b0a-0284632c3c4d.gif)
@@ -1702,8 +1782,13 @@ kline.render()
 **Kline + dataZoom**
 ```python
 kline = Kline("K 线图示例")
-kline.add("日K", ["2017/7/{}".format(i + 1) for i in range(31)], v1,
-          mark_point=["max"], is_datazoom_show=True)
+kline.add(
+    "日K",
+    ["2017/7/{}".format(i + 1) for i in range(31)],
+    v1,
+    mark_point=["max"],
+    is_datazoom_show=True,
+)
 kline.render()
 ```
 ![kline-demo](https://user-images.githubusercontent.com/19553554/35090072-9b6ca404-fc73-11e7-8abe-e5576d35c57a.gif)
@@ -1711,9 +1796,14 @@ kline.render()
 **dataZoom 效果加在纵坐标轴上**
 ```python
 kline = Kline("K 线图示例")
-kline.add("日K", ["2017/7/{}".format(i + 1) for i in range(31)], v1,
-          mark_point=["max"], is_datazoom_show=True,
-          datazoom_orient='vertical')
+kline.add(
+    "日K",
+    ["2017/7/{}".format(i + 1) for i in range(31)],
+    v1,
+    mark_point=["max"],
+    is_datazoom_show=True,
+    datazoom_orient="vertical",
+)
 kline.render()
 ```
 ![kline-demo](https://user-images.githubusercontent.com/19553554/35090075-9d14041e-fc73-11e7-8b89-437ee75a9296.gif)
@@ -1721,9 +1811,15 @@ kline.render()
 **指定 markLine 位于开盘或者收盘上**
 ```python
 kline = Kline("K 线图示例")
-kline.add("日K", ["2017/7/{}".format(i + 1) for i in range(31)],
-          v1, mark_line=["max"], mark_line_symbolsize=0,
-          datazoom_orient='vertical', mark_line_valuedim='close')
+kline.add(
+    "日K",
+    ["2017/7/{}".format(i + 1) for i in range(31)],
+    v1,
+    mark_line=["max"],
+    mark_line_symbolsize=0,
+    datazoom_orient="vertical",
+    mark_line_valuedim="close",
+)
 kline.render()
 ```
 ![kline-demo](https://user-images.githubusercontent.com/19553554/35090078-9e901a44-fc73-11e7-835c-3408cc960bac.png)
@@ -2117,8 +2213,14 @@ attr = [
     "福建", "山东", "北京", "上海", "甘肃", "新疆", "河南", "广西", "西藏"
     ]
 map = Map("Map 结合 VisualMap 示例", width=1200, height=600)
-map.add("", attr, value, maptype='china', is_visualmap=True,
-        visual_text_color='#000')
+map.add(
+    "",
+    attr,
+    value,
+    maptype="china",
+    is_visualmap=True,
+    visual_text_color="#000",
+)
 map.render()
 ```
 ![map-demo](https://user-images.githubusercontent.com/19553554/35082380-75e1b89c-fc54-11e7-8169-75884ffb67fb.gif)
@@ -2131,8 +2233,9 @@ from pyecharts import Map
 value = [20, 190, 253, 77, 65]
 attr = ['汕头市', '汕尾市', '揭阳市', '阳江市', '肇庆市']
 map = Map("广东地图示例", width=1200, height=600)
-map.add("", attr, value, maptype='广东', is_visualmap=True,
-        visual_text_color='#000')
+map.add(
+    "", attr, value, maptype="广东", is_visualmap=True, visual_text_color="#000"
+)
 map.render()
 ```
 ![map-demo](https://user-images.githubusercontent.com/19553554/35082381-786c8542-fc54-11e7-8886-5e4047fbeefd.gif)
@@ -2141,8 +2244,14 @@ map.render()
 value = [95.1, 23.2, 43.3, 66.4, 88.5]
 attr= ["China", "Canada", "Brazil", "Russia", "United States"]
 map = Map("世界地图示例", width=1200, height=600)
-map.add("", attr, value, maptype="world", is_visualmap=True,
-        visual_text_color='#000')
+map.add(
+    "",
+    attr,
+    value,
+    maptype="world",
+    is_visualmap=True,
+    visual_text_color="#000",
+)
 map.render()
 ```
 ![map-demo](https://user-images.githubusercontent.com/19553554/35082382-7a37df3e-fc54-11e7-93e8-f9c02e465a2f.gif)
@@ -2152,8 +2261,15 @@ map.render()
 value = [95.1, 23.2, 43.3, 66.4, 88.5]
 attr= ["China", "Canada", "Brazil", "Russia", "United States"]
 map = Map("世界地图示例", width=1200, height=600)
-map.add("", attr, value, maptype="world", is_visualmap=True,
-        visual_text_color='#000', , is_map_symbol_show=False)
+map.add(
+    "",
+    attr,
+    value,
+    maptype="world",
+    is_visualmap=True,
+    visual_text_color="#000",
+    is_map_symbol_show=False,
+)
 map.render()
 ```
 ![map-demo](https://user-images.githubusercontent.com/19553554/35082387-7d35893e-fc54-11e7-8482-60dc23d31836.png)
@@ -2174,8 +2290,15 @@ from echarts_united_kingdom_pypkg import NM_WESTMINSTER_2016_UK
 value = []
 attr = []
 map = Map('United Kingdom', width=800, height=600)
-map.add('', attr, value, maptype='英国选区2016', is_visualmap=True,
-        visual_text_color="#000", name_map=NM_WESTMINSTER_2016_UK)
+map.add(
+    "",
+    attr,
+    value,
+    maptype="英国选区2016",
+    is_visualmap=True,
+    visual_text_color="#000",
+    name_map=NM_WESTMINSTER_2016_UK,
+)
 map.render()
 ```
 ![map-demo](https://user-images.githubusercontent.com/4280312/36720626-803ff194-1ba0-11e8-998b-548afbedc18e.png)
@@ -2346,9 +2469,16 @@ from pyecharts import Pie
 attr = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
 v1 = [11, 12, 13, 10, 10, 10]
 pie = Pie("饼图-圆环图示例", title_pos='center')
-pie.add("", attr, v1, radius=[40, 75], label_text_color=None,
-        is_label_show=True, legend_orient='vertical',
-        legend_pos='left')
+pie.add(
+    "",
+    attr,
+    v1,
+    radius=[40, 75],
+    label_text_color=None,
+    is_label_show=True,
+    legend_orient="vertical",
+    legend_pos="left",
+)
 pie.render()
 ```
 ![pie-demo](https://user-images.githubusercontent.com/19553554/35089631-70b6e7de-fc72-11e7-838d-f8b238bbc03f.png)
@@ -2360,11 +2490,26 @@ attr = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
 v1 = [11, 12, 13, 10, 10, 10]
 v2 = [19, 21, 32, 20, 20, 33]
 pie = Pie("饼图-玫瑰图示例", title_pos='center', width=900)
-pie.add("商品A", attr, v1, center=[25, 50], is_random=True,
-        radius=[30, 75], rosetype='radius')
-pie.add("商品B", attr, v2, center=[75, 50], is_random=True,
-        radius=[30, 75], rosetype='area',
-        is_legend_show=False, is_label_show=True)
+pie.add(
+    "商品A",
+    attr,
+    v1,
+    center=[25, 50],
+    is_random=True,
+    radius=[30, 75],
+    rosetype="radius",
+)
+pie.add(
+    "商品B",
+    attr,
+    v2,
+    center=[75, 50],
+    is_random=True,
+    radius=[30, 75],
+    rosetype="area",
+    is_legend_show=False,
+    is_label_show=True,
+)
 pie.render()
 ```
 ![pie-demo](https://user-images.githubusercontent.com/19553554/35089635-72585da2-fc72-11e7-835d-c9b64750d19d.png)
@@ -2376,14 +2521,38 @@ from pyecharts import Pie
 
 attr = ['A', 'B', 'C', 'D', 'E', 'F']
 pie = Pie("饼图示例", width=1000, height=600)
-pie.add("", attr, [random.randint(0, 100) for _ in range(6)],
-        radius=[50, 55], center=[25, 50], is_random=True)
-pie.add("", attr, [random.randint(20, 100) for _ in range(6)],
-        radius=[0, 45], center=[25, 50], rosetype='area')
-pie.add("", attr, [random.randint(0, 100) for _ in range(6)],
-        radius=[50, 55], center=[65, 50], is_random=True)
-pie.add("", attr, [random.randint(20, 100) for _ in range(6)],
-        radius=[0, 45], center=[65, 50], rosetype='radius')
+pie.add(
+    "",
+    attr,
+    [random.randint(0, 100) for _ in range(6)],
+    radius=[50, 55],
+    center=[25, 50],
+    is_random=True,
+)
+pie.add(
+    "",
+    attr,
+    [random.randint(20, 100) for _ in range(6)],
+    radius=[0, 45],
+    center=[25, 50],
+    rosetype="area",
+)
+pie.add(
+    "",
+    attr,
+    [random.randint(0, 100) for _ in range(6)],
+    radius=[50, 55],
+    center=[65, 50],
+    is_random=True,
+)
+pie.add(
+    "",
+    attr,
+    [random.randint(20, 100) for _ in range(6)],
+    radius=[0, 45],
+    center=[65, 50],
+    rosetype="radius",
+)
 pie.render()
 ```
 ![pie-demo](https://user-images.githubusercontent.com/19553554/35089639-73f0e2c4-fc72-11e7-9fba-84376a94314c.gif)
@@ -2400,26 +2569,42 @@ pie_style = style.add(
     label_text_color=None
 )
 
-pie.add("", ["剧情", ""], [25, 75], center=[10, 30],
-        radius=[18, 24], **pie_style)
-pie.add("", ["奇幻", ""], [24, 76], center=[30, 30],
-        radius=[18, 24], **pie_style)
-pie.add("", ["爱情", ""], [14, 86], center=[50, 30],
-        radius=[18, 24], **pie_style)
-pie.add("", ["惊悚", ""], [11, 89], center=[70, 30],
-        radius=[18, 24], **pie_style)
-pie.add("", ["冒险", ""], [27, 73], center=[90, 30],
-        radius=[18, 24], **pie_style)
-pie.add("", ["动作", ""], [15, 85], center=[10, 70],
-        radius=[18, 24], **pie_style)
-pie.add("", ["喜剧", ""], [54, 46], center=[30, 70],
-        radius=[18, 24], **pie_style)
-pie.add("", ["科幻", ""], [26, 74], center=[50, 70],
-        radius=[18, 24], **pie_style)
-pie.add("", ["悬疑", ""], [25, 75], center=[70, 70],
-        radius=[18, 24], **pie_style)
-pie.add("", ["犯罪", ""], [28, 72], center=[90, 70],
-        radius=[18, 24], legend_top="center", **pie_style)
+pie.add(
+    "", ["剧情", ""], [25, 75], center=[10, 30], radius=[18, 24], **pie_style
+)
+pie.add(
+    "", ["奇幻", ""], [24, 76], center=[30, 30], radius=[18, 24], **pie_style
+)
+pie.add(
+    "", ["爱情", ""], [14, 86], center=[50, 30], radius=[18, 24], **pie_style
+)
+pie.add(
+    "", ["惊悚", ""], [11, 89], center=[70, 30], radius=[18, 24], **pie_style
+)
+pie.add(
+    "", ["冒险", ""], [27, 73], center=[90, 30], radius=[18, 24], **pie_style
+)
+pie.add(
+    "", ["动作", ""], [15, 85], center=[10, 70], radius=[18, 24], **pie_style
+)
+pie.add(
+    "", ["喜剧", ""], [54, 46], center=[30, 70], radius=[18, 24], **pie_style
+)
+pie.add(
+    "", ["科幻", ""], [26, 74], center=[50, 70], radius=[18, 24], **pie_style
+)
+pie.add(
+    "", ["悬疑", ""], [25, 75], center=[70, 70], radius=[18, 24], **pie_style
+)
+pie.add(
+    "",
+    ["犯罪", ""],
+    [28, 72],
+    center=[90, 70],
+    radius=[18, 24],
+    legend_top="center",
+    **pie_style
+)
 pie.render()
 ```
 ![pie-demo](https://user-images.githubusercontent.com/19553554/35089644-76cbcb9e-fc72-11e7-8b9e-d5bebc78e8a1.gif)
@@ -2483,9 +2668,15 @@ from pyecharts import Polar
 import random
 data = [(i, random.randint(1, 100)) for i in range(101)]
 polar = Polar("极坐标系-散点图示例")
-polar.add("", data, boundary_gap=False, type='scatter',
-          is_splitline_show=False,
-          area_color=None, is_axisline_show=True)
+polar.add(
+    "",
+    data,
+    boundary_gap=False,
+    type="scatter",
+    is_splitline_show=False,
+    area_color=None,
+    is_axisline_show=True,
+)
 polar.render()
 ```
 ![polar-demo](https://user-images.githubusercontent.com/19553554/35090448-aaf0d5a2-fc74-11e7-83c4-7b2f55090e98.png)
@@ -2530,12 +2721,27 @@ from pyecharts import Polar
 
 radius = ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
 polar = Polar("极坐标系-堆叠柱状图示例", width=1200, height=600)
-polar.add("A", [1, 2, 3, 4, 3, 5, 1], radius_data=radius,
-          type='barRadius', is_stack=True)
-polar.add("B", [2, 4, 6, 1, 2, 3, 1], radius_data=radius,
-          type='barRadius', is_stack=True)
-polar.add("C", [1, 2, 3, 4, 1, 2, 5], radius_data=radius,
-          type='barRadius', is_stack=True)
+polar.add(
+    "A",
+    [1, 2, 3, 4, 3, 5, 1],
+    radius_data=radius,
+    type="barRadius",
+    is_stack=True,
+)
+polar.add(
+    "B",
+    [2, 4, 6, 1, 2, 3, 1],
+    radius_data=radius,
+    type="barRadius",
+    is_stack=True,
+)
+polar.add(
+    "C",
+    [1, 2, 3, 4, 1, 2, 5],
+    radius_data=radius,
+    type="barRadius",
+    is_stack=True,
+)
 polar.render()
 ```
 ![polar-demo](https://user-images.githubusercontent.com/19553554/35090457-afc0658e-fc74-11e7-9c58-24c780436287.gif)
@@ -2545,12 +2751,27 @@ from pyecharts import Polar
 
 radius = ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
 polar = Polar("极坐标系-堆叠柱状图示例", width=1200, height=600)
-polar.add("", [1, 2, 3, 4, 3, 5, 1], radius_data=radius,
-          type='barAngle', is_stack=True)
-polar.add("", [2, 4, 6, 1, 2, 3, 1], radius_data=radius,
-          type='barAngle', is_stack=True)
-polar.add("", [1, 2, 3, 4, 1, 2, 5], radius_data=radius,
-          type='barAngle', is_stack=True)
+polar.add(
+    "",
+    [1, 2, 3, 4, 3, 5, 1],
+    radius_data=radius,
+    type="barAngle",
+    is_stack=True,
+)
+polar.add(
+    "",
+    [2, 4, 6, 1, 2, 3, 1],
+    radius_data=radius,
+    type="barAngle",
+    is_stack=True,
+)
+polar.add(
+    "",
+    [1, 2, 3, 4, 1, 2, 5],
+    radius_data=radius,
+    type="barAngle",
+    is_stack=True,
+)
 polar.render()
 ```
 ![polar-demo](https://user-images.githubusercontent.com/19553554/35090460-b11ab380-fc74-11e7-836c-2e8197e32723.png)
@@ -2770,9 +2991,16 @@ links = [
     {'source': 'category5', 'target': 'category6', 'value': 25}
 ]
 sankey = Sankey("桑基图示例", width=1200, height=600)
-sankey.add("sankey", nodes, links, line_opacity=0.2,
-           line_curve=0.5, line_color='source',
-           is_label_show=True, label_pos='right')
+sankey.add(
+    "sankey",
+    nodes,
+    links,
+    line_opacity=0.2,
+    line_curve=0.5,
+    line_color="source",
+    is_label_show=True,
+    label_pos="right",
+)
 sankey.render()
 ```
 ![sankey-demo](https://user-images.githubusercontent.com/19553554/35090344-5b701286-fc74-11e7-8c53-9a5d0e6797e5.png)
@@ -2787,9 +3015,16 @@ from pyecharts import Sankey
 with codecs.open(os.path.join("fixtures", "energy.json"), "r", encoding="utf-8") as f:
     j = json.load(f)
 sankey = Sankey("桑基图示例", width=1200, height=600)
-sankey.add("sankey", nodes=j['nodes'], links=j['links'],
-           line_opacity=0.2, line_curve=0.5, line_color='source',
-           is_label_show=True, label_pos='right')
+sankey.add(
+    "sankey",
+    nodes=j["nodes"],
+    links=j["links"],
+    line_opacity=0.2,
+    line_curve=0.5,
+    line_color="source",
+    is_label_show=True,
+    label_pos="right",
+)
 sankey.render()
 ```
 ![sankey-1](https://user-images.githubusercontent.com/19553554/35090346-5c79d1da-fc74-11e7-869b-7db7ecf42d9e.png)
@@ -2842,8 +3077,14 @@ scatter.render()
 ```python
 scatter = Scatter("散点图示例")
 scatter.add("A", v1, v2)
-scatter.add("B", v1[::-1], v2, is_visualmap=True,
-            visual_type='size', visual_range_size=[20, 80])
+scatter.add(
+    "B",
+    v1[::-1],
+    v2,
+    is_visualmap=True,
+    visual_type="size",
+    visual_range_size=[20, 80],
+)
 scatter.render()
 ```
 ![scatter-demo](https://user-images.githubusercontent.com/19553554/35090360-62d94cfe-fc74-11e7-869f-ae3a3281f27b.gif)
@@ -2876,10 +3117,18 @@ x_lst = [v[0] for v in data]
 y_lst = [v[1] for v in data]
 extra_data = [v[2] for v in data]
 sc = Scatter()
-sc.add("scatter", x_lst, y_lst, extra_data=extra_data, is_visualmap=True,
-        visual_dimension=2, visual_orient='horizontal',
-        visual_type='size', visual_range=[254830, 1154605773],
-        visual_text_color='#000')
+sc.add(
+    "scatter",
+    x_lst,
+    y_lst,
+    extra_data=extra_data,
+    is_visualmap=True,
+    visual_dimension=2,
+    visual_orient="horizontal",
+    visual_type="size",
+    visual_range=[254830, 1154605773],
+    visual_text_color="#000",
+)
 sc.render()
 ```
 ![scatter-demo](https://user-images.githubusercontent.com/19553554/35090364-63f2ef78-fc74-11e7-950b-75ebd13e1f03.gif)
@@ -4166,24 +4415,54 @@ from pyecharts import Pie, Timeline
 
 attr = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
 pie_1 = Pie("2012 年销量比例", "数据纯属虚构")
-pie_1.add("秋季", attr, [randint(10, 100) for _ in range(6)],
-          is_label_show=True, radius=[30, 55], rosetype='radius')
+pie_1.add(
+    "秋季",
+    attr,
+    [randint(10, 100) for _ in range(6)],
+    is_label_show=True,
+    radius=[30, 55],
+    rosetype="radius",
+)
 
 pie_2 = Pie("2013 年销量比例", "数据纯属虚构")
-pie_2.add("秋季", attr, [randint(10, 100) for _ in range(6)],
-          is_label_show=True, radius=[30, 55], rosetype='radius')
+pie_2.add(
+    "秋季",
+    attr,
+    [randint(10, 100) for _ in range(6)],
+    is_label_show=True,
+    radius=[30, 55],
+    rosetype="radius",
+)
 
 pie_3 = Pie("2014 年销量比例", "数据纯属虚构")
-pie_3.add("秋季", attr, [randint(10, 100) for _ in range(6)],
-          is_label_show=True, radius=[30, 55], rosetype='radius')
+pie_3.add(
+    "秋季",
+    attr,
+    [randint(10, 100) for _ in range(6)],
+    is_label_show=True,
+    radius=[30, 55],
+    rosetype="radius",
+)
 
 pie_4 = Pie("2015 年销量比例", "数据纯属虚构")
-pie_4.add("秋季", attr, [randint(10, 100) for _ in range(6)],
-          is_label_show=True, radius=[30, 55], rosetype='radius')
+pie_4.add(
+    "秋季",
+    attr,
+    [randint(10, 100) for _ in range(6)],
+    is_label_show=True,
+    radius=[30, 55],
+    rosetype="radius",
+)
 
 pie_5 = Pie("2016 年销量比例", "数据纯属虚构")
-pie_5.add("秋季", attr, [randint(10, 100) for _ in range(6)],
-          is_label_show=True, radius=[30, 55], rosetype='radius')
+pie_5.add(
+    "秋季",
+    attr,
+    [randint(10, 100) for _ in range(6)],
+    is_label_show=True,
+    radius=[30, 55],
+    rosetype="radius",
+)
 
 timeline = Timeline(is_auto_play=True, timeline_bottom=0)
 timeline.add(pie_1, '2012 年')
