@@ -27,9 +27,9 @@ pyecharts 内置了一些常用的城市地理坐标数据，这些数据保存�
 }
 ```
 
-### 检索地理坐标
+### 检索中国地理坐标
 
-`get_coordinate(name)` 返回城市名称的地理坐标，如果未定义将返回 None 。
+`get_coordinate(name, country="CN")` 返回城市名称的地理坐标，如果未定义将返回 None 。
 
 ```python
 from pyecharts.datasets.coordinates import get_coordinate
@@ -59,12 +59,12 @@ print(result) # {'北京':[116.46, 39.92], '北京市': [116.4, 39.9]}
 ```python
 from pyecharts.datasets.coordinates import search_coordinates_by_keyword
 result = search_coordinates_by_keyword('福州', '杭州')
-print(result) # {'福州市': [119.3, 26.08], '杭州市': [120.15, 30.28] ...} 
+print(result) # {'福州市': [119.3, 26.08], '杭州市': [120.15, 30.28] ...}
 ```
 
 ### 按过滤函数搜索地理坐标
 
-`search_coordinates_by_filter(func)` 根据过滤函数，返回一个匹配的字典对象。
+`search_coordinates_by_filter(func, country='CN')` 根据过滤函数，返回一个匹配的字典对象。
 用法（结果同上）
 
 ```python
@@ -111,6 +111,64 @@ geo.add(
     effect_scale=5,
 )
 geo.render()
+```
+
+## 国际城市地里坐标
+
+自 v0.5.7 之后，[echarts-cities-pypkg](https://github.com/pyecharts/echarts-cities-pypkg) 给 pyecharts 补充了 [138,398 个城市地理坐标](https://github.com/echarts-maps/echarts-cities-js)，覆盖了200 多个国家。你可以配合 echarts-countries-pypkg 画地理散点图。
+
+### 安装方法
+
+```
+pip install echarts-cities-pypkg
+```
+
+### 使用方法
+
+```python
+from pyecharts.datasets.coordinates import get_coordinate
+
+coordinate = get_coordinate('Oxford', country="GB")
+print(coordinate) # [-1.25596, 51.75222]
+```
+
+### 按关键字搜索地理坐标
+
+`search_coordinates_by_country_and_keyword(*args)` 根据一个或多个关键字，返回一个匹配的字典对象。
+
+用法 1：单个关键字模糊搜索
+
+```python
+from pyecharts.datasets.coordinates import search_coordinates_by_country_and_keyword
+
+result = search_coordinates_by_country_and_keyword('GB', 'London')
+print(result)
+#{
+#    "Londonderry County Borough": [-7.30917, 54.99721],
+#    "City of London": [-0.09184, 51.51279],
+#    "London": [-0.12574, 51.50853],
+#}
+```
+
+用法 2：多个关键字模糊搜索
+
+```python
+from pyecharts.datasets.coordinates import search_coordinates_by_country_and_keyword
+result = search_coordinates_by_country_and_keyword('HK', 'Central', 'Hong Kong')
+print(result) # { "Hong Kong": [114.15769, 22.28552], "Central": [114.15846, 22.28299]}
+```
+
+### 按过滤函数搜索地理坐标
+
+```python
+from pyecharts.datasets.coordinates import search_coordinates_by_filter
+
+result = search_coordinates_by_filter(
+    func=lambda name: "Central" in name or "Hong Kong" in name,
+    country="HK",
+
+)
+print(result) # { "Hong Kong": [114.15769, 22.28552], "Central": [114.15846, 22.28299]}
 ```
 
 ## 地图数据
