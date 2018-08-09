@@ -63,8 +63,8 @@ def test_default_china_data_bank_with_mars():
 
 
 def test_two_digit_iso_code():
-    code = GEO_DATA_BANK.ensure_two_digit_iso_code('波斯尼亚-黑塞哥维那')
-    eq_(code, 'BA')
+    code = GEO_DATA_BANK.ensure_two_digit_iso_code('安提瓜和巴布达')
+    eq_(code, 'AG')
 
 
 def test_two_digit_iso_code_with_two_digit_code():
