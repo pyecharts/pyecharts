@@ -65,12 +65,6 @@ class GeoDataBank(PluginManager):
                 two_digit_code = self._translate_country(country)
         return two_digit_code
 
-    def contains_country_key(self, country):
-        country = self.ensure_two_digit_iso_code(country)
-        if not self.country_dict:
-            self._load_countries_into_memory()
-        return country in self.country_dict
-
     def _load_data_into_memory(self, country):
         self.geo_coordinates[country] = {}
         for pypkgs in self.registry.values():
