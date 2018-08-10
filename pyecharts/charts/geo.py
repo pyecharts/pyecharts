@@ -57,7 +57,7 @@ class Geo(Chart):
         value,
         type="scatter",
         maptype="china",
-        map_country="中国",
+        coordinate_country="中国",
         symbol_size=12,
         border_color="#111",
         geo_normal_color="#323c48",
@@ -79,7 +79,7 @@ class Geo(Chart):
         :param maptype:
             地图类型。 从 v0.3.2+ 起，地图已经变为扩展包，支持全国省份，全国城市，全国区县，
             全球国家等地图，具体请参考 [地图自定义篇](zh-cn/customize_map)
-        :param map_country:
+        :param coordinate_country:
             城市坐标所属国家。从 v0.5.7 引入，针对国际城市的地理位置的查找。
         :param symbol_size:
             标记图形大小。
@@ -110,7 +110,7 @@ class Geo(Chart):
         _data = []
         for _name, _value in zip(attr, value):
             _coordinate = self.get_coordinate(
-                _name, map_country, raise_exception=True)
+                _name, coordinate_country, raise_exception=True)
             _data_value = [_coordinate[0], _coordinate[1], _value]
             _data.append({"name": _name, "value": _data_value})
         self._option.update(
