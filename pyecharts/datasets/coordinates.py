@@ -65,6 +65,12 @@ class GeoDataBank(PluginManager):
                 two_digit_code = self._translate_country(country)
         return two_digit_code
 
+    def contains_country_key(self, country):
+        country = self.ensure_two_digit_iso_code(country)
+        if not self.country_dict:
+            self._load_countries_into_memory()
+        return country in self.country_dict
+
     def _load_data_into_memory(self, country):
         self.geo_coordinates[country] = {}
         for pypkgs in self.registry.values():
@@ -78,15 +84,18 @@ class GeoDataBank(PluginManager):
 
     def _translate_country(self, country):
         if not self.country_dict:
-            _country_dict = get_resource_dir("datasets",
-                                             COUNTRY_DB)
-            with codecs.open(_country_dict, encoding="utf-8") as file_handle:
-                self.country_dict = json.load(file_handle)
+            self._load_countries_into_memory()
         two_digit_code = self.country_dict.get(country)
         if two_digit_code is None:
             raise exceptions.CountryNotFound(
                 "Pyecharts have no knowledge of {}".format(country))
         return two_digit_code
+
+    def _load_countries_into_memory(self):
+        _country_dict = get_resource_dir("datasets",
+                                         COUNTRY_DB)
+        with codecs.open(_country_dict, encoding="utf-8") as file_handle:
+            self.country_dict = json.load(file_handle)
 
 
 @PluginInfo(constants.GEO_DATA_PLUGIN_TYPE, tags=['builtin'])

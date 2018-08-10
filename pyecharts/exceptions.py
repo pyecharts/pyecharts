@@ -24,4 +24,3 @@ class InvalidTheme(Exception):
 
 class CountryNotFound(Exception):
     pass
-

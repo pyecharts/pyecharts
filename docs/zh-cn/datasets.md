@@ -64,7 +64,7 @@ print(result) # {'福州市': [119.3, 26.08], '杭州市': [120.15, 30.28] ...}
 
 ### 按过滤函数搜索地理坐标
 
-`search_coordinates_by_filter(func, country='CN')` 根据过滤函数，返回一个匹配的字典对象。
+`search_coordinates_by_filter(func, country="CN")` 根据过滤函数，返回一个匹配的字典对象。
 用法（结果同上）
 
 ```python
@@ -141,7 +141,7 @@ print(coordinate) # [-1.25596, 51.75222]
 ```python
 from pyecharts.datasets.coordinates import search_coordinates_by_country_and_keyword
 
-result = search_coordinates_by_country_and_keyword('英国', 'London')
+result = search_coordinates_by_country_and_keyword("英国", 'London')
 print(result)
 #{
 #    "Londonderry County Borough": [-7.30917, 54.99721],
