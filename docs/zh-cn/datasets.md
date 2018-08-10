@@ -128,7 +128,7 @@ pip install echarts-cities-pypkg
 ```python
 from pyecharts.datasets.coordinates import get_coordinate
 
-coordinate = get_coordinate('Oxford', country="GB")
+coordinate = get_coordinate('Oxford', country="英国")
 print(coordinate) # [-1.25596, 51.75222]
 ```
 
@@ -141,7 +141,7 @@ print(coordinate) # [-1.25596, 51.75222]
 ```python
 from pyecharts.datasets.coordinates import search_coordinates_by_country_and_keyword
 
-result = search_coordinates_by_country_and_keyword('GB', 'London')
+result = search_coordinates_by_country_and_keyword('英国', 'London')
 print(result)
 #{
 #    "Londonderry County Borough": [-7.30917, 54.99721],
@@ -165,7 +165,7 @@ from pyecharts.datasets.coordinates import search_coordinates_by_filter
 
 result = search_coordinates_by_filter(
     func=lambda name: "Central" in name or "Hong Kong" in name,
-    country="HK",
+    country="香港",
 
 )
 print(result) # { "Hong Kong": [114.15769, 22.28552], "Central": [114.15846, 22.28299]}

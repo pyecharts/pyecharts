@@ -10,6 +10,7 @@ import codecs
 from lml.plugin import PluginManager, PluginInfo
 
 import pyecharts.constants as constants
+import pyecharts.exceptions as exceptions
 from pyecharts.utils import get_resource_dir, is_ascii
 
 
@@ -81,7 +82,11 @@ class GeoDataBank(PluginManager):
                                              COUNTRY_DB)
             with codecs.open(_country_dict, encoding="utf-8") as file_handle:
                 self.country_dict = json.load(file_handle)
-        return self.country_dict.get(country)
+        two_digit_code = self.country_dict.get(country)
+        if two_digit_code is None:
+            raise exceptions.CountryNotFound(
+                "Pyecharts have no knowledge of {}".format(country))
+        return two_digit_code
 
 
 @PluginInfo(constants.GEO_DATA_PLUGIN_TYPE, tags=['builtin'])

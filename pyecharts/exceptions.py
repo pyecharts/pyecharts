@@ -20,3 +20,8 @@ class ExtensionMissing(Exception):
 
 class InvalidTheme(Exception):
     pass
+
+
+class CountryNotFound(Exception):
+    pass
+

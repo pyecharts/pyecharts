@@ -3,7 +3,9 @@
 Test Case for the acccess interface of coordinate dataset
 """
 from __future__ import unicode_literals
-from nose.tools import eq_
+from nose.tools import eq_, raises
+from nose.tools import assert_dict_equal
+
 from pyecharts.datasets.coordinates import (
     get_coordinate,
     search_coordinates_by_country_and_keyword,
@@ -12,8 +14,7 @@ from pyecharts.datasets.coordinates import (
     DefaultChinaDataBank,
     GEO_DATA_BANK
 )
-
-from nose.tools import assert_dict_equal
+from pyecharts.exceptions import CountryNotFound
 
 
 def test_get_coordinate():
@@ -38,6 +39,18 @@ def test_search_coordinates_by_country():
     result = search_coordinates_by_country_and_keyword("CN", "北京")
     assert "北京" in result
     assert "北京市" in result
+
+
+def test_search_coordinates_by_country_in_chinese():
+    # search the city name containing '北京'
+    result = search_coordinates_by_country_and_keyword("中国", "北京")
+    assert "北京" in result
+    assert "北京市" in result
+
+
+@raises(CountryNotFound)
+def test_get_coordinate_from_unknown_country():
+    get_coordinate("Alien City", "Glaxy")
 
 
 def test_advance_search_coordinates():
