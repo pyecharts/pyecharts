@@ -21,7 +21,7 @@ __all__ = [
     "get_coordinate",
 ]
 
-REGION_DB = "countries_db.json"
+REGION_DB = "countries_regions_db.json"
 
 
 class GeoDataBank(PluginManager):
