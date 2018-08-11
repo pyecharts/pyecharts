@@ -1,4 +1,5 @@
 include pyecharts/datasets/city_coordinates.json
+include pyecharts/datasets/countries_regions_db.json
 include pyecharts/templates/*.html
 include README.md
 include changelog.md

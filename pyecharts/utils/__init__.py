@@ -20,6 +20,7 @@ __all__ = [
     "write_utf8_html_file",
     "to_css_length",
     "merge_js_dependencies",
+    "is_ascii",
 ]
 
 
@@ -136,3 +137,7 @@ def _clean_array(myarray):
 
 def remove_key_with_none_value(incoming_dict):
     return _expand(_clean_dict(incoming_dict))
+
+
+def is_ascii(s):
+    return all(ord(c) < 128 for c in s)

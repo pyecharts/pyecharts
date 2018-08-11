@@ -56,6 +56,16 @@ $ python setup.py install
 
 Please note: since version 0.3.2, **NO LONGER** pyecharts comes with any map files. Please read next section for more informations.
 
+### Geo Data extensions (0.5.7+)
+
+1. From geonames.org, [138,398 cities of the world with a population of at least 1000 inhabitants](https://github.com/echarts-maps/echarts-cities-js): [echarts-cities-pypkg](https://github.com/pyecharts/echarts-cities-pypkg)
+
+In order to install them, you can try one or all of them below:
+
+```shell
+$ pip install echarts-cities-pypkg
+```
+
 ### Map extensions
 
 Here is a list of map extensions from pyecharts dev team:
