@@ -53,6 +53,8 @@ class Axis(JsonSerializable):
         split_line=True,
         value_range=None,
         axis_type="value",
+        axis_line_color=None,
+        axis_line_width=1,
         chart_type=None,
     ):
         self._config = {
@@ -69,6 +71,11 @@ class Axis(JsonSerializable):
             "max": value_range[1],
             "type": axis_type,
             "splitLine": {"show": split_line},
+            "axisLine": {
+                "lineStyle": {
+                    "color": axis_line_color, "width": axis_line_width
+                }
+            },
         }
 
 

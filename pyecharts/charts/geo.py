@@ -1,4 +1,5 @@
 # coding=utf-8
+from __future__ import unicode_literals
 
 from pyecharts.chart import Chart
 from pyecharts.datasets.coordinates import get_coordinate
@@ -29,7 +30,7 @@ class Geo(Chart):
         """
         self._coordinates.update({name: [longitude, latitude]})
 
-    def get_coordinate(self, name, raise_exception=False):
+    def get_coordinate(self, name, region="中国", raise_exception=False):
         """
         Return coordinate for the city name.
 
@@ -40,7 +41,7 @@ class Geo(Chart):
         if name in self._coordinates:
             return self._coordinates[name]
 
-        coordinate = get_coordinate(name)
+        coordinate = get_coordinate(name, region=region)
         if coordinate is None and raise_exception:
             raise ValueError("No coordinate is specified for {}".format(name))
 
@@ -56,6 +57,7 @@ class Geo(Chart):
         value,
         type="scatter",
         maptype="china",
+        coordinate_region="中国",
         symbol_size=12,
         border_color="#111",
         geo_normal_color="#323c48",
@@ -77,6 +79,8 @@ class Geo(Chart):
         :param maptype:
             地图类型。 从 v0.3.2+ 起，地图已经变为扩展包，支持全国省份，全国城市，全国区县，
             全球国家等地图，具体请参考 [地图自定义篇](zh-cn/customize_map)
+        :param coordinate_region:
+            城市坐标所属国家。从 v0.5.7 引入，针对国际城市的地理位置的查找。
         :param symbol_size:
             标记图形大小。
         :param border_color:
@@ -105,7 +109,9 @@ class Geo(Chart):
 
         _data = []
         for _name, _value in zip(attr, value):
-            _coordinate = self.get_coordinate(_name, raise_exception=True)
+            _coordinate = self.get_coordinate(
+                _name, coordinate_region, raise_exception=True
+            )
             _data_value = [_coordinate[0], _coordinate[1], _value]
             _data.append({"name": _name, "value": _data_value})
         self._option.update(

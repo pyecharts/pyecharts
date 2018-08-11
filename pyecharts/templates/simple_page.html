@@ -6,9 +6,9 @@
     {{ echarts_js_dependencies(page) }}
 </head>
 <body>
-{% for chart in page %}
-    {{ echarts_container(chart) }}
-{% endfor %}
-{{ echarts_js_content(*page) }}
+    {% for chart in page %}
+        {{ echarts_container(chart) }}
+    {% endfor %}
+    {{ echarts_js_content(*page) }}
 </body>
 </html>

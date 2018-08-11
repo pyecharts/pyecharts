@@ -76,7 +76,9 @@
     指定生成的 html 文件中 `<title>` 标签的值。默认为'Echarts'
 * renderer -> str  
     指定使用渲染方式，有 'svg' 和 'canvas' 可选，默认为 'canvas'。3D 图仅能使用 'canvas'。
-    
+* extra_html_text_label -> list  
+    额外的 HTML 文本标签，(<p> 标签)。类型为 list，list[0] 为文本内容，list[1] 为字体风格样式（选填）。如 ["this is a p label", "color:red"]。**仅限于在单个图形或者 page 类时使用。**
+
 
 # 通用配置项
 **通用配置项均在 ```add()``` 中设置**
@@ -169,6 +171,10 @@
         color: string,
     }
     ```
+* xaxis_line_color -> str  
+    x 坐标轴线线的颜色，默认为 None
+* xaxis_line_width -> int  
+    x 坐标轴线线的宽度，默认为 1
 * y_axis -> list  
     y 坐标轴数据
 * yaxis_interval -> int  
@@ -235,6 +241,10 @@
     * 'log'：对数轴。适用于对数数据。
 * yaxis_rotate -> int  
     y 轴刻度标签旋转的角度，在类目轴的类目标签显示不下的时候可以通过旋转防止标签之间重叠。默认为 0，即不旋转。旋转的角度从 -90 度到 90 度。
+* yaxis_line_color -> str  
+    y 坐标轴线线的颜色，默认为 None
+* yaxis_line_width -> int  
+    y 坐标轴线线的宽度，默认为 1
 
 
 **dataZoom：dataZoom 组件 用于区域缩放，从而能自由关注细节的数据信息，或者概览数据整体，或者去除离群点的影响。(Line、Bar、Scatter、EffectScatter、Kline)**
@@ -610,8 +620,14 @@ bar.render()
 attr = ["{}天".format(i) for i in range(30)]
 v1 = [random.randint(1, 30) for _ in range(30)]
 bar = Bar("Bar - datazoom - inside 示例")
-bar.add("", attr, v1, is_datazoom_show=True, datazoom_type='inside',
-        datazoom_range=[10, 25])
+bar.add(
+    "",
+    attr,
+    v1,
+    is_datazoom_show=True,
+    datazoom_type="inside",
+    datazoom_range=[10, 25],
+)
 bar.render()
 ```
 ![bar-demo](https://user-images.githubusercontent.com/19553554/35081801-307b3d26-fc51-11e7-8ac7-eea2f2422402.gif)
@@ -621,8 +637,14 @@ bar.render()
 attr = ["{}天".format(i) for i in range(30)]
 v1 = [random.randint(1, 30) for _ in range(30)]
 bar = Bar("Bar - datazoom - inside 示例")
-bar.add("", attr, v1, is_datazoom_show=True, datazoom_type='both',
-        datazoom_range=[10, 25])
+bar.add(
+    "",
+    attr,
+    v1,
+    is_datazoom_show=True,
+    datazoom_type="both",
+    datazoom_range=[10, 25],
+)
 bar.render()
 ```
 ![bar-demo](https://user-images.githubusercontent.com/19553554/35081813-37fc4072-fc51-11e7-9b5c-a3ca2f0d1fef.gif)
@@ -708,6 +730,32 @@ bar.render()
 ```
 ![bar-demo](https://user-images.githubusercontent.com/19553554/35081822-3e090748-fc51-11e7-8bba-b775d29671e4.png)
 
+**额外的文本标签**
+```python
+from pyecharts import Bar
+
+bar = Bar("柱状图", extra_html_text_label=["bar_extra_html_text_label", "color:red"])
+bar.add("商家A", CLOTHES, clothes_v1, is_stack=True)
+bar.add("商家B", CLOTHES, clothes_v2, is_stack=True)
+bar.render()
+```
+![bar-demo](https://user-images.githubusercontent.com/19553554/43812932-31f22e0a-9af6-11e8-8fbe-c62b65daec41.png)
+
+**控制 X/Y 轴坐标轴线颜色以及宽度**
+```python
+bar = Bar("柱状图")
+bar.add(
+    "商家A",
+    CLOTHES,
+    clothes_v1,
+    xaxis_line_color="green",
+    xaxis_line_width=5,
+    xaxis_label_textcolor="black",
+)
+bar.render()
+```
+![bar-demo](https://user-images.githubusercontent.com/19553554/43877147-e30b5cf0-9bca-11e8-9bc7-c1cd7be58141.png)
+
 
 ## Bar3D（3D 柱状图）
 Bar3D.add() 方法签名
@@ -775,9 +823,17 @@ data = [
     ]
 range_color = ['#313695', '#4575b4', '#74add1', '#abd9e9', '#e0f3f8', '#ffffbf',
                '#fee090', '#fdae61', '#f46d43', '#d73027', '#a50026']
-bar3d.add("", x_axis, y_axis, [[d[1], d[0], d[2]] for d in data],
-          is_visualmap=True, visual_range=[0, 20],
-          visual_range_color=range_color, grid3d_width=200, grid3d_depth=80)
+bar3d.add(
+    "",
+    x_axis,
+    y_axis,
+    [[d[1], d[0], d[2]] for d in data],
+    is_visualmap=True,
+    visual_range=[0, 20],
+    visual_range_color=range_color,
+    grid3d_width=200,
+    grid3d_depth=80,
+)
 bar3d.render()
 ```
 ![bar3d-demo](https://user-images.githubusercontent.com/19553554/35081629-36a8e046-fc50-11e7-8910-e02bf24008d9.gif)
@@ -787,10 +843,18 @@ data 中，如 [1, 2, 3] 表示 x 轴的索引为 1，即 "1a"；y 轴的索引�
 **设置 ```grid3d_shading``` 可以让柱状更真实**
 ```python
 bar3d = Bar3D("3D 柱状图示例", width=1200, height=600)
-bar3d.add("", x_axis, y_axis, [[d[1], d[0], d[2]] for d in data],
-          is_visualmap=True, visual_range=[0, 20],
-          visual_range_color=range_color, grid3d_width=200,
-          grid3d_depth=80, grid3d_shading='lambert')
+bar3d.add(
+    "",
+    x_axis,
+    y_axis,
+    [[d[1], d[0], d[2]] for d in data],
+    is_visualmap=True,
+    visual_range=[0, 20],
+    visual_range_color=range_color,
+    grid3d_width=200,
+    grid3d_depth=80,
+    grid3d_shading="lambert",
+)
 bar3d.render()
 ```
 ![bar3d-demo](https://user-images.githubusercontent.com/19553554/35081631-38a0cb02-fc50-11e7-9f74-3d487bd98a3a.gif)
@@ -798,10 +862,18 @@ bar3d.render()
 **设置 ```is_grid3d_rotate``` 启动自动旋转功能**
 ```python
 bar3d = Bar3D("3D 柱状图示例", width=1200, height=600)
-bar3d.add("", x_axis, y_axis, [[d[1], d[0], d[2]] for d in data],
-          is_visualmap=True, visual_range=[0, 20],
-          visual_range_color=range_color, grid3d_width=200,
-          grid3d_depth=80, is_grid3d_rotate=True)
+bar3d.add(
+    "",
+    x_axis,
+    y_axis,
+    [[d[1], d[0], d[2]] for d in data],
+    is_visualmap=True,
+    visual_range=[0, 20],
+    visual_range_color=range_color,
+    grid3d_width=200,
+    grid3d_depth=80,
+    is_grid3d_rotate=True,
+)
 bar3d.render()
 ```
 ![bar3d-demo](https://user-images.githubusercontent.com/19553554/35081703-a70b544a-fc50-11e7-838a-53445cd8d203.gif)
@@ -809,10 +881,19 @@ bar3d.render()
 **设置 ```grid3d_rotate_speed``` 调节旋转速度**
 ```python
 bar3d = Bar3D("3D 柱状图示例", width=1200, height=600)
-bar3d.add("", x_axis, y_axis, [[d[1], d[0], d[2]] for d in data],
-          is_visualmap=True, visual_range=[0, 20],
-          visual_range_color=range_color, grid3d_width=200,
-          grid3d_depth=80, is_grid3d_rotate=True, grid3d_rotate_speed=180)
+bar3d.add(
+    "",
+    x_axis,
+    y_axis,
+    [[d[1], d[0], d[2]] for d in data],
+    is_visualmap=True,
+    visual_range=[0, 20],
+    visual_range_color=range_color,
+    grid3d_width=200,
+    grid3d_depth=80,
+    is_grid3d_rotate=True,
+    grid3d_rotate_speed=180,
+)
 bar3d.render()
 ```
 ![bar3d-demo](https://user-images.githubusercontent.com/19553554/35081705-a92a878c-fc50-11e7-8427-9066456db54c.gif)
@@ -916,18 +997,60 @@ es.render()
 **动态散点图各种图形**
 ```python
 es = EffectScatter("动态散点图各种图形示例")
-es.add("", [10], [10], symbol_size=20, effect_scale=3.5,
-       effect_period=3, symbol="pin")
-es.add("", [20], [20], symbol_size=12, effect_scale=4.5,
-       effect_period=4,symbol="rect")
-es.add("", [30], [30], symbol_size=30, effect_scale=5.5,
-       effect_period=5,symbol="roundRect")
-es.add("", [40], [40], symbol_size=10, effect_scale=6.5,
-       effect_brushtype='fill',symbol="diamond")
-es.add("", [50], [50], symbol_size=16, effect_scale=5.5,
-       effect_period=3,symbol="arrow")
-es.add("", [60], [60], symbol_size=6, effect_scale=2.5,
-       effect_period=3,symbol="triangle")
+es.add(
+    "",
+    [10],
+    [10],
+    symbol_size=20,
+    effect_scale=3.5,
+    effect_period=3,
+    symbol="pin",
+)
+es.add(
+    "",
+    [20],
+    [20],
+    symbol_size=12,
+    effect_scale=4.5,
+    effect_period=4,
+    symbol="rect",
+)
+es.add(
+    "",
+    [30],
+    [30],
+    symbol_size=30,
+    effect_scale=5.5,
+    effect_period=5,
+    symbol="roundRect",
+)
+es.add(
+    "",
+    [40],
+    [40],
+    symbol_size=10,
+    effect_scale=6.5,
+    effect_brushtype="fill",
+    symbol="diamond",
+)
+es.add(
+    "",
+    [50],
+    [50],
+    symbol_size=16,
+    effect_scale=5.5,
+    effect_period=3,
+    symbol="arrow",
+)
+es.add(
+    "",
+    [60],
+    [60],
+    symbol_size=6,
+    effect_scale=2.5,
+    effect_period=3,
+    symbol="triangle",
+)
 es.render()
 ```
 ![effectscatter-demo](https://user-images.githubusercontent.com/19553554/35090533-e7330076-fc74-11e7-9ba0-7cc4ff80e030.gif)
@@ -960,16 +1083,29 @@ from pyecharts import Funnel
 attr = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
 value = [20, 40, 60, 80, 100, 120]
 funnel = Funnel("漏斗图示例")
-funnel.add("商品", attr, value, is_label_show=True,
-           label_pos="inside", label_text_color="#fff")
+funnel.add(
+    "商品",
+    attr,
+    value,
+    is_label_show=True,
+    label_pos="inside",
+    label_text_color="#fff",
+)
 funnel.render()
 ```
 ![funnel-demo](https://user-images.githubusercontent.com/19553554/35090181-d6b0e886-fc73-11e7-8e00-dec8ac38c415.gif)
 
 ```python
 funnel = Funnel("漏斗图示例", width=600, height=400, title_pos='center')
-funnel.add("商品", attr, value, is_label_show=True, label_pos="outside",
-           legend_orient='vertical', legend_pos='left')
+funnel.add(
+    "商品",
+    attr,
+    value,
+    is_label_show=True,
+    label_pos="outside",
+    legend_orient="vertical",
+    legend_pos="left",
+)
 funnel.render()
 ```
 ![funnel-demo](https://user-images.githubusercontent.com/19553554/35090186-d8f50db6-fc73-11e7-9b7e-947580a621de.png)
@@ -1004,8 +1140,14 @@ gauge.render()
 
 ```python
 gauge = Gauge("仪表盘示例")
-gauge.add("业务指标", "完成率", 166.66, angle_range=[180, 0],
-          scale_range=[0, 200], is_legend_show=False)
+gauge.add(
+    "业务指标",
+    "完成率",
+    166.66,
+    angle_range=[180, 0],
+    scale_range=[0, 200],
+    is_legend_show=False,
+)
 gauge.render()
 ```
 ![gauge-demo](https://user-images.githubusercontent.com/19553554/35090193-dc199d22-fc73-11e7-8f4d-22477a3a22be.png)
@@ -1019,6 +1161,7 @@ Geo.add() 方法签名
 add(name, attr, value,
     type="scatter",
     maptype='china',
+    coordinate_region='中国',
     symbol_size=12,
     border_color="#111",
     geo_normal_color="#323c48",
@@ -1036,6 +1179,8 @@ add(name, attr, value,
     图例类型，有'scatter', 'effectScatter', 'heatmap'可选。默认为 'scatter'
 * maptype -> str  
     地图类型。 从 v0.3.2+ 起，地图已经变为扩展包，支持全国省份，全国城市，全国区县，全球国家等地图，具体请参考 [地图自定义篇](zh-cn/customize_map)
+* coordinate_region -> str
+    城市坐标所属国家。从 v0.5.7 引入，针对国际城市的地理位置的查找。
 * symbol_size -> int  
     标记图形大小。默认为 12
 * border_color -> str  
@@ -1088,12 +1233,25 @@ data = [
     ("湘潭", 154),("金华", 157),("岳阳", 169),("长沙", 175),("衢州", 177),("廊坊", 193),
     ("菏泽", 194),("合肥", 229),("武汉", 273),("大庆", 279)]
 
-geo = Geo("全国主要城市空气质量", "data from pm2.5", title_color="#fff",
-          title_pos="center", width=1200,
-          height=600, background_color='#404a59')
+geo = Geo(
+    "全国主要城市空气质量",
+    "data from pm2.5",
+    title_color="#fff",
+    title_pos="center",
+    width=1200,
+    height=600,
+    background_color="#404a59",
+)
 attr, value = geo.cast(data)
-geo.add("", attr, value, visual_range=[0, 200], visual_text_color="#fff",
-        symbol_size=15, is_visualmap=True)
+geo.add(
+    "",
+    attr,
+    value,
+    visual_range=[0, 200],
+    visual_text_color="#fff",
+    symbol_size=15,
+    is_visualmap=True,
+)
 geo.render()
 ```
 ![geo-demo](https://user-images.githubusercontent.com/19553554/35089650-7f06172e-fc72-11e7-9d4b-14437fb0d8fe.gif)
@@ -1102,24 +1260,52 @@ geo.render()
 
 **Scatter 类型（分段型）**
 ```python
-geo = Geo("全国主要城市空气质量", "data from pm2.5", title_color="#fff",
-          title_pos="center", width=1200,
-          height=600, background_color='#404a59')
+geo = Geo(
+    "全国主要城市空气质量",
+    "data from pm2.5",
+    title_color="#fff",
+    title_pos="center",
+    width=1200,
+    height=600,
+    background_color="#404a59",
+)
 attr, value = geo.cast(data)
-geo.add("", attr, value, visual_range=[0, 200], visual_text_color="#fff",
-        symbol_size=15, is_visualmap=True, is_piecewise=True, visual_split_number=6)
+geo.add(
+    "",
+    attr,
+    value,
+    visual_range=[0, 200],
+    visual_text_color="#fff",
+    symbol_size=15,
+    is_visualmap=True,
+    is_piecewise=True,
+    visual_split_number=6,
+)
 geo.render()
 ```
 ![geo-demo](https://user-images.githubusercontent.com/19553554/35089651-80d259a0-fc72-11e7-8af9-d96df53c0d49.gif)
 
 **HeatMap 类型**
 ```python
-geo = Geo("全国主要城市空气质量", "data from pm2.5", title_color="#fff",
-          title_pos="center", width=1200,
-          height=600, background_color='#404a59')
+geo = Geo(
+    "全国主要城市空气质量",
+    "data from pm2.5",
+    title_color="#fff",
+    title_pos="center",
+    width=1200,
+    height=600,
+    background_color="#404a59",
+)
 attr, value = geo.cast(data)
-geo.add("", attr, value, type="heatmap", is_visualmap=True, visual_range=[0, 300],
-        visual_text_color='#fff')
+geo.add(
+    "",
+    attr,
+    value,
+    type="heatmap",
+    is_visualmap=True,
+    visual_range=[0, 300],
+    visual_text_color="#fff",
+)
 geo.render()
 ```
 ![geo-demo](https://user-images.githubusercontent.com/19553554/35089653-82498f88-fc72-11e7-9811-2aceccd4ed68.gif)
@@ -1129,12 +1315,17 @@ geo.render()
 from pyecharts import Geo
 
 data = [
-    ("海门", 9), ("鄂尔多斯", 12), ("招远", 12),
-    ("舟山", 12), ("齐齐哈尔", 14), ("盐城", 15)
-    ]
-geo = Geo("全国主要城市空气质量", "data from pm2.5", title_color="#fff",
-          title_pos="center", width=1200,
-          height=600, background_color='#404a59')
+    ("海门", 9), ("鄂尔多斯", 12), ("招远", 12), ("舟山", 12), ("齐齐哈尔", 14), ("盐城", 15)
+]
+geo = Geo(
+    "全国主要城市空气质量",
+    "data from pm2.5",
+    title_color="#fff",
+    title_pos="center",
+    width=1200,
+    height=600,
+    background_color="#404a59",
+)
 attr, value = geo.cast(data)
 geo.add("", attr, value, type="effectScatter", is_random=True, effect_scale=5)
 geo.render()
@@ -1145,16 +1336,27 @@ geo.render()
 ```python
 from pyecharts import Geo
 
-data =[
-    ('汕头市', 50), ('汕尾市', 60), ('揭阳市', 35),
-    ('阳江市', 44), ('肇庆市', 72)
-    ]
-geo = Geo("广东城市空气质量", "data from pm2.5", title_color="#fff",
-          title_pos="center", width=1200,
-          height=600, background_color='#404a59')
+data = [("汕头市", 50), ("汕尾市", 60), ("揭阳市", 35), ("阳江市", 44), ("肇庆市", 72)]
+geo = Geo(
+    "广东城市空气质量",
+    "data from pm2.5",
+    title_color="#fff",
+    title_pos="center",
+    width=1200,
+    height=600,
+    background_color="#404a59",
+)
 attr, value = geo.cast(data)
-geo.add("", attr, value, maptype='广东', type="effectScatter",
-        is_random=True, effect_scale=5, is_legend_show=False)
+geo.add(
+    "",
+    attr,
+    value,
+    maptype="广东",
+    type="effectScatter",
+    is_random=True,
+    effect_scale=5,
+    is_legend_show=False,
+)
 geo.render()
 ```
 ![geo-demo](https://user-images.githubusercontent.com/19553554/35089657-85d0b7bc-fc72-11e7-8b3d-8127dbe8f780.gif)
@@ -1413,9 +1615,15 @@ graph.render()
 
 ```python
 graph = Graph("关系图-环形布局示例")
-graph.add("", nodes, links, is_label_show=True,
-          graph_repulsion=8000, graph_layout='circular',
-          label_text_color=None)
+graph.add(
+    "",
+    nodes,
+    links,
+    is_label_show=True,
+    graph_repulsion=8000,
+    graph_layout="circular",
+    label_text_color=None,
+)
 graph.render()
 ```
 ![graph-demo](https://user-images.githubusercontent.com/19553554/35082112-07074726-fc53-11e7-9f28-2d3b39c5e162.png)
@@ -1429,9 +1637,17 @@ with open(os.path.join("fixtures", "weibo.json"), "r", encoding="utf-8") as f:
     j = json.load(f)
     nodes, links, categories, cont, mid, userl = j
 graph = Graph("微博转发关系图", width=1200, height=600)
-graph.add("", nodes, links, categories, label_pos="right",
-          graph_repulsion=50, is_legend_show=False,
-          line_curve=0.2, label_text_color=None)
+graph.add(
+    "",
+    nodes,
+    links,
+    categories,
+    label_pos="right",
+    graph_repulsion=50,
+    is_legend_show=False,
+    line_curve=0.2,
+    label_text_color=None,
+)
 graph.render()
 ```
 ![graph-demo](https://user-images.githubusercontent.com/19553554/35081908-bb313aba-fc51-11e7-8ef5-df20be445d72.gif)
@@ -1478,8 +1694,15 @@ y_axis = [
     "Saturday", "Friday", "Thursday", "Wednesday", "Tuesday", "Monday", "Sunday"]
 data = [[i, j, random.randint(0, 50)] for i in range(24) for j in range(7)]
 heatmap = HeatMap()
-heatmap.add("热力图直角坐标系", x_axis, y_axis, data, is_visualmap=True,
-            visual_text_color="#000", visual_orient='horizontal')
+heatmap.add(
+    "热力图直角坐标系",
+    x_axis,
+    y_axis,
+    data,
+    is_visualmap=True,
+    visual_text_color="#000",
+    visual_orient="horizontal",
+)
 heatmap.render()
 ```
 ![heatmap-demo](https://user-images.githubusercontent.com/19553554/35090544-f306fcb8-fc74-11e7-8b0a-0284632c3c4d.gif)
@@ -1492,15 +1715,26 @@ from pyecharts import HeatMap
 
 begin = datetime.date(2017, 1, 1)
 end = datetime.date(2017, 12, 31)
-data = [[str(begin + datetime.timedelta(days=i)),
-        random.randint(1000, 25000)] for i in range((end - begin).days + 1)]
+data = [
+    [str(begin + datetime.timedelta(days=i)), random.randint(1000, 25000)]
+    for i in range((end - begin).days + 1)
+]
 heatmap = HeatMap("日历热力图示例", "某人 2017 年微信步数情况", width=1100)
-heatmap.add("", data, is_calendar_heatmap=True,
-            visual_text_color='#000', visual_range_text=['', ''],
-            visual_range=[1000, 25000], calendar_cell_size=['auto', 30],
-            is_visualmap=True, calendar_date_range="2017",
-            visual_orient="horizontal", visual_pos="center",
-            visual_top="80%", is_piecewise=True)
+heatmap.add(
+    "",
+    data,
+    is_calendar_heatmap=True,
+    visual_text_color="#000",
+    visual_range_text=["", ""],
+    visual_range=[1000, 25000],
+    calendar_cell_size=["auto", 30],
+    is_visualmap=True,
+    calendar_date_range="2017",
+    visual_orient="horizontal",
+    visual_pos="center",
+    visual_top="80%",
+    is_piecewise=True,
+)
 heatmap.render()
 ```
 ![heatmap-demo](https://user-images.githubusercontent.com/19553554/35090548-f51dfe0c-fc74-11e7-8a97-012fec231b85.gif)
@@ -1551,8 +1785,13 @@ kline.render()
 **Kline + dataZoom**
 ```python
 kline = Kline("K 线图示例")
-kline.add("日K", ["2017/7/{}".format(i + 1) for i in range(31)], v1,
-          mark_point=["max"], is_datazoom_show=True)
+kline.add(
+    "日K",
+    ["2017/7/{}".format(i + 1) for i in range(31)],
+    v1,
+    mark_point=["max"],
+    is_datazoom_show=True,
+)
 kline.render()
 ```
 ![kline-demo](https://user-images.githubusercontent.com/19553554/35090072-9b6ca404-fc73-11e7-8abe-e5576d35c57a.gif)
@@ -1560,9 +1799,14 @@ kline.render()
 **dataZoom 效果加在纵坐标轴上**
 ```python
 kline = Kline("K 线图示例")
-kline.add("日K", ["2017/7/{}".format(i + 1) for i in range(31)], v1,
-          mark_point=["max"], is_datazoom_show=True,
-          datazoom_orient='vertical')
+kline.add(
+    "日K",
+    ["2017/7/{}".format(i + 1) for i in range(31)],
+    v1,
+    mark_point=["max"],
+    is_datazoom_show=True,
+    datazoom_orient="vertical",
+)
 kline.render()
 ```
 ![kline-demo](https://user-images.githubusercontent.com/19553554/35090075-9d14041e-fc73-11e7-8b89-437ee75a9296.gif)
@@ -1570,9 +1814,15 @@ kline.render()
 **指定 markLine 位于开盘或者收盘上**
 ```python
 kline = Kline("K 线图示例")
-kline.add("日K", ["2017/7/{}".format(i + 1) for i in range(31)],
-          v1, mark_line=["max"], mark_line_symbolsize=0,
-          datazoom_orient='vertical', mark_line_valuedim='close')
+kline.add(
+    "日K",
+    ["2017/7/{}".format(i + 1) for i in range(31)],
+    v1,
+    mark_line=["max"],
+    mark_line_symbolsize=0,
+    datazoom_orient="vertical",
+    mark_line_valuedim="close",
+)
 kline.render()
 ```
 ![kline-demo](https://user-images.githubusercontent.com/19553554/35090078-9e901a44-fc73-11e7-835c-3408cc960bac.png)
@@ -1623,22 +1873,41 @@ line.render()
 **标记点其他配置**
 ```python
 line = Line("折线图示例")
-line.add("商家A", attr, v1, mark_point=["average", "max", "min"],
-         mark_point_symbol='diamond', mark_point_textcolor='#40ff27')
-line.add("商家B", attr, v2, mark_point=["average", "max", "min"],
-         mark_point_symbol='arrow', mark_point_symbolsize=40)
+line.add(
+    "商家A",
+    attr,
+    v1,
+    mark_point=["average", "max", "min"],
+    mark_point_symbol="diamond",
+    mark_point_textcolor="#40ff27",
+)
+line.add(
+    "商家B",
+    attr,
+    v2,
+    mark_point=["average", "max", "min"],
+    mark_point_symbol="arrow",
+    mark_point_symbolsize=40,
+)
 line.render()
 ```
 ![line-demo](https://user-images.githubusercontent.com/19553554/35089954-49784dd8-fc73-11e7-8a5b-d9163857c4b1.png)
 
 ```python
 line = Line("折线图示例")
-line.add("商家A", attr, v1,
-            mark_point=["average", {
-                "coord": ["裤子", 10], "name": "这是我想要的第一个标记点"}])
-line.add("商家B", attr, v2, is_smooth=True,
-            mark_point=[{
-                "coord": ["袜子", 80], "name": "这是我想要的第二个标记点"}])
+line.add(
+    "商家A",
+    attr,
+    v1,
+    mark_point=["average", {"coord": ["裤子", 10], "name": "这是我想要的第一个标记点"}],
+)
+line.add(
+    "商家B",
+    attr,
+    v2,
+    is_smooth=True,
+    mark_point=[{"coord": ["袜子", 80], "name": "这是我想要的第二个标记点"}],
+)
 line.render()
 ```
 ![line-demo](https://user-images.githubusercontent.com/19553554/35089957-4af28598-fc73-11e7-967b-cb6a431ed542.gif)
@@ -1660,10 +1929,24 @@ line.render()
 
 ```python
 line = Line("折线图-面积图示例")
-line.add("商家A", attr, v1, is_fill=True, line_opacity=0.2,
-         area_opacity=0.4, symbol=None)
-line.add("商家B", attr, v2, is_fill=True, area_color='#000',
-         area_opacity=0.3, is_smooth=True)
+line.add(
+    "商家A",
+    attr,
+    v1,
+    is_fill=True,
+    line_opacity=0.2,
+    area_opacity=0.4,
+    symbol=None,
+)
+line.add(
+    "商家B",
+    attr,
+    v2,
+    is_fill=True,
+    area_color="#000",
+    area_opacity=0.3,
+    is_smooth=True,
+)
 line.render()
 ```
 ![line-demo](https://user-images.githubusercontent.com/19553554/35089973-53868fd8-fc73-11e7-8ff6-bfb452954267.png)
@@ -1681,8 +1964,12 @@ line.render()
 import math, random
 line = Line("折线图示例")
 line.add("商家A", attr, [math.log10(random.randint(1, 99999)) for _ in range(6)])
-line.add("商家B", attr, [math.log10(random.randint(1, 99999999)) for _ in range(6)],
-         yaxis_type="log")
+line.add(
+    "商家B",
+    attr,
+    [math.log10(random.randint(1, 99999999)) for _ in range(6)],
+    yaxis_type="log",
+)
 line.render()
 ```
 ![line-demo](https://user-images.githubusercontent.com/19553554/35089976-5473125e-fc73-11e7-809c-adbfe6834b61.png)
@@ -1693,11 +1980,21 @@ from pyecharts import Line
 
 attr = ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
 line = Line("折线图示例")
-line.add("最高气温", attr, [11, 11, 15, 13, 12, 13, 10],
-         mark_point=["max", "min"], mark_line=["average"])
-line.add("最低气温", attr, [1, -2, 2, 5, 3, 2, 0],
-         mark_point=["max", "min"],  mark_line=["average"],
-         yaxis_formatter="°C")
+line.add(
+    "最高气温",
+    attr,
+    [11, 11, 15, 13, 12, 13, 10],
+    mark_point=["max", "min"],
+    mark_line=["average"],
+)
+line.add(
+    "最低气温",
+    attr,
+    [1, -2, 2, 5, 3, 2, 0],
+    mark_point=["max", "min"],
+    mark_line=["average"],
+    yaxis_formatter="°C",
+)
 line.render()
 ```
 ![line-demo](https://user-images.githubusercontent.com/19553554/35089980-5649aed0-fc73-11e7-9e8f-01ed75ad7418.gif)
@@ -1732,8 +2029,14 @@ range_color = [
     '#313695', '#4575b4', '#74add1', '#abd9e9', '#e0f3f8', '#ffffbf',
     '#fee090', '#fdae61', '#f46d43', '#d73027', '#a50026']
 line3d = Line3D("3D 折线图示例", width=1200, height=600)
-line3d.add("", _data, is_visualmap=True, visual_range_color=range_color,
-           visual_range=[0, 30], grid3d_rotate_sensitivity=5)
+line3d.add(
+    "",
+    _data,
+    is_visualmap=True,
+    visual_range_color=range_color,
+    visual_range=[0, 30],
+    grid3d_rotate_sensitivity=5,
+)
 line3d.render()
 ```
 ![line3d-demo](https://user-images.githubusercontent.com/19553554/35081902-b0bed8c6-fc51-11e7-9b3a-1d138c4eba13.gif)
@@ -1754,9 +2057,15 @@ range_color = [
     '#313695', '#4575b4', '#74add1', '#abd9e9', '#e0f3f8', '#ffffbf',
     '#fee090', '#fdae61', '#f46d43', '#d73027', '#a50026']
 line3d = Line3D("3D 折线图示例", width=1200, height=600)
-line3d.add("", _data, is_visualmap=True, visual_range_color=range_color,
-           visual_range=[0, 30], is_grid3d_rotate=True,
-           grid3d_rotate_speed=180)
+line3d.add(
+    "",
+    _data,
+    is_visualmap=True,
+    visual_range_color=range_color,
+    visual_range=[0, 30],
+    is_grid3d_rotate=True,
+    grid3d_rotate_speed=180,
+)
 line3d.render()
 ```
 ![line3d-demo](https://user-images.githubusercontent.com/19553554/35081903-b3a4eada-fc51-11e7-97b1-33f1dd6ed79e.gif)
@@ -1907,8 +2216,14 @@ attr = [
     "福建", "山东", "北京", "上海", "甘肃", "新疆", "河南", "广西", "西藏"
     ]
 map = Map("Map 结合 VisualMap 示例", width=1200, height=600)
-map.add("", attr, value, maptype='china', is_visualmap=True,
-        visual_text_color='#000')
+map.add(
+    "",
+    attr,
+    value,
+    maptype="china",
+    is_visualmap=True,
+    visual_text_color="#000",
+)
 map.render()
 ```
 ![map-demo](https://user-images.githubusercontent.com/19553554/35082380-75e1b89c-fc54-11e7-8169-75884ffb67fb.gif)
@@ -1921,8 +2236,9 @@ from pyecharts import Map
 value = [20, 190, 253, 77, 65]
 attr = ['汕头市', '汕尾市', '揭阳市', '阳江市', '肇庆市']
 map = Map("广东地图示例", width=1200, height=600)
-map.add("", attr, value, maptype='广东', is_visualmap=True,
-        visual_text_color='#000')
+map.add(
+    "", attr, value, maptype="广东", is_visualmap=True, visual_text_color="#000"
+)
 map.render()
 ```
 ![map-demo](https://user-images.githubusercontent.com/19553554/35082381-786c8542-fc54-11e7-8886-5e4047fbeefd.gif)
@@ -1931,8 +2247,14 @@ map.render()
 value = [95.1, 23.2, 43.3, 66.4, 88.5]
 attr= ["China", "Canada", "Brazil", "Russia", "United States"]
 map = Map("世界地图示例", width=1200, height=600)
-map.add("", attr, value, maptype="world", is_visualmap=True,
-        visual_text_color='#000')
+map.add(
+    "",
+    attr,
+    value,
+    maptype="world",
+    is_visualmap=True,
+    visual_text_color="#000",
+)
 map.render()
 ```
 ![map-demo](https://user-images.githubusercontent.com/19553554/35082382-7a37df3e-fc54-11e7-93e8-f9c02e465a2f.gif)
@@ -1942,8 +2264,15 @@ map.render()
 value = [95.1, 23.2, 43.3, 66.4, 88.5]
 attr= ["China", "Canada", "Brazil", "Russia", "United States"]
 map = Map("世界地图示例", width=1200, height=600)
-map.add("", attr, value, maptype="world", is_visualmap=True,
-        visual_text_color='#000', , is_map_symbol_show=False)
+map.add(
+    "",
+    attr,
+    value,
+    maptype="world",
+    is_visualmap=True,
+    visual_text_color="#000",
+    is_map_symbol_show=False,
+)
 map.render()
 ```
 ![map-demo](https://user-images.githubusercontent.com/19553554/35082387-7d35893e-fc54-11e7-8482-60dc23d31836.png)
@@ -1964,8 +2293,15 @@ from echarts_united_kingdom_pypkg import NM_WESTMINSTER_2016_UK
 value = []
 attr = []
 map = Map('United Kingdom', width=800, height=600)
-map.add('', attr, value, maptype='英国选区2016', is_visualmap=True,
-        visual_text_color="#000", name_map=NM_WESTMINSTER_2016_UK)
+map.add(
+    "",
+    attr,
+    value,
+    maptype="英国选区2016",
+    is_visualmap=True,
+    visual_text_color="#000",
+    name_map=NM_WESTMINSTER_2016_UK,
+)
 map.render()
 ```
 ![map-demo](https://user-images.githubusercontent.com/4280312/36720626-803ff194-1ba0-11e8-998b-548afbedc18e.png)
@@ -2136,9 +2472,16 @@ from pyecharts import Pie
 attr = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
 v1 = [11, 12, 13, 10, 10, 10]
 pie = Pie("饼图-圆环图示例", title_pos='center')
-pie.add("", attr, v1, radius=[40, 75], label_text_color=None,
-        is_label_show=True, legend_orient='vertical',
-        legend_pos='left')
+pie.add(
+    "",
+    attr,
+    v1,
+    radius=[40, 75],
+    label_text_color=None,
+    is_label_show=True,
+    legend_orient="vertical",
+    legend_pos="left",
+)
 pie.render()
 ```
 ![pie-demo](https://user-images.githubusercontent.com/19553554/35089631-70b6e7de-fc72-11e7-838d-f8b238bbc03f.png)
@@ -2150,11 +2493,26 @@ attr = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
 v1 = [11, 12, 13, 10, 10, 10]
 v2 = [19, 21, 32, 20, 20, 33]
 pie = Pie("饼图-玫瑰图示例", title_pos='center', width=900)
-pie.add("商品A", attr, v1, center=[25, 50], is_random=True,
-        radius=[30, 75], rosetype='radius')
-pie.add("商品B", attr, v2, center=[75, 50], is_random=True,
-        radius=[30, 75], rosetype='area',
-        is_legend_show=False, is_label_show=True)
+pie.add(
+    "商品A",
+    attr,
+    v1,
+    center=[25, 50],
+    is_random=True,
+    radius=[30, 75],
+    rosetype="radius",
+)
+pie.add(
+    "商品B",
+    attr,
+    v2,
+    center=[75, 50],
+    is_random=True,
+    radius=[30, 75],
+    rosetype="area",
+    is_legend_show=False,
+    is_label_show=True,
+)
 pie.render()
 ```
 ![pie-demo](https://user-images.githubusercontent.com/19553554/35089635-72585da2-fc72-11e7-835d-c9b64750d19d.png)
@@ -2166,14 +2524,38 @@ from pyecharts import Pie
 
 attr = ['A', 'B', 'C', 'D', 'E', 'F']
 pie = Pie("饼图示例", width=1000, height=600)
-pie.add("", attr, [random.randint(0, 100) for _ in range(6)],
-        radius=[50, 55], center=[25, 50], is_random=True)
-pie.add("", attr, [random.randint(20, 100) for _ in range(6)],
-        radius=[0, 45], center=[25, 50], rosetype='area')
-pie.add("", attr, [random.randint(0, 100) for _ in range(6)],
-        radius=[50, 55], center=[65, 50], is_random=True)
-pie.add("", attr, [random.randint(20, 100) for _ in range(6)],
-        radius=[0, 45], center=[65, 50], rosetype='radius')
+pie.add(
+    "",
+    attr,
+    [random.randint(0, 100) for _ in range(6)],
+    radius=[50, 55],
+    center=[25, 50],
+    is_random=True,
+)
+pie.add(
+    "",
+    attr,
+    [random.randint(20, 100) for _ in range(6)],
+    radius=[0, 45],
+    center=[25, 50],
+    rosetype="area",
+)
+pie.add(
+    "",
+    attr,
+    [random.randint(0, 100) for _ in range(6)],
+    radius=[50, 55],
+    center=[65, 50],
+    is_random=True,
+)
+pie.add(
+    "",
+    attr,
+    [random.randint(20, 100) for _ in range(6)],
+    radius=[0, 45],
+    center=[65, 50],
+    rosetype="radius",
+)
 pie.render()
 ```
 ![pie-demo](https://user-images.githubusercontent.com/19553554/35089639-73f0e2c4-fc72-11e7-9fba-84376a94314c.gif)
@@ -2190,26 +2572,42 @@ pie_style = style.add(
     label_text_color=None
 )
 
-pie.add("", ["剧情", ""], [25, 75], center=[10, 30],
-        radius=[18, 24], **pie_style)
-pie.add("", ["奇幻", ""], [24, 76], center=[30, 30],
-        radius=[18, 24], **pie_style)
-pie.add("", ["爱情", ""], [14, 86], center=[50, 30],
-        radius=[18, 24], **pie_style)
-pie.add("", ["惊悚", ""], [11, 89], center=[70, 30],
-        radius=[18, 24], **pie_style)
-pie.add("", ["冒险", ""], [27, 73], center=[90, 30],
-        radius=[18, 24], **pie_style)
-pie.add("", ["动作", ""], [15, 85], center=[10, 70],
-        radius=[18, 24], **pie_style)
-pie.add("", ["喜剧", ""], [54, 46], center=[30, 70],
-        radius=[18, 24], **pie_style)
-pie.add("", ["科幻", ""], [26, 74], center=[50, 70],
-        radius=[18, 24], **pie_style)
-pie.add("", ["悬疑", ""], [25, 75], center=[70, 70],
-        radius=[18, 24], **pie_style)
-pie.add("", ["犯罪", ""], [28, 72], center=[90, 70],
-        radius=[18, 24], legend_top="center", **pie_style)
+pie.add(
+    "", ["剧情", ""], [25, 75], center=[10, 30], radius=[18, 24], **pie_style
+)
+pie.add(
+    "", ["奇幻", ""], [24, 76], center=[30, 30], radius=[18, 24], **pie_style
+)
+pie.add(
+    "", ["爱情", ""], [14, 86], center=[50, 30], radius=[18, 24], **pie_style
+)
+pie.add(
+    "", ["惊悚", ""], [11, 89], center=[70, 30], radius=[18, 24], **pie_style
+)
+pie.add(
+    "", ["冒险", ""], [27, 73], center=[90, 30], radius=[18, 24], **pie_style
+)
+pie.add(
+    "", ["动作", ""], [15, 85], center=[10, 70], radius=[18, 24], **pie_style
+)
+pie.add(
+    "", ["喜剧", ""], [54, 46], center=[30, 70], radius=[18, 24], **pie_style
+)
+pie.add(
+    "", ["科幻", ""], [26, 74], center=[50, 70], radius=[18, 24], **pie_style
+)
+pie.add(
+    "", ["悬疑", ""], [25, 75], center=[70, 70], radius=[18, 24], **pie_style
+)
+pie.add(
+    "",
+    ["犯罪", ""],
+    [28, 72],
+    center=[90, 70],
+    radius=[18, 24],
+    legend_top="center",
+    **pie_style
+)
 pie.render()
 ```
 ![pie-demo](https://user-images.githubusercontent.com/19553554/35089644-76cbcb9e-fc72-11e7-8b9e-d5bebc78e8a1.gif)
@@ -2273,9 +2671,15 @@ from pyecharts import Polar
 import random
 data = [(i, random.randint(1, 100)) for i in range(101)]
 polar = Polar("极坐标系-散点图示例")
-polar.add("", data, boundary_gap=False, type='scatter',
-          is_splitline_show=False,
-          area_color=None, is_axisline_show=True)
+polar.add(
+    "",
+    data,
+    boundary_gap=False,
+    type="scatter",
+    is_splitline_show=False,
+    area_color=None,
+    is_axisline_show=True,
+)
 polar.render()
 ```
 ![polar-demo](https://user-images.githubusercontent.com/19553554/35090448-aaf0d5a2-fc74-11e7-83c4-7b2f55090e98.png)
@@ -2320,12 +2724,27 @@ from pyecharts import Polar
 
 radius = ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
 polar = Polar("极坐标系-堆叠柱状图示例", width=1200, height=600)
-polar.add("A", [1, 2, 3, 4, 3, 5, 1], radius_data=radius,
-          type='barRadius', is_stack=True)
-polar.add("B", [2, 4, 6, 1, 2, 3, 1], radius_data=radius,
-          type='barRadius', is_stack=True)
-polar.add("C", [1, 2, 3, 4, 1, 2, 5], radius_data=radius,
-          type='barRadius', is_stack=True)
+polar.add(
+    "A",
+    [1, 2, 3, 4, 3, 5, 1],
+    radius_data=radius,
+    type="barRadius",
+    is_stack=True,
+)
+polar.add(
+    "B",
+    [2, 4, 6, 1, 2, 3, 1],
+    radius_data=radius,
+    type="barRadius",
+    is_stack=True,
+)
+polar.add(
+    "C",
+    [1, 2, 3, 4, 1, 2, 5],
+    radius_data=radius,
+    type="barRadius",
+    is_stack=True,
+)
 polar.render()
 ```
 ![polar-demo](https://user-images.githubusercontent.com/19553554/35090457-afc0658e-fc74-11e7-9c58-24c780436287.gif)
@@ -2335,12 +2754,27 @@ from pyecharts import Polar
 
 radius = ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
 polar = Polar("极坐标系-堆叠柱状图示例", width=1200, height=600)
-polar.add("", [1, 2, 3, 4, 3, 5, 1], radius_data=radius,
-          type='barAngle', is_stack=True)
-polar.add("", [2, 4, 6, 1, 2, 3, 1], radius_data=radius,
-          type='barAngle', is_stack=True)
-polar.add("", [1, 2, 3, 4, 1, 2, 5], radius_data=radius,
-          type='barAngle', is_stack=True)
+polar.add(
+    "",
+    [1, 2, 3, 4, 3, 5, 1],
+    radius_data=radius,
+    type="barAngle",
+    is_stack=True,
+)
+polar.add(
+    "",
+    [2, 4, 6, 1, 2, 3, 1],
+    radius_data=radius,
+    type="barAngle",
+    is_stack=True,
+)
+polar.add(
+    "",
+    [1, 2, 3, 4, 1, 2, 5],
+    radius_data=radius,
+    type="barAngle",
+    is_stack=True,
+)
 polar.render()
 ```
 ![polar-demo](https://user-images.githubusercontent.com/19553554/35090460-b11ab380-fc74-11e7-836c-2e8197e32723.png)
@@ -2560,9 +2994,16 @@ links = [
     {'source': 'category5', 'target': 'category6', 'value': 25}
 ]
 sankey = Sankey("桑基图示例", width=1200, height=600)
-sankey.add("sankey", nodes, links, line_opacity=0.2,
-           line_curve=0.5, line_color='source',
-           is_label_show=True, label_pos='right')
+sankey.add(
+    "sankey",
+    nodes,
+    links,
+    line_opacity=0.2,
+    line_curve=0.5,
+    line_color="source",
+    is_label_show=True,
+    label_pos="right",
+)
 sankey.render()
 ```
 ![sankey-demo](https://user-images.githubusercontent.com/19553554/35090344-5b701286-fc74-11e7-8c53-9a5d0e6797e5.png)
@@ -2577,9 +3018,16 @@ from pyecharts import Sankey
 with codecs.open(os.path.join("fixtures", "energy.json"), "r", encoding="utf-8") as f:
     j = json.load(f)
 sankey = Sankey("桑基图示例", width=1200, height=600)
-sankey.add("sankey", nodes=j['nodes'], links=j['links'],
-           line_opacity=0.2, line_curve=0.5, line_color='source',
-           is_label_show=True, label_pos='right')
+sankey.add(
+    "sankey",
+    nodes=j["nodes"],
+    links=j["links"],
+    line_opacity=0.2,
+    line_curve=0.5,
+    line_color="source",
+    is_label_show=True,
+    label_pos="right",
+)
 sankey.render()
 ```
 ![sankey-1](https://user-images.githubusercontent.com/19553554/35090346-5c79d1da-fc74-11e7-869b-7db7ecf42d9e.png)
@@ -2600,8 +3048,10 @@ add(name, x_axis, y_axis,
     x 坐标轴数据
 * y_axis -> list  
     y 坐标轴数据
-* extra_data -> int  
+* extra_data -> list[int]  
     第三维度数据，x 轴为第一个维度，y 轴为第二个维度。（可在 visualmap 中将视图元素映射到第三维度）
+* extra_name -> list[str]  
+    额外的数据项的名称，可以为每个数据点指定一个名称。
 * symbol_size -> int  
     标记图形大小，默认为 10
 
@@ -2630,8 +3080,14 @@ scatter.render()
 ```python
 scatter = Scatter("散点图示例")
 scatter.add("A", v1, v2)
-scatter.add("B", v1[::-1], v2, is_visualmap=True,
-            visual_type='size', visual_range_size=[20, 80])
+scatter.add(
+    "B",
+    v1[::-1],
+    v2,
+    is_visualmap=True,
+    visual_type="size",
+    visual_range_size=[20, 80],
+)
 scatter.render()
 ```
 ![scatter-demo](https://user-images.githubusercontent.com/19553554/35090360-62d94cfe-fc74-11e7-869f-ae3a3281f27b.gif)
@@ -2664,14 +3120,55 @@ x_lst = [v[0] for v in data]
 y_lst = [v[1] for v in data]
 extra_data = [v[2] for v in data]
 sc = Scatter()
-sc.add("scatter", x_lst, y_lst, extra_data=extra_data, is_visualmap=True,
-        visual_dimension=2, visual_orient='horizontal',
-        visual_type='size', visual_range=[254830, 1154605773],
-        visual_text_color='#000')
+sc.add(
+    "scatter",
+    x_lst,
+    y_lst,
+    extra_data=extra_data,
+    is_visualmap=True,
+    visual_dimension=2,
+    visual_orient="horizontal",
+    visual_type="size",
+    visual_range=[254830, 1154605773],
+    visual_text_color="#000",
+)
 sc.render()
 ```
 ![scatter-demo](https://user-images.githubusercontent.com/19553554/35090364-63f2ef78-fc74-11e7-950b-75ebd13e1f03.gif)
 
+**为每个坐标点指定一个名称，可用于 tooltip 展示**
+```python
+
+def custom_formatter(params):
+    return params.value[3]
+
+data = [
+    [28604, 77, 17096],
+    [31163, 77.4, 27662],
+    [1516, 68, 11546],
+]
+x_lst = [v[0] for v in data]
+y_lst = [v[1] for v in data]
+extra_data = [v[2] for v in data]
+extra_name = ["point A", "point B", "point C"]
+sc = Scatter()
+sc.add(
+    "scatter",
+    x_lst,
+    y_lst,
+    extra_data=extra_data,
+    extra_name=extra_name,
+    is_visualmap=True,
+    visual_dimension=2,
+    visual_orient="horizontal",
+    visual_type="size",
+    visual_range=[17000, 28000],
+    visual_text_color="#000",
+    tooltip_formatter=custom_formatter,
+)
+sc.render()
+```
+![scatter-demo](https://user-images.githubusercontent.com/19553554/43563684-e5e3cc34-9655-11e8-9792-0aa03a9233c6.gif)
 
 **Note：** 请配合 通用配置项 中的 Visualmap 使用
 
@@ -3787,6 +4284,43 @@ page.render()
 ```
 ![page-demo](https://user-images.githubusercontent.com/19553554/35104305-66f2a766-fca3-11e7-8ffd-8e85911fdea5.gif)
 
+**Page 类的额外的文本标签，由各图形本身携带**
+```python
+from pyecharts import *
+
+page = Page()
+line = Line("折线图示例", extra_html_text_label=["LINE TEXT LABEL", "color:red"])
+line.add(
+    "最高气温",
+    WEEK,
+    [11, 11, 15, 13, 12, 13, 10],
+    mark_point=["max", "min"],
+    mark_line=["average"],
+)
+page.add(line)
+
+v1 = [11, 12, 13, 10, 10, 10]
+pie = Pie("饼图-圆环图示例", title_pos="center", extra_html_text_label=["PIE TEXT LABEL"])
+pie.add(
+    "",
+    CLOTHES,
+    v1,
+    radius=[40, 75],
+    label_text_color=None,
+    is_label_show=True,
+    legend_orient="vertical",
+    legend_pos="left",
+)
+page.add(pie)
+
+v2 = [10, 25, 8, 60, 20, 80]
+bar = Bar("柱状图", extra_html_text_label=["BAR TEXT LABEL"])
+bar.add("商家B", CLOTHES, v2)
+page.add(bar)
+page.render()
+```
+![page-demo](https://user-images.githubusercontent.com/19553554/43813125-e4ef7e2c-9af6-11e8-96a0-a6b53b0c136f.gif)
+
 
 ## Timeline：提供时间线轮播多张图
 Timeline 类的使用：
@@ -3884,24 +4418,54 @@ from pyecharts import Pie, Timeline
 
 attr = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
 pie_1 = Pie("2012 年销量比例", "数据纯属虚构")
-pie_1.add("秋季", attr, [randint(10, 100) for _ in range(6)],
-          is_label_show=True, radius=[30, 55], rosetype='radius')
+pie_1.add(
+    "秋季",
+    attr,
+    [randint(10, 100) for _ in range(6)],
+    is_label_show=True,
+    radius=[30, 55],
+    rosetype="radius",
+)
 
 pie_2 = Pie("2013 年销量比例", "数据纯属虚构")
-pie_2.add("秋季", attr, [randint(10, 100) for _ in range(6)],
-          is_label_show=True, radius=[30, 55], rosetype='radius')
+pie_2.add(
+    "秋季",
+    attr,
+    [randint(10, 100) for _ in range(6)],
+    is_label_show=True,
+    radius=[30, 55],
+    rosetype="radius",
+)
 
 pie_3 = Pie("2014 年销量比例", "数据纯属虚构")
-pie_3.add("秋季", attr, [randint(10, 100) for _ in range(6)],
-          is_label_show=True, radius=[30, 55], rosetype='radius')
+pie_3.add(
+    "秋季",
+    attr,
+    [randint(10, 100) for _ in range(6)],
+    is_label_show=True,
+    radius=[30, 55],
+    rosetype="radius",
+)
 
 pie_4 = Pie("2015 年销量比例", "数据纯属虚构")
-pie_4.add("秋季", attr, [randint(10, 100) for _ in range(6)],
-          is_label_show=True, radius=[30, 55], rosetype='radius')
+pie_4.add(
+    "秋季",
+    attr,
+    [randint(10, 100) for _ in range(6)],
+    is_label_show=True,
+    radius=[30, 55],
+    rosetype="radius",
+)
 
 pie_5 = Pie("2016 年销量比例", "数据纯属虚构")
-pie_5.add("秋季", attr, [randint(10, 100) for _ in range(6)],
-          is_label_show=True, radius=[30, 55], rosetype='radius')
+pie_5.add(
+    "秋季",
+    attr,
+    [randint(10, 100) for _ in range(6)],
+    is_label_show=True,
+    radius=[30, 55],
+    rosetype="radius",
+)
 
 timeline = Timeline(is_auto_play=True, timeline_bottom=0)
 timeline.add(pie_1, '2012 年')
