@@ -114,11 +114,7 @@ def test_scatter_extra_name():
     def custom_formatter(params):
         return params.value[3]
 
-    data = [
-        [28604, 77, 17096],
-        [31163, 77.4, 27662],
-        [1516, 68, 11546],
-    ]
+    data = [[28604, 77, 17096], [31163, 77.4, 27662], [1516, 68, 11546]]
     x_lst = [v[0] for v in data]
     y_lst = [v[1] for v in data]
     extra_data = [v[2] for v in data]

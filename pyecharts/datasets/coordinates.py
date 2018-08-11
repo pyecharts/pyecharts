@@ -25,10 +25,9 @@ REGION_DB = "countries_regions_db.json"
 
 
 class GeoDataBank(PluginManager):
+
     def __init__(self):
-        super(GeoDataBank, self).__init__(
-            constants.GEO_DATA_PLUGIN_TYPE
-            )
+        super(GeoDataBank, self).__init__(constants.GEO_DATA_PLUGIN_TYPE)
         self.geo_coordinates = {}
         self.region_dict = {}
 
@@ -43,7 +42,7 @@ class GeoDataBank(PluginManager):
         region = self.ensure_two_digit_iso_code(region)
         return self.search_in_region_by_filter(
             region,
-            lambda name_in_db: any([name in name_in_db for name in names])
+            lambda name_in_db: any([name in name_in_db for name in names]),
         )
 
     def search_in_region_by_filter(self, region, filter_function):
@@ -54,7 +53,7 @@ class GeoDataBank(PluginManager):
         if _cities_in_a_region:
             for city_name, coordinates in _cities_in_a_region.items():
                 if filter_function(city_name):
-                    yield(city_name, coordinates)
+                    yield (city_name, coordinates)
 
     def ensure_two_digit_iso_code(self, region):
         two_digit_code = region
@@ -70,11 +69,9 @@ class GeoDataBank(PluginManager):
         for pypkgs in self.registry.values():
             for data_bank in pypkgs:
                 _data_bank = data_bank.cls()
-                _cities_in_a_region = _data_bank.get_cities_in_region(
-                    region)
+                _cities_in_a_region = _data_bank.get_cities_in_region(region)
                 if _cities_in_a_region:
-                    self.geo_coordinates[region].update(
-                        _cities_in_a_region)
+                    self.geo_coordinates[region].update(_cities_in_a_region)
 
     def _translate_region(self, region):
         if not self.region_dict:
@@ -82,17 +79,17 @@ class GeoDataBank(PluginManager):
         two_digit_code = self.region_dict.get(region)
         if two_digit_code is None:
             raise exceptions.RegionNotFound(
-                "Pyecharts have no knowledge of {}".format(region))
+                "Pyecharts have no knowledge of {}".format(region)
+            )
         return two_digit_code
 
     def _load_countries_into_memory(self):
-        _region_dict = get_resource_dir("datasets",
-                                         REGION_DB)
+        _region_dict = get_resource_dir("datasets", REGION_DB)
         with codecs.open(_region_dict, encoding="utf-8") as file_handle:
             self.region_dict = json.load(file_handle)
 
 
-@PluginInfo(constants.GEO_DATA_PLUGIN_TYPE, tags=['builtin'])
+@PluginInfo(constants.GEO_DATA_PLUGIN_TYPE, tags=["builtin"])
 class DefaultChinaDataBank:
 
     def get_cities_in_region(self, region):
@@ -101,7 +98,8 @@ class DefaultChinaDataBank:
             return {}
 
         _local_data_file = get_resource_dir(
-            "datasets", "city_coordinates.json")
+            "datasets", "city_coordinates.json"
+        )
         with codecs.open(_local_data_file, encoding="utf8") as f:
             return json.load(f)
 

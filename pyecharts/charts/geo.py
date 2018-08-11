@@ -110,7 +110,8 @@ class Geo(Chart):
         _data = []
         for _name, _value in zip(attr, value):
             _coordinate = self.get_coordinate(
-                _name, coordinate_region, raise_exception=True)
+                _name, coordinate_region, raise_exception=True
+            )
             _data_value = [_coordinate[0], _coordinate[1], _value]
             _data.append({"name": _name, "value": _data_value})
         self._option.update(

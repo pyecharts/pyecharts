@@ -12,7 +12,7 @@ from pyecharts.datasets.coordinates import (
     search_coordinates_by_keyword,
     search_coordinates_by_filter,
     DefaultChinaDataBank,
-    GEO_DATA_BANK
+    GEO_DATA_BANK,
 )
 from pyecharts.exceptions import RegionNotFound
 
@@ -65,24 +65,24 @@ def test_advance_search_coordinates():
 
 def test_default_china_data_bank():
     bank = DefaultChinaDataBank()
-    cities = bank.get_cities_in_region('CN')
+    cities = bank.get_cities_in_region("CN")
     assert "北京市" in cities
 
 
 def test_default_china_data_bank_with_mars():
     bank = DefaultChinaDataBank()
-    cities = bank.get_cities_in_region('火星')
+    cities = bank.get_cities_in_region("火星")
     assert len(cities) == 0
 
 
 def test_two_digit_iso_code():
     code = GEO_DATA_BANK.ensure_two_digit_iso_code("安提瓜和巴布达")
-    eq_(code, 'AG')
+    eq_(code, "AG")
 
 
 def test_two_digit_iso_code_with_two_digit_code():
-    code = GEO_DATA_BANK.ensure_two_digit_iso_code('LU')
-    eq_(code, 'LU')
+    code = GEO_DATA_BANK.ensure_two_digit_iso_code("LU")
+    eq_(code, "LU")
 
 
 def test_two_digit_iso_code_with_wrong_input():

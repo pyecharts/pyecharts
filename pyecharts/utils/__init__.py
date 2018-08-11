@@ -20,7 +20,7 @@ __all__ = [
     "write_utf8_html_file",
     "to_css_length",
     "merge_js_dependencies",
-    "is_ascii"
+    "is_ascii",
 ]
 
 
