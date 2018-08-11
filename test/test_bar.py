@@ -162,3 +162,26 @@ def test_bar_datazoom_xaxis_and_yaxis():
     assert ': "slider"' in html_content
     assert ': "vertical"' in html_content
     assert ': "horizontal"' in html_content
+
+
+def test_bar_extra_html_text_label():
+    bar = Bar("柱状图", extra_html_text_label=["bar_extra_html_text_label"])
+    bar.add("商家A", CLOTHES, clothes_v1, is_stack=True)
+    bar.add("商家B", CLOTHES, clothes_v2, is_stack=True)
+    html_content = bar._repr_html_()
+    assert '<p style="">bar_extra_html_text_label</p>' in html_content
+
+
+def test_bar_line_color_and_with():
+    bar = Bar("柱状图")
+    bar.add(
+        "商家A",
+        CLOTHES,
+        clothes_v1,
+        xaxis_line_color="green",
+        xaxis_line_width=5,
+        xaxis_label_textcolor="black",
+    )
+    html_content = bar._repr_html_()
+    assert '"color": "green"' in html_content
+    assert '"width": 5' in html_content
