@@ -83,8 +83,7 @@ def echarts_container(env, chart):
             _text_label.append("")
         _text, _style = _text_label
         _container_and_text += EXTRA_TEXT_FORMATTER.format(
-            text=_text,
-            style=_style
+            text=_text, style=_style
         )
     return Markup(_container_and_text)
 
