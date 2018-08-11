@@ -29,7 +29,7 @@ pyecharts 内置了一些常用的城市地理坐标数据，这些数据保存�
 
 ### 检索中国地理坐标
 
-`get_coordinate(name, region="CN")` 返回城市名称的地理坐标，如果未定义将返回 None 。
+`get_coordinate(name, region="中国")` 返回城市名称的地理坐标，如果未定义将返回 None 。
 
 ```python
 from pyecharts.datasets.coordinates import get_coordinate
@@ -64,7 +64,7 @@ print(result) # {'福州市': [119.3, 26.08], '杭州市': [120.15, 30.28] ...}
 
 ### 按过滤函数搜索地理坐标
 
-`search_coordinates_by_filter(func, region="CN")` 根据过滤函数，返回一个匹配的字典对象。
+`search_coordinates_by_filter(func, region="中国")` 根据过滤函数，返回一个匹配的字典对象。
 用法（结果同上）
 
 ```python
@@ -154,7 +154,7 @@ print(result)
 
 ```python
 from pyecharts.datasets.coordinates import search_coordinates_by_region_and_keyword
-result = search_coordinates_by_region_and_keyword('HK', 'Central', 'Hong Kong')
+result = search_coordinates_by_region_and_keyword('中国香港', 'Central', 'Hong Kong')
 print(result) # { "Hong Kong": [114.15769, 22.28552], "Central": [114.15846, 22.28299]}
 ```
 
@@ -165,7 +165,7 @@ from pyecharts.datasets.coordinates import search_coordinates_by_filter
 
 result = search_coordinates_by_filter(
     func=lambda name: "Central" in name or "Hong Kong" in name,
-    region="香港",
+    region="中国香港",
 
 )
 print(result) # { "Hong Kong": [114.15769, 22.28552], "Central": [114.15846, 22.28299]}
