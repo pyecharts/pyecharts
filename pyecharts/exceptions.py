@@ -20,3 +20,7 @@ class ExtensionMissing(Exception):
 
 class InvalidTheme(Exception):
     pass
+
+
+class RegionNotFound(Exception):
+    pass
