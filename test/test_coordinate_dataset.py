@@ -8,13 +8,13 @@ from nose.tools import assert_dict_equal
 
 from pyecharts.datasets.coordinates import (
     get_coordinate,
-    search_coordinates_by_country_and_keyword,
+    search_coordinates_by_region_and_keyword,
     search_coordinates_by_keyword,
     search_coordinates_by_filter,
     DefaultChinaDataBank,
     GEO_DATA_BANK
 )
-from pyecharts.exceptions import CountryNotFound
+from pyecharts.exceptions import RegionNotFound
 
 
 def test_get_coordinate():
@@ -34,22 +34,22 @@ def test_search_coordinates():
     assert "北京市" in result
 
 
-def test_search_coordinates_by_country():
+def test_search_coordinates_by_region():
     # search the city name containing '北京'
-    result = search_coordinates_by_country_and_keyword("CN", "北京")
+    result = search_coordinates_by_region_and_keyword("CN", "北京")
     assert "北京" in result
     assert "北京市" in result
 
 
-def test_search_coordinates_by_country_in_chinese():
+def test_search_coordinates_by_region_in_chinese():
     # search the city name containing '北京'
-    result = search_coordinates_by_country_and_keyword("中国", "北京")
+    result = search_coordinates_by_region_and_keyword("中国", "北京")
     assert "北京" in result
     assert "北京市" in result
 
 
-@raises(CountryNotFound)
-def test_get_coordinate_from_unknown_country():
+@raises(RegionNotFound)
+def test_get_coordinate_from_unknown_region():
     get_coordinate("Alien City", "Glaxy")
 
 
@@ -65,13 +65,13 @@ def test_advance_search_coordinates():
 
 def test_default_china_data_bank():
     bank = DefaultChinaDataBank()
-    cities = bank.get_cities_in_country('CN')
+    cities = bank.get_cities_in_region('CN')
     assert "北京市" in cities
 
 
 def test_default_china_data_bank_with_mars():
     bank = DefaultChinaDataBank()
-    cities = bank.get_cities_in_country('火星')
+    cities = bank.get_cities_in_region('火星')
     assert len(cities) == 0
 
 

@@ -22,5 +22,5 @@ class InvalidTheme(Exception):
     pass
 
 
-class CountryNotFound(Exception):
+class RegionNotFound(Exception):
     pass

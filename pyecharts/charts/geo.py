@@ -41,7 +41,7 @@ class Geo(Chart):
         if name in self._coordinates:
             return self._coordinates[name]
 
-        coordinate = get_coordinate(name, country=region)
+        coordinate = get_coordinate(name, region=region)
         if coordinate is None and raise_exception:
             raise ValueError("No coordinate is specified for {}".format(name))
 
