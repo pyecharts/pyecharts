@@ -1,4 +1,5 @@
 # coding=utf-8
+from __future__ import unicode_literals
 
 from pyecharts.charts.geo import Geo
 from pyecharts.constants import SYMBOL
@@ -20,6 +21,7 @@ class GeoLines(Geo):
         name,
         data,
         maptype="china",
+        coordinate_region="中国",
         symbol=None,
         symbol_size=12,
         border_color="#111",
@@ -46,6 +48,8 @@ class GeoLines(Geo):
         :param maptype:
             地图类型。 从 v0.3.2+ 起，地图已经变为扩展包，支持全国省份，全国城市，全国区县，
             全球国家等地图，具体请参考 [地图自定义篇](zh-cn/customize_map)
+        :param coordinate_region:
+            城市坐标所属国家。从 v0.5.7 引入，针对国际城市的地理位置的查找。
         :param symbol:
             线两端的标记类型，可以是一个数组分别指定两端，也可以是单个统一指定。
         :param symbol_size:
@@ -99,7 +103,7 @@ class GeoLines(Geo):
                 _from_name, _to_name, _line_value = element
 
             _from_coordinate = self.get_coordinate(
-                _from_name, raise_exception=True
+                _from_name, coordinate_region, raise_exception=True
             )
             _to_coordinate = self.get_coordinate(
                 _to_name, raise_exception=True

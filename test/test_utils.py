@@ -11,7 +11,6 @@ from pyecharts.utils import (
     get_resource_dir,
     merge_js_dependencies,
 )
-from pyecharts.utils.lazy import LazyObject
 from pyecharts.utils import remove_key_with_none_value
 
 
@@ -81,17 +80,6 @@ class MockPoint(object):
     def __init__(self, x, y):
         self.x = x
         self.y = y
-
-
-def create_point():
-    return MockPoint(1, 2)
-
-
-def test_lazy_object():
-    p = LazyObject(create_point)
-    assert isinstance(p, LazyObject)
-    p.x = 3
-    assert isinstance(p, MockPoint)
 
 
 def test_remove_key_with_none_value():
