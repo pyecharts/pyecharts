@@ -107,3 +107,33 @@ def test_scatter_markline_coords():
     scatter = Scatter("散点图示例")
     scatter.add("A", v1, v2, mark_line_coords=[[10, 10], [30, 30]])
     assert '"coord": [' in scatter._repr_html_()
+
+
+def test_scatter_extra_name():
+
+    def custom_formatter(params):
+        return params.value[3]
+
+    data = [[28604, 77, 17096], [31163, 77.4, 27662], [1516, 68, 11546]]
+    x_lst = [v[0] for v in data]
+    y_lst = [v[1] for v in data]
+    extra_data = [v[2] for v in data]
+    extra_name = ["point A", "point B", "point C"]
+    sc = Scatter()
+    sc.add(
+        "scatter",
+        x_lst,
+        y_lst,
+        extra_data=extra_data,
+        extra_name=extra_name,
+        is_visualmap=True,
+        visual_dimension=2,
+        visual_orient="horizontal",
+        visual_type="size",
+        visual_range=[17000, 28000],
+        visual_text_color="#000",
+        tooltip_formatter=custom_formatter,
+    )
+    assert "point A" in sc._repr_html_()
+    assert "point B" in sc._repr_html_()
+    assert "point C" in sc._repr_html_()

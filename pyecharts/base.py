@@ -26,6 +26,7 @@ class Base(object):
         height=400,
         renderer=constants.CANVAS_RENDERER,
         page_title=constants.PAGE_TITLE,
+        extra_html_text_label=None,
     ):
         """
 
@@ -38,6 +39,9 @@ class Base(object):
             3D 图仅能使用 'canvas'。
         :param page_title:
             指定生成的 html 文件中 <title> 标签的值。默认为 'Echarts'
+        :param extra_html_text_label:
+            额外的 HTML 文本标签，(<p> 标签)。类型为 list，list[0] 为文本内容，
+            list[1] 为字体风格样式（选填）。如 ["this is a p label", "color:red"]
         """
         self._option = {}
         self._js_dependencies = set()
@@ -49,6 +53,7 @@ class Base(object):
         self.event_handlers = {}
         self.theme = None
         self.use_theme(CURRENT_CONFIG.theme)
+        self.extra_html_text_label = extra_html_text_label
 
     @property
     def chart_id(self):
