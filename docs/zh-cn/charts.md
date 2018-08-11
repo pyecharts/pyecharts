@@ -1161,7 +1161,7 @@ Geo.add() 方法签名
 add(name, attr, value,
     type="scatter",
     maptype='china',
-    coordinate_country='中国',
+    coordinate_region='中国',
     symbol_size=12,
     border_color="#111",
     geo_normal_color="#323c48",
@@ -1179,7 +1179,7 @@ add(name, attr, value,
     图例类型，有'scatter', 'effectScatter', 'heatmap'可选。默认为 'scatter'
 * maptype -> str  
     地图类型。 从 v0.3.2+ 起，地图已经变为扩展包，支持全国省份，全国城市，全国区县，全球国家等地图，具体请参考 [地图自定义篇](zh-cn/customize_map)
-* coordinate_country -> str
+* coordinate_region -> str
     城市坐标所属国家。从 v0.5.7 引入，针对国际城市的地理位置的查找。
 * symbol_size -> int  
     标记图形大小。默认为 12
