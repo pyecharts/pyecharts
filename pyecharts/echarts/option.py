@@ -1173,11 +1173,6 @@ def zaxis3D(
 
 
 @option.Option()
-def tooltip(**kwargs):
-    return option.Tooltip(**kwargs)
-
-
-@option.Option()
 def calendar(calendar_date_range=None, calendar_cell_size=None, **kwargs):
     """
 
@@ -1202,6 +1197,6 @@ def get_all_options(**kwargs):
     返回图形实例的所有配置项
     """
     _funcs = {}
-    for handler in OPTION_HANDER_MANAGER:
-        _funcs[handler.__name__] = handler(**kwargs)
+    for name, handler in OPTION_HANDER_MANAGER:
+        _funcs[name] = handler(**kwargs)
     return _funcs
