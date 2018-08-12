@@ -2949,6 +2949,7 @@ add(name, data,
 * tree_leaves_rotate -> int  
     叶节点标签旋转。从 -90 度到 90 度。正值是逆时针。默认为 0
 
+**简单示例**
 
 首先假设你有一份数据需要生产树图，大概长这样
 ```
@@ -3025,7 +3026,7 @@ tree.render()
 ```
 ![tree-demo](https://user-images.githubusercontent.com/19553554/44004354-fc603b0a-9e93-11e8-9437-778a1e4a3001.png)
 
-`collapse_interval()` 方法签名
+`Tree.collapse_interval()` 方法签名
 ```
 collapse_interval(data, interval=0)
 
