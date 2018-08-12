@@ -143,6 +143,7 @@ class Chart(Base):
         center=None,
         calendar_date_range=None,
         calendar_cell_size=None,
+        coordinate_region=None,
         datazoom_type=None,
         datazoom_range=None,
         datazoom_orient=None,
