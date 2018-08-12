@@ -15,6 +15,15 @@ class Tree(Chart):
 
     @staticmethod
     def collapse_interval(data, interval=0):
+        """
+        间隔折叠节点，当节点过多时可以解决节点显示过杂间隔。
+
+        :param data: 节点数据
+        :param interval: 指定间隔
+        :return:
+        """
+        if interval <= 0:
+            return data
         if data and isinstance(data, list):
             children = data[0].get("children", None)
             if children and interval > 0:
@@ -42,10 +51,12 @@ class Tree(Chart):
         tree_label_vertical_align="middle",
         tree_label_align="right",
         tree_label_text_size=12,
+        tree_label_rotate=0,
         tree_leaves_position="right",
         tree_leaves_vertical_align="middle",
         tree_leaves_align="left",
         tree_leaves_text_size=12,
+        tree_leaves_rotate=0,
         **kwargs
     ):
         """
@@ -53,66 +64,36 @@ class Tree(Chart):
         :param name:
             系列名称，用于 tooltip 的显示，legend 的图例筛选。
         :param data:
-            数据项，list 类型。
-            首先假设你有一份数据需要生产树图，大概长这样
-
-                 |----B     |----E----|----I
-                 |          |
-                 |----C-----|----F         |----J
-            A----|                         |
-                 |----D-----|----G----|----|----K
-                            |
-                            |----H
-            你需要来编写成 JSON 数据，节点都是以 {name, children} 为基础的递归嵌套模式，如下
-            [{
-                "children": [
-                    {
-                        "children": [],
-                        "name": "B"
-                    },
-                    {
-                        "children": [
-                            {
-                                "children": [
-                                    {
-                                        "children": [],
-                                        "name": "I"
-                                    }
-                                ],
-                                "name": "E"
-                            },
-                            {
-                                "children": [],
-                                "name": "F"
-                            }
-                        ],
-                        "name": "C"
-                    },
-                    {
-                        "children": [
-                            {
-                                "children": [
-                                    {
-                                        "children": [],
-                                        "name": "J"
-                                    },
-                                    {
-                                        "children": [],
-                                        "name": "K"
-                                    }
-                                ],
-                                "name": "G"
-                            },
-                            {
-                                "children": [],
-                                "name": "H"
-                            }
-                        ],
-                        "name": "D"
-                    }
-                ],
-                "name": "A"
-            }]
+            树图的数据项是 **一棵树**，每个节点包括`value`（可选）,
+            `name`, `children`（也是树，可选）如下所示
+            [
+                {
+                    value: 1212,    # 数值
+                    # 子节点
+                    children: [
+                        {
+                            # 子节点数值
+                            value: 2323,
+                            # 子节点名
+                            name: 'description of this node',
+                            children: [...],
+                        },
+                        {
+                            value: 4545,
+                            name: 'description of this node',
+                            children: [
+                                {
+                                    value: 5656,
+                                    name: 'description of this node',
+                                    children: [...]
+                                },
+                                ...
+                            ]
+                        }
+                    ]
+                },
+                ...
+            ]
         :param tree_layout:
             树图的布局，有 正交 和 径向 两种。这里的 正交布局 就是我们通常所说的
             水平 和 垂直 方向，对应的参数取值为 'orthogonal' 。而 径向布局 是指以
@@ -167,7 +148,9 @@ class Tree(Chart):
             父节点文字垂直对齐方式，默认自动。可选：'top'，'middle'，'bottom'
         :param tree_label_align:
             父节点文字水平对齐方式，默认自动。可选：'left'，'center'，'right'
-        :param tree_text_size:
+        :param tree_label_rotate:
+            父节点标签旋转。从 -90 度到 90 度。正值是逆时针。
+        :param tree_label_text_size:
             父节点文字的字体大小
         :param tree_leaves_position:
             距离图形元素的距离。当 position 为字符描述值（如 'top'、'insideRight'）时候有效。
@@ -178,6 +161,8 @@ class Tree(Chart):
             叶节点文字水平对齐方式，默认自动。可选：'left'，'center'，'right'
         :param tree_leaves_text_size:
             叶节点文字的字体大小
+        :param tree_leaves_rotate:
+            叶节点标签旋转。从 -90 度到 90 度。正值是逆时针。
         :param kwargs:
         """
         self._option.get("series").append(
@@ -199,6 +184,7 @@ class Tree(Chart):
                         "verticalAlign": tree_label_vertical_align,
                         "align": tree_label_align,
                         "fontSize": tree_label_text_size,
+                        "rotate": tree_label_rotate,
                     }
                 },
                 "leaves": {
@@ -208,6 +194,7 @@ class Tree(Chart):
                             "verticalAlign": tree_leaves_vertical_align,
                             "align": tree_leaves_align,
                             "fontSize": tree_leaves_text_size,
+                            "rotate": tree_leaves_rotate,
                         }
                     }
                 },

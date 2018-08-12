@@ -40,21 +40,16 @@ def test_tree_default():
             "name": "A",
         }
     ]
-    tree = Tree("树图示例")
-    tree.add("", data)
-    tree.render()
+    copy_data = data.copy()
+    data1 = Tree.collapse_interval(data)
+    assert copy_data == data1
 
 
-def test_tree_official_data():
+def test_tree_collapse_interval():
     with codecs.open(
         os.path.join("fixtures", "flare.json"), "r", encoding="utf-8"
     ) as f:
         j = json.load(f)
-
-    tree = Tree(width=1200, height=800)
-    data = tree.collapse_interval([j], interval=2)
-    tree.add("", data, tree_orient="RL")
-    tree.render()
-
-
-test_tree_default()
+    copy_data = j.copy()
+    data = Tree.collapse_interval([j], interval=2)
+    assert data != copy_data

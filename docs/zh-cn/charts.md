@@ -26,6 +26,7 @@
     * Scatter（散点图）
     * Scatter3D（3D 散点图）
     * ThemeRiver（主题河流图）
+    * Tree（树图）
     * TreeMap（矩形树图）
     * WordCloud（词云图）
 * 用户自定义
@@ -250,6 +251,7 @@ bar.render()
 
 ## Bar3D（3D 柱状图）
 Bar3D.add() 方法签名
+
 ```python
 add(name, x_axis, y_axis, data,
     grid3d_opacity=1,
@@ -2769,6 +2771,7 @@ scatter3D.render()
 
 ## ThemeRiver（主题河流图）
 > 主题河流图是一种特殊的流图, 它主要用来表示事件或主题等在一段时间内的变化。
+
 ThemeRiver.add() 方法签名
 ```python
 add(name, data)
@@ -2827,8 +2830,289 @@ tr.render()
 **Note：** 可以看到，每个数据项中的第三个数值就是该项的种类，而种类可以在 `add()` 第一个参数指定。
 
 
+## Tree（树图）
+> 树图主要用来可视化树形数据结构，是一种特殊的层次类型，具有唯一的根节点，左子树，和右子树。
+
+Tree.add() 方法签名
+```python
+add(name, data,
+    tree_layout="orthogonal",
+    tree_symbol="emptyCircle",
+    tree_symbol_size=7,
+    tree_orient="LR",
+    tree_top="12%",
+    tree_left="12%",
+    tree_bottom="12%",
+    tree_right="12%",
+    tree_label_position="left",
+    tree_label_vertical_align="middle",
+    tree_label_align="right",
+    tree_label_text_size=12,
+    tree_label_rotate=0,
+    tree_leaves_position="right",
+    tree_leaves_vertical_align="middle",
+    tree_leaves_align="left",
+    tree_leaves_text_size=12,
+    tree_leaves_rotate=0,
+    **kwargs
+    )
+```
+* name -> str  
+    系列名称，用于 tooltip 的显示，legend 的图例筛选。
+* data -> list  
+    树图的数据项是 **一棵树**，每个节点包括`value`（可选）, `name`, `children`（也是树，可选）如下所示
+    ```
+    [
+        {
+            value: 1212,    # 数值
+            # 子节点
+            children: [
+                {
+                    # 子节点数值
+                    value: 2323,
+                    # 子节点名
+                    name: 'description of this node',
+                    children: [...],
+                },
+                {
+                    value: 4545,
+                    name: 'description of this node',
+                    children: [
+                        {
+                            value: 5656,
+                            name: 'description of this node',
+                            children: [...]
+                        },
+                        ...
+                    ]
+                }
+            ]
+        },
+        ...
+    ]
+    ```
+* tree_layout -> str  
+    树图的布局，有 正交 和 径向 两种。这里的 正交布局 就是我们通常所说的水平 和 垂直 方向，对应的参数取值为 'orthogonal' 。而 径向布局 是指以根节点为圆心，每一层节点为环，一层层向外发散绘制而成的布局，对应的参数取值为 'radial' 。默认为 “orthogonal”。
+* tree_symbol -> str  
+    标记的图形。ECharts 提供的标记类型包括 'emptyCircle', 'circle', 'rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow', 'none'。默认为 “emptyCircle”。
+* tree_symbol_size -> int/list  
+    标记的大小，可以设置成诸如 10 这样单一的数字，也可以用数组分开表示宽和高，例如 [20, 10] 表示标记宽为 20，高为 10。默认为 7。
+* tree_orient -> str  
+    树图中 正交布局 的方向，也就是说只有在 layout = 'orthogonal' 的时候，该配置项才生效。对应有 水平 方向的 从左到右，从右到左；以及垂直方向的从上到下，从下到上。取值分别为 'LR' , 'RL', 'TB', 'BT'。注意，之前的配置项值 'horizontal' 等同于 'LR'， 'vertical' 等同于 'TB'。默认为 “LR”
+* tree_top -> str  
+    tree 组件离容器顶部的距离。可以是像 20 这样的具体像素值，可以是像 '20%' 这样相对于容器高宽的百分比。默认为 “12%”
+* tree_left -> str  
+    tree 组件离容器左侧的距离。可以是像 20 这样的具体像素值，可以是像 '20%' 这样相对于容器高宽的百分比。默认为 “12%”
+* tree_bottom -> str  
+    tree 组件离容器底部的距离。可以是像 20 这样的具体像素值，可以是像 '20%' 这样相对于容器高宽的百分比。默认为 “12%”
+* tree_right -> str  
+    tree 组件离容器右侧的距离。可以是像 20 这样的具体像素值，可以是像 '20%' 这样相对于容器高宽的百分比。默认为 “12%”
+* tree_label_position -> str/list  
+    标签的位置。默认为 “left”
+    ```
+    * [x, y]
+    通过相对的百分比或者绝对像素值表示标签相对于图形包围盒左上角的位置。 示例：
+    // 绝对的像素值
+    position: [10, 10],
+    // 相对的百分比
+    position: ['50%', '50%']
+    * 'top'
+    * 'left'
+    * 'right'
+    * 'bottom'
+    * 'inside'
+    * 'insideLeft'
+    * 'insideRight'
+    * 'insideTop'
+    * 'insideBottom'
+    * 'insideTopLeft'
+    * 'insideBottomLeft'
+    * 'insideTopRight'
+    * 'insideBottomRight'
+    ```
+* tree_label_vertical_align -> str  
+    父节点文字垂直对齐方式，默认自动。可选：'top'，'middle'，'bottom'
+* tree_label_align -> str  
+    父节点文字水平对齐方式，默认自动。可选：'left'，'center'，'right'
+* tree_label_text_size -> int  
+    父节点文字的字体大小
+* tree_label_rotate -> int  
+    父节点标签旋转。从 -90 度到 90 度。正值是逆时针。默认为 0
+* tree_leaves_position -> str  
+    距离图形元素的距离。当 position 为字符描述值（如 'top'、'insideRight'）时候有效。参加 tree_label_position
+* tree_leaves_vertical_align -> str  
+    叶节点文字垂直对齐方式，默认自动。可选：'top'，'middle'，'bottom'
+* tree_leaves_align -> str  
+    叶节点文字水平对齐方式，默认自动。可选：'left'，'center'，'right'
+* tree_leaves_text_size -> int  
+    叶节点文字的字体大小
+* tree_leaves_rotate -> int  
+    叶节点标签旋转。从 -90 度到 90 度。正值是逆时针。默认为 0
+
+
+首先假设你有一份数据需要生产树图，大概长这样
+```
+
+     |----B     |----E----|----I
+     |          |
+     |----C-----|----F         |----J
+A----|                         |
+     |----D-----|----G----|----|----K
+                |
+                |----H
+```
+你需要来编写成 JSON 数据，节点都是以 {name, children} 为基础的递归嵌套模式，如下
+```json
+data = [
+    {
+        "children": [
+            {
+                "children": [],
+                "name": "B"
+            },
+            {
+                "children": [
+                    {
+                        "children": [
+                            {
+                                "children": [],
+                                "name": "I"
+                            }
+                        ],
+                        "name": "E"
+                    },
+                    {
+                        "children": [],
+                        "name": "F"
+                    }
+                ],
+                "name": "C"
+            },
+            {
+                "children": [
+                    {
+                        "children": [
+                            {
+                                "children": [],
+                                "name": "J"
+                            },
+                            {
+                                "children": [],
+                                "name": "K"
+                            }
+                        ],
+                        "name": "G"
+                    },
+                    {
+                        "children": [],
+                        "name": "H"
+                    }
+                ],
+                "name": "D"
+            }
+        ],
+        "name": "A"
+    }
+]
+```
+生成树图
+```python
+from pyecharts import Tree
+
+tree = Tree("树图示例")
+tree.add("", data)
+tree.render()
+```
+![tree-demo](https://user-images.githubusercontent.com/19553554/44004354-fc603b0a-9e93-11e8-9437-778a1e4a3001.png)
+
+`collapse_interval()` 方法签名
+```
+collapse_interval(data, interval=0)
+
+间隔折叠节点，当节点过多时可以解决节点显示过杂间隔。
+```
+* data -> list  
+    节点数据
+* interval -> int  
+    指定间隔，默认为 0
+
+以官方提供的 flare.json 数据为例，interval 为 0 时，文字都挤在一起了
+```python
+import os
+import json
+import codecs
+
+from pyecharts import Tree
+
+with codecs.open(
+    os.path.join("fixtures", "flare.json"), "r", encoding="utf-8"
+) as f:
+    j = json.load(f)
+tree = Tree(width=1200, height=800)
+tree.add("", data)
+tree.render()
+```
+![tree-demo](https://user-images.githubusercontent.com/19553554/44004551-a41321f8-9e96-11e8-9837-ddf930394240.png)
+
+设置 interval 为 2，图明显就好看多了
+```python
+import os
+import json
+import codecs
+
+from pyecharts import Tree
+
+with codecs.open(
+    os.path.join("fixtures", "flare.json"), "r", encoding="utf-8"
+) as f:
+    j = json.load(f)
+tree = Tree(width=1200, height=800)
+data = tree.collapse_interval([j], interval=2)
+tree.add("", data)
+tree.render()
+```
+![tree-demo](https://user-images.githubusercontent.com/19553554/44004598-5636d74e-9e97-11e8-8a5c-92de6278880d.gif)
+
+**指定方向，从右到左**
+```python
+tree = Tree(width=1200, height=800)
+data = tree.collapse_interval([j], interval=2)
+tree.add("", data, tree_orient="RL")
+tree.render()
+```
+![tree-demo](https://user-images.githubusercontent.com/19553554/44004607-8cd0ff3c-9e97-11e8-97b1-c4bd343ce49c.png)
+
+**指定方向，从上到下**
+```python
+tree = Tree(width=1200, height=800)
+data = tree.collapse_interval([j], interval=2)
+tree.add("", data, tree_orient="TB", tree_label_rotate=-90, tree_leaves_rotate=-90)
+tree.render
+```
+![tree-demo](https://user-images.githubusercontent.com/19553554/44004803-5537bada-9e9b-11e8-83f1-4c8b4df81d1e.png)
+
+**指定布局** 
+```python
+tree = Tree(width=1200, height=800)
+data = tree.collapse_interval([j], interval=2)
+tree.add("", data, tree_layout="radial")
+tree.render()
+```
+![tree-demo](https://user-images.githubusercontent.com/19553554/44004643-15e284ee-9e98-11e8-93f6-8103c3af42f4.png)
+
+**调整容器布局**
+```python
+tree = Tree(width=1200, height=800)
+data = tree.collapse_interval([j], interval=2)
+tree.add("", data, tree_top="15%", tree_right="20%")
+tree.render()
+```
+![tree-demo](https://user-images.githubusercontent.com/19553554/44004651-399e4ab2-9e98-11e8-93b5-8ab6e9926408.png)
+
+
 ## TreeMap（矩形树图）
 > 矩形树图是一种常见的表达『层级数据』『树状数据』的可视化形式。它主要用面积的方式，便于突出展现出『树』的各层级中重要的节点。
+
 TreeMap.add() 方法签名
 ```python
 add(name, attr, value,
