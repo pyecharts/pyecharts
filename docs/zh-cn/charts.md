@@ -670,8 +670,8 @@ add(name, attr, value,
     图例类型，有'scatter', 'effectScatter', 'heatmap'可选。默认为 'scatter'
 * maptype -> str  
     地图类型。 从 v0.3.2+ 起，地图已经变为扩展包，支持全国省份，全国城市，全国区县，全球国家等地图，具体请参考 [地图自定义篇](zh-cn/customize_map)
-* coordinate_region -> str
-    城市坐标所属国家。从 v0.5.7 引入，针对国际城市的地理位置的查找。
+* coordinate_region -> str  
+    城市坐标所属国家。从 v0.5.7 引入，针对国际城市的地理位置的查找。默认为 `中国`。具体的国家/地区映射表参照 [countries_regions_db.json](https://github.com/pyecharts/pyecharts/blob/master/pyecharts/datasets/countries_regions_db.json)
 * symbol_size -> int  
     标记图形大小。默认为 12
 * border_color -> str  
@@ -851,6 +851,38 @@ geo.add(
 geo.render()
 ```
 ![geo-demo](https://user-images.githubusercontent.com/19553554/35089657-85d0b7bc-fc72-11e7-8b3d-8127dbe8f780.gif)
+
+**使用 coordinate_region 指定检索坐标的国家/地区**
+```python
+from pyecharts import Geo
+
+data = [("Oxford", 15), ("London", 12)]
+
+geo = Geo(
+    "英国主要城市空气质量",
+    "data from pm2.5",
+    title_color="#fff",
+    title_pos="center",
+    background_color="#404a59",
+)
+attr, value = geo.cast(data)
+geo.add(
+    "",
+    attr,
+    value,
+    maptype="英国",
+    # 使用 coordinate_region，指定检索英国范围内的坐标，如上述的 Oxford。
+    # 默认为中国
+    coordinate_region="英国",
+    visual_range=[0, 200],
+    visual_text_color="#fff",
+    symbol_size=15,
+    is_visualmap=True,
+)
+
+geo.render()
+```
+![geo-demo](https://user-images.githubusercontent.com/19553554/43998653-23b21a78-9e2d-11e8-8273-52fbeaacc6e8.png)
 
 
 ## GeoLines（地理坐标系线图）
