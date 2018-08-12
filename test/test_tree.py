@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 import os
 import json
 import codecs
+from copy import deepcopy
 
 from pyecharts import Tree
 
@@ -40,7 +41,7 @@ def test_tree_default():
             "name": "A",
         }
     ]
-    copy_data = data.copy()
+    copy_data = deepcopy(data)
     data1 = Tree.collapse_interval(data)
     assert copy_data == data1
 
@@ -50,6 +51,6 @@ def test_tree_collapse_interval():
         os.path.join("fixtures", "flare.json"), "r", encoding="utf-8"
     ) as f:
         j = json.load(f)
-    copy_data = j.copy()
+    copy_data = deepcopy(j)
     data = Tree.collapse_interval([j], interval=2)
     assert data != copy_data
