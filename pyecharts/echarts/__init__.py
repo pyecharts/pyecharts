@@ -3,3 +3,4 @@ from .label import NormalLabel, EmphasisLabel
 from .line import Line
 from .axis import XAxisLabel, YAxisLabel, XAxis, YAxis
 from .tooltip import Tooltip
+from .option_manager import Option, EchartsOptionHandlerManager
