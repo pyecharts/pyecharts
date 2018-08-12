@@ -22,7 +22,17 @@ $ pip install echarts-china-counties-pypkg
 $ pip install echarts-china-misc-pypkg
 ```
 
-除此之外，[英国2016选区图](https://echarts-maps.github.io/echarts-united-kingdom-js/): [echarts-united-kingdom-pypkg](https://github.com/pyecharts/echarts-united-kingdom-pypkg) (1MB): 英国选区图可以用来画与政治经济相关的数据。
+除此之外，[英国 2016 选区图](https://echarts-maps.github.io/echarts-united-kingdom-js/): [echarts-united-kingdom-pypkg](https://github.com/pyecharts/echarts-united-kingdom-pypkg) (1MB): 英国选区图可以用来画与政治经济相关的数据。
+
+## VERSION 0.5.7+
+
+从 v0.5.7 开始，新增了 [echarts-cities-pypkg](https://github.com/pyecharts/echarts-cities-pypkg) 插件，扩展 Geo/Geoline 图的地理坐标数据。可以从指定的国家/地区中检索区域坐标。数据来自 [geonames.org](geonames.org), 总共包含了 [138,398](https://github.com/echarts-maps/echarts-cities-js) 个地区。具体的国家/地区映射表参照 [countries_regions_db.json](https://github.com/pyecharts/pyecharts/blob/master/pyecharts/datasets/countries_regions_db.json)。
+
+安装扩展包
+
+```shell
+$ pip install echarts-cities-pypkg
+```
 
 ## 如何制作自己的地图扩展
 

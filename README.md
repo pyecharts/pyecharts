@@ -58,9 +58,9 @@ Please note: since version 0.3.2, **NO LONGER** pyecharts comes with any map fil
 
 ### Geo Data extensions (0.5.7+)
 
-1. From geonames.org, [138,398 cities of the world with a population of at least 1000 inhabitants](https://github.com/echarts-maps/echarts-cities-js): [echarts-cities-pypkg](https://github.com/pyecharts/echarts-cities-pypkg)
+From geonames.org, [138,398](https://github.com/echarts-maps/echarts-cities-js) cities of the world with a population of at least 1000 inhabitants: [echarts-cities-pypkg](https://github.com/pyecharts/echarts-cities-pypkg)
 
-In order to install them, you can try one or all of them below:
+Install data extensions:
 
 ```shell
 $ pip install echarts-cities-pypkg
