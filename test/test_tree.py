@@ -42,7 +42,7 @@ def test_tree_default():
         }
     ]
     copy_data = deepcopy(data)
-    data1 = Tree.collapse_interval(data)
+    data1 = Tree._set_collapse_interval(data)
     assert copy_data == data1
 
 
@@ -52,5 +52,5 @@ def test_tree_collapse_interval():
     ) as f:
         j = json.load(f)
     copy_data = deepcopy(j)
-    data = Tree.collapse_interval([j], interval=2)
+    data = Tree._set_collapse_interval([j], interval=2)
     assert data != copy_data

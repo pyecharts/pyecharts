@@ -2844,6 +2844,7 @@ add(name, data,
     tree_left="12%",
     tree_bottom="12%",
     tree_right="12%",
+    tree_collapse_interval=0,
     tree_label_position="left",
     tree_label_vertical_align="middle",
     tree_label_align="right",
@@ -2907,6 +2908,8 @@ add(name, data,
     tree 组件离容器底部的距离。可以是像 20 这样的具体像素值，可以是像 '20%' 这样相对于容器高宽的百分比。默认为 “12%”
 * tree_right -> str  
     tree 组件离容器右侧的距离。可以是像 20 这样的具体像素值，可以是像 '20%' 这样相对于容器高宽的百分比。默认为 “12%”
+* tree_collapse_interval -> int  
+    折叠节点间隔，当节点过多时可以解决节点显示过杂间隔。默认为 0
 * tree_label_position -> str/list  
     标签的位置。默认为 “left”
     ```
@@ -3026,18 +3029,9 @@ tree.render()
 ```
 ![tree-demo](https://user-images.githubusercontent.com/19553554/44004354-fc603b0a-9e93-11e8-9437-778a1e4a3001.png)
 
-`Tree.collapse_interval()` 方法签名
-```
-collapse_interval(data, interval=0)
+**使用 tree_collapse_interval**
 
-间隔折叠节点，当节点过多时可以解决节点显示过杂间隔。
-```
-* data -> list  
-    节点数据
-* interval -> int  
-    指定间隔，默认为 0
-
-以官方提供的 flare.json 数据为例，interval 为 0 时，文字都挤在一起了
+以官方提供的 flare.json 数据为例，tree_collapse_interval 为 0 时，文字都挤在一起了
 ```python
 import os
 import json
@@ -3055,7 +3049,7 @@ tree.render()
 ```
 ![tree-demo](https://user-images.githubusercontent.com/19553554/44004551-a41321f8-9e96-11e8-9837-ddf930394240.png)
 
-设置 interval 为 2，图明显就好看多了
+设置 tree_collapse_interval 为 2，图明显就好看多了
 ```python
 import os
 import json
@@ -3067,9 +3061,10 @@ with codecs.open(
     os.path.join("fixtures", "flare.json"), "r", encoding="utf-8"
 ) as f:
     j = json.load(f)
+data = [j]
+
 tree = Tree(width=1200, height=800)
-data = tree.collapse_interval([j], interval=2)
-tree.add("", data)
+tree.add("", data, tree_collapse_interval=2)
 tree.render()
 ```
 ![tree-demo](https://user-images.githubusercontent.com/19553554/44004598-5636d74e-9e97-11e8-8a5c-92de6278880d.gif)
@@ -3077,8 +3072,7 @@ tree.render()
 **指定方向，从右到左**
 ```python
 tree = Tree(width=1200, height=800)
-data = tree.collapse_interval([j], interval=2)
-tree.add("", data, tree_orient="RL")
+tree.add("", data, tree_orient="RL", tree_collapse_interval=2)
 tree.render()
 ```
 ![tree-demo](https://user-images.githubusercontent.com/19553554/44004607-8cd0ff3c-9e97-11e8-97b1-c4bd343ce49c.png)
@@ -3086,8 +3080,14 @@ tree.render()
 **指定方向，从上到下**
 ```python
 tree = Tree(width=1200, height=800)
-data = tree.collapse_interval([j], interval=2)
-tree.add("", data, tree_orient="TB", tree_label_rotate=-90, tree_leaves_rotate=-90)
+tree.add(
+    "",
+    data,
+    tree_collapse_interval=2,
+    tree_orient="TB",
+    tree_label_rotate=-90,
+    tree_leaves_rotate=-90
+)
 tree.render
 ```
 ![tree-demo](https://user-images.githubusercontent.com/19553554/44004803-5537bada-9e9b-11e8-83f1-4c8b4df81d1e.png)
@@ -3095,8 +3095,7 @@ tree.render
 **指定布局** 
 ```python
 tree = Tree(width=1200, height=800)
-data = tree.collapse_interval([j], interval=2)
-tree.add("", data, tree_layout="radial")
+tree.add("", data, tree_collapse_interval=2, tree_layout="radial")
 tree.render()
 ```
 ![tree-demo](https://user-images.githubusercontent.com/19553554/44004643-15e284ee-9e98-11e8-93f6-8103c3af42f4.png)
@@ -3104,8 +3103,7 @@ tree.render()
 **调整容器布局**
 ```python
 tree = Tree(width=1200, height=800)
-data = tree.collapse_interval([j], interval=2)
-tree.add("", data, tree_top="15%", tree_right="20%")
+tree.add("", data, tree_collapse_interval=2, tree_top="15%", tree_right="20%")
 tree.render()
 ```
 ![tree-demo](https://user-images.githubusercontent.com/19553554/44004651-399e4ab2-9e98-11e8-93b5-8ab6e9926408.png)

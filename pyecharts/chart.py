@@ -287,6 +287,7 @@ class Chart(Base):
         tree_left=None,
         tree_bottom=None,
         tree_right=None,
+        tree_collapse_interval=None,
         tree_label_position=None,
         tree_label_vertical_align=None,
         tree_label_align=None,

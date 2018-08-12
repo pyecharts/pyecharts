@@ -14,13 +14,12 @@ class Tree(Chart):
         super(Tree, self).__init__(title, subtitle, **kwargs)
 
     @staticmethod
-    def collapse_interval(data, interval=0):
+    def _set_collapse_interval(data, interval=0):
         """
         间隔折叠节点，当节点过多时可以解决节点显示过杂间隔。
 
         :param data: 节点数据
         :param interval: 指定间隔
-        :return:
         """
         if interval <= 0:
             return data
@@ -31,6 +30,16 @@ class Tree(Chart):
                     if index % interval == 0:
                         value.update(collapsed="false")
                 return data
+
+    @staticmethod
+    def _get_label_config(position, vertical_align, align, text_size, rotate):
+        return {
+            "position": position,
+            "verticalAlign": vertical_align,
+            "align": align,
+            "fontSize": text_size,
+            "rotate": rotate,
+        }
 
     def add(self, *args, **kwargs):
         self.__add(*args, **kwargs)
@@ -47,6 +56,7 @@ class Tree(Chart):
         tree_left="12%",
         tree_bottom="12%",
         tree_right="12%",
+        tree_collapse_interval=0,
         tree_label_position="left",
         tree_label_vertical_align="middle",
         tree_label_align="right",
@@ -123,6 +133,8 @@ class Tree(Chart):
         :param tree_right:
             tree 组件离容器右侧的距离。可以是像 20 这样的具体像素值，
             可以是像 '20%' 这样相对于容器高宽的百分比。
+        :param tree_collapse_interval:
+            折叠节点间隔，当节点过多时可以解决节点显示过杂间隔。默认为 0
         :param tree_label_position:
             标签的位置。
             * [x, y]
@@ -165,11 +177,12 @@ class Tree(Chart):
             叶节点标签旋转。从 -90 度到 90 度。正值是逆时针。
         :param kwargs:
         """
+        _data = self._set_collapse_interval(data, tree_collapse_interval)
         self._option.get("series").append(
             {
                 "type": "tree",
                 "name": name,
-                "data": data,
+                "data": _data,
                 "left": tree_left,
                 "right": tree_right,
                 "top": tree_top,
@@ -179,23 +192,23 @@ class Tree(Chart):
                 "layout": tree_layout,
                 "orient": tree_orient,
                 "label": {
-                    "normal": {
-                        "position": tree_label_position,
-                        "verticalAlign": tree_label_vertical_align,
-                        "align": tree_label_align,
-                        "fontSize": tree_label_text_size,
-                        "rotate": tree_label_rotate,
-                    }
+                    "normal": self._get_label_config(
+                        position=tree_label_position,
+                        vertical_align=tree_label_vertical_align,
+                        align=tree_label_align,
+                        text_size=tree_label_text_size,
+                        rotate=tree_label_rotate,
+                    )
                 },
                 "leaves": {
                     "label": {
-                        "normal": {
-                            "position": tree_leaves_position,
-                            "verticalAlign": tree_leaves_vertical_align,
-                            "align": tree_leaves_align,
-                            "fontSize": tree_leaves_text_size,
-                            "rotate": tree_leaves_rotate,
-                        }
+                        "normal": self._get_label_config(
+                            position=tree_leaves_position,
+                            vertical_align=tree_leaves_vertical_align,
+                            align=tree_leaves_align,
+                            text_size=tree_leaves_text_size,
+                            rotate=tree_leaves_rotate,
+                        )
                     }
                 },
             }
