@@ -7,6 +7,7 @@
 - [Codecov](https://codecov.io)：代码覆盖率
 - [nose](http://nose.readthedocs.io/en/latest/index.html) ：单元测试工具
 - [flake8](http://flake8.pycqa.org/en/latest/index.html) ：静态代码检查
+- [black(18.4a4)](https://github.com/ambv/black) ：代码格式化
 - [McCabe](https://pypi.org/project/mccabe/) ：复杂度检测工具
 
 ## 文档构建工具

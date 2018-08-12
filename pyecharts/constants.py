@@ -20,17 +20,8 @@ GEO_DATA_PLUGIN_TYPE = "pyecharts_geo_data_bank"
 # themes
 LIGHT_THEME = "light"
 DARK_THEME = "dark"
-VINTAGE_THEME = "vintage"
-MACARONS_THEME = "macarons"
-INFOGRAPHIC_THEME = "infographic"
-SHINE_THEME = "shine"
-ROMA_THEME = "roma"
 
-EXTERNAL_THEMES = [
-    VINTAGE_THEME, MACARONS_THEME, INFOGRAPHIC_THEME, SHINE_THEME, ROMA_THEME
-]
 BUILTIN_THEMES = [LIGHT_THEME, DARK_THEME]
-ALL_THEMES = EXTERNAL_THEMES + BUILTIN_THEMES
 
 ERROR_MESSAGE = "You need python 3.5+ and pyecharts-javascripthon"
 
