@@ -162,7 +162,7 @@ bar.add(
 )
 bar.render()
 ```
-![2018-07-28_10-19-17](https://user-images.githubusercontent.com/19553554/43352052-ec70fe82-924f-11e8-880b-832b8f95d701.gif)
+![bar-demo](https://user-images.githubusercontent.com/19553554/43352052-ec70fe82-924f-11e8-880b-832b8f95d701.gif)
 
 
 **Note：** datazoom 适合所有平面直角坐标系图形，也就是(Line、Bar、Scatter、EffectScatter、Kline)  
@@ -247,6 +247,18 @@ bar.add(
 bar.render()
 ```
 ![bar-demo](https://user-images.githubusercontent.com/19553554/43877147-e30b5cf0-9bca-11e8-9bc7-c1cd7be58141.png)
+
+
+**数据不对齐**
+
+当进行两次或两次 add 的时候，有一次的某项数据缺失，可用 0 填充
+```python
+bar = Bar("折线图示例")
+bar.add("商家A", CLOTHES, clothes_v1)
+bar.add("商家B", CLOTHES, [55, 60, 16, 20, 0, 0])
+bar.render()
+```
+![bar-demo](https://user-images.githubusercontent.com/19553554/44008022-e3708900-9ed0-11e8-94c5-68c8d96ebe60.png)
 
 
 ## Bar3D（3D 柱状图）
@@ -1354,6 +1366,7 @@ kline.add(
 kline.render()
 ```
 ![kline-demo](https://user-images.githubusercontent.com/19553554/35090078-9e901a44-fc73-11e7-835c-3408cc960bac.png)
+
 
 ## Line（折线/面积图）
 > 折线图是用折线将各个数据点标志连接起来的图表，用于展现数据的变化趋势。
