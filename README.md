@@ -18,8 +18,11 @@
     <a href="https://badge.fury.io/py/pyecharts">
         <img src="https://badge.fury.io/py/pyecharts.svg" alt="Package version">
     </a>
+    <a href="https://github.com/pyecharts/pyecharts/pulls">
+        <img src="https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat" alt="Contributions welcome">
+    </a>
     <a href="https://opensource.org/licenses/MIT">
-        <img src="https://img.shields.io/badge/License-MIT-green.svg" alt="LICENSE">
+        <img src="https://img.shields.io/badge/License-MIT-green.svg" alt="License">
     </a>
 </p>
 
