@@ -134,6 +134,7 @@ class Chart(Base):
         self,
         angle_data=None,
         angle_range=None,
+        angleaxis_label_interval=None,
         area_color=None,
         area_opacity=None,
         axis_range=None,

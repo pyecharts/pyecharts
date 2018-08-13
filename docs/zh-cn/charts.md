@@ -2195,6 +2195,9 @@ add(name, data,
     数据堆叠，同个类目轴上系列配置相同的 stack 值可以堆叠放置
 * axis_range -> list  
     坐标轴刻度范围。默认值为 [None, None]。
+* angleaxis_label_interval -> int/str  
+    坐标轴刻度标签的显示间隔，在类目轴中有效。  
+    可以采用标签不重叠的策略间隔显示标签，即'auto'。可以设置成 0 强制显示所有标签。如果设置为 1，表示『隔一个标签显示一个标签』，如果值为 2，表示隔两个标签显示一个标签，以此类推。默认为 0。
 * is_angleaxis_show -> bool  
     是否显示极坐标系的角度轴，默认为 True
 * radiusaxis_z_index -> int

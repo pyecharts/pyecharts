@@ -7,8 +7,9 @@
 * ### version 0.6.0 - 2018.8.13（current）
 
     #### Added
-    * [issue#655](https://github.com/pyecharts/pyecharts/issues/655) 增加七个自定义主题：westeros, wonderland, chalk, halloween, essos，walden and purple-passion
+    * [issue#655](https://github.com/pyecharts/pyecharts/issues/655) 新增七个自定义主题：westeros, wonderland, chalk, halloween, essos，walden, romantic and purple-passion
     * [issue#669](https://github.com/pyecharts/pyecharts/issues/669) 新增 Tree 图形种类。
+    * Polar 图新增 `angleaxis_label_interval` 参数，用于控制坐标轴刻度标签的显示间隔，在类目轴中有效。
 
 
 * ### version 0.5.7 - 2018.8.11
