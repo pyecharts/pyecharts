@@ -8,12 +8,12 @@ from lml.loader import scan_plugins
 from lml.plugin import PluginManager
 
 import pyecharts.exceptions as exceptions
-import pyecharts.constants as constants
 
 # here are all plugins from pyecharts team
 OFFICIAL_PLUGINS = ["jupyter_echarts_pypkg", "pyecharts_snapshot"]
 THIRD_PARTY_PLUGIN_PREFIX = "echarts_"
 
+JS_EXTENSION_PLUGIN_TYPE = "pyecharts_js_extension"
 JS_EXTENSION_REGISTRY = "registry.json"
 REGISTRY_JS_FOLDER = "JS_FOLDER"
 REGISTRY_FILE_MAP = "FILE_MAP"
@@ -32,12 +32,12 @@ class JsExtension(object):
 
     @classmethod
     def from_registry_path(cls, extension_installation_path):
-        __registry_json__ = os.path.join(
+        _registry_json = os.path.join(
             extension_installation_path, JS_EXTENSION_REGISTRY
         )
-        __registry__ = read_a_map_registry(__registry_json__)
-        _validate_registry(__registry__)
-        return cls(extension_installation_path, __registry__)
+        _registry = read_a_map_registry(_registry_json)
+        _validate_registry(_registry)
+        return cls(extension_installation_path, _registry)
 
     def get_js_library(self, pinyin):
         file_map = self.registry.get(REGISTRY_FILE_MAP)
@@ -58,7 +58,7 @@ class JsExtension(object):
         if filename:
             if jshost is None:
                 jshost = self.home
-            return "%s/%s.js" % (jshost, filename)
+            return "{}/{}.js".format(jshost, filename)
 
         else:
             return None
@@ -69,50 +69,48 @@ class JsExtension(object):
         filename = self.get_js_library(pinyin)
         if filename:
             jshost = self._resolve_jshost(jshost, use_github)
-            return "'%s': '%s/%s'" % (pinyin, jshost, filename)
+            return "'{}': '{}/{}'".format(pinyin, jshost, filename)
 
         else:
             return None
 
     def chinese_to_pinyin(self, chinese):
-        __PINYIN_MAP__ = self.registry.get(REGISTRY_PINYIN_MAP, {})
-        return __PINYIN_MAP__.get(chinese)
+        _PINYIN_MAP = self.registry.get(REGISTRY_PINYIN_MAP, {})
+        return _PINYIN_MAP.get(chinese)
 
     def _resolve_jshost(self, jshost, use_github=False):
-        __jshost__ = jshost
+        _jshost = jshost
         if jshost is None:
             if use_github:
-                __jshost__ = self.registry[REGISTRY_GITHUB_URL]
+                _jshost = self.registry[REGISTRY_GITHUB_URL]
             else:
-                __jshost__ = self.registry[REGISTRY_JUPYTER_URL]
-        return __jshost__
+                _jshost = self.registry[REGISTRY_JUPYTER_URL]
+        return _jshost
 
 
 class JsExtensionManager(PluginManager):
 
     def __init__(self):
-        super(JsExtensionManager, self).__init__(
-            constants.JS_EXTENSION_PLUGIN_TYPE
-        )
+        super(JsExtensionManager, self).__init__(JS_EXTENSION_PLUGIN_TYPE)
         self.js_extensions = []
 
     def get_all_extensions(self):
         if len(self.js_extensions) == 0:
             for pypkgs in self.registry.values():
                 for pypkg_info in pypkgs:
-                    __pypkg__ = pypkg_info.cls()
-                    __js_extension__ = JsExtension.from_registry_path(
-                        __pypkg__.js_extension_path
+                    _pypkg = pypkg_info.cls()
+                    _js_extension = JsExtension.from_registry_path(
+                        _pypkg.js_extension_path
                     )
-                    self.js_extensions.append(__js_extension__)
+                    self.js_extensions.append(_js_extension)
         return self.js_extensions
 
     def get_a_extension(self, name):
         if len(self.js_extensions) == 0:
             self.get_all_extensions()
-        for __extension__ in self.js_extensions:
-            if __extension__.registry[REGISTRY_JS_FOLDER] == name:
-                return __extension__
+        for extension in self.js_extensions:
+            if extension.registry[REGISTRY_JS_FOLDER] == name:
+                return extension
 
         return None
 
@@ -133,13 +131,13 @@ def read_a_map_registry(registry_json):
 
 
 def _validate_registry(registry):
-    __registry_keys__ = [
+    _registry_keys = [
         REGISTRY_JS_FOLDER,
         REGISTRY_FILE_MAP,
         REGISTRY_GITHUB_URL,
         REGISTRY_JUPYTER_URL,
         REGISTRY_PINYIN_MAP,
     ]
-    for key in __registry_keys__:
+    for key in _registry_keys:
         if key not in registry:
-            raise exceptions.InvalidRegistry("%s is missing" % key)
+            raise exceptions.InvalidRegistry("{} is missing".format(key))

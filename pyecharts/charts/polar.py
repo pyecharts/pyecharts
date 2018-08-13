@@ -30,6 +30,7 @@ class Polar(Chart):
         is_clockwise=True,
         is_stack=False,
         axis_range=None,
+        angleaxis_label_interval=0,
         is_angleaxis_show=True,
         is_radiusaxis_show=True,
         radiusaxis_z_index=50,
@@ -66,6 +67,11 @@ class Polar(Chart):
             数据堆叠，同个类目轴上系列配置相同的 stack 值可以堆叠放置。
         :param axis_range:
             坐标轴刻度范围。默认值为 [None, None]。
+        :param angleaxis_label_interval:
+            坐标轴刻度标签的显示间隔，在类目轴中有效。
+            默认会采用标签不重叠的策略间隔显示标签。可以设置成 0 强制显示所有标签。
+            如果设置为 1，表示『隔一个标签显示一个标签』，如果值为 2，表示隔两个
+            标签显示一个标签，以此类推。
         :param is_angleaxis_show:
             是否显示极坐标系的角度轴，默认为 True。
         :param is_radiusaxis_show:
@@ -185,6 +191,7 @@ class Polar(Chart):
                     "boundaryGap": boundary_gap,
                     "splitLine": chart["split_line"],
                     "axisLine": chart["axis_line"],
+                    "axisLabel": {"interval": angleaxis_label_interval}
                 }
             )
             self._option.update(
