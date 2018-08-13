@@ -1,5 +1,8 @@
 {
     "angleAxis": {
+        "axisLabel": {
+            "interval": 0
+        },
         "axisLine": {
             "lineStyle": {
                 "normal": {
@@ -10,8 +13,8 @@
                 }
             }, 
             "show": true
-        }, 
-        "boundaryGap": false, 
+        },
+        "boundaryGap": false,
         "clockwise": true, 
         "show": true, 
         "splitLine": {
