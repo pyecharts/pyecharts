@@ -1,10 +1,10 @@
 # 版本日志
 
-* ### version 0.6.1（dev）
+* ### version 0.5.9（dev）
     * TODO
 
 
-* ### version 0.6.0 - 2018.8.13（current）
+* ### version 0.5.8 - 2018.8.13（current）
 
     #### Added
     * [issue#655](https://github.com/pyecharts/pyecharts/issues/655) 新增多个自定义主题：westeros, wonderland, chalk, halloween, essos，walden, romantic and purple-passion

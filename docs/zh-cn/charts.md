@@ -248,10 +248,7 @@ bar.render()
 ```
 ![bar-demo](https://user-images.githubusercontent.com/19553554/43877147-e30b5cf0-9bca-11e8-9bc7-c1cd7be58141.png)
 
-
-**数据不对齐**
-
-当进行两次或两次 add 的时候，有一次的某项数据缺失，可用 0 填充
+**进行两次或两次 add 的时候，有一次的某项数据缺失，可用 0 填充**
 ```python
 bar = Bar("折线图示例")
 bar.add("商家A", CLOTHES, clothes_v1)
@@ -3048,9 +3045,9 @@ tree.render()
 ```
 ![tree-demo](https://user-images.githubusercontent.com/19553554/44004354-fc603b0a-9e93-11e8-9437-778a1e4a3001.png)
 
-**使用 tree_collapse_interval**
+**使用 tree_collapse_interva 控制折叠节点间隔**
 
-以官方提供的 flare.json 数据为例，tree_collapse_interval 为 0 时，文字都挤在一起了
+当节点过多时可以解决节点显示过杂间隔。以官方提供的 flare.json 数据为例，tree_collapse_interval 为 0 时（表示全部节点均不折叠），文字都挤在一起了
 ```python
 import os
 import json
@@ -3068,7 +3065,7 @@ tree.render()
 ```
 ![tree-demo](https://user-images.githubusercontent.com/19553554/44004551-a41321f8-9e96-11e8-9837-ddf930394240.png)
 
-设置 tree_collapse_interval 为 2，图明显就好看多了
+设置 tree_collapse_interval 为 2（表示间隔折叠节点），图明显就好看多了
 ```python
 import os
 import json
