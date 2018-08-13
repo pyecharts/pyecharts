@@ -151,7 +151,7 @@ Mode                LastWriteTime         Length Name
 复制本文件夹到需要离线安装的电脑上，终端切换到该路径下
 
 ``` shell
-$ pip install --no-index -f ./ -r r requirements.txt
+$ pip install --no-index -f ./ -r requirements.txt
 $ pip install ./pyecharts
 ```
 
