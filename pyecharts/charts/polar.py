@@ -121,13 +121,15 @@ class Polar(Chart):
             "show": is_angleaxis_show,
             "type": polar_type,
             "data": angle_data,
-            # "clockwise": is_clockwise,
-            # "startAngle": start_angle,
-            # "boundaryGap": boundary_gap,
-            # "splitLine": chart["split_line"],
-            # "axisLine": chart["axis_line"],
-            # "axisLabel": {"interval": angleaxis_label_interval},
+            "clockwise": is_clockwise,
+            "startAngle": start_angle,
+            "boundaryGap": boundary_gap,
+            "splitLine": chart["split_line"],
+            "axisLine": chart["axis_line"],
+            "axisLabel": {"interval": angleaxis_label_interval},
+            "z": angleaxis_z_index,
         }
+
         if type in ("scatter", "line"):
             self._option.get("series").append(
                 {
