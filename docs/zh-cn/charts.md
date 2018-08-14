@@ -37,6 +37,8 @@
 * 统一风格
 
 
+# 基本图表类
+
 ## Bar（柱状图/条形图）
 > 柱状/条形图，通过柱形的高度/条形的宽度来表现数据的大小。
 
@@ -3292,7 +3294,7 @@ wordcloud.render()
 **Note：** 当且仅当 shape 为默认的'circle'时 rotate_step 参数才生效
 
 
-# 用户自定义
+# 自定义图表类
 
 ## Grid：并行显示多张图
 > 用户可以自定义结合 Line/Bar/Kline/Scatter/EffectScatter/Pie/HeatMap/Boxplot 图表，将不同类型图表画在多张图上。第一个图需为 有 x/y 轴的图，即不能为 Pie，其他位置顺序任意。
