@@ -70,3 +70,9 @@ def test_effectscatter_multiple_symbol_type():
         symbol="triangle",
     )
     es.render()
+
+
+def test_effectscatter_splitline():
+    es = EffectScatter("动态散点图各种图形示例")
+    es.add("", [10], [10],)
+    assert es.options["xAxis"][0]["splitLine"]["show"] == True
