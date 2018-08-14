@@ -34,6 +34,8 @@ class EffectScatter(Scatter):
         chart = self._get_all_options(**kwargs)
 
         xaxis, yaxis = chart["xy_axis"]
+        # show split line, because by default split line is hidden for xaxis
+        xaxis[0]["splitLine"]["show"] = True
         self._option.update(xAxis=xaxis, yAxis=yaxis)
         self._option.get("legend")[0].get("data").append(name)
 
