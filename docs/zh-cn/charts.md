@@ -2,7 +2,7 @@
 
 **图表详细配置请参考 [图表配置篇](zh-cn/charts_configure)**
 
-* 图表详情
+* 基本图表类
     * Bar（柱状图/条形图）
     * Bar3D（3D 柱状图）
     * Boxplot（箱形图）
@@ -29,7 +29,7 @@
     * Tree（树图）
     * TreeMap（矩形树图）
     * WordCloud（词云图）
-* 用户自定义
+* 自定义图表类
     * Grid 类：并行显示多张图
     * Overlap 类：结合不同类型图表叠加画在同张图上
     * Page 类：同一网页按顺序展示多图
@@ -37,7 +37,9 @@
 * 统一风格
 
 
-## Bar（柱状图/条形图）
+## 基本图表类
+
+### Bar（柱状图/条形图）
 > 柱状/条形图，通过柱形的高度/条形的宽度来表现数据的大小。
 
 Bar.add() 方法签名
@@ -258,7 +260,7 @@ bar.render()
 ![bar-demo](https://user-images.githubusercontent.com/19553554/44008022-e3708900-9ed0-11e8-94c5-68c8d96ebe60.png)
 
 
-## Bar3D（3D 柱状图）
+### Bar3D（3D 柱状图）
 Bar3D.add() 方法签名
 
 ```python
@@ -404,7 +406,7 @@ bar3d.render()
 **Note：** 可配合 axis3D 通用配置项 一起使用 
 
 
-## Boxplot（箱形图）
+### Boxplot（箱形图）
 > 箱形图是一种用作显示一组数据分散情况资料的统计图。它能显示出一组数据的最大值、最小值、中位数、下四分位数及上四分位数。
 
 Boxplot.add() 方法签名
@@ -468,7 +470,7 @@ boxplot.render()
 ![boxplot-demo](https://user-images.githubusercontent.com/19553554/35082365-511fcc38-fc54-11e7-9826-d16231a401f4.png)
 
 
-## EffectScatter（带有涟漪特效动画的散点图）
+### EffectScatter（带有涟漪特效动画的散点图）
 > 利用动画特效可以将某些想要突出的数据进行视觉突出。
 
 EffectScatter.add() 方法签名
@@ -567,7 +569,7 @@ es.render()
     动画持续的时间。默认为 4（s）
 
 
-## Funnel（漏斗图）
+### Funnel（漏斗图）
 Funnel.add() 方法签名
 ```python
 add(name, attr, value, **kwargs)
@@ -613,7 +615,7 @@ funnel.render()
 ![funnel-demo](https://user-images.githubusercontent.com/19553554/35090186-d8f50db6-fc73-11e7-9b7e-947580a621de.png)
 
 
-## Gauge（仪表盘）
+### Gauge（仪表盘）
 Gauge.add() 方法签名
 ```python
 add(name, attr, value,
@@ -655,7 +657,7 @@ gauge.render()
 ![gauge-demo](https://user-images.githubusercontent.com/19553554/35090193-dc199d22-fc73-11e7-8f4d-22477a3a22be.png)
 
 
-## Geo（地理坐标系）
+### Geo（地理坐标系）
 > 地理坐标系组件用于地图的绘制，支持在地理坐标系上绘制散点图，线集。
 
 Geo.add() 方法签名
@@ -896,7 +898,7 @@ geo.render()
 ![geo-demo](https://user-images.githubusercontent.com/19553554/43998653-23b21a78-9e2d-11e8-8273-52fbeaacc6e8.png)
 
 
-## GeoLines（地理坐标系线图）
+### GeoLines（地理坐标系线图）
 > 用于带有起点和终点信息的线数据的绘制，主要用于地图上的航线，路线的可视化。
 
 GeoLines.add() 方法签名
@@ -1069,7 +1071,7 @@ geolines.render()
 ![geolines-demo](https://user-images.githubusercontent.com/19553554/35082105-00885b92-fc53-11e7-8803-adc054037285.gif)
 
 
-## Graph（关系图）
+### Graph（关系图）
 > 用于展现节点以及节点之间的关系数据。
 
 Graph.add() 方法签名
@@ -1192,7 +1194,7 @@ graph.render()
 **Note：** 可配置 **lineStyle** 参数
 
 
-## HeatMap（热力图）
+### HeatMap（热力图）
 > 热力图主要通过颜色去表现数值的大小，必须要配合 visualMap 组件使用。直角坐标系上必须要使用两个类目轴。
 
 HeatMap.add() 方法签名
@@ -1279,7 +1281,7 @@ heatmap.render()
 **Note：** 热力图必须配合 通用配置项 中的 VisualMap 使用才有效果。
 
 
-## Kline/Candlestick（K线图）
+### Kline/Candlestick（K线图）
 > 红涨蓝跌
 
 Kline.add() 方法签名
@@ -1365,7 +1367,7 @@ kline.render()
 ![kline-demo](https://user-images.githubusercontent.com/19553554/35090078-9e901a44-fc73-11e7-835c-3408cc960bac.png)
 
 
-## Line（折线/面积图）
+### Line（折线/面积图）
 > 折线图是用折线将各个数据点标志连接起来的图表，用于展现数据的变化趋势。
 
 Line.add() 方法签名
@@ -1538,7 +1540,7 @@ line.render()
 ![line-demo](https://user-images.githubusercontent.com/19553554/35089980-5649aed0-fc73-11e7-9e8f-01ed75ad7418.gif)
 
 
-## Line3D（3D 折线图）
+### Line3D（3D 折线图）
 Line3D.add() 方法签名
 ```python
 add(name, data,
@@ -1612,7 +1614,7 @@ line3d.render()
 **Note：** 可配合 axis3D 通用配置项 一起使用 
 
 
-## Liquid（水球图）
+### Liquid（水球图）
 > 主要用来突出数据的百分比。
 
 Liquid.add() 方法签名
@@ -1692,7 +1694,7 @@ liquid.render()
 ![liquid-demo](https://user-images.githubusercontent.com/19553554/35082181-5863dfda-fc53-11e7-9807-507ac5639638.gif)
 
 
-## Map（地图）
+### Map（地图）
 > 地图主要用于地理区域数据的可视化。
 
 Map.add() 方法签名
@@ -1864,7 +1866,7 @@ map.render()
 ![map-demo](https://user-images.githubusercontent.com/19553554/36943053-22748c70-1fbd-11e8-86dc-ac3d48f5c4e3.png)
 
 
-## Parallel（平行坐标系）
+### Parallel（平行坐标系）
 > 平行坐标系是一种常用的可视化高维数据的图表。
 
 Parallel.add() 方法签名
@@ -1966,7 +1968,7 @@ parallel.render()
 **Note：** 可配置 **lineStyle** 参数
 
 
-## Pie（饼图）
+### Pie（饼图）
 > 饼图主要用于表现不同类目的数据在总和中的占比。每个的弧度表示数据数量的比例。
 
 Pie.add() 方法签名
@@ -2151,7 +2153,7 @@ pie.render()
 ![pie-demo](https://user-images.githubusercontent.com/19553554/35089644-76cbcb9e-fc72-11e7-8b9e-d5bebc78e8a1.gif)
 
 
-## Polar（极坐标系）
+### Polar（极坐标系）
 > 可以用于散点图和折线图。
 
 Polar.add() 方法签名
@@ -2364,7 +2366,7 @@ polar.render()
 ![polar-demo](https://user-images.githubusercontent.com/19553554/40104662-820a82ee-5923-11e8-8052-9bd8fcb70623.png)
 
 
-## Radar（雷达图）
+### Radar（雷达图）
 > 雷达图主要用于表现多变量的数据。
 
 Radar.add() 方法签名
@@ -2494,7 +2496,7 @@ radar.render()
 ![radar-demo](https://user-images.githubusercontent.com/19553554/35082343-269d9440-fc54-11e7-9675-4c125bbca75d.gif)
 
 
-## Sankey（桑基图）
+### Sankey（桑基图）
 > 桑基图是一种特殊的流图, 它主要用来表示原材料、能量等如何从初始形式经过中间过程的加工、转化到达最终形式。
 
 Sankey.add() 方法签名
@@ -2574,7 +2576,7 @@ sankey.render()
 ![sankey-1](https://user-images.githubusercontent.com/19553554/35090346-5c79d1da-fc74-11e7-869b-7db7ecf42d9e.png)
 
 
-## Scatter（散点图）
+### Scatter（散点图）
 > 直角坐标系上的散点图可以用来展现数据的 x，y 之间的关系，如果数据项有多个维度，可以用颜色来表现，利用 geo 组件。
 
 Scatter.add() 方法签名
@@ -2750,7 +2752,7 @@ scatter.render()
 ![pyecharts-render](https://user-images.githubusercontent.com/19553554/35104426-c4ac81ce-fca3-11e7-9b46-7fd729ec3ece.png)
 
 
-## Scatter3D（3D 散点图）
+### Scatter3D（3D 散点图）
 Scatter3D.add() 方法签名
 ```python
 add(name, data,
@@ -2785,7 +2787,7 @@ scatter3D.render()
 **Note：** 可配合 axis3D 通用配置项 一起使用 
 
 
-## ThemeRiver（主题河流图）
+### ThemeRiver（主题河流图）
 > 主题河流图是一种特殊的流图, 它主要用来表示事件或主题等在一段时间内的变化。
 
 ThemeRiver.add() 方法签名
@@ -2846,7 +2848,7 @@ tr.render()
 **Note：** 可以看到，每个数据项中的第三个数值就是该项的种类，而种类可以在 `add()` 第一个参数指定。
 
 
-## Tree（树图）
+### Tree（树图）
 > 树图主要用来可视化树形数据结构，是一种特殊的层次类型，具有唯一的根节点，左子树，和右子树。
 
 Tree.add() 方法签名
@@ -3125,7 +3127,7 @@ tree.render()
 ![tree-demo](https://user-images.githubusercontent.com/19553554/44004651-399e4ab2-9e98-11e8-93b5-8ab6e9926408.png)
 
 
-## TreeMap（矩形树图）
+### TreeMap（矩形树图）
 > 矩形树图是一种常见的表达『层级数据』『树状数据』的可视化形式。它主要用面积的方式，便于突出展现出『树』的各层级中重要的节点。
 
 TreeMap.add() 方法签名
@@ -3240,7 +3242,7 @@ treemap.render()
 ![treemap-demo](https://user-images.githubusercontent.com/19553554/35082251-b9e23982-fc53-11e7-8341-e7da1842389f.gif)
 
 
-## WordCloud（词云图）
+### WordCloud（词云图）
 WordCloud.add() 方法签名
 ```python
 add(name, attr, value,
@@ -3292,9 +3294,9 @@ wordcloud.render()
 **Note：** 当且仅当 shape 为默认的'circle'时 rotate_step 参数才生效
 
 
-# 用户自定义
+## 自定义图表类
 
-## Grid：并行显示多张图
+### Grid：并行显示多张图
 > 用户可以自定义结合 Line/Bar/Kline/Scatter/EffectScatter/Pie/HeatMap/Boxplot 图表，将不同类型图表画在多张图上。第一个图需为 有 x/y 轴的图，即不能为 Pie，其他位置顺序任意。
 
 Grid 类的使用：
@@ -3403,7 +3405,7 @@ from pyecharts import Bar, Line, Scatter, EffectScatter, Grid
 attr = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
 v1 = [5, 20, 36, 10, 75, 90]
 v2 = [10, 25, 8, 60, 20, 80]
-bar = Bar("柱状图示例", height=720, width=1200, title_pos="65%")
+bar = Bar("柱状图示例", title_pos="65%")
 bar.add("商家A", attr, v1, is_stack=True)
 bar.add("商家B", attr, v2, is_stack=True, legend_pos="80%")
 line = Line("折线图示例")
@@ -3437,7 +3439,7 @@ es.add(
     legend_pos="20%",
 )
 
-grid = Grid()
+grid = Grid(height=720, width=1200)
 grid.add(bar, grid_bottom="60%", grid_left="60%")
 grid.add(line, grid_bottom="60%", grid_right="60%")
 grid.add(scatter, grid_top="60%", grid_left="60%")
@@ -3450,7 +3452,7 @@ grid.render()
 ```python
 from pyecharts import Line, Pie, Grid
 
-line = Line("折线图示例", width=1200)
+line = Line("折线图示例")
 attr = ["周一", "周二", "周三", "周四", "周五", "周六", "周日"]
 line.add(
     "最高气温",
@@ -3480,7 +3482,7 @@ pie.add(
     legend_orient="vertical",
 )
 
-grid = Grid()
+grid = Grid(width=1200)
 grid.add(line, grid_right="55%")
 grid.add(pie, grid_left="60%")
 grid.render()
@@ -3493,7 +3495,7 @@ grid.render()
 ```python
 from pyecharts import Line, Kline, Grid
 
-line = Line("折线图示例", width=1200)
+line = Line("折线图示例")
 attr = ["周一", "周二", "周三", "周四", "周五", "周六", "周日"]
 line.add(
     "最高气温",
@@ -3548,7 +3550,7 @@ kline.add(
     "日K", ["2017/7/{}".format(i + 1) for i in range(31)], v1, legend_pos="80%"
 )
 
-grid = Grid()
+grid = Grid(width=1200)
 grid.add(line, grid_right="60%")
 grid.add(kline, grid_left="55%")
 grid.render()
@@ -3562,30 +3564,10 @@ import random
 from pyecharts import HeatMap, Bar, Grid
 
 x_axis = [
-    "12a",
-    "1a",
-    "2a",
-    "3a",
-    "4a",
-    "5a",
-    "6a",
-    "7a",
-    "8a",
-    "9a",
-    "10a",
-    "11a",
-    "12p",
-    "1p",
-    "2p",
-    "3p",
-    "4p",
-    "5p",
-    "6p",
-    "7p",
-    "8p",
-    "9p",
-    "10p",
-    "11p",
+    "12a", "1a", "2a", "3a", "4a", "5a", "6a",
+    "7a", "8a", "9a", "10a", "11a", "12p", "1p",
+    "2p", "3p", "4p", "5p", "6p", "7p", "8p", "9p",
+    "10p", "11p",
 ]
 y_axis = [
     "Saturday",
@@ -3597,7 +3579,7 @@ y_axis = [
     "Sunday",
 ]
 data = [[i, j, random.randint(0, 50)] for i in range(24) for j in range(7)]
-heatmap = HeatMap("热力图示例", height=700)
+heatmap = HeatMap("热力图示例")
 heatmap.add(
     "热力图直角坐标系",
     x_axis,
@@ -3615,7 +3597,7 @@ bar = Bar("柱状图示例", title_top="52%")
 bar.add("商家A", attr, v1, is_stack=True)
 bar.add("商家B", attr, v2, is_stack=True, legend_top="50%")
 
-grid = Grid()
+grid = Grid(height=700)
 grid.add(heatmap, grid_bottom="60%")
 grid.add(bar, grid_top="60%")
 grid.render()
@@ -3653,7 +3635,7 @@ grid.render()
 ```python
 from pyecharts import Line, Kline, Grid
 
-line = Line("折线图示例", width=1200, height=700)
+line = Line("折线图示例")
 attr = ["周一", "周二", "周三", "周四", "周五", "周六", "周日"]
 line.add(
     "最高气温",
@@ -3715,7 +3697,7 @@ kline.add(
     is_datazoom_show=True,
 )
 
-grid = Grid()
+grid = Grid(width=1200, height=700)
 grid.add(line, grid_top="60%")
 grid.add(kline, grid_bottom="60%")
 grid.render()
@@ -3729,7 +3711,7 @@ from pyecharts import Line, Grid
 import random
 
 attr = ["{}天".format(i) for i in range(1, 31)]
-line_top = Line("折线图示例", width=1200, height=700)
+line_top = Line("折线图示例")
 line_top.add(
     "最高气温",
     attr,
@@ -3749,7 +3731,7 @@ line_bottom.add(
     xaxis_pos="top",
 )
 
-grid = Grid()
+grid = Grid(width=1200, height=700)
 grid.add(line_top, grid_bottom="60%")
 grid.add(line_bottom, grid_top="50%")
 grid.render()
@@ -3767,7 +3749,7 @@ v1 = [2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3]
 v2 = [2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3]
 v3 = [2.0, 2.2, 3.3, 4.5, 6.3, 10.2, 20.3, 23.4, 23.0, 16.5, 12.0, 6.2]
 
-bar = Bar(width=1200, height=600, title="Overlap+Grid 示例", title_pos="40%")
+bar = Bar(title="Overlap+Grid 示例", title_pos="40%")
 bar.add("蒸发量", attr, v1)
 bar.add(
     "降水量",
@@ -3781,7 +3763,7 @@ bar.add(
 )
 line = Line()
 line.add("平均温度", attr, v3, yaxis_formatter=" °C")
-overlap = Overlap()
+overlap = Overlap(width=1200, height=600)
 overlap.add(bar)
 overlap.add(line, is_add_yaxis=True, yaxis_index=1)
 
@@ -3793,7 +3775,7 @@ grid.render()
 **Note：** `Overlap` 放入 `Grid` 可以利用其 grid 网格调整布局，例如上图将图例放在右边，这种情况在**图例名字过长**时很有用。
 
 
-## Overlap：结合不同类型图表叠加画在同张图上
+### Overlap：结合不同类型图表叠加画在同张图上
 > 用户可以自定义结合 Line/Bar/Kline, Scatter/EffectScatter 图表，将不同类型图表画在一张图上。利用第一个图表为基础，往后的数据都将会画在第一个图表上。   
 Overlap 类的使用：
 1. 引入 `Overlap` 类，`from pyecharts import Overlap`
@@ -3947,7 +3929,7 @@ v1 = [2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3]
 v2 = [2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3]
 v3 = [2.0, 2.2, 3.3, 4.5, 6.3, 10.2, 20.3, 23.4, 23.0, 16.5, 12.0, 6.2]
 
-bar = Bar(width=1200, height=600)
+bar = Bar()
 bar.add("蒸发量", attr, v1)
 bar.add("降水量", attr, v2, yaxis_formatter=" ml",
         yaxis_interval=50, yaxis_max=250)
@@ -3955,7 +3937,7 @@ bar.add("降水量", attr, v2, yaxis_formatter=" ml",
 line = Line()
 line.add("平均温度", attr, v3, yaxis_formatter=" °C", yaxis_interval=5)
 
-overlap = Overlap()
+overlap = Overlap(width=1200, height=600)
 # 默认不新增 x y 轴，并且 x y 轴的索引都为 0
 overlap.add(bar)
 # 新增一个 y 轴，此时 y 轴的数量为 2，第二个 y 轴的索引为 1（索引从 0 开始），所以设置 yaxis_index = 1
@@ -3970,7 +3952,7 @@ overlap.render()
 如果只是想在单个 .html 按顺序展示图表，推荐使用 ```Page()``` 类
 
 
-## Page：同一网页按顺序展示多图
+### Page：同一网页按顺序展示多图
 > Grid/Timeline/Overlap 都可在 Page 中正常展示，把其当做一个图加入到 Page 中即可
 
 Page 类的使用：
@@ -4144,7 +4126,7 @@ page.render()
 ![page-demo](https://user-images.githubusercontent.com/19553554/43813125-e4ef7e2c-9af6-11e8-96a0-a6b53b0c136f.gif)
 
 
-## Timeline：提供时间线轮播多张图
+### Timeline：提供时间线轮播多张图
 Timeline 类的使用：
 1. 引入 `Timeline` 类，`from pyecharts import Timeline`
 2. 实例化 `Timeline` 类
@@ -4354,10 +4336,10 @@ timeline.render()
 ![timeline-demo](https://user-images.githubusercontent.com/19553554/35082284-e704cfa6-fc53-11e7-8790-f92eb6b2315f.gif)
 
 
-# 统一风格
+## 统一风格
 > 为了简化配置项编写，提供了一个 Style 类，可用于在同一个图或者多个图内保持统一的风格
 
-### 初始化图时
+### 初始化图
 ```python
 from pyecharts import Style
 
@@ -4372,7 +4354,7 @@ style = Style(
 geo = Geo("全国主要城市空气质量", "data from pm2.5", **style.init_style)
 ```
 
-### 增加图例时
+### 增加图例
 ```python
 pie = Pie('各类电影中"好片"所占的比例', "数据来着豆瓣", title_pos='center')
 # 使用 Style.add() 可配置增加图例的风格配置字典
