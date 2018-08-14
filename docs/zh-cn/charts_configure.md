@@ -10,13 +10,14 @@
     * grid3D：3D笛卡尔坐标系组配置项，适用于 3D 图形。（Bar3D, Line3D, Scatter3D)
     * axis3D：3D 笛卡尔坐标系 X，Y，Z 轴配置项，适用于 3D 图形。（Bar3D, Line3D, Scatter3D)
     * visualMap：是视觉映射组件，用于进行『视觉编码』，也就是将数据映射到视觉元素（视觉通道）
-    * markLine&markPoint：图形标记组件，用于标记指定的特殊数据，有标记线和标记点两种。（Bar、Line、Kline）
+    * markLine-markPoint：图形标记组件，用于标记指定的特殊数据，有标记线和标记点两种。（Bar、Line、Kline）
     * tooltip：提示框组件，用于移动或点击鼠标时弹出数据内容
     * toolbox：右侧实用工具箱
 
 
-# 图形初始化
-图表类初始化所接受的参数（所有类型的图表都一样）。
+## 图形初始化
+
+> 图表类初始化所接受的参数（所有类型的图表都一样）。
 
 * title -> str   
     主标题文本，支持 \n 换行，默认为 ""
@@ -48,10 +49,12 @@
     额外的 HTML 文本标签，(<p> 标签)。类型为 list，list[0] 为文本内容，list[1] 为字体风格样式（选填）。如 ["this is a p label", "color:red"]。**仅限于在单个图形或者 page 类时使用。**
 
 
-# 通用配置项
-**通用配置项均在 ```add()``` 中设置**
+## 通用配置项
 
-**xyAxis：平面直角坐标系中的 x、y 轴。(Line、Bar、Scatter、EffectScatter、Kline)**
+> 通用配置项均在 ```add()``` 中设置
+
+### xyAxis
+**平面直角坐标系中的 x、y 轴。(Line、Bar、Scatter、EffectScatter、Kline)**
 
 * is_convert -> bool  
     是否交换 x 轴与 y 轴
@@ -215,7 +218,8 @@
     y 坐标轴线线的宽度，默认为 1
 
 
-**dataZoom：dataZoom 组件 用于区域缩放，从而能自由关注细节的数据信息，或者概览数据整体，或者去除离群点的影响。(Line、Bar、Scatter、EffectScatter、Kline)**
+### dataZoom
+**dataZoom 组件 用于区域缩放，从而能自由关注细节的数据信息，或者概览数据整体，或者去除离群点的影响。(Line、Bar、Scatter、EffectScatter、Kline)**
 
 默认的 dataZoom 控制条
 * is_datazoom_show -> bool  
@@ -250,7 +254,8 @@
     默认控制第一个 y 轴，如没特殊需求无须显示指定。单个为 int 类型而控制多个为 list 类型，如 [0, 1] 表示控制第一个和第二个 x 轴。
 
 
-**legend：图例组件。图例组件展现了不同系列的标记(symbol)，颜色和名字。可以通过点击图例控制哪些系列不显示。**
+### legend
+**图例组件。图例组件展现了不同系列的标记(symbol)，颜色和名字。可以通过点击图例控制哪些系列不显示。**
 
 * is_legend_show -> bool  
     是否显示顶端图例，默认为 True
@@ -268,7 +273,8 @@
     图例名称字体颜色
     
 
-**label：图形上的文本标签，可用于说明图形的一些数据信息，比如值，名称等。**
+### label
+**图形上的文本标签，可用于说明图形的一些数据信息，比如值，名称等。**
 
 * is_label_show -> bool  
     是否正常显示标签，默认不显示。标签即各点的数据项信息  
@@ -304,7 +310,8 @@
 **Note：** is_random 可随机打乱图例颜色列表。
 
 
-**lineStyle：带线图形的线的风格选项(Line、Polar、Radar、Graph、Parallel)**
+### lineStyle
+**带线图形的线的风格选项(Line、Polar、Radar、Graph、Parallel)**
 
 * line_width -> int    
     线的宽度，默认为 1
@@ -318,7 +325,8 @@
     线的颜色
 
 
-**grid3D：3D 笛卡尔坐标系组配置项，适用于 3D 图形。（Bar3D, Line3D, Scatter3D)**
+### grid3D
+**3D 笛卡尔坐标系组配置项，适用于 3D 图形。（Bar3D, Line3D, Scatter3D)**
 
 * grid3d_width -> int  
     三维笛卡尔坐标系组件在三维场景中的高度。默认为 100
@@ -334,9 +342,10 @@
     旋转操作的灵敏度，值越大越灵敏。默认为 1, 设置为 0 后无法旋转。
 
 
-**axis3D：3D 笛卡尔坐标系 X，Y，Z 轴配置项，适用于 3D 图形。（Bar3D, Line3D, Scatter3D)**
+### axis3D
+**3D 笛卡尔坐标系 X，Y，Z 轴配置项，适用于 3D 图形。（Bar3D, Line3D, Scatter3D)**
 
-**3D X 轴**
+#### 3D X 轴
 
 * xaxis3d_name -> str  
     x 轴名称，默认为 ""
@@ -354,7 +363,7 @@
 * xaxis3d_margin -> int  
     x 轴刻度标签与轴线之间的距离。默认为 8
 
-**3D Y 轴**
+#### 3D Y 轴
 
 * yaxis3d_name -> str  
     y 轴名称，默认为 ""
@@ -372,7 +381,7 @@
 * yaxis3d_margin -> int  
     y 轴刻度标签与轴线之间的距离。默认为 8
 
-**3D Z 轴**
+#### 3D Z 轴
 
 * zaxis3d_name -> str  
     z 轴名称，默认为 ""
@@ -388,7 +397,8 @@
     z 轴刻度标签与轴线之间的距离。默认为 8
 
 
-**visualMap：是视觉映射组件，用于进行『视觉编码』，也就是将数据映射到视觉元素（视觉通道）**
+### visualMap
+**是视觉映射组件，用于进行『视觉编码』，也就是将数据映射到视觉元素（视觉通道）**
 
 * is_visualmap -> bool  
     是否使用视觉映射组件
@@ -435,7 +445,8 @@
     ]
     ```
 
-**tooltip：提示框组件，用于移动或点击鼠标时弹出数据内容**
+### tooltip
+**提示框组件，用于移动或点击鼠标时弹出数据内容**
 
 * tooltip_trigger -> str  
     触发类型。默认为 'item'  
@@ -475,7 +486,8 @@
     提示框浮层的边框宽。默认为 0
 
 
-**markLine&markPoint：图形标记组件，用于标记指定的特殊数据，有标记线和标记点两种（Bar、Line、Kline）**
+### markLine-markPoint
+**图形标记组件，用于标记指定的特殊数据，有标记线和标记点两种（Bar、Line、Kline）**
 
 * mark_point -> list  
     标记点，默认有'min', 'max', 'average'可选。支持自定义标记点，具体使用如下  
@@ -503,7 +515,8 @@
     mark_point=['min', 'max'], mark_point_valuedim=['lowest', 'highest'] 则表示 min 使用 lowest 维度，max 使用 highest 维度，以此类推
 
 
-**toolbox：右侧实用工具箱**
+### toolbox
+**右侧实用工具箱**
 
 * is_toolbox_show -> bool  
     指定是否显示右侧实用工具箱，默认为 True。

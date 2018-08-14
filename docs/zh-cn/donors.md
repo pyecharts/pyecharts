@@ -1,5 +1,3 @@
-## 赞助者名单
-
 > 感谢大家对 pyecharts 项目的慷慨捐赠！下面是名单，排名不分先后！
 
 * https://github.com/liuhui9312
