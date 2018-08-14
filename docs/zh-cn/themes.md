@@ -117,10 +117,9 @@ bar = Bar()
 
 ![purple-passion](https://user-images.githubusercontent.com/19553554/43997624-56ed56e2-9e13-11e8-95be-8815e1bdf0e5.png)
 
-# romantic
+#### romantic
 
 ![romantic](https://user-images.githubusercontent.com/19553554/44029175-eef6f170-9f2e-11e8-82cb-b60a39b28762.png)
-
 
 
 ## 使用自己构建的主题
