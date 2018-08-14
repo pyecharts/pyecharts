@@ -20,7 +20,7 @@ def test_polar_type_scatter_one(patched):
     fixture = "polar_options.json"
     patched.return_value = "1"
     data = [i for i in range(101)]
-    polar = Polar("极坐标系-散点图示例")
+    polar = Polar("Polar")
     polar.add(
         "",
         data,
