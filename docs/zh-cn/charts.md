@@ -2,7 +2,7 @@
 
 **图表详细配置请参考 [图表配置篇](zh-cn/charts_configure)**
 
-* 图表详情
+* 基本图表类
     * Bar（柱状图/条形图）
     * Bar3D（3D 柱状图）
     * Boxplot（箱形图）
@@ -29,7 +29,7 @@
     * Tree（树图）
     * TreeMap（矩形树图）
     * WordCloud（词云图）
-* 用户自定义
+* 自定义图表类
     * Grid 类：并行显示多张图
     * Overlap 类：结合不同类型图表叠加画在同张图上
     * Page 类：同一网页按顺序展示多图
@@ -3403,7 +3403,7 @@ from pyecharts import Bar, Line, Scatter, EffectScatter, Grid
 attr = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
 v1 = [5, 20, 36, 10, 75, 90]
 v2 = [10, 25, 8, 60, 20, 80]
-bar = Bar("柱状图示例", height=720, width=1200, title_pos="65%")
+bar = Bar("柱状图示例", title_pos="65%")
 bar.add("商家A", attr, v1, is_stack=True)
 bar.add("商家B", attr, v2, is_stack=True, legend_pos="80%")
 line = Line("折线图示例")
@@ -3437,7 +3437,7 @@ es.add(
     legend_pos="20%",
 )
 
-grid = Grid()
+grid = Grid(height=720, width=1200)
 grid.add(bar, grid_bottom="60%", grid_left="60%")
 grid.add(line, grid_bottom="60%", grid_right="60%")
 grid.add(scatter, grid_top="60%", grid_left="60%")
@@ -3450,7 +3450,7 @@ grid.render()
 ```python
 from pyecharts import Line, Pie, Grid
 
-line = Line("折线图示例", width=1200)
+line = Line("折线图示例")
 attr = ["周一", "周二", "周三", "周四", "周五", "周六", "周日"]
 line.add(
     "最高气温",
@@ -3480,7 +3480,7 @@ pie.add(
     legend_orient="vertical",
 )
 
-grid = Grid()
+grid = Grid(width=1200)
 grid.add(line, grid_right="55%")
 grid.add(pie, grid_left="60%")
 grid.render()
@@ -3493,7 +3493,7 @@ grid.render()
 ```python
 from pyecharts import Line, Kline, Grid
 
-line = Line("折线图示例", width=1200)
+line = Line("折线图示例")
 attr = ["周一", "周二", "周三", "周四", "周五", "周六", "周日"]
 line.add(
     "最高气温",
@@ -3548,7 +3548,7 @@ kline.add(
     "日K", ["2017/7/{}".format(i + 1) for i in range(31)], v1, legend_pos="80%"
 )
 
-grid = Grid()
+grid = Grid(width=1200)
 grid.add(line, grid_right="60%")
 grid.add(kline, grid_left="55%")
 grid.render()
@@ -3562,30 +3562,10 @@ import random
 from pyecharts import HeatMap, Bar, Grid
 
 x_axis = [
-    "12a",
-    "1a",
-    "2a",
-    "3a",
-    "4a",
-    "5a",
-    "6a",
-    "7a",
-    "8a",
-    "9a",
-    "10a",
-    "11a",
-    "12p",
-    "1p",
-    "2p",
-    "3p",
-    "4p",
-    "5p",
-    "6p",
-    "7p",
-    "8p",
-    "9p",
-    "10p",
-    "11p",
+    "12a", "1a", "2a", "3a", "4a", "5a", "6a",
+    "7a", "8a", "9a", "10a", "11a", "12p", "1p",
+    "2p", "3p", "4p", "5p", "6p", "7p", "8p", "9p",
+    "10p", "11p",
 ]
 y_axis = [
     "Saturday",
@@ -3597,7 +3577,7 @@ y_axis = [
     "Sunday",
 ]
 data = [[i, j, random.randint(0, 50)] for i in range(24) for j in range(7)]
-heatmap = HeatMap("热力图示例", height=700)
+heatmap = HeatMap("热力图示例")
 heatmap.add(
     "热力图直角坐标系",
     x_axis,
@@ -3615,7 +3595,7 @@ bar = Bar("柱状图示例", title_top="52%")
 bar.add("商家A", attr, v1, is_stack=True)
 bar.add("商家B", attr, v2, is_stack=True, legend_top="50%")
 
-grid = Grid()
+grid = Grid(height=700)
 grid.add(heatmap, grid_bottom="60%")
 grid.add(bar, grid_top="60%")
 grid.render()
@@ -3653,7 +3633,7 @@ grid.render()
 ```python
 from pyecharts import Line, Kline, Grid
 
-line = Line("折线图示例", width=1200, height=700)
+line = Line("折线图示例")
 attr = ["周一", "周二", "周三", "周四", "周五", "周六", "周日"]
 line.add(
     "最高气温",
@@ -3715,7 +3695,7 @@ kline.add(
     is_datazoom_show=True,
 )
 
-grid = Grid()
+grid = Grid(width=1200, height=700)
 grid.add(line, grid_top="60%")
 grid.add(kline, grid_bottom="60%")
 grid.render()
@@ -3729,7 +3709,7 @@ from pyecharts import Line, Grid
 import random
 
 attr = ["{}天".format(i) for i in range(1, 31)]
-line_top = Line("折线图示例", width=1200, height=700)
+line_top = Line("折线图示例")
 line_top.add(
     "最高气温",
     attr,
@@ -3749,7 +3729,7 @@ line_bottom.add(
     xaxis_pos="top",
 )
 
-grid = Grid()
+grid = Grid(width=1200, height=700)
 grid.add(line_top, grid_bottom="60%")
 grid.add(line_bottom, grid_top="50%")
 grid.render()
@@ -3767,7 +3747,7 @@ v1 = [2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3]
 v2 = [2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3]
 v3 = [2.0, 2.2, 3.3, 4.5, 6.3, 10.2, 20.3, 23.4, 23.0, 16.5, 12.0, 6.2]
 
-bar = Bar(width=1200, height=600, title="Overlap+Grid 示例", title_pos="40%")
+bar = Bar(title="Overlap+Grid 示例", title_pos="40%")
 bar.add("蒸发量", attr, v1)
 bar.add(
     "降水量",
@@ -3781,7 +3761,7 @@ bar.add(
 )
 line = Line()
 line.add("平均温度", attr, v3, yaxis_formatter=" °C")
-overlap = Overlap()
+overlap = Overlap(width=1200, height=600)
 overlap.add(bar)
 overlap.add(line, is_add_yaxis=True, yaxis_index=1)
 
@@ -3947,7 +3927,7 @@ v1 = [2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3]
 v2 = [2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3]
 v3 = [2.0, 2.2, 3.3, 4.5, 6.3, 10.2, 20.3, 23.4, 23.0, 16.5, 12.0, 6.2]
 
-bar = Bar(width=1200, height=600)
+bar = Bar()
 bar.add("蒸发量", attr, v1)
 bar.add("降水量", attr, v2, yaxis_formatter=" ml",
         yaxis_interval=50, yaxis_max=250)
@@ -3955,7 +3935,7 @@ bar.add("降水量", attr, v2, yaxis_formatter=" ml",
 line = Line()
 line.add("平均温度", attr, v3, yaxis_formatter=" °C", yaxis_interval=5)
 
-overlap = Overlap()
+overlap = Overlap(width=1200, height=600)
 # 默认不新增 x y 轴，并且 x y 轴的索引都为 0
 overlap.add(bar)
 # 新增一个 y 轴，此时 y 轴的数量为 2，第二个 y 轴的索引为 1（索引从 0 开始），所以设置 yaxis_index = 1
