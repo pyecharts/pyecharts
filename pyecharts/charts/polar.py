@@ -98,6 +98,38 @@ class Polar(Chart):
         if kwargs.get("area_color", None) is None:
             _area_style = None
 
+        _bar_type_series = {
+            "type": "bar",
+            "coordinateSystem": "polar",
+            "stack": is_stack,
+            "name": name,
+            "data": data,
+        }
+
+        _radius_axis_opt = {
+            "show": is_radiusaxis_show,
+            "type": polar_type,
+            "data": radius_data,
+            "min": _amin,
+            "max": _amax,
+            "axisLine": chart["axis_line"],
+            "axisLabel": {"rotate": rotate_step},
+            "z": radiusaxis_z_index,
+        }
+
+        _angle_axis_opt = {
+            "show": is_angleaxis_show,
+            "type": polar_type,
+            "data": angle_data,
+            "clockwise": is_clockwise,
+            "startAngle": start_angle,
+            "boundaryGap": boundary_gap,
+            "splitLine": chart["split_line"],
+            "axisLine": chart["axis_line"],
+            "axisLabel": {"interval": angleaxis_label_interval},
+            "z": angleaxis_z_index,
+        }
+
         if type in ("scatter", "line"):
             self._option.get("series").append(
                 {
@@ -128,45 +160,14 @@ class Polar(Chart):
             )
 
         elif type == "barRadius":
-            self._option.get("series").append(
-                {
-                    "type": "bar",
-                    "stack": is_stack,
-                    "name": name,
-                    "coordinateSystem": "polar",
-                    "data": data,
-                }
-            )
+            self._option.get("series").append(_bar_type_series)
             self._option.update(angleAxis={})
-            self._option.update(
-                radiusAxis={
-                    "type": polar_type,
-                    "data": radius_data,
-                    "z": radiusaxis_z_index,
-                }
-            )
+            self._option.update(radiusAxis=_radius_axis_opt)
 
         elif type == "barAngle":
-            self._option.get("series").append(
-                {
-                    "type": "bar",
-                    "stack": is_stack,
-                    "name": name,
-                    "coordinateSystem": "polar",
-                    "data": data,
-                }
-            )
+            self._option.get("series").append(_bar_type_series)
             self._option.update(radiusAxis={"show": is_radiusaxis_show})
-            self._option.update(
-                angleAxis={
-                    "show": is_angleaxis_show,
-                    "type": polar_type,
-                    "data": radius_data,
-                    "z": angleaxis_z_index,
-                    "startAngle": start_angle,
-                    "splitLine": chart["split_line"],
-                }
-            )
+            self._option.update(angleAxis=_angle_axis_opt)
 
         elif type == "custom":
             assert render_item is not None
@@ -181,30 +182,7 @@ class Polar(Chart):
             )
 
         if type not in ("barAngle", "barRadius"):
-            self._option.update(
-                angleAxis={
-                    "show": is_angleaxis_show,
-                    "type": polar_type,
-                    "data": angle_data,
-                    "clockwise": is_clockwise,
-                    "startAngle": start_angle,
-                    "boundaryGap": boundary_gap,
-                    "splitLine": chart["split_line"],
-                    "axisLine": chart["axis_line"],
-                    "axisLabel": {"interval": angleaxis_label_interval}
-                }
-            )
-            self._option.update(
-                radiusAxis={
-                    "show": is_radiusaxis_show,
-                    "type": polar_type,
-                    "data": radius_data,
-                    "min": _amin,
-                    "max": _amax,
-                    "axisLine": chart["axis_line"],
-                    "axisLabel": {"rotate": rotate_step},
-                    "z": radiusaxis_z_index,
-                }
-            )
+            self._option.update(angleAxis=_angle_axis_opt)
+            self._option.update(radiusAxis=_radius_axis_opt)
         self._option.update(polar={})
         self._config_components(**kwargs)
