@@ -46,7 +46,7 @@
 * renderer -> str  
     指定使用渲染方式，有 'svg' 和 'canvas' 可选，默认为 'canvas'。3D 图仅能使用 'canvas'。
 * extra_html_text_label -> list  
-    额外的 HTML 文本标签，(<p> 标签)。类型为 list，list[0] 为文本内容，list[1] 为字体风格样式（选填）。如 ["this is a p label", "color:red"]。**仅限于在单个图形或者 page 类时使用。**
+    额外的 HTML 文本标签，`(<p> 标签)`。类型为 list，list[0] 为文本内容，list[1] 为字体风格样式（选填）。如 ["this is a p label", "color:red"]。**仅限于在单个图形或者 page 类时使用。**
 
 
 ## 通用配置项

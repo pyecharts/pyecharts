@@ -4123,7 +4123,7 @@ bar.add("商家B", CLOTHES, v2)
 page.add(bar)
 page.render()
 ```
-![page-demo](https://user-images.githubusercontent.com/19553554/43813125-e4ef7e2c-9af6-11e8-96a0-a6b53b0c136f.gif)
+![page-demo](https://user-images.githubusercontent.com/19553554/44133457-71fb6448-a092-11e8-88b4-78e5c5d3b48e.png)
 
 
 ### Timeline：提供时间线轮播多张图
