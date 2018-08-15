@@ -66,7 +66,7 @@ def echarts_js_dependencies_embed(env, *args):
 @environmentfunction
 def echarts_container(env, chart):
     """
-    Render a div html element for a chart.
+    Render <p></p><div></div> html elements for a chart.
 
     :param env:
     :param chart: A pyecharts.base.Base object
