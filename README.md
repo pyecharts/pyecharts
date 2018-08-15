@@ -18,11 +18,16 @@
     <a href="https://badge.fury.io/py/pyecharts">
         <img src="https://badge.fury.io/py/pyecharts.svg" alt="Package version">
     </a>
-    <a href="https://github.com/pyecharts/pyecharts/pulls">
+    <a href="https://pypi.org/project/pyecharts/">
+        <img src="https://img.shields.io/pypi/pyversions/pyecharts.svg?colorB=brightgreen" alt="PyPI - Python Version">
+    </a>
+</p>
+<p align="center">
+     <a href="https://github.com/pyecharts/pyecharts/pulls">
         <img src="https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat" alt="Contributions welcome">
     </a>
     <a href="https://opensource.org/licenses/MIT">
-        <img src="https://img.shields.io/badge/License-MIT-green.svg" alt="License">
+        <img src="https://img.shields.io/badge/License-MIT-brightgreen.svg" alt="License">
     </a>
 </p>
 
