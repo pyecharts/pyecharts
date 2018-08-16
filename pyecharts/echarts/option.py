@@ -9,12 +9,10 @@ fs = []
 SYMBOLS = ("rect", "roundRect", "triangle", "diamond", "pin", "arrow")
 
 
-def collectfuncs(func):
-    fs.append(func)
-    return func
+OPTION_HANDER_MANAGER = option.EchartsOptionHandlerManager()
 
 
-@collectfuncs
+@option.Option()
 def label(
     type=None,
     is_label_show=False,
@@ -88,7 +86,7 @@ def label(
     return _label
 
 
-@collectfuncs
+@option.Option()
 def color(colorlst=None, is_random=False, label_color=None, **kwargs):
     """
 
@@ -110,7 +108,7 @@ def color(colorlst=None, is_random=False, label_color=None, **kwargs):
     return colorlst
 
 
-@collectfuncs
+@option.Option()
 def line_style(
     type=None,
     line_width=1,
@@ -153,7 +151,7 @@ def line_style(
     return _line_style
 
 
-@collectfuncs
+@option.Option()
 def split_line(is_splitline_show=True, **kwargs):
     """
 
@@ -167,7 +165,7 @@ def split_line(is_splitline_show=True, **kwargs):
     return _split_line
 
 
-@collectfuncs
+@option.Option()
 def axis_line(is_axisline_show=True, **kwargs):
     """
 
@@ -179,7 +177,7 @@ def axis_line(is_axisline_show=True, **kwargs):
     return _axis_line
 
 
-@collectfuncs
+@option.Option()
 def split_area(is_area_show=True, **kwargs):
     """
 
@@ -191,7 +189,7 @@ def split_area(is_area_show=True, **kwargs):
     return _split_area
 
 
-@collectfuncs
+@option.Option()
 def area_style(flag=False, area_opacity=None, area_color=None, **kwargs):
     """
 
@@ -209,7 +207,7 @@ def area_style(flag=False, area_opacity=None, area_color=None, **kwargs):
     return _area_style
 
 
-@collectfuncs
+@option.Option()
 def xy_axis(
     type=None,
     x_axis=None,
@@ -637,7 +635,7 @@ def _mark(
     return mark
 
 
-@collectfuncs
+@option.Option()
 def mark_point(mark_point=None, **kwargs):
     """
     标记点配置项
@@ -660,7 +658,7 @@ def mark_point(mark_point=None, **kwargs):
     return _mark(mark_point, **kwargs)
 
 
-@collectfuncs
+@option.Option()
 def mark_line(mark_line=None, **kwargs):
     """ 标记线配置项
 
@@ -671,7 +669,7 @@ def mark_line(mark_line=None, **kwargs):
     return _mark(mark_line, _is_markline=True, **kwargs)
 
 
-@collectfuncs
+@option.Option()
 def legend(
     is_legend_show=True,
     legend_orient="horizontal",
@@ -719,7 +717,7 @@ def legend(
     return _legend
 
 
-@collectfuncs
+@option.Option()
 def visual_map(
     visual_type="color",
     visual_range=None,
@@ -833,7 +831,7 @@ def visual_map(
     return _visual_map
 
 
-@collectfuncs
+@option.Option()
 def symbol(type=None, symbol="", **kwargs):
     """
 
@@ -851,7 +849,7 @@ def symbol(type=None, symbol="", **kwargs):
     return symbol
 
 
-@collectfuncs
+@option.Option()
 def effect(
     effect_brushtype="stroke", effect_scale=2.5, effect_period=4, **kwargs
 ):
@@ -874,7 +872,7 @@ def effect(
     return _effect
 
 
-@collectfuncs
+@option.Option()
 def datazoom_extra(
     is_datazoom_extra_show=False,
     datazoom_extra_type="slider",
@@ -898,7 +896,7 @@ def datazoom_extra(
         )
 
 
-@collectfuncs
+@option.Option()
 def datazoom(
     is_datazoom_show=False,
     datazoom_type="slider",
@@ -955,7 +953,7 @@ def datazoom(
     return _datazoom
 
 
-@collectfuncs
+@option.Option()
 def grid(
     grid_width=None,
     grid_height=None,
@@ -1001,7 +999,7 @@ def grid(
     return _grid
 
 
-@collectfuncs
+@option.Option()
 def grid3D(
     grid3d_width=100,
     grid3d_height=100,
@@ -1041,7 +1039,7 @@ def grid3D(
     return _grid3D
 
 
-@collectfuncs
+@option.Option()
 def xaxis3D(
     xaxis3d_type=None,
     xaxis3d_name="",
@@ -1087,7 +1085,7 @@ def xaxis3D(
     return _xaxis3D
 
 
-@collectfuncs
+@option.Option()
 def yaxis3D(
     yaxis3d_type=None,
     yaxis3d_name="",
@@ -1133,7 +1131,7 @@ def yaxis3D(
     return _yaxis3D
 
 
-@collectfuncs
+@option.Option()
 def zaxis3D(
     zaxis3d_type=None,
     zaxis3d_name="",
@@ -1174,12 +1172,7 @@ def zaxis3D(
     return _zaxis3D
 
 
-@collectfuncs
-def tooltip(**kwargs):
-    return option.Tooltip(**kwargs)
-
-
-@collectfuncs
+@option.Option()
 def calendar(calendar_date_range=None, calendar_cell_size=None, **kwargs):
     """
 
@@ -1204,6 +1197,6 @@ def get_all_options(**kwargs):
     返回图形实例的所有配置项
     """
     _funcs = {}
-    for f in fs:
-        _funcs[f.__name__] = f(**kwargs)
+    for name, handler in OPTION_HANDER_MANAGER:
+        _funcs[name] = handler(**kwargs)
     return _funcs

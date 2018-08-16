@@ -1,7 +1,9 @@
 # coding=utf-8
 from pyecharts.echarts.json_serializable import JsonSerializable
+from pyecharts.echarts.option_manager import Option
 
 
+@Option(option_for="tooltip")
 class Tooltip(JsonSerializable):
 
     def __init__(

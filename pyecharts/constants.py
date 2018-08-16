@@ -15,6 +15,7 @@ NTERACT = "nteract"
 JUPYTER_PRESENTATIONS = [SVG, PNG, JPEG, DEFAULT_HTML, NTERACT]
 ENVIRONMENT_PLUGIN_TYPE = "pyecharts_environment"
 GEO_DATA_PLUGIN_TYPE = "pyecharts_geo_data_bank"
+ECHARTS_OPTION_PLUGIN_TYPE = "pyecharts_option"
 
 # themes
 LIGHT_THEME = "light"
