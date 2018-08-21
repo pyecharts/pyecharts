@@ -39,6 +39,11 @@ class Funnel(Chart):
         self._option.get("legend")[0].update(data=list(_dset))
 
         self._option.get("series").append(
-            {"type": "funnel", "name": name, "data": _data, "label": chart["label"]}
+            {
+                "type": "funnel",
+                "name": name,
+                "data": _data,
+                "label": chart["label"],
+            }
         )
         self._config_components(**kwargs)

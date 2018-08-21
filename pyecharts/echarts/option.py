@@ -579,7 +579,9 @@ def _mark(
                     "name": _pname,
                     "symbol": mark_point_symbol,
                     "symbolSize": mark_point_symbolsize,
-                    "label": {"normal": {"textStyle": {"color": mark_point_textcolor}}},
+                    "label": {
+                        "normal": {"textStyle": {"color": mark_point_textcolor}}
+                    },
                 }
                 mark.get("data").append(_marktmp)
             else:
@@ -606,7 +608,9 @@ def _mark(
                         symbol=mark_point_symbol,
                         symbolSize=mark_point_symbolsize,
                         label={
-                            "normal": {"textStyle": {"color": mark_point_textcolor}}
+                            "normal": {
+                                "textStyle": {"color": mark_point_textcolor}
+                            }
                         },
                     )
                     if _type:
@@ -614,7 +618,9 @@ def _mark(
 
     if mark_line_coords and len(mark_line_coords) == 2:
         return {
-            "data": [[{"coord": mark_line_coords[0]}, {"coord": mark_line_coords[1]}]]
+            "data": [
+                [{"coord": mark_line_coords[0]}, {"coord": mark_line_coords[1]}]
+            ]
         }
 
     return mark
@@ -833,7 +839,9 @@ def symbol(type=None, symbol="", **kwargs):
 
 
 @collectfuncs
-def effect(effect_brushtype="stroke", effect_scale=2.5, effect_period=4, **kwargs):
+def effect(
+    effect_brushtype="stroke", effect_scale=2.5, effect_period=4, **kwargs
+):
     """
     涟漪动画配置项
 
@@ -846,7 +854,9 @@ def effect(effect_brushtype="stroke", effect_scale=2.5, effect_period=4, **kwarg
     :param kwargs:
     """
     _effect = {
-        "brushType": effect_brushtype, "scale": effect_scale, "period": effect_period
+        "brushType": effect_brushtype,
+        "scale": effect_scale,
+        "period": effect_period,
     }
     return _effect
 

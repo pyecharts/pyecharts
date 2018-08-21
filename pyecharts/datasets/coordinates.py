@@ -41,7 +41,8 @@ class GeoDataBank(PluginManager):
     def search_in_region(self, region, *names):
         region = self.ensure_two_digit_iso_code(region)
         return self.search_in_region_by_filter(
-            region, lambda name_in_db: any([name in name_in_db for name in names])
+            region,
+            lambda name_in_db: any([name in name_in_db for name in names]),
         )
 
     def search_in_region_by_filter(self, region, filter_function):
