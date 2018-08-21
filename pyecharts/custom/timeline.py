@@ -100,9 +100,7 @@ class Timeline(Base):
         self._option.get("baseOption").update(
             backgroundColor=chart.options.get("backgroundColor")
         )
-        self._option.get("baseOption").get("timeline").update(
-            data=self._time_points
-        )
+        self._option.get("baseOption").get("timeline").update(data=self._time_points)
         self._option.get("options").append(
             {
                 "color": chart.options.get("color"),

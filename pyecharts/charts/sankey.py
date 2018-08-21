@@ -19,13 +19,7 @@ class Sankey(Chart):
         return self
 
     def __add(
-        self,
-        name,
-        nodes,
-        links,
-        sankey_node_width=20,
-        sankey_node_gap=8,
-        **kwargs
+        self, name, nodes, links, sankey_node_width=20, sankey_node_gap=8, **kwargs
     ):
         """
 

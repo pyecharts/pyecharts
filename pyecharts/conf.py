@@ -8,9 +8,7 @@ import pyecharts.constants as constants
 
 class PyEchartsConfig(object):
 
-    def __init__(
-        self, echarts_template_dir=".", jshost=None, force_js_embed=False
-    ):
+    def __init__(self, echarts_template_dir=".", jshost=None, force_js_embed=False):
         self.echarts_template_dir = echarts_template_dir
         self._jshost = remove_trailing_slashes(jshost)
         self.force_js_embed = force_js_embed
@@ -91,15 +89,11 @@ class PyEchartsConfig(object):
                 if config_item:
                     require_conf_items.append(config_item)
         require_libraries = ["'%s'" % key for key in __dependencies__]
-        return dict(
-            config_items=require_conf_items, libraries=require_libraries
-        )
+        return dict(config_items=require_conf_items, libraries=require_libraries)
 
     def produce_html_script_list(self, dependencies):
         __dependencies__ = _ensure_echarts_is_in_the_front(dependencies)
-        script_list = [
-            "%s" % self.get_js_library(key) for key in __dependencies__
-        ]
+        script_list = ["%s" % self.get_js_library(key) for key in __dependencies__]
         return script_list
 
 
@@ -165,8 +159,7 @@ def online(host=None):
 
 def enable_nteract(host=None):
     configure(
-        output_image=constants.NTERACT,
-        jshost="https://pyecharts.github.io/assets/js",
+        output_image=constants.NTERACT, jshost="https://pyecharts.github.io/assets/js"
     )
 
 

@@ -3,9 +3,7 @@ import random
 from pyecharts.chart import Chart
 
 
-SHAPES = (
-    "cardioid", "diamond", "triangle-forward", "triangle", "pentagon", "star"
-)
+SHAPES = ("cardioid", "diamond", "triangle-forward", "triangle", "pentagon", "star")
 
 
 def gen_color():

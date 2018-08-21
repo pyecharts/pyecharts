@@ -26,9 +26,7 @@ class JsExtension(object):
 
     def __init__(self, extension_home, registry_content):
         self.registry = registry_content
-        self.home = os.path.join(
-            extension_home, self.registry[REGISTRY_JS_FOLDER]
-        )
+        self.home = os.path.join(extension_home, self.registry[REGISTRY_JS_FOLDER])
 
     @classmethod
     def from_registry_path(cls, extension_installation_path):
@@ -63,9 +61,7 @@ class JsExtension(object):
         else:
             return None
 
-    def produce_require_config_syntax(
-        self, pinyin, jshost=None, use_github=False
-    ):
+    def produce_require_config_syntax(self, pinyin, jshost=None, use_github=False):
         filename = self.get_js_library(pinyin)
         if filename:
             jshost = self._resolve_jshost(jshost, use_github)

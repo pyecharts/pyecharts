@@ -106,9 +106,7 @@ class GeoLines(Geo):
             _from_coordinate = self.get_coordinate(
                 _from_name, coordinate_region, raise_exception=True
             )
-            _to_coordinate = self.get_coordinate(
-                _to_name, raise_exception=True
-            )
+            _to_coordinate = self.get_coordinate(_to_name, raise_exception=True)
             _data_lines.append(
                 {
                     "fromName": _from_name,
@@ -124,23 +122,17 @@ class GeoLines(Geo):
                 }
             )
             _data_scatter.append(
-                {
-                    "name": _to_name,
-                    "value": [_to_coordinate[0], _to_coordinate[1], 0],
-                }
+                {"name": _to_name, "value": [_to_coordinate[0], _to_coordinate[1], 0]}
             )
 
         self._option.update(
             geo={
                 "map": maptype,
                 "roam": is_roam,
-                "label": {
-                    "emphasis": {"show": True, "textStyle": {"color": "#eee"}}
-                },
+                "label": {"emphasis": {"show": True, "textStyle": {"color": "#eee"}}},
                 "itemStyle": {
                     "normal": {
-                        "areaColor": geo_normal_color,
-                        "borderColor": border_color,
+                        "areaColor": geo_normal_color, "borderColor": border_color
                     },
                     "emphasis": {"areaColor": geo_emphasis_color},
                 },

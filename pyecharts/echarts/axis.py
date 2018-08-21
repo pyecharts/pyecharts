@@ -72,18 +72,14 @@ class Axis(JsonSerializable):
             "type": axis_type,
             "splitLine": {"show": split_line},
             "axisLine": {
-                "lineStyle": {
-                    "color": axis_line_color, "width": axis_line_width
-                }
+                "lineStyle": {"color": axis_line_color, "width": axis_line_width}
             },
         }
 
 
 class XAxis(Axis):
 
-    def __init__(
-        self, axis_type=None, chart_type=None, split_line=False, **kwargs
-    ):
+    def __init__(self, axis_type=None, chart_type=None, split_line=False, **kwargs):
         if axis_type is None:
             if chart_type == "scatter":
                 axis_type = "value"
