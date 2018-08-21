@@ -181,3 +181,4 @@ class GeoLines(Geo):
 
         self._add_chinese_map(maptype)
         self._config_components(**kwargs)
+        return self

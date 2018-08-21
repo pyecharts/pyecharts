@@ -117,6 +117,7 @@ class Timeline(Base):
             if _s.get("type") == "map":
                 _s.pop("data", None)
                 self._option.get("baseOption").get("series").append(_s)
+        return self
 
     def __check_components(self, chart):
         """

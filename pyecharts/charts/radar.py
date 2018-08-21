@@ -62,9 +62,11 @@ class Radar(Chart):
                 "axisLine": chart["axis_line"],
             }
         )
+        return self
 
     def add(self, *args, **kwargs):
         self.__add(*args, **kwargs)
+        return self
 
     def __add(self, name, value, item_color=None, **kwargs):
         """
