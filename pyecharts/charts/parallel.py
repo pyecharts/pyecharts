@@ -39,7 +39,7 @@ class Parallel(Chart):
             self._option.update(parallelAxis=_schema)
         if c_schema:
             self._option.update(parallelAxis=c_schema)
-        return selfs
+        return self
 
     def __add(self, name, data, **kwargs):
         """
