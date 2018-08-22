@@ -1,7 +1,9 @@
 # 版本日志
 
 * ### version 0.5.9（dev）
-    * TODO
+    
+    #### Added
+    * [pr#685](https://github.com/pyecharts/pyecharts/pull/685) 图表方法( `use_theme`/`config`/`add`)支持链式调用
 
 
 * ### version 0.5.8 - 2018.8.13（current）
