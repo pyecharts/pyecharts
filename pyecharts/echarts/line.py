@@ -2,7 +2,6 @@ from pyecharts.echarts.json_serializable import JsonSerializable
 
 
 class Line(JsonSerializable):
-
     def __init__(
         self,
         width=None,
