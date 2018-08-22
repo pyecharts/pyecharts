@@ -1,4 +1,4 @@
-> 数据集 篇：本文档主要介绍 pyecharts 项目相关的原始数据和访问接口。
+> 数据集篇：本文档主要介绍 pyecharts 项目相关的原始数据和访问接口。
 
 ## 概述
 
@@ -26,6 +26,11 @@ pyecharts 内置了一些常用的城市地理坐标数据，这些数据保存�
     ...
 }
 ```
+
+### 提供自定义数据
+
+具体可参考 [pyecharts/geo-region-coords](https://github.com/pyecharts/geo-region-coords)
+
 
 ### 检索中国地理坐标
 

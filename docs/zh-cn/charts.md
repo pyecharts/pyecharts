@@ -684,7 +684,7 @@ add(name, attr, value,
 * maptype -> str  
     地图类型。 从 v0.3.2+ 起，地图已经变为扩展包，支持全国省份，全国城市，全国区县，全球国家等地图，具体请参考 [地图自定义篇](zh-cn/customize_map)
 * coordinate_region -> str  
-    城市坐标所属国家。从 v0.5.7 引入，针对国际城市的地理位置的查找。默认为 `中国`。具体的国家/地区映射表参照 [countries_regions_db.json](https://github.com/pyecharts/pyecharts/blob/master/pyecharts/datasets/countries_regions_db.json)
+    城市坐标所属国家。从 v0.5.7 引入，针对国际城市的地理位置的查找。默认为 `中国`。具体的国家/地区映射表参照 [countries_regions_db.json](https://github.com/pyecharts/pyecharts/blob/master/pyecharts/datasets/countries_regions_db.json)。更多地理坐标信息可以参考 [数据集篇](/zh-cn/datasets)
 * symbol_size -> int  
     标记图形大小。默认为 12
 * border_color -> str  
@@ -694,7 +694,7 @@ add(name, attr, value,
 * geo_emphasis_color -> str  
     高亮状态下地图区域的颜色。默认为 '#2a333d'
 * geo_cities_coords -> dict  
-    用户自定义地区经纬度，类似如 {'阿城': [126.58, 45.32],} 这样的字典，当用于提供了该参数时，将会覆盖原有预存的区域坐标信息。
+    用户自定义地区经纬度，类似如 {'阿城': [126.58, 45.32],} 这样的字典。
 * is_roam -> bool  
     是否开启鼠标缩放和平移漫游。默认为 True  
     如果只想要开启缩放或者平移，可以设置成'scale'或者'move'。设置成 True 为都开启
@@ -927,7 +927,7 @@ add(name, data,
 * maptype -> str  
     地图类型。 从 v0.3.2+ 起，地图已经变为扩展包，支持全国省份，全国城市，全国区县，全球国家等地图，具体请参考 [地图自定义篇](zh-cn/customize_map)
 * coordinate_region -> str  
-    城市坐标所属国家。从 v0.5.7 引入，针对国际城市的地理位置的查找。默认为 `中国`。具体的国家/地区映射表参照 [countries_regions_db.json](https://github.com/pyecharts/pyecharts/blob/master/pyecharts/datasets/countries_regions_db.json)
+    城市坐标所属国家。从 v0.5.7 引入，针对国际城市的地理位置的查找。默认为 `中国`。具体的国家/地区映射表参照 [countries_regions_db.json](https://github.com/pyecharts/pyecharts/blob/master/pyecharts/datasets/countries_regions_db.json)。更多地理坐标信息可以参考 [数据集篇](/zh-cn/datasets)
 * symbol -> str  
     线两端的标记类型，可以是一个数组分别指定两端，也可以是单个统一指定。
 * symbol_size -> int  
@@ -939,7 +939,7 @@ add(name, data,
 * geo_emphasis_color -> str  
     高亮状态下地图区域的颜色。默认为 '#2a333d'
 * geo_cities_coords -> dict  
-    用户自定义地区经纬度，类似如 {'阿城': [126.58, 45.32],} 这样的字典，当用于提供了该参数时，将会覆盖原有预存的区域坐标信息。
+    用户自定义地区经纬度，类似如 {'阿城': [126.58, 45.32],} 这样的字典。
 * geo_effect_period -> int/float  
     特效动画的时间，单位为 s，默认为 6s
 * geo_effect_traillength -> float  
