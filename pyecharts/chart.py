@@ -374,7 +374,7 @@ class Chart(Base):
         """
         `add()` 方法只是用于提供自动参数补全
         """
-        pass
+        return self
 
     def _config_components(
         self,
