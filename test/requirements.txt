@@ -10,4 +10,4 @@ mock;python_version<"3"
 echarts-countries-pypkg
 echarts-china-cities-pypkg
 echarts-china-provinces-pypkg
-black==18.4a4
+

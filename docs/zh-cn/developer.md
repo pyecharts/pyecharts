@@ -9,6 +9,13 @@ $ pip install -r requirements.txt
 $ python setup.py install
 ```
 
+## 代码秀秀 (python 3.6)
+
+```
+$ pip install -r requirements-dev.txt
+$ black pyecharts test
+```
+
 ## pyecharts 0.3.2+ 的扩展包
 
 现在 pyecharts 所有的 js 库均由 lml 管理，由 pip 组装。 Jupyter notebook 用户不用担心，javascript 库装机的时候，会被 pyecharts-jupyter-installer 一齐装上。
