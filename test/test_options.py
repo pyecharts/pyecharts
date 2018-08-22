@@ -281,7 +281,11 @@ def test_geolines(patched):
     lines.add("从北京出发", data_beijing, **style_geo)
 
     actual_options = json.dumps(
-        lines.options, sort_keys=True, indent=4, cls=DefaultJsonEncoder
+        lines.options,
+        sort_keys=True,
+        indent=4,
+        cls=DefaultJsonEncoder,
+        ensure_ascii=False,
     )
     expected = get_fixture_content(fixture)
     for a, b in zip(actual_options.split("\n"), expected.split("\n")):

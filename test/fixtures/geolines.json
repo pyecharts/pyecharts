@@ -57,8 +57,8 @@
     "legend": [
         {
             "data": [
-                "\u4ece\u5e7f\u5dde\u51fa\u53d1",
-                "\u4ece\u5317\u4eac\u51fa\u53d1"
+                "从广州出发",
+                "从北京出发"
             ],
             "left": "right",
             "orient": "horizontal",
@@ -81,12 +81,12 @@
                             23.16
                         ],
                         [
-                            121.48,
-                            31.22
+                            121.473701,
+                            31.230416
                         ]
                     ],
-                    "fromName": "\u5e7f\u5dde",
-                    "toName": "\u4e0a\u6d77"
+                    "fromName": "广州",
+                    "toName": "上海"
                 }
             ],
             "effect": {
@@ -105,7 +105,7 @@
                     "width": 1
                 }
             },
-            "name": "\u4ece\u5e7f\u5dde\u51fa\u53d1",
+            "name": "从广州出发",
             "symbol": [
                 "none",
                 "arrow"
@@ -118,7 +118,7 @@
             "coordinateSystem": "geo",
             "data": [
                 {
-                    "name": "\u5e7f\u5dde",
+                    "name": "广州",
                     "value": [
                         113.23,
                         23.16,
@@ -126,10 +126,10 @@
                     ]
                 },
                 {
-                    "name": "\u4e0a\u6d77",
+                    "name": "上海",
                     "value": [
-                        121.48,
-                        31.22,
+                        121.473701,
+                        31.230416,
                         0
                     ]
                 }
@@ -151,7 +151,7 @@
                     }
                 }
             },
-            "name": "\u4ece\u5e7f\u5dde\u51fa\u53d1",
+            "name": "从广州出发",
             "symbolSize": 10,
             "tooltip": {
                 "formatter": "{b}"
@@ -164,16 +164,16 @@
                 {
                     "coords": [
                         [
-                            116.46,
-                            39.92
+                            116.407526,
+                            39.90403
                         ],
                         [
-                            121.48,
-                            31.22
+                            121.473701,
+                            31.230416
                         ]
                     ],
-                    "fromName": "\u5317\u4eac",
-                    "toName": "\u4e0a\u6d77"
+                    "fromName": "北京",
+                    "toName": "上海"
                 }
             ],
             "effect": {
@@ -192,7 +192,7 @@
                     "width": 1
                 }
             },
-            "name": "\u4ece\u5317\u4eac\u51fa\u53d1",
+            "name": "从北京出发",
             "symbol": [
                 "none",
                 "arrow"
@@ -205,18 +205,18 @@
             "coordinateSystem": "geo",
             "data": [
                 {
-                    "name": "\u5317\u4eac",
+                    "name": "北京",
                     "value": [
-                        116.46,
-                        39.92,
+                        116.407526,
+                        39.90403,
                         0
                     ]
                 },
                 {
-                    "name": "\u4e0a\u6d77",
+                    "name": "上海",
                     "value": [
-                        121.48,
-                        31.22,
+                        121.473701,
+                        31.230416,
                         0
                     ]
                 }
@@ -238,7 +238,7 @@
                     }
                 }
             },
-            "name": "\u4ece\u5317\u4eac\u51fa\u53d1",
+            "name": "从北京出发",
             "symbolSize": 10,
             "tooltip": {
                 "formatter": "{b}"
@@ -254,7 +254,7 @@
             "subtextStyle": {
                 "fontSize": 12
             },
-            "text": "GeoLines \u793a\u4f8b",
+            "text": "GeoLines 示例",
             "textStyle": {
                 "fontSize": 18
             },
@@ -271,7 +271,7 @@
             },
             "saveAsImage": {
                 "show": true,
-                "title": "\u4e0b\u8f7d\u56fe\u7247"
+                "title": "下载图片"
             }
         },
         "left": "95%",
