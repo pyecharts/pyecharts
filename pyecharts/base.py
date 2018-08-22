@@ -79,9 +79,11 @@ class Base(object):
         self.theme = theme_name
         if theme_name not in constants.BUILTIN_THEMES:
             self._js_dependencies.add(self.theme)
+        return self
 
     def on(self, event_name, handler):
         self.event_handlers[event_name] = handler
+        return self
 
     def print_echarts_options(self):
         """
