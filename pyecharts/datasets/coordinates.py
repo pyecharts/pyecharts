@@ -25,7 +25,6 @@ REGION_DB = "countries_regions_db.json"
 
 
 class GeoDataBank(PluginManager):
-
     def __init__(self):
         super(GeoDataBank, self).__init__(constants.GEO_DATA_PLUGIN_TYPE)
         self.geo_coordinates = {}
@@ -41,8 +40,7 @@ class GeoDataBank(PluginManager):
     def search_in_region(self, region, *names):
         region = self.ensure_two_digit_iso_code(region)
         return self.search_in_region_by_filter(
-            region,
-            lambda name_in_db: any([name in name_in_db for name in names]),
+            region, lambda name_in_db: any([name in name_in_db for name in names])
         )
 
     def search_in_region_by_filter(self, region, filter_function):
@@ -91,15 +89,12 @@ class GeoDataBank(PluginManager):
 
 @PluginInfo(constants.GEO_DATA_PLUGIN_TYPE, tags=["builtin"])
 class DefaultChinaDataBank:
-
     def get_cities_in_region(self, region):
 
         if region != "CN":
             return {}
 
-        _local_data_file = get_resource_dir(
-            "datasets", "city_coordinates.json"
-        )
+        _local_data_file = get_resource_dir("datasets", "city_coordinates.json")
         with codecs.open(_local_data_file, encoding="utf8") as f:
             return json.load(f)
 

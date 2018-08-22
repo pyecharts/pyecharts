@@ -21,9 +21,7 @@ def test_scatter_default():
 def test_scatter_xaxis_type_category():
     scatter = Scatter("散点图示例")
     scatter.add("A", ["a", "b", "c", "d", "e", "f"], v2)
-    scatter.add(
-        "B", ["a", "b", "c", "d", "e", "f"], v1[::-1], xaxis_type="category"
-    )
+    scatter.add("B", ["a", "b", "c", "d", "e", "f"], v1[::-1], xaxis_type="category")
     assert '"type": "category"' in scatter._repr_html_()
 
 
@@ -110,7 +108,6 @@ def test_scatter_markline_coords():
 
 
 def test_scatter_extra_name():
-
     def custom_formatter(params):
         return params.value[3]
 

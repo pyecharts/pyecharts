@@ -161,9 +161,7 @@ def split_line(is_splitline_show=True, **kwargs):
         指定是否显示分割线
     :param kwargs:
     """
-    _split_line = {
-        "show": is_splitline_show, "lineStyle": line_style(**kwargs)
-    }
+    _split_line = {"show": is_splitline_show, "lineStyle": line_style(**kwargs)}
     return _split_line
 
 
@@ -568,8 +566,8 @@ def _mark(
     mark = {"data": []}
     if data:
         _markpv = _marklv = [None for _ in range(len(data))]
-        _markpv[:len(mark_point_valuedim)] = mark_point_valuedim
-        _marklv[:len(mark_line_valuedim)] = mark_line_valuedim
+        _markpv[: len(mark_point_valuedim)] = mark_point_valuedim
+        _marklv[: len(mark_line_valuedim)] = mark_line_valuedim
         for index, d in enumerate(list(data)):
             # 自定义坐标点数据
             if isinstance(d, dict):
@@ -581,11 +579,7 @@ def _mark(
                     "name": _pname,
                     "symbol": mark_point_symbol,
                     "symbolSize": mark_point_symbolsize,
-                    "label": {
-                        "normal": {
-                            "textStyle": {"color": mark_point_textcolor}
-                        }
-                    },
+                    "label": {"normal": {"textStyle": {"color": mark_point_textcolor}}},
                 }
                 mark.get("data").append(_marktmp)
             else:
@@ -616,9 +610,7 @@ def _mark(
                         symbol=mark_point_symbol,
                         symbolSize=mark_point_symbolsize,
                         label={
-                            "normal": {
-                                "textStyle": {"color": mark_point_textcolor}
-                            }
+                            "normal": {"textStyle": {"color": mark_point_textcolor}}
                         },
                     )
                     if _type:
@@ -626,12 +618,7 @@ def _mark(
 
     if mark_line_coords and len(mark_line_coords) == 2:
         return {
-            "data": [
-                [
-                    {"coord": mark_line_coords[0]},
-                    {"coord": mark_line_coords[1]},
-                ]
-            ]
+            "data": [[{"coord": mark_line_coords[0]}, {"coord": mark_line_coords[1]}]]
         }
 
     return mark
@@ -712,9 +699,7 @@ def legend(
         "left": legend_pos,
         "top": legend_top,
         "orient": legend_orient,
-        "textStyle": {
-            "fontSize": legend_text_size, "color": legend_text_color
-        },
+        "textStyle": {"fontSize": legend_text_size, "color": legend_text_color},
     }
     return _legend
 
@@ -852,9 +837,7 @@ def symbol(type=None, symbol="", **kwargs):
 
 
 @collectfuncs
-def effect(
-    effect_brushtype="stroke", effect_scale=2.5, effect_period=4, **kwargs
-):
+def effect(effect_brushtype="stroke", effect_scale=2.5, effect_period=4, **kwargs):
     """
     涟漪动画配置项
 

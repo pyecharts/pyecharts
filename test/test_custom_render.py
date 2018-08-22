@@ -22,11 +22,7 @@ def create_three():
     import random
 
     data = [
-        [
-            random.randint(0, 100),
-            random.randint(0, 100),
-            random.randint(0, 100),
-        ]
+        [random.randint(0, 100), random.randint(0, 100), random.randint(0, 100)]
         for _ in range(80)
     ]
     scatter3d = Scatter3D("3D 散点图示例", width=1200, height=600)
@@ -37,8 +33,7 @@ def create_three():
 
 def test_custom_templates():
     configure(
-        jshost="https://chfw.github.io/jupyter-echarts/echarts",
-        force_js_embed=False,
+        jshost="https://chfw.github.io/jupyter-echarts/echarts", force_js_embed=False
     )
     page = create_three()
     # page.js_dependencies = ['echarts.min']

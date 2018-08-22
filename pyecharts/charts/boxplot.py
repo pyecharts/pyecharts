@@ -69,15 +69,11 @@ class Boxplot(Chart):
                     if m == 0:
                         _result.append(_d[int(n) - 1])
                     elif m == 1 / 4:
-                        _result.append(
-                            _d[int(n) - 1] * 0.75 + _d[int(n)] * 0.25
-                        )
+                        _result.append(_d[int(n) - 1] * 0.75 + _d[int(n)] * 0.25)
                     elif m == 1 / 2:
                         _result.append(_d[int(n) - 1] * 0.5 + _d[int(n)] * 0.5)
                     elif m == 3 / 4:
-                        _result.append(
-                            _d[int(n) - 1] * 0.25 + _d[int(n)] * 0.75
-                        )
+                        _result.append(_d[int(n) - 1] * 0.25 + _d[int(n)] * 0.75)
                 _result.insert(0, _d[0])  # 最小值
                 _result.append(_d[-1])  # 最大值
                 _data.append(_result)

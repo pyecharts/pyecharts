@@ -20,10 +20,7 @@ def test_liquid_multiple_data():
 def test_liquid_diamond_shape():
     liquid = Liquid("水球图示例")
     liquid.add(
-        "Liquid",
-        [0.6, 0.5, 0.4, 0.3],
-        is_liquid_animation=False,
-        shape="diamond",
+        "Liquid", [0.6, 0.5, 0.4, 0.3], is_liquid_animation=False, shape="diamond"
     )
     assert "diamond" in liquid._repr_html_()
 
@@ -49,9 +46,6 @@ def test_liquid_svg_path():
     )
     liquid = Liquid("水球图示例", width=1000, height=600)
     liquid.add(
-        "Liquid",
-        [0.6, 0.5, 0.4, 0.3],
-        shape=shape,
-        is_liquid_outline_show=False,
+        "Liquid", [0.6, 0.5, 0.4, 0.3], shape=shape, is_liquid_outline_show=False
     )
     liquid.render()

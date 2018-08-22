@@ -113,9 +113,7 @@ class Page(object):
         :return: html content for jupyter
         """
         dependencies = self.js_dependencies
-        require_config = CURRENT_CONFIG.produce_require_configuration(
-            dependencies
-        )
+        require_config = CURRENT_CONFIG.produce_require_configuration(dependencies)
         config_items = require_config["config_items"]
         libraries = require_config["libraries"]
         env = engine.create_default_environment(constants.DEFAULT_HTML)

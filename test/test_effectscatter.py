@@ -16,22 +16,10 @@ def test_effectscatter_default():
 def test_effectscatter_multiple_symbol_type():
     es = EffectScatter("动态散点图各种图形示例")
     es.add(
-        "",
-        [10],
-        [10],
-        symbol_size=20,
-        effect_scale=3.5,
-        effect_period=3,
-        symbol="pin",
+        "", [10], [10], symbol_size=20, effect_scale=3.5, effect_period=3, symbol="pin"
     )
     es.add(
-        "",
-        [20],
-        [20],
-        symbol_size=12,
-        effect_scale=4.5,
-        effect_period=4,
-        symbol="rect",
+        "", [20], [20], symbol_size=12, effect_scale=4.5, effect_period=4, symbol="rect"
     )
     es.add(
         "",

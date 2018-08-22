@@ -46,9 +46,7 @@ def test_bar_rotate_label():
     days = ["{}天".format(i) for i in range(20)]
     days_v1 = [random.randint(1, 20) for _ in range(20)]
     bar = Bar("坐标轴标签旋转示例")
-    bar.add(
-        "", days, days_v1, xaxis_interval=0, xaxis_rotate=30, yaxis_rotate=30
-    )
+    bar.add("", days, days_v1, xaxis_interval=0, xaxis_rotate=30, yaxis_rotate=30)
     assert "stack_" not in bar._repr_html_()
 
 
@@ -57,16 +55,9 @@ def test_bar_waterfall():
     months_v1 = [0, 100, 200, 300, 400, 220, 250]
     months_v2 = [1000, 800, 600, 500, 450, 400, 300]
     bar = Bar("瀑布图示例")
+    bar.add("", months, months_v1, label_color=["rgba(0,0,0,0)"], is_stack=True)
     bar.add(
-        "", months, months_v1, label_color=["rgba(0,0,0,0)"], is_stack=True
-    )
-    bar.add(
-        "月份",
-        months,
-        months_v2,
-        is_label_show=True,
-        is_stack=True,
-        label_pos="inside",
+        "月份", months, months_v2, is_label_show=True, is_stack=True, label_pos="inside"
     )
     bar.render()
 

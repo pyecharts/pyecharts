@@ -37,11 +37,7 @@ def test_treemap_default():
 def test_treemap_drilldown():
     treemap = TreeMap("树图-下钻示例", width=1200, height=600)
     treemap.add(
-        "演示数据",
-        data,
-        is_label_show=True,
-        label_pos="inside",
-        treemap_left_depth=1,
+        "演示数据", data, is_label_show=True, label_pos="inside", treemap_left_depth=1
     )
     treemap.render()
 

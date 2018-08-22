@@ -39,15 +39,11 @@ def echarts_js_dependencies(env, *args):
     if current_config.js_embed:
         contents = current_config.read_file_contents_from_local(dependencies)
 
-        return Markup(
-            "\n".join([EMBED_SCRIPT_FORMATTER.format(c) for c in contents])
-        )
+        return Markup("\n".join([EMBED_SCRIPT_FORMATTER.format(c) for c in contents]))
 
     else:
         js_links = current_config.generate_js_link(dependencies)
-        return Markup(
-            "\n".join([LINK_SCRIPT_FORMATTER.format(j) for j in js_links])
-        )
+        return Markup("\n".join([LINK_SCRIPT_FORMATTER.format(j) for j in js_links]))
 
 
 @environmentfunction
@@ -58,9 +54,7 @@ def echarts_js_dependencies_embed(env, *args):
     current_config = env.pyecharts_config
     dependencies = utils.merge_js_dependencies(*args)
     contents = current_config.read_file_contents_from_local(dependencies)
-    return Markup(
-        "\n".join([EMBED_SCRIPT_FORMATTER.format(c) for c in contents])
-    )
+    return Markup("\n".join([EMBED_SCRIPT_FORMATTER.format(c) for c in contents]))
 
 
 @environmentfunction
@@ -77,9 +71,7 @@ def echarts_container(env, chart):
         if len(_text_label) == 1 and isinstance(_text_label, list):
             _text_label.append("")
         _text, _style = _text_label
-        _container_and_text += EXTRA_TEXT_FORMATTER.format(
-            text=_text, style=_style
-        )
+        _container_and_text += EXTRA_TEXT_FORMATTER.format(text=_text, style=_style)
 
     _container_and_text += CHART_DIV_FORMATTER.format(
         chart_id=chart.chart_id,
@@ -158,9 +150,7 @@ class BaseEnvironment(Environment):
     def __init__(self, *args, **kwargs):
         self.pyecharts_config = kwargs.pop("pyecharts_config", None)
         if self.pyecharts_config is None:
-            raise TypeError(
-                "no pyecharts_config for this environment specified"
-            )
+            raise TypeError("no pyecharts_config for this environment specified")
 
         super(BaseEnvironment, self).__init__(*args, **kwargs)
         self.globals.update(ECHAERTS_TEMPLATE_FUNCTIONS)
@@ -222,9 +212,7 @@ class EchartsEnvironment(BaseEnvironment):
         html = tpl.render(**kwargs)
         utils.write_utf8_html_file(path, html)
 
-    def render_chart_to_notebook(
-        self, template_name="notebook.html", **context
-    ):
+    def render_chart_to_notebook(self, template_name="notebook.html", **context):
         """
         Return html string for rendering a chart/page to a notebook cell.
 
@@ -246,9 +234,7 @@ class EnvironmentManager(PluginManager):
         Register with lml that this class manages 'pyecharts_environment'
         extension
         """
-        super(EnvironmentManager, self).__init__(
-            constants.ENVIRONMENT_PLUGIN_TYPE
-        )
+        super(EnvironmentManager, self).__init__(constants.ENVIRONMENT_PLUGIN_TYPE)
 
     def get_a_environment(self, file_type, **kwargs):
         """
@@ -258,9 +244,7 @@ class EnvironmentManager(PluginManager):
         :param file_type: 'html', 'svg', 'png', 'jpeg', 'gif' or 'pdf'
         :param kwargs: the initialization parameters for Environment
         """
-        _a_echarts_env_cls = super(EnvironmentManager, self).load_me_now(
-            key=file_type
-        )
+        _a_echarts_env_cls = super(EnvironmentManager, self).load_me_now(key=file_type)
         return _a_echarts_env_cls(**kwargs)
 
 
@@ -278,8 +262,6 @@ def create_default_environment(file_type):
     echarts_env = ENV_MANAGER.get_a_environment(
         file_type,
         pyecharts_config=config,
-        loader=FileSystemLoader(
-            [config.echarts_template_dir, default_template_dir]
-        ),
+        loader=FileSystemLoader([config.echarts_template_dir, default_template_dir]),
     )
     return echarts_env

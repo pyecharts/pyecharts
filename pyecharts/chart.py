@@ -104,11 +104,10 @@ class Chart(Base):
                     "subtext": subtitle,
                     "left": title_pos,
                     "top": title_top,
-                    "textStyle": {
-                        "color": title_color, "fontSize": title_text_size
-                    },
+                    "textStyle": {"color": title_color, "fontSize": title_text_size},
                     "subtextStyle": {
-                        "color": subtitle_color, "fontSize": subtitle_text_size
+                        "color": subtitle_color,
+                        "fontSize": subtitle_text_size,
                     },
                 }
             ],
@@ -377,11 +376,7 @@ class Chart(Base):
         return self
 
     def _config_components(
-        self,
-        is_visualmap=False,
-        is_more_utils=False,
-        is_toolbox_show=True,
-        **kwargs
+        self, is_visualmap=False, is_more_utils=False, is_toolbox_show=True, **kwargs
     ):
         """
         图形组件配置项
@@ -432,9 +427,7 @@ class Chart(Base):
                         "tiled": "平铺",
                     },
                 },
-                dataZoom={
-                    "show": True, "title": {"zoom": "区域缩放", "back": "缩放还原"}
-                },
+                dataZoom={"show": True, "title": {"zoom": "区域缩放", "back": "缩放还原"}},
             )
 
         if not is_toolbox_show:
