@@ -178,34 +178,6 @@ def test_line3d_default(patched):
 
 
 @patch("random.randint")
-def test_geo_china_scatter(patched):
-    fixture = "geo_options.json"
-    patched.return_value = "1"
-    cities = [("鄂尔多斯", 12), ("招远", 12), ("舟山", 12), ("齐齐哈尔", 14), ("盐城", 15)]
-    geo = Geo("全国主要城市空气质量", "data from pm2.5")
-    attr, value = geo.cast(cities)
-    geo.add(
-        "",
-        attr,
-        value,
-        visual_range=[0, 200],
-        visual_text_color="#fff",
-        is_legend_show=False,
-        symbol_size=15,
-        is_visualmap=True,
-        tooltip_formatter="{b}",
-        label_emphasis_textsize=15,
-        label_emphasis_pos="right",
-    )
-    actual_options = json.dumps(
-        geo.options, sort_keys=True, indent=4, cls=DefaultJsonEncoder
-    )
-    expected = get_fixture_content(fixture)
-    for a, b in zip(actual_options.split("\n"), expected.split("\n")):
-        eq_(a.strip(), b.strip())
-
-
-@patch("random.randint")
 def test_scatter3d_default(patched):
     fixture = "scatter3d_options.json"
     patched.return_value = "1"
@@ -242,51 +214,5 @@ def test_bar3d_default(patched):
     )
     expected = get_fixture_content(fixture)
 
-    for a, b in zip(actual_options.split("\n"), expected.split("\n")):
-        eq_(a.strip(), b.strip())
-
-
-style = Style(
-    title_top="#fff",
-    title_pos="center",
-    width=1200,
-    height=600,
-    background_color="#404a59",
-)
-
-style_geo = style.add(
-    is_label_show=True,
-    line_curve=0.2,
-    line_opacity=0.6,
-    legend_text_color="#eee",
-    legend_pos="right",
-    geo_effect_symbol="plane",
-    geo_effect_symbolsize=15,
-    label_color=["#a6c84c", "#ffa022", "#46bee9"],
-    label_pos="right",
-    label_formatter="{b}",
-    label_text_color="#eee",
-    legend_selectedmode="single",
-)
-
-
-@patch("random.randint")
-def test_geolines(patched):
-    fixture = "geolines.json"
-    patched.return_value = "1"
-    data_guangzhou = [["广州", "上海"]]
-    data_beijing = [["北京", "上海"]]
-    lines = GeoLines("GeoLines 示例", **style.init_style)
-    lines.add("从广州出发", data_guangzhou, **style_geo)
-    lines.add("从北京出发", data_beijing, **style_geo)
-
-    actual_options = json.dumps(
-        lines.options,
-        sort_keys=True,
-        indent=4,
-        cls=DefaultJsonEncoder,
-        ensure_ascii=False,
-    )
-    expected = get_fixture_content(fixture)
     for a, b in zip(actual_options.split("\n"), expected.split("\n")):
         eq_(a.strip(), b.strip())
