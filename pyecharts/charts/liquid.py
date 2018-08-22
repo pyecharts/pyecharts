@@ -16,6 +16,7 @@ class Liquid(Chart):
 
     def add(self, *args, **kwargs):
         self.__add(*args, **kwargs)
+        return self
 
     def __add(
         self,

@@ -57,6 +57,7 @@ class Overlap(Base):
             self._js_dependencies = merge_js_dependencies(
                 self._js_dependencies, chart.js_dependencies
             )
+            return self
 
     def __custom(self, series):
         """
