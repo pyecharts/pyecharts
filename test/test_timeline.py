@@ -38,7 +38,10 @@ def test_timeline_bar():
     bar_5.add("夏季", CLOTHES, [randint(10, 100) for _ in range(6)])
     bar_5.add("秋季", CLOTHES, [randint(10, 100) for _ in range(6)])
     bar_5.add(
-        "冬季", CLOTHES, [randint(10, 100) for _ in range(6)], is_legend_show=True
+        "冬季",
+        CLOTHES,
+        [randint(10, 100) for _ in range(6)],
+        is_legend_show=True,
     )
 
     timeline = Timeline(is_auto_play=True, timeline_bottom=0)

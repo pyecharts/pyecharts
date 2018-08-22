@@ -68,7 +68,11 @@ def create_three_charts():
 
     # scatter3D
     data = [
-        [random.randint(0, 100), random.randint(0, 100), random.randint(0, 100)]
+        [
+            random.randint(0, 100),
+            random.randint(0, 100),
+            random.randint(0, 100),
+        ]
         for _ in range(80)
     ]
     scatter3d = Scatter3D("3D 散点图示例", width=1200, height=600)
@@ -248,7 +252,11 @@ def test_more_charts():
 
     # scatter3d
     data = [
-        [random.randint(0, 100), random.randint(0, 100), random.randint(0, 100)]
+        [
+            random.randint(0, 100),
+            random.randint(0, 100),
+            random.randint(0, 100),
+        ]
         for _ in range(80)
     ]
     scatter3D = Scatter3D("3D 散点图示例", width=1200, height=600)
@@ -319,7 +327,9 @@ def test_more_charts():
 
 def test_page_extra_html_text_label():
     page = Page()
-    line = Line("折线图示例", extra_html_text_label=["LINE TEXT LABEL", "color:red"])
+    line = Line(
+        "折线图示例", extra_html_text_label=["LINE TEXT LABEL", "color:red"]
+    )
     line.add(
         "最高气温",
         WEEK,
@@ -331,7 +341,9 @@ def test_page_extra_html_text_label():
 
     v1 = [11, 12, 13, 10, 10, 10]
     pie = Pie(
-        "饼图-圆环图示例", title_pos="center", extra_html_text_label=["PIE TEXT LABEL"]
+        "饼图-圆环图示例",
+        title_pos="center",
+        extra_html_text_label=["PIE TEXT LABEL"],
     )
     pie.add(
         "",

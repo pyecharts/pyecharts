@@ -13,7 +13,7 @@ $ python setup.py install
 
 ```
 $ pip install -r requirements-dev.txt
-$ black -l 80 pyecharts test
+$ black -l 79 pyecharts test
 ```
 
 ## Pull request instructions

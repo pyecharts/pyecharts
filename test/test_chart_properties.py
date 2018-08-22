@@ -18,7 +18,8 @@ def test_base_properties():
     eq_(b.height, 400)
     eq_(len(b.options), 0)  # empty
     assert (
-        ("echarts" in b.js_dependencies) or ("echarts.min" in b.js_dependencies)
+        ("echarts" in b.js_dependencies)
+        or ("echarts.min" in b.js_dependencies)
     )
 
 

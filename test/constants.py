@@ -44,7 +44,13 @@ X_TIME = [
 ]
 
 Y_WEEK = [
-    "Saturday", "Friday", "Thursday", "Wednesday", "Tuesday", "Monday", "Sunday"
+    "Saturday",
+    "Friday",
+    "Thursday",
+    "Wednesday",
+    "Tuesday",
+    "Monday",
+    "Sunday",
 ]
 
 CLOTHES = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]

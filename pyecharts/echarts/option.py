@@ -161,7 +161,9 @@ def split_line(is_splitline_show=True, **kwargs):
         指定是否显示分割线
     :param kwargs:
     """
-    _split_line = {"show": is_splitline_show, "lineStyle": line_style(**kwargs)}
+    _split_line = {
+        "show": is_splitline_show, "lineStyle": line_style(**kwargs)
+    }
     return _split_line
 
 
@@ -580,7 +582,9 @@ def _mark(
                     "symbol": mark_point_symbol,
                     "symbolSize": mark_point_symbolsize,
                     "label": {
-                        "normal": {"textStyle": {"color": mark_point_textcolor}}
+                        "normal": {
+                            "textStyle": {"color": mark_point_textcolor}
+                        }
                     },
                 }
                 mark.get("data").append(_marktmp)
@@ -595,14 +599,18 @@ def _mark(
 
                 if _is_markline:
                     _marktmp = {
-                        "type": _type, "name": _name, "valueDim": _marklv[index]
+                        "type": _type,
+                        "name": _name,
+                        "valueDim": _marklv[index],
                     }
                     if _type:
                         mark.get("data").append(_marktmp)
                         mark.update(symbolSize=mark_line_symbolsize)
                 else:
                     _marktmp = {
-                        "type": _type, "name": _name, "valueDim": _markpv[index]
+                        "type": _type,
+                        "name": _name,
+                        "valueDim": _markpv[index],
                     }
                     _marktmp.update(
                         symbol=mark_point_symbol,
@@ -619,7 +627,10 @@ def _mark(
     if mark_line_coords and len(mark_line_coords) == 2:
         return {
             "data": [
-                [{"coord": mark_line_coords[0]}, {"coord": mark_line_coords[1]}]
+                [
+                    {"coord": mark_line_coords[0]},
+                    {"coord": mark_line_coords[1]},
+                ]
             ]
         }
 
@@ -701,7 +712,9 @@ def legend(
         "left": legend_pos,
         "top": legend_top,
         "orient": legend_orient,
-        "textStyle": {"fontSize": legend_text_size, "color": legend_text_color},
+        "textStyle": {
+            "fontSize": legend_text_size, "color": legend_text_color
+        },
     }
     return _legend
 

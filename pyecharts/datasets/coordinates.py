@@ -97,7 +97,9 @@ class DefaultChinaDataBank:
         if region != "CN":
             return {}
 
-        _local_data_file = get_resource_dir("datasets", "city_coordinates.json")
+        _local_data_file = get_resource_dir(
+            "datasets", "city_coordinates.json"
+        )
         with codecs.open(_local_data_file, encoding="utf8") as f:
             return json.load(f)
 

@@ -106,7 +106,9 @@ class GeoLines(Geo):
             _from_coordinate = self.get_coordinate(
                 _from_name, coordinate_region, raise_exception=True
             )
-            _to_coordinate = self.get_coordinate(_to_name, raise_exception=True)
+            _to_coordinate = self.get_coordinate(
+                _to_name, raise_exception=True
+            )
             _data_lines.append(
                 {
                     "fromName": _from_name,

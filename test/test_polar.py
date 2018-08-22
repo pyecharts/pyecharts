@@ -179,7 +179,11 @@ def test_polor_custom_type():
     polar.add(
         "",
         [
-            [random.randint(0, 6), random.randint(1, 24), random.randint(1, 24)]
+            [
+                random.randint(0, 6),
+                random.randint(1, 24),
+                random.randint(1, 24),
+            ]
             for _ in range(100)
         ],
         render_item=render_item,

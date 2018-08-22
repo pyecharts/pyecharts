@@ -57,7 +57,9 @@ def test_bar_waterfall():
     months_v1 = [0, 100, 200, 300, 400, 220, 250]
     months_v2 = [1000, 800, 600, 500, 450, 400, 300]
     bar = Bar("瀑布图示例")
-    bar.add("", months, months_v1, label_color=["rgba(0,0,0,0)"], is_stack=True)
+    bar.add(
+        "", months, months_v1, label_color=["rgba(0,0,0,0)"], is_stack=True
+    )
     bar.add(
         "月份",
         months,
