@@ -4,8 +4,7 @@ from __future__ import unicode_literals
 
 import json
 
-from pyecharts import Polar, Kline, Bar, Scatter, Line3D, Geo
-from pyecharts import Scatter3D, Bar3D, GeoLines, Style
+from pyecharts import Polar, Kline, Bar, Scatter, Line3D, Scatter3D, Bar3D
 from pyecharts_javascripthon.api import DefaultJsonEncoder
 
 from nose.tools import eq_
