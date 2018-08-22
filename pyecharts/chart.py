@@ -106,8 +106,7 @@ class Chart(Base):
                     "top": title_top,
                     "textStyle": {"color": title_color, "fontSize": title_text_size},
                     "subtextStyle": {
-                        "color": subtitle_color,
-                        "fontSize": subtitle_text_size,
+                        "color": subtitle_color, "fontSize": subtitle_text_size
                     },
                 }
             ],
@@ -421,10 +420,7 @@ class Chart(Base):
                     "show": True,
                     "type": ["line", "bar", "stack", "tiled"],
                     "title": {
-                        "line": "折线图",
-                        "bar": "柱状图",
-                        "stack": "堆叠",
-                        "tiled": "平铺",
+                        "line": "折线图", "bar": "柱状图", "stack": "堆叠", "tiled": "平铺"
                     },
                 },
                 dataZoom={"show": True, "title": {"zoom": "区域缩放", "back": "缩放还原"}},

@@ -133,6 +133,7 @@ def test_polar_draw_snail():
 
 
 def test_polor_custom_type():
+
     def render_item(params, api):
         values = [api.value(0), api.value(1)]
         coord = api.coord(values)

@@ -123,8 +123,7 @@ class Geo(Chart):
                 "label": {"emphasis": {"show": True, "textStyle": {"color": "#eee"}}},
                 "itemStyle": {
                     "normal": {
-                        "areaColor": geo_normal_color,
-                        "borderColor": border_color,
+                        "areaColor": geo_normal_color, "borderColor": border_color
                     },
                     "emphasis": {"areaColor": geo_emphasis_color},
                 },

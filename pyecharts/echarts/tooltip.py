@@ -3,6 +3,7 @@ from pyecharts.echarts.json_serializable import JsonSerializable
 
 
 class Tooltip(JsonSerializable):
+
     def __init__(
         self,
         tooltip_trigger="item",

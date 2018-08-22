@@ -4,6 +4,7 @@ from pyecharts.echarts.json_serializable import JsonSerializable
 
 
 class AxisLabel(JsonSerializable):
+
     def __init__(
         self,
         interval=None,
@@ -23,11 +24,13 @@ class AxisLabel(JsonSerializable):
 
 
 class XAxisLabel(AxisLabel):
+
     def __init__(self, **kwargs):
         super(XAxisLabel, self).__init__(**kwargs)
 
 
 class YAxisLabel(AxisLabel):
+
     def __init__(self, formatter=None, **kwargs):
         if not isinstance(formatter, types.FunctionType):
             formatter = "{value} " + formatter
@@ -35,6 +38,7 @@ class YAxisLabel(AxisLabel):
 
 
 class Axis(JsonSerializable):
+
     def __init__(
         self,
         name=None,
@@ -74,6 +78,7 @@ class Axis(JsonSerializable):
 
 
 class XAxis(Axis):
+
     def __init__(self, axis_type=None, chart_type=None, split_line=False, **kwargs):
         if axis_type is None:
             if chart_type == "scatter":
@@ -87,6 +92,7 @@ class XAxis(Axis):
 
 
 class YAxis(Axis):
+
     def __init__(self, axis_type=None, **kwargs):
         if axis_type is None:
             axis_type = "value"

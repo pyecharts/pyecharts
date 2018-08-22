@@ -2,6 +2,7 @@ from pyecharts.echarts.json_serializable import JsonSerializable
 
 
 class Label(JsonSerializable):
+
     def __init__(
         self,
         visibility=False,
@@ -30,6 +31,7 @@ class EmphasisLabel(Label):
 
 
 class NormalLabel(Label):
+
     def __init__(self, position=None, chart_type=None, **kwargs):
         if position is None:
             position = "outside" if chart_type in ["pie", "graph"] else "top"

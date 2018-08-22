@@ -566,8 +566,8 @@ def _mark(
     mark = {"data": []}
     if data:
         _markpv = _marklv = [None for _ in range(len(data))]
-        _markpv[: len(mark_point_valuedim)] = mark_point_valuedim
-        _marklv[: len(mark_line_valuedim)] = mark_line_valuedim
+        _markpv[:len(mark_point_valuedim)] = mark_point_valuedim
+        _marklv[:len(mark_line_valuedim)] = mark_line_valuedim
         for index, d in enumerate(list(data)):
             # 自定义坐标点数据
             if isinstance(d, dict):
@@ -593,18 +593,14 @@ def _mark(
 
                 if _is_markline:
                     _marktmp = {
-                        "type": _type,
-                        "name": _name,
-                        "valueDim": _marklv[index],
+                        "type": _type, "name": _name, "valueDim": _marklv[index]
                     }
                     if _type:
                         mark.get("data").append(_marktmp)
                         mark.update(symbolSize=mark_line_symbolsize)
                 else:
                     _marktmp = {
-                        "type": _type,
-                        "name": _name,
-                        "valueDim": _markpv[index],
+                        "type": _type, "name": _name, "valueDim": _markpv[index]
                     }
                     _marktmp.update(
                         symbol=mark_point_symbol,
@@ -850,9 +846,7 @@ def effect(effect_brushtype="stroke", effect_scale=2.5, effect_period=4, **kwarg
     :param kwargs:
     """
     _effect = {
-        "brushType": effect_brushtype,
-        "scale": effect_scale,
-        "period": effect_period,
+        "brushType": effect_brushtype, "scale": effect_scale, "period": effect_period
     }
     return _effect
 

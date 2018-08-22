@@ -23,6 +23,7 @@ REGISTRY_PINYIN_MAP = "PINYIN_MAP"
 
 
 class JsExtension(object):
+
     def __init__(self, extension_home, registry_content):
         self.registry = registry_content
         self.home = os.path.join(extension_home, self.registry[REGISTRY_JS_FOLDER])
@@ -84,6 +85,7 @@ class JsExtension(object):
 
 
 class JsExtensionManager(PluginManager):
+
     def __init__(self):
         super(JsExtensionManager, self).__init__(JS_EXTENSION_PLUGIN_TYPE)
         self.js_extensions = []
