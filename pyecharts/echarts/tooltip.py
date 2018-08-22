@@ -94,7 +94,9 @@ class Tooltip(JsonSerializable):
             "triggerOn": tooltip_trigger_on,
             "axisPointer": {"type": tooltip_axispointer_type},
             "formatter": tooltip_formatter,
-            "textStyle": {"color": tooltip_text_color, "fontSize": tooltip_font_size},
+            "textStyle": {
+                "color": tooltip_text_color, "fontSize": tooltip_font_size
+            },
             "backgroundColor": tooltip_background_color,
             "borderColor": tooltip_border_color,
             "borderWidth": tooltip_border_width,

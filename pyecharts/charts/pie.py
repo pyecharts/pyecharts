@@ -18,7 +18,14 @@ class Pie(Chart):
         return self
 
     def __add(
-        self, name, attr, value, radius=None, center=None, rosetype=None, **kwargs
+        self,
+        name,
+        attr,
+        value,
+        radius=None,
+        center=None,
+        rosetype=None,
+        **kwargs
     ):
         """
 

@@ -104,7 +104,9 @@ class Chart(Base):
                     "subtext": subtitle,
                     "left": title_pos,
                     "top": title_top,
-                    "textStyle": {"color": title_color, "fontSize": title_text_size},
+                    "textStyle": {
+                        "color": title_color, "fontSize": title_text_size
+                    },
                     "subtextStyle": {
                         "color": subtitle_color, "fontSize": subtitle_text_size
                     },
@@ -375,7 +377,11 @@ class Chart(Base):
         return self
 
     def _config_components(
-        self, is_visualmap=False, is_more_utils=False, is_toolbox_show=True, **kwargs
+        self,
+        is_visualmap=False,
+        is_more_utils=False,
+        is_toolbox_show=True,
+        **kwargs
     ):
         """
         图形组件配置项
@@ -420,10 +426,15 @@ class Chart(Base):
                     "show": True,
                     "type": ["line", "bar", "stack", "tiled"],
                     "title": {
-                        "line": "折线图", "bar": "柱状图", "stack": "堆叠", "tiled": "平铺"
+                        "line": "折线图",
+                        "bar": "柱状图",
+                        "stack": "堆叠",
+                        "tiled": "平铺",
                     },
                 },
-                dataZoom={"show": True, "title": {"zoom": "区域缩放", "back": "缩放还原"}},
+                dataZoom={
+                    "show": True, "title": {"zoom": "区域缩放", "back": "缩放还原"}
+                },
             )
 
         if not is_toolbox_show:

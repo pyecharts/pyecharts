@@ -240,7 +240,9 @@ class Base(object):
 
         elif file_type not in [constants.JPEG, constants.PNG]:
             # CANVAS_RENDERER here
-            raise exceptions.InvalidConfiguration("svg output requires svg renderer.")
+            raise exceptions.InvalidConfiguration(
+                "svg output requires svg renderer."
+            )
 
         env = engine.create_default_environment(file_type)
         tmp_file_handle, tmp_file_path = mkstemp(suffix="." + file_type)

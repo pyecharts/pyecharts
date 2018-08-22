@@ -18,7 +18,13 @@ class Bar(Chart):
         return self
 
     def __add(
-        self, name, x_axis, y_axis, is_stack=False, bar_category_gap="20%", **kwargs
+        self,
+        name,
+        x_axis,
+        y_axis,
+        is_stack=False,
+        bar_category_gap="20%",
+        **kwargs
     ):
         """
 

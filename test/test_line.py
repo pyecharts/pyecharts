@@ -13,7 +13,9 @@ clothes_v2 = [55, 60, 16, 20, 15, 80]
 def test_line_marks():
     line = Line("折线图示例")
     line.add("商家A", CLOTHES, clothes_v1, mark_point=["average"])
-    line.add("商家B", CLOTHES, clothes_v2, is_smooth=True, mark_line=["max", "average"])
+    line.add(
+        "商家B", CLOTHES, clothes_v2, is_smooth=True, mark_line=["max", "average"]
+    )
     line.render()
 
 
@@ -119,7 +121,9 @@ def test_line_log_yaxis():
     import random
 
     line = Line("折线图示例")
-    line.add("商家A", CLOTHES, [math.log10(random.randint(1, 99999)) for _ in range(6)])
+    line.add(
+        "商家A", CLOTHES, [math.log10(random.randint(1, 99999)) for _ in range(6)]
+    )
     line.add(
         "商家B",
         CLOTHES,

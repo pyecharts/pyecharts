@@ -7,7 +7,17 @@ import codecs
 import random
 
 from test.constants import RANGE_COLOR, CLOTHES, WEEK
-from pyecharts import Bar, Scatter3D, Line, Pie, Map, Kline, Radar, WordCloud, Liquid
+from pyecharts import (
+    Bar,
+    Scatter3D,
+    Line,
+    Pie,
+    Map,
+    Kline,
+    Radar,
+    WordCloud,
+    Liquid,
+)
 from pyecharts import Page
 
 from mock import MagicMock
@@ -31,7 +41,9 @@ def test_page_init():
 
 def test_page_add_chart():
     nc = (
-        Page().add_chart(MagicMock(page_title="Line-Chart"), name="line").add_chart(
+        Page().add_chart(
+            MagicMock(page_title="Line-Chart"), name="line"
+        ).add_chart(
             MagicMock(page_title="Bar-Chart")
         )
     )
@@ -67,7 +79,14 @@ def create_three_charts():
     value = [20, 190, 253, 77, 65]
     attr = ["汕头市", "汕尾市", "揭阳市", "阳江市", "肇庆市"]
     map = Map("广东地图示例", width=1200, height=600)
-    map.add("", attr, value, maptype="广东", is_visualmap=True, visual_text_color="#000")
+    map.add(
+        "",
+        attr,
+        value,
+        maptype="广东",
+        is_visualmap=True,
+        visual_text_color="#000",
+    )
     page.add(map)
 
     return page
@@ -197,7 +216,10 @@ def test_more_charts():
     ]
     kline = Kline("K 线图示例")
     kline.add(
-        "日K", ["2017/7/{}".format(i + 1) for i in range(31)], v1, is_datazoom_show=True
+        "日K",
+        ["2017/7/{}".format(i + 1) for i in range(31)],
+        v1,
+        is_datazoom_show=True,
     )
     page.add(kline)
 
@@ -289,7 +311,8 @@ def test_more_charts():
     assert len(page) == 7
     assert isinstance(page[0], Line)
     assert (
-        ("echarts" in page.js_dependencies) or ("echarts.min" in page.js_dependencies)
+        ("echarts" in page.js_dependencies)
+        or ("echarts.min" in page.js_dependencies)
     )
     page.render()
 
@@ -307,7 +330,9 @@ def test_page_extra_html_text_label():
     page.add(line)
 
     v1 = [11, 12, 13, 10, 10, 10]
-    pie = Pie("饼图-圆环图示例", title_pos="center", extra_html_text_label=["PIE TEXT LABEL"])
+    pie = Pie(
+        "饼图-圆环图示例", title_pos="center", extra_html_text_label=["PIE TEXT LABEL"]
+    )
     pie.add(
         "",
         CLOTHES,
