@@ -43,7 +43,7 @@ class Geo(Chart):
                 json_reader = json.load(f)
                 for k, v in json_reader.items():
                     self.add_coordinate(k, v[0], v[1])
-        except:
+        except Exception:
             raise
 
     def get_coordinate(self, name, region="中国", raise_exception=False):
