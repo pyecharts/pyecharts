@@ -83,12 +83,35 @@ print(result)
 
 ### 使用例子
 
-`pyecharts.Geo` 和 `pyecharts.GeoLines` 新增 `add_coordinate` 用于新增一个自定义城市地理位置的功能。接口如下：
+Geo/Geolines:
 
-```python
+* `add_coordinate` 用于新增一个自定义城市地理位置的功能。
+* `add_coordinate_json`  用于导入自定义地理位置 JSON 文件。
+
+方法接口如下：
+
+```
 class Geo:
     add_coordinate(self, name: six.text_type, longitude: float, latitude: float): -> None
-        pass
+    """
+    example:
+        add_coordinate("某地", 100.0, 20.0)
+    """
+    
+    # v0.5.9+
+    add_coordinate_json(self, json_file: six.text_type): -> None
+    """
+    example:
+        add_coordinate_json("my_coords.json")
+    """
+
+    # my_coords.json
+    """
+    {
+        "某地": [100.0, 20.0],
+        ...
+    }
+    """
 ```
 
 整个使用例子如下：

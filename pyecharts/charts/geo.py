@@ -1,6 +1,9 @@
 # coding=utf-8
 from __future__ import unicode_literals
 
+import json
+import codecs
+
 from pyecharts.chart import Chart
 from pyecharts.datasets.coordinates import get_coordinate
 
@@ -26,9 +29,22 @@ class Geo(Chart):
         :param name: The name of a position
         :param longitude: The longitude of coordinate.
         :param latitude: The latitude of coordinate.
-        :return:
         """
         self._coordinates.update({name: [longitude, latitude]})
+
+    def add_coordinate_json(self, json_file):
+        """
+        add a geo coordinate json file for position
+
+        :param json_file: geo coords json file
+        """
+        try:
+            with codecs.open(json_file, "r", "utf-8") as f:
+                json_reader = json.load(f)
+                for k, v in json_reader.items():
+                    self.add_coordinate(k, v[0], v[1])
+        except:
+            raise
 
     def get_coordinate(self, name, region="中国", raise_exception=False):
         """
