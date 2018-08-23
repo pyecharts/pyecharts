@@ -7,7 +7,6 @@ import pyecharts.constants as constants
 
 
 class PyEchartsConfig(object):
-
     def __init__(
         self, echarts_template_dir=".", jshost=None, force_js_embed=False
     ):

@@ -3,10 +3,17 @@
 ## 准备工作
 
 请用下面命令部署好环境
-```
+```bash
 $ git clone https://github.com/pyecharts/pyecharts.git
 $ pip install -r requirements.txt
 $ python setup.py install
+```
+
+## 代码格式化 (python 3.6+)
+
+```bash
+$ pip install -r requirements-dev.txt
+$ ./format_code.sh  # windows: format_code.bat
 ```
 
 ## pyecharts 0.3.2+ 的扩展包
@@ -28,7 +35,7 @@ from pyecharts import Map
 value = [1, 100]
 attr = ['Gujarat', 'Tamil Nadu']
 map = Map('India', width=800, height=600)
-map.add('', attr, value, maptype=u'印度', is_visualmap=True, visual_text_color="#000")
+map.add('', attr, value, maptype='印度', is_visualmap=True, visual_text_color="#000")
 map.render(path='map.png')  # <--- 直接生成图片
 ```
 
@@ -82,7 +89,7 @@ FILES = [
 
 最后运行
 
-```
+```bash
 $ gulp
 ```
 
