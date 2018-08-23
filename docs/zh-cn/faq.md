@@ -79,10 +79,6 @@ from __future__ import unicode_literals
 
 A: 暂不支持。 jupyterlab 应该是下一代 jupyter notebook 的雏形。欢迎大家提交相关 PR。
 
-**Q:怎么设置 echarts 主题？**
-
-A: 主题功能暂时不支持。
-
 **Q:如何设置 tooltip 的 formatter 选项为回调函数？**
 
 A: 在 v0.5.0 引入了 *选项回调函数* 支持，可查阅相关文档。

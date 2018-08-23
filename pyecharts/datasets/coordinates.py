@@ -25,7 +25,6 @@ REGION_DB = "countries_regions_db.json"
 
 
 class GeoDataBank(PluginManager):
-
     def __init__(self):
         super(GeoDataBank, self).__init__(constants.GEO_DATA_PLUGIN_TYPE)
         self.geo_coordinates = {}
@@ -91,7 +90,6 @@ class GeoDataBank(PluginManager):
 
 @PluginInfo(constants.GEO_DATA_PLUGIN_TYPE, tags=["builtin"])
 class DefaultChinaDataBank:
-
     def get_cities_in_region(self, region):
 
         if region != "CN":

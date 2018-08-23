@@ -110,7 +110,6 @@ def test_scatter_markline_coords():
 
 
 def test_scatter_extra_name():
-
     def custom_formatter(params):
         return params.value[3]
 
