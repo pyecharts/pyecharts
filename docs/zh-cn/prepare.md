@@ -68,24 +68,31 @@ pyecharts 支持另外 5 个主体色系，[请移步到主题色系获取更多
 
 ### 图形绘制过程
 
-基本上所有的图表类型都是这样绘制的：
-1. ```chart_name = Type()``` 初始化具体类型图表。
-2. ```add()``` 添加数据及配置项。
-3. ```render()``` 生成本地文件（html/svg/jpeg/png/pdf/gif）。
+图表类提供了若干了构建和渲染的方法，在使用的过程中，建议按照以下的顺序分别调用：
 
-```add()``` 数据一般为两个列表（长度一致）。如果你的数据是字典或者是带元组的字典。可利用 ```cast()``` 方法转换。
+| 步骤 | 描述 | 代码示例 | 备注 |
+| ------ | ------ | ------ | ------ |
+| 1 | 实例一个具体类型图表的对象 |  `chart = FooChart()`| |
+| 2  | 为图表添加通用的配置，如主题 |  `chart.use_theme()` | |
+| 3  | 为图表添加特定的配置 | `geo.add_coordinate()` | |
+| 4  | 添加数据及配置项| `chart.add()` | 参考 [数据解析与导入篇](zh-cn/data_import) |
+| 5  | 生成本地文件（html/svg/jpeg/png/pdf/gif）| `chart.render()` | |
+
+从 v0.5.9 开始，以上涉及的方法均支持链式调用。例如：
 
 ```python
-@staticmethod
-cast(seq)
-转换数据序列，将带字典和元组类型的序列转换为 k_lst,v_lst 两个列表
+from pyecharts import Bar
+
+CLOTHES = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
+clothes_v1 = [5, 20, 36, 10, 75, 90]
+clothes_v2 = [10, 25, 8, 60, 20, 80]
+
+Bar("柱状图数据堆叠示例").add(
+    "商家A", CLOTHES, clothes_v1, is_stack=True
+).add(
+    "商家B", CLOTHES, clothes_v2, is_stack=True
+).render()
 ```
-1. 元组列表  
-    [(A1, B1), (A2, B2), (A3, B3), (A4, B4)] --> k_lst[ A[i1, i2...] ], v_lst[ B[i1, i2...] ]
-2. 字典列表  
-    [{A1: B1}, {A2: B2}, {A3: B3}, {A4: B4}] --> k_lst[ A[i1, i2...] ], v_lst[ B[i1, i2...] ]
-3. 字典  
-    {A1: B1, A2: B2, A3: B3, A4: B4} -- > k_lst[ A[i1, i2...] ], v_lst[ B[i1, i2...] ]
 
 ### 多次显示图表
 
