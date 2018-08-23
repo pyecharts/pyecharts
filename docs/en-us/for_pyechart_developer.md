@@ -9,11 +9,11 @@ $ pip install -r requirements.txt
 $ python setup.py install
 ```
 
-## Auto code formatting (python 3.6)
+## Auto code formatting (python 3.6+)
 
 ```bash
 $ pip install -r requirements-dev.txt
-$ pink */*/*.py
+$ ./format_code.sh  # windows: format_code.bat
 ```
 
 ## Pull request instructions
