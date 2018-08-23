@@ -11,9 +11,9 @@ $ python setup.py install
 
 ## Auto code formatting (python 3.6)
 
-```
+```bash
 $ pip install -r requirements-dev.txt
-$ black -l 79 pyecharts test
+$ pink */*/*.py
 ```
 
 ## Pull request instructions

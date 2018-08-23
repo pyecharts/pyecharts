@@ -9,11 +9,11 @@ $ pip install -r requirements.txt
 $ python setup.py install
 ```
 
-## 代码秀秀 (python 3.6)
+## 代码格式化 (python 3.6+)
 
-```
+```bash
 $ pip install -r requirements-dev.txt
-$ black -l 80 pyecharts test
+$ pink */*/*.py
 ```
 
 ## pyecharts 0.3.2+ 的扩展包

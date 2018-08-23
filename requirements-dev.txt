@@ -1,2 +1,5 @@
-black==18.6b4
+# Format code with pink
+# pink */*/*.py
 
+black==18.6b4
+pink
