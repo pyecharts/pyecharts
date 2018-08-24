@@ -1,4 +1,4 @@
-> 数据集 篇：本文档主要介绍 pyecharts 项目相关的原始数据和访问接口。
+> 数据集篇：本文档主要介绍 pyecharts 项目相关的原始数据和访问接口。
 
 ## 概述
 
@@ -26,6 +26,11 @@ pyecharts 内置了一些常用的城市地理坐标数据，这些数据保存�
     ...
 }
 ```
+
+### 提供自定义数据
+
+具体可参考 [pyecharts/geo-region-coords](https://github.com/pyecharts/geo-region-coords)
+
 
 ### 检索中国地理坐标
 
@@ -78,12 +83,35 @@ print(result)
 
 ### 使用例子
 
-`pyecharts.Geo` 和 `pyecharts.GeoLines` 新增 `add_coordinate` 用于新增一个自定义城市地理位置的功能。接口如下：
+Geo/Geolines:
 
-```python
+* `add_coordinate` 用于新增一个自定义城市地理位置的功能。
+* `add_coordinate_json`  用于导入自定义地理位置 JSON 文件。
+
+方法接口如下：
+
+```
 class Geo:
     add_coordinate(self, name: six.text_type, longitude: float, latitude: float): -> None
-        pass
+    """
+    example:
+        add_coordinate("某地", 100.0, 20.0)
+    """
+    
+    # v0.5.9+
+    add_coordinate_json(self, json_file: six.text_type): -> None
+    """
+    example:
+        add_coordinate_json("my_coords.json")
+    """
+
+    # my_coords.json
+    """
+    {
+        "某地": [100.0, 20.0],
+        ...
+    }
+    """
 ```
 
 整个使用例子如下：

@@ -19,7 +19,7 @@ from pyecharts.exceptions import RegionNotFound
 
 def test_get_coordinate():
     coordinate = get_coordinate("北京")
-    assert [116.46, 39.92] == coordinate
+    assert [116.407526, 39.904030] == coordinate
 
 
 def test_get_coordinate_without_data():
