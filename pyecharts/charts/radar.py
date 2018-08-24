@@ -1,4 +1,5 @@
 # coding=utf-8
+import warnings
 
 from pyecharts.chart import Chart
 
@@ -13,7 +14,7 @@ class Radar(Chart):
     def __init__(self, title="", subtitle="", **kwargs):
         super(Radar, self).__init__(title, subtitle, **kwargs)
 
-    def config(
+    def set_schema(
         self,
         schema=None,
         c_schema=None,
@@ -64,6 +65,30 @@ class Radar(Chart):
             }
         )
         return self
+
+    def config(
+        self,
+        schema=None,
+        c_schema=None,
+        shape="",
+        radar_text_color="#333",
+        radar_text_size=12,
+        **kwargs
+    ):
+        """The old alias for set_schema.
+        """
+        deprecated_tpl = "The {} is deprecated, please use {} instead!"
+        warnings.warn(
+            deprecated_tpl.format("config", "set_schema"), DeprecationWarning
+        )
+        return self.set_schema(
+            schema=schema,
+            c_schema=c_schema,
+            shape=shape,
+            radar_text_color=radar_text_color,
+            radar_text_size=radar_text_size,
+            **kwargs
+        )
 
     def add(self, *args, **kwargs):
         self.__add(*args, **kwargs)
