@@ -50,7 +50,8 @@ class GeoLines(Geo):
             全球国家等地图，具体请参考 [地图自定义篇](zh-cn/customize_map)
         :param coordinate_region:
             城市坐标所属国家。从 v0.5.7 引入，针对国际城市的地理位置的查找。默认为 `中国`。
-            具体的国家/地区映射表参照 datasets/countries_regions_db.json
+            具体的国家/地区映射表参照 datasets/countries_regions_db.json。更多地理坐标
+            信息可以参考 [数据集篇](/zh-cn/datasets)
         :param symbol:
             线两端的标记类型，可以是一个数组分别指定两端，也可以是单个统一指定。
         :param symbol_size:
