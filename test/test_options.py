@@ -4,8 +4,18 @@ from __future__ import unicode_literals
 
 import json
 
-from pyecharts import Polar, Kline, Bar, Scatter, Line3D, Geo
-from pyecharts import Scatter3D, Bar3D, GeoLines, Style
+from pyecharts import (
+    Polar,
+    Kline,
+    Bar,
+    Scatter,
+    Line3D,
+    Geo,
+    Scatter3D,
+    Bar3D,
+    GeoLines,
+    Style,
+)
 from pyecharts_javascripthon.api import DefaultJsonEncoder
 
 from nose.tools import eq_
@@ -13,6 +23,10 @@ from mock import patch
 
 from test.utils import get_fixture_content
 from test.constants import RANGE_COLOR, X_TIME, Y_WEEK
+
+
+def dumps_actual_options(opts):
+    return json.dumps(opts, sort_keys=True, indent=4, cls=DefaultJsonEncoder)
 
 
 @patch("random.randint")
@@ -29,9 +43,7 @@ def test_polar_type_scatter_one(patched):
         is_splitline_show=False,
         is_axisline_show=True,
     )
-    actual_options = json.dumps(
-        polar.options, sort_keys=True, indent=4, cls=DefaultJsonEncoder
-    )
+    actual_options = dumps_actual_options(polar.options)
     expected = get_fixture_content(fixture)
     for a, b in zip(actual_options.split("\n"), expected.split("\n")):
         eq_(a.strip(), b.strip())
@@ -79,9 +91,7 @@ def test_kline_default(patched):
     patched.return_value = "1"
     kline = Kline("K 线图-默认示例")
     kline.add("日K", DATE, data)
-    actual_options = json.dumps(
-        kline.options, sort_keys=True, indent=4, cls=DefaultJsonEncoder
-    )
+    actual_options = dumps_actual_options(kline.options)
     expected = get_fixture_content(fixture)
     for a, b in zip(actual_options.split("\n"), expected.split("\n")):
         eq_(a.strip(), b.strip())
@@ -122,9 +132,7 @@ def test_bar_default(patched):
         mark_line=["average"],
         mark_point=["max", "min"],
     )
-    actual_options = json.dumps(
-        bar.options, sort_keys=True, indent=4, cls=DefaultJsonEncoder
-    )
+    actual_options = dumps_actual_options(bar.options)
     expected = get_fixture_content(fixture)
     for a, b in zip(actual_options.split("\n"), expected.split("\n")):
         eq_(a.strip(), b.strip())
@@ -139,9 +147,7 @@ def test_scatter_option(patched):
     scatter = Scatter("scatter test")
     scatter.add("A", v1, v2)
     scatter.add("B", v1[::-1], v2)
-    actual_options = json.dumps(
-        scatter.options, sort_keys=True, indent=4, cls=DefaultJsonEncoder
-    )
+    actual_options = dumps_actual_options(scatter.options)
     expected = get_fixture_content(fixture)
     for a, b in zip(actual_options.split("\n"), expected.split("\n")):
         eq_(a.strip(), b.strip())
@@ -169,9 +175,7 @@ def test_line3d_default(patched):
         visual_range=[0, 30],
         grid3d_rotate_sensitivity=5,
     )
-    actual_options = json.dumps(
-        line3d.options, sort_keys=True, indent=4, cls=DefaultJsonEncoder
-    )
+    actual_options = dumps_actual_options(line3d.options)
     expected = get_fixture_content(fixture)
     for a, b in zip(actual_options.split("\n"), expected.split("\n")):
         eq_(a.strip(), b.strip())
@@ -197,9 +201,7 @@ def test_geo_china_scatter(patched):
         label_emphasis_textsize=15,
         label_emphasis_pos="right",
     )
-    actual_options = json.dumps(
-        geo.options, sort_keys=True, indent=4, cls=DefaultJsonEncoder
-    )
+    actual_options = dumps_actual_options(geo.options)
     expected = get_fixture_content(fixture)
     for a, b in zip(actual_options.split("\n"), expected.split("\n")):
         eq_(a.strip(), b.strip())
@@ -213,9 +215,7 @@ def test_scatter3d_default(patched):
     data = [[1, 1, 1] for _ in range(3)]
     scatter3d = Scatter3D("3D 散点图示例", width=1200, height=600)
     scatter3d.add("", data, is_visualmap=True, visual_range_color=RANGE_COLOR)
-    actual_options = json.dumps(
-        scatter3d.options, sort_keys=True, indent=4, cls=DefaultJsonEncoder
-    )
+    actual_options = dumps_actual_options(scatter3d.options)
     expected = get_fixture_content(fixture)
     for a, b in zip(actual_options.split("\n"), expected.split("\n")):
         eq_(a.strip(), b.strip())
@@ -237,9 +237,7 @@ def test_bar3d_default(patched):
         grid3d_width=200,
         grid3d_depth=80,
     )
-    actual_options = json.dumps(
-        bar3d.options, sort_keys=True, indent=4, cls=DefaultJsonEncoder
-    )
+    actual_options = dumps_actual_options(bar3d.options)
     expected = get_fixture_content(fixture)
 
     for a, b in zip(actual_options.split("\n"), expected.split("\n")):
@@ -279,10 +277,7 @@ def test_geolines(patched):
     lines = GeoLines("GeoLines 示例", **style.init_style)
     lines.add("从广州出发", data_guangzhou, **style_geo)
     lines.add("从北京出发", data_beijing, **style_geo)
-
-    actual_options = json.dumps(
-        lines.options, sort_keys=True, indent=4, cls=DefaultJsonEncoder
-    )
+    actual_options = dumps_actual_options(lines.options)
     expected = get_fixture_content(fixture)
     for a, b in zip(actual_options.split("\n"), expected.split("\n")):
         eq_(a.strip(), b.strip())

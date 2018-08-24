@@ -3,7 +3,8 @@
 * ### version 0.5.9（dev）
     
     #### Added
-    * [pr#685](https://github.com/pyecharts/pyecharts/pull/685) 图表方法( `use_theme`/`config`/`add`)支持链式调用
+    * [pr#685](https://github.com/pyecharts/pyecharts/pull/685) 图表方法(`use_theme`/`config`/`add`)支持链式调用
+    * [issue#687](https://github.com/pyecharts/pyecharts/issues/687) 新增 `add_coordinate_json` 方法用于支持导入 Geo/Geolines 坐标数据
 
 
 * ### version 0.5.8 - 2018.8.13（current）
