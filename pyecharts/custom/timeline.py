@@ -9,7 +9,7 @@ from pyecharts.utils import merge_js_dependencies
 
 class Timeline(Base):
     """
-    时间线轮播多张图
+    <<< 时间线轮播多张图 >>>
     """
 
     def __init__(
