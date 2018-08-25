@@ -1878,10 +1878,14 @@ add(name, data, **kwargs)
 * data -> [list], 包含列表的列表  
     数据项。数据中，每一行是一个『数据项』，每一列属于一个『维度』
 
-Parallel.config() 方法签名
+Parallel.set_schema() / Parallel.config() 方法签名
 ```python
+set_schema(schema=None, c_schema=None)
 config(schema=None, c_schema=None)
 ```
+
+> 从 v0.5.9 开始，原有 `config` 方法被废弃，推荐使用 set_schema 方法。
+
 * schema  
     默认平行坐标系的坐标轴信息，如 ["dim_name1", "dim_name2", "dim_name3"]。
 * c_schema  
@@ -2381,13 +2385,22 @@ add(name, value,
 * item_color -> str  
     指定单图例颜色
 
-Radar.config() 方法签名
+Radar.set_radar_component() / Radar.config() 方法签名
 ```python
+
+set_radar_component(schema=None,
+    c_schema=None,
+    shape="",
+    rader_text_color="#000", **kwargs):
+	
 config(schema=None,
     c_schema=None,
     shape="",
     rader_text_color="#000", **kwargs):
 ```
+
+> 从 v0.5.9 开始，原有的 `config` 被废弃，推荐使用 `set_radar_component` 方法。
+
 * schema -> list  
     默认雷达图的指示器，用来指定雷达图中的多个维度，会对数据处理成 {name:xx, value:xx} 的字典
 * c_schema -> dict  
