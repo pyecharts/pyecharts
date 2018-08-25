@@ -14,7 +14,7 @@ class Radar(Chart):
     def __init__(self, title="", subtitle="", **kwargs):
         super(Radar, self).__init__(title, subtitle, **kwargs)
 
-    def set_schema(
+    def set_radar_component(
         self,
         schema=None,
         c_schema=None,
@@ -81,7 +81,7 @@ class Radar(Chart):
         warnings.warn(
             deprecated_tpl.format("config", "set_schema"), DeprecationWarning
         )
-        return self.set_schema(
+        return self.set_radar_component(
             schema=schema,
             c_schema=c_schema,
             shape=shape,
