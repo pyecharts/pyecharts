@@ -12,6 +12,8 @@ import pyecharts.constants as constants
 
 class Page(object):
     """
+    <<< 同一网页按顺序展示多图 >>>
+
     A composite object to present multiple charts vertically in a single page
     """
 

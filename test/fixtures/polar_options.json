@@ -32,6 +32,7 @@
         "type": "category",
         "z": 50
     },
+    "animation": true,
     "color": [
         "#c23531",
         "#2f4554",
