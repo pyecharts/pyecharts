@@ -17,7 +17,7 @@ def test_radar_default_schema():
     v1 = [[4300, 10000, 28000, 35000, 50000, 19000]]
     v2 = [[5000, 14000, 28000, 31000, 42000, 21000]]
     radar = Radar("雷达图示例")
-    radar.config(schema)
+    radar.set_radar_component(schema)
     radar.add("预算分配", v1, is_splitline=True, is_axisline_show=True)
     radar.add(
         "实际开销",
@@ -109,7 +109,7 @@ c_schema = [
 
 def test_radar_user_define_schema_single():
     radar = Radar("雷达图示例")
-    radar.config(c_schema=c_schema, shape="circle")
+    radar.set_radar_component(c_schema=c_schema, shape="circle")
     radar.add("北京", value_bj, item_color="#f9713c", symbol=None)
     radar.add(
         "上海",

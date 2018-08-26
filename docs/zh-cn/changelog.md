@@ -1,10 +1,24 @@
 # 版本日志
 
-* ### version 0.5.9（dev）
-    * TODO
+* ### version 0.5.10
+    * Todo
 
 
-* ### version 0.5.8 - 2018.8.13（current）
+* ### version 0.5.9 - 2018.8.26（current）
+    
+    #### Added
+    * [pr#685](https://github.com/pyecharts/pyecharts/pull/685) 图表方法(`use_theme`/`config`/`add`)支持链式调用
+    * [pr#690](https://github.com/pyecharts/pyecharts/pull/690) Radar 新增 `set_radar_component` 方法，废弃 `config` 方法；Parallel 图新增 `set_schema` 方法，废弃 `confg` 方法
+    * [issue#687](https://github.com/pyecharts/pyecharts/issues/687) 新增 `add_coordinate_json` 方法用于支持导入 Geo/Geolines 坐标数据
+    * [issue#691](https://github.com/pyecharts/pyecharts/issues/691) 为每种图形新增 `is_animation` 初始化参数，用于控制是否显示动画。
+    * 新增 [geo-region-coords](https://github.com/pyecharts/geo-region-coords) 辅助项目，提供中国地区坐标查询。
+
+    ### Updated
+    * [issue#678](https://github.com/pyecharts/pyecharts/issues/678) 将 `extra_html_text_label` 默认位置移动到图形顶部。
+    * [pr#677](https://github.com/pyecharts/pyecharts/pull/677) 重构 Polar，更正错误参数。
+
+
+* ### version 0.5.8 - 2018.8.13
 
     #### Added
     * [issue#655](https://github.com/pyecharts/pyecharts/issues/655) 新增多个自定义主题：westeros, wonderland, chalk, halloween, essos，walden, romantic and purple-passion

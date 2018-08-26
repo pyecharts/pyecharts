@@ -18,6 +18,7 @@ class Scatter(Chart):
 
     def add(self, *args, **kwargs):
         self.__add(*args, **kwargs)
+        return self
 
     def __add(
         self,
@@ -99,7 +100,8 @@ class Scatter(Chart):
             for y in range(height):
                 if y < int(height / 2):
                     (imarray[x, y], imarray[x, height - y - 1]) = (
-                        imarray[x, height - y - 1], imarray[x, y]
+                        imarray[x, height - y - 1],
+                        imarray[x, y],
                     )
         # [:3] 代表着 R, G, B 三原色
         result = [

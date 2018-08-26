@@ -27,6 +27,7 @@ class Chart(Base):
         page_title=constants.PAGE_TITLE,
         renderer=constants.CANVAS_RENDERER,
         extra_html_text_label=None,
+        is_animation=True,
     ):
         """
 
@@ -62,6 +63,8 @@ class Chart(Base):
         :param extra_html_text_label:
             额外的 HTML 文本标签，(<p> 标签)。类型为 list，list[0] 为文本内容，
             list[1] 为字体风格样式（选填）。如 ["this is a p label", "color:red"]
+        :param is_animation:
+            是否开启动画，默认为 True。V0.5.9+
         """
         super(Chart, self).__init__(
             width=width,
@@ -69,6 +72,7 @@ class Chart(Base):
             renderer=renderer,
             page_title=page_title,
             extra_html_text_label=extra_html_text_label,
+            is_animation=is_animation
         )
         self._colorlst = [
             "#c23531",
@@ -105,10 +109,12 @@ class Chart(Base):
                     "left": title_pos,
                     "top": title_top,
                     "textStyle": {
-                        "color": title_color, "fontSize": title_text_size
+                        "color": title_color,
+                        "fontSize": title_text_size,
                     },
                     "subtextStyle": {
-                        "color": subtitle_color, "fontSize": subtitle_text_size
+                        "color": subtitle_color,
+                        "fontSize": subtitle_text_size,
                     },
                 }
             ],
@@ -128,6 +134,7 @@ class Chart(Base):
             series=[],
             legend=[{"data": []}],
             backgroundColor=background_color,
+            animation=self.is_animation
         )
 
     def add(
@@ -374,7 +381,7 @@ class Chart(Base):
         """
         `add()` 方法只是用于提供自动参数补全
         """
-        pass
+        return self
 
     def _config_components(
         self,
@@ -433,7 +440,8 @@ class Chart(Base):
                     },
                 },
                 dataZoom={
-                    "show": True, "title": {"zoom": "区域缩放", "back": "缩放还原"}
+                    "show": True,
+                    "title": {"zoom": "区域缩放", "back": "缩放还原"},
                 },
             )
 
