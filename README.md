@@ -23,6 +23,9 @@
     </a>
 </p>
 <p align="center">
+    <a href="https://pypi.org/project/pyecharts">
+        <img src="https://img.shields.io/pypi/format/pyecharts.svg" alt="PyPI - Format">
+    </a>
      <a href="https://github.com/pyecharts/pyecharts/pulls">
         <img src="https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat" alt="Contributions welcome">
     </a>
