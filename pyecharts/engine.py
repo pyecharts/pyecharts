@@ -66,17 +66,12 @@ def echarts_js_dependencies_embed(env, *args):
 @environmentfunction
 def echarts_container(env, chart):
     """
-    Render a div html element for a chart.
+    Render <p></p><div></div> html elements for a chart.
 
     :param env:
     :param chart: A pyecharts.base.Base object
     """
     _container_and_text = ""
-    _container_and_text += CHART_DIV_FORMATTER.format(
-        chart_id=chart.chart_id,
-        width=utils.to_css_length(chart.width),
-        height=utils.to_css_length(chart.height),
-    )
     _text_label = chart.extra_html_text_label
     if _text_label:
         if len(_text_label) == 1 and isinstance(_text_label, list):
@@ -85,6 +80,12 @@ def echarts_container(env, chart):
         _container_and_text += EXTRA_TEXT_FORMATTER.format(
             text=_text, style=_style
         )
+
+    _container_and_text += CHART_DIV_FORMATTER.format(
+        chart_id=chart.chart_id,
+        width=utils.to_css_length(chart.width),
+        height=utils.to_css_length(chart.height),
+    )
     return Markup(_container_and_text)
 
 

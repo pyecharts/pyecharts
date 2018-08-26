@@ -8,6 +8,8 @@ from pyecharts.utils import merge_js_dependencies
 
 class Overlap(Base):
     """
+    <<< 结合不同类型图表叠加画在同张图上 >>>
+
     用户可以自定义结合 Line/Bar/Kline, Scatter/EffectScatter 图表，
     将不同类型图表画在一张图上。利用第一个图表为基础，往后的数据都将
     会画在第一个图表上。
@@ -57,6 +59,7 @@ class Overlap(Base):
             self._js_dependencies = merge_js_dependencies(
                 self._js_dependencies, chart.js_dependencies
             )
+            return self
 
     def __custom(self, series):
         """

@@ -31,7 +31,6 @@ about = {}
 with open(os.path.join(here, __title__, "_version.py")) as f:
     exec(f.read(), about)
 
-
 setup(
     name=__title__,
     version=about["__version__"],
@@ -59,6 +58,7 @@ setup(
         "Programming Language :: Python :: 3.4",
         "Programming Language :: Python :: 3.5",
         "Programming Language :: Python :: 3.6",
+        "Programming Language :: Python :: 3.7",
         "Topic :: Software Development :: Libraries",
     ],
 )
