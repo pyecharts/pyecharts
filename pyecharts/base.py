@@ -27,6 +27,7 @@ class Base(object):
         renderer=constants.CANVAS_RENDERER,
         page_title=constants.PAGE_TITLE,
         extra_html_text_label=None,
+        is_animation=True,
     ):
         """
 
@@ -42,6 +43,8 @@ class Base(object):
         :param extra_html_text_label:
             额外的 HTML 文本标签，(<p> 标签)。类型为 list，list[0] 为文本内容，
             list[1] 为字体风格样式（选填）。如 ["this is a p label", "color:red"]
+        :param is_animation:
+            是否开启动画，默认为 True。V0.5.9+
         """
         self._option = {}
         self._js_dependencies = set()
@@ -54,6 +57,7 @@ class Base(object):
         self.theme = None
         self.use_theme(CURRENT_CONFIG.theme)
         self.extra_html_text_label = extra_html_text_label
+        self.is_animation = is_animation
 
     @property
     def chart_id(self):
@@ -79,9 +83,11 @@ class Base(object):
         self.theme = theme_name
         if theme_name not in constants.BUILTIN_THEMES:
             self._js_dependencies.add(self.theme)
+        return self
 
     def on(self, event_name, handler):
         self.event_handlers[event_name] = handler
+        return self
 
     def print_echarts_options(self):
         """

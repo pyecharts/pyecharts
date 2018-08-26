@@ -1,6 +1,9 @@
 # coding=utf-8
 from __future__ import unicode_literals
 
+import json
+import codecs
+
 from pyecharts.chart import Chart
 from pyecharts.datasets.coordinates import get_coordinate
 
@@ -26,9 +29,22 @@ class Geo(Chart):
         :param name: The name of a position
         :param longitude: The longitude of coordinate.
         :param latitude: The latitude of coordinate.
-        :return:
         """
         self._coordinates.update({name: [longitude, latitude]})
+
+    def add_coordinate_json(self, json_file):
+        """
+        add a geo coordinate json file for position
+
+        :param json_file: geo coords json file
+        """
+        try:
+            with codecs.open(json_file, "r", "utf-8") as f:
+                json_reader = json.load(f)
+                for k, v in json_reader.items():
+                    self.add_coordinate(k, v[0], v[1])
+        except Exception:
+            raise
 
     def get_coordinate(self, name, region="中国", raise_exception=False):
         """
@@ -49,6 +65,7 @@ class Geo(Chart):
 
     def add(self, *args, **kwargs):
         self.__add(*args, **kwargs)
+        return self
 
     def __add(
         self,
@@ -81,7 +98,8 @@ class Geo(Chart):
             全球国家等地图，具体请参考 [地图自定义篇](zh-cn/customize_map)
         :param coordinate_region:
             城市坐标所属国家。从 v0.5.7 引入，针对国际城市的地理位置的查找。默认为 `中国`。
-            具体的国家/地区映射表参照 datasets/countries_regions_db.json
+            具体的国家/地区映射表参照 datasets/countries_regions_db.json。更多地理坐标
+            信息可以参考 [数据集篇](/zh-cn/datasets)
         :param symbol_size:
             标记图形大小。
         :param border_color:

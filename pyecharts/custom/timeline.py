@@ -9,7 +9,7 @@ from pyecharts.utils import merge_js_dependencies
 
 class Timeline(Base):
     """
-    时间线轮播多张图
+    <<< 时间线轮播多张图 >>>
     """
 
     def __init__(
@@ -117,6 +117,7 @@ class Timeline(Base):
             if _s.get("type") == "map":
                 _s.pop("data", None)
                 self._option.get("baseOption").get("series").append(_s)
+        return self
 
     def __check_components(self, chart):
         """

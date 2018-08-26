@@ -1,5 +1,21 @@
 # Developer's Guide
 
+## Get started
+
+
+```
+$ git clone https://github.com/pyecharts/pyecharts.git
+$ pip install -r requirements.txt
+$ python setup.py install
+```
+
+## Auto code formatting (python 3.6+)
+
+```bash
+$ pip install -r requirements-dev.txt
+$ ./format_code.sh  # windows: format_code.bat
+```
+
 ## Pull request instructions
 
 `dev` branch is for the development of each new releases. `master` branch is reserved for released code only. What it means for contributors is:
