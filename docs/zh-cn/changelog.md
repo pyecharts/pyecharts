@@ -3,6 +3,7 @@
 * ### version 0.5.9（dev）
     
     #### Added
+    * [pr#690](https://github.com/pyecharts/pyecharts/pull/690) Radar 新增 `set_radar_component` 方法，废弃 `config` 方法；Parallel 图新增 `set_schema` 方法，废弃 `confg` 方法
     * [pr#685](https://github.com/pyecharts/pyecharts/pull/685) 图表方法(`use_theme`/`config`/`add`)支持链式调用
     * [issue#687](https://github.com/pyecharts/pyecharts/issues/687) 新增 `add_coordinate_json` 方法用于支持导入 Geo/Geolines 坐标数据
     * [issue#691](https://github.com/pyecharts/pyecharts/issues/691) 为每种图形新增 `is_animation` 初始化参数，用于控制是否显示动画。

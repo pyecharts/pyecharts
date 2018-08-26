@@ -21,7 +21,7 @@ def test_parallel_default():
         [11, 117, 81, 124, 1.03, 45],
     ]
     parallel = Parallel("平行坐标系-默认指示器")
-    parallel.config(schema)
+    parallel.set_schema(schema)
     parallel.add("parallel", data, is_random=True)
     parallel.render()
 
@@ -59,7 +59,7 @@ def test_parallel_user_define():
         [14, 116, 87, 131, 1.47, 84, 40, "轻度污染"],
     ]
     parallel = Parallel("平行坐标系-用户自定义指示器")
-    parallel.config(c_schema=c_schema)
+    parallel.set_schema(c_schema=c_schema)
     parallel.add("parallel", data)
     parallel.render()
 
