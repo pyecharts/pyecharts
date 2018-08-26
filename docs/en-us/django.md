@@ -87,7 +87,8 @@ from django.http import HttpResponse
 from django.template import loader
 from pyecharts import Line3D
 
-from pyecharts.constants import DEFAULT_HOST
+
+REMOTE_HOST = "https://pyecharts.github.io/assets/js"
 
 
 def index(request):
@@ -95,7 +96,7 @@ def index(request):
     l3d = line3d()
     context = dict(
         myechart=l3d.render_embed(),
-        host=DEFAULT_HOST,
+        host=REMOTE_HOST,
         script_list=l3d.get_js_dependencies()
     )
     return HttpResponse(template.render(context, request))
@@ -123,9 +124,9 @@ def line3d():
 The number of libraries varies according to the dependency requirements of the charts
 to be rendered.
 
-`host` refers to the host for echarts libraries. The default host is
-http://chfw.github.io/jupyter-echarts/echarts. You can change them if you wish. And if you do so,
-please clone https://github.com/chfw/jupyter-echarts. Then, place `echarts` folder onto your own server.
+`host` refers to the host for echarts js libraries. The default host is
+https://pyecharts.github.io/assets/js. You can change them if you wish. And if you do so,
+please clone https://github.com/pyecharts/assets. Then, place `js` folder onto your own server.
 
 
 ## Step 3: Now let's create a template
