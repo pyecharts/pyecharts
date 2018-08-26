@@ -70,21 +70,21 @@ def test_polar_type_barangle():
     polar.add(
         "",
         [1, 2, 3, 4, 3, 5, 1],
-        radius_data=WEEK,
+        angle_data=WEEK,
         type="barAngle",
         is_stack=True,
     )
     polar.add(
         "",
         [2, 4, 6, 1, 2, 3, 1],
-        radius_data=WEEK,
+        anglle_data=WEEK,
         type="barAngle",
         is_stack=True,
     )
     polar.add(
         "",
         [1, 2, 3, 4, 1, 2, 5],
-        radius_data=WEEK,
+        angle_data=WEEK,
         type="barAngle",
         is_stack=True,
     )
@@ -157,7 +157,6 @@ def test_polar_draw_snail():
 
 
 def test_polor_custom_type():
-
     def render_item(params, api):
         values = [api.value(0), api.value(1)]
         coord = api.coord(values)

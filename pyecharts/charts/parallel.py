@@ -1,5 +1,7 @@
 # coding=utf-8
 
+import warnings
+
 from pyecharts.chart import Chart
 
 
@@ -15,8 +17,9 @@ class Parallel(Chart):
 
     def add(self, *args, **kwargs):
         self.__add(*args, **kwargs)
+        return self
 
-    def config(self, schema=None, c_schema=None):
+    def set_schema(self, schema=None, c_schema=None):
         """
 
         :param schema:
@@ -38,6 +41,16 @@ class Parallel(Chart):
             self._option.update(parallelAxis=_schema)
         if c_schema:
             self._option.update(parallelAxis=c_schema)
+        return self
+
+    def config(self, schema=None, c_schema=None):
+        """The old alias name for set_schema.
+        """
+        deprecated_tpl = "The {} is deprecated, please use {} instead!"
+        warnings.warn(
+            deprecated_tpl.format("config", "set_schema"), DeprecationWarning
+        )
+        return self.set_schema(schema=schema, c_schema=c_schema)
 
     def __add(self, name, data, **kwargs):
         """
@@ -51,7 +64,10 @@ class Parallel(Chart):
         chart = self._get_all_options(**kwargs)
         self._option.update(
             parallel={
-                "left": "5%", "right": "13%", "bottom": "10%", "top": "20%"
+                "left": "5%",
+                "right": "13%",
+                "bottom": "10%",
+                "top": "20%",
             }
         )
         self._option.get("legend")[0].get("data").append(name)
