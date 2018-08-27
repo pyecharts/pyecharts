@@ -572,7 +572,8 @@ es.render()
 ### Funnel（漏斗图）
 Funnel.add() 方法签名
 ```python
-add(name, attr, value, **kwargs)
+add(name, attr, value,
+    funnel_sort="ascending", funnel_gap=0, **kwargs)
 ```
 * name -> str  
     图例名称
@@ -580,7 +581,12 @@ add(name, attr, value, **kwargs)
     属性名称
 * value -> list  
     属性所对应的值
+* funnel_sort -> str/func  
+    数据排序， 可以取 'ascending'，'descending'，'none'（表示按 data 顺序，即不排序）。
+* funnel_gap- > int  
+    数据图形间距。默认为 0。
 
+**标签显示在内部**
 ```python
 from pyecharts import Funnel
 
@@ -599,6 +605,7 @@ funnel.render()
 ```
 ![funnel-demo](https://user-images.githubusercontent.com/19553554/35090181-d6b0e886-fc73-11e7-8e00-dec8ac38c415.gif)
 
+**标签显示在外部**
 ```python
 funnel = Funnel("漏斗图示例", width=600, height=400, title_pos='center')
 funnel.add(
@@ -613,6 +620,55 @@ funnel.add(
 funnel.render()
 ```
 ![funnel-demo](https://user-images.githubusercontent.com/19553554/35090186-d8f50db6-fc73-11e7-9b7e-947580a621de.png)
+
+**数据按升序排序**
+```python
+funnel = Funnel("漏斗图示例", width=600, height=400, title_pos='center')
+funnel.add(
+    "商品",
+    CLOTHES,
+    prices,
+    is_label_show=True,
+    label_pos="inside",
+    label_text_color="#fff",
+    funnel_sort="ascending"
+)
+funnel.render()
+```
+![funnel-demo](https://user-images.githubusercontent.com/19553554/44653464-6cc08880-aa21-11e8-9b78-a3090ada7be7.png)
+
+**不排序数据**
+```python
+funnel = Funnel("漏斗图示例", width=600, height=400, title_pos='center')
+funnel.add(
+    "商品",
+    CLOTHES,
+    prices,
+    is_label_show=True,
+    label_pos="inside",
+    label_text_color="#fff",
+    funnel_sort="none"
+)
+funnel.render()
+```
+![funnel-demo](https://user-images.githubusercontent.com/19553554/44653675-fc663700-aa21-11e8-82f3-69c02d4a847d.png)
+
+**指定图形间隔**
+```python
+funnel = Funnel("漏斗图示例", width=600, height=400, title_pos='center')
+funnel.add(
+    "商品",
+    CLOTHES,
+    prices,
+    is_label_show=True,
+    label_pos="inside",
+    label_text_color="#fff",
+    funnel_sort="ascending",
+    funnel_gap=5,
+)
+funnel.render()
+```
+![funnel-demo](https://user-images.githubusercontent.com/19553554/44653847-6ed71700-aa22-11e8-8c08-e93d2e9e528d.png)
 
 
 ### Gauge（仪表盘）
