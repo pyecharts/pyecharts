@@ -33,9 +33,7 @@ class Funnel(Chart):
         :param value:
             属性所对应的值。
         :param funnel_sort:
-            数据排序， 可以取 'ascending'，'descending'，'none'（表示按 data 顺序），
-            或者一个函数（即 Array.prototype.sort(function (a, b) { ... })）。
-            回调函数和语言扩展相关内容可参考文档 [高级用法篇](zh-cn/advanced)
+            数据排序， 可以取 'ascending'，'descending'，'none'（表示按 data 顺序）。
         :param funnel_gap:
             数据图形间距。
         :param kwargs:

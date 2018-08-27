@@ -572,7 +572,8 @@ es.render()
 ### Funnel（漏斗图）
 Funnel.add() 方法签名
 ```python
-add(name, attr, value, **kwargs)
+add(name, attr, value,
+    funnel_sort="ascending", funnel_gap=0, **kwargs)
 ```
 * name -> str  
     图例名称
@@ -581,7 +582,7 @@ add(name, attr, value, **kwargs)
 * value -> list  
     属性所对应的值
 * funnel_sort -> str/func  
-    数据排序， 可以取 'ascending'，'descending'，'none'（表示按 data 顺序，即不排序），或者一个函数（即 Array.prototype.sort(function (a, b) { ... })）。默认为'ascending'。回调函数和语言扩展相关内容可参考文档 [高级用法篇](zh-cn/advanced)
+    数据排序， 可以取 'ascending'，'descending'，'none'（表示按 data 顺序，即不排序）。
 * funnel_gap- > int  
     数据图形间距。默认为 0。
 
