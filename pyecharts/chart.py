@@ -72,7 +72,7 @@ class Chart(Base):
             renderer=renderer,
             page_title=page_title,
             extra_html_text_label=extra_html_text_label,
-            is_animation=is_animation
+            is_animation=is_animation,
         )
         self._colorlst = [
             "#c23531",
@@ -134,7 +134,7 @@ class Chart(Base):
             series=[],
             legend=[{"data": []}],
             backgroundColor=background_color,
-            animation=self.is_animation
+            animation=self.is_animation,
         )
 
     def add(
@@ -167,6 +167,8 @@ class Chart(Base):
         effect_scale=None,
         extra_data=None,
         extra_name=None,
+        funnel_gap=None,
+        funnel_sort=None,
         geo_emphasis_color=None,
         geo_normal_color=None,
         geo_cities_coords=None,

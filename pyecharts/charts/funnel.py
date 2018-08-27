@@ -15,7 +15,15 @@ class Funnel(Chart):
         self.__add(*args, **kwargs)
         return self
 
-    def __add(self, name, attr, value, **kwargs):
+    def __add(
+        self,
+        name,
+        attr,
+        value,
+        funnel_sort="descending",
+        funnel_gap=0,
+        **kwargs
+    ):
         """
 
         :param name:
@@ -24,6 +32,10 @@ class Funnel(Chart):
             属性名称。
         :param value:
             属性所对应的值。
+        :param funnel_sort:
+            数据排序， 可以取 'ascending'，'descending'，'none'（表示按 data 顺序）。
+        :param funnel_gap:
+            数据图形间距。
         :param kwargs:
         """
         assert len(attr) == len(value)
@@ -43,6 +55,8 @@ class Funnel(Chart):
                 "type": "funnel",
                 "name": name,
                 "data": _data,
+                "sort": funnel_sort,
+                "gap": funnel_gap,
                 "label": chart["label"],
             }
         )
