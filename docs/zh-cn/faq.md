@@ -108,7 +108,7 @@ A: 因为 china.js 没有加载成功。请检查 echarts-countries-pypkg 是不
 
 1）检查能否访问 echarts.min.js？ http://localhost:8888/nbextensions/echarts/echarts.min.js
 
-如果不能，请检查 jupyter-echarts-pypkg 是否装好？在确认你已经装了 jupyter 的情况下，可以卸载 jupyter-echarts-pypkg 然后再装一遍。然后运行 jupyter notebook，再次查看 1）能否正确访问 echarts.min.js？
+如果不能，请检查 jupyter-echarts-pypkg 是否装好？在确认你已经装了 jupyter 的情况下，可以卸载 jupyter-echarts-pypkg 然后再装一遍（`pip install --no-cache-dir jupyter-echarts-pypkg`）。然后运行 jupyter notebook，再次查看 1）能否正确访问 echarts.min.js？
 
 如果能，请右键打开开发者工具，截下 <script>...</script> 区域的截图.
 
@@ -116,6 +116,16 @@ A: 因为 china.js 没有加载成功。请检查 echarts-countries-pypkg 是不
 
 ![](https://user-images.githubusercontent.com/4280312/29354092-4c4eecee-8264-11e7-98bb-06ec1b4c06b6.png)
 
+**Q: 为什么有些 echarts-xxx-pypkg 可以给 jupyter 装上，而唯独这个 echarts-yyy-pypkg 不能？**
+
+首先，请检查当前 python 环境有没有 jupyter。有的话，下一步
+再用 `pip install --no-cache-dir echarts-yyy-pypkg` 装一遍。
+
+**Q: pip install pyecharts meet error: Microsoft Visual C++ 14.0 is required**
+
+安装问题，使用pip install pyecharts 的时候出现了，“error: Microsoft Visual C++ 14.0 is required. Get it with "Microsoft Visual C++ Build Tools": http://landinghub.visualstudio.com/visual-cpp-build-tools” 问题。
+
+你需要发问微软网站下载 Build Tools for Visual Studio 2017。具体信息请访问 https://www.scivision.co/python-windows-visual-c++-14-required/
 
 **Q:如何离线安装 pyecharts？**
 
