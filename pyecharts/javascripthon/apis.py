@@ -21,46 +21,60 @@ from collections import OrderedDict
 
 from pyecharts.javascripthon.compat import TranslatorCompatAPI
 
-__all__ = ['FunctionSnippet', 'JavascriptSnippet', 'EChartsTranslator']
+__all__ = ['EChartsTranslator']
 
 
-class FunctionSnippet(OrderedDict):
+class JsSnippetMixin(object):
+    def to_js_snippet(self):
+        pass
+
+
+class FunctionStore(OrderedDict, JsSnippetMixin):
     """
     A OrderedDict which stores translated function.
     {<func_name>:<func>}
     """
 
-    def as_snippet(self):
+    def to_js_snippet(self):
         return ''.join(self.values())
 
 
-class JavascriptSnippet(object):
-    """
-    A class presenting translated js code.
-    """
+class TranslateResult(JsSnippetMixin):
+    def __init__(self, options, options_snippet, function_store):
+        self._options = options
+        self._options_snippet = options_snippet
+        self._function_store = function_store
 
-    def __init__(self, function_snippet, option_snippet):
-        self.function_snippet = function_snippet
-        self.option_snippet = option_snippet
+    @property
+    def options_snippet(self):
+        return self._options_snippet
 
-    def as_snippet(self):
-        return self.function_snippet.as_snippet() + '\n' + self.option_snippet
+    @property
+    def function_snippet(self):
+        return self._function_store.to_js_snippet()
 
-    def as_json(self):
-        if len(self.function_snippet) == 0:
-            return self.option_snippet
-        else:
-            raise ValueError('Can not dump to a valid json string.')
+    @property
+    def has_function(self):
+        return len(self._function_store) > 0
+
+    def to_js_snippet(self):
+        return '\n'.join([
+            self.function_snippet,
+            self._options_snippet
+        ])
 
 
 class FunctionTranslator(object):
+    """A translator for function,a FunctionStore object will be generated.
+    """
+
     def __init__(self):
         self.left_delimiter = '-=>'
         self.right_delimiter = '<=-'
         self.reference_str_format = ''.join(
             [self.left_delimiter, '{name}', self.right_delimiter]
         )
-        self._shared_function_snippet = FunctionSnippet()
+        self._shared_function_snippet = FunctionStore()
 
         # Tmp Data for a render process
         self._func_store = {}  # {<name>:<func>}
@@ -79,7 +93,7 @@ class FunctionTranslator(object):
             return ref_str
 
     def translate(self):
-        fs = FunctionSnippet()
+        fs = FunctionStore()
         for name, func in self._func_store.items():
             if name in self._shared_function_snippet:
                 snippet = self._shared_function_snippet[name]
@@ -138,15 +152,46 @@ class EChartsTranslator(object):
     def _feed_func_in_options(self, func):
         return self._function_translator.feed(func, reference=True)
 
+    # ------ Public API - Translator -----
+
     def feed_event(self, func, name=None):
+        """Add a event function
+        :param func: Event function object
+        :param name: The name of function
+        :return: None
+        """
         return self._function_translator.feed(func, name=name, reference=False)
 
     def feed_options(self, options):
+        """Add options dict
+        :param options: A dictionary for options
+        :return:
+        """
         self._cache['options'] = options
+        return self
 
     def translate(self):
+        """Translate a options,a TranslateResult object is returned
+        :return: a TranslateResult
+        """
         option_snippet = self.json_encoder.encode(self._cache['options'])
-        function_snippet = self._function_translator.translate()
+        function_store = self._function_translator.translate()
         option_snippet = self._function_translator.handle_options(
             option_snippet)
-        return JavascriptSnippet(function_snippet, option_snippet)
+        return TranslateResult(
+            options=self._cache['options'],
+            options_snippet=option_snippet,
+            function_store=function_store
+        )
+
+    # ------ Tools ------
+
+    @staticmethod
+    def dumps(obj, **kwargs):
+        """A simple wrapper for json.dumps
+        :param obj:
+        :param kwargs:
+        :return:
+        """
+        encoder_class = kwargs.pop('cls', DefaultJsonEncoder)
+        return json.dumps(obj, cls=encoder_class, **kwargs)

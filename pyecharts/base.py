@@ -11,8 +11,8 @@ import pyecharts.engine as engine
 import pyecharts.constants as constants
 import pyecharts.exceptions as exceptions
 from pyecharts.conf import CURRENT_CONFIG
-from pyecharts_javascripthon.api import TRANSLATOR
 from pyecharts.echarts.option import get_all_options
+from pyecharts.javascripthon.apis import EChartsTranslator
 
 
 class Base(object):
@@ -21,13 +21,13 @@ class Base(object):
     """
 
     def __init__(
-        self,
-        width=800,
-        height=400,
-        renderer=constants.CANVAS_RENDERER,
-        page_title=constants.PAGE_TITLE,
-        extra_html_text_label=None,
-        is_animation=True,
+            self,
+            width=800,
+            height=400,
+            renderer=constants.CANVAS_RENDERER,
+            page_title=constants.PAGE_TITLE,
+            extra_html_text_label=None,
+            is_animation=True,
     ):
         """
 
@@ -93,8 +93,7 @@ class Base(object):
         """
         打印输出图形所有配置项
         """
-        snippet = TRANSLATOR.translate(self.options)
-        print(snippet.as_snippet())
+        print(EChartsTranslator.dumps(self.options))
 
     def show_config(self):
         """
@@ -122,11 +121,11 @@ class Base(object):
         return CURRENT_CONFIG.produce_html_script_list(self._js_dependencies)
 
     def render(
-        self,
-        path="render.html",
-        template_name="simple_chart.html",
-        object_name="chart",
-        **kwargs
+            self,
+            path="render.html",
+            template_name="simple_chart.html",
+            object_name="chart",
+            **kwargs
     ):
         _, ext = os.path.splitext(path)
         _file_type = ext[1:]
