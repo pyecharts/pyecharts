@@ -3,6 +3,8 @@ from pyecharts.utils import remove_key_with_none_value
 
 class JsonSerializable(object):
     # TODO Serializable/Encoder
+    # TODO Use __pye_json__
+    
     def __init__(self):
         self._config = {}
 

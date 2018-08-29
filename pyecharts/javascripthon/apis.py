@@ -74,7 +74,10 @@ class FunctionTranslator(object):
         name = name or func.__name__
         self._func_store.update({name: func})
         if reference:
-            ref_str = FunctionTranslator.generate_ref_str(name)
+            ref_str = FunctionTranslator.generate_ref_str(
+                func=None,
+                func_name=name
+            )
             replaced_str = '"{}"'.format(ref_str)
             self._replace_items.append((replaced_str, name))
             return ref_str
@@ -126,6 +129,16 @@ class DefaultJsonEncoder(json.JSONEncoder):
 
         if isinstance(obj, (datetime.datetime, datetime.date)):
             return obj.isoformat()
+
+        # Pandas and Numpy lists
+        if obj.__class__.__name__ == 'ndarray':
+            try:
+                return obj.astype(float).tolist()
+            except (AttributeError, ValueError):
+                try:
+                    return obj.astype(str).tolist()
+                except (AttributeError, ValueError):
+                    pass
 
         # For pyecharts.echarts.json_serializable.JsonSerializable
         if hasattr(obj, 'config'):
