@@ -1,15 +1,6 @@
 # coding=utf8
 """
-et = EChartsTranslator()
-et.feed_event()
-et.feed_options()
-js_snippet = et.translate()
-
-#
-et.feed_options(options)
-js_snippet = et.translate()
-print(js_snippet.as_json_string())
-
+A core api for python-to-javascript translator.
 """
 
 from __future__ import unicode_literals
@@ -116,24 +107,14 @@ class DefaultJsonEncoder(json.JSONEncoder):
 
     def default(self, obj):
         if isinstance(obj, types.FunctionType) and self._func_callback:
-            self._func_callback(obj)
+            return self._func_callback(obj)
 
         if isinstance(obj, (datetime.datetime, datetime.date)):
             return obj.isoformat()
 
         if hasattr(obj, 'config'):
             return obj.config
-
-        # Pandas and Numpy lists
-        try:
-            return obj.astype(float).tolist()
-
-        except Exception:
-            try:
-                return obj.astype(str).tolist()
-
-            except Exception:
-                return super(DefaultJsonEncoder, self).default(obj)
+        return super(DefaultJsonEncoder, self).default(obj)
 
 
 class EChartsTranslator(object):

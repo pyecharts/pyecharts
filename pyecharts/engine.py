@@ -115,7 +115,7 @@ def generate_js_content(*charts):
             renderer=chart.renderer,
             theme=chart.theme,
             custom_function=translate_result.function_snippet,
-            options=translate_result.option_snippet,
+            options=translate_result.options_snippet,
         )
         js_content = CHART_CONFIG_FORMATTER.format(**kwargs)
         for event_name, handler in chart.event_handlers.items():
