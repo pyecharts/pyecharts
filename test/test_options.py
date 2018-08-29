@@ -17,15 +17,14 @@ from pyecharts import (
     GeoLines,
     Style,
 )
-from pyecharts.javascripthon.apis import DefaultJsonEncoder
+from pyecharts.javascripthon.apis import EChartsTranslator
 from test.constants import RANGE_COLOR, X_TIME, Y_WEEK
 from test.utils import get_fixture_content
 
-ENCODER = DefaultJsonEncoder(sort_keys=True, indent=4, enable_func=True)
-
 
 def dumps_actual_options(opts):
-    return ENCODER.encode(opts)
+    return EChartsTranslator.dumps(opts, sort_keys=True, indent=4,
+                                   enable_func=True)
 
 
 @patch("random.randint")

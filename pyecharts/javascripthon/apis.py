@@ -109,8 +109,9 @@ class FunctionTranslator(object):
 
 class DefaultJsonEncoder(json.JSONEncoder):
     """My custom JsonEncoder.
-    1. Support datetime/date/JsonSerializable object
+    1. Support datetime/date/numpy.ndarray object
     2. Support Function object
+    3. My Json Encoder Protocol: __pye_json__
     """
 
     def __init__(self, *args, **kwargs):
@@ -134,15 +135,14 @@ class DefaultJsonEncoder(json.JSONEncoder):
         if obj.__class__.__name__ == 'ndarray':
             try:
                 return obj.astype(float).tolist()
-            except (AttributeError, ValueError):
+            except ValueError:
                 try:
                     return obj.astype(str).tolist()
-                except (AttributeError, ValueError):
+                except ValueError:
                     pass
 
-        # For pyecharts.echarts.json_serializable.JsonSerializable
-        if hasattr(obj, 'config'):
-            return obj.config
+        if hasattr(obj, '__pye_json__'):
+            return obj.__pye_json__()
         return super(DefaultJsonEncoder, self).default(obj)
 
 
@@ -197,11 +197,17 @@ class EChartsTranslator(object):
     # ------ Tools ------
 
     @staticmethod
-    def dumps(obj, **kwargs):
+    def dumps(obj, enable_func=False, func_callback=None, **kwargs):
         """A simple wrapper for json.dumps
         :param obj:
+        :param enable_func:
+        :param func_callback:
         :param kwargs:
         :return:
         """
-        encoder_class = kwargs.pop('cls', DefaultJsonEncoder)
-        return json.dumps(obj, cls=encoder_class, **kwargs)
+        encoder = DefaultJsonEncoder(
+            enable_func=enable_func,
+            func_callback=func_callback,
+            **kwargs
+        )
+        return encoder.encode(obj)
