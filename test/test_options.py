@@ -2,7 +2,8 @@
 # coding=utf-8
 from __future__ import unicode_literals
 
-import json
+from mock import patch
+from nose.tools import eq_
 
 from pyecharts import (
     Polar,
@@ -16,17 +17,15 @@ from pyecharts import (
     GeoLines,
     Style,
 )
-from pyecharts_javascripthon.api import DefaultJsonEncoder
-
-from nose.tools import eq_
-from mock import patch
-
-from test.utils import get_fixture_content
+from pyecharts.javascripthon.apis import DefaultJsonEncoder
 from test.constants import RANGE_COLOR, X_TIME, Y_WEEK
+from test.utils import get_fixture_content
+
+ENCODER = DefaultJsonEncoder(sort_keys=True, indent=4, enable_func=True)
 
 
 def dumps_actual_options(opts):
-    return json.dumps(opts, sort_keys=True, indent=4, cls=DefaultJsonEncoder)
+    return ENCODER.encode(opts)
 
 
 @patch("random.randint")

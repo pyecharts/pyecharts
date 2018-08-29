@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 
 import pyecharts.echarts.events as events
 from pyecharts import Bar
-from pyecharts_javascripthon.dom import alert
+from pyecharts.javascripthon.dom import alert
 
 
 def on_click():

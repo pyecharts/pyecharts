@@ -60,11 +60,6 @@ class FunctionTranslator(object):
     """
 
     def __init__(self):
-        self.left_delimiter = '-=>'
-        self.right_delimiter = '<=-'
-        self.reference_str_format = ''.join(
-            [self.left_delimiter, '{name}', self.right_delimiter]
-        )
         self._shared_function_snippet = FunctionStore()
 
         # Tmp Data for a render process
@@ -79,8 +74,9 @@ class FunctionTranslator(object):
         name = name or func.__name__
         self._func_store.update({name: func})
         if reference:
-            ref_str = self.reference_str_format.format(name=name)
-            self._replace_items.append((''.join(['"', ref_str, '"']), name))
+            ref_str = FunctionTranslator.generate_ref_str(name)
+            replaced_str = '"{}"'.format(ref_str)
+            self._replace_items.append((replaced_str, name))
             return ref_str
 
     def translate(self):
@@ -99,19 +95,39 @@ class FunctionTranslator(object):
             options_snippet = options_snippet.replace(src, dest)
         return options_snippet
 
+    @staticmethod
+    def generate_ref_str(func, func_name=None):
+        if func:
+            func_name = func.__name__
+        else:
+            func_name = func_name
+        return '-=>{}<=-'.format(func_name)
+
 
 class DefaultJsonEncoder(json.JSONEncoder):
+    """My custom JsonEncoder.
+    1. Support datetime/date/JsonSerializable object
+    2. Support Function object
+    """
+
     def __init__(self, *args, **kwargs):
+        self._enable_func = kwargs.pop('enable_func', False)
         self._func_callback = kwargs.pop('func_callback', None)
+        if self._func_callback is not None:
+            self._enable_func = True
         super(DefaultJsonEncoder, self).__init__(*args, **kwargs)
 
     def default(self, obj):
-        if isinstance(obj, types.FunctionType) and self._func_callback:
-            return self._func_callback(obj)
+        if isinstance(obj, types.FunctionType) and self._enable_func:
+            if self._func_callback:
+                return self._func_callback(obj)
+            else:
+                return FunctionTranslator.generate_ref_str(obj)
 
         if isinstance(obj, (datetime.datetime, datetime.date)):
             return obj.isoformat()
 
+        # For pyecharts.echarts.json_serializable.JsonSerializable
         if hasattr(obj, 'config'):
             return obj.config
         return super(DefaultJsonEncoder, self).default(obj)
