@@ -116,3 +116,4 @@ def test_nteract_feature():
     # restore configuration
     configure(output_image=constants.DEFAULT_HTML)
     CURRENT_CONFIG.jshost = None
+    CURRENT_CONFIG.hosted_on_github = False
