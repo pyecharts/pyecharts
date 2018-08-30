@@ -207,6 +207,5 @@ def test_online_html():
         'src="https://pyecharts.github.io/assets/echarts.min.js'
         in html_content
     )
-    # 还原设置
     CURRENT_CONFIG.jshost = None
     CURRENT_CONFIG.hosted_on_github = False

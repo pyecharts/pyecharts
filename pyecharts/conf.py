@@ -8,7 +8,8 @@ import pyecharts.constants as constants
 from pyecharts.js_extensions import EXTENSION_MANAGER
 
 
-ONLINE_JS = "https://pyecharts.github.io/assets/"
+ONLINE_ASSETS = "https://pyecharts.github.io/assets/"
+ONLINE_ASSETS_JS = ONLINE_ASSETS + "js/"
 
 
 class PyEchartsConfig(object):
@@ -76,7 +77,7 @@ class PyEchartsConfig(object):
         # self.jshost 为 None 时应该使用远程 js
         # "https://pyecharts.github.io/assets/"
         if not self.jshost:
-            self.jshost = ONLINE_JS
+            self.jshost = ONLINE_ASSETS
         links = []
         for name in js_names:
             for extension in EXTENSION_MANAGER.get_all_extensions():
@@ -173,10 +174,14 @@ def online(host=None):
 
 
 def enable_nteract(host=None):
-    _host = ONLINE_JS
-    if _host:
-        _host = remove_trailing_slashes(host)
-    configure(output_image=constants.NTERACT, jshost=_host)
+    # self.jshost 为 None 时应该使用远程 js
+    # "https://pyecharts.github.io/assets/js"
+    _host = ONLINE_ASSETS_JS
+    if host:
+        _host = host
+    configure(
+        output_image=constants.NTERACT, jshost=remove_trailing_slashes(_host)
+    )
 
 
 @contextmanager
