@@ -20,6 +20,11 @@ class JsSnippetMixin(object):
         pass
 
 
+class TranslatorMixin(object):
+    def translate(self):
+        pass
+
+
 class FunctionStore(OrderedDict, JsSnippetMixin):
     """
     A OrderedDict which stores translated function.
@@ -55,7 +60,7 @@ class TranslateResult(JsSnippetMixin):
         ])
 
 
-class FunctionTranslator(object):
+class FunctionTranslator(TranslatorMixin):
     """A translator for function,a FunctionStore object will be generated.
     """
 
@@ -107,7 +112,7 @@ class FunctionTranslator(object):
         return '-=>{}<=-'.format(func_name)
 
 
-class DefaultJsonEncoder(json.JSONEncoder):
+class MyJSONEncoder(json.JSONEncoder):
     """My custom JsonEncoder.
     1. Support datetime/date/numpy.ndarray object
     2. Support Function object
@@ -119,7 +124,7 @@ class DefaultJsonEncoder(json.JSONEncoder):
         self._func_callback = kwargs.pop('func_callback', None)
         if self._func_callback is not None:
             self._enable_func = True
-        super(DefaultJsonEncoder, self).__init__(*args, **kwargs)
+        super(MyJSONEncoder, self).__init__(*args, **kwargs)
 
     def default(self, obj):
         if isinstance(obj, types.FunctionType) and self._enable_func:
@@ -143,12 +148,12 @@ class DefaultJsonEncoder(json.JSONEncoder):
 
         if hasattr(obj, '__pye_json__'):
             return obj.__pye_json__()
-        return super(DefaultJsonEncoder, self).default(obj)
+        return super(MyJSONEncoder, self).default(obj)
 
 
-class EChartsTranslator(object):
+class EChartsTranslator(TranslatorMixin):
     def __init__(self):
-        self.json_encoder = DefaultJsonEncoder(
+        self.json_encoder = MyJSONEncoder(
             indent=4,
             func_callback=self._feed_func_in_options
         )
@@ -205,7 +210,7 @@ class EChartsTranslator(object):
         :param kwargs:
         :return:
         """
-        encoder = DefaultJsonEncoder(
+        encoder = MyJSONEncoder(
             enable_func=enable_func,
             func_callback=func_callback,
             **kwargs
