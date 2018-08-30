@@ -4,4 +4,4 @@
 # pink test/*.py
 
 black==18.6b4
-pink
+pink>0.1.0
