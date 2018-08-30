@@ -173,10 +173,10 @@ def online(host=None):
 
 
 def enable_nteract(host=None):
-    configure(
-        output_image=constants.NTERACT,
-        jshost="https://pyecharts.github.io/assets/js",
-    )
+    _host = ONLINE_JS
+    if _host:
+        _host = remove_trailing_slashes(host)
+    configure(output_image=constants.NTERACT, jshost=_host)
 
 
 @contextmanager
