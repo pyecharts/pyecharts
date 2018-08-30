@@ -16,5 +16,5 @@ class JsonSerializable(object):
     def update(self, **kwargs):
         self._config.update(**kwargs)
 
-    def __pye_json__(self):
+    def __json__(self):
         return remove_key_with_none_value(self._config)

@@ -9,6 +9,7 @@ import datetime
 import json
 import types
 from collections import OrderedDict
+from contextlib import contextmanager
 
 from pyecharts.javascripthon.compat import TranslatorCompatAPI
 
@@ -21,7 +22,23 @@ class JsSnippetMixin(object):
 
 
 class TranslatorMixin(object):
+    """A Interface for state-machine translator
+    """
+
+    @contextmanager
+    def new_task(self):
+        try:
+            self.reset()
+            yield
+        finally:
+            self.reset()
+
+    def reset(self):
+        pass
+
     def translate(self):
+        """Main process
+        """
         pass
 
 
@@ -116,7 +133,7 @@ class MyJSONEncoder(json.JSONEncoder):
     """My custom JsonEncoder.
     1. Support datetime/date/numpy.ndarray object
     2. Support Function object
-    3. My Json Encoder Protocol: __pye_json__
+    3. My Json Encoder Protocol: __json__
     """
 
     def __init__(self, *args, **kwargs):
@@ -146,8 +163,8 @@ class MyJSONEncoder(json.JSONEncoder):
                 except ValueError:
                     pass
 
-        if hasattr(obj, '__pye_json__'):
-            return obj.__pye_json__()
+        if hasattr(obj, '__json__'):
+            return obj.__json__()
         return super(MyJSONEncoder, self).default(obj)
 
 
