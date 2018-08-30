@@ -2,8 +2,14 @@
 from __future__ import unicode_literals
 
 from contextlib import contextmanager
-from pyecharts.js_extensions import EXTENSION_MANAGER
+
 import pyecharts.constants as constants
+
+from pyecharts.js_extensions import EXTENSION_MANAGER
+
+
+ONLINE_ASSETS = "https://pyecharts.github.io/assets/"
+ONLINE_ASSETS_JS = ONLINE_ASSETS + "js/"
 
 
 class PyEchartsConfig(object):
@@ -24,7 +30,8 @@ class PyEchartsConfig(object):
         """
         if self.force_js_embed:
             return True
-
+        if self.hosted_on_github:
+            return False
         else:
             return self.jshost is None
 
@@ -67,6 +74,10 @@ class PyEchartsConfig(object):
         return contents
 
     def generate_js_link(self, js_names):
+        # self.jshost 为 None 时应该使用远程 js
+        # "https://pyecharts.github.io/assets/"
+        if not self.jshost:
+            self.jshost = ONLINE_ASSETS
         links = []
         for name in js_names:
             for extension in EXTENSION_MANAGER.get_all_extensions():
@@ -163,9 +174,13 @@ def online(host=None):
 
 
 def enable_nteract(host=None):
+    # self.jshost 为 None 时应该使用远程 js
+    # "https://pyecharts.github.io/assets/js"
+    _host = ONLINE_ASSETS_JS
+    if host:
+        _host = host
     configure(
-        output_image=constants.NTERACT,
-        jshost="https://pyecharts.github.io/assets/js",
+        output_image=constants.NTERACT, jshost=remove_trailing_slashes(_host)
     )
 
 
