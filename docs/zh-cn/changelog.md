@@ -1,7 +1,12 @@
 # 版本日志
 
-* ### version 0.5.10
-    * Todo
+* ### version 0.5.10（dev）
+
+    #### Added
+    * [issue#699](https://github.com/pyecharts/pyecharts/issues/699) 为漏斗图新增 `funnel_sort` 和 `funnel_gap` 分别用于控制漏斗图的排序方式和数据图形间隔。
+    
+    #### Fixed
+    * [issue#715](https://github.com/pyecharts/pyecharts/issues/715) 修复 online() 方法不生效的 bug
 
 
 * ### version 0.5.9 - 2018.8.26（current）
@@ -13,7 +18,7 @@
     * [issue#691](https://github.com/pyecharts/pyecharts/issues/691) 为每种图形新增 `is_animation` 初始化参数，用于控制是否显示动画。
     * 新增 [geo-region-coords](https://github.com/pyecharts/geo-region-coords) 辅助项目，提供中国地区坐标查询。
 
-    ### Updated
+    #### Updated
     * [issue#678](https://github.com/pyecharts/pyecharts/issues/678) 将 `extra_html_text_label` 默认位置移动到图形顶部。
     * [pr#677](https://github.com/pyecharts/pyecharts/pull/677) 重构 Polar，更正错误参数。
 
