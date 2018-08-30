@@ -124,9 +124,9 @@ class Chart(Base):
                 "left": "95%",
                 "top": "center",
                 "feature": {
-                    "saveAsImage": {"show": True, "title": "下载图片"},
-                    "restore": {"show": True},
-                    "dataView": {"show": True},
+                    "saveAsImage": {"show": True, "title": "save as image"},
+                    "restore": {"show": True, "title": "restore"},
+                    "dataView": {"show": True, "title": "data view"},
                 },
             },
             series_id=random.randint(1, 9000000),
