@@ -235,17 +235,19 @@
             "top": "auto"
         }
     ],
-    "toolbox": {
+     "toolbox": {
         "feature": {
             "dataView": {
-                "show": true
+                "show": true,
+                "title": "data view"
             },
             "restore": {
-                "show": true
+                "show": true,
+                "title": "restore"
             },
             "saveAsImage": {
                 "show": true,
-                "title": "\u4e0b\u8f7d\u56fe\u7247"
+                "title": "save as image"
             }
         },
         "left": "95%",
