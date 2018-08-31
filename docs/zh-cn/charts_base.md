@@ -2849,7 +2849,6 @@ scatter3D.render()
 **Note：** 可配合 axis3D 通用配置项 一起使用 
 
 
-<<<<<<< HEAD:docs/zh-cn/charts.md
 ### Surface3D（3D 曲面图）
 Surface3D.add() 方法签名
 ```python
@@ -2869,9 +2868,9 @@ import math
 
 def create_surface3d_data():
     for t0 in range(-30, 30, 1):
-        y = t0/10
+        y = t0 / 10
         for t1 in range(-30, 30, 1):
-            x = t1/10
+            x = t1 / 10
             z = math.sin(x * x + y * y) * x / 3.14
             yield [x, y, z]
 
@@ -2891,9 +2890,6 @@ surface3D.render()
 
 
 ### ThemeRiver（主题河流图）
-=======
-## ThemeRiver（主题河流图）
->>>>>>> 5ce131c67924c636a9a56ba3d5487e483c8ee0d1:docs/zh-cn/charts_base.md
 > 主题河流图是一种特殊的流图, 它主要用来表示事件或主题等在一段时间内的变化。
 
 ThemeRiver.add() 方法签名

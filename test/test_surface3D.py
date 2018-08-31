@@ -11,9 +11,9 @@ from nose.tools import eq_
 
 def create_surface3d_data():
     for t0 in range(-30, 30, 1):
-        y = t0/10
+        y = t0 / 10
         for t1 in range(-30, 30, 1):
-            x = t1/10
+            x = t1 / 10
             z = math.sin(x * x + y * y) * x / 3.14
             yield [x, y, z]
 
