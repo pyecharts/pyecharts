@@ -4,4 +4,4 @@
 
 black==18.6b4
 pink>0.4.0
-isort
+lias
