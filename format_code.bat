@@ -1,2 +1,3 @@
-lias *.py pyecharts/**/*.py test/*.py
-pink *.py pyecharts/**/*.py test/*.py
+SET FILES=*.py pyecharts/**/*.py test/*.py
+lias %FILES%
+pink %FILES%
