@@ -25,6 +25,7 @@
     * Sankey（桑基图）
     * Scatter（散点图）
     * Scatter3D（3D 散点图）
+    * Surface3D（3D 曲面图）
     * ThemeRiver（主题河流图）
     * Tree（树图）
     * TreeMap（矩形树图）
@@ -2848,7 +2849,98 @@ scatter3D.render()
 **Note：** 可配合 axis3D 通用配置项 一起使用 
 
 
-## ThemeRiver（主题河流图）
+### Surface3D（3D 曲面图）
+Surface3D.add() 方法签名
+```python
+add(name, data,
+    grid3d_opacity=1, **kwargs)
+```
+* name -> str  
+    图例名称
+* data -> [list]/ndarray, 包含列表的列表  
+    数据项，数据中，每一行是一个『数据项』，每一列属于一个『维度』
+* grid3d_opacity -> int  
+    3D 笛卡尔坐标系组的透明度（点的透明度），默认为 1，完全不透明。
+    
+```python
+import math
+
+from pyecharts import Surface3D
+
+
+def create_surface3d_data():
+    for t0 in range(-60, 60, 1):
+        y = t0 / 60
+        for t1 in range(-60, 60, 1):
+            x = t1 / 60
+            if math.fabs(x) < 0.1 and math.fabs(y) < 0.1:
+                z = '-'
+            else:
+                z = math.sin(x * math.pi) * math.sin(y * math.pi)
+            yield [x, y, z]
+
+range_color = [
+    "#313695",
+    "#4575b4",
+    "#74add1",
+    "#abd9e9",
+    "#e0f3f8",
+    "#ffffbf",
+    "#fee090",
+    "#fdae61",
+    "#f46d43",
+    "#d73027",
+    "#a50026",
+]
+
+_data = list(create_surface3d_data())
+surface3d = Surface3D("3D 曲面图示例", width=1200, height=600)
+surface3d.add(
+    "",
+    _data,
+    is_visualmap=True,
+    visual_range_color=range_color,
+    visual_range=[-3, 3],
+    grid3d_rotate_sensitivity=5,
+)
+surface3d.render()
+```
+![surface3d-demo](https://user-images.githubusercontent.com/19553554/44899702-0dba8680-ad35-11e8-95fd-4bc21e673b8b.gif)
+
+**曲面波图**
+```python
+import math
+
+from pyecharts import Surface3D
+
+
+def create_surface3d_data():
+    for t0 in range(-30, 30, 1):
+        y = t0 / 10
+        for t1 in range(-30, 30, 1):
+            x = t1 / 10
+            z = math.sin(x * x + y * y) * x / 3.14
+            yield [x, y, z]
+
+data = list(create_surface3d_data())
+surface3D = Surface3D("3D 曲面图", width=1200, height=600)
+surface3D.add(
+    "",
+    data,
+    is_visualmap=True,
+    visual_range=[-1, 1],
+    visual_range_color=range_color,
+)
+
+surface3D.render()
+```
+![surface3d-demo](https://user-images.githubusercontent.com/19553554/44898394-60923f00-ad31-11e8-81a7-5d35214490cd.gif)
+
+**Note：** 关于 gird3D 部分的设置，请参照通用配置项中的介绍 通用配置项  
+**Note：** 可配合 axis3D 通用配置项 一起使用 
+
+
+### ThemeRiver（主题河流图）
 > 主题河流图是一种特殊的流图, 它主要用来表示事件或主题等在一段时间内的变化。
 
 ThemeRiver.add() 方法签名
