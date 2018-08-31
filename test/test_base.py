@@ -11,8 +11,9 @@ import numpy as np
 from nose.tools import eq_, raises
 from mock import patch, MagicMock
 
-from pyecharts import Bar, Map, jupyter_image
 import pyecharts.exceptions as exceptions
+from pyecharts import Bar, Map, jupyter_image, online
+from pyecharts.conf import CURRENT_CONFIG
 from test.constants import CLOTHES
 from test.utils import get_default_rendering_file_content
 
@@ -194,3 +195,17 @@ def test_base_cast_dict():
     keys, values = Bar.cast(adict)
     eq_(keys, ["key", "value"])
     eq_(values, [1, 2])
+
+
+def test_online_html():
+    online()
+    bar = Bar()
+    bar.add("", CLOTHES, [5, 20, 36, 10, 75, 90], is_stack=True)
+    bar.render()
+    html_content = get_default_rendering_file_content()
+    assert (
+        'src="https://pyecharts.github.io/assets/js/echarts.min.js'
+        in html_content
+    )
+    CURRENT_CONFIG.jshost = None
+    CURRENT_CONFIG.hosted_on_github = False
