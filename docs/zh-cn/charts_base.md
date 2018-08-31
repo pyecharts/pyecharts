@@ -2863,8 +2863,10 @@ add(name, data,
     3D 笛卡尔坐标系组的透明度（点的透明度），默认为 1，完全不透明。
 
 ```python
-from pyecharts import Surface3D
 import math
+
+from pyecharts import Surface3D
+
 
 def create_surface3d_data():
     for t0 in range(-30, 30, 1):
@@ -2874,16 +2876,33 @@ def create_surface3d_data():
             z = math.sin(x * x + y * y) * x / 3.14
             yield [x, y, z]
 
+
 range_color = [
-    '#313695', '#4575b4', '#74add1', '#abd9e9', '#e0f3f8', '#ffffbf',
-    '#fee090', '#fdae61', '#f46d43', '#d73027', '#a50026']
+    "#313695",
+    "#4575b4",
+    "#74add1",
+    "#abd9e9",
+    "#e0f3f8",
+    "#ffffbf",
+    "#fee090",
+    "#fdae61",
+    "#f46d43",
+    "#d73027",
+    "#a50026",
+]
 data = list(create_surface3d_data())
-surface3D = Surface3D('3D 曲面图',width=1200, height=600)
-surface3D.add('', data, is_visualmap=True, visual_range=[-1, 1], visual_range_color=range_color)
+surface3D = Surface3D("3D 曲面图", width=1200, height=600)
+surface3D.add(
+    "",
+    data,
+    is_visualmap=True,
+    visual_range=[-1, 1],
+    visual_range_color=range_color,
+)
 
 surface3D.render()
 ```
-![surface3d-demo](待添加pic.gif url)
+![surface3d-demo](https://user-images.githubusercontent.com/19553554/44898394-60923f00-ad31-11e8-81a7-5d35214490cd.gif)
 
 **Note：** 关于 gird3D 部分的设置，请参照通用配置项中的介绍 通用配置项  
 **Note：** 可配合 axis3D 通用配置项 一起使用 
