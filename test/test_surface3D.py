@@ -29,24 +29,9 @@ def test_surface3d_default():
         visual_range=[-3, 3],
         grid3d_rotate_sensitivity=5,
     )
-    surface3d.render()
-
-
-def test_surface3d_rotate_automatically_speedup():
-    _data = list(create_surface3d_data())
-    surface3d = Surface3D("3D 曲面图示例", width=1200, height=600)
-    surface3d.add(
-        "",
-        _data,
-        is_visualmap=True,
-        visual_range_color=RANGE_COLOR,
-        visual_range=[-3, 3],
-        is_grid3d_rotate=True,
-        grid3d_rotate_speed=180,
-    )
-    surface3d.render()
+    assert "lambert" not in surface3d._repr_html_()
 
 
 def test_surface3d_must_use_canvas():
-    surface3d = Surface3D("3D 曲面图示例", width=1200, height=600)
+    surface3d = Surface3D()
     eq_(surface3d.renderer, "canvas")
