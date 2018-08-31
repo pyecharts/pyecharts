@@ -2,7 +2,8 @@
 import os
 import sys
 from shutil import rmtree
-from setuptools import setup, find_packages, Command
+
+from setuptools import Command, find_packages, setup
 
 # RELEASE STEPS
 # $ python setup.py upload

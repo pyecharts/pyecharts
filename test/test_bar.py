@@ -3,9 +3,9 @@
 from __future__ import unicode_literals
 
 import random
+from test.constants import CLOTHES
 
 from pyecharts import Bar
-from test.constants import CLOTHES
 
 clothes_v1 = [5, 20, 36, 10, 75, 90]
 clothes_v2 = [10, 25, 8, 60, 20, 80]
