@@ -1,28 +1,28 @@
-> 高级用法篇：本文档描述了 pyecharts 库的高级进阶用法。
+> Advanced Usage: This document describes advanced usage of the pyecharts library.
 
-## 概述
+## Overview
 
-自 v0.5.0 开始， pyecharts 支持 *javascript 回调函数* 和 *echarts 事件处理函数* ，进一步覆盖 [ECharts](http://echarts.baidu.com/) 相关特性。为项目发展注入新的活力。
+Starting with v0.5.0, pyecharts supports the *javascript callback function* and the *echarts event handler*, further covering the [ECharts](http://echarts.baidu.com/) related features. Inject new vitality into the development of the project.
 
-在 Python-To-Javascript 语言翻译领域，[javascripthon](https://pypi.python.org/pypi/javascripthon)  是一个简单的 Python3.5+ 到 Javascript 的语言翻译器;  [dukpy](https://github.com/amol-/dukpy) 支持 Python2.7 和 Python 3.4 的语言翻译。
+In the field of Python-To-Javascript language translation, [javascripthon](https://pypi.python.org/pypi/javascripthon) is a simple Python 3.5+ to Javascript language translator; [dukpy](https:/ /github.com/amol-/dukpy) Supports language translation for Python 2.7 and Python 3.4.
 
-基于以上事实，pyecharts 团队开发了  [pyecharts-javascripthon](https://github.com/pyecharts/pyecharts-javascripthon) 作为底层的 Python-To-Javascript 语言翻译库，封装了以上两个不同的翻译器，并提供若干个 Javascript 数据类型适配模块。关于翻译器的更多内容，请移步至 [Translator 篇](zh-cn/translator)。
+Based above, the pyecharts team developed [pyecharts-javascripthon] (https://github.com/pyecharts/pyecharts-javascripthon) as the underlying Python-To-Javascript language translation library, which encapsulated the above two different translators. Several Javascript data type adaptation modules are also available. For more on the translator, please go to [Translator] (en-us/translator).
 
-pyecharts 目前仅使用了并封装一部分的 Javascripthon 的翻译规则，主要是 **函数翻译(Function Translate)** 。使用伪代码表示如下：
+Pyecharts currently only uses and encapsulates some of Javascripthon's translation rules, mainly **Function Translate**. Use pseudo code to indicate the following:
 
 ```
-输入：一个 Python 的函数对象
-输出：一个多行的 unicode 字符串
+input：a Python function objection
+output：a multi-line unicode string
 ```
 
-比如能够将以下的 Python 函数：
+For example, input the following Python functions:
 
 ```python
 def add(x, y):
     return x + y
 ```
 
-翻译为以下 Javascript 函数。
+Translated into the following Javascript functions.
 
 ```js
 function add(x, y) {
@@ -30,36 +30,36 @@ function add(x, y) {
 }
 ```
 
-对于 pyecharts 使用者来说，无需了解该翻译器具体的工作原理。
+For pyecharts users, there is no need to understand how the translator works.
 
-## 安装
+## Installation
 
-### 基本安装
+### Basic installation
 
-pyecharts 默认已经安装了 pyecharts-javascripthon ，同时也可以通过 pip 安装。
+Pyecharts has pyecharts-javascripthon installed by default and can also be installed via pip.
 
 ```bash
 $ pip install pyecharts-javascripthon 
 ```
 
-### 环境限制
+### Environment restrictions
 
-由于 Javascripthon 要求 Python 的版本至少为 3.5+ 而 pyecharts 用户是 python 2.7, 3.4, 3.5 和 3.6, pyecharts-javascripthon 采用了双轨制：python 3.5+ 用户直接用 Javascripthon；python 2.7 和 3.4 的用户调用网络翻译服务 (software as a service)。同时，希望大家支持这个网络服务的运营费用。
+Since Javascripthon requires a version of Python of at least 3.5+ and pyecharts users of python 2.7, 3.4, 3.5 and 3.6, pyecharts-javascripthon uses a two-track system: python 3.5+ users directly use Javascripthon; python 2.7 and 3.4 users call network translation services (software as a service). At the same time, I hope that everyone will support the operating expenses of this network service.
 
-> 注意： Python2.7-3.4 的用户使用时请确保系统可以联网。
+> Note: Make sure the system is networked when using Python 2.7-3.4 users.
 
 
-## 使用 JavaScript 回调函数
+## JavaScript callback function
 
-### 基本使用
+### Basic usage
 
-pyecharts 已经封装了底层相关逻辑，对使用者是透明的。因此你可以像之前一样的使用。将回调函数对象通过 `add` 方法赋值到 echarts 配置字典中，这里的回调函数需满足以下条件之一：
+Pyecharts has encapsulated the underlying related logic and is transparent to the user. So you can use it as before. The callback function is assigned to the echarts configuration dictionary via the `add` method. The callback function here must satisfy one of the following conditions:
 
-- 使用 `def` 定义的命名函数
+- Defined function with `def`
 
-注意的是目前暂不支持 `lambda` 表达式。
+Note that the `lambda` expression is currently not supported.
 
-例子：
+Example：
 
 ```python
 from pyecharts import Bar
@@ -76,17 +76,17 @@ bar.add("precipitation", attr, v1, is_label_show=True, label_formatter=label_for
 bar.render()
 ```
 
-> 回调函数格式参考自  [series[i]-bar.label.formatter](http://echarts.baidu.com/option.html#series-bar.label.formatter) 。
+> Callback function format reference  [series[i]-bar.label.formatter](http://echarts.baidu.com/option.html#series-bar.label.formatter) 。
 
-效果图
+Rendering
 
 ![bar-label-formatter-callback](https://user-images.githubusercontent.com/9875406/38666230-07c1aa66-3e71-11e8-9e9f-43fb7d707a64.png)
 
-### Tooltip 示例
+### Tooltip example
 
-举个例子，pyecharts 用户经常会提问 Geo 图中如何在 tooltip 中只显示地图坐标名称和数值，不显示经纬度。
+For example, pyecharts users often ask questions in the Geo diagram how to display only the map coordinate names and values ​​in the tooltip without the latitude and longitude.
 
-像这样
+Like this:
 
 ```python
 def test_geo_shantou_city():
@@ -105,11 +105,10 @@ def test_geo_shantou_city():
     )
     geo.render()
 ```
-得到
 
 ![](https://user-images.githubusercontent.com/19553554/39248236-186a50ae-48ce-11e8-84eb-e58ba17eca5c.png)
 
-而现在，你可以这么操作，先定义一个 `geo_formatter` 函数
+Now, you can do this by defining a `geo_formatter` function firstly.
 
 ```python
 def geo_formatter(params):
@@ -126,19 +125,18 @@ def test_geo_shantou_city():
         maptype="汕头",
         is_visualmap=True,
         is_legend_show=False,
-        tooltip_formatter=geo_formatter,    # 重点在这里，将函数直接传递为参数。
+        tooltip_formatter=geo_formatter,    # The point is here to pass the function directly as a parameter.
         label_emphasis_textsize=15,
         label_emphasis_pos='right',
     )
     geo.render()
 ```
-就可以看到下面的效果了。
 
 ![](https://user-images.githubusercontent.com/19553554/39248244-1be6da4a-48ce-11e8-931f-059879c5dcf4.png)
 
-### Label 示例
+### Label example
 
-使用回调函数强制设置浮点数位数
+Use the callback function to set float type
 
 ```python
 from pyecharts_javascripthon.dom import window
@@ -177,11 +175,11 @@ grid.render()
 ![](https://user-images.githubusercontent.com/19553554/44003191-5c5e7764-9e81-11e8-98f1-757a208ec337.png)
 
 
-## 使用 JavaScript 事件处理函数
+## JavaScript event handlers
 
-Echarts 本身提供了 [api/events](http://echarts.baidu.com/api.html#events) 事件处理函数，主要通过 on 方式实现。
+Echarts provides [api/events](http://echarts.baidu.com/api.html#events) event handlers, mainly via 'on' method.
 
-pyecharts 根据官方提供的 events 列表，提供了如下全局事件名变量。位于 `pyecharts.echarts.events` 模块中。
+Pyecharts provides the following global event name variables based on the official list of events. Located in the `pyecharts.echarts.events` module.
 
 ``` python
 # Mouse Events
@@ -219,7 +217,7 @@ BRUSH = "brush"
 BRUSH_SELECTED = "brushselected"
 ```
 
-使用方式如下，
+The usage is as follows:
 ```python
 #!/usr/bin/env python
 # coding=utf-8
@@ -242,30 +240,29 @@ def test_mouse_click():
     bar.on(events.MOUSE_CLICK, on_click)
     bar.render()
 ```
-效果
 
 ![](https://user-images.githubusercontent.com/19553554/39252189-b02b5420-48d7-11e8-9c53-6f0fb6d386c0.gif)
 
-## 注意
+## Note
 
-第一，pyecharts 并不会检查 echarts 图表配置选项是否支持回调函数，关于这一部分可参考 ECharts 文档。
+First, pyecharts does not check if the echarts chart configuration option supports callback functions. See the ECharts documentation for this section.
 
-这里指的是，options 参数本身是否支持回调函数，比如
+This refers to whether the options parameter itself supports callback functions, such as :
 
 ```python
 def my_title():
     return 'my_title'
 bar.add(my_title, [], [])
 ```
-在 pyecharts 并不会出现渲染上的错误，但不符合 Echarts 中对 title 的要求.
+There are no rendering errors in pyecharts, but it does not meet the requirements for title in Echarts.
 
 
-第二，为了提高性能，pyecharts 作了以下几点处理：
+Second, in order to improve performance, pyecharts did the following:
 
-- 函数翻译的实际执行是在 `render` 函数调用时，而不是 `add` 函数。
-- 对已经翻译完成的函数以 **函数名** 为索引进行缓存，避免多次渲染同名函数。
+- The actual execution of a function translation is when the `render` function is called, not the `add` function.
+- Cache the function that has been translated with the **function name** as an index to avoid rendering the function of the same name multiple times.
 
-因此应当避免同一个函数名多用，以下的情况可能无法获得预期的效果。
+Therefore, you should avoid using the same function name. The following situations may not achieve the expected results.
 
 ```python
 from pyecharts import Bar
