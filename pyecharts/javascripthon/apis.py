@@ -86,23 +86,14 @@ class FunctionTranslator(TranslatorMixin):
 
         # Tmp Data for a render process
         self._func_store = {}  # {<name>:<func>}
-        self._replace_items = []
 
     def reset(self):
         self._func_store = {}
-        self._replace_items = []
 
-    def feed(self, func, name=None, reference=False):
+    def feed(self, func, name=None):
         name = name or func.__name__
         self._func_store.update({name: func})
-        if reference:
-            ref_str = FunctionTranslator.encode_function(
-                func=None,
-                func_name=name
-            )
-            replaced_str = '"{}"'.format(ref_str)
-            self._replace_items.append((replaced_str, name))
-            return ref_str
+        return self
 
     def translate(self):
         fs = FunctionStore()
@@ -115,19 +106,6 @@ class FunctionTranslator(TranslatorMixin):
             fs.update({name: snippet})
         return fs
 
-    def handle_options(self, options_snippet):
-        for src, dest in self._replace_items:
-            options_snippet = options_snippet.replace(src, dest)
-        return options_snippet
-
-    @staticmethod
-    def encode_function(func, func_name=None):
-        if func:
-            func_name = func.__name__
-        else:
-            func_name = func_name
-        return '-=>{}<=-'.format(func_name)
-
 
 class MyJSONEncoder(json.JSONEncoder):
     """My custom JsonEncoder.
@@ -138,21 +116,19 @@ class MyJSONEncoder(json.JSONEncoder):
 
     def __init__(self, *args, **kwargs):
         """
-        Value choices of function_encoder
-        1. False / None : disable encode function
-        2. True : encode function to the default value
-        3. Callable : encode function to a custom value
+        :param enable_func : enable encode function obj or not
+        :param post_encode_func : The callback after encoding a function, ()
         """
-        self._function_encoder = kwargs.pop('function_encoder', False)
+        self._enable_func = kwargs.pop('enable_func', False)
+        self._post_encode_func = kwargs.pop('post_encode_func', None)
         super(MyJSONEncoder, self).__init__(*args, **kwargs)
 
     def default(self, obj):
-        if isinstance(obj, types.FunctionType) and self._function_encoder:
-            if callable(self._function_encoder):
-                return self._function_encoder(obj)
-            else:
-                # self._function_encoder = True
-                return FunctionTranslator.encode_function(obj)
+        if isinstance(obj, types.FunctionType) and self._enable_func:
+            encoded_value = JSONTranslator.encode_func(obj)
+            if self._post_encode_func:
+                self._post_encode_func(obj, encoded_value)
+            return encoded_value
 
         if isinstance(obj, (datetime.datetime, datetime.date)):
             return obj.isoformat()
@@ -172,11 +148,44 @@ class MyJSONEncoder(json.JSONEncoder):
         return super(MyJSONEncoder, self).default(obj)
 
 
+class JSONTranslator(TranslatorMixin):
+    def __init__(self, post_encode_func=None):
+        self._data_store = {}
+        self._replace_items = []
+        self._post_encode_func = post_encode_func
+
+        self._encoder = MyJSONEncoder(
+            enable_func=True,
+            post_encode_func=self._my_post_encode_func
+        )
+
+    def feed(self, options):
+        self._data_store['options'] = options
+
+    def translate(self):
+        options_snippet = self._encoder.encode(self._data_store['options'])
+        for src, dest in self._replace_items:
+            options_snippet = options_snippet.replace(src, dest)
+        return options_snippet
+
+    def _my_post_encode_func(self, func, func_encoded):
+        replaced_str = '"{}"'.format(func_encoded)
+        self._replace_items.append((replaced_str, func.__name__))
+        self._post_encode_func(func, func_encoded)
+
+    @staticmethod
+    def encode_func(func, func_name=None):
+        if func:
+            func_name = func.__name__
+        else:
+            func_name = func_name
+        return '-=>{}<=-'.format(func_name)
+
+
 class EChartsTranslator(TranslatorMixin):
     def __init__(self):
-        self.json_encoder = MyJSONEncoder(
-            indent=4,
-            function_encoder=self._feed_func_in_options
+        self._json_translator = JSONTranslator(
+            post_encode_func=self.func_encode_bridge
         )
         self._function_translator = FunctionTranslator()
         self._cache = {}
@@ -185,8 +194,14 @@ class EChartsTranslator(TranslatorMixin):
         self._function_translator.reset()
         self._cache = {}
 
-    def _feed_func_in_options(self, func):
-        return self._function_translator.feed(func, reference=True)
+    def func_encode_bridge(self, func, func_encoded):
+        """
+        <<JSONTranslator>> --> <<EChartsTranslator>> --> <<FunctionTranslator>>
+        :param func:
+        :param func_encoded:
+        :return:
+        """
+        return self._function_translator.feed(func)
 
     # ------ Public API - Translator -----
 
@@ -196,26 +211,24 @@ class EChartsTranslator(TranslatorMixin):
         :param name: The name of function
         :return: None
         """
-        return self._function_translator.feed(func, name=name, reference=False)
+        return self._function_translator.feed(func, name=name)
 
     def feed_options(self, options):
         """Add options dict
         :param options: A dictionary for options
         :return:
         """
-        self._cache['options'] = options
+        self._json_translator.feed(options)
         return self
 
     def translate(self):
         """Translate a options,a TranslateResult object is returned
         :return: a TranslateResult
         """
-        option_snippet = self.json_encoder.encode(self._cache['options'])
+        option_snippet = self._json_translator.translate()
         function_store = self._function_translator.translate()
-        option_snippet = self._function_translator.handle_options(
-            option_snippet)
         return TranslateResult(
-            options=self._cache['options'],
+            options=self._json_translator._data_store['options'],
             options_snippet=option_snippet,
             function_store=function_store
         )
@@ -223,15 +236,17 @@ class EChartsTranslator(TranslatorMixin):
     # ------ Tools ------
 
     @staticmethod
-    def dumps(obj, function_encoder=False, **kwargs):
+    def dumps(obj, enable_func=False, post_encode_func=None, **kwargs):
         """A simple wrapper for json.dumps
         :param obj:
-        :param function_encoder:
+        :param enable_func:
+        :param post_encode_func
         :param kwargs:
         :return:
         """
         encoder = MyJSONEncoder(
-            function_encoder=function_encoder,
+            enable_func=enable_func,
+            post_encode_func=post_encode_func,
             **kwargs
         )
         return encoder.encode(obj)
