@@ -8,8 +8,7 @@ import pyecharts.constants as constants
 from pyecharts.js_extensions import EXTENSION_MANAGER
 
 
-ONLINE_ASSETS = "https://pyecharts.github.io/assets/"
-ONLINE_ASSETS_JS = ONLINE_ASSETS + "js/"
+ONLINE_ASSETS_JS = "https://pyecharts.github.io/assets/js/"
 
 
 class PyEchartsConfig(object):
@@ -75,9 +74,9 @@ class PyEchartsConfig(object):
 
     def generate_js_link(self, js_names):
         # self.jshost 为 None 时应该使用远程 js
-        # "https://pyecharts.github.io/assets/"
+        # "https://pyecharts.github.io/assets/js"
         if not self.jshost:
-            self.jshost = ONLINE_ASSETS
+            self.jshost = ONLINE_ASSETS_JS
         links = []
         for name in js_names:
             for extension in EXTENSION_MANAGER.get_all_extensions():
