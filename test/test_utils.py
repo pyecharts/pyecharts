@@ -10,7 +10,7 @@ from pyecharts.utils import (
     write_utf8_html_file,
     get_resource_dir,
     merge_js_dependencies,
-    NOT_SET
+    NOT_SET,
 )
 from pyecharts.utils import remove_key_with_none_value
 
@@ -92,13 +92,25 @@ def test_remove_key_with_none_value():
             {"nested": {"ac": 1, "bc": None, "nested": {"a": 1, "b": None}}},
             {"normal": 1, "empty_string": ""},
         ],
-        "not_set": NOT_SET
+        "not_set": NOT_SET,
     }
     actual_result = remove_key_with_none_value(fixture)
     expected = {
         "a": 1,
         "array": [1, {"nested": {"ac": 1, "nested": {"a": 1}}}, {"normal": 1}],
         "nested": {"ac": 1, "nested": {"a": 1}},
-        "not_set": None
+        "not_set": None,
     }
     eq_(actual_result, expected)
+
+
+def test_not_set():
+    from pyecharts import Kline
+
+    kline = Kline("K 线图-默认示例")
+    kline.add("日K", [], [])
+    kline._option["series"][0]["itemStyle"] = {
+        "normal": {"borderColor": NOT_SET}
+    }
+    content = kline._repr_html_()
+    assert '"borderColor": null' in content

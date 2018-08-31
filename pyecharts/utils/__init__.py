@@ -33,7 +33,7 @@ class Passport(object):
         return self.reason
 
 
-NOT_SET = Passport('To pass None type through remove_key_with_none_value')
+NOT_SET = Passport("To pass None type through remove_key_with_none_value")
 
 
 def get_resource_dir(*paths):

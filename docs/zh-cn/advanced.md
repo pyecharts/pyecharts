@@ -286,3 +286,17 @@ bar2 = Bar("Bar chart", "precipitation and evaporation one year")
 bar2.add("precipitation", attr, v1, is_label_show=True, label_formatter=label_formatter)
 bar2.render()
 ```
+
+## 编辑 _option
+
+如果 pyecharts 的自带 options 不能满足要求的话，开发人员是可以自己插入自己的配置选项。唯一的问题是，pyecharts 不能把某选项设置为空 (null)。
+从 0.5.11 起，这个问题得到了解决。
+
+```python
+from pyecharts import NOT_SET, Kline
+
+kline = Kline("K 线图-默认示例")
+kline.add("日K", DATE, data)
+kline._option['series'][0]['itemStyle']['normal']['borderColor'] = NOT_SET
+kline.render()
+```
