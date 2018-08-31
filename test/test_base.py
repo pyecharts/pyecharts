@@ -204,7 +204,7 @@ def test_online_html():
     bar.render()
     html_content = get_default_rendering_file_content()
     assert (
-        'src="https://pyecharts.github.io/assets/echarts.min.js'
+        'src="https://pyecharts.github.io/assets/js/echarts.min.js'
         in html_content
     )
     CURRENT_CONFIG.jshost = None
