@@ -248,5 +248,5 @@ def test_bar3d_rotate_automatically_speedup():
 
 
 def test_bar3d_must_use_canvas():
-    bar3d = Bar3D("3D 柱状图示例", width=1200, height=600)
+    bar3d = Bar3D()
     eq_(bar3d.renderer, "canvas")
