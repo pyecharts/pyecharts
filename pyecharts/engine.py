@@ -1,15 +1,12 @@
 # coding=utf-8
 from __future__ import unicode_literals
 
-from jinja2 import Environment, FileSystemLoader, environmentfunction, Markup
-from lml.plugin import PluginManager, PluginInfo
-
 import pyecharts.conf as conf
 import pyecharts.constants as constants
 import pyecharts.utils as utils
-from pyecharts_javascripthon.api import TRANSLATOR
-from pyecharts_javascripthon.api import FUNCTION_TRANSLATOR
-
+from jinja2 import Environment, FileSystemLoader, Markup, environmentfunction
+from lml.plugin import PluginInfo, PluginManager
+from pyecharts_javascripthon.api import FUNCTION_TRANSLATOR, TRANSLATOR
 
 LINK_SCRIPT_FORMATTER = '<script type="text/javascript" src="{}"></script>'
 EMBED_SCRIPT_FORMATTER = '<script type="text/javascript">\n{}\n</script>'

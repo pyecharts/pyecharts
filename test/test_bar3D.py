@@ -2,10 +2,10 @@
 # coding=utf-8
 from __future__ import unicode_literals
 
-from pyecharts import Bar3D
-from nose.tools import eq_
 from test.constants import RANGE_COLOR, X_TIME, Y_WEEK
 
+from nose.tools import eq_
+from pyecharts import Bar3D
 
 data = [
     [0, 0, 5],

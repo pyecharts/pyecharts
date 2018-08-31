@@ -4,15 +4,14 @@ import uuid
 import warnings
 from tempfile import mkstemp
 
-from jinja2 import Markup
-
-import pyecharts.utils as utils
-import pyecharts.engine as engine
 import pyecharts.constants as constants
+import pyecharts.engine as engine
 import pyecharts.exceptions as exceptions
+import pyecharts.utils as utils
+from jinja2 import Markup
 from pyecharts.conf import CURRENT_CONFIG
-from pyecharts_javascripthon.api import TRANSLATOR
 from pyecharts.echarts.option import get_all_options
+from pyecharts_javascripthon.api import TRANSLATOR
 
 
 class Base(object):

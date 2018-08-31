@@ -2,12 +2,11 @@
 import os
 from collections import OrderedDict
 
-from jinja2 import Markup
-
-import pyecharts.utils as utils
-import pyecharts.engine as engine
-from pyecharts.conf import CURRENT_CONFIG
 import pyecharts.constants as constants
+import pyecharts.engine as engine
+import pyecharts.utils as utils
+from jinja2 import Markup
+from pyecharts.conf import CURRENT_CONFIG
 
 
 class Page(object):

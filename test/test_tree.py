@@ -1,9 +1,9 @@
 # coding=utf-8
 from __future__ import unicode_literals
 
-import os
-import json
 import codecs
+import json
+import os
 from copy import deepcopy
 
 from pyecharts import Tree

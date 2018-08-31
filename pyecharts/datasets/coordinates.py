@@ -4,15 +4,13 @@ The Raw Data and Access Interface for builtin coordinates.
 """
 from __future__ import unicode_literals
 
-import json
 import codecs
-
-from lml.plugin import PluginManager, PluginInfo
+import json
 
 import pyecharts.constants as constants
 import pyecharts.exceptions as exceptions
+from lml.plugin import PluginInfo, PluginManager
 from pyecharts.utils import get_resource_dir, is_ascii
-
 
 __all__ = [
     "search_coordinates_by_filter",

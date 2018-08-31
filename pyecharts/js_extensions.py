@@ -1,13 +1,12 @@
 # coding=utf-8
 
-import os
-import json
 import codecs
-
-from lml.loader import scan_plugins
-from lml.plugin import PluginManager
+import json
+import os
 
 import pyecharts.exceptions as exceptions
+from lml.loader import scan_plugins
+from lml.plugin import PluginManager
 
 # here are all plugins from pyecharts team
 OFFICIAL_PLUGINS = ["jupyter_echarts_pypkg", "pyecharts_snapshot"]

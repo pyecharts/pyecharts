@@ -1,12 +1,11 @@
 # coding=utf-8
 from __future__ import unicode_literals
 
-import json
 import codecs
+import json
 
 from pyecharts.chart import Chart
 from pyecharts.datasets.coordinates import get_coordinate
-
 
 DEFAULT_GEO_TOOLTIP_FORMATTER = "{b}: {c}"
 
