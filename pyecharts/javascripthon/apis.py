@@ -96,7 +96,7 @@ class FunctionTranslator(TranslatorMixin):
         name = name or func.__name__
         self._func_store.update({name: func})
         if reference:
-            ref_str = FunctionTranslator.generate_ref_str(
+            ref_str = FunctionTranslator.encode_function(
                 func=None,
                 func_name=name
             )
@@ -121,7 +121,7 @@ class FunctionTranslator(TranslatorMixin):
         return options_snippet
 
     @staticmethod
-    def generate_ref_str(func, func_name=None):
+    def encode_function(func, func_name=None):
         if func:
             func_name = func.__name__
         else:
@@ -137,18 +137,22 @@ class MyJSONEncoder(json.JSONEncoder):
     """
 
     def __init__(self, *args, **kwargs):
-        self._enable_func = kwargs.pop('enable_func', False)
-        self._func_callback = kwargs.pop('func_callback', None)
-        if self._func_callback is not None:
-            self._enable_func = True
+        """
+        Value choices of function_encoder
+        1. False / None : disable encode function
+        2. True : encode function to the default value
+        3. Callable : encode function to a custom value
+        """
+        self._function_encoder = kwargs.pop('function_encoder', False)
         super(MyJSONEncoder, self).__init__(*args, **kwargs)
 
     def default(self, obj):
-        if isinstance(obj, types.FunctionType) and self._enable_func:
-            if self._func_callback:
-                return self._func_callback(obj)
+        if isinstance(obj, types.FunctionType) and self._function_encoder:
+            if callable(self._function_encoder):
+                return self._function_encoder(obj)
             else:
-                return FunctionTranslator.generate_ref_str(obj)
+                # self._function_encoder = True
+                return FunctionTranslator.encode_function(obj)
 
         if isinstance(obj, (datetime.datetime, datetime.date)):
             return obj.isoformat()
@@ -172,7 +176,7 @@ class EChartsTranslator(TranslatorMixin):
     def __init__(self):
         self.json_encoder = MyJSONEncoder(
             indent=4,
-            func_callback=self._feed_func_in_options
+            function_encoder=self._feed_func_in_options
         )
         self._function_translator = FunctionTranslator()
         self._cache = {}
@@ -219,17 +223,15 @@ class EChartsTranslator(TranslatorMixin):
     # ------ Tools ------
 
     @staticmethod
-    def dumps(obj, enable_func=False, func_callback=None, **kwargs):
+    def dumps(obj, function_encoder=False, **kwargs):
         """A simple wrapper for json.dumps
         :param obj:
-        :param enable_func:
-        :param func_callback:
+        :param function_encoder:
         :param kwargs:
         :return:
         """
         encoder = MyJSONEncoder(
-            enable_func=enable_func,
-            func_callback=func_callback,
+            function_encoder=function_encoder,
             **kwargs
         )
         return encoder.encode(obj)

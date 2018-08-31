@@ -24,7 +24,7 @@ from test.utils import get_fixture_content
 
 def dumps_actual_options(opts):
     return EChartsTranslator.dumps(opts, sort_keys=True, indent=4,
-                                   enable_func=True)
+                                   function_encoder=True)
 
 
 @patch("random.randint")
