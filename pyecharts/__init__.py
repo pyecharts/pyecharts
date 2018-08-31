@@ -43,6 +43,7 @@ from pyecharts.conf import enable_nteract
 from pyecharts.conf import configure
 from pyecharts.echarts.style import Style
 from pyecharts.conf import jupyter_image
+from pyecharts.utils import NOT_SET
 
 # alias
 Candlestick = Kline
