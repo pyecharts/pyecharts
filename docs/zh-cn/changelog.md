@@ -4,13 +4,14 @@
 
     #### Added
     * [issue#699](https://github.com/pyecharts/pyecharts/issues/699) 为漏斗图新增 `funnel_sort` 和 `funnel_gap` 分别用于控制漏斗图的排序方式和数据图形间隔。
-    
+    * [issue#703](https://github.com/pyecharts/pyecharts/issues/715) To be able to set a key to null in Echarts options
+
     #### Fixed
     * [issue#715](https://github.com/pyecharts/pyecharts/issues/715) 修复 online() 方法不生效的 bug
 
 
 * ### version 0.5.9 - 2018.8.26（current）
-    
+
     #### Added
     * [pr#685](https://github.com/pyecharts/pyecharts/pull/685) 图表方法(`use_theme`/`config`/`add`)支持链式调用
     * [pr#690](https://github.com/pyecharts/pyecharts/pull/690) Radar 新增 `set_radar_component` 方法，废弃 `config` 方法；Parallel 图新增 `set_schema` 方法，废弃 `confg` 方法
