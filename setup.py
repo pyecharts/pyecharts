@@ -1,12 +1,11 @@
 # coding=utf-8
 import os
-from setuptools import setup, find_packages
+import sys
+from shutil import rmtree
+from setuptools import setup, find_packages, Command
 
 # RELEASE STEPS
-# $ python setup.py bdist_wheel
-# $ python twine upload dist/VX.Y.Z.whl
-# $ git tag -a VX.Y.Z -m "release version VX.Y.Z"
-# $ git push origin VX.Y.Z
+# $ python setup.py upload
 
 
 __title__ = "pyecharts"
@@ -31,9 +30,51 @@ about = {}
 with open(os.path.join(here, __title__, "_version.py")) as f:
     exec(f.read(), about)
 
+
+__version__ = about["__version__"]
+
+
+class UploadCommand(Command):
+    description = "Build and publish the package."
+    user_options = []
+
+    @staticmethod
+    def status(s):
+        print("✨✨ {0}".format(s))
+
+    def initialize_options(self):
+        pass
+
+    def finalize_options(self):
+        pass
+
+    def run(self):
+        try:
+            self.status("Removing previous builds…")
+            rmtree(os.path.join(here, "dist"))
+            rmtree(os.path.join(here, "build"))
+            rmtree(os.path.join(here, "{0}.egg-info".format(__title__)))
+        except OSError:
+            pass
+
+        self.status("Building Source and Wheel distribution…")
+        os.system("{0} setup.py bdist_wheel".format(sys.executable))
+
+        self.status("Uploading the package to PyPI via Twine…")
+        os.system("twine upload dist/*")
+
+        self.status("Pushing git tags…")
+        os.system(
+            'git tag -a v{0} -m "release version v{0}"'.format(__version__)
+        )
+        os.system("git push origin v{0}".format(__version__))
+
+        sys.exit()
+
+
 setup(
     name=__title__,
-    version=about["__version__"],
+    version=__version__,
     description=__description__,
     url=__url__,
     author=about["__author__"],
@@ -55,10 +96,10 @@ setup(
         "Programming Language :: Python :: 2",
         "Programming Language :: Python :: 2.7",
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.4",
         "Programming Language :: Python :: 3.5",
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
         "Topic :: Software Development :: Libraries",
     ],
+    cmdclass={"upload": UploadCommand},
 )
