@@ -20,6 +20,7 @@ IOPub data rate exceeded.
 c.NotebookApp.iopub_data_rate_limit = 10000000
 ```
 
+
 **Q:在 Jupyter Notebook 使用 download-as 导出 ipynb/png/pdf 等文件后，图表无法显示？**
 
 A:由于使用 download-as 后，便脱离了 Jupyter Notebook 的环境，无法引用其内的相关 js 文件，因此应当使用在线模式，引用来自 [jupyter-echarts](https://github.com/pyecharts/jupyter-echarts) 或其他有效的远程 js 库。
@@ -29,6 +30,7 @@ from pyecharts import online
 
 online()
 ```
+
 
 **Q:jupyter-notebook 输出问题**
 
@@ -60,6 +62,7 @@ from pyecharts import online
 online(host="http://localhost:8000")
 ```
 
+
 **Q:Python2 编码问题**
 
 由于 pyecharts 包含了非 Ascii 字符 (Non Ascii Characters)，因此必须使用 UTF-8 编码处理文件和字符串等。
@@ -75,22 +78,27 @@ from __future__ import unicode_literals
 ```
 前两句告知你的编辑器你用 UTF-8 ([PEP-0263](https://www.python.org/dev/peps/pep-0263/)). 最后一句告知 Python 所有字符是 UTF-8 ([unicode literals](http://python-future.org/unicode_literals.html))
 
+
 **Q:pyecharts 是否支持  jupyterlab?**
 
 A: 暂不支持。 jupyterlab 应该是下一代 jupyter notebook 的雏形。欢迎大家提交相关 PR。
+
 
 **Q:如何设置 tooltip 的 formatter 选项为回调函数？**
 
 A: 在 v0.5.0 引入了 *选项回调函数* 支持，可查阅相关文档。
 
+
 **Q:为什么安装后还是无法 import Bar,Line 等图形**
 
 A:请检查是否将测试文件命名为 pyecharts.py，如若是请重命名该文件。
+
 
 **Q:使用 pyinstaller 的单文件模式打包后无法加载 js 等静态文件？**
 
 A:目前 pyecharts 暂时未开放这部分的API，没有考虑到打包后的资源文件路径的兼容问题。建议使用文件夹/多文件模式。
 如果确实需要使用单文件模式，可参考 [《Python打包工具》](https://kinegratii.github.io/2016/04/23/python-package/) 这篇文章了解相关原理后进行源码修改。
+
 
 **Q:为什么中国地图画出来只有南海诸岛？**
 
@@ -102,19 +110,32 @@ A: 因为 china.js 没有加载成功。请检查 echarts-countries-pypkg 是不
 
 ![](https://user-images.githubusercontent.com/4280312/37921785-a472a2b8-3122-11e8-8ee3-cc80a3901d9d.png)
 
+
 **Q:为什么 jupyter notebook 图是空的？**
 
 请按这个顺序排查问题：
 
 1）检查能否访问 echarts.min.js？ http://localhost:8888/nbextensions/echarts/echarts.min.js
 
-如果不能，请检查 jupyter-echarts-pypkg 是否装好？在确认你已经装了 jupyter 的情况下，可以卸载 jupyter-echarts-pypkg 然后再装一遍。然后运行 jupyter notebook，再次查看 1）能否正确访问 echarts.min.js？
+如果不能，请检查 jupyter-echarts-pypkg 是否装好？在确认你已经装了 jupyter 的情况下，可以卸载 jupyter-echarts-pypkg 然后再装一遍（`pip install --no-cache-dir jupyter-echarts-pypkg`）。然后运行 jupyter notebook，再次查看 1）能否正确访问 echarts.min.js？
 
 如果能，请右键打开开发者工具，截下 <script>...</script> 区域的截图.
 
 例子：
 
 ![](https://user-images.githubusercontent.com/4280312/29354092-4c4eecee-8264-11e7-98bb-06ec1b4c06b6.png)
+
+
+**Q: 为什么部分 echarts-xxx-pypkg 不能成功安装？**
+
+首先，请检查当前 python 环境有没有 jupyter。有的话，下一步再用 `pip install --no-cache-dir echarts-xxx-pypkg` 装一遍。
+
+
+**Q: pip install pyecharts meet error: Microsoft Visual C++ 14.0 is required**
+
+使用 `pip install pyecharts` 安装时出现该问题，“error: Microsoft Visual C++ 14.0 is required. Get it with "Microsoft Visual C++ Build Tools": http://landinghub.visualstudio.com/visual-cpp-build-tools”。
+
+你需要到微软网站下载 Build Tools for Visual Studio 2017。具体信息请访问 https://www.scivision.co/python-windows-visual-c++-14-required/
 
 
 **Q:如何离线安装 pyecharts？**
