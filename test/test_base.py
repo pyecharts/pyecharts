@@ -1,21 +1,19 @@
 # coding=utf-8
 from __future__ import unicode_literals
 
+import json
 import os
 import sys
-import json
-
-import pandas as pd
-import numpy as np
-
-from nose.tools import eq_, raises
-from mock import patch, MagicMock
-
-import pyecharts.exceptions as exceptions
-from pyecharts import Bar, Map, jupyter_image, online
-from pyecharts.conf import CURRENT_CONFIG
 from test.constants import CLOTHES
 from test.utils import get_default_rendering_file_content
+
+import numpy as np
+import pandas as pd
+import pyecharts.exceptions as exceptions
+from mock import MagicMock, patch
+from nose.tools import eq_, raises
+from pyecharts import Bar, Map, jupyter_image, online
+from pyecharts.conf import CURRENT_CONFIG
 
 TITLE = "柱状图数据堆叠示例"
 

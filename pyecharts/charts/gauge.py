@@ -2,7 +2,6 @@
 
 from pyecharts.chart import Chart
 
-
 DEFAULT_GAUGE_TOOLTIP_FORMATTER = "{a} <br/>{b} : {c}%"
 
 

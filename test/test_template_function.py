@@ -4,12 +4,12 @@ Test cases for jinja2 template functions
 """
 
 from __future__ import unicode_literals
-from nose.tools import raises
 
-from pyecharts.utils import get_resource_dir
+from nose.tools import raises
 from pyecharts import Bar, Map
-from pyecharts.engine import BaseEnvironment, EchartsEnvironment
 from pyecharts.conf import PyEchartsConfig
+from pyecharts.engine import BaseEnvironment, EchartsEnvironment
+from pyecharts.utils import get_resource_dir
 
 ECHARTS_ENV = EchartsEnvironment()
 

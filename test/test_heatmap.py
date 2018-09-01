@@ -3,9 +3,9 @@
 from __future__ import unicode_literals
 
 import random
+from test.constants import X_TIME, Y_WEEK
 
 from pyecharts import HeatMap
-from test.constants import X_TIME, Y_WEEK
 
 
 def test_heatmap_default():
