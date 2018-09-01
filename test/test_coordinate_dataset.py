@@ -3,16 +3,15 @@
 Test Case for the acccess interface of coordinate dataset
 """
 from __future__ import unicode_literals
-from nose.tools import eq_, raises
-from nose.tools import assert_dict_equal
 
+from nose.tools import assert_dict_equal, eq_, raises
 from pyecharts.datasets.coordinates import (
-    get_coordinate,
-    search_coordinates_by_region_and_keyword,
-    search_coordinates_by_keyword,
-    search_coordinates_by_filter,
-    DefaultChinaDataBank,
     GEO_DATA_BANK,
+    DefaultChinaDataBank,
+    get_coordinate,
+    search_coordinates_by_filter,
+    search_coordinates_by_keyword,
+    search_coordinates_by_region_and_keyword,
 )
 from pyecharts.exceptions import RegionNotFound
 

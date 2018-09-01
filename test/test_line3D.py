@@ -3,10 +3,10 @@
 from __future__ import unicode_literals
 
 import math
-
 from test.constants import RANGE_COLOR
-from pyecharts import Line3D
+
 from nose.tools import eq_
+from pyecharts import Line3D
 
 
 def create_line3d_data():

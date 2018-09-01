@@ -3,10 +3,9 @@
 from __future__ import unicode_literals
 
 import os
-
-from pyecharts import Bar, Polar
 from test.utils import get_default_rendering_file_content
 
+from pyecharts import Bar, Polar
 
 # ------ Test Cases for Chart Rendering -----
 

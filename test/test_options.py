@@ -3,27 +3,26 @@
 from __future__ import unicode_literals
 
 import json
+from test.constants import RANGE_COLOR, X_TIME, Y_WEEK
+from test.utils import get_fixture_content
 
-from pyecharts import (
-    Polar,
-    Kline,
-    Bar,
-    Scatter,
-    Line3D,
-    Geo,
-    Scatter3D,
-    Bar3D,
-    Surface3D,
-    GeoLines,
-    Style,
-)
 from pyecharts_javascripthon.api import DefaultJsonEncoder
 
-from nose.tools import eq_
 from mock import patch
-
-from test.utils import get_fixture_content
-from test.constants import RANGE_COLOR, X_TIME, Y_WEEK
+from nose.tools import eq_
+from pyecharts import (
+    Bar,
+    Bar3D,
+    Geo,
+    GeoLines,
+    Kline,
+    Line3D,
+    Polar,
+    Scatter,
+    Scatter3D,
+    Style,
+    Surface3D,
+)
 
 
 def dumps_actual_options(opts):

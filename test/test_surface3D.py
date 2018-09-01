@@ -3,10 +3,10 @@
 from __future__ import unicode_literals
 
 import math
-
 from test.constants import RANGE_COLOR
-from pyecharts import Surface3D
+
 from nose.tools import eq_
+from pyecharts import Surface3D
 
 
 def create_surface3d_data():
