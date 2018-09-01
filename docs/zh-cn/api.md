@@ -85,7 +85,7 @@ js 文件仓库路径。可以设置本地或者远程地址。所有的远程�
 
 **options**
 
-字典类型(dict)，Echarts 图表配置。不同图表类型具有不同数据格式。具体请参考 ECharts 文档。
+字典类型(dict)，Echarts 图表配置。不同图表类型具有不同数据格式。具体请参考 Echarts 文档。
 
 **js_dependencies**
 

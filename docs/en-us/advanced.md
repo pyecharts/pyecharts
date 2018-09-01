@@ -8,7 +8,7 @@ In the field of Python-To-Javascript language translation, [javascripthon](https
 
 Based above, the pyecharts team developed [pyecharts-javascripthon] (https://github.com/pyecharts/pyecharts-javascripthon) as the underlying Python-To-Javascript language translation library, which encapsulated the above two different translators. Several Javascript data type adaptation modules are also available. For more on the translator, please go to [Translator] (en-us/translator).
 
-Pyecharts currently only uses and encapsulates some of Javascripthon's translation rules, mainly **Function Translate**. Use pseudo code to indicate the following:
+pyecharts currently only uses and encapsulates some of Javascripthon's translation rules, mainly **Function Translate**. Use pseudo code to indicate the following:
 
 ```
 input：a Python function objection
@@ -36,7 +36,7 @@ For pyecharts users, there is no need to understand how the translator works.
 
 ### Basic installation
 
-Pyecharts has pyecharts-javascripthon installed by default and can also be installed via pip.
+pyecharts has pyecharts-javascripthon installed by default and can also be installed via pip.
 
 ```bash
 $ pip install pyecharts-javascripthon 
@@ -53,7 +53,7 @@ Since Javascripthon requires a version of Python of at least 3.5+ and pyecharts 
 
 ### Basic usage
 
-Pyecharts has encapsulated the underlying related logic and is transparent to the user. So you can use it as before. The callback function is assigned to the echarts configuration dictionary via the `add` method. The callback function here must satisfy one of the following conditions:
+pyecharts has encapsulated the underlying related logic and is transparent to the user. So you can use it as before. The callback function is assigned to the echarts configuration dictionary via the `add` method. The callback function here must satisfy one of the following conditions:
 
 - Defined function with `def`
 
@@ -179,7 +179,7 @@ grid.render()
 
 Echarts provides [api/events](http://echarts.baidu.com/api.html#events) event handlers, mainly via 'on' method.
 
-Pyecharts provides the following global event name variables based on the official list of events. Located in the `pyecharts.echarts.events` module.
+pyecharts provides the following global event name variables based on the official list of events. Located in the `pyecharts.echarts.events` module.
 
 ``` python
 # Mouse Events
