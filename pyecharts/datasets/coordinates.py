@@ -7,9 +7,10 @@ from __future__ import unicode_literals
 import codecs
 import json
 
+from lml.plugin import PluginInfo, PluginManager
+
 import pyecharts.constants as constants
 import pyecharts.exceptions as exceptions
-from lml.plugin import PluginInfo, PluginManager
 from pyecharts.utils import get_resource_dir, is_ascii
 
 __all__ = [

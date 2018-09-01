@@ -1,6 +1,7 @@
 # coding=utf-8
 
 from PIL import Image
+
 from pyecharts.chart import Chart
 
 

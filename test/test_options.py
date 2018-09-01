@@ -6,6 +6,8 @@ import json
 from test.constants import RANGE_COLOR, X_TIME, Y_WEEK
 from test.utils import get_fixture_content
 
+from pyecharts_javascripthon.api import DefaultJsonEncoder
+
 from mock import patch
 from nose.tools import eq_
 from pyecharts import (
@@ -21,7 +23,6 @@ from pyecharts import (
     Style,
     Surface3D,
 )
-from pyecharts_javascripthon.api import DefaultJsonEncoder
 
 
 def dumps_actual_options(opts):

@@ -4,9 +4,10 @@ import codecs
 import json
 import os
 
-import pyecharts.exceptions as exceptions
 from lml.loader import scan_plugins
 from lml.plugin import PluginManager
+
+import pyecharts.exceptions as exceptions
 
 # here are all plugins from pyecharts team
 OFFICIAL_PLUGINS = ["jupyter_echarts_pypkg", "pyecharts_snapshot"]
