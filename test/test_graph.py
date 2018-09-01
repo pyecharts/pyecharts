@@ -2,11 +2,11 @@
 # coding=utf-8
 from __future__ import unicode_literals
 
-import os
-import json
 import codecs
-from pyecharts import Graph
+import json
+import os
 
+from pyecharts import Graph
 
 nodes = [
     {"name": "结点1", "symbolSize": 10},
