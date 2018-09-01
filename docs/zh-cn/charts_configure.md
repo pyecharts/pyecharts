@@ -239,7 +239,7 @@
     默认控制第一个 y 轴，如没特殊需求无须显示指定。单个为 int 类型而控制多个为 list 类型，如 [0, 1] 表示控制第一个和第二个 x 轴。
 
 额外的 dataZoom 控制条
-* is_datazoom_extrashow -> bool  
+* is_datazoom_extra_show -> bool  
     是否使用额外区域缩放组件，默认为 False
 * datazoom_extra_type -> str  
     额外区域缩放组件类型，默认为'slider'，有'slider', 'inside', 'both'可选

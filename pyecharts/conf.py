@@ -4,9 +4,7 @@ from __future__ import unicode_literals
 from contextlib import contextmanager
 
 import pyecharts.constants as constants
-
 from pyecharts.js_extensions import EXTENSION_MANAGER
-
 
 ONLINE_ASSETS_JS = "https://pyecharts.github.io/assets/js/"
 

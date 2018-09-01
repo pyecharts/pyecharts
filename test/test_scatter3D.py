@@ -1,9 +1,10 @@
 # coding=utf-8
 from __future__ import unicode_literals
 
-from pyecharts import Scatter3D
 from test.constants import RANGE_COLOR
+
 from nose.tools import eq_
+from pyecharts import Scatter3D
 
 
 def test_scatter3d():

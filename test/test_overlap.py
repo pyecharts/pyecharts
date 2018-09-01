@@ -2,9 +2,9 @@
 # coding=utf-8
 from __future__ import unicode_literals
 
-from pyecharts import Bar, Line, Scatter, EffectScatter, Kline
-from pyecharts import Overlap
 from test.constants import CLOTHES
+
+from pyecharts import Bar, EffectScatter, Kline, Line, Overlap, Scatter
 
 
 def test_overlap_bar_line():
