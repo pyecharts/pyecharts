@@ -1,17 +1,16 @@
 # coding=utf-8
 from __future__ import unicode_literals
 
-import os
 import codecs
+import os
 
 from nose.tools import eq_
-
 from pyecharts.utils import (
-    write_utf8_html_file,
     get_resource_dir,
     merge_js_dependencies,
+    remove_key_with_none_value,
+    write_utf8_html_file,
 )
-from pyecharts.utils import remove_key_with_none_value
 
 
 def test_get_resource_dir():

@@ -2,8 +2,8 @@
 
 import random
 
-from pyecharts.base import Base
 import pyecharts.constants as constants
+from pyecharts.base import Base
 
 
 class Chart(Base):
