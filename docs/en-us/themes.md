@@ -1,6 +1,6 @@
-> 主题自定义篇：扩展主题插件，多样化图表配色。V0.5.2+ 新增
+> Theme customization: Expand the theme plugin, diversified chart color matching. V0.5.2+ added
 
-自 0.5.2+ 起，pyecharts 支持更换主题。下面是更换为 "dark" 的例子：
+Since 0.5.2+, pyecharts has supported the replacement of themes. The following is an example of replacing with "dark":
 
 ```python
 import random
@@ -19,14 +19,15 @@ bar.render()
 ```
 ![dark](https://user-images.githubusercontent.com/19553554/39868563-c136646a-548c-11e8-87c2-dbf7ae85e844.png)
 
-默认主题的效果
+Default theme effect
 
 ![default](https://user-images.githubusercontent.com/19553554/39868566-c20b699e-548c-11e8-861f-5a1b063434c3.png)
 
 
-## 使用主题插件
+## Theme plugins usage
 
-echarts 自带 `dark` 主题，pyecharts 也就自带了 `dark`。 [echarts-themes-pypkg](https://github.com/pyecharts/echarts-themes-pypkg) 主题插件提供了如下主题
+ECharts comes with the `dark` theme, and pyecharts comes with `dark`.  
+[echarts-themes-pypkg](https://github.com/pyecharts/echarts-themes-pypkg) theme plugin provides the following topics :  
 
 * [vintage](#vintage)
 * [macarons](#macarons)
@@ -42,32 +43,31 @@ echarts 自带 `dark` 主题，pyecharts 也就自带了 `dark`。 [echarts-them
 * [purple-passion](#purple-passion)
 * [romantic](#romantic)
 
-
-### 安装主题插件
+### Installing theme plugin
 
 ```shell
 $ pip install echarts-themes-pypkg
 ```
 
-### 使用主题
+### Theme usage
 
-更换单个图形主题
+Replace a single graphic theme
 ```python
 bar.use_theme("vintage")
 ```
 
-更换运行环境内所有图表主题
+Replace all chart topics in the operating environment
 ```python
 from pyecharts import configure
 
-# 将这行代码置于首部
+# Put this line of code in the header
 configure(global_theme='dark')
 
 bar = Bar()
-# 其他代码
+# other code
 ```
 
-### 示例
+### Example
 
 #### vintage
 
@@ -122,28 +122,28 @@ bar = Bar()
 ![romantic](https://user-images.githubusercontent.com/19553554/44029175-eef6f170-9f2e-11e8-82cb-b60a39b28762.png)
 
 
-## 使用自己构建的主题
+## Use your own built theme
 
-Echarts 提供了[主题构建工具](http://echarts.baidu.com/theme-builder/)，你可以从中构建喜欢的主题，如 `myTheme.js`。然后 hack *echarts-themes-pypkg* 包。具体操作如下
+ECharts provides [Theme Build Tools](http://echarts.baidu.com/theme-builder/), from which you can build favorite themes like `myTheme.js`. Then pack the *echarts-themes-pypkg* package. The specific operation is as follows
 
-1. cd 到你 Python 安装环境下的 `Lib/site-packages/echarts_themes_pypkg/resources` 目录下，具体路径因操作系统而异
-2. 将 `myTheme.js` 放入到 `resources/echarts-themes-js` 文件夹下
-3. 改动 `resources/registry.json` 文件
+1. cd to your Python installation environment `Lib/site-packages/echarts_themes_pypkg/resources`. The specific path varies by operating system
+2. Move `myTheme.js` to `resources/echarts-themes-js` folder
+3. Change the `resources/registry.json` file
 
 ```
  "PINYIN_MAP": {
         "shine": "shine",
         ...
-        "myTheme": "myTheme"    # 这行
+        "myTheme": "myTheme"    # here
     },
     "FILE_MAP": {
         "shine": "shine",
         ...
-        "myTheme": "myTheme"    # 还有这行
+        "myTheme": "myTheme"    # and here
     }
 ```
-4. cd 到 notebook 安装环境下的 `jupyter/nbextensions/echarts-themes-js` 目录下，具体路径因操作系统而异
-5. 将 `myTheme.js` 放入到 `echarts-themes-js` 文件夹下
-6. 使用 `chart.use_theme("myTheme")`
+4. cd to `jupyter/nbextensions/echarts-themes-js` directory in the notebook installation environment, the specific path varies by operating system
+5. Move `myTheme.js` to `echarts-themes-js` folder
+6. Use `chart.use_theme("myTheme")`
 
-**4、5 为可选项，如果不使用 notebook 的话可以忽略该步骤。**
+**4、5 as options, you can ignore this step if you don't use a notebook.**
