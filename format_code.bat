@@ -1,3 +1,3 @@
-pink *.py
-pink pyecharts/**/*.py
-pink test/*.py
+SET FILES=*.py pyecharts/**/*.py test/*.py
+lias %FILES% -sp .isort.cfg
+pink %FILES%

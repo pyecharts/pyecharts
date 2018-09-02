@@ -2,9 +2,9 @@
 # coding=utf-8
 from __future__ import unicode_literals
 
-from pyecharts import Line
 from test.constants import CLOTHES, WEEK
 
+from pyecharts import Line
 
 clothes_v1 = [5, 20, 36, 10, 10, 100]
 clothes_v2 = [55, 60, 16, 20, 15, 80]

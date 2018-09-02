@@ -1,7 +1,7 @@
 # coding=utf-8
 import random
-from pyecharts.chart import Chart
 
+from pyecharts.chart import Chart
 
 SHAPES = (
     "cardioid",

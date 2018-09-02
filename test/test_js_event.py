@@ -2,9 +2,10 @@
 # coding=utf-8
 from __future__ import unicode_literals
 
+from pyecharts_javascripthon.dom import alert
+
 import pyecharts.echarts.events as events
 from pyecharts import Bar
-from pyecharts_javascripthon.dom import alert
 
 
 def on_click():

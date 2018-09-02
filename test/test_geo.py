@@ -2,8 +2,8 @@
 # coding=utf-8
 from __future__ import unicode_literals
 
+from nose.tools import assert_raises, raises
 from pyecharts import Geo, Style
-from nose.tools import raises, assert_raises
 
 style = Style(
     title_color="#fff",

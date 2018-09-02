@@ -1,9 +1,9 @@
 # coding=utf-8
 import copy
 
-from pyecharts.echarts.option import grid
-from pyecharts.constants import PAGE_TITLE
 from pyecharts.base import Base
+from pyecharts.constants import PAGE_TITLE
+from pyecharts.echarts.option import grid
 from pyecharts.utils import merge_js_dependencies
 
 

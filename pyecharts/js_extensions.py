@@ -1,8 +1,8 @@
 # coding=utf-8
 
-import os
-import json
 import codecs
+import json
+import os
 
 from lml.loader import scan_plugins
 from lml.plugin import PluginManager

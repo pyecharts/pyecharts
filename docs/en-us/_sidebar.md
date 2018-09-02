@@ -3,7 +3,8 @@ pyecharts is a class library for generating ECharts charts. ECharts is a data vi
 - Basic Usage
   - [Chart Render](en-us/prepare)
   - [Chart Options](en-us/charts_configure)
-  - [Chart Details](en-us/charts)
+  - [Chart Details](en-us/charts_base)
+  - [Chart Customization](en-us/charts_custom)
 - Advance Topics
   - [Chart API](en-us/api)
   - [Custom Themes](en-us/themes)

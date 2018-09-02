@@ -2,9 +2,9 @@
 from __future__ import unicode_literals
 
 import json
-from pyecharts import Map
-
 from test.utils import get_default_rendering_file_content
+
+from pyecharts import Map
 
 
 def test_map_show_label():
