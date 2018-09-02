@@ -2,8 +2,8 @@
 
 import copy
 
-from pyecharts.constants import PAGE_TITLE
 from pyecharts.base import Base
+from pyecharts.constants import PAGE_TITLE
 from pyecharts.utils import merge_js_dependencies
 
 

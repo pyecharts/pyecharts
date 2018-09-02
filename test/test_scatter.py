@@ -4,7 +4,6 @@ from __future__ import unicode_literals
 
 from pyecharts import Scatter
 
-
 v1 = [10, 20, 30, 40, 50, 60]
 v2 = [10, 20, 30, 40, 50, 60]
 
