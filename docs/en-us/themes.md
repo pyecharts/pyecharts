@@ -124,7 +124,7 @@ bar = Bar()
 
 ## Use your own built theme
 
-ECharts provides [Theme Build Tools](http://echarts.baidu.com/theme-builder/), from which you can build favorite themes like `myTheme.js`. Then pack the *echarts-themes-pypkg* package. The specific operation is as follows
+ECharts provides [Theme Build Tools](http://echarts.baidu.com/theme-builder/), from which you can build favorite themes like `myTheme.js`. Then hack the *echarts-themes-pypkg* package. The specific operation is as follows
 
 1. cd to your Python installation environment `Lib/site-packages/echarts_themes_pypkg/resources`. The specific path varies by operating system
 2. Move `myTheme.js` to `resources/echarts-themes-js` folder

@@ -124,7 +124,7 @@ bar = Bar()
 
 ## 使用自己构建的主题
 
-Echarts 提供了[主题构建工具](http://echarts.baidu.com/theme-builder/)，你可以从中构建喜欢的主题，如 `myTheme.js`。然后 pack *echarts-themes-pypkg* 包。具体操作如下
+Echarts 提供了[主题构建工具](http://echarts.baidu.com/theme-builder/)，你可以从中构建喜欢的主题，如 `myTheme.js`。然后 hack *echarts-themes-pypkg* 包。具体操作如下
 
 1. cd 到你 Python 安装环境下的 `Lib/site-packages/echarts_themes_pypkg/resources` 目录下，具体路径因操作系统而异
 2. 将 `myTheme.js` 放入到 `resources/echarts-themes-js` 文件夹下
