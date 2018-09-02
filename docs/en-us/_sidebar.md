@@ -1,10 +1,9 @@
-Pyecharts is a class library for generating Echarts charts. Echarts is a data visualization JS library of Baidu Open Source. The graphics generated with Echarts are very visual, and pyecharts is designed to interface with Python, making it easy to use data generation diagrams directly in Python.
+pyecharts is a class library for generating ECharts charts. ECharts is a data visualization JS library of Baidu Open Source. The graphics generated with ECharts are very visual, and pyecharts is designed to interface with Python, making it easy to use data generation diagrams directly in Python.
 
 - Basic Usage
   - [Chart Render](en-us/prepare)
   - [Chart Options](en-us/charts_configure)
-  - [Basic Charts](en-us/charts_base)
-  - [Custom Charts](en-us/charts_custom)
+  - [Chart Details](en-us/charts)
 - Advance Topics
   - [Chart API](en-us/api)
   - [Custom Themes](en-us/themes)
@@ -20,10 +19,10 @@ Pyecharts is a class library for generating Echarts charts. Echarts is a data vi
   - [Demo Projects](https://github.com/pyecharts/pyecharts-users-cases)
   - [Geography & Map](en-us/datasets)
 - Project Release
-  - [Changelog](en-us/changelog)
-  - [Release Note](en-us/release-note)
+  - [Changelog](zh-cn/changelog)
+  - [Release Note](zh-cn/release-note)
 - Project Development
   - [Technical Documents](en-us/technical)
-  - [Team](en-us/team)
+  - [Team](zh-cn/team)
   - [Donors List](zh-cn/donors)
   - [FAQ](en-us/faq)

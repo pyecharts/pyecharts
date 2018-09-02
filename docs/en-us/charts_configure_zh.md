@@ -7,8 +7,8 @@
     * legend：图例组件。图例组件展现了不同系列的标记(symbol)，颜色和名字。可以通过点击图例控制哪些系列不显示。
     * label：图形上的文本标签，可用于说明图形的一些数据信息，比如值，名称等。
     * lineStyle：带线图形的线的风格选项(Line、Polar、Radar、Graph、Parallel)
-    * grid3D：3D笛卡尔坐标系组配置项，适用于 3D 图形。（Bar3D, Line3D, Scatter3D, Surface3D)
-    * axis3D：3D 笛卡尔坐标系 X，Y，Z 轴配置项，适用于 3D 图形。（Bar3D, Line3D, Scatter3D, Surface3D)
+    * grid3D：3D笛卡尔坐标系组配置项，适用于 3D 图形。(Bar3D, Line3D, Scatter3D, Surface3D)
+    * axis3D：3D 笛卡尔坐标系 X，Y，Z 轴配置项，适用于 3D 图形。(Bar3D, Line3D, Scatter3D, Surface3D)
     * visualMap：是视觉映射组件，用于进行『视觉编码』，也就是将数据映射到视觉元素（视觉通道）
     * markLine-markPoint：图形标记组件，用于标记指定的特殊数据，有标记线和标记点两种。（Bar、Line、Kline）
     * tooltip：提示框组件，用于移动或点击鼠标时弹出数据内容
@@ -263,9 +263,9 @@
 * legend_orient -> str  
     图例列表的布局朝向，默认为'horizontal'，有'horizontal', 'vertical'可选
 * legend_pos -> str  
-    图例组件离容器左侧的距离，默认为'center'，有'left', 'center', 'right'可选，也可以为百分数，如"%60"
+    图例组件离容器左侧的距离，默认为'center'，有'left', 'center', 'right'可选，也可以为百分数，如"60%"
 * legend_top -> str  
-    图例组件离容器上侧的距离，默认为'top'，有'top', 'center', 'bottom'可选，也可以为百分数，如"%60"
+    图例组件离容器上侧的距离，默认为'top'，有'top', 'center', 'bottom'可选，也可以为百分数，如"60%"
 * legend_selectedmode -> str/bool  
     图例选择的模式，控制是否可以通过点击图例改变系列的显示状态。默认为'multiple'，可以设成 'single' 或者 'multiple' 使用单选或者多选模式。也可以设置为 False 关闭显示状态。
 * legend_text_size -> int  
@@ -299,7 +299,8 @@
     自定义标签颜色。全局颜色列表，所有图表的图例颜色均在这里修改。如 Bar 的柱状颜色，Line 的线条颜色等等。
 * label_formatter -> str  
     模板变量有 {a}, {b}，{c}，{d}，{e}，分别表示系列名，数据名，数据值等。使用示例，如 `label_formatter='{a}'`  
-    在 trigger 为 'axis' 的时候，会有多个系列的数据，此时可以通过 {a0}, {a1}, {a2} 这种后面加索引的方式表示系列的索引。不同图表类型下的 {a}，{b}，{c}，{d} 含义不一样。 其中变量 {a}, {b}, {c}, {d} 在不同图表类型下代表数据含义为：
+    在 trigger 为 'axis' 的时候，会有多个系列的数据，此时可以通过 {a0}, {a1}, {a2} 这种后面加索引的方式表示系列的索引。
+    不同图表类型下的 {a}，{b}，{c}，{d} 含义不一样。 其中变量 {a}, {b}, {c}, {d} 在不同图表类型下代表数据含义为：
     * 折线（区域）图、柱状（条形）图、K线图 : {a}（系列名称），{b}（类目值），{c}（数值）, {d}（无）
     * 散点图（气泡）图 : {a}（系列名称），{b}（数据名称），{c}（数值数组）, {d}（无）
     * 地图 : {a}（系列名称），{b}（区域名称），{c}（合并数值）, {d}（无）
@@ -330,9 +331,9 @@
 **3D 笛卡尔坐标系组配置项，适用于 3D 图形。（Bar3D, Line3D, Scatter3D, Surface3D)**
 
 * grid3d_width -> int  
-    三维笛卡尔坐标系组件在三维场景中的高度。默认为 100
+    三维笛卡尔坐标系组件在三维场景中的宽度。默认为 100
 * grid3d_height -> int  
-    三维笛卡尔坐标系组件在三维场景中的高度。默认为 100
+    三维笛卡尔坐标系组件在三维场景中的长度。默认为 100
 * grid3d_depth -> int  
     三维笛卡尔坐标系组件在三维场景中的高度。默认为 100
 * is_grid3d_rotate -> bool  
