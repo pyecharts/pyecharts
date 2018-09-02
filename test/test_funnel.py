@@ -2,8 +2,9 @@
 # coding=utf-8
 from __future__ import unicode_literals
 
-from pyecharts import Funnel
 from test.constants import CLOTHES
+
+from pyecharts import Funnel
 
 prices = [20, 40, 60, 80, 100, 120]
 

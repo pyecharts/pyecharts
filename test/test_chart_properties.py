@@ -3,10 +3,11 @@
 
 from __future__ import unicode_literals
 
-from pyecharts.base import Base
-from pyecharts import Bar, Line, Grid
 from test.constants import CLOTHES, WEEK
+
 from nose.tools import eq_
+from pyecharts import Bar, Grid, Line
+from pyecharts.base import Base
 
 UUID_HEX_LENGTH = 32
 

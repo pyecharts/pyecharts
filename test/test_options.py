@@ -3,26 +3,26 @@
 from __future__ import unicode_literals
 
 import json
+from test.constants import RANGE_COLOR, X_TIME, Y_WEEK
+from test.utils import get_fixture_content
 
-from pyecharts import (
-    Polar,
-    Kline,
-    Bar,
-    Scatter,
-    Line3D,
-    Geo,
-    Scatter3D,
-    Bar3D,
-    GeoLines,
-    Style,
-)
 from pyecharts_javascripthon.api import DefaultJsonEncoder
 
-from nose.tools import eq_
 from mock import patch
-
-from test.utils import get_fixture_content
-from test.constants import RANGE_COLOR, X_TIME, Y_WEEK
+from nose.tools import eq_
+from pyecharts import (
+    Bar,
+    Bar3D,
+    Geo,
+    GeoLines,
+    Kline,
+    Line3D,
+    Polar,
+    Scatter,
+    Scatter3D,
+    Style,
+    Surface3D,
+)
 
 
 def dumps_actual_options(opts):
@@ -238,6 +238,28 @@ def test_bar3d_default(patched):
         grid3d_depth=80,
     )
     actual_options = dumps_actual_options(bar3d.options)
+    expected = get_fixture_content(fixture)
+
+    for a, b in zip(actual_options.split("\n"), expected.split("\n")):
+        eq_(a.strip(), b.strip())
+
+
+@patch("random.randint")
+def test_surface3d_default(patched):
+    fixture = "surface3d_options.json"
+    patched.return_value = "1"
+    _data = list(create_line3d_data())
+    surface3d = Surface3D("3D 曲面图示例", width=1200, height=600)
+    surface3d.add(
+        "",
+        _data,
+        is_visualmap=True,
+        visual_range_color=RANGE_COLOR,
+        visual_range=[-3, 3],
+        grid3d_rotate_sensitivity=5,
+    )
+
+    actual_options = dumps_actual_options(surface3d.options)
     expected = get_fixture_content(fixture)
 
     for a, b in zip(actual_options.split("\n"), expected.split("\n")):

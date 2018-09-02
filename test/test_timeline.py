@@ -3,9 +3,9 @@
 from __future__ import unicode_literals
 
 from random import randint
-
-from pyecharts import Bar, Pie, Line, Overlap, Timeline, Style, Map
 from test.constants import CLOTHES
+
+from pyecharts import Bar, Line, Map, Overlap, Pie, Style, Timeline
 
 
 def test_timeline_bar():
