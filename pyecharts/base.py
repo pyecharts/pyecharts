@@ -12,7 +12,7 @@ import pyecharts.constants as constants
 import pyecharts.exceptions as exceptions
 from pyecharts.conf import CURRENT_CONFIG
 from pyecharts.echarts.option import get_all_options
-from pyecharts.javascripthon.apis import EChartsTranslator
+from pyecharts.javascripthon.api import EChartsTranslator
 
 
 class Base(object):

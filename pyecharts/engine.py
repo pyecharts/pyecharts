@@ -7,7 +7,7 @@ from lml.plugin import PluginManager, PluginInfo
 import pyecharts.conf as conf
 import pyecharts.constants as constants
 import pyecharts.utils as utils
-from pyecharts.javascripthon.apis import EChartsTranslator
+from pyecharts.javascripthon.api import EChartsTranslator
 
 # ------ Code Tpl Start
 

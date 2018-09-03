@@ -1,7 +1,6 @@
 # coding=utf8
-
 """
-The api module for python-to-javascript translator
+A core api for python-to-javascript translator.
 """
 
 from __future__ import unicode_literals
@@ -9,120 +8,245 @@ from __future__ import unicode_literals
 import datetime
 import json
 import types
+from collections import OrderedDict
+from contextlib import contextmanager
 
 from pyecharts.javascripthon.compat import TranslatorCompatAPI
 
+__all__ = ['EChartsTranslator']
 
-class FunctionSnippet(object):
-    def __init__(self):
-        self._function_names = []  # js function name,not python function name
-        self._function_codes = []
 
-    def add(self, function_code, function_name):
-        if function_name not in self._function_names:
-            self._function_codes.append(function_code)
-            self._function_names.append(function_name)
+class JsSnippetMixin(object):
+    def to_js_snippet(self):
+        pass
 
-    def as_snippet(self):
-        return ''.join(self._function_codes)
 
-    def __contains__(self, item):
-        return item in self._function_names
+class TranslatorMixin(object):
+    """A Interface for state-machine translator
+    """
 
-    def get_snippet(self, func_names):
+    @contextmanager
+    def new_task(self):
         try:
-            index = self._function_names.index(func_names)
-            return self._function_codes[index]
+            self.reset()
+            yield
+        finally:
+            self.reset()
 
-        except ValueError:
-            pass
+    def reset(self):
+        pass
 
-
-class JavascriptSnippet(object):
-    def __init__(self, function_snippet, option_snippet):
-        self.function_snippet = function_snippet
-        self.option_snippet = option_snippet
-
-    def as_snippet(self):
-        return self.function_snippet + '\n' + self.option_snippet
+    def translate(self):
+        """Main process
+        """
+        pass
 
 
-class FunctionTranslator(object):
+class FunctionStore(OrderedDict, JsSnippetMixin):
+    """
+    A OrderedDict which stores translated function.
+    {<func_name>:<func>}
+    """
+
+    def to_js_snippet(self):
+        return ''.join(self.values())
+
+
+class TranslateResult(JsSnippetMixin):
+    def __init__(self, options, options_snippet, function_store):
+        self._options = options
+        self._options_snippet = options_snippet
+        self._function_store = function_store
+
+    @property
+    def options_snippet(self):
+        return self._options_snippet
+
+    @property
+    def function_snippet(self):
+        return self._function_store.to_js_snippet()
+
+    @property
+    def has_function(self):
+        return len(self._function_store) > 0
+
+    def to_js_snippet(self):
+        return '\n'.join([
+            self.function_snippet,
+            self._options_snippet
+        ])
+
+
+class FunctionTranslator(TranslatorMixin):
+    """A translator for function,a FunctionStore object will be generated.
+    """
+
     def __init__(self):
-        self.left_delimiter = '-=>'
-        self.right_delimiter = '<=-'
-        self.reference_str_format = ''.join(
-            [self.left_delimiter, '{name}', self.right_delimiter]
-        )
-        self._shared_function_snippet = FunctionSnippet()
+        self._shared_function_snippet = FunctionStore()
 
         # Tmp Data for a render process
         self._func_store = {}  # {<name>:<func>}
-        self._replace_items = []
 
     def reset(self):
         self._func_store = {}
-        self._replace_items = []
 
     def feed(self, func, name=None):
         name = name or func.__name__
         self._func_store.update({name: func})
-        ref_str = self.reference_str_format.format(name=name)
-        self._replace_items.append((''.join(['"', ref_str, '"']), name))
-        return ref_str
+        return self
 
     def translate(self):
-        fs = FunctionSnippet()
+        fs = FunctionStore()
         for name, func in self._func_store.items():
             if name in self._shared_function_snippet:
-                snippet = self._shared_function_snippet.get_snippet(name)
+                snippet = self._shared_function_snippet[name]
             else:
                 snippet = TranslatorCompatAPI.translate_function(func)
-                self._shared_function_snippet.add(snippet, name)
-            fs.add(snippet, name)
+                self._shared_function_snippet.update({name: snippet})
+            fs.update({name: snippet})
         return fs
 
-    def handle_options(self, options_snippet):
-        for src, dest in self._replace_items:
-            options_snippet = options_snippet.replace(src, dest)
-        return options_snippet
 
+class MyJSONEncoder(json.JSONEncoder):
+    """My custom JsonEncoder.
+    1. Support datetime/date/numpy.ndarray object
+    2. Support Function object
+    3. My Json Encoder Protocol: __json__
+    """
 
-FUNCTION_TRANSLATOR = FunctionTranslator()
+    def __init__(self, *args, **kwargs):
+        """
+        :param enable_func : enable encode function obj or not
+        :param post_encode_func : The callback after encoding a function, ()
+        """
+        self._enable_func = kwargs.pop('enable_func', False)
+        self._post_encode_func = kwargs.pop('post_encode_func', None)
+        super(MyJSONEncoder, self).__init__(*args, **kwargs)
 
-
-class DefaultJsonEncoder(json.JSONEncoder):
     def default(self, obj):
-        if isinstance(obj, types.FunctionType):
-            return FUNCTION_TRANSLATOR.feed(obj)
+        if isinstance(obj, types.FunctionType) and self._enable_func:
+            encoded_value = JSONTranslator.encode_func(obj)
+            if self._post_encode_func:
+                self._post_encode_func(obj, encoded_value)
+            return encoded_value
 
         if isinstance(obj, (datetime.datetime, datetime.date)):
             return obj.isoformat()
 
-        if hasattr(obj, 'config'):
-            return obj.config
-
         # Pandas and Numpy lists
-        try:
-            return obj.astype(float).tolist()
-
-        except Exception:
+        if obj.__class__.__name__ == 'ndarray':
             try:
-                return obj.astype(str).tolist()
+                return obj.astype(float).tolist()
+            except ValueError:
+                try:
+                    return obj.astype(str).tolist()
+                except ValueError:
+                    pass
 
-            except Exception:
-                return super(DefaultJsonEncoder, self).default(obj)
-
-
-class EChartsTranslator(object):
-    def __init__(self, json_encoder=DefaultJsonEncoder):
-        self.json_encoder = json_encoder
-
-    def translate(self, options):
-        option_snippet = json.dumps(options, indent=4, cls=self.json_encoder)
-        function_snippet = FUNCTION_TRANSLATOR.translate()
-        option_snippet = FUNCTION_TRANSLATOR.handle_options(option_snippet)
-        return JavascriptSnippet(function_snippet.as_snippet(), option_snippet)
+        if hasattr(obj, '__json__'):
+            return obj.__json__()
+        return super(MyJSONEncoder, self).default(obj)
 
 
-TRANSLATOR = EChartsTranslator()
+class JSONTranslator(TranslatorMixin):
+    def __init__(self, post_encode_func=None):
+        self._data_store = {}
+        self._replace_items = []
+        self._post_encode_func = post_encode_func
+
+        self._encoder = MyJSONEncoder(
+            enable_func=True,
+            post_encode_func=self._my_post_encode_func
+        )
+
+    def feed(self, options):
+        self._data_store['options'] = options
+
+    def translate(self):
+        options_snippet = self._encoder.encode(self._data_store['options'])
+        for src, dest in self._replace_items:
+            options_snippet = options_snippet.replace(src, dest)
+        return options_snippet
+
+    def _my_post_encode_func(self, func, func_encoded):
+        replaced_str = '"{}"'.format(func_encoded)
+        self._replace_items.append((replaced_str, func.__name__))
+        self._post_encode_func(func, func_encoded)
+
+    @staticmethod
+    def encode_func(func, func_name=None):
+        if func:
+            func_name = func.__name__
+        else:
+            func_name = func_name
+        return '-=>{}<=-'.format(func_name)
+
+
+class EChartsTranslator(TranslatorMixin):
+    def __init__(self):
+        self._json_translator = JSONTranslator(
+            post_encode_func=self.func_encode_bridge
+        )
+        self._function_translator = FunctionTranslator()
+        self._cache = {}
+
+    def reset(self):
+        self._function_translator.reset()
+        self._cache = {}
+
+    def func_encode_bridge(self, func, func_encoded):
+        """
+        <<JSONTranslator>> --> <<EChartsTranslator>> --> <<FunctionTranslator>>
+        :param func:
+        :param func_encoded:
+        :return:
+        """
+        return self._function_translator.feed(func)
+
+    # ------ Public API - Translator -----
+
+    def feed_event(self, func, name=None):
+        """Add a event function
+        :param func: Event function object
+        :param name: The name of function
+        :return: None
+        """
+        return self._function_translator.feed(func, name=name)
+
+    def feed_options(self, options):
+        """Add options dict
+        :param options: A dictionary for options
+        :return:
+        """
+        self._json_translator.feed(options)
+        return self
+
+    def translate(self):
+        """Translate a options,a TranslateResult object is returned
+        :return: a TranslateResult
+        """
+        option_snippet = self._json_translator.translate()
+        function_store = self._function_translator.translate()
+        return TranslateResult(
+            options=self._json_translator._data_store['options'],
+            options_snippet=option_snippet,
+            function_store=function_store
+        )
+
+    # ------ Tools ------
+
+    @staticmethod
+    def dumps(obj, enable_func=False, post_encode_func=None, **kwargs):
+        """A simple wrapper for json.dumps
+        :param obj:
+        :param enable_func:
+        :param post_encode_func
+        :param kwargs:
+        :return:
+        """
+        encoder = MyJSONEncoder(
+            enable_func=enable_func,
+            post_encode_func=post_encode_func,
+            **kwargs
+        )
+        return encoder.encode(obj)

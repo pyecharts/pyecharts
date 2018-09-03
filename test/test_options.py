@@ -17,7 +17,7 @@ from pyecharts import (
     GeoLines,
     Style,
 )
-from pyecharts.javascripthon.apis import EChartsTranslator
+from pyecharts.javascripthon.api import EChartsTranslator
 from test.constants import RANGE_COLOR, X_TIME, Y_WEEK
 from test.utils import get_fixture_content
 
