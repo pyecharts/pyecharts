@@ -3,5 +3,4 @@
 # Windows: format_code.bat
 
 black==18.6b4
-pink>0.4.0
-lias>0.2.0
+pink>0.6.1
