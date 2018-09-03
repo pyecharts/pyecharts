@@ -293,10 +293,10 @@ bar2.render()
 从 0.5.10 起，这个问题得到了解决。
 
 ```python
-from pyecharts import NOT_SET, Kline
+from pyecharts import NULL, Kline
 
 kline = Kline("K 线图-默认示例")
 kline.add("日K", DATE, data)
-kline._option['series'][0]['itemStyle']['normal']['borderColor'] = NOT_SET
+kline._option['series'][0]['itemStyle']['normal']['borderColor'] = NULL
 kline.render()
 ```

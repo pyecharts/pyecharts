@@ -6,7 +6,7 @@ import os
 
 from nose.tools import eq_
 from pyecharts.utils import (
-    NOT_SET,
+    NULL,
     get_resource_dir,
     merge_js_dependencies,
     remove_key_with_none_value,
@@ -91,7 +91,7 @@ def test_remove_key_with_none_value():
             {"nested": {"ac": 1, "bc": None, "nested": {"a": 1, "b": None}}},
             {"normal": 1, "empty_string": ""},
         ],
-        "not_set": NOT_SET,
+        "not_set": NULL,
     }
     actual_result = remove_key_with_none_value(fixture)
     expected = {
@@ -109,7 +109,7 @@ def test_not_set():
     kline = Kline("K 线图-默认示例")
     kline.add("日K", [], [])
     kline._option["series"][0]["itemStyle"] = {
-        "normal": {"borderColor": NOT_SET}
+        "normal": {"borderColor": NULL}
     }
     content = kline._repr_html_()
     assert '"borderColor": null' in content
