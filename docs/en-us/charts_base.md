@@ -41,31 +41,24 @@ add(name, x_axis, y_axis,
     is_stack=False,
     bar_category_gap='20%', **kwargs)
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 * name -> str  
     name of chart
+
 * x_axis -> list  
     data of xAixs
+
 * y_axis -> list  
     data of yAxis
+
 * is_stack -> bool  
     defalut -> False   
     Data stacking, the stack values ​​of the same series configuration on the same category axis can be stacked
 
+* bar_category_gap -> int/str  
+    default -> '20%'  
+    The columnar distance of the category axis. When set to 0, the columns are next to each other(histogram type), 
+
+**is_stack implements data stacking**
 ```python
 from pyecharts import Bar
 
@@ -77,7 +70,6 @@ bar.add("商家A", attr, v1, is_stack=True)
 bar.add("商家B", attr, v2, is_stack=True)
 bar.render()
 ```
-
 ![bar-0](https://user-images.githubusercontent.com/19553554/35081597-0c3e7212-fc50-11e7-8f72-af6c552223e8.gif)
 
 **Tip：**  Global configuration item needs set in the last ```add()``` or the setting will lose efficacy.
@@ -92,20 +84,7 @@ bar.render()
 ```
 ![bar-1](https://user-images.githubusercontent.com/19553554/35081600-0ea23f0c-fc50-11e7-894b-65ad0f611a01.gif)
 
-* mark_point -> list  
-    mark point data, it can be 'min', 'max', 'average'
-* mark_line  -> list  
-    mark line data, it can be 'min', 'max', 'average'
-* mark_point_symbol -> str  
-    default -> 'pin'  
-    mark symbol, it cna be 'circle', 'rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow'
-* mark_point_symbolsize -> int  
-    default -> 50  
-    mark symbol size
-* mark_point_textcolor -> str  
-    default -> '#fff'  
-    mark point text color
-
+**is_convert exchange XY axis**
 ```python
 from pyecharts import Bar
 
@@ -114,9 +93,9 @@ bar.add("商家A", attr, v1)
 bar.add("商家B", attr, v2, is_convert=True)
 bar.render()
 ```
-![bar-2](https://user-images.githubusercontent.com/19553554/35081605-151472ce-fc50-11e7-8627-66929309b08c.png)
+![bar-demo](https://user-images.githubusercontent.com/19553554/35081605-151472ce-fc50-11e7-8627-66929309b08c.png)
 
-dataZoom effect，'slider' type
+**dataZoom effect, 'slider' type**
 ```python
 import random
 
@@ -124,39 +103,71 @@ attr = ["{}天".format(i) for i in range(30)]
 v1 = [random.randint(1, 30) for _ in range(30)]
 bar = Bar("Bar - datazoom - slider 示例")
 bar.add("", attr, v1, is_label_show=True, is_datazoom_show=True)
-bar.show_config()
 bar.render()
 ```
-![bar-4](https://user-images.githubusercontent.com/19553554/35081742-ddcbf3e0-fc50-11e7-937e-f806fd12c83e.gif)
+![bar-demo](https://user-images.githubusercontent.com/19553554/35081742-ddcbf3e0-fc50-11e7-937e-f806fd12c83e.gif)
 
-'inside' type
+**dataZoom effect, 'inside' type**
 ```python
 attr = ["{}天".format(i) for i in range(30)]
 v1 = [random.randint(1, 30) for _ in range(30)]
 bar = Bar("Bar - datazoom - inside 示例")
-bar.add("", attr, v1, is_datazoom_show=True, datazoom_type='inside', datazoom_range=[10, 25])
-bar.show_config()
+bar.add(
+    "",
+    attr,
+    v1,
+    is_datazoom_show=True,
+    datazoom_type="inside",
+    datazoom_range=[10, 25],
+)
 bar.render()
 ```
-![bar-5](https://user-images.githubusercontent.com/19553554/35081801-307b3d26-fc51-11e7-8ac7-eea2f2422402.gif)
+![bar-demo](https://user-images.githubusercontent.com/19553554/35081801-307b3d26-fc51-11e7-8ac7-eea2f2422402.gif)
 
-'both' type
-
+**dataZoom effect，'both' type**
 ```python
 attr = ["{}天".format(i) for i in range(30)]
 v1 = [random.randint(1, 30) for _ in range(30)]
 bar = Bar("Bar - datazoom - inside 示例")
-bar.add("", attr, v1, is_datazoom_show=True, datazoom_type='both',
-        datazoom_range=[10, 25])
+bar.add(
+    "",
+    attr,
+    v1,
+    is_datazoom_show=True,
+    datazoom_type="both",
+    datazoom_range=[10, 25],
+)
 bar.render()
 ```
-![bar-8](https://user-images.githubusercontent.com/19553554/35081813-37fc4072-fc51-11e7-9b5c-a3ca2f0d1fef.gif)
+![bar-demo](https://user-images.githubusercontent.com/19553554/35081813-37fc4072-fc51-11e7-9b5c-a3ca2f0d1fef.gif)
+
+**Multiple dataZoom effect，support X and Y axis at the same time**
+```python
+days = ["{}天".format(i) for i in range(30)]
+days_v1 = [random.randint(1, 30) for _ in range(30)]
+bar = Bar("Bar - datazoom - xaxis/yaxis 示例")
+bar.add(
+    "",
+    days,
+    days_v1,
+    # default is X axis，horizontal
+    is_datazoom_show=True,
+    datazoom_type="slider",
+    datazoom_range=[10, 25],
+    # add extra dataZoom control bar，vertical
+    is_datazoom_extra_show=True,
+    datazoom_extra_type="slider",
+    datazoom_extra_range=[10, 25],
+    is_toolbox_show=False,
+)
+bar.render()
+```
+![bar-demo](https://user-images.githubusercontent.com/19553554/43352052-ec70fe82-924f-11e8-880b-832b8f95d701.gif)
+
+**Note：** datazoom could be applied for all 2D Cartesian coordinates, ie(Line、Bar、Scatter、EffectScatter、Kline)  
 
 
-**Note：** datazoom can be used for Line、Bar、Scatter、EffectScatter、Kline
-
-if axis labels are too long, rotation is a good solution.
-
+**When the x-axis or y-axis labels are too dense to cause all the displays to overlap, the method of rotating the labels can be used**
 ```python
 attr = ["{}天".format(i) for i in range(20)]
 v1 = [random.randint(1, 20) for _ in range(20)]
@@ -164,13 +175,13 @@ bar = Bar("坐标轴标签旋转示例")
 bar.add("", attr, v1, xaxis_interval=0, xaxis_rotate=30, yaxis_rotate=30)
 bar.render()
 ```
-![bar-6](https://user-images.githubusercontent.com/19553554/35081805-3258a2be-fc51-11e7-9cb1-d99c1a707bc5.png)
+![bar-demo](https://user-images.githubusercontent.com/19553554/35081805-3258a2be-fc51-11e7-9cb1-d99c1a707bc5.png)
 
-**Tip：** Datazoom fits all plane rectangular coordinate system figure,that's(Line, Bar, Scatter, EffectScatter, Kline)
-**Tip：** Through label_color to set column's colour,like ['#eee', '#000']，any type of chart's legend colour can revise by label_color .
+**Note：** The maximum and minimum values ​​on the x and y axes can be adjusted by setting `xaxis_min` / `xaxis_max` / `yaxis_min` / `yaxis_max`. Effective for the value axis!  
 
+**Note：** Through label_color to set column's color, like ['#eee', '#000'], any type of chart's legend color can revise by label_color.  
 
-waterfall example
+**Waterfall example**
 
 ```python
 from pyecharts import Bar
@@ -179,15 +190,14 @@ attr = ["{}月".format(i) for i in range(1, 8)]
 v1 = [0, 100, 200, 300, 400, 220, 250]
 v2 = [1000, 800, 600, 500, 450, 400, 300]
 bar = Bar("瀑布图示例")
-# 利用第一个 add() 图例的颜色为透明，即 'rgba(0,0,0,0)'，并且设置 is_stack 标志为 True
+# the first add() legend to be transparent, ie 'rgba(0,0,0,0)', and set the is_stack flag is True
 bar.add("", attr, v1, label_color=['rgba(0,0,0,0)'], is_stack=True)
 bar.add("月份", attr, v2, is_label_show=True, is_stack=True, label_pos='inside')
 bar.render()
 ```
 ![bar-7](https://user-images.githubusercontent.com/19553554/35081807-34a5568e-fc51-11e7-8199-3c3f8f43ba98.png)
 
-fat histogram example
-
+**Fat histogram example**
 ```python
 from pyecharts import Bar
 
@@ -200,7 +210,7 @@ bar.render()
 ```
 ![bar-9](https://user-images.githubusercontent.com/19553554/35081820-3c6f2ad4-fc51-11e7-8600-9212e7e8b519.png)
 
-Double histograms
+**Double histograms**
 ```python
 from pyecharts import Bar
 
@@ -214,28 +224,68 @@ bar.render()
 ```
 ![bar-10](https://user-images.githubusercontent.com/19553554/35081822-3e090748-fc51-11e7-8bba-b775d29671e4.png)
 
+**Extra text label**
+```python
+from pyecharts import Bar
+
+bar = Bar("柱状图", extra_html_text_label=["bar_extra_html_text_label", "color:red"])
+bar.add("商家A", CLOTHES, clothes_v1, is_stack=True)
+bar.add("商家B", CLOTHES, clothes_v2, is_stack=True)
+bar.render()
+```
+![bar-demo](https://user-images.githubusercontent.com/19553554/43812932-31f22e0a-9af6-11e8-8fbe-c62b65daec41.png)
+
+**Control X/Y axis line color and width**
+```python
+bar = Bar("柱状图")
+bar.add(
+    "商家A",
+    CLOTHES,
+    clothes_v1,
+    xaxis_line_color="green",
+    xaxis_line_width=5,
+    xaxis_label_textcolor="black",
+)
+bar.render()
+```
+![bar-demo](https://user-images.githubusercontent.com/19553554/43877147-e30b5cf0-9bca-11e8-9bc7-c1cd7be58141.png)
+
+**Two or more adds are made, one of the data is missing and can be filled with 0**
+```python
+bar = Bar("折线图示例")
+bar.add("商家A", CLOTHES, clothes_v1)
+bar.add("商家B", CLOTHES, [55, 60, 16, 20, 0, 0])
+bar.render()
+```
+![bar-demo](https://user-images.githubusercontent.com/19553554/44008022-e3708900-9ed0-11e8-94c5-68c8d96ebe60.png)
 
 ## Bar3D
 Bar3D.add() signatures
-```
+```python
 add(name, x_axis, y_axis, data, grid3D_opacity=1, grid3D_shading='color', **kwargs)
 ```
 * name -> str  
-    Series name used for displaying in tooltip and filtering with legend,or updaing data and configuration with setOption.
-* x_axis -> list  
-    xAxis data
-* y_axis -> list  
-    yAxis data
+    chart name
+
+* x_axis -> str    
+    xAxis data, need to be a category axis, in another word, it cannot be a numeric value
+
+* y_axis -> str  
+    yAxis data, need to be a category axis, in another word, it cannot be a numeric value
+
 * data -> [[], []]
     zAxis data, it is represented by a two-dimension array.
+
 * grid3D_opacity -> float  
     default -> 1  
-    opacity of gird3D item
+    opacity of gird3D item bar
+
 * grid3D_shading -> str  
     3D graphics coloring effect  
     * 'color': Only show color, not affected by lighting and other factors.
     * 'lambert': Through the classic lambert coloring to show the light and shade.
-    * 'realistic': Realistic rendering.
+    * 'realistic': Realistic rendering. With `light.ambientCubemap` and `postEffect` to improve the quality of the display.  
+    ECharts GL uses physics-based rendering (PBR) to represent realistic materials
 
 ```python
 from pyecharts import Bar3D
@@ -266,14 +316,16 @@ data = [[0, 0, 5], [0, 1, 1], [0, 2, 0], [0, 3, 0], [0, 4, 0], [0, 5, 0], [0, 6,
         [6, 20, 1], [6, 21, 2], [6, 22, 2], [6, 23, 6]]
 range_color = ['#313695', '#4575b4', '#74add1', '#abd9e9', '#e0f3f8', '#ffffbf',
                '#fee090', '#fdae61', '#f46d43', '#d73027', '#a50026']
-bar3d.add("", x_axis, y_aixs, [[d[1], d[0], d[2]] for d in data], is_visualmap=True,
-          visual_range=[0, 20], visual_range_color=range_color, grid3D_width=200, grid3D_depth=80)
-bar3d.show_config()
+bar3d.add("", x_axis, y_aixs, [[d[1], d[0], d[2]] for d in data], 
+    is_visualmap=True, visual_range=[0, 20], visual_range_color=range_color, 
+    grid3D_width=200, grid3D_depth=80)
 bar3d.render()
 ```
 ![bar3d-0](https://user-images.githubusercontent.com/19553554/35081629-36a8e046-fc50-11e7-8910-e02bf24008d9.gif)
 
-``` grid3D_shading``` could make bar look more real  
+In data, such as [1, 2, 3], the index of the x-axis is 1 ("1a"); the index of the y-axis is 2 ("Thursday"); the value of the z-axis is 3.
+
+**Set `grid3D_shading` could make bar look more real**  
 ```python
 bar3d = Bar3D("3D 柱状图示例", width=1200, height=600)
 bar3d.add("", x_axis, y_aixs, [[d[1], d[0], d[2]] for d in data], is_visualmap=True,
@@ -285,7 +337,7 @@ bar3d.render()
 
 ![bar3d-1](https://user-images.githubusercontent.com/19553554/35081631-38a0cb02-fc50-11e7-9f74-3d487bd98a3a.gif)
 
-```is_grid3D_rotate``` could let it rotate automatically
+**Set```is_grid3D_rotate``` could let it rotate automatically**
 ```python
 bar3d = Bar3D("3D 柱状图示例", width=1200, height=600)
 bar3d.add("", x_axis, y_aixs, [[d[1], d[0], d[2]] for d in data], is_visualmap=True,
@@ -302,12 +354,77 @@ bar3d = Bar3D("3D 柱状图示例", width=1200, height=600)
 bar3d.add("", x_axis, y_aixs, [[d[1], d[0], d[2]] for d in data], is_visualmap=True,
           visual_range=[0, 20], visual_range_color=range_color, grid3D_width=200, grid3D_depth=80,
           is_grid3D_rotate=True, grid3D_rotate_speed=180)
-bar3d.show_config()
 bar3d.render()
 ```
 ![bar3d-3](https://user-images.githubusercontent.com/19553554/35081705-a92a878c-fc50-11e7-8427-9066456db54c.gif)
 
-**Tip：** more details aboutt gird3D，please refer to [Global-options](https://github.com/chenjiandongx/pyecharts/blob/master/document/en-us/documentation.md#Global-options)
+**Note：** more details about gird3D，please refer to **Chart Configuration**
+**Note：** Can be used with axis3D configuration
+
+## Boxplot
+> Boxplot is a chart used to display a set of dispersion data. It can display the maximum, minimum, median, lower quartile and upper quartile.
+
+Boxplot.add() signatures
+```python
+add(name, x_axis, y_axis, **kwargs)
+```
+* name -> str    
+    Chart name
+
+* x_axis -> list    
+    x axis data
+
+* y_axis -> list
+    y axis data, each row data of the two-dimensional array (each row in the following example) is rendering a box containing five magnitudes, in order:  
+    [[min,  Q1,  median (or Q2),  Q3,  max], ...]
+
+You can calculate the required five values by ​​yourself. Or you can convert them by the built-in `prepare_data()`, which converts the input list data into [[min, Q1, median (or Q2), Q3, max], ...], as shown below:
+```python
+from pyecharts import Boxplot
+
+boxplot = Boxplot("箱形图")
+x_axis = ['expr1', 'expr2', 'expr3', 'expr4', 'expr5']
+y_axis = [
+    [850, 740, 900, 1070, 930, 850, 950, 980, 980, 880,
+    1000, 980, 930, 650, 760, 810, 1000, 1000, 960, 960],
+    [960, 940, 960, 940, 880, 800, 850, 880, 900, 840,
+    830, 790, 810, 880, 880, 830, 800, 790, 760, 800],
+    [880, 880, 880, 860, 720, 720, 620, 860, 970, 950,
+    880, 910, 850, 870, 840, 840, 850, 840, 840, 840],
+    [890, 810, 810, 820, 800, 770, 760, 740, 750, 760,
+    910, 920, 890, 860, 880, 720, 840, 850, 850, 780],
+    [890, 840, 780, 810, 760, 810, 790, 810, 820, 850,
+    870, 870, 810, 740, 810, 940, 950, 800, 810, 870]
+]
+_yaxis = boxplot.prepare_data(y_axis)       # transform data
+boxplot.add("boxplot", x_axis, _yaxis)
+boxplot.render()
+```
+![boxplot-demo](https://user-images.githubusercontent.com/19553554/35082364-4f4e98f8-fc54-11e7-9e53-1d6a66b67e46.png)
+
+**Or convert directly in add()**
+```python
+from pyecharts import Boxplot
+
+boxplot = Boxplot("箱形图")
+x_axis = ['expr1', 'expr2']
+y_axis1 = [
+    [850, 740, 900, 1070, 930, 850, 950, 980, 980, 880,
+    1000, 980, 930, 650, 760, 810, 1000, 1000, 960, 960],
+    [960, 940, 960, 940, 880, 800, 850, 880, 900, 840,
+    830, 790, 810, 880, 880, 830, 800, 790, 760, 800],
+]
+y_axis2 = [
+    [890, 810, 810, 820, 800, 770, 760, 740, 750, 760,
+    910, 920, 890, 860, 880, 720, 840, 850, 850, 780],
+    [890, 840, 780, 810, 760, 810, 790, 810, 820, 850,
+    870, 870, 810, 740, 810, 940, 950, 800, 810, 870]
+]
+boxplot.add("category1", x_axis, boxplot.prepare_data(y_axis1))
+boxplot.add("category2", x_axis, boxplot.prepare_data(y_axis2))
+boxplot.render()
+```
+![boxplot-demo](https://user-images.githubusercontent.com/19553554/35082365-511fcc38-fc54-11e7-9826-d16231a401f4.png)
 
 
 ## EffectScatter
@@ -319,11 +436,14 @@ add(name, x_value, y_value, symbol_size=10, **kwargs)
 ```
 * name -> str  
     Series name used for displaying in tooltip and filtering with legend,or updaing data and configuration with setOption.
+
 * x_axis -> list  
     data of xAxis
+
 * y_axis -> list  
     data of yAxis  
-* symbol_size -> int  
+
+* symbol_size -> int   
     default -> 10  
     symbol size
 
@@ -338,6 +458,7 @@ es.render()
 ```
 ![effectscatter-0](https://user-images.githubusercontent.com/19553554/35090528-e4c9a04c-fc74-11e7-938a-d348bb1fdbf8.gif)
 
+**Effect scatter charts of various symbols**
 ```python
 es = EffectScatter("动态散点图各种图形示例")
 es.add("", [10], [10], symbol_size=20, effect_scale=3.5, effect_period=3, symbol="pin")
@@ -353,12 +474,15 @@ es.render()
 
 * symbol -> str  
     symbol shape, it can be 'rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow'
+
 * effect_brushtype -> str   
     default -> 'stroke'  
     The brush type for ripples. options: 'stroke' and 'fill'.
+
 * effect_scale -> float  
     default -> 2.5  
     The maximum zooming scale of ripples in animation.
+
 * effect_period -> float  
     default -> 4(s)  
     The duration of animation.
@@ -367,15 +491,25 @@ es.render()
 ## Funnel
 Funnel.add() signatures
 ```python
-add(name, attr, value, **kwargs)
+add(name, attr, value,
+    funnel_sort="ascending", funnel_gap=0, **kwargs)
 ```
 * name -> str  
     Series name used for displaying in tooltip and filtering with legend,or updaing data and configuration with setOption.
+
 * attr -> list  
     name of attribute
+
 * value -> list  
     value of attribute
 
+* funnel_sort -> str/func
+    Sort the data, you can take 'ascending', 'descending', 'none' (in origin order of the data, not sorted).
+
+* funnel_gap- > int
+    Data pattern spacing. Default is 0.
+
+**The label is displayed inside**  
 ```python
 from pyecharts import Funnel
 
@@ -387,6 +521,7 @@ funnel.render()
 ```
 ![funnel-0](https://user-images.githubusercontent.com/19553554/35090181-d6b0e886-fc73-11e7-8e00-dec8ac38c415.gif)
 
+**The label is displayed outside**  
 ```python
 funnel = Funnel("漏斗图示例", width=600, height=400, title_pos='center')
 funnel.add("商品", attr, value, is_label_show=True, label_pos="outside", legend_orient='vertical',
@@ -396,6 +531,55 @@ funnel.render()
 ```
 ![funnel-1](https://raw.githubusercontent.com/pyecharts/pyecharts/master/images/funnel-1.png)
 
+**Ascending data**
+```python
+funnel = Funnel("漏斗图示例", width=600, height=400, title_pos='center')
+funnel.add(
+    "商品",
+    CLOTHES,
+    prices,
+    is_label_show=True,
+    label_pos="inside",
+    label_text_color="#fff",
+    funnel_sort="ascending"
+)
+funnel.render()
+```
+![funnel-demo](https://user-images.githubusercontent.com/19553554/44653464-6cc08880-aa21-11e8-9b78-a3090ada7be7.png)
+
+**No sorted data**
+```python
+funnel = Funnel("漏斗图示例", width=600, height=400, title_pos='center')
+funnel.add(
+    "商品",
+    CLOTHES,
+    prices,
+    is_label_show=True,
+    label_pos="inside",
+    label_text_color="#fff",
+    funnel_sort="none"
+)
+funnel.render()
+```
+![funnel-demo](https://user-images.githubusercontent.com/19553554/44653675-fc663700-aa21-11e8-82f3-69c02d4a847d.png)
+
+**Specify graphics interval**
+```python
+funnel = Funnel("漏斗图示例", width=600, height=400, title_pos='center')
+funnel.add(
+    "商品",
+    CLOTHES,
+    prices,
+    is_label_show=True,
+    label_pos="inside",
+    label_text_color="#fff",
+    funnel_sort="ascending",
+    funnel_gap=5,
+)
+funnel.render()
+```
+![funnel-demo](https://user-images.githubusercontent.com/19553554/44653847-6ed71700-aa22-11e8-8c08-e93d2e9e528d.png)
+
 
 ## Gauge
 Gauge.add() signatures
@@ -404,13 +588,17 @@ add(name, attr, value, scale_range=None, angle_range=None, **kwargs)
 ```
 * name -> str  
     Series name used for displaying in tooltip and filtering with legend,or updaing data and configuration with setOption.
+
 * attr -> list  
     name of attribute
+
 * value -> list  
     value of attribute
+
 * scale_range -> list  
     default -> [0, 100]  
     data range of guage
+
 * angle_range -> list  
     default -> [225, -45]  
     angle range of guage.The direct right side of circle center is 0 degree,the right above it is 90 degree, the direct left side of it is 180 degree.
@@ -420,7 +608,6 @@ from pyecharts import Gauge
 
 gauge = Gauge("仪表盘示例")
 gauge.add("业务指标", "完成率", 66.66)
-gauge.show_config()
 gauge.render()
 ```
 ![gauge-0](https://user-images.githubusercontent.com/19553554/35090190-daa33eee-fc73-11e7-9710-7844b12d3e6b.png)
@@ -428,45 +615,69 @@ gauge.render()
 ```python
 gauge = Gauge("仪表盘示例")
 gauge.add("业务指标", "完成率", 166.66, angle_range=[180, 0], scale_range=[0, 200], is_legend_show=False)
-gauge.show_config()
 gauge.render()
 ```
-
 ![gauge-1](https://user-images.githubusercontent.com/19553554/35090193-dc199d22-fc73-11e7-8f4d-22477a3a22be.png)
 
+
 ## Geo
-> Geographic coorinate system component.Geographic coorinate system component is used to draw maps, which also supports scatter series, and line series.
+> Geographic coordinate system component. Geographic coordinate system component is used to draw maps, which also supports scatter series, and line series.
 
 Geo.add() signatures
 ```python
-add(name, attr, value, type="scatter", maptype='china', symbol_size=12, border_color="#111",
-    geo_normal_color="#323c48", geo_emphasis_color="#2a333d", **kwargs)
+add(name, attr, value, 
+    type="scatter", 
+    maptype='china', 
+    symbol_size=12, b
+    order_color="#111",
+    geo_normal_color="#323c48", 
+    geo_emphasis_color="#2a333d", 
+    geo_cities_coords=None, 
+    is_roam=True, **kwargs)
 ```
 * name -> str  
     Series name used for displaying in tooltip and filtering with legend,or updaing data and configuration with setOption.
+
 * attr -> list  
-    name of attribute
+    Name of attribute
+
 * value -> list  
-    value of attribute
+    Value of attribute
+
 * type -> str  
     default -> 'scatter'  
-    chart type, it can be 'scatter', 'effectscatter', 'heatmap'
+    Chart type, it can be 'scatter', 'effectscatter', 'heatmap'
+
 * maptype -> str  
-    type of map, it only supports 'china' temporarily.
+    Type of map. Since v0.3.2+, the map has become an extension package, supporting maps of provinces, cities, national districts, and countries around the world. For details, please refer to [Map Customization](en-us/customize_map)
+
+* coordinate_region -> str   
+    Which the city coordinates belong to the country. Introduced from v0.5.7, looking for the location of international cities. The default is `China`. The detail country mapping table refers to [countries_regions_db.json](https://github.com/pyecharts/pyecharts/blob/master/pyecharts/datasets/countries_regions_db.json). More geographic coordinates information can be referred to [Geography & Map](/en-us/datasets)
+
 * symbol_size -> int  
     default -> 12  
     symbol size
+
 * border_color -> str  
     default -> '#111'  
     color of map border
+
 * geo_normal_color -> str  
     default -> '#323c48'  
     The color of the map area in normal state
+
 * geo_emphasis_color -> str  
     default -> '#2a333d'  
     The color of the map area in emphasis state
 
-Scatter type
+* geo_cities_coords -> dict  
+    User-defined regional latitude and longitude, similar to the dictionary such as {'Acheng': [126.58, 45.32],}.
+
+* is_roam -> bool  
+    Whether to enable mouse zoom and pan roaming. Default is True
+    If you only want to turn on zoom or pan, you can set it to 'scale' or 'move'. Set to True to turn on
+
+**Scatter type (Continuous)**
 ```python
 from pyecharts import Geo
 
@@ -508,14 +719,13 @@ geo = Geo("全国主要城市空气质量", "data from pm2.5", title_color="#fff
 width=1200, height=600, background_color='#404a59')
 attr, value = geo.cast(data)
 geo.add("", attr, value, visual_range=[0, 200], visual_text_color="#fff", symbol_size=15, is_visualmap=True)
-geo.show_config()
 geo.render()
 ```
 ![geo-0](https://user-images.githubusercontent.com/19553554/35089650-7f06172e-fc72-11e7-9d4b-14437fb0d8fe.gif)
 
 **Note：** Please use it with Visualmap
 
-With Scatter
+**Scatter type (Segmented)**
 ```python
 geo = Geo("全国主要城市空气质量", "data from pm2.5", title_color="#fff",
           title_pos="center", width=1200,
@@ -527,7 +737,7 @@ geo.render()
 ```
 ![geo-0-0](https://user-images.githubusercontent.com/19553554/35089651-80d259a0-fc72-11e7-8af9-d96df53c0d49.gif)
 
-With HeatMap
+**HeatMap type**
 ```python
 geo = Geo("全国主要城市空气质量", "data from pm2.5", title_color="#fff",
           title_pos="center", width=1200,
@@ -540,7 +750,7 @@ geo.render()
 ![geo-0-1](https://user-images.githubusercontent.com/19553554/35089653-82498f88-fc72-11e7-9811-2aceccd4ed68.gif)
 
 
-With EffectScatter on China map
+**EffectScatter on China map**
 ```python
 from pyecharts import Geo
 
@@ -557,7 +767,7 @@ geo.render()
 ```
 ![geo-1](https://user-images.githubusercontent.com/19553554/35089655-844c8902-fc72-11e7-8d1b-a0920ad5baa8.gif)
 
-With effectScatter on my home province, Canton
+**EffectScatter on my home province, Canton**
 ```python
 from pyecharts import Geo
 
@@ -575,32 +785,275 @@ geo.render()
 ```
 ![geo-2](https://user-images.githubusercontent.com/19553554/35089657-85d0b7bc-fc72-11e7-8b3d-8127dbe8f780.gif)
 
+**Use coordinate_region to specify the country which to retrieve coordinates**
+```python
+from pyecharts import Geo
+
+data = [("Oxford", 15), ("London", 12)]
+
+geo = Geo(
+    "英国主要城市空气质量",
+    "data from pm2.5",
+    title_color="#fff",
+    title_pos="center",
+    background_color="#404a59",
+)
+attr, value = geo.cast(data)
+geo.add(
+    "",
+    attr,
+    value,
+    maptype="英国",
+    # Use coordinate_region to specify the coordinates of the UK range, such as Oxford above.
+    # default is China
+    coordinate_region="英国",
+    visual_range=[0, 200],
+    visual_text_color="#fff",
+    symbol_size=15,
+    is_visualmap=True,
+)
+geo.render()
+```
+![geo-demo](https://user-images.githubusercontent.com/19553554/43998653-23b21a78-9e2d-11e8-8273-52fbeaacc6e8.png)
+
+
+## GeoLines
+> It is used for drawing line data with start and end point information, mainly for the route on the map and the route visualization.
+
+GeoLines.add() signatures
+```python
+add(name, data,
+    maptype='china',
+    coordinate_region="中国",
+    symbol=None,
+    symbol_size=12,
+    border_color="#111",
+    geo_normal_color="#323c48",
+    geo_emphasis_color="#2a333d",
+    geo_cities_coords=None,
+    geo_effect_period=6,
+    geo_effect_traillength=0,
+    geo_effect_color='#fff',
+    geo_effect_symbol='circle',
+    geo_effect_symbolsize=5,
+    is_geo_effect_show=True,
+    is_roam=True, **kwargs)
+```
+
+
+
+-------------------------------------------------------------------------------------------
+* name -> str  
+    Chart name
+
+* data -> [list], 包含列表的列表  
+    数据项，数据中，每一行是一个『数据项』，每一列属于一个『维度』。每一行包含两个或三个数据，如 ["广州", "北京"] 或 ["广州", "北京"，100]，则指定从广州到北京。第三个值用于表示该 line 的数值，该值可省略。
+
+* maptype -> str  
+    地图类型。 从 v0.3.2+ 起，地图已经变为扩展包，支持全国省份，全国城市，全国区县，全球国家等地图，具体请参考 [地图自定义篇](zh-cn/customize_map)
+
+* coordinate_region -> str  
+    城市坐标所属国家。从 v0.5.7 引入，针对国际城市的地理位置的查找。默认为 `中国`。具体的国家/地区映射表参照 [countries_regions_db.json](https://github.com/pyecharts/pyecharts/blob/master/pyecharts/datasets/countries_regions_db.json)。更多地理坐标信息可以参考 [数据集篇](/zh-cn/datasets)
+
+* symbol -> str  
+    线两端的标记类型，可以是一个数组分别指定两端，也可以是单个统一指定。
+
+* symbol_size -> int  
+    线两端的标记大小，可以是一个数组分别指定两端，也可以是单个统一指定。
+
+* border_color -> str  
+    地图边界颜色。默认为 '#111'
+
+* geo_normal_color -> str  
+    正常状态下地图区域的颜色。默认为 '#323c48'
+
+* geo_emphasis_color -> str  
+    高亮状态下地图区域的颜色。默认为 '#2a333d'
+
+* geo_cities_coords -> dict  
+    用户自定义地区经纬度，类似如 {'阿城': [126.58, 45.32],} 这样的字典。
+
+* geo_effect_period -> int/float  
+    特效动画的时间，单位为 s，默认为 6s
+
+* geo_effect_traillength -> float  
+    特效尾迹的长度。取从 0 到 1 的值，数值越大尾迹越长。默认为 0
+
+* geo_effect_color -> str  
+    特效标记的颜色。默认为 '#fff'
+
+* geo_effect_symbol -> str  
+     特效图形的标记。有 'circle', 'rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow', 'plane' 可选。
+
+* geo_effect_symbolsize -> int/list  
+    特效标记的大小，可以设置成诸如 10 这样单一的数字，也可以用数组分开表示高和宽，例如 [20, 10] 表示标记宽为 20，高为 10。
+
+* is_geo_effect_show -> bool  
+    是否显示特效。
+
+* is_roam -> bool  
+    是否开启鼠标缩放和平移漫游。默认为 True  
+    如果只想要开启缩放或者平移，可以设置成'scale'或者'move'。设置成 True 为都开启
+
+**Default effect**
+```python
+from pyecharts import GeoLines, Style
+
+style = Style(
+    title_top="#fff",
+    title_pos = "center",
+    width=1200,
+    height=600,
+    background_color="#404a59"
+)
+
+data_guangzhou = [
+    ["广州", "上海"],
+    ["广州", "北京"],
+    ["广州", "南京"],
+    ["广州", "重庆"],
+    ["广州", "兰州"],
+    ["广州", "杭州"]
+]
+geolines = GeoLines("GeoLines 示例", **style.init_style)
+geolines.add("从广州出发", data_guangzhou, is_legend_show=False)
+geolines.render()
+```
+![geolines-demo](https://user-images.githubusercontent.com/19553554/35082101-fb57aeb6-fc52-11e7-92c9-3e9a024e5749.gif)
+
+**稍加配置**
+```python
+from pyecharts import GeoLines, Style
+
+style_geo = style.add(
+    is_label_show=True,
+    line_curve=0.2,
+    line_opacity=0.6,
+    legend_text_color="#eee",
+    legend_pos="right",
+    geo_effect_symbol="plane",
+    geo_effect_symbolsize=15,
+    label_color=['#a6c84c', '#ffa022', '#46bee9'],
+    label_pos="right",
+    label_formatter="{b}",
+    label_text_color="#eee",
+)
+geolines = GeoLines("GeoLines 示例", **style.init_style)
+geolines.add("从广州出发", data_guangzhou, **style_geo)
+geolines.render()
+
+```
+![geolines-demo](https://user-images.githubusercontent.com/19553554/35082102-fd8d884a-fc52-11e7-9e40-5f94098d4493.gif)
+
+**指定数值**
+```python
+from pyecharts import GeoLines, Style
+
+data_guangzhou = [
+    ["广州", "上海", 10],
+    ["广州", "北京", 20],
+    ["广州", "南京", 30],
+    ["广州", "重庆", 40],
+    ["广州", "兰州", 50],
+    ["广州", "杭州", 60],
+]
+lines = GeoLines("GeoLines 示例", **style.init_style)
+lines.add(
+    "从广州出发", data_guangzhou, tooltip_formatter="{a} : {c}", **style_geo
+)
+lines.render()
+```
+![geolines-demo](https://user-images.githubusercontent.com/19553554/40048098-eaa7b3aa-5863-11e8-98cd-dcd8526fe820.gif)
+
+**多例模式**
+```python
+from pyecharts import GeoLines, Style
+
+data_beijing = [
+    ["北京", "上海"],
+    ["北京", "广州"],
+    ["北京", "南京"],
+    ["北京", "重庆"],
+    ["北京", "兰州"],
+    ["北京", "杭州"]
+]
+geolines = GeoLines("GeoLines 示例", **style.init_style)
+geolines.add("从广州出发", data_guangzhou, **style_geo)
+geolines.add("从北京出发", data_beijing, **style_geo)
+geolines.render()
+```
+![geolines-demo](https://user-images.githubusercontent.com/19553554/35082103-ff1f2aba-fc52-11e7-97b2-edf837db113e.gif)
+
+**单例模式，指定 `legend_selectedmode="single"`**
+```python
+from pyecharts import GeoLines, Style
+
+style_geo = style.add(
+    is_label_show=True,
+    line_curve=0.2,
+    line_opacity=0.6,
+    legend_text_color="#eee",
+    legend_pos="right",
+    geo_effect_symbol="plane",
+    geo_effect_symbolsize=15,
+    label_color=['#a6c84c', '#ffa022', '#46bee9'],
+    label_pos="right",
+    label_formatter="{b}",
+    label_text_color="#eee",
+    legend_selectedmode="single", #指定单例模式
+)
+geolines = GeoLines("GeoLines 示例", **style.init_style)
+geolines.add("从广州出发", data_guangzhou, **style_geo)
+geolines.add("从北京出发", data_beijing, **style_geo)
+geolines.render()
+```
+![geolines-demo](https://user-images.githubusercontent.com/19553554/35082105-00885b92-fc53-11e7-8803-adc054037285.gif)
+
+
+
+
+
+
+
+
+
+
+
+
 
 visualMap：visualMap is a type of component for visual encoding, which maps the data to visual channels
 * is_visualmap -> bool  
     It specifies whether to use the datazoom component.
+
 * visual_range -> list  
     default -> [0, 100]  
     pecify the min and max dataValue for the visualMap component.
+
 * visual_text_color -> list  
     visualMap text color.
+
 * visual_range_text -> list  
     The label text on both ends, such as ['High', 'Low']
+
 * visual_range_color -> list  
     default ->  ['#50a3ba', '#eac763', '#d94e5d']  
     For visual channel color, array is used, like: ['#333', '#78ab23', 'blue'],which means a color ribbon is formed based on the three color stops,and dataValues will be mapped to the ribbon.  
     Specifically,the dataValue that equals to visualMap.min will be mapped onto '#333',the dataValue that equals to visualMap.max will be mapped onto 'blue',and other dataValues will be piecewisely interpolated to get the final color.
+
 * visual_orient -> str  
     default -> 'vertical'  
     How to layout the visualMap component, 'horizontal' or 'vertical'.
+
 * visual_pos -> str/int  
     default -> 'left'  
     Distance between visualMap component and the left side of the container.  
     visual_pos value can be instant pixel value like 20;it can also be percentage value relative to container width like '20%';and it can also be 'left', 'center', or 'right'.
+
 * visual_top -> str/int  
     default -> 'top'  
     Distance between visualMap component and the top side of the container.  
     visual_top value can be instant pixel value like 20;it can also be percentage value relative to container width like '20%';and it can also be 'top', 'middle', or 'bottom'.
+
 * is_calculable -> bool  
     default -> True  
     Whether show handles, which can be dragged to adjust "selected range".

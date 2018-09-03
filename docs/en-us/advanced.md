@@ -254,7 +254,7 @@ def my_title():
     return 'my_title'
 bar.add(my_title, [], [])
 ```
-There are no rendering errors in pyecharts, but it does not meet the requirements for title in Echarts.
+There are no rendering errors in pyecharts, but it does not meet the requirements for title in ECharts.
 
 
 Second, in order to improve performance, pyecharts did the following:

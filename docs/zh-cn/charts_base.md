@@ -243,7 +243,7 @@ bar.render()
 ```
 ![bar-demo](https://user-images.githubusercontent.com/19553554/43877147-e30b5cf0-9bca-11e8-9bc7-c1cd7be58141.png)
 
-**进行两次或两次 add 的时候，有一次的某项数据缺失，可用 0 填充**
+**进行两次或多次 add 的时候，有一次的某项数据缺失，可用 0 填充**
 ```python
 bar = Bar("折线图示例")
 bar.add("商家A", CLOTHES, clothes_v1)
@@ -411,7 +411,7 @@ add(name, x_axis, y_axis, **kwargs)
 * x_axis -> list  
     x 坐标轴数据
 * y_axis -> [list], 包含列表的列表   
-    y 坐标轴数据，二维数组的每一数组项（上例中的每行）是渲染一个 box，它含有五个量值，依次是：  
+    y 坐标轴数据，二维数组的每一数组项（下例中的每行）是渲染一个 box，它含有五个量值，依次是：  
     [min,  Q1,  median (or Q2),  Q3,  max]
 
 可自行计算出所需五个数值，也可通过内置 `prepare_data()` 转换，`prepare_data()` 会将传入的嵌套列表中的数据转换为嵌套的 [min,  Q1,  median (or Q2),  Q3,  max]，如下所示：
@@ -612,7 +612,7 @@ funnel.add(
 )
 funnel.render()
 ```
-![funnel-demo](https://user-images.githubusercontent.com/19553554/35090186-d8f50db6-fc73-11e7-9b7e-947580a621de.png)
+![funnel-1](https://raw.githubusercontent.com/pyecharts/pyecharts/master/images/funnel-1.png)
 
 **数据按升序排序**
 ```python
