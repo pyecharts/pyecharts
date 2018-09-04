@@ -2462,7 +2462,7 @@ config(schema=None,
 * rader_text_color -> str  
     雷达图数据项字体颜色，默认为'#000'
 * radar_text_size -> int  
-    雷达图m数据项字体大小，默认为 12
+    雷达图数据项字体大小，默认为 12
 
 ```python
 from pyecharts import Radar
@@ -3407,17 +3407,17 @@ add(name, attr, value,
 * name -> str  
     图例名称
 * attr -> list  
-   属性名称
+    属性名称
 * value -> list  
-   属性所对应的值
+    属性所对应的值
 * shape -> list  
-   词云图轮廓，有'circle', 'cardioid', 'diamond', 'triangle-forward', 'triangle', 'pentagon', 'star'可选
+    词云图轮廓，有'circle', 'cardioid', 'diamond', 'triangle-forward', 'triangle', 'pentagon', 'star'可选
 * word_gap -> int  
-   单词间隔，默认为 20。
+    单词间隔，默认为 20。
 * word_size_range -> list  
-   单词字体大小范围，默认为 [12, 60]。
+    单词字体大小范围，默认为 [12, 60]。
 * rotate_step -> int  
-   旋转单词角度，默认为 45
+    旋转单词角度，默认为 45
 
 ```python
 from pyecharts import WordCloud

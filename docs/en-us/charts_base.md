@@ -839,61 +839,57 @@ add(name, data,
     is_geo_effect_show=True,
     is_roam=True, **kwargs)
 ```
-
-
-
--------------------------------------------------------------------------------------------
 * name -> str  
     Chart name
 
-* data -> [list], 包含列表的列表  
-    数据项，数据中，每一行是一个『数据项』，每一列属于一个『维度』。每一行包含两个或三个数据，如 ["广州", "北京"] 或 ["广州", "北京"，100]，则指定从广州到北京。第三个值用于表示该 line 的数值，该值可省略。
+* data -> [list]
+    Data item, each row is a "data item", and each column is one "dimension". Each row contains two or three data, such as ["Guangzhou", "Beijing"] or ["Guangzhou", "Beijing", 100], which is designated from Guangzhou to Beijing. The third value is used to represent the value of the line, which can be omitted.
 
 * maptype -> str  
-    地图类型。 从 v0.3.2+ 起，地图已经变为扩展包，支持全国省份，全国城市，全国区县，全球国家等地图，具体请参考 [地图自定义篇](zh-cn/customize_map)
+    Map type. Since v0.3.2+, the map has become an extension package, supporting maps of provinces, cities, national districts, and countries around the world. For details, please refer to [Map Customization] (en-us/customize_map)
 
 * coordinate_region -> str  
-    城市坐标所属国家。从 v0.5.7 引入，针对国际城市的地理位置的查找。默认为 `中国`。具体的国家/地区映射表参照 [countries_regions_db.json](https://github.com/pyecharts/pyecharts/blob/master/pyecharts/datasets/countries_regions_db.json)。更多地理坐标信息可以参考 [数据集篇](/zh-cn/datasets)
+    The country of which the city coordinates belongs to. From v0.5.7, looking for the location of international cities. Default is `China`. The specific country mapping table refers to [countries_regions_db.json](https://github.com/pyecharts/pyecharts/blob/master/pyecharts/datasets/countries_regions_db.json). More geographic coordinates information can be referred to [dataset articles](/en-us/datasets)
 
 * symbol -> str  
-    线两端的标记类型，可以是一个数组分别指定两端，也可以是单个统一指定。
+    The symbol type at both ends of the line. It could be either an array specifying two ends, or a single unified designation.
 
 * symbol_size -> int  
-    线两端的标记大小，可以是一个数组分别指定两端，也可以是单个统一指定。
+    The symbol size at both ends of the line. It could be an array specified at both ends, or a single unified designation.
 
 * border_color -> str  
-    地图边界颜色。默认为 '#111'
+    Map border color. Default is '#111'
 
-* geo_normal_color -> str  
-    正常状态下地图区域的颜色。默认为 '#323c48'
+* geo_normal_color -> str   
+    The color of the map area under normal mode. Default is '#323c48'
 
-* geo_emphasis_color -> str  
-    高亮状态下地图区域的颜色。默认为 '#2a333d'
+* geo_emphasis_color -> str   
+    The color of the map area under highlighted mode. Default is '#2a333d'
 
-* geo_cities_coords -> dict  
-    用户自定义地区经纬度，类似如 {'阿城': [126.58, 45.32],} 这样的字典。
+* geo_cities_coords -> dict   
+    Custom regional latitude and longitude, similar to the dictionary such as {'Acheng': [126.58, 45.32],}.
 
 * geo_effect_period -> int/float  
-    特效动画的时间，单位为 s，默认为 6s
+    Effect animation time, the unit is s. Ddefault is 6s
 
-* geo_effect_traillength -> float  
-    特效尾迹的长度。取从 0 到 1 的值，数值越大尾迹越长。默认为 0
+* geo_effect_traillength -> float   
+    The special effect trail length. Range from 0 to 1, the larger the value, the longer the trail. Default is 0
 
 * geo_effect_color -> str  
-    特效标记的颜色。默认为 '#fff'
+    The color of the effect tag. The default is '#fff'
 
 * geo_effect_symbol -> str  
-     特效图形的标记。有 'circle', 'rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow', 'plane' 可选。
+    The symbol of the special effect graphic. There are 'circle', 'rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow', 'plane' optional.
 
 * geo_effect_symbolsize -> int/list  
-    特效标记的大小，可以设置成诸如 10 这样单一的数字，也可以用数组分开表示高和宽，例如 [20, 10] 表示标记宽为 20，高为 10。
+    The size of the effect tag. It could be set to a single number such as 10, or divided into high and wide by an array. For example, [20, 10] means the tag width is 20 and the height is 10.
 
 * is_geo_effect_show -> bool  
-    是否显示特效。
+    Whether to display special effects.
 
 * is_roam -> bool  
-    是否开启鼠标缩放和平移漫游。默认为 True  
-    如果只想要开启缩放或者平移，可以设置成'scale'或者'move'。设置成 True 为都开启
+    Whether to enable mouse zoom and move roaming. Default is True.  
+    If you only want to turn on zoom or move, you can set it to 'scale' or 'move'. Set to True means to turn on both.  
 
 **Default effect**
 ```python
@@ -921,7 +917,7 @@ geolines.render()
 ```
 ![geolines-demo](https://user-images.githubusercontent.com/19553554/35082101-fb57aeb6-fc52-11e7-92c9-3e9a024e5749.gif)
 
-**稍加配置**
+**Configured more parameters**
 ```python
 from pyecharts import GeoLines, Style
 
@@ -945,7 +941,7 @@ geolines.render()
 ```
 ![geolines-demo](https://user-images.githubusercontent.com/19553554/35082102-fd8d884a-fc52-11e7-9e40-5f94098d4493.gif)
 
-**指定数值**
+**Specify value**
 ```python
 from pyecharts import GeoLines, Style
 
@@ -965,7 +961,7 @@ lines.render()
 ```
 ![geolines-demo](https://user-images.githubusercontent.com/19553554/40048098-eaa7b3aa-5863-11e8-98cd-dcd8526fe820.gif)
 
-**多例模式**
+**Multiple case mode**
 ```python
 from pyecharts import GeoLines, Style
 
@@ -984,7 +980,7 @@ geolines.render()
 ```
 ![geolines-demo](https://user-images.githubusercontent.com/19553554/35082103-ff1f2aba-fc52-11e7-97b2-edf837db113e.gif)
 
-**单例模式，指定 `legend_selectedmode="single"`**
+**Single selected mode, specified `legend_selectedmode="single"`**
 ```python
 from pyecharts import GeoLines, Style
 
@@ -1000,7 +996,7 @@ style_geo = style.add(
     label_pos="right",
     label_formatter="{b}",
     label_text_color="#eee",
-    legend_selectedmode="single", #指定单例模式
+    legend_selectedmode="single", #set to single selected mode
 )
 geolines = GeoLines("GeoLines 示例", **style.init_style)
 geolines.add("从广州出发", data_guangzhou, **style_geo)
@@ -1008,81 +1004,6 @@ geolines.add("从北京出发", data_beijing, **style_geo)
 geolines.render()
 ```
 ![geolines-demo](https://user-images.githubusercontent.com/19553554/35082105-00885b92-fc53-11e7-8803-adc054037285.gif)
-
-
-
-
-
-
-
-
-
-
-
-
-
-visualMap：visualMap is a type of component for visual encoding, which maps the data to visual channels
-* is_visualmap -> bool  
-    It specifies whether to use the datazoom component.
-
-* visual_range -> list  
-    default -> [0, 100]  
-    pecify the min and max dataValue for the visualMap component.
-
-* visual_text_color -> list  
-    visualMap text color.
-
-* visual_range_text -> list  
-    The label text on both ends, such as ['High', 'Low']
-
-* visual_range_color -> list  
-    default ->  ['#50a3ba', '#eac763', '#d94e5d']  
-    For visual channel color, array is used, like: ['#333', '#78ab23', 'blue'],which means a color ribbon is formed based on the three color stops,and dataValues will be mapped to the ribbon.  
-    Specifically,the dataValue that equals to visualMap.min will be mapped onto '#333',the dataValue that equals to visualMap.max will be mapped onto 'blue',and other dataValues will be piecewisely interpolated to get the final color.
-
-* visual_orient -> str  
-    default -> 'vertical'  
-    How to layout the visualMap component, 'horizontal' or 'vertical'.
-
-* visual_pos -> str/int  
-    default -> 'left'  
-    Distance between visualMap component and the left side of the container.  
-    visual_pos value can be instant pixel value like 20;it can also be percentage value relative to container width like '20%';and it can also be 'left', 'center', or 'right'.
-
-* visual_top -> str/int  
-    default -> 'top'  
-    Distance between visualMap component and the top side of the container.  
-    visual_top value can be instant pixel value like 20;it can also be percentage value relative to container width like '20%';and it can also be 'top', 'middle', or 'bottom'.
-
-* is_calculable -> bool  
-    default -> True  
-    Whether show handles, which can be dragged to adjust "selected range".
-
-HeatMap type
-```python
-geo = Geo("全国主要城市空气质量", "data from pm2.5", title_color="#fff", title_pos="center", width=1200, height=600,
-          background_color='#404a59')
-attr, value = geo.cast(data)
-geo.add("", attr, value, type="heatmap", is_visualmap=True, visual_range=[0, 300], visual_text_color='#fff')
-geo.show_config()
-geo.render()
-```
-![geo-0-1](https://raw.githubusercontent.com/pyecharts/pyecharts/master/images/geo-0-1.gif)
-
-EffectScatter type
-```python
-from pyecharts import Geo
-
-data = [("海门", 9), ("鄂尔多斯", 12), ("招远", 12), ("舟山", 12), ("齐齐哈尔", 14), ("盐城", 15)]
-geo = Geo("全国主要城市空气质量", "data from pm2.5", title_color="#fff", title_pos="center",
-          width=1200, height=600, background_color='#404a59')
-attr, value = geo.cast(data)
-geo.add("", attr, value, type="effectScatter", is_random=True, effect_scale=5)
-geo.show_config()
-geo.render()
-```
-![geo-1](https://raw.githubusercontent.com/pyecharts/pyecharts/master/images/geo-1.gif)
-
 
 ## Graph
 > Graph is a diagram to represent nodes and the links connecting nodes.
@@ -1094,6 +1015,7 @@ add(name, nodes, links, categories=None, is_focusnode=True, is_roam=True, is_rot
 ```
 * name -> str  
     Series name used for displaying in tooltip and filtering with legend,or updaing data and configuration with setOption.
+
 * nodes -> dict  
     Relational nodes data
     * name：Name of data item.     # required！！
@@ -1103,42 +1025,56 @@ add(name, nodes, links, categories=None, is_focusnode=True, is_roam=True, is_rot
     * category：Index of category which the data item belongs to.
     * symbol：Symbol of node of this category.Includes 'circle', 'rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow'
     * symbolSize：symbol size
+
 * links -> dict  
     Relational data between nodes
     * source：name of source node on edge      # required！！
     * target：name of target node on edge      # required！！
     * vaule：value of edge,It can be used in the force layout to map to the length of the edge
+
 * categories -> list  
     Name of category, which is used to correspond with legend and the content of tooltip.
+
 * is_focusnode -> bool  
     defalut -> True  
     Whether to focus/highlight the hover node and it's adjacencies.
+
 * is_roam -> bool/str  
     default -> True  
     Whether to enable mouse zooming and translating.  
     If either zooming or translating is wanted,it can be set to 'scale' or 'move'. Otherwise, set it to be true to enable both.
+
 * is_rotatelabel -> bool  
     default -> False  
     Whether to rotate the label automatically.
-* layout -> str  
+
+* graph_layout -> str  
     Graph layout.  
     default -> 'force'  
     * none：No any layout, use x, y provided in node as the position of node.
     * circular：Adopt circular layout, see the example Les Miserables.
     * force：Adopt force-directed layout, see the example Force,the detail about configrations of layout are in graph.force
-* edge_length -> int  
+
+* graph_edge_length -> int  
     default -> 50  
-    The distance between 2 nodes on edge. This distance is also affected by repulsion.  
-    It can be an array to represent the range of edge length.In this case edge with larger value will be shorter, which means two nodes are closer. And edge with smaller value will be longer.
-* gravity -> int/float  
+    The distance between 2 nodes on edge. This distance is also affected by `repulsion`.  
+    It can be an array to represent the range of edge length. In this case, edge with larger value will be shorter, which means two nodes are closer. And edge with smaller value will be longer.
+
+* graph_gravity -> int/float  
     default -> 0.2  
     The gravity factor enforcing nodes approach to the center.The nodes will be closer to the center as the value becomes larger.
-* repulsion -> int  
-    default -> 50  
-    The repulsion factor between nodes. The repulsion will be stronger and the distance between 2 nodes becomes further as this value becomes larger.
-    It can be an array to represent the range of repulsion.  
-    In this case larger value have larger repulsion and smaller value will have smaller repulsion.
 
+* graph_repulsion -> int  
+    default -> 50  
+    The repulsion factor between nodes. The repulsion will be stronger and the distance between 2 nodes becomes further as this value becomes larger.  
+    It can be an array to represent the range of repulsion.  
+    In this case, larger value have larger repulsion and smaller value will have smaller repulsion.
+
+* graph_edge_symbol -> str/list
+    The symbol type at both ends of the edge. It can be an array specifying the two ends, or a single unified designation. Symbols are not displayed by default, and common option can be set to arrows, as follows: edgeSymbol: ['circle', 'arrow']
+
+* graph_edge_symbolsize -> int/list
+    The size of the symbol at both ends of the edge. It can be an array to specify the two ends, or a single unified designation.
 ```python
 from pyecharts import Graph
 
@@ -1186,47 +1122,67 @@ graph.render()
 ```
 ![graph-2](https://user-images.githubusercontent.com/19553554/35081908-bb313aba-fc51-11e7-8ef5-df20be445d72.gif)
 
-**Tip：** **lineStyle** parameter is configurable
+**Note：** **lineStyle** parameter is configurable
 
+## HeatMap type  
+> The heat map mainly uses color to represent the size of the value and must be used with the visualMap component. Two category axes must be used on a Cartesian coordinate system.
 
-## HeatMap
-> Heat map mainly use colors to represent values, which must be used along with visualMap component.
-> It can be used in either rectangular coordinate or geographic coordinate.But the behaviour on them are quite different. Rectangular coordinate must have two catagories to use it.
-
-HeatMap.add() signatures
+HeatMap.add() method signature
 ```python
-add(name, x_axis, y_axis, data, **kwargs)
+Add(*args, **kwargs)
 ```
+If `is_calendar_heatmap` is specified (use the calendar heat map) is True, the parameter is
 * name -> str  
-    Series name used for displaying in tooltip and filtering with legend,or updaing data and configuration with setOption.
-* x_axis -> str  
-    data of xAxis, it must be catagory axis.
-* y_axis -> str  
-    data of yAxis, it must be catagory axis.
-* data -> [[],[]]  
-    data array of series, it is represented by a two-dimension array
-* is_date_heatmap -> bool  
-    default -> False
-    Whether it is a date heatmap
-* date_range -> str/list  
-    date range of date heatmap, "2016" is year 2016, ["2016-5-5", "2017-5-5"] is 2016/5/5-2017/5/5  
+    chart name
 
+* data -> [list]  
+    Data item, in the data, each row is a "data item", and each column belongs is a "dimension"
+
+* calendar_date_range -> str/list  
+    The date of the calendar heat map, "2016" means 2016, ["2016-5-5", "2017-5-5"] means May 5, 2016 to May 5, 2017
+
+* calendar_cell_size -> list  
+    The size of each calendar frame could be set to a single value or an array. The first element is wide. The second element is high. Support to set the adaptive "auto". Default is ["auto", 20]
+
+Default is not specified, the parameter is
+* name -> str  
+    chart name
+
+* x_axis -> str  
+    x axis data. Need to be the category axis, that is, it cannot be a numeric value.
+
+* y_axis -> str  
+    y axis data. Need to be the category axis, that is, it cannot be a numeric value.
+
+* data -> [list]   
+    Data item, in the data, each row is a "data item", and each column belongs to a "dimension"
+
+**By default, not specified `is_calendar_heatmap`**
 ```python
 import random
 from pyecharts import HeatMap
 
-x_axis = ["12a", "1a", "2a", "3a", "4a", "5a", "6a", "7a", "8a", "9a", "10a", "11a",
-          "12p", "1p", "2p", "3p", "4p", "5p", "6p", "7p", "8p", "9p", "10p", "11p"]
-y_aixs = ["Saturday", "Friday", "Thursday", "Wednesday", "Tuesday", "Monday", "Sunday"]
+x_axis = [
+    "12a", "1a", "2a", "3a", "4a", "5a", "6a", "7a", "8a", "9a", "10a", "11a",
+    "12p", "1p", "2p", "3p", "4p", "5p", "6p", "7p", "8p", "9p", "10p", "11p"]
+y_axis = [
+    "Saturday", "Friday", "Thursday", "Wednesday", "Tuesday", "Monday", "Sunday"]
 data = [[i, j, random.randint(0, 50)] for i in range(24) for j in range(7)]
 heatmap = HeatMap()
-heatmap.add("热力图直角坐标系", x_axis, y_aixs, data, is_visualmap=True,
-            visual_text_color="#000", visual_orient='horizontal')
-heatmap.show_config()
+heatmap.add(
+    "热力图直角坐标系",
+    x_axis,
+    y_axis,
+    data,
+    is_visualmap=True,
+    visual_text_color="#000",
+    visual_orient="horizontal",
+)
 heatmap.render()
 ```
-![heatmap-0](https://user-images.githubusercontent.com/19553554/35090544-f306fcb8-fc74-11e7-8b0a-0284632c3c4d.gif)
+![heatmap-demo](https://user-images.githubusercontent.com/19553554/35090544-f306fcb8-fc74-11e7-8b0a-0284632c3c4d.gif)
 
+**Use the calendar heat map to specify `is_calendar_heatmap` is True**
 ```python
 import datetime
 import random
@@ -1234,20 +1190,34 @@ from pyecharts import HeatMap
 
 begin = datetime.date(2017, 1, 1)
 end = datetime.date(2017, 12, 31)
-data = [[str(begin + datetime.timedelta(days=i)),
-        random.randint(0, 100)] for i in range((end - begin).days+1)]
-heatmap = HeatMap("日历热力图示例")
-heatmap.add("日历热力图", data, date_range=["2017"], is_visualmap=True,
-            is_legend_show=False, is_date_heatmap=True, visual_orient="horizontal",
-            visual_pos="center", visual_top="top")
+data = [
+    [str(begin + datetime.timedelta(days=i)), random.randint(1000, 25000)]
+    for i in range((end - begin).days + 1)
+]
+heatmap = HeatMap("日历热力图示例", "某人 2017 年微信步数情况", width=1100)
+heatmap.add(
+    "",
+    data,
+    is_calendar_heatmap=True,
+    visual_text_color="#000",
+    visual_range_text=["", ""],
+    visual_range=[1000, 25000],
+    calendar_cell_size=["auto", 30],
+    is_visualmap=True,
+    calendar_date_range="2017",
+    visual_orient="horizontal",
+    visual_pos="center",
+    visual_top="80%",
+    is_piecewise=True,
+)
 heatmap.render()
 ```
-![heatmap-1](https://user-images.githubusercontent.com/19553554/35090548-f51dfe0c-fc74-11e7-8a97-012fec231b85.gif)
+![heatmap-demo](https://user-images.githubusercontent.com/19553554/35090548-f51dfe0c-fc74-11e7-8a97-012fec231b85.gif)
 
-**Tip：** Thermodynamic chart have to cooperate with VisualMap in use.
+**Note：** The heat map must be used with VisualMap in the common configuration item.
 
 
-## Kline
+## Kline/Candlestick
 > Kline chart use red to imply increasing with red and decreasing with blue
 
 Kline.add() signatures
@@ -1256,11 +1226,14 @@ add(name, x_axis, y_axis, **kwargs)
 ```
 * name -> str  
     Series name used for displaying in tooltip and filtering with legend,or updaing data and configuration with setOption.
+
 * x_axis -> list  
     data of xAxis
+
 * y_axis -> [[], []]  
     data pf yAxis.Data should be the two-dimensional array shown as follow.  
     Every data item (each line in the example above) represents a box, which contains 4 values. They are: [open, close, lowest, highest]  (namely: [opening value, closing value, lowest value, highest value])
+
 ```python
 from pyecharts import Kline
 
@@ -1282,24 +1255,52 @@ v1 = [[2320.26, 2320.26, 2287.3, 2362.94], [2300, 2291.3, 2288.26, 2308.38],
       [2255.77, 2270.28, 2253.31, 2276.22]]
 kline = Kline("K 线图示例")
 kline.add("日K", ["2017/7/{}".format(i + 1) for i in range(31)], v1)
-kline.show_config()
 kline.render()
 ```
 ![kline-0](https://user-images.githubusercontent.com/19553554/35090067-9a247694-fc73-11e7-88bb-3b0f019a5e90.png)
 
-Kline + dataZoom
+**Kline + dataZoom**
 ```python
 kline = Kline("K 线图示例")
 kline.add("日K", ["2017/7/{}".format(i + 1) for i in range(31)], v1, mark_point=["max"], is_datazoom_show=True)
-kline.show_config()
 kline.render()
 ```
 ![kline-1](https://user-images.githubusercontent.com/19553554/35090072-9b6ca404-fc73-11e7-8abe-e5576d35c57a.gif)
 
+**dataZoom effect is added to the ordinate axis**
+```python
+kline = Kline("K 线图示例")
+kline.add(
+    "日K",
+    ["2017/7/{}".format(i + 1) for i in range(31)],
+    v1,
+    mark_point=["max"],
+    is_datazoom_show=True,
+    datazoom_orient="vertical",
+)
+kline.render()
+```
+![kline-demo](https://user-images.githubusercontent.com/19553554/35090075-9d14041e-fc73-11e7-8b89-437ee75a9296.gif)
+
+**Specify markLine to be on the open or close**
+```python
+kline = Kline("K 线图示例")
+kline.add(
+    "日K",
+    ["2017/7/{}".format(i + 1) for i in range(31)],
+    v1,
+    mark_line=["max"],
+    mark_line_symbolsize=0,
+    datazoom_orient="vertical",
+    mark_line_valuedim="close",
+)
+kline.render()
+```
+![kline-demo](https://user-images.githubusercontent.com/19553554/35090078-9e901a44-fc73-11e7-835c-3408cc960bac.png)
 
 ## Line
 > Broken line chart relates all the data points symbol by broken lines,
-> which is used to show the trend of data changing.It could be used in both rectangular coordinate and polar coordinate.
+> which is used to show the trend of data changing. It could be used in both rectangular coordinate and polar coordinate.
 
 Line.add() signatures
 ```python
@@ -1308,22 +1309,29 @@ add(name, x_axis, y_axis, is_symbol_show=True, is_smooth=False, is_stack=False,
 ```
 * name -> str  
     Series name used for displaying in tooltip and filtering with legend,or updaing data and configuration with setOption.
+
 * x_axis -> list  
     data of xAxis
+
 * y_axis -> list  
     data of yAxis
+
 * is_symbol_show -> bool  
     default -> True  
     It specifies whether to show the symbol.
+
 * is_smooth -> bool
     default -> False
     Whether to show as smooth curve.
+
 * is_stack -> bool  
     default -> Flase  
     It specifies whether to stack category axis.
+
 * is_step -> bool/str  
     default -> False  
     Whether to show as a step line.It can be true, false. Or 'start', 'middle', 'end'.Which will configure the turn point of step line.
+
 * is_fill -> bool  
     default -> False  
     Whether to fill area.
@@ -1342,28 +1350,13 @@ line.render()
 ```
 ![line-0](https://user-images.githubusercontent.com/19553554/35089953-4865fe2c-fc73-11e7-8c47-e917332d061c.gif)
 
-* mark_point -> list  
-    mark point data, it can be 'min', 'max', 'average'
-* mark_line  -> list  
-    mark line data, it can be 'min', 'max', 'average'
-* mark_point_symbol -> str  
-    default -> 'pin'  
-    mark symbol, it cna be 'circle', 'rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow'
-* mark_point_symbolsize -> int  
-    default -> 50  
-    mark symbol size
-* mark_point_textcolor -> str  
-    default -> '#fff'  
-    mark point text color
-
-Other Configurations Of Marker Point
+**Other Configurations Of Marker Point**
 ```python
 line = Line("折线图示例")
 line.add("商家A", attr, v1, mark_point=["average", "max", "min"],
          mark_point_symbol='diamond', mark_point_textcolor='#40ff27')
 line.add("商家B", attr, v2, mark_point=["average", "max", "min"],
          mark_point_symbol='arrow', mark_point_symbolsize=40)
-line.show_config()
 line.render()
 ```
 ![line-0-1](https://user-images.githubusercontent.com/19553554/35089954-49784dd8-fc73-11e7-8a5b-d9163857c4b1.png)
@@ -1396,11 +1389,52 @@ line.render()
 
 * area_opacity -> float  
     Opacity of the component. Supports value from 0 to 1, and the component will not be drawn when set to 0.
+
 * area_color -> str  
     Fill color.
 
-**Tip：** **lineStyle** Parameter is Configurable
-**Tip：** Setting line colour by label_color,like ['#eee', '#000'],all type of chart can revise label colour by label_color.
+**Note：** **lineStyle** Parameter is Configurable
+**Note：** Setting line color by `label_color`, like ['#eee', '#000'], all type of chart can revise label color by `label_color`.
+
+**If it is logarithmic data, we recommended to use the ```yaxis_type``` parameter to set the y coordinate axis to logarithmic axis.**
+```python
+import math, random
+line = Line("折线图示例")
+line.add("商家A", attr, [math.log10(random.randint(1, 99999)) for _ in range(6)])
+line.add(
+    "商家B",
+    attr,
+    [math.log10(random.randint(1, 99999999)) for _ in range(6)],
+    yaxis_type="log",
+)
+line.render()
+```
+![line-demo](https://user-images.githubusercontent.com/19553554/35089976-5473125e-fc73-11e7-809c-adbfe6834b61.png)
+
+**The lowest and highest temperature line chart of certain place**
+```python
+from pyecharts import Line
+
+attr = ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+line = Line("折线图示例")
+line.add(
+    "最高气温",
+    attr,
+    [11, 11, 15, 13, 12, 13, 10],
+    mark_point=["max", "min"],
+    mark_line=["average"],
+)
+line.add(
+    "最低气温",
+    attr,
+    [1, -2, 2, 5, 3, 2, 0],
+    mark_point=["max", "min"],
+    mark_line=["average"],
+    yaxis_formatter="°C",
+)
+line.render()
+```
+![line-demo](https://user-images.githubusercontent.com/19553554/35089980-5649aed0-fc73-11e7-9e8f-01ed75ad7418.gif)
 
 
 ## Line3D
@@ -1410,13 +1444,15 @@ add(name, data, grid3D_opacity=1, **kwargs)
 ```
 * name -> str
     Series name used for displaying in tooltip and filtering with legend,or updaing data and configuration with setOption.
+
 * data -> [[], []]  
     data of line3D
+
 * grid3D_opacity -> float  
     default -> 1  
     opacity of gird3D item
 
-draw a spring
+**Draw a spring**
 ```python
 from pyecharts import Line3D
 
@@ -1437,8 +1473,7 @@ line3d.render()
 ```
 ![line3d-0](https://user-images.githubusercontent.com/19553554/35081902-b0bed8c6-fc51-11e7-9b3a-1d138c4eba13.gif)
 
-
-rotating spring
+**rotating spring**
 ```python
 from pyecharts import Line3D
 
@@ -1459,7 +1494,9 @@ line3d.render()
 ```
 ![line3d-1](https://user-images.githubusercontent.com/19553554/35081903-b3a4eada-fc51-11e7-97b1-33f1dd6ed79e.gif)
 
-**Tip：** more details aboutt gird3D，please refer to [Global-options](https://github.com/chenjiandongx/pyecharts/blob/master/document/en-us/documentation.md#Global-options)
+**Note：** more details aboutt gird3D，please refer to [Chart Configuration](en-us/charts_configure)
+**Note：** Can be used with axis3D common configuration items
+
 
 ## Liquid
 > Liquid chart is usually used to represent data in percentage.
@@ -1471,19 +1508,24 @@ add(name, data, shape='circle', liquid_color=None, is_liquid_animation=True,
 ```
 * name -> str  
     Series name used for displaying in tooltip and filtering with legend,or updaing data and configuration with setOption.
+
 * data -> list  
     data of liquid,[0.6, 0.5, 0.4, 0.3] -> This creates a chart wit waves at position of 60%, 50%, 40%, and 30%.
+
 * shape -> str  
     Shape of water fill chart.It can be one of the default symbols: 'circle', 'rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow'
+
 * liquid_color -> list  
     default -> ['#294D99', '#156ACF', '#1598ED', '#45BDFF']  
     To set colors for liquid fill chart series, set color to be an array of colors.
+
 * is_liquid_animation -> bool  
     default -> True  
     Whether disable animation.
+
 * is_liquid_outline_show -> bool  
     default -> True  
-    whether hide the outline
+    whether show the outline
 
 ```python
 from pyecharts import Liquid
@@ -1515,8 +1557,36 @@ liquid.render()
 ```
 ![liquid-2](https://user-images.githubusercontent.com/19553554/35082178-567d2db6-fc53-11e7-965a-d60e72ab6bf4.png)
 
+**Custom SVG route**
+```python
+from pyecharts import Liquid
+
+shape = ("path://M367.855,428.202c-3.674-1.385-7.452-1.966-11.146-1"
+         ".794c0.659-2.922,0.844-5.85,0.58-8.719 c-0.937-10.407-7."
+         "663-19.864-18.063-23.834c-10.697-4.043-22.298-1.168-29.9"
+         "02,6.403c3.015,0.026,6.074,0.594,9.035,1.728 c13.626,5."
+         "151,20.465,20.379,15.32,34.004c-1.905,5.02-5.177,9.115-9"
+         ".22,12.05c-6.951,4.992-16.19,6.536-24.777,3.271 c-13.625"
+         "-5.137-20.471-20.371-15.32-34.004c0.673-1.768,1.523-3.423"
+         ",2.526-4.992h-0.014c0,0,0,0,0,0.014 c4.386-6.853,8.145-14"
+         ".279,11.146-22.187c23.294-61.505-7.689-130.278-69.215-153"
+         ".579c-61.532-23.293-130.279,7.69-153.579,69.202 c-6.371,"
+         "16.785-8.679,34.097-7.426,50.901c0.026,0.554,0.079,1.121,"
+         "0.132,1.688c4.973,57.107,41.767,109.148,98.945,130.793 c58."
+         "162,22.008,121.303,6.529,162.839-34.465c7.103-6.893,17.826"
+         "-9.444,27.679-5.719c11.858,4.491,18.565,16.6,16.719,28.643 "
+         "c4.438-3.126,8.033-7.564,10.117-13.045C389.751,449.992,"
+         "382.411,433.709,367.855,428.202z")
+liquid = Liquid("水球图示例", width=1000, height=600)
+liquid.add("Liquid", [0.6, 0.5, 0.4, 0.3],
+           shape=shape, is_liquid_outline_show=False)
+liquid.render()
+```
+![liquid-demo](https://user-images.githubusercontent.com/19553554/35082181-5863dfda-fc53-11e7-9807-507ac5639638.gif)
+
+
 ## Map
-> Map is maily used in the visulization of geographic area data,which can be used with visualMap component to visualize the datas such as population distribution density in diffrent areas.
+> Map is maily used in the visulization of geographic area data, which can be used with visualMap component to visualize the datas such as population distribution density in diffrent areas.
 
 Map.add() signatures
 ```python
@@ -1524,15 +1594,30 @@ add(name, attr, value, is_roam=True, maptype='china', **kwargs)
 ```
 * name -> str  
     Series name used for displaying in tooltip and filtering with legend,or updaing data and configuration with setOption.
+
 * attr -> list  
     name of attribute
+
 * value -> list  
     value of attribute
+
+* maptype -> str  
+   type of map, it supports chinese geographical names, such as "安徽, 澳门, 北京, 重庆, 福建, 福建, 甘肃, 广东，广西, 广州, 海南, 河北, 黑龙江, 河南, 湖北, 湖南, 江苏, 江西, 吉林, 辽宁, 内蒙古, 宁夏, 青海, 山东, 上海, 陕西, 四川, 台湾, 天津, 香港, 新疆, 西藏, 云南, 浙江" and [363 provincial cities](https://github.com/chfw/echarts-china-cities-js#featuring-citiesor-for-single-download).
+
 * is_roam -> bool/str  
     default -> True  
     Whether to enable mouse zooming and translating.If either zooming or translating is wanted,it can be set to 'scale' or 'move'. Otherwise, set it to be true to enable both.
-* maptype -> str  
-   type of map, it supports chinese geographical names, such as "安徽, 澳门, 北京, 重庆, 福建, 福建, 甘肃, 广东，广西, 广州, 海南, 河北, 黑龙江, 河南, 湖北, 湖南, 江苏, 江西, 吉林, 辽宁, 内蒙古, 宁夏, 青海, 山东, 上海, 陕西, 四川, 台湾, 天津, 香港, 新疆, 西藏, 云南, 浙江" and [363 provincial cities](https://github.com/chfw/echarts-china-cities-js#featuring-citiesor-for-single-download).
+
+* is_map_symbol_show -> bool    
+    Whether to display the map marker red dot, default is True.
+
+* name_map -> dict  
+    [Use a custom map name](http://echarts.baidu.com/option.html#series-map.nameMap). Some maps provide administrative area codes, and `name_map` can help convert them to user-friendly place names. For example, the British constituency map, the administrative area code of the London constituency is E14000639, and converting it into a readable place name requires such a dictionary:  
+    ```
+    name_map = {"E14000639": "Cities of London and Westminster"}
+    ```
+
+    By analogy, to convert all the names of the UK constituencies, you need a [larger dictionary](https://github.com/chfw/echarts-united-kingdom-pypkg/blob/master/echarts_united_kingdom_pypkg/constants.py#L1)
 
 ```python
 from pyecharts import Map
@@ -1546,6 +1631,18 @@ map.render()
 ```
 ![map-0](https://user-images.githubusercontent.com/19553554/35082377-718385f0-fc54-11e7-88c2-bd1df8bf112b.gif)
 
+**Show each area name**
+```python
+from pyecharts import Map
+
+value = [155, 10, 66, 78]
+attr = ["福建", "山东", "北京", "上海"]
+map = Map("全国地图示例", width=1200, height=600)
+map.add("", attr, value, maptype='china', is_label_show=True)
+map.render()
+```
+![map-demo](https://user-images.githubusercontent.com/19553554/35082379-7463a0f2-fc54-11e7-9bee-d71e8ec3acc8.png)
+
 ```python
 from pyecharts import Map
 
@@ -1558,7 +1655,7 @@ map.render()
 ```
 ![map-1](https://user-images.githubusercontent.com/19553554/35082380-75e1b89c-fc54-11e7-8169-75884ffb67fb.gif)
 
-**Tip：** Settings can combine with visualMap component.
+**Note：** Settings can combine with visualMap component.
 
 ```python
 from pyecharts import Map
@@ -1572,14 +1669,88 @@ map.render()
 ```
 ![map-2](https://user-images.githubusercontent.com/19553554/35082381-786c8542-fc54-11e7-8886-5e4047fbeefd.gif)
 
-### About Customized Map
-Because map contain large area,this program can't cover all the map,but don't worry about it.Echarts officially provide your own custom map [echart-map](http://echarts.baidu.com/download-map.html),this function allow you make map that you need,just download in JS file form.
+```python
+value = [95.1, 23.2, 43.3, 66.4, 88.5]
+attr= ["China", "Canada", "Brazil", "Russia", "United States"]
+map = Map("世界地图示例", width=1200, height=600)
+map.add(
+    "",
+    attr,
+    value,
+    maptype="world",
+    is_visualmap=True,
+    visual_text_color="#000",
+)
+map.render()
+```
+![map-demo](https://user-images.githubusercontent.com/19553554/35082382-7a37df3e-fc54-11e7-93e8-f9c02e465a2f.gif)
 
-open file pyecharts/temple.py under the installation directory,add the same line under the corresponding of  _temple variable.
- ```<script type="text/javascript " src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>```
-correspond under Jupyter Notebook add the same lineunder _mapindex variable.
-```"北京": "beijing: '//oog4yfyu0.bkt.clouddn.com/beijing'"```
-Then use customized map in the program!The way import Js decide by yourself，only if it can be found by the program!
+
+**Set `is_map_symbol_show=False` to cancel display symbol red point**
+```python
+value = [95.1, 23.2, 43.3, 66.4, 88.5]
+attr= ["China", "Canada", "Brazil", "Russia", "United States"]
+map = Map("世界地图示例", width=1200, height=600)
+map.add(
+    "",
+    attr,
+    value,
+    maptype="world",
+    is_visualmap=True,
+    visual_text_color="#000",
+    is_map_symbol_show=False,
+)
+map.render()
+```
+![map-demo](https://user-images.githubusercontent.com/19553554/35082387-7d35893e-fc54-11e7-8482-60dc23d31836.png)
+
+**Set `name_map` to use custom map name**
+Original version ： 
+![map-demo](https://user-images.githubusercontent.com/4280312/36720467-16fb0a66-1ba0-11e8-8cbd-453d8f2462d3.png)
+    
+After `name_map` changed ： 
+
+```python
+#coding=utf-8
+from __future__ import unicode_literals
+
+from pyecharts import Map
+from echarts_united_kingdom_pypkg import NM_WESTMINSTER_2016_UK
+
+value = []
+attr = []
+map = Map('United Kingdom', width=800, height=600)
+map.add(
+    "",
+    attr,
+    value,
+    maptype="英国选区2016",
+    is_visualmap=True,
+    visual_text_color="#000",
+    name_map=NM_WESTMINSTER_2016_UK,
+)
+map.render()
+```
+![map-demo](https://user-images.githubusercontent.com/4280312/36720626-803ff194-1ba0-11e8-998b-548afbedc18e.png)
+
+This is convenient for drawing, because many data and area numbers are directly linked, and it is also easy to localize.
+
+Set the `pieces` custom visualMap component tag
+```python
+value = [155, 10, 66, 78]
+attr = ["福建", "山东", "北京", "上海"]
+map = Map("全国地图示例", width=1200, height=600)
+map.add("", attr, value, maptype='china',
+        is_visualmap=True, is_piecewise=True,
+        visual_text_color="#000",
+        visual_range_text=["", ""],
+        pieces=[
+            {"max": 160, "min": 70, "label": "高数值"},
+            {"max": 69, "min": 0, "label": "低数值"},
+        ])
+map.render()
+```
+![map-demo](https://user-images.githubusercontent.com/19553554/36943053-22748c70-1fbd-11e8-86dc-ac3d48f5c4e3.png)
 
 
 ## Parallel
@@ -1591,33 +1762,46 @@ add(name, data, **kwargs)
 ```
 * name -> str  
     Series name used for displaying in tooltip and filtering with legend,or updaing data and configuration with setOption.
+
 * data -> [[],[]]  
     data array of series, it is represented by a two-dimension array.
 
-Parallel.config() signatures
+Parallel.set_schema() / Parallel.config() method signatures  
 ```python
+set_schema(schema=None, c_schema=None)
 config(schema=None, c_schema=None)
 ```
+
+> Since v0.5.9, the original `config` method was deprecated and the set_schema method is recommended.
+
 * schema  
     Dimension index of coordinate axis.  
     a axis name list, like ['apple', 'orange', 'watermelon']
+
 * c_schema  
     User customize coordinate axis for parallel coordinate.
+    
     * dim -> int  
         Dimension index of coordinate axis.
+    
     * name > str  
         Name of axis.
+    
     * type -> str  
         Type of axis  
         value：Numerical axis, suitable for continuous data.  
         category：Category axis, suitable for discrete category data.Data should only be set via data for this type.
+    
     * min -> int  
         The minimun value of axis.
+    
     * max -> int  
         The maximum value of axis.
+    
     * inverse - bool  
         default -> False  
         Whether axis is inversed.
+    
     * nameLocation -> str  
         Location of axis name. it can be 'start', 'middle', 'end'.
 
@@ -1641,7 +1825,6 @@ data = [
 parallel = Parallel("平行坐标系-默认指示器")
 parallel.config(schema)
 parallel.add("parallel", data, is_random=True)
-parallel.show_config()
 parallel.render()
 ```
 ![parallel-0](https://user-images.githubusercontent.com/19553554/35090275-17c3dcde-fc74-11e7-94d6-e497668dba0c.png)
@@ -1679,12 +1862,11 @@ data = [
 parallel = Parallel("平行坐标系-用户自定义指示器")
 parallel.config(c_schema=c_schema)
 parallel.add("parallel", data)
-parallel.show_config()
 parallel.render()
 ```
 ![parallel-1](https://user-images.githubusercontent.com/19553554/35090278-19ac1674-fc74-11e7-9aa1-2662296d3e22.png)
 
-**Tip：** **lineStyle** Parameter is Configurable
+**Note：** **lineStyle** Parameter is Configurable
 
 
 ## Pie
@@ -1695,19 +1877,23 @@ Pie.add() signatures
 add(name, attr, value, radius=None, center=None, rosetype=None, **kwargs)
 ```
 * name -> str  
-    Series name used for displaying in tooltip and filtering with legend,or updaing data and configuration with setOption.
+    Series name used for displaying in tooltip and filtering with legend, or updaing data and configuration with setOption.
+
 * attr -> list  
     name of attribute
 * value -> list  
     value of attribute
+
 * radius -> list  
     default -> [0, 75]  
     Radius of Pie chart, the first of which is inner radius, and the second is outer radius.  
-    Percentage is supported. When set in percentage,it's relative to the smaller size between height and width of the container.
+    Percentage is supported. When set in percentage, it's relative to the smaller size between height and width of the container.
+
 * center -> list
     default -> [50, 50]  
     Center position of Pie chart, the first of which is the horizontal position,and the second is the vertical position.  
-    Percentage is supported. When set in percentage, the item is relative to the container width,and the second item to the height.
+    Percentage is supported. When set in percentage, the item is relative to the container width, and the second item to the height.
+
 * rosetype -> str  
     default -> 'radius'  
     Whether to show as Nightingale chart, which distinguishs data through radius. There are 2 optional modes:
@@ -1721,7 +1907,6 @@ attr = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
 v1 = [11, 12, 13, 10, 10, 10]
 pie = Pie("饼图示例")
 pie.add("", attr, v1, is_label_show=True)
-pie.show_config()
 pie.render()
 ```
 ![pie-0](https://user-images.githubusercontent.com/19553554/35089599-5eed1ef6-fc72-11e7-8740-601880be9e16.gif)
@@ -1734,7 +1919,6 @@ v1 = [11, 12, 13, 10, 10, 10]
 pie = Pie("饼图-圆环图示例", title_pos='center')
 pie.add("", attr, v1, radius=[40, 75], label_text_color=None, is_label_show=True,
         legend_orient='vertical', legend_pos='left')
-pie.show_config()
 pie.render()
 ```
 ![pie-1](https://user-images.githubusercontent.com/19553554/35089631-70b6e7de-fc72-11e7-838d-f8b238bbc03f.png)
@@ -1754,6 +1938,101 @@ pie.render()
 ```
 ![pie-2](https://user-images.githubusercontent.com/19553554/35089635-72585da2-fc72-11e7-835d-c9b64750d19d.png)
 
+**Pie in Pie**
+```python
+import random
+from pyecharts import Pie
+
+attr = ['A', 'B', 'C', 'D', 'E', 'F']
+pie = Pie("饼图示例", width=1000, height=600)
+pie.add(
+    "",
+    attr,
+    [random.randint(0, 100) for _ in range(6)],
+    radius=[50, 55],
+    center=[25, 50],
+    is_random=True,
+)
+pie.add(
+    "",
+    attr,
+    [random.randint(20, 100) for _ in range(6)],
+    radius=[0, 45],
+    center=[25, 50],
+    rosetype="area",
+)
+pie.add(
+    "",
+    attr,
+    [random.randint(0, 100) for _ in range(6)],
+    radius=[50, 55],
+    center=[65, 50],
+    is_random=True,
+)
+pie.add(
+    "",
+    attr,
+    [random.randint(20, 100) for _ in range(6)],
+    radius=[0, 45],
+    center=[65, 50],
+    rosetype="radius",
+)
+pie.render()
+```
+![pie-demo](https://user-images.githubusercontent.com/19553554/35089639-73f0e2c4-fc72-11e7-9fba-84376a94314c.gif)
+
+**Multiple pie drawings in one chart**
+```python
+from pyecharts import Pie
+
+pie = Pie('各类电影中"好片"所占的比例', "数据来着豆瓣", title_pos='center')
+style = Style()
+pie_style = style.add(
+    label_pos="center",
+    is_label_show=True,
+    label_text_color=None
+)
+
+pie.add(
+    "", ["剧情", ""], [25, 75], center=[10, 30], radius=[18, 24], **pie_style
+)
+pie.add(
+    "", ["奇幻", ""], [24, 76], center=[30, 30], radius=[18, 24], **pie_style
+)
+pie.add(
+    "", ["爱情", ""], [14, 86], center=[50, 30], radius=[18, 24], **pie_style
+)
+pie.add(
+    "", ["惊悚", ""], [11, 89], center=[70, 30], radius=[18, 24], **pie_style
+)
+pie.add(
+    "", ["冒险", ""], [27, 73], center=[90, 30], radius=[18, 24], **pie_style
+)
+pie.add(
+    "", ["动作", ""], [15, 85], center=[10, 70], radius=[18, 24], **pie_style
+)
+pie.add(
+    "", ["喜剧", ""], [54, 46], center=[30, 70], radius=[18, 24], **pie_style
+)
+pie.add(
+    "", ["科幻", ""], [26, 74], center=[50, 70], radius=[18, 24], **pie_style
+)
+pie.add(
+    "", ["悬疑", ""], [25, 75], center=[70, 70], radius=[18, 24], **pie_style
+)
+pie.add(
+    "",
+    ["犯罪", ""],
+    [28, 72],
+    center=[90, 70],
+    radius=[18, 24],
+    legend_top="center",
+    **pie_style
+)
+pie.render()
+```
+![pie-demo](https://user-images.githubusercontent.com/19553554/35089644-76cbcb9e-fc72-11e7-8b9e-d5bebc78e8a1.gif)
+
 
 ## Polar
 > Polar coordinate can be used in scatter and line chart. Every polar coordinate has an angleAxis and a radiusAxis.
@@ -1765,45 +2044,70 @@ add(name, data, angle_data=None, radius_data=None, type='line', symbol_size=4, s
 ```
 * name -> str  
     Series name used for displaying in tooltip and filtering with legend,or updaing data and configuration with setOption.
+
 * data -> [[],[]]  
     data of polar, [Polar radius, Polar angle,it is represented by a two-dimension array.
+
 * angle_data -> list  
     Category data for angle, available in type: 'category' axis.
+
 * radius_data -> list  
     Category data for radius, available in type: 'category' axis.
+
 * type -> str  
     default -> 'line'  
     chart type，it can be 'scatter', 'effectScatter', 'barAngle', 'barRadius'
+
 * symbol_size -> int  
     default -> 4  
     symbol size
+
 * start_angle -> int  
     default -> 90  
     Starting angle of axis.standing for top position of center.0 degree stands for right position of center.
+
 * rotate_step -> int  
     default -> 0  
     Rotation degree of axis label, which is especially useful when there is no enough space for category axis.
     Rotation degree is from -90 to 90.
+
 * boundary_gap -> bool  
     default -> True  
     The boundary gap on both sides of a coordinate axis.  
     The setting and behavior of category axes and non-category axes are different.  
     The boundaryGap of category axis can be set to either true or false.  
     Default value is set to be true, in which case axisTick is served only as a separation line,and labels and data appear only in the center part of two axis ticks, which is called band.
+
 * clockwise -> bool  
     default -> True  
     Whether the positive position of axis is in clockwise. True for clockwise by default.
+
 * is_stack -> bool  
     It specifies whether to stack category axis.
+
 * axis_range -> list  
     default -> [None, None]  
     axis scale range
+
 * is_angleaxis_show -> bool  
     default -> True  
     whether show angle axis.
+
 * is_radiusaxis_show -> bool  
     default -> True  
     whether show radius axis.
+
+* radiusaxis_z_index -> int
+    Radius axis z-index, default is 50
+
+* angleaxis_z_index -> int
+    Angle axis z-index, default is 50
+
+* is_radiusaxis_show -> bool  
+    Whether to display the radial axis of the polar coordinate system, default is True
+
+* render_item -> function  
+    The developer provides the logic of the graphics rendering. This rendering logic is generally name [render_item](http://echarts.baidu.com/option.html#series-custom.renderItem)，refer to [Advance Topics](en-us/advanced)
 
 ```python
 from pyecharts import Polar
@@ -1813,7 +2117,6 @@ data = [(i, random.randint(1, 100)) for i in range(101)]
 polar = Polar("极坐标系-散点图示例")
 polar.add("", data, boundary_gap=False, type='scatter', is_splitline_show=False,
           area_color=None, is_axisline_show=True)
-polar.show_config()
 polar.render()
 ```
 ![polar-0](https://user-images.githubusercontent.com/19553554/35090448-aaf0d5a2-fc74-11e7-83c4-7b2f55090e98.png)
@@ -1821,15 +2124,18 @@ polar.render()
 * is_splitline_show -> bool  
     default -> True  
     It specifies whether to show split line.
+
 * is_axisline_show -> bool  
     default -> True  
     It specifies whether to show axis line.
+
 * area_opacity -> float  
     Opacity of the component. Supports value from 0 to 1, and the component will not be drawn when set to 0.
+
 * area_color -> str  
     Fill color.
 
-**Tip：** **lineStyle** Parameter is Configurable
+**Note：** **lineStyle** Parameter is Configurable
 
 ```python
 from pyecharts import Polar
@@ -1840,7 +2146,6 @@ data_2 = [(11, random.randint(1, 100)) for i in range(300)]
 polar = Polar("极坐标系-散点图示例", width=1200, height=600)
 polar.add("", data_1, type='scatter')
 polar.add("", data_2, type='scatter')
-polar.show_config()
 polar.render()
 ```
 ![polar-1](https://user-images.githubusercontent.com/19553554/35090451-abf708e0-fc74-11e7-8814-25ba5e72f542.png)
@@ -1852,7 +2157,6 @@ import random
 data = [(i, random.randint(1, 100)) for i in range(10)]
 polar = Polar("极坐标系-动态散点图示例", width=1200, height=600)
 polar.add("", data, type='effectScatter', effect_scale=10, effect_period=5)
-polar.show_config()
 polar.render()
 ```
 ![polar-2](https://user-images.githubusercontent.com/19553554/35090453-ad2b4d52-fc74-11e7-8ecd-cb64546d0d40.gif)
@@ -1865,7 +2169,6 @@ polar = Polar("极坐标系-堆叠柱状图示例", width=1200, height=600)
 polar.add("A", [1, 2, 3, 4, 3, 5, 1], radius_data=radius, type='barRadius', is_stack=True)
 polar.add("B", [2, 4, 6, 1, 2, 3, 1], radius_data=radius, type='barRadius', is_stack=True)
 polar.add("C", [1, 2, 3, 4, 1, 2, 5], radius_data=radius, type='barRadius', is_stack=True)
-polar.show_config()
 polar.render()
 ```
 ![polar-3](https://user-images.githubusercontent.com/19553554/35090457-afc0658e-fc74-11e7-9c58-24c780436287.gif)
@@ -1878,10 +2181,54 @@ polar = Polar("极坐标系-堆叠柱状图示例", width=1200, height=600)
 polar.add("", [1, 2, 3, 4, 3, 5, 1], radius_data=radius, type='barAngle', is_stack=True)
 polar.add("", [2, 4, 6, 1, 2, 3, 1], radius_data=radius, type='barAngle', is_stack=True)
 polar.add("", [1, 2, 3, 4, 1, 2, 5], radius_data=radius, type='barAngle', is_stack=True)
-polar.show_config()
 polar.render()
 ```
 ![polar-4](https://user-images.githubusercontent.com/19553554/35090460-b11ab380-fc74-11e7-836c-2e8197e32723.png)
+
+
+**Custom rendering logic example**
+```python
+from pyecharts import Polar
+
+def render_item(params, api):
+    values = [api.value(0), api.value(1)]
+    coord = api.coord(values)
+    size = api.size([1, 1], values)
+    return {
+        "type": "sector",
+        "shape": {
+            "cx": params.coordSys.cx,
+            "cy": params.coordSys.cy,
+            "r0": coord[2] - size[0] / 2,
+            "r": coord[2] + size[0] / 2,
+            "startAngle": coord[3] - size[1] / 2,
+            "endAngle": coord[3] + size[1] / 2,
+        },
+        "style": api.style({"fill": api.visual("color")}),
+    }
+
+polar = Polar("自定义渲染逻辑示例", width=1200, height=600)
+polar.add(
+    "",
+    [
+        [
+            random.randint(0, 6),
+            random.randint(1, 24),
+            random.randint(1, 24),
+        ]
+        for _ in range(100)
+    ],
+    render_item=render_item,
+    type="custom",
+    angle_data=X_TIME,
+    radius_data=WEEK,
+    is_visualmap=True,
+    visual_range=[0, 30]
+)
+polar.render()
+```
+![polar-demo](https://user-images.githubusercontent.com/19553554/40104662-820a82ee-5923-11e8-8052-9bd8fcb70623.png)
+
 
 ## Radar
 > Radar chart is mainly used to show multi-variable data,such as the analysis of a football player's varied attributes. It relies radar component.
@@ -1892,27 +2239,49 @@ add(name, value, item_color=None, **kwargs)
 ```
 * name -> list  
     Series name used for displaying in tooltip and filtering with legend,or updaing data and configuration with setOption.
+
 * value -> [[],[]]  
     data array of series, it is represented by a two-dimension array.
+
 * item_color -> str  
     Specify a single legend color
 
-Radar.config() signatures
+Radar.set_radar_component() /Radar.config() signatures
 ```python
-config(schema=None, c_schema=None, shape="", rader_text_color="#000", **kwargs):
+set_radar_component(schema=None,
+    c_schema=None,
+    shape="",
+    rader_text_color="#000", **kwargs):
+	
+config(schema=None,
+    c_schema=None,
+    shape="",
+    rader_text_color="#000", **kwargs):
 ```
-* schema -> list
+
+> As of v0.5.9, the original `config` is deprecated. The `set_radar_component` method is recommended.
+
+* schema -> list  
     The default radar map indicator, used to specify multiple dimensions in the radar map,will process the data into a dictionary of {name: xx, value: xx}
+
 * c_schema -> dict  
     Indicator of radar chart, which is used to assign multiple variables(dimensions) in radar chart.
+    
     * name: Indicator's name.
+    
     * min: The maximum value of indicator. It is an optional configuration, but we recommend to set it manually.
+    
     * max: The maximum value of indicator. It is an optional configuration, but we recommend to set it manually.
+
 * shape -> str  
     Radar render type, in which 'polygon' and 'circle' are supported.
+
 * rader_text_color -> str  
     default -> '#000'  
     Radar chart data item font color
+
+* radar_text_size -> int
+    Radar chart data item font size, default is 12
 
 ```python
 from pyecharts import Radar
@@ -1925,25 +2294,28 @@ radar = Radar()
 radar.config(schema)
 radar.add("预算分配", v1, is_splitline=True, is_axisline_show=True)
 radar.add("实际开销", v2, label_color=["#4e79a7"], is_area_show=False)
-radar.show_config()
 radar.render()
 ```
 ![radar-0](https://user-images.githubusercontent.com/19553554/35082333-20046172-fc54-11e7-944a-b6e25bf5dd2a.gif)
 
 * is_area_show -> bool  
     It specifies whether to show split area.
+
 * area_opacity -> float  
     Opacity of the component. Supports value from 0 to 1, and the component will not be drawn when set to 0.
+
 * area_color -> str  
     Fill color.
+
 * is_splitline_show  -> bool  
     default -> True
     It specifies whether to show split line.
+
 * is_axisline_show -> bool  
     default -> True  
     It specifies whether to show axis line.
 
-**Tip：** **lineStyle** Parameter is Configurable
+**Note：** **lineStyle** Parameter is Configurable
 
 ```python
 value_bj = [
@@ -1990,12 +2362,107 @@ radar = Radar()
 radar.config(c_schema=c_schema, shape='circle')
 radar.add("北京", value_bj, item_color="#f9713c", symbol=None)
 radar.add("上海", value_sh, item_color="#b3e4a1", symbol=None)
-radar.show_config()
 radar.render()
 ```
 ![radar-1](https://user-images.githubusercontent.com/19553554/35082335-224c23ca-fc54-11e7-910a-0914699ac06e.gif)
 
 **Tip：** symblo=None make marked graphic hiden(small circle)
+
+
+**Multiple charts mode**
+```python
+radar = Radar()
+radar.config(c_schema=c_schema, shape='circle')
+radar.add("北京", value_bj, item_color="#f9713c", symbol=None)
+radar.add("上海", value_sh, item_color="#b3e4a1", symbol=None)
+radar.render()
+```
+![radar-demo](https://user-images.githubusercontent.com/19553554/35082343-269d9440-fc54-11e7-9675-4c125bbca75d.gif)
+
+
+## Sankey
+> Sankey is a special flow diagram, which is mainly used to indicate how raw materials, energy, etc. are processed and transformed from the initial form to the final form through the intermediate process.
+
+Sankey.add() signatures
+```python
+add(name, nodes, links,
+    sankey_node_width=20,
+    sankey_node_gap=8, **kwargs)
+```
+* name -> str    
+     chart name
+
+* nodes -> list  
+    桑基图结点，必须包含的数据项有：
+    * name：数据项名称
+    * value：数据项数值
+
+* links -> list  
+    桑基图结点关系
+    * source：边的源节点名称（必须有！）
+    * target：边的目标节点名称（必须有！）
+    * value：边的数值，决定边的宽度。
+
+ * sankey_node_width -> int  
+    图中每个矩形节点的宽度。默认为 20
+ * sankey_node_gap -> int  
+    图中每一列任意两个矩形节点之间的间隔。默认为 8
+
+**简单示例**
+```python
+from pyecharts import Sankey
+
+nodes = [
+    {'name': 'category1'}, {'name': 'category2'}, {'name': 'category3'},
+    {'name': 'category4'}, {'name': 'category5'}, {'name': 'category6'},
+]
+
+links = [
+    {'source': 'category1', 'target': 'category2', 'value': 10},
+    {'source': 'category2', 'target': 'category3', 'value': 15},
+    {'source': 'category3', 'target': 'category4', 'value': 20},
+    {'source': 'category5', 'target': 'category6', 'value': 25}
+]
+sankey = Sankey("桑基图示例", width=1200, height=600)
+sankey.add(
+    "sankey",
+    nodes,
+    links,
+    line_opacity=0.2,
+    line_curve=0.5,
+    line_color="source",
+    is_label_show=True,
+    label_pos="right",
+)
+sankey.render()
+```
+![sankey-demo](https://user-images.githubusercontent.com/19553554/35090344-5b701286-fc74-11e7-8c53-9a5d0e6797e5.png)
+
+**使用官方提供的 json 数据**
+```python
+import os
+import json
+
+from pyecharts import Sankey
+
+with codecs.open(os.path.join("fixtures", "energy.json"), "r", encoding="utf-8") as f:
+    j = json.load(f)
+sankey = Sankey("桑基图示例", width=1200, height=600)
+sankey.add(
+    "sankey",
+    nodes=j["nodes"],
+    links=j["links"],
+    line_opacity=0.2,
+    line_curve=0.5,
+    line_color="source",
+    is_label_show=True,
+    label_pos="right",
+)
+sankey.render()
+```
+![sankey-1](https://user-images.githubusercontent.com/19553554/35090346-5c79d1da-fc74-11e7-869b-7db7ecf42d9e.png)
+
+
 
 
 ## Scatter
@@ -2176,6 +2643,124 @@ surface3D.render()
 **Note：** more details aboutt gird3D，please refer to [Global-options](https://github.com/chenjiandongx/pyecharts/blob/master/document/en-us/documentation.md#Global-options)
 
 
+## TreeMap
+> A rectangular tree chart is a common form of visualization that expresses "hierarchical data" and "tree data." It mainly uses the area method to highlight the important nodes in each level of the "tree".
+
+TreeMap.add() signatures
+```python
+add(name, attr, value,
+    shape="circle",
+    word_gap=20,
+    word_size_range=None,
+    rotate_step=45)
+```
+* name -> str  
+    chart name
+
+* data -> list  
+    The data item of the rectangle tree diagram is **a tree**, each node includes `value`, `name` (optional), `children` (also tree, optional) as shown below :  
+    ```
+    [
+        {
+            value: 1212,    # 数值
+            # 子节点
+            children: [
+                {
+                    # 子节点数值
+                    value: 2323,
+                    # 子节点名
+                    name: 'description of this node',
+                    children: [...],
+                },
+                {
+                    value: 4545,
+                    name: 'description of this node',
+                    children: [
+                        {
+                            value: 5656,
+                            name: 'description of this node',
+                            children: [...]
+                        },
+                        ...
+                    ]
+                }
+            ]
+        },
+        ...
+    ]
+    ```
+* treemap_left_depth -> int  
+    leafDepth represents "show several layers", and nodes of deeper levels are hidden. With the leafDepth set, the drill down function is turned on. The drill down function displays the sub-levels after clicking. For example, if leafDepth is set to 1, it means that one layer of nodes is displayed.
+
+* treemap_drilldown_icon -> str  
+    The prompt when the node can drill down. Can only be characters. Default is '▶'
+
+* treemap_visible_min -> int  
+    If the area of ​​a node's rectangle is less than this value (unit: px square), this node is not displayed.
+
+```python
+from pyecharts import TreeMap
+
+data = [
+    {
+        "value": 40,
+        "name": "我是A",
+    },
+    {
+        "value": 180,
+        "name": "我是B",
+        "children": [
+            {
+                "value": 76,
+                "name": "我是B.children",
+                "children": [
+                    {
+                        "value": 12,
+                        "name": "我是B.children.a",
+                    },
+                    {
+                        "value": 28,
+                        "name": "我是B.children.b",
+                    },
+                    {
+                        "value": 20,
+                        "name": "我是B.children.c",
+                    },
+                    {
+                        "value": 16,
+                        "name": "我是B.children.d",
+                    }]
+            }]}
+]
+
+treemap = TreeMap("矩形树图-默认示例", width=1200, height=600)
+treemap.add("演示数据", data, is_label_show=True, label_pos='inside')
+treemap.render()
+```
+![treemap-demo](https://user-images.githubusercontent.com/19553554/35082247-b6f5ff88-fc53-11e7-84ca-bcb1f621ec68.png)
+
+```python
+treemap = TreeMap("矩形树图-下钻示例", width=1200, height=600)
+treemap.add("演示数据", data, is_label_show=True, label_pos='inside',
+            treemap_left_depth=1)
+treemap.render()
+```
+![treemap-demo](https://user-images.githubusercontent.com/19553554/35082249-b862ecf0-fc53-11e7-85eb-8021de696a66.gif)
+
+```python
+from pyecharts import TreeMap
+
+treemap = TreeMap("矩形树图示例", width=1200, height=600)
+import os
+import json
+with open(os.path.join("..", "json", "treemap.json"), "r", encoding="utf-8") as f:
+        data = json.load(f)
+treemap.add("演示数据", data, is_label_show=True, label_pos='inside')
+treemap.render()
+```
+![treemap-demo](https://user-images.githubusercontent.com/19553554/35082251-b9e23982-fc53-11e7-8341-e7da1842389f.gif)
+
+
 ## WordCloud
 WordCloud.add() signatures
 ```python
@@ -2183,18 +2768,24 @@ add(name, attr, value, shape="circle", word_gap=20, word_size_range=None, rotate
 ```
 * name -> str  
     Series name used for displaying in tooltip and filtering with legend,or updaing data and configuration with setOption.
+
 * attr -> list  
     name of attribute
+
 * value -> list  
     value of attribute
+
 * shape -> list  
     shape of wordcloud.It can be 'circle', 'cardioid', 'diamond', 'triangle-forward', 'triangle', 'pentagon', 'star'
+
 * word_gap -> int  
     default -> 20  
     Gap of word.size of the grid in pixels for marking the availability of the canvas,the larger the grid size, the bigger the gap between words.
+
 * word_size_range -> list  
     default -> [12, 60]  
     Text size range which the value in data will be mapped to.
+
 * rotate_step -> int  
     default -> 45  
     Text rotation range and step in degree. Text will be rotated randomly in range [-90, 90].
@@ -2210,7 +2801,6 @@ value = [10000, 6181, 4386, 4055, 2467, 2244, 1898, 1484, 1112, 965, 847, 582, 5
          550, 462, 366, 360, 282, 273, 265]
 wordcloud = WordCloud(width=1300, height=620)
 wordcloud.add("", name, value, word_size_range=[20, 100])
-wordcloud.show_config()
 wordcloud.render()
 ```
 ![wordcloud-0](https://user-images.githubusercontent.com/19553554/35081546-cfe57770-fc4f-11e7-878a-e76d274afcbd.png)
@@ -2218,364 +2808,9 @@ wordcloud.render()
 ```python
 wordcloud = WordCloud(width=1300, height=620)
 wordcloud.add("", name, value, word_size_range=[30, 100], shape='diamond')
-wordcloud.show_config()
 wordcloud.render()
 ```
 ![wordcloud-1](https://user-images.githubusercontent.com/19553554/35081549-d2bde37e-fc4f-11e7-98b2-4cdc019433b1.png)
 
-**Tip：** if and only if shape is default'circle' the rotate_step parameter will take effect.
-
-
-# User Custom
-
-## Combination different types of chart and draw they on same picture.
-User Can Combination Custom Line/Bar/Kline, Scatter/EffectScatter chart,draw different types of chart on one image.Using the first chart as basement,data after that will draw on the first chart.
-Need use the method ```get_series()``` and ```custom()```.
-
-```python
-get_series()
-""" Get chart's series data """
-```
-```python
-custom(series)
-''' Add to custom chart type '''
-```
-* series -> dict
-    add to chart type series data
-
-irst use ```get_series()``` to get the data,then use ```custom()``` combine the charts together
-
-Line + Bar
-```python
-from pyecharts import Bar, Line
-
-attr = ['A', 'B', 'C', 'D', 'E', 'F']
-v1 = [10, 20, 30, 40, 50, 60]
-v2 = [15, 25, 35, 45, 55, 65]
-v3 = [38, 28, 58, 48, 78, 68]
-bar = Bar("Line - Bar 示例")
-bar.add("bar", attr, v1)
-line = Line()
-line.add("line", v2, v3)
-bar.custom(line.get_series())
-bar.show_config()
-bar.render()
-```
-![custom-0](https://raw.githubusercontent.com/pyecharts/pyecharts/master/images/custom-0.gif)
-
-Specific procedure are as follows:
-1. initialize the chart,add normal configuration item.
-2. call the first chart's custom(type.get_series()) method and one by one.
-3. call the first chart's render() method.
-
-**Tip：** ```bar.custom(line.get_series())``` this one have to be careful,use the first one chart as basement.remember do not write ```bar.custom(bar.get_series())``` or the program will get into endless self call state,infinite recursion,finally may cause your computer to crash.
-
-Scatter + EffectScatter
-```python
-from pyecharts import Scatter, EffectScatter
-
-v1 = [10, 20, 30, 40, 50, 60]
-v2 = [30, 30, 30, 30, 30, 30]
-v3 = [50, 50, 50, 50, 50, 50]
-v4 = [10, 10, 10, 10, 10, 10]
-es = EffectScatter("Scatter - EffectScatter 示例")
-es.add("es", v1, v2)
-scatter = Scatter()
-scatter.add("scatter", v1, v3)
-es.custom(scatter.get_series())
-es_1 = EffectScatter()
-es_1.add("es_1", v1, v4, symbol='pin', effect_scale=5)
-es.custom(es_1.get_series())
-es.show_config()
-es.render()
-```
-![custom-1](https://raw.githubusercontent.com/pyecharts/pyecharts/master/images/custom-1.gif)
-
-Kline + Line
-```python
-import random
-from pyecharts import Line, Kline
-
-v1 = [[2320.26, 2320.26, 2287.3, 2362.94], [2300, 2291.3, 2288.26, 2308.38],
-      [2295.35, 2346.5, 2295.35, 2345.92], [2347.22, 2358.98, 2337.35, 2363.8],
-      [2360.75, 2382.48, 2347.89, 2383.76], [2383.43, 2385.42, 2371.23, 2391.82],
-      [2377.41, 2419.02, 2369.57, 2421.15], [2425.92, 2428.15, 2417.58, 2440.38],
-      [2411, 2433.13, 2403.3, 2437.42], [2432.68, 2334.48, 2427.7, 2441.73],
-      [2430.69, 2418.53, 2394.22, 2433.89], [2416.62, 2432.4, 2414.4, 2443.03],
-      [2441.91, 2421.56, 2418.43, 2444.8], [2420.26, 2382.91, 2373.53, 2427.07],
-      [2383.49, 2397.18, 2370.61, 2397.94], [2378.82, 2325.95, 2309.17, 2378.82],
-      [2322.94, 2314.16, 2308.76, 2330.88], [2320.62, 2325.82, 2315.01, 2338.78],
-      [2313.74, 2293.34, 2289.89, 2340.71], [2297.77, 2313.22, 2292.03, 2324.63],
-      [2322.32, 2365.59, 2308.92, 2366.16], [2364.54, 2359.51, 2330.86, 2369.65],
-      [2332.08, 2273.4, 2259.25, 2333.54], [2274.81, 2326.31, 2270.1, 2328.14],
-      [2333.61, 2347.18, 2321.6, 2351.44], [2340.44, 2324.29, 2304.27, 2352.02],
-      [2326.42, 2318.61, 2314.59, 2333.67], [2314.68, 2310.59, 2296.58, 2320.96],
-      [2309.16, 2286.6, 2264.83, 2333.29], [2282.17, 2263.97, 2253.25, 2286.33],
-      [2255.77, 2270.28, 2253.31, 2276.22]]
-attr = ["2017/7/{}".format(i + 1) for i in range(31)]
-kline = Kline("Kline - Line 示例")
-kline.add("日K", attr, v1)
-line_1 = Line()
-line_1.add("line-1", attr, [random.randint(2400, 2500) for _ in range(31)])
-line_2 = Line()
-line_2.add("line-2", attr, [random.randint(2400, 2500) for _ in range(31)])
-kline.custom(line_1.get_series())
-kline.custom(line_2.get_series())
-kline.show_config()
-kline.render()
-```
-![custom-2](https://raw.githubusercontent.com/pyecharts/pyecharts/master/images/custom-2.png)
-
-## Combination different types of chart and draw on multiple picture,the chart parallel disply.
-User Can Combination Custom  Line/Bar/Kline/Scatter/EffectScatter/Pie/HeatMap chart,draw different types of chart on multiple image.Using the first chart as basement
-Need use the method ```get_series()``` and ```grid()```.
-
-```python
-get_series()
-""" get chart's series data """
-```
-```python
-grid(series，grid_width, grid_height, grid_top, grid_bottom, grid_left, grid_right)
-''' Concurrently show charts '''
-```
-* series -> dict  
-    other chart series data
-* grid_width -> str/int  
-    Width of grid component. Adaptive by default.
-* grid_height -> str/int  
-    Height of grid component. Adaptive by default.
-* grid_top -> str/int  
-    Distance between grid component and the top side of the container.  
-    grid_top value can be instant pixel value like 20;it can also be percentage value relative to container width like '20%';and it can also be 'top', 'middle', or 'bottom'.  
-    If the grid_top value is set to be 'top', 'middle', or 'bottom',then the component will be aligned automatically based on position.
-* grid_bottom -> str/int  
-    Distance between grid component and the bottom side of the container.  
-    grid_bottom value can be instant pixel value like 20;it can also be percentage value relative to container width like '20%'.
-* grid_left -> str/int  
-    Distance between grid component and the left side of the container.  
-    grid_left value can be instant pixel value like 20;it can also be percentage value relative to container width like '20%';and it can also be 'left', 'center', or 'right'.  
-    If the grid_left value is set to be 'left', 'center', or 'right',then the component will be aligned automatically based on position.
-* grid_right -> str/int  
-    Distance between grid component and the right side of the container.  
-    grid_right value can be instant pixel value like 20;it can also be percentage value relative to container width like '20%'.
-
-irst use ```get_series()``` get data，then use ```grid()``` combine the charts
-
-up and down type,Bar + Line
-```python
-from pyecharts import Bar, Line
-
-attr = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
-v1 = [5, 20, 36, 10, 75, 90]
-v2 = [10, 25, 8, 60, 20, 80]
-bar = Bar("柱状图示例", height=720, is_grid=True)
-bar.add("商家A", attr, v1, is_stack=True, grid_bottom="60%")
-bar.add("商家B", attr, v2, is_stack=True, grid_bottom="60%")
-line = Line("折线图示例", title_top="50%")
-attr = ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
-line.add("最高气温", attr, [11, 11, 15, 13, 12, 13, 10], mark_point=["max", "min"], mark_line=["average"])
-line.add("最低气温", attr, [1, -2, 2, 5, 3, 2, 0], mark_point=["max", "min"],
-         mark_line=["average"], legend_top="50%")
-bar.grid(line.get_series(), grid_top="60%")
-bar.show_config()
-bar.render()
-```
-![grid-0](https://user-images.githubusercontent.com/19553554/35089722-c80f84fa-fc72-11e7-93b0-4fff14a371a5.gif)
-
-**once more Tip：** ```bar.grid(line.get_series(), grid_top="60%")``` do not write ```bar.grid(bar.get_series())``` or get into edless recursion
-
-The specific process is as follows：
-1. Make is_grid=True when the first chart initialize,declare using grid assembly.
-2. The first form's add() method have to make grid_* parameter，it has to be done,because grid_* default value is None,and won't add to configuration item.Appoint one at least.
-3. Initialize other type（so do the same type）,not need appoint grid_* parameter.
-4. Call the first chart's grid() method and add one by one,and set grid_* parameter，it has to be done，at least one.
-5. Call the first chart's render() method.
-
-left and right type，Scatter + EffectScatter
-```python
-from pyecharts import Scatter, EffectScatter
-
-v1 = [5, 20, 36, 10, 75, 90]
-v2 = [10, 25, 8, 60, 20, 80]
-scatter = Scatter(width=1200, is_grid=True)
-scatter.add("散点图示例", v1, v2, grid_left="60%", legend_pos="70%")
-es = EffectScatter()
-es.add("动态散点图示例", [11, 11, 15, 13, 12, 13, 10], [1, -2, 2, 5, 3, 2, 0],
-       effect_scale=6, legend_pos="20%")
-scatter.grid(es.get_series(), grid_right="60%")
-scatter.show_config()
-scatter.render()
-```
-![grid-1](https://user-images.githubusercontent.com/19553554/35089730-ca173c70-fc72-11e7-915e-34ce5c79ead7.gif)
-
-up,down,left and right type,Bar + Line + Scatter + EffectScatter
-```python
-from pyecharts import Bar, Line, Scatter, EffectScatter
-
-attr = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
-v1 = [5, 20, 36, 10, 75, 90]
-v2 = [10, 25, 8, 60, 20, 80]
-bar = Bar("柱状图示例", height=720, width=1200, title_pos="65%", is_grid=True)
-bar.add("商家A", attr, v1, is_stack=True, grid_bottom="60%", grid_left="60%")
-bar.add("商家B", attr, v2, is_stack=True, grid_bottom="60%", grid_left="60%", legend_pos="80%")
-line = Line("折线图示例")
-attr = ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
-line.add("最高气温", attr, [11, 11, 15, 13, 12, 13, 10], mark_point=["max", "min"], mark_line=["average"])
-line.add("最低气温", attr, [1, -2, 2, 5, 3, 2, 0], mark_point=["max", "min"],
-         mark_line=["average"], legend_pos="20%")
-v1 = [5, 20, 36, 10, 75, 90]
-v2 = [10, 25, 8, 60, 20, 80]
-scatter = Scatter("散点图示例", title_top="50%", title_pos="65%")
-scatter.add("scatter", v1, v2, legend_top="50%", legend_pos="80%")
-es = EffectScatter("动态散点图示例", title_top="50%")
-es.add("es", [11, 11, 15, 13, 12, 13, 10], [1, -2, 2, 5, 3, 2, 0], effect_scale=6,
-       legend_top="50%", legend_pos="20%")
-bar.grid(line.get_series(), grid_bottom="60%", grid_right="60%")
-bar.grid(scatter.get_series(), grid_top="60%", grid_left="60%")
-bar.grid(es.get_series(), grid_top="60%", grid_right="60%")
-bar.show_config()
-bar.render()
-```
-![grid-2](https://user-images.githubusercontent.com/19553554/35089731-cb044614-fc72-11e7-930c-be269b1f1589.gif)
-
-Line +  Pie
-```python
-from pyecharts import Line, Pie
-
-line = Line("折线图示例", width=1200, is_grid=True)
-attr = ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
-line.add("最高气温", attr, [11, 11, 15, 13, 12, 13, 10], mark_point=["max", "min"],
-         mark_line=["average"], grid_right="65%")
-line.add("最低气温", attr, [1, -2, 2, 5, 3, 2, 0], mark_point=["max", "min"],
-         mark_line=["average"], legend_pos="20%")
-attr = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
-v1 = [11, 12, 13, 10, 10, 10]
-pie = Pie("饼图示例", title_pos="45%")
-pie.add("", attr, v1, radius=[30, 55], legend_pos="65%", legend_orient='vertical')
-line.grid(pie.get_series(), grid_left="60%")
-line.show_config()
-line.render()
-```
-![grid-3](https://user-images.githubusercontent.com/19553554/35089737-ccc1c01c-fc72-11e7-874d-8ba8b89572eb.png)
-
-Line + Kline
-```python
-from pyecharts import Line, Kline
-
-line = Line("折线图示例", width=1200, is_grid=True)
-attr = ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
-line.add("最高气温", attr, [11, 11, 15, 13, 12, 13, 10], mark_point=["max", "min"],
-         mark_line=["average"], grid_right="60%")
-line.add("最低气温", attr, [1, -2, 2, 5, 3, 2, 0], mark_point=["max", "min"],
-         mark_line=["average"], legend_pos="20%", grid_right="60%")
-attr = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
-value = [20, 40, 60, 80, 100, 120]
-v1 = [[2320.26, 2320.26, 2287.3, 2362.94], [2300, 2291.3, 2288.26, 2308.38],
-      [2295.35, 2346.5, 2295.35, 2345.92], [2347.22, 2358.98, 2337.35, 2363.8],
-      [2360.75, 2382.48, 2347.89, 2383.76], [2383.43, 2385.42, 2371.23, 2391.82],
-      [2377.41, 2419.02, 2369.57, 2421.15], [2425.92, 2428.15, 2417.58, 2440.38],
-      [2411, 2433.13, 2403.3, 2437.42], [2432.68, 2334.48, 2427.7, 2441.73],
-      [2430.69, 2418.53, 2394.22, 2433.89], [2416.62, 2432.4, 2414.4, 2443.03],
-      [2441.91, 2421.56, 2418.43, 2444.8], [2420.26, 2382.91, 2373.53, 2427.07],
-      [2383.49, 2397.18, 2370.61, 2397.94], [2378.82, 2325.95, 2309.17, 2378.82],
-      [2322.94, 2314.16, 2308.76, 2330.88], [2320.62, 2325.82, 2315.01, 2338.78],
-      [2313.74, 2293.34, 2289.89, 2340.71], [2297.77, 2313.22, 2292.03, 2324.63],
-      [2322.32, 2365.59, 2308.92, 2366.16], [2364.54, 2359.51, 2330.86, 2369.65],
-      [2332.08, 2273.4, 2259.25, 2333.54], [2274.81, 2326.31, 2270.1, 2328.14],
-      [2333.61, 2347.18, 2321.6, 2351.44], [2340.44, 2324.29, 2304.27, 2352.02],
-      [2326.42, 2318.61, 2314.59, 2333.67], [2314.68, 2310.59, 2296.58, 2320.96],
-      [2309.16, 2286.6, 2264.83, 2333.29], [2282.17, 2263.97, 2253.25, 2286.33],
-      [2255.77, 2270.28, 2253.31, 2276.22]]
-kline = Kline("K 线图示例", title_pos="60%")
-kline.add("日K", ["2017/7/{}".format(i + 1) for i in range(31)], v1, legend_pos="80%")
-line.grid(kline.get_series(), grid_left="55%")
-line.show_config()
-line.render()
-```
-![grid-4](https://user-images.githubusercontent.com/19553554/35089740-ce510c6c-fc72-11e7-84eb-6ae3dddece76.png)
-
-HeatMap + Bar
-```python
-import random
-
-from pyecharts import HeatMap, Bar
-
-x_axis = ["12a", "1a", "2a", "3a", "4a", "5a", "6a", "7a", "8a", "9a", "10a", "11a",
-          "12p", "1p", "2p", "3p", "4p", "5p", "6p", "7p", "8p", "9p", "10p", "11p"]
-y_aixs = ["Saturday", "Friday", "Thursday", "Wednesday", "Tuesday", "Monday", "Sunday"]
-data = [[i, j, random.randint(0, 50)] for i in range(24) for j in range(7)]
-heatmap = HeatMap("热力图示例", height=700, is_grid=True)
-heatmap.add("热力图直角坐标系", x_axis, y_aixs, data, is_visualmap=True, visual_top="45%",
-            visual_text_color="#000", visual_orient='horizontal', grid_bottom="60%")
-attr = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
-v1 = [5, 20, 36, 10, 75, 90]
-v2 = [10, 25, 8, 60, 20, 80]
-bar = Bar("柱状图示例", title_top="52%")
-bar.add("商家A", attr, v1, is_stack=True)
-bar.add("商家B", attr, v2, is_stack=True, legend_top="50%")
-heatmap.grid(bar.get_series(), grid_top="60%")
-heatmap.show_config()
-heatmap.render()
-```
-![grid-5](https://user-images.githubusercontent.com/19553554/35089741-cfca19bc-fc72-11e7-8c3b-2f20d054d3fc.gif)  
-Bar will influenced by HeatMap,it's funy.
-
-# Multiple charts in one html page
-
-You will need use `Page` class and its api is simple, call `add()` charts to and then call `render()` in
-the end. However, wordcloud and liquid charts cannot be mixed in.
-
-
-Here is an example code::
-
-```python
-#coding=utf-8
-from __future__ import unicode_literals
-
-from pyecharts import Bar, Scatter3D
-from pyecharts import Page
-
-
-page = Page()  # step 1
-
-attr = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
-v1 = [5, 20, 36, 10, 75, 90]
-v2 = [10, 25, 8, 60, 20, 80]
-bar = Bar("柱状图数据堆叠示例")
-bar.add("商家A", attr, v1, is_stack=True)
-bar.add("商家B", attr, v2, is_stack=True)
-page.add(bar)   # step 2
-
-# scatter3D_0
-import random
-data = [[random.randint(0, 100), random.randint(0, 100), random.randint(0, 100)] for _ in range(80)]
-range_color = ['#313695', '#4575b4', '#74add1', '#abd9e9', '#e0f3f8', '#ffffbf',
-               '#fee090', '#fdae61', '#f46d43', '#d73027', '#a50026']
-scatter3D = Scatter3D("3D 散点图示例", width=1200, height=600)
-scatter3D.add("", data, is_visualmap=True, visual_range_color=range_color)
-page.add(scatter3D)  # step 2
-
-page.render()  # step 3
-```
-
-After executing above code, you will find two charts in render.html:
-
-![multiple-charts-0](https://raw.githubusercontent.com/pyecharts/pyecharts/master/images/multiple-charts-0.gif)
-
-# Flask and Django Integration Documentation
-
-* [pyecharts + Flask](https://github.com/chenjiandongx/pyecharts/blob/master/document/en-us/doc_flask.md)
-* [pyecharts + Django](https://github.com/chenjiandongx/pyecharts/blob/master/document/en-us/doc_django.md)
-
-
-# More Examples
-
-* More examples refer to [example.md](https://github.com/chenjiandongx/pyecharts/blob/master/example.md)
-* Welcome to provide more examples.
-
-# About The Project
-
-* Enjoy pyecharts!
-* If you have any question or want to improve this repository, welcome to create an issue or pull requests .
-* If you want to discuss with me alone, use the emali -> chenjiandongx@qq.com
-* Show solicitude for [changelog.md](https://github.com/chenjiandongx/pyecharts/blob/master/changelog.md)
+**Note：** if and only if shape is default 'circle' the rotate_step parameter will take effect.
+**If you have read this document, you can read further [Custom Charts](en-us/charts_custom)**
