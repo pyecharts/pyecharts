@@ -529,7 +529,7 @@ funnel.add("商品", attr, value, is_label_show=True, label_pos="outside", legen
 funnel.show_config()
 funnel.render()
 ```
-![funnel-1](https://raw.githubusercontent.com/pyecharts/pyecharts/master/images/funnel-1.png)
+![funnel-1](https://user-images.githubusercontent.com/19553554/35090186-d8f50db6-fc73-11e7-9b7e-947580a621de.png)
 
 **Ascending data**
 ```python
