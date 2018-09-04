@@ -1,5 +1,7 @@
 > 感谢大家对 pyecharts 项目的慷慨捐赠！下面是名单，排名不分先后！
 
+> Thanks for your generous donation to the pyecharts project! The following is a list without particular order!
+
 * https://github.com/liuhui9312
 * https://github.com/sssdjj
 * https://github.com/rubinliudongpo
