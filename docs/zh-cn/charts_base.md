@@ -612,7 +612,7 @@ funnel.add(
 )
 funnel.render()
 ```
-![funnel-1](https://user-images.githubusercontent.com/19553554/35090186-d8f50db6-fc73-11e7-9b7e-947580a621de.png)
+![funnel-demo](https://user-images.githubusercontent.com/19553554/35090186-d8f50db6-fc73-11e7-9b7e-947580a621de.png)
 
 **数据按升序排序**
 ```python
@@ -2636,7 +2636,7 @@ sankey.add(
 )
 sankey.render()
 ```
-![sankey-1](https://user-images.githubusercontent.com/19553554/35090346-5c79d1da-fc74-11e7-869b-7db7ecf42d9e.png)
+![sankey-demo](https://user-images.githubusercontent.com/19553554/35090346-5c79d1da-fc74-11e7-869b-7db7ecf42d9e.png)
 
 
 ## Scatter（散点图）

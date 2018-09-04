@@ -8,4 +8,4 @@
 <img height="265" width=231 alt="chfw-zhifubao" src="https://user-images.githubusercontent.com/4280312/35767977-23c484ae-08ed-11e8-8985-30ec7fa1f10c.png">　　<img height="265" width=231 alt="chfw-wechat" src="https://user-images.githubusercontent.com/4280312/35759160-ce2aa3c0-086f-11e8-8715-b8696da60341.png">
 </div>
 
-This is [donors List](en-us/donors), you could e-mail your Github account to (chenjiandongx@qq.com, wangc_2011@hotmail.com). We will add your name on donors list.
+This is [donors List](zh-cn/donors), you could e-mail your Github account to (chenjiandongx@qq.com, wangc_2011@hotmail.com). We will add your name on donors list.

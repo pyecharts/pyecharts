@@ -70,7 +70,7 @@ bar.add("商家A", attr, v1, is_stack=True)
 bar.add("商家B", attr, v2, is_stack=True)
 bar.render()
 ```
-![bar-0](https://user-images.githubusercontent.com/19553554/35081597-0c3e7212-fc50-11e7-8f72-af6c552223e8.gif)
+![bar-demo](https://user-images.githubusercontent.com/19553554/35081597-0c3e7212-fc50-11e7-8f72-af6c552223e8.gif)
 
 **Tip：**  Global configuration item needs set in the last ```add()``` or the setting will lose efficacy.
 
@@ -195,7 +195,7 @@ bar.add("", attr, v1, label_color=['rgba(0,0,0,0)'], is_stack=True)
 bar.add("月份", attr, v2, is_label_show=True, is_stack=True, label_pos='inside')
 bar.render()
 ```
-![bar-7](https://user-images.githubusercontent.com/19553554/35081807-34a5568e-fc51-11e7-8199-3c3f8f43ba98.png)
+![bar-demo](https://user-images.githubusercontent.com/19553554/35081807-34a5568e-fc51-11e7-8199-3c3f8f43ba98.png)
 
 **Fat histogram example**
 ```python
@@ -208,7 +208,7 @@ bar = Bar("直方图示例")
 bar.add("", attr * 2, v1 + v2, bar_category_gap=0)
 bar.render()
 ```
-![bar-9](https://user-images.githubusercontent.com/19553554/35081820-3c6f2ad4-fc51-11e7-8600-9212e7e8b519.png)
+![bar-demo](https://user-images.githubusercontent.com/19553554/35081820-3c6f2ad4-fc51-11e7-8600-9212e7e8b519.png)
 
 **Double histograms**
 ```python
@@ -222,7 +222,7 @@ bar.add("蒸发量", attr, v1, mark_line=["average"], mark_point=["max", "min"])
 bar.add("降水量", attr, v2, mark_line=["average"], mark_point=["max", "min"])
 bar.render()
 ```
-![bar-10](https://user-images.githubusercontent.com/19553554/35081822-3e090748-fc51-11e7-8bba-b775d29671e4.png)
+![bar-demo](https://user-images.githubusercontent.com/19553554/35081822-3e090748-fc51-11e7-8bba-b775d29671e4.png)
 
 **Extra text label**
 ```python
@@ -321,7 +321,7 @@ bar3d.add("", x_axis, y_aixs, [[d[1], d[0], d[2]] for d in data],
     grid3D_width=200, grid3D_depth=80)
 bar3d.render()
 ```
-![bar3d-0](https://user-images.githubusercontent.com/19553554/35081629-36a8e046-fc50-11e7-8910-e02bf24008d9.gif)
+![bar3d-demo](https://user-images.githubusercontent.com/19553554/35081629-36a8e046-fc50-11e7-8910-e02bf24008d9.gif)
 
 In data, such as [1, 2, 3], the index of the x-axis is 1 ("1a"); the index of the y-axis is 2 ("Thursday"); the value of the z-axis is 3.
 
@@ -335,7 +335,7 @@ bar3d.show_config()
 bar3d.render()
 ```
 
-![bar3d-1](https://user-images.githubusercontent.com/19553554/35081631-38a0cb02-fc50-11e7-9f74-3d487bd98a3a.gif)
+![bar3d-demo](https://user-images.githubusercontent.com/19553554/35081631-38a0cb02-fc50-11e7-9f74-3d487bd98a3a.gif)
 
 **Set```is_grid3D_rotate``` could let it rotate automatically**
 ```python
@@ -346,7 +346,7 @@ bar3d.add("", x_axis, y_aixs, [[d[1], d[0], d[2]] for d in data], is_visualmap=T
 bar3d.show_config()
 bar3d.render()
 ```
-![bar3d-2](https://user-images.githubusercontent.com/19553554/35081703-a70b544a-fc50-11e7-838a-53445cd8d203.gif)
+![bar3d-demo](https://user-images.githubusercontent.com/19553554/35081703-a70b544a-fc50-11e7-838a-53445cd8d203.gif)
 
 set ``` grid3D_rotate_speed``` to adjust the rotation speed  
 ```python
@@ -356,7 +356,7 @@ bar3d.add("", x_axis, y_aixs, [[d[1], d[0], d[2]] for d in data], is_visualmap=T
           is_grid3D_rotate=True, grid3D_rotate_speed=180)
 bar3d.render()
 ```
-![bar3d-3](https://user-images.githubusercontent.com/19553554/35081705-a92a878c-fc50-11e7-8427-9066456db54c.gif)
+![bar3d-demo](https://user-images.githubusercontent.com/19553554/35081705-a92a878c-fc50-11e7-8427-9066456db54c.gif)
 
 **Note：** more details about gird3D，please refer to **Chart Configuration**
 **Note：** Can be used with axis3D configuration
@@ -519,7 +519,7 @@ funnel = Funnel("漏斗图示例")
 funnel.add("商品", attr, value, is_label_show=True, label_pos="inside", label_text_color="#fff")
 funnel.render()
 ```
-![funnel-0](https://user-images.githubusercontent.com/19553554/35090181-d6b0e886-fc73-11e7-8e00-dec8ac38c415.gif)
+![funnel-demo](https://user-images.githubusercontent.com/19553554/35090181-d6b0e886-fc73-11e7-8e00-dec8ac38c415.gif)
 
 **The label is displayed outside**  
 ```python
@@ -529,7 +529,7 @@ funnel.add("商品", attr, value, is_label_show=True, label_pos="outside", legen
 funnel.show_config()
 funnel.render()
 ```
-![funnel-1](https://user-images.githubusercontent.com/19553554/35090186-d8f50db6-fc73-11e7-9b7e-947580a621de.png)
+![funnel-demo](https://user-images.githubusercontent.com/19553554/35090186-d8f50db6-fc73-11e7-9b7e-947580a621de.png)
 
 **Ascending data**
 ```python
@@ -610,14 +610,14 @@ gauge = Gauge("仪表盘示例")
 gauge.add("业务指标", "完成率", 66.66)
 gauge.render()
 ```
-![gauge-0](https://user-images.githubusercontent.com/19553554/35090190-daa33eee-fc73-11e7-9710-7844b12d3e6b.png)
+![gauge-demo](https://user-images.githubusercontent.com/19553554/35090190-daa33eee-fc73-11e7-9710-7844b12d3e6b.png)
 
 ```python
 gauge = Gauge("仪表盘示例")
 gauge.add("业务指标", "完成率", 166.66, angle_range=[180, 0], scale_range=[0, 200], is_legend_show=False)
 gauge.render()
 ```
-![gauge-1](https://user-images.githubusercontent.com/19553554/35090193-dc199d22-fc73-11e7-8f4d-22477a3a22be.png)
+![gauge-demo](https://user-images.githubusercontent.com/19553554/35090193-dc199d22-fc73-11e7-8f4d-22477a3a22be.png)
 
 
 ## Geo
@@ -721,7 +721,7 @@ attr, value = geo.cast(data)
 geo.add("", attr, value, visual_range=[0, 200], visual_text_color="#fff", symbol_size=15, is_visualmap=True)
 geo.render()
 ```
-![geo-0](https://user-images.githubusercontent.com/19553554/35089650-7f06172e-fc72-11e7-9d4b-14437fb0d8fe.gif)
+![geo-demo](https://user-images.githubusercontent.com/19553554/35089650-7f06172e-fc72-11e7-9d4b-14437fb0d8fe.gif)
 
 **Note：** Please use it with Visualmap
 
@@ -735,7 +735,7 @@ geo.add("", attr, value, visual_range=[0, 200], visual_text_color="#fff",
         symbol_size=15, is_visualmap=True, is_piecewise=True, visual_split_number=6)
 geo.render()
 ```
-![geo-0-0](https://user-images.githubusercontent.com/19553554/35089651-80d259a0-fc72-11e7-8af9-d96df53c0d49.gif)
+![geo-demo](https://user-images.githubusercontent.com/19553554/35089651-80d259a0-fc72-11e7-8af9-d96df53c0d49.gif)
 
 **HeatMap type**
 ```python
@@ -747,7 +747,7 @@ geo.add("", attr, value, type="heatmap", is_visualmap=True, visual_range=[0, 300
         visual_text_color='#fff')
 geo.render()
 ```
-![geo-0-1](https://user-images.githubusercontent.com/19553554/35089653-82498f88-fc72-11e7-9811-2aceccd4ed68.gif)
+![geo-demo](https://user-images.githubusercontent.com/19553554/35089653-82498f88-fc72-11e7-9811-2aceccd4ed68.gif)
 
 
 **EffectScatter on China map**
@@ -765,7 +765,7 @@ attr, value = geo.cast(data)
 geo.add("", attr, value, type="effectScatter", is_random=True, effect_scale=5)
 geo.render()
 ```
-![geo-1](https://user-images.githubusercontent.com/19553554/35089655-844c8902-fc72-11e7-8d1b-a0920ad5baa8.gif)
+![geo-demo](https://user-images.githubusercontent.com/19553554/35089655-844c8902-fc72-11e7-8d1b-a0920ad5baa8.gif)
 
 **EffectScatter on my home province, Canton**
 ```python
@@ -783,7 +783,7 @@ geo.add("", attr, value, maptype='广东', type="effectScatter",
         is_random=True, effect_scale=5, is_legend_show=False)
 geo.render()
 ```
-![geo-2](https://user-images.githubusercontent.com/19553554/35089657-85d0b7bc-fc72-11e7-8b3d-8127dbe8f780.gif)
+![geo-demo](https://user-images.githubusercontent.com/19553554/35089657-85d0b7bc-fc72-11e7-8b3d-8127dbe8f780.gif)
 
 **Use coordinate_region to specify the country which to retrieve coordinates**
 ```python
@@ -1096,7 +1096,7 @@ graph.show_config()
 graph.render()
 
 ```
-![graph-0](https://user-images.githubusercontent.com/19553554/35082109-05240854-fc53-11e7-9e92-dd9437c55383.png)
+![graph-demo](https://user-images.githubusercontent.com/19553554/35082109-05240854-fc53-11e7-9e92-dd9437c55383.png)
 
 
 ```python
@@ -1105,7 +1105,7 @@ graph.add("", nodes, links, is_label_show=True, repulsion=8000, layout='circular
 graph.show_config()
 graph.render()
 ```
-![graph-1](https://user-images.githubusercontent.com/19553554/35082112-07074726-fc53-11e7-9f28-2d3b39c5e162.png)
+![graph-demo](https://user-images.githubusercontent.com/19553554/35082112-07074726-fc53-11e7-9f28-2d3b39c5e162.png)
 
 ```python
 from pyecharts import Graph
@@ -1120,7 +1120,7 @@ graph.add("", nodes, links, categories, label_pos="right", repulsion=50, is_lege
 graph.show_config()
 graph.render()
 ```
-![graph-2](https://user-images.githubusercontent.com/19553554/35081908-bb313aba-fc51-11e7-8ef5-df20be445d72.gif)
+![graph-demo](https://user-images.githubusercontent.com/19553554/35081908-bb313aba-fc51-11e7-8ef5-df20be445d72.gif)
 
 **Note：** **lineStyle** parameter is configurable
 
@@ -1257,7 +1257,7 @@ kline = Kline("K 线图示例")
 kline.add("日K", ["2017/7/{}".format(i + 1) for i in range(31)], v1)
 kline.render()
 ```
-![kline-0](https://user-images.githubusercontent.com/19553554/35090067-9a247694-fc73-11e7-88bb-3b0f019a5e90.png)
+![kline-demo](https://user-images.githubusercontent.com/19553554/35090067-9a247694-fc73-11e7-88bb-3b0f019a5e90.png)
 
 **Kline + dataZoom**
 ```python
@@ -1265,7 +1265,7 @@ kline = Kline("K 线图示例")
 kline.add("日K", ["2017/7/{}".format(i + 1) for i in range(31)], v1, mark_point=["max"], is_datazoom_show=True)
 kline.render()
 ```
-![kline-1](https://user-images.githubusercontent.com/19553554/35090072-9b6ca404-fc73-11e7-8abe-e5576d35c57a.gif)
+![kline-demo](https://user-images.githubusercontent.com/19553554/35090072-9b6ca404-fc73-11e7-8abe-e5576d35c57a.gif)
 
 **dataZoom effect is added to the ordinate axis**
 ```python
@@ -1348,7 +1348,7 @@ line.add("商家B", attr, v2, is_smooth=True, mark_line=["max", "average"])
 line.show_config()
 line.render()
 ```
-![line-0](https://user-images.githubusercontent.com/19553554/35089953-4865fe2c-fc73-11e7-8c47-e917332d061c.gif)
+![line-demo](https://user-images.githubusercontent.com/19553554/35089953-4865fe2c-fc73-11e7-8c47-e917332d061c.gif)
 
 **Other Configurations Of Marker Point**
 ```python
@@ -1359,7 +1359,7 @@ line.add("商家B", attr, v2, mark_point=["average", "max", "min"],
          mark_point_symbol='arrow', mark_point_symbolsize=40)
 line.render()
 ```
-![line-0-1](https://user-images.githubusercontent.com/19553554/35089954-49784dd8-fc73-11e7-8a5b-d9163857c4b1.png)
+![line-demo](https://user-images.githubusercontent.com/19553554/35089954-49784dd8-fc73-11e7-8a5b-d9163857c4b1.png)
 
 ```python
 line = Line("折线图-数据堆叠示例")
@@ -1368,7 +1368,7 @@ line.add("商家B", attr, v2, is_stack=True, is_label_show=True)
 line.show_config()
 line.render()
 ```
-![line-1](https://user-images.githubusercontent.com/19553554/35089965-4f880100-fc73-11e7-9861-c43bd4d4bbe1.gif)
+![line-demo](https://user-images.githubusercontent.com/19553554/35089965-4f880100-fc73-11e7-9861-c43bd4d4bbe1.gif)
 
 ```python
 line = Line("折线图-阶梯图示例")
@@ -1376,7 +1376,7 @@ line.add("商家A", attr, v1, is_step=True, is_label_show=True)
 line.show_config()
 line.render()
 ```
-![line-2](https://user-images.githubusercontent.com/19553554/35089968-510f3304-fc73-11e7-9159-67ce6ace9fa3.png)
+![line-demo](https://user-images.githubusercontent.com/19553554/35089968-510f3304-fc73-11e7-9159-67ce6ace9fa3.png)
 
 ```python
 line = Line("折线图-面积图示例")
@@ -1385,7 +1385,7 @@ line.add("商家B", attr, v2, is_fill=True, area_color='#000', area_opacity=0.3,
 line.show_config()
 line.render()
 ```
-![line-3](https://user-images.githubusercontent.com/19553554/35089973-53868fd8-fc73-11e7-8ff6-bfb452954267.png)
+![line-demo](https://user-images.githubusercontent.com/19553554/35089973-53868fd8-fc73-11e7-8ff6-bfb452954267.png)
 
 * area_opacity -> float  
     Opacity of the component. Supports value from 0 to 1, and the component will not be drawn when set to 0.
@@ -1471,7 +1471,7 @@ line3d.add("", _data, is_visualmap=True, visual_range_color=range_color, visual_
            grid3D_rotate_sensitivity=5)
 line3d.render()
 ```
-![line3d-0](https://user-images.githubusercontent.com/19553554/35081902-b0bed8c6-fc51-11e7-9b3a-1d138c4eba13.gif)
+![line3d-demo](https://user-images.githubusercontent.com/19553554/35081902-b0bed8c6-fc51-11e7-9b3a-1d138c4eba13.gif)
 
 **rotating spring**
 ```python
@@ -1492,7 +1492,7 @@ line3d.add("", _data, is_visualmap=True, visual_range_color=range_color, visual_
            is_grid3D_rotate=True, grid3D_rotate_speed=180)
 line3d.render()
 ```
-![line3d-1](https://user-images.githubusercontent.com/19553554/35081903-b3a4eada-fc51-11e7-97b1-33f1dd6ed79e.gif)
+![line3d-demo](https://user-images.githubusercontent.com/19553554/35081903-b3a4eada-fc51-11e7-97b1-33f1dd6ed79e.gif)
 
 **Note：** more details aboutt gird3D，please refer to [Chart Configuration](en-us/charts_configure)
 **Note：** Can be used with axis3D common configuration items
@@ -1535,7 +1535,7 @@ liquid.add("Liquid", [0.6])
 liquid.show_config()
 liquid.render()
 ```
-![liquid-0](https://user-images.githubusercontent.com/19553554/35082172-536178a8-fc53-11e7-8c8b-1fa1312c8854.gif)
+![liquid-demo](https://user-images.githubusercontent.com/19553554/35082172-536178a8-fc53-11e7-8c8b-1fa1312c8854.gif)
 
 ```python
 from pyecharts import Liquid
@@ -1545,7 +1545,7 @@ liquid.add("Liquid", [0.6, 0.5, 0.4, 0.3], is_liquid_outline_show=False)
 liquid.show_config()
 liquid.render()
 ```
-![liquid-1](https://user-images.githubusercontent.com/19553554/35082175-55337000-fc53-11e7-9e5b-24cd47288e8d.gif)
+![liquid-demo](https://user-images.githubusercontent.com/19553554/35082175-55337000-fc53-11e7-9e5b-24cd47288e8d.gif)
 
 ```python
 from pyecharts import Liquid
@@ -1555,7 +1555,7 @@ liquid.add("Liquid", [0.6, 0.5, 0.4, 0.3], is_liquid_animation=False, shape='dia
 liquid.show_config()
 liquid.render()
 ```
-![liquid-2](https://user-images.githubusercontent.com/19553554/35082178-567d2db6-fc53-11e7-965a-d60e72ab6bf4.png)
+![liquid-demo](https://user-images.githubusercontent.com/19553554/35082178-567d2db6-fc53-11e7-965a-d60e72ab6bf4.png)
 
 **Custom SVG route**
 ```python
@@ -1629,7 +1629,7 @@ map.add("", attr, value, maptype='china')
 map.show_config()
 map.render()
 ```
-![map-0](https://user-images.githubusercontent.com/19553554/35082377-718385f0-fc54-11e7-88c2-bd1df8bf112b.gif)
+![map-demo](https://user-images.githubusercontent.com/19553554/35082377-718385f0-fc54-11e7-88c2-bd1df8bf112b.gif)
 
 **Show each area name**
 ```python
@@ -1653,7 +1653,7 @@ map.add("", attr, value, maptype='china', is_visualmap=True, visual_text_color='
 map.show_config()
 map.render()
 ```
-![map-1](https://user-images.githubusercontent.com/19553554/35082380-75e1b89c-fc54-11e7-8169-75884ffb67fb.gif)
+![map-demo](https://user-images.githubusercontent.com/19553554/35082380-75e1b89c-fc54-11e7-8169-75884ffb67fb.gif)
 
 **Note：** Settings can combine with visualMap component.
 
@@ -1667,7 +1667,7 @@ map.add("", attr, value, maptype='广东', is_visualmap=True, visual_text_color=
 map.show_config()
 map.render()
 ```
-![map-2](https://user-images.githubusercontent.com/19553554/35082381-786c8542-fc54-11e7-8886-5e4047fbeefd.gif)
+![map-demo](https://user-images.githubusercontent.com/19553554/35082381-786c8542-fc54-11e7-8886-5e4047fbeefd.gif)
 
 ```python
 value = [95.1, 23.2, 43.3, 66.4, 88.5]
@@ -1827,7 +1827,7 @@ parallel.config(schema)
 parallel.add("parallel", data, is_random=True)
 parallel.render()
 ```
-![parallel-0](https://user-images.githubusercontent.com/19553554/35090275-17c3dcde-fc74-11e7-94d6-e497668dba0c.png)
+![parallel-demo](https://user-images.githubusercontent.com/19553554/35090275-17c3dcde-fc74-11e7-94d6-e497668dba0c.png)
 
 ```python
 from pyecharts import Parallel
@@ -1864,7 +1864,7 @@ parallel.config(c_schema=c_schema)
 parallel.add("parallel", data)
 parallel.render()
 ```
-![parallel-1](https://user-images.githubusercontent.com/19553554/35090278-19ac1674-fc74-11e7-9aa1-2662296d3e22.png)
+![parallel-demo](https://user-images.githubusercontent.com/19553554/35090278-19ac1674-fc74-11e7-9aa1-2662296d3e22.png)
 
 **Note：** **lineStyle** Parameter is Configurable
 
@@ -2296,7 +2296,7 @@ radar.add("预算分配", v1, is_splitline=True, is_axisline_show=True)
 radar.add("实际开销", v2, label_color=["#4e79a7"], is_area_show=False)
 radar.render()
 ```
-![radar-0](https://user-images.githubusercontent.com/19553554/35082333-20046172-fc54-11e7-944a-b6e25bf5dd2a.gif)
+![radar-demo](https://user-images.githubusercontent.com/19553554/35082333-20046172-fc54-11e7-944a-b6e25bf5dd2a.gif)
 
 * is_area_show -> bool  
     It specifies whether to show split area.
@@ -2364,7 +2364,7 @@ radar.add("北京", value_bj, item_color="#f9713c", symbol=None)
 radar.add("上海", value_sh, item_color="#b3e4a1", symbol=None)
 radar.render()
 ```
-![radar-1](https://user-images.githubusercontent.com/19553554/35082335-224c23ca-fc54-11e7-910a-0914699ac06e.gif)
+![radar-demo](https://user-images.githubusercontent.com/19553554/35082335-224c23ca-fc54-11e7-910a-0914699ac06e.gif)
 
 **Tip：** symblo=None make marked graphic hiden(small circle)
 
@@ -2461,7 +2461,7 @@ sankey.add(
 )
 sankey.render()
 ```
-![sankey-1](https://user-images.githubusercontent.com/19553554/35090346-5c79d1da-fc74-11e7-869b-7db7ecf42d9e.png)
+![sankey-demo](https://user-images.githubusercontent.com/19553554/35090346-5c79d1da-fc74-11e7-869b-7db7ecf42d9e.png)
 
 
 ## Scatter
@@ -2501,7 +2501,7 @@ scatter.add("A", v1, v2)
 scatter.add("B", v1[::-1], v2)
 scatter.render()
 ```
-![scatter-0](https://user-images.githubusercontent.com/19553554/35090352-5f4bae42-fc74-11e7-9158-6fa70e5abf5d.png)
+![scatter-demo](https://user-images.githubusercontent.com/19553554/35090352-5f4bae42-fc74-11e7-9158-6fa70e5abf5d.png)
 
 **Realize color mapping values using Visualmap component**
 ```python
@@ -2671,7 +2671,7 @@ scatter3D = Scatter3D("3D 散点图示例", width=1200, height=600)
 scatter3D.add("", data, is_visualmap=True, visual_range_color=range_color)
 scatter3D.render()
 ```
-![scatter3d-0](https://user-images.githubusercontent.com/19553554/35081974-1ece83ca-fc52-11e7-86d7-bec5c4d3e2c8.gif)
+![scatter3d-demo](https://user-images.githubusercontent.com/19553554/35081974-1ece83ca-fc52-11e7-86d7-bec5c4d3e2c8.gif)
 
 **Note：** more details aboutt gird3D，please refer to [Chart Configuration](en-us/charts_configure)
 **Note:** this can be used with axis3D common configuration
@@ -3304,14 +3304,14 @@ wordcloud = WordCloud(width=1300, height=620)
 wordcloud.add("", name, value, word_size_range=[20, 100])
 wordcloud.render()
 ```
-![wordcloud-0](https://user-images.githubusercontent.com/19553554/35081546-cfe57770-fc4f-11e7-878a-e76d274afcbd.png)
+![wordcloud-demo](https://user-images.githubusercontent.com/19553554/35081546-cfe57770-fc4f-11e7-878a-e76d274afcbd.png)
 
 ```python
 wordcloud = WordCloud(width=1300, height=620)
 wordcloud.add("", name, value, word_size_range=[30, 100], shape='diamond')
 wordcloud.render()
 ```
-![wordcloud-1](https://user-images.githubusercontent.com/19553554/35081549-d2bde37e-fc4f-11e7-98b2-4cdc019433b1.png)
+![wordcloud-demo](https://user-images.githubusercontent.com/19553554/35081549-d2bde37e-fc4f-11e7-98b2-4cdc019433b1.png)
 
 **Note：** if and only if shape is default 'circle' the rotate_step parameter will take effect.
 **If you have read this document, you can read further [Custom Charts](en-us/charts_custom)**
