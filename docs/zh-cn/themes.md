@@ -67,57 +67,57 @@ bar = Bar()
 # 其他代码
 ```
 
-### 示例
+## 主题风格
 
-#### vintage
+### vintage
 
 ![vintage](https://user-images.githubusercontent.com/19553554/39868887-1bed3ae0-548e-11e8-99f5-8440ea578080.png)
 
-#### macarons
+### macarons
 
 ![macarons](https://user-images.githubusercontent.com/19553554/39868570-c3563a0e-548c-11e8-9795-e0ebea18853f.png)
 
-#### infographic
+### infographic
 
 ![infographic](https://user-images.githubusercontent.com/19553554/39868564-c1884dac-548c-11e8-9009-f61162759be3.png)
 
-#### shine
+### shine
 
 ![shine](https://user-images.githubusercontent.com/19553554/39868565-c1c8951a-548c-11e8-8351-2973cce47679.png)
 
-#### roma
+### roma
 
 ![roma](https://user-images.githubusercontent.com/19553554/39868568-c2c7b798-548c-11e8-9de8-3d3ae148f172.png)
 
-#### westeros
+### westeros
 
 ![westeros](https://user-images.githubusercontent.com/19553554/43997578-077ff444-9e12-11e8-947b-9b37b279e99f.png)
 
-#### wonderland
+### wonderland
 
 ![wonderland](https://user-images.githubusercontent.com/19553554/43997583-31b32b8c-9e12-11e8-8f39-4ef027e7a223.png)
 
-#### chalk
+### chalk
 
 ![chalk](https://user-images.githubusercontent.com/19553554/43997593-6835b652-9e12-11e8-98ff-1894c4475b5a.png)
 
-#### halloween
+### halloween
 
 ![halloween](https://user-images.githubusercontent.com/19553554/43997599-97fcc038-9e12-11e8-878d-0a9a538ad75e.png)
 
-#### essos
+### essos
 
 ![essos](https://user-images.githubusercontent.com/19553554/43997602-c0ce6390-9e12-11e8-94ba-5215b9e2c85b.png)
 
-#### walden
+### walden
 
 ![walden](https://user-images.githubusercontent.com/19553554/43997620-3868a01e-9e13-11e8-84d5-79e998051170.png)
 
-#### purple-passion
+### purple-passion
 
 ![purple-passion](https://user-images.githubusercontent.com/19553554/43997624-56ed56e2-9e13-11e8-95be-8815e1bdf0e5.png)
 
-#### romantic
+### romantic
 
 ![romantic](https://user-images.githubusercontent.com/19553554/44029175-eef6f170-9f2e-11e8-82cb-b60a39b28762.png)
 

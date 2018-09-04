@@ -4,7 +4,7 @@
 
 > A Python Echarts Plotting Library.
 
-* Chart: 28+ kinds of charts
+* Chart: 30+ kinds of charts
 * Map: 300+ Chinese cities / 200+ countries and regions
 * Platforms: Pure Python / Jupyter Notebook / Web Framework
 
