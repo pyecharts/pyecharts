@@ -3,10 +3,18 @@
 from __future__ import unicode_literals
 
 import random
+from test.constants import CLOTHES, WEEK, X_TIME, Y_WEEK
 
-from pyecharts import Bar, Line, Scatter, EffectScatter, Pie, Kline, HeatMap
-from pyecharts import Grid
-from test.constants import X_TIME, Y_WEEK, CLOTHES, WEEK
+from pyecharts import (
+    Bar,
+    EffectScatter,
+    Grid,
+    HeatMap,
+    Kline,
+    Line,
+    Pie,
+    Scatter,
+)
 
 
 def test_grid_top_bottom():

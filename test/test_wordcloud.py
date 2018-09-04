@@ -3,7 +3,6 @@
 
 from pyecharts import WordCloud
 
-
 name = [
     "Sam S Club",
     "Macys",

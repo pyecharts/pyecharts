@@ -3,9 +3,9 @@
 from __future__ import unicode_literals
 
 import random
+from test.constants import CLOTHES
 
 from pyecharts import Pie, Style
-from test.constants import CLOTHES
 
 
 def test_pie_default_formatter():

@@ -3,7 +3,7 @@
 </p>
 <h1 align="center">pyecharts</h1>
 <p align="center">
-    <em>pyecharts is a library to generate charts using Echarts. It simply provides the interface of 28+ kinds of charts between Echarts and Python.</em>
+    <em>pyecharts is a library to generate charts using Echarts. It simply provides the interface of 30+ kinds of charts between Echarts and Python.</em>
 </p>
 <p align="center">
     <a href="https://travis-ci.org/pyecharts/pyecharts">
