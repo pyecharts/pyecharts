@@ -27,26 +27,15 @@
         "#918597",
         "#f6f5ec"
     ],
-    "geo": {
-        "itemStyle": {
-            "emphasis": {
-                "areaColor": "#2a333d"
-            },
-            "normal": {
-                "areaColor": "#323c48",
-                "borderColor": "#111"
-            }
-        },
-        "label": {
-            "emphasis": {
-                "show": true,
-                "textStyle": {
-                    "color": "#eee"
-                }
-            }
-        },
-        "map": "china",
-        "roam": true
+    "grid3D": {
+        "boxDepth": 100,
+        "boxHeight": 100,
+        "boxWidth": 100,
+        "viewControl": {
+            "autoRotate": false,
+            "autoRotateSpeed": 10,
+            "rotateSensitivity": 5
+        }
     },
     "legend": [
         {
@@ -56,7 +45,7 @@
             "left": "center",
             "orient": "horizontal",
             "selectedMode": "multiple",
-            "show": false,
+            "show": true,
             "textStyle": {
                 "fontSize": 12
             },
@@ -65,55 +54,21 @@
     ],
     "series": [
         {
-            "coordinateSystem": "geo",
             "data": [
-                {
-                    "name": "\u9102\u5c14\u591a\u65af",
-                    "value": [
-                        109.781327,
-                        39.608266,
-                        12
-                    ]
-                },
-                {
-                    "name": "\u62db\u8fdc",
-                    "value": [
-                        120.38,
-                        37.35,
-                        12
-                    ]
-                },
-                {
-                    "name": "\u821f\u5c71",
-                    "value": [
-                        122.207216,
-                        29.985295,
-                        12
-                    ]
-                },
-                {
-                    "name": "\u9f50\u9f50\u54c8\u5c14",
-                    "value": [
-                        123.97,
-                        47.33,
-                        14
-                    ]
-                },
-                {
-                    "name": "\u76d0\u57ce",
-                    "value": [
-                        120.13,
-                        33.38,
-                        15
-                    ]
-                }
+                [
+                    0,
+                    0,
+                    0
+                ]
             ],
+            "itemStyle": {
+                "opacity": 1
+            },
             "label": {
                 "emphasis": {
-                    "position": "right",
                     "show": true,
                     "textStyle": {
-                        "fontSize": 15
+                        "fontSize": 12
                     }
                 },
                 "normal": {
@@ -124,27 +79,24 @@
                     }
                 }
             },
-            "symbol": "circle",
-            "symbolSize": 15,
-            "type": "scatter"
+            "type": "surface"
         }
     ],
     "series_id": "1",
     "title": [
         {
             "left": "auto",
-            "subtext": "data from pm2.5",
             "subtextStyle": {
                 "fontSize": 12
             },
-            "text": "\u5168\u56fd\u4e3b\u8981\u57ce\u5e02\u7a7a\u6c14\u8d28\u91cf",
+            "text": "3D \u66f2\u9762\u56fe\u793a\u4f8b",
             "textStyle": {
                 "fontSize": 18
             },
             "top": "auto"
         }
     ],
-     "toolbox": {
+    "toolbox": {
         "feature": {
             "dataView": {
                 "show": true,
@@ -171,7 +123,6 @@
         "backgroundColor": "rgba(50,50,50,0.7)",
         "borderColor": "#333",
         "borderWidth": 0,
-        "formatter": "{b}",
         "textStyle": {
             "fontSize": 14
         },
@@ -182,14 +133,22 @@
         "calculable": true,
         "inRange": {
             "color": [
-                "#50a3ba",
-                "#eac763",
-                "#d94e5d"
+                "#313695",
+                "#4575b4",
+                "#74add1",
+                "#abd9e9",
+                "#e0f3f8",
+                "#ffffbf",
+                "#fee090",
+                "#fdae61",
+                "#f46d43",
+                "#d73027",
+                "#a50026"
             ]
         },
         "left": "left",
-        "max": 200,
-        "min": 0,
+        "max": 3,
+        "min": -3,
         "orient": "vertical",
         "showLabel": true,
         "splitNumber": 5,
@@ -197,10 +156,40 @@
             "high",
             "low"
         ],
-        "textStyle": {
-            "color": "#fff"
-        },
+        "textStyle": {},
         "top": "bottom",
         "type": "continuous"
+    },
+    "xAxis3D": {
+        "axisLabel": {
+            "interval": "auto",
+            "margin": 8
+        },
+        "nameGap": 20,
+        "nameTextStyle": {
+            "fontSize": 16
+        },
+        "type": "value"
+    },
+    "yAxis3D": {
+        "axisLabel": {
+            "interval": "auto",
+            "margin": 8
+        },
+        "nameGap": 20,
+        "nameTextStyle": {
+            "fontSize": 16
+        },
+        "type": "value"
+    },
+    "zAxis3D": {
+        "axisLabel": {
+            "margin": 8
+        },
+        "nameGap": 20,
+        "nameTextStyle": {
+            "fontSize": 16
+        },
+        "type": "value"
     }
 }

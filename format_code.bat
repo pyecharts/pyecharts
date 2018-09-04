@@ -1,3 +1,1 @@
-pink *.py
-pink pyecharts/**/*.py
-pink test/*.py
+pink *.py pyecharts/**/*.py test/*.py -sp .isort.cfg

@@ -7,8 +7,8 @@
     * legend：图例组件。图例组件展现了不同系列的标记(symbol)，颜色和名字。可以通过点击图例控制哪些系列不显示。
     * label：图形上的文本标签，可用于说明图形的一些数据信息，比如值，名称等。
     * lineStyle：带线图形的线的风格选项(Line、Polar、Radar、Graph、Parallel)
-    * grid3D：3D笛卡尔坐标系组配置项，适用于 3D 图形。（Bar3D, Line3D, Scatter3D)
-    * axis3D：3D 笛卡尔坐标系 X，Y，Z 轴配置项，适用于 3D 图形。（Bar3D, Line3D, Scatter3D)
+    * grid3D：3D笛卡尔坐标系组配置项，适用于 3D 图形。（Bar3D, Line3D, Scatter3D, Surface3D)
+    * axis3D：3D 笛卡尔坐标系 X，Y，Z 轴配置项，适用于 3D 图形。（Bar3D, Line3D, Scatter3D, Surface3D)
     * visualMap：是视觉映射组件，用于进行『视觉编码』，也就是将数据映射到视觉元素（视觉通道）
     * markLine-markPoint：图形标记组件，用于标记指定的特殊数据，有标记线和标记点两种。（Bar、Line、Kline）
     * tooltip：提示框组件，用于移动或点击鼠标时弹出数据内容
@@ -239,7 +239,7 @@
     默认控制第一个 y 轴，如没特殊需求无须显示指定。单个为 int 类型而控制多个为 list 类型，如 [0, 1] 表示控制第一个和第二个 x 轴。
 
 额外的 dataZoom 控制条
-* is_datazoom_extrashow -> bool  
+* is_datazoom_extra_show -> bool  
     是否使用额外区域缩放组件，默认为 False
 * datazoom_extra_type -> str  
     额外区域缩放组件类型，默认为'slider'，有'slider', 'inside', 'both'可选
@@ -327,7 +327,7 @@
 
 
 ### grid3D
-**3D 笛卡尔坐标系组配置项，适用于 3D 图形。（Bar3D, Line3D, Scatter3D)**
+**3D 笛卡尔坐标系组配置项，适用于 3D 图形。（Bar3D, Line3D, Scatter3D, Surface3D)**
 
 * grid3d_width -> int  
     三维笛卡尔坐标系组件在三维场景中的高度。默认为 100
@@ -344,7 +344,7 @@
 
 
 ### axis3D
-**3D 笛卡尔坐标系 X，Y，Z 轴配置项，适用于 3D 图形。（Bar3D, Line3D, Scatter3D)**
+**3D 笛卡尔坐标系 X，Y，Z 轴配置项，适用于 3D 图形。（Bar3D, Line3D, Scatter3D, Surface3D)**
 
 #### 3D X 轴
 
@@ -523,3 +523,5 @@
     指定是否显示右侧实用工具箱，默认为 True。
 * is_more_utils -> bool  
     指定是否提供更多的实用工具按钮。默认只提供『数据视图』和『下载』按钮
+
+**如果你已阅读完本篇文档，可以进一步阅读 [基本图表篇](zh-cn/charts_base)**

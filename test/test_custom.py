@@ -1,11 +1,20 @@
 #!/usr/bin/env python
 # coding=utf-8
 from __future__ import unicode_literals
-from random import randint
 
-from pyecharts import Bar, Line, Scatter, EffectScatter
-from pyecharts import Grid, Timeline, Overlap, Page
+from random import randint
 from test.constants import CLOTHES, WEEK
+
+from pyecharts import (
+    Bar,
+    EffectScatter,
+    Grid,
+    Line,
+    Overlap,
+    Page,
+    Scatter,
+    Timeline,
+)
 
 
 def test_page_grid_timeline_overlap():

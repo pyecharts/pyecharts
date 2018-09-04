@@ -1,9 +1,9 @@
 import os
+
+import pyecharts.exceptions as exceptions
 from mock import patch
 from nose.tools import eq_, raises
-
 from pyecharts.js_extensions import JsExtension
-import pyecharts.exceptions as exceptions
 
 
 def produce_test_js_extension():

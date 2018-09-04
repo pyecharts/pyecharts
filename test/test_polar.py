@@ -4,9 +4,9 @@ from __future__ import unicode_literals
 
 import math
 import random
+from test.constants import WEEK, X_TIME
 
 from pyecharts import Polar
-from test.constants import WEEK, X_TIME
 
 
 def test_polar_type_scatter_one():

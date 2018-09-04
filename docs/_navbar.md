@@ -5,7 +5,7 @@
   - [pyecharts-snapshot](https://github.com/pyecharts/pyecharts-snapshot)
   - [jupyter-echarts-pypkg](https://github.com/pyecharts/jupyter-echarts-pypkg)
 - [团队](zh-cn/team)
-- [支持 pyecharts](zh-cn/donate)
-- 语言
+- [捐赠](zh-cn/donate)
+- Language
   - [中文](/zh-cn/)
   - [English](/en-us/)
