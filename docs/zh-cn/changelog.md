@@ -14,6 +14,12 @@
     #### Fixed
     * [issue#715](https://github.com/pyecharts/pyecharts/issues/715) 修复 online() 方法不生效的 bug
 
+    #### Updated
+    * [issue#702](https://github.com/pyecharts/pyecharts/issues/702) Toobox 选项标签文本更改为更通用的英语。
+
+    #### Removed
+    * 停止对 Python3.4 版本的支持和维护。
+
 
 * ### version 0.5.9 - 2018.8.26
 
