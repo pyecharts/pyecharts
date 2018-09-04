@@ -220,7 +220,7 @@ lineStyle：line style for Line, Polar, Radar, Graph, Parallel.
 * line_type -> str  
     Line type,it can be 'solid', 'dashed', 'dotted'
 
-grid3D：gird3D components in cartesian coordinate system(Bar3D, Line3D, Scatter3D)
+grid3D：gird3D components in cartesian coordinate system(Bar3D, Line3D, Scatter3D, Surface3D)
 
 * grid_width -> int  
     Width of grid component. Adaptive by default.
@@ -1853,6 +1853,97 @@ scatter3D.render()
 ![scatter3d-0](https://user-images.githubusercontent.com/19553554/35081974-1ece83ca-fc52-11e7-86d7-bec5c4d3e2c8.gif)
 
 **Tip：** more details aboutt gird3D，please refer to [Global-options](https://github.com/chenjiandongx/pyecharts/blob/master/document/en-us/documentation.md#Global-options)
+
+
+## Surface3D
+Surface3D.add() signatures
+```python
+add(name, data,
+    grid3d_opacity=1, **kwargs)
+```
+* name -> str  
+    Series name used for displaying in tooltip and filtering with legend,or updaing data and configuration with setOption.
+* data -> [list]/ndarray 
+    data item，1 row is a data unit，1 column is a field data
+* grid3d_opacity -> int  
+    default is 1(opacity)
+
+```python
+import math
+
+from pyecharts import Surface3D
+
+
+def create_surface3d_data():
+    for t0 in range(-60, 60, 1):
+        y = t0 / 60
+        for t1 in range(-60, 60, 1):
+            x = t1 / 60
+            if math.fabs(x) < 0.1 and math.fabs(y) < 0.1:
+                z = '-'
+            else:
+                z = math.sin(x * math.pi) * math.sin(y * math.pi)
+            yield [x, y, z]
+
+range_color = [
+    "#313695",
+    "#4575b4",
+    "#74add1",
+    "#abd9e9",
+    "#e0f3f8",
+    "#ffffbf",
+    "#fee090",
+    "#fdae61",
+    "#f46d43",
+    "#d73027",
+    "#a50026",
+]
+
+_data = list(create_surface3d_data())
+surface3d = Surface3D("3D 曲面图示例", width=1200, height=600)
+surface3d.add(
+    "",
+    _data,
+    is_visualmap=True,
+    visual_range_color=range_color,
+    visual_range=[-3, 3],
+    grid3d_rotate_sensitivity=5,
+)
+surface3d.render()
+```
+![surface3d-demo](https://user-images.githubusercontent.com/19553554/44899702-0dba8680-ad35-11e8-95fd-4bc21e673b8b.gif)
+
+**曲面波图**
+```python
+import math
+
+from pyecharts import Surface3D
+
+
+def create_surface3d_data():
+    for t0 in range(-30, 30, 1):
+        y = t0 / 10
+        for t1 in range(-30, 30, 1):
+            x = t1 / 10
+            z = math.sin(x * x + y * y) * x / 3.14
+            yield [x, y, z]
+
+data = list(create_surface3d_data())
+surface3D = Surface3D("3D 曲面图", width=1200, height=600)
+surface3D.add(
+    "",
+    data,
+    is_visualmap=True,
+    visual_range=[-1, 1],
+    visual_range_color=range_color,
+)
+
+surface3D.render()
+```
+![surface3d-demo](https://user-images.githubusercontent.com/19553554/44898394-60923f00-ad31-11e8-81a7-5d35214490cd.gif)
+
+**Note：** more details aboutt gird3D，please refer to [Global-options](https://github.com/chenjiandongx/pyecharts/blob/master/document/en-us/documentation.md#Global-options)
+
 
 ## WordCloud
 WordCloud.add() signatures
