@@ -8,7 +8,7 @@
 
     #### Added
     * [issue#699](https://github.com/pyecharts/pyecharts/issues/699) 为漏斗图新增 `funnel_sort` 和 `funnel_gap` 分别用于控制漏斗图的排序方式和数据图形间隔。
-    * [issue#703](https://github.com/pyecharts/pyecharts/issues/715) 支持设置 Echarts 某选项为空 (null)
+    * [issue#703](https://github.com/pyecharts/pyecharts/issues/703) 支持设置 Echarts 某选项为空 (null)
     * [issue#720](https://github.com/pyecharts/pyecharts/issues/720) 新增 3D 曲面图图形种类。
 
     #### Fixed
