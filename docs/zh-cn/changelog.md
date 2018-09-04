@@ -1,17 +1,21 @@
 # 版本日志
 
-* ### version 0.5.10（dev）
+* ### version 0.6.0（dev）
+    * TODO
+
+
+* ### version 0.5.10 - 2018.9.4（current）
 
     #### Added
     * [issue#699](https://github.com/pyecharts/pyecharts/issues/699) 为漏斗图新增 `funnel_sort` 和 `funnel_gap` 分别用于控制漏斗图的排序方式和数据图形间隔。
-    * [issue#703](https://github.com/pyecharts/pyecharts/issues/715) 支持设置 Echarts 某选项为空 (null)
+    * [issue#703](https://github.com/pyecharts/pyecharts/issues/703) 支持设置 Echarts 某选项为空 (null)
     * [issue#720](https://github.com/pyecharts/pyecharts/issues/720) 新增 3D 曲面图图形种类。
 
     #### Fixed
     * [issue#715](https://github.com/pyecharts/pyecharts/issues/715) 修复 online() 方法不生效的 bug
 
 
-* ### version 0.5.9 - 2018.8.26（current）
+* ### version 0.5.9 - 2018.8.26
 
     #### Added
     * [pr#685](https://github.com/pyecharts/pyecharts/pull/685) 图表方法(`use_theme`/`config`/`add`)支持链式调用
