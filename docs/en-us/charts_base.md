@@ -2393,22 +2393,23 @@ add(name, nodes, links,
      chart name
 
 * nodes -> list  
-    桑基图结点，必须包含的数据项有：
-    * name：数据项名称
-    * value：数据项数值
+    The data items that must be included in the Sankey chart node are:
+    * name: data item name
+    * value: data item value
 
 * links -> list  
-    桑基图结点关系
-    * source：边的源节点名称（必须有！）
-    * target：边的目标节点名称（必须有！）
-    * value：边的数值，决定边的宽度。
+    Sankey node link relation
+    * source：The source node name of the edge ( required! )
+    * target：Target node name of the edge ( required! )
+    * value：The value of the edge determines the width of the edge
 
  * sankey_node_width -> int  
-    图中每个矩形节点的宽度。默认为 20
- * sankey_node_gap -> int  
-    图中每一列任意两个矩形节点之间的间隔。默认为 8
+    The width of each rectangular node in the chart. Default is 20
 
-**简单示例**
+ * sankey_node_gap -> int  
+    The interval between any two rectangular nodes in each column of the chart. Default is 8
+
+**Simple example**
 ```python
 from pyecharts import Sankey
 
@@ -2438,7 +2439,7 @@ sankey.render()
 ```
 ![sankey-demo](https://user-images.githubusercontent.com/19553554/35090344-5b701286-fc74-11e7-8c53-9a5d0e6797e5.png)
 
-**使用官方提供的 json 数据**
+**Use json data from official**
 ```python
 import os
 import json
@@ -2463,22 +2464,29 @@ sankey.render()
 ![sankey-1](https://user-images.githubusercontent.com/19553554/35090346-5c79d1da-fc74-11e7-869b-7db7ecf42d9e.png)
 
 
-
-
 ## Scatter
 > The scatter chart in rectangular coordinate could be used to present the relation between x and y.
-> If data have multiple dimensions, the values of the other dimensions can be visualized through symbol with various sizes and colors, which becomes a bubble chart. These can be done by using with visualMap component.
+> If data have multiple dimensions, the values of the other dimensions can be visualized through symbol with various sizes and colors, which becomes a bubble chart. These can be done by using with geo component.
 
 Scatter.add() signatures
 ```python
-add(name, x_axis, y_axis, symbol_size=10, **kwargs)
+add(name, x_axis, y_axis, extra_data=None, symbol_size=10, **kwargs)
 ```
 * name -> str  
     Series name used for displaying in tooltip and filtering with legend,or updaing data and configuration with setOption.
+
 * x_axis -> list  
     data of xAxis
+
 * y_axis -> list  
     data of yAxis
+
+* extra_data -> list[int]  
+    The third dimension data, the x-axis is the first dimension and the y-axis is the second dimension. (View elements can be mapped to a third dimension in a visualmap)
+
+* extra_name -> list[str]  
+    The name of the extra data item. You can specify a name for each data point.
+
 * symbol_size -> int  
     default -> 10  
     symbol size
@@ -2491,12 +2499,125 @@ v2 = [10, 20, 30, 40, 50, 60]
 scatter = Scatter("散点图示例")
 scatter.add("A", v1, v2)
 scatter.add("B", v1[::-1], v2)
-scatter.show_config()
 scatter.render()
 ```
 ![scatter-0](https://user-images.githubusercontent.com/19553554/35090352-5f4bae42-fc74-11e7-9158-6fa70e5abf5d.png)
 
-Scatter also built-in draw method.
+**Realize color mapping values using Visualmap component**
+```python
+scatter = Scatter("散点图示例")
+scatter.add("A", v1, v2)
+scatter.add("B", v1[::-1], v2, is_visualmap=True)
+scatter.render()
+```
+![scatter-demo](https://user-images.githubusercontent.com/19553554/35090355-60bc82b0-fc74-11e7-8cc2-4f10c1c8193e.gif)
+
+**Map values ​​with chart point size using the Visualmap component**
+```python
+scatter = Scatter("散点图示例")
+scatter.add("A", v1, v2)
+scatter.add(
+    "B",
+    v1[::-1],
+    v2,
+    is_visualmap=True,
+    visual_type="size",
+    visual_range_size=[20, 80],
+)
+scatter.render()
+```
+![scatter-demo](https://user-images.githubusercontent.com/19553554/35090360-62d94cfe-fc74-11e7-869f-ae3a3281f27b.gif)
+
+**Map to the third dimension data using Visualmap components**
+```python
+data = [
+        [28604, 77, 17096869],
+        [31163, 77.4, 27662440],
+        [1516, 68, 1154605773],
+        [13670, 74.7, 10582082],
+        [28599, 75, 4986705],
+        [29476, 77.1, 56943299],
+        [31476, 75.4, 78958237],
+        [28666, 78.1, 254830],
+        [1777, 57.7, 870601776],
+        [29550, 79.1, 122249285],
+        [2076, 67.9, 20194354],
+        [12087, 72, 42972254],
+        [24021, 75.4, 3397534],
+        [43296, 76.8, 4240375],
+        [10088, 70.8, 38195258],
+        [19349, 69.6, 147568552],
+        [10670, 67.3, 53994605],
+        [26424, 75.7, 57110117],
+        [37062, 75.4, 252847810]
+    ]
+
+x_lst = [v[0] for v in data]
+y_lst = [v[1] for v in data]
+extra_data = [v[2] for v in data]
+sc = Scatter()
+sc.add(
+    "scatter",
+    x_lst,
+    y_lst,
+    extra_data=extra_data,
+    is_visualmap=True,
+    visual_dimension=2,
+    visual_orient="horizontal",
+    visual_type="size",
+    visual_range=[254830, 1154605773],
+    visual_text_color="#000",
+)
+sc.render()
+```
+![scatter-demo](https://user-images.githubusercontent.com/19553554/35090364-63f2ef78-fc74-11e7-950b-75ebd13e1f03.gif)
+
+**Give each coordinate point a name that can be used for tooltip display**
+```python
+
+def custom_formatter(params):
+    return params.value[3]
+
+data = [
+    [28604, 77, 17096],
+    [31163, 77.4, 27662],
+    [1516, 68, 11546],
+]
+x_lst = [v[0] for v in data]
+y_lst = [v[1] for v in data]
+extra_data = [v[2] for v in data]
+extra_name = ["point A", "point B", "point C"]
+sc = Scatter()
+sc.add(
+    "scatter",
+    x_lst,
+    y_lst,
+    extra_data=extra_data,
+    extra_name=extra_name,
+    is_visualmap=True,
+    visual_dimension=2,
+    visual_orient="horizontal",
+    visual_type="size",
+    visual_range=[17000, 28000],
+    visual_text_color="#000",
+    tooltip_formatter=custom_formatter,
+)
+sc.render()
+```
+![scatter-demo](https://user-images.githubusercontent.com/19553554/43563684-e5e3cc34-9655-11e8-9792-0aa03a9233c6.gif)
+
+**Note：** Please use the Visualmap in the common configuration.
+
+**The default axis of the scatter chart is value axis. If you want to implement the category axis, you can modify it by `xaxis_type`**
+```python
+scatter = Scatter("散点图示例")
+scatter.add("A", ["a", "b", "c", "d", "e", "f"], v2)
+scatter.add("B", ["a", "b", "c", "d", "e", "f"], v1[::-1], xaxis_type="category")
+scatter.render()
+```
+![scatter-demo](https://user-images.githubusercontent.com/19553554/35090414-916add4e-fc74-11e7-83c1-d428387e8101.png)
+
+**Scatter also have built-in draw method**
 ```python
 draw(path, color=None)
 ```
@@ -2505,6 +2626,7 @@ convert pixels on the image into array ,when colour is （255,255,255）only ret
 ```
 * path -> str  
     path of Image that want to draw
+
 * color -> str  
     select a color to exclude, (225, 225, 225) means Keep only white pixel information.
 
@@ -2518,7 +2640,6 @@ from pyecharts import Scatter
 scatter = Scatter("散点图示例")
 v1, v2 = scatter.draw("../images/pyecharts-0.png")
 scatter.add("pyecharts", v1, v2, is_random=True)
-scatter.show_config()
 scatter.render()
 ```
 ![pyecharts-1](https://user-images.githubusercontent.com/19553554/35104426-c4ac81ce-fca3-11e7-9b46-7fd729ec3ece.png)
@@ -2531,8 +2652,10 @@ add(name, data, grid3D_opacity=1, **kwargs)
 ```
 * name -> str
     Series name used for displaying in tooltip and filtering with legend,or updaing data and configuration with setOption.
+
 * data -> [[], []]  
     data of line3D
+
 * grid3D_opacity -> float  
     default -> 1  
     opacity of gird3D item
@@ -2550,8 +2673,8 @@ scatter3D.render()
 ```
 ![scatter3d-0](https://user-images.githubusercontent.com/19553554/35081974-1ece83ca-fc52-11e7-86d7-bec5c4d3e2c8.gif)
 
-**Tip：** more details aboutt gird3D，please refer to [Global-options](https://github.com/chenjiandongx/pyecharts/blob/master/document/en-us/documentation.md#Global-options)
-
+**Note：** more details aboutt gird3D，please refer to [Chart Configuration](en-us/charts_configure)
+**Note:** this can be used with axis3D common configuration
 
 ## Surface3D
 Surface3D.add() signatures
@@ -2561,8 +2684,10 @@ add(name, data,
 ```
 * name -> str  
     Series name used for displaying in tooltip and filtering with legend,or updaing data and configuration with setOption.
+
 * data -> [list]/ndarray 
     data item，1 row is a data unit，1 column is a field data
+
 * grid3d_opacity -> int  
     default is 1(opacity)
 
@@ -2611,7 +2736,7 @@ surface3d.render()
 ```
 ![surface3d-demo](https://user-images.githubusercontent.com/19553554/44899702-0dba8680-ad35-11e8-95fd-4bc21e673b8b.gif)
 
-**曲面波图**
+**Surface3D wave chart**
 ```python
 import math
 
@@ -2640,7 +2765,383 @@ surface3D.render()
 ```
 ![surface3d-demo](https://user-images.githubusercontent.com/19553554/44898394-60923f00-ad31-11e8-81a7-5d35214490cd.gif)
 
-**Note：** more details aboutt gird3D，please refer to [Global-options](https://github.com/chenjiandongx/pyecharts/blob/master/document/en-us/documentation.md#Global-options)
+**Note：** more details aboutt gird3D，please refer to [Chart Configuration](en-us/charts_configure)
+**Note:** this can be used with axis3D common configuration
+
+## ThemeRiver
+> The ThemeRiver chart is a special flow chart that is mainly used to indicate changes in events or topics over a period of time.
+
+ThemeRiver.add() signatures
+```python
+add(name, data)
+```
+* name -> list  
+    The chart name must be of type list, and each value in list is the kind of data.
+
+* data -> [list] / [[], []]  
+    Data item. In the data, each row is a "data item", and each column belongs to a "dimension". Each data item requires at least three dimensions, such as ['2015/11/08', 10, 'DQ'], respectively [time, value, type (legend name)]
+
+```python
+from pyecharts import ThemeRiver
+
+data = [
+    ['2015/11/08', 10, 'DQ'], ['2015/11/09', 15, 'DQ'], ['2015/11/10', 35, 'DQ'],
+    ['2015/11/14', 7, 'DQ'], ['2015/11/15', 2, 'DQ'], ['2015/11/16', 17, 'DQ'],
+    ['2015/11/17', 33, 'DQ'], ['2015/11/18', 40, 'DQ'], ['2015/11/19', 32, 'DQ'],
+    ['2015/11/20', 26, 'DQ'], ['2015/11/21', 35, 'DQ'], ['2015/11/22', 40, 'DQ'],
+    ['2015/11/23', 32, 'DQ'], ['2015/11/24', 26, 'DQ'], ['2015/11/25', 22, 'DQ'],
+    ['2015/11/08', 35, 'TY'], ['2015/11/09', 36, 'TY'], ['2015/11/10', 37, 'TY'],
+    ['2015/11/11', 22, 'TY'], ['2015/11/12', 24, 'TY'], ['2015/11/13', 26, 'TY'],
+    ['2015/11/14', 34, 'TY'], ['2015/11/15', 21, 'TY'], ['2015/11/16', 18, 'TY'],
+    ['2015/11/17', 45, 'TY'], ['2015/11/18', 32, 'TY'], ['2015/11/19', 35, 'TY'],
+    ['2015/11/20', 30, 'TY'], ['2015/11/21', 28, 'TY'], ['2015/11/22', 27, 'TY'],
+    ['2015/11/23', 26, 'TY'], ['2015/11/24', 15, 'TY'], ['2015/11/25', 30, 'TY'],
+    ['2015/11/26', 35, 'TY'], ['2015/11/27', 42, 'TY'], ['2015/11/28', 42, 'TY'],
+    ['2015/11/08', 21, 'SS'], ['2015/11/09', 25, 'SS'], ['2015/11/10', 27, 'SS'],
+    ['2015/11/11', 23, 'SS'], ['2015/11/12', 24, 'SS'], ['2015/11/13', 21, 'SS'],
+    ['2015/11/14', 35, 'SS'], ['2015/11/15', 39, 'SS'], ['2015/11/16', 40, 'SS'],
+    ['2015/11/17', 36, 'SS'], ['2015/11/18', 33, 'SS'], ['2015/11/19', 43, 'SS'],
+    ['2015/11/20', 40, 'SS'], ['2015/11/21', 34, 'SS'], ['2015/11/22', 28, 'SS'],
+    ['2015/11/14', 7, 'QG'], ['2015/11/15', 2, 'QG'], ['2015/11/16', 17, 'QG'],
+    ['2015/11/17', 33, 'QG'], ['2015/11/18', 40, 'QG'], ['2015/11/19', 32, 'QG'],
+    ['2015/11/20', 26, 'QG'], ['2015/11/21', 35, 'QG'], ['2015/11/22', 40, 'QG'],
+    ['2015/11/23', 32, 'QG'], ['2015/11/24', 26, 'QG'], ['2015/11/25', 22, 'QG'],
+    ['2015/11/26', 16, 'QG'], ['2015/11/27', 22, 'QG'], ['2015/11/28', 10, 'QG'],
+    ['2015/11/08', 10, 'SY'], ['2015/11/09', 15, 'SY'], ['2015/11/10', 35, 'SY'],
+    ['2015/11/11', 38, 'SY'], ['2015/11/12', 22, 'SY'], ['2015/11/13', 16, 'SY'],
+    ['2015/11/14', 7, 'SY'], ['2015/11/15', 2, 'SY'], ['2015/11/16', 17, 'SY'],
+    ['2015/11/17', 33, 'SY'], ['2015/11/18', 40, 'SY'], ['2015/11/19', 32, 'SY'],
+    ['2015/11/20', 26, 'SY'], ['2015/11/21', 35, 'SY'], ['2015/11/22', 4, 'SY'],
+    ['2015/11/23', 32, 'SY'], ['2015/11/24', 26, 'SY'], ['2015/11/25', 22, 'SY'],
+    ['2015/11/26', 16, 'SY'], ['2015/11/27', 22, 'SY'], ['2015/11/28', 10, 'SY'],
+    ['2015/11/08', 10, 'DD'], ['2015/11/09', 15, 'DD'], ['2015/11/10', 35, 'DD'],
+    ['2015/11/11', 38, 'DD'], ['2015/11/12', 22, 'DD'], ['2015/11/13', 16, 'DD'],
+    ['2015/11/14', 7, 'DD'], ['2015/11/15', 2, 'DD'], ['2015/11/16', 17, 'DD'],
+    ['2015/11/17', 33, 'DD'], ['2015/11/18', 4, 'DD'], ['2015/11/19', 32, 'DD'],
+    ['2015/11/20', 26, 'DD'], ['2015/11/21', 35, 'DD'], ['2015/11/22', 40, 'DD'],
+    ['2015/11/23', 32, 'DD'], ['2015/11/24', 26, 'DD'], ['2015/11/25', 22, 'DD']
+]
+tr = ThemeRiver("主题河流图示例图")
+tr.add(['DQ', 'TY', 'SS', 'QG', 'SY', 'DD'], data, is_label_show=True)
+tr.render()
+```
+![themeriver-demo](https://user-images.githubusercontent.com/19553554/35090642-3aaf6eba-fc75-11e7-8560-d36f1d225f6d.gif)
+
+**Note：** It can be seen that the third value in each data item is the type of the item, and the type can be specified in the first parameter of `add()`.
+
+
+## Tree
+> The tree chart is mainly used to visualize tree data structure. It is a special hierarchical type with a unique root node, a left subtree, and a right subtree.
+
+Tree.add() signatures
+```python
+add(name, data,
+    tree_layout="orthogonal",
+    tree_symbol="emptyCircle",
+    tree_symbol_size=7,
+    tree_orient="LR",
+    tree_top="12%",
+    tree_left="12%",
+    tree_bottom="12%",
+    tree_right="12%",
+    tree_collapse_interval=0,
+    tree_label_position="left",
+    tree_label_vertical_align="middle",
+    tree_label_align="right",
+    tree_label_text_size=12,
+    tree_label_rotate=0,
+    tree_leaves_position="right",
+    tree_leaves_vertical_align="middle",
+    tree_leaves_align="left",
+    tree_leaves_text_size=12,
+    tree_leaves_rotate=0,
+    **kwargs
+    )
+```
+* name -> str  
+    The name of the series, used for the display of the tooltip and filtering the legend.
+
+* data -> list  
+    The data of the tree chart is **a tree**, each node includes `value` (optional), `name`, `children` (also tree, optional) as shown below :   
+    ```
+    [
+        {
+            value: 1212,    # value
+            # child node
+            children: [
+                {
+                    # child node value
+                    value: 2323,
+                    # child node name
+                    name: 'description of this node',
+                    children: [...],
+                },
+                {
+                    value: 4545,
+                    name: 'description of this node',
+                    children: [
+                        {
+                            value: 5656,
+                            name: 'description of this node',
+                            children: [...]
+                        },
+                        ...
+                    ]
+                }
+            ]
+        },
+        ...
+    ]
+    ```
+* tree_layout -> str    
+    Default -> `"orthogonal"`.   
+    The layout of the tree diagram has two types: `orthogonal` and `radial`.   
+    The `orthogonal` layout here is what we usually call the horizontal and vertical directions, and the corresponding parameter value is `'orthogonal'`.   
+    The `radial` layout refers to the layout where the root node is the center, each layer is a ring, the layers are diverged outward. The corresponding parameter takes the value is `'radial'`. 
+
+* tree_symbol -> str  
+    Default -> "emptyCircle"
+    Symbol graphics. The types of tags provided by ECharts include 'emptyCircle', 'circle', 'rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow', 'none'. 
+
+* tree_symbol_size -> int/list   
+    Default -> 7
+    The size of the symbol. It can be set to a single number such as 10 or expressed as an array with width and height. For example, [20, 10] means the mark width is 20 and the height is 10. 
+
+* tree_orient -> str   
+    Default -> "LR"
+    The direction of the orthogonal layout in the tree chart. The configuration item only takes effect when layout = 'orthogonal'.   
+    Corresponding to the horizontal direction from left to right, from right to left;  
+    The vertical from top to bottom, bottom to top.   
+    The values ​​are 'LR', 'RL', 'TB', 'BT'. Note that the previous configuration item value 'horizontal' is equivalent to 'LR' and 'vertical' is equivalent to 'TB'. 
+
+* tree_top -> str   
+    Default -> "12%"   
+    The distance from the top of the container to the tree component. It can be a specific pixel value like 20, which can be a percentage like '20%' relative to the height and width of the container. 
+
+* tree_left -> str   
+    Default -> "12%"   
+    The distance from the left of the container to the tree component. It can be a specific pixel value like 20, which can be a percentage like '20%' relative to the height and width of the container. 
+
+* tree_bottom -> str  
+    Default -> "12%"
+    The distance from the bottom of the container to the tree component. It can be a specific pixel value like 20, which can be a percentage like '20%' relative to the height and width of the container. 
+
+* tree_right -> str  
+    Default -> "12%"
+    The distance from the right of the container to the tree component. It can be a specific pixel value like 20, which can be a percentage like '20%' relative to the height and width of the container. 
+
+* tree_collapse_interval -> int   
+    Default -> 0
+    Folding node interval. When the node is too much, it can solve the node display messy interval.
+
+* tree_label_position -> str/list  
+    The position of the label. Default is "left"
+    ```
+    * [x, y]
+    The position of the label relative to the upper left corner of the chart bounding box. It is represented by a relative percentage or absolute pixel value. Example:
+    // Absolute pixel value
+    position: [10, 10],
+    // Relative pixel value
+    position: ['50%', '50%']
+    * 'top'
+    * 'left'
+    * 'right'
+    * 'bottom'
+    * 'inside'
+    * 'insideLeft'
+    * 'insideRight'
+    * 'insideTop'
+    * 'insideBottom'
+    * 'insideTopLeft'
+    * 'insideBottomLeft'
+    * 'insideTopRight'
+    * 'insideBottomRight'
+    ```
+* tree_label_vertical_align -> str  
+    The label of parent node is vertically aligned and default is automatic. Optional: 'top', 'middle', 'bottom'
+
+* tree_label_align -> str  
+    The label of parent node is horizontally aligned and default is automatic. Optional：'left'，'center'，'right'
+
+* tree_label_text_size -> int  
+    The label font size of parent node
+
+* tree_label_rotate -> int   
+    Default -> 0
+    Rotate the parent node label. From -90 degrees to 90 degrees. Positive values ​​are counterclockwise. 
+
+* tree_leaves_position -> str  
+    The distance between the chart elements. Valid when position is a character description value (such as 'top', 'insideRight'). Cooperate with tree_label_position
+
+* tree_leaves_vertical_align -> str  
+    The label of leaf node is vertically aligned and default is automatic. Optional: 'top', 'middle', 'bottom'
+
+* tree_leaves_align -> str  
+    The label of leaf node is horizontally aligned and default is automatic. Optional：'left'，'center'，'right'
+
+* tree_leaves_text_size -> int  
+    The label font size of leaf node
+
+* tree_leaves_rotate -> int  
+    Default is 0  
+    Rotate the leaf node label. From -90 degrees to 90 degrees. Positive values ​​are counterclockwise. 
+
+
+**Simple example**
+
+First, suppose you have a data that requires generating tree chart, which is probably like this:  
+```
+
+     |----B     |----E----|----I
+     |          |
+     |----C-----|----F         |----J
+A----|                         |
+     |----D-----|----G----|----|----K
+                |
+                |----H
+```
+You need to write JSON data, the nodes are recursive nesting mode based on {name, children}, as follows:  
+```json
+data = [
+    {
+        "children": [
+            {
+                "children": [],
+                "name": "B"
+            },
+            {
+                "children": [
+                    {
+                        "children": [
+                            {
+                                "children": [],
+                                "name": "I"
+                            }
+                        ],
+                        "name": "E"
+                    },
+                    {
+                        "children": [],
+                        "name": "F"
+                    }
+                ],
+                "name": "C"
+            },
+            {
+                "children": [
+                    {
+                        "children": [
+                            {
+                                "children": [],
+                                "name": "J"
+                            },
+                            {
+                                "children": [],
+                                "name": "K"
+                            }
+                        ],
+                        "name": "G"
+                    },
+                    {
+                        "children": [],
+                        "name": "H"
+                    }
+                ],
+                "name": "D"
+            }
+        ],
+        "name": "A"
+    }
+]
+```
+Generate Tree chart
+```python
+from pyecharts import Tree
+
+tree = Tree("树图示例")
+tree.add("", data)
+tree.render()
+```
+![tree-demo](https://user-images.githubusercontent.com/19553554/44004354-fc603b0a-9e93-11e8-9437-778a1e4a3001.png)
+
+**Use tree_collapse_interva to control node spacing**
+
+When there are too many nodes, the node can be found to display messy intervals. Take the `flare.json` data from offical as an example. When `tree_collapse_interval` is 0 (indicating that all nodes are not collapsed), the text is crowded together.
+```python
+import os
+import json
+import codecs
+
+from pyecharts import Tree
+
+with codecs.open(
+    os.path.join("fixtures", "flare.json"), "r", encoding="utf-8"
+) as f:
+    j = json.load(f)
+tree = Tree(width=1200, height=800)
+tree.add("", data)
+tree.render()
+```
+![tree-demo](https://user-images.githubusercontent.com/19553554/44004551-a41321f8-9e96-11e8-9837-ddf930394240.png)
+
+Set tree_collapse_interval equals to 2 (means interval folding nodes), and then looks better
+```python
+import os
+import json
+import codecs
+
+from pyecharts import Tree
+
+with codecs.open(
+    os.path.join("fixtures", "flare.json"), "r", encoding="utf-8"
+) as f:
+    j = json.load(f)
+data = [j]
+
+tree = Tree(width=1200, height=800)
+tree.add("", data, tree_collapse_interval=2)
+tree.render()
+```
+![tree-demo](https://user-images.githubusercontent.com/19553554/44004598-5636d74e-9e97-11e8-8a5c-92de6278880d.gif)
+
+**Specify direction, right to left**
+```python
+tree = Tree(width=1200, height=800)
+tree.add("", data, tree_orient="RL", tree_collapse_interval=2)
+tree.render()
+```
+![tree-demo](https://user-images.githubusercontent.com/19553554/44004607-8cd0ff3c-9e97-11e8-97b1-c4bd343ce49c.png)
+
+**Specify direction, from top to bottom**
+```python
+tree = Tree(width=1200, height=800)
+tree.add(
+    "",
+    data,
+    tree_collapse_interval=2,
+    tree_orient="TB",
+    tree_label_rotate=-90,
+    tree_leaves_rotate=-90
+)
+tree.render
+```
+![tree-demo](https://user-images.githubusercontent.com/19553554/44004803-5537bada-9e9b-11e8-83f1-4c8b4df81d1e.png)
+
+**Specify layout** 
+```python
+tree = Tree(width=1200, height=800)
+tree.add("", data, tree_collapse_interval=2, tree_layout="radial")
+tree.render()
+```
+![tree-demo](https://user-images.githubusercontent.com/19553554/44004643-15e284ee-9e98-11e8-93f6-8103c3af42f4.png)
+
+**Control container layout**
+```python
+tree = Tree(width=1200, height=800)
+tree.add("", data, tree_collapse_interval=2, tree_top="15%", tree_right="20%")
+tree.render()
+```
+![tree-demo](https://user-images.githubusercontent.com/19553554/44004651-399e4ab2-9e98-11e8-93b5-8ab6e9926408.png)
 
 
 ## TreeMap
@@ -2662,13 +3163,13 @@ add(name, attr, value,
     ```
     [
         {
-            value: 1212,    # 数值
+            value: 1212,    # value
             # 子节点
             children: [
                 {
-                    # 子节点数值
+                    # child node value
                     value: 2323,
-                    # 子节点名
+                    # child node name
                     name: 'description of this node',
                     children: [...],
                 },

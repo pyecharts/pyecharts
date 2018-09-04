@@ -2940,7 +2940,7 @@ surface3D.render()
 **Note：** 可配合 axis3D 通用配置项 一起使用 
 
 
-### ThemeRiver（主题河流图）
+## ThemeRiver（主题河流图）
 > 主题河流图是一种特殊的流图, 它主要用来表示事件或主题等在一段时间内的变化。
 
 ThemeRiver.add() 方法签名
