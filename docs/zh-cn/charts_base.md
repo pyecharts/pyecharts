@@ -1005,7 +1005,8 @@ add(name, data,
     是否开启鼠标缩放和平移漫游。默认为 True  
     如果只想要开启缩放或者平移，可以设置成'scale'或者'move'。设置成 True 为都开启
 
-**默认效果**
+**默认效果**  
+这里使用了 Style 类，该类用于统一图表配置风格，具体文档可参考 [图表风格](zh-cn/custom_style)
 ```python
 from pyecharts import GeoLines, Style
 
@@ -2849,7 +2850,7 @@ scatter3D.render()
 **Note：** 可配合 axis3D 通用配置项 一起使用 
 
 
-### Surface3D（3D 曲面图）
+## Surface3D（3D 曲面图）
 Surface3D.add() 方法签名
 ```python
 add(name, data,
