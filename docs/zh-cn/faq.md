@@ -128,7 +128,7 @@ A: 因为 china.js 没有加载成功。请检查 echarts-countries-pypkg 是不
 
 **Q: 为什么部分 echarts-xxx-pypkg 不能成功安装？**
 
-首先，请检查当前 python 环境有没有 jupyter。有的话，下一步再用 `pip install --no-cache-dir echarts-xxx-pypkg` 装一遍。
+首先，请检查当前 python 环境有没有 jupyter。有的话，先卸载先前装的 echarts-xxx-pypkg (`pip uninstall echarts-xxx-pypkg`) ，下一步再用 `pip install --no-cache-dir echarts-xxx-pypkg` 装一遍。
 
 
 **Q: pip install pyecharts meet error: Microsoft Visual C++ 14.0 is required**
