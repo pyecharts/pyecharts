@@ -8,12 +8,9 @@
     * Overlap 类：结合不同类型图表叠加画在同张图上
     * Page 类：同一网页按顺序展示多图
     * Timeline 类：提供时间线轮播多张图
-* 统一风格
 
 
-## 自定义图表类
-
-### Grid：并行显示多张图
+## Grid：并行显示多张图
 > 用户可以自定义结合 Line/Bar/Kline/Scatter/EffectScatter/Pie/HeatMap/Boxplot 图表，将不同类型图表画在多张图上。第一个图需为 有 x/y 轴的图，即不能为 Pie，其他位置顺序任意。
 
 Grid 类的使用：
@@ -492,7 +489,7 @@ grid.render()
 **Note：** `Overlap` 放入 `Grid` 可以利用其 grid 网格调整布局，例如上图将图例放在右边，这种情况在**图例名字过长**时很有用。
 
 
-### Overlap：结合不同类型图表叠加画在同张图上
+## Overlap：结合不同类型图表叠加画在同张图上
 > 用户可以自定义结合 Line/Bar/Kline, Scatter/EffectScatter 图表，将不同类型图表画在一张图上。利用第一个图表为基础，往后的数据都将会画在第一个图表上。   
 Overlap 类的使用：
 1. 引入 `Overlap` 类，`from pyecharts import Overlap`
@@ -669,7 +666,7 @@ overlap.render()
 如果只是想在单个 .html 按顺序展示图表，推荐使用 ```Page()``` 类
 
 
-### Page：同一网页按顺序展示多图
+## Page：同一网页按顺序展示多图
 > Grid/Timeline/Overlap 都可在 Page 中正常展示，把其当做一个图加入到 Page 中即可
 
 Page 类的使用：
@@ -843,7 +840,7 @@ page.render()
 ![page-demo](https://user-images.githubusercontent.com/19553554/44133457-71fb6448-a092-11e8-88b4-78e5c5d3b48e.png)
 
 
-### Timeline：提供时间线轮播多张图
+## Timeline：提供时间线轮播多张图
 Timeline 类的使用：
 1. 引入 `Timeline` 类，`from pyecharts import Timeline`
 2. 实例化 `Timeline` 类
@@ -1051,41 +1048,5 @@ timeline.add(overlap_4.chart, '5 月')
 timeline.render()
 ```
 ![timeline-demo](https://user-images.githubusercontent.com/19553554/35082284-e704cfa6-fc53-11e7-8790-f92eb6b2315f.gif)
-
-
-## 统一风格
-> 为了简化配置项编写，提供了一个 Style 类，可用于在同一个图或者多个图内保持统一的风格
-
-### 初始化图
-```python
-from pyecharts import Style
-
-style = Style(
-    title_color="#fff",
-    title_pos="center",
-    width=1100,
-    height=600,
-    background_color='#404a59'
-)
-# style,init_style 会返回类初始化的风格配置字典
-geo = Geo("全国主要城市空气质量", "data from pm2.5", **style.init_style)
-```
-
-### 增加图例
-```python
-pie = Pie('各类电影中"好片"所占的比例', "数据来着豆瓣", title_pos='center')
-# 使用 Style.add() 可配置增加图例的风格配置字典
-pie_style = style.add(
-    radius=[18, 24],
-    label_pos="center",
-    is_label_show=True,
-    label_text_color=None
-)
-pie.add("", ["剧情", ""], [25, 75], center=[10, 30], **pie_style)
-pie.add("", ["奇幻", ""], [24, 76], center=[30, 30], **pie_style)
-pie.add("", ["爱情", ""], [14, 86], center=[50, 30], **pie_style)
-pie.add("", ["惊悚", ""], [11, 89], center=[70, 30], **pie_style)
-```
-这样会使得每个图例都会按照设定的风格
 
 **如果你已阅读完本篇文档，可以进一步阅读 [高级用法篇](zh-cn/advanced)**
