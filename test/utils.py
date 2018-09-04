@@ -1,5 +1,5 @@
-import os
 import codecs
+import os
 
 
 def get_default_rendering_file_content(file_name="render.html"):

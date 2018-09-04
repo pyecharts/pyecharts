@@ -1,10 +1,12 @@
 #!/usr/bin/env python
 # coding=utf-8
 from __future__ import unicode_literals
-import sys
-import os
+
 import codecs
 import json
+import os
+import sys
+
 from pyecharts import Sankey
 
 PY2 = sys.version_info[0] == 2

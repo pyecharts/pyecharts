@@ -1,7 +1,6 @@
 # Format code with pink
-# pink *.py
-# pink pyecharts/**/*.py
-# pink test/*.py
+# $ ./format_code.sh
+# Windows: format_code.bat
 
 black==18.6b4
-pink
+pink>0.6.1

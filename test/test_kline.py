@@ -3,9 +3,9 @@
 from __future__ import unicode_literals
 
 import json
-from pyecharts import Kline
-
 from test.utils import get_default_rendering_file_content
+
+from pyecharts import Kline
 
 data = [
     [2320.26, 2320.26, 2287.3, 2362.94],
