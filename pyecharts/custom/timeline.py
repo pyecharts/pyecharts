@@ -92,7 +92,7 @@ class Timeline(Base):
         :param time_point:
             指定时间点
         """
-        chart_options = chart.get_options(remove_none=False)        
+        chart_options = chart.get_options(remove_none=False)
         self._js_dependencies = merge_js_dependencies(
             self._js_dependencies, chart.js_dependencies
         )
