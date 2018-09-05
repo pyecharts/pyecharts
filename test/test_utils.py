@@ -7,6 +7,7 @@ import os
 from nose.tools import eq_
 from pyecharts.utils import (
     NULL,
+    Passport,
     get_resource_dir,
     merge_js_dependencies,
     remove_key_with_none_value,
@@ -113,3 +114,17 @@ def test_not_set():
     }
     content = kline._repr_html_()
     assert '"borderColor": null' in content
+
+
+def test_not_set_in_grid():
+    from pyecharts import Line, Grid
+    
+    line = Line("Line")
+    attr = ['A', 'B', 'C']
+    line.add('Line1', attr, [1, 2, 3])
+    line._option['series'][0]['symbol'] = NULL
+
+    grid = Grid()
+    grid.add(line, grid_top="10%")
+
+    assert isinstance(grid._option['series'][0]['symbol'], Passport)

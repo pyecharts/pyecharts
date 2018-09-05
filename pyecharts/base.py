@@ -1,4 +1,5 @@
 # coding=utf-8
+import copy
 import os
 import uuid
 import warnings
@@ -69,7 +70,7 @@ class Base(object):
 
     @property
     def options(self):
-        return utils.remove_key_with_none_value(self._option)
+        return self.get_options()
 
     @property
     def js_dependencies(self):
@@ -78,6 +79,12 @@ class Base(object):
     @property
     def page_title(self):
         return self._page_title
+
+    def get_options(self, remove_none=True):
+        if remove_none:
+            return utils.remove_key_with_none_value(self._option)
+        else:
+            return copy.deepcopy(self._option)
 
     def use_theme(self, theme_name):
         self.theme = theme_name
