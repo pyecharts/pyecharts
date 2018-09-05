@@ -2,7 +2,6 @@
 # coding=utf-8
 from __future__ import unicode_literals
 
-import json
 from test.constants import RANGE_COLOR, X_TIME, Y_WEEK
 from test.utils import get_fixture_content
 
@@ -23,6 +22,7 @@ from pyecharts import (
     Style,
     Surface3D,
 )
+
 
 def dumps_actual_options(opts):
     return EChartsTranslator.dumps(opts, sort_keys=True, indent=4,
