@@ -26,6 +26,7 @@ from pyecharts.charts.radar import Radar
 from pyecharts.charts.sankey import Sankey
 from pyecharts.charts.scatter import Scatter
 from pyecharts.charts.scatter3D import Scatter3D
+from pyecharts.charts.surface3D import Surface3D
 from pyecharts.charts.themeriver import ThemeRiver
 from pyecharts.charts.tree import Tree
 from pyecharts.charts.treemap import TreeMap
@@ -43,6 +44,7 @@ from pyecharts.conf import enable_nteract
 from pyecharts.conf import configure
 from pyecharts.echarts.style import Style
 from pyecharts.conf import jupyter_image
+from pyecharts.utils import NULL
 
 # alias
 Candlestick = Kline

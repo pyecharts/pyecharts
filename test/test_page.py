@@ -1,27 +1,26 @@
 # coding=utf-8
 from __future__ import unicode_literals
 
-import sys
-import json
 import codecs
+import json
 import random
-
-from test.constants import RANGE_COLOR, CLOTHES, WEEK
-from pyecharts import (
-    Bar,
-    Scatter3D,
-    Line,
-    Pie,
-    Map,
-    Kline,
-    Radar,
-    WordCloud,
-    Liquid,
-)
-from pyecharts import Page
+import sys
+from test.constants import CLOTHES, RANGE_COLOR, WEEK
 
 from mock import MagicMock
-from nose.tools import eq_, assert_list_equal, raises
+from nose.tools import assert_list_equal, eq_, raises
+from pyecharts import (
+    Bar,
+    Kline,
+    Line,
+    Liquid,
+    Map,
+    Page,
+    Pie,
+    Radar,
+    Scatter3D,
+    WordCloud,
+)
 
 TEST_PAGE_TITLE = "my awesome chart"
 

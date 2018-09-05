@@ -209,12 +209,12 @@ class EchartsEnvironment(BaseEnvironment):
         return tpl.render(chart=chart)
 
     def render_chart_to_file(
-            self,
-            chart,
-            object_name="chart",
-            path="render.html",
-            template_name="simple_chart.html",
-            **kwargs
+        self,
+        chart,
+        object_name="chart",
+        path="render.html",
+        template_name="simple_chart.html",
+        **kwargs
     ):
         """
         Render a chart or page to local html files.
@@ -232,7 +232,7 @@ class EchartsEnvironment(BaseEnvironment):
         utils.write_utf8_html_file(path, html)
 
     def render_chart_to_notebook(
-            self, template_name="notebook.html", **context
+        self, template_name="notebook.html", **context
     ):
         """
         Return html string for rendering a chart/page to a notebook cell.

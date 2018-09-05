@@ -2,12 +2,10 @@
 from __future__ import unicode_literals
 
 import codecs
+from test.constants import CLOTHES, RANGE_COLOR
 
-from pyecharts import Bar, Scatter3D
-from pyecharts import Page
-from pyecharts.conf import CURRENT_CONFIG
-from pyecharts.conf import configure
-from test.constants import RANGE_COLOR, CLOTHES
+from pyecharts import Bar, Page, Scatter3D
+from pyecharts.conf import CURRENT_CONFIG, configure
 
 
 def create_three():

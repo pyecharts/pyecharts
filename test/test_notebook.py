@@ -5,12 +5,11 @@ Test cases for rendering in jupyter notebook
 from __future__ import unicode_literals
 
 import json
-
-from pyecharts import Bar, Line, Pie, Page, online
-from pyecharts import enable_nteract, configure
-import pyecharts.constants as constants
-from pyecharts.conf import CURRENT_CONFIG
 from test.constants import CLOTHES, WEEK
+
+import pyecharts.constants as constants
+from pyecharts import Bar, Line, Page, Pie, configure, enable_nteract, online
+from pyecharts.conf import CURRENT_CONFIG
 
 TITLE = "柱状图数据堆叠示例"
 
@@ -116,3 +115,4 @@ def test_nteract_feature():
     # restore configuration
     configure(output_image=constants.DEFAULT_HTML)
     CURRENT_CONFIG.jshost = None
+    CURRENT_CONFIG.hosted_on_github = False
