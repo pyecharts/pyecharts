@@ -5,7 +5,6 @@ import warnings
 from tempfile import mkstemp
 
 from jinja2 import Markup
-from pyecharts_javascripthon.api import TRANSLATOR
 
 import pyecharts.constants as constants
 import pyecharts.engine as engine
