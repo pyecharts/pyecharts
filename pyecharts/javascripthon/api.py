@@ -141,7 +141,7 @@ class MyJSONEncoder(json.JSONEncoder):
                 try:
                     return obj.astype(str).tolist()
                 except ValueError:
-                    pass
+                    raise
 
         if hasattr(obj, '__json__'):
             return obj.__json__()
