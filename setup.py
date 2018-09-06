@@ -22,8 +22,8 @@ __requires__ = [
     "jupyter-echarts-pypkg==0.1.2",
     "lml==0.0.2",
     "requests",
-    'javascripthon>=0.10 ; python_version > "3.4"',
-    'requests ; python_version < "3.5"',
+    'javascripthon>=0.10; python_version>"3.4"',
+    'requests; python_version<"3.5"',
 ]
 
 __keywords__ = ["Echarts", "charts", "plotting-tool"]
