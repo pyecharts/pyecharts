@@ -7,7 +7,6 @@ import os
 from nose.tools import eq_
 from pyecharts.utils import (
     NULL,
-    Passport,
     get_resource_dir,
     merge_js_dependencies,
     remove_key_with_none_value,
