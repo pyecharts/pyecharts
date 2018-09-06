@@ -6,6 +6,7 @@ import pyecharts.echarts.events as events
 from pyecharts import Bar
 from pyecharts.javascripthon.dom import alert
 
+
 def on_click():
     alert("点击事件触发")
 
