@@ -2,7 +2,7 @@
 
 ## 概述
 
-> 从 v0.6.0 开始， [pyecharts-javascripthon](https://github.com/pyecharts/pyecharts-javascripthon) 将合并入主代码库，原有代码不再维护。 
+> 从 v0.6.0 开始，[pyecharts-javascripthon](https://github.com/pyecharts/pyecharts-javascripthon) 将合并入主代码库，原有代码不再维护。 
 
 pyecharts.javascripthon 封装了底层的 Python-To-Javascript 的语言翻译器。
 
@@ -11,14 +11,14 @@ pyecharts.javascripthon 封装了底层的 Python-To-Javascript 的语言翻译�
 pyecharts.javascripthon 封装了一个 Python-To-Javascript 语言翻译器，定义在 `pyecharts.javascripthon.api` 模块。 
 
 
-- `EChartsTranslator`  --> `TranslateResult`：公共 API 类，提供对外接口，该类本身不处理具体 translate 工作，调用两个组件 translator ，并将结果进行组装。
-- `JSONTranslator` --> `str` ：将 Python 字典翻译成 一个JS 代码段字符串（当含有函数是不再是有效的 JSON 字符串），另外提供了一个回调接口 `post_encode_func(func, func_encoded)`，用于当 json 在 encode 完一个函数对象后调用。
-- `FunctionTranslator` --> `FunctionStore` ：将若干个函数对象翻译成对应的 JS 代码片段。
+- `EChartsTranslator`  --> `TranslateResult`：公共 API 类，提供对外接口，该类本身不处理具体 translate 工作，调用两个组件 translator，并将结果进行组装。
+- `JSONTranslator` --> `str`：将 Python 字典翻译成 一个JS 代码段字符串（当含有函数是不再是有效的 JSON 字符串），另外提供了一个回调接口。`post_encode_func(func, func_encoded)`：用于当 json 在 encode 完一个函数对象后调用。
+- `FunctionTranslator` --> `FunctionStore`：将若干个函数对象翻译成对应的 JS 代码片段。
 
 
 ### EChartsTranslator
 
-该类是翻译器的核心类，包含了一个方法 `translate` 。接口如下
+该类是翻译器的核心类，包含了一个方法 `translate`。接口如下
 
 ```python
 class EChartsTranslator:
@@ -44,7 +44,7 @@ class JavascriptSnippet:
 
 各自在展开之后代码的位置如下：
 
-```javascript
+```js
 
 var myChart_09de949b428d4e5db7782a12a7541e35 = echarts.init(document.getElementById('09de949b428d4e5db7782a12a7541e35'), null, {renderer: 'canvas'});
 
@@ -59,7 +59,7 @@ function label_formatter(params) {
 
 var option_09de949b428d4e5db7782a12a7541e35 = {
   // 省略
-}; // options_snippet片段
+}; // options_snippet 片段
 myChart_09de949b428d4e5db7782a12a7541e35.setOption(option_09de949b428d4e5db7782a12a7541e35);
 
 myChart_09de949b428d4e5db7782a12a7541e35.on("click", on_click);

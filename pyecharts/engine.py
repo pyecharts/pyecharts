@@ -1,8 +1,8 @@
 # coding=utf-8
 from __future__ import unicode_literals
 
-from jinja2 import Environment, FileSystemLoader, environmentfunction, Markup
-from lml.plugin import PluginManager, PluginInfo
+from jinja2 import Environment, FileSystemLoader, Markup, environmentfunction
+from lml.plugin import PluginInfo, PluginManager
 
 import pyecharts.conf as conf
 import pyecharts.constants as constants

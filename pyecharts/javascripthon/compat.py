@@ -9,7 +9,6 @@ else:
 
 
 class TranslatorCompatAPI(object):
-
     @staticmethod
     def translate_function(func):
         """

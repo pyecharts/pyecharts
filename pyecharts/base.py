@@ -21,13 +21,13 @@ class Base(object):
     """
 
     def __init__(
-            self,
-            width=800,
-            height=400,
-            renderer=constants.CANVAS_RENDERER,
-            page_title=constants.PAGE_TITLE,
-            extra_html_text_label=None,
-            is_animation=True,
+        self,
+        width=800,
+        height=400,
+        renderer=constants.CANVAS_RENDERER,
+        page_title=constants.PAGE_TITLE,
+        extra_html_text_label=None,
+        is_animation=True,
     ):
         """
 
@@ -121,11 +121,11 @@ class Base(object):
         return CURRENT_CONFIG.produce_html_script_list(self._js_dependencies)
 
     def render(
-            self,
-            path="render.html",
-            template_name="simple_chart.html",
-            object_name="chart",
-            **kwargs
+        self,
+        path="render.html",
+        template_name="simple_chart.html",
+        object_name="chart",
+        **kwargs
     ):
         _, ext = os.path.splitext(path)
         _file_type = ext[1:]

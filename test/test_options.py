@@ -5,8 +5,6 @@ from __future__ import unicode_literals
 from test.constants import RANGE_COLOR, X_TIME, Y_WEEK
 from test.utils import get_fixture_content
 
-from pyecharts.javascripthon.api import EChartsTranslator
-
 from mock import patch
 from nose.tools import eq_
 from pyecharts import (
@@ -22,11 +20,13 @@ from pyecharts import (
     Style,
     Surface3D,
 )
+from pyecharts.javascripthon.api import EChartsTranslator
 
 
 def dumps_actual_options(opts):
-    return EChartsTranslator.dumps(opts, sort_keys=True, indent=4,
-                                   enable_func=True)
+    return EChartsTranslator.dumps(
+        opts, sort_keys=True, indent=4, enable_func=True
+    )
 
 
 @patch("random.randint")

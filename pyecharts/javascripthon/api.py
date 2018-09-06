@@ -13,7 +13,7 @@ from contextlib import contextmanager
 
 from pyecharts.javascripthon.compat import TranslatorCompatAPI
 
-__all__ = ['EChartsTranslator']
+__all__ = ["EChartsTranslator"]
 
 
 class JsSnippetMixin(object):
@@ -49,7 +49,7 @@ class FunctionStore(OrderedDict, JsSnippetMixin):
     """
 
     def to_js_snippet(self):
-        return ''.join(self.values())
+        return "".join(self.values())
 
 
 class TranslateResult(JsSnippetMixin):
@@ -71,10 +71,7 @@ class TranslateResult(JsSnippetMixin):
         return len(self._function_store) > 0
 
     def to_js_snippet(self):
-        return '\n'.join([
-            self.function_snippet,
-            self._options_snippet
-        ])
+        return "\n".join([self.function_snippet, self._options_snippet])
 
 
 class FunctionTranslator(TranslatorMixin):
@@ -119,8 +116,8 @@ class MyJSONEncoder(json.JSONEncoder):
         :param enable_func : enable encode function obj or not
         :param post_encode_func : The callback after encoding a function, ()
         """
-        self._enable_func = kwargs.pop('enable_func', False)
-        self._post_encode_func = kwargs.pop('post_encode_func', None)
+        self._enable_func = kwargs.pop("enable_func", False)
+        self._post_encode_func = kwargs.pop("post_encode_func", None)
         super(MyJSONEncoder, self).__init__(*args, **kwargs)
 
     def default(self, obj):
@@ -134,7 +131,7 @@ class MyJSONEncoder(json.JSONEncoder):
             return obj.isoformat()
 
         # Pandas and Numpy lists
-        if obj.__class__.__name__ == 'ndarray':
+        if obj.__class__.__name__ == "ndarray":
             try:
                 return obj.astype(float).tolist()
             except ValueError:
@@ -143,7 +140,7 @@ class MyJSONEncoder(json.JSONEncoder):
                 except ValueError:
                     raise
 
-        if hasattr(obj, '__json__'):
+        if hasattr(obj, "__json__"):
             return obj.__json__()
         return super(MyJSONEncoder, self).default(obj)
 
@@ -155,15 +152,14 @@ class JSONTranslator(TranslatorMixin):
         self._post_encode_func = post_encode_func
 
         self._encoder = MyJSONEncoder(
-            enable_func=True,
-            post_encode_func=self._my_post_encode_func
+            enable_func=True, post_encode_func=self._my_post_encode_func
         )
 
     def feed(self, options):
-        self._data_store['options'] = options
+        self._data_store["options"] = options
 
     def translate(self):
-        options_snippet = self._encoder.encode(self._data_store['options'])
+        options_snippet = self._encoder.encode(self._data_store["options"])
         for src, dest in self._replace_items:
             options_snippet = options_snippet.replace(src, dest)
         return options_snippet
@@ -179,7 +175,7 @@ class JSONTranslator(TranslatorMixin):
             func_name = func.__name__
         else:
             func_name = func_name
-        return '-=>{}<=-'.format(func_name)
+        return "-=>{}<=-".format(func_name)
 
 
 class EChartsTranslator(TranslatorMixin):
@@ -228,9 +224,9 @@ class EChartsTranslator(TranslatorMixin):
         option_snippet = self._json_translator.translate()
         function_store = self._function_translator.translate()
         return TranslateResult(
-            options=self._json_translator._data_store['options'],
+            options=self._json_translator._data_store["options"],
             options_snippet=option_snippet,
-            function_store=function_store
+            function_store=function_store,
         )
 
     # ------ Tools ------
