@@ -1,6 +1,4 @@
 # coding=utf-8
-import copy
-
 from pyecharts.base import Base
 from pyecharts.constants import PAGE_TITLE
 from pyecharts.echarts.option import grid
@@ -52,7 +50,7 @@ class Grid(Base):
             'right'可选，也可以为百分数或者整数
         """
         if not self._option:
-            self._option = copy.deepcopy(chart.options)
+            self._option = chart.get_options(remove_none=False)
             self._option.update(grid=[])
             self._js_dependencies = chart.js_dependencies
 
@@ -68,12 +66,13 @@ class Grid(Base):
                 for _ in range(len(self._option.get("series"))):
                     self._option.get("grid").append(_grid)
         else:
+            chart_options = chart.get_options(remove_none=False)
             _series = (
-                chart.options.get("series"),
-                chart.options.get("xAxis", None),
-                chart.options.get("yAxis", None),
-                chart.options.get("legend")[0],
-                chart.options.get("title")[0],
+                chart_options.get("series"),
+                chart_options.get("xAxis", None),
+                chart_options.get("yAxis", None),
+                chart_options.get("legend")[0],
+                chart_options.get("title")[0],
             )
             (
                 _index,
