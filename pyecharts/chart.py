@@ -4,6 +4,7 @@ import random
 
 import pyecharts.constants as constants
 from pyecharts.base import Base
+from pyecharts.echarts.option import get_base_options
 
 
 class Chart(Base):
@@ -409,7 +410,7 @@ class Chart(Base):
         """
         if self.theme == constants.LIGHT_THEME:
             kwargs.update(colorlst=self._colorlst)
-        chart = self._get_all_options(**kwargs)
+        chart = get_base_options(**kwargs)
         self._option.update(color=chart["color"])
 
         # legend

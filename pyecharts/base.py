@@ -13,7 +13,7 @@ import pyecharts.engine as engine
 import pyecharts.exceptions as exceptions
 import pyecharts.utils as utils
 from pyecharts.conf import CURRENT_CONFIG
-from pyecharts.echarts.option import get_all_options
+from pyecharts.echarts.option import get_other_options
 
 
 class Base(object):
@@ -190,7 +190,7 @@ class Base(object):
         )
 
     def _get_all_options(self, **kwargs):
-        return get_all_options(**kwargs)
+        return get_other_options(**kwargs)
 
     def _repr_html_(self):
         """
