@@ -75,7 +75,7 @@ class MyJSONEncoder(json.JSONEncoder):
             return obj.isoformat()
 
         # Pandas and Numpy lists
-        if obj.__class__.__name__ == "ndarray":
+        if obj.__class__.__name__ in ("ndarray", "Series", "DataFrame"):
             try:
                 return obj.astype(float).tolist()
             except ValueError:
