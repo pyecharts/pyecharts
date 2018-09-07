@@ -16,33 +16,7 @@ from pyecharts.javascripthon.compat import TranslatorCompatAPI
 __all__ = ["EChartsTranslator"]
 
 
-class JsSnippetMixin(object):
-    def to_js_snippet(self):
-        pass
-
-
-class TranslatorMixin(object):
-    """A Interface for state-machine translator
-    """
-
-    @contextmanager
-    def new_task(self):
-        try:
-            self.reset()
-            yield
-        finally:
-            self.reset()
-
-    def reset(self):
-        pass
-
-    def translate(self):
-        """Main process
-        """
-        pass
-
-
-class FunctionStore(OrderedDict, JsSnippetMixin):
+class FunctionStore(OrderedDict):
     """
     A OrderedDict which stores translated function.
     {<func_name>:<func>}
@@ -52,7 +26,7 @@ class FunctionStore(OrderedDict, JsSnippetMixin):
         return "".join(self.values())
 
 
-class TranslateResult(JsSnippetMixin):
+class TranslateResult(object):
     def __init__(self, options, options_snippet, function_store):
         self._options = options
         self._options_snippet = options_snippet
@@ -72,36 +46,6 @@ class TranslateResult(JsSnippetMixin):
 
     def to_js_snippet(self):
         return "\n".join([self.function_snippet, self._options_snippet])
-
-
-class FunctionTranslator(TranslatorMixin):
-    """A translator for function,a FunctionStore object will be generated.
-    """
-
-    def __init__(self):
-        self._shared_function_snippet = FunctionStore()
-
-        # Tmp Data for a render process
-        self._func_store = {}  # {<name>:<func>}
-
-    def reset(self):
-        self._func_store = {}
-
-    def feed(self, func, name=None):
-        name = name or func.__name__
-        self._func_store.update({name: func})
-        return self
-
-    def translate(self):
-        fs = FunctionStore()
-        for name, func in self._func_store.items():
-            if name in self._shared_function_snippet:
-                snippet = self._shared_function_snippet[name]
-            else:
-                snippet = TranslatorCompatAPI.translate_function(func)
-                self._shared_function_snippet.update({name: snippet})
-            fs.update({name: snippet})
-        return fs
 
 
 class MyJSONEncoder(json.JSONEncoder):
@@ -143,6 +87,57 @@ class MyJSONEncoder(json.JSONEncoder):
         if hasattr(obj, "__json__"):
             return obj.__json__()
         return super(MyJSONEncoder, self).default(obj)
+
+
+class TranslatorMixin(object):
+    """A Interface for state-machine translator
+    """
+
+    @contextmanager
+    def new_task(self):
+        try:
+            self.reset()
+            yield
+        finally:
+            self.reset()
+
+    def reset(self):
+        pass
+
+    def translate(self):
+        """Main process
+        """
+        pass
+
+
+class FunctionTranslator(TranslatorMixin):
+    """A translator for function,a FunctionStore object will be generated.
+    """
+
+    def __init__(self):
+        self._shared_function_snippet = FunctionStore()
+
+        # Tmp Data for a render process
+        self._func_store = {}  # {<name>:<func>}
+
+    def reset(self):
+        self._func_store = {}
+
+    def feed(self, func, name=None):
+        name = name or func.__name__
+        self._func_store.update({name: func})
+        return self
+
+    def translate(self):
+        fs = FunctionStore()
+        for name, func in self._func_store.items():
+            if name in self._shared_function_snippet:
+                snippet = self._shared_function_snippet[name]
+            else:
+                snippet = TranslatorCompatAPI.translate_function(func)
+                self._shared_function_snippet.update({name: snippet})
+            fs.update({name: snippet})
+        return fs
 
 
 class JSONTranslator(TranslatorMixin):
