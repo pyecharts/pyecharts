@@ -510,9 +510,11 @@ def xy_axis(
 
 def _mark(
     data,
+    mark_point_raw=None,
     mark_point_symbol="pin",
     mark_point_symbolsize=50,
     mark_point_textcolor="#fff",
+    mark_line_raw=None,
     mark_line_symbolsize=10,
     mark_line_valuedim="",
     mark_line_coords=None,
@@ -539,6 +541,9 @@ def _mark(
             需自己传入标记点字典，共有两个键值对，'coord' 对应为 x y 轴坐标，'name' 为标记点名称
         标记线
             只支持默认的 'min', 'max', 'average'
+    :param mark_point_raw:
+        原生格式的 markPoint 数据，数据类型为 [{}, {}, ...]。
+        格式请参考 http://echarts.baidu.com/option.html#series-line.markPoint.data
     :param mark_point_symbol:
         标记点图形，，默认为'pin'，有'circle', 'rect', 'roundRect', 'triangle',
         'diamond', 'pin', 'arrow'可选
@@ -546,6 +551,9 @@ def _mark(
         标记点图形大小，默认为 50
     :param mark_point_textcolor:
         标记点字体颜色，默认为'#fff'
+    :param mark_line_raw:
+        原生格式的 markLine 数据，数据类型为 [{}, {}, ...]。
+        格式请参考 http://echarts.baidu.com/option.html#series-line.markLine.data
     :param mark_line_symbolsize:
         标记线图形大小，默认为 15
     :param mark_line_valuedim:
@@ -566,6 +574,13 @@ def _mark(
     :param _is_markline:
         指定是否为 markline
     """
+    if _is_markline:
+        if mark_line_raw:
+            return {"data": mark_line_raw}
+    else:
+        if mark_point_raw:
+            return {"data": mark_point_raw}
+
     mark = {"data": []}
     if data:
         _markpv = _marklv = [None for _ in range(len(data))]
