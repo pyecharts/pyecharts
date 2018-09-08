@@ -1,36 +1,33 @@
-> 自定义图表篇：本篇文档为 pyecharts 自定义图表详情文档，介绍了关于 pyecharts 各类自定义图表的细节。
+> Charts Customization : This document is a pyecharts custom chart detail document.
 
-**基本图表类请参考 [基本图表类篇](zh-cn/charts_base)**
-
-
-* 自定义图表类
-    * Grid 类：并行显示多张图
-    * Overlap 类：结合不同类型图表叠加画在同张图上
-    * Page 类：同一网页按顺序展示多图
-    * Timeline 类：提供时间线轮播多张图
-* 统一风格
+**Basic chart class please refer to [Chart Basic](en-us/charts_base)**
 
 
-## 自定义图表类
+* Custom chart class
+    * Grid class : display multiple charts parallel
+    * Overlap class : combine different types of chart overlays on the same image
+    * Page class : displays multiple images in sequence on the same page 
+    * Timeline class : provide timeline carousel multiple images
 
-### Grid：并行显示多张图
-> 用户可以自定义结合 Line/Bar/Kline/Scatter/EffectScatter/Pie/HeatMap/Boxplot 图表，将不同类型图表画在多张图上。第一个图需为 有 x/y 轴的图，即不能为 Pie，其他位置顺序任意。
 
-Grid 类的使用：
-1. 引入 `Grid` 类，`from pyecharts import Grid`
-2. 实例化 Grid 类，`grid = Grid()` ，可指定 `page_title`, `width`, `height`, `jhost` 参数。
-3. 使用 `add()` 向 `grid` 中添加图，至少需要设置一个 `grid_top`, `grid_bottom`, `grid_left`, `grid_right` 四个参数中的一个。`grid_width` 和 `grid_height` 一般不用设置，默认即可。
-4. 使用 `render()` 渲染生成 .html 文件
+### Grid : display multiple charts parallel
+> Users can customize the combination of Line/Bar/Kline/Scatter/EffectScatter/Pie/HeatMap/Boxplot charts to draw different types of charts on multiple images. The first image needs to be a graph with an x/y axis, that means it cannot be a Pie, and the other positions are in any order.
 
-**Note：** `Overlap` 可类放入 `Grid` 类中，不过有个前提，`Overlap` 不可为多 x 轴或者多 y 轴，否则会出现坐标轴索引混乱问题
+Grid class usage：
+1. Introduce `Grid` class, `from pyecharts import Grid`
+2. Instance Grid class，`grid = Grid()`, you can specify `page_title`, `width`, `height`, `jhost` parameters。
+3. Use `add()` to add chart to `grid`. You should set one of `grid_top`, `grid_bottom`, `grid_left`, `grid_right` at least. `grid_width` and `grid_height` do not need to be set generally, the default is ok.
+4. Use `render()` generate ".html" file.
 
-Grid 类中其他方法：
-* `render_embed()`：在 Flask&Django 中可以使用该方法渲染
-* `show_config()`：打印输出所有配置项
-* `chart`：chart 属性返回图形实例
-* 在 Jupyter-notebook 中直接调用 Grid 实例即可显示图表
+**Note：** `Overlap` class can be put into the `Grid` class, but there is a premise that `Overlap` cannot be multiple x or y axes, otherwise the axis index confusion will occur.
 
-Grid.add() 方法签名 
+Other methods in the Grid class：
+* `render_embed()`：could be used for rendering in Flask&Django
+* `show_config()`：print all config items
+* `chart`：chart attribute, return chart instance
+* Display the chart directly by calling the Grid instance in the Jupyter-notebook
+
+Grid.add() signature  
 ```python
 add(chart,
     grid_width=None,
@@ -41,22 +38,34 @@ add(chart,
     grid_right=None)
 ```
 * chart -> chart instance  
-    图表实例
-* grid_width -> str/int  
-    grid 组件的宽度。默认自适应。
+    Chart instance.
+
+* grid_width -> str/int   
+    default -> adaptive    
+    The width of grid component.
+
 * grid_height -> str/int  
-    grid 组件的高度。默认自适应。
-* grid_top -> str/int  
-    grid 组件离容器顶部的距离。默认为 None, 有'top', 'center', 'middle'可选，也可以为百分数或者整数
+    default -> adaptive  
+    The height of grid component.
+
+* grid_top -> str/int   
+    default -> None    
+    The distance of the grid component from the top of the container. There are 'top', 'center', 'middle' optional. It can also be a percentage or an integer.
+
 * grid_bottom -> str/int  
-    grid 组件离容器底部的距离。默认为 None, 有'top', 'center', 'middle'可选，也可以为百分数或者整数
+    default -> None    
+    The distance of the grid component from the bottom of the container. There are 'top', 'center', 'middle' optional. It can also be a percentage or an integer.
+
 * grid_left -> str/int  
-    grid 组件离容器左侧的距离。默认为 None, 有'left', 'center', 'right'可选，也可以为百分数或者整数
+    default -> None    
+    The distance of the grid component from the left of the container. There are 'left', 'center', 'right' optional. It can also be a percentage or an integer.
+
 * grid_right -> str/int  
-    grid 组件离容器右侧的距离。默认为 None, 有'left', 'center', 'right'可选，也可以为百分数或者整数
+    default -> None    
+    The distance of the grid component from the right of the container. There are 'left', 'center', 'right' optional. It can also be a percentage or an integer.
 
 
-**上下类型，Bar + Line**
+**Up and down type，Bar + Line**
 ```python
 from pyecharts import Bar, Line, Grid
 
@@ -91,7 +100,7 @@ grid.render()
 ```
 ![grid-demo](https://user-images.githubusercontent.com/19553554/35089722-c80f84fa-fc72-11e7-93b0-4fff14a371a5.gif)
 
-**左右类型，Scatter + EffectScatter**
+**Left and right type，Scatter + EffectScatter**
 ```python
 from pyecharts import Scatter, EffectScatter, Grid
 
@@ -115,7 +124,7 @@ grid.render()
 ```
 ![grid-demo](https://user-images.githubusercontent.com/19553554/35089730-ca173c70-fc72-11e7-915e-34ce5c79ead7.gif)
 
-**上下左右类型，Bar + Line + Scatter + EffectScatter**
+**Up, down, left and right type, Bar + Line + Scatter + EffectScatter**
 ```python
 from pyecharts import Bar, Line, Scatter, EffectScatter, Grid
 
@@ -206,7 +215,7 @@ grid.render()
 ```
 ![grid-demo](https://user-images.githubusercontent.com/19553554/35089737-ccc1c01c-fc72-11e7-874d-8ba8b89572eb.png)
 
-**Note：** 可以通过设置 center 参数改变 Pie 图的位置，如 [v1, v2]， 要求 v1 > v2。
+**Note：** You can change the position of the Pie chart by setting the `center` parameter, such as [v1, v2], requiring v1 > v2.
 
 **Line + Kline**
 ```python
@@ -320,9 +329,9 @@ grid.add(bar, grid_top="60%")
 grid.render()
 ```
 ![grid-demo](https://user-images.githubusercontent.com/19553554/35089741-cfca19bc-fc72-11e7-8c3b-2f20d054d3fc.gif)  
-Bar 会受 HeatMap 影响，很有趣。
+Bar is affected by HeatMap, very interesting.
 
-**利用 Grid 解决 dataZoom 与 X 轴标签重叠问题**
+**Use Grid to solve dataZoom overlapping with X-axis labels problem**
 ```python
 from pyecharts imoprt Bar, Grid
 
@@ -342,13 +351,13 @@ y = [10, 20, 30, 40, 50, 60, 70, 80, 90]
 grid = Grid()
 bar = Bar("利用 Grid 解决 dataZoom 与 X 轴标签重叠问题")
 bar.add("", x, y, is_datazoom_show=True, xaxis_interval=0, xaxis_rotate=30)
-# 把 bar 加入到 grid 中，并适当调整 grid_bottom 参数，使 bar 图整体上移
+# Add bar to the grid and adjust the grid_bottom parameter appropriately to move the bar chart up
 grid.add(bar, grid_bottom="25%")
 grid.render()
 ```
 ![grid-demo](https://user-images.githubusercontent.com/19553554/43446550-c3756fde-94db-11e8-81fd-b7c202306858.gif)
 
-**datazoom 组件同时控制多个图**
+**datazoom component controls multiple charts simultaneously**
 ```python
 from pyecharts import Line, Kline, Grid
 
@@ -368,7 +377,7 @@ line.add(
     mark_point=["max", "min"],
     legend_top="50%",
     mark_line=["average"],
-    # 设置 dataZoom 控制索引为 0,1 的 x 轴，即第一个和第二个
+    # set dataZoom control index to [0,1], which means the first and second x axis
     is_datazoom_show=True,
     datazoom_xaxis_index=[0, 1],
 )
@@ -421,7 +430,7 @@ grid.render()
 ```
 ![grid-demo](https://user-images.githubusercontent.com/19553554/35089743-d13a3502-fc72-11e7-9c6a-21aeb7415c2b.gif)  
 
-**倒映直角坐标系**
+**Reflected coordinate system**
 ```python
 from pyecharts import Line, Grid
 
@@ -489,18 +498,19 @@ grid.render()
 ```
 ![grid-demo](https://user-images.githubusercontent.com/19553554/35089754-d62726c4-fc72-11e7-836b-c8cd597e2b71.png)  
 
-**Note：** `Overlap` 放入 `Grid` 可以利用其 grid 网格调整布局，例如上图将图例放在右边，这种情况在**图例名字过长**时很有用。
+**Note：** Put `Overlap` in `Grid` that can adjust the layout with its grid. For example, the above chart will put the legend on the right. This is useful when the legend name is too long.
 
 
-### Overlap：结合不同类型图表叠加画在同张图上
-> 用户可以自定义结合 Line/Bar/Kline, Scatter/EffectScatter 图表，将不同类型图表画在一张图上。利用第一个图表为基础，往后的数据都将会画在第一个图表上。   
-Overlap 类的使用：
-1. 引入 `Overlap` 类，`from pyecharts import Overlap`
-2. 实例化 `Overlap` 类，`overlap = Overlap()`  ，可指定 `page_title`, `width`, `height`, `jhost` 参数。
-3. 使用 `add()` 向 `overlap` 中添加图
-4. 使用 `render()` 渲染生成 .html 文件
+### Overlap : Combine different types of charts overlay on the same image
+> Users can customize the Line/Bar/Kline, Scatter/EffectScatter charts to draw different types of charts on a single chart. Based on the first chart, the next data will be drawn on the first chart.   
 
-Overlap.add() 方法签名  
+Overlap class usage：
+1. Introduce `Overlap` class, `from pyecharts import Overlap`;
+2. Instance `Overlap` class, `overlap = Overlap()`, you can specify `page_title`, `width`, `height`, `jhost` parameters;
+3. Use `add()` to add charts to `overlap`;
+4. Use `render()` generate ".html" file.
+
+Overlap.add() signature    
 ```python
 add(chart,
     xaxis_index=0,
@@ -509,21 +519,29 @@ add(chart,
     is_add_yaxis=False)
 ```
 * chart -> chart instance  
-    图表示例
-* xaxis_index -> int  
-    x 坐标轴索引，默认为 0
-* yaxis_index -> int  
-    y 坐标轴索引，默认为 0
-* is_add_xaxis -> bool  
-    是否新增一个 x 坐标轴，默认为 False
-* is_add_yaxis -> bool  
-    是否新增一个 y 坐标轴，默认为 False
+    Chart instance
 
-Overlap 类中其他方法：
-* `render_embed()`：在 Flask&Django 中可以使用该方法渲染
-* `show_config()`：打印输出所有配置项
-* `chart`：返回图形实例
-* 在 Jupyter-notebook 中直接调用 Overlap 实例即可显示图表
+* xaxis_index -> int  
+    default -> 0  
+    x axis index
+
+* yaxis_index -> int  
+    default -> 0  
+    y axis index
+
+* is_add_xaxis -> bool  
+    default -> False  
+    Whether to add an x ​​axis
+
+* is_add_yaxis -> bool  
+    default -> False  
+    Whether to add a y axis
+
+Other methods in the Overlap class:
+* `render_embed()` : use this method to render in Flask&Django
+* `show_config()` : print all config items
+* `chart` : return chart instance
+* Display the chart in Jupyter-notebook by calling the Overlap instance directly
 
 **Line + Bar**
 ```python
@@ -637,7 +655,7 @@ overlap.render()
 ```
 ![overlap-demo](https://user-images.githubusercontent.com/19553554/35090267-10e673fe-fc74-11e7-981d-7c9db110fbfb.gif)
 
-**如果想改变轴索引，使其有多 X 轴或者多 Y 轴的话。请看下面**
+**If you want to change the axis index to have more X or more Y axes. Please look below**
 ```python
 from pyecharts import Line, Bar, Overlap
 
@@ -655,34 +673,34 @@ line = Line()
 line.add("平均温度", attr, v3, yaxis_formatter=" °C", yaxis_interval=5)
 
 overlap = Overlap(width=1200, height=600)
-# 默认不新增 x y 轴，并且 x y 轴的索引都为 0
+# The x y axis is not added by default, and the index of the x y axis is 0.
 overlap.add(bar)
-# 新增一个 y 轴，此时 y 轴的数量为 2，第二个 y 轴的索引为 1（索引从 0 开始），所以设置 yaxis_index = 1
-# 由于使用的是同一个 x 轴，所以 x 轴部分不用做出改变
+# Add a y axis, the number of y axes is 2, and the index of the second y axis is 1 (index starts from 0). So set yaxis_index = 1
+# Since the same x-axis is used, it does not need to change the x-axis part.
 overlap.add(line, yaxis_index=1, is_add_yaxis=True)
 overlap.render()
 ```
 ![overlap-demo](https://user-images.githubusercontent.com/19553554/35090266-0f7d7d96-fc74-11e7-9851-d56777b4114d.gif)
 
-**Note：** 关于双 Y 轴对齐，可以使用 `yaxis_force_interval` 参数，强制分割成相同份数的刻度。这里有个小技巧，可以先设置 y 轴最大值。举个例子，如果双 y 轴一个最大值为 700，一个最大值为 400。那你可以把两个的 `yaxis_force_interval` 参数分别设置为 140 和 80，那就会都分成均等的 5 份了。
+**Note：** For double Y-axis alignment, you can use the `yaxis_force_interval` parameter to split into the same number of scales. Here's a trick to set the y-axis maximum first. For example, if the double y axis has a maximum of 700 and a maximum of 400. Then you can set the two `yaxis_force_interval` parameters to 140 and 80 respectively, and they will all be divided into 5 equals.  
 
-如果只是想在单个 .html 按顺序展示图表，推荐使用 ```Page()``` 类
+If you just want to display the charts in order in a ".html" file, it is recommended to use the ```Page()``` class.  
 
 
-### Page：同一网页按顺序展示多图
-> Grid/Timeline/Overlap 都可在 Page 中正常展示，把其当做一个图加入到 Page 中即可
+### Page : displays multiple charts in sequence on the same page
+> Grid/Timeline/Overlap can be displayed normally in Page. You can add them as a chart to Page.
 
-Page 类的使用：
-1. 引入 `Page` 类，`from pyecharts import Page`
-2. 实例化 `Page` 类，`page = Page()`  ，可指定 `page_title`, `jhost` 参数。
-3. 使用 `add()` 向 `page` 中添加图，可以是单个图实例，也可以是一个图实例列表。
-4. 使用 `render()` 渲染生成 .html 文件
+Page class usage：
+1. Introduce `Page` class, `from pyecharts import Page`
+2. Instance `Page` class, `page = Page()`, you can specify `page_title`, `jhost` parameters.
+3. Use `add()` to add charts to `page`. It can be a single chart instance or a list of chart instances.
+4. Use `render()` to generate ".html" file.
 
-Page 类中其他方法：
-* `render_embed()`：在 Flask&Django 中可以使用该方法渲染
-* `show_config()`：打印输出所有配置项
-* `chart`：chart 属性返回图形实例
-* 在 Jupyter-notebook 中直接调用 Page 实例即可显示图表
+Other methods in Page class:
+* `render_embed()` : this method can be used to render in Flask&Django
+* `show_config()` : print all config items
+* `chart`：return the chart instance
+* Display the chart in Jupyter-notebook by calling the Page instance directly
 
 ```python
 #coding=utf-8
@@ -719,11 +737,11 @@ page.add(scatter3D)  # step 2
 
 page.render()        # step 3
 ```
-运行之后，你会发现 render.html 已经按顺序显示了两个图:
+After running, you will find that render.html has shown two charts in order:
 
 ![page-demo](https://user-images.githubusercontent.com/19553554/35104303-658f9654-fca3-11e7-9a05-5e2e13d1a4c4.gif)
 
-**当然，更多图也是可以的**
+**Of course, more charts are also possible.**
 ```python
 #coding=utf-8
 from __future__ import unicode_literals
@@ -805,7 +823,7 @@ page.render()
 ```
 ![page-demo](https://user-images.githubusercontent.com/19553554/35104305-66f2a766-fca3-11e7-8ffd-8e85911fdea5.gif)
 
-**Page 类的额外的文本标签，由各图形本身携带**
+**Additional text labels of the Page class, carried by the charts themselves**
 ```python
 from pyecharts import *
 
@@ -843,52 +861,77 @@ page.render()
 ![page-demo](https://user-images.githubusercontent.com/19553554/44133457-71fb6448-a092-11e8-88b4-78e5c5d3b48e.png)
 
 
-### Timeline：提供时间线轮播多张图
-Timeline 类的使用：
-1. 引入 `Timeline` 类，`from pyecharts import Timeline`
-2. 实例化 `Timeline` 类
-3. 使用 `add()` 向 `timeline` 中添加图。如 `add(bar, '2013')` 接受两个参数，第一个为图实例，第二个为时间线的 ”时间点“。
-4. 使用 `render()` 渲染生成 .html 文件
+### Timeline：provide timeline carousel multiple images
+Timeline class usage :  
+1. Introduce `Timeline` class, `from pyecharts import Timeline`
+2. Instance `Timeline` class
+3. Use `add()` to add charts to `timeline`. For example, `add(bar, '2013')` accepts two parameters, the first is the chart instance and the second is the "time point" of the timeline.
+4. Use `render()` to generate ".html" file
 
-实例化 Timeline 类时接受设置参数：
+You can set parameters when instance the Timeline class:
 
 * page_title -> str  
-    生成 html 文件的 `<title>` 标签的值，默认为'Echarts'
-* width -> int  
-    画布宽度，默认为 800
-* height -> int  
-    画布高度，默认为 400
-* jhost -> str  
-    自定义每个实例的 JavaScript host
-* is_auto_play -> bool  
-    是否自动播放，默认为 Flase
-* is_loop_play -> bool  
-    是否循环播放，默认为 True
-* is_rewind_play -> bool  
-    是否方向播放，默认为 Flase
-* is_timeline_show -> bool  
-    是否显示 timeline 组件。默认为 True，如果设置为false，不会显示，但是功能还存在。
-* timeline_play_interval -> int  
-    播放的速度（跳动的间隔），单位毫秒（ms）。
-* timeline_symbol -> str  
-    标记的图形。ECharts 提供的标记类型包括 'circle', 'rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow'
-* timeline_symbol_size -> int/list  
-    标记的图形大小，可以设置成诸如 10 这样单一的数字，也可以用数组分开表示宽和高，例如 [20, 10] 表示标记宽为 20，高为 10。
-* timeline_left -> int/str  
-    timeline 组件离容器左侧的距离。  
-    left 的值可以是像 20 这样的具体像素值，可以是像 '20%' 这样相对于容器高宽的百分比，也可以是 'left', 'center', 'right'。如果 left 的值为'left', 'center', 'right'，组件会根据相应的位置自动对齐。
-* timeline_right -> int/str  
-    timeline 组件离容器右侧的距离。同 left
-* timeline_top -> int/str  
-    timeline 组件离容器顶侧的距离。同 left
-* timeline_bottom -> int/str  
-    timeline 组件离容器底侧的距离。同 left
+    default -> 'Echarts'  
+    Generates the value of the `<title>` tag of the html file
 
-Timeline 类中其他方法：
-* `render_embed()`：在 Flask&Django 中可以使用该方法渲染
-* `show_config()`：打印输出所有配置项
-* `chart`：chart 属性返回图形实例
-* Timeline 在 Jupyter-notebook 中显示有问题（无法正常显示动画）
+* width -> int  
+    default -> 800  
+    Canvas width.
+
+* height -> int  
+    default -> 400  
+    Canvas height
+
+* jhost -> str  
+    Customize the JavaScript host for each instance
+
+* is_auto_play -> bool  
+    default -> Flase  
+    Whether to play automatically
+
+* is_loop_play -> bool  
+    default -> True  
+    Whether to loop
+
+* is_rewind_play -> bool  
+    default is Flase  
+    Whether to play backwards
+
+* is_timeline_show -> bool  
+    default -> True  
+    Whether to display the timeline component. If set to false, it will not be displayed, but the function still exists.
+
+* timeline_play_interval -> int  
+    The speed of play (the interval of the jitter) in milliseconds (ms).
+
+* timeline_symbol -> str  
+    The symbol graphic type. ECharts provide the graphic type including 'circle', 'rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow'
+
+* timeline_symbol_size -> int/list  
+    The size of the marked graphic can be set to a single number such as 10. Or it can be separated by an array to indicate the width and height. For example, [20, 10] means that the mark width is 20 and the height is 10.
+
+* timeline_left -> int/str  
+    The distance of the timeline component from the left side of the container.   
+    The value of `left` can be a specific pixel value like 20. Or it can be a percentage like '20%' relative to the height and width of the container. Or it can be 'left', 'center', 'right'.   
+    If the value of left is 'left', 'center', 'right', the component will automatically align according to the corresponding position.  
+
+* timeline_right -> int/str  
+    The distance of the timeline component from the right side of the container.  
+    Value setting is the same as timeline_left
+
+* timeline_top -> int/str  
+    The distance of the timeline component from the top side of the container.  
+    Value setting is the same as timeline_left  
+
+* timeline_bottom -> int/str  
+    The distance of the timeline component from the bottom side of the container.  
+    Value setting is the same as timeline_left
+
+Other methods in Timeline class :   
+* `render_embed()`：this method can be used to render in Flask&Django  
+* `show_config()`：print all config items
+* `chart`：return chart instance
+* Timeline have a problem in Jupyter-notebook (the animation cannot be displayed properly)
 
 ```python
 from pyecharts import Bar, Timeline
@@ -1052,40 +1095,4 @@ timeline.render()
 ```
 ![timeline-demo](https://user-images.githubusercontent.com/19553554/35082284-e704cfa6-fc53-11e7-8790-f92eb6b2315f.gif)
 
-
-## 统一风格
-> 为了简化配置项编写，提供了一个 Style 类，可用于在同一个图或者多个图内保持统一的风格
-
-### 初始化图
-```python
-from pyecharts import Style
-
-style = Style(
-    title_color="#fff",
-    title_pos="center",
-    width=1100,
-    height=600,
-    background_color='#404a59'
-)
-# style,init_style 会返回类初始化的风格配置字典
-geo = Geo("全国主要城市空气质量", "data from pm2.5", **style.init_style)
-```
-
-### 增加图例
-```python
-pie = Pie('各类电影中"好片"所占的比例', "数据来着豆瓣", title_pos='center')
-# 使用 Style.add() 可配置增加图例的风格配置字典
-pie_style = style.add(
-    radius=[18, 24],
-    label_pos="center",
-    is_label_show=True,
-    label_text_color=None
-)
-pie.add("", ["剧情", ""], [25, 75], center=[10, 30], **pie_style)
-pie.add("", ["奇幻", ""], [24, 76], center=[30, 30], **pie_style)
-pie.add("", ["爱情", ""], [14, 86], center=[50, 30], **pie_style)
-pie.add("", ["惊悚", ""], [11, 89], center=[70, 30], **pie_style)
-```
-这样会使得每个图例都会按照设定的风格
-
-**如果你已阅读完本篇文档，可以进一步阅读 [高级用法篇](zh-cn/advanced)**
+**If you have read this document, read further [Advanced Topics](en-us/advanced)**

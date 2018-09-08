@@ -7,11 +7,11 @@
 
 **Basic Usage**
 
-[Chart Render](en-us/prepare) | [Chart Options](en-us/charts)
+[Chart Render](en-us/prepare) | [Chart Configuration](en-us/charts_configure) | [Chart Basic](en-us/charts_base) | [Chart Customization](en-us/charts_custom) | [Chart Style](en-us/charts_style) | [Data Analysis and Import](en-us/data_import)
 
 **Advance Topics**
 
-[Chart API](en-us/api) | [Custom Map](en-us/customize_map)
+[Chart API](en-us/api) | [Themes Customization](en-us/themes) | [Map Customization](en-us/customize_map) | [Callback Function & Event Handler](en-us/advanced) | [Language Translator Extension](en-us/translator)
 
 **Platform Support**
 
@@ -21,6 +21,10 @@
 
 [Demo Projects](https://github.com/pyecharts/pyecharts-users-cases) | [Geography & Map](en-us/datasets)
 
-**Development**
+**Project Release**
 
-[Changelog](zh-cn/changelog) | [Release Note](zh-cn/release-note) | [Team](en-us/team) | [FAQ](en-us/faq)
+[Changelog](zh-cn/changelog) | [Release Note](zh-cn/release-note)
+
+**Project Development**
+
+[Developer Guide](en-us/for_pyechart_developer) | [Technical Documents](en-us/technical) | [Team](en-us/team) | [Donors List](zh-cn/donors) | [FAQ](en-us/faq)

@@ -101,7 +101,7 @@ $ flask run
 
 Here's what you will get:
 
-![flask-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/flask-0.gif)
+![flask-0](https://user-images.githubusercontent.com/19553554/35081158-3faa7c34-fc4d-11e7-80c9-2de79371374f.gif)
 
 
 ## Conclusion

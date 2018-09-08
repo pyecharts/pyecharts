@@ -12,7 +12,7 @@ pyecharts.javascripthon 封装了一个 Python-To-Javascript 语言翻译器，�
 
 
 - `EChartsTranslator`  --> `TranslateResult`：公共 API 类，提供对外接口，该类本身不处理具体 translate 工作，调用两个组件 translator，并将结果进行组装。
-- `JSONTranslator` --> `str`：将 Python 字典翻译成 一个JS 代码段字符串（当含有函数是不再是有效的 JSON 字符串），另外提供了一个回调接口。`post_encode_func(func, func_encoded)`：用于当 json 在 encode 完一个函数对象后调用。
+- `JSONTranslator` --> `str`：将 Python 字典翻译成 一个JS 代码段字符串（当含有函数是不再是有效的 JSON 字符串），另外提供了一个回调接口`post_encode_func(func, func_encoded)`：用于当 json 在 encode 完一个函数对象后调用。
 - `FunctionTranslator` --> `FunctionStore`：将若干个函数对象翻译成对应的 JS 代码片段。
 
 
