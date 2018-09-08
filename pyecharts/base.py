@@ -5,7 +5,6 @@ import warnings
 from tempfile import mkstemp
 
 from jinja2 import Markup
-from pyecharts_javascripthon.api import TRANSLATOR
 
 import pyecharts.constants as constants
 import pyecharts.engine as engine
@@ -13,6 +12,7 @@ import pyecharts.exceptions as exceptions
 import pyecharts.utils as utils
 from pyecharts.conf import CURRENT_CONFIG
 from pyecharts.echarts.option import get_all_options
+from pyecharts.javascripthon.api import EChartsTranslator
 
 
 class Base(object):
@@ -93,8 +93,7 @@ class Base(object):
         """
         打印输出图形所有配置项
         """
-        snippet = TRANSLATOR.translate(self.options)
-        print(snippet.as_snippet())
+        print(EChartsTranslator.dumps(self.options))
 
     def show_config(self):
         """

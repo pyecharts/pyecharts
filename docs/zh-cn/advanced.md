@@ -6,7 +6,9 @@
 
 在 Python-To-Javascript 语言翻译领域，[javascripthon](https://pypi.python.org/pypi/javascripthon)  是一个简单的 Python3.5+ 到 Javascript 的语言翻译器;  [dukpy](https://github.com/amol-/dukpy) 支持 Python2.7 和 Python 3.4 的语言翻译。
 
-基于以上事实，pyecharts 团队开发了  [pyecharts-javascripthon](https://github.com/pyecharts/pyecharts-javascripthon) 作为底层的 Python-To-Javascript 语言翻译库，封装了以上两个不同的翻译器，并提供若干个 Javascript 数据类型适配模块。关于翻译器的更多内容，请移步至 [Translator 篇](zh-cn/translator)。
+基于以上事实，`pyecharts.javascripthon` 封装了以上两个不同的翻译器，并提供若干个 Javascript 数据类型适配模块。
+
+> 从 v0.6.0 开始，原有的 [pyecharts-javascripthon](https://github.com/pyecharts/pyecharts-javascripthon) 库将合并入 pyecharts ，引用路径为 `pyecharts.javascripthon` 。
 
 pyecharts 目前仅使用了并封装一部分的 Javascripthon 的翻译规则，主要是 **函数翻译(Function Translate)** 。使用伪代码表示如下：
 
@@ -30,17 +32,14 @@ function add(x, y) {
 }
 ```
 
-对于 pyecharts 使用者来说，无需了解该翻译器具体的工作原理。
+对于 pyecharts 使用者来说，无需了解该翻译器具体的工作原理。关于翻译器的更多内容，请移步至 [Translator 篇](zh-cn/translator)。
 
 ## 安装
 
 ### 基本安装
 
-pyecharts 默认已经安装了 pyecharts-javascripthon ，同时也可以通过 pip 安装。
+从 v0.6.0 开始，pyecharts 默认已经集成，无需额外安装。
 
-```bash
-$ pip install pyecharts-javascripthon 
-```
 
 ### 环境限制
 
@@ -141,8 +140,8 @@ def test_geo_shantou_city():
 使用回调函数强制设置浮点数位数
 
 ```python
-from pyecharts_javascripthon.dom import window
 from pyecharts import Bar, Grid
+from pyecharts.javascripthon.dom import window
 
 
 def custom_formatter(params):
@@ -227,7 +226,7 @@ from __future__ import unicode_literals
 
 import pyecharts.echarts.events as events
 from pyecharts import Bar
-from pyecharts_javascripthon.dom import alert
+from pyecharts.javascripthon.dom import alert
 
 
 def on_click():
