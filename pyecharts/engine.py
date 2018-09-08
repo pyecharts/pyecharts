@@ -3,17 +3,25 @@ from __future__ import unicode_literals
 
 from jinja2 import Environment, FileSystemLoader, Markup, environmentfunction
 from lml.plugin import PluginInfo, PluginManager
-from pyecharts_javascripthon.api import FUNCTION_TRANSLATOR, TRANSLATOR
 
 import pyecharts.conf as conf
 import pyecharts.constants as constants
 import pyecharts.utils as utils
+from pyecharts.javascripthon.api import EChartsTranslator
+
+# ------ Code Tpl Start
+
+# TODO Use class
 
 LINK_SCRIPT_FORMATTER = '<script type="text/javascript" src="{}"></script>'
 EMBED_SCRIPT_FORMATTER = '<script type="text/javascript">\n{}\n</script>'
+
+EXTRA_TEXT_FORMATTER = """<p style="{style}">{text}</p>"""
 CHART_DIV_FORMATTER = (
     '<div id="{chart_id}" style="width:{width};height:{height};"></div>'
-)  # flake8: noqa
+)
+
+# flake8: noqa
 CHART_CONFIG_FORMATTER = """
 var myChart_{chart_id} = echarts.init(document.getElementById('{chart_id}'), '{theme}', {{renderer: '{renderer}'}});
 {custom_function}
@@ -23,7 +31,10 @@ myChart_{chart_id}.setOption(option_{chart_id});
 CHART_EVENT_FORMATTER = """
 myChart_{chart_id}.on("{event_name}", {handler_name});
 """
-EXTRA_TEXT_FORMATTER = """<p style="{style}">{text}</p>"""
+
+# ------ Code Tpl End
+
+TRANSLATOR = EChartsTranslator()
 
 
 @environmentfunction
@@ -94,17 +105,17 @@ def generate_js_content(*charts):
     contents = []
 
     for chart in charts:
-        FUNCTION_TRANSLATOR.reset()
+        TRANSLATOR.reset()
         for handler in chart.event_handlers.values():
-            FUNCTION_TRANSLATOR.feed(handler)
-
-        javascript_snippet = TRANSLATOR.translate(chart.options)
+            TRANSLATOR.feed_event(handler)
+        TRANSLATOR.feed_options(chart.options)
+        translate_result = TRANSLATOR.translate()
         kwargs = dict(
             chart_id=chart.chart_id,
             renderer=chart.renderer,
             theme=chart.theme,
-            custom_function=javascript_snippet.function_snippet,
-            options=javascript_snippet.option_snippet,
+            custom_function=translate_result.function_snippet,
+            options=translate_result.options_snippet,
         )
         js_content = CHART_CONFIG_FORMATTER.format(**kwargs)
         for event_name, handler in chart.event_handlers.items():
