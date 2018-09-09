@@ -11,7 +11,7 @@
     #### Fixed
     * [issue#738](https://github.com/pyecharts/pyecharts/issues/738) 支持设置 Grid, Overlay 和 Timeline 某选项为空 (null)
 
-    #### Remove
+    #### Removed
     * 移除 pillow 作为默认依赖，需要用到 Scatter.draw 方法的开发者请先自行安装 pillow。
     
 
