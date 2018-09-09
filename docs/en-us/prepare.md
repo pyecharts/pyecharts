@@ -108,34 +108,27 @@ The chart class provides several methods for building and rendering. In the usin
 | 2  | Add a common configuration to the chart, such as a theme |  `chart.use_theme()` | |
 | 3  | Add a specific configuration to the chart | `geo.add_coordinate()` | |
 | 4  | Add data and configuration items| `chart.add()` | Refer to [Data Analysis and Import](en-us/data_import) |
-| 5  | 生成本地文件（html/svg/jpeg/png/pdf/gif）| `chart.render()` | |
+| 5  | Generate local file(html/svg/jpeg/png/pdf/gif)| `chart.render()` | |
 
-从 v0.5.9 开始，以上涉及的方法均支持链式调用。例如：
+From v0.5.9, the methods involved above support chain calls. E.g:
 
+```python
+from pyecharts import Bar
 
+CLOTHES = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
+clothes_v1 = [5, 20, 36, 10, 75, 90]
+clothes_v2 = [10, 25, 8, 60, 20, 80]
 
-almost all the chart type drawed like this:
-1. ```chart_name = Type()``` Initialise the concrete chart type.
-2. ```add()``` Add data and options.
-3. ```render()``` Creat .html file.
-
-​```add()``` Data is two lists commonly(the same length),if your data is dictionary or dictionary with tuple,use ```cast()``` to convert.
-
-​```python
-@staticmethod
-cast(seq)
-​``` Convert the sequence with the dictionary and tuple type into k_lst, v_lst. ```
+(Bar("柱状图数据堆叠示例")
+    .add("商家A", CLOTHES, clothes_v1, is_stack=True)
+    .add("商家B", CLOTHES, clothes_v2, is_stack=True)
+    .render())
 ```
-1. Tuple Lists
-    [(A1, B1), (A2, B2), (A3, B3), (A4, B4)] --> k_lst[ A[i1, i2...] ], v_lst[ B[i1, i2...] ]
-2. Dictionary Lists
-    [{A1: B1}, {A2: B2}, {A3: B3}, {A4: B4}] --> k_lst[ A[i1, i2...] ], v_lst[ B[i1, i2...] ]
-3. Dictionaries
-    {A1: B1, A2: B2, A3: B3, A4: B4} -- > k_lst[ A[i1, i2...] ], v_lst[ B[i1, i2...] ]
+
 
 ### Render Charts Many Times
 
-> Update on v0.4.0
+From v0.4.0+, pyecharts reconstructed the internal logic of rendering to improve efficiency. It is recommended to display multiple charts in the following ways.
 
 You can call `chart.render`  many times to show some charts in a script.
 
@@ -164,6 +157,9 @@ line = Line("我的第一个图表", "这里是副标题")
 line.add("服装", ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"], [5, 20, 36, 10, 75, 90])
 
 env = create_default_environment()
+# Create a default configuration environment for rendering
+# create_default_environment(filet_ype)
+# file_type: 'html', 'svg', 'png', 'jpeg', 'gif' or 'pdf'
 
 env.render_chart_to_file(bar, path='bar.html')
 env.render_chart_to_file(line, path='line.html')
@@ -177,54 +173,11 @@ In the context of Numpy and/or Pandas, ```pdcast(pddata)``` and ``` npcast(npdat
 
 ![pandas-numpy](https://user-images.githubusercontent.com/19553554/35104252-3e36cee2-fca3-11e7-8e43-09bbe8dbbd1e.png)
 
-If your DataFrame returns a transposed list(such as, [ [1], [2], [3] ]), you have to tranpose it by yourself (make it like [ 1, 2, 3 ] ). This transpose operation applies to Radar, Parallel, HeatMap.
+**Note:** When using Pandas&Numpy, ensure that the integer type is int instead of numpy.int32
 
-Series type
-```python
-from pyecharts import Bar
-import pandas as pd
+**Of course you can use the cooler way, use Jupyter Notebook to show the chart. What matplotlib have，so do pyecharts**
 
-pddata = pd.Series([1, 2, 3, 4], index=[1, 'b', 'c', 'd'])
-vlst, ilst = Bar.pdcast(pddata)
-
-print(vlst)
->>> [1.0, 2.0, 3.0, 4.0] 
-print(ilst)
->>> ['1', 'b', 'c', 'd']
-```
-
-DataFrame type
-```python
-from pyecharts import Bar
-import pandas as pd
-
-pddt = pd.DataFrame([[1, 2, 3, 4], [2, 3, 4, 5], [4.1, 5.2, 6.3, 7.4]], index=["A", "B", "C"])
-vlst, ilst = Bar.pdcast(pddata)
-
-print(vlst)
->>> [[1.0, 2.0, 3.0, 4.0], [2.0, 3.0, 4.0, 5.0], [4.1, 5.2, 6.3, 7.4]]
-print(ilst)
->>> ['A', 'B', 'C']
-```
-
-npcast()，It accepts numpy.array type.
-```python
-@staticmethod
-npcast(npdata)
-​``` handle the ndarray type in Numpy, return a list that ensures the correct type. Returns the nested list if there are multiple dimensions.```
-```
-
-Numpy.array type
-```python
-from pyecharts import Bar
-import numpy ad np
-
-npdata = np.array([[1, 2, 3, 4], [2, 4, 5.0, 6.3]])
-print(npdata)
->>> [[1.0, 2.0, 3.0, 4.0], [2.0, 4.0, 5.0, 6.3]]
-```
-
-**Of course you can use the cooler way,use Jupyter Notebook to show the chart.But what matplotlib have，so do pyecharts**
+**Note:** From v0.1.9.2, the ```render_notebook()``` method has been deprecated and is now more pythonic. It is ok to call the instance itself directly.
 
 like this
 
@@ -234,19 +187,10 @@ and this
 
 ![notebook-1](https://user-images.githubusercontent.com/19553554/35104157-fa39e170-fca2-11e7-9738-1547e22914a6.gif)
 
-more Jupyter notebook examples, please refer to [notebook-use-cases](https://github.com/chenjiandongx/pyecharts/blob/master/document/notebook-use-cases.ipynb)。you could download and run it on your notebook.
+more Jupyter notebook examples, please refer to [notebook-use-cases](https://github.com/chenjiandongx/pyecharts/blob/master/document/notebook-use-cases.ipynb). You could download and run it on your notebook.
 
-**Tip：** The function was official added in 0.1.9.2 version,please update the newest version to use it.
-
+Use Jupyter Notebook to display charts, just call your own instance and be compatible with Python2 and Python3's Jupyter Notebook environment. All charts can be displayed normally, and the interactive experience is consistent with the browser. It is even no need PPT with this method to display report! !
 
 ### Offline installation instructions for pyecharts 0.3.2 +
 
 Please download these three packages from pypi: pyecharts, pyecharts-jupyter-installer, 和 jupyter-echarts-pypkg. 
-
-Then install them sequentially as:
-
-```
-pip install pyecharts-jupyter-installer.tar.gz
-pip install jupyter-echarts-pypkg.tar.gz
-pip install pyecharts.tar.gz
-```

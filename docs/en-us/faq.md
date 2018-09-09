@@ -102,53 +102,54 @@ If you really need to use the single file mode, please refer to [Python Packagin
 
 ![](https://user-images.githubusercontent.com/4280312/37690316-08ef46e0-2ca2-11e8-9f2c-78c41a84bf57.png)
 
-A: 因为 china.js 没有加载成功。请检查 echarts-countries-pypkg 是不是已经装了，安装方法参考 [README](https://github.com/pyecharts/pyecharts/blob/master/README.md)。如果是 jupyter 的环境的话， 请检查能否正确访问 http://localhost:8888/nbextensions/echarts-countries-js/china.js
+A: Because china.js did not load successfully. Please check if echarts-countries-pypkg is installed. Install solutions [README](https://github.com/pyecharts/pyecharts/blob/master/README.md). If in jupyter environment, please check if it can be accessed correctly. http://localhost:8888/nbextensions/echarts-countries-js/china.js
 
-如果你把地图全部装了的画，在你开新的 notebook 的时候， jupyter 的 javascript console 会有这个显示：
+If you have already installed all maps, jupyter's javascript console will have this content when you open a new notebook:
 
 ![](https://user-images.githubusercontent.com/4280312/37921785-a472a2b8-3122-11e8-8ee3-cc80a3901d9d.png)
 
 
-**Q:为什么 jupyter notebook 图是空的？**
+**Q: Why is the jupyter notebook chart empty?**
 
-请按这个顺序排查问题：
+Please check it in this order：
 
-1）检查能否访问 echarts.min.js？ http://localhost:8888/nbextensions/echarts/echarts.min.js
+1）Check if you can access echarts.min.js? http://localhost:8888/nbextensions/echarts/echarts.min.js
 
-如果不能，请检查 jupyter-echarts-pypkg 是否装好？在确认你已经装了 jupyter 的情况下，可以卸载 jupyter-echarts-pypkg 然后再装一遍（`pip install --no-cache-dir jupyter-echarts-pypkg`）。然后运行 jupyter notebook，再次查看 1）能否正确访问 echarts.min.js？
+If not, please check if jupyter-echarts-pypkg is installed? After confirming that jupyter is installed, you can uninstall jupyter-echarts-pypkg and install it again. (`pip install --no-cache-dir jupyter-echarts-pypkg`).   
+And then run jupyter notebook, check `1）if you can access echarts.min.js`?
 
-如果能，请右键打开开发者工具，截下 <script>...</script> 区域的截图.
+If so, right click on the developer tool and take a screenshot of the <script>...</script> area.
 
-例子：
+Example:  
 
 ![](https://user-images.githubusercontent.com/4280312/29354092-4c4eecee-8264-11e7-98bb-06ec1b4c06b6.png)
 
 
-**Q: 为什么部分 echarts-xxx-pypkg 不能成功安装？**
+**Q: Why are some echarts-xxx-pypkg not successfully installed?**
 
-首先，请检查当前 python 环境有没有 jupyter。有的话，先卸载先前装的 echarts-xxx-pypkg (`pip uninstall echarts-xxx-pypkg`) ，下一步再用 `pip install --no-cache-dir echarts-xxx-pypkg` 装一遍。
+First, check if there is a jupyter in the current python environment. If you have it, first uninstall the previously installed echarts-xxx-pypkg (`pip uninstall echarts-xxx-pypkg`) and install it again with `pip install --no-cache-dir echarts-xxx-pypkg`.
 
 
 **Q: pip install pyecharts meet error: Microsoft Visual C++ 14.0 is required**
 
-使用 `pip install pyecharts` 安装时出现该问题，“error: Microsoft Visual C++ 14.0 is required. Get it with "Microsoft Visual C++ Build Tools": http://landinghub.visualstudio.com/visual-cpp-build-tools”。
+"error: Microsoft Visual C++ 14.0 is required. Get it with "Microsoft Visual C++ Build Tools": http://landinghub.visualstudio.com/visual-cpp-build-tools ". This problem occurs when installing with `pip install pyecharts`.  
 
-你需要到微软网站下载 Build Tools for Visual Studio 2017。具体信息请访问 https://www.scivision.co/python-windows-visual-c++-14-required/
+You need to go to the Microsoft website to download Build Tools for Visual Studio 2017. For more information, please visit https://www.scivision.co/python-windows-visual-c++-14-required/
 
 
-**Q:如何离线安装 pyecharts？**
+**Q: How to install pyecharts offline?**
 
-自 v0.5.0 后，离线模式的要求改变了一下。如果你用的是 python 3.5+, 以下的指导就足够了。要是你用的是 python 2.7, 3.4, 请读补充提示。
+The requirements for offline mode have changed since v0.5.0. If you are using python 3.5+, the following instructions will be enough. If you are using python 2.7 / 3.4, please read the supplementary tips.
 
-首先需要在一台可以联网的电脑上下载 [requirements.txt](https://github.com/pyecharts/pyecharts/blob/master/requirements.txt) 的依赖包，然后执行
+First, you need to download [requirements.txt](https://github.com/pyecharts/pyecharts/blob/master/requirements.txt) packages on a computer that can be connected to the Internet.
 ``` shell
 $ mkdir pyecharts_requirements
 $ cd pyecharts_requirements
-$ # 将下载好的 requirement.txt 复制到本目录下
+$ # copy requirement.txt to this directory
 $ pip download -r requirements.txt
 $ pip download pyecharts
 ```
-然后就可以看到 pyecharts_requirements 文件夹下已经安装了所有需要的依赖包，包括 pyecharts
+Then you can see all required dependencies have been installed under the pyecharts_requirements folder, including pyecharts.
 ``` shell
 $ ls
 Mode                LastWriteTime         Length Name
@@ -163,16 +164,16 @@ Mode                LastWriteTime         Length Name
 -a----        2018/4/19     19:59           4725 pyecharts_jupyter_installer-0.0.3-py2.py3-none-any.whl
 -a----         2018/3/9     23:12             71 requirements.txt
 ```
-复制本文件夹到需要离线安装的电脑上，终端切换到该路径下
+Copy this folder to the computer that needs to be installed offline, and then switches to the path in terminal.
 
 ``` shell
 $ pip install --no-index -f ./ -r requirements.txt
 $ pip install ./pyecharts
 ```
 
-python 2.7, 3.4 用户提示：
+python 2.7, 3.4 user tips：
 
-离线用法呢，你们有两个选择：
+For offline usage, you have two options:
 
-1）拥抱 python 3.5+, 你们就不需要再做别的了  
-2）在自己的机器上运行 [pyecharts-javascripthon-api-service](https://github.com/pyecharts/pyecharts-javascripthon-api-service). 这个服务呢，也是需要 python 3.5+ 的，所以如果你是个人用户的，可以就此打住，直接用 pip3 装 pyecharts v0.5.0 好了。
+1）Switch to python 3.5+  
+2）Run [pyecharts-javascripthon-api-service](https://github.com/pyecharts/pyecharts-javascripthon-api-service) on your machine. This service also needs python 3.5+, so if you are a personal user, you can stop here and install pyecharts v0.5.0 directly with pip3.
