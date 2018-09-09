@@ -1,7 +1,5 @@
 # coding=utf-8
 
-from PIL import Image
-
 from pyecharts.chart import Chart
 
 
@@ -91,6 +89,10 @@ class Scatter(Chart):
         :return:
             转换后的数组
         """
+        try:
+            from PIL import Image
+        except ImportError:
+            raise
         color = color or (255, 255, 255)
         im = Image.open(path)
         width, height = im.size
