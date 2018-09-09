@@ -108,8 +108,6 @@ def test_not_set():
 
     kline = Kline("K 线图-默认示例")
     kline.add("日K", [], [])
-    kline._option["series"][0]["itemStyle"] = {
-        "normal": {"borderColor": NULL}
-    }
+    kline._option["series"][0]["itemStyle"] = {"normal": {"borderColor": NULL}}
     content = kline._repr_html_()
     assert '"borderColor": null' in content

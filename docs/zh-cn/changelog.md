@@ -3,8 +3,19 @@
 * ### version 0.6.0（dev）
     * TODO
 
+* ### version 0.5.11 - 2018.9.9（current）
+    
+    #### Added
+    * [issue#731](https://github.com/pyecharts/pyecharts/issues/731) 新增 `mark_point_raw`, `mark_line_raw` 配置项用于个性化展示标记。
+    
+    #### Fixed
+    * [issue#738](https://github.com/pyecharts/pyecharts/issues/738) 支持设置 Grid, Overlay 和 Timeline 某选项为空 (null)
 
-* ### version 0.5.10 - 2018.9.4（current）
+    #### Removed
+    * 移除 pillow 作为默认依赖，需要用到 Scatter.draw 方法的开发者请先自行安装 pillow。
+    
+
+* ### version 0.5.10 - 2018.9.4
 
     #### Added
     * [issue#699](https://github.com/pyecharts/pyecharts/issues/699) 为漏斗图新增 `funnel_sort` 和 `funnel_gap` 分别用于控制漏斗图的排序方式和数据图形间隔。
