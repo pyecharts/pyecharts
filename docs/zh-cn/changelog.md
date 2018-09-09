@@ -4,9 +4,13 @@
     * TODO
 
 * ### version 0.5.11 - （dev）
-
-    #### Fxied
-    * [issue#738](https://github.com/pyecharts/pyecharts/issues/738) 支持设置 Grid, Overlay 和 Timeliine 某选项为空 (null)
+    
+    #### Added
+    * [issue#731](https://github.com/pyecharts/pyecharts/issues/731) 新增 `mark_point_raw`, `mark_line_raw` 配置项用于个性化展示标记。
+    
+    #### Fixed
+    * [issue#738](https://github.com/pyecharts/pyecharts/issues/738) 支持设置 Grid, Overlay 和 Timeline 某选项为空 (null)
+    
 
 * ### version 0.5.10 - 2018.9.4
 
