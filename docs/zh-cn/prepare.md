@@ -1,5 +1,35 @@
 > 基本用法篇：本文档描述了 pyecharts 库的基本使用用法。
 
+### 安装 pyecharts
+
+#### 兼容性
+
+pyecharts 支持 Python2.7+ 和 Ptyhon3.5+。如果你使用的是 Python2.7，请在代码顶部声明字符编码，否则会出现中文乱码问题。
+```python
+#coding=utf-8
+from __future__ import unicode_literals
+```
+
+#### pyecharts
+
+pip 安装
+```shell
+$ pip install pyecharts
+```
+
+源码安装
+```shell
+$ git clone https://github.com/pyecharts/pyecharts.git
+$ cd pyecharts
+$ pip install -r requirements.txt
+$ python setup.py install
+```
+
+#### 地图插件
+
+自从 v0.3.2 开始，为了缩减项目本身的体积以及维持 pyecharts 项目的轻量化运行，pyecharts 将不再自带地图 js 文件。想使用地图的开发者**必须**自己手动安装地图插件。具体参考 [自定义地图篇](zh-cn/customize_map)。
+
+
 ### 快速开始
 
 首先开始来绘制你的第一个图表
@@ -33,6 +63,7 @@ bar.add("服装",
 bar.render()
 ```
 ![guide-1](https://user-images.githubusercontent.com/19553554/35104150-f31e1b7c-fca2-11e7-81cf-a12bf1629e02.png)
+
 
 ### 使用主题
 

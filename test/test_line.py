@@ -2,6 +2,8 @@
 # coding=utf-8
 from __future__ import unicode_literals
 
+import math
+import random
 from test.constants import CLOTHES, WEEK
 
 from pyecharts import Line
@@ -121,9 +123,6 @@ def test_line_type_fil():
 
 
 def test_line_log_yaxis():
-    import math
-    import random
-
     line = Line("折线图示例")
     line.add(
         "商家A",
@@ -137,3 +136,21 @@ def test_line_log_yaxis():
         yaxis_type="log",
     )
     line.render()
+
+
+def test_line_mark_point_raw():
+    line = Line()
+    line.add(
+        "商家A",
+        CLOTHES,
+        clothes_v1,
+        mark_point_raw=[
+            {
+                "name": "rawData",
+                "symbol": "pin",
+                "coord": ["衬衫", 5],
+                "value": 5,
+            }
+        ],
+    )
+    assert line.options.get("series")[0]["markLine"]["data"] == []
