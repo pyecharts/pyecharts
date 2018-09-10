@@ -47,17 +47,13 @@ def test_scatter_visualmap_type_size():
 
 
 def test_scatter_draw_love():
-    scatter = Scatter("散点图示例", width=800, height=480)
-    v1, v2 = scatter.draw("../images/love.png")
-    scatter.add("Love", v1, v2)
-    scatter.render()
+    scatter = Scatter("", width=800, height=480)
+    scatter.draw("../images/love.png")
 
 
 def test_scatter_draw__hot_red_bra():
-    scatter = Scatter("散点图示例", width=1000, height=480)
-    v1, v2 = scatter.draw("../images/cup.png")
-    scatter.add("Cup", v1, v2)
-    scatter.render()
+    scatter = Scatter("", width=1000, height=480)
+    scatter.draw("../images/cup.png")
 
 
 def test_scatter_multi_dimension():
