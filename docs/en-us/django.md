@@ -182,7 +182,7 @@ Quit the server with CONTROL-C.
 
 Please visit http://localhost:8000/myfirstvis/ for your first visualization via pyecharts. Here is your first 3D visualization:
 
-![django-0](https://github.com/chenjiandongx/pyecharts/blob/master/images/django-0.gif)
+![django-0](https://user-images.githubusercontent.com/19553554/35081440-21efcf58-fc4f-11e7-8427-ed73306533e8.gif)
 
 
 ## Conclusion
