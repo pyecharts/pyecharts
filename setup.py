@@ -16,7 +16,6 @@ __author_email__ = "chenjiandongx@qq.com"
 __license__ = "MIT"
 
 __requires__ = [
-    "pillow",
     "jinja2",
     "future",
     "jupyter-echarts-pypkg==0.1.2",
