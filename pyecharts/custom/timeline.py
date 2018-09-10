@@ -92,27 +92,28 @@ class Timeline(Base):
         :param time_point:
             指定时间点
         """
+        chart_options = chart.get_options(remove_none=False)
         self._js_dependencies = merge_js_dependencies(
             self._js_dependencies, chart.js_dependencies
         )
         self.__check_components(chart)
         self._time_points.append(time_point)
         self._option.get("baseOption").update(
-            backgroundColor=chart.options.get("backgroundColor")
+            backgroundColor=chart_options.get("backgroundColor")
         )
         self._option.get("baseOption").get("timeline").update(
             data=self._time_points
         )
         self._option.get("options").append(
             {
-                "color": chart.options.get("color"),
-                "legend": chart.options.get("legend"),
-                "series": chart.options.get("series"),
-                "title": chart.options.get("title"),
-                "tooltip": chart.options.get("tooltip"),
+                "color": chart_options.get("color"),
+                "legend": chart_options.get("legend"),
+                "series": chart_options.get("series"),
+                "title": chart_options.get("title"),
+                "tooltip": chart_options.get("tooltip"),
             }
         )
-        _tmp_series = copy.deepcopy(chart.options.get("series"))
+        _tmp_series = copy.deepcopy(chart_options.get("series"))
         for _s in _tmp_series:
             if _s.get("type") == "map":
                 _s.pop("data", None)
@@ -125,6 +126,7 @@ class Timeline(Base):
         :param chart:
             图形实例
         """
+        chart_options = chart.get_options(remove_none=False)
         _compoents = [
             "grid",
             "xAxis",
@@ -140,6 +142,6 @@ class Timeline(Base):
         ]
 
         for component in _compoents:
-            _c = chart.options.get(component, None)
+            _c = chart_options.get(component, None)
             if _c is not None:
                 self._option.get("baseOption").update({component: _c})
