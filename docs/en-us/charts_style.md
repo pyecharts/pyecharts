@@ -1,8 +1,8 @@
-> 图表风格篇：本篇文档为 pyecharts 图表风格详情文档。
+> Chart Style : This document is a pyecharts chart style detail document.
 
-为了简化配置项编写，提供了一个 Style 类，可用于在同一个图或者多个图内保持统一的风格
+To simplify writing configuration items, a Style class is provided that can be used to maintain a uniform style in the same or multiple charts.
 
-## 初始化图
+## Initialize Style
 ```python
 from pyecharts import Style
 
@@ -13,14 +13,14 @@ style = Style(
     height=600,
     background_color='#404a59'
 )
-# style.init_style 会返回类初始化的风格配置字典
+# style.init_style will return the Style class initialization dictionary
 geo = Geo("全国主要城市空气质量", "data from pm2.5", **style.init_style)
 ```
 
-## 增加图例
+## Update Style
 ```python
 pie = Pie('各类电影中"好片"所占的比例', "数据来着豆瓣", title_pos='center')
-# 使用 Style.add() 可配置增加图例的风格配置字典
+# Use Style.add() to update the Style class dictionary
 pie_style = style.add(
     radius=[18, 24],
     label_pos="center",
@@ -32,4 +32,4 @@ pie.add("", ["奇幻", ""], [24, 76], center=[30, 30], **pie_style)
 pie.add("", ["爱情", ""], [14, 86], center=[50, 30], **pie_style)
 pie.add("", ["惊悚", ""], [11, 89], center=[70, 30], **pie_style)
 ```
-这样会使得每个图例都会按照设定的风格
+This will make each chart follow the custom style.
