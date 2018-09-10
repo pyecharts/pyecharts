@@ -1,4 +1,5 @@
 # coding=utf-8
+import copy
 import os
 import uuid
 import warnings
@@ -11,7 +12,7 @@ import pyecharts.engine as engine
 import pyecharts.exceptions as exceptions
 import pyecharts.utils as utils
 from pyecharts.conf import CURRENT_CONFIG
-from pyecharts.echarts.option import get_all_options
+from pyecharts.echarts.option import get_other_options
 from pyecharts.javascripthon.api import EChartsTranslator
 
 
@@ -69,7 +70,7 @@ class Base(object):
 
     @property
     def options(self):
-        return utils.remove_key_with_none_value(self._option)
+        return self.get_options()
 
     @property
     def js_dependencies(self):
@@ -78,6 +79,12 @@ class Base(object):
     @property
     def page_title(self):
         return self._page_title
+
+    def get_options(self, remove_none=True):
+        if remove_none:
+            return utils.remove_key_with_none_value(self._option)
+        else:
+            return copy.deepcopy(self._option)
 
     def use_theme(self, theme_name):
         self.theme = theme_name
@@ -182,7 +189,7 @@ class Base(object):
         )
 
     def _get_all_options(self, **kwargs):
-        return get_all_options(**kwargs)
+        return get_other_options(**kwargs)
 
     def _repr_html_(self):
         """

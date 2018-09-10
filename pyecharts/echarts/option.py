@@ -5,16 +5,293 @@ import random
 
 import pyecharts.echarts as option
 
-fs = []
+base_fs = []    # _config_components() 方法中被调用
+other_fs = []   # add() 方法中被调用
 SYMBOLS = ("rect", "roundRect", "triangle", "diamond", "pin", "arrow")
 
 
-def collectfuncs(func):
-    fs.append(func)
+def collect_other_func(func):
+    other_fs.append(func)
     return func
 
 
-@collectfuncs
+def collect_base_func(func):
+    base_fs.append(func)
+    return func
+
+
+@collect_base_func
+def datazoom(
+    is_datazoom_show=False,
+    datazoom_type="slider",
+    datazoom_range=None,
+    datazoom_orient="horizontal",
+    datazoom_xaxis_index=None,
+    datazoom_yaxis_index=None,
+    **kwargs
+):
+    """
+    dataZoom 组件 用于区域缩放，从而能自由关注细节的数据信息，或者概览数据整
+    体，或者去除离群点的影响。
+
+    :param is_datazoom_show:
+        是否使用区域缩放组件，默认为 False
+    :param datazoom_type:
+        区域缩放组件类型，默认为'slider'，有'slider', 'inside', 'both'可选
+    :param datazoom_range:
+        区域缩放的范围，默认为[50, 100]
+    :param datazoom_orient:
+        datazoom 组件在直角坐标系中的方向，默认为 'horizontal'，效果显示在 x 轴。
+        如若设置为 'vertical' 的话效果显示在 y 轴。
+    :param datazoom_xaxis_index:
+        datazoom 组件控制的 x 轴索引
+        默认控制第一个 x 轴，如没特殊需求无须显示指定。单个为 int 类型而控制多个为 list
+        类型，如 [0, 1] 表示控制第一个和第二个 x 轴。
+    :param datazoom_yaxis_index:
+        datazoom 组件控制的 y 轴索引
+        默认控制第一个 y 轴，如没特殊需求无须显示指定。单个为 int 类型而控制多个为 list
+        类型，如 [0, 1] 表示控制第一个和第二个 x 轴。
+    :param kwargs:
+    """
+    _min, _max = 50, 100
+    if datazoom_range:
+        if len(datazoom_range) == 2:
+            _min, _max = datazoom_range
+    if datazoom_type not in ("slider", "inside", "both"):
+        datazoom_type = "slider"
+    _datazoom = []
+    _datazoom_config = {
+        "show": is_datazoom_show,
+        "type": "slider",
+        "start": _min,
+        "end": _max,
+        "orient": datazoom_orient,
+        "xAxisIndex": datazoom_xaxis_index,
+        "yAxisIndex": datazoom_yaxis_index,
+    }
+    if datazoom_type == "both":
+        _datazoom.append(_datazoom_config.copy())
+        datazoom_type = "inside"
+    _datazoom_config["type"] = datazoom_type
+    _datazoom.append(_datazoom_config)
+    return _datazoom
+
+
+@collect_base_func
+def datazoom_extra(
+    is_datazoom_extra_show=False,
+    datazoom_extra_type="slider",
+    datazoom_extra_range=None,
+    datazoom_extra_orient="vertical",
+    datazoom_extra_xaxis_index=None,
+    datazoom_extra_yaxis_index=None,
+    **kwargs
+):
+    """
+    额外的 dataZoom 条，直接 X/Y 轴同时使用 dataZoom 效果
+    """
+    if is_datazoom_extra_show:
+        return datazoom(
+            is_datazoom_show=True,
+            datazoom_type=datazoom_extra_type,
+            datazoom_range=datazoom_extra_range,
+            datazoom_orient=datazoom_extra_orient,
+            datazoom_xaxis_index=datazoom_extra_xaxis_index,
+            datazoom_yaxis_index=datazoom_extra_yaxis_index,
+        )
+
+
+@collect_base_func
+def color(colorlst=None, is_random=False, label_color=None, **kwargs):
+    """
+
+    :param colorlst:
+        全局颜色列表
+    :param is_random:
+        指定是否随机打乱全局颜色列表
+    :param label_color:
+        追加的颜色列表
+    :param kwargs:
+    """
+    if colorlst is None:
+        colorlst = []
+    if label_color:
+        for color in reversed(list(label_color)):
+            colorlst.insert(0, color)
+    if is_random:
+        random.shuffle(colorlst)
+    return colorlst
+
+
+@collect_base_func
+def tooltip(**kwargs):
+    return option.Tooltip(**kwargs)
+
+
+@collect_base_func
+def legend(
+    is_legend_show=True,
+    legend_orient="horizontal",
+    legend_pos="center",
+    legend_top="top",
+    legend_selectedmode="multiple",
+    legend_text_size=12,
+    legend_text_color=None,
+    **kwargs
+):
+    """
+    图例组件。图例组件展现了不同系列的标记(symbol)，颜色和名字。可以通过点击图例
+    控制哪些系列不显示。
+
+    :param is_legend_show:
+        是否显示顶端图例，默认为 True
+    :param legend_orient:
+        图例列表的布局朝向，默认为'horizontal'，有'horizontal', 'vertical'可选
+    :param legend_pos:
+        图例组件离容器左侧的距离，默认为'center'，有'left', 'center', 'right'可选，
+        也可以为百分数，如 "%60"
+    :param legend_top:
+        图例组件离容器上侧的距离，默认为'top'，有'top', 'center', 'bottom'可选，
+        也可以为百分数，如 "%60"
+    :param legend_selectedmode:
+        图例选择的模式，控制是否可以通过点击图例改变系列的显示状态。默认为'multiple'，
+        可以设成 'single' 或者 'multiple' 使用单选或者多选模式。
+        也可以设置为 False 关闭显示状态。
+    :param legend_text_size:
+        图例名称字体大小
+    :param legend_text_color:
+        图例名称字体颜色
+    :param kwargs:
+    """
+    _legend = {
+        "selectedMode": legend_selectedmode,
+        "show": is_legend_show,
+        "left": legend_pos,
+        "top": legend_top,
+        "orient": legend_orient,
+        "textStyle": {
+            "fontSize": legend_text_size,
+            "color": legend_text_color,
+        },
+    }
+    return _legend
+
+
+@collect_base_func
+def visual_map(
+    visual_type="color",
+    visual_range=None,
+    visual_text_color=None,
+    visual_range_text=None,
+    visual_range_color=None,
+    visual_range_size=None,
+    visual_orient="vertical",
+    visual_pos="left",
+    visual_top="bottom",
+    visual_split_number=5,
+    visual_dimension=None,
+    is_calculable=True,
+    is_piecewise=False,
+    pieces=None,
+    **kwargs
+):
+    """
+    是视觉映射组件，用于进行『视觉编码』，也就是将数据映射到视觉元素（视觉通道）
+
+    :param visual_type:
+        制定组件映射方式，默认为'color‘，即通过颜色来映射数值。有'color', 'size'可选。
+        'size'通过数值点的大小，也就是图形点的大小来映射数值。
+    :param visual_range:
+        指定组件的允许的最小值与最大值。默认为 [0, 100]
+    :param visual_text_color:
+        两端文本颜色。
+    :param visual_range_text:
+        两端文本。默认为 ['low', 'hight']
+    :param visual_range_size:
+        数值映射的范围，也就是图形点大小的范围。默认为 [20, 50]
+    :param visual_range_color:
+        过渡颜色。默认为 ['#50a3ba', '#eac763', '#d94e5d']
+    :param visual_orient:
+        visualMap 组件条的方向，默认为'vertical'，有'vertical', 'horizontal'可选。
+    :param visual_pos:
+        visualmap 组件条距离左侧的位置，默认为'left'。有'right', 'center',
+        'right'可选，也可为百分数或整数。
+    :param visual_top:
+        visualmap 组件条距离顶部的位置，默认为'top'。有'top', 'center',
+        'bottom'可选，也可为百分数或整数。
+    :param visual_split_number:
+        分段型中分割的段数，在设置为分段型时生效。默认分为 5 段。
+    :param visual_dimension:
+        指定用数据的『哪个维度』，映射到视觉元素上。默认映射到最后一个维度。索引从 0 开始。
+        在直角坐标系中，x 轴为第一个维度（0），y 轴为第二个维度（1）。
+    :param is_calculable:
+        是否显示拖拽用的手柄（手柄能拖拽调整选中范围）。默认为 True
+    :param is_piecewise:
+        是否将组件转换为分段型（默认为连续型），默认为 False
+    :param pieces:
+        自定义『分段式视觉映射组件（visualMapPiecewise）』的每一段的范围，
+        以及每一段的文字，以及每一段的特别的样式（仅在 is_piecewise 为 True
+        时生效）。例如：
+        pieces: [
+            {min: 1500}, // 不指定 max，表示 max 为无限大（Infinity）。
+            {min: 900, max: 1500},
+            {min: 310, max: 1000},
+            {min: 200, max: 300},
+            {min: 10, max: 200, label: '10 到 200（自定义label）'},
+            // 表示 value 等于 123 的情况。
+            {value: 123, label: '123（自定义特殊颜色）', color: 'grey'}
+            {max: 5}     // 不指定 min，表示 min 为无限大（-Infinity）。
+        ]
+    :param kwargs:
+    """
+    _min, _max = 0, 100
+    if visual_range:
+        if len(visual_range) == 2:
+            _min, _max = visual_range
+
+    _tlow, _thigh = "low", "high"
+    if visual_range_text:
+        if len(visual_range_text) == 2:
+            _tlow, _thigh = visual_range_text
+
+    _inrange_op = {}
+    if visual_type == "color":
+        range_color = ["#50a3ba", "#eac763", "#d94e5d"]
+        if visual_range_color:
+            if len(visual_range_color) >= 2:
+                range_color = visual_range_color
+        _inrange_op.update(color=range_color)
+
+    if visual_type == "size":
+        range_size = [20, 50]
+        if visual_range_size:
+            if len(visual_range_size) >= 2:
+                range_size = visual_range_size
+        _inrange_op.update(symbolSize=range_size)
+
+    _type = "piecewise" if is_piecewise else "continuous"
+
+    _visual_map = {
+        "type": _type,
+        "min": _min,
+        "max": _max,
+        "text": [_thigh, _tlow],
+        "textStyle": {"color": visual_text_color},
+        "inRange": _inrange_op,
+        "calculable": is_calculable,
+        "splitNumber": visual_split_number,
+        "dimension": visual_dimension,
+        "orient": visual_orient,
+        "left": visual_pos,
+        "top": visual_top,
+        "showLabel": True,
+    }
+    if is_piecewise:
+        _visual_map.update(pieces=pieces)
+    return _visual_map
+
+
+@collect_other_func
 def label(
     type=None,
     is_label_show=False,
@@ -88,29 +365,7 @@ def label(
     return _label
 
 
-@collectfuncs
-def color(colorlst=None, is_random=False, label_color=None, **kwargs):
-    """
-
-    :param colorlst:
-        全局颜色列表
-    :param is_random:
-        指定是否随机打乱全局颜色列表
-    :param label_color:
-        追加的颜色列表
-    :param kwargs:
-    """
-    if colorlst is None:
-        colorlst = []
-    if label_color:
-        for color in reversed(list(label_color)):
-            colorlst.insert(0, color)
-    if is_random:
-        random.shuffle(colorlst)
-    return colorlst
-
-
-@collectfuncs
+@collect_other_func
 def line_style(
     type=None,
     line_width=1,
@@ -153,7 +408,7 @@ def line_style(
     return _line_style
 
 
-@collectfuncs
+@collect_other_func
 def split_line(is_splitline_show=True, **kwargs):
     """
 
@@ -168,7 +423,7 @@ def split_line(is_splitline_show=True, **kwargs):
     return _split_line
 
 
-@collectfuncs
+@collect_other_func
 def axis_line(is_axisline_show=True, **kwargs):
     """
 
@@ -180,7 +435,7 @@ def axis_line(is_axisline_show=True, **kwargs):
     return _axis_line
 
 
-@collectfuncs
+@collect_other_func
 def split_area(is_area_show=True, **kwargs):
     """
 
@@ -192,7 +447,7 @@ def split_area(is_area_show=True, **kwargs):
     return _split_area
 
 
-@collectfuncs
+@collect_other_func
 def area_style(flag=False, area_opacity=None, area_color=None, **kwargs):
     """
 
@@ -210,7 +465,7 @@ def area_style(flag=False, area_opacity=None, area_color=None, **kwargs):
     return _area_style
 
 
-@collectfuncs
+@collect_other_func
 def xy_axis(
     type=None,
     x_axis=None,
@@ -510,9 +765,11 @@ def xy_axis(
 
 def _mark(
     data,
+    mark_point_raw=None,
     mark_point_symbol="pin",
     mark_point_symbolsize=50,
     mark_point_textcolor="#fff",
+    mark_line_raw=None,
     mark_line_symbolsize=10,
     mark_line_valuedim="",
     mark_line_coords=None,
@@ -539,6 +796,9 @@ def _mark(
             需自己传入标记点字典，共有两个键值对，'coord' 对应为 x y 轴坐标，'name' 为标记点名称
         标记线
             只支持默认的 'min', 'max', 'average'
+    :param mark_point_raw:
+        原生格式的 markPoint 数据，数据类型为 [{}, {}, ...]。
+        格式请参考 http://echarts.baidu.com/option.html#series-line.markPoint.data
     :param mark_point_symbol:
         标记点图形，，默认为'pin'，有'circle', 'rect', 'roundRect', 'triangle',
         'diamond', 'pin', 'arrow'可选
@@ -546,6 +806,9 @@ def _mark(
         标记点图形大小，默认为 50
     :param mark_point_textcolor:
         标记点字体颜色，默认为'#fff'
+    :param mark_line_raw:
+        原生格式的 markLine 数据，数据类型为 [{}, {}, ...]。
+        格式请参考 http://echarts.baidu.com/option.html#series-line.markLine.data
     :param mark_line_symbolsize:
         标记线图形大小，默认为 15
     :param mark_line_valuedim:
@@ -566,6 +829,13 @@ def _mark(
     :param _is_markline:
         指定是否为 markline
     """
+    if _is_markline:
+        if mark_line_raw:
+            return {"data": mark_line_raw}
+    else:
+        if mark_point_raw:
+            return {"data": mark_point_raw}
+
     mark = {"data": []}
     if data:
         _markpv = _marklv = [None for _ in range(len(data))]
@@ -638,7 +908,7 @@ def _mark(
     return mark
 
 
-@collectfuncs
+@collect_other_func
 def mark_point(mark_point=None, **kwargs):
     """
     标记点配置项
@@ -661,7 +931,7 @@ def mark_point(mark_point=None, **kwargs):
     return _mark(mark_point, **kwargs)
 
 
-@collectfuncs
+@collect_other_func
 def mark_line(mark_line=None, **kwargs):
     """ 标记线配置项
 
@@ -672,170 +942,7 @@ def mark_line(mark_line=None, **kwargs):
     return _mark(mark_line, _is_markline=True, **kwargs)
 
 
-@collectfuncs
-def legend(
-    is_legend_show=True,
-    legend_orient="horizontal",
-    legend_pos="center",
-    legend_top="top",
-    legend_selectedmode="multiple",
-    legend_text_size=12,
-    legend_text_color=None,
-    **kwargs
-):
-    """
-    图例组件。图例组件展现了不同系列的标记(symbol)，颜色和名字。可以通过点击图例
-    控制哪些系列不显示。
-
-    :param is_legend_show:
-        是否显示顶端图例，默认为 True
-    :param legend_orient:
-        图例列表的布局朝向，默认为'horizontal'，有'horizontal', 'vertical'可选
-    :param legend_pos:
-        图例组件离容器左侧的距离，默认为'center'，有'left', 'center', 'right'可选，
-        也可以为百分数，如 "%60"
-    :param legend_top:
-        图例组件离容器上侧的距离，默认为'top'，有'top', 'center', 'bottom'可选，
-        也可以为百分数，如 "%60"
-    :param legend_selectedmode:
-        图例选择的模式，控制是否可以通过点击图例改变系列的显示状态。默认为'multiple'，
-        可以设成 'single' 或者 'multiple' 使用单选或者多选模式。
-        也可以设置为 False 关闭显示状态。
-    :param legend_text_size:
-        图例名称字体大小
-    :param legend_text_color:
-        图例名称字体颜色
-    :param kwargs:
-    """
-    _legend = {
-        "selectedMode": legend_selectedmode,
-        "show": is_legend_show,
-        "left": legend_pos,
-        "top": legend_top,
-        "orient": legend_orient,
-        "textStyle": {
-            "fontSize": legend_text_size,
-            "color": legend_text_color,
-        },
-    }
-    return _legend
-
-
-@collectfuncs
-def visual_map(
-    visual_type="color",
-    visual_range=None,
-    visual_text_color=None,
-    visual_range_text=None,
-    visual_range_color=None,
-    visual_range_size=None,
-    visual_orient="vertical",
-    visual_pos="left",
-    visual_top="bottom",
-    visual_split_number=5,
-    visual_dimension=None,
-    is_calculable=True,
-    is_piecewise=False,
-    pieces=None,
-    **kwargs
-):
-    """
-    是视觉映射组件，用于进行『视觉编码』，也就是将数据映射到视觉元素（视觉通道）
-
-    :param visual_type:
-        制定组件映射方式，默认为'color‘，即通过颜色来映射数值。有'color', 'size'可选。
-        'size'通过数值点的大小，也就是图形点的大小来映射数值。
-    :param visual_range:
-        指定组件的允许的最小值与最大值。默认为 [0, 100]
-    :param visual_text_color:
-        两端文本颜色。
-    :param visual_range_text:
-        两端文本。默认为 ['low', 'hight']
-    :param visual_range_size:
-        数值映射的范围，也就是图形点大小的范围。默认为 [20, 50]
-    :param visual_range_color:
-        过渡颜色。默认为 ['#50a3ba', '#eac763', '#d94e5d']
-    :param visual_orient:
-        visualMap 组件条的方向，默认为'vertical'，有'vertical', 'horizontal'可选。
-    :param visual_pos:
-        visualmap 组件条距离左侧的位置，默认为'left'。有'right', 'center',
-        'right'可选，也可为百分数或整数。
-    :param visual_top:
-        visualmap 组件条距离顶部的位置，默认为'top'。有'top', 'center',
-        'bottom'可选，也可为百分数或整数。
-    :param visual_split_number:
-        分段型中分割的段数，在设置为分段型时生效。默认分为 5 段。
-    :param visual_dimension:
-        指定用数据的『哪个维度』，映射到视觉元素上。默认映射到最后一个维度。索引从 0 开始。
-        在直角坐标系中，x 轴为第一个维度（0），y 轴为第二个维度（1）。
-    :param is_calculable:
-        是否显示拖拽用的手柄（手柄能拖拽调整选中范围）。默认为 True
-    :param is_piecewise:
-        是否将组件转换为分段型（默认为连续型），默认为 False
-    :param pieces:
-        自定义『分段式视觉映射组件（visualMapPiecewise）』的每一段的范围，
-        以及每一段的文字，以及每一段的特别的样式（仅在 is_piecewise 为 True
-        时生效）。例如：
-        pieces: [
-            {min: 1500}, // 不指定 max，表示 max 为无限大（Infinity）。
-            {min: 900, max: 1500},
-            {min: 310, max: 1000},
-            {min: 200, max: 300},
-            {min: 10, max: 200, label: '10 到 200（自定义label）'},
-            // 表示 value 等于 123 的情况。
-            {value: 123, label: '123（自定义特殊颜色）', color: 'grey'}
-            {max: 5}     // 不指定 min，表示 min 为无限大（-Infinity）。
-        ]
-    :param kwargs:
-    """
-    _min, _max = 0, 100
-    if visual_range:
-        if len(visual_range) == 2:
-            _min, _max = visual_range
-
-    _tlow, _thigh = "low", "high"
-    if visual_range_text:
-        if len(visual_range_text) == 2:
-            _tlow, _thigh = visual_range_text
-
-    _inrange_op = {}
-    if visual_type == "color":
-        range_color = ["#50a3ba", "#eac763", "#d94e5d"]
-        if visual_range_color:
-            if len(visual_range_color) >= 2:
-                range_color = visual_range_color
-        _inrange_op.update(color=range_color)
-
-    if visual_type == "size":
-        range_size = [20, 50]
-        if visual_range_size:
-            if len(visual_range_size) >= 2:
-                range_size = visual_range_size
-        _inrange_op.update(symbolSize=range_size)
-
-    _type = "piecewise" if is_piecewise else "continuous"
-
-    _visual_map = {
-        "type": _type,
-        "min": _min,
-        "max": _max,
-        "text": [_thigh, _tlow],
-        "textStyle": {"color": visual_text_color},
-        "inRange": _inrange_op,
-        "calculable": is_calculable,
-        "splitNumber": visual_split_number,
-        "dimension": visual_dimension,
-        "orient": visual_orient,
-        "left": visual_pos,
-        "top": visual_top,
-        "showLabel": True,
-    }
-    if is_piecewise:
-        _visual_map.update(pieces=pieces)
-    return _visual_map
-
-
-@collectfuncs
+@collect_other_func
 def symbol(type=None, symbol="", **kwargs):
     """
 
@@ -853,7 +960,7 @@ def symbol(type=None, symbol="", **kwargs):
     return symbol
 
 
-@collectfuncs
+@collect_other_func
 def effect(
     effect_brushtype="stroke", effect_scale=2.5, effect_period=4, **kwargs
 ):
@@ -876,88 +983,7 @@ def effect(
     return _effect
 
 
-@collectfuncs
-def datazoom_extra(
-    is_datazoom_extra_show=False,
-    datazoom_extra_type="slider",
-    datazoom_extra_range=None,
-    datazoom_extra_orient="vertical",
-    datazoom_extra_xaxis_index=None,
-    datazoom_extra_yaxis_index=None,
-    **kwargs
-):
-    """
-    额外的 dataZoom 条，直接 X/Y 轴同时使用 dataZoom 效果
-    """
-    if is_datazoom_extra_show:
-        return datazoom(
-            is_datazoom_show=True,
-            datazoom_type=datazoom_extra_type,
-            datazoom_range=datazoom_extra_range,
-            datazoom_orient=datazoom_extra_orient,
-            datazoom_xaxis_index=datazoom_extra_xaxis_index,
-            datazoom_yaxis_index=datazoom_extra_yaxis_index,
-        )
-
-
-@collectfuncs
-def datazoom(
-    is_datazoom_show=False,
-    datazoom_type="slider",
-    datazoom_range=None,
-    datazoom_orient="horizontal",
-    datazoom_xaxis_index=None,
-    datazoom_yaxis_index=None,
-    **kwargs
-):
-    """
-    dataZoom 组件 用于区域缩放，从而能自由关注细节的数据信息，或者概览数据整
-    体，或者去除离群点的影响。
-
-    :param is_datazoom_show:
-        是否使用区域缩放组件，默认为 False
-    :param datazoom_type:
-        区域缩放组件类型，默认为'slider'，有'slider', 'inside', 'both'可选
-    :param datazoom_range:
-        区域缩放的范围，默认为[50, 100]
-    :param datazoom_orient:
-        datazoom 组件在直角坐标系中的方向，默认为 'horizontal'，效果显示在 x 轴。
-        如若设置为 'vertical' 的话效果显示在 y 轴。
-    :param datazoom_xaxis_index:
-        datazoom 组件控制的 x 轴索引
-        默认控制第一个 x 轴，如没特殊需求无须显示指定。单个为 int 类型而控制多个为 list
-        类型，如 [0, 1] 表示控制第一个和第二个 x 轴。
-    :param datazoom_yaxis_index:
-        datazoom 组件控制的 y 轴索引
-        默认控制第一个 y 轴，如没特殊需求无须显示指定。单个为 int 类型而控制多个为 list
-        类型，如 [0, 1] 表示控制第一个和第二个 x 轴。
-    :param kwargs:
-    """
-    _min, _max = 50, 100
-    if datazoom_range:
-        if len(datazoom_range) == 2:
-            _min, _max = datazoom_range
-    if datazoom_type not in ("slider", "inside", "both"):
-        datazoom_type = "slider"
-    _datazoom = []
-    _datazoom_config = {
-        "show": is_datazoom_show,
-        "type": "slider",
-        "start": _min,
-        "end": _max,
-        "orient": datazoom_orient,
-        "xAxisIndex": datazoom_xaxis_index,
-        "yAxisIndex": datazoom_yaxis_index,
-    }
-    if datazoom_type == "both":
-        _datazoom.append(_datazoom_config.copy())
-        datazoom_type = "inside"
-    _datazoom_config["type"] = datazoom_type
-    _datazoom.append(_datazoom_config)
-    return _datazoom
-
-
-@collectfuncs
+@collect_other_func
 def grid(
     grid_width=None,
     grid_height=None,
@@ -1003,7 +1029,7 @@ def grid(
     return _grid
 
 
-@collectfuncs
+@collect_other_func
 def grid3D(
     grid3d_width=100,
     grid3d_height=100,
@@ -1043,7 +1069,7 @@ def grid3D(
     return _grid3D
 
 
-@collectfuncs
+@collect_other_func
 def xaxis3D(
     xaxis3d_type=None,
     xaxis3d_name="",
@@ -1089,7 +1115,7 @@ def xaxis3D(
     return _xaxis3D
 
 
-@collectfuncs
+@collect_other_func
 def yaxis3D(
     yaxis3d_type=None,
     yaxis3d_name="",
@@ -1135,7 +1161,7 @@ def yaxis3D(
     return _yaxis3D
 
 
-@collectfuncs
+@collect_other_func
 def zaxis3D(
     zaxis3d_type=None,
     zaxis3d_name="",
@@ -1176,12 +1202,7 @@ def zaxis3D(
     return _zaxis3D
 
 
-@collectfuncs
-def tooltip(**kwargs):
-    return option.Tooltip(**kwargs)
-
-
-@collectfuncs
+@collect_other_func
 def calendar(calendar_date_range=None, calendar_cell_size=None, **kwargs):
     """
 
@@ -1201,11 +1222,21 @@ def calendar(calendar_date_range=None, calendar_cell_size=None, **kwargs):
     return _calendar
 
 
-def get_all_options(**kwargs):
+def get_base_options(**kwargs):
     """
     返回图形实例的所有配置项
     """
     _funcs = {}
-    for f in fs:
+    for f in base_fs:
+        _funcs[f.__name__] = f(**kwargs)
+    return _funcs
+
+
+def get_other_options(**kwargs):
+    """
+    返回图形实例的所有配置项
+    """
+    _funcs = {}
+    for f in other_fs:
         _funcs[f.__name__] = f(**kwargs)
     return _funcs

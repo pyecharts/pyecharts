@@ -1,6 +1,5 @@
 jinja2>=2.8
 future
-pillow
 lml>=0.0.2
 jupyter-echarts-pypkg>=0.1.1
 javascripthon>=0.10; python_version>"3.4"

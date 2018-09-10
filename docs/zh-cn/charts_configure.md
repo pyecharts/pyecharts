@@ -734,6 +734,10 @@
     [{"coord": [a1, b1], "name": "first markpoint"}, {"coord": [a2, b2], "name": "second markpoint"}]  
     需自己传入标记点字典，共有两个键值对，'coord' 对应为 x y 轴坐标， 'name' 为标记点名称。
 
+* mark_point_raw -> list  
+    原生格式的 markPoint 数据，数据类型为 [{}, {}, ...]。  
+    格式请参考 http://echarts.baidu.com/option.html#series-line.markPoint.data
+
 * mark_point_symbol -> str  
     默认 -> 'pin'  
     标记点图形，有'circle', 'rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow'可选。
@@ -748,6 +752,10 @@
 
 * mark_line -> list  
     标记线，默认有'min', 'max', 'average'可选
+
+* mark_line_raw -> list  
+    原生格式的 markLine 数据，数据类型为 [{}, {}, ...]。  
+    格式请参考 http://echarts.baidu.com/option.html#series-line.markLine.data
 
 * mark_line_symbolsize -> int  
     默认 -> 15  
