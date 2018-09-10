@@ -1,7 +1,5 @@
 # coding=utf-8
 
-import copy
-
 from pyecharts.base import Base
 from pyecharts.constants import PAGE_TITLE
 from pyecharts.utils import merge_js_dependencies
@@ -42,27 +40,28 @@ class Overlap(Base):
             是否新增一个 y 坐标轴，默认为 False
         """
         if not self._option:
-            self._option = copy.deepcopy(chart.options)
+            self._option = chart.get_options(remove_none=False)
             self._series_id = self._option.get("series")[0].get("seriesId")
             self._js_dependencies = chart.js_dependencies
         else:
+            chart_options = chart.get_options(remove_none=False)
             _series = (
-                chart.options.get("legend")[0].get("data"),
-                chart.options.get("series"),
-                chart.options.get("xAxis")[0],
-                chart.options.get("yAxis")[0],
+                chart_options.get("legend")[0].get("data"),
+                chart_options.get("series"),
+                chart_options.get("xAxis")[0],
+                chart_options.get("yAxis")[0],
                 is_add_xaxis,
                 is_add_yaxis,
                 xaxis_index,
                 yaxis_index,
             )
-            self.__custom(_series)
+            self._custom(_series)
             self._js_dependencies = merge_js_dependencies(
                 self._js_dependencies, chart.js_dependencies
             )
             return self
 
-    def __custom(self, series):
+    def _custom(self, series):
         """
         Appends the data for the series of the chart type
 
