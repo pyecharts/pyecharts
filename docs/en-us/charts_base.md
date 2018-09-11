@@ -1305,7 +1305,7 @@ kline.render()
 Line.add() signatures
 ```python
 add(name, x_axis, y_axis, is_symbol_show=True, is_smooth=False, is_stack=False,
-    is_step=False, is_fill=False, **kwargs)
+    is_step=False, **kwargs)
 ```
 * name -> str  
     Series name used for displaying in tooltip and filtering with legend,or updaing data and configuration with setOption.
@@ -1331,10 +1331,6 @@ add(name, x_axis, y_axis, is_symbol_show=True, is_smooth=False, is_stack=False,
 * is_step -> bool/str  
     default -> False  
     Whether to show as a step line.It can be true, false. Or 'start', 'middle', 'end'.Which will configure the turn point of step line.
-
-* is_fill -> bool  
-    default -> False  
-    Whether to fill area.
 
 ```python
 from pyecharts import Line
@@ -1365,7 +1361,6 @@ line.render()
 line = Line("折线图-数据堆叠示例")
 line.add("商家A", attr, v1, is_stack=True, is_label_show=True)
 line.add("商家B", attr, v2, is_stack=True, is_label_show=True)
-line.show_config()
 line.render()
 ```
 ![line-demo](https://user-images.githubusercontent.com/19553554/35089965-4f880100-fc73-11e7-9861-c43bd4d4bbe1.gif)
@@ -1373,16 +1368,15 @@ line.render()
 ```python
 line = Line("折线图-阶梯图示例")
 line.add("商家A", attr, v1, is_step=True, is_label_show=True)
-line.show_config()
 line.render()
 ```
 ![line-demo](https://user-images.githubusercontent.com/19553554/35089968-510f3304-fc73-11e7-9159-67ce6ace9fa3.png)
 
+**area_opacity：** Opacity of the component. Supports value from 0 to 1, and the component will not be drawn when set to 0.
 ```python
 line = Line("折线图-面积图示例")
 line.add("商家A", attr, v1, is_fill=True, line_opacity=0.2, area_opacity=0.4, symbol=None)
 line.add("商家B", attr, v2, is_fill=True, area_color='#000', area_opacity=0.3, is_smooth=True)
-line.show_config()
 line.render()
 ```
 ![line-demo](https://user-images.githubusercontent.com/19553554/35089973-53868fd8-fc73-11e7-8ff6-bfb452954267.png)
