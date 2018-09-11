@@ -11,12 +11,13 @@ import pyecharts.constants as constants
 import pyecharts.engine as engine
 import pyecharts.exceptions as exceptions
 import pyecharts.utils as utils
+from pyecharts.interfaces import IPythonRichDisplayMixin
 from pyecharts.conf import CURRENT_CONFIG
 from pyecharts.echarts.option import get_other_options
 from pyecharts.javascripthon.api import EChartsTranslator
 
 
-class Base(object):
+class Base(IPythonRichDisplayMixin):
     """
     `Base`类是所有图形类的基类，提供部分初始化参数和基本的方法
     """

@@ -7,10 +7,11 @@ from jinja2 import Markup
 import pyecharts.constants as constants
 import pyecharts.engine as engine
 import pyecharts.utils as utils
+from pyecharts.interfaces import IPythonRichDisplayMixin
 from pyecharts.conf import CURRENT_CONFIG
 
 
-class Page(object):
+class Page(IPythonRichDisplayMixin):
     """
     <<< 同一网页按顺序展示多图 >>>
 
