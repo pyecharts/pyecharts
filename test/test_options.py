@@ -2,11 +2,8 @@
 # coding=utf-8
 from __future__ import unicode_literals
 
-import json
 from test.constants import RANGE_COLOR, X_TIME, Y_WEEK
 from test.utils import get_fixture_content
-
-from pyecharts_javascripthon.api import DefaultJsonEncoder
 
 from mock import patch
 from nose.tools import eq_
@@ -23,10 +20,13 @@ from pyecharts import (
     Style,
     Surface3D,
 )
+from pyecharts.javascripthon.api import EChartsTranslator
 
 
 def dumps_actual_options(opts):
-    return json.dumps(opts, sort_keys=True, indent=4, cls=DefaultJsonEncoder)
+    return EChartsTranslator.dumps(
+        opts, sort_keys=True, indent=4, enable_func=True
+    )
 
 
 @patch("random.randint")

@@ -131,7 +131,7 @@ ECharts provides [Theme Build Tools](http://echarts.baidu.com/theme-builder/), f
 3. Change the `resources/registry.json` file
 
 ```
- "PINYIN_MAP": {
+"PINYIN_MAP": {
         "shine": "shine",
         ...
         "myTheme": "myTheme"    # here

@@ -1,7 +1,10 @@
 # 版本日志
 
 * ### version 0.6.0（dev）
-    * TODO
+
+    #### Updated
+    * 将 pyecharts-javascripthon 合并入主仓库，并对该部分代码进行了重构。导入路径由 `from pyecharts_javascripthon import *` 转变为 `from pyecharts.javascripthon import *`
+
 
 * ### version 0.5.11 - 2018.9.9（current）
     
