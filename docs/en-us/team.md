@@ -26,3 +26,4 @@ Home Url: https://github.com/pyecharts
 | <img src="https://avatars2.githubusercontent.com/u/15907728?s=60&v=4" alt="shkey" width="60px"/> | [shkey](https://github.com/shkey) |
 | <img src="https://avatars1.githubusercontent.com/u/1425636?s=60&v=4" alt="crispgm" width="60px"/> | [crispgm](https://github.com/crispgm) |
 | <img src="https://avatars0.githubusercontent.com/u/25895405?s=60&v=4" alt="Zeroto521" width="60px"/> | [Zeroto521](https://github.com/Zeroto521) |
+| <img src="https://avatars0.githubusercontent.com/u/19723117?s=60&v=4" alt="FangyangJz" width="60px"/> | [FangyangJz](https://github.com/FangyangJz) |

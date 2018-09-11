@@ -283,3 +283,16 @@ bar2 = Bar("Bar chart", "precipitation and evaporation one year")
 bar2.add("precipitation", attr, v1, is_label_show=True, label_formatter=label_formatter)
 bar2.render()
 ```
+
+## Eidt _option
+
+Developers can insert their own configuration options if the of pyecharts options cannot meet the requirements. The only problem is that pyecharts can't set an option to null. **But** from 0.5.10, this problem is solved.
+
+```python
+from pyecharts import NULL, Kline
+
+kline = Kline("K 线图-默认示例")
+kline.add("日K", DATE, data)
+kline._option['series'][0]['itemStyle']['normal']['borderColor'] = NULL
+kline.render()
+```
