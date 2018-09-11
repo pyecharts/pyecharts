@@ -6,8 +6,8 @@ numpy
 jupyter
 flake8
 mccabe
+pillow
 mock;python_version<"3"
 echarts-countries-pypkg
 echarts-china-cities-pypkg
 echarts-china-provinces-pypkg
-
