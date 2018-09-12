@@ -12,8 +12,7 @@ import pandas as pd
 from mock import MagicMock, patch
 from nose.tools import eq_, raises
 
-import pyecharts.exceptions as exceptions
-from pyecharts import Bar, Map, jupyter_image, online
+from pyecharts import Bar, Map, exceptions, jupyter_image, online
 from pyecharts.conf import CURRENT_CONFIG
 
 TITLE = "柱状图数据堆叠示例"
