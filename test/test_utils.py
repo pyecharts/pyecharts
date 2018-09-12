@@ -5,6 +5,7 @@ import codecs
 import os
 
 from nose.tools import eq_
+
 from pyecharts.utils import (
     NULL,
     get_resource_dir,
