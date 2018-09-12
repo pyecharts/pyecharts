@@ -2,8 +2,9 @@
 
 from __future__ import unicode_literals
 
-import pyecharts.conf as conf
 from nose.tools import eq_
+
+import pyecharts.conf as conf
 
 DEFAULT_JS_LIBRARIES = dict(
     echarts="echarts.min",

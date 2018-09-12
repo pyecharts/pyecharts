@@ -4,6 +4,9 @@
 
     #### Updated
     * 将 pyecharts-javascripthon 合并入主仓库，并对该部分代码进行了重构。导入路径由 `from pyecharts_javascripthon import *` 转变为 `from pyecharts.javascripthon import *`
+    
+    ### Removed
+    * [issue#762](https://github.com/pyecharts/pyecharts/issues/762) 移除 `is_fill` 配置项，使用 `area_opacity` 指定区域透明度。
 
 
 * ### version 0.5.11 - 2018.9.9（current）

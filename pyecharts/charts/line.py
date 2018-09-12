@@ -27,7 +27,6 @@ class Line(Chart):
         is_smooth=False,
         is_stack=False,
         is_step=False,
-        is_fill=False,
         **kwargs
     ):
         """
@@ -48,8 +47,6 @@ class Line(Chart):
             是否是阶梯线图。可以设置为 True 显示成阶梯线图。默认为 False。
             也支持设置成'start', 'middle', 'end'分别配置在当前点，当前点与下个
             点的中间下个点拐弯。
-        :param is_fill:
-            是否填充曲线所绘制面积，默认为 False。
         :param kwargs:
         """
         assert len(x_axis) == len(y_axis)

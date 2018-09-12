@@ -206,7 +206,6 @@ class Chart(Base):
         is_convert=None,
         is_datazoom_show=None,
         is_datazoom_extra_show=None,
-        is_fill=None,
         is_focusnode=None,
         is_geo_effect_show=None,
         is_grid3d_rotate=None,
