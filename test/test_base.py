@@ -9,6 +9,7 @@ from test.utils import get_default_rendering_file_content
 
 import numpy as np
 import pandas as pd
+
 import pyecharts.exceptions as exceptions
 from mock import MagicMock, patch
 from nose.tools import eq_, raises
