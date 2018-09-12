@@ -6,6 +6,7 @@ Test cases for jinja2 template functions
 from __future__ import unicode_literals
 
 from nose.tools import raises
+
 from pyecharts import Bar, Map
 from pyecharts.conf import PyEchartsConfig
 from pyecharts.engine import BaseEnvironment, EchartsEnvironment

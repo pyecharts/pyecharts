@@ -1426,8 +1426,7 @@ add(name, x_axis, y_axis,
     is_symbol_show=True,
     is_smooth=False,
     is_stack=False,
-    is_step=False,
-    is_fill=False, **kwargs)
+    is_step=False, **kwargs)
 ```
 * name -> str  
     图例名称
@@ -1444,8 +1443,6 @@ add(name, x_axis, y_axis,
 * is_step -> bool/str  
     是否是阶梯线图。可以设置为 True 显示成阶梯线图。默认为 False  
     也支持设置成'start', 'middle', 'end'分别配置在当前点，当前点与下个点的中间下个点拐弯。
-* is_fill -> bool  
-    是否填充曲线所绘制面积，默认为 False
 
 ```python
 from pyecharts import Line
@@ -1517,13 +1514,13 @@ line.render()
 ```
 ![line-demo](https://user-images.githubusercontent.com/19553554/35089968-510f3304-fc73-11e7-9159-67ce6ace9fa3.png)
 
+**使用 area_opacity：** area_opacity 用于指定区域透明度，0 为完全不透明（默认），1 为完全透明。
 ```python
 line = Line("折线图-面积图示例")
 line.add(
     "商家A",
     attr,
     v1,
-    is_fill=True,
     line_opacity=0.2,
     area_opacity=0.4,
     symbol=None,

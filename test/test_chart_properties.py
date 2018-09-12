@@ -6,6 +6,7 @@ from __future__ import unicode_literals
 from test.constants import CLOTHES, WEEK
 
 from nose.tools import eq_
+
 from pyecharts import Bar, Grid, Line
 from pyecharts.base import Base
 
