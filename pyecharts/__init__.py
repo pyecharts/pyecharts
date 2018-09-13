@@ -40,7 +40,7 @@ from pyecharts.charts.composite.timeline import Timeline
 
 # custom component
 
-from pyecharts.custom.page import Page
+from pyecharts.contrib.page import Page
 
 # misc
 from pyecharts.conf import online

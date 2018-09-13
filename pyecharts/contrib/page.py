@@ -15,7 +15,7 @@ class Page(IPythonRichDisplayMixin):
     """
     <<< 同一网页按顺序展示多图 >>>
 
-    A composite object to present multiple charts vertically in a single page
+    A container object to present multiple charts vertically in a single page
     """
 
     def __init__(self, page_title="EChart", **name_chart_pair):
