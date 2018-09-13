@@ -37,19 +37,17 @@ class Geo(Chart):
 
         :param json_file: geo coords json file
         """
-        try:
-            with codecs.open(json_file, "r", "utf-8") as f:
-                json_reader = json.load(f)
-                for k, v in json_reader.items():
-                    self.add_coordinate(k, v[0], v[1])
-        except Exception:
-            raise
+        with codecs.open(json_file, "r", "utf-8") as f:
+            json_reader = json.load(f)
+            for k, v in json_reader.items():
+                self.add_coordinate(k, v[0], v[1])
 
     def get_coordinate(self, name, region="中国", raise_exception=False):
         """
         Return coordinate for the city name.
 
         :param name: City name or any custom name string.
+        :param region : The region
         :param raise_exception: Whether to raise exception if not exist.
         :return: A list like [longitude, latitude] or None
         """
