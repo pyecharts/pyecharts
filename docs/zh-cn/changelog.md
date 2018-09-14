@@ -4,7 +4,10 @@
 
     #### Updated
     * 将 pyecharts-javascripthon 合并入主仓库，并对该部分代码进行了重构。导入路径由 `from pyecharts_javascripthon import *` 转变为 `from pyecharts.javascripthon import *`
-
+    * Grid / Overlap / Timeline 等更名为复合图表，并移入 `pyecharts.charts.composite` 包。
+    
+    #### Removed
+    * 类 `Style` 废弃，推荐使用原生 `dict` 写法。
 
 * ### version 0.5.11 - 2018.9.9（current）
     
