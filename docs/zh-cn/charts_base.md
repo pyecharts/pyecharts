@@ -3005,7 +3005,6 @@ tr.render()
 Tree.add() 方法签名
 ```python
 add(name, data,
-<<<<<<< HEAD:docs/zh-cn/charts_base.md
     tree_layout="orthogonal",
     tree_symbol="emptyCircle",
     tree_symbol_size=7,
@@ -3027,11 +3026,6 @@ add(name, data,
     tree_leaves_rotate=0,
     **kwargs
     )
-=======
-    treemap_left_depth=None,
-    treemap_drilldown_icon="▶",
-    treemap_visible_min=10)
->>>>>>> 更新TreeMap .add() 方法签名:docs/zh-cn/charts.md
 ```
 * name -> str  
     系列名称，用于 tooltip 的显示，legend 的图例筛选。
@@ -3289,11 +3283,10 @@ tree.render()
 
 TreeMap.add() 方法签名
 ```python
-add(name, attr, value,
-    shape="circle",
-    word_gap=20,
-    word_size_range=None,
-    rotate_step=45)
+add(name, data,
+    treemap_left_depth=None,
+    treemap_drilldown_icon="▶",
+    treemap_visible_min=10)
 ```
 * name -> str  
     图例名称
