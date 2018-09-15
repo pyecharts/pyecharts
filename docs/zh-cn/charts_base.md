@@ -3283,11 +3283,10 @@ tree.render()
 
 TreeMap.add() 方法签名
 ```python
-add(name, attr, value,
-    shape="circle",
-    word_gap=20,
-    word_size_range=None,
-    rotate_step=45)
+add(name, data,
+    treemap_left_depth=None,
+    treemap_drilldown_icon="▶",
+    treemap_visible_min=10)
 ```
 * name -> str  
     图例名称
