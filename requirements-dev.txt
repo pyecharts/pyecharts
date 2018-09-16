@@ -3,4 +3,4 @@
 # Windows: format_code.bat
 
 black==18.6b4
-pink>0.7.0
+pink>0.7.1
