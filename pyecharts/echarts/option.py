@@ -5,8 +5,8 @@ import random
 
 import pyecharts.echarts as option
 
-base_fs = []    # _config_components() 方法中被调用
-other_fs = []   # add() 方法中被调用
+base_fs = []  # _config_components() 方法中被调用
+other_fs = []  # add() 方法中被调用
 SYMBOLS = ("rect", "roundRect", "triangle", "diamond", "pin", "arrow")
 
 
