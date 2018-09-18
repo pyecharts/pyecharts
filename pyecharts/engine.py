@@ -1,5 +1,4 @@
 # coding=utf-8
-# flake8: noqa
 
 from __future__ import unicode_literals
 
@@ -23,6 +22,7 @@ CHART_DIV_FORMATTER = (
     '<div id="{chart_id}" style="width:{width};height:{height};"></div>'
 )
 
+# flake8: noqa
 CHART_CONFIG_FORMATTER = """
 var myChart_{chart_id} = echarts.init(document.getElementById('{chart_id}'), '{theme}', {{renderer: '{renderer}'}});
 {custom_function}
@@ -224,7 +224,6 @@ class EchartsEnvironment(BaseEnvironment):
         :param object_name: Variable name for chart/page used in template
         :param path: The destination file which the html code write to
         :param template_name: The name of template file.
-        :param extra_context: A dictionary containing extra data.
         :return: None
         """
         kwargs[object_name] = chart
@@ -237,7 +236,7 @@ class EchartsEnvironment(BaseEnvironment):
     ):
         """
         Return html string for rendering a chart/page to a notebook cell.
-
+        :param template_name: file name of template.
         :param context: A dictionary containing data.
         :return: A unicode string that will be displayed in notebook cell.
         """
