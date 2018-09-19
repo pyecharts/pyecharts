@@ -1,4 +1,5 @@
 # coding=utf-8
+
 from __future__ import unicode_literals
 
 from jinja2 import Environment, FileSystemLoader, Markup, environmentfunction
@@ -223,7 +224,6 @@ class EchartsEnvironment(BaseEnvironment):
         :param object_name: Variable name for chart/page used in template
         :param path: The destination file which the html code write to
         :param template_name: The name of template file.
-        :param extra_context: A dictionary containing extra data.
         :return: None
         """
         kwargs[object_name] = chart
@@ -236,7 +236,7 @@ class EchartsEnvironment(BaseEnvironment):
     ):
         """
         Return html string for rendering a chart/page to a notebook cell.
-
+        :param template_name: file name of template.
         :param context: A dictionary containing data.
         :return: A unicode string that will be displayed in notebook cell.
         """

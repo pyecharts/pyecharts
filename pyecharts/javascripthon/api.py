@@ -79,10 +79,11 @@ class MyJSONEncoder(json.JSONEncoder):
             try:
                 return obj.astype(float).tolist()
             except ValueError:
-                try:
-                    return obj.astype(str).tolist()
-                except ValueError:
-                    raise
+                pass
+            try:
+                return obj.astype(str).tolist()
+            except ValueError:
+                raise
 
         if hasattr(obj, "__json__"):
             return obj.__json__()
