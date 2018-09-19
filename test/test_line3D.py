@@ -6,6 +6,7 @@ import math
 from test.constants import RANGE_COLOR
 
 from nose.tools import eq_
+
 from pyecharts import Line3D
 
 

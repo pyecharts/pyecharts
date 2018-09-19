@@ -3,6 +3,7 @@
 from __future__ import unicode_literals
 
 from nose.tools import assert_raises
+
 from pyecharts import GeoLines, Style
 from pyecharts.datasets.coordinates import search_coordinates_by_keyword
 

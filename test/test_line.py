@@ -99,7 +99,7 @@ def test_line_type_step():
     assert '"step": true' in line._repr_html_()
 
 
-def test_line_type_fil():
+def test_line_type_fill():
     line = Line("折线图-面积图示例")
     line.add(
         "商家A",

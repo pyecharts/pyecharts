@@ -3,7 +3,7 @@
 
 from pyecharts._version import __version__, __author__
 
-# charts
+# Simple Charts
 from pyecharts.charts.bar import Bar
 from pyecharts.charts.bar3D import Bar3D
 from pyecharts.charts.boxplot import Boxplot
@@ -32,11 +32,15 @@ from pyecharts.charts.tree import Tree
 from pyecharts.charts.treemap import TreeMap
 from pyecharts.charts.wordcloud import WordCloud
 
+# Composite Charts
+
+from pyecharts.charts.composite.grid import Grid
+from pyecharts.charts.composite.overlap import Overlap
+from pyecharts.charts.composite.timeline import Timeline
+
 # custom component
-from pyecharts.custom.grid import Grid
-from pyecharts.custom.overlap import Overlap
-from pyecharts.custom.page import Page
-from pyecharts.custom.timeline import Timeline
+
+from pyecharts.contrib.page import Page
 
 # misc
 from pyecharts.conf import online
