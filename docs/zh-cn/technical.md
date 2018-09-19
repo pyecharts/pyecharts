@@ -10,6 +10,12 @@
 - [black(18.6b4)](https://github.com/ambv/black) ：代码格式化
 - [McCabe](https://pypi.org/project/mccabe/) ：复杂度检测工具
 
+## 开发约定
+
+- 每行不超过 79 个字符。
+- 函数复杂度不超过 14 。
+- 代码覆盖率不低于 90% 。
+
 ## 文档构建工具
 
 主网站 [pyechart.org](http://pyecharts.org) 由 [docsify](https://docsify.js.org/) 构建。
