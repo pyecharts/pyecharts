@@ -14,7 +14,7 @@ import pyecharts.utils as utils
 from pyecharts.interfaces import IPythonRichDisplayMixin
 from pyecharts.conf import CURRENT_CONFIG
 from pyecharts.echarts.option import get_other_options
-from pyecharts.javascripthon.api import EChartsTranslator
+from pyecharts.shortcuts import dumps_json
 
 
 class Base(IPythonRichDisplayMixin):
@@ -101,7 +101,7 @@ class Base(IPythonRichDisplayMixin):
         """
         打印输出图形所有配置项
         """
-        print(EChartsTranslator.dumps(self.options))
+        print(dumps_json(self.options))
 
     def show_config(self):
         """

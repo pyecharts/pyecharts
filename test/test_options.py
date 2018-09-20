@@ -21,11 +21,11 @@ from pyecharts import (
     Style,
     Surface3D,
 )
-from pyecharts.javascripthon.api import EChartsTranslator
+from pyecharts.shortcuts import dumps_json
 
 
 def dumps_actual_options(opts):
-    return EChartsTranslator.dumps(
+    return dumps_json(
         opts, sort_keys=True, indent=4, enable_func=True
     )
 
