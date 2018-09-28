@@ -224,21 +224,3 @@ class EChartsTranslator(TranslatorMixin):
             options_snippet=option_snippet,
             function_store=function_store,
         )
-
-    # ------ Tools ------
-
-    @staticmethod
-    def dumps(obj, enable_func=False, post_encode_func=None, **kwargs):
-        """A simple wrapper for json.dumps
-        :param obj:
-        :param enable_func:
-        :param post_encode_func
-        :param kwargs:
-        :return:
-        """
-        encoder = MyJSONEncoder(
-            enable_func=enable_func,
-            post_encode_func=post_encode_func,
-            **kwargs
-        )
-        return encoder.encode(obj)
