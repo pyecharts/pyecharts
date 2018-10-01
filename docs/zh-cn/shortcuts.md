@@ -1,6 +1,6 @@
 > Shortcuts 篇：工具方法
 
-pyecharts 提供了一系列工具方法。
+pyecharts 提供了一系列工具方法, 这些均定义在 `pyecharts.shortcuts` 模块 。
 
 ## 方法
 
@@ -19,6 +19,6 @@ def get_bar_data(request):
     return HttpResponse(dumps_json(bar.options), content_type="application/json")
 ```
 
-pyecharts 使用了自己的序列化类，定义在 `pyecharts.javascripthon.api.MyJSONEncoder` 。
+`dumps_json` 使用了自己的序列化类，定义在 `pyecharts.javascripthon.api.MyJSONEncoder` 。
 
 

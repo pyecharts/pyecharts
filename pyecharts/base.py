@@ -14,7 +14,7 @@ import pyecharts.utils as utils
 from pyecharts.interfaces import IPythonRichDisplayMixin
 from pyecharts.conf import CURRENT_CONFIG
 from pyecharts.echarts.option import get_other_options
-from pyecharts.shortcuts import dumps_json
+from pyecharts.shortcuts import dumps_json, cast
 
 
 class Base(IPythonRichDisplayMixin):
@@ -146,49 +146,6 @@ class Base(IPythonRichDisplayMixin):
             **kwargs
         )
 
-    @staticmethod
-    def cast(seq):
-        """
-        转换数据序列，将带字典和元组类型的序列转换为 k_lst,v_lst 两个列表
-
-        元组列表
-            [(A1, B1), (A2, B2), ...] -->
-                k_lst[ A[i1, i2...] ], v_lst[ B[i1, i2...] ]
-        字典列表
-            [{A1: B1}, {A2: B2}, ...] -->
-                k_lst[ A[i1, i2...] ], v_lst[ B[i1, i2...] ]
-        字典
-            {A1: B1, A2: B2, ...} -- >
-                k_lst[ A[i1, i2...] ], v_lst[ B[i1, i2...] ]
-
-        :param seq:
-            待转换的序列
-        :return:
-        """
-        k_lst, v_lst = [], []
-        if isinstance(seq, list):
-            for s in seq:
-                if isinstance(s, tuple):
-                    _attr, _value = s
-                    k_lst.append(_attr)
-                    v_lst.append(_value)
-                elif isinstance(s, dict):
-                    for k, v in s.items():
-                        k_lst.append(k)
-                        v_lst.append(v)
-        elif isinstance(seq, dict):
-            for key in sorted(list(seq.keys())):
-                k_lst.append(key)
-                v_lst.append(seq[key])
-        return k_lst, v_lst
-
-    def render_notebook(self):
-        warnings.warn(
-            "Implementation has been removed. "
-            + "Please pass the chart instance directly to Jupyter."
-            + "If you need more help, please read documentation"
-        )
-
     def _get_all_options(self, **kwargs):
         return get_other_options(**kwargs)
 
@@ -266,3 +223,17 @@ class Base(IPythonRichDisplayMixin):
     def _add_chinese_map(self, map_name_in_chinese):
         name_in_pinyin = CURRENT_CONFIG.chinese_to_pinyin(map_name_in_chinese)
         self._js_dependencies.add(name_in_pinyin)
+
+    # Deprecated API
+
+    @staticmethod
+    def cast(seq):
+        warnings.warn('This method is deprecated. Use shortcuts.cast instead.')
+        return cast(seq)
+
+    def render_notebook(self):
+        warnings.warn(
+            "Implementation has been removed. "
+            + "Please pass the chart instance directly to Jupyter."
+            + "If you need more help, please read documentation"
+        )
