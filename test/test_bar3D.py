@@ -5,6 +5,7 @@ from __future__ import unicode_literals
 from test.constants import RANGE_COLOR, X_TIME, Y_WEEK
 
 from nose.tools import eq_
+
 from pyecharts import Bar3D
 
 data = [
