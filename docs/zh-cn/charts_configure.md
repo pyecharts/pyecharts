@@ -385,11 +385,11 @@
 
 * legend_pos -> str  
     默认 -> 'center'  
-    图例组件离容器左侧的距离，有'left', 'center', 'right'可选，也可以为百分数，如"%60"。
+    图例组件离容器左侧的距离，有'left', 'center', 'right'可选，也可以为百分数，如"60%"。
 
 * legend_top -> str  
     默认 -> 'top'  
-    图例组件离容器上侧的距离，有'top', 'center', 'bottom'可选，也可以为百分数，如"%60"。
+    图例组件离容器上侧的距离，有'top', 'center', 'bottom'可选，也可以为百分数，如"60%"。
 
 * legend_selectedmode -> str/bool  
     默认 -> 'multiple'  
