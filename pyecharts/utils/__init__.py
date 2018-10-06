@@ -63,7 +63,7 @@ def to_css_length(pixcel_number):
     Return the standard length string of css.
     It's compatible with number values in old versions.
 
-    :param pixel_number:
+    :param pixcel_number:
     :return:
     """
     if isinstance(pixcel_number, (int, float)):

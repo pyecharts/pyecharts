@@ -48,17 +48,19 @@ class Base(IPythonRichDisplayMixin):
         :param is_animation:
             是否开启动画，默认为 True。V0.5.9+
         """
+        self._chart_id = uuid.uuid4().hex
+        self._width = width
+        self._height = height
+        self._page_title = page_title
+        self.extra_html_text_label = extra_html_text_label
+
         self._option = {}
         self._js_dependencies = set()
-        self._chart_id = uuid.uuid4().hex
-        self.width, self.height = width, height
         self.renderer = renderer
-        self._page_title = page_title
         self._js_dependencies = {"echarts"}
         self.event_handlers = {}
         self.theme = None
         self.use_theme(CURRENT_CONFIG.theme)
-        self.extra_html_text_label = extra_html_text_label
         self.is_animation = is_animation
 
     # ----- Properties for html element -----
@@ -72,16 +74,24 @@ class Base(IPythonRichDisplayMixin):
         self._chart_id = chart_id
 
     @property
+    def width(self):
+        return self._width
+
+    @property
+    def height(self):
+        return self._height
+
+    @property
+    def page_title(self):
+        return self._page_title
+
+    @property
     def options(self):
         return self.get_options()
 
     @property
     def js_dependencies(self):
         return utils.merge_js_dependencies(self._js_dependencies)
-
-    @property
-    def page_title(self):
-        return self._page_title
 
     def _get_all_options(self, **kwargs):
         return get_other_options(**kwargs)
@@ -97,6 +107,10 @@ class Base(IPythonRichDisplayMixin):
         if theme_name not in constants.BUILTIN_THEMES:
             self._js_dependencies.add(self.theme)
         return self
+
+    def _add_chinese_map(self, map_name_in_chinese):
+        name_in_pinyin = CURRENT_CONFIG.chinese_to_pinyin(map_name_in_chinese)
+        self._js_dependencies.add(name_in_pinyin)
 
     def on(self, event_name, handler):
         self.event_handlers[event_name] = handler
@@ -213,10 +227,6 @@ class Base(IPythonRichDisplayMixin):
         )
         os.close(tmp_file_handle)
         return content
-
-    def _add_chinese_map(self, map_name_in_chinese):
-        name_in_pinyin = CURRENT_CONFIG.chinese_to_pinyin(map_name_in_chinese)
-        self._js_dependencies.add(name_in_pinyin)
 
     # ----- Deprecated API -----
 
