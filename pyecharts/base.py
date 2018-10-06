@@ -61,6 +61,8 @@ class Base(IPythonRichDisplayMixin):
         self.extra_html_text_label = extra_html_text_label
         self.is_animation = is_animation
 
+    # ----- Properties for html element -----
+
     @property
     def chart_id(self):
         return self._chart_id
@@ -80,6 +82,9 @@ class Base(IPythonRichDisplayMixin):
     @property
     def page_title(self):
         return self._page_title
+
+    def _get_all_options(self, **kwargs):
+        return get_other_options(**kwargs)
 
     def get_options(self, remove_none=True):
         if remove_none:
@@ -103,17 +108,6 @@ class Base(IPythonRichDisplayMixin):
         """
         print(dumps_json(self.options))
 
-    def show_config(self):
-        """
-        打印输出图形所有配置项
-        """
-        deprecated_tpl = "The {} is deprecated, please use {} instead!"
-        warnings.warn(
-            deprecated_tpl.format("show_config", "print_echarts_options"),
-            DeprecationWarning,
-        )
-        self.print_echarts_options()
-
     def render_embed(self):
         """
         渲染图表的所有配置项，为 web pages 服务，不过需先提供所需要的js 依赖文件
@@ -127,6 +121,8 @@ class Base(IPythonRichDisplayMixin):
         声明所有的 js 文件路径
         """
         return CURRENT_CONFIG.produce_html_script_list(self._js_dependencies)
+
+    # ----- Render API -----
 
     def render(
         self,
@@ -146,9 +142,6 @@ class Base(IPythonRichDisplayMixin):
             **kwargs
         )
 
-    def _get_all_options(self, **kwargs):
-        return get_other_options(**kwargs)
-
     def _repr_html_(self):
         """
         渲染配置项并将图形显示在 notebook 中
@@ -157,6 +150,7 @@ class Base(IPythonRichDisplayMixin):
         chart.js_dependencies => require_config => config_items, libraries
         :return A unicode string.
         """
+        # TODO Use the same template for notebook & nteract
         if CURRENT_CONFIG.jupyter_presentation == constants.DEFAULT_HTML:
             require_config = CURRENT_CONFIG.produce_require_configuration(
                 self.js_dependencies
@@ -224,12 +218,18 @@ class Base(IPythonRichDisplayMixin):
         name_in_pinyin = CURRENT_CONFIG.chinese_to_pinyin(map_name_in_chinese)
         self._js_dependencies.add(name_in_pinyin)
 
-    # Deprecated API
+    # ----- Deprecated API -----
 
-    @staticmethod
-    def cast(seq):
-        warnings.warn('This method is deprecated. Use shortcuts.cast instead.')
-        return cast(seq)
+    def show_config(self):
+        """
+        打印输出图形所有配置项
+        """
+        deprecated_tpl = "The {} is deprecated, please use {} instead!"
+        warnings.warn(
+            deprecated_tpl.format("show_config", "print_echarts_options"),
+            DeprecationWarning,
+        )
+        self.print_echarts_options()
 
     def render_notebook(self):
         warnings.warn(
@@ -237,3 +237,9 @@ class Base(IPythonRichDisplayMixin):
             + "Please pass the chart instance directly to Jupyter."
             + "If you need more help, please read documentation"
         )
+
+    @staticmethod
+    def cast(seq):
+        warnings.warn(
+            'This method is deprecated. Use shortcuts.cast instead.')
+        return cast(seq)
