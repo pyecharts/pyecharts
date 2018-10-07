@@ -117,6 +117,7 @@ class Base(IPythonRichDisplayMixin):
         return self
 
     def _add_chinese_map(self, map_name_in_chinese):
+        # TODO Lazy Resolve ?
         name_in_pinyin = CURRENT_CONFIG.chinese_to_pinyin(map_name_in_chinese)
         self._js_dependencies.add(name_in_pinyin)
 
@@ -173,19 +174,19 @@ class Base(IPythonRichDisplayMixin):
         :return A unicode string.
         """
         # TODO Use the same template for notebook & nteract
-        if CURRENT_CONFIG.jupyter_presentation == constants.DEFAULT_HTML:
-            require_config = CURRENT_CONFIG.produce_require_configuration(
+        env = engine.create_default_environment(constants.DEFAULT_HTML)
+        current_config = env.pyecharts_config
+        if current_config.jupyter_presentation == constants.DEFAULT_HTML:
+            require_config = current_config.produce_require_configuration(
                 self.js_dependencies
             )
             config_items = require_config["config_items"]
             libraries = require_config["libraries"]
-            env = engine.create_default_environment(constants.DEFAULT_HTML)
             return env.render_chart_to_notebook(
                 charts=(self,), config_items=config_items, libraries=libraries
             )
 
-        elif CURRENT_CONFIG.jupyter_presentation == constants.NTERACT:
-            env = engine.create_default_environment(constants.DEFAULT_HTML)
+        elif current_config.jupyter_presentation == constants.NTERACT:
             return env.render_chart_to_notebook(
                 chart=self, template_name="nteract.html"
             )
@@ -213,7 +214,9 @@ class Base(IPythonRichDisplayMixin):
 
         :param file_type: the parameter is mostly image file types.
         """
-        if CURRENT_CONFIG.jupyter_presentation != file_type:
+        env = engine.create_default_environment(file_type)
+        current_config = env.pyecharts_config
+        if current_config.jupyter_presentation != file_type:
             return None
 
         if self.renderer == constants.SVG_RENDERER:
@@ -227,8 +230,6 @@ class Base(IPythonRichDisplayMixin):
             raise exceptions.InvalidConfiguration(
                 "svg output requires svg renderer."
             )
-
-        env = engine.create_default_environment(file_type)
         tmp_file_handle, tmp_file_path = mkstemp(suffix="." + file_type)
         content = env.render_chart_to_file(
             chart=self, path=tmp_file_path, verbose=False
@@ -259,5 +260,7 @@ class Base(IPythonRichDisplayMixin):
     @staticmethod
     def cast(seq):
         warnings.warn(
-            'This method is deprecated. Use shortcuts.cast instead.')
+            'This method is deprecated. Use shortcuts.cast instead.',
+            DeprecationWarning
+        )
         return cast(seq)

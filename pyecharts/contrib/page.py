@@ -115,13 +115,14 @@ class Page(IPythonRichDisplayMixin):
         """
         :return: html content for jupyter
         """
+        env = engine.create_default_environment(constants.DEFAULT_HTML)
         dependencies = self.js_dependencies
-        require_config = CURRENT_CONFIG.produce_require_configuration(
+        current_config = env.pyecharts_config
+        require_config = current_config.produce_require_configuration(
             dependencies
         )
         config_items = require_config["config_items"]
         libraries = require_config["libraries"]
-        env = engine.create_default_environment(constants.DEFAULT_HTML)
         return env.render_chart_to_notebook(
             charts=self, config_items=config_items, libraries=libraries
         )
