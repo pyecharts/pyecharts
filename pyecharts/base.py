@@ -231,6 +231,7 @@ class Base(IPythonRichDisplayMixin):
                 "svg output requires svg renderer."
             )
         tmp_file_handle, tmp_file_path = mkstemp(suffix="." + file_type)
+        # SnapshotEnvironment.render_chart_to_file returns file binary data.
         content = env.render_chart_to_file(
             chart=self, path=tmp_file_path, verbose=False
         )

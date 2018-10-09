@@ -182,6 +182,7 @@ class EchartsEnvironment(BaseEnvironment):
     Built-in jinja2 template engine for pyecharts
     This class provides some shortcut methods for rendering charts.
     """
+    # TODO 将 进一步封装。
 
     def __init__(self, pyecharts_config=None, *args, **kwargs):
         pyecharts_config = pyecharts_config or conf.PyEchartsConfig()
@@ -284,6 +285,7 @@ def create_default_environment(file_type):
     """
     default_template_dir = utils.get_resource_dir("templates")
     config = conf.CURRENT_CONFIG
+    config.jupyter_presentation = file_type  # TODO ?
     echarts_env = ENV_MANAGER.get_a_environment(
         file_type,
         pyecharts_config=config,
