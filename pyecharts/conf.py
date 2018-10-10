@@ -40,6 +40,10 @@ class PyEchartsConfig(object):
     def jshost(self, jshost):
         self._jshost = remove_trailing_slashes(jshost)
 
+    @jshost.setter
+    def jshost(self, jshost):
+        self._jshost = remove_trailing_slashes(jshost)
+
     def get_js_library(self, pinyin):
         for extension in EXTENSION_MANAGER.get_all_extensions():
             library = extension.get_js_library(pinyin)
@@ -177,7 +181,7 @@ def enable_nteract(host=None):
     if host:
         _host = host
     configure(
-        output_image=constants.NTERACT, jshost=remove_trailing_slashes(_host)
+        output_image=constants.NTERACT, jshost=_host
     )
 
 
