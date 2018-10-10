@@ -4,16 +4,15 @@ from __future__ import unicode_literals
 import json
 import os
 import sys
-from test.constants import CLOTHES
-from test.utils import get_default_rendering_file_content
 
 import numpy as np
 import pandas as pd
-from mock import MagicMock, patch
-from nose.tools import eq_, raises
+from nose.tools import eq_
 
-from pyecharts import Bar, Map, exceptions, jupyter_image, online
-from pyecharts.conf import CURRENT_CONFIG
+from pyecharts import Bar, Map, online
+from pyecharts.app import CURRENT_CONFIG
+from test.constants import CLOTHES
+from test.utils import get_default_rendering_file_content
 
 TITLE = "柱状图数据堆叠示例"
 
@@ -67,27 +66,6 @@ def test_embed_option():
     assert "<body>" not in html
 
 
-@patch("os.unlink")
-def test_render_as_svg(fake_unlink):
-    with jupyter_image("svg"):
-        bar = create_a_bar("test", renderer="svg")
-        svg_content = bar._repr_svg_()
-        fake_unlink.assert_called()
-        assert svg_content is not None
-
-
-@raises(exceptions.InvalidConfiguration)
-def test_render_as_svg_with_wrong_configuration():
-    with jupyter_image("svg"):
-        bar = create_a_bar("test")
-        bar._repr_svg_()
-
-
-@raises(exceptions.InvalidConfiguration)
-def test_render_as_png_with_wrong_configuration():
-    with jupyter_image("png"):
-        bar = create_a_bar("test", renderer="svg")
-        bar._repr_png_()
 
 
 def test_base_get_js_dependencies():

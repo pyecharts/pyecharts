@@ -12,7 +12,7 @@ import pyecharts.engine as engine
 import pyecharts.exceptions as exceptions
 import pyecharts.utils as utils
 from pyecharts.interfaces import IPythonRichDisplayMixin
-from pyecharts.conf import CURRENT_CONFIG
+from pyecharts.app import CURRENT_CONFIG
 from pyecharts.echarts.option import get_other_options
 from pyecharts.shortcuts import dumps_json, cast
 

@@ -9,7 +9,7 @@ from test.constants import CLOTHES, WEEK
 
 import pyecharts.constants as constants
 from pyecharts import Bar, Line, Page, Pie, configure, enable_nteract, online
-from pyecharts.conf import CURRENT_CONFIG
+from pyecharts.app import CURRENT_CONFIG
 
 TITLE = "柱状图数据堆叠示例"
 
