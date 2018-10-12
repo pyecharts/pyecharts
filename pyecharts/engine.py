@@ -287,6 +287,8 @@ def create_default_environment(file_type):
 
     :return: A new EchartsEnvironment object.
     """
+    # TODO (jupyter_presentation, file_type, render) => file_type
+
     default_template_dir = utils.get_resource_dir("templates")
     config = CURRENT_CONFIG
     config.jupyter_presentation = file_type  # TODO ?

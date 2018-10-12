@@ -8,6 +8,7 @@ import pyecharts.constants as constants
 # TODO Merge
 ONLINE_ASSETS_JS = "https://pyecharts.github.io/assets/js/"
 
+# TODO Make private
 CURRENT_CONFIG = PyEchartsConfig()
 
 
@@ -62,6 +63,7 @@ def online(host=None):
 def enable_nteract(host=None):
     # self.jshost 为 None 时应该使用远程 js
     # "https://pyecharts.github.io/assets/js"
+    CURRENT_CONFIG.is_run_on_nteract = True
     _host = ONLINE_ASSETS_JS
     if host:
         _host = host
@@ -83,3 +85,7 @@ def jupyter_image(jupyter_presentation):
 
     finally:
         CURRENT_CONFIG.jupyter_presentation = previous_presentation
+
+
+def use_config():
+    pass

@@ -173,10 +173,13 @@ class Base(IPythonRichDisplayMixin):
         chart.js_dependencies => require_config => config_items, libraries
         :return A unicode string.
         """
-        # TODO Use the same template for notebook & nteract
         env = engine.create_default_environment(constants.DEFAULT_HTML)
         current_config = env.pyecharts_config
-        if current_config.jupyter_presentation == constants.DEFAULT_HTML:
+        if current_config.is_run_on_nteract:
+            return env.render_chart_to_notebook(
+                chart=self, template_name="nteract.html"
+            )
+        elif current_config.jupyter_presentation == constants.DEFAULT_HTML:
             require_config = current_config.produce_require_configuration(
                 self.js_dependencies
             )
@@ -185,12 +188,6 @@ class Base(IPythonRichDisplayMixin):
             return env.render_chart_to_notebook(
                 charts=(self,), config_items=config_items, libraries=libraries
             )
-
-        elif current_config.jupyter_presentation == constants.NTERACT:
-            return env.render_chart_to_notebook(
-                chart=self, template_name="nteract.html"
-            )
-
         else:
             return None
 

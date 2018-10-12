@@ -16,6 +16,7 @@ class PyEchartsConfig(object):
         self.force_js_embed = force_js_embed
         self.hosted_on_github = False
         self.jupyter_presentation = constants.DEFAULT_HTML
+        self.is_run_on_nteract = False
         self.theme = constants.LIGHT_THEME
 
     @property
