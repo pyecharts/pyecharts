@@ -84,4 +84,3 @@ def test_page():
     assert html.count("width:600px") == 1
     assert html.count("width:800px") == 2
     assert html.count("id_my_cell_line") == 6
-
