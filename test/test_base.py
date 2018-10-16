@@ -9,8 +9,7 @@ import numpy as np
 import pandas as pd
 from nose.tools import eq_
 
-from pyecharts import Bar, Map, online
-from pyecharts.app import CURRENT_CONFIG
+from pyecharts import Bar, Map
 from test.constants import CLOTHES
 from test.utils import get_default_rendering_file_content
 
@@ -153,15 +152,3 @@ def test_base_cast_dict():
     eq_(values, [1, 2])
 
 
-def test_online_html():
-    online()
-    bar = Bar()
-    bar.add("", CLOTHES, [5, 20, 36, 10, 75, 90], is_stack=True)
-    bar.render()
-    html_content = get_default_rendering_file_content()
-    assert (
-        'src="https://pyecharts.github.io/assets/js/echarts.min.js'
-        in html_content
-    )
-    CURRENT_CONFIG.jshost = None
-    CURRENT_CONFIG.hosted_on_github = False

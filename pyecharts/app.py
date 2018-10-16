@@ -1,8 +1,9 @@
 # coding=utf8
-
-from pyecharts.conf import PyEchartsConfig
+"""Configure API for default Environment & PyEchartsConfig
+"""
 from contextlib import contextmanager
 
+from pyecharts.conf import PyEchartsConfig
 import pyecharts.constants as constants
 
 # TODO Merge
@@ -34,6 +35,7 @@ def configure(
                          formats, instead of 'html' format.
     :param global_theme: Default Theme
     """
+
     if jshost:
         CURRENT_CONFIG.jshost = jshost
     elif hosted_on_github is True:
@@ -44,6 +46,8 @@ def configure(
         CURRENT_CONFIG.force_js_embed = force_js_embed
     if output_image in constants.JUPYTER_PRESENTATIONS:
         CURRENT_CONFIG.jupyter_presentation = output_image
+    if output_image != constants.NTERACT:
+        CURRENT_CONFIG.is_run_on_nteract = False
     if global_theme is not None:
         CURRENT_CONFIG.theme = global_theme
 
@@ -67,6 +71,7 @@ def enable_nteract(host=None):
     _host = ONLINE_ASSETS_JS
     if host:
         _host = host
+
     configure(
         output_image=constants.NTERACT, jshost=_host
     )
@@ -87,5 +92,21 @@ def jupyter_image(jupyter_presentation):
         CURRENT_CONFIG.jupyter_presentation = previous_presentation
 
 
+@contextmanager
 def use_config():
-    pass
+    global CURRENT_CONFIG
+    fields = [
+        'jshost',
+        'hosted_on_github',
+        'echarts_template_dir',
+        'force_js_embed',
+        'jupyter_presentation',
+        'is_run_on_nteract'
+    ]
+
+    previous_config ={k:getattr(CURRENT_CONFIG, k) for k in fields}
+    try:
+        yield
+    finally:
+        for k, v in previous_config.items():
+            setattr(CURRENT_CONFIG, k, v)

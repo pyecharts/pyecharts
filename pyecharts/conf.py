@@ -123,6 +123,7 @@ def remove_trailing_slashes(jshost):
     else:
         return jshost
 
+
 def _ensure_echarts_is_in_the_front(dependencies):
     """
     make sure echarts is the item in the list
