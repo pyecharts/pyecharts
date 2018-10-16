@@ -65,8 +65,6 @@ def test_embed_option():
     assert "<body>" not in html
 
 
-
-
 def test_base_get_js_dependencies():
     bar = create_a_bar(TITLE)
     dependencies = bar.get_js_dependencies()
@@ -150,5 +148,3 @@ def test_base_cast_dict():
     keys, values = Bar.cast(adict)
     eq_(keys, ["key", "value"])
     eq_(values, [1, 2])
-
-

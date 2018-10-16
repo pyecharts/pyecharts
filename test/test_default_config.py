@@ -37,6 +37,7 @@ def create_a_bar(title):
     bar.add("商家B", CLOTHES, v2, is_stack=True)
     return bar
 
+
 def test_online_html():
     with use_config():
         online()

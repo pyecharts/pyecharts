@@ -104,7 +104,7 @@ def use_config():
         'is_run_on_nteract'
     ]
 
-    previous_config ={k:getattr(CURRENT_CONFIG, k) for k in fields}
+    previous_config = {k: getattr(CURRENT_CONFIG, k) for k in fields}
     try:
         yield
     finally:
