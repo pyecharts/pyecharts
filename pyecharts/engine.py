@@ -8,7 +8,7 @@ from lml.plugin import PluginInfo, PluginManager
 import pyecharts.conf as conf
 import pyecharts.constants as constants
 import pyecharts.utils as utils
-from pyecharts.app import CURRENT_CONFIG
+from pyecharts.app import get_default_config
 from pyecharts.javascripthon.api import EChartsTranslator
 
 # ------ Code Tpl Start
@@ -290,7 +290,7 @@ def create_default_environment(file_type):
     # TODO (jupyter_presentation, file_type, render) => file_type
 
     default_template_dir = utils.get_resource_dir("templates")
-    config = CURRENT_CONFIG
+    config = get_default_config()
     config.jupyter_presentation = file_type  # TODO ?
     echarts_env = ENV_MANAGER.get_a_environment(
         file_type,

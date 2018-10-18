@@ -5,7 +5,7 @@
 from nose.tools import eq_
 
 from pyecharts import Bar
-from pyecharts.app import CURRENT_CONFIG, use_config, online, enable_nteract
+from pyecharts.app import get_default_config, use_config, online, enable_nteract
 from test.constants import CLOTHES
 from test.utils import get_default_rendering_file_content
 
@@ -13,18 +13,18 @@ TITLE = "柱状图数据堆叠示例"
 
 
 def test_use_config():
-    c1 = CURRENT_CONFIG.jshost
+    c1 = get_default_config().jshost
     with use_config():
         online()
-    c2 = CURRENT_CONFIG.jshost
+    c2 = get_default_config().jshost
     eq_(c1, c2)
 
-    j1 = CURRENT_CONFIG.is_run_on_nteract
+    j1 = get_default_config().is_run_on_nteract
     with use_config():
         enable_nteract()
-        eq_(True, CURRENT_CONFIG.is_run_on_nteract)
+        eq_(True, get_default_config().is_run_on_nteract)
 
-    j2 = CURRENT_CONFIG.is_run_on_nteract
+    j2 = get_default_config().is_run_on_nteract
 
     eq_(j1, j2)
 
@@ -58,7 +58,6 @@ def test_online_feature():
         online()
         bar = create_a_bar(TITLE)
         html = bar._repr_html_()
-        # print(CURRENT_CONFIG.jshost)
         expected_jshost = "https://pyecharts.github.io/jupyter-echarts/echarts"
         assert expected_jshost in html
         # CURRENT_CONFIG.hosted_on_github = False
@@ -67,7 +66,7 @@ def test_online_feature():
 def test_online_with_custom_jshost():
     with use_config():
         online(host="https://my-site.com/js")
-        assert CURRENT_CONFIG.jshost == 'https://my-site.com/js'
+        assert get_default_config().jshost == 'https://my-site.com/js'
         bar = create_a_bar(TITLE)
         html = bar._repr_html_()
         expected_jshost = "https://my-site.com/js"
@@ -78,8 +77,6 @@ def test_online_with_custom_jshost():
 def test_nteract_feature():
     with use_config():
         enable_nteract()
-        print(CURRENT_CONFIG.jupyter_presentation)
-        print(CURRENT_CONFIG.is_run_on_nteract)
         bar = create_a_bar(TITLE)
         html = bar._repr_html_()
         assert "https://pyecharts.github.io/assets/js/echarts.min.js" in html

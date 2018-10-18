@@ -12,7 +12,7 @@ import pyecharts.engine as engine
 import pyecharts.exceptions as exceptions
 import pyecharts.utils as utils
 from pyecharts.interfaces import IPythonRichDisplayMixin
-from pyecharts.app import CURRENT_CONFIG
+from pyecharts.app import get_default_config
 from pyecharts.echarts.option import get_other_options
 from pyecharts.shortcuts import dumps_json, cast
 
@@ -60,7 +60,7 @@ class Base(IPythonRichDisplayMixin):
         self._js_dependencies = {"echarts"}
         self.event_handlers = {}
         self.theme = None
-        self.use_theme(CURRENT_CONFIG.theme)
+        self.use_theme(get_default_config().theme)
         self.is_animation = is_animation
 
     # ----- Properties for html element -----
@@ -118,7 +118,8 @@ class Base(IPythonRichDisplayMixin):
 
     def _add_chinese_map(self, map_name_in_chinese):
         # TODO Lazy Resolve ?
-        name_in_pinyin = CURRENT_CONFIG.chinese_to_pinyin(map_name_in_chinese)
+        current_config = get_default_config()
+        name_in_pinyin = current_config.chinese_to_pinyin(map_name_in_chinese)
         self._js_dependencies.add(name_in_pinyin)
 
     def on(self, event_name, handler):
@@ -143,7 +144,8 @@ class Base(IPythonRichDisplayMixin):
         """
         声明所有的 js 文件路径
         """
-        return CURRENT_CONFIG.produce_html_script_list(self._js_dependencies)
+        current_config = get_default_config()
+        return current_config.produce_html_script_list(self._js_dependencies)
 
     # ----- Render API -----
 

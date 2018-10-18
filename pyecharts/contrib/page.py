@@ -8,7 +8,7 @@ import pyecharts.constants as constants
 import pyecharts.engine as engine
 import pyecharts.utils as utils
 from pyecharts.interfaces import IPythonRichDisplayMixin
-from pyecharts.app import CURRENT_CONFIG
+from pyecharts.app import get_default_config
 
 
 class Page(IPythonRichDisplayMixin):
@@ -109,7 +109,8 @@ class Page(IPythonRichDisplayMixin):
         """
         Declare its javascript dependencies for embedding purpose
         """
-        return CURRENT_CONFIG.produce_html_script_list(self.js_dependencies)
+        current_config = get_default_config()
+        return current_config.produce_html_script_list(self.js_dependencies)
 
     def _repr_html_(self):
         """
