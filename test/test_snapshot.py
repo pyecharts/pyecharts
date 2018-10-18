@@ -5,10 +5,11 @@ Test Cases for SnapshotEnvironment
 Note: These cases will use Mock library instead of calling directly.
 """
 
+from test.constants import CLOTHES
+
 from mock import MagicMock, patch
 
 from pyecharts import Bar
-from test.constants import CLOTHES
 
 # Mock a SnapshotEnvironment object
 

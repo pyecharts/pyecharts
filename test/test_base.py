@@ -4,14 +4,14 @@ from __future__ import unicode_literals
 import json
 import os
 import sys
+from test.constants import CLOTHES
+from test.utils import get_default_rendering_file_content
 
 import numpy as np
 import pandas as pd
 from nose.tools import eq_
 
 from pyecharts import Bar, Map
-from test.constants import CLOTHES
-from test.utils import get_default_rendering_file_content
 
 TITLE = "柱状图数据堆叠示例"
 

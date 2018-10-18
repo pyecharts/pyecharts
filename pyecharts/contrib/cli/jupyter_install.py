@@ -1,7 +1,7 @@
 # coding=utf8
-import os
-import json
 import codecs
+import json
+import os
 import warnings
 
 from setuptools.command.install import install

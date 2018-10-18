@@ -11,10 +11,10 @@ import pyecharts.constants as constants
 import pyecharts.engine as engine
 import pyecharts.exceptions as exceptions
 import pyecharts.utils as utils
-from pyecharts.interfaces import IPythonRichDisplayMixin
 from pyecharts.app import get_default_config
 from pyecharts.echarts.option import get_other_options
-from pyecharts.shortcuts import dumps_json, cast
+from pyecharts.interfaces import IPythonRichDisplayMixin
+from pyecharts.shortcuts import cast, dumps_json
 
 
 class Base(IPythonRichDisplayMixin):

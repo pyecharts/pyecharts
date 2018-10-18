@@ -3,8 +3,8 @@
 """
 from contextlib import contextmanager
 
-from pyecharts.conf import PyEchartsConfig
 import pyecharts.constants as constants
+from pyecharts.conf import PyEchartsConfig
 
 # TODO Merge
 ONLINE_ASSETS_JS = "https://pyecharts.github.io/assets/js/"

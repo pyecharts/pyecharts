@@ -2,17 +2,18 @@
 """Unit Test Cases
 """
 
+from test.constants import CLOTHES
+from test.utils import get_default_rendering_file_content
+
 from nose.tools import eq_
 
 from pyecharts import Bar
 from pyecharts.app import (
-    get_default_config,
     configure_context,
-    online,
     enable_nteract,
+    get_default_config,
+    online,
 )
-from test.constants import CLOTHES
-from test.utils import get_default_rendering_file_content
 
 TITLE = "柱状图数据堆叠示例"
 

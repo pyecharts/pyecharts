@@ -5,9 +5,9 @@ Test cases for rendering in jupyter notebook
 from __future__ import unicode_literals
 
 import json
+from test.constants import CLOTHES, WEEK
 
 from pyecharts import Bar, Line, Page, Pie
-from test.constants import CLOTHES, WEEK
 
 TITLE = "柱状图数据堆叠示例"
 
