@@ -12,9 +12,9 @@ import pyecharts.engine as engine
 import pyecharts.exceptions as exceptions
 import pyecharts.utils as utils
 from pyecharts.interfaces import IPythonRichDisplayMixin
-from pyecharts.conf import CURRENT_CONFIG
+from pyecharts.app import get_default_config
 from pyecharts.echarts.option import get_other_options
-from pyecharts.javascripthon.api import EChartsTranslator
+from pyecharts.shortcuts import dumps_json, cast
 
 
 class Base(IPythonRichDisplayMixin):
@@ -48,18 +48,22 @@ class Base(IPythonRichDisplayMixin):
         :param is_animation:
             是否开启动画，默认为 True。V0.5.9+
         """
+        self._chart_id = uuid.uuid4().hex
+        self._width = width
+        self._height = height
+        self._page_title = page_title
+        self.extra_html_text_label = extra_html_text_label
+
         self._option = {}
         self._js_dependencies = set()
-        self._chart_id = uuid.uuid4().hex
-        self.width, self.height = width, height
         self.renderer = renderer
-        self._page_title = page_title
         self._js_dependencies = {"echarts"}
         self.event_handlers = {}
         self.theme = None
-        self.use_theme(CURRENT_CONFIG.theme)
-        self.extra_html_text_label = extra_html_text_label
+        self.use_theme(get_default_config().theme)
         self.is_animation = is_animation
+
+    # ----- Properties for html element -----
 
     @property
     def chart_id(self):
@@ -70,6 +74,26 @@ class Base(IPythonRichDisplayMixin):
         self._chart_id = chart_id
 
     @property
+    def width(self):
+        return self._width
+
+    @width.setter
+    def width(self, width):
+        self._width = width
+
+    @property
+    def height(self):
+        return self._height
+
+    @height.setter
+    def height(self, height):
+        self._height = height
+
+    @property
+    def page_title(self):
+        return self._page_title
+
+    @property
     def options(self):
         return self.get_options()
 
@@ -77,9 +101,8 @@ class Base(IPythonRichDisplayMixin):
     def js_dependencies(self):
         return utils.merge_js_dependencies(self._js_dependencies)
 
-    @property
-    def page_title(self):
-        return self._page_title
+    def _get_all_options(self, **kwargs):
+        return get_other_options(**kwargs)
 
     def get_options(self, remove_none=True):
         if remove_none:
@@ -93,6 +116,12 @@ class Base(IPythonRichDisplayMixin):
             self._js_dependencies.add(self.theme)
         return self
 
+    def _add_chinese_map(self, map_name_in_chinese):
+        # TODO Lazy Resolve ?
+        current_config = get_default_config()
+        name_in_pinyin = current_config.chinese_to_pinyin(map_name_in_chinese)
+        self._js_dependencies.add(name_in_pinyin)
+
     def on(self, event_name, handler):
         self.event_handlers[event_name] = handler
         return self
@@ -101,18 +130,7 @@ class Base(IPythonRichDisplayMixin):
         """
         打印输出图形所有配置项
         """
-        print(EChartsTranslator.dumps(self.options))
-
-    def show_config(self):
-        """
-        打印输出图形所有配置项
-        """
-        deprecated_tpl = "The {} is deprecated, please use {} instead!"
-        warnings.warn(
-            deprecated_tpl.format("show_config", "print_echarts_options"),
-            DeprecationWarning,
-        )
-        self.print_echarts_options()
+        print(dumps_json(self.options))
 
     def render_embed(self):
         """
@@ -126,7 +144,10 @@ class Base(IPythonRichDisplayMixin):
         """
         声明所有的 js 文件路径
         """
-        return CURRENT_CONFIG.produce_html_script_list(self._js_dependencies)
+        current_config = get_default_config()
+        return current_config.produce_html_script_list(self._js_dependencies)
+
+    # ----- Render API -----
 
     def render(
         self,
@@ -146,52 +167,6 @@ class Base(IPythonRichDisplayMixin):
             **kwargs
         )
 
-    @staticmethod
-    def cast(seq):
-        """
-        转换数据序列，将带字典和元组类型的序列转换为 k_lst,v_lst 两个列表
-
-        元组列表
-            [(A1, B1), (A2, B2), ...] -->
-                k_lst[ A[i1, i2...] ], v_lst[ B[i1, i2...] ]
-        字典列表
-            [{A1: B1}, {A2: B2}, ...] -->
-                k_lst[ A[i1, i2...] ], v_lst[ B[i1, i2...] ]
-        字典
-            {A1: B1, A2: B2, ...} -- >
-                k_lst[ A[i1, i2...] ], v_lst[ B[i1, i2...] ]
-
-        :param seq:
-            待转换的序列
-        :return:
-        """
-        k_lst, v_lst = [], []
-        if isinstance(seq, list):
-            for s in seq:
-                if isinstance(s, tuple):
-                    _attr, _value = s
-                    k_lst.append(_attr)
-                    v_lst.append(_value)
-                elif isinstance(s, dict):
-                    for k, v in s.items():
-                        k_lst.append(k)
-                        v_lst.append(v)
-        elif isinstance(seq, dict):
-            for key in sorted(list(seq.keys())):
-                k_lst.append(key)
-                v_lst.append(seq[key])
-        return k_lst, v_lst
-
-    def render_notebook(self):
-        warnings.warn(
-            "Implementation has been removed. "
-            + "Please pass the chart instance directly to Jupyter."
-            + "If you need more help, please read documentation"
-        )
-
-    def _get_all_options(self, **kwargs):
-        return get_other_options(**kwargs)
-
     def _repr_html_(self):
         """
         渲染配置项并将图形显示在 notebook 中
@@ -200,23 +175,21 @@ class Base(IPythonRichDisplayMixin):
         chart.js_dependencies => require_config => config_items, libraries
         :return A unicode string.
         """
-        if CURRENT_CONFIG.jupyter_presentation == constants.DEFAULT_HTML:
-            require_config = CURRENT_CONFIG.produce_require_configuration(
+        env = engine.create_default_environment(constants.DEFAULT_HTML)
+        current_config = env.pyecharts_config
+        if current_config.is_run_on_nteract:
+            return env.render_chart_to_notebook(
+                chart=self, template_name="nteract.html"
+            )
+        elif current_config.jupyter_presentation == constants.DEFAULT_HTML:
+            require_config = current_config.produce_require_configuration(
                 self.js_dependencies
             )
             config_items = require_config["config_items"]
             libraries = require_config["libraries"]
-            env = engine.create_default_environment(constants.DEFAULT_HTML)
             return env.render_chart_to_notebook(
                 charts=(self,), config_items=config_items, libraries=libraries
             )
-
-        elif CURRENT_CONFIG.jupyter_presentation == constants.NTERACT:
-            env = engine.create_default_environment(constants.DEFAULT_HTML)
-            return env.render_chart_to_notebook(
-                chart=self, template_name="nteract.html"
-            )
-
         else:
             return None
 
@@ -240,7 +213,9 @@ class Base(IPythonRichDisplayMixin):
 
         :param file_type: the parameter is mostly image file types.
         """
-        if CURRENT_CONFIG.jupyter_presentation != file_type:
+        env = engine.create_default_environment(file_type)
+        current_config = env.pyecharts_config
+        if current_config.jupyter_presentation != file_type:
             return None
 
         if self.renderer == constants.SVG_RENDERER:
@@ -254,15 +229,38 @@ class Base(IPythonRichDisplayMixin):
             raise exceptions.InvalidConfiguration(
                 "svg output requires svg renderer."
             )
-
-        env = engine.create_default_environment(file_type)
         tmp_file_handle, tmp_file_path = mkstemp(suffix="." + file_type)
+        # SnapshotEnvironment.render_chart_to_file returns file binary data.
         content = env.render_chart_to_file(
             chart=self, path=tmp_file_path, verbose=False
         )
         os.close(tmp_file_handle)
         return content
 
-    def _add_chinese_map(self, map_name_in_chinese):
-        name_in_pinyin = CURRENT_CONFIG.chinese_to_pinyin(map_name_in_chinese)
-        self._js_dependencies.add(name_in_pinyin)
+    # ----- Deprecated API -----
+
+    def show_config(self):
+        """
+        打印输出图形所有配置项
+        """
+        deprecated_tpl = "The {} is deprecated, please use {} instead!"
+        warnings.warn(
+            deprecated_tpl.format("show_config", "print_echarts_options"),
+            DeprecationWarning,
+        )
+        self.print_echarts_options()
+
+    def render_notebook(self):
+        warnings.warn(
+            "Implementation has been removed. "
+            + "Please pass the chart instance directly to Jupyter."
+            + "If you need more help, please read documentation"
+        )
+
+    @staticmethod
+    def cast(seq):
+        warnings.warn(
+            'This method is deprecated. Use shortcuts.cast instead.',
+            DeprecationWarning
+        )
+        return cast(seq)

@@ -8,7 +8,7 @@ import pyecharts.constants as constants
 import pyecharts.engine as engine
 import pyecharts.utils as utils
 from pyecharts.interfaces import IPythonRichDisplayMixin
-from pyecharts.conf import CURRENT_CONFIG
+from pyecharts.app import get_default_config
 
 
 class Page(IPythonRichDisplayMixin):
@@ -109,19 +109,21 @@ class Page(IPythonRichDisplayMixin):
         """
         Declare its javascript dependencies for embedding purpose
         """
-        return CURRENT_CONFIG.produce_html_script_list(self.js_dependencies)
+        current_config = get_default_config()
+        return current_config.produce_html_script_list(self.js_dependencies)
 
     def _repr_html_(self):
         """
         :return: html content for jupyter
         """
+        env = engine.create_default_environment(constants.DEFAULT_HTML)
         dependencies = self.js_dependencies
-        require_config = CURRENT_CONFIG.produce_require_configuration(
+        current_config = env.pyecharts_config
+        require_config = current_config.produce_require_configuration(
             dependencies
         )
         config_items = require_config["config_items"]
         libraries = require_config["libraries"]
-        env = engine.create_default_environment(constants.DEFAULT_HTML)
         return env.render_chart_to_notebook(
             charts=self, config_items=config_items, libraries=libraries
         )
