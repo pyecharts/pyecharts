@@ -5,7 +5,12 @@
 from nose.tools import eq_
 
 from pyecharts import Bar
-from pyecharts.app import get_default_config, use_config, online, enable_nteract
+from pyecharts.app import (
+    get_default_config,
+    configure_context,
+    online,
+    enable_nteract
+)
 from test.constants import CLOTHES
 from test.utils import get_default_rendering_file_content
 
@@ -14,13 +19,13 @@ TITLE = "柱状图数据堆叠示例"
 
 def test_use_config():
     c1 = get_default_config().jshost
-    with use_config():
+    with configure_context():
         online()
     c2 = get_default_config().jshost
     eq_(c1, c2)
 
     j1 = get_default_config().is_run_on_nteract
-    with use_config():
+    with configure_context():
         enable_nteract()
         eq_(True, get_default_config().is_run_on_nteract)
 
@@ -39,7 +44,7 @@ def create_a_bar(title):
 
 
 def test_online_html():
-    with use_config():
+    with configure_context():
         online()
         bar = Bar()
         bar.add("", CLOTHES, [5, 20, 36, 10, 75, 90], is_stack=True)
@@ -54,7 +59,7 @@ def test_online_html():
 
 
 def test_online_feature():
-    with use_config():
+    with configure_context():
         online()
         bar = create_a_bar(TITLE)
         html = bar._repr_html_()
@@ -64,7 +69,7 @@ def test_online_feature():
 
 
 def test_online_with_custom_jshost():
-    with use_config():
+    with configure_context():
         online(host="https://my-site.com/js")
         assert get_default_config().jshost == 'https://my-site.com/js'
         bar = create_a_bar(TITLE)
@@ -75,7 +80,7 @@ def test_online_with_custom_jshost():
 
 
 def test_nteract_feature():
-    with use_config():
+    with configure_context():
         enable_nteract()
         bar = create_a_bar(TITLE)
         html = bar._repr_html_()

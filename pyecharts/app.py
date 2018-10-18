@@ -55,6 +55,37 @@ def configure(
         _CURRENT_CONFIG.theme = global_theme
 
 
+@contextmanager
+def configure_context(
+    jshost=None,
+    hosted_on_github=None,
+    force_js_embed=None,
+    output_image=None,
+):
+    global _CURRENT_CONFIG
+    fields = [
+        'jshost',
+        'hosted_on_github',
+        'echarts_template_dir',
+        'force_js_embed',
+        'jupyter_presentation',
+        'is_run_on_nteract'
+    ]
+
+    previous_config = {k: getattr(_CURRENT_CONFIG, k) for k in fields}
+    try:
+        configure(
+            jshost=jshost,
+            hosted_on_github=hosted_on_github,
+            force_js_embed=force_js_embed,
+            output_image=output_image
+        )
+        yield
+    finally:
+        for k, v in previous_config.items():
+            setattr(_CURRENT_CONFIG, k, v)
+
+
 def online(host=None):
     """
     Set the jshost
@@ -85,7 +116,6 @@ def jupyter_image(jupyter_presentation):
     """
     Temporarily change jupyter's default presentation
     """
-    # TODO Remove
     previous_presentation = _CURRENT_CONFIG.jupyter_presentation
     try:
         _CURRENT_CONFIG.jupyter_presentation = jupyter_presentation
@@ -93,23 +123,3 @@ def jupyter_image(jupyter_presentation):
 
     finally:
         _CURRENT_CONFIG.jupyter_presentation = previous_presentation
-
-
-@contextmanager
-def use_config():
-    global _CURRENT_CONFIG
-    fields = [
-        'jshost',
-        'hosted_on_github',
-        'echarts_template_dir',
-        'force_js_embed',
-        'jupyter_presentation',
-        'is_run_on_nteract'
-    ]
-
-    previous_config = {k: getattr(_CURRENT_CONFIG, k) for k in fields}
-    try:
-        yield
-    finally:
-        for k, v in previous_config.items():
-            setattr(_CURRENT_CONFIG, k, v)

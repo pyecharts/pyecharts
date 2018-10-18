@@ -5,7 +5,7 @@ import codecs
 from test.constants import CLOTHES, RANGE_COLOR
 
 from pyecharts import Bar, Page, Scatter3D
-from pyecharts.app import configure, use_config
+from pyecharts.app import configure, configure_context
 
 
 def create_three():
@@ -34,7 +34,7 @@ def create_three():
 
 
 def test_custom_templates():
-    with use_config():
+    with configure_context():
         configure(
             jshost="https://chfw.github.io/jupyter-echarts/echarts",
             force_js_embed=False,
@@ -54,7 +54,7 @@ def test_custom_template_for_chart():
         {"name": "羊毛衫", "value": 20},
         {"name": "雪纺衫", "value": 36},
     ]
-    with use_config():
+    with configure_context():
         configure(echarts_template_dir=".")
 
         data1 = {"衬衫": "34", "羊毛衫": 45, "雪纺衫": 40}
