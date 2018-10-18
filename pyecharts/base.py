@@ -260,7 +260,7 @@ class Base(IPythonRichDisplayMixin):
     @staticmethod
     def cast(seq):
         warnings.warn(
-            'This method is deprecated. Use shortcuts.cast instead.',
-            DeprecationWarning
+            "This method is deprecated. Use shortcuts.cast instead.",
+            DeprecationWarning,
         )
         return cast(seq)

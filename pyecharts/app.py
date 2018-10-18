@@ -57,19 +57,16 @@ def configure(
 
 @contextmanager
 def configure_context(
-    jshost=None,
-    hosted_on_github=None,
-    force_js_embed=None,
-    output_image=None,
+    jshost=None, hosted_on_github=None, force_js_embed=None, output_image=None
 ):
     global _CURRENT_CONFIG
     fields = [
-        'jshost',
-        'hosted_on_github',
-        'echarts_template_dir',
-        'force_js_embed',
-        'jupyter_presentation',
-        'is_run_on_nteract'
+        "jshost",
+        "hosted_on_github",
+        "echarts_template_dir",
+        "force_js_embed",
+        "jupyter_presentation",
+        "is_run_on_nteract",
     ]
 
     previous_config = {k: getattr(_CURRENT_CONFIG, k) for k in fields}
@@ -78,7 +75,7 @@ def configure_context(
             jshost=jshost,
             hosted_on_github=hosted_on_github,
             force_js_embed=force_js_embed,
-            output_image=output_image
+            output_image=output_image,
         )
         yield
     finally:
@@ -106,9 +103,7 @@ def enable_nteract(host=None):
     if host:
         _host = host
 
-    configure(
-        output_image=constants.NTERACT, jshost=_host
-    )
+    configure(output_image=constants.NTERACT, jshost=_host)
 
 
 @contextmanager

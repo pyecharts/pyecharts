@@ -54,4 +54,3 @@ from pyecharts.echarts.style import Style
 
 # alias
 Candlestick = Kline
-

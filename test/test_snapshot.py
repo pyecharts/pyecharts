@@ -12,10 +12,10 @@ from test.constants import CLOTHES
 
 # Mock a SnapshotEnvironment object
 
-FAKE_CONFIG = MagicMock(jupyter_presentation='svg')
+FAKE_CONFIG = MagicMock(jupyter_presentation="svg")
 FAKE_ENV = MagicMock(
     pyecharts_config=FAKE_CONFIG,
-    render_chart_to_file=MagicMock(return_value="fake svg")
+    render_chart_to_file=MagicMock(return_value="fake svg"),
 )
 
 

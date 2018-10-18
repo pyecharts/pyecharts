@@ -25,9 +25,7 @@ from pyecharts.shortcuts import dumps_json
 
 
 def dumps_actual_options(opts):
-    return dumps_json(
-        opts, sort_keys=True, indent=4, enable_func=True
-    )
+    return dumps_json(opts, sort_keys=True, indent=4, enable_func=True)
 
 
 @patch("random.randint")

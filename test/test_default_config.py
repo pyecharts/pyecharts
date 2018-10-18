@@ -9,7 +9,7 @@ from pyecharts.app import (
     get_default_config,
     configure_context,
     online,
-    enable_nteract
+    enable_nteract,
 )
 from test.constants import CLOTHES
 from test.utils import get_default_rendering_file_content
@@ -71,7 +71,7 @@ def test_online_feature():
 def test_online_with_custom_jshost():
     with configure_context():
         online(host="https://my-site.com/js")
-        assert get_default_config().jshost == 'https://my-site.com/js'
+        assert get_default_config().jshost == "https://my-site.com/js"
         bar = create_a_bar(TITLE)
         html = bar._repr_html_()
         expected_jshost = "https://my-site.com/js"
