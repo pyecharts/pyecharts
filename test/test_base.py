@@ -9,11 +9,9 @@ from test.utils import get_default_rendering_file_content
 
 import numpy as np
 import pandas as pd
-from mock import MagicMock, patch
-from nose.tools import eq_, raises
+from nose.tools import eq_
 
-from pyecharts import Bar, Map, exceptions, jupyter_image, online
-from pyecharts.conf import CURRENT_CONFIG
+from pyecharts import Bar, Map
 
 TITLE = "柱状图数据堆叠示例"
 
@@ -65,49 +63,6 @@ def test_embed_option():
     assert json_encoded_title in html
     assert "<html>" not in html
     assert "<body>" not in html
-
-
-def test_jupyter_repr_png():
-    bar = create_a_bar(TITLE)
-    assert bar._repr_png_() is None
-
-
-def test_jupyter_repr_jpeg():
-    bar = create_a_bar(TITLE)
-    assert bar._repr_jpeg_() is None
-
-
-def test_jupyter_repr_svg():
-    bar = create_a_bar(TITLE)
-    assert bar._repr_svg_() is None
-
-
-@patch("pyecharts.engine.create_default_environment")
-@patch("os.unlink")
-def test_render_as_svg(fake_unlink, fake_factory):
-    fake_env = MagicMock(
-        render_chart_to_file=MagicMock(return_value="fake svg")
-    )
-    fake_factory.return_value = fake_env
-    with jupyter_image("svg"):
-        bar = create_a_bar("test", renderer="svg")
-        svg_content = bar._repr_svg_()
-        fake_unlink.assert_called()
-        eq_(svg_content, "fake svg")
-
-
-@raises(exceptions.InvalidConfiguration)
-def test_render_as_svg_with_wrong_configuration():
-    with jupyter_image("svg"):
-        bar = create_a_bar("test")
-        bar._repr_svg_()
-
-
-@raises(exceptions.InvalidConfiguration)
-def test_render_as_png_with_wrong_configuration():
-    with jupyter_image("png"):
-        bar = create_a_bar("test", renderer="svg")
-        bar._repr_png_()
 
 
 def test_base_get_js_dependencies():
@@ -193,17 +148,3 @@ def test_base_cast_dict():
     keys, values = Bar.cast(adict)
     eq_(keys, ["key", "value"])
     eq_(values, [1, 2])
-
-
-def test_online_html():
-    online()
-    bar = Bar()
-    bar.add("", CLOTHES, [5, 20, 36, 10, 75, 90], is_stack=True)
-    bar.render()
-    html_content = get_default_rendering_file_content()
-    assert (
-        'src="https://pyecharts.github.io/assets/js/echarts.min.js'
-        in html_content
-    )
-    CURRENT_CONFIG.jshost = None
-    CURRENT_CONFIG.hosted_on_github = False

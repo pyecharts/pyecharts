@@ -8,6 +8,7 @@ from lml.plugin import PluginInfo, PluginManager
 import pyecharts.conf as conf
 import pyecharts.constants as constants
 import pyecharts.utils as utils
+from pyecharts.app import get_default_config
 from pyecharts.javascripthon.api import EChartsTranslator
 
 # ------ Code Tpl Start
@@ -183,6 +184,8 @@ class EchartsEnvironment(BaseEnvironment):
     This class provides some shortcut methods for rendering charts.
     """
 
+    # TODO 将 进一步封装。
+
     def __init__(self, pyecharts_config=None, *args, **kwargs):
         pyecharts_config = pyecharts_config or conf.PyEchartsConfig()
         loader = kwargs.pop("loader", None)
@@ -250,6 +253,8 @@ class EnvironmentManager(PluginManager):
     loosely coupled environments
     """
 
+    # TODO Move to pyecharts.app ?
+
     def __init__(self):
         """
         Register with lml that this class manages 'pyecharts_environment'
@@ -282,8 +287,11 @@ def create_default_environment(file_type):
 
     :return: A new EchartsEnvironment object.
     """
+    # TODO (jupyter_presentation, file_type, render) => file_type
+
     default_template_dir = utils.get_resource_dir("templates")
-    config = conf.CURRENT_CONFIG
+    config = get_default_config()
+    config.jupyter_presentation = file_type  # TODO ?
     echarts_env = ENV_MANAGER.get_a_environment(
         file_type,
         pyecharts_config=config,

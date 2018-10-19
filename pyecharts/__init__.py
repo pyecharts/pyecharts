@@ -43,12 +43,14 @@ from pyecharts.charts.composite.timeline import Timeline
 from pyecharts.contrib.page import Page
 
 # misc
-from pyecharts.conf import online
-from pyecharts.conf import enable_nteract
-from pyecharts.conf import configure
-from pyecharts.echarts.style import Style
-from pyecharts.conf import jupyter_image
+from pyecharts.app import online
+from pyecharts.app import enable_nteract
+from pyecharts.app import configure
+from pyecharts.app import jupyter_image
 from pyecharts.utils import NULL
+
+# Deprecated Feature
+from pyecharts.echarts.style import Style
 
 # alias
 Candlestick = Kline

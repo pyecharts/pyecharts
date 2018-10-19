@@ -20,6 +20,7 @@ GEO_DATA_PLUGIN_TYPE = "pyecharts_geo_data_bank"
 LIGHT_THEME = "light"
 DARK_THEME = "dark"
 
+# Builtin themes do not need external theme javascript files
 BUILTIN_THEMES = [LIGHT_THEME, DARK_THEME]
 
 ERROR_MESSAGE = "You need python 3.5+ and pyecharts-javascripthon"
