@@ -16,6 +16,7 @@ __author_email__ = "chenjiandongx@qq.com"
 __license__ = "MIT"
 
 __requires__ = [
+    "click",
     "jinja2",
     "future",
     "jupyter-echarts-pypkg==0.1.2",
@@ -104,4 +105,9 @@ setup(
         "Topic :: Software Development :: Libraries",
     ],
     cmdclass={"upload": UploadCommand},
+    entry_points={
+        'console_scripts': [
+            'pye_cli = pyecharts.cli.main:cli'
+        ]
+    }
 )
