@@ -1,86 +1,14 @@
 # coding=utf8
 import codecs
+import importlib
 import json
 import os
 import warnings
-import importlib
-
-from setuptools.command.install import install
 
 import click
 
-REGISTRY_FILE = "registry.json"
-JUPYTER_ENTRY = "JUPYTER_ENTRY"
-REGISTRY_KEYS = [
-    "FILE_MAP",
-    "GITHUB_URL",
-    "JS_FOLDER",
-    "JUPYTER_URL",
-    "PINYIN_MAP",
-]
 
-
-def _load_registry_json(file_path):
-    with codecs.open(file_path, "r", encoding="utf-8") as f:
-        return json.load(f)
-
-
-def _validate_registry(registry):
-    for key in REGISTRY_KEYS:
-        if key not in registry:
-            raise InvalidRegistry("%s is missing" % key)
-
-
-def install_cmd_for(package_name, package_path):
-    # Command used for standard installs
-    class InstallCommand(install):
-        def run(self):
-            print("Installing pyecharts module...")
-            install.run(self)
-            print("Installing javascript extensions %s ..." % package_name)
-            _install(package_name, package_path)
-            print("All done")
-
-    return dict(install=InstallCommand)
-
-
-class InvalidRegistry(Exception):
-    pass
-
-
-def _install(package_name, package_path):
-    try:
-        __registry__ = _load_registry_json(
-            os.path.join(package_path, "..", REGISTRY_FILE)
-        )
-        _validate_registry(__registry__)
-        _jupyter_install(
-            package_name, __registry__[JUPYTER_ENTRY], package_path
-        )
-    except InvalidRegistry as e:
-        print("Invalid registry: " + str(e))
-
-
-def _jupyter_install(package_name, package_main, package_installation_path):
-    install_nbextension, ConfigManager = __get_jupyter_note_utils()
-    if install_nbextension and ConfigManager:
-        print("Installing %s to jupyter.." % package_name)
-        install_nbextension(
-            package_installation_path, symlink=False, user=True
-        )
-        print("Enabling %s on jupyter.." % package_name)
-        cm = ConfigManager()
-        cm.update("notebook", {"load_extensions": {package_main: True}})
-    else:
-        warnings.warn(
-            "No jupyter notebook found in your environment. "
-            "Hence jupyter nbextensions were not installed. "
-            "If you would like to have them,"
-            "please issue 'pip install jupyter'."
-        )
-
-
-def __get_jupyter_note_utils():
+def _get_jupyter_install_api():
     try:
         # IPython/Jupyter 4.0
         from notebook.nbextensions import install_nbextension
@@ -93,6 +21,33 @@ def __get_jupyter_note_utils():
         except ImportError:
             raise
     return install_nbextension, ConfigManager
+
+
+def _jupyter_install(package_name, package_main, package_installation_path):
+    install_nbextension, ConfigManager = _get_jupyter_install_api()
+    print("Installing %s to jupyter.." % package_name)
+    install_nbextension(
+        package_installation_path, symlink=False, user=True
+    )
+    print("Enabling %s on jupyter.." % package_name)
+    cm = ConfigManager()
+    cm.update("notebook", {"load_extensions": {package_main: True}})
+
+
+def _validate_registry(registry_path):
+    with codecs.open(registry_path, "r", encoding="utf-8") as f:
+        registry = json.load(f)
+
+    required_fields = [
+        "FILE_MAP",
+        "GITHUB_URL",
+        "JS_FOLDER",
+        "JUPYTER_URL",
+        "PINYIN_MAP",
+    ]
+    for key in required_fields:
+        if key not in registry:
+            raise ValueError("{} is missing".format(key))
 
 
 _INFO_FIELDS = ['import_name', 'extension_dir']
@@ -120,7 +75,7 @@ PACKAGE_INFO_LOOKUP = {
     }
 
 
-def install_(package_name):
+def _retrieve_package_info(package_name):
     info = PACKAGE_INFO_LOOKUP.get(package_name, None)
     if not info:
         print('No info found for {}'.format(package_name))
@@ -132,35 +87,42 @@ def install_(package_name):
     )
 
     node_package_path = os.path.join(package_path, 'resources')
+    registry_path = os.path.join(node_package_path, 'registry.json')
 
-    assert os.path.exists(os.path.join(node_package_path, 'registry.json'))
+    assert os.path.exists(registry_path)
 
     extension_path = os.path.join(
         node_package_path, info['extension_dir']
     )
     assert os.path.exists(os.path.join(extension_path, 'main.js'))
     main_entry = '/'.join([info['extension_dir'], 'main'])
-    print({
+    return {
         'PackageName': package_name,
         'PackagePath': package_path,
+        'RegistryPath': registry_path,
         'ExtensionDir': extension_path,
         'MainEntry': main_entry
-    })
-
-    # _jupyter_install(
-    #     package_name=package_name,
-    #     package_main=main_entry,
-    #     package_installation_path=extension_path
-    # )
+    }
 
 
 @click.command()
 @click.argument('package_name')
-def cli(package_name):
+@click.option('--fake/--no-fake', default=False)
+def cli(package_name, fake):
     """
     A simple wrapper for installation API.
+    Demo: pyecharts_cli jupyter_install jupyter_echarts_pypkg
     :param package_name:
+    :param fake:
     :return:
     """
-    # pyecharts_cli jupyter_install jupyter_echarts_pypkg
-    install_(package_name)
+    package_info = _retrieve_package_info(package_name)
+    if fake:
+        print(package_info)
+    else:
+        _validate_registry(package_info['RegistryPath'])
+        _jupyter_install(
+            package_name=package_name,
+            package_main=package_info['MainEntry'],
+            package_installation_path=package_info['ExtensionDir']
+        )
