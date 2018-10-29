@@ -1,8 +1,10 @@
 # coding=utf8
+
 import codecs
 import importlib
 import json
 import os
+from collections import namedtuple
 
 import click
 
@@ -49,7 +51,9 @@ def _validate_registry(registry_path):
             raise ValueError("{} is missing".format(key))
 
 
-_INFO_FIELDS = ['import_name', 'extension_dir']
+PackageInfo = namedtuple('PackageInfo',
+                         ['package_name', 'import_name', 'extension_dir'])
+
 _PACKAGE_RAW = [
     ['jupyter-echarts-pypkg', 'jupyter_echarts_pypkg', 'echarts'],
     ['echarts-themes-pypkg', 'echarts_themes_pypkg', 'echarts-themes-js'],
@@ -68,10 +72,7 @@ _PACKAGE_RAW = [
      'echarts-united-kingdom-js']
 ]
 
-PACKAGE_INFO_LOOKUP = {
-    item[0]: {k: v for k, v in zip(_INFO_FIELDS, item[1:])} for item in
-    _PACKAGE_RAW
-    }
+PACKAGE_INFO_LOOKUP = {item[0]: PackageInfo(*item) for item in _PACKAGE_RAW}
 
 
 def _retrieve_package_info(package_name):
@@ -82,7 +83,7 @@ def _retrieve_package_info(package_name):
 
     # This target package must be installed first.
     package_path = os.path.dirname(
-        importlib.import_module(info['import_name']).__file__
+        importlib.import_module(info.import_name).__file__
     )
 
     node_package_path = os.path.join(package_path, 'resources')
@@ -91,10 +92,10 @@ def _retrieve_package_info(package_name):
     assert os.path.exists(registry_path)
 
     extension_path = os.path.join(
-        node_package_path, info['extension_dir']
+        node_package_path, info.extension_dir
     )
     assert os.path.exists(os.path.join(extension_path, 'main.js'))
-    main_entry = '/'.join([info['extension_dir'], 'main'])
+    main_entry = '/'.join([info.extension_dir, 'main'])
     return {
         'PackageName': package_name,
         'PackagePath': package_path,
@@ -105,8 +106,8 @@ def _retrieve_package_info(package_name):
 
 
 @click.command()
-@click.argument('package_name', help='The name of package.')
-@click.option('--fake/--no-fake', default=False, help='Just echo information.')
+@click.argument('package_name')
+@click.option('--fake/--no-fake', default=False)
 def cli(package_name, fake):
     """
     A simple wrapper for installation API.
