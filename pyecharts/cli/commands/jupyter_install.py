@@ -3,7 +3,6 @@ import codecs
 import importlib
 import json
 import os
-import warnings
 
 import click
 
@@ -106,19 +105,19 @@ def _retrieve_package_info(package_name):
 
 
 @click.command()
-@click.argument('package_name')
-@click.option('--fake/--no-fake', default=False)
+@click.argument('package_name', help='The name of package.')
+@click.option('--fake/--no-fake', default=False, help='Just echo information.')
 def cli(package_name, fake):
     """
     A simple wrapper for installation API.
-    Demo: pyecharts_cli jupyter_install jupyter_echarts_pypkg
+    Demo: pye_cli jupyter_install jupyter-echarts-pypkg
     :param package_name:
     :param fake:
     :return:
     """
     package_info = _retrieve_package_info(package_name)
     if fake:
-        print(package_info)
+        click.echo(package_info)
     else:
         _validate_registry(package_info['RegistryPath'])
         _jupyter_install(
