@@ -1,8 +1,7 @@
 # coding=utf8
-
+import os
 from mock import patch, MagicMock
 from nose.tools import assert_raises
-from click.testing import CliRunner
 
 from pyecharts.cli.commands.jupyter_install import (
     _validate_registry,
@@ -38,11 +37,16 @@ def test_validate_registry_with_invalid_data(json_load, open_loads):
         _validate_registry('Foo.json')
 
 
+def build_path(*args):
+    return os.sep + os.sep.join(args)
+
+
 # Mock the import for different cases.
 err_module = MagicMock(
     side_effect=ImportError('can not import this module.')
 )
-normal_module = MagicMock(return_value=MagicMock(__file__=r'\usr\foo\init'))
+module_path = build_path('usr', 'foo', 'init')
+normal_module = MagicMock(return_value=MagicMock(__file__=module_path))
 
 
 @patch('importlib.import_module', err_module)
@@ -52,8 +56,10 @@ def test_command_with_import_error():
 
 
 @patch('importlib.import_module', normal_module)
+@patch('os.path.dirname', MagicMock(return_value=build_path('usr', 'foo')))
 @patch('os.path.exists', MagicMock(return_value=True))
 def test_command():
     info = retrieve_package_info('jupyter-echarts-pypkg')
     print(info)
-    assert r'\usr\foo\resources\registry.json' == info['RegistryPath']
+    excepted = build_path('usr', 'foo', 'resources', 'registry.json')
+    assert excepted == info['RegistryPath']
