@@ -49,6 +49,7 @@ def _validate_registry(registry_path):
     for key in required_fields:
         if key not in registry:
             raise ValueError("{} is missing".format(key))
+    return True
 
 
 PackageInfo = namedtuple('PackageInfo',
