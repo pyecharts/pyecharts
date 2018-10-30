@@ -26,13 +26,16 @@ def _get_jupyter_install_api():
 
 def _jupyter_install(package_name, package_main, package_installation_path):
     install_nbextension, ConfigManager = _get_jupyter_install_api()
-    print("Installing %s to jupyter.." % package_name)
+    click.echo("Installing {} to jupyter..".format(package_name))
     install_nbextension(
         package_installation_path, symlink=False, user=True
     )
-    print("Enabling %s on jupyter.." % package_name)
+    click.echo("Enabling {} on jupyter..".format(package_name))
     cm = ConfigManager()
     cm.update("notebook", {"load_extensions": {package_main: True}})
+    click.echo(
+        'The nbextension {} has been installed OK!'.format(package_name)
+    )
 
 
 def _validate_registry(registry_path):
@@ -76,13 +79,17 @@ _PACKAGE_RAW = [
 PACKAGE_INFO_LOOKUP = {item[0]: PackageInfo(*item) for item in _PACKAGE_RAW}
 
 
-def _retrieve_package_info(package_name):
+def retrieve_package_info(package_name):
+    """Retrieve info for given package.
+    This target package must be installed first.
+    :param package_name:
+    :return:
+    """
     info = PACKAGE_INFO_LOOKUP.get(package_name, None)
     if not info:
-        print('No info found for {}'.format(package_name))
+        click.echo('No info found for {}'.format(package_name))
         return
 
-    # This target package must be installed first.
     package_path = os.path.dirname(
         importlib.import_module(info.import_name).__file__
     )
@@ -102,7 +109,8 @@ def _retrieve_package_info(package_name):
         'PackagePath': package_path,
         'RegistryPath': registry_path,
         'ExtensionDir': extension_path,
-        'MainEntry': main_entry
+        'MainEntry': main_entry,
+        'JupyterUrl': '/nbextensions/{}'.format(info.extension_dir)
     }
 
 
@@ -117,7 +125,7 @@ def cli(package_name, fake):
     :param fake:
     :return:
     """
-    package_info = _retrieve_package_info(package_name)
+    package_info = retrieve_package_info(package_name)
     if fake:
         click.echo(package_info)
     else:
