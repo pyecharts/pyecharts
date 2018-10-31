@@ -3,6 +3,7 @@
 * ### version 0.6.0（dev）
     #### Added
     * 新增 `pyecharts.shortcuts` 工具模块
+    * 新增 pye-CLI 命令行工具
 
     #### Updated
     * 将 [pyecharts-javascripthon](https://github.com/pyecharts/pyecharts-javascripthon) 合并入主仓库，并对该部分代码进行了重构。导入路径由 `from pyecharts_javascripthon import *` 转变为 `from pyecharts.javascripthon import *`
