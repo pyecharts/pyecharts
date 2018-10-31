@@ -34,10 +34,11 @@ def test_echarts_js_dependencies():
     tpl = env.from_string("{{ echarts_js_dependencies(bar) }}")
     bar = create_demo_bar()
     html = tpl.render(bar=bar)
+    # flake8: noqa
     assert (
         '<script type="text/javascript" src="http://localhost/echarts/echarts.min.js"></script>'
         == html
-    )  # flake8: noqa
+    )
 
 
 def test_echarts_js_dependencies_embed():
@@ -100,7 +101,7 @@ def test_echarts_js_content_wrap():
 
 @raises(TypeError)
 def test_create_environment_without_config():
-    be = BaseEnvironment()
+    BaseEnvironment()
 
 
 def test_echarts_js_in_first():

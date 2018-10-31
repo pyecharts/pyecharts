@@ -1,6 +1,6 @@
 # coding=utf8
 """
-Call commands
+CLI entry
 """
 import os
 import click
@@ -12,6 +12,7 @@ class MyCLI(click.MultiCommand):
     def list_commands(self, ctx):
         rv = []
         for filename in os.listdir(plugin_folder):
+            # Exclude private module
             if not filename.startswith('_') and filename.endswith('.py'):
                 rv.append(filename.lstrip('_')[:-3])
         rv.sort()
