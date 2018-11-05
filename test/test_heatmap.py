@@ -38,7 +38,7 @@ def test_heatmap_calendar():
         [str(begin + datetime.timedelta(days=i)), random.randint(1000, 25000)]
         for i in range((end - begin).days + 1)
     ]
-    heatmap = HeatMap("日历热力图示例", "某人 2017 年微信步数情况", width=1100)
+    heatmap = HeatMap("日历热力图示例", "某人 2017 年微信步数情况", width='1100px')
     heatmap.add(
         "",
         data,

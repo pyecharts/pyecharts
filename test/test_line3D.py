@@ -21,7 +21,7 @@ def create_line3d_data():
 
 def test_line3d_default():
     _data = list(create_line3d_data())
-    line3d = Line3D("3D 折线图示例", width=1200, height=600)
+    line3d = Line3D("3D 折线图示例", width='1200px', height='600px')
     line3d.add(
         "",
         _data,
@@ -35,7 +35,7 @@ def test_line3d_default():
 
 def test_line3d_rotate_automatically_speedup():
     _data = list(create_line3d_data())
-    line3d = Line3D("3D 折线图示例", width=1200, height=600)
+    line3d = Line3D("3D 折线图示例", width='1200px', height='600px')
     line3d.add(
         "",
         _data,

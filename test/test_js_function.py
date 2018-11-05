@@ -13,8 +13,8 @@ def test_geo_formatter_func():
     style = Style(
         title_color="#fff",
         title_pos="center",
-        width=1200,
-        height=600,
+        width='1200px',
+        height='600px',
         background_color="#404a59",
     )
     data = [("汕头市", 50), ("汕尾市", 60), ("揭阳市", 35), ("阳江市", 44), ("肇庆市", 72)]

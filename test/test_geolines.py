@@ -10,8 +10,8 @@ from pyecharts.datasets.coordinates import search_coordinates_by_keyword
 style = Style(
     title_top="#fff",
     title_pos="center",
-    width=1200,
-    height=600,
+    width='1200px',
+    height='600px',
     background_color="#404a59",
 )
 

@@ -34,7 +34,7 @@ def test_pie_legend():
 def test_pie_type_rose():
     v1 = [11, 12, 13, 10, 10, 10]
     v2 = [19, 21, 32, 20, 20, 33]
-    pie = Pie("饼图-玫瑰图示例", title_pos="center", width=900)
+    pie = Pie("饼图-玫瑰图示例", title_pos="center", width='900px')
     pie.add(
         "商品A",
         CLOTHES,
@@ -59,7 +59,7 @@ def test_pie_type_rose():
 
 
 def test_pie_type_radius():
-    pie = Pie("饼图示例", title_pos="center", width=1000, height=600)
+    pie = Pie("饼图示例", title_pos="center", width='1000px', height='600px')
     pie.add(
         "",
         ["A", "B", "C", "D", "E", "F"],
@@ -80,7 +80,7 @@ def test_pie_type_radius():
 
 def test_pie_multiple():
     attr = ["A", "B", "C", "D", "E", "F"]
-    pie = Pie("饼图示例", width=1000, height=600)
+    pie = Pie("饼图示例", width='1000px', height='600px')
     pie.add(
         "",
         attr,

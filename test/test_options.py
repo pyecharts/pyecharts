@@ -165,7 +165,7 @@ def test_line3d_default(patched):
     fixture = "line3d_options.json"
     patched.return_value = "1"
     _data = list(create_line3d_data())
-    line3d = Line3D("3D 折线图示例", width=1200, height=600)
+    line3d = Line3D("3D 折线图示例", width='1200px', height='600px')
     line3d.add(
         "",
         _data,
@@ -212,7 +212,7 @@ def test_scatter3d_default(patched):
     patched.return_value = "1"
 
     data = [[1, 1, 1] for _ in range(3)]
-    scatter3d = Scatter3D("3D 散点图示例", width=1200, height=600)
+    scatter3d = Scatter3D("3D 散点图示例", width='1200px', height='600px')
     scatter3d.add("", data, is_visualmap=True, visual_range_color=RANGE_COLOR)
     actual_options = dumps_actual_options(scatter3d.options)
     expected = get_fixture_content(fixture)
@@ -224,7 +224,7 @@ def test_scatter3d_default(patched):
 def test_bar3d_default(patched):
     fixture = "bar3d_options.json"
     patched.return_value = "1"
-    bar3d = Bar3D("3D 柱状图示例", width=1200, height=600)
+    bar3d = Bar3D("3D 柱状图示例", width='1200px', height='600px')
     bar3d.add(
         "",
         X_TIME,
@@ -248,7 +248,7 @@ def test_surface3d_default(patched):
     fixture = "surface3d_options.json"
     patched.return_value = "1"
     _data = list(create_line3d_data())
-    surface3d = Surface3D("3D 曲面图示例", width=1200, height=600)
+    surface3d = Surface3D("3D 曲面图示例", width='1200px', height='600px')
     surface3d.add(
         "",
         _data,
@@ -268,8 +268,8 @@ def test_surface3d_default(patched):
 style = Style(
     title_top="#fff",
     title_pos="center",
-    width=1200,
-    height=600,
+    width='1200px',
+    height='600px',
     background_color="#404a59",
 )
 

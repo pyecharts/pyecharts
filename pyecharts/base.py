@@ -24,8 +24,8 @@ class Base(IPythonRichDisplayMixin):
 
     def __init__(
         self,
-        width=800,
-        height=400,
+        width='800px',
+        height='400px',
         renderer=constants.CANVAS_RENDERER,
         page_title=constants.PAGE_TITLE,
         extra_html_text_label=None,
@@ -34,9 +34,9 @@ class Base(IPythonRichDisplayMixin):
         """
 
         :param width:
-            画布宽度，默认为 800（px）
+            画布宽度，默认为 '800px'
         :param height:
-            画布高度，默认为 400（px）
+            画布高度，默认为 '400px'
         :param renderer:
             指定使用渲染方式，有 'svg' 和 'canvas' 可选，默认为 'canvas'。
             3D 图仅能使用 'canvas'。
@@ -49,8 +49,8 @@ class Base(IPythonRichDisplayMixin):
             是否开启动画，默认为 True。V0.5.9+
         """
         self._chart_id = uuid.uuid4().hex
-        self._width = width
-        self._height = height
+        self._width = utils.to_css_length(width)
+        self._height = utils.to_css_length(height)
         self._page_title = page_title
         self.extra_html_text_label = extra_html_text_label
 
@@ -79,7 +79,7 @@ class Base(IPythonRichDisplayMixin):
 
     @width.setter
     def width(self, width):
-        self._width = width
+        self._width = utils.to_css_length(width)
 
     @property
     def height(self):
@@ -87,7 +87,7 @@ class Base(IPythonRichDisplayMixin):
 
     @height.setter
     def height(self, height):
-        self._height = height
+        self._height = utils.to_css_length(height)
 
     @property
     def page_title(self):

@@ -9,8 +9,8 @@ from pyecharts import Geo, Style
 style = Style(
     title_color="#fff",
     title_pos="center",
-    width=1200,
-    height=600,
+    width='1200px',
+    height='600px',
     background_color="#404a59",
 )
 

@@ -28,7 +28,7 @@ def test_sankey_default():
         {"source": "category3", "target": "category4", "value": 20},
         {"source": "category5", "target": "category6", "value": 25},
     ]
-    sankey = Sankey("桑基图示例", width=1200, height=600)
+    sankey = Sankey("桑基图示例", width='1200px', height='600px')
     sankey.add(
         "sankey",
         nodes,
@@ -45,7 +45,7 @@ def test_sankey_default():
         os.path.join("fixtures", "energy.json"), "r", encoding="utf-8"
     ) as f:
         j = json.load(f)
-    sankey = Sankey("桑基图示例", width=1200, height=600)
+    sankey = Sankey("桑基图示例", width='1200px', height='600px')
     sankey.add(
         "sankey",
         nodes=j["nodes"],

@@ -21,7 +21,7 @@ def create_surface3d_data():
 
 def test_surface3d_default():
     _data = list(create_surface3d_data())
-    surface3d = Surface3D("3D 曲面图示例", width=1200, height=600)
+    surface3d = Surface3D("3D 曲面图示例", width='1200px', height='600px')
     surface3d.add(
         "",
         _data,
