@@ -68,7 +68,7 @@ class JsExtension(object):
         filename = self.get_js_library(pinyin)
         if filename:
             jshost = self._resolve_jshost(jshost, use_github)
-            return "'{}': '{}/{}'".format(pinyin, jshost, filename)
+            return "'{}': Jupyter.notebook.base_url.slice(0,-1) + '{}/{}'".format(pinyin, jshost, filename)
 
         else:
             return None
