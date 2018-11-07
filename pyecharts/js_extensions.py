@@ -4,14 +4,16 @@ import codecs
 import json
 import os
 
-from lml.loader import scan_plugins
+from lml.loader import scan_plugins_regex
 from lml.plugin import PluginManager
 
 import pyecharts.exceptions as exceptions
 
 # here are all plugins from pyecharts team
-OFFICIAL_PLUGINS = ["jupyter_echarts_pypkg", "pyecharts_snapshot"]
-THIRD_PARTY_PLUGIN_PREFIX = "echarts_"
+OFFICIAL_PLUGINS = ["jupyter_echarts_pypkg"]
+PYTHON_PLUGINS = "^pyecharts_.+$"
+JS_PLUGINS = "^echarts_+$"
+THIRD_PARTY_PLUGIN_PREFIX = "|".join([PYTHON_PLUGINS, JS_PLUGINS])
 
 JS_EXTENSION_PLUGIN_TYPE = "pyecharts_js_extension"
 JS_EXTENSION_REGISTRY = "registry.json"
@@ -115,7 +117,7 @@ class JsExtensionManager(PluginManager):
 
 EXTENSION_MANAGER = JsExtensionManager()
 # Load js & map file index into a dictionary.
-scan_plugins(
+scan_plugins_regex(
     THIRD_PARTY_PLUGIN_PREFIX,
     "pyecharts",  # <- useful for pyinstaller only
     white_list=OFFICIAL_PLUGINS,
