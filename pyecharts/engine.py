@@ -94,8 +94,8 @@ def echarts_container(env, chart):
 
     _container_and_text += CHART_DIV_FORMATTER.format(
         chart_id=chart.chart_id,
-        width=utils.to_css_length(chart.width),
-        height=utils.to_css_length(chart.height),
+        width=chart.width,
+        height=chart.height,
     )
     return Markup(_container_and_text)
 
