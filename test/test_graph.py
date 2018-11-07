@@ -54,7 +54,7 @@ def test_graph_official_data():
     ) as f:
         j = json.load(f)
     nodes, links, categories, cont, mid, _ = j
-    graph = Graph("微博转发关系图", width=1200, height=600)
+    graph = Graph("微博转发关系图", width='1200px', height='600px')
     graph.add(
         "",
         nodes,

@@ -11,7 +11,7 @@ def test_map_show_label():
     # show label
     value = [155, 10, 66, 78]
     attr = ["福建", "山东", "北京", "上海"]
-    map = Map("全国地图示例", width=1200, height=600)
+    map = Map("全国地图示例", width='1200px', height='600px')
     map.add("", attr, value, maptype="china", is_label_show=True)
     map.render()
 
@@ -20,7 +20,7 @@ def test_map_with_custom_name_map():
     # show label
     value = [155, 10, 66, 78]
     attr = ["福建", "山东", "北京", "上海"]
-    map = Map("全国地图示例", width=1200, height=600)
+    map = Map("全国地图示例", width='1200px', height='600px')
     map.add(
         "",
         attr,
@@ -38,7 +38,7 @@ def test_map_with_custom_name_map():
 def test_map_combine_with_visualmap():
     value = [155, 10, 66, 78, 33, 80, 190, 53, 49.6]
     attr = ["福建", "山东", "北京", "上海", "甘肃", "新疆", "河南", "广西", "西藏"]
-    map = Map("Map 结合 VisualMap 示例", width=1200, height=600)
+    map = Map("Map 结合 VisualMap 示例", width='1200px', height='600px')
     map.add(
         "",
         attr,
@@ -53,7 +53,7 @@ def test_map_combine_with_visualmap():
 def test_echarts_position_in_render_html():
     value = [20, 190, 253, 77, 65]
     attr = ["汕头市", "汕尾市", "揭阳市", "阳江市", "肇庆市"]
-    map = Map("广东地图示例", width=1200, height=600)
+    map = Map("广东地图示例", width='1200px', height='600px')
     map.add(
         "",
         attr,
@@ -81,7 +81,7 @@ def test_world_map():
         "United States",
         "Unknown Country",
     ]
-    map = Map("世界地图示例", width=1200, height=600)
+    map = Map("世界地图示例", width='1200px', height='600px')
     map.add(
         "",
         attr,
@@ -103,7 +103,7 @@ def test_world_map():
 def test_china_map():
     value = [155, 10, 66, 78]
     attr = ["福建", "山东", "北京", "上海"]
-    map = Map("全国地图示例", width=1200, height=600)
+    map = Map("全国地图示例", width='1200px', height='600px')
     map.add("", attr, value, maptype="china")
     map.render()
 
@@ -119,7 +119,7 @@ def test_china_map():
 def test_map_visualmap_pieces():
     value = [155, 10, 66, 78]
     attr = ["福建", "山东", "北京", "上海"]
-    map = Map("全国地图示例", width=1200, height=600)
+    map = Map("全国地图示例", width='1200px', height='600px')
     map.add(
         "",
         attr,

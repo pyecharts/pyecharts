@@ -47,12 +47,12 @@ def test_scatter_visualmap_type_size():
 
 
 def test_scatter_draw_love():
-    scatter = Scatter("", width=800, height=480)
+    scatter = Scatter("", width='800px', height='480px')
     scatter.draw("../images/love.png")
 
 
 def test_scatter_draw__hot_red_bra():
-    scatter = Scatter("", width=1000, height=480)
+    scatter = Scatter("", width='1000px', height='480px')
     scatter.draw("../images/cup.png")
 
 

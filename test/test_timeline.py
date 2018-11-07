@@ -76,7 +76,7 @@ def test_timeline_pie():
     pie_5.add("秋季", CLOTHES, [randint(10, 100) for _ in range(6)], **pie_style)
 
     timeline = Timeline(
-        is_auto_play=True, timeline_bottom=0, width=1200, height=600
+        is_auto_play=True, timeline_bottom=0, width='1200px', height='600px'
     )
     timeline.add(pie_1, "2012 年")
     timeline.add(pie_2, "2013 年")
@@ -142,7 +142,7 @@ def test_timeline_map():
     timeline = Timeline(timeline_bottom=0)
     value = [155, 10, 66, 78, 33, 80, 190, 53, 49.6]
     attr = ["福建", "山东", "北京", "上海", "甘肃", "新疆", "河南", "广西", "西藏"]
-    map = Map("Map 结合 VisualMap 示例", width=1200, height=600)
+    map = Map("Map 结合 VisualMap 示例", width='1200px', height='600px')
     map.add(
         "",
         attr,
@@ -155,7 +155,7 @@ def test_timeline_map():
     timeline.add(map, "test1")
     value = [155, 10, 66, 78, 33]
     attr = ["福建", "山东", "北京", "上海", "甘肃"]
-    map = Map("Map 结合 VisualMap 示例", width=1200, height=600)
+    map = Map("Map 结合 VisualMap 示例", width='1200px', height='600px')
     map.add(
         "",
         attr,

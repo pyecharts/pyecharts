@@ -101,7 +101,7 @@ def test_pandas_dataframe():
 def test_echarts_position_in_render_html():
     value = [20, 190, 253, 77, 65]
     attr = ["汕头市", "汕尾市", "揭阳市", "阳江市", "肇庆市"]
-    map = Map("广东地图示例", width=1200, height=600, page_title=TITLE)
+    map = Map("广东地图示例", width='1200px', height='600px', page_title=TITLE)
     map.add(
         "",
         attr,

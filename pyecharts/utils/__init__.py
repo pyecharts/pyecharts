@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 import os
 import sys
 import codecs
+import warnings
 
 from future.utils import viewitems
 
@@ -13,7 +14,6 @@ if PY3:
     string_type = str
 else:
     string_type = basestring
-
 
 __all__ = [
     "get_resource_dir",
@@ -67,6 +67,11 @@ def to_css_length(pixcel_number):
     :return:
     """
     if isinstance(pixcel_number, (int, float)):
+        warnings.warn(
+            'This attribute value with integer is deprecated,'
+            + 'Use a valid css string instead.',
+            DeprecationWarning
+        )
         return "{}px".format(pixcel_number)
 
     else:

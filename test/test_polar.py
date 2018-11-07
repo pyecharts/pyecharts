@@ -26,7 +26,7 @@ def test_polar_type_scatter_one():
 def test_polar_type_scatter_more():
     data_1 = [(10, random.randint(1, 100)) for i in range(300)]
     data_2 = [(11, random.randint(1, 100)) for i in range(300)]
-    polar = Polar("极坐标系-散点图示例", width=1200, height=600)
+    polar = Polar("极坐标系-散点图示例", width='1200px', height='600px')
     polar.add("", data_1, type="scatter")
     polar.add("", data_2, type="scatter")
     polar.render()
@@ -34,13 +34,13 @@ def test_polar_type_scatter_more():
 
 def test_polar_type_effectscatter():
     data = [(i, random.randint(1, 100)) for i in range(10)]
-    polar = Polar("极坐标系-动态散点图示例", width=1200, height=600)
+    polar = Polar("极坐标系-动态散点图示例", width='1200px', height='600px')
     polar.add("", data, type="effectScatter", effect_scale=10, effect_period=5)
     assert '"type": "effectScatter"' in polar._repr_html_()
 
 
 def test_polar_type_barradius():
-    polar = Polar("极坐标系-堆叠柱状图示例", width=1200, height=600)
+    polar = Polar("极坐标系-堆叠柱状图示例", width='1200px', height='600px')
     polar.add(
         "A",
         [1, 2, 3, 4, 3, 5, 1],
@@ -66,7 +66,7 @@ def test_polar_type_barradius():
 
 
 def test_polar_type_barangle():
-    polar = Polar("极坐标系-堆叠柱状图示例", width=1200, height=600)
+    polar = Polar("极坐标系-堆叠柱状图示例", width='1200px', height='600px')
     polar.add(
         "",
         [1, 2, 3, 4, 3, 5, 1],
@@ -98,7 +98,7 @@ def test_polar_draw_love():
         r = 5 * (1 + math.sin(theta / 180 * math.pi))
         data.append([r, theta])
     hour = [i for i in range(1, 25)]
-    polar = Polar("极坐标系示例", width=1200, height=600)
+    polar = Polar("极坐标系示例", width='1200px', height='600px')
     polar.add("Love", data, angle_data=hour, boundary_gap=False, start_angle=0)
     polar.render()
 
@@ -109,7 +109,7 @@ def test_polar_draw_flower():
         t = i / 180 * math.pi
         r = math.sin(2 * t) * math.cos(2 * t)
         data.append([r, i])
-    polar = Polar("极坐标系示例", width=1200, height=600)
+    polar = Polar("极坐标系示例", width='1200px', height='600px')
     polar.add("Flower", data, start_angle=0, symbol=None, axis_range=[0, None])
     polar.render()
 
@@ -120,7 +120,7 @@ def test_polar_draw_color_flower():
         t = i / 180 * math.pi
         r = math.sin(2 * t) * math.cos(2 * t)
         data.append([r, i])
-    polar = Polar("极坐标系示例", width=1200, height=600)
+    polar = Polar("极坐标系示例", width='1200px', height='600px')
     polar.add(
         "Color-Flower",
         data,
@@ -174,7 +174,7 @@ def test_polor_custom_type():
             "style": api.style({"fill": api.visual("color")}),
         }
 
-    polar = Polar("自定义渲染逻辑示例", width=1200, height=600)
+    polar = Polar("自定义渲染逻辑示例", width='1200px', height='600px')
     polar.add(
         "",
         [

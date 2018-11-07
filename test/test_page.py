@@ -73,14 +73,14 @@ def create_three_charts():
         ]
         for _ in range(80)
     ]
-    scatter3d = Scatter3D("3D 散点图示例", width=1200, height=600)
+    scatter3d = Scatter3D("3D 散点图示例", width='1200px', height='600px')
     scatter3d.add("", data, is_visualmap=True, visual_range_color=RANGE_COLOR)
     page.add(scatter3d)
 
     # guangdong
     value = [20, 190, 253, 77, 65]
     attr = ["汕头市", "汕尾市", "揭阳市", "阳江市", "肇庆市"]
-    map = Map("广东地图示例", width=1200, height=600)
+    map = Map("广东地图示例", width='1200px', height='600px')
     map.add(
         "",
         attr,
@@ -257,7 +257,7 @@ def test_more_charts():
         ]
         for _ in range(80)
     ]
-    scatter3D = Scatter3D("3D 散点图示例", width=1200, height=600)
+    scatter3D = Scatter3D("3D 散点图示例", width='1200px', height='600px')
     scatter3D.add("", data, is_visualmap=True, visual_range_color=RANGE_COLOR)
     page.add(scatter3D)
 
@@ -306,7 +306,7 @@ def test_more_charts():
         273,
         265,
     ]
-    wordcloud = WordCloud(width=1300, height=620)
+    wordcloud = WordCloud(width='1300px', height='620px')
     wordcloud.add("", name, value, word_size_range=[30, 100], rotate_step=66)
     page.add(wordcloud)
 

@@ -51,12 +51,12 @@ value = [
 
 
 def test_wordcloud_default():
-    wordcloud = WordCloud(width=1300, height=620)
+    wordcloud = WordCloud(width='1300px', height='620px')
     wordcloud.add("", name, value, word_size_range=[30, 100], rotate_step=66)
     assert "diamond" not in wordcloud._repr_html_()
 
 
 def test_wordcloud_shape_diamond():
-    wordcloud = WordCloud(width=1300, height=620)
+    wordcloud = WordCloud(width='1300px', height='620px')
     wordcloud.add("", name, value, word_size_range=[30, 100], shape="diamond")
     assert "diamond" in wordcloud._repr_html_()

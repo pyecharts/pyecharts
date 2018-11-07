@@ -10,6 +10,7 @@
     * Grid / Overlap / Timeline 等更名为复合图表，并移入 `pyecharts.charts.composite` 包。
     
     #### Deprecated
+    * 图表的 `width` / `height` 不再支持整数形式，必须使用有效的 css 字符串形式，如 '800px'。
     * 类 `pyecharts.echarts.style.Style` 废弃
     * 方法 `Base.cast` 废弃，推荐使用 `pyecharts.shortcuts.cast`
     

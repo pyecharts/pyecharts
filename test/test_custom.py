@@ -21,7 +21,7 @@ def test_page_grid_timeline_overlap():
     # Grid
     v1 = [5, 20, 36, 10, 75, 90]
     v2 = [10, 25, 8, 60, 20, 80]
-    bar = Bar("柱状图示例", height=720, width=1200, title_pos="65%")
+    bar = Bar("柱状图示例", height='720px', width='1200px', title_pos="65%")
     bar.add("商家A", CLOTHES, v1, is_stack=True)
     bar.add("商家B", CLOTHES, v2, is_stack=True, legend_pos="80%")
     line = Line("折线图示例")
@@ -85,7 +85,7 @@ def test_page_grid_timeline_overlap():
     bar_4.add("秋季", CLOTHES, [randint(10, 100) for _ in range(6)])
     bar_4.add("冬季", CLOTHES, [randint(10, 100) for _ in range(6)])
 
-    bar_5 = Bar("2016 年销量", "数据纯属虚构", height=720, width=1200)
+    bar_5 = Bar("2016 年销量", "数据纯属虚构", height='720px', width='1200px')
     bar_5.add("春季", CLOTHES, [randint(10, 100) for _ in range(6)])
     bar_5.add("夏季", CLOTHES, [randint(10, 100) for _ in range(6)])
     bar_5.add("秋季", CLOTHES, [randint(10, 100) for _ in range(6)])
@@ -109,7 +109,7 @@ def test_page_grid_timeline_overlap():
     v2 = [2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3]
     v3 = [2.0, 2.2, 3.3, 4.5, 6.3, 10.2, 20.3, 23.4, 23.0, 16.5, 12.0, 6.2]
 
-    bar = Bar(height=720, width=1200)
+    bar = Bar(height='720px', width='1200px')
     bar.add("蒸发量", attr, v1)
     bar.add("降水量", attr, v2, yaxis_formatter=" ml", yaxis_max=250)
     line = Line()

@@ -68,14 +68,6 @@ def test_echarts_js_container():
         == html
     )  # flake8: noqa
 
-    bar.width = 1024
-    bar.height = 768
-    html = tpl.render(bar=bar)
-    assert (
-        '<div id="id_demo_chart" style="width:1024px;height:768px;"></div>'
-        == html
-    )  # flake8: noqa
-
     bar.width = "1024px"
     bar.height = "768px"
     html = tpl.render(bar=bar)
@@ -107,7 +99,7 @@ def test_create_environment_without_config():
 def test_echarts_js_in_first():
     value = [20, 190, 253, 77, 65]
     attr = ["汕头市", "汕尾市", "揭阳市", "阳江市", "肇庆市"]
-    map = Map("广东地图示例", width=1200, height=600)
+    map = Map("广东地图示例", width='1200px', height='600px')
     map.add(
         "",
         attr,

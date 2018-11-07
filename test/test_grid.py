@@ -22,7 +22,7 @@ from pyecharts.utils import Passport
 def test_grid_top_bottom():
     v1 = [5, 20, 36, 10, 75, 90]
     v2 = [10, 25, 8, 60, 20, 80]
-    bar = Bar("柱状图示例", height=720)
+    bar = Bar("柱状图示例", height='720px')
     bar.add("商家A", CLOTHES, v1, is_stack=True)
     bar.add("商家B", CLOTHES, v2, is_stack=True)
     line = Line("折线图示例", title_top="50%")
@@ -51,7 +51,7 @@ def test_grid_top_bottom():
 def test_grid_left_right():
     v1 = [5, 20, 36, 10, 75, 90]
     v2 = [10, 25, 8, 60, 20, 80]
-    scatter = Scatter(width=1200)
+    scatter = Scatter(width='1200px')
     scatter.add("散点图示例", v1, v2, legend_pos="70%")
     es = EffectScatter()
     es.add(
@@ -71,7 +71,7 @@ def test_grid_left_right():
 def test_grid_four_direction():
     v1 = [5, 20, 36, 10, 75, 90]
     v2 = [10, 25, 8, 60, 20, 80]
-    bar = Bar("柱状图示例", height=720, width=1200, title_pos="65%")
+    bar = Bar("柱状图示例", height='720px', width='1200px', title_pos="65%")
     bar.add("商家A", CLOTHES, v1, is_stack=True)
     bar.add("商家B", CLOTHES, v2, is_stack=True, legend_pos="80%")
     line = Line("折线图示例")
@@ -113,7 +113,7 @@ def test_grid_four_direction():
 
 
 def test_grid_line_pie():
-    line = Line("折线图示例", width=1200)
+    line = Line("折线图示例", width='1200px')
     line.add(
         "最高气温",
         WEEK,
@@ -148,7 +148,7 @@ def test_grid_line_pie():
 
 
 def test_grid_line_kline():
-    line = Line("折线图示例", width=1200)
+    line = Line("折线图示例", width='1200px')
     line.add(
         "最高气温",
         WEEK,
@@ -213,7 +213,7 @@ def test_grid_line_kline():
 
 def test_grid_heatmap_bar():
     data = [[i, j, random.randint(0, 50)] for i in range(24) for j in range(7)]
-    heatmap = HeatMap("热力图示例", height=700)
+    heatmap = HeatMap("热力图示例", height='700px')
     heatmap.add(
         "热力图直角坐标系",
         X_TIME,
@@ -237,7 +237,7 @@ def test_grid_heatmap_bar():
 
 
 def test_grid_multiple_datazoom_index():
-    line = Line("折线图示例", width=1200, height=700)
+    line = Line("折线图示例", width='1200px', height='700px')
     line.add(
         "最高气温",
         WEEK,
@@ -305,7 +305,7 @@ def test_grid_multiple_datazoom_index():
 
 def test_grid_inverse_yaxis():
     attr = ["{}天".format(i) for i in range(1, 31)]
-    line_top = Line("折线图示例", width=1200, height=700)
+    line_top = Line("折线图示例", width='1200px', height='700px')
     line_top.add(
         "最高气温",
         attr,
@@ -340,7 +340,8 @@ def test_grid_add_overlap():
     v2 = [2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3]
     v3 = [2.0, 2.2, 3.3, 4.5, 6.3, 10.2, 20.3, 23.4, 23.0, 16.5, 12.0, 6.2]
 
-    bar = Bar("Overlap+Grid 示例", width=1200, height=600, title_pos="40%")
+    bar = Bar("Overlap+Grid 示例",
+              width='1200px', height='600px', title_pos="40%")
     bar.add("蒸发量", attr, v1)
     bar.add(
         "降水量",

@@ -47,7 +47,7 @@ def test_liquid_svg_path():
         "c4.438-3.126,8.033-7.564,10.117-13.045C389.751,449.992,"
         "382.411,433.709,367.855,428.202z"
     )
-    liquid = Liquid("水球图示例", width=1000, height=600)
+    liquid = Liquid("水球图示例", width='1000px', height='600px')
     liquid.add(
         "Liquid",
         [0.6, 0.5, 0.4, 0.3],

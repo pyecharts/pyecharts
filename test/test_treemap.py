@@ -29,13 +29,13 @@ data = [
 
 
 def test_treemap_default():
-    treemap = TreeMap("树图-默认示例", width=1200, height=600)
+    treemap = TreeMap("树图-默认示例", width='1200px', height='600px')
     treemap.add("演示数据", data, is_label_show=True, label_pos="inside")
     treemap.render()
 
 
 def test_treemap_drilldown():
-    treemap = TreeMap("树图-下钻示例", width=1200, height=600)
+    treemap = TreeMap("树图-下钻示例", width='1200px', height='600px')
     treemap.add(
         "演示数据",
         data,
@@ -47,7 +47,7 @@ def test_treemap_drilldown():
 
 
 def test_treemap_offcical_data():
-    treemap = TreeMap("树图-官方数据", width=1200, height=600)
+    treemap = TreeMap("树图-官方数据", width='1200px', height='600px')
     import os
     import json
     import codecs

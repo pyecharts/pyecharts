@@ -181,7 +181,7 @@ data = [
 
 
 def test_bar3d_default():
-    bar3d = Bar3D("3D 柱状图示例", width=1200, height=600)
+    bar3d = Bar3D("3D 柱状图示例", width='1200px', height='600px')
     bar3d.add(
         "",
         X_TIME,
@@ -197,7 +197,7 @@ def test_bar3d_default():
 
 
 def test_bar3d_shading_lambert():
-    bar3d = Bar3D("3D 柱状图示例", width=1200, height=600)
+    bar3d = Bar3D("3D 柱状图示例", width='1200px', height='600px')
     bar3d.add(
         "",
         X_TIME,
@@ -214,7 +214,7 @@ def test_bar3d_shading_lambert():
 
 
 def test_bar3d_rotate_automatically():
-    bar3d = Bar3D("3D 柱状图示例", width=1200, height=600)
+    bar3d = Bar3D("3D 柱状图示例", width='1200px', height='600px')
     bar3d.add(
         "",
         X_TIME,
@@ -231,7 +231,7 @@ def test_bar3d_rotate_automatically():
 
 
 def test_bar3d_rotate_automatically_speedup():
-    bar3d = Bar3D("3D 柱状图示例", width=1200, height=600)
+    bar3d = Bar3D("3D 柱状图示例", width='1200px', height='600px')
     bar3d.add(
         "",
         X_TIME,
