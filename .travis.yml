@@ -17,5 +17,5 @@ script:
   - python setup.py install
   - make
 after_success:
-  - cd test && codecov
+  cd test && codecov
 
