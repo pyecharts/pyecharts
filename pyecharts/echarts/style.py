@@ -1,5 +1,7 @@
 # coding=utf-8
 
+import warnings
+
 from pyecharts.chart import Chart
 
 
@@ -9,21 +11,18 @@ class Style(Chart):
     """
 
     def __init__(self, title="", subtitle="", **kwargs):
+        warnings.warn(
+            "The class Style is deprecated.",
+            DeprecationWarning,
+        )
         super(Style, self).__init__(title, subtitle, **kwargs)
         self._add_style = None
-        self.init_style = {}
-        for key in kwargs:
-            value = kwargs.get(key)
-            if value is not None:
-                self.init_style.update({key: value})
+        self.init_style = {k: v for k, v in kwargs.items() if v is not None}
 
     def add(self, **kwargs):
         self._add_style = {}
         return self.__add(**kwargs)
 
     def __add(self, **kwargs):
-        for key in kwargs:
-            value = kwargs.get(key)
-            if value is not None:
-                self._add_style.update({key: value})
+        self._add_style = {k: v for k, v in kwargs.items() if v is not None}
         return self._add_style
