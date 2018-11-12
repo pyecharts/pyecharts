@@ -35,9 +35,9 @@ def test_echarts_js_dependencies():
     bar = create_demo_bar()
     html = tpl.render(bar=bar)
     assert (
-        '<script type="text/javascript" src="http://localhost/echarts/echarts.min.js"></script>'
+        '<script type="text/javascript" src="http://localhost/echarts/echarts.min.js"></script>'  # noqa: E501
         == html
-    )  # flake8: noqa
+    )
 
 
 def test_echarts_js_dependencies_embed():
@@ -65,7 +65,7 @@ def test_echarts_js_container():
     assert (
         '<div id="id_demo_chart" style="width:800px;height:400px;"></div>'
         == html
-    )  # flake8: noqa
+    )
 
     bar.width = 1024
     bar.height = 768
@@ -73,7 +73,7 @@ def test_echarts_js_container():
     assert (
         '<div id="id_demo_chart" style="width:1024px;height:768px;"></div>'
         == html
-    )  # flake8: noqa
+    )
 
     bar.width = "1024px"
     bar.height = "768px"
@@ -81,7 +81,7 @@ def test_echarts_js_container():
     assert (
         '<div id="id_demo_chart" style="width:1024px;height:768px;"></div>'
         == html
-    )  # flake8: noqa
+    )
 
 
 def test_echarts_js_content():
@@ -100,7 +100,7 @@ def test_echarts_js_content_wrap():
 
 @raises(TypeError)
 def test_create_environment_without_config():
-    be = BaseEnvironment()
+    BaseEnvironment()
 
 
 def test_echarts_js_in_first():
