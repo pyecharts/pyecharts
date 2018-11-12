@@ -8,20 +8,20 @@ import random
 from pyecharts import Bar
 
 
-X_AXIS = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
-bar = Bar("我的第一个图表", "这里是副标题")
+X_AXIS = ["T-shirt", "Sweater", "Georgette", "Trousers", "High-heels", "Socks"]
+bar = Bar("My first chart", "For our fashion shop client")
 bar.use_theme("dark")
-bar.add("商家A", X_AXIS, [random.randint(10, 100) for _ in range(6)])
-bar.add("商家B", X_AXIS, [random.randint(10, 100) for _ in range(6)])
-bar.add("商家C", X_AXIS, [random.randint(10, 100) for _ in range(6)])
-bar.add("商家D", X_AXIS, [random.randint(10, 100) for _ in range(6)])
+bar.add("Debenhams", X_AXIS, [random.randint(10, 100) for _ in range(6)])
+bar.add("Marks & Spencer", X_AXIS, [random.randint(10, 100) for _ in range(6)])
+bar.add("Premark", X_AXIS, [random.randint(10, 100) for _ in range(6)])
+bar.add("TK Maxx", X_AXIS, [random.randint(10, 100) for _ in range(6)])
 bar.render()
 ```
-![dark](https://user-images.githubusercontent.com/19553554/39868563-c136646a-548c-11e8-87c2-dbf7ae85e844.png)
+![dark](https://user-images.githubusercontent.com/4280312/48332539-2526c180-e64c-11e8-9482-d7e97cc50b93.png)
 
 Default theme effect
 
-![default](https://user-images.githubusercontent.com/19553554/39868566-c20b699e-548c-11e8-861f-5a1b063434c3.png)
+![default](https://user-images.githubusercontent.com/4280312/48332557-3a9beb80-e64c-11e8-8a49-b2e3afdb8aa7.png)
 
 
 ## Theme plugins usage
@@ -71,55 +71,55 @@ bar = Bar()
 
 #### vintage
 
-![vintage](https://user-images.githubusercontent.com/19553554/39868887-1bed3ae0-548e-11e8-99f5-8440ea578080.png)
+![vintage](https://user-images.githubusercontent.com/4280312/48332613-66b76c80-e64c-11e8-9c16-c98779a3a1ee.png)
 
 #### macarons
 
-![macarons](https://user-images.githubusercontent.com/19553554/39868570-c3563a0e-548c-11e8-9795-e0ebea18853f.png)
+![macarons](https://user-images.githubusercontent.com/4280312/48332667-91092a00-e64c-11e8-9a59-76d987c972c9.png)
 
 #### infographic
 
-![infographic](https://user-images.githubusercontent.com/19553554/39868564-c1884dac-548c-11e8-9009-f61162759be3.png)
+![infographic](https://user-images.githubusercontent.com/4280312/48332700-aed68f00-e64c-11e8-9073-8e52b656a90d.png)
 
 #### shine
 
-![shine](https://user-images.githubusercontent.com/19553554/39868565-c1c8951a-548c-11e8-8351-2973cce47679.png)
+![shine](https://user-images.githubusercontent.com/4280312/48332723-ca419a00-e64c-11e8-8664-3b38c15ad086.png)
 
 #### roma
 
-![roma](https://user-images.githubusercontent.com/19553554/39868568-c2c7b798-548c-11e8-9de8-3d3ae148f172.png)
+![roma](https://user-images.githubusercontent.com/4280312/48332772-e9d8c280-e64c-11e8-8167-21caa156104e.png)
 
 #### westeros
 
-![westeros](https://user-images.githubusercontent.com/19553554/43997578-077ff444-9e12-11e8-947b-9b37b279e99f.png)
+![westeros](https://user-images.githubusercontent.com/4280312/48332802-0d037200-e64d-11e8-8f11-1fb6db6171ca.png)
 
 #### wonderland
 
-![wonderland](https://user-images.githubusercontent.com/19553554/43997583-31b32b8c-9e12-11e8-8f39-4ef027e7a223.png)
+![wonderland](https://user-images.githubusercontent.com/4280312/48332842-33c1a880-e64d-11e8-992b-c40676a2fef6.png)
 
 #### chalk
 
-![chalk](https://user-images.githubusercontent.com/19553554/43997593-6835b652-9e12-11e8-98ff-1894c4475b5a.png)
+![chalk](https://user-images.githubusercontent.com/4280312/48332856-4a67ff80-e64d-11e8-913e-28deae7f8058.png)
 
 #### halloween
 
-![halloween](https://user-images.githubusercontent.com/19553554/43997599-97fcc038-9e12-11e8-878d-0a9a538ad75e.png)
+![halloween](https://user-images.githubusercontent.com/4280312/48332927-8307d900-e64d-11e8-840a-cfa3e5ca405e.png)
 
 #### essos
 
-![essos](https://user-images.githubusercontent.com/19553554/43997602-c0ce6390-9e12-11e8-94ba-5215b9e2c85b.png)
+![essos](https://user-images.githubusercontent.com/4280312/48332950-9a46c680-e64d-11e8-91b6-5afa8c2f0a98.png)
 
 #### walden
 
-![walden](https://user-images.githubusercontent.com/19553554/43997620-3868a01e-9e13-11e8-84d5-79e998051170.png)
+![walden](https://user-images.githubusercontent.com/4280312/48332982-afbbf080-e64d-11e8-8318-6274426add0c.png)
 
 #### purple-passion
 
-![purple-passion](https://user-images.githubusercontent.com/19553554/43997624-56ed56e2-9e13-11e8-95be-8815e1bdf0e5.png)
+![purple-passion](https://user-images.githubusercontent.com/4280312/48333020-cd895580-e64d-11e8-9770-7b37eedc4e6e.png)
 
 #### romantic
 
-![romantic](https://user-images.githubusercontent.com/19553554/44029175-eef6f170-9f2e-11e8-82cb-b60a39b28762.png)
+![romantic](https://user-images.githubusercontent.com/4280312/48333043-e134bc00-e64d-11e8-9319-77522965d1cc.png)
 
 
 ## Use your own built theme

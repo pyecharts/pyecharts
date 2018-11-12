@@ -36,13 +36,13 @@ Now, you are ready to make your first chart!
 ```python
 from pyecharts import Bar
 
-bar = Bar("我的第一个图表", "这里是副标题")
-bar.add("服装", ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"], [5, 20, 36, 10, 75, 90])
+bar = Bar("My first bar chart", "For our fashion shop client")
+bar.add("Clothes", ["T-shirt", "Sweater", "Georgette", "Trousers", "High-heels", "Socks"], [5, 20, 36, 10, 75, 90])
 # bar.print_echarts_options() # This line is only for printing configuration items, which is convenient for debugging.
 bar.render()  # generate a local HTML file
 ```
 
-![guide-0](https://user-images.githubusercontent.com/19553554/35103909-3ee41ba2-fca2-11e7-87be-1a3585b9e0fa.png)
+![guide-0](https://user-images.githubusercontent.com/4280312/45588036-41d1a200-b906-11e8-83f9-fc84e8b0eccd.png)
 
 * ```add()```
     main method，add the data and set up various options of the chart
@@ -58,12 +58,12 @@ bar.render()  # generate a local HTML file
 ```python
 from pyecharts import Bar
 
-bar = Bar("我的第一个图表", "这里是副标题")
-bar.add("服装", ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"], [5, 20, 36, 10, 75, 90],
+bar = Bar("My first bar chart", "For our fashion shop client")
+bar.add("Clothes", ["T-shirt", "Sweater", "Georgette", "Trousers", "High-heels", "Socks"], [5, 20, 36, 10, 75, 90],
         is_more_utils=True)
 bar.render()
 ```
-![guide-1](https://user-images.githubusercontent.com/19553554/35104150-f31e1b7c-fca2-11e7-81cf-a12bf1629e02.png)
+![guide-1](https://user-images.githubusercontent.com/4280312/45588058-9aa13a80-b906-11e8-9d41-dd8b9f625c6d.png)
 
 
 ### Use theme
@@ -73,19 +73,19 @@ Since 0.5.2+, pyecharts has supported the replacement of the theme color. Here's
 ```python
 from pyecharts import Bar
 
-bar = Bar("我的第一个图表", "这里是副标题")
+bar = Bar("My first bar chart", "For our fashion shop client")
 bar.use_theme('dark')
-bar.add("服装", ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"], [5, 20, 36, 10, 75, 90])
+bar.add("Clothes", ["T-shirt", "Sweater", "Georgette", "Trousers", "High-heels", "Socks"], [5, 20, 36, 10, 75, 90])
 bar.render()
 ```
-![guide-2](https://user-images.githubusercontent.com/4280312/39617664-79789878-4f78-11e8-9f0e-c3a2c371b6cb.png)
+![guide-2](https://user-images.githubusercontent.com/4280312/45588084-e9e76b00-b906-11e8-99d7-9e3d651bfcc2.png)
 
 pyecharts supports extra 5 body colors, [Please move to the theme color for more configuration information](en-us/themes).
 
 
 ### Rendering as image using pyecharts-snapshot
 
-If you would to get png, pdf, gif files instead of `render.html`, you can use [pyecharts-snapshot](https://github.com/chfw/pyecharts-snapshot)。However, node.js is required and can be downloaded from [https://nodejs.org/en/download/](https://nodejs.org/en/download/)
+To get png, pdf, gif files instead of `render.html`, [pyecharts-snapshot](https://github.com/pyecharts/pyecharts-snapshot) is required。What's more, node.js is also required and can be downloaded from [https://nodejs.org/en/download/](https://nodejs.org/en/download/).
 
 1. Install phantomjs  
     `npm install -g phantomjs-prebuilt`
@@ -93,14 +93,14 @@ If you would to get png, pdf, gif files instead of `render.html`, you can use [p
     `pip install pyecharts-snapshot`
 3. Call `render` method  
     `bar.render(path='snapshot.png')`  
-    The file suffix can be svg/jpeg/png/pdf/gif. Note that the svg file requires you to set `renderer='svg'` when initialize bar chart.
+    The file suffix can be svg/jpeg/png/pdf/gif. Note that the svg file requires you to set `renderer='svg'` in the chart's constructor.
 
-For more details, please refer to [pyecharts-snapshot](https://github.com/chfw/pyecharts-snapshot)  
+For more details, please refer to [pyecharts-snapshot](https://github.com/pyecharts/pyecharts-snapshot)  
 
 
 ### Chart drawing process
 
-The chart class provides several methods for building and rendering. In the using process, it is recommended to call them in the following order:
+A chart class provides the following apis for building and rendering. Here are the generic steps to draw your own chart:
 
 | Step | Describe | Code example | Remarks |
 | ------ | ------ | ------ | ------ |
@@ -110,18 +110,18 @@ The chart class provides several methods for building and rendering. In the usin
 | 4  | Add data and configuration items| `chart.add()` | Refer to [Data Analysis and Import](en-us/data_import) |
 | 5  | Generate local file(html/svg/jpeg/png/pdf/gif)| `chart.render()` | |
 
-From v0.5.9, the methods involved above support chain calls. E.g:
+From v0.5.9, the methods involved above support method-chaining. For example:
 
 ```python
 from pyecharts import Bar
 
-CLOTHES = ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
+CLOTHES = ["T-shirt", "Sweater", "Georgette", "Trousers", "High-heels", "Socks"]
 clothes_v1 = [5, 20, 36, 10, 75, 90]
 clothes_v2 = [10, 25, 8, 60, 20, 80]
 
-(Bar("柱状图数据堆叠示例")
-    .add("商家A", CLOTHES, clothes_v1, is_stack=True)
-    .add("商家B", CLOTHES, clothes_v2, is_stack=True)
+(Bar("My second bar chart")
+    .add("H&M", CLOTHES, clothes_v1, is_stack=True)
+    .add("Zara", CLOTHES, clothes_v2, is_stack=True)
     .render())
 ```
 
@@ -165,7 +165,7 @@ env.render_chart_to_file(bar, path='bar.html')
 env.render_chart_to_file(line, path='line.html')
 ```
 
-This example use the only one engine object to render multiple charts.
+This example uses the only one engine object to render multiple charts.
 
 ### Pandas & Numpy examples
 
@@ -191,6 +191,6 @@ more Jupyter notebook examples, please refer to [notebook-use-cases](https://git
 
 Use Jupyter Notebook to display charts, just call your own instance and be compatible with Python2 and Python3's Jupyter Notebook environment. All charts can be displayed normally, and the interactive experience is consistent with the browser. It is even no need PPT with this method to display report! !
 
-### Offline installation instructions for pyecharts 0.3.2 +
+### Offline installation instructions for pyecharts
 
-Please download these three packages from pypi: pyecharts, pyecharts-jupyter-installer, 和 jupyter-echarts-pypkg. 
+Please visit faq section for more details
