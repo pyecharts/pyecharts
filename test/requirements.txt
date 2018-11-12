@@ -10,4 +10,4 @@ pillow
 mock;python_version<"3"
 echarts-countries-pypkg
 echarts-china-cities-pypkg
-echarts-china-provinces-pypkg
+echarts-china-provinces-pypkg>=0.0.3

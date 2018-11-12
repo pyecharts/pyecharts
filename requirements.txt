@@ -1,6 +1,6 @@
 jinja2>=2.8
 future
-lml>=0.0.2
-jupyter-echarts-pypkg>=0.1.1
+lml>=0.0.6
+jupyter-echarts-pypkg>=0.1.4
 javascripthon>=0.10; python_version>"3.4"
 requests; python_version<"3.5"
