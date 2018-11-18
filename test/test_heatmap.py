@@ -44,7 +44,8 @@ def test_heatmap_display_yaxis_label():
     )
     html_content = heatmap._repr_html_()
     assert r'"formatter": "{value} "' not in html_content
-    assert str(X_TIME) in html_content
+    assert "Saturday" in html_content
+    assert "Monday" in html_content
 
 
 def test_heatmap_yaxis_formatter():
@@ -63,7 +64,8 @@ def test_heatmap_yaxis_formatter():
     )
     html_content = heatmap._repr_html_()
     assert r'"formatter": "{value} "' in html_content
-    assert str(X_TIME) in html_content
+    assert "Saturday" in html_content
+    assert "Monday" in html_content
 
 
 def test_heatmap_calendar():
