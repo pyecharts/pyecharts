@@ -44,6 +44,8 @@ class HeatMap(Chart):
         else:
             name, x_axis, y_axis, data = args
 
+        if "yaxis_formatter" not in kwargs:
+            kwargs["yaxis_formatter"] = None
         chart = self._get_all_options(**kwargs)
         self._option.get("legend")[0].get("data").append(name)
 
