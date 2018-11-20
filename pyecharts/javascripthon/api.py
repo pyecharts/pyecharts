@@ -12,6 +12,7 @@ from collections import OrderedDict
 from contextlib import contextmanager
 
 from pyecharts.javascripthon.compat import TranslatorCompatAPI
+from pyecharts.utils import Passport
 
 __all__ = ["EChartsTranslator"]
 
@@ -73,6 +74,9 @@ class MyJSONEncoder(json.JSONEncoder):
 
         if isinstance(obj, (datetime.datetime, datetime.date)):
             return obj.isoformat()
+
+        if isinstance(obj, Passport):
+            return obj.value
 
         # Pandas and Numpy lists
         if obj.__class__.__name__ in ("ndarray", "Series", "DataFrame"):

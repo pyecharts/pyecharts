@@ -132,10 +132,6 @@ def _clean_dict(mydict):
                 # delete key with empty string
                 continue
 
-            elif isinstance(value, Passport):
-                passport = value
-                value = passport.value
-
             yield (key, value)
 
 
