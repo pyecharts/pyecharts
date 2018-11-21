@@ -9,7 +9,7 @@ from nose.tools import eq_
 
 from pyecharts import Bar, Polar
 from pyecharts.javascripthon.api import EChartsTranslator
-from pyecharts.utils import NULL
+from pyecharts.javascripthon.dom import NULL
 
 # ------ Test Cases for Chart Rendering -----
 

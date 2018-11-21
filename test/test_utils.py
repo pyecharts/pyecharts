@@ -6,8 +6,8 @@ import os
 
 from nose.tools import eq_
 
+from pyecharts.javascripthon.dom import NULL
 from pyecharts.utils import (
-    NULL,
     get_resource_dir,
     merge_js_dependencies,
     remove_key_with_none_value,

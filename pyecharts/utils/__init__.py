@@ -24,18 +24,6 @@ __all__ = [
 ]
 
 
-class Passport(object):
-    def __init__(self, reason, value=None):
-        self.reason = reason
-        self.value = value
-
-    def __str__(self):
-        return self.reason
-
-
-NULL = Passport("To pass None type through remove_key_with_none_value")
-
-
 def get_resource_dir(*paths):
     """
     Return absolute path for a directory or file inside the project.
