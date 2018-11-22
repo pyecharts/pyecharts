@@ -6,7 +6,7 @@ from random import randint
 from test.constants import CLOTHES
 
 from pyecharts import NULL, Bar, Line, Map, Overlap, Pie, Style, Timeline
-from pyecharts.utils import Passport
+from pyecharts.javascripthon.dom import JsValue
 
 
 def test_timeline_bar():
@@ -239,5 +239,5 @@ def test_null_in_timeline_options():
     timeline.add(bar_1, "2012 年")
 
     assert isinstance(
-        timeline._option["options"][0]["series"][0]["symbol"], Passport
+        timeline._option["options"][0]["series"][0]["symbol"], JsValue
     )

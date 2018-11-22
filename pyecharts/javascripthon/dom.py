@@ -31,3 +31,14 @@ class screen:
 
 def alert(msg):
     pass
+
+
+class JsValue(object):
+    def __init__(self, value=None):
+        self.value = value
+
+    def __json__(self):
+        return self.value
+
+
+NULL = JsValue()
