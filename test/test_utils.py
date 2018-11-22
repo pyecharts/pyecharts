@@ -6,8 +6,8 @@ import os
 
 from nose.tools import eq_
 
+from pyecharts.javascripthon.dom import NULL
 from pyecharts.utils import (
-    NULL,
     get_resource_dir,
     merge_js_dependencies,
     remove_key_with_none_value,
@@ -92,14 +92,12 @@ def test_remove_key_with_none_value():
             {"nested": {"ac": 1, "bc": None, "nested": {"a": 1, "b": None}}},
             {"normal": 1, "empty_string": ""},
         ],
-        "not_set": NULL,
     }
     actual_result = remove_key_with_none_value(fixture)
     expected = {
         "a": 1,
         "array": [1, {"nested": {"ac": 1, "nested": {"a": 1}}}, {"normal": 1}],
         "nested": {"ac": 1, "nested": {"a": 1}},
-        "not_set": None,
     }
     eq_(actual_result, expected)
 

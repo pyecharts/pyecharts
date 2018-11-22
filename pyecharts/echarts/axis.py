@@ -29,9 +29,8 @@ class XAxisLabel(AxisLabel):
 
 class YAxisLabel(AxisLabel):
     def __init__(self, formatter=None, **kwargs):
-        if (
-            formatter is not None and
-            not isinstance(formatter, types.FunctionType)
+        if formatter is not None and not isinstance(
+            formatter, types.FunctionType
         ):
             formatter = "{value} " + formatter
         super(YAxisLabel, self).__init__(formatter=formatter, **kwargs)

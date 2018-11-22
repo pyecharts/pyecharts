@@ -40,7 +40,7 @@ def test_heatmap_display_yaxis_label():
         is_visualmap=True,
         is_label_show=False,
         visual_text_color="#000",
-        visual_orient='horizontal',
+        visual_orient="horizontal",
     )
     html_content = heatmap._repr_html_()
     assert r'"formatter": "{value} "' not in html_content
@@ -59,7 +59,7 @@ def test_heatmap_yaxis_formatter():
         is_visualmap=True,
         is_label_show=False,
         visual_text_color="#000",
-        visual_orient='horizontal',
+        visual_orient="horizontal",
         yaxis_formatter="",
     )
     html_content = heatmap._repr_html_()

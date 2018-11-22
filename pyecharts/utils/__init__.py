@@ -24,18 +24,6 @@ __all__ = [
 ]
 
 
-class Passport(object):
-    def __init__(self, reason, value=None):
-        self.reason = reason
-        self.value = value
-
-    def __str__(self):
-        return self.reason
-
-
-NULL = Passport("To pass None type through remove_key_with_none_value")
-
-
 def get_resource_dir(*paths):
     """
     Return absolute path for a directory or file inside the project.
@@ -131,10 +119,6 @@ def _clean_dict(mydict):
             elif isinstance(value, string_type) and not value:
                 # delete key with empty string
                 continue
-
-            elif isinstance(value, Passport):
-                passport = value
-                value = passport.value
 
             yield (key, value)
 

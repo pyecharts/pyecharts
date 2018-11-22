@@ -11,10 +11,7 @@ class Style(Chart):
     """
 
     def __init__(self, title="", subtitle="", **kwargs):
-        warnings.warn(
-            "The class Style is deprecated.",
-            DeprecationWarning,
-        )
+        warnings.warn("The class Style is deprecated.", DeprecationWarning)
         super(Style, self).__init__(title, subtitle, **kwargs)
         self._add_style = None
         self.init_style = {k: v for k, v in kwargs.items() if v is not None}
