@@ -7,8 +7,8 @@ from jinja2 import Markup
 import pyecharts.constants as constants
 import pyecharts.engine as engine
 import pyecharts.utils as utils
-from pyecharts.interfaces import IPythonRichDisplayMixin
 from pyecharts.conf import CURRENT_CONFIG
+from pyecharts.interfaces import IPythonRichDisplayMixin
 
 
 class Page(IPythonRichDisplayMixin):

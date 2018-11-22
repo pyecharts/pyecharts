@@ -16,7 +16,7 @@ from pyecharts import (
     Pie,
     Scatter,
 )
-from pyecharts.utils import Passport
+from pyecharts.javascripthon.dom import JsValue
 
 
 def test_grid_top_bottom():
@@ -373,4 +373,4 @@ def test_not_set_in_grid():
     grid = Grid()
     grid.add(line, grid_top="10%")
 
-    assert isinstance(grid._option["series"][0]["symbol"], Passport)
+    assert isinstance(grid._option["series"][0]["symbol"], JsValue)

@@ -5,7 +5,11 @@ from __future__ import unicode_literals
 import os
 from test.utils import get_default_rendering_file_content
 
+from nose.tools import eq_
+
 from pyecharts import Bar, Polar
+from pyecharts.javascripthon.api import EChartsTranslator
+from pyecharts.javascripthon.dom import NULL
 
 # ------ Test Cases for Chart Rendering -----
 
@@ -82,3 +86,9 @@ def test_polar_draw_snail():
     assert 'return "test"' in content
     assert '"renderItem": custom_polar_render_item' in content
     os.unlink("render.html")
+
+
+def test_translate_null_field():
+    obj = {"not_set": NULL}
+    json = EChartsTranslator.dumps(obj)
+    eq_('{"not_set": null}', json)

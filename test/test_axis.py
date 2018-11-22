@@ -9,17 +9,13 @@ from pyecharts.echarts import YAxisLabel
 
 def test_yaxis_wo_formatter():
     label = YAxisLabel(
-        interval="auto",
-        rotate=0,
-        margin=8,
-        text_size=12,
-        text_color="#000",
+        interval="auto", rotate=0, margin=8, text_size=12, text_color="#000"
     )
     assert label.__json__() == {
-        'interval': 'auto',
-        'rotate': 0,
-        'margin': 8,
-        'textStyle': {'fontSize': 12, 'color': '#000'},
+        "interval": "auto",
+        "rotate": 0,
+        "margin": 8,
+        "textStyle": {"fontSize": 12, "color": "#000"},
     }
 
 
@@ -33,10 +29,10 @@ def test_yaxis_none_formatter():
         formatter=None,
     )
     assert label.__json__() == {
-        'interval': 'auto',
-        'rotate': 0,
-        'margin': 8,
-        'textStyle': {'fontSize': 12, 'color': '#000'},
+        "interval": "auto",
+        "rotate": 0,
+        "margin": 8,
+        "textStyle": {"fontSize": 12, "color": "#000"},
     }
 
 
@@ -50,11 +46,11 @@ def test_yaxis_str_formatter():
         formatter="",
     )
     assert label.__json__() == {
-        'interval': 'auto',
-        'rotate': 0,
-        'margin': 8,
-        'textStyle': {'fontSize': 12, 'color': '#000'},
-        'formatter': '{value} ',
+        "interval": "auto",
+        "rotate": 0,
+        "margin": 8,
+        "textStyle": {"fontSize": 12, "color": "#000"},
+        "formatter": "{value} ",
     }
 
 
@@ -71,11 +67,11 @@ def test_yaxis_func_formatter():
         formatter=formatter,
     )
     json_obj = label.__json__()
-    assert isinstance(json_obj['formatter'], types.FunctionType)
-    del json_obj['formatter']
+    assert isinstance(json_obj["formatter"], types.FunctionType)
+    del json_obj["formatter"]
     assert json_obj == {
-        'interval': 'auto',
-        'rotate': 0,
-        'margin': 8,
-        'textStyle': {'fontSize': 12, 'color': '#000'},
+        "interval": "auto",
+        "rotate": 0,
+        "margin": 8,
+        "textStyle": {"fontSize": 12, "color": "#000"},
     }
