@@ -49,6 +49,7 @@ from pyecharts.app import configure
 from pyecharts.app import jupyter_image
 from pyecharts.utils import NULL
 
+
 # Deprecated Feature
 from pyecharts.echarts.style import Style
 

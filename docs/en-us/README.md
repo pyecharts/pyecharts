@@ -7,9 +7,9 @@
 
 **Basic Usage**
 
-[Chart Render](en-us/prepare) | [Chart Configuration](en-us/charts_configure) | [Chart Basic](en-us/charts_base) | [Chart Customization](en-us/charts_custom) | [Chart Style](en-us/charts_style) | [Data Analysis and Import](en-us/data_import)
+[Get started](en-us/prepare) | [Chart Configuration](en-us/charts_configure) | [Basic Charts](en-us/charts_base) | [Custom Charts](en-us/charts_custom) | [Chart Style](en-us/charts_style) | [Data Analysis and Import](en-us/data_import)
 
-**Advance Topics**
+**Advanced Topics**
 
 [Chart API](en-us/api) | [Themes Customization](en-us/themes) | [Map Customization](en-us/customize_map) | [Callback Function & Event Handler](en-us/advanced) | [Language Translator Extension](en-us/translator)
 
