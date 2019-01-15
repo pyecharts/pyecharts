@@ -47,7 +47,6 @@ from pyecharts.app import online
 from pyecharts.app import enable_nteract
 from pyecharts.app import configure
 from pyecharts.app import jupyter_image
-from pyecharts.utils import NULL
 
 
 # Deprecated Feature
