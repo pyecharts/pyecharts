@@ -1,16 +1,18 @@
 from pyecharts.echarts.json_serializable import JsonSerializable
+from ..types import Numeric
 
 
 class Label(JsonSerializable):
     def __init__(
         self,
-        visibility=False,
-        position="inside",
-        text_color=None,
-        text_size=12,
-        formatter=None,
-        chart_type=None,
+        visibility: bool = False,
+        position: str = "inside",
+        text_color: str = None,
+        text_size: Numeric = 12,
+        formatter: str = "",
+        chart_type: str = "",
     ):
+        super(Label, self).__init__()
         self._config = {
             "show": visibility,
             "position": position,

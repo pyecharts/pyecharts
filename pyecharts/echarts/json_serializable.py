@@ -1,10 +1,9 @@
 # coding=utf8
 
-from pyecharts.interfaces import JSONSerializableMixin
 from pyecharts.utils import remove_key_with_none_value
 
 
-class JsonSerializable(JSONSerializableMixin):
+class JsonSerializable:
     def __init__(self):
         self._config = {}
 

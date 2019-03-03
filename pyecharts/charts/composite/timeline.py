@@ -3,7 +3,7 @@
 import copy
 
 from pyecharts.base import Base
-from pyecharts.constants import PAGE_TITLE
+from pyecharts.consts import PAGE_TITLE
 from pyecharts.utils import merge_js_dependencies
 
 
@@ -101,9 +101,7 @@ class Timeline(Base):
         self._option.get("baseOption").update(
             backgroundColor=chart_options.get("backgroundColor")
         )
-        self._option.get("baseOption").get("timeline").update(
-            data=self._time_points
-        )
+        self._option.get("baseOption").get("timeline").update(data=self._time_points)
         self._option.get("options").append(
             {
                 "color": chart_options.get("color"),

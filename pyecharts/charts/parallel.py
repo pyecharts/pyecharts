@@ -47,9 +47,7 @@ class Parallel(Chart):
         """The old alias name for set_schema.
         """
         deprecated_tpl = "The {} is deprecated, please use {} instead!"
-        warnings.warn(
-            deprecated_tpl.format("config", "set_schema"), DeprecationWarning
-        )
+        warnings.warn(deprecated_tpl.format("config", "set_schema"), DeprecationWarning)
         return self.set_schema(schema=schema, c_schema=c_schema)
 
     def __add(self, name, data, **kwargs):
@@ -63,12 +61,7 @@ class Parallel(Chart):
         """
         chart = self._get_all_options(**kwargs)
         self._option.update(
-            parallel={
-                "left": "5%",
-                "right": "13%",
-                "bottom": "10%",
-                "top": "20%",
-            }
+            parallel={"left": "5%", "right": "13%", "bottom": "10%", "top": "20%"}
         )
         self._option.get("legend")[0].get("data").append(name)
 

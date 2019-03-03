@@ -16,13 +16,7 @@ class Funnel(Chart):
         return self
 
     def __add(
-        self,
-        name,
-        attr,
-        value,
-        funnel_sort="descending",
-        funnel_gap=0,
-        **kwargs
+        self, name, attr, value, funnel_sort="descending", funnel_gap=0, **kwargs
     ):
         """
 

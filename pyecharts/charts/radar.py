@@ -78,9 +78,7 @@ class Radar(Chart):
         """The old alias for set_schema.
         """
         deprecated_tpl = "The {} is deprecated, please use {} instead!"
-        warnings.warn(
-            deprecated_tpl.format("config", "set_schema"), DeprecationWarning
-        )
+        warnings.warn(deprecated_tpl.format("config", "set_schema"), DeprecationWarning)
         return self.set_radar_component(
             schema=schema,
             c_schema=c_schema,

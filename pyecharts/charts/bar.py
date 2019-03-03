@@ -1,5 +1,7 @@
 # coding=utf-8
 
+from typing import Any
+
 from pyecharts.chart import Chart
 
 
@@ -11,20 +13,37 @@ class Bar(Chart):
     """
 
     def __init__(self, title="", subtitle="", **kwargs):
-        super(Bar, self).__init__(title, subtitle, **kwargs)
+        super().__init__(title, subtitle, **kwargs)
+        self.options.update(yAxis={})
+
+    def add_xaxis(self, xaxis_data: Any):
+        self.options.update(xAxis=dict(data=xaxis_data))
+        return self
+
+    def add_yaxis(self, series_name: str, yaxis_data: Any):
+        self.options.get("legend")[0].get("data").append(series_name)
+        self.options.get("series").append(
+            {
+                "type": "bar",
+                "name": series_name,
+                "data": yaxis_data,
+                # "seriesId": self._option.get("series_id"),
+            }
+        )
+        return self
+
+    def set_series_opts(self):
+        return self
+
+    def set_global_opts(self):
+        return self
 
     def add(self, *args, **kwargs):
         self.__add(*args, **kwargs)
         return self
 
     def __add(
-        self,
-        name,
-        x_axis,
-        y_axis,
-        is_stack=False,
-        bar_category_gap="20%",
-        **kwargs
+        self, name, x_axis, y_axis, is_stack=False, bar_category_gap="20%", **kwargs
     ):
         """
 
@@ -38,7 +57,7 @@ class Bar(Chart):
             数据堆叠，同个类目轴上系列配置相同的 stack 值可以堆叠放置。默认为 False。
         :param kwargs:
         """
-        assert len(x_axis) == len(y_axis)
+        # assert len(x_axis) == len(y_axis)
         kwargs.update(x_axis=x_axis)
         chart = self._get_all_options(**kwargs)
 
@@ -64,3 +83,6 @@ class Bar(Chart):
             }
         )
         self._config_components(**kwargs)
+
+
+Bar().add_xaxis(["A", "B", "C"]).add_yaxis("bar0", [1, 2, 4]).add_yaxis("bar1", [2, 3, 6]).render("render.html")

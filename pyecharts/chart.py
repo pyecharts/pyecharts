@@ -1,10 +1,13 @@
 # coding=utf-8
 
 import random
+from typing import Optional
 
-import pyecharts.constants as constants
+from pyecharts import consts
 from pyecharts.base import Base
 from pyecharts.echarts.option import get_base_options
+
+from .types import Numeric
 
 
 class Chart(Base):
@@ -14,21 +17,19 @@ class Chart(Base):
 
     def __init__(
         self,
-        title,
-        subtitle,
-        width=800,
-        height=400,
-        title_pos="auto",
-        title_top="auto",
-        title_color=None,
-        subtitle_color=None,
-        title_text_size=18,
-        subtitle_text_size=12,
-        background_color=None,
-        page_title=constants.PAGE_TITLE,
-        renderer=constants.CANVAS_RENDERER,
-        extra_html_text_label=None,
-        is_animation=True,
+        title: str,
+        subtitle: str,
+        width: str = "800px",
+        height: str = "400px",
+        title_left: str = "auto",
+        title_top: str = "auto",
+        title_color: Optional[str] = None,
+        subtitle_color: Optional[str] = None,
+        title_text_size: Numeric = 18,
+        subtitle_text_size: Numeric = 12,
+        background_color: Optional[str] = None,
+        page_title: str = consts.PAGE_TITLE,
+        renderer: str = consts.CANVAS_RENDERER,
     ):
         """
 
@@ -40,7 +41,7 @@ class Chart(Base):
             画布宽度，默认为 800（px）
         :param height:
             画布高度，默认为 400（px）
-        :param title_pos:
+        :param title_left:
             标题距离左侧距离，默认为'left'，有'auto', 'left', 'right',
             'center'可选，也可为百分比或整数
         :param title_top:
@@ -61,58 +62,21 @@ class Chart(Base):
         :param renderer:
             指定使用渲染方式，有 'svg' 和 'canvas' 可选，默认为 'canvas'。
             3D 图仅能使用 'canvas'。
-        :param extra_html_text_label:
-            额外的 HTML 文本标签，(<p> 标签)。类型为 list，list[0] 为文本内容，
-            list[1] 为字体风格样式（选填）。如 ["this is a p label", "color:red"]
         :param is_animation:
             是否开启动画，默认为 True。V0.5.9+
         """
-        super(Chart, self).__init__(
-            width=width,
-            height=height,
-            renderer=renderer,
-            page_title=page_title,
-            extra_html_text_label=extra_html_text_label,
-            is_animation=is_animation,
+        super().__init__(
+            width=width, height=height, renderer=renderer, page_title=page_title
         )
-        self._colorlst = [
-            "#c23531",
-            "#2f4554",
-            "#61a0a8",
-            "#d48265",
-            "#749f83",
-            "#ca8622",
-            "#bda29a",
-            "#6e7074",
-            "#546570",
-            "#c4ccd3",
-            "#f05b72",
-            "#ef5b9c",
-            "#f47920",
-            "#905a3d",
-            "#fab27b",
-            "#2a5caa",
-            "#444693",
-            "#726930",
-            "#b2d235",
-            "#6d8346",
-            "#ac6767",
-            "#1d953f",
-            "#6950a1",
-            "#918597",
-            "#f6f5ec",
-        ]
-        self._option.update(
+        self._colorlst = consts.COLOR_LST
+        self.options.update(
             title=[
                 {
                     "text": title,
                     "subtext": subtitle,
-                    "left": title_pos,
+                    "left": title_left,
                     "top": title_top,
-                    "textStyle": {
-                        "color": title_color,
-                        "fontSize": title_text_size,
-                    },
+                    "textStyle": {"color": title_color, "fontSize": title_text_size},
                     "subtextStyle": {
                         "color": subtitle_color,
                         "fontSize": subtitle_text_size,
@@ -135,7 +99,6 @@ class Chart(Base):
             series=[],
             legend=[{"data": []}],
             backgroundColor=background_color,
-            animation=self.is_animation,
         )
 
     def add(
@@ -388,11 +351,7 @@ class Chart(Base):
         return self
 
     def _config_components(
-        self,
-        is_visualmap=False,
-        is_more_utils=False,
-        is_toolbox_show=True,
-        **kwargs
+        self, is_visualmap=False, is_more_utils=False, is_toolbox_show=True, **kwargs
     ):
         """
         图形组件配置项
@@ -407,32 +366,32 @@ class Chart(Base):
             指定是否显示工具箱
         :param kwargs:
         """
-        if self.theme == constants.LIGHT_THEME:
+        if self.theme == consts.LIGHT_THEME:
             kwargs.update(colorlst=self._colorlst)
         chart = get_base_options(**kwargs)
-        self._option.update(color=chart["color"])
+        self.options.update(color=chart["color"])
 
         # legend
-        self._option.get("legend")[0].update(chart["legend"])
+        self.options.get("legend")[0].update(chart["legend"])
 
         # tooltip
-        self._option.update(tooltip=chart["tooltip"])
+        self.options.update(tooltip=chart["tooltip"])
 
         # dataZoom，勿改动
         if kwargs.get("is_datazoom_show", False) is True:
-            self._option.update(dataZoom=chart["datazoom"])
+            self.options.update(dataZoom=chart["datazoom"])
         if kwargs.get("is_datazoom_extra_show", False) is True:
-            _dz = self._option.get("dataZoom", [])
+            _dz = self.options.get("dataZoom", [])
             _dz.extend(chart["datazoom_extra"])
-            self._option.update(dataZoom=_dz)
+            self.options.update(dataZoom=_dz)
 
         # visualMap
         if is_visualmap:
-            self._option.update(visualMap=chart["visual_map"])
+            self.options.update(visualMap=chart["visual_map"])
 
         # toolbox
         if is_more_utils:
-            self._option.get("toolbox").get("feature").update(
+            self.options.get("toolbox").get("feature").update(
                 magicType={
                     "show": True,
                     "type": ["line", "bar", "stack", "tiled"],
@@ -443,14 +402,11 @@ class Chart(Base):
                         "tiled": "平铺",
                     },
                 },
-                dataZoom={
-                    "show": True,
-                    "title": {"zoom": "区域缩放", "back": "缩放还原"},
-                },
+                dataZoom={"show": True, "title": {"zoom": "区域缩放", "back": "缩放还原"}},
             )
 
         if not is_toolbox_show:
-            self._option.pop("toolbox", None)
+            self.options.pop("toolbox", None)
 
 
 class Chart3D(Chart):
@@ -459,9 +415,9 @@ class Chart3D(Chart):
     """
 
     def __init__(self, title="", subtitle="", **kwargs):
-        kwargs["renderer"] = constants.CANVAS_RENDERER
+        kwargs["renderer"] = consts.CANVAS_RENDERER
         super(Chart3D, self).__init__(title, subtitle, **kwargs)
-        self._js_dependencies.add("echartsgl")
+        self.js_dependencies.add("echartsgl")
         self._3d_chart_type = None  # 3d chart type, don't use it directly
 
     def add(self, *args, **kwargs):
@@ -511,15 +467,15 @@ class Chart3D(Chart):
             **kwargs
         )
 
-        self._option.get("legend")[0].get("data").append(name)
-        self._option.update(
+        self.options.get("legend")[0].get("data").append(name)
+        self.options.update(
             xAxis3D=chart["xaxis3D"],
             yAxis3D=chart["yaxis3D"],
             zAxis3D=chart["zaxis3D"],
             grid3D=chart["grid3D"],
         )
 
-        self._option.get("series").append(
+        self.options.get("series").append(
             {
                 "type": self._3d_chart_type,
                 "name": name,

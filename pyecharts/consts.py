@@ -7,6 +7,8 @@ PAGE_TITLE = "Echarts"
 
 # presentation types for jupyter
 # output file types for pure python
+
+FILE_TYPES = dict(svg="svg", html="html")
 SVG = "svg"
 PNG = "png"
 JPEG = "jpeg"
@@ -19,6 +21,34 @@ GEO_DATA_PLUGIN_TYPE = "pyecharts_geo_data_bank"
 # themes
 LIGHT_THEME = "light"
 DARK_THEME = "dark"
+
+COLOR_LST = [
+    "#c23531",
+    "#2f4554",
+    "#61a0a8",
+    "#d48265",
+    "#749f83",
+    "#ca8622",
+    "#bda29a",
+    "#6e7074",
+    "#546570",
+    "#c4ccd3",
+    "#f05b72",
+    "#ef5b9c",
+    "#f47920",
+    "#905a3d",
+    "#fab27b",
+    "#2a5caa",
+    "#444693",
+    "#726930",
+    "#b2d235",
+    "#6d8346",
+    "#ac6767",
+    "#1d953f",
+    "#6950a1",
+    "#918597",
+    "#f6f5ec",
+]
 
 BUILTIN_THEMES = [LIGHT_THEME, DARK_THEME]
 

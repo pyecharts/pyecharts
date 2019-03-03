@@ -9,7 +9,7 @@ import json
 
 from lml.plugin import PluginInfo, PluginManager
 
-import pyecharts.constants as constants
+import pyecharts.consts as constants
 import pyecharts.exceptions as exceptions
 from pyecharts.utils import get_resource_dir, is_ascii
 
@@ -39,8 +39,7 @@ class GeoDataBank(PluginManager):
     def search_in_region(self, region, *names):
         region = self.ensure_two_digit_iso_code(region)
         return self.search_in_region_by_filter(
-            region,
-            lambda name_in_db: any([name in name_in_db for name in names]),
+            region, lambda name_in_db: any([name in name_in_db for name in names])
         )
 
     def search_in_region_by_filter(self, region, filter_function):
@@ -94,9 +93,7 @@ class DefaultChinaDataBank:
         if region != "CN":
             return {}
 
-        _local_data_file = get_resource_dir(
-            "datasets", "city_coordinates.json"
-        )
+        _local_data_file = get_resource_dir("datasets", "city_coordinates.json")
         with codecs.open(_local_data_file, encoding="utf8") as f:
             return json.load(f)
 
