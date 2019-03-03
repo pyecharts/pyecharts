@@ -4,14 +4,12 @@ from collections import OrderedDict
 
 from jinja2 import Markup
 
-import pyecharts.constants as constants
+import pyecharts.consts as constants
 import pyecharts.engine as engine
 import pyecharts.utils as utils
-from pyecharts.conf import CURRENT_CONFIG
-from pyecharts.interfaces import IPythonRichDisplayMixin
 
 
-class Page(IPythonRichDisplayMixin):
+class Page:
     """
     <<< 同一网页按顺序展示多图 >>>
 
@@ -36,20 +34,6 @@ class Page(IPythonRichDisplayMixin):
             self.add_chart(chart=c)
         return self
 
-    def add_chart(self, chart, name=None):
-        """
-        Add a chart.New in v0.5.4
-        :param chart:
-        :param name:
-        :return:
-        """
-        name = name or self._next_name()
-        self._charts[name] = chart
-        return self
-
-    def _next_name(self):
-        return "c{}".format(len(self))
-
     # List-Like Feature
 
     def __iter__(self):
@@ -58,21 +42,6 @@ class Page(IPythonRichDisplayMixin):
 
     def __len__(self):
         return len(self._charts)
-
-    # Dict-Like Feature
-
-    def __contains__(self, item):
-        return item in self._charts
-
-    def __getitem__(self, item):
-        if isinstance(item, int):
-            # list index
-            return list(self._charts.values())[item]
-
-        return self._charts[item]
-
-    def __setitem__(self, key, value):
-        self._charts[key] = value
 
     # Chart-Like Feature
 
@@ -116,9 +85,7 @@ class Page(IPythonRichDisplayMixin):
         :return: html content for jupyter
         """
         dependencies = self.js_dependencies
-        require_config = CURRENT_CONFIG.produce_require_configuration(
-            dependencies
-        )
+        require_config = CURRENT_CONFIG.produce_require_configuration(dependencies)
         config_items = require_config["config_items"]
         libraries = require_config["libraries"]
         env = engine.create_default_environment(constants.DEFAULT_HTML)
@@ -130,16 +97,3 @@ class Page(IPythonRichDisplayMixin):
     def js_dependencies(self):
         # Treat self as a list,not a page
         return utils.merge_js_dependencies(*self)
-
-    @classmethod
-    def from_charts(cls, *charts):
-        """
-        A shortcut class method for building page object from charts.
-
-        :param args: page arguments
-        :return: Page instance
-        """
-        page = cls()
-        for chart in charts:
-            page.add_chart(chart)
-        return page

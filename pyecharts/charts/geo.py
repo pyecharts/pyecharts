@@ -134,9 +134,7 @@ class Geo(Chart):
             geo={
                 "map": maptype,
                 "roam": is_roam,
-                "label": {
-                    "emphasis": {"show": True, "textStyle": {"color": "#eee"}}
-                },
+                "label": {"emphasis": {"show": True, "textStyle": {"color": "#eee"}}},
                 "itemStyle": {
                     "normal": {
                         "areaColor": geo_normal_color,
@@ -178,12 +176,7 @@ class Geo(Chart):
 
         elif type == "heatmap":
             self._option.get("series").append(
-                {
-                    "type": type,
-                    "name": name,
-                    "coordinateSystem": "geo",
-                    "data": _data,
-                }
+                {"type": type, "name": name, "coordinateSystem": "geo", "data": _data}
             )
 
         self._add_chinese_map(maptype)

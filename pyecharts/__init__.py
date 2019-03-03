@@ -43,11 +43,12 @@ from pyecharts.charts.composite.timeline import Timeline
 from pyecharts.contrib.page import Page
 
 # misc
-from pyecharts.conf import online
-from pyecharts.conf import enable_nteract
-from pyecharts.conf import configure
+# from pyecharts.conf import online
+# from pyecharts.conf import enable_nteract
+# from pyecharts.conf import configure
 from pyecharts.echarts.style import Style
-from pyecharts.conf import jupyter_image
+
+# from pyecharts.conf import jupyter_image
 from pyecharts.javascripthon.dom import NULL
 
 # alias

@@ -20,6 +20,49 @@ def collect_base_func(func):
     return func
 
 
+from ..types import ListTuple
+
+# class TitleOpts:
+#
+#     def __init__(self, title: str, title_left: str, title_top: str, title_color: str, subtitle: str,):
+#         title_left: str = "auto",
+#         title_top: str = "auto",
+#         title_color: Optional[str] = None,
+#         subtitle_color: Optional[str] = None,
+#         title_text_size: Numeric = 18,
+#         subtitle_text_size: Numeric = 12,
+
+
+
+
+class DataZoomOpts:
+    def __init__(
+        self,
+        is_show: bool = False,
+        type: str = "slider",
+        range: ListTuple = None,
+        orient: str = "horizontal",
+        xaxis_index: int = 0,
+        yaxis_index: int = 0,
+    ):
+        _min, _max = 50, 100
+        if range and len(range) == 2:
+            _min, _max = range
+
+        if type not in ("slider", "inside"):
+            type = "slider"
+
+        self.opts = {
+            "show": is_show,
+            "type": type,
+            "start": _min,
+            "end": _max,
+            "orient": orient,
+            "xAxisIndex": xaxis_index,
+            "yAxisIndex": yaxis_index,
+        }
+
+
 @collect_base_func
 def datazoom(
     is_datazoom_show=False,
@@ -28,7 +71,7 @@ def datazoom(
     datazoom_orient="horizontal",
     datazoom_xaxis_index=None,
     datazoom_yaxis_index=None,
-    **kwargs
+    **kwargs,
 ):
     """
     dataZoom 组件 用于区域缩放，从而能自由关注细节的数据信息，或者概览数据整
@@ -85,7 +128,7 @@ def datazoom_extra(
     datazoom_extra_orient="vertical",
     datazoom_extra_xaxis_index=None,
     datazoom_extra_yaxis_index=None,
-    **kwargs
+    **kwargs,
 ):
     """
     额外的 dataZoom 条，直接 X/Y 轴同时使用 dataZoom 效果
@@ -128,6 +171,31 @@ def tooltip(**kwargs):
     return option.Tooltip(**kwargs)
 
 
+from ..types import Numeric
+from typing import Optional
+
+
+class LegendOpts:
+    def __init__(
+        self,
+        selected_mode: str,
+        is_show: bool = True,
+        left: Optional[str] = None,
+        top: Optional[str] = None,
+        orient: Optional[str] = None,
+        text_size: Optional[Numeric] = None,
+        text_color: Optional[str] = None,
+    ):
+        self.opts = {
+            "selectedMode": selected_mode,
+            "show": is_show,
+            "left": left,
+            "top": top,
+            "orient": orient,
+            "textStyle": {"fontSize": text_size, "color": text_color},
+        }
+
+
 @collect_base_func
 def legend(
     is_legend_show=True,
@@ -137,7 +205,7 @@ def legend(
     legend_selectedmode="multiple",
     legend_text_size=12,
     legend_text_color=None,
-    **kwargs
+    **kwargs,
 ):
     """
     图例组件。图例组件展现了不同系列的标记(symbol)，颜色和名字。可以通过点击图例
@@ -169,10 +237,7 @@ def legend(
         "left": legend_pos,
         "top": legend_top,
         "orient": legend_orient,
-        "textStyle": {
-            "fontSize": legend_text_size,
-            "color": legend_text_color,
-        },
+        "textStyle": {"fontSize": legend_text_size, "color": legend_text_color},
     }
     return _legend
 
@@ -193,7 +258,7 @@ def visual_map(
     is_calculable=True,
     is_piecewise=False,
     pieces=None,
-    **kwargs
+    **kwargs,
 ):
     """
     是视觉映射组件，用于进行『视觉编码』，也就是将数据映射到视觉元素（视觉通道）
@@ -303,7 +368,7 @@ def label(
     label_emphasis_pos=None,
     label_emphasis_textcolor=None,
     label_emphasis_textsize=12,
-    **kwargs
+    **kwargs,
 ):
     """
     图形上的文本标签，可用于说明图形的一些数据信息，比如值，名称等。
@@ -373,7 +438,7 @@ def line_style(
     line_curve=0,
     line_type="solid",
     line_color=None,
-    **kwargs
+    **kwargs,
 ):
     """
     带线图形的线的风格选项
@@ -416,10 +481,7 @@ def split_line(is_splitline_show=True, **kwargs):
         指定是否显示分割线
     :param kwargs:
     """
-    _split_line = {
-        "show": is_splitline_show,
-        "lineStyle": line_style(**kwargs),
-    }
+    _split_line = {"show": is_splitline_show, "lineStyle": line_style(**kwargs)}
     return _split_line
 
 
@@ -513,7 +575,7 @@ def xy_axis(
     is_xaxis_show=True,
     is_yaxis_show=True,
     is_splitline_show=True,
-    **kwargs
+    **kwargs,
 ):
     """
     直角坐标系中的 x、y 轴(Line、Bar、Scatter、EffectScatter、Kline)。
@@ -775,7 +837,7 @@ def _mark(
     mark_line_coords=None,
     mark_point_valuedim="",
     _is_markline=False,
-    **kwargs
+    **kwargs,
 ):
     """
     图形标记组件，用于标记指定的特殊数据，有标记线和标记点两种
@@ -852,11 +914,7 @@ def _mark(
                     "name": _pname,
                     "symbol": mark_point_symbol,
                     "symbolSize": mark_point_symbolsize,
-                    "label": {
-                        "normal": {
-                            "textStyle": {"color": mark_point_textcolor}
-                        }
-                    },
+                    "label": {"normal": {"textStyle": {"color": mark_point_textcolor}}},
                 }
                 mark.get("data").append(_marktmp)
             else:
@@ -887,9 +945,7 @@ def _mark(
                         symbol=mark_point_symbol,
                         symbolSize=mark_point_symbolsize,
                         label={
-                            "normal": {
-                                "textStyle": {"color": mark_point_textcolor}
-                            }
+                            "normal": {"textStyle": {"color": mark_point_textcolor}}
                         },
                     )
                     if _type:
@@ -897,12 +953,7 @@ def _mark(
 
     if mark_line_coords and len(mark_line_coords) == 2:
         return {
-            "data": [
-                [
-                    {"coord": mark_line_coords[0]},
-                    {"coord": mark_line_coords[1]},
-                ]
-            ]
+            "data": [[{"coord": mark_line_coords[0]}, {"coord": mark_line_coords[1]}]]
         }
 
     return mark
@@ -961,9 +1012,7 @@ def symbol(type=None, symbol="", **kwargs):
 
 
 @collect_other_func
-def effect(
-    effect_brushtype="stroke", effect_scale=2.5, effect_period=4, **kwargs
-):
+def effect(effect_brushtype="stroke", effect_scale=2.5, effect_period=4, **kwargs):
     """
     涟漪动画配置项
 
@@ -991,7 +1040,7 @@ def grid(
     grid_bottom=None,
     grid_left=None,
     grid_right=None,
-    **kwargs
+    **kwargs,
 ):
     """
     Grid 类组件配置项
@@ -1037,7 +1086,7 @@ def grid3D(
     grid3d_rotate_speed=10,
     grid3d_rotate_sensitivity=1,
     is_grid3d_rotate=False,
-    **kwargs
+    **kwargs,
 ):
     """
     3D 笛卡尔坐标系组配置项，适用于 3D 图形。
@@ -1079,7 +1128,7 @@ def xaxis3D(
     xaxis3d_max=None,
     xaxis3d_interval="auto",
     xaxis3d_margin=8,
-    **kwargs
+    **kwargs,
 ):
     """
     3D x 轴配置项
@@ -1125,7 +1174,7 @@ def yaxis3D(
     yaxis3d_max=None,
     yaxis3d_interval="auto",
     yaxis3d_margin=8,
-    **kwargs
+    **kwargs,
 ):
     """
     3D y 轴配置项
@@ -1170,7 +1219,7 @@ def zaxis3D(
     zaxis3d_min=None,
     zaxis3d_max=None,
     zaxis3d_margin=8,
-    **kwargs
+    **kwargs,
 ):
     """
     3D y 轴配置项

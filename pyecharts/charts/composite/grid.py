@@ -1,6 +1,6 @@
 # coding=utf-8
 from pyecharts.base import Base
-from pyecharts.constants import PAGE_TITLE
+from pyecharts.consts import PAGE_TITLE
 from pyecharts.echarts.option import grid
 from pyecharts.utils import merge_js_dependencies
 
@@ -55,12 +55,7 @@ class Grid(Base):
             self._js_dependencies = chart.js_dependencies
 
             _grid = grid(
-                grid_width,
-                grid_height,
-                grid_top,
-                grid_bottom,
-                grid_left,
-                grid_right,
+                grid_width, grid_height, grid_top, grid_bottom, grid_left, grid_right
             )
             if _grid:
                 for _ in range(len(self._option.get("series"))):
@@ -74,14 +69,9 @@ class Grid(Base):
                 chart_options.get("legend")[0],
                 chart_options.get("title")[0],
             )
-            (
-                _index,
-                _index_once,
-                _xaxis,
-                _yaxis,
-                _legend,
-                _title,
-            ) = self.__custom(_series)
+            (_index, _index_once, _xaxis, _yaxis, _legend, _title) = self.__custom(
+                _series
+            )
             self._option.get("legend").append(_legend)
             self._option.get("title").append(_title)
 
@@ -98,23 +88,14 @@ class Grid(Base):
                 _series_index = 0
                 for s in self._option.get("series"):
                     if _flag == s.get("seriesId"):
-                        s.update(
-                            xAxisIndex=_series_index, yAxisIndex=_series_index
-                        )
+                        s.update(xAxisIndex=_series_index, yAxisIndex=_series_index)
                     else:
                         _series_index += 1
-                        s.update(
-                            xAxisIndex=_series_index, yAxisIndex=_series_index
-                        )
+                        s.update(xAxisIndex=_series_index, yAxisIndex=_series_index)
                     _flag = s.get("seriesId")
 
             _grid = grid(
-                grid_width,
-                grid_height,
-                grid_top,
-                grid_bottom,
-                grid_left,
-                grid_right,
+                grid_width, grid_height, grid_top, grid_bottom, grid_left, grid_right
             )
             for _ in range(_index_once):
                 self._option.get("grid").append(_grid)

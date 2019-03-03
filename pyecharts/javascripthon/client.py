@@ -17,10 +17,7 @@ class Python2Javascript:
         source_lines, _ = inspect.getsourcelines(obj)
         endpoint = os.environ.get(ENV_KEY_API_ENDPOINT, DEFAULT_API_EP)
         api_token = os.environ.get(ENV_KEY_API_TOKEN, DEFAULT_API_KEY)
-        headers = {
-            "Content-Type": "application/json",
-            "Authorization": api_token,
-        }
+        headers = {"Content-Type": "application/json", "Authorization": api_token}
         r = requests.post(
             endpoint,
             headers=headers,

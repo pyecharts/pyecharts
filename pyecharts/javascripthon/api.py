@@ -176,9 +176,7 @@ class JSONTranslator(TranslatorMixin):
 
 class EChartsTranslator(TranslatorMixin):
     def __init__(self):
-        self._json_translator = JSONTranslator(
-            post_encode_func=self.func_encode_bridge
-        )
+        self._json_translator = JSONTranslator(post_encode_func=self.func_encode_bridge)
         self._function_translator = FunctionTranslator()
         self._cache = {}
 
@@ -237,8 +235,6 @@ class EChartsTranslator(TranslatorMixin):
         :return:
         """
         encoder = MyJSONEncoder(
-            enable_func=enable_func,
-            post_encode_func=post_encode_func,
-            **kwargs
+            enable_func=enable_func, post_encode_func=post_encode_func, **kwargs
         )
         return encoder.encode(obj)
