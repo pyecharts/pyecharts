@@ -20,7 +20,7 @@ class Base:
         self,
         width: str = "800px",
         height: str = "400px",
-        renderer: str = consts.CANVAS_RENDERER,
+        renderer: str = consts.RENDER_TYPE.CANVAS,
         page_title: str = consts.PAGE_TITLE,
         theme="white",
     ):
