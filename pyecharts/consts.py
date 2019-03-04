@@ -1,20 +1,42 @@
 # coding=utf-8
 from __future__ import unicode_literals
 
-CANVAS_RENDERER = "canvas"
-SVG_RENDERER = "svg"
+
+class _RenderType:
+    CANVAS: str = "canvas"
+    SVG: str = "svg"
+
+
+RENDER_TYPE = _RenderType()
+
+
+class _FileType:
+    SVG: str = "svg"
+    PNG: str = "png"
+    JPEG: str = "jpeg"
+    HTML: str = "html"
+
+
+FILE_TYPES = _FileType()
+
+
+class _SymbolType:
+    pass
+    # ("rect", "roundRect", "triangle", "diamond", "pin", "arrow")
+
+
 PAGE_TITLE = "Echarts"
 
 # presentation types for jupyter
 # output file types for pure python
 
-FILE_TYPES = dict(svg="svg", html="html")
-SVG = "svg"
-PNG = "png"
-JPEG = "jpeg"
-DEFAULT_HTML = "html"
+# FILE_TYPES = dict(svg="svg", html="html")
+# SVG = "svg"
+# PNG = "png"
+# JPEG = "jpeg"
+# DEFAULT_HTML = "html"
 NTERACT = "nteract"
-JUPYTER_PRESENTATIONS = [SVG, PNG, JPEG, DEFAULT_HTML, NTERACT]
+# JUPYTER_PRESENTATIONS = [SVG, PNG, JPEG, DEFAULT_HTML, NTERACT]
 ENVIRONMENT_PLUGIN_TYPE = "pyecharts_environment"
 GEO_DATA_PLUGIN_TYPE = "pyecharts_geo_data_bank"
 

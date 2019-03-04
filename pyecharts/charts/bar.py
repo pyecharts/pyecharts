@@ -32,9 +32,11 @@ class Bar(Chart):
         )
         return self
 
+    # TODO: 转移至 chart 实现
     def set_series_opts(self):
         return self
 
+    # TODO: 转移至 chart 实现
     def set_global_opts(self):
         return self
 
@@ -85,4 +87,6 @@ class Bar(Chart):
         self._config_components(**kwargs)
 
 
-Bar().add_xaxis(["A", "B", "C"]).add_yaxis("bar0", [1, 2, 4]).add_yaxis("bar1", [2, 3, 6]).render("render.html")
+Bar().add_xaxis(["A", "B", "C"]).add_yaxis("bar0", [1, 2, 4]).add_yaxis(
+    "bar1", [2, 3, 6]
+).render("render.html")

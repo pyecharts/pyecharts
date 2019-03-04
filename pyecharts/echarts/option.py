@@ -22,19 +22,6 @@ def collect_base_func(func):
 
 from ..types import ListTuple
 
-# class TitleOpts:
-#
-#     def __init__(self, title: str, title_left: str, title_top: str, title_color: str, subtitle: str,):
-#         title_left: str = "auto",
-#         title_top: str = "auto",
-#         title_color: Optional[str] = None,
-#         subtitle_color: Optional[str] = None,
-#         title_text_size: Numeric = 18,
-#         subtitle_text_size: Numeric = 12,
-
-
-
-
 class DataZoomOpts:
     def __init__(
         self,

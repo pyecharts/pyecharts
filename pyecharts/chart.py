@@ -29,7 +29,7 @@ class Chart(Base):
         subtitle_text_size: Numeric = 12,
         background_color: Optional[str] = None,
         page_title: str = consts.PAGE_TITLE,
-        renderer: str = consts.CANVAS_RENDERER,
+        renderer: str = consts.RENDER_TYPE.CANVAS,
     ):
         """
 

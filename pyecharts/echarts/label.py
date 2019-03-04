@@ -12,13 +12,14 @@ class Label(JsonSerializable):
         formatter: str = "",
         chart_type: str = "",
     ):
-        super(Label, self).__init__()
+        # super(Label, self).__init__()
         self._config = {
             "show": visibility,
             "position": position,
             "textStyle": {"color": text_color, "fontSize": text_size},
         }
 
+        # 特殊的 hack 实现应该放到具体的文件中
         if chart_type != "graph":
             if formatter is None:
                 if chart_type == "pie":
@@ -33,6 +34,7 @@ class EmphasisLabel(Label):
 
 class NormalLabel(Label):
     def __init__(self, position=None, chart_type=None, **kwargs):
+        # 特殊的 hack 实现应该放到具体的文件中
         if position is None:
             position = "outside" if chart_type in ["pie", "graph"] else "top"
         super(NormalLabel, self).__init__(
