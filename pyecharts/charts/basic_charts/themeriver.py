@@ -2,6 +2,7 @@
 
 from ...charts.chart import Chart
 from ...options import *
+from ...types import *
 
 
 class ThemeRiver(Chart):
@@ -14,7 +15,7 @@ class ThemeRiver(Chart):
     def __init__(self, init_opts: InitOpts = InitOpts()):
         super().__init__(init_opts=init_opts)
 
-    def add(self, name, data, label_opts: LabelOpts = LabelOpts()):
+    def add(self, name: str, data: ListTuple, label_opts: LabelOpts = LabelOpts()):
         if isinstance(label_opts, LabelOpts):
             label_opts = label_opts.opts
         self._append_legend(name)

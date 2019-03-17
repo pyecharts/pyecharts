@@ -3,6 +3,7 @@ import random
 
 from ...charts.chart import Chart
 from ...options import *
+from ...types import *
 
 SHAPES = ("cardioid", "diamond", "triangle-forward", "triangle", "pentagon", "star")
 
@@ -29,12 +30,12 @@ class WordCloud(Chart):
 
     def add(
         self,
-        name,
-        data_pair=None,
-        shape="circle",
-        word_gap=20,
+        name: str,
+        data_pair: ListTuple,
+        shape: str = "circle",
+        word_gap: Numeric = 20,
         word_size_range=None,
-        rotate_step=45,
+        rotate_step: Numeric = 45,
     ):
         _data = []
         for (_name, _value) in data_pair:

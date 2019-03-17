@@ -18,7 +18,7 @@ class GeoLines(Geo):
 
     def add(
         self,
-        name,
+        name: str,
         data,
         maptype="china",
         coordinate_region="中国",

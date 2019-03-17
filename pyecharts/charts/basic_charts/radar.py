@@ -3,6 +3,7 @@ import warnings
 
 from ...charts.chart import Chart
 from ...options import *
+from ...types import *
 
 
 class Radar(Chart):
@@ -54,9 +55,9 @@ class Radar(Chart):
 
     def add(
         self,
-        name,
-        value,
-        symbol=None,
+        name: str,
+        value: ListTuple,
+        symbol: Optional[str] = None,
         item_color=None,
         label_opts: LabelOpts = LabelOpts(),
         linestyle_opts: LineStyleOpts = LineStyleOpts(),

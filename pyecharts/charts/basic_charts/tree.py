@@ -2,6 +2,7 @@
 
 from ...charts.chart import Chart
 from ...options import *
+from ...types import *
 
 
 class Tree(Chart):
@@ -32,40 +33,27 @@ class Tree(Chart):
                         value.update(collapsed="false")
                 return data
 
-    @staticmethod
-    def _get_label_config(position, vertical_align, align, text_size, rotate):
-        return {
-            "position": position,
-            "verticalAlign": vertical_align,
-            "align": align,
-            "fontSize": text_size,
-            "rotate": rotate,
-        }
-
     def add(
         self,
-        name,
-        data,
-        layout="orthogonal",
-        symbol="emptyCircle",
+        name: str,
+        data: ListTuple,
+        layout: str = "orthogonal",
+        symbol: str = "emptyCircle",
         symbol_size=7,
-        orient="LR",
-        top="12%",
-        left="12%",
-        bottom="12%",
-        right="12%",
-        collapse_interval=0,
-        label_position="left",
-        label_vertical_align="middle",
-        label_align="right",
-        label_text_size=12,
-        label_rotate=0,
-        leaves_position="right",
-        leaves_vertical_align="middle",
-        leaves_align="left",
-        leaves_text_size=12,
-        leaves_rotate=0,
+        orient: str = "LR",
+        top: str = "12%",
+        left: str = "12%",
+        bottom: str = "12%",
+        right: str = "12%",
+        collapse_interval: Numeric = 0,
+        label_opts: LabelOpts = LabelOpts(),
+        leaves_label_opts: LabelOpts = LabelOpts(),
     ):
+        if isinstance(label_opts, LabelOpts):
+            label_opts = label_opts.opts
+        if isinstance(leaves_label_opts, LabelOpts):
+            leaves_label_opts = leaves_label_opts.opts
+
         _data = self._set_collapse_interval(data, collapse_interval)
         self.options.get("series").append(
             {
@@ -80,25 +68,7 @@ class Tree(Chart):
                 "symbolSize": symbol_size,
                 "layout": layout,
                 "orient": orient,
-                "label": {
-                    "normal": self._get_label_config(
-                        position=label_position,
-                        vertical_align=label_vertical_align,
-                        align=label_align,
-                        text_size=label_text_size,
-                        rotate=label_rotate,
-                    )
-                },
-                "leaves": {
-                    "label": {
-                        "normal": self._get_label_config(
-                            position=leaves_position,
-                            vertical_align=leaves_vertical_align,
-                            align=leaves_align,
-                            text_size=leaves_text_size,
-                            rotate=leaves_rotate,
-                        )
-                    }
-                },
+                "label": label_opts,
+                "leaves": {"label": leaves_label_opts},
             }
         )

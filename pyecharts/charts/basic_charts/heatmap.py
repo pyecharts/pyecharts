@@ -15,26 +15,17 @@ class HeatMap(Chart):
     def __init__(self, init_opts: InitOpts = InitOpts()):
         super().__init__(init_opts=init_opts)
 
-    def add(self, *args, **kwargs):
-        """
+    def add(
+        self,
+        label_opt: LabelOpts = LabelOpts(),
+        splitline_opt: SplitLineOpts = SplitLineOpts()
+    ):
 
-        :param args:
-            如果指定；额 is_has_calendar_heatmap 属性为 True，则定义如下
-                :param name:
-                    系列名称，用于 tooltip 的显示，legend 的图例筛选。
-                :param data:
-                    数据项，数据中，每一行是一个『数据项』，每一列属于一个『维度』。
-            不指定，默认情况定义如下:
-                :param name:
-                    系列名称，用于 tooltip 的显示，legend 的图例筛选。
-                :param x_axis:
-                    x 坐标轴数据。需为类目轴，也就是不能是数值。
-                :param y_axis:
-                    y 坐标轴数据。需为类目轴，也就是不能是数值。
-                :param data:
-                    数据项，数据中，每一行是一个『数据项』，每一列属于一个『维度』。
-        :param kwargs:
-        """
+        if isinstance(label_opt, LabelOpts):
+            label_opt = label_opt.opts
+        if isinstance(splitline_opt, SplitLineOpts):
+            splitline_opt = splitline_opt.opts
+
         _is_calendar = kwargs.get("is_calendar_heatmap", None) is True
         if _is_calendar:
             name, data = args
@@ -46,13 +37,7 @@ class HeatMap(Chart):
             self._append_legend(name)
 
         self.options.get("series").append(
-            {
-                "type": "heatmap",
-                "name": name,
-                "data": data,
-                "label": chart["label"],
-                "seriesId": self._option.get("series_id"),
-            }
+            {"type": "heatmap", "name": name, "data": data, "label": label_opt}
         )
 
         if _is_calendar:
@@ -63,8 +48,8 @@ class HeatMap(Chart):
             xaxis, yaxis = chart["xy_axis"]
             self.options.update(xAxis=xaxis, yAxis=yaxis)
             self.options.get("xAxis")[0].update(
-                type="category", data=x_axis, splitArea={"show": True}
+                type="category", data=x_axis, splitArea=splitline_opt
             )
             self.options.get("yAxis")[0].update(
-                type="category", data=y_axis, splitArea={"show": True}
+                type="category", data=y_axis, splitArea=splitline_opt
             )

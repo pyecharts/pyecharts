@@ -120,10 +120,10 @@ class Chart3D(Chart):
 
     def add(
         self,
-        name,
-        data,
+        name: str,
+        data: ListTuple,
         opacity: Numeric = 1,
-        shading: str = None,
+        shading: Optional[str] = None,
         label_opts: LabelOpts = LabelOpts(),
         xaxis3d: Axis3DOpts = Axis3DOpts(),
         yaxis3d: Axis3DOpts = Axis3DOpts(),

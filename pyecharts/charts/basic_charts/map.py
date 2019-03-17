@@ -2,6 +2,7 @@
 
 from ...charts.chart import Chart
 from ...options import *
+from ...types import *
 
 
 class Map(Chart):
@@ -16,12 +17,12 @@ class Map(Chart):
 
     def add(
         self,
-        name,
-        data_pair=None,
-        maptype="china",
-        is_roam=True,
-        symbol=None,
-        is_map_symbol_show=True,
+        name: str,
+        data_pair: ListTuple,
+        maptype: str = "china",
+        is_roam: bool = True,
+        symbol: str = None,
+        is_map_symbol_show: bool = True,
         name_map=None,
         label_opts: LabelOpts = LabelOpts(),
     ):

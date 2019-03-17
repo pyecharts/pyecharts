@@ -18,7 +18,7 @@ class Gauge(Chart):
     def add(
         self,
         name: str,
-        data_pair=None,
+        data_pair: ListTuple,
         min_: Numeric = 0,
         max_: Numeric = 100,
         start_angle: Numeric = 225,

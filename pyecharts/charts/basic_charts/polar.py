@@ -16,19 +16,17 @@ class Polar(Chart):
 
     def add(
         self,
-        name,
+        name: str,
         data,
         angle_data=None,
         radius_data=None,
-        type="line",
+        type_="line",
         symbol_size=4,
         start_angle=90,
-        rotate_step=0,
         boundary_gap=True,
         is_clockwise=True,
         is_stack=False,
         axis_range=None,
-        angleaxis_label_interval=0,
         is_angleaxis_show=True,
         is_radiusaxis_show=True,
         radiusaxis_z_index=50,
@@ -40,6 +38,7 @@ class Polar(Chart):
         axisline_opts: AxisLineOpts = AxisLineOpts(),
         splitline_opts: SplitLineOpts = SplitLineOpts(),
         effect_opts: EffectOpts = EffectOpts(),
+        axislabel_opts: LabelOpts = LabelOpts(),
     ):
 
         if isinstance(label_opts, LabelOpts):
@@ -52,6 +51,8 @@ class Polar(Chart):
             splitline_opts = splitline_opts.opts
         if isinstance(effect_opts, EffectOpts):
             effect_opts = effect_opts.opts
+        if isinstance(axislabel_opts, LabelOpts):
+            axislabel_opts = axislabel_opts.opts
 
         polar_type = "value" if type == "line" else "category"
         is_stack = "stack" if is_stack else ""
@@ -81,7 +82,7 @@ class Polar(Chart):
             "min": _amin,
             "max": _amax,
             "axisLine": axisline_opts,
-            "axisLabel": {"rotate": rotate_step},
+            "axisLabel": axislabel_opts,
             "z": radiusaxis_z_index,
         }
 
@@ -94,14 +95,14 @@ class Polar(Chart):
             "boundaryGap": boundary_gap,
             "splitLine": splitline_opts,
             "axisLine": axisline_opts,
-            "axisLabel": {"interval": angleaxis_label_interval},
+            "axisLabel": axislabel_opts,
             "z": angleaxis_z_index,
         }
 
         if type in ("scatter", "line"):
             self.options.get("series").append(
                 {
-                    "type": type,
+                    "type": type_,
                     "name": name,
                     "coordinateSystem": "polar",
                     "symbol": symbol,
@@ -115,7 +116,7 @@ class Polar(Chart):
         elif type == "effectScatter":
             self.options.get("series").append(
                 {
-                    "type": type,
+                    "type": type_,
                     "name": name,
                     "coordinateSystem": "polar",
                     "showEffectOn": "render",

@@ -18,7 +18,7 @@ class Pie(Chart):
     def add(
         self,
         name: str,
-        data_pair,
+        data_pair: ListTuple,
         radius: Optional[ListTuple] = None,
         center: Optional[ListTuple] = None,
         rosetype: str = "radius",

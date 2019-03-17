@@ -2,6 +2,7 @@
 
 from ...charts.chart import Chart
 from ...options import *
+from ...types import *
 
 
 class Sankey(Chart):
@@ -17,11 +18,11 @@ class Sankey(Chart):
 
     def add(
         self,
-        name,
-        nodes,
-        links,
-        node_width=20,
-        node_gap=8,
+        name: str,
+        nodes: ListTuple,
+        links: ListTuple,
+        node_width: Numeric = 20,
+        node_gap: Numeric = 8,
         label_opts: LabelOpts = LabelOpts(),
         linestyle_opt: LineStyleOpts = LineStyleOpts(),
     ):

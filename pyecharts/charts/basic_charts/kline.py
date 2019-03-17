@@ -2,6 +2,7 @@
 
 from ...charts.chart import Chart
 from ...options import *
+from ...types import *
 
 
 def kline_tooltip_formatter(params):
@@ -35,11 +36,13 @@ class Kline(Chart):
         self.options.update(yAxis={})
         self.__xaxis_data = None
 
-    def add(
+    def add_xaxis(self):
+        pass
+
+    def add_yaxis(
         self,
-        name,
-        x_axis,
-        y_axis,
+        name: str,
+        y_axis: ListTuple,
         markline_opts: MarkLineOpts(),
         markpoint_opts: MarkPointOpts(),
     ):

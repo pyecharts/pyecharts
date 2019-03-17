@@ -1,10 +1,11 @@
 # coding=utf-8
 
-from ...charts.basic_charts.scatter import Scatter
+from ...charts.chart import Chart
 from ...options import *
+from ...types import *
 
 
-class EffectScatter(Scatter):
+class EffectScatter(Chart):
     """
     <<< 带有涟漪特效动画的散点图 >>>
 
@@ -14,7 +15,18 @@ class EffectScatter(Scatter):
     def __init__(self, init_opts: InitOpts = InitOpts()):
         super().__init__(init_opts=init_opts)
 
-    def add(self, name, x_axis, y_axis, symbol_size=10, **kwargs):
+    def add_xaxis(self, xaxis_data: ListTuple):
+        pass
+
+    def add_yaxis(
+        self,
+        name: str,
+        y_axis: ListTuple,
+        symbol_size: Numeric = 10,
+        symbol: Optional[str] = None,
+        label_opts: LabelOpts = LabelOpts,
+        effect_opts: EffectOpts = EffectOpts(),
+    ):
         """
 
         :param name:
@@ -27,9 +39,12 @@ class EffectScatter(Scatter):
             标记图形大小。
         :param kwargs:
         """
-        kwargs.update(type="scatter")
+        if isinstance(label_opts, LabelOpts):
+            label_opts = label_opts.opts
+        if isinstance(effect_opts, EffectOpts):
+            effect_opts = effect_opts.opts
 
-        xaxis, yaxis = chart["xy_axis"]
+        # xaxis, yaxis = chart["xy_axis"]
         # show split line, because by default split line is hidden for xaxis
         xaxis[0]["splitLine"]["show"] = True
         self.options.update(xAxis=xaxis, yAxis=yaxis)
@@ -40,10 +55,10 @@ class EffectScatter(Scatter):
                 "type": "effectScatter",
                 "name": name,
                 "showEffectOn": "render",
-                "rippleEffect": chart["effect"],
-                "symbol": chart["symbol"],
+                "rippleEffect": effect_opts,
+                "symbol": symbol,
                 "symbolSize": symbol_size,
                 "data": [list(z) for z in zip(x_axis, y_axis)],
-                "label": chart["label"],
+                "label": label_opts,
             }
         )
