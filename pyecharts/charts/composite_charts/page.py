@@ -4,7 +4,8 @@ from collections import OrderedDict
 
 from jinja2 import Markup
 
-from pyecharts.commons import consts, engine
+from pyecharts.commons import consts
+from pyecharts.render import engine
 from pyecharts.commons.types import *
 
 

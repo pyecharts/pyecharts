@@ -4,8 +4,9 @@ import uuid
 import json
 import os
 
-from pyecharts.commons import engine, consts, utils
-from pyecharts.commons.engine import RenderEngine
+from pyecharts.commons import consts, utils
+from pyecharts.render import engine
+from pyecharts.render.engine import RenderEngine
 from pyecharts.commons.structures import OrderedSet
 from pyecharts.commons.consts import ONLINE_HOST
 from pyecharts.options import InitOpts
