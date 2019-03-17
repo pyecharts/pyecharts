@@ -3,8 +3,8 @@ import os
 from mock import patch
 from nose.tools import eq_, raises
 
-from pyecharts import exceptions
-from pyecharts.js_extensions import JsExtension
+from pyecharts.commons import exceptions
+from pyecharts.commons.js_extensions import JsExtension
 
 
 def produce_test_js_extension():
@@ -69,7 +69,7 @@ def test_read_js_library_no_match():
 
 @raises(exceptions.InvalidRegistry)
 def test_validate_registry():
-    from pyecharts.js_extensions import _validate_registry
+    from pyecharts.commons.js_extensions import _validate_registry
 
     test = {}
     _validate_registry(test)

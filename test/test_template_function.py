@@ -9,7 +9,7 @@ from nose.tools import raises
 
 from pyecharts import Bar, Map
 from pyecharts.conf import PyEchartsConfig
-from pyecharts.engine import BaseEnvironment, EchartsEnvironment
+from pyecharts.commons.engine import BaseEnvironment, EchartsEnvironment
 from pyecharts.utils import get_resource_dir
 
 ECHARTS_ENV = EchartsEnvironment()
@@ -29,13 +29,13 @@ def create_demo_bar(chart_id_demo=None):
 
 def test_echarts_js_dependencies():
     env = EchartsEnvironment(
-        pyecharts_config=PyEchartsConfig(jshost="http://localhost/echarts")
+        pyecharts_config=PyEchartsConfig(jshost="http://localhost/options")
     )
     tpl = env.from_string("{{ echarts_js_dependencies(bar) }}")
     bar = create_demo_bar()
     html = tpl.render(bar=bar)
     assert (
-        '<script type="text/javascript" src="http://localhost/echarts/echarts.min.js"></script>'  # noqa: E501
+        '<script type="text/javascript" src="http://localhost/options/options.min.js"></script>'  # noqa: E501
         == html
     )
 
@@ -43,10 +43,10 @@ def test_echarts_js_dependencies():
 def test_echarts_js_dependencies_embed():
     env = EchartsEnvironment(
         pyecharts_config=PyEchartsConfig(
-            jshost=get_resource_dir("templates", "js", "echarts")
+            jshost=get_resource_dir("templates", "js", "options")
         )
     )
-    tpl = env.from_string('{{ echarts_js_dependencies_embed("echarts") }}')
+    tpl = env.from_string('{{ echarts_js_dependencies_embed("options") }}')
     bar = create_demo_bar()
     html = tpl.render(bar=bar)
     assert len(html) > 0
@@ -62,26 +62,17 @@ def test_echarts_js_container():
     tpl = ECHARTS_ENV.from_string("{{ echarts_container(bar) }}")
     bar = create_demo_bar("id_demo_chart")
     html = tpl.render(bar=bar)
-    assert (
-        '<div id="id_demo_chart" style="width:800px;height:400px;"></div>'
-        == html
-    )
+    assert '<div id="id_demo_chart" style="width:800px;height:400px;"></div>' == html
 
     bar.width = 1024
     bar.height = 768
     html = tpl.render(bar=bar)
-    assert (
-        '<div id="id_demo_chart" style="width:1024px;height:768px;"></div>'
-        == html
-    )
+    assert '<div id="id_demo_chart" style="width:1024px;height:768px;"></div>' == html
 
     bar.width = "1024px"
     bar.height = "768px"
     html = tpl.render(bar=bar)
-    assert (
-        '<div id="id_demo_chart" style="width:1024px;height:768px;"></div>'
-        == html
-    )
+    assert '<div id="id_demo_chart" style="width:1024px;height:768px;"></div>' == html
 
 
 def test_echarts_js_content():
@@ -107,20 +98,13 @@ def test_echarts_js_in_first():
     value = [20, 190, 253, 77, 65]
     attr = ["汕头市", "汕尾市", "揭阳市", "阳江市", "肇庆市"]
     map = Map("广东地图示例", width=1200, height=600)
-    map.add(
-        "",
-        attr,
-        value,
-        maptype="广东",
-        is_visualmap=True,
-        visual_text_color="#000",
-    )
+    map.add("", attr, value, maptype="广东", is_visualmap=True, visual_text_color="#000")
     env = EchartsEnvironment(
-        pyecharts_config=PyEchartsConfig(jshost="http://localhost/echarts")
+        pyecharts_config=PyEchartsConfig(jshost="http://localhost/options")
     )
     tpl = env.from_string("{{ echarts_js_dependencies(m) }}")
     html = tpl.render(m=map)
-    echarts_js_pos = html.find("echarts.min.js")
+    echarts_js_pos = html.find("options.min.js")
     guangdong_js_pos = html.find("guangdong.js")
     assert echarts_js_pos > -1
     assert guangdong_js_pos > -1

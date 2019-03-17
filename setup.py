@@ -1,8 +1,8 @@
 # coding=utf-8
+
 import os
 import sys
 from shutil import rmtree
-
 from setuptools import Command, find_packages, setup
 
 # RELEASE STEPS
@@ -10,20 +10,12 @@ from setuptools import Command, find_packages, setup
 
 
 __title__ = "pyecharts"
-__description__ = "Python echarts, make charting easier"
+__description__ = "Python options, make charting easier"
 __url__ = "https://github.com/chenjiandongx/pyecharts"
 __author_email__ = "chenjiandongx@qq.com"
 __license__ = "MIT"
 
-__requires__ = [
-    "jinja2",
-    "future",
-    "jupyter-echarts-pypkg==0.1.4",
-    "lml==0.0.6",
-    "requests",
-    'javascripthon>=0.10; python_version>"3.4"',
-    'requests; python_version<"3.5"',
-]
+__requires__ = ["jinja2"]
 
 __keywords__ = ["Echarts", "charts", "plotting-tool"]
 # Load the package's _version.py module as a dictionary.
@@ -66,9 +58,7 @@ class UploadCommand(Command):
         os.system("twine upload dist/*")
 
         self.status("Pushing git tags…")
-        os.system(
-            'git tag -a v{0} -m "release version v{0}"'.format(__version__)
-        )
+        os.system('git tag -a v{0} -m "release version v{0}"'.format(__version__))
         os.system("git push origin v{0}".format(__version__))
 
         sys.exit()

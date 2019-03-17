@@ -12,7 +12,8 @@ import pandas as pd
 from mock import MagicMock, patch
 from nose.tools import eq_, raises
 
-from pyecharts import Bar, Map, exceptions, jupyter_image, online
+from pyecharts import Bar, Map, jupyter_image, online
+from pyecharts.commons import exceptions
 from pyecharts.conf import CURRENT_CONFIG
 
 TITLE = "柱状图数据堆叠示例"
@@ -85,9 +86,7 @@ def test_jupyter_repr_svg():
 @patch("pyecharts.engine.create_default_environment")
 @patch("os.unlink")
 def test_render_as_svg(fake_unlink, fake_factory):
-    fake_env = MagicMock(
-        render_chart_to_file=MagicMock(return_value="fake svg")
-    )
+    fake_env = MagicMock(render_chart_to_file=MagicMock(return_value="fake svg"))
     fake_factory.return_value = fake_env
     with jupyter_image("svg"):
         bar = create_a_bar("test", renderer="svg")
@@ -113,7 +112,7 @@ def test_render_as_png_with_wrong_configuration():
 def test_base_get_js_dependencies():
     bar = create_a_bar(TITLE)
     dependencies = bar.get_js_dependencies()
-    expected = ["echarts.min"]
+    expected = ["options.min"]
     eq_(dependencies, expected)
 
 
@@ -147,14 +146,7 @@ def test_echarts_position_in_render_html():
     value = [20, 190, 253, 77, 65]
     attr = ["汕头市", "汕尾市", "揭阳市", "阳江市", "肇庆市"]
     map = Map("广东地图示例", width=1200, height=600, page_title=TITLE)
-    map.add(
-        "",
-        attr,
-        value,
-        maptype="广东",
-        is_visualmap=True,
-        visual_text_color="#000",
-    )
+    map.add("", attr, value, maptype="广东", is_visualmap=True, visual_text_color="#000")
     map.render()
     actual_content = get_default_rendering_file_content()
     assert TITLE in actual_content
@@ -201,9 +193,6 @@ def test_online_html():
     bar.add("", CLOTHES, [5, 20, 36, 10, 75, 90], is_stack=True)
     bar.render()
     html_content = get_default_rendering_file_content()
-    assert (
-        'src="https://pyecharts.github.io/assets/js/echarts.min.js'
-        in html_content
-    )
+    assert 'src="https://pyecharts.github.io/assets/js/options.min.js' in html_content
     CURRENT_CONFIG.jshost = None
     CURRENT_CONFIG.hosted_on_github = False

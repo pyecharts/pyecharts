@@ -112,11 +112,7 @@ def test_radar_user_define_schema_single():
     radar.set_radar_component(c_schema=c_schema, shape="circle")
     radar.add("北京", value_bj, item_color="#f9713c", symbol=None)
     radar.add(
-        "上海",
-        value_sh,
-        item_color="#b3e4a1",
-        symbol=None,
-        legend_selectedmode="single",
+        "上海", value_sh, item_color="#b3e4a1", symbol=None, legend_selectedmode="single"
     )
     html_content = radar._repr_html_()
     assert "single" in html_content

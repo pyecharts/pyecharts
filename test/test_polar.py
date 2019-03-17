@@ -42,25 +42,13 @@ def test_polar_type_effectscatter():
 def test_polar_type_barradius():
     polar = Polar("极坐标系-堆叠柱状图示例", width=1200, height=600)
     polar.add(
-        "A",
-        [1, 2, 3, 4, 3, 5, 1],
-        radius_data=WEEK,
-        type="barRadius",
-        is_stack=True,
+        "A", [1, 2, 3, 4, 3, 5, 1], radius_data=WEEK, type="barRadius", is_stack=True
     )
     polar.add(
-        "B",
-        [2, 4, 6, 1, 2, 3, 1],
-        radius_data=WEEK,
-        type="barRadius",
-        is_stack=True,
+        "B", [2, 4, 6, 1, 2, 3, 1], radius_data=WEEK, type="barRadius", is_stack=True
     )
     polar.add(
-        "C",
-        [1, 2, 3, 4, 1, 2, 5],
-        radius_data=WEEK,
-        type="barRadius",
-        is_stack=True,
+        "C", [1, 2, 3, 4, 1, 2, 5], radius_data=WEEK, type="barRadius", is_stack=True
     )
     polar.render()
 
@@ -68,25 +56,13 @@ def test_polar_type_barradius():
 def test_polar_type_barangle():
     polar = Polar("极坐标系-堆叠柱状图示例", width=1200, height=600)
     polar.add(
-        "",
-        [1, 2, 3, 4, 3, 5, 1],
-        angle_data=WEEK,
-        type="barAngle",
-        is_stack=True,
+        "", [1, 2, 3, 4, 3, 5, 1], angle_data=WEEK, type="barAngle", is_stack=True
     )
     polar.add(
-        "",
-        [2, 4, 6, 1, 2, 3, 1],
-        anglle_data=WEEK,
-        type="barAngle",
-        is_stack=True,
+        "", [2, 4, 6, 1, 2, 3, 1], anglle_data=WEEK, type="barAngle", is_stack=True
     )
     polar.add(
-        "",
-        [1, 2, 3, 4, 1, 2, 5],
-        angle_data=WEEK,
-        type="barAngle",
-        is_stack=True,
+        "", [1, 2, 3, 4, 1, 2, 5], angle_data=WEEK, type="barAngle", is_stack=True
     )
     polar.render()
 
@@ -178,11 +154,7 @@ def test_polor_custom_type():
     polar.add(
         "",
         [
-            [
-                random.randint(0, 6),
-                random.randint(1, 24),
-                random.randint(1, 24),
-            ]
+            [random.randint(0, 6), random.randint(1, 24), random.randint(1, 24)]
             for _ in range(100)
         ],
         render_item=render_item,
