@@ -32,7 +32,7 @@ class Pie(Chart):
         if not center:
             center = ["50%", "50%"]
 
-        for a in attr:
+        for (a, _) in data_pair:
             self.options.get("legend")[0].get("data").append(a)
 
         _dlst = self.options.get("legend")[0].get("data")

@@ -45,7 +45,7 @@ class Bar(Chart):
         if isinstance(markline_opts, MarkLineOpts):
             markline_opts = markline_opts.opts
 
-        self.options.get("legend")[0].get("data").append(series_name)
+        self._append_legend(series_name)
         self.options.get("series").append(
             {
                 "type": "bar",

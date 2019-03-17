@@ -18,15 +18,13 @@ class Gauge(Chart):
     def add(
         self,
         name: str,
-        attr: str,
-        value: Numeric,
+        data_pair=None,
         min_: Numeric = 0,
         max_: Numeric = 100,
         start_angle: Numeric = 225,
         end_angle: Numeric = -45,
     ):
-
-        self.options.get("legend")[0].get("data").append(name)
+        self._append_legend(name)
         self.options.get("series").append(
             {
                 "type": "gauge",
@@ -36,6 +34,6 @@ class Gauge(Chart):
                 "max": max_,
                 "startAngle": start_angle,
                 "endAngle": end_angle,
-                "data": [{"value": value, "name": attr}],
+                "data": [{"value": v, "name": n} for (v, n) in data_pair],
             }
         )

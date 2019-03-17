@@ -25,17 +25,16 @@ class GeoLines(Geo):
         symbol=None,
         symbol_size=12,
         border_color="#111",
-        geo_normal_color="#323c48",
-        geo_emphasis_color="#2a333d",
-        geo_cities_coords=None,
-        geo_effect_period=6,
-        geo_effect_traillength=0,
-        geo_effect_color="#fff",
-        geo_effect_symbol="circle",
-        geo_effect_symbolsize=5,
+        normal_color="#323c48",
+        emphasis_color="#2a333d",
+        region_coords=None,
+        effect_period=6,
+        effect_traillength=0,
+        effect_color="#fff",
+        effect_symbol="circle",
+        effect_symbolsize=5,
         is_geo_effect_show=True,
         is_roam=True,
-        **kwargs
     ):
         """
 

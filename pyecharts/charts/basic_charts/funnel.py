@@ -16,19 +16,15 @@ class Funnel(Chart):
     def add(
         self,
         name,
-        attr,
-        value,
+        data_pair=None,
         sort_: str = "descending",
         gap: Numeric = 0,
         label_opts: LabelOpts = LabelOpts(),
     ):
-        _data = []
-        for data in zip(attr, value):
-            _name, _value = data
-            _data.append({"name": _name, "value": _value})
+        data = [{"name": n, "value": v} for (n, v) in data_pair]
 
-        for element in attr:
-            self.options.get("legend")[0].get("data").append(element)
+        for (a, _) in data_pair:
+            self._append_legend(a)
 
         _dset = set(self.options.get("legend")[0].get("data"))
         self.options.get("legend")[0].update(data=list(_dset))
@@ -37,7 +33,7 @@ class Funnel(Chart):
             {
                 "type": "funnel",
                 "name": name,
-                "data": _data,
+                "data": data,
                 "sort": sort_,
                 "gap": gap,
                 "label": label_opts.opts,

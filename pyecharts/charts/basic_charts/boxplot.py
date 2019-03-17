@@ -32,14 +32,21 @@ class Boxplot(Chart):
         markpoint_opts: MarkPointOpts = MarkPointData(),
         markline_opts: MarkLineOpts = MarkLineOpts(),
     ):
-        self.options.get("legend")[0].get("data").append(name)
+        if isinstance(label_opts, LabelOpts):
+            label_opts = label_opts.opts
+        if isinstance(markpoint_opts, MarkPointOpts):
+            markpoint_opts = markpoint_opts.opts
+        if isinstance(markline_opts, MarkLineOpts):
+            markline_opts = markline_opts.opts
+
+        self._append_legend(name)
         self.options.get("series").append(
             {
                 "type": "boxplot",
                 "name": name,
                 "data": y_axis,
-                "label": label_opts.opts,
-                "markPoint": markpoint_opts.opts,
-                "markLine": markline_opts.opts,
+                "label": label_opts,
+                "markPoint": markpoint_opts,
+                "markLine": markline_opts,
             }
         )

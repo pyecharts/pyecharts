@@ -1,6 +1,6 @@
 # coding=utf-8
 
-from pyecharts.charts.chart import Chart3D
+from ...charts.chart import Chart3D
 
 
 class Scatter3D(Chart3D):

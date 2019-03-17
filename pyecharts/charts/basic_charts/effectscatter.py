@@ -1,6 +1,6 @@
 # coding=utf-8
 
-from ...charts import Scatter
+from ...charts.basic_charts.scatter import Scatter
 from ...options import *
 
 
@@ -27,17 +27,15 @@ class EffectScatter(Scatter):
             标记图形大小。
         :param kwargs:
         """
-        assert len(x_axis) == len(y_axis)
         kwargs.update(type="scatter")
-        chart = self._get_all_options(**kwargs)
 
         xaxis, yaxis = chart["xy_axis"]
         # show split line, because by default split line is hidden for xaxis
         xaxis[0]["splitLine"]["show"] = True
-        self._option.update(xAxis=xaxis, yAxis=yaxis)
-        self._option.get("legend")[0].get("data").append(name)
+        self.options.update(xAxis=xaxis, yAxis=yaxis)
+        self._append_legend(name)
 
-        self._option.get("series").append(
+        self.options.get("series").append(
             {
                 "type": "effectScatter",
                 "name": name,
@@ -47,7 +45,5 @@ class EffectScatter(Scatter):
                 "symbolSize": symbol_size,
                 "data": [list(z) for z in zip(x_axis, y_axis)],
                 "label": chart["label"],
-                "seriesId": self._option.get("series_id"),
             }
         )
-        self._config_components(**kwargs)

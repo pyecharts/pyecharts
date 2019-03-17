@@ -25,10 +25,8 @@ class Map(Chart):
         name_map=None,
         label_opts: LabelOpts = LabelOpts(),
     ):
-        _data = []
-        for (_name, _value) in data_pair:
-            _data.append({"name": _name, "value": _value})
-        self.options.get("legend")[0].get("data").append(name)
+        data = [{"name": n, "value": v} for (n, v) in data_pair]
+        self._append_legend(name)
 
         __option__ = {
             "type": "map",
@@ -36,7 +34,7 @@ class Map(Chart):
             "symbol": symbol,
             "label": label_opts.opts,
             "mapType": maptype,
-            "data": _data,
+            "data": data,
             "roam": is_roam,
             "showLegendSymbol": is_map_symbol_show,
         }
