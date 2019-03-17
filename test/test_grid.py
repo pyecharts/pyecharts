@@ -5,17 +5,7 @@ from __future__ import unicode_literals
 import random
 from test.constants import CLOTHES, WEEK, X_TIME, Y_WEEK
 
-from pyecharts import (
-    NULL,
-    Bar,
-    EffectScatter,
-    Grid,
-    HeatMap,
-    Kline,
-    Line,
-    Pie,
-    Scatter,
-)
+from pyecharts import NULL, Bar, EffectScatter, Grid, HeatMap, Kline, Line, Pie, Scatter
 from pyecharts.javascripthon.dom import JsValue
 
 
@@ -199,10 +189,7 @@ def test_grid_line_kline():
     ]
     kline = Kline("K 线图示例", title_pos="60%")
     kline.add(
-        "日K",
-        ["2017/7/{}".format(i + 1) for i in range(31)],
-        v1,
-        legend_pos="80%",
+        "日K", ["2017/7/{}".format(i + 1) for i in range(31)], v1, legend_pos="80%"
     )
 
     grid = Grid()
@@ -291,10 +278,7 @@ def test_grid_multiple_datazoom_index():
     ]
     kline = Kline("K 线图示例", title_top="50%")
     kline.add(
-        "日K",
-        ["2017/7/{}".format(i + 1) for i in range(31)],
-        v1,
-        is_datazoom_show=True,
+        "日K", ["2017/7/{}".format(i + 1) for i in range(31)], v1, is_datazoom_show=True
     )
 
     grid = Grid()

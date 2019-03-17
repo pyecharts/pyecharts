@@ -33,7 +33,7 @@ from pyecharts.conf import PyEchartsConfig
 class FlaskEchartsEnvironment(Environment):
     def __init__(self, *args, **kwargs):
         super(FlaskEchartsEnvironment, self).__init__(*args, **kwargs)
-        self.pyecharts_config = PyEchartsConfig(jshost='https://cdn.bootcss.com/echarts/3.7.2')
+        self.pyecharts_config = PyEchartsConfig(jshost=options)
         self.globals.update(ECHAERTS_TEMPLATE_FUNCTIONS)
 
 class MyFlask(Flask):

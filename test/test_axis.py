@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 
 import types
 
-from pyecharts.echarts import YAxisLabel
+from pyecharts.options import YAxisLabel
 
 
 def test_yaxis_wo_formatter():

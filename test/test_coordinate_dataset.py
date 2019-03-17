@@ -14,7 +14,7 @@ from pyecharts.datasets.coordinates import (
     search_coordinates_by_keyword,
     search_coordinates_by_region_and_keyword,
 )
-from pyecharts.exceptions import RegionNotFound
+from pyecharts.commons.exceptions import RegionNotFound
 
 
 def test_get_coordinate():

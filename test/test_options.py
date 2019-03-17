@@ -25,9 +25,7 @@ from pyecharts.javascripthon.api import EChartsTranslator
 
 
 def dumps_actual_options(opts):
-    return EChartsTranslator.dumps(
-        opts, sort_keys=True, indent=4, enable_func=True
-    )
+    return EChartsTranslator.dumps(opts, sort_keys=True, indent=4, enable_func=True)
 
 
 @patch("random.randint")
@@ -119,20 +117,8 @@ def test_bar_default(patched):
     v1 = [2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3]
     v2 = [2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3]
     bar = Bar("Bar chart", "precipitation and evaporation one year")
-    bar.add(
-        "precipitation",
-        attr,
-        v1,
-        mark_line=["average"],
-        mark_point=["max", "min"],
-    )
-    bar.add(
-        "evaporation",
-        attr,
-        v2,
-        mark_line=["average"],
-        mark_point=["max", "min"],
-    )
+    bar.add("precipitation", attr, v1, mark_line=["average"], mark_point=["max", "min"])
+    bar.add("evaporation", attr, v2, mark_line=["average"], mark_point=["max", "min"])
     actual_options = dumps_actual_options(bar.options)
     expected = get_fixture_content(fixture)
     for a, b in zip(actual_options.split("\n"), expected.split("\n")):

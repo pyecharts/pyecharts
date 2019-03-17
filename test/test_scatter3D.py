@@ -12,11 +12,7 @@ def test_scatter3d():
     import random
 
     data = [
-        [
-            random.randint(0, 100),
-            random.randint(0, 100),
-            random.randint(0, 100),
-        ]
+        [random.randint(0, 100), random.randint(0, 100), random.randint(0, 100)]
         for _ in range(80)
     ]
     scatter3d = Scatter3D("3D 散点图示例", width=1200, height=600)

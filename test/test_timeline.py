@@ -38,12 +38,7 @@ def test_timeline_bar():
     bar_5.add("春季", CLOTHES, [randint(10, 100) for _ in range(6)])
     bar_5.add("夏季", CLOTHES, [randint(10, 100) for _ in range(6)])
     bar_5.add("秋季", CLOTHES, [randint(10, 100) for _ in range(6)])
-    bar_5.add(
-        "冬季",
-        CLOTHES,
-        [randint(10, 100) for _ in range(6)],
-        is_legend_show=True,
-    )
+    bar_5.add("冬季", CLOTHES, [randint(10, 100) for _ in range(6)], is_legend_show=True)
 
     timeline = Timeline(is_auto_play=True, timeline_bottom=0)
     timeline.add(bar_1, "2012 年")
@@ -57,9 +52,7 @@ def test_timeline_bar():
 
 def test_timeline_pie():
     style = Style()
-    pie_style = style.add(
-        is_label_show=True, radius=[30, 55], rosetype="radius"
-    )
+    pie_style = style.add(is_label_show=True, radius=[30, 55], rosetype="radius")
     pie_1 = Pie("2012 年销量比例", "数据纯属虚构")
     pie_1.add("秋季", CLOTHES, [randint(10, 100) for _ in range(6)], **pie_style)
 
@@ -75,9 +68,7 @@ def test_timeline_pie():
     pie_5 = Pie("2016 年销量比例", "数据纯属虚构")
     pie_5.add("秋季", CLOTHES, [randint(10, 100) for _ in range(6)], **pie_style)
 
-    timeline = Timeline(
-        is_auto_play=True, timeline_bottom=0, width=1200, height=600
-    )
+    timeline = Timeline(is_auto_play=True, timeline_bottom=0, width=1200, height=600)
     timeline.add(pie_1, "2012 年")
     timeline.add(pie_2, "2013 年")
     timeline.add(pie_3, "2014 年")
@@ -181,12 +172,7 @@ def test_timeline_different_legend():
     bar_2.add("春季b", CLOTHES, [randint(10, 100) for _ in range(6)])
     bar_2.add("夏季b", CLOTHES, [randint(10, 100) for _ in range(6)])
     bar_2.add("秋季b", CLOTHES, [randint(10, 100) for _ in range(6)])
-    bar_2.add(
-        "冬季b",
-        CLOTHES,
-        [randint(10, 100) for _ in range(6)],
-        is_legend_show=True,
-    )
+    bar_2.add("冬季b", CLOTHES, [randint(10, 100) for _ in range(6)], is_legend_show=True)
 
     timeline = Timeline(is_auto_play=True, timeline_bottom=0)
     timeline.add(bar_1, "2012 年")
@@ -238,6 +224,4 @@ def test_null_in_timeline_options():
     timeline = Timeline(is_auto_play=True, timeline_bottom=0)
     timeline.add(bar_1, "2012 年")
 
-    assert isinstance(
-        timeline._option["options"][0]["series"][0]["symbol"], JsValue
-    )
+    assert isinstance(timeline._option["options"][0]["series"][0]["symbol"], JsValue)

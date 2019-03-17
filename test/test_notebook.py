@@ -7,7 +7,7 @@ from __future__ import unicode_literals
 import json
 from test.constants import CLOTHES, WEEK
 
-import pyecharts.constants as constants
+import pyecharts.commons.consts as constants
 from pyecharts import Bar, Line, Page, Pie, configure, enable_nteract, online
 from pyecharts.conf import CURRENT_CONFIG
 
@@ -29,8 +29,8 @@ def test_single_chart():
     json_encoded_title = json.dumps(TITLE)
     assert json_encoded_title in html
     assert "require.config" in html
-    assert "function(echarts)" in html
-    assert "nbextensions/echarts" in html
+    assert "function(options)" in html
+    assert "nbextensions/options" in html
     assert "width:800px" in html
     assert "height:400px" in html
     assert "<div" in html
@@ -77,11 +77,11 @@ def test_page():
     # Test base html structure
     assert html.count("<script>") == html.count("</script>") == 2
     assert html.count("<div") == html.count("</div>") == 3
-    assert html.count("require.config") == html.count("function(echarts)") == 1
+    assert html.count("require.config") == html.count("function(options)") == 1
     # Test some chart attributes
     json_encoded_title = json.dumps(TITLE)
     assert json_encoded_title in html
-    assert "nbextensions/echarts" in html  # default jshost
+    assert "nbextensions/options" in html  # default jshost
     assert html.count("height:400px") == 3
     assert html.count("width:600px") == 1
     assert html.count("width:800px") == 2
@@ -92,7 +92,7 @@ def test_online_feature():
     online()
     bar = create_a_bar(TITLE)
     html = bar._repr_html_()
-    expected_jshost = "https://pyecharts.github.io/jupyter-echarts/echarts"
+    expected_jshost = "https://pyecharts.github.io/jupyter-options/options"
     assert expected_jshost in html
     CURRENT_CONFIG.hosted_on_github = False
 
@@ -110,7 +110,7 @@ def test_nteract_feature():
     enable_nteract()
     bar = create_a_bar(TITLE)
     html = bar._repr_html_()
-    assert "https://pyecharts.github.io/assets/js/echarts.min.js" in html
+    assert "https://pyecharts.github.io/assets/js/options.min.js" in html
     assert "require" not in html
     # restore configuration
     configure(output_image=constants.DEFAULT_HTML)

@@ -48,10 +48,7 @@ def test_merge_js_dependencies_with_one_chart():
     eq_(["echarts"], merge_js_dependencies(base_chart))
     # A map chart
     ch1 = MockChart(["echarts", "fujian", "zhengjiang", "anhui"])
-    eq_(
-        ["echarts", "fujian", "zhengjiang", "anhui"],
-        merge_js_dependencies(ch1),
-    )
+    eq_(["echarts", "fujian", "zhengjiang", "anhui"], merge_js_dependencies(ch1))
 
 
 def test_merge_js_dependencies_with_multiple_charts():
@@ -70,9 +67,7 @@ def test_merge_js_dependencies_with_mixed_chart_and_string():
     map_chart = MockChart(["echarts", "fujian"])
 
     eq_(["echarts", "zhejiang"], merge_js_dependencies("echarts", "zhejiang"))
-    eq_(
-        ["echarts", "zhejiang"], merge_js_dependencies(["echarts", "zhejiang"])
-    )
+    eq_(["echarts", "zhejiang"], merge_js_dependencies(["echarts", "zhejiang"]))
     eq_(["echarts", "fujian"], merge_js_dependencies("echarts", map_chart))
 
 

@@ -40,12 +40,7 @@ def test_map_combine_with_visualmap():
     attr = ["福建", "山东", "北京", "上海", "甘肃", "新疆", "河南", "广西", "西藏"]
     map = Map("Map 结合 VisualMap 示例", width=1200, height=600)
     map.add(
-        "",
-        attr,
-        value,
-        maptype="china",
-        is_visualmap=True,
-        visual_text_color="#000",
+        "", attr, value, maptype="china", is_visualmap=True, visual_text_color="#000"
     )
     map.render()
 
@@ -65,7 +60,7 @@ def test_echarts_position_in_render_html():
     )
     map.render()
     content = get_default_rendering_file_content()
-    echarts_position = content.find("exports.echarts")
+    echarts_position = content.find("exports.options")
     guangdong_position = content.find(json.dumps("广东"))
     assert echarts_position < guangdong_position
     assert '"showLegendSymbol": false' in content
@@ -73,22 +68,10 @@ def test_echarts_position_in_render_html():
 
 def test_world_map():
     value = [95.1, 23.2, 43.3, 66.4, 88.5, 0.1]
-    attr = [
-        "China",
-        "Canada",
-        "Brazil",
-        "Russia",
-        "United States",
-        "Unknown Country",
-    ]
+    attr = ["China", "Canada", "Brazil", "Russia", "United States", "Unknown Country"]
     map = Map("世界地图示例", width=1200, height=600)
     map.add(
-        "",
-        attr,
-        value,
-        maptype="world",
-        is_visualmap=True,
-        visual_text_color="#000",
+        "", attr, value, maptype="world", is_visualmap=True, visual_text_color="#000"
     )
     map.render()
 

@@ -16,10 +16,7 @@ def test_tree_default():
                 {"children": [], "name": "B"},
                 {
                     "children": [
-                        {
-                            "children": [{"children": [], "name": "I"}],
-                            "name": "E",
-                        },
+                        {"children": [{"children": [], "name": "I"}], "name": "E"},
                         {"children": [], "name": "F"},
                     ],
                     "name": "C",

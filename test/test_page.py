@@ -66,11 +66,7 @@ def create_three_charts():
 
     # scatter3D
     data = [
-        [
-            random.randint(0, 100),
-            random.randint(0, 100),
-            random.randint(0, 100),
-        ]
+        [random.randint(0, 100), random.randint(0, 100), random.randint(0, 100)]
         for _ in range(80)
     ]
     scatter3d = Scatter3D("3D 散点图示例", width=1200, height=600)
@@ -81,14 +77,7 @@ def create_three_charts():
     value = [20, 190, 253, 77, 65]
     attr = ["汕头市", "汕尾市", "揭阳市", "阳江市", "肇庆市"]
     map = Map("广东地图示例", width=1200, height=600)
-    map.add(
-        "",
-        attr,
-        value,
-        maptype="广东",
-        is_visualmap=True,
-        visual_text_color="#000",
-    )
+    map.add("", attr, value, maptype="广东", is_visualmap=True, visual_text_color="#000")
     page.add(map)
 
     return page
@@ -111,7 +100,7 @@ def test_two_bars():
         # test the optimization
         assert "registerMap('china'," not in actual_content
         assert "registerMap('world'," not in actual_content
-        echarts_position = actual_content.find("exports.echarts")
+        echarts_position = actual_content.find("exports.options")
         guangdong_position = actual_content.find(json.dumps("广东"))
         assert echarts_position < guangdong_position
 
@@ -119,9 +108,9 @@ def test_two_bars():
 def test_page_get_js_dependencies():
     page = create_three_charts()
     dependencies = page.get_js_dependencies()
-    eq_(dependencies[0], "echarts.min")
+    eq_(dependencies[0], "options.min")
     assert "guangdong" in dependencies
-    assert "echarts-gl.min" in dependencies
+    assert "options-gl.min" in dependencies
     eq_(len(dependencies), 3)
 
 
@@ -137,10 +126,10 @@ def test_page_in_notebook():
     html = page._repr_html_()
 
     assert "echartsgl" in html
-    assert "echarts" in html
+    assert "options" in html
     assert "guangdong" in html
-    # find the appearing postion of echarts.min in html
-    echarts_position = html.find("echarts.min")
+    # find the appearing postion of options.min in html
+    echarts_position = html.find("options.min")
     # find the appearing postion of guangdong in html
     guangdong_position = html.find("guangdong")
     assert echarts_position < guangdong_position
@@ -218,10 +207,7 @@ def test_more_charts():
     ]
     kline = Kline("K 线图示例")
     kline.add(
-        "日K",
-        ["2017/7/{}".format(i + 1) for i in range(31)],
-        v1,
-        is_datazoom_show=True,
+        "日K", ["2017/7/{}".format(i + 1) for i in range(31)], v1, is_datazoom_show=True
     )
     page.add(kline)
 
@@ -250,11 +236,7 @@ def test_more_charts():
 
     # scatter3d
     data = [
-        [
-            random.randint(0, 100),
-            random.randint(0, 100),
-            random.randint(0, 100),
-        ]
+        [random.randint(0, 100), random.randint(0, 100), random.randint(0, 100)]
         for _ in range(80)
     ]
     scatter3D = Scatter3D("3D 散点图示例", width=1200, height=600)
@@ -316,17 +298,15 @@ def test_more_charts():
     page.add(liquid)
     assert len(page) == 7
     assert isinstance(page[0], Line)
-    assert ("echarts" in page.js_dependencies) or (
-        "echarts.min" in page.js_dependencies
+    assert ("options" in page.js_dependencies) or (
+        "options.min" in page.js_dependencies
     )
     page.render()
 
 
 def test_page_extra_html_text_label():
     page = Page()
-    line = Line(
-        "折线图示例", extra_html_text_label=["LINE TEXT LABEL", "color:red"]
-    )
+    line = Line("折线图示例", extra_html_text_label=["LINE TEXT LABEL", "color:red"])
     line.add(
         "最高气温",
         WEEK,
@@ -337,11 +317,7 @@ def test_page_extra_html_text_label():
     page.add(line)
 
     v1 = [11, 12, 13, 10, 10, 10]
-    pie = Pie(
-        "饼图-圆环图示例",
-        title_pos="center",
-        extra_html_text_label=["PIE TEXT LABEL"],
-    )
+    pie = Pie("饼图-圆环图示例", title_pos="center", extra_html_text_label=["PIE TEXT LABEL"])
     pie.add(
         "",
         CLOTHES,

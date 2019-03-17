@@ -10,7 +10,6 @@ python:
   - "3.7-dev"
   - "3.6"
   - "3.5"
-  - "2.7"
 before_install:
   - pip install -r test/requirements.txt
 script:

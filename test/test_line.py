@@ -15,13 +15,7 @@ clothes_v2 = [55, 60, 16, 20, 15, 80]
 def test_line_marks():
     line = Line("折线图示例")
     line.add("商家A", CLOTHES, clothes_v1, mark_point=["average"])
-    line.add(
-        "商家B",
-        CLOTHES,
-        clothes_v2,
-        is_smooth=True,
-        mark_line=["max", "average"],
-    )
+    line.add("商家B", CLOTHES, clothes_v2, is_smooth=True, mark_line=["max", "average"])
     line.render()
 
 
@@ -124,11 +118,7 @@ def test_line_type_fill():
 
 def test_line_log_yaxis():
     line = Line("折线图示例")
-    line.add(
-        "商家A",
-        CLOTHES,
-        [math.log10(random.randint(1, 99999)) for _ in range(6)],
-    )
+    line.add("商家A", CLOTHES, [math.log10(random.randint(1, 99999)) for _ in range(6)])
     line.add(
         "商家B",
         CLOTHES,
@@ -145,12 +135,7 @@ def test_line_mark_point_raw():
         CLOTHES,
         clothes_v1,
         mark_point_raw=[
-            {
-                "name": "rawData",
-                "symbol": "pin",
-                "coord": ["衬衫", 5],
-                "value": 5,
-            }
+            {"name": "rawData", "symbol": "pin", "coord": ["衬衫", 5], "value": 5}
         ],
     )
     assert line.options.get("series")[0]["markLine"]["data"] == []

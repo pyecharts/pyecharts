@@ -5,16 +5,7 @@ from __future__ import unicode_literals
 from random import randint
 from test.constants import CLOTHES, WEEK
 
-from pyecharts import (
-    Bar,
-    EffectScatter,
-    Grid,
-    Line,
-    Overlap,
-    Page,
-    Scatter,
-    Timeline,
-)
+from pyecharts import Bar, EffectScatter, Grid, Line, Overlap, Page, Scatter, Timeline
 
 
 def test_page_grid_timeline_overlap():
@@ -89,12 +80,7 @@ def test_page_grid_timeline_overlap():
     bar_5.add("春季", CLOTHES, [randint(10, 100) for _ in range(6)])
     bar_5.add("夏季", CLOTHES, [randint(10, 100) for _ in range(6)])
     bar_5.add("秋季", CLOTHES, [randint(10, 100) for _ in range(6)])
-    bar_5.add(
-        "冬季",
-        CLOTHES,
-        [randint(10, 100) for _ in range(6)],
-        is_legend_show=True,
-    )
+    bar_5.add("冬季", CLOTHES, [randint(10, 100) for _ in range(6)], is_legend_show=True)
 
     timeline = Timeline(is_auto_play=True, timeline_bottom=0)
     timeline.add(bar_1, "2012 年")
