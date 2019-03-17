@@ -9,7 +9,7 @@ from nose.tools import raises
 
 from pyecharts import Bar, Map
 from pyecharts.conf import PyEchartsConfig
-from pyecharts.commons.engine import BaseEnvironment, EchartsEnvironment
+from pyecharts.render.engine import BaseEnvironment, EchartsEnvironment
 from pyecharts.utils import get_resource_dir
 
 ECHARTS_ENV = EchartsEnvironment()

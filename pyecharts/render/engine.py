@@ -4,8 +4,8 @@ import os
 
 from jinja2 import Environment, FileSystemLoader
 
-from .utils import write_utf8_html_file
-from .consts import ONLINE_HOST
+from pyecharts.commons.utils import write_utf8_html_file
+from pyecharts.commons.consts import ONLINE_HOST
 from pyecharts.commons.types import Optional, Any
 from pyecharts.datasets import FILENAMES
 
