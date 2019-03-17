@@ -1,7 +1,7 @@
 # coding=utf-8
 
 from ...charts.chart import Chart
-from ...commons.types import *
+from ...types import *
 from ...options import *
 
 

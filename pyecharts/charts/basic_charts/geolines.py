@@ -1,9 +1,8 @@
 # coding=utf-8
 from __future__ import unicode_literals
 
-from pyecharts.charts.basic_charts.geo import Geo
-
-# from pyecharts.commons.consts import SYMBOL
+from ...charts import Geo
+from ...options import *
 
 
 class GeoLines(Geo):
@@ -13,8 +12,8 @@ class GeoLines(Geo):
     用于带有起点和终点信息的线数据的绘制，主要用于地图上的航线，路线的可视化。
     """
 
-    def __init__(self, *args, **kwargs):
-        super(GeoLines, self).__init__(*args, **kwargs)
+    def __init__(self, init_opts: InitOpts = InitOpts()):
+        super().__init__(init_opts=init_opts)
         self._zlevel = 1
 
     def add(

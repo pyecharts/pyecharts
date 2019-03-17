@@ -1,6 +1,7 @@
 # coding=utf-8
 
 from pyecharts.charts.chart import Chart
+from ...options import *
 
 
 class HeatMap(Chart):
@@ -11,8 +12,8 @@ class HeatMap(Chart):
     直角坐标系上必须要使用两个类目轴。
     """
 
-    def __init__(self, title="", subtitle="", **kwargs):
-        super(HeatMap, self).__init__(title, subtitle, **kwargs)
+    def __init__(self, init_opts: InitOpts = InitOpts()):
+        super().__init__(init_opts=init_opts)
 
     def add(self, *args, **kwargs):
         """

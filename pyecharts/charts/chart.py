@@ -2,10 +2,10 @@
 
 import uuid
 
-from pyecharts.charts.base import Base
-from pyecharts.commons.consts import RENDER_TYPE, COLOR_LST
-from pyecharts.commons.types import *
-from pyecharts.options import *
+from ..charts.base import Base
+from ..commons.consts import RENDER_TYPE, COLOR_LST
+from ..types import *
+from ..options import *
 
 
 class Chart(Base):

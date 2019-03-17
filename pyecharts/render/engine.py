@@ -4,10 +4,10 @@ import os
 
 from jinja2 import Environment, FileSystemLoader
 
-from pyecharts.commons.utils import write_utf8_html_file
-from pyecharts.commons.consts import ONLINE_HOST
-from pyecharts.commons.types import Optional, Any
-from pyecharts.datasets import FILENAMES
+from ..commons.utils import write_utf8_html_file
+from ..commons.consts import ONLINE_HOST
+from ..types import Optional, Any
+from ..datasets import FILENAMES
 
 
 __HERE = os.path.abspath(os.path.dirname(__file__))

@@ -1,7 +1,8 @@
 # coding=utf-8
 import warnings
 
-from pyecharts.charts.chart import Chart
+from ...charts.chart import Chart
+from ...options import *
 
 
 class Radar(Chart):
@@ -11,8 +12,8 @@ class Radar(Chart):
     雷达图主要用于表现多变量的数据。
     """
 
-    def __init__(self, title="", subtitle="", **kwargs):
-        super(Radar, self).__init__(title, subtitle, **kwargs)
+    def __init__(self, init_opts: InitOpts = InitOpts()):
+        super().__init__(init_opts=init_opts)
 
     def set_radar_component(
         self,

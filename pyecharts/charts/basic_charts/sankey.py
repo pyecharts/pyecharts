@@ -1,6 +1,7 @@
 # coding=utf-8
 
-from pyecharts.charts.chart import Chart
+from ...charts.chart import Chart
+from ...options import *
 
 
 class Sankey(Chart):
@@ -11,8 +12,8 @@ class Sankey(Chart):
     间过程的加工、转化到达最终形式。
     """
 
-    def __init__(self, title="", subtitle="", **kwargs):
-        super(Sankey, self).__init__(title, subtitle, **kwargs)
+    def __init__(self, init_opts: InitOpts = InitOpts()):
+        super().__init__(init_opts=init_opts)
 
     def add(
         self, name, nodes, links, sankey_node_width=20, sankey_node_gap=8, **kwargs

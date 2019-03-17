@@ -1,7 +1,7 @@
 # coding=utf-8
 
-from pyecharts.charts.basic_charts.scatter import Scatter
-from pyecharts.options import InitOpts
+from ...charts import Scatter
+from ...options import *
 
 
 class EffectScatter(Scatter):
@@ -11,8 +11,8 @@ class EffectScatter(Scatter):
     利用动画特效可以将某些想要突出的数据进行视觉突出。
     """
 
-    def __init__(self, title="", subtitle="", **kwargs):
-        super(EffectScatter, self).__init__(title, subtitle, **kwargs)
+    def __init__(self, init_opts: InitOpts = InitOpts()):
+        super().__init__(init_opts=init_opts)
 
     def add(self, name, x_axis, y_axis, symbol_size=10, **kwargs):
         """

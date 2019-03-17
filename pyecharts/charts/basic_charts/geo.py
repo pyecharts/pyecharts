@@ -2,9 +2,9 @@
 
 import json
 
-from ...options import *
-from ...commons.types import *
 from ...charts.chart import Chart
+from ...options import *
+from ...types import *
 from ...datasets import COORDINATES
 
 DEFAULT_GEO_TOOLTIP_FORMATTER = "{b}: {c}"
@@ -53,12 +53,6 @@ class Geo(Chart):
         """
         if name in self._coordinates:
             return self._coordinates[name]
-
-        # coordinate = get_coordinate(name, region=region)
-        # if coordinate is None and raise_exception:
-        #     raise ValueError("No coordinate is specified for {}".format(name))
-
-        # return coordinate
 
     def add(
         self,
@@ -133,5 +127,3 @@ class Geo(Chart):
             self.options.get("series").append(
                 {"type": type_, "name": name, "coordinateSystem": "geo", "data": _data}
             )
-
-        self._add_chinese_map(maptype)

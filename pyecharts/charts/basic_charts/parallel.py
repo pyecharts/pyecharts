@@ -2,7 +2,8 @@
 
 import warnings
 
-from pyecharts.charts.chart import Chart
+from ...charts.chart import Chart
+from ...options import *
 
 
 class Parallel(Chart):
@@ -12,8 +13,8 @@ class Parallel(Chart):
     平行坐标系是一种常用的可视化高维数据的图表。
     """
 
-    def __init__(self, title="", subtitle="", **kwargs):
-        super(Parallel, self).__init__(title, subtitle, **kwargs)
+    def __init__(self, init_opts: InitOpts = InitOpts()):
+        super().__init__(init_opts=init_opts)
 
     def set_schema(self, schema=None, c_schema=None):
         """

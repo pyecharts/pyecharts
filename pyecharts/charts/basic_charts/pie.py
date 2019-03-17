@@ -1,7 +1,7 @@
 # coding=utf-8
 
-from pyecharts.charts.chart import Chart
-from ...commons.types import *
+from ...charts.chart import Chart
+from ...types import *
 from ...options import *
 
 
@@ -15,43 +15,39 @@ class Pie(Chart):
     def __init__(self, init_opts: InitOpts = InitOpts()):
         super().__init__(init_opts=init_opts)
 
-    def add(self, name, data_pair, radius=None, center=None, rosetype=None, **kwargs):
+    def add(
+        self,
+        name: str,
+        data_pair,
+        radius: Optional[ListTuple] = None,
+        center: Optional[ListTuple] = None,
+        rosetype: str = "radius",
+        label_opts: LabelOpts = LabelOpts(),
+    ):
 
-        _data = []
-        for (_name, _value) in data_pair:
-            _data.append({"name": _name, "value": _value})
+        data = [{"name": _name, "value": _value} for (_name, _value) in data_pair]
 
-        _rmin, _rmax = "0%", "75%"
-        if radius:
-            if len(radius) == 2:
-                _rmin, _rmax = ["{}%".format(r) for r in radius]
-
-        _cmin, _cmax = "50%", "50%"
-        if center:
-            if len(center) == 2:
-                _cmin, _cmax = ["{}%".format(c) for c in center]
-
-        if rosetype:
-            if rosetype not in ("radius", "area"):
-                rosetype = "radius"
+        if not radius:
+            radius = ["0%", "75%"]
+        if not center:
+            center = ["50%", "50%"]
 
         for a in attr:
-            self._option.get("legend")[0].get("data").append(a)
+            self.options.get("legend")[0].get("data").append(a)
 
-        _dlst = self._option.get("legend")[0].get("data")
+        _dlst = self.options.get("legend")[0].get("data")
         _dset = list(set(_dlst))
         _dset.sort(key=_dlst.index)
-        self._option.get("legend")[0].update(data=list(_dset))
+        self.options.get("legend")[0].update(data=list(_dset))
 
         self.options.get("series").append(
             {
                 "type": "pie",
                 "name": name,
-                "data": _data,
-                "radius": [_rmin, _rmax],
-                "center": [_cmin, _cmax],
+                "data": data,
+                "radius": radius,
+                "center": center,
                 "roseType": rosetype,
-                "label": chart["label"],
-                "seriesId": self._option.get("series_id"),
+                "label": label_opts.opts,
             }
         )
