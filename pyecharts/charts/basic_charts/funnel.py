@@ -1,8 +1,8 @@
 # coding=utf-8
 
-from pyecharts.charts.chart import Chart
+from ...charts.chart import Chart
 from ...options import *
-from ...commons.types import *
+from ...types import *
 
 
 class Funnel(Chart):
@@ -29,6 +29,7 @@ class Funnel(Chart):
 
         for element in attr:
             self.options.get("legend")[0].get("data").append(element)
+
         _dset = set(self.options.get("legend")[0].get("data"))
         self.options.get("legend")[0].update(data=list(_dset))
 

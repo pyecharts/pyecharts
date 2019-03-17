@@ -1,6 +1,7 @@
 # coding=utf-8
 
-from pyecharts.charts.chart import Chart
+from ...charts.chart import Chart
+from ...options import *
 
 
 class Graph(Chart):
@@ -10,8 +11,8 @@ class Graph(Chart):
     用于展现节点以及节点之间的关系数据。
     """
 
-    def __init__(self, title="", subtitle="", **kwargs):
-        super(Graph, self).__init__(title, subtitle, **kwargs)
+    def __init__(self, init_opts: InitOpts = InitOpts()):
+        super().__init__(init_opts=init_opts)
 
     def add(
         self,

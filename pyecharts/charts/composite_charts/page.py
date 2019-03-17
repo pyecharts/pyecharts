@@ -6,7 +6,7 @@ from jinja2 import Markup
 
 from pyecharts.commons import consts
 from pyecharts.render import engine
-from pyecharts.commons.types import *
+from pyecharts.types import *
 
 
 class Page:

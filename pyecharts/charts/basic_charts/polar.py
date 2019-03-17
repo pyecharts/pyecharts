@@ -1,6 +1,7 @@
 # coding=utf-8
 
-from pyecharts.charts.chart import Chart
+from ...charts.chart import Chart
+from ...options import *
 
 
 class Polar(Chart):
@@ -10,8 +11,8 @@ class Polar(Chart):
     可以用于散点图和折线图。
     """
 
-    def __init__(self, title="", subtitle="", **kwargs):
-        super(Polar, self).__init__(title, subtitle, **kwargs)
+    def __init__(self, init_opts: InitOpts = InitOpts()):
+        super().__init__(init_opts=init_opts)
 
     def add(
         self,

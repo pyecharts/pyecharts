@@ -1,6 +1,6 @@
 # coding=utf-8
 
-from pyecharts.commons.types import Optional, Union, List, Numeric
+from ..types import Optional, Union, List, Numeric
 
 
 class LabelOpts:
@@ -53,9 +53,9 @@ class LineStyleOpts:
 
 class SplitLineOpts:
     def __init__(
-        self, is_show: bool = True, line_style: LineStyleOpts = LineStyleOpts()
+        self, is_show: bool = False, linestyle_opts: LineStyleOpts = LineStyleOpts()
     ):
-        self.opts: dict = {"show": is_show, "lineStyle": line_style}
+        self.opts: dict = {"show": is_show, "lineStyle": linestyle_opts.opts}
 
 
 class AxisLineOpts:

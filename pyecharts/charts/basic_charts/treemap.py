@@ -1,6 +1,7 @@
 # coding=utf-8
 
-from pyecharts.charts.chart import Chart
+from ...charts.chart import Chart
+from ...options import *
 
 
 class TreeMap(Chart):
@@ -11,8 +12,8 @@ class TreeMap(Chart):
     便于突出展现出『树』的各层级中重要的节点。
     """
 
-    def __init__(self, title="", subtitle="", **kwargs):
-        super(TreeMap, self).__init__(title, subtitle, **kwargs)
+    def __init__(self, init_opts: InitOpts = InitOpts()):
+        super().__init__(init_opts=init_opts)
 
     def add(
         self,

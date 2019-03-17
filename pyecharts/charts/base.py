@@ -4,13 +4,12 @@ import uuid
 import json
 import os
 
-from pyecharts.commons import consts, utils
-from pyecharts.render import engine
-from pyecharts.render.engine import RenderEngine
-from pyecharts.commons.structures import OrderedSet
-from pyecharts.commons.consts import ONLINE_HOST
-from pyecharts.options import InitOpts
-from pyecharts.datasets import FILENAMES
+from ..commons import consts, utils
+from ..commons.structures import OrderedSet
+from ..commons.consts import ONLINE_HOST
+from ..render.engine import RenderEngine
+from ..options import InitOpts
+from ..datasets import FILENAMES
 
 
 class Base:
@@ -60,7 +59,7 @@ class Base:
     def _repr_html_(self):
         require_config = self.__produce_require_dict()
         self.options = self.dump_options()
-        return engine.RenderEngine().render_chart_to_notebook(
+        return RenderEngine().render_chart_to_notebook(
             template_name="notebook.html",
             charts=(self,),
             config_items=require_config["config_items"],

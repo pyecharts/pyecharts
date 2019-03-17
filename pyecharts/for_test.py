@@ -1,6 +1,6 @@
-from pyecharts import Bar, Line
+from pyecharts.charts import Bar, Line
 from pyecharts.options import *
-from pyecharts.commons import snapshot
+from pyecharts.render import snapshot
 
 bar = Bar()
 
@@ -35,4 +35,4 @@ line = (
 )
 line.render("line.html")
 
-snapshot("bar.html", "bar.png", is_remove_html=True)
+# snapshot("bar.html", "bar.png")

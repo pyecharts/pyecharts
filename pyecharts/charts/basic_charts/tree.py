@@ -1,6 +1,7 @@
 # coding=utf-8
 
-from pyecharts.charts.chart import Chart
+from ...charts.chart import Chart
+from ...options import *
 
 
 class Tree(Chart):
@@ -10,8 +11,8 @@ class Tree(Chart):
     树图主要用来可视化树形数据结构，是一种特殊的层次类型，具有唯一的根节点，左子树，和右子树。
     """
 
-    def __init__(self, title="", subtitle="", **kwargs):
-        super(Tree, self).__init__(title, subtitle, **kwargs)
+    def __init__(self, init_opts: InitOpts = InitOpts()):
+        super().__init__(init_opts=init_opts)
 
     @staticmethod
     def _set_collapse_interval(data, interval=0):

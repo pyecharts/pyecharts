@@ -1,8 +1,7 @@
 # coding=utf-8
 
-from pyecharts.commons.types import *
-from pyecharts.commons.consts import *
-from pyecharts.options.series_options import *
+from ..commons.consts import *
+from ..options.series_options import *
 
 
 class InitOpts:
@@ -202,11 +201,11 @@ class AxisOpts:
         boundary_gap: Optional[str] = None,
         label_alignment: Optional[str] = None,
         inverse: Optional[str] = None,
-        is_split_line: bool = True,
+        splitline_opts: SplitLineOpts = SplitLineOpts(),
         min_: Union[None, Numeric] = None,
         max_: Union[None, Numeric] = None,
-        type_: str = "value",
-        line_style: LineStyleOpts = LineStyleOpts(),
+        type_: Union[str] = None,
+        linestyle_opts: LineStyleOpts = LineStyleOpts(),
     ):
         self.opts: dict = {
             "name": name,
@@ -221,8 +220,8 @@ class AxisOpts:
             "min": min_,
             "max": max_,
             "type": type_,
-            "splitLine": {"show": is_split_line},
-            "axisLine": {"lineStyle": line_style.opts},
+            "splitLine": splitline_opts.opts,
+            "axisLine": {"lineStyle": linestyle_opts.opts},
         }
 
         # if is_convert:

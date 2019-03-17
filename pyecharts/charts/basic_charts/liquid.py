@@ -1,8 +1,8 @@
 # coding=utf-8
 
-from pyecharts.charts.chart import Chart
-from pyecharts.options import *
-from pyecharts.commons.types import *
+from ...charts.chart import Chart
+from ...options import *
+from ...types import *
 
 
 class Liquid(Chart):

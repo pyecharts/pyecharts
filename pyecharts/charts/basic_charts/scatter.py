@@ -1,8 +1,8 @@
 # coding=utf-8
 
-from pyecharts.commons.types import *
-from pyecharts.charts.chart import Chart
-from pyecharts.options import *
+from ...types import *
+from ...charts.chart import Chart
+from ...options import *
 
 
 class Scatter(Chart):
@@ -23,35 +23,31 @@ class Scatter(Chart):
         self.__xaxis_data = xaxis_data
         return self
 
-    def add_yaxis(self, name: str, y_axis: List, symbol_size=10, **kwargs):
-        assert len(x_axis) == len(y_axis)
-        kwargs.update(type="scatter", x_axis=x_axis)
-        chart = self._get_all_options(**kwargs)
+    def add_yaxis(
+        self,
+        name: str,
+        y_axis: List,
+        symbol=None,
+        symbol_size=10,
+        label_opts: LabelOpts = LabelOpts(),
+        markpoint_opts: MarkPointOpts = MarkPointOpts(),
+        markline_opts: MarkLineOpts = MarkLineOpts(),
+    ):
 
-        xaxis, yaxis = chart["xy_axis"]
         # show split line, because by default split line is hidden for xaxis
-        xaxis[0]["splitLine"]["show"] = True
-        self._option.update(xAxis=xaxis, yAxis=yaxis)
-        self._option.get("legend")[0].get("data").append(name)
-
-        zip_lst = [x_axis, y_axis]
-        for e in (extra_data, extra_name):
-            if e:
-                # 确保提供的额外的数据或名称长度相同
-                assert len(e) == len(x_axis)
-                zip_lst.append(e)
-        _data = [list(z) for z in zip(*zip_lst)]
-
+        # xaxis[0]["splitLine"]["show"] = True
+        # self._option.update(xAxis=xaxis, yAxis=yaxis)
+        self.options.get("legend")[0].get("data").append(name)
+        data = [list(z) for z in zip(self.__xaxis_data, y_axis)]
         self.options.get("series").append(
             {
                 "type": "scatter",
                 "name": name,
-                "symbol": chart["symbol"],
+                "symbol": symbol,
                 "symbolSize": symbol_size,
-                "data": _data,
-                "label": chart["label"],
-                "markPoint": chart["mark_point"],
-                "markLine": chart["mark_line"],
-                "seriesId": self._option.get("series_id"),
+                "data": data,
+                "label": label_opts,
+                "markPoint": markpoint_opts,
+                "markLine": markline_opts,
             }
         )

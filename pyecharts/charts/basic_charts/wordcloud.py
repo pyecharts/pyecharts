@@ -1,7 +1,8 @@
 # coding=utf-8
 import random
 
-from pyecharts.charts.chart import Chart
+from ...charts.chart import Chart
+from ...options import *
 
 SHAPES = ("cardioid", "diamond", "triangle-forward", "triangle", "pentagon", "star")
 
@@ -22,8 +23,8 @@ class WordCloud(Chart):
     <<< 词云图 >>>
     """
 
-    def __init__(self, title="", subtitle="", **kwargs):
-        super(WordCloud, self).__init__(title, subtitle, **kwargs)
+    def __init__(self, init_opts: InitOpts = InitOpts()):
+        super().__init__(init_opts=init_opts)
         self.js_dependencies.add("wordcloud")
 
     def add(
@@ -78,7 +79,7 @@ class WordCloud(Chart):
         else:
             shape = "circle"
 
-        self._option.get("series").append(
+        self.options.get("series").append(
             {
                 "type": "wordCloud",
                 "name": name,
@@ -90,4 +91,3 @@ class WordCloud(Chart):
                 "data": _data,
             }
         )
-        self._config_components(**kwargs)

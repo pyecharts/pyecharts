@@ -1,8 +1,8 @@
 # coding=utf-8
 
-from pyecharts.charts.chart import Chart
+from ...charts.chart import Chart
 from ...options import *
-from ...commons.types import *
+from ...types import *
 
 DEFAULT_GAUGE_TOOLTIP_FORMATTER = "{a} <br/>{b} : {c}%"
 

@@ -1,7 +1,7 @@
 # coding=utf-8
 
-from pyecharts.charts.chart import Chart
-from pyecharts.options import *
+from ...charts.chart import Chart
+from ...options import *
 
 
 class Map(Chart):

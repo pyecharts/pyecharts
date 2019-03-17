@@ -1,6 +1,7 @@
 # coding=utf-8
 
-from pyecharts.charts.chart import Chart
+from ...charts.chart import Chart
+from ...options import *
 
 
 def kline_tooltip_formatter(params):
@@ -29,8 +30,10 @@ class Kline(Chart):
     红涨蓝跌
     """
 
-    def __init__(self, title="", subtitle="", **kwargs):
-        super(Kline, self).__init__(title, subtitle, **kwargs)
+    def __init__(self, init_opts: InitOpts = InitOpts()):
+        super().__init__(init_opts=init_opts)
+        self.options.update(yAxis={})
+        self.__xaxis_data = None
 
     def add(self, name, x_axis, y_axis, **kwargs):
         """
@@ -58,16 +61,14 @@ class Kline(Chart):
         self._option.get("yAxis")[0]["scale"] = True
         self._option.get("yAxis")[0]["splitArea"] = {"show": True}
 
-        self._option.get("legend")[0].get("data").append(name)
+        self.options.get("legend")[0].get("data").append(name)
 
-        self._option.get("series").append(
+        self.options.get("series").append(
             {
                 "type": "candlestick",
                 "name": name,
                 "data": y_axis,
                 "markPoint": chart["mark_point"],
                 "markLine": chart["mark_line"],
-                "seriesId": self._option.get("series_id"),
             }
         )
-        self._config_components(**kwargs)
