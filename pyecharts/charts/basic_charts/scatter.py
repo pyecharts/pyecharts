@@ -37,7 +37,7 @@ class Scatter(Chart):
         # show split line, because by default split line is hidden for xaxis
         # xaxis[0]["splitLine"]["show"] = True
         # self._option.update(xAxis=xaxis, yAxis=yaxis)
-        self.options.get("legend")[0].get("data").append(name)
+        self._append_legend(name)
         data = [list(z) for z in zip(self.__xaxis_data, y_axis)]
         self.options.get("series").append(
             {

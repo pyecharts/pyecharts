@@ -30,36 +30,14 @@ class WordCloud(Chart):
     def add(
         self,
         name,
-        attr,
-        value,
+        data_pair=None,
         shape="circle",
         word_gap=20,
         word_size_range=None,
         rotate_step=45,
-        **kwargs
     ):
-        """
-
-        :param name:
-            系列名称，用于 tooltip 的显示，legend 的图例筛选。
-        :param attr:
-            属性名称。
-        :param value:
-            属性所对应的值。
-        :param shape:
-            词云图轮廓，有'circle', 'cardioid', 'diamond', 'triangle-forward',
-            'triangle', 'pentagon', 'star'可选。
-        :param word_gap:
-            单词间隔，默认为 20。
-        :param word_size_range:
-            单词字体大小范围，默认为 [12, 60]。
-        :param rotate_step:
-            旋转单词角度，默认为 45。
-        """
-        assert len(attr) == len(value)
         _data = []
-        for data in zip(attr, value):
-            _name, _value = data
+        for (_name, _value) in data_pair:
             _data.append(
                 {
                     "name": _name,
@@ -67,6 +45,7 @@ class WordCloud(Chart):
                     "textStyle": {"normal": {"color": gen_color()}},
                 }
             )
+
         _min, _max = 12, 60
         if word_size_range is not None:
             if len(word_size_range) == 2:

@@ -20,12 +20,12 @@ class Grid(Base):
     def add(
         self,
         chart,
-        grid_width=None,
-        grid_height=None,
-        grid_top=None,
-        grid_bottom=None,
-        grid_left=None,
-        grid_right=None,
+        width=None,
+        height=None,
+        top=None,
+        bottom=None,
+        left=None,
+        right=None,
     ):
         """
 

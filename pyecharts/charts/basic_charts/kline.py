@@ -35,7 +35,14 @@ class Kline(Chart):
         self.options.update(yAxis={})
         self.__xaxis_data = None
 
-    def add(self, name, x_axis, y_axis, **kwargs):
+    def add(
+        self,
+        name,
+        x_axis,
+        y_axis,
+        markline_opts: MarkLineOpts(),
+        markpoint_opts: MarkPointOpts(),
+    ):
         """
 
         :param name:
@@ -48,12 +55,16 @@ class Kline(Chart):
              最低值, 最高值]）。
         :param kwargs:
         """
-        kwargs.update(type="candlestick", x_axis=x_axis)
-        if "tooltip_formatter" not in kwargs:
-            kwargs["tooltip_formatter"] = kline_tooltip_formatter
-        if "tooltip_trigger" not in kwargs:
-            kwargs["tooltip_trigger"] = "axis"
-        chart = self._get_all_options(**kwargs)
+        # kwargs.update(type="candlestick", x_axis=x_axis)
+        # if "tooltip_formatter" not in kwargs:
+        #     kwargs["tooltip_formatter"] = kline_tooltip_formatter
+        # if "tooltip_trigger" not in kwargs:
+        #     kwargs["tooltip_trigger"] = "axis"
+
+        if isinstance(markpoint_opts, MarkPointOpts):
+            markpoint_opts = markpoint_opts.opts
+        if isinstance(markline_opts, MarkLineOpts):
+            markline_opts = markline_opts.opts
 
         xaxis, yaxis = chart["xy_axis"]
         self._option.update(xAxis=xaxis, yAxis=yaxis)
@@ -61,14 +72,14 @@ class Kline(Chart):
         self._option.get("yAxis")[0]["scale"] = True
         self._option.get("yAxis")[0]["splitArea"] = {"show": True}
 
-        self.options.get("legend")[0].get("data").append(name)
+        self._append_legend(name)
 
         self.options.get("series").append(
             {
                 "type": "candlestick",
                 "name": name,
                 "data": y_axis,
-                "markPoint": chart["mark_point"],
-                "markLine": chart["mark_line"],
+                "markPoint": markpoint_opts,
+                "markLine": markline_opts,
             }
         )

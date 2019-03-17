@@ -1,7 +1,7 @@
 # coding=utf-8
 
-from pyecharts.charts.base import Base
-from pyecharts.commons.consts import PAGE_TITLE
+from ...charts.base import Base
+from ...commons.consts import PAGE_TITLE
 
 # from pyecharts.commons.utils import merge_js_dependencies
 

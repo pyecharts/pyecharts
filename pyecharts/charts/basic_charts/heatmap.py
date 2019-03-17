@@ -43,10 +43,9 @@ class HeatMap(Chart):
 
         if "yaxis_formatter" not in kwargs:
             kwargs["yaxis_formatter"] = None
-        chart = self._get_all_options(**kwargs)
-        self._option.get("legend")[0].get("data").append(name)
+            self._append_legend(name)
 
-        self._option.get("series").append(
+        self.options.get("series").append(
             {
                 "type": "heatmap",
                 "name": name,
@@ -57,17 +56,15 @@ class HeatMap(Chart):
         )
 
         if _is_calendar:
-            self._option.get("toolbox").update(left="98%", top="26%")
-            self._option.get("series")[0].update(coordinateSystem="calendar")
-            self._option.update(calendar=chart["calendar"])
+            self.options.get("toolbox").update(left="98%", top="26%")
+            self.options.get("series")[0].update(coordinateSystem="calendar")
+            self.options.update(calendar=chart["calendar"])
         else:
             xaxis, yaxis = chart["xy_axis"]
-            self._option.update(xAxis=xaxis, yAxis=yaxis)
-            self._option.get("xAxis")[0].update(
+            self.options.update(xAxis=xaxis, yAxis=yaxis)
+            self.options.get("xAxis")[0].update(
                 type="category", data=x_axis, splitArea={"show": True}
             )
-            self._option.get("yAxis")[0].update(
+            self.options.get("yAxis")[0].update(
                 type="category", data=y_axis, splitArea={"show": True}
             )
-
-        self._config_components(**kwargs)

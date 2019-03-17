@@ -4,9 +4,9 @@ from collections import OrderedDict
 
 from jinja2 import Markup
 
-from pyecharts.commons import consts
-from pyecharts.render import engine
-from pyecharts.types import *
+from ...commons import consts
+from ...render import engine
+from ...types import *
 
 
 class Page:

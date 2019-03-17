@@ -93,7 +93,7 @@ class Geo(Chart):
                 },
             }
         )
-        self.options.get("legend")[0].get("data").append(name)
+        self._append_legend(name)
 
         if type == "scatter":
             self.options.get("series").append(

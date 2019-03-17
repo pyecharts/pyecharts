@@ -38,10 +38,10 @@ class Line(Chart):
         linestyle_opts: LineStyleOpts = LineStyleOpts(),
         areastyle_opts: AreaStyleOpts = AreaStyleOpts(),
     ):
-        self.options.get("legend")[0].get("data").append(name)
+        self._append_legend(name)
         # 合并 x 和 y 轴数据，避免当 X 轴的类型设置为 'value' 的时候，
         # X、Y 轴均显示 Y 轴数据
-        _data = [list(z) for z in zip(self.__xaxis_data, y_axis)]
+        data = [list(z) for z in zip(self.__xaxis_data, y_axis)]
 
         self.options.get("series").append(
             {
@@ -53,7 +53,7 @@ class Line(Chart):
                 "step": is_step,
                 "stack": stack,
                 "showSymbol": is_symbol_show,
-                "data": _data,
+                "data": data,
                 "label": label_opts.opts,
                 "lineStyle": linestyle_opts.opts,
                 "areaStyle": areastyle_opts.opts,

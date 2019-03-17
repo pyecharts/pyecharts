@@ -35,17 +35,10 @@ class Parallel(Chart):
         """
         if schema:
             _schema = [{"dim": i, "name": v} for i, v in enumerate(schema)]
-            self._option.update(parallelAxis=_schema)
+            self.options.update(parallelAxis=_schema)
         if c_schema:
-            self._option.update(parallelAxis=c_schema)
+            self.options.update(parallelAxis=c_schema)
         return self
-
-    def config(self, schema=None, c_schema=None):
-        """The old alias name for set_schema.
-        """
-        deprecated_tpl = "The {} is deprecated, please use {} instead!"
-        warnings.warn(deprecated_tpl.format("config", "set_schema"), DeprecationWarning)
-        return self.set_schema(schema=schema, c_schema=c_schema)
 
     def add(self, name, data, **kwargs):
         """
@@ -56,13 +49,12 @@ class Parallel(Chart):
             数据项。数据中，每一行是一个『数据项』，每一列属于一个『维度』。
         :param kwargs:
         """
-        chart = self._get_all_options(**kwargs)
-        self._option.update(
+        self.options.update(
             parallel={"left": "5%", "right": "13%", "bottom": "10%", "top": "20%"}
         )
-        self._option.get("legend")[0].get("data").append(name)
+        self._append_legend(name)
 
-        self._option.get("series").append(
+        self.options.get("series").append(
             {
                 "type": "parallel",
                 "coordinateSystem": "parallel",
@@ -71,4 +63,3 @@ class Parallel(Chart):
                 "data": data,
             }
         )
-        self._config_components(**kwargs)

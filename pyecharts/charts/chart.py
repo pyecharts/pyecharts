@@ -22,33 +22,53 @@ class Chart(Base):
 
     def set_series_opts(
         self,
-        label_opts: Optional[LabelOpts] = None,
-        linestyle_opts: Optional[LineStyleOpts] = None,
-        splitline_opts: Optional[SplitLineOpts] = None,
-        axisline_opts: Optional[AxisLineOpts] = None,
-        markpoint_opts: Optional[MarkPointOpts] = None,
-        markline_opts: Optional[MarkLineOpts] = None,
+        label_opts: Union[LabelOpts, Dict, None] = None,
+        linestyle_opts: Union[LineStyleOpts, Dict, None] = None,
+        splitline_opts: Union[SplitLineOpts, Dict, None] = None,
+        axisline_opts: Union[AxisLineOpts, Dict, None] = None,
+        markpoint_opts: Union[MarkPointOpts, Dict, None] = None,
+        markline_opts: Union[MarkLineOpts, Dict, None] = None,
     ):
         _series = self.options.get("series")
         if label_opts:
+            if isinstance(label_opts, LabelOpts):
+                label_opts = label_opts.opts
             for s in _series:
-                s.update(label=label_opts.opts)
+                s.update(label=label_opts)
+
         if linestyle_opts:
+            if isinstance(linestyle_opts, LineStyleOpts):
+                linestyle_opts = linestyle_opts.opts
             for s in _series:
-                s.update(lineStyle=linestyle_opts.opts)
+                s.update(lineStyle=linestyle_opts)
+
         if splitline_opts:
+            if isinstance(splitline_opts, SplitLineOpts):
+                splitline_opts = splitline_opts.opts
             for s in _series:
-                s.update(splitLine=splitline_opts.opts)
+                s.update(splitLine=splitline_opts)
+
         if axisline_opts:
+            if isinstance(axisline_opts, AxisLineOpts):
+                axisline_opts = axisline_opts.opts
             for s in _series:
-                s.update(axisLine=axisline_opts.opts)
+                s.update(axisLine=axisline_opts)
+
         if markpoint_opts:
+            if isinstance(markpoint_opts, MarkPointOpts):
+                markpoint_opts = markpoint_opts.opts
             for s in _series:
-                s.update(markPoint=markpoint_opts.opts)
+                s.update(markPoint=markpoint_opts)
+
         if markline_opts:
+            if isinstance(markline_opts, MarkLineOpts):
+                markline_opts = markline_opts.opts
             for s in _series:
-                s.update(markLine=markline_opts.opts)
+                s.update(markLine=markline_opts)
         return self
+
+    def _append_legend(self, name):
+        self.options.get("legend")[0].get("data").append(name)
 
     def set_global_opts(
         self,
@@ -59,16 +79,31 @@ class Chart(Base):
         visualmap_opts: VisualMapOpts = None,
         datazoom_opts: DataZoomOpts = None,
     ):
+        if isinstance(title_opts, TitleOpts):
+            title_opts = title_opts.opts
+        if isinstance(toolbox_opts, ToolboxOpst):
+            toolbox_opts = toolbox_opts.opts
+        if isinstance(tooltip_opts, TooltipOpts):
+            tooltip_opts = tooltip_opts.opts
+        if isinstance(legend_opts, LegendOpts):
+            legend_opts = legend_opts.opts
+
         self.options.update(
-            title=title_opts.opts,
-            toolbox=toolbox_opts.opts,
-            tooltip=tooltip_opts.opts,
-            legend=legend_opts.opts,
+            title=title_opts, toolbox=toolbox_opts, tooltip=tooltip_opts
         )
+
+        for _s in self.options["legend"]:
+            _s.update(legend_opts)
+
         if visualmap_opts:
-            self.options.update(visualMap=visualmap_opts.ops)
+            if isinstance(visualmap_opts, VisualMapOpts):
+                visualmap_opts = visualmap_opts.ops
+            self.options.update(visualMap=visualmap_opts)
+
         if datazoom_opts:
-            self.options.update(dataZoom=datazoom_opts.opts)
+            if isinstance(datazoom_opts, DataZoomOpts):
+                datazoom_opts = datazoom_opts.opts
+            self.options.update(dataZoom=datazoom_opts)
         return self
 
 
@@ -98,8 +133,8 @@ class Chart3D(Chart):
         self.options.get("legend")[0].get("data").append(name)
         self.options.update(
             xAxis3D=xaxis3d.opts,
-            yAxis3D=yaxis3d_type.opts,
-            zAxis3D=zaxis3d_type.opts,
+            yAxis3D=yaxis3d.opts,
+            zAxis3D=zaxis3d.opts,
             # grid3D=chart["grid3D"],
         )
 

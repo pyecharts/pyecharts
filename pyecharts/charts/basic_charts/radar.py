@@ -20,29 +20,19 @@ class Radar(Chart):
         schema=None,
         c_schema=None,
         shape="",
-        radar_text_color="#333",
-        radar_text_size=12,
-        **kwargs
+        text_color="#333",
+        text_size=12,
+        splitline_opt: SplitLineOpts = SplitLineOpts(),
+        splitarea_opt: SplitAreaOpt = SplitAreaOpt(),
+        axisline_opt: AxisLineOpts = AxisLineOpts(),
     ):
-        """ config rader component options
+        if isinstance(splitline_opt, SplitLineOpts):
+            splitline_opt = splitline_opt.opts
+        if isinstance(splitarea_opt, SplitAreaOpt):
+            splitarea_opt = splitarea_opt.opts
+        if isinstance(axisline_opt, AxisLineOpts):
+            axisline_opt = axisline_opt.opts
 
-        :param schema:
-            默认雷达图的指示器，用来指定雷达图中的多个维度，会对数据处理成。
-            {name:xx, value:xx} 的字典
-        :param c_schema:
-            用户自定义雷达图的指示器，用来指定雷达图中的多个维度
-                name: 指示器名称
-                min: 指示器最小值
-                max: 指示器最大值
-        :param shape:
-            雷达图绘制类型，有'polygon'（多边形）和'circle'可选。
-        :param radar_text_color:
-            雷达图数据项字体颜色，默认为'#000'。
-        :param radar_text_size:
-            雷达图m数据项字体大小，默认为 12。
-        :param kwargs:
-        """
-        chart = self._get_all_options(**kwargs)
         indicator = []
         if schema:
             for s in schema:
@@ -50,70 +40,45 @@ class Radar(Chart):
                 indicator.append({"name": _name, "max": _max})
         if c_schema:
             indicator = c_schema
-        self._option.update(
+        self.options.update(
             radar={
                 "indicator": indicator,
                 "shape": shape,
-                "name": {
-                    "textStyle": {
-                        "color": radar_text_color,
-                        "fontSize": radar_text_size,
-                    }
-                },
-                "splitLine": chart["split_line"],
-                "splitArea": chart["split_area"],
-                "axisLine": chart["axis_line"],
+                "name": {"textStyle": {"color": text_color, "fontSize": text_size}},
+                "splitLine": splitline_opt,
+                "splitArea": splitarea_opt,
+                "axisLine": axisline_opt,
             }
         )
         return self
 
-    def config(
+    def add(
         self,
-        schema=None,
-        c_schema=None,
-        shape="",
-        radar_text_color="#333",
-        radar_text_size=12,
-        **kwargs
+        name,
+        value,
+        symbol=None,
+        item_color=None,
+        label_opts: LabelOpts = LabelOpts(),
+        linestyle_opts: LineStyleOpts = LineStyleOpts(),
+        areastyle_opts: AreaStyleOpts = AreaStyleOpts(),
     ):
-        """The old alias for set_schema.
-        """
-        deprecated_tpl = "The {} is deprecated, please use {} instead!"
-        warnings.warn(deprecated_tpl.format("config", "set_schema"), DeprecationWarning)
-        return self.set_radar_component(
-            schema=schema,
-            c_schema=c_schema,
-            shape=shape,
-            radar_text_color=radar_text_color,
-            radar_text_size=radar_text_size,
-            **kwargs
-        )
+        if isinstance(label_opts, LabelOpts):
+            label_opts = label_opts.opts
+        if isinstance(linestyle_opts, LineStyleOpts):
+            linestyle_opts = linestyle_opts.opts
+        if isinstance(areastyle_opts, AreaStyleOpts):
+            areastyle_opts = areastyle_opts.opts
 
-    def add(self, name, value, item_color=None, **kwargs):
-        """
-
-        :param name:
-            系列名称，用于 tooltip 的显示，legend 的图例筛选
-        :param value:
-            数据项。数据中，每一行是一个『数据项』，每一列属于一个『维度』
-        :param item_color:
-            指定单图例颜色
-        :param kwargs:
-        """
-        kwargs.update(flag=True, type="radar")
-        chart = self._get_all_options(**kwargs)
-        self._option.get("legend")[0].get("data").append(name)
-
-        self._option.get("series").append(
+        self._append_legend(name)
+        self.options.get("series").append(
             {
                 "type": "radar",
                 "name": name,
                 "data": value,
-                "symbol": chart["symbol"],
-                "label": chart["label"],
+                "symbol": symbol,
+                "label": label_opts,
                 "itemStyle": {"normal": {"color": item_color}},
-                "lineStyle": chart["line_style"],
-                "areaStyle": chart["area_style"],
+                "lineStyle": linestyle_opts,
+                "areaStyle": areastyle_opts,
             }
         )
-        self._config_components(**kwargs)
