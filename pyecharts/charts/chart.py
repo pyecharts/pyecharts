@@ -91,8 +91,8 @@ class Chart3D(Chart):
         shading: str = None,
         label_opts: LabelOpts = LabelOpts(),
         xaxis3d: Axis3DOpts = Axis3DOpts(),
-        yaxis3d_type: Axis3DOpts = Axis3DOpts(),
-        zaxis3d_type: Axis3DOpts = Axis3DOpts(),
+        yaxis3d: Axis3DOpts = Axis3DOpts(),
+        zaxis3d: Axis3DOpts = Axis3DOpts(),
     ):
 
         self.options.get("legend")[0].get("data").append(name)
