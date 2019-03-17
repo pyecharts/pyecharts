@@ -26,9 +26,9 @@ class Scatter(Chart):
     def add_yaxis(
         self,
         name: str,
-        y_axis: List,
+        y_axis: ListTuple,
         symbol=None,
-        symbol_size=10,
+        symbol_size: Numeric = 10,
         label_opts: LabelOpts = LabelOpts(),
         markpoint_opts: MarkPointOpts = MarkPointOpts(),
         markline_opts: MarkLineOpts = MarkLineOpts(),

@@ -18,8 +18,8 @@ class Liquid(Chart):
 
     def add(
         self,
-        name,
-        data,
+        name: str,
+        data: ListTuple,
         shape: str = "circle",
         color: Optional[List[str]] = None,
         is_animation: bool = True,

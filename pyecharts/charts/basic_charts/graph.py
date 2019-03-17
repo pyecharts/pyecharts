@@ -16,7 +16,7 @@ class Graph(Chart):
 
     def add(
         self,
-        name,
+        name: str,
         nodes,
         links,
         categories=None,

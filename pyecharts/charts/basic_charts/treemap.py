@@ -2,6 +2,7 @@
 
 from ...charts.chart import Chart
 from ...options import *
+from ...types import *
 
 
 class TreeMap(Chart):
@@ -17,11 +18,11 @@ class TreeMap(Chart):
 
     def add(
         self,
-        name,
+        name: str,
         data,
         left_depth=None,
         drilldown_icon="▶",
-        visible_min=10,
+        visible_min: Numeric = 10,
         label_opt: LabelOpts = LabelOpts(),
     ):
         if isinstance(label_opt, LabelOpts):

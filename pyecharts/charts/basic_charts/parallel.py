@@ -1,9 +1,8 @@
 # coding=utf-8
 
-import warnings
-
 from ...charts.chart import Chart
 from ...options import *
+from ...types import *
 
 
 class Parallel(Chart):
@@ -16,7 +15,7 @@ class Parallel(Chart):
     def __init__(self, init_opts: InitOpts = InitOpts()):
         super().__init__(init_opts=init_opts)
 
-    def set_schema(self, schema=None, c_schema=None):
+    def set_schema(self, schema: ListTuple, c_schema=None):
         """
 
         :param schema:
@@ -40,25 +39,21 @@ class Parallel(Chart):
             self.options.update(parallelAxis=c_schema)
         return self
 
-    def add(self, name, data, **kwargs):
-        """
-
-        :param name:
-            系列名称，用于 tooltip 的显示，legend 的图例筛选。
-        :param data:
-            数据项。数据中，每一行是一个『数据项』，每一列属于一个『维度』。
-        :param kwargs:
-        """
+    def add(
+        self,
+        name: str,
+        data: ListTuple,
+        linestyle_opts: LineStyleOpts = LineStyleOpts(),
+    ):
         self.options.update(
             parallel={"left": "5%", "right": "13%", "bottom": "10%", "top": "20%"}
         )
         self._append_legend(name)
-
         self.options.get("series").append(
             {
                 "type": "parallel",
                 "coordinateSystem": "parallel",
-                "lineStyle": chart["line_style"],
+                "lineStyle": linestyle_opts,
                 "name": name,
                 "data": data,
             }
