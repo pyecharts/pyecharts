@@ -2,12 +2,12 @@
 
 import uuid
 import json
+import os
 
 from pyecharts.commons import engine, consts, utils
 from pyecharts.commons.engine import RenderEngine
 from pyecharts.commons.structures import OrderedSet
 from pyecharts.commons.consts import ONLINE_HOST
-from pyecharts.commons.types import *
 from pyecharts.options import InitOpts
 from pyecharts.datasets import FILENAMES
 
@@ -36,11 +36,12 @@ class Base:
     def dump_options(self) -> str:
         return json.dumps(self.get_options(), indent=4)
 
-    def render(self, path="render.html", template_name="simple_chart.html"):
+    def render(self, path="render.html", template_name="simple_chart.html") -> str:
         self.options = self.dump_options()
         RenderEngine().render_chart_to_file(
             chart=self, path=path, template_name=template_name
         )
+        return os.path.abspath(path)
 
     # TODO: finally validate
     def __use_theme(self, theme_name: str):

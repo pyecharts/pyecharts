@@ -15,7 +15,10 @@ class Boxplot(Chart):
     def __init__(self, init_opts: InitOpts = InitOpts()):
         super().__init__(init_opts=init_opts)
 
-    def add(self, name, x_axis, y_axis, **kwargs):
+    def add_xaxis(self):
+        pass
+
+    def add_yaxis(self, name, x_axis, y_axis):
         """
 
         :param name:
@@ -27,14 +30,12 @@ class Boxplot(Chart):
             它含有五个量值，依次是：[min, Q1, median (or Q2), Q3, max]。
         :param kwargs:
         """
-        kwargs.update(x_axis=x_axis)
-        chart = self._get_all_options(**kwargs)
 
         xaxis, yaxis = chart["xy_axis"]
-        self._option.update(xAxis=xaxis, yAxis=yaxis)
-        self._option.get("legend")[0].get("data").append(name)
+        self.options.update(xAxis=xaxis, yAxis=yaxis)
+        self.options.get("legend")[0].get("data").append(name)
 
-        self._option.get("series").append(
+        self.options.get("series").append(
             {
                 "type": "boxplot",
                 "name": name,
@@ -45,7 +46,6 @@ class Boxplot(Chart):
                 "seriesId": self._option.get("series_id"),
             }
         )
-        self._config_components(**kwargs)
 
     @staticmethod
     def prepare_data(data):
