@@ -1,17 +1,4 @@
-from typing import (
-    IO,
-    Any,
-    Callable,
-    Dict,
-    Iterable,
-    List,
-    Mapping,
-    MutableMapping,
-    Optional,
-    Text,
-    Tuple,
-    Union,
-)
+from typing import Any, Callable, Iterable, List, Mapping, Optional, Tuple, Union
 
 Numeric = Union[int, float]
 ListTuple = Union[List, Tuple]

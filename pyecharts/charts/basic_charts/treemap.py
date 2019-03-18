@@ -13,7 +13,7 @@ class TreeMap(Chart):
     便于突出展现出『树』的各层级中重要的节点。
     """
 
-    def __init__(self, init_opts: InitOpts = InitOpts()):
+    def __init__(self, init_opts: Union[InitOpts, dict] = InitOpts()):
         super().__init__(init_opts=init_opts)
 
     def add(
@@ -23,7 +23,7 @@ class TreeMap(Chart):
         left_depth=None,
         drilldown_icon="▶",
         visible_min: Numeric = 10,
-        label_opt: LabelOpts = LabelOpts(),
+        label_opt: Union[LabelOpts, dict] = LabelOpts(),
     ):
         if isinstance(label_opt, LabelOpts):
             label_opt = label_opt.opts

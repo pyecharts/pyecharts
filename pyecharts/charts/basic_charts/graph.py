@@ -12,7 +12,7 @@ class Graph(Chart):
     用于展现节点以及节点之间的关系数据。
     """
 
-    def __init__(self, init_opts: InitOpts = InitOpts()):
+    def __init__(self, init_opts: Union[InitOpts, dict] = InitOpts()):
         super().__init__(init_opts=init_opts)
 
     def add(
@@ -31,8 +31,8 @@ class Graph(Chart):
         repulsion: Numeric = 50,
         edge_symbol=None,
         edge_symbol_size: Numeric = 10,
-        label_opts: LabelOpts = LabelOpts(),
-        linestyle_opts: LineStyleOpts = LineStyleOpts(),
+        label_opts: Union[LabelOpts, dict] = LabelOpts(),
+        linestyle_opts: Union[LineStyleOpts, dict] = LineStyleOpts(),
     ):
         if isinstance(label_opts, LabelOpts):
             label_opts = label_opts.opts

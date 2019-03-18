@@ -22,8 +22,10 @@ class Pie(Chart):
         radius: Optional[ListTuple] = None,
         center: Optional[ListTuple] = None,
         rosetype: str = "radius",
-        label_opts: LabelOpts = LabelOpts(),
+        label_opts: Union[LabelOpts, dict] = LabelOpts(),
     ):
+        if isinstance(label_opts, LabelOpts):
+            label_opts = label_opts.opts
 
         data = [{"name": n, "value": v} for (n, v) in data_pair]
 
@@ -48,6 +50,6 @@ class Pie(Chart):
                 "radius": radius,
                 "center": center,
                 "roseType": rosetype,
-                "label": label_opts.opts,
+                "label": label_opts,
             }
         )

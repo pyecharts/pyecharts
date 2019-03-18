@@ -10,7 +10,7 @@ from ...options import (
     SplitAreaOpt,
     SplitLineOpts,
 )
-from ...types import *
+from ...types import ListTuple, Optional, Union
 
 
 class Radar(Chart):
@@ -20,7 +20,7 @@ class Radar(Chart):
     雷达图主要用于表现多变量的数据。
     """
 
-    def __init__(self, init_opts: InitOpts = InitOpts()):
+    def __init__(self, init_opts: Union[InitOpts, dict] = InitOpts()):
         super().__init__(init_opts=init_opts)
 
     def set_radar_component(
@@ -30,9 +30,9 @@ class Radar(Chart):
         shape="",
         text_color="#333",
         text_size=12,
-        splitline_opt: SplitLineOpts = SplitLineOpts(),
-        splitarea_opt: SplitAreaOpt = SplitAreaOpt(),
-        axisline_opt: AxisLineOpts = AxisLineOpts(),
+        splitline_opt: Union[SplitLineOpts, dict] = SplitLineOpts(),
+        splitarea_opt: Union[SplitAreaOpt, dict] = SplitAreaOpt(),
+        axisline_opt: Union[AxisLineOpts, dict] = AxisLineOpts(),
     ):
         if isinstance(splitline_opt, SplitLineOpts):
             splitline_opt = splitline_opt.opts

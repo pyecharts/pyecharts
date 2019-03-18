@@ -12,10 +12,15 @@ class ThemeRiver(Chart):
     主题河流图是一种特殊的流图, 它主要用来表示事件或主题等在一段时间内的变化。
     """
 
-    def __init__(self, init_opts: InitOpts = InitOpts()):
+    def __init__(self, init_opts: Union[InitOpts, dict] = InitOpts()):
         super().__init__(init_opts=init_opts)
 
-    def add(self, name: str, data: ListTuple, label_opts: LabelOpts = LabelOpts()):
+    def add(
+        self,
+        name: str,
+        data: ListTuple,
+        label_opts: Union[LabelOpts, dict] = LabelOpts(),
+    ):
         if isinstance(label_opts, LabelOpts):
             label_opts = label_opts.opts
         self._append_legend(name)

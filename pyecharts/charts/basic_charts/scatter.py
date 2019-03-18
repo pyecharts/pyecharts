@@ -30,14 +30,17 @@ class Scatter(Chart):
         y_axis: ListTuple,
         symbol=None,
         symbol_size: Numeric = 10,
-        label_opts: LabelOpts = LabelOpts(),
-        markpoint_opts: MarkPointOpts = MarkPointOpts(),
-        markline_opts: MarkLineOpts = MarkLineOpts(),
+        label_opts: Union[LabelOpts, dict] = LabelOpts(position="right"),
+        markpoint_opts: Union[MarkPointOpts, dict] = MarkPointOpts(),
+        markline_opts: Union[MarkLineOpts, dict] = MarkLineOpts(),
     ):
+        if isinstance(label_opts, LabelOpts):
+            label_opts = label_opts.opts
+        if isinstance(markline_opts, MarkLineOpts):
+            markline_opts = markline_opts.opts
+        if isinstance(markpoint_opts, MarkPointOpts):
+            markpoint_opts = markpoint_opts.opts
 
-        # show split line, because by default split line is hidden for xaxis
-        # xaxis[0]["splitLine"]["show"] = True
-        # self._option.update(xAxis=xaxis, yAxis=yaxis)
         self._append_legend(name)
         data = [list(z) for z in zip(self.__xaxis_data, y_axis)]
         self.options.get("series").append(

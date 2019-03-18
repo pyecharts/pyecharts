@@ -20,7 +20,7 @@ class Line(Chart):
     折线图是用折线将各个数据点标志连接起来的图表，用于展现数据的变化趋势。
     """
 
-    def __init__(self, init_opts: InitOpts = InitOpts()):
+    def __init__(self, init_opts: Union[InitOpts, dict] = InitOpts()):
         super().__init__(init_opts=init_opts)
         self.options.update(yAxis=AxisOpts().opts)
         self.__xaxis_data = None
@@ -41,11 +41,11 @@ class Line(Chart):
         stack: Optional[str] = None,
         is_smooth: bool = False,
         is_step: bool = False,
-        label_opts: LabelOpts = LabelOpts(),
-        markpoint_opts: MarkPointOpts = MarkPointOpts(),
-        markline_opts: MarkLineOpts = MarkLineOpts(),
-        linestyle_opts: LineStyleOpts = LineStyleOpts(),
-        areastyle_opts: AreaStyleOpts = AreaStyleOpts(),
+        label_opts: Union[LabelOpts, dict] = LabelOpts(),
+        markpoint_opts: Union[MarkPointOpts, dict] = MarkPointOpts(),
+        markline_opts: Union[MarkLineOpts, dict] = MarkLineOpts(),
+        linestyle_opts: Union[LineStyleOpts, dict] = LineStyleOpts(),
+        areastyle_opts: Union[AreaStyleOpts, dict] = AreaStyleOpts(),
     ):
         self._append_legend(name)
         # 合并 x 和 y 轴数据，避免当 X 轴的类型设置为 'value' 的时候，

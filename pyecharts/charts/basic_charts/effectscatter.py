@@ -2,7 +2,7 @@
 
 from ...charts.chart import Chart
 from ...options import AxisOpts, EffectOpts, InitOpts, LabelOpts
-from ...types import *
+from ...types import ListTuple, Numeric, Optional, Union
 
 
 class EffectScatter(Chart):
@@ -12,7 +12,7 @@ class EffectScatter(Chart):
     利用动画特效可以将某些想要突出的数据进行视觉突出。
     """
 
-    def __init__(self, init_opts: InitOpts = InitOpts()):
+    def __init__(self, init_opts: Union[InitOpts, dict] = InitOpts()):
         super().__init__(init_opts=init_opts)
         self.options.update(yAxis=AxisOpts().opts)
         self.__xaxis_data = None
@@ -29,17 +29,14 @@ class EffectScatter(Chart):
         y_axis: ListTuple,
         symbol_size: Numeric = 10,
         symbol: Optional[str] = None,
-        label_opts: LabelOpts = LabelOpts,
-        effect_opts: EffectOpts = EffectOpts(),
+        label_opts: Union[LabelOpts, dict] = LabelOpts,
+        effect_opts: Union[EffectOpts, dict] = EffectOpts(),
     ):
         if isinstance(label_opts, LabelOpts):
             label_opts = label_opts.opts
         if isinstance(effect_opts, EffectOpts):
             effect_opts = effect_opts.opts
 
-        # xaxis, yaxis = chart["xy_axis"]
-        # show split line, because by default split line is hidden for xaxis
-        # xaxis[0]["splitLine"]["show"] = True
         self._append_legend(name)
         self.options.get("series").append(
             {

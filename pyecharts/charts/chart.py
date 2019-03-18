@@ -22,12 +22,12 @@ class Chart(Base):
 
     def set_series_opts(
         self,
-        label_opts: Union[LabelOpts, Dict, None] = None,
-        linestyle_opts: Union[LineStyleOpts, Dict, None] = None,
-        splitline_opts: Union[SplitLineOpts, Dict, None] = None,
-        axisline_opts: Union[AxisLineOpts, Dict, None] = None,
-        markpoint_opts: Union[MarkPointOpts, Dict, None] = None,
-        markline_opts: Union[MarkLineOpts, Dict, None] = None,
+        label_opts: Union[LabelOpts, dict, None] = None,
+        linestyle_opts: Union[LineStyleOpts, dict, None] = None,
+        splitline_opts: Union[SplitLineOpts, dict, None] = None,
+        axisline_opts: Union[AxisLineOpts, dict, None] = None,
+        markpoint_opts: Union[MarkPointOpts, dict, None] = None,
+        markline_opts: Union[MarkLineOpts, dict, None] = None,
     ):
         _series = self.options.get("series")
         if label_opts:
@@ -72,12 +72,14 @@ class Chart(Base):
 
     def set_global_opts(
         self,
-        title_opts: TitleOpts = TitleOpts(),
-        toolbox_opts: ToolboxOpst = ToolboxOpst(),
-        tooltip_opts: TooltipOpts = TooltipOpts(),
-        legend_opts: LegendOpts = LegendOpts(),
-        visualmap_opts: VisualMapOpts = None,
-        datazoom_opts: DataZoomOpts = None,
+        title_opts: Union[TitleOpts, dict] = TitleOpts(),
+        toolbox_opts: Union[ToolboxOpst, dict] = ToolboxOpst(),
+        tooltip_opts: Union[TooltipOpts, dict] = TooltipOpts(),
+        legend_opts: Union[LegendOpts, dict] = LegendOpts(),
+        xaxis_opt: Union[AxisOpts, dict, None] = None,
+        yaxis_opt: Union[AxisOpts, dict, None] = None,
+        visualmap_opts: Union[VisualMapOpts, dict, None] = None,
+        datazoom_opts: Union[DataZoomOpts, dict, None] = None,
     ):
         if isinstance(title_opts, TitleOpts):
             title_opts = title_opts.opts
@@ -94,6 +96,16 @@ class Chart(Base):
 
         for _s in self.options["legend"]:
             _s.update(legend_opts)
+
+        if xaxis_opt and self.options.get("xAxis", None):
+            if isinstance(xaxis_opt, AxisOpts):
+                xaxis_opt = xaxis_opt.opts
+            self.options["xAxis"].update(xaxis_opt)
+
+        if yaxis_opt and self.options.get("yAxis", None):
+            if isinstance(yaxis_opt, AxisOpts):
+                yaxis_opt = yaxis_opt.opts
+            self.options["yAxis"].update(yaxis_opt)
 
         if visualmap_opts:
             if isinstance(visualmap_opts, VisualMapOpts):
@@ -112,7 +124,7 @@ class Chart3D(Chart):
     `Chart3D`类是所有 3D 类图表的基类，继承自 `Chart` 类
     """
 
-    def __init__(self, init_opts: InitOpts = InitOpts()):
+    def __init__(self, init_opts: Union[InitOpts, dict] = InitOpts()):
         init_opts.renderer = RENDER_TYPE.canvas
         super().__init__(init_opts)
         self.js_dependencies.add("echartsgl")

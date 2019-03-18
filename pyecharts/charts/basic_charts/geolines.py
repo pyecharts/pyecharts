@@ -2,6 +2,7 @@
 
 from ...charts import Geo
 from ...options import EffectOpts, InitOpts, LabelOpts, LineStyleOpts
+from ...types import *
 
 
 class GeoLines(Geo):
@@ -11,7 +12,7 @@ class GeoLines(Geo):
     用于带有起点和终点信息的线数据的绘制，主要用于地图上的航线，路线的可视化。
     """
 
-    def __init__(self, init_opts: InitOpts = InitOpts()):
+    def __init__(self, init_opts: Union[InitOpts, dict] = InitOpts()):
         super().__init__(init_opts=init_opts)
         self._zlevel = 1
 
@@ -27,9 +28,9 @@ class GeoLines(Geo):
         normal_color="#323c48",
         emphasis_color="#2a333d",
         region_coords=None,
-        effect_opts: EffectOpts = EffectOpts(),
-        linestyle_opts: LineStyleOpts = LineStyleOpts(),
-        label_opts: LabelOpts = LabelOpts(),
+        effect_opts: Union[EffectOpts, dict] = EffectOpts(),
+        linestyle_opts: Union[LineStyleOpts, dict] = LineStyleOpts(),
+        label_opts: Union[LabelOpts, dict] = LabelOpts(),
         is_roam=True,
     ):
 

@@ -13,7 +13,7 @@ class Sankey(Chart):
     间过程的加工、转化到达最终形式。
     """
 
-    def __init__(self, init_opts: InitOpts = InitOpts()):
+    def __init__(self, init_opts: Union[InitOpts, dict] = InitOpts()):
         super().__init__(init_opts=init_opts)
 
     def add(
@@ -23,8 +23,8 @@ class Sankey(Chart):
         links: ListTuple,
         node_width: Numeric = 20,
         node_gap: Numeric = 8,
-        label_opts: LabelOpts = LabelOpts(),
-        linestyle_opt: LineStyleOpts = LineStyleOpts(),
+        label_opts: Union[LabelOpts, dict] = LabelOpts(),
+        linestyle_opt: Union[LineStyleOpts, dict] = LineStyleOpts(),
     ):
         if isinstance(label_opts, LabelOpts):
             label_opts = label_opts.opts
