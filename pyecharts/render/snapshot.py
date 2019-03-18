@@ -4,8 +4,8 @@ import base64
 import os
 
 from selenium import webdriver
-from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from selenium.common import exceptions
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 
 def snapshot(

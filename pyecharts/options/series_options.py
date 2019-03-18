@@ -1,6 +1,6 @@
 # coding=utf-8
 
-from ..types import Optional, Union, List, Numeric
+from ..types import List, Numeric, Optional, Union
 
 
 class LabelOpts:

@@ -1,8 +1,8 @@
 # coding=utf-8
 
-from ...types import *
 from ...charts.chart import Chart
 from ...options import *
+from ...types import *
 
 
 class Scatter(Chart):
