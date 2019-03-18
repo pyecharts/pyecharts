@@ -1,7 +1,7 @@
 # coding=utf-8
 
 from ...charts.chart import Chart
-from ...options import *
+from ...options import AxisOpts, EffectOpts, InitOpts, LabelOpts
 from ...types import *
 
 
@@ -14,9 +14,14 @@ class EffectScatter(Chart):
 
     def __init__(self, init_opts: InitOpts = InitOpts()):
         super().__init__(init_opts=init_opts)
+        self.options.update(yAxis=AxisOpts().opts)
+        self.__xaxis_data = None
 
     def add_xaxis(self, xaxis_data: ListTuple):
-        pass
+        self.options.update(xAxis=AxisOpts().opts)
+        self.options["xAxis"].update(data=xaxis_data)
+        self.__xaxis_data = xaxis_data
+        return self
 
     def add_yaxis(
         self,
@@ -27,18 +32,6 @@ class EffectScatter(Chart):
         label_opts: LabelOpts = LabelOpts,
         effect_opts: EffectOpts = EffectOpts(),
     ):
-        """
-
-        :param name:
-            系列名称，用于 tooltip 的显示，legend 的图例筛选。
-        :param x_axis:
-            x 坐标轴数据。
-        :param y_axis:
-            y 坐标轴数据。
-        :param symbol_size:
-            标记图形大小。
-        :param kwargs:
-        """
         if isinstance(label_opts, LabelOpts):
             label_opts = label_opts.opts
         if isinstance(effect_opts, EffectOpts):
@@ -46,10 +39,8 @@ class EffectScatter(Chart):
 
         # xaxis, yaxis = chart["xy_axis"]
         # show split line, because by default split line is hidden for xaxis
-        xaxis[0]["splitLine"]["show"] = True
-        self.options.update(xAxis=xaxis, yAxis=yaxis)
+        # xaxis[0]["splitLine"]["show"] = True
         self._append_legend(name)
-
         self.options.get("series").append(
             {
                 "type": "effectScatter",
@@ -58,7 +49,7 @@ class EffectScatter(Chart):
                 "rippleEffect": effect_opts,
                 "symbol": symbol,
                 "symbolSize": symbol_size,
-                "data": [list(z) for z in zip(x_axis, y_axis)],
+                "data": [list(z) for z in zip(self.__xaxis_data, y_axis)],
                 "label": label_opts,
             }
         )

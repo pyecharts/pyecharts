@@ -1,7 +1,7 @@
 # coding=utf-8
 
 from ...charts.chart import Chart
-from ...options import *
+from ...options import InitOpts, LabelOpts
 from ...types import *
 
 
@@ -25,7 +25,7 @@ class Pie(Chart):
         label_opts: LabelOpts = LabelOpts(),
     ):
 
-        data = [{"name": _name, "value": _value} for (_name, _value) in data_pair]
+        data = [{"name": n, "value": v} for (n, v) in data_pair]
 
         if not radius:
             radius = ["0%", "75%"]

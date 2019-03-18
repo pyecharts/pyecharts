@@ -1,7 +1,7 @@
 # coding=utf-8
 
 from ...charts.chart import Chart
-from ...options import *
+from ...options import AxisOpts, InitOpts, LabelOpts, MarkLineOpts, MarkPointOpts
 from ...types import *
 
 
@@ -29,7 +29,7 @@ class Boxplot(Chart):
         name: str,
         y_axis: ListTuple,
         label_opts: LabelOpts = LabelOpts(),
-        markpoint_opts: MarkPointOpts = MarkPointData(),
+        markpoint_opts: MarkPointOpts = MarkPointOpts(),
         markline_opts: MarkLineOpts = MarkLineOpts(),
     ):
         if isinstance(label_opts, LabelOpts):

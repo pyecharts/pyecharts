@@ -1,7 +1,14 @@
 # coding=utf-8
 
 from ...charts.chart import Chart
-from ...options import *
+from ...options import (
+    AreaStyleOpts,
+    AxisLineOpts,
+    EffectOpts,
+    InitOpts,
+    LabelOpts,
+    SplitLineOpts,
+)
 from ...types import *
 
 

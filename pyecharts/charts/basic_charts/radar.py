@@ -1,8 +1,15 @@
 # coding=utf-8
-import warnings
 
 from ...charts.chart import Chart
-from ...options import *
+from ...options import (
+    AreaStyleOpts,
+    AxisLineOpts,
+    InitOpts,
+    LabelOpts,
+    LineStyleOpts,
+    SplitAreaOpt,
+    SplitLineOpts,
+)
 from ...types import *
 
 

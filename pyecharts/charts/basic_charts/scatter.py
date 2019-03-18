@@ -1,7 +1,7 @@
 # coding=utf-8
 
 from ...charts.chart import Chart
-from ...options import *
+from ...options import AxisOpts, InitOpts, LabelOpts, MarkLineOpts, MarkPointOpts
 from ...types import *
 
 
@@ -15,11 +15,12 @@ class Scatter(Chart):
 
     def __init__(self, init_opts: InitOpts = InitOpts()):
         super().__init__(init_opts=init_opts)
-        self.options.update(yAxis={})
+        self.options.update(yAxis=AxisOpts().opts)
         self.__xaxis_data = None
 
     def add_xaxis(self, xaxis_data: Any):
-        self.options.update(xAxis={"data": xaxis_data})
+        self.options.update(xAxis=AxisOpts().opts)
+        self.options["xAxis"].update(data=xaxis_data)
         self.__xaxis_data = xaxis_data
         return self
 
