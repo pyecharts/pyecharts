@@ -2,7 +2,7 @@
 
 from ...charts.chart import Chart
 from ...options import AxisOpts, InitOpts, LabelOpts, MarkLineOpts, MarkPointOpts
-from ...types import *
+from ...types import ListTuple, Optional, Union
 
 
 class BarOpts:
@@ -18,7 +18,7 @@ class Bar(Chart):
     柱状/条形图，通过柱形的高度/条形的宽度来表现数据的大小。
     """
 
-    def __init__(self, init_opts: InitOpts = InitOpts()):
+    def __init__(self, init_opts: Union[InitOpts, dict] = InitOpts()):
         super().__init__(init_opts=init_opts)
         self.options.update(yAxis=AxisOpts().opts)
         self.__xaxis_data = None
@@ -34,9 +34,9 @@ class Bar(Chart):
         series_name: str,
         yaxis_data: ListTuple,
         bar_opts: Union[BarOpts, dict] = BarOpts(),
-        label_opts: LabelOpts = LabelOpts(),
-        markpoint_opts: MarkPointOpts = MarkPointOpts(),
-        markline_opts: MarkLineOpts = MarkLineOpts(),
+        label_opts: Union[LabelOpts, dict] = LabelOpts(),
+        markpoint_opts: Union[MarkPointOpts, dict] = MarkPointOpts(),
+        markline_opts: Union[MarkLineOpts, dict] = MarkLineOpts(),
     ):
         if isinstance(label_opts, LabelOpts):
             label_opts = label_opts.opts

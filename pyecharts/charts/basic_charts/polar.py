@@ -19,7 +19,7 @@ class Polar(Chart):
     可以用于散点图和折线图。
     """
 
-    def __init__(self, init_opts: InitOpts = InitOpts()):
+    def __init__(self, init_opts: Union[InitOpts, dict] = InitOpts()):
         super().__init__(init_opts=init_opts)
 
     def add(
@@ -41,12 +41,12 @@ class Polar(Chart):
         angleaxis_z_index=50,
         render_item=None,
         symbol=None,
-        label_opts: LabelOpts = LabelOpts(),
-        areastyle_opts: AreaStyleOpts = AreaStyleOpts(),
-        axisline_opts: AxisLineOpts = AxisLineOpts(),
-        splitline_opts: SplitLineOpts = SplitLineOpts(),
-        effect_opts: EffectOpts = EffectOpts(),
-        axislabel_opts: LabelOpts = LabelOpts(),
+        label_opts: Union[LabelOpts, dict] = LabelOpts(),
+        areastyle_opts: Union[AreaStyleOpts, dict] = AreaStyleOpts(),
+        axisline_opts: Union[AxisLineOpts, dict] = AxisLineOpts(),
+        splitline_opts: Union[SplitLineOpts, dict] = SplitLineOpts(),
+        effect_opts: Union[EffectOpts, dict] = EffectOpts(),
+        axislabel_opts: Union[LabelOpts, dict] = LabelOpts(),
     ):
 
         if isinstance(label_opts, LabelOpts):
@@ -75,7 +75,7 @@ class Polar(Chart):
         if kwargs.get("area_color", None) is None:
             _area_style = None
 
-        _bar_type_series = {
+        bar_type_series = {
             "type": "bar",
             "coordinateSystem": "polar",
             "stack": is_stack,
@@ -83,7 +83,7 @@ class Polar(Chart):
             "data": data,
         }
 
-        _radius_axis_opt = {
+        radius_axis_opt = {
             "show": is_radiusaxis_show,
             "type": polar_type,
             "data": radius_data,
@@ -94,7 +94,7 @@ class Polar(Chart):
             "z": radiusaxis_z_index,
         }
 
-        _angle_axis_opt = {
+        angle_axis_opt = {
             "show": is_angleaxis_show,
             "type": polar_type,
             "data": angle_data,
@@ -137,14 +137,14 @@ class Polar(Chart):
             )
 
         elif type == "barRadius":
-            self.options.get("series").append(_bar_type_series)
+            self.options.get("series").append(bar_type_series)
             self.options.update(angleAxis={})
-            self.options.update(radiusAxis=_radius_axis_opt)
+            self.options.update(radiusAxis=radius_axis_opt)
 
         elif type == "barAngle":
-            self.options.get("series").append(_bar_type_series)
+            self.options.get("series").append(bar_type_series)
             self.options.update(radiusAxis={"show": is_radiusaxis_show})
-            self.options.update(angleAxis=_angle_axis_opt)
+            self.options.update(angleAxis=angle_axis_opt)
 
         elif type == "custom":
             assert render_item is not None
@@ -159,6 +159,6 @@ class Polar(Chart):
             )
 
         if type not in ("barAngle", "barRadius"):
-            self.options.update(angleAxis=_angle_axis_opt)
-            self.options.update(radiusAxis=_radius_axis_opt)
+            self.options.update(angleAxis=angle_axis_opt)
+            self.options.update(radiusAxis=radius_axis_opt)
         self.options.update(polar={})

@@ -5,7 +5,7 @@ import json
 from ...charts.chart import Chart
 from ...datasets import COORDINATES
 from ...options import EffectOpts, InitOpts, LabelOpts
-from ...types import *
+from ...types import List, ListTuple, Numeric, Optional, Union
 
 DEFAULT_GEO_TOOLTIP_FORMATTER = "{b}: {c}"
 
@@ -17,7 +17,7 @@ class Geo(Chart):
     地理坐标系组件用于地图的绘制，支持在地理坐标系上绘制散点图，线集。
     """
 
-    def __init__(self, init_opts: InitOpts = InitOpts()):
+    def __init__(self, init_opts: Union[InitOpts, dict] = InitOpts()):
         super().__init__(init_opts=init_opts)
         self._coordinates = COORDINATES
 

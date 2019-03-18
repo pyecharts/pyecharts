@@ -46,18 +46,6 @@ class Kline(Chart):
         markline_opts: MarkLineOpts(),
         markpoint_opts: MarkPointOpts(),
     ):
-        """
-
-        :param name:
-            系列名称，用于 tooltip 的显示，legend 的图例筛选。
-        :param x_axis:
-            x 坐标轴数据。
-        :param y_axis:
-            y 坐标轴数据。数据中，每一行是一个『数据项』，每一列属于一个『维度』。
-            数据项具体为 [open, close, lowest, highest] （即：[开盘值, 收盘值,
-             最低值, 最高值]）。
-        :param kwargs:
-        """
         # kwargs.update(type="candlestick", x_axis=x_axis)
         # if "tooltip_formatter" not in kwargs:
         #     kwargs["tooltip_formatter"] = kline_tooltip_formatter

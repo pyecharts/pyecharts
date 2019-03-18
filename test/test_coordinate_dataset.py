@@ -6,6 +6,7 @@ from __future__ import unicode_literals
 
 from nose.tools import assert_dict_equal, eq_, raises
 
+from pyecharts.commons.exceptions import RegionNotFound
 from pyecharts.datasets.coordinates import (
     GEO_DATA_BANK,
     DefaultChinaDataBank,
@@ -14,7 +15,6 @@ from pyecharts.datasets.coordinates import (
     search_coordinates_by_keyword,
     search_coordinates_by_region_and_keyword,
 )
-from pyecharts.commons.exceptions import RegionNotFound
 
 
 def test_get_coordinate():

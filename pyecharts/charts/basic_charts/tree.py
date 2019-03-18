@@ -12,7 +12,7 @@ class Tree(Chart):
     树图主要用来可视化树形数据结构，是一种特殊的层次类型，具有唯一的根节点，左子树，和右子树。
     """
 
-    def __init__(self, init_opts: InitOpts = InitOpts()):
+    def __init__(self, init_opts: Union[InitOpts, dict] = InitOpts()):
         super().__init__(init_opts=init_opts)
 
     @staticmethod
@@ -46,8 +46,8 @@ class Tree(Chart):
         bottom: str = "12%",
         right: str = "12%",
         collapse_interval: Numeric = 0,
-        label_opts: LabelOpts = LabelOpts(),
-        leaves_label_opts: LabelOpts = LabelOpts(),
+        label_opts: Union[LabelOpts, dict] = LabelOpts(),
+        leaves_label_opts: Union[LabelOpts, dict] = LabelOpts(),
     ):
         if isinstance(label_opts, LabelOpts):
             label_opts = label_opts.opts

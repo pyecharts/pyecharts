@@ -12,7 +12,7 @@ class Parallel(Chart):
     平行坐标系是一种常用的可视化高维数据的图表。
     """
 
-    def __init__(self, init_opts: InitOpts = InitOpts()):
+    def __init__(self, init_opts: Union[InitOpts, dict] = InitOpts()):
         super().__init__(init_opts=init_opts)
 
     def set_schema(self, schema: ListTuple, c_schema=None):
@@ -43,7 +43,7 @@ class Parallel(Chart):
         self,
         name: str,
         data: ListTuple,
-        linestyle_opts: LineStyleOpts = LineStyleOpts(),
+        linestyle_opts: Union[LineStyleOpts, dict] = LineStyleOpts(),
     ):
         self.options.update(
             parallel={"left": "5%", "right": "13%", "bottom": "10%", "top": "20%"}

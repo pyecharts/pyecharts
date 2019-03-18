@@ -24,7 +24,7 @@ class WordCloud(Chart):
     <<< 词云图 >>>
     """
 
-    def __init__(self, init_opts: InitOpts = InitOpts()):
+    def __init__(self, init_opts: Union[InitOpts, dict] = InitOpts()):
         super().__init__(init_opts=init_opts)
         self.js_dependencies.add("wordcloud")
 

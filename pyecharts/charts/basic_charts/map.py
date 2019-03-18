@@ -12,7 +12,7 @@ class Map(Chart):
     地图主要用于地理区域数据的可视化。
     """
 
-    def __init__(self, init_opts: InitOpts = InitOpts()):
+    def __init__(self, init_opts: Union[InitOpts, dict] = InitOpts()):
         super().__init__(init_opts=init_opts)
 
     def add(
@@ -24,7 +24,7 @@ class Map(Chart):
         symbol: str = None,
         is_map_symbol_show: bool = True,
         name_map=None,
-        label_opts: LabelOpts = LabelOpts(),
+        label_opts: Union[LabelOpts, dict] = LabelOpts(),
     ):
         data = [{"name": n, "value": v} for (n, v) in data_pair]
         self._append_legend(name)

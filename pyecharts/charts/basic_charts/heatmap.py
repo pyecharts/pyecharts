@@ -21,7 +21,6 @@ class HeatMap(Chart):
         label_opt: LabelOpts = LabelOpts(),
         splitline_opt: SplitLineOpts = SplitLineOpts(),
     ):
-
         if isinstance(label_opt, LabelOpts):
             label_opt = label_opt.opts
         if isinstance(splitline_opt, SplitLineOpts):

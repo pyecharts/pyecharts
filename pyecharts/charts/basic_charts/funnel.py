@@ -2,7 +2,7 @@
 
 from ...charts.chart import Chart
 from ...options import InitOpts, LabelOpts
-from ...types import *
+from ...types import ListTuple, Numeric, Union
 
 
 class Funnel(Chart):
@@ -10,7 +10,7 @@ class Funnel(Chart):
     <<< 漏斗图 >>>
     """
 
-    def __init__(self, init_opts: InitOpts = InitOpts()):
+    def __init__(self, init_opts: Union[InitOpts, dict] = InitOpts()):
         super().__init__(init_opts=init_opts)
 
     def add(
@@ -19,10 +19,12 @@ class Funnel(Chart):
         data_pair: ListTuple,
         sort_: str = "descending",
         gap: Numeric = 0,
-        label_opts: LabelOpts = LabelOpts(),
+        label_opts: Union[LabelOpts, dict] = LabelOpts(),
     ):
-        data = [{"name": n, "value": v} for (n, v) in data_pair]
+        if isinstance(label_opts, LabelOpts):
+            label_opts = label_opts.opts
 
+        data = [{"name": n, "value": v} for (n, v) in data_pair]
         for (a, _) in data_pair:
             self._append_legend(a)
 
