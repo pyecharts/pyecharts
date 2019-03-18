@@ -37,14 +37,10 @@ class WordCloud(Chart):
         word_size_range=None,
         rotate_step: Numeric = 45,
     ):
-        _data = []
-        for (_name, _value) in data_pair:
-            _data.append(
-                {
-                    "name": _name,
-                    "value": _value,
-                    "textStyle": {"normal": {"color": gen_color()}},
-                }
+        data = []
+        for (n, v) in data_pair:
+            data.append(
+                {"name": n, "value": v, "textStyle": {"normal": {"color": gen_color()}}}
             )
 
         _min, _max = 12, 60
@@ -68,6 +64,6 @@ class WordCloud(Chart):
                 "rotationStep": rotate_step,
                 "girdSize": word_gap,
                 "sizeRange": [_min, _max],
-                "data": _data,
+                "data": data,
             }
         )

@@ -1,7 +1,15 @@
 # coding=utf-8
 
 from ...charts.chart import Chart
-from ...options import *
+from ...options import (
+    AreaStyleOpts,
+    AxisOpts,
+    InitOpts,
+    LabelOpts,
+    LineStyleOpts,
+    MarkLineOpts,
+    MarkPointOpts,
+)
 from ...types import *
 
 
@@ -14,11 +22,12 @@ class Line(Chart):
 
     def __init__(self, init_opts: InitOpts = InitOpts()):
         super().__init__(init_opts=init_opts)
-        self.options.update(yAxis={})
+        self.options.update(yAxis=AxisOpts().opts)
         self.__xaxis_data = None
 
     def add_xaxis(self, xaxis_data: ListTuple):
-        self.options.update(xAxis={"data": xaxis_data})
+        self.options.update(xAxis=AxisOpts().opts)
+        self.options["xAxis"].update(data=xaxis_data)
         self.__xaxis_data = xaxis_data
         return self
 
@@ -29,8 +38,8 @@ class Line(Chart):
         is_symbol_show: bool = True,
         symbol: Optional[str] = None,
         symbol_size: Numeric = 4,
-        is_smooth: bool = False,
         stack: Optional[str] = None,
+        is_smooth: bool = False,
         is_step: bool = False,
         label_opts: LabelOpts = LabelOpts(),
         markpoint_opts: MarkPointOpts = MarkPointOpts(),

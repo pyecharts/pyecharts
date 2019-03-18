@@ -2,7 +2,7 @@
 
 from pyecharts.charts.chart import Chart
 
-from ...options import *
+from ...options import InitOpts, LabelOpts, SplitLineOpts
 
 
 class HeatMap(Chart):

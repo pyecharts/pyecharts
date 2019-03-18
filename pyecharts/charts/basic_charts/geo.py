@@ -4,7 +4,7 @@ import json
 
 from ...charts.chart import Chart
 from ...datasets import COORDINATES
-from ...options import *
+from ...options import EffectOpts, InitOpts, LabelOpts
 from ...types import *
 
 DEFAULT_GEO_TOOLTIP_FORMATTER = "{b}: {c}"
@@ -67,7 +67,7 @@ class Geo(Chart):
         emphasis_color="#2a333d",
         label_opts: LabelOpts() = LabelOpts(),
         effect_opts: EffectOpts() = EffectOpts(),
-        region_coords=None,
+        region_coords: Optional[dict] = None,
         is_roam: bool = True,
     ):
         # if "tooltip_formatter" not in kwargs:
@@ -77,10 +77,10 @@ class Geo(Chart):
             for city_name, city_coord in region_coords.items():
                 self.add_coordinate(city_name, city_coord[0], city_coord[1])
 
-        _data = []
-        for (_name, _value) in data_pair:
-            lng, lat = self.get_coordinate(_name)
-            _data.append({"name": _name, "value": [lng, lat, _value]})
+        data = []
+        for (n, v) in data_pair:
+            lng, lat = self.get_coordinate(n)
+            data.append({"name": n, "value": [lng, lat, v]})
 
         self.options.update(
             geo={
@@ -103,7 +103,7 @@ class Geo(Chart):
                     "coordinateSystem": "geo",
                     "symbol": symbol,
                     "symbolSize": symbol_size,
-                    "data": _data,
+                    "data": data,
                     "label": label_opts.opts,
                 }
             )
@@ -118,12 +118,12 @@ class Geo(Chart):
                     "rippleEffect": effect_opts.opts,
                     "symbol": symbol,
                     "symbolSize": symbol_size,
-                    "data": _data,
+                    "data": data,
                     "label": label_opts.opts,
                 }
             )
 
         elif type == "heatmap":
             self.options.get("series").append(
-                {"type": type_, "name": name, "coordinateSystem": "geo", "data": _data}
+                {"type": type_, "name": name, "coordinateSystem": "geo", "data": data}
             )

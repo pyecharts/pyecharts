@@ -1,7 +1,7 @@
 # coding=utf-8
 
 from ...charts.chart import Chart
-from ...options import *
+from ...options import InitOpts
 from ...types import *
 
 DEFAULT_GAUGE_TOOLTIP_FORMATTER = "{a} <br/>{b} : {c}%"

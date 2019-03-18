@@ -1,7 +1,8 @@
 # coding=utf-8
 
 from ...charts.chart import Chart
-from ...options import *
+from ...options import InitOpts, LabelOpts, LineStyleOpts
+from ...types import *
 
 
 class Graph(Chart):
@@ -20,16 +21,16 @@ class Graph(Chart):
         nodes,
         links,
         categories=None,
-        is_focusnode=True,
-        is_roam=True,
-        is_rotate_label=False,
-        layout="force",
+        is_focusnode: bool = True,
+        is_roam: bool = True,
+        is_rotate_label: bool = False,
+        layout: str = "force",
         symbol=None,
-        edge_length=50,
-        gravity=0.2,
-        repulsion=50,
+        edge_length: Numeric = 50,
+        gravity: Numeric = 0.2,
+        repulsion: Numeric = 50,
         edge_symbol=None,
-        edge_symbol_size=10,
+        edge_symbol_size: Numeric = 10,
         label_opts: LabelOpts = LabelOpts(),
         linestyle_opts: LineStyleOpts = LineStyleOpts(),
     ):
@@ -40,7 +41,7 @@ class Graph(Chart):
 
         if categories:
             for c in categories:
-                self.options.get("legend")[0].get("data").append(c)
+                self._append_legend(c)
 
         if edge_symbol is None:
             edge_symbol = [None, None]
