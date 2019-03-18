@@ -38,6 +38,6 @@ class Funnel(Chart):
                 "data": data,
                 "sort": sort_,
                 "gap": gap,
-                "label": label_opts.opts,
+                "label": label_opts,
             }
         )
