@@ -2,6 +2,7 @@
 
 from ...charts.chart import Chart
 from ...options import *
+from ...types import *
 
 
 class Polar(Chart):
@@ -17,7 +18,7 @@ class Polar(Chart):
     def add(
         self,
         name: str,
-        data,
+        data: ListTuple,
         angle_data=None,
         radius_data=None,
         type_="line",

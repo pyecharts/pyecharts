@@ -3,9 +3,9 @@
 import uuid
 
 from ..charts.base import Base
-from ..commons.consts import RENDER_TYPE, COLOR_LST
-from ..types import *
+from ..commons.consts import COLOR_LST, RENDER_TYPE
 from ..options import *
+from ..types import *
 
 
 class Chart(Base):

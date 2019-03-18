@@ -4,11 +4,10 @@ import os
 
 from jinja2 import Environment, FileSystemLoader
 
-from ..commons.utils import write_utf8_html_file
 from ..commons.consts import ONLINE_HOST
-from ..types import Optional, Any
+from ..commons.utils import write_utf8_html_file
 from ..datasets import FILENAMES
-
+from ..types import Any, Optional
 
 __HERE = os.path.abspath(os.path.dirname(__file__))
 

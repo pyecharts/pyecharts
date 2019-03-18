@@ -3,9 +3,9 @@
 import json
 
 from ...charts.chart import Chart
+from ...datasets import COORDINATES
 from ...options import *
 from ...types import *
-from ...datasets import COORDINATES
 
 DEFAULT_GEO_TOOLTIP_FORMATTER = "{b}: {c}"
 

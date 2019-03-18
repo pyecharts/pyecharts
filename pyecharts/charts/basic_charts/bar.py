@@ -1,8 +1,8 @@
 # coding=utf-8
 
 from ...charts.chart import Chart
-from ...types import *
 from ...options import *
+from ...types import *
 
 
 class BarOpts:

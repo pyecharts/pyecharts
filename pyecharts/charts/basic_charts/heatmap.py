@@ -1,6 +1,7 @@
 # coding=utf-8
 
 from pyecharts.charts.chart import Chart
+
 from ...options import *
 
 
@@ -18,7 +19,7 @@ class HeatMap(Chart):
     def add(
         self,
         label_opt: LabelOpts = LabelOpts(),
-        splitline_opt: SplitLineOpts = SplitLineOpts()
+        splitline_opt: SplitLineOpts = SplitLineOpts(),
     ):
 
         if isinstance(label_opt, LabelOpts):

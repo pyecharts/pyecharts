@@ -1,16 +1,16 @@
 from typing import (
-    Callable,
-    Optional,
-    Union,
+    IO,
     Any,
+    Callable,
+    Dict,
     Iterable,
     List,
     Mapping,
     MutableMapping,
-    Tuple,
-    IO,
+    Optional,
     Text,
-    Dict,
+    Tuple,
+    Union,
 )
 
 Numeric = Union[int, float]

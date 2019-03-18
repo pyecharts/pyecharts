@@ -2,7 +2,6 @@
 
 import os
 
-
 __all__ = ["get_resource_dir", "write_utf8_html_file", "is_ascii"]
 
 
