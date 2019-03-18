@@ -65,7 +65,7 @@ class AxisLineOpts:
         self.opts: dict = {"show": is_show, "lineStyle": line_style}
 
 
-class MarkPointData:
+class MarkPointItem:
     def __init__(
         self,
         name: Optional[str] = None,
@@ -96,7 +96,7 @@ class MarkPointData:
 class MarkPointOpts:
     def __init__(
         self,
-        data: List[MarkPointData] = None,
+        data: List[MarkPointItem] = None,
         symbol: Optional[str] = None,
         symbol_size: Union[None, Numeric] = None,
         label: LabelOpts = LabelOpts(),
@@ -115,6 +115,10 @@ class MarkLineOpts:
     def __init__(self):
         self.opts: dict = {}
 
+# TODO
+class MarkLineItem:
+    pass
+
 
 class EffectOpts:
     def __init__(
@@ -131,6 +135,11 @@ class AreaStyleOpts:
 class SplitAreaOpt:
     def __init__(self, is_show=True, area_style: AreaStyleOpts = AreaStyleOpts()):
         self.opts: dict = {"show": is_show, "areaStyle": area_style}
+
+
+# TODO
+class ItemStyleOpts:
+    pass
 
 
 # def symbol(type=None, symbol="", **kwargs):
