@@ -2,7 +2,7 @@
 
 from ...charts.chart import Chart
 from ...options import AxisOpts, InitOpts, LabelOpts, MarkLineOpts, MarkPointOpts
-from ...types import *
+from ...types import ListTuple, Numeric, Union
 
 
 class Scatter(Chart):
@@ -13,12 +13,12 @@ class Scatter(Chart):
     可以用颜色来表现，利用 geo 组件。
     """
 
-    def __init__(self, init_opts: InitOpts = InitOpts()):
+    def __init__(self, init_opts: Union[InitOpts, dict] = InitOpts()):
         super().__init__(init_opts=init_opts)
         self.options.update(yAxis=AxisOpts().opts)
         self.__xaxis_data = None
 
-    def add_xaxis(self, xaxis_data: Any):
+    def add_xaxis(self, xaxis_data: ListTuple):
         self.options.update(xAxis=AxisOpts().opts)
         self.options["xAxis"].update(data=xaxis_data)
         self.__xaxis_data = xaxis_data

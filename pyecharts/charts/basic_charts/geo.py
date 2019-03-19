@@ -65,13 +65,17 @@ class Geo(Chart):
         border_color="#111",
         normal_color="#323c48",
         emphasis_color="#2a333d",
-        label_opts: LabelOpts() = LabelOpts(),
-        effect_opts: EffectOpts() = EffectOpts(),
         region_coords: Optional[dict] = None,
         is_roam: bool = True,
+        label_opts: Union[LabelOpts, dict] = LabelOpts(),
+        effect_opts: Union[EffectOpts, dict] = EffectOpts(),
     ):
         # if "tooltip_formatter" not in kwargs:
         #     kwargs["tooltip_formatter"] = DEFAULT_GEO_TOOLTIP_FORMATTER
+        if isinstance(label_opts, LabelOpts):
+            label_opts = label_opts.opts
+        if isinstance(effect_opts, EffectOpts):
+            effect_opts = effect_opts.opts
 
         if region_coords:
             for city_name, city_coord in region_coords.items():

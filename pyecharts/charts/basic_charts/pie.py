@@ -2,7 +2,7 @@
 
 from ...charts.chart import Chart
 from ...options import InitOpts, LabelOpts
-from ...types import *
+from ...types import ListTuple, Optional, Union
 
 
 class Pie(Chart):
@@ -12,7 +12,7 @@ class Pie(Chart):
     饼图主要用于表现不同类目的数据在总和中的占比。每个的弧度表示数据数量的比例。
     """
 
-    def __init__(self, init_opts: InitOpts = InitOpts()):
+    def __init__(self, init_opts: Union[InitOpts, dict] = InitOpts()):
         super().__init__(init_opts=init_opts)
 
     def add(

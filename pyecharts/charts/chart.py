@@ -4,8 +4,24 @@ import uuid
 
 from ..charts.base import Base
 from ..commons.consts import COLOR_LST, RENDER_TYPE
-from ..options import *
-from ..types import *
+from ..options import (
+    Axis3DOpts,
+    AxisLineOpts,
+    AxisOpts,
+    DataZoomOpts,
+    InitOpts,
+    LabelOpts,
+    LegendOpts,
+    LineStyleOpts,
+    MarkLineOpts,
+    MarkPointOpts,
+    SplitLineOpts,
+    TitleOpts,
+    ToolboxOpst,
+    TooltipOpts,
+    VisualMapOpts,
+)
+from ..types import ListTuple, Numeric, Optional, Union
 
 
 class Chart(Base):
@@ -13,7 +29,7 @@ class Chart(Base):
     `Chart`类是所有非自定义类的基类，继承自 `Base` 类
     """
 
-    def __init__(self, init_opts: InitOpts = InitOpts()):
+    def __init__(self, init_opts: Union[InitOpts, dict] = InitOpts()):
         super().__init__(init_opts=init_opts)
         self._colorlst = COLOR_LST
         self.options.update(

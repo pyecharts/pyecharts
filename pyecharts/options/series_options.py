@@ -115,6 +115,7 @@ class MarkLineOpts:
     def __init__(self):
         self.opts: dict = {}
 
+
 # TODO
 class MarkLineItem:
     pass

@@ -8,7 +8,8 @@ from selenium.common import exceptions
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 
-def snapshot(
+# TODO: multi render
+def make_snapshot(
     html_path: str, image_name: str, pixel_ratio: int = 2, is_remove_html: bool = False
 ):
     option = webdriver.ChromeOptions()
