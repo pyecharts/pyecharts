@@ -1,11 +1,11 @@
 # coding=utf-8
 
-from ...charts.chart import Chart
+from ...charts.chart import AxisChart
 from ...options import AxisOpts, InitOpts, LabelOpts, MarkLineOpts, MarkPointOpts
 from ...types import ListTuple, Numeric, Union
 
 
-class Scatter(Chart):
+class Scatter(AxisChart):
     """
     <<< 散点图 >>>
 
@@ -15,19 +15,13 @@ class Scatter(Chart):
 
     def __init__(self, init_opts: Union[InitOpts, dict] = InitOpts()):
         super().__init__(init_opts=init_opts)
-        self.options.update(yAxis=AxisOpts().opts)
-        self.__xaxis_data = None
-
-    def add_xaxis(self, xaxis_data: ListTuple):
-        self.options.update(xAxis=AxisOpts().opts)
-        self.options["xAxis"].update(data=xaxis_data)
-        self.__xaxis_data = xaxis_data
-        return self
+        self.options.update(yAxis=[AxisOpts().opts])
 
     def add_yaxis(
         self,
         name: str,
         y_axis: ListTuple,
+        *,
         symbol=None,
         symbol_size: Numeric = 10,
         label_opts: Union[LabelOpts, dict] = LabelOpts(position="right"),

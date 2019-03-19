@@ -20,6 +20,6 @@ from .series_options import (
     SplitLineOpts,
     AreaStyleOpts,
     AxisLineOpts,
-    MarkPointData,
+    MarkPointItem,
     EffectOpts,
 )

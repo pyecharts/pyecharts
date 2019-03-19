@@ -1,7 +1,7 @@
 # coding=utf-8
 
-from ...charts.chart import Chart
-from ...options import InitOpts, MarkLineOpts, MarkPointOpts
+from ...charts.chart import AxisChart
+from ...options import AxisOpts, InitOpts, MarkLineOpts, MarkPointOpts
 from ...types import ListTuple
 
 
@@ -24,7 +24,7 @@ def kline_tooltip_formatter(params):
     return text
 
 
-class Kline(Chart):
+class Kline(AxisChart):
     """
     <<< K 线图 >>>
 
@@ -33,16 +33,13 @@ class Kline(Chart):
 
     def __init__(self, init_opts: InitOpts = InitOpts()):
         super().__init__(init_opts=init_opts)
-        self.options.update(yAxis={})
-        self.__xaxis_data = None
-
-    def add_xaxis(self):
-        pass
+        self.options.update(yAxis=[AxisOpts().opts])
 
     def add_yaxis(
         self,
         name: str,
         y_axis: ListTuple,
+        *,
         markline_opts: MarkLineOpts(),
         markpoint_opts: MarkPointOpts(),
     ):
@@ -64,7 +61,6 @@ class Kline(Chart):
         self._option.get("yAxis")[0]["splitArea"] = {"show": True}
 
         self._append_legend(name)
-
         self.options.get("series").append(
             {
                 "type": "candlestick",

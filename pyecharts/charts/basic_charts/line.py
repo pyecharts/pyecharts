@@ -1,6 +1,6 @@
 # coding=utf-8
 
-from ...charts.chart import Chart
+from ...charts.chart import AxisChart
 from ...options import (
     AreaStyleOpts,
     AxisOpts,
@@ -13,7 +13,7 @@ from ...options import (
 from ...types import ListTuple, Numeric, Optional, Union
 
 
-class Line(Chart):
+class Line(AxisChart):
     """
     <<< 折线/面积图 >>>
 
@@ -22,19 +22,13 @@ class Line(Chart):
 
     def __init__(self, init_opts: Union[InitOpts, dict] = InitOpts()):
         super().__init__(init_opts=init_opts)
-        self.options.update(yAxis=AxisOpts().opts)
-        self.__xaxis_data = None
-
-    def add_xaxis(self, xaxis_data: ListTuple):
-        self.options.update(xAxis=AxisOpts().opts)
-        self.options["xAxis"].update(data=xaxis_data)
-        self.__xaxis_data = xaxis_data
-        return self
+        self.options.update(yAxis=[AxisOpts().opts])
 
     def add_yaxis(
         self,
         name: str,
         y_axis: ListTuple,
+        *,
         is_symbol_show: bool = True,
         symbol: Optional[str] = None,
         symbol_size: Numeric = 4,

@@ -113,11 +113,13 @@ class Chart(Base):
         for _s in self.options["legend"]:
             _s.update(legend_opts)
 
+        # TODO: xaxis -> list
         if xaxis_opt and self.options.get("xAxis", None):
             if isinstance(xaxis_opt, AxisOpts):
                 xaxis_opt = xaxis_opt.opts
             self.options["xAxis"].update(xaxis_opt)
 
+        # TODO: yaxis -> list
         if yaxis_opt and self.options.get("yAxis", None):
             if isinstance(yaxis_opt, AxisOpts):
                 yaxis_opt = yaxis_opt.opts
@@ -132,6 +134,26 @@ class Chart(Base):
             if isinstance(datazoom_opts, DataZoomOpts):
                 datazoom_opts = datazoom_opts.opts
             self.options.update(dataZoom=datazoom_opts)
+        return self
+
+
+class AxisChart(Chart):
+    def extend_axis(
+        self, xaxis: Optional[AxisOpts] = None, yaxis: Optional[AxisOpts] = None
+    ):
+        if xaxis:
+            if isinstance(xaxis, AxisOpts):
+                xaxis = xaxis.opts
+            self.options["xAxis"].append(xaxis)
+        if yaxis:
+            if isinstance(yaxis, AxisOpts):
+                yaxis = yaxis.opts
+            self.options["yAxis"].append(yaxis)
+
+    def add_xaxis(self, xaxis_data: ListTuple):
+        self.options.update(xAxis=[AxisOpts().opts])
+        self.options["xAxis"][0].update(data=xaxis_data)
+        self.__xaxis_data = xaxis_data
         return self
 
 
@@ -152,17 +174,25 @@ class Chart3D(Chart):
         data: ListTuple,
         opacity: Numeric = 1,
         shading: Optional[str] = None,
-        label_opts: LabelOpts = LabelOpts(),
-        xaxis3d: Axis3DOpts = Axis3DOpts(),
-        yaxis3d: Axis3DOpts = Axis3DOpts(),
-        zaxis3d: Axis3DOpts = Axis3DOpts(),
+        label_opts: Union[LabelOpts, dict] = LabelOpts(),
+        xaxis3d: Union[Axis3DOpts, dict] = Axis3DOpts(),
+        yaxis3d: Union[Axis3DOpts, dict] = Axis3DOpts(),
+        zaxis3d: Union[Axis3DOpts, dict] = Axis3DOpts(),
     ):
+        if isinstance(label_opts, LabelOpts):
+            label_opts = label_opts.opts
+        if isinstance(xaxis3d, Axis3DOpts):
+            xaxis3d = xaxis3d.opts
+        if isinstance(yaxis3d, Axis3DOpts):
+            yaxis3d = yaxis3d.opts
+        if isinstance(zaxis3d, Axis3DOpts):
+            zaxis3d = zaxis3d.opts
 
         self.options.get("legend")[0].get("data").append(name)
         self.options.update(
-            xAxis3D=xaxis3d.opts,
-            yAxis3D=yaxis3d.opts,
-            zAxis3D=zaxis3d.opts,
+            xAxis3D=xaxis3d,
+            yAxis3D=yaxis3d,
+            zAxis3D=zaxis3d,
             # grid3D=chart["grid3D"],
         )
 
@@ -171,7 +201,7 @@ class Chart3D(Chart):
                 "type": self._3d_chart_type,
                 "name": name,
                 "data": data,
-                "label": label_opts.opts,
+                "label": label_opts,
                 "shading": shading,
                 "itemStyle": {"opacity": opacity},
             }

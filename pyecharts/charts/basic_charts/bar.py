@@ -1,6 +1,6 @@
 # coding=utf-8
 
-from ...charts.chart import Chart
+from ...charts.chart import AxisChart
 from ...options import AxisOpts, InitOpts, LabelOpts, MarkLineOpts, MarkPointOpts
 from ...types import ListTuple, Optional, Union
 
@@ -11,7 +11,7 @@ class BarOpts:
         self.category_gap = category_gap
 
 
-class Bar(Chart):
+class Bar(AxisChart):
     """
     <<< 柱状图/条形图 >>>
 
@@ -20,19 +20,13 @@ class Bar(Chart):
 
     def __init__(self, init_opts: Union[InitOpts, dict] = InitOpts()):
         super().__init__(init_opts=init_opts)
-        self.options.update(yAxis=AxisOpts().opts)
-        self.__xaxis_data = None
-
-    def add_xaxis(self, xaxis_data: ListTuple):
-        self.options.update(xAxis=AxisOpts().opts)
-        self.options["xAxis"].update(data=xaxis_data)
-        self.__xaxis_data = xaxis_data
-        return self
+        self.options.update(yAxis=[AxisOpts().opts])
 
     def add_yaxis(
         self,
         series_name: str,
         yaxis_data: ListTuple,
+        *,
         bar_opts: Union[BarOpts, dict] = BarOpts(),
         label_opts: Union[LabelOpts, dict] = LabelOpts(),
         markpoint_opts: Union[MarkPointOpts, dict] = MarkPointOpts(),
