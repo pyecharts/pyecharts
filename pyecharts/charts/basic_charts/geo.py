@@ -108,7 +108,7 @@ class Geo(Chart):
                     "symbol": symbol,
                     "symbolSize": symbol_size,
                     "data": data,
-                    "label": label_opts.opts,
+                    "label": label_opts,
                 }
             )
 
@@ -119,11 +119,11 @@ class Geo(Chart):
                     "name": name,
                     "coordinateSystem": "geo",
                     "showEffectOn": "render",
-                    "rippleEffect": effect_opts.opts,
+                    "rippleEffect": effect_opts,
                     "symbol": symbol,
                     "symbolSize": symbol_size,
                     "data": data,
-                    "label": label_opts.opts,
+                    "label": label_opts,
                 }
             )
 

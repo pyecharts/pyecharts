@@ -1,1 +1,1 @@
-from .snapshot import snapshot
+from .snapshot import make_snapshot
