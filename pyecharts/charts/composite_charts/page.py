@@ -5,7 +5,8 @@ from collections import OrderedDict
 from jinja2 import Markup
 
 from ...commons import consts
-from ...render import engine
+from ...render.engine import RenderEngine
+from ...commons.structures import OrderedSet
 from ...types import *
 
 
@@ -23,23 +24,23 @@ class Page:
         :param name_chart_pair: named charts as {<name>:<chart>}
         """
         self.page_title = page_title
-        self._charts = OrderedDict()
+        self._charts = OrderedSet()
+        self.js_dependencies = OrderedSet()
 
-    def add(self, charts: List = None):
-        if not isinstance(achart_or_charts, (list, tuple, set)):
-            achart_or_charts = (achart_or_charts,)  # Make it a sequence
-        for c in achart_or_charts:
-            self.add_chart(chart=c)
+    def add(self, *charts):
+        for c in charts:
+            self._charts.add(c)
+            for d in c.js_depencencies.items:
+                self.js_dependencies.add(d)
         return self
 
     # List-Like Feature
-
     def __iter__(self):
-        for chart in self._charts.values():
+        for chart in self._charts.items:
             yield chart
 
     def __len__(self):
-        return len(self._charts)
+        return len(self._charts.items)
 
     # Chart-Like Feature
 
@@ -72,21 +73,25 @@ class Page:
         """
         return Markup("<br/> ".join([chart.render_embed() for chart in self]))
 
-    def get_js_dependencies(self):
-        """
-        Declare its javascript dependencies for embedding purpose
-        """
-        return CURRENT_CONFIG.produce_html_script_list(self.js_dependencies)
+    # def _repr_html_(self):
+    #     """
+    #     :return: html content for jupyter
+    #     """
+    #     dependencies = self.js_dependencies
+    #     require_config = CURRENT_CONFIG.produce_require_configuration(dependencies)
+    #     config_items = require_config["config_items"]
+    #     libraries = require_config["libraries"]
+    #     env = engine.create_default_environment(constants.DEFAULT_HTML)
+    #     return env.render_chart_to_notebook(
+    #         charts=self, config_items=config_items, libraries=libraries
+    #     )
 
     def _repr_html_(self):
-        """
-        :return: html content for jupyter
-        """
-        dependencies = self.js_dependencies
-        require_config = CURRENT_CONFIG.produce_require_configuration(dependencies)
-        config_items = require_config["config_items"]
-        libraries = require_config["libraries"]
-        env = engine.create_default_environment(constants.DEFAULT_HTML)
-        return env.render_chart_to_notebook(
-            charts=self, config_items=config_items, libraries=libraries
+        require_config = self.__produce_require_dict()
+        self.options = self.dump_options()
+        return RenderEngine().render_chart_to_notebook(
+            template_name="notebook.html",
+            charts=self,
+            config_items=require_config["config_items"],
+            libraries=require_config["libraries"],
         )
