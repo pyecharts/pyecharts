@@ -2,7 +2,7 @@
 
 from ...charts.chart import Chart
 from ...options import InitOpts, MarkLineOpts, MarkPointOpts
-from ...types import *
+from ...types import ListTuple
 
 
 def kline_tooltip_formatter(params):

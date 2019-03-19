@@ -2,7 +2,7 @@
 
 from ...charts import Geo
 from ...options import EffectOpts, InitOpts, LabelOpts, LineStyleOpts
-from ...types import *
+from ...types import Union
 
 
 class GeoLines(Geo):
@@ -21,7 +21,6 @@ class GeoLines(Geo):
         name: str,
         data,
         maptype="china",
-        coordinate_region="中国",
         symbol=None,
         symbol_size=12,
         border_color="#111",

@@ -2,7 +2,7 @@
 
 from ...charts.chart import Chart
 from ...options import InitOpts, LabelOpts
-from ...types import *
+from ...types import ListTuple, Union
 
 
 class ThemeRiver(Chart):
@@ -23,8 +23,8 @@ class ThemeRiver(Chart):
     ):
         if isinstance(label_opts, LabelOpts):
             label_opts = label_opts.opts
-        self._append_legend(name)
 
+        self._append_legend(name)
         self.options.get("series").append(
             {"type": "themeRiver", "name": name, "data": data, "label": label_opts}
         )

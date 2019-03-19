@@ -23,17 +23,18 @@ class TreeMap(Chart):
         left_depth=None,
         drilldown_icon="▶",
         visible_min: Numeric = 10,
-        label_opt: Union[LabelOpts, dict] = LabelOpts(),
+        label_opts: Union[LabelOpts, dict] = LabelOpts(),
     ):
-        if isinstance(label_opt, LabelOpts):
-            label_opt = label_opt.opts
+        if isinstance(label_opts, LabelOpts):
+            label_opts = label_opts.opts
+
         self._append_legend(name)
         self.options.get("series").append(
             {
                 "type": "treemap",
                 "name": name,
                 "data": data,
-                "label": label_opt,
+                "label": label_opts,
                 "leafDepth": left_depth,
                 "drillDownIcon": drilldown_icon,
                 "visibleMin": visible_min,

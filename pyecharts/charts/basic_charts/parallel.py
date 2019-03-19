@@ -2,7 +2,7 @@
 
 from ...charts.chart import Chart
 from ...options import InitOpts, LineStyleOpts
-from ...types import *
+from ...types import ListTuple, Union
 
 
 class Parallel(Chart):
@@ -45,6 +45,9 @@ class Parallel(Chart):
         data: ListTuple,
         linestyle_opts: Union[LineStyleOpts, dict] = LineStyleOpts(),
     ):
+        if isinstance(linestyle_opts, LineStyleOpts):
+            linestyle_opts = linestyle_opts.opts
+
         self.options.update(
             parallel={"left": "5%", "right": "13%", "bottom": "10%", "top": "20%"}
         )

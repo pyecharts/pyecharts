@@ -2,7 +2,7 @@
 
 from ...charts.chart import Chart
 from ...options import InitOpts, LabelOpts, LineStyleOpts
-from ...types import *
+from ...types import Numeric, Union
 
 
 class Graph(Chart):

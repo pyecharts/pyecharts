@@ -10,7 +10,7 @@ from ...options import (
     MarkLineOpts,
     MarkPointOpts,
 )
-from ...types import *
+from ...types import ListTuple, Numeric, Optional, Union
 
 
 class Line(Chart):
@@ -47,6 +47,17 @@ class Line(Chart):
         linestyle_opts: Union[LineStyleOpts, dict] = LineStyleOpts(),
         areastyle_opts: Union[AreaStyleOpts, dict] = AreaStyleOpts(),
     ):
+        if isinstance(label_opts, LabelOpts):
+            label_opts = label_opts.opts
+        if isinstance(markpoint_opts, MarkPointOpts):
+            markpoint_opts = markpoint_opts.opts
+        if isinstance(markline_opts, MarkLineOpts):
+            markline_opts = markline_opts
+        if isinstance(linestyle_opts, LineStyleOpts):
+            linestyle_opts = linestyle_opts.opts
+        if isinstance(areastyle_opts, AreaStyleOpts):
+            areastyle_opts = areastyle_opts.opts
+
         self._append_legend(name)
         # 合并 x 和 y 轴数据，避免当 X 轴的类型设置为 'value' 的时候，
         # X、Y 轴均显示 Y 轴数据

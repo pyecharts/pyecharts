@@ -2,7 +2,7 @@
 
 from ...charts.chart import Chart
 from ...options import InitOpts, LabelOpts
-from ...types import *
+from ...types import ListTuple, Union
 
 
 class Map(Chart):
@@ -26,6 +26,9 @@ class Map(Chart):
         name_map=None,
         label_opts: Union[LabelOpts, dict] = LabelOpts(),
     ):
+        if isinstance(label_opts, LabelOpts):
+            label_opts = label_opts.opts
+
         data = [{"name": n, "value": v} for (n, v) in data_pair]
         self._append_legend(name)
 
@@ -33,7 +36,7 @@ class Map(Chart):
             "type": "map",
             "name": name,
             "symbol": symbol,
-            "label": label_opts.opts,
+            "label": label_opts,
             "mapType": maptype,
             "data": data,
             "roam": is_roam,

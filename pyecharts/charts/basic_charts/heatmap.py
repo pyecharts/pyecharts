@@ -3,6 +3,7 @@
 from pyecharts.charts.chart import Chart
 
 from ...options import InitOpts, LabelOpts, SplitLineOpts
+from ...types import Union
 
 
 class HeatMap(Chart):
@@ -13,13 +14,16 @@ class HeatMap(Chart):
     直角坐标系上必须要使用两个类目轴。
     """
 
-    def __init__(self, init_opts: InitOpts = InitOpts()):
+    def __init__(self, init_opts: Union[InitOpts, dict] = InitOpts()):
         super().__init__(init_opts=init_opts)
 
-    def add(
+    def add_xaxis(self):
+        pass
+
+    def add_yaxis(
         self,
-        label_opt: LabelOpts = LabelOpts(),
-        splitline_opt: SplitLineOpts = SplitLineOpts(),
+        label_opt: Union[LabelOpts, dict] = LabelOpts(),
+        splitline_opt: Union[SplitLineOpts, dict] = SplitLineOpts(),
     ):
         if isinstance(label_opt, LabelOpts):
             label_opt = label_opt.opts

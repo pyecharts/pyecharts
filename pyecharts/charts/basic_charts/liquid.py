@@ -2,7 +2,7 @@
 
 from ...charts.chart import Chart
 from ...options import InitOpts
-from ...types import *
+from ...types import List, ListTuple, Optional, Union
 
 
 class Liquid(Chart):
