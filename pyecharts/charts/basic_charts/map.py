@@ -2,7 +2,7 @@
 
 from ...charts.chart import Chart
 from ...options import InitOpts, LabelOpts
-from ...types import ListTuple, Union
+from ...commons.types import ListTuple, Union
 
 
 class Map(Chart):

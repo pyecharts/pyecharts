@@ -1,10 +1,10 @@
 # coding=utf-8
-
 import json
 import os
 import uuid
 
-from ..commons import consts, utils
+from ..consts import BUILTIN_THEMES, ONLINE_HOST
+from ..commons import utils
 from ..commons.structures import OrderedSet
 from ..options import InitOpts
 from ..render.engine import RenderEngine
@@ -22,16 +22,17 @@ class Base:
         self.renderer = init_opts.renderer
         self.page_title = init_opts.page_title
         self.theme = init_opts.theme
+        self._chart_type = ""
 
         self.chart_id = uuid.uuid4().hex
         self.options: dict = {}
-        self.js_host: str = consts.ONLINE_HOST
+        self.js_host: str = ONLINE_HOST
         self.js_functions: OrderedSet = OrderedSet()
         self.js_dependencies: OrderedSet = OrderedSet("echarts")
 
     @staticmethod
     def produce_js_func(fn: str) -> str:
-        return "__-o-__{}__-o-__".format(fn)
+        return utils._produce_js_func(fn)
 
     def add_js_funcs(self, *fns):
         for fn in fns:
@@ -52,7 +53,7 @@ class Base:
         return os.path.abspath(path)
 
     def _use_theme(self):
-        if self.theme not in consts.BUILTIN_THEMES:
+        if self.theme not in BUILTIN_THEMES:
             self.js_dependencies.add(self.theme)
 
     def _repr_html_(self):

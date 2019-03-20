@@ -3,7 +3,7 @@ import random
 
 from ...charts.chart import Chart
 from ...options import InitOpts
-from ...types import ListTuple, Numeric, Union
+from ...commons.types import ListTuple, Numeric, Union
 
 SHAPES = ("cardioid", "diamond", "triangle-forward", "triangle", "pentagon", "star")
 

@@ -2,7 +2,7 @@
 
 from ...charts.chart import Chart
 from ...options import InitOpts, LabelOpts
-from ...types import ListTuple, Numeric, Union
+from ...commons.types import ListTuple, Numeric, Union
 
 
 class Tree(Chart):

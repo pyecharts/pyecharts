@@ -2,7 +2,7 @@
 
 from ...charts.chart import AxisChart
 from ...options import AxisOpts, InitOpts, LabelOpts, MarkLineOpts, MarkPointOpts
-from ...types import ListTuple, Numeric, Union
+from ...commons.types import ListTuple, Numeric, Union
 
 
 class Scatter(AxisChart):

@@ -2,7 +2,7 @@
 
 from ...charts.chart import Chart
 from ...options import InitOpts
-from ...types import ListTuple, Numeric, Union
+from ...commons.types import ListTuple, Numeric, Union
 
 DEFAULT_GAUGE_TOOLTIP_FORMATTER = "{a} <br/>{b} : {c}%"
 

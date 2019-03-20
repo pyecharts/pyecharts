@@ -4,7 +4,22 @@ import os
 
 from pyecharts.datasets import FILENAMES
 
-__all__ = ["get_resource_dir", "write_utf8_html_file", "is_ascii"]
+
+class OrderedSet:
+    def __init__(self, *args):
+        self._values = dict()
+        self.items = []
+        for a in args:
+            self.add(a)
+
+    def add(self, item):
+        if not self._values.get(item, False):
+            self._values.update({item: True})
+            self.items.append(item)
+
+
+def _produce_js_func(fn: str) -> str:
+    return "__-o-__{}__-o-__".format(fn)
 
 
 def produce_require_dict(js_dependencies, js_host) -> dict:

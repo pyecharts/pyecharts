@@ -2,7 +2,7 @@
 
 from ...charts.chart import Chart
 from ...options import InitOpts, LabelOpts
-from ...types import *
+from ...commons.types import *
 
 
 class TreeMap(Chart):

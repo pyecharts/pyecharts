@@ -2,7 +2,7 @@
 
 from ...charts.chart import Chart
 from ...options import InitOpts, LineStyleOpts
-from ...types import ListTuple, Union
+from ...commons.types import ListTuple, Union
 
 
 class Parallel(Chart):

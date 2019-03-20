@@ -10,7 +10,7 @@ from ...options import (
     SplitAreaOpt,
     SplitLineOpts,
 )
-from ...types import ListTuple, Optional, Union
+from ...commons.types import ListTuple, Optional, Union
 
 
 class Radar(Chart):

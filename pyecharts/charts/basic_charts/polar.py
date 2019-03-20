@@ -9,7 +9,7 @@ from ...options import (
     LabelOpts,
     SplitLineOpts,
 )
-from ...types import ListTuple, Union
+from ...commons.types import ListTuple, Union
 
 
 class Polar(Chart):
