@@ -25,8 +25,8 @@ class Scatter(AxisChart):
         symbol=None,
         symbol_size: Numeric = 10,
         label_opts: Union[LabelOpts, dict] = LabelOpts(position="right"),
-        markpoint_opts: Union[MarkPointOpts, dict] = MarkPointOpts(),
-        markline_opts: Union[MarkLineOpts, dict] = MarkLineOpts(),
+        markpoint_opts: Union[MarkPointOpts, dict, None] = None,
+        markline_opts: Union[MarkLineOpts, dict, None] = None,
     ):
         if isinstance(label_opts, LabelOpts):
             label_opts = label_opts.opts

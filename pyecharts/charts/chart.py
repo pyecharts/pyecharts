@@ -117,13 +117,15 @@ class Chart(Base):
         if xaxis_opt and self.options.get("xAxis", None):
             if isinstance(xaxis_opt, AxisOpts):
                 xaxis_opt = xaxis_opt.opts
-            self.options["xAxis"].update(xaxis_opt)
+                for x in self.options["xAxis"]:
+                    x.update(xaxis_opt)
 
         # TODO: yaxis -> list
         if yaxis_opt and self.options.get("yAxis", None):
             if isinstance(yaxis_opt, AxisOpts):
                 yaxis_opt = yaxis_opt.opts
-            self.options["yAxis"].update(yaxis_opt)
+                for y in self.options["yAxis"]:
+                    y.update(yaxis_opt)
 
         if visualmap_opts:
             if isinstance(visualmap_opts, VisualMapOpts):

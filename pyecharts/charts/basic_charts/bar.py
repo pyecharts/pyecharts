@@ -5,12 +5,6 @@ from ...options import AxisOpts, InitOpts, LabelOpts, MarkLineOpts, MarkPointOpt
 from ...types import ListTuple, Optional, Union
 
 
-class BarOpts:
-    def __init__(self, stack: Optional[str] = None, category_gap=None):
-        self.stack = stack
-        self.category_gap = category_gap
-
-
 class Bar(AxisChart):
     """
     <<< 柱状图/条形图 >>>
@@ -32,10 +26,11 @@ class Bar(AxisChart):
         series_name: str,
         yaxis_data: ListTuple,
         *,
-        bar_opts: Union[BarOpts, dict] = BarOpts(),
+        stack: Optional[str] = None,
+        category_gap: str = "20%",
         label_opts: Union[LabelOpts, dict] = LabelOpts(),
-        markpoint_opts: Union[MarkPointOpts, dict] = MarkPointOpts(),
-        markline_opts: Union[MarkLineOpts, dict] = MarkLineOpts(),
+        markpoint_opts: Union[MarkPointOpts, dict, None] = None,
+        markline_opts: Union[MarkLineOpts, dict, None] = None,
     ):
         if isinstance(label_opts, LabelOpts):
             label_opts = label_opts.opts
@@ -50,8 +45,8 @@ class Bar(AxisChart):
                 "type": "bar",
                 "name": series_name,
                 "data": yaxis_data,
-                "stack": bar_opts.stack,
-                "barCategoryGap": bar_opts.category_gap,
+                "stack": stack,
+                "barCategoryGap": category_gap,
                 "label": label_opts,
                 "markPoint": markpoint_opts,
                 "markLine": markline_opts,
