@@ -10,5 +10,5 @@ class OrderedSet:
 
     def add(self, item):
         if not self._values.get(item, False):
-            self._values.update(item=True)
+            self._values.update({item: True})
             self.items.append(item)

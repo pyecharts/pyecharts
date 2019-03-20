@@ -7,7 +7,6 @@ import uuid
 from ..commons import consts, utils
 from ..commons.consts import ONLINE_HOST
 from ..commons.structures import OrderedSet
-from ..datasets import FILENAMES
 from ..options import InitOpts
 from ..render.engine import RenderEngine
 
@@ -49,15 +48,8 @@ class Base:
             self.js_dependencies.add(theme_name)
         return self
 
-    def __produce_require_dict(self) -> dict:
-        confs, libraries = [], []
-        for name in self.js_dependencies.items:
-            confs.append("'{}':'{}/{}'".format(name, self.js_host, FILENAMES[name]))
-            libraries = ["'{}'".format(name)]
-        return dict(config_items=confs, libraries=libraries)
-
     def _repr_html_(self):
-        require_config = self.__produce_require_dict()
+        require_config = utils.produce_require_dict(self.js_dependencies, self.js_host)
         self.options = self.dump_options()
         return RenderEngine().render_chart_to_notebook(
             template_name="notebook.html",
@@ -65,12 +57,6 @@ class Base:
             config_items=require_config["config_items"],
             libraries=require_config["libraries"],
         )
-
-        # elif CURRENT_CONFIG.jupyter_presentation == consts.NTERACT:
-        #     env = engine.create_default_environment(consts.DEFAULT_HTML)
-        #     return env.render_chart_to_notebook(
-        #         chart=self, template_name="nteract.html"
-        #     )
 
     # def _repr_svg_(self):
     #     content = self._render_as_image(consts.SVG)
