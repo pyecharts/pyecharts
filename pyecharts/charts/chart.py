@@ -3,7 +3,7 @@
 import uuid
 
 from ..charts.base import Base
-from ..commons.consts import COLOR_LST, RENDER_TYPE
+from ..commons.consts import COLOR_LST, RENDER_TYPE, CHART_TYPE
 from ..options import (
     Axis3DOpts,
     AxisLineOpts,
@@ -21,7 +21,7 @@ from ..options import (
     TooltipOpts,
     VisualMapOpts,
 )
-from ..types import ListTuple, Numeric, Optional, Union
+from pyecharts.commons.types import ListTuple, Numeric, Optional, Union
 
 
 class Chart(Base):
@@ -35,6 +35,7 @@ class Chart(Base):
         self.options.update(
             series_id=uuid.uuid4().hex, series=[], legend=[{"data": []}]
         )
+        _chart_type = "!"
 
     def set_series_opts(
         self,

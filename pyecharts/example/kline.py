@@ -39,9 +39,7 @@ v1 = [
 ]
 
 kline.add_yaxis("kline", v1)
-kline.set_global_opts(
-    xaxis_opt=AxisOpts(name="x轴"), yaxis_opt=AxisOpts(name="y轴")
-)
+kline.set_global_opts(xaxis_opt=AxisOpts(name="x轴"), yaxis_opt=AxisOpts(name="y轴"))
 kline.render()
 
 # self._option.get("xAxis")[0]["scale"] = True

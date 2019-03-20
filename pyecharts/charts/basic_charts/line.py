@@ -10,7 +10,7 @@ from ...options import (
     MarkLineOpts,
     MarkPointOpts,
 )
-from ...types import ListTuple, Numeric, Optional, Union
+from ...commons.types import ListTuple, Numeric, Optional, Union
 
 
 class Line(AxisChart):

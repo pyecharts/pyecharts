@@ -4,14 +4,10 @@ import json
 
 from ...charts.chart import Chart
 from ...datasets import COORDINATES
+from ...consts import TOOLTIP_FORMATTER_TYPE
 from ...options import EffectOpts, InitOpts, LabelOpts, TooltipOpts
-from ...types import List, ListTuple, Numeric, Optional, Union
-
-GEO_TOOLTIP_FORMATTER = """
-var geoFormatter = `function (params) {
-    return params.name + ' : ' + params.value[2];
-}
-"""
+from ...commons.types import List, ListTuple, Numeric, Optional, Union
+from ...commons.utils import produce_js_func
 
 
 class Geo(Chart):
@@ -24,7 +20,6 @@ class Geo(Chart):
     def __init__(self, init_opts: Union[InitOpts, dict] = InitOpts()):
         super().__init__(init_opts=init_opts)
         self._coordinates = COORDINATES
-        self.set_global_opts(tooltip_opts=TooltipOpts(formatter=self.produce_js_func(GEO_TOOLTIP_FORMATTER)))
 
     def add_coordinate(self, name, longitude, latitude):
         """
@@ -138,3 +133,12 @@ class Geo(Chart):
                 {"type": type_, "name": name, "coordinateSystem": "geo", "data": data}
             )
         return self
+
+    def set_global_opts(
+        self,
+        tooltip_opts: Union[TooltipOpts, dict] = TooltipOpts(
+            formatter=produce_js_func(TOOLTIP_FORMATTER_TYPE.GEO)
+        ),
+        **kwargs,
+    ):
+        super().set_global_opts(tooltip_opts=tooltip_opts, **kwargs)

@@ -1,6 +1,6 @@
 # coding=utf-8
 
-from ..types import List, Numeric, Optional, Union
+from pyecharts.commons.types import List, Numeric, Optional, Union
 
 
 class LabelOpts:

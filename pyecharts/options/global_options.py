@@ -1,6 +1,7 @@
 # coding=utf-8
 
-from ..commons.consts import *
+from pyecharts.consts import *
+from pyecharts.commons.consts import *
 from ..options.series_options import *
 
 
@@ -9,7 +10,7 @@ class InitOpts:
         self,
         width: str = "800px",
         height: str = "400px",
-        renderer: str = RENDER_TYPE.canvas,
+        renderer: str = RENDER_TYPE.CANVAS,
         page_title: str = PAGE_TITLE,
         theme: str = "white",
         bg_color: Optional[str] = None,

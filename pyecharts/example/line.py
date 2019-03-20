@@ -8,9 +8,9 @@ from pyecharts.render import make_snapshot
 
 def line_base() -> Line:
     c = Line()
-    c.add_xaxis(CLOTHES).add_yaxis(
-        "series0", gen_random_data(len(CLOTHES))
-    ).add_yaxis("series1", gen_random_data(len(CLOTHES)))
+    c.add_xaxis(CLOTHES).add_yaxis("series0", gen_random_data(len(CLOTHES))).add_yaxis(
+        "series1", gen_random_data(len(CLOTHES))
+    )
     return c
 
 

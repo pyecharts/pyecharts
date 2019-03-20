@@ -2,7 +2,7 @@
 
 from ...charts.chart import Chart
 from ...options import EffectOpts, InitOpts, LabelOpts, LineStyleOpts
-from ...types import Union
+from ...commons.types import Union
 
 
 class GeoLines(Chart):

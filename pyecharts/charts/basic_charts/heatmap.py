@@ -2,7 +2,7 @@
 
 from ...charts.chart import Chart
 from ...options import InitOpts, LabelOpts, SplitLineOpts
-from ...types import Union
+from ...commons.types import Union
 
 
 class HeatMap(Chart):

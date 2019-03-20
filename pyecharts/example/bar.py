@@ -8,9 +8,9 @@ from pyecharts.render import make_snapshot
 
 def bar_base() -> Bar:
     c = Bar()
-    c.add_xaxis(CLOTHES).add_yaxis(
-        "series0", gen_random_data(len(CLOTHES))
-    ).add_yaxis("series1", gen_random_data(len(CLOTHES)))
+    c.add_xaxis(CLOTHES).add_yaxis("series0", gen_random_data(len(CLOTHES))).add_yaxis(
+        "series1", gen_random_data(len(CLOTHES))
+    )
     return c
 
 
