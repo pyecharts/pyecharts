@@ -1,14 +1,14 @@
+{% import 'macro' as macro %}
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>{{ page.page_title }}</title>
-    {{ echarts_js_dependencies(page) }}
+    <title>{{ chart.page_title }}</title>
+    {{ macro.render_chart_dependencies(chart) }}
 </head>
 <body>
-    {% for chart in page %}
-        {{ echarts_container(chart) }}
+    {% for c in chart %}
+        {{ macro.render_chart_content(c) }}
     {% endfor %}
-    {{ echarts_js_content(*page) }}
 </body>
 </html>

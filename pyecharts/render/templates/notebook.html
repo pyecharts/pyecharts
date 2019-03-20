@@ -1,3 +1,4 @@
+{% import 'macro' as macro %}
 <script>
     require.config({
         paths: {
@@ -14,11 +15,7 @@
 <script>
     require([{{ libraries | join(', ') }}], function(echarts) {
     {% for chart in charts %}
-        var chart_{{ chart.chart_id }} = echarts.init(
-                document.getElementById('{{ chart.chart_id }}'), '{{ chart.theme }}', {renderer: '{{ chart.renderer }}'});
-        {{ chart.custom_function }}
-        var option_{{ chart.chart_id }} = {{ chart.options }};
-        chart_{{ chart.chart_id }}.setOption(option_{{ chart.chart_id }});
+        {{ macro.render_chart_content(chart) }}
     {% endfor %}
     });
 </script>

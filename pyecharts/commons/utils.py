@@ -1,8 +1,17 @@
 # coding=utf-8
 
 import os
+from pyecharts.datasets import FILENAMES
 
 __all__ = ["get_resource_dir", "write_utf8_html_file", "is_ascii"]
+
+
+def produce_require_dict(js_dependencies, js_host) -> dict:
+    confs, libraries = [], []
+    for name in js_dependencies.items:
+        confs.append("'{}':'{}/{}'".format(name, js_host, FILENAMES[name]))
+        libraries = ["'{}'".format(name)]
+    return dict(config_items=confs, libraries=libraries)
 
 
 def get_resource_dir(*paths):
