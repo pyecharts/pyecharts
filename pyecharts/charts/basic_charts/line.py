@@ -55,7 +55,7 @@ class Line(AxisChart):
         self._append_legend(name)
         # 合并 x 和 y 轴数据，避免当 X 轴的类型设置为 'value' 的时候，
         # X、Y 轴均显示 Y 轴数据
-        data = [list(z) for z in zip(self.__xaxis_data, y_axis)]
+        data = [list(z) for z in zip(self._xaxis_data, y_axis)]
 
         self.options.get("series").append(
             {
@@ -68,10 +68,10 @@ class Line(AxisChart):
                 "stack": stack,
                 "showSymbol": is_symbol_show,
                 "data": data,
-                "label": label_opts.opts,
-                "lineStyle": linestyle_opts.opts,
-                "areaStyle": areastyle_opts.opts,
-                "markPoint": markpoint_opts.opts,
+                "label": label_opts,
+                "lineStyle": linestyle_opts,
+                "areaStyle": areastyle_opts,
+                "markPoint": markpoint_opts,
                 "markLine": markline_opts.opts,
             }
         )

@@ -41,3 +41,4 @@ class Funnel(Chart):
                 "label": label_opts,
             }
         )
+        return self

@@ -1,7 +1,5 @@
-from pyecharts.charts import Page
-
 import pyecharts.options as opts
-from pyecharts.charts import Bar
+from pyecharts.charts import Bar, Page
 from pyecharts.example.commons import CLOTHES, gen_random_data
 from pyecharts.render import make_snapshot
 

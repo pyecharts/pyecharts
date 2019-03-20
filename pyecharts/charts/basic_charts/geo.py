@@ -7,8 +7,6 @@ from ...datasets import COORDINATES
 from ...options import EffectOpts, InitOpts, LabelOpts
 from ...types import List, ListTuple, Numeric, Optional, Union
 
-DEFAULT_GEO_TOOLTIP_FORMATTER = "{b}: {c}"
-
 
 class Geo(Chart):
     """
@@ -60,6 +58,7 @@ class Geo(Chart):
         data_pair: ListTuple,
         type_: str = "scatter",
         maptype: str = "china",
+        *,
         symbol: Optional[str] = None,
         symbol_size: Numeric = 12,
         border_color="#111",
@@ -70,12 +69,12 @@ class Geo(Chart):
         label_opts: Union[LabelOpts, dict] = LabelOpts(),
         effect_opts: Union[EffectOpts, dict] = EffectOpts(),
     ):
-        # if "tooltip_formatter" not in kwargs:
-        #     kwargs["tooltip_formatter"] = DEFAULT_GEO_TOOLTIP_FORMATTER
         if isinstance(label_opts, LabelOpts):
             label_opts = label_opts.opts
         if isinstance(effect_opts, EffectOpts):
             effect_opts = effect_opts.opts
+
+        self.js_dependencies.add(maptype)
 
         if region_coords:
             for city_name, city_coord in region_coords.items():
@@ -99,7 +98,7 @@ class Geo(Chart):
         )
         self._append_legend(name)
 
-        if type == "scatter":
+        if type_ == "scatter":
             self.options.get("series").append(
                 {
                     "type": type_,
@@ -112,7 +111,7 @@ class Geo(Chart):
                 }
             )
 
-        elif type == "effectScatter":
+        elif type_ == "effectScatter":
             self.options.get("series").append(
                 {
                     "type": type_,
@@ -127,7 +126,8 @@ class Geo(Chart):
                 }
             )
 
-        elif type == "heatmap":
+        elif type_ == "heatmap":
             self.options.get("series").append(
                 {"type": type_, "name": name, "coordinateSystem": "geo", "data": data}
             )
+        return self

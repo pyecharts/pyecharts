@@ -17,8 +17,17 @@ def bar_base() -> Bar:
 def bar_title() -> Bar:
     bar = bar_base()
     bar.set_global_opts(title_opts=opts.TitleOpts(title="我是主标题", subtitle="我是副标题"))
+    bar.add_js_funcs("var fn = function() { console.log('hello'); }")
     return bar
 
 
-make_snapshot(bar_base().render(), "bar_base.png")
-make_snapshot(bar_title().render(), "bar_title.png")
+def bar_reversal_axis() -> Bar:
+    bar = bar_title()
+    bar.reversal_axis()
+    return bar
+
+
+bar_reversal_axis().render()
+# make_snapshot(bar_reversal_axis().render(), "bar_reversal.png")
+# make_snapshot(bar_base().render(), "bar_base.png")
+# make_snapshot(bar_title().render(), "bar_title.png")

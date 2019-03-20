@@ -36,7 +36,7 @@ class Scatter(AxisChart):
             markpoint_opts = markpoint_opts.opts
 
         self._append_legend(name)
-        data = [list(z) for z in zip(self.__xaxis_data, y_axis)]
+        data = [list(z) for z in zip(self._xaxis_data, y_axis)]
         self.options.get("series").append(
             {
                 "type": "scatter",
@@ -49,3 +49,4 @@ class Scatter(AxisChart):
                 "markLine": markline_opts,
             }
         )
+        return self

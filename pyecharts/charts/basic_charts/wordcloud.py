@@ -26,7 +26,7 @@ class WordCloud(Chart):
 
     def __init__(self, init_opts: Union[InitOpts, dict] = InitOpts()):
         super().__init__(init_opts=init_opts)
-        self.js_dependencies.add("wordcloud")
+        self.js_dependencies.add("echarts-wordcloud")
 
     def add(
         self,
@@ -67,3 +67,4 @@ class WordCloud(Chart):
                 "data": data,
             }
         )
+        return self

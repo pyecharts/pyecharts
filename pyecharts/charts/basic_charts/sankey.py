@@ -45,3 +45,4 @@ class Sankey(Chart):
                 "lineStyle": linestyle_opt,
             }
         )
+        return self

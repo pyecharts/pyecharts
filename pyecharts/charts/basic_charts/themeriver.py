@@ -31,3 +31,4 @@ class ThemeRiver(Chart):
 
         self.options.update(singleAxis={"type": "time"})
         self.options.get("tooltip").update(trigger="axis")
+        return self

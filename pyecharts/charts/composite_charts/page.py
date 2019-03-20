@@ -36,6 +36,8 @@ class Page:
     def render(self, path="render.html", template_name="simple_page.html"):
         for c in self:
             c.options = c.dump_options()
+            if c.theme not in consts.BUILTIN_THEMES:
+                self.js_dependencies.add(c.theme)
         RenderEngine().render_chart_to_file(
             template_name=template_name, chart=self, path=path
         )
@@ -44,6 +46,8 @@ class Page:
         require_config = utils.produce_require_dict(self.js_dependencies, self.js_host)
         for c in self:
             c.options = c.dump_options()
+            if c.theme not in consts.BUILTIN_THEMES:
+                self.js_dependencies.add(c.theme)
         return RenderEngine().render_chart_to_notebook(
             template_name="notebook.html",
             charts=self,

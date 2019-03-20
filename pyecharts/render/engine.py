@@ -1,6 +1,7 @@
 # coding=utf-8
 
 import os
+import re
 
 from jinja2 import Environment, FileSystemLoader
 
@@ -53,6 +54,7 @@ class RenderEngine:
         """
         tpl = self.env.get_template(template_name)
         html = tpl.render(chart=self.generate_js_link(chart))
+        html = re.sub('"?__-o-__"?', "", html)
         write_utf8_html_file(path, html)
 
     def render_chart_to_notebook(self, template_name, **kwargs) -> str:

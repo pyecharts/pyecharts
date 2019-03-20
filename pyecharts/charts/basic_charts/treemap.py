@@ -40,3 +40,4 @@ class TreeMap(Chart):
                 "visibleMin": visible_min,
             }
         )
+        return self

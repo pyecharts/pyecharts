@@ -40,7 +40,8 @@ class EffectScatter(AxisChart):
                 "rippleEffect": effect_opts,
                 "symbol": symbol,
                 "symbolSize": symbol_size,
-                "data": [list(z) for z in zip(self.__xaxis_data, y_axis)],
+                "data": [list(z) for z in zip(self._xaxis_data, y_axis)],
                 "label": label_opts,
             }
         )
+        return self

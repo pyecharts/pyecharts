@@ -61,3 +61,4 @@ class Parallel(Chart):
                 "data": data,
             }
         )
+        return self

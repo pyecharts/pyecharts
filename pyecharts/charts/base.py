@@ -5,7 +5,6 @@ import os
 import uuid
 
 from ..commons import consts, utils
-from ..commons.consts import ONLINE_HOST
 from ..commons.structures import OrderedSet
 from ..options import InitOpts
 from ..render.engine import RenderEngine
@@ -26,8 +25,17 @@ class Base:
 
         self.chart_id = uuid.uuid4().hex
         self.options: dict = {}
-        self.js_host: str = ONLINE_HOST
+        self.js_host: str = consts.ONLINE_HOST
+        self.js_functions: OrderedSet = OrderedSet()
         self.js_dependencies: OrderedSet = OrderedSet("echarts")
+
+    @staticmethod
+    def produce_js_func(fn: str) -> str:
+        return "__-o-__{}__-o-__".format(fn)
+
+    def add_js_funcs(self, *fns):
+        for fn in fns:
+            self.js_functions.add(fn)
 
     def get_options(self) -> dict:
         return utils.remove_key_with_none_value(self.options)
@@ -37,20 +45,20 @@ class Base:
 
     def render(self, path="render.html", template_name="simple_chart.html") -> str:
         self.options = self.dump_options()
+        self._use_theme()
         RenderEngine().render_chart_to_file(
             chart=self, path=path, template_name=template_name
         )
         return os.path.abspath(path)
 
-    # TODO: finally validate
-    def __use_theme(self, theme_name: str):
-        if theme_name not in consts.BUILTIN_THEMES:
-            self.js_dependencies.add(theme_name)
-        return self
+    def _use_theme(self):
+        if self.theme not in consts.BUILTIN_THEMES:
+            self.js_dependencies.add(self.theme)
 
     def _repr_html_(self):
         require_config = utils.produce_require_dict(self.js_dependencies, self.js_host)
         self.options = self.dump_options()
+        self._use_theme()
         return RenderEngine().render_chart_to_notebook(
             template_name="notebook.html",
             charts=(self,),
@@ -58,6 +66,7 @@ class Base:
             libraries=require_config["libraries"],
         )
 
+    # TODO: necessary?
     # def _repr_svg_(self):
     #     content = self._render_as_image(consts.SVG)
     #     if content:

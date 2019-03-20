@@ -69,3 +69,4 @@ class Graph(Chart):
                 "links": links,
             }
         )
+        return self
