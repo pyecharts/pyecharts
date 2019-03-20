@@ -3,7 +3,8 @@ from pyecharts.options import *
 
 geo = Geo()
 geo.add("geo", [("广州", 10)])
-geo.set_global_opts()
+geo.set_global_opts(visualmap_opts=VisualMapOpts())
+print(geo.options["tooltip"])
 geo.render()
 
 # map = Map()

@@ -7,7 +7,7 @@ class LabelOpts:
     def __init__(
         self,
         is_show: bool = True,
-        position: Optional[str] = None,
+        position: Optional[str] = "right",
         text_color: Optional[str] = None,
         text_size: Numeric = 12,
         formatter=None,

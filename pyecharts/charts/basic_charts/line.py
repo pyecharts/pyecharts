@@ -36,8 +36,8 @@ class Line(AxisChart):
         is_smooth: bool = False,
         is_step: bool = False,
         label_opts: Union[LabelOpts, dict] = LabelOpts(),
-        markpoint_opts: Union[MarkPointOpts, dict] = MarkPointOpts(),
-        markline_opts: Union[MarkLineOpts, dict] = MarkLineOpts(),
+        markpoint_opts: Union[MarkPointOpts, dict, None] = None,
+        markline_opts: Union[MarkLineOpts, dict, None] = None,
         linestyle_opts: Union[LineStyleOpts, dict] = LineStyleOpts(),
         areastyle_opts: Union[AreaStyleOpts, dict] = AreaStyleOpts(),
     ):
@@ -72,7 +72,7 @@ class Line(AxisChart):
                 "lineStyle": linestyle_opts,
                 "areaStyle": areastyle_opts,
                 "markPoint": markpoint_opts,
-                "markLine": markline_opts.opts,
+                "markLine": markline_opts,
             }
         )
         return self

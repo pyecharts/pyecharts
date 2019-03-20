@@ -75,17 +75,17 @@ class TitleOpts:
 class DataZoomOpts:
     def __init__(
         self,
-        is_show: bool = False,
-        type: str = "slider",
-        range_start: Numeric = 50,
-        range_end: Numeric = 100,
+        is_show: bool = True,
+        type_: str = "slider",
+        range_start: Numeric = 40,
+        range_end: Numeric = 80,
         orient: str = "horizontal",
         xaxis_index: int = 0,
         yaxis_index: int = 0,
     ):
         self.opts: dict = {
             "show": is_show,
-            "type": type,
+            "type": type_,
             "start": range_start,
             "end": range_end,
             "orient": orient,
@@ -193,7 +193,8 @@ class AxisOpts:
     def __init__(
         self,
         name: Optional[str] = None,
-        visibility: bool = True,
+        is_show: bool = True,
+        is_scale: bool = False,
         name_location: str = "end",
         name_gap: Numeric = 15,
         name_size: Numeric = 12,
@@ -201,15 +202,16 @@ class AxisOpts:
         boundary_gap: Optional[str] = None,
         label_alignment: Optional[str] = None,
         inverse: Optional[str] = None,
-        splitline_opts: SplitLineOpts = SplitLineOpts(),
         min_: Union[None, Numeric] = None,
         max_: Union[None, Numeric] = None,
         type_: Union[str] = None,
+        splitline_opts: SplitLineOpts = SplitLineOpts(),
         linestyle_opts: LineStyleOpts = LineStyleOpts(),
     ):
         self.opts: dict = {
             "name": name,
-            "show": visibility,
+            "show": is_show,
+            "scale": is_scale,
             "nameLocation": name_location,
             "nameGap": name_gap,
             "nameTextStyle": {"fontSize": name_size},

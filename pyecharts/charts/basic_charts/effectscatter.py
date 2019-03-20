@@ -21,8 +21,8 @@ class EffectScatter(AxisChart):
         name: str,
         y_axis: ListTuple,
         *,
-        symbol_size: Numeric = 10,
         symbol: Optional[str] = None,
+        symbol_size: Numeric = 10,
         label_opts: Union[LabelOpts, dict] = LabelOpts,
         effect_opts: Union[EffectOpts, dict] = EffectOpts(),
     ):
