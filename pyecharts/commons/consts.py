@@ -34,7 +34,7 @@ class _ThemeType:
 RENDER_TYPE = _RenderType()
 FILE_TYPE = _FileType()
 SYMBOL_TYPE = _SymbolType()
-BUILTIN_THEMES = ["light", "dark"]
+BUILTIN_THEMES = ["light", "dark", "white"]
 
 
 ONLINE_HOST = "http://chenjiandongx.com/go-echarts-assets/assets/"

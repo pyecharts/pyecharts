@@ -72,3 +72,4 @@ class Tree(Chart):
                 "leaves": {"label": leaves_label_opts},
             }
         )
+        return self

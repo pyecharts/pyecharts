@@ -20,28 +20,28 @@ class Map(Chart):
         name: str,
         data_pair: ListTuple,
         maptype: str = "china",
+        *,
         is_roam: bool = True,
         symbol: str = None,
         is_map_symbol_show: bool = True,
-        name_map=None,
         label_opts: Union[LabelOpts, dict] = LabelOpts(),
     ):
         if isinstance(label_opts, LabelOpts):
             label_opts = label_opts.opts
 
+        self.js_dependencies.add(maptype)
         data = [{"name": n, "value": v} for (n, v) in data_pair]
         self._append_legend(name)
-
-        __option__ = {
-            "type": "map",
-            "name": name,
-            "symbol": symbol,
-            "label": label_opts,
-            "mapType": maptype,
-            "data": data,
-            "roam": is_roam,
-            "showLegendSymbol": is_map_symbol_show,
-        }
-        if name_map:
-            __option__["nameMap"] = name_map
-        self.options.get("series").append(__option__)
+        self.options.get("series").append(
+            {
+                "type": "map",
+                "name": name,
+                "symbol": symbol,
+                "label": label_opts,
+                "mapType": maptype,
+                "data": data,
+                "roam": is_roam,
+                "showLegendSymbol": is_map_symbol_show,
+            }
+        )
+        return self

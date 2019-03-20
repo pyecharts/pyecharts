@@ -1,7 +1,6 @@
 # coding=utf-8
 
-from pyecharts.charts.chart import Chart
-
+from ...charts.chart import Chart
 from ...options import InitOpts, LabelOpts, SplitLineOpts
 from ...types import Union
 
@@ -57,3 +56,4 @@ class HeatMap(Chart):
             self.options.get("yAxis")[0].update(
                 type="category", data=y_axis, splitArea=splitline_opt
             )
+        return self

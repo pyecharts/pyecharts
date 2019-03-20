@@ -44,3 +44,4 @@ class Boxplot(AxisChart):
                 "markLine": markline_opts,
             }
         )
+        return self

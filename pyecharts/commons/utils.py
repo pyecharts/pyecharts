@@ -1,6 +1,7 @@
 # coding=utf-8
 
 import os
+
 from pyecharts.datasets import FILENAMES
 
 __all__ = ["get_resource_dir", "write_utf8_html_file", "is_ascii"]

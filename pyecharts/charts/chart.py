@@ -153,7 +153,7 @@ class AxisChart(Chart):
     def add_xaxis(self, xaxis_data: ListTuple):
         self.options.update(xAxis=[AxisOpts().opts])
         self.options["xAxis"][0].update(data=xaxis_data)
-        self.__xaxis_data = xaxis_data
+        self._xaxis_data = xaxis_data
         return self
 
 

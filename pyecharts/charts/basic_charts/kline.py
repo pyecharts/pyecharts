@@ -54,11 +54,11 @@ class Kline(AxisChart):
         if isinstance(markline_opts, MarkLineOpts):
             markline_opts = markline_opts.opts
 
-        xaxis, yaxis = chart["xy_axis"]
-        self._option.update(xAxis=xaxis, yAxis=yaxis)
-        self._option.get("xAxis")[0]["scale"] = True
-        self._option.get("yAxis")[0]["scale"] = True
-        self._option.get("yAxis")[0]["splitArea"] = {"show": True}
+        # xaxis, yaxis = chart["xy_axis"]
+        # self._option.update(xAxis=xaxis, yAxis=yaxis)
+        # self._option.get("xAxis")[0]["scale"] = True
+        # self._option.get("yAxis")[0]["scale"] = True
+        # self._option.get("yAxis")[0]["splitArea"] = {"show": True}
 
         self._append_legend(name)
         self.options.get("series").append(
@@ -70,3 +70,4 @@ class Kline(AxisChart):
                 "markLine": markline_opts,
             }
         )
+        return self

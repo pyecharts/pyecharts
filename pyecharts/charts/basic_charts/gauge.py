@@ -37,3 +37,4 @@ class Gauge(Chart):
                 "data": [{"value": v, "name": n} for (v, n) in data_pair],
             }
         )
+        return self

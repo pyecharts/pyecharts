@@ -90,3 +90,4 @@ class Radar(Chart):
                 "areaStyle": areastyle_opts,
             }
         )
+        return self

@@ -14,7 +14,7 @@ class Liquid(Chart):
 
     def __init__(self, init_opts: Union[InitOpts, dict] = InitOpts()):
         super().__init__(init_opts=init_opts)
-        self.js_dependencies.add("liquidfill")
+        self.js_dependencies.add("echarts-liquidfill")
 
     def add(
         self,
@@ -25,7 +25,6 @@ class Liquid(Chart):
         is_animation: bool = True,
         is_outline_show: bool = True,
     ):
-
         _animation_dur, _animation_dur_update = 2000, 1000
         if not is_animation:
             _animation_dur, _animation_dur_update = 0, 0
@@ -45,3 +44,4 @@ class Liquid(Chart):
                 "outline": {"show": is_outline_show},
             }
         )
+        return self

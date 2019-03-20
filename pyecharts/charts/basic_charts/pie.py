@@ -53,3 +53,4 @@ class Pie(Chart):
                 "label": label_opts,
             }
         )
+        return self

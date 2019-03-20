@@ -1,11 +1,11 @@
 # coding=utf-8
 
-from ...charts import Geo
+from ...charts.chart import Chart
 from ...options import EffectOpts, InitOpts, LabelOpts, LineStyleOpts
 from ...types import Union
 
 
-class GeoLines(Geo):
+class GeoLines(Chart):
     """
     <<< 地理坐标系线图 >>>
 

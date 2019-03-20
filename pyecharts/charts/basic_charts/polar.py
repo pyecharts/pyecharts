@@ -162,3 +162,4 @@ class Polar(Chart):
             self.options.update(angleAxis=angle_axis_opt)
             self.options.update(radiusAxis=radius_axis_opt)
         self.options.update(polar={})
+        return self
