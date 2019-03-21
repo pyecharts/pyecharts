@@ -1,6 +1,6 @@
 # coding=utf-8
-
 from ...charts.chart import AxisChart
+from ...commons.types import ListTuple, Numeric, Optional, Union
 from ...options import (
     AreaStyleOpts,
     AxisOpts,
@@ -10,7 +10,6 @@ from ...options import (
     MarkLineOpts,
     MarkPointOpts,
 )
-from ...commons.types import ListTuple, Numeric, Optional, Union
 
 
 class Line(AxisChart):

@@ -1,8 +1,7 @@
 # coding=utf-8
-
 from ...charts.chart import Chart
+from ...commons.types import Numeric, Union
 from ...options import InitOpts, LabelOpts
-from ...commons.types import *
 
 
 class TreeMap(Chart):

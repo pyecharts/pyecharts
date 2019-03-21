@@ -7,7 +7,6 @@ Test Target: js_embed (should render <script> in embed mode)
 from __future__ import unicode_literals
 
 from nose.tools import eq_, raises
-
 from pyecharts.conf import PyEchartsConfig, _ensure_echarts_is_in_the_front
 
 

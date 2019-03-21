@@ -2,8 +2,8 @@
 import random
 
 from ...charts.chart import Chart
-from ...options import InitOpts
 from ...commons.types import ListTuple, Numeric, Union
+from ...options import InitOpts
 
 SHAPES = ("cardioid", "diamond", "triangle-forward", "triangle", "pentagon", "star")
 
@@ -43,10 +43,7 @@ class WordCloud(Chart):
                 {"name": n, "value": v, "textStyle": {"normal": {"color": gen_color()}}}
             )
 
-        _min, _max = 12, 60
-        if word_size_range is not None:
-            if len(word_size_range) == 2:
-                _min, _max = word_size_range
+        word_size_range = word_size_range or (12, 60)
 
         _rmin, _rmax = -90, 90
         # 确保设置的形状有效，单词的旋转角度应该设置在 [-90, 90]
@@ -63,7 +60,7 @@ class WordCloud(Chart):
                 "rotationRange": [_rmin, _rmax],
                 "rotationStep": rotate_step,
                 "girdSize": word_gap,
-                "sizeRange": [_min, _max],
+                "sizeRange": word_size_range,
                 "data": data,
             }
         )

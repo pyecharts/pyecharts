@@ -1,8 +1,7 @@
 # coding=utf-8
-
 from ...charts.chart import Chart
-from ...options import InitOpts, LabelOpts, SplitLineOpts
 from ...commons.types import Union
+from ...options import InitOpts, LabelOpts, SplitLineOpts
 
 
 class HeatMap(Chart):

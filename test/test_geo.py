@@ -3,7 +3,6 @@
 from __future__ import unicode_literals
 
 from nose.tools import assert_raises, raises
-
 from pyecharts import Geo, Style
 
 style = Style(

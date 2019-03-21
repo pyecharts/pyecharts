@@ -1,10 +1,7 @@
 # coding=utf-8
-
 from ...charts.chart import Chart
-from ...options import InitOpts
 from ...commons.types import ListTuple, Numeric, Union
-
-DEFAULT_GAUGE_TOOLTIP_FORMATTER = "{a} <br/>{b} : {c}%"
+from ...options import InitOpts
 
 
 class Gauge(Chart):

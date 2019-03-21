@@ -1,6 +1,6 @@
 # coding=utf-8
-
 from ...charts.chart import Chart
+from ...commons.types import ListTuple, Union
 from ...options import (
     AreaStyleOpts,
     AxisLineOpts,
@@ -9,7 +9,6 @@ from ...options import (
     LabelOpts,
     SplitLineOpts,
 )
-from ...commons.types import ListTuple, Union
 
 
 class Polar(Chart):
@@ -28,15 +27,15 @@ class Polar(Chart):
         data: ListTuple,
         angle_data=None,
         radius_data=None,
-        type_="line",
+        type_: str = "line",
         symbol_size=4,
         start_angle=90,
         boundary_gap=True,
-        is_clockwise=True,
-        is_stack=False,
         axis_range=None,
-        is_angleaxis_show=True,
-        is_radiusaxis_show=True,
+        is_clockwise: bool = True,
+        is_stack: bool = False,
+        is_angleaxis_show: bool = True,
+        is_radiusaxis_show: bool = True,
         radiusaxis_z_index=50,
         angleaxis_z_index=50,
         render_item=None,

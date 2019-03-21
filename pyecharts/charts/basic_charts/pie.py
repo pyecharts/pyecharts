@@ -1,8 +1,7 @@
 # coding=utf-8
-
 from ...charts.chart import Chart
-from ...options import InitOpts, LabelOpts
 from ...commons.types import ListTuple, Optional, Union
+from ...options import InitOpts, LabelOpts
 
 
 class Pie(Chart):

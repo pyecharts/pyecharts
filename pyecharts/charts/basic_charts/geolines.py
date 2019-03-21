@@ -1,8 +1,7 @@
 # coding=utf-8
-
 from ...charts.chart import Chart
-from ...options import EffectOpts, InitOpts, LabelOpts, LineStyleOpts
 from ...commons.types import Union
+from ...options import EffectOpts, InitOpts, LabelOpts, LineStyleOpts
 
 
 class GeoLines(Chart):
@@ -21,16 +20,17 @@ class GeoLines(Chart):
         name: str,
         data,
         maptype="china",
+        *,
         symbol=None,
         symbol_size=12,
         border_color="#111",
         normal_color="#323c48",
         emphasis_color="#2a333d",
         region_coords=None,
+        is_roam=True,
         effect_opts: Union[EffectOpts, dict] = EffectOpts(),
         linestyle_opts: Union[LineStyleOpts, dict] = LineStyleOpts(),
         label_opts: Union[LabelOpts, dict] = LabelOpts(),
-        is_roam=True,
     ):
 
         if isinstance(effect_opts, EffectOpts):
