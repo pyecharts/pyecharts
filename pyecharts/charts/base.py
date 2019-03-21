@@ -1,9 +1,9 @@
 # coding=utf-8
 import json
 import os
-import uuid
 
 from ..commons import utils
+from ..commons.types import Union
 from ..consts import BUILTIN_THEMES, ONLINE_HOST
 from ..options import InitOpts
 from ..render.engine import RenderEngine
@@ -14,15 +14,14 @@ class Base:
     `Base`类是所有图形类的基类，提供部分初始化参数和基本的方法
     """
 
-    def __init__(self, init_opts: InitOpts = InitOpts()):
-
+    def __init__(self, init_opts: Union[InitOpts, dict] = InitOpts()):
         self.width = init_opts.width
         self.height = init_opts.height
         self.renderer = init_opts.renderer
         self.page_title = init_opts.page_title
         self.theme = init_opts.theme
+        self.chart_id = init_opts.chart_id
 
-        self.chart_id = uuid.uuid4().hex
         self.options: dict = {}
         self.js_host: str = ONLINE_HOST
         self.js_functions: utils.OrderedSet = utils.OrderedSet()
@@ -42,7 +41,9 @@ class Base:
     def dump_options(self) -> str:
         return json.dumps(self.get_options(), indent=4)
 
-    def render(self, path="render.html", template_name="simple_chart.html") -> str:
+    def render(
+        self, path: str = "render.html", template_name: str = "simple_chart.html"
+    ) -> str:
         self.options = self.dump_options()
         self._use_theme()
         RenderEngine().render_chart_to_file(

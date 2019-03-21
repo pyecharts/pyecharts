@@ -11,7 +11,9 @@ class Page:
     A container object to present multiple charts vertically in a single page
     """
 
-    def __init__(self, page_title="EChart", js_host=ONLINE_HOST):
+    def __init__(
+        self, page_title: str = "Awesome-pyecharts", js_host: str = ONLINE_HOST
+    ):
         self.page_title = page_title
         self.js_dependencies = utils.OrderedSet()
         self.js_host = js_host

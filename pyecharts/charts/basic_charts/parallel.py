@@ -1,7 +1,7 @@
 # coding=utf-8
 from ... import options as opts
 from ...charts.chart import Chart
-from ...commons.types import ListTuple, Union
+from ...commons.types import List, ListTuple, Union
 
 
 class Parallel(Chart):
@@ -14,7 +14,7 @@ class Parallel(Chart):
     def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):
         super().__init__(init_opts=init_opts)
 
-    def set_schema(self, schema: ListTuple[opts.ParallelAxisOpts]):
+    def set_schema(self, schema: List[opts.ParallelAxisOpts]):
         self.options.update(parallelAxis=schema)
         return self
 

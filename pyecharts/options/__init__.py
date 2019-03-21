@@ -12,6 +12,8 @@ from .global_options import (
     Axis3DOpts,
     ParallelAxisOpts,
     ParallelOpts,
+    Grid3DOpts,
+    GridOpts,
 )
 from .series_options import (
     LabelOpts,

@@ -1,4 +1,6 @@
 # coding=utf-8
+import uuid
+
 from ..consts import *
 from ..options.series_options import *
 
@@ -8,6 +10,7 @@ class InitOpts:
         self,
         width: str = "800px",
         height: str = "400px",
+        chart_id: str = uuid.uuid4().hex,
         renderer: str = RENDER_TYPE.CANVAS,
         page_title: str = "Awesome-pyecharts",
         theme: str = "white",
@@ -16,6 +19,7 @@ class InitOpts:
     ):
         self.width = width
         self.height = height
+        self.chart_id = chart_id
         self.renderer = renderer
         self.page_title = page_title
         self.theme = theme

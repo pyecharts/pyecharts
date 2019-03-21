@@ -5,7 +5,35 @@ from pyecharts.commons.types import ListTuple, Numeric, Optional, Union
 
 from .. import options as opts
 from ..charts.base import Base
-from ..consts import COLOR_LST, RENDER_TYPE
+from ..consts import RENDER_TYPE
+
+COLORS = [
+    "#c23531",
+    "#2f4554",
+    "#61a0a8",
+    "#d48265",
+    "#749f83",
+    "#ca8622",
+    "#bda29a",
+    "#6e7074",
+    "#546570",
+    "#c4ccd3",
+    "#f05b72",
+    "#ef5b9c",
+    "#f47920",
+    "#905a3d",
+    "#fab27b",
+    "#2a5caa",
+    "#444693",
+    "#726930",
+    "#b2d235",
+    "#6d8346",
+    "#ac6767",
+    "#1d953f",
+    "#6950a1",
+    "#918597",
+    "#f6f5ec",
+]
 
 
 class Chart(Base):
@@ -15,7 +43,7 @@ class Chart(Base):
 
     def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):
         super().__init__(init_opts=init_opts)
-        self._colors = COLOR_LST
+        self._colors = COLORS
         self.options.update(
             series_id=uuid.uuid4().hex, series=[], legend=[{"data": []}]
         )
@@ -144,11 +172,8 @@ class AxisChart(Chart):
         self._xaxis_data = xaxis_data
         return self
 
-    def set_grid_index(self, xaxis_index: int, yaxis_index: int):
-        for x in self.options.get("xAxis"):
-            x.update(gridIndex=xaxis_index)
-        for y in self.options.get("yAxis"):
-            y.update(gridIndex=yaxis_index)
+    def overlap(self):
+        pass
 
 
 class Chart3D(Chart):
