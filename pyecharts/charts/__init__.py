@@ -1,5 +1,6 @@
-# Simple Charts
+# coding=utf-8
 
+# basic Charts
 from ..charts.basic_charts.bar import Bar
 from ..charts.basic_charts.boxplot import Boxplot
 from ..charts.basic_charts.effectscatter import EffectScatter
@@ -23,14 +24,16 @@ from ..charts.basic_charts.tree import Tree
 from ..charts.basic_charts.treemap import TreeMap
 from ..charts.basic_charts.wordcloud import WordCloud
 
-# Composite Charts
+# 3d charts
+from ..charts.threed_charts.bar3D import Bar3D
+from ..charts.threed_charts.line3D import Line3D
+from ..charts.threed_charts.scatter3D import Scatter3D
+from ..charts.threed_charts.surface3D import Surface3D
 
-# from ..charts.composite_charts.grid import Grid
+# Composite Charts
+from ..charts.composite_charts.grid import Grid
 from ..charts.composite_charts.overlap import Overlap
 from ..charts.composite_charts.timeline import Timeline
-
-# custom component
-
 from ..charts.composite_charts.page import Page
 
 # alias

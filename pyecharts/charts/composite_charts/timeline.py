@@ -3,7 +3,8 @@
 import copy
 
 from ...charts.base import Base
-from ...consts import PAGE_TITLE
+
+# from ...consts import PAGE_TITLE
 
 # from pyecharts.commons.utils import merge_js_dependencies
 
@@ -15,7 +16,7 @@ class Timeline(Base):
 
     def __init__(
         self,
-        page_title=PAGE_TITLE,
+        page_title="",
         width=800,
         height=400,
         is_auto_play=False,

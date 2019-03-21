@@ -1,7 +1,8 @@
 # coding=utf-8
 
 from ...charts.base import Base
-from ...consts import PAGE_TITLE
+
+# from ...consts import PAGE_TITLE
 
 # from pyecharts.commons.utils import merge_js_dependencies
 
@@ -15,7 +16,7 @@ class Overlap(Base):
     会画在第一个图表上。
     """
 
-    def __init__(self, page_title=PAGE_TITLE, width=800, height=400):
+    def __init__(self, page_title="", width=800, height=400):
         super(Overlap, self).__init__(width=width, height=height)
         self._page_title = page_title
 
