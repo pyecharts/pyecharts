@@ -9,7 +9,7 @@ class InitOpts:
         width: str = "800px",
         height: str = "400px",
         renderer: str = RENDER_TYPE.CANVAS,
-        page_title: str = PAGE_TITLE,
+        page_title: str = "Awesome-pyecharts",
         theme: str = "white",
         bg_color: Optional[str] = None,
         js_host: str = "",
@@ -53,8 +53,8 @@ class TitleOpts:
         pos_right: Optional[str] = None,
         pos_top: Optional[str] = None,
         pos_bottom: Optional[str] = None,
-        title_textstyle_opts: Optional[TextStyleOpts] = None,
-        subtitle_textstyle_opts: Optional[TextStyleOpts] = None,
+        title_textstyle_opts: Union[TextStyleOpts, dict, None] = None,
+        subtitle_textstyle_opts: Union[TextStyleOpts, dict, None] = None,
     ):
         if isinstance(title_textstyle_opts, TextStyleOpts):
             title_textstyle_opts = title_textstyle_opts.opts
@@ -105,7 +105,7 @@ class LegendOpts:
         left: Optional[str] = None,
         top: Optional[str] = None,
         orient: Optional[str] = None,
-        textstyle_opts: Optional[TextStyleOpts] = None,
+        textstyle_opts: Union[TextStyleOpts, dict, None] = None,
     ):
         if isinstance(textstyle_opts, TextStyleOpts):
             textstyle_opts = textstyle_opts.opts
@@ -129,7 +129,6 @@ class VisualMapOpts:
         range_text: Union[list, tuple] = None,
         range_color: Union[List[str]] = None,
         range_size: Union[List[int]] = None,
-        textstyle_opts: Optional[TextStyleOpts] = None,
         orient: str = "vertical",
         pos_left: str = "left",
         pos_top: str = "bottom",
@@ -138,6 +137,7 @@ class VisualMapOpts:
         is_calculable: bool = True,
         is_piecewise: bool = False,
         pieces=None,
+        textstyle_opts: Union[TextStyleOpts, dict, None] = None,
     ):
         if isinstance(textstyle_opts, TextStyleOpts):
             textstyle_opts = textstyle_opts.opts
@@ -177,10 +177,10 @@ class TooltipOpts:
         trigger_on: str = "mousemove|click",
         axis_pointer_type: str = "line",
         formatter: Optional[str] = None,
-        textstyle_opts: TextStyleOpts = TextStyleOpts(font_size=14),
         background_color: Optional[str] = None,
         border_color: Optional[str] = None,
         border_width: Numeric = 0,
+        textstyle_opts: TextStyleOpts = TextStyleOpts(font_size=14),
     ):
         if isinstance(textstyle_opts, TextStyleOpts):
             textstyle_opts = textstyle_opts.opts
@@ -213,7 +213,7 @@ class AxisOpts:
         min_: Union[None, Numeric] = None,
         max_: Union[None, Numeric] = None,
         type_: Optional[str] = None,
-        name_textstyle_opts: Optional[TextStyleOpts] = None,
+        name_textstyle_opts: Union[TextStyleOpts, dict, None] = None,
         splitline_opts: Union[SplitLineOpts, dict] = SplitLineOpts(),
         linestyle_opts: Union[LineStyleOpts, dict] = LineStyleOpts(),
     ):

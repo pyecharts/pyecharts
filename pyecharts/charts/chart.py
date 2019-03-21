@@ -141,7 +141,9 @@ class Chart(Base):
 
 class AxisChart(Chart):
     def extend_axis(
-        self, xaxis: Optional[AxisOpts] = None, yaxis: Optional[AxisOpts] = None
+        self,
+        xaxis: Union[AxisOpts, dict, None] = None,
+        yaxis: Union[AxisOpts, dict, None] = None,
     ):
         if xaxis:
             if isinstance(xaxis, AxisOpts):

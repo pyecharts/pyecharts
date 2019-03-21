@@ -1,5 +1,5 @@
 # coding=utf-8
-from pyecharts.commons.types import List, Numeric, Optional, Union, ListTuple
+from pyecharts.commons.types import List, ListTuple, Numeric, Optional, Union
 
 
 class LabelOpts:
