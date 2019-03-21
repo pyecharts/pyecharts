@@ -5,7 +5,6 @@ Test Case for the acccess interface of coordinate dataset
 from __future__ import unicode_literals
 
 from nose.tools import assert_dict_equal, eq_, raises
-
 from pyecharts.commons.exceptions import RegionNotFound
 from pyecharts.datasets.coordinates import (
     GEO_DATA_BANK,

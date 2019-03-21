@@ -3,9 +3,8 @@ import json
 import os
 import uuid
 
-from ..consts import BUILTIN_THEMES, ONLINE_HOST
 from ..commons import utils
-from ..commons.structures import OrderedSet
+from ..consts import BUILTIN_THEMES, ONLINE_HOST
 from ..options import InitOpts
 from ..render.engine import RenderEngine
 
@@ -27,12 +26,12 @@ class Base:
         self.chart_id = uuid.uuid4().hex
         self.options: dict = {}
         self.js_host: str = ONLINE_HOST
-        self.js_functions: OrderedSet = OrderedSet()
-        self.js_dependencies: OrderedSet = OrderedSet("echarts")
+        self.js_functions: utils.OrderedSet = utils.OrderedSet()
+        self.js_dependencies: utils.OrderedSet = utils.OrderedSet("echarts")
 
     @staticmethod
     def produce_js_func(fn: str) -> str:
-        return utils._produce_js_func(fn)
+        return utils.filter_js_func(fn)
 
     def add_js_funcs(self, *fns):
         for fn in fns:

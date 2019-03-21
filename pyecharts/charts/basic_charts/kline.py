@@ -1,13 +1,8 @@
 # coding=utf-8
-
 from ...charts.chart import AxisChart
-
-# from ...options import AxisOpts, InitOpts, MarkLineOpts, MarkPointOpts, TooltipOpts
-from ...options import *
 from ...commons.types import ListTuple, Union
-from ...commons.consts import CHART_TYPE
-from ...consts import TOOLTIP_FORMATTER_TYPE
-
+from ...consts import CHART_TYPE
+from ...options import AxisOpts, InitOpts, MarkLineOpts, MarkPointOpts
 
 # def kline_tooltip_formatter(params):
 #     text = (

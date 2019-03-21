@@ -1,8 +1,7 @@
 # coding=utf-8
-
 from ...charts.chart import Chart
+from ...commons.types import Numeric, Optional, Union
 from ...options import InitOpts, LabelOpts, LineStyleOpts
-from ...commons.types import Numeric, Union
 
 
 class Graph(Chart):
@@ -25,11 +24,11 @@ class Graph(Chart):
         is_roam: bool = True,
         is_rotate_label: bool = False,
         layout: str = "force",
-        symbol=None,
+        symbol: Optional[str] = None,
         edge_length: Numeric = 50,
         gravity: Numeric = 0.2,
         repulsion: Numeric = 50,
-        edge_symbol=None,
+        edge_symbol: Optional[str] = None,
         edge_symbol_size: Numeric = 10,
         label_opts: Union[LabelOpts, dict] = LabelOpts(),
         linestyle_opts: Union[LineStyleOpts, dict] = LineStyleOpts(),

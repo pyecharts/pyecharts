@@ -2,7 +2,6 @@ import os
 
 from mock import patch
 from nose.tools import eq_, raises
-
 from pyecharts.commons import exceptions
 from pyecharts.commons.js_extensions import JsExtension
 

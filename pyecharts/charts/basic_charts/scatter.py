@@ -1,8 +1,7 @@
 # coding=utf-8
-
 from ...charts.chart import AxisChart
-from ...options import AxisOpts, InitOpts, LabelOpts, MarkLineOpts, MarkPointOpts
 from ...commons.types import ListTuple, Numeric, Union
+from ...options import AxisOpts, InitOpts, LabelOpts, MarkLineOpts, MarkPointOpts
 
 
 class Scatter(AxisChart):

@@ -5,7 +5,6 @@ import codecs
 import os
 
 from nose.tools import eq_
-
 from pyecharts.javascripthon.dom import NULL
 from pyecharts.utils import (
     get_resource_dir,

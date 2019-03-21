@@ -6,7 +6,6 @@ import os
 from test.utils import get_default_rendering_file_content
 
 from nose.tools import eq_
-
 from pyecharts import Bar, Polar
 from pyecharts.javascripthon.api import EChartsTranslator
 from pyecharts.javascripthon.dom import NULL

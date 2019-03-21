@@ -1,6 +1,6 @@
 # coding=utf-8
-
 from ...charts.chart import Chart
+from ...commons.types import ListTuple, Optional, Union
 from ...options import (
     AreaStyleOpts,
     AxisLineOpts,
@@ -10,7 +10,6 @@ from ...options import (
     SplitAreaOpt,
     SplitLineOpts,
 )
-from ...commons.types import ListTuple, Optional, Union
 
 
 class Radar(Chart):

@@ -3,11 +3,11 @@
 import json
 
 from ...charts.chart import Chart
-from ...datasets import COORDINATES
-from ...consts import TOOLTIP_FORMATTER_TYPE
-from ...options import EffectOpts, InitOpts, LabelOpts, TooltipOpts
+from ...commons import utils
 from ...commons.types import List, ListTuple, Numeric, Optional, Union
-from ...commons.utils import produce_js_func
+from ...consts import TOOLTIP_FORMATTER_TYPE
+from ...datasets import COORDINATES
+from ...options import EffectOpts, InitOpts, LabelOpts, TooltipOpts
 
 
 class Geo(Chart):
@@ -137,7 +137,7 @@ class Geo(Chart):
     def set_global_opts(
         self,
         tooltip_opts: Union[TooltipOpts, dict] = TooltipOpts(
-            formatter=produce_js_func(TOOLTIP_FORMATTER_TYPE.GEO)
+            formatter=utils.filter_js_func(TOOLTIP_FORMATTER_TYPE.GEO)
         ),
         **kwargs,
     ):

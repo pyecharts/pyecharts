@@ -1,8 +1,7 @@
 # coding=utf-8
-
 from ...charts.chart import Chart
-from ...options import InitOpts
 from ...commons.types import List, ListTuple, Optional, Union
+from ...options import InitOpts
 
 
 class Liquid(Chart):

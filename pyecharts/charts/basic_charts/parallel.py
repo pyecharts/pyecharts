@@ -1,8 +1,7 @@
 # coding=utf-8
-
 from ...charts.chart import Chart
-from ...options import InitOpts, LineStyleOpts
 from ...commons.types import ListTuple, Union
+from ...options import InitOpts, LineStyleOpts
 
 
 class Parallel(Chart):

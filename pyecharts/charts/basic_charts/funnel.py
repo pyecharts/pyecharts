@@ -1,7 +1,7 @@
 # coding=utf-8
 from ...charts.chart import Chart
-from ...options import InitOpts, LabelOpts
 from ...commons.types import ListTuple, Numeric, Union
+from ...options import InitOpts, LabelOpts
 
 
 class Funnel(Chart):

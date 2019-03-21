@@ -1,7 +1,8 @@
 # coding=utf-8
 
-from pyecharts.consts import *
 from pyecharts.commons.consts import *
+from pyecharts.consts import *
+
 from ..options.series_options import *
 
 
