@@ -4,24 +4,6 @@ from ...commons.types import ListTuple, Union
 from ...consts import CHART_TYPE
 from ...options import AxisOpts, InitOpts, MarkLineOpts, MarkPointOpts
 
-# def kline_tooltip_formatter(params):
-#     text = (
-#         params[0].seriesName
-#         + "<br/>"
-#         + "- open:"
-#         + params[0].data[1]
-#         + "<br/>"
-#         + "- close:"
-#         + params[0].data[2]
-#         + "<br/>"
-#         + "- lowest:"
-#         + params[0].data[3]
-#         + "<br/>"
-#         + "- highest:"
-#         + params[0].data[4]
-#     )
-#     return text
-
 
 class Kline(AxisChart):
     """

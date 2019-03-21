@@ -1,5 +1,4 @@
 # coding=utf-8
-
 import uuid
 
 from pyecharts.commons.types import ListTuple, Numeric, Optional, Union
@@ -32,10 +31,12 @@ class Chart(Base):
 
     def __init__(self, init_opts: Union[InitOpts, dict] = InitOpts()):
         super().__init__(init_opts=init_opts)
-        self._colorlst = COLOR_LST
+        self._colors = COLOR_LST
         self.options.update(
             series_id=uuid.uuid4().hex, series=[], legend=[{"data": []}]
         )
+        if self.theme == "white":
+            self.options.update(color=self._colors)
 
     def set_series_opts(
         self,
@@ -114,14 +115,12 @@ class Chart(Base):
         for _s in self.options["legend"]:
             _s.update(legend_opts)
 
-        # TODO: xaxis -> list
         if xaxis_opt and self.options.get("xAxis", None):
             if isinstance(xaxis_opt, AxisOpts):
                 xaxis_opt = xaxis_opt.opts
                 for x in self.options["xAxis"]:
                     x.update(xaxis_opt)
 
-        # TODO: yaxis -> list
         if yaxis_opt and self.options.get("yAxis", None):
             if isinstance(yaxis_opt, AxisOpts):
                 yaxis_opt = yaxis_opt.opts
@@ -159,6 +158,12 @@ class AxisChart(Chart):
         self._xaxis_data = xaxis_data
         return self
 
+    def set_grid_index(self, xaxis_index: int, yaxis_index: int):
+        for x in self.options.get("xAxis"):
+            x.update(gridIndex=xaxis_index)
+        for y in self.options.get("yAxis"):
+            y.update(gridIndex=yaxis_index)
+
 
 class Chart3D(Chart):
     """
@@ -166,7 +171,7 @@ class Chart3D(Chart):
     """
 
     def __init__(self, init_opts: Union[InitOpts, dict] = InitOpts()):
-        init_opts.renderer = RENDER_TYPE.canvas
+        init_opts.renderer = RENDER_TYPE.CANVAS
         super().__init__(init_opts)
         self.js_dependencies.add("echartsgl")
         self._3d_chart_type = None  # 3d chart type, don't use it directly

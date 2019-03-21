@@ -7,12 +7,6 @@ BUILTIN_THEMES = ["light", "dark", "white"]
 ONLINE_HOST = "http://chenjiandongx.com/go-echarts-assets/assets/"
 PAGE_TITLE = "Echarts"
 
-NTERACT = "nteract"
-
-# themes
-LIGHT_THEME = "light"
-DARK_THEME = "dark"
-
 COLOR_LST = [
     "#c23531",
     "#2f4554",
@@ -86,7 +80,27 @@ class _ToolTipFormatterType:
 
 
 class _ThemeType:
-    pass
+    LIGHT_THEME = "light"
+    DARK_THEME = "dark"
+    CHALK: str = "chalk"
+    ESSOS: str = "essos"
+    INFOGRAPHIC: str = "infographic"
+    MACARONS: str = "macarons"
+    PURPLE_PASSION: str = "purple-passion"
+    ROMA: str = "roma"
+    ROMANTIC: str = "romantic"
+    SHINE: str = "shine"
+    VINTAGE: str = "vintage"
+    WALDEN: str = "walden"
+    WESTEROS: str = "westeros"
+    WONDERLAND: str = "wonderland"
+
+
+class _GeoType:
+    SCATTER: str = "scatter"
+    EFFECT_SCATTER: str = "effectScatter"
+    HEATMAP: str = "heatmap"
+    LINES: str = "lines"
 
 
 RENDER_TYPE = _RenderType()
@@ -95,3 +109,4 @@ SYMBOL_TYPE = _SymbolType()
 CHART_TYPE = _ChartType
 TOOLTIP_FORMATTER_TYPE = _ToolTipFormatterType()
 THEME_TYPE = _ThemeType()
+GEO_TYPES = _GeoType()

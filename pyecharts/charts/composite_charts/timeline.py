@@ -3,7 +3,7 @@
 import copy
 
 from ...charts.base import Base
-from ...commons.consts import PAGE_TITLE
+from ...consts import PAGE_TITLE
 
 # from pyecharts.commons.utils import merge_js_dependencies
 
@@ -30,37 +30,6 @@ class Timeline(Base):
         pos_top="auto",
         pos_bottom="atuo",
     ):
-        """
-
-        :param is_auto_play:
-            是否自动播放，默认为 Flase
-        :param is_loop_play:
-            是否循环播放，默认为 True
-        :param is_rewind_play:
-            是否方向播放，默认为 Flase
-        :param is_timeline_show:
-            是否显示 timeline 组件。默认为 True，如果设置为false，不会显示，但是功能还存在。
-        :param timeline_play_interval:
-            播放的速度（跳动的间隔），单位毫秒（ms）。
-        :param timeline_symbol:
-            标记的图形。有'circle', 'rect', 'roundRect', 'triangle', 'diamond',
-            'pin', 'arrow'可选
-        :param timeline_symbol_size:
-            标记的图形大小，可以设置成诸如 10 这样单一的数字，也可以用数组分开表示
-            宽和高，例如 [20, 10] 表示标记宽为 20，高为 10。
-        :param timeline_left:
-            timeline 组件离容器左侧的距离。
-            left 的值可以是像 20 这样的具体像素值，可以是像 '20%' 这样相对于容器高宽的百分比，
-            也可以是 'left', 'center', 'right'。如果 left 的值为'left', 'center',
-            'right'，组件会根据相应的位置自动对齐。
-        :param timeline_right:
-            timeline 组件离容器右侧的距离。同 left
-        :param timeline_top:
-            timeline 组件离容器顶侧的距离。同 left
-        :param timeline_bottom:
-            timeline 组件离容器底侧的距离。同 left
-        """
-
         super(Timeline, self).__init__(width=width, height=height)
         self._page_title = page_title
         self._time_points = []

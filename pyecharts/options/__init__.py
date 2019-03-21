@@ -22,4 +22,5 @@ from .series_options import (
     AxisLineOpts,
     MarkPointItem,
     EffectOpts,
+    TextStyleOpts,
 )

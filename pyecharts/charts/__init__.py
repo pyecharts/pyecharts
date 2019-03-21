@@ -6,7 +6,6 @@ from ..charts.basic_charts.effectscatter import EffectScatter
 from ..charts.basic_charts.funnel import Funnel
 from ..charts.basic_charts.gauge import Gauge
 from ..charts.basic_charts.geo import Geo
-from ..charts.basic_charts.geolines import GeoLines
 from ..charts.basic_charts.graph import Graph
 from ..charts.basic_charts.heatmap import HeatMap
 from ..charts.basic_charts.kline import Kline
