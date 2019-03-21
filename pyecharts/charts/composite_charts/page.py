@@ -34,7 +34,9 @@ class Page:
     def __len__(self):
         return len(self._charts)
 
-    def render(self, path="render.html", template_name="simple_page.html"):
+    def render(
+        self, path: str = "render.html", template_name: str = "simple_page.html"
+    ):
         for c in self:
             c.options = c.dump_options()
             if c.theme not in BUILTIN_THEMES:

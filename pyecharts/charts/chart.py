@@ -1,10 +1,9 @@
 # coding=utf-8
 import uuid
 
-from pyecharts.commons.types import ListTuple, Numeric, Optional, Union
-
 from .. import options as opts
 from ..charts.base import Base
+from ..commons.types import ListTuple, Numeric, Optional, Union
 from ..consts import RENDER_TYPE
 
 COLORS = [
