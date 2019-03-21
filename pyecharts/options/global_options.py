@@ -362,3 +362,8 @@ class ParallelAxisOpts:
             "max": max_,
             "scale": is_scale,
         }
+
+
+# TODO
+class CalendarOpts:
+    pass

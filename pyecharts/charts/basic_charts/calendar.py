@@ -21,21 +21,12 @@ class Calendar(Chart):
         yaxis_data: ListTuple,
         *,
         label_opts: Union[LabelOpts, dict] = LabelOpts(),
-        markpoint_opts: Union[MarkPointOpts, dict, None] = None,
-        markline_opts: Union[MarkLineOpts, dict, None] = None,
     ):
         if isinstance(label_opts, LabelOpts):
             label_opts = label_opts.opts
-        if isinstance(markpoint_opts, MarkPointOpts):
-            markpoint_opts = markpoint_opts.opts
-        if isinstance(markline_opts, MarkLineOpts):
-            markline_opts = markline_opts.opts
 
-        # _is_calendar = kwargs.get("is_calendar_heatmap", None) is True
         # if _is_calendar:
         #     name, data = args
-        # else:
-        #     name, x_axis, y_axis, data = args
 
         # if "yaxis_formatter" not in kwargs:
         #     kwargs["yaxis_formatter"] = None
@@ -47,8 +38,6 @@ class Calendar(Chart):
                 "name": name,
                 "data": yaxis_data,
                 "label": label_opts,
-                "markLine": markline_opts,
-                "markPoint": markpoint_opts,
             }
         )
 
@@ -56,13 +45,4 @@ class Calendar(Chart):
         #     self.options.get("toolbox").update(left="98%", top="26%")
         #     self.options.get("series")[0].update(coordinateSystem="calendar")
         #     self.options.update(calendar=chart["calendar"])
-        # else:
-        # xaxis, yaxis = chart["xy_axis"]
-        # self.options.update(xAxis=xaxis, yAxis=yaxis)
-        # self.options.get("xAxis")[0].update(
-        #         type="category", data=x_axis, splitArea=splitline_opts
-        #     )
-        # self.options.get("yAxis")[0].update(
-        #         type="category", data=y_axis, splitArea=splitline_opts
-        #     )
         return self
