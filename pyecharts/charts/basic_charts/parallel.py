@@ -1,7 +1,7 @@
 # coding=utf-8
 from ...charts.chart import Chart
-from ...commons.types import ListTuple, Union, Optional
-from ...options import InitOpts, LineStyleOpts
+from ...commons.types import ListTuple, Union
+from ...options import InitOpts, LineStyleOpts, ParallelAxisOpts, ParallelOpts
 
 
 class Parallel(Chart):
@@ -14,28 +14,8 @@ class Parallel(Chart):
     def __init__(self, init_opts: Union[InitOpts, dict] = InitOpts()):
         super().__init__(init_opts=init_opts)
 
-    def set_schema(self, schema: ListTuple, c_schema=None):
-        """
-
-        :param schema:
-            默认平行坐标系的坐标轴信息，如 ["dim_name1", "dim_name2", "dim_name3"]。
-        :param c_schema:
-            用户自定义平行坐标系的坐标轴信息。有以下属性可选。
-            dim：维度索引
-            name：维度名称
-            type：维度类型，有'value', 'category'可选
-                value：数值轴，适用于连续数据。
-                category： 类目轴，适用于离散的类目数据。
-            min：坐标轴刻度最小值。
-            max：坐标轴刻度最大值。
-            inverse：是否是反向坐标轴。默认为 False
-            nameLocation：坐标轴名称显示位置。有'start', 'middle', 'end'可选
-        """
-        if schema:
-            _schema = [{"dim": i, "name": v} for i, v in enumerate(schema)]
-            self.options.update(parallelAxis=_schema)
-        if c_schema:
-            self.options.update(parallelAxis=c_schema)
+    def set_schema(self, schema: ListTuple[ParallelAxisOpts]):
+        self.options.update(parallelAxis=schema)
         return self
 
     def add(
@@ -47,9 +27,7 @@ class Parallel(Chart):
         if isinstance(linestyle_opts, LineStyleOpts):
             linestyle_opts = linestyle_opts.opts
 
-        self.options.update(
-            parallel={"left": "5%", "right": "13%", "bottom": "10%", "top": "20%"}
-        )
+        self.options.update(parallel=ParallelOpts())
         self._append_legend(name)
         self.options.get("series").append(
             {

@@ -1,5 +1,6 @@
-from pyecharts.charts import HeatMap
+import random
 
+from pyecharts.charts import HeatMap
 
 x_axis = [
     "12a",
@@ -27,7 +28,6 @@ x_axis = [
     "10p",
     "11p",
 ]
-import random
 
 y_axis = ["Saturday", "Friday", "Thursday", "Wednesday", "Tuesday", "Monday", "Sunday"]
 value = [[i, j, random.randint(0, 50)] for i in range(24) for j in range(7)]

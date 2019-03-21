@@ -1,6 +1,6 @@
 # coding=utf-8
 from ...charts.chart import Chart
-from ...commons.types import Union, ListTuple
+from ...commons.types import ListTuple, Union
 from ...options import InitOpts, LabelOpts, MarkLineOpts, MarkPointOpts
 
 

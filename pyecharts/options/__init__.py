@@ -10,6 +10,8 @@ from .global_options import (
     ToolboxOpst,
     AxisOpts,
     Axis3DOpts,
+    ParallelAxisOpts,
+    ParallelOpts,
 )
 from .series_options import (
     LabelOpts,

@@ -1,13 +1,13 @@
 # coding=utf-8
 from ...charts.chart import AxisChart
-from ...commons.types import Union, ListTuple
+from ...commons.types import ListTuple, Union
 from ...options import (
+    AxisOpts,
     InitOpts,
     LabelOpts,
     MarkLineOpts,
     MarkPointOpts,
     VisualMapOpts,
-    AxisOpts,
 )
 
 

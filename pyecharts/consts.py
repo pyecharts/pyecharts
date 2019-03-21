@@ -1,12 +1,7 @@
 # coding=utf-8
 
-
 BUILTIN_THEMES = ["light", "dark", "white"]
-
-
 ONLINE_HOST = "http://chenjiandongx.com/go-echarts-assets/assets/"
-PAGE_TITLE = "Echarts"
-
 COLOR_LST = [
     "#c23531",
     "#2f4554",
@@ -70,6 +65,11 @@ class _ChartType:
     GAUGE: str = "gauge"
     GEO: str = "geo"
     KLINE: str = "candlestick"
+    LINE: str = "line"
+    LIQUID: str = "liquidFill"
+    MAP: str = "map"
+    PARALLEL: str = "parallel"
+    PIE: str = "pie"
 
 
 class _ToolTipFormatterType:

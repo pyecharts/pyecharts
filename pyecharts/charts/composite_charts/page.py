@@ -1,6 +1,6 @@
 # coding=utf-8
 from ...commons import utils
-from ...consts import ONLINE_HOST, BUILTIN_THEMES
+from ...consts import BUILTIN_THEMES, ONLINE_HOST
 from ...render.engine import RenderEngine
 
 
@@ -13,9 +13,9 @@ class Page:
 
     def __init__(self, page_title="EChart", js_host=ONLINE_HOST):
         self.page_title = page_title
-        self._charts = []
         self.js_dependencies = utils.OrderedSet()
         self.js_host = js_host
+        self._charts = []
 
     def add(self, *charts):
         for c in charts:

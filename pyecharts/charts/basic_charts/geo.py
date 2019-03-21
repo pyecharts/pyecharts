@@ -7,7 +7,7 @@ from ...commons import utils
 from ...commons.types import List, ListTuple, Numeric, Optional, Union
 from ...consts import TOOLTIP_FORMATTER_TYPE
 from ...datasets import COORDINATES
-from ...options import EffectOpts, InitOpts, LabelOpts, TooltipOpts, LineStyleOpts
+from ...options import EffectOpts, InitOpts, LabelOpts, LineStyleOpts, TooltipOpts
 
 
 class Geo(Chart):
