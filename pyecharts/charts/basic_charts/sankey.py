@@ -1,7 +1,7 @@
 # coding=utf-8
+from ... import options as opts
 from ...charts.chart import Chart
 from ...commons.types import ListTuple, Numeric, Union
-from ...options import InitOpts, LabelOpts, LineStyleOpts
 
 
 class Sankey(Chart):
@@ -12,7 +12,7 @@ class Sankey(Chart):
     间过程的加工、转化到达最终形式。
     """
 
-    def __init__(self, init_opts: Union[InitOpts, dict] = InitOpts()):
+    def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):
         super().__init__(init_opts=init_opts)
 
     def add(
@@ -22,12 +22,12 @@ class Sankey(Chart):
         links: ListTuple,
         node_width: Numeric = 20,
         node_gap: Numeric = 8,
-        label_opts: Union[LabelOpts, dict] = LabelOpts(),
-        linestyle_opt: Union[LineStyleOpts, dict] = LineStyleOpts(),
+        label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
+        linestyle_opt: Union[opts.LineStyleOpts, dict] = opts.LineStyleOpts(),
     ):
-        if isinstance(label_opts, LabelOpts):
+        if isinstance(label_opts, opts.LabelOpts):
             label_opts = label_opts.opts
-        if isinstance(linestyle_opt, LineStyleOpts):
+        if isinstance(linestyle_opt, opts.LineStyleOpts):
             linestyle_opt = linestyle_opt.opts
 
         self._append_legend(name)

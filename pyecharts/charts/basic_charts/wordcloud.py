@@ -1,9 +1,9 @@
 # coding=utf-8
 import random
 
+from ... import options as opts
 from ...charts.chart import Chart
 from ...commons.types import ListTuple, Numeric, Union
-from ...options import InitOpts
 
 SHAPES = ("cardioid", "diamond", "triangle-forward", "triangle", "pentagon", "star")
 
@@ -24,7 +24,7 @@ class WordCloud(Chart):
     <<< 词云图 >>>
     """
 
-    def __init__(self, init_opts: Union[InitOpts, dict] = InitOpts()):
+    def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):
         super().__init__(init_opts=init_opts)
         self.js_dependencies.add("echarts-wordcloud")
 

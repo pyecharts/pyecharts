@@ -1,8 +1,8 @@
 # coding=utf-8
+from ... import options as opts
 from ...charts.chart import AxisChart
 from ...commons.types import ListTuple, Union
 from ...consts import CHART_TYPE
-from ...options import AxisOpts, InitOpts, MarkLineOpts, MarkPointOpts
 
 
 class Kline(AxisChart):
@@ -12,11 +12,12 @@ class Kline(AxisChart):
     红涨蓝跌
     """
 
-    def __init__(self, init_opts: InitOpts = InitOpts()):
+    def __init__(self, init_opts: opts.InitOpts = opts.InitOpts()):
         super().__init__(init_opts=init_opts)
-        self.options.update(yAxis=[AxisOpts().opts])
+        self.options.update(yAxis=[opts.AxisOpts().opts])
         self.set_global_opts(
-            xaxis_opt=AxisOpts(is_scale=True), yaxis_opt=AxisOpts(is_scale=True)
+            xaxis_opt=opts.AxisOpts(is_scale=True),
+            yaxis_opt=opts.AxisOpts(is_scale=True),
         )
 
     def add_yaxis(
@@ -24,13 +25,13 @@ class Kline(AxisChart):
         name: str,
         y_axis: ListTuple,
         *,
-        markline_opts: Union[MarkLineOpts, dict, None] = None,
-        markpoint_opts: Union[MarkPointOpts, dict, None] = None,
+        markline_opts: Union[opts.MarkLineOpts, dict, None] = None,
+        markpoint_opts: Union[opts.MarkPointOpts, dict, None] = None,
     ):
 
-        if isinstance(markpoint_opts, MarkPointOpts):
+        if isinstance(markpoint_opts, opts.MarkPointOpts):
             markpoint_opts = markpoint_opts.opts
-        if isinstance(markline_opts, MarkLineOpts):
+        if isinstance(markline_opts, opts.MarkLineOpts):
             markline_opts = markline_opts.opts
 
         self._append_legend(name)

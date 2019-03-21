@@ -1,7 +1,7 @@
 # coding=utf-8
+from ... import options as opts
 from ...charts.chart import Chart
 from ...commons.types import Numeric, Optional, Union
-from ...options import InitOpts, LabelOpts, LineStyleOpts
 
 
 class Graph(Chart):
@@ -11,7 +11,7 @@ class Graph(Chart):
     用于展现节点以及节点之间的关系数据。
     """
 
-    def __init__(self, init_opts: Union[InitOpts, dict] = InitOpts()):
+    def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):
         super().__init__(init_opts=init_opts)
 
     def add(
@@ -30,12 +30,12 @@ class Graph(Chart):
         repulsion: Numeric = 50,
         edge_symbol: Optional[str] = None,
         edge_symbol_size: Numeric = 10,
-        label_opts: Union[LabelOpts, dict] = LabelOpts(),
-        linestyle_opts: Union[LineStyleOpts, dict] = LineStyleOpts(),
+        label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
+        linestyle_opts: Union[opts.LineStyleOpts, dict] = opts.LineStyleOpts(),
     ):
-        if isinstance(label_opts, LabelOpts):
+        if isinstance(label_opts, opts.LabelOpts):
             label_opts = label_opts.opts
-        if isinstance(linestyle_opts, LineStyleOpts):
+        if isinstance(linestyle_opts, opts.LineStyleOpts):
             linestyle_opts = linestyle_opts.opts
 
         if categories:

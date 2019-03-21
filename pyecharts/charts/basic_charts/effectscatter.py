@@ -1,7 +1,7 @@
 # coding=utf-8
+from ... import options as opts
 from ...charts.chart import AxisChart
 from ...commons.types import ListTuple, Numeric, Optional, Union
-from ...options import AxisOpts, EffectOpts, InitOpts, LabelOpts
 
 
 class EffectScatter(AxisChart):
@@ -11,9 +11,9 @@ class EffectScatter(AxisChart):
     利用动画特效可以将某些想要突出的数据进行视觉突出。
     """
 
-    def __init__(self, init_opts: Union[InitOpts, dict] = InitOpts()):
+    def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):
         super().__init__(init_opts=init_opts)
-        self.options.update(yAxis=[AxisOpts().opts])
+        self.options.update(yAxis=[opts.AxisOpts().opts])
 
     def add_yaxis(
         self,
@@ -22,12 +22,12 @@ class EffectScatter(AxisChart):
         *,
         symbol: Optional[str] = None,
         symbol_size: Numeric = 10,
-        label_opts: Union[LabelOpts, dict] = LabelOpts,
-        effect_opts: Union[EffectOpts, dict] = EffectOpts(),
+        label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts,
+        effect_opts: Union[opts.EffectOpts, dict] = opts.EffectOpts(),
     ):
-        if isinstance(label_opts, LabelOpts):
+        if isinstance(label_opts, opts.LabelOpts):
             label_opts = label_opts.opts
-        if isinstance(effect_opts, EffectOpts):
+        if isinstance(effect_opts, opts.EffectOpts):
             effect_opts = effect_opts.opts
 
         self._append_legend(name)

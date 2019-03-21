@@ -1,14 +1,7 @@
 # coding=utf-8
+from ... import options as opts
 from ...charts.chart import Chart
 from ...commons.types import ListTuple, Union
-from ...options import (
-    AreaStyleOpts,
-    AxisLineOpts,
-    EffectOpts,
-    InitOpts,
-    LabelOpts,
-    SplitLineOpts,
-)
 
 
 class Polar(Chart):
@@ -18,7 +11,7 @@ class Polar(Chart):
     可以用于散点图和折线图。
     """
 
-    def __init__(self, init_opts: Union[InitOpts, dict] = InitOpts()):
+    def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):
         super().__init__(init_opts=init_opts)
 
     def add(
@@ -40,25 +33,25 @@ class Polar(Chart):
         angleaxis_z_index=50,
         render_item=None,
         symbol=None,
-        label_opts: Union[LabelOpts, dict] = LabelOpts(),
-        areastyle_opts: Union[AreaStyleOpts, dict] = AreaStyleOpts(),
-        axisline_opts: Union[AxisLineOpts, dict] = AxisLineOpts(),
-        splitline_opts: Union[SplitLineOpts, dict] = SplitLineOpts(),
-        effect_opts: Union[EffectOpts, dict] = EffectOpts(),
-        axislabel_opts: Union[LabelOpts, dict] = LabelOpts(),
+        label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
+        areastyle_opts: Union[opts.AreaStyleOpts, dict] = opts.AreaStyleOpts(),
+        axisline_opts: Union[opts.AxisLineOpts, dict] = opts.AxisLineOpts(),
+        splitline_opts: Union[opts.SplitLineOpts, dict] = opts.SplitLineOpts(),
+        effect_opts: Union[opts.EffectOpts, dict] = opts.EffectOpts(),
+        axislabel_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
     ):
 
-        if isinstance(label_opts, LabelOpts):
+        if isinstance(label_opts, opts.LabelOpts):
             label_opts = label_opts.opts
-        if isinstance(areastyle_opts, AreaStyleOpts):
+        if isinstance(areastyle_opts, opts.AreaStyleOpts):
             areastyle_opts = areastyle_opts.opts
-        if isinstance(axisline_opts, AxisLineOpts):
+        if isinstance(axisline_opts, opts.AxisLineOpts):
             axisline_opts = axisline_opts.opts
-        if isinstance(splitline_opts, SplitLineOpts):
+        if isinstance(splitline_opts, opts.SplitLineOpts):
             splitline_opts = splitline_opts.opts
-        if isinstance(effect_opts, EffectOpts):
+        if isinstance(effect_opts, opts.EffectOpts):
             effect_opts = effect_opts.opts
-        if isinstance(axislabel_opts, LabelOpts):
+        if isinstance(axislabel_opts, opts.LabelOpts):
             axislabel_opts = axislabel_opts.opts
 
         polar_type = "value" if type == "line" else "category"

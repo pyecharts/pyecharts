@@ -2,12 +2,12 @@
 
 import json
 
+from ... import options as opts
 from ...charts.chart import Chart
 from ...commons import utils
 from ...commons.types import List, ListTuple, Numeric, Optional, Union
 from ...consts import TOOLTIP_FORMATTER_TYPE
 from ...datasets import COORDINATES
-from ...options import EffectOpts, InitOpts, LabelOpts, LineStyleOpts, TooltipOpts
 
 
 class Geo(Chart):
@@ -17,7 +17,7 @@ class Geo(Chart):
     地理坐标系组件用于地图的绘制，支持在地理坐标系上绘制散点图，线集。
     """
 
-    def __init__(self, init_opts: Union[InitOpts, dict] = InitOpts()):
+    def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):
         super().__init__(init_opts=init_opts)
         self._coordinates = COORDINATES
         self._zlevel = 1
@@ -69,15 +69,15 @@ class Geo(Chart):
         emphasis_color="#2a333d",
         region_coords: Optional[dict] = None,
         is_roam: bool = True,
-        label_opts: Union[LabelOpts, dict] = LabelOpts(),
-        effect_opts: Union[EffectOpts, dict] = EffectOpts(),
-        linestyle_opts: Union[LineStyleOpts, dict] = LineStyleOpts(),
+        label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
+        effect_opts: Union[opts.EffectOpts, dict] = opts.EffectOpts(),
+        linestyle_opts: Union[opts.LineStyleOpts, dict] = opts.LineStyleOpts(),
     ):
-        if isinstance(label_opts, LabelOpts):
+        if isinstance(label_opts, opts.LabelOpts):
             label_opts = label_opts.opts
-        if isinstance(effect_opts, EffectOpts):
+        if isinstance(effect_opts, opts.EffectOpts):
             effect_opts = effect_opts.opts
-        if isinstance(linestyle_opts, LineStyleOpts):
+        if isinstance(linestyle_opts, opts.LineStyleOpts):
             linestyle_opts = linestyle_opts.opts
 
         self._zlevel += 1
@@ -161,7 +161,7 @@ class Geo(Chart):
 
     def set_global_opts(
         self,
-        tooltip_opts: Union[TooltipOpts, dict] = TooltipOpts(
+        tooltip_opts: Union[opts.TooltipOpts, dict] = opts.TooltipOpts(
             formatter=utils.filter_js_func(TOOLTIP_FORMATTER_TYPE.GEO)
         ),
         **kwargs,
