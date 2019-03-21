@@ -6,7 +6,7 @@ import re
 from jinja2 import Environment, FileSystemLoader
 from pyecharts.commons.types import Any, Optional
 
-from ..commons.consts import ONLINE_HOST
+from ..consts import ONLINE_HOST
 from ..commons.utils import write_utf8_html_file
 from ..datasets import FILENAMES
 
@@ -54,8 +54,7 @@ class RenderEngine:
         """
         tpl = self.env.get_template(template_name)
         html = tpl.render(chart=self.generate_js_link(chart))
-        html = re.sub('"?__-o-__"?', "", html)
-        html = re.sub(r"\\n|\\t", "", html)
+        html = re.sub(r'\\n|\\t|"?__-o-__"?', "", html)
         write_utf8_html_file(path, html)
 
     def render_chart_to_notebook(self, template_name, **kwargs) -> str:

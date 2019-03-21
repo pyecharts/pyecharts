@@ -25,6 +25,7 @@ class Bar(AxisChart):
         series_name: str,
         yaxis_data: ListTuple,
         *,
+        color: Optional[str] = None,
         stack: Optional[str] = None,
         category_gap: str = "20%",
         label_opts: Union[LabelOpts, dict] = LabelOpts(),
@@ -37,6 +38,9 @@ class Bar(AxisChart):
             markpoint_opts = markpoint_opts.opts
         if isinstance(markline_opts, MarkLineOpts):
             markline_opts = markline_opts.opts
+
+        if color:
+            self._colors.insert(0, color)
 
         self._append_legend(series_name)
         self.options.get("series").append(

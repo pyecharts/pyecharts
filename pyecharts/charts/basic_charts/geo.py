@@ -7,7 +7,7 @@ from ...commons import utils
 from ...commons.types import List, ListTuple, Numeric, Optional, Union
 from ...consts import TOOLTIP_FORMATTER_TYPE
 from ...datasets import COORDINATES
-from ...options import EffectOpts, InitOpts, LabelOpts, TooltipOpts
+from ...options import EffectOpts, InitOpts, LabelOpts, TooltipOpts, LineStyleOpts
 
 
 class Geo(Chart):
@@ -20,6 +20,7 @@ class Geo(Chart):
     def __init__(self, init_opts: Union[InitOpts, dict] = InitOpts()):
         super().__init__(init_opts=init_opts)
         self._coordinates = COORDINATES
+        self._zlevel = 1
 
     def add_coordinate(self, name, longitude, latitude):
         """
@@ -70,12 +71,16 @@ class Geo(Chart):
         is_roam: bool = True,
         label_opts: Union[LabelOpts, dict] = LabelOpts(),
         effect_opts: Union[EffectOpts, dict] = EffectOpts(),
+        linestyle_opts: Union[LineStyleOpts, dict] = LineStyleOpts(),
     ):
         if isinstance(label_opts, LabelOpts):
             label_opts = label_opts.opts
         if isinstance(effect_opts, EffectOpts):
             effect_opts = effect_opts.opts
+        if isinstance(linestyle_opts, LineStyleOpts):
+            linestyle_opts = linestyle_opts.opts
 
+        self._zlevel += 1
         self.js_dependencies.add(maptype)
 
         if region_coords:
@@ -83,9 +88,14 @@ class Geo(Chart):
                 self.add_coordinate(city_name, city_coord[0], city_coord[1])
 
         data = []
-        for (n, v) in data_pair:
-            lng, lat = self.get_coordinate(n)
-            data.append({"name": n, "value": [lng, lat, v]})
+        for n, v in data_pair:
+            if type_ == "lines":
+                assert len(v) == 2
+                f, t = self.get_coordinate(v[0]), self.get_coordinate(v[1])
+                data.append({"name": n, "coords": [f, t]})
+            else:
+                lng, lat = self.get_coordinate(n)
+                data.append({"name": n, "value": [lng, lat, v]})
 
         self.options.update(
             geo={
@@ -132,6 +142,21 @@ class Geo(Chart):
             self.options.get("series").append(
                 {"type": type_, "name": name, "coordinateSystem": "geo", "data": data}
             )
+
+        elif type_ == "lines":
+            self.options.get("series").append(
+                {
+                    "type": "lines",
+                    "name": name,
+                    "zlevel": self._zlevel,
+                    "effect": effect_opts,
+                    "symbol": symbol or ["none", "arrow"],
+                    "symbolSize": symbol_size,
+                    "data": data,
+                    "lineStyle": linestyle_opts,
+                }
+            )
+
         return self
 
     def set_global_opts(

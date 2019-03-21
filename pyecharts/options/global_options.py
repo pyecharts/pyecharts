@@ -1,8 +1,5 @@
 # coding=utf-8
-
-from pyecharts.commons.consts import *
-from pyecharts.consts import *
-
+from ..consts import *
 from ..options.series_options import *
 
 
@@ -52,24 +49,28 @@ class TitleOpts:
         self,
         title: Optional[str] = None,
         subtitle: Optional[str] = None,
-        title_left: Optional[str] = None,
-        title_top: Optional[str] = None,
-        title_color: Optional[str] = None,
-        title_text_size: Union[None, Numeric] = None,
-        subtitle_color: Optional[str] = None,
-        subtitle_text_size: Union[None, Numeric] = None,
+        pos_left: Optional[str] = None,
+        pos_right: Optional[str] = None,
+        pos_top: Optional[str] = None,
+        pos_bottom: Optional[str] = None,
+        title_textstyle_opts: Optional[TextStyleOpts] = None,
+        subtitle_textstyle_opts: Optional[TextStyleOpts] = None,
     ):
+        if isinstance(title_textstyle_opts, TextStyleOpts):
+            title_textstyle_opts = title_textstyle_opts.opts
+        if isinstance(subtitle_textstyle_opts, TextStyleOpts):
+            subtitle_textstyle_opts = subtitle_textstyle_opts.opts
+
         self.opts: List = [
             {
                 "text": title,
                 "subtext": subtitle,
-                "left": title_left,
-                "top": title_top,
-                "textStyle": {"color": title_color, "fontSize": title_text_size},
-                "subtextStyle": {
-                    "color": subtitle_color,
-                    "fontSize": subtitle_text_size,
-                },
+                "left": pos_left,
+                "right": pos_right,
+                "top": pos_top,
+                "bottom": pos_bottom,
+                "textStyle": title_textstyle_opts,
+                "subtextStyle": subtitle_textstyle_opts,
             }
         ]
 
@@ -104,16 +105,18 @@ class LegendOpts:
         left: Optional[str] = None,
         top: Optional[str] = None,
         orient: Optional[str] = None,
-        text_size: Union[None, Numeric] = None,
-        text_color: Optional[str] = None,
+        textstyle_opts: Optional[TextStyleOpts] = None,
     ):
+        if isinstance(textstyle_opts, TextStyleOpts):
+            textstyle_opts = textstyle_opts.opts
+
         self.opts: dict = {
             "selectedMode": selected_mode,
             "show": is_show,
             "left": left,
             "top": top,
             "orient": orient,
-            "textStyle": {"fontSize": text_size, "color": text_color},
+            "textStyle": textstyle_opts,
         }
 
 
@@ -126,7 +129,7 @@ class VisualMapOpts:
         range_text: Union[list, tuple] = None,
         range_color: Union[List[str]] = None,
         range_size: Union[List[int]] = None,
-        text_color: Optional[str] = None,
+        textstyle_opts: Optional[TextStyleOpts] = None,
         orient: str = "vertical",
         pos_left: str = "left",
         pos_top: str = "bottom",
@@ -136,7 +139,8 @@ class VisualMapOpts:
         is_piecewise: bool = False,
         pieces=None,
     ):
-
+        if isinstance(textstyle_opts, TextStyleOpts):
+            textstyle_opts = textstyle_opts.opts
         _inrange_op = {}
         if type_ == "color":
             range_color = range_color or ["#50a3ba", "#eac763", "#d94e5d"]
@@ -152,7 +156,7 @@ class VisualMapOpts:
             "min": min_,
             "max": max_,
             "text": range_text,
-            "textStyle": {"color": text_color},
+            "textStyle": textstyle_opts,
             "inRange": _inrange_op,
             "calculable": is_calculable,
             "splitNumber": split_number,
@@ -173,18 +177,20 @@ class TooltipOpts:
         trigger_on: str = "mousemove|click",
         axis_pointer_type: str = "line",
         formatter: Optional[str] = None,
-        text_color: Optional[str] = None,
-        text_size: Numeric = 14,
+        textstyle_opts: TextStyleOpts = TextStyleOpts(font_size=14),
         background_color: Optional[str] = None,
         border_color: Optional[str] = None,
         border_width: Numeric = 0,
     ):
+        if isinstance(textstyle_opts, TextStyleOpts):
+            textstyle_opts = textstyle_opts.opts
+
         self.opts: dict = {
             "trigger": trigger,
             "triggerOn": trigger_on,
             "axisPointer": {"type": axis_pointer_type},
             "formatter": formatter,
-            "textStyle": {"color": text_color, "fontSize": text_size},
+            "textStyle": textstyle_opts,
             "backgroundColor": background_color,
             "borderColor": border_color,
             "borderWidth": border_width,
@@ -199,24 +205,33 @@ class AxisOpts:
         is_scale: bool = False,
         name_location: str = "end",
         name_gap: Numeric = 15,
-        name_size: Numeric = 12,
+        grid_index: Numeric = 0,
         position: Optional[str] = None,
         boundary_gap: Optional[str] = None,
         label_alignment: Optional[str] = None,
         inverse: Optional[str] = None,
         min_: Union[None, Numeric] = None,
         max_: Union[None, Numeric] = None,
-        type_: Union[str] = None,
-        splitline_opts: SplitLineOpts = SplitLineOpts(),
-        linestyle_opts: LineStyleOpts = LineStyleOpts(),
+        type_: Optional[str] = None,
+        name_textstyle_opts: Optional[TextStyleOpts] = None,
+        splitline_opts: Union[SplitLineOpts, dict] = SplitLineOpts(),
+        linestyle_opts: Union[LineStyleOpts, dict] = LineStyleOpts(),
     ):
+        if isinstance(name_textstyle_opts, TextStyleOpts):
+            name_textstyle_opts = name_textstyle_opts.opts
+        if isinstance(splitline_opts, SplitLineOpts):
+            splitline_opts = splitline_opts.opts
+        if isinstance(linestyle_opts, LineStyleOpts):
+            linestyle_opts = linestyle_opts.opts
+
         self.opts: dict = {
             "name": name,
             "show": is_show,
             "scale": is_scale,
             "nameLocation": name_location,
             "nameGap": name_gap,
-            "nameTextStyle": {"fontSize": name_size},
+            "nameTextStyle": name_textstyle_opts,
+            "gridIndex": grid_index,
             "axisTick": {"alignWithLabel": label_alignment},
             "inverse": inverse,
             "position": position,
@@ -224,8 +239,8 @@ class AxisOpts:
             "min": min_,
             "max": max_,
             "type": type_,
-            "splitLine": splitline_opts.opts,
-            "axisLine": {"lineStyle": linestyle_opts.opts},
+            "splitLine": splitline_opts,
+            "axisLine": {"lineStyle": linestyle_opts},
         }
 
         # if is_convert:
@@ -240,6 +255,26 @@ class AxisOpts:
         #     _xAxis["interval"] = xaxis_force_interval
         # if yaxis_force_interval is not None:
         #     _yAxis["interval"] = yaxis_force_interval
+
+
+class GridOpts:
+    def __init__(
+        self,
+        left: Optional[str] = None,
+        top: Optional[str] = None,
+        right: Optional[str] = None,
+        bottom: Optional[str] = None,
+        width: Optional[Numeric] = None,
+        height: Optional[Numeric] = None,
+    ):
+        self.opts: dict = {
+            "left": left,
+            "top": top,
+            "right": right,
+            "bottom": bottom,
+            "width": width,
+            "height": height,
+        }
 
 
 class Grid3DOpts:
@@ -284,4 +319,42 @@ class Axis3DOpts:
             "min": min_,
             "max": max_,
             "axisLabel": {"margin": margin, "interval": interval},
+        }
+
+
+class ParallelOpts:
+    def __init__(
+        self,
+        left: str = "5%",
+        right: str = "13%",
+        bottom: str = "10%",
+        top: str = "20%",
+        layout: Optional[str] = None,
+    ):
+        self.opts: dict = {
+            "left": left,
+            "right": right,
+            "bottom": bottom,
+            "top": top,
+            "layout": layout,
+        }
+
+
+class ParallelAxisOpts:
+    def __init__(
+        self,
+        dim: Numeric,
+        name: str,
+        type_: Optional[str] = None,
+        min_: Union[str, Numeric, None] = None,
+        max_: Union[str, Numeric, None] = None,
+        is_scale: bool = False,
+    ):
+        self.opts: dict = {
+            "dim": dim,
+            "name": name,
+            "type": type_,
+            "min": min_,
+            "max": max_,
+            "scale": is_scale,
         }

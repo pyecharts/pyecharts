@@ -1,10 +1,17 @@
 # coding=utf-8
-from ...charts.chart import Chart
-from ...commons.types import Union
-from ...options import InitOpts, LabelOpts, SplitLineOpts
+from ...charts.chart import AxisChart
+from ...commons.types import Union, ListTuple
+from ...options import (
+    InitOpts,
+    LabelOpts,
+    MarkLineOpts,
+    MarkPointOpts,
+    VisualMapOpts,
+    AxisOpts,
+)
 
 
-class HeatMap(Chart):
+class HeatMap(AxisChart):
     """
     <<< 热力图 >>>
 
@@ -14,45 +21,35 @@ class HeatMap(Chart):
 
     def __init__(self, init_opts: Union[InitOpts, dict] = InitOpts()):
         super().__init__(init_opts=init_opts)
-
-    def add_xaxis(self):
-        pass
+        self.options.update(yAxis=[AxisOpts().opts])
+        self.set_global_opts(visualmap_opts=VisualMapOpts(orient="horizontal"))
 
     def add_yaxis(
         self,
-        label_opt: Union[LabelOpts, dict] = LabelOpts(),
-        splitline_opt: Union[SplitLineOpts, dict] = SplitLineOpts(),
+        name: str,
+        yaxis_data: ListTuple,
+        value: ListTuple,
+        *,
+        label_opts: Union[LabelOpts, dict] = LabelOpts(),
+        markpoint_opts: Union[MarkPointOpts, dict, None] = None,
+        markline_opts: Union[MarkLineOpts, dict, None] = None,
     ):
-        if isinstance(label_opt, LabelOpts):
-            label_opt = label_opt.opts
-        if isinstance(splitline_opt, SplitLineOpts):
-            splitline_opt = splitline_opt.opts
+        if isinstance(label_opts, LabelOpts):
+            label_opts = label_opts.opts
+        if isinstance(markpoint_opts, MarkPointOpts):
+            markpoint_opts = markpoint_opts.opts
+        if isinstance(markline_opts, MarkLineOpts):
+            markline_opts = markline_opts.opts
 
-        _is_calendar = kwargs.get("is_calendar_heatmap", None) is True
-        if _is_calendar:
-            name, data = args
-        else:
-            name, x_axis, y_axis, data = args
-
-        if "yaxis_formatter" not in kwargs:
-            kwargs["yaxis_formatter"] = None
-            self._append_legend(name)
-
+        self.options.get("yAxis")[0].update(data=yaxis_data)
         self.options.get("series").append(
-            {"type": "heatmap", "name": name, "data": data, "label": label_opt}
+            {
+                "type": "heatmap",
+                "name": name,
+                "data": value,
+                "label": label_opts,
+                "markLine": markline_opts,
+                "markPoint": markpoint_opts,
+            }
         )
-
-        if _is_calendar:
-            self.options.get("toolbox").update(left="98%", top="26%")
-            self.options.get("series")[0].update(coordinateSystem="calendar")
-            self.options.update(calendar=chart["calendar"])
-        else:
-            xaxis, yaxis = chart["xy_axis"]
-            self.options.update(xAxis=xaxis, yAxis=yaxis)
-            self.options.get("xAxis")[0].update(
-                type="category", data=x_axis, splitArea=splitline_opt
-            )
-            self.options.get("yAxis")[0].update(
-                type="category", data=y_axis, splitArea=splitline_opt
-            )
         return self
