@@ -1,15 +1,7 @@
 # coding=utf-8
+from ... import options as opts
 from ...charts.chart import Chart
 from ...commons.types import ListTuple, Optional, Union
-from ...options import (
-    AreaStyleOpts,
-    AxisLineOpts,
-    InitOpts,
-    LabelOpts,
-    LineStyleOpts,
-    SplitAreaOpt,
-    SplitLineOpts,
-)
 
 
 class Radar(Chart):
@@ -19,7 +11,7 @@ class Radar(Chart):
     雷达图主要用于表现多变量的数据。
     """
 
-    def __init__(self, init_opts: Union[InitOpts, dict] = InitOpts()):
+    def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):
         super().__init__(init_opts=init_opts)
 
     def set_radar_component(
@@ -29,15 +21,15 @@ class Radar(Chart):
         shape="",
         text_color="#333",
         text_size=12,
-        splitline_opt: Union[SplitLineOpts, dict] = SplitLineOpts(),
-        splitarea_opt: Union[SplitAreaOpt, dict] = SplitAreaOpt(),
-        axisline_opt: Union[AxisLineOpts, dict] = AxisLineOpts(),
+        splitline_opt: Union[opts.SplitLineOpts, dict] = opts.SplitLineOpts(),
+        splitarea_opt: Union[opts.SplitAreaOpt, dict] = opts.SplitAreaOpt(),
+        axisline_opt: Union[opts.AxisLineOpts, dict] = opts.AxisLineOpts(),
     ):
-        if isinstance(splitline_opt, SplitLineOpts):
+        if isinstance(splitline_opt, opts.SplitLineOpts):
             splitline_opt = splitline_opt.opts
-        if isinstance(splitarea_opt, SplitAreaOpt):
+        if isinstance(splitarea_opt, opts.SplitAreaOpt):
             splitarea_opt = splitarea_opt.opts
-        if isinstance(axisline_opt, AxisLineOpts):
+        if isinstance(axisline_opt, opts.AxisLineOpts):
             axisline_opt = axisline_opt.opts
 
         indicator = []
@@ -65,15 +57,15 @@ class Radar(Chart):
         value: ListTuple,
         symbol: Optional[str] = None,
         item_color=None,
-        label_opts: LabelOpts = LabelOpts(),
-        linestyle_opts: LineStyleOpts = LineStyleOpts(),
-        areastyle_opts: AreaStyleOpts = AreaStyleOpts(),
+        label_opts: opts.LabelOpts = opts.LabelOpts(),
+        linestyle_opts: opts.LineStyleOpts = opts.LineStyleOpts(),
+        areastyle_opts: opts.AreaStyleOpts = opts.AreaStyleOpts(),
     ):
-        if isinstance(label_opts, LabelOpts):
+        if isinstance(label_opts, opts.LabelOpts):
             label_opts = label_opts.opts
-        if isinstance(linestyle_opts, LineStyleOpts):
+        if isinstance(linestyle_opts, opts.LineStyleOpts):
             linestyle_opts = linestyle_opts.opts
-        if isinstance(areastyle_opts, AreaStyleOpts):
+        if isinstance(areastyle_opts, opts.AreaStyleOpts):
             areastyle_opts = areastyle_opts.opts
 
         self._append_legend(name)

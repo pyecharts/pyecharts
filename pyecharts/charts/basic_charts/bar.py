@@ -1,7 +1,7 @@
 # coding=utf-8
+from ... import options as opts
 from ...charts.chart import AxisChart
 from ...commons.types import ListTuple, Optional, Union
-from ...options import AxisOpts, InitOpts, LabelOpts, MarkLineOpts, MarkPointOpts
 
 
 class Bar(AxisChart):
@@ -11,9 +11,9 @@ class Bar(AxisChart):
     柱状/条形图，通过柱形的高度/条形的宽度来表现数据的大小。
     """
 
-    def __init__(self, init_opts: Union[InitOpts, dict] = InitOpts()):
+    def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):
         super().__init__(init_opts=init_opts)
-        self.options.update(yAxis=[AxisOpts().opts])
+        self.options.update(yAxis=[opts.AxisOpts().opts])
 
     def reversal_axis(self):
         self.options["yAxis"][0]["data"] = self._xaxis_data
@@ -28,15 +28,15 @@ class Bar(AxisChart):
         color: Optional[str] = None,
         stack: Optional[str] = None,
         category_gap: str = "20%",
-        label_opts: Union[LabelOpts, dict] = LabelOpts(),
-        markpoint_opts: Union[MarkPointOpts, dict, None] = None,
-        markline_opts: Union[MarkLineOpts, dict, None] = None,
+        label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
+        markpoint_opts: Union[opts.MarkPointOpts, dict, None] = None,
+        markline_opts: Union[opts.MarkLineOpts, dict, None] = None,
     ):
-        if isinstance(label_opts, LabelOpts):
+        if isinstance(label_opts, opts.LabelOpts):
             label_opts = label_opts.opts
-        if isinstance(markpoint_opts, MarkPointOpts):
+        if isinstance(markpoint_opts, opts.MarkPointOpts):
             markpoint_opts = markpoint_opts.opts
-        if isinstance(markline_opts, MarkLineOpts):
+        if isinstance(markline_opts, opts.MarkLineOpts):
             markline_opts = markline_opts.opts
 
         if color:

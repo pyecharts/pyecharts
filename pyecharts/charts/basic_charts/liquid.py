@@ -1,7 +1,7 @@
 # coding=utf-8
+from ... import options as opts
 from ...charts.chart import Chart
 from ...commons.types import List, ListTuple, Optional, Union
-from ...options import InitOpts
 
 
 class Liquid(Chart):
@@ -11,7 +11,7 @@ class Liquid(Chart):
     主要用来突出数据的百分比。
     """
 
-    def __init__(self, init_opts: Union[InitOpts, dict] = InitOpts()):
+    def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):
         super().__init__(init_opts=init_opts)
         self.js_dependencies.add("echarts-liquidfill")
 

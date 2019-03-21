@@ -1,15 +1,7 @@
 # coding=utf-8
+from ... import options as opts
 from ...charts.chart import AxisChart
 from ...commons.types import ListTuple, Numeric, Optional, Union
-from ...options import (
-    AreaStyleOpts,
-    AxisOpts,
-    InitOpts,
-    LabelOpts,
-    LineStyleOpts,
-    MarkLineOpts,
-    MarkPointOpts,
-)
 
 
 class Line(AxisChart):
@@ -19,9 +11,9 @@ class Line(AxisChart):
     折线图是用折线将各个数据点标志连接起来的图表，用于展现数据的变化趋势。
     """
 
-    def __init__(self, init_opts: Union[InitOpts, dict] = InitOpts()):
+    def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):
         super().__init__(init_opts=init_opts)
-        self.options.update(yAxis=[AxisOpts().opts])
+        self.options.update(yAxis=[opts.AxisOpts().opts])
 
     def add_yaxis(
         self,
@@ -34,21 +26,21 @@ class Line(AxisChart):
         stack: Optional[str] = None,
         is_smooth: bool = False,
         is_step: bool = False,
-        label_opts: Union[LabelOpts, dict] = LabelOpts(),
-        markpoint_opts: Union[MarkPointOpts, dict, None] = None,
-        markline_opts: Union[MarkLineOpts, dict, None] = None,
-        linestyle_opts: Union[LineStyleOpts, dict] = LineStyleOpts(),
-        areastyle_opts: Union[AreaStyleOpts, dict] = AreaStyleOpts(),
+        label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
+        markpoint_opts: Union[opts.MarkPointOpts, dict, None] = None,
+        markline_opts: Union[opts.MarkLineOpts, dict, None] = None,
+        linestyle_opts: Union[opts.LineStyleOpts, dict] = opts.LineStyleOpts(),
+        areastyle_opts: Union[opts.AreaStyleOpts, dict] = opts.AreaStyleOpts(),
     ):
-        if isinstance(label_opts, LabelOpts):
+        if isinstance(label_opts, opts.LabelOpts):
             label_opts = label_opts.opts
-        if isinstance(markpoint_opts, MarkPointOpts):
+        if isinstance(markpoint_opts, opts.MarkPointOpts):
             markpoint_opts = markpoint_opts.opts
-        if isinstance(markline_opts, MarkLineOpts):
+        if isinstance(markline_opts, opts.MarkLineOpts):
             markline_opts = markline_opts
-        if isinstance(linestyle_opts, LineStyleOpts):
+        if isinstance(linestyle_opts, opts.LineStyleOpts):
             linestyle_opts = linestyle_opts.opts
-        if isinstance(areastyle_opts, AreaStyleOpts):
+        if isinstance(areastyle_opts, opts.AreaStyleOpts):
             areastyle_opts = areastyle_opts.opts
 
         self._append_legend(name)

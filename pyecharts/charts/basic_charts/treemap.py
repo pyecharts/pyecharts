@@ -1,7 +1,7 @@
 # coding=utf-8
+from ... import options as opts
 from ...charts.chart import Chart
 from ...commons.types import Numeric, Union
-from ...options import InitOpts, LabelOpts
 
 
 class TreeMap(Chart):
@@ -12,7 +12,7 @@ class TreeMap(Chart):
     便于突出展现出『树』的各层级中重要的节点。
     """
 
-    def __init__(self, init_opts: Union[InitOpts, dict] = InitOpts()):
+    def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):
         super().__init__(init_opts=init_opts)
 
     def add(
@@ -22,9 +22,9 @@ class TreeMap(Chart):
         left_depth=None,
         drilldown_icon="▶",
         visible_min: Numeric = 10,
-        label_opts: Union[LabelOpts, dict] = LabelOpts(),
+        label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
     ):
-        if isinstance(label_opts, LabelOpts):
+        if isinstance(label_opts, opts.LabelOpts):
             label_opts = label_opts.opts
 
         self._append_legend(name)
