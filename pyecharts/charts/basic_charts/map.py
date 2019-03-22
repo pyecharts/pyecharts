@@ -2,6 +2,7 @@
 from ... import options as opts
 from ...charts.chart import Chart
 from ...commons.types import ListTuple, Optional, Union
+from ...consts import CHART_TYPE
 
 
 class Map(Chart):
@@ -33,7 +34,7 @@ class Map(Chart):
         self._append_legend(series_name)
         self.options.get("series").append(
             {
-                "type": "map",
+                "type": CHART_TYPE.MAP,
                 "name": series_name,
                 "symbol": symbol,
                 "label": label_opts,

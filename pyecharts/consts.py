@@ -37,12 +37,22 @@ class _ChartType:
     FUNNEL: str = "funnel"
     GAUGE: str = "gauge"
     GEO: str = "geo"
+    GRAPH: str = "graph"
+    HEATMAP: str = "heatmap"
     KLINE: str = "candlestick"
     LINE: str = "line"
     LIQUID: str = "liquidFill"
     MAP: str = "map"
     PARALLEL: str = "parallel"
     PIE: str = "pie"
+    POLAR: str = "polar"
+    RADAR: str = "radar"
+    SANKEY: str = "sankey"
+    SCATTER: str = "scatter"
+    THEMERIVER: str = "themeRiver"
+    TREE: str = "tree"
+    TREEMAP: str = "treemap"
+    WORDCLOUD: str = "wordCloud"
 
 
 class _ToolTipFormatterType:

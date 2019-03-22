@@ -31,12 +31,8 @@ class Calendar(Chart):
 
         if calendar_opts:
             self.options.update(calendar=calendar_opts)
+
         self._append_legend(series_name)
-
-        # if "yaxis_formatter" not in kwargs:
-        #     kwargs["yaxis_formatter"] = None
-        #     self._append_legend(name)
-
         self.options.get("series").append(
             {
                 "type": "heatmap",
@@ -46,6 +42,4 @@ class Calendar(Chart):
                 "label": label_opts,
             }
         )
-
-        #     self.options.get("toolbox").update(left="98%", top="26%")
         return self

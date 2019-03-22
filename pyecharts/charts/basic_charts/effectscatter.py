@@ -2,6 +2,7 @@
 from ... import options as opts
 from ...charts.chart import AxisChart
 from ...commons.types import ListTuple, Numeric, Optional, Union
+from ...consts import CHART_TYPE
 
 
 class EffectScatter(AxisChart):
@@ -33,7 +34,7 @@ class EffectScatter(AxisChart):
         self._append_legend(series_name)
         self.options.get("series").append(
             {
-                "type": "effectScatter",
+                "type": CHART_TYPE.EFFECT_SCATTER,
                 "name": series_name,
                 "showEffectOn": "render",
                 "rippleEffect": effect_opts,

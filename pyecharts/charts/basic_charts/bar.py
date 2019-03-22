@@ -2,6 +2,7 @@
 from ... import options as opts
 from ...charts.chart import AxisChart
 from ...commons.types import ListTuple, Optional, Union
+from ...consts import CHART_TYPE
 
 
 class Bar(AxisChart):
@@ -45,7 +46,7 @@ class Bar(AxisChart):
         self._append_legend(series_name)
         self.options.get("series").append(
             {
-                "type": "bar",
+                "type": CHART_TYPE.BAR,
                 "name": series_name,
                 "data": yaxis_data,
                 "stack": stack,

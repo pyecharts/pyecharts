@@ -2,6 +2,7 @@
 from ... import options as opts
 from ...charts.chart import AxisChart
 from ...commons.types import ListTuple, Numeric, Optional, Union
+from ...consts import CHART_TYPE
 
 
 class Line(AxisChart):
@@ -50,7 +51,7 @@ class Line(AxisChart):
 
         self.options.get("series").append(
             {
-                "type": "line",
+                "type": CHART_TYPE.LINE,
                 "name": series_name,
                 "symbol": symbol,
                 "symbolSize": symbol_size,

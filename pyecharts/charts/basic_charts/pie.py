@@ -2,6 +2,7 @@
 from ... import options as opts
 from ...charts.chart import Chart
 from ...commons.types import ListTuple, Optional, Union
+from ...consts import CHART_TYPE
 
 
 class Pie(Chart):
@@ -43,7 +44,7 @@ class Pie(Chart):
 
         self.options.get("series").append(
             {
-                "type": "pie",
+                "type": CHART_TYPE.PIE,
                 "name": series_name,
                 "data": data,
                 "radius": radius,
