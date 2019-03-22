@@ -28,8 +28,8 @@ class Grid(Base):
 
         for s in chart.options.get("series"):
             s.update(xAxisIndex=self._axis_index, yAxisIndex=self._axis_index)
-
         self.options.get("series").extend(chart.options.get("series"))
+        self.options.get("legend").extend(chart.options.get("legend"))
 
         for dep in chart.js_dependencies.items:
             self.js_dependencies.add(dep)

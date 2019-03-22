@@ -15,7 +15,7 @@ class Parallel(Chart):
     def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):
         super().__init__(init_opts=init_opts)
 
-    def set_schema(self, schema: List[opts.ParallelAxisOpts]):
+    def add_schema(self, schema: List[opts.ParallelSchemaOpts]):
         self.options.update(parallelAxis=schema)
         return self
 

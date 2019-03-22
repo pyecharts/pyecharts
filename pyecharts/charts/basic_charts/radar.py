@@ -1,7 +1,7 @@
 # coding=utf-8
 from ... import options as opts
 from ...charts.chart import Chart
-from ...commons.types import ListTuple, Optional, Union
+from ...commons.types import List, ListTuple, Optional, Union
 from ...consts import CHART_TYPE
 
 
@@ -15,17 +15,17 @@ class Radar(Chart):
     def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):
         super().__init__(init_opts=init_opts)
 
-    def set_radar_component(
+    def add_schema(
         self,
-        schema=None,
-        c_schema=None,
-        shape="",
-        text_color="#333",
-        text_size=12,
+        schema: Union[List[Union[opts.RadarIndicatorOpts, dict]]],
+        shape: Optional[str] = None,
+        textstyle_opts: Union[opts.TextStyleOpts, dict] = opts.TextStyleOpts(),
         splitline_opt: Union[opts.SplitLineOpts, dict] = opts.SplitLineOpts(),
         splitarea_opt: Union[opts.SplitAreaOpts, dict] = opts.SplitAreaOpts(),
         axisline_opt: Union[opts.AxisLineOpts, dict] = opts.AxisLineOpts(),
     ):
+        if isinstance(textstyle_opts, opts.TextStyleOpts):
+            textstyle_opts = textstyle_opts.opts
         if isinstance(splitline_opt, opts.SplitLineOpts):
             splitline_opt = splitline_opt.opts
         if isinstance(splitarea_opt, opts.SplitAreaOpts):
@@ -33,18 +33,17 @@ class Radar(Chart):
         if isinstance(axisline_opt, opts.AxisLineOpts):
             axisline_opt = axisline_opt.opts
 
-        indicator = []
-        if schema:
-            for s in schema:
-                _name, _max = s
-                indicator.append({"name": _name, "max": _max})
-        if c_schema:
-            indicator = c_schema
+        indicators = []
+        for s in schema:
+            if isinstance(s, opts.RadarIndicatorOpts):
+                s = s.opts
+            indicators.append(s)
+
         self.options.update(
             radar={
-                "indicator": indicator,
+                "indicator": indicators,
                 "shape": shape,
-                "name": {"textStyle": {"color": text_color, "fontSize": text_size}},
+                "name": {"textStyle": textstyle_opts},
                 "splitLine": splitline_opt,
                 "splitArea": splitarea_opt,
                 "axisLine": axisline_opt,

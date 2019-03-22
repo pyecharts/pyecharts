@@ -12,6 +12,7 @@ line = Line()
 line.add_xaxis(line_attr)
 line.add_yaxis("最高气温", [11, 11, 15, 13, 12, 13, 10])
 line.add_yaxis("最低气温", [1, -2, 2, 5, 3, 2, 0])
+line.set_global_opts(legend_opts=opts.LegendOpts(top="50%"))
 
 grid = Grid()
 grid.add(bar, opts.GridOpts(bottom="60%"))

@@ -373,7 +373,7 @@ class ParallelOpts:
         }
 
 
-class ParallelAxisOpts:
+class ParallelSchemaOpts:
     def __init__(
         self,
         dim: Numeric,
@@ -391,6 +391,17 @@ class ParallelAxisOpts:
             "max": max_,
             "scale": is_scale,
         }
+
+
+class RadarIndicatorOpts:
+    def __init__(
+        self,
+        name: Optional[str] = None,
+        min_: Optional[Numeric] = None,
+        max_: Optional[Numeric] = None,
+        color: Optional[str] = None,
+    ):
+        self.opts: dict = {"name": name, "max": max_, "min": min_, "color": color}
 
 
 class CalendarOpts:
