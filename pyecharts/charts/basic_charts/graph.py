@@ -16,7 +16,7 @@ class Graph(Chart):
 
     def add(
         self,
-        name: str,
+        series_name: str,
         nodes,
         links,
         categories=None,
@@ -48,7 +48,7 @@ class Graph(Chart):
         self.options.get("series").append(
             {
                 "type": "graph",
-                "name": name,
+                "name": series_name,
                 "layout": layout,
                 "symbol": symbol,
                 "circular": {"rotateLabel": is_rotate_label},

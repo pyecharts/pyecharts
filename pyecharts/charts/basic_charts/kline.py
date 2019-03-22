@@ -22,7 +22,7 @@ class Kline(AxisChart):
 
     def add_yaxis(
         self,
-        name: str,
+        series_name: str,
         y_axis: ListTuple,
         *,
         markline_opts: Union[opts.MarkLineOpts, dict, None] = None,
@@ -34,11 +34,11 @@ class Kline(AxisChart):
         if isinstance(markline_opts, opts.MarkLineOpts):
             markline_opts = markline_opts.opts
 
-        self._append_legend(name)
+        self._append_legend(series_name)
         self.options.get("series").append(
             {
                 "type": CHART_TYPE.KLINE,
-                "name": name,
+                "name": series_name,
                 "data": y_axis,
                 "markPoint": markpoint_opts,
                 "markLine": markline_opts,

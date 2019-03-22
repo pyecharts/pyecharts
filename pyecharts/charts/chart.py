@@ -43,9 +43,7 @@ class Chart(Base):
     def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):
         super().__init__(init_opts=init_opts)
         self._colors = COLORS
-        self.options.update(
-            series_id=uuid.uuid4().hex, series=[], legend=[{"data": []}]
-        )
+        self.options.update(series=[], legend=[{"data": []}])
         if self.theme == "white":
             self.options.update(color=self._colors)
 
@@ -102,7 +100,7 @@ class Chart(Base):
     def set_global_opts(
         self,
         title_opts: Union[opts.TitleOpts, dict] = opts.TitleOpts(),
-        toolbox_opts: Union[opts.ToolboxOpst, dict] = opts.ToolboxOpst(),
+        toolbox_opts: Union[opts.ToolboxOpts, dict] = opts.ToolboxOpts(),
         tooltip_opts: Union[opts.TooltipOpts, dict] = opts.TooltipOpts(),
         legend_opts: Union[opts.LegendOpts, dict] = opts.LegendOpts(),
         xaxis_opt: Union[opts.AxisOpts, dict, None] = None,
@@ -112,7 +110,7 @@ class Chart(Base):
     ):
         if isinstance(title_opts, opts.TitleOpts):
             title_opts = title_opts.opts
-        if isinstance(toolbox_opts, opts.ToolboxOpst):
+        if isinstance(toolbox_opts, opts.ToolboxOpts):
             toolbox_opts = toolbox_opts.opts
         if isinstance(tooltip_opts, opts.TooltipOpts):
             tooltip_opts = tooltip_opts.opts

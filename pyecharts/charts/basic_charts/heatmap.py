@@ -19,7 +19,7 @@ class HeatMap(AxisChart):
 
     def add_yaxis(
         self,
-        name: str,
+        series_name: str,
         yaxis_data: ListTuple,
         value: ListTuple,
         *,
@@ -38,7 +38,7 @@ class HeatMap(AxisChart):
         self.options.get("series").append(
             {
                 "type": "heatmap",
-                "name": name,
+                "name": series_name,
                 "data": value,
                 "label": label_opts,
                 "markLine": markline_opts,

@@ -18,7 +18,7 @@ class Boxplot(AxisChart):
 
     def add_yaxis(
         self,
-        name: str,
+        series_name: str,
         y_axis: ListTuple,
         *,
         label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
@@ -32,11 +32,11 @@ class Boxplot(AxisChart):
         if isinstance(markline_opts, opts.MarkLineOpts):
             markline_opts = markline_opts.opts
 
-        self._append_legend(name)
+        self._append_legend(series_name)
         self.options.get("series").append(
             {
                 "type": "boxplot",
-                "name": name,
+                "name": series_name,
                 "data": y_axis,
                 "label": label_opts,
                 "markPoint": markpoint_opts,

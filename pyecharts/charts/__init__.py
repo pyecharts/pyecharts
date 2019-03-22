@@ -3,6 +3,7 @@
 # basic Charts
 from ..charts.basic_charts.bar import Bar
 from ..charts.basic_charts.boxplot import Boxplot
+from ..charts.basic_charts.calendar import Calendar
 from ..charts.basic_charts.effectscatter import EffectScatter
 from ..charts.basic_charts.funnel import Funnel
 from ..charts.basic_charts.gauge import Gauge

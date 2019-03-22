@@ -17,7 +17,7 @@ class TreeMap(Chart):
 
     def add(
         self,
-        name: str,
+        series_name: str,
         data,
         left_depth=None,
         drilldown_icon="▶",
@@ -27,11 +27,11 @@ class TreeMap(Chart):
         if isinstance(label_opts, opts.LabelOpts):
             label_opts = label_opts.opts
 
-        self._append_legend(name)
+        self._append_legend(series_name)
         self.options.get("series").append(
             {
                 "type": "treemap",
-                "name": name,
+                "name": series_name,
                 "data": data,
                 "label": label_opts,
                 "leafDepth": left_depth,

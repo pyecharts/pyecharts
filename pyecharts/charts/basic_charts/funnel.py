@@ -14,7 +14,7 @@ class Funnel(Chart):
 
     def add(
         self,
-        name: str,
+        series_name: str,
         data_pair: ListTuple,
         sort_: str = "descending",
         gap: Numeric = 0,
@@ -33,7 +33,7 @@ class Funnel(Chart):
         self.options.get("series").append(
             {
                 "type": "funnel",
-                "name": name,
+                "name": series_name,
                 "data": data,
                 "sort": sort_,
                 "gap": gap,

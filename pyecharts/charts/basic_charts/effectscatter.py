@@ -17,7 +17,7 @@ class EffectScatter(AxisChart):
 
     def add_yaxis(
         self,
-        name: str,
+        series_name: str,
         y_axis: ListTuple,
         *,
         symbol: Optional[str] = None,
@@ -30,11 +30,11 @@ class EffectScatter(AxisChart):
         if isinstance(effect_opts, opts.EffectOpts):
             effect_opts = effect_opts.opts
 
-        self._append_legend(name)
+        self._append_legend(series_name)
         self.options.get("series").append(
             {
                 "type": "effectScatter",
-                "name": name,
+                "name": series_name,
                 "showEffectOn": "render",
                 "rippleEffect": effect_opts,
                 "symbol": symbol,

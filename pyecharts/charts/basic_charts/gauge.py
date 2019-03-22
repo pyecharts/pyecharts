@@ -14,19 +14,19 @@ class Gauge(Chart):
 
     def add(
         self,
-        name: str,
+        series_name: str,
         data_pair: ListTuple,
         min_: Numeric = 0,
         max_: Numeric = 100,
         start_angle: Numeric = 225,
         end_angle: Numeric = -45,
     ):
-        self._append_legend(name)
+        self._append_legend(series_name)
         self.options.get("series").append(
             {
                 "type": "gauge",
                 "detail": {"formatter": "{value}%"},
-                "name": name,
+                "name": series_name,
                 "min": min_,
                 "max": max_,
                 "startAngle": start_angle,

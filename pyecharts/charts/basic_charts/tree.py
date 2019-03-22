@@ -34,7 +34,7 @@ class Tree(Chart):
 
     def add(
         self,
-        name: str,
+        series_name: str,
         data: ListTuple,
         layout: str = "orthogonal",
         symbol: str = "emptyCircle",
@@ -57,7 +57,7 @@ class Tree(Chart):
         self.options.get("series").append(
             {
                 "type": "tree",
-                "name": name,
+                "name": series_name,
                 "data": _data,
                 "left": left,
                 "right": right,

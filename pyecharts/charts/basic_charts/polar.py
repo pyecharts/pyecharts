@@ -16,7 +16,7 @@ class Polar(Chart):
 
     def add(
         self,
-        name: str,
+        series_name: str,
         data: ListTuple,
         angle_data=None,
         radius_data=None,
@@ -56,7 +56,7 @@ class Polar(Chart):
 
         polar_type = "value" if type == "line" else "category"
         is_stack = "stack" if is_stack else ""
-        self._append_legend(name)
+        self._append_legend(series_name)
 
         _amin, _amax = None, None
         if axis_range:
@@ -71,7 +71,7 @@ class Polar(Chart):
             "type": "bar",
             "coordinateSystem": "polar",
             "stack": is_stack,
-            "name": name,
+            "name": series_name,
             "data": data,
         }
 
@@ -103,7 +103,7 @@ class Polar(Chart):
             self.options.get("series").append(
                 {
                     "type": type_,
-                    "name": name,
+                    "name": series_name,
                     "coordinateSystem": "polar",
                     "symbol": symbol,
                     "symbolSize": symbol_size,
@@ -117,7 +117,7 @@ class Polar(Chart):
             self.options.get("series").append(
                 {
                     "type": type_,
-                    "name": name,
+                    "name": series_name,
                     "coordinateSystem": "polar",
                     "showEffectOn": "render",
                     "rippleEffect": effect_opts,
@@ -143,7 +143,7 @@ class Polar(Chart):
             self.options.get("series").append(
                 {
                     "type": "custom",
-                    "name": name,
+                    "name": series_name,
                     "coordinateSystem": "polar",
                     "data": data,
                     "renderItem": render_item,

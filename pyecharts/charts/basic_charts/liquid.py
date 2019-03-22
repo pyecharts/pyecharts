@@ -17,7 +17,7 @@ class Liquid(Chart):
 
     def add(
         self,
-        name: str,
+        series_name: str,
         data: ListTuple,
         shape: str = "circle",
         color: Optional[List[str]] = None,
@@ -33,7 +33,7 @@ class Liquid(Chart):
         self.options.get("series").append(
             {
                 "type": "liquidFill",
-                "name": name,
+                "name": series_name,
                 "data": data,
                 "waveAnimation": is_animation,
                 "animationDuration": _animation_dur,
