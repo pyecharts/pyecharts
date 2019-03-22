@@ -17,7 +17,7 @@ class Sankey(Chart):
 
     def add(
         self,
-        name: str,
+        series_name: str,
         nodes: ListTuple,
         links: ListTuple,
         node_width: Numeric = 20,
@@ -30,11 +30,11 @@ class Sankey(Chart):
         if isinstance(linestyle_opt, opts.LineStyleOpts):
             linestyle_opt = linestyle_opt.opts
 
-        self._append_legend(name)
+        self._append_legend(series_name)
         self.options.get("series").append(
             {
                 "type": "sankey",
-                "name": name,
+                "name": series_name,
                 "layout": None,
                 "data": nodes,
                 "links": links,

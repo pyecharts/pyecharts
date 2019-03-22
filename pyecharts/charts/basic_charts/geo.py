@@ -57,7 +57,7 @@ class Geo(Chart):
 
     def add(
         self,
-        name: str,
+        series_name: str,
         data_pair: ListTuple,
         type_: str = "scatter",
         maptype: str = "china",
@@ -108,13 +108,13 @@ class Geo(Chart):
                 },
             }
         )
-        self._append_legend(name)
+        self._append_legend(series_name)
 
         if type_ == "scatter":
             self.options.get("series").append(
                 {
                     "type": type_,
-                    "name": name,
+                    "name": series_name,
                     "coordinateSystem": "geo",
                     "symbol": symbol,
                     "symbolSize": symbol_size,
@@ -127,7 +127,7 @@ class Geo(Chart):
             self.options.get("series").append(
                 {
                     "type": type_,
-                    "name": name,
+                    "name": series_name,
                     "coordinateSystem": "geo",
                     "showEffectOn": "render",
                     "rippleEffect": effect_opts,
@@ -140,14 +140,19 @@ class Geo(Chart):
 
         elif type_ == "heatmap":
             self.options.get("series").append(
-                {"type": type_, "name": name, "coordinateSystem": "geo", "data": data}
+                {
+                    "type": type_,
+                    "name": series_name,
+                    "coordinateSystem": "geo",
+                    "data": data,
+                }
             )
 
         elif type_ == "lines":
             self.options.get("series").append(
                 {
                     "type": "lines",
-                    "name": name,
+                    "name": series_name,
                     "zlevel": self._zlevel,
                     "effect": effect_opts,
                     "symbol": symbol or ["none", "arrow"],

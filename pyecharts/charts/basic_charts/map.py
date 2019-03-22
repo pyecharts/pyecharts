@@ -16,7 +16,7 @@ class Map(Chart):
 
     def add(
         self,
-        name: str,
+        series_name: str,
         data_pair: ListTuple,
         maptype: str = "china",
         *,
@@ -30,11 +30,11 @@ class Map(Chart):
 
         self.js_dependencies.add(maptype)
         data = [{"name": n, "value": v} for (n, v) in data_pair]
-        self._append_legend(name)
+        self._append_legend(series_name)
         self.options.get("series").append(
             {
                 "type": "map",
-                "name": name,
+                "name": series_name,
                 "symbol": symbol,
                 "label": label_opts,
                 "mapType": maptype,

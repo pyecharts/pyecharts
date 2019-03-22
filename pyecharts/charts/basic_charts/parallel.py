@@ -20,7 +20,7 @@ class Parallel(Chart):
 
     def add(
         self,
-        name: str,
+        series_name: str,
         data: ListTuple,
         linestyle_opts: Union[opts.LineStyleOpts, dict] = opts.LineStyleOpts(),
     ):
@@ -28,13 +28,13 @@ class Parallel(Chart):
             linestyle_opts = linestyle_opts.opts
 
         self.options.update(parallel=opts.ParallelOpts())
-        self._append_legend(name)
+        self._append_legend(series_name)
         self.options.get("series").append(
             {
                 "type": "parallel",
                 "coordinateSystem": "parallel",
                 "lineStyle": linestyle_opts,
-                "name": name,
+                "name": series_name,
                 "data": data,
             }
         )

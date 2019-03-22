@@ -16,7 +16,7 @@ class Pie(Chart):
 
     def add(
         self,
-        name: str,
+        series_name: str,
         data_pair: ListTuple,
         radius: Optional[ListTuple] = None,
         center: Optional[ListTuple] = None,
@@ -44,7 +44,7 @@ class Pie(Chart):
         self.options.get("series").append(
             {
                 "type": "pie",
-                "name": name,
+                "name": series_name,
                 "data": data,
                 "radius": radius,
                 "center": center,

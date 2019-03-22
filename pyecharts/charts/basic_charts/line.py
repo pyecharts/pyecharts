@@ -17,7 +17,7 @@ class Line(AxisChart):
 
     def add_yaxis(
         self,
-        name: str,
+        series_name: str,
         y_axis: ListTuple,
         *,
         is_symbol_show: bool = True,
@@ -43,7 +43,7 @@ class Line(AxisChart):
         if isinstance(areastyle_opts, opts.AreaStyleOpts):
             areastyle_opts = areastyle_opts.opts
 
-        self._append_legend(name)
+        self._append_legend(series_name)
         # 合并 x 和 y 轴数据，避免当 X 轴的类型设置为 'value' 的时候，
         # X、Y 轴均显示 Y 轴数据
         data = [list(z) for z in zip(self._xaxis_data, y_axis)]
@@ -51,7 +51,7 @@ class Line(AxisChart):
         self.options.get("series").append(
             {
                 "type": "line",
-                "name": name,
+                "name": series_name,
                 "symbol": symbol,
                 "symbolSize": symbol_size,
                 "smooth": is_smooth,

@@ -30,7 +30,7 @@ class WordCloud(Chart):
 
     def add(
         self,
-        name: str,
+        series_name: str,
         data_pair: ListTuple,
         shape: str = "circle",
         word_gap: Numeric = 20,
@@ -55,7 +55,7 @@ class WordCloud(Chart):
         self.options.get("series").append(
             {
                 "type": "wordCloud",
-                "name": name,
+                "name": series_name,
                 "shape": shape,
                 "rotationRange": [_rmin, _rmax],
                 "rotationStep": rotate_step,

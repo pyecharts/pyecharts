@@ -16,16 +16,21 @@ class ThemeRiver(Chart):
 
     def add(
         self,
-        name: str,
+        series_name: str,
         data: ListTuple,
         label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
     ):
         if isinstance(label_opts, opts.LabelOpts):
             label_opts = label_opts.opts
 
-        self._append_legend(name)
+        self._append_legend(series_name)
         self.options.get("series").append(
-            {"type": "themeRiver", "name": name, "data": data, "label": label_opts}
+            {
+                "type": "themeRiver",
+                "name": series_name,
+                "data": data,
+                "label": label_opts,
+            }
         )
 
         self.options.update(singleAxis={"type": "time"})

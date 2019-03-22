@@ -152,15 +152,34 @@ class MarkLineOpts:
         }
 
 
-# TODO
 class MarkLineItem:
-    pass
+    def __init__(
+        self,
+        name: Optional[str] = None,
+        type_: Optional[str] = None,
+        xaxis: Union[str, Numeric, None] = None,
+        yaxis: Union[str, Numeric, None] = None,
+        coord: Optional[ListTuple] = None,
+        symbol: Optional[str] = None,
+        symbol_size: Optional[Numeric] = None,
+    ):
+        self.opts: dict = {
+            "name": name,
+            "type": type_,
+            "xAxis": xaxis,
+            "yAxis": yaxis,
+            "coord": coord,
+            "symbol": symbol,
+            "symbolSize": symbol_size,
+        }
 
 
+# TODO
 class MarkAreaOpts:
     pass
 
 
+# TODO
 class MarkAreaItem:
     pass
 
@@ -177,14 +196,23 @@ class AreaStyleOpts:
         self.opts: dict = {"opacity": opacity, "color": color}
 
 
-class SplitAreaOpt:
+class SplitAreaOpts:
     def __init__(self, is_show=True, area_style: AreaStyleOpts = AreaStyleOpts()):
         self.opts: dict = {"show": is_show, "areaStyle": area_style}
 
 
-# TODO
 class ItemStyleOpts:
-    pass
+    def __init__(
+        self,
+        color: Optional[str] = None,
+        border_color: Optional[str] = None,
+        opacity: Optional[Numeric] = None,
+    ):
+        self.opts: dict = {
+            "color": color,
+            "borderColor": border_color,
+            "opacity": opacity,
+        }
 
 
 class TextStyleOpts:
@@ -222,30 +250,6 @@ class TextStyleOpts:
 #     elif symbol not in SYMBOLS:
 #         symbol = "circle"
 #     return symbol
-
-
-# def grid(
-#     grid_width=None,
-#     grid_height=None,
-#     grid_top=None,
-#     grid_bottom=None,
-#     grid_left=None,
-#     grid_right=None,
-# ):
-#     _grid = {}
-#     if grid_width is not None:
-#         _grid.update(width=grid_width)
-#     if grid_height is not None:
-#         _grid.update(height=grid_height)
-#     if grid_top is not None:
-#         _grid.update(top=grid_top)
-#     if grid_bottom is not None:
-#         _grid.update(bottom=grid_bottom)
-#     if grid_left is not None:
-#         _grid.update(left=grid_left)
-#     if grid_right is not None:
-#         _grid.update(right=grid_right)
-#     return _grid
 #
 #
 # def calendar(calendar_date_range=None, calendar_cell_size=None, **kwargs):

@@ -22,12 +22,12 @@ class Radar(Chart):
         text_color="#333",
         text_size=12,
         splitline_opt: Union[opts.SplitLineOpts, dict] = opts.SplitLineOpts(),
-        splitarea_opt: Union[opts.SplitAreaOpt, dict] = opts.SplitAreaOpt(),
+        splitarea_opt: Union[opts.SplitAreaOpts, dict] = opts.SplitAreaOpts(),
         axisline_opt: Union[opts.AxisLineOpts, dict] = opts.AxisLineOpts(),
     ):
         if isinstance(splitline_opt, opts.SplitLineOpts):
             splitline_opt = splitline_opt.opts
-        if isinstance(splitarea_opt, opts.SplitAreaOpt):
+        if isinstance(splitarea_opt, opts.SplitAreaOpts):
             splitarea_opt = splitarea_opt.opts
         if isinstance(axisline_opt, opts.AxisLineOpts):
             axisline_opt = axisline_opt.opts
@@ -53,7 +53,7 @@ class Radar(Chart):
 
     def add(
         self,
-        name: str,
+        series_name: str,
         value: ListTuple,
         symbol: Optional[str] = None,
         item_color=None,
@@ -68,11 +68,11 @@ class Radar(Chart):
         if isinstance(areastyle_opts, opts.AreaStyleOpts):
             areastyle_opts = areastyle_opts.opts
 
-        self._append_legend(name)
+        self._append_legend(series_name)
         self.options.get("series").append(
             {
                 "type": "radar",
-                "name": name,
+                "name": series_name,
                 "data": value,
                 "symbol": symbol,
                 "label": label_opts,

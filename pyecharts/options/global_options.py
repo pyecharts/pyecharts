@@ -8,8 +8,8 @@ from ..options.series_options import *
 class InitOpts:
     def __init__(
         self,
-        width: str = "800px",
-        height: str = "400px",
+        width: str = "900px",
+        height: str = "500px",
         chart_id: str = uuid.uuid4().hex,
         renderer: str = RENDER_TYPE.CANVAS,
         page_title: str = "Awesome-pyecharts",
@@ -27,24 +27,53 @@ class InitOpts:
         self.js_host = js_host
 
 
-class ToolboxOpst:
+class ToolBoxFeatureOpts:
+    def __init__(
+        self,
+        save_as_image: Optional[dict] = None,
+        restore: Optional[dict] = None,
+        data_view: Optional[dict] = None,
+        data_zoom: Optional[dict] = None,
+    ):
+        if not save_as_image:
+            save_as_image = {"show": True, "title": "save as image"}
+        if not restore:
+            restore = {"show": True, "title": "restore"}
+        if not data_view:
+            data_view = {"show": True, "title": "data view"}
+        if not data_zoom:
+            data_zoom = {"show": True, "title": "data zoom"}
+
+        self.opts: dict = {
+            "saveAsImage": save_as_image,
+            "restore": restore,
+            "dataView": data_view,
+            "dataZoom": data_zoom,
+        }
+
+
+class ToolboxOpts:
     def __init__(
         self,
         is_show: bool = True,
-        orient: Optional[str] = None,
-        pos_left: str = "95%",
+        orient: str = "horizontal",
+        pos_left: str = "80%",
+        pos_right: Optional[str] = None,
         pos_top: Optional[str] = None,
+        pos_bottom: Optional[str] = None,
+        feature: Union[ToolBoxFeatureOpts, dict] = ToolBoxFeatureOpts(),
     ):
+        if isinstance(feature, ToolBoxFeatureOpts):
+            feature = feature.opts
+
         self.opts: dict = {
             "show": is_show,
             "orient": orient,
             "left": pos_left,
+            "right": pos_right,
             "top": pos_top,
-            "feature": {
-                "saveAsImage": {"show": True, "title": "save as image"},
-                "restore": {"show": True, "title": "restore"},
-                "dataView": {"show": True, "title": "data view"},
-            },
+            "bottom": pos_bottom,
+            "feature": feature,
         }
 
 
@@ -214,8 +243,8 @@ class AxisOpts:
         boundary_gap: Optional[str] = None,
         label_alignment: Optional[str] = None,
         inverse: Optional[str] = None,
-        min_: Union[None, Numeric] = None,
-        max_: Union[None, Numeric] = None,
+        min_: Optional[Numeric] = None,
+        max_: Optional[Numeric] = None,
         type_: Optional[str] = None,
         name_textstyle_opts: Union[TextStyleOpts, dict, None] = None,
         splitline_opts: Union[SplitLineOpts, dict] = SplitLineOpts(),
@@ -364,6 +393,34 @@ class ParallelAxisOpts:
         }
 
 
-# TODO
 class CalendarOpts:
-    pass
+    def __init__(
+        self,
+        left: Optional[str] = None,
+        top: Optional[str] = None,
+        right: Optional[str] = None,
+        bottom: Optional[str] = None,
+        orient: Optional[str] = None,
+        range_: Union[str, ListTuple, int] = None,
+        daylabel_opts: Union[LabelOpts, dict, None] = None,
+        monthlabel_opts: Union[LabelOpts, dict, None] = None,
+        yearlabel_opts: Union[LabelOpts, dict, None] = None,
+    ):
+        if isinstance(daylabel_opts, LabelOpts):
+            daylabel_opts = daylabel_opts.opts
+        if isinstance(monthlabel_opts, LabelOpts):
+            monthlabel_opts = monthlabel_opts.opts
+        if isinstance(yearlabel_opts, LabelOpts):
+            yearlabel_opts = yearlabel_opts.opts
+
+        self.opts: dict = {
+            "left": left,
+            "top": top,
+            "right": right,
+            "bottom": bottom,
+            "orient": orient,
+            "range": range_,
+            "dayLabel": daylabel_opts,
+            "monthLabel": monthlabel_opts,
+            "yearLabel": yearlabel_opts,
+        }

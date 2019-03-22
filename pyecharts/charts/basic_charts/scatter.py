@@ -18,7 +18,7 @@ class Scatter(AxisChart):
 
     def add_yaxis(
         self,
-        name: str,
+        series_name: str,
         y_axis: ListTuple,
         *,
         symbol=None,
@@ -34,12 +34,12 @@ class Scatter(AxisChart):
         if isinstance(markpoint_opts, opts.MarkPointOpts):
             markpoint_opts = markpoint_opts.opts
 
-        self._append_legend(name)
+        self._append_legend(series_name)
         data = [list(z) for z in zip(self._xaxis_data, y_axis)]
         self.options.get("series").append(
             {
                 "type": "scatter",
-                "name": name,
+                "name": series_name,
                 "symbol": symbol,
                 "symbolSize": symbol_size,
                 "data": data,
