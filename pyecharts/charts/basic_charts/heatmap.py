@@ -1,7 +1,7 @@
 # coding=utf-8
 from ... import options as opts
 from ...charts.chart import AxisChart
-from ...commons.types import ListTuple, Union
+from ...commons.types import ListTuple, Numeric, Optional, Union
 from ...consts import CHART_TYPE
 
 
@@ -24,6 +24,8 @@ class HeatMap(AxisChart):
         yaxis_data: ListTuple,
         value: ListTuple,
         *,
+        xaxis_index: Optional[Numeric] = None,
+        yaxis_index: Optional[Numeric] = None,
         label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
         markpoint_opts: Union[opts.MarkPointOpts, dict, None] = None,
         markline_opts: Union[opts.MarkLineOpts, dict, None] = None,
@@ -40,6 +42,8 @@ class HeatMap(AxisChart):
             {
                 "type": CHART_TYPE.HEATMAP,
                 "name": series_name,
+                "xAxisIndex": xaxis_index,
+                "yAxisIndex": yaxis_index,
                 "data": value,
                 "label": label_opts,
                 "markLine": markline_opts,

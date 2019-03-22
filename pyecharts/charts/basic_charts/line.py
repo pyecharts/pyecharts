@@ -21,6 +21,8 @@ class Line(AxisChart):
         series_name: str,
         y_axis: ListTuple,
         *,
+        xaxis_index: Optional[Numeric] = None,
+        yaxis_index: Optional[Numeric] = None,
         is_symbol_show: bool = True,
         symbol: Optional[str] = None,
         symbol_size: Numeric = 4,
@@ -53,6 +55,8 @@ class Line(AxisChart):
             {
                 "type": CHART_TYPE.LINE,
                 "name": series_name,
+                "xAxisIndex": xaxis_index,
+                "yAxisIndex": yaxis_index,
                 "symbol": symbol,
                 "symbolSize": symbol_size,
                 "smooth": is_smooth,

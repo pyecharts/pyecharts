@@ -1,7 +1,7 @@
 # coding=utf-8
 from ... import options as opts
 from ...charts.chart import AxisChart
-from ...commons.types import ListTuple, Union
+from ...commons.types import ListTuple, Numeric, Optional, Union
 from ...consts import CHART_TYPE
 
 
@@ -25,6 +25,8 @@ class Kline(AxisChart):
         series_name: str,
         y_axis: ListTuple,
         *,
+        xaxis_index: Optional[Numeric] = None,
+        yaxis_index: Optional[Numeric] = None,
         markline_opts: Union[opts.MarkLineOpts, dict, None] = None,
         markpoint_opts: Union[opts.MarkPointOpts, dict, None] = None,
     ):
@@ -39,6 +41,8 @@ class Kline(AxisChart):
             {
                 "type": CHART_TYPE.KLINE,
                 "name": series_name,
+                "xAxisIndex": xaxis_index,
+                "yAxisIndex": yaxis_index,
                 "data": y_axis,
                 "markPoint": markpoint_opts,
                 "markLine": markline_opts,

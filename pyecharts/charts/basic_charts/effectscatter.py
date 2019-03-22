@@ -21,6 +21,8 @@ class EffectScatter(AxisChart):
         series_name: str,
         y_axis: ListTuple,
         *,
+        xaxis_index: Optional[Numeric] = None,
+        yaxis_index: Optional[Numeric] = None,
         symbol: Optional[str] = None,
         symbol_size: Numeric = 10,
         label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts,
@@ -36,6 +38,8 @@ class EffectScatter(AxisChart):
             {
                 "type": CHART_TYPE.EFFECT_SCATTER,
                 "name": series_name,
+                "xAxisIndex": xaxis_index,
+                "yAxisIndex": yaxis_index,
                 "showEffectOn": "render",
                 "rippleEffect": effect_opts,
                 "symbol": symbol,
