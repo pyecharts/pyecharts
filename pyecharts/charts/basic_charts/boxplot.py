@@ -2,6 +2,7 @@
 from ... import options as opts
 from ...charts.chart import AxisChart
 from ...commons.types import ListTuple, Union
+from ...consts import CHART_TYPE
 
 
 class Boxplot(AxisChart):
@@ -35,7 +36,7 @@ class Boxplot(AxisChart):
         self._append_legend(series_name)
         self.options.get("series").append(
             {
-                "type": "boxplot",
+                "type": CHART_TYPE.BOXPLOT,
                 "name": series_name,
                 "data": y_axis,
                 "label": label_opts,

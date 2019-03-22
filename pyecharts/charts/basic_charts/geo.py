@@ -6,7 +6,7 @@ from ... import options as opts
 from ...charts.chart import Chart
 from ...commons import utils
 from ...commons.types import List, ListTuple, Numeric, Optional, Union
-from ...consts import TOOLTIP_FORMATTER_TYPE
+from ...consts import CHART_TYPE, TOOLTIP_FORMATTER_TYPE
 from ...datasets import COORDINATES
 
 

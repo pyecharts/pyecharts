@@ -1,7 +1,7 @@
 # coding=utf-8
 from ... import options as opts
 from ...charts.chart import Chart
-from ...commons.types import ListTuple, Union
+from ...commons.types import ListTuple, Numeric, Optional, Union
 
 
 class Polar(Chart):
@@ -21,8 +21,9 @@ class Polar(Chart):
         angle_data=None,
         radius_data=None,
         type_: str = "line",
-        symbol_size=4,
-        start_angle=90,
+        symbol: Optional[str] = None,
+        symbol_size: Numeric = 4,
+        start_angle: Numeric = 90,
         boundary_gap=True,
         axis_range=None,
         is_clockwise: bool = True,
@@ -32,7 +33,6 @@ class Polar(Chart):
         radiusaxis_z_index=50,
         angleaxis_z_index=50,
         render_item=None,
-        symbol=None,
         label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
         areastyle_opts: Union[opts.AreaStyleOpts, dict] = opts.AreaStyleOpts(),
         axisline_opts: Union[opts.AxisLineOpts, dict] = opts.AxisLineOpts(),
@@ -64,8 +64,8 @@ class Polar(Chart):
                 _amin, _amax = axis_range
 
         # _area_style = chart["area_style"]
-        if kwargs.get("area_color", None) is None:
-            _area_style = None
+        # if kwargs.get("area_color", None) is None:
+        #     _area_style = None
 
         bar_type_series = {
             "type": "bar",

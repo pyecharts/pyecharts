@@ -2,6 +2,7 @@
 from ... import options as opts
 from ...charts.chart import Chart
 from ...commons.types import ListTuple, Numeric, Union
+from ...consts import CHART_TYPE
 
 
 class Funnel(Chart):
@@ -32,7 +33,7 @@ class Funnel(Chart):
 
         self.options.get("series").append(
             {
-                "type": "funnel",
+                "type": CHART_TYPE.FUNNEL,
                 "name": series_name,
                 "data": data,
                 "sort": sort_,

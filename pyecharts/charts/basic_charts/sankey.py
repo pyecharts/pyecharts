@@ -2,6 +2,7 @@
 from ... import options as opts
 from ...charts.chart import Chart
 from ...commons.types import ListTuple, Numeric, Union
+from ...consts import CHART_TYPE
 
 
 class Sankey(Chart):
@@ -33,9 +34,8 @@ class Sankey(Chart):
         self._append_legend(series_name)
         self.options.get("series").append(
             {
-                "type": "sankey",
+                "type": CHART_TYPE.SANKEY,
                 "name": series_name,
-                "layout": None,
                 "data": nodes,
                 "links": links,
                 "nodeWidth": node_width,

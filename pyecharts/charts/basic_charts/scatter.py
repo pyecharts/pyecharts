@@ -2,6 +2,7 @@
 from ... import options as opts
 from ...charts.chart import AxisChart
 from ...commons.types import ListTuple, Numeric, Union
+from ...consts import CHART_TYPE
 
 
 class Scatter(AxisChart):
@@ -38,7 +39,7 @@ class Scatter(AxisChart):
         data = [list(z) for z in zip(self._xaxis_data, y_axis)]
         self.options.get("series").append(
             {
-                "type": "scatter",
+                "type": CHART_TYPE.SCATTER,
                 "name": series_name,
                 "symbol": symbol,
                 "symbolSize": symbol_size,
