@@ -169,8 +169,12 @@ class AxisChart(Chart):
         self._xaxis_data = xaxis_data
         return self
 
-    def overlap(self):
-        pass
+    def overlap(self, chart: Base):
+        self.options.get("legend")[0].get("data").extend(
+            chart.options.get("legend")[0].get("data")
+        )
+        self.options.get("series").extend(chart.options.get("series"))
+        return self
 
 
 class Chart3D(Chart):

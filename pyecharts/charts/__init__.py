@@ -33,7 +33,6 @@ from ..charts.threed_charts.surface3D import Surface3D
 
 # Composite Charts
 from ..charts.composite_charts.grid import Grid
-from ..charts.composite_charts.overlap import Overlap
 from ..charts.composite_charts.timeline import Timeline
 from ..charts.composite_charts.page import Page
 

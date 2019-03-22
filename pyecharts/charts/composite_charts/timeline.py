@@ -1,12 +1,7 @@
 # coding=utf-8
-
-import copy
-
-from ...charts.base import Base
-
-# from ...consts import PAGE_TITLE
-
-# from pyecharts.commons.utils import merge_js_dependencies
+from ... import options as opts
+from ...charts.chart import Base
+from ...commons.types import Numeric, Optional, Union
 
 
 class Timeline(Base):
@@ -14,89 +9,64 @@ class Timeline(Base):
     <<< 时间线轮播多张图 >>>
     """
 
-    def __init__(
-        self,
-        page_title="",
-        width=800,
-        height=400,
-        is_auto_play=False,
-        is_loop_play=True,
-        is_rewind_play=False,
-        is_timeline_show=True,
-        play_interval=2000,
-        symbol="emptyCircle",
-        symbol_size=10,
-        pos_left="auto",
-        pos_right="auto",
-        pos_top="auto",
-        pos_bottom="atuo",
-    ):
-        super(Timeline, self).__init__(width=width, height=height)
-        self._page_title = page_title
+    def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):
+        super().__init__(init_opts=init_opts)
+        self.options = {"baseOption": {"series": [], "timeline": {}}, "options": []}
         self._time_points = []
-        self._option = {
-            "baseOption": {
-                "timeline": {
-                    "axisType": "category",
-                    "autoPlay": is_auto_play,
-                    "loop": is_loop_play,
-                    "rewind": is_rewind_play,
-                    "show": is_timeline_show,
-                    "symbol": symbol,
-                    "symbolSize": symbol_size,
-                    "playInterval": play_interval,
-                    "left": pos_left,
-                    "right": pos_right,
-                    "top": pos_top,
-                    "bottom": pos_bottom,
-                },
-                "series": [],
-            },
-            "options": [],
-        }
 
-    def add(self, chart, time_point):
-        """
-
-        :param chart:
-            图形实例
-        :param time_point:
-            指定时间点
-        """
-        chart_options = chart.get_options(remove_none=False)
-        # self._js_dependencies = merge_js_dependencies(
-        #     self._js_dependencies, chart.js_dependencies
-        # )
-        self.__check_components(chart)
-        self._time_points.append(time_point)
-        self._option.get("baseOption").update(
-            backgroundColor=chart_options.get("backgroundColor")
-        )
-        self._option.get("baseOption").get("timeline").update(data=self._time_points)
-        self._option.get("options").append(
+    def add_schema(
+        self,
+        axis_type: str = "category",
+        symbol: Optional[str] = None,
+        symbol_size: Optional[Numeric] = None,
+        play_interval: Optional[Numeric] = None,
+        is_auto_play: bool = False,
+        is_loop_play: bool = True,
+        is_rewind_play: bool = False,
+        is_timeline_show: bool = True,
+        pos_left: Optional[str] = None,
+        pos_right: Optional[str] = None,
+        pos_top: Optional[str] = None,
+        pos_bottom: Optional[str] = None,
+    ):
+        self.options.get("baseOption").update(
             {
-                "color": chart_options.get("color"),
-                "legend": chart_options.get("legend"),
-                "series": chart_options.get("series"),
-                "title": chart_options.get("title"),
-                "tooltip": chart_options.get("tooltip"),
+                "axisType": axis_type,
+                "autoPlay": is_auto_play,
+                "loop": is_loop_play,
+                "rewind": is_rewind_play,
+                "show": is_timeline_show,
+                "symbol": symbol,
+                "symbolSize": symbol_size,
+                "playInterval": play_interval,
+                "left": pos_left,
+                "right": pos_right,
+                "top": pos_top,
+                "bottom": pos_bottom,
             }
         )
-        _tmp_series = copy.deepcopy(chart_options.get("series"))
-        for _s in _tmp_series:
-            if _s.get("type") == "map":
-                _s.pop("data", None)
-                self._option.get("baseOption").get("series").append(_s)
+
+    def add(self, chart: Base, time_point: str):
+        for dep in chart.js_dependencies.items:
+            self.js_dependencies.add(dep)
+        self._time_points.append(time_point)
+
+        series_data = [{"data": s.get("data")} for s in chart.options.get("series")]
+        self.options.get("baseOption").get("timeline").update(data=self._time_points)
+        self.options.get("options").append(
+            {
+                "legend": chart.options.get("legend"),
+                "series": series_data,
+                "title": chart.options.get("title"),
+                "tooltip": chart.options.get("tooltip"),
+            }
+        )
+        self.__check_components(chart)
+        self.options.get("baseOption").get("series").extend(chart.options.get("series"))
         return self
 
-    def __check_components(self, chart):
-        """
-
-        :param chart:
-            图形实例
-        """
-        chart_options = chart.get_options(remove_none=False)
-        _compoents = [
+    def __check_components(self, chart: Base):
+        components = [
             "grid",
             "xAxis",
             "yAxis",
@@ -110,7 +80,7 @@ class Timeline(Base):
             "parallelAxis",
         ]
 
-        for component in _compoents:
-            _c = chart_options.get(component, None)
-            if _c is not None:
-                self._option.get("baseOption").update({component: _c})
+        for component in components:
+            c = chart.options.get(component, None)
+            if c is not None:
+                self.options.get("baseOption").update({component: c})
