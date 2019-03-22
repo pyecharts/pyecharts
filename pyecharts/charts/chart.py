@@ -154,11 +154,11 @@ class AxisChart(Chart):
         xaxis: Union[opts.AxisOpts, dict, None] = None,
         yaxis: Union[opts.AxisOpts, dict, None] = None,
     ):
-        if xaxis:
+        if xaxis is not None:
             if isinstance(xaxis, opts.AxisOpts):
                 xaxis = xaxis.opts
             self.options["xAxis"].append(xaxis)
-        if yaxis:
+        if yaxis is not None:
             if isinstance(yaxis, opts.AxisOpts):
                 yaxis = yaxis.opts
             self.options["yAxis"].append(yaxis)

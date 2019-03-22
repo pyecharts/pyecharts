@@ -1,7 +1,7 @@
 # coding=utf-8
 from ... import options as opts
 from ...charts.chart import AxisChart
-from ...commons.types import ListTuple, Numeric, Union
+from ...commons.types import ListTuple, Numeric, Optional, Union
 from ...consts import CHART_TYPE
 
 
@@ -22,7 +22,9 @@ class Scatter(AxisChart):
         series_name: str,
         y_axis: ListTuple,
         *,
-        symbol=None,
+        xaxis_index: Optional[Numeric] = None,
+        yaxis_index: Optional[Numeric] = None,
+        symbol: Optional[str] = None,
         symbol_size: Numeric = 10,
         label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(position="right"),
         markpoint_opts: Union[opts.MarkPointOpts, dict, None] = None,
@@ -41,6 +43,8 @@ class Scatter(AxisChart):
             {
                 "type": CHART_TYPE.SCATTER,
                 "name": series_name,
+                "xAxisIndex": xaxis_index,
+                "yAxisIndex": yaxis_index,
                 "symbol": symbol,
                 "symbolSize": symbol_size,
                 "data": data,

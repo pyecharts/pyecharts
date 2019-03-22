@@ -1,7 +1,7 @@
 # coding=utf-8
 from ... import options as opts
 from ...charts.chart import AxisChart
-from ...commons.types import ListTuple, Optional, Union
+from ...commons.types import ListTuple, Numeric, Optional, Union
 from ...consts import CHART_TYPE
 
 
@@ -26,6 +26,8 @@ class Bar(AxisChart):
         series_name: str,
         yaxis_data: ListTuple,
         *,
+        xaxis_index: Optional[Numeric] = None,
+        yaxis_index: Optional[Numeric] = None,
         color: Optional[str] = None,
         stack: Optional[str] = None,
         category_gap: str = "20%",
@@ -48,6 +50,8 @@ class Bar(AxisChart):
             {
                 "type": CHART_TYPE.BAR,
                 "name": series_name,
+                "xAxisIndex": xaxis_index,
+                "yAxisIndex": yaxis_index,
                 "data": yaxis_data,
                 "stack": stack,
                 "barCategoryGap": category_gap,
