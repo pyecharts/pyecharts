@@ -9,6 +9,7 @@ from test.constants import CLOTHES, RANGE_COLOR, WEEK
 
 from mock import MagicMock
 from nose.tools import assert_list_equal, eq_, raises
+
 from pyecharts import (
     Bar,
     Kline,

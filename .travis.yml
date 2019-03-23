@@ -15,8 +15,7 @@ before_install:
   - pip install -r test/requirements.txt
 script:
   - python setup.py install
-  - make tests
+  - make
 after_success:
-  - cd test
-  - codecov
+  cd test && codecov
 
