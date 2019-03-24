@@ -1,6 +1,7 @@
 # coding=utf-8
 from pyecharts import options as opts
 from pyecharts.charts import Geo
+
 from example.commons import Faker
 
 

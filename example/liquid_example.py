@@ -1,8 +1,7 @@
 # coding=utf-8
 from pyecharts import options as opts
-from pyecharts.charts import Page, Liquid
+from pyecharts.charts import Liquid, Page
 from pyecharts.consts import SymbolType
-
 
 charts = []
 

@@ -23,6 +23,7 @@ class EffectScatter(AxisChart):
         *,
         xaxis_index: Optional[Numeric] = None,
         yaxis_index: Optional[Numeric] = None,
+        color: Optional[str] = None,
         symbol: Optional[str] = None,
         symbol_size: Numeric = 10,
         label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts,
@@ -36,6 +37,7 @@ class EffectScatter(AxisChart):
         if isinstance(tooltip_opts, opts.TooltipOpts):
             tooltip_opts = tooltip_opts.opts
 
+        self._append_color(color)
         self._append_legend(series_name)
         self.options.get("series").append(
             {

@@ -2,7 +2,7 @@
 from ... import options as opts
 from ...charts.chart import Chart
 from ...commons.types import Numeric, Optional, Union
-from ...consts import RenderType
+from ...consts import ChartType
 
 
 class Graph(Chart):
@@ -51,7 +51,7 @@ class Graph(Chart):
 
         self.options.get("series").append(
             {
-                "type": RenderType.GRAPH,
+                "type": ChartType.GRAPH,
                 "name": series_name,
                 "layout": layout,
                 "symbol": symbol,

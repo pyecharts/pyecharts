@@ -1,6 +1,7 @@
 # coding=utf-8
 import pyecharts.options as opts
 from pyecharts.charts import Line, Page
+
 from example.commons import Faker
 
 charts = []

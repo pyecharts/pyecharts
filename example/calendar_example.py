@@ -5,7 +5,6 @@ import random
 from pyecharts import options as opts
 from pyecharts.charts import Calendar, Page
 
-
 charts = []
 
 

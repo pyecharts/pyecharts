@@ -135,8 +135,10 @@ class LegendOpts:
         self,
         selected_mode: Optional[str] = None,
         is_show: bool = True,
-        left: Optional[str] = None,
-        top: Optional[str] = None,
+        pos_left: Optional[str] = None,
+        pos_right: Optional[str] = None,
+        pos_top: Optional[str] = None,
+        pos_bottom: Optional[str] = None,
         orient: Optional[str] = None,
         textstyle_opts: Union[TextStyleOpts, dict, None] = None,
     ):
@@ -146,8 +148,10 @@ class LegendOpts:
         self.opts: dict = {
             "selectedMode": selected_mode,
             "show": is_show,
-            "left": left,
-            "top": top,
+            "left": pos_left,
+            "right": pos_right,
+            "top": pos_top,
+            "bottom": pos_bottom,
             "orient": orient,
             "textStyle": textstyle_opts,
         }
@@ -184,7 +188,7 @@ class VisualMapOpts:
 
         _visual_typ = "piecewise" if is_piecewise else "continuous"
 
-        self.ops: dict = {
+        self.opts: dict = {
             "type": _visual_typ,
             "min": min_,
             "max": max_,
@@ -200,7 +204,7 @@ class VisualMapOpts:
             "showLabel": True,
         }
         if is_piecewise:
-            self.ops.update(pieces=pieces)
+            self.opts.update(pieces=pieces)
 
 
 class TooltipOpts:
@@ -297,18 +301,18 @@ class AxisOpts:
 class GridOpts:
     def __init__(
         self,
-        left: Optional[str] = None,
-        top: Optional[str] = None,
-        right: Optional[str] = None,
-        bottom: Optional[str] = None,
+        pos_left: Optional[str] = None,
+        pos_top: Optional[str] = None,
+        pos_right: Optional[str] = None,
+        pos_bottom: Optional[str] = None,
         width: Optional[Numeric] = None,
         height: Optional[Numeric] = None,
     ):
         self.opts: dict = {
-            "left": left,
-            "top": top,
-            "right": right,
-            "bottom": bottom,
+            "left": pos_left,
+            "top": pos_top,
+            "right": pos_right,
+            "bottom": pos_bottom,
             "width": width,
             "height": height,
         }
@@ -317,9 +321,9 @@ class GridOpts:
 class Grid3DOpts:
     def __init__(
         self,
-        width: Numeric = 100,
+        width: Numeric = 200,
         height: Numeric = 100,
-        depth: Numeric = 100,
+        depth: Numeric = 80,
         is_rotate: bool = False,
         rotate_speed: Numeric = 10,
         rotate_sensitivity: Numeric = 1,
@@ -339,8 +343,9 @@ class Grid3DOpts:
 class Axis3DOpts:
     def __init__(
         self,
+        data: ListTuple = None,
         type_: Optional[str] = None,
-        name: str = "",
+        name: Optional[str] = None,
         name_size: Numeric = 16,
         name_gap: Numeric = 20,
         min_=None,
@@ -349,6 +354,7 @@ class Axis3DOpts:
         margin: Numeric = 8,
     ):
         self.opts: dict = {
+            "data": data,
             "name": name,
             "nameGap": name_gap,
             "nameTextStyle": {"fontSize": name_size},
@@ -362,17 +368,17 @@ class Axis3DOpts:
 class ParallelOpts:
     def __init__(
         self,
-        left: str = "5%",
-        right: str = "13%",
-        bottom: str = "10%",
-        top: str = "20%",
+        pos_left: str = "5%",
+        pos_right: str = "13%",
+        pos_bottom: str = "10%",
+        pos_top: str = "20%",
         layout: Optional[str] = None,
     ):
         self.opts: dict = {
-            "left": left,
-            "right": right,
-            "bottom": bottom,
-            "top": top,
+            "left": pos_left,
+            "right": pos_right,
+            "bottom": pos_bottom,
+            "top": pos_top,
             "layout": layout,
         }
 
@@ -382,6 +388,7 @@ class ParallelSchemaOpts:
         self,
         dim: Numeric,
         name: str,
+        data: ListTuple = None,
         type_: Optional[str] = None,
         min_: Union[str, Numeric, None] = None,
         max_: Union[str, Numeric, None] = None,
@@ -390,6 +397,7 @@ class ParallelSchemaOpts:
         self.opts: dict = {
             "dim": dim,
             "name": name,
+            "data": data,
             "type": type_,
             "min": min_,
             "max": max_,
@@ -411,10 +419,10 @@ class RadarIndicatorOpts:
 class CalendarOpts:
     def __init__(
         self,
-        left: Optional[str] = None,
-        top: Optional[str] = None,
-        right: Optional[str] = None,
-        bottom: Optional[str] = None,
+        pos_left: Optional[str] = None,
+        pos_top: Optional[str] = None,
+        pos_right: Optional[str] = None,
+        pos_bottom: Optional[str] = None,
         orient: Optional[str] = None,
         range_: Union[str, ListTuple, int] = None,
         daylabel_opts: Union[LabelOpts, dict, None] = None,
@@ -429,10 +437,10 @@ class CalendarOpts:
             yearlabel_opts = yearlabel_opts.opts
 
         self.opts: dict = {
-            "left": left,
-            "top": top,
-            "right": right,
-            "bottom": bottom,
+            "left": pos_left,
+            "top": pos_top,
+            "right": pos_right,
+            "bottom": pos_bottom,
             "orient": orient,
             "range": range_,
             "dayLabel": daylabel_opts,

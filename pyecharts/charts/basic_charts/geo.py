@@ -1,5 +1,4 @@
 # coding=utf-8
-
 import json
 
 from ... import options as opts
@@ -92,7 +91,7 @@ class Geo(Chart):
 
         data = []
         for n, v in data_pair:
-            if type_ == "lines":
+            if type_ == ChartType.LINES:
                 assert len(v) == 2
                 f, t = self.get_coordinate(v[0]), self.get_coordinate(v[1])
                 data.append({"name": n, "coords": [f, t]})
@@ -113,7 +112,7 @@ class Geo(Chart):
         )
         self._append_legend(series_name)
 
-        if type_ == "scatter":
+        if type_ == ChartType.SCATTER:
             self.options.get("series").append(
                 {
                     "type": type_,
@@ -126,7 +125,7 @@ class Geo(Chart):
                 }
             )
 
-        elif type_ == "effectScatter":
+        elif type_ == ChartType.EFFECT_SCATTER:
             self.options.get("series").append(
                 {
                     "type": type_,
@@ -141,7 +140,7 @@ class Geo(Chart):
                 }
             )
 
-        elif type_ == "heatmap":
+        elif type_ == ChartType.HEATMAP:
             self.options.get("series").append(
                 {
                     "type": type_,
@@ -151,10 +150,10 @@ class Geo(Chart):
                 }
             )
 
-        elif type_ == "lines":
+        elif type_ == ChartType.LINES:
             self.options.get("series").append(
                 {
-                    "type": "lines",
+                    "type": type_,
                     "name": series_name,
                     "zlevel": self._zlevel,
                     "effect": effect_opts,

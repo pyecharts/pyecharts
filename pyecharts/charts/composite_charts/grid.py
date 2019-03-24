@@ -1,4 +1,6 @@
 # coding=utf-8
+import copy
+
 from ... import options as opts
 from ...commons.types import Optional, Union
 from ..chart import Base
@@ -22,14 +24,19 @@ class Grid(Base):
             grid_opts = grid_opts.opts
 
         if self.options is None:
-            self.options = chart.options
+            self.options = copy.deepcopy(chart.options)
             self.chart_id = chart.chart_id
-            self.options.update(grid=[])
+            self.options.update(grid=[], title=[])
+            for s in self.options.get("series"):
+                s.update(xAxisIndex=self._axis_index, yAxisIndex=self._axis_index)
+
+        title = chart.options.get("title", opts.TitleOpts().opts)
+        self.options.update(
+            title=self.options.get("title", opts.TitleOpts().opts) + title
+        )
 
         for s in chart.options.get("series"):
             s.update(xAxisIndex=self._axis_index, yAxisIndex=self._axis_index)
-        self.options.get("series").extend(chart.options.get("series"))
-        self.options.get("legend").extend(chart.options.get("legend"))
 
         for dep in chart.js_dependencies.items:
             self.js_dependencies.add(dep)
@@ -44,7 +51,11 @@ class Grid(Base):
         self._grow_grid_index += 1
 
         if self._axis_index > 0:
+            self.options.get("series").extend(chart.options.get("series"))
+            self.options.get("legend").extend(chart.options.get("legend"))
             self.options.get("xAxis").extend(chart.options.get("xAxis"))
             self.options.get("yAxis").extend(chart.options.get("yAxis"))
+
         self.options.get("grid").append(grid_opts)
         self._axis_index += 1
+        return self
