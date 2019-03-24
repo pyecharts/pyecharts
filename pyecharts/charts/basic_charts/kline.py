@@ -29,12 +29,15 @@ class Kline(AxisChart):
         yaxis_index: Optional[Numeric] = None,
         markline_opts: Union[opts.MarkLineOpts, dict, None] = None,
         markpoint_opts: Union[opts.MarkPointOpts, dict, None] = None,
+        tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
     ):
 
         if isinstance(markpoint_opts, opts.MarkPointOpts):
             markpoint_opts = markpoint_opts.opts
         if isinstance(markline_opts, opts.MarkLineOpts):
             markline_opts = markline_opts.opts
+        if isinstance(tooltip_opts, opts.TooltipOpts):
+            tooltip_opts = tooltip_opts.opts
 
         self._append_legend(series_name)
         self.options.get("series").append(
@@ -46,6 +49,7 @@ class Kline(AxisChart):
                 "data": y_axis,
                 "markPoint": markpoint_opts,
                 "markLine": markline_opts,
+                "tooltip": tooltip_opts,
             }
         )
         return self

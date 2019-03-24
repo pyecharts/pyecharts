@@ -19,21 +19,26 @@ class Pie(Chart):
         self,
         series_name: str,
         data_pair: ListTuple,
+        color: Optional[str] = None,
         radius: Optional[ListTuple] = None,
         center: Optional[ListTuple] = None,
         rosetype: Optional[str] = None,
         label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
+        tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
     ):
         if isinstance(label_opts, opts.LabelOpts):
             label_opts = label_opts.opts
+        if isinstance(tooltip_opts, opts.TooltipOpts):
+            tooltip_opts = tooltip_opts.opts
 
-        data = [{"name": n, "value": v} for (n, v) in data_pair]
+        data = [{"name": n, "value": v} for n, v in data_pair]
 
         if not radius:
             radius = ["0%", "75%"]
         if not center:
             center = ["50%", "50%"]
 
+        self._append_color(color)
         for a, _ in data_pair:
             self.options.get("legend")[0].get("data").append(a)
 
@@ -51,6 +56,7 @@ class Pie(Chart):
                 "center": center,
                 "roseType": rosetype,
                 "label": label_opts,
+                "tooltip": tooltip_opts,
             }
         )
         return self

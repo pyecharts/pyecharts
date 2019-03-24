@@ -55,6 +55,7 @@ class Chart(Base):
         axisline_opts: Union[opts.AxisLineOpts, dict, None] = None,
         markpoint_opts: Union[opts.MarkPointOpts, dict, None] = None,
         markline_opts: Union[opts.MarkLineOpts, dict, None] = None,
+        tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
     ):
         _series = self.options.get("series")
         if label_opts:
@@ -92,6 +93,12 @@ class Chart(Base):
                 markline_opts = markline_opts.opts
             for s in _series:
                 s.update(markLine=markline_opts)
+
+        if tooltip_opts:
+            if isinstance(tooltip_opts, opts.TooltipOpts):
+                tooltip_opts = tooltip_opts.opts
+            for s in _series:
+                s.update(tooltip=tooltip_opts)
         return self
 
     def _append_legend(self, name):
@@ -173,6 +180,7 @@ class AxisChart(Chart):
             if isinstance(yaxis, opts.AxisOpts):
                 yaxis = yaxis.opts
             self.options["yAxis"].append(yaxis)
+        return self
 
     def add_xaxis(self, xaxis_data: ListTuple):
         self.options.update(xAxis=[opts.AxisOpts().opts])

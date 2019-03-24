@@ -25,11 +25,13 @@ class Scatter(AxisChart):
         *,
         xaxis_index: Optional[Numeric] = None,
         yaxis_index: Optional[Numeric] = None,
+        color: Optional[str] = None,
         symbol: Optional[str] = None,
         symbol_size: Numeric = 10,
         label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(position="right"),
         markpoint_opts: Union[opts.MarkPointOpts, dict, None] = None,
         markline_opts: Union[opts.MarkLineOpts, dict, None] = None,
+        tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
     ):
         if isinstance(label_opts, opts.LabelOpts):
             label_opts = label_opts.opts
@@ -37,7 +39,10 @@ class Scatter(AxisChart):
             markline_opts = markline_opts.opts
         if isinstance(markpoint_opts, opts.MarkPointOpts):
             markpoint_opts = markpoint_opts.opts
+        if isinstance(tooltip_opts, opts.TooltipOpts):
+            tooltip_opts = tooltip_opts.opts
 
+        self._append_color(color)
         self._append_legend(series_name)
         data = [list(z) for z in zip(self._xaxis_data, y_axis)]
         self.options.get("series").append(
@@ -52,6 +57,7 @@ class Scatter(AxisChart):
                 "label": label_opts,
                 "markPoint": markpoint_opts,
                 "markLine": markline_opts,
+                "tooltip": tooltip_opts,
             }
         )
         return self

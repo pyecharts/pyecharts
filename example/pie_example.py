@@ -1,7 +1,7 @@
 # coding=utf-8
 from pyecharts import options as opts
 from pyecharts.charts import Page, Pie
-from pyecharts.example.commons import Faker
+from example.commons import Faker
 
 charts = []
 

@@ -27,6 +27,7 @@ class Boxplot(AxisChart):
         label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
         markpoint_opts: Union[opts.MarkPointOpts, dict] = opts.MarkPointOpts(),
         markline_opts: Union[opts.MarkLineOpts, dict] = opts.MarkLineOpts(),
+        tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
     ):
         if isinstance(label_opts, opts.LabelOpts):
             label_opts = label_opts.opts
@@ -34,6 +35,8 @@ class Boxplot(AxisChart):
             markpoint_opts = markpoint_opts.opts
         if isinstance(markline_opts, opts.MarkLineOpts):
             markline_opts = markline_opts.opts
+        if isinstance(tooltip_opts, opts.TooltipOpts):
+            tooltip_opts = tooltip_opts.opts
 
         self._append_legend(series_name)
         self.options.get("series").append(
@@ -46,6 +49,7 @@ class Boxplot(AxisChart):
                 "label": label_opts,
                 "markPoint": markpoint_opts,
                 "markLine": markline_opts,
+                "tooltip": tooltip_opts,
             }
         )
         return self

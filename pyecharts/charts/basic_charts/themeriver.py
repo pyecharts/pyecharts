@@ -20,9 +20,12 @@ class ThemeRiver(Chart):
         series_name: str,
         data: ListTuple,
         label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
+        tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
     ):
         if isinstance(label_opts, opts.LabelOpts):
             label_opts = label_opts.opts
+        if isinstance(tooltip_opts, opts.TooltipOpts):
+            tooltip_opts = tooltip_opts.opts
 
         self._append_legend(series_name)
         self.options.get("series").append(
@@ -31,6 +34,7 @@ class ThemeRiver(Chart):
                 "name": series_name,
                 "data": data,
                 "label": label_opts,
+                "tooltip": tooltip_opts,
             }
         )
 

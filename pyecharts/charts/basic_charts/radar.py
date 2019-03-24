@@ -60,6 +60,7 @@ class Radar(Chart):
         label_opts: opts.LabelOpts = opts.LabelOpts(),
         linestyle_opts: opts.LineStyleOpts = opts.LineStyleOpts(),
         areastyle_opts: opts.AreaStyleOpts = opts.AreaStyleOpts(),
+        tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
     ):
         if isinstance(label_opts, opts.LabelOpts):
             label_opts = label_opts.opts
@@ -67,6 +68,8 @@ class Radar(Chart):
             linestyle_opts = linestyle_opts.opts
         if isinstance(areastyle_opts, opts.AreaStyleOpts):
             areastyle_opts = areastyle_opts.opts
+        if isinstance(tooltip_opts, opts.TooltipOpts):
+            tooltip_opts = tooltip_opts.opts
 
         self._append_legend(series_name)
         self.options.get("series").append(
@@ -79,6 +82,7 @@ class Radar(Chart):
                 "itemStyle": {"normal": {"color": item_color}},
                 "lineStyle": linestyle_opts,
                 "areaStyle": areastyle_opts,
+                "tooltip": tooltip_opts,
             }
         )
         return self

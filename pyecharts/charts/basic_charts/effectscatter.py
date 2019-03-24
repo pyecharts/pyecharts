@@ -27,11 +27,14 @@ class EffectScatter(AxisChart):
         symbol_size: Numeric = 10,
         label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts,
         effect_opts: Union[opts.EffectOpts, dict] = opts.EffectOpts(),
+        tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
     ):
         if isinstance(label_opts, opts.LabelOpts):
             label_opts = label_opts.opts
         if isinstance(effect_opts, opts.EffectOpts):
             effect_opts = effect_opts.opts
+        if isinstance(tooltip_opts, opts.TooltipOpts):
+            tooltip_opts = tooltip_opts.opts
 
         self._append_legend(series_name)
         self.options.get("series").append(
@@ -46,6 +49,7 @@ class EffectScatter(AxisChart):
                 "symbolSize": symbol_size,
                 "data": [list(z) for z in zip(self._xaxis_data, y_axis)],
                 "label": label_opts,
+                "tooltip": tooltip_opts,
             }
         )
         return self

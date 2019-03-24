@@ -30,9 +30,10 @@ class Line(AxisChart):
         stack: Optional[str] = None,
         is_smooth: bool = False,
         is_step: bool = False,
-        label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
         markpoint_opts: Union[opts.MarkPointOpts, dict, None] = None,
         markline_opts: Union[opts.MarkLineOpts, dict, None] = None,
+        tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
+        label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
         linestyle_opts: Union[opts.LineStyleOpts, dict] = opts.LineStyleOpts(),
         areastyle_opts: Union[opts.AreaStyleOpts, dict] = opts.AreaStyleOpts(),
     ):
@@ -41,11 +42,13 @@ class Line(AxisChart):
         if isinstance(markpoint_opts, opts.MarkPointOpts):
             markpoint_opts = markpoint_opts.opts
         if isinstance(markline_opts, opts.MarkLineOpts):
-            markline_opts = markline_opts
+            markline_opts = markline_opts.opts
         if isinstance(linestyle_opts, opts.LineStyleOpts):
             linestyle_opts = linestyle_opts.opts
         if isinstance(areastyle_opts, opts.AreaStyleOpts):
             areastyle_opts = areastyle_opts.opts
+        if isinstance(tooltip_opts, opts.TooltipOpts):
+            tooltip_opts = tooltip_opts.opts
 
         self._append_color(color)
         self._append_legend(series_name)
@@ -71,6 +74,7 @@ class Line(AxisChart):
                 "areaStyle": areastyle_opts,
                 "markPoint": markpoint_opts,
                 "markLine": markline_opts,
+                "tooltip": tooltip_opts,
             }
         )
         return self

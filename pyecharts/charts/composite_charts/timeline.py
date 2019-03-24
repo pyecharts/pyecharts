@@ -28,7 +28,7 @@ class Timeline(Base):
         pos_left: Optional[str] = None,
         pos_right: Optional[str] = None,
         pos_top: Optional[str] = None,
-        pos_bottom: Optional[str] = None,
+        pos_bottom: Optional[str] = "-5px",
     ):
         self.options.get("baseOption").get("timeline").update(
             {
