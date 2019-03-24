@@ -36,7 +36,7 @@ class Gauge(Chart):
                 "max": max_,
                 "startAngle": start_angle,
                 "endAngle": end_angle,
-                "data": [{"value": v, "name": n} for (v, n) in data_pair],
+                "data": [{"name": n, "value": v} for n, v in data_pair],
                 "tooltip": tooltip_opts,
             }
         )

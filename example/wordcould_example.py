@@ -1,6 +1,6 @@
 # coding=utf-8
 from pyecharts import options as opts
-from pyecharts.charts import WordCloud, Page
+from pyecharts.charts import Page, WordCloud
 from pyecharts.consts import SymbolType
 
 charts = []

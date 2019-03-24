@@ -2,10 +2,9 @@
 from ... import options as opts
 from ...charts.chart import AxisChart
 from ...commons.types import ListTuple, Numeric, Optional, Union
-from ...consts import RenderType
+from ...consts import ChartType
 
 
-# TODO: color
 class Scatter(AxisChart):
     """
     <<< 散点图 >>>
@@ -47,7 +46,7 @@ class Scatter(AxisChart):
         data = [list(z) for z in zip(self._xaxis_data, y_axis)]
         self.options.get("series").append(
             {
-                "type": RenderType.SCATTER,
+                "type": ChartType.SCATTER,
                 "name": series_name,
                 "xAxisIndex": xaxis_index,
                 "yAxisIndex": yaxis_index,

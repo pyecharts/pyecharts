@@ -41,6 +41,7 @@ class _ChartType:
     HEATMAP: str = "heatmap"
     KLINE: str = "candlestick"
     LINE: str = "line"
+    LINES: str = "lines"
     LIQUID: str = "liquidFill"
     MAP: str = "map"
     PARALLEL: str = "parallel"
@@ -63,8 +64,8 @@ class _ToolTipFormatterType:
 
 
 class _ThemeType:
-    LIGHT_THEME = "light"
-    DARK_THEME = "dark"
+    LIGHT = "light"
+    DARK = "dark"
     CHALK: str = "chalk"
     ESSOS: str = "essos"
     INFOGRAPHIC: str = "infographic"

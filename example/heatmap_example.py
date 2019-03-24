@@ -1,36 +1,32 @@
+# coding=utf-8
 import random
 
-from pyecharts.charts import HeatMap
+from pyecharts import options as opts
+from pyecharts.charts import HeatMap, Page
 
-x_axis = [
-    "12a",
-    "1a",
-    "2a",
-    "3a",
-    "4a",
-    "5a",
-    "6a",
-    "7a",
-    "8a",
-    "9a",
-    "10a",
-    "11a",
-    "12p",
-    "1p",
-    "2p",
-    "3p",
-    "4p",
-    "5p",
-    "6p",
-    "7p",
-    "8p",
-    "9p",
-    "10p",
-    "11p",
-]
+from example.commons import Faker
 
-y_axis = ["Saturday", "Friday", "Thursday", "Wednesday", "Tuesday", "Monday", "Sunday"]
-value = [[i, j, random.randint(0, 50)] for i in range(24) for j in range(7)]
+charts = []
 
-hm = HeatMap()
-hm.add_xaxis(x_axis).add_yaxis("series0", y_axis, value).render()
+
+def collect_charts(fn):
+    charts.append((fn, fn.__name__))
+    return fn
+
+
+@collect_charts
+def heatmap_base() -> HeatMap:
+    value = [[i, j, random.randint(0, 50)] for i in range(24) for j in range(7)]
+    c = (
+        HeatMap()
+        .add_xaxis(Faker.clock)
+        .add_yaxis("series0", Faker.week, value)
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="HeatMap-基本示例"),
+            visualmap_opts=opts.VisualMapOpts(),
+        )
+    )
+    return c
+
+
+Page().add(*[fn() for fn, _ in charts]).render()

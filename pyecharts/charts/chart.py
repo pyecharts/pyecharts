@@ -130,7 +130,7 @@ class Chart(Base):
         if isinstance(toolbox_opts, opts.ToolboxOpts):
             toolbox_opts = toolbox_opts.opts
         if isinstance(visualmap_opts, opts.VisualMapOpts):
-            visualmap_opts = visualmap_opts.ops
+            visualmap_opts = visualmap_opts.opts
 
         self.options.update(
             title=title_opts,
@@ -204,7 +204,8 @@ class Chart3D(Chart):
     def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):
         init_opts.renderer = RenderType.CANVAS
         super().__init__(init_opts)
-        self.js_dependencies.add("echartsgl")
+        self.js_dependencies.add("echarts-gl")
+        self.options.update(visualMap=opts.VisualMapOpts().opts)
         self._3d_chart_type = None  # 3d chart type, don't use it directly
 
     def add(
@@ -213,10 +214,10 @@ class Chart3D(Chart):
         data: ListTuple,
         opacity: Numeric = 1,
         shading: Optional[str] = None,
-        label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
-        xaxis3d: Union[opts.Axis3DOpts, dict] = opts.Axis3DOpts(),
-        yaxis3d: Union[opts.Axis3DOpts, dict] = opts.Axis3DOpts(),
-        zaxis3d: Union[opts.Axis3DOpts, dict] = opts.Axis3DOpts(),
+        label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(is_show=False),
+        xaxis3d: Union[opts.Axis3DOpts, dict] = opts.Axis3DOpts(type_="category"),
+        yaxis3d: Union[opts.Axis3DOpts, dict] = opts.Axis3DOpts(type_="category"),
+        zaxis3d: Union[opts.Axis3DOpts, dict] = opts.Axis3DOpts(type_="value"),
     ):
         if isinstance(label_opts, opts.LabelOpts):
             label_opts = label_opts.opts
@@ -232,7 +233,7 @@ class Chart3D(Chart):
             xAxis3D=xaxis3d,
             yAxis3D=yaxis3d,
             zAxis3D=zaxis3d,
-            # grid3D=chart["grid3D"],
+            grid3D=opts.Grid3DOpts().opts,
         )
 
         self.options.get("series").append(
@@ -245,3 +246,4 @@ class Chart3D(Chart):
                 "itemStyle": {"opacity": opacity},
             }
         )
+        return self

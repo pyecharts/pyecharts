@@ -1,6 +1,7 @@
 # coding=utf-8
 from pyecharts import options as opts
-from pyecharts.charts import Bar, Line, Page
+from pyecharts.charts import Bar, Grid, Line, Page, Scatter
+
 from example.commons import Faker
 
 charts = []
@@ -11,29 +12,63 @@ def collect_charts(fn):
     return fn
 
 
-v1 = [2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3]
-v2 = [2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3]
-v3 = [2.0, 2.2, 3.3, 4.5, 6.3, 10.2, 20.3, 23.4, 23.0, 16.5, 12.0, 6.2]
-
-
 @collect_charts
-def grid_bar_line() -> Bar:
+def grid_vertical() -> Grid:
     bar = (
         Bar()
-        .add_xaxis(Faker.months)
-        .add_yaxis("蒸发量", v1)
-        .add_yaxis("降水量", v2)
-        .extend_axis(yaxis=opts.AxisOpts(formatter="{value} °C", interval=5))
-        .set_series_opts(label_opts=opts.LabelOpts(is_show=False))
+        .add_xaxis(Faker.choose())
+        .add_yaxis("商家A", Faker.values())
+        .add_yaxis("商家B", Faker.values())
+        .set_global_opts(title_opts=opts.TitleOpts(title="Grid-Bar"))
+    )
+    line = (
+        Line()
+        .add_xaxis(Faker.choose())
+        .add_yaxis("商家A", Faker.values())
+        .add_yaxis("商家B", Faker.values())
         .set_global_opts(
-            title_opts=opts.TitleOpts(title="Grid-bar+line"),
-            yaxis_opt=opts.AxisOpts(formatter="{value} ml"),
+            title_opts=opts.TitleOpts(title="Grid-Line", pos_top="48%"),
+            legend_opts=opts.LegendOpts(pos_top="48%"),
         )
     )
 
-    line = Line().add_xaxis(Faker.months).add_yaxis("平均温度", v3, yaxis_index=1)
-    bar.overlap(line)
-    return bar
+    grid = (
+        Grid()
+        .add(bar, grid_opts=opts.GridOpts(pos_bottom="60%"))
+        .add(line, grid_opts=opts.GridOpts(pos_top="60%"))
+    )
+    return grid
+
+
+@collect_charts
+def grid_horizontal() -> Grid:
+    scatter = (
+        Scatter()
+        .add_xaxis(Faker.choose())
+        .add_yaxis("商家A", Faker.values())
+        .add_yaxis("商家B", Faker.values())
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="Grid-Scatter"),
+            legend_opts=opts.LegendOpts(pos_left="20%"),
+        )
+    )
+    line = (
+        Line()
+        .add_xaxis(Faker.choose())
+        .add_yaxis("商家A", Faker.values())
+        .add_yaxis("商家B", Faker.values())
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="Grid-Line", pos_right="5%"),
+            legend_opts=opts.LegendOpts(pos_right="20%"),
+        )
+    )
+
+    grid = (
+        Grid()
+        .add(scatter, grid_opts=opts.GridOpts(pos_left="55%"))
+        .add(line, grid_opts=opts.GridOpts(pos_right="55%"))
+    )
+    return grid
 
 
 Page().add(*[fn() for fn, _ in charts]).render()

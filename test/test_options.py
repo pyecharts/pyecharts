@@ -5,9 +5,7 @@ from __future__ import unicode_literals
 from test.constants import RANGE_COLOR, X_TIME, Y_WEEK
 from test.utils import get_fixture_content
 
-from mock import patch
 from nose.tools import eq_
-
 from pyecharts import (
     Bar,
     Bar3D,
@@ -22,6 +20,8 @@ from pyecharts import (
     Surface3D,
 )
 from pyecharts.javascripthon.api import EChartsTranslator
+
+from mock import patch
 
 
 def dumps_actual_options(opts):

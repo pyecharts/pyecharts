@@ -1,7 +1,7 @@
 # coding=utf-8
 from ... import options as opts
 from ...charts.chart import Chart
-from ...commons.types import ListTuple, Numeric, Union, Optional
+from ...commons.types import ListTuple, Numeric, Optional, Union
 from ...consts import ChartType
 
 
@@ -30,7 +30,7 @@ class Funnel(Chart):
 
         self._append_color(color)
         data = [{"name": n, "value": v} for n, v in data_pair]
-        for (a, _) in data_pair:
+        for a, _ in data_pair:
             self._append_legend(a)
 
         _dset = set(self.options.get("legend")[0].get("data"))

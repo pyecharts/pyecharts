@@ -15,8 +15,13 @@ class Parallel(Chart):
     def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):
         super().__init__(init_opts=init_opts)
 
-    def add_schema(self, schema: List[opts.ParallelSchemaOpts]):
-        self.options.update(parallelAxis=schema)
+    def add_schema(self, schema: List[Union[opts.ParallelSchemaOpts, dict]]):
+        sc = []
+        for s in schema:
+            if isinstance(s, opts.ParallelSchemaOpts):
+                s = s.opts
+            sc.append(s)
+        self.options.update(parallelAxis=sc)
         return self
 
     def add(
@@ -31,7 +36,7 @@ class Parallel(Chart):
         if isinstance(tooltip_opts, opts.TooltipOpts):
             tooltip_opts = tooltip_opts.opts
 
-        self.options.update(parallel=opts.ParallelOpts())
+        self.options.update(parallel=opts.ParallelOpts().opts)
         self._append_legend(series_name)
         self.options.get("series").append(
             {
