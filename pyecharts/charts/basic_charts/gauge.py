@@ -21,7 +21,11 @@ class Gauge(Chart):
         max_: Numeric = 100,
         start_angle: Numeric = 225,
         end_angle: Numeric = -45,
+        tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
     ):
+        if isinstance(tooltip_opts, opts.TooltipOpts):
+            tooltip_opts = tooltip_opts.opts
+
         self._append_legend(series_name)
         self.options.get("series").append(
             {
@@ -33,6 +37,7 @@ class Gauge(Chart):
                 "startAngle": start_angle,
                 "endAngle": end_angle,
                 "data": [{"value": v, "name": n} for (v, n) in data_pair],
+                "tooltip": tooltip_opts,
             }
         )
         return self

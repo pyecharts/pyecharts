@@ -24,9 +24,12 @@ class Parallel(Chart):
         series_name: str,
         data: ListTuple,
         linestyle_opts: Union[opts.LineStyleOpts, dict] = opts.LineStyleOpts(),
+        tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
     ):
         if isinstance(linestyle_opts, opts.LineStyleOpts):
             linestyle_opts = linestyle_opts.opts
+        if isinstance(tooltip_opts, opts.TooltipOpts):
+            tooltip_opts = tooltip_opts.opts
 
         self.options.update(parallel=opts.ParallelOpts())
         self._append_legend(series_name)
@@ -37,6 +40,7 @@ class Parallel(Chart):
                 "lineStyle": linestyle_opts,
                 "name": series_name,
                 "data": data,
+                "tooltip": tooltip_opts,
             }
         )
         return self

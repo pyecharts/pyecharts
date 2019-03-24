@@ -72,6 +72,7 @@ class Geo(Chart):
         label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
         effect_opts: Union[opts.EffectOpts, dict] = opts.EffectOpts(),
         linestyle_opts: Union[opts.LineStyleOpts, dict] = opts.LineStyleOpts(),
+        tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
     ):
         if isinstance(label_opts, opts.LabelOpts):
             label_opts = label_opts.opts
@@ -79,6 +80,8 @@ class Geo(Chart):
             effect_opts = effect_opts.opts
         if isinstance(linestyle_opts, opts.LineStyleOpts):
             linestyle_opts = linestyle_opts.opts
+        if isinstance(tooltip_opts, opts.TooltipOpts):
+            tooltip_opts = tooltip_opts.opts
 
         self._zlevel += 1
         self.js_dependencies.add(maptype)

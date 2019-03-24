@@ -25,9 +25,12 @@ class Map(Chart):
         symbol: Optional[str] = None,
         is_map_symbol_show: bool = True,
         label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
+        tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
     ):
         if isinstance(label_opts, opts.LabelOpts):
             label_opts = label_opts.opts
+        if isinstance(tooltip_opts, opts.TooltipOpts):
+            tooltip_opts = tooltip_opts.opts
 
         self.js_dependencies.add(maptype)
         data = [{"name": n, "value": v} for (n, v) in data_pair]
@@ -42,6 +45,7 @@ class Map(Chart):
                 "data": data,
                 "roam": is_roam,
                 "showLegendSymbol": is_map_symbol_show,
+                "tooltip": tooltip_opts,
             }
         )
         return self

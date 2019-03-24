@@ -39,6 +39,7 @@ class Polar(Chart):
         splitline_opts: Union[opts.SplitLineOpts, dict] = opts.SplitLineOpts(),
         effect_opts: Union[opts.EffectOpts, dict] = opts.EffectOpts(),
         axislabel_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
+        tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
     ):
 
         if isinstance(label_opts, opts.LabelOpts):
@@ -53,6 +54,8 @@ class Polar(Chart):
             effect_opts = effect_opts.opts
         if isinstance(axislabel_opts, opts.LabelOpts):
             axislabel_opts = axislabel_opts.opts
+        if isinstance(tooltip_opts, opts.TooltipOpts):
+            tooltip_opts = tooltip_opts.opts
 
         polar_type = "value" if type == "line" else "category"
         is_stack = "stack" if is_stack else ""

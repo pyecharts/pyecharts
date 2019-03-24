@@ -25,11 +25,14 @@ class Sankey(Chart):
         node_gap: Numeric = 8,
         label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
         linestyle_opt: Union[opts.LineStyleOpts, dict] = opts.LineStyleOpts(),
+        tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
     ):
         if isinstance(label_opts, opts.LabelOpts):
             label_opts = label_opts.opts
         if isinstance(linestyle_opt, opts.LineStyleOpts):
             linestyle_opt = linestyle_opt.opts
+        if isinstance(tooltip_opts, opts.TooltipOpts):
+            tooltip_opts = tooltip_opts.opts
 
         self._append_legend(series_name)
         self.options.get("series").append(
@@ -42,6 +45,7 @@ class Sankey(Chart):
                 "nodeGap": node_gap,
                 "label": label_opts,
                 "lineStyle": linestyle_opt,
+                "tooltip": tooltip_opts,
             }
         )
         return self

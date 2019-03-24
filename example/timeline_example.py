@@ -1,0 +1,128 @@
+# coding=utf-8
+from pyecharts import options as opts
+from pyecharts.charts import Bar, Timeline, Page, Pie
+from example.commons import Faker
+
+charts = []
+
+
+def collect_charts(fn):
+    charts.append((fn, fn.__name__))
+    return fn
+
+
+@collect_charts
+def timeline_bar() -> Timeline:
+    x = Faker.choose()
+    bar0 = (
+        Bar()
+        .add_xaxis(x)
+        .add_yaxis("商家A", Faker.values())
+        .add_yaxis("商家B", Faker.values())
+        .set_global_opts(title_opts=opts.TitleOpts("某商店2015年营业额"))
+    )
+    bar1 = (
+        Bar()
+        .add_xaxis(x)
+        .add_yaxis("商家A", Faker.values())
+        .add_yaxis("商家B", Faker.values())
+        .set_global_opts(title_opts=opts.TitleOpts("某商店2016年营业额"))
+    )
+    bar2 = (
+        Bar()
+        .add_xaxis(x)
+        .add_yaxis("商家A", Faker.values())
+        .add_yaxis("商家B", Faker.values())
+        .set_global_opts(title_opts=opts.TitleOpts("某商店2017年营业额"))
+    )
+    bar3 = (
+        Bar()
+        .add_xaxis(x)
+        .add_yaxis("商家A", Faker.values())
+        .add_yaxis("商家B", Faker.values())
+        .set_global_opts(title_opts=opts.TitleOpts("某商店2018年营业额"))
+    )
+    bar4 = (
+        Bar()
+        .add_xaxis(x)
+        .add_yaxis("商家A", Faker.values())
+        .add_yaxis("商家B", Faker.values())
+        .set_global_opts(title_opts=opts.TitleOpts("某商店2019年营业额"))
+    )
+
+    tl = (
+        Timeline()
+        .add(bar0, "2015年")
+        .add(bar1, "2016年")
+        .add(bar2, "2017年")
+        .add(bar3, "2018年")
+        .add(bar4, "2019年")
+    )
+    return tl
+
+
+@collect_charts
+def timeline_pie() -> Timeline:
+    attr = Faker.choose()
+    pie0 = (
+        Pie()
+        .add(
+            "商家A",
+            [list(z) for z in zip(attr, Faker.values())],
+            rosetype="radius",
+            radius=["30%", "55%"],
+        )
+        .set_global_opts(title_opts=opts.TitleOpts("某商店2015年营业额"))
+    )
+    pie1 = (
+        Pie()
+        .add(
+            "商家A",
+            [list(z) for z in zip(attr, Faker.values())],
+            rosetype="radius",
+            radius=["30%", "55%"],
+        )
+        .set_global_opts(title_opts=opts.TitleOpts("某商店2016年营业额"))
+    )
+    pie2 = (
+        Pie()
+        .add(
+            "商家A",
+            [list(z) for z in zip(attr, Faker.values())],
+            rosetype="radius",
+            radius=["30%", "55%"],
+        )
+        .set_global_opts(title_opts=opts.TitleOpts("某商店2017年营业额"))
+    )
+    pie3 = (
+        Pie()
+        .add(
+            "商家A",
+            [list(z) for z in zip(attr, Faker.values())],
+            rosetype="radius",
+            radius=["30%", "55%"],
+        )
+        .set_global_opts(title_opts=opts.TitleOpts("某商店2018年营业额"))
+    )
+    pie4 = (
+        Pie()
+        .add(
+            "商家A",
+            [list(z) for z in zip(attr, Faker.values())],
+            rosetype="radius",
+            radius=["30%", "55%"],
+        )
+        .set_global_opts(title_opts=opts.TitleOpts("某商店2019年营业额"))
+    )
+    tl = (
+        Timeline()
+        .add(pie0, "2015年")
+        .add(pie1, "2016年")
+        .add(pie2, "2017年")
+        .add(pie3, "2018年")
+        .add(pie4, "2019年")
+    )
+    return tl
+
+
+Page().add(*[fn() for fn, _ in charts]).render()

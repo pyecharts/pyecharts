@@ -37,9 +37,13 @@ class WordCloud(Chart):
         word_gap: Numeric = 20,
         word_size_range=None,
         rotate_step: Numeric = 45,
+        tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
     ):
+        if isinstance(tooltip_opts, opts.TooltipOpts):
+            tooltip_opts = tooltip_opts.opts
+
         data = []
-        for (n, v) in data_pair:
+        for n, v in data_pair:
             data.append(
                 {"name": n, "value": v, "textStyle": {"normal": {"color": gen_color()}}}
             )
@@ -63,6 +67,7 @@ class WordCloud(Chart):
                 "girdSize": word_gap,
                 "sizeRange": word_size_range,
                 "data": data,
+                "tooltip": tooltip_opts,
             }
         )
         return self

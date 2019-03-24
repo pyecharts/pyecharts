@@ -34,6 +34,7 @@ class Bar(AxisChart):
         label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
         markpoint_opts: Union[opts.MarkPointOpts, dict, None] = None,
         markline_opts: Union[opts.MarkLineOpts, dict, None] = None,
+        tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
     ):
         if isinstance(label_opts, opts.LabelOpts):
             label_opts = label_opts.opts
@@ -41,6 +42,8 @@ class Bar(AxisChart):
             markpoint_opts = markpoint_opts.opts
         if isinstance(markline_opts, opts.MarkLineOpts):
             markline_opts = markline_opts.opts
+        if isinstance(tooltip_opts, opts.TooltipOpts):
+            tooltip_opts = tooltip_opts.opts
 
         self._append_color(color)
         self._append_legend(series_name)
@@ -56,6 +59,7 @@ class Bar(AxisChart):
                 "label": label_opts,
                 "markPoint": markpoint_opts,
                 "markLine": markline_opts,
+                "tooltip": tooltip_opts,
             }
         )
         return self

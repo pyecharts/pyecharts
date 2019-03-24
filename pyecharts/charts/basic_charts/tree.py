@@ -48,11 +48,14 @@ class Tree(Chart):
         collapse_interval: Numeric = 0,
         label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
         leaves_label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
+        tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
     ):
         if isinstance(label_opts, opts.LabelOpts):
             label_opts = label_opts.opts
         if isinstance(leaves_label_opts, opts.LabelOpts):
             leaves_label_opts = leaves_label_opts.opts
+        if isinstance(tooltip_opts, opts.TooltipOpts):
+            tooltip_opts = tooltip_opts.opts
 
         _data = self._set_collapse_interval(data, collapse_interval)
         self.options.get("series").append(
@@ -70,6 +73,7 @@ class Tree(Chart):
                 "orient": orient,
                 "label": label_opts,
                 "leaves": {"label": leaves_label_opts},
+                "tooltip": tooltip_opts,
             }
         )
         return self

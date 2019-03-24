@@ -23,11 +23,14 @@ class Calendar(Chart):
         *,
         label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
         calendar_opts: Union[opts.CalendarOpts, dict, None] = None,
+        tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
     ):
         if isinstance(label_opts, opts.LabelOpts):
             label_opts = label_opts.opts
         if isinstance(calendar_opts, opts.CalendarOpts):
             calendar_opts = calendar_opts.opts
+        if isinstance(tooltip_opts, opts.TooltipOpts):
+            tooltip_opts = tooltip_opts.opts
 
         if calendar_opts:
             self.options.update(calendar=calendar_opts)
@@ -40,6 +43,7 @@ class Calendar(Chart):
                 "name": series_name,
                 "data": yaxis_data,
                 "label": label_opts,
+                "tooltip": tooltip_opts,
             }
         )
         return self
