@@ -2,7 +2,7 @@
 from ... import options as opts
 from ...charts.chart import AxisChart
 from ...commons.types import ListTuple, Numeric, Optional, Union
-from ...consts import CHART_TYPE
+from ...consts import ChartType
 
 
 class Bar(AxisChart):
@@ -30,7 +30,7 @@ class Bar(AxisChart):
         yaxis_index: Optional[Numeric] = None,
         color: Optional[str] = None,
         stack: Optional[str] = None,
-        category_gap: str = "20%",
+        category_gap: Union[Numeric, str] = "20%",
         label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
         markpoint_opts: Union[opts.MarkPointOpts, dict, None] = None,
         markline_opts: Union[opts.MarkLineOpts, dict, None] = None,
@@ -42,13 +42,11 @@ class Bar(AxisChart):
         if isinstance(markline_opts, opts.MarkLineOpts):
             markline_opts = markline_opts.opts
 
-        if color:
-            self._colors.insert(0, color)
-
+        self._append_color(color)
         self._append_legend(series_name)
         self.options.get("series").append(
             {
-                "type": CHART_TYPE.BAR,
+                "type": ChartType.BAR,
                 "name": series_name,
                 "xAxisIndex": xaxis_index,
                 "yAxisIndex": yaxis_index,

@@ -1,9 +1,9 @@
 # coding=utf-8
-
 import os
 import re
 
 from jinja2 import Environment, FileSystemLoader
+
 from pyecharts.commons.types import Any, Optional
 
 from ..commons.utils import write_utf8_html_file
@@ -34,15 +34,6 @@ class RenderEngine:
             links.append("{}{}.js".format(chart.js_host, FILENAMES[dep]))
         chart.dependencies = links
         return chart
-
-    @staticmethod
-    def gen_notebook_cfg(chart: Any) -> dict:
-        items = []
-        for dep in chart.js_dependencies.items:
-            # TODO: if?
-            items.append(dep)
-        require_libraries = ["'{}'".format(dep) for dep in chart.js_dependencies.items]
-        return dict(config_items=items, libraries=require_libraries)
 
     def render_chart_to_file(self, template_name: str, chart: Any, path: str):
         """

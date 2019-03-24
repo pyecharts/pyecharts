@@ -2,7 +2,7 @@
 from ... import options as opts
 from ...charts.chart import AxisChart
 from ...commons.types import ListTuple, Numeric, Optional, Union
-from ...consts import CHART_TYPE
+from ...consts import ChartType
 
 
 class Line(AxisChart):
@@ -23,6 +23,7 @@ class Line(AxisChart):
         *,
         xaxis_index: Optional[Numeric] = None,
         yaxis_index: Optional[Numeric] = None,
+        color: Optional[str] = None,
         is_symbol_show: bool = True,
         symbol: Optional[str] = None,
         symbol_size: Numeric = 4,
@@ -46,6 +47,7 @@ class Line(AxisChart):
         if isinstance(areastyle_opts, opts.AreaStyleOpts):
             areastyle_opts = areastyle_opts.opts
 
+        self._append_color(color)
         self._append_legend(series_name)
         # 合并 x 和 y 轴数据，避免当 X 轴的类型设置为 'value' 的时候，
         # X、Y 轴均显示 Y 轴数据
@@ -53,7 +55,7 @@ class Line(AxisChart):
 
         self.options.get("series").append(
             {
-                "type": CHART_TYPE.LINE,
+                "type": ChartType.LINE,
                 "name": series_name,
                 "xAxisIndex": xaxis_index,
                 "yAxisIndex": yaxis_index,

@@ -6,7 +6,7 @@ class LabelOpts:
     def __init__(
         self,
         is_show: bool = True,
-        position: Union[str, ListTuple] = "right",
+        position: Union[str, ListTuple] = "top",
         color: Optional[str] = None,
         font_size: Numeric = 12,
         font_style: Optional[str] = None,
@@ -106,33 +106,7 @@ class MarkPointOpts:
         data: List[Union[MarkPointItem, dict]] = None,
         symbol: Optional[str] = None,
         symbol_size: Union[None, Numeric] = None,
-        label_opts: LabelOpts = LabelOpts(),
-    ):
-        if isinstance(label_opts, LabelOpts):
-            label_opts = label_opts.opts
-        _data = []
-        if data:
-            for d in data:
-                if isinstance(d, dict):
-                    _data.append(d)
-                else:
-                    _data.append(d.opts)
-
-        self.opts: dict = {
-            "symbol": symbol,
-            "symbolSize": symbol_size,
-            "label": label_opts,
-            "data": _data,
-        }
-
-
-class MarkLineOpts:
-    def __init__(
-        self,
-        data: List[Union[MarkPointItem, dict]] = None,
-        symbol: Optional[str] = None,
-        symbol_size: Union[None, Numeric] = None,
-        label_opts: LabelOpts = LabelOpts(),
+        label_opts: LabelOpts = LabelOpts(position="inside", color="#fff"),
     ):
         if isinstance(label_opts, LabelOpts):
             label_opts = label_opts.opts
@@ -171,6 +145,32 @@ class MarkLineItem:
             "coord": coord,
             "symbol": symbol,
             "symbolSize": symbol_size,
+        }
+
+
+class MarkLineOpts:
+    def __init__(
+        self,
+        data: List[Union[MarkLineItem, dict]] = None,
+        symbol: Optional[str] = None,
+        symbol_size: Union[None, Numeric] = None,
+        label_opts: LabelOpts = LabelOpts(),
+    ):
+        if isinstance(label_opts, LabelOpts):
+            label_opts = label_opts.opts
+        _data = []
+        if data:
+            for d in data:
+                if isinstance(d, dict):
+                    _data.append(d)
+                else:
+                    _data.append(d.opts)
+
+        self.opts: dict = {
+            "symbol": symbol,
+            "symbolSize": symbol_size,
+            "label": label_opts,
+            "data": _data,
         }
 
 

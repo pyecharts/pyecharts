@@ -2,7 +2,7 @@
 from ... import options as opts
 from ...charts.chart import Chart
 from ...commons.types import Numeric, Union
-from ...consts import CHART_TYPE
+from ...consts import ChartType
 
 
 class TreeMap(Chart):
@@ -31,7 +31,7 @@ class TreeMap(Chart):
         self._append_legend(series_name)
         self.options.get("series").append(
             {
-                "type": CHART_TYPE.TREEMAP,
+                "type": ChartType.TREEMAP,
                 "name": series_name,
                 "data": data,
                 "label": label_opts,

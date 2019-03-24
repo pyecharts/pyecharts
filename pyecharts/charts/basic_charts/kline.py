@@ -2,7 +2,7 @@
 from ... import options as opts
 from ...charts.chart import AxisChart
 from ...commons.types import ListTuple, Numeric, Optional, Union
-from ...consts import CHART_TYPE
+from ...consts import ChartType
 
 
 class Kline(AxisChart):
@@ -39,7 +39,7 @@ class Kline(AxisChart):
         self._append_legend(series_name)
         self.options.get("series").append(
             {
-                "type": CHART_TYPE.KLINE,
+                "type": ChartType.KLINE,
                 "name": series_name,
                 "xAxisIndex": xaxis_index,
                 "yAxisIndex": yaxis_index,

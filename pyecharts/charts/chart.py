@@ -1,10 +1,10 @@
 # coding=utf-8
-import uuid
+import copy
 
 from .. import options as opts
 from ..charts.base import Base
-from ..commons.types import ListTuple, Numeric, Optional, Union
-from ..consts import RENDER_TYPE
+from ..commons.types import List, ListTuple, Numeric, Optional, Union
+from ..consts import RenderType
 
 COLORS = [
     "#c23531",
@@ -42,10 +42,10 @@ class Chart(Base):
 
     def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):
         super().__init__(init_opts=init_opts)
-        self._colors = COLORS
-        self.options.update(series=[], legend=[{"data": []}])
-        if self.theme == "white":
+        self._colors = copy.deepcopy(COLORS)
+        if init_opts.theme == "white":
             self.options.update(color=self._colors)
+        self.options.update(series=[], legend=[{"data": []}])
 
     def set_series_opts(
         self,
@@ -97,28 +97,39 @@ class Chart(Base):
     def _append_legend(self, name):
         self.options.get("legend")[0].get("data").append(name)
 
+    def _append_color(self, color: Optional[str]):
+        if color:
+            self._colors = [color] + self._colors
+            if self.theme == "white":
+                self.options.update(color=self._colors)
+
     def set_global_opts(
         self,
         title_opts: Union[opts.TitleOpts, dict] = opts.TitleOpts(),
-        toolbox_opts: Union[opts.ToolboxOpts, dict] = opts.ToolboxOpts(),
         tooltip_opts: Union[opts.TooltipOpts, dict] = opts.TooltipOpts(),
         legend_opts: Union[opts.LegendOpts, dict] = opts.LegendOpts(),
+        toolbox_opts: Union[opts.ToolboxOpts, dict] = None,
         xaxis_opt: Union[opts.AxisOpts, dict, None] = None,
         yaxis_opt: Union[opts.AxisOpts, dict, None] = None,
         visualmap_opts: Union[opts.VisualMapOpts, dict, None] = None,
-        datazoom_opts: Union[opts.DataZoomOpts, dict, None] = None,
+        datazoom_opts: List[Union[opts.DataZoomOpts, dict, None]] = None,
     ):
         if isinstance(title_opts, opts.TitleOpts):
             title_opts = title_opts.opts
-        if isinstance(toolbox_opts, opts.ToolboxOpts):
-            toolbox_opts = toolbox_opts.opts
         if isinstance(tooltip_opts, opts.TooltipOpts):
             tooltip_opts = tooltip_opts.opts
         if isinstance(legend_opts, opts.LegendOpts):
             legend_opts = legend_opts.opts
+        if isinstance(toolbox_opts, opts.ToolboxOpts):
+            toolbox_opts = toolbox_opts.opts
+        if isinstance(visualmap_opts, opts.VisualMapOpts):
+            visualmap_opts = visualmap_opts.ops
 
         self.options.update(
-            title=title_opts, toolbox=toolbox_opts, tooltip=tooltip_opts
+            title=title_opts,
+            toolbox=toolbox_opts,
+            tooltip=tooltip_opts,
+            visualMap=visualmap_opts,
         )
 
         for _s in self.options["legend"]:
@@ -136,15 +147,15 @@ class Chart(Base):
                 for y in self.options["yAxis"]:
                     y.update(yaxis_opt)
 
-        if visualmap_opts:
-            if isinstance(visualmap_opts, opts.VisualMapOpts):
-                visualmap_opts = visualmap_opts.ops
-            self.options.update(visualMap=visualmap_opts)
-
         if datazoom_opts:
-            if isinstance(datazoom_opts, opts.DataZoomOpts):
-                datazoom_opts = datazoom_opts.opts
-            self.options.update(dataZoom=datazoom_opts)
+            dzs = []
+            for dz in datazoom_opts:
+                if not dz:
+                    continue
+                if isinstance(dz, opts.DataZoomOpts):
+                    dz = dz.opts
+                dzs.append(dz)
+            self.options.update(dataZoom=dzs)
         return self
 
 
@@ -183,7 +194,7 @@ class Chart3D(Chart):
     """
 
     def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):
-        init_opts.renderer = RENDER_TYPE.CANVAS
+        init_opts.renderer = RenderType.CANVAS
         super().__init__(init_opts)
         self.js_dependencies.add("echartsgl")
         self._3d_chart_type = None  # 3d chart type, don't use it directly

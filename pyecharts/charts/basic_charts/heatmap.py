@@ -2,7 +2,7 @@
 from ... import options as opts
 from ...charts.chart import AxisChart
 from ...commons.types import ListTuple, Numeric, Optional, Union
-from ...consts import CHART_TYPE
+from ...consts import ChartType
 
 
 class HeatMap(AxisChart):
@@ -40,7 +40,7 @@ class HeatMap(AxisChart):
         self.options.get("yAxis")[0].update(data=yaxis_data)
         self.options.get("series").append(
             {
-                "type": CHART_TYPE.HEATMAP,
+                "type": ChartType.HEATMAP,
                 "name": series_name,
                 "xAxisIndex": xaxis_index,
                 "yAxisIndex": yaxis_index,

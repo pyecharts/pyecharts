@@ -2,7 +2,7 @@
 from ... import options as opts
 from ...charts.chart import Chart
 from ...commons.types import ListTuple, Numeric, Union
-from ...consts import CHART_TYPE
+from ...consts import ChartType
 
 
 class Tree(Chart):
@@ -57,7 +57,7 @@ class Tree(Chart):
         _data = self._set_collapse_interval(data, collapse_interval)
         self.options.get("series").append(
             {
-                "type": CHART_TYPE.TREE,
+                "type": ChartType.TREE,
                 "name": series_name,
                 "data": _data,
                 "left": left,

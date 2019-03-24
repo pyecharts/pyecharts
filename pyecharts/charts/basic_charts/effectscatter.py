@@ -2,7 +2,7 @@
 from ... import options as opts
 from ...charts.chart import AxisChart
 from ...commons.types import ListTuple, Numeric, Optional, Union
-from ...consts import CHART_TYPE
+from ...consts import ChartType
 
 
 class EffectScatter(AxisChart):
@@ -36,7 +36,7 @@ class EffectScatter(AxisChart):
         self._append_legend(series_name)
         self.options.get("series").append(
             {
-                "type": CHART_TYPE.EFFECT_SCATTER,
+                "type": ChartType.EFFECT_SCATTER,
                 "name": series_name,
                 "xAxisIndex": xaxis_index,
                 "yAxisIndex": yaxis_index,

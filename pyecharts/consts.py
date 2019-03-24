@@ -86,10 +86,10 @@ class _GeoType:
     LINES: str = "lines"
 
 
-RENDER_TYPE = _RenderType()
-FILE_TYPE = _FileType()
-SYMBOL_TYPE = _SymbolType()
-CHART_TYPE = _ChartType
-TOOLTIP_FORMATTER_TYPE = _ToolTipFormatterType()
-THEME_TYPE = _ThemeType()
-GEO_TYPES = _GeoType()
+RenderType = _RenderType()
+FileType = _FileType()
+SymbolType = _SymbolType()
+ChartType = _ChartType
+TooltipFormatterType = _ToolTipFormatterType()
+ThemeType = _ThemeType()
+GeoType = _GeoType()

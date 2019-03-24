@@ -4,7 +4,7 @@ import random
 from ... import options as opts
 from ...charts.chart import Chart
 from ...commons.types import ListTuple, Numeric, Union
-from ...consts import CHART_TYPE
+from ...consts import ChartType
 
 SHAPES = ("cardioid", "diamond", "triangle-forward", "triangle", "pentagon", "star")
 
@@ -55,7 +55,7 @@ class WordCloud(Chart):
 
         self.options.get("series").append(
             {
-                "type": CHART_TYPE.WORDCLOUD,
+                "type": ChartType.WORDCLOUD,
                 "name": series_name,
                 "shape": shape,
                 "rotationRange": [_rmin, _rmax],

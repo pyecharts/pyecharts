@@ -2,7 +2,7 @@
 from ... import options as opts
 from ...charts.chart import Chart
 from ...commons.types import List, ListTuple, Optional, Union
-from ...consts import CHART_TYPE
+from ...consts import ChartType
 
 
 class Radar(Chart):
@@ -71,7 +71,7 @@ class Radar(Chart):
         self._append_legend(series_name)
         self.options.get("series").append(
             {
-                "type": CHART_TYPE.RADAR,
+                "type": ChartType.RADAR,
                 "name": series_name,
                 "data": value,
                 "symbol": symbol,
