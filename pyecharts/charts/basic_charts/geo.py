@@ -6,7 +6,7 @@ from ... import options as opts
 from ...charts.chart import Chart
 from ...commons import utils
 from ...commons.types import List, ListTuple, Numeric, Optional, Union
-from ...consts import CHART_TYPE, TOOLTIP_FORMATTER_TYPE
+from ...consts import ChartType, TooltipFormatterType
 from ...datasets import COORDINATES
 
 
@@ -167,7 +167,7 @@ class Geo(Chart):
     def set_global_opts(
         self,
         tooltip_opts: Union[opts.TooltipOpts, dict] = opts.TooltipOpts(
-            formatter=utils.filter_js_func(TOOLTIP_FORMATTER_TYPE.GEO)
+            formatter=utils.filter_js_func(TooltipFormatterType.GEO)
         ),
         **kwargs,
     ):

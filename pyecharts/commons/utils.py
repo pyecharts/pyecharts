@@ -1,7 +1,4 @@
 # coding=utf-8
-
-import os
-
 from pyecharts.datasets import FILENAMES
 
 
@@ -30,24 +27,7 @@ def produce_require_dict(js_dependencies, js_host) -> dict:
     return dict(config_items=confs, libraries=libraries)
 
 
-def get_resource_dir(*paths):
-    """
-    Return absolute path for a directory or file inside the project.
-    :param paths: paths relative to project root dir.
-    :return:
-    """
-    project_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    resource_path = os.path.join(project_dir, *paths)
-    return resource_path
-
-
 def write_utf8_html_file(file_name, html_content):
-    """
-
-    :param file_name:
-    :param html_content:
-    :return:
-    """
     with open(file_name, "w+", encoding="utf-8") as html_file:
         html_file.write(html_content)
 

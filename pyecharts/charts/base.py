@@ -1,9 +1,12 @@
 # coding=utf-8
 import json
 import os
+import uuid
+
+from jinja2 import Environment
 
 from ..commons import utils
-from ..commons.types import Union
+from ..commons.types import Optional, Union
 from ..consts import BUILTIN_THEMES, ONLINE_HOST
 from ..options import InitOpts
 from ..render.engine import RenderEngine
@@ -20,7 +23,7 @@ class Base:
         self.renderer = init_opts.renderer
         self.page_title = init_opts.page_title
         self.theme = init_opts.theme
-        self.chart_id = init_opts.chart_id
+        self.chart_id = init_opts.chart_id or uuid.uuid4().hex
 
         self.options: dict = {}
         self.js_host: str = ONLINE_HOST
@@ -42,11 +45,14 @@ class Base:
         return json.dumps(self.get_options(), indent=4)
 
     def render(
-        self, path: str = "render.html", template_name: str = "simple_chart.html"
+        self,
+        path: str = "render.html",
+        template_name: str = "simple_chart.html",
+        env: Optional[Environment] = None,
     ) -> str:
         self.options = self.dump_options()
         self._use_theme()
-        RenderEngine().render_chart_to_file(
+        RenderEngine(env).render_chart_to_file(
             chart=self, path=path, template_name=template_name
         )
         return os.path.abspath(path)

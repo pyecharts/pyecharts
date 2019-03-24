@@ -7,6 +7,7 @@ from test.utils import get_fixture_content
 
 from mock import patch
 from nose.tools import eq_
+
 from pyecharts import (
     Bar,
     Bar3D,

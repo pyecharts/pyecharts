@@ -2,7 +2,7 @@
 from ... import options as opts
 from ...charts.chart import Chart
 from ...commons.types import List, ListTuple, Optional, Union
-from ...consts import CHART_TYPE
+from ...consts import ChartType
 
 
 class Liquid(Chart):
@@ -33,7 +33,7 @@ class Liquid(Chart):
 
         self.options.get("series").append(
             {
-                "type": CHART_TYPE.LIQUID,
+                "type": ChartType.LIQUID,
                 "name": series_name,
                 "data": data,
                 "waveAnimation": is_animation,

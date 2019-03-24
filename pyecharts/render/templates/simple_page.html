@@ -9,6 +9,7 @@
 <body>
     {% for c in chart %}
         {{ macro.render_chart_content(c) }}
+        {% for _ in range(chart.page_interval) %}<br/>{% endfor %}
     {% endfor %}
 </body>
 </html>

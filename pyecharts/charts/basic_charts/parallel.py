@@ -2,7 +2,7 @@
 from ... import options as opts
 from ...charts.chart import Chart
 from ...commons.types import List, ListTuple, Union
-from ...consts import CHART_TYPE
+from ...consts import ChartType
 
 
 class Parallel(Chart):
@@ -32,7 +32,7 @@ class Parallel(Chart):
         self._append_legend(series_name)
         self.options.get("series").append(
             {
-                "type": CHART_TYPE.PARALLEL,
+                "type": ChartType.PARALLEL,
                 "coordinateSystem": "parallel",
                 "lineStyle": linestyle_opts,
                 "name": series_name,

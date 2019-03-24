@@ -11,6 +11,7 @@ import numpy as np
 import pandas as pd
 from mock import MagicMock, patch
 from nose.tools import eq_, raises
+
 from pyecharts import Bar, Map, jupyter_image, online
 from pyecharts.commons import exceptions
 from pyecharts.conf import CURRENT_CONFIG

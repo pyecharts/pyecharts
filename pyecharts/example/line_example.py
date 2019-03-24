@@ -1,17 +1,16 @@
 # coding=utf-8
-
 import pyecharts.options as opts
-from pyecharts.charts import Bar, Line
-from pyecharts.example.commons import CLOTHES, gen_random_data
+from pyecharts.charts import Line
+from pyecharts.example.commons import Faker
 from pyecharts.render import make_snapshot
 
 
 def line_base() -> Line:
-    c = Line()
-    c.add_xaxis(CLOTHES).add_yaxis("series0", gen_random_data(len(CLOTHES))).add_yaxis(
-        "series1", gen_random_data(len(CLOTHES))
+    c = (
+        Line()
+        .add_xaxis(Faker.choose())
+        .add_yaxis("商家A", Faker.values())
+        .add_yaxis("商家B", Faker.values())
+        .set_global_opts(title_opts=opts.TitleOpts(title="Line-基本示例"))
     )
     return c
-
-
-line_base().render()

@@ -2,7 +2,7 @@
 from ... import options as opts
 from ...charts.chart import Chart
 from ...commons.types import ListTuple, Numeric, Union
-from ...consts import CHART_TYPE
+from ...consts import ChartType
 
 
 class Gauge(Chart):
@@ -25,7 +25,7 @@ class Gauge(Chart):
         self._append_legend(series_name)
         self.options.get("series").append(
             {
-                "type": CHART_TYPE.GAUGE,
+                "type": ChartType.GAUGE,
                 "detail": {"formatter": "{value}%"},
                 "name": series_name,
                 "min": min_,

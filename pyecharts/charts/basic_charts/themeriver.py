@@ -2,7 +2,7 @@
 from ... import options as opts
 from ...charts.chart import Chart
 from ...commons.types import ListTuple, Union
-from ...consts import CHART_TYPE
+from ...consts import ChartType
 
 
 class ThemeRiver(Chart):
@@ -27,7 +27,7 @@ class ThemeRiver(Chart):
         self._append_legend(series_name)
         self.options.get("series").append(
             {
-                "type": CHART_TYPE.THEMERIVER,
+                "type": ChartType.THEMERIVER,
                 "name": series_name,
                 "data": data,
                 "label": label_opts,

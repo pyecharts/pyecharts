@@ -1,5 +1,8 @@
 # coding=utf-8
+from jinja2 import Environment
+
 from ...commons import utils
+from ...commons.types import Optional
 from ...consts import BUILTIN_THEMES, ONLINE_HOST
 from ...render.engine import RenderEngine
 
@@ -12,9 +15,13 @@ class Page:
     """
 
     def __init__(
-        self, page_title: str = "Awesome-pyecharts", js_host: str = ONLINE_HOST
+        self,
+        page_title: str = "Awesome-pyecharts",
+        js_host: str = ONLINE_HOST,
+        interval: int = 1,
     ):
         self.page_title = page_title
+        self.page_interval = interval
         self.js_dependencies = utils.OrderedSet()
         self.js_host = js_host
         self._charts = []
@@ -35,13 +42,16 @@ class Page:
         return len(self._charts)
 
     def render(
-        self, path: str = "render.html", template_name: str = "simple_page.html"
+        self,
+        path: str = "render.html",
+        template_name: str = "simple_page.html",
+        env: Optional[Environment] = None,
     ):
         for c in self:
             c.options = c.dump_options()
             if c.theme not in BUILTIN_THEMES:
                 self.js_dependencies.add(c.theme)
-        RenderEngine().render_chart_to_file(
+        RenderEngine(env).render_chart_to_file(
             template_name=template_name, chart=self, path=path
         )
 

@@ -2,7 +2,7 @@
 from ... import options as opts
 from ...charts.chart import Chart
 from ...commons.types import ListTuple, Optional, Union
-from ...consts import CHART_TYPE
+from ...consts import ChartType
 
 
 class Pie(Chart):
@@ -21,7 +21,7 @@ class Pie(Chart):
         data_pair: ListTuple,
         radius: Optional[ListTuple] = None,
         center: Optional[ListTuple] = None,
-        rosetype: str = "radius",
+        rosetype: Optional[str] = None,
         label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
     ):
         if isinstance(label_opts, opts.LabelOpts):
@@ -44,7 +44,7 @@ class Pie(Chart):
 
         self.options.get("series").append(
             {
-                "type": CHART_TYPE.PIE,
+                "type": ChartType.PIE,
                 "name": series_name,
                 "data": data,
                 "radius": radius,
