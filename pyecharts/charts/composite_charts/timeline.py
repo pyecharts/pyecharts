@@ -12,6 +12,7 @@ class Timeline(Base):
     def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):
         super().__init__(init_opts=init_opts)
         self.options = {"baseOption": {"series": [], "timeline": {}}, "options": []}
+        self.add_schema()
         self._time_points = []
 
     def add_schema(
@@ -29,7 +30,7 @@ class Timeline(Base):
         pos_top: Optional[str] = None,
         pos_bottom: Optional[str] = None,
     ):
-        self.options.get("baseOption").update(
+        self.options.get("baseOption").get("timeline").update(
             {
                 "axisType": axis_type,
                 "autoPlay": is_auto_play,
@@ -62,7 +63,7 @@ class Timeline(Base):
             }
         )
         self.__check_components(chart)
-        self.options.get("baseOption").get("series").extend(chart.options.get("series"))
+        self.options.get("baseOption").update(series=chart.options.get("series"))
         return self
 
     def __check_components(self, chart: Base):
