@@ -1,4 +1,4 @@
 include pyecharts/datasets/*.json
-include pyecharts/templates/*.html
+include pyecharts/render/templates/*
 include README.md
 include changelog.md
