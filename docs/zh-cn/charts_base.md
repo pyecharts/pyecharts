@@ -2156,7 +2156,7 @@ pie.render()
 
 **多个饼图画在一张图内**
 ```python
-from pyecharts import Pie
+from pyecharts import Pie, Style
 
 pie = Pie('各类电影中"好片"所占的比例', "数据来着豆瓣", title_pos='center')
 style = Style()
