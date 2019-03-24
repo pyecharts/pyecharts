@@ -22,8 +22,8 @@ def filter_js_func(fn: str) -> str:
 def produce_require_dict(js_dependencies, js_host) -> dict:
     confs, libraries = [], []
     for name in js_dependencies.items:
-        confs.append("'{}':'{}/{}'".format(name, js_host, FILENAMES[name]))
-        libraries = ["'{}'".format(name)]
+        confs.append("'{}':'{}{}'".format(name, js_host, FILENAMES[name]))
+        libraries.append("'{}'".format(name))
     return dict(config_items=confs, libraries=libraries)
 
 
