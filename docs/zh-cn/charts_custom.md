@@ -19,7 +19,7 @@ Grid 类的使用：
 3. 使用 `add()` 向 `grid` 中添加图，至少需要设置一个 `grid_top`, `grid_bottom`, `grid_left`, `grid_right` 四个参数中的一个。`grid_width` 和 `grid_height` 一般不用设置，默认即可。
 4. 使用 `render()` 渲染生成 .html 文件
 
-**Note：** `Overlap` 可类放入 `Grid` 类中，不过有个前提，`Overlap` 不可为多 x 轴或者多 y 轴，否则会出现坐标轴索引混乱问题
+**Note：** `Overlap` 类可放入 `Grid` 类中，不过有个前提，`Overlap` 不可为多 x 轴或者多 y 轴，否则会出现坐标轴索引混乱问题
 
 Grid 类中其他方法：
 * `render_embed()`：在 Flask&Django 中可以使用该方法渲染
@@ -862,7 +862,7 @@ Timeline 类的使用：
 * is_loop_play -> bool  
     是否循环播放，默认为 True
 * is_rewind_play -> bool  
-    是否方向播放，默认为 Flase
+    是否反向播放，默认为 Flase
 * is_timeline_show -> bool  
     是否显示 timeline 组件。默认为 True，如果设置为false，不会显示，但是功能还存在。
 * timeline_play_interval -> int  

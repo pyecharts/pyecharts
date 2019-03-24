@@ -1,5 +1,7 @@
 > 图表风格篇：本篇文档为 pyecharts 图表风格详情文档。
 
+> 重要：从 v0.6.0 开始，类 Style 已经废弃。可以使用原生 dict 代替。
+
 为了简化配置项编写，提供了一个 Style 类，可用于在同一个图或者多个图内保持统一的风格
 
 ## 初始化图
@@ -13,7 +15,7 @@ style = Style(
     height=600,
     background_color='#404a59'
 )
-# style,init_style 会返回类初始化的风格配置字典
+# style.init_style 会返回类初始化的风格配置字典
 geo = Geo("全国主要城市空气质量", "data from pm2.5", **style.init_style)
 ```
 

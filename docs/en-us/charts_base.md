@@ -293,7 +293,7 @@ from pyecharts import Bar3D
 bar3d = Bar3D("3D 柱状图示例", width=1200, height=600)
 x_axis = ["12a", "1a", "2a", "3a", "4a", "5a", "6a", "7a", "8a", "9a", "10a", "11a",
           "12p", "1p", "2p", "3p", "4p", "5p", "6p", "7p", "8p", "9p", "10p", "11p"]
-y_aixs = ["Saturday", "Friday", "Thursday", "Wednesday", "Tuesday", "Monday", "Sunday"]
+y_axis = ["Saturday", "Friday", "Thursday", "Wednesday", "Tuesday", "Monday", "Sunday"]
 data = [[0, 0, 5], [0, 1, 1], [0, 2, 0], [0, 3, 0], [0, 4, 0], [0, 5, 0], [0, 6, 0], [0, 7, 0],
         [0, 8, 0],[0, 9, 0], [0, 10, 0], [0, 11, 2], [0, 12, 4], [0, 13, 1], [0, 14, 1], [0, 15, 3],
         [0, 16, 4], [0, 17, 6], [0, 18, 4], [0, 19, 4], [0, 20, 3], [0, 21, 3], [0, 22, 2], [0, 23, 5],
@@ -316,7 +316,7 @@ data = [[0, 0, 5], [0, 1, 1], [0, 2, 0], [0, 3, 0], [0, 4, 0], [0, 5, 0], [0, 6,
         [6, 20, 1], [6, 21, 2], [6, 22, 2], [6, 23, 6]]
 range_color = ['#313695', '#4575b4', '#74add1', '#abd9e9', '#e0f3f8', '#ffffbf',
                '#fee090', '#fdae61', '#f46d43', '#d73027', '#a50026']
-bar3d.add("", x_axis, y_aixs, [[d[1], d[0], d[2]] for d in data], 
+bar3d.add("", x_axis, y_axis, [[d[1], d[0], d[2]] for d in data], 
     is_visualmap=True, visual_range=[0, 20], visual_range_color=range_color, 
     grid3D_width=200, grid3D_depth=80)
 bar3d.render()
@@ -328,7 +328,7 @@ In data, such as [1, 2, 3], the index of the x-axis is 1 ("1a"); the index of th
 **Set `grid3D_shading` could make bar look more real**  
 ```python
 bar3d = Bar3D("3D 柱状图示例", width=1200, height=600)
-bar3d.add("", x_axis, y_aixs, [[d[1], d[0], d[2]] for d in data], is_visualmap=True,
+bar3d.add("", x_axis, y_axis, [[d[1], d[0], d[2]] for d in data], is_visualmap=True,
           visual_range=[0, 20], visual_range_color=range_color, grid3D_width=200, grid3D_depth=80,
           grid3D_shading='lambert')
 bar3d.show_config()
@@ -340,7 +340,7 @@ bar3d.render()
 **Set```is_grid3D_rotate``` could let it rotate automatically**
 ```python
 bar3d = Bar3D("3D 柱状图示例", width=1200, height=600)
-bar3d.add("", x_axis, y_aixs, [[d[1], d[0], d[2]] for d in data], is_visualmap=True,
+bar3d.add("", x_axis, y_axis, [[d[1], d[0], d[2]] for d in data], is_visualmap=True,
           visual_range=[0, 20], visual_range_color=range_color, grid3D_width=200, grid3D_depth=80,
           is_grid3D_rotate=True)
 bar3d.show_config()
@@ -351,7 +351,7 @@ bar3d.render()
 set ``` grid3D_rotate_speed``` to adjust the rotation speed  
 ```python
 bar3d = Bar3D("3D 柱状图示例", width=1200, height=600)
-bar3d.add("", x_axis, y_aixs, [[d[1], d[0], d[2]] for d in data], is_visualmap=True,
+bar3d.add("", x_axis, y_axis, [[d[1], d[0], d[2]] for d in data], is_visualmap=True,
           visual_range=[0, 20], visual_range_color=range_color, grid3D_width=200, grid3D_depth=80,
           is_grid3D_rotate=True, grid3D_rotate_speed=180)
 bar3d.render()
@@ -1305,7 +1305,7 @@ kline.render()
 Line.add() signatures
 ```python
 add(name, x_axis, y_axis, is_symbol_show=True, is_smooth=False, is_stack=False,
-    is_step=False, is_fill=False, **kwargs)
+    is_step=False, **kwargs)
 ```
 * name -> str  
     Series name used for displaying in tooltip and filtering with legend,or updaing data and configuration with setOption.
@@ -1331,10 +1331,6 @@ add(name, x_axis, y_axis, is_symbol_show=True, is_smooth=False, is_stack=False,
 * is_step -> bool/str  
     default -> False  
     Whether to show as a step line.It can be true, false. Or 'start', 'middle', 'end'.Which will configure the turn point of step line.
-
-* is_fill -> bool  
-    default -> False  
-    Whether to fill area.
 
 ```python
 from pyecharts import Line
@@ -1365,7 +1361,6 @@ line.render()
 line = Line("折线图-数据堆叠示例")
 line.add("商家A", attr, v1, is_stack=True, is_label_show=True)
 line.add("商家B", attr, v2, is_stack=True, is_label_show=True)
-line.show_config()
 line.render()
 ```
 ![line-demo](https://user-images.githubusercontent.com/19553554/35089965-4f880100-fc73-11e7-9861-c43bd4d4bbe1.gif)
@@ -1373,16 +1368,15 @@ line.render()
 ```python
 line = Line("折线图-阶梯图示例")
 line.add("商家A", attr, v1, is_step=True, is_label_show=True)
-line.show_config()
 line.render()
 ```
 ![line-demo](https://user-images.githubusercontent.com/19553554/35089968-510f3304-fc73-11e7-9159-67ce6ace9fa3.png)
 
+**area_opacity：** Opacity of the component. Supports value from 0 to 1, and the component will not be drawn when set to 0.
 ```python
 line = Line("折线图-面积图示例")
 line.add("商家A", attr, v1, is_fill=True, line_opacity=0.2, area_opacity=0.4, symbol=None)
 line.add("商家B", attr, v2, is_fill=True, area_color='#000', area_opacity=0.3, is_smooth=True)
-line.show_config()
 line.render()
 ```
 ![line-demo](https://user-images.githubusercontent.com/19553554/35089973-53868fd8-fc73-11e7-8ff6-bfb452954267.png)
