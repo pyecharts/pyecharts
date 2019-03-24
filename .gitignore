@@ -96,5 +96,6 @@ ENV/
 # for vscode
 .vscode/
 
-pyecharts/example/*.png
-pyecharts/example/*.html
+# example
+example/*.png
+example/*.html

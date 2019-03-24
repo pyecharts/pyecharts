@@ -1,5 +1,4 @@
 # coding=utf-8
-import uuid
 
 from ..consts import *
 from ..options.series_options import *
