@@ -1,8 +1,8 @@
 # coding=utf-8
 from ... import options as opts
 from ...charts.chart import Chart
-from ...commons.types import ListTuple, Numeric, Union
-from ...consts import ChartType
+from ...commons.types import Sequence, Numeric, Union
+from ...globals import ChartType
 
 
 class Tree(Chart):
@@ -36,7 +36,7 @@ class Tree(Chart):
     def add(
         self,
         series_name: str,
-        data: ListTuple,
+        data: Sequence,
         layout: str = "orthogonal",
         symbol: str = "emptyCircle",
         symbol_size=7,

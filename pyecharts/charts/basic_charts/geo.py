@@ -4,8 +4,8 @@ import json
 from ... import options as opts
 from ...charts.chart import Chart
 from ...commons import utils
-from ...commons.types import List, ListTuple, Numeric, Optional, Union
-from ...consts import ChartType, TooltipFormatterType
+from ...commons.types import List, Sequence, Numeric, Optional, Union
+from ...globals import ChartType, TooltipFormatterType
 from ...datasets import COORDINATES
 
 
@@ -57,7 +57,7 @@ class Geo(Chart):
     def add(
         self,
         series_name: str,
-        data_pair: ListTuple,
+        data_pair: Sequence,
         type_: str = "scatter",
         maptype: str = "china",
         *,

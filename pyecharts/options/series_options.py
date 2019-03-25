@@ -1,12 +1,12 @@
 # coding=utf-8
-from pyecharts.commons.types import List, ListTuple, Numeric, Optional, Union
+from pyecharts.commons.types import List, Sequence, Numeric, Optional, Union
 
 
 class LabelOpts:
     def __init__(
         self,
         is_show: bool = True,
-        position: Union[str, ListTuple] = "top",
+        position: Union[str, Sequence] = "top",
         color: Optional[str] = None,
         font_size: Numeric = 12,
         font_style: Optional[str] = None,
@@ -133,7 +133,7 @@ class MarkLineItem:
         type_: Optional[str] = None,
         xaxis: Union[str, Numeric, None] = None,
         yaxis: Union[str, Numeric, None] = None,
-        coord: Optional[ListTuple] = None,
+        coord: Optional[Sequence] = None,
         symbol: Optional[str] = None,
         symbol_size: Optional[Numeric] = None,
     ):

@@ -1,8 +1,8 @@
 # coding=utf-8
 from ... import options as opts
 from ...charts.chart import Chart
-from ...commons.types import List, ListTuple, Optional, Union
-from ...consts import ChartType
+from ...commons.types import List, Sequence, Optional, Union
+from ...globals import ChartType
 
 
 class Liquid(Chart):
@@ -19,7 +19,7 @@ class Liquid(Chart):
     def add(
         self,
         series_name: str,
-        data: ListTuple,
+        data: Sequence,
         shape: str = "circle",
         color: Optional[List[str]] = None,
         is_animation: bool = True,

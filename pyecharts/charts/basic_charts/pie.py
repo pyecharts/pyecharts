@@ -1,8 +1,8 @@
 # coding=utf-8
 from ... import options as opts
 from ...charts.chart import Chart
-from ...commons.types import ListTuple, Optional, Union
-from ...consts import ChartType
+from ...commons.types import Sequence, Optional, Union
+from ...globals import ChartType
 
 
 class Pie(Chart):
@@ -18,10 +18,10 @@ class Pie(Chart):
     def add(
         self,
         series_name: str,
-        data_pair: ListTuple,
+        data_pair: Sequence,
         color: Optional[str] = None,
-        radius: Optional[ListTuple] = None,
-        center: Optional[ListTuple] = None,
+        radius: Optional[Sequence] = None,
+        center: Optional[Sequence] = None,
         rosetype: Optional[str] = None,
         label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
         tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,

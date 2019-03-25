@@ -1,8 +1,8 @@
 # coding=utf-8
 from ... import options as opts
 from ...charts.chart import Chart
-from ...commons.types import ListTuple, Numeric, Optional, Union
-from ...consts import ChartType
+from ...commons.types import Sequence, Numeric, Optional, Union
+from ...globals import ChartType
 
 
 class Funnel(Chart):
@@ -16,7 +16,7 @@ class Funnel(Chart):
     def add(
         self,
         series_name: str,
-        data_pair: ListTuple,
+        data_pair: Sequence,
         color: Optional[str] = None,
         sort_: str = "descending",
         gap: Numeric = 0,

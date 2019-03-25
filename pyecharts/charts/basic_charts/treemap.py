@@ -2,7 +2,7 @@
 from ... import options as opts
 from ...charts.chart import Chart
 from ...commons.types import Numeric, Union
-from ...consts import ChartType
+from ...globals import ChartType
 
 
 class TreeMap(Chart):

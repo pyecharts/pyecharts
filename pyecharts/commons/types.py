@@ -1,4 +1,3 @@
-from typing import Any, Callable, Iterable, List, Mapping, Optional, Tuple, Union
+from typing import Any, Callable, Iterable, List, Mapping, Optional, Tuple, Union, Sequence
 
 Numeric = Union[int, float]
-ListTuple = Union[List, Tuple]

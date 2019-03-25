@@ -1,8 +1,8 @@
 # coding=utf-8
 from ... import options as opts
 from ...charts.chart import Chart
-from ...commons.types import List, ListTuple, Optional, Union
-from ...consts import ChartType
+from ...commons.types import List, Sequence, Optional, Union
+from ...globals import ChartType
 
 
 class Radar(Chart):
@@ -54,7 +54,7 @@ class Radar(Chart):
     def add(
         self,
         series_name: str,
-        value: ListTuple,
+        value: Sequence,
         symbol: Optional[str] = None,
         item_color=None,
         label_opts: opts.LabelOpts = opts.LabelOpts(),

@@ -3,7 +3,7 @@ from jinja2 import Environment
 
 from ...commons import utils
 from ...commons.types import Optional
-from ...consts import BUILTIN_THEMES, ONLINE_HOST
+from ...globals import BUILTIN_THEMES, ONLINE_HOST
 from ...render.engine import RenderEngine
 
 

@@ -1,8 +1,8 @@
 # coding=utf-8
 from ... import options as opts
 from ...charts.chart import Chart
-from ...commons.types import ListTuple, Optional, Union
-from ...consts import ChartType
+from ...commons.types import Sequence, Optional, Union
+from ...globals import ChartType
 
 
 class Map(Chart):
@@ -18,7 +18,7 @@ class Map(Chart):
     def add(
         self,
         series_name: str,
-        data_pair: ListTuple,
+        data_pair: Sequence,
         maptype: str = "china",
         *,
         is_roam: bool = True,

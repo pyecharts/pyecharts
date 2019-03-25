@@ -1,6 +1,5 @@
 # coding=utf-8
-
-from ..consts import *
+from ..globals import *
 from ..options.series_options import *
 
 

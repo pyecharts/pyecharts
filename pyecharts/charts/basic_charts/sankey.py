@@ -1,8 +1,8 @@
 # coding=utf-8
 from ... import options as opts
 from ...charts.chart import Chart
-from ...commons.types import ListTuple, Numeric, Union
-from ...consts import ChartType
+from ...commons.types import Sequence, Numeric, Union
+from ...globals import ChartType
 
 
 class Sankey(Chart):
@@ -19,8 +19,8 @@ class Sankey(Chart):
     def add(
         self,
         series_name: str,
-        nodes: ListTuple,
-        links: ListTuple,
+        nodes: Sequence,
+        links: Sequence,
         node_width: Numeric = 20,
         node_gap: Numeric = 8,
         label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),

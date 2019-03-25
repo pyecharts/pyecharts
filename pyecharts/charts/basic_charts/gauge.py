@@ -1,8 +1,8 @@
 # coding=utf-8
 from ... import options as opts
 from ...charts.chart import Chart
-from ...commons.types import ListTuple, Numeric, Union
-from ...consts import ChartType
+from ...commons.types import Sequence, Numeric, Union
+from ...globals import ChartType
 
 
 class Gauge(Chart):
@@ -16,7 +16,7 @@ class Gauge(Chart):
     def add(
         self,
         series_name: str,
-        data_pair: ListTuple,
+        data_pair: Sequence,
         min_: Numeric = 0,
         max_: Numeric = 100,
         start_angle: Numeric = 225,

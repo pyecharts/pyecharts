@@ -2,7 +2,7 @@
 from example.commons import Collector, Faker
 from pyecharts import options as opts
 from pyecharts.charts import Bar, Page
-from pyecharts.consts import ThemeType
+from pyecharts.globals import ThemeType
 
 C = Collector()
 

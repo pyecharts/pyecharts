@@ -1,7 +1,7 @@
 # coding=utf-8
 from ... import options as opts
 from ...charts.chart import Chart
-from ...commons.types import ListTuple, Union
+from ...commons.types import Sequence, Union
 
 
 class Calendar(Chart):
@@ -19,7 +19,7 @@ class Calendar(Chart):
     def add(
         self,
         series_name: str,
-        yaxis_data: ListTuple,
+        yaxis_data: Sequence,
         *,
         label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
         calendar_opts: Union[opts.CalendarOpts, dict, None] = None,
