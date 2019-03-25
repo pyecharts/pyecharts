@@ -1,18 +1,12 @@
 # coding=utf-8
+from example.commons import Collector, Faker
 from pyecharts import options as opts
 from pyecharts.charts import Bar, Grid, Line, Page, Scatter
 
-from example.commons import Faker
-
-charts = []
+C = Collector()
 
 
-def collect_charts(fn):
-    charts.append((fn, fn.__name__))
-    return fn
-
-
-@collect_charts
+@C.funcs
 def grid_vertical() -> Grid:
     bar = (
         Bar()
@@ -40,7 +34,7 @@ def grid_vertical() -> Grid:
     return grid
 
 
-@collect_charts
+@C.funcs
 def grid_horizontal() -> Grid:
     scatter = (
         Scatter()
@@ -71,4 +65,4 @@ def grid_horizontal() -> Grid:
     return grid
 
 
-Page().add(*[fn() for fn, _ in charts]).render()
+Page().add(*[fn() for fn, _ in C.charts]).render()

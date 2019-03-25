@@ -1,18 +1,12 @@
 # coding=utf-8
 import pyecharts.options as opts
+from example.commons import Collector, Faker
 from pyecharts.charts import Line, Page
 
-from example.commons import Faker
-
-charts = []
+C = Collector()
 
 
-def collect_charts(fn):
-    charts.append((fn, fn.__name__))
-    return fn
-
-
-@collect_charts
+@C.funcs
 def line_base() -> Line:
     c = (
         Line()
@@ -24,7 +18,7 @@ def line_base() -> Line:
     return c
 
 
-@collect_charts
+@C.funcs
 def line_smooth() -> Line:
     c = (
         Line()
@@ -36,7 +30,7 @@ def line_smooth() -> Line:
     return c
 
 
-@collect_charts
+@C.funcs
 def line_markpoint() -> Line:
     c = (
         Line()
@@ -56,7 +50,7 @@ def line_markpoint() -> Line:
     return c
 
 
-@collect_charts
+@C.funcs
 def line_markline() -> Line:
     c = (
         Line()
@@ -76,7 +70,7 @@ def line_markline() -> Line:
     return c
 
 
-@collect_charts
+@C.funcs
 def line_step() -> Line:
     c = (
         Line()
@@ -87,4 +81,4 @@ def line_step() -> Line:
     return c
 
 
-Page().add(*[fn() for fn, _ in charts]).render()
+Page().add(*[fn() for fn, _ in C.charts]).render()

@@ -10,11 +10,11 @@ from test.utils import get_default_rendering_file_content
 import numpy as np
 import pandas as pd
 from nose.tools import eq_, raises
+
+from mock import MagicMock, patch
 from pyecharts import Bar, Map, jupyter_image, online
 from pyecharts.commons import exceptions
 from pyecharts.conf import CURRENT_CONFIG
-
-from mock import MagicMock, patch
 
 TITLE = "柱状图数据堆叠示例"
 

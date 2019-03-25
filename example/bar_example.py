@@ -1,18 +1,12 @@
 # coding=utf-8
+from example.commons import Collector, Faker
 from pyecharts import options as opts
 from pyecharts.charts import Bar, Page
 
-from example.commons import Faker
-
-charts = []
+C = Collector()
 
 
-def collect_charts(fn):
-    charts.append((fn, fn.__name__))
-    return fn
-
-
-@collect_charts
+@C.funcs
 def bar_base() -> Bar:
     c = (
         Bar()
@@ -24,7 +18,7 @@ def bar_base() -> Bar:
     return c
 
 
-@collect_charts
+@C.funcs
 def bar_reversal_axis() -> Bar:
     c = (
         Bar()
@@ -38,7 +32,7 @@ def bar_reversal_axis() -> Bar:
     return c
 
 
-@collect_charts
+@C.funcs
 def bar_stack0() -> Bar:
     c = (
         Bar()
@@ -51,7 +45,7 @@ def bar_stack0() -> Bar:
     return c
 
 
-@collect_charts
+@C.funcs
 def bar_stack1() -> Bar:
     c = (
         Bar()
@@ -65,7 +59,7 @@ def bar_stack1() -> Bar:
     return c
 
 
-@collect_charts
+@C.funcs
 def bar_markpoint_type() -> Bar:
     c = (
         Bar()
@@ -87,7 +81,7 @@ def bar_markpoint_type() -> Bar:
     return c
 
 
-@collect_charts
+@C.funcs
 def bar_markpoint_custom() -> Bar:
     x, y = Faker.choose(), Faker.values()
     c = (
@@ -107,7 +101,7 @@ def bar_markpoint_custom() -> Bar:
     return c
 
 
-@collect_charts
+@C.funcs
 def bar_markline_type() -> Bar:
     c = (
         Bar()
@@ -129,7 +123,7 @@ def bar_markline_type() -> Bar:
     return c
 
 
-@collect_charts
+@C.funcs
 def bar_markline_custom() -> Bar:
     c = (
         Bar()
@@ -147,7 +141,7 @@ def bar_markline_custom() -> Bar:
     return c
 
 
-@collect_charts
+@C.funcs
 def bar_datazoom_slider() -> Bar:
     c = (
         Bar()
@@ -161,7 +155,7 @@ def bar_datazoom_slider() -> Bar:
     return c
 
 
-@collect_charts
+@C.funcs
 def bar_datazoom_slider_vertical() -> Bar:
     c = (
         Bar()
@@ -175,7 +169,7 @@ def bar_datazoom_slider_vertical() -> Bar:
     return c
 
 
-@collect_charts
+@C.funcs
 def bar_datazoom_inside() -> Bar:
     c = (
         Bar()
@@ -189,7 +183,7 @@ def bar_datazoom_inside() -> Bar:
     return c
 
 
-@collect_charts
+@C.funcs
 def bar_datazoom_both() -> Bar:
     c = (
         Bar()
@@ -203,7 +197,7 @@ def bar_datazoom_both() -> Bar:
     return c
 
 
-@collect_charts
+@C.funcs
 def bar_histogram() -> Bar:
     c = (
         Bar()
@@ -214,4 +208,4 @@ def bar_histogram() -> Bar:
     return c
 
 
-Page().add(*[fn() for fn, _ in charts]).render()
+Page().add(*[fn() for fn, _ in C.charts]).render()

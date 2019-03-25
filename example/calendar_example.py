@@ -2,18 +2,14 @@
 import datetime
 import random
 
+from example.commons import Collector
 from pyecharts import options as opts
 from pyecharts.charts import Calendar, Page
 
-charts = []
+C = Collector()
 
 
-def collect_charts(fn):
-    charts.append((fn, fn.__name__))
-    return fn
-
-
-@collect_charts
+@C.funcs
 def calendar_base() -> Calendar:
     begin = datetime.date(2017, 1, 1)
     end = datetime.date(2017, 12, 31)
@@ -40,4 +36,4 @@ def calendar_base() -> Calendar:
     return c
 
 
-Page().add(*[fn() for fn, _ in charts]).render()
+Page().add(*[fn() for fn, _ in C.charts]).render()

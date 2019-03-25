@@ -1,19 +1,12 @@
 # coding=utf-8
-import datetime
-import random
-
+from example.commons import Collector
 from pyecharts import options as opts
 from pyecharts.charts import Page, Parallel
 
-charts = []
+C = Collector()
 
 
-def collect_charts(fn):
-    charts.append((fn, fn.__name__))
-    return fn
-
-
-@collect_charts
+@C.funcs
 def parallel_base() -> Parallel:
     data = [
         [1, 91, 45, 125, 0.82, 34],
@@ -46,7 +39,7 @@ def parallel_base() -> Parallel:
     return c
 
 
-@collect_charts
+@C.funcs
 def parallel_category():
     data = [
         [1, 91, 45, 125, 0.82, 34, 23, "良"],
@@ -89,4 +82,4 @@ def parallel_category():
     return c
 
 
-Page().add(*[fn() for fn, _ in charts]).render()
+Page().add(*[fn() for fn, _ in C.charts]).render()

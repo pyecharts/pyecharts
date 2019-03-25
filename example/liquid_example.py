@@ -1,17 +1,13 @@
 # coding=utf-8
+from example.commons import Collector
 from pyecharts import options as opts
 from pyecharts.charts import Liquid, Page
 from pyecharts.consts import SymbolType
 
-charts = []
+C = Collector()
 
 
-def collect_charts(fn):
-    charts.append((fn, fn.__name__))
-    return fn
-
-
-@collect_charts
+@C.funcs
 def liquid_base() -> Liquid:
     c = (
         Liquid()
@@ -21,7 +17,7 @@ def liquid_base() -> Liquid:
     return c
 
 
-@collect_charts
+@C.funcs
 def liquid_without_outline() -> Liquid:
     c = (
         Liquid()
@@ -31,7 +27,7 @@ def liquid_without_outline() -> Liquid:
     return c
 
 
-@collect_charts
+@C.funcs
 def liquid_shape_diamond() -> Liquid:
     c = (
         Liquid()
@@ -41,7 +37,7 @@ def liquid_shape_diamond() -> Liquid:
     return c
 
 
-@collect_charts
+@C.funcs
 def liquid_shape_diamond() -> Liquid:
     c = (
         Liquid()
@@ -51,7 +47,7 @@ def liquid_shape_diamond() -> Liquid:
     return c
 
 
-@collect_charts
+@C.funcs
 def liquid_shape_diamond() -> Liquid:
     c = (
         Liquid()
@@ -61,4 +57,4 @@ def liquid_shape_diamond() -> Liquid:
     return c
 
 
-Page().add(*[fn() for fn, _ in charts]).render()
+Page().add(*[fn() for fn, _ in C.charts]).render()

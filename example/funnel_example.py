@@ -1,18 +1,12 @@
 # coding=utf-8
+from example.commons import Collector, Faker
 from pyecharts import options as opts
 from pyecharts.charts import Funnel, Page
 
-from example.commons import Faker
-
-charts = []
+C = Collector()
 
 
-def collect_charts(fn):
-    charts.append((fn, fn.__name__))
-    return fn
-
-
-@collect_charts
+@C.funcs
 def funnel_base() -> Funnel:
     c = (
         Funnel()
@@ -22,7 +16,7 @@ def funnel_base() -> Funnel:
     return c
 
 
-@collect_charts
+@C.funcs
 def funnel_label_inside() -> Funnel:
     c = (
         Funnel()
@@ -36,7 +30,7 @@ def funnel_label_inside() -> Funnel:
     return c
 
 
-@collect_charts
+@C.funcs
 def funnel_sort_ascending() -> Funnel:
     c = (
         Funnel()
@@ -51,4 +45,4 @@ def funnel_sort_ascending() -> Funnel:
     return c
 
 
-Page().add(*[fn() for fn, _ in charts]).render()
+Page().add(*[fn() for fn, _ in C.charts]).render()

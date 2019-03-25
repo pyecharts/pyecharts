@@ -1,18 +1,12 @@
 # coding=utf-8
+from example.commons import Collector, Faker
 from pyecharts import options as opts
 from pyecharts.charts import Bar, Page, Pie, Timeline
 
-from example.commons import Faker
-
-charts = []
+C = Collector()
 
 
-def collect_charts(fn):
-    charts.append((fn, fn.__name__))
-    return fn
-
-
-@collect_charts
+@C.funcs
 def timeline_bar() -> Timeline:
     x = Faker.choose()
     bar0 = (
@@ -62,7 +56,7 @@ def timeline_bar() -> Timeline:
     return tl
 
 
-@collect_charts
+@C.funcs
 def timeline_pie() -> Timeline:
     attr = Faker.choose()
     pie0 = (
@@ -126,4 +120,4 @@ def timeline_pie() -> Timeline:
     return tl
 
 
-Page().add(*[fn() for fn, _ in charts]).render()
+Page().add(*[fn() for fn, _ in C.charts]).render()

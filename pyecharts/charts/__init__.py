@@ -25,16 +25,16 @@ from ..charts.basic_charts.tree import Tree
 from ..charts.basic_charts.treemap import TreeMap
 from ..charts.basic_charts.wordcloud import WordCloud
 
+# Composite Charts
+from ..charts.composite_charts.grid import Grid
+from ..charts.composite_charts.page import Page
+from ..charts.composite_charts.timeline import Timeline
+
 # 3d charts
 from ..charts.threeD_charts.bar3D import Bar3D
 from ..charts.threeD_charts.line3D import Line3D
 from ..charts.threeD_charts.scatter3D import Scatter3D
 from ..charts.threeD_charts.surface3D import Surface3D
-
-# Composite Charts
-from ..charts.composite_charts.grid import Grid
-from ..charts.composite_charts.timeline import Timeline
-from ..charts.composite_charts.page import Page
 
 # alias
 Candlestick = Kline

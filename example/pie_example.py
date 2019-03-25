@@ -1,18 +1,12 @@
 # coding=utf-8
+from example.commons import Collector, Faker
 from pyecharts import options as opts
 from pyecharts.charts import Page, Pie
 
-from example.commons import Faker
-
-charts = []
+C = Collector()
 
 
-def collect_charts(fn):
-    charts.append((fn, fn.__name__))
-    return fn
-
-
-@collect_charts
+@C.funcs
 def pie_base() -> Pie:
     c = (
         Pie()
@@ -23,7 +17,7 @@ def pie_base() -> Pie:
     return c
 
 
-@collect_charts
+@C.funcs
 def pie_radius() -> Pie:
     c = (
         Pie()
@@ -34,14 +28,16 @@ def pie_radius() -> Pie:
         )
         .set_global_opts(
             title_opts=opts.TitleOpts(title="Pie-Radius"),
-            legend_opts=opts.LegendOpts(orient="vertical", top="15%", left="2%"),
+            legend_opts=opts.LegendOpts(
+                orient="vertical", pos_top="15%", pos_left="2%"
+            ),
         )
         .set_series_opts(label_opts=opts.LabelOpts(formatter="{b}: {c}"))
     )
     return c
 
 
-@collect_charts
+@C.funcs
 def pie_rosetype() -> Pie:
     v = Faker.choose()
     c = (
@@ -66,4 +62,4 @@ def pie_rosetype() -> Pie:
     return c
 
 
-Page().add(*[fn() for fn, _ in charts]).render()
+Page().add(*[fn() for fn, _ in C.charts]).render()
