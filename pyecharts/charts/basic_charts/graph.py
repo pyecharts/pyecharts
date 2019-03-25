@@ -1,7 +1,7 @@
 # coding=utf-8
 from ... import options as opts
 from ...charts.chart import Chart
-from ...commons.types import Numeric, Optional, Union
+from ...commons.types import List, Numeric, Optional, Union
 from ...globals import ChartType
 
 
@@ -18,9 +18,9 @@ class Graph(Chart):
     def add(
         self,
         series_name: str,
-        nodes,
-        links,
-        categories=None,
+        nodes: List[Union[opts.GraphNode, dict]],
+        links: List[Union[opts.GraphLink, dict]],
+        categories: Union[List[Union[opts.GraphCategory, dict]], None] = None,
         is_focusnode: bool = True,
         is_roam: bool = True,
         is_rotate_label: bool = False,
@@ -42,8 +42,22 @@ class Graph(Chart):
         if isinstance(tooltip_opts, opts.TooltipOpts):
             tooltip_opts = tooltip_opts.opts
 
+        _nodes = []
+        for n in nodes:
+            if isinstance(n, opts.GraphNode):
+                n = n.opts
+            _nodes.append(n)
+
+        _links = []
+        for l in links:
+            if isinstance(l, opts.GraphLink):
+                l = l.opts
+            _links.append(l)
+
         if categories:
             for c in categories:
+                if isinstance(c, opts.GraphCategory):
+                    c = c.opts
                 self._append_legend(c)
 
         if edge_symbol is None:
@@ -65,11 +79,11 @@ class Graph(Chart):
                 "lineStyle": linestyle_opts,
                 "roam": is_roam,
                 "focusNodeAdjacency": is_focusnode,
-                "data": nodes,
+                "data": _nodes,
                 "categories": categories,
                 "edgeSymbol": edge_symbol,
                 "edgeSymbolSize": edge_symbol_size,
-                "links": links,
+                "links": _links,
                 "tooltip": tooltip_opts,
             }
         )

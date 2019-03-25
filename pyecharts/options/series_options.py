@@ -1,5 +1,5 @@
 # coding=utf-8
-from pyecharts.commons.types import List, Numeric, Optional, Sequence, Union
+from ..commons.types import List, Numeric, Optional, Sequence, Union
 
 
 class LabelOpts:
@@ -249,11 +249,78 @@ class TextStyleOpts:
 #     elif symbol not in SYMBOLS:
 #         symbol = "circle"
 #     return symbol
-#
-#
-# def calendar(calendar_date_range=None, calendar_cell_size=None, **kwargs):
-#     if calendar_cell_size is None:
-#         calendar_cell_size = ["auto", 20]
-#
-#     _calendar = {"range": calendar_date_range, "cellSize": calendar_cell_size}
-#     return _calendar
+
+
+class GraphNode:
+    def __init__(
+        self,
+        name: Optional[str] = None,
+        x: Optional[Numeric] = None,
+        y: Optional[Numeric] = None,
+        is_fixed: bool = False,
+        value: Union[str, Sequence, None] = None,
+        category: Optional[int] = None,
+        symbol: Optional[str] = None,
+        symbol_size: Union[Numeric, Sequence, None] = None,
+        label_opts: Optional[LabelOpts] = None,
+    ):
+        if isinstance(label_opts, LabelOpts):
+            label_opts = label_opts.opts
+
+        self.opts: dict = {
+            "name": name,
+            "x": x,
+            "y": y,
+            "fixed": is_fixed,
+            "value": value,
+            "category": category,
+            "symbol": symbol,
+            "symbolSize": symbol_size,
+            "label": label_opts,
+        }
+
+
+class GraphLink:
+    def __init__(
+        self,
+        source: Union[str, int, None] = None,
+        target: Union[str, int, None] = None,
+        value: Optional[Numeric] = None,
+        symbol: Union[str, Sequence, None] = None,
+        symbol_size: Union[Numeric, Sequence, None] = None,
+        linestyle_opts: Optional[LineStyleOpts] = None,
+        label_opts: Optional[LabelOpts] = None,
+    ):
+        if isinstance(linestyle_opts, LineStyleOpts):
+            linestyle_opts = linestyle_opts.opts
+        if isinstance(label_opts, LabelOpts):
+            label_opts = label_opts.opts
+
+        self.opts: dict = {
+            "source": source,
+            "target": target,
+            "value": value,
+            "symbol": symbol,
+            "symbolSize": symbol_size,
+            "lineStyle": linestyle_opts,
+            "label": label_opts,
+        }
+
+
+class GraphCategory:
+    def __init__(
+        self,
+        name: Optional[str] = None,
+        symbol: Optional[str] = None,
+        symbol_size: Union[Numeric, Sequence, None] = None,
+        label_opts: Optional[LabelOpts] = None,
+    ):
+        if isinstance(label_opts, LabelOpts):
+            label_opts = label_opts.opts
+
+        self.opts: dict = {
+            "name": name,
+            "symbol": symbol,
+            "symbolSize": symbol_size,
+            "label": label_opts,
+        }

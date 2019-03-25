@@ -1,6 +1,12 @@
 # coding=utf-8
+from ..commons.types import List, Numeric, Optional, Sequence, Union
 from ..globals import *
-from ..options.series_options import *
+from ..options.series_options import (
+    LabelOpts,
+    LineStyleOpts,
+    SplitLineOpts,
+    TextStyleOpts,
+)
 
 
 class InitOpts:
