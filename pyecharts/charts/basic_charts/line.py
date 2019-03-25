@@ -1,8 +1,8 @@
 # coding=utf-8
 from ... import options as opts
 from ...charts.chart import AxisChart
-from ...commons.types import ListTuple, Numeric, Optional, Union
-from ...consts import ChartType
+from ...commons.types import Sequence, Numeric, Optional, Union
+from ...globals import ChartType
 
 
 class Line(AxisChart):
@@ -19,7 +19,7 @@ class Line(AxisChart):
     def add_yaxis(
         self,
         series_name: str,
-        y_axis: ListTuple,
+        y_axis: Sequence,
         *,
         xaxis_index: Optional[Numeric] = None,
         yaxis_index: Optional[Numeric] = None,

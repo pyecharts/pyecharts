@@ -3,8 +3,8 @@ import random
 
 from ... import options as opts
 from ...charts.chart import Chart
-from ...commons.types import ListTuple, Numeric, Union
-from ...consts import ChartType
+from ...commons.types import Sequence, Numeric, Union
+from ...globals import ChartType
 
 SHAPES = ("cardioid", "diamond", "triangle-forward", "triangle", "pentagon", "star")
 
@@ -32,7 +32,7 @@ class WordCloud(Chart):
     def add(
         self,
         series_name: str,
-        data_pair: ListTuple,
+        data_pair: Sequence,
         shape: str = "circle",
         word_gap: Numeric = 20,
         word_size_range=None,

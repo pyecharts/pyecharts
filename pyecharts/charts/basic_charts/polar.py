@@ -1,7 +1,7 @@
 # coding=utf-8
 from ... import options as opts
 from ...charts.chart import Chart
-from ...commons.types import ListTuple, Numeric, Optional, Union
+from ...commons.types import Sequence, Numeric, Optional, Union
 
 
 class Polar(Chart):
@@ -17,7 +17,7 @@ class Polar(Chart):
     def add(
         self,
         series_name: str,
-        data: ListTuple,
+        data: Sequence,
         angle_data=None,
         radius_data=None,
         type_: str = "line",

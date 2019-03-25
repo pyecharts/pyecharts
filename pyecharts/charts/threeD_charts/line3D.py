@@ -1,5 +1,4 @@
 # coding=utf-8
-
 from ...charts.chart import Chart3D
 from ...commons.types import Union
 from ...options import InitOpts

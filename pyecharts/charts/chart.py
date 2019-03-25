@@ -3,8 +3,8 @@ import copy
 
 from .. import options as opts
 from ..charts.base import Base
-from ..commons.types import List, ListTuple, Numeric, Optional, Union
-from ..consts import RenderType
+from ..commons.types import List, Sequence, Numeric, Optional, Union
+from ..globals import RenderType
 
 COLORS = [
     "#c23531",
@@ -182,7 +182,7 @@ class AxisChart(Chart):
             self.options["yAxis"].append(yaxis)
         return self
 
-    def add_xaxis(self, xaxis_data: ListTuple):
+    def add_xaxis(self, xaxis_data: Sequence):
         self.options.update(xAxis=[opts.AxisOpts().opts])
         self.options["xAxis"][0].update(data=xaxis_data)
         self._xaxis_data = xaxis_data
@@ -211,7 +211,7 @@ class Chart3D(Chart):
     def add(
         self,
         name: str,
-        data: ListTuple,
+        data: Sequence,
         opacity: Numeric = 1,
         shading: Optional[str] = None,
         label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(is_show=False),

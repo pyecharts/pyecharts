@@ -1,8 +1,8 @@
 # coding=utf-8
 from ... import options as opts
 from ...charts.chart import Chart
-from ...commons.types import ListTuple, Union
-from ...consts import ChartType
+from ...commons.types import Sequence, Union
+from ...globals import ChartType
 
 
 class ThemeRiver(Chart):
@@ -18,7 +18,7 @@ class ThemeRiver(Chart):
     def add(
         self,
         series_name: str,
-        data: ListTuple,
+        data: Sequence,
         label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
         tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
     ):

@@ -1,8 +1,8 @@
 # coding=utf-8
 from ... import options as opts
 from ...charts.chart import Chart
-from ...commons.types import List, ListTuple, Union
-from ...consts import ChartType
+from ...commons.types import List, Sequence, Union
+from ...globals import ChartType
 
 
 class Parallel(Chart):
@@ -27,7 +27,7 @@ class Parallel(Chart):
     def add(
         self,
         series_name: str,
-        data: ListTuple,
+        data: Sequence,
         linestyle_opts: Union[opts.LineStyleOpts, dict] = opts.LineStyleOpts(),
         tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
     ):

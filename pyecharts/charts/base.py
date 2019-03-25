@@ -7,7 +7,7 @@ from jinja2 import Environment
 
 from ..commons import utils
 from ..commons.types import Optional, Union
-from ..consts import BUILTIN_THEMES, ONLINE_HOST
+from ..globals import BUILTIN_THEMES, ONLINE_HOST
 from ..options import InitOpts
 from ..render.engine import RenderEngine
 

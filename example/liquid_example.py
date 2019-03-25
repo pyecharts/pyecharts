@@ -2,7 +2,7 @@
 from example.commons import Collector
 from pyecharts import options as opts
 from pyecharts.charts import Liquid, Page
-from pyecharts.consts import SymbolType
+from pyecharts.globals import SymbolType
 
 C = Collector()
 
