@@ -9,19 +9,6 @@ from pyecharts import Funnel
 prices = [20, 40, 60, 80, 100, 120]
 
 
-def test_funnel_labelpos_inside():
-    funnel = Funnel("漏斗图示例")
-    funnel.add(
-        "商品",
-        CLOTHES,
-        prices,
-        is_label_show=True,
-        label_pos="inside",
-        label_text_color="#fff",
-    )
-    funnel.render()
-
-
 def test_funnel_other_style():
     funnel = Funnel("漏斗图示例", title_pos="center")
     funnel.add(

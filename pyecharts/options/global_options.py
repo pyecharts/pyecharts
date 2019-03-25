@@ -1,6 +1,6 @@
 # coding=utf-8
 from ..commons.types import List, Numeric, Optional, Sequence, Union
-from ..globals import *
+from ..globals import RenderType
 from ..options.series_options import (
     LabelOpts,
     LineStyleOpts,

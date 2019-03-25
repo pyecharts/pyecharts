@@ -23,15 +23,6 @@ def test_polar_type_scatter_one():
     assert '"type": "scatter"' in polar._repr_html_()
 
 
-def test_polar_type_scatter_more():
-    data_1 = [(10, random.randint(1, 100)) for i in range(300)]
-    data_2 = [(11, random.randint(1, 100)) for i in range(300)]
-    polar = Polar("极坐标系-散点图示例", width=1200, height=600)
-    polar.add("", data_1, type="scatter")
-    polar.add("", data_2, type="scatter")
-    polar.render()
-
-
 def test_polar_type_effectscatter():
     data = [(i, random.randint(1, 100)) for i in range(10)]
     polar = Polar("极坐标系-动态散点图示例", width=1200, height=600)

@@ -51,7 +51,7 @@ class LineStyleOpts:
         self.opts: dict = {
             "width": width,
             "opacity": opacity,
-            "curve": curve,
+            "curveness": curve,
             "type": type_,
             "color": color,
         }

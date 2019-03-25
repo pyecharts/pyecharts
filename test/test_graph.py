@@ -20,16 +20,6 @@ nodes = [
 ]
 
 
-def test_graph_force_layout():
-    links = []
-    for i in nodes:
-        for j in nodes:
-            links.append({"source": i.get("name"), "target": j.get("name")})
-    graph = Graph("关系图-力引导布局示例")
-    graph.add("", nodes, links, repulsion=8000, line_color="#aaa")
-    graph.render()
-
-
 def test_graph_circular_layout():
     links = []
     for i in nodes:

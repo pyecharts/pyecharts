@@ -12,13 +12,6 @@ clothes_v1 = [5, 20, 36, 10, 10, 100]
 clothes_v2 = [55, 60, 16, 20, 15, 80]
 
 
-def test_line_marks():
-    line = Line("折线图示例")
-    line.add("商家A", CLOTHES, clothes_v1, mark_point=["average"])
-    line.add("商家B", CLOTHES, clothes_v2, is_smooth=True, mark_line=["max", "average"])
-    line.render()
-
-
 def test_line_user_define_markpoint():
     line = Line("折线图示例")
     line.add(
@@ -61,32 +54,6 @@ def test_line_user_define_marks():
     assert '"symbolSize":50' not in line._repr_html_()
 
 
-def test_line_negative_value():
-    line = Line("折线图示例")
-    line.add(
-        "最高气温",
-        WEEK,
-        [11, 11, 15, 13, 12, 13, 10],
-        mark_point=["max", "min"],
-        mark_line=["average"],
-    )
-    line.add(
-        "最低气温",
-        WEEK,
-        [1, -2, 2, 5, 3, 2, 0],
-        mark_point=["max", "min"],
-        mark_line=["average"],
-    )
-    line.render()
-
-
-def test_line_type_stack():
-    line = Line("折线图-数据堆叠示例")
-    line.add("商家A", CLOTHES, clothes_v1, is_stack=True, is_label_show=True)
-    line.add("商家B", CLOTHES, clothes_v2, is_stack=True, is_label_show=True)
-    line.render()
-
-
 def test_line_type_step():
     line = Line("折线图-阶梯图示例")
     line.add("商家A", CLOTHES, clothes_v1, is_step=True, is_label_show=True)
@@ -114,18 +81,6 @@ def test_line_type_fill():
         is_smooth=True,
     )
     assert '"step": true' not in line._repr_html_()
-
-
-def test_line_log_yaxis():
-    line = Line("折线图示例")
-    line.add("商家A", CLOTHES, [math.log10(random.randint(1, 99999)) for _ in range(6)])
-    line.add(
-        "商家B",
-        CLOTHES,
-        [math.log10(random.randint(1, 99999999)) for _ in range(6)],
-        yaxis_type="log",
-    )
-    line.render()
 
 
 def test_line_mark_point_raw():

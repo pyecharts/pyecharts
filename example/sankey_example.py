@@ -1,4 +1,7 @@
 # coding=utf-8
+import json
+import os
+
 from example.commons import Collector
 from pyecharts import options as opts
 from pyecharts.charts import Page, Sankey
@@ -35,6 +38,24 @@ def sankey_base() -> Sankey:
         .set_global_opts(title_opts=opts.TitleOpts(title="Sankey-基本示例"))
     )
 
+    return c
+
+
+@C.funcs
+def sankey_offical() -> Sankey:
+    with open(os.path.join("fixtures", "energy.json"), "r", encoding="utf-8") as f:
+        j = json.load(f)
+    c = (
+        Sankey()
+        .add(
+            "sankey",
+            nodes=j["nodes"],
+            links=j["links"],
+            linestyle_opt=opts.LineStyleOpts(opacity=0.2, curve=0.5, color="source"),
+            label_opts=opts.LabelOpts(position="right"),
+        )
+        .set_global_opts(title_opts=opts.TitleOpts(title="Sankey-官方示例"))
+    )
     return c
 
 
