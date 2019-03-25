@@ -282,19 +282,6 @@ class AxisOpts:
             "axisLine": {"lineStyle": linestyle_opts},
         }
 
-        # if is_convert:
-        #     xaxis_type, yaxis_type = _yAxis["type"], _xAxis["type"]
-        #     _xAxis["type"] = xaxis_type
-        #     _yAxis.update(data=x_axis, type=yaxis_type)
-        # else:
-        #     _xAxis["data"] = x_axis
-        #
-        # # 强制分割数值轴，在多 x、y 轴中可以使用强制分割使标刻线对齐
-        # if xaxis_force_interval is not None:
-        #     _xAxis["interval"] = xaxis_force_interval
-        # if yaxis_force_interval is not None:
-        #     _yAxis["interval"] = yaxis_force_interval
-
 
 class GridOpts:
     def __init__(
@@ -341,7 +328,7 @@ class Grid3DOpts:
 class Axis3DOpts:
     def __init__(
         self,
-        data: ListTuple = None,
+        data: Sequence = None,
         type_: Optional[str] = None,
         name: Optional[str] = None,
         name_size: Numeric = 16,
@@ -381,12 +368,12 @@ class ParallelOpts:
         }
 
 
-class ParallelSchemaOpts:
+class ParallelAxisOpts:
     def __init__(
         self,
         dim: Numeric,
         name: str,
-        data: ListTuple = None,
+        data: Sequence = None,
         type_: Optional[str] = None,
         min_: Union[str, Numeric, None] = None,
         max_: Union[str, Numeric, None] = None,
@@ -422,7 +409,7 @@ class CalendarOpts:
         pos_right: Optional[str] = None,
         pos_bottom: Optional[str] = None,
         orient: Optional[str] = None,
-        range_: Union[str, ListTuple, int] = None,
+        range_: Union[str, Sequence, int] = None,
         daylabel_opts: Union[LabelOpts, dict, None] = None,
         monthlabel_opts: Union[LabelOpts, dict, None] = None,
         yearlabel_opts: Union[LabelOpts, dict, None] = None,
@@ -444,4 +431,34 @@ class CalendarOpts:
             "dayLabel": daylabel_opts,
             "monthLabel": monthlabel_opts,
             "yearLabel": yearlabel_opts,
+        }
+
+
+class SingleAxisOpts:
+    def __init__(
+        self,
+        name: Optional[str] = None,
+        max_: Union[str, Numeric, None] = None,
+        min_: Union[str, Numeric, None] = None,
+        pos_left: Optional[str] = None,
+        pos_right: Optional[str] = None,
+        pos_top: Optional[str] = None,
+        pos_bottom: Optional[str] = None,
+        width: Optional[str] = None,
+        height: Optional[str] = None,
+        orient: Optional[str] = None,
+        type_: Optional[str] = None,
+    ):
+        self.opts: dict = {
+            "name": name,
+            "max": max_,
+            "min": min_,
+            "left": pos_left,
+            "right": pos_right,
+            "top": pos_top,
+            "bottom": pos_bottom,
+            "width": width,
+            "height": height,
+            "orient": orient,
+            "type": type_,
         }

@@ -16,9 +16,9 @@ def bar3d_base() -> Bar3D:
         .add(
             "",
             [[d[1], d[0], d[2]] for d in data],
-            xaxis3d=opts.Axis3DOpts(Faker.clock, type_="category"),
-            yaxis3d=opts.Axis3DOpts(Faker.week_en, type_="category"),
-            zaxis3d=opts.Axis3DOpts(type_="value"),
+            xaxis3d_opts=opts.Axis3DOpts(Faker.clock, type_="category"),
+            yaxis3d_opts=opts.Axis3DOpts(Faker.week_en, type_="category"),
+            zaxis3d_opts=opts.Axis3DOpts(type_="value"),
         )
         .set_global_opts(
             visualmap_opts=opts.VisualMapOpts(max_=20),

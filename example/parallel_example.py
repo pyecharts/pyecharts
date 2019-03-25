@@ -40,7 +40,7 @@ def parallel_base() -> Parallel:
 
 
 @C.funcs
-def parallel_category():
+def parallel_category() -> Parallel:
     data = [
         [1, 91, 45, 125, 0.82, 34, 23, "良"],
         [2, 65, 27, 78, 0.86, 45, 29, "良"],
@@ -61,14 +61,14 @@ def parallel_category():
         Parallel()
         .add_schema(
             [
-                opts.ParallelSchemaOpts(dim=0, name="data"),
-                opts.ParallelSchemaOpts(dim=1, name="AQI"),
-                opts.ParallelSchemaOpts(dim=2, name="PM2.5"),
-                opts.ParallelSchemaOpts(dim=3, name="PM10"),
-                opts.ParallelSchemaOpts(dim=4, name="CO"),
-                opts.ParallelSchemaOpts(dim=5, name="NO2"),
-                opts.ParallelSchemaOpts(dim=6, name="CO2"),
-                opts.ParallelSchemaOpts(
+                opts.ParallelAxisOpts(dim=0, name="data"),
+                opts.ParallelAxisOpts(dim=1, name="AQI"),
+                opts.ParallelAxisOpts(dim=2, name="PM2.5"),
+                opts.ParallelAxisOpts(dim=3, name="PM10"),
+                opts.ParallelAxisOpts(dim=4, name="CO"),
+                opts.ParallelAxisOpts(dim=5, name="NO2"),
+                opts.ParallelAxisOpts(dim=6, name="CO2"),
+                opts.ParallelAxisOpts(
                     dim=7,
                     name="等级",
                     type_="category",

@@ -22,7 +22,7 @@ def overlap_bar_line() -> Bar:
         .set_series_opts(label_opts=opts.LabelOpts(is_show=False))
         .set_global_opts(
             title_opts=opts.TitleOpts(title="Grid-bar+line"),
-            yaxis_opt=opts.AxisOpts(formatter="{value} ml"),
+            yaxis_opts=opts.AxisOpts(formatter="{value} ml"),
         )
     )
 

@@ -4,47 +4,6 @@ import random
 
 from pyecharts.render import make_snapshot
 
-RANGE_COLOR = [
-    "#313695",
-    "#4575b4",
-    "#74add1",
-    "#abd9e9",
-    "#e0f3f8",
-    "#ffffbf",
-    "#fee090",
-    "#fdae61",
-    "#f46d43",
-    "#d73027",
-    "#a50026",
-]
-
-X_TIME = [
-    "12a",
-    "1a",
-    "2a",
-    "3a",
-    "4a",
-    "5a",
-    "6a",
-    "7a",
-    "8a",
-    "9a",
-    "10a",
-    "11a",
-    "12p",
-    "1p",
-    "2p",
-    "3p",
-    "4p",
-    "5p",
-    "6p",
-    "7p",
-    "8p",
-    "9p",
-    "10p",
-    "11p",
-]
-
 
 def render_chart_images(charts: list):
     for fn, name in charts:
@@ -77,6 +36,16 @@ class _Faker:
     ]
     months = ["{}月".format(i) for i in range(1, 13)]
     provinces = ["广东", "北京", "上海", "江西", "湖南", "浙江", "江苏"]
+    guangdong_city = ["汕头市", "汕尾市", "揭阳市", "阳江市", "肇庆市", "广州市", "惠州市"]
+    country = [
+        "China",
+        "Canada",
+        "Brazil",
+        "Russia",
+        "United States",
+        "Africa",
+        "Germany",
+    ]
     days_attrs = ["{}天".format(i) for i in range(30)]
     days_values = [random.randint(1, 30) for _ in range(30)]
 

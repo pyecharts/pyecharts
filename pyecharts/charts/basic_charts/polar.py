@@ -1,7 +1,7 @@
 # coding=utf-8
 from ... import options as opts
 from ...charts.chart import Chart
-from ...commons.types import Sequence, Numeric, Optional, Union
+from ...commons.types import Numeric, Optional, Sequence, Union
 
 
 class Polar(Chart):

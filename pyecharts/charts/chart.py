@@ -1,38 +1,8 @@
 # coding=utf-8
-import copy
-
 from .. import options as opts
 from ..charts.base import Base
-from ..commons.types import List, Sequence, Numeric, Optional, Union
+from ..commons.types import List, Numeric, Optional, Sequence, Union
 from ..globals import RenderType
-
-COLORS = [
-    "#c23531",
-    "#2f4554",
-    "#61a0a8",
-    "#d48265",
-    "#749f83",
-    "#ca8622",
-    "#bda29a",
-    "#6e7074",
-    "#546570",
-    "#c4ccd3",
-    "#f05b72",
-    "#ef5b9c",
-    "#f47920",
-    "#905a3d",
-    "#fab27b",
-    "#2a5caa",
-    "#444693",
-    "#726930",
-    "#b2d235",
-    "#6d8346",
-    "#ac6767",
-    "#1d953f",
-    "#6950a1",
-    "#918597",
-    "#f6f5ec",
-]
 
 
 class Chart(Base):
@@ -42,10 +12,16 @@ class Chart(Base):
 
     def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):
         super().__init__(init_opts=init_opts)
-        self._colors = copy.deepcopy(COLORS)
+        self._colors = (
+            "#c23531 #2f4554 #61a0a8 #d48265 #749f83 #ca8622 #bda29a #6e7074 "
+            "#546570 #c4ccd3 #f05b72 #ef5b9c #f47920 #905a3d #fab27b #2a5caa "
+            "#444693 #726930 #b2d235 #6d8346 #ac6767 #1d953f #6950a1 #918597"
+        ).split()
         if init_opts.theme == "white":
             self.options.update(color=self._colors)
-        self.options.update(series=[], legend=[{"data": []}])
+        self.options.update(
+            series=[], legend=[{"data": []}], tooltip=opts.TooltipOpts().opts
+        )
 
     def set_series_opts(
         self,
@@ -116,8 +92,8 @@ class Chart(Base):
         tooltip_opts: Union[opts.TooltipOpts, dict] = opts.TooltipOpts(),
         legend_opts: Union[opts.LegendOpts, dict] = opts.LegendOpts(),
         toolbox_opts: Union[opts.ToolboxOpts, dict] = None,
-        xaxis_opt: Union[opts.AxisOpts, dict, None] = None,
-        yaxis_opt: Union[opts.AxisOpts, dict, None] = None,
+        xaxis_opts: Union[opts.AxisOpts, dict, None] = None,
+        yaxis_opts: Union[opts.AxisOpts, dict, None] = None,
         visualmap_opts: Union[opts.VisualMapOpts, dict, None] = None,
         datazoom_opts: List[Union[opts.DataZoomOpts, dict, None]] = None,
     ):
@@ -142,15 +118,15 @@ class Chart(Base):
         for _s in self.options["legend"]:
             _s.update(legend_opts)
 
-        if xaxis_opt and self.options.get("xAxis", None):
-            if isinstance(xaxis_opt, opts.AxisOpts):
-                xaxis_opt = xaxis_opt.opts
+        if xaxis_opts and self.options.get("xAxis", None):
+            if isinstance(xaxis_opts, opts.AxisOpts):
+                xaxis_opt = xaxis_opts.opts
                 for x in self.options["xAxis"]:
                     x.update(xaxis_opt)
 
-        if yaxis_opt and self.options.get("yAxis", None):
-            if isinstance(yaxis_opt, opts.AxisOpts):
-                yaxis_opt = yaxis_opt.opts
+        if yaxis_opts and self.options.get("yAxis", None):
+            if isinstance(yaxis_opts, opts.AxisOpts):
+                yaxis_opt = yaxis_opts.opts
                 for y in self.options["yAxis"]:
                     y.update(yaxis_opt)
 
@@ -215,25 +191,28 @@ class Chart3D(Chart):
         opacity: Numeric = 1,
         shading: Optional[str] = None,
         label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(is_show=False),
-        xaxis3d: Union[opts.Axis3DOpts, dict] = opts.Axis3DOpts(type_="category"),
-        yaxis3d: Union[opts.Axis3DOpts, dict] = opts.Axis3DOpts(type_="category"),
-        zaxis3d: Union[opts.Axis3DOpts, dict] = opts.Axis3DOpts(type_="value"),
+        xaxis3d_opts: Union[opts.Axis3DOpts, dict] = opts.Axis3DOpts(type_="category"),
+        yaxis3d_opts: Union[opts.Axis3DOpts, dict] = opts.Axis3DOpts(type_="category"),
+        zaxis3d_opts: Union[opts.Axis3DOpts, dict] = opts.Axis3DOpts(type_="value"),
+        grid3d_opts: Union[opts.Grid3DOpts, dict] = opts.Grid3DOpts(),
     ):
         if isinstance(label_opts, opts.LabelOpts):
             label_opts = label_opts.opts
-        if isinstance(xaxis3d, opts.Axis3DOpts):
-            xaxis3d = xaxis3d.opts
-        if isinstance(yaxis3d, opts.Axis3DOpts):
-            yaxis3d = yaxis3d.opts
-        if isinstance(zaxis3d, opts.Axis3DOpts):
-            zaxis3d = zaxis3d.opts
+        if isinstance(xaxis3d_opts, opts.Axis3DOpts):
+            xaxis3d_opts = xaxis3d_opts.opts
+        if isinstance(yaxis3d_opts, opts.Axis3DOpts):
+            yaxis3d_opts = yaxis3d_opts.opts
+        if isinstance(zaxis3d_opts, opts.Axis3DOpts):
+            zaxis3d_opts = zaxis3d_opts.opts
+        if isinstance(grid3d_opts, opts.Grid3DOpts):
+            grid3d_opts = grid3d_opts.opts
 
         self.options.get("legend")[0].get("data").append(name)
         self.options.update(
-            xAxis3D=xaxis3d,
-            yAxis3D=yaxis3d,
-            zAxis3D=zaxis3d,
-            grid3D=opts.Grid3DOpts().opts,
+            xAxis3D=xaxis3d_opts,
+            yAxis3D=yaxis3d_opts,
+            zAxis3D=zaxis3d_opts,
+            grid3D=grid3d_opts,
         )
 
         self.options.get("series").append(

@@ -15,10 +15,10 @@ class Parallel(Chart):
     def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):
         super().__init__(init_opts=init_opts)
 
-    def add_schema(self, schema: List[Union[opts.ParallelSchemaOpts, dict]]):
+    def add_schema(self, schema: List[Union[opts.ParallelAxisOpts, dict]]):
         sc = []
         for s in schema:
-            if isinstance(s, opts.ParallelSchemaOpts):
+            if isinstance(s, opts.ParallelAxisOpts):
                 s = s.opts
             sc.append(s)
         self.options.update(parallelAxis=sc)

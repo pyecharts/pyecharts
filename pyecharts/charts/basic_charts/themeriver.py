@@ -17,17 +17,22 @@ class ThemeRiver(Chart):
 
     def add(
         self,
-        series_name: str,
+        series_name: Sequence,
         data: Sequence,
         label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
         tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
+        singleaxis_opts: Union[opts.SingleAxisOpts, dict] = opts.SingleAxisOpts(),
     ):
         if isinstance(label_opts, opts.LabelOpts):
             label_opts = label_opts.opts
         if isinstance(tooltip_opts, opts.TooltipOpts):
             tooltip_opts = tooltip_opts.opts
+        if isinstance(singleaxis_opts, opts.SingleAxisOpts):
+            singleaxis_opts = singleaxis_opts.opts
 
-        self._append_legend(series_name)
+        for n in series_name:
+            self._append_legend(n)
+
         self.options.get("series").append(
             {
                 "type": ChartType.THEMERIVER,
@@ -38,6 +43,6 @@ class ThemeRiver(Chart):
             }
         )
 
-        self.options.update(singleAxis={"type": "time"})
+        self.options.update(singleAxis=singleaxis_opts)
         self.options.get("tooltip").update(trigger="axis")
         return self
