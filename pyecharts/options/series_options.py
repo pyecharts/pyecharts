@@ -1,5 +1,5 @@
 # coding=utf-8
-from pyecharts.commons.types import List, Sequence, Numeric, Optional, Union
+from pyecharts.commons.types import List, Numeric, Optional, Sequence, Union
 
 
 class LabelOpts:
@@ -27,7 +27,6 @@ class LabelOpts:
             "formatter": formatter,
         }
 
-        # 特殊的 hack 实现应该放到具体的文件中
         # if chart_type != "graph":
         #     if formatter is None:
         #         if chart_type == "pie":

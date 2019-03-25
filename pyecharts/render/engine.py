@@ -7,8 +7,8 @@ from jinja2 import Environment, FileSystemLoader
 from pyecharts.commons.types import Any, Optional
 
 from ..commons.utils import write_utf8_html_file
-from ..globals import ONLINE_HOST
 from ..datasets import FILENAMES
+from ..globals import ONLINE_HOST
 
 __HERE = os.path.abspath(os.path.dirname(__file__))
 

@@ -4,9 +4,9 @@ import json
 from ... import options as opts
 from ...charts.chart import Chart
 from ...commons import utils
-from ...commons.types import List, Sequence, Numeric, Optional, Union
-from ...globals import ChartType, TooltipFormatterType
+from ...commons.types import List, Numeric, Optional, Sequence, Union
 from ...datasets import COORDINATES
+from ...globals import ChartType, TooltipFormatterType
 
 
 class Geo(Chart):
