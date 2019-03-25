@@ -21,6 +21,7 @@ class Graph(Chart):
         nodes: List[Union[opts.GraphNode, dict]],
         links: List[Union[opts.GraphLink, dict]],
         categories: Union[List[Union[opts.GraphCategory, dict]], None] = None,
+        *,
         is_focusnode: bool = True,
         is_roam: bool = True,
         is_rotate_label: bool = False,

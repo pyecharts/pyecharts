@@ -8,21 +8,6 @@ from pyecharts import NULL, Bar, EffectScatter, Kline, Line, Overlap, Scatter
 from pyecharts.javascripthon.dom import JsValue
 
 
-def test_overlap_bar_line():
-    attr = ["A", "B", "C", "D", "E", "F"]
-    v1 = [10, 20, 30, 40, 50, 60]
-    v2 = [38, 28, 58, 48, 78, 68]
-    bar = Bar("Line-Bar 示例")
-    bar.add("bar", attr, v1)
-    line = Line()
-    line.add("line", attr, v2)
-
-    overlap = Overlap()
-    overlap.add(bar)
-    overlap.add(line)
-    overlap.render()
-
-
 def test_overlap_es_scatter():
     v1 = [10, 20, 30, 40, 50, 60]
     v2 = [30, 30, 30, 30, 30, 30]
@@ -109,19 +94,6 @@ def test_overlap_two_yaxis():
     overlap = Overlap()
     overlap.add(bar)
     overlap.add(line, yaxis_index=1, is_add_yaxis=True)
-    overlap.render()
-
-
-def test_line_es():
-    v1 = [5, 20, 36, 10, 10, 100]
-    line = Line("line-EffectScatter 示例")
-    line.add("", CLOTHES, v1, is_random=True)
-    es = EffectScatter()
-    es.add("", CLOTHES, v1, effect_scale=8)
-
-    overlap = Overlap()
-    overlap.add(line)
-    overlap.add(es)
     overlap.render()
 
 

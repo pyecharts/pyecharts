@@ -262,60 +262,6 @@ def test_geo_with_noexist_city():
     geo.render()
 
 
-def test_geo_guangdong_province():
-    data = [("汕头市", 50), ("汕尾市", 60), ("揭阳市", 35), ("阳江市", 44), ("肇庆市", 72)]
-    geo = Geo("广东城市空气质量", "data from pm2.5", **style.init_style)
-    attr, value = geo.cast(data)
-    geo.add(
-        "",
-        attr,
-        value,
-        maptype="广东",
-        type="effectScatter",
-        is_random=True,
-        effect_scale=5,
-        is_legend_show=False,
-    )
-    geo.render()
-
-
-def test_geo_shantou_city():
-    data = [("澄海区", 30), ("南澳县", 40), ("龙湖区", 50), ("金平区", 60)]
-    geo = Geo("汕头市地图示例", **style.init_style)
-    attr, value = geo.cast(data)
-    geo.add(
-        "",
-        attr,
-        value,
-        maptype="汕头",
-        is_visualmap=True,
-        tooltip_formatter="{b}",
-        is_legend_show=False,
-        label_emphasis_textsize=15,
-        label_emphasis_pos="right",
-    )
-    geo.render()
-
-
-def test_geo_user_define_coords():
-    coords = {
-        "0": [0.572430556, 19.246],
-        "1": [0.479039352, 1.863],
-        "2": (0.754143519, -20.579),
-    }
-
-    geo = Geo(**style.init_style)
-    geo.add(
-        "",
-        ["0", "1", "2"],
-        [6, 5.8, 6.2],
-        is_visualmap=True,
-        geo_cities_coords=coords,
-        maptype="world",
-    )
-    geo.render()
-
-
 def test_geo_visualmap_pieces():
     data = [("海门", 9), ("鄂尔多斯", 12), ("招远", 12), ("舟山", 12), ("齐齐哈尔", 14), ("盐城", 15)]
     geo = Geo("全国主要城市空气质量", "data from pm2.5", **style.init_style)
@@ -338,46 +284,3 @@ def test_geo_visualmap_pieces():
     content = geo._repr_html_()
     assert '"max": 13' in content
     assert '"label": "14 < x < 16"' in content
-
-
-def test_full_example():
-    data = [("广州", 45), ("漳州", 35), ("A市", 43)]
-    geo = Geo("全国主要城市空气质量", "data from pm2.5", **style.init_style)
-    coordinate = geo.get_coordinate("广州")
-    assert 2 == len(coordinate)
-    with assert_raises(ValueError):
-        geo.get_coordinate("A市", raise_exception=True)
-    attr, value = geo.cast(data)
-    with assert_raises(ValueError):
-        geo.add(
-            "",
-            attr,
-            value,
-            type="effectScatter",
-            is_random=True,
-            is_visualmap=True,
-            is_piecewise=True,
-            visual_text_color="#fff",
-            pieces=[
-                {"min": 0, "max": 13, "label": "0 < x < 13"},
-                {"min": 14, "max": 16, "label": "14 < x < 16"},
-            ],
-            effect_scale=5,
-        )
-    geo.add_coordinate("A市", 119.3, 26.08)
-    geo.add(
-        "",
-        attr,
-        value,
-        type="effectScatter",
-        is_random=True,
-        is_visualmap=True,
-        is_piecewise=True,
-        visual_text_color="#fff",
-        pieces=[
-            {"min": 0, "max": 13, "label": "0 < x < 13"},
-            {"min": 14, "max": 16, "label": "14 < x < 16"},
-        ],
-        effect_scale=5,
-    )
-    geo.render()
