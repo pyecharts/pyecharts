@@ -8,6 +8,8 @@ import sys
 from test.constants import CLOTHES, RANGE_COLOR, WEEK
 
 from nose.tools import assert_list_equal, eq_, raises
+
+from mock import MagicMock
 from pyecharts import (
     Bar,
     Kline,
@@ -20,8 +22,6 @@ from pyecharts import (
     Scatter3D,
     WordCloud,
 )
-
-from mock import MagicMock
 
 TEST_PAGE_TITLE = "my awesome chart"
 

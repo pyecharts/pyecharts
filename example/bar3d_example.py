@@ -1,20 +1,14 @@
 # coding=utf-8
 import random
 
+from example.commons import Collector, Faker
 from pyecharts import options as opts
 from pyecharts.charts import Bar3D, Page
 
-from example.commons import Faker
-
-charts = []
+C = Collector()
 
 
-def collect_charts(fn):
-    charts.append((fn, fn.__name__))
-    return fn
-
-
-@collect_charts
+@C.funcs
 def bar3d_base() -> Bar3D:
     data = [(i, j, random.randint(0, 12)) for i in range(6) for j in range(24)]
     c = (
@@ -34,4 +28,4 @@ def bar3d_base() -> Bar3D:
     return c
 
 
-Page().add(*[fn() for fn, _ in charts]).render()
+Page().add(*[fn() for fn, _ in C.charts]).render()

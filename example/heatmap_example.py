@@ -1,20 +1,14 @@
 # coding=utf-8
 import random
 
+from example.commons import Collector, Faker
 from pyecharts import options as opts
 from pyecharts.charts import HeatMap, Page
 
-from example.commons import Faker
-
-charts = []
+C = Collector()
 
 
-def collect_charts(fn):
-    charts.append((fn, fn.__name__))
-    return fn
-
-
-@collect_charts
+@C.funcs
 def heatmap_base() -> HeatMap:
     value = [[i, j, random.randint(0, 50)] for i in range(24) for j in range(7)]
     c = (
@@ -29,4 +23,4 @@ def heatmap_base() -> HeatMap:
     return c
 
 
-Page().add(*[fn() for fn, _ in charts]).render()
+Page().add(*[fn() for fn, _ in C.charts]).render()

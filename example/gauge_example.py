@@ -1,18 +1,12 @@
 # coding=utf-8
+from example.commons import Collector
 from pyecharts import options as opts
 from pyecharts.charts import Gauge, Page
 
-from example.commons import Faker
-
-charts = []
+C = Collector()
 
 
-def collect_charts(fn):
-    charts.append((fn, fn.__name__))
-    return fn
-
-
-@collect_charts
+@C.funcs
 def gauge_base() -> Gauge:
     c = (
         Gauge()
@@ -22,4 +16,4 @@ def gauge_base() -> Gauge:
     return c
 
 
-Page().add(*[fn() for fn, _ in charts]).render()
+Page().add(*[fn() for fn, _ in C.charts]).render()

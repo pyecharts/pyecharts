@@ -1,15 +1,10 @@
 # coding=utf-8
+from example.commons import Collector
 from pyecharts import options as opts
 from pyecharts.charts import Page, WordCloud
 from pyecharts.consts import SymbolType
 
-charts = []
-
-
-def collect_charts(fn):
-    charts.append((fn, fn.__name__))
-    return fn
-
+C = Collector()
 
 words = [
     ("Sam S Club", 10000),
@@ -35,7 +30,7 @@ words = [
 ]
 
 
-@collect_charts
+@C.funcs
 def wordcloud_base() -> WordCloud:
     c = (
         WordCloud()
@@ -45,7 +40,7 @@ def wordcloud_base() -> WordCloud:
     return c
 
 
-@collect_charts
+@C.funcs
 def wordcloud_diamond() -> WordCloud:
     c = (
         WordCloud()
@@ -55,4 +50,4 @@ def wordcloud_diamond() -> WordCloud:
     return c
 
 
-Page().add(*[fn() for fn, _ in charts]).render()
+Page().add(*[fn() for fn, _ in C.charts]).render()

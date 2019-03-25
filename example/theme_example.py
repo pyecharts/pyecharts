@@ -1,19 +1,13 @@
 # coding=utf-8
+from example.commons import Collector, Faker
 from pyecharts import options as opts
 from pyecharts.charts import Bar, Page
 from pyecharts.consts import ThemeType
 
-from example.commons import Faker
-
-charts = []
+C = Collector()
 
 
-def collect_charts(fn):
-    charts.append((fn, fn.__name__))
-    return fn
-
-
-@collect_charts
+@C.funcs
 def theme_default() -> Bar:
     c = (
         Bar()
@@ -27,7 +21,7 @@ def theme_default() -> Bar:
     return c
 
 
-@collect_charts
+@C.funcs
 def theme_light() -> Bar:
     c = (
         Bar(init_opts=opts.InitOpts(theme=ThemeType.LIGHT))
@@ -41,7 +35,7 @@ def theme_light() -> Bar:
     return c
 
 
-@collect_charts
+@C.funcs
 def theme_dark() -> Bar:
     c = (
         Bar(init_opts=opts.InitOpts(theme=ThemeType.DARK))
@@ -55,7 +49,7 @@ def theme_dark() -> Bar:
     return c
 
 
-@collect_charts
+@C.funcs
 def theme_chalk() -> Bar:
     c = (
         Bar(init_opts=opts.InitOpts(theme=ThemeType.CHALK))
@@ -69,7 +63,7 @@ def theme_chalk() -> Bar:
     return c
 
 
-@collect_charts
+@C.funcs
 def theme_essos() -> Bar:
     c = (
         Bar(init_opts=opts.InitOpts(theme=ThemeType.ESSOS))
@@ -83,7 +77,7 @@ def theme_essos() -> Bar:
     return c
 
 
-@collect_charts
+@C.funcs
 def theme_infographic() -> Bar:
     c = (
         Bar(init_opts=opts.InitOpts(theme=ThemeType.INFOGRAPHIC))
@@ -97,7 +91,7 @@ def theme_infographic() -> Bar:
     return c
 
 
-@collect_charts
+@C.funcs
 def theme_macarons() -> Bar:
     c = (
         Bar(init_opts=opts.InitOpts(theme=ThemeType.MACARONS))
@@ -111,7 +105,7 @@ def theme_macarons() -> Bar:
     return c
 
 
-@collect_charts
+@C.funcs
 def theme_purple_passion() -> Bar:
     c = (
         Bar(init_opts=opts.InitOpts(theme=ThemeType.PURPLE_PASSION))
@@ -125,7 +119,7 @@ def theme_purple_passion() -> Bar:
     return c
 
 
-@collect_charts
+@C.funcs
 def theme_roma() -> Bar:
     c = (
         Bar(init_opts=opts.InitOpts(theme=ThemeType.ROMA))
@@ -139,7 +133,7 @@ def theme_roma() -> Bar:
     return c
 
 
-@collect_charts
+@C.funcs
 def theme_romantic() -> Bar:
     c = (
         Bar(init_opts=opts.InitOpts(theme=ThemeType.ROMANTIC))
@@ -153,7 +147,7 @@ def theme_romantic() -> Bar:
     return c
 
 
-@collect_charts
+@C.funcs
 def theme_shine() -> Bar:
     c = (
         Bar(init_opts=opts.InitOpts(theme=ThemeType.SHINE))
@@ -167,7 +161,7 @@ def theme_shine() -> Bar:
     return c
 
 
-@collect_charts
+@C.funcs
 def theme_vintage() -> Bar:
     c = (
         Bar(init_opts=opts.InitOpts(theme=ThemeType.VINTAGE))
@@ -181,7 +175,7 @@ def theme_vintage() -> Bar:
     return c
 
 
-@collect_charts
+@C.funcs
 def theme_walden() -> Bar:
     c = (
         Bar(init_opts=opts.InitOpts(theme=ThemeType.WALDEN))
@@ -195,7 +189,7 @@ def theme_walden() -> Bar:
     return c
 
 
-@collect_charts
+@C.funcs
 def theme_westeros() -> Bar:
     c = (
         Bar(init_opts=opts.InitOpts(theme=ThemeType.WESTEROS))
@@ -209,7 +203,7 @@ def theme_westeros() -> Bar:
     return c
 
 
-@collect_charts
+@C.funcs
 def theme_wonderland() -> Bar:
     c = (
         Bar(init_opts=opts.InitOpts(theme=ThemeType.WONDERLAND))
@@ -223,4 +217,4 @@ def theme_wonderland() -> Bar:
     return c
 
 
-Page().add(*[fn() for fn, _ in charts]).render()
+Page().add(*[fn() for fn, _ in C.charts]).render()

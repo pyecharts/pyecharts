@@ -128,3 +128,11 @@ class _Faker:
 
 
 Faker = _Faker()
+
+
+class Collector:
+    charts = []
+
+    @staticmethod
+    def funcs(fn):
+        Collector.charts.append((fn, fn.__name__))
