@@ -333,3 +333,22 @@ class GraphCategory:
             "symbolSize": symbol_size,
             "label": label_opts,
         }
+
+
+class TreeItem:
+    def __init__(
+        self,
+        name: Optional[str] = None,
+        value: Optional[Numeric] = None,
+        label_opts: Optional[LabelOpts] = None,
+        children: Optional[Sequence] = None,
+    ):
+        if isinstance(label_opts, LabelOpts):
+            label_opts = label_opts.opts
+
+        self.opts: dict = {
+            "name": name,
+            "value": value,
+            "children": children,
+            "label": label_opts,
+        }
