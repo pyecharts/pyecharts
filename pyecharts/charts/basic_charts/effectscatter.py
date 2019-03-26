@@ -26,7 +26,7 @@ class EffectScatter(AxisChart):
         color: Optional[str] = None,
         symbol: Optional[str] = None,
         symbol_size: Numeric = 10,
-        label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts,
+        label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
         effect_opts: Union[opts.EffectOpts, dict] = opts.EffectOpts(),
         tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
     ):

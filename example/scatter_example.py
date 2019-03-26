@@ -25,8 +25,8 @@ def scatter_spliteline() -> Scatter:
         .add_yaxis("商家A", Faker.values())
         .set_global_opts(title_opts=opts.TitleOpts(title="Scatter-显示分割线"))
         .set_global_opts(
-            xaxis_opt=opts.AxisOpts(splitline_opts=opts.SplitLineOpts(is_show=True)),
-            yaxis_opt=opts.AxisOpts(splitline_opts=opts.SplitLineOpts(is_show=True)),
+            xaxis_opts=opts.AxisOpts(splitline_opts=opts.SplitLineOpts(is_show=True)),
+            yaxis_opts=opts.AxisOpts(splitline_opts=opts.SplitLineOpts(is_show=True)),
         )
     )
     return c

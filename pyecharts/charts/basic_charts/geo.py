@@ -18,6 +18,7 @@ class Geo(Chart):
 
     def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):
         super().__init__(init_opts=init_opts)
+        self.set_global_opts()
         self._coordinates = COORDINATES
         self._zlevel = 1
 
@@ -63,9 +64,10 @@ class Geo(Chart):
         *,
         symbol: Optional[str] = None,
         symbol_size: Numeric = 12,
-        border_color="#111",
-        normal_color="#323c48",
-        emphasis_color="#2a333d",
+        color: Optional[str] = None,
+        border_color: str = "#111",
+        normal_color: str = "#323c48",
+        emphasis_color: str = "#2a333d",
         region_coords: Optional[dict] = None,
         is_roam: bool = True,
         label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
@@ -92,9 +94,8 @@ class Geo(Chart):
         data = []
         for n, v in data_pair:
             if type_ == ChartType.LINES:
-                assert len(v) == 2
-                f, t = self.get_coordinate(v[0]), self.get_coordinate(v[1])
-                data.append({"name": n, "coords": [f, t]})
+                f, t = self.get_coordinate(n), self.get_coordinate(v)
+                data.append({"name": "{}->{}".format(n, v), "coords": [f, t]})
             else:
                 lng, lat = self.get_coordinate(n)
                 data.append({"name": n, "value": [lng, lat, v]})
@@ -110,6 +111,7 @@ class Geo(Chart):
                 },
             }
         )
+        self._append_color(color)
         self._append_legend(series_name)
 
         if type_ == ChartType.SCATTER:
@@ -122,6 +124,7 @@ class Geo(Chart):
                     "symbolSize": symbol_size,
                     "data": data,
                     "label": label_opts,
+                    "tooltip": tooltip_opts,
                 }
             )
 
@@ -137,6 +140,7 @@ class Geo(Chart):
                     "symbolSize": symbol_size,
                     "data": data,
                     "label": label_opts,
+                    "tooltip": tooltip_opts,
                 }
             )
 
@@ -147,6 +151,7 @@ class Geo(Chart):
                     "name": series_name,
                     "coordinateSystem": "geo",
                     "data": data,
+                    "tooltip": tooltip_opts,
                 }
             )
 
@@ -161,6 +166,7 @@ class Geo(Chart):
                     "symbolSize": symbol_size,
                     "data": data,
                     "lineStyle": linestyle_opts,
+                    "tooltip": tooltip_opts,
                 }
             )
 
@@ -168,9 +174,24 @@ class Geo(Chart):
 
     def set_global_opts(
         self,
+        title_opts: Union[opts.TitleOpts, dict] = opts.TitleOpts(),
         tooltip_opts: Union[opts.TooltipOpts, dict] = opts.TooltipOpts(
             formatter=utils.filter_js_func(TooltipFormatterType.GEO)
         ),
-        **kwargs,
+        legend_opts: Union[opts.LegendOpts, dict] = opts.LegendOpts(),
+        toolbox_opts: Union[opts.ToolboxOpts, dict] = None,
+        xaxis_opts: Union[opts.AxisOpts, dict, None] = None,
+        yaxis_opts: Union[opts.AxisOpts, dict, None] = None,
+        visualmap_opts: Union[opts.VisualMapOpts, dict, None] = None,
+        datazoom_opts: List[Union[opts.DataZoomOpts, dict, None]] = None,
     ):
-        super().set_global_opts(tooltip_opts=tooltip_opts, **kwargs)
+        return super().set_global_opts(
+            title_opts=title_opts,
+            tooltip_opts=tooltip_opts,
+            legend_opts=legend_opts,
+            toolbox_opts=toolbox_opts,
+            xaxis_opts=xaxis_opts,
+            yaxis_opts=yaxis_opts,
+            visualmap_opts=visualmap_opts,
+            datazoom_opts=datazoom_opts,
+        )
