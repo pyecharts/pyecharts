@@ -8,7 +8,7 @@ from pyecharts.commons.types import Any, Optional
 
 from ..commons.utils import write_utf8_html_file
 from ..datasets import FILENAMES
-from ..globals import CURRENT_HOST
+from ..globals import CurrentConfig
 
 __HERE = os.path.abspath(os.path.dirname(__file__))
 
@@ -27,7 +27,7 @@ class RenderEngine:
     @staticmethod
     def generate_js_link(chart: Any) -> Any:
         if not chart.js_host:
-            chart.js_host = CURRENT_HOST
+            chart.js_host = CurrentConfig.ONLINE_HOST
         links = []
         for dep in chart.js_dependencies.items:
             # TODO: if?
