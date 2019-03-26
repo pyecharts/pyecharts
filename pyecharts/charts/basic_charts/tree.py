@@ -39,7 +39,7 @@ class Tree(Chart):
         data: Sequence,
         layout: str = "orthogonal",
         symbol: str = "emptyCircle",
-        symbol_size=7,
+        symbol_size: Numeric = 7,
         orient: str = "LR",
         top: str = "12%",
         left: str = "12%",

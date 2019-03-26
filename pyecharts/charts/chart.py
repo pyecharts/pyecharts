@@ -28,6 +28,7 @@ class Chart(Base):
         label_opts: Union[opts.LabelOpts, dict, None] = None,
         linestyle_opts: Union[opts.LineStyleOpts, dict, None] = None,
         splitline_opts: Union[opts.SplitLineOpts, dict, None] = None,
+        areastyle_opts: Union[opts.AreaStyleOpts, dict, None] = None,
         axisline_opts: Union[opts.AxisLineOpts, dict, None] = None,
         markpoint_opts: Union[opts.MarkPointOpts, dict, None] = None,
         markline_opts: Union[opts.MarkLineOpts, dict, None] = None,
@@ -51,6 +52,12 @@ class Chart(Base):
                 splitline_opts = splitline_opts.opts
             for s in _series:
                 s.update(splitLine=splitline_opts)
+
+        if areastyle_opts:
+            if isinstance(areastyle_opts, opts.AreaStyleOpts):
+                areastyle_opts = areastyle_opts.opts
+            for s in _series:
+                s.update(areaStyle=areastyle_opts)
 
         if axisline_opts:
             if isinstance(axisline_opts, opts.AxisLineOpts):

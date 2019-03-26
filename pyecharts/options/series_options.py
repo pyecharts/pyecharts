@@ -61,14 +61,20 @@ class SplitLineOpts:
     def __init__(
         self, is_show: bool = False, linestyle_opts: LineStyleOpts = LineStyleOpts()
     ):
-        self.opts: dict = {"show": is_show, "lineStyle": linestyle_opts.opts}
+        if isinstance(linestyle_opts, LineStyleOpts):
+            linestyle_opts = linestyle_opts.opts
+
+        self.opts: dict = {"show": is_show, "lineStyle": linestyle_opts}
 
 
 class AxisLineOpts:
     def __init__(
-        self, is_show: bool = True, line_style: LineStyleOpts = LineStyleOpts()
+        self, is_show: bool = True, linestyle_opts: LineStyleOpts = LineStyleOpts()
     ):
-        self.opts: dict = {"show": is_show, "lineStyle": line_style}
+        if isinstance(linestyle_opts, LineStyleOpts):
+            linestyle_opts = linestyle_opts.opts
+
+        self.opts: dict = {"show": is_show, "lineStyle": linestyle_opts}
 
 
 class MarkPointItem:
@@ -196,8 +202,11 @@ class AreaStyleOpts:
 
 
 class SplitAreaOpts:
-    def __init__(self, is_show=True, area_style: AreaStyleOpts = AreaStyleOpts()):
-        self.opts: dict = {"show": is_show, "areaStyle": area_style}
+    def __init__(self, is_show=True, areastyle_opts: AreaStyleOpts = AreaStyleOpts()):
+        if isinstance(areastyle_opts, AreaStyleOpts):
+            areastyle_opts = areastyle_opts.opts
+
+        self.opts: dict = {"show": is_show, "areaStyle": areastyle_opts}
 
 
 class ItemStyleOpts:
