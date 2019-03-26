@@ -12,18 +12,22 @@ class LabelOpts:
         font_style: Optional[str] = None,
         font_weight: Optional[str] = None,
         font_family: Optional[str] = None,
-        align: Optional[str] = None,
+        rotate: Optional[Numeric] = None,
+        horizontal_align: Optional[str] = None,
+        vertical_align: Optional[str] = None,
         formatter: Optional[str] = None,
     ):
         self.opts: dict = {
             "show": is_show,
             "position": position,
             "color": color,
+            "rotate": rotate,
             "fontSize": font_size,
             "fontStyle": font_style,
             "fontWeight": font_weight,
             "fontFamily": font_family,
-            "align": align,
+            "align": horizontal_align,
+            "verticalAlign": vertical_align,
             "formatter": formatter,
         }
 

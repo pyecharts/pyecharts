@@ -42,13 +42,83 @@ def tree_base() -> Tree:
 
 
 @C.funcs
-def tree_official() -> Tree:
+def tree_lr() -> Tree:
     with open(os.path.join("fixtures", "flare.json"), "r", encoding="utf-8") as f:
         j = json.load(f)
     c = (
         Tree()
         .add("", [j], collapse_interval=2)
-        .set_global_opts(title_opts=opts.TitleOpts(title="Tree-官方示例"))
+        .set_global_opts(title_opts=opts.TitleOpts(title="Tree-左右方向"))
+    )
+    return c
+
+
+@C.funcs
+def tree_rl() -> Tree:
+    with open(os.path.join("fixtures", "flare.json"), "r", encoding="utf-8") as f:
+        j = json.load(f)
+    c = (
+        Tree()
+        .add("", [j], collapse_interval=2, orient="RL")
+        .set_global_opts(title_opts=opts.TitleOpts(title="Tree-右左方向"))
+    )
+    return c
+
+
+@C.funcs
+def tree_tb() -> Tree:
+    with open(os.path.join("fixtures", "flare.json"), "r", encoding="utf-8") as f:
+        j = json.load(f)
+    c = (
+        Tree()
+        .add(
+            "",
+            [j],
+            collapse_interval=2,
+            orient="TB",
+            label_opts=opts.LabelOpts(
+                position="top",
+                horizontal_align="right",
+                vertical_align="middle",
+                rotate=-90,
+            ),
+        )
+        .set_global_opts(title_opts=opts.TitleOpts(title="Tree-上下方向"))
+    )
+    return c
+
+
+@C.funcs
+def tree_bt() -> Tree:
+    with open(os.path.join("fixtures", "flare.json"), "r", encoding="utf-8") as f:
+        j = json.load(f)
+    c = (
+        Tree()
+        .add(
+            "",
+            [j],
+            collapse_interval=2,
+            orient="BT",
+            label_opts=opts.LabelOpts(
+                position="top",
+                horizontal_align="right",
+                vertical_align="middle",
+                rotate=-90,
+            ),
+        )
+        .set_global_opts(title_opts=opts.TitleOpts(title="Tree-下上方向"))
+    )
+    return c
+
+
+@C.funcs
+def tree_layout() -> Tree:
+    with open(os.path.join("fixtures", "flare.json"), "r", encoding="utf-8") as f:
+        j = json.load(f)
+    c = (
+        Tree()
+        .add("", [j], collapse_interval=2, layout="radial")
+        .set_global_opts(title_opts=opts.TitleOpts(title="Tree-Layout"))
     )
     return c
 
