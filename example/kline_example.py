@@ -1,10 +1,11 @@
-from pyecharts.charts import Kline
-from pyecharts.options import *
+# coding=utf-8
+from example.commons import Collector
+from pyecharts import options as opts
+from pyecharts.charts import Kline, Page
 
-kline = Kline()
-kline.add_xaxis(["2017/7/{}".format(i + 1) for i in range(31)])
+C = Collector()
 
-v1 = [
+data = [
     [2320.26, 2320.26, 2287.3, 2362.94],
     [2300, 2291.3, 2288.26, 2308.38],
     [2295.35, 2346.5, 2295.35, 2345.92],
@@ -38,10 +39,108 @@ v1 = [
     [2255.77, 2270.28, 2253.31, 2276.22],
 ]
 
-kline.add_yaxis("kline", v1)
-kline.set_global_opts(xaxis_opt=AxisOpts(name="x轴"), yaxis_opt=AxisOpts(name="y轴"))
-kline.render()
 
-# self._option.get("xAxis")[0]["scale"] = True
-# self._option.get("yAxis")[0]["scale"] = True
-# self._option.get("yAxis")[0]["splitArea"] = {"show": True}
+@C.funcs
+def kline_base() -> Kline:
+    c = (
+        Kline()
+        .add_xaxis(["2017/7/{}".format(i + 1) for i in range(31)])
+        .add_yaxis("kline", data)
+        .set_global_opts(
+            yaxis_opts=opts.AxisOpts(is_scale=True),
+            xaxis_opts=opts.AxisOpts(is_scale=True),
+            title_opts=opts.TitleOpts(title="Kline-基本示例"),
+        )
+    )
+    return c
+
+
+@C.funcs
+def kline_splitarea() -> Kline:
+    c = (
+        Kline()
+        .add_xaxis(["2017/7/{}".format(i + 1) for i in range(31)])
+        .add_yaxis("kline", data)
+        .set_global_opts(
+            xaxis_opts=opts.AxisOpts(is_scale=True),
+            yaxis_opts=opts.AxisOpts(
+                is_scale=True,
+                splitarea_opts=opts.SplitAreaOpts(
+                    is_show=True, areastyle_opts=opts.AreaStyleOpts(opacity=1)
+                ),
+            ),
+            title_opts=opts.TitleOpts(title="Kline-显示分割区域"),
+        )
+    )
+    return c
+
+
+@C.funcs
+def kline_datazoom_slider() -> Kline:
+    c = (
+        Kline()
+        .add_xaxis(["2017/7/{}".format(i + 1) for i in range(31)])
+        .add_yaxis("kline", data)
+        .set_global_opts(
+            xaxis_opts=opts.AxisOpts(is_scale=True),
+            yaxis_opts=opts.AxisOpts(
+                is_scale=True,
+                splitarea_opts=opts.SplitAreaOpts(
+                    is_show=True, areastyle_opts=opts.AreaStyleOpts(opacity=1)
+                ),
+            ),
+            datazoom_opts=[opts.DataZoomOpts()],
+            title_opts=opts.TitleOpts(title="Kline-DataZoom-slider"),
+        )
+    )
+    return c
+
+
+@C.funcs
+def kline_datazoom_inside() -> Kline:
+    c = (
+        Kline()
+        .add_xaxis(["2017/7/{}".format(i + 1) for i in range(31)])
+        .add_yaxis("kline", data)
+        .set_global_opts(
+            xaxis_opts=opts.AxisOpts(is_scale=True),
+            yaxis_opts=opts.AxisOpts(
+                is_scale=True,
+                splitarea_opts=opts.SplitAreaOpts(
+                    is_show=True, areastyle_opts=opts.AreaStyleOpts(opacity=1)
+                ),
+            ),
+            datazoom_opts=[opts.DataZoomOpts(type_="inside")],
+            title_opts=opts.TitleOpts(title="Kline-DataZoom-inside"),
+        )
+    )
+    return c
+
+
+@C.funcs
+def kline_markline() -> Kline:
+    c = (
+        Kline()
+        .add_xaxis(["2017/7/{}".format(i + 1) for i in range(31)])
+        .add_yaxis(
+            "kline",
+            data,
+            markline_opts=opts.MarkLineOpts(
+                data=[opts.MarkLineItem(type_="max", value_dim="close")]
+            ),
+        )
+        .set_global_opts(
+            xaxis_opts=opts.AxisOpts(is_scale=True),
+            yaxis_opts=opts.AxisOpts(
+                is_scale=True,
+                splitarea_opts=opts.SplitAreaOpts(
+                    is_show=True, areastyle_opts=opts.AreaStyleOpts(opacity=1)
+                ),
+            ),
+            title_opts=opts.TitleOpts(title="Kline-MarkLine"),
+        )
+    )
+    return c
+
+
+Page().add(*[fn() for fn, _ in C.charts]).render()

@@ -134,7 +134,7 @@ def bar_markline_custom() -> Bar:
         .set_series_opts(
             label_opts=opts.LabelOpts(is_show=False),
             markline_opts=opts.MarkLineOpts(
-                data=[opts.MarkLineItem(yaxis=50, name="yAxis=50")]
+                data=[opts.MarkLineItem(y=50, name="yAxis=50")]
             ),
         )
     )

@@ -102,7 +102,7 @@ class Polar(Chart):
             "z": angleaxis_z_index,
         }
 
-        if type in ("scatter", "line"):
+        if type_ in ("scatter", "line"):
             self.options.get("series").append(
                 {
                     "type": type_,
@@ -116,7 +116,7 @@ class Polar(Chart):
                 }
             )
 
-        elif type == "effectScatter":
+        elif type_ == "effectScatter":
             self.options.get("series").append(
                 {
                     "type": type_,
@@ -131,17 +131,17 @@ class Polar(Chart):
                 }
             )
 
-        elif type == "barRadius":
+        elif type_ == "barRadius":
             self.options.get("series").append(bar_type_series)
             self.options.update(angleAxis={})
             self.options.update(radiusAxis=radius_axis_opt)
 
-        elif type == "barAngle":
+        elif type_ == "barAngle":
             self.options.get("series").append(bar_type_series)
             self.options.update(radiusAxis={"show": is_radiusaxis_show})
             self.options.update(angleAxis=angle_axis_opt)
 
-        elif type == "custom":
+        elif type_ == "custom":
             assert render_item is not None
             self.options.get("series").append(
                 {
@@ -153,7 +153,7 @@ class Polar(Chart):
                 }
             )
 
-        if type not in ("barAngle", "barRadius"):
+        if type_ not in ("barAngle", "barRadius"):
             self.options.update(angleAxis=angle_axis_opt)
             self.options.update(radiusAxis=radius_axis_opt)
         self.options.update(polar={})

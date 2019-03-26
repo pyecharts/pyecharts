@@ -4,6 +4,7 @@ from ..globals import RenderType
 from ..options.series_options import (
     LabelOpts,
     LineStyleOpts,
+    SplitAreaOpts,
     SplitLineOpts,
     TextStyleOpts,
 )
@@ -257,11 +258,14 @@ class AxisOpts:
         max_: Optional[Numeric] = None,
         type_: Optional[str] = None,
         name_textstyle_opts: Union[TextStyleOpts, dict, None] = None,
+        splitarea_opts: Union[SplitAreaOpts, dict, None] = None,
         splitline_opts: Union[SplitLineOpts, dict] = SplitLineOpts(),
         linestyle_opts: Union[LineStyleOpts, dict] = LineStyleOpts(),
     ):
         if isinstance(name_textstyle_opts, TextStyleOpts):
             name_textstyle_opts = name_textstyle_opts.opts
+        if isinstance(splitarea_opts, SplitAreaOpts):
+            splitarea_opts = splitarea_opts.opts
         if isinstance(splitline_opts, SplitLineOpts):
             splitline_opts = splitline_opts.opts
         if isinstance(linestyle_opts, LineStyleOpts):
@@ -285,6 +289,7 @@ class AxisOpts:
             "max": max_,
             "type": type_,
             "splitLine": splitline_opts,
+            "splitArea": splitarea_opts,
             "axisLine": {"lineStyle": linestyle_opts},
         }
 
