@@ -1,7 +1,7 @@
 # coding=utf-8
 from example.commons import Collector
 from pyecharts import options as opts
-from pyecharts.charts import Radar, Page
+from pyecharts.charts import Page, Radar
 
 C = Collector()
 
@@ -57,7 +57,7 @@ def radar_selected_mode() -> Radar:
 
 
 @C.funcs
-def radar_air_quality():
+def radar_air_quality() -> Radar:
     value_bj = [
         [55, 9, 56, 0.46, 18, 6, 1],
         [25, 11, 21, 0.65, 34, 9, 2],

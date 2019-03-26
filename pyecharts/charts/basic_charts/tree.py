@@ -1,7 +1,7 @@
 # coding=utf-8
 from ... import options as opts
 from ...charts.chart import Chart
-from ...commons.types import Numeric, Sequence, Union
+from ...commons.types import Numeric, Optional, Sequence, Union
 from ...globals import ChartType
 
 
@@ -16,7 +16,7 @@ class Tree(Chart):
         super().__init__(init_opts=init_opts)
 
     @staticmethod
-    def _set_collapse_interval(data, interval=0):
+    def _set_collapse_interval(data, interval):
         """
         间隔折叠节点，当节点过多时可以解决节点显示过杂间隔。
 
@@ -26,12 +26,13 @@ class Tree(Chart):
         if interval <= 0:
             return data
         if data and isinstance(data, list):
-            children = data[0].get("children", None)
-            if children and interval > 0:
-                for index, value in enumerate(children):
-                    if index % interval == 0:
-                        value.update(collapsed="false")
-                return data
+            for d in data:
+                children = d.get("children", None)
+                if children and interval > 0:
+                    for index, value in enumerate(children):
+                        if index % interval == 0:
+                            value.update(collapsed="false")
+            return data
 
     def add(
         self,
@@ -41,10 +42,10 @@ class Tree(Chart):
         symbol: str = "emptyCircle",
         symbol_size: Numeric = 7,
         orient: str = "LR",
-        top: str = "12%",
-        left: str = "12%",
-        bottom: str = "12%",
-        right: str = "12%",
+        top: Optional[str] = None,
+        left: Optional[str] = None,
+        bottom: Optional[str] = None,
+        right: Optional[str] = None,
         collapse_interval: Numeric = 0,
         label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
         leaves_label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
