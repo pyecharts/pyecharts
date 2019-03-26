@@ -1,6 +1,8 @@
 # flake8: noqa
 
 from .global_options import (
+    AngleAxisItem,
+    AngleAxisOpts,
     Axis3DOpts,
     AxisOpts,
     CalendarOpts,
@@ -12,6 +14,8 @@ from .global_options import (
     ParallelAxisOpts,
     ParallelOpts,
     RadarIndicatorOpts,
+    RadiusAxisItem,
+    RadiusAxisOpts,
     SingleAxisOpts,
     TitleOpts,
     ToolboxOpts,
