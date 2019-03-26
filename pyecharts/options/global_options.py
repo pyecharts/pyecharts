@@ -2,6 +2,7 @@
 from ..commons.types import List, Numeric, Optional, Sequence, Union
 from ..globals import RenderType
 from ..options.series_options import (
+    AxisLineOpts,
     LabelOpts,
     LineStyleOpts,
     SplitAreaOpts,
@@ -339,13 +340,13 @@ class Grid3DOpts:
 class Axis3DOpts:
     def __init__(
         self,
-        data: Sequence = None,
+        data: Optional[Sequence] = None,
         type_: Optional[str] = None,
         name: Optional[str] = None,
         name_size: Numeric = 16,
         name_gap: Numeric = 20,
-        min_=None,
-        max_=None,
+        min_: Union[str, Numeric, None] = None,
+        max_: Union[str, Numeric, None] = None,
         interval: Optional[str] = None,
         margin: Numeric = 8,
     ):
@@ -472,4 +473,119 @@ class SingleAxisOpts:
             "height": height,
             "orient": orient,
             "type": type_,
+        }
+
+
+class RadiusAxisItem:
+    def __init__(
+        self,
+        value: Optional[str] = None,
+        textstyle_opts: Optional[TextStyleOpts] = None,
+    ):
+        if isinstance(textstyle_opts, TextStyleOpts):
+            textstyle_opts = textstyle_opts.opts
+
+        self.opts: dict = {"value": value, "textStyle": textstyle_opts}
+
+
+class AngleAxisItem(RadiusAxisItem):
+    def __init__(
+        self,
+        value: Optional[str] = None,
+        textstyle_opts: Optional[TextStyleOpts] = None,
+    ):
+        super().__init__(value, textstyle_opts)
+
+
+class RadiusAxisOpts:
+    def __init__(
+        self,
+        polar_index: Optional[int] = None,
+        data: Optional[List[Union[RadiusAxisItem, dict]]] = None,
+        boundary_gap: Union[bool, List] = None,
+        type_: Optional[str] = None,
+        name: Optional[str] = None,
+        name_location: Optional[str] = None,
+        min_: Union[str, Numeric, None] = None,
+        max_: Union[str, Numeric, None] = None,
+        is_scale: bool = False,
+        splitline_opts: Union[SplitLineOpts, dict, None] = None,
+        axisline_opts: Union[AxisLineOpts, dict, None] = None,
+        axislabel_opts: Union[LabelOpts, dict, None] = None,
+        z: Optional[int] = None,
+    ):
+        if isinstance(splitline_opts, SplitLineOpts):
+            splitline_opts = splitline_opts.opts
+        if isinstance(axisline_opts, AxisLineOpts):
+            axisline_opts = axisline_opts.opts
+        if isinstance(axislabel_opts, LabelOpts):
+            axislabel_opts = axislabel_opts.opts
+
+        _data = []
+        if data:
+            for d in data:
+                if isinstance(d, RadiusAxisItem):
+                    d = d.opts
+                _data.append(d)
+
+        self.opts: dict = {
+            "polarIndex": polar_index,
+            "type": type_,
+            "data": data,
+            "boundaryGap": boundary_gap,
+            "name": name,
+            "nameLocation": name_location,
+            "min": min_,
+            "max": max_,
+            "scale": is_scale,
+            "splitLine": splitline_opts,
+            "axisLine": axisline_opts,
+            "axisLabel": axislabel_opts,
+            "z": z,
+        }
+
+
+class AngleAxisOpts:
+    def __init__(
+        self,
+        polar_index: Optional[int] = None,
+        data: Optional[List[Union[AngleAxisItem, dict]]] = None,
+        start_angle: Optional[Numeric] = None,
+        is_clockwise: bool = False,
+        boundary_gap: Union[bool, List] = None,
+        type_: Optional[str] = None,
+        min_: Union[str, Numeric, None] = None,
+        max_: Union[str, Numeric, None] = None,
+        splitline_opts: Union[SplitLineOpts, dict, None] = None,
+        axisline_opts: Union[AxisLineOpts, dict, None] = None,
+        axislabel_opts: Union[LabelOpts, dict, None] = None,
+        z: Optional[int] = None,
+    ):
+        if isinstance(splitline_opts, SplitLineOpts):
+            splitline_opts = splitline_opts.opts
+        if isinstance(axisline_opts, AxisLineOpts):
+            axisline_opts = axisline_opts.opts
+        if isinstance(axislabel_opts, LabelOpts):
+            axislabel_opts = axislabel_opts.opts
+
+        _data = []
+        if data:
+            for d in data:
+                if isinstance(d, AngleAxisItem):
+                    d = d.opts
+                _data.append(d)
+
+        self.opts: dict = {
+            "polarIndex": polar_index,
+            "startAngle": start_angle,
+            "data": data,
+            "clockwise": is_clockwise,
+            "boundaryGap": boundary_gap,
+            "type": type_,
+            "min": min_,
+            "max": max_,
+            "splitLine": splitline_opts,
+            "axisLine": axisline_opts,
+            "axisLabel": axislabel_opts,
+            "z": z,
         }
