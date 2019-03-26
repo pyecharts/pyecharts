@@ -1,7 +1,7 @@
 # coding=utf-8
 from ... import options as opts
 from ...charts.chart import Chart
-from ...commons.types import Numeric, Union
+from ...commons.types import Numeric, Optional, Sequence, Union
 from ...globals import ChartType
 
 
@@ -19,10 +19,15 @@ class TreeMap(Chart):
     def add(
         self,
         series_name: str,
-        data,
-        left_depth=None,
-        drilldown_icon="▶",
+        data: Sequence,
+        left_depth: Optional[Numeric] = None,
+        pos_left: Optional[str] = None,
+        pos_right: Optional[str] = None,
+        pos_top: Optional[str] = None,
+        pos_bottom: Optional[str] = None,
+        drilldown_icon: str = "▶",
         visible_min: Numeric = 10,
+        visible_max: Optional[Numeric] = None,
         label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
         tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
     ):
@@ -37,10 +42,15 @@ class TreeMap(Chart):
                 "type": ChartType.TREEMAP,
                 "name": series_name,
                 "data": data,
+                "left": pos_left,
+                "right": pos_right,
+                "top": pos_top,
+                "bottom": pos_bottom,
                 "label": label_opts,
                 "leafDepth": left_depth,
                 "drillDownIcon": drilldown_icon,
                 "visibleMin": visible_min,
+                "visibleMax": visible_max,
                 "tooltip": tooltip_opts,
             }
         )
