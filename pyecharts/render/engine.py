@@ -8,7 +8,7 @@ from pyecharts.commons.types import Any, Optional
 
 from ..commons.utils import write_utf8_html_file
 from ..datasets import FILENAMES
-from ..globals import ONLINE_HOST
+from ..globals import CURRENT_HOST
 
 __HERE = os.path.abspath(os.path.dirname(__file__))
 
@@ -27,7 +27,7 @@ class RenderEngine:
     @staticmethod
     def generate_js_link(chart: Any) -> Any:
         if not chart.js_host:
-            chart.js_host = ONLINE_HOST
+            chart.js_host = CURRENT_HOST
         links = []
         for dep in chart.js_dependencies.items:
             # TODO: if?
@@ -48,12 +48,11 @@ class RenderEngine:
         html = re.sub(r'\\n|\\t|"?__-o-__"?', "", html)
         write_utf8_html_file(path, html)
 
-    def render_chart_to_notebook(self, template_name, **kwargs) -> str:
-        """
-        Return html string for rendering a chart/page to a notebook cell.
-
-        :param template_name: file name of template.
-        :param ctx: A dictionary containing data.
-        """
+    def render_notebook(self, template_name, **kwargs) -> str:
         tpl = self.env.get_template(template_name)
         return tpl.render(**kwargs)
+
+    #
+    # def render_jupyter_lab(self, template_name, **kwargs) -> str:
+    #     tpl = self.env.get_template(template_name)
+    #     return tpl.render(**kwargs)

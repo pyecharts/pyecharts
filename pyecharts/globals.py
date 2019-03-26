@@ -1,8 +1,5 @@
 # coding=utf-8
 
-BUILTIN_THEMES = ["light", "dark", "white"]
-ONLINE_HOST = "http://chenjiandongx.com/go-echarts-assets/assets/"
-
 
 class _RenderType:
     CANVAS: str = "canvas"
@@ -58,6 +55,7 @@ class _ToolTipFormatterType:
 
 
 class _ThemeType:
+    BUILTIN_THEMES = ["light", "dark", "white"]
     LIGHT = "light"
     DARK = "dark"
     CHALK: str = "chalk"
@@ -81,6 +79,11 @@ class _GeoType:
     LINES: str = "lines"
 
 
+class _NotebookType:
+    JUPYTER_NOTEBOOK = "jupyter_notebook"
+    JUPYTER_LAB = "jupyter_lab"
+
+
 RenderType = _RenderType()
 FileType = _FileType()
 SymbolType = _SymbolType()
@@ -88,3 +91,7 @@ ChartType = _ChartType
 TooltipFormatterType = _ToolTipFormatterType()
 ThemeType = _ThemeType()
 GeoType = _GeoType()
+NotebookType = _NotebookType()
+
+CURRENT_HOST = "http://chenjiandongx.com/go-echarts-assets/assets/"
+CURRENT_NOTEBOOK = NotebookType.JUPYTER_NOTEBOOK

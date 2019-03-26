@@ -3,7 +3,7 @@ from jinja2 import Environment
 
 from ...commons import utils
 from ...commons.types import Optional
-from ...globals import BUILTIN_THEMES, ONLINE_HOST
+from ...globals import ThemeType, CURRENT_HOST
 from ...render.engine import RenderEngine
 
 
@@ -17,7 +17,7 @@ class Page:
     def __init__(
         self,
         page_title: str = "Awesome-pyecharts",
-        js_host: str = ONLINE_HOST,
+        js_host: str = CURRENT_HOST,
         interval: int = 1,
     ):
         self.page_title = page_title
@@ -49,7 +49,7 @@ class Page:
     ):
         for c in self:
             c.options = c.dump_options()
-            if c.theme not in BUILTIN_THEMES:
+            if c.theme not in ThemeType.BUILTIN_THEMES:
                 self.js_dependencies.add(c.theme)
         RenderEngine(env).render_chart_to_file(
             template_name=template_name, chart=self, path=path
@@ -59,10 +59,10 @@ class Page:
         require_config = utils.produce_require_dict(self.js_dependencies, self.js_host)
         for c in self:
             c.options = c.dump_options()
-            if c.theme not in BUILTIN_THEMES:
+            if c.theme not in ThemeType.BUILTIN_THEMES:
                 self.js_dependencies.add(c.theme)
-        return RenderEngine().render_chart_to_notebook(
-            template_name="notebook.html",
+        return RenderEngine().render_notebook(
+            template_name="jupyter_notebook.html",
             charts=self,
             config_items=require_config["config_items"],
             libraries=require_config["libraries"],
