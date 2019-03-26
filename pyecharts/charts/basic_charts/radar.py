@@ -17,10 +17,12 @@ class Radar(Chart):
 
     def add_schema(
         self,
-        schema: Union[List[Union[opts.RadarIndicatorOpts, dict]]],
+        schema: List[Union[opts.RadarIndicatorOpts, dict]],
         shape: Optional[str] = None,
         textstyle_opts: Union[opts.TextStyleOpts, dict] = opts.TextStyleOpts(),
-        splitline_opt: Union[opts.SplitLineOpts, dict] = opts.SplitLineOpts(),
+        splitline_opt: Union[opts.SplitLineOpts, dict] = opts.SplitLineOpts(
+            is_show=True
+        ),
         splitarea_opt: Union[opts.SplitAreaOpts, dict] = opts.SplitAreaOpts(),
         axisline_opt: Union[opts.AxisLineOpts, dict] = opts.AxisLineOpts(),
     ):
@@ -54,9 +56,9 @@ class Radar(Chart):
     def add(
         self,
         series_name: str,
-        value: Sequence,
+        data: Sequence,
         symbol: Optional[str] = None,
-        item_color=None,
+        color: Optional[str] = None,
         label_opts: opts.LabelOpts = opts.LabelOpts(),
         linestyle_opts: opts.LineStyleOpts = opts.LineStyleOpts(),
         areastyle_opts: opts.AreaStyleOpts = opts.AreaStyleOpts(),
@@ -76,10 +78,10 @@ class Radar(Chart):
             {
                 "type": ChartType.RADAR,
                 "name": series_name,
-                "data": value,
+                "data": data,
                 "symbol": symbol,
                 "label": label_opts,
-                "itemStyle": {"normal": {"color": item_color}},
+                "itemStyle": {"normal": {"color": color}},
                 "lineStyle": linestyle_opts,
                 "areaStyle": areastyle_opts,
                 "tooltip": tooltip_opts,
