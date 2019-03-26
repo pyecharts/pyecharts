@@ -53,3 +53,26 @@ class Boxplot(AxisChart):
             }
         )
         return self
+
+    @staticmethod
+    def prepare_data(items):
+        data = []
+        for item in items:
+            try:
+                d, res = sorted(item), []
+                for i in range(1, 4):
+                    n = i * (len(d) + 1) / 4
+                    k = int(n)
+                    m = n - k
+                    if m == 0:
+                        res.append(d[k - 1])
+                    elif m == 1 / 4:
+                        res.append(d[k - 1] * 0.75 + d[k] * 0.25)
+                    elif m == 1 / 2:
+                        res.append(d[k - 1] * 0.50 + d[k] * 0.50)
+                    elif m == 3 / 4:
+                        res.append(d[k - 1] * 0.25 + d[k] * 0.75)
+                data.append([d[0]] + res + [d[-1]])
+            except Exception:
+                pass
+        return data
