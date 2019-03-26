@@ -3,11 +3,11 @@ import json
 import os
 import uuid
 
-from jinja2 import Environment
+from jinja2 import Environment, Markup
 
 from ..commons import utils
 from ..commons.types import Optional, Union
-from ..globals import ThemeType, NotebookType, CURRENT_HOST, CURRENT_NOTEBOOK
+from ..globals import ThemeType, NotebookType, CurrentConfig
 from ..datasets import FILENAMES
 from ..options import InitOpts
 from ..render.engine import RenderEngine
@@ -27,7 +27,7 @@ class Base:
         self.chart_id = init_opts.chart_id or uuid.uuid4().hex
 
         self.options: dict = {}
-        self.js_host: str = CURRENT_HOST
+        self.js_host: str = CurrentConfig.ONLINE_HOST
         self.js_functions: utils.OrderedSet = utils.OrderedSet()
         self.js_dependencies: utils.OrderedSet = utils.OrderedSet("echarts")
 
@@ -63,7 +63,7 @@ class Base:
             self.js_dependencies.add(self.theme)
 
     def _repr_html_(self):
-        if CURRENT_NOTEBOOK == NotebookType.JUPYTER_NOTEBOOK:
+        if CurrentConfig.NOTEBOOK_TYPE == NotebookType.JUPYTER_NOTEBOOK:
             require_config = utils.produce_require_dict(
                 self.js_dependencies, self.js_host
             )
@@ -76,7 +76,7 @@ class Base:
                 libraries=require_config["libraries"],
             )
 
-        if CURRENT_NOTEBOOK == NotebookType.JUPYTER_LAB:
+        if CurrentConfig.NOTEBOOK_TYPE == NotebookType.JUPYTER_LAB:
             self.options = self.dump_options()
             return RenderEngine().render_notebook(
                 template_name="jupyter_lab.html", charts=(self,)
@@ -89,7 +89,8 @@ class Base:
                 "var s{idx} = document.createElement('script'); "
                 "s{idx}.src = '{dep}';"
                 "document.head.appendChild(s{idx});".format(
-                    idx=idx, dep="{}{}.js".format(CURRENT_HOST, FILENAMES[dep])
+                    idx=idx,
+                    dep="{}{}.js".format(CurrentConfig.ONLINE_HOST, FILENAMES[dep]),
                 )
             )
         return "".join(scripts)

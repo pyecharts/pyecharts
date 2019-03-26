@@ -3,7 +3,7 @@ from jinja2 import Environment
 
 from ...commons import utils
 from ...commons.types import Optional
-from ...globals import ThemeType, CURRENT_HOST
+from ...globals import ThemeType, CurrentConfig
 from ...render.engine import RenderEngine
 
 
@@ -17,7 +17,7 @@ class Page:
     def __init__(
         self,
         page_title: str = "Awesome-pyecharts",
-        js_host: str = CURRENT_HOST,
+        js_host: str = CurrentConfig.ONLINE_HOST,
         interval: int = 1,
     ):
         self.page_title = page_title

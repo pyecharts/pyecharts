@@ -93,5 +93,10 @@ ThemeType = _ThemeType()
 GeoType = _GeoType()
 NotebookType = _NotebookType()
 
-CURRENT_HOST = "http://chenjiandongx.com/go-echarts-assets/assets/"
-CURRENT_NOTEBOOK = NotebookType.JUPYTER_NOTEBOOK
+
+class _CurrentConfig:
+    ONLINE_HOST = "http://chenjiandongx.com/go-echarts-assets/assets/"
+    NOTEBOOK_TYPE = NotebookType.JUPYTER_NOTEBOOK
+
+
+CurrentConfig = _CurrentConfig()
