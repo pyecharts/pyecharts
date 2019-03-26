@@ -16,8 +16,8 @@ class Kline(AxisChart):
         super().__init__(init_opts=init_opts)
         self.options.update(yAxis=[opts.AxisOpts().opts])
         self.set_global_opts(
-            xaxis_opt=opts.AxisOpts(is_scale=True),
-            yaxis_opt=opts.AxisOpts(is_scale=True),
+            xaxis_opts=opts.AxisOpts(is_scale=True),
+            yaxis_opts=opts.AxisOpts(is_scale=True),
         )
 
     def add_yaxis(
