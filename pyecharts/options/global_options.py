@@ -501,7 +501,7 @@ class RadiusAxisOpts:
     def __init__(
         self,
         polar_index: Optional[int] = None,
-        data: Optional[List[Union[RadiusAxisItem, dict]]] = None,
+        data: Optional[List[Union[RadiusAxisItem, dict, str]]] = None,
         boundary_gap: Union[bool, List] = None,
         type_: Optional[str] = None,
         name: Optional[str] = None,
@@ -549,7 +549,7 @@ class AngleAxisOpts:
     def __init__(
         self,
         polar_index: Optional[int] = None,
-        data: Optional[List[Union[AngleAxisItem, dict]]] = None,
+        data: Optional[List[Union[AngleAxisItem, dict, str]]] = None,
         start_angle: Optional[Numeric] = None,
         is_clockwise: bool = False,
         boundary_gap: Union[bool, List] = None,

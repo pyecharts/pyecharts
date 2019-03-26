@@ -31,13 +31,6 @@ class LabelOpts:
             "formatter": formatter,
         }
 
-        # if chart_type != "graph":
-        #     if formatter is None:
-        #         if chart_type == "pie":
-        #             formatter = "{b}: {d}%"
-
-        # position = "outside" if chart_type in ["pie", "graph"] else "top"
-
 
 class LineStyleOpts:
     def __init__(
@@ -48,10 +41,6 @@ class LineStyleOpts:
         type_: str = "solid",
         color: Optional[str] = None,
     ):
-
-        # if line_color is None and type == "graph":
-        #     line_color = "#aaa"
-
         self.opts: dict = {
             "width": width,
             "opacity": opacity,
@@ -199,9 +188,24 @@ class MarkAreaItem:
 
 class EffectOpts:
     def __init__(
-        self, brush_type: str = "stroke", scale: Numeric = 2.5, period: Numeric = 4
+        self,
+        is_show: bool = True,
+        brush_type: str = "stroke",
+        scale: Numeric = 2.5,
+        period: Numeric = 4,
+        color: Optional[str] = None,
+        symbol: Optional[str] = None,
+        symbol_size: Optional[Numeric] = None,
     ):
-        self.opts: dict = {"brushType": brush_type, "scale": scale, "period": period}
+        self.opts: dict = {
+            "show": is_show,
+            "brushType": brush_type,
+            "scale": scale,
+            "period": period,
+            "color": color,
+            "symbol": symbol,
+            "symbolSize": symbol_size,
+        }
 
 
 class AreaStyleOpts:
@@ -249,23 +253,6 @@ class TextStyleOpts:
             "fontSize": font_size,
             "lineHeight": line_height,
         }
-
-
-# def symbol(type=None, symbol="", **kwargs):
-#     """
-#
-#     :param symbol:
-#         标记类型, 有'rect', 'roundRect', 'triangle', 'diamond',
-#          'pin', 'arrow'可选
-#     :param kwargs:
-#     """
-#     if symbol is None:  # Radar
-#         symbol = "none"
-#     elif type == "line" and symbol == "":  # Line
-#         symbol = "emptyCircle"
-#     elif symbol not in SYMBOLS:
-#         symbol = "circle"
-#     return symbol
 
 
 class GraphNode:
