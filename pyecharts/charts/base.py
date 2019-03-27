@@ -3,7 +3,7 @@ import json
 import os
 import uuid
 
-from jinja2 import Environment, Markup
+from jinja2 import Environment
 
 from ..commons import utils
 from ..commons.types import Optional, Union
@@ -69,7 +69,7 @@ class Base:
             )
             self.options = self.dump_options()
             self._use_theme()
-            return RenderEngine().render_notebook(
+            return RenderEngine().render_chart_to_notebook(
                 template_name="jupyter_notebook.html",
                 charts=(self,),
                 config_items=require_config["config_items"],
@@ -78,9 +78,12 @@ class Base:
 
         if CurrentConfig.NOTEBOOK_TYPE == NotebookType.JUPYTER_LAB:
             self.options = self.dump_options()
-            return RenderEngine().render_notebook(
+            return RenderEngine().render_chart_to_notebook(
                 template_name="jupyter_lab.html", charts=(self,)
             )
+
+        if CurrentConfig.NOTEBOOK_TYPE == NotebookType.NTERACT:
+            pass
 
     def _repr_javascript_(self):
         scripts = []
