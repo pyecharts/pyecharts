@@ -27,7 +27,7 @@ class Base:
         self.chart_id = init_opts.chart_id or uuid.uuid4().hex
 
         self.options: dict = {}
-        self.js_host: str = CurrentConfig.ONLINE_HOST
+        self.js_host: str = init_opts.js_host or CurrentConfig.ONLINE_HOST
         self.js_functions: utils.OrderedSet = utils.OrderedSet()
         self.js_dependencies: utils.OrderedSet = utils.OrderedSet("echarts")
 
