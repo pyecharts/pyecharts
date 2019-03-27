@@ -76,4 +76,9 @@ def _clean_array(myarray):
 
 
 def remove_key_with_none_value(incoming_dict):
-    return _expand(_clean_dict(incoming_dict))
+    if isinstance(incoming_dict, dict):
+        return _expand(_clean_dict(incoming_dict))
+    elif incoming_dict:
+        return incoming_dict
+    else:
+        return None

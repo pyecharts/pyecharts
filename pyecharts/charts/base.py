@@ -72,6 +72,7 @@ class Base:
         return RenderEngine().render_chart_to_notebook(
             template_name="jupyter_notebook.html",
             charts=(self,),
+            content=self.dump_options(),
             config_items=require_config["config_items"],
             libraries=require_config["libraries"],
         )
@@ -85,15 +86,15 @@ class Base:
         # if CurrentConfig.NOTEBOOK_TYPE == NotebookType.NTERACT:
         #     pass
 
-    def _repr_javascript_(self):
-        scripts = []
-        for idx, dep in enumerate(self.js_dependencies.items):
-            f, ext = FILENAMES[dep]
-            scripts.append(
-                "var s{idx} = document.createElement('script'); "
-                "s{idx}.src = '{dep}';"
-                "document.head.appendChild(s{idx});".format(
-                    idx=idx, dep="{}{}.{}".format(CurrentConfig.ONLINE_HOST, f, ext)
-                )
-            )
-        return "".join(scripts)
+#    def _repr_javascript_(self):
+#        scripts = []
+#        for idx, dep in enumerate(self.js_dependencies.items):
+#            f, ext = FILENAMES[dep]
+#            scripts.append(
+#                "var s{idx} = document.createElement('script'); "
+#                "s{idx}.src = '{dep}';"
+#                "document.head.appendChild(s{idx});".format(
+#                    idx=idx, dep="{}{}.{}".format(CurrentConfig.ONLINE_HOST, f, ext)
+#                )
+#            )
+#        return "".join(scripts)
