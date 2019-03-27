@@ -62,6 +62,7 @@ class Geo(Chart):
         type_: str = "scatter",
         maptype: str = "china",
         *,
+        is_selected: bool = True,
         symbol: Optional[str] = None,
         symbol_size: Numeric = 12,
         color: Optional[str] = None,
@@ -112,7 +113,7 @@ class Geo(Chart):
             }
         )
         self._append_color(color)
-        self._append_legend(series_name)
+        self._append_legend(series_name, is_selected)
 
         if type_ == ChartType.SCATTER:
             self.options.get("series").append(

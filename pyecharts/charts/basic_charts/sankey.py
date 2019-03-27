@@ -21,6 +21,8 @@ class Sankey(Chart):
         series_name: str,
         nodes: Sequence,
         links: Sequence,
+        *,
+        is_selected: bool = True,
         node_width: Numeric = 20,
         node_gap: Numeric = 8,
         label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
@@ -34,7 +36,7 @@ class Sankey(Chart):
         if isinstance(tooltip_opts, opts.TooltipOpts):
             tooltip_opts = tooltip_opts.opts
 
-        self._append_legend(series_name)
+        self._append_legend(series_name, is_selected)
         self.options.get("series").append(
             {
                 "type": ChartType.SANKEY,

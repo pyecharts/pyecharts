@@ -57,6 +57,8 @@ class Radar(Chart):
         self,
         series_name: str,
         data: Sequence,
+        *,
+        is_selected: bool = True,
         symbol: Optional[str] = None,
         color: Optional[str] = None,
         label_opts: opts.LabelOpts = opts.LabelOpts(),
@@ -73,7 +75,7 @@ class Radar(Chart):
         if isinstance(tooltip_opts, opts.TooltipOpts):
             tooltip_opts = tooltip_opts.opts
 
-        self._append_legend(series_name)
+        self._append_legend(series_name, is_selected)
         self.options.get("series").append(
             {
                 "type": ChartType.RADAR,

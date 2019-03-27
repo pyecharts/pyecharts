@@ -22,6 +22,7 @@ class Boxplot(AxisChart):
         series_name: str,
         y_axis: Sequence,
         *,
+        is_selected: bool = True,
         xaxis_index: Optional[Numeric] = None,
         yaxis_index: Optional[Numeric] = None,
         label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
@@ -38,7 +39,7 @@ class Boxplot(AxisChart):
         if isinstance(tooltip_opts, opts.TooltipOpts):
             tooltip_opts = tooltip_opts.opts
 
-        self._append_legend(series_name)
+        self._append_legend(series_name, is_selected)
         self.options.get("series").append(
             {
                 "type": ChartType.BOXPLOT,

@@ -12,7 +12,7 @@ def bar_base() -> Bar:
         Bar()
         .add_xaxis(Faker.choose())
         .add_yaxis("商家A", Faker.values())
-        .add_yaxis("商家B", Faker.values())
+        .add_yaxis("商家B", Faker.values(), is_selected=False)
         .set_global_opts(title_opts=opts.TitleOpts(title="Bar-基本示例", subtitle="我是副标题"))
     )
     return c

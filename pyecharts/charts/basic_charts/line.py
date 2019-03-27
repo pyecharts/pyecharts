@@ -21,6 +21,7 @@ class Line(AxisChart):
         series_name: str,
         y_axis: Sequence,
         *,
+        is_selected: bool = True,
         xaxis_index: Optional[Numeric] = None,
         yaxis_index: Optional[Numeric] = None,
         color: Optional[str] = None,
@@ -51,7 +52,7 @@ class Line(AxisChart):
             tooltip_opts = tooltip_opts.opts
 
         self._append_color(color)
-        self._append_legend(series_name)
+        self._append_legend(series_name, is_selected)
         # 合并 x 和 y 轴数据，避免当 X 轴的类型设置为 'value' 的时候，
         # X、Y 轴均显示 Y 轴数据
         data = [list(z) for z in zip(self._xaxis_data, y_axis)]

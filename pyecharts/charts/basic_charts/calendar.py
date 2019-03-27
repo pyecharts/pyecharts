@@ -21,6 +21,7 @@ class Calendar(Chart):
         series_name: str,
         yaxis_data: Sequence,
         *,
+        is_selected: bool = True,
         label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
         calendar_opts: Union[opts.CalendarOpts, dict, None] = None,
         tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
@@ -35,7 +36,7 @@ class Calendar(Chart):
         if calendar_opts:
             self.options.update(calendar=calendar_opts)
 
-        self._append_legend(series_name)
+        self._append_legend(series_name, is_selected)
         self.options.get("series").append(
             {
                 "type": "heatmap",

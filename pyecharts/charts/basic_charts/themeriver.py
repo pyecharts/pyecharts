@@ -19,6 +19,8 @@ class ThemeRiver(Chart):
         self,
         series_name: Sequence,
         data: Sequence,
+        *,
+        is_selected: bool = True,
         label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
         tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
         singleaxis_opts: Union[opts.SingleAxisOpts, dict] = opts.SingleAxisOpts(),
@@ -31,7 +33,7 @@ class ThemeRiver(Chart):
             singleaxis_opts = singleaxis_opts.opts
 
         for n in series_name:
-            self._append_legend(n)
+            self._append_legend(n, is_selected)
 
         self.options.get("series").append(
             {

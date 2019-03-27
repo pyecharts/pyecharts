@@ -31,6 +31,8 @@ class Polar(Chart):
         self,
         series_name: str,
         data: Sequence,
+        *,
+        is_selected: bool = True,
         type_: str = "line",
         symbol: Optional[str] = None,
         symbol_size: Numeric = 4,
@@ -49,7 +51,7 @@ class Polar(Chart):
         if isinstance(tooltip_opts, opts.TooltipOpts):
             tooltip_opts = tooltip_opts.opts
 
-        self._append_legend(series_name)
+        self._append_legend(series_name, is_selected)
         self.options.update(polar={})
 
         if type_ in ("scatter", "line", "bar"):

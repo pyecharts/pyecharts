@@ -7,8 +7,8 @@ from jinja2 import Environment
 
 from ..commons import utils
 from ..commons.types import Optional, Union
-from ..globals import ThemeType, NotebookType, CurrentConfig
 from ..datasets import FILENAMES
+from ..globals import CurrentConfig, NotebookType, ThemeType
 from ..options import InitOpts
 from ..render.engine import RenderEngine
 

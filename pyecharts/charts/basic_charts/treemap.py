@@ -20,6 +20,8 @@ class TreeMap(Chart):
         self,
         series_name: str,
         data: Sequence,
+        *,
+        is_selected: bool = True,
         left_depth: Optional[Numeric] = None,
         pos_left: Optional[str] = None,
         pos_right: Optional[str] = None,
@@ -36,7 +38,7 @@ class TreeMap(Chart):
         if isinstance(tooltip_opts, opts.TooltipOpts):
             tooltip_opts = tooltip_opts.opts
 
-        self._append_legend(series_name)
+        self._append_legend(series_name, is_selected)
         self.options.get("series").append(
             {
                 "type": ChartType.TREEMAP,

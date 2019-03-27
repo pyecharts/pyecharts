@@ -33,6 +33,7 @@ class WordCloud(Chart):
         self,
         series_name: str,
         data_pair: Sequence,
+        *,
         shape: str = "circle",
         word_gap: Numeric = 20,
         word_size_range=None,
