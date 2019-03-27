@@ -1,8 +1,7 @@
 # coding=utf-8
-import os
 import re
 
-from jinja2 import Environment, FileSystemLoader
+from jinja2 import Environment
 
 from pyecharts.commons.types import Any, Optional
 
@@ -10,19 +9,10 @@ from ..commons.utils import write_utf8_html_file
 from ..datasets import FILENAMES
 from ..globals import CurrentConfig
 
-__HERE = os.path.abspath(os.path.dirname(__file__))
-
-GLOBAL_ENV = Environment(
-    keep_trailing_newline=True,
-    trim_blocks=True,
-    lstrip_blocks=True,
-    loader=FileSystemLoader(os.path.join(__HERE, "templates")),
-)
-
 
 class RenderEngine:
     def __init__(self, env: Optional[Environment] = None):
-        self.env = env or GLOBAL_ENV
+        self.env = env or CurrentConfig.GLOBAL_ENV
 
     @staticmethod
     def generate_js_link(chart: Any) -> Any:
@@ -48,11 +38,6 @@ class RenderEngine:
         html = re.sub(r'\\n|\\t|"?__-o-__"?', "", html)
         write_utf8_html_file(path, html)
 
-    def render_notebook(self, template_name, **kwargs) -> str:
+    def render_chart_to_notebook(self, template_name, **kwargs) -> str:
         tpl = self.env.get_template(template_name)
         return tpl.render(**kwargs)
-
-    #
-    # def render_jupyter_lab(self, template_name, **kwargs) -> str:
-    #     tpl = self.env.get_template(template_name)
-    #     return tpl.render(**kwargs)

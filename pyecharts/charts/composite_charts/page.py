@@ -61,7 +61,7 @@ class Page:
             c.options = c.dump_options()
             if c.theme not in ThemeType.BUILTIN_THEMES:
                 self.js_dependencies.add(c.theme)
-        return RenderEngine().render_notebook(
+        return RenderEngine().render_chart_to_notebook(
             template_name="jupyter_notebook.html",
             charts=self,
             config_items=require_config["config_items"],
