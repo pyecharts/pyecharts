@@ -6,7 +6,7 @@ from jinja2 import Environment
 from pyecharts.commons.types import Any, Optional
 
 from ..commons.utils import write_utf8_html_file
-from ..datasets import FILENAMES
+from ..datasets import FILENAMES, EXTRA
 from ..globals import CurrentConfig
 
 
@@ -21,8 +21,15 @@ class RenderEngine:
         links = []
         for dep in chart.js_dependencies.items:
             # TODO: if?
-            f, ext = FILENAMES[dep]
-            links.append("{}{}.{}".format(chart.js_host, f, ext))
+            if dep in FILENAMES:
+                f, ext = FILENAMES[dep]
+                links.append("{}{}.{}".format(chart.js_host, f, ext))
+            else:
+                for url, files in EXTRA.items():
+                    if dep in files:
+                        f, ext = files[dep]
+                        links.append("{}{}.{}".format(url, f, ext))
+                        break
         chart.dependencies = links
         return chart
 
