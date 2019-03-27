@@ -22,6 +22,7 @@ class Graph(Chart):
         links: List[Union[opts.GraphLink, dict]],
         categories: Union[List[Union[opts.GraphCategory, dict]], None] = None,
         *,
+        is_selected: bool = True,
         is_focusnode: bool = True,
         is_roam: bool = True,
         is_rotate_label: bool = False,
@@ -59,7 +60,7 @@ class Graph(Chart):
             for c in categories:
                 if isinstance(c, opts.GraphCategory):
                     c = c.opts
-                self._append_legend(c)
+                self._append_legend(c, is_selected)
 
         if edge_symbol is None:
             edge_symbol = [None, None]

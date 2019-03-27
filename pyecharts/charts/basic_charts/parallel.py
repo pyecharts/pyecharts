@@ -28,6 +28,8 @@ class Parallel(Chart):
         self,
         series_name: str,
         data: Sequence,
+        *,
+        is_selected: bool = True,
         linestyle_opts: Union[opts.LineStyleOpts, dict] = opts.LineStyleOpts(),
         tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
     ):
@@ -37,7 +39,7 @@ class Parallel(Chart):
             tooltip_opts = tooltip_opts.opts
 
         self.options.update(parallel=opts.ParallelOpts().opts)
-        self._append_legend(series_name)
+        self._append_legend(series_name, is_selected)
         self.options.get("series").append(
             {
                 "type": ChartType.PARALLEL,

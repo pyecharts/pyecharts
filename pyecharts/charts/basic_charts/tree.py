@@ -38,6 +38,7 @@ class Tree(Chart):
         self,
         series_name: str,
         data: Sequence,
+        *,
         layout: str = "orthogonal",
         symbol: str = "emptyCircle",
         symbol_size: Numeric = 7,

@@ -19,6 +19,7 @@ class Pie(Chart):
         self,
         series_name: str,
         data_pair: Sequence,
+        *,
         color: Optional[str] = None,
         radius: Optional[Sequence] = None,
         center: Optional[Sequence] = None,

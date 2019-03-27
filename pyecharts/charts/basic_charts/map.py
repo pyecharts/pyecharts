@@ -21,6 +21,7 @@ class Map(Chart):
         data_pair: Sequence,
         maptype: str = "china",
         *,
+        is_selected: bool = True,
         is_roam: bool = True,
         symbol: Optional[str] = None,
         is_map_symbol_show: bool = True,
@@ -33,8 +34,8 @@ class Map(Chart):
             tooltip_opts = tooltip_opts.opts
 
         self.js_dependencies.add(maptype)
-        data = [{"name": n, "value": v} for (n, v) in data_pair]
-        self._append_legend(series_name)
+        data = [{"name": n, "value": v} for n, v in data_pair]
+        self._append_legend(series_name, is_selected)
         self.options.get("series").append(
             {
                 "type": ChartType.MAP,

@@ -24,6 +24,7 @@ class HeatMap(AxisChart):
         yaxis_data: Sequence,
         value: Sequence,
         *,
+        is_selected: bool = True,
         xaxis_index: Optional[Numeric] = None,
         yaxis_index: Optional[Numeric] = None,
         label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
@@ -40,6 +41,7 @@ class HeatMap(AxisChart):
         if isinstance(tooltip_opts, opts.TooltipOpts):
             tooltip_opts = tooltip_opts.opts
 
+        self._append_legend(series_name, is_selected)
         self.options.get("yAxis")[0].update(data=yaxis_data)
         self.options.get("series").append(
             {

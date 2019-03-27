@@ -20,7 +20,9 @@ class Chart(Base):
         if init_opts.theme == "white":
             self.options.update(color=self._colors)
         self.options.update(
-            series=[], legend=[{"data": []}], tooltip=opts.TooltipOpts().opts
+            series=[],
+            legend=[{"data": [], "selected": dict()}],
+            tooltip=opts.TooltipOpts().opts,
         )
 
     def set_series_opts(
@@ -84,8 +86,10 @@ class Chart(Base):
                 s.update(tooltip=tooltip_opts)
         return self
 
-    def _append_legend(self, name):
+    def _append_legend(self, name, is_selected):
         self.options.get("legend")[0].get("data").append(name)
+        self.options.get("legend")[0].get("selected").update({name: is_selected})
+        print(self.options.get("legend")[0])
 
     def _append_color(self, color: Optional[str]):
         if color:

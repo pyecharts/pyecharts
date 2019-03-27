@@ -22,6 +22,7 @@ class Scatter(AxisChart):
         series_name: str,
         y_axis: Sequence,
         *,
+        is_selected: bool = True,
         xaxis_index: Optional[Numeric] = None,
         yaxis_index: Optional[Numeric] = None,
         color: Optional[str] = None,
@@ -42,7 +43,7 @@ class Scatter(AxisChart):
             tooltip_opts = tooltip_opts.opts
 
         self._append_color(color)
-        self._append_legend(series_name)
+        self._append_legend(series_name, is_selected)
         data = [list(z) for z in zip(self._xaxis_data, y_axis)]
         self.options.get("series").append(
             {

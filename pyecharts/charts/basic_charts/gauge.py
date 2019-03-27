@@ -17,6 +17,8 @@ class Gauge(Chart):
         self,
         series_name: str,
         data_pair: Sequence,
+        *,
+        is_selected: bool = True,
         min_: Numeric = 0,
         max_: Numeric = 100,
         start_angle: Numeric = 225,
@@ -26,7 +28,7 @@ class Gauge(Chart):
         if isinstance(tooltip_opts, opts.TooltipOpts):
             tooltip_opts = tooltip_opts.opts
 
-        self._append_legend(series_name)
+        self._append_legend(series_name, is_selected)
         self.options.get("series").append(
             {
                 "type": ChartType.GAUGE,

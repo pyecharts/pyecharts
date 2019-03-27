@@ -3,7 +3,7 @@ from jinja2 import Environment
 
 from ...commons import utils
 from ...commons.types import Optional
-from ...globals import ThemeType, CurrentConfig
+from ...globals import CurrentConfig, ThemeType
 from ...render.engine import RenderEngine
 
 

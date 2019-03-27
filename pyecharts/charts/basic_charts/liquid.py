@@ -20,6 +20,7 @@ class Liquid(Chart):
         self,
         series_name: str,
         data: Sequence,
+        *,
         shape: str = "circle",
         color: Optional[List[str]] = None,
         is_animation: bool = True,
