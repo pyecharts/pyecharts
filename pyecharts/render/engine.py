@@ -21,7 +21,8 @@ class RenderEngine:
         links = []
         for dep in chart.js_dependencies.items:
             # TODO: if?
-            links.append("{}{}.js".format(chart.js_host, FILENAMES[dep]))
+            f, ext = FILENAMES[dep]
+            links.append("{}{}.{}".format(chart.js_host, f, ext))
         chart.dependencies = links
         return chart
 

@@ -63,37 +63,37 @@ class Base:
             self.js_dependencies.add(self.theme)
 
     def _repr_html_(self):
-        if CurrentConfig.NOTEBOOK_TYPE == NotebookType.JUPYTER_NOTEBOOK:
-            require_config = utils.produce_require_dict(
+        # if CurrentConfig.NOTEBOOK_TYPE == NotebookType.JUPYTER_NOTEBOOK:
+        require_config = utils.produce_require_dict(
                 self.js_dependencies, self.js_host
             )
-            self.options = self.dump_options()
-            self._use_theme()
-            return RenderEngine().render_chart_to_notebook(
-                template_name="jupyter_notebook.html",
-                charts=(self,),
-                config_items=require_config["config_items"],
-                libraries=require_config["libraries"],
-            )
+        self.options = self.dump_options()
+        self._use_theme()
+        return RenderEngine().render_chart_to_notebook(
+            template_name="jupyter_notebook.html",
+            charts=(self,),
+            config_items=require_config["config_items"],
+            libraries=require_config["libraries"],
+        )
 
-        if CurrentConfig.NOTEBOOK_TYPE == NotebookType.JUPYTER_LAB:
-            self.options = self.dump_options()
-            return RenderEngine().render_chart_to_notebook(
-                template_name="jupyter_lab.html", charts=(self,)
-            )
-
-        if CurrentConfig.NOTEBOOK_TYPE == NotebookType.NTERACT:
-            pass
+        # if CurrentConfig.NOTEBOOK_TYPE == NotebookType.JUPYTER_LAB:
+        #     self.options = self.dump_options()
+        #     return RenderEngine().render_chart_to_notebook(
+        #         template_name="jupyter_lab.html", charts=(self,)
+        #     )
+        #
+        # if CurrentConfig.NOTEBOOK_TYPE == NotebookType.NTERACT:
+        #     pass
 
     def _repr_javascript_(self):
         scripts = []
         for idx, dep in enumerate(self.js_dependencies.items):
+            f, ext = FILENAMES[dep]
             scripts.append(
                 "var s{idx} = document.createElement('script'); "
                 "s{idx}.src = '{dep}';"
                 "document.head.appendChild(s{idx});".format(
-                    idx=idx,
-                    dep="{}{}.js".format(CurrentConfig.ONLINE_HOST, FILENAMES[dep]),
+                    idx=idx, dep="{}{}.{}".format(CurrentConfig.ONLINE_HOST, f, ext)
                 )
             )
         return "".join(scripts)
