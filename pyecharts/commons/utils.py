@@ -1,5 +1,5 @@
 # coding=utf-8
-from pyecharts.datasets import FILENAMES
+from pyecharts.datasets import FILENAMES, EXTRA
 
 
 class OrderedSet:
@@ -22,8 +22,17 @@ def filter_js_func(fn: str) -> str:
 def produce_require_dict(js_dependencies, js_host) -> dict:
     confs, libraries = [], []
     for name in js_dependencies.items:
-        confs.append("'{}':'{}{}'".format(name, js_host, FILENAMES[name]))
-        libraries.append("'{}'".format(name))
+        if name in FILENAMES:
+            f, _ = FILENAMES[name]
+            confs.append("'{}':'{}{}'".format(name, js_host, f))
+            libraries.append("'{}'".format(name))
+        else:
+            for url, files in EXTRA.items():
+                if name in files:
+                    f, _ = files[name]
+                    confs.append("'{}':'{}{}'".format(name, url, f))
+                    libraries.append("'{}'".format(name))
+                    break
     return dict(config_items=confs, libraries=libraries)
 
 
@@ -75,4 +84,9 @@ def _clean_array(myarray):
 
 
 def remove_key_with_none_value(incoming_dict):
-    return _expand(_clean_dict(incoming_dict))
+    if isinstance(incoming_dict, dict):
+        return _expand(_clean_dict(incoming_dict))
+    elif incoming_dict:
+        return incoming_dict
+    else:
+        return None
