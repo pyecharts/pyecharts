@@ -1,5 +1,5 @@
 # coding=utf-8
-from pyecharts.datasets import FILENAMES, EXTRA
+from pyecharts.datasets import EXTRA, FILENAMES
 
 
 class OrderedSet:

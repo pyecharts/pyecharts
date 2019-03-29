@@ -44,7 +44,7 @@ class Javascript:
             css = []
         self.lib = lib
         self.css = css
-        self.data = data
+        self.data = data or ""
 
     def _repr_javascript_(self):
         r = ""

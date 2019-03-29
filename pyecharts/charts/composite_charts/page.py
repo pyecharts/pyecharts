@@ -1,9 +1,13 @@
 # coding=utf-8
+import uuid
+
 from jinja2 import Environment
 
 from ...commons import utils
 from ...commons.types import Optional
-from ...globals import CurrentConfig, ThemeType
+from ...datasets import FILENAMES
+from ...globals import CurrentConfig, NotebookType, ThemeType
+from ...render.display import HTML, Javascript
 from ...render.engine import RenderEngine
 
 
@@ -55,15 +59,39 @@ class Page:
             template_name=template_name, chart=self, path=path
         )
 
-    def _repr_html_(self):
-        require_config = utils.produce_require_dict(self.js_dependencies, self.js_host)
+    def render_notebook(self):
         for c in self:
             c.json_contents = c.dump_options()
+            c.chart_id = uuid.uuid4().hex
             if c.theme not in ThemeType.BUILTIN_THEMES:
                 self.js_dependencies.add(c.theme)
-        return RenderEngine().render_chart_to_notebook(
-            template_name="jupyter_notebook.html",
-            charts=self,
-            config_items=require_config["config_items"],
-            libraries=require_config["libraries"],
-        )
+
+        if CurrentConfig.NOTEBOOK_TYPE == NotebookType.JUPYTER_NOTEBOOK:
+            require_config = utils.produce_require_dict(
+                self.js_dependencies, self.js_host
+            )
+            return HTML(
+                RenderEngine().render_chart_to_notebook(
+                    template_name="jupyter_notebook.html",
+                    charts=self,
+                    config_items=require_config["config_items"],
+                    libraries=require_config["libraries"],
+                )
+            )
+
+        if CurrentConfig.NOTEBOOK_TYPE == NotebookType.JUPYTER_LAB:
+            return HTML(
+                RenderEngine().render_chart_to_notebook(
+                    template_name="jupyter_lab.html", charts=self
+                )
+            )
+
+        if CurrentConfig.NOTEBOOK_TYPE == NotebookType.NTERACT:
+            pass
+
+    def load_javascript(self):
+        scripts = []
+        for dep in self.js_dependencies.items:
+            f, ext = FILENAMES[dep]
+            scripts.append("{}{}.{}".format(CurrentConfig.ONLINE_HOST, f, ext))
+        return Javascript(lib=scripts)

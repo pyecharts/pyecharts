@@ -1,10 +1,10 @@
 # coding=utf-8
 from prettytable import PrettyTable
 
+from ..commons import utils
 from ..commons.types import List
 from ..globals import CurrentConfig
 from ..render.engine import RenderEngine
-from ..commons import utils
 
 
 class Table:
