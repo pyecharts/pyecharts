@@ -1,9 +1,12 @@
 # coding=utf-8
+import os
+
+from jinja2 import Environment
 from prettytable import PrettyTable
 
-from ..commons import utils
-from ..commons.types import List
+from ..commons.types import List, Optional
 from ..globals import CurrentConfig
+from ..render.display import HTML
 from ..render.engine import RenderEngine
 
 
@@ -15,20 +18,13 @@ class Table:
     ):
         self.page_title = page_title
         self.js_host = js_host
-        self.js_dependencies = utils.OrderedSet("bulma")
         self._charts = []
 
     def add(self, headers: List, rows: List):
         table = PrettyTable(headers)
         for r in rows:
             table.add_row(r)
-        self._charts.append(
-            table.get_html_string(
-                attributes={
-                    "class": "table is-bordered is-striped is-narrow is-hoverable is-fullwidth"
-                }
-            )
-        )
+        self._charts.append(table.get_html_string())
         return self
 
     # List-Like Feature
@@ -39,5 +35,16 @@ class Table:
     def __len__(self):
         return len(self._charts)
 
-    def _repr_html_(self):
-        return RenderEngine().render_chart_to_notebook("table.html", chart=self)
+    def render(
+        self,
+        path: str = "render.html",
+        template_name: str = "table.html",
+        env: Optional[Environment] = None,
+    ) -> str:
+        RenderEngine(env).render_chart_to_file(
+            chart=self, path=path, template_name=template_name
+        )
+        return os.path.abspath(path)
+
+    def render_notebook(self):
+        return HTML(RenderEngine().render_chart_to_notebook("table.html", chart=self))
