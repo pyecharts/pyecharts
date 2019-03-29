@@ -51,7 +51,7 @@ class Base:
         template_name: str = "simple_chart.html",
         env: Optional[Environment] = None,
     ) -> str:
-        self.options = self.dump_options()
+        self.json_contents = self.dump_options()
         self._use_theme()
         RenderEngine(env).render_chart_to_file(
             chart=self, path=path, template_name=template_name
@@ -67,7 +67,7 @@ class Base:
         require_config = utils.produce_require_dict(
                 self.js_dependencies, self.js_host
             )
-        self.options = self.dump_options()
+        self.json_contents = self.dump_options()
         self._use_theme()
         return RenderEngine().render_chart_to_notebook(
             template_name="jupyter_notebook.html",

@@ -48,7 +48,7 @@ class Page:
         env: Optional[Environment] = None,
     ):
         for c in self:
-            c.options = c.dump_options()
+            c.json_contents = c.dump_options()
             if c.theme not in ThemeType.BUILTIN_THEMES:
                 self.js_dependencies.add(c.theme)
         RenderEngine(env).render_chart_to_file(
@@ -58,7 +58,7 @@ class Page:
     def _repr_html_(self):
         require_config = utils.produce_require_dict(self.js_dependencies, self.js_host)
         for c in self:
-            c.options = c.dump_options()
+            c.json_contents = c.dump_options()
             if c.theme not in ThemeType.BUILTIN_THEMES:
                 self.js_dependencies.add(c.theme)
         return RenderEngine().render_chart_to_notebook(
