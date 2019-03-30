@@ -551,7 +551,7 @@ class AngleAxisOpts:
     def __init__(
         self,
         polar_index: Optional[int] = None,
-        data: Optional[List[Union[AngleAxisItem, dict, str]]] = None,
+        data: Optional[List[Union[AngleAxisItem, Numeric, dict, str]]] = None,
         start_angle: Optional[Numeric] = None,
         is_clockwise: bool = False,
         boundary_gap: Union[bool, List] = None,
