@@ -12,11 +12,11 @@ from setuptools import Command, find_packages, setup
 
 __title__ = "pyecharts"
 __description__ = "Python options, make charting easier"
-__url__ = "https://github.com/chenjiandongx/pyecharts"
+__url__ = "https://github.com/pyecharts/pyecharts"
 __author_email__ = "chenjiandongx@qq.com"
 __license__ = "MIT"
 
-__requires__ = ["jinja2"]
+__requires__ = ["jinja2", "prettytable"]
 
 __keywords__ = ["Echarts", "charts", "plotting-tool"]
 # Load the package's _version.py module as a dictionary.

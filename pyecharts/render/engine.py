@@ -6,7 +6,7 @@ from jinja2 import Environment
 from pyecharts.commons.types import Any, Optional
 
 from ..commons.utils import write_utf8_html_file
-from ..datasets import FILENAMES, EXTRA
+from ..datasets import EXTRA, FILENAMES
 from ..globals import CurrentConfig
 
 
