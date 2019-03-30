@@ -174,6 +174,11 @@ class AxisChart(Chart):
         self._xaxis_data = xaxis_data
         return self
 
+    def reversal_axis(self):
+        self.options["yAxis"][0]["data"] = self._xaxis_data
+        self.options["xAxis"][0]["data"] = None
+        return self
+
     def overlap(self, chart: Base):
         self.options.get("legend")[0].get("data").extend(
             chart.options.get("legend")[0].get("data")

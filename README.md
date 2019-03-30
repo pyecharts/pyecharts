@@ -163,14 +163,26 @@ $ make
 
 使用 [flake8](http://flake8.pycqa.org/en/latest/index.html), [Codecov](https://codecov.io/) 以及 [pylint](https://www.pylint.org/) 提升代码质量。
 
-
 ## 😉 Author
 
-项目主要由以下三位开发者开发维护
+pyecharts 主要由以下三位开发者开发维护
 
 * [@chenjiandongx](https://github.com/chenjiandongx)
 * [@chfw](https://github.com/chfw)
 * [@kinegratii](https://github.com/kinegratii)
+
+更多贡献者信息可以访问 [pyecharts/graphs/contributors](https://github.com/pyecharts/pyecharts/graphs/contributors)
+
+## 💌 捐赠
+
+开发和维护 pyecharts 花费了我巨大的心力，如果你觉得项目帮助到您，请认真考虑请作者喝一杯咖啡 😄
+
+<img src="https://user-images.githubusercontent.com/19553554/35425853-500d6b5c-0299-11e8-80a1-ebb6629b497e.png" width="19.8%" height="19.8%" alt="Alipay">
+　　
+<img src="https://user-images.githubusercontent.com/19553554/35425854-504e716a-0299-11e8-81fc-4a511f1c47e8.png" width="20%" height="20%" alt="Wechat">
+
+
+如果其他开发者帮助到了您，也可以请他们喝喝咖啡 [捐赠通道](http://pyecharts.org/#/zh-cn/donate)
 
 ## 📃 License
 

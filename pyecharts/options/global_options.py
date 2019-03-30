@@ -139,7 +139,8 @@ class DataZoomOpts:
 class LegendOpts:
     def __init__(
         self,
-        selected_mode: Optional[str] = None,
+        type_: Optional[str] = None,
+        selected_mode: Union[str, bool, None] = None,
         is_show: bool = True,
         pos_left: Optional[str] = None,
         pos_right: Optional[str] = None,
@@ -152,6 +153,7 @@ class LegendOpts:
             textstyle_opts = textstyle_opts.opts
 
         self.opts: dict = {
+            "type": type_,
             "selectedMode": selected_mode,
             "show": is_show,
             "left": pos_left,
@@ -176,10 +178,10 @@ class VisualMapOpts:
         pos_left: str = "left",
         pos_top: str = "bottom",
         split_number: int = 5,
-        dimension=None,
+        dimension: Optional[Numeric] = None,
         is_calculable: bool = True,
         is_piecewise: bool = False,
-        pieces=None,
+        pieces: Optional[Sequence] = None,
         textstyle_opts: Union[TextStyleOpts, dict, None] = None,
     ):
         if isinstance(textstyle_opts, TextStyleOpts):
@@ -251,12 +253,12 @@ class AxisOpts:
         interval: Optional[Numeric] = None,
         grid_index: Numeric = 0,
         position: Optional[str] = None,
-        boundary_gap: Optional[str] = None,
+        boundary_gap: Union[str, bool, None] = None,
         label_alignment: Optional[str] = None,
         formatter: Optional[str] = None,
         inverse: Optional[str] = None,
-        min_: Optional[Numeric] = None,
-        max_: Optional[Numeric] = None,
+        min_: Union[Numeric, str, None] = None,
+        max_: Union[Numeric, str, None] = None,
         type_: Optional[str] = None,
         name_textstyle_opts: Union[TextStyleOpts, dict, None] = None,
         splitarea_opts: Union[SplitAreaOpts, dict, None] = None,
