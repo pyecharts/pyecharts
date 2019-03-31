@@ -61,6 +61,7 @@ class _ThemeType:
     BUILTIN_THEMES = ["light", "dark", "white"]
     LIGHT = "light"
     DARK = "dark"
+    WHITE = "white"
     CHALK: str = "chalk"
     ESSOS: str = "essos"
     INFOGRAPHIC: str = "infographic"
