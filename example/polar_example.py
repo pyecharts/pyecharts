@@ -1,6 +1,6 @@
 # coding=utf-8
-import random
 import math
+import random
 
 from example.commons import Collector, Faker
 from pyecharts import options as opts
