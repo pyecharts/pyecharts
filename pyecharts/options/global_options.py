@@ -179,8 +179,10 @@ class VisualMapOpts:
         range_color: Union[List[str]] = None,
         range_size: Union[List[int]] = None,
         orient: str = "vertical",
-        pos_left: str = "left",
-        pos_top: str = "bottom",
+        pos_left: Optional[str] = None,
+        pos_right: Optional[str] = None,
+        pos_top: Optional[str] = None,
+        pos_bottom: Optional[str] = None,
         split_number: int = 5,
         dimension: Optional[Numeric] = None,
         is_calculable: bool = True,
@@ -213,6 +215,8 @@ class VisualMapOpts:
             "orient": orient,
             "left": pos_left,
             "top": pos_top,
+            "bottom": pos_bottom,
+            "right": pos_right,
             "showLabel": True,
         }
         if is_piecewise:
@@ -246,29 +250,51 @@ class TooltipOpts:
         }
 
 
+class AxisTickOpts:
+    def __init__(
+        self,
+        is_show: bool = True,
+        is_align_with_label: bool = False,
+        is_inside: bool = False,
+        length: Optional[Numeric] = None,
+        linestyle_opts: Union[LineStyleOpts, dict, None] = None,
+    ):
+        self.opts: dict = {
+            "show": is_show,
+            "alignWithLabel": is_align_with_label,
+            "inside": is_inside,
+            "length": length,
+            "lineStyle": linestyle_opts,
+        }
+
+
 class AxisOpts:
     def __init__(
         self,
         name: Optional[str] = None,
         is_show: bool = True,
         is_scale: bool = False,
+        is_inverse: bool = False,
         name_location: str = "end",
         name_gap: Numeric = 15,
         interval: Optional[Numeric] = None,
         grid_index: Numeric = 0,
         position: Optional[str] = None,
         boundary_gap: Union[str, bool, None] = None,
-        label_alignment: Optional[str] = None,
-        formatter: Optional[str] = None,
-        inverse: Optional[str] = None,
         min_: Union[Numeric, str, None] = None,
         max_: Union[Numeric, str, None] = None,
         type_: Optional[str] = None,
+        axistick_opts: Union[AxisTickOpts, dict, None] = None,
+        axislabel_opts: Union[LabelOpts, dict, None] = None,
         name_textstyle_opts: Union[TextStyleOpts, dict, None] = None,
         splitarea_opts: Union[SplitAreaOpts, dict, None] = None,
         splitline_opts: Union[SplitLineOpts, dict] = SplitLineOpts(),
         linestyle_opts: Union[LineStyleOpts, dict] = LineStyleOpts(),
     ):
+        if isinstance(axistick_opts, AxisTickOpts):
+            axistick_opts = axistick_opts.opts
+        if isinstance(axislabel_opts, LabelOpts):
+            axislabel_opts = axislabel_opts.opts
         if isinstance(name_textstyle_opts, TextStyleOpts):
             name_textstyle_opts = name_textstyle_opts.opts
         if isinstance(splitarea_opts, SplitAreaOpts):
@@ -287,9 +313,9 @@ class AxisOpts:
             "interval": interval,
             "nameTextStyle": name_textstyle_opts,
             "gridIndex": grid_index,
-            "axisTick": {"alignWithLabel": label_alignment},
-            "axisLabel": {"formatter": formatter},
-            "inverse": inverse,
+            "axisTick": axistick_opts,
+            "axisLabel": axislabel_opts,
+            "inverse": is_inverse,
             "position": position,
             "boundaryGap": boundary_gap,
             "min": min_,

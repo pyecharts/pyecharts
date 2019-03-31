@@ -5,6 +5,7 @@ from .global_options import (
     AngleAxisOpts,
     Axis3DOpts,
     AxisOpts,
+    AxisTickOpts,
     CalendarOpts,
     DataZoomOpts,
     Grid3DOpts,
