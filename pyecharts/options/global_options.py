@@ -1,6 +1,6 @@
 # coding=utf-8
 from ..commons.types import List, Numeric, Optional, Sequence, Union
-from ..globals import RenderType
+from ..globals import RenderType, ThemeType
 from ..options.series_options import (
     AxisLineOpts,
     LabelOpts,
@@ -19,7 +19,7 @@ class InitOpts:
         chart_id: Optional[str] = None,
         renderer: str = RenderType.CANVAS,
         page_title: str = "Awesome-pyecharts",
-        theme: str = "white",
+        theme: str = ThemeType.WHITE,
         bg_color: Optional[str] = None,
         js_host: str = "",
     ):
@@ -42,13 +42,13 @@ class ToolBoxFeatureOpts:
         data_zoom: Optional[dict] = None,
     ):
         if not save_as_image:
-            save_as_image = {"show": True, "title": "save as image"}
+            save_as_image = {"show": True, "title": "save as image", "type": "png"}
         if not restore:
             restore = {"show": True, "title": "restore"}
         if not data_view:
             data_view = {"show": True, "title": "data view"}
         if not data_zoom:
-            data_zoom = {"show": True, "title": "data zoom"}
+            data_zoom = {"show": True, "title": {"zoom": "data zoom", "back": "data zoom restore"}}
 
         self.opts: dict = {
             "saveAsImage": save_as_image,
@@ -63,6 +63,8 @@ class ToolboxOpts:
         self,
         is_show: bool = True,
         orient: str = "horizontal",
+        item_size: Union[int, float] = 15,
+        item_gap: Union[int, float] = 10,
         pos_left: str = "80%",
         pos_right: Optional[str] = None,
         pos_top: Optional[str] = None,
@@ -75,6 +77,8 @@ class ToolboxOpts:
         self.opts: dict = {
             "show": is_show,
             "orient": orient,
+            "itemSize": item_size,
+            "itemGap": item_gap,
             "left": pos_left,
             "right": pos_right,
             "top": pos_top,
@@ -100,18 +104,16 @@ class TitleOpts:
         if isinstance(subtitle_textstyle_opts, TextStyleOpts):
             subtitle_textstyle_opts = subtitle_textstyle_opts.opts
 
-        self.opts: List = [
-            {
-                "text": title,
-                "subtext": subtitle,
-                "left": pos_left,
-                "right": pos_right,
-                "top": pos_top,
-                "bottom": pos_bottom,
-                "textStyle": title_textstyle_opts,
-                "subtextStyle": subtitle_textstyle_opts,
-            }
-        ]
+        self.opts: dict = {
+            "text": title,
+            "subtext": subtitle,
+            "left": pos_left,
+            "right": pos_right,
+            "top": pos_top,
+            "bottom": pos_bottom,
+            "textStyle": title_textstyle_opts,
+            "subtextStyle": subtitle_textstyle_opts,
+        }
 
 
 class DataZoomOpts:
@@ -549,7 +551,7 @@ class AngleAxisOpts:
     def __init__(
         self,
         polar_index: Optional[int] = None,
-        data: Optional[List[Union[AngleAxisItem, dict, str]]] = None,
+        data: Optional[List[Union[AngleAxisItem, Numeric, dict, str]]] = None,
         start_angle: Optional[Numeric] = None,
         is_clockwise: bool = False,
         boundary_gap: Union[bool, List] = None,
