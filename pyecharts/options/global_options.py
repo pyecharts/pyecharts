@@ -46,7 +46,7 @@ class ToolBoxFeatureOpts:
         if not restore:
             restore = {"show": True, "title": "restore"}
         if not data_view:
-            data_view = {"show": True, "title": "data view"}
+            data_view = {"show": True, "title": "data view", "readOnly": False}
         if not data_zoom:
             data_zoom = {"show": True, "title": {"zoom": "data zoom", "back": "data zoom restore"}}
 
@@ -63,8 +63,8 @@ class ToolboxOpts:
         self,
         is_show: bool = True,
         orient: str = "horizontal",
-        item_size: Union[int, float] = 15,
-        item_gap: Union[int, float] = 10,
+        item_size: Numeric = 15,
+        item_gap: Numeric = 10,
         pos_left: str = "80%",
         pos_right: Optional[str] = None,
         pos_top: Optional[str] = None,
@@ -91,7 +91,11 @@ class TitleOpts:
     def __init__(
         self,
         title: Optional[str] = None,
+        title_link: Optional[str] = None,
+        target: Optional[str] = None,
         subtitle: Optional[str] = None,
+        subtitle_link: Optional[str] = None,
+        sub_target: Optional[str] = None,
         pos_left: Optional[str] = None,
         pos_right: Optional[str] = None,
         pos_top: Optional[str] = None,
@@ -99,6 +103,10 @@ class TitleOpts:
         title_textstyle_opts: Union[TextStyleOpts, dict, None] = None,
         subtitle_textstyle_opts: Union[TextStyleOpts, dict, None] = None,
     ):
+        if not target:
+            target = "blank"
+        if not sub_target:
+            sub_target = "blank"
         if isinstance(title_textstyle_opts, TextStyleOpts):
             title_textstyle_opts = title_textstyle_opts.opts
         if isinstance(subtitle_textstyle_opts, TextStyleOpts):
@@ -107,7 +115,11 @@ class TitleOpts:
         self.opts: List = [
             {
                 "text": title,
+                "link": title_link,
+                "target": target,
                 "subtext": subtitle,
+                "sublink": subtitle_link,
+                "subtarget": sub_target,
                 "left": pos_left,
                 "right": pos_right,
                 "top": pos_top,
@@ -173,8 +185,8 @@ class VisualMapOpts:
     def __init__(
         self,
         type_: str = "color",
-        min_: Union[int, float] = 0,
-        max_: Union[int, float] = 100,
+        min_: Numeric = 0,
+        max_: Numeric = 100,
         range_text: Union[list, tuple] = None,
         range_color: Union[List[str]] = None,
         range_size: Union[List[int]] = None,
