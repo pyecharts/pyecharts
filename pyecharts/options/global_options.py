@@ -1,6 +1,6 @@
 # coding=utf-8
 from ..commons.types import List, Numeric, Optional, Sequence, Union
-from ..globals import RenderType
+from ..globals import RenderType, ThemeType
 from ..options.series_options import (
     AxisLineOpts,
     LabelOpts,
@@ -19,7 +19,7 @@ class InitOpts:
         chart_id: Optional[str] = None,
         renderer: str = RenderType.CANVAS,
         page_title: str = "Awesome-pyecharts",
-        theme: str = "white",
+        theme: str = ThemeType.WHITE,
         bg_color: Optional[str] = None,
         js_host: str = "",
     ):
