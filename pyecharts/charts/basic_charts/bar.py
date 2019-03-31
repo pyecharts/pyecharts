@@ -16,11 +16,6 @@ class Bar(AxisChart):
         super().__init__(init_opts=init_opts)
         self.options.update(yAxis=[opts.AxisOpts().opts])
 
-    def reversal_axis(self):
-        self.options["yAxis"][0]["data"] = self._xaxis_data
-        self.options["xAxis"][0]["data"] = None
-        return self
-
     def add_yaxis(
         self,
         series_name: str,
