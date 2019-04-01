@@ -92,10 +92,10 @@ class TitleOpts:
         self,
         title: Optional[str] = None,
         title_link: Optional[str] = None,
-        target: Optional[str] = None,
+        title_target: Optional[str] = None,
         subtitle: Optional[str] = None,
         subtitle_link: Optional[str] = None,
-        sub_target: Optional[str] = None,
+        sub_title_target: Optional[str] = None,
         pos_left: Optional[str] = None,
         pos_right: Optional[str] = None,
         pos_top: Optional[str] = None,
@@ -103,10 +103,6 @@ class TitleOpts:
         title_textstyle_opts: Union[TextStyleOpts, dict, None] = None,
         subtitle_textstyle_opts: Union[TextStyleOpts, dict, None] = None,
     ):
-        if not target:
-            target = "blank"
-        if not sub_target:
-            sub_target = "blank"
         if isinstance(title_textstyle_opts, TextStyleOpts):
             title_textstyle_opts = title_textstyle_opts.opts
         if isinstance(subtitle_textstyle_opts, TextStyleOpts):
@@ -116,10 +112,10 @@ class TitleOpts:
             {
                 "text": title,
                 "link": title_link,
-                "target": target,
+                "target": title_target,
                 "subtext": subtitle,
                 "sublink": subtitle_link,
-                "subtarget": sub_target,
+                "subtarget": sub_title_target,
                 "left": pos_left,
                 "right": pos_right,
                 "top": pos_top,
