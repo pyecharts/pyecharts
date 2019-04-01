@@ -1,6 +1,6 @@
 # coding=utf-8
 from ..commons.types import List, Numeric, Optional, Sequence, Union
-from ..globals import RenderType
+from ..globals import RenderType, ThemeType
 from ..options.series_options import (
     AxisLineOpts,
     LabelOpts,
@@ -19,7 +19,7 @@ class InitOpts:
         chart_id: Optional[str] = None,
         renderer: str = RenderType.CANVAS,
         page_title: str = "Awesome-pyecharts",
-        theme: str = "white",
+        theme: str = ThemeType.WHITE,
         bg_color: Optional[str] = None,
         js_host: str = "",
     ):
@@ -42,13 +42,13 @@ class ToolBoxFeatureOpts:
         data_zoom: Optional[dict] = None,
     ):
         if not save_as_image:
-            save_as_image = {"show": True, "title": "save as image"}
+            save_as_image = {"show": True, "title": "save as image", "type": "png"}
         if not restore:
             restore = {"show": True, "title": "restore"}
         if not data_view:
-            data_view = {"show": True, "title": "data view"}
+            data_view = {"show": True, "title": "data view", "readOnly": False}
         if not data_zoom:
-            data_zoom = {"show": True, "title": "data zoom"}
+            data_zoom = {"show": True, "title": {"zoom": "data zoom", "back": "data zoom restore"}}
 
         self.opts: dict = {
             "saveAsImage": save_as_image,
@@ -63,6 +63,8 @@ class ToolboxOpts:
         self,
         is_show: bool = True,
         orient: str = "horizontal",
+        item_size: Numeric = 15,
+        item_gap: Numeric = 10,
         pos_left: str = "80%",
         pos_right: Optional[str] = None,
         pos_top: Optional[str] = None,
@@ -75,6 +77,8 @@ class ToolboxOpts:
         self.opts: dict = {
             "show": is_show,
             "orient": orient,
+            "itemSize": item_size,
+            "itemGap": item_gap,
             "left": pos_left,
             "right": pos_right,
             "top": pos_top,
@@ -87,7 +91,11 @@ class TitleOpts:
     def __init__(
         self,
         title: Optional[str] = None,
+        title_link: Optional[str] = None,
+        title_target: Optional[str] = None,
         subtitle: Optional[str] = None,
+        subtitle_link: Optional[str] = None,
+        subtitle_target: Optional[str] = None,
         pos_left: Optional[str] = None,
         pos_right: Optional[str] = None,
         pos_top: Optional[str] = None,
@@ -103,7 +111,11 @@ class TitleOpts:
         self.opts: List = [
             {
                 "text": title,
+                "link": title_link,
+                "target": title_target,
                 "subtext": subtitle,
+                "sublink": subtitle_link,
+                "subtarget": subtitle_target,
                 "left": pos_left,
                 "right": pos_right,
                 "top": pos_top,
@@ -169,8 +181,8 @@ class VisualMapOpts:
     def __init__(
         self,
         type_: str = "color",
-        min_: Union[int, float] = 0,
-        max_: Union[int, float] = 100,
+        min_: Numeric = 0,
+        max_: Numeric = 100,
         range_text: Union[list, tuple] = None,
         range_color: Union[List[str]] = None,
         range_size: Union[List[int]] = None,
