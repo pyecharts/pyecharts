@@ -27,7 +27,7 @@ class Line(AxisChart):
         color: Optional[str] = None,
         is_symbol_show: bool = True,
         symbol: Optional[str] = None,
-        symbol_size: Numeric = 4,
+        symbol_size: Union[Numeric, Sequence] = 4,
         stack: Optional[str] = None,
         is_smooth: bool = False,
         is_step: bool = False,

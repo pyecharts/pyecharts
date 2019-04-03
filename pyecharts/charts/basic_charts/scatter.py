@@ -27,7 +27,7 @@ class Scatter(AxisChart):
         yaxis_index: Optional[Numeric] = None,
         color: Optional[str] = None,
         symbol: Optional[str] = None,
-        symbol_size: Numeric = 10,
+        symbol_size: Union[Numeric, Sequence] = 10,
         label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(position="right"),
         markpoint_opts: Union[opts.MarkPointOpts, dict, None] = None,
         markline_opts: Union[opts.MarkLineOpts, dict, None] = None,
