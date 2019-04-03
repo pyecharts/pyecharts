@@ -383,18 +383,22 @@ class Axis3DOpts:
         data: Optional[Sequence] = None,
         type_: Optional[str] = None,
         name: Optional[str] = None,
-        name_size: Numeric = 16,
         name_gap: Numeric = 20,
         min_: Union[str, Numeric, None] = None,
         max_: Union[str, Numeric, None] = None,
-        interval: Optional[str] = None,
+        splitnum: Optional[Numeric] = None,
+        interval: Optional[Numeric] = None,
         margin: Numeric = 8,
+        textstyle_opts: Union[TextStyleOpts, dict, None] = None,
     ):
+        if isinstance(textstyle_opts, TextStyleOpts):
+            textstyle_opts = textstyle_opts.opts
         self.opts: dict = {
             "data": data,
             "name": name,
             "nameGap": name_gap,
-            "nameTextStyle": {"fontSize": name_size},
+            "nameTextStyle": textstyle_opts,
+            "splitNum": splitnum,
             "type": type_,
             "min": min_,
             "max": max_,
