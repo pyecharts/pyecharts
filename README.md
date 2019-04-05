@@ -34,7 +34,7 @@
     </a>
 </p>
 
-> Note: 0.5.x 文档已经移动至 05x.pyecharts.org
+> Note: 0.5.x 文档已经移动至 [05x-docs.pyecharts.org](05x-docs.pyecharts.org)
 
 ## 📣 简介
 
