@@ -48,7 +48,10 @@ class ToolBoxFeatureOpts:
         if not data_view:
             data_view = {"show": True, "title": "data view", "readOnly": False}
         if not data_zoom:
-            data_zoom = {"show": True, "title": {"zoom": "data zoom", "back": "data zoom restore"}}
+            data_zoom = {
+                "show": True,
+                "title": {"zoom": "data zoom", "back": "data zoom restore"},
+            }
 
         self.opts: dict = {
             "saveAsImage": save_as_image,
