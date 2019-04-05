@@ -34,6 +34,7 @@
     </a>
 </p>
 
+> Note: 0.5.x 文档已经移动至 [05x-docs.pyecharts.org](05x-docs.pyecharts.org)
 [English README](README.en.md)
 
 ## 📣 简介
@@ -186,7 +187,17 @@ pyecharts 主要由以下三位开发者开发维护
 <img src="https://user-images.githubusercontent.com/19553554/35425853-500d6b5c-0299-11e8-80a1-ebb6629b497e.png" width="19.8%" alt="Alipay">　　　<img src="https://user-images.githubusercontent.com/19553554/35425854-504e716a-0299-11e8-81fc-4a511f1c47e8.png" width="20%" alt="Wechat">
 
 
-如果其他开发者帮助到了您，也可以请他们喝喝咖啡 [捐赠通道](http://pyecharts.org/#/zh-cn/donate)
+如果其他开发者帮助到了您，也可以请他们喝咖啡 [捐赠通道](http://pyecharts.org/#/zh-cn/donate)
+
+## 💡 贡献
+
+期待能有更多的开发者参与到 pyecharts 的开发中来，我们会保证尽快 Reivew PR 并且及时回复。但提交 PR 请确保
+
+1. 通过所有单元测试，如若是新功能，请为其新增单元测试
+2. 遵守开发规范，使用 black 以及 isort 格式化代码（$ pip install -r requirements-dev.txt）
+3. 如若需要，请更新相对应的文档
+
+我们也非常欢迎开发者能为 pyecharts 提供更多的示例，共同来完善文档，文档项目位于 [pyecharts/website](https://github.com/pyecharts/website)
 
 ## 📃 License
 
