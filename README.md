@@ -116,6 +116,8 @@ make_snapshot(bar.render(), "bar.png")
 
 ## 🔖 Demo
 
+> Demo 代码位于 example 文件夹下。
+
 <div align="center">
 <img src="https://user-images.githubusercontent.com/19553554/52197440-843a5200-289a-11e9-8601-3ce8d945b04a.gif" width="33%" alt="bar"/>
 <img src="https://user-images.githubusercontent.com/19553554/52360729-ad640980-2a77-11e9-84e2-feff7e11aea5.gif" width="33%" alt="boxplot"/>
