@@ -34,30 +34,28 @@
     </a>
 </p>
 
-[English README](README.en.md)
+## 📣 Introduction
 
-## 📣 简介
+[Echarts](https://github.com/ecomfe/echarts) is easy-to-use, highly interactive and highly performant javascript visualization library under Apache license. Since its first public release in 2013, it dominated 74% of Chinese web front-end market。Yet Python is an expressive language and is loved by data science community. Combining the strength of both technologies, [pyecharts](https://github.com/pyecharts/pyecharts) is born.
 
-[Echarts](https://github.com/ecomfe/echarts) 是一个由百度开源的数据可视化，凭借着良好的交互性，精巧的图表设计，得到了众多开发者的认可。而 Python 是一门富有表达力的语言，很适合用于数据处理。当数据分析遇上数据可视化时，[pyecharts](https://github.com/pyecharts/pyecharts) 诞生了。
+## ✨ Feature hightlights
 
-## ✨ 特性
+* Simple API, Sleek and method chaining
+* Support 30 + popular charts
+* Suppot data science tools: Jupyter Notebook, JupyterLab, nteract
+* Integrate with Flask，Django at ease
+* Easy to use and highly configurable
+* Detialed documentation and examples.
+* More than 400+ geomaps assets for geograpic information processing
 
-* 简洁的 API 设计，使用如丝滑般流畅，支持链式调用
-* 囊括了 30+ 种常见图表，应有尽有
-* 支持主流 Notebook 环境，Jupyter Notebook 和 JupyterLab
-* 可轻松集成至 Flask，Django 等主流 Web 框架
-* 高度灵活的配置项，可轻松搭配出精美的图表
-* 详细的文档和示例，帮助开发者更快的上手项目
-* 多达 400+ 地图，为地理数据可视化提供强有力的支持
+## 🔰 Installation
 
-## 🔰 安装
-
-**pip 安装**
+**pip install**
 ```shell
 $ pip install pyecharts
 ```
 
-**源码安装**
+**Install from source**
 ```shell
 $ git clone https://github.com/pyecharts/pyecharts.git
 $ cd pyecharts
@@ -65,11 +63,11 @@ $ pip install -r requirements.txt
 $ python setup.py install
 ```
 
-## 📝 使用
+## 📝 Usage
 
-### 本地环境
+### Local computer
 
-#### 生成 HTML
+#### HTML
 ```python
 from pyecharts.charts import Bar
 from pyecharts import options as opts
@@ -87,18 +85,18 @@ bar.render()
 <img src="https://user-images.githubusercontent.com/19553554/55270272-d6ff1b80-52d7-11e9-820f-30660a068e3e.gif"  width="85%" />
 </p>
 
-#### 生成图片
+#### image
 ```python
 from pyecharts.render import make_snapshot
 
-# 需要安装配置 selenium
+# needs to configure selenium
 make_snapshot(bar.render(), "bar.png")
 ```
 <p align="center">
 <img src="https://user-images.githubusercontent.com/19553554/55270432-7a9cfb80-52d9-11e9-81b5-4ceb4dcd1756.png"  width="85%" />
 </p>
 
-### Notebook 环境
+### Notebook
 
 #### Jupyter Notebook
 
@@ -108,7 +106,7 @@ make_snapshot(bar.render(), "bar.png")
 
 ![](https://user-images.githubusercontent.com/19553554/55270259-c0f15b00-52d7-11e9-8811-93bfca1cc027.png)
 
-#### Web 框架
+#### Web framework
 
 ![](https://user-images.githubusercontent.com/19553554/35081158-3faa7c34-fc4d-11e7-80c9-2de79371374f.gif)
 
@@ -147,46 +145,46 @@ make_snapshot(bar.render(), "bar.png")
 <img src="https://user-images.githubusercontent.com/19553554/35082279-e111743c-fc53-11e7-9362-580160593715.gif" width="33%" alt="timeline"/>
 </div>
 
-更多详细文档，请访问
+For more documentaiton, please visit
 
-* [中文文档](http://pyecharts.org/#/zh-cn/)
+* [Chinese documentation](http://pyecharts.org/#/zh-cn/)
 * [English Documentation](http://pyecharts.org/#/en-us/)
 
-## ⛏ 代码质量
+## ⛏ Software development
 
-### 单元测试
+### Unit tests
 
 ```shell
 $ pip install -r test/requirements.txt
 $ make
 ```
 
-### 集成测试
+### Team development
 
-使用 [Travis CI](https://travis-ci.org/) 和 [AppVeyor](https://ci.appveyor.com/) 持续集成环境。
+[Travis CI](https://travis-ci.org/) 和 [AppVeyor](https://ci.appveyor.com/) is place for continuous integration.
 
-### 代码规范
+### Coding styles
 
-使用 [flake8](http://flake8.pycqa.org/en/latest/index.html), [Codecov](https://codecov.io/) 以及 [pylint](https://www.pylint.org/) 提升代码质量。
+[flake8](http://flake8.pycqa.org/en/latest/index.html), [Codecov](https://codecov.io/) and [pylint](https://www.pylint.org/) are used
 
 ## 😉 Author
 
-pyecharts 主要由以下三位开发者开发维护
+pyecharts are co-maintained by:
 
 * [@chenjiandongx](https://github.com/chenjiandongx)
 * [@chfw](https://github.com/chfw)
 * [@kinegratii](https://github.com/kinegratii)
 
-更多贡献者信息可以访问 [pyecharts/graphs/contributors](https://github.com/pyecharts/pyecharts/graphs/contributors)
+For more contributors, please visit [pyecharts/graphs/contributors](https://github.com/pyecharts/pyecharts/graphs/contributors)
 
-## 💌 捐赠
+## 💌 Donation
 
-开发和维护 pyecharts 花费了我巨大的心力，如果你觉得项目帮助到您，请认真考虑请作者喝一杯咖啡 😄
+To develop and maintain pyecharts, it took me a lot of overnights. If you think pyecharts has helped you, please consider buying me a coffee:
 
 <img src="https://user-images.githubusercontent.com/19553554/35425853-500d6b5c-0299-11e8-80a1-ebb6629b497e.png" width="19.8%" alt="Alipay">　　　<img src="https://user-images.githubusercontent.com/19553554/35425854-504e716a-0299-11e8-81fc-4a511f1c47e8.png" width="20%" alt="Wechat">
 
 
-如果其他开发者帮助到了您，也可以请他们喝喝咖啡 [捐赠通道](http://pyecharts.org/#/zh-cn/donate)
+Please also buy the other maintainer a coffee if you think their work helped you too [donation details](http://pyecharts.org/#/zh-cn/donate)
 
 ## 📃 License
 
