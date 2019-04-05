@@ -161,7 +161,7 @@ $ make
 
 ### Team development
 
-[Travis CI](https://travis-ci.org/) 和 [AppVeyor](https://ci.appveyor.com/) is place for continuous integration.
+[Travis CI](https://travis-ci.org/) and [AppVeyor](https://ci.appveyor.com/) is place for continuous integration.
 
 ### Coding styles
 
