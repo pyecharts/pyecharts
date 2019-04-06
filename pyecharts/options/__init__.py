@@ -38,6 +38,8 @@ from .series_options import (
     MarkLineOpts,
     MarkPointItem,
     MarkPointOpts,
+    MarkAreaItem,
+    MarkAreaOpts,
     SplitAreaOpts,
     SplitLineOpts,
     TextStyleOpts,
