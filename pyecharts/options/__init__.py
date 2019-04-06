@@ -20,6 +20,7 @@ from .global_options import (
     SingleAxisOpts,
     TitleOpts,
     ToolboxOpts,
+    ToolBoxFeatureOpts,
     TooltipOpts,
     VisualMapOpts,
 )

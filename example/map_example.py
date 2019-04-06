@@ -33,7 +33,7 @@ def map_visualmap() -> Map:
         Map()
         .add("商家A", [list(z) for z in zip(Faker.provinces, Faker.values())], "china")
         .set_global_opts(
-            title_opts=opts.TitleOpts(title="Map-VisualMap（连续性）"),
+            title_opts=opts.TitleOpts(title="Map-VisualMap（连续型）"),
             visualmap_opts=opts.VisualMapOpts(max_=200),
         )
     )
@@ -46,7 +46,7 @@ def map_visualmap() -> Map:
         Map()
         .add("商家A", [list(z) for z in zip(Faker.provinces, Faker.values())], "china")
         .set_global_opts(
-            title_opts=opts.TitleOpts(title="Map-VisualMap（分段线）"),
+            title_opts=opts.TitleOpts(title="Map-VisualMap（分段型）"),
             visualmap_opts=opts.VisualMapOpts(max_=200, is_piecewise=True),
         )
     )

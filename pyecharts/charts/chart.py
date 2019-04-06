@@ -201,16 +201,18 @@ class Chart3D(Chart):
 
     def add(
         self,
-        name: str,
+        series_name: str,
         data: Sequence,
-        opacity: Numeric = 1,
         shading: Optional[str] = None,
+        itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
         label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(is_show=False),
         xaxis3d_opts: Union[opts.Axis3DOpts, dict] = opts.Axis3DOpts(type_="category"),
         yaxis3d_opts: Union[opts.Axis3DOpts, dict] = opts.Axis3DOpts(type_="category"),
         zaxis3d_opts: Union[opts.Axis3DOpts, dict] = opts.Axis3DOpts(type_="value"),
         grid3d_opts: Union[opts.Grid3DOpts, dict] = opts.Grid3DOpts(),
     ):
+        if isinstance(itemstyle_opts, opts.ItemStyleOpts):
+            itemstyle_opts = itemstyle_opts.opts
         if isinstance(label_opts, opts.LabelOpts):
             label_opts = label_opts.opts
         if isinstance(xaxis3d_opts, opts.Axis3DOpts):
@@ -233,11 +235,11 @@ class Chart3D(Chart):
         self.options.get("series").append(
             {
                 "type": self._3d_chart_type,
-                "name": name,
+                "name": series_name,
                 "data": data,
                 "label": label_opts,
                 "shading": shading,
-                "itemStyle": {"opacity": opacity},
+                "itemStyle": itemstyle_opts,
             }
         )
         return self
