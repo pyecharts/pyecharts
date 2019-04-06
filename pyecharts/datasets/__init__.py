@@ -15,9 +15,7 @@ with open(os.path.join(__HERE, "city_coordinates.json"), "r", encoding="utf8") a
 EXTRA = {}
 
 
-def register_files(asset_files: Optional[dict], asset_url: Optional[str]):
-    if asset_files:
-        FILENAMES.update(asset_files)
+def register_url(asset_url: Optional[str]):
     if asset_url:
         try:
             contents = urllib.request.urlopen(asset_url + "/registry.json").read()
@@ -30,6 +28,11 @@ def register_files(asset_files: Optional[dict], asset_url: Optional[str]):
             files[name] = [file_name, "js"]
 
         EXTRA[contents["GITHUB_URL"] + "/"] = files
+
+
+def register_files(asset_files: Optional[dict]):
+    if asset_files:
+        FILENAMES.update(asset_files)
 
 
 def register_coords(coords: dict):
