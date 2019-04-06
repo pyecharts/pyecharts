@@ -17,8 +17,9 @@ EXTRA = {}
 
 def register_url(asset_url: Optional[str]):
     if asset_url:
+        registry = asset_url + "/registry.json"
         try:
-            contents = urllib.request.urlopen(asset_url + "/registry.json").read()
+            contents = urllib.request.urlopen(registry).read()
             contents = json.loads(contents)
         except Exception as e:
             raise e
