@@ -201,7 +201,7 @@ class Chart3D(Chart):
 
     def add(
         self,
-        name: str,
+        series_name: str,
         data: Sequence,
         opacity: Numeric = 1,
         shading: Optional[str] = None,
@@ -233,7 +233,7 @@ class Chart3D(Chart):
         self.options.get("series").append(
             {
                 "type": self._3d_chart_type,
-                "name": name,
+                "name": series_name,
                 "data": data,
                 "label": label_opts,
                 "shading": shading,
