@@ -1,5 +1,39 @@
 # coding=utf-8
-from ..commons.types import List, Numeric, Optional, Sequence, Union
+from ..commons.types import List, Numeric, Optional, Sequence, Union, Tuple
+
+
+class ItemStyleOpts:
+    def __init__(
+        self,
+        color: Optional[str] = None,
+        border_color: Optional[str] = None,
+        opacity: Optional[Numeric] = None,
+    ):
+        self.opts: dict = {
+            "color": color,
+            "borderColor": border_color,
+            "opacity": opacity,
+        }
+
+
+class TextStyleOpts:
+    def __init__(
+        self,
+        color: Optional[str] = None,
+        font_style: Optional[str] = None,
+        font_weight: Optional[str] = None,
+        font_family: Optional[str] = None,
+        font_size: Optional[Numeric] = None,
+        line_height: Optional[str] = None,
+    ):
+        self.opts: dict = {
+            "color": color,
+            "fontStyle": font_style,
+            "fontWeight": font_weight,
+            "fontFamily": font_family,
+            "fontSize": font_size,
+            "lineHeight": line_height,
+        }
 
 
 class LabelOpts:
@@ -176,14 +210,64 @@ class MarkLineOpts:
         }
 
 
-# TODO
-class MarkAreaOpts:
-    pass
-
-
-# TODO
 class MarkAreaItem:
-    pass
+    def __init__(
+        self,
+        name: Optional[str] = None,
+        type_: Tuple[Optional[str], Optional[str]] = (None, None),
+        value_index: Tuple[Optional[Numeric], Optional[Numeric]] = (None, None),
+        value_dim: Tuple[Optional[str], Optional[str]] = (None, None),
+        x: Tuple[Union[str, Numeric, None], Union[str, Numeric, None]] = (None, None),
+        y: Tuple[Union[str, Numeric, None], Union[str, Numeric, None]] = (None, None),
+        label_opts: Union[LabelOpts, dict, None] = None,
+        itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
+    ):
+        if isinstance(label_opts, LabelOpts):
+            label_opts = label_opts.opts
+        if isinstance(itemstyle_opts, ItemStyleOpts):
+            itemstyle_opts = itemstyle_opts.opts
+        self.opts: List = [
+            {
+                "name": name,
+                "type": type_[0],
+                "valueIndex": value_index[0],
+                "valueDim": value_dim[0],
+                "xAxis": x[0],
+                "yAxis": y[0],
+                "label": label_opts,
+                "itemStyle": itemstyle_opts
+            }, {
+                "type": type_[1],
+                "valueIndex": value_index[1],
+                "valueDim": value_dim[1],
+                "xAxis": x[1],
+                "yAxis": y[1]
+            }
+        ]
+
+
+class MarkAreaOpts:
+    def __init__(
+        self,
+        silent: bool = False,
+        label_opts: LabelOpts = LabelOpts(),
+        data: List[Union[MarkAreaItem, dict]] = None,
+    ):
+        if isinstance(label_opts, LabelOpts):
+            label_opts = label_opts.opts
+        _data = []
+        if data:
+            for d in data:
+                if isinstance(d, dict):
+                    _data.append(d)
+                else:
+                    _data.append(d.opts)
+
+        self.opts: dict = {
+            "silent": silent,
+            "label": label_opts,
+            "data": _data
+        }
 
 
 class EffectOpts:
@@ -219,40 +303,6 @@ class SplitAreaOpts:
             areastyle_opts = areastyle_opts.opts
 
         self.opts: dict = {"show": is_show, "areaStyle": areastyle_opts}
-
-
-class ItemStyleOpts:
-    def __init__(
-        self,
-        color: Optional[str] = None,
-        border_color: Optional[str] = None,
-        opacity: Optional[Numeric] = None,
-    ):
-        self.opts: dict = {
-            "color": color,
-            "borderColor": border_color,
-            "opacity": opacity,
-        }
-
-
-class TextStyleOpts:
-    def __init__(
-        self,
-        color: Optional[str] = None,
-        font_style: Optional[str] = None,
-        font_weight: Optional[str] = None,
-        font_family: Optional[str] = None,
-        font_size: Optional[Numeric] = None,
-        line_height: Optional[str] = None,
-    ):
-        self.opts: dict = {
-            "color": color,
-            "fontStyle": font_style,
-            "fontWeight": font_weight,
-            "fontFamily": font_family,
-            "fontSize": font_size,
-            "lineHeight": line_height,
-        }
 
 
 class GraphNode:

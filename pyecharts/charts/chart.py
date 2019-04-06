@@ -34,6 +34,7 @@ class Chart(Base):
         axisline_opts: Union[opts.AxisLineOpts, dict, None] = None,
         markpoint_opts: Union[opts.MarkPointOpts, dict, None] = None,
         markline_opts: Union[opts.MarkLineOpts, dict, None] = None,
+        markarea_opts: Union[opts.MarkAreaOpts, dict, None] = None,
         tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
     ):
         _series = self.options.get("series")
@@ -78,6 +79,12 @@ class Chart(Base):
                 markline_opts = markline_opts.opts
             for s in _series:
                 s.update(markLine=markline_opts)
+
+        if markarea_opts:
+            if isinstance(markarea_opts, opts.MarkAreaOpts):
+                markarea_opts = markarea_opts.opts
+            for s in _series:
+                s.update(markArea=markarea_opts)
 
         if tooltip_opts:
             if isinstance(tooltip_opts, opts.TooltipOpts):
