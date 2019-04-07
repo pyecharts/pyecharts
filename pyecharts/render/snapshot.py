@@ -17,6 +17,8 @@ def make_snapshot(
     is_remove_html: bool = True,
     browser='Chrome'
 ):
+    if delay < 0:
+        raise Exception('Time travel is not possible')
     if browser == 'Chrome':
         driver = get_chrome()
     elif browser == 'Safari':
