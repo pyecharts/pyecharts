@@ -100,7 +100,7 @@ NotebookType = _NotebookType()
 
 
 class _CurrentConfig:
-    ONLINE_HOST = "http://assets.pyecharts.org/assets/"
+    ONLINE_HOST = "https://assets.pyecharts.org/assets/"
     NOTEBOOK_TYPE = NotebookType.JUPYTER_NOTEBOOK
     GLOBAL_ENV = Environment(
         keep_trailing_newline=True,

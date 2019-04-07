@@ -35,6 +35,7 @@ class Chart(Base):
         markpoint_opts: Union[opts.MarkPointOpts, dict, None] = None,
         markline_opts: Union[opts.MarkLineOpts, dict, None] = None,
         markarea_opts: Union[opts.MarkAreaOpts, dict, None] = None,
+        effect_opts: Union[opts.EffectOpts, dict] = opts.EffectOpts(),
         tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
     ):
         _series = self.options.get("series")
@@ -85,6 +86,12 @@ class Chart(Base):
                 markarea_opts = markarea_opts.opts
             for s in _series:
                 s.update(markArea=markarea_opts)
+
+        if effect_opts:
+            if isinstance(effect_opts, opts.EffectOpts):
+                effect_opts = effect_opts.opts
+            for s in _series:
+                s.update(rippleEffect=effect_opts)
 
         if tooltip_opts:
             if isinstance(tooltip_opts, opts.TooltipOpts):
