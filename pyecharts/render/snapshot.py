@@ -1,6 +1,7 @@
 # coding=utf-8
 import base64
 import time
+import sys
 import os
 
 from selenium import webdriver
@@ -37,7 +38,6 @@ def make_snapshot(
         pass
 
     try:
-        print(output)
         output = output.split(",")[1]
     except:
         raise
@@ -45,8 +45,8 @@ def make_snapshot(
     with open(image_name, "wb") as f:
         f.write(base64.b64decode(output))
 
-    if is_remove_html:
-        os.remove(html_path)
+    if is_remove_html and not html_path.startswith("http"):
+        os.remove(html_path[7:])
     driver.close()
     print("render {}".format(image_name))
 
@@ -69,6 +69,8 @@ def __gen_js_code(file_type: str, pixel_ratio: int, delay: int) -> str:
 def get_chrome():
     option = webdriver.ChromeOptions()
     option.add_argument("headless")
+    if sys.platform == 'darwin':
+        option.binary_location = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
     capabilities = DesiredCapabilities.CHROME
     capabilities["loggingPrefs"] = {"browser": "ALL"}
     return webdriver.Chrome(
