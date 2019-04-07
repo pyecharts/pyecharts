@@ -6,12 +6,18 @@ class ItemStyleOpts:
     def __init__(
         self,
         color: Optional[str] = None,
+        color0: Optional[str] = None,
         border_color: Optional[str] = None,
+        border_color0: Optional[str] = None,
+        border_width: Optional[Numeric] = None,
         opacity: Optional[Numeric] = None,
     ):
         self.opts: dict = {
             "color": color,
+            "color0": color0,
             "borderColor": border_color,
+            "borderColor0": border_color0,
+            "borderWidth": border_width,
             "opacity": opacity,
         }
 
@@ -235,14 +241,15 @@ class MarkAreaItem:
                 "xAxis": x[0],
                 "yAxis": y[0],
                 "label": label_opts,
-                "itemStyle": itemstyle_opts
-            }, {
+                "itemStyle": itemstyle_opts,
+            },
+            {
                 "type": type_[1],
                 "valueIndex": value_index[1],
                 "valueDim": value_dim[1],
                 "xAxis": x[1],
-                "yAxis": y[1]
-            }
+                "yAxis": y[1],
+            },
         ]
 
 
@@ -263,11 +270,7 @@ class MarkAreaOpts:
                 else:
                     _data.append(d.opts)
 
-        self.opts: dict = {
-            "silent": is_silent,
-            "label": label_opts,
-            "data": _data
-        }
+        self.opts: dict = {"silent": is_silent, "label": label_opts, "data": _data}
 
 
 class EffectOpts:
