@@ -249,7 +249,7 @@ class MarkAreaItem:
 class MarkAreaOpts:
     def __init__(
         self,
-        silent: bool = False,
+        is_silent: bool = False,
         label_opts: LabelOpts = LabelOpts(),
         data: List[Union[MarkAreaItem, dict]] = None,
     ):
@@ -264,7 +264,7 @@ class MarkAreaOpts:
                     _data.append(d.opts)
 
         self.opts: dict = {
-            "silent": silent,
+            "silent": is_silent,
             "label": label_opts,
             "data": _data
         }
