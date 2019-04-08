@@ -147,12 +147,30 @@ class Chart(Base):
                 xaxis_opt = xaxis_opts.opts
                 for x in self.options["xAxis"]:
                     x.update(xaxis_opt)
+            elif isinstance(xaxis_opts, List):
+                xaxis_list = []
+                for xaxis_opt in xaxis_opts:
+                    if not xaxis_opt:
+                        continue
+                    if isinstance(xaxis_opt, opts.AxisOpts):
+                        xaxis_opt = xaxis_opt.opts
+                    xaxis_list.append(xaxis_opt)
+                self.options["xAxis"] = xaxis_list
 
         if yaxis_opts and self.options.get("yAxis", None):
             if isinstance(yaxis_opts, opts.AxisOpts):
                 yaxis_opt = yaxis_opts.opts
                 for y in self.options["yAxis"]:
                     y.update(yaxis_opt)
+            elif isinstance(yaxis_opts, List):
+                yaxis_list = []
+                for yaxis_opt in yaxis_opts:
+                    if not yaxis_opt:
+                        continue
+                    if isinstance(yaxis_opt, opts.AxisOpts):
+                        yaxis_opt = yaxis_opt.opts
+                    yaxis_list.append(yaxis_opt)
+                self.options["yAxis"] = yaxis_list
 
         if datazoom_opts:
             dzs = []

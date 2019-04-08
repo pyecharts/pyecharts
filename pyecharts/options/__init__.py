@@ -5,7 +5,9 @@ from .global_options import (
     AngleAxisOpts,
     Axis3DOpts,
     AxisOpts,
+    AxisLineOpts,
     AxisTickOpts,
+    AxisPointerOpts,
     CalendarOpts,
     DataZoomOpts,
     Grid3DOpts,
@@ -26,7 +28,6 @@ from .global_options import (
 )
 from .series_options import (
     AreaStyleOpts,
-    AxisLineOpts,
     EffectOpts,
     GraphCategory,
     GraphLink,

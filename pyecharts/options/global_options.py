@@ -2,7 +2,6 @@
 from ..commons.types import List, Numeric, Optional, Sequence, Union
 from ..globals import RenderType, ThemeType
 from ..options.series_options import (
-    AxisLineOpts,
     LabelOpts,
     LineStyleOpts,
     SplitAreaOpts,
@@ -134,20 +133,28 @@ class DataZoomOpts:
         self,
         is_show: bool = True,
         type_: str = "slider",
+        is_realtime: bool = True,
         range_start: Numeric = 20,
         range_end: Numeric = 80,
+        start_value: Union[int, str, None] = None,
+        end_value: Union[int, str, None] = None,
         orient: str = "horizontal",
         xaxis_index: int = 0,
         yaxis_index: int = 0,
+        is_zoom_lock: bool = False,
     ):
         self.opts: dict = {
             "show": is_show,
             "type": type_,
+            "realtime": is_realtime,
+            "startValue": start_value,
+            "endValue": end_value,
             "start": range_start,
             "end": range_end,
             "orient": orient,
             "xAxisIndex": xaxis_index,
             "yAxisIndex": yaxis_index,
+            "zoomLock": is_zoom_lock
         }
 
 
@@ -199,6 +206,7 @@ class VisualMapOpts:
         is_calculable: bool = True,
         is_piecewise: bool = False,
         pieces: Optional[Sequence] = None,
+        out_of_range: Optional[Sequence] = None,
         textstyle_opts: Union[TextStyleOpts, dict, None] = None,
     ):
         if isinstance(textstyle_opts, TextStyleOpts):
@@ -229,6 +237,7 @@ class VisualMapOpts:
             "bottom": pos_bottom,
             "right": pos_right,
             "showLabel": True,
+            "outOfRange": out_of_range
         }
         if is_piecewise:
             self.opts.update(pieces=pieces)
@@ -237,6 +246,7 @@ class VisualMapOpts:
 class TooltipOpts:
     def __init__(
         self,
+        is_show: bool = True,
         trigger: str = "item",
         trigger_on: str = "mousemove|click",
         axis_pointer_type: str = "line",
@@ -250,6 +260,7 @@ class TooltipOpts:
             textstyle_opts = textstyle_opts.opts
 
         self.opts: dict = {
+            "show": is_show,
             "trigger": trigger,
             "triggerOn": trigger_on,
             "axisPointer": {"type": axis_pointer_type},
@@ -258,6 +269,27 @@ class TooltipOpts:
             "backgroundColor": background_color,
             "borderColor": border_color,
             "borderWidth": border_width,
+        }
+
+
+class AxisLineOpts:
+    def __init__(
+        self,
+        is_show: bool = True,
+        is_on_zero: bool = True,
+        on_zero_axis_index: int = 0,
+        symbol: Optional[str] = None,
+        linestyle_opts: Union[LineStyleOpts, dict, None] = None,
+    ):
+        if isinstance(linestyle_opts, LineStyleOpts):
+            linestyle_opts = linestyle_opts.opts
+
+        self.opts: dict = {
+            "show": is_show,
+            "onZero": is_on_zero,
+            "onZeroAxisIndex": on_zero_axis_index,
+            "symbol": symbol,
+            "lineStyle": linestyle_opts
         }
 
 
@@ -279,6 +311,27 @@ class AxisTickOpts:
         }
 
 
+class AxisPointerOpts:
+    def __init__(
+        self,
+        is_show: bool = False,
+        type_: str = "line",
+        label: Union[LabelOpts, dict, None] = None,
+        linestyle_opts: Union[LineStyleOpts, dict, None] = None,
+    ):
+        if isinstance(label, LabelOpts):
+            label = label.opts
+        if isinstance(linestyle_opts, LineStyleOpts):
+            linestyle_opts = linestyle_opts.opts
+
+        self.opts: dict = {
+            "show": is_show,
+            "type": type_,
+            "label": label,
+            "lineStyle": linestyle_opts
+        }
+
+
 class AxisOpts:
     def __init__(
         self,
@@ -295,25 +348,28 @@ class AxisOpts:
         min_: Union[Numeric, str, None] = None,
         max_: Union[Numeric, str, None] = None,
         type_: Optional[str] = None,
+        axisline_opts: Union[AxisLineOpts, dict, None] = None,
         axistick_opts: Union[AxisTickOpts, dict, None] = None,
         axislabel_opts: Union[LabelOpts, dict, None] = None,
+        axispointer_opts: Union[AxisPointerOpts, dict, None] = None,
         name_textstyle_opts: Union[TextStyleOpts, dict, None] = None,
         splitarea_opts: Union[SplitAreaOpts, dict, None] = None,
         splitline_opts: Union[SplitLineOpts, dict] = SplitLineOpts(),
-        linestyle_opts: Union[LineStyleOpts, dict] = LineStyleOpts(),
     ):
+        if isinstance(axisline_opts, AxisLineOpts):
+            axisline_opts = axisline_opts.opts
         if isinstance(axistick_opts, AxisTickOpts):
             axistick_opts = axistick_opts.opts
         if isinstance(axislabel_opts, LabelOpts):
             axislabel_opts = axislabel_opts.opts
+        if isinstance(axispointer_opts, AxisPointerOpts):
+            axispointer_opts = axispointer_opts.opts
         if isinstance(name_textstyle_opts, TextStyleOpts):
             name_textstyle_opts = name_textstyle_opts.opts
         if isinstance(splitarea_opts, SplitAreaOpts):
             splitarea_opts = splitarea_opts.opts
         if isinstance(splitline_opts, SplitLineOpts):
             splitline_opts = splitline_opts.opts
-        if isinstance(linestyle_opts, LineStyleOpts):
-            linestyle_opts = linestyle_opts.opts
 
         self.opts: dict = {
             "name": name,
@@ -324,8 +380,10 @@ class AxisOpts:
             "interval": interval,
             "nameTextStyle": name_textstyle_opts,
             "gridIndex": grid_index,
+            "axisLine": axisline_opts,
             "axisTick": axistick_opts,
             "axisLabel": axislabel_opts,
+            "axisPointer": axispointer_opts,
             "inverse": is_inverse,
             "position": position,
             "boundaryGap": boundary_gap,
@@ -334,7 +392,6 @@ class AxisOpts:
             "type": type_,
             "splitLine": splitline_opts,
             "splitArea": splitarea_opts,
-            "axisLine": {"lineStyle": linestyle_opts},
         }
 
 
