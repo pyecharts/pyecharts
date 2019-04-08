@@ -1,5 +1,4 @@
 import os
-import sys
 import base64
 import codecs
 
@@ -27,58 +26,10 @@ SUPPORTED_IMAGE_FORMATS = [
     B64_FORMAT,
 ]
 
-HELP_TEXT = """
-Usage:   snapshot input file [%s] [delay] [pixel ratio]
-         snapshot help: display this help message
-Parameters:
-         delay: float value, unit in seconds and defaults 1.5 seconds
-         pixel ratio: integer value, defaults to 2
-         document online:github.com/pyecharts/pyecharts-snapshot
-""".format(
-    "|".join(SUPPORTED_IMAGE_FORMATS)
-)
-
-DEFAULT_OUTPUT_NAME = "output.%s"
 NOT_SUPPORTED_FILE_TYPE = "Not supported file type '%s'"
 
 MESSAGE_GENERATING = "Generating file ..."
 MESSAGE_FILE_SAVED_AS = "File saved in %s"
-
-
-def main():
-    # user must have Chrome, no negotiation
-    # otherwise, please use make_snapshot function
-    import snapshot_selenium.snapshot as driver
-    if len(sys.argv) < 2 or len(sys.argv) > 5:
-        show_help()
-    file_name = sys.argv[1]
-    if file_name == "help":
-        show_help()
-    delay = DEFAULT_DELAY
-    output = DEFAULT_OUTPUT_NAME % PNG_FORMAT
-    pixel_ratio = DEFAULT_PIXEL_RATIO
-    if len(sys.argv) >= 3:
-        file_type = sys.argv[2]
-        if file_type in SUPPORTED_IMAGE_FORMATS:
-            output = DEFAULT_OUTPUT_NAME % file_type
-        elif file_type != PNG_FORMAT:
-            raise TypeError(NOT_SUPPORTED_FILE_TYPE % file_type)
-        if len(sys.argv) >= 4:
-            delay = float(sys.argv[3])  # in seconds
-            if len(sys.argv) == 5:
-                pixel_ratio = sys.argv[4]
-    # to do
-    make_snapshot(driver,
-                  file_name,
-                  output,
-                  delay=delay,
-                  pixel_ratio=pixel_ratio,
-                  is_remove_html=False)
-
-
-def show_help():
-    logger.info(HELP_TEXT)
-    exit(0)
 
 
 def make_snapshot(
@@ -91,7 +42,6 @@ def make_snapshot(
     is_remove_html: bool = False,
     **keywards
 ):
-    logger.VERBOSE = verbose
     logger.info(MESSAGE_GENERATING)
     file_type = output_name.split(".")[-1]
 
