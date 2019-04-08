@@ -23,7 +23,9 @@ __entry_points__ = {
 
 __requires__ = ["jinja2", "prettytable"]
 __extra_requires__ = {
-    "selenium": ['snapshot-selenium']
+    "selenium": ['snapshot-selenium'],
+    "phantomjs": ['snapshot-phantomjs'],
+    "images": ['PIL']
 }
 
 __keywords__ = ["Echarts", "charts", "plotting-tool"]
