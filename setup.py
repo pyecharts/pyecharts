@@ -15,8 +15,16 @@ __description__ = "Python options, make charting easier"
 __url__ = "https://github.com/pyecharts/pyecharts"
 __author_email__ = "chenjiandongx@qq.com"
 __license__ = "MIT"
+__entry_points__ = {
+    'console_scripts': [
+        'snapshot = pyecharts.render.snapshot:main'
+    ],
+}
 
 __requires__ = ["jinja2", "prettytable"]
+__extra_requires__ = {
+    "selenium": ['snapshot-selenium']
+}
 
 __keywords__ = ["Echarts", "charts", "plotting-tool"]
 # Load the package's _version.py module as a dictionary.
@@ -95,4 +103,6 @@ setup(
         "Topic :: Software Development :: Libraries",
     ],
     cmdclass={"upload": UploadCommand},
+    entry_points=__entry_points__,
+    extras_require=__extra_requires__
 )

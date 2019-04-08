@@ -60,6 +60,9 @@ MESSAGE_NO_PHANTOMJS = "No phantomjs found in your PATH. Please install it!"
 
 
 def main():
+    # user must have Chrome, no negotiation
+    # otherwise, please use make_snapshot function
+    import snapshot_selenium.snapshot as driver
     if len(sys.argv) < 2 or len(sys.argv) > 5:
         show_help()
     file_name = sys.argv[1]
@@ -79,7 +82,12 @@ def main():
             if len(sys.argv) == 5:
                 pixel_ratio = sys.argv[4]
     # to do
-    make_snapshot(None, file_name, output, delay=delay, pixel_ratio=pixel_ratio)
+    make_snapshot(driver,
+                  file_name,
+                  output,
+                  delay=delay,
+                  pixel_ratio=pixel_ratio,
+                  is_remove_html=False)
 
 
 def show_help():
@@ -119,6 +127,8 @@ def make_snapshot(
     if "/" not in output_name:
         output_name = os.path.join(os.getcwd(), output_name)
 
+    if is_remove_html and not file_name.startswith('http'):
+        os.unlink(file_name)
     logger.info(MESSAGE_FILE_SAVED_AS % output_name)
 
 
