@@ -4,15 +4,7 @@ import base64
 import codecs
 
 import logging
-
-from PIL import Image
-
-PY2 = sys.version_info[0] == 2
-
-if PY2:
-    from StringIO import StringIO as BytesIO
-else:
-    from io import BytesIO
+from io import BytesIO
 
 logger = logging.getLogger(__name__)
 DEFAULT_DELAY = 1.5
@@ -45,18 +37,12 @@ Parameters:
 """.format(
     "|".join(SUPPORTED_IMAGE_FORMATS)
 )
-PHANTOMJS_EXEC = "phantomjs"
+
 DEFAULT_OUTPUT_NAME = "output.%s"
 NOT_SUPPORTED_FILE_TYPE = "Not supported file type '%s'"
 
 MESSAGE_GENERATING = "Generating file ..."
-MESSAGE_PHANTOMJS_VERSION = "phantomjs version: %s"
 MESSAGE_FILE_SAVED_AS = "File saved in %s"
-MESSAGE_NO_SNAPSHOT = (
-    "No snapshot taken by phantomjs. "
-    "Please make sure it is installed and available on your PATH!"
-)
-MESSAGE_NO_PHANTOMJS = "No phantomjs found in your PATH. Please install it!"
 
 
 def main():
@@ -102,7 +88,7 @@ def make_snapshot(
     delay: float = DEFAULT_DELAY,
     pixel_ratio: int = DEFAULT_PIXEL_RATIO,
     verbose: bool = True,
-    is_remove_html: bool = True,
+    is_remove_html: bool = False,
 ):
     logger.VERBOSE = verbose
     logger.info(MESSAGE_GENERATING)
@@ -156,22 +142,16 @@ def save_as_text(imagedata, output_name):
 
 
 def save_as(imagedata, output_name, file_type):
-    m = Image.open(BytesIO(imagedata))
-    m.load()
-    color = (255, 255, 255)
-    b = Image.new("RGB", m.size, color)
-    b.paste(m, mask=m.split()[3])
-    b.save(output_name, file_type, quality=100)
-
-
-def get_resource_dir(folder):
-    current_path = os.path.dirname(__file__)
-    resource_path = os.path.join(current_path, folder)
-    return resource_path
-
-
-def get_shell_flag():
-    return sys.platform == "win32"
+    try:
+        from PIL import Image
+        m = Image.open(BytesIO(imagedata))
+        m.load()
+        color = (255, 255, 255)
+        b = Image.new("RGB", m.size, color)
+        b.paste(m, mask=m.split()[3])
+        b.save(output_name, file_type, quality=100)
+    except ModuleNotFoundError:
+        raise Exception('Please install PIL for % image type' % file_type)
 
 
 def to_file_uri(a_file_name):
