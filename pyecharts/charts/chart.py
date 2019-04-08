@@ -147,30 +147,12 @@ class Chart(Base):
                 xaxis_opt = xaxis_opts.opts
                 for x in self.options["xAxis"]:
                     x.update(xaxis_opt)
-            elif isinstance(xaxis_opts, List):
-                xaxis_list = []
-                for xaxis_opt in xaxis_opts:
-                    if not xaxis_opt:
-                        continue
-                    if isinstance(xaxis_opt, opts.AxisOpts):
-                        xaxis_opt = xaxis_opt.opts
-                    xaxis_list.append(xaxis_opt)
-                self.options["xAxis"] = xaxis_list
 
         if yaxis_opts and self.options.get("yAxis", None):
             if isinstance(yaxis_opts, opts.AxisOpts):
                 yaxis_opt = yaxis_opts.opts
                 for y in self.options["yAxis"]:
                     y.update(yaxis_opt)
-            elif isinstance(yaxis_opts, List):
-                yaxis_list = []
-                for yaxis_opt in yaxis_opts:
-                    if not yaxis_opt:
-                        continue
-                    if isinstance(yaxis_opt, opts.AxisOpts):
-                        yaxis_opt = yaxis_opt.opts
-                    yaxis_list.append(yaxis_opt)
-                self.options["yAxis"] = yaxis_list
 
         if datazoom_opts:
             dzs = []
@@ -185,23 +167,33 @@ class Chart(Base):
 
 
 class AxisChart(Chart):
+
     def extend_axis(
-        self,
-        xaxis: Union[opts.AxisOpts, dict, None] = None,
-        yaxis: Union[opts.AxisOpts, dict, None] = None,
+            self,
+            xaxis_data: Sequence = None,
+            xaxis: Union[opts.AxisOpts, dict, None] = None,
+            yaxis_data: Sequence = None,
+            yaxis: Union[opts.AxisOpts, dict, None] = None,
     ):
         if xaxis is not None:
             if isinstance(xaxis, opts.AxisOpts):
                 xaxis = xaxis.opts
             self.options["xAxis"].append(xaxis)
+            self.options["xAxis"][-1].update(data=xaxis_data)
         if yaxis is not None:
             if isinstance(yaxis, opts.AxisOpts):
                 yaxis = yaxis.opts
             self.options["yAxis"].append(yaxis)
+            self.options["yAxis"][-1].update(data=yaxis_data)
         return self
 
-    def add_xaxis(self, xaxis_data: Sequence):
-        self.options.update(xAxis=[opts.AxisOpts().opts])
+    def add_xaxis(
+            self,
+            xaxis_data: Sequence,
+            xaxis_opts: Union[opts.AxisOpts, dict, None] = None):
+        if xaxis_opts is None:
+            xaxis_opts = opts.AxisOpts()
+        self.options.update(xAxis=[xaxis_opts.opts])
         self.options["xAxis"][0].update(data=xaxis_data)
         self._xaxis_data = xaxis_data
         return self
