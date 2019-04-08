@@ -40,7 +40,7 @@ def make_snapshot(
     pixel_ratio: int = DEFAULT_PIXEL_RATIO,
     verbose: bool = True,
     is_remove_html: bool = False,
-    **keywards
+    **keywords
 ):
     logger.info(MESSAGE_GENERATING)
     file_type = output_name.split(".")[-1]
