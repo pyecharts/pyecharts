@@ -89,12 +89,14 @@ def make_snapshot(
     pixel_ratio: int = DEFAULT_PIXEL_RATIO,
     verbose: bool = True,
     is_remove_html: bool = False,
+    **keywards
 ):
     logger.VERBOSE = verbose
     logger.info(MESSAGE_GENERATING)
     file_type = output_name.split(".")[-1]
 
-    content = driver.make_snapshot(file_name, file_type, delay, pixel_ratio)
+    content = driver.make_snapshot(
+        file_name, file_type, delay, pixel_ratio, **keywards)
     if file_type in [SVG_FORMAT, B64_FORMAT]:
         save_as_text(content, output_name)
     else:
