@@ -100,16 +100,6 @@ class SplitLineOpts:
         self.opts: dict = {"show": is_show, "lineStyle": linestyle_opts}
 
 
-class AxisLineOpts:
-    def __init__(
-        self, is_show: bool = True, linestyle_opts: LineStyleOpts = LineStyleOpts()
-    ):
-        if isinstance(linestyle_opts, LineStyleOpts):
-            linestyle_opts = linestyle_opts.opts
-
-        self.opts: dict = {"show": is_show, "lineStyle": linestyle_opts}
-
-
 class MarkPointItem:
     def __init__(
         self,
@@ -193,9 +183,11 @@ class MarkLineItem:
 class MarkLineOpts:
     def __init__(
         self,
+        is_silent: bool = False,
         data: List[Union[MarkLineItem, dict]] = None,
         symbol: Optional[str] = None,
         symbol_size: Union[None, Numeric] = None,
+        precision: int = 2,
         label_opts: LabelOpts = LabelOpts(),
     ):
         if isinstance(label_opts, LabelOpts):
@@ -209,8 +201,10 @@ class MarkLineOpts:
                     _data.append(d.opts)
 
         self.opts: dict = {
+            "silent": is_silent,
             "symbol": symbol,
             "symbolSize": symbol_size,
+            "precision": precision,
             "label": label_opts,
             "data": _data,
         }

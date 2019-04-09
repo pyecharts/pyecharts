@@ -145,14 +145,12 @@ class Chart(Base):
         if xaxis_opts and self.options.get("xAxis", None):
             if isinstance(xaxis_opts, opts.AxisOpts):
                 xaxis_opt = xaxis_opts.opts
-                for x in self.options["xAxis"]:
-                    x.update(xaxis_opt)
+                self.options["xAxis"][0].update(xaxis_opt)
 
         if yaxis_opts and self.options.get("yAxis", None):
             if isinstance(yaxis_opts, opts.AxisOpts):
                 yaxis_opt = yaxis_opts.opts
-                for y in self.options["yAxis"]:
-                    y.update(yaxis_opt)
+                self.options["yAxis"][0].update(yaxis_opt)
 
         if datazoom_opts:
             dzs = []
@@ -167,14 +165,17 @@ class Chart(Base):
 
 
 class AxisChart(Chart):
+
     def extend_axis(
-        self,
-        xaxis: Union[opts.AxisOpts, dict, None] = None,
-        yaxis: Union[opts.AxisOpts, dict, None] = None,
+            self,
+            xaxis_data: Sequence = None,
+            xaxis: Union[opts.AxisOpts, dict, None] = None,
+            yaxis: Union[opts.AxisOpts, dict, None] = None,
     ):
         if xaxis is not None:
             if isinstance(xaxis, opts.AxisOpts):
                 xaxis = xaxis.opts
+            xaxis.update(data=xaxis_data)
             self.options["xAxis"].append(xaxis)
         if yaxis is not None:
             if isinstance(yaxis, opts.AxisOpts):
