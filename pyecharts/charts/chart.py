@@ -183,14 +183,8 @@ class AxisChart(Chart):
             self.options["yAxis"].append(yaxis)
         return self
 
-    def add_xaxis(
-            self,
-            xaxis_data: Sequence,
-            xaxis_opts: Union[opts.AxisOpts, dict, None] = None
-    ):
-        if xaxis_opts is None:
-            xaxis_opts = opts.AxisOpts()
-        self.options.update(xAxis=[xaxis_opts.opts])
+    def add_xaxis(self, xaxis_data: Sequence):
+        self.options.update(xAxis=[opts.AxisOpts().opts])
         self.options["xAxis"][0].update(data=xaxis_data)
         self._xaxis_data = xaxis_data
         return self
