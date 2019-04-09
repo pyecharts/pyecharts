@@ -4,6 +4,7 @@ import codecs
 
 import logging
 from io import BytesIO
+from ..commons.types import Any
 
 logger = logging.getLogger(__name__)
 DEFAULT_DELAY = 1.5
@@ -33,9 +34,9 @@ MESSAGE_FILE_SAVED_AS = "File saved in %s"
 
 
 def make_snapshot(
-    driver,
-    file_name,
-    output_name,
+    driver: Any,
+    file_name: str,
+    output_name: str,
     delay: float = DEFAULT_DELAY,
     pixel_ratio: int = DEFAULT_PIXEL_RATIO,
     verbose: bool = True,
@@ -46,7 +47,7 @@ def make_snapshot(
     file_type = output_name.split(".")[-1]
 
     content = driver.make_snapshot(
-        file_name, file_type, delay, pixel_ratio, **keywards)
+        file_name, file_type, delay, pixel_ratio, **keywords)
     if file_type in [SVG_FORMAT, B64_FORMAT]:
         save_as_text(content, output_name)
     else:
@@ -70,7 +71,7 @@ def make_snapshot(
     logger.info(MESSAGE_FILE_SAVED_AS % output_name)
 
 
-def decode_base64(data):
+def decode_base64(data: str) -> str:
     """Decode base64, padding being optional.
 
     :param data: Base64 data as an ASCII byte string
@@ -83,17 +84,17 @@ def decode_base64(data):
     return base64.decodestring(data.encode("utf-8"))
 
 
-def save_as_png(imagedata, output_name):
+def save_as_png(imagedata: str, output_name: str):
     with open(output_name, "wb") as f:
         f.write(imagedata)
 
 
-def save_as_text(imagedata, output_name):
+def save_as_text(imagedata: str, output_name: str):
     with codecs.open(output_name, "w", encoding="utf-8") as f:
         f.write(imagedata)
 
 
-def save_as(imagedata, output_name, file_type):
+def save_as(imagedata: str, output_name: str, file_type: str):
     try:
         from PIL import Image
         m = Image.open(BytesIO(imagedata))
@@ -106,7 +107,7 @@ def save_as(imagedata, output_name, file_type):
         raise Exception('Please install PIL for % image type' % file_type)
 
 
-def to_file_uri(a_file_name):
+def to_file_uri(a_file_name: str) -> str:
     __universal_file_name = a_file_name.replace("\\", "/")
     if ":" not in a_file_name:
         __universal_file_name = os.path.abspath(__universal_file_name)
