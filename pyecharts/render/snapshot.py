@@ -105,10 +105,3 @@ def save_as(imagedata: str, output_name: str, file_type: str):
         b.save(output_name, file_type, quality=100)
     except ModuleNotFoundError:
         raise Exception('Please install PIL for % image type' % file_type)
-
-
-def to_file_uri(a_file_name: str) -> str:
-    __universal_file_name = a_file_name.replace("\\", "/")
-    if ":" not in a_file_name:
-        __universal_file_name = os.path.abspath(__universal_file_name)
-    return "file:///{0}".format(__universal_file_name)
