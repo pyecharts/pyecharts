@@ -1,5 +1,5 @@
 # coding=utf-8
-from ..commons.types import List, Numeric, Optional, Sequence, Union, Tuple
+from ..commons.types import List, Numeric, Optional, Sequence, Tuple, Union
 
 
 class ItemStyleOpts:

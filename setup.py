@@ -18,9 +18,9 @@ __license__ = "MIT"
 
 __requires__ = ["jinja2", "prettytable"]
 __extra_requires__ = {
-    "selenium": ['snapshot-selenium'],
-    "phantomjs": ['snapshot-phantomjs'],
-    "images": ['PIL']
+    "selenium": ["snapshot-selenium"],
+    "phantomjs": ["snapshot-phantomjs"],
+    "images": ["PIL"],
 }
 
 __keywords__ = ["Echarts", "charts", "plotting-tool"]
@@ -100,5 +100,5 @@ setup(
         "Topic :: Software Development :: Libraries",
     ],
     cmdclass={"upload": UploadCommand},
-    extras_require=__extra_requires__
+    extras_require=__extra_requires__,
 )
