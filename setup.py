@@ -17,6 +17,11 @@ __author_email__ = "chenjiandongx@qq.com"
 __license__ = "MIT"
 
 __requires__ = ["jinja2", "prettytable"]
+__extra_requires__ = {
+    "selenium": ["snapshot-selenium"],
+    "phantomjs": ["snapshot-phantomjs"],
+    "images": ["PIL"],
+}
 
 __keywords__ = ["Echarts", "charts", "plotting-tool"]
 # Load the package's _version.py module as a dictionary.
@@ -95,4 +100,5 @@ setup(
         "Topic :: Software Development :: Libraries",
     ],
     cmdclass={"upload": UploadCommand},
+    extras_require=__extra_requires__,
 )

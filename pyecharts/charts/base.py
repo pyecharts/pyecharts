@@ -1,4 +1,5 @@
 # coding=utf-8
+import datetime
 import json
 import os
 import uuid
@@ -44,7 +45,7 @@ class Base:
         return utils.remove_key_with_none_value(self.options)
 
     def dump_options(self) -> str:
-        return json.dumps(self.get_options(), indent=4)
+        return json.dumps(self.get_options(), indent=4, default=default)
 
     def render(
         self,
@@ -96,3 +97,8 @@ class Base:
             f, ext = FILENAMES[dep]
             scripts.append("{}{}.{}".format(CurrentConfig.ONLINE_HOST, f, ext))
         return Javascript(lib=scripts)
+
+
+def default(o):
+    if isinstance(o, (datetime.date, datetime.datetime)):
+        return o.isoformat()

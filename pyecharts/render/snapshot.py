@@ -1,84 +1,91 @@
-# coding=utf-8
 import base64
-import time
-import sys
+import codecs
+import logging
 import os
+from io import BytesIO
 
-from selenium import webdriver
-from selenium.common import exceptions
-from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
+from ..commons.types import Any
+
+logger = logging.getLogger(__name__)
+
+PNG_FORMAT = "png"
+JPG_FORMAT = "jpeg"
+GIF_FORMAT = "gif"
+PDF_FORMAT = "pdf"
+SVG_FORMAT = "svg"
+EPS_FORMAT = "eps"
+B64_FORMAT = "base64"
 
 
 def make_snapshot(
-    html_path: str,
-    image_name: str,
+    driver: Any,
+    file_name: str,
+    output_name: str,
+    delay: float = 2,
     pixel_ratio: int = 2,
-    delay: int = 2,
-    is_remove_html: bool = True,
-    browser='Chrome'
+    is_remove_html: bool = False,
+    **kwargs,
 ):
-    if delay < 0:
-        raise Exception('Time travel is not possible')
-    if browser == 'Chrome':
-        driver = get_chrome()
-    elif browser == 'Safari':
-        driver = get_safari()
+    logger.info("Generating file ...")
+    file_type = output_name.split(".")[-1]
+
+    content = driver.make_snapshot(file_name, file_type, delay, pixel_ratio, **kwargs)
+    if file_type in [SVG_FORMAT, B64_FORMAT]:
+        save_as_text(content, output_name)
     else:
-        raise Exception('Unknown browser!')
-    driver.set_script_timeout(delay + 1)
+        # pdf, gif, png, jpeg
+        content_array = content.split(",")
+        if len(content_array) != 2:
+            raise OSError(content_array)
 
-    if not html_path.startswith("http"):
-        html_path = 'file://' + os.path.abspath(html_path)
-    driver.get(html_path)
-    time.sleep(delay)
+        image_data = decode_base64(content_array[1])
 
-    ext = image_name.split(".")[1]
+        if file_type in [PDF_FORMAT, GIF_FORMAT, EPS_FORMAT]:
+            save_as(image_data, output_name, file_type)
+        elif file_type in [PNG_FORMAT, JPG_FORMAT]:
+            save_as_png(image_data, output_name)
+        else:
+            raise TypeError("Not supported file type '%s'".format(file_type))
 
+    if "/" not in output_name:
+        output_name = os.path.join(os.getcwd(), output_name)
+
+    if is_remove_html and not file_name.startswith("http"):
+        os.unlink(file_name)
+    logger.info("File saved in %s" % output_name)
+
+
+def decode_base64(data: str) -> bytes:
+    """Decode base64, padding being optional.
+
+    :param data: Base64 data as an ASCII byte string
+    :returns: The decoded byte string.
+    """
+    missing_padding = len(data) % 4
+    if missing_padding != 0:
+        data += "=" * (4 - missing_padding)
+    return base64.decodebytes(data.encode("utf-8"))
+
+
+def save_as_png(image_data: bytes, output_name: str):
+    with open(output_name, "wb") as f:
+        f.write(image_data)
+
+
+def save_as_text(image_data: str, output_name: str):
+    with codecs.open(output_name, "w", encoding="utf-8") as f:
+        f.write(image_data)
+
+
+def save_as(image_data: bytes, output_name: str, file_type: str):
     try:
-        output = driver.execute_script(__gen_js_code(ext, pixel_ratio, delay))
-    except exceptions.TimeoutException:
-        pass
+        from PIL import Image
 
-    try:
-        output = output.split(",")[1]
-    except:
-        raise
-
-    with open(image_name, "wb") as f:
-        f.write(base64.b64decode(output))
-
-    if is_remove_html and not html_path.startswith("http"):
-        os.remove(html_path[7:])
-    driver.close()
-    print("render {}".format(image_name))
-
-
-def __gen_js_code(file_type: str, pixel_ratio: int, delay: int) -> str:
-    script = (
-        """
-        var ele = document.querySelector('div[_echarts_instance_]');
-        var mychart = echarts.getInstanceByDom(ele);
-        return mychart.getDataURL(
-            {type:'--file-type--', pixelRatio: --pixel-ratio--, excludeComponents: ['toolbox']});
-    """.replace(
-            "--file-type--", file_type
-        )
-        .replace("--pixel-ratio--", str(pixel_ratio))
-    )
-    return script
-
-
-def get_chrome():
-    option = webdriver.ChromeOptions()
-    option.add_argument("headless")
-    if sys.platform == 'darwin':
-        option.binary_location = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
-    capabilities = DesiredCapabilities.CHROME
-    capabilities["loggingPrefs"] = {"browser": "ALL"}
-    return webdriver.Chrome(
-        options=option,
-        desired_capabilities=capabilities)
-
-
-def get_safari():
-    return webdriver.Safari(executable_path='/usr/bin/safaridriver')
+        m = Image.open(BytesIO(image_data))
+        m.load()
+        color = (255, 255, 255)
+        b = Image.new("RGB", m.size, color)
+        b.paste(m, mask=m.split()[3])
+        b.save(output_name, file_type, quality=100)
+    except ModuleNotFoundError:
+        raise Exception("Please install PIL for % image type" % file_type)
