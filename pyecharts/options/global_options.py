@@ -154,7 +154,7 @@ class DataZoomOpts:
             "orient": orient,
             "xAxisIndex": xaxis_index,
             "yAxisIndex": yaxis_index,
-            "zoomLock": is_zoom_lock
+            "zoomLock": is_zoom_lock,
         }
 
 
@@ -237,7 +237,7 @@ class VisualMapOpts:
             "bottom": pos_bottom,
             "right": pos_right,
             "showLabel": True,
-            "outOfRange": out_of_range
+            "outOfRange": out_of_range,
         }
         if is_piecewise:
             self.opts.update(pieces=pieces)
@@ -289,7 +289,7 @@ class AxisLineOpts:
             "onZero": is_on_zero,
             "onZeroAxisIndex": on_zero_axis_index,
             "symbol": symbol,
-            "lineStyle": linestyle_opts
+            "lineStyle": linestyle_opts,
         }
 
 
@@ -328,7 +328,7 @@ class AxisPointerOpts:
             "show": is_show,
             "type": type_,
             "label": label,
-            "lineStyle": linestyle_opts
+            "lineStyle": linestyle_opts,
         }
 
 

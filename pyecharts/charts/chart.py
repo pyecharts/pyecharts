@@ -165,12 +165,11 @@ class Chart(Base):
 
 
 class AxisChart(Chart):
-
     def extend_axis(
-            self,
-            xaxis_data: Sequence = None,
-            xaxis: Union[opts.AxisOpts, dict, None] = None,
-            yaxis: Union[opts.AxisOpts, dict, None] = None,
+        self,
+        xaxis_data: Sequence = None,
+        xaxis: Union[opts.AxisOpts, dict, None] = None,
+        yaxis: Union[opts.AxisOpts, dict, None] = None,
     ):
         if xaxis is not None:
             if isinstance(xaxis, opts.AxisOpts):
