@@ -239,7 +239,7 @@ class Chart3D(Chart):
         if isinstance(grid3d_opts, opts.Grid3DOpts):
             grid3d_opts = grid3d_opts.opts
 
-        self.options.get("legend")[0].get("data").append(name)
+        self.options.get("legend")[0].get("data").append(series_name)
         self.options.update(
             xAxis3D=xaxis3d_opts,
             yAxis3D=yaxis3d_opts,
