@@ -112,6 +112,7 @@ def polar_flower() -> Polar:
         Polar()
         .add_schema(angleaxis_opts=opts.AngleAxisOpts(start_angle=0, min_=0))
         .add("flower", data, label_opts=opts.LabelOpts(is_show=False))
+        .set_global_opts(title_opts=opts.TitleOpts(title="Polar-Flower"))
     )
     return c
 

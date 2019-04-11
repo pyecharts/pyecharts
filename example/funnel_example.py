@@ -40,7 +40,7 @@ def funnel_sort_ascending() -> Funnel:
             sort_="ascending",
             label_opts=opts.LabelOpts(position="inside"),
         )
-        .set_global_opts(title_opts=opts.TitleOpts(title="Funnel-Label（inside)"))
+        .set_global_opts(title_opts=opts.TitleOpts(title="Funnel-Sort（ascending）"))
     )
     return c
 

@@ -60,7 +60,7 @@ class Graph(Chart):
             for c in categories:
                 if isinstance(c, opts.GraphCategory):
                     c = c.opts
-                self._append_legend(c, is_selected)
+                self._append_legend(c.get("name", ""), is_selected)
 
         if edge_symbol is None:
             edge_symbol = [None, None]
