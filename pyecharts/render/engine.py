@@ -48,4 +48,6 @@ class RenderEngine:
 
     def render_chart_to_notebook(self, template_name, **kwargs) -> str:
         tpl = self.env.get_template(template_name)
-        return tpl.render(**kwargs)
+        html = tpl.render(**kwargs)
+        html = re.sub(r'\\n|\\t|"?__-o-__"?', "", html)
+        return html
