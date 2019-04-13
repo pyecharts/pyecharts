@@ -7,7 +7,7 @@
 </p>
 <p align="center">
     <a href="https://travis-ci.org/pyecharts/pyecharts">
-        <img src="https://travis-ci.org/pyecharts/pyecharts.svg?branch=master" alt="Travis Build Status">
+        <img src="https://travis-ci.org/pyecharts/pyecharts.svg?branch=2019" alt="Travis Build Status">
     </a>
     <a href="https://ci.appveyor.com/project/chenjiandongx/pyecharts">
         <img src="https://ci.appveyor.com/api/projects/status/81cbsfjpfryv1cl8?svg=true" alt="Appveyor Build Status">
