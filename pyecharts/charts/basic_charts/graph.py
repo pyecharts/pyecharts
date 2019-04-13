@@ -51,10 +51,10 @@ class Graph(Chart):
             _nodes.append(n)
 
         _links = []
-        for l in links:
-            if isinstance(l, opts.GraphLink):
-                l = l.opts
-            _links.append(l)
+        for link in links:
+            if isinstance(link, opts.GraphLink):
+                link = link.opts
+            _links.append(link)
 
         if categories:
             for c in categories:

@@ -81,7 +81,7 @@ def polar_angleaxis() -> Polar:
 
 
 @C.funcs
-def polar_flower() -> Polar:
+def polar_love() -> Polar:
     data = []
     for i in range(101):
         theta = i / 100 * 360

@@ -47,7 +47,7 @@ def scatter_visualmap_color() -> Scatter:
 
 
 @C.funcs
-def scatter_visualmap_color() -> Scatter:
+def scatter_visualmap_size() -> Scatter:
     c = (
         Scatter()
         .add_xaxis(Faker.choose())

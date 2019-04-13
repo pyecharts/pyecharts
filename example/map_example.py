@@ -41,7 +41,7 @@ def map_visualmap() -> Map:
 
 
 @C.funcs
-def map_visualmap() -> Map:
+def map_visualmap_piecewise() -> Map:
     c = (
         Map()
         .add("商家A", [list(z) for z in zip(Faker.provinces, Faker.values())], "china")

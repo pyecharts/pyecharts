@@ -37,7 +37,7 @@ def line3d_base() -> Line3D:
 
 
 @C.funcs
-def line3d_base() -> Line3D:
+def line3d_auto_rotate() -> Line3D:
     data = []
     for t in range(0, 25000):
         _t = t / 1000
