@@ -20,7 +20,8 @@ class _Faker:
     dogs = ["哈士奇", "萨摩耶", "泰迪", "金毛", "牧羊犬", "吉娃娃", "柯基"]
     week = ["周一", "周二", "周三", "周四", "周五", "周六", "周日"]
     week_en = "Saturday Friday Thursday Wednesday Tuesday Monday Sunday".split()
-    clock = "12a 1a 2a 3a 4a 5a 6a 7a 8a 9a 10a 11a 12p 1p 2p 3p 4p 5p 6p 7p 8p 9p 10p 11p".split()
+    clock = "12a 1a 2a 3a 4a 5a 6a 7a 8a 9a 10a 11a 12p " \
+            "1p 2p 3p 4p 5p 6p 7p 8p 9p 10p 11p".split()
     visual_color = [
         "#313695",
         "#4575b4",

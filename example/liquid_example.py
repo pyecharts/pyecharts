@@ -38,7 +38,7 @@ def liquid_shape_diamond() -> Liquid:
 
 
 @C.funcs
-def liquid_shape_diamond() -> Liquid:
+def liquid_shape_arrow() -> Liquid:
     c = (
         Liquid()
         .add("lq", [0.3, 0.7], is_outline_show=False, shape=SymbolType.ARROW)
@@ -48,7 +48,7 @@ def liquid_shape_diamond() -> Liquid:
 
 
 @C.funcs
-def liquid_shape_diamond() -> Liquid:
+def liquid_shape_rect() -> Liquid:
     c = (
         Liquid()
         .add("lq", [0.3, 0.7], is_outline_show=False, shape=SymbolType.RECT)
