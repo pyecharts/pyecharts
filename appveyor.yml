@@ -13,5 +13,4 @@ install:
 build: off
 
 test_script:
-  - make.bat
   - "%PYTHON%/Scripts/nosetests --with-coverage --cover-package pyecharts --cover-package test && cd .. && %PYTHON%/Scripts/flake8 --exclude build --max-line-length 89 --ignore=F401"
