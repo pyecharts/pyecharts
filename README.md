@@ -92,13 +92,30 @@ bar.render()
 
 #### 生成图片
 ```python
+from snapshot_selenium import snapshot as driver
+
+from pyecharts import options as opts
+from pyecharts.charts import Bar
 from pyecharts.render import make_snapshot
 
-# 需要安装配置 selenium
-make_snapshot(bar.render(), "bar.png")
+
+def bar_chart() -> Bar:
+    c = (
+        Bar()
+        .add_xaxis(["衬衫", "毛衣", "领带", "裤子", "风衣", "高跟鞋", "袜子"])
+        .add_yaxis("商家A", [114, 55, 27, 101, 125, 27, 105])
+        .add_yaxis("商家B", [57, 134, 137, 129, 145, 60, 49])
+        .reversal_axis()
+        .set_series_opts(label_opts=opts.LabelOpts(position="right"))
+        .set_global_opts(title_opts=opts.TitleOpts(title="Bar-测试渲染图片"))
+    )
+    return c
+
+# 需要安装 snapshot_selenium
+make_snapshot(driver, bar_chart().render(), "bar.png")
 ```
 <p align="center">
-<img src="https://user-images.githubusercontent.com/19553554/55270432-7a9cfb80-52d9-11e9-81b5-4ceb4dcd1756.png"  width="85%" />
+<img src="https://user-images.githubusercontent.com/19553554/56089096-11fc7400-5ec0-11e9-9c21-551624036836.png"  width="85%" />
 </p>
 
 ### Notebook 环境

@@ -139,8 +139,8 @@ class DataZoomOpts:
         start_value: Union[int, str, None] = None,
         end_value: Union[int, str, None] = None,
         orient: str = "horizontal",
-        xaxis_index: int = 0,
-        yaxis_index: int = 0,
+        xaxis_index: Union[int, List[int], None] = None,
+        yaxis_index: Union[int, List[int], None] = None,
         is_zoom_lock: bool = False,
     ):
         self.opts: dict = {
