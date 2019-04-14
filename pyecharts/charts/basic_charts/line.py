@@ -1,11 +1,11 @@
 # coding=utf-8
 from ... import options as opts
-from ...charts.chart import AxisChart
+from ...charts.chart import RectChart
 from ...commons.types import Numeric, Optional, Sequence, Union
 from ...globals import ChartType
 
 
-class Line(AxisChart):
+class Line(RectChart):
     """
     <<< 折线/面积图 >>>
 

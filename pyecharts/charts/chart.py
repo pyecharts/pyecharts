@@ -164,7 +164,7 @@ class Chart(Base):
         return self
 
 
-class AxisChart(Chart):
+class RectChart(Chart):
     def extend_axis(
         self,
         xaxis_data: Sequence = None,

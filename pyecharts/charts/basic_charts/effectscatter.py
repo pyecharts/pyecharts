@@ -1,11 +1,11 @@
 # coding=utf-8
 from ... import options as opts
-from ...charts.chart import AxisChart
+from ...charts.chart import RectChart
 from ...commons.types import Numeric, Optional, Sequence, Union
 from ...globals import ChartType
 
 
-class EffectScatter(AxisChart):
+class EffectScatter(RectChart):
     """
     <<< 带有涟漪特效动画的散点图 >>>
 
