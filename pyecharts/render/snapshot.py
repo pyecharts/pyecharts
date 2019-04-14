@@ -18,7 +18,7 @@ B64_FORMAT = "base64"
 
 
 def make_snapshot(
-    driver: Any,
+    engine: Any,
     file_name: str,
     output_name: str,
     delay: float = 2,
@@ -29,7 +29,7 @@ def make_snapshot(
     logger.info("Generating file ...")
     file_type = output_name.split(".")[-1]
 
-    content = driver.make_snapshot(file_name, file_type, delay, pixel_ratio, **kwargs)
+    content = engine.make_snapshot(file_name, file_type, delay, pixel_ratio, **kwargs)
     if file_type in [SVG_FORMAT, B64_FORMAT]:
         save_as_text(content, output_name)
     else:

@@ -1,5 +1,3 @@
-from snapshot_selenium import snapshot as driver
-
 from pyecharts import options as opts
 from pyecharts.charts import Bar
 from pyecharts.render import make_snapshot
@@ -18,4 +16,15 @@ def bar_chart() -> Bar:
     return c
 
 
-make_snapshot(driver, bar_chart().render(), "bar.png")
+def render_chart_by_selenium():
+    from snapshot_selenium import snapshot
+    make_snapshot(snapshot, bar_chart().render(), "bar0.png")
+
+
+def render_chart_by_phantomjs():
+    from snapshot_phantomjs import snapshot
+    make_snapshot(snapshot, bar_chart().render(), "bar1.png")
+
+
+render_chart_by_phantomjs()
+render_chart_by_selenium()
