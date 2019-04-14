@@ -18,7 +18,10 @@ class Grid(Base):
         self._grow_grid_index: int = 0
 
     def add(
-        self, chart: RectChart, grid_opts: Union[opts.GridOpts, dict], grid_index: int = 0
+        self,
+        chart: RectChart,
+        grid_opts: Union[opts.GridOpts, dict],
+        grid_index: int = 0,
     ):
         if isinstance(grid_opts, opts.GridOpts):
             grid_opts = grid_opts.opts

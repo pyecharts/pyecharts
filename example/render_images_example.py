@@ -18,11 +18,13 @@ def bar_chart() -> Bar:
 
 def render_chart_by_selenium():
     from snapshot_selenium import snapshot
+
     make_snapshot(snapshot, bar_chart().render(), "bar0.png")
 
 
 def render_chart_by_phantomjs():
     from snapshot_phantomjs import snapshot
+
     make_snapshot(snapshot, bar_chart().render(), "bar1.png")
 
 
