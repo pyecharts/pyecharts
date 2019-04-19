@@ -34,8 +34,6 @@
     </a>
 </p>
 
-> Note: 0.5.x 文档已经移动至 [05x-docs.pyecharts.org](http://05x-docs.pyecharts.org)
-
 [English README](README.en.md)
 
 ## 📣 简介
@@ -52,8 +50,11 @@
 * 详细的文档和示例，帮助开发者更快的上手项目
 * 多达 400+ 地图，为地理数据可视化提供强有力的支持
 
+## ⏳ 版本
+
+经开发团队决定，0.5.x 版本将不再进行维护，0.5.x 版本代码位于 *05x* 分支，文档位于 [05x-docs.pyecharts.org](http://05x-docs.pyecharts.org)。新版本系列将从 v1.0.0 开始，不过 v1.0.0 正式版还未发布，**暂时请使用源码安装**，新版本文档位于 [pyecharts.org](https://pyecharts.org)。
+
 ## 🔰 安装
-> Note: 目前 v1.0.0 正式版还未发布，暂时请使用源码安装。
 
 **pip 安装**
 ```shell
