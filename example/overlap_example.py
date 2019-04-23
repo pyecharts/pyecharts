@@ -12,6 +12,26 @@ v3 = [2.0, 2.2, 3.3, 4.5, 6.3, 10.2, 20.3, 23.4, 23.0, 16.5, 12.0, 6.2]
 
 
 @C.funcs
+def overlap_line_scatter() -> Bar:
+    x = Faker.choose()
+    bar = (
+        Bar()
+        .add_xaxis(x)
+        .add_yaxis("商家A", Faker.values())
+        .add_yaxis("商家B", Faker.values())
+        .set_global_opts(title_opts=opts.TitleOpts(title="Overlap-line+scatter"))
+    )
+    line = (
+        Line()
+        .add_xaxis(x)
+        .add_yaxis("商家A", Faker.values())
+        .add_yaxis("商家B", Faker.values())
+    )
+    bar.overlap(line)
+    return bar
+
+
+@C.funcs
 def overlap_bar_line() -> Bar:
     bar = (
         Bar()
@@ -25,7 +45,7 @@ def overlap_bar_line() -> Bar:
         )
         .set_series_opts(label_opts=opts.LabelOpts(is_show=False))
         .set_global_opts(
-            title_opts=opts.TitleOpts(title="Grid-bar+line"),
+            title_opts=opts.TitleOpts(title="Overlap-bar+line"),
             yaxis_opts=opts.AxisOpts(
                 axislabel_opts=opts.LabelOpts(formatter="{value} ml")
             ),
