@@ -52,7 +52,19 @@
 
 ## ⏳ 版本
 
-经开发团队决定，0.5.x 版本将不再进行维护，0.5.x 版本代码位于 *05x* 分支，文档位于 [05x-docs.pyecharts.org](http://05x-docs.pyecharts.org)。新版本系列将从 v1.0.0 开始，不过 v1.0.0 正式版还未发布，**暂时请使用源码安装**，新版本文档位于 [pyecharts.org](https://pyecharts.org)。
+v0.5.X 和 V1.0.X 间完全不兼容，V1.0.X 是一个全线的版本，虽然目前还不够完善，但它值得期待。参考 [ISSUE#892](https://github.com/pyecharts/pyecharts/issues/892)
+
+### V0.5.X
+
+> 支持 Python2.7，3.4+
+
+经开发团队决定，0.5.x 版本将不再进行维护，0.5.x 版本代码位于 *05x* 分支，文档位于 [05x-docs.pyecharts.org](http://05x-docs.pyecharts.org)。
+
+### V1.0.X
+
+> 仅支持 Python3.6+
+
+新版本系列将从 v1.0.0 开始，不过 v1.0.0 正式版还未发布，文档也仍在逐渐完善中，可以配合 example 文件夹里的示例学习使用，**暂时请使用源码安装**，新版本文档位于 [pyecharts.org](https://pyecharts.org)。
 
 ## 🔰 安装
 
