@@ -22,16 +22,16 @@ class Geo(Chart):
         self._coordinates = COORDINATES
         self._zlevel = 1
 
-    def add_coordinate(self, name, longitude, latitude):
+    def add_coordinate(self, name: str, longitude: Numeric, latitude: Numeric):
         self._coordinates.update({name: [longitude, latitude]})
 
-    def add_coordinate_json(self, json_file):
+    def add_coordinate_json(self, json_file: str):
         with open(json_file, "r", encoding="utf-8") as f:
             json_reader = json.load(f)
             for k, v in json_reader.items():
                 self.add_coordinate(k, v[0], v[1])
 
-    def get_coordinate(self, name) -> List:
+    def get_coordinate(self, name: str) -> List:
         if name in self._coordinates:
             return self._coordinates[name]
 
@@ -78,7 +78,6 @@ class Geo(Chart):
         symbol: Optional[str] = None,
         symbol_size: Numeric = 12,
         color: Optional[str] = None,
-        region_coords: Optional[dict] = None,
         label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
         effect_opts: Union[opts.EffectOpts, dict] = opts.EffectOpts(),
         linestyle_opts: Union[opts.LineStyleOpts, dict] = opts.LineStyleOpts(),
@@ -94,10 +93,6 @@ class Geo(Chart):
             tooltip_opts = tooltip_opts.opts
 
         self._zlevel += 1
-        if region_coords:
-            for city_name, city_coord in region_coords.items():
-                self.add_coordinate(city_name, city_coord[0], city_coord[1])
-
         data = []
         for n, v in data_pair:
             if type_ == ChartType.LINES:
