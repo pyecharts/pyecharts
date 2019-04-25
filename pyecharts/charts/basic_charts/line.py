@@ -37,6 +37,7 @@ class Line(RectChart):
         label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
         linestyle_opts: Union[opts.LineStyleOpts, dict] = opts.LineStyleOpts(),
         areastyle_opts: Union[opts.AreaStyleOpts, dict] = opts.AreaStyleOpts(),
+        itemstyle_opts: Union[opts.ItemStyleOpts, dict] = opts.ItemStyleOpts(),
     ):
         if isinstance(label_opts, opts.LabelOpts):
             label_opts = label_opts.opts
@@ -50,6 +51,8 @@ class Line(RectChart):
             areastyle_opts = areastyle_opts.opts
         if isinstance(tooltip_opts, opts.TooltipOpts):
             tooltip_opts = tooltip_opts.opts
+        if isinstance(itemstyle_opts, opts.ItemStyleOpts):
+            itemstyle_opts = itemstyle_opts.opts
 
         self._append_color(color)
         self._append_legend(series_name, is_selected)
@@ -76,6 +79,7 @@ class Line(RectChart):
                 "markPoint": markpoint_opts,
                 "markLine": markline_opts,
                 "tooltip": tooltip_opts,
+                "itemStyle": itemstyle_opts,
             }
         )
         return self
