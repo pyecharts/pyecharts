@@ -53,21 +53,24 @@ class Base:
         template_name: str = "simple_chart.html",
         env: Optional[Environment] = None,
     ) -> str:
-        self.json_contents = self.dump_options()
-        self._use_theme()
+        self._prepare_render()
         RenderEngine(env).render_chart_to_file(
             chart=self, path=path, template_name=template_name
         )
         return os.path.abspath(path)
 
-    def _use_theme(self):
-        if self.theme not in ThemeType.BUILTIN_THEMES:
-            self.js_dependencies.add(self.theme)
+    def render_embed(
+        self,
+        template_name: str = "simple_chart.html",
+        env: Optional[Environment] = None,
+    ):
+        self._prepare_render()
+        html = RenderEngine(env).render_chart_to_template(template_name, chart=self)
+        return html
 
     def render_notebook(self):
         self.chart_id = uuid.uuid4().hex
-        self.json_contents = self.dump_options()
-        self._use_theme()
+        self._prepare_render()
         if CurrentConfig.NOTEBOOK_TYPE == NotebookType.JUPYTER_NOTEBOOK:
             require_config = utils.produce_require_dict(
                 self.js_dependencies, self.js_host
@@ -90,6 +93,14 @@ class Base:
 
         if CurrentConfig.NOTEBOOK_TYPE == NotebookType.NTERACT:
             pass
+
+    def _use_theme(self):
+        if self.theme not in ThemeType.BUILTIN_THEMES:
+            self.js_dependencies.add(self.theme)
+
+    def _prepare_render(self):
+        self.json_contents = self.dump_options()
+        self._use_theme()
 
     def load_javascript(self):
         scripts = []
