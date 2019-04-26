@@ -3,8 +3,8 @@ import json
 
 from ... import options as opts
 from ...charts.chart import Chart
-from ...commons.utils import produce_js_func
 from ...commons.types import List, Numeric, Optional, Sequence, Union
+from ...commons.utils import produce_js_func
 from ...datasets import COORDINATES
 from ...globals import ChartType, TooltipFormatterType
 

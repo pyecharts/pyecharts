@@ -16,10 +16,7 @@ def test_bar3d_base():
             yaxis3d_opts=opts.Axis3DOpts(Faker.week_en, type_="category"),
             zaxis3d_opts=opts.Axis3DOpts(type_="value"),
         )
-        .set_global_opts(
-            visualmap_opts=opts.VisualMapOpts(max_=20),
-            title_opts=opts.TitleOpts(title="Bar3D-基本示例"),
-        )
+        .set_global_opts(visualmap_opts=opts.VisualMapOpts(max_=20))
     )
     assert c.theme == "white"
     assert c.renderer == "canvas"
