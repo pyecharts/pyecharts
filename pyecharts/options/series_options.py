@@ -1,5 +1,5 @@
 # coding=utf-8
-from ..commons.types import List, Numeric, Optional, Sequence, Tuple, Union
+from ..commons.types import JSFunc, List, Numeric, Optional, Sequence, Tuple, Union
 
 
 class ItemStyleOpts:
@@ -55,7 +55,7 @@ class LabelOpts:
         rotate: Optional[Numeric] = None,
         horizontal_align: Optional[str] = None,
         vertical_align: Optional[str] = None,
-        formatter: Optional[str] = None,
+        formatter: Union[str, JSFunc, None] = None,
     ):
         self.opts: dict = {
             "show": is_show,

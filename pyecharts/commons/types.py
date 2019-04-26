@@ -12,3 +12,4 @@ from typing import (
 )
 
 Numeric = Union[int, float]
+JSFunc = str
