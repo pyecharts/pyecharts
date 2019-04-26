@@ -97,6 +97,36 @@ def kline_datazoom_slider() -> Kline:
 
 
 @C.funcs
+def kline_itemstyle() -> Kline:
+    c = (
+        Kline()
+        .add_xaxis(["2017/7/{}".format(i + 1) for i in range(31)])
+        .add_yaxis(
+            "kline",
+            data,
+            itemstyle_opts=opts.ItemStyleOpts(
+                color="#ec0000",
+                color0="#00da3c",
+                border_color="#8A0000",
+                border_color0="#008F28",
+            ),
+        )
+        .set_global_opts(
+            xaxis_opts=opts.AxisOpts(is_scale=True),
+            yaxis_opts=opts.AxisOpts(
+                is_scale=True,
+                splitarea_opts=opts.SplitAreaOpts(
+                    is_show=True, areastyle_opts=opts.AreaStyleOpts(opacity=1)
+                ),
+            ),
+            datazoom_opts=[opts.DataZoomOpts(type_="inside")],
+            title_opts=opts.TitleOpts(title="Kline-ItemStyle"),
+        )
+    )
+    return c
+
+
+@C.funcs
 def kline_datazoom_inside() -> Kline:
     c = (
         Kline()

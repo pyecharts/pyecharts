@@ -30,6 +30,7 @@ class EffectScatter(RectChart):
         label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
         effect_opts: Union[opts.EffectOpts, dict] = opts.EffectOpts(),
         tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
+        itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
     ):
         if isinstance(label_opts, opts.LabelOpts):
             label_opts = label_opts.opts
@@ -37,6 +38,8 @@ class EffectScatter(RectChart):
             effect_opts = effect_opts.opts
         if isinstance(tooltip_opts, opts.TooltipOpts):
             tooltip_opts = tooltip_opts.opts
+        if isinstance(itemstyle_opts, opts.ItemStyleOpts):
+            itemstyle_opts = itemstyle_opts.opts
 
         self._append_color(color)
         self._append_legend(series_name, is_selected)
@@ -53,6 +56,7 @@ class EffectScatter(RectChart):
                 "data": [list(z) for z in zip(self._xaxis_data, y_axis)],
                 "label": label_opts,
                 "tooltip": tooltip_opts,
+                "itemStyle": itemstyle_opts,
             }
         )
         return self

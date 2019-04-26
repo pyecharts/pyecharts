@@ -26,11 +26,14 @@ class Pie(Chart):
         rosetype: Optional[str] = None,
         label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
         tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
+        itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
     ):
         if isinstance(label_opts, opts.LabelOpts):
             label_opts = label_opts.opts
         if isinstance(tooltip_opts, opts.TooltipOpts):
             tooltip_opts = tooltip_opts.opts
+        if isinstance(itemstyle_opts, opts.ItemStyleOpts):
+            itemstyle_opts = itemstyle_opts.opts
 
         data = [{"name": n, "value": v} for n, v in data_pair]
 
@@ -58,6 +61,7 @@ class Pie(Chart):
                 "roseType": rosetype,
                 "label": label_opts,
                 "tooltip": tooltip_opts,
+                "itemStyle": itemstyle_opts,
             }
         )
         return self

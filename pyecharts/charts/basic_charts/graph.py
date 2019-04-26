@@ -36,6 +36,7 @@ class Graph(Chart):
         label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
         linestyle_opts: Union[opts.LineStyleOpts, dict] = opts.LineStyleOpts(),
         tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
+        itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
     ):
         if isinstance(label_opts, opts.LabelOpts):
             label_opts = label_opts.opts
@@ -43,6 +44,8 @@ class Graph(Chart):
             linestyle_opts = linestyle_opts.opts
         if isinstance(tooltip_opts, opts.TooltipOpts):
             tooltip_opts = tooltip_opts.opts
+        if isinstance(itemstyle_opts, opts.ItemStyleOpts):
+            itemstyle_opts = itemstyle_opts.opts
 
         _nodes = []
         for n in nodes:
@@ -87,6 +90,7 @@ class Graph(Chart):
                 "edgeSymbolSize": edge_symbol_size,
                 "links": _links,
                 "tooltip": tooltip_opts,
+                "itemStyle": itemstyle_opts,
             }
         )
         return self

@@ -34,10 +34,10 @@ class Line(RectChart):
         markpoint_opts: Union[opts.MarkPointOpts, dict, None] = None,
         markline_opts: Union[opts.MarkLineOpts, dict, None] = None,
         tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
+        itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
         label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
         linestyle_opts: Union[opts.LineStyleOpts, dict] = opts.LineStyleOpts(),
         areastyle_opts: Union[opts.AreaStyleOpts, dict] = opts.AreaStyleOpts(),
-        itemstyle_opts: Union[opts.ItemStyleOpts, dict] = opts.ItemStyleOpts(),
     ):
         if isinstance(label_opts, opts.LabelOpts):
             label_opts = label_opts.opts

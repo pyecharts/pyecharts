@@ -39,9 +39,12 @@ class WordCloud(Chart):
         word_size_range=None,
         rotate_step: Numeric = 45,
         tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
+        itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
     ):
         if isinstance(tooltip_opts, opts.TooltipOpts):
             tooltip_opts = tooltip_opts.opts
+        if isinstance(itemstyle_opts, opts.ItemStyleOpts):
+            itemstyle_opts = itemstyle_opts.opts
 
         data = []
         for n, v in data_pair:
@@ -69,6 +72,7 @@ class WordCloud(Chart):
                 "sizeRange": word_size_range,
                 "data": data,
                 "tooltip": tooltip_opts,
+                "itemStyle": itemstyle_opts,
             }
         )
         return self

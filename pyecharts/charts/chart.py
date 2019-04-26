@@ -37,6 +37,7 @@ class Chart(Base):
         markarea_opts: Union[opts.MarkAreaOpts, dict, None] = None,
         effect_opts: Union[opts.EffectOpts, dict] = opts.EffectOpts(),
         tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
+        itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
     ):
         _series = self.options.get("series")
         if label_opts:
@@ -98,6 +99,13 @@ class Chart(Base):
                 tooltip_opts = tooltip_opts.opts
             for s in _series:
                 s.update(tooltip=tooltip_opts)
+
+        if itemstyle_opts:
+            if isinstance(itemstyle_opts, opts.ItemStyleOpts):
+                itemstyle_opts = itemstyle_opts.opts
+            for s in _series:
+                s.update(itemStyle=itemstyle_opts)
+
         return self
 
     def _append_legend(self, name, is_selected):

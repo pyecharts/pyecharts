@@ -2,6 +2,7 @@
 from ... import options as opts
 from ...charts.chart import Chart
 from ...commons.types import Numeric, Optional, Sequence, Union
+from ...globals import ChartType
 
 
 class Polar(Chart):
@@ -41,6 +42,7 @@ class Polar(Chart):
         areastyle_opts: Union[opts.AreaStyleOpts, dict] = opts.AreaStyleOpts(),
         effect_opts: Union[opts.EffectOpts, dict] = opts.EffectOpts(),
         tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
+        itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
     ):
         if isinstance(label_opts, opts.LabelOpts):
             label_opts = label_opts.opts
@@ -50,11 +52,13 @@ class Polar(Chart):
             effect_opts = effect_opts.opts
         if isinstance(tooltip_opts, opts.TooltipOpts):
             tooltip_opts = tooltip_opts.opts
+        if isinstance(itemstyle_opts, opts.ItemStyleOpts):
+            itemstyle_opts = itemstyle_opts.opts
 
         self._append_legend(series_name, is_selected)
         self.options.update(polar={})
 
-        if type_ in ("scatter", "line", "bar"):
+        if type_ in (ChartType.SCATTER, ChartType.LINE, ChartType.BAR):
             self.options.get("series").append(
                 {
                     "type": type_,
@@ -67,10 +71,11 @@ class Polar(Chart):
                     "label": label_opts,
                     "areaStyle": areastyle_opts,
                     "tooltip": tooltip_opts,
+                    "itemStyle": itemstyle_opts,
                 }
             )
 
-        elif type_ == "effectScatter":
+        elif type_ == ChartType.EFFECT_SCATTER:
             self.options.get("series").append(
                 {
                     "type": type_,
@@ -83,6 +88,7 @@ class Polar(Chart):
                     "data": data,
                     "label": label_opts,
                     "tooltip": tooltip_opts,
+                    "itemStyle": itemstyle_opts,
                 }
             )
         return self

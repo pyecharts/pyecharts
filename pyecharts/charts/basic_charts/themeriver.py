@@ -22,8 +22,9 @@ class ThemeRiver(Chart):
         *,
         is_selected: bool = True,
         label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
-        tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
         singleaxis_opts: Union[opts.SingleAxisOpts, dict] = opts.SingleAxisOpts(),
+        tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
+        itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
     ):
         if isinstance(label_opts, opts.LabelOpts):
             label_opts = label_opts.opts
@@ -31,6 +32,8 @@ class ThemeRiver(Chart):
             tooltip_opts = tooltip_opts.opts
         if isinstance(singleaxis_opts, opts.SingleAxisOpts):
             singleaxis_opts = singleaxis_opts.opts
+        if isinstance(itemstyle_opts, opts.ItemStyleOpts):
+            itemstyle_opts = itemstyle_opts.opts
 
         for n in series_name:
             self._append_legend(n, is_selected)
@@ -42,6 +45,7 @@ class ThemeRiver(Chart):
                 "data": data,
                 "label": label_opts,
                 "tooltip": tooltip_opts,
+                "itemStyle": itemstyle_opts,
             }
         )
 
