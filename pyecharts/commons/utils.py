@@ -15,7 +15,7 @@ class OrderedSet:
             self.items.append(item)
 
 
-def filter_js_func(fn: str) -> str:
+def produce_js_func(fn: str) -> str:
     return "__-o-__{}__-o-__".format(fn)
 
 

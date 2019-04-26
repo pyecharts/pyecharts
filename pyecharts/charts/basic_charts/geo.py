@@ -3,7 +3,7 @@ import json
 
 from ... import options as opts
 from ...charts.chart import Chart
-from ...commons import utils
+from ...commons.utils import produce_js_func
 from ...commons.types import List, Numeric, Optional, Sequence, Union
 from ...datasets import COORDINATES
 from ...globals import ChartType, TooltipFormatterType
@@ -167,7 +167,7 @@ class Geo(Chart):
         self,
         title_opts: Union[opts.TitleOpts, dict] = opts.TitleOpts(),
         tooltip_opts: Union[opts.TooltipOpts, dict] = opts.TooltipOpts(
-            formatter=utils.filter_js_func(TooltipFormatterType.GEO)
+            formatter=produce_js_func(TooltipFormatterType.GEO)
         ),
         legend_opts: Union[opts.LegendOpts, dict] = opts.LegendOpts(),
         toolbox_opts: Union[opts.ToolboxOpts, dict] = None,

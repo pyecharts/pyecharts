@@ -33,13 +33,10 @@ class Base:
         self.js_functions: utils.OrderedSet = utils.OrderedSet()
         self.js_dependencies: utils.OrderedSet = utils.OrderedSet("echarts")
 
-    @staticmethod
-    def produce_js_func(fn: str) -> str:
-        return utils.filter_js_func(fn)
-
     def add_js_funcs(self, *fns):
         for fn in fns:
             self.js_functions.add(fn)
+        return self
 
     def get_options(self) -> dict:
         return utils.remove_key_with_none_value(self.options)
