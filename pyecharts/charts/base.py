@@ -32,6 +32,7 @@ class Base:
         self.js_host: str = init_opts.js_host or CurrentConfig.ONLINE_HOST
         self.js_functions: utils.OrderedSet = utils.OrderedSet()
         self.js_dependencies: utils.OrderedSet = utils.OrderedSet("echarts")
+        self.options.update(backgroundColor=init_opts.bg_color)
 
     def add_js_funcs(self, *fns):
         for fn in fns:
