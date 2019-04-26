@@ -78,6 +78,6 @@ class Boxplot(RectChart):
                     elif m == 3 / 4:
                         res.append(d[k - 1] * 0.25 + d[k] * 0.75)
                 data.append([d[0]] + res + [d[-1]])
-            except:
+            except Exception:
                 pass
         return data
