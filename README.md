@@ -52,7 +52,7 @@
 
 ## ⏳ 版本
 
-v0.5.X 和 V1.0.X 间完全不兼容，V1.0.X 是一个全线的版本，虽然目前还不够完善，但它值得期待。参考 [ISSUE#892](https://github.com/pyecharts/pyecharts/issues/892)
+v0.5.X 和 V1.0.X 间完全不兼容，V1.0.X 是一个全新的版本，虽然目前还不够完善，但它值得期待。参考 [ISSUE#892](https://github.com/pyecharts/pyecharts/issues/892)
 
 ### V0.5.X
 
@@ -206,11 +206,12 @@ $ make
 
 ## 😉 Author
 
-pyecharts 主要由以下三位开发者开发维护
+pyecharts 主要由以下几位开发者开发维护
 
 * [@chenjiandongx](https://github.com/chenjiandongx)
 * [@chfw](https://github.com/chfw)
 * [@kinegratii](https://github.com/kinegratii)
+* [@sunhailin-Leo](https://github.com/sunhailin-Leo)
 
 更多贡献者信息可以访问 [pyecharts/graphs/contributors](https://github.com/pyecharts/pyecharts/graphs/contributors)
 
@@ -218,7 +219,7 @@ pyecharts 主要由以下三位开发者开发维护
 
 开发和维护 pyecharts 花费了我巨大的心力，如果你觉得项目帮助到您，请认真考虑请作者喝一杯咖啡 😄
 
-<img src="https://user-images.githubusercontent.com/19553554/35425853-500d6b5c-0299-11e8-80a1-ebb6629b497e.png" width="19.8%" alt="Alipay">　　　<img src="https://user-images.githubusercontent.com/19553554/35425854-504e716a-0299-11e8-81fc-4a511f1c47e8.png" width="20%" alt="Wechat">
+<img src="https://user-images.githubusercontent.com/19553554/35425853-500d6b5c-0299-11e8-80a1-ebb6629b497e.png" width="21.7%" alt="Alipay">　　　　　<img src="https://user-images.githubusercontent.com/19553554/35425854-504e716a-0299-11e8-81fc-4a511f1c47e8.png" width="22%" alt="Wechat">
 
 
 如果其他开发者帮助到了您，也可以请他们喝咖啡 [捐赠通道](http://pyecharts.org/#/zh-cn/donate)
