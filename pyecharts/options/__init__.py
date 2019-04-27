@@ -16,7 +16,7 @@ from .global_options import (
     LegendOpts,
     ParallelAxisOpts,
     ParallelOpts,
-    RadarIndicatorOpts,
+    RadarIndicatorItem,
     RadiusAxisItem,
     RadiusAxisOpts,
     SingleAxisOpts,

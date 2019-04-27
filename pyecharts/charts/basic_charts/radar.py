@@ -17,7 +17,7 @@ class Radar(Chart):
 
     def add_schema(
         self,
-        schema: List[Union[opts.RadarIndicatorOpts, dict]],
+        schema: List[Union[opts.RadarIndicatorItem, dict]],
         shape: Optional[str] = None,
         textstyle_opts: Union[opts.TextStyleOpts, dict] = opts.TextStyleOpts(),
         splitline_opt: Union[opts.SplitLineOpts, dict] = opts.SplitLineOpts(
@@ -37,7 +37,7 @@ class Radar(Chart):
 
         indicators = []
         for s in schema:
-            if isinstance(s, opts.RadarIndicatorOpts):
+            if isinstance(s, opts.RadarIndicatorItem):
                 s = s.opts
             indicators.append(s)
 

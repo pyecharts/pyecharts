@@ -506,7 +506,7 @@ class ParallelAxisOpts:
         }
 
 
-class RadarIndicatorOpts:
+class RadarIndicatorItem:
     def __init__(
         self,
         name: Optional[str] = None,
