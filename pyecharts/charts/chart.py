@@ -126,7 +126,9 @@ class Chart(Base):
         toolbox_opts: Union[opts.ToolboxOpts, dict] = None,
         xaxis_opts: Union[opts.AxisOpts, dict, None] = None,
         yaxis_opts: Union[opts.AxisOpts, dict, None] = None,
-        visualmap_opts: Union[opts.VisualMapOpts, dict, None] = None,
+        visualmap_opts: Union[
+                opts.VisualMapOpts, List[Union[opts.VisualMapOpts, dict]], dict, None
+            ] = None,
         datazoom_opts: List[Union[opts.DataZoomOpts, dict, None]] = None,
     ):
         if isinstance(title_opts, opts.TitleOpts):
@@ -140,11 +142,21 @@ class Chart(Base):
         if isinstance(visualmap_opts, opts.VisualMapOpts):
             visualmap_opts = visualmap_opts.opts
 
+        vs = []
+        if isinstance(visualmap_opts, Sequence):
+            for vo in visualmap_opts:
+                if isinstance(vo, opts.VisualMapOpts):
+                    vs.append(vo.opts)
+                else:
+                    vs.append(vo)
+
+        _visualmap_opts = vs if vs else visualmap_opts
+
         self.options.update(
             title=title_opts,
             toolbox=toolbox_opts,
             tooltip=tooltip_opts,
-            visualMap=visualmap_opts,
+            visualMap=_visualmap_opts,
         )
 
         for _s in self.options["legend"]:
