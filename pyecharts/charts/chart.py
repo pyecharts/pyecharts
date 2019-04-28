@@ -127,8 +127,8 @@ class Chart(Base):
         xaxis_opts: Union[opts.AxisOpts, dict, None] = None,
         yaxis_opts: Union[opts.AxisOpts, dict, None] = None,
         visualmap_opts: Union[
-                opts.VisualMapOpts, List[Union[opts.VisualMapOpts, dict]], dict, None
-            ] = None,
+            opts.VisualMapOpts, List[Union[opts.VisualMapOpts, dict]], dict, None
+        ] = None,
         datazoom_opts: List[Union[opts.DataZoomOpts, dict, None]] = None,
     ):
         if isinstance(title_opts, opts.TitleOpts):
