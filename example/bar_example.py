@@ -12,8 +12,36 @@ def bar_base() -> Bar:
         Bar()
         .add_xaxis(Faker.choose())
         .add_yaxis("商家A", Faker.values())
-        .add_yaxis("商家B", Faker.values(), is_selected=False)
+        .add_yaxis("商家B", Faker.values())
         .set_global_opts(title_opts=opts.TitleOpts(title="Bar-基本示例", subtitle="我是副标题"))
+    )
+    return c
+
+
+@C.funcs
+def bar_is_selected() -> Bar:
+    c = (
+        Bar()
+        .add_xaxis(Faker.choose())
+        .add_yaxis("商家A", Faker.values())
+        .add_yaxis("商家B", Faker.values(), is_selected=False)
+        .set_global_opts(title_opts=opts.TitleOpts(title="Bar-默认取消显示某 Series"))
+    )
+    return c
+
+
+@C.funcs
+def bar_toolbox() -> Bar:
+    c = (
+        Bar()
+        .add_xaxis(Faker.choose())
+        .add_yaxis("商家A", Faker.values())
+        .add_yaxis("商家B", Faker.values())
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="Bar-显示 ToolBox"),
+            toolbox_opts=opts.ToolboxOpts(),
+            legend_opts=opts.LegendOpts(is_show=False)
+        )
     )
     return c
 
