@@ -1,7 +1,7 @@
 # coding=utf-8
 from ... import options as opts
 from ...charts.chart import Chart
-from ...commons.types import List, Numeric, Optional, Union
+from ...commons.types import Numeric, Optional, Union, Sequence
 from ...globals import ChartType
 
 
@@ -18,9 +18,9 @@ class Graph(Chart):
     def add(
         self,
         series_name: str,
-        nodes: List[Union[opts.GraphNode, dict]],
-        links: List[Union[opts.GraphLink, dict]],
-        categories: Union[List[Union[opts.GraphCategory, dict]], None] = None,
+        nodes: Sequence[Union[opts.GraphNode, dict]],
+        links: Sequence[Union[opts.GraphLink, dict]],
+        categories: Union[Sequence[Union[opts.GraphCategory, dict]], None] = None,
         *,
         is_selected: bool = True,
         is_focusnode: bool = True,

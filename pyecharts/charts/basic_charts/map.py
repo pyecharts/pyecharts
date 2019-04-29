@@ -1,7 +1,7 @@
 # coding=utf-8
 from ... import options as opts
 from ...charts.chart import Chart
-from ...commons.types import Optional, Sequence, Union, List, Numeric
+from ...commons.types import Optional, Sequence, Union, Numeric
 from ...globals import ChartType
 
 
@@ -23,7 +23,7 @@ class Map(Chart):
         *,
         is_selected: bool = True,
         is_roam: bool = True,
-        center: Optional[List] = None,
+        center: Optional[Sequence] = None,
         zoom: Optional[Numeric] = 1,
         name_map: Optional[dict] = None,
         symbol: Optional[str] = None,

@@ -1,7 +1,7 @@
 # coding=utf-8
 from .. import options as opts
 from ..charts.base import Base
-from ..commons.types import List, Numeric, Optional, Sequence, Union
+from ..commons.types import Optional, Sequence, Union
 from ..globals import RenderType, ThemeType
 
 
@@ -127,9 +127,9 @@ class Chart(Base):
         xaxis_opts: Union[opts.AxisOpts, dict, None] = None,
         yaxis_opts: Union[opts.AxisOpts, dict, None] = None,
         visualmap_opts: Union[
-            opts.VisualMapOpts, List[Union[opts.VisualMapOpts, dict]], dict, None
+            opts.VisualMapOpts, Sequence[Union[opts.VisualMapOpts, dict]], dict, None
         ] = None,
-        datazoom_opts: List[Union[opts.DataZoomOpts, dict, None]] = None,
+        datazoom_opts: Sequence[Union[opts.DataZoomOpts, dict, None]] = None,
     ):
         if isinstance(title_opts, opts.TitleOpts):
             title_opts = title_opts.opts

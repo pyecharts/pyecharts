@@ -1,7 +1,7 @@
 # coding=utf-8
 from ... import options as opts
 from ...charts.chart import Chart
-from ...commons.types import List, Sequence, Union
+from ...commons.types import Sequence, Union
 from ...globals import ChartType
 
 
@@ -18,7 +18,7 @@ class Parallel(Chart):
 
     def add_schema(
         self,
-        schema: List[Union[opts.ParallelAxisOpts, dict]],
+        schema: Sequence[Union[opts.ParallelAxisOpts, dict]],
         parallel_opts: Union[opts.ParallelOpts, dict, None] = None,
     ):
         sc = []

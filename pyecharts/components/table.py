@@ -4,7 +4,7 @@ import os
 from jinja2 import Environment
 from prettytable import PrettyTable
 
-from ..commons.types import List, Optional
+from ..commons.types import Sequence, Optional
 from ..globals import CurrentConfig
 from ..render.display import HTML
 from ..render.engine import RenderEngine
@@ -20,7 +20,7 @@ class Table:
         self.js_host = js_host
         self._charts = []
 
-    def add(self, headers: List, rows: List):
+    def add(self, headers: Sequence, rows: Sequence):
         table = PrettyTable(headers)
         for r in rows:
             table.add_row(r)

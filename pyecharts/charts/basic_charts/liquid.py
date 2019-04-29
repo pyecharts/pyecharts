@@ -1,7 +1,7 @@
 # coding=utf-8
 from ... import options as opts
 from ...charts.chart import Chart
-from ...commons.types import List, Optional, Sequence, Union
+from ...commons.types import Optional, Sequence, Union
 from ...globals import ChartType
 
 
@@ -22,7 +22,7 @@ class Liquid(Chart):
         data: Sequence,
         *,
         shape: str = "circle",
-        color: Optional[List[str]] = None,
+        color: Optional[Sequence[str]] = None,
         is_animation: bool = True,
         is_outline_show: bool = True,
         tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
