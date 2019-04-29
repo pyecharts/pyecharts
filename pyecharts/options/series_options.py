@@ -36,8 +36,8 @@ class TextStyleOpts:
         background_color: Optional[str] = None,
         border_color: Optional[str] = None,
         border_width: Optional[Numeric] = None,
-        border_radius: Union[Numeric, List] = None,
-        padding: Union[Numeric, List] = None,
+        border_radius: Union[Numeric, List, None] = None,
+        padding: Union[Numeric, List, None] = None,
         shadow_color: Optional[str] = None,
         shadow_blur: Optional[Numeric] = None,
         width: Optional[str] = None,
@@ -107,7 +107,7 @@ class LineStyleOpts:
         opacity: Numeric = 1,
         curve: Numeric = 0,
         type_: str = "solid",
-        color: Union[str, List] = None,
+        color: Union[str, List, None] = None,
     ):
         self.opts: dict = {
             "width": width,
