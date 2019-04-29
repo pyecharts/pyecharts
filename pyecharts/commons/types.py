@@ -11,5 +11,7 @@ from typing import (
     Union,
 )
 
+from .utils import JsCode
+
 Numeric = Union[int, float]
-JSFunc = str
+JSFunc = Union[str, JsCode]

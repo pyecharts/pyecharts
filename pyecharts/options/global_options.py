@@ -1,5 +1,5 @@
 # coding=utf-8
-from ..commons.types import List, Numeric, Optional, Sequence, Union
+from ..commons.types import JSFunc, List, Numeric, Optional, Sequence, Union
 from ..globals import RenderType, ThemeType
 from ..options.series_options import (
     LabelOpts,
@@ -250,7 +250,7 @@ class TooltipOpts:
         trigger: str = "item",
         trigger_on: str = "mousemove|click",
         axis_pointer_type: str = "line",
-        formatter: Optional[str] = None,
+        formatter: Optional[JSFunc] = None,
         background_color: Optional[str] = None,
         border_color: Optional[str] = None,
         border_width: Numeric = 0,

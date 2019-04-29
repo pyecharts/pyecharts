@@ -1,5 +1,16 @@
 # coding=utf-8
+import re
+
 from pyecharts.datasets import EXTRA, FILENAMES
+
+
+class JsCode:
+    def __init__(self, js_code: str):
+        self.js_code = "--x_x--0_0--" + js_code + "--x_x--0_0--"
+
+    def replace(self, pattern: str, repl: str):
+        self.js_code = re.sub(pattern, repl, self.js_code)
+        return self
 
 
 class OrderedSet:
@@ -13,10 +24,6 @@ class OrderedSet:
         if not self._values.get(item, False):
             self._values.update({item: True})
             self.items.append(item)
-
-
-def produce_js_func(fn: str) -> str:
-    return "__-o-__{}__-o-__".format(fn)
 
 
 def produce_require_dict(js_dependencies, js_host) -> dict:

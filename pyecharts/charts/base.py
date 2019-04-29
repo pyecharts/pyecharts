@@ -111,3 +111,7 @@ class Base:
 def default(o):
     if isinstance(o, (datetime.date, datetime.datetime)):
         return o.isoformat()
+    if isinstance(o, utils.JsCode):
+        return (
+            o.replace("\\n|\\t", "").replace(r"\\n", "\n").replace(r"\\t", "\t").js_code
+        )
