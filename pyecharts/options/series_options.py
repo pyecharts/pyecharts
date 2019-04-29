@@ -107,7 +107,7 @@ class LineStyleOpts:
         opacity: Numeric = 1,
         curve: Numeric = 0,
         type_: str = "solid",
-        color: Optional[str, List] = None,
+        color: Union[str, List] = None,
     ):
         self.opts: dict = {
             "width": width,
