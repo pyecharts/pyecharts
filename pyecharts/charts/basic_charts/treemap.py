@@ -1,7 +1,7 @@
 # coding=utf-8
 from ... import options as opts
 from ...charts.chart import Chart
-from ...commons.types import Numeric, Optional, Union, Sequence
+from ...commons.types import Numeric, Optional, Sequence, Union
 from ...globals import ChartType
 
 

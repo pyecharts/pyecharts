@@ -4,7 +4,7 @@ import os
 from jinja2 import Environment
 from prettytable import PrettyTable
 
-from ..commons.types import Sequence, Optional
+from ..commons.types import Optional, Sequence
 from ..globals import CurrentConfig
 from ..render.display import HTML
 from ..render.engine import RenderEngine
