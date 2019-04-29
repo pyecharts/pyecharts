@@ -30,7 +30,19 @@ class TextStyleOpts:
         font_weight: Optional[str] = None,
         font_family: Optional[str] = None,
         font_size: Optional[Numeric] = None,
+        align: Optional[str] = None,
+        vertical_align: Optional[str] = None,
         line_height: Optional[str] = None,
+        background_color: Optional[str] = None,
+        border_color: Optional[str] = None,
+        border_width: Optional[Numeric] = None,
+        border_radius: Union[Numeric, List] = None,
+        padding: Union[Numeric, List] = None,
+        shadow_color: Optional[str] = None,
+        shadow_blur: Optional[Numeric] = None,
+        width: Optional[str] = None,
+        height: Optional[str] = None,
+        rich: Optional[dict] = None,
     ):
         self.opts: dict = {
             "color": color,
@@ -38,7 +50,19 @@ class TextStyleOpts:
             "fontWeight": font_weight,
             "fontFamily": font_family,
             "fontSize": font_size,
+            "align": align,
+            "verticalAlign": vertical_align,
             "lineHeight": line_height,
+            "backgroundColor": background_color,
+            "borderColor": border_color,
+            "borderWidth": border_width,
+            "borderRadius": border_radius,
+            "padding": padding,
+            "shadowColor": shadow_color,
+            "shadowBlur": shadow_blur,
+            "width": width,
+            "height": height,
+            "rich": rich,
         }
 
 
@@ -53,15 +77,18 @@ class LabelOpts:
         font_weight: Optional[str] = None,
         font_family: Optional[str] = None,
         rotate: Optional[Numeric] = None,
+        margin: Optional[Numeric] = 8,
         horizontal_align: Optional[str] = None,
         vertical_align: Optional[str] = None,
         formatter: Union[str, JSFunc, None] = None,
+        rich: Optional[dict] = None,
     ):
         self.opts: dict = {
             "show": is_show,
             "position": position,
             "color": color,
             "rotate": rotate,
+            "margin": margin,
             "fontSize": font_size,
             "fontStyle": font_style,
             "fontWeight": font_weight,
@@ -69,6 +96,7 @@ class LabelOpts:
             "align": horizontal_align,
             "verticalAlign": vertical_align,
             "formatter": formatter,
+            "rich": rich,
         }
 
 
@@ -79,7 +107,7 @@ class LineStyleOpts:
         opacity: Numeric = 1,
         curve: Numeric = 0,
         type_: str = "solid",
-        color: Optional[str] = None,
+        color: Optional[str, List] = None,
     ):
         self.opts: dict = {
             "width": width,

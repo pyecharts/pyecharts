@@ -24,6 +24,7 @@ class Pie(Chart):
         radius: Optional[Sequence] = None,
         center: Optional[Sequence] = None,
         rosetype: Optional[str] = None,
+        is_clockwise: bool = True,
         label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
         tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
         itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
@@ -55,6 +56,7 @@ class Pie(Chart):
             {
                 "type": ChartType.PIE,
                 "name": series_name,
+                "clockwise": is_clockwise,
                 "data": data,
                 "radius": radius,
                 "center": center,
