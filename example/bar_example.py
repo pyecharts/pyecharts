@@ -40,7 +40,7 @@ def bar_toolbox() -> Bar:
         .set_global_opts(
             title_opts=opts.TitleOpts(title="Bar-显示 ToolBox"),
             toolbox_opts=opts.ToolboxOpts(),
-            legend_opts=opts.LegendOpts(is_show=False)
+            legend_opts=opts.LegendOpts(is_show=False),
         )
     )
     return c

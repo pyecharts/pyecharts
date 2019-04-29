@@ -1,7 +1,7 @@
 # coding=utf-8
 from ... import options as opts
 from ...charts.chart import Chart
-from ...commons.types import List, Optional, Sequence, Union
+from ...commons.types import Optional, Sequence, Union
 from ...globals import ChartType
 
 
@@ -17,7 +17,7 @@ class Radar(Chart):
 
     def add_schema(
         self,
-        schema: List[Union[opts.RadarIndicatorItem, dict]],
+        schema: Sequence[Union[opts.RadarIndicatorItem, dict]],
         shape: Optional[str] = None,
         textstyle_opts: Union[opts.TextStyleOpts, dict] = opts.TextStyleOpts(),
         splitline_opt: Union[opts.SplitLineOpts, dict] = opts.SplitLineOpts(

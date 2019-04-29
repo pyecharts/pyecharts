@@ -36,8 +36,8 @@ class TextStyleOpts:
         background_color: Optional[str] = None,
         border_color: Optional[str] = None,
         border_width: Optional[Numeric] = None,
-        border_radius: Union[Numeric, List, None] = None,
-        padding: Union[Numeric, List, None] = None,
+        border_radius: Union[Numeric, Sequence, None] = None,
+        padding: Union[Numeric, Sequence, None] = None,
         shadow_color: Optional[str] = None,
         shadow_blur: Optional[Numeric] = None,
         width: Optional[str] = None,
@@ -107,7 +107,7 @@ class LineStyleOpts:
         opacity: Numeric = 1,
         curve: Numeric = 0,
         type_: str = "solid",
-        color: Union[str, List, None] = None,
+        color: Union[str, Sequence, None] = None,
     ):
         self.opts: dict = {
             "width": width,
@@ -135,12 +135,12 @@ class MarkPointItem:
         type_: Optional[str] = None,
         value_index: Optional[Numeric] = None,
         value_dim: Optional[str] = None,
-        coord: Optional[List] = None,
+        coord: Optional[Sequence] = None,
         x: Optional[Numeric] = None,
         y: Optional[Numeric] = None,
         value: Optional[Numeric] = None,
         symbol: Optional[str] = None,
-        symbol_size: Union[Numeric, List] = None,
+        symbol_size: Union[Numeric, Sequence, None] = None,
     ):
         self.opts: dict = {
             "name": name,
@@ -159,7 +159,7 @@ class MarkPointItem:
 class MarkPointOpts:
     def __init__(
         self,
-        data: List[Union[MarkPointItem, dict]] = None,
+        data: Sequence[Union[MarkPointItem, dict]] = None,
         symbol: Optional[str] = None,
         symbol_size: Union[None, Numeric] = None,
         label_opts: LabelOpts = LabelOpts(position="inside", color="#fff"),
@@ -212,7 +212,7 @@ class MarkLineOpts:
     def __init__(
         self,
         is_silent: bool = False,
-        data: List[Union[MarkLineItem, dict]] = None,
+        data: Sequence[Union[MarkLineItem, dict]] = None,
         symbol: Optional[str] = None,
         symbol_size: Union[None, Numeric] = None,
         precision: int = 2,
@@ -280,7 +280,7 @@ class MarkAreaOpts:
         self,
         is_silent: bool = False,
         label_opts: LabelOpts = LabelOpts(),
-        data: List[Union[MarkAreaItem, dict]] = None,
+        data: Sequence[Union[MarkAreaItem, dict]] = None,
     ):
         if isinstance(label_opts, LabelOpts):
             label_opts = label_opts.opts
