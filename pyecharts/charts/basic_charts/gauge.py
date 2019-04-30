@@ -24,10 +24,13 @@ class Gauge(Chart):
         start_angle: Numeric = 225,
         end_angle: Numeric = -45,
         tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
+        axisline_opts: Union[opts.AxisLineOpts, dict, None] = None,
         itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
     ):
         if isinstance(tooltip_opts, opts.TooltipOpts):
             tooltip_opts = tooltip_opts.opts
+        if isinstance(axisline_opts, opts.AxisLineOpts):
+            axisline_opts = axisline_opts.opts
         if isinstance(itemstyle_opts, opts.ItemStyleOpts):
             itemstyle_opts = itemstyle_opts.opts
 
@@ -43,6 +46,7 @@ class Gauge(Chart):
                 "endAngle": end_angle,
                 "data": [{"name": n, "value": v} for n, v in data_pair],
                 "tooltip": tooltip_opts,
+                "axisLine": axisline_opts,
                 "itemStyle": itemstyle_opts,
             }
         )
