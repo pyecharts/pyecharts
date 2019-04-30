@@ -42,19 +42,17 @@ class RenderEngine:
         :param template_name: The name of template file.
         """
         tpl = self.env.get_template(template_name)
-        html = tpl.render(chart=self.generate_js_link(chart))
-        write_utf8_html_file(path, self._reg_replace(html))
+        html = self._replace_html(tpl.render(chart=self.generate_js_link(chart)))
+        write_utf8_html_file(path, html)
 
     def render_chart_to_template(self, template_name: str, chart: Any):
         tpl = self.env.get_template(template_name)
-        html = tpl.render(chart=self.generate_js_link(chart))
-        return self._reg_replace(html)
+        return self._replace_html(tpl.render(chart=self.generate_js_link(chart)))
 
     def render_chart_to_notebook(self, template_name: str, **kwargs) -> str:
         tpl = self.env.get_template(template_name)
-        html = tpl.render(**kwargs)
-        return self._reg_replace(html)
+        return self._replace_html(tpl.render(**kwargs))
 
     @staticmethod
-    def _reg_replace(html):
-        return re.sub(r'\\n|\\t|"?__-o-__"?', "", html)
+    def _replace_html(html) -> str:
+        return re.sub('"?--x_x--0_0--"?', "", html)

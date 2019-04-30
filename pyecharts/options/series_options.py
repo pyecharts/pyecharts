@@ -80,7 +80,7 @@ class LabelOpts:
         margin: Optional[Numeric] = 8,
         horizontal_align: Optional[str] = None,
         vertical_align: Optional[str] = None,
-        formatter: Union[str, JSFunc, None] = None,
+        formatter: Optional[JSFunc] = None,
         rich: Optional[dict] = None,
     ):
         self.opts: dict = {
