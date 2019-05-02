@@ -81,6 +81,10 @@ class LabelOpts:
         horizontal_align: Optional[str] = None,
         vertical_align: Optional[str] = None,
         formatter: Optional[JSFunc] = None,
+        background_color: Optional[str] = None,
+        border_color: Optional[str] = None,
+        border_width: Optional[Numeric] = None,
+        border_radius: Optional[Numeric] = None,
         rich: Optional[dict] = None,
     ):
         self.opts: dict = {
@@ -96,6 +100,10 @@ class LabelOpts:
             "align": horizontal_align,
             "verticalAlign": vertical_align,
             "formatter": formatter,
+            "backgroundColor": background_color,
+            "borderColor": border_color,
+            "borderWidth": border_width,
+            "borderRadius": border_radius,
             "rich": rich,
         }
 
