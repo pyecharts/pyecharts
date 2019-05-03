@@ -20,15 +20,19 @@ class OrderedSet:
         for a in args:
             self.add(a)
 
-    def add(self, item):
-        if not self._values.get(item, False):
-            self._values.update({item: True})
-            self.items.append(item)
+    def add(self, *items):
+        for item in items:
+            if not self._values.get(item, False):
+                self._values.update({item: True})
+                self.items.append(item)
 
 
 def produce_require_dict(js_dependencies, js_host) -> dict:
     confs, libraries = [], []
     for name in js_dependencies.items:
+        if name.startswith("http://api.map.baidu.com"):
+            confs.append("'baidu_map_api{}':'{}'".format(len(name), name))
+            libraries.append("'baidu_map_api{}'".format(len(name)))
         if name in FILENAMES:
             f, _ = FILENAMES[name]
             confs.append("'{}':'{}{}'".format(name, js_host, f))
