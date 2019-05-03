@@ -21,6 +21,8 @@ class RenderEngine:
         links = []
         for dep in chart.js_dependencies.items:
             # TODO: if?
+            if dep.startswith("http://api.map.baidu.com"):
+                links.append(dep)
             if dep in FILENAMES:
                 f, ext = FILENAMES[dep]
                 links.append("{}{}.{}".format(chart.js_host, f, ext))
