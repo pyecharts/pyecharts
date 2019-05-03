@@ -48,7 +48,7 @@ class Timeline(Base):
                 "right": pos_right,
                 "top": pos_top,
                 "bottom": pos_bottom,
-                "label": label_opts
+                "label": label_opts,
             }
         )
         return self

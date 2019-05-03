@@ -1,5 +1,6 @@
-from pyecharts.options.series_options import LabelOpts
 from nose.tools import eq_
+
+from pyecharts.options.series_options import LabelOpts
 
 
 def test_label_options_1043_defaults():
