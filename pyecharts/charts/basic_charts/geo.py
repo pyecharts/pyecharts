@@ -1,4 +1,3 @@
-# coding=utf-8
 import json
 
 from ... import options as opts
@@ -9,18 +8,13 @@ from ...datasets import COORDINATES
 from ...globals import ChartType, TooltipFormatterType
 
 
-class Geo(Chart):
-    """
-    <<< 地理坐标系 >>>
-
-    地理坐标系组件用于地图的绘制，支持在地理坐标系上绘制散点图，线集。
-    """
-
+class _GeoChart(Chart):
     def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):
         super().__init__(init_opts=init_opts)
         self.set_global_opts()
         self._coordinates = COORDINATES
         self._zlevel = 1
+        self._coordinate_system: Optional[str] = None
 
     def add_coordinate(self, name: str, longitude: Numeric, latitude: Numeric):
         self._coordinates.update({name: [longitude, latitude]})
@@ -34,39 +28,6 @@ class Geo(Chart):
     def get_coordinate(self, name: str) -> List:
         if name in self._coordinates:
             return self._coordinates[name]
-
-    def add_schema(
-        self,
-        maptype: str = "china",
-        is_roam: bool = True,
-        label_opts: Union[opts.LabelOpts, dict, None] = None,
-        itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
-        emphasis_itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
-        emphasis_label_opts: Union[opts.LabelOpts, dict, None] = None,
-    ):
-        if isinstance(label_opts, opts.LabelOpts):
-            label_opts = label_opts.opts
-        if isinstance(itemstyle_opts, opts.ItemStyleOpts):
-            itemstyle_opts = itemstyle_opts.opts
-        if isinstance(emphasis_itemstyle_opts, opts.ItemStyleOpts):
-            emphasis_itemstyle_opts = emphasis_itemstyle_opts.opts
-        if isinstance(emphasis_label_opts, opts.LabelOpts):
-            emphasis_label_opts = emphasis_label_opts.opts
-
-        self.js_dependencies.add(maptype)
-        self.options.update(
-            geo={
-                "map": maptype,
-                "roam": is_roam,
-                "label": label_opts,
-                "itemStyle": itemstyle_opts,
-                "emphasis": {
-                    "itemStyle": emphasis_itemstyle_opts,
-                    "label": emphasis_label_opts,
-                },
-            }
-        )
-        return self
 
     def add(
         self,
@@ -113,7 +74,7 @@ class Geo(Chart):
                 {
                     "type": type_,
                     "name": series_name,
-                    "coordinateSystem": "geo",
+                    "coordinateSystem": self._coordinate_system,
                     "symbol": symbol,
                     "symbolSize": symbol_size,
                     "data": data,
@@ -128,7 +89,7 @@ class Geo(Chart):
                 {
                     "type": type_,
                     "name": series_name,
-                    "coordinateSystem": "geo",
+                    "coordinateSystem": self._coordinate_system,
                     "showEffectOn": "render",
                     "rippleEffect": effect_opts,
                     "symbol": symbol,
@@ -145,7 +106,7 @@ class Geo(Chart):
                 {
                     "type": type_,
                     "name": series_name,
-                    "coordinateSystem": "geo",
+                    "coordinateSystem": self._coordinate_system,
                     "data": data,
                     "tooltip": tooltip_opts,
                     "itemStyle": itemstyle_opts,
@@ -193,3 +154,48 @@ class Geo(Chart):
             visualmap_opts=visualmap_opts,
             datazoom_opts=datazoom_opts,
         )
+
+
+class Geo(_GeoChart):
+    """
+    <<< 地理坐标系 >>>
+
+    地理坐标系组件用于地图的绘制，支持在地理坐标系上绘制散点图，线集。
+    """
+
+    def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):
+        super().__init__(init_opts=init_opts)
+        self._coordinate_system: Optional[str] = "geo"
+
+    def add_schema(
+        self,
+        maptype: str = "china",
+        is_roam: bool = True,
+        label_opts: Union[opts.LabelOpts, dict, None] = None,
+        itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
+        emphasis_itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
+        emphasis_label_opts: Union[opts.LabelOpts, dict, None] = None,
+    ):
+        if isinstance(label_opts, opts.LabelOpts):
+            label_opts = label_opts.opts
+        if isinstance(itemstyle_opts, opts.ItemStyleOpts):
+            itemstyle_opts = itemstyle_opts.opts
+        if isinstance(emphasis_itemstyle_opts, opts.ItemStyleOpts):
+            emphasis_itemstyle_opts = emphasis_itemstyle_opts.opts
+        if isinstance(emphasis_label_opts, opts.LabelOpts):
+            emphasis_label_opts = emphasis_label_opts.opts
+
+        self.js_dependencies.add(maptype)
+        self.options.update(
+            geo={
+                "map": maptype,
+                "roam": is_roam,
+                "label": label_opts,
+                "itemStyle": itemstyle_opts,
+                "emphasis": {
+                    "itemStyle": emphasis_itemstyle_opts,
+                    "label": emphasis_label_opts,
+                },
+            }
+        )
+        return self
