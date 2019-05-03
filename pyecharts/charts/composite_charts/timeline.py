@@ -29,7 +29,11 @@ class Timeline(Base):
         pos_right: Optional[str] = None,
         pos_top: Optional[str] = None,
         pos_bottom: Optional[str] = "-5px",
+        label_opts: Optional[opts.LabelOpts] = None,
     ):
+        if isinstance(label_opts, opts.LabelOpts):
+            label_opts = label_opts.opts
+
         self.options.get("baseOption").get("timeline").update(
             {
                 "axisType": axis_type,
@@ -44,8 +48,10 @@ class Timeline(Base):
                 "right": pos_right,
                 "top": pos_top,
                 "bottom": pos_bottom,
+                "label": label_opts,
             }
         )
+        return self
 
     def add(self, chart: Base, time_point: str):
         for dep in chart.js_dependencies.items:
