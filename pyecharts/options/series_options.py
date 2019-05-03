@@ -2,7 +2,11 @@
 from ..commons.types import JSFunc, List, Numeric, Optional, Sequence, Tuple, Union
 
 
-class ItemStyleOpts:
+class BasicOpts:
+    pass
+
+
+class ItemStyleOpts(BasicOpts):
     def __init__(
         self,
         color: Optional[str] = None,
@@ -22,7 +26,7 @@ class ItemStyleOpts:
         }
 
 
-class TextStyleOpts:
+class TextStyleOpts(BasicOpts):
     def __init__(
         self,
         color: Optional[str] = None,
@@ -66,7 +70,7 @@ class TextStyleOpts:
         }
 
 
-class LabelOpts:
+class LabelOpts(BasicOpts):
     def __init__(
         self,
         is_show: bool = True,
@@ -108,7 +112,7 @@ class LabelOpts:
         }
 
 
-class LineStyleOpts:
+class LineStyleOpts(BasicOpts):
     def __init__(
         self,
         width: Numeric = 1,
@@ -126,17 +130,14 @@ class LineStyleOpts:
         }
 
 
-class SplitLineOpts:
+class SplitLineOpts(BasicOpts):
     def __init__(
         self, is_show: bool = False, linestyle_opts: LineStyleOpts = LineStyleOpts()
     ):
-        if isinstance(linestyle_opts, LineStyleOpts):
-            linestyle_opts = linestyle_opts.opts
-
         self.opts: dict = {"show": is_show, "lineStyle": linestyle_opts}
 
 
-class MarkPointItem:
+class MarkPointItem(BasicOpts):
     def __init__(
         self,
         name: Optional[str] = None,
@@ -164,7 +165,7 @@ class MarkPointItem:
         }
 
 
-class MarkPointOpts:
+class MarkPointOpts(BasicOpts):
     def __init__(
         self,
         data: Sequence[Union[MarkPointItem, dict]] = None,
@@ -172,8 +173,6 @@ class MarkPointOpts:
         symbol_size: Union[None, Numeric] = None,
         label_opts: LabelOpts = LabelOpts(position="inside", color="#fff"),
     ):
-        if isinstance(label_opts, LabelOpts):
-            label_opts = label_opts.opts
         _data = []
         if data:
             for d in data:
@@ -190,7 +189,7 @@ class MarkPointOpts:
         }
 
 
-class MarkLineItem:
+class MarkLineItem(BasicOpts):
     def __init__(
         self,
         name: Optional[str] = None,
@@ -216,7 +215,7 @@ class MarkLineItem:
         }
 
 
-class MarkLineOpts:
+class MarkLineOpts(BasicOpts):
     def __init__(
         self,
         is_silent: bool = False,
@@ -226,8 +225,6 @@ class MarkLineOpts:
         precision: int = 2,
         label_opts: LabelOpts = LabelOpts(),
     ):
-        if isinstance(label_opts, LabelOpts):
-            label_opts = label_opts.opts
         _data = []
         if data:
             for d in data:
@@ -246,7 +243,7 @@ class MarkLineOpts:
         }
 
 
-class MarkAreaItem:
+class MarkAreaItem(BasicOpts):
     def __init__(
         self,
         name: Optional[str] = None,
@@ -258,10 +255,6 @@ class MarkAreaItem:
         label_opts: Union[LabelOpts, dict, None] = None,
         itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
     ):
-        if isinstance(label_opts, LabelOpts):
-            label_opts = label_opts.opts
-        if isinstance(itemstyle_opts, ItemStyleOpts):
-            itemstyle_opts = itemstyle_opts.opts
         self.opts: List = [
             {
                 "name": name,
@@ -283,15 +276,13 @@ class MarkAreaItem:
         ]
 
 
-class MarkAreaOpts:
+class MarkAreaOpts(BasicOpts):
     def __init__(
         self,
         is_silent: bool = False,
         label_opts: LabelOpts = LabelOpts(),
         data: Sequence[Union[MarkAreaItem, dict]] = None,
     ):
-        if isinstance(label_opts, LabelOpts):
-            label_opts = label_opts.opts
         _data = []
         if data:
             for d in data:
@@ -303,7 +294,7 @@ class MarkAreaOpts:
         self.opts: dict = {"silent": is_silent, "label": label_opts, "data": _data}
 
 
-class EffectOpts:
+class EffectOpts(BasicOpts):
     def __init__(
         self,
         is_show: bool = True,
@@ -325,20 +316,17 @@ class EffectOpts:
         }
 
 
-class AreaStyleOpts:
+class AreaStyleOpts(BasicOpts):
     def __init__(self, opacity: Optional[Numeric] = 0, color: Optional[str] = None):
         self.opts: dict = {"opacity": opacity, "color": color}
 
 
-class SplitAreaOpts:
+class SplitAreaOpts(BasicOpts):
     def __init__(self, is_show=True, areastyle_opts: AreaStyleOpts = AreaStyleOpts()):
-        if isinstance(areastyle_opts, AreaStyleOpts):
-            areastyle_opts = areastyle_opts.opts
-
         self.opts: dict = {"show": is_show, "areaStyle": areastyle_opts}
 
 
-class GraphNode:
+class GraphNode(BasicOpts):
     def __init__(
         self,
         name: Optional[str] = None,
@@ -351,9 +339,6 @@ class GraphNode:
         symbol_size: Union[Numeric, Sequence, None] = None,
         label_opts: Optional[LabelOpts] = None,
     ):
-        if isinstance(label_opts, LabelOpts):
-            label_opts = label_opts.opts
-
         self.opts: dict = {
             "name": name,
             "x": x,
@@ -367,7 +352,7 @@ class GraphNode:
         }
 
 
-class GraphLink:
+class GraphLink(BasicOpts):
     def __init__(
         self,
         source: Union[str, int, None] = None,
@@ -378,11 +363,6 @@ class GraphLink:
         linestyle_opts: Optional[LineStyleOpts] = None,
         label_opts: Optional[LabelOpts] = None,
     ):
-        if isinstance(linestyle_opts, LineStyleOpts):
-            linestyle_opts = linestyle_opts.opts
-        if isinstance(label_opts, LabelOpts):
-            label_opts = label_opts.opts
-
         self.opts: dict = {
             "source": source,
             "target": target,
@@ -394,7 +374,7 @@ class GraphLink:
         }
 
 
-class GraphCategory:
+class GraphCategory(BasicOpts):
     def __init__(
         self,
         name: Optional[str] = None,
@@ -402,9 +382,6 @@ class GraphCategory:
         symbol_size: Union[Numeric, Sequence, None] = None,
         label_opts: Optional[LabelOpts] = None,
     ):
-        if isinstance(label_opts, LabelOpts):
-            label_opts = label_opts.opts
-
         self.opts: dict = {
             "name": name,
             "symbol": symbol,
@@ -413,7 +390,7 @@ class GraphCategory:
         }
 
 
-class TreeItem:
+class TreeItem(BasicOpts):
     def __init__(
         self,
         name: Optional[str] = None,
@@ -421,9 +398,6 @@ class TreeItem:
         label_opts: Optional[LabelOpts] = None,
         children: Optional[Sequence] = None,
     ):
-        if isinstance(label_opts, LabelOpts):
-            label_opts = label_opts.opts
-
         self.opts: dict = {
             "name": name,
             "value": value,

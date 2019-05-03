@@ -1,4 +1,3 @@
-# coding=utf-8
 import copy
 
 from ... import options as opts
@@ -23,9 +22,6 @@ class Grid(Base):
         grid_opts: Union[opts.GridOpts, dict],
         grid_index: int = 0,
     ):
-        if isinstance(grid_opts, opts.GridOpts):
-            grid_opts = grid_opts.opts
-
         if self.options is None:
             self.options = copy.deepcopy(chart.options)
             self.chart_id = chart.chart_id

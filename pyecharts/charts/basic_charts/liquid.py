@@ -1,4 +1,3 @@
-# coding=utf-8
 from ... import options as opts
 from ...charts.chart import Chart
 from ...commons.types import Optional, Sequence, Union
@@ -27,9 +26,6 @@ class Liquid(Chart):
         is_outline_show: bool = True,
         tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
     ):
-        if isinstance(tooltip_opts, opts.TooltipOpts):
-            tooltip_opts = tooltip_opts.opts
-
         _animation_dur, _animation_dur_update = 2000, 1000
         if not is_animation:
             _animation_dur, _animation_dur_update = 0, 0

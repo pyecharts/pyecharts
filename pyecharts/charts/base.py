@@ -11,6 +11,7 @@ from ..commons.types import Optional, Union
 from ..datasets import FILENAMES
 from ..globals import CurrentConfig, NotebookType, ThemeType
 from ..options import InitOpts
+from ..options.series_options import BasicOpts
 from ..render.display import HTML, Javascript
 from ..render.engine import RenderEngine
 
@@ -116,3 +117,5 @@ def default(o):
         return (
             o.replace("\\n|\\t", "").replace(r"\\n", "\n").replace(r"\\t", "\t").js_code
         )
+    if isinstance(o, BasicOpts):
+        return utils.remove_key_with_none_value(o.opts)

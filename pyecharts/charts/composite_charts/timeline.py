@@ -1,4 +1,3 @@
-# coding=utf-8
 from ... import options as opts
 from ...charts.chart import Base
 from ...commons.types import Numeric, Optional, Union
@@ -31,9 +30,6 @@ class Timeline(Base):
         pos_bottom: Optional[str] = "-5px",
         label_opts: Optional[opts.LabelOpts] = None,
     ):
-        if isinstance(label_opts, opts.LabelOpts):
-            label_opts = label_opts.opts
-
         self.options.get("baseOption").get("timeline").update(
             {
                 "axisType": axis_type,
