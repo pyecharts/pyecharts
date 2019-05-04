@@ -1,4 +1,3 @@
-# coding=utf-8
 from ... import options as opts
 from ...charts.chart import Chart
 from ...commons.types import Optional, Sequence, Union
@@ -26,15 +25,6 @@ class Radar(Chart):
         splitarea_opt: Union[opts.SplitAreaOpts, dict] = opts.SplitAreaOpts(),
         axisline_opt: Union[opts.AxisLineOpts, dict] = opts.AxisLineOpts(),
     ):
-        if isinstance(textstyle_opts, opts.TextStyleOpts):
-            textstyle_opts = textstyle_opts.opts
-        if isinstance(splitline_opt, opts.SplitLineOpts):
-            splitline_opt = splitline_opt.opts
-        if isinstance(splitarea_opt, opts.SplitAreaOpts):
-            splitarea_opt = splitarea_opt.opts
-        if isinstance(axisline_opt, opts.AxisLineOpts):
-            axisline_opt = axisline_opt.opts
-
         indicators = []
         for s in schema:
             if isinstance(s, opts.RadarIndicatorItem):

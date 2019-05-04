@@ -1,4 +1,3 @@
-# coding=utf-8
 from ... import options as opts
 from ...charts.chart import Chart
 from ...commons.types import Numeric, Optional, Sequence, Union
@@ -38,15 +37,6 @@ class Graph(Chart):
         tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
         itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
     ):
-        if isinstance(label_opts, opts.LabelOpts):
-            label_opts = label_opts.opts
-        if isinstance(linestyle_opts, opts.LineStyleOpts):
-            linestyle_opts = linestyle_opts.opts
-        if isinstance(tooltip_opts, opts.TooltipOpts):
-            tooltip_opts = tooltip_opts.opts
-        if isinstance(itemstyle_opts, opts.ItemStyleOpts):
-            itemstyle_opts = itemstyle_opts.opts
-
         _nodes = []
         for n in nodes:
             if isinstance(n, opts.GraphNode):

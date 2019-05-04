@@ -1,4 +1,3 @@
-# coding=utf-8
 from ... import options as opts
 from ...charts.chart import RectChart
 from ...commons.types import Numeric, Optional, Sequence, Union
@@ -39,21 +38,6 @@ class Line(RectChart):
         linestyle_opts: Union[opts.LineStyleOpts, dict] = opts.LineStyleOpts(),
         areastyle_opts: Union[opts.AreaStyleOpts, dict] = opts.AreaStyleOpts(),
     ):
-        if isinstance(label_opts, opts.LabelOpts):
-            label_opts = label_opts.opts
-        if isinstance(markpoint_opts, opts.MarkPointOpts):
-            markpoint_opts = markpoint_opts.opts
-        if isinstance(markline_opts, opts.MarkLineOpts):
-            markline_opts = markline_opts.opts
-        if isinstance(linestyle_opts, opts.LineStyleOpts):
-            linestyle_opts = linestyle_opts.opts
-        if isinstance(areastyle_opts, opts.AreaStyleOpts):
-            areastyle_opts = areastyle_opts.opts
-        if isinstance(tooltip_opts, opts.TooltipOpts):
-            tooltip_opts = tooltip_opts.opts
-        if isinstance(itemstyle_opts, opts.ItemStyleOpts):
-            itemstyle_opts = itemstyle_opts.opts
-
         self._append_color(color)
         self._append_legend(series_name, is_selected)
         # 合并 x 和 y 轴数据，避免当 X 轴的类型设置为 'value' 的时候，

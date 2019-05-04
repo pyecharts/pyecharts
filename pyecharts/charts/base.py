@@ -3,6 +3,7 @@ import datetime
 import json
 import os
 import uuid
+from typing import Sequence
 
 from jinja2 import Environment
 
@@ -11,6 +12,7 @@ from ..commons.types import Optional, Union
 from ..datasets import FILENAMES
 from ..globals import CurrentConfig, NotebookType, ThemeType
 from ..options import InitOpts
+from ..options.series_options import BasicOpts
 from ..render.display import HTML, Javascript
 from ..render.engine import RenderEngine
 
@@ -116,3 +118,8 @@ def default(o):
         return (
             o.replace("\\n|\\t", "").replace(r"\\n", "\n").replace(r"\\t", "\t").js_code
         )
+    if isinstance(o, BasicOpts):
+        if isinstance(o.opts, Sequence):
+            return [utils.remove_key_with_none_value(item) for item in o.opts]
+        else:
+            return utils.remove_key_with_none_value(o.opts)

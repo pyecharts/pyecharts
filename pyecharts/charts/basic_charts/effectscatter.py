@@ -1,4 +1,3 @@
-# coding=utf-8
 from ... import options as opts
 from ...charts.chart import RectChart
 from ...commons.types import Numeric, Optional, Sequence, Union
@@ -32,15 +31,6 @@ class EffectScatter(RectChart):
         tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
         itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
     ):
-        if isinstance(label_opts, opts.LabelOpts):
-            label_opts = label_opts.opts
-        if isinstance(effect_opts, opts.EffectOpts):
-            effect_opts = effect_opts.opts
-        if isinstance(tooltip_opts, opts.TooltipOpts):
-            tooltip_opts = tooltip_opts.opts
-        if isinstance(itemstyle_opts, opts.ItemStyleOpts):
-            itemstyle_opts = itemstyle_opts.opts
-
         self._append_color(color)
         self._append_legend(series_name, is_selected)
         self.options.get("series").append(

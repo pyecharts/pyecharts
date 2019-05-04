@@ -1,4 +1,3 @@
-# coding=utf-8
 from ... import options as opts
 from ...charts.chart import Chart
 from ...commons.types import Sequence, Union
@@ -27,15 +26,6 @@ class Calendar(Chart):
         tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
         itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
     ):
-        if isinstance(label_opts, opts.LabelOpts):
-            label_opts = label_opts.opts
-        if isinstance(calendar_opts, opts.CalendarOpts):
-            calendar_opts = calendar_opts.opts
-        if isinstance(tooltip_opts, opts.TooltipOpts):
-            tooltip_opts = tooltip_opts.opts
-        if isinstance(itemstyle_opts, opts.ItemStyleOpts):
-            itemstyle_opts = itemstyle_opts.opts
-
         if calendar_opts:
             self.options.update(calendar=calendar_opts)
 
