@@ -3,6 +3,7 @@ import datetime
 import json
 import os
 import uuid
+from typing import Sequence
 
 from jinja2 import Environment
 
@@ -118,4 +119,7 @@ def default(o):
             o.replace("\\n|\\t", "").replace(r"\\n", "\n").replace(r"\\t", "\t").js_code
         )
     if isinstance(o, BasicOpts):
-        return utils.remove_key_with_none_value(o.opts)
+        if isinstance(o.opts, Sequence):
+            return [utils.remove_key_with_none_value(item) for item in o.opts]
+        else:
+            return utils.remove_key_with_none_value(o.opts)

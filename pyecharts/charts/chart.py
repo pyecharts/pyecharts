@@ -122,13 +122,19 @@ class Chart(Base):
             visualMap=_visualmap_opts,
         )
 
+        if isinstance(legend_opts, opts.LegendOpts):
+            legend_opts = legend_opts.opts
         for _s in self.options["legend"]:
             _s.update(legend_opts)
 
         if xaxis_opts and self.options.get("xAxis", None):
+            if isinstance(xaxis_opts, opts.AxisOpts):
+                xaxis_opts = xaxis_opts.opts
             self.options["xAxis"][0].update(xaxis_opts)
 
         if yaxis_opts and self.options.get("yAxis", None):
+            if isinstance(yaxis_opts, opts.AxisOpts):
+                yaxis_opts = yaxis_opts.opts
             self.options["yAxis"][0].update(yaxis_opts)
 
         if datazoom_opts:
