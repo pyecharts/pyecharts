@@ -1,4 +1,3 @@
-# coding=utf-8
 import re
 
 from jinja2 import Environment
@@ -47,7 +46,7 @@ class RenderEngine:
         html = self._replace_html(tpl.render(chart=self.generate_js_link(chart)))
         write_utf8_html_file(path, html)
 
-    def render_chart_to_template(self, template_name: str, chart: Any):
+    def render_chart_to_template(self, template_name: str, chart: Any) -> str:
         tpl = self.env.get_template(template_name)
         return self._replace_html(tpl.render(chart=self.generate_js_link(chart)))
 

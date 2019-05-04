@@ -5,7 +5,7 @@ from ...commons.types import Numeric, Optional, Union
 
 class Timeline(Base):
     """
-    <<< 时间线轮播多张图 >>>
+    `Timeline` provides functions like switching and playing between multiple charts.
     """
 
     def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):
