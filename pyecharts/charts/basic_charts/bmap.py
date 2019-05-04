@@ -1,15 +1,15 @@
 from ... import options as opts
-from ...charts.basic_charts.geo import _GeoChart
+from ...charts.basic_charts.geo import GeoChartBase
 from ...commons.types import Optional, Sequence, Union
 
 BAIDU_MAP_API = "http://api.map.baidu.com/api?v=2.0&ak={}"
 BAIDU_MAP_GETSCRIPT = "http://api.map.baidu.com/getscript?v=2.0&ak={}"
 
 
-class BMap(_GeoChart):
+class BMap(GeoChartBase):
     """
-    <<< 百度地图地理坐标系 >>>
-    百度地图地理坐标系组件用于地图的绘制，支持在地理坐标系上绘制散点图，线集。
+    <<< Baidu coordinate system >>>
+    Support scatter plot, line
     """
 
     def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):

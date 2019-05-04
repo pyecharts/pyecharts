@@ -8,7 +8,7 @@ from ...datasets import COORDINATES
 from ...globals import ChartType, TooltipFormatterType
 
 
-class _GeoChart(Chart):
+class GeoChartBase(Chart):
     def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):
         super().__init__(init_opts=init_opts)
         self.set_global_opts()
@@ -18,12 +18,14 @@ class _GeoChart(Chart):
 
     def add_coordinate(self, name: str, longitude: Numeric, latitude: Numeric):
         self._coordinates.update({name: [longitude, latitude]})
+        return self
 
     def add_coordinate_json(self, json_file: str):
         with open(json_file, "r", encoding="utf-8") as f:
             json_reader = json.load(f)
             for k, v in json_reader.items():
                 self.add_coordinate(k, v[0], v[1])
+        return self
 
     def get_coordinate(self, name: str) -> List:
         if name in self._coordinates:
@@ -145,11 +147,11 @@ class _GeoChart(Chart):
         )
 
 
-class Geo(_GeoChart):
+class Geo(GeoChartBase):
     """
-    <<< 地理坐标系 >>>
+    <<< geo coordinate system >>>
 
-    地理坐标系组件用于地图的绘制，支持在地理坐标系上绘制散点图，线集。
+    support scatter plot and line
     """
 
     def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):
