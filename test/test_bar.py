@@ -32,6 +32,7 @@ def test_bar_title_options(fake_writer):
     file_name, content = fake_writer.call_args[0]
     assert "render.html" == file_name
     assert "This is title." in content
+    assert "This is subtitle." in content
     assert "null" not in content
 
 
@@ -49,3 +50,29 @@ def test_bar_default_set_function(fake_writer):
     file_name, content = fake_writer.call_args[0]
     assert "my_chart.html" == file_name
     assert "null" not in content
+
+
+@patch("pyecharts.render.engine.write_utf8_html_file")
+def test_bar_default_remote_host(fake_writer):
+    c = (
+        Bar()
+            .add_xaxis(["A", "B", "C"])
+            .add_yaxis("series0", [1, 2, 4])
+    )
+    c.render()
+    assert c.js_host == "https://assets.pyecharts.org/assets/"
+    _, content = fake_writer.call_args[0]
+    assert "https://assets.pyecharts.org/assets/echarts.min.js" in content
+
+
+@patch("pyecharts.render.engine.write_utf8_html_file")
+def test_bar_custom_remote_host(fake_writer):
+    c = (
+        Bar(init_opts=opts.InitOpts(js_host="http://localhost:8000/assets/"))
+            .add_xaxis(["A", "B", "C"])
+            .add_yaxis("series0", [1, 2, 4])
+    )
+    c.render()
+    assert c.js_host == "http://localhost:8000/assets/"
+    _, content = fake_writer.call_args[0]
+    assert "http://localhost:8000/assets/echarts.min.js" in content
