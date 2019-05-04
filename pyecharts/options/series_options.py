@@ -1,9 +1,8 @@
-# coding=utf-8
 from ..commons.types import JSFunc, List, Numeric, Optional, Sequence, Tuple, Union
 
 
 class BasicOpts:
-    pass
+    opts: Union[dict, Sequence, None] = None
 
 
 class ItemStyleOpts(BasicOpts):

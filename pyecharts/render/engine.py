@@ -1,9 +1,9 @@
-# coding=utf-8
 import re
 
 from jinja2 import Environment
 
-from pyecharts.commons.types import Any, Optional
+from pyecharts.charts.base import Base
+from pyecharts.commons.types import Optional
 
 from ..commons.utils import write_utf8_html_file
 from ..datasets import EXTRA, FILENAMES
@@ -15,7 +15,7 @@ class RenderEngine:
         self.env = env or CurrentConfig.GLOBAL_ENV
 
     @staticmethod
-    def generate_js_link(chart: Any) -> Any:
+    def generate_js_link(chart: Base) -> Base:
         if not chart.js_host:
             chart.js_host = CurrentConfig.ONLINE_HOST
         links = []
@@ -35,7 +35,7 @@ class RenderEngine:
         chart.dependencies = links
         return chart
 
-    def render_chart_to_file(self, template_name: str, chart: Any, path: str):
+    def render_chart_to_file(self, template_name: str, chart: Base, path: str):
         """
         Render a chart or page to local html files.
 
@@ -47,7 +47,7 @@ class RenderEngine:
         html = self._replace_html(tpl.render(chart=self.generate_js_link(chart)))
         write_utf8_html_file(path, html)
 
-    def render_chart_to_template(self, template_name: str, chart: Any):
+    def render_chart_to_template(self, template_name: str, chart: Base) -> str:
         tpl = self.env.get_template(template_name)
         return self._replace_html(tpl.render(chart=self.generate_js_link(chart)))
 
