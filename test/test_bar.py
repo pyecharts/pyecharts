@@ -24,7 +24,7 @@ def test_bar_title_options(fake_writer):
         .add_yaxis("series0", [1, 2, 4])
         .set_global_opts(
             title_opts=opts.TitleOpts(
-                title="This is title.", subtitle="This is subtitle"
+                title="This is title.", subtitle="This is subtitle."
             )
         )
     )
@@ -54,11 +54,7 @@ def test_bar_default_set_function(fake_writer):
 
 @patch("pyecharts.render.engine.write_utf8_html_file")
 def test_bar_default_remote_host(fake_writer):
-    c = (
-        Bar()
-            .add_xaxis(["A", "B", "C"])
-            .add_yaxis("series0", [1, 2, 4])
-    )
+    c = Bar().add_xaxis(["A", "B", "C"]).add_yaxis("series0", [1, 2, 4])
     c.render()
     assert c.js_host == "https://assets.pyecharts.org/assets/"
     _, content = fake_writer.call_args[0]
@@ -69,8 +65,8 @@ def test_bar_default_remote_host(fake_writer):
 def test_bar_custom_remote_host(fake_writer):
     c = (
         Bar(init_opts=opts.InitOpts(js_host="http://localhost:8000/assets/"))
-            .add_xaxis(["A", "B", "C"])
-            .add_yaxis("series0", [1, 2, 4])
+        .add_xaxis(["A", "B", "C"])
+        .add_yaxis("series0", [1, 2, 4])
     )
     c.render()
     assert c.js_host == "http://localhost:8000/assets/"
