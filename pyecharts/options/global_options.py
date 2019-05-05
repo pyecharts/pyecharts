@@ -1,4 +1,3 @@
-# coding=utf-8
 from ..commons.types import JSFunc, List, Numeric, Optional, Sequence, Union
 from ..globals import RenderType, ThemeType
 from ..options.series_options import (
