@@ -5,6 +5,7 @@ from jinja2 import Environment
 
 from ...commons import utils
 from ...commons.types import Optional
+from ...commons.utils import OrderedSet
 from ...datasets import FILENAMES
 from ...globals import CurrentConfig, NotebookType, ThemeType
 from ...render.display import HTML, Javascript
@@ -27,6 +28,7 @@ class Page:
         self.page_title = page_title
         self.page_interval = interval
         self.js_dependencies = utils.OrderedSet()
+        # self.js_functions: utils.OrderedSet = utils.OrderedSet()
         self.js_host = js_host
         self._charts = []
 
@@ -88,6 +90,21 @@ class Page:
 
         if CurrentConfig.NOTEBOOK_TYPE == NotebookType.NTERACT:
             pass
+
+    def render_embed(
+        self,
+        template_name: str = "simple_page.html",
+        env: Optional[Environment] = None,
+    ):
+        self.js_functions=OrderedSet()
+        for c in self:
+            self.json_contents = c.dump_options()
+            for item in c.js_functions.items:
+                self.js_functions.add(item)
+            if c.theme not in ThemeType.BUILTIN_THEMES:
+                self.js_dependencies.add(c.theme)
+        html = RenderEngine(env).render_chart_to_template(template_name, chart=self)
+        return html
 
     def load_javascript(self):
         scripts = []
