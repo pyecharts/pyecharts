@@ -17,6 +17,7 @@ class Timeline(Base):
     def add_schema(
         self,
         axis_type: str = "category",
+        orient: str = "horizontal",
         symbol: Optional[str] = None,
         symbol_size: Optional[Numeric] = None,
         play_interval: Optional[Numeric] = None,
@@ -24,19 +25,26 @@ class Timeline(Base):
         is_loop_play: bool = True,
         is_rewind_play: bool = False,
         is_timeline_show: bool = True,
+        is_inverse: bool = False,
         pos_left: Optional[str] = None,
         pos_right: Optional[str] = None,
         pos_top: Optional[str] = None,
         pos_bottom: Optional[str] = "-5px",
+        width: Optional[str] = None,
+        height: Optional[str] = None,
+        linestyle_opts: Union[opts.LineStyleOpts, dict, None] = None,
         label_opts: Optional[opts.LabelOpts] = None,
+        itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
     ):
         self.options.get("baseOption").get("timeline").update(
             {
                 "axisType": axis_type,
+                "orient": orient,
                 "autoPlay": is_auto_play,
                 "loop": is_loop_play,
                 "rewind": is_rewind_play,
                 "show": is_timeline_show,
+                "inverse": is_inverse,
                 "symbol": symbol,
                 "symbolSize": symbol_size,
                 "playInterval": play_interval,
@@ -44,7 +52,11 @@ class Timeline(Base):
                 "right": pos_right,
                 "top": pos_top,
                 "bottom": pos_bottom,
+                "width": width,
+                "height": height,
+                "lineStyle": linestyle_opts,
                 "label": label_opts,
+                "itemStyle": itemstyle_opts
             }
         )
         return self
@@ -62,6 +74,7 @@ class Timeline(Base):
                 "series": series_data,
                 "title": chart.options.get("title"),
                 "tooltip": chart.options.get("tooltip"),
+                "visualMap": chart.options.get("visualMap"),
             }
         )
         self.__check_components(chart)
