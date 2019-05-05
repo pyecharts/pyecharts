@@ -28,6 +28,12 @@ from .global_options import (
 )
 from .series_options import (
     AreaStyleOpts,
+    BMapCopyrightType,
+    BMapGeoLocationControlOpts,
+    BMapNavigationControlOpts,
+    BMapOverviewMapControlOpts,
+    BMapScaleControlOpts,
+    BMapTypeControl,
     EffectOpts,
     GraphCategory,
     GraphLink,

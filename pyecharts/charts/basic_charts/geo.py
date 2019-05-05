@@ -41,6 +41,10 @@ class GeoChartBase(Chart):
         symbol: Optional[str] = None,
         symbol_size: Numeric = 12,
         color: Optional[str] = None,
+        is_polyline: bool = False,
+        is_large: bool = False,
+        trail_length: Numeric = 0.2,
+        large_threshold: Numeric = 2000,
         label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
         effect_opts: Union[opts.EffectOpts, dict] = opts.EffectOpts(),
         linestyle_opts: Union[opts.LineStyleOpts, dict] = opts.LineStyleOpts(),
@@ -49,11 +53,12 @@ class GeoChartBase(Chart):
     ):
         self._zlevel += 1
         data = []
-        for n, v in data_pair:
-            if type_ == ChartType.LINES:
-                f, t = self.get_coordinate(n), self.get_coordinate(v)
-                data.append({"name": "{}->{}".format(n, v), "coords": [f, t]})
-            else:
+
+        if type_ == ChartType.LINES:
+            for pair in data_pair:
+                data.append({"coords": pair})
+        else:
+            for n, v in data_pair:
                 lng, lat = self.get_coordinate(n)
                 data.append({"name": n, "value": [lng, lat, v]})
 
@@ -105,13 +110,18 @@ class GeoChartBase(Chart):
             )
 
         elif type_ == ChartType.LINES:
+            effect_opts.opts.update(trailLength=trail_length)
             self.options.get("series").append(
                 {
                     "type": type_,
                     "name": series_name,
+                    "coordinateSystem": self._coordinate_system,
                     "zlevel": self._zlevel,
                     "effect": effect_opts,
                     "symbol": symbol or ["none", "arrow"],
+                    "polyline": is_polyline,
+                    "large": is_large,
+                    "largeThreshold": large_threshold,
                     "symbolSize": symbol_size,
                     "data": data,
                     "lineStyle": linestyle_opts,
@@ -150,7 +160,6 @@ class GeoChartBase(Chart):
 class Geo(GeoChartBase):
     """
     <<< geo coordinate system >>>
-
     support scatter plot and line
     """
 

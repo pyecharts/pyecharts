@@ -12,8 +12,7 @@ class TestTimeLine:
             .add_yaxis("shop a", [1, 2])
             .add_yaxis("shop b", [3, 4])
             .set_global_opts(
-                title_opts=opts.TitleOpts("test"),
-                visualmap_opts=opts.VisualMapOpts()
+                title_opts=opts.TitleOpts("test"), visualmap_opts=opts.VisualMapOpts()
             )
         )
         self.tl = Timeline().add(bar0, "year 2015")
@@ -31,32 +30,20 @@ class TestTimeLine:
 
     def test_timeline_vertical(self):
         self.tl.add_schema(orient="vertical")
-        eq_(
-            "vertical",
-            self.tl.options.get("baseOption").get("timeline").get("orient")
-        )
+        eq_("vertical", self.tl.options.get("baseOption").get("timeline").get("orient"))
 
     def test_timeline_inverse(self):
         self.tl.add_schema(is_inverse=True)
-        eq_(
-            True,
-            self.tl.options.get("baseOption").get("timeline").get("inverse")
-        )
+        eq_(True, self.tl.options.get("baseOption").get("timeline").get("inverse"))
 
     def test_timeline_width_height(self):
         width, height = "20", "30"
         self.tl.add_schema(width=width, height=height)
-        eq_(
-            width,
-            self.tl.options.get("baseOption").get("timeline").get("width")
-        )
-        eq_(
-            height,
-            self.tl.options.get("baseOption").get("timeline").get("height")
-        )
+        eq_(width, self.tl.options.get("baseOption").get("timeline").get("width"))
+        eq_(height, self.tl.options.get("baseOption").get("timeline").get("height"))
 
     def test_timeline_visual_map(self):
         eq_(
             type(opts.VisualMapOpts()),
-            type(self.tl.options.get("options")[0].get("visualMap"))
+            type(self.tl.options.get("options")[0].get("visualMap")),
         )
