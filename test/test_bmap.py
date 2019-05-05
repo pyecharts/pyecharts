@@ -100,7 +100,9 @@ def test_bmap_map_control_panel(fake_writer):
         )
         .add_control_panel(
             copyright_control_opts=opts.BMapCopyrightType(position=3),
-            maptype_control_opts=opts.BMapTypeControl(type_=BMapType.BMAP_MAPTYPE_CONTROL_DROPDOWN),
+            maptype_control_opts=opts.BMapTypeControl(
+                type_=BMapType.BMAP_MAPTYPE_CONTROL_DROPDOWN
+            ),
             scale_control_opts=opts.BMapScaleControlOpts(),
             overview_map_opts=opts.BMapOverviewMapControlOpts(is_open=True),
             navigation_control_opts=opts.BMapNavigationControlOpts(),
@@ -119,6 +121,12 @@ def test_bmap_map_control_panel(fake_writer):
     assert expected_copyright_control in content, "copyright function isn`t initialize"
     assert expected_map_type_control in content, "maptype function isn`t initialize"
     assert expected_scale_control in content, "scale function isn`t initialize"
-    assert expected_overview_map_control in content, "overview function isn`t initialize"
-    assert expected_navigation_control in content, "navigation function isn`t initialize"
-    assert expected_geo_location_control in content, "geo_location function isn`t initialize"
+    assert (
+        expected_overview_map_control in content
+    ), "overview function isn`t initialize"
+    assert (
+        expected_navigation_control in content
+    ), "navigation function isn`t initialize"
+    assert (
+        expected_geo_location_control in content
+    ), "geo_location function isn`t initialize"
