@@ -505,7 +505,7 @@ class BMapCopyrightType(BasicOpts):
         position: Union[BMapType, Numeric] = BMapType.BMAP_ANCHOR_BOTTOM_LEFT,
         offset_width: Numeric = 2,
         offset_height: Numeric = 2,
-        copy_right: str = BMapType.BMap_Copyright,
+        copy_right: str = "",
     ):
         bmap_copyright_config = json.dumps(
             {
