@@ -1,6 +1,7 @@
+# coding=utf-8
 from ... import options as opts
 from ...charts.chart import Chart
-from ...commons.types import Optional, Sequence, Union
+from ...commons.types import List, Optional, Sequence, Union
 from ...globals import ChartType
 
 
@@ -16,7 +17,7 @@ class Radar(Chart):
 
     def add_schema(
         self,
-        schema: Sequence[Union[opts.RadarIndicatorItem, dict]],
+        schema: List[Union[opts.RadarIndicatorOpts, dict]],
         shape: Optional[str] = None,
         textstyle_opts: Union[opts.TextStyleOpts, dict] = opts.TextStyleOpts(),
         splitline_opt: Union[opts.SplitLineOpts, dict] = opts.SplitLineOpts(
@@ -25,9 +26,18 @@ class Radar(Chart):
         splitarea_opt: Union[opts.SplitAreaOpts, dict] = opts.SplitAreaOpts(),
         axisline_opt: Union[opts.AxisLineOpts, dict] = opts.AxisLineOpts(),
     ):
+        if isinstance(textstyle_opts, opts.TextStyleOpts):
+            textstyle_opts = textstyle_opts.opts
+        if isinstance(splitline_opt, opts.SplitLineOpts):
+            splitline_opt = splitline_opt.opts
+        if isinstance(splitarea_opt, opts.SplitAreaOpts):
+            splitarea_opt = splitarea_opt.opts
+        if isinstance(axisline_opt, opts.AxisLineOpts):
+            axisline_opt = axisline_opt.opts
+
         indicators = []
         for s in schema:
-            if isinstance(s, opts.RadarIndicatorItem):
+            if isinstance(s, opts.RadarIndicatorOpts):
                 s = s.opts
             indicators.append(s)
 
@@ -66,17 +76,21 @@ class Radar(Chart):
             tooltip_opts = tooltip_opts.opts
 
         self._append_legend(series_name, is_selected)
-        self.options.get("series").append(
-            {
-                "type": ChartType.RADAR,
-                "name": series_name,
-                "data": data,
-                "symbol": symbol,
-                "label": label_opts,
-                "itemStyle": {"normal": {"color": color}},
-                "lineStyle": linestyle_opts,
-                "areaStyle": areastyle_opts,
-                "tooltip": tooltip_opts,
-            }
-        )
+        series = self.options.get("series")
+        if len(series) == 0:
+            series.append(
+                {
+                    "type": ChartType.RADAR,
+                    "name": 'series',
+                    "data": [dict(name=series_name, value=data)],
+                    "symbol": symbol,
+                    "label": label_opts,
+                    "itemStyle": {"normal": {"color": color}},
+                    "lineStyle": linestyle_opts,
+                    "areaStyle": areastyle_opts,
+                    "tooltip": tooltip_opts,
+                }
+            )
+        else:
+            series[0]["data"].append(dict(name=series_name, value=data))
         return self
