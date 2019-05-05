@@ -7,7 +7,9 @@ from ..chart import Base, RectChart
 
 class Grid(Base):
     """
-    <<< 并行显示多张图 >>>
+    `Gird` Drawing grid in rectangular coordinate. In a single grid,
+    at most two X and Y axes each is allowed. Line chart, bar chart,
+    and scatter chart (bubble chart) can be drawn in grid.
     """
 
     def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):

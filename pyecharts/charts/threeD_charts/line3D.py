@@ -1,4 +1,3 @@
-# coding=utf-8
 from ...charts.chart import Chart3D
 from ...commons.types import Union
 from ...options import InitOpts
@@ -6,7 +5,7 @@ from ...options import InitOpts
 
 class Line3D(Chart3D):
     """
-    <<< 3D 折线图 >>>
+    <<< 3D Line-Chart >>>
     """
 
     def __init__(self, init_opts: Union[InitOpts, dict] = InitOpts()):
