@@ -43,6 +43,7 @@ class GeoChartBase(Chart):
         color: Optional[str] = None,
         is_polyline: bool = False,
         is_large: bool = False,
+        trail_length: Numeric = 0.2,
         large_threshold: Numeric = 2000,
         label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
         effect_opts: Union[opts.EffectOpts, dict] = opts.EffectOpts(),
@@ -52,14 +53,6 @@ class GeoChartBase(Chart):
     ):
         self._zlevel += 1
         data = []
-
-        # for n, v in data_pair:
-        #     if type_ == ChartType.LINES:
-        #         f, t = self.get_coordinate(n), self.get_coordinate(v)
-        #         data.append({"name": "{}->{}".format(n, v), "coords": [f, t]})
-        #     else:
-        #         lng, lat = self.get_coordinate(n)
-        #         data.append({"name": n, "value": [lng, lat, v]})
 
         if type_ == ChartType.LINES:
             for pair in data_pair:
@@ -117,6 +110,7 @@ class GeoChartBase(Chart):
             )
 
         elif type_ == ChartType.LINES:
+            effect_opts.opts.update(trailLength=trail_length)
             self.options.get("series").append(
                 {
                     "type": type_,
