@@ -1,4 +1,3 @@
-# coding=utf-8
 from ..globals import BMapType
 from ..commons.types import JSFunc, List, Numeric, Optional, Sequence, Tuple, Union
 
