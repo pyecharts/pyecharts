@@ -83,6 +83,12 @@ class _GeoType:
 
 
 class _BMapType:
+    # BMap Default Copyright
+    BMap_Copyright = "© 2019 pyecharts " \
+                     "<a href='https://github.com/pyecharts/pyecharts'>" \
+                     "pyecharts repository" \
+                     "</a>"
+
     # BMap Control location
     BMAP_ANCHOR_TOP_LEFT = 0
     BMAP_ANCHOR_TOP_RIGHT = 1

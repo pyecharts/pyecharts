@@ -40,7 +40,6 @@ class Base:
     def add_js_funcs(self, *fns):
         for fn in fns:
             if self._is_geo_chart:
-                fn = fn.replace("'", "")  # 可能会有点儿问题
                 self.js_bmap_functions.add(fn)
             else:
                 self.js_functions.add(fn)

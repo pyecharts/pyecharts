@@ -1,3 +1,5 @@
+import json
+
 from ..commons.types import JSFunc, List, Numeric, Optional, Sequence, Tuple, Union
 from ..globals import BMapType
 
@@ -416,16 +418,20 @@ class BMapNavigationControlOpts(BasicOpts):
         is_show_zoom_info: bool = False,
         is_enable_geo_location: bool = False,
     ):
+        bmap_nav_config = json.dumps(
+            {
+                "anchor": position,
+                "offset": {"width": offset_width, "height": offset_height},
+                "type": type_,
+                "showZoomInfo": is_show_zoom_info,
+                "enableGeolocation": is_enable_geo_location,
+            }
+        )
+
         self.opts: dict = {
             "functions": [
                 "bmap.addControl(new BMap.NavigationControl({}));".format(
-                    {
-                        "anchor": position,
-                        "offset": {"width": offset_width, "height": offset_height},
-                        "type": type_,
-                        "showZoomInfo": str(is_show_zoom_info).lower(),
-                        "enableGeolocation": str(is_enable_geo_location).lower(),
-                    }
+                    bmap_nav_config
                 )
             ]
         }
@@ -439,14 +445,18 @@ class BMapOverviewMapControlOpts(BasicOpts):
         offset_height: Numeric = 50,
         is_open: bool = False,
     ):
+        bmap_overview_config = json.dumps(
+            {
+                "anchor": position,
+                "offset": {"width": offset_width, "height": offset_height},
+                "isOpen": is_open,
+            }
+        )
+
         self.opts: dict = {
             "functions": [
                 "var overview = new BMap.OverviewMapControl({});".format(
-                    {
-                        "anchor": position,
-                        "offset": {"width": offset_width, "height": offset_height},
-                        "isOpen": str(is_open).lower(),
-                    }
+                    bmap_overview_config
                 ),
                 "bmap.addControl(overview);",
             ]
@@ -460,14 +470,16 @@ class BMapScaleControlOpts(BasicOpts):
         offset_width: Numeric = 80,
         offset_height: Numeric = 21,
     ):
+        bmap_scale_config = json.dumps(
+            {
+                "anchor": position,
+                "offset": {"width": offset_width, "height": offset_height},
+            }
+        )
+
         self.opts: dict = {
             "functions": [
-                "bmap.addControl(new BMap.ScaleControl({}));".format(
-                    {
-                        "anchor": position,
-                        "offset": {"width": offset_width, "height": offset_height},
-                    }
-                )
+                "bmap.addControl(new BMap.ScaleControl({}));".format(bmap_scale_config)
             ]
         }
 
@@ -478,11 +490,11 @@ class BMapTypeControl(BasicOpts):
         position: Union[BMapType, Numeric] = BMapType.BMAP_ANCHOR_TOP_RIGHT,
         type_: Union[BMapType, Numeric] = BMapType.BMAP_MAPTYPE_CONTROL_HORIZONTAL,
     ):
+        bmap_type_config = json.dumps({"anchor": position, "type": type_})
+
         self.opts: dict = {
             "functions": [
-                "bmap.addControl(new BMap.MapTypeControl({}));".format(
-                    {"anchor": position, "type": type_}
-                )
+                "bmap.addControl(new BMap.MapTypeControl({}));".format(bmap_type_config)
             ]
         }
 
@@ -493,20 +505,23 @@ class BMapCopyrightType(BasicOpts):
         position: Union[BMapType, Numeric] = BMapType.BMAP_ANCHOR_BOTTOM_LEFT,
         offset_width: Numeric = 2,
         offset_height: Numeric = 2,
-        copy_right: str = "© 2019 pyecharts "
-        "<a href='https://github.com/pyecharts/pyecharts'>"
-        "pyecharts repository"
-        "</a>",
+        copy_right: str = BMapType.BMap_Copyright,
     ):
+        bmap_copyright_config = json.dumps(
+            {
+                "anchor": position,
+                "offset": {"width": offset_width, "height": offset_height},
+            }
+        )
+
+        bmap_copyright_content_config = json.dumps({"id": 1, "content": copy_right})
+
         self.opts: dict = {
             "functions": [
                 "var copyright = new BMap.CopyrightControl({});".format(
-                    {
-                        "anchor": position,
-                        "offset": {"width": offset_width, "height": offset_height},
-                    }
+                    bmap_copyright_config
                 ),
-                "copyright.addCopyright({});".format({"id": 1, "content": copy_right}),
+                "copyright.addCopyright({});".format(bmap_copyright_content_config),
                 "bmap.addControl(copyright);",
             ]
         }
@@ -521,15 +536,19 @@ class BMapGeoLocationControlOpts(BasicOpts):
         is_show_address_bar: bool = True,
         is_enable_auto_location: bool = False,
     ):
+        bmap_geo_location_config = json.dumps(
+            {
+                "anchor": position,
+                "offset": {"width": offset_width, "height": offset_height},
+                "showAddressBar": is_show_address_bar,
+                "enableAutoLocation": is_enable_auto_location,
+            }
+        )
+
         self.opts: dict = {
             "functions": [
                 "bmap.addControl(new BMap.GeolocationControl({}))".format(
-                    {
-                        "anchor": position,
-                        "offset": {"width": offset_width, "height": offset_height},
-                        "showAddressBar": str(is_show_address_bar).lower(),
-                        "enableAutoLocation": str(is_enable_auto_location).lower(),
-                    }
+                    bmap_geo_location_config
                 )
             ]
         }
