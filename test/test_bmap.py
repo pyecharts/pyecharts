@@ -57,7 +57,7 @@ def test_bmap_effect_trail_length(fake_writer):
 
 
 @patch("pyecharts.render.engine.write_utf8_html_file")
-def test_baidu_polyline_and_large(fake_writer):
+def test_bmap_polyline_and_large(fake_writer):
     fake_api_key = "fake_application_key"
     provinces = ["London"]
     values = [1]
@@ -84,7 +84,7 @@ def test_baidu_polyline_and_large(fake_writer):
 
 
 @patch("pyecharts.render.engine.write_utf8_html_file")
-def test_baidu_map_control_panel(fake_writer):
+def test_bmap_map_control_panel(fake_writer):
     fake_api_key = "fake_application_key"
     provinces = ["London"]
     values = [1]
