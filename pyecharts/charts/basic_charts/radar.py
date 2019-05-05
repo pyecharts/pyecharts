@@ -66,17 +66,21 @@ class Radar(Chart):
             tooltip_opts = tooltip_opts.opts
 
         self._append_legend(series_name, is_selected)
-        self.options.get("series").append(
-            {
-                "type": ChartType.RADAR,
-                "name": series_name,
-                "data": data,
-                "symbol": symbol,
-                "label": label_opts,
-                "itemStyle": {"normal": {"color": color}},
-                "lineStyle": linestyle_opts,
-                "areaStyle": areastyle_opts,
-                "tooltip": tooltip_opts,
-            }
-        )
+        series = self.options.get("series")
+        if len(series) == 0:
+            series.append(
+                {
+                    "type": ChartType.RADAR,
+                    "name": 'series',
+                    "data": [dict(name=series_name, value=data)],
+                    "symbol": symbol,
+                    "label": label_opts,
+                    "itemStyle": {"normal": {"color": color}},
+                    "lineStyle": linestyle_opts,
+                    "areaStyle": areastyle_opts,
+                    "tooltip": tooltip_opts,
+                }
+            )
+        else:
+            series[0]["data"].append(dict(name=series_name, value=data))
         return self
