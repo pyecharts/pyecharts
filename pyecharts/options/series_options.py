@@ -494,7 +494,10 @@ class BMapCopyrightType(BasicOpts):
         position: Union[BMapType, Numeric] = BMapType.BMAP_ANCHOR_BOTTOM_LEFT,
         offset_width: Numeric = 2,
         offset_height: Numeric = 2,
-        copy_right: str = "© 2019 pyecharts <a href='https://github.com/pyecharts/pyecharts'>pyecharts repository</a>",
+        copy_right: str = "© 2019 pyecharts "
+                          "<a href='https://github.com/pyecharts/pyecharts'>"
+                          "pyecharts repository"
+                          "</a>",
     ):
         self.opts: dict = {
             "functions": [
