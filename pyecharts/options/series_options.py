@@ -1,4 +1,5 @@
 # coding=utf-8
+from ..globals import BMapType
 from ..commons.types import JSFunc, List, Numeric, Optional, Sequence, Tuple, Union
 
 
@@ -403,4 +404,130 @@ class TreeItem(BasicOpts):
             "value": value,
             "children": children,
             "label": label_opts,
+        }
+
+
+class BMapNavigationControlOpts(BasicOpts):
+    def __init__(
+        self,
+        position: Union[BMapType, Numeric] = BMapType.BMAP_ANCHOR_TOP_LEFT,
+        offset_width: Numeric = 10,
+        offset_height: Numeric = 10,
+        type_: Union[BMapType, Numeric] = BMapType.BMAP_NAVIGATION_CONTROL_LARGE,
+        is_show_zoom_info: bool = False,
+        is_enable_geo_location: bool = False,
+    ):
+        self.opts: dict = {
+            "functions": [
+                "bmap.addControl(new BMap.NavigationControl({}));".format(
+                    {
+                        "anchor": position,
+                        "offset": {"width": offset_width, "height": offset_height},
+                        "type": type_,
+                        "showZoomInfo": str(is_show_zoom_info).lower(),
+                        "enableGeolocation": str(is_enable_geo_location).lower(),
+                    }
+                )
+            ]
+        }
+
+
+class BMapOverviewMapControlOpts(BasicOpts):
+    def __init__(
+        self,
+        position: Union[BMapType, Numeric] = BMapType.BMAP_ANCHOR_BOTTOM_RIGHT,
+        offset_width: Numeric = 10,
+        offset_height: Numeric = 50,
+        is_open: bool = False,
+    ):
+        self.opts: dict = {
+            "functions": [
+                "var overview = new BMap.OverviewMapControl({});".format(
+                    {
+                        "anchor": position,
+                        "offset": {"width": offset_width, "height": offset_height},
+                        "isOpen": str(is_open).lower(),
+                    }
+                ),
+                "bmap.addControl(overview);",
+            ]
+        }
+
+
+class BMapScaleControlOpts(BasicOpts):
+    def __init__(
+        self,
+        position: Union[BMapType, Numeric] = BMapType.BMAP_ANCHOR_BOTTOM_LEFT,
+        offset_width: Numeric = 80,
+        offset_height: Numeric = 21,
+    ):
+        self.opts: dict = {
+            "functions": [
+                "bmap.addControl(new BMap.ScaleControl({}));".format(
+                    {
+                        "anchor": position,
+                        "offset": {"width": offset_width, "height": offset_height},
+                    }
+                )
+            ]
+        }
+
+
+class BMapTypeControl(BasicOpts):
+    def __init__(
+        self,
+        position: Union[BMapType, Numeric] = BMapType.BMAP_ANCHOR_TOP_RIGHT,
+        type_: Union[BMapType, Numeric] = BMapType.BMAP_MAPTYPE_CONTROL_HORIZONTAL,
+    ):
+        self.opts: dict = {
+            "functions": [
+                "bmap.addControl(new BMap.MapTypeControl({}));".format(
+                    {"anchor": position, "type": type_}
+                )
+            ]
+        }
+
+
+class BMapCopyrightType(BasicOpts):
+    def __init__(
+        self,
+        position: Union[BMapType, Numeric] = BMapType.BMAP_ANCHOR_BOTTOM_LEFT,
+        offset_width: Numeric = 2,
+        offset_height: Numeric = 2,
+        copy_right: str = "© 2019 pyecharts <a href='https://github.com/pyecharts/pyecharts'>pyecharts repository</a>",
+    ):
+        self.opts: dict = {
+            "functions": [
+                "var copyright = new BMap.CopyrightControl({});".format(
+                    {
+                        "anchor": position,
+                        "offset": {"width": offset_width, "height": offset_height},
+                    }
+                ),
+                "copyright.addCopyright({});".format({"id": 1, "content": copy_right}),
+                "bmap.addControl(copyright);",
+            ]
+        }
+
+
+class BMapGeoLocationControlOpts(BasicOpts):
+    def __init__(
+        self,
+        position: Union[BMapType, Numeric] = BMapType.BMAP_ANCHOR_BOTTOM_LEFT,
+        offset_width: Numeric = 10,
+        offset_height: Numeric = 10,
+        is_show_address_bar: bool = True,
+        is_enable_auto_location: bool = False,
+    ):
+        self.opts: dict = {
+            "functions": [
+                "bmap.addControl(new BMap.GeolocationControl({}))".format(
+                    {
+                        "anchor": position,
+                        "offset": {"width": offset_width, "height": offset_height},
+                        "showAddressBar": str(is_show_address_bar).lower(),
+                        "enableAutoLocation": str(is_enable_auto_location).lower(),
+                    }
+                )
+            ]
         }
