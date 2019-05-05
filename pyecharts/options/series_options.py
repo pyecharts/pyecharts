@@ -1,5 +1,5 @@
-from ..globals import BMapType
 from ..commons.types import JSFunc, List, Numeric, Optional, Sequence, Tuple, Union
+from ..globals import BMapType
 
 
 class BasicOpts:
@@ -494,9 +494,9 @@ class BMapCopyrightType(BasicOpts):
         offset_width: Numeric = 2,
         offset_height: Numeric = 2,
         copy_right: str = "© 2019 pyecharts "
-                          "<a href='https://github.com/pyecharts/pyecharts'>"
-                          "pyecharts repository"
-                          "</a>",
+        "<a href='https://github.com/pyecharts/pyecharts'>"
+        "pyecharts repository"
+        "</a>",
     ):
         self.opts: dict = {
             "functions": [

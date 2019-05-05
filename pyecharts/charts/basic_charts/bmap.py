@@ -1,6 +1,6 @@
 from ... import options as opts
 from ...charts.basic_charts.geo import GeoChartBase
-from ...commons.types import Optional, Sequence, Union, JsCode
+from ...commons.types import JsCode, Optional, Sequence, Union
 
 BAIDU_MAP_API = "http://api.map.baidu.com/api?v=2.0&ak={}"
 BAIDU_MAP_GETSCRIPT = "http://api.map.baidu.com/getscript?v=2.0&ak={}"

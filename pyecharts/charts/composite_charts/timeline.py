@@ -56,7 +56,7 @@ class Timeline(Base):
                 "height": height,
                 "lineStyle": linestyle_opts,
                 "label": label_opts,
-                "itemStyle": itemstyle_opts
+                "itemStyle": itemstyle_opts,
             }
         )
         return self
