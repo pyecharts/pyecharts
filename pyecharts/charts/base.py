@@ -36,10 +36,15 @@ class Base:
         self.js_dependencies: utils.OrderedSet = utils.OrderedSet("echarts")
         self.options.update(backgroundColor=init_opts.bg_color)
         self._is_geo_chart: bool = False
+        self.js_bmap_functions: utils.OrderedSet = utils.OrderedSet()
 
     def add_js_funcs(self, *fns):
         for fn in fns:
-            self.js_functions.add(fn)
+            if self._is_geo_chart:
+                fn = fn.replace("'", "")  # 可能会有点儿问题
+                self.js_bmap_functions.add(fn)
+            else:
+                self.js_functions.add(fn)
         return self
 
     def get_options(self) -> dict:

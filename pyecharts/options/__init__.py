@@ -45,4 +45,10 @@ from .series_options import (
     SplitLineOpts,
     TextStyleOpts,
     TreeItem,
+    BMapNavigationControlOpts,
+    BMapOverviewMapControlOpts,
+    BMapScaleControlOpts,
+    BMapTypeControl,
+    BMapCopyrightType,
+    BMapGeoLocationControlOpts,
 )
