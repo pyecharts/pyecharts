@@ -1,7 +1,7 @@
 # coding=utf-8
 from example.commons import Collector, Faker
 from pyecharts import options as opts
-from pyecharts.charts import Bar, Line, Page
+from pyecharts.charts import Bar, Line, Page, Scatter
 
 C = Collector()
 
@@ -14,8 +14,8 @@ v3 = [2.0, 2.2, 3.3, 4.5, 6.3, 10.2, 20.3, 23.4, 23.0, 16.5, 12.0, 6.2]
 @C.funcs
 def overlap_line_scatter() -> Bar:
     x = Faker.choose()
-    bar = (
-        Bar()
+    scatter = (
+        Scatter()
         .add_xaxis(x)
         .add_yaxis("商家A", Faker.values())
         .add_yaxis("商家B", Faker.values())
@@ -27,8 +27,8 @@ def overlap_line_scatter() -> Bar:
         .add_yaxis("商家A", Faker.values())
         .add_yaxis("商家B", Faker.values())
     )
-    bar.overlap(line)
-    return bar
+    scatter.overlap(line)
+    return scatter
 
 
 @C.funcs
