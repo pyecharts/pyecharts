@@ -12,23 +12,23 @@ v3 = [2.0, 2.2, 3.3, 4.5, 6.3, 10.2, 20.3, 23.4, 23.0, 16.5, 12.0, 6.2]
 
 
 @C.funcs
-def overlap_line_scatter() -> Bar:
+def overlap_line_scatter() -> Line:
     x = Faker.choose()
-    scatter = (
-        Scatter()
-        .add_xaxis(x)
-        .add_yaxis("商家A", Faker.values())
-        .add_yaxis("商家B", Faker.values())
-        .set_global_opts(title_opts=opts.TitleOpts(title="Overlap-line+scatter"))
-    )
     line = (
         Line()
         .add_xaxis(x)
         .add_yaxis("商家A", Faker.values())
         .add_yaxis("商家B", Faker.values())
+        .set_global_opts(title_opts=opts.TitleOpts(title="Overlap-line+scatter"))
     )
-    scatter.overlap(line)
-    return scatter
+    scatter = (
+        Scatter()
+        .add_xaxis(x)
+        .add_yaxis("商家A", Faker.values())
+        .add_yaxis("商家B", Faker.values())
+    )
+    line.overlap(scatter)
+    return line
 
 
 @C.funcs
