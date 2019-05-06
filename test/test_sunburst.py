@@ -1,5 +1,6 @@
-from nose.tools import eq_
 from unittest.mock import patch
+
+from nose.tools import eq_
 
 from pyecharts.charts import Sunburst
 
