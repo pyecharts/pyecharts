@@ -10,6 +10,13 @@ class Sunburst(Chart):
 
     旭日图（Sunburst）由多层的环形图组成，在数据结构上，内圈是外圈的父节点。
     因此，它既能像饼图一样表现局部和整体的占比，又能像矩形树图一样表现层级关系。
+
+    <<< Sunburst >>
+    
+    Sunburst graphs are composed of multiple layers of ring graphs.
+    In terms of data structure, inner circle is the parent node of outer circle.
+    Therefore, it can represent local and global proportions like pie charts and
+    hierarchical relationships like rectangle tree graphs.
     """
 
     def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):
