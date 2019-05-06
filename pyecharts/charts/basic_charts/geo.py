@@ -110,7 +110,9 @@ class GeoChartBase(Chart):
             )
 
         elif type_ == ChartType.LINES:
-            effect_opts.opts.update(trailLength=trail_length)
+            if isinstance(effect_opts, (opts.EffectOpts, dict)):
+                effect_opts.opts.update(trailLength=trail_length)
+
             self.options.get("series").append(
                 {
                     "type": type_,

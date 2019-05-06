@@ -411,10 +411,10 @@ class TreeItem(BasicOpts):
 class BMapNavigationControlOpts(BasicOpts):
     def __init__(
         self,
-        position: Union[BMapType, Numeric] = BMapType.BMAP_ANCHOR_TOP_LEFT,
+        position: Union[Numeric] = BMapType.BMAP_ANCHOR_TOP_LEFT,
         offset_width: Numeric = 10,
         offset_height: Numeric = 10,
-        type_: Union[BMapType, Numeric] = BMapType.BMAP_NAVIGATION_CONTROL_LARGE,
+        type_: Union[Numeric] = BMapType.BMAP_NAVIGATION_CONTROL_LARGE,
         is_show_zoom_info: bool = False,
         is_enable_geo_location: bool = False,
     ):
@@ -440,7 +440,7 @@ class BMapNavigationControlOpts(BasicOpts):
 class BMapOverviewMapControlOpts(BasicOpts):
     def __init__(
         self,
-        position: Union[BMapType, Numeric] = BMapType.BMAP_ANCHOR_BOTTOM_RIGHT,
+        position: Union[Numeric] = BMapType.BMAP_ANCHOR_BOTTOM_RIGHT,
         offset_width: Numeric = 10,
         offset_height: Numeric = 50,
         is_open: bool = False,
@@ -466,7 +466,7 @@ class BMapOverviewMapControlOpts(BasicOpts):
 class BMapScaleControlOpts(BasicOpts):
     def __init__(
         self,
-        position: Union[BMapType, Numeric] = BMapType.BMAP_ANCHOR_BOTTOM_LEFT,
+        position: Union[Numeric] = BMapType.BMAP_ANCHOR_BOTTOM_LEFT,
         offset_width: Numeric = 80,
         offset_height: Numeric = 21,
     ):
@@ -487,8 +487,8 @@ class BMapScaleControlOpts(BasicOpts):
 class BMapTypeControl(BasicOpts):
     def __init__(
         self,
-        position: Union[BMapType, Numeric] = BMapType.BMAP_ANCHOR_TOP_RIGHT,
-        type_: Union[BMapType, Numeric] = BMapType.BMAP_MAPTYPE_CONTROL_HORIZONTAL,
+        position: Union[Numeric] = BMapType.BMAP_ANCHOR_TOP_RIGHT,
+        type_: Union[Numeric] = BMapType.BMAP_MAPTYPE_CONTROL_HORIZONTAL,
     ):
         bmap_type_config = json.dumps({"anchor": position, "type": type_})
 
@@ -502,7 +502,7 @@ class BMapTypeControl(BasicOpts):
 class BMapCopyrightType(BasicOpts):
     def __init__(
         self,
-        position: Union[BMapType, Numeric] = BMapType.BMAP_ANCHOR_BOTTOM_LEFT,
+        position: Union[Numeric] = BMapType.BMAP_ANCHOR_BOTTOM_LEFT,
         offset_width: Numeric = 2,
         offset_height: Numeric = 2,
         copy_right: str = "",
@@ -530,7 +530,7 @@ class BMapCopyrightType(BasicOpts):
 class BMapGeoLocationControlOpts(BasicOpts):
     def __init__(
         self,
-        position: Union[BMapType, Numeric] = BMapType.BMAP_ANCHOR_BOTTOM_LEFT,
+        position: Union[Numeric] = BMapType.BMAP_ANCHOR_BOTTOM_LEFT,
         offset_width: Numeric = 10,
         offset_height: Numeric = 10,
         is_show_address_bar: bool = True,
