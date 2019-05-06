@@ -62,10 +62,11 @@ class BMap(GeoChartBase):
         for panel in panel_options:
             if panel is not None:
                 fns = panel.opts.get("functions")
-                self.add_js_funcs(fns)
+                for fn in fns:
+                    self.add_js_funcs(fn)
 
         return self
 
-    def add_js_funcs(self, fns: Sequence):
+    def add_js_funcs(self, *fns: Sequence):
         for fn in fns:
             self.js_bmap_functions.add(fn)
