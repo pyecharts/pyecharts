@@ -49,6 +49,7 @@ from .series_options import (
     MarkPointOpts,
     SplitAreaOpts,
     SplitLineOpts,
+    SunburstItem,
     TextStyleOpts,
     TreeItem,
 )

@@ -43,6 +43,7 @@ class _ChartType:
     RADAR: str = "radar"
     SANKEY: str = "sankey"
     SCATTER: str = "scatter"
+    SUNBURST: str = "sunburst"
     THEMERIVER: str = "themeRiver"
     TREE: str = "tree"
     TREEMAP: str = "treemap"
