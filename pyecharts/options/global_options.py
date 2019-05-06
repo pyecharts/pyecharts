@@ -1,4 +1,4 @@
-from ..commons.types import JSFunc, List, Numeric, Optional, Sequence, Union
+from ..commons.types import JSFunc, Numeric, Optional, Sequence, Union
 from ..globals import RenderType, ThemeType
 from ..options.series_options import (
     BasicOpts,
@@ -102,7 +102,7 @@ class TitleOpts(BasicOpts):
         title_textstyle_opts: Union[TextStyleOpts, dict, None] = None,
         subtitle_textstyle_opts: Union[TextStyleOpts, dict, None] = None,
     ):
-        self.opts: List = [
+        self.opts: Sequence = [
             {
                 "text": title,
                 "link": title_link,

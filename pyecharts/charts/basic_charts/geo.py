@@ -2,7 +2,7 @@ import json
 
 from ... import options as opts
 from ...charts.chart import Chart
-from ...commons.types import List, Numeric, Optional, Sequence, Union
+from ...commons.types import Numeric, Optional, Sequence, Union
 from ...commons.utils import JsCode
 from ...datasets import COORDINATES
 from ...globals import ChartType, TooltipFormatterType
@@ -27,7 +27,7 @@ class GeoChartBase(Chart):
                 self.add_coordinate(k, v[0], v[1])
         return self
 
-    def get_coordinate(self, name: str) -> List:
+    def get_coordinate(self, name: str) -> Sequence:
         if name in self._coordinates:
             return self._coordinates[name]
 
@@ -52,8 +52,8 @@ class GeoChartBase(Chart):
         itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
     ):
         self._zlevel += 1
-        data = []
 
+        data = []
         if type_ == ChartType.LINES:
             for pair in data_pair:
                 data.append({"coords": pair})
@@ -110,9 +110,7 @@ class GeoChartBase(Chart):
             )
 
         elif type_ == ChartType.LINES:
-            if isinstance(effect_opts, (opts.EffectOpts, dict)):
-                effect_opts.opts.update(trailLength=trail_length)
-
+            effect_opts.update(trailLength=trail_length)
             self.options.get("series").append(
                 {
                     "type": type_,
@@ -145,7 +143,7 @@ class GeoChartBase(Chart):
         xaxis_opts: Union[opts.AxisOpts, dict, None] = None,
         yaxis_opts: Union[opts.AxisOpts, dict, None] = None,
         visualmap_opts: Union[opts.VisualMapOpts, dict, None] = None,
-        datazoom_opts: List[Union[opts.DataZoomOpts, dict, None]] = None,
+        datazoom_opts: Sequence[Union[opts.DataZoomOpts, dict, None]] = None,
     ):
         return super().set_global_opts(
             title_opts=title_opts,
@@ -162,6 +160,7 @@ class GeoChartBase(Chart):
 class Geo(GeoChartBase):
     """
     <<< geo coordinate system >>>
+
     support scatter plot and line
     """
 
@@ -178,15 +177,6 @@ class Geo(GeoChartBase):
         emphasis_itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
         emphasis_label_opts: Union[opts.LabelOpts, dict, None] = None,
     ):
-        if isinstance(label_opts, opts.LabelOpts):
-            label_opts = label_opts.opts
-        if isinstance(itemstyle_opts, opts.ItemStyleOpts):
-            itemstyle_opts = itemstyle_opts.opts
-        if isinstance(emphasis_itemstyle_opts, opts.ItemStyleOpts):
-            emphasis_itemstyle_opts = emphasis_itemstyle_opts.opts
-        if isinstance(emphasis_label_opts, opts.LabelOpts):
-            emphasis_label_opts = emphasis_label_opts.opts
-
         self.js_dependencies.add(maptype)
         self.options.update(
             geo={

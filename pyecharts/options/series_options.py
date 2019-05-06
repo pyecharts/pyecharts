@@ -1,6 +1,6 @@
 import json
 
-from ..commons.types import Any, JSFunc, List, Numeric, Optional, Sequence, Tuple, Union
+from ..commons.types import Any, JSFunc, Numeric, Optional, Sequence, Tuple, Union
 from ..globals import BMapType
 
 
@@ -263,7 +263,7 @@ class MarkAreaItem(BasicOpts):
         label_opts: Union[LabelOpts, dict, None] = None,
         itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
     ):
-        self.opts: List = [
+        self.opts: Sequence = [
             {
                 "name": name,
                 "type": type_[0],
