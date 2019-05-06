@@ -1,4 +1,3 @@
-# coding=utf-8
 import pyecharts.options as opts
 from example.commons import Collector, Faker
 from pyecharts.charts import Line, Page

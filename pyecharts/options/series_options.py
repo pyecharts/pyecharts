@@ -339,7 +339,7 @@ class GraphNode(BasicOpts):
         category: Optional[int] = None,
         symbol: Optional[str] = None,
         symbol_size: Union[Numeric, Sequence, None] = None,
-        label_opts: Optional[LabelOpts] = None,
+        label_opts: Union[LabelOpts, dict, None] = None,
     ):
         self.opts: dict = {
             "name": name,
@@ -362,8 +362,8 @@ class GraphLink(BasicOpts):
         value: Optional[Numeric] = None,
         symbol: Union[str, Sequence, None] = None,
         symbol_size: Union[Numeric, Sequence, None] = None,
-        linestyle_opts: Optional[LineStyleOpts] = None,
-        label_opts: Optional[LabelOpts] = None,
+        linestyle_opts: Union[LineStyleOpts, dict, None] = None,
+        label_opts: Union[LabelOpts, dict, None] = None,
     ):
         self.opts: dict = {
             "source": source,
@@ -382,7 +382,7 @@ class GraphCategory(BasicOpts):
         name: Optional[str] = None,
         symbol: Optional[str] = None,
         symbol_size: Union[Numeric, Sequence, None] = None,
-        label_opts: Optional[LabelOpts] = None,
+        label_opts: Union[LabelOpts, dict, None] = None,
     ):
         self.opts: dict = {
             "name": name,
@@ -397,7 +397,7 @@ class TreeItem(BasicOpts):
         self,
         name: Optional[str] = None,
         value: Optional[Numeric] = None,
-        label_opts: Optional[LabelOpts] = None,
+        label_opts: Union[LabelOpts, dict, None] = None,
         children: Optional[Sequence] = None,
     ):
         self.opts: dict = {
@@ -505,7 +505,7 @@ class BMapCopyrightType(BasicOpts):
         position: Numeric = BMapType.BMAP_ANCHOR_BOTTOM_LEFT,
         offset_width: Numeric = 2,
         offset_height: Numeric = 2,
-        copy_right: str = "",
+        copyright_: str = "",
     ):
         bmap_copyright_config = json.dumps(
             {
@@ -514,7 +514,7 @@ class BMapCopyrightType(BasicOpts):
             }
         )
 
-        bmap_copyright_content_config = json.dumps({"id": 1, "content": copy_right})
+        bmap_copyright_content_config = json.dumps({"id": 1, "content": copyright_})
 
         self.opts: dict = {
             "functions": [

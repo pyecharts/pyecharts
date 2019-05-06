@@ -1,5 +1,3 @@
-# coding=utf-8
-
 # basic Charts
 from ..charts.basic_charts.bar import Bar
 from ..charts.basic_charts.bmap import BMap
