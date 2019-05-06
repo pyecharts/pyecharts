@@ -1,7 +1,11 @@
+from nose.tools import eq_
+from unittest.mock import patch
+
 from pyecharts.charts import Sunburst
 
 
-def test_sunburst_base():
+@patch("pyecharts.render.engine.write_utf8_html_file")
+def test_sunburst_base(fake_writer):
     data = [
         {
             "name": "Grandpa",
@@ -44,6 +48,5 @@ def test_sunburst_base():
     ]
 
     c = Sunburst().add("Sunburst 演示数据", data)
-    assert c.theme == "white"
-    assert c.renderer == "canvas"
-    c.render("render.html")
+    eq_("white", c.theme)
+    eq_("canvas", c.renderer)
