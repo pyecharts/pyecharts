@@ -546,7 +546,7 @@ class RadiusAxisItem(BasicOpts):
     def __init__(
         self,
         value: Optional[str] = None,
-        textstyle_opts: Optional[TextStyleOpts] = None,
+        textstyle_opts: Union[TextStyleOpts, dict, None] = None,
     ):
         self.opts: dict = {"value": value, "textStyle": textstyle_opts}
 

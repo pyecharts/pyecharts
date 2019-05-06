@@ -1,11 +1,17 @@
 import json
 
-from ..commons.types import JSFunc, List, Numeric, Optional, Sequence, Tuple, Union
+from ..commons.types import Any, JSFunc, List, Numeric, Optional, Sequence, Tuple, Union
 from ..globals import BMapType
 
 
 class BasicOpts:
-    pass
+    __slots__ = ("opts",)
+
+    def update(self, item: dict):
+        self.opts.update(item)
+
+    def get(self, key: str) -> Any:
+        return self.opts.get(key)
 
 
 class ItemStyleOpts(BasicOpts):

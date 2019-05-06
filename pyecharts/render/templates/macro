@@ -3,17 +3,14 @@
     <script>
         var chart_{{ c.chart_id }} = echarts.init(
             document.getElementById('{{ c.chart_id }}'), '{{ c.theme }}', {renderer: '{{ c.renderer }}'});
-        {% for js in c.js_functions.items %}
-            {{ js }}
-        {% endfor %}
         var option_{{ c.chart_id }} = {{ c.json_contents }};
         chart_{{ c.chart_id }}.setOption(option_{{ c.chart_id }});
         {% if c._is_geo_chart %}
             var bmap = chart_{{ c.chart_id }}.getModel().getComponent('bmap').getBMap();
-            {% for bmap_js in c.js_bmap_functions.items %}
-                {{ bmap_js }}
-            {% endfor %}
         {% endif %}
+        {% for js in c.js_functions.items %}
+            {{ js }}
+        {% endfor %}
     </script>
 {%- endmacro %}
 
