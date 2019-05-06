@@ -552,3 +552,25 @@ class BMapGeoLocationControlOpts(BasicOpts):
                 )
             ]
         }
+
+
+class SunburstItem(BasicOpts):
+    def __init__(
+        self,
+        value: Optional[Numeric] = None,
+        name: Optional[str] = None,
+        link: Optional[str] = None,
+        target: Optional[str] = "blank",
+        label_opts: Union[LabelOpts, dict, None] = None,
+        itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
+        children: Optional[Sequence] = None,
+    ):
+        self.opts: dict = {
+            "value": value,
+            "name": name,
+            "link": link,
+            "target": target,
+            "label": label_opts,
+            "itemStyle": itemstyle_opts,
+            "children": children,
+        }
