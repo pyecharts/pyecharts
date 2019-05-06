@@ -1,6 +1,7 @@
 from ... import options as opts
 from ...charts.basic_charts.geo import GeoChartBase
-from ...commons.types import JsCode, Optional, Sequence, Union
+from ...commons import utils
+from ...commons.types import Optional, Sequence, Union
 
 BAIDU_MAP_API = "http://api.map.baidu.com/api?v=2.0&ak={}"
 BAIDU_MAP_GETSCRIPT = "http://api.map.baidu.com/getscript?v=2.0&ak={}"
@@ -17,6 +18,7 @@ class BMap(GeoChartBase):
         self.js_dependencies.add("bmap")
         self._is_geo_chart = True
         self._coordinate_system: Optional[str] = "bmap"
+        self.js_bmap_functions: utils.OrderedSet = utils.OrderedSet()
 
     def add_schema(
         self,
@@ -59,8 +61,12 @@ class BMap(GeoChartBase):
 
         for panel in panel_options:
             if panel is not None:
-                fns = panel.opts
-                for fn in fns["functions"]:
+                fns = panel.opts.get("functions")
+                for fn in fns:
                     self.add_js_funcs(fn)
 
         return self
+
+    def add_js_funcs(self, *fns: Sequence):
+        for fn in fns:
+            self.js_bmap_functions.add(fn)
