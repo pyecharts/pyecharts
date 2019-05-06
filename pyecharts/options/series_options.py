@@ -561,8 +561,8 @@ class SunburstItem(BasicOpts):
         name: Optional[str] = None,
         link: Optional[str] = None,
         target: Optional[str] = "blank",
-        label_opts: Optional[LabelOpts] = None,
-        itemstyle_opts: Optional[ItemStyleOpts] = None,
+        label_opts: Union[LabelOpts, dict, None] = None,
+        itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
         children: Optional[Sequence] = None,
     ):
         self.opts: dict = {

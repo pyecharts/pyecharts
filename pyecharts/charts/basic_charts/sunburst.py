@@ -24,7 +24,7 @@ class Sunburst(Chart):
         radius: Optional[Sequence] = None,
         highlight_policy: str = "descendant",
         node_click: str = "rootToNode",
-        sort: Optional[JSFunc] = "desc",
+        sort_: Optional[JSFunc] = "desc",
         label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
         itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
     ):
@@ -42,7 +42,7 @@ class Sunburst(Chart):
                 "radius": radius,
                 "highlightPolicy": highlight_policy,
                 "nodeClick": node_click,
-                "sort": sort,
+                "sort": sort_,
                 "label": label_opts,
                 "itemStyle": itemstyle_opts,
             }
