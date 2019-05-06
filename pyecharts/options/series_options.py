@@ -181,19 +181,11 @@ class MarkPointOpts(BasicOpts):
         symbol_size: Union[None, Numeric] = None,
         label_opts: LabelOpts = LabelOpts(position="inside", color="#fff"),
     ):
-        _data = []
-        if data:
-            for d in data:
-                if isinstance(d, dict):
-                    _data.append(d)
-                else:
-                    _data.append(d.opts)
-
         self.opts: dict = {
             "symbol": symbol,
             "symbolSize": symbol_size,
             "label": label_opts,
-            "data": _data,
+            "data": data,
         }
 
 
@@ -233,21 +225,13 @@ class MarkLineOpts(BasicOpts):
         precision: int = 2,
         label_opts: LabelOpts = LabelOpts(),
     ):
-        _data = []
-        if data:
-            for d in data:
-                if isinstance(d, dict):
-                    _data.append(d)
-                else:
-                    _data.append(d.opts)
-
         self.opts: dict = {
             "silent": is_silent,
             "symbol": symbol,
             "symbolSize": symbol_size,
             "precision": precision,
             "label": label_opts,
-            "data": _data,
+            "data": data,
         }
 
 
@@ -291,15 +275,7 @@ class MarkAreaOpts(BasicOpts):
         label_opts: LabelOpts = LabelOpts(),
         data: Sequence[Union[MarkAreaItem, dict]] = None,
     ):
-        _data = []
-        if data:
-            for d in data:
-                if isinstance(d, dict):
-                    _data.append(d)
-                else:
-                    _data.append(d.opts)
-
-        self.opts: dict = {"silent": is_silent, "label": label_opts, "data": _data}
+        self.opts: dict = {"silent": is_silent, "label": label_opts, "data": data}
 
 
 class EffectOpts(BasicOpts):
