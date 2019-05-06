@@ -54,13 +54,16 @@ class GeoChartBase(Chart):
         self._zlevel += 1
 
         data = []
-        if type_ == ChartType.LINES:
-            for pair in data_pair:
-                data.append({"coords": pair})
+        if type_ == ChartType.LINES and self._coordinate_system == "bmap":
+            data = data_pair
         else:
             for n, v in data_pair:
-                lng, lat = self.get_coordinate(n)
-                data.append({"name": n, "value": [lng, lat, v]})
+                if type_ == ChartType.LINES:
+                    f, t = self.get_coordinate(n), self.get_coordinate(v)
+                    data.append({"name": "{}->{}".format(n, v), "coords": [f, t]})
+                else:
+                    lng, lat = self.get_coordinate(n)
+                    data.append({"name": n, "value": [lng, lat, v]})
 
         self._append_color(color)
         self._append_legend(series_name, is_selected)

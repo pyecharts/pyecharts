@@ -34,7 +34,6 @@ def bmap_lines() -> BMap:
         os.path.join("fixtures", "hangzhou-tracks.json"), "r", encoding="utf-8"
     ) as f:
         j = json.load(f)
-
     c = (
         BMap()
         .add_schema(
@@ -130,7 +129,7 @@ def bmap_lines() -> BMap:
         .add(
             "",
             type_="lines",
-            data_pair=[[y["coord"] for y in x] for x in j],
+            data_pair=j,
             is_polyline=True,
             is_large=True,
             linestyle_opts=opts.LineStyleOpts(color="purple", opacity=0.6, width=1),

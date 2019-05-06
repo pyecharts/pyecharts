@@ -7,8 +7,8 @@ from ..globals import BMapType
 class BasicOpts:
     __slots__ = ("opts",)
 
-    def update(self, item: dict):
-        self.opts.update(item)
+    def update(self, **kwargs):
+        self.opts.update(kwargs)
 
     def get(self, key: str) -> Any:
         return self.opts.get(key)
