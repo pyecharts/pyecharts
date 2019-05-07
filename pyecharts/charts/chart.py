@@ -11,13 +11,13 @@ class Chart(Base):
 
     def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):
         super().__init__(init_opts=init_opts)
-        self._colors = (
+        self.colors = (
             "#c23531 #2f4554 #61a0a8 #d48265 #749f83 #ca8622 #bda29a #6e7074 "
             "#546570 #c4ccd3 #f05b72 #ef5b9c #f47920 #905a3d #fab27b #2a5caa "
             "#444693 #726930 #b2d235 #6d8346 #ac6767 #1d953f #6950a1 #918597"
         ).split()
         if init_opts.theme == ThemeType.WHITE:
-            self.options.update(color=self._colors)
+            self.options.update(color=self.colors)
         self.options.update(
             series=[],
             legend=[{"data": [], "selected": dict()}],
@@ -91,9 +91,9 @@ class Chart(Base):
 
     def _append_color(self, color: Optional[str]):
         if color:
-            self._colors = [color] + self._colors
+            self.colors = [color] + self.colors
             if self.theme == ThemeType.WHITE:
-                self.options.update(color=self._colors)
+                self.options.update(color=self.colors)
 
     def set_global_opts(
         self,
