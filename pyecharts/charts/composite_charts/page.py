@@ -85,7 +85,7 @@ class Page:
 
         if CurrentConfig.NOTEBOOK_TYPE == NotebookType.NTERACT:
             pass
-        
+
     def render_embed(
         self,
         template_name: str = "simple_page.html",
@@ -97,7 +97,7 @@ class Page:
                 self.js_dependencies.add(c.theme)
         html = RenderEngine(env).render_chart_to_template(template_name, chart=self)
         return html
-        
+
     def load_javascript(self):
         scripts = []
         for dep in self.js_dependencies.items:
