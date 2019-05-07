@@ -17,6 +17,24 @@ def pie_base() -> Pie:
 
 
 @C.funcs
+def pie_position() -> Pie:
+    c = (
+        Pie()
+        .add(
+            "",
+            [list(z) for z in zip(Faker.choose(), Faker.values())],
+            center=["35%", "50%"],
+        )
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="Pie-调整位置"),
+            legend_opts=opts.LegendOpts(pos_left="15%"),
+        )
+        .set_series_opts(label_opts=opts.LabelOpts(formatter="{b}: {c}"))
+    )
+    return c
+
+
+@C.funcs
 def pie_radius() -> Pie:
     c = (
         Pie()
