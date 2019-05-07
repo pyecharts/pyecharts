@@ -33,7 +33,7 @@ class Grid(Base):
 
         title = chart.options.get("title", opts.TitleOpts().opts)
         self.options.update(
-            title=self.options.get("title", opts.TitleOpts().opts) + title
+            title=self.options.get("title", [opts.TitleOpts().opts]) + [title]
         )
 
         for s in chart.options.get("series"):
