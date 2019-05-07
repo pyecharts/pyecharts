@@ -134,6 +134,10 @@ class DataZoomOpts(BasicOpts):
         xaxis_index: Union[int, Sequence[int], None] = None,
         yaxis_index: Union[int, Sequence[int], None] = None,
         is_zoom_lock: bool = False,
+        pos_left: Optional[str] = None,
+        pos_right: Optional[str] = None,
+        pos_top: Optional[str] = None,
+        pos_bottom: Optional[str] = None,
     ):
         self.opts: dict = {
             "show": is_show,
@@ -147,6 +151,10 @@ class DataZoomOpts(BasicOpts):
             "xAxisIndex": xaxis_index,
             "yAxisIndex": yaxis_index,
             "zoomLock": is_zoom_lock,
+            "left": pos_left,
+            "right": pos_right,
+            "top": pos_top,
+            "bottom": pos_bottom,
         }
 
 
