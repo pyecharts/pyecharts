@@ -7,6 +7,7 @@ from pyecharts.charts import BMap, Page
 from pyecharts.globals import BMapType
 
 C = Collector()
+BAIDU_MAP_AK = os.environ.get("BAIDU_MAP_AK", "FAKE_AK")
 
 
 @C.funcs
@@ -15,7 +16,7 @@ def bmap_base() -> BMap:
     c = (
         BMap()
         .add_schema(
-            baidu_ak="Uf1rIjuIVVXxDwEy0iEU0tApwdoqGeGn",
+            baidu_ak=BAIDU_MAP_AK,
             center=[120.13066322374, 30.240018034923],
         )
         .add(
@@ -37,7 +38,7 @@ def bmap_lines() -> BMap:
     c = (
         BMap()
         .add_schema(
-            baidu_ak="Uf1rIjuIVVXxDwEy0iEU0tApwdoqGeGn",
+            baidu_ak=BAIDU_MAP_AK,
             center=[120.13066322374, 30.240018034923],
             zoom=14,
             is_roam=True,
