@@ -60,7 +60,7 @@ def test_bar_default_remote_host(fake_writer):
     c.render()
     eq_(c.js_host, "https://assets.pyecharts.org/assets/")
     _, content = fake_writer.call_args[0]
-    eq_("https://assets.pyecharts.org/assets/echarts.min.js", content)
+    assert_in("https://assets.pyecharts.org/assets/echarts.min.js", content)
 
 
 @patch("pyecharts.render.engine.write_utf8_html_file")
