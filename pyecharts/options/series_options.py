@@ -1,5 +1,7 @@
-# coding=utf-8
+import json
+
 from ..commons.types import JSFunc, List, Numeric, Optional, Sequence, Tuple, Union
+from ..globals import BMapType
 
 
 class BasicOpts:
@@ -403,4 +405,172 @@ class TreeItem(BasicOpts):
             "value": value,
             "children": children,
             "label": label_opts,
+        }
+
+
+class BMapNavigationControlOpts(BasicOpts):
+    def __init__(
+        self,
+        position: Numeric = BMapType.BMAP_ANCHOR_TOP_LEFT,
+        offset_width: Numeric = 10,
+        offset_height: Numeric = 10,
+        type_: Numeric = BMapType.BMAP_NAVIGATION_CONTROL_LARGE,
+        is_show_zoom_info: bool = False,
+        is_enable_geo_location: bool = False,
+    ):
+        bmap_nav_config = json.dumps(
+            {
+                "anchor": position,
+                "offset": {"width": offset_width, "height": offset_height},
+                "type": type_,
+                "showZoomInfo": is_show_zoom_info,
+                "enableGeolocation": is_enable_geo_location,
+            }
+        )
+
+        self.opts: dict = {
+            "functions": [
+                "bmap.addControl(new BMap.NavigationControl({}));".format(
+                    bmap_nav_config
+                )
+            ]
+        }
+
+
+class BMapOverviewMapControlOpts(BasicOpts):
+    def __init__(
+        self,
+        position: Numeric = BMapType.BMAP_ANCHOR_BOTTOM_RIGHT,
+        offset_width: Numeric = 10,
+        offset_height: Numeric = 50,
+        is_open: bool = False,
+    ):
+        bmap_overview_config = json.dumps(
+            {
+                "anchor": position,
+                "offset": {"width": offset_width, "height": offset_height},
+                "isOpen": is_open,
+            }
+        )
+
+        self.opts: dict = {
+            "functions": [
+                "var overview = new BMap.OverviewMapControl({});".format(
+                    bmap_overview_config
+                ),
+                "bmap.addControl(overview);",
+            ]
+        }
+
+
+class BMapScaleControlOpts(BasicOpts):
+    def __init__(
+        self,
+        position: Numeric = BMapType.BMAP_ANCHOR_BOTTOM_LEFT,
+        offset_width: Numeric = 80,
+        offset_height: Numeric = 21,
+    ):
+        bmap_scale_config = json.dumps(
+            {
+                "anchor": position,
+                "offset": {"width": offset_width, "height": offset_height},
+            }
+        )
+
+        self.opts: dict = {
+            "functions": [
+                "bmap.addControl(new BMap.ScaleControl({}));".format(bmap_scale_config)
+            ]
+        }
+
+
+class BMapTypeControl(BasicOpts):
+    def __init__(
+        self,
+        position: Numeric = BMapType.BMAP_ANCHOR_TOP_RIGHT,
+        type_: Numeric = BMapType.BMAP_MAPTYPE_CONTROL_HORIZONTAL,
+    ):
+        bmap_type_config = json.dumps({"anchor": position, "type": type_})
+
+        self.opts: dict = {
+            "functions": [
+                "bmap.addControl(new BMap.MapTypeControl({}));".format(bmap_type_config)
+            ]
+        }
+
+
+class BMapCopyrightType(BasicOpts):
+    def __init__(
+        self,
+        position: Numeric = BMapType.BMAP_ANCHOR_BOTTOM_LEFT,
+        offset_width: Numeric = 2,
+        offset_height: Numeric = 2,
+        copy_right: str = "",
+    ):
+        bmap_copyright_config = json.dumps(
+            {
+                "anchor": position,
+                "offset": {"width": offset_width, "height": offset_height},
+            }
+        )
+
+        bmap_copyright_content_config = json.dumps({"id": 1, "content": copy_right})
+
+        self.opts: dict = {
+            "functions": [
+                "var copyright = new BMap.CopyrightControl({});".format(
+                    bmap_copyright_config
+                ),
+                "copyright.addCopyright({});".format(bmap_copyright_content_config),
+                "bmap.addControl(copyright);",
+            ]
+        }
+
+
+class BMapGeoLocationControlOpts(BasicOpts):
+    def __init__(
+        self,
+        position: Numeric = BMapType.BMAP_ANCHOR_BOTTOM_LEFT,
+        offset_width: Numeric = 10,
+        offset_height: Numeric = 10,
+        is_show_address_bar: bool = True,
+        is_enable_auto_location: bool = False,
+    ):
+        bmap_geo_location_config = json.dumps(
+            {
+                "anchor": position,
+                "offset": {"width": offset_width, "height": offset_height},
+                "showAddressBar": is_show_address_bar,
+                "enableAutoLocation": is_enable_auto_location,
+            }
+        )
+
+        self.opts: dict = {
+            "functions": [
+                "bmap.addControl(new BMap.GeolocationControl({}))".format(
+                    bmap_geo_location_config
+                )
+            ]
+        }
+
+
+class SunburstItem(BasicOpts):
+    def __init__(
+        self,
+        value: Optional[Numeric] = None,
+        name: Optional[str] = None,
+        link: Optional[str] = None,
+        target: Optional[str] = "blank",
+        label_opts: Union[LabelOpts, dict, None] = None,
+        itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
+        children: Optional[Sequence] = None,
+    ):
+        self.opts: dict = {
+            "value": value,
+            "name": name,
+            "link": link,
+            "target": target,
+            "label": label_opts,
+            "itemStyle": itemstyle_opts,
+            "children": children,
         }

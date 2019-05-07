@@ -1,4 +1,3 @@
-# coding=utf-8
 import uuid
 
 from jinja2 import Environment
@@ -14,9 +13,7 @@ from ...render.engine import RenderEngine
 
 class Page:
     """
-    <<< 同一网页按顺序展示多图 >>>
-
-    A container object to present multiple charts vertically in a single page
+    `Page` A container object to present multiple charts vertically in a single page
     """
 
     def __init__(
