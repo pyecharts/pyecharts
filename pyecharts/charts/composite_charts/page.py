@@ -93,11 +93,8 @@ class Page:
         template_name: str = "simple_page.html",
         env: Optional[Environment] = None,
     ):
-        self.js_functions=OrderedSet()
         for c in self:
             self.json_contents = c.dump_options()
-            for item in c.js_functions.items:
-                self.js_functions.add(item)
             if c.theme not in ThemeType.BUILTIN_THEMES:
                 self.js_dependencies.add(c.theme)
         html = RenderEngine(env).render_chart_to_template(template_name, chart=self)
