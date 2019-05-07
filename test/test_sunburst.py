@@ -1,12 +1,9 @@
-from unittest.mock import patch
-
 from nose.tools import eq_
 
 from pyecharts.charts import Sunburst
 
 
-@patch("pyecharts.render.engine.write_utf8_html_file")
-def test_sunburst_base(fake_writer):
+def test_sunburst_base():
     data = [
         {
             "name": "Grandpa",
