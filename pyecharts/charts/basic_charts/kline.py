@@ -6,9 +6,12 @@ from ...globals import ChartType
 
 class Kline(RectChart):
     """
-    <<< K 线图 >>>
+    <<< K-line >>>
 
-    红涨蓝跌
+    K-line shows the highest value, the lowest value,
+    the starting value and the ending value of the data on the day,
+    which is used to show the daily fluctuation of the data or
+    the fluctuation of a certain period.
     """
 
     def __init__(self, init_opts: opts.InitOpts = opts.InitOpts()):

@@ -6,10 +6,12 @@ from ...globals import ChartType
 
 class Scatter(RectChart):
     """
-    <<< 散点图 >>>
+    <<< Scatter >>>
 
-    直角坐标系上的散点图可以用来展现数据的 x，y 之间的关系，如果数据项有多个维度，
-    可以用颜色来表现，利用 geo 组件。
+    The scatter diagram on the rectangular coordinate system can be used to
+    show the relationship between x and y of the data. If the data item has
+    multiple dimensions, it can be represented by color, and the
+    visualmap component can be used.
     """
 
     def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):

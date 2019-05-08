@@ -6,9 +6,9 @@ from ...globals import ChartType
 
 class Line(RectChart):
     """
-    <<< 折线/面积图 >>>
+    <<< Line Chart >>>
 
-    折线图是用折线将各个数据点标志连接起来的图表，用于展现数据的变化趋势。
+    Line chart is a graph that connects all data points with single line to show the change trend of data.
     """
 
     def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):

@@ -6,10 +6,11 @@ from ...globals import ChartType
 
 class HeatMap(RectChart):
     """
-    <<< 热力图 >>>
+    <<< HeatMap >>>
 
-    热力图主要通过颜色去表现数值的大小，必须要配合 visualMap 组件使用。
-    直角坐标系上必须要使用两个类目轴。
+    The heat map is mainly used to represent the size of the value by color,
+    which must be used in conjunction with the visualMap component.
+    Two categories of axes must be used in rectangular coordinates.
     """
 
     def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):

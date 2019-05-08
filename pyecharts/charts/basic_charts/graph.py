@@ -6,9 +6,9 @@ from ...globals import ChartType
 
 class Graph(Chart):
     """
-    <<< 关系图 >>>
+    <<< Graph >>>
 
-    用于展现节点以及节点之间的关系数据。
+    The graph is used to represent nodes and the relational data between them.
     """
 
     def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):

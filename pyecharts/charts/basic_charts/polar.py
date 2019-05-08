@@ -6,9 +6,9 @@ from ...globals import ChartType
 
 class Polar(Chart):
     """
-    <<< 极坐标系 >>>
+    <<< Polar >>>
 
-    可以用于散点图和折线图。
+    Polar coordinates can be used for scatter and polyline graphs.
     """
 
     def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):

@@ -21,7 +21,10 @@ def gen_color():
 
 class WordCloud(Chart):
     """
-    <<< 词云图 >>>
+    <<< WordCloud >>>
+
+    Word cloud is to visually highlight the keywords that
+    appear frequently in the text.
     """
 
     def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):
