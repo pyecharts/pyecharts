@@ -1,5 +1,7 @@
 from unittest.mock import patch
 
+from nose.tools import assert_in, assert_not_in, eq_
+
 from pyecharts import options as opts
 from pyecharts.charts import Bar
 
@@ -11,8 +13,8 @@ def test_bar_base():
         .add_yaxis("series0", [1, 2, 4])
         .add_yaxis("series1", [2, 3, 6])
     )
-    assert c.theme == "white"
-    assert c.renderer == "canvas"
+    eq_(c.theme, "white")
+    eq_(c.renderer, "canvas")
     c.render("render.html")
 
 
@@ -30,10 +32,10 @@ def test_bar_title_options(fake_writer):
     )
     c.render("render.html")
     file_name, content = fake_writer.call_args[0]
-    assert "render.html" == file_name
-    assert "This is title." in content
-    assert "This is subtitle." in content
-    assert "null" not in content
+    eq_("render.html", file_name)
+    assert_in("This is title.", content)
+    assert_in("This is subtitle.", content)
+    assert_not_in("null", content)
 
 
 @patch("pyecharts.render.engine.write_utf8_html_file")
@@ -48,17 +50,17 @@ def test_bar_default_set_function(fake_writer):
 
     c.render("my_chart.html")
     file_name, content = fake_writer.call_args[0]
-    assert "my_chart.html" == file_name
-    assert "null" not in content
+    eq_("my_chart.html", file_name)
+    assert_not_in("null", content)
 
 
 @patch("pyecharts.render.engine.write_utf8_html_file")
 def test_bar_default_remote_host(fake_writer):
     c = Bar().add_xaxis(["A", "B", "C"]).add_yaxis("series0", [1, 2, 4])
     c.render()
-    assert c.js_host == "https://assets.pyecharts.org/assets/"
+    eq_(c.js_host, "https://assets.pyecharts.org/assets/")
     _, content = fake_writer.call_args[0]
-    assert "https://assets.pyecharts.org/assets/echarts.min.js" in content
+    assert_in("https://assets.pyecharts.org/assets/echarts.min.js", content)
 
 
 @patch("pyecharts.render.engine.write_utf8_html_file")
@@ -69,6 +71,6 @@ def test_bar_custom_remote_host(fake_writer):
         .add_yaxis("series0", [1, 2, 4])
     )
     c.render()
-    assert c.js_host == "http://localhost:8000/assets/"
+    eq_(c.js_host, "http://localhost:8000/assets/")
     _, content = fake_writer.call_args[0]
-    assert "http://localhost:8000/assets/echarts.min.js" in content
+    assert_in("http://localhost:8000/assets/echarts.min.js", content)

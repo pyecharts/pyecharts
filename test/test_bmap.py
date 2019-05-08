@@ -1,20 +1,22 @@
 from unittest.mock import patch
 
+from nose.tools import assert_in
+
 from pyecharts import options as opts
 from pyecharts.charts import BMap
 from pyecharts.globals import BMapType, ChartType
 
 BAIDU_MAP_API_PREFIX = "http://api.map.baidu.com/api?v=2.0"
+FAKE_API_KEY = "fake_application_key"
 
 
 @patch("pyecharts.render.engine.write_utf8_html_file")
 def test_bmap(fake_writer):
-    fake_api_key = "fake_application_key"
     provinces = ["London"]
     values = [1]
     bmap = (
         BMap()
-        .add_schema(baidu_ak=fake_api_key, center=[-0.118092, 51.509865])
+        .add_schema(baidu_ak=FAKE_API_KEY, center=[-0.118092, 51.509865])
         .add_coordinate("London", -0.118092, 51.509865)
         .add(
             "bmap",
@@ -25,20 +27,17 @@ def test_bmap(fake_writer):
     )
     bmap.render("render.html")
     content = fake_writer.call_args[0][1]
-    expected_baidu_key = f'src="{BAIDU_MAP_API_PREFIX}&ak={fake_api_key}"'
-    expected_map_type = '"coordinateSystem": "bmap"'
-    assert expected_baidu_key in content, "missing baidu api key"
-    assert expected_map_type in content, "non bmap found"
+    assert_in(f'src="{BAIDU_MAP_API_PREFIX}&ak={FAKE_API_KEY}"', content)
+    assert_in('"coordinateSystem": "bmap"', content, "non bmap found")
 
 
 @patch("pyecharts.render.engine.write_utf8_html_file")
 def test_bmap_effect_trail_length(fake_writer):
-    fake_api_key = "fake_application_key"
     provinces = ["London"]
     values = [1]
     bmap = (
         BMap()
-        .add_schema(baidu_ak=fake_api_key, center=[-0.118092, 51.509865])
+        .add_schema(baidu_ak=FAKE_API_KEY, center=[-0.118092, 51.509865])
         .add_coordinate("London", -0.118092, 51.509865)
         .add(
             "bmap",
@@ -52,18 +51,16 @@ def test_bmap_effect_trail_length(fake_writer):
     )
     bmap.render("render.html")
     content = fake_writer.call_args[0][1]
-    expected_trail_length = '"trailLength": 0.5'
-    assert expected_trail_length in content, "trainLength parameter is error"
+    assert_in('"trailLength": 0.5', content, "trainLength parameter is error")
 
 
 @patch("pyecharts.render.engine.write_utf8_html_file")
 def test_bmap_polyline_and_large(fake_writer):
-    fake_api_key = "fake_application_key"
     provinces = ["London"]
     values = [1]
     bmap = (
         BMap()
-        .add_schema(baidu_ak=fake_api_key, center=[-0.118092, 51.509865])
+        .add_schema(baidu_ak=FAKE_API_KEY, center=[-0.118092, 51.509865])
         .add_coordinate("London", -0.118092, 51.509865)
         .add(
             "bmap",
@@ -77,20 +74,17 @@ def test_bmap_polyline_and_large(fake_writer):
     )
     bmap.render("render.html")
     content = fake_writer.call_args[0][1]
-    expected_poly_line = '"polyline": true'
-    expected_large = '"large": true'
-    assert expected_poly_line in content, "polyline parameter is error"
-    assert expected_large in content, "large parameter is error"
+    assert_in('"polyline": true', content, "polyline parameter is error")
+    assert_in('"large": true', content, "large parameter is error")
 
 
 @patch("pyecharts.render.engine.write_utf8_html_file")
 def test_bmap_map_control_panel(fake_writer):
-    fake_api_key = "fake_application_key"
     provinces = ["London"]
     values = [1]
     bmap = (
         BMap()
-        .add_schema(baidu_ak=fake_api_key, center=[-0.118092, 51.509865])
+        .add_schema(baidu_ak=FAKE_API_KEY, center=[-0.118092, 51.509865])
         .add_coordinate("London", -0.118092, 51.509865)
         .add(
             "bmap",
@@ -112,21 +106,9 @@ def test_bmap_map_control_panel(fake_writer):
     )
     bmap.render("render.html")
     content = fake_writer.call_args[0][1]
-    expected_copyright_control = "new BMap.CopyrightControl"
-    expected_map_type_control = "new BMap.MapTypeControl"
-    expected_scale_control = "new BMap.ScaleControl"
-    expected_overview_map_control = "new BMap.OverviewMapControl"
-    expected_navigation_control = "new BMap.NavigationControl"
-    expected_geo_location_control = "new BMap.GeolocationControl"
-    assert expected_copyright_control in content, "copyright function isn`t initialize"
-    assert expected_map_type_control in content, "maptype function isn`t initialize"
-    assert expected_scale_control in content, "scale function isn`t initialize"
-    assert (
-        expected_overview_map_control in content
-    ), "overview function isn`t initialize"
-    assert (
-        expected_navigation_control in content
-    ), "navigation function isn`t initialize"
-    assert (
-        expected_geo_location_control in content
-    ), "geo_location function isn`t initialize"
+    assert_in("new BMap.CopyrightControl", content)
+    assert_in("new BMap.MapTypeControl", content)
+    assert_in("new BMap.ScaleControl", content)
+    assert_in("new BMap.OverviewMapControl", content)
+    assert_in("new BMap.NavigationControl", content)
+    assert_in("new BMap.GeolocationControl", content)

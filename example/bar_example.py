@@ -1,4 +1,3 @@
-# coding=utf-8
 from example.commons import Collector, Faker
 from pyecharts import options as opts
 from pyecharts.charts import Bar, Page
@@ -47,6 +46,18 @@ def bar_toolbox() -> Bar:
 
 
 @C.funcs
+def bar_gap() -> Bar:
+    c = (
+        Bar()
+        .add_xaxis(Faker.choose())
+        .add_yaxis("商家A", Faker.values(), gap="0%")
+        .add_yaxis("商家B", Faker.values(), gap="0%")
+        .set_global_opts(title_opts=opts.TitleOpts(title="Bar-不同系列柱间距离"))
+    )
+    return c
+
+
+@C.funcs
 def bar_yaxis_formatter() -> Bar:
     c = (
         Bar()
@@ -58,6 +69,22 @@ def bar_yaxis_formatter() -> Bar:
             yaxis_opts=opts.AxisOpts(
                 axislabel_opts=opts.LabelOpts(formatter="{value} /月")
             ),
+        )
+    )
+    return c
+
+
+@C.funcs
+def bar_xyaxis_name() -> Bar:
+    c = (
+        Bar()
+        .add_xaxis(Faker.choose())
+        .add_yaxis("商家A", Faker.values())
+        .add_yaxis("商家B", Faker.values())
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="Bar-XY 轴名称"),
+            yaxis_opts=opts.AxisOpts(name="我是 Y 轴"),
+            xaxis_opts=opts.AxisOpts(name="我是 X 轴"),
         )
     )
     return c

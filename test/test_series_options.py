@@ -3,7 +3,7 @@ from nose.tools import eq_
 from pyecharts.options.series_options import LabelOpts
 
 
-def test_label_options_1043_defaults():
+def test_label_options_defaults():
     option = LabelOpts()
     expected = {
         "show": True,
@@ -27,7 +27,7 @@ def test_label_options_1043_defaults():
     eq_(expected, option.opts)
 
 
-def test_label_options_1043_custom():
+def test_label_options_custom():
     option = LabelOpts(
         background_color="red", border_color="green", border_width=1, border_radius=2
     )

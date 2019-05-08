@@ -1,4 +1,3 @@
-# coding=utf-8
 from example.commons import Collector, Faker
 from pyecharts import options as opts
 from pyecharts.charts import Page, Pie
@@ -12,6 +11,24 @@ def pie_base() -> Pie:
         Pie()
         .add("", [list(z) for z in zip(Faker.choose(), Faker.values())])
         .set_global_opts(title_opts=opts.TitleOpts(title="Pie-基本示例"))
+        .set_series_opts(label_opts=opts.LabelOpts(formatter="{b}: {c}"))
+    )
+    return c
+
+
+@C.funcs
+def pie_position() -> Pie:
+    c = (
+        Pie()
+        .add(
+            "",
+            [list(z) for z in zip(Faker.choose(), Faker.values())],
+            center=["35%", "50%"],
+        )
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="Pie-调整位置"),
+            legend_opts=opts.LegendOpts(pos_left="15%"),
+        )
         .set_series_opts(label_opts=opts.LabelOpts(formatter="{b}: {c}"))
     )
     return c

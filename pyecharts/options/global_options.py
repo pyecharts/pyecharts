@@ -1,4 +1,4 @@
-from ..commons.types import JSFunc, List, Numeric, Optional, Sequence, Union
+from ..commons.types import JSFunc, Numeric, Optional, Sequence, Union
 from ..globals import RenderType, ThemeType
 from ..options.series_options import (
     BasicOpts,
@@ -102,7 +102,7 @@ class TitleOpts(BasicOpts):
         title_textstyle_opts: Union[TextStyleOpts, dict, None] = None,
         subtitle_textstyle_opts: Union[TextStyleOpts, dict, None] = None,
     ):
-        self.opts: List = [
+        self.opts: Sequence = [
             {
                 "text": title,
                 "link": title_link,
@@ -134,6 +134,10 @@ class DataZoomOpts(BasicOpts):
         xaxis_index: Union[int, Sequence[int], None] = None,
         yaxis_index: Union[int, Sequence[int], None] = None,
         is_zoom_lock: bool = False,
+        pos_left: Optional[str] = None,
+        pos_right: Optional[str] = None,
+        pos_top: Optional[str] = None,
+        pos_bottom: Optional[str] = None,
     ):
         self.opts: dict = {
             "show": is_show,
@@ -147,6 +151,10 @@ class DataZoomOpts(BasicOpts):
             "xAxisIndex": xaxis_index,
             "yAxisIndex": yaxis_index,
             "zoomLock": is_zoom_lock,
+            "left": pos_left,
+            "right": pos_right,
+            "top": pos_top,
+            "bottom": pos_bottom,
         }
 
 
@@ -546,7 +554,7 @@ class RadiusAxisItem(BasicOpts):
     def __init__(
         self,
         value: Optional[str] = None,
-        textstyle_opts: Optional[TextStyleOpts] = None,
+        textstyle_opts: Union[TextStyleOpts, dict, None] = None,
     ):
         self.opts: dict = {"value": value, "textStyle": textstyle_opts}
 

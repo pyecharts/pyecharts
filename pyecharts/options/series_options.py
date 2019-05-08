@@ -1,11 +1,17 @@
 import json
 
-from ..commons.types import JSFunc, List, Numeric, Optional, Sequence, Tuple, Union
+from ..commons.types import Any, JSFunc, Numeric, Optional, Sequence, Tuple, Union
 from ..globals import BMapType
 
 
 class BasicOpts:
-    pass
+    __slots__ = ("opts",)
+
+    def update(self, **kwargs):
+        self.opts.update(kwargs)
+
+    def get(self, key: str) -> Any:
+        return self.opts.get(key)
 
 
 class ItemStyleOpts(BasicOpts):
@@ -175,19 +181,11 @@ class MarkPointOpts(BasicOpts):
         symbol_size: Union[None, Numeric] = None,
         label_opts: LabelOpts = LabelOpts(position="inside", color="#fff"),
     ):
-        _data = []
-        if data:
-            for d in data:
-                if isinstance(d, dict):
-                    _data.append(d)
-                else:
-                    _data.append(d.opts)
-
         self.opts: dict = {
             "symbol": symbol,
             "symbolSize": symbol_size,
             "label": label_opts,
-            "data": _data,
+            "data": data,
         }
 
 
@@ -227,21 +225,13 @@ class MarkLineOpts(BasicOpts):
         precision: int = 2,
         label_opts: LabelOpts = LabelOpts(),
     ):
-        _data = []
-        if data:
-            for d in data:
-                if isinstance(d, dict):
-                    _data.append(d)
-                else:
-                    _data.append(d.opts)
-
         self.opts: dict = {
             "silent": is_silent,
             "symbol": symbol,
             "symbolSize": symbol_size,
             "precision": precision,
             "label": label_opts,
-            "data": _data,
+            "data": data,
         }
 
 
@@ -257,7 +247,7 @@ class MarkAreaItem(BasicOpts):
         label_opts: Union[LabelOpts, dict, None] = None,
         itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
     ):
-        self.opts: List = [
+        self.opts: Sequence = [
             {
                 "name": name,
                 "type": type_[0],
@@ -285,15 +275,7 @@ class MarkAreaOpts(BasicOpts):
         label_opts: LabelOpts = LabelOpts(),
         data: Sequence[Union[MarkAreaItem, dict]] = None,
     ):
-        _data = []
-        if data:
-            for d in data:
-                if isinstance(d, dict):
-                    _data.append(d)
-                else:
-                    _data.append(d.opts)
-
-        self.opts: dict = {"silent": is_silent, "label": label_opts, "data": _data}
+        self.opts: dict = {"silent": is_silent, "label": label_opts, "data": data}
 
 
 class EffectOpts(BasicOpts):
@@ -339,7 +321,7 @@ class GraphNode(BasicOpts):
         category: Optional[int] = None,
         symbol: Optional[str] = None,
         symbol_size: Union[Numeric, Sequence, None] = None,
-        label_opts: Optional[LabelOpts] = None,
+        label_opts: Union[LabelOpts, dict, None] = None,
     ):
         self.opts: dict = {
             "name": name,
@@ -362,8 +344,8 @@ class GraphLink(BasicOpts):
         value: Optional[Numeric] = None,
         symbol: Union[str, Sequence, None] = None,
         symbol_size: Union[Numeric, Sequence, None] = None,
-        linestyle_opts: Optional[LineStyleOpts] = None,
-        label_opts: Optional[LabelOpts] = None,
+        linestyle_opts: Union[LineStyleOpts, dict, None] = None,
+        label_opts: Union[LabelOpts, dict, None] = None,
     ):
         self.opts: dict = {
             "source": source,
@@ -382,7 +364,7 @@ class GraphCategory(BasicOpts):
         name: Optional[str] = None,
         symbol: Optional[str] = None,
         symbol_size: Union[Numeric, Sequence, None] = None,
-        label_opts: Optional[LabelOpts] = None,
+        label_opts: Union[LabelOpts, dict, None] = None,
     ):
         self.opts: dict = {
             "name": name,
@@ -397,7 +379,7 @@ class TreeItem(BasicOpts):
         self,
         name: Optional[str] = None,
         value: Optional[Numeric] = None,
-        label_opts: Optional[LabelOpts] = None,
+        label_opts: Union[LabelOpts, dict, None] = None,
         children: Optional[Sequence] = None,
     ):
         self.opts: dict = {
@@ -505,7 +487,7 @@ class BMapCopyrightType(BasicOpts):
         position: Numeric = BMapType.BMAP_ANCHOR_BOTTOM_LEFT,
         offset_width: Numeric = 2,
         offset_height: Numeric = 2,
-        copy_right: str = "",
+        copyright_: str = "",
     ):
         bmap_copyright_config = json.dumps(
             {
@@ -514,7 +496,7 @@ class BMapCopyrightType(BasicOpts):
             }
         )
 
-        bmap_copyright_content_config = json.dumps({"id": 1, "content": copy_right})
+        bmap_copyright_content_config = json.dumps({"id": 1, "content": copyright_})
 
         self.opts: dict = {
             "functions": [

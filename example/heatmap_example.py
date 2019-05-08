@@ -1,4 +1,3 @@
-# coding=utf-8
 import random
 
 from example.commons import Collector, Faker

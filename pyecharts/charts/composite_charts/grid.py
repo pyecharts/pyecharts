@@ -1,7 +1,8 @@
 import copy
 
 from ... import options as opts
-from ...commons.types import Optional, Union
+from ...commons.types import Optional, Sequence, Union
+from ...globals import ThemeType
 from ..chart import Base, RectChart
 
 
@@ -28,13 +29,17 @@ class Grid(Base):
             self.options = copy.deepcopy(chart.options)
             self.chart_id = chart.chart_id
             self.options.update(grid=[], title=[])
+            if self.theme != ThemeType.WHITE:
+                self.options.update(color=[])
             for s in self.options.get("series"):
                 s.update(xAxisIndex=self._axis_index, yAxisIndex=self._axis_index)
 
         title = chart.options.get("title", opts.TitleOpts().opts)
-        self.options.update(
-            title=self.options.get("title", opts.TitleOpts().opts) + title
-        )
+        if isinstance(title, opts.TitleOpts):
+            title = title.opts
+        if not isinstance(title, Sequence):
+            title = (title,)
+        self.options.get("title").extend(title)
 
         for s in chart.options.get("series"):
             s.update(xAxisIndex=self._axis_index, yAxisIndex=self._axis_index)

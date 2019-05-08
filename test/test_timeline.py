@@ -1,10 +1,12 @@
+import unittest
+
 from nose.tools import eq_
 
 from pyecharts import options as opts
 from pyecharts.charts import Bar, Timeline
 
 
-class TestTimeLine:
+class TestTimeLine(unittest.TestCase):
     def setUp(self):
         bar0 = (
             Bar()

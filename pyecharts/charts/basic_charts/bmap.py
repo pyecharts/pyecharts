@@ -1,7 +1,7 @@
 from ... import options as opts
 from ...charts.basic_charts.geo import GeoChartBase
-from ...commons import utils
 from ...commons.types import Optional, Sequence, Union
+from ...commons.utils import OrderedSet
 
 BAIDU_MAP_API = "http://api.map.baidu.com/api?v=2.0&ak={}"
 BAIDU_MAP_GETSCRIPT = "http://api.map.baidu.com/getscript?v=2.0&ak={}"
@@ -10,6 +10,7 @@ BAIDU_MAP_GETSCRIPT = "http://api.map.baidu.com/getscript?v=2.0&ak={}"
 class BMap(GeoChartBase):
     """
     <<< Baidu coordinate system >>>
+
     Support scatter plot, line
     """
 
@@ -18,7 +19,7 @@ class BMap(GeoChartBase):
         self.js_dependencies.add("bmap")
         self._is_geo_chart = True
         self._coordinate_system: Optional[str] = "bmap"
-        self.js_bmap_functions: utils.OrderedSet = utils.OrderedSet()
+        self.bmap_js_functions: OrderedSet = OrderedSet()
 
     def add_schema(
         self,
@@ -43,12 +44,16 @@ class BMap(GeoChartBase):
 
     def add_control_panel(
         self,
-        navigation_control_opts: Union[opts.BMapNavigationControlOpts, None] = None,
-        overview_map_opts: Union[opts.BMapOverviewMapControlOpts, None] = None,
-        scale_control_opts: Union[opts.BMapScaleControlOpts, None] = None,
-        maptype_control_opts: Union[opts.BMapTypeControl, None] = None,
-        copyright_control_opts: Union[opts.BMapCopyrightType, None] = None,
-        geo_location_control_opts: Union[opts.BMapGeoLocationControlOpts, None] = None,
+        navigation_control_opts: Union[
+            opts.BMapNavigationControlOpts, dict, None
+        ] = None,
+        overview_map_opts: Union[opts.BMapOverviewMapControlOpts, dict, None] = None,
+        scale_control_opts: Union[opts.BMapScaleControlOpts, dict, None] = None,
+        maptype_control_opts: Union[opts.BMapTypeControl, dict, None] = None,
+        copyright_control_opts: Union[opts.BMapCopyrightType, dict, None] = None,
+        geo_location_control_opts: Union[
+            opts.BMapGeoLocationControlOpts, dict, None
+        ] = None,
     ):
         panel_options = [
             navigation_control_opts,
@@ -61,12 +66,8 @@ class BMap(GeoChartBase):
 
         for panel in panel_options:
             if panel is not None:
-                fns = panel.opts.get("functions")
+                fns = panel.get("functions")
                 for fn in fns:
-                    self.add_js_funcs(fn)
+                    self.bmap_js_functions.add(fn)
 
         return self
-
-    def add_js_funcs(self, *fns: Sequence):
-        for fn in fns:
-            self.js_bmap_functions.add(fn)
