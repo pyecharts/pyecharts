@@ -8,7 +8,8 @@ class Line(RectChart):
     """
     <<< Line Chart >>>
 
-    Line chart is a graph that connects all data points with single line to show the change trend of data.
+    Line chart is a graph that connects all data points
+    with single line to show the change trend of data.
     """
 
     def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):
