@@ -288,6 +288,7 @@ class EffectOpts(BasicOpts):
         color: Optional[str] = None,
         symbol: Optional[str] = None,
         symbol_size: Optional[Numeric] = None,
+        trail_length: Optional[Numeric] = None,
     ):
         self.opts: dict = {
             "show": is_show,
@@ -297,6 +298,7 @@ class EffectOpts(BasicOpts):
             "color": color,
             "symbol": symbol,
             "symbolSize": symbol_size,
+            "trailLength": trail_length,
         }
 
 
