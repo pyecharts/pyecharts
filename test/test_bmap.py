@@ -95,7 +95,7 @@ def test_bmap_map_control_panel(fake_writer):
         .add_control_panel(
             copyright_control_opts=opts.BMapCopyrightType(position=3),
             maptype_control_opts=opts.BMapTypeControl(
-                type_=BMapType.BMAP_MAPTYPE_CONTROL_DROPDOWN
+                type_=BMapType.MAPTYPE_CONTROL_DROPDOWN
             ),
             scale_control_opts=opts.BMapScaleControlOpts(),
             overview_map_opts=opts.BMapOverviewMapControlOpts(is_open=True),
