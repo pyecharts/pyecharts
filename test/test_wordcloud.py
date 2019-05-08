@@ -1,3 +1,5 @@
+from nose.tools import eq_
+
 from pyecharts.charts import WordCloud
 
 words = [
@@ -14,6 +16,6 @@ words = [
 
 def test_wordcloud_base():
     c = WordCloud().add("", words, word_size_range=[20, 100])
-    assert c.theme == "white"
-    assert c.renderer == "canvas"
-    c.render("render.html")
+    eq_(c.theme, "white")
+    eq_(c.renderer, "canvas")
+    c.render()

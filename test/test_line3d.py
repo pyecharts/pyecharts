@@ -1,5 +1,7 @@
 import math
 
+from nose.tools import eq_
+
 from example.commons import Faker
 from pyecharts import options as opts
 from pyecharts.charts import Line3D
@@ -28,6 +30,6 @@ def test_line3d_base():
             )
         )
     )
-    assert c.theme == "white"
-    assert c.renderer == "canvas"
-    c.render("render.html")
+    eq_(c.theme, "white")
+    eq_(c.renderer, "canvas")
+    c.render()

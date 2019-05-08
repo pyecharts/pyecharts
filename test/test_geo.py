@@ -1,3 +1,5 @@
+from nose.tools import eq_
+
 from example.commons import Faker
 from pyecharts import options as opts
 from pyecharts.charts import Geo
@@ -11,6 +13,6 @@ def test_geo_base():
         .set_series_opts(label_opts=opts.LabelOpts(is_show=False))
         .set_global_opts(visualmap_opts=opts.VisualMapOpts())
     )
-    assert c.theme == "white"
-    assert c.renderer == "canvas"
-    c.render("render.html")
+    eq_(c.theme, "white")
+    eq_(c.renderer, "canvas")
+    c.render()

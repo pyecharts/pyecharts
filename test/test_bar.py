@@ -16,7 +16,7 @@ def test_bar_base():
     )
     eq_(c.theme, "white")
     eq_(c.renderer, "canvas")
-    c.render("render.html")
+    c.render()
 
 
 @patch("pyecharts.render.engine.write_utf8_html_file")

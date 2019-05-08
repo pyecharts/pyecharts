@@ -1,3 +1,5 @@
+from nose.tools import eq_
+
 from pyecharts.charts import Parallel
 
 
@@ -24,6 +26,6 @@ def test_parallel_base():
         )
         .add("parallel", data)
     )
-    assert c.theme == "white"
-    assert c.renderer == "canvas"
-    c.render("render.html")
+    eq_(c.theme, "white")
+    eq_(c.renderer, "canvas")
+    c.render()

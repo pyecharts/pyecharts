@@ -1,3 +1,5 @@
+from nose.tools import eq_
+
 from pyecharts.charts import Graph
 
 
@@ -13,6 +15,6 @@ def test_graph_base():
         for j in nodes:
             links.append({"source": i.get("name"), "target": j.get("name")})
     c = Graph().add("", nodes, links, repulsion=8000)
-    assert c.theme == "white"
-    assert c.renderer == "canvas"
-    c.render("render.html")
+    eq_(c.theme, "white")
+    eq_(c.renderer, "canvas")
+    c.render()
