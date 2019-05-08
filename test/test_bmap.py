@@ -43,8 +43,7 @@ def test_bmap_effect_trail_length(fake_writer):
             "bmap",
             [list(z) for z in zip(provinces, values)],
             type_=ChartType.LINES,
-            trail_length=0.5,
-            effect_opts=opts.EffectOpts(),
+            effect_opts=opts.EffectOpts(trail_length=0.5),
             label_opts=opts.LabelOpts(formatter="{b}"),
         )
         .set_global_opts(title_opts=opts.TitleOpts(title="BMap-polyline-large"))
