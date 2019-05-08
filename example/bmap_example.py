@@ -15,10 +15,7 @@ def bmap_base() -> BMap:
 
     c = (
         BMap()
-        .add_schema(
-            baidu_ak=BAIDU_MAP_AK,
-            center=[120.13066322374, 30.240018034923],
-        )
+        .add_schema(baidu_ak=BAIDU_MAP_AK, center=[120.13066322374, 30.240018034923])
         .add(
             "bmap",
             [list(z) for z in zip(Faker.provinces, Faker.values())],

@@ -24,6 +24,10 @@ class Chart(Base):
             tooltip=opts.TooltipOpts().opts,
         )
 
+    def set_colors(self, colors: Sequence[str]):
+        self.options.update(color=colors)
+        return self
+
     def set_series_opts(
         self,
         label_opts: Union[opts.LabelOpts, dict, None] = None,

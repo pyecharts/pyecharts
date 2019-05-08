@@ -19,6 +19,17 @@ def test_bar_base():
 
 
 @patch("pyecharts.render.engine.write_utf8_html_file")
+def test_bar_colors(fake_writer):
+    c = Bar().add_xaxis(["A", "B", "C"]).add_yaxis("series0", [1, 2, 4])
+    c.set_colors(["#AABBCC", "#BBCCDD", "#CCDDEE"] + c.colors)
+    c.render("render.html")
+    _, content = fake_writer.call_args[0]
+    assert_in("#AABBCC", content)
+    assert_in("#BBCCDD", content)
+    assert_in("#CCDDEE", content)
+
+
+@patch("pyecharts.render.engine.write_utf8_html_file")
 def test_bar_title_options(fake_writer):
     c = (
         Bar()
