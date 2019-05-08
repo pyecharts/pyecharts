@@ -23,7 +23,6 @@ def test_bmap(fake_writer):
             [list(z) for z in zip(provinces, values)],
             label_opts=opts.LabelOpts(formatter="{b}"),
         )
-        .set_global_opts(title_opts=opts.TitleOpts(title="BMap-基本示例"))
     )
     bmap.render("render.html")
     content = fake_writer.call_args[0][1]
@@ -46,7 +45,6 @@ def test_bmap_effect_trail_length(fake_writer):
             effect_opts=opts.EffectOpts(trail_length=0.5),
             label_opts=opts.LabelOpts(formatter="{b}"),
         )
-        .set_global_opts(title_opts=opts.TitleOpts(title="BMap-polyline-large"))
     )
     bmap.render("render.html")
     content = fake_writer.call_args[0][1]
@@ -69,7 +67,6 @@ def test_bmap_polyline_and_large(fake_writer):
             type_=ChartType.LINES,
             label_opts=opts.LabelOpts(formatter="{b}"),
         )
-        .set_global_opts(title_opts=opts.TitleOpts(title="BMap-polyline-large"))
     )
     bmap.render("render.html")
     content = fake_writer.call_args[0][1]
@@ -101,7 +98,6 @@ def test_bmap_map_control_panel(fake_writer):
             navigation_control_opts=opts.BMapNavigationControlOpts(),
             geo_location_control_opts=opts.BMapGeoLocationControlOpts(),
         )
-        .set_global_opts(title_opts=opts.TitleOpts(title="BMap-控制面板示例"))
     )
     bmap.render("render.html")
     content = fake_writer.call_args[0][1]
