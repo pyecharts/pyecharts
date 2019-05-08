@@ -1,3 +1,5 @@
+from nose.tools import eq_
+
 from pyecharts.charts import Line
 
 
@@ -8,6 +10,6 @@ def test_bar_base():
         .add_yaxis("series0", [1, 2, 4])
         .add_yaxis("series1", [2, 3, 6])
     )
-    assert c.theme == "white"
-    assert c.renderer == "canvas"
-    c.render("render.html")
+    eq_(c.theme, "white")
+    eq_(c.renderer, "canvas")
+    c.render()

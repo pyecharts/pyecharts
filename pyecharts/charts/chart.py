@@ -41,6 +41,7 @@ class Chart(Base):
         effect_opts: Union[opts.EffectOpts, dict] = opts.EffectOpts(),
         tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
         itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
+        **kwargs,
     ):
         _series = self.options.get("series")
         if label_opts:
@@ -86,6 +87,10 @@ class Chart(Base):
         if itemstyle_opts:
             for s in _series:
                 s.update(itemStyle=itemstyle_opts)
+
+        if len(kwargs) > 0:
+            for s in _series:
+                s.update(kwargs)
 
         return self
 

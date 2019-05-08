@@ -1,3 +1,5 @@
+from nose.tools import eq_
+
 from pyecharts.charts import Boxplot
 
 
@@ -14,6 +16,6 @@ def test_boxpolt_base():
     c.add_xaxis(["expr1", "expr2"]).add_yaxis("A", c.prepare_data(v1)).add_yaxis(
         "B", c.prepare_data(v2)
     )
-    assert c.theme == "white"
-    assert c.renderer == "canvas"
-    c.render("render.html")
+    eq_(c.theme, "white")
+    eq_(c.renderer, "canvas")
+    c.render()

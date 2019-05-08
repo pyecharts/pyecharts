@@ -1,3 +1,5 @@
+from nose.tools import eq_
+
 from pyecharts import options as opts
 from pyecharts.charts import Sankey
 
@@ -16,6 +18,6 @@ def test_sankey_base():
         linestyle_opt=opts.LineStyleOpts(opacity=0.2, curve=0.5, color="source"),
         label_opts=opts.LabelOpts(position="right"),
     )
-    assert c.theme == "white"
-    assert c.renderer == "canvas"
-    c.render("render.html")
+    eq_(c.theme, "white")
+    eq_(c.renderer, "canvas")
+    c.render()
