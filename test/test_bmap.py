@@ -24,7 +24,7 @@ def test_bmap(fake_writer):
             label_opts=opts.LabelOpts(formatter="{b}"),
         )
     )
-    bmap.render("render.html")
+    bmap.render()
     content = fake_writer.call_args[0][1]
     assert_in(f'src="{BAIDU_MAP_API_PREFIX}&ak={FAKE_API_KEY}"', content)
     assert_in('"coordinateSystem": "bmap"', content, "non bmap found")
@@ -68,7 +68,7 @@ def test_bmap_polyline_and_large(fake_writer):
             label_opts=opts.LabelOpts(formatter="{b}"),
         )
     )
-    bmap.render("render.html")
+    bmap.render()
     content = fake_writer.call_args[0][1]
     assert_in('"polyline": true', content, "polyline parameter is error")
     assert_in('"large": true', content, "large parameter is error")
@@ -99,7 +99,7 @@ def test_bmap_map_control_panel(fake_writer):
             geo_location_control_opts=opts.BMapGeoLocationControlOpts(),
         )
     )
-    bmap.render("render.html")
+    bmap.render()
     content = fake_writer.call_args[0][1]
     assert_in("new BMap.CopyrightControl", content)
     assert_in("new BMap.MapTypeControl", content)
