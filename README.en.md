@@ -10,7 +10,7 @@
         <img src="https://travis-ci.org/pyecharts/pyecharts.svg?branch=master" alt="Travis Build Status">
     </a>
     <a href="https://ci.appveyor.com/project/chenjiandongx/pyecharts">
-        <img src="https://ci.appveyor.com/api/projects/status/81cbsfjpfryv1cl8?svg=true" alt="Appveyor Build Status">
+        <img src="https://ci.appveyor.com/api/projects/status/81cbsfjpfryv1cl8/branch/master?svg=true" alt="Appveyor Build Status">
     </a>
     <a href="https://codecov.io/gh/pyecharts/pyecharts">
         <img src="https://codecov.io/gh/pyecharts/pyecharts/branch/master/graph/badge.svg" alt="Codecov">

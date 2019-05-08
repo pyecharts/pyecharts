@@ -7,10 +7,10 @@
 </p>
 <p align="center">
     <a href="https://travis-ci.org/pyecharts/pyecharts">
-        <img src="https://travis-ci.org/pyecharts/pyecharts.svg?branch=2019" alt="Travis Build Status">
+        <img src="https://travis-ci.org/pyecharts/pyecharts.svg?branch=master" alt="Travis Build Status">
     </a>
     <a href="https://ci.appveyor.com/project/chenjiandongx/pyecharts">
-        <img src="https://ci.appveyor.com/api/projects/status/81cbsfjpfryv1cl8?svg=true" alt="Appveyor Build Status">
+        <img src="https://ci.appveyor.com/api/projects/status/81cbsfjpfryv1cl8/branch/master?svg=true" alt="Appveyor Build Status">
     </a>
     <a href="https://codecov.io/gh/pyecharts/pyecharts">
         <img src="https://codecov.io/gh/pyecharts/pyecharts/branch/master/graph/badge.svg" alt="Codecov">
@@ -52,7 +52,7 @@
 
 ## ⏳ 版本
 
-v0.5.X 和 V1.0.X 间完全不兼容，V1.0.X 是一个全新的版本，详见 [ISSUE#892](https://github.com/pyecharts/pyecharts/issues/892)
+v0.5.X 和 V1 间不兼容，V1 是一个全新的版本，详见 [ISSUE#892](https://github.com/pyecharts/pyecharts/issues/892)
 
 ### V0.5.X
 
@@ -60,7 +60,7 @@ v0.5.X 和 V1.0.X 间完全不兼容，V1.0.X 是一个全新的版本，详见 
 
 经开发团队决定，0.5.x 版本将不再进行维护，0.5.x 版本代码位于 *05x* 分支，文档位于 [05x-docs.pyecharts.org](http://05x-docs.pyecharts.org)。
 
-### V1.0.X
+### V1
 
 > 仅支持 Python3.6+
 
@@ -151,7 +151,7 @@ make_snapshot(driver, bar_chart().render(), "bar.png")
 
 ## 🔖 Demo
 
-> Demo 代码位于 example 文件夹下。
+> Demo 代码位于 example 文件夹下，欢迎参考 pyecharts 画廊 [pyecharts-gallery](https://github.com/pyecharts/pyecharts-gallery)。
 
 <div align="center">
 <img src="https://user-images.githubusercontent.com/19553554/52197440-843a5200-289a-11e9-8601-3ce8d945b04a.gif" width="33%" alt="bar"/>
