@@ -6,10 +6,11 @@ from ...globals import ChartType
 
 class Sankey(Chart):
     """
-    <<< 桑基图  >>>
+    <<< Sankey >>>
 
-    桑基图是一种特殊的流图, 它主要用来表示原材料、能量等如何从初始形式经过中
-    间过程的加工、转化到达最终形式。
+    Sankey diagram is a special flow diagram, which is mainly used to
+    express how raw materials, energy and so on from the initial form through
+    the intermediate process of processing, transformation to the final form.
     """
 
     def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):

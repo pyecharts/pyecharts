@@ -6,9 +6,10 @@ from ...globals import ChartType
 
 class Parallel(Chart):
     """
-    <<< 平行坐标系 >>>
+    <<< Parallel >>>
 
-    平行坐标系是一种常用的可视化高维数据的图表。
+    Parallel coordinate systems are commonly used to visualize graphs of
+    high dimensional data.
     """
 
     def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):

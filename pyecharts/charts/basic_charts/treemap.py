@@ -6,10 +6,10 @@ from ...globals import ChartType
 
 class TreeMap(Chart):
     """
-    <<< 树图 >>>
+    <<< TreeMap >>>
 
-    树图是一种常见的表达『层级数据』『树状数据』的可视化形式。它主要用面积的方式，
-    便于突出展现出『树』的各层级中重要的节点。
+    TreeMap are a common visual representation of "hierarchical data" and "tree data".
+    It mainly uses area to highlight the important nodes in the hierarchy of "tree".
     """
 
     def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):

@@ -6,9 +6,9 @@ from ...globals import ChartType
 
 class Radar(Chart):
     """
-    <<< 雷达图 >>>
+    <<< Radar >>>
 
-    雷达图主要用于表现多变量的数据。
+    Radar maps are mainly used to represent multivariable data.
     """
 
     def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):

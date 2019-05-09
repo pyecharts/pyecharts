@@ -6,10 +6,11 @@ from ...globals import ChartType
 
 class Boxplot(RectChart):
     """
-    <<< 箱形图 >>>
+    <<< Boxplot >>>
 
-    箱形图是一种用作显示一组数据分散情况资料的统计图。它能显示出一组数据
-    的最大值、最小值、中位数、下四分位数及上四分位数。
+    A box-plot is a statistical chart used to show a set of data dispersion data.
+    It displays the maximum, minimum, median, lower quartile, and upper quartile
+    of a set of data.
     """
 
     def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):

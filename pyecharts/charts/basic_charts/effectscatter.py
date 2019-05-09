@@ -6,9 +6,9 @@ from ...globals import ChartType
 
 class EffectScatter(RectChart):
     """
-    <<< 带有涟漪特效动画的散点图 >>>
+    <<< Scatter plots with ripple effects animation >>>
 
-    利用动画特效可以将某些想要突出的数据进行视觉突出。
+    Use animation effects to visually highlight designated data set.
     """
 
     def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):

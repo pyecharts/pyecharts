@@ -6,7 +6,13 @@ from ...globals import ChartType
 
 class Funnel(Chart):
     """
-    <<< 漏斗图 >>>
+    <<< Funnel >>>
+
+    Funnel diagram is suitable for one-way analysis of single process
+    with standardized business process, long cycle and multiple links.
+    Through comparison of business data of each link in the funnel,
+    the link where the potential problems can be found intuitively,
+    and then decisions can be made.
     """
 
     def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):

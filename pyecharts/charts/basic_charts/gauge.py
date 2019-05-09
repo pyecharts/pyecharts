@@ -6,7 +6,9 @@ from ...globals import ChartType
 
 class Gauge(Chart):
     """
-    <<< 仪表盘 >>>
+    <<< Gauge >>>
+
+    The gauge displays a single key business measure.
     """
 
     def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):

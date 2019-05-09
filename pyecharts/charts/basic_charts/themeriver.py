@@ -6,9 +6,11 @@ from ...globals import ChartType
 
 class ThemeRiver(Chart):
     """
-    <<< 主题河流图 >>>
+    <<< ThemeRiver >>>
 
-    主题河流图是一种特殊的流图, 它主要用来表示事件或主题等在一段时间内的变化。
+    ThemeRiver graph is a special kind of flow graph,
+    which is mainly used to show the changes of events or themes
+    over a period of time.
     """
 
     def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):

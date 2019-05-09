@@ -6,9 +6,11 @@ from ...globals import ChartType
 
 class Tree(Chart):
     """
-    <<< 树图 >>>
+    <<< Tree diagrams >>>
 
-    树图主要用来可视化树形数据结构，是一种特殊的层次类型，具有唯一的根节点，左子树，和右子树。
+    Tree diagrams are used primarily to visualize tree data structures,
+    which are special hierarchical types with unique root nodes, left subtrees,
+    and right subtrees.
     """
 
     def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):

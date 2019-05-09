@@ -6,9 +6,9 @@ from ...globals import ChartType
 
 class Map(Chart):
     """
-    <<< 地图 >>>
+    <<< Map >>>
 
-    地图主要用于地理区域数据的可视化。
+    Map are mainly used for visualization of geographic area data.
     """
 
     def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):

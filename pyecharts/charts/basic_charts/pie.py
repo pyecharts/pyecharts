@@ -6,9 +6,11 @@ from ...globals import ChartType
 
 class Pie(Chart):
     """
-    <<< 饼图 >>>
+    <<< Pie >>>
 
-    饼图主要用于表现不同类目的数据在总和中的占比。每个的弧度表示数据数量的比例。
+    The pie chart is mainly used to represent the proportion of data of
+    different categories in the total. Each radian represents the ratio of
+    the number of data points.
     """
 
     def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):

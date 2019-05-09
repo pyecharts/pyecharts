@@ -6,9 +6,10 @@ from ...globals import ChartType
 
 class Bar(RectChart):
     """
-    <<< 柱状图/条形图 >>>
+    <<< Bar Chart >>>
 
-    柱状/条形图，通过柱形的高度/条形的宽度来表现数据的大小。
+    Bar chart presents categorical data with rectangular bars
+    with heights or lengths proportional to the values that they represent.
     """
 
     def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):

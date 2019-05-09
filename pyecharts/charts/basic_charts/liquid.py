@@ -6,9 +6,9 @@ from ...globals import ChartType
 
 class Liquid(Chart):
     """
-    <<< 水球图 >>>
+    <<< Liquid >>>
 
-    主要用来突出数据的百分比。
+    The liquid chart is mainly used to highlight the percentage of data.
     """
 
     def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):
