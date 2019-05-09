@@ -8,7 +8,7 @@ class Gauge(Chart):
     """
     <<< Gauge >>>
 
-    The gauge measures information and key business metrics
+    The gauge displays a single key business measure.
     """
 
     def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):

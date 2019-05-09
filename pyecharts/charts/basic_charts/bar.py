@@ -8,7 +8,8 @@ class Bar(RectChart):
     """
     <<< Bar Chart >>>
 
-    Bar chart, which indicates the size of the data by the height/width of the bar.
+    Bar chart presents categorical data with rectangular bars
+    with heights or lengths proportional to the values that they represent.
     """
 
     def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):

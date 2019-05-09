@@ -9,7 +9,7 @@ class TreeMap(Chart):
     <<< TreeMap >>>
 
     TreeMap are a common visual representation of "hierarchical data" and "tree data".
-    It mainly use area to highlight the important nodes in the hierarchy of "tree".
+    It mainly uses area to highlight the important nodes in the hierarchy of "tree".
     """
 
     def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):

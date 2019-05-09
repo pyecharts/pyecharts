@@ -8,7 +8,7 @@ class Graph(Chart):
     """
     <<< Graph >>>
 
-    The graph is used to represent nodes and the relational data between them.
+    The graph is used to represent the relational data.
     """
 
     def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):

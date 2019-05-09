@@ -8,8 +8,7 @@ class EffectScatter(RectChart):
     """
     <<< Scatter plots with ripple effects animation >>>
 
-    Use animation effects to visually highlight
-    certain data that you want to highlight.
+    Use animation effects to visually highlight designated data set.
     """
 
     def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):

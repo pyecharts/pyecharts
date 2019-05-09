@@ -11,7 +11,7 @@ class Funnel(Chart):
     Funnel diagram is suitable for one-way analysis of single process
     with standardized business process, long cycle and multiple links.
     Through comparison of business data of each link in the funnel,
-    the link where the problem can be found and explained intuitively,
+    the link where the potential problems can be found intuitively,
     and then decisions can be made.
     """
 
