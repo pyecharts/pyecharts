@@ -43,7 +43,6 @@ class GeoChartBase(Chart):
         color: Optional[str] = None,
         is_polyline: bool = False,
         is_large: bool = False,
-        trail_length: Numeric = 0.2,
         large_threshold: Numeric = 2000,
         label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
         effect_opts: Union[opts.EffectOpts, dict] = opts.EffectOpts(),
@@ -113,7 +112,6 @@ class GeoChartBase(Chart):
             )
 
         elif type_ == ChartType.LINES:
-            effect_opts.update(trailLength=trail_length)
             self.options.get("series").append(
                 {
                     "type": type_,

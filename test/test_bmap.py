@@ -23,9 +23,8 @@ def test_bmap(fake_writer):
             [list(z) for z in zip(provinces, values)],
             label_opts=opts.LabelOpts(formatter="{b}"),
         )
-        .set_global_opts(title_opts=opts.TitleOpts(title="BMap-基本示例"))
     )
-    bmap.render("render.html")
+    bmap.render()
     content = fake_writer.call_args[0][1]
     assert_in(f'src="{BAIDU_MAP_API_PREFIX}&ak={FAKE_API_KEY}"', content)
     assert_in('"coordinateSystem": "bmap"', content, "non bmap found")
@@ -43,11 +42,9 @@ def test_bmap_effect_trail_length(fake_writer):
             "bmap",
             [list(z) for z in zip(provinces, values)],
             type_=ChartType.LINES,
-            trail_length=0.5,
-            effect_opts=opts.EffectOpts(),
+            effect_opts=opts.EffectOpts(trail_length=0.5),
             label_opts=opts.LabelOpts(formatter="{b}"),
         )
-        .set_global_opts(title_opts=opts.TitleOpts(title="BMap-polyline-large"))
     )
     bmap.render("render.html")
     content = fake_writer.call_args[0][1]
@@ -70,9 +67,8 @@ def test_bmap_polyline_and_large(fake_writer):
             type_=ChartType.LINES,
             label_opts=opts.LabelOpts(formatter="{b}"),
         )
-        .set_global_opts(title_opts=opts.TitleOpts(title="BMap-polyline-large"))
     )
-    bmap.render("render.html")
+    bmap.render()
     content = fake_writer.call_args[0][1]
     assert_in('"polyline": true', content, "polyline parameter is error")
     assert_in('"large": true', content, "large parameter is error")
@@ -102,9 +98,8 @@ def test_bmap_map_control_panel(fake_writer):
             navigation_control_opts=opts.BMapNavigationControlOpts(),
             geo_location_control_opts=opts.BMapGeoLocationControlOpts(),
         )
-        .set_global_opts(title_opts=opts.TitleOpts(title="BMap-控制面板示例"))
     )
-    bmap.render("render.html")
+    bmap.render()
     content = fake_writer.call_args[0][1]
     assert_in("new BMap.CopyrightControl", content)
     assert_in("new BMap.MapTypeControl", content)
