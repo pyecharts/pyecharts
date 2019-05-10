@@ -80,4 +80,39 @@ def graph_weibo() -> Graph:
     return c
 
 
+@C.funcs
+def graph_npm_dependencies() -> Graph:
+    with open(os.path.join("fixtures", "npmdepgraph.json"), "r", encoding="utf-8") as f:
+        j = json.load(f)
+    nodes = [
+        {
+            "x": node["x"],
+            "y": node["y"],
+            "id": node["id"],
+            "name": node["label"],
+            "symbolSize": node["size"],
+            "itemStyle": {"normal": {"color": node["color"]}},
+        }
+        for node in j["nodes"]
+    ]
+
+    edges = [
+        {"source": edge["sourceID"], "target": edge["targetID"]} for edge in j["edges"]
+    ]
+
+    c = (
+        Graph(init_opts=opts.InitOpts(width="1000px", height="600px"))
+        .add(
+            "",
+            nodes=nodes,
+            links=edges,
+            layout="none",
+            label_opts=opts.LabelOpts(is_show=False),
+            linestyle_opts=opts.LineStyleOpts(width=0.5, curve=0.3, opacity=0.7),
+        )
+        .set_global_opts(title_opts=opts.TitleOpts(title="Graph-NPM Dependencies"))
+    )
+    return c
+
+
 Page().add(*[fn() for fn, _ in C.charts]).render()

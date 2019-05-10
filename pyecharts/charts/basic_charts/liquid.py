@@ -25,6 +25,9 @@ class Liquid(Chart):
         is_animation: bool = True,
         is_outline_show: bool = True,
         tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
+        label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(
+            font_size=50, position="inside"
+        ),
     ):
         _animation_dur, _animation_dur_update = 2000, 1000
         if not is_animation:
@@ -44,6 +47,7 @@ class Liquid(Chart):
                 "shape": shape,
                 "outline": {"show": is_outline_show},
                 "tooltip": tooltip_opts,
+                "label": label_opts,
             }
         )
         return self
