@@ -2,6 +2,7 @@ import json
 
 from ..commons.types import Numeric, Optional, Sequence, Union
 from ..globals import BMapType
+from .global_options import TooltipOpts
 from .series_options import BasicOpts, ItemStyleOpts, LabelOpts, LineStyleOpts
 
 
@@ -250,4 +251,22 @@ class BMapGeoLocationControlOpts(BasicOpts):
                     bmap_geo_location_config
                 )
             ]
+        }
+
+
+class BarItem(BasicOpts):
+    def __init__(
+        self,
+        name: Optional[str] = None,
+        value: Optional[Numeric] = None,
+        label_opts: Union[LabelOpts, dict, None] = None,
+        itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
+        tooltip_opts: Union[TooltipOpts, dict, None] = None,
+    ):
+        self.opts: dict = {
+            "name": name,
+            "value": value,
+            "label": label_opts,
+            "itemStyle": itemstyle_opts,
+            "tooltip": tooltip_opts,
         }

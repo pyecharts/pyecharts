@@ -46,7 +46,18 @@ def bar_toolbox() -> Bar:
 
 
 @C.funcs
-def bar_gap() -> Bar:
+def bar_same_series_gap() -> Bar:
+    c = (
+        Bar()
+        .add_xaxis(Faker.choose())
+        .add_yaxis("商家A", Faker.values(), category_gap="80%")
+        .set_global_opts(title_opts=opts.TitleOpts(title="Bar-单系列柱间距离"))
+    )
+    return c
+
+
+@C.funcs
+def bar_different_series_gap() -> Bar:
     c = (
         Bar()
         .add_xaxis(Faker.choose())
@@ -276,6 +287,38 @@ def bar_histogram() -> Bar:
         .add_xaxis(Faker.choose())
         .add_yaxis("商家A", Faker.values(), category_gap=0, color=Faker.rand_color())
         .set_global_opts(title_opts=opts.TitleOpts(title="Bar-直方图"))
+    )
+    return c
+
+
+@C.funcs
+def bar_histogram_color() -> Bar:
+    x = Faker.dogs + Faker.animal
+    xlen = len(x)
+    y = []
+    for idx, item in enumerate(x):
+        if idx <= xlen / 2:
+            y.append(
+                opts.BarItem(
+                    name=item,
+                    value=(idx + 1) * 10,
+                    itemstyle_opts=opts.ItemStyleOpts(color="#749f83"),
+                )
+            )
+        else:
+            y.append(
+                opts.BarItem(
+                    name=item,
+                    value=(xlen + 1 - idx) * 10,
+                    itemstyle_opts=opts.ItemStyleOpts(color="#d48265"),
+                )
+            )
+
+    c = (
+        Bar()
+        .add_xaxis(x)
+        .add_yaxis("series0", y, category_gap=0, color=Faker.rand_color())
+        .set_global_opts(title_opts=opts.TitleOpts(title="Bar-直方图（颜色区分）"))
     )
     return c
 
