@@ -133,15 +133,13 @@ def bmap_lines() -> BMap:
             linestyle_opts=opts.LineStyleOpts(color="purple", opacity=0.6, width=1),
         )
         .add_control_panel(
-            copyright_control_opts=opts.BMapCopyrightType(position=3),
             maptype_control_opts=opts.BMapTypeControl(
-                type_=BMapType.BMAP_MAPTYPE_CONTROL_DROPDOWN
+                type_=BMapType.MAPTYPE_CONTROL_DROPDOWN
             ),
             scale_control_opts=opts.BMapScaleControlOpts(),
             overview_map_opts=opts.BMapOverviewMapControlOpts(is_open=True),
-            navigation_control_opts=opts.BMapNavigationControlOpts(),
         )
-        .set_global_opts(title_opts=opts.TitleOpts(title="BMap-Lines"))
+        .set_global_opts(title_opts=opts.TitleOpts(title="BMap-杭州热门步行路线"))
     )
     return c
 
