@@ -1,6 +1,6 @@
 from example.commons import Collector, Faker
 from pyecharts import options as opts
-from pyecharts.charts import Bar, Page, Pie, Timeline, Map
+from pyecharts.charts import Bar, Map, Page, Pie, Timeline
 
 C = Collector()
 

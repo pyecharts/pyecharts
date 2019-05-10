@@ -4,6 +4,7 @@ from jinja2 import Environment
 from prettytable import PrettyTable
 
 from ..commons.types import Optional, Sequence
+from ..commons.utils import OrderedSet
 from ..globals import CurrentConfig
 from ..render.display import HTML
 from ..render.engine import RenderEngine
@@ -17,10 +18,13 @@ class Table:
     ):
         self.page_title = page_title
         self.js_host = js_host
+        self.js_dependencies: OrderedSet = OrderedSet("bulma")
         self._charts = []
 
-    def add(self, headers: Sequence, rows: Sequence):
-        table = PrettyTable(headers)
+    def add(self, headers: Sequence, rows: Sequence, attributes: Optional[dict] = None):
+
+        attributes = attributes or {"class": "table is-bordered table is-striped"}
+        table = PrettyTable(headers, attributes=attributes)
         for r in rows:
             table.add_row(r)
         self._charts.append(table.get_html_string())
