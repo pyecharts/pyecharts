@@ -19,7 +19,7 @@ class Bar(RectChart):
     def add_yaxis(
         self,
         series_name: str,
-        yaxis_data: Sequence,
+        yaxis_data: Sequence[Union[Numeric, opts.BarItem, dict]],
         *,
         is_selected: bool = True,
         xaxis_index: Optional[Numeric] = None,

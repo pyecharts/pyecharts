@@ -1,6 +1,7 @@
 # flake8: noqa
 
 from .charts_options import (
+    BarItem,
     BMapCopyrightType,
     BMapGeoLocationControlOpts,
     BMapNavigationControlOpts,
