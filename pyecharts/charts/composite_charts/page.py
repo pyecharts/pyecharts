@@ -42,18 +42,31 @@ class Page:
     def __len__(self):
         return len(self._charts)
 
+    def _prepare_render(self):
+        for c in self:
+            c.json_contents = c.dump_options()
+            if c.theme not in ThemeType.BUILTIN_THEMES:
+                self.js_dependencies.add(c.theme)
+
     def render(
         self,
         path: str = "render.html",
         template_name: str = "simple_page.html",
         env: Optional[Environment] = None,
     ):
-        for c in self:
-            c.json_contents = c.dump_options()
-            if c.theme not in ThemeType.BUILTIN_THEMES:
-                self.js_dependencies.add(c.theme)
+        self._prepare_render()
         RenderEngine(env).render_chart_to_file(
             template_name=template_name, chart=self, path=path
+        )
+
+    def render_embed(
+        self,
+        template_name: str = "simple_page.html",
+        env: Optional[Environment] = None,
+    ):
+        self._prepare_render()
+        return RenderEngine(env).render_chart_to_template(
+            template_name=template_name, chart=self
         )
 
     def render_notebook(self):
