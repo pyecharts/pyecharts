@@ -1,8 +1,8 @@
 from example.commons import Collector
 from pyecharts import options as opts
 from pyecharts.charts import Liquid, Page
-from pyecharts.globals import SymbolType
 from pyecharts.commons.utils import JsCode
+from pyecharts.globals import SymbolType
 
 C = Collector()
 
@@ -27,7 +27,9 @@ def liquid_data_precision() -> Liquid:
             label_opts=opts.LabelOpts(
                 font_size=50,
                 formatter=JsCode(
-                    "function (param) {return (Math.floor(param.value * 10000) / 100) + '%';}"
+                    """function (param) {
+                        return (Math.floor(param.value * 10000) / 100) + '%';
+                    }"""
                 ),
                 position="inside",
             ),

@@ -25,7 +25,9 @@ class Liquid(Chart):
         is_animation: bool = True,
         is_outline_show: bool = True,
         tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
-        label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
+        label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(
+            font_size=50, position="inside"
+        ),
     ):
         _animation_dur, _animation_dur_update = 2000, 1000
         if not is_animation:
