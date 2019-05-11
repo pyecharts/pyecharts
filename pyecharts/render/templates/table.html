@@ -1,3 +1,11 @@
+{% for dep in chart.dependencies %}
+    {% if dep.endswith("js") %}
+        <script type="text/javascript" src="{{ dep }}"></script>
+    {% elif dep.endswith("css") %}
+        <link rel="stylesheet" href="{{ dep }}">
+    {% endif %}
+{% endfor %}
+
 {% for c in chart %}
     {{ c }}
 {% endfor %}
