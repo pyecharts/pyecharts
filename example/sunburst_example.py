@@ -61,17 +61,36 @@ def sunburst_base() -> Sunburst:
 
 
 @C.funcs
-def sunburst_base_json() -> Sunburst:
-    with open(os.path.join("fixtures", "family.json"), "r", encoding="utf-8") as f:
+def sunburst_official() -> Sunburst:
+    with open(os.path.join("fixtures", "drink.json"), "r", encoding="utf-8") as f:
         j = json.load(f)
 
     c = (
         Sunburst(init_opts=opts.InitOpts(width="1000px", height="600px"))
         .add(
             "",
-            data_pair=j
+            data_pair=j,
+            highlight_policy="ancestor",
+            radius=[0, "95%"],
+            sort_="null",
+            levels=[
+                {},
+                {
+                    "r0": "15%",
+                    "r": "35%",
+                    "itemStyle": {"borderWidth": 2},
+                    "label": {"rotate": "tangential"},
+                },
+                {"r0": "35%", "r": "70%", "label": {"align": "right"}},
+                {
+                    "r0": "70%",
+                    "r": "72%",
+                    "label": {"position": "outside", "padding": 3, "silent": False},
+                    "itemStyle": {"borderWidth": 3},
+                },
+            ],
         )
-        .set_global_opts(title_opts=opts.TitleOpts(title="Sunburst-官方示例(使用 JSON 传入数据)"))
+        .set_global_opts(title_opts=opts.TitleOpts(title="Sunburst-官方示例"))
         .set_series_opts(label_opts=opts.LabelOpts(formatter="{b}"))
     )
     return c
