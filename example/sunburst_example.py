@@ -1,3 +1,6 @@
+import json
+import os
+
 from example.commons import Collector
 from pyecharts import options as opts
 from pyecharts.charts import Page, Sunburst
@@ -49,9 +52,26 @@ def sunburst_base() -> Sunburst:
     ]
 
     c = (
-        Sunburst()
+        Sunburst(init_opts=opts.InitOpts(width="1000px", height="600px"))
         .add(series_name="", data_pair=data, radius=[0, "90%"])
         .set_global_opts(title_opts=opts.TitleOpts(title="Sunburst-基本示例"))
+        .set_series_opts(label_opts=opts.LabelOpts(formatter="{b}"))
+    )
+    return c
+
+
+@C.funcs
+def sunburst_base_json() -> Sunburst:
+    with open(os.path.join("fixtures", "family.json"), "r", encoding="utf-8") as f:
+        j = json.load(f)
+
+    c = (
+        Sunburst(init_opts=opts.InitOpts(width="1000px", height="600px"))
+        .add(
+            "",
+            data_pair=j
+        )
+        .set_global_opts(title_opts=opts.TitleOpts(title="Sunburst-官方示例(使用 JSON 传入数据)"))
         .set_series_opts(label_opts=opts.LabelOpts(formatter="{b}"))
     )
     return c
