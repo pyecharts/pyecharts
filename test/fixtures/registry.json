@@ -1,0 +1,13 @@
+{
+    "JUPYTER_URL": "/nbextensions/echarts-china-cities-js",
+    "GITHUB_URL": "https://echarts-maps.github.io/echarts-china-cities-js",
+    "JUPYTER_ENTRY": "echarts-china-cities-js/index",
+    "JS_FOLDER": "js",
+    "GEOJSON_FOLDER": "geojson",
+    "PINYIN_MAP": {
+         "安庆": "an1_qing4"
+    },
+    "FILE_MAP": {
+        "an1_qing4": "shape-with-internal-borders/an1_hui1_an1_qing4"
+    }
+}
