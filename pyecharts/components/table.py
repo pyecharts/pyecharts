@@ -19,7 +19,7 @@ class Table:
         self.page_title = page_title
         self.js_host = js_host
         self.js_dependencies: OrderedSet = OrderedSet("bulma")
-        self._charts = []
+        self._charts: Sequence = []
 
     def add(self, headers: Sequence, rows: Sequence, attributes: Optional[dict] = None):
 

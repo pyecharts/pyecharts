@@ -12,7 +12,7 @@ class Parallel(Chart):
     high dimensional data.
     """
 
-    def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):
+    def __init__(self, init_opts: opts.InitOpts = opts.InitOpts()):
         super().__init__(init_opts=init_opts)
         self.options.update(parallel=opts.ParallelOpts().opts)
 

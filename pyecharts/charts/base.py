@@ -21,7 +21,7 @@ class Base:
     `Base`类是所有图形类的基类，提供部分初始化参数和基本的方法
     """
 
-    def __init__(self, init_opts: Union[InitOpts, dict] = InitOpts()):
+    def __init__(self, init_opts: InitOpts = InitOpts()):
         self.width = init_opts.width
         self.height = init_opts.height
         self.renderer = init_opts.renderer
