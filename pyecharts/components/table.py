@@ -22,7 +22,6 @@ class Table:
         self._charts = []
 
     def add(self, headers: Sequence, rows: Sequence, attributes: Optional[dict] = None):
-
         attributes = attributes or {"class": "fl-table"}
         table = PrettyTable(headers, attributes=attributes)
         for r in rows:
