@@ -7,7 +7,8 @@ from nose.tools import eq_
 
 @patch('pyecharts.datasets.urllib.request.urlopen')
 def test_register_url(fake):
-    with open(os.path.join("test", "fixtures", "registry.json")) as f:
+    current_path = os.path.dirname(__file__)
+    with open(os.path.join(current_path, "fixtures", "registry.json")) as f:
         fake.return_value = f
         register_url('fake_url')
         eq_(EXTRA, {
