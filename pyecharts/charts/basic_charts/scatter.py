@@ -14,7 +14,7 @@ class Scatter(RectChart):
     visualmap component can be used.
     """
 
-    def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):
+    def __init__(self, init_opts: opts.InitOpts = opts.InitOpts()):
         super().__init__(init_opts=init_opts)
         self.options.update(yAxis=[opts.AxisOpts().opts])
 

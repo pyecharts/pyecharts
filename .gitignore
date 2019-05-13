@@ -99,3 +99,6 @@ ENV/
 # example
 example/*.png
 example/*.html
+
+# mypy
+.mypy_cache/

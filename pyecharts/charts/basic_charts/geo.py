@@ -9,7 +9,7 @@ from ...globals import ChartType, TooltipFormatterType
 
 
 class GeoChartBase(Chart):
-    def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):
+    def __init__(self, init_opts: opts.InitOpts = opts.InitOpts()):
         super().__init__(init_opts=init_opts)
         self.set_global_opts()
         self._coordinates = COORDINATES
@@ -27,7 +27,7 @@ class GeoChartBase(Chart):
                 self.add_coordinate(k, v[0], v[1])
         return self
 
-    def get_coordinate(self, name: str) -> Sequence:
+    def get_coordinate(self, name: str) -> Optional[Sequence]:
         if name in self._coordinates:
             return self._coordinates[name]
 
@@ -165,7 +165,7 @@ class Geo(GeoChartBase):
     support scatter plot and line
     """
 
-    def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):
+    def __init__(self, init_opts: opts.InitOpts = opts.InitOpts()):
         super().__init__(init_opts=init_opts)
         self._coordinate_system: Optional[str] = "geo"
 

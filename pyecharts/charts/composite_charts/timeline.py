@@ -1,6 +1,6 @@
 from ... import options as opts
 from ...charts.chart import Base
-from ...commons.types import Numeric, Optional, Union
+from ...commons.types import Numeric, Optional, Union, Sequence
 
 
 class Timeline(Base):
@@ -8,11 +8,11 @@ class Timeline(Base):
     `Timeline` provides functions like switching and playing between multiple charts.
     """
 
-    def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):
+    def __init__(self, init_opts: opts.InitOpts = opts.InitOpts()):
         super().__init__(init_opts=init_opts)
         self.options = {"baseOption": {"series": [], "timeline": {}}, "options": []}
         self.add_schema()
-        self._time_points = []
+        self._time_points: Sequence = []
 
     def add_schema(
         self,

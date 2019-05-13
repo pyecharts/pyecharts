@@ -14,7 +14,7 @@ class BMap(GeoChartBase):
     Support scatter plot, line
     """
 
-    def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):
+    def __init__(self, init_opts: opts.InitOpts = opts.InitOpts()):
         super().__init__(init_opts=init_opts)
         self.js_dependencies.add("bmap")
         self._is_geo_chart = True

@@ -11,7 +11,7 @@ class Radar(Chart):
     Radar maps are mainly used to represent multivariable data.
     """
 
-    def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):
+    def __init__(self, init_opts: opts.InitOpts = opts.InitOpts()):
         super().__init__(init_opts=init_opts)
 
     def add_schema(
@@ -56,15 +56,6 @@ class Radar(Chart):
         areastyle_opts: opts.AreaStyleOpts = opts.AreaStyleOpts(),
         tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
     ):
-        if isinstance(label_opts, opts.LabelOpts):
-            label_opts = label_opts.opts
-        if isinstance(linestyle_opts, opts.LineStyleOpts):
-            linestyle_opts = linestyle_opts.opts
-        if isinstance(areastyle_opts, opts.AreaStyleOpts):
-            areastyle_opts = areastyle_opts.opts
-        if isinstance(tooltip_opts, opts.TooltipOpts):
-            tooltip_opts = tooltip_opts.opts
-
         self._append_legend(series_name, is_selected)
         self.options.get("series").append(
             {
