@@ -60,9 +60,7 @@ class Page:
         )
 
     def render_embed(
-        self,
-        template_name: str = "simple_page.html",
-        env: Optional[Environment] = None,
+        self, template_name: str = "simple_page.html", env: Optional[Environment] = None
     ):
         self._prepare_render()
         return RenderEngine(env).render_chart_to_template(
