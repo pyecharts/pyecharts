@@ -18,12 +18,11 @@ class Table:
     ):
         self.page_title = page_title
         self.js_host = js_host
-        self.js_dependencies: OrderedSet = OrderedSet("bulma")
-        self._charts: Sequence = []
+        self.js_dependencies: OrderedSet = OrderedSet()
+        self._charts = []
 
     def add(self, headers: Sequence, rows: Sequence, attributes: Optional[dict] = None):
-
-        attributes = attributes or {"class": "table is-bordered table is-striped"}
+        attributes = attributes or {"class": "fl-table"}
         table = PrettyTable(headers, attributes=attributes)
         for r in rows:
             table.add_row(r)

@@ -1,6 +1,6 @@
 from ... import options as opts
 from ...charts.chart import Base
-from ...commons.types import Numeric, Optional, Union, Sequence
+from ...commons.types import Numeric, Optional, Sequence, Union
 
 
 class Timeline(Base):
