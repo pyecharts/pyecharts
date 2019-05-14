@@ -13,4 +13,4 @@ def test_table_base(fake_writer):
     rows = [["Brisbane", 5905, 1857594, 1146.4], ["Perth", 5386, 1554769, 869.4]]
     table.add(headers, rows).render()
     _, content = fake_writer.call_args[0]
-    assert_in("bulma.min.css", content)
+    assert_in("fl-table", content)

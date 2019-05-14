@@ -1,5 +1,8 @@
+from ..commons.types import Optional, Sequence, Union
+
+
 class HTML:
-    def __init__(self, data=None):
+    def __init__(self, data: Optional[str] = None):
         self.data = data
 
     def _repr_html_(self):
@@ -30,7 +33,12 @@ _css_t = """var link = document.createElement("link");
 
 
 class Javascript:
-    def __init__(self, data=None, lib=None, css=None):
+    def __init__(
+        self,
+        data: Optional[str] = None,
+        lib: Optional[Union[str, Sequence]] = None,
+        css: Optional[Union[str, Sequence]] = None,
+    ):
         if isinstance(lib, str):
             lib = [lib]
         elif lib is None:
