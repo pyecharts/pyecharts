@@ -25,7 +25,8 @@ def register_url(asset_url: str):
             file_name = contents["FILE_MAP"][pinyin]
             files[name] = [file_name, "js"]
 
-        EXTRA[contents["GITHUB_URL"] + "/"] = files
+        js_file_prefix = f'{contents["GITHUB_URL"]}/{contents["JS_FOLDER"]}/'
+        EXTRA[js_file_prefix] = files
 
 
 def register_files(asset_files: dict):
