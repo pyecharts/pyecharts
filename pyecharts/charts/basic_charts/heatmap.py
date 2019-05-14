@@ -1,4 +1,3 @@
-# coding=utf-8
 from ... import options as opts
 from ...charts.chart import RectChart
 from ...commons.types import Numeric, Optional, Sequence, Union
@@ -7,13 +6,14 @@ from ...globals import ChartType
 
 class HeatMap(RectChart):
     """
-    <<< 热力图 >>>
+    <<< HeatMap >>>
 
-    热力图主要通过颜色去表现数值的大小，必须要配合 visualMap 组件使用。
-    直角坐标系上必须要使用两个类目轴。
+    The heat map is mainly used to represent the size of the value by color,
+    which must be used in conjunction with the visualMap component.
+    Two categories of axes must be used in rectangular coordinates.
     """
 
-    def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):
+    def __init__(self, init_opts: opts.InitOpts = opts.InitOpts()):
         super().__init__(init_opts=init_opts)
         self.options.update(yAxis=[opts.AxisOpts().opts])
         self.set_global_opts(visualmap_opts=opts.VisualMapOpts(orient="horizontal"))
@@ -33,17 +33,6 @@ class HeatMap(RectChart):
         tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
         itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
     ):
-        if isinstance(label_opts, opts.LabelOpts):
-            label_opts = label_opts.opts
-        if isinstance(markpoint_opts, opts.MarkPointOpts):
-            markpoint_opts = markpoint_opts.opts
-        if isinstance(markline_opts, opts.MarkLineOpts):
-            markline_opts = markline_opts.opts
-        if isinstance(tooltip_opts, opts.TooltipOpts):
-            tooltip_opts = tooltip_opts.opts
-        if isinstance(itemstyle_opts, opts.ItemStyleOpts):
-            itemstyle_opts = itemstyle_opts.opts
-
         self._append_legend(series_name, is_selected)
         self.options.get("yAxis")[0].update(data=yaxis_data)
         self.options.get("series").append(

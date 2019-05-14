@@ -1,7 +1,6 @@
-# coding=utf-8
 from example.commons import Collector, Faker
 from pyecharts import options as opts
-from pyecharts.charts import Bar, Page, Pie, Timeline
+from pyecharts.charts import Bar, Map, Page, Pie, Timeline
 
 C = Collector()
 
@@ -116,6 +115,59 @@ def timeline_pie() -> Timeline:
         .add(pie2, "2017年")
         .add(pie3, "2018年")
         .add(pie4, "2019年")
+    )
+    return tl
+
+
+@C.funcs
+def timeline_map() -> Timeline:
+    map0 = (
+        Map()
+        .add("商家A", [list(z) for z in zip(Faker.provinces, Faker.values())], "china")
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="Map-2015年某些数据"),
+            visualmap_opts=opts.VisualMapOpts(max_=200),
+        )
+    )
+    map1 = (
+        Map()
+        .add("商家A", [list(z) for z in zip(Faker.provinces, Faker.values())], "china")
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="Map-2016年某些数据"),
+            visualmap_opts=opts.VisualMapOpts(max_=200),
+        )
+    )
+    map2 = (
+        Map()
+        .add("商家A", [list(z) for z in zip(Faker.provinces, Faker.values())], "china")
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="Map-2017年某些数据"),
+            visualmap_opts=opts.VisualMapOpts(max_=200),
+        )
+    )
+    map3 = (
+        Map()
+        .add("商家A", [list(z) for z in zip(Faker.provinces, Faker.values())], "china")
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="Map-2018年某些数据"),
+            visualmap_opts=opts.VisualMapOpts(max_=200),
+        )
+    )
+    map4 = (
+        Map()
+        .add("商家A", [list(z) for z in zip(Faker.provinces, Faker.values())], "china")
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="Map-2019年某些数据"),
+            visualmap_opts=opts.VisualMapOpts(max_=200),
+        )
+    )
+    tl = (
+        Timeline()
+        .add(map0, "2015年")
+        .add(map1, "2016年")
+        .add(map2, "2017年")
+        .add(map3, "2018年")
+        .add(map4, "2019年")
     )
     return tl
 

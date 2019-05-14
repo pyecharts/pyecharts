@@ -1,4 +1,3 @@
-# coding=utf-8
 from ... import options as opts
 from ...charts.chart import Chart
 from ...commons.types import Numeric, Sequence, Union
@@ -7,13 +6,14 @@ from ...globals import ChartType
 
 class Sankey(Chart):
     """
-    <<< 桑基图  >>>
+    <<< Sankey >>>
 
-    桑基图是一种特殊的流图, 它主要用来表示原材料、能量等如何从初始形式经过中
-    间过程的加工、转化到达最终形式。
+    Sankey diagram is a special flow diagram, which is mainly used to
+    express how raw materials, energy and so on from the initial form through
+    the intermediate process of processing, transformation to the final form.
     """
 
-    def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):
+    def __init__(self, init_opts: opts.InitOpts = opts.InitOpts()):
         super().__init__(init_opts=init_opts)
 
     def add(
@@ -30,15 +30,6 @@ class Sankey(Chart):
         tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
         itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
     ):
-        if isinstance(label_opts, opts.LabelOpts):
-            label_opts = label_opts.opts
-        if isinstance(linestyle_opt, opts.LineStyleOpts):
-            linestyle_opt = linestyle_opt.opts
-        if isinstance(tooltip_opts, opts.TooltipOpts):
-            tooltip_opts = tooltip_opts.opts
-        if isinstance(itemstyle_opts, opts.ItemStyleOpts):
-            itemstyle_opts = itemstyle_opts.opts
-
         self._append_legend(series_name, is_selected)
         self.options.get("series").append(
             {

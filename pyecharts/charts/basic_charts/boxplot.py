@@ -1,4 +1,3 @@
-# coding=utf-8
 from ... import options as opts
 from ...charts.chart import RectChart
 from ...commons.types import Numeric, Optional, Sequence, Union
@@ -7,13 +6,14 @@ from ...globals import ChartType
 
 class Boxplot(RectChart):
     """
-    <<< 箱形图 >>>
+    <<< Boxplot >>>
 
-    箱形图是一种用作显示一组数据分散情况资料的统计图。它能显示出一组数据
-    的最大值、最小值、中位数、下四分位数及上四分位数。
+    A box-plot is a statistical chart used to show a set of data dispersion data.
+    It displays the maximum, minimum, median, lower quartile, and upper quartile
+    of a set of data.
     """
 
-    def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):
+    def __init__(self, init_opts: opts.InitOpts = opts.InitOpts()):
         super().__init__(init_opts=init_opts)
         self.options.update(yAxis=[opts.AxisOpts().opts])
 
@@ -31,17 +31,6 @@ class Boxplot(RectChart):
         tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
         itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
     ):
-        if isinstance(label_opts, opts.LabelOpts):
-            label_opts = label_opts.opts
-        if isinstance(markpoint_opts, opts.MarkPointOpts):
-            markpoint_opts = markpoint_opts.opts
-        if isinstance(markline_opts, opts.MarkLineOpts):
-            markline_opts = markline_opts.opts
-        if isinstance(tooltip_opts, opts.TooltipOpts):
-            tooltip_opts = tooltip_opts.opts
-        if isinstance(itemstyle_opts, opts.ItemStyleOpts):
-            itemstyle_opts = itemstyle_opts.opts
-
         self._append_legend(series_name, is_selected)
         self.options.get("series").append(
             {

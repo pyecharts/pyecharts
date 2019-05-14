@@ -1,4 +1,3 @@
-# coding=utf-8
 from example.commons import Collector
 from pyecharts import options as opts
 from pyecharts.charts import Kline, Page
@@ -91,6 +90,27 @@ def kline_datazoom_slider() -> Kline:
             ),
             datazoom_opts=[opts.DataZoomOpts()],
             title_opts=opts.TitleOpts(title="Kline-DataZoom-slider"),
+        )
+    )
+    return c
+
+
+@C.funcs
+def kline_datazoom_slider_position() -> Kline:
+    c = (
+        Kline()
+        .add_xaxis(["2017/7/{}".format(i + 1) for i in range(31)])
+        .add_yaxis("kline", data)
+        .set_global_opts(
+            xaxis_opts=opts.AxisOpts(is_scale=True),
+            yaxis_opts=opts.AxisOpts(
+                is_scale=True,
+                splitarea_opts=opts.SplitAreaOpts(
+                    is_show=True, areastyle_opts=opts.AreaStyleOpts(opacity=1)
+                ),
+            ),
+            datazoom_opts=[opts.DataZoomOpts(pos_bottom="-2%")],
+            title_opts=opts.TitleOpts(title="Kline-DataZoom-slider-Position"),
         )
     )
     return c

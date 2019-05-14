@@ -1,4 +1,3 @@
-# coding=utf-8
 from ... import options as opts
 from ...charts.chart import Chart
 from ...commons.types import Sequence, Union
@@ -7,12 +6,14 @@ from ...globals import ChartType
 
 class ThemeRiver(Chart):
     """
-    <<< 主题河流图 >>>
+    <<< ThemeRiver >>>
 
-    主题河流图是一种特殊的流图, 它主要用来表示事件或主题等在一段时间内的变化。
+    ThemeRiver graph is a special kind of flow graph,
+    which is mainly used to show the changes of events or themes
+    over a period of time.
     """
 
-    def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):
+    def __init__(self, init_opts: opts.InitOpts = opts.InitOpts()):
         super().__init__(init_opts=init_opts)
 
     def add(
@@ -26,15 +27,6 @@ class ThemeRiver(Chart):
         tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
         itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
     ):
-        if isinstance(label_opts, opts.LabelOpts):
-            label_opts = label_opts.opts
-        if isinstance(tooltip_opts, opts.TooltipOpts):
-            tooltip_opts = tooltip_opts.opts
-        if isinstance(singleaxis_opts, opts.SingleAxisOpts):
-            singleaxis_opts = singleaxis_opts.opts
-        if isinstance(itemstyle_opts, opts.ItemStyleOpts):
-            itemstyle_opts = itemstyle_opts.opts
-
         for n in series_name:
             self._append_legend(n, is_selected)
 

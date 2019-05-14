@@ -1,4 +1,3 @@
-# coding=utf-8
 from ... import options as opts
 from ...charts.chart import Chart
 from ...commons.types import Numeric, Sequence, Union
@@ -7,10 +6,12 @@ from ...globals import ChartType
 
 class Gauge(Chart):
     """
-    <<< 仪表盘 >>>
+    <<< Gauge >>>
+
+    The gauge displays a single key business measure.
     """
 
-    def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):
+    def __init__(self, init_opts: opts.InitOpts = opts.InitOpts()):
         super().__init__(init_opts=init_opts)
 
     def add(
@@ -24,13 +25,9 @@ class Gauge(Chart):
         start_angle: Numeric = 225,
         end_angle: Numeric = -45,
         tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
+        axisline_opts: Union[opts.AxisLineOpts, dict, None] = None,
         itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
     ):
-        if isinstance(tooltip_opts, opts.TooltipOpts):
-            tooltip_opts = tooltip_opts.opts
-        if isinstance(itemstyle_opts, opts.ItemStyleOpts):
-            itemstyle_opts = itemstyle_opts.opts
-
         self._append_legend(series_name, is_selected)
         self.options.get("series").append(
             {
@@ -43,6 +40,7 @@ class Gauge(Chart):
                 "endAngle": end_angle,
                 "data": [{"name": n, "value": v} for n, v in data_pair],
                 "tooltip": tooltip_opts,
+                "axisLine": axisline_opts,
                 "itemStyle": itemstyle_opts,
             }
         )

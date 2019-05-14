@@ -1,4 +1,3 @@
-# coding=utf-8
 from ... import options as opts
 from ...charts.chart import RectChart
 from ...commons.types import Numeric, Optional, Sequence, Union
@@ -7,9 +6,12 @@ from ...globals import ChartType
 
 class Kline(RectChart):
     """
-    <<< K 线图 >>>
+    <<< K-line >>>
 
-    红涨蓝跌
+    K-line shows the highest value, the lowest value,
+    the starting value and the ending value of the data on the day,
+    which is used to show the daily fluctuation of the data or
+    the fluctuation of a certain period.
     """
 
     def __init__(self, init_opts: opts.InitOpts = opts.InitOpts()):
@@ -33,16 +35,6 @@ class Kline(RectChart):
         tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
         itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
     ):
-
-        if isinstance(markpoint_opts, opts.MarkPointOpts):
-            markpoint_opts = markpoint_opts.opts
-        if isinstance(markline_opts, opts.MarkLineOpts):
-            markline_opts = markline_opts.opts
-        if isinstance(tooltip_opts, opts.TooltipOpts):
-            tooltip_opts = tooltip_opts.opts
-        if isinstance(itemstyle_opts, opts.ItemStyleOpts):
-            itemstyle_opts = itemstyle_opts.opts
-
         self._append_legend(series_name, is_selected)
         self.options.get("series").append(
             {

@@ -1,9 +1,6 @@
-# coding=utf-8
 import json
 import os
 import urllib.request
-
-from ..commons.types import Optional
 
 __HERE = os.path.abspath(os.path.dirname(__file__))
 with open(os.path.join(__HERE, "map_filename.json"), "r", encoding="utf8") as f:
@@ -15,7 +12,7 @@ with open(os.path.join(__HERE, "city_coordinates.json"), "r", encoding="utf8") a
 EXTRA = {}
 
 
-def register_url(asset_url: Optional[str]):
+def register_url(asset_url: str):
     if asset_url:
         registry = asset_url + "/registry.json"
         try:
@@ -28,10 +25,11 @@ def register_url(asset_url: Optional[str]):
             file_name = contents["FILE_MAP"][pinyin]
             files[name] = [file_name, "js"]
 
-        EXTRA[contents["GITHUB_URL"] + "/"] = files
+        js_file_prefix = f'{contents["GITHUB_URL"]}/{contents["JS_FOLDER"]}/'
+        EXTRA[js_file_prefix] = files
 
 
-def register_files(asset_files: Optional[dict]):
+def register_files(asset_files: dict):
     if asset_files:
         FILENAMES.update(asset_files)
 

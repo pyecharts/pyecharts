@@ -1,3 +1,5 @@
+from nose.tools import eq_
+
 from pyecharts.charts import TreeMap
 
 
@@ -23,6 +25,6 @@ def test_treemap_base():
     ]
 
     c = TreeMap().add("演示数据", data)
-    assert c.theme == "white"
-    assert c.renderer == "canvas"
-    c.render("render.html")
+    eq_(c.theme, "white")
+    eq_(c.renderer, "canvas")
+    c.render()

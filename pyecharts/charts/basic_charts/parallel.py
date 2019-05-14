@@ -1,24 +1,24 @@
-# coding=utf-8
 from ... import options as opts
 from ...charts.chart import Chart
-from ...commons.types import List, Sequence, Union
+from ...commons.types import Sequence, Union
 from ...globals import ChartType
 
 
 class Parallel(Chart):
     """
-    <<< 平行坐标系 >>>
+    <<< Parallel >>>
 
-    平行坐标系是一种常用的可视化高维数据的图表。
+    Parallel coordinate systems are commonly used to visualize graphs of
+    high dimensional data.
     """
 
-    def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):
+    def __init__(self, init_opts: opts.InitOpts = opts.InitOpts()):
         super().__init__(init_opts=init_opts)
         self.options.update(parallel=opts.ParallelOpts().opts)
 
     def add_schema(
         self,
-        schema: List[Union[opts.ParallelAxisOpts, dict]],
+        schema: Sequence[Union[opts.ParallelAxisOpts, dict]],
         parallel_opts: Union[opts.ParallelOpts, dict, None] = None,
     ):
         sc = []
@@ -44,13 +44,6 @@ class Parallel(Chart):
         tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
         itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
     ):
-        if isinstance(linestyle_opts, opts.LineStyleOpts):
-            linestyle_opts = linestyle_opts.opts
-        if isinstance(tooltip_opts, opts.TooltipOpts):
-            tooltip_opts = tooltip_opts.opts
-        if isinstance(itemstyle_opts, opts.ItemStyleOpts):
-            itemstyle_opts = itemstyle_opts.opts
-
         self._append_legend(series_name, is_selected)
         self.options.get("series").append(
             {

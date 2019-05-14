@@ -1,18 +1,19 @@
-# coding=utf-8
 from ... import options as opts
 from ...charts.chart import Chart
-from ...commons.types import List, Numeric, Optional, Union
+from ...commons.types import Numeric, Optional, Sequence, Union
 from ...globals import ChartType
 
 
 class Tree(Chart):
     """
-    <<< 树图 >>>
+    <<< Tree diagrams >>>
 
-    树图主要用来可视化树形数据结构，是一种特殊的层次类型，具有唯一的根节点，左子树，和右子树。
+    Tree diagrams are used primarily to visualize tree data structures,
+    which are special hierarchical types with unique root nodes, left subtrees,
+    and right subtrees.
     """
 
-    def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):
+    def __init__(self, init_opts: opts.InitOpts = opts.InitOpts()):
         super().__init__(init_opts=init_opts)
 
     @staticmethod
@@ -37,7 +38,7 @@ class Tree(Chart):
     def add(
         self,
         series_name: str,
-        data: List[Union[opts.TreeItem, dict]],
+        data: Sequence[Union[opts.TreeItem, dict]],
         *,
         layout: str = "orthogonal",
         symbol: str = "emptyCircle",
@@ -53,15 +54,6 @@ class Tree(Chart):
         tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
         itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
     ):
-        if isinstance(label_opts, opts.LabelOpts):
-            label_opts = label_opts.opts
-        if isinstance(leaves_label_opts, opts.LabelOpts):
-            leaves_label_opts = leaves_label_opts.opts
-        if isinstance(tooltip_opts, opts.TooltipOpts):
-            tooltip_opts = tooltip_opts.opts
-        if isinstance(itemstyle_opts, opts.ItemStyleOpts):
-            itemstyle_opts = itemstyle_opts.opts
-
         _data = self._set_collapse_interval(data, collapse_interval)
         self.options.get("series").append(
             {

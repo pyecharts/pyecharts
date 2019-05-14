@@ -1,8 +1,8 @@
-# coding=utf-8
 import datetime
 import json
 import os
 import uuid
+from typing import Sequence
 
 from jinja2 import Environment
 
@@ -11,6 +11,7 @@ from ..commons.types import Optional, Union
 from ..datasets import FILENAMES
 from ..globals import CurrentConfig, NotebookType, ThemeType
 from ..options import InitOpts
+from ..options.series_options import BasicOpts
 from ..render.display import HTML, Javascript
 from ..render.engine import RenderEngine
 
@@ -20,7 +21,7 @@ class Base:
     `Base`类是所有图形类的基类，提供部分初始化参数和基本的方法
     """
 
-    def __init__(self, init_opts: Union[InitOpts, dict] = InitOpts()):
+    def __init__(self, init_opts: InitOpts = InitOpts()):
         self.width = init_opts.width
         self.height = init_opts.height
         self.renderer = init_opts.renderer
@@ -33,6 +34,7 @@ class Base:
         self.js_functions: utils.OrderedSet = utils.OrderedSet()
         self.js_dependencies: utils.OrderedSet = utils.OrderedSet("echarts")
         self.options.update(backgroundColor=init_opts.bg_color)
+        self._is_geo_chart: bool = False
 
     def add_js_funcs(self, *fns):
         for fn in fns:
@@ -111,3 +113,12 @@ class Base:
 def default(o):
     if isinstance(o, (datetime.date, datetime.datetime)):
         return o.isoformat()
+    if isinstance(o, utils.JsCode):
+        return (
+            o.replace("\\n|\\t", "").replace(r"\\n", "\n").replace(r"\\t", "\t").js_code
+        )
+    if isinstance(o, BasicOpts):
+        if isinstance(o.opts, Sequence):
+            return [utils.remove_key_with_none_value(item) for item in o.opts]
+        else:
+            return utils.remove_key_with_none_value(o.opts)

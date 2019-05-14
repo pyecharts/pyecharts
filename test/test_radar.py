@@ -1,8 +1,10 @@
+from nose.tools import eq_
+
 from pyecharts import options as opts
 from pyecharts.charts import Radar
 
-v1 = [[4300, 10000, 28000, 35000, 50000, 19000]]
-v2 = [[5000, 14000, 28000, 31000, 42000, 21000]]
+v1 = [(4300, 10000, 28000, 35000, 50000, 19000)]
+v2 = [(5000, 14000, 28000, 31000, 42000, 21000)]
 
 
 def test_radar_base():
@@ -22,6 +24,6 @@ def test_radar_base():
         .add("实际开销", v2)
         .set_series_opts(label_opts=opts.LabelOpts(is_show=False))
     )
-    assert c.theme == "white"
-    assert c.renderer == "canvas"
-    c.render("render.html")
+    eq_(c.theme, "white")
+    eq_(c.renderer, "canvas")
+    c.render()

@@ -1,4 +1,3 @@
-# coding=utf-8
 from ... import options as opts
 from ...charts.chart import Chart
 from ...commons.types import Optional, Sequence, Union
@@ -7,12 +6,14 @@ from ...globals import ChartType
 
 class Pie(Chart):
     """
-    <<< 饼图 >>>
+    <<< Pie >>>
 
-    饼图主要用于表现不同类目的数据在总和中的占比。每个的弧度表示数据数量的比例。
+    The pie chart is mainly used to represent the proportion of data of
+    different categories in the total. Each radian represents the ratio of
+    the number of data points.
     """
 
-    def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):
+    def __init__(self, init_opts: opts.InitOpts = opts.InitOpts()):
         super().__init__(init_opts=init_opts)
 
     def add(
@@ -24,17 +25,11 @@ class Pie(Chart):
         radius: Optional[Sequence] = None,
         center: Optional[Sequence] = None,
         rosetype: Optional[str] = None,
+        is_clockwise: bool = True,
         label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
         tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
         itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
     ):
-        if isinstance(label_opts, opts.LabelOpts):
-            label_opts = label_opts.opts
-        if isinstance(tooltip_opts, opts.TooltipOpts):
-            tooltip_opts = tooltip_opts.opts
-        if isinstance(itemstyle_opts, opts.ItemStyleOpts):
-            itemstyle_opts = itemstyle_opts.opts
-
         data = [{"name": n, "value": v} for n, v in data_pair]
 
         if not radius:
@@ -55,6 +50,7 @@ class Pie(Chart):
             {
                 "type": ChartType.PIE,
                 "name": series_name,
+                "clockwise": is_clockwise,
                 "data": data,
                 "radius": radius,
                 "center": center,

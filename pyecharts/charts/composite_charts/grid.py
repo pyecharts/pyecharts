@@ -1,17 +1,19 @@
-# coding=utf-8
 import copy
 
 from ... import options as opts
-from ...commons.types import Optional, Union
+from ...commons.types import Optional, Sequence, Union
+from ...globals import ThemeType
 from ..chart import Base, RectChart
 
 
 class Grid(Base):
     """
-    <<< 并行显示多张图 >>>
+    `Gird` Drawing grid in rectangular coordinate. In a single grid,
+    at most two X and Y axes each is allowed. Line chart, bar chart,
+    and scatter chart (bubble chart) can be drawn in grid.
     """
 
-    def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):
+    def __init__(self, init_opts: opts.InitOpts = opts.InitOpts()):
         super().__init__(init_opts=init_opts)
         self.options: Optional[dict] = None
         self._axis_index: int = 0
@@ -23,20 +25,21 @@ class Grid(Base):
         grid_opts: Union[opts.GridOpts, dict],
         grid_index: int = 0,
     ):
-        if isinstance(grid_opts, opts.GridOpts):
-            grid_opts = grid_opts.opts
-
         if self.options is None:
             self.options = copy.deepcopy(chart.options)
             self.chart_id = chart.chart_id
             self.options.update(grid=[], title=[])
+            if self.theme != ThemeType.WHITE:
+                self.options.update(color=[])
             for s in self.options.get("series"):
                 s.update(xAxisIndex=self._axis_index, yAxisIndex=self._axis_index)
 
         title = chart.options.get("title", opts.TitleOpts().opts)
-        self.options.update(
-            title=self.options.get("title", opts.TitleOpts().opts) + title
-        )
+        if isinstance(title, opts.TitleOpts):
+            title = title.opts
+        if not isinstance(title, Sequence):
+            title = (title,)
+        self.options.get("title").extend(title)
 
         for s in chart.options.get("series"):
             s.update(xAxisIndex=self._axis_index, yAxisIndex=self._axis_index)

@@ -1,4 +1,3 @@
-# coding=utf-8
 import random
 
 from ... import options as opts
@@ -22,10 +21,13 @@ def gen_color():
 
 class WordCloud(Chart):
     """
-    <<< 词云图 >>>
+    <<< WordCloud >>>
+
+    Word cloud is to visually highlight the keywords that
+    appear frequently in the text.
     """
 
-    def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):
+    def __init__(self, init_opts: opts.InitOpts = opts.InitOpts()):
         super().__init__(init_opts=init_opts)
         self.js_dependencies.add("echarts-wordcloud")
 
@@ -41,11 +43,6 @@ class WordCloud(Chart):
         tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
         itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
     ):
-        if isinstance(tooltip_opts, opts.TooltipOpts):
-            tooltip_opts = tooltip_opts.opts
-        if isinstance(itemstyle_opts, opts.ItemStyleOpts):
-            itemstyle_opts = itemstyle_opts.opts
-
         data = []
         for n, v in data_pair:
             data.append(

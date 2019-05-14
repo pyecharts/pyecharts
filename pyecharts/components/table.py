@@ -1,10 +1,10 @@
-# coding=utf-8
 import os
 
 from jinja2 import Environment
 from prettytable import PrettyTable
 
-from ..commons.types import List, Optional
+from ..commons.types import Optional, Sequence
+from ..commons.utils import OrderedSet
 from ..globals import CurrentConfig
 from ..render.display import HTML
 from ..render.engine import RenderEngine
@@ -18,10 +18,12 @@ class Table:
     ):
         self.page_title = page_title
         self.js_host = js_host
+        self.js_dependencies: OrderedSet = OrderedSet()
         self._charts = []
 
-    def add(self, headers: List, rows: List):
-        table = PrettyTable(headers)
+    def add(self, headers: Sequence, rows: Sequence, attributes: Optional[dict] = None):
+        attributes = attributes or {"class": "fl-table"}
+        table = PrettyTable(headers, attributes=attributes)
         for r in rows:
             table.add_row(r)
         self._charts.append(table.get_html_string())

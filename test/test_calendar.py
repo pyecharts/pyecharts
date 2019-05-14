@@ -1,6 +1,8 @@
 import datetime
 import random
 
+from nose.tools import eq_
+
 from pyecharts import options as opts
 from pyecharts.charts import Calendar
 
@@ -27,6 +29,6 @@ def test_calendar_base():
             )
         )
     )
-    assert c.theme == "white"
-    assert c.renderer == "canvas"
-    c.render("render.html")
+    eq_(c.theme, "white")
+    eq_(c.renderer, "canvas")
+    c.render()

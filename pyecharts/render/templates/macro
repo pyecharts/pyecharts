@@ -8,6 +8,14 @@
         {% endfor %}
         var option_{{ c.chart_id }} = {{ c.json_contents }};
         chart_{{ c.chart_id }}.setOption(option_{{ c.chart_id }});
+        {% if c._is_geo_chart %}
+            var bmap = chart_{{ c.chart_id }}.getModel().getComponent('bmap').getBMap();
+            {% if c.bmap_js_functions %}
+                {% for fn in c.bmap_js_functions.items %}
+                    {{ fn }}
+                {% endfor %}
+            {% endif %}
+        {% endif %}
     </script>
 {%- endmacro %}
 

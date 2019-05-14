@@ -1,5 +1,19 @@
 # flake8: noqa
 
+from .charts_options import (
+    BarItem,
+    BMapCopyrightType,
+    BMapGeoLocationControlOpts,
+    BMapNavigationControlOpts,
+    BMapOverviewMapControlOpts,
+    BMapScaleControlOpts,
+    BMapTypeControl,
+    GraphCategory,
+    GraphLink,
+    GraphNode,
+    SunburstItem,
+    TreeItem,
+)
 from .global_options import (
     AngleAxisItem,
     AngleAxisOpts,
@@ -29,9 +43,6 @@ from .global_options import (
 from .series_options import (
     AreaStyleOpts,
     EffectOpts,
-    GraphCategory,
-    GraphLink,
-    GraphNode,
     ItemStyleOpts,
     LabelOpts,
     LineStyleOpts,
@@ -44,5 +55,4 @@ from .series_options import (
     SplitAreaOpts,
     SplitLineOpts,
     TextStyleOpts,
-    TreeItem,
 )

@@ -1,4 +1,3 @@
-# coding=utf-8
 from ... import options as opts
 from ...charts.chart import Chart
 from ...commons.types import Sequence, Union
@@ -6,13 +5,14 @@ from ...commons.types import Sequence, Union
 
 class Calendar(Chart):
     """
-    <<< 日历图 >>>
+    <<< Calendar Diagram >>>
 
-    热力图主要通过颜色去表现数值的大小，必须要配合 visualMap 组件使用。
-    直角坐标系上必须要使用两个类目轴。
+    The calendar diagram is mainly used to represent the size of a value by
+    color and must be used in conjunction with the visualMap component.
+    Two categories of axes must be used in rectangular coordinates.
     """
 
-    def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):
+    def __init__(self, init_opts: opts.InitOpts = opts.InitOpts()):
         super().__init__(init_opts=init_opts)
         self.options.update(calendar=opts.CalendarOpts().opts)
 
@@ -27,15 +27,6 @@ class Calendar(Chart):
         tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
         itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
     ):
-        if isinstance(label_opts, opts.LabelOpts):
-            label_opts = label_opts.opts
-        if isinstance(calendar_opts, opts.CalendarOpts):
-            calendar_opts = calendar_opts.opts
-        if isinstance(tooltip_opts, opts.TooltipOpts):
-            tooltip_opts = tooltip_opts.opts
-        if isinstance(itemstyle_opts, opts.ItemStyleOpts):
-            itemstyle_opts = itemstyle_opts.opts
-
         if calendar_opts:
             self.options.update(calendar=calendar_opts)
 

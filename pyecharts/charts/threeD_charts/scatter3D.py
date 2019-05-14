@@ -1,4 +1,3 @@
-# coding=utf-8
 from ...charts.chart import Chart3D
 from ...commons.types import Union
 from ...options import InitOpts
@@ -6,7 +5,7 @@ from ...options import InitOpts
 
 class Scatter3D(Chart3D):
     """
-    <<< 3D 散点图 >>>
+    <<< 3D Scatter-Chart >>>
     """
 
     def __init__(self, init_opts: Union[InitOpts, dict] = InitOpts()):

@@ -1,4 +1,3 @@
-# coding=utf-8
 import os
 
 from jinja2 import Environment, FileSystemLoader
@@ -44,6 +43,7 @@ class _ChartType:
     RADAR: str = "radar"
     SANKEY: str = "sankey"
     SCATTER: str = "scatter"
+    SUNBURST: str = "sunburst"
     THEMERIVER: str = "themeRiver"
     TREE: str = "tree"
     TREEMAP: str = "treemap"
@@ -83,6 +83,25 @@ class _GeoType:
     LINES: str = "lines"
 
 
+class _BMapType:
+    # BMap Control location
+    ANCHOR_TOP_LEFT = 0
+    ANCHOR_TOP_RIGHT = 1
+    ANCHOR_BOTTOM_LEFT = 2
+    ANCHOR_BOTTOM_RIGHT = 3
+
+    # BMap Navigation Control Type
+    NAVIGATION_CONTROL_LARGE = 0
+    NAVIGATION_CONTROL_SMALL = 1
+    NAVIGATION_CONTROL_PAN = 2
+    NAVIGATION_CONTROL_ZOOM = 3
+
+    # BMap Maptype Control Type
+    MAPTYPE_CONTROL_HORIZONTAL = 0
+    MAPTYPE_CONTROL_DROPDOWN = 1
+    MAPTYPE_CONTROL_MAP = 2
+
+
 class _NotebookType:
     JUPYTER_NOTEBOOK = "jupyter_notebook"
     JUPYTER_LAB = "jupyter_lab"
@@ -96,6 +115,7 @@ ChartType = _ChartType
 TooltipFormatterType = _ToolTipFormatterType()
 ThemeType = _ThemeType()
 GeoType = _GeoType()
+BMapType = _BMapType
 NotebookType = _NotebookType()
 
 

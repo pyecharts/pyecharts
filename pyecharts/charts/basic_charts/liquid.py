@@ -1,18 +1,17 @@
-# coding=utf-8
 from ... import options as opts
 from ...charts.chart import Chart
-from ...commons.types import List, Optional, Sequence, Union
+from ...commons.types import Optional, Sequence, Union
 from ...globals import ChartType
 
 
 class Liquid(Chart):
     """
-    <<< 水球图 >>>
+    <<< Liquid >>>
 
-    主要用来突出数据的百分比。
+    The liquid chart is mainly used to highlight the percentage of data.
     """
 
-    def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):
+    def __init__(self, init_opts: opts.InitOpts = opts.InitOpts()):
         super().__init__(init_opts=init_opts)
         self.js_dependencies.add("echarts-liquidfill")
 
@@ -22,14 +21,14 @@ class Liquid(Chart):
         data: Sequence,
         *,
         shape: str = "circle",
-        color: Optional[List[str]] = None,
+        color: Optional[Sequence[str]] = None,
         is_animation: bool = True,
         is_outline_show: bool = True,
         tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
+        label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(
+            font_size=50, position="inside"
+        ),
     ):
-        if isinstance(tooltip_opts, opts.TooltipOpts):
-            tooltip_opts = tooltip_opts.opts
-
         _animation_dur, _animation_dur_update = 2000, 1000
         if not is_animation:
             _animation_dur, _animation_dur_update = 0, 0
@@ -48,6 +47,7 @@ class Liquid(Chart):
                 "shape": shape,
                 "outline": {"show": is_outline_show},
                 "tooltip": tooltip_opts,
+                "label": label_opts,
             }
         )
         return self

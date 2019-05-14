@@ -1,7 +1,7 @@
-# coding=utf-8
-from ..commons.types import List, Numeric, Optional, Sequence, Union
+from ..commons.types import JSFunc, Numeric, Optional, Sequence, Union
 from ..globals import RenderType, ThemeType
 from ..options.series_options import (
+    BasicOpts,
     LabelOpts,
     LineStyleOpts,
     SplitAreaOpts,
@@ -32,7 +32,7 @@ class InitOpts:
         self.js_host = js_host
 
 
-class ToolBoxFeatureOpts:
+class ToolBoxFeatureOpts(BasicOpts):
     def __init__(
         self,
         save_as_image: Optional[dict] = None,
@@ -60,7 +60,7 @@ class ToolBoxFeatureOpts:
         }
 
 
-class ToolboxOpts:
+class ToolboxOpts(BasicOpts):
     def __init__(
         self,
         is_show: bool = True,
@@ -73,9 +73,6 @@ class ToolboxOpts:
         pos_bottom: Optional[str] = None,
         feature: Union[ToolBoxFeatureOpts, dict] = ToolBoxFeatureOpts(),
     ):
-        if isinstance(feature, ToolBoxFeatureOpts):
-            feature = feature.opts
-
         self.opts: dict = {
             "show": is_show,
             "orient": orient,
@@ -89,7 +86,7 @@ class ToolboxOpts:
         }
 
 
-class TitleOpts:
+class TitleOpts(BasicOpts):
     def __init__(
         self,
         title: Optional[str] = None,
@@ -105,12 +102,7 @@ class TitleOpts:
         title_textstyle_opts: Union[TextStyleOpts, dict, None] = None,
         subtitle_textstyle_opts: Union[TextStyleOpts, dict, None] = None,
     ):
-        if isinstance(title_textstyle_opts, TextStyleOpts):
-            title_textstyle_opts = title_textstyle_opts.opts
-        if isinstance(subtitle_textstyle_opts, TextStyleOpts):
-            subtitle_textstyle_opts = subtitle_textstyle_opts.opts
-
-        self.opts: List = [
+        self.opts: Sequence = [
             {
                 "text": title,
                 "link": title_link,
@@ -128,7 +120,7 @@ class TitleOpts:
         ]
 
 
-class DataZoomOpts:
+class DataZoomOpts(BasicOpts):
     def __init__(
         self,
         is_show: bool = True,
@@ -139,9 +131,13 @@ class DataZoomOpts:
         start_value: Union[int, str, None] = None,
         end_value: Union[int, str, None] = None,
         orient: str = "horizontal",
-        xaxis_index: Union[int, List[int], None] = None,
-        yaxis_index: Union[int, List[int], None] = None,
+        xaxis_index: Union[int, Sequence[int], None] = None,
+        yaxis_index: Union[int, Sequence[int], None] = None,
         is_zoom_lock: bool = False,
+        pos_left: Optional[str] = None,
+        pos_right: Optional[str] = None,
+        pos_top: Optional[str] = None,
+        pos_bottom: Optional[str] = None,
     ):
         self.opts: dict = {
             "show": is_show,
@@ -155,10 +151,14 @@ class DataZoomOpts:
             "xAxisIndex": xaxis_index,
             "yAxisIndex": yaxis_index,
             "zoomLock": is_zoom_lock,
+            "left": pos_left,
+            "right": pos_right,
+            "top": pos_top,
+            "bottom": pos_bottom,
         }
 
 
-class LegendOpts:
+class LegendOpts(BasicOpts):
     def __init__(
         self,
         type_: Optional[str] = None,
@@ -171,9 +171,6 @@ class LegendOpts:
         orient: Optional[str] = None,
         textstyle_opts: Union[TextStyleOpts, dict, None] = None,
     ):
-        if isinstance(textstyle_opts, TextStyleOpts):
-            textstyle_opts = textstyle_opts.opts
-
         self.opts: dict = {
             "type": type_,
             "selectedMode": selected_mode,
@@ -187,15 +184,15 @@ class LegendOpts:
         }
 
 
-class VisualMapOpts:
+class VisualMapOpts(BasicOpts):
     def __init__(
         self,
         type_: str = "color",
         min_: Numeric = 0,
         max_: Numeric = 100,
-        range_text: Union[list, tuple] = None,
-        range_color: Union[List[str]] = None,
-        range_size: Union[List[int]] = None,
+        range_text: Optional[Sequence] = None,
+        range_color: Optional[Sequence[str]] = None,
+        range_size: Optional[Sequence[int]] = None,
         orient: str = "vertical",
         pos_left: Optional[str] = None,
         pos_right: Optional[str] = None,
@@ -209,8 +206,6 @@ class VisualMapOpts:
         out_of_range: Optional[Sequence] = None,
         textstyle_opts: Union[TextStyleOpts, dict, None] = None,
     ):
-        if isinstance(textstyle_opts, TextStyleOpts):
-            textstyle_opts = textstyle_opts.opts
         _inrange_op = {}
         if type_ == "color":
             range_color = range_color or ["#50a3ba", "#eac763", "#d94e5d"]
@@ -243,22 +238,19 @@ class VisualMapOpts:
             self.opts.update(pieces=pieces)
 
 
-class TooltipOpts:
+class TooltipOpts(BasicOpts):
     def __init__(
         self,
         is_show: bool = True,
         trigger: str = "item",
         trigger_on: str = "mousemove|click",
         axis_pointer_type: str = "line",
-        formatter: Optional[str] = None,
+        formatter: Optional[JSFunc] = None,
         background_color: Optional[str] = None,
         border_color: Optional[str] = None,
         border_width: Numeric = 0,
         textstyle_opts: TextStyleOpts = TextStyleOpts(font_size=14),
     ):
-        if isinstance(textstyle_opts, TextStyleOpts):
-            textstyle_opts = textstyle_opts.opts
-
         self.opts: dict = {
             "show": is_show,
             "trigger": trigger,
@@ -272,7 +264,7 @@ class TooltipOpts:
         }
 
 
-class AxisLineOpts:
+class AxisLineOpts(BasicOpts):
     def __init__(
         self,
         is_show: bool = True,
@@ -281,9 +273,6 @@ class AxisLineOpts:
         symbol: Optional[str] = None,
         linestyle_opts: Union[LineStyleOpts, dict, None] = None,
     ):
-        if isinstance(linestyle_opts, LineStyleOpts):
-            linestyle_opts = linestyle_opts.opts
-
         self.opts: dict = {
             "show": is_show,
             "onZero": is_on_zero,
@@ -293,7 +282,7 @@ class AxisLineOpts:
         }
 
 
-class AxisTickOpts:
+class AxisTickOpts(BasicOpts):
     def __init__(
         self,
         is_show: bool = True,
@@ -311,7 +300,7 @@ class AxisTickOpts:
         }
 
 
-class AxisPointerOpts:
+class AxisPointerOpts(BasicOpts):
     def __init__(
         self,
         is_show: bool = False,
@@ -319,11 +308,6 @@ class AxisPointerOpts:
         label: Union[LabelOpts, dict, None] = None,
         linestyle_opts: Union[LineStyleOpts, dict, None] = None,
     ):
-        if isinstance(label, LabelOpts):
-            label = label.opts
-        if isinstance(linestyle_opts, LineStyleOpts):
-            linestyle_opts = linestyle_opts.opts
-
         self.opts: dict = {
             "show": is_show,
             "type": type_,
@@ -332,22 +316,27 @@ class AxisPointerOpts:
         }
 
 
-class AxisOpts:
+class AxisOpts(BasicOpts):
     def __init__(
         self,
+        type_: Optional[str] = None,
         name: Optional[str] = None,
         is_show: bool = True,
         is_scale: bool = False,
         is_inverse: bool = False,
         name_location: str = "end",
         name_gap: Numeric = 15,
+        name_rotate: Optional[Numeric] = None,
         interval: Optional[Numeric] = None,
         grid_index: Numeric = 0,
         position: Optional[str] = None,
+        offset: Numeric = 0,
+        split_number: Numeric = 5,
         boundary_gap: Union[str, bool, None] = None,
         min_: Union[Numeric, str, None] = None,
         max_: Union[Numeric, str, None] = None,
-        type_: Optional[str] = None,
+        min_interval: Numeric = 0,
+        max_interval: Optional[Numeric] = None,
         axisline_opts: Union[AxisLineOpts, dict, None] = None,
         axistick_opts: Union[AxisTickOpts, dict, None] = None,
         axislabel_opts: Union[LabelOpts, dict, None] = None,
@@ -356,27 +345,14 @@ class AxisOpts:
         splitarea_opts: Union[SplitAreaOpts, dict, None] = None,
         splitline_opts: Union[SplitLineOpts, dict] = SplitLineOpts(),
     ):
-        if isinstance(axisline_opts, AxisLineOpts):
-            axisline_opts = axisline_opts.opts
-        if isinstance(axistick_opts, AxisTickOpts):
-            axistick_opts = axistick_opts.opts
-        if isinstance(axislabel_opts, LabelOpts):
-            axislabel_opts = axislabel_opts.opts
-        if isinstance(axispointer_opts, AxisPointerOpts):
-            axispointer_opts = axispointer_opts.opts
-        if isinstance(name_textstyle_opts, TextStyleOpts):
-            name_textstyle_opts = name_textstyle_opts.opts
-        if isinstance(splitarea_opts, SplitAreaOpts):
-            splitarea_opts = splitarea_opts.opts
-        if isinstance(splitline_opts, SplitLineOpts):
-            splitline_opts = splitline_opts.opts
-
         self.opts: dict = {
+            "type": type_,
             "name": name,
             "show": is_show,
             "scale": is_scale,
             "nameLocation": name_location,
             "nameGap": name_gap,
+            "nameRotate": name_rotate,
             "interval": interval,
             "nameTextStyle": name_textstyle_opts,
             "gridIndex": grid_index,
@@ -386,16 +362,19 @@ class AxisOpts:
             "axisPointer": axispointer_opts,
             "inverse": is_inverse,
             "position": position,
+            "offset": offset,
+            "splitNumber": split_number,
             "boundaryGap": boundary_gap,
             "min": min_,
             "max": max_,
-            "type": type_,
+            "minInterval": min_interval,
+            "maxInterval": max_interval,
             "splitLine": splitline_opts,
             "splitArea": splitarea_opts,
         }
 
 
-class GridOpts:
+class GridOpts(BasicOpts):
     def __init__(
         self,
         pos_left: Optional[str] = None,
@@ -415,7 +394,7 @@ class GridOpts:
         }
 
 
-class Grid3DOpts:
+class Grid3DOpts(BasicOpts):
     def __init__(
         self,
         width: Numeric = 200,
@@ -437,7 +416,7 @@ class Grid3DOpts:
         }
 
 
-class Axis3DOpts:
+class Axis3DOpts(BasicOpts):
     def __init__(
         self,
         data: Optional[Sequence] = None,
@@ -451,8 +430,6 @@ class Axis3DOpts:
         margin: Numeric = 8,
         textstyle_opts: Union[TextStyleOpts, dict, None] = None,
     ):
-        if isinstance(textstyle_opts, TextStyleOpts):
-            textstyle_opts = textstyle_opts.opts
         self.opts: dict = {
             "data": data,
             "name": name,
@@ -466,7 +443,7 @@ class Axis3DOpts:
         }
 
 
-class ParallelOpts:
+class ParallelOpts(BasicOpts):
     def __init__(
         self,
         pos_left: str = "5%",
@@ -484,7 +461,7 @@ class ParallelOpts:
         }
 
 
-class ParallelAxisOpts:
+class ParallelAxisOpts(BasicOpts):
     def __init__(
         self,
         dim: Numeric,
@@ -506,7 +483,7 @@ class ParallelAxisOpts:
         }
 
 
-class RadarIndicatorItem:
+class RadarIndicatorItem(BasicOpts):
     def __init__(
         self,
         name: Optional[str] = None,
@@ -517,7 +494,7 @@ class RadarIndicatorItem:
         self.opts: dict = {"name": name, "max": max_, "min": min_, "color": color}
 
 
-class CalendarOpts:
+class CalendarOpts(BasicOpts):
     def __init__(
         self,
         pos_left: Optional[str] = None,
@@ -530,13 +507,6 @@ class CalendarOpts:
         monthlabel_opts: Union[LabelOpts, dict, None] = None,
         yearlabel_opts: Union[LabelOpts, dict, None] = None,
     ):
-        if isinstance(daylabel_opts, LabelOpts):
-            daylabel_opts = daylabel_opts.opts
-        if isinstance(monthlabel_opts, LabelOpts):
-            monthlabel_opts = monthlabel_opts.opts
-        if isinstance(yearlabel_opts, LabelOpts):
-            yearlabel_opts = yearlabel_opts.opts
-
         self.opts: dict = {
             "left": pos_left,
             "top": pos_top,
@@ -550,7 +520,7 @@ class CalendarOpts:
         }
 
 
-class SingleAxisOpts:
+class SingleAxisOpts(BasicOpts):
     def __init__(
         self,
         name: Optional[str] = None,
@@ -580,15 +550,12 @@ class SingleAxisOpts:
         }
 
 
-class RadiusAxisItem:
+class RadiusAxisItem(BasicOpts):
     def __init__(
         self,
         value: Optional[str] = None,
-        textstyle_opts: Optional[TextStyleOpts] = None,
+        textstyle_opts: Union[TextStyleOpts, dict, None] = None,
     ):
-        if isinstance(textstyle_opts, TextStyleOpts):
-            textstyle_opts = textstyle_opts.opts
-
         self.opts: dict = {"value": value, "textStyle": textstyle_opts}
 
 
@@ -601,12 +568,12 @@ class AngleAxisItem(RadiusAxisItem):
         super().__init__(value, textstyle_opts)
 
 
-class RadiusAxisOpts:
+class RadiusAxisOpts(BasicOpts):
     def __init__(
         self,
         polar_index: Optional[int] = None,
-        data: Optional[List[Union[RadiusAxisItem, dict, str]]] = None,
-        boundary_gap: Union[bool, List] = None,
+        data: Optional[Sequence[Union[RadiusAxisItem, dict, str]]] = None,
+        boundary_gap: Union[bool, Sequence] = None,
         type_: Optional[str] = None,
         name: Optional[str] = None,
         name_location: Optional[str] = None,
@@ -618,13 +585,6 @@ class RadiusAxisOpts:
         axislabel_opts: Union[LabelOpts, dict, None] = None,
         z: Optional[int] = None,
     ):
-        if isinstance(splitline_opts, SplitLineOpts):
-            splitline_opts = splitline_opts.opts
-        if isinstance(axisline_opts, AxisLineOpts):
-            axisline_opts = axisline_opts.opts
-        if isinstance(axislabel_opts, LabelOpts):
-            axislabel_opts = axislabel_opts.opts
-
         _data = []
         if data:
             for d in data:
@@ -649,14 +609,14 @@ class RadiusAxisOpts:
         }
 
 
-class AngleAxisOpts:
+class AngleAxisOpts(BasicOpts):
     def __init__(
         self,
         polar_index: Optional[int] = None,
-        data: Optional[List[Union[AngleAxisItem, Numeric, dict, str]]] = None,
+        data: Optional[Sequence[Union[AngleAxisItem, Numeric, dict, str]]] = None,
         start_angle: Optional[Numeric] = None,
         is_clockwise: bool = False,
-        boundary_gap: Union[bool, List] = None,
+        boundary_gap: Union[bool, Sequence, None] = None,
         type_: Optional[str] = None,
         min_: Union[str, Numeric, None] = None,
         max_: Union[str, Numeric, None] = None,
@@ -665,13 +625,6 @@ class AngleAxisOpts:
         axislabel_opts: Union[LabelOpts, dict, None] = None,
         z: Optional[int] = None,
     ):
-        if isinstance(splitline_opts, SplitLineOpts):
-            splitline_opts = splitline_opts.opts
-        if isinstance(axisline_opts, AxisLineOpts):
-            axisline_opts = axisline_opts.opts
-        if isinstance(axislabel_opts, LabelOpts):
-            axislabel_opts = axislabel_opts.opts
-
         _data = []
         if data:
             for d in data:

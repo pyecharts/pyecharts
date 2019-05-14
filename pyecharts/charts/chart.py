@@ -1,7 +1,6 @@
-# coding=utf-8
 from .. import options as opts
 from ..charts.base import Base
-from ..commons.types import List, Numeric, Optional, Sequence, Union
+from ..commons.types import Optional, Sequence, Union
 from ..globals import RenderType, ThemeType
 
 
@@ -10,20 +9,24 @@ class Chart(Base):
     `Chart`类是所有非自定义类的基类，继承自 `Base` 类
     """
 
-    def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):
+    def __init__(self, init_opts: opts.InitOpts = opts.InitOpts()):
         super().__init__(init_opts=init_opts)
-        self._colors = (
+        self.colors = (
             "#c23531 #2f4554 #61a0a8 #d48265 #749f83 #ca8622 #bda29a #6e7074 "
             "#546570 #c4ccd3 #f05b72 #ef5b9c #f47920 #905a3d #fab27b #2a5caa "
             "#444693 #726930 #b2d235 #6d8346 #ac6767 #1d953f #6950a1 #918597"
         ).split()
         if init_opts.theme == ThemeType.WHITE:
-            self.options.update(color=self._colors)
+            self.options.update(color=self.colors)
         self.options.update(
             series=[],
             legend=[{"data": [], "selected": dict()}],
             tooltip=opts.TooltipOpts().opts,
         )
+
+    def set_colors(self, colors: Sequence[str]):
+        self.options.update(color=colors)
+        return self
 
     def set_series_opts(
         self,
@@ -38,73 +41,56 @@ class Chart(Base):
         effect_opts: Union[opts.EffectOpts, dict] = opts.EffectOpts(),
         tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
         itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
+        **kwargs,
     ):
         _series = self.options.get("series")
         if label_opts:
-            if isinstance(label_opts, opts.LabelOpts):
-                label_opts = label_opts.opts
             for s in _series:
                 s.update(label=label_opts)
 
         if linestyle_opts:
-            if isinstance(linestyle_opts, opts.LineStyleOpts):
-                linestyle_opts = linestyle_opts.opts
             for s in _series:
                 s.update(lineStyle=linestyle_opts)
 
         if splitline_opts:
-            if isinstance(splitline_opts, opts.SplitLineOpts):
-                splitline_opts = splitline_opts.opts
             for s in _series:
                 s.update(splitLine=splitline_opts)
 
         if areastyle_opts:
-            if isinstance(areastyle_opts, opts.AreaStyleOpts):
-                areastyle_opts = areastyle_opts.opts
             for s in _series:
                 s.update(areaStyle=areastyle_opts)
 
         if axisline_opts:
-            if isinstance(axisline_opts, opts.AxisLineOpts):
-                axisline_opts = axisline_opts.opts
             for s in _series:
                 s.update(axisLine=axisline_opts)
 
         if markpoint_opts:
-            if isinstance(markpoint_opts, opts.MarkPointOpts):
-                markpoint_opts = markpoint_opts.opts
             for s in _series:
                 s.update(markPoint=markpoint_opts)
 
         if markline_opts:
-            if isinstance(markline_opts, opts.MarkLineOpts):
-                markline_opts = markline_opts.opts
             for s in _series:
                 s.update(markLine=markline_opts)
 
         if markarea_opts:
-            if isinstance(markarea_opts, opts.MarkAreaOpts):
-                markarea_opts = markarea_opts.opts
             for s in _series:
                 s.update(markArea=markarea_opts)
 
         if effect_opts:
-            if isinstance(effect_opts, opts.EffectOpts):
-                effect_opts = effect_opts.opts
             for s in _series:
                 s.update(rippleEffect=effect_opts)
 
         if tooltip_opts:
-            if isinstance(tooltip_opts, opts.TooltipOpts):
-                tooltip_opts = tooltip_opts.opts
             for s in _series:
                 s.update(tooltip=tooltip_opts)
 
         if itemstyle_opts:
-            if isinstance(itemstyle_opts, opts.ItemStyleOpts):
-                itemstyle_opts = itemstyle_opts.opts
             for s in _series:
                 s.update(itemStyle=itemstyle_opts)
+
+        if len(kwargs) > 0:
+            for s in _series:
+                s.update(kwargs)
 
         return self
 
@@ -114,9 +100,9 @@ class Chart(Base):
 
     def _append_color(self, color: Optional[str]):
         if color:
-            self._colors = [color] + self._colors
+            self.colors = [color] + self.colors
             if self.theme == ThemeType.WHITE:
-                self.options.update(color=self._colors)
+                self.options.update(color=self.colors)
 
     def set_global_opts(
         self,
@@ -127,28 +113,14 @@ class Chart(Base):
         xaxis_opts: Union[opts.AxisOpts, dict, None] = None,
         yaxis_opts: Union[opts.AxisOpts, dict, None] = None,
         visualmap_opts: Union[
-            opts.VisualMapOpts, List[Union[opts.VisualMapOpts, dict]], dict, None
+            opts.VisualMapOpts, Sequence[Union[opts.VisualMapOpts, dict]], dict, None
         ] = None,
-        datazoom_opts: List[Union[opts.DataZoomOpts, dict, None]] = None,
+        datazoom_opts: Sequence[Union[opts.DataZoomOpts, dict, None]] = None,
     ):
-        if isinstance(title_opts, opts.TitleOpts):
-            title_opts = title_opts.opts
-        if isinstance(tooltip_opts, opts.TooltipOpts):
-            tooltip_opts = tooltip_opts.opts
-        if isinstance(legend_opts, opts.LegendOpts):
-            legend_opts = legend_opts.opts
-        if isinstance(toolbox_opts, opts.ToolboxOpts):
-            toolbox_opts = toolbox_opts.opts
-        if isinstance(visualmap_opts, opts.VisualMapOpts):
-            visualmap_opts = visualmap_opts.opts
-
         vs = []
         if isinstance(visualmap_opts, Sequence):
             for vo in visualmap_opts:
-                if isinstance(vo, opts.VisualMapOpts):
-                    vs.append(vo.opts)
-                else:
-                    vs.append(vo)
+                vs.append(vo)
 
         _visualmap_opts = vs if vs else visualmap_opts
 
@@ -159,26 +131,26 @@ class Chart(Base):
             visualMap=_visualmap_opts,
         )
 
+        if isinstance(legend_opts, opts.LegendOpts):
+            legend_opts = legend_opts.opts
         for _s in self.options["legend"]:
             _s.update(legend_opts)
 
         if xaxis_opts and self.options.get("xAxis", None):
             if isinstance(xaxis_opts, opts.AxisOpts):
-                xaxis_opt = xaxis_opts.opts
-                self.options["xAxis"][0].update(xaxis_opt)
+                xaxis_opts = xaxis_opts.opts
+            self.options["xAxis"][0].update(xaxis_opts)
 
         if yaxis_opts and self.options.get("yAxis", None):
             if isinstance(yaxis_opts, opts.AxisOpts):
-                yaxis_opt = yaxis_opts.opts
-                self.options["yAxis"][0].update(yaxis_opt)
+                yaxis_opts = yaxis_opts.opts
+            self.options["yAxis"][0].update(yaxis_opts)
 
         if datazoom_opts:
             dzs = []
             for dz in datazoom_opts:
                 if not dz:
                     continue
-                if isinstance(dz, opts.DataZoomOpts):
-                    dz = dz.opts
                 dzs.append(dz)
             self.options.update(dataZoom=dzs)
         return self
@@ -226,12 +198,12 @@ class Chart3D(Chart):
     `Chart3D`类是所有 3D 类图表的基类，继承自 `Chart` 类
     """
 
-    def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):
+    def __init__(self, init_opts: opts.InitOpts = opts.InitOpts()):
         init_opts.renderer = RenderType.CANVAS
         super().__init__(init_opts)
         self.js_dependencies.add("echarts-gl")
         self.options.update(visualMap=opts.VisualMapOpts().opts)
-        self._3d_chart_type = None  # 3d chart type, don't use it directly
+        self._3d_chart_type: Optional[str] = None  # 3d chart type,don't use it directly
 
     def add(
         self,
@@ -245,19 +217,6 @@ class Chart3D(Chart):
         zaxis3d_opts: Union[opts.Axis3DOpts, dict] = opts.Axis3DOpts(type_="value"),
         grid3d_opts: Union[opts.Grid3DOpts, dict] = opts.Grid3DOpts(),
     ):
-        if isinstance(itemstyle_opts, opts.ItemStyleOpts):
-            itemstyle_opts = itemstyle_opts.opts
-        if isinstance(label_opts, opts.LabelOpts):
-            label_opts = label_opts.opts
-        if isinstance(xaxis3d_opts, opts.Axis3DOpts):
-            xaxis3d_opts = xaxis3d_opts.opts
-        if isinstance(yaxis3d_opts, opts.Axis3DOpts):
-            yaxis3d_opts = yaxis3d_opts.opts
-        if isinstance(zaxis3d_opts, opts.Axis3DOpts):
-            zaxis3d_opts = zaxis3d_opts.opts
-        if isinstance(grid3d_opts, opts.Grid3DOpts):
-            grid3d_opts = grid3d_opts.opts
-
         self.options.get("legend")[0].get("data").append(series_name)
         self.options.update(
             xAxis3D=xaxis3d_opts,

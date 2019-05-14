@@ -1,7 +1,6 @@
-# coding=utf-8
-
 # basic Charts
 from ..charts.basic_charts.bar import Bar
+from ..charts.basic_charts.bmap import BMap
 from ..charts.basic_charts.boxplot import Boxplot
 from ..charts.basic_charts.calendar import Calendar
 from ..charts.basic_charts.effectscatter import EffectScatter
@@ -20,6 +19,7 @@ from ..charts.basic_charts.polar import Polar
 from ..charts.basic_charts.radar import Radar
 from ..charts.basic_charts.sankey import Sankey
 from ..charts.basic_charts.scatter import Scatter
+from ..charts.basic_charts.sunburst import Sunburst
 from ..charts.basic_charts.themeriver import ThemeRiver
 from ..charts.basic_charts.tree import Tree
 from ..charts.basic_charts.treemap import TreeMap

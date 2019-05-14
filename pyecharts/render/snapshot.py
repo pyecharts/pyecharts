@@ -88,4 +88,4 @@ def save_as(image_data: bytes, output_name: str, file_type: str):
         b.paste(m, mask=m.split()[3])
         b.save(output_name, file_type, quality=100)
     except ModuleNotFoundError:
-        raise Exception("Please install PIL for % image type" % file_type)
+        raise Exception("Please install PIL for {} image type".format(file_type))

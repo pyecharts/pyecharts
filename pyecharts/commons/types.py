@@ -1,4 +1,3 @@
-# coding=utf-8
 from typing import (
     Any,
     Callable,
@@ -11,5 +10,7 @@ from typing import (
     Union,
 )
 
+from .utils import JsCode
+
 Numeric = Union[int, float]
-JSFunc = str
+JSFunc = Union[str, JsCode]

@@ -1,3 +1,5 @@
+from nose.tools import eq_
+
 from pyecharts.charts import Tree
 
 
@@ -25,6 +27,6 @@ def test_tree_base():
         }
     ]
     c = Tree().add("", data)
-    assert c.theme == "white"
-    assert c.renderer == "canvas"
-    c.render("render.html")
+    eq_(c.theme, "white")
+    eq_(c.renderer, "canvas")
+    c.render()

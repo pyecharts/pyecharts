@@ -1,4 +1,3 @@
-# coding=utf-8
 from ... import options as opts
 from ...charts.chart import RectChart
 from ...commons.types import Numeric, Optional, Sequence, Union
@@ -7,12 +6,12 @@ from ...globals import ChartType
 
 class EffectScatter(RectChart):
     """
-    <<< 带有涟漪特效动画的散点图 >>>
+    <<< Scatter plots with ripple effects animation >>>
 
-    利用动画特效可以将某些想要突出的数据进行视觉突出。
+    Use animation effects to visually highlight designated data set.
     """
 
-    def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):
+    def __init__(self, init_opts: opts.InitOpts = opts.InitOpts()):
         super().__init__(init_opts=init_opts)
         self.options.update(yAxis=[opts.AxisOpts().opts])
 
@@ -32,15 +31,6 @@ class EffectScatter(RectChart):
         tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
         itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
     ):
-        if isinstance(label_opts, opts.LabelOpts):
-            label_opts = label_opts.opts
-        if isinstance(effect_opts, opts.EffectOpts):
-            effect_opts = effect_opts.opts
-        if isinstance(tooltip_opts, opts.TooltipOpts):
-            tooltip_opts = tooltip_opts.opts
-        if isinstance(itemstyle_opts, opts.ItemStyleOpts):
-            itemstyle_opts = itemstyle_opts.opts
-
         self._append_color(color)
         self._append_legend(series_name, is_selected)
         self.options.get("series").append(

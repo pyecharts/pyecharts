@@ -1,25 +1,24 @@
-# coding=utf-8
 from ... import options as opts
 from ...charts.chart import Chart
-from ...commons.types import List, Numeric, Optional, Union
+from ...commons.types import Numeric, Optional, Sequence, Union
 from ...globals import ChartType
 
 
 class TreeMap(Chart):
     """
-    <<< 树图 >>>
+    <<< TreeMap >>>
 
-    树图是一种常见的表达『层级数据』『树状数据』的可视化形式。它主要用面积的方式，
-    便于突出展现出『树』的各层级中重要的节点。
+    TreeMap are a common visual representation of "hierarchical data" and "tree data".
+    It mainly uses area to highlight the important nodes in the hierarchy of "tree".
     """
 
-    def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):
+    def __init__(self, init_opts: opts.InitOpts = opts.InitOpts()):
         super().__init__(init_opts=init_opts)
 
     def add(
         self,
         series_name: str,
-        data: List[Union[opts.TreeItem, dict]],
+        data: Sequence[Union[opts.TreeItem, dict]],
         *,
         is_selected: bool = True,
         leaf_depth: Optional[Numeric] = None,
@@ -34,13 +33,6 @@ class TreeMap(Chart):
         tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
         itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
     ):
-        if isinstance(label_opts, opts.LabelOpts):
-            label_opts = label_opts.opts
-        if isinstance(tooltip_opts, opts.TooltipOpts):
-            tooltip_opts = tooltip_opts.opts
-        if isinstance(itemstyle_opts, opts.ItemStyleOpts):
-            itemstyle_opts = itemstyle_opts.opts
-
         self._append_legend(series_name, is_selected)
         self.options.get("series").append(
             {

@@ -1,5 +1,7 @@
 import random
 
+from nose.tools import eq_
+
 from example.commons import Faker
 from pyecharts import options as opts
 from pyecharts.charts import Scatter3D
@@ -17,6 +19,6 @@ def test_scatter3d_base():
             visualmap_opts=opts.VisualMapOpts(range_color=Faker.visual_color)
         )
     )
-    assert c.theme == "white"
-    assert c.renderer == "canvas"
-    c.render("render.html")
+    eq_(c.theme, "white")
+    eq_(c.renderer, "canvas")
+    c.render()

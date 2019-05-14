@@ -1,8 +1,7 @@
-# coding=utf-8
 from pyecharts.components import Table
 
 
-def table_base():
+def table_base() -> Table:
     table = Table()
 
     headers = ["City name", "Area", "Population", "Annual Rainfall"]
@@ -16,3 +15,7 @@ def table_base():
         ["Perth", 5386, 1554769, 869.4],
     ]
     table.add(headers, rows)
+    return table
+
+
+table_base().render()

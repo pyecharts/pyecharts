@@ -1,4 +1,3 @@
-# coding=utf-8
 from ... import options as opts
 from ...charts.chart import Chart
 from ...commons.types import Numeric, Optional, Sequence, Union
@@ -7,12 +6,12 @@ from ...globals import ChartType
 
 class Polar(Chart):
     """
-    <<< 极坐标系 >>>
+    <<< Polar >>>
 
-    可以用于散点图和折线图。
+    Polar coordinates can be used for scatter and polyline graphs.
     """
 
-    def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):
+    def __init__(self, init_opts: opts.InitOpts = opts.InitOpts()):
         super().__init__(init_opts=init_opts)
         self.add_schema()
 
@@ -44,17 +43,6 @@ class Polar(Chart):
         tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
         itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
     ):
-        if isinstance(label_opts, opts.LabelOpts):
-            label_opts = label_opts.opts
-        if isinstance(areastyle_opts, opts.AreaStyleOpts):
-            areastyle_opts = areastyle_opts.opts
-        if isinstance(effect_opts, opts.EffectOpts):
-            effect_opts = effect_opts.opts
-        if isinstance(tooltip_opts, opts.TooltipOpts):
-            tooltip_opts = tooltip_opts.opts
-        if isinstance(itemstyle_opts, opts.ItemStyleOpts):
-            itemstyle_opts = itemstyle_opts.opts
-
         self._append_legend(series_name, is_selected)
         self.options.update(polar={})
 

@@ -1,3 +1,5 @@
+from nose.tools import eq_
+
 from pyecharts import options as opts
 from pyecharts.charts import Kline
 
@@ -25,6 +27,6 @@ def test_kline_base():
             xaxis_opts=opts.AxisOpts(is_scale=True),
         )
     )
-    assert c.theme == "white"
-    assert c.renderer == "canvas"
-    c.render("render.html")
+    eq_(c.theme, "white")
+    eq_(c.renderer, "canvas")
+    c.render()

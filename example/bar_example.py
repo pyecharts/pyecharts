@@ -1,4 +1,3 @@
-# coding=utf-8
 from example.commons import Collector, Faker
 from pyecharts import options as opts
 from pyecharts.charts import Bar, Page
@@ -40,7 +39,63 @@ def bar_toolbox() -> Bar:
         .set_global_opts(
             title_opts=opts.TitleOpts(title="Bar-显示 ToolBox"),
             toolbox_opts=opts.ToolboxOpts(),
-            legend_opts=opts.LegendOpts(is_show=False)
+            legend_opts=opts.LegendOpts(is_show=False),
+        )
+    )
+    return c
+
+
+@C.funcs
+def bar_same_series_gap() -> Bar:
+    c = (
+        Bar()
+        .add_xaxis(Faker.choose())
+        .add_yaxis("商家A", Faker.values(), category_gap="80%")
+        .set_global_opts(title_opts=opts.TitleOpts(title="Bar-单系列柱间距离"))
+    )
+    return c
+
+
+@C.funcs
+def bar_different_series_gap() -> Bar:
+    c = (
+        Bar()
+        .add_xaxis(Faker.choose())
+        .add_yaxis("商家A", Faker.values(), gap="0%")
+        .add_yaxis("商家B", Faker.values(), gap="0%")
+        .set_global_opts(title_opts=opts.TitleOpts(title="Bar-不同系列柱间距离"))
+    )
+    return c
+
+
+@C.funcs
+def bar_yaxis_formatter() -> Bar:
+    c = (
+        Bar()
+        .add_xaxis(Faker.choose())
+        .add_yaxis("商家A", Faker.values())
+        .add_yaxis("商家B", Faker.values())
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="Bar-Y 轴 formatter"),
+            yaxis_opts=opts.AxisOpts(
+                axislabel_opts=opts.LabelOpts(formatter="{value} /月")
+            ),
+        )
+    )
+    return c
+
+
+@C.funcs
+def bar_xyaxis_name() -> Bar:
+    c = (
+        Bar()
+        .add_xaxis(Faker.choose())
+        .add_yaxis("商家A", Faker.values())
+        .add_yaxis("商家B", Faker.values())
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="Bar-XY 轴名称"),
+            yaxis_opts=opts.AxisOpts(name="我是 Y 轴"),
+            xaxis_opts=opts.AxisOpts(name="我是 X 轴"),
         )
     )
     return c
@@ -232,6 +287,62 @@ def bar_histogram() -> Bar:
         .add_xaxis(Faker.choose())
         .add_yaxis("商家A", Faker.values(), category_gap=0, color=Faker.rand_color())
         .set_global_opts(title_opts=opts.TitleOpts(title="Bar-直方图"))
+    )
+    return c
+
+
+@C.funcs
+def bar_histogram_color() -> Bar:
+    x = Faker.dogs + Faker.animal
+    xlen = len(x)
+    y = []
+    for idx, item in enumerate(x):
+        if idx <= xlen / 2:
+            y.append(
+                opts.BarItem(
+                    name=item,
+                    value=(idx + 1) * 10,
+                    itemstyle_opts=opts.ItemStyleOpts(color="#749f83"),
+                )
+            )
+        else:
+            y.append(
+                opts.BarItem(
+                    name=item,
+                    value=(xlen + 1 - idx) * 10,
+                    itemstyle_opts=opts.ItemStyleOpts(color="#d48265"),
+                )
+            )
+
+    c = (
+        Bar()
+        .add_xaxis(x)
+        .add_yaxis("series0", y, category_gap=0, color=Faker.rand_color())
+        .set_global_opts(title_opts=opts.TitleOpts(title="Bar-直方图（颜色区分）"))
+    )
+    return c
+
+
+@C.funcs
+def bar_rorate_xaxis_label() -> Bar:
+    c = (
+        Bar()
+        .add_xaxis(
+            [
+                "名字很长的X轴标签1",
+                "名字很长的X轴标签2",
+                "名字很长的X轴标签3",
+                "名字很长的X轴标签4",
+                "名字很长的X轴标签5",
+                "名字很长的X轴标签6",
+            ]
+        )
+        .add_yaxis("商家A", [10, 20, 30, 40, 50, 40])
+        .add_yaxis("商家B", [20, 10, 40, 30, 40, 50])
+        .set_global_opts(
+            xaxis_opts=opts.AxisOpts(axislabel_opts=opts.LabelOpts(rotate=-15)),
+            title_opts=opts.TitleOpts(title="Bar-旋转X轴标签", subtitle="解决标签名字过长的问题"),
+        )
     )
     return c
 

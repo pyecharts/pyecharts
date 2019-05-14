@@ -1,26 +1,25 @@
-# coding=utf-8
 from ... import options as opts
 from ...charts.chart import Chart
-from ...commons.types import List, Numeric, Optional, Union
+from ...commons.types import Numeric, Optional, Sequence, Union
 from ...globals import ChartType
 
 
 class Graph(Chart):
     """
-    <<< 关系图 >>>
+    <<< Graph >>>
 
-    用于展现节点以及节点之间的关系数据。
+    The graph is used to represent the relational data.
     """
 
-    def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):
+    def __init__(self, init_opts: opts.InitOpts = opts.InitOpts()):
         super().__init__(init_opts=init_opts)
 
     def add(
         self,
         series_name: str,
-        nodes: List[Union[opts.GraphNode, dict]],
-        links: List[Union[opts.GraphLink, dict]],
-        categories: Union[List[Union[opts.GraphCategory, dict]], None] = None,
+        nodes: Sequence[Union[opts.GraphNode, dict]],
+        links: Sequence[Union[opts.GraphLink, dict]],
+        categories: Union[Sequence[Union[opts.GraphCategory, dict]], None] = None,
         *,
         is_selected: bool = True,
         is_focusnode: bool = True,
@@ -38,15 +37,6 @@ class Graph(Chart):
         tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
         itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
     ):
-        if isinstance(label_opts, opts.LabelOpts):
-            label_opts = label_opts.opts
-        if isinstance(linestyle_opts, opts.LineStyleOpts):
-            linestyle_opts = linestyle_opts.opts
-        if isinstance(tooltip_opts, opts.TooltipOpts):
-            tooltip_opts = tooltip_opts.opts
-        if isinstance(itemstyle_opts, opts.ItemStyleOpts):
-            itemstyle_opts = itemstyle_opts.opts
-
         _nodes = []
         for n in nodes:
             if isinstance(n, opts.GraphNode):
