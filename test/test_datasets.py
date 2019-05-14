@@ -9,7 +9,9 @@ from pyecharts.datasets import EXTRA, register_url
 @patch("pyecharts.datasets.urllib.request.urlopen")
 def test_register_url(fake):
     current_path = os.path.dirname(__file__)
-    with open(os.path.join(current_path, "fixtures", "registry.json"), encoding="utf8") as f:
+    with open(
+        os.path.join(current_path, "fixtures", "registry.json"), encoding="utf8"
+    ) as f:
         fake.return_value = f
         register_url("fake_url")
         eq_(
