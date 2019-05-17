@@ -71,7 +71,7 @@ def scatter_muti_dimension_data() -> Scatter:
             [list(z) for z in zip(Faker.values(), Faker.choose())],
             label_opts=opts.LabelOpts(
                 formatter=JsCode(
-                    "function (params) {return params.value[1] + ' : ' + params.value[2];}"
+                    "function(params){return params.value[1] +' : '+ params.value[2];}"
                 )
             ),
         )
