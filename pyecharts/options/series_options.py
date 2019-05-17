@@ -221,6 +221,7 @@ class MarkLineOpts(BasicOpts):
         symbol_size: Union[None, Numeric] = None,
         precision: int = 2,
         label_opts: LabelOpts = LabelOpts(),
+        linestyle_opts: Union[LineStyleOpts, dict, None] = None,
     ):
         self.opts: dict = {
             "silent": is_silent,
@@ -228,6 +229,7 @@ class MarkLineOpts(BasicOpts):
             "symbolSize": symbol_size,
             "precision": precision,
             "label": label_opts,
+            "lineStyle": linestyle_opts,
             "data": data,
         }
 
