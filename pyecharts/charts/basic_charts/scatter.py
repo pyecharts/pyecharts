@@ -1,8 +1,9 @@
+import itertools
+
 from ... import options as opts
 from ...charts.chart import RectChart
 from ...commons.types import Numeric, Optional, Sequence, Union
 from ...globals import ChartType
-import itertools
 
 
 class Scatter(RectChart):
