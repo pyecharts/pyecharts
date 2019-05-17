@@ -8,6 +8,7 @@ from .charts_options import (
     BMapOverviewMapControlOpts,
     BMapScaleControlOpts,
     BMapTypeControl,
+    ComponentTitleOpts,
     GraphCategory,
     GraphLink,
     GraphNode,
