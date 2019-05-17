@@ -284,12 +284,8 @@ class ComponentTitleOpts:
         self.subtitle = subtitle.replace("\n", "<br/>")
         self.title_style: str = ""
         self.subtitle_style: str = ""
-        title_style = title_style or {
-            "style": "font-size: 18px; font-weight:bold;"
-        }
-        subtitle_style = subtitle_style or {
-            "style": "font-size: 12px;"
-        }
+        title_style = title_style or {"style": "font-size: 18px; font-weight:bold;"}
+        subtitle_style = subtitle_style or {"style": "font-size: 12px;"}
         self._convert_dict_to_string(title_style, subtitle_style)
 
     def _convert_dict_to_string(self, title_style: dict, subtitle_style: dict):
