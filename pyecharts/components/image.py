@@ -13,7 +13,7 @@ from ..render.engine import RenderEngine
 class Image:
     def __init__(
         self,
-        page_title: str = "Awesome-pyecharts",
+        page_title: str = CurrentConfig.PAGE_TITLE,
         js_host: str = CurrentConfig.ONLINE_HOST,
     ):
         self.page_title = page_title

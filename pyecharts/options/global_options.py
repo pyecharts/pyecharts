@@ -1,5 +1,5 @@
 from ..commons.types import JSFunc, Numeric, Optional, Sequence, Union
-from ..globals import RenderType, ThemeType
+from ..globals import CurrentConfig, RenderType, ThemeType
 from ..options.series_options import (
     BasicOpts,
     LabelOpts,
@@ -17,7 +17,7 @@ class InitOpts:
         height: str = "500px",
         chart_id: Optional[str] = None,
         renderer: str = RenderType.CANVAS,
-        page_title: str = "Awesome-pyecharts",
+        page_title: str = CurrentConfig.PAGE_TITLE,
         theme: str = ThemeType.WHITE,
         bg_color: Optional[str] = None,
         js_host: str = "",
