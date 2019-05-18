@@ -270,3 +270,26 @@ class BarItem(BasicOpts):
             "itemStyle": itemstyle_opts,
             "tooltip": tooltip_opts,
         }
+
+
+class ComponentTitleOpts:
+    def __init__(
+        self,
+        title: str = "",
+        subtitle: str = "",
+        title_style: Optional[dict] = None,
+        subtitle_style: Optional[dict] = None,
+    ):
+        self.title = title.replace("\n", "<br/>")
+        self.subtitle = subtitle.replace("\n", "<br/>")
+        self.title_style: str = ""
+        self.subtitle_style: str = ""
+        title_style = title_style or {"style": "font-size: 18px; font-weight:bold;"}
+        subtitle_style = subtitle_style or {"style": "font-size: 12px;"}
+        self._convert_dict_to_string(title_style, subtitle_style)
+
+    def _convert_dict_to_string(self, title_style: dict, subtitle_style: dict):
+        for k, v in title_style.items():
+            self.title_style += '{}="{}" '.format(k, v)
+        for k, v in subtitle_style.items():
+            self.subtitle_style += '{}="{}" '.format(k, v)
