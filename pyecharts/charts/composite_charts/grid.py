@@ -3,7 +3,7 @@ import copy
 from ... import options as opts
 from ...commons.types import Optional, Sequence, Union
 from ...globals import ThemeType
-from ..chart import Base, RectChart
+from ..chart import Base, Chart, RectChart
 
 
 class Grid(Base):
@@ -21,7 +21,7 @@ class Grid(Base):
 
     def add(
         self,
-        chart: RectChart,
+        chart: Union[Chart, RectChart],
         grid_opts: Union[opts.GridOpts, dict],
         *,
         grid_index: int = 0,
@@ -52,20 +52,22 @@ class Grid(Base):
         for dep in chart.js_dependencies.items:
             self.js_dependencies.add(dep)
 
-        if grid_index == 0:
-            grid_index = self._grow_grid_index
+        if isinstance(chart, RectChart):
+            if grid_index == 0:
+                grid_index = self._grow_grid_index
 
-        for x in chart.options.get("xAxis"):
-            x.update(gridIndex=grid_index)
-        for y in chart.options.get("yAxis"):
-            y.update(gridIndex=grid_index)
-        self._grow_grid_index += 1
+            for x in chart.options.get("xAxis"):
+                x.update(gridIndex=grid_index)
+            for y in chart.options.get("yAxis"):
+                y.update(gridIndex=grid_index)
+            self._grow_grid_index += 1
 
         if self._axis_index > 0:
             self.options.get("series").extend(chart.options.get("series"))
             self.options.get("legend").extend(chart.options.get("legend"))
-            self.options.get("xAxis").extend(chart.options.get("xAxis"))
-            self.options.get("yAxis").extend(chart.options.get("yAxis"))
+            if isinstance(chart, RectChart):
+                self.options.get("xAxis").extend(chart.options.get("xAxis"))
+                self.options.get("yAxis").extend(chart.options.get("yAxis"))
 
         self.options.get("grid").append(grid_opts)
         self._axis_index += 1
