@@ -23,7 +23,9 @@ class Grid(Base):
         self,
         chart: RectChart,
         grid_opts: Union[opts.GridOpts, dict],
+        *,
         grid_index: int = 0,
+        is_control_axis_index: bool = False,
     ):
         if self.options is None:
             self.options = copy.deepcopy(chart.options)
@@ -31,8 +33,10 @@ class Grid(Base):
             self.options.update(grid=[], title=[])
             if self.theme != ThemeType.WHITE:
                 self.options.update(color=[])
-            for s in self.options.get("series"):
-                s.update(xAxisIndex=self._axis_index, yAxisIndex=self._axis_index)
+
+            if not is_control_axis_index:
+                for s in self.options.get("series"):
+                    s.update(xAxisIndex=self._axis_index, yAxisIndex=self._axis_index)
 
         title = chart.options.get("title", opts.TitleOpts().opts)
         if isinstance(title, opts.TitleOpts):
@@ -41,8 +45,9 @@ class Grid(Base):
             title = (title,)
         self.options.get("title").extend(title)
 
-        for s in chart.options.get("series"):
-            s.update(xAxisIndex=self._axis_index, yAxisIndex=self._axis_index)
+        if not is_control_axis_index:
+            for s in chart.options.get("series"):
+                s.update(xAxisIndex=self._axis_index, yAxisIndex=self._axis_index)
 
         for dep in chart.js_dependencies.items:
             self.js_dependencies.add(dep)
