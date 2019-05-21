@@ -157,6 +157,10 @@ class Chart(Base):
 
 
 class RectChart(Chart):
+    def __init__(self, init_opts: opts.InitOpts = opts.InitOpts()):
+        super().__init__(init_opts=init_opts)
+        self.options.update(xAxis=[opts.AxisOpts().opts], yAxis=[opts.AxisOpts().opts])
+
     def extend_axis(
         self,
         xaxis_data: Sequence = None,
@@ -175,7 +179,6 @@ class RectChart(Chart):
         return self
 
     def add_xaxis(self, xaxis_data: Sequence):
-        self.options.update(xAxis=[opts.AxisOpts().opts])
         self.options["xAxis"][0].update(data=xaxis_data)
         self._xaxis_data = xaxis_data
         return self
