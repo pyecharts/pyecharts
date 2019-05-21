@@ -15,7 +15,6 @@ class HeatMap(RectChart):
 
     def __init__(self, init_opts: opts.InitOpts = opts.InitOpts()):
         super().__init__(init_opts=init_opts)
-        self.options.update(yAxis=[opts.AxisOpts().opts])
         self.set_global_opts(visualmap_opts=opts.VisualMapOpts(orient="horizontal"))
 
     def add_yaxis(
