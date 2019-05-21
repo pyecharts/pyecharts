@@ -3,7 +3,7 @@ import copy
 from ... import options as opts
 from ...commons.types import Optional, Sequence, Union
 from ...globals import ThemeType
-from ..chart import Base, Chart, RectChart
+from ..chart import Base, RectChart
 
 
 class Grid(Base):
@@ -21,7 +21,7 @@ class Grid(Base):
 
     def add(
         self,
-        chart: Union[Chart, RectChart],
+        chart: RectChart,
         grid_opts: Union[opts.GridOpts, dict],
         *,
         grid_index: int = 0,
