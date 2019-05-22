@@ -1,5 +1,6 @@
-from pyecharts.render.display import HTML, Javascript
 from nose.tools import eq_
+
+from pyecharts.render.display import HTML, Javascript
 
 
 def test_display_html():
