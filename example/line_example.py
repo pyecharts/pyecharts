@@ -46,7 +46,7 @@ def line_areastyle() -> Line:
 
 
 @C.funcs
-def line_areastyle() -> Line:
+def line_areastyle_boundary_gap() -> Line:
     c = (
         Line()
         .add_xaxis(Faker.choose())
