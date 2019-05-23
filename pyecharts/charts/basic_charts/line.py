@@ -21,6 +21,7 @@ class Line(RectChart):
         y_axis: Sequence,
         *,
         is_selected: bool = True,
+        is_connect_nones: bool = False,
         xaxis_index: Optional[Numeric] = None,
         yaxis_index: Optional[Numeric] = None,
         color: Optional[str] = None,
@@ -48,6 +49,7 @@ class Line(RectChart):
             {
                 "type": ChartType.LINE,
                 "name": series_name,
+                "connectNulls": is_connect_nones,
                 "xAxisIndex": xaxis_index,
                 "yAxisIndex": yaxis_index,
                 "symbol": symbol,
