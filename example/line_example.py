@@ -18,6 +18,19 @@ def line_base() -> Line:
 
 
 @C.funcs
+def line_connect_null() -> Line:
+    y = Faker.values()
+    y[3], y[5] = None, None
+    c = (
+        Line()
+        .add_xaxis(Faker.choose())
+        .add_yaxis("商家A", y, is_connect_nones=True)
+        .set_global_opts(title_opts=opts.TitleOpts(title="Line-连接空数据"))
+    )
+    return c
+
+
+@C.funcs
 def line_smooth() -> Line:
     c = (
         Line()
