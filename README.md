@@ -45,16 +45,16 @@
 * 简洁的 API 设计，使用如丝滑般流畅，支持链式调用
 * 囊括了 30+ 种常见图表，应有尽有
 * 支持主流 Notebook 环境，Jupyter Notebook 和 JupyterLab
-* 可轻松集成至 Flask，Django 等主流 Web 框架
+* 可轻松集成至 Flask，Sanic，Django 等主流 Web 框架
 * 高度灵活的配置项，可轻松搭配出精美的图表
 * 详细的文档和示例，帮助开发者更快的上手项目
-* 多达 400+ 地图，为地理数据可视化提供强有力的支持
+* 多达 400+ 地图文件，并且支持原生百度地图，为地理数据可视化提供强有力的支持
 
 ## ⏳ 版本
 
-v0.5.X 和 V1 间不兼容，V1 是一个全新的版本，详见 [ISSUE#892](https://github.com/pyecharts/pyecharts/issues/892)
+v0.5.x 和 V1 间不兼容，V1 是一个全新的版本，详见 [ISSUE#892](https://github.com/pyecharts/pyecharts/issues/892)，[ISSUE#1033](https://github.com/pyecharts/pyecharts/issues/1033)。
 
-### V0.5.X
+### V0.5.x
 
 > 支持 Python2.7，3.4+
 
@@ -70,7 +70,7 @@ v0.5.X 和 V1 间不兼容，V1 是一个全新的版本，详见 [ISSUE#892](ht
 
 **pip 安装**
 ```shell
-# 安装 1.0.x 以上版本
+# 安装 v1 以上版本
 $ pip install pyecharts -U
 
 # 如果需要安装 0.5.11 版本的开发者，可以使用
@@ -79,7 +79,9 @@ $ pip install pyecharts -U
 
 **源码安装**
 ```shell
+# 安装 v1 以上版本
 $ git clone https://github.com/pyecharts/pyecharts.git
+# 如果需要安装 0.5.11 版本，请使用 git clone https://github.com/pyecharts/pyecharts.git -b v05x
 $ cd pyecharts
 $ pip install -r requirements.txt
 $ python setup.py install
