@@ -17,6 +17,18 @@ def pie_base() -> Pie:
 
 
 @C.funcs
+def pie_set_colors() -> Pie:
+    c = (
+        Pie()
+        .add("", [list(z) for z in zip(Faker.choose(), Faker.values())])
+        .set_colors(["blue", "green", "yellow", "red", "pink", "orange", "purple"])
+        .set_global_opts(title_opts=opts.TitleOpts(title="Pie-设置颜色"))
+        .set_series_opts(label_opts=opts.LabelOpts(formatter="{b}: {c}"))
+    )
+    return c
+
+
+@C.funcs
 def pie_position() -> Pie:
     c = (
         Pie()
