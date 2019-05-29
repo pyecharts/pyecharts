@@ -45,16 +45,16 @@
 * 简洁的 API 设计，使用如丝滑般流畅，支持链式调用
 * 囊括了 30+ 种常见图表，应有尽有
 * 支持主流 Notebook 环境，Jupyter Notebook 和 JupyterLab
-* 可轻松集成至 Flask，Django 等主流 Web 框架
+* 可轻松集成至 Flask，Sanic，Django 等主流 Web 框架
 * 高度灵活的配置项，可轻松搭配出精美的图表
 * 详细的文档和示例，帮助开发者更快的上手项目
-* 多达 400+ 地图，为地理数据可视化提供强有力的支持
+* 多达 400+ 地图文件，并且支持原生百度地图，为地理数据可视化提供强有力的支持
 
 ## ⏳ 版本
 
-v0.5.X 和 V1 间不兼容，V1 是一个全新的版本，详见 [ISSUE#892](https://github.com/pyecharts/pyecharts/issues/892)
+v0.5.x 和 V1 间不兼容，V1 是一个全新的版本，详见 [ISSUE#892](https://github.com/pyecharts/pyecharts/issues/892)，[ISSUE#1033](https://github.com/pyecharts/pyecharts/issues/1033)。
 
-### V0.5.X
+### V0.5.x
 
 > 支持 Python2.7，3.4+
 
@@ -70,7 +70,7 @@ v0.5.X 和 V1 间不兼容，V1 是一个全新的版本，详见 [ISSUE#892](ht
 
 **pip 安装**
 ```shell
-# 安装 1.0.x 以上版本
+# 安装 v1 以上版本
 $ pip install pyecharts -U
 
 # 如果需要安装 0.5.11 版本的开发者，可以使用
@@ -79,7 +79,9 @@ $ pip install pyecharts -U
 
 **源码安装**
 ```shell
+# 安装 v1 以上版本
 $ git clone https://github.com/pyecharts/pyecharts.git
+# 如果需要安装 0.5.11 版本，请使用 git clone https://github.com/pyecharts/pyecharts.git -b v05x
 $ cd pyecharts
 $ pip install -r requirements.txt
 $ python setup.py install
@@ -94,6 +96,7 @@ $ python setup.py install
 from pyecharts.charts import Bar
 from pyecharts import options as opts
 
+# V1 版本开始支持链式调用
 bar = (
     Bar()
     .add_xaxis(["衬衫", "毛衣", "领带", "裤子", "风衣", "高跟鞋", "袜子"])
@@ -101,6 +104,14 @@ bar = (
     .add_yaxis("商家B", [57, 134, 137, 129, 145, 60, 49])
     .set_global_opts(title_opts=opts.TitleOpts(title="某商场销售情况"))
 )
+bar.render()
+
+# 不习惯链式调用的开发者依旧可以单独调用方法
+bar = Bar()
+bar.add_xaxis(["衬衫", "毛衣", "领带", "裤子", "风衣", "高跟鞋", "袜子"])
+bar.add_yaxis("商家A", [114, 55, 27, 101, 125, 27, 105])
+bar.add_yaxis("商家B", [57, 134, 137, 129, 145, 60, 49])
+bar.set_global_opts(title_opts=opts.TitleOpts(title="某商场销售情况"))
 bar.render()
 ```
 <p align="center">
@@ -128,7 +139,7 @@ def bar_chart() -> Bar:
     )
     return c
 
-# 需要安装 snapshot_selenium
+# 需要安装 snapshot-selenium 或者 snapshot-phantomjs
 make_snapshot(driver, bar_chart().render(), "bar.png")
 ```
 <p align="center">
@@ -167,6 +178,7 @@ make_snapshot(driver, bar_chart().render(), "bar.png")
 <img src="https://user-images.githubusercontent.com/19553554/52346064-b7770f80-2a59-11e9-9e03-6dae3a8c637d.gif" width="33%" alt="line"/>
 <img src="https://user-images.githubusercontent.com/19553554/52347117-248ba480-2a5c-11e9-8402-5a94054dca50.gif" width="33%" alt="liquid"/>
 <img src="https://user-images.githubusercontent.com/19553554/52347915-0a52c600-2a5e-11e9-8039-41268238576c.gif" width="33%" alt="map"/>
+<img src="https://user-images.githubusercontent.com/19553554/57545910-431c7700-738e-11e9-896b-e071b55115c7.png" width="33%" alt="bmap"/>
 <img src="https://user-images.githubusercontent.com/19553554/52535013-e48e2f80-2d83-11e9-8886-ac0d2122d6af.png" width="33%" alt="parallel"/>
 <img src="https://user-images.githubusercontent.com/19553554/52348202-bb596080-2a5e-11e9-84a7-60732be0743a.gif" width="33%" alt="pie"/>
 <img src="https://user-images.githubusercontent.com/19553554/35090457-afc0658e-fc74-11e7-9c58-24c780436287.gif" width="33%" alt="ploar"/>
@@ -181,8 +193,10 @@ make_snapshot(driver, bar_chart().render(), "bar.png")
 <img src="https://user-images.githubusercontent.com/19553554/52464647-aee81b80-2bb6-11e9-864e-c544392e523a.gif" width="33%" alt="scatter3D"/>
 <img src="https://user-images.githubusercontent.com/19553554/52465183-a55fb300-2bb8-11e9-8c10-4519c4e3f758.gif" width="33%" alt="surface3D"/>
 <img src="https://user-images.githubusercontent.com/19553554/52798246-7ebae400-30b2-11e9-8489-6c10339c3429.gif" width="33%" alt="themeRiver"/>
+<img src="https://user-images.githubusercontent.com/17564655/57567164-bdd5a880-7407-11e9-8d19-9be2776c57fa.png" width="33%" alt="sunburst"/>
 <img src="https://user-images.githubusercontent.com/19553554/52349544-c2ce3900-2a61-11e9-82af-28aaaaae0d67.gif" width="33%" alt="overlap"/>
 <img src="https://user-images.githubusercontent.com/19553554/35089737-ccc1c01c-fc72-11e7-874d-8ba8b89572eb.png" width="33%" alt="grid"/>
+<img src="https://user-images.githubusercontent.com/19553554/56976071-b9f28c80-6ba4-11e9-8efd-603203c77619.png" width="33%" alt="grid">
 <img src="https://user-images.githubusercontent.com/19553554/35082279-e111743c-fc53-11e7-9362-580160593715.gif" width="33%" alt="timeline"/>
 </div>
 
