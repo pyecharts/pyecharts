@@ -18,13 +18,13 @@ class Page:
     def __init__(
         self,
         page_title: str = CurrentConfig.PAGE_TITLE,
-        js_host: str = CurrentConfig.ONLINE_HOST,
+        js_host: str = "",
         interval: int = 1,
     ):
         self.page_title = page_title
         self.page_interval = interval
         self.js_dependencies = utils.OrderedSet()
-        self.js_host = js_host
+        self.js_host = js_host or CurrentConfig.ONLINE_HOST
         self._charts = []
 
     def add(self, *charts):
