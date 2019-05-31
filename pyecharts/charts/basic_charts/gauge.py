@@ -25,7 +25,9 @@ class Gauge(Chart):
         split_number: Numeric = 10,
         start_angle: Numeric = 225,
         end_angle: Numeric = -45,
-        label_opts: Union[opts.LabelOpts, dict, None] = opts.LabelOpts(formatter="{value}%"),
+        label_opts: Union[opts.LabelOpts, dict, None] = opts.LabelOpts(
+            formatter="{value}%"
+        ),
         tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
         axisline_opts: Union[opts.AxisLineOpts, dict, None] = None,
         itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
