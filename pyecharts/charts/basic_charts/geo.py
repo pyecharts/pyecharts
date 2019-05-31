@@ -53,8 +53,9 @@ class GeoChartBase(Chart):
         self._zlevel += 1
 
         data = []
-        if type_ == ChartType.LINES and self._coordinate_system == "bmap":
-            data = data_pair
+        if self._coordinate_system == "bmap":
+            if type_ == ChartType.LINES:
+                data = data_pair
         else:
             for n, v in data_pair:
                 if type_ == ChartType.LINES:
