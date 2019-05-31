@@ -13,7 +13,7 @@ def image_base() -> Image:
         src=img_src,
         style_opts={"width": "200px", "height": "200px", "style": "margin-top: 20px"},
     ).set_global_opts(
-        title_opts=ComponentTitleOpts(title="我是主标题", subtitle="我是副标题支持换行哦")
+        title_opts=ComponentTitleOpts(title="Image-基本示例", subtitle="我是副标题支持换行哦")
     )
     return image
 

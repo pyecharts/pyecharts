@@ -43,7 +43,6 @@ def pictorialbar_base() -> PictorialBar:
             ),
         )
     )
-
     return c
 
 
@@ -74,7 +73,6 @@ def pictorialbar_custom_symbol() -> PictorialBar:
             ),
         )
     )
-
     return c
 
 
@@ -125,7 +123,6 @@ def pictorialbar_multi_custom_symbols() -> PictorialBar:
             ),
         )
     )
-
     return c
 
 
