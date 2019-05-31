@@ -157,6 +157,7 @@ class MarkPointItem(BasicOpts):
         value: Optional[Numeric] = None,
         symbol: Optional[str] = None,
         symbol_size: Union[Numeric, Sequence, None] = None,
+        itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
     ):
         self.opts: dict = {
             "name": name,
@@ -168,7 +169,8 @@ class MarkPointItem(BasicOpts):
             "y": y,
             "value": value,
             "symbol": symbol,
-            "symbol_size": symbol_size,
+            "symbolSize": symbol_size,
+            "itemStyle": itemstyle_opts,
         }
 
 
