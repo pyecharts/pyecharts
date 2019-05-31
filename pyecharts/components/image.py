@@ -14,10 +14,10 @@ class Image:
     def __init__(
         self,
         page_title: str = CurrentConfig.PAGE_TITLE,
-        js_host: str = CurrentConfig.ONLINE_HOST,
+        js_host: str = "",
     ):
         self.page_title = page_title
-        self.js_host = js_host
+        self.js_host = js_host or CurrentConfig.ONLINE_HOST
         self.js_dependencies: OrderedSet = OrderedSet()
         self._images = []
         self.title_opts = ComponentTitleOpts()
