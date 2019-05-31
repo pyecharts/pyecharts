@@ -81,7 +81,7 @@ class LabelOpts(BasicOpts):
         is_show: bool = True,
         position: Union[str, Sequence] = "top",
         color: Optional[str] = None,
-        font_size: Numeric = 12,
+        font_size: Optional[Numeric] = None,
         font_style: Optional[str] = None,
         font_weight: Optional[str] = None,
         font_family: Optional[str] = None,
