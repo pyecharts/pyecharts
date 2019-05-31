@@ -23,7 +23,7 @@ def pictorialbar_base() -> PictorialBar:
         )
         .reversal_axis()
         .set_global_opts(
-            title_opts=opts.TitleOpts(title="全国各省份人口数量（虚假数据）"),
+            title_opts=opts.TitleOpts(title="PictorialBar-各省份人口数量（虚假数据）"),
             xaxis_opts=opts.AxisOpts(is_show=False),
             yaxis_opts=opts.AxisOpts(
                 axistick_opts=opts.AxisTickOpts(is_show=False),
