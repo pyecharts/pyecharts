@@ -2,6 +2,11 @@ from .. import options as opts
 from ..charts.base import Base
 from ..commons.types import Optional, Sequence, Union
 from ..globals import RenderType, ThemeType
+from ..options.charts_options import BaseGraphic
+
+VisualMapType = Union[opts.VisualMapOpts, dict]
+DataZoomType = Union[opts.DataZoomOpts, dict]
+GraphicType = Union[BaseGraphic, dict]
 
 
 class Chart(Base):
@@ -112,23 +117,17 @@ class Chart(Base):
         toolbox_opts: Union[opts.ToolboxOpts, dict] = None,
         xaxis_opts: Union[opts.AxisOpts, dict, None] = None,
         yaxis_opts: Union[opts.AxisOpts, dict, None] = None,
-        visualmap_opts: Union[
-            opts.VisualMapOpts, Sequence[Union[opts.VisualMapOpts, dict]], dict, None
-        ] = None,
-        datazoom_opts: Sequence[Union[opts.DataZoomOpts, dict, None]] = None,
+        visualmap_opts: Union[VisualMapType, Sequence[VisualMapType], None] = None,
+        datazoom_opts: Union[DataZoomType, Sequence[DataZoomType], None] = None,
+        graphic_opts: Union[GraphicType, Sequence[GraphicType], None] = None,
     ):
-        vs = []
-        if isinstance(visualmap_opts, Sequence):
-            for vo in visualmap_opts:
-                vs.append(vo)
-
-        _visualmap_opts = vs if vs else visualmap_opts
-
         self.options.update(
             title=title_opts,
             toolbox=toolbox_opts,
             tooltip=tooltip_opts,
-            visualMap=_visualmap_opts,
+            visualMap=visualmap_opts,
+            dataZoom=datazoom_opts,
+            graphic=graphic_opts,
         )
 
         if isinstance(legend_opts, opts.LegendOpts):
@@ -146,13 +145,6 @@ class Chart(Base):
                 yaxis_opts = yaxis_opts.opts
             self.options["yAxis"][0].update(yaxis_opts)
 
-        if datazoom_opts:
-            dzs = []
-            for dz in datazoom_opts:
-                if not dz:
-                    continue
-                dzs.append(dz)
-            self.options.update(dataZoom=dzs)
         return self
 
 
