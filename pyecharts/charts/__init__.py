@@ -14,6 +14,7 @@ from ..charts.basic_charts.line import Line
 from ..charts.basic_charts.liquid import Liquid
 from ..charts.basic_charts.map import Map
 from ..charts.basic_charts.parallel import Parallel
+from ..charts.basic_charts.pictorialbar import PictorialBar
 from ..charts.basic_charts.pie import Pie
 from ..charts.basic_charts.polar import Polar
 from ..charts.basic_charts.radar import Radar
