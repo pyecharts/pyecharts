@@ -3,9 +3,8 @@ import json
 from ... import options as opts
 from ...charts.chart import Chart
 from ...commons.types import Numeric, Optional, Sequence, Union
-from ...commons.utils import JsCode
 from ...datasets import COORDINATES
-from ...globals import ChartType, TooltipFormatterType
+from ...globals import ChartType
 
 
 class GeoChartBase(Chart):
@@ -15,6 +14,7 @@ class GeoChartBase(Chart):
         self._coordinates = COORDINATES
         self._zlevel = 1
         self._coordinate_system: Optional[str] = None
+        self._chart_type = ChartType.GEO
 
     def add_coordinate(self, name: str, longitude: Numeric, latitude: Numeric):
         self._coordinates.update({name: [longitude, latitude]})
@@ -121,30 +121,6 @@ class GeoChartBase(Chart):
             )
 
         return self
-
-    def set_global_opts(
-        self,
-        title_opts: Union[opts.TitleOpts, dict] = opts.TitleOpts(),
-        tooltip_opts: Union[opts.TooltipOpts, dict] = opts.TooltipOpts(
-            formatter=JsCode(TooltipFormatterType.GEO)
-        ),
-        legend_opts: Union[opts.LegendOpts, dict] = opts.LegendOpts(),
-        toolbox_opts: Union[opts.ToolboxOpts, dict] = None,
-        xaxis_opts: Union[opts.AxisOpts, dict, None] = None,
-        yaxis_opts: Union[opts.AxisOpts, dict, None] = None,
-        visualmap_opts: Union[opts.VisualMapOpts, dict, None] = None,
-        datazoom_opts: Sequence[Union[opts.DataZoomOpts, dict, None]] = None,
-    ):
-        return super().set_global_opts(
-            title_opts=title_opts,
-            tooltip_opts=tooltip_opts,
-            legend_opts=legend_opts,
-            toolbox_opts=toolbox_opts,
-            xaxis_opts=xaxis_opts,
-            yaxis_opts=yaxis_opts,
-            visualmap_opts=visualmap_opts,
-            datazoom_opts=datazoom_opts,
-        )
 
 
 class Geo(GeoChartBase):

@@ -41,8 +41,7 @@ class Page:
                 self.js_dependencies.add(d)
         return self
 
-    @staticmethod
-    def _assembly_layout(layout: Union[PageLayoutOpts, dict]) -> str:
+    def _assembly_layout(self, layout: Union[PageLayoutOpts, dict]) -> str:
         result = ""
         if isinstance(layout, PageLayoutOpts):
             layout = layout.opts
