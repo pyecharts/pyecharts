@@ -2,6 +2,8 @@ import os
 
 from jinja2 import Environment, FileSystemLoader
 
+from pyecharts.commons.utils import JsCode
+
 
 class _RenderType:
     CANVAS: str = "canvas"
@@ -51,11 +53,14 @@ class _ChartType:
     WORDCLOUD: str = "wordCloud"
 
 
-class _ToolTipFormatterType:
-    GEO = """function (params) {
+ToolTipFormatterType = {
+    _ChartType.GEO: JsCode(
+        """function (params) {
         return params.name + ' : ' + params.value[2];
     }"""
-    GAUGE = "{a} <br/>{b} : {c}%"
+    ),
+    _ChartType.GAUGE: "{a} <br/>{b} : {c}%",
+}
 
 
 class _ThemeType:
@@ -113,7 +118,6 @@ RenderType = _RenderType()
 FileType = _FileType()
 SymbolType = _SymbolType()
 ChartType = _ChartType
-TooltipFormatterType = _ToolTipFormatterType()
 ThemeType = _ThemeType()
 GeoType = _GeoType()
 BMapType = _BMapType

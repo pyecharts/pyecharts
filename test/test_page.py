@@ -12,6 +12,16 @@ def _create_line() -> Line:
     return Line().add_xaxis(Faker.choose()).add_yaxis("商家A", Faker.values())
 
 
+def test_page_layout_default():
+    page = Page()
+    eq_(page.layout, "")
+
+
+def test_page_layout_custom():
+    page = Page(layout=Page.SimplePageLayout)
+    eq_(page.layout, "justify-content:center; display:flex; flex-wrap:wrap; ")
+
+
 def test_page_jshost_default():
     bar = _create_bar()
     line = _create_line()
