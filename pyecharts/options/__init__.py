@@ -21,6 +21,7 @@ from .charts_options import (
     GraphicTextStyleOpts,
     GraphLink,
     GraphNode,
+    PageLayoutOpts,
     SunburstItem,
     TreeItem,
 )
