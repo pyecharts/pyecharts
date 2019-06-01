@@ -7,9 +7,12 @@
     {{ macro.render_chart_dependencies(chart) }}
 </head>
 <body>
-    {% for c in chart %}
-        {{ macro.render_chart_content(c) }}
-        {% for _ in range(chart.page_interval) %}<br/>{% endfor %}
-    {% endfor %}
+    <style>.box { {{ chart.layout }} } </style>
+    <div class="box">
+        {% for c in chart %}
+            {{ macro.render_chart_content(c) }}
+            {% for _ in range(chart.page_interval) %}<br/>{% endfor %}
+        {% endfor %}
+    </div>
 </body>
 </html>

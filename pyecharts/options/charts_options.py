@@ -295,6 +295,22 @@ class ComponentTitleOpts:
             self.subtitle_style += '{}="{}" '.format(k, v)
 
 
+class PageLayoutOpts(BasicOpts):
+    def __init__(
+        self,
+        justify_content: Optional[str] = None,
+        margin: Optional[str] = None,
+        display: Optional[str] = None,
+        flex_wrap: Optional[str] = None,
+    ):
+        self.opts: dict = {
+            "justify-content": justify_content,
+            "margin": margin,
+            "display": display,
+            "flex-wrap": flex_wrap,
+        }
+
+
 class BaseGraphic(BasicOpts):
     pass
 
