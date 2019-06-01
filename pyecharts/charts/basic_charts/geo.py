@@ -51,18 +51,7 @@ class GeoChartBase(Chart):
         itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
     ):
         self._zlevel += 1
-
-        data = []
-        if type_ == ChartType.LINES and self._coordinate_system == "bmap":
-            data = data_pair
-        else:
-            for n, v in data_pair:
-                if type_ == ChartType.LINES:
-                    f, t = self.get_coordinate(n), self.get_coordinate(v)
-                    data.append({"name": "{}->{}".format(n, v), "coords": [f, t]})
-                else:
-                    lng, lat = self.get_coordinate(n)
-                    data.append({"name": n, "value": [lng, lat, v]})
+        data = self._feed_data(data_pair, type_)
 
         self._append_color(color)
         self._append_legend(series_name, is_selected)
@@ -168,6 +157,17 @@ class Geo(GeoChartBase):
     def __init__(self, init_opts: opts.InitOpts = opts.InitOpts()):
         super().__init__(init_opts=init_opts)
         self._coordinate_system: Optional[str] = "geo"
+
+    def _feed_data(self, data_pair: Sequence, type_: str) -> Sequence:
+        result = []
+        for n, v in data_pair:
+            if type_ == ChartType.LINES:
+                f, t = self.get_coordinate(n), self.get_coordinate(v)
+                result.append({"name": "{}->{}".format(n, v), "coords": [f, t]})
+            else:
+                lng, lat = self.get_coordinate(n)
+                result.append({"name": n, "value": [lng, lat, v]})
+        return result
 
     def add_schema(
         self,
