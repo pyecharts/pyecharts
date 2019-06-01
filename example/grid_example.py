@@ -141,7 +141,9 @@ def grid_mutil_yaxis() -> Grid:
     )
 
     bar.overlap(line)
-    return Grid().add(bar, opts.GridOpts(pos_left="5%", pos_right="20%"))
+    return Grid().add(
+        bar, opts.GridOpts(pos_left="5%", pos_right="20%"), is_control_axis_index=True
+    )
 
 
 Page().add(*[fn() for fn, _ in C.charts]).render()

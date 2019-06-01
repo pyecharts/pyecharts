@@ -81,12 +81,13 @@ class LabelOpts(BasicOpts):
         is_show: bool = True,
         position: Union[str, Sequence] = "top",
         color: Optional[str] = None,
-        font_size: Numeric = 12,
+        font_size: Optional[Numeric] = None,
         font_style: Optional[str] = None,
         font_weight: Optional[str] = None,
         font_family: Optional[str] = None,
         rotate: Optional[Numeric] = None,
         margin: Optional[Numeric] = 8,
+        interval: Union[Numeric, str, None] = None,
         horizontal_align: Optional[str] = None,
         vertical_align: Optional[str] = None,
         formatter: Optional[JSFunc] = None,
@@ -102,6 +103,7 @@ class LabelOpts(BasicOpts):
             "color": color,
             "rotate": rotate,
             "margin": margin,
+            "interval": interval,
             "fontSize": font_size,
             "fontStyle": font_style,
             "fontWeight": font_weight,
@@ -155,6 +157,7 @@ class MarkPointItem(BasicOpts):
         value: Optional[Numeric] = None,
         symbol: Optional[str] = None,
         symbol_size: Union[Numeric, Sequence, None] = None,
+        itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
     ):
         self.opts: dict = {
             "name": name,
@@ -166,7 +169,8 @@ class MarkPointItem(BasicOpts):
             "y": y,
             "value": value,
             "symbol": symbol,
-            "symbol_size": symbol_size,
+            "symbolSize": symbol_size,
+            "itemStyle": itemstyle_opts,
         }
 
 
@@ -221,6 +225,7 @@ class MarkLineOpts(BasicOpts):
         symbol_size: Union[None, Numeric] = None,
         precision: int = 2,
         label_opts: LabelOpts = LabelOpts(),
+        linestyle_opts: Union[LineStyleOpts, dict, None] = None,
     ):
         self.opts: dict = {
             "silent": is_silent,
@@ -228,6 +233,7 @@ class MarkLineOpts(BasicOpts):
             "symbolSize": symbol_size,
             "precision": precision,
             "label": label_opts,
+            "lineStyle": linestyle_opts,
             "data": data,
         }
 

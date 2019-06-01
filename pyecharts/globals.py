@@ -38,6 +38,7 @@ class _ChartType:
     LIQUID: str = "liquidFill"
     MAP: str = "map"
     PARALLEL: str = "parallel"
+    PICTORIALBAR: str = "pictorialBar"
     PIE: str = "pie"
     POLAR: str = "polar"
     RADAR: str = "radar"
@@ -120,6 +121,7 @@ NotebookType = _NotebookType()
 
 
 class _CurrentConfig:
+    PAGE_TITLE = "Awesome-pyecharts"
     ONLINE_HOST = "https://assets.pyecharts.org/assets/"
     NOTEBOOK_TYPE = NotebookType.JUPYTER_NOTEBOOK
     GLOBAL_ENV = Environment(

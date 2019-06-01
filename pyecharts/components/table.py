@@ -3,39 +3,41 @@ import os
 from jinja2 import Environment
 from prettytable import PrettyTable
 
-from ..commons.types import Optional, Sequence
+from ..commons.types import Optional, Sequence, Union
 from ..commons.utils import OrderedSet
 from ..globals import CurrentConfig
+from ..options import ComponentTitleOpts
 from ..render.display import HTML
 from ..render.engine import RenderEngine
 
 
 class Table:
-    def __init__(
-        self,
-        page_title: str = "Awesome-pyecharts",
-        js_host: str = CurrentConfig.ONLINE_HOST,
-    ):
+    def __init__(self, page_title: str = CurrentConfig.PAGE_TITLE, js_host: str = ""):
         self.page_title = page_title
-        self.js_host = js_host
+        self.js_host = js_host or CurrentConfig.ONLINE_HOST
         self.js_dependencies: OrderedSet = OrderedSet()
-        self._charts = []
+        self._tables = []
+        self.title_opts = ComponentTitleOpts()
 
     def add(self, headers: Sequence, rows: Sequence, attributes: Optional[dict] = None):
         attributes = attributes or {"class": "fl-table"}
         table = PrettyTable(headers, attributes=attributes)
         for r in rows:
             table.add_row(r)
-        self._charts.append(table.get_html_string())
+        self._tables.append(table.get_html_string())
+        return self
+
+    def set_global_opts(self, title_opts: Union[ComponentTitleOpts, dict, None] = None):
+        self.title_opts = title_opts
         return self
 
     # List-Like Feature
     def __iter__(self):
-        for chart in self._charts:
+        for chart in self._tables:
             yield chart
 
     def __len__(self):
-        return len(self._charts)
+        return len(self._tables)
 
     def render(
         self,

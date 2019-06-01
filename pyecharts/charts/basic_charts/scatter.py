@@ -1,3 +1,5 @@
+import itertools
+
 from ... import options as opts
 from ...charts.chart import RectChart
 from ...commons.types import Numeric, Optional, Sequence, Union
@@ -16,7 +18,6 @@ class Scatter(RectChart):
 
     def __init__(self, init_opts: opts.InitOpts = opts.InitOpts()):
         super().__init__(init_opts=init_opts)
-        self.options.update(yAxis=[opts.AxisOpts().opts])
 
     def add_yaxis(
         self,
@@ -37,7 +38,13 @@ class Scatter(RectChart):
     ):
         self._append_color(color)
         self._append_legend(series_name, is_selected)
-        data = [list(z) for z in zip(self._xaxis_data, y_axis)]
+        if len(y_axis) > 0 and isinstance(y_axis[0], Sequence):
+            data = [
+                list(itertools.chain(list([x]), y))
+                for x, y in zip(self._xaxis_data, y_axis)
+            ]
+        else:
+            data = [list(z) for z in zip(self._xaxis_data, y_axis)]
         self.options.get("series").append(
             {
                 "type": ChartType.SCATTER,

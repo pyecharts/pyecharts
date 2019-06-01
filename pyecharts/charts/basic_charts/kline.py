@@ -16,7 +16,6 @@ class Kline(RectChart):
 
     def __init__(self, init_opts: opts.InitOpts = opts.InitOpts()):
         super().__init__(init_opts=init_opts)
-        self.options.update(yAxis=[opts.AxisOpts().opts])
         self.set_global_opts(
             xaxis_opts=opts.AxisOpts(is_scale=True),
             yaxis_opts=opts.AxisOpts(is_scale=True),

@@ -1,6 +1,7 @@
 from example.commons import Collector, Faker
 from pyecharts import options as opts
 from pyecharts.charts import Page, Scatter
+from pyecharts.commons.utils import JsCode
 
 C = Collector()
 
@@ -55,6 +56,35 @@ def scatter_visualmap_size() -> Scatter:
         .set_global_opts(
             title_opts=opts.TitleOpts(title="Scatter-VisualMap(Size)"),
             visualmap_opts=opts.VisualMapOpts(type_="size", max_=150, min_=20),
+        )
+    )
+    return c
+
+
+@C.funcs
+def scatter_muti_dimension_data() -> Scatter:
+    c = (
+        Scatter()
+        .add_xaxis(Faker.choose())
+        .add_yaxis(
+            "商家A",
+            [list(z) for z in zip(Faker.values(), Faker.choose())],
+            label_opts=opts.LabelOpts(
+                formatter=JsCode(
+                    "function(params){return params.value[1] +' : '+ params.value[2];}"
+                )
+            ),
+        )
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="Scatter-多维度数据"),
+            tooltip_opts=opts.TooltipOpts(
+                formatter=JsCode(
+                    "function (params) {return params.name + ' : ' + params.value[2];}"
+                )
+            ),
+            visualmap_opts=opts.VisualMapOpts(
+                type_="color", max_=150, min_=20, dimension=1
+            ),
         )
     )
     return c
