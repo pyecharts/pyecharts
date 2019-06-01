@@ -2,6 +2,7 @@ from ... import options as opts
 from ...charts.basic_charts.geo import GeoChartBase
 from ...commons.types import Optional, Sequence, Union
 from ...commons.utils import OrderedSet
+from ...globals import ChartType
 
 BAIDU_MAP_API = "http://api.map.baidu.com/api?v=2.0&ak={}"
 BAIDU_MAP_GETSCRIPT = "http://api.map.baidu.com/getscript?v=2.0&ak={}"
@@ -20,6 +21,16 @@ class BMap(GeoChartBase):
         self._is_geo_chart = True
         self._coordinate_system: Optional[str] = "bmap"
         self.bmap_js_functions: OrderedSet = OrderedSet()
+
+    def _feed_data(self, data_pair: Sequence, type_: str) -> Sequence:
+        result = []
+        if type_ == ChartType.LINES:
+            result = data_pair
+        else:
+            for n, v in data_pair:
+                lng, lat = self.get_coordinate(n)
+                result.append({"name": n, "value": [lng, lat, v]})
+        return result
 
     def add_schema(
         self,
