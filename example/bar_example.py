@@ -369,34 +369,28 @@ def bar_graphic_component() -> Bar:
                     children=[
                         opts.GraphicRect(
                             graphic_item=opts.GraphicItem(
-                                left="center",
-                                top="center",
-                                z=100,
+                                left="center", top="center", z=100
                             ),
                             graphic_shape_opts=opts.GraphicShapeOpts(
-                                width=400, height=50,
+                                width=400, height=50
                             ),
                             graphic_style_opts=opts.GraphicStyleOpts(
-                                fill="rgba(0,0,0,0.3)",
-                            )
+                                fill="rgba(0,0,0,0.3)"
+                            ),
                         ),
                         opts.GraphicText(
                             graphic_item=opts.GraphicItem(
-                                left="center",
-                                top="center",
-                                z=100,
+                                left="center", top="center", z=100
                             ),
                             graphic_style_opts=opts.GraphicTextStyleOpts(
                                 text="pyecharts bar chart",
                                 font="bold 26px Microsoft YaHei",
-                                graphic_base_style=opts.GraphicStyleOpts(
-                                    fill="#fff",
-                                )
-                            )
-                        )
-                    ]
-                ),
-            ]
+                                graphic_base_style=opts.GraphicStyleOpts(fill="#fff"),
+                            ),
+                        ),
+                    ],
+                )
+            ],
         )
     )
     return c

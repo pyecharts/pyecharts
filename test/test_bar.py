@@ -121,12 +121,12 @@ def test_bar_graphic(fake_writer):
                         bounding="raw",
                         origin=[75, 75],
                     ),
-                    graphic_style_opts=opts.GraphicImageStyleOpts(
+                    graphic_imagestyle_opts=opts.GraphicImageStyleOpts(
                         image="http://echarts.baidu.com/images/favicon.png",
                         width=150,
                         height=150,
                         opacity=0.4,
-                    )
+                    ),
                 )
             ]
         )

@@ -1,6 +1,6 @@
 import json
 
-from ..commons.types import Numeric, Optional, Sequence, Union, JSFunc
+from ..commons.types import JSFunc, Numeric, Optional, Sequence, Union
 from ..globals import BMapType
 from .global_options import TooltipOpts
 from .series_options import BasicOpts, ItemStyleOpts, LabelOpts, LineStyleOpts
@@ -295,14 +295,18 @@ class ComponentTitleOpts:
             self.subtitle_style += '{}="{}" '.format(k, v)
 
 
-class GraphicShapeOpts(BasicOpts):
+class BaseGraphic(BasicOpts):
+    pass
+
+
+class GraphicShapeOpts(BaseGraphic):
     def __init__(
         self,
         pos_x: Numeric = 0,
         pos_y: Numeric = 0,
         width: Numeric = 0,
         height: Numeric = 0,
-        r: Union[Sequence, Numeric] = None,
+        r: Union[Sequence, Numeric, None] = None,
     ):
         self.opts: dict = {
             "x": pos_x,
@@ -313,16 +317,16 @@ class GraphicShapeOpts(BasicOpts):
         }
 
 
-class GraphicStyleOpts(BasicOpts):
+class GraphicBasicStyleOpts(BaseGraphic):
     def __init__(
         self,
         fill: str = "#000",
-        stroke: str = None,
+        stroke: Optional[str] = None,
         line_width: Numeric = 0,
-        shadow_blur: Numeric = None,
-        shadow_offset_x: Numeric = None,
-        shadow_offset_y: Numeric = None,
-        shadow_color: str = None,
+        shadow_blur: Optional[Numeric] = None,
+        shadow_offset_x: Optional[Numeric] = None,
+        shadow_offset_y: Optional[Numeric] = None,
+        shadow_color: Optional[str] = None,
     ):
         self.opts: dict = {
             "fill": fill,
@@ -335,16 +339,16 @@ class GraphicStyleOpts(BasicOpts):
         }
 
 
-class GraphicImageStyleOpts(BasicOpts):
+class GraphicImageStyleOpts(BaseGraphic):
     def __init__(
         self,
-        image: str = None,
+        image: Optional[str] = None,
         pos_x: Numeric = 0,
         pos_y: Numeric = 0,
         width: Numeric = 0,
         height: Numeric = 0,
         opacity: Numeric = 1,
-        graphic_base_style: Union[GraphicStyleOpts, dict, None] = None,
+        graphic_basicstyle_opts: Union[GraphicBasicStyleOpts, dict, None] = None,
     ):
         self.opts: dict = {
             "image": image,
@@ -355,23 +359,23 @@ class GraphicImageStyleOpts(BasicOpts):
             "opacity": opacity,
         }
 
-        if graphic_base_style is not None:
-            if isinstance(graphic_base_style, dict):
-                self.opts.update(graphic_base_style)
-            elif isinstance(graphic_base_style, GraphicStyleOpts):
-                self.opts.update(graphic_base_style.opts)
+        if graphic_basicstyle_opts:
+            if isinstance(graphic_basicstyle_opts, GraphicBasicStyleOpts):
+                self.opts.update(graphic_basicstyle_opts.opts)
+            else:
+                self.opts.update(graphic_basicstyle_opts)
 
 
-class GraphicTextStyleOpts(BasicOpts):
+class GraphicTextStyleOpts(BaseGraphic):
     def __init__(
         self,
-        text: JSFunc = None,
+        text: Optional[JSFunc] = None,
         pos_x: Numeric = 0,
         pos_y: Numeric = 0,
-        font: str = None,
+        font: Optional[str] = None,
         text_align: str = "left",
-        text_vertical_align: str = None,
-        graphic_base_style: Union[GraphicStyleOpts, dict, None] = None,
+        text_vertical_align: Optional[str] = None,
+        graphic_basicstyle_opts: Union[GraphicBasicStyleOpts, dict, None] = None,
     ):
         self.opts: dict = {
             "text": text,
@@ -382,26 +386,26 @@ class GraphicTextStyleOpts(BasicOpts):
             "textVerticalAlign": text_vertical_align,
         }
 
-        if graphic_base_style is not None:
-            if isinstance(graphic_base_style, dict):
-                self.opts.update(graphic_base_style)
-            elif isinstance(graphic_base_style, GraphicStyleOpts):
-                self.opts.update(graphic_base_style.opts)
+        if graphic_basicstyle_opts:
+            if isinstance(graphic_basicstyle_opts, GraphicBasicStyleOpts):
+                self.opts.update(graphic_basicstyle_opts.opts)
+            else:
+                self.opts.update(graphic_basicstyle_opts)
 
 
-class GraphicItem(BasicOpts):
+class GraphicItem(BaseGraphic):
     def __init__(
         self,
-        id_: str = None,
+        id_: Optional[str] = None,
         action: str = "merge",
-        position: Union[Sequence, Numeric] = None,
-        rotation: Union[Numeric, JSFunc] = 0,
-        scale: Union[Sequence, Numeric] = None,
-        origin: Union[Numeric, Sequence] = None,
-        left: Union[Numeric, str] = None,
-        right: Union[Numeric, str] = None,
-        top: Union[Numeric, str] = None,
-        bottom: Union[Numeric, str] = None,
+        position: [Sequence, Numeric, None] = None,
+        rotation: Union[Numeric, JSFunc, None] = 0,
+        scale: Union[Sequence, Numeric, None] = None,
+        origin: Union[Numeric, Sequence, None] = None,
+        left: Union[Numeric, str, None] = None,
+        right: Union[Numeric, str, None] = None,
+        top: Union[Numeric, str, None] = None,
+        bottom: Union[Numeric, str, None] = None,
         bounding: str = "all",
         z: Numeric = 0,
         z_level: Numeric = 0,
@@ -439,66 +443,91 @@ class GraphicItem(BasicOpts):
         }
 
 
-class GraphicGroup(BasicOpts):
+class GraphicGroup(BaseGraphic):
     def __init__(
         self,
-        graphic_item: Union[GraphicItem, dict] = None,
+        graphic_item: Union[GraphicItem, dict, None] = None,
         is_diff_children_by_name: bool = False,
-        children: Sequence = None,
+        children: Optional[Sequence[BaseGraphic]] = None,
     ):
         self.opts: dict = {
             "type": "group",
             "diffChildrenByName": is_diff_children_by_name,
             "children": children,
         }
+
         if graphic_item:
-            self.opts.update(graphic_item.opts)
+            if isinstance(graphic_item, GraphicItem):
+                self.opts.update(graphic_item.opts)
+            else:
+                self.opts.update(graphic_item)
 
 
-class GraphicImage(BasicOpts):
+class GraphicImage(BaseGraphic):
     def __init__(
         self,
-        graphic_item: Union[GraphicItem, dict] = None,
-        graphic_style_opts: Union[GraphicImageStyleOpts, dict, None] = None,
+        graphic_item: Union[GraphicItem, dict, None] = None,
+        graphic_imagestyle_opts: Union[GraphicImageStyleOpts, dict, None] = None,
     ):
         self.opts: dict = {"type": "image"}
 
         if graphic_item:
-            self.opts.update(graphic_item.opts)
+            if isinstance(graphic_item, GraphicItem):
+                self.opts.update(graphic_item.opts)
+            else:
+                self.opts.update(graphic_item)
 
-        if graphic_style_opts:
-            self.opts.update(style=graphic_style_opts.opts)
+        if graphic_imagestyle_opts:
+            if isinstance(graphic_imagestyle_opts, GraphicImageStyleOpts):
+                self.opts.update(style=graphic_imagestyle_opts.opts)
+            else:
+                self.opts.update(style=graphic_imagestyle_opts)
 
 
-class GraphicText(BasicOpts):
+class GraphicText(BaseGraphic):
     def __init__(
         self,
-        graphic_item: Union[GraphicItem, dict] = None,
-        graphic_style_opts: Union[GraphicTextStyleOpts, dict, None] = None,
+        graphic_item: Union[GraphicItem, dict, None] = None,
+        graphic_textstyle_opts: Union[GraphicTextStyleOpts, dict, None] = None,
     ):
         self.opts: dict = {"type": "text"}
 
         if graphic_item:
-            self.opts.update(graphic_item.opts)
+            if isinstance(graphic_item, GraphicItem):
+                self.opts.update(graphic_item.opts)
+            else:
+                self.opts.update(graphic_item)
 
-        if graphic_style_opts:
-            self.opts.update(style=graphic_style_opts.opts)
+        if graphic_textstyle_opts:
+            if isinstance(graphic_textstyle_opts, GraphicTextStyleOpts):
+                self.opts.update(style=graphic_textstyle_opts.opts)
+            else:
+                self.opts.update(style=graphic_textstyle_opts)
 
 
-class GraphicRect(BasicOpts):
+class GraphicRect(BaseGraphic):
     def __init__(
         self,
-        graphic_item: Union[GraphicItem, dict] = None,
+        graphic_item: Union[GraphicItem, dict, None] = None,
         graphic_shape_opts: Union[GraphicShapeOpts, dict, None] = None,
-        graphic_style_opts: Union[GraphicStyleOpts, dict, None] = None,
+        graphic_basicstyle_opts: Union[GraphicBasicStyleOpts, dict, None] = None,
     ):
         self.opts: dict = {"type": "rect"}
 
         if graphic_item:
-            self.opts.update(graphic_item.opts)
+            if isinstance(graphic_item, GraphicItem):
+                self.opts.update(graphic_item.opts)
+            else:
+                self.opts.update(graphic_item)
 
         if graphic_shape_opts:
-            self.opts.update(shape=graphic_shape_opts.opts)
+            if isinstance(graphic_shape_opts, GraphicShapeOpts):
+                self.opts.update(shape=graphic_shape_opts.opts)
+            else:
+                self.opts.update(graphic_shape_opts)
 
-        if graphic_style_opts:
-            self.opts.update(style=graphic_style_opts.opts)
+        if graphic_basicstyle_opts:
+            if isinstance(graphic_basicstyle_opts, GraphicBasicStyleOpts):
+                self.opts.update(style=graphic_basicstyle_opts.opts)
+            else:
+                self.opts.update(style=graphic_basicstyle_opts)
