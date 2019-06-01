@@ -116,6 +116,7 @@ class Chart(Base):
             opts.VisualMapOpts, Sequence[Union[opts.VisualMapOpts, dict]], dict, None
         ] = None,
         datazoom_opts: Sequence[Union[opts.DataZoomOpts, dict, None]] = None,
+        graphic_opts: Sequence[Union[dict, None]] = None,
     ):
         vs = []
         if isinstance(visualmap_opts, Sequence):
@@ -153,6 +154,15 @@ class Chart(Base):
                     continue
                 dzs.append(dz)
             self.options.update(dataZoom=dzs)
+
+        if graphic_opts:
+            gcs = []
+            for gc in graphic_opts:
+                if not gc:
+                    continue
+                gcs.append(gc)
+            self.options.update(graphic=gcs)
+
         return self
 
 
