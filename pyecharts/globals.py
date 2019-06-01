@@ -38,6 +38,7 @@ class _ChartType:
     LIQUID: str = "liquidFill"
     MAP: str = "map"
     PARALLEL: str = "parallel"
+    PICTORIALBAR: str = "pictorialBar"
     PIE: str = "pie"
     POLAR: str = "polar"
     RADAR: str = "radar"

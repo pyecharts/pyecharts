@@ -16,7 +16,7 @@ def table_base() -> Table:
         ["Perth", 5386, 1554769, 869.4],
     ]
     table.add(headers, rows).set_global_opts(
-        title_opts=ComponentTitleOpts(title="我是主标题", subtitle="我是副标题支持换行哦")
+        title_opts=ComponentTitleOpts(title="Table-基本示例", subtitle="我是副标题支持换行哦")
     )
     return table
 
