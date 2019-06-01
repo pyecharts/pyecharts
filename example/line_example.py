@@ -18,6 +18,19 @@ def line_base() -> Line:
 
 
 @C.funcs
+def line_connect_null() -> Line:
+    y = Faker.values()
+    y[3], y[5] = None, None
+    c = (
+        Line()
+        .add_xaxis(Faker.choose())
+        .add_yaxis("商家A", y, is_connect_nones=True)
+        .set_global_opts(title_opts=opts.TitleOpts(title="Line-连接空数据"))
+    )
+    return c
+
+
+@C.funcs
 def line_smooth() -> Line:
     c = (
         Line()
@@ -25,6 +38,45 @@ def line_smooth() -> Line:
         .add_yaxis("商家A", Faker.values(), is_smooth=True)
         .add_yaxis("商家B", Faker.values(), is_smooth=True)
         .set_global_opts(title_opts=opts.TitleOpts(title="Line-smooth"))
+    )
+    return c
+
+
+@C.funcs
+def line_areastyle() -> Line:
+    c = (
+        Line()
+        .add_xaxis(Faker.choose())
+        .add_yaxis(
+            "商家A", Faker.values(), areastyle_opts=opts.AreaStyleOpts(opacity=0.5)
+        )
+        .add_yaxis(
+            "商家B", Faker.values(), areastyle_opts=opts.AreaStyleOpts(opacity=0.5)
+        )
+        .set_global_opts(title_opts=opts.TitleOpts(title="Line-面积图"))
+    )
+    return c
+
+
+@C.funcs
+def line_areastyle_boundary_gap() -> Line:
+    c = (
+        Line()
+        .add_xaxis(Faker.choose())
+        .add_yaxis("商家A", Faker.values(), is_smooth=True)
+        .add_yaxis("商家B", Faker.values(), is_smooth=True)
+        .set_series_opts(
+            areastyle_opts=opts.AreaStyleOpts(opacity=0.5),
+            label_opts=opts.LabelOpts(is_show=False),
+        )
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="Line-面积图（紧贴 Y 轴）"),
+            xaxis_opts=opts.AxisOpts(
+                axistick_opts=opts.AxisTickOpts(is_align_with_label=True),
+                is_scale=False,
+                boundary_gap=False,
+            ),
+        )
     )
     return c
 

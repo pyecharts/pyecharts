@@ -2,6 +2,8 @@ import os
 
 from jinja2 import Environment, FileSystemLoader
 
+from pyecharts.commons.utils import JsCode
+
 
 class _RenderType:
     CANVAS: str = "canvas"
@@ -38,6 +40,7 @@ class _ChartType:
     LIQUID: str = "liquidFill"
     MAP: str = "map"
     PARALLEL: str = "parallel"
+    PICTORIALBAR: str = "pictorialBar"
     PIE: str = "pie"
     POLAR: str = "polar"
     RADAR: str = "radar"
@@ -50,11 +53,14 @@ class _ChartType:
     WORDCLOUD: str = "wordCloud"
 
 
-class _ToolTipFormatterType:
-    GEO = """function (params) {
+ToolTipFormatterType = {
+    _ChartType.GEO: JsCode(
+        """function (params) {
         return params.name + ' : ' + params.value[2];
     }"""
-    GAUGE = "{a} <br/>{b} : {c}%"
+    ),
+    _ChartType.GAUGE: "{a} <br/>{b} : {c}%",
+}
 
 
 class _ThemeType:
@@ -112,7 +118,6 @@ RenderType = _RenderType()
 FileType = _FileType()
 SymbolType = _SymbolType()
 ChartType = _ChartType
-TooltipFormatterType = _ToolTipFormatterType()
 ThemeType = _ThemeType()
 GeoType = _GeoType()
 BMapType = _BMapType
@@ -120,6 +125,7 @@ NotebookType = _NotebookType()
 
 
 class _CurrentConfig:
+    PAGE_TITLE = "Awesome-pyecharts"
     ONLINE_HOST = "https://assets.pyecharts.org/assets/"
     NOTEBOOK_TYPE = NotebookType.JUPYTER_NOTEBOOK
     GLOBAL_ENV = Environment(

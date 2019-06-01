@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{{ chart.page_title }}</title>
+</head>
+<body>
+
+<p class="title" {{ chart.title_opts.title_style }}> {{ chart.title_opts.title }}</p>
+<p class="subtitle" {{ chart.title_opts.subtitle_style }}> {{ chart.title_opts.subtitle }}</p>
+{% for c in chart %}
+    <img {{ c }}/>
+{% endfor %}
+</body>
+</html>

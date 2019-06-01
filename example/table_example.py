@@ -1,4 +1,5 @@
 from pyecharts.components import Table
+from pyecharts.options import ComponentTitleOpts
 
 
 def table_base() -> Table:
@@ -14,7 +15,9 @@ def table_base() -> Table:
         ["Melbourne", 1566, 3806092, 646.9],
         ["Perth", 5386, 1554769, 869.4],
     ]
-    table.add(headers, rows)
+    table.add(headers, rows).set_global_opts(
+        title_opts=ComponentTitleOpts(title="Table-基本示例", subtitle="我是副标题支持换行哦")
+    )
     return table
 
 

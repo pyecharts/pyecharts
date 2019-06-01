@@ -3,9 +3,10 @@ import uuid
 from jinja2 import Environment
 
 from ...commons import utils
-from ...commons.types import Optional
+from ...commons.types import Optional, Union
 from ...datasets import FILENAMES
 from ...globals import CurrentConfig, NotebookType, ThemeType
+from ...options import PageLayoutOpts
 from ...render.display import HTML, Javascript
 from ...render.engine import RenderEngine
 
@@ -15,16 +16,22 @@ class Page:
     `Page` A container object to present multiple charts vertically in a single page
     """
 
+    SimplePageLayout = PageLayoutOpts(
+        justify_content="center", display="flex", flex_wrap="wrap"
+    )
+
     def __init__(
         self,
-        page_title: str = "Awesome-pyecharts",
-        js_host: str = CurrentConfig.ONLINE_HOST,
+        page_title: str = CurrentConfig.PAGE_TITLE,
+        js_host: str = "",
         interval: int = 1,
+        layout: Union[PageLayoutOpts, dict] = PageLayoutOpts(),
     ):
         self.page_title = page_title
         self.page_interval = interval
         self.js_dependencies = utils.OrderedSet()
-        self.js_host = js_host
+        self.js_host = js_host or CurrentConfig.ONLINE_HOST
+        self.layout = self._assembly_layout(layout)
         self._charts = []
 
     def add(self, *charts):
@@ -33,6 +40,15 @@ class Page:
             for d in c.js_dependencies.items:
                 self.js_dependencies.add(d)
         return self
+
+    def _assembly_layout(self, layout: Union[PageLayoutOpts, dict]) -> str:
+        result = ""
+        if isinstance(layout, PageLayoutOpts):
+            layout = layout.opts
+        layout = utils.remove_key_with_none_value(layout)
+        for k, v in layout.items():
+            result += "{}:{}; ".format(k, v)
+        return result
 
     # List-Like Feature
     def __iter__(self):

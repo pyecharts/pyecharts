@@ -1,6 +1,7 @@
 from example.commons import Collector, Faker
 from pyecharts import options as opts
 from pyecharts.charts import Bar, Page
+from pyecharts.commons.utils import JsCode
 
 C = Collector()
 
@@ -232,7 +233,7 @@ def bar_datazoom_slider() -> Bar:
         .add_yaxis("商家A", Faker.days_values)
         .set_global_opts(
             title_opts=opts.TitleOpts(title="Bar-DataZoom（slider-水平）"),
-            datazoom_opts=[opts.DataZoomOpts()],
+            datazoom_opts=opts.DataZoomOpts(),
         )
     )
     return c
@@ -246,7 +247,7 @@ def bar_datazoom_slider_vertical() -> Bar:
         .add_yaxis("商家A", Faker.days_values, color=Faker.rand_color())
         .set_global_opts(
             title_opts=opts.TitleOpts(title="Bar-DataZoom（slider-垂直）"),
-            datazoom_opts=[opts.DataZoomOpts(orient="vertical")],
+            datazoom_opts=opts.DataZoomOpts(orient="vertical"),
         )
     )
     return c
@@ -260,7 +261,7 @@ def bar_datazoom_inside() -> Bar:
         .add_yaxis("商家A", Faker.days_values, color=Faker.rand_color())
         .set_global_opts(
             title_opts=opts.TitleOpts(title="Bar-DataZoom（inside）"),
-            datazoom_opts=[opts.DataZoomOpts(type_="inside")],
+            datazoom_opts=opts.DataZoomOpts(type_="inside"),
         )
     )
     return c
@@ -342,6 +343,56 @@ def bar_rorate_xaxis_label() -> Bar:
         .set_global_opts(
             xaxis_opts=opts.AxisOpts(axislabel_opts=opts.LabelOpts(rotate=-15)),
             title_opts=opts.TitleOpts(title="Bar-旋转X轴标签", subtitle="解决标签名字过长的问题"),
+        )
+    )
+    return c
+
+
+@C.funcs
+def bar_graphic_component() -> Bar:
+    c = (
+        Bar()
+        .add_xaxis(Faker.choose())
+        .add_yaxis("商家A", Faker.values())
+        .add_yaxis("商家B", Faker.values())
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="Bar-Graphic 组件示例"),
+            graphic_opts=[
+                opts.GraphicGroup(
+                    graphic_item=opts.GraphicItem(
+                        rotation=JsCode("Math.PI / 4"),
+                        bounding="raw",
+                        right=110,
+                        bottom=110,
+                        z=100,
+                    ),
+                    children=[
+                        opts.GraphicRect(
+                            graphic_item=opts.GraphicItem(
+                                left="center", top="center", z=100
+                            ),
+                            graphic_shape_opts=opts.GraphicShapeOpts(
+                                width=400, height=50
+                            ),
+                            graphic_basicstyle_opts=opts.GraphicBasicStyleOpts(
+                                fill="rgba(0,0,0,0.3)"
+                            ),
+                        ),
+                        opts.GraphicText(
+                            graphic_item=opts.GraphicItem(
+                                left="center", top="center", z=100
+                            ),
+                            graphic_textstyle_opts=opts.GraphicTextStyleOpts(
+                                text="pyecharts bar chart",
+                                font="bold 26px Microsoft YaHei",
+                                graphic_basicstyle_opts=opts.GraphicBasicStyleOpts(
+                                    fill="#fff"
+                                ),
+                            ),
+                        ),
+                    ],
+                )
+            ],
         )
     )
     return c

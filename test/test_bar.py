@@ -102,3 +102,36 @@ def test_bar_custom_remote_host(fake_writer):
     eq_(c.js_host, "http://localhost:8000/assets/")
     _, content = fake_writer.call_args[0]
     assert_in("http://localhost:8000/assets/echarts.min.js", content)
+
+
+@patch("pyecharts.render.engine.write_utf8_html_file")
+def test_bar_graphic(fake_writer):
+    c = (
+        Bar()
+        .add_xaxis(["A", "B", "C"])
+        .add_yaxis("series0", [1, 2, 4])
+        .set_global_opts(
+            graphic_opts=[
+                opts.GraphicImage(
+                    graphic_item=opts.GraphicItem(
+                        id_="logo",
+                        right=20,
+                        top=20,
+                        z=-10,
+                        bounding="raw",
+                        origin=[75, 75],
+                    ),
+                    graphic_imagestyle_opts=opts.GraphicImageStyleOpts(
+                        image="http://echarts.baidu.com/images/favicon.png",
+                        width=150,
+                        height=150,
+                        opacity=0.4,
+                    ),
+                )
+            ]
+        )
+    )
+    c.render()
+    file_name, content = fake_writer.call_args[0]
+    eq_("render.html", file_name)
+    assert_in("graphic", content)
