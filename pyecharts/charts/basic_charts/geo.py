@@ -2,7 +2,7 @@ import json
 
 from ... import options as opts
 from ...charts.chart import Chart
-from ...commons.types import Numeric, Optional, Sequence, Union, List
+from ...commons.types import Numeric, Optional, Sequence, Union
 from ...datasets import COORDINATES
 from ...globals import ChartType
 
@@ -149,8 +149,8 @@ class Geo(GeoChartBase):
         self,
         maptype: str = "china",
         is_roam: bool = True,
-        zoom: Numeric = None,
-        center: Union[List, None] = None,
+        zoom: Optional[Numeric] = None,
+        center: Union[Sequence, None] = None,
         label_opts: Union[opts.LabelOpts, dict, None] = None,
         itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
         emphasis_itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,

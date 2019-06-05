@@ -5,7 +5,6 @@ from nose.tools import eq_, assert_in
 from example.commons import Faker
 from pyecharts import options as opts
 from pyecharts.charts import Geo
-from textwrap import dedent
 
 
 @patch("pyecharts.render.engine.write_utf8_html_file")
