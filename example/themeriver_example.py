@@ -87,6 +87,7 @@ themeriver_data = [
     ["2015/11/20", 26, "DD"],
 ]
 
+
 @C.funcs
 def themeriver_example() -> ThemeRiver:
     c = (
