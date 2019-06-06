@@ -33,10 +33,10 @@ def register_url(asset_url: str):
                 files[key] = [file_name, "js"]
 
         js_folder_name = contents["JS_FOLDER"]
-        if js_folder_name == '/':
-            js_file_prefix = f'{asset_url}/'
+        if js_folder_name == "/":
+            js_file_prefix = f"{asset_url}/"
         else:
-            js_file_prefix = f'{asset_url}/{js_folder_name}/'
+            js_file_prefix = f"{asset_url}/{js_folder_name}/"
         EXTRA[js_file_prefix] = files
 
 
