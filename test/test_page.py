@@ -2,7 +2,6 @@ from nose.tools import assert_true, eq_
 
 from example.commons import Faker
 from pyecharts.charts import Bar, Line, Page
-from pyecharts.render.engine import RenderEngine
 
 
 def _create_bar() -> Bar:
@@ -46,3 +45,11 @@ def test_page_render_embed():
     line = _create_line()
     content = Page().add(bar, line).render_embed()
     assert_true(len(content) > 1000)
+
+
+def test_page_load_javascript():
+    bar = _create_bar()
+    line = _create_line()
+    content = Page().add(bar, line).load_javascript()
+    eq_("", content.data)
+    eq_(["https://assets.pyecharts.org/assets/echarts.min.js"], content.lib)
