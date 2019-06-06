@@ -4,6 +4,7 @@ import os
 from example.commons import Collector
 from pyecharts import options as opts
 from pyecharts.charts import Page, Sunburst
+from pyecharts.commons.utils import JsCode
 
 C = Collector()
 
@@ -91,6 +92,96 @@ def sunburst_official() -> Sunburst:
             ],
         )
         .set_global_opts(title_opts=opts.TitleOpts(title="Sunburst-官方示例"))
+        .set_series_opts(label_opts=opts.LabelOpts(formatter="{b}"))
+    )
+    return c
+
+
+@C.funcs
+def sunburst_graphic_component() -> Sunburst:
+    data = [
+        opts.SunburstItem(
+            name="Grandpa",
+            children=[
+                opts.SunburstItem(
+                    name="Uncle Leo",
+                    value=15,
+                    children=[
+                        opts.SunburstItem(name="Cousin Jack", value=2),
+                        opts.SunburstItem(
+                            name="Cousin Mary",
+                            value=5,
+                            children=[opts.SunburstItem(name="Jackson", value=2)],
+                        ),
+                        opts.SunburstItem(name="Cousin Ben", value=4),
+                    ],
+                ),
+                opts.SunburstItem(
+                    name="Father",
+                    value=10,
+                    children=[
+                        opts.SunburstItem(name="Me", value=5),
+                        opts.SunburstItem(name="Brother Peter", value=1),
+                    ],
+                ),
+            ],
+        ),
+        opts.SunburstItem(
+            name="Nancy",
+            children=[
+                opts.SunburstItem(
+                    name="Uncle Nike",
+                    children=[
+                        opts.SunburstItem(name="Cousin Betty", value=1),
+                        opts.SunburstItem(name="Cousin Jenny", value=2),
+                    ],
+                )
+            ],
+        ),
+    ]
+
+    c = (
+        Sunburst(init_opts=opts.InitOpts(width="1000px", height="600px"))
+        .add(series_name="", data_pair=data, radius=[0, "90%"])
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="Sunburst-Graphic"),
+            graphic_opts=[
+                opts.GraphicGroup(
+                    graphic_item=opts.GraphicItem(
+                        rotation=JsCode("Math.PI / 4"),
+                        bounding="raw",
+                        right=110,
+                        bottom=110,
+                        z=100,
+                    ),
+                    children=[
+                        opts.GraphicRect(
+                            graphic_item=opts.GraphicItem(
+                                left="center", top="center", z=100
+                            ),
+                            graphic_shape_opts=opts.GraphicShapeOpts(
+                                width=400, height=50
+                            ),
+                            graphic_basicstyle_opts=opts.GraphicBasicStyleOpts(
+                                fill="rgba(0,0,0,0.3)"
+                            ),
+                        ),
+                        opts.GraphicText(
+                            graphic_item=opts.GraphicItem(
+                                left="center", top="center", z=100
+                            ),
+                            graphic_textstyle_opts=opts.GraphicTextStyleOpts(
+                                text="pyecharts bar chart",
+                                font="bold 26px Microsoft YaHei",
+                                graphic_basicstyle_opts=opts.GraphicBasicStyleOpts(
+                                    fill="#fff"
+                                ),
+                            ),
+                        ),
+                    ],
+                )
+            ],
+        )
         .set_series_opts(label_opts=opts.LabelOpts(formatter="{b}"))
     )
     return c

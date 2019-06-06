@@ -1,6 +1,7 @@
 from example.commons import Collector, Faker
 from pyecharts import options as opts
 from pyecharts.charts import Map, Page
+from pyecharts.commons.utils import JsCode
 
 C = Collector()
 
@@ -74,6 +75,54 @@ def map_guangdong() -> Map:
         .set_global_opts(
             title_opts=opts.TitleOpts(title="Map-广东地图"),
             visualmap_opts=opts.VisualMapOpts(),
+        )
+    )
+    return c
+
+
+@C.funcs
+def map_graphic_component() -> Map:
+    c = (
+        Map()
+        .add("商家A", [list(z) for z in zip(Faker.provinces, Faker.values())], "china")
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="Map-Graphic"),
+            graphic_opts=[
+                opts.GraphicGroup(
+                    graphic_item=opts.GraphicItem(
+                        rotation=JsCode("Math.PI / 4"),
+                        bounding="raw",
+                        right=110,
+                        bottom=110,
+                        z=100,
+                    ),
+                    children=[
+                        opts.GraphicRect(
+                            graphic_item=opts.GraphicItem(
+                                left="center", top="center", z=100
+                            ),
+                            graphic_shape_opts=opts.GraphicShapeOpts(
+                                width=400, height=50
+                            ),
+                            graphic_basicstyle_opts=opts.GraphicBasicStyleOpts(
+                                fill="rgba(0,0,0,0.3)"
+                            ),
+                        ),
+                        opts.GraphicText(
+                            graphic_item=opts.GraphicItem(
+                                left="center", top="center", z=100
+                            ),
+                            graphic_textstyle_opts=opts.GraphicTextStyleOpts(
+                                text="pyecharts bar chart",
+                                font="bold 26px Microsoft YaHei",
+                                graphic_basicstyle_opts=opts.GraphicBasicStyleOpts(
+                                    fill="#fff"
+                                ),
+                            ),
+                        ),
+                    ],
+                )
+            ],
         )
     )
     return c

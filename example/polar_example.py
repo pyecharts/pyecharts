@@ -4,6 +4,7 @@ import random
 from example.commons import Collector, Faker
 from pyecharts import options as opts
 from pyecharts.charts import Page, Polar
+from pyecharts.commons.utils import JsCode
 
 C = Collector()
 
@@ -91,7 +92,8 @@ def polar_love() -> Polar:
         Polar()
         .add_schema(
             angleaxis_opts=opts.AngleAxisOpts(
-                data=hour, type_="value", boundary_gap=False, start_angle=0
+                data=hour, type_="value", boundary_gap=False, start_angle=0,
+                is_clockwise=True
             )
         )
         .add("love", data, label_opts=opts.LabelOpts(is_show=False))
@@ -112,6 +114,66 @@ def polar_flower() -> Polar:
         .add_schema(angleaxis_opts=opts.AngleAxisOpts(start_angle=0, min_=0))
         .add("flower", data, label_opts=opts.LabelOpts(is_show=False))
         .set_global_opts(title_opts=opts.TitleOpts(title="Polar-Flower"))
+    )
+    return c
+
+
+@C.funcs
+def polar_graphic_component() -> Polar:
+    data = []
+    for i in range(101):
+        theta = i / 100 * 360
+        r = 5 * (1 + math.sin(theta / 180 * math.pi))
+        data.append([r, theta])
+    hour = [i for i in range(1, 25)]
+    c = (
+        Polar()
+        .add_schema(
+            angleaxis_opts=opts.AngleAxisOpts(
+                data=hour, type_="value", boundary_gap=False, start_angle=0,
+                is_clockwise=True
+            )
+        )
+        .add("love", data, label_opts=opts.LabelOpts(is_show=False))
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="Polar-Graphic"),
+            graphic_opts=[
+                opts.GraphicGroup(
+                    graphic_item=opts.GraphicItem(
+                        rotation=JsCode("Math.PI / 4"),
+                        bounding="raw",
+                        right=110,
+                        bottom=110,
+                        z=100,
+                    ),
+                    children=[
+                        opts.GraphicRect(
+                            graphic_item=opts.GraphicItem(
+                                left="center", top="center", z=100
+                            ),
+                            graphic_shape_opts=opts.GraphicShapeOpts(
+                                width=400, height=50
+                            ),
+                            graphic_basicstyle_opts=opts.GraphicBasicStyleOpts(
+                                fill="rgba(0,0,0,0.3)"
+                            ),
+                        ),
+                        opts.GraphicText(
+                            graphic_item=opts.GraphicItem(
+                                left="center", top="center", z=100
+                            ),
+                            graphic_textstyle_opts=opts.GraphicTextStyleOpts(
+                                text="pyecharts bar chart",
+                                font="bold 26px Microsoft YaHei",
+                                graphic_basicstyle_opts=opts.GraphicBasicStyleOpts(
+                                    fill="#fff"
+                                ),
+                            ),
+                        ),
+                    ],
+                )
+            ],
+        )
     )
     return c
 

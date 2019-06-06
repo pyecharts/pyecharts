@@ -4,6 +4,7 @@ import os
 from example.commons import Collector
 from pyecharts import options as opts
 from pyecharts.charts import Graph, Page
+from pyecharts.commons.utils import JsCode
 
 C = Collector()
 
@@ -111,6 +112,68 @@ def graph_npm_dependencies() -> Graph:
             linestyle_opts=opts.LineStyleOpts(width=0.5, curve=0.3, opacity=0.7),
         )
         .set_global_opts(title_opts=opts.TitleOpts(title="Graph-NPM Dependencies"))
+    )
+    return c
+
+
+@C.funcs
+def graph_graphic_component() -> Graph:
+    nodes = [
+        {"name": "结点1", "symbolSize": 10},
+        {"name": "结点2", "symbolSize": 20},
+        {"name": "结点3", "symbolSize": 30},
+        {"name": "结点4", "symbolSize": 40},
+        {"name": "结点5", "symbolSize": 50},
+        {"name": "结点6", "symbolSize": 40},
+        {"name": "结点7", "symbolSize": 30},
+        {"name": "结点8", "symbolSize": 20},
+    ]
+    links = []
+    for i in nodes:
+        for j in nodes:
+            links.append({"source": i.get("name"), "target": j.get("name")})
+    c = (
+        Graph()
+        .add("", nodes, links, repulsion=8000)
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="Graph-Graphic"),
+            graphic_opts=[
+                opts.GraphicGroup(
+                    graphic_item=opts.GraphicItem(
+                        rotation=JsCode("Math.PI / 4"),
+                        bounding="raw",
+                        right=110,
+                        bottom=110,
+                        z=100,
+                    ),
+                    children=[
+                        opts.GraphicRect(
+                            graphic_item=opts.GraphicItem(
+                                left="center", top="center", z=100
+                            ),
+                            graphic_shape_opts=opts.GraphicShapeOpts(
+                                width=400, height=50
+                            ),
+                            graphic_basicstyle_opts=opts.GraphicBasicStyleOpts(
+                                fill="rgba(0,0,0,0.3)"
+                            ),
+                        ),
+                        opts.GraphicText(
+                            graphic_item=opts.GraphicItem(
+                                left="center", top="center", z=100
+                            ),
+                            graphic_textstyle_opts=opts.GraphicTextStyleOpts(
+                                text="pyecharts bar chart",
+                                font="bold 26px Microsoft YaHei",
+                                graphic_basicstyle_opts=opts.GraphicBasicStyleOpts(
+                                    fill="#fff"
+                                ),
+                            ),
+                        ),
+                    ],
+                )
+            ],
+        )
     )
     return c
 

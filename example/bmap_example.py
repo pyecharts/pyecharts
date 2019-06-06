@@ -5,6 +5,7 @@ from example.commons import Collector, Faker
 from pyecharts import options as opts
 from pyecharts.charts import BMap, Page
 from pyecharts.globals import BMapType
+from pyecharts.commons.utils import JsCode
 
 C = Collector()
 BAIDU_MAP_AK = os.environ.get("BAIDU_MAP_AK", "FAKE_AK")
@@ -22,6 +23,60 @@ def bmap_base() -> BMap:
             label_opts=opts.LabelOpts(formatter="{b}"),
         )
         .set_global_opts(title_opts=opts.TitleOpts(title="BMap-基本示例"))
+    )
+    return c
+
+
+@C.funcs
+def bmap_graphic_component() -> BMap:
+
+    c = (
+        BMap()
+        .add_schema(baidu_ak=BAIDU_MAP_AK, center=[120.13066322374, 30.240018034923])
+        .add(
+            "bmap",
+            [list(z) for z in zip(Faker.provinces, Faker.values())],
+            label_opts=opts.LabelOpts(formatter="{b}"),
+        )
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="BMap-Graphic"),
+            graphic_opts=[
+                opts.GraphicGroup(
+                    graphic_item=opts.GraphicItem(
+                        rotation=JsCode("Math.PI / 4"),
+                        bounding="raw",
+                        right=110,
+                        bottom=110,
+                        z=100,
+                    ),
+                    children=[
+                        opts.GraphicRect(
+                            graphic_item=opts.GraphicItem(
+                                left="center", top="center", z=100
+                            ),
+                            graphic_shape_opts=opts.GraphicShapeOpts(
+                                width=400, height=50
+                            ),
+                            graphic_basicstyle_opts=opts.GraphicBasicStyleOpts(
+                                fill="rgba(0,0,0,0.3)"
+                            ),
+                        ),
+                        opts.GraphicText(
+                            graphic_item=opts.GraphicItem(
+                                left="center", top="center", z=100
+                            ),
+                            graphic_textstyle_opts=opts.GraphicTextStyleOpts(
+                                text="pyecharts bar chart",
+                                font="bold 26px Microsoft YaHei",
+                                graphic_basicstyle_opts=opts.GraphicBasicStyleOpts(
+                                    fill="#fff"
+                                ),
+                            ),
+                        ),
+                    ],
+                )
+            ],
+        )
     )
     return c
 

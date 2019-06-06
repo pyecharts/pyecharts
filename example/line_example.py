@@ -1,6 +1,7 @@
 import pyecharts.options as opts
 from example.commons import Collector, Faker
 from pyecharts.charts import Line, Page
+from pyecharts.commons.utils import JsCode
 
 C = Collector()
 
@@ -177,6 +178,56 @@ def line_itemstyle() -> Line:
             ),
         )
         .set_global_opts(title_opts=opts.TitleOpts(title="Line-ItemStyle"))
+    )
+    return c
+
+
+@C.funcs
+def line_graphic_component() -> Line:
+    c = (
+        Line()
+        .add_xaxis(Faker.choose())
+        .add_yaxis("商家A", Faker.values())
+        .add_yaxis("商家B", Faker.values())
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="Line-Graphic"),
+            graphic_opts=[
+                opts.GraphicGroup(
+                    graphic_item=opts.GraphicItem(
+                        rotation=JsCode("Math.PI / 4"),
+                        bounding="raw",
+                        right=110,
+                        bottom=110,
+                        z=100,
+                    ),
+                    children=[
+                        opts.GraphicRect(
+                            graphic_item=opts.GraphicItem(
+                                left="center", top="center", z=100
+                            ),
+                            graphic_shape_opts=opts.GraphicShapeOpts(
+                                width=400, height=50
+                            ),
+                            graphic_basicstyle_opts=opts.GraphicBasicStyleOpts(
+                                fill="rgba(0,0,0,0.3)"
+                            ),
+                        ),
+                        opts.GraphicText(
+                            graphic_item=opts.GraphicItem(
+                                left="center", top="center", z=100
+                            ),
+                            graphic_textstyle_opts=opts.GraphicTextStyleOpts(
+                                text="pyecharts bar chart",
+                                font="bold 26px Microsoft YaHei",
+                                graphic_basicstyle_opts=opts.GraphicBasicStyleOpts(
+                                    fill="#fff"
+                                ),
+                            ),
+                        ),
+                    ],
+                )
+            ],
+        )
     )
     return c
 

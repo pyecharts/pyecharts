@@ -4,6 +4,7 @@ import os
 from example.commons import Collector
 from pyecharts import options as opts
 from pyecharts.charts import Page, Tree
+from pyecharts.commons.utils import JsCode
 
 C = Collector()
 
@@ -118,6 +119,76 @@ def tree_layout() -> Tree:
         Tree()
         .add("", [j], collapse_interval=2, layout="radial")
         .set_global_opts(title_opts=opts.TitleOpts(title="Tree-Layout"))
+    )
+    return c
+
+
+@C.funcs
+def tree_graphic_component() -> Tree:
+    data = [
+        {
+            "children": [
+                {"name": "B"},
+                {
+                    "children": [
+                        {"children": [{"name": "I"}], "name": "E"},
+                        {"name": "F"},
+                    ],
+                    "name": "C",
+                },
+                {
+                    "children": [
+                        {"children": [{"name": "J"}, {"name": "K"}], "name": "G"},
+                        {"name": "H"},
+                    ],
+                    "name": "D",
+                },
+            ],
+            "name": "A",
+        }
+    ]
+    c = (
+        Tree()
+        .add("", data)
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="Tree-Graphic"),
+            graphic_opts=[
+                opts.GraphicGroup(
+                    graphic_item=opts.GraphicItem(
+                        rotation=JsCode("Math.PI / 4"),
+                        bounding="raw",
+                        right=110,
+                        bottom=110,
+                        z=100,
+                    ),
+                    children=[
+                        opts.GraphicRect(
+                            graphic_item=opts.GraphicItem(
+                                left="center", top="center", z=100
+                            ),
+                            graphic_shape_opts=opts.GraphicShapeOpts(
+                                width=400, height=50
+                            ),
+                            graphic_basicstyle_opts=opts.GraphicBasicStyleOpts(
+                                fill="rgba(0,0,0,0.3)"
+                            ),
+                        ),
+                        opts.GraphicText(
+                            graphic_item=opts.GraphicItem(
+                                left="center", top="center", z=100
+                            ),
+                            graphic_textstyle_opts=opts.GraphicTextStyleOpts(
+                                text="pyecharts bar chart",
+                                font="bold 26px Microsoft YaHei",
+                                graphic_basicstyle_opts=opts.GraphicBasicStyleOpts(
+                                    fill="#fff"
+                                ),
+                            ),
+                        ),
+                    ],
+                )
+            ],
+        )
     )
     return c
 
