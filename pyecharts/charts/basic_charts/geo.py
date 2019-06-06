@@ -149,15 +149,21 @@ class Geo(GeoChartBase):
         self,
         maptype: str = "china",
         is_roam: bool = True,
+        zoom: Optional[Numeric] = None,
+        center: Optional[Sequence] = None,
         label_opts: Union[opts.LabelOpts, dict, None] = None,
         itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
         emphasis_itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
         emphasis_label_opts: Union[opts.LabelOpts, dict, None] = None,
     ):
         self.js_dependencies.add(maptype)
+        if center:
+            assert len(center) == 2
         self.options.update(
             geo={
                 "map": maptype,
+                "zoom": zoom,
+                "center": center,
                 "roam": is_roam,
                 "label": label_opts,
                 "itemStyle": itemstyle_opts,

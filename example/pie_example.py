@@ -92,6 +92,32 @@ def pie_rosetype() -> Pie:
 
 
 @C.funcs
+def pie_scroll_legend() -> Pie:
+    c = (
+        Pie()
+        .add(
+            "",
+            [
+                list(z)
+                for z in zip(
+                    Faker.choose() + Faker.choose() + Faker.choose(),
+                    Faker.values() + Faker.values() + Faker.values(),
+                )
+            ],
+            center=["40%", "50%"],
+        )
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="Pie-Legend 滚动"),
+            legend_opts=opts.LegendOpts(
+                type_="scroll", pos_left="80%", orient="vertical"
+            ),
+        )
+        .set_series_opts(label_opts=opts.LabelOpts(formatter="{b}: {c}"))
+    )
+    return c
+
+
+@C.funcs
 def pie_rich_label() -> Pie:
     c = (
         Pie()
