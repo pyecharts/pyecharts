@@ -32,8 +32,7 @@ def _chart_for_grid() -> Bar:
         .set_global_opts(
             yaxis_opts=opts.AxisOpts(
                 name="降水量", min_=0, max_=250, position="right", offset=80
-            ),
-            tooltip_opts=opts.TooltipOpts(trigger="axis", axis_pointer_type="cross"),
+            )
         )
     )
 
