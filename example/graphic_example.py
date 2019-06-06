@@ -67,19 +67,14 @@ def bar_graphic_rect_text_two_component() -> Bar:
             title_opts=opts.TitleOpts(title="Bar-Graphic Rect+Text 2 组件示例"),
             graphic_opts=[
                 opts.GraphicGroup(
-                    graphic_item=opts.GraphicItem(
-                        left="50%",
-                        top="15%",
-                    ),
+                    graphic_item=opts.GraphicItem(left="50%", top="15%"),
                     children=[
                         opts.GraphicRect(
                             graphic_item=opts.GraphicItem(
-                                z=100,
-                                left="center",
-                                top="middle",
+                                z=100, left="center", top="middle"
                             ),
                             graphic_shape_opts=opts.GraphicShapeOpts(
-                                width=190, height=90,
+                                width=190, height=90
                             ),
                             graphic_basicstyle_opts=opts.GraphicBasicStyleOpts(
                                 fill="#fff",
@@ -89,13 +84,11 @@ def bar_graphic_rect_text_two_component() -> Bar:
                                 shadow_offset_x=3,
                                 shadow_offset_y=3,
                                 shadow_color="rgba(0,0,0,0.3)",
-                            )
+                            ),
                         ),
                         opts.GraphicText(
                             graphic_item=opts.GraphicItem(
-                                left="center",
-                                top="middle",
-                                z=100,
+                                left="center", top="middle", z=100
                             ),
                             graphic_textstyle_opts=opts.GraphicTextStyleOpts(
                                 text=JsCode(
@@ -107,10 +100,10 @@ def bar_graphic_rect_text_two_component() -> Bar:
                                 font="14px Microsoft YaHei",
                                 graphic_basicstyle_opts=opts.GraphicBasicStyleOpts(
                                     fill="#333"
-                                )
-                            )
-                        )
-                    ]
+                                ),
+                            ),
+                        ),
+                    ],
                 )
             ],
         )
@@ -180,18 +173,13 @@ def bar_graphic_image_with_js_component() -> Grid:
         )
     )
     c = (
-        Grid(
-            init_opts=opts.InitOpts(chart_id="1234")
-        )
+        Grid(init_opts=opts.InitOpts(chart_id="1234"))
         .add(
             chart=bar,
-            grid_opts=opts.GridOpts(
-                pos_left="5%",
-                pos_right="4%",
-                pos_bottom="5%",
-            )
+            grid_opts=opts.GridOpts(pos_left="5%", pos_right="4%", pos_bottom="5%"),
         )
-        .add_js_funcs("""
+        .add_js_funcs(
+            """
             var rotation = 0;
             setInterval(function () {
                 chart_1234.setOption({
@@ -201,7 +189,8 @@ def bar_graphic_image_with_js_component() -> Grid:
                     }
                 });
             }, 30);
-        """)
+        """
+        )
     )
     return c
 
