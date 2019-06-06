@@ -1,7 +1,8 @@
-from nose.tools import eq_
+from nose.tools import assert_true, eq_
 
 from example.commons import Faker
 from pyecharts.charts import Bar, Line, Page
+from pyecharts.render.engine import RenderEngine
 
 
 def _create_bar() -> Bar:
@@ -38,3 +39,10 @@ def test_page_jshost_custom():
     line = _create_line()
     page = Page().add(bar, line)
     eq_(page.js_host, custom_host)
+
+
+def test_page_render_embed():
+    bar = _create_bar()
+    line = _create_line()
+    content = Page().add(bar, line).render_embed()
+    assert_true(len(content) > 1000)
