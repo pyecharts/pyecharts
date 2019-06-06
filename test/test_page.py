@@ -32,12 +32,14 @@ def test_page_jshost_default():
 def test_page_jshost_custom():
     from pyecharts.globals import CurrentConfig
 
+    default_host = CurrentConfig.ONLINE_HOST
     custom_host = "http://localhost:8888/assets/"
     CurrentConfig.ONLINE_HOST = custom_host
     bar = _create_bar()
     line = _create_line()
     page = Page().add(bar, line)
     eq_(page.js_host, custom_host)
+    CurrentConfig.ONLINE_HOST = default_host
 
 
 def test_page_render_embed():
