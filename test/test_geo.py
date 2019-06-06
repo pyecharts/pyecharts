@@ -1,6 +1,6 @@
 from unittest.mock import patch
 
-from nose.tools import eq_, assert_in
+from nose.tools import assert_in, eq_
 
 from example.commons import Faker
 from pyecharts import options as opts

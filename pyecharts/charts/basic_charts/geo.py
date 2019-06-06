@@ -150,7 +150,7 @@ class Geo(GeoChartBase):
         maptype: str = "china",
         is_roam: bool = True,
         zoom: Optional[Numeric] = None,
-        center: Union[Sequence, None] = None,
+        center: Optional[Sequence] = None,
         label_opts: Union[opts.LabelOpts, dict, None] = None,
         itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
         emphasis_itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
