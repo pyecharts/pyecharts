@@ -30,6 +30,8 @@ class Map(Chart):
         label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
         tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
         itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
+        emphasis_label_opts: Union[opts.LabelOpts, dict] = None,
+        emphasis_itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
     ):
         self.js_dependencies.add(maptype)
         data = [{"name": n, "value": v} for n, v in data_pair]
@@ -49,6 +51,10 @@ class Map(Chart):
                 "showLegendSymbol": is_map_symbol_show,
                 "tooltip": tooltip_opts,
                 "itemStyle": itemstyle_opts,
+                "emphasis": {
+                    "label": emphasis_label_opts,
+                    "itemStyle": emphasis_itemstyle_opts
+                }
             }
         )
         return self
