@@ -10,7 +10,7 @@ from ..options.series_options import (
 )
 
 
-class InitOpts:
+class InitOpts(BasicOpts):
     def __init__(
         self,
         width: str = "900px",
