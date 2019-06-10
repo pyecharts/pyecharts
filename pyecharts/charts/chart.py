@@ -17,7 +17,7 @@ class Chart(Base):
             "#546570 #c4ccd3 #f05b72 #ef5b9c #f47920 #905a3d #fab27b #2a5caa "
             "#444693 #726930 #b2d235 #6d8346 #ac6767 #1d953f #6950a1 #918597"
         ).split()
-        if init_opts.theme == ThemeType.WHITE:
+        if init_opts.opts.get("theme") == ThemeType.WHITE:
             self.options.update(color=self.colors)
         self.options.update(
             series=[],

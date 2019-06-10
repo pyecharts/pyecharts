@@ -22,18 +22,19 @@ class Base:
     """
 
     def __init__(self, init_opts: InitOpts = InitOpts()):
-        self.width = init_opts.width
-        self.height = init_opts.height
-        self.renderer = init_opts.renderer
-        self.page_title = init_opts.page_title
-        self.theme = init_opts.theme
-        self.chart_id = init_opts.chart_id or uuid.uuid4().hex
+        _opts = init_opts.opts
+        self.width = _opts.get("width")
+        self.height = _opts.get("height")
+        self.renderer = _opts.get("renderer")
+        self.page_title = _opts.get("page_title")
+        self.theme = _opts.get("theme")
+        self.chart_id = _opts.get("chart_id") or uuid.uuid4().hex
 
         self.options: dict = {}
-        self.js_host: str = init_opts.js_host or CurrentConfig.ONLINE_HOST
+        self.js_host: str = _opts.get("js_host") or CurrentConfig.ONLINE_HOST
         self.js_functions: utils.OrderedSet = utils.OrderedSet()
         self.js_dependencies: utils.OrderedSet = utils.OrderedSet("echarts")
-        self.options.update(backgroundColor=init_opts.bg_color)
+        self.options.update(backgroundColor=_opts.get("bg_color"))
         self._is_geo_chart: bool = False
 
     def add_js_funcs(self, *fns):

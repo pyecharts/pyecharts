@@ -30,7 +30,7 @@ class Map(Chart):
         label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
         tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
         itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
-        emphasis_label_opts: Union[opts.LabelOpts, dict] = None,
+        emphasis_label_opts: Union[opts.LabelOpts, dict, None] = None,
         emphasis_itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
     ):
         self.js_dependencies.add(maptype)
@@ -53,8 +53,8 @@ class Map(Chart):
                 "itemStyle": itemstyle_opts,
                 "emphasis": {
                     "label": emphasis_label_opts,
-                    "itemStyle": emphasis_itemstyle_opts
-                }
+                    "itemStyle": emphasis_itemstyle_opts,
+                },
             }
         )
         return self
