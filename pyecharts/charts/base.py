@@ -7,7 +7,7 @@ from typing import Sequence
 from jinja2 import Environment
 
 from ..commons import utils
-from ..commons.types import Optional
+from ..commons.types import Optional, Union
 from ..datasets import FILENAMES
 from ..globals import CurrentConfig, NotebookType, ThemeType
 from ..options import InitOpts
@@ -21,7 +21,7 @@ class Base:
     `Base`类是所有图形类的基类，提供部分初始化参数和基本的方法
     """
 
-    def __init__(self, init_opts: InitOpts = InitOpts()):
+    def __init__(self, init_opts: Union[InitOpts, dict] = InitOpts()):
         _opts = init_opts.opts
         self.width = _opts.get("width")
         self.height = _opts.get("height")

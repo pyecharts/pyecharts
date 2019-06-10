@@ -13,7 +13,7 @@ class Sankey(Chart):
     the intermediate process of processing, transformation to the final form.
     """
 
-    def __init__(self, init_opts: opts.InitOpts = opts.InitOpts()):
+    def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):
         super().__init__(init_opts=init_opts)
 
     def add(

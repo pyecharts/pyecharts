@@ -8,7 +8,7 @@ class Timeline(Base):
     `Timeline` provides functions like switching and playing between multiple charts.
     """
 
-    def __init__(self, init_opts: opts.InitOpts = opts.InitOpts()):
+    def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):
         super().__init__(init_opts=init_opts)
         self.options = {"baseOption": {"series": [], "timeline": {}}, "options": []}
         self.add_schema()
