@@ -25,7 +25,7 @@ def test_graph_base(fake_writer):
     eq_(c.renderer, "canvas")
 
 
-def test_graph_graph_item():
+def test_graph_item():
     node_name, link_source = "test_node_name", "test_link_source"
     node = opts.GraphNode(name=node_name)
     link = opts.GraphLink(source=link_source)

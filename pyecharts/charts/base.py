@@ -18,11 +18,15 @@ from ..render.engine import RenderEngine
 
 class Base:
     """
-    `Base`类是所有图形类的基类，提供部分初始化参数和基本的方法
+    `Base` is the root class for all graphical class, it provides
+    part of the initialization parameters and common methods
     """
 
     def __init__(self, init_opts: Union[InitOpts, dict] = InitOpts()):
-        _opts = init_opts.opts
+        _opts = init_opts
+        if isinstance(init_opts, InitOpts):
+            _opts = init_opts.opts
+
         self.width = _opts.get("width")
         self.height = _opts.get("height")
         self.renderer = _opts.get("renderer")
