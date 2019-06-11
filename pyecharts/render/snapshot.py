@@ -4,7 +4,7 @@ import logging
 import os
 from io import BytesIO
 
-from ..commons.types import Any
+from pyecharts.types import Any
 
 logger = logging.getLogger(__name__)
 

@@ -2,12 +2,12 @@
 
 from .charts_options import (
     BarItem,
-    BMapCopyrightType,
+    BMapCopyrightTypeOpts,
     BMapGeoLocationControlOpts,
     BMapNavigationControlOpts,
     BMapOverviewMapControlOpts,
     BMapScaleControlOpts,
-    BMapTypeControl,
+    BMapTypeControlOpts,
     ComponentTitleOpts,
     GraphCategory,
     GraphicBasicStyleOpts,

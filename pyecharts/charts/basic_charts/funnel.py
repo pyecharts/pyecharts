@@ -1,6 +1,6 @@
 from ... import options as opts
+from ... import types
 from ...charts.chart import Chart
-from ...commons.types import Numeric, Optional, Sequence, Union
 from ...globals import ChartType
 
 
@@ -18,15 +18,15 @@ class Funnel(Chart):
     def add(
         self,
         series_name: str,
-        data_pair: Sequence,
+        data_pair: types.Sequence,
         *,
         is_selected: bool = True,
-        color: Optional[str] = None,
+        color: types.Optional[str] = None,
         sort_: str = "descending",
-        gap: Numeric = 0,
-        label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
-        tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
-        itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
+        gap: types.Numeric = 0,
+        label_opts: types.Label = opts.LabelOpts(),
+        tooltip_opts: types.Tooltip = None,
+        itemstyle_opts: types.ItemStyle = None,
     ):
         self._append_color(color)
         data = [{"name": n, "value": v} for n, v in data_pair]
