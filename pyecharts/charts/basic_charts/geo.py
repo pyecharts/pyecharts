@@ -8,7 +8,7 @@ from ...globals import ChartType
 
 
 class GeoChartBase(Chart):
-    def __init__(self, init_opts: opts.InitOpts = opts.InitOpts()):
+    def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):
         super().__init__(init_opts=init_opts)
         self.set_global_opts()
         self._coordinates = COORDINATES
@@ -130,7 +130,7 @@ class Geo(GeoChartBase):
     support scatter plot and line
     """
 
-    def __init__(self, init_opts: opts.InitOpts = opts.InitOpts()):
+    def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):
         super().__init__(init_opts=init_opts)
         self._coordinate_system: Optional[str] = "geo"
 

@@ -13,9 +13,6 @@ class Tree(Chart):
     and right subtrees.
     """
 
-    def __init__(self, init_opts: opts.InitOpts = opts.InitOpts()):
-        super().__init__(init_opts=init_opts)
-
     @staticmethod
     def _set_collapse_interval(data, interval):
         """

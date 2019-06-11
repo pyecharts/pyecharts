@@ -1,4 +1,5 @@
 import random
+from unittest.mock import patch
 
 from nose.tools import eq_
 
@@ -7,7 +8,8 @@ from pyecharts import options as opts
 from pyecharts.charts import Bar3D
 
 
-def test_bar3d_base():
+@patch("pyecharts.render.engine.write_utf8_html_file")
+def test_bar3d_base(fake_writer):
     data = [(i, j, random.randint(0, 12)) for i in range(6) for j in range(24)]
     c = (
         Bar3D()
@@ -20,6 +22,7 @@ def test_bar3d_base():
         )
         .set_global_opts(visualmap_opts=opts.VisualMapOpts(max_=20))
     )
+    c.render()
+    _, content = fake_writer.call_args[0]
     eq_(c.theme, "white")
     eq_(c.renderer, "canvas")
-    c.render()

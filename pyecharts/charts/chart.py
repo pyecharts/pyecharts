@@ -10,14 +10,14 @@ GraphicType = Union[BaseGraphic, dict]
 
 
 class Chart(Base):
-    def __init__(self, init_opts: opts.InitOpts = opts.InitOpts()):
+    def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):
         super().__init__(init_opts=init_opts)
         self.colors = (
             "#c23531 #2f4554 #61a0a8 #d48265 #749f83 #ca8622 #bda29a #6e7074 "
             "#546570 #c4ccd3 #f05b72 #ef5b9c #f47920 #905a3d #fab27b #2a5caa "
             "#444693 #726930 #b2d235 #6d8346 #ac6767 #1d953f #6950a1 #918597"
         ).split()
-        if init_opts.theme == ThemeType.WHITE:
+        if init_opts.opts.get("theme") == ThemeType.WHITE:
             self.options.update(color=self.colors)
         self.options.update(
             series=[],
@@ -138,7 +138,7 @@ class Chart(Base):
 
 
 class RectChart(Chart):
-    def __init__(self, init_opts: opts.InitOpts = opts.InitOpts()):
+    def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):
         super().__init__(init_opts=init_opts)
         self.options.update(xAxis=[opts.AxisOpts().opts], yAxis=[opts.AxisOpts().opts])
 
@@ -182,7 +182,7 @@ class Chart3D(Chart):
     `Chart3D`类是所有 3D 类图表的基类，继承自 `Chart` 类
     """
 
-    def __init__(self, init_opts: opts.InitOpts = opts.InitOpts()):
+    def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):
         init_opts.renderer = RenderType.CANVAS
         super().__init__(init_opts)
         self.js_dependencies.add("echarts-gl")

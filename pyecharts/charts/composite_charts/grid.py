@@ -13,7 +13,7 @@ class Grid(Base):
     and scatter chart (bubble chart) can be drawn in grid.
     """
 
-    def __init__(self, init_opts: opts.InitOpts = opts.InitOpts()):
+    def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):
         super().__init__(init_opts=init_opts)
         self.options: Optional[dict] = None
         self._axis_index: int = 0
