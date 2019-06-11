@@ -1,6 +1,6 @@
 from ... import options as opts
+from ... import types
 from ...charts.chart import RectChart
-from ...commons.types import Numeric, Optional, Sequence, Union
 from ...globals import ChartType
 
 
@@ -16,16 +16,16 @@ class Boxplot(RectChart):
     def add_yaxis(
         self,
         series_name: str,
-        y_axis: Sequence,
+        y_axis: types.Sequence,
         *,
         is_selected: bool = True,
-        xaxis_index: Optional[Numeric] = None,
-        yaxis_index: Optional[Numeric] = None,
-        label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
-        markpoint_opts: Union[opts.MarkPointOpts, dict] = opts.MarkPointOpts(),
-        markline_opts: Union[opts.MarkLineOpts, dict] = opts.MarkLineOpts(),
-        tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
-        itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
+        xaxis_index: types.Optional[types.Numeric] = None,
+        yaxis_index: types.Optional[types.Numeric] = None,
+        label_opts: types.Label = opts.LabelOpts(),
+        markpoint_opts: types.MarkPoint = opts.MarkPointOpts(),
+        markline_opts: types.MarkLine = opts.MarkLineOpts(),
+        tooltip_opts: types.Tooltip = None,
+        itemstyle_opts: types.ItemStyle = None,
     ):
         self._append_legend(series_name, is_selected)
         self.options.get("series").append(

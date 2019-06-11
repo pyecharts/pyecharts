@@ -1,6 +1,6 @@
 from ... import options as opts
+from ... import types
 from ...charts.chart import Chart
-from ...commons.types import Numeric, Optional, Sequence, Union
 from ...globals import ChartType
 
 
@@ -15,20 +15,20 @@ class TreeMap(Chart):
     def add(
         self,
         series_name: str,
-        data: Sequence[Union[opts.TreeItem, dict]],
+        data: types.Sequence[types.Union[opts.TreeItem, dict]],
         *,
         is_selected: bool = True,
-        leaf_depth: Optional[Numeric] = None,
-        pos_left: Optional[str] = None,
-        pos_right: Optional[str] = None,
-        pos_top: Optional[str] = None,
-        pos_bottom: Optional[str] = None,
+        leaf_depth: types.Optional[types.Numeric] = None,
+        pos_left: types.Optional[str] = None,
+        pos_right: types.Optional[str] = None,
+        pos_top: types.Optional[str] = None,
+        pos_bottom: types.Optional[str] = None,
         drilldown_icon: str = "▶",
-        visual_min: Optional[Numeric] = None,
-        visual_max: Optional[Numeric] = None,
-        label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
-        tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
-        itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
+        visual_min: types.Optional[types.Numeric] = None,
+        visual_max: types.Optional[types.Numeric] = None,
+        label_opts: types.Label = opts.LabelOpts(),
+        tooltip_opts: types.Tooltip = None,
+        itemstyle_opts: types.ItemStyle = None,
     ):
         self._append_legend(series_name, is_selected)
         self.options.get("series").append(

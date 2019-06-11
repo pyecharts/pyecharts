@@ -89,8 +89,8 @@ def test_bmap_map_control_panel(fake_writer):
             label_opts=opts.LabelOpts(formatter="{b}"),
         )
         .add_control_panel(
-            copyright_control_opts=opts.BMapCopyrightType(position=3),
-            maptype_control_opts=opts.BMapTypeControl(
+            copyright_control_opts=opts.BMapCopyrightTypeOpts(position=3),
+            maptype_control_opts=opts.BMapTypeControlOpts(
                 type_=BMapType.MAPTYPE_CONTROL_DROPDOWN
             ),
             scale_control_opts=opts.BMapScaleControlOpts(),

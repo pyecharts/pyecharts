@@ -1,6 +1,6 @@
 from ... import options as opts
+from ... import types
 from ...charts.chart import Chart
-from ...commons.types import Numeric, Optional, Sequence, Union
 from ...globals import ChartType
 
 
@@ -14,21 +14,21 @@ class Map(Chart):
     def add(
         self,
         series_name: str,
-        data_pair: Sequence,
+        data_pair: types.Sequence,
         maptype: str = "china",
         *,
         is_selected: bool = True,
         is_roam: bool = True,
-        center: Optional[Sequence] = None,
-        zoom: Optional[Numeric] = 1,
-        name_map: Optional[dict] = None,
-        symbol: Optional[str] = None,
+        center: types.Optional[types.Sequence] = None,
+        zoom: types.Optional[types.Numeric] = 1,
+        name_map: types.Optional[dict] = None,
+        symbol: types.Optional[str] = None,
         is_map_symbol_show: bool = True,
-        label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
-        tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
-        itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
-        emphasis_label_opts: Union[opts.LabelOpts, dict, None] = None,
-        emphasis_itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
+        label_opts: types.Label = opts.LabelOpts(),
+        tooltip_opts: types.Tooltip = None,
+        itemstyle_opts: types.ItemStyle = None,
+        emphasis_label_opts: types.Label = None,
+        emphasis_itemstyle_opts: types.ItemStyle = None,
     ):
         self.js_dependencies.add(maptype)
         data = [{"name": n, "value": v} for n, v in data_pair]

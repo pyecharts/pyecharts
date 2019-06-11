@@ -1,12 +1,16 @@
-from ..commons.types import JSFunc, Numeric, Optional, Sequence, Union
 from ..globals import CurrentConfig, RenderType, ThemeType
 from ..options.series_options import (
     BasicOpts,
+    JSFunc,
     LabelOpts,
     LineStyleOpts,
+    Numeric,
+    Optional,
+    Sequence,
     SplitAreaOpts,
     SplitLineOpts,
     TextStyleOpts,
+    Union,
 )
 
 
