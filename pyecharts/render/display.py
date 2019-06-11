@@ -1,4 +1,4 @@
-from ..commons.types import Optional, Sequence, Union
+from pyecharts.types import Optional, Sequence, Union
 
 
 class HTML:

@@ -1,6 +1,6 @@
 from ... import options as opts
+from ... import types
 from ...charts.basic_charts.geo import GeoChartBase
-from ...commons.types import Optional, Sequence, Union
 from ...commons.utils import OrderedSet
 from ...globals import ChartType
 
@@ -15,14 +15,14 @@ class BMap(GeoChartBase):
     Support scatter plot, line
     """
 
-    def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):
+    def __init__(self, init_opts: types.Init = opts.InitOpts()):
         super().__init__(init_opts=init_opts)
         self.js_dependencies.add("bmap")
         self._is_geo_chart = True
-        self._coordinate_system: Optional[str] = "bmap"
+        self._coordinate_system: types.Optional[str] = "bmap"
         self.bmap_js_functions: OrderedSet = OrderedSet()
 
-    def _feed_data(self, data_pair: Sequence, type_: str) -> Sequence:
+    def _feed_data(self, data_pair: types.Sequence, type_: str) -> types.Sequence:
         result = []
         if type_ == ChartType.LINES:
             result = data_pair
@@ -35,10 +35,10 @@ class BMap(GeoChartBase):
     def add_schema(
         self,
         baidu_ak: str,
-        center: Sequence,
-        zoom: Optional[int] = None,
+        center: types.Sequence,
+        zoom: types.Optional[int] = None,
         is_roam: bool = True,
-        map_style: Optional[dict] = None,
+        map_style: types.Optional[dict] = None,
     ):
         self.js_dependencies.add(
             BAIDU_MAP_API.format(baidu_ak), BAIDU_MAP_GETSCRIPT.format(baidu_ak)
@@ -55,16 +55,12 @@ class BMap(GeoChartBase):
 
     def add_control_panel(
         self,
-        navigation_control_opts: Union[
-            opts.BMapNavigationControlOpts, dict, None
-        ] = None,
-        overview_map_opts: Union[opts.BMapOverviewMapControlOpts, dict, None] = None,
-        scale_control_opts: Union[opts.BMapScaleControlOpts, dict, None] = None,
-        maptype_control_opts: Union[opts.BMapTypeControl, dict, None] = None,
-        copyright_control_opts: Union[opts.BMapCopyrightType, dict, None] = None,
-        geo_location_control_opts: Union[
-            opts.BMapGeoLocationControlOpts, dict, None
-        ] = None,
+        navigation_control_opts: types.BMapNavigationControl = None,
+        overview_map_opts: types.BMapOverviewMapControl = None,
+        scale_control_opts: types.BMapScaleControl = None,
+        maptype_control_opts: types.BMapTypeControl = None,
+        copyright_control_opts: types.BMapCopyrightType = None,
+        geo_location_control_opts: types.BMapGeoLocationControl = None,
     ):
         panel_options = [
             navigation_control_opts,

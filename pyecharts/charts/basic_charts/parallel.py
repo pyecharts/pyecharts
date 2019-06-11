@@ -1,6 +1,6 @@
 from ... import options as opts
+from ... import types
 from ...charts.chart import Chart
-from ...commons.types import Sequence, Union
 from ...globals import ChartType
 
 
@@ -12,14 +12,14 @@ class Parallel(Chart):
     high dimensional data.
     """
 
-    def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):
+    def __init__(self, init_opts: types.Init = opts.InitOpts()):
         super().__init__(init_opts=init_opts)
         self.options.update(parallel=opts.ParallelOpts().opts)
 
     def add_schema(
         self,
-        schema: Sequence[Union[opts.ParallelAxisOpts, dict]],
-        parallel_opts: Union[opts.ParallelOpts, dict, None] = None,
+        schema: types.Sequence[types.Union[opts.ParallelAxisOpts, dict]],
+        parallel_opts: types.Union[opts.ParallelOpts, dict, None] = None,
     ):
         sc = []
         for s in schema:
@@ -37,12 +37,12 @@ class Parallel(Chart):
     def add(
         self,
         series_name: str,
-        data: Sequence,
+        data: types.Sequence,
         *,
         is_selected: bool = True,
-        linestyle_opts: Union[opts.LineStyleOpts, dict] = opts.LineStyleOpts(),
-        tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
-        itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
+        linestyle_opts: types.LineStyle = opts.LineStyleOpts(),
+        tooltip_opts: types.Tooltip = None,
+        itemstyle_opts: types.ItemStyle = None,
     ):
         self._append_legend(series_name, is_selected)
         self.options.get("series").append(

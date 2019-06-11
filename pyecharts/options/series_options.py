@@ -1,4 +1,9 @@
-from ..commons.types import Any, JSFunc, Numeric, Optional, Sequence, Tuple, Union
+from typing import Any, Optional, Sequence, Tuple, Union
+
+from ..commons.utils import JsCode
+
+Numeric = Union[int, float]
+JSFunc = Union[str, JsCode]
 
 
 class BasicOpts:

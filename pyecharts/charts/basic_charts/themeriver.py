@@ -1,6 +1,6 @@
 from ... import options as opts
+from ... import types
 from ...charts.chart import Chart
-from ...commons.types import Sequence, Union
 from ...globals import ChartType
 
 
@@ -15,14 +15,14 @@ class ThemeRiver(Chart):
 
     def add(
         self,
-        series_name: Sequence,
-        data: Sequence,
+        series_name: types.Sequence,
+        data: types.Sequence,
         *,
         is_selected: bool = True,
-        label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
-        singleaxis_opts: Union[opts.SingleAxisOpts, dict] = opts.SingleAxisOpts(),
-        tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
-        itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
+        label_opts: types.Label = opts.LabelOpts(),
+        singleaxis_opts: types.SingleAxis = opts.SingleAxisOpts(),
+        tooltip_opts: types.Tooltip = None,
+        itemstyle_opts: types.ItemStyle = None,
     ):
         for n in series_name:
             self._append_legend(n, is_selected)

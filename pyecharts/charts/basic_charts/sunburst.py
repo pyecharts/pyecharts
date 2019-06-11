@@ -1,6 +1,6 @@
 from ... import options as opts
+from ... import types
 from ...charts.chart import Chart
-from ...commons.types import JSFunc, Optional, Sequence, Union
 from ...globals import ChartType
 
 
@@ -17,16 +17,16 @@ class Sunburst(Chart):
     def add(
         self,
         series_name: str,
-        data_pair: Sequence,
+        data_pair: types.Sequence,
         *,
-        center: Optional[Sequence] = None,
-        radius: Optional[Sequence] = None,
+        center: types.Optional[types.Sequence] = None,
+        radius: types.Optional[types.Sequence] = None,
         highlight_policy: str = "descendant",
         node_click: str = "rootToNode",
-        sort_: Optional[JSFunc] = "desc",
-        levels: Optional[Sequence] = None,
-        label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
-        itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
+        sort_: types.Optional[types.JSFunc] = "desc",
+        levels: types.Optional[types.Sequence] = None,
+        label_opts: types.Label = opts.LabelOpts(),
+        itemstyle_opts: types.ItemStyle = None,
     ):
         if not center:
             center = ["50%", "50%"]

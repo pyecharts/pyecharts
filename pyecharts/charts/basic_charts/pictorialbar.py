@@ -1,5 +1,5 @@
 from ... import options as opts
-from ...commons.types import Numeric, Optional, Sequence, Union
+from ... import types
 from ...globals import ChartType
 from .. import Bar
 
@@ -15,28 +15,28 @@ class PictorialBar(Bar):
     def add_yaxis(
         self,
         series_name: str,
-        yaxis_data: Sequence[Union[Numeric, opts.BarItem, dict]],
+        yaxis_data: types.Sequence[types.Union[types.Numeric, opts.BarItem, dict]],
         *,
-        symbol: Optional[str] = None,
-        symbol_size: Union[Numeric, Sequence, None] = None,
-        symbol_pos: Optional[str] = None,
-        symbol_offset: Optional[Sequence] = None,
-        symbol_rotate: Optional[Numeric] = None,
-        symbol_repeat: Optional[str] = None,
-        symbol_repeat_direction: Optional[str] = None,
-        symbol_margin: Union[Numeric, str, None] = None,
+        symbol: types.Optional[str] = None,
+        symbol_size: types.Union[types.Numeric, types.Sequence, None] = None,
+        symbol_pos: types.Optional[str] = None,
+        symbol_offset: types.Optional[types.Sequence] = None,
+        symbol_rotate: types.Optional[types.Numeric] = None,
+        symbol_repeat: types.Optional[str] = None,
+        symbol_repeat_direction: types.Optional[str] = None,
+        symbol_margin: types.Union[types.Numeric, str, None] = None,
         is_symbol_clip: bool = False,
         is_selected: bool = True,
-        xaxis_index: Optional[Numeric] = None,
-        yaxis_index: Optional[Numeric] = None,
-        color: Optional[str] = None,
-        category_gap: Union[Numeric, str] = "20%",
-        gap: Optional[str] = None,
-        label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
-        markpoint_opts: Union[opts.MarkPointOpts, dict, None] = None,
-        markline_opts: Union[opts.MarkLineOpts, dict, None] = None,
-        tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
-        itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
+        xaxis_index: types.Optional[types.Numeric] = None,
+        yaxis_index: types.Optional[types.Numeric] = None,
+        color: types.Optional[str] = None,
+        category_gap: types.Union[types.Numeric, str] = "20%",
+        gap: types.Optional[str] = None,
+        label_opts: types.Label = opts.LabelOpts(),
+        markpoint_opts: types.MarkPoint = None,
+        markline_opts: types.MarkLine = None,
+        tooltip_opts: types.Tooltip = None,
+        itemstyle_opts: types.ItemStyle = None,
     ):
         self._append_color(color)
         self._append_legend(series_name, is_selected)
