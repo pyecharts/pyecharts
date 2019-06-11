@@ -19,21 +19,10 @@ def _chart_for_grid() -> Bar:
             [2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3],
             yaxis_index=1,
         )
-        .extend_axis(
-            yaxis=opts.AxisOpts(
-                name="蒸发量", type_="value", min_=0, max_=250, position="right"
-            )
-        )
-        .extend_axis(
-            yaxis=opts.AxisOpts(
-                type_="value", name="温度", min_=0, max_=25, position="left"
-            )
-        )
+        .extend_axis(yaxis=opts.AxisOpts(name="蒸发量", type_="value", position="right"))
+        .extend_axis(yaxis=opts.AxisOpts(type_="value", name="温度", position="left"))
         .set_global_opts(
-            yaxis_opts=opts.AxisOpts(
-                name="降水量", min_=0, max_=250, position="right", offset=80
-            ),
-            tooltip_opts=opts.TooltipOpts(trigger="axis", axis_pointer_type="cross"),
+            yaxis_opts=opts.AxisOpts(name="降水量", position="right", offset=80)
         )
     )
 

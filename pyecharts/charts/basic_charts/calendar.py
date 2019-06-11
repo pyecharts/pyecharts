@@ -12,7 +12,7 @@ class Calendar(Chart):
     Two categories of axes must be used in rectangular coordinates.
     """
 
-    def __init__(self, init_opts: opts.InitOpts = opts.InitOpts()):
+    def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):
         super().__init__(init_opts=init_opts)
         self.options.update(calendar=opts.CalendarOpts().opts)
 

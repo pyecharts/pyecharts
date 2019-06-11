@@ -8,6 +8,7 @@
          "安庆": "an1_qing4"
     },
     "FILE_MAP": {
-        "an1_qing4": "shape-with-internal-borders/an1_hui1_an1_qing4"
+        "an1_qing4": "shape-with-internal-borders/an1_hui1_an1_qing4",
+        "English Name": "shape-with-internal-borders/an1_hui1_an1_qing4"
     }
 }

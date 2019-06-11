@@ -11,7 +11,7 @@ class Polar(Chart):
     Polar coordinates can be used for scatter and polyline graphs.
     """
 
-    def __init__(self, init_opts: opts.InitOpts = opts.InitOpts()):
+    def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):
         super().__init__(init_opts=init_opts)
         self.add_schema()
 
