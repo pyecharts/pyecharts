@@ -35,13 +35,13 @@ class Chart(Base):
     def set_series_opts(
         self,
         label_opts: types.Label = None,
-        linestyle_opts: Union[opts.LineStyleOpts, dict, None] = None,
-        splitline_opts: Union[opts.SplitLineOpts, dict, None] = None,
-        areastyle_opts: Union[opts.AreaStyleOpts, dict, None] = None,
-        axisline_opts: Union[opts.AxisLineOpts, dict, None] = None,
+        linestyle_opts: types.LineStyle = None,
+        splitline_opts: types.SplitLine = None,
+        areastyle_opts: types.AreaStyle = None,
+        axisline_opts: types.AxisLine = None,
         markpoint_opts: types.MarkPoint = None,
         markline_opts: types.MarkLine = None,
-        markarea_opts: Union[opts.MarkAreaOpts, dict, None] = None,
+        markarea_opts: types.MarkArea = None,
         effect_opts: types.Effect = opts.EffectOpts(),
         tooltip_opts: types.Tooltip = None,
         itemstyle_opts: types.ItemStyle = None,
@@ -98,12 +98,12 @@ class Chart(Base):
 
     def set_global_opts(
         self,
-        title_opts: Union[opts.TitleOpts, dict] = opts.TitleOpts(),
-        legend_opts: Union[opts.LegendOpts, dict] = opts.LegendOpts(),
-        tooltip_opts: Union[opts.TooltipOpts, dict] = None,
-        toolbox_opts: Union[opts.ToolboxOpts, dict] = None,
-        xaxis_opts: Union[opts.AxisOpts, dict, None] = None,
-        yaxis_opts: Union[opts.AxisOpts, dict, None] = None,
+        title_opts: types.Title = opts.TitleOpts(),
+        legend_opts: types.Legend = opts.LegendOpts(),
+        tooltip_opts: types.Tooltip = None,
+        toolbox_opts: types.Toolbox = None,
+        xaxis_opts: types.Axis = None,
+        yaxis_opts: types.Axis = None,
         visualmap_opts: Union[VisualMapType, Sequence[VisualMapType], None] = None,
         datazoom_opts: Union[DataZoomType, Sequence[DataZoomType], None] = None,
         graphic_opts: Union[GraphicType, Sequence[GraphicType], None] = None,
@@ -147,8 +147,8 @@ class RectChart(Chart):
     def extend_axis(
         self,
         xaxis_data: Sequence = None,
-        xaxis: Union[opts.AxisOpts, dict, None] = None,
-        yaxis: Union[opts.AxisOpts, dict, None] = None,
+        xaxis: types.Axis = None,
+        yaxis: types.Axis = None,
     ):
         if xaxis is not None:
             if isinstance(xaxis, opts.AxisOpts):
@@ -198,10 +198,10 @@ class Chart3D(Chart):
         shading: Optional[str] = None,
         itemstyle_opts: types.ItemStyle = None,
         label_opts: types.Label = opts.LabelOpts(is_show=False),
-        xaxis3d_opts: Union[opts.Axis3DOpts, dict] = opts.Axis3DOpts(type_="category"),
-        yaxis3d_opts: Union[opts.Axis3DOpts, dict] = opts.Axis3DOpts(type_="category"),
-        zaxis3d_opts: Union[opts.Axis3DOpts, dict] = opts.Axis3DOpts(type_="value"),
-        grid3d_opts: Union[opts.Grid3DOpts, dict] = opts.Grid3DOpts(),
+        xaxis3d_opts: types.Axis3D = opts.Axis3DOpts(type_="category"),
+        yaxis3d_opts: types.Axis3D = opts.Axis3DOpts(type_="category"),
+        zaxis3d_opts: types.Axis3D = opts.Axis3DOpts(type_="value"),
+        grid3d_opts: types.Grid3D = opts.Grid3DOpts(),
     ):
         self.options.get("legend")[0].get("data").append(series_name)
         self.options.update(
