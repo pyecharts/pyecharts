@@ -13,9 +13,6 @@ class ThemeRiver(Chart):
     over a period of time.
     """
 
-    def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):
-        super().__init__(init_opts=init_opts)
-
     def add(
         self,
         series_name: Sequence,

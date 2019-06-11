@@ -11,9 +11,6 @@ class Gauge(Chart):
     The gauge displays a single key business measure.
     """
 
-    def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):
-        super().__init__(init_opts=init_opts)
-
     def add(
         self,
         series_name: str,

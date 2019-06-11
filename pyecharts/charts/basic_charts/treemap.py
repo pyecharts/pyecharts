@@ -12,9 +12,6 @@ class TreeMap(Chart):
     It mainly uses area to highlight the important nodes in the hierarchy of "tree".
     """
 
-    def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):
-        super().__init__(init_opts=init_opts)
-
     def add(
         self,
         series_name: str,

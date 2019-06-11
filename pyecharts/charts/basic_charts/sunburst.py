@@ -14,9 +14,6 @@ class Sunburst(Chart):
     hierarchical relationships like rectangle tree graphs.
     """
 
-    def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):
-        super().__init__(init_opts=init_opts)
-
     def add(
         self,
         series_name: str,
