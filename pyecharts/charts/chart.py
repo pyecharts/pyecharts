@@ -1,10 +1,9 @@
-from pyecharts.types import Optional, Sequence, Union
-
 from .. import options as opts
 from .. import types
 from ..charts.base import Base
 from ..globals import RenderType, ThemeType, ToolTipFormatterType
 from ..options.charts_options import BaseGraphic
+from ..types import Optional, Sequence, Union
 
 VisualMapType = Union[opts.VisualMapOpts, dict]
 DataZoomType = Union[opts.DataZoomOpts, dict]

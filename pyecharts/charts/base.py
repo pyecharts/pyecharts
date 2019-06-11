@@ -6,8 +6,6 @@ from typing import Sequence
 
 from jinja2 import Environment
 
-from pyecharts.types import Optional, Union
-
 from ..commons import utils
 from ..datasets import FILENAMES
 from ..globals import CurrentConfig, NotebookType, ThemeType
@@ -15,6 +13,7 @@ from ..options import InitOpts
 from ..options.series_options import BasicOpts
 from ..render.display import HTML, Javascript
 from ..render.engine import RenderEngine
+from ..types import Optional, Union
 
 
 class Base:
