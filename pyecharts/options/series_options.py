@@ -19,7 +19,7 @@ class BasicOpts:
 class ItemStyleOpts(BasicOpts):
     def __init__(
         self,
-        color: Optional[str] = None,
+        color: Optional[JSFunc] = None,
         color0: Optional[str] = None,
         border_color: Optional[str] = None,
         border_color0: Optional[str] = None,
