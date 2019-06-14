@@ -1,8 +1,6 @@
-import re
-
 from jinja2 import Environment
 
-from ..commons.utils import write_utf8_html_file
+from ..commons.utils import replace_placeholder, write_utf8_html_file
 from ..datasets import EXTRA, FILENAMES
 from ..globals import CurrentConfig
 from ..types import Any, Optional
@@ -42,17 +40,13 @@ class RenderEngine:
         :param template_name: The name of template file.
         """
         tpl = self.env.get_template(template_name)
-        html = self._replace_html(tpl.render(chart=self.generate_js_link(chart)))
+        html = replace_placeholder(tpl.render(chart=self.generate_js_link(chart)))
         write_utf8_html_file(path, html)
 
     def render_chart_to_template(self, template_name: str, chart: Any) -> str:
         tpl = self.env.get_template(template_name)
-        return self._replace_html(tpl.render(chart=self.generate_js_link(chart)))
+        return replace_placeholder(tpl.render(chart=self.generate_js_link(chart)))
 
     def render_chart_to_notebook(self, template_name: str, **kwargs) -> str:
         tpl = self.env.get_template(template_name)
-        return self._replace_html(tpl.render(**kwargs))
-
-    @staticmethod
-    def _replace_html(html) -> str:
-        return re.sub('"?--x_x--0_0--"?', "", html)
+        return replace_placeholder(tpl.render(**kwargs))
