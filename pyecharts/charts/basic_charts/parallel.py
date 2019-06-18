@@ -39,6 +39,7 @@ class Parallel(Chart):
         series_name: str,
         data: types.Sequence,
         *,
+        is_smooth: bool = False,
         is_selected: bool = True,
         linestyle_opts: types.LineStyle = opts.LineStyleOpts(),
         tooltip_opts: types.Tooltip = None,
@@ -52,6 +53,7 @@ class Parallel(Chart):
                 "lineStyle": linestyle_opts,
                 "name": series_name,
                 "data": data,
+                "smooth": is_smooth,
                 "tooltip": tooltip_opts,
                 "itemStyle": itemstyle_opts,
             }
