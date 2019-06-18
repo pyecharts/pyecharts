@@ -43,9 +43,17 @@ def test_make_snapshot_raise_type_error():
 
 
 @patch("pyecharts.render.snapshot.save_as_png")
-def test_make_snapshot_image(fake_writer):
+def test_make_snapshot_png(fake_writer):
     eng = _gen_faker_engine("fake content1,content2")
     make_snapshot(eng, _gen_bar_chart(), "make_snapshot.png")
+    _ = fake_writer.call_args[0]
+    eq_(None, None)
+
+
+@patch("pyecharts.render.snapshot.save_as")
+def test_make_snapshot_gif(fake_writer):
+    eng = _gen_faker_engine("fake content1,content2")
+    make_snapshot(eng, _gen_bar_chart(), "make_snapshot.gif")
     _ = fake_writer.call_args[0]
     eq_(None, None)
 

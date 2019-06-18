@@ -1,11 +1,11 @@
+import json
 from unittest.mock import patch
 
-import json
 from nose.tools import eq_
 
 from example.commons import Faker
-from pyecharts.charts import Map
 from pyecharts import options as opts
+from pyecharts.charts import Map
 
 
 @patch("pyecharts.render.engine.write_utf8_html_file")

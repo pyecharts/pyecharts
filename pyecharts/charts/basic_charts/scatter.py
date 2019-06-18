@@ -1,8 +1,8 @@
 import itertools
 
 from ... import options as opts
+from ... import types
 from ...charts.chart import RectChart
-from ...commons.types import Numeric, Optional, Sequence, Union
 from ...globals import ChartType
 
 
@@ -16,29 +16,26 @@ class Scatter(RectChart):
     visualmap component can be used.
     """
 
-    def __init__(self, init_opts: opts.InitOpts = opts.InitOpts()):
-        super().__init__(init_opts=init_opts)
-
     def add_yaxis(
         self,
         series_name: str,
-        y_axis: Sequence,
+        y_axis: types.Sequence,
         *,
         is_selected: bool = True,
-        xaxis_index: Optional[Numeric] = None,
-        yaxis_index: Optional[Numeric] = None,
-        color: Optional[str] = None,
-        symbol: Optional[str] = None,
-        symbol_size: Union[Numeric, Sequence] = 10,
-        label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(position="right"),
-        markpoint_opts: Union[opts.MarkPointOpts, dict, None] = None,
-        markline_opts: Union[opts.MarkLineOpts, dict, None] = None,
-        tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
-        itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
+        xaxis_index: types.Optional[types.Numeric] = None,
+        yaxis_index: types.Optional[types.Numeric] = None,
+        color: types.Optional[str] = None,
+        symbol: types.Optional[str] = None,
+        symbol_size: types.Union[types.Numeric, types.Sequence] = 10,
+        label_opts: types.Label = opts.LabelOpts(position="right"),
+        markpoint_opts: types.MarkPoint = None,
+        markline_opts: types.MarkLine = None,
+        tooltip_opts: types.Tooltip = None,
+        itemstyle_opts: types.ItemStyle = None,
     ):
         self._append_color(color)
         self._append_legend(series_name, is_selected)
-        if len(y_axis) > 0 and isinstance(y_axis[0], Sequence):
+        if len(y_axis) > 0 and isinstance(y_axis[0], types.Sequence):
             data = [
                 list(itertools.chain(list([x]), y))
                 for x, y in zip(self._xaxis_data, y_axis)

@@ -1,6 +1,6 @@
 from ... import options as opts
+from ... import types
 from ...charts.chart import Chart
-from ...commons.types import Numeric, Optional, Sequence, Union
 from ...globals import ChartType
 
 
@@ -11,31 +11,28 @@ class Graph(Chart):
     The graph is used to represent the relational data.
     """
 
-    def __init__(self, init_opts: opts.InitOpts = opts.InitOpts()):
-        super().__init__(init_opts=init_opts)
-
     def add(
         self,
         series_name: str,
-        nodes: Sequence[Union[opts.GraphNode, dict]],
-        links: Sequence[Union[opts.GraphLink, dict]],
-        categories: Union[Sequence[Union[opts.GraphCategory, dict]], None] = None,
+        nodes: types.Sequence[types.GraphNode],
+        links: types.Sequence[types.GraphLink],
+        categories: types.Union[types.Sequence[types.GraphCategory], None] = None,
         *,
         is_selected: bool = True,
         is_focusnode: bool = True,
         is_roam: bool = True,
         is_rotate_label: bool = False,
         layout: str = "force",
-        symbol: Optional[str] = None,
-        edge_length: Numeric = 50,
-        gravity: Numeric = 0.2,
-        repulsion: Numeric = 50,
-        edge_symbol: Optional[str] = None,
-        edge_symbol_size: Numeric = 10,
-        label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
-        linestyle_opts: Union[opts.LineStyleOpts, dict] = opts.LineStyleOpts(),
-        tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
-        itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
+        symbol: types.Optional[str] = None,
+        edge_length: types.Numeric = 50,
+        gravity: types.Numeric = 0.2,
+        repulsion: types.Numeric = 50,
+        edge_symbol: types.Optional[str] = None,
+        edge_symbol_size: types.Numeric = 10,
+        label_opts: types.Label = opts.LabelOpts(),
+        linestyle_opts: types.LineStyle = opts.LineStyleOpts(),
+        tooltip_opts: types.Tooltip = None,
+        itemstyle_opts: types.ItemStyle = None,
     ):
         _nodes = []
         for n in nodes:

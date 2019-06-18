@@ -1,22 +1,24 @@
 import json
 
 from ... import options as opts
+from ... import types
 from ...charts.chart import Chart
-from ...commons.types import Numeric, Optional, Sequence, Union
 from ...datasets import COORDINATES
 from ...globals import ChartType
 
 
 class GeoChartBase(Chart):
-    def __init__(self, init_opts: opts.InitOpts = opts.InitOpts()):
+    def __init__(self, init_opts: types.Init = opts.InitOpts()):
         super().__init__(init_opts=init_opts)
         self.set_global_opts()
         self._coordinates = COORDINATES
         self._zlevel = 1
-        self._coordinate_system: Optional[str] = None
+        self._coordinate_system: types.Optional[str] = None
         self._chart_type = ChartType.GEO
 
-    def add_coordinate(self, name: str, longitude: Numeric, latitude: Numeric):
+    def add_coordinate(
+        self, name: str, longitude: types.Numeric, latitude: types.Numeric
+    ):
         self._coordinates.update({name: [longitude, latitude]})
         return self
 
@@ -27,28 +29,28 @@ class GeoChartBase(Chart):
                 self.add_coordinate(k, v[0], v[1])
         return self
 
-    def get_coordinate(self, name: str) -> Optional[Sequence]:
+    def get_coordinate(self, name: str) -> types.Optional[types.Sequence]:
         if name in self._coordinates:
             return self._coordinates[name]
 
     def add(
         self,
         series_name: str,
-        data_pair: Sequence,
+        data_pair: types.Sequence,
         type_: str = "scatter",
         *,
         is_selected: bool = True,
-        symbol: Optional[str] = None,
-        symbol_size: Numeric = 12,
-        color: Optional[str] = None,
+        symbol: types.Optional[str] = None,
+        symbol_size: types.Numeric = 12,
+        color: types.Optional[str] = None,
         is_polyline: bool = False,
         is_large: bool = False,
-        large_threshold: Numeric = 2000,
-        label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
-        effect_opts: Union[opts.EffectOpts, dict] = opts.EffectOpts(),
-        linestyle_opts: Union[opts.LineStyleOpts, dict] = opts.LineStyleOpts(),
-        tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
-        itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
+        large_threshold: types.Numeric = 2000,
+        label_opts: types.Label = opts.LabelOpts(),
+        effect_opts: types.Effect = opts.EffectOpts(),
+        linestyle_opts: types.LineStyle = opts.LineStyleOpts(),
+        tooltip_opts: types.Tooltip = None,
+        itemstyle_opts: types.ItemStyle = None,
     ):
         self._zlevel += 1
         data = self._feed_data(data_pair, type_)
@@ -130,11 +132,11 @@ class Geo(GeoChartBase):
     support scatter plot and line
     """
 
-    def __init__(self, init_opts: opts.InitOpts = opts.InitOpts()):
+    def __init__(self, init_opts: types.Init = opts.InitOpts()):
         super().__init__(init_opts=init_opts)
-        self._coordinate_system: Optional[str] = "geo"
+        self._coordinate_system: types.Optional[str] = "geo"
 
-    def _feed_data(self, data_pair: Sequence, type_: str) -> Sequence:
+    def _feed_data(self, data_pair: types.Sequence, type_: str) -> types.Sequence:
         result = []
         for n, v in data_pair:
             if type_ == ChartType.LINES:
@@ -149,12 +151,12 @@ class Geo(GeoChartBase):
         self,
         maptype: str = "china",
         is_roam: bool = True,
-        zoom: Optional[Numeric] = None,
-        center: Optional[Sequence] = None,
-        label_opts: Union[opts.LabelOpts, dict, None] = None,
-        itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
-        emphasis_itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
-        emphasis_label_opts: Union[opts.LabelOpts, dict, None] = None,
+        zoom: types.Optional[types.Numeric] = None,
+        center: types.Optional[types.Sequence] = None,
+        label_opts: types.Label = None,
+        itemstyle_opts: types.ItemStyle = None,
+        emphasis_itemstyle_opts: types.ItemStyle = None,
+        emphasis_label_opts: types.Label = None,
     ):
         self.js_dependencies.add(maptype)
         if center:

@@ -1,6 +1,6 @@
 from ... import options as opts
+from ... import types
 from ...charts.chart import Chart
-from ...commons.types import Numeric, Optional, Sequence, Union
 from ...globals import ChartType
 
 
@@ -12,9 +12,6 @@ class Tree(Chart):
     which are special hierarchical types with unique root nodes, left subtrees,
     and right subtrees.
     """
-
-    def __init__(self, init_opts: opts.InitOpts = opts.InitOpts()):
-        super().__init__(init_opts=init_opts)
 
     @staticmethod
     def _set_collapse_interval(data, interval):
@@ -38,21 +35,21 @@ class Tree(Chart):
     def add(
         self,
         series_name: str,
-        data: Sequence[Union[opts.TreeItem, dict]],
+        data: types.Sequence[types.Union[opts.TreeItem, dict]],
         *,
         layout: str = "orthogonal",
         symbol: str = "emptyCircle",
-        symbol_size: Numeric = 7,
+        symbol_size: types.Numeric = 7,
         orient: str = "LR",
-        pos_top: Optional[str] = None,
-        pos_left: Optional[str] = None,
-        pos_bottom: Optional[str] = None,
-        pos_right: Optional[str] = None,
-        collapse_interval: Numeric = 0,
-        label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
-        leaves_label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
-        tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
-        itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
+        pos_top: types.Optional[str] = None,
+        pos_left: types.Optional[str] = None,
+        pos_bottom: types.Optional[str] = None,
+        pos_right: types.Optional[str] = None,
+        collapse_interval: types.Numeric = 0,
+        label_opts: types.Label = opts.LabelOpts(),
+        leaves_label_opts: types.Label = opts.LabelOpts(),
+        tooltip_opts: types.Tooltip = None,
+        itemstyle_opts: types.ItemStyle = None,
     ):
         _data = self._set_collapse_interval(data, collapse_interval)
         self.options.get("series").append(
