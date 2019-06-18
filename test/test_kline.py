@@ -1,3 +1,5 @@
+from unittest.mock import patch
+
 from nose.tools import eq_
 
 from pyecharts import options as opts
@@ -17,7 +19,8 @@ data = [
 ]
 
 
-def test_kline_base():
+@patch("pyecharts.render.engine.write_utf8_html_file")
+def test_kline_base(fake_writer):
     c = (
         Kline()
         .add_xaxis(["2017/7/{}".format(i + 1) for i in range(10)])
@@ -27,6 +30,7 @@ def test_kline_base():
             xaxis_opts=opts.AxisOpts(is_scale=True),
         )
     )
+    c.render()
+    _, content = fake_writer.call_args[0]
     eq_(c.theme, "white")
     eq_(c.renderer, "canvas")
-    c.render()

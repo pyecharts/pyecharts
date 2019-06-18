@@ -1,6 +1,6 @@
 from ... import options as opts
+from ... import types
 from ...charts.chart import Chart
-from ...commons.types import Numeric, Sequence, Union
 from ...globals import ChartType
 
 
@@ -11,26 +11,21 @@ class Gauge(Chart):
     The gauge displays a single key business measure.
     """
 
-    def __init__(self, init_opts: opts.InitOpts = opts.InitOpts()):
-        super().__init__(init_opts=init_opts)
-
     def add(
         self,
         series_name: str,
-        data_pair: Sequence,
+        data_pair: types.Sequence,
         *,
         is_selected: bool = True,
-        min_: Numeric = 0,
-        max_: Numeric = 100,
-        split_number: Numeric = 10,
-        start_angle: Numeric = 225,
-        end_angle: Numeric = -45,
-        label_opts: Union[opts.LabelOpts, dict, None] = opts.LabelOpts(
-            formatter="{value}%"
-        ),
-        tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
-        axisline_opts: Union[opts.AxisLineOpts, dict, None] = None,
-        itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
+        min_: types.Numeric = 0,
+        max_: types.Numeric = 100,
+        split_number: types.Numeric = 10,
+        start_angle: types.Numeric = 225,
+        end_angle: types.Numeric = -45,
+        label_opts: types.Label = opts.LabelOpts(formatter="{value}%"),
+        tooltip_opts: types.Tooltip = None,
+        axisline_opts: types.AxisLine = None,
+        itemstyle_opts: types.ItemStyle = None,
     ):
 
         self._append_legend(series_name, is_selected)

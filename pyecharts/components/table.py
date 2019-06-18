@@ -3,7 +3,8 @@ import os
 from jinja2 import Environment
 from prettytable import PrettyTable
 
-from ..commons.types import Optional, Sequence, Union
+from pyecharts.types import Optional, Sequence, Union
+
 from ..commons.utils import OrderedSet
 from ..globals import CurrentConfig
 from ..options import ComponentTitleOpts

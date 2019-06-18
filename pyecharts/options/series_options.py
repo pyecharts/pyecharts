@@ -1,4 +1,9 @@
-from ..commons.types import Any, JSFunc, Numeric, Optional, Sequence, Tuple, Union
+from typing import Any, Optional, Sequence, Tuple, Union
+
+from ..commons.utils import JsCode
+
+Numeric = Union[int, float]
+JSFunc = Union[str, JsCode]
 
 
 class BasicOpts:
@@ -14,7 +19,7 @@ class BasicOpts:
 class ItemStyleOpts(BasicOpts):
     def __init__(
         self,
-        color: Optional[str] = None,
+        color: Optional[JSFunc] = None,
         color0: Optional[str] = None,
         border_color: Optional[str] = None,
         border_color0: Optional[str] = None,

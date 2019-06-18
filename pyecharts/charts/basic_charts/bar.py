@@ -1,6 +1,6 @@
 from ... import options as opts
+from ... import types
 from ...charts.chart import RectChart
-from ...commons.types import Numeric, Optional, Sequence, Union
 from ...globals import ChartType
 
 
@@ -12,26 +12,23 @@ class Bar(RectChart):
     with heights or lengths proportional to the values that they represent.
     """
 
-    def __init__(self, init_opts: opts.InitOpts = opts.InitOpts()):
-        super().__init__(init_opts=init_opts)
-
     def add_yaxis(
         self,
         series_name: str,
-        yaxis_data: Sequence[Union[Numeric, opts.BarItem, dict]],
+        yaxis_data: types.Sequence[types.Union[types.Numeric, opts.BarItem, dict]],
         *,
         is_selected: bool = True,
-        xaxis_index: Optional[Numeric] = None,
-        yaxis_index: Optional[Numeric] = None,
-        color: Optional[str] = None,
-        stack: Optional[str] = None,
-        category_gap: Union[Numeric, str] = "20%",
-        gap: Optional[str] = None,
-        label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
-        markpoint_opts: Union[opts.MarkPointOpts, dict, None] = None,
-        markline_opts: Union[opts.MarkLineOpts, dict, None] = None,
-        tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
-        itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
+        xaxis_index: types.Optional[types.Numeric] = None,
+        yaxis_index: types.Optional[types.Numeric] = None,
+        color: types.Optional[str] = None,
+        stack: types.Optional[str] = None,
+        category_gap: types.Union[types.Numeric, str] = "20%",
+        gap: types.Optional[str] = None,
+        label_opts: types.Label = opts.LabelOpts(),
+        markpoint_opts: types.MarkPoint = None,
+        markline_opts: types.MarkLine = None,
+        tooltip_opts: types.Tooltip = None,
+        itemstyle_opts: types.ItemStyle = None,
     ):
         self._append_color(color)
         self._append_legend(series_name, is_selected)

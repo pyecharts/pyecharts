@@ -1,6 +1,6 @@
 from ... import options as opts
+from ... import types
 from ...charts.chart import Chart
-from ...commons.types import Numeric, Sequence, Union
 from ...globals import ChartType
 
 
@@ -13,22 +13,19 @@ class Sankey(Chart):
     the intermediate process of processing, transformation to the final form.
     """
 
-    def __init__(self, init_opts: opts.InitOpts = opts.InitOpts()):
-        super().__init__(init_opts=init_opts)
-
     def add(
         self,
         series_name: str,
-        nodes: Sequence,
-        links: Sequence,
+        nodes: types.Sequence,
+        links: types.Sequence,
         *,
         is_selected: bool = True,
-        node_width: Numeric = 20,
-        node_gap: Numeric = 8,
-        label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
-        linestyle_opt: Union[opts.LineStyleOpts, dict] = opts.LineStyleOpts(),
-        tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
-        itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
+        node_width: types.Numeric = 20,
+        node_gap: types.Numeric = 8,
+        label_opts: types.Label = opts.LabelOpts(),
+        linestyle_opt: types.LineStyle = opts.LineStyleOpts(),
+        tooltip_opts: types.Tooltip = None,
+        itemstyle_opts: types.ItemStyle = None,
     ):
         self._append_legend(series_name, is_selected)
         self.options.get("series").append(

@@ -1,7 +1,7 @@
 import copy
 
 from ... import options as opts
-from ...commons.types import Optional, Sequence, Union
+from ... import types
 from ...globals import ThemeType
 from ..chart import Base, RectChart
 
@@ -13,16 +13,16 @@ class Grid(Base):
     and scatter chart (bubble chart) can be drawn in grid.
     """
 
-    def __init__(self, init_opts: opts.InitOpts = opts.InitOpts()):
+    def __init__(self, init_opts: types.Init = opts.InitOpts()):
         super().__init__(init_opts=init_opts)
-        self.options: Optional[dict] = None
+        self.options: types.Optional[dict] = None
         self._axis_index: int = 0
         self._grow_grid_index: int = 0
 
     def add(
         self,
         chart: RectChart,
-        grid_opts: Union[opts.GridOpts, dict],
+        grid_opts: types.Union[opts.GridOpts, dict],
         *,
         grid_index: int = 0,
         is_control_axis_index: bool = False,
@@ -41,7 +41,7 @@ class Grid(Base):
         title = chart.options.get("title", opts.TitleOpts().opts)
         if isinstance(title, opts.TitleOpts):
             title = title.opts
-        if not isinstance(title, Sequence):
+        if not isinstance(title, types.Sequence):
             title = (title,)
         self.options.get("title").extend(title)
 

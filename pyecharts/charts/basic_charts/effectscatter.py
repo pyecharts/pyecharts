@@ -1,6 +1,6 @@
 from ... import options as opts
+from ... import types
 from ...charts.chart import RectChart
-from ...commons.types import Numeric, Optional, Sequence, Union
 from ...globals import ChartType
 
 
@@ -11,24 +11,21 @@ class EffectScatter(RectChart):
     Use animation effects to visually highlight designated data set.
     """
 
-    def __init__(self, init_opts: opts.InitOpts = opts.InitOpts()):
-        super().__init__(init_opts=init_opts)
-
     def add_yaxis(
         self,
         series_name: str,
-        y_axis: Sequence,
+        y_axis: types.Sequence,
         *,
         is_selected: bool = True,
-        xaxis_index: Optional[Numeric] = None,
-        yaxis_index: Optional[Numeric] = None,
-        color: Optional[str] = None,
-        symbol: Optional[str] = None,
-        symbol_size: Numeric = 10,
-        label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
-        effect_opts: Union[opts.EffectOpts, dict] = opts.EffectOpts(),
-        tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
-        itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
+        xaxis_index: types.Optional[types.Numeric] = None,
+        yaxis_index: types.Optional[types.Numeric] = None,
+        color: types.Optional[str] = None,
+        symbol: types.Optional[str] = None,
+        symbol_size: types.Numeric = 10,
+        label_opts: types.Label = opts.LabelOpts(),
+        effect_opts: types.Effect = opts.EffectOpts(),
+        tooltip_opts: types.Tooltip = None,
+        itemstyle_opts: types.ItemStyle = None,
     ):
         self._append_color(color)
         self._append_legend(series_name, is_selected)

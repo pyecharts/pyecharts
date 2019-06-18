@@ -1,4 +1,4 @@
-from nose.tools import eq_
+from nose.tools import assert_true, eq_
 
 from example.commons import Faker
 from pyecharts.charts import Bar, Line, Page
@@ -32,9 +32,26 @@ def test_page_jshost_default():
 def test_page_jshost_custom():
     from pyecharts.globals import CurrentConfig
 
+    default_host = CurrentConfig.ONLINE_HOST
     custom_host = "http://localhost:8888/assets/"
     CurrentConfig.ONLINE_HOST = custom_host
     bar = _create_bar()
     line = _create_line()
     page = Page().add(bar, line)
     eq_(page.js_host, custom_host)
+    CurrentConfig.ONLINE_HOST = default_host
+
+
+def test_page_render_embed():
+    bar = _create_bar()
+    line = _create_line()
+    content = Page().add(bar, line).render_embed()
+    assert_true(len(content) > 1000)
+
+
+def test_page_load_javascript():
+    bar = _create_bar()
+    line = _create_line()
+    content = Page().add(bar, line).load_javascript()
+    eq_("", content.data)
+    eq_(["https://assets.pyecharts.org/assets/echarts.min.js"], content.lib)

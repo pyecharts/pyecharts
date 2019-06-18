@@ -1,9 +1,18 @@
 import json
 
-from ..commons.types import JSFunc, Numeric, Optional, Sequence, Union
 from ..globals import BMapType
 from .global_options import TooltipOpts
-from .series_options import BasicOpts, ItemStyleOpts, LabelOpts, LineStyleOpts
+from .series_options import (
+    BasicOpts,
+    ItemStyleOpts,
+    JSFunc,
+    LabelOpts,
+    LineStyleOpts,
+    Numeric,
+    Optional,
+    Sequence,
+    Union,
+)
 
 
 class SunburstItem(BasicOpts):
@@ -184,7 +193,7 @@ class BMapScaleControlOpts(BasicOpts):
         }
 
 
-class BMapTypeControl(BasicOpts):
+class BMapTypeControlOpts(BasicOpts):
     def __init__(
         self,
         position: Numeric = BMapType.ANCHOR_TOP_RIGHT,
@@ -199,7 +208,7 @@ class BMapTypeControl(BasicOpts):
         }
 
 
-class BMapCopyrightType(BasicOpts):
+class BMapCopyrightTypeOpts(BasicOpts):
     def __init__(
         self,
         position: Numeric = BMapType.ANCHOR_BOTTOM_LEFT,

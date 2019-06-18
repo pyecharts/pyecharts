@@ -1,6 +1,6 @@
 from ... import options as opts
+from ... import types
 from ...charts.chart import Chart
-from ...commons.types import Optional, Sequence, Union
 from ...globals import ChartType
 
 
@@ -11,23 +11,21 @@ class Liquid(Chart):
     The liquid chart is mainly used to highlight the percentage of data.
     """
 
-    def __init__(self, init_opts: opts.InitOpts = opts.InitOpts()):
+    def __init__(self, init_opts: types.Init = opts.InitOpts()):
         super().__init__(init_opts=init_opts)
         self.js_dependencies.add("echarts-liquidfill")
 
     def add(
         self,
         series_name: str,
-        data: Sequence,
+        data: types.Sequence,
         *,
         shape: str = "circle",
-        color: Optional[Sequence[str]] = None,
+        color: types.Optional[types.Sequence[str]] = None,
         is_animation: bool = True,
         is_outline_show: bool = True,
-        tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
-        label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(
-            font_size=50, position="inside"
-        ),
+        tooltip_opts: types.Tooltip = None,
+        label_opts: types.Label = opts.LabelOpts(font_size=50, position="inside"),
     ):
         _animation_dur, _animation_dur_update = 2000, 1000
         if not is_animation:
