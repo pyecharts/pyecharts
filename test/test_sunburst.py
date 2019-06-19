@@ -1,9 +1,13 @@
+from unittest.mock import patch
+
 from nose.tools import eq_
 
+from pyecharts import options as opts
 from pyecharts.charts import Sunburst
 
 
-def test_sunburst_base():
+@patch("pyecharts.render.engine.write_utf8_html_file")
+def test_sunburst_base(fake_writer):
     data = [
         {
             "name": "Grandpa",
@@ -46,5 +50,13 @@ def test_sunburst_base():
     ]
 
     c = Sunburst().add("Sunburst 演示数据", data)
-    eq_("white", c.theme)
-    eq_("canvas", c.renderer)
+    c.render()
+    _, content = fake_writer.call_args[0]
+    eq_(c.theme, "white")
+    eq_(c.renderer, "canvas")
+
+
+def test_sunburst_dataitem():
+    item_name = "test_data_item"
+    item = opts.SunburstItem(name=item_name)
+    eq_(item.opts.get("name"), item_name)

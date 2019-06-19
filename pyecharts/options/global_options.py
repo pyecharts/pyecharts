@@ -1,16 +1,20 @@
-from ..commons.types import JSFunc, Numeric, Optional, Sequence, Union
 from ..globals import CurrentConfig, RenderType, ThemeType
 from ..options.series_options import (
     BasicOpts,
+    JSFunc,
     LabelOpts,
     LineStyleOpts,
+    Numeric,
+    Optional,
+    Sequence,
     SplitAreaOpts,
     SplitLineOpts,
     TextStyleOpts,
+    Union,
 )
 
 
-class InitOpts:
+class InitOpts(BasicOpts):
     def __init__(
         self,
         width: str = "900px",
@@ -22,14 +26,16 @@ class InitOpts:
         bg_color: Optional[str] = None,
         js_host: str = "",
     ):
-        self.width = width
-        self.height = height
-        self.chart_id = chart_id
-        self.renderer = renderer
-        self.page_title = page_title
-        self.theme = theme
-        self.bg_color = bg_color
-        self.js_host = js_host
+        self.opts: dict = {
+            "width": width,
+            "height": height,
+            "chart_id": chart_id,
+            "renderer": renderer,
+            "page_title": page_title,
+            "theme": theme,
+            "bg_color": bg_color,
+            "js_host": js_host,
+        }
 
 
 class ToolBoxFeatureOpts(BasicOpts):
@@ -581,6 +587,7 @@ class RadiusAxisOpts(BasicOpts):
         max_: Union[str, Numeric, None] = None,
         is_scale: bool = False,
         splitline_opts: Union[SplitLineOpts, dict, None] = None,
+        axistick_opts: Union[AxisTickOpts, dict, None] = None,
         axisline_opts: Union[AxisLineOpts, dict, None] = None,
         axislabel_opts: Union[LabelOpts, dict, None] = None,
         z: Optional[int] = None,
@@ -603,6 +610,7 @@ class RadiusAxisOpts(BasicOpts):
             "max": max_,
             "scale": is_scale,
             "splitLine": splitline_opts,
+            "axisTick": axistick_opts,
             "axisLine": axisline_opts,
             "axisLabel": axislabel_opts,
             "z": z,
