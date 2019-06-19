@@ -1,12 +1,16 @@
-from ..commons.types import JSFunc, Numeric, Optional, Sequence, Union
 from ..globals import CurrentConfig, RenderType, ThemeType
 from ..options.series_options import (
     BasicOpts,
+    JSFunc,
     LabelOpts,
     LineStyleOpts,
+    Numeric,
+    Optional,
+    Sequence,
     SplitAreaOpts,
     SplitLineOpts,
     TextStyleOpts,
+    Union,
 )
 
 
@@ -583,6 +587,7 @@ class RadiusAxisOpts(BasicOpts):
         max_: Union[str, Numeric, None] = None,
         is_scale: bool = False,
         splitline_opts: Union[SplitLineOpts, dict, None] = None,
+        axistick_opts: Union[AxisTickOpts, dict, None] = None,
         axisline_opts: Union[AxisLineOpts, dict, None] = None,
         axislabel_opts: Union[LabelOpts, dict, None] = None,
         z: Optional[int] = None,
@@ -605,6 +610,7 @@ class RadiusAxisOpts(BasicOpts):
             "max": max_,
             "scale": is_scale,
             "splitLine": splitline_opts,
+            "axisTick": axistick_opts,
             "axisLine": axisline_opts,
             "axisLabel": axislabel_opts,
             "z": z,

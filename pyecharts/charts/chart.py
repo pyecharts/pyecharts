@@ -1,8 +1,9 @@
 from .. import options as opts
+from .. import types
 from ..charts.base import Base
-from ..commons.types import Optional, Sequence, Union
 from ..globals import RenderType, ThemeType, ToolTipFormatterType
 from ..options.charts_options import BaseGraphic
+from ..types import Optional, Sequence, Union
 
 VisualMapType = Union[opts.VisualMapOpts, dict]
 DataZoomType = Union[opts.DataZoomOpts, dict]
@@ -10,7 +11,7 @@ GraphicType = Union[BaseGraphic, dict]
 
 
 class Chart(Base):
-    def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):
+    def __init__(self, init_opts: types.Init = opts.InitOpts()):
         super().__init__(init_opts=init_opts)
         self.colors = (
             "#c23531 #2f4554 #61a0a8 #d48265 #749f83 #ca8622 #bda29a #6e7074 "
@@ -32,17 +33,17 @@ class Chart(Base):
 
     def set_series_opts(
         self,
-        label_opts: Union[opts.LabelOpts, dict, None] = None,
-        linestyle_opts: Union[opts.LineStyleOpts, dict, None] = None,
-        splitline_opts: Union[opts.SplitLineOpts, dict, None] = None,
-        areastyle_opts: Union[opts.AreaStyleOpts, dict, None] = None,
-        axisline_opts: Union[opts.AxisLineOpts, dict, None] = None,
-        markpoint_opts: Union[opts.MarkPointOpts, dict, None] = None,
-        markline_opts: Union[opts.MarkLineOpts, dict, None] = None,
-        markarea_opts: Union[opts.MarkAreaOpts, dict, None] = None,
-        effect_opts: Union[opts.EffectOpts, dict] = opts.EffectOpts(),
-        tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
-        itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
+        label_opts: types.Label = None,
+        linestyle_opts: types.LineStyle = None,
+        splitline_opts: types.SplitLine = None,
+        areastyle_opts: types.AreaStyle = None,
+        axisline_opts: types.AxisLine = None,
+        markpoint_opts: types.MarkPoint = None,
+        markline_opts: types.MarkLine = None,
+        markarea_opts: types.MarkArea = None,
+        effect_opts: types.Effect = opts.EffectOpts(),
+        tooltip_opts: types.Tooltip = None,
+        itemstyle_opts: types.ItemStyle = None,
         **kwargs,
     ):
         for s in self.options.get("series"):
@@ -96,12 +97,12 @@ class Chart(Base):
 
     def set_global_opts(
         self,
-        title_opts: Union[opts.TitleOpts, dict] = opts.TitleOpts(),
-        legend_opts: Union[opts.LegendOpts, dict] = opts.LegendOpts(),
-        tooltip_opts: Union[opts.TooltipOpts, dict] = None,
-        toolbox_opts: Union[opts.ToolboxOpts, dict] = None,
-        xaxis_opts: Union[opts.AxisOpts, dict, None] = None,
-        yaxis_opts: Union[opts.AxisOpts, dict, None] = None,
+        title_opts: types.Title = opts.TitleOpts(),
+        legend_opts: types.Legend = opts.LegendOpts(),
+        tooltip_opts: types.Tooltip = None,
+        toolbox_opts: types.Toolbox = None,
+        xaxis_opts: types.Axis = None,
+        yaxis_opts: types.Axis = None,
         visualmap_opts: Union[VisualMapType, Sequence[VisualMapType], None] = None,
         datazoom_opts: Union[DataZoomType, Sequence[DataZoomType], None] = None,
         graphic_opts: Union[GraphicType, Sequence[GraphicType], None] = None,
@@ -138,15 +139,15 @@ class Chart(Base):
 
 
 class RectChart(Chart):
-    def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):
+    def __init__(self, init_opts: types.Init = opts.InitOpts()):
         super().__init__(init_opts=init_opts)
         self.options.update(xAxis=[opts.AxisOpts().opts], yAxis=[opts.AxisOpts().opts])
 
     def extend_axis(
         self,
         xaxis_data: Sequence = None,
-        xaxis: Union[opts.AxisOpts, dict, None] = None,
-        yaxis: Union[opts.AxisOpts, dict, None] = None,
+        xaxis: types.Axis = None,
+        yaxis: types.Axis = None,
     ):
         if xaxis is not None:
             if isinstance(xaxis, opts.AxisOpts):
@@ -182,7 +183,7 @@ class Chart3D(Chart):
     `Chart3D`类是所有 3D 类图表的基类，继承自 `Chart` 类
     """
 
-    def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):
+    def __init__(self, init_opts: types.Init = opts.InitOpts()):
         init_opts.renderer = RenderType.CANVAS
         super().__init__(init_opts)
         self.js_dependencies.add("echarts-gl")
@@ -194,12 +195,12 @@ class Chart3D(Chart):
         series_name: str,
         data: Sequence,
         shading: Optional[str] = None,
-        itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
-        label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(is_show=False),
-        xaxis3d_opts: Union[opts.Axis3DOpts, dict] = opts.Axis3DOpts(type_="category"),
-        yaxis3d_opts: Union[opts.Axis3DOpts, dict] = opts.Axis3DOpts(type_="category"),
-        zaxis3d_opts: Union[opts.Axis3DOpts, dict] = opts.Axis3DOpts(type_="value"),
-        grid3d_opts: Union[opts.Grid3DOpts, dict] = opts.Grid3DOpts(),
+        itemstyle_opts: types.ItemStyle = None,
+        label_opts: types.Label = opts.LabelOpts(is_show=False),
+        xaxis3d_opts: types.Axis3D = opts.Axis3DOpts(type_="category"),
+        yaxis3d_opts: types.Axis3D = opts.Axis3DOpts(type_="category"),
+        zaxis3d_opts: types.Axis3D = opts.Axis3DOpts(type_="value"),
+        grid3d_opts: types.Grid3D = opts.Grid3DOpts(),
     ):
         self.options.get("legend")[0].get("data").append(series_name)
         self.options.update(

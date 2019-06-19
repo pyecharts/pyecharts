@@ -2,18 +2,17 @@ import datetime
 import json
 import os
 import uuid
-from typing import Sequence
 
 from jinja2 import Environment
 
 from ..commons import utils
-from ..commons.types import Optional, Union
 from ..datasets import FILENAMES
 from ..globals import CurrentConfig, NotebookType, ThemeType
 from ..options import InitOpts
 from ..options.series_options import BasicOpts
 from ..render.display import HTML, Javascript
 from ..render.engine import RenderEngine
+from ..types import Optional, Sequence, Union
 
 
 class Base:
@@ -50,7 +49,9 @@ class Base:
         return utils.remove_key_with_none_value(self.options)
 
     def dump_options(self) -> str:
-        return json.dumps(self.get_options(), indent=4, default=default)
+        return utils.replace_placeholder(
+            json.dumps(self.get_options(), indent=4, default=default)
+        )
 
     def render(
         self,

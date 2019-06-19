@@ -1,6 +1,6 @@
 from ... import options as opts
+from ... import types
 from ...charts.chart import RectChart
-from ...commons.types import Numeric, Optional, Sequence, Union
 from ...globals import ChartType
 
 
@@ -14,7 +14,7 @@ class Kline(RectChart):
     the fluctuation of a certain period.
     """
 
-    def __init__(self, init_opts: Union[opts.InitOpts, dict] = opts.InitOpts()):
+    def __init__(self, init_opts: types.Init = opts.InitOpts()):
         super().__init__(init_opts=init_opts)
         self.set_global_opts(
             xaxis_opts=opts.AxisOpts(is_scale=True),
@@ -24,15 +24,15 @@ class Kline(RectChart):
     def add_yaxis(
         self,
         series_name: str,
-        y_axis: Sequence,
+        y_axis: types.Sequence,
         *,
         is_selected: bool = True,
-        xaxis_index: Optional[Numeric] = None,
-        yaxis_index: Optional[Numeric] = None,
-        markline_opts: Union[opts.MarkLineOpts, dict, None] = None,
-        markpoint_opts: Union[opts.MarkPointOpts, dict, None] = None,
-        tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
-        itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
+        xaxis_index: types.Optional[types.Numeric] = None,
+        yaxis_index: types.Optional[types.Numeric] = None,
+        markline_opts: types.MarkLine = None,
+        markpoint_opts: types.MarkPoint = None,
+        tooltip_opts: types.Tooltip = None,
+        itemstyle_opts: types.ItemStyle = None,
     ):
         self._append_legend(series_name, is_selected)
         self.options.get("series").append(
