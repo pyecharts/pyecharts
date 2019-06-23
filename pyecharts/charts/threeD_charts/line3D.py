@@ -1,9 +1,9 @@
 from ... import types
-from ...charts.chart import Chart3D
+from ...charts.chart import ThreeAxisChart
 from ...options import InitOpts
 
 
-class Line3D(Chart3D):
+class Line3D(ThreeAxisChart):
     """
     <<< 3D Line-Chart >>>
     """
