@@ -34,11 +34,10 @@ from ..charts.composite_charts.timeline import Timeline
 # 3d charts
 from ..charts.threeD_charts.bar3D import Bar3D
 from ..charts.threeD_charts.line3D import Line3D
+from ..charts.threeD_charts.map3D import Map3D
+from ..charts.threeD_charts.map_globe import MapGlobe
 from ..charts.threeD_charts.scatter3D import Scatter3D
 from ..charts.threeD_charts.surface3D import Surface3D
-from ..charts.threeD_charts.map3D import Map3D
-from ..charts.threeD_charts.globe import Globe
-from ..charts.threeD_charts.map_globe import MapGlobe
 
 # alias
 Candlestick = Kline

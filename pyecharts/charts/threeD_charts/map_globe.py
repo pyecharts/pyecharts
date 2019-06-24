@@ -1,16 +1,15 @@
-from ... import types
-from ...charts.chart import Chart3D
-from ...charts.basic_charts.map import MapMixin
-from ...options import InitOpts
-from .globe import Globe
-from jinja2 import Environment
-
-from ...render.engine import RenderEngine
 import uuid
 
+from jinja2 import Environment
+
+from ... import types
+from ...charts.basic_charts.map import MapMixin
+from ...charts.chart import Chart3D
 from ...commons import utils
 from ...globals import CurrentConfig, NotebookType
+from ...options import InitOpts
 from ...render.display import HTML
+from ...render.engine import RenderEngine
 
 
 class MapGlobe(Chart3D, MapMixin):

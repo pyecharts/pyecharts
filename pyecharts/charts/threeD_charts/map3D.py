@@ -1,9 +1,9 @@
 from ... import options as opts
 from ... import types
-from ...charts.chart import Chart3D
-from ...options import InitOpts
 from ...charts.basic_charts.map import MapMixin
+from ...charts.chart import Chart3D
 from ...globals import ChartType
+from ...options import InitOpts
 
 
 class Map3D(Chart3D, MapMixin):
