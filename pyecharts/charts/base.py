@@ -30,7 +30,7 @@ class Base:
         self.height = _opts.get("height")
         self.renderer = _opts.get("renderer")
         self.page_title = _opts.get("page_title")
-        self.theme = _opts.get("theme")
+        self.theme = _opts.get("theme") or ThemeType.WHITE
         self.chart_id = _opts.get("chart_id") or uuid.uuid4().hex
 
         self.options: dict = {}
