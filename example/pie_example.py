@@ -57,9 +57,7 @@ def pie_radius() -> Pie:
         )
         .set_global_opts(
             title_opts=opts.TitleOpts(title="Pie-Radius"),
-            legend_opts=opts.LegendOpts(
-                orient="vertical", pos_top="15%", pos_left="2%"
-            ),
+            legend_opts=opts.LegendOpts(orient="vertical", pos_top="15%", pos_left="2%"),
         )
         .set_series_opts(label_opts=opts.LabelOpts(formatter="{b}: {c}"))
     )
