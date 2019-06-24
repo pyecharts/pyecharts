@@ -567,9 +567,7 @@ class RadiusAxisItem(BasicOpts):
 
 class AngleAxisItem(RadiusAxisItem):
     def __init__(
-        self,
-        value: Optional[str] = None,
-        textstyle_opts: Optional[TextStyleOpts] = None,
+        self, value: Optional[str] = None, textstyle_opts: Optional[TextStyleOpts] = None
     ):
         super().__init__(value, textstyle_opts)
 

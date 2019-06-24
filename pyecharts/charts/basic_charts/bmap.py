@@ -44,12 +44,7 @@ class BMap(GeoChartBase):
             BAIDU_MAP_API.format(baidu_ak), BAIDU_MAP_GETSCRIPT.format(baidu_ak)
         )
         self.options.update(
-            bmap={
-                "center": center,
-                "zoom": zoom,
-                "roam": is_roam,
-                "mapStyle": map_style,
-            }
+            bmap={"center": center, "zoom": zoom, "roam": is_roam, "mapStyle": map_style}
         )
         return self
 
