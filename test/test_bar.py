@@ -5,6 +5,7 @@ from nose.tools import assert_in, assert_not_in, eq_
 
 from pyecharts import options as opts
 from pyecharts.charts import Bar
+from pyecharts.globals import ThemeType
 
 
 @patch("pyecharts.render.engine.write_utf8_html_file")
@@ -19,6 +20,25 @@ def test_bar_base(fake_writer):
     _, content = fake_writer.call_args[0]
     eq_(c.theme, "white")
     eq_(c.renderer, "canvas")
+
+
+@patch("pyecharts.render.engine.write_utf8_html_file")
+def test_bar_base_dict_config(fake_writer):
+    c = (
+        Bar({"theme": ThemeType.MACARONS})
+        .add_xaxis(["A", "B", "C"])
+        .add_yaxis("series0", [1, 2, 4])
+        .add_yaxis("series1", [2, 3, 6])
+        .set_global_opts(title_opts={
+            "text": "Bar-dict-setting", "subtext": "subtext also set by dict"
+        })
+    )
+    c.render()
+    _, content = fake_writer.call_args[0]
+    eq_(c.theme, "macarons")
+    eq_(c.renderer, "canvas")
+    assert_in("Bar-dict-setting", content)
+    assert_in("subtext also set by dict", content)
 
 
 @patch("pyecharts.render.engine.write_utf8_html_file")
