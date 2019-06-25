@@ -100,6 +100,18 @@ class Base:
         if CurrentConfig.NOTEBOOK_TYPE == NotebookType.NTERACT:
             pass
 
+    def render_zeppelin(
+        self,
+        template_name: str = "simple_chart.html",
+        env: Optional[Environment] = None,
+    ):
+        self._prepare_render()
+        return HTML(
+            RenderEngine(env).render_chart_to_zeppelin(
+                chart=self, template_name=template_name
+            )
+        ).data
+
     def _use_theme(self):
         if self.theme not in ThemeType.BUILTIN_THEMES:
             self.js_dependencies.add(self.theme)

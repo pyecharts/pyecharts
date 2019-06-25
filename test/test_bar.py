@@ -137,3 +137,14 @@ def test_bar_graphic(fake_writer):
     file_name, content = fake_writer.call_args[0]
     eq_("render.html", file_name)
     assert_in("graphic", content)
+
+
+def test_bar_render_zeppelin():
+    c = (
+        Bar()
+        .add_xaxis(["A", "B", "C"])
+        .add_yaxis("series0", [1, 2, 4])
+        .add_yaxis("series1", [2, 3, 6])
+    )
+    zeppelin_code = c.render_zeppelin()
+    assert_in("Awesome-pyecharts", zeppelin_code)

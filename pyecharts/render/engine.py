@@ -50,3 +50,8 @@ class RenderEngine:
     def render_chart_to_notebook(self, template_name: str, **kwargs) -> str:
         tpl = self.env.get_template(template_name)
         return replace_placeholder(tpl.render(**kwargs))
+
+    def render_chart_to_zeppelin(self, template_name: str, chart: Any):
+        tpl = self.env.get_template(template_name)
+        html = replace_placeholder(tpl.render(chart=self.generate_js_link(chart)))
+        return html
