@@ -1,7 +1,6 @@
-from pyecharts.charts import MapGlobe
 import pyecharts.options as opts
 from example.commons import POPULATION
-
+from pyecharts.charts import MapGlobe
 
 high = max([x for _, x in POPULATION[1:]])
 low = min([x for _, x in POPULATION[1:]])

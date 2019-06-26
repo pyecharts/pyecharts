@@ -68,7 +68,9 @@ def polar_radiusaxis() -> Polar:
 def polar_angleaxis() -> Polar:
     c = (
         Polar()
-        .add_schema(angleaxis_opts=opts.AngleAxisOpts(data=Faker.week, type_="category"))
+        .add_schema(
+            angleaxis_opts=opts.AngleAxisOpts(data=Faker.week, type_="category")
+        )
         .add("A", [1, 2, 3, 4, 3, 5, 1], type_="bar", stack="stack0")
         .add("B", [2, 4, 6, 1, 2, 3, 1], type_="bar", stack="stack0")
         .add("C", [1, 2, 3, 4, 1, 2, 5], type_="bar", stack="stack0")

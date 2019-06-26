@@ -66,7 +66,9 @@ class Base:
         return os.path.abspath(path)
 
     def render_embed(
-        self, template_name: str = "simple_chart.html", env: Optional[Environment] = None
+        self,
+        template_name: str = "simple_chart.html",
+        env: Optional[Environment] = None,
     ):
         self._prepare_render()
         html = RenderEngine(env).render_chart_to_template(template_name, chart=self)
