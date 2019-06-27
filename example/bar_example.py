@@ -1,6 +1,7 @@
 from example.commons import Collector, Faker
 from pyecharts import options as opts
 from pyecharts.charts import Bar, Page
+from pyecharts.globals import ThemeType
 from pyecharts.commons.utils import JsCode
 
 C = Collector()
@@ -14,6 +15,20 @@ def bar_base() -> Bar:
         .add_yaxis("商家A", Faker.values())
         .add_yaxis("商家B", Faker.values())
         .set_global_opts(title_opts=opts.TitleOpts(title="Bar-基本示例", subtitle="我是副标题"))
+    )
+    return c
+
+
+@C.funcs
+def bar_base_dict_config() -> Bar:
+    c = (
+        Bar({"theme": ThemeType.MACARONS})
+        .add_xaxis(Faker.choose())
+        .add_yaxis("商家A", Faker.values())
+        .add_yaxis("商家B", Faker.values())
+        .set_global_opts(title_opts={
+            "text": "Bar-通过 dict 进行配置", "subtext": "我也是通过 dict 进行配置的"
+        })
     )
     return c
 

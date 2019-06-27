@@ -12,6 +12,10 @@ GraphicType = Union[BaseGraphic, dict]
 
 class Chart(Base):
     def __init__(self, init_opts: types.Init = opts.InitOpts()):
+        if isinstance(init_opts, dict):
+            temp_opts = opts.InitOpts()
+            temp_opts.update(**init_opts)
+            init_opts = temp_opts
         super().__init__(init_opts=init_opts)
         self.colors = (
             "#c23531 #2f4554 #61a0a8 #d48265 #749f83 #ca8622 #bda29a #6e7074 "
