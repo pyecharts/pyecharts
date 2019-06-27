@@ -194,6 +194,8 @@ class Chart3D(Chart):
         self.options.update(visualMap=opts.VisualMapOpts().opts)
         self._3d_chart_type: Optional[str] = None  # 3d chart type,don't use it directly
 
+
+class ThreeAxisChart(Chart3D):
     def add(
         self,
         series_name: str,

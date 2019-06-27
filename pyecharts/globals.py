@@ -39,6 +39,7 @@ class _ChartType:
     LINES: str = "lines"
     LIQUID: str = "liquidFill"
     MAP: str = "map"
+    MAP3D: str = "map3D"
     PARALLEL: str = "parallel"
     PICTORIALBAR: str = "pictorialBar"
     PIE: str = "pie"
