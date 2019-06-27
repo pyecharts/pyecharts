@@ -5,7 +5,8 @@ from nose.tools import assert_in, assert_not_in, eq_
 
 from pyecharts import options as opts
 from pyecharts.charts import Bar
-from pyecharts.globals import ThemeType
+from pyecharts.render.display import HTML
+from pyecharts.globals import ThemeType, NotebookType, CurrentConfig
 
 
 @patch("pyecharts.render.engine.write_utf8_html_file")
@@ -157,3 +158,27 @@ def test_bar_graphic(fake_writer):
     file_name, content = fake_writer.call_args[0]
     eq_("render.html", file_name)
     assert_in("graphic", content)
+
+
+def test_bar_render_nteract():
+    CurrentConfig.NOTEBOOK_TYPE = NotebookType.NTERACT
+    c = (
+        Bar()
+        .add_xaxis(["A", "B", "C"])
+        .add_yaxis("series0", [1, 2, 4])
+        .add_yaxis("series1", [2, 3, 6])
+    )
+    nteract_code = c.render_notebook()
+    eq_(isinstance(nteract_code, HTML), True)
+
+
+def test_bar_render_zeppelin():
+    CurrentConfig.NOTEBOOK_TYPE = NotebookType.ZEPPELIN
+    c = (
+        Bar()
+        .add_xaxis(["A", "B", "C"])
+        .add_yaxis("series0", [1, 2, 4])
+        .add_yaxis("series1", [2, 3, 6])
+    )
+    zeppelin_code = c.render_notebook()
+    eq_(zeppelin_code, None)

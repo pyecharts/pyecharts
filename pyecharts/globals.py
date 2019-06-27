@@ -112,6 +112,7 @@ class _NotebookType:
     JUPYTER_NOTEBOOK = "jupyter_notebook"
     JUPYTER_LAB = "jupyter_lab"
     NTERACT = "nteract"
+    ZEPPELIN = "zeppelin"
 
 
 RenderType = _RenderType()
