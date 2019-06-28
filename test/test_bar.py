@@ -1,8 +1,11 @@
 import re
+import sys
+from io import StringIO
 from unittest.mock import patch
 
 from nose.tools import assert_in, assert_not_in, eq_
 
+from test import stdout_redirect
 from pyecharts import options as opts
 from pyecharts.charts import Bar
 from pyecharts.globals import CurrentConfig, NotebookType, ThemeType
@@ -183,5 +186,13 @@ def test_bar_render_zeppelin():
         .add_yaxis("series0", [1, 2, 4])
         .add_yaxis("series1", [2, 3, 6])
     )
-    zeppelin_code = c.render_notebook()
-    eq_(zeppelin_code, None)
+    # Block Console stdout
+    stdout_redirect.fp = StringIO()
+    temp_stdout, sys.stdout = sys.stdout, stdout_redirect
+
+    # render
+    c.render_notebook()
+    sys.stdout = temp_stdout
+
+    # Block Result
+    assert_in("%html", stdout_redirect.fp.getvalue())
