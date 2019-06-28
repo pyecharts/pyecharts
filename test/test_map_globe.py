@@ -23,6 +23,6 @@ def test_map_globe_in_jupyter():
     c = MapGlobe().add(
         "商家A", [list(z) for z in zip(Faker.provinces, Faker.values())], "china"
     )
-    content = c.render_notebook()._repr_html_()
+    content = c.render_notebook().data
     assert_in("document.createElement('canvas')", content)
     assert_in("baseTexture", content)
