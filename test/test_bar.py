@@ -1,11 +1,15 @@
 import re
+import sys
+from io import StringIO
 from unittest.mock import patch
 
 from nose.tools import assert_in, assert_not_in, eq_
 
+from test import stdout_redirect
 from pyecharts import options as opts
 from pyecharts.charts import Bar
-from pyecharts.globals import ThemeType
+from pyecharts.globals import CurrentConfig, NotebookType, ThemeType
+from pyecharts.render.display import HTML
 
 
 @patch("pyecharts.render.engine.write_utf8_html_file")
@@ -29,9 +33,12 @@ def test_bar_base_dict_config(fake_writer):
         .add_xaxis(["A", "B", "C"])
         .add_yaxis("series0", [1, 2, 4])
         .add_yaxis("series1", [2, 3, 6])
-        .set_global_opts(title_opts={
-            "text": "Bar-dict-setting", "subtext": "subtext also set by dict"
-        })
+        .set_global_opts(
+            title_opts={
+                "text": "Bar-dict-setting",
+                "subtext": "subtext also set by dict",
+            }
+        )
     )
     c.render()
     _, content = fake_writer.call_args[0]
@@ -157,3 +164,35 @@ def test_bar_graphic(fake_writer):
     file_name, content = fake_writer.call_args[0]
     eq_("render.html", file_name)
     assert_in("graphic", content)
+
+
+def test_bar_render_nteract():
+    CurrentConfig.NOTEBOOK_TYPE = NotebookType.NTERACT
+    c = (
+        Bar()
+        .add_xaxis(["A", "B", "C"])
+        .add_yaxis("series0", [1, 2, 4])
+        .add_yaxis("series1", [2, 3, 6])
+    )
+    nteract_code = c.render_notebook()
+    eq_(isinstance(nteract_code, HTML), True)
+
+
+def test_bar_render_zeppelin():
+    CurrentConfig.NOTEBOOK_TYPE = NotebookType.ZEPPELIN
+    c = (
+        Bar()
+        .add_xaxis(["A", "B", "C"])
+        .add_yaxis("series0", [1, 2, 4])
+        .add_yaxis("series1", [2, 3, 6])
+    )
+    # Block Console stdout
+    stdout_redirect.fp = StringIO()
+    temp_stdout, sys.stdout = sys.stdout, stdout_redirect
+
+    # render
+    c.render_notebook()
+    sys.stdout = temp_stdout
+
+    # Block Result
+    assert_in("%html", stdout_redirect.fp.getvalue())
