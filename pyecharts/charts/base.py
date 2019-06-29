@@ -1,5 +1,5 @@
 import datetime
-import json
+import simplejson as json
 import os
 import uuid
 
@@ -50,7 +50,7 @@ class Base:
 
     def dump_options(self) -> str:
         return utils.replace_placeholder(
-            json.dumps(self.get_options(), indent=4, default=default)
+            json.dumps(self.get_options(), indent=4, default=default, ignore_nan=True)
         )
 
     def render(
