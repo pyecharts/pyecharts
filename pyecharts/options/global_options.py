@@ -212,7 +212,7 @@ class VisualMapOpts(BasicOpts):
         out_of_range: Optional[Sequence] = None,
         textstyle_opts: Union[TextStyleOpts, dict, None] = None,
     ):
-        _inrange_op = {}
+        _inrange_op: dict = {}
         if type_ == "color":
             range_color = range_color or ["#50a3ba", "#eac763", "#d94e5d"]
             _inrange_op.update(color=range_color)
@@ -630,6 +630,7 @@ class AngleAxisOpts(BasicOpts):
         max_: Union[str, Numeric, None] = None,
         splitline_opts: Union[SplitLineOpts, dict, None] = None,
         axisline_opts: Union[AxisLineOpts, dict, None] = None,
+        axistick_opts: Union[AxisTickOpts, dict, None] = None,
         axislabel_opts: Union[LabelOpts, dict, None] = None,
         z: Optional[int] = None,
     ):
@@ -651,6 +652,7 @@ class AngleAxisOpts(BasicOpts):
             "max": max_,
             "splitLine": splitline_opts,
             "axisLine": axisline_opts,
+            "axisTick": axistick_opts,
             "axisLabel": axislabel_opts,
             "z": z,
         }
