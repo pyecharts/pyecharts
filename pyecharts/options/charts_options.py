@@ -1,4 +1,4 @@
-import json
+import simplejson as json
 
 from ..globals import BMapType
 from .global_options import TooltipOpts
