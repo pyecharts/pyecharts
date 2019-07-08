@@ -38,6 +38,7 @@ class Base:
         self.js_functions: utils.OrderedSet = utils.OrderedSet()
         self.js_dependencies: utils.OrderedSet = utils.OrderedSet("echarts")
         self.options.update(backgroundColor=_opts.get("bg_color"))
+        self.options.update(_opts.get("animationOpts").opts)
         self._is_geo_chart: bool = False
 
     def add_js_funcs(self, *fns):

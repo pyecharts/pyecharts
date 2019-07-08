@@ -14,6 +14,30 @@ from ..options.series_options import (
 )
 
 
+class AnimationOpts(BasicOpts):
+    def __init__(
+        self,
+        animation: bool = True,
+        animation_threshold: Numeric = 2000,
+        animation_duration: Union[Numeric, JSFunc] = 1000,
+        animation_easing: Union[str] = "cubicOut",
+        animation_delay: Union[Numeric, JSFunc] = 0,
+        animation_duration_update: Union[Numeric, JSFunc] = 300,
+        animation_easing_update: Union[Numeric] = "cubicOut",
+        animation_delay_update: Union[Numeric, JSFunc] = 0,
+    ):
+        self.opts: dict = {
+            "animation": animation,
+            "animationThreshold": animation_threshold,
+            "animationDuration": animation_duration,
+            "animationEasing": animation_easing,
+            "animationDelay": animation_delay,
+            "animationDurationUpdate": animation_duration_update,
+            "animationEasingUpdate": animation_easing_update,
+            "animationDelayUpdate": animation_delay_update,
+        }
+
+
 class InitOpts(BasicOpts):
     def __init__(
         self,
@@ -23,8 +47,9 @@ class InitOpts(BasicOpts):
         renderer: str = RenderType.CANVAS,
         page_title: str = CurrentConfig.PAGE_TITLE,
         theme: str = ThemeType.WHITE,
-        bg_color: Optional[str] = None,
+        bg_color: Optional[str, dict] = None,
         js_host: str = "",
+        animation_opts: Union[AnimationOpts, dict] = AnimationOpts()
     ):
         self.opts: dict = {
             "width": width,
@@ -35,6 +60,7 @@ class InitOpts(BasicOpts):
             "theme": theme,
             "bg_color": bg_color,
             "js_host": js_host,
+            "animationOpts": animation_opts
         }
 
 

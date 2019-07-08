@@ -8,6 +8,7 @@ from nose.tools import assert_in, assert_not_in, eq_
 from test import stdout_redirect
 from pyecharts import options as opts
 from pyecharts.charts import Bar
+from pyecharts.commons.utils import JsCode
 from pyecharts.globals import CurrentConfig, NotebookType, ThemeType
 from pyecharts.render.display import HTML
 
@@ -24,6 +25,57 @@ def test_bar_base(fake_writer):
     _, content = fake_writer.call_args[0]
     eq_(c.theme, "white")
     eq_(c.renderer, "canvas")
+
+
+@patch("pyecharts.render.engine.write_utf8_html_file")
+def test_bar_base_with_animation(fake_writer):
+    c = (
+        Bar(
+            init_opts=opts.InitOpts(
+                animation_opts=opts.AnimationOpts(animation_delay=1000)
+            )
+        )
+        .add_xaxis(["A", "B", "C"])
+        .add_yaxis("series0", [1, 2, 4])
+        .add_yaxis("series1", [2, 3, 6])
+    )
+    c.render()
+    _, content = fake_writer.call_args[0]
+    assert_in("animationDelay", content)
+
+
+@patch("pyecharts.render.engine.write_utf8_html_file")
+def test_bar_base_with_custom_background_image(fake_writer):
+    c = (
+        Bar(
+            init_opts=opts.InitOpts(
+                bg_color={
+                    "type": "pattern",
+                    "image": JsCode("img"),
+                    "repeat": "no-repeat",
+                }
+            )
+        )
+        .add_xaxis(["A", "B", "C"])
+        .add_yaxis("series0", [1, 2, 4])
+        .add_yaxis("series1", [2, 3, 6])
+        .set_global_opts(
+            title_opts=opts.TitleOpts(
+                title="Bar-背景图基本示例",
+                subtitle="我是副标题",
+                title_textstyle_opts=opts.TextStyleOpts(color="white"),
+            )
+        )
+    )
+    c.add_js_funcs(
+        """
+        var img = new Image(); 
+        img.src = 'https://s2.ax1x.com/2019/07/08/ZsS0fK.jpg';
+        """
+    )
+    c.render()
+    _, content = fake_writer.call_args[0]
+    assert_in("image", content)
 
 
 @patch("pyecharts.render.engine.write_utf8_html_file")
