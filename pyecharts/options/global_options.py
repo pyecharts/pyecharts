@@ -47,7 +47,7 @@ class InitOpts(BasicOpts):
         renderer: str = RenderType.CANVAS,
         page_title: str = CurrentConfig.PAGE_TITLE,
         theme: str = ThemeType.WHITE,
-        bg_color: Optional[str, dict] = None,
+        bg_color: Union[str, dict] = None,
         js_host: str = "",
         animation_opts: Union[AnimationOpts, dict] = AnimationOpts()
     ):

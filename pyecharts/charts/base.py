@@ -10,6 +10,7 @@ from ..datasets import FILENAMES
 from ..globals import CurrentConfig, NotebookType, RenderType, ThemeType
 from ..options import InitOpts
 from ..options.series_options import BasicOpts
+from ..options.global_options import AnimationOpts
 from ..render.display import HTML, Javascript
 from ..render.engine import RenderEngine
 from ..types import Optional, Sequence, Union
@@ -38,7 +39,7 @@ class Base:
         self.js_functions: utils.OrderedSet = utils.OrderedSet()
         self.js_dependencies: utils.OrderedSet = utils.OrderedSet("echarts")
         self.options.update(backgroundColor=_opts.get("bg_color"))
-        self.options.update(_opts.get("animationOpts").opts)
+        self.options.update(_opts.get("animationOpts", AnimationOpts()).opts)
         self._is_geo_chart: bool = False
 
     def add_js_funcs(self, *fns):

@@ -69,8 +69,7 @@ def test_bar_base_with_custom_background_image(fake_writer):
     )
     c.add_js_funcs(
         """
-        var img = new Image(); 
-        img.src = 'https://s2.ax1x.com/2019/07/08/ZsS0fK.jpg';
+        var img = new Image(); img.src = 'https://s2.ax1x.com/2019/07/08/ZsS0fK.jpg';
         """
     )
     c.render()
