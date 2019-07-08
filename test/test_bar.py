@@ -247,3 +247,20 @@ def test_bar_render_zeppelin():
 
     # Block Result
     assert_in("%html", stdout_redirect.fp.getvalue())
+
+
+@patch("pyecharts.render.engine.write_utf8_html_file")
+def test_bar_with_brush(fake_writer):
+    c = (
+        Bar()
+        .add_xaxis(["A", "B", "C"])
+        .add_yaxis("series0", [1, 2, 4])
+        .add_yaxis("series1", [2, 3, 6])
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="Bar-Brush示例", subtitle="我是副标题"),
+            brush_opts=opts.BrushOpts()
+        )
+    )
+    c.render()
+    _, content = fake_writer.call_args[0]
+    assert_in("brush", content)

@@ -464,4 +464,19 @@ def bar_graphic_component() -> Bar:
     return c
 
 
+@C.funcs
+def bar_with_brush() -> Bar:
+    c = (
+        Bar()
+        .add_xaxis(Faker.choose())
+        .add_yaxis("商家A", Faker.values())
+        .add_yaxis("商家B", Faker.values())
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="Bar-Brush示例", subtitle="我是副标题"),
+            brush_opts=opts.BrushOpts()
+        )
+    )
+    return c
+
+
 Page().add(*[fn() for fn, _ in C.charts]).render()

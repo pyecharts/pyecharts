@@ -118,6 +118,50 @@ class ToolboxOpts(BasicOpts):
         }
 
 
+class BrushOpts(BasicOpts):
+    def __init__(
+        self,
+        tool_box: Optional[Sequence] = None,
+        brush_link: Union[Sequence, str] = None,
+        series_index: Union[Sequence, Numeric, str] = None,
+        geo_index: Union[Sequence, Numeric, str] = None,
+        x_axis_index: Union[Sequence, Numeric, str] = None,
+        y_axis_index: Union[Sequence, Numeric, str] = None,
+        brush_type: str = "rect",
+        brush_mode: str = "single",
+        transformable: bool = True,
+        brush_style: Optional[dict] = None,
+        throttle_type: str = "fixRate",
+        throttle_delay: Numeric = 0,
+        remove_on_click: bool = True
+    ):
+        if tool_box is None:
+            tool_box = ["rect", "polygon", "keep", "clear"]
+
+        if brush_style is None:
+            brush_style = {
+                "borderWidth": 1,
+                "color": 'rgba(120,140,180,0.3)',
+                "borderColor": 'rgba(120,140,180,0.8)'
+            }
+
+        self.opts: dict = {
+            "toolbox": tool_box,
+            "brushLink": brush_link,
+            "seriesIndex": series_index,
+            "geoIndex": geo_index,
+            "xAxisIndex": x_axis_index,
+            "yAxisIndex": y_axis_index,
+            "brushType": brush_type,
+            "brushMode": brush_mode,
+            "transformable": transformable,
+            "brushStyle": brush_style,
+            "throttleType": throttle_type,
+            "throttleDelay": throttle_delay,
+            "removeOnClick": remove_on_click,
+        }
+
+
 class TitleOpts(BasicOpts):
     def __init__(
         self,

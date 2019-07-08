@@ -34,6 +34,7 @@ from .global_options import (
     AxisOpts,
     AxisPointerOpts,
     AxisTickOpts,
+    BrushOpts,
     CalendarOpts,
     DataZoomOpts,
     Grid3DOpts,
