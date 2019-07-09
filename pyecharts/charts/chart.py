@@ -105,6 +105,7 @@ class Chart(Base):
         legend_opts: types.Legend = opts.LegendOpts(),
         tooltip_opts: types.Tooltip = None,
         toolbox_opts: types.Toolbox = None,
+        brush_opts: types.Brush = None,
         xaxis_opts: types.Axis = None,
         yaxis_opts: types.Axis = None,
         visualmap_opts: Union[VisualMapType, Sequence[VisualMapType], None] = None,
@@ -123,6 +124,9 @@ class Chart(Base):
             dataZoom=datazoom_opts,
             graphic=graphic_opts,
         )
+
+        if brush_opts is not None:
+            self.options.update(brush=brush_opts)
 
         if isinstance(legend_opts, opts.LegendOpts):
             legend_opts = legend_opts.opts

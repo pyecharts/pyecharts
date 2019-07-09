@@ -14,6 +14,30 @@ from ..options.series_options import (
 )
 
 
+class AnimationOpts(BasicOpts):
+    def __init__(
+        self,
+        animation: bool = True,
+        animation_threshold: Numeric = 2000,
+        animation_duration: Union[Numeric, JSFunc] = 1000,
+        animation_easing: Union[str] = "cubicOut",
+        animation_delay: Union[Numeric, JSFunc] = 0,
+        animation_duration_update: Union[Numeric, JSFunc] = 300,
+        animation_easing_update: Union[Numeric] = "cubicOut",
+        animation_delay_update: Union[Numeric, JSFunc] = 0,
+    ):
+        self.opts: dict = {
+            "animation": animation,
+            "animationThreshold": animation_threshold,
+            "animationDuration": animation_duration,
+            "animationEasing": animation_easing,
+            "animationDelay": animation_delay,
+            "animationDurationUpdate": animation_duration_update,
+            "animationEasingUpdate": animation_easing_update,
+            "animationDelayUpdate": animation_delay_update,
+        }
+
+
 class InitOpts(BasicOpts):
     def __init__(
         self,
@@ -23,8 +47,9 @@ class InitOpts(BasicOpts):
         renderer: str = RenderType.CANVAS,
         page_title: str = CurrentConfig.PAGE_TITLE,
         theme: str = ThemeType.WHITE,
-        bg_color: Optional[str] = None,
+        bg_color: Union[str, dict] = None,
         js_host: str = "",
+        animation_opts: Union[AnimationOpts, dict] = AnimationOpts(),
     ):
         self.opts: dict = {
             "width": width,
@@ -35,6 +60,7 @@ class InitOpts(BasicOpts):
             "theme": theme,
             "bg_color": bg_color,
             "js_host": js_host,
+            "animationOpts": animation_opts,
         }
 
 
@@ -89,6 +115,50 @@ class ToolboxOpts(BasicOpts):
             "top": pos_top,
             "bottom": pos_bottom,
             "feature": feature,
+        }
+
+
+class BrushOpts(BasicOpts):
+    def __init__(
+        self,
+        tool_box: Optional[Sequence] = None,
+        brush_link: Union[Sequence, str] = None,
+        series_index: Union[Sequence, Numeric, str] = None,
+        geo_index: Union[Sequence, Numeric, str] = None,
+        x_axis_index: Union[Sequence, Numeric, str] = None,
+        y_axis_index: Union[Sequence, Numeric, str] = None,
+        brush_type: str = "rect",
+        brush_mode: str = "single",
+        transformable: bool = True,
+        brush_style: Optional[dict] = None,
+        throttle_type: str = "fixRate",
+        throttle_delay: Numeric = 0,
+        remove_on_click: bool = True,
+    ):
+        if tool_box is None:
+            tool_box = ["rect", "polygon", "keep", "clear"]
+
+        if brush_style is None:
+            brush_style = {
+                "borderWidth": 1,
+                "color": "rgba(120,140,180,0.3)",
+                "borderColor": "rgba(120,140,180,0.8)",
+            }
+
+        self.opts: dict = {
+            "toolbox": tool_box,
+            "brushLink": brush_link,
+            "seriesIndex": series_index,
+            "geoIndex": geo_index,
+            "xAxisIndex": x_axis_index,
+            "yAxisIndex": y_axis_index,
+            "brushType": brush_type,
+            "brushMode": brush_mode,
+            "transformable": transformable,
+            "brushStyle": brush_style,
+            "throttleType": throttle_type,
+            "throttleDelay": throttle_delay,
+            "removeOnClick": remove_on_click,
         }
 
 

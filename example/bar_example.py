@@ -20,6 +20,57 @@ def bar_base() -> Bar:
 
 
 @C.funcs
+def bar_base_with_animation() -> Bar:
+    c = (
+        Bar(
+            init_opts=opts.InitOpts(
+                animation_opts=opts.AnimationOpts(
+                    animation_delay=1000, animation_easing="elasticOut"
+                )
+            )
+        )
+        .add_xaxis(Faker.choose())
+        .add_yaxis("商家A", Faker.values())
+        .add_yaxis("商家B", Faker.values())
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="Bar-动画配置基本示例", subtitle="我是副标题")
+        )
+    )
+    return c
+
+
+@C.funcs
+def bar_base_with_custom_background_image() -> Bar:
+    c = (
+        Bar(
+            init_opts=opts.InitOpts(
+                bg_color={
+                    "type": "pattern",
+                    "image": JsCode("img"),
+                    "repeat": "no-repeat",
+                }
+            )
+        )
+        .add_xaxis(Faker.choose())
+        .add_yaxis("商家A", Faker.values())
+        .add_yaxis("商家B", Faker.values())
+        .set_global_opts(
+            title_opts=opts.TitleOpts(
+                title="Bar-背景图基本示例",
+                subtitle="我是副标题",
+                title_textstyle_opts=opts.TextStyleOpts(color="white"),
+            )
+        )
+    )
+    c.add_js_funcs(
+        """
+        var img = new Image(); mg.src = 'https://s2.ax1x.com/2019/07/08/ZsS0fK.jpg';
+        """
+    )
+    return c
+
+
+@C.funcs
 def bar_base_dict_config() -> Bar:
     c = (
         Bar({"theme": ThemeType.MACARONS})
@@ -408,6 +459,21 @@ def bar_graphic_component() -> Bar:
                     ],
                 )
             ],
+        )
+    )
+    return c
+
+
+@C.funcs
+def bar_with_brush() -> Bar:
+    c = (
+        Bar()
+        .add_xaxis(Faker.choose())
+        .add_yaxis("商家A", Faker.values())
+        .add_yaxis("商家B", Faker.values())
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="Bar-Brush示例", subtitle="我是副标题"),
+            brush_opts=opts.BrushOpts(),
         )
     )
     return c
