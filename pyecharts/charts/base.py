@@ -1,16 +1,16 @@
 import datetime
-import simplejson as json
 import os
 import uuid
 
+import simplejson as json
 from jinja2 import Environment
 
 from ..commons import utils
 from ..datasets import FILENAMES
 from ..globals import CurrentConfig, NotebookType, RenderType, ThemeType
 from ..options import InitOpts
-from ..options.series_options import BasicOpts
 from ..options.global_options import AnimationOpts
+from ..options.series_options import BasicOpts
 from ..render.display import HTML, Javascript
 from ..render.engine import RenderEngine
 from ..types import Optional, Sequence, Union

@@ -126,9 +126,7 @@ class Chart(Base):
         )
 
         if brush_opts is not None:
-            self.options.update(
-                brush=brush_opts
-            )
+            self.options.update(brush=brush_opts)
 
         if isinstance(legend_opts, opts.LegendOpts):
             legend_opts = legend_opts.opts

@@ -1,6 +1,6 @@
-import simplejson as json
 from unittest.mock import patch
 
+import simplejson as json
 from nose.tools import eq_
 
 from example.commons import Faker

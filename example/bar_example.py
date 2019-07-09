@@ -473,7 +473,7 @@ def bar_with_brush() -> Bar:
         .add_yaxis("商家B", Faker.values())
         .set_global_opts(
             title_opts=opts.TitleOpts(title="Bar-Brush示例", subtitle="我是副标题"),
-            brush_opts=opts.BrushOpts()
+            brush_opts=opts.BrushOpts(),
         )
     )
     return c

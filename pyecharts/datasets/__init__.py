@@ -1,5 +1,6 @@
 import os
 import urllib.request
+
 import simplejson as json
 
 __HERE = os.path.abspath(os.path.dirname(__file__))

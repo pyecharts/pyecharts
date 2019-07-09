@@ -49,7 +49,7 @@ class InitOpts(BasicOpts):
         theme: str = ThemeType.WHITE,
         bg_color: Union[str, dict] = None,
         js_host: str = "",
-        animation_opts: Union[AnimationOpts, dict] = AnimationOpts()
+        animation_opts: Union[AnimationOpts, dict] = AnimationOpts(),
     ):
         self.opts: dict = {
             "width": width,
@@ -60,7 +60,7 @@ class InitOpts(BasicOpts):
             "theme": theme,
             "bg_color": bg_color,
             "js_host": js_host,
-            "animationOpts": animation_opts
+            "animationOpts": animation_opts,
         }
 
 
@@ -133,7 +133,7 @@ class BrushOpts(BasicOpts):
         brush_style: Optional[dict] = None,
         throttle_type: str = "fixRate",
         throttle_delay: Numeric = 0,
-        remove_on_click: bool = True
+        remove_on_click: bool = True,
     ):
         if tool_box is None:
             tool_box = ["rect", "polygon", "keep", "clear"]
@@ -141,8 +141,8 @@ class BrushOpts(BasicOpts):
         if brush_style is None:
             brush_style = {
                 "borderWidth": 1,
-                "color": 'rgba(120,140,180,0.3)',
-                "borderColor": 'rgba(120,140,180,0.8)'
+                "color": "rgba(120,140,180,0.3)",
+                "borderColor": "rgba(120,140,180,0.8)",
             }
 
         self.opts: dict = {

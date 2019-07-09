@@ -1,11 +1,11 @@
 import re
 import sys
 from io import StringIO
+from test import stdout_redirect
 from unittest.mock import patch
 
 from nose.tools import assert_in, assert_not_in, eq_
 
-from test import stdout_redirect
 from pyecharts import options as opts
 from pyecharts.charts import Bar
 from pyecharts.commons.utils import JsCode
@@ -258,7 +258,7 @@ def test_bar_with_brush(fake_writer):
         .add_yaxis("series1", [2, 3, 6])
         .set_global_opts(
             title_opts=opts.TitleOpts(title="Bar-Brush示例", subtitle="我是副标题"),
-            brush_opts=opts.BrushOpts()
+            brush_opts=opts.BrushOpts(),
         )
     )
     c.render()
