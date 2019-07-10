@@ -242,10 +242,10 @@ class LegendOpts(BasicOpts):
         type_: Optional[str] = None,
         selected_mode: Union[str, bool, None] = None,
         is_show: bool = True,
-        pos_left: Optional[str] = None,
-        pos_right: Optional[str] = None,
-        pos_top: Optional[str] = None,
-        pos_bottom: Optional[str] = None,
+        pos_left: Union[str, Numeric] = None,
+        pos_right: Union[str, Numeric] = None,
+        pos_top: Union[str, Numeric] = None,
+        pos_bottom: Union[str, Numeric] = None,
         orient: Optional[str] = None,
         textstyle_opts: Union[TextStyleOpts, dict, None] = None,
     ):
@@ -465,8 +465,8 @@ class GridOpts(BasicOpts):
         pos_top: Optional[str] = None,
         pos_right: Optional[str] = None,
         pos_bottom: Optional[str] = None,
-        width: Optional[Numeric] = None,
-        height: Optional[Numeric] = None,
+        width: Union[Numeric, str] = None,
+        height: Union[Numeric, str] = None,
     ):
         self.opts: dict = {
             "left": pos_left,
