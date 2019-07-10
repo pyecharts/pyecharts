@@ -134,6 +134,7 @@ class BrushOpts(BasicOpts):
         throttle_type: str = "fixRate",
         throttle_delay: Numeric = 0,
         remove_on_click: bool = True,
+        out_of_brush: dict = None,
     ):
         if tool_box is None:
             tool_box = ["rect", "polygon", "keep", "clear"]
@@ -141,8 +142,8 @@ class BrushOpts(BasicOpts):
         if brush_style is None:
             brush_style = {
                 "borderWidth": 1,
-                "color": "rgba(120,140,180,0.3)",
-                "borderColor": "rgba(120,140,180,0.8)",
+                "color": 'rgba(120,140,180,0.3)',
+                "borderColor": 'rgba(120,140,180,0.8)'
             }
 
         self.opts: dict = {
@@ -159,6 +160,7 @@ class BrushOpts(BasicOpts):
             "throttleType": throttle_type,
             "throttleDelay": throttle_delay,
             "removeOnClick": remove_on_click,
+            "outOfBrush": out_of_brush
         }
 
 
@@ -263,6 +265,7 @@ class LegendOpts(BasicOpts):
 class VisualMapOpts(BasicOpts):
     def __init__(
         self,
+        is_show: bool = True,
         type_: str = "color",
         min_: Numeric = 0,
         max_: Numeric = 100,
@@ -275,6 +278,7 @@ class VisualMapOpts(BasicOpts):
         pos_top: Optional[str] = None,
         pos_bottom: Optional[str] = None,
         split_number: int = 5,
+        series_index: Union[Numeric, Sequence] = None,
         dimension: Optional[Numeric] = None,
         is_calculable: bool = True,
         is_piecewise: bool = False,
@@ -293,6 +297,7 @@ class VisualMapOpts(BasicOpts):
         _visual_typ = "piecewise" if is_piecewise else "continuous"
 
         self.opts: dict = {
+            "show": is_show,
             "type": _visual_typ,
             "min": min_,
             "max": max_,
@@ -302,6 +307,7 @@ class VisualMapOpts(BasicOpts):
             "calculable": is_calculable,
             "splitNumber": split_number,
             "dimension": dimension,
+            "seriesIndex": series_index,
             "orient": orient,
             "left": pos_left,
             "top": pos_top,
@@ -380,6 +386,7 @@ class AxisPointerOpts(BasicOpts):
     def __init__(
         self,
         is_show: bool = False,
+        link: Sequence[dict] = None,
         type_: str = "line",
         label: Union[LabelOpts, dict, None] = None,
         linestyle_opts: Union[LineStyleOpts, dict, None] = None,
@@ -387,6 +394,7 @@ class AxisPointerOpts(BasicOpts):
         self.opts: dict = {
             "show": is_show,
             "type": type_,
+            "link": link,
             "label": label,
             "lineStyle": linestyle_opts,
         }

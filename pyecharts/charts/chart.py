@@ -111,6 +111,7 @@ class Chart(Base):
         visualmap_opts: Union[VisualMapType, Sequence[VisualMapType], None] = None,
         datazoom_opts: Union[DataZoomType, Sequence[DataZoomType], None] = None,
         graphic_opts: Union[GraphicType, Sequence[GraphicType], None] = None,
+        axispointer_opts: Union[opts.AxisPointerOpts, dict, None] = None,
     ):
         if tooltip_opts is None:
             tooltip_opts = opts.TooltipOpts(
@@ -123,6 +124,7 @@ class Chart(Base):
             visualMap=visualmap_opts,
             dataZoom=datazoom_opts,
             graphic=graphic_opts,
+            axisPointer=axispointer_opts,
         )
 
         if brush_opts is not None:
