@@ -142,8 +142,8 @@ class BrushOpts(BasicOpts):
         if brush_style is None:
             brush_style = {
                 "borderWidth": 1,
-                "color": 'rgba(120,140,180,0.3)',
-                "borderColor": 'rgba(120,140,180,0.8)'
+                "color": "rgba(120,140,180,0.3)",
+                "borderColor": "rgba(120,140,180,0.8)"
             }
 
         self.opts: dict = {
