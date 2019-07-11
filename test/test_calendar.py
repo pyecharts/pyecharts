@@ -1,5 +1,6 @@
 import datetime
 import random
+from unittest.mock import patch
 
 from nose.tools import eq_
 
@@ -7,7 +8,8 @@ from pyecharts import options as opts
 from pyecharts.charts import Calendar
 
 
-def test_calendar_base():
+@patch("pyecharts.render.engine.write_utf8_html_file")
+def test_calendar_base(fake_writer):
     begin = datetime.date(2017, 1, 1)
     end = datetime.date(2017, 12, 31)
     data = [
@@ -29,6 +31,7 @@ def test_calendar_base():
             )
         )
     )
+    c.render()
+    _, content = fake_writer.call_args[0]
     eq_(c.theme, "white")
     eq_(c.renderer, "canvas")
-    c.render()

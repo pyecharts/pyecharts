@@ -2,6 +2,7 @@ from ... import options as opts
 from ... import types
 from ...charts.chart import Chart
 from ...globals import ChartType
+from ...options.series_options import Numeric
 
 
 class Liquid(Chart):
@@ -24,6 +25,7 @@ class Liquid(Chart):
         color: types.Optional[types.Sequence[str]] = None,
         is_animation: bool = True,
         is_outline_show: bool = True,
+        center: types.Sequence = None,
         tooltip_opts: types.Tooltip = None,
         label_opts: types.Label = opts.LabelOpts(font_size=50, position="inside"),
     ):
@@ -46,6 +48,7 @@ class Liquid(Chart):
                 "outline": {"show": is_outline_show},
                 "tooltip": tooltip_opts,
                 "label": label_opts,
+                "center": center
             }
         )
         return self
