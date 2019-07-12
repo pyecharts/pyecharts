@@ -1,10 +1,13 @@
+from unittest.mock import patch
+
 from nose.tools import eq_
 
 from pyecharts import options as opts
 from pyecharts.charts import Sankey
 
 
-def test_sankey_base():
+@patch("pyecharts.render.engine.write_utf8_html_file")
+def test_sankey_base(fake_writer):
     nodes = [{"name": "category1"}, {"name": "category2"}, {"name": "category3"}]
 
     links = [
@@ -18,6 +21,7 @@ def test_sankey_base():
         linestyle_opt=opts.LineStyleOpts(opacity=0.2, curve=0.5, color="source"),
         label_opts=opts.LabelOpts(position="right"),
     )
+    c.render()
+    _, content = fake_writer.call_args[0]
     eq_(c.theme, "white")
     eq_(c.renderer, "canvas")
-    c.render()

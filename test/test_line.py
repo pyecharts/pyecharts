@@ -39,3 +39,16 @@ def test_set_global_opts(fake_writer):
     assert_in('"inverse": true', content)
     assert_in("test_type", content)
     assert_in("-10001", content)
+
+
+@patch("pyecharts.render.engine.write_utf8_html_file")
+def test_data_label_none_animation_opts(fake_writer):
+    c = (
+        Line()
+        .add_xaxis(["A", "B", "C"])
+        .add_yaxis("series0", [1, 2, 4], is_hover_animation=False)
+        .add_yaxis("series1", [2, 3, 6], is_hover_animation=False)
+    )
+    c.render()
+    _, content = fake_writer.call_args[0]
+    assert_in("hoverAnimation", content)
