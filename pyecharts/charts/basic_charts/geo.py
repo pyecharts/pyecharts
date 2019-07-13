@@ -1,4 +1,4 @@
-import json
+import simplejson as json
 
 from ... import options as opts
 from ... import types

@@ -28,11 +28,13 @@ from .charts_options import (
 from .global_options import (
     AngleAxisItem,
     AngleAxisOpts,
+    AnimationOpts,
     Axis3DOpts,
     AxisLineOpts,
     AxisOpts,
     AxisPointerOpts,
     AxisTickOpts,
+    BrushOpts,
     CalendarOpts,
     DataZoomOpts,
     Grid3DOpts,

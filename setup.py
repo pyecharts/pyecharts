@@ -14,7 +14,7 @@ __url__ = "https://github.com/pyecharts/pyecharts"
 __author_email__ = "chenjiandongx@qq.com"
 __license__ = "MIT"
 
-__requires__ = ["jinja2", "prettytable"]
+__requires__ = ["jinja2", "prettytable", "simplejson"]
 __extra_requires__ = {
     "selenium": ["snapshot-selenium"],
     "phantomjs": ["snapshot-phantomjs"],

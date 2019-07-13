@@ -1,6 +1,6 @@
 from unittest.mock import patch
 
-from nose.tools import eq_
+from nose.tools import eq_, assert_in
 
 from pyecharts import options as opts
 from pyecharts.charts import Kline
@@ -34,3 +34,24 @@ def test_kline_base(fake_writer):
     _, content = fake_writer.call_args[0]
     eq_(c.theme, "white")
     eq_(c.renderer, "canvas")
+
+
+@patch("pyecharts.render.engine.write_utf8_html_file")
+def test_kline_axispointer_opts(fake_writer):
+    c = (
+        Kline()
+        .add_xaxis(["2017/7/{}".format(i + 1) for i in range(10)])
+        .add_yaxis("kline", data)
+        .set_global_opts(
+            yaxis_opts=opts.AxisOpts(is_scale=True),
+            xaxis_opts=opts.AxisOpts(is_scale=True),
+            axispointer_opts=opts.AxisPointerOpts(
+                is_show=True,
+                link=[{"xAxisIndex": "all"}],
+                label=opts.LabelOpts(background_color="#777"),
+            ),
+        )
+    )
+    c.render()
+    _, content = fake_writer.call_args[0]
+    assert_in("axisPointer", content)
