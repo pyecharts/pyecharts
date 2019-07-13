@@ -1,6 +1,6 @@
 from ... import options as opts
+from ... import types
 from ...charts.chart import Chart
-from ...commons.types import Sequence, Union
 
 
 class Calendar(Chart):
@@ -12,20 +12,20 @@ class Calendar(Chart):
     Two categories of axes must be used in rectangular coordinates.
     """
 
-    def __init__(self, init_opts: opts.InitOpts = opts.InitOpts()):
+    def __init__(self, init_opts: types.Init = opts.InitOpts()):
         super().__init__(init_opts=init_opts)
         self.options.update(calendar=opts.CalendarOpts().opts)
 
     def add(
         self,
         series_name: str,
-        yaxis_data: Sequence,
+        yaxis_data: types.Sequence,
         *,
         is_selected: bool = True,
-        label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
-        calendar_opts: Union[opts.CalendarOpts, dict, None] = None,
-        tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
-        itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
+        label_opts: types.Label = opts.LabelOpts(),
+        calendar_opts: types.Calendar = None,
+        tooltip_opts: types.Tooltip = None,
+        itemstyle_opts: types.ItemStyle = None,
     ):
         if calendar_opts:
             self.options.update(calendar=calendar_opts)

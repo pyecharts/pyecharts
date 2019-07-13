@@ -1,6 +1,6 @@
 from ... import options as opts
+from ... import types
 from ...charts.chart import Base
-from ...commons.types import Numeric, Optional, Sequence, Union
 
 
 class Timeline(Base):
@@ -8,33 +8,33 @@ class Timeline(Base):
     `Timeline` provides functions like switching and playing between multiple charts.
     """
 
-    def __init__(self, init_opts: opts.InitOpts = opts.InitOpts()):
+    def __init__(self, init_opts: types.Init = opts.InitOpts()):
         super().__init__(init_opts=init_opts)
         self.options = {"baseOption": {"series": [], "timeline": {}}, "options": []}
         self.add_schema()
-        self._time_points: Sequence = []
+        self._time_points: types.Sequence = []
 
     def add_schema(
         self,
         axis_type: str = "category",
         orient: str = "horizontal",
-        symbol: Optional[str] = None,
-        symbol_size: Optional[Numeric] = None,
-        play_interval: Optional[Numeric] = None,
+        symbol: types.Optional[str] = None,
+        symbol_size: types.Optional[types.Numeric] = None,
+        play_interval: types.Optional[types.Numeric] = None,
         is_auto_play: bool = False,
         is_loop_play: bool = True,
         is_rewind_play: bool = False,
         is_timeline_show: bool = True,
         is_inverse: bool = False,
-        pos_left: Optional[str] = None,
-        pos_right: Optional[str] = None,
-        pos_top: Optional[str] = None,
-        pos_bottom: Optional[str] = "-5px",
-        width: Optional[str] = None,
-        height: Optional[str] = None,
-        linestyle_opts: Union[opts.LineStyleOpts, dict, None] = None,
-        label_opts: Optional[opts.LabelOpts] = None,
-        itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
+        pos_left: types.Optional[str] = None,
+        pos_right: types.Optional[str] = None,
+        pos_top: types.Optional[str] = None,
+        pos_bottom: types.Optional[str] = "-5px",
+        width: types.Optional[str] = None,
+        height: types.Optional[str] = None,
+        linestyle_opts: types.Union[opts.LineStyleOpts, dict, None] = None,
+        label_opts: types.Optional[opts.LabelOpts] = None,
+        itemstyle_opts: types.ItemStyle = None,
     ):
         self.options.get("baseOption").get("timeline").update(
             {

@@ -1,3 +1,5 @@
+from unittest.mock import patch
+
 from nose.tools import eq_
 
 from pyecharts.charts import WordCloud
@@ -14,8 +16,10 @@ words = [
 ]
 
 
-def test_wordcloud_base():
+@patch("pyecharts.render.engine.write_utf8_html_file")
+def test_wordcloud_base(fake_writer):
     c = WordCloud().add("", words, word_size_range=[20, 100])
+    c.render()
+    _, content = fake_writer.call_args[0]
     eq_(c.theme, "white")
     eq_(c.renderer, "canvas")
-    c.render()

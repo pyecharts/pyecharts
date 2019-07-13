@@ -1,6 +1,6 @@
 from ... import options as opts
+from ... import types
 from ...charts.chart import RectChart
-from ...commons.types import Numeric, Optional, Sequence, Union
 from ...globals import ChartType
 
 
@@ -12,32 +12,30 @@ class Line(RectChart):
     with single line to show the change trend of data.
     """
 
-    def __init__(self, init_opts: opts.InitOpts = opts.InitOpts()):
-        super().__init__(init_opts=init_opts)
-
     def add_yaxis(
         self,
         series_name: str,
-        y_axis: Sequence,
+        y_axis: types.Sequence,
         *,
         is_selected: bool = True,
         is_connect_nones: bool = False,
-        xaxis_index: Optional[Numeric] = None,
-        yaxis_index: Optional[Numeric] = None,
-        color: Optional[str] = None,
+        xaxis_index: types.Optional[types.Numeric] = None,
+        yaxis_index: types.Optional[types.Numeric] = None,
+        color: types.Optional[str] = None,
         is_symbol_show: bool = True,
-        symbol: Optional[str] = None,
-        symbol_size: Union[Numeric, Sequence] = 4,
-        stack: Optional[str] = None,
+        symbol: types.Optional[str] = None,
+        symbol_size: types.Union[types.Numeric, types.Sequence] = 4,
+        stack: types.Optional[str] = None,
         is_smooth: bool = False,
         is_step: bool = False,
-        markpoint_opts: Union[opts.MarkPointOpts, dict, None] = None,
-        markline_opts: Union[opts.MarkLineOpts, dict, None] = None,
-        tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
-        itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
-        label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
-        linestyle_opts: Union[opts.LineStyleOpts, dict] = opts.LineStyleOpts(),
-        areastyle_opts: Union[opts.AreaStyleOpts, dict] = opts.AreaStyleOpts(),
+        is_hover_animation: bool = True,
+        markpoint_opts: types.MarkPoint = None,
+        markline_opts: types.MarkLine = None,
+        tooltip_opts: types.Tooltip = None,
+        itemstyle_opts: types.ItemStyle = None,
+        label_opts: types.Label = opts.LabelOpts(),
+        linestyle_opts: types.LineStyle = opts.LineStyleOpts(),
+        areastyle_opts: types.AreaStyle = opts.AreaStyleOpts(),
     ):
         self._append_color(color)
         self._append_legend(series_name, is_selected)
@@ -59,6 +57,7 @@ class Line(RectChart):
                 "step": is_step,
                 "stack": stack,
                 "data": data,
+                "hoverAnimation": is_hover_animation,
                 "label": label_opts,
                 "lineStyle": linestyle_opts,
                 "areaStyle": areastyle_opts,

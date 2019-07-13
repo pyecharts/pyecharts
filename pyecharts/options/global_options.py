@@ -1,16 +1,44 @@
-from ..commons.types import JSFunc, Numeric, Optional, Sequence, Union
 from ..globals import CurrentConfig, RenderType, ThemeType
 from ..options.series_options import (
     BasicOpts,
+    JSFunc,
     LabelOpts,
     LineStyleOpts,
+    Numeric,
+    Optional,
+    Sequence,
     SplitAreaOpts,
     SplitLineOpts,
     TextStyleOpts,
+    Union,
 )
 
 
-class InitOpts:
+class AnimationOpts(BasicOpts):
+    def __init__(
+        self,
+        animation: bool = True,
+        animation_threshold: Numeric = 2000,
+        animation_duration: Union[Numeric, JSFunc] = 1000,
+        animation_easing: Union[str] = "cubicOut",
+        animation_delay: Union[Numeric, JSFunc] = 0,
+        animation_duration_update: Union[Numeric, JSFunc] = 300,
+        animation_easing_update: Union[Numeric] = "cubicOut",
+        animation_delay_update: Union[Numeric, JSFunc] = 0,
+    ):
+        self.opts: dict = {
+            "animation": animation,
+            "animationThreshold": animation_threshold,
+            "animationDuration": animation_duration,
+            "animationEasing": animation_easing,
+            "animationDelay": animation_delay,
+            "animationDurationUpdate": animation_duration_update,
+            "animationEasingUpdate": animation_easing_update,
+            "animationDelayUpdate": animation_delay_update,
+        }
+
+
+class InitOpts(BasicOpts):
     def __init__(
         self,
         width: str = "900px",
@@ -19,17 +47,21 @@ class InitOpts:
         renderer: str = RenderType.CANVAS,
         page_title: str = CurrentConfig.PAGE_TITLE,
         theme: str = ThemeType.WHITE,
-        bg_color: Optional[str] = None,
+        bg_color: Union[str, dict] = None,
         js_host: str = "",
+        animation_opts: Union[AnimationOpts, dict] = AnimationOpts(),
     ):
-        self.width = width
-        self.height = height
-        self.chart_id = chart_id
-        self.renderer = renderer
-        self.page_title = page_title
-        self.theme = theme
-        self.bg_color = bg_color
-        self.js_host = js_host
+        self.opts: dict = {
+            "width": width,
+            "height": height,
+            "chart_id": chart_id,
+            "renderer": renderer,
+            "page_title": page_title,
+            "theme": theme,
+            "bg_color": bg_color,
+            "js_host": js_host,
+            "animationOpts": animation_opts,
+        }
 
 
 class ToolBoxFeatureOpts(BasicOpts):
@@ -83,6 +115,52 @@ class ToolboxOpts(BasicOpts):
             "top": pos_top,
             "bottom": pos_bottom,
             "feature": feature,
+        }
+
+
+class BrushOpts(BasicOpts):
+    def __init__(
+        self,
+        tool_box: Optional[Sequence] = None,
+        brush_link: Union[Sequence, str] = None,
+        series_index: Union[Sequence, Numeric, str] = None,
+        geo_index: Union[Sequence, Numeric, str] = None,
+        x_axis_index: Union[Sequence, Numeric, str] = None,
+        y_axis_index: Union[Sequence, Numeric, str] = None,
+        brush_type: str = "rect",
+        brush_mode: str = "single",
+        transformable: bool = True,
+        brush_style: Optional[dict] = None,
+        throttle_type: str = "fixRate",
+        throttle_delay: Numeric = 0,
+        remove_on_click: bool = True,
+        out_of_brush: dict = None,
+    ):
+        if tool_box is None:
+            tool_box = ["rect", "polygon", "keep", "clear"]
+
+        if brush_style is None:
+            brush_style = {
+                "borderWidth": 1,
+                "color": "rgba(120,140,180,0.3)",
+                "borderColor": "rgba(120,140,180,0.8)",
+            }
+
+        self.opts: dict = {
+            "toolbox": tool_box,
+            "brushLink": brush_link,
+            "seriesIndex": series_index,
+            "geoIndex": geo_index,
+            "xAxisIndex": x_axis_index,
+            "yAxisIndex": y_axis_index,
+            "brushType": brush_type,
+            "brushMode": brush_mode,
+            "transformable": transformable,
+            "brushStyle": brush_style,
+            "throttleType": throttle_type,
+            "throttleDelay": throttle_delay,
+            "removeOnClick": remove_on_click,
+            "outOfBrush": out_of_brush
         }
 
 
@@ -164,10 +242,10 @@ class LegendOpts(BasicOpts):
         type_: Optional[str] = None,
         selected_mode: Union[str, bool, None] = None,
         is_show: bool = True,
-        pos_left: Optional[str] = None,
-        pos_right: Optional[str] = None,
-        pos_top: Optional[str] = None,
-        pos_bottom: Optional[str] = None,
+        pos_left: Union[str, Numeric, None] = None,
+        pos_right: Union[str, Numeric, None] = None,
+        pos_top: Union[str, Numeric, None] = None,
+        pos_bottom: Union[str, Numeric, None] = None,
         orient: Optional[str] = None,
         textstyle_opts: Union[TextStyleOpts, dict, None] = None,
     ):
@@ -187,6 +265,7 @@ class LegendOpts(BasicOpts):
 class VisualMapOpts(BasicOpts):
     def __init__(
         self,
+        is_show: bool = True,
         type_: str = "color",
         min_: Numeric = 0,
         max_: Numeric = 100,
@@ -199,6 +278,7 @@ class VisualMapOpts(BasicOpts):
         pos_top: Optional[str] = None,
         pos_bottom: Optional[str] = None,
         split_number: int = 5,
+        series_index: Union[Numeric, Sequence, None] = None,
         dimension: Optional[Numeric] = None,
         is_calculable: bool = True,
         is_piecewise: bool = False,
@@ -206,7 +286,7 @@ class VisualMapOpts(BasicOpts):
         out_of_range: Optional[Sequence] = None,
         textstyle_opts: Union[TextStyleOpts, dict, None] = None,
     ):
-        _inrange_op = {}
+        _inrange_op: dict = {}
         if type_ == "color":
             range_color = range_color or ["#50a3ba", "#eac763", "#d94e5d"]
             _inrange_op.update(color=range_color)
@@ -217,6 +297,7 @@ class VisualMapOpts(BasicOpts):
         _visual_typ = "piecewise" if is_piecewise else "continuous"
 
         self.opts: dict = {
+            "show": is_show,
             "type": _visual_typ,
             "min": min_,
             "max": max_,
@@ -226,6 +307,7 @@ class VisualMapOpts(BasicOpts):
             "calculable": is_calculable,
             "splitNumber": split_number,
             "dimension": dimension,
+            "seriesIndex": series_index,
             "orient": orient,
             "left": pos_left,
             "top": pos_top,
@@ -304,6 +386,7 @@ class AxisPointerOpts(BasicOpts):
     def __init__(
         self,
         is_show: bool = False,
+        link: Sequence[dict] = None,
         type_: str = "line",
         label: Union[LabelOpts, dict, None] = None,
         linestyle_opts: Union[LineStyleOpts, dict, None] = None,
@@ -311,6 +394,7 @@ class AxisPointerOpts(BasicOpts):
         self.opts: dict = {
             "show": is_show,
             "type": type_,
+            "link": link,
             "label": label,
             "lineStyle": linestyle_opts,
         }
@@ -381,8 +465,8 @@ class GridOpts(BasicOpts):
         pos_top: Optional[str] = None,
         pos_right: Optional[str] = None,
         pos_bottom: Optional[str] = None,
-        width: Optional[Numeric] = None,
-        height: Optional[Numeric] = None,
+        width: Union[Numeric, str, None] = None,
+        height: Union[Numeric, str, None] = None,
     ):
         self.opts: dict = {
             "left": pos_left,
@@ -581,6 +665,7 @@ class RadiusAxisOpts(BasicOpts):
         max_: Union[str, Numeric, None] = None,
         is_scale: bool = False,
         splitline_opts: Union[SplitLineOpts, dict, None] = None,
+        axistick_opts: Union[AxisTickOpts, dict, None] = None,
         axisline_opts: Union[AxisLineOpts, dict, None] = None,
         axislabel_opts: Union[LabelOpts, dict, None] = None,
         z: Optional[int] = None,
@@ -603,6 +688,7 @@ class RadiusAxisOpts(BasicOpts):
             "max": max_,
             "scale": is_scale,
             "splitLine": splitline_opts,
+            "axisTick": axistick_opts,
             "axisLine": axisline_opts,
             "axisLabel": axislabel_opts,
             "z": z,
@@ -622,6 +708,7 @@ class AngleAxisOpts(BasicOpts):
         max_: Union[str, Numeric, None] = None,
         splitline_opts: Union[SplitLineOpts, dict, None] = None,
         axisline_opts: Union[AxisLineOpts, dict, None] = None,
+        axistick_opts: Union[AxisTickOpts, dict, None] = None,
         axislabel_opts: Union[LabelOpts, dict, None] = None,
         z: Optional[int] = None,
     ):
@@ -643,6 +730,7 @@ class AngleAxisOpts(BasicOpts):
             "max": max_,
             "splitLine": splitline_opts,
             "axisLine": axisline_opts,
+            "axisTick": axistick_opts,
             "axisLabel": axislabel_opts,
             "z": z,
         }

@@ -1,6 +1,6 @@
 from ... import options as opts
+from ... import types
 from ...charts.chart import Chart
-from ...commons.types import Numeric, Optional, Sequence, Union
 from ...globals import ChartType
 
 
@@ -11,14 +11,14 @@ class Polar(Chart):
     Polar coordinates can be used for scatter and polyline graphs.
     """
 
-    def __init__(self, init_opts: opts.InitOpts = opts.InitOpts()):
+    def __init__(self, init_opts: types.Init = opts.InitOpts()):
         super().__init__(init_opts=init_opts)
         self.add_schema()
 
     def add_schema(
         self,
-        radiusaxis_opts: Union[opts.RadiusAxisOpts, dict] = opts.RadiusAxisOpts(),
-        angleaxis_opts: Union[opts.AngleAxisOpts, dict] = opts.AngleAxisOpts(),
+        radiusaxis_opts: types.RadiusAxis = opts.RadiusAxisOpts(),
+        angleaxis_opts: types.AngleAxis = opts.AngleAxisOpts(),
     ):
         if isinstance(angleaxis_opts, opts.AngleAxisOpts):
             angleaxis_opts = angleaxis_opts.opts
@@ -30,18 +30,18 @@ class Polar(Chart):
     def add(
         self,
         series_name: str,
-        data: Sequence,
+        data: types.Sequence,
         *,
         is_selected: bool = True,
         type_: str = "line",
-        symbol: Optional[str] = None,
-        symbol_size: Numeric = 4,
-        stack: Optional[str] = None,
-        label_opts: Union[opts.LabelOpts, dict] = opts.LabelOpts(),
-        areastyle_opts: Union[opts.AreaStyleOpts, dict] = opts.AreaStyleOpts(),
-        effect_opts: Union[opts.EffectOpts, dict] = opts.EffectOpts(),
-        tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
-        itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
+        symbol: types.Optional[str] = None,
+        symbol_size: types.Numeric = 4,
+        stack: types.Optional[str] = None,
+        label_opts: types.Label = opts.LabelOpts(),
+        areastyle_opts: types.AreaStyle = opts.AreaStyleOpts(),
+        effect_opts: types.Effect = opts.EffectOpts(),
+        tooltip_opts: types.Tooltip = None,
+        itemstyle_opts: types.ItemStyle = None,
     ):
         self._append_legend(series_name, is_selected)
         self.options.update(polar={})

@@ -2,8 +2,8 @@ import uuid
 
 from jinja2 import Environment
 
+from ... import types
 from ...commons import utils
-from ...commons.types import Optional, Union
 from ...datasets import FILENAMES
 from ...globals import CurrentConfig, NotebookType, ThemeType
 from ...options import PageLayoutOpts
@@ -25,7 +25,7 @@ class Page:
         page_title: str = CurrentConfig.PAGE_TITLE,
         js_host: str = "",
         interval: int = 1,
-        layout: Union[PageLayoutOpts, dict] = PageLayoutOpts(),
+        layout: types.Union[PageLayoutOpts, dict] = PageLayoutOpts(),
     ):
         self.page_title = page_title
         self.page_interval = interval
@@ -41,7 +41,7 @@ class Page:
                 self.js_dependencies.add(d)
         return self
 
-    def _assembly_layout(self, layout: Union[PageLayoutOpts, dict]) -> str:
+    def _assembly_layout(self, layout: types.Union[PageLayoutOpts, dict]) -> str:
         result = ""
         if isinstance(layout, PageLayoutOpts):
             layout = layout.opts
@@ -68,7 +68,7 @@ class Page:
         self,
         path: str = "render.html",
         template_name: str = "simple_page.html",
-        env: Optional[Environment] = None,
+        env: types.Optional[Environment] = None,
     ):
         self._prepare_render()
         RenderEngine(env).render_chart_to_file(
@@ -76,7 +76,9 @@ class Page:
         )
 
     def render_embed(
-        self, template_name: str = "simple_page.html", env: Optional[Environment] = None
+        self,
+        template_name: str = "simple_page.html",
+        env: types.Optional[Environment] = None,
     ):
         self._prepare_render()
         return RenderEngine(env).render_chart_to_template(

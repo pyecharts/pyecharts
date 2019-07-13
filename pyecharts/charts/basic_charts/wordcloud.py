@@ -1,8 +1,8 @@
 import random
 
 from ... import options as opts
+from ... import types
 from ...charts.chart import Chart
-from ...commons.types import Numeric, Sequence, Union
 from ...globals import ChartType
 
 SHAPES = ("cardioid", "diamond", "triangle-forward", "triangle", "pentagon", "star")
@@ -10,7 +10,7 @@ SHAPES = ("cardioid", "diamond", "triangle-forward", "triangle", "pentagon", "st
 
 def gen_color():
     """
-    为词云图生成随机颜色
+    generate random color for WordCloud
     """
     return "rgb(%s,%s,%s)" % (
         random.randint(0, 160),
@@ -27,21 +27,21 @@ class WordCloud(Chart):
     appear frequently in the text.
     """
 
-    def __init__(self, init_opts: opts.InitOpts = opts.InitOpts()):
+    def __init__(self, init_opts: types.Init = opts.InitOpts()):
         super().__init__(init_opts=init_opts)
         self.js_dependencies.add("echarts-wordcloud")
 
     def add(
         self,
         series_name: str,
-        data_pair: Sequence,
+        data_pair: types.Sequence,
         *,
         shape: str = "circle",
-        word_gap: Numeric = 20,
-        word_size_range=None,
-        rotate_step: Numeric = 45,
-        tooltip_opts: Union[opts.TooltipOpts, dict, None] = None,
-        itemstyle_opts: Union[opts.ItemStyleOpts, dict, None] = None,
+        word_gap: types.Numeric = 20,
+        word_size_range: types.Optional[types.Sequence] = None,
+        rotate_step: types.Numeric = 45,
+        tooltip_opts: types.Tooltip = None,
+        itemstyle_opts: types.ItemStyle = None,
     ):
         data = []
         for n, v in data_pair:

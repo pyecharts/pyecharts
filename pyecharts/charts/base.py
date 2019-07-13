@@ -1,39 +1,45 @@
 import datetime
-import json
 import os
 import uuid
-from typing import Sequence
 
+import simplejson as json
 from jinja2 import Environment
 
 from ..commons import utils
-from ..commons.types import Optional
 from ..datasets import FILENAMES
-from ..globals import CurrentConfig, NotebookType, ThemeType
+from ..globals import CurrentConfig, NotebookType, RenderType, ThemeType
 from ..options import InitOpts
+from ..options.global_options import AnimationOpts
 from ..options.series_options import BasicOpts
 from ..render.display import HTML, Javascript
 from ..render.engine import RenderEngine
+from ..types import Optional, Sequence, Union
 
 
 class Base:
     """
-    `Base`类是所有图形类的基类，提供部分初始化参数和基本的方法
+    `Base` is the root class for all graphical class, it provides
+    part of the initialization parameters and common methods
     """
 
-    def __init__(self, init_opts: InitOpts = InitOpts()):
-        self.width = init_opts.width
-        self.height = init_opts.height
-        self.renderer = init_opts.renderer
-        self.page_title = init_opts.page_title
-        self.theme = init_opts.theme
-        self.chart_id = init_opts.chart_id or uuid.uuid4().hex
+    def __init__(self, init_opts: Union[InitOpts, dict] = InitOpts()):
+        _opts = init_opts
+        if isinstance(init_opts, InitOpts):
+            _opts = init_opts.opts
+
+        self.width = _opts.get("width", "900px")
+        self.height = _opts.get("height", "500px")
+        self.renderer = _opts.get("renderer", RenderType.CANVAS)
+        self.page_title = _opts.get("page_title", CurrentConfig.PAGE_TITLE)
+        self.theme = _opts.get("theme", ThemeType.WHITE)
+        self.chart_id = _opts.get("chart_id") or uuid.uuid4().hex
 
         self.options: dict = {}
-        self.js_host: str = init_opts.js_host or CurrentConfig.ONLINE_HOST
+        self.js_host: str = _opts.get("js_host", CurrentConfig.ONLINE_HOST)
         self.js_functions: utils.OrderedSet = utils.OrderedSet()
         self.js_dependencies: utils.OrderedSet = utils.OrderedSet("echarts")
-        self.options.update(backgroundColor=init_opts.bg_color)
+        self.options.update(backgroundColor=_opts.get("bg_color"))
+        self.options.update(_opts.get("animationOpts", AnimationOpts()).opts)
         self._is_geo_chart: bool = False
 
     def add_js_funcs(self, *fns):
@@ -45,7 +51,9 @@ class Base:
         return utils.remove_key_with_none_value(self.options)
 
     def dump_options(self) -> str:
-        return json.dumps(self.get_options(), indent=4, default=default)
+        return utils.replace_placeholder(
+            json.dumps(self.get_options(), indent=4, default=default, ignore_nan=True)
+        )
 
     def render(
         self,
@@ -92,7 +100,10 @@ class Base:
             )
 
         if CurrentConfig.NOTEBOOK_TYPE == NotebookType.NTERACT:
-            pass
+            return HTML(self.render_embed())
+
+        if CurrentConfig.NOTEBOOK_TYPE == NotebookType.ZEPPELIN:
+            print("%html " + self.render_embed())
 
     def _use_theme(self):
         if self.theme not in ThemeType.BUILTIN_THEMES:

@@ -1,3 +1,5 @@
+from unittest.mock import patch
+
 from nose.tools import eq_
 
 from pyecharts import options as opts
@@ -7,7 +9,8 @@ v1 = [(4300, 10000, 28000, 35000, 50000, 19000)]
 v2 = [(5000, 14000, 28000, 31000, 42000, 21000)]
 
 
-def test_radar_base():
+@patch("pyecharts.render.engine.write_utf8_html_file")
+def test_radar_base(fake_writer):
     c = (
         Radar()
         .add_schema(
@@ -24,6 +27,7 @@ def test_radar_base():
         .add("实际开销", v2)
         .set_series_opts(label_opts=opts.LabelOpts(is_show=False))
     )
+    c.render()
+    _, content = fake_writer.call_args[0]
     eq_(c.theme, "white")
     eq_(c.renderer, "canvas")
-    c.render()

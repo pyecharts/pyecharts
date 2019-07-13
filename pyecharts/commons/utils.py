@@ -1,6 +1,6 @@
 import re
 
-from pyecharts.datasets import EXTRA, FILENAMES
+from ..datasets import EXTRA, FILENAMES
 
 
 class JsCode:
@@ -49,6 +49,10 @@ def produce_require_dict(js_dependencies, js_host) -> dict:
 def write_utf8_html_file(file_name, html_content):
     with open(file_name, "w+", encoding="utf-8") as html_file:
         html_file.write(html_content)
+
+
+def replace_placeholder(html: str) -> str:
+    return re.sub('"?--x_x--0_0--"?', "", html)
 
 
 def _flat(obj):
