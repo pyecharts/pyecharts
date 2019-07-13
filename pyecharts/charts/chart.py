@@ -12,6 +12,10 @@ GraphicType = Union[BaseGraphic, dict]
 
 class Chart(Base):
     def __init__(self, init_opts: types.Init = opts.InitOpts()):
+        if isinstance(init_opts, dict):
+            temp_opts = opts.InitOpts()
+            temp_opts.update(**init_opts)
+            init_opts = temp_opts
         super().__init__(init_opts=init_opts)
         self.colors = (
             "#c23531 #2f4554 #61a0a8 #d48265 #749f83 #ca8622 #bda29a #6e7074 "
@@ -101,11 +105,13 @@ class Chart(Base):
         legend_opts: types.Legend = opts.LegendOpts(),
         tooltip_opts: types.Tooltip = None,
         toolbox_opts: types.Toolbox = None,
+        brush_opts: types.Brush = None,
         xaxis_opts: types.Axis = None,
         yaxis_opts: types.Axis = None,
         visualmap_opts: Union[VisualMapType, Sequence[VisualMapType], None] = None,
         datazoom_opts: Union[DataZoomType, Sequence[DataZoomType], None] = None,
         graphic_opts: Union[GraphicType, Sequence[GraphicType], None] = None,
+        axispointer_opts: Union[opts.AxisPointerOpts, dict, None] = None,
     ):
         if tooltip_opts is None:
             tooltip_opts = opts.TooltipOpts(
@@ -118,7 +124,11 @@ class Chart(Base):
             visualMap=visualmap_opts,
             dataZoom=datazoom_opts,
             graphic=graphic_opts,
+            axisPointer=axispointer_opts,
         )
+
+        if brush_opts is not None:
+            self.options.update(brush=brush_opts)
 
         if isinstance(legend_opts, opts.LegendOpts):
             legend_opts = legend_opts.opts
@@ -190,6 +200,8 @@ class Chart3D(Chart):
         self.options.update(visualMap=opts.VisualMapOpts().opts)
         self._3d_chart_type: Optional[str] = None  # 3d chart type,don't use it directly
 
+
+class ThreeAxisChart(Chart3D):
     def add(
         self,
         series_name: str,

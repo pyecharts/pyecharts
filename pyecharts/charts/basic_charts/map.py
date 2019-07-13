@@ -4,7 +4,7 @@ from ...charts.chart import Chart
 from ...globals import ChartType
 
 
-class Map(Chart):
+class MapMixin:
     """
     <<< Map >>>
 
@@ -55,3 +55,7 @@ class Map(Chart):
             }
         )
         return self
+
+
+class Map(Chart, MapMixin):
+    pass

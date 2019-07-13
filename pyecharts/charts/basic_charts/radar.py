@@ -15,6 +15,8 @@ class Radar(Chart):
         self,
         schema: types.Sequence[types.Union[opts.RadarIndicatorItem, dict]],
         shape: types.Optional[str] = None,
+        center: types.Optional[types.Sequence] = None,
+        radius: types.Optional[types.Union[types.Sequence, str]] = None,
         textstyle_opts: types.TextStyle = opts.TextStyleOpts(),
         splitline_opt: types.SplitLine = opts.SplitLineOpts(is_show=True),
         splitarea_opt: types.SplitArea = opts.SplitAreaOpts(),
@@ -30,6 +32,8 @@ class Radar(Chart):
             radar={
                 "indicator": indicators,
                 "shape": shape,
+                "center": center,
+                "radius": radius,
                 "name": {"textStyle": textstyle_opts},
                 "splitLine": splitline_opt,
                 "splitArea": splitarea_opt,

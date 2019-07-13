@@ -39,6 +39,7 @@ class _ChartType:
     LINES: str = "lines"
     LIQUID: str = "liquidFill"
     MAP: str = "map"
+    MAP3D: str = "map3D"
     PARALLEL: str = "parallel"
     PICTORIALBAR: str = "pictorialBar"
     PIE: str = "pie"
@@ -112,6 +113,7 @@ class _NotebookType:
     JUPYTER_NOTEBOOK = "jupyter_notebook"
     JUPYTER_LAB = "jupyter_lab"
     NTERACT = "nteract"
+    ZEPPELIN = "zeppelin"
 
 
 RenderType = _RenderType()
