@@ -35,7 +35,7 @@ class MapMixin:
         self._append_legend(series_name, is_selected)
         self.options.get("series").append(
             {
-                "type": ChartType.MAP,
+                "type": self.chart_type,
                 "name": series_name,
                 "symbol": symbol,
                 "label": label_opts,
@@ -58,4 +58,7 @@ class MapMixin:
 
 
 class Map(Chart, MapMixin):
-    pass
+
+    def __init__(self, init_opts: types.Init = opts.InitOpts()):
+        super(self).__init__(init_opts=init_opts)
+        self.chart_type = ChartType.MAP
