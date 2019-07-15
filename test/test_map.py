@@ -25,11 +25,12 @@ def test_map_emphasis():
         [list(z) for z in zip(Faker.provinces, Faker.values())],
         "china",
         emphasis_label_opts=opts.LabelOpts(is_show=False),
-        emphasis_itemstyle_opts=opts.ItemStyleOpts(border_color="white"),
+        emphasis_itemstyle_opts=opts.ItemStyleOpts(border_color="white",
+                                                   area_color="red"),
     )
     options = json.loads(c.dump_options())
     expected = {
         "label": {"show": False, "position": "top", "margin": 8},
-        "itemStyle": {"borderColor": "white"},
+        "itemStyle": {"borderColor": "white", "areaColor": "red"},
     }
     eq_(expected, options["series"][0]["emphasis"])
