@@ -25,6 +25,7 @@ class ItemStyleOpts(BasicOpts):
         border_color0: Optional[str] = None,
         border_width: Optional[Numeric] = None,
         opacity: Optional[Numeric] = None,
+        area_color: Optional[str] = None,
     ):
         self.opts: dict = {
             "color": color,
@@ -33,6 +34,7 @@ class ItemStyleOpts(BasicOpts):
             "borderColor0": border_color0,
             "borderWidth": border_width,
             "opacity": opacity,
+            "areaColor": area_color
         }
 
 
