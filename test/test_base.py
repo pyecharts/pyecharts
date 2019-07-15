@@ -1,4 +1,4 @@
-from nose.tools import eq_
+from nose.tools import eq_, assert_not_in
 
 from pyecharts.charts.base import Base
 
@@ -18,3 +18,4 @@ def test_base_init_funcs():
     c1 = Base(dict(width="110px", height="210px"))
     eq_(c1.width, "110px")
     eq_(c1.height, "210px")
+    assert_not_in(c1.jshost, ['', None])
