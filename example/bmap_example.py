@@ -12,7 +12,6 @@ BAIDU_MAP_AK = os.environ.get("BAIDU_MAP_AK", "FAKE_AK")
 
 @C.funcs
 def bmap_base() -> BMap:
-
     c = (
         BMap()
         .add_schema(baidu_ak=BAIDU_MAP_AK, center=[120.13066322374, 30.240018034923])
