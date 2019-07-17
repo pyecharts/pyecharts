@@ -103,7 +103,7 @@ class Chart(Base):
         brush_opts: types.Brush = None,
         xaxis_opts: types.Axis = None,
         yaxis_opts: types.Axis = None,
-        visualmap_opts: types = None,
+        visualmap_opts: types.VisualMap = None,
         datazoom_opts: types.DataZoom = None,
         graphic_opts: types.Graphic = None,
         axispointer_opts: types.AxisPointer = None,
