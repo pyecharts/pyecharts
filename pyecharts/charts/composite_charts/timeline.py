@@ -35,6 +35,7 @@ class Timeline(Base):
         linestyle_opts: types.Union[opts.LineStyleOpts, dict, None] = None,
         label_opts: types.Optional[opts.LabelOpts] = None,
         itemstyle_opts: types.ItemStyle = None,
+        graphic_opts: types.Graphic = None,
     ):
         self.options.get("baseOption").get("timeline").update(
             {
@@ -57,6 +58,7 @@ class Timeline(Base):
                 "lineStyle": linestyle_opts,
                 "label": label_opts,
                 "itemStyle": itemstyle_opts,
+                "graphic": graphic_opts,
             }
         )
         return self

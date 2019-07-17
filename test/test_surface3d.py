@@ -1,4 +1,5 @@
 import math
+from unittest.mock import patch
 
 from nose.tools import eq_
 
@@ -7,7 +8,8 @@ from pyecharts import options as opts
 from pyecharts.charts import Surface3D
 
 
-def test_surface3d_base():
+@patch("pyecharts.render.engine.write_utf8_html_file")
+def test_surface3d_base(fake_writer):
     def surface3d_data():
         for t0 in range(-60, 60, 1):
             y = t0 / 60
@@ -34,6 +36,7 @@ def test_surface3d_base():
             )
         )
     )
+    c.render()
+    _, content = fake_writer.call_args[0]
     eq_(c.theme, "white")
     eq_(c.renderer, "canvas")
-    c.render()
