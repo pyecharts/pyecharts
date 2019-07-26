@@ -52,5 +52,5 @@ def test_geo_dump_options():
         .add("geo", [list(z) for z in zip(Faker.provinces, Faker.values())])
         .set_global_opts(visualmap_opts=opts.VisualMapOpts())
     )
-    formatter = """"formatter": function (params) {        return params.name + ' : ' + params.value[2];    }"""  # noqa
+    formatter = """"formatter": "function (params) {        return params.name + ' : ' + params.value[2];    }"""  # noqa
     assert_in(formatter, c.dump_options())
