@@ -15,6 +15,7 @@ def pie_base() -> Pie:
     )
     return c
 
+
 @C.funcs
 def pie_multiple_base() -> Pie:
     c = (
@@ -52,7 +53,6 @@ def pie_multiple_base() -> Pie:
         .set_series_opts(label_opts=opts.LabelOpts(formatter="{b}: {c}"))
     )
     return c
-
 
 
 @C.funcs
