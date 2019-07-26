@@ -15,6 +15,45 @@ def pie_base() -> Pie:
     )
     return c
 
+@C.funcs
+def pie_multiple_base() -> Pie:
+    c = (
+        Pie()
+        .add(
+            "",
+            [list(z) for z in zip(["剧情", "其他"], [25, 75])],
+            center=["20%", "30%"],
+            radius=[40, 60],
+        )
+        .add(
+            "",
+            [list(z) for z in zip(["奇幻", "其他"], [24, 76])],
+            center=["55%", "30%"],
+            radius=[40, 60],
+        )
+        .add(
+            "",
+            [list(z) for z in zip(["爱情", "其他"], [14, 86])],
+            center=["20%", "70%"],
+            radius=[40, 60],
+        )
+        .add(
+            "",
+            [list(z) for z in zip(["惊悚", "其他"], [11, 89])],
+            center=["55%", "70%"],
+            radius=[40, 60],
+        )
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="Pie-多饼图基本示例"),
+            legend_opts=opts.LegendOpts(
+                type_="scroll", pos_top="20%", pos_left="80%", orient="vertical"
+            ),
+        )
+        .set_series_opts(label_opts=opts.LabelOpts(formatter="{b}: {c}"))
+    )
+    return c
+
+
 
 @C.funcs
 def pie_set_colors() -> Pie:
