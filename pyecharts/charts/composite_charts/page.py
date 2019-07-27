@@ -1,3 +1,4 @@
+import os
 import uuid
 
 from jinja2 import Environment
@@ -74,6 +75,7 @@ class Page:
         RenderEngine(env).render_chart_to_file(
             template_name=template_name, chart=self, path=path
         )
+        return os.path.abspath(path)
 
     def render_embed(
         self,
