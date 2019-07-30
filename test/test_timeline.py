@@ -88,9 +88,9 @@ class TestTimeLine(unittest.TestCase):
                         ),
                     ],
                 )
-            ],
+            ]
         )
         eq_(
             type(opts.GraphicGroup()),
-            type(self.tl.options.get("baseOption").get("timeline").get("graphic")[0])
+            type(self.tl.options.get("baseOption").get("timeline").get("graphic")[0]),
         )

@@ -87,29 +87,22 @@ def multiple_liquid() -> Grid:
         .set_global_opts(title_opts=opts.TitleOpts(title="多个 Liquid 显示"))
     )
 
-    l2 = (
-        Liquid()
-        .add(
-            "lq",
-            [0.3254],
-            center=["25%", "50%"],
-            label_opts=opts.LabelOpts(
-                font_size=50,
-                formatter=JsCode(
-                    """function (param) {
+    l2 = Liquid().add(
+        "lq",
+        [0.3254],
+        center=["25%", "50%"],
+        label_opts=opts.LabelOpts(
+            font_size=50,
+            formatter=JsCode(
+                """function (param) {
                         return (Math.floor(param.value * 10000) / 100) + '%';
                     }"""
-                ),
-                position="inside",
             ),
-        )
+            position="inside",
+        ),
     )
 
-    grid = (
-        Grid()
-        .add(l1, grid_opts=opts.GridOpts())
-        .add(l2, grid_opts=opts.GridOpts())
-    )
+    grid = Grid().add(l1, grid_opts=opts.GridOpts()).add(l2, grid_opts=opts.GridOpts())
     return grid
 
 

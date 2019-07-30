@@ -18,4 +18,4 @@ def test_base_init_funcs():
     c1 = Base(dict(width="110px", height="210px"))
     eq_(c1.width, "110px")
     eq_(c1.height, "210px")
-    assert_not_in(c1.js_host, ['', None])
+    assert_not_in(c1.js_host, ["", None])

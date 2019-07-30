@@ -51,6 +51,11 @@ class Base:
         return utils.remove_key_with_none_value(self.options)
 
     def dump_options(self) -> str:
+        return utils.replace_placeholder(
+            json.dumps(self.get_options(), indent=4, default=default, ignore_nan=True)
+        )
+
+    def dump_options_without_quotes(self) -> str:
         return utils.replace_placeholder_without_quotes(
             json.dumps(self.get_options(), indent=4, default=default, ignore_nan=True)
         )

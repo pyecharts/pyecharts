@@ -52,6 +52,7 @@ class _ChartType:
     TREE: str = "tree"
     TREEMAP: str = "treemap"
     WORDCLOUD: str = "wordCloud"
+    CUSTOM: str = "custom"
 
 
 ToolTipFormatterType = {
