@@ -88,25 +88,24 @@ class Polar(Chart):
                     # TODO: 提供自定义 function
                     "renderItem": JsCode(
                         """function(params, api) {
-                                var values = [api.value(0), api.value(1)];
-                                var coord = api.coord(values);
-                                return {
-                                    type: 'text',
-                                    position: [3 * Math.sin(coord[3]), 3 * Math.cos(coord[3])],
-                                    rotation: coord[3] + Math.PI / 2,
-                                    origin: [coord[0], coord[1]],
-                                    style: {
-                                        text: api.value(1),
-                                        fill: 'black',
-                                        fontSize: 12,
-                                        textAlign: 'right',
-                                        textVerticalAlign: 'middle',
-                                        x: coord[0],
-                                        y: coord[1]
-                                    }
-                                };
+                        var values = [api.value(0), api.value(1)];
+                        var coord = api.coord(values);
+                        return {
+                            type: 'text',
+                            position: [3 * Math.sin(coord[3]), 3 * Math.cos(coord[3])],
+                            rotation: coord[3] + Math.PI / 2,
+                            origin: [coord[0], coord[1]],
+                            style: {
+                                text: api.value(1),
+                                fill: 'black',
+                                fontSize: 12,
+                                textAlign: 'right',
+                                textVerticalAlign: 'middle',
+                                x: coord[0],
+                                y: coord[1]
                             }
-                        """
+                        };
+                    }"""
                     ),
                     "data": data,
                 }
