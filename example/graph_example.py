@@ -81,6 +81,30 @@ def graph_weibo() -> Graph:
 
 
 @C.funcs
+def graph_les_miserables():
+    with open(os.path.join("fixtures", "les-miserables-nodes.json"), "r", encoding="utf-8") as f:
+        nodes = json.load(f)
+    with open(os.path.join("fixtures", "les-miserables-links.json"), "r", encoding="utf-8") as f:
+        links = json.load(f)
+    with open(os.path.join("fixtures", "les-miserables-category.json"), "r", encoding="utf-8") as f:
+        category = json.load(f)
+    c = (
+        Graph(init_opts=opts.InitOpts(width="1000px", height="600px"))
+            .add(
+            "",
+            nodes=nodes,
+            links=links,
+            categories=category,
+            layout="circular",
+            # label_opts=opts.LabelOpts(is_show=False),
+            # linestyle_opts=opts.LineStyleOpts(width=0.5, curve=0.3, opacity=0.7),
+        )
+            .set_global_opts(title_opts=opts.TitleOpts(title="Graph-Les Miserables"))
+    )
+    return c
+
+
+@C.funcs
 def graph_npm_dependencies() -> Graph:
     with open(os.path.join("fixtures", "npmdepgraph.json"), "r", encoding="utf-8") as f:
         j = json.load(f)
