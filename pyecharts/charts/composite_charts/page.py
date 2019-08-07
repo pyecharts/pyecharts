@@ -11,6 +11,8 @@ from ...options import PageLayoutOpts
 from ...render.display import HTML, Javascript
 from ...render.engine import RenderEngine
 
+_MARK_FREEDOM_LAYOUT = "_MARK_FREEDOM_LAYOUT_"
+
 
 class Page:
     """
@@ -20,6 +22,7 @@ class Page:
     SimplePageLayout = PageLayoutOpts(
         justify_content="center", display="flex", flex_wrap="wrap"
     )
+    FreedomLayout = PageLayoutOpts()
 
     def __init__(
         self,
@@ -31,6 +34,7 @@ class Page:
         self.page_title = page_title
         self.page_interval = interval
         self.js_dependencies = utils.OrderedSet()
+        self.js_functions: utils.OrderedSet = utils.OrderedSet()
         self.js_host = js_host or CurrentConfig.ONLINE_HOST
         self.layout = self._assembly_layout(layout)
         self._charts = []
@@ -43,6 +47,8 @@ class Page:
         return self
 
     def _assembly_layout(self, layout: types.Union[PageLayoutOpts, dict]) -> str:
+        if layout is Page.FreedomLayout:
+            return _MARK_FREEDOM_LAYOUT
         result = ""
         if isinstance(layout, PageLayoutOpts):
             layout = layout.opts
@@ -64,6 +70,29 @@ class Page:
             c.json_contents = c.dump_options()
             if c.theme not in ThemeType.BUILTIN_THEMES:
                 self.js_dependencies.add(c.theme)
+
+        if self.layout == _MARK_FREEDOM_LAYOUT:
+            for c in self:
+                self.add_js_funcs(
+                    f'$("#{c.chart_id}")'
+                    ".resizable()"
+                    ".draggable()"
+                    '.css("border-style", "dashed")'
+                    '.css("border-width", "1px");',
+                    f'$("#{c.chart_id}>div:nth-child(1)").width("100%").height("100%");',
+                    "new ResizeSensor(jQuery('#{}'), function() {});".format(
+                        c.chart_id, "{ chart_" + c.chart_id + ".resize();}"
+                    ),
+                )
+            for lib in ("jquery", "jquery-ui", "resize-sensor"):
+                self.js_dependencies.add(lib)
+            self.css_libs = [self.js_host + link for link in ("jquery-ui.css",)]
+            self.layout = ""
+
+    def add_js_funcs(self, *fns):
+        for fn in fns:
+            self.js_functions.add(fn)
+        return self
 
     def render(
         self,
