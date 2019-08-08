@@ -1,5 +1,6 @@
-from pyecharts import options as opts
 from nose.tools import eq_
+
+from pyecharts import options as opts
 
 
 def test_area_color_in_item_styles():

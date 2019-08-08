@@ -1,8 +1,8 @@
 from ... import options as opts
 from ... import types
 from ...charts.chart import Chart
-from ...globals import ChartType
 from ...commons.utils import JsCode
+from ...globals import ChartType
 
 
 class Polar(Chart):

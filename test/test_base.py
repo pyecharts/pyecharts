@@ -1,4 +1,4 @@
-from nose.tools import eq_, assert_not_in
+from nose.tools import assert_not_in, eq_
 
 from pyecharts.charts.base import Base
 

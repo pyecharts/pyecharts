@@ -8,9 +8,9 @@
     {{ macro.render_chart_css(chart) }}
 </head>
 <body>
-    <style>.box { {{ chart.layout }} }; body { width: {{ chart.width }}; height: {{ chart.height }}} </style>
+    <style>.box { {{ chart.layout }} }; </style>
     {% if chart.download_button %}
-        <button onclick="downloadCfg()">保存配置文件</button>
+        <button onclick="downloadCfg()">Save Config</button>
     {% endif %}
     <div class="box">
         {% for c in chart %}

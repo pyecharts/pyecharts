@@ -1,7 +1,7 @@
-import os
-import uuid
 import json
+import os
 import re
+import uuid
 
 from jinja2 import Environment
 
@@ -22,7 +22,7 @@ function downloadCfg () {
     downLink.download = fileName
 
     let result = []
-    for(i = 0; i < charts_id.length; i++) {
+    for(let i=0; i<charts_id.length; i++) {
         chart = $('#'+charts_id[i])
         result.push({
             cid: charts_id[i],
@@ -106,17 +106,19 @@ class Page:
                 charts_id.append("'{}'".format(c.chart_id))
                 self.add_js_funcs(
                     # make charts resizable and draggable
-                    '$("#%s")'
+                    f"$('#{c.chart_id}')"
                     ".resizable()"
                     ".draggable()"
-                    ".hover(function() {"
-                    '    $("#%s").css("border-style", "dashed").css("border-width", "1px")'
-                    "}, function() {"
-                    '    $("#%s").css("border-width", "0px")'
-                    "})" % (c.chart_id, c.chart_id, c.chart_id),
-                    f'$("#{c.chart_id}>div:nth-child(1)").width("100%").height("100%");',
-                    "new ResizeSensor(jQuery('#%s'), function() {chart_%s.resize()});"
-                    % (c.chart_id, c.chart_id),
+                    ".css('border-style', 'dashed')"
+                    ".css('border-width', '1px');"
+                    # make charts Responsive
+                    f'$("#{c.chart_id}>div:nth-child(1)")'
+                    '.width("100%")'
+                    '.height("100%");',
+                    # call resize function
+                    "new ResizeSensor("
+                    f"jQuery('#{c.chart_id}'), "
+                    f"function() {{ chart_{c.chart_id}.resize()}});",
                 )
             for lib in ("jquery", "jquery-ui", "resize-sensor"):
                 self.js_dependencies.add(lib)
@@ -205,8 +207,8 @@ class Page:
 
         for chart in charts:
             s = (
-                '<div id="{cid}" style="width: '
-                '{width}; height: {height}; top: {top}; left: {left}; position: absolute;">'.format(
+                '<div id="{cid}" style="position: absolute; '
+                'width: {width}; height: {height}; top: {top}; left: {left};">'.format(
                     cid=chart["cid"],
                     width=chart["width"],
                     height=chart["height"],
@@ -215,6 +217,10 @@ class Page:
                 )
             )
             html = re.sub('<div id="{}" style="(.*?)">'.format(chart["cid"]), s, html)
+            html = re.sub("'border-width', '1px'", "'border-width', '0px'", html)
+            html = re.sub(
+                r'<button onclick="downloadCfg\(\)">Save Config</button>', "", html
+            )
 
         with open(dest, "w+", encoding="utf8") as f:
             f.write(html)
