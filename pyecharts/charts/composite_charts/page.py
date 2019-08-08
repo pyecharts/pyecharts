@@ -1,5 +1,7 @@
 import os
 import uuid
+import json
+import re
 
 from jinja2 import Environment
 
@@ -13,6 +15,31 @@ from ...render.engine import RenderEngine
 
 _MARK_FREEDOM_LAYOUT = "_MARK_FREEDOM_LAYOUT_"
 
+DOWNLOAD_CFG_FUNC = """
+function downloadCfg () {
+    const fileName = 'chart_config.json'
+    let downLink = document.createElement('a')
+    downLink.download = fileName
+
+    let result = []
+    for(i = 0; i < charts_id.length; i++) {
+        chart = $('#'+charts_id[i])
+        result.push({
+            cid: charts_id[i],
+            width: chart.css("width"),
+            height: chart.css("height"),
+            top: chart.offset().top + "px",
+            left: chart.offset().left + "px"
+        })
+    }
+
+    let blob = new Blob([JSON.stringify(result)])
+    downLink.href = URL.createObjectURL(blob)
+    document.body.appendChild(downLink)
+    downLink.click()
+    document.body.removeChild(downLink)
+}"""
+
 
 class Page:
     """
@@ -22,7 +49,7 @@ class Page:
     SimplePageLayout = PageLayoutOpts(
         justify_content="center", display="flex", flex_wrap="wrap"
     )
-    FreedomLayout = PageLayoutOpts()
+    DraggablePageLayout = PageLayoutOpts()
 
     def __init__(
         self,
@@ -37,6 +64,7 @@ class Page:
         self.js_functions: utils.OrderedSet = utils.OrderedSet()
         self.js_host = js_host or CurrentConfig.ONLINE_HOST
         self.layout = self._assembly_layout(layout)
+        self.download_button: bool = False
         self._charts = []
 
     def add(self, *charts):
@@ -47,7 +75,7 @@ class Page:
         return self
 
     def _assembly_layout(self, layout: types.Union[PageLayoutOpts, dict]) -> str:
-        if layout is Page.FreedomLayout:
+        if layout is Page.DraggablePageLayout:
             return _MARK_FREEDOM_LAYOUT
         result = ""
         if isinstance(layout, PageLayoutOpts):
@@ -71,21 +99,31 @@ class Page:
             if c.theme not in ThemeType.BUILTIN_THEMES:
                 self.js_dependencies.add(c.theme)
 
+        charts_id = []
         if self.layout == _MARK_FREEDOM_LAYOUT:
+            self.download_button = True
             for c in self:
+                charts_id.append("'{}'".format(c.chart_id))
                 self.add_js_funcs(
-                    f'$("#{c.chart_id}")'
+                    # make charts resizable and draggable
+                    '$("#%s")'
                     ".resizable()"
                     ".draggable()"
-                    '.css("border-style", "dashed")'
-                    '.css("border-width", "1px");',
+                    ".hover(function() {"
+                    '    $("#%s").css("border-style", "dashed").css("border-width", "1px")'
+                    "}, function() {"
+                    '    $("#%s").css("border-width", "0px")'
+                    "})" % (c.chart_id, c.chart_id, c.chart_id),
                     f'$("#{c.chart_id}>div:nth-child(1)").width("100%").height("100%");',
-                    "new ResizeSensor(jQuery('#{}'), function() {});".format(
-                        c.chart_id, "{ chart_" + c.chart_id + ".resize();}"
-                    ),
+                    "new ResizeSensor(jQuery('#%s'), function() {chart_%s.resize()});"
+                    % (c.chart_id, c.chart_id),
                 )
             for lib in ("jquery", "jquery-ui", "resize-sensor"):
                 self.js_dependencies.add(lib)
+
+            self.add_js_funcs(
+                "var charts_id = [{}];".format(",".join(charts_id)) + DOWNLOAD_CFG_FUNC
+            )
             self.css_libs = [self.js_host + link for link in ("jquery-ui.css",)]
             self.layout = ""
 
@@ -152,3 +190,31 @@ class Page:
             f, ext = FILENAMES[dep]
             scripts.append("{}{}.{}".format(CurrentConfig.ONLINE_HOST, f, ext))
         return Javascript(lib=scripts)
+
+    @staticmethod
+    def save_resize_html(
+        source: str = "render.html",
+        cfg: str = "chart_config.json",
+        dest: str = "resize_render.html",
+    ) -> None:
+        with open(source, "r", encoding="utf8") as f:
+            html = f.read()
+
+        with open(cfg, "r", encoding="utf8") as f:
+            charts = json.load(f)
+
+        for chart in charts:
+            s = (
+                '<div id="{cid}" style="width: '
+                '{width}; height: {height}; top: {top}; left: {left}; position: absolute;">'.format(
+                    cid=chart["cid"],
+                    width=chart["width"],
+                    height=chart["height"],
+                    top=chart["top"],
+                    left=chart["left"],
+                )
+            )
+            html = re.sub('<div id="{}" style="(.*?)">'.format(chart["cid"]), s, html)
+
+        with open(dest, "w+", encoding="utf8") as f:
+            f.write(html)

@@ -140,6 +140,10 @@ def grid_mutil_yaxis() -> Grid:
     )
 
 
-page = Page(layout=Page.SimplePageLayout)
-page.add(bar_datazoom_slider(), line_markpoint(), pie_rosetype(), grid_mutil_yaxis())
-page.render()
+# Page.DraggablePageLayout
+# Page.SimplePageLayout
+# page = Page(layout=Page.DraggablePageLayout)
+# page.add(bar_datazoom_slider(), line_markpoint(), pie_rosetype(), grid_mutil_yaxis())
+# page.render()
+
+Page.save_resize_html("render.html", "d:/chart_config.json")
