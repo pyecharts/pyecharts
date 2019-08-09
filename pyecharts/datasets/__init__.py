@@ -4,11 +4,13 @@ import urllib.request
 
 import simplejson as json
 
+from .. import types
+
 
 class FuzzyDict(dict):
     """Provides a dictionary that performs fuzzy lookup"""
 
-    def __init__(self, items=None, cutoff=0.6):
+    def __init__(self, cutoff: types.Numeric = 0.6):
         """Construct a new FuzzyDict instance
 
         items is an dictionary to copy items from (optional)
@@ -16,16 +18,13 @@ class FuzzyDict(dict):
         cutoff needs to be a float between 0 and 1 (where zero is no match
         and 1 is a perfect match)"""
         super(FuzzyDict, self).__init__()
-
-        if items:
-            self.update(items)
         self.cutoff = cutoff
 
         # short wrapper around some super (dict) methods
         self._dict_contains = lambda key: super(FuzzyDict, self).__contains__(key)
         self._dict_getitem = lambda key: super(FuzzyDict, self).__getitem__(key)
 
-    def _search(self, lookfor, stop_on_first=False):
+    def _search(self, lookfor: types.Any, stop_on_first: bool = False):
         """Returns the value whose key best matches lookfor
 
         if stop_on_first is True then the method returns as soon
@@ -73,13 +72,13 @@ class FuzzyDict(dict):
 
         return best_ratio >= self.cutoff, best_key, best_match, best_ratio
 
-    def __contains__(self, item):
+    def __contains__(self, item: types.Any):
         if self._search(item, True)[0]:
             return True
         else:
             return False
 
-    def __getitem__(self, lookfor):
+    def __getitem__(self, lookfor: types.Any):
         matched, key, item, ratio = self._search(lookfor)
 
         if not matched:
