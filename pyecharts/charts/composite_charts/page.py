@@ -198,7 +198,7 @@ class Page:
         source: str = "render.html",
         cfg: str = "chart_config.json",
         dest: str = "resize_render.html",
-    ) -> None:
+    ) -> str:
         with open(source, "r", encoding="utf8") as f:
             html = f.read()
 
@@ -224,3 +224,5 @@ class Page:
 
         with open(dest, "w+", encoding="utf8") as f:
             f.write(html)
+
+        return html
