@@ -56,7 +56,7 @@ def replace_placeholder(html: str) -> str:
 
 
 def replace_placeholder_without_quotes(html: str) -> str:
-    return re.sub('--x_x--0_0--', "", html)
+    return re.sub("--x_x--0_0--", "", html)
 
 
 def _flat(obj):

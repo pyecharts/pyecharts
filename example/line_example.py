@@ -121,7 +121,7 @@ def line_markpoint_custom() -> Line:
             y,
             markpoint_opts=opts.MarkPointOpts(
                 data=[opts.MarkPointItem(name="自定义标记点", coord=[x[2], y[2]], value=y[2])]
-            )
+            ),
         )
         .set_global_opts(title_opts=opts.TitleOpts(title="Line-MarkPoint（自定义）"))
     )

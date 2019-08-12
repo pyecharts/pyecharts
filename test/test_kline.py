@@ -1,6 +1,6 @@
 from unittest.mock import patch
 
-from nose.tools import eq_, assert_in
+from nose.tools import assert_in, eq_
 
 from pyecharts import options as opts
 from pyecharts.charts import Kline
