@@ -196,14 +196,23 @@ class Page:
     @staticmethod
     def save_resize_html(
         source: str = "render.html",
-        cfg: str = "chart_config.json",
+        *,
+        cfg_file: types.Optional[str] = None,
+        cfg_dict: types.Optional[list] = None,
         dest: str = "resize_render.html",
     ) -> str:
         with open(source, "r", encoding="utf8") as f:
             html = f.read()
 
-        with open(cfg, "r", encoding="utf8") as f:
-            charts = json.load(f)
+        if cfg_dict is None and cfg_dict is None:
+            raise ValueError("Chart layout config is empty")
+
+        if cfg_file:
+            with open(cfg_file, "r", encoding="utf8") as f:
+                charts = json.load(f)
+
+        if cfg_dict:
+            charts = cfg_dict
 
         for chart in charts:
             s = (

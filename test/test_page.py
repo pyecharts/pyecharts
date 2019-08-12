@@ -70,23 +70,40 @@ def _get_new_page(unique: bool = True) -> Page:
     return p
 
 
+# chart_config.json content
+LAYOUT_DICT = [
+    {
+        "cid": "chenjiandongx_is_an_awesome_boy",
+        "width": "900px",
+        "height": "500px",
+        "top": "31px",
+        "left": "8px",
+    },
+    {
+        "cid": "chenjiandongx_is_an_amazing_boy",
+        "width": "900px",
+        "height": "500px",
+        "top": "30px",
+        "left": "910px",
+    },
+]
+
+
 def test_page_draggable_layout_unique_chart_id():
-    chart_cfg = "./fixtures/chart_config.json"
     page1 = _get_new_page()
-    html1 = page1.save_resize_html(source=page1.render(), cfg=chart_cfg)
+    html1 = page1.save_resize_html(source=page1.render(), cfg_dict=LAYOUT_DICT)
 
     page2 = _get_new_page()
-    html2 = page2.save_resize_html(source=page2.render(), cfg=chart_cfg)
+    html2 = page2.save_resize_html(source=page2.render(), cfg_dict=LAYOUT_DICT)
 
     assert_not_equal(html1, html2)
 
 
 def test_page_draggable_layout_same_chart_id():
-    chart_cfg = "./fixtures/chart_config.json"
     page1 = _get_new_page(unique=False)
-    html1 = page1.save_resize_html(source=page1.render(), cfg=chart_cfg)
+    html1 = page1.save_resize_html(source=page1.render(), cfg_dict=LAYOUT_DICT)
 
     page2 = _get_new_page(unique=False)
-    html2 = page2.save_resize_html(source=page2.render(), cfg=chart_cfg)
+    html2 = page2.save_resize_html(source=page2.render(), cfg_dict=LAYOUT_DICT)
 
     eq_(html1, html2)
