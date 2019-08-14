@@ -2,7 +2,7 @@ from typing import List, Union
 
 from example.commons import Collector, Faker
 from pyecharts import options as opts
-from pyecharts.charts import Bar, Grid, Line, Kline, Page, Scatter
+from pyecharts.charts import Bar, Grid, Kline, Line, Page, Scatter
 
 C = Collector()
 

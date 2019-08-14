@@ -35,7 +35,7 @@ class Base:
         self.chart_id = _opts.get("chart_id") or uuid.uuid4().hex
 
         self.options: dict = {}
-        self.js_host: str = _opts.get("js_host", CurrentConfig.ONLINE_HOST)
+        self.js_host: str = _opts.get("js_host") or CurrentConfig.ONLINE_HOST
         self.js_functions: utils.OrderedSet = utils.OrderedSet()
         self.js_dependencies: utils.OrderedSet = utils.OrderedSet("echarts")
         self.options.update(backgroundColor=_opts.get("bg_color"))
@@ -52,6 +52,11 @@ class Base:
 
     def dump_options(self) -> str:
         return utils.replace_placeholder(
+            json.dumps(self.get_options(), indent=4, default=default, ignore_nan=True)
+        )
+
+    def dump_options_without_quotes(self) -> str:
+        return utils.replace_placeholder_without_quotes(
             json.dumps(self.get_options(), indent=4, default=default, ignore_nan=True)
         )
 

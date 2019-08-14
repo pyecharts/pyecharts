@@ -24,3 +24,9 @@
         <script type="text/javascript" src="{{ dep }}"></script>
     {% endfor %}
 {%- endmacro %}
+
+{%- macro render_chart_css(c) -%}
+    {% for dep in c.css_libs %}
+        <link rel="stylesheet"  href="{{ dep }}">
+    {% endfor %}
+{%- endmacro %}

@@ -54,12 +54,12 @@ def polar_radiusaxis() -> Polar:
     c = (
         Polar()
         .add_schema(
-            radiusaxis_opts=opts.RadiusAxisOpts(data=Faker.week, type_="category")
+            radiusaxis_opts=opts.RadiusAxisOpts(data=Faker.week, type_="category"),
+            angleaxis_opts=opts.AngleAxisOpts(is_clockwise=True, max_=10),
         )
-        .add("A", [1, 2, 3, 4, 3, 5, 1], type_="bar", stack="stack0")
-        .add("B", [2, 4, 6, 1, 2, 3, 1], type_="bar", stack="stack0")
-        .add("C", [1, 2, 3, 4, 1, 2, 5], type_="bar", stack="stack0")
+        .add("A", [1, 2, 3, 4, 3, 5, 1], type_="bar")
         .set_global_opts(title_opts=opts.TitleOpts(title="Polar-RadiusAxis"))
+        .set_series_opts(label_opts=opts.LabelOpts(is_show=True))
     )
     return c
 

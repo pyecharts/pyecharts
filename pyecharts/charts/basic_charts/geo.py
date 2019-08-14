@@ -42,6 +42,8 @@ class GeoChartBase(Chart):
         is_selected: bool = True,
         symbol: types.Optional[str] = None,
         symbol_size: types.Numeric = 12,
+        blur_size: types.Numeric = 20,
+        point_size: types.Numeric = 20,
         color: types.Optional[str] = None,
         is_polyline: bool = False,
         is_large: bool = False,
@@ -99,6 +101,8 @@ class GeoChartBase(Chart):
                     "data": data,
                     "tooltip": tooltip_opts,
                     "itemStyle": itemstyle_opts,
+                    "pointSize": point_size,
+                    "blurSize": blur_size,
                 }
             )
 

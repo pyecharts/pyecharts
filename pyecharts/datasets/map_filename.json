@@ -1,5 +1,8 @@
 {
   "bulma": ["bulma.min", "css"],
+  "jquery": ["jquery.min", "js"],
+  "jquery-ui": ["jquery-ui.min", "js"],
+  "resize-sensor": ["ResizeSensor", "js"],
   "echarts": ["echarts.min", "js"],
   "echarts-gl": ["echarts-gl.min", "js"],
   "echarts-liquidfill": ["echarts-liquidfill.min", "js"],
