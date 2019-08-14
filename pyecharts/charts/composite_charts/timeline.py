@@ -74,6 +74,7 @@ class Timeline(Base):
             {
                 "legend": chart.options.get("legend"),
                 "series": series_data,
+                "xAxis": chart.options.get("xAxis"),
                 "title": chart.options.get("title"),
                 "tooltip": chart.options.get("tooltip"),
                 "visualMap": chart.options.get("visualMap"),

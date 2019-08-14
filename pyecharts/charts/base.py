@@ -55,8 +55,8 @@ class Base:
             json.dumps(self.get_options(), indent=4, default=default, ignore_nan=True)
         )
 
-    def dump_options_without_quotes(self) -> str:
-        return utils.replace_placeholder_without_quotes(
+    def dump_options_with_quotes(self) -> str:
+        return utils.replace_placeholder_with_quotes(
             json.dumps(self.get_options(), indent=4, default=default, ignore_nan=True)
         )
 

@@ -174,4 +174,5 @@ page.add(
 )
 page.render()
 
+# reRender page html
 # Page.save_resize_html("render.html", cfg_file="chart_config.json")
