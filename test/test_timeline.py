@@ -2,8 +2,10 @@ import unittest
 
 from nose.tools import eq_
 
+from example.commons import Faker
 from pyecharts import options as opts
 from pyecharts.charts import Bar, Timeline
+from pyecharts.commons.utils import JsCode
 
 
 class TestTimeLine(unittest.TestCase):
@@ -49,3 +51,62 @@ class TestTimeLine(unittest.TestCase):
             type(opts.VisualMapOpts()),
             type(self.tl.options.get("options")[0].get("visualMap")),
         )
+
+    def test_timeline_graphic(self):
+        self.tl.add_schema(
+            graphic_opts=[
+                opts.GraphicGroup(
+                    graphic_item=opts.GraphicItem(
+                        rotation=JsCode("Math.PI / 4"),
+                        bounding="raw",
+                        right=110,
+                        bottom=110,
+                        z=100,
+                    ),
+                    children=[
+                        opts.GraphicRect(
+                            graphic_item=opts.GraphicItem(
+                                left="center", top="center", z=100
+                            ),
+                            graphic_shape_opts=opts.GraphicShapeOpts(
+                                width=400, height=50
+                            ),
+                            graphic_basicstyle_opts=opts.GraphicBasicStyleOpts(
+                                fill="rgba(0,0,0,0.3)"
+                            ),
+                        ),
+                        opts.GraphicText(
+                            graphic_item=opts.GraphicItem(
+                                left="center", top="center", z=100
+                            ),
+                            graphic_textstyle_opts=opts.GraphicTextStyleOpts(
+                                text="pyecharts bar chart",
+                                font="bold 26px Microsoft YaHei",
+                                graphic_basicstyle_opts=opts.GraphicBasicStyleOpts(
+                                    fill="#fff"
+                                ),
+                            ),
+                        ),
+                    ],
+                )
+            ]
+        )
+        eq_(
+            type(opts.GraphicGroup()),
+            type(self.tl.options.get("baseOption").get("timeline").get("graphic")[0]),
+        )
+
+
+def test_page_with_multi_axis():
+    tl = Timeline()
+    for i in range(2015, 2020):
+        bar = (
+            Bar()
+            .add_xaxis(Faker.choose())
+            .add_yaxis("商家A", Faker.values())
+            .add_yaxis("商家B", Faker.values())
+        )
+        tl.add(bar, "{}年".format(i))
+
+    for t in tl.options.get("options"):
+        assert "xAxis" in t

@@ -11,6 +11,7 @@ from typing import (
 )
 
 from . import options as opts
+from .options.charts_options import BaseGraphic
 from .options.series_options import JsCode, JSFunc, Numeric
 
 Init = Union[opts.InitOpts, dict]
@@ -19,9 +20,14 @@ Init = Union[opts.InitOpts, dict]
 Axis = Union[opts.AxisOpts, dict, None]
 Axis3D = Union[opts.Axis3DOpts, dict]
 AxisLine = Union[opts.AxisLineOpts, dict, None]
+AxisPointer = Union[opts.AxisPointerOpts, dict, None]
 AreaStyle = Union[opts.AreaStyleOpts, dict, None]
 Brush = Union[opts.BrushOpts, dict, None]
+_DataZoomType = Union[opts.DataZoomOpts, dict]
+DataZoom = Union[_DataZoomType, Sequence[_DataZoomType], None]
 Effect = Union[opts.EffectOpts, dict, None]
+_GraphicType = Union[BaseGraphic, dict]
+Graphic = Union[_GraphicType, Sequence[_GraphicType], None]
 ItemStyle = Union[opts.ItemStyleOpts, dict, None]
 MarkArea = Union[opts.MarkAreaOpts, dict, None]
 MarkPoint = Union[opts.MarkPointOpts, dict, None]
@@ -36,6 +42,8 @@ Toolbox = Union[opts.ToolboxOpts, dict]
 SplitLine = Union[opts.SplitLineOpts, dict, None]
 SplitArea = Union[opts.SplitAreaOpts, dict, None]
 SingleAxis = Union[opts.SingleAxisOpts, dict, None]
+_VisualMapType = Union[opts.VisualMapOpts, dict]
+VisualMap = Union[_VisualMapType, Sequence[_VisualMapType], None]
 
 Calendar = Union[opts.CalendarOpts, dict, None]
 

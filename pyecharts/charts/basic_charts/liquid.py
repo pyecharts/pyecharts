@@ -48,7 +48,7 @@ class Liquid(Chart):
                 "outline": {"show": is_outline_show},
                 "tooltip": tooltip_opts,
                 "label": label_opts,
-                "center": center
+                "center": center,
             }
         )
         return self

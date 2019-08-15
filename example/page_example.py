@@ -1,6 +1,7 @@
 from example.commons import Faker
 from pyecharts import options as opts
-from pyecharts.charts import Bar, Grid, Line, Page, Pie
+from pyecharts.charts import Bar, Grid, Line, Liquid, Page, Pie
+from pyecharts.commons.utils import JsCode
 
 
 def bar_datazoom_slider() -> Bar:
@@ -140,6 +141,38 @@ def grid_mutil_yaxis() -> Grid:
     )
 
 
-page = Page(layout=Page.SimplePageLayout)
-page.add(bar_datazoom_slider(), line_markpoint(), pie_rosetype(), grid_mutil_yaxis())
+def liquid_data_precision() -> Liquid:
+    c = (
+        Liquid()
+        .add(
+            "lq",
+            [0.3254],
+            label_opts=opts.LabelOpts(
+                font_size=50,
+                formatter=JsCode(
+                    """function (param) {
+                        return (Math.floor(param.value * 10000) / 100) + '%';
+                    }"""
+                ),
+                position="inside",
+            ),
+        )
+        .set_global_opts(title_opts=opts.TitleOpts(title="Liquid-数据精度"))
+    )
+    return c
+
+
+# Page.DraggablePageLayout
+# Page.SimplePageLayout
+page = Page(layout=Page.DraggablePageLayout)
+page.add(
+    bar_datazoom_slider(),
+    line_markpoint(),
+    pie_rosetype(),
+    grid_mutil_yaxis(),
+    liquid_data_precision(),
+)
 page.render()
+
+# reRender page html
+# Page.save_resize_html("render.html", cfg_file="chart_config.json")

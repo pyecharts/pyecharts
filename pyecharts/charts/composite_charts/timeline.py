@@ -35,6 +35,7 @@ class Timeline(Base):
         linestyle_opts: types.Union[opts.LineStyleOpts, dict, None] = None,
         label_opts: types.Optional[opts.LabelOpts] = None,
         itemstyle_opts: types.ItemStyle = None,
+        graphic_opts: types.Graphic = None,
     ):
         self.options.get("baseOption").get("timeline").update(
             {
@@ -57,6 +58,7 @@ class Timeline(Base):
                 "lineStyle": linestyle_opts,
                 "label": label_opts,
                 "itemStyle": itemstyle_opts,
+                "graphic": graphic_opts,
             }
         )
         return self
@@ -72,6 +74,7 @@ class Timeline(Base):
             {
                 "legend": chart.options.get("legend"),
                 "series": series_data,
+                "xAxis": chart.options.get("xAxis"),
                 "title": chart.options.get("title"),
                 "tooltip": chart.options.get("tooltip"),
                 "visualMap": chart.options.get("visualMap"),

@@ -160,7 +160,7 @@ class BrushOpts(BasicOpts):
             "throttleType": throttle_type,
             "throttleDelay": throttle_delay,
             "removeOnClick": remove_on_click,
-            "outOfBrush": out_of_brush
+            "outOfBrush": out_of_brush,
         }
 
 

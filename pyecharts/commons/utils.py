@@ -55,6 +55,10 @@ def replace_placeholder(html: str) -> str:
     return re.sub('"?--x_x--0_0--"?', "", html)
 
 
+def replace_placeholder_with_quotes(html: str) -> str:
+    return re.sub("--x_x--0_0--", "", html)
+
+
 def _flat(obj):
     if hasattr(obj, "js_dependencies"):
         return list(obj.js_dependencies)

@@ -2,12 +2,7 @@ from .. import options as opts
 from .. import types
 from ..charts.base import Base
 from ..globals import RenderType, ThemeType, ToolTipFormatterType
-from ..options.charts_options import BaseGraphic
 from ..types import Optional, Sequence, Union
-
-VisualMapType = Union[opts.VisualMapOpts, dict]
-DataZoomType = Union[opts.DataZoomOpts, dict]
-GraphicType = Union[BaseGraphic, dict]
 
 
 class Chart(Base):
@@ -108,10 +103,10 @@ class Chart(Base):
         brush_opts: types.Brush = None,
         xaxis_opts: types.Axis = None,
         yaxis_opts: types.Axis = None,
-        visualmap_opts: Union[VisualMapType, Sequence[VisualMapType], None] = None,
-        datazoom_opts: Union[DataZoomType, Sequence[DataZoomType], None] = None,
-        graphic_opts: Union[GraphicType, Sequence[GraphicType], None] = None,
-        axispointer_opts: Union[opts.AxisPointerOpts, dict, None] = None,
+        visualmap_opts: types.VisualMap = None,
+        datazoom_opts: types.DataZoom = None,
+        graphic_opts: types.Graphic = None,
+        axispointer_opts: types.AxisPointer = None,
     ):
         if tooltip_opts is None:
             tooltip_opts = opts.TooltipOpts(

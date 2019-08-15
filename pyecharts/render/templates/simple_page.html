@@ -5,14 +5,23 @@
     <meta charset="UTF-8">
     <title>{{ chart.page_title }}</title>
     {{ macro.render_chart_dependencies(chart) }}
+    {{ macro.render_chart_css(chart) }}
 </head>
 <body>
-    <style>.box { {{ chart.layout }} } </style>
+    <style>.box { {{ chart.layout }} }; </style>
+    {% if chart.download_button %}
+        <button onclick="downloadCfg()">Save Config</button>
+    {% endif %}
     <div class="box">
         {% for c in chart %}
             {{ macro.render_chart_content(c) }}
             {% for _ in range(chart.page_interval) %}<br/>{% endfor %}
         {% endfor %}
     </div>
+    <script>
+        {% for js in chart.js_functions.items %}
+            {{ js }}
+        {% endfor %}
+    </script>
 </body>
 </html>

@@ -34,7 +34,7 @@ class ItemStyleOpts(BasicOpts):
             "borderColor0": border_color0,
             "borderWidth": border_width,
             "opacity": opacity,
-            "areaColor": area_color
+            "areaColor": area_color,
         }
 
 

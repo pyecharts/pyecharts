@@ -1,9 +1,9 @@
 import os
 from unittest.mock import patch
 
-from nose.tools import eq_
+from nose.tools import eq_, raises
 
-from pyecharts.datasets import EXTRA, register_url
+from pyecharts.datasets import EXTRA, FuzzyDict, register_url
 
 
 @patch("pyecharts.datasets.urllib.request.urlopen")
@@ -23,3 +23,16 @@ def test_register_url(fake):
                 }
             },
         )
+
+
+def test_fuzzy_search_dict():
+    fd = FuzzyDict()
+    fd.update({"我是北京市": [1, 2]})
+    eq_(fd["我是北京"], [1, 2])
+
+
+@raises(KeyError)
+def test_fuzzy_search_key_error():
+    fd = FuzzyDict()
+    fd.cutoff = 0.9
+    _ = fd["我是北京"]
