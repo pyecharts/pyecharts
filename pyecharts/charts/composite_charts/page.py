@@ -204,7 +204,7 @@ class Page:
         with open(source, "r", encoding="utf8") as f:
             html = f.read()
 
-        if cfg_dict is None and cfg_dict is None:
+        if cfg_dict is None and cfg_file is None:
             raise ValueError("Chart layout config is empty")
 
         if cfg_file:
