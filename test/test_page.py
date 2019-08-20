@@ -1,4 +1,4 @@
-from nose.tools import assert_not_equal, assert_true, eq_
+from nose.tools import assert_not_equal, assert_true, eq_, raises
 
 from example.commons import Faker
 from pyecharts.charts import Bar, Line, Page
@@ -107,3 +107,9 @@ def test_page_draggable_layout_same_chart_id():
     html2 = page2.save_resize_html(source=page2.render(), cfg_dict=LAYOUT_DICT)
 
     eq_(html1, html2)
+
+
+@raises(ValueError)
+def test_page_cfg_type():
+    page = Page()
+    page.save_resize_html()

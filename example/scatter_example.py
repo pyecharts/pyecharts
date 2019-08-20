@@ -18,6 +18,21 @@ def scatter_base() -> Scatter:
 
 
 @C.funcs
+def scatter_value_xaxis() -> Scatter:
+    c = (
+        Scatter()
+        .add_xaxis(Faker.values())
+        .add_yaxis("商家A", Faker.values())
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="Scatter-X 数值轴"),
+            xaxis_opts=opts.AxisOpts(type_="value"),
+            tooltip_opts=opts.TooltipOpts(formatter="{c}"),
+        )
+    )
+    return c
+
+
+@C.funcs
 def scatter_spliteline() -> Scatter:
     c = (
         Scatter()
