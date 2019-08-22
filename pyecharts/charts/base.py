@@ -65,10 +65,11 @@ class Base:
         path: str = "render.html",
         template_name: str = "simple_chart.html",
         env: Optional[Environment] = None,
+        **kwargs,
     ) -> str:
         self._prepare_render()
         RenderEngine(env).render_chart_to_file(
-            chart=self, path=path, template_name=template_name
+            template_name=template_name, chart=self, path=path, **kwargs
         )
         return os.path.abspath(path)
 
@@ -76,9 +77,12 @@ class Base:
         self,
         template_name: str = "simple_chart.html",
         env: Optional[Environment] = None,
-    ):
+        **kwargs,
+    ) -> str:
         self._prepare_render()
-        html = RenderEngine(env).render_chart_to_template(template_name, chart=self)
+        html = RenderEngine(env).render_chart_to_template(
+            template_name, chart=self, **kwargs
+        )
         return html
 
     def render_notebook(self):

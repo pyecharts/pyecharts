@@ -110,3 +110,4 @@ def test_page_with_multi_axis():
 
     for t in tl.options.get("options"):
         assert "xAxis" in t
+        assert "color" in t

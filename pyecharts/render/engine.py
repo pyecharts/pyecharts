@@ -31,7 +31,7 @@ class RenderEngine:
         chart.dependencies = links
         return chart
 
-    def render_chart_to_file(self, template_name: str, chart: Any, path: str):
+    def render_chart_to_file(self, template_name: str, chart: Any, path: str, **kwargs):
         """
         Render a chart or page to local html files.
 
@@ -40,12 +40,16 @@ class RenderEngine:
         :param template_name: The name of template file.
         """
         tpl = self.env.get_template(template_name)
-        html = replace_placeholder(tpl.render(chart=self.generate_js_link(chart)))
+        html = replace_placeholder(
+            tpl.render(chart=self.generate_js_link(chart), **kwargs)
+        )
         write_utf8_html_file(path, html)
 
-    def render_chart_to_template(self, template_name: str, chart: Any) -> str:
+    def render_chart_to_template(self, template_name: str, chart: Any, **kwargs) -> str:
         tpl = self.env.get_template(template_name)
-        return replace_placeholder(tpl.render(chart=self.generate_js_link(chart)))
+        return replace_placeholder(
+            tpl.render(chart=self.generate_js_link(chart), **kwargs)
+        )
 
     def render_chart_to_notebook(self, template_name: str, **kwargs) -> str:
         tpl = self.env.get_template(template_name)

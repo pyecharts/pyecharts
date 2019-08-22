@@ -139,10 +139,11 @@ class Page:
         path: str = "render.html",
         template_name: str = "simple_page.html",
         env: types.Optional[Environment] = None,
-    ):
+        **kwargs,
+    ) -> str:
         self._prepare_render()
         RenderEngine(env).render_chart_to_file(
-            template_name=template_name, chart=self, path=path
+            template_name=template_name, chart=self, path=path, **kwargs
         )
         return os.path.abspath(path)
 
@@ -150,10 +151,11 @@ class Page:
         self,
         template_name: str = "simple_page.html",
         env: types.Optional[Environment] = None,
-    ):
+        **kwargs,
+    ) -> str:
         self._prepare_render()
         return RenderEngine(env).render_chart_to_template(
-            template_name=template_name, chart=self
+            template_name=template_name, chart=self, **kwargs
         )
 
     def render_notebook(self):
@@ -184,7 +186,10 @@ class Page:
             )
 
         if CurrentConfig.NOTEBOOK_TYPE == NotebookType.NTERACT:
-            pass
+            return HTML(self.render_embed())
+
+        if CurrentConfig.NOTEBOOK_TYPE == NotebookType.ZEPPELIN:
+            print("%html " + self.render_embed())
 
     def load_javascript(self):
         scripts = []
