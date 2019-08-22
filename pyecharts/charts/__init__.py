@@ -29,6 +29,7 @@ from ..charts.basic_charts.wordcloud import WordCloud
 # Composite Charts
 from ..charts.composite_charts.grid import Grid
 from ..charts.composite_charts.page import Page
+from ..charts.composite_charts.tab import Tab
 from ..charts.composite_charts.timeline import Timeline
 
 # 3d charts

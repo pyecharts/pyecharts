@@ -164,7 +164,7 @@ def liquid_data_precision() -> Liquid:
 
 # Page.DraggablePageLayout
 # Page.SimplePageLayout
-page = Page(layout=Page.DraggablePageLayout)
+page = Page()
 page.add(
     bar_datazoom_slider(),
     line_markpoint(),
