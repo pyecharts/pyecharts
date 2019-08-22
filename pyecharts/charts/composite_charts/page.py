@@ -186,7 +186,10 @@ class Page:
             )
 
         if CurrentConfig.NOTEBOOK_TYPE == NotebookType.NTERACT:
-            pass
+            return HTML(self.render_embed())
+
+        if CurrentConfig.NOTEBOOK_TYPE == NotebookType.ZEPPELIN:
+            print("%html " + self.render_embed())
 
     def load_javascript(self):
         scripts = []
