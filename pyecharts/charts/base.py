@@ -60,6 +60,7 @@ class Base:
             json.dumps(self.get_options(), indent=4, default=default, ignore_nan=True)
         )
 
+    # TODO: 抽象 Render 类
     def render(
         self,
         path: str = "render.html",
