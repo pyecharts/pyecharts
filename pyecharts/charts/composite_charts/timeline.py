@@ -78,6 +78,7 @@ class Timeline(Base):
                 "title": chart.options.get("title"),
                 "tooltip": chart.options.get("tooltip"),
                 "visualMap": chart.options.get("visualMap"),
+                "color": chart.options.get("color"),
             }
         )
         self.__check_components(chart)
