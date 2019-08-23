@@ -55,7 +55,7 @@ class Page(Render):
         interval: int = 1,
         layout: types.Union[PageLayoutOpts, dict] = PageLayoutOpts(),
     ):
-        self.js_host = js_host or CurrentConfig.ONLINE_HOST
+        self.js_host: str = js_host or CurrentConfig.ONLINE_HOST
         self.page_title = page_title
         self.page_interval = interval
         self.layout = self._assembly_layout(layout)

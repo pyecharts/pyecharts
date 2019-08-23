@@ -10,8 +10,8 @@ from ...render.engine import Render
 
 class Tab(Render):
     def __init__(self, page_title: str = CurrentConfig.PAGE_TITLE, js_host: str = ""):
-        self.js_host = js_host or CurrentConfig.ONLINE_HOST
-        self.page_title = page_title
+        self.js_host: str = js_host or CurrentConfig.ONLINE_HOST
+        self.page_title: str = page_title
         self.download_button: bool = False
         self.js_functions: utils.OrderedSet = utils.OrderedSet()
         self.js_dependencies = utils.OrderedSet()

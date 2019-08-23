@@ -9,7 +9,7 @@ from ..types import Any, Optional
 from .display import HTML, Javascript
 
 
-def write_utf8_html_file(file_name, html_content):
+def write_utf8_html_file(file_name: str, html_content: str):
     with open(file_name, "w+", encoding="utf-8") as html_file:
         html_file.write(html_content)
 
@@ -66,7 +66,7 @@ class RenderEngine:
 
 class Render:
     def __int__(self):
-        self.js_host = ""
+        self.js_host: str = ""
         self.js_functions: utils.OrderedSet = utils.OrderedSet()
         self.js_dependencies = utils.OrderedSet()
 
