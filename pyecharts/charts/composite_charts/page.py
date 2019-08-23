@@ -1,5 +1,4 @@
 import json
-import os
 import re
 import uuid
 
@@ -7,11 +6,9 @@ from jinja2 import Environment
 
 from ... import types
 from ...commons import utils
-from ...datasets import FILENAMES
-from ...globals import CurrentConfig, NotebookType, ThemeType
+from ...globals import CurrentConfig, ThemeType
 from ...options import PageLayoutOpts
-from ...render.display import HTML, Javascript
-from ...render.engine import RenderEngine
+from ...render.engine import Render
 
 _MARK_FREEDOM_LAYOUT = "_MARK_FREEDOM_LAYOUT_"
 
@@ -41,91 +38,7 @@ function downloadCfg () {
 }"""
 
 
-class IterChart:
-    def __init__(self, js_host: str = ""):
-        self.js_host = js_host
-        self.js_functions: utils.OrderedSet = utils.OrderedSet()
-        self.js_dependencies = utils.OrderedSet()
-        self._charts = []
-
-    # List-Like Feature
-    def __iter__(self):
-        for chart in self._charts:
-            yield chart
-
-    def __len__(self):
-        return len(self._charts)
-
-    def add_js_funcs(self, *fns):
-        for fn in fns:
-            self.js_functions.add(fn)
-        return self
-
-    def load_javascript(self):
-        scripts = []
-        for dep in self.js_dependencies.items:
-            f, ext = FILENAMES[dep]
-            scripts.append("{}{}.{}".format(CurrentConfig.ONLINE_HOST, f, ext))
-        return Javascript(lib=scripts)
-
-    def _prepare_render(self):
-        for c in self:
-            c.json_contents = c.dump_options()
-            if c.theme not in ThemeType.BUILTIN_THEMES:
-                self.js_dependencies.add(c.theme)
-
-    def _render(
-        self, path: str, template_name: str, env: types.Optional[Environment], **kwargs
-    ) -> str:
-        self._prepare_render()
-        RenderEngine(env).render_chart_to_file(
-            template_name=template_name, chart=self, path=path, **kwargs
-        )
-        return os.path.abspath(path)
-
-    def _render_embed(
-        self, template_name: str, env: types.Optional[Environment], **kwargs
-    ) -> str:
-        self._prepare_render()
-        return RenderEngine(env).render_chart_to_template(
-            template_name=template_name, chart=self, **kwargs
-        )
-
-    def _render_notebook(self, notebook_template, lab_template):
-        for c in self:
-            c.json_contents = c.dump_options()
-            c.chart_id = uuid.uuid4().hex
-            if c.theme not in ThemeType.BUILTIN_THEMES:
-                self.js_dependencies.add(c.theme)
-
-        if CurrentConfig.NOTEBOOK_TYPE == NotebookType.JUPYTER_NOTEBOOK:
-            require_config = utils.produce_require_dict(
-                self.js_dependencies, self.js_host
-            )
-            return HTML(
-                RenderEngine().render_chart_to_notebook(
-                    template_name=notebook_template,
-                    charts=self,
-                    config_items=require_config["config_items"],
-                    libraries=require_config["libraries"],
-                )
-            )
-
-        if CurrentConfig.NOTEBOOK_TYPE == NotebookType.JUPYTER_LAB:
-            return HTML(
-                RenderEngine().render_chart_to_notebook(
-                    template_name=lab_template, charts=self
-                )
-            )
-
-        if CurrentConfig.NOTEBOOK_TYPE == NotebookType.NTERACT:
-            return HTML(self.render_embed())
-
-        if CurrentConfig.NOTEBOOK_TYPE == NotebookType.ZEPPELIN:
-            print("%html " + self.render_embed())
-
-
-class Page(IterChart):
+class Page(Render):
     """
     `Page` A container object to present multiple charts vertically in a single page
     """
@@ -142,11 +55,21 @@ class Page(IterChart):
         interval: int = 1,
         layout: types.Union[PageLayoutOpts, dict] = PageLayoutOpts(),
     ):
-        super().__init__(js_host=js_host or CurrentConfig.ONLINE_HOST)
+        self.js_host = js_host or CurrentConfig.ONLINE_HOST
         self.page_title = page_title
         self.page_interval = interval
         self.layout = self._assembly_layout(layout)
+        self.js_functions: utils.OrderedSet = utils.OrderedSet()
+        self.js_dependencies = utils.OrderedSet()
         self.download_button: bool = False
+        self._charts: list = []
+
+    def __iter__(self):
+        for chart in self._charts:
+            yield chart
+
+    def __len__(self):
+        return len(self._charts)
 
     def add(self, *charts):
         for c in charts:
@@ -167,7 +90,10 @@ class Page(IterChart):
         return result
 
     def _prepare_render(self):
-        super()._prepare_render()
+        for c in self:
+            c.json_contents = c.dump_options()
+            if c.theme not in ThemeType.BUILTIN_THEMES:
+                self.js_dependencies.add(c.theme)
         charts_id = []
         if self.layout == _MARK_FREEDOM_LAYOUT:
             self.download_button = True
@@ -216,6 +142,11 @@ class Page(IterChart):
         return super()._render_embed(template_name, env, **kwargs)
 
     def render_notebook(self):
+        for c in self:
+            c.json_contents = c.dump_options()
+            c.chart_id = uuid.uuid4().hex
+            if c.theme not in ThemeType.BUILTIN_THEMES:
+                self.js_dependencies.add(c.theme)
         return super()._render_notebook("jupyter_notebook.html", "jupyter_lab.html")
 
     @staticmethod
@@ -229,6 +160,7 @@ class Page(IterChart):
         with open(source, "r", encoding="utf8") as f:
             html = f.read()
 
+        charts = []
         if cfg_dict is None and cfg_file is None:
             raise ValueError("Chart layout config is empty")
 

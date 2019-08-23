@@ -1,9 +1,17 @@
+import os
+
 from jinja2 import Environment
 
-from ..commons.utils import replace_placeholder, write_utf8_html_file
+from ..commons import utils
 from ..datasets import EXTRA, FILENAMES
-from ..globals import CurrentConfig
+from ..globals import CurrentConfig, NotebookType
 from ..types import Any, Optional
+from .display import HTML, Javascript
+
+
+def write_utf8_html_file(file_name, html_content):
+    with open(file_name, "w+", encoding="utf-8") as html_file:
+        html_file.write(html_content)
 
 
 class RenderEngine:
@@ -40,17 +48,86 @@ class RenderEngine:
         :param template_name: The name of template file.
         """
         tpl = self.env.get_template(template_name)
-        html = replace_placeholder(
+        html = utils.replace_placeholder(
             tpl.render(chart=self.generate_js_link(chart), **kwargs)
         )
         write_utf8_html_file(path, html)
 
     def render_chart_to_template(self, template_name: str, chart: Any, **kwargs) -> str:
         tpl = self.env.get_template(template_name)
-        return replace_placeholder(
+        return utils.replace_placeholder(
             tpl.render(chart=self.generate_js_link(chart), **kwargs)
         )
 
     def render_chart_to_notebook(self, template_name: str, **kwargs) -> str:
         tpl = self.env.get_template(template_name)
-        return replace_placeholder(tpl.render(**kwargs))
+        return utils.replace_placeholder(tpl.render(**kwargs))
+
+
+class Render:
+    def __int__(self):
+        self.js_host = ""
+        self.js_functions: utils.OrderedSet = utils.OrderedSet()
+        self.js_dependencies = utils.OrderedSet()
+
+    def _prepare_render(self):
+        raise NotImplementedError
+
+    def _render(
+        self, path: str, template_name: str, env: Optional[Environment], **kwargs
+    ) -> str:
+        self._prepare_render()
+        RenderEngine(env).render_chart_to_file(
+            template_name=template_name, chart=self, path=path, **kwargs
+        )
+        return os.path.abspath(path)
+
+    def _render_embed(
+        self, template_name: str, env: Optional[Environment], **kwargs
+    ) -> str:
+        self._prepare_render()
+        return RenderEngine(env).render_chart_to_template(
+            template_name=template_name, chart=self, **kwargs
+        )
+
+    def render_embed(self):
+        raise NotImplementedError
+
+    def _render_notebook(self, notebook_template, lab_template):
+        if CurrentConfig.NOTEBOOK_TYPE == NotebookType.JUPYTER_NOTEBOOK:
+            require_config = utils.produce_require_dict(
+                self.js_dependencies, self.js_host
+            )
+            return HTML(
+                RenderEngine().render_chart_to_notebook(
+                    template_name=notebook_template,
+                    charts=self,
+                    config_items=require_config["config_items"],
+                    libraries=require_config["libraries"],
+                )
+            )
+
+        if CurrentConfig.NOTEBOOK_TYPE == NotebookType.JUPYTER_LAB:
+            return HTML(
+                RenderEngine().render_chart_to_notebook(
+                    template_name=lab_template, charts=self
+                )
+            )
+
+        if CurrentConfig.NOTEBOOK_TYPE == NotebookType.NTERACT:
+            return HTML(self.render_embed())
+
+        if CurrentConfig.NOTEBOOK_TYPE == NotebookType.ZEPPELIN:
+            print("%html " + self.render_embed())
+
+    def load_javascript(self):
+        scripts = []
+        for dep in self.js_dependencies.items:
+            f, ext = FILENAMES[dep]
+            scripts.append("{}{}.{}".format(CurrentConfig.ONLINE_HOST, f, ext))
+        return Javascript(lib=scripts)
+
+    def add_js_funcs(self, *fns):
+        for fn in fns:
+            self.js_functions.add(fn)
+        return self
