@@ -73,13 +73,7 @@ class Render:
     def _prepare_render(self):
         raise NotImplementedError
 
-    def render(self):
-        raise NotImplementedError
-
     def render_embed(self):
-        raise NotImplementedError
-
-    def render_notebook(self):
         raise NotImplementedError
 
     def _render(
