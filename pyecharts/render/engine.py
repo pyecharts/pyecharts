@@ -73,6 +73,15 @@ class Render:
     def _prepare_render(self):
         raise NotImplementedError
 
+    def render(self):
+        raise NotImplementedError
+
+    def render_embed(self):
+        raise NotImplementedError
+
+    def render_notebook(self):
+        raise NotImplementedError
+
     def _render(
         self, path: str, template_name: str, env: Optional[Environment], **kwargs
     ) -> str:
@@ -89,9 +98,6 @@ class Render:
         return RenderEngine(env).render_chart_to_template(
             template_name=template_name, chart=self, **kwargs
         )
-
-    def render_embed(self):
-        raise NotImplementedError
 
     def _render_notebook(self, notebook_template, lab_template):
         if CurrentConfig.NOTEBOOK_TYPE == NotebookType.JUPYTER_NOTEBOOK:

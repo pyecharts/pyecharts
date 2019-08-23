@@ -28,7 +28,7 @@ def pie_multiple_base() -> Pie:
     """
 
     def new_label_opts():
-        return opts.LabelOpts(formatter=fn, position="center")
+        return opts.LabelOpts(formatter=JsCode(fn), position="center")
 
     c = (
         Pie()
