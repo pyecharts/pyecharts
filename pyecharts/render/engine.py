@@ -95,7 +95,7 @@ class Render:
         )
 
     def _render_notebook(self, notebook_template, lab_template):
-        instance = (self,)
+        instance = self if isinstance(self, Iterable) else (self,)
         if CurrentConfig.NOTEBOOK_TYPE == NotebookType.JUPYTER_NOTEBOOK:
             require_config = utils.produce_require_dict(
                 self.js_dependencies, self.js_host
