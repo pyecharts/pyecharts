@@ -1,0 +1,27 @@
+{% import 'macro' as macro %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{{ chart.page_title }}</title>
+    {{ macro.render_chart_dependencies(chart) }}
+    {{ macro.render_chart_css(chart) }}
+</head>
+<body>
+    {{ macro.generate_tab_css() }}
+    {{ macro.display_tablinks(chart) }}
+
+    <div class="box">
+        {% for c in chart %}
+            {{ macro.render_chart_content(c) }}
+        {% endfor %}
+    </div>
+
+    <script>
+        {% for js in chart.js_functions.items %}
+            {{ js }}
+        {% endfor %}
+    </script>
+    {{ macro.switch_tabs() }}
+</body>
+</html>

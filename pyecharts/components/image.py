@@ -45,9 +45,10 @@ class Image:
         path: str = "render.html",
         template_name: str = "image.html",
         env: Optional[Environment] = None,
+        **kwargs,
     ) -> str:
         RenderEngine(env).render_chart_to_file(
-            chart=self, path=path, template_name=template_name
+            chart=self, path=path, template_name=template_name, **kwargs
         )
         return os.path.abspath(path)
 

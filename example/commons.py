@@ -1,13 +1,6 @@
 import os
 import random
 
-from pyecharts.render import make_snapshot
-
-
-def render_chart_images(charts: list):
-    for fn, name in charts:
-        make_snapshot(fn().render(), Faker.img_path(name + ".png"))
-
 
 class _Faker:
     clothes = ["衬衫", "毛衣", "领带", "裤子", "风衣", "高跟鞋", "袜子"]
