@@ -1,22 +1,19 @@
 import datetime
-import os
 import uuid
 
 import simplejson as json
 from jinja2 import Environment
 
 from ..commons import utils
-from ..datasets import FILENAMES
-from ..globals import CurrentConfig, NotebookType, RenderType, ThemeType
+from ..globals import CurrentConfig, RenderType, ThemeType
 from ..options import InitOpts
 from ..options.global_options import AnimationOpts
 from ..options.series_options import BasicOpts
-from ..render.display import HTML, Javascript
-from ..render.engine import RenderEngine
+from ..render.engine import Render
 from ..types import Optional, Sequence, Union
 
 
-class Base:
+class Base(Render):
     """
     `Base` is the root class for all graphical class, it provides
     part of the initialization parameters and common methods
@@ -42,11 +39,6 @@ class Base:
         self.options.update(_opts.get("animationOpts", AnimationOpts()).opts)
         self._is_geo_chart: bool = False
 
-    def add_js_funcs(self, *fns):
-        for fn in fns:
-            self.js_functions.add(fn)
-        return self
-
     def get_options(self) -> dict:
         return utils.remove_key_with_none_value(self.options)
 
@@ -67,11 +59,7 @@ class Base:
         env: Optional[Environment] = None,
         **kwargs,
     ) -> str:
-        self._prepare_render()
-        RenderEngine(env).render_chart_to_file(
-            template_name=template_name, chart=self, path=path, **kwargs
-        )
-        return os.path.abspath(path)
+        return super()._render(path, template_name, env, **kwargs)
 
     def render_embed(
         self,
@@ -79,40 +67,12 @@ class Base:
         env: Optional[Environment] = None,
         **kwargs,
     ) -> str:
-        self._prepare_render()
-        html = RenderEngine(env).render_chart_to_template(
-            template_name, chart=self, **kwargs
-        )
-        return html
+        return super()._render_embed(template_name, env, **kwargs)
 
     def render_notebook(self):
         self.chart_id = uuid.uuid4().hex
         self._prepare_render()
-        if CurrentConfig.NOTEBOOK_TYPE == NotebookType.JUPYTER_NOTEBOOK:
-            require_config = utils.produce_require_dict(
-                self.js_dependencies, self.js_host
-            )
-            return HTML(
-                RenderEngine().render_chart_to_notebook(
-                    template_name="jupyter_notebook.html",
-                    charts=(self,),
-                    config_items=require_config["config_items"],
-                    libraries=require_config["libraries"],
-                )
-            )
-
-        if CurrentConfig.NOTEBOOK_TYPE == NotebookType.JUPYTER_LAB:
-            return HTML(
-                RenderEngine().render_chart_to_notebook(
-                    template_name="jupyter_lab.html", charts=(self,)
-                )
-            )
-
-        if CurrentConfig.NOTEBOOK_TYPE == NotebookType.NTERACT:
-            return HTML(self.render_embed())
-
-        if CurrentConfig.NOTEBOOK_TYPE == NotebookType.ZEPPELIN:
-            print("%html " + self.render_embed())
+        return super()._render_notebook("jupyter_notebook.html", "jupyter_lab.html")
 
     def _use_theme(self):
         if self.theme not in ThemeType.BUILTIN_THEMES:
@@ -121,13 +81,6 @@ class Base:
     def _prepare_render(self):
         self.json_contents = self.dump_options()
         self._use_theme()
-
-    def load_javascript(self):
-        scripts = []
-        for dep in self.js_dependencies.items:
-            f, ext = FILENAMES[dep]
-            scripts.append("{}{}.{}".format(CurrentConfig.ONLINE_HOST, f, ext))
-        return Javascript(lib=scripts)
 
 
 def default(o):
