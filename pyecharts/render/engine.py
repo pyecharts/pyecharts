@@ -77,17 +77,12 @@ class Render:
     def render_embed(self):
         raise NotImplementedError
 
-    def _iter_charts(self):
-        if not isinstance(self, Iterable):
-            return (self,)
-        return self
-
     def _render(
         self, path: str, template_name: str, env: Optional[Environment], **kwargs
     ) -> str:
         self._prepare_render()
         RenderEngine(env).render_chart_to_file(
-            template_name=template_name, chart=self._iter_charts(), path=path, **kwargs
+            template_name=template_name, chart=self, path=path, **kwargs
         )
         return os.path.abspath(path)
 
@@ -96,10 +91,11 @@ class Render:
     ) -> str:
         self._prepare_render()
         return RenderEngine(env).render_chart_to_template(
-            template_name=template_name, chart=self._iter_charts(), **kwargs
+            template_name=template_name, chart=self, **kwargs
         )
 
     def _render_notebook(self, notebook_template, lab_template):
+        instance = (self,)
         if CurrentConfig.NOTEBOOK_TYPE == NotebookType.JUPYTER_NOTEBOOK:
             require_config = utils.produce_require_dict(
                 self.js_dependencies, self.js_host
@@ -107,7 +103,7 @@ class Render:
             return HTML(
                 RenderEngine().render_chart_to_notebook(
                     template_name=notebook_template,
-                    charts=self._iter_charts(),
+                    charts=instance,
                     config_items=require_config["config_items"],
                     libraries=require_config["libraries"],
                 )
@@ -116,7 +112,7 @@ class Render:
         if CurrentConfig.NOTEBOOK_TYPE == NotebookType.JUPYTER_LAB:
             return HTML(
                 RenderEngine().render_chart_to_notebook(
-                    template_name=lab_template, charts=self._iter_charts()
+                    template_name=lab_template, charts=instance
                 )
             )
 
