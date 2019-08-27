@@ -57,5 +57,5 @@ class Tab(CompositeMixin):
             if c.theme not in ThemeType.BUILTIN_THEMES:
                 self.js_dependencies.add(c.theme)
         return engine.render_notebook(
-            self,
-            "jupyter_notebook_tab.html", "jupyter_lab.html")
+            self, "jupyter_notebook_tab.html", "jupyter_lab.html"
+        )

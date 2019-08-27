@@ -85,9 +85,7 @@ def render_embed(
 def render_notebook(self, notebook_template, lab_template):
     instance = self if isinstance(self, Iterable) else (self,)
     if CurrentConfig.NOTEBOOK_TYPE == NotebookType.JUPYTER_NOTEBOOK:
-        require_config = utils.produce_require_dict(
-            self.js_dependencies, self.js_host
-        )
+        require_config = utils.produce_require_dict(self.js_dependencies, self.js_host)
         return HTML(
             RenderEngine().render_chart_to_notebook(
                 template_name=notebook_template,

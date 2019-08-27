@@ -12,7 +12,6 @@ class ChartMixin(object):
 
 
 class CompositeMixin(ChartMixin):
-
     def __iter__(self):
         for chart in self._charts:
             yield chart
