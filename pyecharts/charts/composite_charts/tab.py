@@ -5,10 +5,11 @@ from jinja2 import Environment
 from ... import types
 from ...commons import utils
 from ...globals import CurrentConfig, ThemeType
-from ...render.engine import Render
+from ...render import engine
+from .composite import CompositeMixin
 
 
-class Tab(Render):
+class Tab(CompositeMixin):
     def __init__(self, page_title: str = CurrentConfig.PAGE_TITLE, js_host: str = ""):
         self.js_host: str = js_host or CurrentConfig.ONLINE_HOST
         self.page_title: str = page_title
@@ -24,13 +25,6 @@ class Tab(Render):
             self.js_dependencies.add(d)
         return self
 
-    def __iter__(self):
-        for chart in self._charts:
-            yield chart
-
-    def __len__(self):
-        return len(self._charts)
-
     def render(
         self,
         path: str = "render.html",
@@ -38,7 +32,8 @@ class Tab(Render):
         env: types.Optional[Environment] = None,
         **kwargs,
     ) -> str:
-        return super()._render(path, template_name, env, **kwargs)
+        self._prepare_render()
+        return engine.render(self, path, template_name, env, **kwargs)
 
     def render_embed(
         self,
@@ -46,7 +41,8 @@ class Tab(Render):
         env: types.Optional[Environment] = None,
         **kwargs,
     ) -> str:
-        return super()._render_embed(template_name, env, **kwargs)
+        self._prepare_render()
+        return engine.render_embed(self, template_name, env, **kwargs)
 
     def _prepare_render(self):
         for c in self:
@@ -60,4 +56,6 @@ class Tab(Render):
             c.chart_id = uuid.uuid4().hex
             if c.theme not in ThemeType.BUILTIN_THEMES:
                 self.js_dependencies.add(c.theme)
-        return super()._render_notebook("jupyter_notebook_tab.html", "jupyter_lab.html")
+        return engine.render_notebook(
+            self,
+            "jupyter_notebook_tab.html", "jupyter_lab.html")

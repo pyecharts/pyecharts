@@ -9,11 +9,11 @@ from ..globals import CurrentConfig, RenderType, ThemeType
 from ..options import InitOpts
 from ..options.global_options import AnimationOpts
 from ..options.series_options import BasicOpts
-from ..render.engine import Render
+from ..render import engine
 from ..types import Optional, Sequence, Union
 
 
-class Base(Render):
+class Base(object):
     """
     `Base` is the root class for all graphical class, it provides
     part of the initialization parameters and common methods
@@ -39,6 +39,11 @@ class Base(Render):
         self.options.update(_opts.get("animationOpts", AnimationOpts()).opts)
         self._is_geo_chart: bool = False
 
+    def add_js_funcs(self, *fns):
+        for fn in fns:
+            self.js_functions.add(fn)
+        return self
+
     def get_options(self) -> dict:
         return utils.remove_key_with_none_value(self.options)
 
@@ -59,7 +64,8 @@ class Base(Render):
         env: Optional[Environment] = None,
         **kwargs,
     ) -> str:
-        return super()._render(path, template_name, env, **kwargs)
+        self._prepare_render()
+        return engine.render(self, path, template_name, env, **kwargs)
 
     def render_embed(
         self,
@@ -67,12 +73,16 @@ class Base(Render):
         env: Optional[Environment] = None,
         **kwargs,
     ) -> str:
-        return super()._render_embed(template_name, env, **kwargs)
+        self._prepare_render()
+        return engine.render_embed(self, template_name, env, **kwargs)
 
     def render_notebook(self):
         self.chart_id = uuid.uuid4().hex
         self._prepare_render()
-        return super()._render_notebook("jupyter_notebook.html", "jupyter_lab.html")
+        return engine.render_notebook(self, "jupyter_notebook.html", "jupyter_lab.html")
+
+    def load_javascript(self):
+        return engine.load_javascript(self)
 
     def _use_theme(self):
         if self.theme not in ThemeType.BUILTIN_THEMES:
