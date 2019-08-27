@@ -47,15 +47,12 @@ class Tab(CompositeMixin):
     def _prepare_render(self):
         for c in self:
             c.json_contents = c.dump_options()
+            c.chart_id = uuid.uuid4().hex
             if c.theme not in ThemeType.BUILTIN_THEMES:
                 self.js_dependencies.add(c.theme)
 
     def render_notebook(self):
-        for c in self:
-            c.json_contents = c.dump_options()
-            c.chart_id = uuid.uuid4().hex
-            if c.theme not in ThemeType.BUILTIN_THEMES:
-                self.js_dependencies.add(c.theme)
+        self._prepare_render()
         return engine.render_notebook(
             self, "jupyter_notebook_tab.html", "jupyter_lab.html"
         )
