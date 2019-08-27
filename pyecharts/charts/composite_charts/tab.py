@@ -6,7 +6,7 @@ from ... import types
 from ...commons import utils
 from ...globals import CurrentConfig, ThemeType
 from ...render import engine
-from .composite import CompositeMixin
+from ..mixins import CompositeMixin
 
 
 class Tab(CompositeMixin):

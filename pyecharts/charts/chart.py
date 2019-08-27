@@ -2,7 +2,7 @@ from .. import options as opts
 from .. import types
 from ..charts.base import Base
 from ..globals import RenderType, ThemeType, ToolTipFormatterType
-from ..types import Optional, Sequence, Union
+from ..types import Optional, Sequence
 
 
 class Chart(Base):

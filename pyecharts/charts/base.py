@@ -11,9 +11,10 @@ from ..options.global_options import AnimationOpts
 from ..options.series_options import BasicOpts
 from ..render import engine
 from ..types import Optional, Sequence, Union
+from .mixins import ChartMixin
 
 
-class Base(object):
+class Base(ChartMixin):
     """
     `Base` is the root class for all graphical class, it provides
     part of the initialization parameters and common methods
@@ -38,11 +39,6 @@ class Base(object):
         self.options.update(backgroundColor=_opts.get("bg_color"))
         self.options.update(_opts.get("animationOpts", AnimationOpts()).opts)
         self._is_geo_chart: bool = False
-
-    def add_js_funcs(self, *fns):
-        for fn in fns:
-            self.js_functions.add(fn)
-        return self
 
     def get_options(self) -> dict:
         return utils.remove_key_with_none_value(self.options)
@@ -80,9 +76,6 @@ class Base(object):
         self.chart_id = uuid.uuid4().hex
         self._prepare_render()
         return engine.render_notebook(self, "jupyter_notebook.html", "jupyter_lab.html")
-
-    def load_javascript(self):
-        return engine.load_javascript(self)
 
     def _use_theme(self):
         if self.theme not in ThemeType.BUILTIN_THEMES:

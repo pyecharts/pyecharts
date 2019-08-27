@@ -9,7 +9,7 @@ from ...commons import utils
 from ...globals import CurrentConfig, ThemeType
 from ...options import PageLayoutOpts
 from ...render import engine
-from .composite import CompositeMixin
+from ..mixins import CompositeMixin
 
 
 _MARK_FREEDOM_LAYOUT = "_MARK_FREEDOM_LAYOUT_"
