@@ -1,4 +1,4 @@
-from nose.tools import eq_
+from nose.tools import assert_equal
 
 from pyecharts.commons.utils import remove_key_with_none_value
 from pyecharts.options.global_options import ToolboxOpts
@@ -14,4 +14,4 @@ def test_toolbox_options_remove_none():
         "left": "80%",
         "feature": {},
     }
-    eq_(expected, remove_key_with_none_value(option.opts))
+    assert_equal(expected, remove_key_with_none_value(option.opts))

@@ -1,6 +1,6 @@
 from unittest.mock import patch
 
-from nose.tools import eq_
+from nose.tools import assert_equal
 
 from pyecharts.charts import TreeMap
 
@@ -30,5 +30,5 @@ def test_treemap_base(fake_writer):
     c = TreeMap().add("演示数据", data)
     c.render()
     _, content = fake_writer.call_args[0]
-    eq_(c.theme, "white")
-    eq_(c.renderer, "canvas")
+    assert_equal(c.theme, "white")
+    assert_equal(c.renderer, "canvas")

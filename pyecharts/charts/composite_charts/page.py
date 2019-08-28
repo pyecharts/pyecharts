@@ -8,7 +8,8 @@ from ... import types
 from ...commons import utils
 from ...globals import CurrentConfig, ThemeType
 from ...options import PageLayoutOpts
-from ...render.engine import Render
+from ...render import engine
+from ..mixins import CompositeMixin
 
 _MARK_FREEDOM_LAYOUT = "_MARK_FREEDOM_LAYOUT_"
 
@@ -38,7 +39,7 @@ function downloadCfg () {
 }"""
 
 
-class Page(Render):
+class Page(CompositeMixin):
     """
     `Page` A container object to present multiple charts vertically in a single page
     """
@@ -63,13 +64,6 @@ class Page(Render):
         self.js_dependencies = utils.OrderedSet()
         self.download_button: bool = False
         self._charts: list = []
-
-    def __iter__(self):
-        for chart in self._charts:
-            yield chart
-
-    def __len__(self):
-        return len(self._charts)
 
     def add(self, *charts):
         for c in charts:
@@ -131,7 +125,8 @@ class Page(Render):
         env: types.Optional[Environment] = None,
         **kwargs,
     ) -> str:
-        return super()._render(path, template_name, env, **kwargs)
+        self._prepare_render()
+        return engine.render(self, path, template_name, env, **kwargs)
 
     def render_embed(
         self,
@@ -139,7 +134,8 @@ class Page(Render):
         env: types.Optional[Environment] = None,
         **kwargs,
     ) -> str:
-        return super()._render_embed(template_name, env, **kwargs)
+        self._prepare_render()
+        return engine.render_embed(self, template_name, env, **kwargs)
 
     def render_notebook(self):
         for c in self:
@@ -147,7 +143,7 @@ class Page(Render):
             c.chart_id = uuid.uuid4().hex
             if c.theme not in ThemeType.BUILTIN_THEMES:
                 self.js_dependencies.add(c.theme)
-        return super()._render_notebook("jupyter_notebook.html", "jupyter_lab.html")
+        return engine.render_notebook(self, "jupyter_notebook.html", "jupyter_lab.html")
 
     @staticmethod
     def save_resize_html(
