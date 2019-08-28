@@ -1,6 +1,6 @@
 from unittest.mock import patch
 
-from nose.tools import assert_in, eq_
+from nose.tools import assert_equal, assert_in
 
 from pyecharts import options as opts
 from pyecharts.charts import Grid, Liquid
@@ -12,8 +12,8 @@ def test_liquid_base(fake_writer):
     c = Liquid().add("lq", [0.6, 0.7])
     c.render()
     _, content = fake_writer.call_args[0]
-    eq_(c.theme, "white")
-    eq_(c.renderer, "canvas")
+    assert_equal(c.theme, "white")
+    assert_equal(c.renderer, "canvas")
 
 
 @patch("pyecharts.render.engine.write_utf8_html_file")

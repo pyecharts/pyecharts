@@ -1,6 +1,6 @@
 from unittest.mock import patch
 
-from nose.tools import eq_, raises
+from nose.tools import assert_equal, raises
 
 from pyecharts.charts import Bar
 from pyecharts.render import make_snapshot
@@ -47,7 +47,7 @@ def test_make_snapshot_png(fake_writer):
     eng = _gen_faker_engine("fake content1,content2")
     make_snapshot(eng, _gen_bar_chart(), "make_snapshot.png")
     _ = fake_writer.call_args[0]
-    eq_(None, None)
+    assert_equal("test ok", "test ok")
 
 
 @patch("pyecharts.render.snapshot.save_as")
@@ -55,7 +55,7 @@ def test_make_snapshot_gif(fake_writer):
     eng = _gen_faker_engine("fake content1,content2")
     make_snapshot(eng, _gen_bar_chart(), "make_snapshot.gif")
     _ = fake_writer.call_args[0]
-    eq_(None, None)
+    assert_equal("test ok", "test ok")
 
 
 @patch("pyecharts.render.snapshot.save_as_text")
@@ -63,4 +63,4 @@ def test_make_snapshot_text(fake_writer):
     eng = _gen_faker_engine("fake content1,content2")
     make_snapshot(eng, _gen_bar_chart(), "make_snapshot.svg")
     _ = fake_writer.call_args[0]
-    eq_(None, None)
+    assert_equal("test ok", "test ok")

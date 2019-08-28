@@ -1,6 +1,6 @@
 from unittest.mock import patch
 
-from nose.tools import eq_
+from nose.tools import assert_equal
 
 from pyecharts import options as opts
 from pyecharts.charts import Graph
@@ -21,13 +21,13 @@ def test_graph_base(fake_writer):
     c = Graph().add("", nodes, links, repulsion=8000)
     c.render()
     _, content = fake_writer.call_args[0]
-    eq_(c.theme, "white")
-    eq_(c.renderer, "canvas")
+    assert_equal(c.theme, "white")
+    assert_equal(c.renderer, "canvas")
 
 
 def test_graph_item():
     node_name, link_source = "test_node_name", "test_link_source"
     node = opts.GraphNode(name=node_name)
     link = opts.GraphLink(source=link_source)
-    eq_(node_name, node.opts.get("name"))
-    eq_(link_source, link.opts.get("source"))
+    assert_equal(node_name, node.opts.get("name"))
+    assert_equal(link_source, link.opts.get("source"))
