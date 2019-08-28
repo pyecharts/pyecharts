@@ -162,17 +162,38 @@ def liquid_data_precision() -> Liquid:
     return c
 
 
-# Page.DraggablePageLayout
-# Page.SimplePageLayout
-page = Page(layout=Page.DraggablePageLayout)
-page.add(
-    bar_datazoom_slider(),
-    line_markpoint(),
-    pie_rosetype(),
-    grid_mutil_yaxis(),
-    liquid_data_precision(),
-)
-page.render()
+def page_default_layout():
+    page = Page()
+    page.add(
+        bar_datazoom_slider(),
+        line_markpoint(),
+        pie_rosetype(),
+        grid_mutil_yaxis(),
+        liquid_data_precision(),
+    )
+    page.render()
 
-# reRender page html
-# Page.save_resize_html("render.html", cfg_file="chart_config.json")
+
+def page_simple_layout():
+    page = Page(layout=Page.SimplePageLayout)
+    page.add(
+        bar_datazoom_slider(),
+        line_markpoint(),
+        pie_rosetype(),
+        grid_mutil_yaxis(),
+        liquid_data_precision(),
+    )
+    page.render()
+
+
+def page_draggable_layout():
+    page = Page(layout=Page.DraggablePageLayout)
+    page.add(
+        bar_datazoom_slider(),
+        line_markpoint(),
+        pie_rosetype(),
+        grid_mutil_yaxis(),
+        liquid_data_precision(),
+    )
+    page.render()
+    # Page.save_resize_html("render.html", cfg_file="chart_config.json")

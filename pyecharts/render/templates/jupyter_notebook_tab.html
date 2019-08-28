@@ -8,8 +8,12 @@
     });
 </script>
 
+{{ macro.generate_tab_css() }}
+{{ macro.display_tablinks(charts) }}
+
 {% for chart in charts %}
-    <div id="{{ chart.chart_id }}" style="width:{{ chart.width }}; height:{{ chart.height }};"></div>
+    <div id="{{ chart.chart_id }}" class="chart-container" style="width:{{ chart.width }}; height:{{ chart.height }};"></div>
 {% endfor %}
 
 {{ macro.render_notebook_charts(charts, libraries) }}
+{{ macro.switch_tabs() }}

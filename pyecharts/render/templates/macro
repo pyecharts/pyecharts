@@ -1,5 +1,5 @@
 {%- macro render_chart_content(c) -%}
-    <div id="{{ c.chart_id }}" style="width:{{ c.width }}; height:{{ c.height }};"></div>
+    <div id="{{ c.chart_id }}" class="chart-container" style="width:{{ c.width }}; height:{{ c.height }};"></div>
     <script>
         var chart_{{ c.chart_id }} = echarts.init(
             document.getElementById('{{ c.chart_id }}'), '{{ c.theme }}', {renderer: '{{ c.renderer }}'});
@@ -19,6 +19,26 @@
     </script>
 {%- endmacro %}
 
+{%- macro render_notebook_charts(charts, libraries) -%}
+    <script>
+        require([{{ libraries | join(', ') }}], function(echarts) {
+        {% for c in charts %}
+            var chart_{{ c.chart_id }} = echarts.init(
+                document.getElementById('{{ c.chart_id }}'), '{{ c.theme }}', {renderer: '{{ c.renderer }}'});
+            {% for js in c.js_functions.items %}
+                {{ js }}
+            {% endfor %}
+            var option_{{ c.chart_id }} = {{ c.json_contents }};
+            chart_{{ c.chart_id }}.setOption(option_{{ c.chart_id }});
+            {% if c._is_geo_chart %}
+                var bmap = chart_{{ c.chart_id }}.getModel().getComponent('bmap').getBMap();
+                bmap.addControl(new BMap.MapTypeControl());
+            {% endif %}
+        {% endfor %}
+        });
+    </script>
+{%- endmacro %}
+
 {%- macro render_chart_dependencies(c) -%}
     {% for dep in c.dependencies %}
         <script type="text/javascript" src="{{ dep }}"></script>
@@ -29,4 +49,72 @@
     {% for dep in c.css_libs %}
         <link rel="stylesheet"  href="{{ dep }}">
     {% endfor %}
+{%- endmacro %}
+
+{%- macro generate_tab_css() -%}
+    <style>
+        .tab {
+            overflow: hidden;
+            border: 1px solid #ccc;
+            background-color: #f1f1f1;
+        }
+
+        .tab button {
+            background-color: inherit;
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 12px 16px;
+            transition: 0.3s;
+        }
+
+        .tab button:hover {
+            background-color: #ddd;
+        }
+
+        .tab button.active {
+            background-color: #ccc;
+        }
+
+        .chart-container {
+            display: none;
+            padding: 6px 12px;
+            border-top: none;
+        }
+    </style>
+{%- endmacro %}
+
+{%- macro display_tablinks(chart) -%}
+    <div class="tab">
+        {% for c in chart %}
+            <button class="tablinks" onclick="showChart(event, '{{ c.chart_id }}')">{{ c.tab_name }}</button>
+        {% endfor %}
+    </div>
+{%- endmacro %}
+
+{%- macro switch_tabs() -%}
+    <script>
+        (function() {
+            containers = document.getElementsByClassName("chart-container");
+            if(containers.length > 0) {
+                containers[0].style.display = "block";
+            }
+        })()
+
+        function showChart(evt, chartID) {
+            let containers = document.getElementsByClassName("chart-container");
+            for (let i = 0; i < containers.length; i++) {
+                containers[i].style.display = "none";
+            }
+
+            let tablinks = document.getElementsByClassName("tablinks");
+            for (let i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = "tablinks";
+            }
+
+            document.getElementById(chartID).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+    </script>
 {%- endmacro %}
