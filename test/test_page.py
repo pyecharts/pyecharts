@@ -1,6 +1,12 @@
 from typing import Iterable
 
-from nose.tools import assert_equal, assert_not_equal, assert_true, raises
+from nose.tools import (
+    assert_equal,
+    assert_not_equal,
+    assert_not_in,
+    assert_true,
+    raises,
+)
 
 from example.commons import Faker
 from pyecharts.charts import Bar, Line, Page
@@ -127,3 +133,12 @@ def test_page_attr():
     page = Page()
     assert_true(isinstance(page.js_functions, OrderedSet))
     assert_true(isinstance(page._charts, list))
+
+
+def test_page_resize():
+    page = Page()
+    content = page.save_resize_html(
+        cfg_dict=[{"cid": "xxx", "width": 100, "height": 100, "top": 100, "left": 100}]
+    )
+    assert_not_in(".resizable()", content)
+    assert_not_in(".draggable()", content)

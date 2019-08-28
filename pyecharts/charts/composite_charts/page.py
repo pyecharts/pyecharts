@@ -183,6 +183,7 @@ class Page(CompositeMixin):
             html = re.sub(
                 r'<button onclick="downloadCfg\(\)">Save Config</button>', "", html
             )
+            html = re.sub(r".resizable\(\).draggable\(\)", "", html)
 
         with open(dest, "w+", encoding="utf8") as f:
             f.write(html)
