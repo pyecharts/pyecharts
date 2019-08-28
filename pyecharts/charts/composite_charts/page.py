@@ -85,9 +85,11 @@ class Page(CompositeMixin):
 
     def _prepare_render(self):
         for c in self:
-            c.json_contents = c.dump_options()
-            if c.theme not in ThemeType.BUILTIN_THEMES:
-                self.js_dependencies.add(c.theme)
+            if hasattr(c, "dump_options"):
+                c.json_contents = c.dump_options()
+            if hasattr(c, "theme"):
+                if c.theme not in ThemeType.BUILTIN_THEMES:
+                    self.js_dependencies.add(c.theme)
         charts_id = []
         if self.layout == _MARK_FREEDOM_LAYOUT:
             self.download_button = True

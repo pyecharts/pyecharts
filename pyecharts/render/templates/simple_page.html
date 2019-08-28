@@ -14,7 +14,14 @@
     {% endif %}
     <div class="box">
         {% for c in chart %}
-            {{ macro.render_chart_content(c) }}
+            {% if c._component_type == "table" %}
+                {{ macro.generate_table_css() }}
+                <div id="{{ c.chart_id }}" class="chart-container">
+                    {{ c.table_html }}
+                </div>
+            {% else %}
+                {{ macro.render_chart_content(c) }}
+            {% endif %}
             {% for _ in range(chart.page_interval) %}<br/>{% endfor %}
         {% endfor %}
     </div>
