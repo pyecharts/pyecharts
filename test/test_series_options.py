@@ -1,4 +1,4 @@
-from nose.tools import eq_
+from nose.tools import assert_equal
 
 from pyecharts.options.series_options import LabelOpts
 
@@ -25,7 +25,7 @@ def test_label_options_defaults():
         "borderRadius": None,
         "rich": None,
     }
-    eq_(expected, option.opts)
+    assert_equal(expected, option.opts)
 
 
 def test_label_options_custom():
@@ -52,4 +52,4 @@ def test_label_options_custom():
         "borderRadius": 2,
         "rich": None,
     }
-    eq_(expected, option.opts)
+    assert_equal(expected, option.opts)

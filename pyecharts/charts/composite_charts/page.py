@@ -11,7 +11,6 @@ from ...options import PageLayoutOpts
 from ...render import engine
 from ..mixins import CompositeMixin
 
-
 _MARK_FREEDOM_LAYOUT = "_MARK_FREEDOM_LAYOUT_"
 
 DOWNLOAD_CFG_FUNC = """

@@ -1,6 +1,6 @@
 from unittest.mock import patch
 
-from nose.tools import assert_in, eq_
+from nose.tools import assert_equal, assert_in
 
 from example.commons import Faker
 from pyecharts.charts import Map3D
@@ -14,5 +14,5 @@ def test_map_3d(fake_writer):
     c.render()
     _, content = fake_writer.call_args[0]
     assert_in("map3D", content)
-    eq_(c.theme, "white")
-    eq_(c.renderer, "canvas")
+    assert_equal(c.theme, "white")
+    assert_equal(c.renderer, "canvas")

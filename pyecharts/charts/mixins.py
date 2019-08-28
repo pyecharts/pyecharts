@@ -1,7 +1,7 @@
 from ..render import engine
 
 
-class ChartMixin(object):
+class ChartMixin:
     def add_js_funcs(self, *fns):
         for fn in fns:
             self.js_functions.add(fn)

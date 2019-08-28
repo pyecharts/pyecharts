@@ -1,6 +1,6 @@
 from unittest.mock import patch
 
-from nose.tools import assert_in, eq_
+from nose.tools import assert_equal, assert_in
 
 from example.commons import Faker
 from pyecharts import options as opts
@@ -16,7 +16,7 @@ def test_geo_base(fake_writer):
         .set_series_opts(label_opts=opts.LabelOpts(is_show=False))
         .set_global_opts(visualmap_opts=opts.VisualMapOpts())
     )
-    eq_(c.theme, "white")
+    assert_equal(c.theme, "white")
     c.render()
     _, content = fake_writer.call_args[0]
     assert_in("canvas", content)
@@ -31,8 +31,8 @@ def test_extra_geo_parameters(fake_writer):
         .set_series_opts(label_opts=opts.LabelOpts(is_show=False))
         .set_global_opts(visualmap_opts=opts.VisualMapOpts())
     )
-    eq_(c.theme, "white")
-    eq_(c.renderer, "canvas")
+    assert_equal(c.theme, "white")
+    assert_equal(c.renderer, "canvas")
     c.render()
     _, content = fake_writer.call_args[0]
     center_string = """

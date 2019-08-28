@@ -1,6 +1,6 @@
 import unittest
 
-from nose.tools import eq_
+from nose.tools import assert_equal
 
 from example.commons import Faker
 from pyecharts import options as opts
@@ -22,32 +22,42 @@ class TestTimeLine(unittest.TestCase):
         self.tl = Timeline().add(bar0, "year 2015")
 
     def test_default_label(self):
-        eq_(None, self.tl.options.get("baseOption").get("timeline").get("label"))
+        assert_equal(
+            None, self.tl.options.get("baseOption").get("timeline").get("label")
+        )
 
     def test_custom_label(self):
         custom_label_opts = {"custom": "label"}
         self.tl.add_schema(label_opts=custom_label_opts)
-        eq_(
+        assert_equal(
             custom_label_opts,
             self.tl.options.get("baseOption").get("timeline").get("label"),
         )
 
     def test_timeline_vertical(self):
         self.tl.add_schema(orient="vertical")
-        eq_("vertical", self.tl.options.get("baseOption").get("timeline").get("orient"))
+        assert_equal(
+            "vertical", self.tl.options.get("baseOption").get("timeline").get("orient")
+        )
 
     def test_timeline_inverse(self):
         self.tl.add_schema(is_inverse=True)
-        eq_(True, self.tl.options.get("baseOption").get("timeline").get("inverse"))
+        assert_equal(
+            True, self.tl.options.get("baseOption").get("timeline").get("inverse")
+        )
 
     def test_timeline_width_height(self):
         width, height = "20", "30"
         self.tl.add_schema(width=width, height=height)
-        eq_(width, self.tl.options.get("baseOption").get("timeline").get("width"))
-        eq_(height, self.tl.options.get("baseOption").get("timeline").get("height"))
+        assert_equal(
+            width, self.tl.options.get("baseOption").get("timeline").get("width")
+        )
+        assert_equal(
+            height, self.tl.options.get("baseOption").get("timeline").get("height")
+        )
 
     def test_timeline_visual_map(self):
-        eq_(
+        assert_equal(
             type(opts.VisualMapOpts()),
             type(self.tl.options.get("options")[0].get("visualMap")),
         )
@@ -91,7 +101,7 @@ class TestTimeLine(unittest.TestCase):
                 )
             ]
         )
-        eq_(
+        assert_equal(
             type(opts.GraphicGroup()),
             type(self.tl.options.get("baseOption").get("timeline").get("graphic")[0]),
         )
