@@ -175,13 +175,13 @@
                 background: #F8F8F8;
             }
         </style>
-        <div id="{{ chart.chart_id }}" class="chart-container">
+        <div id="{{ chart.chart_id }}" class="chart-container" style="">
             <p class="title" {{ chart.title_opts.title_style }}> {{ chart.title_opts.title }}</p>
             <p class="subtitle" {{ chart.title_opts.subtitle_style }}> {{ chart.title_opts.subtitle }}</p>
             {{ chart.html_content }}
         </div>
     {% elif chart._component_type == "image" %}
-        <div id="{{ chart.chart_id }}" class="chart-container">
+        <div id="{{ chart.chart_id }}" class="chart-container" style="">
             <p class="title" {{ chart.title_opts.title_style }}> {{ chart.title_opts.title }}</p>
             <p class="subtitle" {{ chart.title_opts.subtitle_style }}> {{ chart.title_opts.subtitle }}</p>
             <img {{ chart.html_content }}/>
