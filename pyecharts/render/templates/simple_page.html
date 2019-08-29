@@ -17,6 +17,7 @@
             {% if c._component_type == "table" %}
                 {{ macro.generate_table_css() }}
                 <div id="{{ c.chart_id }}" class="chart-container">
+                     {{ macro.show_components_title(c) }}
                     {{ c.table_html }}
                 </div>
             {% else %}

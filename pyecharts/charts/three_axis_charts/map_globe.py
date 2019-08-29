@@ -42,7 +42,7 @@ class MapGlobe(Chart3D, MapMixin):
             )
             return HTML(
                 RenderEngine().render_chart_to_notebook(
-                    template_name="jupyter_globe.html",
+                    template_name="nb_jupyter_globe.html",
                     charts=(self,),
                     config_items=require_config["config_items"],
                     libraries=require_config["libraries"],

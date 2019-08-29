@@ -145,7 +145,9 @@ class Page(CompositeMixin):
             c.chart_id = uuid.uuid4().hex
             if c.theme not in ThemeType.BUILTIN_THEMES:
                 self.js_dependencies.add(c.theme)
-        return engine.render_notebook(self, "jupyter_notebook.html", "jupyter_lab.html")
+        return engine.render_notebook(
+            self, "nb_jupyter_notebook.html", "nb_jupyter_lab.html"
+        )
 
     @staticmethod
     def save_resize_html(

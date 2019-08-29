@@ -173,3 +173,8 @@
         }
     </script>
 {%- endmacro %}
+
+{%- macro show_components_title(chart) %}
+    <p class="title" {{ chart.title_opts.title_style }}> {{ chart.title_opts.title }}</p>
+    <p class="subtitle" {{ chart.title_opts.subtitle_style }}> {{ chart.title_opts.subtitle }}</p>
+{%- endmacro %}

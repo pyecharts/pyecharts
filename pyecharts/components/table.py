@@ -55,5 +55,5 @@ class Table(ChartMixin):
         # only notebook env need to re-generate chart_id
         self.chart_id = uuid.uuid4().hex
         return engine.render_notebook(
-            self, "jupyter_notebook_tab.html", "jupyter_lab.html"
+            self, "component_table.html", "component_table.html"
         )

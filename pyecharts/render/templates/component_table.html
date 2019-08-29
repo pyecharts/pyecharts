@@ -8,8 +8,7 @@
 <body>
 
 {{ macro.generate_table_css() }}
-<p class="title" {{ chart.title_opts.title_style }}> {{ chart.title_opts.title }}</p>
-<p class="subtitle" {{ chart.title_opts.subtitle_style }}> {{ chart.title_opts.subtitle }}</p>
+{{ macro.show_components_title(chart) }}
 <div id="{{ chart.chart_id }}" class="chart-container">
    {{ chart.table_html }}
 </div>
