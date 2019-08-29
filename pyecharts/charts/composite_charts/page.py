@@ -141,10 +141,12 @@ class Page(CompositeMixin):
 
     def render_notebook(self):
         for c in self:
-            c.json_contents = c.dump_options()
             c.chart_id = uuid.uuid4().hex
-            if c.theme not in ThemeType.BUILTIN_THEMES:
-                self.js_dependencies.add(c.theme)
+            if hasattr(c, "dump_options"):
+                c.json_contents = c.dump_options()
+            if hasattr(c, "theme"):
+                if c.theme not in ThemeType.BUILTIN_THEMES:
+                    self.js_dependencies.add(c.theme)
         return engine.render_notebook(
             self, "nb_jupyter_notebook.html", "nb_jupyter_lab.html"
         )

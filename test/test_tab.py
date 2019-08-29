@@ -6,6 +6,7 @@ from nose.tools import assert_equal, assert_in, assert_true
 from example.commons import Faker
 from pyecharts.charts import Bar, Line, Tab
 from pyecharts.commons.utils import OrderedSet
+from pyecharts.components import Table
 
 
 def _create_bar() -> Bar:
@@ -14,6 +15,18 @@ def _create_bar() -> Bar:
 
 def _create_line() -> Line:
     return Line().add_xaxis(Faker.week).add_yaxis("商家A", [7, 6, 5, 4, 3, 2, 1])
+
+
+def _create_table() -> Table:
+    table = Table()
+    headers = ["City name", "Area", "Population", "Annual Rainfall"]
+    rows = [
+        ["Brisbane", 5905, 1857594, 1146.4],
+        ["Adelaide", 1295, 1158259, 600.5],
+        ["Darwin", 112, 120900, 1714.7],
+    ]
+    table.add(headers, rows)
+    return table
 
 
 @patch("pyecharts.render.engine.write_utf8_html_file")
@@ -32,6 +45,15 @@ def test_tab_render_embed():
     line = _create_line()
     content = Tab().add(bar, "bar").add(line, "line").render_embed()
     assert_true(len(content) > 8000)
+
+
+def test_tab_render_notebook():
+    tab = Tab()
+    tab.add(_create_line(), "line-example")
+    tab.add(_create_bar(), "bar-example")
+    tab.add(_create_table(), "table-example")
+    html = tab.render_notebook().__html__()
+    assert_in("City name", html)
 
 
 def test_page_jshost_default():

@@ -14,7 +14,7 @@
     <div class="box">
         {% for c in chart %}
             {% if c._component_type in ("table", "image") %}
-                {{ macro.gen_components_content(chart) }}
+                {{ macro.gen_components_content(c) }}
             {% else %}
                 {{ macro.render_chart_content(c) }}
             {% endif %}

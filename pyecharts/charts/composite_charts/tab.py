@@ -58,5 +58,5 @@ class Tab(CompositeMixin):
         for c in self:
             c.chart_id = uuid.uuid4().hex
         return engine.render_notebook(
-            self, "nb_jupyter_notebook_tab.html", "nb_jupyter_lab.html"
+            self, "nb_jupyter_notebook_tab.html", "nb_jupyter_lab_tab.html"
         )

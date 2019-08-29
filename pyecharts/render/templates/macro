@@ -23,16 +23,18 @@
     <script>
         require([{{ libraries | join(', ') }}], function(echarts) {
         {% for c in charts %}
-            var chart_{{ c.chart_id }} = echarts.init(
-                document.getElementById('{{ c.chart_id }}'), '{{ c.theme }}', {renderer: '{{ c.renderer }}'});
-            {% for js in c.js_functions.items %}
-                {{ js }}
-            {% endfor %}
-            var option_{{ c.chart_id }} = {{ c.json_contents }};
-            chart_{{ c.chart_id }}.setOption(option_{{ c.chart_id }});
-            {% if c._is_geo_chart %}
-                var bmap = chart_{{ c.chart_id }}.getModel().getComponent('bmap').getBMap();
-                bmap.addControl(new BMap.MapTypeControl());
+            {% if c._component_type not in ("table", "image") %}
+                var chart_{{ c.chart_id }} = echarts.init(
+                    document.getElementById('{{ c.chart_id }}'), '{{ c.theme }}', {renderer: '{{ c.renderer }}'});
+                {% for js in c.js_functions.items %}
+                    {{ js }}
+                {% endfor %}
+                var option_{{ c.chart_id }} = {{ c.json_contents }};
+                chart_{{ c.chart_id }}.setOption(option_{{ c.chart_id }});
+                {% if c._is_geo_chart %}
+                    var bmap = chart_{{ c.chart_id }}.getModel().getComponent('bmap').getBMap();
+                    bmap.addControl(new BMap.MapTypeControl());
+                {% endif %}
             {% endif %}
         {% endfor %}
         });
@@ -120,8 +122,6 @@
 {%- endmacro %}
 
 {%- macro gen_components_content(chart) %}
-    <p class="title" {{ chart.title_opts.title_style }}> {{ chart.title_opts.title }}</p>
-    <p class="subtitle" {{ chart.title_opts.subtitle_style }}> {{ chart.title_opts.subtitle }}</p>
     {% if chart._component_type == "table" %}
         <style>
             .fl-table {
@@ -176,10 +176,14 @@
             }
         </style>
         <div id="{{ chart.chart_id }}" class="chart-container">
-           {{ chart.html_content }}
+            <p class="title" {{ chart.title_opts.title_style }}> {{ chart.title_opts.title }}</p>
+            <p class="subtitle" {{ chart.title_opts.subtitle_style }}> {{ chart.title_opts.subtitle }}</p>
+            {{ chart.html_content }}
         </div>
     {% elif chart._component_type == "image" %}
         <div id="{{ chart.chart_id }}" class="chart-container">
+            <p class="title" {{ chart.title_opts.title_style }}> {{ chart.title_opts.title }}</p>
+            <p class="subtitle" {{ chart.title_opts.subtitle_style }}> {{ chart.title_opts.subtitle }}</p>
             <img {{ chart.html_content }}/>
         </div>
     {% endif %}
