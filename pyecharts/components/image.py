@@ -16,7 +16,7 @@ class Image(ChartMixin):
         self.js_host = js_host or CurrentConfig.ONLINE_HOST
         self.js_dependencies: OrderedSet = OrderedSet()
         self.title_opts: ComponentTitleOpts = ComponentTitleOpts()
-        self.image_html: str = ""
+        self.html_content: str = ""
         self._component_type: str = "image"
         self.chart_id: str = uuid.uuid4().hex
 
@@ -26,7 +26,7 @@ class Image(ChartMixin):
         if style_opts:
             for k, v in style_opts.items():
                 html_tag_args += '{}="{}" '.format(k, v)
-        self.image_html = html_tag_args
+        self.html_content = html_tag_args
         return self
 
     def set_global_opts(self, title_opts: Union[ComponentTitleOpts, dict, None] = None):
@@ -36,7 +36,7 @@ class Image(ChartMixin):
     def render(
         self,
         path: str = "render.html",
-        template_name: str = "component_image.html",
+        template_name: str = "components.html",
         env: Optional[Environment] = None,
         **kwargs,
     ) -> str:
@@ -44,7 +44,7 @@ class Image(ChartMixin):
 
     def render_embed(
         self,
-        template_name: str = "component_image.html",
+        template_name: str = "components.html",
         env: Optional[Environment] = None,
         **kwargs,
     ) -> str:
@@ -53,6 +53,4 @@ class Image(ChartMixin):
     def render_notebook(self):
         # only notebook env need to re-generate chart_id
         self.chart_id = uuid.uuid4().hex
-        return engine.render_notebook(
-            self, "component_image.html", "component_image.html"
-        )
+        return engine.render_notebook(self, "nb_components.html", "nb_components.html")

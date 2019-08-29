@@ -1,0 +1,15 @@
+{% import 'macro' as macro %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{{ charts.page_title }}</title>
+</head>
+<body>
+
+{% for chart in charts %}
+    {{ macro.gen_components_content(chart) }}
+{% endfor %}
+
+</body>
+</html>

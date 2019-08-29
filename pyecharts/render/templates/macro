@@ -51,40 +51,6 @@
     {% endfor %}
 {%- endmacro %}
 
-{%- macro generate_tab_css() -%}
-    <style>
-        .tab {
-            overflow: hidden;
-            border: 1px solid #ccc;
-            background-color: #f1f1f1;
-        }
-
-        .tab button {
-            background-color: inherit;
-            float: left;
-            border: none;
-            outline: none;
-            cursor: pointer;
-            padding: 12px 16px;
-            transition: 0.3s;
-        }
-
-        .tab button:hover {
-            background-color: #ddd;
-        }
-
-        .tab button.active {
-            background-color: #ccc;
-        }
-
-        .chart-container {
-            display: none;
-            padding: 6px 12px;
-            border-top: none;
-        }
-    </style>
-{%- endmacro %}
-
 {%- macro generate_table_css() -%}
     <style>
         .fl-table {
@@ -174,7 +140,81 @@
     </script>
 {%- endmacro %}
 
-{%- macro show_components_title(chart) %}
+{%- macro generate_tab_css() %}
+    <style>
+        .tab {
+            overflow: hidden;
+            border: 1px solid #ccc;
+            background-color: #f1f1f1;
+        }
+
+        .tab button {
+            background-color: inherit;
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 12px 16px;
+            transition: 0.3s;
+        }
+
+        .tab button:hover {
+            background-color: #ddd;
+        }
+
+        .tab button.active {
+            background-color: #ccc;
+        }
+
+        .chart-container {
+            display: none;
+            padding: 6px 12px;
+            border-top: none;
+        }
+    </style>
+{%- endmacro %}
+
+{%- macro gen_components_content(chart) %}
     <p class="title" {{ chart.title_opts.title_style }}> {{ chart.title_opts.title }}</p>
     <p class="subtitle" {{ chart.title_opts.subtitle_style }}> {{ chart.title_opts.subtitle }}</p>
+    {% if chart._component_type == "table" %}
+        <style>
+        .tab {
+            overflow: hidden;
+            border: 1px solid #ccc;
+            background-color: #f1f1f1;
+        }
+
+        .tab button {
+            background-color: inherit;
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 12px 16px;
+            transition: 0.3s;
+        }
+
+        .tab button:hover {
+            background-color: #ddd;
+        }
+
+        .tab button.active {
+            background-color: #ccc;
+        }
+
+        .chart-container {
+            display: none;
+            padding: 6px 12px;
+            border-top: none;
+        }
+        </style>
+        <div id="{{ chart.chart_id }}" class="chart-container">
+           {{ chart.html_content }}
+        </div>
+    {% elif chart._component_type == "image" %}
+        <div id="{{ chart.chart_id }}" class="chart-container">
+            <img {{ chart.html_content }}/>
+        </div>
+    {% endif %}
 {%- endmacro %}

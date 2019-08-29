@@ -18,7 +18,7 @@ class Table(ChartMixin):
         self.js_dependencies: OrderedSet = OrderedSet()
         self.js_functions: OrderedSet = OrderedSet()
         self.title_opts: ComponentTitleOpts = ComponentTitleOpts()
-        self.table_html: str = ""
+        self.html_content: str = ""
         self._component_type: str = "table"
         self.chart_id: str = uuid.uuid4().hex
 
@@ -27,7 +27,7 @@ class Table(ChartMixin):
         table = PrettyTable(headers, attributes=attributes)
         for r in rows:
             table.add_row(r)
-        self.table_html = table.get_html_string()
+        self.html_content = table.get_html_string()
         return self
 
     def set_global_opts(self, title_opts: Union[ComponentTitleOpts, dict, None] = None):
@@ -37,7 +37,7 @@ class Table(ChartMixin):
     def render(
         self,
         path: str = "render.html",
-        template_name: str = "component_table.html",
+        template_name: str = "components.html",
         env: Optional[Environment] = None,
         **kwargs,
     ) -> str:
@@ -45,7 +45,7 @@ class Table(ChartMixin):
 
     def render_embed(
         self,
-        template_name: str = "component_table.html",
+        template_name: str = "components.html",
         env: Optional[Environment] = None,
         **kwargs,
     ) -> str:
@@ -54,6 +54,4 @@ class Table(ChartMixin):
     def render_notebook(self):
         # only notebook env need to re-generate chart_id
         self.chart_id = uuid.uuid4().hex
-        return engine.render_notebook(
-            self, "component_table.html", "component_table.html"
-        )
+        return engine.render_notebook(self, "nb_components.html", "nb_components.html")
