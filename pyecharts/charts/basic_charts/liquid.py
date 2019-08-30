@@ -2,7 +2,6 @@ from ... import options as opts
 from ... import types
 from ...charts.chart import Chart
 from ...globals import ChartType
-from ...options.series_options import Numeric
 
 
 class Liquid(Chart):
