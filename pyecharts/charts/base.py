@@ -75,7 +75,9 @@ class Base(ChartMixin):
     def render_notebook(self):
         self.chart_id = uuid.uuid4().hex
         self._prepare_render()
-        return engine.render_notebook(self, "jupyter_notebook.html", "jupyter_lab.html")
+        return engine.render_notebook(
+            self, "nb_jupyter_notebook.html", "nb_jupyter_lab.html"
+        )
 
     def _use_theme(self):
         if self.theme not in ThemeType.BUILTIN_THEMES:

@@ -15,7 +15,7 @@ class Tab(CompositeMixin):
         self.page_title: str = page_title
         self.download_button: bool = False
         self.js_functions: utils.OrderedSet = utils.OrderedSet()
-        self.js_dependencies = utils.OrderedSet()
+        self.js_dependencies: utils.OrderedSet = utils.OrderedSet()
         self._charts: list = []
 
     def add(self, chart, tab_name):
@@ -27,9 +27,11 @@ class Tab(CompositeMixin):
 
     def _prepare_render(self):
         for c in self:
-            c.json_contents = c.dump_options()
-            if c.theme not in ThemeType.BUILTIN_THEMES:
-                self.js_dependencies.add(c.theme)
+            if hasattr(c, "dump_options"):
+                c.json_contents = c.dump_options()
+            if hasattr(c, "theme"):
+                if c.theme not in ThemeType.BUILTIN_THEMES:
+                    self.js_dependencies.add(c.theme)
 
     def render(
         self,
@@ -56,5 +58,5 @@ class Tab(CompositeMixin):
         for c in self:
             c.chart_id = uuid.uuid4().hex
         return engine.render_notebook(
-            self, "jupyter_notebook_tab.html", "jupyter_lab.html"
+            self, "nb_jupyter_notebook_tab.html", "nb_jupyter_lab_tab.html"
         )
