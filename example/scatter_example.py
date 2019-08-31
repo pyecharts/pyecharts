@@ -26,7 +26,7 @@ def scatter_value_xaxis() -> Scatter:
         .set_global_opts(
             title_opts=opts.TitleOpts(title="Scatter-X 数值轴"),
             xaxis_opts=opts.AxisOpts(type_="value"),
-            tooltip_opts=opts.TooltipOpts(formatter="{c}")
+            tooltip_opts=opts.TooltipOpts(formatter="{c}"),
         )
     )
     return c

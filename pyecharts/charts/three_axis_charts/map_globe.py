@@ -20,7 +20,7 @@ class MapGlobe(Chart3D, MapMixin):
     def __init__(self, init_opts: types.Init = InitOpts()):
         super().__init__(init_opts)
 
-    def add_schema(self, maptype: str = "china", box_opts: dict = None):
+    def add_schema(self, maptype: str = "china"):
         self.js_dependencies.add(maptype)
         return self
 
@@ -29,8 +29,9 @@ class MapGlobe(Chart3D, MapMixin):
         path: str = "render.html",
         template_name: str = "simple_globe.html",
         env: types.Optional[Environment] = None,
+        **kwargs,
     ) -> str:
-        return super().render(path=path, template_name=template_name, env=env)
+        return super().render(path=path, template_name=template_name, env=env, **kwargs)
 
     def render_notebook(self):
         self.chart_id = uuid.uuid4().hex
@@ -41,7 +42,7 @@ class MapGlobe(Chart3D, MapMixin):
             )
             return HTML(
                 RenderEngine().render_chart_to_notebook(
-                    template_name="jupyter_globe.html",
+                    template_name="nb_jupyter_globe.html",
                     charts=(self,),
                     config_items=require_config["config_items"],
                     libraries=require_config["libraries"],

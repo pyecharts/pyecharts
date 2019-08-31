@@ -1,7 +1,7 @@
 import os
 from unittest.mock import patch
 
-from nose.tools import eq_, raises
+from nose.tools import assert_equal, raises
 
 from pyecharts.datasets import EXTRA, FuzzyDict, register_url
 
@@ -14,7 +14,7 @@ def test_register_url(fake):
     with open(fake_registry, encoding="utf8") as f:
         fake.return_value = f
         register_url("http://register.url/is/used")
-        eq_(
+        assert_equal(
             EXTRA,
             {
                 "http://register.url/is/used/js/": {
@@ -28,7 +28,7 @@ def test_register_url(fake):
 def test_fuzzy_search_dict():
     fd = FuzzyDict()
     fd.update({"我是北京市": [1, 2]})
-    eq_(fd["我是北京"], [1, 2])
+    assert_equal(fd["我是北京"], [1, 2])
 
 
 @raises(KeyError)

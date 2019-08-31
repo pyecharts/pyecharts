@@ -16,6 +16,3 @@ def image_base() -> Image:
         title_opts=ComponentTitleOpts(title="Image-基本示例", subtitle="我是副标题支持换行哦")
     )
     return image
-
-
-image_base().render()
