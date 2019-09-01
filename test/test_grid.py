@@ -1,4 +1,4 @@
-from nose.tools import eq_
+from nose.tools import assert_equal
 
 from pyecharts import options as opts
 from pyecharts.charts import Bar, Grid, Line
@@ -49,7 +49,7 @@ def test_grid_control_axis_index():
     )
     expected_idx = (0, 1, 2)
     for idx, series in enumerate(gc.options.get("series")):
-        eq_(series.get("yAxisIndex"), expected_idx[idx])
+        assert_equal(series.get("yAxisIndex"), expected_idx[idx])
 
 
 def test_grid_do_not_control_axis_index():
@@ -57,4 +57,4 @@ def test_grid_do_not_control_axis_index():
     gc = Grid().add(bar, opts.GridOpts(pos_left="5%", pos_right="20%"))
     expected_idx = (0, 0, 0)
     for idx, series in enumerate(gc.options.get("series")):
-        eq_(series.get("yAxisIndex"), expected_idx[idx])
+        assert_equal(series.get("yAxisIndex"), expected_idx[idx])

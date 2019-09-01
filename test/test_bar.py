@@ -4,7 +4,7 @@ from io import StringIO
 from test import stdout_redirect
 from unittest.mock import patch
 
-from nose.tools import assert_in, assert_not_in, eq_
+from nose.tools import assert_equal, assert_greater, assert_in, assert_not_in
 
 from pyecharts import options as opts
 from pyecharts.charts import Bar
@@ -23,8 +23,9 @@ def test_bar_base(fake_writer):
     )
     c.render()
     _, content = fake_writer.call_args[0]
-    eq_(c.theme, "white")
-    eq_(c.renderer, "canvas")
+    assert_greater(len(content), 2000)
+    assert_equal(c.theme, "white")
+    assert_equal(c.renderer, "canvas")
 
 
 @patch("pyecharts.render.engine.write_utf8_html_file")
@@ -93,8 +94,8 @@ def test_bar_base_dict_config(fake_writer):
     )
     c.render()
     _, content = fake_writer.call_args[0]
-    eq_(c.theme, "macarons")
-    eq_(c.renderer, "canvas")
+    assert_equal(c.theme, "macarons")
+    assert_equal(c.renderer, "canvas")
     assert_in("Bar-dict-setting", content)
     assert_in("subtext also set by dict", content)
 
@@ -123,7 +124,7 @@ def test_bar_series_stack(fake_writer):
     c.render()
     _, content = fake_writer.call_args[0]
     stack_cnt = re.findall("MY_STACK_NAME", content)
-    eq_(3, len(stack_cnt))
+    assert_equal(3, len(stack_cnt))
 
 
 @patch("pyecharts.render.engine.write_utf8_html_file")
@@ -140,7 +141,7 @@ def test_bar_title_options(fake_writer):
     )
     c.render()
     file_name, content = fake_writer.call_args[0]
-    eq_("render.html", file_name)
+    assert_equal("render.html", file_name)
     assert_in("This is title.", content)
     assert_in("This is subtitle.", content)
     assert_not_in("null", content)
@@ -158,7 +159,7 @@ def test_bar_default_set_function(fake_writer):
 
     c.render("my_chart.html")
     file_name, content = fake_writer.call_args[0]
-    eq_("my_chart.html", file_name)
+    assert_equal("my_chart.html", file_name)
     assert_not_in("null", content)
 
 
@@ -166,7 +167,7 @@ def test_bar_default_set_function(fake_writer):
 def test_bar_default_remote_host(fake_writer):
     c = Bar().add_xaxis(["A", "B", "C"]).add_yaxis("series0", [1, 2, 4])
     c.render()
-    eq_(c.js_host, "https://assets.pyecharts.org/assets/")
+    assert_equal(c.js_host, "https://assets.pyecharts.org/assets/")
     _, content = fake_writer.call_args[0]
     assert_in("https://assets.pyecharts.org/assets/echarts.min.js", content)
 
@@ -179,7 +180,7 @@ def test_bar_custom_remote_host(fake_writer):
         .add_yaxis("series0", [1, 2, 4])
     )
     c.render()
-    eq_(c.js_host, "http://localhost:8000/assets/")
+    assert_equal(c.js_host, "http://localhost:8000/assets/")
     _, content = fake_writer.call_args[0]
     assert_in("http://localhost:8000/assets/echarts.min.js", content)
 
@@ -213,7 +214,7 @@ def test_bar_graphic(fake_writer):
     )
     c.render()
     file_name, content = fake_writer.call_args[0]
-    eq_("render.html", file_name)
+    assert_equal("render.html", file_name)
     assert_in("graphic", content)
 
 
@@ -226,7 +227,7 @@ def test_bar_render_nteract():
         .add_yaxis("series1", [2, 3, 6])
     )
     nteract_code = c.render_notebook()
-    eq_(isinstance(nteract_code, HTML), True)
+    assert_equal(isinstance(nteract_code, HTML), True)
 
 
 def test_bar_render_zeppelin():

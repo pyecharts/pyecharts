@@ -8,10 +8,9 @@
     {{ macro.render_chart_css(chart) }}
 </head>
 <body>
-    <style>.box { {{ chart.layout }} }; </style>
-    {% if chart.download_button %}
-        <button onclick="downloadCfg()">Save Config</button>
-    {% endif %}
+    {{ macro.generate_tab_css() }}
+    {{ macro.display_tablinks(chart) }}
+
     <div class="box">
         {% for c in chart %}
             {% if c._component_type in ("table", "image") %}
@@ -19,13 +18,14 @@
             {% else %}
                 {{ macro.render_chart_content(c) }}
             {% endif %}
-            {% for _ in range(chart.page_interval) %}<br/>{% endfor %}
         {% endfor %}
     </div>
+
     <script>
         {% for js in chart.js_functions.items %}
             {{ js }}
         {% endfor %}
     </script>
+    {{ macro.switch_tabs() }}
 </body>
 </html>

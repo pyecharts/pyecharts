@@ -1,7 +1,18 @@
-from nose.tools import assert_not_equal, assert_true, eq_
+from typing import Iterable
+
+from nose.tools import (
+    assert_equal,
+    assert_in,
+    assert_not_equal,
+    assert_not_in,
+    assert_true,
+    raises,
+)
 
 from example.commons import Faker
 from pyecharts.charts import Bar, Line, Page
+from pyecharts.commons.utils import OrderedSet
+from pyecharts.components import Table
 
 
 def _create_bar() -> Bar:
@@ -12,21 +23,33 @@ def _create_line() -> Line:
     return Line().add_xaxis(Faker.week).add_yaxis("商家A", [7, 6, 5, 4, 3, 2, 1])
 
 
+def _create_table() -> Table:
+    table = Table()
+    headers = ["City name", "Area", "Population", "Annual Rainfall"]
+    rows = [
+        ["Brisbane", 5905, 1857594, 1146.4],
+        ["Adelaide", 1295, 1158259, 600.5],
+        ["Darwin", 112, 120900, 1714.7],
+    ]
+    table.add(headers, rows)
+    return table
+
+
 def test_page_layout_default():
     page = Page()
-    eq_(page.layout, "")
+    assert_equal(page.layout, "")
 
 
 def test_page_layout_custom():
     page = Page(layout=Page.SimplePageLayout)
-    eq_(page.layout, "justify-content:center; display:flex; flex-wrap:wrap; ")
+    assert_equal(page.layout, "justify-content:center; display:flex; flex-wrap:wrap; ")
 
 
 def test_page_jshost_default():
     bar = _create_bar()
     line = _create_line()
     page = Page().add(bar, line)
-    eq_(page.js_host, "https://assets.pyecharts.org/assets/")
+    assert_equal(page.js_host, "https://assets.pyecharts.org/assets/")
 
 
 def test_page_jshost_custom():
@@ -38,7 +61,7 @@ def test_page_jshost_custom():
     bar = _create_bar()
     line = _create_line()
     page = Page().add(bar, line)
-    eq_(page.js_host, custom_host)
+    assert_equal(page.js_host, custom_host)
     CurrentConfig.ONLINE_HOST = default_host
 
 
@@ -46,15 +69,22 @@ def test_page_render_embed():
     bar = _create_bar()
     line = _create_line()
     content = Page().add(bar, line).render_embed()
-    assert_true(len(content) > 1000)
+    assert_true(len(content) > 8000)
+
+
+def test_page_render_notebook():
+    page = Page()
+    page.add(_create_line(), _create_bar(), _create_table())
+    html = page.render_notebook().__html__()
+    assert_in("City name", html)
 
 
 def test_page_load_javascript():
     bar = _create_bar()
     line = _create_line()
     content = Page().add(bar, line).load_javascript()
-    eq_("", content.data)
-    eq_(["https://assets.pyecharts.org/assets/echarts.min.js"], content.lib)
+    assert_equal("", content.data)
+    assert_equal(["https://assets.pyecharts.org/assets/echarts.min.js"], content.lib)
 
 
 def _get_new_page(unique: bool = True) -> Page:
@@ -106,4 +136,30 @@ def test_page_draggable_layout_same_chart_id():
     page2 = _get_new_page(unique=False)
     html2 = page2.save_resize_html(source=page2.render(), cfg_dict=LAYOUT_DICT)
 
-    eq_(html1, html2)
+    assert_equal(html1, html2)
+
+
+@raises(ValueError)
+def test_page_cfg_type():
+    page = Page()
+    page.save_resize_html()
+
+
+def test_page_iterable():
+    page = Page()
+    assert_true(isinstance(page, Iterable))
+
+
+def test_page_attr():
+    page = Page()
+    assert_true(isinstance(page.js_functions, OrderedSet))
+    assert_true(isinstance(page._charts, list))
+
+
+def test_page_resize():
+    page = Page()
+    content = page.save_resize_html(
+        cfg_dict=[{"cid": "xxx", "width": 100, "height": 100, "top": 100, "left": 100}]
+    )
+    assert_not_in(".resizable()", content)
+    assert_not_in(".draggable()", content)

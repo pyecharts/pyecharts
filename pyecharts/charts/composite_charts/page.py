@@ -1,5 +1,4 @@
 import json
-import os
 import re
 import uuid
 
@@ -7,11 +6,10 @@ from jinja2 import Environment
 
 from ... import types
 from ...commons import utils
-from ...datasets import FILENAMES
-from ...globals import CurrentConfig, NotebookType, ThemeType
+from ...globals import CurrentConfig, ThemeType
 from ...options import PageLayoutOpts
-from ...render.display import HTML, Javascript
-from ...render.engine import RenderEngine
+from ...render import engine
+from ..mixins import CompositeMixin
 
 _MARK_FREEDOM_LAYOUT = "_MARK_FREEDOM_LAYOUT_"
 
@@ -41,7 +39,7 @@ function downloadCfg () {
 }"""
 
 
-class Page:
+class Page(CompositeMixin):
     """
     `Page` A container object to present multiple charts vertically in a single page
     """
@@ -58,14 +56,14 @@ class Page:
         interval: int = 1,
         layout: types.Union[PageLayoutOpts, dict] = PageLayoutOpts(),
     ):
+        self.js_host: str = js_host or CurrentConfig.ONLINE_HOST
         self.page_title = page_title
         self.page_interval = interval
-        self.js_dependencies = utils.OrderedSet()
-        self.js_functions: utils.OrderedSet = utils.OrderedSet()
-        self.js_host = js_host or CurrentConfig.ONLINE_HOST
         self.layout = self._assembly_layout(layout)
+        self.js_functions: utils.OrderedSet = utils.OrderedSet()
+        self.js_dependencies = utils.OrderedSet()
         self.download_button: bool = False
-        self._charts = []
+        self._charts: list = []
 
     def add(self, *charts):
         for c in charts:
@@ -85,20 +83,13 @@ class Page:
             result += "{}:{}; ".format(k, v)
         return result
 
-    # List-Like Feature
-    def __iter__(self):
-        for chart in self._charts:
-            yield chart
-
-    def __len__(self):
-        return len(self._charts)
-
     def _prepare_render(self):
         for c in self:
-            c.json_contents = c.dump_options()
-            if c.theme not in ThemeType.BUILTIN_THEMES:
-                self.js_dependencies.add(c.theme)
-
+            if hasattr(c, "dump_options"):
+                c.json_contents = c.dump_options()
+            if hasattr(c, "theme"):
+                if c.theme not in ThemeType.BUILTIN_THEMES:
+                    self.js_dependencies.add(c.theme)
         charts_id = []
         if self.layout == _MARK_FREEDOM_LAYOUT:
             self.download_button = True
@@ -114,12 +105,16 @@ class Page:
                     # make charts Responsive
                     f'$("#{c.chart_id}>div:nth-child(1)")'
                     '.width("100%")'
-                    '.height("100%");',
-                    # call resize function
-                    "new ResizeSensor("
-                    f"jQuery('#{c.chart_id}'), "
-                    f"function() {{ chart_{c.chart_id}.resize()}});",
+                    '.height("100%");'
                 )
+
+                if not hasattr(c, "_component_type"):
+                    self.add_js_funcs(
+                        # call resize function
+                        "new ResizeSensor("
+                        f"jQuery('#{c.chart_id}'), "
+                        f"function() {{ chart_{c.chart_id}.resize()}});"
+                    )
             for lib in ("jquery", "jquery-ui", "resize-sensor"):
                 self.js_dependencies.add(lib)
 
@@ -129,69 +124,36 @@ class Page:
             self.css_libs = [self.js_host + link for link in ("jquery-ui.css",)]
             self.layout = ""
 
-    def add_js_funcs(self, *fns):
-        for fn in fns:
-            self.js_functions.add(fn)
-        return self
-
     def render(
         self,
         path: str = "render.html",
         template_name: str = "simple_page.html",
         env: types.Optional[Environment] = None,
-    ):
+        **kwargs,
+    ) -> str:
         self._prepare_render()
-        RenderEngine(env).render_chart_to_file(
-            template_name=template_name, chart=self, path=path
-        )
-        return os.path.abspath(path)
+        return engine.render(self, path, template_name, env, **kwargs)
 
     def render_embed(
         self,
         template_name: str = "simple_page.html",
         env: types.Optional[Environment] = None,
-    ):
+        **kwargs,
+    ) -> str:
         self._prepare_render()
-        return RenderEngine(env).render_chart_to_template(
-            template_name=template_name, chart=self
-        )
+        return engine.render_embed(self, template_name, env, **kwargs)
 
     def render_notebook(self):
         for c in self:
-            c.json_contents = c.dump_options()
             c.chart_id = uuid.uuid4().hex
-            if c.theme not in ThemeType.BUILTIN_THEMES:
-                self.js_dependencies.add(c.theme)
-
-        if CurrentConfig.NOTEBOOK_TYPE == NotebookType.JUPYTER_NOTEBOOK:
-            require_config = utils.produce_require_dict(
-                self.js_dependencies, self.js_host
-            )
-            return HTML(
-                RenderEngine().render_chart_to_notebook(
-                    template_name="jupyter_notebook.html",
-                    charts=self,
-                    config_items=require_config["config_items"],
-                    libraries=require_config["libraries"],
-                )
-            )
-
-        if CurrentConfig.NOTEBOOK_TYPE == NotebookType.JUPYTER_LAB:
-            return HTML(
-                RenderEngine().render_chart_to_notebook(
-                    template_name="jupyter_lab.html", charts=self
-                )
-            )
-
-        if CurrentConfig.NOTEBOOK_TYPE == NotebookType.NTERACT:
-            pass
-
-    def load_javascript(self):
-        scripts = []
-        for dep in self.js_dependencies.items:
-            f, ext = FILENAMES[dep]
-            scripts.append("{}{}.{}".format(CurrentConfig.ONLINE_HOST, f, ext))
-        return Javascript(lib=scripts)
+            if hasattr(c, "dump_options"):
+                c.json_contents = c.dump_options()
+            if hasattr(c, "theme"):
+                if c.theme not in ThemeType.BUILTIN_THEMES:
+                    self.js_dependencies.add(c.theme)
+        return engine.render_notebook(
+            self, "nb_jupyter_notebook.html", "nb_jupyter_lab.html"
+        )
 
     @staticmethod
     def save_resize_html(
@@ -204,7 +166,8 @@ class Page:
         with open(source, "r", encoding="utf8") as f:
             html = f.read()
 
-        if cfg_dict is None and cfg_dict is None:
+        charts = []
+        if cfg_dict is None and cfg_file is None:
             raise ValueError("Chart layout config is empty")
 
         if cfg_file:
@@ -216,7 +179,7 @@ class Page:
 
         for chart in charts:
             s = (
-                '<div id="{cid}" style="position: absolute; '
+                '<div id="{cid}" class="chart-container" style="position: absolute; '
                 'width: {width}; height: {height}; top: {top}; left: {left};">'.format(
                     cid=chart["cid"],
                     width=chart["width"],
@@ -225,11 +188,18 @@ class Page:
                     left=chart["left"],
                 )
             )
-            html = re.sub('<div id="{}" style="(.*?)">'.format(chart["cid"]), s, html)
+            html = re.sub(
+                '<div id="{}" class="chart-container" style="(.*?)">'.format(
+                    chart["cid"]
+                ),
+                s,
+                html,
+            )
             html = re.sub("'border-width', '1px'", "'border-width', '0px'", html)
             html = re.sub(
                 r'<button onclick="downloadCfg\(\)">Save Config</button>', "", html
             )
+            html = re.sub(r".resizable\(\).draggable\(\)", "", html)
 
         with open(dest, "w+", encoding="utf8") as f:
             f.write(html)

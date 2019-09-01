@@ -1,7 +1,7 @@
 from unittest.mock import patch
 
 import simplejson as json
-from nose.tools import eq_
+from nose.tools import assert_equal
 
 from example.commons import Faker
 from pyecharts import options as opts
@@ -15,8 +15,8 @@ def test_map_base(fake_writer):
     )
     c.render()
     _, content = fake_writer.call_args[0]
-    eq_(c.theme, "white")
-    eq_(c.renderer, "canvas")
+    assert_equal(c.theme, "white")
+    assert_equal(c.renderer, "canvas")
 
 
 def test_map_emphasis():
@@ -34,4 +34,4 @@ def test_map_emphasis():
         "label": {"show": False, "position": "top", "margin": 8},
         "itemStyle": {"borderColor": "white", "areaColor": "red"},
     }
-    eq_(expected, options["series"][0]["emphasis"])
+    assert_equal(expected, options["series"][0]["emphasis"])

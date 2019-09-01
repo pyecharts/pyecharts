@@ -3,10 +3,11 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <title>{{ chart.page_title }}</title>
 </head>
 <body>
-    {% for c in charts %}
-        {{ macro.render_chart_content(c) }}
-    {% endfor %}
+
+{{ macro.gen_components_content(chart) }}
+
 </body>
 </html>
