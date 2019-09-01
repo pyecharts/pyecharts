@@ -1,6 +1,6 @@
 from unittest.mock import patch
 
-from nose.tools import eq_
+from nose.tools import assert_equal
 
 from pyecharts import options as opts
 from pyecharts.charts import Sunburst
@@ -52,11 +52,11 @@ def test_sunburst_base(fake_writer):
     c = Sunburst().add("Sunburst 演示数据", data)
     c.render()
     _, content = fake_writer.call_args[0]
-    eq_(c.theme, "white")
-    eq_(c.renderer, "canvas")
+    assert_equal(c.theme, "white")
+    assert_equal(c.renderer, "canvas")
 
 
 def test_sunburst_dataitem():
     item_name = "test_data_item"
     item = opts.SunburstItem(name=item_name)
-    eq_(item.opts.get("name"), item_name)
+    assert_equal(item.opts.get("name"), item_name)

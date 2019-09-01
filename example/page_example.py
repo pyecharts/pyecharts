@@ -2,6 +2,7 @@ from example.commons import Faker
 from pyecharts import options as opts
 from pyecharts.charts import Bar, Grid, Line, Liquid, Page, Pie
 from pyecharts.commons.utils import JsCode
+from pyecharts.components import Table
 
 
 def bar_datazoom_slider() -> Bar:
@@ -162,6 +163,25 @@ def liquid_data_precision() -> Liquid:
     return c
 
 
+def table_base() -> Table:
+    table = Table()
+
+    headers = ["City name", "Area", "Population", "Annual Rainfall"]
+    rows = [
+        ["Brisbane", 5905, 1857594, 1146.4],
+        ["Adelaide", 1295, 1158259, 600.5],
+        ["Darwin", 112, 120900, 1714.7],
+        ["Hobart", 1357, 205556, 619.5],
+        ["Sydney", 2058, 4336374, 1214.8],
+        ["Melbourne", 1566, 3806092, 646.9],
+        ["Perth", 5386, 1554769, 869.4],
+    ]
+    table.add(headers, rows).set_global_opts(
+        title_opts=opts.ComponentTitleOpts(title="Table")
+    )
+    return table
+
+
 def page_default_layout():
     page = Page()
     page.add(
@@ -170,6 +190,7 @@ def page_default_layout():
         pie_rosetype(),
         grid_mutil_yaxis(),
         liquid_data_precision(),
+        table_base(),
     )
     page.render()
 
@@ -182,6 +203,7 @@ def page_simple_layout():
         pie_rosetype(),
         grid_mutil_yaxis(),
         liquid_data_precision(),
+        table_base(),
     )
     page.render()
 
@@ -194,6 +216,7 @@ def page_draggable_layout():
         pie_rosetype(),
         grid_mutil_yaxis(),
         liquid_data_precision(),
+        table_base(),
     )
     page.render()
     # Page.save_resize_html("render.html", cfg_file="chart_config.json")
