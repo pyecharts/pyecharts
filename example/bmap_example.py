@@ -26,6 +26,25 @@ def bmap_base() -> BMap:
 
 
 @C.funcs
+def bmap_heatmap() -> BMap:
+    c = (
+        BMap()
+        .add_schema(baidu_ak=BAIDU_MAP_AK, center=[120.13066322374, 30.240018034923])
+        .add(
+            "bmap",
+            [list(z) for z in zip(Faker.provinces, Faker.values())],
+            type_="heatmap",
+            label_opts=opts.LabelOpts(formatter="{b}"),
+        )
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="BMap-热力图"),
+            visualmap_opts=opts.VisualMapOpts(),
+        )
+    )
+    return c
+
+
+@C.funcs
 def bmap_lines() -> BMap:
     with open(
         os.path.join("fixtures", "hangzhou-tracks.json"), "r", encoding="utf-8"
