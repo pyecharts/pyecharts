@@ -85,9 +85,11 @@ class Page(CompositeMixin):
 
     def _prepare_render(self):
         for c in self:
-            c.json_contents = c.dump_options()
-            if c.theme not in ThemeType.BUILTIN_THEMES:
-                self.js_dependencies.add(c.theme)
+            if hasattr(c, "dump_options"):
+                c.json_contents = c.dump_options()
+            if hasattr(c, "theme"):
+                if c.theme not in ThemeType.BUILTIN_THEMES:
+                    self.js_dependencies.add(c.theme)
         charts_id = []
         if self.layout == _MARK_FREEDOM_LAYOUT:
             self.download_button = True
@@ -103,12 +105,16 @@ class Page(CompositeMixin):
                     # make charts Responsive
                     f'$("#{c.chart_id}>div:nth-child(1)")'
                     '.width("100%")'
-                    '.height("100%");',
-                    # call resize function
-                    "new ResizeSensor("
-                    f"jQuery('#{c.chart_id}'), "
-                    f"function() {{ chart_{c.chart_id}.resize()}});",
+                    '.height("100%");'
                 )
+
+                if not hasattr(c, "_component_type"):
+                    self.add_js_funcs(
+                        # call resize function
+                        "new ResizeSensor("
+                        f"jQuery('#{c.chart_id}'), "
+                        f"function() {{ chart_{c.chart_id}.resize()}});"
+                    )
             for lib in ("jquery", "jquery-ui", "resize-sensor"):
                 self.js_dependencies.add(lib)
 
@@ -139,11 +145,15 @@ class Page(CompositeMixin):
 
     def render_notebook(self):
         for c in self:
-            c.json_contents = c.dump_options()
             c.chart_id = uuid.uuid4().hex
-            if c.theme not in ThemeType.BUILTIN_THEMES:
-                self.js_dependencies.add(c.theme)
-        return engine.render_notebook(self, "jupyter_notebook.html", "jupyter_lab.html")
+            if hasattr(c, "dump_options"):
+                c.json_contents = c.dump_options()
+            if hasattr(c, "theme"):
+                if c.theme not in ThemeType.BUILTIN_THEMES:
+                    self.js_dependencies.add(c.theme)
+        return engine.render_notebook(
+            self, "nb_jupyter_notebook.html", "nb_jupyter_lab.html"
+        )
 
     @staticmethod
     def save_resize_html(
@@ -169,7 +179,7 @@ class Page(CompositeMixin):
 
         for chart in charts:
             s = (
-                '<div id="{cid}" style="position: absolute; '
+                '<div id="{cid}" class="chart-container" style="position: absolute; '
                 'width: {width}; height: {height}; top: {top}; left: {left};">'.format(
                     cid=chart["cid"],
                     width=chart["width"],
@@ -178,11 +188,18 @@ class Page(CompositeMixin):
                     left=chart["left"],
                 )
             )
-            html = re.sub('<div id="{}" style="(.*?)">'.format(chart["cid"]), s, html)
+            html = re.sub(
+                '<div id="{}" class="chart-container" style="(.*?)">'.format(
+                    chart["cid"]
+                ),
+                s,
+                html,
+            )
             html = re.sub("'border-width', '1px'", "'border-width', '0px'", html)
             html = re.sub(
                 r'<button onclick="downloadCfg\(\)">Save Config</button>', "", html
             )
+            html = re.sub(r".resizable\(\).draggable\(\)", "", html)
 
         with open(dest, "w+", encoding="utf8") as f:
             f.write(html)

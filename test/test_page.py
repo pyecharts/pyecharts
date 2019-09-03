@@ -1,10 +1,18 @@
 from typing import Iterable
 
-from nose.tools import assert_equal, assert_not_equal, assert_true, raises
+from nose.tools import (
+    assert_equal,
+    assert_in,
+    assert_not_equal,
+    assert_not_in,
+    assert_true,
+    raises,
+)
 
 from example.commons import Faker
 from pyecharts.charts import Bar, Line, Page
 from pyecharts.commons.utils import OrderedSet
+from pyecharts.components import Table
 
 
 def _create_bar() -> Bar:
@@ -13,6 +21,18 @@ def _create_bar() -> Bar:
 
 def _create_line() -> Line:
     return Line().add_xaxis(Faker.week).add_yaxis("商家A", [7, 6, 5, 4, 3, 2, 1])
+
+
+def _create_table() -> Table:
+    table = Table()
+    headers = ["City name", "Area", "Population", "Annual Rainfall"]
+    rows = [
+        ["Brisbane", 5905, 1857594, 1146.4],
+        ["Adelaide", 1295, 1158259, 600.5],
+        ["Darwin", 112, 120900, 1714.7],
+    ]
+    table.add(headers, rows)
+    return table
 
 
 def test_page_layout_default():
@@ -50,6 +70,13 @@ def test_page_render_embed():
     line = _create_line()
     content = Page().add(bar, line).render_embed()
     assert_true(len(content) > 8000)
+
+
+def test_page_render_notebook():
+    page = Page()
+    page.add(_create_line(), _create_bar(), _create_table())
+    html = page.render_notebook().__html__()
+    assert_in("City name", html)
 
 
 def test_page_load_javascript():
@@ -127,3 +154,12 @@ def test_page_attr():
     page = Page()
     assert_true(isinstance(page.js_functions, OrderedSet))
     assert_true(isinstance(page._charts, list))
+
+
+def test_page_resize():
+    page = Page()
+    content = page.save_resize_html(
+        cfg_dict=[{"cid": "xxx", "width": 100, "height": 100, "top": 100, "left": 100}]
+    )
+    assert_not_in(".resizable()", content)
+    assert_not_in(".draggable()", content)
