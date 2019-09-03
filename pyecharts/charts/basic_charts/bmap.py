@@ -24,7 +24,7 @@ class BMap(GeoChartBase):
 
     def _feed_data(self, data_pair: types.Sequence, type_: str) -> types.Sequence:
         result = []
-        type_list = [ChartType.LINES, ChartType.HEATMAP]
+        type_list = [ChartType.LINES]
         if type_ in type_list:
             result = data_pair
         else:
