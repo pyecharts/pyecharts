@@ -1,9 +1,9 @@
 import json
 import os
 
-from example.commons import Collector, Faker
 from pyecharts import options as opts
 from pyecharts.charts import BMap, Page
+from pyecharts.faker import Collector, Faker
 from pyecharts.globals import BMapType
 
 C = Collector()

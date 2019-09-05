@@ -1,6 +1,6 @@
 import pyecharts.options as opts
-from example.commons import Collector, Faker
 from pyecharts.charts import Line, Page
+from pyecharts.faker import Collector, Faker
 
 C = Collector()
 

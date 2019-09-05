@@ -3,10 +3,10 @@ from unittest.mock import patch
 
 from nose.tools import assert_equal, assert_in, assert_true
 
-from example.commons import Faker
 from pyecharts.charts import Bar, Line, Tab
 from pyecharts.commons.utils import OrderedSet
 from pyecharts.components import Table
+from pyecharts.faker import Faker
 
 
 def _create_bar() -> Bar:

@@ -1,8 +1,8 @@
-from example.commons import Faker
 from pyecharts import options as opts
 from pyecharts.charts import Bar, Grid, Line, Liquid, Page, Pie
 from pyecharts.commons.utils import JsCode
 from pyecharts.components import Table
+from pyecharts.faker import Faker
 
 
 def bar_datazoom_slider() -> Bar:
