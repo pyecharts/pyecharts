@@ -38,7 +38,7 @@ class Polar(Chart):
         symbol: types.Optional[str] = None,
         symbol_size: types.Numeric = 4,
         stack: types.Optional[str] = None,
-        label_opts: types.Label = opts.LabelOpts(),
+        label_opts: types.Label = opts.LabelOpts(is_show=False),
         areastyle_opts: types.AreaStyle = opts.AreaStyleOpts(),
         effect_opts: types.Effect = opts.EffectOpts(),
         tooltip_opts: types.Tooltip = None,
@@ -80,6 +80,7 @@ class Polar(Chart):
                     "itemStyle": itemstyle_opts,
                 }
             )
+
         if label_opts.get("show"):
             self.options.get("series").append(
                 {

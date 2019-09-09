@@ -1,7 +1,7 @@
-from example.commons import Collector, Faker
 from pyecharts import options as opts
 from pyecharts.charts import Page, Pie
 from pyecharts.commons.utils import JsCode
+from pyecharts.faker import Collector, Faker
 
 C = Collector()
 

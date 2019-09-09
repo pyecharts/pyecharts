@@ -1,9 +1,9 @@
 import math
 import random
 
-from example.commons import Collector, Faker
 from pyecharts import options as opts
 from pyecharts.charts import Page, Polar
+from pyecharts.faker import Collector, Faker
 
 C = Collector()
 

@@ -1,6 +1,6 @@
-from example.commons import Collector
 from pyecharts import options as opts
 from pyecharts.charts import Page, WordCloud
+from pyecharts.faker import Collector
 from pyecharts.globals import SymbolType
 
 C = Collector()

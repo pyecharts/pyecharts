@@ -2,10 +2,10 @@ import unittest
 
 from nose.tools import assert_equal
 
-from example.commons import Faker
 from pyecharts import options as opts
 from pyecharts.charts import Bar, Timeline
 from pyecharts.commons.utils import JsCode
+from pyecharts.faker import Faker
 
 
 class TestTimeLine(unittest.TestCase):
