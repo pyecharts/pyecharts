@@ -1,9 +1,9 @@
 import json
 import os
 
-from example.commons import Collector, Faker
 from pyecharts import options as opts
 from pyecharts.charts import BMap, Page
+from pyecharts.faker import Collector, Faker
 from pyecharts.globals import BMapType
 
 C = Collector()
@@ -21,6 +21,25 @@ def bmap_base() -> BMap:
             label_opts=opts.LabelOpts(formatter="{b}"),
         )
         .set_global_opts(title_opts=opts.TitleOpts(title="BMap-基本示例"))
+    )
+    return c
+
+
+@C.funcs
+def bmap_heatmap() -> BMap:
+    c = (
+        BMap()
+        .add_schema(baidu_ak=BAIDU_MAP_AK, center=[120.13066322374, 30.240018034923])
+        .add(
+            "bmap",
+            [list(z) for z in zip(Faker.provinces, Faker.values())],
+            type_="heatmap",
+            label_opts=opts.LabelOpts(formatter="{b}"),
+        )
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="BMap-热力图"),
+            visualmap_opts=opts.VisualMapOpts(),
+        )
     )
     return c
 

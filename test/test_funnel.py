@@ -2,8 +2,8 @@ from unittest.mock import patch
 
 from nose.tools import assert_equal
 
-from example.commons import Faker
 from pyecharts.charts import Funnel
+from pyecharts.faker import Faker
 
 
 @patch("pyecharts.render.engine.write_utf8_html_file")

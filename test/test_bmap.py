@@ -30,6 +30,25 @@ def test_bmap(fake_writer):
     assert_in('"coordinateSystem": "bmap"', content, "non bmap found")
 
 
+def test_bmap_heatmap():
+    provinces = ["London"]
+    values = [1]
+    bmap = (
+        BMap()
+        .add_schema(baidu_ak=FAKE_API_KEY, center=[-0.118092, 51.509865])
+        .add_coordinate("London", -0.118092, 51.509865)
+        .add(
+            "bmap",
+            [list(z) for z in zip(provinces, values)],
+            label_opts=opts.LabelOpts(formatter="{b}"),
+        )
+    )
+    data = bmap.options.get("series")[0]["data"]
+    for item in data:
+        assert_in("name", item)
+        assert_in("value", item)
+
+
 @patch("pyecharts.render.engine.write_utf8_html_file")
 def test_bmap_effect_trail_length(fake_writer):
     provinces = ["London"]

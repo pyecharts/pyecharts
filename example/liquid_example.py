@@ -1,7 +1,7 @@
-from example.commons import Collector
 from pyecharts import options as opts
 from pyecharts.charts import Grid, Liquid, Page
 from pyecharts.commons.utils import JsCode
+from pyecharts.faker import Collector
 from pyecharts.globals import SymbolType
 
 C = Collector()

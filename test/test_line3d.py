@@ -3,9 +3,9 @@ from unittest.mock import patch
 
 from nose.tools import assert_equal
 
-from example.commons import Faker
 from pyecharts import options as opts
 from pyecharts.charts import Line3D
+from pyecharts.faker import Faker
 
 
 @patch("pyecharts.render.engine.write_utf8_html_file")

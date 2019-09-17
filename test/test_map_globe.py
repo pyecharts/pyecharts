@@ -2,8 +2,8 @@ from unittest.mock import patch
 
 from nose.tools import assert_equal, assert_in
 
-from example.commons import Faker
 from pyecharts.charts import MapGlobe
+from pyecharts.faker import Faker
 from pyecharts.globals import CurrentConfig, NotebookType
 
 
