@@ -117,6 +117,11 @@ class _NotebookType:
     ZEPPELIN = "zeppelin"
 
 
+class _OnlineHost:
+    DEFAULT_HOST = "https://assets.pyecharts.org/assets/"
+    NOTEBOOK_HOST = "http://localhost:8888/nbextensions/assets/"
+
+
 RenderType = _RenderType()
 FileType = _FileType()
 SymbolType = _SymbolType()
@@ -125,11 +130,12 @@ ThemeType = _ThemeType()
 GeoType = _GeoType()
 BMapType = _BMapType
 NotebookType = _NotebookType()
+OnlineHostType = _OnlineHost()
 
 
 class _CurrentConfig:
     PAGE_TITLE = "Awesome-pyecharts"
-    ONLINE_HOST = "https://assets.pyecharts.org/assets/"
+    ONLINE_HOST = OnlineHostType.DEFAULT_HOST
     NOTEBOOK_TYPE = NotebookType.JUPYTER_NOTEBOOK
     GLOBAL_ENV = Environment(
         keep_trailing_newline=True,

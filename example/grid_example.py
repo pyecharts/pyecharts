@@ -1,8 +1,8 @@
 from typing import List, Union
 
-from example.commons import Collector, Faker
 from pyecharts import options as opts
 from pyecharts.charts import Bar, Grid, Kline, Line, Page, Scatter
+from pyecharts.faker import Collector, Faker
 
 C = Collector()
 

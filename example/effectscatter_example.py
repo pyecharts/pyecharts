@@ -1,6 +1,6 @@
-from example.commons import Collector, Faker
 from pyecharts import options as opts
 from pyecharts.charts import EffectScatter, Page
+from pyecharts.faker import Collector, Faker
 from pyecharts.globals import SymbolType
 
 C = Collector()

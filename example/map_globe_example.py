@@ -1,6 +1,6 @@
 import pyecharts.options as opts
-from example.commons import POPULATION
 from pyecharts.charts import MapGlobe
+from pyecharts.faker import POPULATION
 
 
 def map_globe_base():

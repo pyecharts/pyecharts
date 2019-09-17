@@ -1,9 +1,9 @@
 import json
 import os
 
-from example.commons import Collector
 from pyecharts import options as opts
 from pyecharts.charts import Page, PictorialBar
+from pyecharts.faker import Collector
 from pyecharts.globals import SymbolType
 
 C = Collector()

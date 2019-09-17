@@ -1,9 +1,9 @@
 import datetime
 import random
 
-from example.commons import Collector
 from pyecharts import options as opts
 from pyecharts.charts import Calendar, Page
+from pyecharts.faker import Collector
 
 C = Collector()
 
