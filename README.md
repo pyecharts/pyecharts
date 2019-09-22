@@ -6,6 +6,9 @@
     <em>Python ❤️ Echarts = pyecharts</em>
 </p>
 <p align="center">
+    <img src="https://user-images.githubusercontent.com/19553554/65382302-9c30ea00-dd34-11e9-9de0-c97e81107d93.png" width="300px" alt="Give it to me.">
+</p>
+<p align="center">
     <a href="https://travis-ci.org/pyecharts/pyecharts">
         <img src="https://travis-ci.org/pyecharts/pyecharts.svg?branch=master" alt="Travis Build Status">
     </a>
