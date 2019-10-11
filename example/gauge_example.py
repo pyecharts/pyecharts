@@ -49,12 +49,28 @@ def gauge_splitnum_label() -> Gauge:
                     color=[(0.3, "#67e0e3"), (0.7, "#37a2da"), (1, "#fd666d")], width=30
                 )
             ),
-            label_opts=opts.LabelOpts(formatter="{value}"),
+            detail_label_opts=opts.LabelOpts(formatter="{value}"),
         )
         .set_global_opts(
             title_opts=opts.TitleOpts(title="Gauge-分割段数-Label"),
             legend_opts=opts.LegendOpts(is_show=False),
         )
+    )
+    return c
+
+
+@C.funcs
+def gauge_label_title_setting() -> Gauge:
+    c = (
+        Gauge()
+        .add(
+            "",
+            [("完成率", 66.6)],
+            title_label_opts=opts.LabelOpts(
+                font_size=40, color="blue", font_family="Microsoft YaHei"
+            ),
+        )
+        .set_global_opts(title_opts=opts.TitleOpts(title="Gauge-改变轮盘内的字体"))
     )
     return c
 

@@ -1,8 +1,9 @@
 from unittest.mock import patch
 
-from nose.tools import assert_equal
+from nose.tools import assert_equal, assert_in
 
 from pyecharts.charts import Gauge
+from pyecharts import options as opts
 
 
 @patch("pyecharts.render.engine.write_utf8_html_file")
@@ -12,3 +13,22 @@ def test_gauge_base(fake_writer):
     _, content = fake_writer.call_args[0]
     assert_equal(c.theme, "white")
     assert_equal(c.renderer, "canvas")
+
+
+@patch("pyecharts.render.engine.write_utf8_html_file")
+def test_gauage_label_setting(fake_writer):
+    c = (
+        Gauge()
+        .add(
+            "",
+            [("完成率", 66.6)],
+            detail_label_opts=opts.LabelOpts(formatter="{value}"),
+            title_label_opts=opts.LabelOpts(
+                font_size=40, color="blue", font_family="Microsoft YaHei"
+            ),
+        )
+        .render()
+    )
+    _, content = fake_writer.call_args[0]
+    assert_in("title", content)
+    assert_in("detail", content)
