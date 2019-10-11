@@ -27,8 +27,8 @@ def test_gauage_label_setting(fake_writer):
                 font_size=40, color="blue", font_family="Microsoft YaHei"
             ),
         )
-        .render()
     )
+    c.render()
     _, content = fake_writer.call_args[0]
     assert_in("title", content)
     assert_in("detail", content)
