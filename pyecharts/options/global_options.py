@@ -467,6 +467,7 @@ class GridOpts(BasicOpts):
         pos_bottom: Optional[str] = None,
         width: Union[Numeric, str, None] = None,
         height: Union[Numeric, str, None] = None,
+        is_contain_label: bool = False,
     ):
         self.opts: dict = {
             "left": pos_left,
@@ -475,6 +476,7 @@ class GridOpts(BasicOpts):
             "bottom": pos_bottom,
             "width": width,
             "height": height,
+            "containLabel": is_contain_label,
         }
 
 
