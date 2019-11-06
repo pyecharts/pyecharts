@@ -82,11 +82,28 @@ class Page(CompositeMixin):
         for k, v in layout.items():
             result += "{}:{}; ".format(k, v)
         return result
-
+    
+    def _get_title(self,c):        
+        
+        pattern = re.compile('"title": \[(.*?)\]',re.S|re.M)
+        
+        #extract title
+        title = pattern.findall(c.dump_options())
+        if len(title)>0:
+            c.dict_title = json.loads(title[0])
+        else:
+            c.dict_title = {}
+       
+        #delete title
+        c.json_contents = pattern.sub('',c.dump_options())
+        
+        return c
     def _prepare_render(self):
         for c in self:
             if hasattr(c, "dump_options"):
-                c.json_contents = c.dump_options()
+                
+                c = self._get_title(c)
+                
             if hasattr(c, "theme"):
                 if c.theme not in ThemeType.BUILTIN_THEMES:
                     self.js_dependencies.add(c.theme)
