@@ -1,4 +1,6 @@
-from nose.tools import assert_equal
+from unittest.mock import patch
+
+from nose.tools import assert_equal, assert_in
 
 from pyecharts import options as opts
 from pyecharts.charts import Bar, Grid, Line
@@ -58,3 +60,14 @@ def test_grid_do_not_control_axis_index():
     expected_idx = (0, 0, 0)
     for idx, series in enumerate(gc.options.get("series")):
         assert_equal(series.get("yAxisIndex"), expected_idx[idx])
+
+
+@patch("pyecharts.render.engine.write_utf8_html_file")
+def test_grid_options(fake_writer):
+    bar = _chart_for_grid()
+    gc = Grid().add(
+        bar, opts.GridOpts(pos_left="5%", pos_right="20%", is_contain_label=True)
+    )
+    gc.render()
+    _, content = fake_writer.call_args[0]
+    assert_in("containLabel", content)

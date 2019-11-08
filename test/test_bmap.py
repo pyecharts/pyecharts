@@ -126,3 +126,26 @@ def test_bmap_map_control_panel(fake_writer):
     assert_in("new BMap.OverviewMapControl", content)
     assert_in("new BMap.NavigationControl", content)
     assert_in("new BMap.GeolocationControl", content)
+
+
+@patch("pyecharts.render.engine.write_utf8_html_file")
+def test_bmap_progressive_options(fake_writer):
+    provinces = ["London"]
+    values = [1]
+    bmap = (
+        BMap()
+        .add_schema(baidu_ak=FAKE_API_KEY, center=[-0.118092, 51.509865])
+        .add_coordinate("London", -0.118092, 51.509865)
+        .add(
+            "bmap",
+            type_="lines",
+            data_pair=[list(z) for z in zip(provinces, values)],
+            label_opts=opts.LabelOpts(formatter="{b}"),
+            progressive=200,
+            progressive_threshold=500,
+        )
+    )
+    bmap.render()
+    content = fake_writer.call_args[0][1]
+    assert_in("progressive", content)
+    assert_in("progressiveThreshold", content)
