@@ -284,6 +284,8 @@ class VisualMapOpts(BasicOpts):
         is_piecewise: bool = False,
         pieces: Optional[Sequence] = None,
         out_of_range: Optional[Sequence] = None,
+        item_width: int = 0,
+        item_height: int = 0,
         textstyle_opts: Union[TextStyleOpts, dict, None] = None,
     ):
         _inrange_op: dict = {}
@@ -295,6 +297,11 @@ class VisualMapOpts(BasicOpts):
             _inrange_op.update(symbolSize=range_size)
 
         _visual_typ = "piecewise" if is_piecewise else "continuous"
+
+        if is_piecewise and item_width == 0 and item_height == 0:
+            item_width, item_height = 20, 14
+        elif item_width == 0 and item_height == 0:
+            item_width, item_height = 20, 140
 
         self.opts: dict = {
             "show": is_show,
@@ -314,6 +321,8 @@ class VisualMapOpts(BasicOpts):
             "bottom": pos_bottom,
             "right": pos_right,
             "showLabel": True,
+            "itemWidth": item_width,
+            "itemHeight": item_height,
             "outOfRange": out_of_range,
         }
         if is_piecewise:

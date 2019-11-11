@@ -27,4 +27,102 @@ def bar3d_base() -> Bar3D:
     return c
 
 
+@C.funcs
+def bar3d_stack() -> Bar3D:
+    def generate_data():
+        data = []
+        for j in range(10):
+            for k in range(10):
+                value = random.randint(0, 9)
+                data.append([j, k, value * 2 + 4])
+        return data
+
+    c = (
+        Bar3D()
+        .add(
+            "",
+            generate_data(),
+            shading="lambert",
+            xaxis3d_opts=opts.Axis3DOpts(data=list(range(10)), type_="value"),
+            yaxis3d_opts=opts.Axis3DOpts(data=list(range(10)), type_="value"),
+            zaxis3d_opts=opts.Axis3DOpts(type_="value"),
+        )
+        .add(
+            "",
+            generate_data(),
+            shading="lambert",
+            xaxis3d_opts=opts.Axis3DOpts(data=list(range(10)), type_="value"),
+            yaxis3d_opts=opts.Axis3DOpts(data=list(range(10)), type_="value"),
+            zaxis3d_opts=opts.Axis3DOpts(type_="value"),
+        )
+        .add(
+            "",
+            generate_data(),
+            shading="lambert",
+            xaxis3d_opts=opts.Axis3DOpts(data=list(range(10)), type_="value"),
+            yaxis3d_opts=opts.Axis3DOpts(data=list(range(10)), type_="value"),
+            zaxis3d_opts=opts.Axis3DOpts(type_="value"),
+        )
+        .add(
+            "",
+            generate_data(),
+            shading="lambert",
+            xaxis3d_opts=opts.Axis3DOpts(data=list(range(10)), type_="value"),
+            yaxis3d_opts=opts.Axis3DOpts(data=list(range(10)), type_="value"),
+            zaxis3d_opts=opts.Axis3DOpts(type_="value"),
+        )
+        .add(
+            "",
+            generate_data(),
+            shading="lambert",
+            xaxis3d_opts=opts.Axis3DOpts(data=list(range(10)), type_="value"),
+            yaxis3d_opts=opts.Axis3DOpts(data=list(range(10)), type_="value"),
+            zaxis3d_opts=opts.Axis3DOpts(type_="value"),
+        )
+        .add(
+            "",
+            generate_data(),
+            shading="lambert",
+            xaxis3d_opts=opts.Axis3DOpts(data=list(range(10)), type_="value"),
+            yaxis3d_opts=opts.Axis3DOpts(data=list(range(10)), type_="value"),
+            zaxis3d_opts=opts.Axis3DOpts(type_="value"),
+        )
+        .add(
+            "",
+            generate_data(),
+            shading="lambert",
+            xaxis3d_opts=opts.Axis3DOpts(data=list(range(10)), type_="value"),
+            yaxis3d_opts=opts.Axis3DOpts(data=list(range(10)), type_="value"),
+            zaxis3d_opts=opts.Axis3DOpts(type_="value"),
+        )
+        .add(
+            "",
+            generate_data(),
+            shading="lambert",
+            xaxis3d_opts=opts.Axis3DOpts(data=list(range(10)), type_="value"),
+            yaxis3d_opts=opts.Axis3DOpts(data=list(range(10)), type_="value"),
+            zaxis3d_opts=opts.Axis3DOpts(type_="value"),
+        )
+        .add(
+            "",
+            generate_data(),
+            shading="lambert",
+            xaxis3d_opts=opts.Axis3DOpts(data=list(range(10)), type_="value"),
+            yaxis3d_opts=opts.Axis3DOpts(data=list(range(10)), type_="value"),
+            zaxis3d_opts=opts.Axis3DOpts(type_="value"),
+        )
+        .add(
+            "",
+            generate_data(),
+            shading="lambert",
+            xaxis3d_opts=opts.Axis3DOpts(data=list(range(10)), type_="value"),
+            yaxis3d_opts=opts.Axis3DOpts(data=list(range(10)), type_="value"),
+            zaxis3d_opts=opts.Axis3DOpts(type_="value"),
+        )
+        .set_global_opts(title_opts=opts.TitleOpts("Bar3D-堆叠柱状图示例"))
+        .set_series_opts(**{"stack": "stack"})
+    )
+    return c
+
+
 Page().add(*[fn() for fn, _ in C.charts]).render()
