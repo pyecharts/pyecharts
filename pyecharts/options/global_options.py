@@ -247,7 +247,14 @@ class LegendOpts(BasicOpts):
         pos_top: Union[str, Numeric, None] = None,
         pos_bottom: Union[str, Numeric, None] = None,
         orient: Optional[str] = None,
+        align: Optional[str] = None,
+        padding: int = 5,
+        item_gap: int = 10,
+        item_width: int = 25,
+        item_height: int = 14,
+        inactive_color: Optional[str] = None,
         textstyle_opts: Union[TextStyleOpts, dict, None] = None,
+        legend_icon: Optional[str] = None,
     ):
         self.opts: dict = {
             "type": type_,
@@ -258,7 +265,14 @@ class LegendOpts(BasicOpts):
             "top": pos_top,
             "bottom": pos_bottom,
             "orient": orient,
+            "align": align,
+            "padding": padding,
+            "itemGap": item_gap,
+            "itemWidth": item_width,
+            "itemHeight": item_height,
+            "inactiveColor": inactive_color,
             "textStyle": textstyle_opts,
+            "icon": legend_icon,
         }
 
 
