@@ -1,6 +1,6 @@
 from unittest.mock import patch
 
-from nose.tools import assert_equal
+from nose.tools import assert_equal, assert_in
 
 from pyecharts import options as opts
 from pyecharts.charts import Graph
@@ -23,6 +23,25 @@ def test_graph_base(fake_writer):
     _, content = fake_writer.call_args[0]
     assert_equal(c.theme, "white")
     assert_equal(c.renderer, "canvas")
+
+
+@patch("pyecharts.render.engine.write_utf8_html_file")
+def test_graph_draggable_and_symbol_size(fake_writer):
+    nodes = [
+        {"name": "结点1", "symbolSize": 10},
+        {"name": "结点2", "symbolSize": 20},
+        {"name": "结点3", "symbolSize": 30},
+        {"name": "结点4", "symbolSize": 40},
+    ]
+    links = []
+    for i in nodes:
+        for j in nodes:
+            links.append({"source": i.get("name"), "target": j.get("name")})
+    c = Graph().add("", nodes, links, repulsion=8000, is_draggable=True, symbol_size=50)
+    c.render()
+    _, content = fake_writer.call_args[0]
+    assert_in("draggable", content)
+    assert_in("symbolSize", content)
 
 
 def test_graph_item():
