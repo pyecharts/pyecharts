@@ -1,7 +1,59 @@
 from nose.tools import assert_equal
 
 from pyecharts.commons.utils import remove_key_with_none_value
-from pyecharts.options.global_options import ToolboxOpts
+from pyecharts.options.global_options import (
+    AnimationOpts,
+    InitOpts,
+    ToolBoxFeatureOpts,
+    ToolboxOpts,
+    BrushOpts,
+    DataZoomOpts,
+    LegendOpts,
+    VisualMapOpts,
+    TooltipOpts,
+)
+
+
+def test_animation_options_remove_none():
+    option = AnimationOpts()
+    expected = {
+        "animation": True,
+        "animationDelay": 0,
+        "animationDelayUpdate": 0,
+        "animationDuration": 1000,
+        "animationDurationUpdate": 300,
+        "animationEasing": "cubicOut",
+        "animationEasingUpdate": "cubicOut",
+        "animationThreshold": 2000,
+    }
+    assert_equal(expected, remove_key_with_none_value(option.opts))
+
+
+def test_init_options_remove_none():
+    option = InitOpts(animation_opts={})
+    expected = {
+        "animationOpts": {},
+        "height": "500px",
+        "page_title": "Awesome-pyecharts",
+        "renderer": "canvas",
+        "theme": "white",
+        "width": "900px",
+    }
+    assert_equal(expected, remove_key_with_none_value(option.opts))
+
+
+def test_toolbox_feature_options_remove_none():
+    option = ToolBoxFeatureOpts()
+    expected = {
+        "dataView": {"readOnly": False, "show": True, "title": "data view"},
+        "dataZoom": {
+            "show": True,
+            "title": {"back": "data zoom restore", "zoom": "data zoom"},
+        },
+        "restore": {"show": True, "title": "restore"},
+        "saveAsImage": {"show": True, "title": "save as image", "type": "png"},
+    }
+    assert_equal(expected, remove_key_with_none_value(option.opts))
 
 
 def test_toolbox_options_remove_none():
@@ -13,5 +65,80 @@ def test_toolbox_options_remove_none():
         "itemGap": 10,
         "left": "80%",
         "feature": {},
+    }
+    assert_equal(expected, remove_key_with_none_value(option.opts))
+
+
+def test_brush_options_remove_none():
+    option = BrushOpts()
+    expected = {
+        "brushMode": "single",
+        "brushStyle": {
+            "borderColor": "rgba(120,140,180,0.8)",
+            "borderWidth": 1,
+            "color": "rgba(120,140,180,0.3)",
+        },
+        "brushType": "rect",
+        "removeOnClick": True,
+        "throttleDelay": 0,
+        "throttleType": "fixRate",
+        "toolbox": ["rect", "polygon", "keep", "clear"],
+        "transformable": True,
+    }
+    assert_equal(expected, remove_key_with_none_value(option.opts))
+
+
+def test_data_zoom_options_remove_none():
+    option = DataZoomOpts()
+    expected = {
+        "end": 80,
+        "orient": "horizontal",
+        "realtime": True,
+        "show": True,
+        "start": 20,
+        "type": "slider",
+        "zoomLock": False,
+    }
+    assert_equal(expected, remove_key_with_none_value(option.opts))
+
+
+def test_legend_options_remove_none():
+    option = LegendOpts()
+    expected = {
+        "show": True,
+        "padding": 5,
+        "itemGap": 10,
+        "itemWidth": 25,
+        "itemHeight": 14,
+    }
+    assert_equal(expected, remove_key_with_none_value(option.opts))
+
+
+def test_visual_map_options_remove_none():
+    option = VisualMapOpts()
+    expected = {
+        "calculable": True,
+        "inRange": {"color": ["#50a3ba", "#eac763", "#d94e5d"]},
+        "itemHeight": 140,
+        "itemWidth": 20,
+        "max": 100,
+        "min": 0,
+        "orient": "vertical",
+        "show": True,
+        "showLabel": True,
+        "splitNumber": 5,
+        "type": "continuous",
+    }
+    assert_equal(expected, remove_key_with_none_value(option.opts))
+
+
+def test_tool_tip_options_remove_none():
+    option = TooltipOpts(textstyle_opts=None)
+    expected = {
+        "axisPointer": {"type": "line"},
+        "borderWidth": 0,
+        "show": True,
+        "trigger": "item",
+        "triggerOn": "mousemove|click",
     }
     assert_equal(expected, remove_key_with_none_value(option.opts))
