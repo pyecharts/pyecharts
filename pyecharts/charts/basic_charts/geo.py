@@ -127,6 +127,7 @@ class GeoChartBase(Chart):
                     "lineStyle": linestyle_opts,
                     "tooltip": tooltip_opts,
                     "itemStyle": itemstyle_opts,
+                    "label": label_opts,
                 }
             )
 
