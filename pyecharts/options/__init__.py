@@ -68,4 +68,6 @@ from .series_options import (
     SplitAreaOpts,
     SplitLineOpts,
     TextStyleOpts,
+    HandleStyleOpts,
+    DataBackgroundOpts,
 )
