@@ -22,7 +22,8 @@ class Gauge(Chart):
         split_number: types.Numeric = 10,
         start_angle: types.Numeric = 225,
         end_angle: types.Numeric = -45,
-        label_opts: types.Label = opts.LabelOpts(formatter="{value}%"),
+        title_label_opts: types.Label = opts.LabelOpts(),
+        detail_label_opts: types.Label = opts.LabelOpts(formatter="{value}%"),
         tooltip_opts: types.Tooltip = None,
         axisline_opts: types.AxisLine = None,
         itemstyle_opts: types.ItemStyle = None,
@@ -32,7 +33,8 @@ class Gauge(Chart):
         self.options.get("series").append(
             {
                 "type": ChartType.GAUGE,
-                "detail": label_opts,
+                "title": title_label_opts,
+                "detail": detail_label_opts,
                 "name": series_name,
                 "min": min_,
                 "max": max_,

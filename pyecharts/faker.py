@@ -62,7 +62,7 @@ class _Faker:
         return [random.randint(start, end) for _ in range(7)]
 
     @staticmethod
-    def rand_color():
+    def rand_color() -> str:
         return random.choice(
             [
                 "#c23531",

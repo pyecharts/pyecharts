@@ -468,7 +468,14 @@ class LegendOpts(BasicOpts):
         pos_top: Union[str, Numeric, None] = None,
         pos_bottom: Union[str, Numeric, None] = None,
         orient: Optional[str] = None,
+        align: Optional[str] = None,
+        padding: int = 5,
+        item_gap: int = 10,
+        item_width: int = 25,
+        item_height: int = 14,
+        inactive_color: Optional[str] = None,
         textstyle_opts: Union[TextStyleOpts, dict, None] = None,
+        legend_icon: Optional[str] = None,
     ):
         self.opts: dict = {
             "type": type_,
@@ -479,7 +486,14 @@ class LegendOpts(BasicOpts):
             "top": pos_top,
             "bottom": pos_bottom,
             "orient": orient,
+            "align": align,
+            "padding": padding,
+            "itemGap": item_gap,
+            "itemWidth": item_width,
+            "itemHeight": item_height,
+            "inactiveColor": inactive_color,
             "textStyle": textstyle_opts,
+            "icon": legend_icon,
         }
 
 
@@ -505,6 +519,8 @@ class VisualMapOpts(BasicOpts):
         is_piecewise: bool = False,
         pieces: Optional[Sequence] = None,
         out_of_range: Optional[Sequence] = None,
+        item_width: int = 0,
+        item_height: int = 0,
         textstyle_opts: Union[TextStyleOpts, dict, None] = None,
     ):
         _inrange_op: dict = {}
@@ -516,6 +532,11 @@ class VisualMapOpts(BasicOpts):
             _inrange_op.update(symbolSize=range_size)
 
         _visual_typ = "piecewise" if is_piecewise else "continuous"
+
+        if is_piecewise and item_width == 0 and item_height == 0:
+            item_width, item_height = 20, 14
+        elif item_width == 0 and item_height == 0:
+            item_width, item_height = 20, 140
 
         self.opts: dict = {
             "show": is_show,
@@ -535,6 +556,8 @@ class VisualMapOpts(BasicOpts):
             "bottom": pos_bottom,
             "right": pos_right,
             "showLabel": True,
+            "itemWidth": item_width,
+            "itemHeight": item_height,
             "outOfRange": out_of_range,
         }
         if is_piecewise:
@@ -688,6 +711,7 @@ class GridOpts(BasicOpts):
         pos_bottom: Optional[str] = None,
         width: Union[Numeric, str, None] = None,
         height: Union[Numeric, str, None] = None,
+        is_contain_label: bool = False,
     ):
         self.opts: dict = {
             "left": pos_left,
@@ -696,6 +720,7 @@ class GridOpts(BasicOpts):
             "bottom": pos_bottom,
             "width": width,
             "height": height,
+            "containLabel": is_contain_label,
         }
 
 

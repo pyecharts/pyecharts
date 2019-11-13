@@ -151,7 +151,7 @@ def bmap_lines() -> BMap:
             linestyle_opts=opts.LineStyleOpts(color="purple", opacity=0.6, width=1),
         )
         .add_control_panel(
-            maptype_control_opts=opts.BMapTypeControl(
+            maptype_control_opts=opts.BMapTypeControlOpts(
                 type_=BMapType.MAPTYPE_CONTROL_DROPDOWN
             ),
             scale_control_opts=opts.BMapScaleControlOpts(),
