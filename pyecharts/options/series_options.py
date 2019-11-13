@@ -320,3 +320,40 @@ class AreaStyleOpts(BasicOpts):
 class SplitAreaOpts(BasicOpts):
     def __init__(self, is_show=True, areastyle_opts: AreaStyleOpts = AreaStyleOpts()):
         self.opts: dict = {"show": is_show, "areaStyle": areastyle_opts}
+
+class HandleStyleOpts(BasicOpts):
+    def __init__(
+            self,
+            color: Union[str, Sequence, None] = None,
+            border_color: Union[str, Sequence, None] = None,
+            border_width: Numeric = 0,
+            border_type: str = "solid",
+            shadow_blur: Numeric = 0,
+            shadow_color: Union[str, Sequence, None] = None,
+            shadow_offsetX: Numeric = 0,
+            shadow_offsetY: Numeric = 0,
+            opacity: Numeric = 1,
+    ):
+        self.opts: dict = {
+            "color": color,
+            "borderColor": border_color,
+            "borderWidth": border_width,
+            "borderType": border_type,
+            "shadowBlur": shadow_blur,
+            "shadowColor": shadow_color,
+            "shadowOffsetX": shadow_offsetX,
+            "shadowOffsetY": shadow_offsetY,
+            "opacity": opacity,
+        }
+
+
+class DataBackgroundOpts(BasicOpts):
+    def __init__(
+            self,
+            linestyle_opts: Union[LineStyleOpts, dict, None] = None,
+            areastyle_opts: AreaStyleOpts = AreaStyleOpts()
+    ):
+        self.opts: dict = {
+            "lineStyle": linestyle_opts,
+            "areaStyle": areastyle_opts
+        }
