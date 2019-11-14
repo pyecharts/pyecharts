@@ -30,10 +30,10 @@ def make_snapshot(
     file_type = output_name.split(".")[-1]
 
     content = engine.make_snapshot(
-        html_path=file_name, 
-        file_type=file_type, 
-        delay=delay, 
-        pixel_ratio=pixel_ratio, 
+        html_path=file_name,
+        file_type=file_type,
+        delay=delay,
+        pixel_ratio=pixel_ratio,
         **kwargs,
     )
     if file_type in [SVG_FORMAT, B64_FORMAT]:
