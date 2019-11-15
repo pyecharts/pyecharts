@@ -84,12 +84,20 @@ def timeline_sankey() -> Timeline:
             {"source": names[1], "target": names[2], "value": Faker.values()[0]},
         ]
         sankey = (
-            Sankey() .add(
-                "sankey", nodes, links, linestyle_opt=opts.LineStyleOpts(
-                    opacity=0.2, curve=0.5, color="source"), label_opts=opts.LabelOpts(
-                    position="right")) .set_global_opts(
-                title_opts=opts.TitleOpts(
-                    title="{}年商店（A, B, C）营业额差".format(i))))
+            Sankey()
+            .add(
+                "sankey",
+                nodes,
+                links,
+                linestyle_opt=opts.LineStyleOpts(
+                    opacity=0.2, curve=0.5, color="source"
+                ),
+                label_opts=opts.LabelOpts(position="right"),
+            )
+            .set_global_opts(
+                title_opts=opts.TitleOpts(title="{}年商店（A, B, C）营业额差".format(i))
+            )
+        )
         tl.add(sankey, "{}年".format(i))
     return tl
 
