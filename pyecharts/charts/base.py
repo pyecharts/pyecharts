@@ -48,7 +48,7 @@ class Base(ChartMixin):
         return utils.remove_key_with_none_value(_options_notitle)
 
     def get_options_title(self) -> dict:
-        return utils.remove_key_with_none_value(self.options["title"].opts[0])
+        return utils.remove_key_with_none_value(self.options.get("title").opts[0])
 
     def dump_options_notitle(self) -> str:
         return utils.replace_placeholder(
