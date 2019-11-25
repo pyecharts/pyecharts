@@ -1,4 +1,6 @@
 {%- macro render_chart_content(c) -%}
+    <b> {{c.dict_title['text']}} </b>
+    <div> {{c.dict_title['subtext']}} </div>
     <div id="{{ c.chart_id }}" class="chart-container" style="width:{{ c.width }}; height:{{ c.height }};"></div>
     <script>
         var chart_{{ c.chart_id }} = echarts.init(
