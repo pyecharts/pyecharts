@@ -85,8 +85,11 @@ class Page(CompositeMixin):
 
     def _prepare_render(self):
         for c in self:
-            if hasattr(c, "dump_options"):
-                c.json_contents = c.dump_options()
+            if hasattr(c, "dump_options_without_title"):
+                c.json_contents = c.dump_options_without_title()
+            if hasattr(c, "dump_options_title"):
+                c.json_title = c.dump_options_title()
+                c.dict_title = json.loads(c.json_title)
             if hasattr(c, "theme"):
                 if c.theme not in ThemeType.BUILTIN_THEMES:
                     self.js_dependencies.add(c.theme)
