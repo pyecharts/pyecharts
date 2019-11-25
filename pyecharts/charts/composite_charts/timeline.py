@@ -68,12 +68,11 @@ class Timeline(Base):
             self.js_dependencies.add(dep)
         self._time_points.append(time_point)
 
-        series_data = [{"data": s.get("data")} for s in chart.options.get("series")]
         self.options.get("baseOption").get("timeline").update(data=self._time_points)
         self.options.get("options").append(
             {
                 "legend": chart.options.get("legend"),
-                "series": series_data,
+                "series": chart.options.get("series"),
                 "xAxis": chart.options.get("xAxis"),
                 "title": chart.options.get("title"),
                 "tooltip": chart.options.get("tooltip"),
