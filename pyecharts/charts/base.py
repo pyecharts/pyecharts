@@ -43,11 +43,40 @@ class Base(ChartMixin):
     def get_options(self) -> dict:
         return utils.remove_key_with_none_value(self.options)
 
+    def get_options_without_title(self) -> dict:
+        _options_notitle = self.options.copy()
+        if "title" in _options_notitle:
+            _options_notitle.pop("title")
+        return utils.remove_key_with_none_value(_options_notitle)
+
+    def get_options_title(self) -> dict:
+        return utils.remove_key_with_none_value(self.options.get("title").opts[0])
+
     def dump_options(self) -> str:
         return utils.replace_placeholder(
             json.dumps(self.get_options(), indent=4, default=default, ignore_nan=True)
         )
 
+    def dump_options_without_title(self) -> str:
+        return utils.replace_placeholder(
+            json.dumps(
+                self.get_options_without_title(),
+                indent=4,
+                default=default,
+                ignore_nan=True,
+            )
+        )
+
+    def dump_options_title(self) -> str:
+        return utils.replace_placeholder(
+            json.dumps(
+                self.get_options_title(),
+                indent=4,
+                default=default,
+                ignore_nan=True,
+            )
+        )
+            
     def dump_options_with_quotes(self) -> str:
         return utils.replace_placeholder_with_quotes(
             json.dumps(self.get_options(), indent=4, default=default, ignore_nan=True)
@@ -84,7 +113,9 @@ class Base(ChartMixin):
             self.js_dependencies.add(self.theme)
 
     def _prepare_render(self):
-        self.json_contents = self.dump_options()
+        self.json_contents = self.dump_options_without_title()
+        self.json_title = self.dump_options_title()
+        self.dict_title = json.loads(self.json_title)
         self._use_theme()
 
 
