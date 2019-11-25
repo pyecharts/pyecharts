@@ -50,7 +50,11 @@ class Base(ChartMixin):
         return utils.remove_key_with_none_value(_options_notitle)
 
     def get_options_title(self) -> dict:
-        return utils.remove_key_with_none_value(self.options.get("title").opts[0])
+        if "title" in self.options:
+            _options_title = self.options.get("title").opts[0]
+        else:
+            _options_title = {}
+        return utils.remove_key_with_none_value(_options_title)
 
     def dump_options(self) -> str:
         return utils.replace_placeholder(
@@ -70,13 +74,10 @@ class Base(ChartMixin):
     def dump_options_title(self) -> str:
         return utils.replace_placeholder(
             json.dumps(
-                self.get_options_title(),
-                indent=4,
-                default=default,
-                ignore_nan=True,
+                self.get_options_title(), indent=4, default=default, ignore_nan=True,
             )
         )
-            
+
     def dump_options_with_quotes(self) -> str:
         return utils.replace_placeholder_with_quotes(
             json.dumps(self.get_options(), indent=4, default=default, ignore_nan=True)
