@@ -7,7 +7,7 @@ from jinja2 import Environment
 from ..commons import utils
 from ..globals import CurrentConfig, RenderType, ThemeType
 from ..options import InitOpts
-from ..options.global_options import AnimationOpts
+from ..options.global_options import AnimationOpts, TitleOpts
 from ..options.series_options import BasicOpts
 from ..render import engine
 from ..types import Optional, Sequence, Union
@@ -51,7 +51,14 @@ class Base(ChartMixin):
 
     def get_options_title(self) -> dict:
         if "title" in self.options:
-            _options_title = self.options.get("title").opts[0]
+            _options_title = self.options.get("title")
+            if isinstance(_options_title, TitleOpts):
+                _options_title = self.options.get("title").opts[0]
+            elif isinstance(_options_title, dict):
+                pass
+            elif isinstance(_options_title, list):
+                _options_title = _options_title[0]
+
         else:
             _options_title = {}
         return utils.remove_key_with_none_value(_options_title)
