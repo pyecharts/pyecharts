@@ -1,6 +1,31 @@
 {%- macro render_chart_content(c) -%}
-    <b> {{c.dict_title['text']}} </b>
-    <div> {{c.dict_title['subtext']}} </div>
+    {% if c.dict_title %}
+        <p class="title" style="font-size: 18px; font-weight:bold;" > {{c.dict_title['text']}}</p>
+        <p class="subtitle" style="font-size: 12px;" >  {{c.dict_title['subtext']}} </p>
+    {% endif %}      
+    <div id="{{ c.chart_id }}" class="chart-container" style="width:{{ c.width }}; height:{{ c.height }};"></div>
+    <script>
+        var chart_{{ c.chart_id }} = echarts.init(
+            document.getElementById('{{ c.chart_id }}'), '{{ c.theme }}', {renderer: '{{ c.renderer }}'});
+        {% for js in c.js_functions.items %}
+            {{ js }}
+        {% endfor %}
+        var option_{{ c.chart_id }} = {{ c.json_contents }};
+        chart_{{ c.chart_id }}.setOption(option_{{ c.chart_id }});
+        {% if c._is_geo_chart %}
+            var bmap = chart_{{ c.chart_id }}.getModel().getComponent('bmap').getBMap();
+            {% if c.bmap_js_functions %}
+                {% for fn in c.bmap_js_functions.items %}
+                    {{ fn }}
+                {% endfor %}
+            {% endif %}
+        {% endif %}
+    </script>
+{%- endmacro %}
+
+{%- macro render_chart_content2(c) -%}
+
+      
     <div id="{{ c.chart_id }}" class="chart-container" style="width:{{ c.width }}; height:{{ c.height }};"></div>
     <script>
         var chart_{{ c.chart_id }} = echarts.init(
