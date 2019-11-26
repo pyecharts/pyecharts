@@ -14,6 +14,10 @@
     {% endif %}
     <div class="box">
         {% for c in chart %}
+        {% if c.dict_title %}
+            <p class="title" style="font-size: 18px; font-weight:bold;" > {{c.dict_title["text"]}}</p>
+            <p class="subtitle" style="font-size: 12px;" >  {{c.dict_title["subtext"]}} </p>
+        {% endif %}             
             {% if c._component_type in ("table", "image") %}
                 {{ macro.gen_components_content(c) }}
             {% else %}
