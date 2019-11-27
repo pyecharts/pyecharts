@@ -2,15 +2,15 @@ from nose.tools import assert_equal
 
 from pyecharts.commons.utils import remove_key_with_none_value
 from pyecharts.options.global_options import (
-    AnimationOpts,
     InitOpts,
-    ToolBoxFeatureOpts,
-    ToolboxOpts,
     BrushOpts,
-    DataZoomOpts,
     LegendOpts,
-    VisualMapOpts,
+    ToolboxOpts,
     TooltipOpts,
+    DataZoomOpts,
+    AnimationOpts,
+    VisualMapOpts,
+    ToolBoxFeatureOpts,
 )
 
 
@@ -91,13 +91,23 @@ def test_brush_options_remove_none():
 def test_data_zoom_options_remove_none():
     option = DataZoomOpts()
     expected = {
-        "end": 80,
-        "orient": "horizontal",
-        "realtime": True,
-        "show": True,
-        "start": 20,
         "type": "slider",
+        "show": True,
+        "borderWidth": 0,
+        "handleIcon": "M8.2,13.6V3.9H6.3v9.7H3.1v14.9h3.3v9.7h1.8v-9.7h3.3V13.6H8.2z M9.7,24.4H4.8v-1.4h4.9V24.4z M9.7,19.1H4.8v-1.4h4.9V19.1z",
+        "handleSize": "100%",
+        "labelPrecision": "auto",
+        "showDetail": True,
+        "showDataShadow": "auto",
+        "realtime": True,
+        "filterMode": "filter",
+        "start": 0,
+        "end": 100,
+        "orient": "horizontal",
         "zoomLock": False,
+        "throttle": 100,
+        "zlevel": 0,
+        "z": 2,
     }
     assert_equal(expected, remove_key_with_none_value(option.opts))
 
