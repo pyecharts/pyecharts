@@ -210,7 +210,8 @@ class DataZoomOpts(BasicOpts):
         filler_color: Optional[str] = None,
         border_color: Optional[str] = None,
         border_width: Numeric = 0,
-        handle_icon: str = "M8.2,13.6V3.9H6.3v9.7H3.1v14.9h3.3v9.7h1.8v-9.7h3.3V13.6H8.2z M9.7,24.4H4.8v-1.4h4.9V24.4z M9.7,19.1H4.8v-1.4h4.9V19.1z",
+        handle_icon: str = "M8.2,13.6V3.9H6.3v9.7H3.1v14.9h3.3v9.7h1.8v-9.7h3.3V13.6H8.2z " +
+                           "M9.7,24.4H4.8v-1.4h4.9V24.4z M9.7,19.1H4.8v-1.4h4.9V19.1z",
         handle_size: Union[Numeric, str] = "100%",
         handlestyle_opt: Union[HandleStyleOpts, dict, None] = None,
         label_precision: Union[Numeric, str] = "auto",
@@ -383,7 +384,8 @@ class DataZoomOpts(BasicOpts):
         databackground_opts: Union[DataBackgroundOpts, dict, None] = None,
         filler_color: Optional[str] = None,
         border_color: Optional[str] = None,
-        handle_icon: str = "M8.2,13.6V3.9H6.3v9.7H3.1v14.9h3.3v9.7h1.8v-9.7h3.3V13.6H8.2z M9.7,24.4H4.8v-1.4h4.9V24.4z M9.7,19.1H4.8v-1.4h4.9V19.1z",
+        handle_icon: str = "M8.2,13.6V3.9H6.3v9.7H3.1v14.9h3.3v9.7h1.8v-9.7h3.3V13.6H8.2z " +
+                           "M9.7,24.4H4.8v-1.4h4.9V24.4z M9.7,19.1H4.8v-1.4h4.9V19.1z",
         handle_size: Union[Numeric, str] = "100%",
         handlestyle_opt: Union[HandleStyleOpts, dict, None] = None,
         label_precision: Union[Numeric, str] = "auto",
