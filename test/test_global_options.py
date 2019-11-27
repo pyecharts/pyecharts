@@ -2,15 +2,15 @@ from nose.tools import assert_equal
 
 from pyecharts.commons.utils import remove_key_with_none_value
 from pyecharts.options.global_options import (
-    InitOpts,
+    AnimationOpts,
     BrushOpts,
+    DataZoomOpts,
+    InitOpts,
     LegendOpts,
+    ToolBoxFeatureOpts,
     ToolboxOpts,
     TooltipOpts,
-    DataZoomOpts,
-    AnimationOpts,
     VisualMapOpts,
-    ToolBoxFeatureOpts,
 )
 
 

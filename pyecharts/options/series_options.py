@@ -1,4 +1,4 @@
-from typing import Any, Tuple, Union, Optional, Sequence
+from typing import Any, Optional, Sequence, Tuple, Union
 
 from ..commons.utils import JsCode
 

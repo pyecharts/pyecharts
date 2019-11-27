@@ -1,18 +1,18 @@
-from ..globals import ThemeType, RenderType, CurrentConfig
+from ..globals import CurrentConfig, RenderType, ThemeType
 from ..options.series_options import (
-    Union,
+    BasicOpts,
+    DataBackgroundOpts,
+    HandleStyleOpts,
     JSFunc,
+    LabelOpts,
+    LineStyleOpts,
     Numeric,
     Optional,
     Sequence,
-    BasicOpts,
-    LabelOpts,
-    LineStyleOpts,
     SplitAreaOpts,
     SplitLineOpts,
     TextStyleOpts,
-    HandleStyleOpts,
-    DataBackgroundOpts,
+    Union,
 )
 
 
