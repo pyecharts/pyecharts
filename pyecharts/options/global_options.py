@@ -318,8 +318,7 @@ class DataZoomOpts(BasicOpts):
                 "preventDefaultMouseMove": prevent_default_mousemove,
             }
         if args is not None:
-            for item in args.items():
-                self.opts[item[0]] = item[1]
+            self.opts.update(args)
 
     @classmethod
     def inside(
