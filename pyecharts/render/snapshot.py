@@ -29,7 +29,13 @@ def make_snapshot(
     logger.info("Generating file ...")
     file_type = output_name.split(".")[-1]
 
-    content = engine.make_snapshot(file_name, file_type, delay, pixel_ratio, **kwargs)
+    content = engine.make_snapshot(
+        html_path=file_name,
+        file_type=file_type,
+        delay=delay,
+        pixel_ratio=pixel_ratio,
+        **kwargs,
+    )
     if file_type in [SVG_FORMAT, B64_FORMAT]:
         save_as_text(content, output_name)
     else:
