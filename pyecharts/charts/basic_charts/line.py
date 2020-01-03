@@ -29,6 +29,8 @@ class Line(RectChart):
         is_smooth: bool = False,
         is_step: bool = False,
         is_hover_animation: bool = True,
+        z_level: types.Numeric = 0,
+        z: types.Numeric = 0,
         markpoint_opts: types.MarkPoint = None,
         markline_opts: types.MarkLine = None,
         tooltip_opts: types.Tooltip = None,
@@ -65,6 +67,8 @@ class Line(RectChart):
                 "markLine": markline_opts,
                 "tooltip": tooltip_opts,
                 "itemStyle": itemstyle_opts,
+                "zlevel": z_level,
+                "z": z,
             }
         )
         return self

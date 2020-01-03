@@ -1,5 +1,7 @@
+from pyecharts.commons.utils import JsCode
+
 from pyecharts import options as opts
-from pyecharts.charts import Bar, Map, Page, Pie, Timeline
+from pyecharts.charts import Bar, Map, Page, Pie, Sankey, Timeline
 from pyecharts.faker import Collector, Faker
 
 C = Collector()
@@ -16,6 +18,60 @@ def timeline_bar() -> Timeline:
             .add_yaxis("商家A", Faker.values())
             .add_yaxis("商家B", Faker.values())
             .set_global_opts(title_opts=opts.TitleOpts("某商店{}年营业额".format(i)))
+        )
+        tl.add(bar, "{}年".format(i))
+    return tl
+
+
+@C.funcs
+def timeline_bar_with_graphic() -> Timeline:
+    x = Faker.choose()
+    tl = Timeline()
+    for i in range(2015, 2020):
+        bar = (
+            Bar()
+            .add_xaxis(x)
+            .add_yaxis("商家A", Faker.values())
+            .add_yaxis("商家B", Faker.values())
+            .set_global_opts(
+                title_opts=opts.TitleOpts("某商店{}年营业额 - With Graphic 组件".format(i)),
+                graphic_opts=[
+                    opts.GraphicGroup(
+                        graphic_item=opts.GraphicItem(
+                            rotation=JsCode("Math.PI / 4"),
+                            bounding="raw",
+                            right=100,
+                            bottom=110,
+                            z=100,
+                        ),
+                        children=[
+                            opts.GraphicRect(
+                                graphic_item=opts.GraphicItem(
+                                    left="center", top="center", z=100
+                                ),
+                                graphic_shape_opts=opts.GraphicShapeOpts(
+                                    width=400, height=50
+                                ),
+                                graphic_basicstyle_opts=opts.GraphicBasicStyleOpts(
+                                    fill="rgba(0,0,0,0.3)"
+                                ),
+                            ),
+                            opts.GraphicText(
+                                graphic_item=opts.GraphicItem(
+                                    left="center", top="center", z=100
+                                ),
+                                graphic_textstyle_opts=opts.GraphicTextStyleOpts(
+                                    text="某商店{}年营业额".format(i),
+                                    font="bold 26px Microsoft YaHei",
+                                    graphic_basicstyle_opts=opts.GraphicBasicStyleOpts(
+                                        fill="#fff"
+                                    ),
+                                ),
+                            ),
+                        ],
+                    )
+                ],
+            )
         )
         tl.add(bar, "{}年".format(i))
     return tl
@@ -59,7 +115,7 @@ def timeline_map() -> Timeline:
 
 
 @C.funcs
-def timeline_with_multi_axis():
+def timeline_with_multi_axis() -> Timeline:
     tl = Timeline()
     for i in range(2015, 2020):
         bar = (
@@ -70,6 +126,35 @@ def timeline_with_multi_axis():
             .set_global_opts(title_opts=opts.TitleOpts("某商店{}年营业额".format(i)))
         )
         tl.add(bar, "{}年".format(i))
+    return tl
+
+
+@C.funcs
+def timeline_sankey() -> Timeline:
+    tl = Timeline()
+    names = ("商家A", "商家B", "商家C")
+    nodes = [{"name": name} for name in names]
+    for i in range(2015, 2020):
+        links = [
+            {"source": names[0], "target": names[1], "value": Faker.values()[0]},
+            {"source": names[1], "target": names[2], "value": Faker.values()[0]},
+        ]
+        sankey = (
+            Sankey()
+            .add(
+                "sankey",
+                nodes,
+                links,
+                linestyle_opt=opts.LineStyleOpts(
+                    opacity=0.2, curve=0.5, color="source"
+                ),
+                label_opts=opts.LabelOpts(position="right"),
+            )
+            .set_global_opts(
+                title_opts=opts.TitleOpts(title="{}年商店（A, B, C）营业额差".format(i))
+            )
+        )
+        tl.add(sankey, "{}年".format(i))
     return tl
 
 
