@@ -18,6 +18,7 @@ __requires__ = ["jinja2", "prettytable", "simplejson"]
 __extra_requires__ = {
     "selenium": ["snapshot-selenium"],
     "phantomjs": ["snapshot-phantomjs"],
+    "pyppeteer": ["snapshot-pyppeteer"],
     "images": ["PIL"],
 }
 
@@ -90,6 +91,7 @@ setup(
         "Programming Language :: Python",
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.8",
         "Topic :: Software Development :: Libraries",
     ],
     cmdclass={"upload": UploadCommand},
