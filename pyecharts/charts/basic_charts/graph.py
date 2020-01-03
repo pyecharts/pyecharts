@@ -29,6 +29,7 @@ class Graph(Chart):
         edge_length: types.Numeric = 50,
         gravity: types.Numeric = 0.2,
         repulsion: types.Numeric = 50,
+        edge_label: types.Label = None,
         edge_symbol: types.Optional[str] = None,
         edge_symbol_size: types.Numeric = 10,
         label_opts: types.Label = opts.LabelOpts(),
@@ -54,6 +55,9 @@ class Graph(Chart):
                     c = c.opts
                 self._append_legend(c.get("name", ""), is_selected)
 
+        if edge_label is None:
+            edge_label = opts.LabelOpts(is_show=False)
+
         if edge_symbol is None:
             edge_symbol = [None, None]
 
@@ -77,6 +81,7 @@ class Graph(Chart):
                 "focusNodeAdjacency": is_focusnode,
                 "data": _nodes,
                 "categories": categories,
+                "edgeLabel": edge_label,
                 "edgeSymbol": edge_symbol,
                 "edgeSymbolSize": edge_symbol_size,
                 "links": _links,

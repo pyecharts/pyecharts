@@ -44,6 +44,26 @@ def test_graph_draggable_and_symbol_size(fake_writer):
     assert_in("symbolSize", content)
 
 
+@patch("pyecharts.render.engine.write_utf8_html_file")
+def test_graph_edge_label_opts(fake_writer):
+    nodes = [
+        {"name": "结点1", "symbolSize": 10},
+        {"name": "结点2", "symbolSize": 20},
+        {"name": "结点3", "symbolSize": 30},
+        {"name": "结点4", "symbolSize": 40},
+    ]
+    links = []
+    for i in nodes:
+        for j in nodes:
+            links.append({"source": i.get("name"), "target": j.get("name")})
+    c = Graph().add(
+        "", nodes, links, repulsion=4000, edge_label=opts.LabelOpts(is_show=True)
+    )
+    c.render()
+    _, content = fake_writer.call_args[0]
+    assert_in("edgeLabel", content)
+
+
 def test_graph_item():
     node_name, link_source = "test_node_name", "test_link_source"
     node = opts.GraphNode(name=node_name)

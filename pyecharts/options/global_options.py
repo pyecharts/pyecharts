@@ -177,6 +177,8 @@ class TitleOpts(BasicOpts):
         pos_right: Optional[str] = None,
         pos_top: Optional[str] = None,
         pos_bottom: Optional[str] = None,
+        padding: Union[Sequence, Numeric] = 5,
+        item_gap: Numeric = 10,
         title_textstyle_opts: Union[TextStyleOpts, dict, None] = None,
         subtitle_textstyle_opts: Union[TextStyleOpts, dict, None] = None,
     ):
@@ -192,6 +194,8 @@ class TitleOpts(BasicOpts):
                 "right": pos_right,
                 "top": pos_top,
                 "bottom": pos_bottom,
+                "padding": padding,
+                "itemGap": item_gap,
                 "textStyle": title_textstyle_opts,
                 "subtextStyle": subtitle_textstyle_opts,
             }

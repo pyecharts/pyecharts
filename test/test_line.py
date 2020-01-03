@@ -52,3 +52,17 @@ def test_data_label_none_animation_opts(fake_writer):
     c.render()
     _, content = fake_writer.call_args[0]
     assert_in("hoverAnimation", content)
+
+
+@patch("pyecharts.render.engine.write_utf8_html_file")
+def test_line_opts_with_zlevel_z(fake_writer):
+    c = (
+        Line()
+        .add_xaxis(["A", "B", "C"])
+        .add_yaxis("series0", [1, 2, 4])
+        .add_yaxis("series1", [2, 3, 6], z_level=2, z=1)
+    )
+    c.render()
+    _, content = fake_writer.call_args[0]
+    assert_in("zlevel", content)
+    assert_in("z", content)
