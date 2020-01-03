@@ -5,6 +5,8 @@ environment:
       PYTHON_VERSION: "3.6"
     - PYTHON: "C:\\Python37-x64"
       PYTHON_VERSION: "3.7"
+    - PYTHON: "C:\\Python38-x64"
+      PYTHON_VERSION: "3.8"
 
 install:
   - "%PYTHON%\\python.exe -m pip install -r requirements.txt"
