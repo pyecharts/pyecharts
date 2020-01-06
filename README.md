@@ -1,12 +1,9 @@
 <p align="center">
-    <img src="https://user-images.githubusercontent.com/19553554/39612358-499eb2ae-4f91-11e8-8f56-179c4f0bf2df.png" alt="pyecharts logo" width=200 height=200 />
+    <img src="https://user-images.githubusercontent.com/19553554/71825144-2d568180-30d6-11ea-8ee0-63c849cfd934.png" alt="pyecharts logo" width=200 height=200 />
 </p>
 <h1 align="center">pyecharts</h1>
 <p align="center">
     <em>Python ❤️ Echarts = pyecharts</em>
-</p>
-<p align="center">
-    <img src="https://user-images.githubusercontent.com/19553554/65382302-9c30ea00-dd34-11e9-9de0-c97e81107d93.png" width="300px" alt="Give it to me.">
 </p>
 <p align="center">
     <a href="https://travis-ci.org/pyecharts/pyecharts">
