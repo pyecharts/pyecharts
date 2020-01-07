@@ -75,4 +75,14 @@ def gauge_label_title_setting() -> Gauge:
     return c
 
 
+@C.funcs
+def gauge_change_radius() -> Gauge:
+    c = (
+        Gauge()
+        .add("", [("完成率", 66.6)], radius="50%")
+        .set_global_opts(title_opts=opts.TitleOpts(title="Gauge-修改 Radius 为 50%"))
+    )
+    return c
+
+
 Page().add(*[fn() for fn, _ in C.charts]).render()
