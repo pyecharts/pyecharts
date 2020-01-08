@@ -24,7 +24,7 @@ class BMap(GeoChartBase):
 
     def _feed_data(self, data_pair: types.Sequence, type_: str) -> types.Sequence:
         result = []
-        type_list = [ChartType.LINES]
+        type_list = [ChartType.LINES, ChartType.CUSTOM]
         if type_ in type_list:
             result = data_pair
         else:
@@ -37,7 +37,7 @@ class BMap(GeoChartBase):
         self,
         baidu_ak: str,
         center: types.Sequence,
-        zoom: types.Optional[int] = None,
+        zoom: types.Union[types.Numeric, str] = None,
         is_roam: bool = True,
         map_style: types.Optional[dict] = None,
     ):

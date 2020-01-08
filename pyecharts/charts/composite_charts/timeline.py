@@ -21,6 +21,7 @@ class Timeline(Base):
         symbol: types.Optional[str] = None,
         symbol_size: types.Optional[types.Numeric] = None,
         play_interval: types.Optional[types.Numeric] = None,
+        control_position: str = "left",
         is_auto_play: bool = False,
         is_loop_play: bool = True,
         is_rewind_play: bool = False,
@@ -42,6 +43,7 @@ class Timeline(Base):
                 "axisType": axis_type,
                 "orient": orient,
                 "autoPlay": is_auto_play,
+                "controlPosition": control_position,
                 "loop": is_loop_play,
                 "rewind": is_rewind_play,
                 "show": is_timeline_show,
@@ -78,7 +80,8 @@ class Timeline(Base):
                 "tooltip": chart.options.get("tooltip"),
                 "visualMap": chart.options.get("visualMap"),
                 "color": chart.options.get("color"),
-                "graphic": chart.options.get("graphic")
+                "graphic": chart.options.get("graphic"),
+                "bmap": chart.options.get("bmap"),
             }
         )
         self.__check_components(chart)

@@ -290,6 +290,7 @@ class VisualMapOpts(BasicOpts):
         range_text: Optional[Sequence] = None,
         range_color: Optional[Sequence[str]] = None,
         range_size: Optional[Sequence[int]] = None,
+        range_opacity: Optional[Numeric] = None,
         orient: str = "vertical",
         pos_left: Optional[str] = None,
         pos_right: Optional[str] = None,
@@ -300,10 +301,14 @@ class VisualMapOpts(BasicOpts):
         dimension: Optional[Numeric] = None,
         is_calculable: bool = True,
         is_piecewise: bool = False,
+        is_inverse: bool = False,
         pieces: Optional[Sequence] = None,
         out_of_range: Optional[Sequence] = None,
         item_width: int = 0,
         item_height: int = 0,
+        background_color: Optional[str] = None,
+        border_color: Optional[str] = None,
+        border_width: int = 0,
         textstyle_opts: Union[TextStyleOpts, dict, None] = None,
     ):
         _inrange_op: dict = {}
@@ -313,6 +318,8 @@ class VisualMapOpts(BasicOpts):
         elif type_ == "size":
             range_size = range_size or [20, 50]
             _inrange_op.update(symbolSize=range_size)
+        if range_opacity is not None:
+            _inrange_op.update(opacity=range_opacity)
 
         _visual_typ = "piecewise" if is_piecewise else "continuous"
 
@@ -330,6 +337,7 @@ class VisualMapOpts(BasicOpts):
             "textStyle": textstyle_opts,
             "inRange": _inrange_op,
             "calculable": is_calculable,
+            "inverse": is_inverse,
             "splitNumber": split_number,
             "dimension": dimension,
             "seriesIndex": series_index,
@@ -342,6 +350,9 @@ class VisualMapOpts(BasicOpts):
             "itemWidth": item_width,
             "itemHeight": item_height,
             "outOfRange": out_of_range,
+            "backgroundColor": background_color,
+            "borderColor": border_color,
+            "borderWidth": border_width,
         }
         if is_piecewise:
             self.opts.update(pieces=pieces)
