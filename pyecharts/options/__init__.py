@@ -22,6 +22,7 @@ from .charts_options import (
     GraphLink,
     GraphNode,
     PageLayoutOpts,
+    SankeyLevelsOpts,
     SunburstItem,
     TreeItem,
 )
@@ -43,6 +44,7 @@ from .global_options import (
     LegendOpts,
     ParallelAxisOpts,
     ParallelOpts,
+    PolarOpts,
     RadarIndicatorItem,
     RadiusAxisItem,
     RadiusAxisOpts,

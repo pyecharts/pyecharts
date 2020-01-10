@@ -320,3 +320,27 @@ class AreaStyleOpts(BasicOpts):
 class SplitAreaOpts(BasicOpts):
     def __init__(self, is_show=True, areastyle_opts: AreaStyleOpts = AreaStyleOpts()):
         self.opts: dict = {"show": is_show, "areaStyle": areastyle_opts}
+
+
+class TreeMapBreadcrumbOpts(BasicOpts):
+    def __init__(
+        self,
+        is_show: bool = True,
+        pos_left: Union[str, Numeric] = "center",
+        pos_right: Union[str, Numeric] = "auto",
+        pos_top: Union[str, Numeric] = "auto",
+        pos_bottom: Union[str, Numeric] = 0,
+        height: Numeric = 22,
+        empty_item_width: Numeric = 25,
+        item_opts: ItemStyleOpts = ItemStyleOpts(),
+    ):
+        self.opts: dict = {
+            "show": is_show,
+            "left": pos_left,
+            "right": pos_right,
+            "top": pos_top,
+            "bottom": pos_bottom,
+            "height": height,
+            "emptyItemWidth": empty_item_width,
+            "itemStyle": item_opts,
+        }
