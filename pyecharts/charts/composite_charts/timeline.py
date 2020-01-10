@@ -76,6 +76,7 @@ class Timeline(Base):
                 "legend": chart.options.get("legend"),
                 "series": chart.options.get("series"),
                 "xAxis": chart.options.get("xAxis"),
+                "yAxis": chart.options.get("yAxis"),
                 "title": chart.options.get("title"),
                 "tooltip": chart.options.get("tooltip"),
                 "visualMap": chart.options.get("visualMap"),

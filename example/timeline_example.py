@@ -1,7 +1,7 @@
 from pyecharts.commons.utils import JsCode
 
 from pyecharts import options as opts
-from pyecharts.charts import Bar, BMap, Map, Page, Pie, Sankey, Timeline
+from pyecharts.charts import Bar, BMap, Grid, Map, Page, Pie, Sankey, Timeline
 from pyecharts.faker import Collector, Faker
 
 C = Collector()
@@ -18,6 +18,28 @@ def timeline_bar() -> Timeline:
             .add_yaxis("商家A", Faker.values())
             .add_yaxis("商家B", Faker.values())
             .set_global_opts(title_opts=opts.TitleOpts("某商店{}年营业额".format(i)))
+        )
+        tl.add(bar, "{}年".format(i))
+    return tl
+
+
+@C.funcs
+def timeline_bar_reversal() -> Timeline:
+    tl = Timeline()
+    for i in range(2015, 2020):
+        bar = (
+            Bar()
+            .add_xaxis(Faker.choose())
+            .add_yaxis(
+                "商家A", Faker.values(), label_opts=opts.LabelOpts(position="right")
+            )
+            .add_yaxis(
+                "商家B", Faker.values(), label_opts=opts.LabelOpts(position="right")
+            )
+            .reversal_axis()
+            .set_global_opts(
+                title_opts=opts.TitleOpts("Timeline-Bar-Reversal (时间: {} 年)".format(i))
+            )
         )
         tl.add(bar, "{}年".format(i))
     return tl
@@ -161,11 +183,7 @@ def timeline_sankey() -> Timeline:
 @C.funcs
 def timeline_bmap() -> Timeline:
     tl = Timeline()
-    tl.add_schema(
-        pos_left="50%",
-        pos_right="10px",
-        pos_bottom="15px",
-    )
+    tl.add_schema(pos_left="50%", pos_right="10px", pos_bottom="15px")
     for i in range(2015, 2020):
         bmap = (
             BMap()
@@ -177,7 +195,9 @@ def timeline_bmap() -> Timeline:
             )
             .set_global_opts(
                 title_opts=opts.TitleOpts(title="Timeline-BMap-热力图-{}年".format(i)),
-                visualmap_opts=opts.VisualMapOpts(pos_bottom="center", pos_right="10px"),
+                visualmap_opts=opts.VisualMapOpts(
+                    pos_bottom="center", pos_right="10px"
+                ),
                 tooltip_opts=opts.TooltipOpts(formatter=None),
             )
         )

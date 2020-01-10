@@ -21,7 +21,17 @@ class Radar(Chart):
         splitline_opt: types.SplitLine = opts.SplitLineOpts(is_show=True),
         splitarea_opt: types.SplitArea = opts.SplitAreaOpts(),
         axisline_opt: types.AxisLine = opts.AxisLineOpts(),
+        radiusaxis_opts: types.RadiusAxis = None,
+        angleaxis_opts: types.AngleAxis = None,
+        polar_opts: types.Polar = None,
     ):
+
+        self.options.update(
+            radiusAxis=radiusaxis_opts,
+            angleAxis=angleaxis_opts,
+            polar=polar_opts,
+        )
+
         indicators = []
         for s in schema:
             if isinstance(s, opts.RadarIndicatorItem):

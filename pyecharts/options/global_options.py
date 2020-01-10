@@ -704,7 +704,9 @@ class RadiusAxisOpts(BasicOpts):
         min_: Union[str, Numeric, None] = None,
         max_: Union[str, Numeric, None] = None,
         is_scale: bool = False,
+        interval: Optional[Numeric] = None,
         splitline_opts: Union[SplitLineOpts, dict, None] = None,
+        splitarea_opts: Union[SplitAreaOpts, dict, None] = None,
         axistick_opts: Union[AxisTickOpts, dict, None] = None,
         axisline_opts: Union[AxisLineOpts, dict, None] = None,
         axislabel_opts: Union[LabelOpts, dict, None] = None,
@@ -727,7 +729,9 @@ class RadiusAxisOpts(BasicOpts):
             "min": min_,
             "max": max_,
             "scale": is_scale,
+            "interval": interval,
             "splitLine": splitline_opts,
+            "splitArea": splitarea_opts,
             "axisTick": axistick_opts,
             "axisLine": axisline_opts,
             "axisLabel": axislabel_opts,
@@ -746,6 +750,9 @@ class AngleAxisOpts(BasicOpts):
         type_: Optional[str] = None,
         min_: Union[str, Numeric, None] = None,
         max_: Union[str, Numeric, None] = None,
+        is_scale: bool = False,
+        split_number: Numeric = 5,
+        interval: Optional[Numeric] = None,
         splitline_opts: Union[SplitLineOpts, dict, None] = None,
         axisline_opts: Union[AxisLineOpts, dict, None] = None,
         axistick_opts: Union[AxisTickOpts, dict, None] = None,
@@ -768,9 +775,26 @@ class AngleAxisOpts(BasicOpts):
             "type": type_,
             "min": min_,
             "max": max_,
+            "scale": is_scale,
+            "splitNumber": split_number,
+            "interval": interval,
             "splitLine": splitline_opts,
             "axisLine": axisline_opts,
             "axisTick": axistick_opts,
             "axisLabel": axislabel_opts,
             "z": z,
+        }
+
+
+class PolarOpts(BasicOpts):
+    def __init__(
+        self,
+        center: Optional[Sequence] = None,
+        radius: Optional[Union[Sequence, str]] = None,
+        tooltip_opts: TooltipOpts = None,
+    ):
+        self.opts: dict = {
+            "center": center,
+            "radius": radius,
+            "tooltip": tooltip_opts
         }
