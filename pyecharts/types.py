@@ -16,7 +16,6 @@ from .options.series_options import JsCode, JSFunc, Numeric
 
 Init = Union[opts.InitOpts, dict]
 
-
 Axis = Union[opts.AxisOpts, dict, None]
 Axis3D = Union[opts.Axis3DOpts, dict]
 AxisLine = Union[opts.AxisLineOpts, dict, None]
@@ -39,6 +38,7 @@ TextStyle = Union[opts.TextStyleOpts, dict, None]
 Title = Union[opts.TitleOpts, dict]
 Tooltip = Union[opts.TooltipOpts, dict, None]
 Toolbox = Union[opts.ToolboxOpts, dict]
+TreeMapBreadcrumb = Union[opts.TreeMapBreadcrumbOpts, dict, None]
 SplitLine = Union[opts.SplitLineOpts, dict, None]
 SplitArea = Union[opts.SplitAreaOpts, dict, None]
 SingleAxis = Union[opts.SingleAxisOpts, dict, None]
@@ -61,3 +61,8 @@ BMapScaleControl = Union[opts.BMapScaleControlOpts, dict, None]
 BMapTypeControl = Union[opts.BMapTypeControlOpts, dict, None]
 BMapCopyrightType = Union[opts.BMapCopyrightTypeOpts, dict, None]
 BMapGeoLocationControl = Union[opts.BMapGeoLocationControlOpts, dict, None]
+
+_SankeyLevelType = Union[opts.SankeyLevelsOpts, dict]
+SankeyLevel = Union[Sequence[_SankeyLevelType], None]
+
+Polar = Union[opts.PolarOpts, dict, None]

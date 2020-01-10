@@ -55,6 +55,8 @@ class GeoChartBase(Chart):
         linestyle_opts: types.LineStyle = opts.LineStyleOpts(),
         tooltip_opts: types.Tooltip = None,
         itemstyle_opts: types.ItemStyle = None,
+        render_item: types.JsCode = None,
+        encode: types.Union[types.JsCode, dict] = None,
     ):
         self._zlevel += 1
         data = self._feed_data(data_pair, type_)
@@ -130,7 +132,18 @@ class GeoChartBase(Chart):
                     "label": label_opts,
                 }
             )
-
+        elif type_ == ChartType.CUSTOM:
+            self.options.get("series").append(
+                {
+                    "type": type_,
+                    "name": series_name,
+                    "coordinateSystem": self._coordinate_system,
+                    "renderItem": render_item,
+                    "emphasis": {"itemStyle": itemstyle_opts},
+                    "encode": encode,
+                    "data": data,
+                }
+            )
         return self
 
 

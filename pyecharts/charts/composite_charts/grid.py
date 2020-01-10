@@ -3,7 +3,7 @@ import copy
 from ... import options as opts
 from ... import types
 from ...globals import ThemeType
-from ..chart import Base, RectChart
+from ..chart import Base, Chart, RectChart
 
 
 class Grid(Base):
@@ -21,7 +21,7 @@ class Grid(Base):
 
     def add(
         self,
-        chart: RectChart,
+        chart: Chart,
         grid_opts: types.Union[opts.GridOpts, dict],
         *,
         grid_index: int = 0,
@@ -51,6 +51,9 @@ class Grid(Base):
 
         for dep in chart.js_dependencies.items:
             self.js_dependencies.add(dep)
+
+        if chart.options.get("geo") is not None:
+            self.options.update(geo=chart.options.get("geo"))
 
         if isinstance(chart, RectChart):
             if grid_index == 0:

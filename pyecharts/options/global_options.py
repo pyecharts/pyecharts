@@ -290,6 +290,7 @@ class VisualMapOpts(BasicOpts):
         range_text: Optional[Sequence] = None,
         range_color: Optional[Sequence[str]] = None,
         range_size: Optional[Sequence[int]] = None,
+        range_opacity: Optional[Numeric] = None,
         orient: str = "vertical",
         pos_left: Optional[str] = None,
         pos_right: Optional[str] = None,
@@ -300,10 +301,14 @@ class VisualMapOpts(BasicOpts):
         dimension: Optional[Numeric] = None,
         is_calculable: bool = True,
         is_piecewise: bool = False,
+        is_inverse: bool = False,
         pieces: Optional[Sequence] = None,
         out_of_range: Optional[Sequence] = None,
         item_width: int = 0,
         item_height: int = 0,
+        background_color: Optional[str] = None,
+        border_color: Optional[str] = None,
+        border_width: int = 0,
         textstyle_opts: Union[TextStyleOpts, dict, None] = None,
     ):
         _inrange_op: dict = {}
@@ -313,6 +318,8 @@ class VisualMapOpts(BasicOpts):
         elif type_ == "size":
             range_size = range_size or [20, 50]
             _inrange_op.update(symbolSize=range_size)
+        if range_opacity is not None:
+            _inrange_op.update(opacity=range_opacity)
 
         _visual_typ = "piecewise" if is_piecewise else "continuous"
 
@@ -330,6 +337,7 @@ class VisualMapOpts(BasicOpts):
             "textStyle": textstyle_opts,
             "inRange": _inrange_op,
             "calculable": is_calculable,
+            "inverse": is_inverse,
             "splitNumber": split_number,
             "dimension": dimension,
             "seriesIndex": series_index,
@@ -342,6 +350,9 @@ class VisualMapOpts(BasicOpts):
             "itemWidth": item_width,
             "itemHeight": item_height,
             "outOfRange": out_of_range,
+            "backgroundColor": background_color,
+            "borderColor": border_color,
+            "borderWidth": border_width,
         }
         if is_piecewise:
             self.opts.update(pieces=pieces)
@@ -693,7 +704,9 @@ class RadiusAxisOpts(BasicOpts):
         min_: Union[str, Numeric, None] = None,
         max_: Union[str, Numeric, None] = None,
         is_scale: bool = False,
+        interval: Optional[Numeric] = None,
         splitline_opts: Union[SplitLineOpts, dict, None] = None,
+        splitarea_opts: Union[SplitAreaOpts, dict, None] = None,
         axistick_opts: Union[AxisTickOpts, dict, None] = None,
         axisline_opts: Union[AxisLineOpts, dict, None] = None,
         axislabel_opts: Union[LabelOpts, dict, None] = None,
@@ -716,7 +729,9 @@ class RadiusAxisOpts(BasicOpts):
             "min": min_,
             "max": max_,
             "scale": is_scale,
+            "interval": interval,
             "splitLine": splitline_opts,
+            "splitArea": splitarea_opts,
             "axisTick": axistick_opts,
             "axisLine": axisline_opts,
             "axisLabel": axislabel_opts,
@@ -735,6 +750,9 @@ class AngleAxisOpts(BasicOpts):
         type_: Optional[str] = None,
         min_: Union[str, Numeric, None] = None,
         max_: Union[str, Numeric, None] = None,
+        is_scale: bool = False,
+        split_number: Numeric = 5,
+        interval: Optional[Numeric] = None,
         splitline_opts: Union[SplitLineOpts, dict, None] = None,
         axisline_opts: Union[AxisLineOpts, dict, None] = None,
         axistick_opts: Union[AxisTickOpts, dict, None] = None,
@@ -757,9 +775,26 @@ class AngleAxisOpts(BasicOpts):
             "type": type_,
             "min": min_,
             "max": max_,
+            "scale": is_scale,
+            "splitNumber": split_number,
+            "interval": interval,
             "splitLine": splitline_opts,
             "axisLine": axisline_opts,
             "axisTick": axistick_opts,
             "axisLabel": axislabel_opts,
             "z": z,
+        }
+
+
+class PolarOpts(BasicOpts):
+    def __init__(
+        self,
+        center: Optional[Sequence] = None,
+        radius: Optional[Union[Sequence, str]] = None,
+        tooltip_opts: TooltipOpts = None,
+    ):
+        self.opts: dict = {
+            "center": center,
+            "radius": radius,
+            "tooltip": tooltip_opts
         }

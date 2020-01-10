@@ -126,8 +126,10 @@ def test_visual_map_options_remove_none():
         "orient": "vertical",
         "show": True,
         "showLabel": True,
+        "inverse": False,
         "splitNumber": 5,
         "type": "continuous",
+        "borderWidth": 0,
     }
     assert_equal(expected, remove_key_with_none_value(option.opts))
 

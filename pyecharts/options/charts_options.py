@@ -556,3 +556,17 @@ class GraphicRect(BaseGraphic):
                 self.opts.update(style=graphic_basicstyle_opts.opts)
             else:
                 self.opts.update(style=graphic_basicstyle_opts)
+
+
+class SankeyLevelsOpts(BasicOpts):
+    def __init__(
+        self,
+        depth: Numeric = None,
+        itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
+        linestyle_opts: Union[LineStyleOpts, dict, None] = None,
+    ):
+        self.opts: dict = {
+            "depth": depth,
+            "itemStyle": itemstyle_opts,
+            "lineStyle": linestyle_opts,
+        }

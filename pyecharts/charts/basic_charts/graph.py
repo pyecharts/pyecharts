@@ -30,7 +30,7 @@ class Graph(Chart):
         gravity: types.Numeric = 0.2,
         repulsion: types.Numeric = 50,
         edge_label: types.Label = None,
-        edge_symbol: types.Optional[str] = None,
+        edge_symbol: types.Union[types.Sequence[str], str] = None,
         edge_symbol_size: types.Numeric = 10,
         label_opts: types.Label = opts.LabelOpts(),
         linestyle_opts: types.LineStyle = opts.LineStyleOpts(),
