@@ -63,6 +63,7 @@ def test_sankey_new_opts(fake_writer):
             ],
             linestyle_opt=opts.LineStyleOpts(opacity=0.2, curve=0.5, color="source"),
             label_opts=opts.LabelOpts(position="right"),
+            breadcrumb_opts=opts.TreeMapBreadcrumbOpts(),
         )
     )
     c.render()
@@ -70,4 +71,5 @@ def test_sankey_new_opts(fake_writer):
     assert_in("bottom", content)
     assert_in("orient", content)
     assert_in("levels", content)
+    assert_in("breadcrumb", content)
     assert_in("focusNodeAdjacency", content)

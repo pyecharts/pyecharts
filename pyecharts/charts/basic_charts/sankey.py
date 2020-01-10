@@ -36,6 +36,7 @@ class Sankey(Chart):
         linestyle_opt: types.LineStyle = opts.LineStyleOpts(),
         tooltip_opts: types.Tooltip = None,
         itemstyle_opts: types.ItemStyle = None,
+        breadcrumb_opts: types.TreeMapBreadcrumb = None,
     ):
         if layout_iterations < 32:
             layout_iterations = 32
@@ -63,6 +64,7 @@ class Sankey(Chart):
                 "lineStyle": linestyle_opt,
                 "tooltip": tooltip_opts,
                 "itemStyle": itemstyle_opts,
+                "breadcrumb": breadcrumb_opts,
             }
         )
         return self

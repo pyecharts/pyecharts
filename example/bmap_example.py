@@ -327,6 +327,7 @@ def bmap_custom() -> BMap:
                 border_color="#ccc",
                 border_width=2,
                 background_color="#eee",
+                range_opacity=0.7,
             ),
             graphic_opts=[
                 opts.GraphicGroup(
