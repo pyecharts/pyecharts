@@ -46,6 +46,9 @@ _VisualMapType = Union[opts.VisualMapOpts, dict]
 VisualMap = Union[_VisualMapType, Sequence[_VisualMapType], None]
 
 Calendar = Union[opts.CalendarOpts, dict, None]
+CalendarDayLabelOpts = Union[opts.CalendarDayLabelOpts, dict, None]
+CalendarMonthLabelOpts = Union[opts.CalendarMonthLabelOpts, dict, None]
+calendarYearLabelOpts = Union[opts.CalendarYearLabelOpts, dict, None]
 
 GraphNode = Union[opts.GraphNode, dict]
 GraphLink = Union[opts.GraphLink, dict]

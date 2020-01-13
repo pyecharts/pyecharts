@@ -1,6 +1,7 @@
 from ..globals import CurrentConfig, RenderType, ThemeType
 from ..options.series_options import (
     BasicOpts,
+    ItemStyleOpts,
     JSFunc,
     LabelOpts,
     LineStyleOpts,
@@ -618,6 +619,100 @@ class RadarIndicatorItem(BasicOpts):
         self.opts: dict = {"name": name, "max": max_, "min": min_, "color": color}
 
 
+class CalendarDayLabelOpts(BasicOpts):
+    def __init__(
+        self,
+        is_show: bool = True,
+        first_day: int = 0,
+        margin: Optional[int] = None,
+        position: str = "start",
+        name_map: Union[str, Sequence] = "en",
+        label_color: str = "#000",
+        label_font_style: str = "normal",
+        label_font_weight: str = "normal",
+        label_font_family: str = "sans-serif",
+        label_font_size: int = 12,
+        align: Optional[str] = None,
+        vertical_align: Optional[str] = None,
+    ):
+        self.opts: dict = {
+            "show": is_show,
+            "firstDay": first_day,
+            "margin": margin,
+            "position": position,
+            "nameMap": name_map,
+            "color": label_color,
+            "fontStyle": label_font_style,
+            "fontWeight": label_font_weight,
+            "fontFamily": label_font_family,
+            "fontSize": label_font_size,
+            "align": align,
+            "verticalAlign": vertical_align,
+        }
+
+
+class CalendarMonthLabelOpts(BasicOpts):
+    def __init__(
+        self,
+        is_show: bool = True,
+        align: Optional[str] = None,
+        margin: Optional[int] = None,
+        position: str = "start",
+        name_map: Union[str, Sequence] = "en",
+        formatter: JSFunc = None,
+        label_color: str = "#000",
+        label_font_style: str = "normal",
+        label_font_weight: str = "normal",
+        label_font_family: str = "sans-serif",
+        label_font_size: int = 12,
+        vertical_align: Optional[str] = None,
+    ):
+        self.opts: dict = {
+            "show": is_show,
+            "align": align,
+            "margin": margin,
+            "position": position,
+            "nameMap": name_map,
+            "formatter": formatter,
+            "color": label_color,
+            "fontStyle": label_font_style,
+            "fontWeight": label_font_weight,
+            "fontFamily": label_font_family,
+            "fontSize": label_font_size,
+            "verticalAlign": vertical_align,
+        }
+
+
+class CalendarYearLabelOpts(BasicOpts):
+    def __init__(
+        self,
+        is_show: bool = True,
+        margin: Optional[int] = None,
+        position: Optional[str] = None,
+        formatter: JSFunc = None,
+        label_color: str = "#000",
+        label_font_style: str = "normal",
+        label_font_weight: str = "normal",
+        label_font_family: str = "sans-serif",
+        label_font_size: int = 12,
+        align: Optional[str] = None,
+        vertical_align: Optional[str] = None,
+    ):
+        self.opts: dict = {
+            "show": is_show,
+            "margin": margin,
+            "position": position,
+            "formatter": formatter,
+            "color": label_color,
+            "fontStyle": label_font_style,
+            "fontWeight": label_font_weight,
+            "fontFamily": label_font_family,
+            "fontSize": label_font_size,
+            "align": align,
+            "verticalAlign": vertical_align,
+        }
+
+
 class CalendarOpts(BasicOpts):
     def __init__(
         self,
@@ -625,19 +720,29 @@ class CalendarOpts(BasicOpts):
         pos_top: Optional[str] = None,
         pos_right: Optional[str] = None,
         pos_bottom: Optional[str] = None,
-        orient: Optional[str] = None,
+        width: Optional[str] = "auto",
+        height: Optional[str] = None,
+        orient: Optional[str] = "horizontal",
         range_: Union[str, Sequence, int] = None,
-        daylabel_opts: Union[LabelOpts, dict, None] = None,
-        monthlabel_opts: Union[LabelOpts, dict, None] = None,
-        yearlabel_opts: Union[LabelOpts, dict, None] = None,
+        cell_size: Union[int, Sequence] = 20,
+        splitline_opts: Union[SplitLineOpts, dict, None] = None,
+        itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
+        daylabel_opts: Union[CalendarDayLabelOpts, dict, None] = None,
+        monthlabel_opts: Union[CalendarMonthLabelOpts, dict, None] = None,
+        yearlabel_opts: Union[CalendarYearLabelOpts, dict, None] = None,
     ):
         self.opts: dict = {
             "left": pos_left,
             "top": pos_top,
             "right": pos_right,
             "bottom": pos_bottom,
+            "width": width,
+            "height": height,
             "orient": orient,
             "range": range_,
+            "cellSize": cell_size,
+            "splitLine": splitline_opts,
+            "itemStyle": itemstyle_opts,
             "dayLabel": daylabel_opts,
             "monthLabel": monthlabel_opts,
             "yearLabel": yearlabel_opts,
