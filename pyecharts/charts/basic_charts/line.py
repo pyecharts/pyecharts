@@ -1,3 +1,5 @@
+import itertools
+
 from ... import options as opts
 from ... import types
 from ...charts.chart import RectChart
@@ -43,7 +45,13 @@ class Line(RectChart):
         self._append_legend(series_name, is_selected)
         # 合并 x 和 y 轴数据，避免当 X 轴的类型设置为 'value' 的时候，
         # X、Y 轴均显示 Y 轴数据
-        data = [list(z) for z in zip(self._xaxis_data, y_axis)]
+        if len(y_axis) > 0 and isinstance(y_axis[0], types.Sequence):
+            data = [
+                list(itertools.chain(list([x]), y))
+                for x, y in zip(self._xaxis_data, y_axis)
+            ]
+        else:
+            data = [list(z) for z in zip(self._xaxis_data, y_axis)]
 
         self.options.get("series").append(
             {
