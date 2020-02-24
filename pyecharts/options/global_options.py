@@ -898,8 +898,4 @@ class PolarOpts(BasicOpts):
         radius: Optional[Union[Sequence, str]] = None,
         tooltip_opts: TooltipOpts = None,
     ):
-        self.opts: dict = {
-            "center": center,
-            "radius": radius,
-            "tooltip": tooltip_opts
-        }
+        self.opts: dict = {"center": center, "radius": radius, "tooltip": tooltip_opts}

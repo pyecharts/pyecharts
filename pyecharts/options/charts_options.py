@@ -11,6 +11,7 @@ from .series_options import (
     Numeric,
     Optional,
     Sequence,
+    TextStyleOpts,
     Union,
 )
 
@@ -569,4 +570,218 @@ class SankeyLevelsOpts(BasicOpts):
             "depth": depth,
             "itemStyle": itemstyle_opts,
             "lineStyle": linestyle_opts,
+        }
+
+
+class Map3DLabelOpts(BasicOpts):
+    def __init__(
+        self,
+        is_show: bool = True,
+        distance: Numeric = None,
+        formatter: Optional[JSFunc] = None,
+        text_style: Union[TextStyleOpts, dict, None] = None,
+    ):
+        self.opts: dict = {
+            "show": is_show,
+            "distance": distance,
+            "formatter": formatter,
+            "textStyle": text_style,
+        }
+
+
+class Map3DRealisticMaterialOpts(BasicOpts):
+    def __init__(
+        self,
+        detail_texture: Optional[JSFunc] = None,
+        texture_tiling: Numeric = 1,
+        texture_offset: Numeric = 0,
+        roughness: Numeric = 0.5,
+        metalness: Numeric = 0,
+        roughness_adjust: Numeric = 0.5,
+        metalness_adjust: Numeric = 0.5,
+        normal_texture: Optional[JSFunc] = None,
+    ):
+        self.opts: dict = {
+            "detailTexture": detail_texture,
+            "textureTiling": texture_tiling,
+            "textureOffset": texture_offset,
+            "roughness": roughness,
+            "metalness": metalness,
+            "roughnessAdjust": roughness_adjust,
+            "metalnessAdjust": metalness_adjust,
+            "normalTexture": normal_texture,
+        }
+
+
+class Map3DLambertMaterialOpts(BasicOpts):
+    def __init__(
+        self,
+        detail_texture: Optional[JSFunc] = None,
+        texture_tiling: Numeric = 1,
+        texture_offset: Numeric = 0,
+    ):
+        self.opts: dict = {
+            "detailTexture": detail_texture,
+            "textureTiling": texture_tiling,
+            "textureOffset": texture_offset,
+        }
+
+
+class Map3DColorMaterialOpts(BasicOpts):
+    def __init__(
+        self,
+        detail_texture: Optional[JSFunc] = None,
+        texture_tiling: Numeric = 1,
+        texture_offset: Numeric = 0,
+    ):
+        self.opts: dict = {
+            "detailTexture": detail_texture,
+            "textureTiling": texture_tiling,
+            "textureOffset": texture_offset,
+        }
+
+
+class Map3DLightOpts(BasicOpts):
+    def __init__(
+        self,
+        main_color: str = "#fff",
+        main_intensity: Numeric = 1,
+        is_main_shadow: bool = False,
+        main_shadow_quality: str = "medium",
+        main_alpha: Numeric = 40,
+        main_beta: Numeric = 40,
+        ambient_color: str = "#fff",
+        ambient_intensity: Numeric = 0.2,
+        ambient_cubemap_texture: Optional[str] = None,
+        ambient_cubemap_diffuse_intensity: Numeric = 0.5,
+        ambient_cubemap_specular_intensity: Numeric = 0.5,
+    ):
+        self.opts: dict = {
+            "main": {
+                "color": main_color,
+                "intensity": main_intensity,
+                "shadow": is_main_shadow,
+                "shadowQuality": main_shadow_quality,
+                "alpha": main_alpha,
+                "beta": main_beta,
+            },
+            "ambient": {"color": ambient_color, "intensity": ambient_intensity},
+            "ambientCubemap": {
+                "texture": ambient_cubemap_texture,
+                "diffuseIntensity": ambient_cubemap_diffuse_intensity,
+                "specularIntensity": ambient_cubemap_specular_intensity,
+            },
+        }
+
+
+class Map3DPostEffectOpts(BasicOpts):
+    def __init__(
+        self,
+        is_enable: bool = False,
+        is_bloom_enable: bool = False,
+        bloom_intensity: Numeric = 0.1,
+        is_depth_field_enable: bool = False,
+        depth_field_focal_distance: Numeric = 50,
+        depth_field_focal_range: Numeric = 20,
+        depth_field_fstop: Numeric = 2.8,
+        depth_field_blur_radius: Numeric = 10,
+        is_ssao_enable: bool = False,
+        ssao_quality: str = "medium",
+        ssao_radius: Numeric = 2,
+        ssao_intensity: Numeric = 1,
+        is_color_correction_enable: bool = False,
+        color_correction_lookup_texture: Optional[JSFunc] = None,
+        color_correction_exposure: Numeric = 0,
+        color_correction_brightness: Numeric = 0,
+        color_correction_contrast: Numeric = 1,
+        color_correction_saturation: Numeric = 1,
+        is_fxaa_enable: bool = False,
+    ):
+        self.opts: dict = {
+            "enable": is_enable,
+            "bloom": {"enable": is_bloom_enable, "bloomIntensity": bloom_intensity},
+            "depthOfField": {
+                "enable": is_depth_field_enable,
+                "focalDistance": depth_field_focal_distance,
+                "focalRange": depth_field_focal_range,
+                "fstop": depth_field_fstop,
+                "blurRadius": depth_field_blur_radius,
+            },
+            "SSAO": {
+                "enable": is_ssao_enable,
+                "quality": ssao_quality,
+                "radius": ssao_radius,
+                "intensity": ssao_intensity,
+            },
+            "colorCorrection": {
+                "enable": is_color_correction_enable,
+                "lookupTexture": color_correction_lookup_texture,
+                "exposure": color_correction_exposure,
+                "brightness": color_correction_brightness,
+                "contrast": color_correction_contrast,
+                "saturation": color_correction_saturation,
+            },
+            "FXAA": {"enable": is_fxaa_enable},
+        }
+
+
+class Map3DViewControlOpts(BasicOpts):
+    def __init__(
+        self,
+        projection: str = "perspective",
+        auto_rotate: bool = False,
+        auto_rotate_direction: str = "cw",
+        auto_rotate_speed: Numeric = 10,
+        auto_rotate_after_still: Numeric = 3,
+        damping: Numeric = 0.8,
+        rotate_sensitivity: Union[Numeric, Sequence] = 1,
+        zoom_sensitivity: Numeric = 1,
+        pan_sensitivity: Numeric = 1,
+        pan_mouse_button: str = "left",
+        rotate_mouse_button: str = "middle",
+        distance: Numeric = 100,
+        min_distance: Numeric = 40,
+        max_distance: Numeric = 400,
+        orthographic_size: Numeric = 100,
+        min_orthographic_size: Numeric = 20,
+        max_orthographic_size: Numeric = 400,
+        alpha: Numeric = 40,
+        beta: Numeric = 0,
+        center: Optional[Sequence] = None,
+        min_alpha: Numeric = 5,
+        max_alpha: Numeric = 90,
+        min_beta: Numeric = -80,
+        max_beta: Numeric = 80,
+        animation: bool = True,
+        animation_duration_update: Numeric = 1000,
+        animation_easing_update: str = "cubicInOut",
+    ):
+        self.opts: dict = {
+            "projection": projection,
+            "autoRotate": auto_rotate,
+            "autoRotateDirection": auto_rotate_direction,
+            "autoRotateSpeed": auto_rotate_speed,
+            "autoRotateAfterStill": auto_rotate_after_still,
+            "damping": damping,
+            "rotateSensitivity": rotate_sensitivity,
+            "zoomSensitivity": zoom_sensitivity,
+            "panSensitivity": pan_sensitivity,
+            "panMouseButton": pan_mouse_button,
+            "rotateMouseButton": rotate_mouse_button,
+            "distance": distance,
+            "minDistance": min_distance,
+            "maxDistance": max_distance,
+            "orthographicSize": orthographic_size,
+            "minOrthographicSize": min_orthographic_size,
+            "maxOrthographicSize": max_orthographic_size,
+            "alpha": alpha,
+            "beta": beta,
+            "center": center,
+            "minAlpha": min_alpha,
+            "maxAlpha": max_alpha,
+            "minBeta": min_beta,
+            "maxBeta": max_beta,
+            "animation": animation,
+            "animationDurationUpdate": animation_duration_update,
+            "animationEasingUpdate": animation_easing_update,
         }

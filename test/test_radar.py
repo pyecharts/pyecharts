@@ -48,7 +48,7 @@ def test_radar_options(fake_writer):
             ],
             radiusaxis_opts=opts.RadiusAxisOpts(),
             angleaxis_opts=opts.AngleAxisOpts(),
-            polar_opts=opts.PolarOpts()
+            polar_opts=opts.PolarOpts(),
         )
         .add("预算分配", v1)
         .add("实际开销", v2)

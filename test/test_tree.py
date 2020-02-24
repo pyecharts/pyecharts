@@ -60,15 +60,7 @@ def test_tree_options(fake_writer):
             "name": "A",
         }
     ]
-    c = (
-        Tree()
-        .add(
-            "tree",
-            data,
-            orient="BT",
-            initial_tree_depth=1,
-        )
-    )
+    c = Tree().add("tree", data, orient="BT", initial_tree_depth=1)
     c.render()
     _, content = fake_writer.call_args[0]
     assert_in("orient", content)

@@ -106,12 +106,7 @@ def radar_air_quality() -> Radar:
 
 @C.funcs
 def radar_angle_radius_axis_opts() -> Radar:
-    data = [
-        {
-            "value": [4, -4, 2, 3, 0, 1],
-            "name": "预算分配"
-        },
-    ]
+    data = [{"value": [4, -4, 2, 3, 0, 1], "name": "预算分配"}]
     c_schema = [
         {"name": "销售", "max": 4, "min": -4},
         {"name": "管理", "max": 4, "min": -4},
@@ -143,9 +138,8 @@ def radar_angle_radius_axis_opts() -> Radar:
                 max_=4,
                 interval=2,
                 splitarea_opts=opts.SplitAreaOpts(
-                    is_show=True,
-                    areastyle_opts=opts.AreaStyleOpts(opacity=1),
-                )
+                    is_show=True, areastyle_opts=opts.AreaStyleOpts(opacity=1)
+                ),
             ),
             polar_opts=opts.PolarOpts(),
             splitarea_opt=opts.SplitAreaOpts(is_show=False),
