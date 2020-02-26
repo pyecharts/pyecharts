@@ -71,7 +71,7 @@ from .series_options import (
     ItemStyleOpts,
     LabelOpts,
     LineStyleOpts,
-    Line3DEffectOpts,
+    Lines3DEffectOpts,
     MarkAreaItem,
     MarkAreaOpts,
     MarkLineItem,

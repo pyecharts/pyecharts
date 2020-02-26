@@ -314,7 +314,7 @@ class EffectOpts(BasicOpts):
         }
 
 
-class Line3DEffectOpts(BasicOpts):
+class Lines3DEffectOpts(BasicOpts):
     def __init__(
         self,
         is_show: bool = True,

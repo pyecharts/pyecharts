@@ -32,7 +32,7 @@ class Map3D(Chart3D):
         stack: types.Optional[str] = None,
         min_height: types.Numeric = 2,
         symbol: str = "circle",
-        symbol_size: types.Numeric = 10,
+        symbol_size: types.Union[types.Numeric, types.Sequence, types.JSFunc] = 10,
         blend_mode: str = "source-over",
         is_polyline: bool = False,
         effect: types.Lines3DEffect = None,

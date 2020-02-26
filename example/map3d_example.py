@@ -161,7 +161,7 @@ def map3d_with_lines3d() -> Map3D:
             series_name="",
             data_pair=example_data,
             type_=ChartType.LINES3D,
-            effect=opts.Line3DEffectOpts(
+            effect=opts.Lines3DEffectOpts(
                 is_show=True,
                 period=4,
                 trail_width=3,
