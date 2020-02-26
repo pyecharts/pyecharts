@@ -4,8 +4,8 @@ from ...charts.basic_charts.geo import GeoChartBase
 from ...commons.utils import OrderedSet
 from ...globals import ChartType
 
-BAIDU_MAP_API = "http://api.map.baidu.com/api?v=2.0&ak={}"
-BAIDU_MAP_GETSCRIPT = "http://api.map.baidu.com/getscript?v=2.0&ak={}"
+BAIDU_MAP_API = "https://api.map.baidu.com/api?v=2.0&ak={}"
+BAIDU_MAP_GETSCRIPT = "https://api.map.baidu.com/getscript?v=2.0&ak={}"
 
 
 class BMap(GeoChartBase):

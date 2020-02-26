@@ -29,7 +29,7 @@ class OrderedSet:
 def produce_require_dict(js_dependencies, js_host) -> dict:
     confs, libraries = [], []
     for name in js_dependencies.items:
-        if name.startswith("http://api.map.baidu.com"):
+        if name.startswith("https://api.map.baidu.com"):
             confs.append("'baidu_map_api{}':'{}'".format(len(name), name))
             libraries.append("'baidu_map_api{}'".format(len(name)))
         if name in FILENAMES:

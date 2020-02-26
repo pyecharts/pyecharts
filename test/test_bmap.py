@@ -6,7 +6,7 @@ from pyecharts import options as opts
 from pyecharts.charts import BMap
 from pyecharts.globals import BMapType, ChartType
 
-BAIDU_MAP_API_PREFIX = "http://api.map.baidu.com/api?v=2.0"
+BAIDU_MAP_API_PREFIX = "https://api.map.baidu.com/api?v=2.0"
 FAKE_API_KEY = "fake_application_key"
 
 
