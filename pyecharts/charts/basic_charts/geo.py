@@ -4,6 +4,7 @@ from ... import options as opts
 from ... import types
 from ...charts.chart import Chart
 from ...datasets import COORDINATES
+from ...exceptions import NonexistentCoordinatesException
 from ...globals import ChartType
 
 
@@ -154,19 +155,28 @@ class Geo(GeoChartBase):
     support scatter plot and line
     """
 
-    def __init__(self, init_opts: types.Init = opts.InitOpts()):
+    def __init__(
+        self,
+        init_opts: types.Init = opts.InitOpts(),
+        is_ignore_nonexistent_coord: bool = False,
+    ):
         super().__init__(init_opts=init_opts)
         self._coordinate_system: types.Optional[str] = "geo"
+        self._is_ignore_nonexistent_coord = is_ignore_nonexistent_coord
 
     def _feed_data(self, data_pair: types.Sequence, type_: str) -> types.Sequence:
         result = []
         for n, v in data_pair:
-            if type_ == ChartType.LINES:
-                f, t = self.get_coordinate(n), self.get_coordinate(v)
-                result.append({"name": "{}->{}".format(n, v), "coords": [f, t]})
-            else:
-                lng, lat = self.get_coordinate(n)
-                result.append({"name": n, "value": [lng, lat, v]})
+            try:
+                if type_ == ChartType.LINES:
+                    f, t = self.get_coordinate(n), self.get_coordinate(v)
+                    result.append({"name": "{}->{}".format(n, v), "coords": [f, t]})
+                else:
+                    lng, lat = self.get_coordinate(n)
+                    result.append({"name": n, "value": [lng, lat, v]})
+            except TypeError as err:
+                if self._is_ignore_nonexistent_coord is not True:
+                    raise NonexistentCoordinatesException(err, (n, v))
         return result
 
     def add_schema(

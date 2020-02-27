@@ -2,6 +2,7 @@ from ... import options as opts
 from ... import types
 from ...charts.basic_charts.geo import GeoChartBase
 from ...commons.utils import OrderedSet
+from ...exceptions import NonexistentCoordinatesException
 from ...globals import ChartType
 
 BAIDU_MAP_API = "https://api.map.baidu.com/api?v=2.0&ak={}"
@@ -15,12 +16,17 @@ class BMap(GeoChartBase):
     Support scatter plot, line
     """
 
-    def __init__(self, init_opts: types.Init = opts.InitOpts()):
+    def __init__(
+        self,
+        init_opts: types.Init = opts.InitOpts(),
+        is_ignore_nonexistent_coord: bool = False,
+    ):
         super().__init__(init_opts=init_opts)
         self.js_dependencies.add("bmap")
         self._is_geo_chart = True
         self._coordinate_system: types.Optional[str] = "bmap"
         self.bmap_js_functions: OrderedSet = OrderedSet()
+        self._is_ignore_nonexistent_coord = is_ignore_nonexistent_coord
 
     def _feed_data(self, data_pair: types.Sequence, type_: str) -> types.Sequence:
         result = []
@@ -29,8 +35,12 @@ class BMap(GeoChartBase):
             result = data_pair
         else:
             for n, v in data_pair:
-                lng, lat = self.get_coordinate(n)
-                result.append({"name": n, "value": [lng, lat, v]})
+                try:
+                    lng, lat = self.get_coordinate(n)
+                    result.append({"name": n, "value": [lng, lat, v]})
+                except TypeError as err:
+                    if self._is_ignore_nonexistent_coord is not True:
+                        raise NonexistentCoordinatesException(err, (n, v))
         return result
 
     def add_schema(

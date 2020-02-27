@@ -8,10 +8,27 @@ C = Collector()
 
 @C.funcs
 def geo_base() -> Geo:
+    data = [
+        ["宝坻区", 31],
+        ["河东区", 10],
+        ["河北区", 10],
+        ["和平区", 6],
+        ["外地来津", 6],
+        ["宁河区", 4],
+        ["西青区", 4],
+        ["东丽区", 4],
+        ["河西区", 4],
+        ["南开区", 3],
+        ["滨海新区", 3],
+        ["红桥区", 2],
+        ["津南区", 1],
+        ["北辰区", 1],
+        ["武清区", 1],
+    ]
     c = (
-        Geo()
-        .add_schema(maptype="china")
-        .add("geo", [list(z) for z in zip(Faker.provinces, Faker.values())])
+        Geo(is_ignore_nonexistent_coord=False)
+        .add_schema(maptype="天津")
+        .add("geo", data)
         .set_series_opts(label_opts=opts.LabelOpts(is_show=False))
         .set_global_opts(
             visualmap_opts=opts.VisualMapOpts(),
