@@ -84,9 +84,7 @@ def graph_with_edge_opts() -> Graph:
             links_data,
             repulsion=4000,
             edge_label=opts.LabelOpts(
-                is_show=True,
-                position="middle",
-                formatter="{b} 的数据 {c}",
+                is_show=True, position="middle", formatter="{b} 的数据 {c}"
             ),
         )
         .set_global_opts(

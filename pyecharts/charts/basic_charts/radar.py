@@ -27,9 +27,7 @@ class Radar(Chart):
     ):
 
         self.options.update(
-            radiusAxis=radiusaxis_opts,
-            angleAxis=angleaxis_opts,
-            polar=polar_opts,
+            radiusAxis=radiusaxis_opts, angleAxis=angleaxis_opts, polar=polar_opts
         )
 
         indicators = []

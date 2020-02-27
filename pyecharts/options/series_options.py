@@ -129,6 +129,7 @@ class LabelOpts(BasicOpts):
 class LineStyleOpts(BasicOpts):
     def __init__(
         self,
+        is_show: bool = True,
         width: Numeric = 1,
         opacity: Numeric = 1,
         curve: Numeric = 0,
@@ -136,6 +137,7 @@ class LineStyleOpts(BasicOpts):
         color: Union[str, Sequence, None] = None,
     ):
         self.opts: dict = {
+            "show": is_show,
             "width": width,
             "opacity": opacity,
             "curveness": curve,
@@ -309,6 +311,28 @@ class EffectOpts(BasicOpts):
             "symbol": symbol,
             "symbolSize": symbol_size,
             "trailLength": trail_length,
+        }
+
+
+class Lines3DEffectOpts(BasicOpts):
+    def __init__(
+        self,
+        is_show: bool = True,
+        period: Numeric = 4,
+        constant_speed: Optional[Numeric] = None,
+        trail_width: Numeric = 4,
+        trail_length: Numeric = 0.1,
+        trail_color: Optional[str] = None,
+        trail_opacity: Optional[Numeric] = None,
+    ):
+        self.opts: dict = {
+            "show": is_show,
+            "period": period,
+            "constantSpeed": constant_speed,
+            "trailWidth": trail_width,
+            "trailLength": trail_length,
+            "trailColor": trail_color,
+            "trailOpacity": trail_opacity,
         }
 
 
