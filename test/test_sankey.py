@@ -45,26 +45,23 @@ def test_sankey_new_opts(fake_writer):
         {"source": "b1", "target": "c", "value": 2},
         {"source": "b", "target": "c", "value": 1},
     ]
-    c = (
-        Sankey()
-        .add(
-            "sankey",
-            nodes,
-            links,
-            pos_bottom="10%",
-            focus_node_adjacency="allEdges",
-            orient="vertical",
-            levels=[
-                opts.SankeyLevelsOpts(
-                    depth=0,
-                    itemstyle_opts=opts.ItemStyleOpts(color="#eee"),
-                    linestyle_opts=opts.LineStyleOpts(color="source", opacity=0.6),
-                ),
-            ],
-            linestyle_opt=opts.LineStyleOpts(opacity=0.2, curve=0.5, color="source"),
-            label_opts=opts.LabelOpts(position="right"),
-            breadcrumb_opts=opts.TreeMapBreadcrumbOpts(),
-        )
+    c = Sankey().add(
+        "sankey",
+        nodes,
+        links,
+        pos_bottom="10%",
+        focus_node_adjacency="allEdges",
+        orient="vertical",
+        levels=[
+            opts.SankeyLevelsOpts(
+                depth=0,
+                itemstyle_opts=opts.ItemStyleOpts(color="#eee"),
+                linestyle_opts=opts.LineStyleOpts(color="source", opacity=0.6),
+            )
+        ],
+        linestyle_opt=opts.LineStyleOpts(opacity=0.2, curve=0.5, color="source"),
+        label_opts=opts.LabelOpts(position="right"),
+        breadcrumb_opts=opts.TreeMapBreadcrumbOpts(),
     )
     c.render()
     _, content = fake_writer.call_args[0]

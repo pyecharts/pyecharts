@@ -27,6 +27,7 @@ class _SymbolType:
 
 class _ChartType:
     BAR: str = "bar"
+    BAR3D: str = "bar3D"
     BOXPLOT: str = "boxplot"
     EFFECT_SCATTER: str = "effectScatter"
     FUNNEL: str = "funnel"
@@ -36,7 +37,9 @@ class _ChartType:
     HEATMAP: str = "heatmap"
     KLINE: str = "candlestick"
     LINE: str = "line"
+    LINE3D: str = "line3D"
     LINES: str = "lines"
+    LINES3D: str = "lines3D"
     LIQUID: str = "liquidFill"
     MAP: str = "map"
     MAP3D: str = "map3D"
@@ -47,6 +50,7 @@ class _ChartType:
     RADAR: str = "radar"
     SANKEY: str = "sankey"
     SCATTER: str = "scatter"
+    SCATTER3D: str = "scatter3D"
     SUNBURST: str = "sunburst"
     THEMERIVER: str = "themeRiver"
     TREE: str = "tree"
