@@ -573,6 +573,52 @@ class SankeyLevelsOpts(BasicOpts):
         }
 
 
+class TreeMapItemStyleOpts(BasicOpts):
+    def __init__(
+        self,
+        color: Optional[str] = None,
+        color_alpha: Union[Numeric, Sequence] = None,
+        color_saturation: Union[Numeric, Sequence] = None,
+        border_color: Optional[str] = None,
+        border_width: Numeric = 0,
+        border_color_saturation: Union[Numeric, Sequence] = None,
+        gap_width: Numeric = 0,
+        stroke_color: Optional[str] = None,
+        stroke_width: Optional[Numeric] = None,
+    ):
+        self.opts: dict = {
+            "color": color,
+            "colorAlpha": color_alpha,
+            "colorSaturation": color_saturation,
+            "gapWidth": gap_width,
+            "borderColor": border_color,
+            "borderWidth": border_width,
+            "borderColorSaturation": border_color_saturation,
+            "strokeColor": stroke_color,
+            "strokeWidth": stroke_width,
+        }
+
+
+class TreeMapLevelsOpts(BasicOpts):
+    def __init__(
+        self,
+        color_alpha: Union[Numeric, Sequence] = None,
+        color_saturation: Union[Numeric, Sequence] = None,
+        color_mapping_by: str = "index",
+        treemap_itemstyle_opts: Union[TreeMapItemStyleOpts, dict, None] = None,
+        label_opts: Union[LabelOpts, dict, None] = None,
+        upper_label_opts: Union[LabelOpts, dict, None] = None,
+    ):
+        self.opts: dict = {
+            "colorAlpha": color_alpha,
+            "colorSaturation": color_saturation,
+            "colorMappingBy": color_mapping_by,
+            "itemStyle": treemap_itemstyle_opts,
+            "label": label_opts,
+            "upperLabel": upper_label_opts,
+        }
+
+
 class Map3DLabelOpts(BasicOpts):
     def __init__(
         self,
