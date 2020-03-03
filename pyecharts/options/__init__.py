@@ -32,6 +32,8 @@ from .charts_options import (
     SankeyLevelsOpts,
     SunburstItem,
     TreeItem,
+    TreeMapItemStyleOpts,
+    TreeMapLevelsOpts,
 )
 from .global_options import (
     AngleAxisItem,

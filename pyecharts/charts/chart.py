@@ -142,6 +142,19 @@ class Chart(Base):
 
         return self
 
+    def add_dataset(
+        self,
+        source: types.Union[types.Sequence, types.JSFunc] = None,
+        dimensions: types.Optional[types.Sequence] = None,
+        source_header: types.Optional[bool] = None,
+    ):
+        self.options.update(dataset={
+            "source": source,
+            "dimensions": dimensions,
+            "sourceHeader": source_header,
+        })
+        return self
+
 
 class RectChart(Chart):
     def __init__(self, init_opts: types.Init = opts.InitOpts()):

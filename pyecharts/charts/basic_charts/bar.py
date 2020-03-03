@@ -29,9 +29,14 @@ class Bar(RectChart):
         markline_opts: types.MarkLine = None,
         tooltip_opts: types.Tooltip = None,
         itemstyle_opts: types.ItemStyle = None,
+        encode: types.Union[types.JSFunc, dict, None] = None,
     ):
         self._append_color(color)
         self._append_legend(series_name, is_selected)
+
+        if self.options.get("dataset") is not None:
+            yaxis_data = None
+
         self.options.get("series").append(
             {
                 "type": ChartType.BAR,
@@ -47,6 +52,7 @@ class Bar(RectChart):
                 "markLine": markline_opts,
                 "tooltip": tooltip_opts,
                 "itemStyle": itemstyle_opts,
+                "encode": encode,
             }
         )
         return self
