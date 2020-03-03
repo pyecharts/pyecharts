@@ -4,7 +4,13 @@ from pyecharts.commons.utils import remove_key_with_none_value
 from pyecharts.options.global_options import (
     AnimationOpts,
     InitOpts,
+    ToolBoxFeatureBrushOpts,
+    ToolBoxFeatureDataViewOpts,
+    ToolBoxFeatureDataZoomOpts,
+    ToolBoxFeatureMagicTypeOpts,
     ToolBoxFeatureOpts,
+    ToolBoxFeatureRestoreOpts,
+    ToolBoxFeatureSaveAsImageOpts,
     ToolboxOpts,
     BrushOpts,
     DataZoomOpts,
@@ -43,15 +49,28 @@ def test_init_options_remove_none():
 
 
 def test_toolbox_feature_options_remove_none():
-    option = ToolBoxFeatureOpts()
+    save_as_image = ToolBoxFeatureSaveAsImageOpts()
+    restore = ToolBoxFeatureRestoreOpts()
+    data_view = ToolBoxFeatureDataViewOpts()
+    data_zoom = ToolBoxFeatureDataZoomOpts()
+    magic_type = ToolBoxFeatureMagicTypeOpts()
+    brush = ToolBoxFeatureBrushOpts()
+
+    option = ToolBoxFeatureOpts(
+        save_as_image=save_as_image,
+        restore=restore,
+        data_view=data_view,
+        data_zoom=data_zoom,
+        magic_type=magic_type,
+        brush=brush,
+    )
     expected = {
-        "dataView": {"readOnly": False, "show": True, "title": "data view"},
-        "dataZoom": {
-            "show": True,
-            "title": {"back": "data zoom restore", "zoom": "data zoom"},
-        },
-        "restore": {"show": True, "title": "restore"},
-        "saveAsImage": {"show": True, "title": "save as image", "type": "png"},
+        "saveAsImage": save_as_image,
+        "restore": restore,
+        "dataView": data_view,
+        "dataZoom": data_zoom,
+        "magicType": magic_type,
+        "brush": brush,
     }
     assert_equal(expected, remove_key_with_none_value(option.opts))
 

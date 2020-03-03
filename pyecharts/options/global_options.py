@@ -65,31 +65,189 @@ class InitOpts(BasicOpts):
         }
 
 
+class ToolBoxFeatureSaveAsImageOpts(BasicOpts):
+    def __init__(
+        self,
+        type_: str = "png",
+        name: Optional[str] = None,
+        background_color: str = "auto",
+        connected_background_color: str = "#fff",
+        exclude_components: Optional[Sequence[str]] = None,
+        is_show: bool = True,
+        title: str = "保存为图片",
+        icon: Optional[JSFunc] = None,
+        pixel_ratio: Numeric = 1,
+    ):
+        self.opts: dict = {
+            "type": type_,
+            "name": name,
+            "backgroundColor": background_color,
+            "connectedBackgroundColor": connected_background_color,
+            "excludeComponents": exclude_components,
+            "show": is_show,
+            "title": title,
+            "icon": icon,
+            "pixelRatio": pixel_ratio,
+        }
+
+
+class ToolBoxFeatureRestoreOpts(BasicOpts):
+    def __init__(
+        self, is_show: bool = True, title: str = "还原", icon: Optional[JSFunc] = None
+    ):
+        self.opts: dict = {"show": is_show, "title": title, "icon": icon}
+
+
+class ToolBoxFeatureDataViewOpts(BasicOpts):
+    def __init__(
+        self,
+        is_show: bool = True,
+        title: str = "数据视图",
+        icon: Optional[JSFunc] = None,
+        is_read_only: bool = False,
+        option_to_content: Optional[JSFunc] = None,
+        content_to_option: Optional[JSFunc] = None,
+        lang: Optional[Sequence[str]] = None,
+        background_color: str = "#fff",
+        text_area_color: str = "#fff",
+        text_area_border_color: str = "#333",
+        text_color: str = "#000",
+        button_color: str = "#c23531",
+        button_text_color: str = "#fff",
+    ):
+        if lang is None:
+            lang = ["数据视图", "关闭", "刷新"]
+
+        self.opts: dict = {
+            "show": is_show,
+            "title": title,
+            "icon": icon,
+            "readOnly": is_read_only,
+            "optionToContent": option_to_content,
+            "contentToOption": content_to_option,
+            "lang": lang,
+            "backgroundColor": background_color,
+            "textareaColor": text_area_color,
+            "textareaBorderColor": text_area_border_color,
+            "textColor": text_color,
+            "buttonColor": button_color,
+            "buttonTextColor": button_text_color,
+        }
+
+
+class ToolBoxFeatureDataZoomOpts(BasicOpts):
+    def __init__(
+        self,
+        is_show: bool = True,
+        zoom_title: str = "区域缩放",
+        back_title: str = "区域缩放还原",
+        zoom_icon: Optional[JSFunc] = None,
+        back_icon: Optional[JSFunc] = None,
+        xaxis_index: Union[Numeric, Sequence, bool] = None,
+        yaxis_index: Union[Numeric, Sequence, bool] = None,
+    ):
+        self.opts: dict = {
+            "show": is_show,
+            "title": {"zoom": zoom_title, "back": back_title},
+            "icon": {"zoom": zoom_icon, "back": back_icon},
+            "xAxisIndex": xaxis_index,
+            "yAxisIndex": yaxis_index,
+        }
+
+
+class ToolBoxFeatureMagicTypeOpts(BasicOpts):
+    def __init__(
+        self,
+        is_show: bool = True,
+        line_title: str = "切换为折线图",
+        bar_title: str = "切换为柱状图",
+        stack_title: str = "切换为堆叠",
+        tiled_title: str = "切换为平铺",
+        line_icon: Optional[JSFunc] = None,
+        bar_icon: Optional[JSFunc] = None,
+        stack_icon: Optional[JSFunc] = None,
+        tiled_icon: Optional[JSFunc] = None,
+    ):
+        self.opts: dict = {
+            "show": is_show,
+            "title": {
+                "line": line_title,
+                "bar": bar_title,
+                "stack": stack_title,
+                "tiled": tiled_title,
+            },
+            "icon": {
+                "line": line_icon,
+                "bar": bar_icon,
+                "stack": stack_icon,
+                "tiled": tiled_icon,
+            },
+        }
+
+
+class ToolBoxFeatureBrushOpts(BasicOpts):
+    def __init__(
+        self,
+        type_: Optional[str] = None,
+        rect_icon: Optional[JSFunc] = None,
+        polygon_icon: Optional[JSFunc] = None,
+        line_x_icon: Optional[JSFunc] = None,
+        line_y_icon: Optional[JSFunc] = None,
+        keep_icon: Optional[JSFunc] = None,
+        clear_icon: Optional[JSFunc] = None,
+        rect_title: str = "矩形选择",
+        polygon_title: str = "圈选",
+        line_x_title: str = "横向选择",
+        line_y_title: str = "纵向选择",
+        keep_title: str = "保持选择",
+        clear_title: str = "清除选择",
+    ):
+        self.opts: dict = {
+            "type": type_,
+            "icon": {
+                "rect": rect_icon,
+                "polygon": polygon_icon,
+                "lineX": line_x_icon,
+                "lineY": line_y_icon,
+                "keep": keep_icon,
+                "clear": clear_icon,
+            },
+            "title": {
+                "rect": rect_title,
+                "polygon": polygon_title,
+                "lineX": line_x_title,
+                "lineY": line_y_title,
+                "keep": keep_title,
+                "clear": clear_title,
+            },
+        }
+
+
 class ToolBoxFeatureOpts(BasicOpts):
     def __init__(
         self,
-        save_as_image: Optional[dict] = None,
-        restore: Optional[dict] = None,
-        data_view: Optional[dict] = None,
-        data_zoom: Optional[dict] = None,
+        save_as_image: Union[
+            ToolBoxFeatureSaveAsImageOpts, dict
+        ] = ToolBoxFeatureSaveAsImageOpts(),
+        restore: Union[ToolBoxFeatureRestoreOpts, dict] = ToolBoxFeatureRestoreOpts(),
+        data_view: Union[
+            ToolBoxFeatureDataViewOpts, dict
+        ] = ToolBoxFeatureDataViewOpts(),
+        data_zoom: Union[
+            ToolBoxFeatureDataZoomOpts, dict
+        ] = ToolBoxFeatureDataZoomOpts(),
+        magic_type: Union[
+            ToolBoxFeatureMagicTypeOpts, dict
+        ] = ToolBoxFeatureMagicTypeOpts(),
+        brush: Union[ToolBoxFeatureBrushOpts, dict] = ToolBoxFeatureBrushOpts(),
     ):
-        if not save_as_image:
-            save_as_image = {"show": True, "title": "save as image", "type": "png"}
-        if not restore:
-            restore = {"show": True, "title": "restore"}
-        if not data_view:
-            data_view = {"show": True, "title": "data view", "readOnly": False}
-        if not data_zoom:
-            data_zoom = {
-                "show": True,
-                "title": {"zoom": "data zoom", "back": "data zoom restore"},
-            }
-
         self.opts: dict = {
             "saveAsImage": save_as_image,
             "restore": restore,
             "dataView": data_view,
             "dataZoom": data_zoom,
+            "magicType": magic_type,
+            "brush": brush,
         }
 
 
