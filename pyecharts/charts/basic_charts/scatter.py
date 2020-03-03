@@ -33,6 +33,7 @@ class Scatter(RectChart):
         markline_opts: types.MarkLine = None,
         tooltip_opts: types.Tooltip = None,
         itemstyle_opts: types.ItemStyle = None,
+        encode: types.Union[types.JSFunc, dict, None] = None,
     ):
         self._append_color(color)
         self._append_legend(series_name, is_selected)
@@ -41,6 +42,8 @@ class Scatter(RectChart):
                 list(itertools.chain(list([x]), y))
                 for x, y in zip(self._xaxis_data, y_axis)
             ]
+        elif self.options.get("dataset") is not None:
+            data = None
         else:
             data = [list(z) for z in zip(self._xaxis_data, y_axis)]
         self.options.get("series").append(
@@ -58,6 +61,7 @@ class Scatter(RectChart):
                 "markLine": markline_opts,
                 "tooltip": tooltip_opts,
                 "itemStyle": itemstyle_opts,
+                "encode": encode,
             }
         )
         return self

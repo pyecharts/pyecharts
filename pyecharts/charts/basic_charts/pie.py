@@ -26,8 +26,23 @@ class Pie(Chart):
         label_opts: types.Label = opts.LabelOpts(),
         tooltip_opts: types.Tooltip = None,
         itemstyle_opts: types.ItemStyle = None,
+        encode: types.Union[types.JSFunc, dict, None] = None,
     ):
-        data = [{"name": n, "value": v} for n, v in data_pair]
+        if self.options.get("dataset") is not None:
+            data = None
+            self.options.get("legend")[0].update(
+                data=[d[0] for d in self.options.get("dataset").get("source")][1:]
+            )
+        else:
+            data = [{"name": n, "value": v} for n, v in data_pair]
+
+            for a, _ in data_pair:
+                self.options.get("legend")[0].get("data").append(a)
+
+            _dlst = self.options.get("legend")[0].get("data")
+            _dset = list(set(_dlst))
+            _dset.sort(key=_dlst.index)
+            self.options.get("legend")[0].update(data=list(_dset))
 
         if not radius:
             radius = ["0%", "75%"]
@@ -35,14 +50,6 @@ class Pie(Chart):
             center = ["50%", "50%"]
 
         self._append_color(color)
-        for a, _ in data_pair:
-            self.options.get("legend")[0].get("data").append(a)
-
-        _dlst = self.options.get("legend")[0].get("data")
-        _dset = list(set(_dlst))
-        _dset.sort(key=_dlst.index)
-        self.options.get("legend")[0].update(data=list(_dset))
-
         self.options.get("series").append(
             {
                 "type": ChartType.PIE,
@@ -55,6 +62,7 @@ class Pie(Chart):
                 "label": label_opts,
                 "tooltip": tooltip_opts,
                 "itemStyle": itemstyle_opts,
+                "encode": encode,
             }
         )
         return self
