@@ -62,30 +62,23 @@ def treemap_levels_example():
             levels=[
                 opts.TreeMapLevelsOpts(
                     treemap_itemstyle_opts=opts.TreeMapItemStyleOpts(
-                        border_color="#555",
-                        border_width=4,
-                        gap_width=4,
+                        border_color="#555", border_width=4, gap_width=4
                     )
                 ),
                 opts.TreeMapLevelsOpts(
                     color_saturation=[0.3, 0.6],
                     treemap_itemstyle_opts=opts.TreeMapItemStyleOpts(
-                        border_color_saturation=0.7,
-                        gap_width=2,
-                        border_width=2,
+                        border_color_saturation=0.7, gap_width=2, border_width=2
                     ),
                 ),
                 opts.TreeMapLevelsOpts(
                     color_saturation=[0.3, 0.5],
                     treemap_itemstyle_opts=opts.TreeMapItemStyleOpts(
-                        border_color_saturation=0.6,
-                        gap_width=1,
+                        border_color_saturation=0.6, gap_width=1
                     ),
                 ),
-                opts.TreeMapLevelsOpts(
-                    color_saturation=[0.3, 0.5],
-                ),
-            ]
+                opts.TreeMapLevelsOpts(color_saturation=[0.3, 0.5]),
+            ],
         )
         .set_global_opts(title_opts=opts.TitleOpts(title="TreeMap-Levels-配置"))
     )

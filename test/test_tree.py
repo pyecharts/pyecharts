@@ -10,10 +10,7 @@ TEST_DATA = [
         "children": [
             {"name": "B"},
             {
-                "children": [
-                    {"children": [{"name": "I"}], "name": "E"},
-                    {"name": "F"},
-                ],
+                "children": [{"children": [{"name": "I"}], "name": "E"}, {"name": "F"}],
                 "name": "C",
             },
             {

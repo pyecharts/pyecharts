@@ -148,11 +148,13 @@ class Chart(Base):
         dimensions: types.Optional[types.Sequence] = None,
         source_header: types.Optional[bool] = None,
     ):
-        self.options.update(dataset={
-            "source": source,
-            "dimensions": dimensions,
-            "sourceHeader": source_header,
-        })
+        self.options.update(
+            dataset={
+                "source": source,
+                "dimensions": dimensions,
+                "sourceHeader": source_header,
+            }
+        )
         return self
 
 
