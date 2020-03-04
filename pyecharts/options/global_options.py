@@ -159,6 +159,7 @@ class ToolBoxFeatureMagicTypeOpts(BasicOpts):
     def __init__(
         self,
         is_show: bool = True,
+        type_: Optional[Sequence] = None,
         line_title: str = "切换为折线图",
         bar_title: str = "切换为柱状图",
         stack_title: str = "切换为堆叠",
@@ -168,8 +169,12 @@ class ToolBoxFeatureMagicTypeOpts(BasicOpts):
         stack_icon: Optional[JSFunc] = None,
         tiled_icon: Optional[JSFunc] = None,
     ):
+        if type_ is None:
+            type_ = ["line", "bar", "stack", "tiled"]
+
         self.opts: dict = {
             "show": is_show,
+            "type": type_,
             "title": {
                 "line": line_title,
                 "bar": bar_title,
