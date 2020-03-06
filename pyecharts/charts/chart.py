@@ -223,6 +223,7 @@ class ThreeAxisChart(Chart3D):
         yaxis3d_opts: types.Axis3D = opts.Axis3DOpts(type_="category"),
         zaxis3d_opts: types.Axis3D = opts.Axis3DOpts(type_="value"),
         grid3d_opts: types.Grid3D = opts.Grid3DOpts(),
+        encode: types.Union[types.JSFunc, dict, None] = None,
     ):
         self.options.get("legend")[0].get("data").append(series_name)
         self.options.update(
@@ -240,6 +241,7 @@ class ThreeAxisChart(Chart3D):
                 "label": label_opts,
                 "shading": shading,
                 "itemStyle": itemstyle_opts,
+                "encode": encode,
             }
         )
         return self
