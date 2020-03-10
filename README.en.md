@@ -147,8 +147,9 @@ make_snapshot(bar.render(), "bar.png")
 
 For more documentaiton, please visit
 
-* [Chinese documentation](http://pyecharts.org/#/zh-cn/)
-* [English Documentation](http://pyecharts.org/#/en-us/)
+* [Chinese documentation](https://pyecharts.org/#/zh-cn/)
+* [English Documentation](https://pyecharts.org/#/en-us/)
+* [Example Documentation](https://gallery.pyecharts.org/)
 
 ## ⛏ Software development
 
@@ -174,6 +175,7 @@ pyecharts are co-maintained by:
 * [@chenjiandongx](https://github.com/chenjiandongx)
 * [@chfw](https://github.com/chfw)
 * [@kinegratii](https://github.com/kinegratii)
+* [@sunhailin-Leo](https://github.com/sunhailin-Leo)
 
 For more contributors, please visit [pyecharts/graphs/contributors](https://github.com/pyecharts/pyecharts/graphs/contributors)
 

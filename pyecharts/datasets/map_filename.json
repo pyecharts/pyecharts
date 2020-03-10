@@ -21,6 +21,7 @@
   "westeros": ["themes/westeros", "js"],
   "wonderland": ["themes/wonderland", "js"],
   "china": ["maps/china", "js"],
+  "china-cities": ["maps/china-cities", "js"],
   "world": ["maps/world", "js"],
   "广东": ["maps/guangdong", "js"],
   "安徽": ["maps/anhui", "js"],

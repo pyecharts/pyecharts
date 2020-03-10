@@ -64,7 +64,7 @@ v0.5.x 和 V1 间不兼容，V1 是一个全新的版本，详见 [ISSUE#892](ht
 
 > 仅支持 Python3.6+
 
-新版本系列将从 v1.0.0 开始，文档位于 [pyecharts.org](https://pyecharts.org)。
+新版本系列将从 v1.0.0 开始，文档位于 [pyecharts.org](https://pyecharts.org)；示例位于 [gallery.pyecharts.org](https://gallery.pyecharts.org)
 
 ## 🔰 安装
 
@@ -204,6 +204,7 @@ make_snapshot(driver, bar_chart().render(), "bar.png")
 
 * [中文文档](http://pyecharts.org/#/zh-cn/)
 * [English Documentation](http://pyecharts.org/#/en-us/)
+* [示例 Example](https://gallery.pyecharts.org)
 
 ## ⛏ 代码质量
 
