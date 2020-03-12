@@ -32,6 +32,8 @@ from .charts_options import (
     SankeyLevelsOpts,
     SunburstItem,
     TreeItem,
+    TreeMapItemStyleOpts,
+    TreeMapLevelsOpts,
 )
 from .global_options import (
     AngleAxisItem,
@@ -60,7 +62,13 @@ from .global_options import (
     RadiusAxisOpts,
     SingleAxisOpts,
     TitleOpts,
+    ToolBoxFeatureBrushOpts,
+    ToolBoxFeatureDataViewOpts,
+    ToolBoxFeatureDataZoomOpts,
+    ToolBoxFeatureMagicTypeOpts,
     ToolBoxFeatureOpts,
+    ToolBoxFeatureRestoreOpts,
+    ToolBoxFeatureSaveAsImageOpts,
     ToolboxOpts,
     TooltipOpts,
     VisualMapOpts,

@@ -41,10 +41,12 @@ class WordCloud(Chart):
         if image_str is None:
             raise WordCloudMaskImageException(data=data)
         current_chart_id = self.chart_id
-        self.add_js_funcs(f"""
+        self.add_js_funcs(
+            f"""
         var maskImage_{current_chart_id} = new Image();
         maskImage_{current_chart_id}.src = '{image_str}';
-        """)
+        """
+        )
         return JsCode(f"maskImage_{current_chart_id}")
 
     def _encode_image_to_base64(self, image_or_path: str) -> types.Optional[str]:
@@ -129,7 +131,7 @@ class WordCloud(Chart):
                     "emphasis": {
                         "shadowBlur": emphasis_shadow_blur,
                         "shadowColor": emphasis_shadow_color,
-                    }
+                    },
                 },
             }
         )

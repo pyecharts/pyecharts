@@ -76,4 +76,8 @@ BMapGeoLocationControl = Union[opts.BMapGeoLocationControlOpts, dict, None]
 _SankeyLevelType = Union[opts.SankeyLevelsOpts, dict]
 SankeyLevel = Union[Sequence[_SankeyLevelType], None]
 
+TreeMapItemStyleOpts = Union[opts.TreeMapItemStyleOpts, dict, None]
+_TreeMapLevelType = Union[opts.TreeMapLevelsOpts, dict]
+TreeMapLevel = Union[_TreeMapLevelType, Sequence[_TreeMapLevelType], None]
+
 Polar = Union[opts.PolarOpts, dict, None]
