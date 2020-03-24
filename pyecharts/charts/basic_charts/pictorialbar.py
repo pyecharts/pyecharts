@@ -37,6 +37,7 @@ class PictorialBar(Bar):
         markline_opts: types.MarkLine = None,
         tooltip_opts: types.Tooltip = None,
         itemstyle_opts: types.ItemStyle = None,
+        encode: types.Union[types.JsCode, dict] = None,
     ):
         self._append_color(color)
         self._append_legend(series_name, is_selected)
@@ -63,6 +64,7 @@ class PictorialBar(Bar):
                 "markLine": markline_opts,
                 "tooltip": tooltip_opts,
                 "itemStyle": itemstyle_opts,
+                "encode": encode,
             }
         )
         return self
