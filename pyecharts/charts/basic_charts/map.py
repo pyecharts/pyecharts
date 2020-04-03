@@ -14,7 +14,7 @@ class MapMixin:
     def add(
         self,
         series_name: str,
-        data_pair: types.Sequence[types.Union[opts.MapItem, dict]],
+        data_pair: types.Sequence[types.Union[types.Sequence, opts.MapItem, dict]],
         maptype: str = "china",
         *,
         is_selected: bool = True,
