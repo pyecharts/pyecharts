@@ -126,6 +126,10 @@ class _OnlineHost:
     NOTEBOOK_HOST = "http://localhost:8888/nbextensions/assets/"
 
 
+class _WarningControl:
+    ShowWarning = True
+
+
 RenderType = _RenderType()
 FileType = _FileType()
 SymbolType = _SymbolType()
@@ -135,6 +139,7 @@ GeoType = _GeoType()
 BMapType = _BMapType
 NotebookType = _NotebookType()
 OnlineHostType = _OnlineHost()
+WarningType = _WarningControl()
 
 
 class _CurrentConfig:

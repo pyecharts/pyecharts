@@ -16,10 +16,26 @@ class Scatter(RectChart):
     visualmap component can be used.
     """
 
+    def _parse_data(
+        self,
+        y_axis: types.Sequence[types.Union[opts.ScatterItem, dict]]
+    ) -> types.Optional[types.Sequence]:
+        if self.options.get("dataset") is not None:
+            return None
+        elif isinstance(y_axis[0], (opts.ScatterItem, dict)):
+            return y_axis
+        elif isinstance(y_axis[0], types.Sequence):
+            return [
+                list(itertools.chain(list([x]), y))
+                for x, y in zip(self._xaxis_data, y_axis)
+            ]
+        else:
+            return [list(z) for z in zip(self._xaxis_data, y_axis)]
+
     def add_yaxis(
         self,
         series_name: str,
-        y_axis: types.Sequence,
+        y_axis: types.Sequence[types.Union[opts.ScatterItem, dict]],
         *,
         is_selected: bool = True,
         xaxis_index: types.Optional[types.Numeric] = None,
@@ -37,15 +53,9 @@ class Scatter(RectChart):
     ):
         self._append_color(color)
         self._append_legend(series_name, is_selected)
-        if len(y_axis) > 0 and isinstance(y_axis[0], types.Sequence):
-            data = [
-                list(itertools.chain(list([x]), y))
-                for x, y in zip(self._xaxis_data, y_axis)
-            ]
-        elif self.options.get("dataset") is not None:
-            data = None
-        else:
-            data = [list(z) for z in zip(self._xaxis_data, y_axis)]
+
+        data = self._parse_data(y_axis=y_axis)
+
         self.options.get("series").append(
             {
                 "type": ChartType.SCATTER,

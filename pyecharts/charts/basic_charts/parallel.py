@@ -37,7 +37,7 @@ class Parallel(Chart):
     def add(
         self,
         series_name: str,
-        data: types.Sequence,
+        data: types.Sequence[types.Union[opts.ParallelItem, dict]],
         *,
         is_smooth: bool = False,
         is_selected: bool = True,

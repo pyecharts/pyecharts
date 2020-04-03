@@ -531,6 +531,7 @@ class TooltipOpts(BasicOpts):
         trigger: str = "item",
         trigger_on: str = "mousemove|click",
         axis_pointer_type: str = "line",
+        position: Union[str, Sequence, JSFunc] = None,
         formatter: Optional[JSFunc] = None,
         background_color: Optional[str] = None,
         border_color: Optional[str] = None,
@@ -542,6 +543,7 @@ class TooltipOpts(BasicOpts):
             "trigger": trigger,
             "triggerOn": trigger_on,
             "axisPointer": {"type": axis_pointer_type},
+            "position": position,
             "formatter": formatter,
             "textStyle": textstyle_opts,
             "backgroundColor": background_color,
@@ -665,6 +667,9 @@ class AxisOpts(BasicOpts):
 class GridOpts(BasicOpts):
     def __init__(
         self,
+        is_show: bool = False,
+        z_level: Numeric = 0,
+        z: Numeric = 2,
         pos_left: Optional[str] = None,
         pos_top: Optional[str] = None,
         pos_right: Optional[str] = None,
@@ -672,8 +677,14 @@ class GridOpts(BasicOpts):
         width: Union[Numeric, str, None] = None,
         height: Union[Numeric, str, None] = None,
         is_contain_label: bool = False,
+        border_color: str = "#ccc",
+        border_width: Numeric = 1,
+        tooltip_opts: Union[TooltipOpts, dict, None] = None,
     ):
         self.opts: dict = {
+            "show": is_show,
+            "zlevel": z_level,
+            "z": z,
             "left": pos_left,
             "top": pos_top,
             "right": pos_right,
@@ -681,6 +692,9 @@ class GridOpts(BasicOpts):
             "width": width,
             "height": height,
             "containLabel": is_contain_label,
+            "borderColor": border_color,
+            "borderWidth": border_width,
+            "tooltip": tooltip_opts,
         }
 
 
