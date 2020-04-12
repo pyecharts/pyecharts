@@ -15,7 +15,7 @@ class Bar(RectChart):
     def add_yaxis(
         self,
         series_name: str,
-        yaxis_data: types.Sequence[types.Union[types.Numeric, opts.BarItem, dict]],
+        y_axis: types.Sequence[types.Union[types.Numeric, opts.BarItem, dict]],
         *,
         is_selected: bool = True,
         xaxis_index: types.Optional[types.Numeric] = None,
@@ -35,7 +35,7 @@ class Bar(RectChart):
         self._append_legend(series_name, is_selected)
 
         if self.options.get("dataset") is not None:
-            yaxis_data = None
+            y_axis = None
 
         self.options.get("series").append(
             {
@@ -43,7 +43,7 @@ class Bar(RectChart):
                 "name": series_name,
                 "xAxisIndex": xaxis_index,
                 "yAxisIndex": yaxis_index,
-                "data": yaxis_data,
+                "data": y_axis,
                 "stack": stack,
                 "barCategoryGap": category_gap,
                 "barGap": gap,

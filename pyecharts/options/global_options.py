@@ -143,8 +143,9 @@ class ToolBoxFeatureDataZoomOpts(BasicOpts):
         back_title: str = "区域缩放还原",
         zoom_icon: Optional[JSFunc] = None,
         back_icon: Optional[JSFunc] = None,
-        xaxis_index: Union[Numeric, Sequence, bool] = None,
-        yaxis_index: Union[Numeric, Sequence, bool] = None,
+        xaxis_index: Union[Numeric, Sequence, bool] = False,
+        yaxis_index: Union[Numeric, Sequence, bool] = False,
+        filter_mode: str = "filter",
     ):
         self.opts: dict = {
             "show": is_show,
@@ -152,6 +153,7 @@ class ToolBoxFeatureDataZoomOpts(BasicOpts):
             "icon": {"zoom": zoom_icon, "back": back_icon},
             "xAxisIndex": xaxis_index,
             "yAxisIndex": yaxis_index,
+            "filterMode": filter_mode,
         }
 
 
