@@ -16,6 +16,11 @@
                 {% endfor %}
             {% endif %}
         {% endif %}
+        {% if c.width.endswith('%') %}
+            window.addEventListener('resize', function(){
+                chart_{{ c.chart_id }}.resize();
+            })
+        {% endif %}
     </script>
 {%- endmacro %}
 
