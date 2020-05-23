@@ -1,5 +1,5 @@
 import os
-from collections import Iterable
+from collections.abc import Iterable
 
 from jinja2 import Environment
 
