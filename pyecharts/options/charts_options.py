@@ -1074,3 +1074,31 @@ class Map3DViewControlOpts(BasicOpts):
             "animationDurationUpdate": animation_duration_update,
             "animationEasingUpdate": animation_easing_update,
         }
+
+
+class BarBackgroundStyleOpts(BasicOpts):
+    def __init__(
+        self,
+        color: str = "rgba(180, 180, 180, 0.2)",
+        border_color: str = "#000",
+        border_width: Numeric = 0,
+        border_type: str = "solid",
+        bar_border_radius: Union[Numeric, Sequence] = 0,
+        shadow_blur: Optional[Numeric] = None,
+        shadow_color: Optional[str] = None,
+        shadow_offset_x: Numeric = 0,
+        shadow_offset_y: Numeric = 0,
+        opacity: Optional[Numeric] = None,
+    ):
+        self.opts: dict = {
+            "color": color,
+            "borderColor": border_color,
+            "borderWidth": border_width,
+            "borderType": border_type,
+            "barBorderRadius": bar_border_radius,
+            "shadowBlur": shadow_blur,
+            "shadowColor": shadow_color,
+            "shadowOffsetX": shadow_offset_x,
+            "shadowOffsetY": shadow_offset_y,
+            "opacity": opacity,
+        }

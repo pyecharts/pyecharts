@@ -24,6 +24,7 @@ class ItemStyleOpts(BasicOpts):
         border_color: Optional[str] = None,
         border_color0: Optional[str] = None,
         border_width: Optional[Numeric] = None,
+        border_type: Optional[str] = None,
         opacity: Optional[Numeric] = None,
         area_color: Optional[str] = None,
     ):
@@ -33,6 +34,7 @@ class ItemStyleOpts(BasicOpts):
             "borderColor": border_color,
             "borderColor0": border_color0,
             "borderWidth": border_width,
+            "borderType": border_type,
             "opacity": opacity,
             "areaColor": area_color,
         }
@@ -88,6 +90,7 @@ class LabelOpts(BasicOpts):
         is_show: bool = True,
         position: Union[str, Sequence] = "top",
         color: Optional[str] = None,
+        distance: Union[Numeric, Sequence, None] = None,
         font_size: Optional[Numeric] = None,
         font_style: Optional[str] = None,
         font_weight: Optional[str] = None,
@@ -108,6 +111,7 @@ class LabelOpts(BasicOpts):
             "show": is_show,
             "position": position,
             "color": color,
+            "distance": distance,
             "rotate": rotate,
             "margin": margin,
             "interval": interval,
@@ -285,9 +289,15 @@ class MarkAreaOpts(BasicOpts):
         self,
         is_silent: bool = False,
         label_opts: LabelOpts = LabelOpts(),
-        data: Sequence[Union[MarkAreaItem, dict]] = None,
+        data: Sequence[Union[MarkAreaItem, Sequence, dict]] = None,
+        itemstyle_opts: ItemStyleOpts = None,
     ):
-        self.opts: dict = {"silent": is_silent, "label": label_opts, "data": data}
+        self.opts: dict = {
+            "silent": is_silent,
+            "label": label_opts,
+            "data": data,
+            "itemStyle": itemstyle_opts,
+        }
 
 
 class EffectOpts(BasicOpts):
@@ -367,4 +377,38 @@ class TreeMapBreadcrumbOpts(BasicOpts):
             "height": height,
             "emptyItemWidth": empty_item_width,
             "itemStyle": item_opts,
+        }
+
+
+class MinorTickOpts(BasicOpts):
+    def __init__(
+        self,
+        is_show: bool = False,
+        split_number: Numeric = 5,
+        length: Numeric = 3,
+        linestyle_opts: Union[LineStyleOpts, dict, None] = None,
+    ):
+        self.opts: dict = {
+            "show": is_show,
+            "splitNumber": split_number,
+            "length": length,
+            "lineStyle": linestyle_opts,
+        }
+
+
+class MinorSplitLineOpts(BasicOpts):
+    def __init__(
+        self,
+        is_show: bool = False,
+        width: Numeric = 1,
+        type_: str = "solid",
+        opacity: Union[Numeric, None] = None,
+        linestyle_opts: Union[LineStyleOpts, dict, None] = None,
+    ):
+        self.opts: dict = {
+            "show": is_show,
+            "width": width,
+            "type": type_,
+            "opacity": opacity,
+            "lineStyle": linestyle_opts,
         }

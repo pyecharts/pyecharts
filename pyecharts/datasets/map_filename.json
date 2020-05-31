@@ -10,6 +10,7 @@
   "bmap": ["bmap.min", "js"],
   "chalk": ["themes/chalk", "js"],
   "essos": ["themes/essos", "js"],
+  "halloween": ["themes/halloween", "js"],
   "infographic": ["themes/infographic", "js"],
   "macarons": ["themes/macarons", "js"],
   "purple-passion": ["themes/purple-passion", "js"],

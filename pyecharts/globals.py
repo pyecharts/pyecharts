@@ -86,6 +86,7 @@ class _ThemeType:
     WALDEN: str = "walden"
     WESTEROS: str = "westeros"
     WONDERLAND: str = "wonderland"
+    HALLOWEEN: str = "halloween"
 
 
 class _GeoType:

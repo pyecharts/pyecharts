@@ -2,6 +2,7 @@
 
 from .charts_options import (
     BarItem,
+    BarBackgroundStyleOpts,
     BMapCopyrightTypeOpts,
     BMapGeoLocationControlOpts,
     BMapNavigationControlOpts,
@@ -97,6 +98,8 @@ from .series_options import (
     MarkLineOpts,
     MarkPointItem,
     MarkPointOpts,
+    MinorSplitLineOpts,
+    MinorTickOpts,
     SplitAreaOpts,
     SplitLineOpts,
     TextStyleOpts,
