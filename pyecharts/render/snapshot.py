@@ -51,14 +51,14 @@ def make_snapshot(
         elif file_type in [PNG_FORMAT, JPG_FORMAT]:
             save_as_png(image_data, output_name)
         else:
-            raise TypeError("Not supported file type '%s'".format(file_type))
+            raise TypeError(f"Not supported file type '{file_type}'")
 
     if "/" not in output_name:
         output_name = os.path.join(os.getcwd(), output_name)
 
     if is_remove_html and not file_name.startswith("http"):
         os.unlink(file_name)
-    logger.info("File saved in %s" % output_name)
+    logger.info(f"File saved in {output_name}")
 
 
 def decode_base64(data: str) -> bytes:
@@ -94,4 +94,4 @@ def save_as(image_data: bytes, output_name: str, file_type: str):
         b.paste(m, mask=m.split()[3])
         b.save(output_name, file_type, quality=100)
     except ModuleNotFoundError:
-        raise Exception("Please install PIL for {} image type".format(file_type))
+        raise Exception(f"Please install PIL for {file_type} image type")
