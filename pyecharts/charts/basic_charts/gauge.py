@@ -23,8 +23,12 @@ class Gauge(Chart):
         radius: types.Union[types.Numeric, str] = "75%",
         start_angle: types.Numeric = 225,
         end_angle: types.Numeric = -45,
-        title_label_opts: types.Label = opts.LabelOpts(),
-        detail_label_opts: types.Label = opts.LabelOpts(formatter="{value}%"),
+        is_clock_wise: bool = True,
+        title_label_opts: types.GaugeTitle = opts.GaugeTitleOpts(),
+        detail_label_opts: types.GaugeDetail = opts.GaugeDetailOpts(
+            formatter="{value}%"
+        ),
+        pointer: types.GaugePointer = opts.GaugePointerOpts(),
         tooltip_opts: types.Tooltip = None,
         axisline_opts: types.AxisLine = None,
         itemstyle_opts: types.ItemStyle = None,
@@ -43,9 +47,11 @@ class Gauge(Chart):
                 "radius": radius,
                 "startAngle": start_angle,
                 "endAngle": end_angle,
+                "clockwise": is_clock_wise,
                 "data": [{"name": n, "value": v} for n, v in data_pair],
                 "tooltip": tooltip_opts,
                 "axisLine": axisline_opts,
+                "pointer": pointer,
                 "itemStyle": itemstyle_opts,
             }
         )

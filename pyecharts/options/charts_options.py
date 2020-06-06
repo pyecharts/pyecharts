@@ -1102,3 +1102,103 @@ class BarBackgroundStyleOpts(BasicOpts):
             "shadowOffsetY": shadow_offset_y,
             "opacity": opacity,
         }
+
+
+class GaugeTitleOpts(BasicOpts):
+    def __init__(
+        self,
+        is_show: bool = True,
+        offset_center: Sequence = None,
+        color: str = "#333",
+        font_style: str = "normal",
+        font_weight: str = "normal",
+        font_family: str = "sans-serif",
+        font_size: Numeric = 15,
+        background_color: str = "transparent",
+        border_color: str = "transparent",
+        border_width: Numeric = 0,
+        border_radius: Numeric = 0,
+        padding: Numeric = 0,
+        shadow_color: Optional[str] = "transparent",
+        shadow_blur: Optional[Numeric] = 0,
+        shadow_offset_x: Numeric = 0,
+        shadow_offset_y: Numeric = 0,
+    ):
+        if offset_center is None:
+            offset_center = [0, "-40%"]
+        self.opts: dict = {
+            "show": is_show,
+            "offsetCenter": offset_center,
+            "color": color,
+            "fontStyle": font_style,
+            "fontWeight": font_weight,
+            "fontFamily": font_family,
+            "fontSize": font_size,
+            "backgroundColor": background_color,
+            "borderColor": border_color,
+            "borderWidth": border_width,
+            "borderRadius": border_radius,
+            "padding": padding,
+            "shadowColor": shadow_color,
+            "shadowBlur": shadow_blur,
+            "shadowOffsetX": shadow_offset_x,
+            "shadowOffsetY": shadow_offset_y,
+        }
+
+
+class GaugeDetailOpts(BasicOpts):
+    def __init__(
+        self,
+        is_show: bool = True,
+        background_color: str = "transparent",
+        border_width: Numeric = 0,
+        border_color: str = "transparent",
+        offset_center: Sequence = None,
+        formatter: Optional[JSFunc] = None,
+        color: str = "auto",
+        font_style: str = "normal",
+        font_weight: str = "normal",
+        font_family: str = "sans-serif",
+        font_size: Numeric = 15,
+        border_radius: Numeric = 0,
+        padding: Numeric = 0,
+        shadow_color: Optional[str] = "transparent",
+        shadow_blur: Optional[Numeric] = 0,
+        shadow_offset_x: Numeric = 0,
+        shadow_offset_y: Numeric = 0,
+    ):
+        if offset_center is None:
+            offset_center = [0, "-40%"]
+        self.opts: dict = {
+            "show": is_show,
+            "backgroundColor": background_color,
+            "borderWidth": border_width,
+            "borderColor": border_color,
+            "offsetCenter": offset_center,
+            "formatter": formatter,
+            "color": color,
+            "fontStyle": font_style,
+            "fontWeight": font_weight,
+            "fontFamily": font_family,
+            "fontSize": font_size,
+            "borderRadius": border_radius,
+            "padding": padding,
+            "shadowColor": shadow_color,
+            "shadowBlur": shadow_blur,
+            "shadowOffsetX": shadow_offset_x,
+            "shadowOffsetY": shadow_offset_y,
+        }
+
+
+class GaugePointerOpts(BasicOpts):
+    def __init__(
+        self,
+        is_show: bool = True,
+        length: Union[str, Numeric] = "80%",
+        width: Numeric = 8,
+    ):
+        self.opts: dict = {
+            "show": is_show,
+            "length": length,
+            "width": width,
+        }
