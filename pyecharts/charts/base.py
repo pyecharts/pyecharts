@@ -1,11 +1,12 @@
 import datetime
 import uuid
+import warnings
 
 import simplejson as json
 from jinja2 import Environment
 
 from ..commons import utils
-from ..globals import CurrentConfig, RenderType, ThemeType
+from ..globals import CurrentConfig, RenderType, ThemeType, WarningType
 from ..options import InitOpts
 from ..options.global_options import AnimationOpts
 from ..options.series_options import BasicOpts
@@ -39,6 +40,14 @@ class Base(ChartMixin):
         self.options.update(backgroundColor=_opts.get("bg_color"))
         self.options.update(_opts.get("animationOpts", AnimationOpts()).opts)
         self._is_geo_chart: bool = False
+
+        if WarningType.ShowWarning:
+            warnings.resetwarnings()
+            warnings.warn(
+                message="pyecharts 各 Chart 将在 1.9.0 版本开始强制使用 ChartItem 进行数据项配置",
+                category=PendingDeprecationWarning,
+                stacklevel=2,
+            )
 
     def get_options(self) -> dict:
         return utils.remove_key_with_none_value(self.options)

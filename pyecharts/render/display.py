@@ -55,8 +55,8 @@ class Javascript:
         r = ""
         for c in self.css:
             r += _css_t % c
-        for l in self.lib:
-            r += _lib_t1 % l
+        for d in self.lib:
+            r += _lib_t1 % d
         r += self.data
         r += _lib_t2 * len(self.lib)
         return r

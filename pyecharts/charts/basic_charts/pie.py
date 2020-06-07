@@ -16,7 +16,7 @@ class Pie(Chart):
     def add(
         self,
         series_name: str,
-        data_pair: types.Sequence,
+        data_pair: types.Sequence[types.Union[types.Sequence, opts.PieItem, dict]],
         *,
         color: types.Optional[str] = None,
         radius: types.Optional[types.Sequence] = None,
@@ -33,6 +33,8 @@ class Pie(Chart):
             self.options.get("legend")[0].update(
                 data=[d[0] for d in self.options.get("dataset").get("source")][1:]
             )
+        elif isinstance(data_pair[0], opts.PieItem):
+            data = data_pair
         else:
             data = [{"name": n, "value": v} for n, v in data_pair]
 
