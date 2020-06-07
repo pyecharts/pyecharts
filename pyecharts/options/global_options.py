@@ -6,6 +6,8 @@ from ..options.series_options import (
     LabelOpts,
     LineStyleOpts,
     Numeric,
+    MinorTickOpts,
+    MinorSplitLineOpts,
     Optional,
     Sequence,
     SplitAreaOpts,
@@ -143,8 +145,9 @@ class ToolBoxFeatureDataZoomOpts(BasicOpts):
         back_title: str = "区域缩放还原",
         zoom_icon: Optional[JSFunc] = None,
         back_icon: Optional[JSFunc] = None,
-        xaxis_index: Union[Numeric, Sequence, bool] = None,
-        yaxis_index: Union[Numeric, Sequence, bool] = None,
+        xaxis_index: Union[Numeric, Sequence, bool] = False,
+        yaxis_index: Union[Numeric, Sequence, bool] = False,
+        filter_mode: str = "filter",
     ):
         self.opts: dict = {
             "show": is_show,
@@ -152,6 +155,7 @@ class ToolBoxFeatureDataZoomOpts(BasicOpts):
             "icon": {"zoom": zoom_icon, "back": back_icon},
             "xAxisIndex": xaxis_index,
             "yAxisIndex": yaxis_index,
+            "filterMode": filter_mode,
         }
 
 
@@ -372,8 +376,8 @@ class DataZoomOpts(BasicOpts):
         is_show: bool = True,
         type_: str = "slider",
         is_realtime: bool = True,
-        range_start: Numeric = 20,
-        range_end: Numeric = 80,
+        range_start: Union[Numeric, None] = 20,
+        range_end: Union[Numeric, None] = 80,
         start_value: Union[int, str, None] = None,
         end_value: Union[int, str, None] = None,
         orient: str = "horizontal",
@@ -384,6 +388,7 @@ class DataZoomOpts(BasicOpts):
         pos_right: Optional[str] = None,
         pos_top: Optional[str] = None,
         pos_bottom: Optional[str] = None,
+        filter_mode: str = "filter"
     ):
         self.opts: dict = {
             "show": is_show,
@@ -401,6 +406,7 @@ class DataZoomOpts(BasicOpts):
             "right": pos_right,
             "top": pos_top,
             "bottom": pos_bottom,
+            "filterMode": filter_mode,
         }
 
 
@@ -466,6 +472,7 @@ class VisualMapOpts(BasicOpts):
         is_calculable: bool = True,
         is_piecewise: bool = False,
         is_inverse: bool = False,
+        precision: Optional[int] = None,
         pieces: Optional[Sequence] = None,
         out_of_range: Optional[Sequence] = None,
         item_width: int = 0,
@@ -502,6 +509,7 @@ class VisualMapOpts(BasicOpts):
             "inRange": _inrange_op,
             "calculable": is_calculable,
             "inverse": is_inverse,
+            "precision": precision,
             "splitNumber": split_number,
             "dimension": dimension,
             "seriesIndex": series_index,
@@ -529,10 +537,16 @@ class TooltipOpts(BasicOpts):
         trigger: str = "item",
         trigger_on: str = "mousemove|click",
         axis_pointer_type: str = "line",
+        is_show_content: bool = True,
+        is_always_show_content: bool = False,
+        show_delay: Numeric = 0,
+        hide_delay: Numeric = 100,
+        position: Union[str, Sequence, JSFunc] = None,
         formatter: Optional[JSFunc] = None,
         background_color: Optional[str] = None,
         border_color: Optional[str] = None,
         border_width: Numeric = 0,
+        padding: Numeric = 5,
         textstyle_opts: TextStyleOpts = TextStyleOpts(font_size=14),
     ):
         self.opts: dict = {
@@ -540,11 +554,17 @@ class TooltipOpts(BasicOpts):
             "trigger": trigger,
             "triggerOn": trigger_on,
             "axisPointer": {"type": axis_pointer_type},
+            "showContent": is_show_content,
+            "alwaysShowContent": is_always_show_content,
+            "showDelay": show_delay,
+            "hideDelay": hide_delay,
+            "position": position,
             "formatter": formatter,
             "textStyle": textstyle_opts,
             "backgroundColor": background_color,
             "borderColor": border_color,
             "borderWidth": border_width,
+            "padding": padding,
         }
 
 
@@ -630,6 +650,8 @@ class AxisOpts(BasicOpts):
         name_textstyle_opts: Union[TextStyleOpts, dict, None] = None,
         splitarea_opts: Union[SplitAreaOpts, dict, None] = None,
         splitline_opts: Union[SplitLineOpts, dict] = SplitLineOpts(),
+        minor_tick_opts: Union[MinorTickOpts, dict, None] = None,
+        minor_split_line_opts: Union[MinorSplitLineOpts, dict, None] = None,
     ):
         self.opts: dict = {
             "type": type_,
@@ -657,21 +679,33 @@ class AxisOpts(BasicOpts):
             "maxInterval": max_interval,
             "splitLine": splitline_opts,
             "splitArea": splitarea_opts,
+            "minorTick": minor_tick_opts,
+            "minorSplitLine": minor_split_line_opts,
         }
 
 
 class GridOpts(BasicOpts):
     def __init__(
         self,
-        pos_left: Optional[str] = None,
-        pos_top: Optional[str] = None,
-        pos_right: Optional[str] = None,
-        pos_bottom: Optional[str] = None,
+        is_show: bool = False,
+        z_level: Numeric = 0,
+        z: Numeric = 2,
+        pos_left: Union[Numeric, str, None] = None,
+        pos_top: Union[Numeric, str, None] = None,
+        pos_right: Union[Numeric, str, None] = None,
+        pos_bottom: Union[Numeric, str, None] = None,
         width: Union[Numeric, str, None] = None,
         height: Union[Numeric, str, None] = None,
         is_contain_label: bool = False,
+        background_color: str = "transparent",
+        border_color: str = "#ccc",
+        border_width: Numeric = 1,
+        tooltip_opts: Union[TooltipOpts, dict, None] = None,
     ):
         self.opts: dict = {
+            "show": is_show,
+            "zlevel": z_level,
+            "z": z,
             "left": pos_left,
             "top": pos_top,
             "right": pos_right,
@@ -679,6 +713,10 @@ class GridOpts(BasicOpts):
             "width": width,
             "height": height,
             "containLabel": is_contain_label,
+            "backgroundColor": background_color,
+            "borderColor": border_color,
+            "borderWidth": border_width,
+            "tooltip": tooltip_opts,
         }
 
 

@@ -111,6 +111,7 @@ def test_data_zoom_options_remove_none():
     option = DataZoomOpts()
     expected = {
         "end": 80,
+        "filterMode": "filter",
         "orient": "horizontal",
         "realtime": True,
         "show": True,
@@ -156,9 +157,14 @@ def test_visual_map_options_remove_none():
 def test_tool_tip_options_remove_none():
     option = TooltipOpts(textstyle_opts=None)
     expected = {
+        "alwaysShowContent": False,
         "axisPointer": {"type": "line"},
         "borderWidth": 0,
+        "hideDelay": 100,
+        "padding": 5,
         "show": True,
+        "showContent": True,
+        "showDelay": 0,
         "trigger": "item",
         "triggerOn": "mousemove|click",
     }

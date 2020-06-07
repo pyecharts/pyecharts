@@ -14,7 +14,7 @@ class MapMixin:
     def add(
         self,
         series_name: str,
-        data_pair: types.Sequence,
+        data_pair: types.Sequence[types.Union[types.Sequence, opts.MapItem, dict]],
         maptype: str = "china",
         *,
         is_selected: bool = True,
@@ -31,7 +31,12 @@ class MapMixin:
         emphasis_itemstyle_opts: types.ItemStyle = None,
     ):
         self.js_dependencies.add(maptype)
-        data = [{"name": n, "value": v} for n, v in data_pair]
+
+        if isinstance(data_pair[0], opts.MapItem):
+            data = data_pair
+        else:
+            data = [{"name": n, "value": v} for n, v in data_pair]
+
         self._append_legend(series_name, is_selected)
         self.options.get("series").append(
             {

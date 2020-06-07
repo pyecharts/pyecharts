@@ -20,8 +20,8 @@ def test_gauage_label_setting(fake_writer):
     c = Gauge().add(
         "",
         [("完成率", 66.6)],
-        detail_label_opts=opts.LabelOpts(formatter="{value}"),
-        title_label_opts=opts.LabelOpts(
+        detail_label_opts=opts.GaugeDetailOpts(formatter="{value}"),
+        title_label_opts=opts.GaugeTitleOpts(
             font_size=40, color="blue", font_family="Microsoft YaHei"
         ),
     )

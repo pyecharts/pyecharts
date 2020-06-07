@@ -1,10 +1,10 @@
 from ... import options as opts
 from ... import types
+from ...charts.chart import RectChart
 from ...globals import ChartType
-from .. import Bar
 
 
-class PictorialBar(Bar):
+class PictorialBar(RectChart):
     """
     <<< PictorialBar Chart >>>
 
@@ -15,7 +15,7 @@ class PictorialBar(Bar):
     def add_yaxis(
         self,
         series_name: str,
-        yaxis_data: types.Sequence[types.Union[types.Numeric, opts.BarItem, dict]],
+        y_axis: types.Sequence[types.Union[types.Numeric, opts.BarItem, dict]],
         *,
         symbol: types.Optional[str] = None,
         symbol_size: types.Union[types.Numeric, types.Sequence, None] = None,
@@ -37,6 +37,7 @@ class PictorialBar(Bar):
         markline_opts: types.MarkLine = None,
         tooltip_opts: types.Tooltip = None,
         itemstyle_opts: types.ItemStyle = None,
+        encode: types.Union[types.JsCode, dict] = None,
     ):
         self._append_color(color)
         self._append_legend(series_name, is_selected)
@@ -55,7 +56,7 @@ class PictorialBar(Bar):
                 "name": series_name,
                 "xAxisIndex": xaxis_index,
                 "yAxisIndex": yaxis_index,
-                "data": yaxis_data,
+                "data": y_axis,
                 "barCategoryGap": category_gap,
                 "barGap": gap,
                 "label": label_opts,
@@ -63,6 +64,7 @@ class PictorialBar(Bar):
                 "markLine": markline_opts,
                 "tooltip": tooltip_opts,
                 "itemStyle": itemstyle_opts,
+                "encode": encode,
             }
         )
         return self
