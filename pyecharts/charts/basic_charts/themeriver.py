@@ -16,7 +16,7 @@ class ThemeRiver(Chart):
     def add(
         self,
         series_name: types.Sequence,
-        data: types.Sequence,
+        data: types.Sequence[types.Union[opts.ThemeRiverItem, dict]],
         *,
         is_selected: bool = True,
         label_opts: types.Label = opts.LabelOpts(),

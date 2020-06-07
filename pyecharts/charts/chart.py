@@ -194,6 +194,9 @@ class RectChart(Chart):
         self.options.get("legend")[0].get("data").extend(
             chart.options.get("legend")[0].get("data")
         )
+        self.options.get("legend")[0].get("selected").update(
+            chart.options.get("legend")[0].get("selected")
+        )
         self.options.get("series").extend(chart.options.get("series"))
         return self
 

@@ -53,7 +53,7 @@ class Radar(Chart):
     def add(
         self,
         series_name: str,
-        data: types.Sequence,
+        data: types.Sequence[types.Union[opts.RadarItem, dict]],
         *,
         is_selected: bool = True,
         symbol: types.Optional[str] = None,

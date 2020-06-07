@@ -18,6 +18,7 @@ class Grid(Base):
         self.options: types.Optional[dict] = None
         self._axis_index: int = 0
         self._grow_grid_index: int = 0
+        self.bg_color = init_opts.opts.get("bg_color")
 
     def add(
         self,
@@ -33,6 +34,9 @@ class Grid(Base):
             self.options.update(grid=[], title=[])
             if self.theme != ThemeType.WHITE:
                 self.options.update(color=[])
+
+            # Priority Order: Grid > Other Chart
+            self.options.update(backgroundColor=self.bg_color)
 
             if not is_control_axis_index:
                 for s in self.options.get("series"):
