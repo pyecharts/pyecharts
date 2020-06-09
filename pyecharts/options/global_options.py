@@ -388,7 +388,7 @@ class DataZoomOpts(BasicOpts):
         pos_right: Optional[str] = None,
         pos_top: Optional[str] = None,
         pos_bottom: Optional[str] = None,
-        filter_mode: str = "filter"
+        filter_mode: str = "filter",
     ):
         self.opts: dict = {
             "show": is_show,
