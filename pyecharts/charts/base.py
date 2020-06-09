@@ -44,7 +44,7 @@ class Base(ChartMixin):
         if WarningType.ShowWarning:
             warnings.resetwarnings()
             warnings.warn(
-                message="pyecharts 各 Chart 将在 1.9.0 版本开始强制使用 ChartItem 进行数据项配置",
+                message="pyecharts 所有图表类型将在 v1.9.0 版本开始强制使用 ChartItem 进行数据项配置 :)",
                 category=PendingDeprecationWarning,
                 stacklevel=2,
             )
