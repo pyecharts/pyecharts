@@ -17,8 +17,7 @@ class Scatter(RectChart):
     """
 
     def _parse_data(
-        self,
-        y_axis: types.Sequence[types.Union[opts.ScatterItem, dict]]
+        self, y_axis: types.Sequence[types.Union[opts.ScatterItem, dict]]
     ) -> types.Optional[types.Sequence]:
         if self.options.get("dataset") is not None:
             return None
