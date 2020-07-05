@@ -41,6 +41,7 @@ from .charts_options import (
     PageLayoutOpts,
     ParallelItem,
     PieItem,
+    PieLabelLineOpts,
     RadarItem,
     SankeyLevelsOpts,
     ScatterItem,
