@@ -291,20 +291,16 @@ class ThemeRiverItem(BasicOpts):
         value: Optional[Numeric] = None,
         name: Optional[str] = None,
     ):
-        self.opts: dict = {
-            "date": date,
-            "value": value,
-            "name": name,
-        }
+        self.opts: dict = {"date": date, "value": value, "name": name}
 
 
 class TreeItem(BasicOpts):
     def __init__(
-            self,
-            name: Optional[str] = None,
-            value: Optional[Numeric] = None,
-            label_opts: Union[LabelOpts, dict, None] = None,
-            children: Optional[Sequence] = None,
+        self,
+        name: Optional[str] = None,
+        value: Optional[Numeric] = None,
+        label_opts: Union[LabelOpts, dict, None] = None,
+        children: Optional[Sequence] = None,
     ):
         self.opts: dict = {
             "name": name,
@@ -1197,11 +1193,7 @@ class GaugePointerOpts(BasicOpts):
         length: Union[str, Numeric] = "80%",
         width: Numeric = 8,
     ):
-        self.opts: dict = {
-            "show": is_show,
-            "length": length,
-            "width": width,
-        }
+        self.opts: dict = {"show": is_show, "length": length, "width": width}
 
 
 class PieLabelLineOpts(BasicOpts):
