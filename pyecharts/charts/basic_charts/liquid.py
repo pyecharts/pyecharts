@@ -47,9 +47,7 @@ class Liquid(Chart):
                 "animationDurationUpdate": _animation_dur_update,
                 "color": color,
                 "shape": shape,
-                "backgroundStyle": {
-                    "color": background_color,
-                },
+                "backgroundStyle": {"color": background_color},
                 "outline": {
                     "show": is_outline_show,
                     "borderDistance": outline_border_distance,
