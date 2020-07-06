@@ -1194,3 +1194,21 @@ class GaugePointerOpts(BasicOpts):
         width: Numeric = 8,
     ):
         self.opts: dict = {"show": is_show, "length": length, "width": width}
+
+
+class PieLabelLineOpts(BasicOpts):
+    def __init__(
+        self,
+        is_show: bool = True,
+        length: Numeric = None,
+        length_2: Numeric = None,
+        smooth: Union[bool, Numeric] = False,
+        linestyle_opts: Union[LineStyleOpts, dict, None] = None,
+    ):
+        self.opts: dict = {
+            "show": is_show,
+            "length": length,
+            "length2": length_2,
+            "smooth": smooth,
+            "lineStyle": linestyle_opts,
+        }
