@@ -47,6 +47,8 @@ from .charts_options import (
     ScatterItem,
     SunburstItem,
     ThemeRiverItem,
+    TimelineCheckPointerStyle,
+    TimelineControlStyle,
     TreeItem,
     TreeMapItemStyleOpts,
     TreeMapLevelsOpts,
