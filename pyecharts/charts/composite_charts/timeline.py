@@ -37,6 +37,8 @@ class Timeline(Base):
         label_opts: types.Optional[opts.LabelOpts] = None,
         itemstyle_opts: types.ItemStyle = None,
         graphic_opts: types.Graphic = None,
+        checkpointstyle_opts: types.TimeLinkCheckPoint = None,
+        controlstyle_opts: types.TimeLineControl = None,
     ):
         self.options.get("baseOption").get("timeline").update(
             {
@@ -61,6 +63,8 @@ class Timeline(Base):
                 "label": label_opts,
                 "itemStyle": itemstyle_opts,
                 "graphic": graphic_opts,
+                "checkpointStyle": checkpointstyle_opts,
+                "controlStyle": controlstyle_opts,
             }
         )
         return self
@@ -73,6 +77,7 @@ class Timeline(Base):
         self.options.get("baseOption").get("timeline").update(data=self._time_points)
         self.options.get("options").append(
             {
+                "backgroundColor": chart.options.get("backgroundColor"),
                 "legend": chart.options.get("legend"),
                 "series": chart.options.get("series"),
                 "xAxis": chart.options.get("xAxis"),
