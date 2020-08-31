@@ -3,7 +3,7 @@
 </p>
 <h1 align="center">pyecharts</h1>
 <p align="center">
-    <em>Python ❤️ Echarts = pyecharts</em>
+    <em>Python ❤️ ECharts = pyecharts</em>
 </p>
 <p align="center">
     <a href="https://travis-ci.org/pyecharts/pyecharts">
