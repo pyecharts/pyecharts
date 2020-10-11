@@ -1194,3 +1194,90 @@ class GaugePointerOpts(BasicOpts):
         width: Numeric = 8,
     ):
         self.opts: dict = {"show": is_show, "length": length, "width": width}
+
+
+class PieLabelLineOpts(BasicOpts):
+    def __init__(
+        self,
+        is_show: bool = True,
+        length: Numeric = None,
+        length_2: Numeric = None,
+        smooth: Union[bool, Numeric] = False,
+        linestyle_opts: Union[LineStyleOpts, dict, None] = None,
+    ):
+        self.opts: dict = {
+            "show": is_show,
+            "length": length,
+            "length2": length_2,
+            "smooth": smooth,
+            "lineStyle": linestyle_opts,
+        }
+
+
+class TimelineCheckPointerStyle(BasicOpts):
+    def __init__(
+        self,
+        symbol: str = "circle",
+        symbol_size: Union[Numeric, Sequence[Numeric]] = 13,
+        symbol_rotate: Optional[Numeric] = None,
+        symbol_keep_aspect: bool = False,
+        symbol_offset: Optional[Sequence[Union[str, Numeric]]] = None,
+        color: str = "#c23531",
+        border_width: Numeric = 5,
+        border_color: str = "rgba(194,53,49,0.5)",
+        is_animation: bool = True,
+        animation_duration: Numeric = 300,
+        animation_easing: str = "quinticInOut",
+    ):
+        if symbol_offset is None:
+            symbol_offset = [0, 0]
+
+        self.opts: dict = {
+            "symbol": symbol,
+            "symbolSize": symbol_size,
+            "symbolRotate": symbol_rotate,
+            "symbolKeepAspect": symbol_keep_aspect,
+            "symbolOffset": symbol_offset,
+            "color": color,
+            "borderWidth": border_width,
+            "borderColor": border_color,
+            "animation": is_animation,
+            "animationDuration": animation_duration,
+            "animationEasing": animation_easing,
+        }
+
+
+class TimelineControlStyle(BasicOpts):
+    def __init__(
+        self,
+        is_show: bool = True,
+        is_show_play_button: bool = True,
+        is_show_prev_button: bool = True,
+        is_show_next_button: bool = True,
+        item_size: Numeric = 22,
+        item_gap: Numeric = 12,
+        position: str = "left",
+        play_icon: Optional[str] = None,
+        stop_icon: Optional[str] = None,
+        prev_icon: Optional[str] = None,
+        next_icon: Optional[str] = None,
+        color: str = "#304654",
+        border_color: str = "#304654",
+        border_width: Numeric = 1,
+    ):
+        self.opts: dict = {
+            "show": is_show,
+            "showPlayBtn": is_show_play_button,
+            "showPrevBtn": is_show_prev_button,
+            "showNextBtn": is_show_next_button,
+            "itemSize": item_size,
+            "itemGap": item_gap,
+            "position": position,
+            "playIcon": play_icon,
+            "stopIcon": stop_icon,
+            "prevIcon": prev_icon,
+            "nextIcon": next_icon,
+            "color": color,
+            "borderColor": border_color,
+            "borderWidth": border_width,
+        }
