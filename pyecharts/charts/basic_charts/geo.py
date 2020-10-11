@@ -185,6 +185,14 @@ class Geo(GeoChartBase):
         is_roam: bool = True,
         zoom: types.Optional[types.Numeric] = None,
         center: types.Optional[types.Sequence] = None,
+        aspect_scale: types.Numeric = 0.75,
+        bounding_coords: types.Optional[types.Sequence[types.Numeric]] = None,
+        min_scale_limit: types.Optional[types.Numeric] = None,
+        max_scale_limit: types.Optional[types.Numeric] = None,
+        name_property: str = "name",
+        selected_mode: types.Union[bool, str] = False,
+        layout_center: types.Optional[types.Sequence[str]] = None,
+        layout_size: types.Union[str, types.Numeric] = None,
         label_opts: types.Label = None,
         itemstyle_opts: types.ItemStyle = None,
         emphasis_itemstyle_opts: types.ItemStyle = None,
@@ -193,12 +201,27 @@ class Geo(GeoChartBase):
         self.js_dependencies.add(maptype)
         if center:
             assert len(center) == 2
+
+        scale_limit: types.Optional[dict] = {
+            "min": min_scale_limit,
+            "max": max_scale_limit,
+        }
+        if min_scale_limit is None and max_scale_limit is None:
+            scale_limit = None
+
         self.options.update(
             geo={
                 "map": maptype,
                 "zoom": zoom,
                 "center": center,
                 "roam": is_roam,
+                "aspectScale": aspect_scale,
+                "boundingCoords": bounding_coords,
+                "scaleLimit": scale_limit,
+                "nameProperty": name_property,
+                "selectedMode": selected_mode,
+                "layoutCenter": layout_center,
+                "layoutSize": layout_size,
                 "label": label_opts,
                 "itemStyle": itemstyle_opts,
                 "emphasis": {
