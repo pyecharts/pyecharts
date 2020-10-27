@@ -21,8 +21,9 @@ from .series_options import (
 class BarItem(BasicOpts):
     def __init__(
         self,
-        name: Optional[str] = None,
-        value: Optional[Numeric] = None,
+        name: Union[int, str],
+        value: Numeric,
+        *,
         label_opts: Union[LabelOpts, dict, None] = None,
         itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
         tooltip_opts: Union[TooltipOpts, dict, None] = None,
@@ -39,8 +40,9 @@ class BarItem(BasicOpts):
 class BoxplotItem(BasicOpts):
     def __init__(
         self,
-        name: Optional[str] = None,
-        value: Optional[Sequence] = None,
+        name: Union[int, str],
+        value: Sequence,
+        *,
         itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
         tooltip_opts: Union[TooltipOpts, dict, None] = None,
     ):
@@ -55,8 +57,9 @@ class BoxplotItem(BasicOpts):
 class CandleStickItem(BasicOpts):
     def __init__(
         self,
-        name: Optional[str] = None,
-        value: Optional[Sequence] = None,
+        name: Union[str, int],
+        value: Sequence,
+        *,
         itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
         tooltip_opts: Union[TooltipOpts, dict, None] = None,
     ):
@@ -71,8 +74,9 @@ class CandleStickItem(BasicOpts):
 class EffectScatterItem(BasicOpts):
     def __init__(
         self,
-        name: Union[str, Numeric] = None,
-        value: Union[str, Numeric] = None,
+        name: Union[str, Numeric],
+        value: Union[str, Numeric],
+        *,
         symbol: Optional[str] = None,
         symbol_size: Union[Sequence[Numeric], Numeric] = None,
         symbol_rotate: Optional[Numeric] = None,
@@ -96,17 +100,28 @@ class EffectScatterItem(BasicOpts):
         }
 
 
-class HeatMapItem(BasicOpts):
+class FunnelItem(BasicOpts):
     def __init__(
         self,
-        name: Optional[str] = None,
-        value: Optional[Sequence] = None,
+        name: Union[str, int],
+        value: Union[Sequence, str, Numeric],
+        *,
+        is_show_label_line: Optional[bool] = None,
+        label_line_width: Optional[int] = None,
+        label_line_linestyle_opts: Union[LineStyleOpts, dict, None] = None,
+        label_opts: Union[LabelOpts, dict, None] = None,
         itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
         tooltip_opts: Union[TooltipOpts, dict, None] = None,
     ):
         self.opts: dict = {
             "name": name,
             "value": value,
+            "labelLine": {
+                "show": is_show_label_line,
+                "length": label_line_width,
+                "lineStyle": label_line_linestyle_opts,
+            },
+            "label": label_opts,
             "itemStyle": itemstyle_opts,
             "tooltip": tooltip_opts,
         }
@@ -117,6 +132,7 @@ class LineItem(BasicOpts):
         self,
         name: Union[str, Numeric] = None,
         value: Union[str, Numeric] = None,
+        *,
         symbol: Optional[str] = "circle",
         symbol_size: Numeric = 4,
         symbol_rotate: Optional[Numeric] = None,
@@ -144,7 +160,7 @@ class MapItem(BasicOpts):
     def __init__(
         self,
         name: Optional[str] = None,
-        value: Optional[Numeric] = None,
+        value: Union[Sequence, Numeric, str] = None,
         is_selected: bool = False,
         label_opts: Union[LabelOpts, dict, None] = None,
         itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
@@ -157,28 +173,6 @@ class MapItem(BasicOpts):
             "label": label_opts,
             "itemStyle": itemstyle_opts,
             "tooltip": tooltip_opts,
-        }
-
-
-class ParallelItem(BasicOpts):
-    def __init__(
-        self,
-        name: Optional[str] = None,
-        value: Optional[Sequence] = None,
-        linestyle_opts: Union[LineStyleOpts, dict, None] = None,
-        color: Union[str, dict] = "#000",
-        width: Numeric = 2,
-        type_: str = "solid",
-        opacity: Numeric = 0.45,
-    ):
-        self.opts: dict = {
-            "name": name,
-            "value": value,
-            "lineStyle": linestyle_opts,
-            "color": color,
-            "width": width,
-            "type": type_,
-            "opacity": opacity,
         }
 
 
@@ -206,7 +200,7 @@ class RadarItem(BasicOpts):
     def __init__(
         self,
         name: Optional[str] = None,
-        value: Optional[Numeric] = None,
+        value: Union[Sequence, Numeric, str] = None,
         symbol: Optional[str] = None,
         symbol_size: Union[Sequence[Numeric], Numeric] = None,
         symbol_rotate: Optional[Numeric] = None,

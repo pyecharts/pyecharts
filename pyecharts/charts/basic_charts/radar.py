@@ -63,7 +63,11 @@ class Radar(Chart):
         areastyle_opts: opts.AreaStyleOpts = opts.AreaStyleOpts(),
         tooltip_opts: types.Tooltip = None,
     ):
-        self._append_legend(series_name, is_selected)
+        if all([isinstance(d, opts.RadarItem) for d in data]):
+            for a in data:
+                self._append_legend(a.get("name"), is_selected)
+        else:
+            self._append_legend(series_name, is_selected)
         self.options.get("series").append(
             {
                 "type": ChartType.RADAR,
