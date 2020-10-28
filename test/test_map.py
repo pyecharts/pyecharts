@@ -19,6 +19,22 @@ def test_map_base(fake_writer):
     assert_equal(c.renderer, "canvas")
 
 
+@patch("pyecharts.render.engine.write_utf8_html_file")
+def test_map_item_base(fake_writer):
+    location_name = ["广东"]
+    location_data = [[100, 200, 300, 400]]
+    mock_data = [
+        opts.MapItem(name=d[0], value=d[1])
+        for d in list(zip(location_name, location_data))
+    ]
+
+    c = Map().add("商家A", mock_data, "china")
+    c.render()
+    _, content = fake_writer.call_args[0]
+    assert_equal(c.theme, "white")
+    assert_equal(c.renderer, "canvas")
+
+
 def test_map_emphasis():
     c = Map().add(
         "商家A",

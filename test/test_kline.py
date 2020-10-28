@@ -37,6 +37,30 @@ def test_kline_base(fake_writer):
 
 
 @patch("pyecharts.render.engine.write_utf8_html_file")
+def test_kline_item_base(fake_writer):
+    x_axis = ["2017/7/{}".format(i + 1) for i in range(10)]
+    y_axis = data
+    kline_item = [
+        opts.CandleStickItem(name=d[0], value=d[1])
+        for d in list(zip(x_axis, y_axis))
+    ]
+
+    c = (
+        Kline()
+        .add_xaxis(x_axis)
+        .add_yaxis("kline", kline_item)
+        .set_global_opts(
+            yaxis_opts=opts.AxisOpts(is_scale=True),
+            xaxis_opts=opts.AxisOpts(is_scale=True),
+        )
+    )
+    c.render()
+    _, content = fake_writer.call_args[0]
+    assert_equal(c.theme, "white")
+    assert_equal(c.renderer, "canvas")
+
+
+@patch("pyecharts.render.engine.write_utf8_html_file")
 def test_kline_axispointer_opts(fake_writer):
     c = (
         Kline()

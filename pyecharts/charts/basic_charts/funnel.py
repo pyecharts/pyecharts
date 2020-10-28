@@ -29,9 +29,14 @@ class Funnel(Chart):
         itemstyle_opts: types.ItemStyle = None,
     ):
         self._append_color(color)
-        data = [{"name": n, "value": v} for n, v in data_pair]
-        for a, _ in data_pair:
-            self._append_legend(a, is_selected)
+        if all([isinstance(d, opts.FunnelItem) for d in data_pair]):
+            data = data_pair
+            for a in data_pair:
+                self._append_legend(a.opts.get("name"), is_selected)
+        else:
+            data = [{"name": n, "value": v} for n, v in data_pair]
+            for a, _ in data_pair:
+                self._append_legend(a, is_selected)
 
         _dset = set(self.options.get("legend")[0].get("data"))
         self.options.get("legend")[0].update(data=list(_dset))

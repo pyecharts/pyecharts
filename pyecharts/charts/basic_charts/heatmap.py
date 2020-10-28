@@ -20,8 +20,8 @@ class HeatMap(RectChart):
     def add_yaxis(
         self,
         series_name: str,
-        yaxis_data: types.Sequence[types.Union[opts.HeatMapItem, dict]],
-        value: types.Sequence[types.Union[opts.HeatMapItem, dict]],
+        yaxis_data: types.Sequence[types.Union[dict]],
+        value: types.Sequence[types.Union[dict]],
         *,
         is_selected: bool = True,
         xaxis_index: types.Optional[types.Numeric] = None,

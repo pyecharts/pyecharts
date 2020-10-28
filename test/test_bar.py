@@ -29,6 +29,29 @@ def test_bar_base(fake_writer):
 
 
 @patch("pyecharts.render.engine.write_utf8_html_file")
+def test_bar_item_base(fake_writer):
+    x_axis = ["A", "B", "C"]
+    bar_item_1 = [
+        opts.BarItem(name=d[0], value=d[1]) for d in list(zip(x_axis, [1, 2, 3]))
+    ]
+    bar_item_2 = [
+        opts.BarItem(name=d[0], value=d[1]) for d in list(zip(x_axis, [4, 5, 6]))
+    ]
+
+    c = (
+        Bar()
+        .add_xaxis(x_axis)
+        .add_yaxis("series0", bar_item_1)
+        .add_yaxis("series1", bar_item_2)
+    )
+    c.render()
+    _, content = fake_writer.call_args[0]
+    assert_greater(len(content), 2000)
+    assert_equal(c.theme, "white")
+    assert_equal(c.renderer, "canvas")
+
+
+@patch("pyecharts.render.engine.write_utf8_html_file")
 def test_bar_base_with_animation(fake_writer):
     c = (
         Bar(
