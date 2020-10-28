@@ -3,7 +3,7 @@
 </p>
 <h1 align="center">pyecharts</h1>
 <p align="center">
-    <em>Python ❤️ Echarts = pyecharts</em>
+    <em>Python ❤️ ECharts = pyecharts</em>
 </p>
 <p align="center">
     <a href="https://travis-ci.org/pyecharts/pyecharts">
@@ -36,7 +36,7 @@
 
 ## 📣 Introduction
 
-[Echarts](https://github.com/ecomfe/echarts) is easy-to-use, highly interactive and highly performant javascript visualization library under Apache license. Since its first public release in 2013, it now dominates over 74% of Chinese web front-end market. Yet Python is an expressive language and is loved by data science community. Combining the strength of both technologies, [pyecharts](https://github.com/pyecharts/pyecharts) is born.
+[Apache ECharts (incubating)](https://github.com/apache/incubator-echarts) is easy-to-use, highly interactive and highly performant javascript visualization library under Apache license. Since its first public release in 2013, it now dominates over 74% of Chinese web front-end market. Yet Python is an expressive language and is loved by data science community. Combining the strength of both technologies, [pyecharts](https://github.com/pyecharts/pyecharts) is born.
 
 ## ✨ Feature hightlights
 

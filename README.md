@@ -3,7 +3,7 @@
 </p>
 <h1 align="center">pyecharts</h1>
 <p align="center">
-    <em>Python ❤️ Echarts = pyecharts</em>
+    <em>Python ❤️ ECharts = pyecharts</em>
 </p>
 <p align="center">
     <a href="https://travis-ci.org/pyecharts/pyecharts">
@@ -38,7 +38,7 @@
 
 ## 📣 简介
 
-[Echarts](https://github.com/ecomfe/echarts) 是一个由百度开源的数据可视化，凭借着良好的交互性，精巧的图表设计，得到了众多开发者的认可。而 Python 是一门富有表达力的语言，很适合用于数据处理。当数据分析遇上数据可视化时，[pyecharts](https://github.com/pyecharts/pyecharts) 诞生了。
+[Apache ECharts (incubating)](https://github.com/apache/incubator-echarts) 是一个由百度开源的数据可视化，凭借着良好的交互性，精巧的图表设计，得到了众多开发者的认可。而 Python 是一门富有表达力的语言，很适合用于数据处理。当数据分析遇上数据可视化时，[pyecharts](https://github.com/pyecharts/pyecharts) 诞生了。
 
 ## ✨ 特性
 
@@ -238,8 +238,9 @@ pyecharts 主要由以下几位开发者开发维护
 
 开发和维护 pyecharts 花费了我巨大的心力，如果你觉得项目帮助到您，请认真考虑请作者喝一杯咖啡 😄
 
-<img src="https://user-images.githubusercontent.com/19553554/35425853-500d6b5c-0299-11e8-80a1-ebb6629b497e.png" width="21.7%" alt="Alipay">　　　　　<img src="https://user-images.githubusercontent.com/19553554/35425854-504e716a-0299-11e8-81fc-4a511f1c47e8.png" width="22%" alt="Wechat">
-
+| 微信二维码 | 支付宝二维码 |
+| -------- | ---------- |
+| <img src="https://assets.pyecharts.org/images/wechat-code.png" width=220px alt="wechat-code"> | <img src="https://assets.pyecharts.org/images/alipay-code.png" width=220px alt="alipay-code"> |
 
 如果其他开发者帮助到了您，也可以请他们喝咖啡 [捐赠通道](http://pyecharts.org/#/zh-cn/donate)
 
