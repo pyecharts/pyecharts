@@ -21,8 +21,9 @@ from .series_options import (
 class BarItem(BasicOpts):
     def __init__(
         self,
-        name: Optional[str] = None,
-        value: Optional[Numeric] = None,
+        name: Union[int, str],
+        value: Numeric,
+        *,
         label_opts: Union[LabelOpts, dict, None] = None,
         itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
         tooltip_opts: Union[TooltipOpts, dict, None] = None,
@@ -39,8 +40,9 @@ class BarItem(BasicOpts):
 class BoxplotItem(BasicOpts):
     def __init__(
         self,
-        name: Optional[str] = None,
-        value: Optional[Sequence] = None,
+        name: Union[int, str],
+        value: Sequence,
+        *,
         itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
         tooltip_opts: Union[TooltipOpts, dict, None] = None,
     ):
@@ -55,8 +57,9 @@ class BoxplotItem(BasicOpts):
 class CandleStickItem(BasicOpts):
     def __init__(
         self,
-        name: Optional[str] = None,
-        value: Optional[Sequence] = None,
+        name: Union[str, int],
+        value: Sequence,
+        *,
         itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
         tooltip_opts: Union[TooltipOpts, dict, None] = None,
     ):
@@ -71,8 +74,9 @@ class CandleStickItem(BasicOpts):
 class EffectScatterItem(BasicOpts):
     def __init__(
         self,
-        name: Union[str, Numeric] = None,
-        value: Union[str, Numeric] = None,
+        name: Union[str, Numeric],
+        value: Union[str, Numeric],
+        *,
         symbol: Optional[str] = None,
         symbol_size: Union[Sequence[Numeric], Numeric] = None,
         symbol_rotate: Optional[Numeric] = None,
@@ -96,17 +100,28 @@ class EffectScatterItem(BasicOpts):
         }
 
 
-class HeatMapItem(BasicOpts):
+class FunnelItem(BasicOpts):
     def __init__(
         self,
-        name: Optional[str] = None,
-        value: Optional[Sequence] = None,
+        name: Union[str, int],
+        value: Union[Sequence, str, Numeric],
+        *,
+        is_show_label_line: Optional[bool] = None,
+        label_line_width: Optional[int] = None,
+        label_line_linestyle_opts: Union[LineStyleOpts, dict, None] = None,
+        label_opts: Union[LabelOpts, dict, None] = None,
         itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
         tooltip_opts: Union[TooltipOpts, dict, None] = None,
     ):
         self.opts: dict = {
             "name": name,
             "value": value,
+            "labelLine": {
+                "show": is_show_label_line,
+                "length": label_line_width,
+                "lineStyle": label_line_linestyle_opts,
+            },
+            "label": label_opts,
             "itemStyle": itemstyle_opts,
             "tooltip": tooltip_opts,
         }
@@ -117,6 +132,7 @@ class LineItem(BasicOpts):
         self,
         name: Union[str, Numeric] = None,
         value: Union[str, Numeric] = None,
+        *,
         symbol: Optional[str] = "circle",
         symbol_size: Numeric = 4,
         symbol_rotate: Optional[Numeric] = None,
@@ -144,7 +160,7 @@ class MapItem(BasicOpts):
     def __init__(
         self,
         name: Optional[str] = None,
-        value: Optional[Numeric] = None,
+        value: Union[Sequence, Numeric, str] = None,
         is_selected: bool = False,
         label_opts: Union[LabelOpts, dict, None] = None,
         itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
@@ -157,28 +173,6 @@ class MapItem(BasicOpts):
             "label": label_opts,
             "itemStyle": itemstyle_opts,
             "tooltip": tooltip_opts,
-        }
-
-
-class ParallelItem(BasicOpts):
-    def __init__(
-        self,
-        name: Optional[str] = None,
-        value: Optional[Sequence] = None,
-        linestyle_opts: Union[LineStyleOpts, dict, None] = None,
-        color: Union[str, dict] = "#000",
-        width: Numeric = 2,
-        type_: str = "solid",
-        opacity: Numeric = 0.45,
-    ):
-        self.opts: dict = {
-            "name": name,
-            "value": value,
-            "lineStyle": linestyle_opts,
-            "color": color,
-            "width": width,
-            "type": type_,
-            "opacity": opacity,
         }
 
 
@@ -206,7 +200,7 @@ class RadarItem(BasicOpts):
     def __init__(
         self,
         name: Optional[str] = None,
-        value: Optional[Numeric] = None,
+        value: Union[Sequence, Numeric, str] = None,
         symbol: Optional[str] = None,
         symbol_size: Union[Sequence[Numeric], Numeric] = None,
         symbol_rotate: Optional[Numeric] = None,
@@ -1194,3 +1188,90 @@ class GaugePointerOpts(BasicOpts):
         width: Numeric = 8,
     ):
         self.opts: dict = {"show": is_show, "length": length, "width": width}
+
+
+class PieLabelLineOpts(BasicOpts):
+    def __init__(
+        self,
+        is_show: bool = True,
+        length: Numeric = None,
+        length_2: Numeric = None,
+        smooth: Union[bool, Numeric] = False,
+        linestyle_opts: Union[LineStyleOpts, dict, None] = None,
+    ):
+        self.opts: dict = {
+            "show": is_show,
+            "length": length,
+            "length2": length_2,
+            "smooth": smooth,
+            "lineStyle": linestyle_opts,
+        }
+
+
+class TimelineCheckPointerStyle(BasicOpts):
+    def __init__(
+        self,
+        symbol: str = "circle",
+        symbol_size: Union[Numeric, Sequence[Numeric]] = 13,
+        symbol_rotate: Optional[Numeric] = None,
+        symbol_keep_aspect: bool = False,
+        symbol_offset: Optional[Sequence[Union[str, Numeric]]] = None,
+        color: str = "#c23531",
+        border_width: Numeric = 5,
+        border_color: str = "rgba(194,53,49,0.5)",
+        is_animation: bool = True,
+        animation_duration: Numeric = 300,
+        animation_easing: str = "quinticInOut",
+    ):
+        if symbol_offset is None:
+            symbol_offset = [0, 0]
+
+        self.opts: dict = {
+            "symbol": symbol,
+            "symbolSize": symbol_size,
+            "symbolRotate": symbol_rotate,
+            "symbolKeepAspect": symbol_keep_aspect,
+            "symbolOffset": symbol_offset,
+            "color": color,
+            "borderWidth": border_width,
+            "borderColor": border_color,
+            "animation": is_animation,
+            "animationDuration": animation_duration,
+            "animationEasing": animation_easing,
+        }
+
+
+class TimelineControlStyle(BasicOpts):
+    def __init__(
+        self,
+        is_show: bool = True,
+        is_show_play_button: bool = True,
+        is_show_prev_button: bool = True,
+        is_show_next_button: bool = True,
+        item_size: Numeric = 22,
+        item_gap: Numeric = 12,
+        position: str = "left",
+        play_icon: Optional[str] = None,
+        stop_icon: Optional[str] = None,
+        prev_icon: Optional[str] = None,
+        next_icon: Optional[str] = None,
+        color: str = "#304654",
+        border_color: str = "#304654",
+        border_width: Numeric = 1,
+    ):
+        self.opts: dict = {
+            "show": is_show,
+            "showPlayBtn": is_show_play_button,
+            "showPrevBtn": is_show_prev_button,
+            "showNextBtn": is_show_next_button,
+            "itemSize": item_size,
+            "itemGap": item_gap,
+            "position": position,
+            "playIcon": play_icon,
+            "stopIcon": stop_icon,
+            "prevIcon": prev_icon,
+            "nextIcon": next_icon,
+            "color": color,
+            "borderColor": border_color,
+            "borderWidth": border_width,
+        }

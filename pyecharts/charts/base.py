@@ -41,14 +41,6 @@ class Base(ChartMixin):
         self.options.update(_opts.get("animationOpts", AnimationOpts()).opts)
         self._is_geo_chart: bool = False
 
-        if WarningType.ShowWarning:
-            warnings.resetwarnings()
-            warnings.warn(
-                message="pyecharts 所有图表类型将在 v1.9.0 版本开始强制使用 ChartItem 进行数据项配置 :)",
-                category=PendingDeprecationWarning,
-                stacklevel=2,
-            )
-
     def get_options(self) -> dict:
         return utils.remove_key_with_none_value(self.options)
 

@@ -81,7 +81,7 @@ def _clean_dict(mydict):
                 # delete key with empty string
                 continue
 
-            yield (key, value)
+            yield key, value
 
 
 def _clean_array(myarray):

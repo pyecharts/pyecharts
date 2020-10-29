@@ -30,6 +30,12 @@ class EffectScatter(RectChart):
     ):
         self._append_color(color)
         self._append_legend(series_name, is_selected)
+
+        if all([isinstance(d, opts.EffectScatterItem) for d in y_axis]):
+            y_axis = y_axis
+        else:
+            y_axis = [list(z) for z in zip(self._xaxis_data, y_axis)]
+
         self.options.get("series").append(
             {
                 "type": ChartType.EFFECT_SCATTER,
@@ -41,7 +47,7 @@ class EffectScatter(RectChart):
                 "symbol": symbol,
                 "symbolSize": symbol_size,
                 "symbolRotate": symbol_rotate,
-                "data": [list(z) for z in zip(self._xaxis_data, y_axis)],
+                "data": y_axis,
                 "label": label_opts,
                 "tooltip": tooltip_opts,
                 "itemStyle": itemstyle_opts,

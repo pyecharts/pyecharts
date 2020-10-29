@@ -21,6 +21,30 @@ def test_bar_base(fake_writer):
 
 
 @patch("pyecharts.render.engine.write_utf8_html_file")
+def test_bar_item_base(fake_writer):
+    x_axis = ["A", "B", "C"]
+    y_axis_0 = [1, 2, 4]
+    line_item_0 = [
+        opts.LineItem(name=d[0], value=d[1]) for d in list(zip(x_axis, y_axis_0))
+    ]
+    y_axis_1 = [2, 3, 6]
+    line_item_1 = [
+        opts.LineItem(name=d[0], value=d[1]) for d in list(zip(x_axis, y_axis_1))
+    ]
+
+    c = (
+        Line()
+        .add_xaxis(x_axis)
+        .add_yaxis("series0", line_item_0)
+        .add_yaxis("series1", line_item_1)
+    )
+    c.render()
+    _, content = fake_writer.call_args[0]
+    assert_equal(c.theme, "white")
+    assert_equal(c.renderer, "canvas")
+
+
+@patch("pyecharts.render.engine.write_utf8_html_file")
 def test_set_global_opts(fake_writer):
     test_type, test_range = "test_type", [-10001, 10001]
     c = (
