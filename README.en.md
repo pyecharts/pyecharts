@@ -38,7 +38,7 @@
 
 [Apache ECharts (incubating)](https://github.com/apache/incubator-echarts) is easy-to-use, highly interactive and highly performant javascript visualization library under Apache license. Since its first public release in 2013, it now dominates over 74% of Chinese web front-end market. Yet Python is an expressive language and is loved by data science community. Combining the strength of both technologies, [pyecharts](https://github.com/pyecharts/pyecharts) is born.
 
-## ✨ Feature hightlights
+## ✨ Feature highlights
 
 * Simple API, Sleek and method chaining
 * Support 30 + popular charts
