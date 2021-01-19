@@ -45,7 +45,7 @@
 * Suppot data science tools: Jupyter Notebook, JupyterLab, nteract
 * Integrate with Flask，Django at ease
 * Easy to use and highly configurable
-* Detialed documentation and examples.
+* Detailed documentation and examples.
 * More than 400+ geomaps assets for geograpic information processing
 
 ## 🔰 Installation
