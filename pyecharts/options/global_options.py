@@ -145,8 +145,8 @@ class ToolBoxFeatureDataZoomOpts(BasicOpts):
         back_title: str = "区域缩放还原",
         zoom_icon: Optional[JSFunc] = None,
         back_icon: Optional[JSFunc] = None,
-        xaxis_index: Union[Numeric, Sequence, bool] = False,
-        yaxis_index: Union[Numeric, Sequence, bool] = False,
+        xaxis_index: Union[Numeric, Sequence, bool] = None,
+        yaxis_index: Union[Numeric, Sequence, bool] = None,
         filter_mode: str = "filter",
     ):
         self.opts: dict = {
@@ -248,7 +248,7 @@ class ToolBoxFeatureOpts(BasicOpts):
         magic_type: Union[
             ToolBoxFeatureMagicTypeOpts, dict
         ] = ToolBoxFeatureMagicTypeOpts(),
-        brush: Union[ToolBoxFeatureBrushOpts, dict] = ToolBoxFeatureBrushOpts(),
+        brush: Union[ToolBoxFeatureBrushOpts, dict] = None,
     ):
         self.opts: dict = {
             "saveAsImage": save_as_image,
