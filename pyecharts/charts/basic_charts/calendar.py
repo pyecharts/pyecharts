@@ -22,7 +22,10 @@ class Calendar(Chart):
         yaxis_data: types.Sequence,
         *,
         is_selected: bool = True,
-        label_opts: types.Label = opts.LabelOpts(),
+        label_opts: types.Label = opts.LabelOpts(
+            is_show=False,
+            position="inside",
+        ),
         calendar_opts: types.Calendar = None,
         tooltip_opts: types.Tooltip = None,
         itemstyle_opts: types.ItemStyle = None,

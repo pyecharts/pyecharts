@@ -50,7 +50,6 @@ def test_sankey_new_opts(fake_writer):
         nodes,
         links,
         pos_bottom="10%",
-        focus_node_adjacency="allEdges",
         orient="vertical",
         levels=[
             opts.SankeyLevelsOpts(
@@ -67,4 +66,3 @@ def test_sankey_new_opts(fake_writer):
     assert_in("bottom", content)
     assert_in("orient", content)
     assert_in("levels", content)
-    assert_in("focusNodeAdjacency", content)
