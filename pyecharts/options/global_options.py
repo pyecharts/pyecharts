@@ -731,6 +731,12 @@ class Grid3DOpts(BasicOpts):
         is_rotate: bool = False,
         rotate_speed: Numeric = 10,
         rotate_sensitivity: Numeric = 1,
+        view_control_alpha: Numeric = 20,
+        view_control_beta: Numeric = 40,
+        view_control_min_alpha: Numeric = -90,
+        view_control_max_alpha: Numeric = 90,
+        view_control_min_beta: Optional[int] = None,
+        view_control_max_beta: Optional[int] = None,
     ):
         self.opts: dict = {
             "boxWidth": width,
@@ -740,6 +746,12 @@ class Grid3DOpts(BasicOpts):
                 "autoRotate": is_rotate,
                 "autoRotateSpeed": rotate_speed,
                 "rotateSensitivity": rotate_sensitivity,
+                "alpha": view_control_alpha,
+                "beta": view_control_beta,
+                "minAlpha": view_control_min_alpha,
+                "maxAlpha": view_control_max_alpha,
+                "minBeta": view_control_min_beta,
+                "maxBeta": view_control_max_beta,
             },
         }
 
@@ -796,18 +808,32 @@ class ParallelAxisOpts(BasicOpts):
         name: str,
         data: Sequence = None,
         type_: Optional[str] = None,
+        name_location: str = "end",
+        name_gap: Numeric = 15,
+        name_rotate: Optional[int] = None,
+        is_inverse: bool = False,
         min_: Union[str, Numeric, None] = None,
         max_: Union[str, Numeric, None] = None,
         is_scale: bool = False,
+        axisline_opts: Union[AxisLineOpts, dict, None] = None,
+        axistick_opts: Union[AxisTickOpts, dict, None] = None,
+        axislabel_opts: Union[LabelOpts, dict, None] = None,
     ):
         self.opts: dict = {
             "dim": dim,
             "name": name,
             "data": data,
             "type": type_,
+            "name_location": name_location,
+            "name_gap": name_gap,
+            "name_rotate": name_rotate,
+            "inverse": is_inverse,
             "min": min_,
             "max": max_,
             "scale": is_scale,
+            "axisLine": axisline_opts,
+            "axisTick": axistick_opts,
+            "axisLabel": axislabel_opts,
         }
 
 
