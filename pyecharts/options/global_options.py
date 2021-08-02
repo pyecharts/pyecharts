@@ -145,8 +145,8 @@ class ToolBoxFeatureDataZoomOpts(BasicOpts):
         back_title: str = "区域缩放还原",
         zoom_icon: Optional[JSFunc] = None,
         back_icon: Optional[JSFunc] = None,
-        xaxis_index: Union[Numeric, Sequence, bool] = False,
-        yaxis_index: Union[Numeric, Sequence, bool] = False,
+        xaxis_index: Union[Numeric, Sequence, bool] = None,
+        yaxis_index: Union[Numeric, Sequence, bool] = None,
         filter_mode: str = "filter",
     ):
         self.opts: dict = {
@@ -248,7 +248,7 @@ class ToolBoxFeatureOpts(BasicOpts):
         magic_type: Union[
             ToolBoxFeatureMagicTypeOpts, dict
         ] = ToolBoxFeatureMagicTypeOpts(),
-        brush: Union[ToolBoxFeatureBrushOpts, dict] = ToolBoxFeatureBrushOpts(),
+        brush: Union[ToolBoxFeatureBrushOpts, dict] = None,
     ):
         self.opts: dict = {
             "saveAsImage": save_as_image,
@@ -337,10 +337,10 @@ class TitleOpts(BasicOpts):
         self,
         title: Optional[str] = None,
         title_link: Optional[str] = None,
-        title_target: Optional[str] = None,
+        title_target: Optional[str] = "blank",
         subtitle: Optional[str] = None,
         subtitle_link: Optional[str] = None,
-        subtitle_target: Optional[str] = None,
+        subtitle_target: Optional[str] = "blank",
         pos_left: Optional[str] = None,
         pos_right: Optional[str] = None,
         pos_top: Optional[str] = None,
@@ -415,6 +415,7 @@ class LegendOpts(BasicOpts):
         self,
         type_: Optional[str] = None,
         selected_mode: Union[str, bool, None] = None,
+        selected_map: Optional[dict] = None,
         is_show: bool = True,
         pos_left: Union[str, Numeric, None] = None,
         pos_right: Union[str, Numeric, None] = None,
@@ -433,6 +434,7 @@ class LegendOpts(BasicOpts):
         self.opts: dict = {
             "type": type_,
             "selectedMode": selected_mode,
+            "selected": selected_map,
             "show": is_show,
             "left": pos_left,
             "right": pos_right,
@@ -649,7 +651,7 @@ class AxisOpts(BasicOpts):
         axispointer_opts: Union[AxisPointerOpts, dict, None] = None,
         name_textstyle_opts: Union[TextStyleOpts, dict, None] = None,
         splitarea_opts: Union[SplitAreaOpts, dict, None] = None,
-        splitline_opts: Union[SplitLineOpts, dict] = SplitLineOpts(),
+        splitline_opts: Union[SplitLineOpts, dict] = SplitLineOpts(is_show=True),
         minor_tick_opts: Union[MinorTickOpts, dict, None] = None,
         minor_split_line_opts: Union[MinorSplitLineOpts, dict, None] = None,
     ):
@@ -729,6 +731,12 @@ class Grid3DOpts(BasicOpts):
         is_rotate: bool = False,
         rotate_speed: Numeric = 10,
         rotate_sensitivity: Numeric = 1,
+        view_control_alpha: Numeric = 20,
+        view_control_beta: Numeric = 40,
+        view_control_min_alpha: Numeric = -90,
+        view_control_max_alpha: Numeric = 90,
+        view_control_min_beta: Optional[int] = None,
+        view_control_max_beta: Optional[int] = None,
     ):
         self.opts: dict = {
             "boxWidth": width,
@@ -738,6 +746,12 @@ class Grid3DOpts(BasicOpts):
                 "autoRotate": is_rotate,
                 "autoRotateSpeed": rotate_speed,
                 "rotateSensitivity": rotate_sensitivity,
+                "alpha": view_control_alpha,
+                "beta": view_control_beta,
+                "minAlpha": view_control_min_alpha,
+                "maxAlpha": view_control_max_alpha,
+                "minBeta": view_control_min_beta,
+                "maxBeta": view_control_max_beta,
             },
         }
 
@@ -794,18 +808,32 @@ class ParallelAxisOpts(BasicOpts):
         name: str,
         data: Sequence = None,
         type_: Optional[str] = None,
+        name_location: str = "end",
+        name_gap: Numeric = 15,
+        name_rotate: Optional[int] = None,
+        is_inverse: bool = False,
         min_: Union[str, Numeric, None] = None,
         max_: Union[str, Numeric, None] = None,
         is_scale: bool = False,
+        axisline_opts: Union[AxisLineOpts, dict, None] = None,
+        axistick_opts: Union[AxisTickOpts, dict, None] = None,
+        axislabel_opts: Union[LabelOpts, dict, None] = None,
     ):
         self.opts: dict = {
             "dim": dim,
             "name": name,
             "data": data,
             "type": type_,
+            "name_location": name_location,
+            "name_gap": name_gap,
+            "name_rotate": name_rotate,
+            "inverse": is_inverse,
             "min": min_,
             "max": max_,
             "scale": is_scale,
+            "axisLine": axisline_opts,
+            "axisTick": axistick_opts,
+            "axisLabel": axislabel_opts,
         }
 
 

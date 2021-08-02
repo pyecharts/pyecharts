@@ -21,12 +21,17 @@ class Boxplot(RectChart):
         is_selected: bool = True,
         xaxis_index: types.Optional[types.Numeric] = None,
         yaxis_index: types.Optional[types.Numeric] = None,
+        box_width: types.Optional[types.Sequence] = None,
+        selected_mode: types.Union[bool, str] = False,
         label_opts: types.Label = opts.LabelOpts(),
         markpoint_opts: types.MarkPoint = opts.MarkPointOpts(),
         markline_opts: types.MarkLine = opts.MarkLineOpts(),
         tooltip_opts: types.Tooltip = None,
         itemstyle_opts: types.ItemStyle = None,
     ):
+        if box_width is None:
+            box_width = [7, 50]
+
         self._append_legend(series_name, is_selected)
         self.options.get("series").append(
             {
@@ -34,6 +39,8 @@ class Boxplot(RectChart):
                 "name": series_name,
                 "xAxisIndex": xaxis_index,
                 "yAxisIndex": yaxis_index,
+                "boxWidth": box_width,
+                "selected_mode": selected_mode,
                 "data": y_axis,
                 "label": label_opts,
                 "markPoint": markpoint_opts,

@@ -12,10 +12,10 @@ class Chart(Base):
             temp_opts.update(**init_opts)
             init_opts = temp_opts
         super().__init__(init_opts=init_opts)
+        # Change to Echarts V5 default color list
         self.colors = (
-            "#c23531 #2f4554 #61a0a8 #d48265 #749f83 #ca8622 #bda29a #6e7074 "
-            "#546570 #c4ccd3 #f05b72 #ef5b9c #f47920 #905a3d #fab27b #2a5caa "
-            "#444693 #726930 #b2d235 #6d8346 #ac6767 #1d953f #6950a1 #918597"
+            "#5470c6 #91cc75 #fac858 #ee6666 #73c0de #3ba272 #fc8452 #9a60b4 "
+            "#ea7ccc"
         ).split()
         if init_opts.opts.get("theme") == ThemeType.WHITE:
             self.options.update(color=self.colors)
@@ -25,6 +25,25 @@ class Chart(Base):
             tooltip=opts.TooltipOpts().opts,
         )
         self._chart_type: Optional[str] = None
+
+    def set_dark_mode(
+        self,
+        dark_mode_colors: Optional[Sequence[str]] = None,
+        dark_mode_bg_color: str = "#100C2A"
+    ):
+        # [Hard Code Here] The Echarts default Dark Mode Configurations
+        if dark_mode_colors is None:
+            dark_mode_colors = (
+                "#4992ff #7cffb2 #fddd60 #ff6e76 #58d9f9 #05c091 #ff8a45 "
+                "#8d48e3 #dd79ff"
+            ).split()
+        self.options.update(
+            backgroundColor=dark_mode_bg_color,
+            darkMode=True,
+            color=dark_mode_colors,
+        )
+        self.theme = ThemeType.DARK
+        return self
 
     def set_colors(self, colors: Sequence[str]):
         self.options.update(color=colors)
@@ -86,7 +105,8 @@ class Chart(Base):
 
     def _append_legend(self, name, is_selected):
         self.options.get("legend")[0].get("data").append(name)
-        self.options.get("legend")[0].get("selected").update({name: is_selected})
+        if self.options.get("legend")[0].get("selected") is not None:
+            self.options.get("legend")[0].get("selected").update({name: is_selected})
 
     def _append_color(self, color: Optional[str]):
         if color:
@@ -194,9 +214,10 @@ class RectChart(Chart):
         self.options.get("legend")[0].get("data").extend(
             chart.options.get("legend")[0].get("data")
         )
-        self.options.get("legend")[0].get("selected").update(
-            chart.options.get("legend")[0].get("selected")
-        )
+        if self.options.get("legend")[0].get("selected") is not None:
+            self.options.get("legend")[0].get("selected").update(
+                chart.options.get("legend")[0].get("selected")
+            )
         self.options.get("series").extend(chart.options.get("series"))
         return self
 

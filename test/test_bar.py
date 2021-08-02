@@ -190,9 +190,9 @@ def test_bar_default_set_function(fake_writer):
 def test_bar_default_remote_host(fake_writer):
     c = Bar().add_xaxis(["A", "B", "C"]).add_yaxis("series0", [1, 2, 4])
     c.render()
-    assert_equal(c.js_host, "https://assets.pyecharts.org/assets/")
+    assert_equal(c.js_host, "https://assets.pyecharts.org/assets/v5/")
     _, content = fake_writer.call_args[0]
-    assert_in("https://assets.pyecharts.org/assets/echarts.min.js", content)
+    assert_in("https://assets.pyecharts.org/assets/v5/echarts.min.js", content)
 
 
 @patch("pyecharts.render.engine.write_utf8_html_file")

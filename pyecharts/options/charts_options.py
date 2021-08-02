@@ -1145,7 +1145,7 @@ class GaugeDetailOpts(BasicOpts):
         border_color: str = "transparent",
         offset_center: Sequence = None,
         formatter: Optional[JSFunc] = None,
-        color: str = "auto",
+        color: str = "#464646",
         font_style: str = "normal",
         font_weight: str = "normal",
         font_family: str = "sans-serif",
@@ -1194,17 +1194,23 @@ class PieLabelLineOpts(BasicOpts):
     def __init__(
         self,
         is_show: bool = True,
-        length: Numeric = None,
-        length_2: Numeric = None,
+        is_show_above: bool = False,
+        length: Numeric = 15,
+        length_2: Numeric = 15,
         smooth: Union[bool, Numeric] = False,
+        min_turn_angle: Numeric = 90,
         linestyle_opts: Union[LineStyleOpts, dict, None] = None,
+        max_surface_angle: Numeric = 90,
     ):
         self.opts: dict = {
             "show": is_show,
+            "showAbove": is_show_above,
             "length": length,
             "length2": length_2,
             "smooth": smooth,
+            "minTurnAngle": min_turn_angle,
             "lineStyle": linestyle_opts,
+            "maxSurfaceAngle": max_surface_angle,
         }
 
 

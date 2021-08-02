@@ -59,7 +59,7 @@ def test_tab_render_notebook():
 def test_page_jshost_default():
     bar = _create_bar()
     tab = Tab().add(bar, "bar")
-    assert_equal(tab.js_host, "https://assets.pyecharts.org/assets/")
+    assert_equal(tab.js_host, "https://assets.pyecharts.org/assets/v5/")
 
 
 def test_tab_jshost_custom():

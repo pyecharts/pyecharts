@@ -24,9 +24,12 @@ class Gauge(Chart):
         start_angle: types.Numeric = 225,
         end_angle: types.Numeric = -45,
         is_clock_wise: bool = True,
-        title_label_opts: types.GaugeTitle = opts.GaugeTitleOpts(),
+        title_label_opts: types.GaugeTitle = opts.GaugeTitleOpts(
+            offset_center=["0%", "20%"],
+        ),
         detail_label_opts: types.GaugeDetail = opts.GaugeDetailOpts(
-            formatter="{value}%"
+            formatter="{value}%",
+            offset_center=["0%", "40%"],
         ),
         pointer: types.GaugePointer = opts.GaugePointerOpts(),
         tooltip_opts: types.Tooltip = None,
