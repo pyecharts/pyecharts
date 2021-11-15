@@ -6,11 +6,8 @@
     <em>Python ❤️ ECharts = pyecharts</em>
 </p>
 <p align="center">
-    <a href="https://travis-ci.org/pyecharts/pyecharts">
-        <img src="https://travis-ci.org/pyecharts/pyecharts.svg?branch=master" alt="Travis Build Status">
-    </a>
-    <a href="https://ci.appveyor.com/project/chenjiandongx/pyecharts">
-        <img src="https://ci.appveyor.com/api/projects/status/81cbsfjpfryv1cl8/branch/master?svg=true" alt="Appveyor Build Status">
+    <a href="https://github.com/pyecharts/pyecharts/actions">
+        <img src="https://github.com/pyecharts/pyecharts/actions/workflows/python-app.yml/badge.svg" alt="Github Actions Status">
     </a>
     <a href="https://codecov.io/gh/pyecharts/pyecharts">
         <img src="https://codecov.io/gh/pyecharts/pyecharts/branch/master/graph/badge.svg" alt="Codecov">
