@@ -58,7 +58,7 @@ class TreeMap(Chart):
                 "bottom": pos_bottom,
                 "squareRatio": square_ratio,
                 "label": label_opts,
-                "upperlabel": upper_label_opts,
+                "upperLabel": upper_label_opts,
                 "leafDepth": leaf_depth,
                 "drillDownIcon": drilldown_icon,
                 "roam": roam,
