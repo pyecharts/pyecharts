@@ -6,11 +6,8 @@
     <em>Python ❤️ ECharts = pyecharts</em>
 </p>
 <p align="center">
-    <a href="https://travis-ci.org/pyecharts/pyecharts">
-        <img src="https://travis-ci.org/pyecharts/pyecharts.svg?branch=master" alt="Travis Build Status">
-    </a>
-    <a href="https://ci.appveyor.com/project/chenjiandongx/pyecharts">
-        <img src="https://ci.appveyor.com/api/projects/status/81cbsfjpfryv1cl8/branch/master?svg=true" alt="Appveyor Build Status">
+    <a href="https://github.com/pyecharts/pyecharts/actions">
+        <img src="https://github.com/pyecharts/pyecharts/actions/workflows/python-app.yml/badge.svg" alt="Github Actions Status">
     </a>
     <a href="https://codecov.io/gh/pyecharts/pyecharts">
         <img src="https://codecov.io/gh/pyecharts/pyecharts/branch/master/graph/badge.svg" alt="Codecov">
@@ -38,7 +35,7 @@
 
 ## 📣 简介
 
-[Apache ECharts (incubating)](https://github.com/apache/incubator-echarts) 是一个由百度开源的数据可视化，凭借着良好的交互性，精巧的图表设计，得到了众多开发者的认可。而 Python 是一门富有表达力的语言，很适合用于数据处理。当数据分析遇上数据可视化时，[pyecharts](https://github.com/pyecharts/pyecharts) 诞生了。
+[Apache ECharts](https://github.com/apache/echarts) 是一个由百度开源的数据可视化，凭借着良好的交互性，精巧的图表设计，得到了众多开发者的认可。而 Python 是一门富有表达力的语言，很适合用于数据处理。当数据分析遇上数据可视化时，[pyecharts](https://github.com/pyecharts/pyecharts) 诞生了。
 
 ## ✨ 特性
 

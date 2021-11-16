@@ -6,11 +6,8 @@
     <em>Python ❤️ ECharts = pyecharts</em>
 </p>
 <p align="center">
-    <a href="https://travis-ci.org/pyecharts/pyecharts">
-        <img src="https://travis-ci.org/pyecharts/pyecharts.svg?branch=master" alt="Travis Build Status">
-    </a>
-    <a href="https://ci.appveyor.com/project/chenjiandongx/pyecharts">
-        <img src="https://ci.appveyor.com/api/projects/status/81cbsfjpfryv1cl8/branch/master?svg=true" alt="Appveyor Build Status">
+    <a href="https://github.com/pyecharts/pyecharts/actions">
+        <img src="https://github.com/pyecharts/pyecharts/actions/workflows/python-app.yml/badge.svg" alt="Github Actions Status">
     </a>
     <a href="https://codecov.io/gh/pyecharts/pyecharts">
         <img src="https://codecov.io/gh/pyecharts/pyecharts/branch/master/graph/badge.svg" alt="Codecov">
@@ -36,7 +33,7 @@
 
 ## 📣 Introduction
 
-[Apache ECharts (incubating)](https://github.com/apache/incubator-echarts) is easy-to-use, highly interactive and highly performant javascript visualization library under Apache license. Since its first public release in 2013, it now dominates over 74% of Chinese web front-end market. Yet Python is an expressive language and is loved by data science community. Combining the strength of both technologies, [pyecharts](https://github.com/pyecharts/pyecharts) is born.
+[Apache ECharts](https://github.com/apache/echarts) is easy-to-use, highly interactive and highly performant javascript visualization library under Apache license. Since its first public release in 2013, it now dominates over 74% of Chinese web front-end market. Yet Python is an expressive language and is loved by data science community. Combining the strength of both technologies, [pyecharts](https://github.com/pyecharts/pyecharts) is born.
 
 ## ✨ Feature highlights
 
