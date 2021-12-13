@@ -17,6 +17,7 @@ class Chart(Base):
             "#546570 #c4ccd3 #f05b72 #ef5b9c #f47920 #905a3d #fab27b #2a5caa "
             "#444693 #726930 #b2d235 #6d8346 #ac6767 #1d953f #6950a1 #918597"
         ).split()
+        self.default_color_n = len(self.colors)
         if init_opts.opts.get("theme") == ThemeType.WHITE:
             self.options.update(color=self.colors)
         self.options.update(
@@ -90,7 +91,9 @@ class Chart(Base):
 
     def _append_color(self, color: Optional[str]):
         if color:
-            self.colors = [color] + self.colors
+            # 这是一个bug
+            # 添加轴（执行add_yaxis操作）的顺序与新添加的color值（设置color属性）未一一对应，正好颠倒
+            self.colors.insert(-self.default_color_n, color)
             if self.theme == ThemeType.WHITE:
                 self.options.update(color=self.colors)
 
