@@ -9,7 +9,8 @@ from ..types import Any
 logger = logging.getLogger(__name__)
 
 PNG_FORMAT = "png"
-JPG_FORMAT = "jpeg"
+JPG_FORMAT = "jpg"
+JPEG_FORMAT = "jpeg"
 GIF_FORMAT = "gif"
 PDF_FORMAT = "pdf"
 SVG_FORMAT = "svg"
@@ -48,7 +49,7 @@ def make_snapshot(
 
         if file_type in [PDF_FORMAT, GIF_FORMAT, EPS_FORMAT]:
             save_as(image_data, output_name, file_type)
-        elif file_type in [PNG_FORMAT, JPG_FORMAT]:
+        elif file_type in [PNG_FORMAT, JPG_FORMAT, JPEG_FORMAT]:
             save_as_png(image_data, output_name)
         else:
             raise TypeError(f"Not supported file type '{file_type}'")
