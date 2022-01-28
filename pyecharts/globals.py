@@ -123,7 +123,7 @@ class _NotebookType:
 
 
 class _OnlineHost:
-    DEFAULT_HOST = "https://assets.pyecharts.org/assets/"
+    DEFAULT_HOST = "https://assets.pyecharts.org/assets/v5/"
     NOTEBOOK_HOST = "http://localhost:8888/nbextensions/assets/"
 
 

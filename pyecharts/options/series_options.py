@@ -351,7 +351,7 @@ class Lines3DEffectOpts(BasicOpts):
 
 
 class AreaStyleOpts(BasicOpts):
-    def __init__(self, opacity: Optional[Numeric] = 0, color: Optional[str] = None):
+    def __init__(self, opacity: Optional[Numeric] = 0, color: Optional[JSFunc] = None):
         self.opts: dict = {"opacity": opacity, "color": color}
 
 

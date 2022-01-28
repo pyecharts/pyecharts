@@ -17,6 +17,7 @@ class Timeline(Base):
     def add_schema(
         self,
         axis_type: str = "category",
+        current_index: types.Numeric = 0,
         orient: str = "horizontal",
         symbol: types.Optional[str] = None,
         symbol_size: types.Optional[types.Numeric] = None,
@@ -43,6 +44,7 @@ class Timeline(Base):
         self.options.get("baseOption").get("timeline").update(
             {
                 "axisType": axis_type,
+                "currentIndex": current_index,
                 "orient": orient,
                 "autoPlay": is_auto_play,
                 "controlPosition": control_position,

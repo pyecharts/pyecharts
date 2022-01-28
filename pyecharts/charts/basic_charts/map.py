@@ -60,7 +60,7 @@ class MapMixin:
                 "name": series_name,
                 "symbol": symbol,
                 "label": label_opts,
-                "mapType": maptype,
+                "map": maptype,
                 "data": data,
                 "roam": is_roam,
                 "aspectScale": aspect_scale,

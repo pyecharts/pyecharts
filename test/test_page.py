@@ -49,7 +49,7 @@ def test_page_jshost_default():
     bar = _create_bar()
     line = _create_line()
     page = Page().add(bar, line)
-    assert_equal(page.js_host, "https://assets.pyecharts.org/assets/")
+    assert_equal(page.js_host, "https://assets.pyecharts.org/assets/v5/")
 
 
 def test_page_jshost_custom():
@@ -84,7 +84,7 @@ def test_page_load_javascript():
     line = _create_line()
     content = Page().add(bar, line).load_javascript()
     assert_equal("", content.data)
-    assert_equal(["https://assets.pyecharts.org/assets/echarts.min.js"], content.lib)
+    assert_equal(["https://assets.pyecharts.org/assets/v5/echarts.min.js"], content.lib)
 
 
 def _get_new_page(unique: bool = True) -> Page:
