@@ -94,6 +94,7 @@ class Chart(Base):
             # 这是一个bug
             # 添加轴（执行add_yaxis操作）的顺序与新添加的color值（设置color属性）未一一对应，正好颠倒
             self.colors.insert(-self.default_color_n, color)
+            # self.colors = [color] + self.colors
             if self.theme == ThemeType.WHITE:
                 self.options.update(color=self.colors)
 
@@ -201,6 +202,9 @@ class RectChart(Chart):
             chart.options.get("legend")[0].get("selected")
         )
         self.options.get("series").extend(chart.options.get("series"))
+        # to merge colors of chart
+        for c in chart.colors[:len(chart.colors) - self.default_color_n]:
+            self.colors.insert(len(self.colors)-self.default_color_n, c)
         return self
 
 
