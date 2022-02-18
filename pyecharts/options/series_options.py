@@ -215,6 +215,7 @@ class MarkLineItem(BasicOpts):
         value_index: Optional[Numeric] = None,
         value_dim: Optional[str] = None,
         coord: Optional[Sequence] = None,
+        linestyle_opts: Union[LineStyleOpts, dict, None] = None,
         symbol: Optional[str] = None,
         symbol_size: Optional[Numeric] = None,
     ):
@@ -227,6 +228,7 @@ class MarkLineItem(BasicOpts):
             "x": xcoord,
             "yAxis": y,
             "y": ycoord,
+            "lineStyle": linestyle_opts,
             "coord": coord,
             "symbol": symbol,
             "symbolSize": symbol_size,
