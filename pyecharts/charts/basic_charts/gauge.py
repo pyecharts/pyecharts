@@ -20,6 +20,7 @@ class Gauge(Chart):
         min_: types.Numeric = 0,
         max_: types.Numeric = 100,
         split_number: types.Numeric = 10,
+        center: types.Sequence = None,
         radius: types.Union[types.Numeric, str] = "75%",
         start_angle: types.Numeric = 225,
         end_angle: types.Numeric = -45,
@@ -36,6 +37,8 @@ class Gauge(Chart):
         axisline_opts: types.AxisLine = None,
         itemstyle_opts: types.ItemStyle = None,
     ):
+        if center is None:
+            center = ["50%", "50%"]
 
         self._append_legend(series_name, is_selected)
         self.options.get("series").append(
@@ -47,6 +50,7 @@ class Gauge(Chart):
                 "min": min_,
                 "max": max_,
                 "splitNumber": split_number,
+                "center": center,
                 "radius": radius,
                 "startAngle": start_angle,
                 "endAngle": end_angle,

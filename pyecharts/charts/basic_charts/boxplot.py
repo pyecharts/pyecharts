@@ -18,9 +18,11 @@ class Boxplot(RectChart):
         series_name: str,
         y_axis: types.Sequence[types.Union[opts.BoxplotItem, dict]],
         *,
+        chart_type: str = ChartType.BOXPLOT,
         is_selected: bool = True,
         xaxis_index: types.Optional[types.Numeric] = None,
         yaxis_index: types.Optional[types.Numeric] = None,
+        dataset_index: types.Optional[types.Numeric] = None,
         box_width: types.Optional[types.Sequence] = None,
         selected_mode: types.Union[bool, str] = False,
         label_opts: types.Label = opts.LabelOpts(),
@@ -35,10 +37,11 @@ class Boxplot(RectChart):
         self._append_legend(series_name, is_selected)
         self.options.get("series").append(
             {
-                "type": ChartType.BOXPLOT,
+                "type": chart_type,
                 "name": series_name,
                 "xAxisIndex": xaxis_index,
                 "yAxisIndex": yaxis_index,
+                "datasetIndex": dataset_index,
                 "boxWidth": box_width,
                 "selected_mode": selected_mode,
                 "data": y_axis,

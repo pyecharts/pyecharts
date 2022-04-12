@@ -25,6 +25,7 @@ class ItemStyleOpts(BasicOpts):
         border_color0: Optional[str] = None,
         border_width: Optional[Numeric] = None,
         border_type: Optional[str] = None,
+        border_radius: Optional[Numeric] = None,
         opacity: Optional[Numeric] = None,
         area_color: Optional[str] = None,
     ):
@@ -35,6 +36,7 @@ class ItemStyleOpts(BasicOpts):
             "borderColor0": border_color0,
             "borderWidth": border_width,
             "borderType": border_type,
+            "borderRadius": border_radius,
             "opacity": opacity,
             "areaColor": area_color,
         }

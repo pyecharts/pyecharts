@@ -41,6 +41,114 @@ class AnimationOpts(BasicOpts):
         }
 
 
+class AriaLabelOpts(BasicOpts):
+    def __init__(
+        self,
+        is_enable: bool = True,
+        description: Optional[str] = None,
+        general_with_title: str = "这是一个关于“{title}”的图表。",
+        general_without_title: str = "这是一个图表，",
+        series_max_count: int = 10,
+        series_single_prefix: str = "",
+        series_single_with_name: str = "图表类型是{seriesType}，表示{seriesName}。",
+        series_single_without_name: str = "图表类型是{seriesType}。",
+        series_multiple_prefix: str = "它由{seriesCount}个图表系列组成。",
+        series_multiple_with_name: str = "图表类型是{seriesType}，表示{seriesName}。",
+        series_multiple_without_name: str = "图表类型是{seriesType}。",
+        series_multiple_separator_middle: str = "；",
+        series_multiple_separator_end: str = "。",
+        data_max_count: int = 10,
+        data_all_data: str = "其数据是——",
+        data_partial_data: str = "其中，前{displayCnt}项是——",
+        data_with_name: str = "{name}的数据是{value}",
+        data_without_name: str = "{value}",
+        data_separator_middle: str = "，",
+        data_separator_end: str = "",
+    ):
+        self.opts: dict = {
+            "enabled": is_enable,
+            "description": description,
+            "general": {
+                "withTitle": general_with_title,
+                "withoutTitle": general_without_title,
+            },
+            "series": {
+                "maxCount": series_max_count,
+                "single": {
+                    "prefix": series_single_prefix,
+                    "withName": series_single_with_name,
+                    "withoutName": series_single_without_name,
+                },
+                "multiple": {
+                    "prefix": series_multiple_prefix,
+                    "withName": series_multiple_with_name,
+                    "withoutName": series_multiple_without_name,
+                    "separator": {
+                        "middle": series_multiple_separator_middle,
+                        "end": series_multiple_separator_end,
+                    }
+                },
+            },
+            "data": {
+                "maxCount": data_max_count,
+                "allData": data_all_data,
+                "partialData": data_partial_data,
+                "withName": data_with_name,
+                "withoutName": data_without_name,
+                "separator": {
+                    "middle": data_separator_middle,
+                    "end": data_separator_end,
+                }
+            }
+        }
+
+
+class AriaDecalOpts(BasicOpts):
+    def __init__(
+        self,
+        is_show: bool = False,
+        decals_symbol: Union[str, Sequence] = "rect",
+        decals_symbol_size: Numeric = 1,
+        decals_symbol_keep_aspect: bool = True,
+        decals_color: str = "rgba(0, 0, 0, 0.2)",
+        decals_background_color: Optional[str] = None,
+        decals_dash_array_x: Union[Numeric, Sequence] = 5,
+        decals_dash_array_y: Union[Numeric, Sequence] = 5,
+        decals_rotation: Numeric = 0,
+        decals_max_tile_width: Numeric = 512,
+        decals_max_tile_height: Numeric = 512,
+    ):
+        self.opts: dict = {
+            "show": is_show,
+            "decals": {
+                "symbol": decals_symbol,
+                "symbolSize": decals_symbol_size,
+                "symbolKeepAspect": decals_symbol_keep_aspect,
+                "color": decals_color,
+                "backgroundColor": decals_background_color,
+                "dashArrayX": decals_dash_array_x,
+                "dashArrayY": decals_dash_array_y,
+                "rotation": decals_rotation,
+                "maxTileWidth": decals_max_tile_width,
+                "maxTileHeight": decals_max_tile_height,
+            }
+        }
+
+
+class AriaOpts(BasicOpts):
+    def __init__(
+        self,
+        is_enable: bool = False,
+        aria_label_opts: Optional[AriaLabelOpts] = None,
+        aria_decal_opts: Optional[AriaDecalOpts] = None,
+    ):
+        self.opts: dict = {
+            "enabled": is_enable,
+            "label": aria_label_opts,
+            "decal": aria_decal_opts,
+        }
+
+
 class InitOpts(BasicOpts):
     def __init__(
         self,
@@ -53,6 +161,7 @@ class InitOpts(BasicOpts):
         bg_color: Union[str, dict] = None,
         js_host: str = "",
         animation_opts: Union[AnimationOpts, dict] = AnimationOpts(),
+        aria_opts: Union[AriaOpts, dict] = AriaOpts()
     ):
         self.opts: dict = {
             "width": width,
@@ -64,6 +173,7 @@ class InitOpts(BasicOpts):
             "bg_color": bg_color,
             "js_host": js_host,
             "animationOpts": animation_opts,
+            "ariaOpts": aria_opts,
         }
 
 
@@ -466,14 +576,16 @@ class VisualMapOpts(BasicOpts):
         range_text: Optional[Sequence] = None,
         range_color: Optional[Sequence[str]] = None,
         range_size: Optional[Sequence[int]] = None,
-        range_opacity: Optional[Numeric] = None,
+        range_opacity: Union[Numeric, Sequence[Numeric]] = None,
         orient: str = "vertical",
         pos_left: Optional[str] = None,
         pos_right: Optional[str] = None,
         pos_top: Optional[str] = None,
         pos_bottom: Optional[str] = None,
+        padding: Union[int, Sequence[int]] = 5,
         split_number: int = 5,
         series_index: Union[Numeric, Sequence, None] = None,
+        is_hover_link: bool = True,
         dimension: Optional[Numeric] = None,
         is_calculable: bool = True,
         is_piecewise: bool = False,
@@ -519,11 +631,13 @@ class VisualMapOpts(BasicOpts):
             "splitNumber": split_number,
             "dimension": dimension,
             "seriesIndex": series_index,
+            "hoverLink": is_hover_link,
             "orient": orient,
             "left": pos_left,
             "top": pos_top,
             "bottom": pos_bottom,
             "right": pos_right,
+            "padding": padding,
             "showLabel": True,
             "itemWidth": item_width,
             "itemHeight": item_height,
@@ -970,6 +1084,8 @@ class CalendarYearLabelOpts(BasicOpts):
 class CalendarOpts(BasicOpts):
     def __init__(
         self,
+        z_level: Numeric = 0,
+        z: Numeric = 2,
         pos_left: Optional[str] = None,
         pos_top: Optional[str] = None,
         pos_right: Optional[str] = None,
@@ -984,8 +1100,11 @@ class CalendarOpts(BasicOpts):
         daylabel_opts: Union[CalendarDayLabelOpts, dict, None] = None,
         monthlabel_opts: Union[CalendarMonthLabelOpts, dict, None] = None,
         yearlabel_opts: Union[CalendarYearLabelOpts, dict, None] = None,
+        is_silent: bool = False,
     ):
         self.opts: dict = {
+            "zlevel": z_level,
+            "z": z,
             "left": pos_left,
             "top": pos_top,
             "right": pos_right,
@@ -1000,6 +1119,7 @@ class CalendarOpts(BasicOpts):
             "dayLabel": daylabel_opts,
             "monthLabel": monthlabel_opts,
             "yearLabel": yearlabel_opts,
+            "silent": is_silent,
         }
 
 
@@ -1153,3 +1273,13 @@ class PolarOpts(BasicOpts):
         tooltip_opts: TooltipOpts = None,
     ):
         self.opts: dict = {"center": center, "radius": radius, "tooltip": tooltip_opts}
+
+
+class DatasetTransformOpts(BasicOpts):
+    def __init__(
+        self,
+        type_: str = "filter",
+        config: Optional[dict] = None,
+        is_print: bool = False,
+    ):
+        self.opts: dict = {"type": type_, "config": config, "print": is_print}

@@ -90,6 +90,10 @@ class Timeline(Base):
                 "color": chart.options.get("color"),
                 "graphic": chart.options.get("graphic"),
                 "bmap": chart.options.get("bmap"),
+                "toolbox": chart.options.get("toolbox"),
+                "dataset": chart.options.get("dataset"),
+                "radiusAxis": chart.options.get("radiusAxis"),
+                "angleAxis": chart.options.get("angleAxis"),
             }
         )
         self.__check_components(chart)

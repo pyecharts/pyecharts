@@ -17,6 +17,7 @@ class Chart(Base):
             "#5470c6 #91cc75 #fac858 #ee6666 #73c0de #3ba272 #fc8452 #9a60b4 "
             "#ea7ccc"
         ).split()
+        self.default_color_n = len(self.colors)
         if init_opts.opts.get("theme") == ThemeType.WHITE:
             self.options.update(color=self.colors)
         self.options.update(
@@ -167,12 +168,20 @@ class Chart(Base):
         source: types.Union[types.Sequence, types.JSFunc] = None,
         dimensions: types.Optional[types.Sequence] = None,
         source_header: types.Optional[bool] = None,
+        transform: types.Optional[Sequence[opts.DatasetTransformOpts]] = None,
+        from_dataset_index: types.Optional[types.Numeric] = None,
+        from_dataset_id: types.Optional[types.Numeric] = None,
+        from_transform_result: types.Optional[types.Numeric] = None,
     ):
         self.options.update(
             dataset={
                 "source": source,
                 "dimensions": dimensions,
                 "sourceHeader": source_header,
+                "transform": transform,
+                "fromDatasetIndex": from_dataset_index,
+                "fromDatasetId": from_dataset_id,
+                "fromTransformResult": from_transform_result,
             }
         )
         return self

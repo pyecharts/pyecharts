@@ -39,6 +39,7 @@ class Base(ChartMixin):
         self.js_dependencies: utils.OrderedSet = utils.OrderedSet("echarts")
         self.options.update(backgroundColor=_opts.get("bg_color"))
         self.options.update(_opts.get("animationOpts", AnimationOpts()).opts)
+        self.options.update(aria=_opts.get("ariaOpts"))
         self._is_geo_chart: bool = False
 
     def get_options(self) -> dict:
