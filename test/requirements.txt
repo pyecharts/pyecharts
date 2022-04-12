@@ -1,8 +1,5 @@
 nose
 codecov
 coverage
-jupyter==1.0.0
 flake8
 mccabe
-notebook==6.4.8
-jupyter_console==6.4.0
