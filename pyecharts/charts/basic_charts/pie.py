@@ -33,7 +33,7 @@ class Pie(Chart):
         if self.options.get("dataset") is not None:
             data = None
             self.options.get("legend")[0].update(
-                data=[d[0] for d in self.options.get("dataset").get("source")][1:]
+                data=[d[0] for d in self.options.get("dataset")[0].get("source")][1:]
             )
         elif isinstance(data_pair[0], opts.PieItem):
             data = data_pair

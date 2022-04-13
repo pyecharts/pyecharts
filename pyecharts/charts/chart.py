@@ -176,17 +176,30 @@ class Chart(Base):
         from_dataset_id: types.Optional[types.Numeric] = None,
         from_transform_result: types.Optional[types.Numeric] = None,
     ):
-        self.options.update(
-            dataset={
-                "source": source,
-                "dimensions": dimensions,
-                "sourceHeader": source_header,
-                "transform": transform,
-                "fromDatasetIndex": from_dataset_index,
-                "fromDatasetId": from_dataset_id,
-                "fromTransformResult": from_transform_result,
-            }
-        )
+        if self.options.get("dataset") is not None:
+            self.options.get("dataset").append(
+                {
+                    "source": source,
+                    "dimensions": dimensions,
+                    "sourceHeader": source_header,
+                    "transform": transform,
+                    "fromDatasetIndex": from_dataset_index,
+                    "fromDatasetId": from_dataset_id,
+                    "fromTransformResult": from_transform_result,
+                }
+            )
+        else:
+            self.options.update(
+                dataset=[{
+                    "source": source,
+                    "dimensions": dimensions,
+                    "sourceHeader": source_header,
+                    "transform": transform,
+                    "fromDatasetIndex": from_dataset_index,
+                    "fromDatasetId": from_dataset_id,
+                    "fromTransformResult": from_transform_result,
+                }]
+            )
         return self
 
 

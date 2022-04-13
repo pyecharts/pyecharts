@@ -664,13 +664,17 @@ class TooltipOpts(BasicOpts):
         is_enterable: bool = False,
         is_confine: bool = False,
         is_append_to_body: bool = False,
+        transition_duration: Numeric = 0.4,
         position: Union[str, Sequence, JSFunc] = None,
         formatter: Optional[JSFunc] = None,
+        value_formatter: Optional[JSFunc] = None,
         background_color: Optional[str] = None,
         border_color: Optional[str] = None,
         border_width: Numeric = 0,
         padding: Numeric = 5,
         textstyle_opts: TextStyleOpts = TextStyleOpts(font_size=14),
+        extra_css_text: Optional[str] = None,
+        order: str = "seriesAsc",
     ):
         self.opts: dict = {
             "show": is_show,
@@ -684,13 +688,17 @@ class TooltipOpts(BasicOpts):
             "enterable": is_enterable,
             "confine": is_confine,
             "appendToBody": is_append_to_body,
+            "transitionDuration": transition_duration,
             "position": position,
             "formatter": formatter,
+            "valueFormatter": value_formatter,
             "textStyle": textstyle_opts,
             "backgroundColor": background_color,
             "borderColor": border_color,
             "borderWidth": border_width,
             "padding": padding,
+            "extraCssText": extra_css_text,
+            "order": order,
         }
 
 
@@ -736,12 +744,14 @@ class AxisPointerOpts(BasicOpts):
         is_show: bool = False,
         link: Sequence[dict] = None,
         type_: str = "line",
+        is_snap: Optional[bool] = False,
         label: Union[LabelOpts, dict, None] = None,
         linestyle_opts: Union[LineStyleOpts, dict, None] = None,
     ):
         self.opts: dict = {
             "show": is_show,
             "type": type_,
+            "snap": is_snap,
             "link": link,
             "label": label,
             "lineStyle": linestyle_opts,
@@ -826,6 +836,10 @@ class GridOpts(BasicOpts):
         background_color: str = "transparent",
         border_color: str = "#ccc",
         border_width: Numeric = 1,
+        shadow_blur: Optional[Numeric] = None,
+        shadow_color: Optional[str] = None,
+        shadow_offset_x: Numeric = 0,
+        shadow_offset_y: Numeric = 0,
         tooltip_opts: Union[TooltipOpts, dict, None] = None,
     ):
         self.opts: dict = {
@@ -842,6 +856,10 @@ class GridOpts(BasicOpts):
             "backgroundColor": background_color,
             "borderColor": border_color,
             "borderWidth": border_width,
+            "shadowBlur": shadow_blur,
+            "shadowColor": shadow_color,
+            "shadowOffsetX": shadow_offset_x,
+            "shadowOffsetY": shadow_offset_y,
             "tooltip": tooltip_opts,
         }
 
@@ -930,6 +948,11 @@ class ParallelOpts(BasicOpts):
         pos_bottom: str = "10%",
         pos_top: str = "20%",
         layout: Optional[str] = None,
+        is_axis_expandable: bool = False,
+        axis_expand_center: Optional[Numeric] = None,
+        axis_expand_count: Numeric = 0,
+        axis_expand_width: Numeric = 50,
+        axis_expand_trigger_on: str = "click",
     ):
         self.opts: dict = {
             "left": pos_left,
@@ -937,6 +960,11 @@ class ParallelOpts(BasicOpts):
             "bottom": pos_bottom,
             "top": pos_top,
             "layout": layout,
+            "axisExpandable": is_axis_expandable,
+            "axisExpandCenter": axis_expand_center,
+            "axisExpandCount": axis_expand_count,
+            "axisExpandWidth": axis_expand_width,
+            "axisExpandTriggerOn": axis_expand_trigger_on,
         }
 
 
@@ -944,7 +972,9 @@ class ParallelAxisOpts(BasicOpts):
     def __init__(
         self,
         dim: Numeric,
-        name: str,
+        parallel_index: Numeric = 0,
+        is_realtime: bool = True,
+        name: Optional[str] = None,
         data: Sequence = None,
         type_: Optional[str] = None,
         name_location: str = "end",
@@ -954,12 +984,18 @@ class ParallelAxisOpts(BasicOpts):
         min_: Union[str, Numeric, None] = None,
         max_: Union[str, Numeric, None] = None,
         is_scale: bool = False,
+        log_base: Numeric = 10,
+        is_silent: bool = False,
+        is_trigger_event: bool = False,
         axisline_opts: Union[AxisLineOpts, dict, None] = None,
         axistick_opts: Union[AxisTickOpts, dict, None] = None,
         axislabel_opts: Union[LabelOpts, dict, None] = None,
+        minor_tick_opts: Union[MinorTickOpts, dict, None] = None,
     ):
         self.opts: dict = {
             "dim": dim,
+            "parallelIndex": parallel_index,
+            "realtime": is_realtime,
             "name": name,
             "data": data,
             "type": type_,
@@ -970,9 +1006,13 @@ class ParallelAxisOpts(BasicOpts):
             "min": min_,
             "max": max_,
             "scale": is_scale,
+            "logBase": log_base,
+            "silent": is_silent,
+            "triggerEvent": is_trigger_event,
             "axisLine": axisline_opts,
             "axisTick": axistick_opts,
             "axisLabel": axislabel_opts,
+            "minorTick": minor_tick_opts,
         }
 
 
@@ -1180,16 +1220,25 @@ class RadiusAxisOpts(BasicOpts):
         type_: Optional[str] = None,
         name: Optional[str] = None,
         name_location: Optional[str] = None,
+        name_gap: Numeric = 15,
+        name_rotate: Optional[Numeric] = None,
+        is_inverse: bool = False,
         min_: Union[str, Numeric, None] = None,
         max_: Union[str, Numeric, None] = None,
         is_scale: bool = False,
+        split_number: Numeric = 5,
         interval: Optional[Numeric] = None,
+        min_interval: Numeric = 0,
+        max_interval: Optional[Numeric] = None,
         splitline_opts: Union[SplitLineOpts, dict, None] = None,
         splitarea_opts: Union[SplitAreaOpts, dict, None] = None,
         axistick_opts: Union[AxisTickOpts, dict, None] = None,
         axisline_opts: Union[AxisLineOpts, dict, None] = None,
         axislabel_opts: Union[LabelOpts, dict, None] = None,
+        minor_tick_opts: Union[MinorTickOpts, dict, None] = None,
+        minor_split_line_opts: Union[MinorSplitLineOpts, dict, None] = None,
         z: Optional[int] = None,
+        z_level: Optional[int] = None,
     ):
         _data = []
         if data:
@@ -1205,16 +1254,25 @@ class RadiusAxisOpts(BasicOpts):
             "boundaryGap": boundary_gap,
             "name": name,
             "nameLocation": name_location,
+            "nameGap": name_gap,
+            "nameRotate": name_rotate,
+            "inverse": is_inverse,
             "min": min_,
             "max": max_,
             "scale": is_scale,
+            "splitNumber": split_number,
             "interval": interval,
+            "minInterval": min_interval,
+            "maxInterval": max_interval,
             "splitLine": splitline_opts,
             "splitArea": splitarea_opts,
             "axisTick": axistick_opts,
             "axisLine": axisline_opts,
             "axisLabel": axislabel_opts,
+            "minorTick": minor_tick_opts,
+            "minorSplitLine": minor_split_line_opts,
             "z": z,
+            "zlevel": z_level,
         }
 
 
@@ -1223,7 +1281,7 @@ class AngleAxisOpts(BasicOpts):
         self,
         polar_index: Optional[int] = None,
         data: Optional[Sequence[Union[AngleAxisItem, Numeric, dict, str]]] = None,
-        start_angle: Optional[Numeric] = None,
+        start_angle: Optional[Numeric] = 90,
         is_clockwise: bool = False,
         boundary_gap: Union[bool, Sequence, None] = None,
         type_: Optional[str] = None,
@@ -1236,7 +1294,10 @@ class AngleAxisOpts(BasicOpts):
         axisline_opts: Union[AxisLineOpts, dict, None] = None,
         axistick_opts: Union[AxisTickOpts, dict, None] = None,
         axislabel_opts: Union[LabelOpts, dict, None] = None,
+        minor_tick_opts: Union[MinorTickOpts, dict, None] = None,
+        minor_split_line_opts: Union[MinorSplitLineOpts, dict, None] = None,
         z: Optional[int] = None,
+        z_level: Optional[int] = None,
     ):
         _data = []
         if data:
@@ -1261,7 +1322,10 @@ class AngleAxisOpts(BasicOpts):
             "axisLine": axisline_opts,
             "axisTick": axistick_opts,
             "axisLabel": axislabel_opts,
+            "minorTick": minor_tick_opts,
+            "minorSplitLine": minor_split_line_opts,
             "z": z,
+            "zlevel": z_level,
         }
 
 

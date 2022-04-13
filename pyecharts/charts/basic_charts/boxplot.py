@@ -16,7 +16,9 @@ class Boxplot(RectChart):
     def add_yaxis(
         self,
         series_name: str,
-        y_axis: types.Sequence[types.Union[opts.BoxplotItem, dict]],
+        y_axis: types.Optional[
+            types.Sequence[types.Union[opts.BoxplotItem, dict]]
+        ] = None,
         *,
         chart_type: str = ChartType.BOXPLOT,
         is_selected: bool = True,
