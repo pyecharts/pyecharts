@@ -246,7 +246,7 @@ class RectChart(Chart):
         self.options.get("series").extend(chart.options.get("series"))
         # to merge colors of chart
         for c in chart.colors[:len(chart.colors) - self.default_color_n]:
-            self.colors.insert(len(self.colors)-self.default_color_n, c)
+            self.colors.insert(len(self.colors) - self.default_color_n, c)
         return self
 
 

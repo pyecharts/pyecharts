@@ -36,7 +36,7 @@ def test_animation_options_remove_none():
 
 
 def test_init_options_remove_none():
-    option = InitOpts(animation_opts={})
+    option = InitOpts(animation_opts={}, aria_opts={})
     expected = {
         "animationOpts": {},
         "height": "500px",
@@ -44,6 +44,7 @@ def test_init_options_remove_none():
         "renderer": "canvas",
         "theme": "white",
         "width": "900px",
+        "ariaOpts": {},
     }
     assert_equal(expected, remove_key_with_none_value(option.opts))
 
@@ -118,6 +119,8 @@ def test_data_zoom_options_remove_none():
         "start": 20,
         "type": "slider",
         "zoomLock": False,
+        "showDetail": True,
+        "showDataShadow": True,
     }
     assert_equal(expected, remove_key_with_none_value(option.opts))
 
@@ -149,6 +152,8 @@ def test_visual_map_options_remove_none():
         "inverse": False,
         "splitNumber": 5,
         "type": "continuous",
+        "hoverLink": True,
+        "padding": 5,
         "borderWidth": 0,
     }
     assert_equal(expected, remove_key_with_none_value(option.opts))
@@ -166,6 +171,11 @@ def test_tool_tip_options_remove_none():
         "showContent": True,
         "showDelay": 0,
         "trigger": "item",
+        "enterable": False,
+        "confine": False,
+        "appendToBody": False,
+        "transitionDuration": 0.4,
+        "order": "seriesAsc",
         "triggerOn": "mousemove|click",
     }
     assert_equal(expected, remove_key_with_none_value(option.opts))
