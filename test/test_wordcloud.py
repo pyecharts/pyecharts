@@ -3,6 +3,8 @@ from unittest.mock import patch
 from nose.tools import assert_equal
 
 from pyecharts.charts import WordCloud
+from pyecharts.commons.utils import JsCode
+from pyecharts.exceptions import WordCloudMaskImageException
 
 words = [
     ("Sam S Club", 10000),
@@ -19,6 +21,41 @@ words = [
 @patch("pyecharts.render.engine.write_utf8_html_file")
 def test_wordcloud_base(fake_writer):
     c = WordCloud().add("", words, word_size_range=[20, 100])
+    c.render()
+    _, content = fake_writer.call_args[0]
+    assert_equal(c.theme, "white")
+    assert_equal(c.renderer, "canvas")
+
+
+@patch("pyecharts.render.engine.write_utf8_html_file")
+def test_wordcloud_shapes(fake_writer):
+    c = WordCloud().add("", words, word_size_range=[20, 100], shape="cardioid")
+    c.render()
+    _, content = fake_writer.call_args[0]
+    assert_equal(c.theme, "white")
+    assert_equal(c.renderer, "canvas")
+
+
+def test_wordcloud_error_url():
+    try:
+        c = WordCloud().add(
+            "", words, word_size_range=[20, 100], mask_image="error images_url"
+        )
+        c.render()
+    except WordCloudMaskImageException as err:
+        assert_equal(type(err), WordCloudMaskImageException)
+        assert err.__str__() != ""
+
+
+@patch("pyecharts.render.engine.write_utf8_html_file")
+def test_wordcloud_mask_image(fake_writer):
+    c = WordCloud().add(
+        "",
+        words,
+        word_size_range=[20, 100],
+        shape="cardioid",
+        mask_image="fixtures/img.png",
+    )
     c.render()
     _, content = fake_writer.call_args[0]
     assert_equal(c.theme, "white")

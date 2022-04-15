@@ -1,9 +1,16 @@
 import os
+import urllib.error
 from unittest.mock import patch
 
 from nose.tools import assert_equal, raises
 
-from pyecharts.datasets import EXTRA, FuzzyDict, register_url
+from pyecharts.datasets import (
+    EXTRA,
+    FuzzyDict,
+    register_url,
+    register_files,
+    register_coords,
+)
 
 
 @patch("pyecharts.datasets.urllib.request.urlopen")
@@ -25,6 +32,13 @@ def test_register_url(fake):
         )
 
 
+def test_register_url_error():
+    try:
+        register_url("http://127.0.0.1")
+    except urllib.error.HTTPError as err:
+        assert_equal(type(err), urllib.error.HTTPError)
+
+
 def test_fuzzy_search_dict():
     fd = FuzzyDict()
     fd.update({"我是北京市": [1, 2]})
@@ -36,3 +50,11 @@ def test_fuzzy_search_key_error():
     fd = FuzzyDict()
     fd.cutoff = 0.9
     _ = fd["我是北京"]
+
+
+def test_register_files():
+    register_files(asset_files={"x": 1})
+
+
+def test_register_coords():
+    register_coords(coords={"深圳": [113, 23]})

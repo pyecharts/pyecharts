@@ -15,3 +15,9 @@ def test_display_javascript():
     obj = Javascript(js_content)
     assert_equal(obj.data, js_content)
     assert_equal(obj._repr_javascript_(), js_content)
+
+
+def test_display_javascript_v1():
+    js_content = "console.log('hello world')"
+    obj = Javascript(js_content, lib="test lib", css="test css")
+    assert_equal(obj.data, js_content)

@@ -36,6 +36,15 @@ def test_tree_base(fake_writer):
 
 
 @patch("pyecharts.render.engine.write_utf8_html_file")
+def test_tree_collapse_interval(fake_writer):
+    c = Tree().add("", TEST_DATA, collapse_interval=1)
+    c.render()
+    _, content = fake_writer.call_args[0]
+    assert_equal(c.theme, "white")
+    assert_equal(c.renderer, "canvas")
+
+
+@patch("pyecharts.render.engine.write_utf8_html_file")
 def test_tree_options(fake_writer):
     c = Tree().add(
         series_name="tree",
