@@ -91,7 +91,9 @@ def save_as(image_data: bytes, output_name: str, file_type: str):
         m.load()
         color = (255, 255, 255)
         b = Image.new("RGB", m.size, color)
-        b.paste(m, mask=m.split()[3])
+        # BUG for Mac:
+        #   b.paste(m, mask=m.split()[3])
+        b.paste(m)
         b.save(output_name, file_type, quality=100)
     except ModuleNotFoundError:
         raise Exception(f"Please install PIL for {file_type} image type")

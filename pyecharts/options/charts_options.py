@@ -1066,6 +1066,30 @@ class Map3DViewControlOpts(BasicOpts):
         }
 
 
+class GlobeLayersOpts(BasicOpts):
+    def __init__(
+        self,
+        is_show: bool = True,
+        type_: str = "overlay",
+        name: Optional[str] = None,
+        blend_to: str = "albedo",
+        intensity: Numeric = 1,
+        shading: str = "lambert",
+        distance: Optional[Numeric] = None,
+        texture: Union[JSFunc, None] = None,
+    ):
+        self.opts: dict = {
+            "show": is_show,
+            "type": type_,
+            "name": name,
+            "blendTo": blend_to,
+            "intensity": intensity,
+            "shading": shading,
+            "distance": distance,
+            "texture": texture,
+        }
+
+
 class BarBackgroundStyleOpts(BasicOpts):
     def __init__(
         self,

@@ -1,3 +1,4 @@
+from ... import options as opts
 from ... import types
 from ...charts.chart import ThreeAxisChart
 from ...options import InitOpts

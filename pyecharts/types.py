@@ -11,7 +11,7 @@ from typing import (
 )
 
 from . import options as opts
-from .options.charts_options import BaseGraphic
+from .options.charts_options import BaseGraphic, GlobeLayersOpts
 from .options.series_options import JsCode, JSFunc, Numeric
 
 Init = Union[opts.InitOpts, dict]
@@ -31,6 +31,8 @@ GaugeDetail = Union[opts.GaugeDetailOpts, dict, None]
 GaugePointer = Union[opts.GaugePointerOpts, dict, None]
 _GraphicType = Union[BaseGraphic, dict]
 Graphic = Union[_GraphicType, Sequence[_GraphicType], None]
+_GlobeLayersType = Union[GlobeLayersOpts, dict]
+GlobeLayers = Union[_GlobeLayersType, Sequence[_GlobeLayersType], None]
 ItemStyle = Union[opts.ItemStyleOpts, dict, None]
 Map3DColorMaterial = Union[opts.Map3DColorMaterialOpts, dict, None]
 Map3DLabel = Union[opts.Map3DLabelOpts, dict, None]

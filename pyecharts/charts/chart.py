@@ -259,8 +259,66 @@ class Chart3D(Chart):
         init_opts.renderer = RenderType.CANVAS
         super().__init__(init_opts)
         self.js_dependencies.add("echarts-gl")
-        self.options.update(visualMap=opts.VisualMapOpts().opts)
         self._3d_chart_type: Optional[str] = None  # 3d chart type,don't use it directly
+
+    def add_globe(
+        self,
+        is_show: bool = True,
+        globe_radius: types.Numeric = 100,
+        globe_outer_radius: types.Numeric = 150,
+        environment: str = "auto",
+        base_texture: types.Union[str, types.JsCode, None] = None,
+        height_texture: types.Union[str, types.JsCode, None] = None,
+        displacement_texture: types.Union[str, types.JsCode, None] = None,
+        displacement_scale: types.Numeric = 0,
+        displacement_quality: str = "medium",
+        shading: types.Optional[str] = None,
+        realistic_material_opts: types.Optional[types.Map3DRealisticMaterial] = None,
+        lambert_material_opts: types.Optional[types.Map3DLambertMaterial] = None,
+        color_material_opts: types.Optional[types.Map3DColorMaterial] = None,
+        light_opts: types.Optional[types.Map3DLight] = None,
+        post_effect_opts: types.Optional[types.Map3DPostEffect] = None,
+        is_enable_super_sampling: types.Union[str, bool] = "auto",
+        view_control_opts: types.Optional[types.Map3DViewControl] = None,
+        layers: types.Optional[types.GlobeLayers] = None,
+        z_level: types.Numeric = -10,
+        pos_left: types.Union[str, types.Numeric] = "auto",
+        pos_top: types.Union[str, types.Numeric] = "auto",
+        pos_right: types.Union[str, types.Numeric] = "auto",
+        pos_bottom: types.Union[str, types.Numeric] = "auto",
+        width: types.Union[str, types.Numeric] = "auto",
+        height: types.Union[str, types.Numeric] = "auto",
+    ):
+        self.options.update(
+            globe={
+                "show": is_show,
+                "globeRadius": globe_radius,
+                "globeOuterRadius": globe_outer_radius,
+                "environment": environment,
+                "baseTexture": base_texture,
+                "heightTexture": height_texture,
+                "displacementTexture": displacement_texture,
+                "displacementScale": displacement_scale,
+                "displacementQuality": displacement_quality,
+                "shading": shading,
+                "realisticMaterial": realistic_material_opts,
+                "lambertMaterial": lambert_material_opts,
+                "colorMaterial": color_material_opts,
+                "light": light_opts,
+                "postEffect": post_effect_opts,
+                "temporalSuperSampling": {"enable": is_enable_super_sampling},
+                "viewControl": view_control_opts,
+                "layers": layers,
+                "zlevel": z_level,
+                "left": pos_left,
+                "top": pos_top,
+                "right": pos_right,
+                "bottom": pos_bottom,
+                "width": width,
+                "height": height,
+            }
+        )
+        return self
 
 
 class ThreeAxisChart(Chart3D):
@@ -271,11 +329,17 @@ class ThreeAxisChart(Chart3D):
         shading: Optional[str] = None,
         itemstyle_opts: types.ItemStyle = None,
         label_opts: types.Label = opts.LabelOpts(is_show=False),
-        xaxis3d_opts: types.Axis3D = opts.Axis3DOpts(type_="value"),
-        yaxis3d_opts: types.Axis3D = opts.Axis3DOpts(type_="value"),
-        zaxis3d_opts: types.Axis3D = opts.Axis3DOpts(type_="value"),
+        grid_3d_index: types.Numeric = 0,
+        xaxis3d_opts: types.Axis3D = opts.Axis3DOpts(type_="value", name="X"),
+        yaxis3d_opts: types.Axis3D = opts.Axis3DOpts(type_="value", name="Y"),
+        zaxis3d_opts: types.Axis3D = opts.Axis3DOpts(type_="value", name="Z"),
         grid3d_opts: types.Grid3D = opts.Grid3DOpts(),
         encode: types.Union[types.JSFunc, dict, None] = None,
+        is_parametric: types.Optional[bool] = None,
+        is_show_wire_frame: types.Optional[bool] = None,
+        wire_frame_line_style_opts: types.Optional[opts.LineStyleOpts] = None,
+        equation: types.Optional[dict] = None,
+        parametric_equation: types.Optional[dict] = None,
     ):
         self.options.get("legend")[0].get("data").append(series_name)
         self.options.update(
@@ -285,15 +349,36 @@ class ThreeAxisChart(Chart3D):
             grid3D=grid3d_opts,
         )
 
-        self.options.get("series").append(
-            {
-                "type": self._3d_chart_type,
-                "name": series_name,
-                "data": data,
-                "label": label_opts,
-                "shading": shading,
-                "itemStyle": itemstyle_opts,
-                "encode": encode,
-            }
-        )
+        if self._3d_chart_type == "surface":
+            self.options.get("series").append(
+                {
+                    "type": self._3d_chart_type,
+                    "name": series_name,
+                    "data": data,
+                    "label": label_opts,
+                    "shading": shading,
+                    "grid3DIndex": grid_3d_index,
+                    "itemStyle": itemstyle_opts,
+                    "parametric": is_parametric,
+                    "wireframe": {
+                        "show": is_show_wire_frame,
+                        "lineStyle": wire_frame_line_style_opts,
+                    },
+                    "equation": equation,
+                    "parametricEquation": parametric_equation
+                }
+            )
+        else:
+            self.options.get("series").append(
+                {
+                    "type": self._3d_chart_type,
+                    "name": series_name,
+                    "data": data,
+                    "label": label_opts,
+                    "shading": shading,
+                    "grid3DIndex": grid_3d_index,
+                    "itemStyle": itemstyle_opts,
+                    "encode": encode,
+                }
+            )
         return self

@@ -36,6 +36,7 @@ from ..charts.composite_charts.timeline import Timeline
 # 3d charts
 from ..charts.three_axis_charts.bar3D import Bar3D
 from ..charts.three_axis_charts.line3D import Line3D
+from ..charts.three_axis_charts.lines3D import Lines3D
 from ..charts.three_axis_charts.map3D import Map3D
 from ..charts.three_axis_charts.map_globe import MapGlobe
 from ..charts.three_axis_charts.scatter3D import Scatter3D
