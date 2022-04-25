@@ -231,16 +231,6 @@ pyecharts 主要由以下几位开发者开发维护
 
 更多贡献者信息可以访问 [pyecharts/graphs/contributors](https://github.com/pyecharts/pyecharts/graphs/contributors)
 
-## 💌 捐赠
-
-开发和维护 pyecharts 花费了我巨大的心力，如果你觉得项目帮助到您，请认真考虑请作者喝一杯咖啡 😄
-
-| 微信二维码 | 支付宝二维码 |
-| -------- | ---------- |
-| <img src="https://assets.pyecharts.org/images/wechat-code.png" width=220px alt="wechat-code"> | <img src="https://assets.pyecharts.org/images/alipay-code.png" width=220px alt="alipay-code"> |
-
-如果其他开发者帮助到了您，也可以请他们喝咖啡 [捐赠通道](http://pyecharts.org/#/zh-cn/donate)
-
 ## 💡 贡献
 
 期待能有更多的开发者参与到 pyecharts 的开发中来，我们会保证尽快 Reivew PR 并且及时回复。但提交 PR 请确保
