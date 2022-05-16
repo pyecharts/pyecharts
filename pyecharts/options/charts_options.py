@@ -1305,3 +1305,21 @@ class TimelineControlStyle(BasicOpts):
             "borderColor": border_color,
             "borderWidth": border_width,
         }
+
+
+class TabChartGlobalOpts(BasicOpts):
+    def __init__(
+            self,
+            is_enable: bool = False,
+            tab_base_css: Optional[dict] = None,
+            tab_button_css: Optional[dict] = None,
+            tab_button_hover_css: Optional[dict] = None,
+            tab_button_active_css: Optional[dict] = None,
+    ):
+        self.opts: dict = {
+            "enable": is_enable,
+            "base": tab_base_css,
+            "button_base": tab_button_css,
+            "button_hover": tab_button_hover_css,
+            "button_active": tab_button_active_css,
+        }

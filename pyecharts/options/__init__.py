@@ -45,6 +45,7 @@ from .charts_options import (
     SankeyLevelsOpts,
     ScatterItem,
     SunburstItem,
+    TabChartGlobalOpts,
     ThemeRiverItem,
     TimelineCheckPointerStyle,
     TimelineControlStyle,

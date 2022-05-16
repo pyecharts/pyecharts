@@ -32,12 +32,14 @@ class Base(ChartMixin):
         self.page_title = _opts.get("page_title", CurrentConfig.PAGE_TITLE)
         self.theme = _opts.get("theme", ThemeType.WHITE)
         self.chart_id = _opts.get("chart_id") or uuid.uuid4().hex
+        self.fill_bg = _opts.get("fill_bg", False)
+        self.bg_color = _opts.get("bg_color")
 
         self.options: dict = {}
         self.js_host: str = _opts.get("js_host") or CurrentConfig.ONLINE_HOST
         self.js_functions: utils.OrderedSet = utils.OrderedSet()
         self.js_dependencies: utils.OrderedSet = utils.OrderedSet("echarts")
-        self.options.update(backgroundColor=_opts.get("bg_color"))
+        self.options.update(backgroundColor=self.bg_color)
         self.options.update(_opts.get("animationOpts", AnimationOpts()).opts)
         self.options.update(aria=_opts.get("ariaOpts"))
         self._is_geo_chart: bool = False

@@ -1,6 +1,9 @@
 {%- macro render_chart_content(c) -%}
     <div id="{{ c.chart_id }}" class="chart-container" style="width:{{ c.width }}; height:{{ c.height }};"></div>
     <script>
+        {% if c._is_tab_chart %}
+            document.getElementById('{{ c.chart_id }}').style.width = document.getElementById('{{ c.chart_id }}').parentNode.clientWidth + 'px';
+        {% endif %}
         var chart_{{ c.chart_id }} = echarts.init(
             document.getElementById('{{ c.chart_id }}'), '{{ c.theme }}', {renderer: '{{ c.renderer }}'});
         {% for js in c.js_functions.items %}
@@ -119,9 +122,11 @@
         }
 
         .chart-container {
+            display: block;
+        }
+
+        .chart-container:nth-child(n+2) {
             display: none;
-            padding: 6px 12px;
-            border-top: none;
         }
     </style>
 {%- endmacro %}

@@ -159,6 +159,7 @@ class InitOpts(BasicOpts):
         page_title: str = CurrentConfig.PAGE_TITLE,
         theme: str = ThemeType.WHITE,
         bg_color: Union[str, dict] = None,
+        is_fill_bg_color: bool = False,
         js_host: str = "",
         animation_opts: Union[AnimationOpts, dict] = AnimationOpts(),
         aria_opts: Union[AriaOpts, dict] = AriaOpts()
@@ -171,6 +172,7 @@ class InitOpts(BasicOpts):
             "page_title": page_title,
             "theme": theme,
             "bg_color": bg_color,
+            "fill_bg": is_fill_bg_color,
             "js_host": js_host,
             "animationOpts": animation_opts,
             "ariaOpts": aria_opts,
