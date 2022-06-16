@@ -835,6 +835,7 @@ class TreeMapItemStyleOpts(BasicOpts):
 class TreeMapLevelsOpts(BasicOpts):
     def __init__(
         self,
+        color: Union[str, Sequence] = None,
         color_alpha: Union[Numeric, Sequence] = None,
         color_saturation: Union[Numeric, Sequence] = None,
         color_mapping_by: str = "index",
@@ -843,6 +844,7 @@ class TreeMapLevelsOpts(BasicOpts):
         upper_label_opts: Union[LabelOpts, dict, None] = None,
     ):
         self.opts: dict = {
+            "color": color,
             "colorAlpha": color_alpha,
             "colorSaturation": color_saturation,
             "colorMappingBy": color_mapping_by,
