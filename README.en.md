@@ -142,7 +142,7 @@ make_snapshot(bar.render(), "bar.png")
 <img src="https://user-images.githubusercontent.com/19553554/35082279-e111743c-fc53-11e7-9362-580160593715.gif" width="33%" alt="timeline"/>
 </div>
 
-For more documentaiton, please visit
+For more documentation, please visit
 
 * [Chinese documentation](https://pyecharts.org/#/zh-cn/)
 * [English Documentation](https://pyecharts.org/#/en-us/)
