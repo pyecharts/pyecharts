@@ -90,7 +90,7 @@ class WordCloud(Chart):
         data = []
         for n, v in data_pair:
             data.append(
-                {"name": n, "value": v, "textStyle": {"normal": {"color": gen_color()}}}
+                {"name": n, "value": v, "textStyle": {"color": gen_color()}}
             )
 
         word_size_range = word_size_range or (12, 60)
