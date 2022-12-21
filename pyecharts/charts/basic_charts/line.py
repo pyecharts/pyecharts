@@ -49,8 +49,11 @@ class Line(RectChart):
         else:
             # 合并 x 和 y 轴数据，避免当 X 轴的类型设置为 'value' 的时候，
             # X、Y 轴均显示 Y 轴数据
-            xaxis_index = xaxis_index or 0
-            data = [list(z) for z in zip(self.options["xAxis"][xaxis_index]['data'], y_axis)]
+            try:
+                xaxis_index = xaxis_index or 0
+                data = [list(z) for z in zip(self.options["xAxis"][xaxis_index]['data'], y_axis)]
+            except IndexError:
+                data = [list(z) for z in zip(self._xaxis_data, y_axis)]
 
         self.options.get("series").append(
             {

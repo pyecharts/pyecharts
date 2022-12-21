@@ -152,7 +152,8 @@ class Chart(Base):
         if isinstance(legend_opts, opts.LegendOpts):
             legend_opts = legend_opts.opts
         for _s in self.options["legend"]:
-            _s.update(legend_opts)
+            # _s.update(legend_opts)
+            _s.update(**{k: v for k, v in legend_opts.items() if v is not None})
 
         if xaxis_opts and self.options.get("xAxis", None):
             if isinstance(xaxis_opts, opts.AxisOpts):

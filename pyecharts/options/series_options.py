@@ -90,7 +90,7 @@ class LabelOpts(BasicOpts):
     def __init__(
         self,
         is_show: bool = True,
-        position: Union[str, Sequence] = "top",
+        position: Optional[Union[str, Sequence]] = None,
         color: Optional[str] = None,
         distance: Union[Numeric, Sequence, None] = None,
         font_size: Optional[Numeric] = None,

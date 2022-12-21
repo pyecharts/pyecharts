@@ -3,6 +3,7 @@ import copy
 from ... import options as opts
 from ... import types
 from ...globals import ThemeType
+from ..basic_charts.radar import Radar
 from ..chart import Base, Chart, RectChart
 
 
@@ -75,6 +76,8 @@ class Grid(Base):
             if isinstance(chart, RectChart):
                 self.options.get("xAxis").extend(chart.options.get("xAxis"))
                 self.options.get("yAxis").extend(chart.options.get("yAxis"))
+            if isinstance(chart, Radar):
+                self.options.get("radar").extend(chart.options.get("radar"))
 
         self.options.get("grid").append(grid_opts)
         self._axis_index += 1

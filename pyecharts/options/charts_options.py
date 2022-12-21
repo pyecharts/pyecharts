@@ -1240,6 +1240,32 @@ class PieLabelLineOpts(BasicOpts):
         }
 
 
+class PieEmptyCircleStyle(BasicOpts):
+    def __init__(
+        self,
+        color: str = "lightgray",
+        border_color: str = "#000",
+        border_width: Numeric = 0,
+        border_type: str = "solid",
+        border_dash_offset: Numeric = 0,
+        border_cap: str = "butt",
+        border_join: str = "bevel",
+        border_miter_limit: Numeric = 10,
+        opacity: Numeric = 1,
+    ):
+        self.opts: dict = {
+            "color": color,
+            "borderColor": border_color,
+            "borderWidth": border_width,
+            "borderType": border_type,
+            "borderDashOffset": border_dash_offset,
+            "borderCap": border_cap,
+            "borderJoin": border_join,
+            "borderMiterLimit": border_miter_limit,
+            "opacity": opacity,
+        }
+
+
 class TimelineCheckPointerStyle(BasicOpts):
     def __init__(
         self,
@@ -1311,12 +1337,12 @@ class TimelineControlStyle(BasicOpts):
 
 class TabChartGlobalOpts(BasicOpts):
     def __init__(
-            self,
-            is_enable: bool = False,
-            tab_base_css: Optional[dict] = None,
-            tab_button_css: Optional[dict] = None,
-            tab_button_hover_css: Optional[dict] = None,
-            tab_button_active_css: Optional[dict] = None,
+        self,
+        is_enable: bool = False,
+        tab_base_css: Optional[dict] = None,
+        tab_button_css: Optional[dict] = None,
+        tab_button_hover_css: Optional[dict] = None,
+        tab_button_active_css: Optional[dict] = None,
     ):
         self.opts: dict = {
             "enable": is_enable,
