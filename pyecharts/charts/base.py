@@ -40,7 +40,10 @@ class Base(ChartMixin):
         self.js_functions: utils.OrderedSet = utils.OrderedSet()
         self.js_dependencies: utils.OrderedSet = utils.OrderedSet("echarts")
         self.options.update(backgroundColor=self.bg_color)
-        self.options.update(_opts.get("animationOpts", AnimationOpts()).opts)
+        if isinstance(_opts.get("animationOpts", AnimationOpts()), dict):
+            self.options.update(_opts.get("animationOpts", AnimationOpts().opts))
+        else:
+            self.options.update(_opts.get("animationOpts", AnimationOpts()).opts)
         self.options.update(aria=_opts.get("ariaOpts"))
         self._is_geo_chart: bool = False
 
