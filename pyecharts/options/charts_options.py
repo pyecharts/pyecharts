@@ -1139,6 +1139,9 @@ class GaugeTitleOpts(BasicOpts):
         shadow_blur: Optional[Numeric] = 0,
         shadow_offset_x: Numeric = 0,
         shadow_offset_y: Numeric = 0,
+        overflow: Optional[str] = "none",
+        rich: Optional[dict] = None,
+        is_value_animation: bool = True,
     ):
         if offset_center is None:
             offset_center = [0, "-40%"]
@@ -1159,6 +1162,9 @@ class GaugeTitleOpts(BasicOpts):
             "shadowBlur": shadow_blur,
             "shadowOffsetX": shadow_offset_x,
             "shadowOffsetY": shadow_offset_y,
+            "overflow": overflow,
+            "rich": rich,
+            "valueAnimation": is_value_animation,
         }
 
 
@@ -1182,6 +1188,9 @@ class GaugeDetailOpts(BasicOpts):
         shadow_blur: Optional[Numeric] = 0,
         shadow_offset_x: Numeric = 0,
         shadow_offset_y: Numeric = 0,
+        overflow: Optional[str] = "none",
+        rich: Optional[dict] = None,
+        is_value_animation: bool = True,
     ):
         if offset_center is None:
             offset_center = [0, "-40%"]
@@ -1203,6 +1212,29 @@ class GaugeDetailOpts(BasicOpts):
             "shadowBlur": shadow_blur,
             "shadowOffsetX": shadow_offset_x,
             "shadowOffsetY": shadow_offset_y,
+            "overflow": overflow,
+            "rich": rich,
+            "valueAnimation": is_value_animation,
+        }
+
+
+class GaugeProgressOpts(BasicOpts):
+    def __init__(
+        self,
+        is_show: bool = False,
+        is_overlap: bool = True,
+        width: Numeric = 10,
+        is_round_cap: bool = False,
+        is_clip: bool = False,
+        itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
+    ):
+        self.opts: dict = {
+            "show": is_show,
+            "overlap": is_overlap,
+            "width": width,
+            "roundCap": is_round_cap,
+            "clip": is_clip,
+            "itemStyle": itemstyle_opts,
         }
 
 
@@ -1214,6 +1246,30 @@ class GaugePointerOpts(BasicOpts):
         width: Numeric = 8,
     ):
         self.opts: dict = {"show": is_show, "length": length, "width": width}
+
+
+class GaugeAnchorOpts(BasicOpts):
+    def __init__(
+        self,
+        is_show: bool = True,
+        is_show_above: bool = False,
+        size: Numeric = 6,
+        icon: str = "circle",
+        offset_center: Optional[Sequence] = None,
+        is_keep_aspect: bool = False,
+        itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
+    ):
+        if offset_center is None:
+            offset_center = [0, 0]
+        self.opts: dict = {
+            "show": is_show,
+            "showAbove": is_show_above,
+            "size": size,
+            "icon": icon,
+            "offsetCenter": offset_center,
+            "keepAspect": is_keep_aspect,
+            "itemStyle": itemstyle_opts,
+        }
 
 
 class PieLabelLineOpts(BasicOpts):

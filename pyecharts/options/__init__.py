@@ -16,6 +16,8 @@ from .charts_options import (
     FunnelItem,
     GaugeDetailOpts,
     GaugePointerOpts,
+    GaugeAnchorOpts,
+    GaugeProgressOpts,
     GaugeTitleOpts,
     GraphCategory,
     GraphicBasicStyleOpts,

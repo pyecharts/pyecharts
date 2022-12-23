@@ -414,7 +414,9 @@ class BrushOpts(BasicOpts):
         throttle_type: str = "fixRate",
         throttle_delay: Numeric = 0,
         remove_on_click: bool = True,
-        out_of_brush: dict = None,
+        in_brush: Optional[dict] = None,
+        out_of_brush: Optional[dict] = None,
+        z: Numeric = 10000,
     ):
         if tool_box is None:
             tool_box = ["rect", "polygon", "keep", "clear"]
@@ -440,7 +442,9 @@ class BrushOpts(BasicOpts):
             "throttleType": throttle_type,
             "throttleDelay": throttle_delay,
             "removeOnClick": remove_on_click,
+            "inBrush": in_brush,
             "outOfBrush": out_of_brush,
+            "z": z,
         }
 
 

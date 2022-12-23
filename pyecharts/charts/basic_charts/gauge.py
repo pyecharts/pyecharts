@@ -32,9 +32,13 @@ class Gauge(Chart):
             formatter="{value}%",
             offset_center=["0%", "40%"],
         ),
+        progress: types.GaugeProgress = opts.GaugeProgressOpts(),
         pointer: types.GaugePointer = opts.GaugePointerOpts(),
+        anchor: types.GaugeAnchor = opts.GaugeAnchorOpts(),
         tooltip_opts: types.Tooltip = None,
         axisline_opts: types.AxisLine = None,
+        axistick_opts: types.AxisTick = None,
+        axislabel_opts: types.AxisLabel = None,
         itemstyle_opts: types.ItemStyle = None,
     ):
         if center is None:
@@ -58,6 +62,10 @@ class Gauge(Chart):
                 "data": [{"name": n, "value": v} for n, v in data_pair],
                 "tooltip": tooltip_opts,
                 "axisLine": axisline_opts,
+                "axisTick": axistick_opts,
+                "axisLabel": axislabel_opts,
+                "progress": progress,
+                "anchor": anchor,
                 "pointer": pointer,
                 "itemStyle": itemstyle_opts,
             }
