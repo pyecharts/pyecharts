@@ -88,4 +88,6 @@ class MapMixin:
 
 
 class Map(Chart, MapMixin):
-    pass
+    def add_geo_json(self, geo_json: dict):
+        self._geo_json = geo_json
+        return self

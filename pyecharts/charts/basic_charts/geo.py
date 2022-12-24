@@ -17,6 +17,10 @@ class GeoChartBase(Chart):
         self._coordinate_system: types.Optional[str] = None
         self._chart_type = ChartType.GEO
 
+    def add_geo_json(self, geo_json: dict):
+        self._geo_json = geo_json
+        return self
+
     def add_coordinate(
         self, name: str, longitude: types.Numeric, latitude: types.Numeric
     ):
