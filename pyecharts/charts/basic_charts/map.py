@@ -40,6 +40,7 @@ class MapMixin:
         emphasis_itemstyle_opts: types.ItemStyle = None,
     ):
         self.js_dependencies.add(maptype)
+        self._geo_json_name = maptype
 
         if isinstance(data_pair[0], opts.MapItem):
             data = data_pair

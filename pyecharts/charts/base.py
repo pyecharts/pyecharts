@@ -45,7 +45,14 @@ class Base(ChartMixin):
         else:
             self.options.update(_opts.get("animationOpts", AnimationOpts()).opts)
         self.options.update(aria=_opts.get("ariaOpts"))
+
         self._is_geo_chart: bool = False
+        self._geo_json_name: Optional[str] = None
+        self._geo_json: Optional[dict] = None
+
+    def add_geo_json(self, geo_json: dict):
+        self._geo_json = geo_json
+        return self
 
     def get_options(self) -> dict:
         return utils.remove_key_with_none_value(self.options)

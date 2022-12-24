@@ -1,5 +1,36 @@
 {%- macro render_chart_content(c) -%}
     <div id="{{ c.chart_id }}" class="chart-container" style="width:{{ c.width }}; height:{{ c.height }};"></div>
+    {% if c._geo_json_name and c._geo_json %}
+    <script>
+        (function (root, factory) {
+            if (typeof define === 'function' && define.amd) {
+                // AMD. Register as an anonymous module.
+                define(['exports', 'echarts'], factory);
+            } else if (typeof exports === 'object' && typeof exports.nodeName !== 'string') {
+                // CommonJS
+                factory(exports, require('echarts'));
+            } else {
+                // Browser globals
+                factory({}, root.echarts);
+            }
+        }(this, function (exports, echarts) {
+            var log = function (msg) {
+                if (typeof console !== 'undefined') {
+                    console && console.error && console.error(msg);
+                }
+            }
+            if (!echarts) {
+                log('ECharts is not Loaded');
+                return;
+            }
+            if (!echarts.registerMap) {
+                log('ECharts Map is not loaded')
+                return;
+            }
+            echarts.registerMap('{{ c._geo_json_name }}', {{ c._geo_json }});
+        }));
+    </script>
+    {% endif %}
     <script>
         {% if c._is_tab_chart %}
             document.getElementById('{{ c.chart_id }}').style.width = document.getElementById('{{ c.chart_id }}').parentNode.clientWidth + 'px';

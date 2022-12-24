@@ -199,6 +199,7 @@ class Geo(GeoChartBase):
         emphasis_label_opts: types.Label = None,
     ):
         self.js_dependencies.add(maptype)
+        self._geo_json_name = maptype
         if center:
             assert len(center) == 2
 
