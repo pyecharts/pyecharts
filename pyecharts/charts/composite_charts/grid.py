@@ -43,6 +43,15 @@ class Grid(Base):
                 for s in self.options.get("series"):
                     s.update(xAxisIndex=self._axis_index, yAxisIndex=self._axis_index)
 
+        # visualMap 配置添加
+        visual_map = chart.options.get("visualMap")
+        if visual_map is not None:
+            if self.options.get("visualMap") is None:
+                self.options.update(visualMap=[visual_map])
+            else:
+                self.options.get("visualMap").extend(visual_map)
+
+        # title 配置添加
         title = chart.options.get("title", opts.TitleOpts().opts)
         if isinstance(title, opts.TitleOpts):
             title = title.opts
