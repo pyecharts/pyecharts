@@ -12,7 +12,7 @@ class Lines3D(Chart3D):
 
     def __init__(self, init_opts: types.Init = InitOpts()):
         super().__init__(init_opts)
-        self._3d_chart_type = "lines3D"
+        self._3d_chart_type = ChartType.LINES3D
 
     def add(
         self,

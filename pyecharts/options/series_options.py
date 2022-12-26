@@ -420,3 +420,37 @@ class MinorSplitLineOpts(BasicOpts):
             "opacity": opacity,
             "lineStyle": linestyle_opts,
         }
+
+
+class GraphGLForceAtlas2Opts(BasicOpts):
+    def __init__(
+        self,
+        is_gpu: bool = True,
+        steps: Numeric = 1,
+        stop_threshold: Numeric = 1,
+        is_barnes_hut_optimize: Optional[bool] = None,
+        is_repulsion_by_degree: bool = True,
+        is_lin_log_mode: bool = False,
+        gravity: Numeric = 1,
+        gravity_center: Optional[Sequence] = None,
+        scaling: Optional[Numeric] = None,
+        edge_weight_influence: Numeric = 1,
+        edge_weight: Union[Sequence, Numeric] = None,
+        node_weight: Union[Sequence, Numeric] = None,
+        is_prevent_overlap: bool = False,
+    ):
+        self.opts: dict = {
+            "GPU": is_gpu,
+            "steps": steps,
+            "stopThreshold": stop_threshold,
+            "barnesHutOptimize": is_barnes_hut_optimize,
+            "repulsionByDegree": is_repulsion_by_degree,
+            "linLogMode": is_lin_log_mode,
+            "gravity": gravity,
+            "gravityCenter": gravity_center,
+            "scaling": scaling,
+            "edgeWeightInfluence": edge_weight_influence,
+            "edgeWeight": edge_weight,
+            "nodeWeight": node_weight,
+            "preventOverlap": is_prevent_overlap,
+        }

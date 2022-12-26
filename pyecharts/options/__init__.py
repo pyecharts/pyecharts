@@ -31,6 +31,8 @@ from .charts_options import (
     GraphicTextStyleOpts,
     GraphLink,
     GraphNode,
+    GraphGLLink,
+    GraphGLNode,
     LineItem,
     MapItem,
     Map3DColorMaterialOpts,
@@ -101,6 +103,7 @@ from .global_options import (
 from .series_options import (
     AreaStyleOpts,
     EffectOpts,
+    GraphGLForceAtlas2Opts,
     ItemStyleOpts,
     LabelOpts,
     LineStyleOpts,

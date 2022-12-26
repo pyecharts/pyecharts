@@ -1407,3 +1407,33 @@ class TabChartGlobalOpts(BasicOpts):
             "button_hover": tab_button_hover_css,
             "button_active": tab_button_active_css,
         }
+
+
+class GraphGLNode(BasicOpts):
+    def __init__(
+        self,
+        name: Optional[str] = None,
+        value: Union[str, Sequence, None] = None,
+        itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
+    ):
+        self.opts: dict = {
+            "name": name,
+            "value": value,
+            "itemStyle": itemstyle_opts,
+        }
+
+
+class GraphGLLink(BasicOpts):
+    def __init__(
+        self,
+        source: Union[str, int, None] = None,
+        target: Union[str, int, None] = None,
+        value: Optional[Numeric] = None,
+        linestyle_opts: Union[LineStyleOpts, dict, None] = None,
+    ):
+        self.opts: dict = {
+            "source": source,
+            "target": target,
+            "value": value,
+            "lineStyle": linestyle_opts,
+        }
