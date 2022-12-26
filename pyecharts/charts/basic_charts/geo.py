@@ -83,7 +83,18 @@ class GeoChartBase(Chart):
                     "itemStyle": itemstyle_opts,
                 }
             )
-
+        elif type_ == ChartType.SCATTERGL:
+            self.options.get("series").append(
+                {
+                    "type": type_,
+                    "name": series_name,
+                    "coordinateSystem": self._coordinate_system,
+                    "symbol": symbol,
+                    "symbolSize": symbol_size,
+                    "data": data,
+                    "itemStyle": itemstyle_opts,
+                }
+            )
         elif type_ == ChartType.EFFECT_SCATTER:
             self.options.get("series").append(
                 {
@@ -100,7 +111,16 @@ class GeoChartBase(Chart):
                     "itemStyle": itemstyle_opts,
                 }
             )
-
+        elif type_ == ChartType.FLOWGL:
+            self.options.get("series").append(
+                {
+                    "type": type_,
+                    "name": series_name,
+                    "coordinateSystem": self._coordinate_system,
+                    "data": data,
+                    "itemStyle": itemstyle_opts,
+                }
+            )
         elif type_ == ChartType.HEATMAP:
             self.options.get("series").append(
                 {
@@ -114,7 +134,6 @@ class GeoChartBase(Chart):
                     "blurSize": blur_size,
                 }
             )
-
         elif type_ == ChartType.LINES:
             self.options.get("series").append(
                 {
@@ -135,6 +154,18 @@ class GeoChartBase(Chart):
                     "tooltip": tooltip_opts,
                     "itemStyle": itemstyle_opts,
                     "label": label_opts,
+                }
+            )
+        elif type_ == ChartType.LINESGL:
+            self.options.get("series").append(
+                {
+                    "type": type_,
+                    "name": series_name,
+                    "coordinateSystem": self._coordinate_system,
+                    "data": data,
+                    "polyline": is_polyline,
+                    "large": is_large,
+                    "lineStyle": linestyle_opts,
                 }
             )
         elif type_ == ChartType.CUSTOM:
