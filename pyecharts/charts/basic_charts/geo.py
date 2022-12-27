@@ -84,6 +84,7 @@ class GeoChartBase(Chart):
                 }
             )
         elif type_ == ChartType.SCATTERGL:
+            self.js_dependencies.add("echarts-gl")
             self.options.get("series").append(
                 {
                     "type": type_,
@@ -112,6 +113,7 @@ class GeoChartBase(Chart):
                 }
             )
         elif type_ == ChartType.FLOWGL:
+            self.js_dependencies.add("echarts-gl")
             self.options.get("series").append(
                 {
                     "type": type_,
@@ -157,6 +159,7 @@ class GeoChartBase(Chart):
                 }
             )
         elif type_ == ChartType.LINESGL:
+            self.js_dependencies.add("echarts-gl")
             self.options.get("series").append(
                 {
                     "type": type_,
