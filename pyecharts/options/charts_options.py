@@ -1413,11 +1413,15 @@ class GraphGLNode(BasicOpts):
     def __init__(
         self,
         name: Optional[str] = None,
-        value: Union[str, Sequence, None] = None,
+        x: Optional[Numeric] = None,
+        y: Optional[Numeric] = None,
+        value: Union[str, Numeric, Sequence, None] = None,
         itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
     ):
         self.opts: dict = {
             "name": name,
+            "x": x,
+            "y": y,
             "value": value,
             "itemStyle": itemstyle_opts,
         }
