@@ -1,5 +1,5 @@
 {%- macro render_chart_content(c) -%}
-    <div id="{{ c.chart_id }}" class="chart-container" style="width:{{ c.width }}; height:{{ c.height }};"></div>
+    <div id="{{ c.chart_id }}" class="chart-container" style="width:{{ c.width }}; height:{{ c.height }}; {{ c.horizontal_center }}"></div>
     {% if c._geo_json_name and c._geo_json %}
     <script>
         (function (root, factory) {

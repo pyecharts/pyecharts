@@ -154,6 +154,7 @@ class InitOpts(BasicOpts):
         self,
         width: str = "900px",
         height: str = "500px",
+        is_horizontal_center: bool = False,
         chart_id: Optional[str] = None,
         renderer: str = RenderType.CANVAS,
         page_title: str = CurrentConfig.PAGE_TITLE,
@@ -167,6 +168,7 @@ class InitOpts(BasicOpts):
         self.opts: dict = {
             "width": width,
             "height": height,
+            "is_horizontal_center": is_horizontal_center,
             "chart_id": chart_id,
             "renderer": renderer,
             "page_title": page_title,

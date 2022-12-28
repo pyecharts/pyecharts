@@ -27,6 +27,11 @@ class Base(ChartMixin):
 
         self.width = _opts.get("width", "900px")
         self.height = _opts.get("height", "500px")
+        self.horizontal_center = (
+            "text-align:center; margin: auto"
+            if _opts.get("is_horizontal_center", False)
+            else ""
+        )
         self.renderer = _opts.get("renderer", RenderType.CANVAS)
         self.page_title = _opts.get("page_title", CurrentConfig.PAGE_TITLE)
         self.theme = _opts.get("theme", ThemeType.WHITE)
