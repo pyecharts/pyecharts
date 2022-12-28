@@ -235,6 +235,9 @@ class Geo(GeoChartBase):
         itemstyle_opts: types.ItemStyle = None,
         emphasis_itemstyle_opts: types.ItemStyle = None,
         emphasis_label_opts: types.Label = None,
+        regions_opts: types.Union[
+            types.Sequence[types.GeoRegions], types.Sequence[dict]
+        ] = None,
     ):
         self.js_dependencies.add(maptype)
         self._geo_json_name = maptype
@@ -267,6 +270,7 @@ class Geo(GeoChartBase):
                     "itemStyle": emphasis_itemstyle_opts,
                     "label": emphasis_label_opts,
                 },
+                "regions": regions_opts,
             }
         )
         return self

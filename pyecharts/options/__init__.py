@@ -19,6 +19,7 @@ from .charts_options import (
     GaugeAnchorOpts,
     GaugeProgressOpts,
     GaugeTitleOpts,
+    GeoRegionsOpts,
     GraphCategory,
     GraphicBasicStyleOpts,
     GraphicGroup,

@@ -1441,3 +1441,41 @@ class GraphGLLink(BasicOpts):
             "value": value,
             "lineStyle": linestyle_opts,
         }
+
+
+class GeoRegionsOpts(BasicOpts):
+    def __init__(
+        self,
+        name: Optional[str] = None,
+        is_selected: bool = False,
+        itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
+        label_opts: Union[LabelOpts, dict, None] = None,
+        emphasis_itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
+        emphasis_label_opts: Union[LabelOpts, dict, None] = None,
+        select_itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
+        select_label_opts: Union[LabelOpts, dict, None] = None,
+        blur_itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
+        blur_label_opts: Union[LabelOpts, dict, None] = None,
+        tooltip_opts: Union[TooltipOpts, dict, None] = None,
+        is_silent: bool = False,
+    ):
+        self.opts: dict = {
+            "name": name,
+            "selected": is_selected,
+            "itemStyle": itemstyle_opts,
+            "label": label_opts,
+            "emphasis": {
+                "itemStyle": emphasis_itemstyle_opts,
+                "label": emphasis_label_opts,
+            },
+            "select": {
+                "itemStyle": select_itemstyle_opts,
+                "label": select_label_opts,
+            },
+            "blur": {
+                "itemStyle": blur_itemstyle_opts,
+                "label": blur_label_opts,
+            },
+            "tooltip": tooltip_opts,
+            "silent": is_silent,
+        }
