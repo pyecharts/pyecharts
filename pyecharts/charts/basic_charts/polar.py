@@ -38,6 +38,7 @@ class Polar(Chart):
         symbol: types.Optional[str] = None,
         symbol_size: types.Numeric = 4,
         stack: types.Optional[str] = None,
+        center: types.Optional[types.Sequence] = None,
         label_opts: types.Label = opts.LabelOpts(is_show=False),
         areastyle_opts: types.AreaStyle = opts.AreaStyleOpts(),
         effect_opts: types.Effect = opts.EffectOpts(),
@@ -45,7 +46,9 @@ class Polar(Chart):
         itemstyle_opts: types.ItemStyle = None,
     ):
         self._append_legend(series_name, is_selected)
-        self.options.update(polar={})
+        self.options.update(polar={
+            "center": center if center else ["50%", "50%"]
+        })
 
         if type_ in (ChartType.SCATTER, ChartType.LINE, ChartType.BAR):
             self.options.get("series").append(

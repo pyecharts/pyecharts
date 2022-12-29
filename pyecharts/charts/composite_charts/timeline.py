@@ -34,12 +34,15 @@ class Timeline(Base):
         pos_bottom: types.Optional[str] = "-5px",
         width: types.Optional[str] = None,
         height: types.Optional[str] = None,
-        linestyle_opts: types.Union[opts.LineStyleOpts, dict, None] = None,
-        label_opts: types.Optional[opts.LabelOpts] = None,
+        linestyle_opts: types.LineStyle = None,
+        label_opts: types.Label = None,
         itemstyle_opts: types.ItemStyle = None,
         graphic_opts: types.Graphic = None,
         checkpointstyle_opts: types.TimeLinkCheckPoint = None,
         controlstyle_opts: types.TimeLineControl = None,
+        progress_linestyle_opts: types.LineStyle = None,
+        progress_itemstyle_opts: types.ItemStyle = None,
+        progress_label_opts: types.Label = None,
     ):
         self.options.get("baseOption").get("timeline").update(
             {
@@ -67,6 +70,11 @@ class Timeline(Base):
                 "graphic": graphic_opts,
                 "checkpointStyle": checkpointstyle_opts,
                 "controlStyle": controlstyle_opts,
+                "progress": {
+                    "lineStyle": progress_linestyle_opts,
+                    "itemStyle": progress_itemstyle_opts,
+                    "label": progress_label_opts,
+                }
             }
         )
         return self

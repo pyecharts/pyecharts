@@ -453,6 +453,7 @@ class BrushOpts(BasicOpts):
 class TitleOpts(BasicOpts):
     def __init__(
         self,
+        is_show: bool = True,
         title: Optional[str] = None,
         title_link: Optional[str] = None,
         title_target: Optional[str] = "blank",
@@ -465,11 +466,15 @@ class TitleOpts(BasicOpts):
         pos_bottom: Optional[str] = None,
         padding: Union[Sequence, Numeric] = 5,
         item_gap: Numeric = 10,
+        text_align: str = "auto",
+        text_vertical_align: str = "auto",
+        is_trigger_event: bool = False,
         title_textstyle_opts: Union[TextStyleOpts, dict, None] = None,
         subtitle_textstyle_opts: Union[TextStyleOpts, dict, None] = None,
     ):
         self.opts: Sequence = [
             {
+                "show": is_show,
                 "text": title,
                 "link": title_link,
                 "target": title_target,
@@ -482,6 +487,9 @@ class TitleOpts(BasicOpts):
                 "bottom": pos_bottom,
                 "padding": padding,
                 "itemGap": item_gap,
+                "textAlign": text_align,
+                "textVerticalAlign": text_vertical_align,
+                "triggerEvent": is_trigger_event,
                 "textStyle": title_textstyle_opts,
                 "subtextStyle": subtitle_textstyle_opts,
             }
@@ -552,6 +560,24 @@ class LegendOpts(BasicOpts):
         inactive_color: Optional[str] = None,
         textstyle_opts: Union[TextStyleOpts, dict, None] = None,
         legend_icon: Optional[str] = None,
+        background_color: Optional[str] = "transparent",
+        border_color: Optional[str] = "#ccc",
+        border_width: int = 1,
+        border_radius: Union[int, Sequence] = 0,
+        page_button_item_gap: int = 5,
+        page_button_gap: Optional[int] = None,
+        page_button_position: str = "end",
+        page_formatter: JSFunc = "{current}/{total}",
+        page_icon: Optional[str] = None,
+        page_icon_color: str = "#2f4554",
+        page_icon_inactive_color: str = "#aaa",
+        page_icon_size: Union[int, Sequence] = 15,
+        is_page_animation: Optional[bool] = None,
+        page_animation_duration_update: int = 800,
+        selector: Union[bool, Sequence] = False,
+        selector_position: str = "auto",
+        selector_item_gap: int = 7,
+        selector_button_gap: int = 10,
     ):
         self.opts: dict = {
             "type": type_,
@@ -571,6 +597,24 @@ class LegendOpts(BasicOpts):
             "inactiveColor": inactive_color,
             "textStyle": textstyle_opts,
             "icon": legend_icon,
+            "backgroundColor": background_color,
+            "borderColor": border_color,
+            "borderWidth": border_width,
+            "borderRadius": border_radius,
+            "pageButtonItemGap": page_button_item_gap,
+            "pageButtonGap": page_button_gap,
+            "pageButtonPosition": page_button_position,
+            "pageFormatter": page_formatter,
+            "pageIcon": page_icon,
+            "pageIconColor": page_icon_color,
+            "pageIconInactiveColor": page_icon_inactive_color,
+            "pageIconSize": page_icon_size,
+            "animation": is_page_animation,
+            "animationDurationUpdate": page_animation_duration_update,
+            "selector": selector,
+            "selectorPosition": selector_position,
+            "selectorItemGap": selector_item_gap,
+            "selectorButtonGap": selector_button_gap,
         }
 
 
@@ -752,7 +796,9 @@ class AxisPointerOpts(BasicOpts):
         is_show: bool = False,
         link: Sequence[dict] = None,
         type_: str = "line",
-        is_snap: Optional[bool] = False,
+        is_snap: Optional[bool] = None,
+        is_trigger_tooltip: bool = True,
+        trigger_on: str = "mousemove|click",
         label: Union[LabelOpts, dict, None] = None,
         linestyle_opts: Union[LineStyleOpts, dict, None] = None,
     ):
@@ -763,6 +809,8 @@ class AxisPointerOpts(BasicOpts):
             "link": link,
             "label": label,
             "lineStyle": linestyle_opts,
+            "triggerTooltip": is_trigger_tooltip,
+            "triggerOn": trigger_on,
         }
 
 

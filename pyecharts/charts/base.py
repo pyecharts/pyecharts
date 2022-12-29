@@ -54,6 +54,9 @@ class Base(ChartMixin):
         self._geo_json_name: Optional[str] = None
         self._geo_json: Optional[dict] = None
 
+    def get_chart_id(self) -> str:
+        return self.chart_id
+
     def get_options(self) -> dict:
         return utils.remove_key_with_none_value(self.options)
 
