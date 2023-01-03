@@ -41,29 +41,143 @@ class AnimationOpts(BasicOpts):
         }
 
 
+class AriaLabelOpts(BasicOpts):
+    def __init__(
+        self,
+        is_enable: bool = True,
+        description: Optional[str] = None,
+        general_with_title: str = "这是一个关于“{title}”的图表。",
+        general_without_title: str = "这是一个图表，",
+        series_max_count: int = 10,
+        series_single_prefix: str = "",
+        series_single_with_name: str = "图表类型是{seriesType}，表示{seriesName}。",
+        series_single_without_name: str = "图表类型是{seriesType}。",
+        series_multiple_prefix: str = "它由{seriesCount}个图表系列组成。",
+        series_multiple_with_name: str = "图表类型是{seriesType}，表示{seriesName}。",
+        series_multiple_without_name: str = "图表类型是{seriesType}。",
+        series_multiple_separator_middle: str = "；",
+        series_multiple_separator_end: str = "。",
+        data_max_count: int = 10,
+        data_all_data: str = "其数据是——",
+        data_partial_data: str = "其中，前{displayCnt}项是——",
+        data_with_name: str = "{name}的数据是{value}",
+        data_without_name: str = "{value}",
+        data_separator_middle: str = "，",
+        data_separator_end: str = "",
+    ):
+        self.opts: dict = {
+            "enabled": is_enable,
+            "description": description,
+            "general": {
+                "withTitle": general_with_title,
+                "withoutTitle": general_without_title,
+            },
+            "series": {
+                "maxCount": series_max_count,
+                "single": {
+                    "prefix": series_single_prefix,
+                    "withName": series_single_with_name,
+                    "withoutName": series_single_without_name,
+                },
+                "multiple": {
+                    "prefix": series_multiple_prefix,
+                    "withName": series_multiple_with_name,
+                    "withoutName": series_multiple_without_name,
+                    "separator": {
+                        "middle": series_multiple_separator_middle,
+                        "end": series_multiple_separator_end,
+                    }
+                },
+            },
+            "data": {
+                "maxCount": data_max_count,
+                "allData": data_all_data,
+                "partialData": data_partial_data,
+                "withName": data_with_name,
+                "withoutName": data_without_name,
+                "separator": {
+                    "middle": data_separator_middle,
+                    "end": data_separator_end,
+                }
+            }
+        }
+
+
+class AriaDecalOpts(BasicOpts):
+    def __init__(
+        self,
+        is_show: bool = False,
+        decals_symbol: Union[str, Sequence] = "rect",
+        decals_symbol_size: Numeric = 1,
+        decals_symbol_keep_aspect: bool = True,
+        decals_color: str = "rgba(0, 0, 0, 0.2)",
+        decals_background_color: Optional[str] = None,
+        decals_dash_array_x: Union[Numeric, Sequence] = 5,
+        decals_dash_array_y: Union[Numeric, Sequence] = 5,
+        decals_rotation: Numeric = 0,
+        decals_max_tile_width: Numeric = 512,
+        decals_max_tile_height: Numeric = 512,
+    ):
+        self.opts: dict = {
+            "show": is_show,
+            "decals": {
+                "symbol": decals_symbol,
+                "symbolSize": decals_symbol_size,
+                "symbolKeepAspect": decals_symbol_keep_aspect,
+                "color": decals_color,
+                "backgroundColor": decals_background_color,
+                "dashArrayX": decals_dash_array_x,
+                "dashArrayY": decals_dash_array_y,
+                "rotation": decals_rotation,
+                "maxTileWidth": decals_max_tile_width,
+                "maxTileHeight": decals_max_tile_height,
+            }
+        }
+
+
+class AriaOpts(BasicOpts):
+    def __init__(
+        self,
+        is_enable: bool = False,
+        aria_label_opts: Optional[AriaLabelOpts] = None,
+        aria_decal_opts: Optional[AriaDecalOpts] = None,
+    ):
+        self.opts: dict = {
+            "enabled": is_enable,
+            "label": aria_label_opts,
+            "decal": aria_decal_opts,
+        }
+
+
 class InitOpts(BasicOpts):
     def __init__(
         self,
         width: str = "900px",
         height: str = "500px",
+        is_horizontal_center: bool = False,
         chart_id: Optional[str] = None,
         renderer: str = RenderType.CANVAS,
         page_title: str = CurrentConfig.PAGE_TITLE,
         theme: str = ThemeType.WHITE,
         bg_color: Union[str, dict] = None,
+        is_fill_bg_color: bool = False,
         js_host: str = "",
         animation_opts: Union[AnimationOpts, dict] = AnimationOpts(),
+        aria_opts: Union[AriaOpts, dict] = AriaOpts()
     ):
         self.opts: dict = {
             "width": width,
             "height": height,
+            "is_horizontal_center": is_horizontal_center,
             "chart_id": chart_id,
             "renderer": renderer,
             "page_title": page_title,
             "theme": theme,
             "bg_color": bg_color,
+            "fill_bg": is_fill_bg_color,
             "js_host": js_host,
             "animationOpts": animation_opts,
+            "ariaOpts": aria_opts,
         }
 
 
@@ -145,8 +259,8 @@ class ToolBoxFeatureDataZoomOpts(BasicOpts):
         back_title: str = "区域缩放还原",
         zoom_icon: Optional[JSFunc] = None,
         back_icon: Optional[JSFunc] = None,
-        xaxis_index: Union[Numeric, Sequence, bool] = False,
-        yaxis_index: Union[Numeric, Sequence, bool] = False,
+        xaxis_index: Union[Numeric, Sequence, bool] = None,
+        yaxis_index: Union[Numeric, Sequence, bool] = None,
         filter_mode: str = "filter",
     ):
         self.opts: dict = {
@@ -248,7 +362,7 @@ class ToolBoxFeatureOpts(BasicOpts):
         magic_type: Union[
             ToolBoxFeatureMagicTypeOpts, dict
         ] = ToolBoxFeatureMagicTypeOpts(),
-        brush: Union[ToolBoxFeatureBrushOpts, dict] = ToolBoxFeatureBrushOpts(),
+        brush: Union[ToolBoxFeatureBrushOpts, dict] = None,
     ):
         self.opts: dict = {
             "saveAsImage": save_as_image,
@@ -302,7 +416,9 @@ class BrushOpts(BasicOpts):
         throttle_type: str = "fixRate",
         throttle_delay: Numeric = 0,
         remove_on_click: bool = True,
-        out_of_brush: dict = None,
+        in_brush: Optional[dict] = None,
+        out_of_brush: Optional[dict] = None,
+        z: Numeric = 10000,
     ):
         if tool_box is None:
             tool_box = ["rect", "polygon", "keep", "clear"]
@@ -328,30 +444,37 @@ class BrushOpts(BasicOpts):
             "throttleType": throttle_type,
             "throttleDelay": throttle_delay,
             "removeOnClick": remove_on_click,
+            "inBrush": in_brush,
             "outOfBrush": out_of_brush,
+            "z": z,
         }
 
 
 class TitleOpts(BasicOpts):
     def __init__(
         self,
+        is_show: bool = True,
         title: Optional[str] = None,
         title_link: Optional[str] = None,
-        title_target: Optional[str] = None,
+        title_target: Optional[str] = "blank",
         subtitle: Optional[str] = None,
         subtitle_link: Optional[str] = None,
-        subtitle_target: Optional[str] = None,
+        subtitle_target: Optional[str] = "blank",
         pos_left: Optional[str] = None,
         pos_right: Optional[str] = None,
         pos_top: Optional[str] = None,
         pos_bottom: Optional[str] = None,
         padding: Union[Sequence, Numeric] = 5,
         item_gap: Numeric = 10,
+        text_align: str = "auto",
+        text_vertical_align: str = "auto",
+        is_trigger_event: bool = False,
         title_textstyle_opts: Union[TextStyleOpts, dict, None] = None,
         subtitle_textstyle_opts: Union[TextStyleOpts, dict, None] = None,
     ):
         self.opts: Sequence = [
             {
+                "show": is_show,
                 "text": title,
                 "link": title_link,
                 "target": title_target,
@@ -364,6 +487,9 @@ class TitleOpts(BasicOpts):
                 "bottom": pos_bottom,
                 "padding": padding,
                 "itemGap": item_gap,
+                "textAlign": text_align,
+                "textVerticalAlign": text_vertical_align,
+                "triggerEvent": is_trigger_event,
                 "textStyle": title_textstyle_opts,
                 "subtextStyle": subtitle_textstyle_opts,
             }
@@ -376,6 +502,8 @@ class DataZoomOpts(BasicOpts):
         is_show: bool = True,
         type_: str = "slider",
         is_realtime: bool = True,
+        is_show_detail: bool = True,
+        is_show_data_shadow: bool = True,
         range_start: Union[Numeric, None] = 20,
         range_end: Union[Numeric, None] = 80,
         start_value: Union[int, str, None] = None,
@@ -393,6 +521,8 @@ class DataZoomOpts(BasicOpts):
         self.opts: dict = {
             "show": is_show,
             "type": type_,
+            "showDetail": is_show_detail,
+            "showDataShadow": is_show_data_shadow,
             "realtime": is_realtime,
             "startValue": start_value,
             "endValue": end_value,
@@ -415,6 +545,7 @@ class LegendOpts(BasicOpts):
         self,
         type_: Optional[str] = None,
         selected_mode: Union[str, bool, None] = None,
+        selected_map: Optional[dict] = None,
         is_show: bool = True,
         pos_left: Union[str, Numeric, None] = None,
         pos_right: Union[str, Numeric, None] = None,
@@ -429,10 +560,29 @@ class LegendOpts(BasicOpts):
         inactive_color: Optional[str] = None,
         textstyle_opts: Union[TextStyleOpts, dict, None] = None,
         legend_icon: Optional[str] = None,
+        background_color: Optional[str] = "transparent",
+        border_color: Optional[str] = "#ccc",
+        border_width: int = 1,
+        border_radius: Union[int, Sequence] = 0,
+        page_button_item_gap: int = 5,
+        page_button_gap: Optional[int] = None,
+        page_button_position: str = "end",
+        page_formatter: JSFunc = "{current}/{total}",
+        page_icon: Optional[str] = None,
+        page_icon_color: str = "#2f4554",
+        page_icon_inactive_color: str = "#aaa",
+        page_icon_size: Union[int, Sequence] = 15,
+        is_page_animation: Optional[bool] = None,
+        page_animation_duration_update: int = 800,
+        selector: Union[bool, Sequence] = False,
+        selector_position: str = "auto",
+        selector_item_gap: int = 7,
+        selector_button_gap: int = 10,
     ):
         self.opts: dict = {
             "type": type_,
             "selectedMode": selected_mode,
+            "selected": selected_map,
             "show": is_show,
             "left": pos_left,
             "right": pos_right,
@@ -447,6 +597,24 @@ class LegendOpts(BasicOpts):
             "inactiveColor": inactive_color,
             "textStyle": textstyle_opts,
             "icon": legend_icon,
+            "backgroundColor": background_color,
+            "borderColor": border_color,
+            "borderWidth": border_width,
+            "borderRadius": border_radius,
+            "pageButtonItemGap": page_button_item_gap,
+            "pageButtonGap": page_button_gap,
+            "pageButtonPosition": page_button_position,
+            "pageFormatter": page_formatter,
+            "pageIcon": page_icon,
+            "pageIconColor": page_icon_color,
+            "pageIconInactiveColor": page_icon_inactive_color,
+            "pageIconSize": page_icon_size,
+            "animation": is_page_animation,
+            "animationDurationUpdate": page_animation_duration_update,
+            "selector": selector,
+            "selectorPosition": selector_position,
+            "selectorItemGap": selector_item_gap,
+            "selectorButtonGap": selector_button_gap,
         }
 
 
@@ -460,14 +628,16 @@ class VisualMapOpts(BasicOpts):
         range_text: Optional[Sequence] = None,
         range_color: Optional[Sequence[str]] = None,
         range_size: Optional[Sequence[int]] = None,
-        range_opacity: Optional[Numeric] = None,
+        range_opacity: Union[Numeric, Sequence[Numeric]] = None,
         orient: str = "vertical",
         pos_left: Optional[str] = None,
         pos_right: Optional[str] = None,
         pos_top: Optional[str] = None,
         pos_bottom: Optional[str] = None,
+        padding: Union[int, Sequence[int]] = 5,
         split_number: int = 5,
         series_index: Union[Numeric, Sequence, None] = None,
+        is_hover_link: bool = True,
         dimension: Optional[Numeric] = None,
         is_calculable: bool = True,
         is_piecewise: bool = False,
@@ -513,11 +683,13 @@ class VisualMapOpts(BasicOpts):
             "splitNumber": split_number,
             "dimension": dimension,
             "seriesIndex": series_index,
+            "hoverLink": is_hover_link,
             "orient": orient,
             "left": pos_left,
             "top": pos_top,
             "bottom": pos_bottom,
             "right": pos_right,
+            "padding": padding,
             "showLabel": True,
             "itemWidth": item_width,
             "itemHeight": item_height,
@@ -541,13 +713,20 @@ class TooltipOpts(BasicOpts):
         is_always_show_content: bool = False,
         show_delay: Numeric = 0,
         hide_delay: Numeric = 100,
+        is_enterable: bool = False,
+        is_confine: bool = False,
+        is_append_to_body: bool = False,
+        transition_duration: Numeric = 0.4,
         position: Union[str, Sequence, JSFunc] = None,
         formatter: Optional[JSFunc] = None,
+        value_formatter: Optional[JSFunc] = None,
         background_color: Optional[str] = None,
         border_color: Optional[str] = None,
         border_width: Numeric = 0,
         padding: Numeric = 5,
         textstyle_opts: TextStyleOpts = TextStyleOpts(font_size=14),
+        extra_css_text: Optional[str] = None,
+        order: str = "seriesAsc",
     ):
         self.opts: dict = {
             "show": is_show,
@@ -558,13 +737,20 @@ class TooltipOpts(BasicOpts):
             "alwaysShowContent": is_always_show_content,
             "showDelay": show_delay,
             "hideDelay": hide_delay,
+            "enterable": is_enterable,
+            "confine": is_confine,
+            "appendToBody": is_append_to_body,
+            "transitionDuration": transition_duration,
             "position": position,
             "formatter": formatter,
+            "valueFormatter": value_formatter,
             "textStyle": textstyle_opts,
             "backgroundColor": background_color,
             "borderColor": border_color,
             "borderWidth": border_width,
             "padding": padding,
+            "extraCssText": extra_css_text,
+            "order": order,
         }
 
 
@@ -610,15 +796,21 @@ class AxisPointerOpts(BasicOpts):
         is_show: bool = False,
         link: Sequence[dict] = None,
         type_: str = "line",
+        is_snap: Optional[bool] = None,
+        is_trigger_tooltip: bool = True,
+        trigger_on: str = "mousemove|click",
         label: Union[LabelOpts, dict, None] = None,
         linestyle_opts: Union[LineStyleOpts, dict, None] = None,
     ):
         self.opts: dict = {
             "show": is_show,
             "type": type_,
+            "snap": is_snap,
             "link": link,
             "label": label,
             "lineStyle": linestyle_opts,
+            "triggerTooltip": is_trigger_tooltip,
+            "triggerOn": trigger_on,
         }
 
 
@@ -649,7 +841,7 @@ class AxisOpts(BasicOpts):
         axispointer_opts: Union[AxisPointerOpts, dict, None] = None,
         name_textstyle_opts: Union[TextStyleOpts, dict, None] = None,
         splitarea_opts: Union[SplitAreaOpts, dict, None] = None,
-        splitline_opts: Union[SplitLineOpts, dict] = SplitLineOpts(),
+        splitline_opts: Union[SplitLineOpts, dict] = SplitLineOpts(is_show=True),
         minor_tick_opts: Union[MinorTickOpts, dict, None] = None,
         minor_split_line_opts: Union[MinorSplitLineOpts, dict, None] = None,
     ):
@@ -700,6 +892,10 @@ class GridOpts(BasicOpts):
         background_color: str = "transparent",
         border_color: str = "#ccc",
         border_width: Numeric = 1,
+        shadow_blur: Optional[Numeric] = None,
+        shadow_color: Optional[str] = None,
+        shadow_offset_x: Numeric = 0,
+        shadow_offset_y: Numeric = 0,
         tooltip_opts: Union[TooltipOpts, dict, None] = None,
     ):
         self.opts: dict = {
@@ -716,6 +912,10 @@ class GridOpts(BasicOpts):
             "backgroundColor": background_color,
             "borderColor": border_color,
             "borderWidth": border_width,
+            "shadowBlur": shadow_blur,
+            "shadowColor": shadow_color,
+            "shadowOffsetX": shadow_offset_x,
+            "shadowOffsetY": shadow_offset_y,
             "tooltip": tooltip_opts,
         }
 
@@ -723,22 +923,60 @@ class GridOpts(BasicOpts):
 class Grid3DOpts(BasicOpts):
     def __init__(
         self,
+        is_show: Optional[bool] = None,
         width: Numeric = 200,
         height: Numeric = 100,
         depth: Numeric = 80,
         is_rotate: bool = False,
         rotate_speed: Numeric = 10,
         rotate_sensitivity: Numeric = 1,
+        axisline_opts: Union[AxisLineOpts, dict, None] = None,
+        axistick_opts: Union[AxisTickOpts, dict, None] = None,
+        axislabel_opts: Union[LabelOpts, dict, None] = None,
+        axispointer_opts: Union[AxisPointerOpts, dict, None] = None,
+        splitarea_opts: Union[SplitAreaOpts, dict, None] = None,
+        splitline_opts: Union[SplitLineOpts, dict] = SplitLineOpts(is_show=True),
+        environment: JSFunc = "auto",
+        view_control_alpha: Numeric = 20,
+        view_control_beta: Numeric = 40,
+        view_control_min_alpha: Numeric = -90,
+        view_control_max_alpha: Numeric = 90,
+        view_control_min_beta: Optional[int] = None,
+        view_control_max_beta: Optional[int] = None,
+        z_level: Numeric = -10,
+        pos_left: Union[str, Numeric] = "auto",
+        pos_top: Union[str, Numeric] = "auto",
+        pos_right: Union[str, Numeric] = "auto",
+        pos_bottom: Union[str, Numeric] = "auto",
     ):
         self.opts: dict = {
+            "show": is_show,
             "boxWidth": width,
             "boxHeight": height,
             "boxDepth": depth,
+            "axisLine": axisline_opts,
+            "axisTick": axistick_opts,
+            "axisLabel": axislabel_opts,
+            "axisPointer": axispointer_opts,
+            "splitLine": splitline_opts,
+            "splitArea": splitarea_opts,
+            "environment": environment,
             "viewControl": {
                 "autoRotate": is_rotate,
                 "autoRotateSpeed": rotate_speed,
                 "rotateSensitivity": rotate_sensitivity,
+                "alpha": view_control_alpha,
+                "beta": view_control_beta,
+                "minAlpha": view_control_min_alpha,
+                "maxAlpha": view_control_max_alpha,
+                "minBeta": view_control_min_beta,
+                "maxBeta": view_control_max_beta,
             },
+            "zlevel": z_level,
+            "left": pos_left,
+            "top": pos_top,
+            "right": pos_right,
+            "bottom": pos_bottom,
         }
 
 
@@ -748,24 +986,41 @@ class Axis3DOpts(BasicOpts):
         data: Optional[Sequence] = None,
         type_: Optional[str] = None,
         name: Optional[str] = None,
+        is_show: bool = True,
+        is_scale: bool = False,
+        grid_3d_index: Numeric = 0,
         name_gap: Numeric = 20,
         min_: Union[str, Numeric, None] = None,
         max_: Union[str, Numeric, None] = None,
-        splitnum: Optional[Numeric] = None,
-        interval: Optional[Numeric] = None,
-        margin: Numeric = 8,
+        split_number: Optional[Numeric] = None,
+        log_base: Numeric = 10,
+        axisline_opts: Union[AxisLineOpts, dict, None] = None,
+        axistick_opts: Union[AxisTickOpts, dict, None] = None,
+        axislabel_opts: Union[LabelOpts, dict, None] = None,
+        axispointer_opts: Union[AxisPointerOpts, dict, None] = None,
+        splitarea_opts: Union[SplitAreaOpts, dict, None] = None,
+        splitline_opts: Union[SplitLineOpts, dict] = SplitLineOpts(is_show=True),
         textstyle_opts: Union[TextStyleOpts, dict, None] = None,
     ):
         self.opts: dict = {
             "data": data,
             "name": name,
+            "show": is_show,
+            "scale": is_scale,
+            "grid3DIndex": grid_3d_index,
             "nameGap": name_gap,
             "nameTextStyle": textstyle_opts,
-            "splitNum": splitnum,
+            "splitNumber": split_number,
+            "logBase": log_base,
             "type": type_,
             "min": min_,
             "max": max_,
-            "axisLabel": {"margin": margin, "interval": interval},
+            "axisLine": axisline_opts,
+            "axisTick": axistick_opts,
+            "axisLabel": axislabel_opts,
+            "axisPointer": axispointer_opts,
+            "splitLine": splitline_opts,
+            "splitArea": splitarea_opts,
         }
 
 
@@ -777,6 +1032,11 @@ class ParallelOpts(BasicOpts):
         pos_bottom: str = "10%",
         pos_top: str = "20%",
         layout: Optional[str] = None,
+        is_axis_expandable: bool = False,
+        axis_expand_center: Optional[Numeric] = None,
+        axis_expand_count: Numeric = 0,
+        axis_expand_width: Numeric = 50,
+        axis_expand_trigger_on: str = "click",
     ):
         self.opts: dict = {
             "left": pos_left,
@@ -784,6 +1044,11 @@ class ParallelOpts(BasicOpts):
             "bottom": pos_bottom,
             "top": pos_top,
             "layout": layout,
+            "axisExpandable": is_axis_expandable,
+            "axisExpandCenter": axis_expand_center,
+            "axisExpandCount": axis_expand_count,
+            "axisExpandWidth": axis_expand_width,
+            "axisExpandTriggerOn": axis_expand_trigger_on,
         }
 
 
@@ -791,21 +1056,47 @@ class ParallelAxisOpts(BasicOpts):
     def __init__(
         self,
         dim: Numeric,
-        name: str,
+        parallel_index: Numeric = 0,
+        is_realtime: bool = True,
+        name: Optional[str] = None,
         data: Sequence = None,
         type_: Optional[str] = None,
+        name_location: str = "end",
+        name_gap: Numeric = 15,
+        name_rotate: Optional[int] = None,
+        is_inverse: bool = False,
         min_: Union[str, Numeric, None] = None,
         max_: Union[str, Numeric, None] = None,
         is_scale: bool = False,
+        log_base: Numeric = 10,
+        is_silent: bool = False,
+        is_trigger_event: bool = False,
+        axisline_opts: Union[AxisLineOpts, dict, None] = None,
+        axistick_opts: Union[AxisTickOpts, dict, None] = None,
+        axislabel_opts: Union[LabelOpts, dict, None] = None,
+        minor_tick_opts: Union[MinorTickOpts, dict, None] = None,
     ):
         self.opts: dict = {
             "dim": dim,
+            "parallelIndex": parallel_index,
+            "realtime": is_realtime,
             "name": name,
             "data": data,
             "type": type_,
+            "name_location": name_location,
+            "name_gap": name_gap,
+            "name_rotate": name_rotate,
+            "inverse": is_inverse,
             "min": min_,
             "max": max_,
             "scale": is_scale,
+            "logBase": log_base,
+            "silent": is_silent,
+            "triggerEvent": is_trigger_event,
+            "axisLine": axisline_opts,
+            "axisTick": axistick_opts,
+            "axisLabel": axislabel_opts,
+            "minorTick": minor_tick_opts,
         }
 
 
@@ -917,6 +1208,8 @@ class CalendarYearLabelOpts(BasicOpts):
 class CalendarOpts(BasicOpts):
     def __init__(
         self,
+        z_level: Numeric = 0,
+        z: Numeric = 2,
         pos_left: Optional[str] = None,
         pos_top: Optional[str] = None,
         pos_right: Optional[str] = None,
@@ -931,8 +1224,11 @@ class CalendarOpts(BasicOpts):
         daylabel_opts: Union[CalendarDayLabelOpts, dict, None] = None,
         monthlabel_opts: Union[CalendarMonthLabelOpts, dict, None] = None,
         yearlabel_opts: Union[CalendarYearLabelOpts, dict, None] = None,
+        is_silent: bool = False,
     ):
         self.opts: dict = {
+            "zlevel": z_level,
+            "z": z,
             "left": pos_left,
             "top": pos_top,
             "right": pos_right,
@@ -947,6 +1243,7 @@ class CalendarOpts(BasicOpts):
             "dayLabel": daylabel_opts,
             "monthLabel": monthlabel_opts,
             "yearLabel": yearlabel_opts,
+            "silent": is_silent,
         }
 
 
@@ -1007,16 +1304,25 @@ class RadiusAxisOpts(BasicOpts):
         type_: Optional[str] = None,
         name: Optional[str] = None,
         name_location: Optional[str] = None,
+        name_gap: Numeric = 15,
+        name_rotate: Optional[Numeric] = None,
+        is_inverse: bool = False,
         min_: Union[str, Numeric, None] = None,
         max_: Union[str, Numeric, None] = None,
         is_scale: bool = False,
+        split_number: Numeric = 5,
         interval: Optional[Numeric] = None,
+        min_interval: Numeric = 0,
+        max_interval: Optional[Numeric] = None,
         splitline_opts: Union[SplitLineOpts, dict, None] = None,
         splitarea_opts: Union[SplitAreaOpts, dict, None] = None,
         axistick_opts: Union[AxisTickOpts, dict, None] = None,
         axisline_opts: Union[AxisLineOpts, dict, None] = None,
         axislabel_opts: Union[LabelOpts, dict, None] = None,
+        minor_tick_opts: Union[MinorTickOpts, dict, None] = None,
+        minor_split_line_opts: Union[MinorSplitLineOpts, dict, None] = None,
         z: Optional[int] = None,
+        z_level: Optional[int] = None,
     ):
         _data = []
         if data:
@@ -1032,16 +1338,25 @@ class RadiusAxisOpts(BasicOpts):
             "boundaryGap": boundary_gap,
             "name": name,
             "nameLocation": name_location,
+            "nameGap": name_gap,
+            "nameRotate": name_rotate,
+            "inverse": is_inverse,
             "min": min_,
             "max": max_,
             "scale": is_scale,
+            "splitNumber": split_number,
             "interval": interval,
+            "minInterval": min_interval,
+            "maxInterval": max_interval,
             "splitLine": splitline_opts,
             "splitArea": splitarea_opts,
             "axisTick": axistick_opts,
             "axisLine": axisline_opts,
             "axisLabel": axislabel_opts,
+            "minorTick": minor_tick_opts,
+            "minorSplitLine": minor_split_line_opts,
             "z": z,
+            "zlevel": z_level,
         }
 
 
@@ -1050,7 +1365,7 @@ class AngleAxisOpts(BasicOpts):
         self,
         polar_index: Optional[int] = None,
         data: Optional[Sequence[Union[AngleAxisItem, Numeric, dict, str]]] = None,
-        start_angle: Optional[Numeric] = None,
+        start_angle: Optional[Numeric] = 90,
         is_clockwise: bool = False,
         boundary_gap: Union[bool, Sequence, None] = None,
         type_: Optional[str] = None,
@@ -1063,7 +1378,10 @@ class AngleAxisOpts(BasicOpts):
         axisline_opts: Union[AxisLineOpts, dict, None] = None,
         axistick_opts: Union[AxisTickOpts, dict, None] = None,
         axislabel_opts: Union[LabelOpts, dict, None] = None,
+        minor_tick_opts: Union[MinorTickOpts, dict, None] = None,
+        minor_split_line_opts: Union[MinorSplitLineOpts, dict, None] = None,
         z: Optional[int] = None,
+        z_level: Optional[int] = None,
     ):
         _data = []
         if data:
@@ -1088,7 +1406,10 @@ class AngleAxisOpts(BasicOpts):
             "axisLine": axisline_opts,
             "axisTick": axistick_opts,
             "axisLabel": axislabel_opts,
+            "minorTick": minor_tick_opts,
+            "minorSplitLine": minor_split_line_opts,
             "z": z,
+            "zlevel": z_level,
         }
 
 
@@ -1100,3 +1421,13 @@ class PolarOpts(BasicOpts):
         tooltip_opts: TooltipOpts = None,
     ):
         self.opts: dict = {"center": center, "radius": radius, "tooltip": tooltip_opts}
+
+
+class DatasetTransformOpts(BasicOpts):
+    def __init__(
+        self,
+        type_: str = "filter",
+        config: Optional[dict] = None,
+        is_print: bool = False,
+    ):
+        self.opts: dict = {"type": type_, "config": config, "print": is_print}

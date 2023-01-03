@@ -12,7 +12,7 @@ class Map3D(Chart3D):
 
     def __init__(self, init_opts: types.Init = InitOpts()):
         super().__init__(init_opts)
-        self._3d_chart_type = "map3D"
+        self._3d_chart_type = ChartType.MAP3D
 
     def add(
         self,

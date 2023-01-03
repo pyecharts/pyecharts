@@ -1,6 +1,7 @@
 from ... import options as opts
 from ... import types
 from ...charts.chart import Chart
+from ...globals import ChartType
 
 
 class Calendar(Chart):
@@ -21,25 +22,33 @@ class Calendar(Chart):
         series_name: str,
         yaxis_data: types.Sequence,
         *,
+        type_: types.Union[str, ChartType] = ChartType.HEATMAP,
         is_selected: bool = True,
-        label_opts: types.Label = opts.LabelOpts(),
-        calendar_opts: types.Calendar = None,
+        calendar_index: types.Optional[types.Numeric] = None,
+        label_opts: types.Label = opts.LabelOpts(is_show=False, position="inside"),
+        calendar_opts: types.Union[types.Calendar, types.List[types.Calendar]] = None,
         tooltip_opts: types.Tooltip = None,
         itemstyle_opts: types.ItemStyle = None,
+        visualmap_opts: types.VisualMap = None,
+        **other_calendar_opts,
     ):
         if calendar_opts:
             self.options.update(calendar=calendar_opts)
+        if visualmap_opts:
+            self.options.update(visualMap=visualmap_opts)
 
         self._append_legend(series_name, is_selected)
         self.options.get("series").append(
             {
-                "type": "heatmap",
+                "type": type_,
                 "coordinateSystem": "calendar",
+                "calendarIndex": calendar_index,
                 "name": series_name,
                 "data": yaxis_data,
                 "label": label_opts,
                 "tooltip": tooltip_opts,
                 "itemStyle": itemstyle_opts,
+                **other_calendar_opts,
             }
         )
         return self

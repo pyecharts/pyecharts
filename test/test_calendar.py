@@ -35,6 +35,7 @@ def test_calendar_base(fake_writer):
     _, content = fake_writer.call_args[0]
     assert_equal(c.theme, "white")
     assert_equal(c.renderer, "canvas")
+    assert_in("visualMap", content)
 
 
 @patch("pyecharts.render.engine.write_utf8_html_file")
@@ -57,8 +58,6 @@ def test_calendar_setting(fake_writer):
                 daylabel_opts=opts.CalendarDayLabelOpts(name_map="cn"),
                 monthlabel_opts=opts.CalendarMonthLabelOpts(name_map="cn"),
             ),
-        )
-        .set_global_opts(
             visualmap_opts=opts.VisualMapOpts(
                 max_=20000,
                 min_=500,
@@ -74,3 +73,4 @@ def test_calendar_setting(fake_writer):
     assert_in("cellSize", content)
     assert_in("dayLabel", content)
     assert_in("monthLabel", content)
+    assert_in("visualMap", content)

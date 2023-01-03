@@ -3,6 +3,7 @@ import copy
 from ... import options as opts
 from ... import types
 from ...globals import ThemeType
+from ..basic_charts.radar import Radar
 from ..chart import Base, Chart, RectChart
 
 
@@ -42,6 +43,15 @@ class Grid(Base):
                 for s in self.options.get("series"):
                     s.update(xAxisIndex=self._axis_index, yAxisIndex=self._axis_index)
 
+        # visualMap 配置添加
+        visual_map = chart.options.get("visualMap")
+        if visual_map is not None:
+            if self.options.get("visualMap") is None:
+                self.options.update(visualMap=[visual_map])
+            else:
+                self.options.get("visualMap").extend(visual_map)
+
+        # title 配置添加
         title = chart.options.get("title", opts.TitleOpts().opts)
         if isinstance(title, opts.TitleOpts):
             title = title.opts
@@ -75,6 +85,8 @@ class Grid(Base):
             if isinstance(chart, RectChart):
                 self.options.get("xAxis").extend(chart.options.get("xAxis"))
                 self.options.get("yAxis").extend(chart.options.get("yAxis"))
+            if isinstance(chart, Radar):
+                self.options.get("radar").extend(chart.options.get("radar"))
 
         self.options.get("grid").append(grid_opts)
         self._axis_index += 1

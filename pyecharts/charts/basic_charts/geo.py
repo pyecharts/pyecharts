@@ -17,6 +17,10 @@ class GeoChartBase(Chart):
         self._coordinate_system: types.Optional[str] = None
         self._chart_type = ChartType.GEO
 
+    def add_geo_json(self, geo_json: dict):
+        self._geo_json = geo_json
+        return self
+
     def add_coordinate(
         self, name: str, longitude: types.Numeric, latitude: types.Numeric
     ):
@@ -79,7 +83,19 @@ class GeoChartBase(Chart):
                     "itemStyle": itemstyle_opts,
                 }
             )
-
+        elif type_ == ChartType.SCATTERGL:
+            self.js_dependencies.add("echarts-gl")
+            self.options.get("series").append(
+                {
+                    "type": type_,
+                    "name": series_name,
+                    "coordinateSystem": self._coordinate_system,
+                    "symbol": symbol,
+                    "symbolSize": symbol_size,
+                    "data": data,
+                    "itemStyle": itemstyle_opts,
+                }
+            )
         elif type_ == ChartType.EFFECT_SCATTER:
             self.options.get("series").append(
                 {
@@ -96,7 +112,17 @@ class GeoChartBase(Chart):
                     "itemStyle": itemstyle_opts,
                 }
             )
-
+        elif type_ == ChartType.FLOWGL:
+            self.js_dependencies.add("echarts-gl")
+            self.options.get("series").append(
+                {
+                    "type": type_,
+                    "name": series_name,
+                    "coordinateSystem": self._coordinate_system,
+                    "data": data,
+                    "itemStyle": itemstyle_opts,
+                }
+            )
         elif type_ == ChartType.HEATMAP:
             self.options.get("series").append(
                 {
@@ -110,7 +136,6 @@ class GeoChartBase(Chart):
                     "blurSize": blur_size,
                 }
             )
-
         elif type_ == ChartType.LINES:
             self.options.get("series").append(
                 {
@@ -131,6 +156,19 @@ class GeoChartBase(Chart):
                     "tooltip": tooltip_opts,
                     "itemStyle": itemstyle_opts,
                     "label": label_opts,
+                }
+            )
+        elif type_ == ChartType.LINESGL:
+            self.js_dependencies.add("echarts-gl")
+            self.options.get("series").append(
+                {
+                    "type": type_,
+                    "name": series_name,
+                    "coordinateSystem": self._coordinate_system,
+                    "data": data,
+                    "polyline": is_polyline,
+                    "large": is_large,
+                    "lineStyle": linestyle_opts,
                 }
             )
         elif type_ == ChartType.CUSTOM:
@@ -197,8 +235,12 @@ class Geo(GeoChartBase):
         itemstyle_opts: types.ItemStyle = None,
         emphasis_itemstyle_opts: types.ItemStyle = None,
         emphasis_label_opts: types.Label = None,
+        regions_opts: types.Union[
+            types.Sequence[types.GeoRegions], types.Sequence[dict]
+        ] = None,
     ):
         self.js_dependencies.add(maptype)
+        self._geo_json_name = maptype
         if center:
             assert len(center) == 2
 
@@ -228,6 +270,7 @@ class Geo(GeoChartBase):
                     "itemStyle": emphasis_itemstyle_opts,
                     "label": emphasis_label_opts,
                 },
+                "regions": regions_opts,
             }
         )
         return self

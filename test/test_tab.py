@@ -3,14 +3,20 @@ from unittest.mock import patch
 
 from nose.tools import assert_equal, assert_in, assert_true
 
+from pyecharts import options as opts
 from pyecharts.charts import Bar, Line, Tab
 from pyecharts.commons.utils import OrderedSet
 from pyecharts.components import Table
 from pyecharts.faker import Faker
+from pyecharts.globals import ThemeType
 
 
 def _create_bar() -> Bar:
-    return Bar().add_xaxis(Faker.week).add_yaxis("商家A", [1, 2, 3, 4, 5, 6, 7])
+    return (
+        Bar(init_opts=opts.InitOpts(theme=ThemeType.ESSOS))
+        .add_xaxis(Faker.week)
+        .add_yaxis("商家A", [1, 2, 3, 4, 5, 6, 7])
+    )
 
 
 def _create_line() -> Line:
@@ -59,7 +65,7 @@ def test_tab_render_notebook():
 def test_page_jshost_default():
     bar = _create_bar()
     tab = Tab().add(bar, "bar")
-    assert_equal(tab.js_host, "https://assets.pyecharts.org/assets/")
+    assert_equal(tab.js_host, "https://assets.pyecharts.org/assets/v5/")
 
 
 def test_tab_jshost_custom():

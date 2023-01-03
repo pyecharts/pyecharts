@@ -1,9 +1,16 @@
+import os
 from unittest.mock import patch
 
 from nose.tools import assert_equal, raises
 
 from pyecharts.charts import Bar
 from pyecharts.render import make_snapshot
+from pyecharts.render.snapshot import (
+    save_as,
+    save_as_png,
+    save_as_text,
+    decode_base64,
+)
 
 
 def _gen_faker_engine(content: str):
@@ -15,6 +22,31 @@ def _gen_faker_engine(content: str):
             return self.content
 
     return Engine(content)
+
+
+def test_decode_base64():
+    assert decode_base64(data="abcde12") == b'i\xb7\x1d{]'
+
+
+def test_save_as_png():
+    save_as_png(image_data=b'i\xb7\x1d{]', output_name="text_png.png")
+    os.unlink("text_png.png")
+
+
+def test_save_as_text():
+    save_as_text(image_data="test data", output_name="test_txt.txt")
+    os.unlink("test_txt.txt")
+
+
+def test_save_as():
+    with open("fixtures/img1.jpg", "rb") as f:
+        image_bytes = f.read()
+    save_as(image_data=image_bytes, output_name="test_pdf.pdf", file_type="pdf")
+    os.unlink("test_pdf.pdf")
+    save_as(image_data=image_bytes, output_name="test_gif.gif", file_type="gif")
+    os.unlink("test_gif.gif")
+    save_as(image_data=image_bytes, output_name="test_eps.eps", file_type="eps")
+    os.unlink("test_eps.eps")
 
 
 @patch("pyecharts.render.engine.write_utf8_html_file")

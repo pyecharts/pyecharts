@@ -190,9 +190,9 @@ def test_bar_default_set_function(fake_writer):
 def test_bar_default_remote_host(fake_writer):
     c = Bar().add_xaxis(["A", "B", "C"]).add_yaxis("series0", [1, 2, 4])
     c.render()
-    assert_equal(c.js_host, "https://assets.pyecharts.org/assets/")
+    assert_equal(c.js_host, "https://assets.pyecharts.org/assets/v5/")
     _, content = fake_writer.call_args[0]
-    assert_in("https://assets.pyecharts.org/assets/echarts.min.js", content)
+    assert_in("https://assets.pyecharts.org/assets/v5/echarts.min.js", content)
 
 
 @patch("pyecharts.render.engine.write_utf8_html_file")
@@ -210,6 +210,40 @@ def test_bar_custom_remote_host(fake_writer):
 
 @patch("pyecharts.render.engine.write_utf8_html_file")
 def test_bar_graphic(fake_writer):
+    c = (
+        Bar()
+        .add_xaxis(["A", "B", "C"])
+        .add_yaxis("series0", [1, 2, 4])
+        .set_global_opts(
+            graphic_opts=[
+                opts.GraphicImage(
+                    graphic_item=opts.GraphicItem(
+                        id_="logo",
+                        right=20,
+                        top=20,
+                        z=-10,
+                        bounding="raw",
+                        origin=[75, 75],
+                    ),
+                    graphic_imagestyle_opts=opts.GraphicImageStyleOpts(
+                        image="http://echarts.baidu.com/images/favicon.png",
+                        width=150,
+                        height=150,
+                        opacity=0.4,
+                        graphic_basicstyle_opts=opts.GraphicBasicStyleOpts(),
+                    ),
+                )
+            ]
+        )
+    )
+    c.render()
+    file_name, content = fake_writer.call_args[0]
+    assert_equal("render.html", file_name)
+    assert_in("graphic", content)
+
+
+@patch("pyecharts.render.engine.write_utf8_html_file")
+def test_bar_graphic_v1(fake_writer):
     c = (
         Bar()
         .add_xaxis(["A", "B", "C"])
@@ -288,3 +322,29 @@ def test_bar_with_brush(fake_writer):
     c.render()
     _, content = fake_writer.call_args[0]
     assert_in("brush", content)
+
+
+@patch("pyecharts.render.engine.write_utf8_html_file")
+def test_bar_add_dataset(fake_writer):
+    c = (
+        Bar()
+        .add_dataset(
+            source=[
+                ["product", "2015", "2016", "2017"],
+                ["Matcha Latte", 43.3, 85.8, 93.7],
+                ["Milk Tea", 83.1, 73.4, 55.1],
+                ["Cheese Cocoa", 86.4, 65.2, 82.5],
+                ["Walnut Brownie", 72.4, 53.9, 39.1],
+            ]
+        )
+        .add_yaxis(series_name="2015", y_axis=[])
+        .add_yaxis(series_name="2016", y_axis=[])
+        .add_yaxis(series_name="2017", y_axis=[])
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="Dataset simple bar example"),
+            xaxis_opts=opts.AxisOpts(type_="category"),
+        )
+    )
+    c.render()
+    _, content = fake_writer.call_args[0]
+    assert_in("dataset", content)

@@ -31,14 +31,17 @@ class _ChartType:
     BOXPLOT: str = "boxplot"
     EFFECT_SCATTER: str = "effectScatter"
     FUNNEL: str = "funnel"
+    FLOWGL: str = "flowGL"
     GAUGE: str = "gauge"
     GEO: str = "geo"
     GRAPH: str = "graph"
+    GRAPHGL: str = "graphGL"
     HEATMAP: str = "heatmap"
     KLINE: str = "candlestick"
     LINE: str = "line"
     LINE3D: str = "line3D"
     LINES: str = "lines"
+    LINESGL: str = "linesGL"
     LINES3D: str = "lines3D"
     LIQUID: str = "liquidFill"
     MAP: str = "map"
@@ -51,7 +54,9 @@ class _ChartType:
     SANKEY: str = "sankey"
     SCATTER: str = "scatter"
     SCATTER3D: str = "scatter3D"
+    SCATTERGL: str = "scatterGL"
     SUNBURST: str = "sunburst"
+    SURFACE: str = "surface"
     THEMERIVER: str = "themeRiver"
     TREE: str = "tree"
     TREEMAP: str = "treemap"
@@ -123,7 +128,7 @@ class _NotebookType:
 
 
 class _OnlineHost:
-    DEFAULT_HOST = "https://assets.pyecharts.org/assets/"
+    DEFAULT_HOST = "https://assets.pyecharts.org/assets/v5/"
     NOTEBOOK_HOST = "http://localhost:8888/nbextensions/assets/"
 
 

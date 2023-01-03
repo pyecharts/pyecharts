@@ -11,16 +11,26 @@ from nose.tools import (
 
 from pyecharts.charts import Bar, Line, Page
 from pyecharts.commons.utils import OrderedSet
+from pyecharts.globals import ThemeType
 from pyecharts.components import Table
+from pyecharts import options as opts
 from pyecharts.faker import Faker
 
 
 def _create_bar() -> Bar:
-    return Bar().add_xaxis(Faker.week).add_yaxis("商家A", [1, 2, 3, 4, 5, 6, 7])
+    return (
+        Bar(init_opts=opts.InitOpts(theme=ThemeType.ROMA))
+        .add_xaxis(Faker.week)
+        .add_yaxis("商家A", [1, 2, 3, 4, 5, 6, 7])
+    )
 
 
 def _create_line() -> Line:
-    return Line().add_xaxis(Faker.week).add_yaxis("商家A", [7, 6, 5, 4, 3, 2, 1])
+    return (
+        Line(init_opts=opts.InitOpts(theme=ThemeType.LIGHT))
+        .add_xaxis(Faker.week)
+        .add_yaxis("商家A", [7, 6, 5, 4, 3, 2, 1])
+    )
 
 
 def _create_table() -> Table:
@@ -49,7 +59,7 @@ def test_page_jshost_default():
     bar = _create_bar()
     line = _create_line()
     page = Page().add(bar, line)
-    assert_equal(page.js_host, "https://assets.pyecharts.org/assets/")
+    assert_equal(page.js_host, "https://assets.pyecharts.org/assets/v5/")
 
 
 def test_page_jshost_custom():
@@ -84,7 +94,7 @@ def test_page_load_javascript():
     line = _create_line()
     content = Page().add(bar, line).load_javascript()
     assert_equal("", content.data)
-    assert_equal(["https://assets.pyecharts.org/assets/echarts.min.js"], content.lib)
+    assert_equal(["https://assets.pyecharts.org/assets/v5/echarts.min.js"], content.lib)
 
 
 def _get_new_page(unique: bool = True) -> Page:
@@ -160,6 +170,15 @@ def test_page_resize():
     page = Page()
     content = page.save_resize_html(
         cfg_dict=[{"cid": "xxx", "width": 100, "height": 100, "top": 100, "left": 100}]
+    )
+    assert_not_in(".resizable()", content)
+    assert_not_in(".draggable()", content)
+
+
+def test_page_resize_cfg():
+    page = Page()
+    content = page.save_resize_html(
+        cfg_file="fixtures/resize_cfg.json"
     )
     assert_not_in(".resizable()", content)
     assert_not_in(".draggable()", content)

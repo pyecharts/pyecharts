@@ -27,6 +27,8 @@ class Kline(RectChart):
         y_axis: types.Sequence[types.Union[opts.CandleStickItem, dict]],
         *,
         is_selected: bool = True,
+        color_by: types.Optional[str] = "series",
+        layout: types.Optional[str] = None,
         xaxis_index: types.Optional[types.Numeric] = None,
         yaxis_index: types.Optional[types.Numeric] = None,
         markline_opts: types.MarkLine = None,
@@ -39,6 +41,8 @@ class Kline(RectChart):
             {
                 "type": ChartType.KLINE,
                 "name": series_name,
+                "colorBy": color_by,
+                "layout": layout,
                 "xAxisIndex": xaxis_index,
                 "yAxisIndex": yaxis_index,
                 "data": y_axis,

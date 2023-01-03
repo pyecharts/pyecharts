@@ -18,6 +18,7 @@ def test_sankey_base(fake_writer):
         "sankey",
         nodes,
         links,
+        layout_iterations=16,
         linestyle_opt=opts.LineStyleOpts(opacity=0.2, curve=0.5, color="source"),
         label_opts=opts.LabelOpts(position="right"),
     )
@@ -25,6 +26,7 @@ def test_sankey_base(fake_writer):
     _, content = fake_writer.call_args[0]
     assert_equal(c.theme, "white")
     assert_equal(c.renderer, "canvas")
+    assert_in("layoutIteration", content)
 
 
 @patch("pyecharts.render.engine.write_utf8_html_file")
@@ -50,7 +52,6 @@ def test_sankey_new_opts(fake_writer):
         nodes,
         links,
         pos_bottom="10%",
-        focus_node_adjacency="allEdges",
         orient="vertical",
         levels=[
             opts.SankeyLevelsOpts(
@@ -67,4 +68,4 @@ def test_sankey_new_opts(fake_writer):
     assert_in("bottom", content)
     assert_in("orient", content)
     assert_in("levels", content)
-    assert_in("focusNodeAdjacency", content)
+    assert_in("layoutIteration", content)

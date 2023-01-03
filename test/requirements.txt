@@ -1,6 +1,5 @@
 nose
 codecov
 coverage
-jupyter
 flake8
 mccabe

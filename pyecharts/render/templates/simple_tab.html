@@ -7,8 +7,12 @@
     {{ macro.render_chart_dependencies(chart) }}
     {{ macro.render_chart_css(chart) }}
 </head>
-<body>
-    {{ macro.generate_tab_css() }}
+<body {% if chart.bg_color != '' %}style="background-color: {{ chart.bg_color }}"{% endif %}>
+    {% if chart.use_custom_tab_css is not true %}
+        {{ macro.generate_tab_css() }}
+    {% else %}
+        <style>{{ chart.tab_custom_css }}</style>
+    {% endif %}
     {{ macro.display_tablinks(chart) }}
 
     <div class="box">

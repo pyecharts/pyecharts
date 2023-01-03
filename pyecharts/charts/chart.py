@@ -12,11 +12,12 @@ class Chart(Base):
             temp_opts.update(**init_opts)
             init_opts = temp_opts
         super().__init__(init_opts=init_opts)
+        # Change to Echarts V5 default color list
         self.colors = (
-            "#c23531 #2f4554 #61a0a8 #d48265 #749f83 #ca8622 #bda29a #6e7074 "
-            "#546570 #c4ccd3 #f05b72 #ef5b9c #f47920 #905a3d #fab27b #2a5caa "
-            "#444693 #726930 #b2d235 #6d8346 #ac6767 #1d953f #6950a1 #918597"
+            "#5470c6 #91cc75 #fac858 #ee6666 #73c0de #3ba272 #fc8452 #9a60b4 "
+            "#ea7ccc"
         ).split()
+        self.default_color_n = len(self.colors)
         if init_opts.opts.get("theme") == ThemeType.WHITE:
             self.options.update(color=self.colors)
         self.options.update(
@@ -25,6 +26,25 @@ class Chart(Base):
             tooltip=opts.TooltipOpts().opts,
         )
         self._chart_type: Optional[str] = None
+
+    def set_dark_mode(
+        self,
+        dark_mode_colors: Optional[Sequence[str]] = None,
+        dark_mode_bg_color: str = "#100C2A"
+    ):
+        # [Hard Code Here] The Echarts default Dark Mode Configurations
+        if dark_mode_colors is None:
+            dark_mode_colors = (
+                "#4992ff #7cffb2 #fddd60 #ff6e76 #58d9f9 #05c091 #ff8a45 "
+                "#8d48e3 #dd79ff"
+            ).split()
+        self.options.update(
+            backgroundColor=dark_mode_bg_color,
+            darkMode=True,
+            color=dark_mode_colors,
+        )
+        self.theme = ThemeType.DARK
+        return self
 
     def set_colors(self, colors: Sequence[str]):
         self.options.update(color=colors)
@@ -86,11 +106,15 @@ class Chart(Base):
 
     def _append_legend(self, name, is_selected):
         self.options.get("legend")[0].get("data").append(name)
-        self.options.get("legend")[0].get("selected").update({name: is_selected})
+        if self.options.get("legend")[0].get("selected") is not None:
+            self.options.get("legend")[0].get("selected").update({name: is_selected})
 
     def _append_color(self, color: Optional[str]):
         if color:
-            self.colors = [color] + self.colors
+            # 这是一个bug
+            # 添加轴（执行add_yaxis操作）的顺序与新添加的color值（设置color属性）未一一对应，正好颠倒
+            self.colors.insert(-self.default_color_n, color)
+            # self.colors = [color] + self.colors
             if self.theme == ThemeType.WHITE:
                 self.options.update(color=self.colors)
 
@@ -128,7 +152,8 @@ class Chart(Base):
         if isinstance(legend_opts, opts.LegendOpts):
             legend_opts = legend_opts.opts
         for _s in self.options["legend"]:
-            _s.update(legend_opts)
+            # _s.update(legend_opts)
+            _s.update(**{k: v for k, v in legend_opts.items() if v is not None})
 
         if xaxis_opts and self.options.get("xAxis", None):
             if isinstance(xaxis_opts, opts.AxisOpts):
@@ -147,14 +172,35 @@ class Chart(Base):
         source: types.Union[types.Sequence, types.JSFunc] = None,
         dimensions: types.Optional[types.Sequence] = None,
         source_header: types.Optional[bool] = None,
+        transform: types.Optional[Sequence[opts.DatasetTransformOpts]] = None,
+        from_dataset_index: types.Optional[types.Numeric] = None,
+        from_dataset_id: types.Optional[types.Numeric] = None,
+        from_transform_result: types.Optional[types.Numeric] = None,
     ):
-        self.options.update(
-            dataset={
-                "source": source,
-                "dimensions": dimensions,
-                "sourceHeader": source_header,
-            }
-        )
+        if self.options.get("dataset") is not None:
+            self.options.get("dataset").append(
+                {
+                    "source": source,
+                    "dimensions": dimensions,
+                    "sourceHeader": source_header,
+                    "transform": transform,
+                    "fromDatasetIndex": from_dataset_index,
+                    "fromDatasetId": from_dataset_id,
+                    "fromTransformResult": from_transform_result,
+                }
+            )
+        else:
+            self.options.update(
+                dataset=[{
+                    "source": source,
+                    "dimensions": dimensions,
+                    "sourceHeader": source_header,
+                    "transform": transform,
+                    "fromDatasetIndex": from_dataset_index,
+                    "fromDatasetId": from_dataset_id,
+                    "fromTransformResult": from_transform_result,
+                }]
+            )
         return self
 
 
@@ -194,10 +240,14 @@ class RectChart(Chart):
         self.options.get("legend")[0].get("data").extend(
             chart.options.get("legend")[0].get("data")
         )
-        self.options.get("legend")[0].get("selected").update(
-            chart.options.get("legend")[0].get("selected")
-        )
+        if self.options.get("legend")[0].get("selected") is not None:
+            self.options.get("legend")[0].get("selected").update(
+                chart.options.get("legend")[0].get("selected")
+            )
         self.options.get("series").extend(chart.options.get("series"))
+        # to merge colors of chart
+        for c in chart.colors[:len(chart.colors) - self.default_color_n]:
+            self.colors.insert(len(self.colors) - self.default_color_n, c)
         return self
 
 
@@ -210,8 +260,66 @@ class Chart3D(Chart):
         init_opts.renderer = RenderType.CANVAS
         super().__init__(init_opts)
         self.js_dependencies.add("echarts-gl")
-        self.options.update(visualMap=opts.VisualMapOpts().opts)
         self._3d_chart_type: Optional[str] = None  # 3d chart type,don't use it directly
+
+    def add_globe(
+        self,
+        is_show: bool = True,
+        globe_radius: types.Numeric = 100,
+        globe_outer_radius: types.Numeric = 150,
+        environment: str = "auto",
+        base_texture: types.Union[str, types.JsCode, None] = None,
+        height_texture: types.Union[str, types.JsCode, None] = None,
+        displacement_texture: types.Union[str, types.JsCode, None] = None,
+        displacement_scale: types.Numeric = 0,
+        displacement_quality: str = "medium",
+        shading: types.Optional[str] = None,
+        realistic_material_opts: types.Optional[types.Map3DRealisticMaterial] = None,
+        lambert_material_opts: types.Optional[types.Map3DLambertMaterial] = None,
+        color_material_opts: types.Optional[types.Map3DColorMaterial] = None,
+        light_opts: types.Optional[types.Map3DLight] = None,
+        post_effect_opts: types.Optional[types.Map3DPostEffect] = None,
+        is_enable_super_sampling: types.Union[str, bool] = "auto",
+        view_control_opts: types.Optional[types.Map3DViewControl] = None,
+        layers: types.Optional[types.GlobeLayers] = None,
+        z_level: types.Numeric = -10,
+        pos_left: types.Union[str, types.Numeric] = "auto",
+        pos_top: types.Union[str, types.Numeric] = "auto",
+        pos_right: types.Union[str, types.Numeric] = "auto",
+        pos_bottom: types.Union[str, types.Numeric] = "auto",
+        width: types.Union[str, types.Numeric] = "auto",
+        height: types.Union[str, types.Numeric] = "auto",
+    ):
+        self.options.update(
+            globe={
+                "show": is_show,
+                "globeRadius": globe_radius,
+                "globeOuterRadius": globe_outer_radius,
+                "environment": environment,
+                "baseTexture": base_texture,
+                "heightTexture": height_texture,
+                "displacementTexture": displacement_texture,
+                "displacementScale": displacement_scale,
+                "displacementQuality": displacement_quality,
+                "shading": shading,
+                "realisticMaterial": realistic_material_opts,
+                "lambertMaterial": lambert_material_opts,
+                "colorMaterial": color_material_opts,
+                "light": light_opts,
+                "postEffect": post_effect_opts,
+                "temporalSuperSampling": {"enable": is_enable_super_sampling},
+                "viewControl": view_control_opts,
+                "layers": layers,
+                "zlevel": z_level,
+                "left": pos_left,
+                "top": pos_top,
+                "right": pos_right,
+                "bottom": pos_bottom,
+                "width": width,
+                "height": height,
+            }
+        )
+        return self
 
 
 class ThreeAxisChart(Chart3D):
@@ -222,11 +330,17 @@ class ThreeAxisChart(Chart3D):
         shading: Optional[str] = None,
         itemstyle_opts: types.ItemStyle = None,
         label_opts: types.Label = opts.LabelOpts(is_show=False),
-        xaxis3d_opts: types.Axis3D = opts.Axis3DOpts(type_="category"),
-        yaxis3d_opts: types.Axis3D = opts.Axis3DOpts(type_="category"),
-        zaxis3d_opts: types.Axis3D = opts.Axis3DOpts(type_="value"),
+        grid_3d_index: types.Numeric = 0,
+        xaxis3d_opts: types.Axis3D = opts.Axis3DOpts(type_="value", name="X"),
+        yaxis3d_opts: types.Axis3D = opts.Axis3DOpts(type_="value", name="Y"),
+        zaxis3d_opts: types.Axis3D = opts.Axis3DOpts(type_="value", name="Z"),
         grid3d_opts: types.Grid3D = opts.Grid3DOpts(),
         encode: types.Union[types.JSFunc, dict, None] = None,
+        is_parametric: types.Optional[bool] = None,
+        is_show_wire_frame: types.Optional[bool] = None,
+        wire_frame_line_style_opts: types.Optional[opts.LineStyleOpts] = None,
+        equation: types.Optional[dict] = None,
+        parametric_equation: types.Optional[dict] = None,
     ):
         self.options.get("legend")[0].get("data").append(series_name)
         self.options.update(
@@ -236,15 +350,36 @@ class ThreeAxisChart(Chart3D):
             grid3D=grid3d_opts,
         )
 
-        self.options.get("series").append(
-            {
-                "type": self._3d_chart_type,
-                "name": series_name,
-                "data": data,
-                "label": label_opts,
-                "shading": shading,
-                "itemStyle": itemstyle_opts,
-                "encode": encode,
-            }
-        )
+        if self._3d_chart_type == "surface":
+            self.options.get("series").append(
+                {
+                    "type": self._3d_chart_type,
+                    "name": series_name,
+                    "data": data,
+                    "label": label_opts,
+                    "shading": shading,
+                    "grid3DIndex": grid_3d_index,
+                    "itemStyle": itemstyle_opts,
+                    "parametric": is_parametric,
+                    "wireframe": {
+                        "show": is_show_wire_frame,
+                        "lineStyle": wire_frame_line_style_opts,
+                    },
+                    "equation": equation,
+                    "parametricEquation": parametric_equation
+                }
+            )
+        else:
+            self.options.get("series").append(
+                {
+                    "type": self._3d_chart_type,
+                    "name": series_name,
+                    "data": data,
+                    "label": label_opts,
+                    "shading": shading,
+                    "grid3DIndex": grid_3d_index,
+                    "itemStyle": itemstyle_opts,
+                    "encode": encode,
+                }
+            )
         return self

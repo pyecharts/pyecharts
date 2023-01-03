@@ -9,11 +9,13 @@ from pyecharts.commons.utils import JsCode
 
 @patch("pyecharts.render.engine.write_utf8_html_file")
 def test_liquid_base(fake_writer):
-    c = Liquid().add("lq", [0.6, 0.7])
+    c = Liquid().add("lq", [0.6, 0.7], is_animation=False)
     c.render()
     _, content = fake_writer.call_args[0]
     assert_equal(c.theme, "white")
     assert_equal(c.renderer, "canvas")
+    assert_in("animationDuration", content)
+    assert_in("animationDurationUpdate", content)
 
 
 @patch("pyecharts.render.engine.write_utf8_html_file")

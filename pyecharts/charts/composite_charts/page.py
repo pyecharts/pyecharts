@@ -54,11 +54,15 @@ class Page(CompositeMixin):
         page_title: str = CurrentConfig.PAGE_TITLE,
         js_host: str = "",
         interval: int = 1,
+        is_remove_br: bool = False,
+        page_border_color: str = "",
         layout: types.Union[PageLayoutOpts, dict] = PageLayoutOpts(),
     ):
         self.js_host: str = js_host or CurrentConfig.ONLINE_HOST
         self.page_title = page_title
         self.page_interval = interval
+        self.remove_br = is_remove_br
+        self.page_border_color = page_border_color
         self.layout = self._assembly_layout(layout)
         self.js_functions: utils.OrderedSet = utils.OrderedSet()
         self.js_dependencies = utils.OrderedSet()

@@ -17,6 +17,7 @@ class Radar(Chart):
         shape: types.Optional[str] = None,
         center: types.Optional[types.Sequence] = None,
         radius: types.Optional[types.Union[types.Sequence, str]] = None,
+        start_angle: types.Numeric = 90,
         textstyle_opts: types.TextStyle = opts.TextStyleOpts(),
         splitline_opt: types.SplitLine = opts.SplitLineOpts(is_show=True),
         splitarea_opt: types.SplitArea = opts.SplitAreaOpts(),
@@ -36,12 +37,16 @@ class Radar(Chart):
                 s = s.opts
             indicators.append(s)
 
-        self.options.update(
-            radar={
+        if self.options.get("radar") is None:
+            self.options.update(radar=[])
+
+        self.options.get("radar").append(
+            {
                 "indicator": indicators,
                 "shape": shape,
                 "center": center,
                 "radius": radius,
+                "startAngle": start_angle,
                 "name": {"textStyle": textstyle_opts},
                 "splitLine": splitline_opt,
                 "splitArea": splitarea_opt,
@@ -59,6 +64,7 @@ class Radar(Chart):
         symbol: types.Optional[str] = None,
         color: types.Optional[str] = None,
         label_opts: opts.LabelOpts = opts.LabelOpts(),
+        radar_index: types.Numeric = None,
         linestyle_opts: opts.LineStyleOpts = opts.LineStyleOpts(),
         areastyle_opts: opts.AreaStyleOpts = opts.AreaStyleOpts(),
         tooltip_opts: types.Tooltip = None,
@@ -75,6 +81,7 @@ class Radar(Chart):
                 "data": data,
                 "symbol": symbol,
                 "label": label_opts,
+                "radarIndex": radar_index,
                 "itemStyle": {"normal": {"color": color}},
                 "lineStyle": linestyle_opts,
                 "areaStyle": areastyle_opts,

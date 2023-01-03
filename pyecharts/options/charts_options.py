@@ -835,6 +835,7 @@ class TreeMapItemStyleOpts(BasicOpts):
 class TreeMapLevelsOpts(BasicOpts):
     def __init__(
         self,
+        color: Union[str, Sequence] = None,
         color_alpha: Union[Numeric, Sequence] = None,
         color_saturation: Union[Numeric, Sequence] = None,
         color_mapping_by: str = "index",
@@ -843,6 +844,7 @@ class TreeMapLevelsOpts(BasicOpts):
         upper_label_opts: Union[LabelOpts, dict, None] = None,
     ):
         self.opts: dict = {
+            "color": color,
             "colorAlpha": color_alpha,
             "colorSaturation": color_saturation,
             "colorMappingBy": color_mapping_by,
@@ -1066,6 +1068,30 @@ class Map3DViewControlOpts(BasicOpts):
         }
 
 
+class GlobeLayersOpts(BasicOpts):
+    def __init__(
+        self,
+        is_show: bool = True,
+        type_: str = "overlay",
+        name: Optional[str] = None,
+        blend_to: str = "albedo",
+        intensity: Numeric = 1,
+        shading: str = "lambert",
+        distance: Optional[Numeric] = None,
+        texture: Union[JSFunc, None] = None,
+    ):
+        self.opts: dict = {
+            "show": is_show,
+            "type": type_,
+            "name": name,
+            "blendTo": blend_to,
+            "intensity": intensity,
+            "shading": shading,
+            "distance": distance,
+            "texture": texture,
+        }
+
+
 class BarBackgroundStyleOpts(BasicOpts):
     def __init__(
         self,
@@ -1113,6 +1139,9 @@ class GaugeTitleOpts(BasicOpts):
         shadow_blur: Optional[Numeric] = 0,
         shadow_offset_x: Numeric = 0,
         shadow_offset_y: Numeric = 0,
+        overflow: Optional[str] = "none",
+        rich: Optional[dict] = None,
+        is_value_animation: bool = True,
     ):
         if offset_center is None:
             offset_center = [0, "-40%"]
@@ -1133,6 +1162,9 @@ class GaugeTitleOpts(BasicOpts):
             "shadowBlur": shadow_blur,
             "shadowOffsetX": shadow_offset_x,
             "shadowOffsetY": shadow_offset_y,
+            "overflow": overflow,
+            "rich": rich,
+            "valueAnimation": is_value_animation,
         }
 
 
@@ -1145,7 +1177,7 @@ class GaugeDetailOpts(BasicOpts):
         border_color: str = "transparent",
         offset_center: Sequence = None,
         formatter: Optional[JSFunc] = None,
-        color: str = "auto",
+        color: str = "#464646",
         font_style: str = "normal",
         font_weight: str = "normal",
         font_family: str = "sans-serif",
@@ -1156,6 +1188,9 @@ class GaugeDetailOpts(BasicOpts):
         shadow_blur: Optional[Numeric] = 0,
         shadow_offset_x: Numeric = 0,
         shadow_offset_y: Numeric = 0,
+        overflow: Optional[str] = "none",
+        rich: Optional[dict] = None,
+        is_value_animation: bool = True,
     ):
         if offset_center is None:
             offset_center = [0, "-40%"]
@@ -1177,6 +1212,29 @@ class GaugeDetailOpts(BasicOpts):
             "shadowBlur": shadow_blur,
             "shadowOffsetX": shadow_offset_x,
             "shadowOffsetY": shadow_offset_y,
+            "overflow": overflow,
+            "rich": rich,
+            "valueAnimation": is_value_animation,
+        }
+
+
+class GaugeProgressOpts(BasicOpts):
+    def __init__(
+        self,
+        is_show: bool = False,
+        is_overlap: bool = True,
+        width: Numeric = 10,
+        is_round_cap: bool = False,
+        is_clip: bool = False,
+        itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
+    ):
+        self.opts: dict = {
+            "show": is_show,
+            "overlap": is_overlap,
+            "width": width,
+            "roundCap": is_round_cap,
+            "clip": is_clip,
+            "itemStyle": itemstyle_opts,
         }
 
 
@@ -1190,21 +1248,77 @@ class GaugePointerOpts(BasicOpts):
         self.opts: dict = {"show": is_show, "length": length, "width": width}
 
 
+class GaugeAnchorOpts(BasicOpts):
+    def __init__(
+        self,
+        is_show: bool = True,
+        is_show_above: bool = False,
+        size: Numeric = 6,
+        icon: str = "circle",
+        offset_center: Optional[Sequence] = None,
+        is_keep_aspect: bool = False,
+        itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
+    ):
+        if offset_center is None:
+            offset_center = [0, 0]
+        self.opts: dict = {
+            "show": is_show,
+            "showAbove": is_show_above,
+            "size": size,
+            "icon": icon,
+            "offsetCenter": offset_center,
+            "keepAspect": is_keep_aspect,
+            "itemStyle": itemstyle_opts,
+        }
+
+
 class PieLabelLineOpts(BasicOpts):
     def __init__(
         self,
         is_show: bool = True,
-        length: Numeric = None,
-        length_2: Numeric = None,
+        is_show_above: bool = False,
+        length: Numeric = 15,
+        length_2: Numeric = 15,
         smooth: Union[bool, Numeric] = False,
+        min_turn_angle: Numeric = 90,
         linestyle_opts: Union[LineStyleOpts, dict, None] = None,
+        max_surface_angle: Numeric = 90,
     ):
         self.opts: dict = {
             "show": is_show,
+            "showAbove": is_show_above,
             "length": length,
             "length2": length_2,
             "smooth": smooth,
+            "minTurnAngle": min_turn_angle,
             "lineStyle": linestyle_opts,
+            "maxSurfaceAngle": max_surface_angle,
+        }
+
+
+class PieEmptyCircleStyle(BasicOpts):
+    def __init__(
+        self,
+        color: str = "lightgray",
+        border_color: str = "#000",
+        border_width: Numeric = 0,
+        border_type: str = "solid",
+        border_dash_offset: Numeric = 0,
+        border_cap: str = "butt",
+        border_join: str = "bevel",
+        border_miter_limit: Numeric = 10,
+        opacity: Numeric = 1,
+    ):
+        self.opts: dict = {
+            "color": color,
+            "borderColor": border_color,
+            "borderWidth": border_width,
+            "borderType": border_type,
+            "borderDashOffset": border_dash_offset,
+            "borderCap": border_cap,
+            "borderJoin": border_join,
+            "borderMiterLimit": border_miter_limit,
+            "opacity": opacity,
         }
 
 
@@ -1274,4 +1388,94 @@ class TimelineControlStyle(BasicOpts):
             "color": color,
             "borderColor": border_color,
             "borderWidth": border_width,
+        }
+
+
+class TabChartGlobalOpts(BasicOpts):
+    def __init__(
+        self,
+        is_enable: bool = False,
+        tab_base_css: Optional[dict] = None,
+        tab_button_css: Optional[dict] = None,
+        tab_button_hover_css: Optional[dict] = None,
+        tab_button_active_css: Optional[dict] = None,
+    ):
+        self.opts: dict = {
+            "enable": is_enable,
+            "base": tab_base_css,
+            "button_base": tab_button_css,
+            "button_hover": tab_button_hover_css,
+            "button_active": tab_button_active_css,
+        }
+
+
+class GraphGLNode(BasicOpts):
+    def __init__(
+        self,
+        name: Optional[str] = None,
+        x: Optional[Numeric] = None,
+        y: Optional[Numeric] = None,
+        value: Union[str, Numeric, Sequence, None] = None,
+        itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
+    ):
+        self.opts: dict = {
+            "name": name,
+            "x": x,
+            "y": y,
+            "value": value,
+            "itemStyle": itemstyle_opts,
+        }
+
+
+class GraphGLLink(BasicOpts):
+    def __init__(
+        self,
+        source: Union[str, int, None] = None,
+        target: Union[str, int, None] = None,
+        value: Optional[Numeric] = None,
+        linestyle_opts: Union[LineStyleOpts, dict, None] = None,
+    ):
+        self.opts: dict = {
+            "source": source,
+            "target": target,
+            "value": value,
+            "lineStyle": linestyle_opts,
+        }
+
+
+class GeoRegionsOpts(BasicOpts):
+    def __init__(
+        self,
+        name: Optional[str] = None,
+        is_selected: bool = False,
+        itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
+        label_opts: Union[LabelOpts, dict, None] = None,
+        emphasis_itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
+        emphasis_label_opts: Union[LabelOpts, dict, None] = None,
+        select_itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
+        select_label_opts: Union[LabelOpts, dict, None] = None,
+        blur_itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
+        blur_label_opts: Union[LabelOpts, dict, None] = None,
+        tooltip_opts: Union[TooltipOpts, dict, None] = None,
+        is_silent: bool = False,
+    ):
+        self.opts: dict = {
+            "name": name,
+            "selected": is_selected,
+            "itemStyle": itemstyle_opts,
+            "label": label_opts,
+            "emphasis": {
+                "itemStyle": emphasis_itemstyle_opts,
+                "label": emphasis_label_opts,
+            },
+            "select": {
+                "itemStyle": select_itemstyle_opts,
+                "label": select_label_opts,
+            },
+            "blur": {
+                "itemStyle": blur_itemstyle_opts,
+                "label": blur_label_opts,
+            },
+            "tooltip": tooltip_opts,
+            "silent": is_silent,
         }

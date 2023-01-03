@@ -25,6 +25,7 @@ class ItemStyleOpts(BasicOpts):
         border_color0: Optional[str] = None,
         border_width: Optional[Numeric] = None,
         border_type: Optional[str] = None,
+        border_radius: Optional[Numeric] = None,
         opacity: Optional[Numeric] = None,
         area_color: Optional[str] = None,
     ):
@@ -35,6 +36,7 @@ class ItemStyleOpts(BasicOpts):
             "borderColor0": border_color0,
             "borderWidth": border_width,
             "borderType": border_type,
+            "borderRadius": border_radius,
             "opacity": opacity,
             "areaColor": area_color,
         }
@@ -88,7 +90,7 @@ class LabelOpts(BasicOpts):
     def __init__(
         self,
         is_show: bool = True,
-        position: Union[str, Sequence] = "top",
+        position: Optional[Union[str, Sequence]] = None,
         color: Optional[str] = None,
         distance: Union[Numeric, Sequence, None] = None,
         font_size: Optional[Numeric] = None,
@@ -215,6 +217,7 @@ class MarkLineItem(BasicOpts):
         value_index: Optional[Numeric] = None,
         value_dim: Optional[str] = None,
         coord: Optional[Sequence] = None,
+        linestyle_opts: Union[LineStyleOpts, dict, None] = None,
         symbol: Optional[str] = None,
         symbol_size: Optional[Numeric] = None,
     ):
@@ -227,6 +230,7 @@ class MarkLineItem(BasicOpts):
             "x": xcoord,
             "yAxis": y,
             "y": ycoord,
+            "lineStyle": linestyle_opts,
             "coord": coord,
             "symbol": symbol,
             "symbolSize": symbol_size,
@@ -351,7 +355,7 @@ class Lines3DEffectOpts(BasicOpts):
 
 
 class AreaStyleOpts(BasicOpts):
-    def __init__(self, opacity: Optional[Numeric] = 0, color: Optional[str] = None):
+    def __init__(self, opacity: Optional[Numeric] = 0, color: Optional[JSFunc] = None):
         self.opts: dict = {"opacity": opacity, "color": color}
 
 
@@ -415,4 +419,38 @@ class MinorSplitLineOpts(BasicOpts):
             "type": type_,
             "opacity": opacity,
             "lineStyle": linestyle_opts,
+        }
+
+
+class GraphGLForceAtlas2Opts(BasicOpts):
+    def __init__(
+        self,
+        is_gpu: bool = True,
+        steps: Numeric = 1,
+        stop_threshold: Numeric = 1,
+        is_barnes_hut_optimize: Optional[bool] = None,
+        is_repulsion_by_degree: bool = True,
+        is_lin_log_mode: bool = False,
+        gravity: Numeric = 1,
+        gravity_center: Optional[Sequence] = None,
+        scaling: Optional[Numeric] = None,
+        edge_weight_influence: Numeric = 1,
+        edge_weight: Union[Sequence, Numeric] = None,
+        node_weight: Union[Sequence, Numeric] = None,
+        is_prevent_overlap: bool = False,
+    ):
+        self.opts: dict = {
+            "GPU": is_gpu,
+            "steps": steps,
+            "stopThreshold": stop_threshold,
+            "barnesHutOptimize": is_barnes_hut_optimize,
+            "repulsionByDegree": is_repulsion_by_degree,
+            "linLogMode": is_lin_log_mode,
+            "gravity": gravity,
+            "gravityCenter": gravity_center,
+            "scaling": scaling,
+            "edgeWeightInfluence": edge_weight_influence,
+            "edgeWeight": edge_weight,
+            "nodeWeight": node_weight,
+            "preventOverlap": is_prevent_overlap,
         }

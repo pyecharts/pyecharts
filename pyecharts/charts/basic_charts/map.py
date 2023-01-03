@@ -40,6 +40,7 @@ class MapMixin:
         emphasis_itemstyle_opts: types.ItemStyle = None,
     ):
         self.js_dependencies.add(maptype)
+        self._geo_json_name = maptype
 
         if isinstance(data_pair[0], opts.MapItem):
             data = data_pair
@@ -60,7 +61,7 @@ class MapMixin:
                 "name": series_name,
                 "symbol": symbol,
                 "label": label_opts,
-                "mapType": maptype,
+                "map": maptype,
                 "data": data,
                 "roam": is_roam,
                 "aspectScale": aspect_scale,
@@ -87,4 +88,6 @@ class MapMixin:
 
 
 class Map(Chart, MapMixin):
-    pass
+    def add_geo_json(self, geo_json: dict):
+        self._geo_json = geo_json
+        return self

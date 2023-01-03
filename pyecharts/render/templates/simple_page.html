@@ -7,8 +7,8 @@
     {{ macro.render_chart_dependencies(chart) }}
     {{ macro.render_chart_css(chart) }}
 </head>
-<body>
-    <style>.box { {{ chart.layout }} }; </style>
+<body {% if chart.page_border_color != '' %}style="background-color: {{ chart.page_border_color }}"{% endif %}>
+    <style>.box { {{ chart.layout }} } </style>
     {% if chart.download_button %}
         <button onclick="downloadCfg()">Save Config</button>
     {% endif %}
@@ -19,7 +19,9 @@
             {% else %}
                 {{ macro.render_chart_content(c) }}
             {% endif %}
-            {% for _ in range(chart.page_interval) %}<br/>{% endfor %}
+            {% for _ in range(chart.page_interval) %}
+                {% if chart.remove_br is false %}<br/>{% endif %}
+            {% endfor %}
         {% endfor %}
     </div>
     <script>

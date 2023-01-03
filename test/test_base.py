@@ -1,9 +1,10 @@
+from datetime import datetime
 from unittest.mock import patch
 
 from nose.tools import assert_equal, assert_not_in
 
 from pyecharts.charts import Bar
-from pyecharts.charts.base import Base
+from pyecharts.charts.base import Base, default
 
 
 def test_base_add_functions():
@@ -30,3 +31,11 @@ def test_render(fake_writer):
     bar = Bar()
     bar.add_xaxis(["1"]).add_yaxis("", [1]).render(my_render_content=my_render_content)
     assert "test ok" == "test ok"
+
+
+def test_base_iso_format():
+    mock_time_str = "2022-04-14 14:42:00"
+    assert (
+        default(datetime.strptime(mock_time_str, "%Y-%m-%d %H:%M:%S"))
+        == "2022-04-14T14:42:00"
+    )

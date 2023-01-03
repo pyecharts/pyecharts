@@ -54,14 +54,14 @@ def replace_placeholder_with_quotes(html: str) -> str:
     return re.sub("--x_x--0_0--", "", html)
 
 
-def _flat(obj):
-    if hasattr(obj, "js_dependencies"):
-        return list(obj.js_dependencies)
-
-    if isinstance(obj, (list, tuple, set)):
-        return obj
-
-    return (obj,)  # tuple
+# def _flat(obj):
+#     if hasattr(obj, "js_dependencies"):
+#         return list(obj.js_dependencies)
+#
+#     if isinstance(obj, (list, tuple, set)):
+#         return obj
+#
+#     return (obj,)  # tuple
 
 
 def _expand(dict_generator):

@@ -106,6 +106,47 @@ class TestTimeLine(unittest.TestCase):
             type(self.tl.options.get("baseOption").get("timeline").get("graphic")[0]),
         )
 
+    def test_timeline_graphic_v1(self):
+        self.tl.add_schema(
+            graphic_opts=[
+                opts.GraphicGroup(
+                    graphic_item=opts.GraphicItem(
+                        rotation=JsCode("Math.PI / 4"),
+                        bounding="raw",
+                        right=110,
+                        bottom=110,
+                        z=100,
+                    ),
+                    children=[
+                        opts.GraphicRect(
+                            graphic_item=opts.GraphicItem(
+                                left="center", top="center", z=100
+                            ),
+                            graphic_shape_opts=opts.GraphicShapeOpts(
+                                width=400, height=50
+                            ),
+                            graphic_basicstyle_opts=opts.GraphicBasicStyleOpts(
+                                fill="rgba(0,0,0,0.3)"
+                            ),
+                        ),
+                        opts.GraphicText(
+                            graphic_item=opts.GraphicItem(
+                                left="center", top="center", z=100
+                            ),
+                            graphic_textstyle_opts=opts.GraphicTextStyleOpts(
+                                text="pyecharts bar chart",
+                                font="bold 26px Microsoft YaHei",
+                            ),
+                        ),
+                    ],
+                )
+            ]
+        )
+        assert_equal(
+            type(opts.GraphicGroup()),
+            type(self.tl.options.get("baseOption").get("timeline").get("graphic")[0]),
+        )
+
 
 def test_page_with_multi_axis():
     tl = Timeline()

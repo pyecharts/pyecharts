@@ -3,6 +3,7 @@ from ..charts.basic_charts.bar import Bar
 from ..charts.basic_charts.bmap import BMap
 from ..charts.basic_charts.boxplot import Boxplot
 from ..charts.basic_charts.calendar import Calendar
+from ..charts.basic_charts.custom import Custom
 from ..charts.basic_charts.effectscatter import EffectScatter
 from ..charts.basic_charts.funnel import Funnel
 from ..charts.basic_charts.gauge import Gauge
@@ -34,7 +35,9 @@ from ..charts.composite_charts.timeline import Timeline
 
 # 3d charts
 from ..charts.three_axis_charts.bar3D import Bar3D
+from ..charts.three_axis_charts.graph_gl import GraphGL
 from ..charts.three_axis_charts.line3D import Line3D
+from ..charts.three_axis_charts.lines3D import Lines3D
 from ..charts.three_axis_charts.map3D import Map3D
 from ..charts.three_axis_charts.map_globe import MapGlobe
 from ..charts.three_axis_charts.scatter3D import Scatter3D
