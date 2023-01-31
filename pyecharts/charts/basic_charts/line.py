@@ -44,7 +44,7 @@ class Line(RectChart):
         self._append_color(color)
         self._append_legend(series_name, is_selected)
 
-        if all([isinstance(d, opts.LineItem) for d in y_axis]):
+        if all([isinstance(d, opts.LineItem) or isinstance(d, opts.LineItem) for d in y_axis]):
             data = y_axis
         else:
             # 合并 x 和 y 轴数据，避免当 X 轴的类型设置为 'value' 的时候，
