@@ -63,6 +63,12 @@ v0.5.x 和 V1 间不兼容，V1 是一个全新的版本，详见 [ISSUE#892](ht
 
 新版本系列将从 v1.0.0 开始，文档位于 [pyecharts.org](https://pyecharts.org)；示例位于 [gallery.pyecharts.org](https://gallery.pyecharts.org)
 
+### V2
+
+> 仅支持 Python3.6+
+
+新版本基于 Echarts 5.4.1+ 进行渲染, 文档和示例位置与 V1 相同
+
 ## 🔰 安装
 
 **pip 安装**
@@ -230,16 +236,6 @@ pyecharts 主要由以下几位开发者开发维护
 * [@sunhailin-Leo](https://github.com/sunhailin-Leo)
 
 更多贡献者信息可以访问 [pyecharts/graphs/contributors](https://github.com/pyecharts/pyecharts/graphs/contributors)
-
-## 💌 捐赠
-
-开发和维护 pyecharts 花费了我巨大的心力，如果你觉得项目帮助到您，请认真考虑请作者喝一杯咖啡 😄
-
-| 微信二维码 | 支付宝二维码 |
-| -------- | ---------- |
-| <img src="https://assets.pyecharts.org/images/wechat-code.png" width=220px alt="wechat-code"> | <img src="https://assets.pyecharts.org/images/alipay-code.png" width=220px alt="alipay-code"> |
-
-如果其他开发者帮助到了您，也可以请他们喝咖啡 [捐赠通道](http://pyecharts.org/#/zh-cn/donate)
 
 ## 💡 贡献
 

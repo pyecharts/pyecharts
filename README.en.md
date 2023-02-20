@@ -45,6 +45,29 @@
 * Detailed documentation and examples.
 * More than 400+ geomaps assets for geograpic information processing
 
+## ⏳ Version
+
+v0.5.x is not compatible with V1, which is a completely new version, see [ISSUE#892](https://github.com/pyecharts/pyecharts/issues/892), [ISSUE#1033](https://github.com/pyecharts/). pyecharts/issues/1033).
+
+### V0.5.x
+
+> Support for Python 2.7, 3.4+
+
+At the discretion of the development team, version 0.5.x will no longer be maintained. Version 0.5.x code is located in the *05x* branch and documentation is located at [05x-docs.pyecharts.org](http://05x-docs.pyecharts.org).
+
+### V1
+
+> Python 3.6+ only
+
+The new version series will start with v1.0.0, documented at [pyecharts.org](https://pyecharts.org); examples at [gallery.pyecharts.org](https://gallery.pyecharts.org)
+
+### V2
+
+> Python 3.6+ only
+
+The new version is based on Echarts 5.4.1+ for rendering, and the documentation and examples are in the same location as V1.
+
+
 ## 🔰 Installation
 
 **pip install**
@@ -142,7 +165,7 @@ make_snapshot(bar.render(), "bar.png")
 <img src="https://user-images.githubusercontent.com/19553554/35082279-e111743c-fc53-11e7-9362-580160593715.gif" width="33%" alt="timeline"/>
 </div>
 
-For more documentaiton, please visit
+For more documentation, please visit
 
 * [Chinese documentation](https://pyecharts.org/#/zh-cn/)
 * [English Documentation](https://pyecharts.org/#/en-us/)

@@ -30,7 +30,7 @@ class _Faker:
         "#a50026",
     ]
     months = ["{}月".format(i) for i in range(1, 13)]
-    provinces = ["广东", "北京", "上海", "江西", "湖南", "浙江", "江苏"]
+    provinces = ["广东省", "北京市", "上海市", "江西省", "湖南省", "浙江省", "江苏省"]
     guangdong_city = ["汕头市", "汕尾市", "揭阳市", "阳江市", "肇庆市", "广州市", "惠州市"]
     country = [
         "China",
