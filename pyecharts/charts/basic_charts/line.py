@@ -23,24 +23,24 @@ class Line(RectChart):
         yaxis_index: types.Optional[types.Numeric] = None,
         color: types.Optional[str] = None,
         is_symbol_show: bool = True,
-            symbol: types.Optional[str] = None,
-            symbol_size: types.Union[types.Numeric, types.Sequence] = 4,
-            stack: types.Optional[str] = None,
-            is_smooth: bool = False,
-            is_clip: bool = True,
-            is_step: bool = False,
-            is_hover_animation: bool = True,
-            z_level: types.Numeric = 0,
-            z: types.Numeric = 0,
-            log_base: types.Numeric = 10,
-            sampling: types.Optional[str] = None,
-            markpoint_opts: types.MarkPoint = None,
-            markline_opts: types.MarkLine = None,
-            tooltip_opts: types.Tooltip = None,
-            itemstyle_opts: types.ItemStyle = None,
-            label_opts: types.Label = opts.LabelOpts(),
-            linestyle_opts: types.LineStyle = opts.LineStyleOpts(),
-            areastyle_opts: types.AreaStyle = opts.AreaStyleOpts(),
+        symbol: types.Optional[str] = None,
+        symbol_size: types.Union[types.Numeric, types.Sequence] = 4,
+        stack: types.Optional[str] = None,
+        is_smooth: bool = False,
+        is_clip: bool = True,
+        is_step: bool = False,
+        is_hover_animation: bool = True,
+        z_level: types.Numeric = 0,
+        z: types.Numeric = 0,
+        log_base: types.Numeric = 10,
+        sampling: types.Optional[str] = None,
+        markpoint_opts: types.MarkPoint = None,
+        markline_opts: types.MarkLine = None,
+        tooltip_opts: types.Tooltip = None,
+        itemstyle_opts: types.ItemStyle = None,
+        label_opts: types.Label = opts.LabelOpts(),
+        linestyle_opts: types.LineStyle = opts.LineStyleOpts(),
+        areastyle_opts: types.AreaStyle = opts.AreaStyleOpts(),
     ):
         self._append_color(color)
         self._append_legend(series_name, is_selected)
@@ -52,7 +52,10 @@ class Line(RectChart):
             # X、Y 轴均显示 Y 轴数据
             try:
                 xaxis_index = xaxis_index or 0
-                data = [list(z) for z in zip(self.options["xAxis"][xaxis_index]['data'], y_axis)]
+                data = [
+                    list(z)
+                    for z in zip(self.options["xAxis"][xaxis_index]["data"], y_axis)
+                ]
             except IndexError:
                 data = [list(z) for z in zip(self._xaxis_data, y_axis)]
 
