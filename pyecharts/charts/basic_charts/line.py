@@ -33,6 +33,7 @@ class Line(RectChart):
         z_level: types.Numeric = 0,
         z: types.Numeric = 0,
         log_base: types.Numeric = 10,
+        sampling: types.Optional[str] = None,
         markpoint_opts: types.MarkPoint = None,
         markline_opts: types.MarkLine = None,
         tooltip_opts: types.Tooltip = None,
@@ -51,7 +52,10 @@ class Line(RectChart):
             # X、Y 轴均显示 Y 轴数据
             try:
                 xaxis_index = xaxis_index or 0
-                data = [list(z) for z in zip(self.options["xAxis"][xaxis_index]['data'], y_axis)]
+                data = [
+                    list(z)
+                    for z in zip(self.options["xAxis"][xaxis_index]["data"], y_axis)
+                ]
             except IndexError:
                 data = [list(z) for z in zip(self._xaxis_data, y_axis)]
 
@@ -73,6 +77,7 @@ class Line(RectChart):
                 "hoverAnimation": is_hover_animation,
                 "label": label_opts,
                 "logBase": log_base,
+                "sampling": sampling,
                 "lineStyle": linestyle_opts,
                 "areaStyle": areastyle_opts,
                 "markPoint": markpoint_opts,
