@@ -47,10 +47,10 @@ def test_register_url(fake):
 def test_register_url_error():
     try:
         register_url("http://127.0.0.1")
-    except urllib.error.HTTPError as err:
-        assert_equal(type(err), urllib.error.HTTPError)
     except ConnectionRefusedError as err:
         assert_equal(type(err), ConnectionRefusedError)
+    except urllib.error.HTTPError as err:
+        assert_equal(type(err), urllib.error.HTTPError)
 
 
 def test_fuzzy_search_dict():
