@@ -35,7 +35,5 @@ def test_render(fake_writer):
 
 def test_base_iso_format():
     mock_time_str = "2022-04-14 14:42:00"
-    assert (
-        default(datetime.strptime(mock_time_str, "%Y-%m-%d %H:%M:%S"))
-        == "2022-04-14T14:42:00"
-    )
+    mock_time = datetime.strptime(mock_time_str, "%Y-%m-%d %H:%M:%S")
+    assert (default(mock_time) == "2022-04-14T14:42:00")

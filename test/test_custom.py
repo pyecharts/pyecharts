@@ -19,7 +19,6 @@ def test_custom_base(fake_writer):
                 var start = api.coord([api.value(1), categoryIndex]);
                 var end = api.coord([api.value(2), categoryIndex]);
                 var height = api.size([0, 1])[1] * 0.6;
-    
                 var rectShape = echarts.graphic.clipRectByRect({
                     x: start[0],
                     y: start[1] - height / 2,
@@ -31,7 +30,6 @@ def test_custom_base(fake_writer):
                     width: params.coordSys.width,
                     height: params.coordSys.height
                 });
-    
                 return rectShape && {
                     type: 'rect',
                     shape: rectShape,

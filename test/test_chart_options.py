@@ -98,4 +98,3 @@ def test_tree_map_item_style_options_remove_none():
         "borderWidth": 0,
     }
     assert_equal(expected, remove_key_with_none_value(option.opts))
-

@@ -24,4 +24,3 @@ def test_composite_mixin_len():
     c.add(b_1, "bar")
     c.add(b_2, "line")
     assert len(c) == 2
-
