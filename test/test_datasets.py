@@ -2,7 +2,7 @@ import os
 import urllib.error
 from unittest.mock import patch
 
-from nose.tools import assert_equal, raises
+from nose.tools import assert_equal, assert_in, raises
 
 from pyecharts.datasets import (
     EXTRA,
@@ -47,10 +47,8 @@ def test_register_url(fake):
 def test_register_url_error():
     try:
         register_url("http://127.0.0.1")
-    except ConnectionRefusedError as err:
-        assert_equal(type(err), ConnectionRefusedError)
-    except urllib.error.HTTPError as err:
-        assert_equal(type(err), urllib.error.HTTPError)
+    except (urllib.error.HTTPError, ConnectionRefusedError) as err:
+        assert_in(type(err), [urllib.error.HTTPError, ConnectionRefusedError])
 
 
 def test_fuzzy_search_dict():
