@@ -117,7 +117,7 @@ class Tab(CompositeMixin):
             if tab_button_active != ""
             else DEFAULT_TAB_BUTTON_ACTIVE_CSS
         )
-        if "chart-container" not in result:
+        if ".chart-container" not in result:
             result += """
             .chart-container { display: block; }
 

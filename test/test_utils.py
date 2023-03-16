@@ -1,6 +1,7 @@
 from nose.tools import assert_equal
 
 from pyecharts.commons import utils
+from pyecharts.datasets import EXTRA
 
 
 def test_utils_produce_require_dict():
@@ -15,6 +16,17 @@ def test_utils_produce_require_dict():
         cfg_1["config_items"], ["'baidu_map_api25':'https://api.map.baidu.com'"],
     )
     assert_equal(cfg_1["libraries"], ["'baidu_map_api25'"])
+
+
+def test_utils_produce_require_dict_with_extra():
+    global EXTRA
+    EXTRA["https://api.baidu.com"] = {
+        "https://api.baidu.com/test.min": ["https://api.baidu.com/test.min", "css"]
+    }
+    cfg_0 = utils.produce_require_dict(
+        utils.OrderedSet("https://api.baidu.com/test.min"), "https://example.com",
+    )
+    assert_equal(cfg_0["libraries"], ["'https://api.baidu.com/test.min'"])
 
 
 def test_js_code():

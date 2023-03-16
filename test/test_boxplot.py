@@ -49,6 +49,27 @@ def test_boxplot_base_v1(fake_writer):
 
 
 @patch("pyecharts.render.engine.write_utf8_html_file")
+def test_boxplot_base_v2(fake_writer):
+    v1 = [
+        None,
+        [200, 200, 200],
+    ]
+    v2 = [
+        [1000, None, 1000],
+        [200, 200, 200],
+    ]
+    c = Boxplot()
+    c.add_xaxis(["expr1", "expr2"]).add_yaxis(
+        "A", c.prepare_data(v1), box_width=40
+    ).add_yaxis("B", c.prepare_data(v2))
+    c.render()
+    _, content = fake_writer.call_args[0]
+    assert_equal(c.theme, "white")
+    assert_equal(c.renderer, "canvas")
+    assert_in("boxWidth", content)
+
+
+@patch("pyecharts.render.engine.write_utf8_html_file")
 def test_boxplot_item_base(fake_writer):
     x_axis = ["expr1", "expr2"]
     v1 = [

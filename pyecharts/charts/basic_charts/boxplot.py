@@ -59,6 +59,8 @@ class Boxplot(RectChart):
     def prepare_data(items):
         data = []
         for item in items:
+            if not item:
+                data.append([])
             try:
                 d, res = sorted(item), []
                 for i in range(1, 4):
@@ -74,6 +76,7 @@ class Boxplot(RectChart):
                     elif m == 3 / 4:
                         res.append(d[k - 1] * 0.25 + d[k] * 0.75)
                 data.append([d[0]] + res + [d[-1]])
-            except Exception:
-                pass
+            except TypeError:
+                # one of the item element is None
+                data.append([])
         return data

@@ -3,7 +3,7 @@ from unittest.mock import patch
 from nose.tools import assert_equal, assert_in
 
 from pyecharts import options as opts
-from pyecharts.charts import Bar, Grid, Line, Geo
+from pyecharts.charts import Bar, Grid, Line, Radar, Geo
 from pyecharts.globals import ThemeType
 from pyecharts.faker import Faker
 from pyecharts.commons.utils import JsCode
@@ -111,6 +111,7 @@ def _chart_for_grid_v2():
             color="blue",
             label_opts=opts.LabelOpts(is_show=False),
         )
+        .set_global_opts(visualmap_opts=opts.VisualMapOpts())
     )
 
     bar.overlap(line)
@@ -139,7 +140,10 @@ def test_grid_geo_bar(fake_writer):
         .add_xaxis(Faker.choose())
         .add_yaxis("商家A", Faker.values())
         .add_yaxis("商家B", Faker.values())
-        .set_global_opts(legend_opts=opts.LegendOpts(pos_left="20%"))
+        .set_global_opts(
+            title_opts=dict(title="Bar 图"),
+            legend_opts=opts.LegendOpts(pos_left="20%"),
+        )
     )
     geo = (
         Geo()
@@ -148,7 +152,7 @@ def test_grid_geo_bar(fake_writer):
         .set_series_opts(label_opts=opts.LabelOpts(is_show=False))
         .set_global_opts(
             visualmap_opts=opts.VisualMapOpts(),
-            title_opts=opts.TitleOpts(title="Grid-Geo-Bar"),
+            title_opts=dict(title="Geo 图"),
         )
     )
 
@@ -160,6 +164,51 @@ def test_grid_geo_bar(fake_writer):
     grid.render()
     _, content = fake_writer.call_args[0]
     assert_in("geo", content)
+
+
+@patch("pyecharts.render.engine.write_utf8_html_file")
+def test_grid_two_radar(fake_writer):
+    schema = [
+        opts.RadarIndicatorItem(name="销售", max_=6500),
+        opts.RadarIndicatorItem(name="管理", max_=16000),
+        opts.RadarIndicatorItem(name="信息技术", max_=30000),
+        opts.RadarIndicatorItem(name="客服", max_=38000),
+        opts.RadarIndicatorItem(name="研发", max_=52000),
+        opts.RadarIndicatorItem(name="市场", max_=25000),
+    ]
+    c = (
+        Radar()
+        .add_schema(schema=schema, center=['25%', '50%'])
+        .add(
+            series_name="预算分配",
+            data=[[4300, 10000, 28000, 35000, 50000, 19000]],
+            radar_index=0,
+        )
+        .set_global_opts(
+            legend_opts=opts.LegendOpts(pos_left="20%")
+        )
+    )
+    c2 = (
+        Radar()
+        .add_schema(schema=schema, center=['75%', '50%'])
+        .add(
+            series_name="实际开销",
+            data=[[5000, 14000, 28000, 31000, 42000, 21000]],
+            radar_index=1,
+        )
+        .set_global_opts(
+            legend_opts=opts.LegendOpts(pos_right="20%")
+        )
+    )
+
+    grid = (
+        Grid()
+        .add(c, grid_opts=opts.GridOpts())
+        .add(c2, grid_opts=opts.GridOpts())
+    )
+    grid.render()
+    _, content = fake_writer.call_args[0]
+    assert_in("radar", content)
 
 
 @patch("pyecharts.render.engine.write_utf8_html_file")

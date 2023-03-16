@@ -24,6 +24,20 @@ def test_scatter_base(fake_writer):
 
 
 @patch("pyecharts.render.engine.write_utf8_html_file")
+def test_scatter_base_no_xaxis(fake_writer):
+    c = (
+        Scatter()
+        .add_xaxis([])
+        .add_yaxis("series0", [1, 2, 4])
+        .add_yaxis("series1", [2, 3, 6])
+    )
+    c.render()
+    _, content = fake_writer.call_args[0]
+    assert_equal(c.theme, "white")
+    assert_equal(c.renderer, "canvas")
+
+
+@patch("pyecharts.render.engine.write_utf8_html_file")
 def test_scatter_item_base(fake_writer):
     x_axis = ["A", "B", "C"]
     y_axis = [1, 2, 4]

@@ -31,6 +31,18 @@ def test_register_url(fake):
             },
         )
 
+    fake_registry_1 = os.path.join(current_path, "fixtures", "registry_1.json")
+    with open(fake_registry_1, encoding="utf8") as f:
+        fake.return_value = f
+        register_url("http://register.url/is/used")
+        assert_equal(
+            EXTRA["http://register.url/is/used/"],
+            {
+                "安庆": file_name,
+                "English Name": file_name,
+            }
+        )
+
 
 def test_register_url_error():
     try:

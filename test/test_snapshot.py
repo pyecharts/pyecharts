@@ -96,3 +96,17 @@ def test_make_snapshot_text(fake_writer):
     make_snapshot(eng, _gen_bar_chart(), "make_snapshot.svg")
     _ = fake_writer.call_args[0]
     assert_equal("test ok", "test ok")
+
+
+@patch("pyecharts.render.snapshot.save_as_text")
+def test_make_snapshot_text_v1(fake_writer):
+    eng = _gen_faker_engine("fake content1,content2")
+    make_snapshot(
+        engine=eng,
+        file_name=_gen_bar_chart(),
+        output_name="make_snapshot.svg",
+        is_remove_html=True,
+    )
+    _ = fake_writer.call_args[0]
+    assert_equal("test ok", "test ok")
+

@@ -10,6 +10,9 @@ from pyecharts.options.charts_options import (
     TimelineControlStyle,
     TreeItem,
     TreeMapItemStyleOpts,
+    GraphicImageStyleOpts,
+    GraphicTextStyleOpts,
+    GeoRegionsOpts,
 )
 
 
@@ -96,5 +99,41 @@ def test_tree_map_item_style_options_remove_none():
     expected = {
         "gapWidth": 0,
         "borderWidth": 0,
+    }
+    assert_equal(expected, remove_key_with_none_value(option.opts))
+
+
+def test_graphic_image_style_opts_remove_none():
+    option = GraphicImageStyleOpts(graphic_basicstyle_opts={"fill": "#000"})
+    expected = {
+        "x": 0,
+        "y": 0,
+        "width": 0,
+        "height": 0,
+        "opacity": 1,
+        "fill": "#000",
+    }
+    assert_equal(expected, remove_key_with_none_value(option.opts))
+
+
+def test_graphic_text_style_opts_remove_none():
+    option = GraphicTextStyleOpts(graphic_basicstyle_opts={"fill": "#000"})
+    expected = {
+        "x": 0,
+        "y": 0,
+        "textAlign": "left",
+        "fill": "#000",
+    }
+    assert_equal(expected, remove_key_with_none_value(option.opts))
+
+
+def test_geo_region_opts_remove_none():
+    option = GeoRegionsOpts()
+    expected = {
+        "blur": {},
+        "emphasis": {},
+        "select": {},
+        "selected": False,
+        "silent": False,
     }
     assert_equal(expected, remove_key_with_none_value(option.opts))
