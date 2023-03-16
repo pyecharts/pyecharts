@@ -17,7 +17,6 @@ class TreeMap(Chart):
         series_name: str,
         data: types.Sequence[types.Union[opts.TreeItem, dict]],
         *,
-        is_selected: bool = True,
         leaf_depth: types.Optional[types.Numeric] = None,
         pos_left: types.Optional[str] = None,
         pos_right: types.Optional[str] = None,
@@ -45,7 +44,7 @@ class TreeMap(Chart):
         itemstyle_opts: types.ItemStyle = None,
         breadcrumb_opts: types.TreeMapBreadcrumb = None,
     ):
-        self._append_legend(series_name, is_selected)
+        self._append_legend(series_name)
         self.options.get("series").append(
             {
                 "type": ChartType.TREEMAP,

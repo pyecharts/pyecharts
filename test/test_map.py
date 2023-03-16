@@ -47,7 +47,7 @@ def test_map_emphasis():
     )
     options = json.loads(c.dump_options())
     expected = {
-        "label": {"show": False, "position": "top", "margin": 8},
+        "label": {"show": False, "margin": 8},
         "itemStyle": {"borderColor": "white", "areaColor": "red"},
     }
     assert_equal(expected, options["series"][0]["emphasis"])

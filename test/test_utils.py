@@ -9,7 +9,6 @@ def test_utils_produce_require_dict():
     assert_equal(cfg["libraries"], ["'echarts'"])
 
     cfg_1 = utils.produce_require_dict(utils.OrderedSet("https://api.map.baidu.com"), "https://example.com")
-    print(cfg_1)
     assert_equal(cfg_1["config_items"], ["'baidu_map_api25':'https://api.map.baidu.com'"])
     assert_equal(cfg_1["libraries"], ["'baidu_map_api25'"])
 

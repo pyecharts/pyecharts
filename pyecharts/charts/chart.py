@@ -104,10 +104,8 @@ class Chart(Base):
 
         return self
 
-    def _append_legend(self, name, is_selected):
+    def _append_legend(self, name):
         self.options.get("legend")[0].get("data").append(name)
-        if self.options.get("legend")[0].get("selected") is not None:
-            self.options.get("legend")[0].get("selected").update({name: is_selected})
 
     def _append_color(self, color: Optional[str]):
         if color:

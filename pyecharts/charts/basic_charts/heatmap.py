@@ -23,7 +23,6 @@ class HeatMap(RectChart):
         yaxis_data: types.Sequence[types.Union[dict]],
         value: types.Sequence[types.Union[dict]],
         *,
-        is_selected: bool = True,
         xaxis_index: types.Optional[types.Numeric] = None,
         yaxis_index: types.Optional[types.Numeric] = None,
         label_opts: types.Label = opts.LabelOpts(),
@@ -32,7 +31,7 @@ class HeatMap(RectChart):
         tooltip_opts: types.Tooltip = None,
         itemstyle_opts: types.ItemStyle = None,
     ):
-        self._append_legend(series_name, is_selected)
+        self._append_legend(series_name)
         self.options.get("yAxis")[0].update(data=yaxis_data)
         self.options.get("series").append(
             {

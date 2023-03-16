@@ -724,7 +724,7 @@ class TooltipOpts(BasicOpts):
         border_color: Optional[str] = None,
         border_width: Numeric = 0,
         padding: Numeric = 5,
-        textstyle_opts: TextStyleOpts = TextStyleOpts(font_size=14),
+        textstyle_opts: Optional[TextStyleOpts] = TextStyleOpts(font_size=14),
         extra_css_text: Optional[str] = None,
         order: str = "seriesAsc",
     ):

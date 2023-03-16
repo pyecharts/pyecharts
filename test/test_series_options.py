@@ -18,7 +18,7 @@ def test_label_options_defaults():
     option = LabelOpts()
     expected = {
         "show": True,
-        "position": "top",
+        "position": None,
         "color": None,
         "distance": None,
         "rotate": None,
@@ -46,7 +46,7 @@ def test_label_options_custom():
     )
     expected = {
         "show": True,
-        "position": "top",
+        "position": None,
         "color": None,
         "distance": None,
         "rotate": None,

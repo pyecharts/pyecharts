@@ -37,7 +37,7 @@ class Custom(Chart):
         itemstyle_opts: types.ItemStyle = None,
         tooltip_opts: types.Tooltip = None,
     ):
-        self._append_legend(series_name, selected_mode)
+        self._append_legend(series_name)
 
         self.options.get("series").append(
             {

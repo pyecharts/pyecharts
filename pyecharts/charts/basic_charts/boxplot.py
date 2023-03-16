@@ -21,7 +21,6 @@ class Boxplot(RectChart):
         ] = None,
         *,
         chart_type: str = ChartType.BOXPLOT,
-        is_selected: bool = True,
         xaxis_index: types.Optional[types.Numeric] = None,
         yaxis_index: types.Optional[types.Numeric] = None,
         dataset_index: types.Optional[types.Numeric] = None,
@@ -36,7 +35,7 @@ class Boxplot(RectChart):
         if box_width is None:
             box_width = [7, 50]
 
-        self._append_legend(series_name, is_selected)
+        self._append_legend(series_name)
         self.options.get("series").append(
             {
                 "type": chart_type,
