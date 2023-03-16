@@ -59,7 +59,7 @@ def test_scatter_item_base(fake_writer):
 
 @patch("pyecharts.render.engine.write_utf8_html_file")
 def test_scatter_dataset(fake_writer):
-    with open("fixtures/life-expectancy-table.json", "r", encoding="utf-8") as f:
+    with open("test/fixtures/life-expectancy-table.json", "r", encoding="utf-8") as f:
         j = json.load(f)
 
     l1_1 = (

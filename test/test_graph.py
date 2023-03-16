@@ -57,7 +57,7 @@ def test_graph_base_v1(fake_writer):
 @patch("pyecharts.render.engine.write_utf8_html_file")
 def test_graph_base_v2(fake_writer):
     with open(
-        os.path.join("fixtures", "les-miserables.json"), "r", encoding="utf-8"
+        os.path.join("test/fixtures", "les-miserables.json"), "r", encoding="utf-8"
     ) as f:
         j = json.load(f)
         nodes = j["nodes"]

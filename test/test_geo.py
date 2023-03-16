@@ -27,7 +27,7 @@ def test_geo_add_coord_json():
     c = (
         Geo()
         .add_schema(maptype="china")
-        .add_coordinate_json(json_file="fixtures/city_coordinates.json")
+        .add_coordinate_json(json_file="test/fixtures/city_coordinates.json")
         .add("geo", [list(z) for z in zip(Faker.provinces, Faker.values())])
         .set_series_opts(label_opts=opts.LabelOpts(is_show=False))
         .set_global_opts(visualmap_opts=opts.VisualMapOpts())
