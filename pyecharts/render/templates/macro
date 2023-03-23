@@ -188,8 +188,8 @@
             }
 
             .fl-table tr:hover td {
-                background: #00d1b2;
-                color: #F8F8F8;
+                background: #00d1b240;
+                color: inherit;
             }
 
             .fl-table td, .fl-table th {
@@ -213,7 +213,7 @@
             }
 
             .fl-table tr:nth-child(even) {
-                background: #F8F8F8;
+                background: #c0c0c020;
             }
         </style>
         <div id="{{ chart.chart_id }}" class="chart-container" style="">
