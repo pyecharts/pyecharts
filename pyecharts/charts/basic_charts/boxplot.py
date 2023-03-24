@@ -21,7 +21,6 @@ class Boxplot(RectChart):
         ] = None,
         *,
         chart_type: str = ChartType.BOXPLOT,
-        is_selected: bool = True,
         xaxis_index: types.Optional[types.Numeric] = None,
         yaxis_index: types.Optional[types.Numeric] = None,
         dataset_index: types.Optional[types.Numeric] = None,
@@ -36,7 +35,7 @@ class Boxplot(RectChart):
         if box_width is None:
             box_width = [7, 50]
 
-        self._append_legend(series_name, is_selected)
+        self._append_legend(series_name)
         self.options.get("series").append(
             {
                 "type": chart_type,
@@ -60,6 +59,8 @@ class Boxplot(RectChart):
     def prepare_data(items):
         data = []
         for item in items:
+            if not item:
+                data.append([])
             try:
                 d, res = sorted(item), []
                 for i in range(1, 4):
@@ -75,6 +76,7 @@ class Boxplot(RectChart):
                     elif m == 3 / 4:
                         res.append(d[k - 1] * 0.25 + d[k] * 0.75)
                 data.append([d[0]] + res + [d[-1]])
-            except Exception:
-                pass
+            except TypeError:
+                # one of the item element is None
+                data.append([])
         return data

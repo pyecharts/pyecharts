@@ -23,7 +23,6 @@ class Calendar(Chart):
         yaxis_data: types.Sequence,
         *,
         type_: types.Union[str, ChartType] = ChartType.HEATMAP,
-        is_selected: bool = True,
         calendar_index: types.Optional[types.Numeric] = None,
         label_opts: types.Label = opts.LabelOpts(is_show=False, position="inside"),
         calendar_opts: types.Union[types.Calendar, types.List[types.Calendar]] = None,
@@ -37,7 +36,7 @@ class Calendar(Chart):
         if visualmap_opts:
             self.options.update(visualMap=visualmap_opts)
 
-        self._append_legend(series_name, is_selected)
+        self._append_legend(series_name)
         self.options.get("series").append(
             {
                 "type": type_,

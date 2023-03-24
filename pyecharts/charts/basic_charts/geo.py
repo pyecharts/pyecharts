@@ -44,7 +44,6 @@ class GeoChartBase(Chart):
         data_pair: types.Sequence,
         type_: str = "scatter",
         *,
-        is_selected: bool = True,
         symbol: types.Optional[str] = None,
         symbol_size: types.Numeric = 12,
         blur_size: types.Numeric = 20,
@@ -67,7 +66,7 @@ class GeoChartBase(Chart):
         data = self._feed_data(data_pair, type_)
 
         self._append_color(color)
-        self._append_legend(series_name, is_selected)
+        self._append_legend(series_name)
 
         if type_ == ChartType.SCATTER:
             self.options.get("series").append(

@@ -17,7 +17,6 @@ class Bar(RectChart):
         series_name: str,
         y_axis: types.Sequence[types.Union[types.Numeric, opts.BarItem, dict]],
         *,
-        is_selected: bool = True,
         xaxis_index: types.Optional[types.Numeric] = None,
         yaxis_index: types.Optional[types.Numeric] = None,
         is_legend_hover_link: bool = True,
@@ -51,7 +50,7 @@ class Bar(RectChart):
         encode: types.Union[types.JSFunc, dict, None] = None,
     ):
         self._append_color(color)
-        self._append_legend(series_name, is_selected)
+        self._append_legend(series_name)
 
         if self.options.get("dataset") is not None:
             y_axis = None

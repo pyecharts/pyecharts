@@ -17,7 +17,6 @@ class MapMixin:
         data_pair: types.Sequence[types.Union[types.Sequence, opts.MapItem, dict]],
         maptype: str = "china",
         *,
-        is_selected: bool = True,
         is_roam: bool = True,
         center: types.Optional[types.Sequence] = None,
         aspect_scale: types.Numeric = 0.75,
@@ -54,7 +53,7 @@ class MapMixin:
         if min_scale_limit is None and max_scale_limit is None:
             scale_limit = None
 
-        self._append_legend(series_name, is_selected)
+        self._append_legend(series_name)
         self.options.get("series").append(
             {
                 "type": ChartType.MAP,

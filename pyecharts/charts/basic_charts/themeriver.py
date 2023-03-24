@@ -18,14 +18,13 @@ class ThemeRiver(Chart):
         series_name: types.Sequence,
         data: types.Sequence[types.Union[opts.ThemeRiverItem, dict]],
         *,
-        is_selected: bool = True,
         label_opts: types.Label = opts.LabelOpts(),
         singleaxis_opts: types.SingleAxis = opts.SingleAxisOpts(),
         tooltip_opts: types.Tooltip = None,
         itemstyle_opts: types.ItemStyle = None,
     ):
         for n in series_name:
-            self._append_legend(n, is_selected)
+            self._append_legend(n)
 
         self.options.get("series").append(
             {

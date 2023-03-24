@@ -33,7 +33,6 @@ class Polar(Chart):
         series_name: str,
         data: types.Sequence,
         *,
-        is_selected: bool = True,
         type_: str = "line",
         symbol: types.Optional[str] = None,
         symbol_size: types.Numeric = 4,
@@ -45,7 +44,7 @@ class Polar(Chart):
         tooltip_opts: types.Tooltip = None,
         itemstyle_opts: types.ItemStyle = None,
     ):
-        self._append_legend(series_name, is_selected)
+        self._append_legend(series_name)
         self.options.update(polar={
             "center": center if center else ["50%", "50%"]
         })

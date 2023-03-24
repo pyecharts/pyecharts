@@ -1,6 +1,6 @@
 from unittest.mock import patch
 
-from nose.tools import assert_equal
+from nose.tools import assert_equal, assert_in
 
 from pyecharts.charts import WordCloud
 from pyecharts.commons.utils import JsCode
@@ -54,7 +54,7 @@ def test_wordcloud_mask_image(fake_writer):
         words,
         word_size_range=[20, 100],
         shape="cardioid",
-        mask_image="fixtures/img.png",
+        mask_image="test/fixtures/img.png",
     )
     c.render()
     _, content = fake_writer.call_args[0]

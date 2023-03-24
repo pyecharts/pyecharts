@@ -3,3 +3,4 @@ codecov
 coverage
 flake8
 mccabe
+Pillow
