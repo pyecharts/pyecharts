@@ -3,8 +3,8 @@ from unittest.mock import patch
 from nose.tools import assert_equal, assert_in
 
 from pyecharts import options as opts
-from pyecharts.charts import Bar, Grid, Line, Radar, Geo
-from pyecharts.globals import ThemeType
+from pyecharts.charts import Bar, Grid, Line, Radar, Geo, Map
+from pyecharts.globals import ThemeType, ChartType
 from pyecharts.faker import Faker
 from pyecharts.commons.utils import JsCode
 
@@ -385,3 +385,35 @@ def test_grid_mutil_yaxis(fake_writer):
     _, content = fake_writer.call_args[0]
     assert_in("xAxis", content)
     assert_in("yAxis", content)
+
+
+@patch("pyecharts.render.engine.write_utf8_html_file")
+def test_grid_geo_map(fake_writer):
+    data_pair = [list(z) for z in zip(Faker.provinces, Faker.values())]
+    geo_chart = (
+        Geo()
+        .add_schema(maptype="china")
+        .add(
+            "geo",
+            data_pair=data_pair,
+            type_=ChartType.SCATTER,
+        )
+        .set_global_opts(
+            visualmap_opts=opts.VisualMapOpts(),
+        )
+    )
+    map_chart = (
+        Map()
+        .add("LCOH", data_pair=data_pair, maptype="china")
+        .set_global_opts(
+            visualmap_opts=opts.VisualMapOpts(),
+        )
+    )
+    grid_chart = (
+        Grid(init_opts=opts.InitOpts())
+        .add(map_chart, grid_opts=opts.GridOpts())
+        .add(geo_chart, grid_opts=opts.GridOpts())
+    )
+    grid_chart.render()
+    _, content = fake_writer.call_args[0]
+    assert_in("geo", content)

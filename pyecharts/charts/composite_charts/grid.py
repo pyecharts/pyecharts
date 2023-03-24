@@ -52,7 +52,7 @@ class Grid(Base):
                 if self.options.get("visualMap") is None:
                     self.options.update(visualMap=[visual_map])
                 else:
-                    self.options.get("visualMap").extend(visual_map)
+                    self.options.get("visualMap").extend([visual_map])
 
         # title 配置添加
         title = chart.options.get("title", opts.TitleOpts().opts)
