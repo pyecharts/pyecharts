@@ -6,12 +6,16 @@ from ..types import Optional, Sequence
 
 
 class Chart(Base):
-    def __init__(self, init_opts: types.Init = opts.InitOpts()):
+    def __init__(
+            self,
+            init_opts: types.Init = opts.InitOpts(),
+            render_opts: types.RenderInit = opts.RenderOpts()
+    ):
         if isinstance(init_opts, dict):
             temp_opts = opts.InitOpts()
             temp_opts.update(**init_opts)
             init_opts = temp_opts
-        super().__init__(init_opts=init_opts)
+        super().__init__(init_opts=init_opts, render_opts=render_opts)
         # Change to Echarts V5 default color list
         self.colors = (
             "#5470c6 #91cc75 #fac858 #ee6666 #73c0de #3ba272 #fc8452 #9a60b4 "
@@ -203,8 +207,12 @@ class Chart(Base):
 
 
 class RectChart(Chart):
-    def __init__(self, init_opts: types.Init = opts.InitOpts()):
-        super().__init__(init_opts=init_opts)
+    def __init__(
+            self,
+            init_opts: types.Init = opts.InitOpts(),
+            render_opts: types.RenderInit = opts.RenderOpts()
+    ):
+        super().__init__(init_opts=init_opts, render_opts=render_opts)
         self.options.update(xAxis=[opts.AxisOpts().opts], yAxis=[opts.AxisOpts().opts])
 
     def extend_axis(
@@ -254,9 +262,13 @@ class Chart3D(Chart):
     `Chart3D`类是所有 3D 类图表的基类，继承自 `Chart` 类
     """
 
-    def __init__(self, init_opts: types.Init = opts.InitOpts()):
+    def __init__(
+            self,
+            init_opts: types.Init = opts.InitOpts(),
+            render_opts: types.RenderInit = opts.RenderOpts()
+    ):
         init_opts.renderer = RenderType.CANVAS
-        super().__init__(init_opts)
+        super().__init__(init_opts, render_opts)
         self.js_dependencies.add("echarts-gl")
         self._3d_chart_type: Optional[str] = None  # 3d chart type,don't use it directly
 

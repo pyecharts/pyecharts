@@ -6,7 +6,7 @@ from nose.tools import assert_equal, assert_not_in
 from pyecharts.charts import Bar
 from pyecharts.commons import utils
 from pyecharts.datasets import EXTRA
-from pyecharts.options import InitOpts
+from pyecharts.options import InitOpts, RenderOpts
 from pyecharts.globals import CurrentConfig
 from pyecharts.charts.base import Base, default
 from pyecharts.options.global_options import AnimationOpts
@@ -50,12 +50,9 @@ def test_render_js_host_none(fake_writer):
     assert_equal(bar.js_host, CurrentConfig.ONLINE_HOST)
 
 
-@patch("pyecharts.render.engine.write_utf8_html_file")
-def test_inner_render(fake_writer):
-    my_render_content = "my_render_content"
-    bar = Bar()
-    bar.add_xaxis(["1"]).add_yaxis("", [1]).render(my_render_content=my_render_content, inner=True)
-    assert "test ok" == "test ok"
+def test_base_render_options():
+    c0 = Base(render_opts=RenderOpts(embed_js=True))
+    assert_equal(c0.render_options.get('embed_js'), True)
 
 
 def test_base_iso_format():
