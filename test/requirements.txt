@@ -1,3 +1,4 @@
+nose
 nose2
 codecov
 coverage
