@@ -1,2 +1,5 @@
+[run]
+omit = pyecharts/render/templates/*
 [report]
 show_missing = True
+omit = pyecharts/render/templates/*

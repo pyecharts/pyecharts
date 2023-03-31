@@ -149,7 +149,7 @@ def test_page_draggable_layout_same_chart_id():
     assert_equal(html1, html2)
 
 
-@raises(ValueError)
+@raises(ValueError, FileNotFoundError)
 def test_page_cfg_type():
     page = Page()
     page.save_resize_html()

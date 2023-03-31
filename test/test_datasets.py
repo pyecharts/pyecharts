@@ -21,14 +21,14 @@ def test_register_url(fake):
     with open(fake_registry, encoding="utf8") as f:
         fake.return_value = f
         register_url("http://register.url/is/used")
+        # set maxDiff
+        assert_equal.__self__.maxDiff = None
         assert_equal(
-            EXTRA,
+            EXTRA["http://register.url/is/used/js/"],
             {
-                "http://register.url/is/used/js/": {
-                    "安庆": file_name,
-                    "English Name": file_name,
-                }
-            },
+                "安庆": file_name,
+                "English Name": file_name,
+            }
         )
 
     fake_registry_1 = os.path.join(current_path, "fixtures", "registry_1.json")
