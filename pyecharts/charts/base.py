@@ -63,6 +63,7 @@ class Base(ChartMixin):
         self._geo_json_name: Optional[str] = None
         self._geo_json: Optional[dict] = None
 
+        self.render_options.update(embed_js=bool(_render_opts.get("embed_js")))
         self._render_cache: dict = dict()
 
     def get_chart_id(self) -> str:
@@ -86,24 +87,18 @@ class Base(ChartMixin):
         path: str = "render.html",
         template_name: str = "simple_chart.html",
         env: Optional[Environment] = None,
-        inner: bool = False,
         **kwargs,
     ) -> str:
         self._prepare_render()
-        if inner:
-            kwargs = {'_inner': inner, '_javascript': self.load_javascript().load_javascript_contents(), **kwargs}
         return engine.render(self, path, template_name, env, **kwargs)
 
     def render_embed(
         self,
         template_name: str = "simple_chart.html",
         env: Optional[Environment] = None,
-        inner: bool = False,
         **kwargs,
     ) -> str:
         self._prepare_render()
-        if inner:
-            kwargs = {'_inner': inner, '_javascript': self.load_javascript().load_javascript_contents(), **kwargs}
         return engine.render_embed(self, template_name, env, **kwargs)
 
     def render_notebook(self):
@@ -120,6 +115,12 @@ class Base(ChartMixin):
     def _prepare_render(self):
         self.json_contents = self.dump_options()
         self._use_theme()
+
+        self._render_cache.clear()
+        if self.render_options.get('embed_js'):
+            self._render_cache['javascript'] = (
+                self.load_javascript().load_javascript_contents()
+            )
 
 
 def default(o):
