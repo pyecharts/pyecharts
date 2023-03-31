@@ -6,3 +6,4 @@ flake8
 mccabe
 Pillow
 pytest
+pytest-cov
