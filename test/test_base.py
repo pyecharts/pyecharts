@@ -50,6 +50,14 @@ def test_render_js_host_none(fake_writer):
     assert_equal(bar.js_host, CurrentConfig.ONLINE_HOST)
 
 
+@patch("pyecharts.render.engine.write_utf8_html_file")
+def test_inner_render(fake_writer):
+    my_render_content = "my_render_content"
+    bar = Bar()
+    bar.add_xaxis(["1"]).add_yaxis("", [1]).render(my_render_content=my_render_content, inner=True)
+    assert "test ok" == "test ok"
+
+
 def test_base_iso_format():
     mock_time_str = "2022-04-14 14:42:00"
     mock_time = datetime.strptime(mock_time_str, "%Y-%m-%d %H:%M:%S")

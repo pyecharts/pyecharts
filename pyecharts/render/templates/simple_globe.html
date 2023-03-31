@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>{{ chart.page_title }}</title>
-    {{ macro.render_chart_dependencies(chart) }}
+    {{ macro.render_chart_dependencies(chart, _inner, _javascript) }}
 </head>
 <body>
     <div id="{{ chart.chart_id }}" style="width:{{ chart.width }}; height:{{ chart.height }};"></div>

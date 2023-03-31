@@ -80,10 +80,18 @@
     </script>
 {%- endmacro %}
 
-{%- macro render_chart_dependencies(c) -%}
-    {% for dep in c.dependencies %}
-        <script type="text/javascript" src="{{ dep }}"></script>
-    {% endfor %}
+{%- macro render_chart_dependencies(c, i, js) -%}
+    {% if i %}
+        {% for dep in c.dependencies %}
+            <script type="text/javascript">
+                {{ js.javascript_contents[dep] }}
+            </script>
+        {% endfor %}
+    {% else %}
+        {% for dep in c.dependencies %}
+            <script type="text/javascript" src="{{ dep }}"></script>
+        {% endfor %}
+    {% endif %}
 {%- endmacro %}
 
 {%- macro render_chart_css(c) -%}

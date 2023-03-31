@@ -75,18 +75,24 @@ class Base(ChartMixin):
         path: str = "render.html",
         template_name: str = "simple_chart.html",
         env: Optional[Environment] = None,
+        inner: bool = False,
         **kwargs,
     ) -> str:
         self._prepare_render()
+        if inner:
+            kwargs = {'_inner': inner, '_javascript': self.load_javascript().load_javascript_contents(), **kwargs}
         return engine.render(self, path, template_name, env, **kwargs)
 
     def render_embed(
         self,
         template_name: str = "simple_chart.html",
         env: Optional[Environment] = None,
+        inner: bool = False,
         **kwargs,
     ) -> str:
         self._prepare_render()
+        if inner:
+            kwargs = {'_inner': inner, '_javascript': self.load_javascript().load_javascript_contents(), **kwargs}
         return engine.render_embed(self, template_name, env, **kwargs)
 
     def render_notebook(self):
