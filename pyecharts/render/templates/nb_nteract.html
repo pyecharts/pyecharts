@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    {{ macro.render_chart_dependencies(chart) }}
+    {{ macro.render_chart_dependencies(chart, _inner, _javascript) }}
 </head>
 <body>
     {% for c in chart %}

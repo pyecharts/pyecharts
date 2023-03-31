@@ -181,6 +181,13 @@ class InitOpts(BasicOpts):
         }
 
 
+class RenderOpts(BasicOpts):
+    def __init__(self, embed_js: bool = False):
+        self.opts: dict = {
+            "embed_js": embed_js,
+        }
+
+
 class ToolBoxFeatureSaveAsImageOpts(BasicOpts):
     def __init__(
         self,

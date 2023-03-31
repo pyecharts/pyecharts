@@ -15,6 +15,7 @@ from .options.charts_options import BaseGraphic, GlobeLayersOpts
 from .options.series_options import JsCode, JSFunc, Numeric
 
 Init = Union[opts.InitOpts, dict]
+RenderInit = Union[opts.RenderOpts, dict]
 
 Axis = Union[opts.AxisOpts, dict, None]
 Axis3D = Union[opts.Axis3DOpts, dict]

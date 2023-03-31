@@ -20,8 +20,9 @@ class BMap(GeoChartBase):
         self,
         init_opts: types.Init = opts.InitOpts(),
         is_ignore_nonexistent_coord: bool = False,
+        render_opts: types.RenderInit = opts.RenderOpts(),
     ):
-        super().__init__(init_opts=init_opts)
+        super().__init__(init_opts=init_opts, render_opts=render_opts)
         self.js_dependencies.add("bmap")
         self._is_geo_chart = True
         self._coordinate_system: types.Optional[str] = "bmap"

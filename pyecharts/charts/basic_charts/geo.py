@@ -9,8 +9,12 @@ from ...globals import ChartType
 
 
 class GeoChartBase(Chart):
-    def __init__(self, init_opts: types.Init = opts.InitOpts()):
-        super().__init__(init_opts=init_opts)
+    def __init__(
+            self,
+            init_opts: types.Init = opts.InitOpts(),
+            render_opts: types.RenderInit = opts.RenderOpts()
+    ):
+        super().__init__(init_opts=init_opts, render_opts=render_opts)
         self.set_global_opts()
         self._coordinates = COORDINATES
         self._zlevel = 1
@@ -196,8 +200,9 @@ class Geo(GeoChartBase):
         self,
         init_opts: types.Init = opts.InitOpts(),
         is_ignore_nonexistent_coord: bool = False,
+        render_opts: types.RenderInit = opts.RenderOpts(),
     ):
-        super().__init__(init_opts=init_opts)
+        super().__init__(init_opts=init_opts, render_opts=render_opts)
         self._coordinate_system: types.Optional[str] = "geo"
         self._is_ignore_nonexistent_coord = is_ignore_nonexistent_coord
 

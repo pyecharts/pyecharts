@@ -1,12 +1,12 @@
 from datetime import datetime
 from unittest.mock import patch
 
-from nose.tools import assert_equal, assert_not_in
+from nose.tools import assert_equal, assert_in, assert_not_in
 
 from pyecharts.charts import Bar
 from pyecharts.commons import utils
 from pyecharts.datasets import EXTRA
-from pyecharts.options import InitOpts
+from pyecharts.options import InitOpts, RenderOpts
 from pyecharts.globals import CurrentConfig
 from pyecharts.charts.base import Base, default
 from pyecharts.options.global_options import AnimationOpts
@@ -48,6 +48,23 @@ def test_render_js_host_none(fake_writer):
     # Render
     bar.render(my_render_content=my_render_content)
     assert_equal(bar.js_host, CurrentConfig.ONLINE_HOST)
+
+
+@patch("pyecharts.render.engine.write_utf8_html_file")
+def test_render_embed_js(_):
+    c = Base(render_opts=RenderOpts(embed_js=True))
+    # Embedded JavaScript
+    content = c.render_embed()
+    assert_not_in(CurrentConfig.ONLINE_HOST, content, 'Embedding JavaScript fails')
+    # No embedded JavaScript
+    c.render_options.update(embed_js=False)
+    content = c.render_embed()
+    assert_in(CurrentConfig.ONLINE_HOST, content, 'Embedded JavaScript cannot be closed')
+
+
+def test_base_render_options():
+    c0 = Base(render_opts=RenderOpts(embed_js=True))
+    assert_equal(c0.render_options.get('embed_js'), True)
 
 
 def test_base_iso_format():
