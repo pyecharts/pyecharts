@@ -182,3 +182,9 @@ def test_page_resize_cfg():
     )
     assert_not_in(".resizable()", content)
     assert_not_in(".draggable()", content)
+
+
+@raises(ValueError)
+def test_page_no_cfg_dict_or_file():
+    page = Page()
+    page.save_resize_html()

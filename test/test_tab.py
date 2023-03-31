@@ -54,6 +54,9 @@ def test_tab_render_embed():
 
 
 def test_tab_render_notebook():
+    from pyecharts.globals import CurrentConfig, NotebookType
+    CurrentConfig.NOTEBOOK_TYPE = NotebookType.JUPYTER_NOTEBOOK
+
     tab = Tab()
     tab.add(_create_line(), "line-example")
     tab.add(_create_bar(), "bar-example")
