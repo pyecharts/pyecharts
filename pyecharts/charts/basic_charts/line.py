@@ -33,6 +33,8 @@ class Line(RectChart):
         z: types.Numeric = 0,
         log_base: types.Numeric = 10,
         sampling: types.Optional[str] = None,
+        dimensions: types.Union[types.Sequence, None] = None,
+        series_layout_by: str = "column",
         markpoint_opts: types.MarkPoint = None,
         markline_opts: types.MarkLine = None,
         tooltip_opts: types.Tooltip = None,
@@ -40,6 +42,7 @@ class Line(RectChart):
         label_opts: types.Label = opts.LabelOpts(),
         linestyle_opts: types.LineStyle = opts.LineStyleOpts(),
         areastyle_opts: types.AreaStyle = opts.AreaStyleOpts(),
+        encode: types.Union[types.JSFunc, dict, None] = None,
     ):
         self._append_color(color)
         self._append_legend(series_name)
@@ -57,6 +60,9 @@ class Line(RectChart):
                 ]
             except IndexError:
                 data = [list(z) for z in zip(self._xaxis_data, y_axis)]
+
+        if self.options.get("dataset") is not None and not y_axis:
+            data = None
 
         self.options.get("series").append(
             {
@@ -77,6 +83,9 @@ class Line(RectChart):
                 "label": label_opts,
                 "logBase": log_base,
                 "sampling": sampling,
+                "dimensions": dimensions,
+                "encode": encode,
+                "seriesLayoutBy": series_layout_by,
                 "lineStyle": linestyle_opts,
                 "areaStyle": areastyle_opts,
                 "markPoint": markpoint_opts,
