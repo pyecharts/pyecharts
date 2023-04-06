@@ -52,7 +52,7 @@ def test_render_js_host_none(fake_writer):
 
 @patch("pyecharts.render.engine.write_utf8_html_file")
 def test_render_embed_js(_):
-    c = Base(render_opts=RenderOpts(embed_js=True))
+    c = Base(render_opts=RenderOpts(is_embed_js=True))
     # Embedded JavaScript
     content = c.render_embed()
     assert_not_in(CurrentConfig.ONLINE_HOST, content, "Embedding JavaScript fails")
@@ -65,7 +65,7 @@ def test_render_embed_js(_):
 
 
 def test_base_render_options():
-    c0 = Base(render_opts=RenderOpts(embed_js=True))
+    c0 = Base(render_opts=RenderOpts(is_embed_js=True))
     assert_equal(c0.render_options.get("embed_js"), True)
 
 

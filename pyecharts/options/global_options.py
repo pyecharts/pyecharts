@@ -182,9 +182,9 @@ class InitOpts(BasicOpts):
 
 
 class RenderOpts(BasicOpts):
-    def __init__(self, embed_js: bool = False):
+    def __init__(self, is_embed_js: bool = False):
         self.opts: dict = {
-            "embed_js": embed_js,
+            "embed_js": is_embed_js,
         }
 
 
