@@ -28,7 +28,7 @@ def test_register_url(fake):
             {
                 "安庆": file_name,
                 "English Name": file_name,
-            }
+            },
         )
 
     fake_registry_1 = os.path.join(current_path, "fixtures", "registry_1.json")
@@ -40,7 +40,7 @@ def test_register_url(fake):
             {
                 "安庆": file_name,
                 "English Name": file_name,
-            }
+            },
         )
 
 

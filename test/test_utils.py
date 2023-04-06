@@ -10,10 +10,12 @@ def test_utils_produce_require_dict():
     assert_equal(cfg["libraries"], ["'echarts'"])
 
     cfg_1 = utils.produce_require_dict(
-        utils.OrderedSet("https://api.map.baidu.com"), "https://example.com",
+        utils.OrderedSet("https://api.map.baidu.com"),
+        "https://example.com",
     )
     assert_equal(
-        cfg_1["config_items"], ["'baidu_map_api25':'https://api.map.baidu.com'"],
+        cfg_1["config_items"],
+        ["'baidu_map_api25':'https://api.map.baidu.com'"],
     )
     assert_equal(cfg_1["libraries"], ["'baidu_map_api25'"])
 
@@ -24,7 +26,8 @@ def test_utils_produce_require_dict_with_extra():
         "https://api.baidu.com/test.min": ["https://api.baidu.com/test.min", "css"]
     }
     cfg_0 = utils.produce_require_dict(
-        utils.OrderedSet("https://api.baidu.com/test.min"), "https://example.com",
+        utils.OrderedSet("https://api.baidu.com/test.min"),
+        "https://example.com",
     )
     assert_equal(cfg_0["libraries"], ["'https://api.baidu.com/test.min'"])
 

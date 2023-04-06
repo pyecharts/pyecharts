@@ -12,9 +12,9 @@ class GraphGL(Chart3D):
     """
 
     def __init__(
-            self,
-            init_opts: types.Init = InitOpts(),
-            render_opts: types.RenderInit = RenderOpts()
+        self,
+        init_opts: types.Init = InitOpts(),
+        render_opts: types.RenderInit = RenderOpts(),
     ):
         super().__init__(init_opts, render_opts)
         self._3d_chart_type = ChartType.GRAPHGL

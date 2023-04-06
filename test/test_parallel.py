@@ -72,7 +72,7 @@ def test_parallel_base_v1(fake_writer):
                     data=["优", "良", "轻度污染", "中度污染", "重度污染", "严重污染"],
                 ),
             ],
-            parallel_opts=opts.ParallelOpts()
+            parallel_opts=opts.ParallelOpts(),
         )
         .add("parallel", data)
         .set_global_opts(title_opts=opts.TitleOpts(title="Parallel-Category"))

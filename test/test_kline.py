@@ -41,8 +41,7 @@ def test_kline_item_base(fake_writer):
     x_axis = ["2017/7/{}".format(i + 1) for i in range(10)]
     y_axis = data
     kline_item = [
-        opts.CandleStickItem(name=d[0], value=d[1])
-        for d in list(zip(x_axis, y_axis))
+        opts.CandleStickItem(name=d[0], value=d[1]) for d in list(zip(x_axis, y_axis))
     ]
 
     c = (

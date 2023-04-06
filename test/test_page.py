@@ -177,9 +177,7 @@ def test_page_resize():
 
 def test_page_resize_cfg():
     page = Page()
-    content = page.save_resize_html(
-        cfg_file="test/fixtures/resize_cfg.json"
-    )
+    content = page.save_resize_html(cfg_file="test/fixtures/resize_cfg.json")
     assert_not_in(".resizable()", content)
     assert_not_in(".draggable()", content)
 

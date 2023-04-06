@@ -55,22 +55,24 @@ def test_render_embed_js(_):
     c = Base(render_opts=RenderOpts(embed_js=True))
     # Embedded JavaScript
     content = c.render_embed()
-    assert_not_in(CurrentConfig.ONLINE_HOST, content, 'Embedding JavaScript fails')
+    assert_not_in(CurrentConfig.ONLINE_HOST, content, "Embedding JavaScript fails")
     # No embedded JavaScript
     c.render_options.update(embed_js=False)
     content = c.render_embed()
-    assert_in(CurrentConfig.ONLINE_HOST, content, 'Embedded JavaScript cannot be closed')
+    assert_in(
+        CurrentConfig.ONLINE_HOST, content, "Embedded JavaScript cannot be closed"
+    )
 
 
 def test_base_render_options():
     c0 = Base(render_opts=RenderOpts(embed_js=True))
-    assert_equal(c0.render_options.get('embed_js'), True)
+    assert_equal(c0.render_options.get("embed_js"), True)
 
 
 def test_base_iso_format():
     mock_time_str = "2022-04-14 14:42:00"
     mock_time = datetime.strptime(mock_time_str, "%Y-%m-%d %H:%M:%S")
-    assert (default(mock_time) == "2022-04-14T14:42:00")
+    assert default(mock_time) == "2022-04-14T14:42:00"
 
 
 def test_base_animation_option():

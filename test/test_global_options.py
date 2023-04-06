@@ -66,7 +66,7 @@ def test_aria_label_options_remove_none():
                 "separator": {
                     "middle": "；",
                     "end": "。",
-                }
+                },
             },
         },
         "data": {
@@ -77,8 +77,8 @@ def test_aria_label_options_remove_none():
             "withoutName": "{value}",
             "separator": {
                 "middle": "，",
-            }
-        }
+            },
+        },
     }
     assert_equal(expected, remove_key_with_none_value(option.opts))
 
@@ -97,7 +97,7 @@ def test_aria_decal_options_remove_none():
             "rotation": 0,
             "maxTileWidth": 512,
             "maxTileHeight": 512,
-        }
+        },
     }
     assert_equal(expected, remove_key_with_none_value(option.opts))
 
@@ -347,8 +347,5 @@ def test_radius_axis_options_remove_none():
 
 def test_dataset_transform_options_remove_none():
     option = DatasetTransformOpts()
-    expected = {
-        "type": "filter",
-        "print": False
-    }
+    expected = {"type": "filter", "print": False}
     assert_equal(expected, remove_key_with_none_value(option.opts))

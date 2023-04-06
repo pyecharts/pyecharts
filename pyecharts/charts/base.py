@@ -21,9 +21,9 @@ class Base(ChartMixin):
     """
 
     def __init__(
-            self,
-            init_opts: Union[InitOpts, dict] = InitOpts(),
-            render_opts: Union[RenderOpts, dict] = RenderOpts()
+        self,
+        init_opts: Union[InitOpts, dict] = InitOpts(),
+        render_opts: Union[RenderOpts, dict] = RenderOpts(),
     ):
         _opts = init_opts
         if isinstance(init_opts, InitOpts):
@@ -117,10 +117,10 @@ class Base(ChartMixin):
         self._use_theme()
 
         self._render_cache.clear()
-        if self.render_options.get('embed_js'):
-            self._render_cache['javascript'] = (
-                self.load_javascript().load_javascript_contents()
-            )
+        if self.render_options.get("embed_js"):
+            self._render_cache[
+                "javascript"
+            ] = self.load_javascript().load_javascript_contents()
 
 
 def default(o):

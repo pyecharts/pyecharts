@@ -4,8 +4,10 @@ import os
 # os.system("nosetests --with-coverage --cover-package pyecharts --cover-package .")
 
 # current nose
-os.system("nose2 --with-coverage --coverage pyecharts "
-          "--coverage-config .coveragerc -s test")
+os.system(
+    "nose2 --with-coverage --coverage pyecharts "
+    "--coverage-config .coveragerc -s test"
+)
 
 # pytest
 os.system("pytest -cov-config=.coveragerc --cov=./ test/")

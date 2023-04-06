@@ -178,34 +178,26 @@ def test_grid_two_radar(fake_writer):
     ]
     c = (
         Radar()
-        .add_schema(schema=schema, center=['25%', '50%'])
+        .add_schema(schema=schema, center=["25%", "50%"])
         .add(
             series_name="预算分配",
             data=[[4300, 10000, 28000, 35000, 50000, 19000]],
             radar_index=0,
         )
-        .set_global_opts(
-            legend_opts=opts.LegendOpts(pos_left="20%")
-        )
+        .set_global_opts(legend_opts=opts.LegendOpts(pos_left="20%"))
     )
     c2 = (
         Radar()
-        .add_schema(schema=schema, center=['75%', '50%'])
+        .add_schema(schema=schema, center=["75%", "50%"])
         .add(
             series_name="实际开销",
             data=[[5000, 14000, 28000, 31000, 42000, 21000]],
             radar_index=1,
         )
-        .set_global_opts(
-            legend_opts=opts.LegendOpts(pos_right="20%")
-        )
+        .set_global_opts(legend_opts=opts.LegendOpts(pos_right="20%"))
     )
 
-    grid = (
-        Grid()
-        .add(c, grid_opts=opts.GridOpts())
-        .add(c2, grid_opts=opts.GridOpts())
-    )
+    grid = Grid().add(c, grid_opts=opts.GridOpts()).add(c2, grid_opts=opts.GridOpts())
     grid.render()
     _, content = fake_writer.call_args[0]
     assert_in("radar", content)

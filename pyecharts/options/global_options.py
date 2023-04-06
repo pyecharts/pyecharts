@@ -86,7 +86,7 @@ class AriaLabelOpts(BasicOpts):
                     "separator": {
                         "middle": series_multiple_separator_middle,
                         "end": series_multiple_separator_end,
-                    }
+                    },
                 },
             },
             "data": {
@@ -98,8 +98,8 @@ class AriaLabelOpts(BasicOpts):
                 "separator": {
                     "middle": data_separator_middle,
                     "end": data_separator_end,
-                }
-            }
+                },
+            },
         }
 
 
@@ -131,7 +131,7 @@ class AriaDecalOpts(BasicOpts):
                 "rotation": decals_rotation,
                 "maxTileWidth": decals_max_tile_width,
                 "maxTileHeight": decals_max_tile_height,
-            }
+            },
         }
 
 
@@ -163,7 +163,7 @@ class InitOpts(BasicOpts):
         is_fill_bg_color: bool = False,
         js_host: str = "",
         animation_opts: Union[AnimationOpts, dict] = AnimationOpts(),
-        aria_opts: Union[AriaOpts, dict] = AriaOpts()
+        aria_opts: Union[AriaOpts, dict] = AriaOpts(),
     ):
         self.opts: dict = {
             "width": width,

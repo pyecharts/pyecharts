@@ -247,7 +247,7 @@ def test_chart_extend_axis(fake_writer):
             xaxis=opts.AxisOpts(),
             yaxis=opts.AxisOpts(
                 axislabel_opts=opts.LabelOpts(formatter="{value} °C"), interval=5
-            )
+            ),
         )
         .set_series_opts(label_opts=opts.LabelOpts(is_show=False))
         .set_global_opts(

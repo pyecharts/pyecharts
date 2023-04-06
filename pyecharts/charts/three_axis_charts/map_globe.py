@@ -18,9 +18,9 @@ class MapGlobe(Chart3D, MapMixin):
     """
 
     def __init__(
-            self,
-            init_opts: types.Init = InitOpts(),
-            render_opts: types.RenderInit = RenderOpts()
+        self,
+        init_opts: types.Init = InitOpts(),
+        render_opts: types.RenderInit = RenderOpts(),
     ):
         super().__init__(init_opts, render_opts)
 

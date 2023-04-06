@@ -75,11 +75,11 @@ class Javascript:
             resp: Optional[http.client.HTTPResponse] = None
             try:
                 conn = http.client.HTTPSConnection(host, port)
-                conn.request('GET', path)
+                conn.request("GET", path)
                 resp = conn.getresponse()
                 if resp.status != 200:
-                    raise RuntimeError('Cannot load JavaScript lib: %s' % lib)
-                self.javascript_contents[lib] = resp.read().decode('utf-8')
+                    raise RuntimeError("Cannot load JavaScript lib: %s" % lib)
+                self.javascript_contents[lib] = resp.read().decode("utf-8")
             finally:
                 if resp is not None:
                     resp.close()

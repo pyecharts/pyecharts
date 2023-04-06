@@ -25,11 +25,11 @@ def _gen_faker_engine(content: str):
 
 
 def test_decode_base64():
-    assert decode_base64(data="abcde12") == b'i\xb7\x1d{]'
+    assert decode_base64(data="abcde12") == b"i\xb7\x1d{]"
 
 
 def test_save_as_png():
-    save_as_png(image_data=b'i\xb7\x1d{]', output_name="text_png.png")
+    save_as_png(image_data=b"i\xb7\x1d{]", output_name="text_png.png")
     os.unlink("text_png.png")
 
 

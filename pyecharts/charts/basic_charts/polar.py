@@ -13,9 +13,9 @@ class Polar(Chart):
     """
 
     def __init__(
-            self,
-            init_opts: types.Init = opts.InitOpts(),
-            render_opts: types.RenderInit = opts.RenderOpts()
+        self,
+        init_opts: types.Init = opts.InitOpts(),
+        render_opts: types.RenderInit = opts.RenderOpts(),
     ):
         super().__init__(init_opts=init_opts, render_opts=render_opts)
         self.add_schema()
@@ -49,9 +49,7 @@ class Polar(Chart):
         itemstyle_opts: types.ItemStyle = None,
     ):
         self._append_legend(series_name)
-        self.options.update(polar={
-            "center": center if center else ["50%", "50%"]
-        })
+        self.options.update(polar={"center": center if center else ["50%", "50%"]})
 
         if type_ in (ChartType.SCATTER, ChartType.LINE, ChartType.BAR):
             self.options.get("series").append(

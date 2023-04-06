@@ -15,7 +15,6 @@ def test_img_path():
 
 
 def test_collector():
-
     def _add(x, y):
         return x + y
 

@@ -9,9 +9,9 @@ class Timeline(Base):
     """
 
     def __init__(
-            self,
-            init_opts: types.Init = opts.InitOpts(),
-            render_opts: types.RenderInit = opts.RenderOpts()
+        self,
+        init_opts: types.Init = opts.InitOpts(),
+        render_opts: types.RenderInit = opts.RenderOpts(),
     ):
         super().__init__(init_opts=init_opts, render_opts=render_opts)
         self.options = {"baseOption": {"series": [], "timeline": {}}, "options": []}
@@ -78,7 +78,7 @@ class Timeline(Base):
                     "lineStyle": progress_linestyle_opts,
                     "itemStyle": progress_itemstyle_opts,
                     "label": progress_label_opts,
-                }
+                },
             }
         )
         return self

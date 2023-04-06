@@ -82,22 +82,25 @@ def test_mark_line_item_remove_none():
 
 def test_mark_area_item_remove_none():
     item = MarkAreaItem()
-    expected = [{
-        "itemStyle": None,
-        "label": None,
-        "name": None,
-        "type": None,
-        "valueDim": None,
-        "valueIndex": None,
-        "xAxis": None,
-        "yAxis": None,
-    }, {
-        "type": None,
-        "valueDim": None,
-        "valueIndex": None,
-        "xAxis": None,
-        "yAxis": None,
-    }]
+    expected = [
+        {
+            "itemStyle": None,
+            "label": None,
+            "name": None,
+            "type": None,
+            "valueDim": None,
+            "valueIndex": None,
+            "xAxis": None,
+            "yAxis": None,
+        },
+        {
+            "type": None,
+            "valueDim": None,
+            "valueIndex": None,
+            "xAxis": None,
+            "yAxis": None,
+        },
+    ]
     assert_equal(expected, remove_key_with_none_value(item.opts))
 
 

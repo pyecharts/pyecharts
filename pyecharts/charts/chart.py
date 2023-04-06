@@ -7,9 +7,9 @@ from ..types import Optional, Sequence
 
 class Chart(Base):
     def __init__(
-            self,
-            init_opts: types.Init = opts.InitOpts(),
-            render_opts: types.RenderInit = opts.RenderOpts()
+        self,
+        init_opts: types.Init = opts.InitOpts(),
+        render_opts: types.RenderInit = opts.RenderOpts(),
     ):
         if isinstance(init_opts, dict):
             temp_opts = opts.InitOpts()
@@ -18,8 +18,7 @@ class Chart(Base):
         super().__init__(init_opts=init_opts, render_opts=render_opts)
         # Change to Echarts V5 default color list
         self.colors = (
-            "#5470c6 #91cc75 #fac858 #ee6666 #73c0de #3ba272 #fc8452 #9a60b4 "
-            "#ea7ccc"
+            "#5470c6 #91cc75 #fac858 #ee6666 #73c0de #3ba272 #fc8452 #9a60b4 " "#ea7ccc"
         ).split()
         self.default_color_n = len(self.colors)
         if init_opts.opts.get("theme") == ThemeType.WHITE:
@@ -34,7 +33,7 @@ class Chart(Base):
     def set_dark_mode(
         self,
         dark_mode_colors: Optional[Sequence[str]] = None,
-        dark_mode_bg_color: str = "#100C2A"
+        dark_mode_bg_color: str = "#100C2A",
     ):
         # [Hard Code Here] The Echarts default Dark Mode Configurations
         if dark_mode_colors is None:
@@ -193,24 +192,26 @@ class Chart(Base):
             )
         else:
             self.options.update(
-                dataset=[{
-                    "source": source,
-                    "dimensions": dimensions,
-                    "sourceHeader": source_header,
-                    "transform": transform,
-                    "fromDatasetIndex": from_dataset_index,
-                    "fromDatasetId": from_dataset_id,
-                    "fromTransformResult": from_transform_result,
-                }]
+                dataset=[
+                    {
+                        "source": source,
+                        "dimensions": dimensions,
+                        "sourceHeader": source_header,
+                        "transform": transform,
+                        "fromDatasetIndex": from_dataset_index,
+                        "fromDatasetId": from_dataset_id,
+                        "fromTransformResult": from_transform_result,
+                    }
+                ]
             )
         return self
 
 
 class RectChart(Chart):
     def __init__(
-            self,
-            init_opts: types.Init = opts.InitOpts(),
-            render_opts: types.RenderInit = opts.RenderOpts()
+        self,
+        init_opts: types.Init = opts.InitOpts(),
+        render_opts: types.RenderInit = opts.RenderOpts(),
     ):
         super().__init__(init_opts=init_opts, render_opts=render_opts)
         self.options.update(xAxis=[opts.AxisOpts().opts], yAxis=[opts.AxisOpts().opts])
@@ -252,7 +253,7 @@ class RectChart(Chart):
             )
         self.options.get("series").extend(chart.options.get("series"))
         # to merge colors of chart
-        for c in chart.colors[:len(chart.colors) - self.default_color_n]:
+        for c in chart.colors[: len(chart.colors) - self.default_color_n]:
             self.colors.insert(len(self.colors) - self.default_color_n, c)
         return self
 
@@ -263,9 +264,9 @@ class Chart3D(Chart):
     """
 
     def __init__(
-            self,
-            init_opts: types.Init = opts.InitOpts(),
-            render_opts: types.RenderInit = opts.RenderOpts()
+        self,
+        init_opts: types.Init = opts.InitOpts(),
+        render_opts: types.RenderInit = opts.RenderOpts(),
     ):
         init_opts.renderer = RenderType.CANVAS
         super().__init__(init_opts, render_opts)
@@ -376,7 +377,7 @@ class ThreeAxisChart(Chart3D):
                         "lineStyle": wire_frame_line_style_opts,
                     },
                     "equation": equation,
-                    "parametricEquation": parametric_equation
+                    "parametricEquation": parametric_equation,
                 }
             )
         else:

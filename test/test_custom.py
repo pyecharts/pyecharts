@@ -9,11 +9,10 @@ from pyecharts.commons.utils import JsCode
 
 @patch("pyecharts.render.engine.write_utf8_html_file")
 def test_custom_base(fake_writer):
-    c = (
-        Custom()
-        .add(
-            series_name="",
-            render_item=JsCode("""
+    c = Custom().add(
+        series_name="",
+        render_item=JsCode(
+            """
             function (params, api) {
                 var categoryIndex = api.value(0);
                 var start = api.coord([api.value(1), categoryIndex]);
@@ -36,9 +35,9 @@ def test_custom_base(fake_writer):
                     style: api.style()
                 };
             }
-            """),
-            data=None,
-        )
+            """
+        ),
+        data=None,
     )
     c.render()
     _, content = fake_writer.call_args[0]

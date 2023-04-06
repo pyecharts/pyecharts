@@ -14,27 +14,33 @@ def test_graph_gl_base(fake_writer):
     nodes = []
     for i in range(50):
         for j in range(50):
-            nodes.append(opts.GraphGLNode(
-                x=random.random() * 958,
-                y=random.random() * 777,
-                value=1,
-            ))
+            nodes.append(
+                opts.GraphGLNode(
+                    x=random.random() * 958,
+                    y=random.random() * 777,
+                    value=1,
+                )
+            )
 
     links = []
     for i in range(50):
         for j in range(50):
             if i < 50 - 1:
-                links.append(opts.GraphGLLink(
-                    source=i + j * 50,
-                    target=i + 1 + j * 50,
-                    value=1,
-                ))
+                links.append(
+                    opts.GraphGLLink(
+                        source=i + j * 50,
+                        target=i + 1 + j * 50,
+                        value=1,
+                    )
+                )
             if j < 50 - 1:
-                links.append(opts.GraphGLLink(
-                    source=i + j * 50,
-                    target=i + (j + 1) * 50,
-                    value=1,
-                ))
+                links.append(
+                    opts.GraphGLLink(
+                        source=i + j * 50,
+                        target=i + (j + 1) * 50,
+                        value=1,
+                    )
+                )
 
     c = (
         GraphGL(init_opts=opts.InitOpts())
@@ -47,7 +53,7 @@ def test_graph_gl_base(fake_writer):
             force_atlas2_opts=opts.GraphGLForceAtlas2Opts(
                 steps=5,
                 edge_weight_influence=4,
-            )
+            ),
         )
         .set_dark_mode()
     )

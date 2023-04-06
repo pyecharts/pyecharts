@@ -55,6 +55,7 @@ def test_tab_render_embed():
 
 def test_tab_render_notebook():
     from pyecharts.globals import CurrentConfig, NotebookType
+
     CurrentConfig.NOTEBOOK_TYPE = NotebookType.JUPYTER_NOTEBOOK
 
     tab = Tab()
@@ -96,8 +97,9 @@ def test_tab_attr():
 
 
 def test_tab_with_chart_container():
-    tab = Tab(tab_css_opts=opts.TabChartGlobalOpts(
-        is_enable=False,
-        tab_base_css={"overflow": "hidden"}
-    ))
+    tab = Tab(
+        tab_css_opts=opts.TabChartGlobalOpts(
+            is_enable=False, tab_base_css={"overflow": "hidden"}
+        )
+    )
     assert_true(isinstance(tab._charts, list))

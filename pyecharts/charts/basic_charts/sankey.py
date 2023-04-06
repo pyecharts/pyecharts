@@ -29,7 +29,7 @@ class Sankey(Chart):
         layout_iterations: types.Numeric = 32,
         orient: str = "horizontal",
         is_draggable: bool = True,
-        focus_node_mode: str = 'none',
+        focus_node_mode: str = "none",
         levels: types.SankeyLevel = None,
         label_opts: types.Label = opts.LabelOpts(),
         linestyle_opt: types.LineStyle = opts.LineStyleOpts(),
