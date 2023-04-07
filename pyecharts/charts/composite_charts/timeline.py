@@ -92,7 +92,6 @@ class Timeline(Base):
         self.options.get("options").append(
             {
                 "backgroundColor": chart.options.get("backgroundColor"),
-                "legend": chart.options.get("legend"),
                 "series": chart.options.get("series"),
                 "xAxis": chart.options.get("xAxis"),
                 "yAxis": chart.options.get("yAxis"),
@@ -125,6 +124,7 @@ class Timeline(Base):
             "visualMap",
             "dataZoom",
             "parallelAxis",
+            "legend",
         ]
 
         for component in components:
