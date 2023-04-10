@@ -6,7 +6,7 @@ from jinja2 import Environment
 
 from ..commons import utils
 from ..globals import CurrentConfig, RenderType, ThemeType
-from ..options import InitOpts
+from ..options import InitOpts, RenderOpts
 from ..options.global_options import AnimationOpts
 from ..options.series_options import BasicOpts
 from ..render import engine
@@ -20,10 +20,18 @@ class Base(ChartMixin):
     part of the initialization parameters and common methods
     """
 
-    def __init__(self, init_opts: Union[InitOpts, dict] = InitOpts()):
+    def __init__(
+        self,
+        init_opts: Union[InitOpts, dict] = InitOpts(),
+        render_opts: Union[RenderOpts, dict] = RenderOpts(),
+    ):
         _opts = init_opts
         if isinstance(init_opts, InitOpts):
             _opts = init_opts.opts
+
+        _render_opts = render_opts
+        if isinstance(render_opts, RenderOpts):
+            _render_opts = render_opts.opts
 
         self.width = _opts.get("width", "900px")
         self.height = _opts.get("height", "500px")
@@ -40,6 +48,7 @@ class Base(ChartMixin):
         self.bg_color = _opts.get("bg_color")
 
         self.options: dict = {}
+        self.render_options: dict = {}
         self.js_host: str = _opts.get("js_host") or CurrentConfig.ONLINE_HOST
         self.js_functions: utils.OrderedSet = utils.OrderedSet()
         self.js_dependencies: utils.OrderedSet = utils.OrderedSet("echarts")
@@ -53,6 +62,9 @@ class Base(ChartMixin):
         self._is_geo_chart: bool = False
         self._geo_json_name: Optional[str] = None
         self._geo_json: Optional[dict] = None
+
+        self.render_options.update(embed_js=bool(_render_opts.get("embed_js")))
+        self._render_cache: dict = dict()
 
     def get_chart_id(self) -> str:
         return self.chart_id
@@ -103,6 +115,12 @@ class Base(ChartMixin):
     def _prepare_render(self):
         self.json_contents = self.dump_options()
         self._use_theme()
+
+        self._render_cache.clear()
+        if self.render_options.get("embed_js"):
+            self._render_cache[
+                "javascript"
+            ] = self.load_javascript().load_javascript_contents()
 
 
 def default(o):

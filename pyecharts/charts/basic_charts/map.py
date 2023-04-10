@@ -17,7 +17,6 @@ class MapMixin:
         data_pair: types.Sequence[types.Union[types.Sequence, opts.MapItem, dict]],
         maptype: str = "china",
         *,
-        is_selected: bool = True,
         is_roam: bool = True,
         center: types.Optional[types.Sequence] = None,
         aspect_scale: types.Numeric = 0.75,
@@ -31,6 +30,15 @@ class MapMixin:
         symbol: types.Optional[str] = None,
         map_value_calculation: str = "sum",
         is_map_symbol_show: bool = True,
+        z_level: types.Numeric = 0,
+        z: types.Numeric = 2,
+        pos_left: types.Optional[types.Union[str, types.Numeric]] = None,
+        pos_top: types.Optional[types.Union[str, types.Numeric]] = None,
+        pos_right: types.Optional[types.Union[str, types.Numeric]] = None,
+        pos_bottom: types.Optional[types.Union[str, types.Numeric]] = None,
+        geo_index: types.Optional[types.Numeric] = None,
+        series_layout_by: str = "column",
+        dataset_index: types.Optional[types.Numeric] = 0,
         layout_center: types.Optional[types.Sequence[str]] = None,
         layout_size: types.Union[str, types.Numeric] = None,
         label_opts: types.Label = opts.LabelOpts(),
@@ -54,7 +62,7 @@ class MapMixin:
         if min_scale_limit is None and max_scale_limit is None:
             scale_limit = None
 
-        self._append_legend(series_name, is_selected)
+        self._append_legend(series_name)
         self.options.get("series").append(
             {
                 "type": ChartType.MAP,
@@ -72,6 +80,15 @@ class MapMixin:
                 "center": center,
                 "zoom": zoom,
                 "nameMap": name_map,
+                "zlevel": z_level,
+                "z": z,
+                "left": pos_left,
+                "top": pos_top,
+                "right": pos_right,
+                "bottom": pos_bottom,
+                "geoIndex": geo_index,
+                "seriesLayoutBy": series_layout_by,
+                "datasetIndex": dataset_index,
                 "mapValueCalculation": map_value_calculation,
                 "showLegendSymbol": is_map_symbol_show,
                 "layoutCenter": layout_center,

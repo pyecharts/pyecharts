@@ -2,7 +2,7 @@ import sys
 
 
 class ConsoleOutputRedirect:
-    """ Wrapper to redirect stdout or stderr """
+    """Wrapper to redirect stdout or stderr"""
 
     def __init__(self, fp):
         self.fp = fp

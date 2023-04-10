@@ -11,8 +11,12 @@ class Liquid(Chart):
     The liquid chart is mainly used to highlight the percentage of data.
     """
 
-    def __init__(self, init_opts: types.Init = opts.InitOpts()):
-        super().__init__(init_opts=init_opts)
+    def __init__(
+        self,
+        init_opts: types.Init = opts.InitOpts(),
+        render_opts: types.RenderInit = opts.RenderOpts(),
+    ):
+        super().__init__(init_opts=init_opts, render_opts=render_opts)
         self.js_dependencies.add("echarts-liquidfill")
 
     def add(

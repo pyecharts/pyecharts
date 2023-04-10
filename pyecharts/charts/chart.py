@@ -6,16 +6,19 @@ from ..types import Optional, Sequence
 
 
 class Chart(Base):
-    def __init__(self, init_opts: types.Init = opts.InitOpts()):
+    def __init__(
+        self,
+        init_opts: types.Init = opts.InitOpts(),
+        render_opts: types.RenderInit = opts.RenderOpts(),
+    ):
         if isinstance(init_opts, dict):
             temp_opts = opts.InitOpts()
             temp_opts.update(**init_opts)
             init_opts = temp_opts
-        super().__init__(init_opts=init_opts)
+        super().__init__(init_opts=init_opts, render_opts=render_opts)
         # Change to Echarts V5 default color list
         self.colors = (
-            "#5470c6 #91cc75 #fac858 #ee6666 #73c0de #3ba272 #fc8452 #9a60b4 "
-            "#ea7ccc"
+            "#5470c6 #91cc75 #fac858 #ee6666 #73c0de #3ba272 #fc8452 #9a60b4 " "#ea7ccc"
         ).split()
         self.default_color_n = len(self.colors)
         if init_opts.opts.get("theme") == ThemeType.WHITE:
@@ -30,7 +33,7 @@ class Chart(Base):
     def set_dark_mode(
         self,
         dark_mode_colors: Optional[Sequence[str]] = None,
-        dark_mode_bg_color: str = "#100C2A"
+        dark_mode_bg_color: str = "#100C2A",
     ):
         # [Hard Code Here] The Echarts default Dark Mode Configurations
         if dark_mode_colors is None:
@@ -104,10 +107,8 @@ class Chart(Base):
 
         return self
 
-    def _append_legend(self, name, is_selected):
+    def _append_legend(self, name):
         self.options.get("legend")[0].get("data").append(name)
-        if self.options.get("legend")[0].get("selected") is not None:
-            self.options.get("legend")[0].get("selected").update({name: is_selected})
 
     def _append_color(self, color: Optional[str]):
         if color:
@@ -191,22 +192,28 @@ class Chart(Base):
             )
         else:
             self.options.update(
-                dataset=[{
-                    "source": source,
-                    "dimensions": dimensions,
-                    "sourceHeader": source_header,
-                    "transform": transform,
-                    "fromDatasetIndex": from_dataset_index,
-                    "fromDatasetId": from_dataset_id,
-                    "fromTransformResult": from_transform_result,
-                }]
+                dataset=[
+                    {
+                        "source": source,
+                        "dimensions": dimensions,
+                        "sourceHeader": source_header,
+                        "transform": transform,
+                        "fromDatasetIndex": from_dataset_index,
+                        "fromDatasetId": from_dataset_id,
+                        "fromTransformResult": from_transform_result,
+                    }
+                ]
             )
         return self
 
 
 class RectChart(Chart):
-    def __init__(self, init_opts: types.Init = opts.InitOpts()):
-        super().__init__(init_opts=init_opts)
+    def __init__(
+        self,
+        init_opts: types.Init = opts.InitOpts(),
+        render_opts: types.RenderInit = opts.RenderOpts(),
+    ):
+        super().__init__(init_opts=init_opts, render_opts=render_opts)
         self.options.update(xAxis=[opts.AxisOpts().opts], yAxis=[opts.AxisOpts().opts])
 
     def extend_axis(
@@ -246,7 +253,7 @@ class RectChart(Chart):
             )
         self.options.get("series").extend(chart.options.get("series"))
         # to merge colors of chart
-        for c in chart.colors[:len(chart.colors) - self.default_color_n]:
+        for c in chart.colors[: len(chart.colors) - self.default_color_n]:
             self.colors.insert(len(self.colors) - self.default_color_n, c)
         return self
 
@@ -256,9 +263,13 @@ class Chart3D(Chart):
     `Chart3D`类是所有 3D 类图表的基类，继承自 `Chart` 类
     """
 
-    def __init__(self, init_opts: types.Init = opts.InitOpts()):
+    def __init__(
+        self,
+        init_opts: types.Init = opts.InitOpts(),
+        render_opts: types.RenderInit = opts.RenderOpts(),
+    ):
         init_opts.renderer = RenderType.CANVAS
-        super().__init__(init_opts)
+        super().__init__(init_opts, render_opts)
         self.js_dependencies.add("echarts-gl")
         self._3d_chart_type: Optional[str] = None  # 3d chart type,don't use it directly
 
@@ -366,7 +377,7 @@ class ThreeAxisChart(Chart3D):
                         "lineStyle": wire_frame_line_style_opts,
                     },
                     "equation": equation,
-                    "parametricEquation": parametric_equation
+                    "parametricEquation": parametric_equation,
                 }
             )
         else:

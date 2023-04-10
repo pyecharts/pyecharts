@@ -8,8 +8,12 @@ class Timeline(Base):
     `Timeline` provides functions like switching and playing between multiple charts.
     """
 
-    def __init__(self, init_opts: types.Init = opts.InitOpts()):
-        super().__init__(init_opts=init_opts)
+    def __init__(
+        self,
+        init_opts: types.Init = opts.InitOpts(),
+        render_opts: types.RenderInit = opts.RenderOpts(),
+    ):
+        super().__init__(init_opts=init_opts, render_opts=render_opts)
         self.options = {"baseOption": {"series": [], "timeline": {}}, "options": []}
         self.add_schema()
         self._time_points: types.Sequence = []
@@ -74,7 +78,7 @@ class Timeline(Base):
                     "lineStyle": progress_linestyle_opts,
                     "itemStyle": progress_itemstyle_opts,
                     "label": progress_label_opts,
-                }
+                },
             }
         )
         return self
@@ -88,7 +92,6 @@ class Timeline(Base):
         self.options.get("options").append(
             {
                 "backgroundColor": chart.options.get("backgroundColor"),
-                "legend": chart.options.get("legend"),
                 "series": chart.options.get("series"),
                 "xAxis": chart.options.get("xAxis"),
                 "yAxis": chart.options.get("yAxis"),
@@ -121,6 +124,7 @@ class Timeline(Base):
             "visualMap",
             "dataZoom",
             "parallelAxis",
+            "legend",
         ]
 
         for component in components:

@@ -149,7 +149,7 @@ def test_page_draggable_layout_same_chart_id():
     assert_equal(html1, html2)
 
 
-@raises(ValueError)
+@raises(ValueError, FileNotFoundError)
 def test_page_cfg_type():
     page = Page()
     page.save_resize_html()
@@ -177,8 +177,12 @@ def test_page_resize():
 
 def test_page_resize_cfg():
     page = Page()
-    content = page.save_resize_html(
-        cfg_file="fixtures/resize_cfg.json"
-    )
+    content = page.save_resize_html(cfg_file="test/fixtures/resize_cfg.json")
     assert_not_in(".resizable()", content)
     assert_not_in(".draggable()", content)
+
+
+@raises(ValueError)
+def test_page_no_cfg_dict_or_file():
+    page = Page()
+    page.save_resize_html()

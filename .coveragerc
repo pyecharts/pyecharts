@@ -1,0 +1,12 @@
+[run]
+omit =
+    pyecharts/render/templates/*
+    setup.py
+    install.py
+
+[report]
+show_missing = True
+omit =
+    pyecharts/render/templates/*
+    setup.py
+    install.py

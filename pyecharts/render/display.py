@@ -1,4 +1,6 @@
 from ..types import Optional, Sequence, Union
+from urllib.parse import urlparse
+import http.client
 
 
 class HTML:
@@ -50,6 +52,7 @@ class Javascript:
         self.lib = lib
         self.css = css
         self.data = data or ""
+        self.javascript_contents = dict()
 
     def _repr_javascript_(self):
         r = ""
@@ -60,3 +63,24 @@ class Javascript:
         r += self.data
         r += _lib_t2 * len(self.lib)
         return r
+
+    def load_javascript_contents(self):
+        for lib in self.lib:
+            parsed_url = urlparse(lib)
+
+            host: str = str(parsed_url.hostname)
+            port: int = parsed_url.port
+            path: str = parsed_url.path
+
+            resp: Optional[http.client.HTTPResponse] = None
+            try:
+                conn = http.client.HTTPSConnection(host, port)
+                conn.request("GET", path)
+                resp = conn.getresponse()
+                if resp.status != 200:
+                    raise RuntimeError("Cannot load JavaScript lib: %s" % lib)
+                self.javascript_contents[lib] = resp.read().decode("utf-8")
+            finally:
+                if resp is not None:
+                    resp.close()
+        return self

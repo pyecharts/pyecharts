@@ -26,7 +26,6 @@ class Radar(Chart):
         angleaxis_opts: types.AngleAxis = None,
         polar_opts: types.Polar = None,
     ):
-
         self.options.update(
             radiusAxis=radiusaxis_opts, angleAxis=angleaxis_opts, polar=polar_opts
         )
@@ -60,7 +59,6 @@ class Radar(Chart):
         series_name: str,
         data: types.Sequence[types.Union[opts.RadarItem, dict]],
         *,
-        is_selected: bool = True,
         symbol: types.Optional[str] = None,
         color: types.Optional[str] = None,
         label_opts: opts.LabelOpts = opts.LabelOpts(),
@@ -71,9 +69,9 @@ class Radar(Chart):
     ):
         if all([isinstance(d, opts.RadarItem) for d in data]):
             for a in data:
-                self._append_legend(a.get("name"), is_selected)
+                self._append_legend(a.get("name"))
         else:
-            self._append_legend(series_name, is_selected)
+            self._append_legend(series_name)
         self.options.get("series").append(
             {
                 "type": ChartType.RADAR,

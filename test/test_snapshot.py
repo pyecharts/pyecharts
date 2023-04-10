@@ -25,11 +25,11 @@ def _gen_faker_engine(content: str):
 
 
 def test_decode_base64():
-    assert decode_base64(data="abcde12") == b'i\xb7\x1d{]'
+    assert decode_base64(data="abcde12") == b"i\xb7\x1d{]"
 
 
 def test_save_as_png():
-    save_as_png(image_data=b'i\xb7\x1d{]', output_name="text_png.png")
+    save_as_png(image_data=b"i\xb7\x1d{]", output_name="text_png.png")
     os.unlink("text_png.png")
 
 
@@ -39,7 +39,7 @@ def test_save_as_text():
 
 
 def test_save_as():
-    with open("fixtures/img1.jpg", "rb") as f:
+    with open("test/fixtures/img1.jpg", "rb") as f:
         image_bytes = f.read()
     save_as(image_data=image_bytes, output_name="test_pdf.pdf", file_type="pdf")
     os.unlink("test_pdf.pdf")
@@ -94,5 +94,18 @@ def test_make_snapshot_gif(fake_writer):
 def test_make_snapshot_text(fake_writer):
     eng = _gen_faker_engine("fake content1,content2")
     make_snapshot(eng, _gen_bar_chart(), "make_snapshot.svg")
+    _ = fake_writer.call_args[0]
+    assert_equal("test ok", "test ok")
+
+
+@patch("pyecharts.render.snapshot.save_as_text")
+def test_make_snapshot_text_v1(fake_writer):
+    eng = _gen_faker_engine("fake content1,content2")
+    make_snapshot(
+        engine=eng,
+        file_name=_gen_bar_chart(),
+        output_name="make_snapshot.svg",
+        is_remove_html=True,
+    )
     _ = fake_writer.call_args[0]
     assert_equal("test ok", "test ok")

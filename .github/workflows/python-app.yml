@@ -26,5 +26,4 @@ jobs:
         python test.py
     - name: Codecov
       run: |
-        cd test
         codecov

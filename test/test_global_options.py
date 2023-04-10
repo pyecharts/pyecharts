@@ -66,7 +66,7 @@ def test_aria_label_options_remove_none():
                 "separator": {
                     "middle": "；",
                     "end": "。",
-                }
+                },
             },
         },
         "data": {
@@ -77,8 +77,8 @@ def test_aria_label_options_remove_none():
             "withoutName": "{value}",
             "separator": {
                 "middle": "，",
-            }
-        }
+            },
+        },
     }
     assert_equal(expected, remove_key_with_none_value(option.opts))
 
@@ -97,7 +97,7 @@ def test_aria_decal_options_remove_none():
             "rotation": 0,
             "maxTileWidth": 512,
             "maxTileHeight": 512,
-        }
+        },
     }
     assert_equal(expected, remove_key_with_none_value(option.opts))
 
@@ -112,6 +112,8 @@ def test_init_options_remove_none():
         "theme": "white",
         "width": "900px",
         "ariaOpts": {},
+        "fill_bg": False,
+        "is_horizontal_center": False,
     }
     assert_equal(expected, remove_key_with_none_value(option.opts))
 
@@ -171,6 +173,7 @@ def test_brush_options_remove_none():
         "throttleType": "fixRate",
         "toolbox": ["rect", "polygon", "keep", "clear"],
         "transformable": True,
+        "z": 10000,
     }
     assert_equal(expected, remove_key_with_none_value(option.opts))
 
@@ -200,6 +203,21 @@ def test_legend_options_remove_none():
         "itemGap": 10,
         "itemWidth": 25,
         "itemHeight": 14,
+        "backgroundColor": "transparent",
+        "borderColor": "#ccc",
+        "borderWidth": 1,
+        "borderRadius": 0,
+        "pageButtonItemGap": 5,
+        "pageButtonPosition": "end",
+        "pageFormatter": "{current}/{total}",
+        "pageIconColor": "#2f4554",
+        "pageIconInactiveColor": "#aaa",
+        "pageIconSize": 15,
+        "animationDurationUpdate": 800,
+        "selector": False,
+        "selectorPosition": "auto",
+        "selectorItemGap": 7,
+        "selectorButtonGap": 10,
     }
     assert_equal(expected, remove_key_with_none_value(option.opts))
 
@@ -329,8 +347,5 @@ def test_radius_axis_options_remove_none():
 
 def test_dataset_transform_options_remove_none():
     option = DatasetTransformOpts()
-    expected = {
-        "type": "filter",
-        "print": False
-    }
+    expected = {"type": "filter", "print": False}
     assert_equal(expected, remove_key_with_none_value(option.opts))

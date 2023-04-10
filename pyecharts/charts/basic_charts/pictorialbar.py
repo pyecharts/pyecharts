@@ -26,7 +26,6 @@ class PictorialBar(RectChart):
         symbol_repeat_direction: types.Optional[str] = None,
         symbol_margin: types.Union[types.Numeric, str, None] = None,
         is_symbol_clip: bool = False,
-        is_selected: bool = True,
         xaxis_index: types.Optional[types.Numeric] = None,
         yaxis_index: types.Optional[types.Numeric] = None,
         color: types.Optional[str] = None,
@@ -40,7 +39,7 @@ class PictorialBar(RectChart):
         encode: types.Union[types.JsCode, dict] = None,
     ):
         self._append_color(color)
-        self._append_legend(series_name, is_selected)
+        self._append_legend(series_name)
         self.options.get("series").append(
             {
                 "type": ChartType.PICTORIALBAR,

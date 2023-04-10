@@ -1,4 +1,5 @@
 import os
+
 try:
     from collections.abc import Iterable
 except ImportError:

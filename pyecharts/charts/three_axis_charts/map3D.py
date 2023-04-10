@@ -2,7 +2,7 @@ from ... import options as opts
 from ... import types
 from ...charts.chart import Chart3D
 from ...globals import ChartType
-from ...options import InitOpts
+from ...options import InitOpts, RenderOpts
 
 
 class Map3D(Chart3D):
@@ -10,8 +10,12 @@ class Map3D(Chart3D):
     3D map
     """
 
-    def __init__(self, init_opts: types.Init = InitOpts()):
-        super().__init__(init_opts)
+    def __init__(
+        self,
+        init_opts: types.Init = InitOpts(),
+        render_opts: types.RenderInit = RenderOpts(),
+    ):
+        super().__init__(init_opts, render_opts)
         self._3d_chart_type = ChartType.MAP3D
 
     def add(
@@ -21,7 +25,6 @@ class Map3D(Chart3D):
         *,
         type_: ChartType = None,
         maptype: str = "china",
-        is_selected: bool = True,
         is_map_symbol_show: bool = True,
         grid_3d_index: types.Numeric = 0,
         geo_3d_index: types.Numeric = 0,
@@ -56,7 +59,7 @@ class Map3D(Chart3D):
             data = [{"name": n, "value": v} for n, v in data_pair]
         else:
             data = data_pair
-        self._append_legend(series_name, is_selected)
+        self._append_legend(series_name)
         if type_ is None or type_ == ChartType.MAP3D:
             self.options.get("series").append(
                 {

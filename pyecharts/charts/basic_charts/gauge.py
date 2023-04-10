@@ -16,7 +16,6 @@ class Gauge(Chart):
         series_name: str,
         data_pair: types.Sequence,
         *,
-        is_selected: bool = True,
         min_: types.Numeric = 0,
         max_: types.Numeric = 100,
         split_number: types.Numeric = 10,
@@ -44,7 +43,7 @@ class Gauge(Chart):
         if center is None:
             center = ["50%", "50%"]
 
-        self._append_legend(series_name, is_selected)
+        self._append_legend(series_name)
         self.options.get("series").append(
             {
                 "type": ChartType.GAUGE,

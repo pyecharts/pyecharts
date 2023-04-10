@@ -13,8 +13,12 @@ class HeatMap(RectChart):
     Two categories of axes must be used in rectangular coordinates.
     """
 
-    def __init__(self, init_opts: types.Init = opts.InitOpts()):
-        super().__init__(init_opts=init_opts)
+    def __init__(
+        self,
+        init_opts: types.Init = opts.InitOpts(),
+        render_opts: types.RenderInit = opts.RenderOpts(),
+    ):
+        super().__init__(init_opts=init_opts, render_opts=render_opts)
         self.set_global_opts(visualmap_opts=opts.VisualMapOpts(orient="horizontal"))
 
     def add_yaxis(
@@ -23,7 +27,6 @@ class HeatMap(RectChart):
         yaxis_data: types.Sequence[types.Union[dict]],
         value: types.Sequence[types.Union[dict]],
         *,
-        is_selected: bool = True,
         xaxis_index: types.Optional[types.Numeric] = None,
         yaxis_index: types.Optional[types.Numeric] = None,
         label_opts: types.Label = opts.LabelOpts(),
@@ -32,7 +35,7 @@ class HeatMap(RectChart):
         tooltip_opts: types.Tooltip = None,
         itemstyle_opts: types.ItemStyle = None,
     ):
-        self._append_legend(series_name, is_selected)
+        self._append_legend(series_name)
         self.options.get("yAxis")[0].update(data=yaxis_data)
         self.options.get("series").append(
             {

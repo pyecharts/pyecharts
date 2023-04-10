@@ -12,8 +12,12 @@ class Parallel(Chart):
     high dimensional data.
     """
 
-    def __init__(self, init_opts: types.Init = opts.InitOpts()):
-        super().__init__(init_opts=init_opts)
+    def __init__(
+        self,
+        init_opts: types.Init = opts.InitOpts(),
+        render_opts: types.RenderInit = opts.RenderOpts(),
+    ):
+        super().__init__(init_opts=init_opts, render_opts=render_opts)
         self.options.update(parallel=opts.ParallelOpts().opts)
 
     def add_schema(
@@ -40,12 +44,11 @@ class Parallel(Chart):
         data: types.Sequence[types.Union[dict]],
         *,
         is_smooth: bool = False,
-        is_selected: bool = True,
         linestyle_opts: types.LineStyle = opts.LineStyleOpts(),
         tooltip_opts: types.Tooltip = None,
         itemstyle_opts: types.ItemStyle = None,
     ):
-        self._append_legend(series_name, is_selected)
+        self._append_legend(series_name)
         self.options.get("series").append(
             {
                 "type": ChartType.PARALLEL,

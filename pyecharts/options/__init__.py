@@ -81,6 +81,7 @@ from .global_options import (
     Grid3DOpts,
     GridOpts,
     InitOpts,
+    RenderOpts,
     LegendOpts,
     ParallelAxisOpts,
     ParallelOpts,

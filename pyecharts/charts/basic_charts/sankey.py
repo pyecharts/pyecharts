@@ -19,7 +19,6 @@ class Sankey(Chart):
         nodes: types.Sequence,
         links: types.Sequence,
         *,
-        is_selected: bool = True,
         pos_left: types.Union[str, types.Numeric] = "5%",
         pos_top: types.Union[str, types.Numeric] = "5%",
         pos_right: types.Union[str, types.Numeric] = "20%",
@@ -30,7 +29,7 @@ class Sankey(Chart):
         layout_iterations: types.Numeric = 32,
         orient: str = "horizontal",
         is_draggable: bool = True,
-        focus_node_mode: str = 'none',
+        focus_node_mode: str = "none",
         levels: types.SankeyLevel = None,
         label_opts: types.Label = opts.LabelOpts(),
         linestyle_opt: types.LineStyle = opts.LineStyleOpts(),
@@ -40,7 +39,7 @@ class Sankey(Chart):
         if layout_iterations < 32:
             layout_iterations = 32
 
-        self._append_legend(series_name, is_selected)
+        self._append_legend(series_name)
         self.options.get("series").append(
             {
                 "type": ChartType.SANKEY,

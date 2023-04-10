@@ -18,7 +18,6 @@ class Graph(Chart):
         links: types.Sequence[types.GraphLink],
         categories: types.Union[types.Sequence[types.GraphCategory], None] = None,
         *,
-        is_selected: bool = True,
         is_focusnode: bool = True,
         is_roam: bool = True,
         is_draggable: bool = False,
@@ -55,7 +54,7 @@ class Graph(Chart):
             for c in categories:
                 if isinstance(c, opts.GraphCategory):
                     c = c.opts
-                self._append_legend(c.get("name", ""), is_selected)
+                self._append_legend(c.get("name", ""))
 
         if edge_label is None:
             edge_label = opts.LabelOpts(is_show=False)

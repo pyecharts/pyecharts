@@ -2,7 +2,7 @@ from ... import options as opts
 from ... import types
 from ...charts.chart import Chart3D
 from ...globals import ChartType
-from ...options import InitOpts
+from ...options import InitOpts, RenderOpts
 
 
 class GraphGL(Chart3D):
@@ -11,8 +11,12 @@ class GraphGL(Chart3D):
     drawing of large-scale network/relational data. >>>
     """
 
-    def __init__(self, init_opts: types.Init = InitOpts()):
-        super().__init__(init_opts)
+    def __init__(
+        self,
+        init_opts: types.Init = InitOpts(),
+        render_opts: types.RenderInit = RenderOpts(),
+    ):
+        super().__init__(init_opts, render_opts)
         self._3d_chart_type = ChartType.GRAPHGL
 
     def add(

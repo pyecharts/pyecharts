@@ -16,7 +16,6 @@ class EffectScatter(RectChart):
         series_name: str,
         y_axis: types.Sequence[types.Union[opts.EffectScatterItem, dict]],
         *,
-        is_selected: bool = True,
         xaxis_index: types.Optional[types.Numeric] = None,
         yaxis_index: types.Optional[types.Numeric] = None,
         color: types.Optional[str] = None,
@@ -29,7 +28,7 @@ class EffectScatter(RectChart):
         itemstyle_opts: types.ItemStyle = None,
     ):
         self._append_color(color)
-        self._append_legend(series_name, is_selected)
+        self._append_legend(series_name)
 
         if all([isinstance(d, opts.EffectScatterItem) for d in y_axis]):
             y_axis = y_axis

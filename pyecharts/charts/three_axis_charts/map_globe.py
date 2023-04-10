@@ -7,7 +7,7 @@ from ...charts.basic_charts.map import MapMixin
 from ...charts.chart import Chart3D
 from ...commons import utils
 from ...globals import CurrentConfig, NotebookType
-from ...options import InitOpts
+from ...options import InitOpts, RenderOpts
 from ...render.display import HTML
 from ...render.engine import RenderEngine
 
@@ -17,8 +17,12 @@ class MapGlobe(Chart3D, MapMixin):
     Globe Map
     """
 
-    def __init__(self, init_opts: types.Init = InitOpts()):
-        super().__init__(init_opts)
+    def __init__(
+        self,
+        init_opts: types.Init = InitOpts(),
+        render_opts: types.RenderInit = RenderOpts(),
+    ):
+        super().__init__(init_opts, render_opts)
 
     def add_schema(self, maptype: str = "china"):
         self.js_dependencies.add(maptype)

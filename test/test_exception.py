@@ -19,7 +19,7 @@ def test_geo_catch_nonexistent_coord_exception():
         )
     except NonexistentCoordinatesException as err:
         assert_equal(type(err), NonexistentCoordinatesException)
-        assert err.__str__() != ''
+        assert err.__str__() != ""
 
 
 def test_geo_ignore_nonexistent_coord_exception():

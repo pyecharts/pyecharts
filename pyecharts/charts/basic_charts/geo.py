@@ -9,8 +9,12 @@ from ...globals import ChartType
 
 
 class GeoChartBase(Chart):
-    def __init__(self, init_opts: types.Init = opts.InitOpts()):
-        super().__init__(init_opts=init_opts)
+    def __init__(
+        self,
+        init_opts: types.Init = opts.InitOpts(),
+        render_opts: types.RenderInit = opts.RenderOpts(),
+    ):
+        super().__init__(init_opts=init_opts, render_opts=render_opts)
         self.set_global_opts()
         self._coordinates = COORDINATES
         self._zlevel = 1
@@ -44,7 +48,6 @@ class GeoChartBase(Chart):
         data_pair: types.Sequence,
         type_: str = "scatter",
         *,
-        is_selected: bool = True,
         symbol: types.Optional[str] = None,
         symbol_size: types.Numeric = 12,
         blur_size: types.Numeric = 20,
@@ -67,7 +70,7 @@ class GeoChartBase(Chart):
         data = self._feed_data(data_pair, type_)
 
         self._append_color(color)
-        self._append_legend(series_name, is_selected)
+        self._append_legend(series_name)
 
         if type_ == ChartType.SCATTER:
             self.options.get("series").append(
@@ -197,8 +200,9 @@ class Geo(GeoChartBase):
         self,
         init_opts: types.Init = opts.InitOpts(),
         is_ignore_nonexistent_coord: bool = False,
+        render_opts: types.RenderInit = opts.RenderOpts(),
     ):
-        super().__init__(init_opts=init_opts)
+        super().__init__(init_opts=init_opts, render_opts=render_opts)
         self._coordinate_system: types.Optional[str] = "geo"
         self._is_ignore_nonexistent_coord = is_ignore_nonexistent_coord
 

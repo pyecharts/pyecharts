@@ -20,7 +20,6 @@ class Funnel(Chart):
         series_name: str,
         data_pair: types.Sequence,
         *,
-        is_selected: bool = True,
         color: types.Optional[str] = None,
         sort_: str = "descending",
         gap: types.Numeric = 0,
@@ -32,11 +31,11 @@ class Funnel(Chart):
         if all([isinstance(d, opts.FunnelItem) for d in data_pair]):
             data = data_pair
             for a in data_pair:
-                self._append_legend(a.opts.get("name"), is_selected)
+                self._append_legend(a.opts.get("name"))
         else:
             data = [{"name": n, "value": v} for n, v in data_pair]
             for a, _ in data_pair:
-                self._append_legend(a, is_selected)
+                self._append_legend(a)
 
         _dset = set(self.options.get("legend")[0].get("data"))
         self.options.get("legend")[0].update(data=list(_dset))
