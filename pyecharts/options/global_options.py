@@ -1268,6 +1268,15 @@ class SingleAxisOpts(BasicOpts):
         height: Optional[str] = None,
         orient: Optional[str] = None,
         type_: Optional[str] = None,
+        axisline_opts: Union[AxisLineOpts, dict, None] = None,
+        axistick_opts: Union[AxisTickOpts, dict, None] = None,
+        axislabel_opts: Union[LabelOpts, dict, None] = None,
+        axispointer_opts: Union[AxisPointerOpts, dict, None] = None,
+        splitarea_opts: Union[SplitAreaOpts, dict, None] = None,
+        splitline_opts: Union[SplitLineOpts, dict, None] = None,
+        minor_tick_opts: Union[MinorTickOpts, dict, None] = None,
+        minor_split_line_opts: Union[MinorSplitLineOpts, dict, None] = None,
+        tooltip_opts: Union[TooltipOpts, dict, None] = None,
     ):
         self.opts: dict = {
             "name": name,
@@ -1281,6 +1290,15 @@ class SingleAxisOpts(BasicOpts):
             "height": height,
             "orient": orient,
             "type": type_,
+            "axisLine": axisline_opts,
+            "axisTick": axistick_opts,
+            "minorTick": minor_tick_opts,
+            "axisLabel": axislabel_opts,
+            "splitLine": splitline_opts,
+            "minorSplitLine": minor_split_line_opts,
+            "splitArea": splitarea_opts,
+            "axisPointer": axispointer_opts,
+            "tooltip": tooltip_opts,
         }
 
 
