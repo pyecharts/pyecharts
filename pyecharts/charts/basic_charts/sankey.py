@@ -29,6 +29,7 @@ class Sankey(Chart):
         layout_iterations: types.Numeric = 32,
         orient: str = "horizontal",
         is_draggable: bool = True,
+        edge_label_opt: types.Label = None,
         focus_node_mode: str = "none",
         levels: types.SankeyLevel = None,
         label_opts: types.Label = opts.LabelOpts(),
@@ -56,6 +57,7 @@ class Sankey(Chart):
                 "layoutIteration": layout_iterations,
                 "orient": orient,
                 "draggable": is_draggable,
+                "edgeLabel": edge_label_opt,
                 "emphasis": {
                     "focus": focus_node_mode,
                 },

@@ -397,3 +397,26 @@ def test_geo_flow_gl(fake_writer):
     c.render()
     _, content = fake_writer.call_args[0]
     assert_in("canvas", content)
+
+
+@patch("pyecharts.render.engine.write_utf8_html_file")
+def test_geo_pie(fake_writer):
+    c = (
+        Geo()
+        .add_schema(maptype="china")
+        .add(
+            series_name="广东省",
+            data_pair=[
+                ("A", 10), ("B", 20), ("C", 30), ("D", 50)
+            ],
+            type_=ChartType.PIE,
+        )
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="Geo-Pie"),
+            legend_opts={}
+        )
+    )
+    assert_equal(c.theme, "white")
+    c.render()
+    _, content = fake_writer.call_args[0]
+    assert_in("canvas", content)
