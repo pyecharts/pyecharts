@@ -59,7 +59,7 @@ class GeoChartBase(Chart):
         large_threshold: types.Numeric = 2000,
         progressive: types.Numeric = 400,
         progressive_threshold: types.Numeric = 3000,
-        label_opts: types.Label = opts.LabelOpts(),
+        label_opts: types.Label = None,
         effect_opts: types.Effect = opts.EffectOpts(),
         linestyle_opts: types.LineStyle = opts.LineStyleOpts(),
         tooltip_opts: types.Tooltip = None,
