@@ -1,0 +1,48 @@
+{% set name = "pyecharts" %}
+{% set version = "2.0.4" %}
+
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/pyecharts-{{ version }}.tar.gz
+  sha256: 352a347c38c0bb122c1540bb2dd65cc534b3b8c9892c0e65c155d30102e824a1
+
+build:
+  number: 0
+  noarch: python
+  script: {{ PYTHON }} -m pip install . -vv
+
+requirements:
+  host:
+    - pip
+    - python >=3.6
+  run:
+    - jinja2
+    - prettytable
+    - python >=3.6
+    - simplejson
+
+test:
+  imports:
+    - pyecharts
+    - pyecharts.charts
+  commands:
+    - pip check
+  requires:
+    - pip
+
+about:
+  home: https://github.com/pyecharts/pyecharts
+  summary: Python options, make charting easier
+  license: MIT
+  license_file: LICENSE
+
+extra:
+  recipe-maintainers:
+    - chenjiandongx
+    - chfw
+    - kinegratii
+    - sunhailin-Leo
