@@ -29,7 +29,18 @@ class GraphNode(BasicOpts):
         category: Optional[int] = None,
         symbol: Optional[str] = None,
         symbol_size: Union[Numeric, Sequence, None] = None,
+        symbol_rotate: Optional[int] = None,
+        itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
         label_opts: Union[LabelOpts, dict, None] = None,
+        is_disabled_emphasis: Optional[bool] = None,
+        emphasis_linestyle_opts: Union[LineStyleOpts, dict, None] = None,
+        emphasis_label_opts: Union[LabelOpts, dict, None] = None,
+        blur_linestyle_opts: Union[LineStyleOpts, dict, None] = None,
+        blur_label_opts: Union[LabelOpts, dict, None] = None,
+        is_disabled_select: Optional[bool] = None,
+        select_linestyle_opts: Union[LineStyleOpts, dict, None] = None,
+        select_label_opts: Union[LabelOpts, dict, None] = None,
+        tooltip_opts: Union[TooltipOpts, dict, None] = None,
     ):
         self.opts: dict = {
             "name": name,
@@ -40,7 +51,24 @@ class GraphNode(BasicOpts):
             "category": category,
             "symbol": symbol,
             "symbolSize": symbol_size,
+            "symbolRotate": symbol_rotate,
+            "itemStyle": itemstyle_opts,
             "label": label_opts,
+            "emphasis": {
+                "disabled": is_disabled_emphasis,
+                "lineStyle": emphasis_linestyle_opts,
+                "label": emphasis_label_opts,
+            },
+            "blur": {
+                "lineStyle": blur_linestyle_opts,
+                "label": blur_label_opts,
+            },
+            "select": {
+                "disabled": is_disabled_select,
+                "lineStyle": select_linestyle_opts,
+                "label": select_label_opts,
+            },
+            "tooltip": tooltip_opts,
         }
 
 
@@ -54,6 +82,15 @@ class GraphLink(BasicOpts):
         symbol_size: Union[Numeric, Sequence, None] = None,
         linestyle_opts: Union[LineStyleOpts, dict, None] = None,
         label_opts: Union[LabelOpts, dict, None] = None,
+        is_disabled_emphasis: Optional[bool] = None,
+        emphasis_linestyle_opts: Union[LineStyleOpts, dict, None] = None,
+        emphasis_label_opts: Union[LabelOpts, dict, None] = None,
+        blur_linestyle_opts: Union[LineStyleOpts, dict, None] = None,
+        blur_label_opts: Union[LabelOpts, dict, None] = None,
+        is_disabled_select: Optional[bool] = None,
+        select_linestyle_opts: Union[LineStyleOpts, dict, None] = None,
+        select_label_opts: Union[LabelOpts, dict, None] = None,
+        is_ignore_force_layout: bool = False
     ):
         self.opts: dict = {
             "source": source,
@@ -63,6 +100,21 @@ class GraphLink(BasicOpts):
             "symbolSize": symbol_size,
             "lineStyle": linestyle_opts,
             "label": label_opts,
+            "emphasis": {
+                "disabled": is_disabled_emphasis,
+                "lineStyle": emphasis_linestyle_opts,
+                "label": emphasis_label_opts,
+            },
+            "blur": {
+                "lineStyle": blur_linestyle_opts,
+                "label": blur_label_opts,
+            },
+            "select": {
+                "disabled": is_disabled_select,
+                "lineStyle": select_linestyle_opts,
+                "label": select_label_opts,
+            },
+            "ignoreForceLayout": is_ignore_force_layout,
         }
 
 
