@@ -107,6 +107,10 @@ class LabelOpts(BasicOpts):
         border_color: Optional[str] = None,
         border_width: Optional[Numeric] = None,
         border_radius: Optional[Numeric] = None,
+        padding: Union[Numeric, Sequence[Numeric], None] = None,
+        text_width: Optional[Numeric] = None,
+        text_height: Optional[Numeric] = None,
+        overflow: Optional[str] = None,
         rich: Optional[dict] = None,
     ):
         self.opts: dict = {
@@ -128,6 +132,10 @@ class LabelOpts(BasicOpts):
             "borderColor": border_color,
             "borderWidth": border_width,
             "borderRadius": border_radius,
+            "padding": padding,
+            "width": text_width,
+            "height": text_height,
+            "overflow": overflow,
             "rich": rich,
         }
 

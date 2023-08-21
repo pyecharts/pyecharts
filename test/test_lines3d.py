@@ -1,7 +1,7 @@
 import requests
 from unittest.mock import patch
 
-from nose.tools import assert_in
+from nose.tools import assert_in, assert_equal
 
 from pyecharts import options as opts
 from pyecharts.charts import Lines3D
@@ -48,5 +48,7 @@ def test_lines3d_base(fake_writer):
     )
     c.render()
     _, content = fake_writer.call_args[0]
+    assert_equal(c.theme, "white")
+    assert_equal(c.renderer, "canvas")
     assert_in("baseTexture", content)
     assert_in("heightTexture", content)

@@ -52,13 +52,14 @@ class GeoChartBase(Chart):
         symbol_size: types.Numeric = 12,
         blur_size: types.Numeric = 20,
         point_size: types.Numeric = 20,
+        radius: types.Optional[types.Sequence] = None,
         color: types.Optional[str] = None,
         is_polyline: bool = False,
         is_large: bool = False,
         large_threshold: types.Numeric = 2000,
         progressive: types.Numeric = 400,
         progressive_threshold: types.Numeric = 3000,
-        label_opts: types.Label = opts.LabelOpts(),
+        label_opts: types.Label = None,
         effect_opts: types.Effect = opts.EffectOpts(),
         linestyle_opts: types.LineStyle = opts.LineStyleOpts(),
         tooltip_opts: types.Tooltip = None,
@@ -186,6 +187,33 @@ class GeoChartBase(Chart):
                     "data": data,
                 }
             )
+        elif type_ == ChartType.PIE:
+            if not radius:
+                radius = ["0%", "5%"]
+
+            if not tooltip_opts:
+                tooltip_opts = {"formatter": "{b}: {c} ({d}%)"}
+
+            if not isinstance(data[0], opts.PieItem):
+                data = [{"name": n, "value": v} for n, v in data]
+
+            self.options.get("series").append(
+                {
+                    "type": type_,
+                    "coordinateSystem": self._coordinate_system,
+                    "data": data,
+                    "tooltip": tooltip_opts,
+                    "label": label_opts,
+                    "center": self.get_coordinate(series_name),
+                    "radius": radius,
+                }
+            )
+            # Legend (hard code here)
+            legend = self.options.get("legend")[0]
+            pie_series_name = [d.get("name") for d in data]
+            if len(legend.get("data")) < len(pie_series_name):
+                legend["data"] = pie_series_name
+
         return self
 
 
@@ -207,6 +235,9 @@ class Geo(GeoChartBase):
         self._is_ignore_nonexistent_coord = is_ignore_nonexistent_coord
 
     def _feed_data(self, data_pair: types.Sequence, type_: str) -> types.Sequence:
+        if type_ == ChartType.PIE:
+            return data_pair
+
         result = []
         for n, v in data_pair:
             try:

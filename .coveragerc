@@ -3,6 +3,8 @@ omit =
     pyecharts/render/templates/*
     setup.py
     install.py
+    test.py
+    test/*
 
 [report]
 show_missing = True

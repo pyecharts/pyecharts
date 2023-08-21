@@ -90,3 +90,47 @@ def test_line_opts_with_zlevel_z(fake_writer):
     _, content = fake_writer.call_args[0]
     assert_in("zlevel", content)
     assert_in("z", content)
+
+
+def test_line_dataset():
+    c = (
+        Line()
+        .add_dataset(
+            source=[
+                ["product", "2012", "2013", "2014", "2015", "2016", "2017"],
+                ["Milk Tea", 56.5, 82.1, 88.7, 70.1, 53.4, 85.1],
+                ["Matcha Latte", 51.1, 51.4, 55.1, 53.3, 73.8, 68.7],
+                ["Cheese Cocoa", 40.1, 62.2, 69.5, 36.4, 45.2, 32.5],
+                ["Walnut Brownie", 25.2, 37.1, 41.2, 18, 33.9, 49.1],
+            ]
+        )
+        .add_yaxis(
+            series_name="Milk Tea",
+            y_axis=[],
+            is_smooth=True,
+            series_layout_by="row",
+        )
+        .add_yaxis(
+            series_name="Matcha Latte",
+            y_axis=[],
+            is_smooth=True,
+            series_layout_by="row",
+        )
+        .add_yaxis(
+            series_name="Cheese Cocoa",
+            y_axis=[],
+            is_smooth=True,
+            series_layout_by="row",
+        )
+        .add_yaxis(
+            series_name="Walnut Brownie",
+            y_axis=[],
+            is_smooth=True,
+            series_layout_by="row",
+        )
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="Dataset Line Example"),
+            xaxis_opts=opts.AxisOpts(type_="category"),
+        )
+    )
+    assert_equal(c.options.get("series")[0].get("data"), None)
