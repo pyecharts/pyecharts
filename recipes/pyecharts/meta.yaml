@@ -8,7 +8,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/pyecharts-{{ version }}.tar.gz
-  sha256: 352a347c38c0bb122c1540bb2dd65cc534b3b8c9892c0e65c155d30102e824a1
+  sha256: 14503e688d4de8560e3d41c19db1b472d9a0208e25dd860626e1e8c665d12d20
 
 build:
   number: 0
