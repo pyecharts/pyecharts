@@ -27,7 +27,7 @@ class Sunburst(Chart):
         is_render_label_for_zero_data: bool = False,
         is_clockwise: bool = True,
         start_angle: types.Numeric = 90,
-        levels: types.Optional[types.Sequence[types.SunburstLevelOpts, dict]] = None,
+        levels: types.Optional[types.Sequence[types.SunburstLevelOpts]] = None,
         label_opts: types.Label = opts.LabelOpts(),
         label_line_opts: types.SunburstLabelLine = None,
         label_layout_opts: types.SunburstLabelLayout = None,
