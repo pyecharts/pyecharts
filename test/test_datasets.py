@@ -51,6 +51,12 @@ def test_register_url(fake):
 #     except (urllib.error.HTTPError, ConnectionRefusedError) as err:
 #         assert_in(type(err), [urllib.error.HTTPError, ConnectionRefusedError])
 
+def test_register_url_error():
+    try:
+        register_url("error_asset_url")
+    except ValueError as err:
+        assert_in(type(err), [ValueError])
+
 
 def test_fuzzy_search_dict():
     fd = FuzzyDict()
