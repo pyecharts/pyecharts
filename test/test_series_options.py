@@ -35,6 +35,10 @@ def test_label_options_defaults():
         "borderColor": None,
         "borderWidth": None,
         "borderRadius": None,
+        "padding": None,
+        "width": None,
+        "height": None,
+        "overflow": None,
         "rich": None,
     }
     assert_equal(expected, option.opts)
@@ -63,6 +67,10 @@ def test_label_options_custom():
         "borderColor": "green",
         "borderWidth": 1,
         "borderRadius": 2,
+        "padding": None,
+        "width": None,
+        "height": None,
+        "overflow": None,
         "rich": None,
     }
     assert_equal(expected, option.opts)
