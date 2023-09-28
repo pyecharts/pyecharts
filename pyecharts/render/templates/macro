@@ -42,6 +42,11 @@
         {% endfor %}
         var option_{{ c.chart_id }} = {{ c.json_contents }};
         chart_{{ c.chart_id }}.setOption(option_{{ c.chart_id }});
+        {% for action in c.dispatch_actions.items %}
+            chart_{{ c.chart_id }}.dispatchAction(
+                {{ action }}
+            );
+        {% endfor %}
         {% if c._is_geo_chart %}
             var bmap = chart_{{ c.chart_id }}.getModel().getComponent('bmap').getBMap();
             {% if c.bmap_js_functions %}
@@ -70,6 +75,11 @@
                 {% endfor %}
                 var option_{{ c.chart_id }} = {{ c.json_contents }};
                 chart_{{ c.chart_id }}.setOption(option_{{ c.chart_id }});
+                {% for action in c.dispatch_actions.items %}
+                    chart_{{ c.chart_id }}.dispatchAction(
+                        {{ action }}
+                    );
+                {% endfor %}
                 {% if c._is_geo_chart %}
                     var bmap = chart_{{ c.chart_id }}.getModel().getComponent('bmap').getBMap();
                     bmap.addControl(new BMap.MapTypeControl());

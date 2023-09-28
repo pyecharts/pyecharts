@@ -51,6 +51,7 @@ class Base(ChartMixin):
         self.render_options: dict = {}
         self.js_host: str = _opts.get("js_host") or CurrentConfig.ONLINE_HOST
         self.js_functions: utils.OrderedSet = utils.OrderedSet()
+        self.dispatch_actions: utils.OrderedSet = utils.OrderedSet()
         self.js_dependencies: utils.OrderedSet = utils.OrderedSet("echarts")
         self.options.update(backgroundColor=self.bg_color)
         if isinstance(_opts.get("animationOpts", AnimationOpts()), dict):

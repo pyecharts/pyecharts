@@ -7,6 +7,11 @@ class ChartMixin:
             self.js_functions.add(fn)
         return self
 
+    def add_dispatch_actions(self, *actions):
+        for action in actions:
+            self.dispatch_actions.add(action)
+        return self
+
     def load_javascript(self):
         return engine.load_javascript(self)
 
