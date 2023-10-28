@@ -1009,8 +1009,14 @@ class GaugePointerOpts(BasicOpts):
         is_show: bool = True,
         length: Union[str, Numeric] = "80%",
         width: Numeric = 8,
+        itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
     ):
-        self.opts: dict = {"show": is_show, "length": length, "width": width}
+        self.opts: dict = {
+                "show": is_show,
+                "length": length,
+                "width": width,
+                "itemStyle": itemstyle_opts,
+                }
 
 
 class GaugeAnchorOpts(BasicOpts):
