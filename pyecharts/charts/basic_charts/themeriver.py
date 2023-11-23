@@ -22,6 +22,7 @@ class ThemeRiver(Chart):
         singleaxis_opts: types.SingleAxis = opts.SingleAxisOpts(),
         tooltip_opts: types.Tooltip = None,
         itemstyle_opts: types.ItemStyle = None,
+        emphasis_opts: types.Emphasis = None,
     ):
         for n in series_name:
             self._append_legend(n)
@@ -34,6 +35,7 @@ class ThemeRiver(Chart):
                 "label": label_opts,
                 "tooltip": tooltip_opts,
                 "itemStyle": itemstyle_opts,
+                "emphasis": emphasis_opts,
             }
         )
 

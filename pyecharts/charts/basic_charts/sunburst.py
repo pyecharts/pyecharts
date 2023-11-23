@@ -33,6 +33,7 @@ class Sunburst(Chart):
         label_layout_opts: types.SunburstLabelLayout = None,
         itemstyle_opts: types.ItemStyle = None,
         tooltip_opts: types.Tooltip = None,
+        emphasis_opts: types.Emphasis = None,
     ):
         if not center:
             center = ["50%", "50%"]
@@ -58,6 +59,7 @@ class Sunburst(Chart):
                 "labelLayout": label_layout_opts,
                 "itemStyle": itemstyle_opts,
                 "tooltip": tooltip_opts,
+                "emphasis": emphasis_opts,
             }
         )
         return self

@@ -26,6 +26,8 @@ class EffectScatter(RectChart):
         effect_opts: types.Effect = opts.EffectOpts(),
         tooltip_opts: types.Tooltip = None,
         itemstyle_opts: types.ItemStyle = None,
+        emphasis_opts: types.Emphasis = None,
+        encode: types.Union[types.JSFunc, dict, None] = None,
     ):
         self._append_color(color)
         self._append_legend(series_name)
@@ -50,6 +52,8 @@ class EffectScatter(RectChart):
                 "label": label_opts,
                 "tooltip": tooltip_opts,
                 "itemStyle": itemstyle_opts,
+                "emphasis": emphasis_opts,
+                "encode": encode,
             }
         )
         return self

@@ -420,3 +420,23 @@ def test_geo_pie(fake_writer):
     c.render()
     _, content = fake_writer.call_args[0]
     assert_in("canvas", content)
+
+
+@patch("pyecharts.render.engine.write_utf8_html_file")
+def test_geo_item_base(fake_writer):
+    data_pair = [
+        opts.GeoItem(longitude=121.97, latitude=30.88, name="公园", value=12),
+    ]
+    c = (
+        Geo()
+        .add_schema(maptype="china")
+        .add(series_name="测试数据", data_pair=data_pair)
+        .set_global_opts(
+            visualmap_opts=opts.VisualMapOpts(),
+            title_opts=opts.TitleOpts(title="Geo-基本示例"),
+        )
+    )
+    c.render()
+    _, content = fake_writer.call_args[0]
+    assert_equal(c.theme, "white")
+    assert_equal(c.renderer, "canvas")

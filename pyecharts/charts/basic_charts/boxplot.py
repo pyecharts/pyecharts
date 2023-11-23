@@ -31,6 +31,7 @@ class Boxplot(RectChart):
         markline_opts: types.MarkLine = opts.MarkLineOpts(),
         tooltip_opts: types.Tooltip = None,
         itemstyle_opts: types.ItemStyle = None,
+        emphasis_opts: types.Emphasis = None,
     ):
         if box_width is None:
             box_width = [7, 50]
@@ -51,6 +52,7 @@ class Boxplot(RectChart):
                 "markLine": markline_opts,
                 "tooltip": tooltip_opts,
                 "itemStyle": itemstyle_opts,
+                "emphasis": emphasis_opts,
             }
         )
         return self

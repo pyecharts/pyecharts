@@ -37,6 +37,7 @@ class Graph(Chart):
         linestyle_opts: types.LineStyle = opts.LineStyleOpts(),
         tooltip_opts: types.Tooltip = None,
         itemstyle_opts: types.ItemStyle = None,
+        emphasis_opts: types.Emphasis = None,
     ):
         _nodes = []
         for n in nodes:
@@ -90,6 +91,7 @@ class Graph(Chart):
                 "links": _links,
                 "tooltip": tooltip_opts,
                 "itemStyle": itemstyle_opts,
+                "emphasis": emphasis_opts,
             }
         )
         return self

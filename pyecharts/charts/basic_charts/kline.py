@@ -39,6 +39,7 @@ class Kline(RectChart):
         markpoint_opts: types.MarkPoint = None,
         tooltip_opts: types.Tooltip = None,
         itemstyle_opts: types.ItemStyle = None,
+        emphasis_opts: types.Emphasis = None,
     ):
         self._append_legend(series_name)
         self.options.get("series").append(
@@ -55,6 +56,7 @@ class Kline(RectChart):
                 "markLine": markline_opts,
                 "tooltip": tooltip_opts,
                 "itemStyle": itemstyle_opts,
+                "emphasis": emphasis_opts,
             }
         )
         return self

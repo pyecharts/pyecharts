@@ -66,6 +66,7 @@ class Radar(Chart):
         linestyle_opts: opts.LineStyleOpts = opts.LineStyleOpts(),
         areastyle_opts: opts.AreaStyleOpts = opts.AreaStyleOpts(),
         tooltip_opts: types.Tooltip = None,
+        emphasis_opts: types.Emphasis = None,
     ):
         if all([isinstance(d, opts.RadarItem) for d in data]):
             for a in data:
@@ -84,6 +85,7 @@ class Radar(Chart):
                 "lineStyle": linestyle_opts,
                 "areaStyle": areastyle_opts,
                 "tooltip": tooltip_opts,
+                "emphasis": emphasis_opts,
             }
         )
         return self

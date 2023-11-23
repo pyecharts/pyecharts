@@ -1467,6 +1467,22 @@ class MapItem(BasicOpts):
         }
 
 
+class GeoItem(BasicOpts):
+    def __init__(
+        self,
+        longitude: Numeric,
+        latitude: Numeric,
+        name: str,
+        value: Union[Sequence, Numeric, str] = None,
+    ):
+        self.opts: dict = {
+            "longitude": longitude,
+            "latitude": latitude,
+            "name": name,
+            "value": value,
+        }
+
+
 class PieItem(BasicOpts):
     def __init__(
         self,

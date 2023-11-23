@@ -47,6 +47,7 @@ class Bar(RectChart):
         markline_opts: types.MarkLine = None,
         tooltip_opts: types.Tooltip = None,
         itemstyle_opts: types.ItemStyle = None,
+        emphasis_opts: types.Emphasis = None,
         encode: types.Union[types.JSFunc, dict, None] = None,
     ):
         self._append_color(color)
@@ -89,6 +90,7 @@ class Bar(RectChart):
                 "markLine": markline_opts,
                 "tooltip": tooltip_opts,
                 "itemStyle": itemstyle_opts,
+                "emphasis": emphasis_opts,
                 "encode": encode,
             }
         )
