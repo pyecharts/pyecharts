@@ -89,13 +89,23 @@ def test_grid_do_not_control_axis_index():
 def test_grid_with_more_datazoom_opts():
     bar_1 = _chart_for_grid_with_datazoom()
     bar_2 = _chart_for_grid_with_datazoom()
-    grid = (
+    grid_1 = (
         Grid()
         .add(chart=bar_1, grid_opts=opts.GridOpts())
         .add(chart=bar_2, grid_opts=opts.GridOpts())
     )
     expected_datazoom_opts_len = 2
-    assert_equal(len(grid.options.get("dataZoom")), expected_datazoom_opts_len)
+    assert_equal(len(grid_1.options.get("dataZoom")), expected_datazoom_opts_len)
+
+    bar_3 = _chart_for_grid()
+    bar_4 = _chart_for_grid_with_datazoom()
+    grid_2 = (
+        Grid()
+        .add(chart=bar_3, grid_opts=opts.GridOpts())
+        .add(chart=bar_4, grid_opts=opts.GridOpts())
+    )
+    expected_datazoom_opts_len = 1
+    assert_equal(len(grid_2.options.get("dataZoom")), expected_datazoom_opts_len)
 
 
 @patch("pyecharts.render.engine.write_utf8_html_file")

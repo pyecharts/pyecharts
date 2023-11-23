@@ -7,7 +7,7 @@ from pyecharts.charts import Line
 
 
 @patch("pyecharts.render.engine.write_utf8_html_file")
-def test_bar_base(fake_writer):
+def test_line_base(fake_writer):
     c = (
         Line()
         .add_xaxis(["A", "B", "C"])
@@ -21,7 +21,22 @@ def test_bar_base(fake_writer):
 
 
 @patch("pyecharts.render.engine.write_utf8_html_file")
-def test_bar_item_base(fake_writer):
+def test_line_with_emphasis(fake_writer):
+    c = (
+        Line()
+        .add_xaxis(["A", "B", "C"])
+        .add_yaxis("series0", [1, 2, 4], emphasis_opts=opts.EmphasisOpts())
+        .add_yaxis("series1", [2, 3, 6], emphasis_opts=opts.EmphasisOpts())
+    )
+    c.render()
+    _, content = fake_writer.call_args[0]
+    assert_equal(c.theme, "white")
+    assert_equal(c.renderer, "canvas")
+    assert_in("emphasis", content)
+
+
+@patch("pyecharts.render.engine.write_utf8_html_file")
+def test_line_item_base(fake_writer):
     x_axis = ["A", "B", "C"]
     y_axis_0 = [1, 2, 4]
     line_item_0 = [
