@@ -1012,11 +1012,11 @@ class GaugePointerOpts(BasicOpts):
         itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
     ):
         self.opts: dict = {
-                "show": is_show,
-                "length": length,
-                "width": width,
-                "itemStyle": itemstyle_opts,
-                }
+            "show": is_show,
+            "length": length,
+            "width": width,
+            "itemStyle": itemstyle_opts,
+        }
 
 
 class GaugeAnchorOpts(BasicOpts):
