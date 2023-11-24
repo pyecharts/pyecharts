@@ -77,6 +77,13 @@ def _clean_dict(mydict):
             elif isinstance(value, (list, tuple, set)):
                 value = list(_clean_array(value))
 
+            # Not elegant, but effective and less code-intrusive.
+            elif type(value).__name__ in ["ndarray", "Series"]:
+                raise ValueError(
+                    "Can't use non-native data structures "
+                    "as axis data to render chart"
+                )
+
             elif isinstance(value, str) and not value:
                 # delete key with empty string
                 continue

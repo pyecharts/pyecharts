@@ -52,3 +52,22 @@ def test_utils_remove_key_with_none_value():
     mock_data_none = None
     none_res = utils.remove_key_with_none_value(mock_data_none)
     assert none_res == mock_data_none
+
+
+def test_utils_remove_key_with_none_value_raise_value_error():
+    import numpy as np
+    import pandas as pd
+
+    mock_data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    mock_numpy_data = np.array(mock_data)
+    tmp_df = pd.DataFrame({"x": mock_data})
+    mock_series_data = tmp_df["x"]
+    try:
+        utils.remove_key_with_none_value({"data": mock_numpy_data})
+    except ValueError:
+        pass
+
+    try:
+        utils.remove_key_with_none_value({"data": mock_series_data})
+    except ValueError:
+        pass

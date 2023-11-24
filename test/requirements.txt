@@ -7,3 +7,5 @@ mccabe
 Pillow
 pytest
 pytest-cov
+numpy
+pandas

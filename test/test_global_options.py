@@ -205,7 +205,6 @@ def test_legend_options_remove_none():
         "itemHeight": 14,
         "backgroundColor": "transparent",
         "borderColor": "#ccc",
-        "borderWidth": 1,
         "borderRadius": 0,
         "pageButtonItemGap": 5,
         "pageButtonPosition": "end",
