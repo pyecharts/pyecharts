@@ -22,6 +22,10 @@ class Radar(Chart):
         splitline_opt: types.SplitLine = opts.SplitLineOpts(is_show=True),
         splitarea_opt: types.SplitArea = opts.SplitAreaOpts(),
         axisline_opt: types.AxisLine = opts.AxisLineOpts(),
+        axistick_opt: types.AxisTick = None,
+        minor_tick_opts: types.MinorTick = None,
+        axislabel_opt: types.Label = None,
+        axispointer_opt: types.AxisPointer = None,
         radiusaxis_opts: types.RadiusAxis = None,
         angleaxis_opts: types.AngleAxis = None,
         polar_opts: types.Polar = None,
@@ -50,6 +54,10 @@ class Radar(Chart):
                 "splitLine": splitline_opt,
                 "splitArea": splitarea_opt,
                 "axisLine": axisline_opt,
+                "axisTick": axistick_opt,
+                "minorTick": minor_tick_opts,
+                "axisLabel": axislabel_opt,
+                "axisPointer": axispointer_opt,
             }
         )
         return self
