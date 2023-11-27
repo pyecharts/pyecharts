@@ -54,7 +54,7 @@ class Sankey(Chart):
                 "nodeWidth": node_width,
                 "nodeGap": node_gap,
                 "nodeAlign": node_align,
-                "layoutIteration": layout_iterations,
+                "layoutIterations": layout_iterations,
                 "orient": orient,
                 "draggable": is_draggable,
                 "edgeLabel": edge_label_opt,
