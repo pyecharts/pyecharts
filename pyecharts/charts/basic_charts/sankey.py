@@ -26,7 +26,7 @@ class Sankey(Chart):
         node_width: types.Numeric = 20,
         node_gap: types.Numeric = 8,
         node_align: str = "justify",
-        layout_iterations: types.Numeric = 32,
+        layout_iterations: types.Optional[types.Numeric] = None,
         orient: str = "horizontal",
         is_draggable: bool = True,
         edge_label_opt: types.Label = None,
@@ -37,9 +37,6 @@ class Sankey(Chart):
         itemstyle_opts: types.ItemStyle = None,
         emphasis_opts: types.Emphasis = None,
     ):
-        if layout_iterations < 32:
-            layout_iterations = 32
-
         self._append_legend(series_name)
         self.options.get("series").append(
             {
