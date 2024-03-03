@@ -39,6 +39,7 @@ class Pie(Chart):
         label_line_opts: types.PieLabelLine = opts.PieLabelLineOpts(),
         tooltip_opts: types.Tooltip = None,
         itemstyle_opts: types.ItemStyle = None,
+        emphasis_opts: types.Emphasis = None,
         encode: types.Union[types.JSFunc, dict, None] = None,
     ):
         if self.options.get("dataset") is not None:
@@ -90,6 +91,7 @@ class Pie(Chart):
                 "labelLine": label_line_opts,
                 "tooltip": tooltip_opts,
                 "itemStyle": itemstyle_opts,
+                "emphasis": emphasis_opts,
                 "encode": encode,
             }
         )

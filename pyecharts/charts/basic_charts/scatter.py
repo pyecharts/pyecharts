@@ -50,6 +50,7 @@ class Scatter(RectChart):
         markarea_opts: types.MarkArea = None,
         tooltip_opts: types.Tooltip = None,
         itemstyle_opts: types.ItemStyle = None,
+        emphasis_opts: types.Emphasis = None,
         encode: types.Union[types.JSFunc, dict, None] = None,
     ):
         self._append_color(color)
@@ -73,6 +74,7 @@ class Scatter(RectChart):
                 "markArea": markarea_opts,
                 "tooltip": tooltip_opts,
                 "itemStyle": itemstyle_opts,
+                "emphasis": emphasis_opts,
                 "encode": encode,
             }
         )

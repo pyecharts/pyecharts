@@ -62,10 +62,11 @@ def test_sankey_new_opts(fake_writer):
         ],
         linestyle_opt=opts.LineStyleOpts(opacity=0.2, curve=0.5, color="source"),
         label_opts=opts.LabelOpts(position="right"),
+        layout_iterations=30,
     )
     c.render()
     _, content = fake_writer.call_args[0]
     assert_in("bottom", content)
     assert_in("orient", content)
     assert_in("levels", content)
-    assert_in("layoutIteration", content)
+    assert_in("layoutIterations", content)

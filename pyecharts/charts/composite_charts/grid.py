@@ -58,6 +58,17 @@ class Grid(Base):
                 else:
                     self.options.get("visualMap").extend([visual_map])
 
+        # dataZoom 配置添加
+        data_zoom = chart.options.get("dataZoom")
+        if data_zoom is not None:
+            if isinstance(self.options.get("dataZoom"), opts.DataZoomOpts):
+                self.options.update(dataZoom=[self.options.get("dataZoom")])
+            else:
+                if self.options.get("dataZoom") is None:
+                    self.options.update(dataZoom=[data_zoom])
+                else:
+                    self.options.get("dataZoom").extend([data_zoom])
+
         # title 配置添加
         title = chart.options.get("title", opts.TitleOpts().opts)
         if isinstance(title, opts.TitleOpts):

@@ -24,9 +24,16 @@ class Sunburst(Chart):
         highlight_policy: str = "descendant",
         node_click: str = "rootToNode",
         sort_: types.Optional[types.JSFunc] = "desc",
-        levels: types.Optional[types.Sequence] = None,
+        is_render_label_for_zero_data: bool = False,
+        is_clockwise: bool = True,
+        start_angle: types.Numeric = 90,
+        levels: types.Optional[types.Sequence[types.SunburstLevelOpts]] = None,
         label_opts: types.Label = opts.LabelOpts(),
+        label_line_opts: types.SunburstLabelLine = None,
+        label_layout_opts: types.SunburstLabelLayout = None,
         itemstyle_opts: types.ItemStyle = None,
+        tooltip_opts: types.Tooltip = None,
+        emphasis_opts: types.Emphasis = None,
     ):
         if not center:
             center = ["50%", "50%"]
@@ -43,9 +50,16 @@ class Sunburst(Chart):
                 "highlightPolicy": highlight_policy,
                 "nodeClick": node_click,
                 "sort": sort_,
+                "renderLabelForZeroData": is_render_label_for_zero_data,
+                "clockwise": is_clockwise,
+                "startAngle": start_angle,
                 "levels": levels,
                 "label": label_opts,
+                "labelLine": label_line_opts,
+                "labelLayout": label_layout_opts,
                 "itemStyle": itemstyle_opts,
+                "tooltip": tooltip_opts,
+                "emphasis": emphasis_opts,
             }
         )
         return self

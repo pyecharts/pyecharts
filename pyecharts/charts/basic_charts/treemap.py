@@ -43,6 +43,7 @@ class TreeMap(Chart):
         tooltip_opts: types.Tooltip = None,
         itemstyle_opts: types.ItemStyle = None,
         breadcrumb_opts: types.TreeMapBreadcrumb = None,
+        emphasis_opts: types.Emphasis = None,
     ):
         self._append_legend(series_name)
         self.options.get("series").append(
@@ -76,6 +77,7 @@ class TreeMap(Chart):
                 "tooltip": tooltip_opts,
                 "itemStyle": itemstyle_opts,
                 "breadcrumb": breadcrumb_opts,
+                "emphasis": emphasis_opts,
             }
         )
         return self

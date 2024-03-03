@@ -42,6 +42,7 @@ class Line(RectChart):
         label_opts: types.Label = opts.LabelOpts(),
         linestyle_opts: types.LineStyle = opts.LineStyleOpts(),
         areastyle_opts: types.AreaStyle = opts.AreaStyleOpts(),
+        emphasis_opts: types.Emphasis = None,
         encode: types.Union[types.JSFunc, dict, None] = None,
     ):
         self._append_color(color)
@@ -88,6 +89,7 @@ class Line(RectChart):
                 "seriesLayoutBy": series_layout_by,
                 "lineStyle": linestyle_opts,
                 "areaStyle": areastyle_opts,
+                "emphasis": emphasis_opts,
                 "markPoint": markpoint_opts,
                 "markLine": markline_opts,
                 "tooltip": tooltip_opts,

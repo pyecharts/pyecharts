@@ -5,6 +5,9 @@ from pyecharts.options.charts_options import (
     BarBackgroundStyleOpts,
     GlobeLayersOpts,
     GraphCategory,
+    SunburstLevelOpts,
+    SunburstLabelLineOpts,
+    SunburstLabelLayoutOpts,
     ThemeRiverItem,
     TimelineCheckPointerStyle,
     TimelineControlStyle,
@@ -136,4 +139,24 @@ def test_geo_region_opts_remove_none():
         "selected": False,
         "silent": False,
     }
+    assert_equal(expected, remove_key_with_none_value(option.opts))
+
+
+def test_sunburst_label_line_opts_remove_none():
+    option = SunburstLabelLineOpts()
+    expected = {
+        "smooth": False
+    }
+    assert_equal(expected, remove_key_with_none_value(option.opts))
+
+
+def test_sunburst_label_layout_opts_remove_none():
+    option = SunburstLabelLayoutOpts()
+    expected = {}
+    assert_equal(expected, remove_key_with_none_value(option.opts))
+
+
+def test_sunburst_level_opts_remove_none():
+    option = SunburstLevelOpts()
+    expected = {}
     assert_equal(expected, remove_key_with_none_value(option.opts))

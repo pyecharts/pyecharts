@@ -34,6 +34,7 @@ class HeatMap(RectChart):
         markline_opts: types.MarkLine = None,
         tooltip_opts: types.Tooltip = None,
         itemstyle_opts: types.ItemStyle = None,
+        emphasis_opts: types.Emphasis = None,
     ):
         self._append_legend(series_name)
         self.options.get("yAxis")[0].update(data=yaxis_data)
@@ -49,6 +50,7 @@ class HeatMap(RectChart):
                 "markPoint": markpoint_opts,
                 "tooltip": tooltip_opts,
                 "itemStyle": itemstyle_opts,
+                "emphasis": emphasis_opts,
             }
         )
         return self

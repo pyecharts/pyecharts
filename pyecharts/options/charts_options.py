@@ -1009,8 +1009,14 @@ class GaugePointerOpts(BasicOpts):
         is_show: bool = True,
         length: Union[str, Numeric] = "80%",
         width: Numeric = 8,
+        itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
     ):
-        self.opts: dict = {"show": is_show, "length": length, "width": width}
+        self.opts: dict = {
+            "show": is_show,
+            "length": length,
+            "width": width,
+            "itemStyle": itemstyle_opts,
+        }
 
 
 class GaugeAnchorOpts(BasicOpts):
@@ -1246,6 +1252,68 @@ class GeoRegionsOpts(BasicOpts):
         }
 
 
+class SunburstLabelLineOpts(BasicOpts):
+    def __init__(
+        self,
+        is_show: Optional[bool] = None,
+        is_show_above: Optional[bool] = None,
+        length_2: Optional[Numeric] = None,
+        smooth: Union[bool, Numeric] = False,
+        min_turn_angle: Optional[Numeric] = None,
+        linestyle_opts: Union[LineStyleOpts, dict, None] = None,
+    ):
+        self.opts: dict = {
+            "show": is_show,
+            "showAbove": is_show_above,
+            "length2": length_2,
+            "smooth": smooth,
+            "minTurnAngle": min_turn_angle,
+            "lineStyle": linestyle_opts,
+        }
+
+
+class SunburstLabelLayoutOpts(BasicOpts):
+    def __init__(
+        self,
+        is_hide_overlap: Optional[bool] = None,
+        is_move_overlap: Optional[bool] = None,
+        rotate: Optional[Numeric] = None,
+        width: Optional[Numeric] = None,
+        height: Optional[Numeric] = None,
+        align: Optional[str] = None,
+        vertical_align: Optional[str] = None,
+        font_size: Optional[Numeric] = None,
+        is_draggable: Optional[bool] = None,
+    ):
+        self.opts: dict = {
+            "hideOverlap": is_hide_overlap,
+            "moveOverlap": is_move_overlap,
+            "rotate": rotate,
+            "width": width,
+            "height": height,
+            "align": align,
+            "verticalAlign": vertical_align,
+            "fontSize": font_size,
+            "draggable": is_draggable,
+        }
+
+
+class SunburstLevelOpts(BasicOpts):
+    def __init__(
+        self,
+        radius: Optional[Sequence] = None,
+        label_opts: Union[LabelOpts, dict, None] = None,
+        label_line_opts: Union[SunburstLabelLineOpts, dict, None] = None,
+        itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
+    ):
+        self.opts: dict = {
+            "radius": radius,
+            "label": label_opts,
+            "labelLine": label_line_opts,
+            "itemStyle": itemstyle_opts,
+        }
+
+
 # Data Item
 class BarItem(BasicOpts):
     def __init__(
@@ -1402,6 +1470,22 @@ class MapItem(BasicOpts):
             "label": label_opts,
             "itemStyle": itemstyle_opts,
             "tooltip": tooltip_opts,
+        }
+
+
+class GeoItem(BasicOpts):
+    def __init__(
+        self,
+        longitude: Numeric,
+        latitude: Numeric,
+        name: str,
+        value: Union[Sequence, Numeric, str] = None,
+    ):
+        self.opts: dict = {
+            "longitude": longitude,
+            "latitude": latitude,
+            "name": name,
+            "value": value,
         }
 
 

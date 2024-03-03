@@ -239,6 +239,19 @@ class Geo(GeoChartBase):
             return data_pair
 
         result = []
+        if isinstance(data_pair[0], opts.GeoItem):
+            for item in data_pair:
+                result.append({
+                    "name": item.get("name"),
+                    "value": [
+                        item.get("longitude"),
+                        item.get("latitude"),
+                        item.get("value"),
+                    ],
+                })
+
+            return result
+
         for n, v in data_pair:
             try:
                 if type_ == ChartType.LINES:

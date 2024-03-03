@@ -37,6 +37,7 @@ class PictorialBar(RectChart):
         tooltip_opts: types.Tooltip = None,
         itemstyle_opts: types.ItemStyle = None,
         encode: types.Union[types.JsCode, dict] = None,
+        emphasis_opts: types.Emphasis = None,
     ):
         self._append_color(color)
         self._append_legend(series_name)
@@ -64,6 +65,7 @@ class PictorialBar(RectChart):
                 "tooltip": tooltip_opts,
                 "itemStyle": itemstyle_opts,
                 "encode": encode,
+                "emphasis": emphasis_opts,
             }
         )
         return self

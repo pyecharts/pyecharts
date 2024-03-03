@@ -1,6 +1,6 @@
 from unittest.mock import patch
 
-from nose.tools import assert_equal, assert_in
+from nose.tools import assert_equal, assert_in, assert_not_in
 
 from pyecharts.charts import WordCloud
 from pyecharts.commons.utils import JsCode
@@ -60,3 +60,19 @@ def test_wordcloud_mask_image(fake_writer):
     _, content = fake_writer.call_args[0]
     assert_equal(c.theme, "white")
     assert_equal(c.renderer, "canvas")
+
+
+@patch("pyecharts.render.engine.write_utf8_html_file")
+def test_wordcloud_encode_image_to_base64_os_error(fake_writer):
+    error_path = "A" * 1000
+    c = WordCloud().add(
+        "",
+        words,
+        word_size_range=[20, 100],
+        shape="cardioid",
+        mask_image=f"{error_path}"
+    )
+    c.render()
+    _, content = fake_writer.call_args[0]
+    assert_in(error_path, content)
+    assert_not_in("data:image/", content)

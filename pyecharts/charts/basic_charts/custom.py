@@ -36,6 +36,7 @@ class Custom(Chart):
         z: types.Numeric = 2,
         itemstyle_opts: types.ItemStyle = None,
         tooltip_opts: types.Tooltip = None,
+        emphasis_opts: types.Emphasis = None,
     ):
         self._append_legend(series_name)
 
@@ -63,6 +64,7 @@ class Custom(Chart):
                 "zlevel": z_level,
                 "z": z,
                 "tooltip": tooltip_opts,
+                "emphasis": emphasis_opts,
             }
         )
         return self

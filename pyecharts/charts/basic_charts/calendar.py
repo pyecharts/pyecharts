@@ -33,6 +33,7 @@ class Calendar(Chart):
         tooltip_opts: types.Tooltip = None,
         itemstyle_opts: types.ItemStyle = None,
         visualmap_opts: types.VisualMap = None,
+        emphasis_opts: types.Emphasis = None,
         **other_calendar_opts,
     ):
         if calendar_opts:
@@ -51,6 +52,7 @@ class Calendar(Chart):
                 "label": label_opts,
                 "tooltip": tooltip_opts,
                 "itemStyle": itemstyle_opts,
+                "emphasis": emphasis_opts,
                 **other_calendar_opts,
             }
         )

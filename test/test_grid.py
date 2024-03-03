@@ -47,6 +47,27 @@ def _chart_for_grid() -> Bar:
     return bar
 
 
+def _chart_for_grid_with_datazoom() -> Bar:
+    bar_1 = (
+        Bar()
+        .add_xaxis(Faker.days_attrs)
+        .add_yaxis("商家", Faker.days_values)
+        .set_global_opts(
+            title_opts=opts.TitleOpts(title="Bar-DataZoom"),
+            datazoom_opts=opts.DataZoomOpts(),
+            toolbox_opts=opts.ToolboxOpts(
+                feature=opts.ToolBoxFeatureOpts(
+                    save_as_image=opts.ToolBoxFeatureSaveAsImageOpts(
+                        exclude_components=["dataZoom", "toolbox"],
+                    )
+                ),
+            ),
+            legend_opts=opts.LegendOpts(),
+        )
+    )
+    return bar_1
+
+
 def test_grid_control_axis_index():
     bar = _chart_for_grid()
     gc = Grid().add(
@@ -63,6 +84,28 @@ def test_grid_do_not_control_axis_index():
     expected_idx = (0, 0, 0)
     for idx, series in enumerate(gc.options.get("series")):
         assert_equal(series.get("yAxisIndex"), expected_idx[idx])
+
+
+def test_grid_with_more_datazoom_opts():
+    bar_1 = _chart_for_grid_with_datazoom()
+    bar_2 = _chart_for_grid_with_datazoom()
+    grid_1 = (
+        Grid()
+        .add(chart=bar_1, grid_opts=opts.GridOpts())
+        .add(chart=bar_2, grid_opts=opts.GridOpts())
+    )
+    expected_datazoom_opts_len = 2
+    assert_equal(len(grid_1.options.get("dataZoom")), expected_datazoom_opts_len)
+
+    bar_3 = _chart_for_grid()
+    bar_4 = _chart_for_grid_with_datazoom()
+    grid_2 = (
+        Grid()
+        .add(chart=bar_3, grid_opts=opts.GridOpts())
+        .add(chart=bar_4, grid_opts=opts.GridOpts())
+    )
+    expected_datazoom_opts_len = 1
+    assert_equal(len(grid_2.options.get("dataZoom")), expected_datazoom_opts_len)
 
 
 @patch("pyecharts.render.engine.write_utf8_html_file")

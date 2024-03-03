@@ -55,6 +55,7 @@ class Tree(Chart):
         leaves_label_opts: types.Label = opts.LabelOpts(),
         tooltip_opts: types.Tooltip = None,
         itemstyle_opts: types.ItemStyle = None,
+        emphasis_opts: types.Emphasis = None,
     ):
         _data = self._set_collapse_interval(data, collapse_interval)
         self.options.get("series").append(
@@ -79,6 +80,7 @@ class Tree(Chart):
                 "leaves": {"label": leaves_label_opts},
                 "tooltip": tooltip_opts,
                 "itemStyle": itemstyle_opts,
+                "emphasis": emphasis_opts,
             }
         )
         return self

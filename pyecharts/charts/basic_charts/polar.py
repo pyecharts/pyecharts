@@ -47,6 +47,7 @@ class Polar(Chart):
         effect_opts: types.Effect = opts.EffectOpts(),
         tooltip_opts: types.Tooltip = None,
         itemstyle_opts: types.ItemStyle = None,
+        emphasis_opts: types.Emphasis = None,
     ):
         self._append_legend(series_name)
         self.options.update(polar={"center": center if center else ["50%", "50%"]})
@@ -65,6 +66,7 @@ class Polar(Chart):
                     "areaStyle": areastyle_opts,
                     "tooltip": tooltip_opts,
                     "itemStyle": itemstyle_opts,
+                    "emphasis": emphasis_opts,
                 }
             )
 
@@ -82,6 +84,7 @@ class Polar(Chart):
                     "label": label_opts,
                     "tooltip": tooltip_opts,
                     "itemStyle": itemstyle_opts,
+                    "emphasis": emphasis_opts,
                 }
             )
 

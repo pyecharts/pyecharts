@@ -39,6 +39,7 @@ class Gauge(Chart):
         axistick_opts: types.AxisTick = None,
         axislabel_opts: types.AxisLabel = None,
         itemstyle_opts: types.ItemStyle = None,
+        emphasis_opts: types.Emphasis = None,
     ):
         if center is None:
             center = ["50%", "50%"]
@@ -67,6 +68,7 @@ class Gauge(Chart):
                 "anchor": anchor,
                 "pointer": pointer,
                 "itemStyle": itemstyle_opts,
+                "emphasis": emphasis_opts,
             }
         )
         return self

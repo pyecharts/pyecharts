@@ -26,20 +26,17 @@ class Sankey(Chart):
         node_width: types.Numeric = 20,
         node_gap: types.Numeric = 8,
         node_align: str = "justify",
-        layout_iterations: types.Numeric = 32,
+        layout_iterations: types.Optional[types.Numeric] = None,
         orient: str = "horizontal",
         is_draggable: bool = True,
         edge_label_opt: types.Label = None,
-        focus_node_mode: str = "none",
         levels: types.SankeyLevel = None,
         label_opts: types.Label = opts.LabelOpts(),
         linestyle_opt: types.LineStyle = opts.LineStyleOpts(),
         tooltip_opts: types.Tooltip = None,
         itemstyle_opts: types.ItemStyle = None,
+        emphasis_opts: types.Emphasis = None,
     ):
-        if layout_iterations < 32:
-            layout_iterations = 32
-
         self._append_legend(series_name)
         self.options.get("series").append(
             {
@@ -54,18 +51,16 @@ class Sankey(Chart):
                 "nodeWidth": node_width,
                 "nodeGap": node_gap,
                 "nodeAlign": node_align,
-                "layoutIteration": layout_iterations,
+                "layoutIterations": layout_iterations,
                 "orient": orient,
                 "draggable": is_draggable,
                 "edgeLabel": edge_label_opt,
-                "emphasis": {
-                    "focus": focus_node_mode,
-                },
                 "levels": levels,
                 "label": label_opts,
                 "lineStyle": linestyle_opt,
                 "tooltip": tooltip_opts,
                 "itemStyle": itemstyle_opts,
+                "emphasis": emphasis_opts,
             }
         )
         return self
