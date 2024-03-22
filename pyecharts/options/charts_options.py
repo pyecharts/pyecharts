@@ -1321,14 +1321,22 @@ class BarItem(BasicOpts):
         name: Union[int, str],
         value: Numeric,
         *,
+        group_id: Optional[str] = None,
         label_opts: Union[LabelOpts, dict, None] = None,
+        is_show_label_line: Optional[bool] = None,
+        label_line_linestyle_opts: Union[LineStyleOpts, dict, None] = None,
         itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
         tooltip_opts: Union[TooltipOpts, dict, None] = None,
     ):
         self.opts: dict = {
             "name": name,
             "value": value,
+            "groupId": group_id,
             "label": label_opts,
+            "labelLine": {
+                "show": is_show_label_line,
+                "lineStyle": label_line_linestyle_opts,
+            },
             "itemStyle": itemstyle_opts,
             "tooltip": tooltip_opts,
         }
@@ -1458,6 +1466,7 @@ class MapItem(BasicOpts):
         self,
         name: Optional[str] = None,
         value: Union[Sequence, Numeric, str] = None,
+        group_id: Optional[str] = None,
         is_selected: bool = False,
         label_opts: Union[LabelOpts, dict, None] = None,
         itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
@@ -1466,6 +1475,7 @@ class MapItem(BasicOpts):
         self.opts: dict = {
             "name": name,
             "value": value,
+            "groupId": group_id,
             "selected": is_selected,
             "label": label_opts,
             "itemStyle": itemstyle_opts,
@@ -1524,6 +1534,7 @@ class PieItem(BasicOpts):
         self,
         name: Optional[str] = None,
         value: Optional[Numeric] = None,
+        group_id: Optional[str] = None,
         is_selected: bool = False,
         label_opts: Union[LabelOpts, dict, None] = None,
         itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
@@ -1533,6 +1544,7 @@ class PieItem(BasicOpts):
         self.opts: dict = {
             "name": name,
             "value": value,
+            "groupId": group_id,
             "selected": is_selected,
             "label": label_opts,
             "labelLine": label_line_opts,
