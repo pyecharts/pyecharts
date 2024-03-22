@@ -72,10 +72,7 @@ class FuzzyDict(dict):
         return best_ratio >= self.cutoff, best_key, best_match, best_ratio
 
     def __contains__(self, item: typing.Any):
-        if self._search(item, True)[0]:
-            return True
-        else:
-            return False
+        return self._search(item, True)[0]
 
     def __getitem__(self, lookfor: typing.Any):
         matched, key, item, ratio = self._search(lookfor)

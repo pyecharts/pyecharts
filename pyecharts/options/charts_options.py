@@ -1489,6 +1489,36 @@ class GeoItem(BasicOpts):
         }
 
 
+class ParallelItem(BasicOpts):
+    def __init__(
+        self,
+        name: Optional[str] = None,
+        value: Optional[Sequence] = None,
+        linestyle_opts: Union[LineStyleOpts, dict, None] = None,
+        color: Union[str, dict] = "#000",
+        width: Numeric = 2,
+        type_: str = "solid",
+        dash_offset: Numeric = 0,
+        cap: str = "butt",
+        join: str = "bevel",
+        miter_limit: Optional[Numeric] = None,
+        opacity: Numeric = 0.45,
+    ):
+        self.opts: dict = {
+            "name": name,
+            "value": value,
+            "lineStyle": linestyle_opts,
+            "color": color,
+            "width": width,
+            "type": type_,
+            "dashOffset": dash_offset,
+            "cap": cap,
+            "join": join,
+            "miterLimit": miter_limit,
+            "opacity": opacity,
+        }
+
+
 class PieItem(BasicOpts):
     def __init__(
         self,

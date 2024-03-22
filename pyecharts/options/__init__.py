@@ -45,6 +45,7 @@ from .charts_options import (
     Map3DRealisticMaterialOpts,
     Map3DViewControlOpts,
     PageLayoutOpts,
+    ParallelItem,
     PieItem,
     PieLabelLineOpts,
     PieEmptyCircleStyle,
