@@ -397,6 +397,7 @@ class GraphicTextStyleOpts(BaseGraphic):
         pos_x: Numeric = 0,
         pos_y: Numeric = 0,
         font: Optional[str] = None,
+        font_size: Optional[Numeric] = 0,
         text_align: str = "left",
         text_vertical_align: Optional[str] = None,
         graphic_basicstyle_opts: Union[GraphicBasicStyleOpts, dict, None] = None,
@@ -406,6 +407,7 @@ class GraphicTextStyleOpts(BaseGraphic):
             "x": pos_x,
             "y": pos_y,
             "font": font,
+            "fontSize": font_size,
             "textAlign": text_align,
             "textVerticalAlign": text_vertical_align,
         }
@@ -1318,7 +1320,7 @@ class SunburstLevelOpts(BasicOpts):
 class BarItem(BasicOpts):
     def __init__(
         self,
-        name: Union[int, str],
+        name: Union[int, str, None],
         value: Numeric,
         *,
         group_id: Optional[str] = None,
@@ -1328,15 +1330,19 @@ class BarItem(BasicOpts):
         itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
         tooltip_opts: Union[TooltipOpts, dict, None] = None,
     ):
+        label_line = None
+        if is_show_label_line:
+            label_line = {
+                "show": is_show_label_line,
+                "lineStyle": label_line_linestyle_opts,
+            }
+
         self.opts: dict = {
             "name": name,
             "value": value,
             "groupId": group_id,
             "label": label_opts,
-            "labelLine": {
-                "show": is_show_label_line,
-                "lineStyle": label_line_linestyle_opts,
-            },
+            "labelLine": label_line,
             "itemStyle": itemstyle_opts,
             "tooltip": tooltip_opts,
         }
