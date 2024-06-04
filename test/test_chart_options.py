@@ -124,6 +124,7 @@ def test_graphic_text_style_opts_remove_none():
     expected = {
         "x": 0,
         "y": 0,
+        "fontSize": 0,
         "textAlign": "left",
         "fill": "#000",
     }

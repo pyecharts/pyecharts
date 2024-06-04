@@ -10,6 +10,7 @@ from pyecharts.options.global_options import (
     AxisTickOpts,
     CalendarYearLabelOpts,
     DatasetTransformOpts,
+    Emphasis3DOpts,
     InitOpts,
     ParallelAxisOpts,
     RadiusAxisItem,
@@ -180,7 +181,9 @@ def test_brush_options_remove_none():
 
 def test_data_zoom_options_remove_none():
     option = DataZoomOpts()
-    expected = {
+
+    # slider
+    slider_expected = {
         "end": 80,
         "filterMode": "filter",
         "orient": "horizontal",
@@ -192,7 +195,28 @@ def test_data_zoom_options_remove_none():
         "showDetail": True,
         "showDataShadow": True,
     }
-    assert_equal(expected, remove_key_with_none_value(option.opts))
+    assert_equal(slider_expected, remove_key_with_none_value(option.opts))
+
+    # insider
+    option_1 = DataZoomOpts(type_="inside")
+    inside_expected = {
+        "end": 80,
+        "filterMode": "filter",
+        "orient": "horizontal",
+        "realtime": True,
+        "show": True,
+        "start": 20,
+        "type": "inside",
+        "zoomLock": False,
+        "showDetail": True,
+        "showDataShadow": True,
+        "disabled": False,
+        "zoomOnMouseWheel": True,
+        "moveOnMouseMove": True,
+        "moveOnMouseWheel": True,
+        "preventDefaultMouseMove": True,
+    }
+    assert_equal(inside_expected, remove_key_with_none_value(option_1.opts))
 
 
 def test_legend_options_remove_none():
@@ -347,4 +371,10 @@ def test_radius_axis_options_remove_none():
 def test_dataset_transform_options_remove_none():
     option = DatasetTransformOpts()
     expected = {"type": "filter", "print": False}
+    assert_equal(expected, remove_key_with_none_value(option.opts))
+
+
+def test_emphasis_3d_options_remove_none():
+    option = Emphasis3DOpts()
+    expected = {}
     assert_equal(expected, remove_key_with_none_value(option.opts))
