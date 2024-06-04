@@ -84,6 +84,7 @@ from .global_options import (
     DataZoomOpts,
     DatasetTransformOpts,
     EmphasisOpts,
+    Emphasis3DOpts,
     Grid3DOpts,
     GridOpts,
     InitOpts,
