@@ -2,7 +2,7 @@ import os
 import urllib.error
 from unittest.mock import patch
 
-from nose.tools import assert_equal, assert_in, raises
+from nose.tools import assert_equal, assert_in, assert_raises, raises
 
 from pyecharts.datasets import (
     EXTRA,

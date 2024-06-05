@@ -26,7 +26,7 @@ def test_bar_background_style_options_remove_none():
         "borderColor": "#000",
         "borderWidth": 0,
         "borderType": "solid",
-        "barBorderRadius": 0,
+        "borderRadius": 0,
         "shadowOffsetX": 0,
         "shadowOffsetY": 0,
     }

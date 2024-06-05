@@ -8,6 +8,7 @@ from pyecharts.options.global_options import (
     AriaLabelOpts,
     AriaDecalOpts,
     AxisTickOpts,
+    BlurOpts,
     CalendarYearLabelOpts,
     DatasetTransformOpts,
     Emphasis3DOpts,
@@ -377,4 +378,10 @@ def test_dataset_transform_options_remove_none():
 def test_emphasis_3d_options_remove_none():
     option = Emphasis3DOpts()
     expected = {}
+    assert_equal(expected, remove_key_with_none_value(option.opts))
+
+
+def test_blur_options_remove_none():
+    option = BlurOpts()
+    expected = {"labelLine": {"show": False}}
     assert_equal(expected, remove_key_with_none_value(option.opts))

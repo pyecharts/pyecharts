@@ -54,3 +54,31 @@ def test_bar3d_stack(fake_writer):
     c.render()
     _, content = fake_writer.call_args[0]
     assert_in("stack", content)
+
+
+@patch("pyecharts.render.engine.write_utf8_html_file")
+def test_bar3d_with_globe(fake_writer):
+    c = (
+        Bar3D(init_opts=opts.InitOpts(bg_color="#000"))
+        .add(
+            series_name="Population",
+            coordinate_system="globe",
+            data=[[120, 30, 1.11112222]],
+            itemstyle_opts=opts.ItemStyleOpts(color="orange"),
+            xaxis3d_opts=None,
+            yaxis3d_opts=None,
+            zaxis3d_opts=None,
+            grid3d_opts=None,
+        )
+        .add_globe(
+            base_texture="world.topo.bathy.200401.jpg",
+            height_texture="world.topo.bathy.200401.jpg",
+            shading="lambert",
+            environment="starfield.jpg",
+            light_opts=opts.Map3DLightOpts(main_intensity=2),
+            view_control_opts={"autoRotate": False}
+        )
+    )
+    c.render()
+    _, content = fake_writer.call_args[0]
+    assert_in("globe", content)

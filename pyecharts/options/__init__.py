@@ -76,6 +76,7 @@ from .global_options import (
     AxisOpts,
     AxisPointerOpts,
     AxisTickOpts,
+    BlurOpts,
     BrushOpts,
     CalendarOpts,
     CalendarDayLabelOpts,

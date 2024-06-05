@@ -1534,3 +1534,21 @@ class Emphasis3DOpts(BasicOpts):
             "itemStyle": itemstyle_opts,
             "label": label_opts,
         }
+
+
+class BlurOpts(BasicOpts):
+    def __init__(
+        self,
+        label_opts: Union[LabelOpts, dict, None] = None,
+        is_show_label_line: bool = False,
+        label_linestyle_opts: Union[LineStyleOpts, dict, None] = None,
+        itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
+    ):
+        self.opts: dict = {
+            "label": label_opts,
+            "labelLine": {
+                "show": is_show_label_line,
+                "lineStyle": label_linestyle_opts
+            },
+            "itemStyle": itemstyle_opts,
+        }
