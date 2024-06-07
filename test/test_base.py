@@ -4,8 +4,6 @@ from unittest.mock import patch
 from nose.tools import assert_equal, assert_in, assert_not_in
 
 from pyecharts.charts import Bar
-from pyecharts.commons import utils
-from pyecharts.datasets import EXTRA
 from pyecharts.options import InitOpts, RenderOpts
 from pyecharts.globals import CurrentConfig
 from pyecharts.charts.base import Base, default

@@ -9,13 +9,16 @@ from jinja2 import Environment
 
 from ..commons import utils
 from ..datasets import EXTRA, FILENAMES
-from ..globals import CurrentConfig, NotebookType
+from ..globals import CurrentConfig, NotebookType, RenderSepType
 from ..types import Any, Optional
 from .display import HTML, Javascript
 
 
 def write_utf8_html_file(file_name: str, html_content: str):
-    with open(file_name, "w+", encoding="utf-8") as html_file:
+    with open(file=file_name,
+              mode="w+",
+              encoding="utf-8",
+              newline=RenderSepType.SepType) as html_file:
         html_file.write(html_content)
 
 

@@ -1,7 +1,6 @@
 from nose.tools import assert_equal
 
 from pyecharts.commons import utils
-from pyecharts.datasets import EXTRA
 
 
 def test_utils_produce_require_dict():

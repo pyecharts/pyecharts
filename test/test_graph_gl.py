@@ -1,9 +1,7 @@
-import os
-import json
 import random
 from unittest.mock import patch
 
-from nose.tools import assert_equal, assert_in
+from nose.tools import assert_equal
 
 from pyecharts import options as opts
 from pyecharts.charts import GraphGL

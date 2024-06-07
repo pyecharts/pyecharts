@@ -1,8 +1,4 @@
-import os
-import json
-from unittest.mock import patch
-
-from nose.tools import assert_equal, assert_in
+from nose.tools import assert_equal
 
 from pyecharts.commons.utils import remove_key_with_none_value
 from pyecharts import options as opts

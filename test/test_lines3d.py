@@ -10,9 +10,7 @@ from pyecharts.globals import ChartType
 
 @patch("pyecharts.render.engine.write_utf8_html_file")
 def test_lines3d_base(fake_writer):
-    test_main_url: str = (
-        "https://cdn.jsdelivr.net/gh/apache/echarts-website@asf-site/examples"
-    )
+    test_main_url: str = "https://echarts.apache.org/examples"
     data_json_url = test_main_url + "/data-gl/asset/data/flights.json"
     base_texture = test_main_url + "/data-gl/asset/world.topo.bathy.200401.jpg"
     height_texture = test_main_url + "/data-gl/asset/bathymetry_bw_composite_4k.jpg"

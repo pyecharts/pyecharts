@@ -1,5 +1,7 @@
 import os
-from unittest.mock import patch
+import unittest
+from io import BytesIO
+from unittest.mock import patch, MagicMock
 
 from nose.tools import assert_equal, raises
 
@@ -109,3 +111,19 @@ def test_make_snapshot_text_v1(fake_writer):
     )
     _ = fake_writer.call_args[0]
     assert_equal("test ok", "test ok")
+
+
+class TestSaveAs(unittest.TestCase):
+    @patch('builtins.__import__', side_effect=ModuleNotFoundError)
+    def test_save_as_module_not_found(self, mock_import):
+        image_data = b'fake_image_data'
+        output_name = 'output.jpg'
+        file_type = 'JPEG'
+
+        with self.assertRaises(Exception) as context:
+            save_as(image_data, output_name, file_type)
+
+        # 检查异常消息是否包含期望的提示信息
+        self.assertTrue(
+            f"Please install PIL for {file_type} image type" in str(context.exception),
+        )

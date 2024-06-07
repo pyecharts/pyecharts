@@ -3,7 +3,6 @@ from unittest.mock import patch
 from nose.tools import assert_equal, assert_in, assert_not_in
 
 from pyecharts.charts import WordCloud
-from pyecharts.commons.utils import JsCode
 from pyecharts.exceptions import WordCloudMaskImageException
 
 words = [
