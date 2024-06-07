@@ -136,8 +136,10 @@ class TestPageComponent(unittest.TestCase):
         self.assertEqual(html1, html2)
 
     def test_page_cfg_type(self):
-        # ValueError
         with self.assertRaises(FileNotFoundError):
+            page = Page()
+            page.save_resize_html()
+        with self.assertRaises(ValueError):
             page = Page()
             page.save_resize_html()
 
