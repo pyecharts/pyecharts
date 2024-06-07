@@ -5,17 +5,17 @@ on: [push, pull_request]
 jobs:
   build:
     strategy:
+      # Allows for matrix sub-jobs to fail without canceling the rest
+      fail-fast: false
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
-        python-version: ["3.7", "3.8", "3.9", "3.10", "3.11", "3.12", "3.13-dev"]
+        python-version: ["3.7", "3.8", "3.9", "3.10", "3.11", "3.12"]
         exclude: # Python < v3.8 does not support Apple Silicon ARM64.
           - python-version: "3.7"
             os: macos-latest
         include: # So run those legacy versions on Intel CPUs.
           - python-version: "3.7"
             os: macos-13
-          - python-version: "3.13-dev"
-            allowed_failure: true
     runs-on: ${{ matrix.os }}
     steps:
     - uses: actions/checkout@v4
