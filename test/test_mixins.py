@@ -1,8 +1,5 @@
-from unittest.mock import patch
+import unittest
 
-from nose.tools import assert_equal
-
-from pyecharts import options as opts
 from pyecharts.charts import Bar, Line
 from pyecharts.charts.mixins import CompositeMixin
 
@@ -17,10 +14,11 @@ class CustomCompositeChart(CompositeMixin):
         return self
 
 
-def test_composite_mixin_len():
-    b_1 = Bar()
-    b_2 = Line()
-    c = CustomCompositeChart()
-    c.add(b_1, "bar")
-    c.add(b_2, "line")
-    assert len(c) == 2
+class TestMixins(unittest.TestCase):
+    def test_composite_mixin_len(self):
+        b_1 = Bar()
+        b_2 = Line()
+        c = CustomCompositeChart()
+        c.add(b_1, "bar")
+        c.add(b_2, "line")
+        assert len(c) == 2
