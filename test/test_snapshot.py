@@ -92,14 +92,13 @@ class TestSnapshotComponent(unittest.TestCase):
     @patch("pyecharts.render.snapshot.save_as_text")
     def test_make_snapshot_text_v1(self, fake_writer):
         eng = _gen_faker_engine("fake content1,content2")
-        with self.assertRaises(FileNotFoundError):
-            make_snapshot(
-                engine=eng,
-                file_name=self._gen_bar_chart(),
-                output_name="make_snapshot.svg",
-                is_remove_html=True,
-            )
-            _ = fake_writer.call_args[0]
+        make_snapshot(
+            engine=eng,
+            file_name=self._gen_bar_chart(),
+            output_name="make_snapshot.svg",
+            is_remove_html=True,
+        )
+        _ = fake_writer.call_args[0]
         self.assertEqual("test ok", "test ok")
 
 
