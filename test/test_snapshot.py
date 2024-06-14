@@ -37,7 +37,7 @@ class TestSnapshotComponent(unittest.TestCase):
         os.unlink("test_txt.txt")
 
     def test_save_as(self):
-        with open("fixtures/img1.jpg", "rb") as f:
+        with open("test/fixtures/img1.jpg", "rb") as f:
             image_bytes = f.read()
         save_as(image_data=image_bytes, output_name="test_pdf.pdf", file_type="pdf")
         os.unlink("test_pdf.pdf")
@@ -115,5 +115,5 @@ class TestSaveAs(unittest.TestCase):
 
         # 检查异常消息是否包含期望的提示信息
         self.assertTrue(
-            f"Please install PIL for {file_type} image type" in str(context.exception),
+            f"Please install PIL for {file_type} image type." in str(context.exception),
         )
