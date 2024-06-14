@@ -1,3 +1,5 @@
+from typing import Sequence
+
 from ... import options as opts
 from ... import types
 from ...charts.chart import Base
@@ -130,4 +132,9 @@ class Timeline(Base):
         for component in components:
             c = chart.options.get(component, None)
             if c is not None:
-                self.options.get("baseOption").update({component: c})
+                # eg: legend in timeline
+                base_option_component = self.options.get("baseOption").get(component)
+                if base_option_component and isinstance(c, Sequence):
+                    base_option_component.extend(c)
+                else:
+                    self.options.get("baseOption").update({component: c})

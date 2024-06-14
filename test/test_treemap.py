@@ -1,6 +1,5 @@
+import unittest
 from unittest.mock import patch
-
-from nose.tools import assert_equal, assert_in
 
 from pyecharts import options as opts
 from pyecharts.charts import TreeMap
@@ -26,35 +25,36 @@ example_data = [
 ]
 
 
-@patch("pyecharts.render.engine.write_utf8_html_file")
-def test_treemap_base(fake_writer):
-    c = TreeMap().add("演示数据", example_data)
-    c.render()
-    _, content = fake_writer.call_args[0]
-    assert_equal(c.theme, "white")
-    assert_equal(c.renderer, "canvas")
+class TestTreeMapChart(unittest.TestCase):
+    @patch("pyecharts.render.engine.write_utf8_html_file")
+    def test_treemap_base(self, fake_writer):
+        c = TreeMap().add("演示数据", example_data)
+        c.render()
+        _, content = fake_writer.call_args[0]
+        self.assertEqual(c.theme, "white")
+        self.assertEqual(c.renderer, "canvas")
 
+    @patch("pyecharts.render.engine.write_utf8_html_file")
+    def test_treemap_options(self, fake_writer):
+        c = TreeMap().add(
+            "演示数据", example_data, width="90%", height="100%", roam=False
+        )
+        c.render()
+        _, content = fake_writer.call_args[0]
+        self.assertIn("width", content)
+        self.assertIn("height", content)
+        self.assertIn("roam", content)
 
-@patch("pyecharts.render.engine.write_utf8_html_file")
-def test_treemap_options(fake_writer):
-    c = TreeMap().add("演示数据", example_data, width="90%", height="100%", roam=False)
-    c.render()
-    _, content = fake_writer.call_args[0]
-    assert_in("width", content)
-    assert_in("height", content)
-    assert_in("roam", content)
-
-
-@patch("pyecharts.render.engine.write_utf8_html_file")
-def test_treemap_levels_options(fake_writer):
-    c = TreeMap().add(
-        "演示数据",
-        example_data,
-        width="90%",
-        height="100%",
-        roam=False,
-        levels=opts.TreeMapLevelsOpts(),
-    )
-    c.render()
-    _, content = fake_writer.call_args[0]
-    assert_in("levels", content)
+    @patch("pyecharts.render.engine.write_utf8_html_file")
+    def test_treemap_levels_options(self, fake_writer):
+        c = TreeMap().add(
+            "演示数据",
+            example_data,
+            width="90%",
+            height="100%",
+            roam=False,
+            levels=opts.TreeMapLevelsOpts(),
+        )
+        c.render()
+        _, content = fake_writer.call_args[0]
+        self.assertIn("levels", content)

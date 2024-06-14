@@ -132,8 +132,8 @@ class _OnlineHost:
     NOTEBOOK_HOST = "http://localhost:8888/nbextensions/assets/"
 
 
-class _WarningControl:
-    ShowWarning = True
+class _RenderSepType:
+    SepType = os.linesep
 
 
 RenderType = _RenderType()
@@ -145,7 +145,7 @@ GeoType = _GeoType()
 BMapType = _BMapType
 NotebookType = _NotebookType()
 OnlineHostType = _OnlineHost()
-WarningType = _WarningControl()
+RenderSepType = _RenderSepType()
 
 
 class _CurrentConfig:
