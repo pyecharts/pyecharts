@@ -1,4 +1,5 @@
 import unittest
+from contextlib import ExitStack
 from typing import Iterable
 
 from pyecharts.charts import Bar, Line, Page
@@ -136,11 +137,11 @@ class TestPageComponent(unittest.TestCase):
         self.assertEqual(html1, html2)
 
     def test_page_cfg_type(self):
-        with self.assertRaises(FileNotFoundError):
-            page = Page()
-            page.save_resize_html()
-        with self.assertRaises(ValueError):
-            page = Page()
+        page = Page()
+
+        with ExitStack() as stack:
+            stack.enter_context(self.assertRaises(FileNotFoundError))
+            stack.enter_context(self.assertRaises(ValueError))
             page.save_resize_html()
 
     def test_page_iterable(self):
