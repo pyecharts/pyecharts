@@ -37,7 +37,7 @@ class TestSnapshotComponent(unittest.TestCase):
         os.unlink("test_txt.txt")
 
     def test_save_as(self):
-        with open("test/fixtures/img1.jpg", "rb") as f:
+        with open("fixtures/img1.jpg", "rb") as f:
             image_bytes = f.read()
         save_as(image_data=image_bytes, output_name="test_pdf.pdf", file_type="pdf")
         os.unlink("test_pdf.pdf")
