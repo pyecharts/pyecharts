@@ -111,8 +111,8 @@ class TestSaveAs(unittest.TestCase):
 
         with self.assertRaises(Exception) as context:
             save_as(image_data, output_name, file_type)
-
-        # 检查异常消息是否包含期望的提示信息
-        self.assertTrue(
-            f"Please install PIL for {file_type} image type." in str(context.exception),
-        )
+            # 检查异常消息是否包含期望的提示信息
+            self.assertTrue(
+                f"Please install PIL for {file_type} image type." in
+                str(context.exception),
+            )

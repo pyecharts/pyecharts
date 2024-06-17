@@ -17,6 +17,12 @@ class TestBaseClass(unittest.TestCase):
         self.assertEqual(1, len(c.js_functions.items))
         self.assertEqual(["console.log('hello')"], c.js_functions.items)
 
+    def test_base_add_events(self):
+        c = Base()
+        c.add_js_events("console.log('hello')", "console.log('hello')")
+        self.assertEqual(1, len(c.js_events.items))
+        self.assertEqual(["console.log('hello')"], c.js_events.items)
+
     def test_base_init_funcs(self):
         c0 = Base({"width": "100px", "height": "200px"})
         self.assertEqual(c0.width, "100px")

@@ -55,6 +55,11 @@
                 chart_{{ c.chart_id }}.resize();
             })
         {% endif %}
+        {% if c.js_events %}
+            {% for fn in c.js_events.items %}
+                {{ fn }}
+            {% endfor %}
+        {% endif %}
     </script>
 {%- endmacro %}
 
@@ -73,6 +78,11 @@
                 {% if c._is_geo_chart %}
                     var bmap = chart_{{ c.chart_id }}.getModel().getComponent('bmap').getBMap();
                     bmap.addControl(new BMap.MapTypeControl());
+                {% endif %}
+                {% if c.js_events %}
+                    {% for fn in c.js_events.items %}
+                        {{ fn }}
+                    {% endfor %}
                 {% endif %}
             {% endif %}
         {% endfor %}
