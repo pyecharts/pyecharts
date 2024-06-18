@@ -25,7 +25,7 @@ class Pie(Chart):
         selected_offset: types.Numeric = 10,
         radius: types.Optional[types.Sequence] = None,
         center: types.Optional[types.Sequence] = None,
-        rosetype: types.Optional[str] = None,
+        rosetype: types.Union[str, bool] = None,
         is_clockwise: bool = True,
         start_angle: types.Numeric = 90,
         min_angle: types.Numeric = 0,
@@ -41,6 +41,9 @@ class Pie(Chart):
         itemstyle_opts: types.ItemStyle = None,
         emphasis_opts: types.Emphasis = None,
         encode: types.Union[types.JSFunc, dict, None] = None,
+        markpoint_opts: types.MarkPoint = None,
+        markline_opts: types.MarkLine = None,
+        markarea_opts: types.MarkArea = None,
     ):
         if self.options.get("dataset") is not None:
             data = None
@@ -93,6 +96,9 @@ class Pie(Chart):
                 "itemStyle": itemstyle_opts,
                 "emphasis": emphasis_opts,
                 "encode": encode,
+                "markpoint": markpoint_opts,
+                "markline": markline_opts,
+                "markarea": markarea_opts,
             }
         )
         return self

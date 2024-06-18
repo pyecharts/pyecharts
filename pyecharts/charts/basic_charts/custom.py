@@ -19,7 +19,7 @@ class Custom(Chart):
         *,
         color_by: str = "series",
         is_legend_hover_link: bool = True,
-        coordinate_system: types.JSFunc = "cartesian2d",
+        coordinate_system: str = "cartesian2d",
         x_axis_index: types.Numeric = 0,
         y_axis_index: types.Numeric = 0,
         polar_index: types.Numeric = 0,
