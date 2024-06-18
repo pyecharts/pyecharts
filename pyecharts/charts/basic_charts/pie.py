@@ -96,9 +96,9 @@ class Pie(Chart):
                 "itemStyle": itemstyle_opts,
                 "emphasis": emphasis_opts,
                 "encode": encode,
-                "markpoint": markpoint_opts,
-                "markline": markline_opts,
-                "markarea": markarea_opts,
+                "markPoint": markpoint_opts,
+                "markLine": markline_opts,
+                "markArea": markarea_opts,
             }
         )
         return self

@@ -41,6 +41,7 @@ class Boxplot(RectChart):
         itemstyle_opts: types.ItemStyle = None,
         emphasis_opts: types.Emphasis = None,
         blur_opts: types.Blur = None,
+        select_opts: types.Select = None,
         encode: types.Union[types.JSFunc, dict, None] = None,
     ):
         if box_width is None:
@@ -72,6 +73,7 @@ class Boxplot(RectChart):
                 "itemStyle": itemstyle_opts,
                 "emphasis": emphasis_opts,
                 "blur": blur_opts,
+                "select": select_opts,
                 "encode": encode,
             }
         )

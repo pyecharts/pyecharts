@@ -16,6 +16,7 @@ from pyecharts.options.global_options import (
     ParallelAxisOpts,
     RadiusAxisItem,
     RadiusAxisOpts,
+    SelectOpts,
     ToolBoxFeatureBrushOpts,
     ToolBoxFeatureDataViewOpts,
     ToolBoxFeatureDataZoomOpts,
@@ -365,4 +366,9 @@ class TestGlobalOptions(unittest.TestCase):
     def test_blur_options_remove_none(self):
         option = BlurOpts()
         expected = {"labelLine": {"show": False}}
+        self.assertEqual(expected, remove_key_with_none_value(option.opts))
+
+    def test_select_opts_remove_none(self):
+        option = SelectOpts()
+        expected = {}
         self.assertEqual(expected, remove_key_with_none_value(option.opts))

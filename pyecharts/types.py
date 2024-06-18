@@ -68,6 +68,7 @@ Title = Union[opts.TitleOpts, dict]
 Tooltip = Union[opts.TooltipOpts, dict, None]
 Toolbox = Union[opts.ToolboxOpts, dict]
 TreeMapBreadcrumb = Union[opts.TreeMapBreadcrumbOpts, dict, None]
+Select = Union[opts.SelectOpts, dict, None]
 SplitLine = Union[opts.SplitLineOpts, dict, None]
 SplitArea = Union[opts.SplitAreaOpts, dict, None]
 SingleAxis = Union[opts.SingleAxisOpts, dict, None]
@@ -101,6 +102,8 @@ BMapGeoLocationControl = Union[opts.BMapGeoLocationControlOpts, dict, None]
 
 _SankeyLevelType = Union[opts.SankeyLevelsOpts, dict]
 SankeyLevel = Union[Sequence[_SankeyLevelType], None]
+
+TreeLeavesOpts = Union[opts.TreeLeavesOpts, dict, None]
 
 TreeMapItemStyleOpts = Union[opts.TreeMapItemStyleOpts, dict, None]
 _TreeMapLevelType = Union[opts.TreeMapLevelsOpts, dict]

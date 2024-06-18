@@ -97,6 +97,7 @@ from .global_options import (
     RadarIndicatorItem,
     RadiusAxisItem,
     RadiusAxisOpts,
+    SelectOpts,
     SingleAxisOpts,
     TitleOpts,
     ToolBoxFeatureBrushOpts,
@@ -108,6 +109,7 @@ from .global_options import (
     ToolBoxFeatureSaveAsImageOpts,
     ToolboxOpts,
     TooltipOpts,
+    TreeLeavesOpts,
     VisualMapOpts,
 )
 from .series_options import (

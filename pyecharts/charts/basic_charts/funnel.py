@@ -93,9 +93,9 @@ class Funnel(Chart):
                 "height": height,
                 "datasetIndex": dataset_index,
                 "encode": encode,
-                "markpoint": markpoint_opts,
-                "markline": markline_opts,
-                "markarea": markarea_opts,
+                "markPoint": markpoint_opts,
+                "markLine": markline_opts,
+                "markArea": markarea_opts,
             }
         )
         return self
