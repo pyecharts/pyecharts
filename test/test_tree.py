@@ -50,7 +50,7 @@ class TestTreeChart(unittest.TestCase):
             orient="BT",
             initial_tree_depth=1,
             label_opts=opts.LabelOpts(),
-            leaves_label_opts=opts.LabelOpts(),
+            leaves_opts=opts.TreeLeavesOpts(),
         )
         c.render()
         _, content = fake_writer.call_args[0]
