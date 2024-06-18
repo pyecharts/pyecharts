@@ -1,9 +1,30 @@
+import random
 import unittest
 
 from pyecharts import options as opts
-from pyecharts.charts import Bar, Timeline
+from pyecharts.charts import Bar, Bar3D, Timeline
 from pyecharts.commons.utils import JsCode
 from pyecharts.faker import Faker
+
+
+def get_bar_3d_chart(i: int):
+    data = [(i, j, random.randint(0, 12)) for i in range(6) for j in range(24)]
+    c = (
+        Bar3D()
+        .add(
+            "",
+            [[d[1], d[0], d[2]] for d in data],
+            xaxis3d_opts=opts.Axis3DOpts(Faker.clock, type_="category"),
+            yaxis3d_opts=opts.Axis3DOpts(Faker.week_en, type_="category"),
+            zaxis3d_opts=opts.Axis3DOpts(type_="value"),
+        )
+        .set_global_opts(
+            visualmap_opts=opts.VisualMapOpts(max_=20),
+            title_opts=opts.TitleOpts(title=f"Bar3D-{i}"),
+        )
+    )
+
+    return c
 
 
 class TestTimeLine(unittest.TestCase):
@@ -159,3 +180,14 @@ class TestTimeLine(unittest.TestCase):
         for t in tl.options.get("options"):
             assert "xAxis" in t
             assert "color" in t
+
+    def test_timeline_with_3d_chart(self):
+        tl = Timeline()
+        for i in range(2, 5):
+            bar_3d = get_bar_3d_chart(i=i)
+            tl.add(bar_3d, "{}".format(i))
+
+        for t in tl.options.get("options"):
+            assert "xAxis3D" in t
+            assert "yAxis3D" in t
+            assert "zAxis3D" in t
