@@ -53,19 +53,19 @@ v0.5.x 和 V1 间不兼容，V1 是一个全新的版本，详见 [ISSUE#892](ht
 
 ### V0.5.x
 
-> 支持 Python2.7，3.4+
+> 支持 Python 2.7，3.4+
 
 经开发团队决定，0.5.x 版本将不再进行维护，0.5.x 版本代码位于 *05x* 分支，文档位于 [05x-docs.pyecharts.org](http://05x-docs.pyecharts.org)。
 
 ### V1
 
-> 仅支持 Python3.6+
+> 仅支持 Python 3.7+
 
 新版本系列将从 v1.0.0 开始，文档位于 [pyecharts.org](https://pyecharts.org)；示例位于 [gallery.pyecharts.org](https://gallery.pyecharts.org)
 
 ### V2
 
-> 仅支持 Python3.6+
+> 仅支持 Python 3.7+
 
 新版本基于 Echarts 5.4.1+ 进行渲染, 文档和示例位置与 V1 相同
 

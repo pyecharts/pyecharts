@@ -57,13 +57,13 @@ At the discretion of the development team, version 0.5.x will no longer be maint
 
 ### V1
 
-> Python 3.6+ only
+> Python 3.7+ only
 
 The new version series will start with v1.0.0, documented at [pyecharts.org](https://pyecharts.org); examples at [gallery.pyecharts.org](https://gallery.pyecharts.org)
 
 ### V2
 
-> Python 3.6+ only
+> Python 3.7+ only
 
 The new version is based on Echarts 5.4.1+ for rendering, and the documentation and examples are in the same location as V1.
 
