@@ -56,6 +56,7 @@ class Bar(RectChart):
         itemstyle_opts: types.ItemStyle = None,
         emphasis_opts: types.Emphasis = None,
         blur_opts: types.Blur = None,
+        select_opts: types.Select = None,
         encode: types.Union[types.JSFunc, dict, None] = None,
     ):
         self._append_color(color)
@@ -107,6 +108,7 @@ class Bar(RectChart):
                 "itemStyle": itemstyle_opts,
                 "emphasis": emphasis_opts,
                 "blur": blur_opts,
+                "select": select_opts,
                 "encode": encode,
             }
         )

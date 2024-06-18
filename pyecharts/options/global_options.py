@@ -1540,15 +1540,51 @@ class BlurOpts(BasicOpts):
     def __init__(
         self,
         label_opts: Union[LabelOpts, dict, None] = None,
+        linestyle_opts: Union[LineStyleOpts, dict, None] = None,
         is_show_label_line: bool = False,
         label_linestyle_opts: Union[LineStyleOpts, dict, None] = None,
         itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
     ):
         self.opts: dict = {
             "label": label_opts,
+            "lineStyle": linestyle_opts,
             "labelLine": {
                 "show": is_show_label_line,
                 "lineStyle": label_linestyle_opts
             },
             "itemStyle": itemstyle_opts,
+        }
+
+
+class SelectOpts(BasicOpts):
+    def __init__(
+            self,
+            is_disabled: Optional[bool] = None,
+            itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
+            linestyle_opts: Union[LineStyleOpts, dict, None] = None,
+            label_opts: Union[LabelOpts, dict, None] = None,
+    ):
+        self.opts: dict = {
+            "disabled": is_disabled,
+            "itemStyle": itemstyle_opts,
+            "lineStyle": linestyle_opts,
+            "label": label_opts,
+        }
+
+
+class TreeLeavesOpts(BasicOpts):
+    def __init__(
+        self,
+        label_opts: Union[LabelOpts, dict, None] = None,
+        itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
+        emphasis_opts: Union[EmphasisOpts, dict, None] = None,
+        blur_opts: Union[BlurOpts, dict, None] = None,
+        select_opts: Union[SelectOpts, dict, None] = None,
+    ):
+        self.opts: dict = {
+            "label": label_opts,
+            "itemStyle": itemstyle_opts,
+            "emphasis": emphasis_opts,
+            "blur": blur_opts,
+            "select": select_opts,
         }
