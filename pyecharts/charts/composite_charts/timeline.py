@@ -107,6 +107,10 @@ class Timeline(Base):
                 "dataset": chart.options.get("dataset"),
                 "radiusAxis": chart.options.get("radiusAxis"),
                 "angleAxis": chart.options.get("angleAxis"),
+                "xAxis3D": chart.options.get("xAxis3D"),
+                "yAxis3D": chart.options.get("yAxis3D"),
+                "zAxis3D": chart.options.get("zAxis3D"),
+                "grid3D": chart.options.get("grid3D"),
             }
         )
         self.__check_components(chart)
