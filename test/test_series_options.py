@@ -90,7 +90,7 @@ class TestSeriesOptions(unittest.TestCase):
             "textShadowColor": "whitesmoke",
             "textShadowBlur": .1,
             "textShadowOffsetX": .2,
-            "textShadowOffsetY": .3,  
+            "textShadowOffsetY": .3,
             "overflow": None,
             "rich": None,
         }
