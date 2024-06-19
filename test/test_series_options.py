@@ -39,6 +39,12 @@ class TestSeriesOptions(unittest.TestCase):
             "padding": None,
             "width": None,
             "height": None,
+            "textBorderColor": None,
+            "textBorderWidth": None,
+            "textShadowColor": None,
+            "textShadowBlur": None,
+            "textShadowOffsetX": None,
+            "textShadowOffsetY": None,
             "overflow": None,
             "rich": None,
         }
