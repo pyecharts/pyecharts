@@ -72,3 +72,19 @@ class TestDatasets(unittest.TestCase):
 
     def test_register_coords(self):
         register_coords(coords={"深圳": [113, 23]})
+
+    def test_type_error_with_non_string_key(self):
+        fd = FuzzyDict()
+        fd[1] = "one"
+        fd[2] = "two"
+
+        result = fd._search("1")
+        self.assertFalse(result[0])  # Ensure no match found
+
+    def test_type_error_with_non_string_lookfor(self):
+        fd = FuzzyDict()
+        fd["one"] = 1
+        fd["two"] = 2
+
+        with self.assertRaises(KeyError):
+            _ = fd[1]
