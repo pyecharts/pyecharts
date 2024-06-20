@@ -39,6 +39,12 @@ class TestSeriesOptions(unittest.TestCase):
             "padding": None,
             "width": None,
             "height": None,
+            "textBorderColor": None,
+            "textBorderWidth": None,
+            "textShadowColor": None,
+            "textShadowBlur": None,
+            "textShadowOffsetX": None,
+            "textShadowOffsetY": None,
             "overflow": None,
             "rich": None,
         }
@@ -50,6 +56,12 @@ class TestSeriesOptions(unittest.TestCase):
             border_color="green",
             border_width=1,
             border_radius=2,
+            text_border_color="black",
+            text_border_width=3,
+            text_shadow_color="whitesmoke",
+            text_shadow_blur=.1,
+            text_shadow_offset_x=.2,
+            text_shadow_offset_y=.3,
         )
         expected = {
             "show": True,
@@ -73,6 +85,12 @@ class TestSeriesOptions(unittest.TestCase):
             "padding": None,
             "width": None,
             "height": None,
+            "textBorderColor": "black",
+            "textBorderWidth": 3,
+            "textShadowColor": "whitesmoke",
+            "textShadowBlur": .1,
+            "textShadowOffsetX": .2,
+            "textShadowOffsetY": .3,
             "overflow": None,
             "rich": None,
         }
