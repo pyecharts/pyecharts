@@ -338,6 +338,7 @@ class ThreeAxisChart(Chart3D):
         self,
         series_name: str,
         data: Sequence,
+        coordinate_system: Optional[str] = None,
         shading: Optional[str] = None,
         itemstyle_opts: types.ItemStyle = None,
         label_opts: types.Label = opts.LabelOpts(is_show=False),
@@ -347,6 +348,7 @@ class ThreeAxisChart(Chart3D):
         zaxis3d_opts: types.Axis3D = opts.Axis3DOpts(type_="value", name="Z"),
         grid3d_opts: types.Grid3D = opts.Grid3DOpts(),
         encode: types.Union[types.JSFunc, dict, None] = None,
+        emphasis_opts: types.Optional[types.Emphasis3D] = None,
         is_parametric: types.Optional[bool] = None,
         is_show_wire_frame: types.Optional[bool] = None,
         wire_frame_line_style_opts: types.Optional[opts.LineStyleOpts] = None,
@@ -366,6 +368,7 @@ class ThreeAxisChart(Chart3D):
                 {
                     "type": self._3d_chart_type,
                     "name": series_name,
+                    "coordinateSystem": coordinate_system,
                     "data": data,
                     "label": label_opts,
                     "shading": shading,
@@ -385,11 +388,13 @@ class ThreeAxisChart(Chart3D):
                 {
                     "type": self._3d_chart_type,
                     "name": series_name,
+                    "coordinateSystem": coordinate_system,
                     "data": data,
                     "label": label_opts,
                     "shading": shading,
                     "grid3DIndex": grid_3d_index,
                     "itemStyle": itemstyle_opts,
+                    "emphasis": emphasis_opts,
                     "encode": encode,
                 }
             )

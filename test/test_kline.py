@@ -1,6 +1,5 @@
+import unittest
 from unittest.mock import patch
-
-from nose.tools import assert_equal, assert_in
 
 from pyecharts import options as opts
 from pyecharts.charts import Kline
@@ -19,62 +18,62 @@ data = [
 ]
 
 
-@patch("pyecharts.render.engine.write_utf8_html_file")
-def test_kline_base(fake_writer):
-    c = (
-        Kline()
-        .add_xaxis(["2017/7/{}".format(i + 1) for i in range(10)])
-        .add_yaxis("kline", data)
-        .set_global_opts(
-            yaxis_opts=opts.AxisOpts(is_scale=True),
-            xaxis_opts=opts.AxisOpts(is_scale=True),
+class TestKlineChart(unittest.TestCase):
+    @patch("pyecharts.render.engine.write_utf8_html_file")
+    def test_kline_base(self, fake_writer):
+        c = (
+            Kline()
+            .add_xaxis(["2017/7/{}".format(i + 1) for i in range(10)])
+            .add_yaxis("kline", data)
+            .set_global_opts(
+                yaxis_opts=opts.AxisOpts(is_scale=True),
+                xaxis_opts=opts.AxisOpts(is_scale=True),
+            )
         )
-    )
-    c.render()
-    _, content = fake_writer.call_args[0]
-    assert_equal(c.theme, "white")
-    assert_equal(c.renderer, "canvas")
+        c.render()
+        _, content = fake_writer.call_args[0]
+        self.assertEqual(c.theme, "white")
+        self.assertEqual(c.renderer, "canvas")
 
+    @patch("pyecharts.render.engine.write_utf8_html_file")
+    def test_kline_item_base(self, fake_writer):
+        x_axis = ["2017/7/{}".format(i + 1) for i in range(10)]
+        y_axis = data
+        kline_item = [
+            opts.CandleStickItem(name=d[0], value=d[1])
+            for d in list(zip(x_axis, y_axis))
+        ]
 
-@patch("pyecharts.render.engine.write_utf8_html_file")
-def test_kline_item_base(fake_writer):
-    x_axis = ["2017/7/{}".format(i + 1) for i in range(10)]
-    y_axis = data
-    kline_item = [
-        opts.CandleStickItem(name=d[0], value=d[1]) for d in list(zip(x_axis, y_axis))
-    ]
-
-    c = (
-        Kline()
-        .add_xaxis(x_axis)
-        .add_yaxis("kline", kline_item)
-        .set_global_opts(
-            yaxis_opts=opts.AxisOpts(is_scale=True),
-            xaxis_opts=opts.AxisOpts(is_scale=True),
+        c = (
+            Kline()
+            .add_xaxis(x_axis)
+            .add_yaxis("kline", kline_item)
+            .set_global_opts(
+                yaxis_opts=opts.AxisOpts(is_scale=True),
+                xaxis_opts=opts.AxisOpts(is_scale=True),
+            )
         )
-    )
-    c.render()
-    _, content = fake_writer.call_args[0]
-    assert_equal(c.theme, "white")
-    assert_equal(c.renderer, "canvas")
+        c.render()
+        _, content = fake_writer.call_args[0]
+        self.assertEqual(c.theme, "white")
+        self.assertEqual(c.renderer, "canvas")
 
-
-@patch("pyecharts.render.engine.write_utf8_html_file")
-def test_kline_axispointer_opts(fake_writer):
-    c = (
-        Kline()
-        .add_xaxis(["2017/7/{}".format(i + 1) for i in range(10)])
-        .add_yaxis("kline", data)
-        .set_global_opts(
-            yaxis_opts=opts.AxisOpts(is_scale=True),
-            xaxis_opts=opts.AxisOpts(is_scale=True),
-            axispointer_opts=opts.AxisPointerOpts(
-                is_show=True,
-                link=[{"xAxisIndex": "all"}],
-                label=opts.LabelOpts(background_color="#777"),
-            ),
+    @patch("pyecharts.render.engine.write_utf8_html_file")
+    def test_kline_axispointer_opts(self, fake_writer):
+        c = (
+            Kline()
+            .add_xaxis(["2017/7/{}".format(i + 1) for i in range(10)])
+            .add_yaxis("kline", data)
+            .set_global_opts(
+                yaxis_opts=opts.AxisOpts(is_scale=True),
+                xaxis_opts=opts.AxisOpts(is_scale=True),
+                axispointer_opts=opts.AxisPointerOpts(
+                    is_show=True,
+                    link=[{"xAxisIndex": "all"}],
+                    label=opts.LabelOpts(background_color="#777"),
+                ),
+            )
         )
-    )
-    c.render()
-    _, content = fake_writer.call_args[0]
-    assert_in("axisPointer", content)
+        c.render()
+        _, content = fake_writer.call_args[0]
+        self.assertIn("axisPointer", content)

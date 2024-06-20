@@ -509,6 +509,7 @@ class DataZoomOpts(BasicOpts):
         self,
         is_show: bool = True,
         type_: str = "slider",
+        is_disabled: bool = False,
         is_realtime: bool = True,
         is_show_detail: bool = True,
         is_show_data_shadow: bool = True,
@@ -516,15 +517,27 @@ class DataZoomOpts(BasicOpts):
         range_end: Union[Numeric, None] = 80,
         start_value: Union[int, str, None] = None,
         end_value: Union[int, str, None] = None,
+        min_span: Union[int, None] = None,
+        max_span: Union[int, None] = None,
+        min_value_span: Union[int, str, None] = None,
+        max_value_span: Union[int, str, None] = None,
         orient: str = "horizontal",
         xaxis_index: Union[int, Sequence[int], None] = None,
         yaxis_index: Union[int, Sequence[int], None] = None,
+        radius_axis_index: Union[int, Sequence[int], None] = None,
+        angle_axis_index: Union[int, Sequence[int], None] = None,
         is_zoom_lock: bool = False,
+        throttle: Optional[int] = None,
+        range_mode: Optional[Sequence] = None,
         pos_left: Optional[str] = None,
         pos_right: Optional[str] = None,
         pos_top: Optional[str] = None,
         pos_bottom: Optional[str] = None,
         filter_mode: str = "filter",
+        is_zoom_on_mouse_wheel: bool = True,
+        is_move_on_mouse_move: bool = True,
+        is_move_on_mouse_wheel: bool = True,
+        is_prevent_default_mouse_move: bool = True,
     ):
         self.opts: dict = {
             "show": is_show,
@@ -536,16 +549,34 @@ class DataZoomOpts(BasicOpts):
             "endValue": end_value,
             "start": range_start,
             "end": range_end,
+            "minSpan": min_span,
+            "maxSpan": max_span,
+            "minValueSpan": min_value_span,
+            "maxValueSpan": max_value_span,
             "orient": orient,
             "xAxisIndex": xaxis_index,
             "yAxisIndex": yaxis_index,
+            "radiusAxisIndex": radius_axis_index,
+            "angleAxisIndex": angle_axis_index,
             "zoomLock": is_zoom_lock,
+            "throttle": throttle,
+            "rangeMode": range_mode,
             "left": pos_left,
             "right": pos_right,
             "top": pos_top,
             "bottom": pos_bottom,
             "filterMode": filter_mode,
         }
+
+        # inside have some different configurations.
+        if type_ == "inside":
+            self.opts.update({
+                "disabled": is_disabled,
+                "zoomOnMouseWheel": is_zoom_on_mouse_wheel,
+                "moveOnMouseMove": is_move_on_mouse_move,
+                "moveOnMouseWheel": is_move_on_mouse_wheel,
+                "preventDefaultMouseMove": is_prevent_default_mouse_move,
+            })
 
 
 class LegendOpts(BasicOpts):
@@ -1490,4 +1521,70 @@ class EmphasisOpts(BasicOpts):
             "lineStyle": linestyle_opts,
             "areaStyle": areastyle_opts,
             "endLabel": end_label_opts,
+        }
+
+
+class Emphasis3DOpts(BasicOpts):
+    def __init__(
+        self,
+        itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
+        label_opts: Union[LabelOpts, dict, None] = None,
+    ):
+        self.opts: dict = {
+            "itemStyle": itemstyle_opts,
+            "label": label_opts,
+        }
+
+
+class BlurOpts(BasicOpts):
+    def __init__(
+        self,
+        label_opts: Union[LabelOpts, dict, None] = None,
+        linestyle_opts: Union[LineStyleOpts, dict, None] = None,
+        is_show_label_line: bool = False,
+        label_linestyle_opts: Union[LineStyleOpts, dict, None] = None,
+        itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
+    ):
+        self.opts: dict = {
+            "label": label_opts,
+            "lineStyle": linestyle_opts,
+            "labelLine": {
+                "show": is_show_label_line,
+                "lineStyle": label_linestyle_opts
+            },
+            "itemStyle": itemstyle_opts,
+        }
+
+
+class SelectOpts(BasicOpts):
+    def __init__(
+            self,
+            is_disabled: Optional[bool] = None,
+            itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
+            linestyle_opts: Union[LineStyleOpts, dict, None] = None,
+            label_opts: Union[LabelOpts, dict, None] = None,
+    ):
+        self.opts: dict = {
+            "disabled": is_disabled,
+            "itemStyle": itemstyle_opts,
+            "lineStyle": linestyle_opts,
+            "label": label_opts,
+        }
+
+
+class TreeLeavesOpts(BasicOpts):
+    def __init__(
+        self,
+        label_opts: Union[LabelOpts, dict, None] = None,
+        itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
+        emphasis_opts: Union[EmphasisOpts, dict, None] = None,
+        blur_opts: Union[BlurOpts, dict, None] = None,
+        select_opts: Union[SelectOpts, dict, None] = None,
+    ):
+        self.opts: dict = {
+            "label": label_opts,
+            "itemStyle": itemstyle_opts,
+            "emphasis": emphasis_opts,
+            "blur": blur_opts,
+            "select": select_opts,
         }

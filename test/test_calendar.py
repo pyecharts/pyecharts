@@ -1,26 +1,61 @@
 import datetime
 import random
+import unittest
 from unittest.mock import patch
-
-from nose.tools import assert_equal, assert_in
 
 from pyecharts import options as opts
 from pyecharts.charts import Calendar
 
 
-@patch("pyecharts.render.engine.write_utf8_html_file")
-def test_calendar_base(fake_writer):
-    begin = datetime.date(2017, 1, 1)
-    end = datetime.date(2017, 12, 31)
-    data = [
-        [str(begin + datetime.timedelta(days=i)), random.randint(1000, 25000)]
-        for i in range((end - begin).days + 1)
-    ]
+class TestCalendarChart(unittest.TestCase):
 
-    c = (
-        Calendar()
-        .add("", data, calendar_opts=opts.CalendarOpts(range_="2017"))
-        .set_global_opts(
+    @patch("pyecharts.render.engine.write_utf8_html_file")
+    def test_calendar_base(self, fake_writer):
+        begin = datetime.date(2017, 1, 1)
+        end = datetime.date(2017, 12, 31)
+        data = [
+            [str(begin + datetime.timedelta(days=i)), random.randint(1000, 25000)]
+            for i in range((end - begin).days + 1)
+        ]
+
+        c = (
+            Calendar()
+            .add("", data, calendar_opts=opts.CalendarOpts(range_="2017"))
+            .set_global_opts(
+                visualmap_opts=opts.VisualMapOpts(
+                    max_=20000,
+                    min_=500,
+                    orient="horizontal",
+                    is_piecewise=True,
+                    pos_top="230px",
+                    pos_left="100px",
+                )
+            )
+        )
+        c.render()
+        _, content = fake_writer.call_args[0]
+        self.assertEqual(c.theme, "white")
+        self.assertEqual(c.renderer, "canvas")
+        self.assertIn("visualMap", content)
+
+    @patch("pyecharts.render.engine.write_utf8_html_file")
+    def test_calendar_setting(self, fake_writer):
+        begin = datetime.date(2017, 1, 1)
+        end = datetime.date(2017, 12, 31)
+        data = [
+            [str(begin + datetime.timedelta(days=i)), random.randint(1000, 25000)]
+            for i in range((end - begin).days + 1)
+        ]
+
+        c = Calendar().add(
+            "",
+            data,
+            calendar_opts=opts.CalendarOpts(
+                range_="2017",
+                cell_size=15,
+                daylabel_opts=opts.CalendarDayLabelOpts(name_map="cn"),
+                monthlabel_opts=opts.CalendarMonthLabelOpts(name_map="cn"),
+            ),
             visualmap_opts=opts.VisualMapOpts(
                 max_=20000,
                 min_=500,
@@ -28,46 +63,11 @@ def test_calendar_base(fake_writer):
                 is_piecewise=True,
                 pos_top="230px",
                 pos_left="100px",
-            )
+            ),
         )
-    )
-    c.render()
-    _, content = fake_writer.call_args[0]
-    assert_equal(c.theme, "white")
-    assert_equal(c.renderer, "canvas")
-    assert_in("visualMap", content)
-
-
-@patch("pyecharts.render.engine.write_utf8_html_file")
-def test_calendar_setting(fake_writer):
-    begin = datetime.date(2017, 1, 1)
-    end = datetime.date(2017, 12, 31)
-    data = [
-        [str(begin + datetime.timedelta(days=i)), random.randint(1000, 25000)]
-        for i in range((end - begin).days + 1)
-    ]
-
-    c = Calendar().add(
-        "",
-        data,
-        calendar_opts=opts.CalendarOpts(
-            range_="2017",
-            cell_size=15,
-            daylabel_opts=opts.CalendarDayLabelOpts(name_map="cn"),
-            monthlabel_opts=opts.CalendarMonthLabelOpts(name_map="cn"),
-        ),
-        visualmap_opts=opts.VisualMapOpts(
-            max_=20000,
-            min_=500,
-            orient="horizontal",
-            is_piecewise=True,
-            pos_top="230px",
-            pos_left="100px",
-        ),
-    )
-    c.render()
-    _, content = fake_writer.call_args[0]
-    assert_in("cellSize", content)
-    assert_in("dayLabel", content)
-    assert_in("monthLabel", content)
-    assert_in("visualMap", content)
+        c.render()
+        _, content = fake_writer.call_args[0]
+        self.assertIn("cellSize", content)
+        self.assertIn("dayLabel", content)
+        self.assertIn("monthLabel", content)
+        self.assertIn("visualMap", content)

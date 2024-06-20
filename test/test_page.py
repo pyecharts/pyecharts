@@ -1,13 +1,6 @@
+import unittest
+from contextlib import ExitStack
 from typing import Iterable
-
-from nose.tools import (
-    assert_equal,
-    assert_in,
-    assert_not_equal,
-    assert_not_in,
-    assert_true,
-    raises,
-)
 
 from pyecharts.charts import Bar, Line, Page
 from pyecharts.commons.utils import OrderedSet
@@ -45,144 +38,138 @@ def _create_table() -> Table:
     return table
 
 
-def test_page_layout_default():
-    page = Page()
-    assert_equal(page.layout, "")
+class TestPageComponent(unittest.TestCase):
+    def test_page_layout_default(self):
+        page = Page()
+        self.assertEqual(page.layout, "")
 
+    def test_page_layout_custom(self):
+        page = Page(layout=Page.SimplePageLayout)
+        self.assertEqual(
+            page.layout, "justify-content:center; display:flex; flex-wrap:wrap; "
+        )
 
-def test_page_layout_custom():
-    page = Page(layout=Page.SimplePageLayout)
-    assert_equal(page.layout, "justify-content:center; display:flex; flex-wrap:wrap; ")
+    def test_page_jshost_default(self):
+        bar = _create_bar()
+        line = _create_line()
+        page = Page().add(bar, line)
+        self.assertEqual(page.js_host, "https://assets.pyecharts.org/assets/v5/")
 
+    def test_page_jshost_custom(self):
+        from pyecharts.globals import CurrentConfig
 
-def test_page_jshost_default():
-    bar = _create_bar()
-    line = _create_line()
-    page = Page().add(bar, line)
-    assert_equal(page.js_host, "https://assets.pyecharts.org/assets/v5/")
+        default_host = CurrentConfig.ONLINE_HOST
+        custom_host = "http://localhost:8888/assets/"
+        CurrentConfig.ONLINE_HOST = custom_host
+        bar = _create_bar()
+        line = _create_line()
+        page = Page().add(bar, line)
+        self.assertEqual(page.js_host, custom_host)
+        CurrentConfig.ONLINE_HOST = default_host
 
+    def test_page_render_embed(self):
+        bar = _create_bar()
+        line = _create_line()
+        content = Page().add(bar, line).render_embed()
+        self.assertTrue(len(content) > 8000)
 
-def test_page_jshost_custom():
-    from pyecharts.globals import CurrentConfig
+    def test_page_render_notebook(self):
+        page = Page()
+        page.add(_create_line(), _create_bar(), _create_table())
+        html = page.render_notebook().__html__()
+        self.assertIn("City name", html)
 
-    default_host = CurrentConfig.ONLINE_HOST
-    custom_host = "http://localhost:8888/assets/"
-    CurrentConfig.ONLINE_HOST = custom_host
-    bar = _create_bar()
-    line = _create_line()
-    page = Page().add(bar, line)
-    assert_equal(page.js_host, custom_host)
-    CurrentConfig.ONLINE_HOST = default_host
+    def test_page_load_javascript(self):
+        bar = _create_bar()
+        line = _create_line()
+        content = Page().add(bar, line).load_javascript()
+        self.assertEqual("", content.data)
+        self.assertEqual(
+            ["https://assets.pyecharts.org/assets/v5/echarts.min.js"], content.lib
+        )
 
+    def _get_new_page(self, unique: bool = True) -> Page:
+        bar = _create_bar()
+        line = _create_line()
 
-def test_page_render_embed():
-    bar = _create_bar()
-    line = _create_line()
-    content = Page().add(bar, line).render_embed()
-    assert_true(len(content) > 8000)
+        if not unique:
+            bar.chart_id = "chenjiandongx_is_an_awesome_boy"
+            line.chart_id = "chenjiandongx_is_an_amazing_boy"
 
+        p = Page(layout=Page.DraggablePageLayout)
+        p.add(bar, line)
+        return p
 
-def test_page_render_notebook():
-    page = Page()
-    page.add(_create_line(), _create_bar(), _create_table())
-    html = page.render_notebook().__html__()
-    assert_in("City name", html)
+    # chart_config.json content
+    LAYOUT_DICT = [
+        {
+            "cid": "chenjiandongx_is_an_awesome_boy",
+            "width": "900px",
+            "height": "500px",
+            "top": "31px",
+            "left": "8px",
+        },
+        {
+            "cid": "chenjiandongx_is_an_amazing_boy",
+            "width": "900px",
+            "height": "500px",
+            "top": "30px",
+            "left": "910px",
+        },
+    ]
 
+    def test_page_draggable_layout_unique_chart_id(self):
+        page1 = self._get_new_page()
+        html1 = page1.save_resize_html(source=page1.render(), cfg_dict=self.LAYOUT_DICT)
 
-def test_page_load_javascript():
-    bar = _create_bar()
-    line = _create_line()
-    content = Page().add(bar, line).load_javascript()
-    assert_equal("", content.data)
-    assert_equal(["https://assets.pyecharts.org/assets/v5/echarts.min.js"], content.lib)
+        page2 = self._get_new_page()
+        html2 = page2.save_resize_html(source=page2.render(), cfg_dict=self.LAYOUT_DICT)
 
+        self.assertNotEqual(html1, html2)
 
-def _get_new_page(unique: bool = True) -> Page:
-    bar = _create_bar()
-    line = _create_line()
+    def test_page_draggable_layout_same_chart_id(self):
+        page1 = self._get_new_page(unique=False)
+        html1 = page1.save_resize_html(source=page1.render(), cfg_dict=self.LAYOUT_DICT)
 
-    if not unique:
-        bar.chart_id = "chenjiandongx_is_an_awesome_boy"
-        line.chart_id = "chenjiandongx_is_an_amazing_boy"
+        page2 = self._get_new_page(unique=False)
+        html2 = page2.save_resize_html(source=page2.render(), cfg_dict=self.LAYOUT_DICT)
 
-    p = Page(layout=Page.DraggablePageLayout)
-    p.add(bar, line)
-    return p
+        self.assertEqual(html1, html2)
 
+    def test_page_cfg_type(self):
+        page = Page()
 
-# chart_config.json content
-LAYOUT_DICT = [
-    {
-        "cid": "chenjiandongx_is_an_awesome_boy",
-        "width": "900px",
-        "height": "500px",
-        "top": "31px",
-        "left": "8px",
-    },
-    {
-        "cid": "chenjiandongx_is_an_amazing_boy",
-        "width": "900px",
-        "height": "500px",
-        "top": "30px",
-        "left": "910px",
-    },
-]
+        with ExitStack() as stack:
+            stack.enter_context(self.assertRaises(FileNotFoundError))
+            stack.enter_context(self.assertRaises(ValueError))
+            page.save_resize_html()
 
+    def test_page_iterable(self):
+        page = Page()
+        self.assertTrue(isinstance(page, Iterable))
 
-def test_page_draggable_layout_unique_chart_id():
-    page1 = _get_new_page()
-    html1 = page1.save_resize_html(source=page1.render(), cfg_dict=LAYOUT_DICT)
+    def test_page_attr(self):
+        page = Page()
+        self.assertTrue(isinstance(page.js_functions, OrderedSet))
+        self.assertTrue(isinstance(page._charts, list))
 
-    page2 = _get_new_page()
-    html2 = page2.save_resize_html(source=page2.render(), cfg_dict=LAYOUT_DICT)
+    def test_page_resize(self):
+        page = Page()
+        content = page.save_resize_html(
+            cfg_dict=[
+                {"cid": "xxx", "width": 100, "height": 100, "top": 100, "left": 100}
+            ]
+        )
+        self.assertNotIn(".resizable()", content)
+        self.assertNotIn(".draggable()", content)
 
-    assert_not_equal(html1, html2)
+    def test_page_resize_cfg(self):
+        page = Page()
+        content = page.save_resize_html(cfg_file="test/fixtures/resize_cfg.json")
+        self.assertNotIn(".resizable()", content)
+        self.assertNotIn(".draggable()", content)
 
-
-def test_page_draggable_layout_same_chart_id():
-    page1 = _get_new_page(unique=False)
-    html1 = page1.save_resize_html(source=page1.render(), cfg_dict=LAYOUT_DICT)
-
-    page2 = _get_new_page(unique=False)
-    html2 = page2.save_resize_html(source=page2.render(), cfg_dict=LAYOUT_DICT)
-
-    assert_equal(html1, html2)
-
-
-@raises(ValueError, FileNotFoundError)
-def test_page_cfg_type():
-    page = Page()
-    page.save_resize_html()
-
-
-def test_page_iterable():
-    page = Page()
-    assert_true(isinstance(page, Iterable))
-
-
-def test_page_attr():
-    page = Page()
-    assert_true(isinstance(page.js_functions, OrderedSet))
-    assert_true(isinstance(page._charts, list))
-
-
-def test_page_resize():
-    page = Page()
-    content = page.save_resize_html(
-        cfg_dict=[{"cid": "xxx", "width": 100, "height": 100, "top": 100, "left": 100}]
-    )
-    assert_not_in(".resizable()", content)
-    assert_not_in(".draggable()", content)
-
-
-def test_page_resize_cfg():
-    page = Page()
-    content = page.save_resize_html(cfg_file="test/fixtures/resize_cfg.json")
-    assert_not_in(".resizable()", content)
-    assert_not_in(".draggable()", content)
-
-
-@raises(ValueError)
-def test_page_no_cfg_dict_or_file():
-    page = Page()
-    page.save_resize_html()
+    def test_page_no_cfg_dict_or_file(self):
+        with self.assertRaises(ValueError):
+            page = Page()
+            page.save_resize_html()

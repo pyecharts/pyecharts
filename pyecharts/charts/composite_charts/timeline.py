@@ -1,3 +1,5 @@
+from typing import Sequence
+
 from ... import options as opts
 from ... import types
 from ...charts.chart import Base
@@ -105,6 +107,10 @@ class Timeline(Base):
                 "dataset": chart.options.get("dataset"),
                 "radiusAxis": chart.options.get("radiusAxis"),
                 "angleAxis": chart.options.get("angleAxis"),
+                "xAxis3D": chart.options.get("xAxis3D"),
+                "yAxis3D": chart.options.get("yAxis3D"),
+                "zAxis3D": chart.options.get("zAxis3D"),
+                "grid3D": chart.options.get("grid3D"),
             }
         )
         self.__check_components(chart)
@@ -130,4 +136,9 @@ class Timeline(Base):
         for component in components:
             c = chart.options.get(component, None)
             if c is not None:
-                self.options.get("baseOption").update({component: c})
+                # eg: legend in timeline
+                base_option_component = self.options.get("baseOption").get(component)
+                if base_option_component and isinstance(c, Sequence):
+                    base_option_component.extend(c)
+                else:
+                    self.options.get("baseOption").update({component: c})

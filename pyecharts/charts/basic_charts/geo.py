@@ -68,7 +68,7 @@ class GeoChartBase(Chart):
         encode: types.Union[types.JsCode, dict] = None,
     ):
         self._zlevel += 1
-        data = self._feed_data(data_pair, type_)
+        data = self._feed_data(data_pair, type_) if data_pair else data_pair
 
         self._append_color(color)
         self._append_legend(series_name)

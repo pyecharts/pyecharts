@@ -397,6 +397,7 @@ class GraphicTextStyleOpts(BaseGraphic):
         pos_x: Numeric = 0,
         pos_y: Numeric = 0,
         font: Optional[str] = None,
+        font_size: Optional[Numeric] = 0,
         text_align: str = "left",
         text_vertical_align: Optional[str] = None,
         graphic_basicstyle_opts: Union[GraphicBasicStyleOpts, dict, None] = None,
@@ -406,6 +407,7 @@ class GraphicTextStyleOpts(BaseGraphic):
             "x": pos_x,
             "y": pos_y,
             "font": font,
+            "fontSize": font_size,
             "textAlign": text_align,
             "textVerticalAlign": text_vertical_align,
         }
@@ -864,7 +866,7 @@ class BarBackgroundStyleOpts(BasicOpts):
         border_color: str = "#000",
         border_width: Numeric = 0,
         border_type: str = "solid",
-        bar_border_radius: Union[Numeric, Sequence] = 0,
+        border_radius: Union[Numeric, Sequence] = 0,
         shadow_blur: Optional[Numeric] = None,
         shadow_color: Optional[str] = None,
         shadow_offset_x: Numeric = 0,
@@ -876,7 +878,7 @@ class BarBackgroundStyleOpts(BasicOpts):
             "borderColor": border_color,
             "borderWidth": border_width,
             "borderType": border_type,
-            "barBorderRadius": bar_border_radius,
+            "borderRadius": border_radius,
             "shadowBlur": shadow_blur,
             "shadowColor": shadow_color,
             "shadowOffsetX": shadow_offset_x,
@@ -1318,17 +1320,29 @@ class SunburstLevelOpts(BasicOpts):
 class BarItem(BasicOpts):
     def __init__(
         self,
-        name: Union[int, str],
+        name: Union[int, str, None],
         value: Numeric,
         *,
+        group_id: Optional[str] = None,
         label_opts: Union[LabelOpts, dict, None] = None,
+        is_show_label_line: Optional[bool] = None,
+        label_line_linestyle_opts: Union[LineStyleOpts, dict, None] = None,
         itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
         tooltip_opts: Union[TooltipOpts, dict, None] = None,
     ):
+        label_line = None
+        if is_show_label_line:
+            label_line = {
+                "show": is_show_label_line,
+                "lineStyle": label_line_linestyle_opts,
+            }
+
         self.opts: dict = {
             "name": name,
             "value": value,
+            "groupId": group_id,
             "label": label_opts,
+            "labelLine": label_line,
             "itemStyle": itemstyle_opts,
             "tooltip": tooltip_opts,
         }
@@ -1458,6 +1472,7 @@ class MapItem(BasicOpts):
         self,
         name: Optional[str] = None,
         value: Union[Sequence, Numeric, str] = None,
+        group_id: Optional[str] = None,
         is_selected: bool = False,
         label_opts: Union[LabelOpts, dict, None] = None,
         itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
@@ -1466,6 +1481,7 @@ class MapItem(BasicOpts):
         self.opts: dict = {
             "name": name,
             "value": value,
+            "groupId": group_id,
             "selected": is_selected,
             "label": label_opts,
             "itemStyle": itemstyle_opts,
@@ -1489,11 +1505,42 @@ class GeoItem(BasicOpts):
         }
 
 
+class ParallelItem(BasicOpts):
+    def __init__(
+        self,
+        name: Optional[str] = None,
+        value: Optional[Sequence] = None,
+        linestyle_opts: Union[LineStyleOpts, dict, None] = None,
+        color: Union[str, dict] = "#000",
+        width: Numeric = 2,
+        type_: str = "solid",
+        dash_offset: Numeric = 0,
+        cap: str = "butt",
+        join: str = "bevel",
+        miter_limit: Optional[Numeric] = None,
+        opacity: Numeric = 0.45,
+    ):
+        self.opts: dict = {
+            "name": name,
+            "value": value,
+            "lineStyle": linestyle_opts,
+            "color": color,
+            "width": width,
+            "type": type_,
+            "dashOffset": dash_offset,
+            "cap": cap,
+            "join": join,
+            "miterLimit": miter_limit,
+            "opacity": opacity,
+        }
+
+
 class PieItem(BasicOpts):
     def __init__(
         self,
         name: Optional[str] = None,
         value: Optional[Numeric] = None,
+        group_id: Optional[str] = None,
         is_selected: bool = False,
         label_opts: Union[LabelOpts, dict, None] = None,
         itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
@@ -1503,6 +1550,7 @@ class PieItem(BasicOpts):
         self.opts: dict = {
             "name": name,
             "value": value,
+            "groupId": group_id,
             "selected": is_selected,
             "label": label_opts,
             "labelLine": label_line_opts,
