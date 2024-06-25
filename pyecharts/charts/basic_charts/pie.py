@@ -53,10 +53,14 @@ class Pie(Chart):
         elif isinstance(data_pair[0], opts.PieItem):
             data = data_pair
         else:
-            data = [{"name": n, "value": v} for n, v in data_pair]
-
-            for a, _ in data_pair:
-                self.options.get("legend")[0].get("data").append(a)
+            if isinstance(data_pair[0], dict):
+                data = data_pair
+                for i in data_pair:
+                    self.options.get("legend")[0].get("data").append(i['name'])
+            else:
+                data = [{"name": n, "value": v} for n, v in data_pair]
+                for a, _ in data_pair:
+                    self.options.get("legend")[0].get("data").append(a)
 
             _dlst = self.options.get("legend")[0].get("data")
             _dset = list(set(_dlst))
