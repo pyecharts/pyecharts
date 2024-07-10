@@ -7,8 +7,7 @@ from jinja2 import Environment
 from ..commons import utils
 from ..globals import CurrentConfig, RenderType, ThemeType
 from ..options import InitOpts, RenderOpts
-from ..options.global_options import AnimationOpts
-from ..options.series_options import BasicOpts
+from ..options.series_options import BasicOpts, AnimationOpts
 from ..render import engine
 from ..types import Optional, Sequence, Union
 from .mixins import ChartMixin
