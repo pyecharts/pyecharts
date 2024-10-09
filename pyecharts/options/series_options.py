@@ -16,6 +16,30 @@ class BasicOpts:
         return self.opts.get(key)
 
 
+class AnimationOpts(BasicOpts):
+    def __init__(
+        self,
+        animation: bool = True,
+        animation_threshold: Numeric = 2000,
+        animation_duration: Union[Numeric, JSFunc] = 1000,
+        animation_easing: Union[str] = "cubicOut",
+        animation_delay: Union[Numeric, JSFunc] = 0,
+        animation_duration_update: Union[Numeric, JSFunc] = 300,
+        animation_easing_update: Union[Numeric] = "cubicOut",
+        animation_delay_update: Union[Numeric, JSFunc] = 0,
+    ):
+        self.opts: dict = {
+            "animation": animation,
+            "animationThreshold": animation_threshold,
+            "animationDuration": animation_duration,
+            "animationEasing": animation_easing,
+            "animationDelay": animation_delay,
+            "animationDurationUpdate": animation_duration_update,
+            "animationEasingUpdate": animation_easing_update,
+            "animationDelayUpdate": animation_delay_update,
+        }
+
+
 class ItemStyleOpts(BasicOpts):
     def __init__(
         self,
@@ -216,6 +240,7 @@ class MarkPointOpts(BasicOpts):
         symbol: Optional[str] = None,
         symbol_size: Union[None, Numeric] = None,
         label_opts: LabelOpts = LabelOpts(position="inside", color="#fff"),
+        animation_opts: Union[AnimationOpts, dict, None] = None,
     ):
         self.opts: dict = {
             "symbol": symbol,
@@ -223,6 +248,9 @@ class MarkPointOpts(BasicOpts):
             "label": label_opts,
             "data": data,
         }
+
+        if animation_opts:
+            self.opts.update(**animation_opts.opts)
 
 
 class MarkLineItem(BasicOpts):
@@ -267,6 +295,7 @@ class MarkLineOpts(BasicOpts):
         precision: int = 2,
         label_opts: LabelOpts = LabelOpts(),
         linestyle_opts: Union[LineStyleOpts, dict, None] = None,
+        animation_opts: Union[AnimationOpts, dict, None] = None,
     ):
         self.opts: dict = {
             "silent": is_silent,
@@ -277,6 +306,9 @@ class MarkLineOpts(BasicOpts):
             "lineStyle": linestyle_opts,
             "data": data,
         }
+
+        if animation_opts:
+            self.opts.update(**animation_opts.opts)
 
 
 class MarkAreaItem(BasicOpts):
@@ -319,6 +351,7 @@ class MarkAreaOpts(BasicOpts):
         label_opts: LabelOpts = LabelOpts(),
         data: Sequence[Union[MarkAreaItem, Sequence, dict]] = None,
         itemstyle_opts: ItemStyleOpts = None,
+        animation_opts: Union[AnimationOpts, dict, None] = None,
     ):
         self.opts: dict = {
             "silent": is_silent,
@@ -326,6 +359,9 @@ class MarkAreaOpts(BasicOpts):
             "data": data,
             "itemStyle": itemstyle_opts,
         }
+
+        if animation_opts:
+            self.opts.update(**animation_opts.opts)
 
 
 class EffectOpts(BasicOpts):

@@ -94,6 +94,7 @@ class Timeline(Base):
         self.options.get("options").append(
             {
                 "backgroundColor": chart.options.get("backgroundColor"),
+                "legend": chart.options.get("legend"),
                 "series": chart.options.get("series"),
                 "xAxis": chart.options.get("xAxis"),
                 "yAxis": chart.options.get("yAxis"),
@@ -136,9 +137,4 @@ class Timeline(Base):
         for component in components:
             c = chart.options.get(component, None)
             if c is not None:
-                # eg: legend in timeline
-                base_option_component = self.options.get("baseOption").get(component)
-                if base_option_component and isinstance(c, Sequence):
-                    base_option_component.extend(c)
-                else:
-                    self.options.get("baseOption").update({component: c})
+                self.options.get("baseOption").update({component: c})
