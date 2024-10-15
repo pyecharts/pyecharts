@@ -41,7 +41,7 @@
 
 * 简洁的 API 设计，使用如丝滑般流畅，支持链式调用
 * 囊括了 30+ 种常见图表，应有尽有
-* 支持主流 Notebook 环境，Jupyter Notebook 和 JupyterLab
+* 支持主流 Notebook 环境，Jupyter Notebook、JupyterLab 和 [marimo](https://github.com/marimo-team/marimo)
 * 可轻松集成至 Flask，Sanic，Django 等主流 Web 框架
 * 高度灵活的配置项，可轻松搭配出精美的图表
 * 详细的文档和示例，帮助开发者更快的上手项目
