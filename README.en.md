@@ -39,7 +39,7 @@
 
 * Simple API, Sleek and method chaining
 * Support 30 + popular charts
-* Suppot data science tools: Jupyter Notebook, JupyterLab, nteract
+* Support data science tools: Jupyter Notebook, JupyterLab, nteract, [marimo](https://github.com/marimo-team/marimo)
 * Integrate with Flask，Django at ease
 * Easy to use and highly configurable
 * Detailed documentation and examples.
