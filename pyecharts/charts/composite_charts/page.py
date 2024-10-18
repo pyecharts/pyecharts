@@ -55,6 +55,7 @@ class Page(CompositeMixin):
         js_host: str = "",
         interval: int = 1,
         is_remove_br: bool = False,
+        is_embed_js: bool = False,
         page_border_color: str = "",
         layout: types.Union[PageLayoutOpts, dict] = PageLayoutOpts(),
     ):
@@ -68,6 +69,9 @@ class Page(CompositeMixin):
         self.js_dependencies = utils.OrderedSet()
         self.download_button: bool = False
         self._charts: list = []
+
+        self.render_options: dict = {"embed_js": is_embed_js}
+        self._render_cache: dict = dict()
 
     def add(self, *charts):
         for c in charts:
@@ -127,6 +131,12 @@ class Page(CompositeMixin):
             )
             self.css_libs = [self.js_host + link for link in ("jquery-ui.css",)]
             self.layout = ""
+
+        self._render_cache.clear()
+        if self.render_options.get("embed_js"):
+            self._render_cache[
+                "javascript"
+            ] = self.load_javascript().load_javascript_contents()
 
     def render(
         self,
