@@ -67,4 +67,5 @@ class TestEngine(unittest.TestCase):
                 from collections import Iterable
                 self.assertTrue(True)  # 如果这里成功导入，测试通过
             except ImportError:
-                self.fail("Failed to import Iterable from both collections.abc and collections")  # 如果两者都失败，则测试不通过
+                # 如果两者都失败，则测试不通过
+                self.fail("Failed to import Iterable")
