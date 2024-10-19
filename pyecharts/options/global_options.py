@@ -862,6 +862,7 @@ class AxisOpts(BasicOpts):
         splitline_opts: Union[SplitLineOpts, dict] = SplitLineOpts(is_show=True),
         minor_tick_opts: Union[MinorTickOpts, dict, None] = None,
         minor_split_line_opts: Union[MinorSplitLineOpts, dict, None] = None,
+        animation_opts: Union[AnimationOpts, dict] = AnimationOpts(),
     ):
         self.opts: dict = {
             "type": type_,
@@ -892,6 +893,9 @@ class AxisOpts(BasicOpts):
             "minorTick": minor_tick_opts,
             "minorSplitLine": minor_split_line_opts,
         }
+
+        if animation_opts:
+            self.opts.update(**animation_opts.opts)
 
 
 class GridOpts(BasicOpts):

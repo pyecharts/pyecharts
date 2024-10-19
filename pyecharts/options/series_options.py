@@ -25,7 +25,7 @@ class AnimationOpts(BasicOpts):
         animation_easing: Union[str] = "cubicOut",
         animation_delay: Union[Numeric, JSFunc] = 0,
         animation_duration_update: Union[Numeric, JSFunc] = 300,
-        animation_easing_update: Union[Numeric] = "cubicOut",
+        animation_easing_update: Union[str] = "cubicOut",
         animation_delay_update: Union[Numeric, JSFunc] = 0,
     ):
         self.opts: dict = {
@@ -142,6 +142,7 @@ class LabelOpts(BasicOpts):
         text_shadow_offset_y: Optional[Numeric] = None,
         overflow: Optional[str] = None,
         rich: Optional[dict] = None,
+        is_value_animation: bool = False,
     ):
         self.opts: dict = {
             "show": is_show,
@@ -173,6 +174,7 @@ class LabelOpts(BasicOpts):
             "textShadowOffsetY": text_shadow_offset_y,
             "overflow": overflow,
             "rich": rich,
+            "valueAnimation": is_value_animation,
         }
 
 

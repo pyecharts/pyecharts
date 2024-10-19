@@ -50,6 +50,7 @@ class TestSeriesOptions(unittest.TestCase):
             "textShadowOffsetY": None,
             "overflow": None,
             "rich": None,
+            "valueAnimation": False,
         }
         self.assertEqual(expected, option.opts)
 
@@ -96,6 +97,7 @@ class TestSeriesOptions(unittest.TestCase):
             "textShadowOffsetY": .3,
             "overflow": None,
             "rich": None,
+            "valueAnimation": False,
         }
         self.assertEqual(expected, option.opts)
 
