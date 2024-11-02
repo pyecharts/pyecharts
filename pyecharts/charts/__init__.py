@@ -1,4 +1,5 @@
 # basic Charts
+from ..charts.basic_charts.amap import AMap
 from ..charts.basic_charts.bar import Bar
 from ..charts.basic_charts.bmap import BMap
 from ..charts.basic_charts.boxplot import Boxplot

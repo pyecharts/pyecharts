@@ -32,6 +32,9 @@ def produce_require_dict(js_dependencies, js_host) -> dict:
         if name.startswith("https://api.map.baidu.com"):
             confs.append("'baidu_map_api{}':'{}'".format(len(name), name))
             libraries.append("'baidu_map_api{}'".format(len(name)))
+        if name.startswith("https://webapi.amap.com"):
+            confs.append("'amap_map_api{}':'{}'".format(len(name), name))
+            libraries.append("'amap_map_api{}'".format(len(name)))
         if name in FILENAMES:
             f, _ = FILENAMES[name]
             confs.append("'{}':'{}{}'".format(name, js_host, f))

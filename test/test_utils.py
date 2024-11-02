@@ -24,6 +24,16 @@ class TestUtils(unittest.TestCase):
         )
         self.assertEqual(cfg_1["libraries"], ["'baidu_map_api25'"])
 
+        cfg_2 = utils.produce_require_dict(
+            utils.OrderedSet("https://webapi.amap.com"),
+            "https://example.com",
+        )
+        self.assertEqual(
+            cfg_2["config_items"],
+            ["'amap_map_api23':'https://webapi.amap.com'"],
+        )
+        self.assertEqual(cfg_2["libraries"], ["'amap_map_api23'"])
+
     def test_utils_produce_require_dict_with_extra(self):
         global EXTRA
         EXTRA["https://api.baidu.com"] = {

@@ -43,11 +43,26 @@
         var option_{{ c.chart_id }} = {{ c.json_contents }};
         chart_{{ c.chart_id }}.setOption(option_{{ c.chart_id }});
         {% if c._is_geo_chart %}
-            var bmap = chart_{{ c.chart_id }}.getModel().getComponent('bmap').getBMap();
-            {% if c.bmap_js_functions %}
-                {% for fn in c.bmap_js_functions.items %}
-                    {{ fn }}
-                {% endfor %}
+            {% if c._coordinate_system == 'bmap' %}
+                var bmap = chart_{{ c.chart_id }}.getModel().getComponent('bmap').getBMap();
+                {% if c.bmap_js_functions %}
+                    {% for fn in c.bmap_js_functions.items %}
+                        {{ fn }}
+                    {% endfor %}
+                {% endif %}
+            {% elif c._coordinate_system == 'amap' %}
+                // Get AMap extension component
+                var amapComponent = chart_{{ c.chart_id }}.getModel().getComponent('amap');
+                // Get the instance of AMap
+                var amap = amapComponent.getAMap();
+                // Add some controls provided by AMap.
+                amap.addControl(new AMap.Scale());
+                amap.addControl(new AMap.ToolBar());
+                {% if c.amap_js_functions %}
+                    {% for fn in c.amap_js_functions.items %}
+                        {{ fn }}
+                    {% endfor %}
+                {% endif %}
             {% endif %}
         {% endif %}
         {% if c.width.endswith('%') %}
@@ -76,8 +91,27 @@
                 var option_{{ c.chart_id }} = {{ c.json_contents }};
                 chart_{{ c.chart_id }}.setOption(option_{{ c.chart_id }});
                 {% if c._is_geo_chart %}
-                    var bmap = chart_{{ c.chart_id }}.getModel().getComponent('bmap').getBMap();
-                    bmap.addControl(new BMap.MapTypeControl());
+                    {% if c._coordinate_system == 'bmap' %}
+                        var bmap = chart_{{ c.chart_id }}.getModel().getComponent('bmap').getBMap();
+                        {% if c.bmap_js_functions %}
+                            {% for fn in c.bmap_js_functions.items %}
+                                {{ fn }}
+                            {% endfor %}
+                        {% endif %}
+                    {% elif c._coordinate_system == 'amap' %}
+                        // Get AMap extension component
+                        var amapComponent = chart_{{ c.chart_id }}.getModel().getComponent('amap');
+                        // Get the instance of AMap
+                        var amap = amapComponent.getAMap();
+                        // Add some controls provided by AMap.
+                        amap.addControl(new AMap.Scale());
+                        amap.addControl(new AMap.ToolBar());
+                        {% if c.amap_js_functions %}
+                            {% for fn in c.amap_js_functions.items %}
+                                {{ fn }}
+                            {% endfor %}
+                        {% endif %}
+                    {% endif %}
                 {% endif %}
                 {% if c.js_events %}
                     {% for fn in c.js_events.items %}
