@@ -2,12 +2,15 @@ import unittest
 
 from pyecharts.commons.utils import remove_key_with_none_value
 from pyecharts.options.series_options import (
+    AnimationOpts,
     LabelOpts,
     ItemStyleOpts,
     MarkPointItem,
     MarkLineItem,
+    MarkLineOpts,
     MarkAreaItem,
     MarkAreaOpts,
+    MarkPointOpts,
     MinorTickOpts,
     MinorSplitLineOpts,
     TreeMapBreadcrumbOpts,
@@ -47,6 +50,7 @@ class TestSeriesOptions(unittest.TestCase):
             "textShadowOffsetY": None,
             "overflow": None,
             "rich": None,
+            "valueAnimation": False,
         }
         self.assertEqual(expected, option.opts)
 
@@ -93,6 +97,7 @@ class TestSeriesOptions(unittest.TestCase):
             "textShadowOffsetY": .3,
             "overflow": None,
             "rich": None,
+            "valueAnimation": False,
         }
         self.assertEqual(expected, option.opts)
 
@@ -174,3 +179,15 @@ class TestSeriesOptions(unittest.TestCase):
     def test_area_color_in_item_styles(self):
         op = ItemStyleOpts(area_color="red")
         self.assertEqual(op.opts["areaColor"], "red")
+
+    def test_mark_point_opts_with_animation(self):
+        op = MarkPointOpts(animation_opts=AnimationOpts(animation=True))
+        self.assertEqual(op.opts["animation"], True)
+
+    def test_mark_line_opts_with_animation(self):
+        op = MarkLineOpts(animation_opts=AnimationOpts(animation=True))
+        self.assertEqual(op.opts["animation"], True)
+
+    def test_mark_area_opts_with_animation(self):
+        op = MarkAreaOpts(animation_opts=AnimationOpts(animation=True))
+        self.assertEqual(op.opts["animation"], True)

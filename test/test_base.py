@@ -6,7 +6,7 @@ from pyecharts.charts import Bar
 from pyecharts.options import InitOpts, RenderOpts
 from pyecharts.globals import CurrentConfig
 from pyecharts.charts.base import Base, default
-from pyecharts.options.global_options import AnimationOpts
+from pyecharts.options.series_options import AnimationOpts
 
 
 class TestBaseClass(unittest.TestCase):

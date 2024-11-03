@@ -1,6 +1,7 @@
 from ..globals import CurrentConfig, RenderType, ThemeType
 from ..options.series_options import (
     BasicOpts,
+    AnimationOpts,
     AreaStyleOpts,
     ItemStyleOpts,
     JSFunc,
@@ -16,30 +17,6 @@ from ..options.series_options import (
     TextStyleOpts,
     Union,
 )
-
-
-class AnimationOpts(BasicOpts):
-    def __init__(
-        self,
-        animation: bool = True,
-        animation_threshold: Numeric = 2000,
-        animation_duration: Union[Numeric, JSFunc] = 1000,
-        animation_easing: Union[str] = "cubicOut",
-        animation_delay: Union[Numeric, JSFunc] = 0,
-        animation_duration_update: Union[Numeric, JSFunc] = 300,
-        animation_easing_update: Union[Numeric] = "cubicOut",
-        animation_delay_update: Union[Numeric, JSFunc] = 0,
-    ):
-        self.opts: dict = {
-            "animation": animation,
-            "animationThreshold": animation_threshold,
-            "animationDuration": animation_duration,
-            "animationEasing": animation_easing,
-            "animationDelay": animation_delay,
-            "animationDurationUpdate": animation_duration_update,
-            "animationEasingUpdate": animation_easing_update,
-            "animationDelayUpdate": animation_delay_update,
-        }
 
 
 class AriaLabelOpts(BasicOpts):
@@ -885,6 +862,7 @@ class AxisOpts(BasicOpts):
         splitline_opts: Union[SplitLineOpts, dict] = SplitLineOpts(is_show=True),
         minor_tick_opts: Union[MinorTickOpts, dict, None] = None,
         minor_split_line_opts: Union[MinorSplitLineOpts, dict, None] = None,
+        animation_opts: Union[AnimationOpts, dict] = AnimationOpts(),
     ):
         self.opts: dict = {
             "type": type_,
@@ -915,6 +893,9 @@ class AxisOpts(BasicOpts):
             "minorTick": minor_tick_opts,
             "minorSplitLine": minor_split_line_opts,
         }
+
+        if animation_opts:
+            self.opts.update(**animation_opts.opts)
 
 
 class GridOpts(BasicOpts):

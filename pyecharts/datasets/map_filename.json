@@ -1,4 +1,5 @@
 {
+  "amap": ["echarts-extension-amap.min", "js"],
   "bulma": ["bulma.min", "css"],
   "jquery": ["jquery.min", "js"],
   "jquery-ui": ["jquery-ui.min", "js"],

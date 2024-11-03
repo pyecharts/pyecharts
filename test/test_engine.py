@@ -55,3 +55,17 @@ class TestEngine(unittest.TestCase):
 
             # importlib.reload(collections.abc)  # 重新加载模块以应用补丁
             assert collections.abc.Iterable.__module__ == "collections.abc"
+
+    def test_iterable_import(self):
+        # 尝试从 collections.abc 导入 Iterable
+        try:
+            from collections.abc import Iterable
+            self.assertTrue(True)  # 如果成功导入，测试通过
+        except ImportError:
+            # 如果从 collections.abc 导入失败，则尝试从 collections 导入
+            try:
+                from collections import Iterable
+                self.assertTrue(True)  # 如果这里成功导入，测试通过
+            except ImportError:
+                # 如果两者都失败，则测试不通过
+                self.fail("Failed to import Iterable")

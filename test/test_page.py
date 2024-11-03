@@ -4,7 +4,7 @@ from typing import Iterable
 
 from pyecharts.charts import Bar, Line, Page
 from pyecharts.commons.utils import OrderedSet
-from pyecharts.globals import ThemeType
+from pyecharts.globals import ThemeType, CurrentConfig
 from pyecharts.components import Table
 from pyecharts import options as opts
 from pyecharts.faker import Faker
@@ -173,3 +173,11 @@ class TestPageComponent(unittest.TestCase):
         with self.assertRaises(ValueError):
             page = Page()
             page.save_resize_html()
+
+    def test_page_with_is_embed_js(self):
+        page = Page(layout=Page.SimplePageLayout, is_embed_js=True)
+        # Embedded JavaScript
+        content = page.render_embed()
+        self.assertNotIn(
+            CurrentConfig.ONLINE_HOST, content, "Embedding JavaScript fails"
+        )
