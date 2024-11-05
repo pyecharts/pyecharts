@@ -1,5 +1,8 @@
 {
   "amap": ["echarts-extension-amap.min", "js"],
+  "lmap": ["echarts-extension-leaflet.min", "js"],
+  "lmap-src": ["leaflet/leaflet", "js"],
+  "lmap-css": ["leaflet/leaflet", "css"],
   "bulma": ["bulma.min", "css"],
   "jquery": ["jquery.min", "js"],
   "jquery-ui": ["jquery-ui.min", "js"],

@@ -1,7 +1,7 @@
 import unittest
 
 from pyecharts import options as opts
-from pyecharts.charts import Geo, AMap, BMap
+from pyecharts.charts import Geo, AMap, BMap, LMap
 from pyecharts.exceptions import NonexistentCoordinatesException
 
 BAIDU_MAP_API_PREFIX = "https://api.map.baidu.com/api?v=2.0"
@@ -53,6 +53,20 @@ class TestException(unittest.TestCase):
                 .add_schema(amap_ak=FAKE_API_KEY, center=[-0.118092, 51.509865])
                 .add(
                     "amap",
+                    [["NonexistentLocation", 123]],
+                    label_opts=opts.LabelOpts(formatter="{b}"),
+                )
+            )
+        except NonexistentCoordinatesException as err:
+            self.assertEqual(type(err), NonexistentCoordinatesException)
+
+    def test_lmap_catch_nonexistent_coord_exception(self):
+        try:
+            (
+                LMap()
+                .add_schema(center=[-0.118092, 51.509865])
+                .add(
+                    "lmap",
                     [["NonexistentLocation", 123]],
                     label_opts=opts.LabelOpts(formatter="{b}"),
                 )
