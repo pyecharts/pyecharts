@@ -63,6 +63,12 @@
                         {{ fn }}
                     {% endfor %}
                 {% endif %}
+            {% elif c._coordinate_system == 'lmap' %}
+                var lmapComponent = chart_{{ c.chart_id }}.getModel().getComponent('lmap');
+                var lmap = lmapComponent.getLeaflet();
+                L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                }).addTo(lmap);
             {% elif c._coordinate_system == 'gmap' %}
                 // Get the instance of Google Map
                 var gmap = chart_{{ c.chart_id }}.getModel().getComponent('gmap').getGoogleMap();
@@ -123,6 +129,12 @@
                                 {{ fn }}
                             {% endfor %}
                         {% endif %}
+                    {% elif c._coordinate_system == 'lmap' %}
+                        var lmapComponent = chart_{{ c.chart_id }}.getModel().getComponent('lmap');
+                        var lmap = lmapComponent.getLeaflet();
+                        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                        }).addTo(lmap);
                     {% elif c._coordinate_system == 'gmap' %}
                         // Get the instance of Google Map
                         var gmap = chart_{{ c.chart_id }}.getModel().getComponent('gmap').getGoogleMap();
@@ -165,7 +177,7 @@
 
 {%- macro render_chart_css(c) -%}
     {% for dep in c.css_libs %}
-        <link rel="stylesheet"  href="{{ dep }}">
+        <link rel="stylesheet" href="{{ dep }}">
     {% endfor %}
 {%- endmacro %}
 

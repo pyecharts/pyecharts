@@ -15,6 +15,7 @@ from ..charts.basic_charts.heatmap import HeatMap
 from ..charts.basic_charts.kline import Kline
 from ..charts.basic_charts.line import Line
 from ..charts.basic_charts.liquid import Liquid
+from ..charts.basic_charts.lmap import LMap
 from ..charts.basic_charts.map import Map
 from ..charts.basic_charts.parallel import Parallel
 from ..charts.basic_charts.pictorialbar import PictorialBar

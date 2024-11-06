@@ -15,7 +15,10 @@ class TestEngine(unittest.TestCase):
             {
                 "https://extra_host.com": {
                     "dep": ("extra_file_path", "extra_ext"),
-                }
+                },
+                "https://extra_host.com/css": {
+                    "dep1": ("extra_file_path", "css"),
+                },
             }
         )
 
@@ -26,6 +29,7 @@ class TestEngine(unittest.TestCase):
             "https://api.map.baidu.com/test",
             "existing_dep",
             "dep",
+            "dep1",
         ]
 
         RenderEngine.generate_js_link(chart)
@@ -38,6 +42,11 @@ class TestEngine(unittest.TestCase):
             "https://extra_host.comextra_file_path.extra_ext",
         ]
         assert chart.dependencies == expected_links
+
+        expected_css_links = [
+            "https://extra_host.com/cssextra_file_path.css",
+        ]
+        assert chart.css_libs == expected_css_links
 
     def test_import_iterable_new_location(self):
         # 在collections.abc不可用的情况下，尝试从collections导入
