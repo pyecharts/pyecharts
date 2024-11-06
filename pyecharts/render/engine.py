@@ -31,22 +31,34 @@ class RenderEngine:
         if not chart.js_host:
             chart.js_host = CurrentConfig.ONLINE_HOST
         links = []
+        css_links = []
         for dep in chart.js_dependencies.items:
             # TODO: if?
             if dep.startswith("https://api.map.baidu.com"):
                 links.append(dep)
             if dep.startswith("https://webapi.amap.com"):
                 links.append(dep)
+            if dep.startswith("https://maps.googleapis.com"):
+                links.append(dep)
             if dep in FILENAMES:
                 f, ext = FILENAMES[dep]
-                links.append("{}{}.{}".format(chart.js_host, f, ext))
+                _link = "{}{}.{}".format(chart.js_host, f, ext)
+                if ext == "css":
+                    css_links.append(_link)
+                else:
+                    links.append(_link)
             else:
                 for url, files in EXTRA.items():
                     if dep in files:
                         f, ext = files[dep]
-                        links.append("{}{}.{}".format(url, f, ext))
+                        _link = "{}{}.{}".format(url, f, ext)
+                        if ext == "css":
+                            css_links.append(_link)
+                        else:
+                            links.append(_link)
                         break
         chart.dependencies = links
+        chart.css_libs = css_links
         return chart
 
     def render_chart_to_file(self, template_name: str, chart: Any, path: str, **kwargs):

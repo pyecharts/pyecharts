@@ -66,6 +66,10 @@ class Base(ChartMixin):
         self.render_options.update(embed_js=bool(_render_opts.get("embed_js")))
         self._render_cache: dict = dict()
 
+    def use_echarts_stat(self):
+        self.js_dependencies.add("echarts-stat")
+        return self
+
     def get_chart_id(self) -> str:
         return self.chart_id
 

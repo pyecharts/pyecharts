@@ -90,3 +90,7 @@ class TestBaseClass(unittest.TestCase):
 
         c1 = Base(init_opts=InitOpts(chart_id="1234567"))
         self.assertEqual(c1.get_chart_id(), "1234567")
+
+    def test_use_echarts_stat(self):
+        c0 = Base().use_echarts_stat()
+        self.assertEqual(c0.js_dependencies.items, ["echarts", "echarts-stat"])
