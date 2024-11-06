@@ -12,6 +12,7 @@
   "echarts-gl": ["echarts-gl.min", "js"],
   "echarts-liquidfill": ["echarts-liquidfill.min", "js"],
   "echarts-wordcloud": ["echarts-wordcloud.min", "js"],
+  "echarts-stat": ["ecStat.min", "js"],
   "bmap": ["bmap.min", "js"],
   "chalk": ["themes/chalk", "js"],
   "essos": ["themes/essos", "js"],
