@@ -73,7 +73,7 @@ class TestException(unittest.TestCase):
             )
         except NonexistentCoordinatesException as err:
             self.assertEqual(type(err), NonexistentCoordinatesException)
-                  
+
     def test_gmap_catch_nonexistent_coord_exception(self):
         try:
             (
