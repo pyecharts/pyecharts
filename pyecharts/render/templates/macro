@@ -63,6 +63,18 @@
                         {{ fn }}
                     {% endfor %}
                 {% endif %}
+            {% elif c._coordinate_system == 'gmap' %}
+                // Get the instance of Google Map
+                var gmap = chart_{{ c.chart_id }}.getModel().getComponent('gmap').getGoogleMap();
+                // Add some markers to map
+                var marker = new google.maps.Marker({ position: gmap.getCenter() });
+                marker.setMap(gmap);
+                // Add TrafficLayer to map
+                {% if c.gmap_js_functions %}
+                    {% for fn in c.gmap_js_functions.items %}
+                        {{ fn }}
+                    {% endfor %}
+                {% endif %}
             {% endif %}
         {% endif %}
         {% if c.width.endswith('%') %}
@@ -108,6 +120,18 @@
                         amap.addControl(new AMap.ToolBar());
                         {% if c.amap_js_functions %}
                             {% for fn in c.amap_js_functions.items %}
+                                {{ fn }}
+                            {% endfor %}
+                        {% endif %}
+                    {% elif c._coordinate_system == 'gmap' %}
+                        // Get the instance of Google Map
+                        var gmap = chart_{{ c.chart_id }}.getModel().getComponent('gmap').getGoogleMap();
+                        // Add some markers to map
+                        var marker = new google.maps.Marker({ position: gmap.getCenter() });
+                        marker.setMap(gmap);
+                        // Add TrafficLayer to map
+                        {% if c.gmap_js_functions %}
+                            {% for fn in c.gmap_js_functions.items %}
                                 {{ fn }}
                             {% endfor %}
                         {% endif %}

@@ -37,6 +37,8 @@ class RenderEngine:
                 links.append(dep)
             if dep.startswith("https://webapi.amap.com"):
                 links.append(dep)
+            if dep.startswith("https://maps.googleapis.com"):
+                links.append(dep)
             if dep in FILENAMES:
                 f, ext = FILENAMES[dep]
                 links.append("{}{}.{}".format(chart.js_host, f, ext))
