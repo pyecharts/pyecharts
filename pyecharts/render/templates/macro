@@ -69,6 +69,18 @@
                 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 }).addTo(lmap);
+            {% elif c._coordinate_system == 'gmap' %}
+                // Get the instance of Google Map
+                var gmap = chart_{{ c.chart_id }}.getModel().getComponent('gmap').getGoogleMap();
+                // Add some markers to map
+                var marker = new google.maps.Marker({ position: gmap.getCenter() });
+                marker.setMap(gmap);
+                // Add TrafficLayer to map
+                {% if c.gmap_js_functions %}
+                    {% for fn in c.gmap_js_functions.items %}
+                        {{ fn }}
+                    {% endfor %}
+                {% endif %}
             {% endif %}
         {% endif %}
         {% if c.width.endswith('%') %}
@@ -123,6 +135,18 @@
                         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                         }).addTo(lmap);
+                    {% elif c._coordinate_system == 'gmap' %}
+                        // Get the instance of Google Map
+                        var gmap = chart_{{ c.chart_id }}.getModel().getComponent('gmap').getGoogleMap();
+                        // Add some markers to map
+                        var marker = new google.maps.Marker({ position: gmap.getCenter() });
+                        marker.setMap(gmap);
+                        // Add TrafficLayer to map
+                        {% if c.gmap_js_functions %}
+                            {% for fn in c.gmap_js_functions.items %}
+                                {{ fn }}
+                            {% endfor %}
+                        {% endif %}
                     {% endif %}
                 {% endif %}
                 {% if c.js_events %}

@@ -3,6 +3,7 @@
   "lmap": ["echarts-extension-leaflet.min", "js"],
   "lmap-src": ["leaflet/leaflet", "js"],
   "lmap-css": ["leaflet/leaflet", "css"],
+  "gmap": ["echarts-extension-gmap.min", "js"],
   "bulma": ["bulma.min", "css"],
   "jquery": ["jquery.min", "js"],
   "jquery-ui": ["jquery-ui.min", "js"],
