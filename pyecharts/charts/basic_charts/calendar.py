@@ -19,7 +19,6 @@ class Calendar(Chart):
         render_opts: types.RenderInit = opts.RenderOpts(),
     ):
         super().__init__(init_opts=init_opts, render_opts=render_opts)
-        self.options.update(calendar=opts.CalendarOpts().opts)
 
     def add(
         self,
@@ -37,7 +36,11 @@ class Calendar(Chart):
         **other_calendar_opts,
     ):
         if calendar_opts:
-            self.options.update(calendar=calendar_opts)
+            if self.options.get("calendar"):
+                self.options.get("calendar").append(calendar_opts)
+            else:
+                self.options.update(calendar=[calendar_opts])
+
         if visualmap_opts:
             self.options.update(visualMap=visualmap_opts)
 
