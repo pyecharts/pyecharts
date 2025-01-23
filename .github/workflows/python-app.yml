@@ -17,7 +17,7 @@ jobs:
             os: ubuntu-latest
         include: # So run those legacy versions on Intel CPUs.
           - python-version: "3.7"
-            os: macos-13,
+            os: macos-13
           - python-version: "3.7"
             os: ubuntu-22.04
     runs-on: ${{ matrix.os }}
