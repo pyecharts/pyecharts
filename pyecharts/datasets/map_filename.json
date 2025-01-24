@@ -1,5 +1,9 @@
 {
   "amap": ["echarts-extension-amap.min", "js"],
+  "lmap": ["echarts-extension-leaflet.min", "js"],
+  "lmap-src": ["leaflet/leaflet", "js"],
+  "lmap-css": ["leaflet/leaflet", "css"],
+  "gmap": ["echarts-extension-gmap.min", "js"],
   "bulma": ["bulma.min", "css"],
   "jquery": ["jquery.min", "js"],
   "jquery-ui": ["jquery-ui.min", "js"],
@@ -8,6 +12,7 @@
   "echarts-gl": ["echarts-gl.min", "js"],
   "echarts-liquidfill": ["echarts-liquidfill.min", "js"],
   "echarts-wordcloud": ["echarts-wordcloud.min", "js"],
+  "echarts-stat": ["ecStat.min", "js"],
   "bmap": ["bmap.min", "js"],
   "chalk": ["themes/chalk", "js"],
   "essos": ["themes/essos", "js"],

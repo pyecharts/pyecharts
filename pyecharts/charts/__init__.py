@@ -9,11 +9,13 @@ from ..charts.basic_charts.effectscatter import EffectScatter
 from ..charts.basic_charts.funnel import Funnel
 from ..charts.basic_charts.gauge import Gauge
 from ..charts.basic_charts.geo import Geo
+from ..charts.basic_charts.gmap import GMap
 from ..charts.basic_charts.graph import Graph
 from ..charts.basic_charts.heatmap import HeatMap
 from ..charts.basic_charts.kline import Kline
 from ..charts.basic_charts.line import Line
 from ..charts.basic_charts.liquid import Liquid
+from ..charts.basic_charts.lmap import LMap
 from ..charts.basic_charts.map import Map
 from ..charts.basic_charts.parallel import Parallel
 from ..charts.basic_charts.pictorialbar import PictorialBar
