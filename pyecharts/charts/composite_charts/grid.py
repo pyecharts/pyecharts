@@ -35,7 +35,6 @@ class Grid(Base):
     ):
         if self.options is None:
             self.options = copy.deepcopy(chart.options)
-            self.chart_id = chart.chart_id
             self.options.update(grid=[], title=[])
             if self.theme != ThemeType.WHITE:
                 self.options.update(color=[])
