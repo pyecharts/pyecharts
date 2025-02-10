@@ -8,6 +8,15 @@ from pyecharts.faker import Faker
 
 
 class TestGridComponent(unittest.TestCase):
+    def _verify_instance_for_datazoom_and_visualmap(self, chart, key):
+        return isinstance(
+            chart.options.get(key), list
+        ) and all(
+            isinstance(
+                item, (opts.DataZoomOpts if key == "dataZoom" else opts.VisualMapOpts, dict)
+            ) for item in chart.options.get(key)
+        )
+
     def _chart_for_grid(self) -> Bar:
         x_data = ["{}月".format(i) for i in range(1, 13)]
         bar = (
@@ -49,7 +58,7 @@ class TestGridComponent(unittest.TestCase):
         bar.overlap(line)
         return bar
 
-    def _chart_for_grid_with_datazoom(self) -> Bar:
+    def _chart_for_grid_with_datazoom_and_visualmap(self) -> Bar:
         bar_1 = (
             Bar()
             .add_xaxis(Faker.days_attrs)
@@ -57,6 +66,28 @@ class TestGridComponent(unittest.TestCase):
             .set_global_opts(
                 title_opts=opts.TitleOpts(title="Bar-DataZoom"),
                 datazoom_opts=opts.DataZoomOpts(),
+                visualmap_opts=opts.VisualMapOpts(),
+                toolbox_opts=opts.ToolboxOpts(
+                    feature=opts.ToolBoxFeatureOpts(
+                        save_as_image=opts.ToolBoxFeatureSaveAsImageOpts(
+                            exclude_components=["dataZoom", "toolbox"],
+                        )
+                    ),
+                ),
+                legend_opts=opts.LegendOpts(),
+            )
+        )
+        return bar_1
+
+    def _chart_for_grid_with_multiple_datazoom_and_visualmap(self) -> Bar:
+        bar_1 = (
+            Bar()
+            .add_xaxis(Faker.days_attrs)
+            .add_yaxis("商家", Faker.days_values)
+            .set_global_opts(
+                title_opts=opts.TitleOpts(title="Bar-DataZoom"),
+                datazoom_opts=[opts.DataZoomOpts(), opts.DataZoomOpts()],
+                visualmap_opts=[opts.VisualMapOpts(), opts.VisualMapOpts()],
                 toolbox_opts=opts.ToolboxOpts(
                     feature=opts.ToolBoxFeatureOpts(
                         save_as_image=opts.ToolBoxFeatureSaveAsImageOpts(
@@ -87,29 +118,70 @@ class TestGridComponent(unittest.TestCase):
         for idx, series in enumerate(gc.options.get("series")):
             self.assertEqual(series.get("yAxisIndex"), expected_idx[idx])
 
-    def test_grid_with_more_datazoom_opts(self):
-        bar_1 = self._chart_for_grid_with_datazoom()
-        bar_2 = self._chart_for_grid_with_datazoom()
+    def test_grid_with_more_datazoom_and_visualmap_opts(self):
+        bar_1 = self._chart_for_grid_with_datazoom_and_visualmap()
+        bar_2 = self._chart_for_grid_with_datazoom_and_visualmap()
         grid_1 = (
             Grid()
             .add(chart=bar_1, grid_opts=opts.GridOpts())
             .add(chart=bar_2, grid_opts=opts.GridOpts())
         )
-        expected_datazoom_opts_len = 2
+        expected_opts_len = 2
         self.assertEqual(
-            len(grid_1.options.get("dataZoom")), expected_datazoom_opts_len
+            len(grid_1.options.get("dataZoom")), expected_opts_len
+        )
+        self.assertEqual(
+            len(grid_1.options.get("visualMap")), expected_opts_len
+        )
+        self.assertEqual(
+            self._verify_instance_for_datazoom_and_visualmap(grid_1, "dataZoom"), True
+        )
+        self.assertEqual(
+            self._verify_instance_for_datazoom_and_visualmap(grid_1, "visualMap"), True
         )
 
         bar_3 = self._chart_for_grid()
-        bar_4 = self._chart_for_grid_with_datazoom()
+        bar_4 = self._chart_for_grid_with_datazoom_and_visualmap()
         grid_2 = (
             Grid()
             .add(chart=bar_3, grid_opts=opts.GridOpts())
             .add(chart=bar_4, grid_opts=opts.GridOpts())
         )
-        expected_datazoom_opts_len = 1
+        expected_opts_len = 1
         self.assertEqual(
-            len(grid_2.options.get("dataZoom")), expected_datazoom_opts_len
+            len(grid_2.options.get("dataZoom")), expected_opts_len
+        )
+        self.assertEqual(
+            len(grid_2.options.get("visualMap")), expected_opts_len
+        )
+        self.assertEqual(
+            self._verify_instance_for_datazoom_and_visualmap(grid_2, "dataZoom"), True
+        )
+        self.assertEqual(
+            self._verify_instance_for_datazoom_and_visualmap(grid_2, "visualMap"), True
+        )
+
+        bar_5 = self._chart_for_grid_with_multiple_datazoom_and_visualmap()
+        bar_6 = self._chart_for_grid_with_datazoom_and_visualmap()
+        bar_7 = self._chart_for_grid()
+        grid_3 = (
+            Grid()
+            .add(chart=bar_5, grid_opts=opts.GridOpts())
+            .add(chart=bar_6, grid_opts=opts.GridOpts())
+            .add(chart=bar_7, grid_opts=opts.GridOpts())
+        )
+        expected_opts_len = 3
+        self.assertEqual(
+            len(grid_3.options.get("dataZoom")), expected_opts_len
+        )
+        self.assertEqual(
+            len(grid_3.options.get("visualMap")), expected_opts_len
+        )
+        self.assertEqual(
+            self._verify_instance_for_datazoom_and_visualmap(grid_3, "dataZoom"), True
+        )
+        self.assertEqual(
+            self._verify_instance_for_datazoom_and_visualmap(grid_3, "visualMap"), True
         )
 
     @patch("pyecharts.render.engine.write_utf8_html_file")
