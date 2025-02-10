@@ -1,5 +1,7 @@
 import copy
 
+from annotated_types.test_cases import cases
+
 from ... import options as opts
 from ... import types
 from ...globals import ThemeType
@@ -47,6 +49,10 @@ class Grid(Base):
                 for s in self.options.get("series"):
                     s.update(xAxisIndex=self._axis_index, yAxisIndex=self._axis_index)
 
+        # 如果是第一个添加的图表，则初始化 dataZoom 和 visualMap 配置
+        if not self._grow_grid_index:
+            self.options.update({"dataZoom": None, "visualMap": None})
+
         # visualMap 配置添加
         visual_map = chart.options.get("visualMap")
         if visual_map is not None:
@@ -54,9 +60,13 @@ class Grid(Base):
                 self.options.update(visualMap=[self.options.get("visualMap")])
             else:
                 if self.options.get("visualMap") is None:
-                    self.options.update(visualMap=[visual_map])
+                    self.options.update(
+                        visualMap=[visual_map] if not isinstance(visual_map, list) else visual_map
+                    )
                 else:
-                    self.options.get("visualMap").extend([visual_map])
+                    self.options.get("visualMap").extend(
+                        [visual_map] if not isinstance(visual_map, list) else visual_map
+                    )
 
         # dataZoom 配置添加
         data_zoom = chart.options.get("dataZoom")
@@ -65,9 +75,13 @@ class Grid(Base):
                 self.options.update(dataZoom=[self.options.get("dataZoom")])
             else:
                 if self.options.get("dataZoom") is None:
-                    self.options.update(dataZoom=[data_zoom])
+                    self.options.update(
+                        dataZoom=[data_zoom] if not isinstance(data_zoom, list) else data_zoom
+                    )
                 else:
-                    self.options.get("dataZoom").extend([data_zoom])
+                    self.options.get("dataZoom").extend(
+                        [data_zoom] if not isinstance(data_zoom, list) else data_zoom
+                    )
 
         # title 配置添加
         title = chart.options.get("title", opts.TitleOpts().opts)
