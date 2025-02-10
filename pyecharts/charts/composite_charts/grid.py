@@ -1,7 +1,5 @@
 import copy
 
-from annotated_types.test_cases import cases
-
 from ... import options as opts
 from ... import types
 from ...globals import ThemeType
