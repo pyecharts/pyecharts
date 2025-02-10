@@ -13,7 +13,7 @@ class TestGridComponent(unittest.TestCase):
             chart.options.get(key), list
         ) and all(
             isinstance(
-                item, 
+                item,
                 (opts.DataZoomOpts if key == "dataZoom" else opts.VisualMapOpts, dict)
             ) for item in chart.options.get(key)
         )
