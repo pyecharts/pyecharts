@@ -58,11 +58,13 @@ class Grid(Base):
             else:
                 if self.options.get("visualMap") is None:
                     self.options.update(
-                        visualMap=[visual_map] if not isinstance(visual_map, list) else visual_map
+                        visualMap=[visual_map] if not isinstance(visual_map, list)
+                        else visual_map
                     )
                 else:
                     self.options.get("visualMap").extend(
-                        [visual_map] if not isinstance(visual_map, list) else visual_map
+                        [visual_map] if not isinstance(visual_map, list)
+                        else visual_map
                     )
 
         # dataZoom 配置添加
@@ -73,11 +75,13 @@ class Grid(Base):
             else:
                 if self.options.get("dataZoom") is None:
                     self.options.update(
-                        dataZoom=[data_zoom] if not isinstance(data_zoom, list) else data_zoom
+                        dataZoom=[data_zoom] if not isinstance(data_zoom, list)
+                        else data_zoom
                     )
                 else:
                     self.options.get("dataZoom").extend(
-                        [data_zoom] if not isinstance(data_zoom, list) else data_zoom
+                        [data_zoom] if not isinstance(data_zoom, list)
+                        else data_zoom
                     )
 
         # title 配置添加
