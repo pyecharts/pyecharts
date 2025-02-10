@@ -42,13 +42,12 @@ class Grid(Base):
             # Priority Order: Grid > Other Chart
             self.options.update(backgroundColor=self.bg_color)
 
+            # 如果是第一个添加的图表，则初始化 dataZoom 和 visualMap 配置
+            self.options.update({"dataZoom": None, "visualMap": None})
+
             if not is_control_axis_index:
                 for s in self.options.get("series"):
                     s.update(xAxisIndex=self._axis_index, yAxisIndex=self._axis_index)
-
-        # 如果是第一个添加的图表，则初始化 dataZoom 和 visualMap 配置
-        if not self._grow_grid_index:
-            self.options.update({"dataZoom": None, "visualMap": None})
 
         # visualMap 配置添加
         visual_map = chart.options.get("visualMap")
