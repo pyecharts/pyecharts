@@ -42,6 +42,9 @@ class Grid(Base):
             # Priority Order: Grid > Other Chart
             self.options.update(backgroundColor=self.bg_color)
 
+            # 如果是第一个添加的图表，则初始化 dataZoom 和 visualMap 配置
+            self.options.update({"dataZoom": None, "visualMap": None})
+
             if not is_control_axis_index:
                 for s in self.options.get("series"):
                     s.update(xAxisIndex=self._axis_index, yAxisIndex=self._axis_index)
@@ -49,24 +52,30 @@ class Grid(Base):
         # visualMap 配置添加
         visual_map = chart.options.get("visualMap")
         if visual_map is not None:
-            if isinstance(self.options.get("visualMap"), opts.VisualMapOpts):
-                self.options.update(visualMap=[self.options.get("visualMap")])
+            if self.options.get("visualMap") is None:
+                self.options.update(
+                    visualMap=[visual_map] if not isinstance(visual_map, list)
+                    else visual_map
+                )
             else:
-                if self.options.get("visualMap") is None:
-                    self.options.update(visualMap=[visual_map])
-                else:
-                    self.options.get("visualMap").extend([visual_map])
+                self.options.get("visualMap").extend(
+                    [visual_map] if not isinstance(visual_map, list)
+                    else visual_map
+                )
 
         # dataZoom 配置添加
         data_zoom = chart.options.get("dataZoom")
         if data_zoom is not None:
-            if isinstance(self.options.get("dataZoom"), opts.DataZoomOpts):
-                self.options.update(dataZoom=[self.options.get("dataZoom")])
+            if self.options.get("dataZoom") is None:
+                self.options.update(
+                    dataZoom=[data_zoom] if not isinstance(data_zoom, list)
+                    else data_zoom
+                )
             else:
-                if self.options.get("dataZoom") is None:
-                    self.options.update(dataZoom=[data_zoom])
-                else:
-                    self.options.get("dataZoom").extend([data_zoom])
+                self.options.get("dataZoom").extend(
+                    [data_zoom] if not isinstance(data_zoom, list)
+                    else data_zoom
+                )
 
         # title 配置添加
         title = chart.options.get("title", opts.TitleOpts().opts)
