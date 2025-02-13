@@ -59,6 +59,18 @@ class TestGridComponent(unittest.TestCase):
         bar.overlap(line)
         return bar
 
+    def _chart_for_set_grid_index(self, gird_index=None) -> Bar:
+        bar = (
+            Bar()
+            .add_xaxis(Faker.choose())
+            .add_yaxis("商家A", Faker.values())
+            .set_global_opts(
+                xaxis_opts=opts.AxisOpts(grid_index=gird_index),
+                yaxis_opts=opts.AxisOpts(grid_index=gird_index)
+            )
+        )
+        return bar
+
     def _chart_for_grid_with_datazoom_and_visualmap(self) -> Bar:
         bar_1 = (
             Bar()
@@ -100,6 +112,74 @@ class TestGridComponent(unittest.TestCase):
             )
         )
         return bar_1
+
+    def test_grid_set_grid_index(self):
+        bar_1 = self._chart_for_set_grid_index()
+        bar_2 = self._chart_for_set_grid_index()
+        bar_3 = self._chart_for_set_grid_index()
+        gc = (
+            Grid()
+            .add(chart=bar_1, grid_index=1, grid_opts=opts.GridOpts())
+            .add(chart=bar_2, grid_index=0, grid_opts=opts.GridOpts())
+            .add(chart=bar_3, grid_index=2, grid_opts=opts.GridOpts())
+        )
+        expected_idx = (1, 0, 2)
+        for idx, series in enumerate(gc.options.get("xAxis")):
+            self.assertEqual(series.get("gridIndex"), expected_idx[idx])
+
+        bar_1 = self._chart_for_set_grid_index()
+        bar_2 = self._chart_for_set_grid_index()
+        bar_3 = self._chart_for_set_grid_index()
+        gc = (
+            Grid()
+            .add(chart=bar_1, grid_index=0, grid_opts=opts.GridOpts())
+            .add(chart=bar_2, grid_index=2, grid_opts=opts.GridOpts())
+            .add(chart=bar_3, grid_index=1, grid_opts=opts.GridOpts())
+        )
+        expected_idx = (0, 2, 1)
+        for idx, series in enumerate(gc.options.get("xAxis")):
+            self.assertEqual(series.get("gridIndex"), expected_idx[idx])
+
+    def test_grid_set_grid_index_priority(self):
+        bar_1 = self._chart_for_set_grid_index(gird_index=2)
+        bar_2 = self._chart_for_set_grid_index(gird_index=0)
+        bar_3 = self._chart_for_set_grid_index(gird_index=1)
+        gc = (
+            Grid()
+            .add(chart=bar_1, grid_index=1, grid_opts=opts.GridOpts())
+            .add(chart=bar_2, grid_index=2, grid_opts=opts.GridOpts())
+            .add(chart=bar_3, grid_index=0, grid_opts=opts.GridOpts())
+        )
+        expected_idx = (2, 0, 1)
+        for idx, series in enumerate(gc.options.get("xAxis")):
+            self.assertEqual(series.get("gridIndex"), expected_idx[idx])
+
+        bar_1 = self._chart_for_set_grid_index(gird_index=0)
+        bar_2 = self._chart_for_set_grid_index(gird_index=2)
+        bar_3 = self._chart_for_set_grid_index(gird_index=1)
+        gc = (
+            Grid()
+            .add(chart=bar_1, grid_index=2, grid_opts=opts.GridOpts())
+            .add(chart=bar_2, grid_index=1, grid_opts=opts.GridOpts())
+            .add(chart=bar_3, grid_index=0, grid_opts=opts.GridOpts())
+        )
+        expected_idx = (0, 2, 1)
+        for idx, series in enumerate(gc.options.get("xAxis")):
+            self.assertEqual(series.get("gridIndex"), expected_idx[idx])
+
+    def test_grid_set_grid_out_of_order(self):
+        bar_1 = self._chart_for_set_grid_index(gird_index=2)
+        bar_2 = self._chart_for_set_grid_index(gird_index=0)
+        bar_3 = self._chart_for_set_grid_index(gird_index=1)
+        gc = (
+            Grid()
+            .add(chart=bar_2, grid_index=1, grid_opts=opts.GridOpts())
+            .add(chart=bar_3, grid_index=2, grid_opts=opts.GridOpts())
+            .add(chart=bar_1, grid_index=0, grid_opts=opts.GridOpts())
+        )
+        expected_idx = (0, 1, 2)
+        for idx, series in enumerate(gc.options.get("xAxis")):
+            self.assertEqual(series.get("gridIndex"), expected_idx[idx])
 
     def test_grid_control_axis_index(self):
         bar = self._chart_for_grid()
