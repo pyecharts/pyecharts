@@ -1,4 +1,5 @@
 import copy
+from typing import Optional
 
 from ... import options as opts
 from ... import types
@@ -30,7 +31,7 @@ class Grid(Base):
         chart: Chart,
         grid_opts: types.Union[opts.GridOpts, dict],
         *,
-        grid_index: int = 0,
+        grid_index: Optional[int] = None,
         is_control_axis_index: bool = False,
     ):
         if self.options is None:
@@ -96,13 +97,19 @@ class Grid(Base):
             self.options.update(geo=chart.options.get("geo"))
 
         if isinstance(chart, RectChart):
-            if grid_index == 0:
+            if grid_index is None:
                 grid_index = self._grow_grid_index
 
-            for x in chart.options.get("xAxis"):
-                x.update(gridIndex=grid_index)
-            for y in chart.options.get("yAxis"):
-                y.update(gridIndex=grid_index)
+            if self._grow_grid_index == 0:
+                for x in self.options.get("xAxis"):
+                    x.update(gridIndex=grid_index) if x.get("gridIndex") is None else ...
+                for y in self.options.get("yAxis"):
+                    y.update(gridIndex=grid_index) if y.get("gridIndex") is None else ...
+            else:
+                for x in chart.options.get("xAxis"):
+                    x.update(gridIndex=grid_index) if x.get("gridIndex") is None else ...
+                for y in chart.options.get("yAxis"):
+                    y.update(gridIndex=grid_index) if y.get("gridIndex") is None else ...
             self._grow_grid_index += 1
 
         if self._axis_index > 0:
