@@ -136,7 +136,7 @@ class TestGridComponent(unittest.TestCase):
             .add(chart=bar_2, grid_index=2, grid_opts=opts.GridOpts())
             .add(chart=bar_3, grid_index=1, grid_opts=opts.GridOpts())
         )
-        expected_idx = (1, 0, 2)
+        expected_idx = (0, 2, 1)
         for idx, series in enumerate(gc.options.get("xAxis")):
             self.assertEqual(series.get("gridIndex"), expected_idx[idx])
 
