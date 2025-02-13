@@ -140,6 +140,7 @@ class LabelOpts(BasicOpts):
         text_shadow_blur: Optional[Numeric] = None,
         text_shadow_offset_x: Optional[Numeric] = None,
         text_shadow_offset_y: Optional[Numeric] = None,
+        offset: Optional[Sequence[Numeric]] = None,
         overflow: Optional[str] = None,
         rich: Optional[dict] = None,
         is_value_animation: bool = False,
@@ -218,7 +219,11 @@ class MarkPointItem(BasicOpts):
         value: Optional[Numeric] = None,
         symbol: Optional[str] = None,
         symbol_size: Union[Numeric, Sequence, None] = None,
+        symbol_rotate: Optional[Numeric] = None,
+        symbol_keep_aspect: bool = None,
+        symbol_offset: Optional[Sequence] = None,
         itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
+        label_opts: Optional[LabelOpts] = None,
     ):
         self.opts: dict = {
             "name": name,
@@ -231,7 +236,11 @@ class MarkPointItem(BasicOpts):
             "value": value,
             "symbol": symbol,
             "symbolSize": symbol_size,
+            "symbolRotate": symbol_rotate,
+            "symbolKeepAspect": symbol_keep_aspect,
+            "symbolOffset": symbol_offset,
             "itemStyle": itemstyle_opts,
+            "label": label_opts,
         }
 
 
@@ -241,13 +250,23 @@ class MarkPointOpts(BasicOpts):
         data: Sequence[Union[MarkPointItem, dict]] = None,
         symbol: Optional[str] = None,
         symbol_size: Union[None, Numeric] = None,
-        label_opts: LabelOpts = LabelOpts(position="inside", color="#fff"),
+        symbol_rotate: Optional[Numeric] = None,
+        symbol_keep_aspect: bool = None,
+        symbol_offset: Optional[Sequence] = None,
+        silent: bool = None,
+        label_opts: Optional[LabelOpts] = None,
+        itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
         animation_opts: Union[AnimationOpts, dict, None] = None,
     ):
         self.opts: dict = {
             "symbol": symbol,
             "symbolSize": symbol_size,
+            "symbolRotate": symbol_rotate,
+            "symbolKeepAspect": symbol_keep_aspect,
+            "symbolOffset": symbol_offset,
+            "silent": silent,
             "label": label_opts,
+            "itemStyle": itemstyle_opts,
             "data": data,
         }
 

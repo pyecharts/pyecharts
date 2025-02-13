@@ -22,9 +22,15 @@ class Table(ChartMixin):
         self._component_type: str = "table"
         self.chart_id: str = uuid.uuid4().hex
 
-    def add(self, headers: Sequence, rows: Sequence, attributes: Optional[dict] = None):
+    def add(
+        self,
+        headers: Sequence,
+        rows: Sequence,
+        attributes: Optional[dict] = None,
+        **kwargs,
+    ):
         attributes = attributes or {"class": "fl-table"}
-        table = PrettyTable(headers, attributes=attributes)
+        table = PrettyTable(headers, attributes=attributes, **kwargs)
         for r in rows:
             table.add_row(r)
         self.html_content = table.get_html_string()
