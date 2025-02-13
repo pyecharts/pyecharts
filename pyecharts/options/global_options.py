@@ -844,7 +844,7 @@ class AxisOpts(BasicOpts):
         name_gap: Numeric = 15,
         name_rotate: Optional[Numeric] = None,
         interval: Optional[Numeric] = None,
-        grid_index: Numeric = 0,
+        grid_index: Optional[Numeric] = None,
         position: Optional[str] = None,
         offset: Numeric = 0,
         split_number: Numeric = 5,

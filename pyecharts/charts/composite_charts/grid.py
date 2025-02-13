@@ -100,10 +100,16 @@ class Grid(Base):
             if grid_index is None:
                 grid_index = self._grow_grid_index
 
-            for x in chart.options.get("xAxis"):
-                x.update(gridIndex=grid_index)
-            for y in chart.options.get("yAxis"):
-                y.update(gridIndex=grid_index)
+            if self._grow_grid_index == 0:
+                for x in self.options.get("xAxis"):
+                    x.update(gridIndex=grid_index) if x.get("gridIndex") is None else ...
+                for y in self.options.get("yAxis"):
+                    y.update(gridIndex=grid_index) if y.get("gridIndex") is None else ...
+            else:
+                for x in chart.options.get("xAxis"):
+                    x.update(gridIndex=grid_index) if x.get("gridIndex") is None else ...
+                for y in chart.options.get("yAxis"):
+                    y.update(gridIndex=grid_index) if y.get("gridIndex") is None else ...
             self._grow_grid_index += 1
 
         if self._axis_index > 0:
