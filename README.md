@@ -23,7 +23,7 @@
     <a href="https://pypi.org/project/pyecharts">
         <img src="https://img.shields.io/pypi/format/pyecharts.svg" alt="PyPI - Format">
     </a>
-     <a href="https://github.com/pyecharts/pyecharts/pulls">
+    <a href="https://github.com/pyecharts/pyecharts/pulls">
         <img src="https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat" alt="Contributions welcome">
     </a>
     <a href="https://opensource.org/licenses/MIT">
@@ -36,6 +36,10 @@
 ## 📣 简介
 
 [Apache ECharts](https://github.com/apache/echarts) 是一个由百度开源的数据可视化，凭借着良好的交互性，精巧的图表设计，得到了众多开发者的认可。而 Python 是一门富有表达力的语言，很适合用于数据处理。当数据分析遇上数据可视化时，[pyecharts](https://github.com/pyecharts/pyecharts) 诞生了。
+
+* **`pyecharts like` 的可视化项目**
+  * [py-vchart](https://github.com/VisActor/py-vchart)
+  * [py-antv](https://github.com/sunhailin-Leo/pyantv)
 
 ## ✨ 特性
 
