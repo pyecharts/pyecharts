@@ -58,7 +58,10 @@ class RenderEngine:
                             links.append(_link)
                         break
         chart.dependencies = links
-        chart.css_libs = chart.css_libs + css_links
+        if hasattr(chart, "css_libs"):
+            chart.css_libs = chart.css_libs + css_links
+        else:
+            chart.css_libs = css_links
         return chart
 
     def render_chart_to_file(self, template_name: str, chart: Any, path: str, **kwargs):
