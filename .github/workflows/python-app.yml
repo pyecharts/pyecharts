@@ -34,7 +34,7 @@ jobs:
         pip install -r test/requirements.txt
     - name: Run unit test
       run: |
-        python setup.py install
+        pip install
         python test.py
     - name: Codecov
       run: |
