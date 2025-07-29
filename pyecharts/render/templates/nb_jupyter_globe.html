@@ -20,7 +20,7 @@
         var mapOption_{{ c.chart_id }} = {{ c.json_contents }};
         mapChart_{{ c.chart_id }}.setOption(mapOption_{{ c.chart_id }});
     	var chart_{{ c.chart_id }} = echarts.init(
-            document.getElementById('{{ c.chart_id }}'), '{{ c.theme }}', {renderer: '{{ c.renderer }}'});
+            document.getElementById('{{ c.chart_id }}'), '{{ c.theme }}', {renderer: '{{ c.renderer }}', locale: '{{ c.locale }}'});
         {% for js in c.js_functions.items %}
             {{ js }}
         {% endfor %}
