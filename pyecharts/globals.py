@@ -9,6 +9,9 @@ class _RenderType:
     CANVAS: str = "canvas"
     SVG: str = "svg"
 
+class _Locale:
+    EN: str = "EN"
+    ZH: str = "ZH"
 
 class _FileType:
     SVG: str = "svg"
@@ -137,6 +140,7 @@ class _RenderSepType:
 
 
 RenderType = _RenderType()
+Locale = _Locale()
 FileType = _FileType()
 SymbolType = _SymbolType()
 ChartType = _ChartType
@@ -152,6 +156,7 @@ class _CurrentConfig:
     PAGE_TITLE = "Awesome-pyecharts"
     ONLINE_HOST = OnlineHostType.DEFAULT_HOST
     NOTEBOOK_TYPE = NotebookType.JUPYTER_NOTEBOOK
+    LOCALE = Locale.ZH
     GLOBAL_ENV = Environment(
         keep_trailing_newline=True,
         trim_blocks=True,

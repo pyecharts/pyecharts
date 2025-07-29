@@ -40,6 +40,7 @@ class Base(ChartMixin):
             else ""
         )
         self.renderer = _opts.get("renderer", RenderType.CANVAS)
+        self.locale = CurrentConfig.LOCALE
         self.page_title = _opts.get("page_title", CurrentConfig.PAGE_TITLE)
         self.theme = _opts.get("theme", ThemeType.WHITE)
         self.chart_id = _opts.get("chart_id") or uuid.uuid4().hex

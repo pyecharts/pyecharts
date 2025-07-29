@@ -165,7 +165,6 @@ class RenderOpts(BasicOpts):
             "embed_js": is_embed_js,
         }
 
-
 class ToolBoxFeatureSaveAsImageOpts(BasicOpts):
     def __init__(
         self,
@@ -175,7 +174,7 @@ class ToolBoxFeatureSaveAsImageOpts(BasicOpts):
         connected_background_color: str = "#fff",
         exclude_components: Optional[Sequence[str]] = None,
         is_show: bool = True,
-        title: str = "保存为图片",
+        title: Optional[str] = None,
         icon: Optional[JSFunc] = None,
         pixel_ratio: Numeric = 1,
     ):
@@ -194,7 +193,7 @@ class ToolBoxFeatureSaveAsImageOpts(BasicOpts):
 
 class ToolBoxFeatureRestoreOpts(BasicOpts):
     def __init__(
-        self, is_show: bool = True, title: str = "还原", icon: Optional[JSFunc] = None
+        self, is_show: bool = True, title: Optional[str] = None, icon: Optional[JSFunc] = None
     ):
         self.opts: dict = {"show": is_show, "title": title, "icon": icon}
 
@@ -203,7 +202,7 @@ class ToolBoxFeatureDataViewOpts(BasicOpts):
     def __init__(
         self,
         is_show: bool = True,
-        title: str = "数据视图",
+        title: Optional[str] = None,
         icon: Optional[JSFunc] = None,
         is_read_only: bool = False,
         option_to_content: Optional[JSFunc] = None,
@@ -216,9 +215,6 @@ class ToolBoxFeatureDataViewOpts(BasicOpts):
         button_color: str = "#c23531",
         button_text_color: str = "#fff",
     ):
-        if lang is None:
-            lang = ["数据视图", "关闭", "刷新"]
-
         self.opts: dict = {
             "show": is_show,
             "title": title,
@@ -240,8 +236,8 @@ class ToolBoxFeatureDataZoomOpts(BasicOpts):
     def __init__(
         self,
         is_show: bool = True,
-        zoom_title: str = "区域缩放",
-        back_title: str = "区域缩放还原",
+        zoom_title: Optional[str] = None,
+        back_title: Optional[str] = None,
         zoom_icon: Optional[JSFunc] = None,
         back_icon: Optional[JSFunc] = None,
         xaxis_index: Union[Numeric, Sequence, bool] = None,
@@ -263,10 +259,10 @@ class ToolBoxFeatureMagicTypeOpts(BasicOpts):
         self,
         is_show: bool = True,
         type_: Optional[Sequence] = None,
-        line_title: str = "切换为折线图",
-        bar_title: str = "切换为柱状图",
-        stack_title: str = "切换为堆叠",
-        tiled_title: str = "切换为平铺",
+        line_title: Optional[str] = None,
+        bar_title: Optional[str] = None,
+        stack_title: Optional[str] = None,
+        tiled_title: Optional[str] = None,
         line_icon: Optional[JSFunc] = None,
         bar_icon: Optional[JSFunc] = None,
         stack_icon: Optional[JSFunc] = None,
@@ -303,12 +299,12 @@ class ToolBoxFeatureBrushOpts(BasicOpts):
         line_y_icon: Optional[JSFunc] = None,
         keep_icon: Optional[JSFunc] = None,
         clear_icon: Optional[JSFunc] = None,
-        rect_title: str = "矩形选择",
-        polygon_title: str = "圈选",
-        line_x_title: str = "横向选择",
-        line_y_title: str = "纵向选择",
-        keep_title: str = "保持选择",
-        clear_title: str = "清除选择",
+        rect_title: Optional[str] = None,
+        polygon_title: Optional[str] = None,
+        line_x_title: Optional[str] = None,
+        line_y_title: Optional[str] = None,
+        keep_title: Optional[str] = None,
+        clear_title: Optional[str] = None,
     ):
         self.opts: dict = {
             "type": type_,
