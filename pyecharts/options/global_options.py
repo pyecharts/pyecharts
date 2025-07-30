@@ -165,6 +165,7 @@ class RenderOpts(BasicOpts):
             "embed_js": is_embed_js,
         }
 
+
 class ToolBoxFeatureSaveAsImageOpts(BasicOpts):
     def __init__(
         self,
@@ -193,7 +194,10 @@ class ToolBoxFeatureSaveAsImageOpts(BasicOpts):
 
 class ToolBoxFeatureRestoreOpts(BasicOpts):
     def __init__(
-        self, is_show: bool = True, title: Optional[str] = None, icon: Optional[JSFunc] = None
+        self,
+        is_show: bool = True,
+        title: Optional[str] = None,
+        icon: Optional[JSFunc] = None
     ):
         self.opts: dict = {"show": is_show, "title": title, "icon": icon}
 
