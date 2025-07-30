@@ -111,3 +111,15 @@ class TestBaseClass(unittest.TestCase):
         CurrentConfig.LOCALE = "wrong_locale"
         c0 = Base()
         self.assertEqual(c0.locale, Locale.ZH)
+
+    @patch("pyecharts.render.engine.write_utf8_html_file")
+    def test_locale_renders_in_html(self, fake_writer):
+        CurrentConfig.LOCALE = Locale.ZH
+        c = (
+            Bar()
+            .add_xaxis(["A", "B", "C"])
+            .add_yaxis("series0", [1, 2, 4])
+        )
+        c.render()
+        _, content = fake_writer.call_args[0]
+        self.assertIn("locale: 'ZH'", content)
