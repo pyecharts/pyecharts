@@ -36,7 +36,7 @@
             document.getElementById('{{ c.chart_id }}').style.width = document.getElementById('{{ c.chart_id }}').parentNode.clientWidth + 'px';
         {% endif %}
         var chart_{{ c.chart_id }} = echarts.init(
-            document.getElementById('{{ c.chart_id }}'), '{{ c.theme }}', {renderer: '{{ c.renderer }}'});
+            document.getElementById('{{ c.chart_id }}'), '{{ c.theme }}', {renderer: '{{ c.renderer }}', locale: '{{ c.locale }}'});
         {% for js in c.js_functions.items %}
             {{ js }}
         {% endfor %}
@@ -102,7 +102,7 @@
         {% for c in charts %}
             {% if c._component_type not in ("table", "image") %}
                 var chart_{{ c.chart_id }} = echarts.init(
-                    document.getElementById('{{ c.chart_id }}'), '{{ c.theme }}', {renderer: '{{ c.renderer }}'});
+                    document.getElementById('{{ c.chart_id }}'), '{{ c.theme }}', {renderer: '{{ c.renderer }}', locale: '{{ c.locale }}'});
                 {% for js in c.js_functions.items %}
                     {{ js }}
                 {% endfor %}

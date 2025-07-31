@@ -19,7 +19,7 @@
         mapChart_{{ chart.chart_id }}.setOption(mapOption_{{ chart.chart_id }});
 
 		var chart_{{ chart.chart_id }} = echarts.init(
-        document.getElementById('{{ chart.chart_id }}'), '{{ chart.theme }}', {renderer: '{{ chart.renderer }}'});
+        document.getElementById('{{ chart.chart_id }}'), '{{ chart.theme }}', {renderer: '{{ chart.renderer }}', locale: '{{ chart.locale }}'});
 		var options_{{ chart.chart_id }} = {
            "globe": {
            "show": true,
