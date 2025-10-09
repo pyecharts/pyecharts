@@ -4,7 +4,7 @@ from unittest.mock import patch
 
 from pyecharts.charts import Bar
 from pyecharts.options import InitOpts, RenderOpts
-from pyecharts.globals import CurrentConfig
+from pyecharts.globals import CurrentConfig, Locale
 from pyecharts.charts.base import Base, default
 from pyecharts.options.series_options import AnimationOpts
 
@@ -94,3 +94,32 @@ class TestBaseClass(unittest.TestCase):
     def test_use_echarts_stat(self):
         c0 = Base().use_echarts_stat()
         self.assertEqual(c0.js_dependencies.items, ["echarts", "echarts-stat"])
+
+    def test_default_locale_zh(self):
+        # Default locale should be Chinese
+        c0 = Base()
+        self.assertEqual(c0.locale, Locale.ZH)
+
+    def test_set_locale_en(self):
+        # Set to English locale
+        CurrentConfig.LOCALE = Locale.EN
+        c0 = Base()
+        self.assertEqual(c0.locale, Locale.EN)
+
+    def test_set_locale_wrong(self):
+        # Set to a wrong locale, should fallback to default
+        CurrentConfig.LOCALE = "wrong_locale"
+        c0 = Base()
+        self.assertEqual(c0.locale, Locale.ZH)
+
+    @patch("pyecharts.render.engine.write_utf8_html_file")
+    def test_locale_renders_in_html(self, fake_writer):
+        CurrentConfig.LOCALE = Locale.ZH
+        c = (
+            Bar()
+            .add_xaxis(["A", "B", "C"])
+            .add_yaxis("series0", [1, 2, 4])
+        )
+        c.render()
+        _, content = fake_writer.call_args[0]
+        self.assertIn("locale: 'ZH'", content)
