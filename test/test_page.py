@@ -53,7 +53,7 @@ class TestPageComponent(unittest.TestCase):
         bar = _create_bar()
         line = _create_line()
         page = Page().add(bar, line)
-        self.assertEqual(page.js_host, "https://assets.pyecharts.org/assets/v5/")
+        self.assertEqual(page.js_host, "https://assets.pyecharts.org/assets/v6/")
 
     def test_page_jshost_custom(self):
         from pyecharts.globals import CurrentConfig
@@ -85,7 +85,7 @@ class TestPageComponent(unittest.TestCase):
         content = Page().add(bar, line).load_javascript()
         self.assertEqual("", content.data)
         self.assertEqual(
-            ["https://assets.pyecharts.org/assets/v5/echarts.min.js"], content.lib
+            ["https://assets.pyecharts.org/assets/v6/echarts.min.js"], content.lib
         )
 
     def _get_new_page(self, unique: bool = True) -> Page:

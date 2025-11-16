@@ -4,6 +4,7 @@ from typing import Optional
 from ... import options as opts
 from ... import types
 from ...globals import ThemeType
+from ..basic_charts.geo import GeoChartBase
 from ..basic_charts.radar import Radar
 from ..chart import Base, Chart, RectChart
 
@@ -94,7 +95,11 @@ class Grid(Base):
             self.js_dependencies.add(dep)
 
         if chart.options.get("geo") is not None:
-            self.options.update(geo=chart.options.get("geo"))
+            _grid_geo_option = self.options.get("geo")
+            if _grid_geo_option is None or isinstance(_grid_geo_option, dict):
+                self.options.update(geo=[chart.options.get("geo")])
+            else:
+                _grid_geo_option.append(chart.options.get("geo"))
 
         if isinstance(chart, RectChart):
             if grid_index is None:

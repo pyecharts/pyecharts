@@ -7,12 +7,25 @@ from pyecharts.options.global_options import (
     AngleAxisOpts,
     AriaLabelOpts,
     AriaDecalOpts,
+    AxisBreakOpts,
+    AxisBreakAreaOpts,
+    AxisBreakLabelLayoutOpts,
     AxisTickOpts,
     BlurOpts,
     CalendarYearLabelOpts,
     DatasetTransformOpts,
     Emphasis3DOpts,
+    GridOuterOpts,
     InitOpts,
+    MatrixDividerLineStyleOpts,
+    MatrixAxisDataOpts,
+    MatrixAxisOpts,
+    MatrixBodyDataOpts,
+    MatrixBodyOrCornerOpts,
+    MatrixBackgroundStyleOpts,
+    MatrixOpts,
+    ThumbnailWindowStyleOpts,
+    ThumbnailOpts,
     ParallelAxisOpts,
     RadiusAxisItem,
     RadiusAxisOpts,
@@ -236,6 +249,7 @@ class TestGlobalOptions(unittest.TestCase):
             "selectorPosition": "auto",
             "selectorItemGap": 7,
             "selectorButtonGap": 10,
+            "triggerEvent": False,
         }
         self.assertEqual(expected, remove_key_with_none_value(option.opts))
 
@@ -260,6 +274,16 @@ class TestGlobalOptions(unittest.TestCase):
         }
         self.assertEqual(expected, remove_key_with_none_value(option.opts))
 
+    def test_visual_map_continuous_options(self):
+        option = VisualMapOpts(
+            type_="continuous",
+            range_color=["red", "yellow"]
+        )
+        self.assertEqual(
+            option.opts.get("inRange").get("color"),
+            ["red", "yellow"],
+        )
+
     def test_tool_tip_options_remove_none(self):
         option = TooltipOpts(textstyle_opts=None)
         expected = {
@@ -267,16 +291,17 @@ class TestGlobalOptions(unittest.TestCase):
             "axisPointer": {"type": "line"},
             "borderWidth": 0,
             "hideDelay": 100,
+            "confine": False,
+            "displayTransition": True,
+            "enterable": False,
+            'order': 'seriesAsc',
             "padding": 5,
             "show": True,
             "showContent": True,
             "showDelay": 0,
             "trigger": "item",
-            "enterable": False,
-            "confine": False,
             "appendToBody": False,
             "transitionDuration": 0.4,
-            "order": "seriesAsc",
             "triggerOn": "mousemove|click",
         }
         self.assertEqual(expected, remove_key_with_none_value(option.opts))
@@ -371,4 +396,108 @@ class TestGlobalOptions(unittest.TestCase):
     def test_select_opts_remove_none(self):
         option = SelectOpts()
         expected = {}
+        self.assertEqual(expected, remove_key_with_none_value(option.opts))
+
+    def test_axis_break_opts_remove_none(self):
+        option = AxisBreakOpts()
+        expected = {}
+        self.assertEqual(expected, remove_key_with_none_value(option.opts))
+
+    def test_axis_break_area_opts_remove_none(self):
+        option = AxisBreakAreaOpts()
+        expected = {}
+        self.assertEqual(expected, remove_key_with_none_value(option.opts))
+
+    def test_axis_break_label_layout_opts_remove_none(self):
+        option = AxisBreakLabelLayoutOpts()
+        expected = {}
+        self.assertEqual(expected, remove_key_with_none_value(option.opts))
+
+    def test_grid_outer_opts_remove_none(self):
+        option = GridOuterOpts()
+        expected = {}
+        self.assertEqual(expected, remove_key_with_none_value(option.opts))
+
+    def test_matrix_divider_line_style_opts_remove_none(self):
+        option = MatrixDividerLineStyleOpts()
+        expected = {
+            "color": "#aaa",
+            "width": 1,
+            "type": "solid",
+            "dashOffset": 0,
+            "cap": "butt",
+            "join": "bevel",
+            "miterLimit": 10,
+            "opacity": 1,
+        }
+        self.assertEqual(expected, remove_key_with_none_value(option.opts))
+
+    def test_matrix_axis_data_opts_remove_none(self):
+        option = MatrixAxisDataOpts()
+        expected = {}
+        self.assertEqual(expected, remove_key_with_none_value(option.opts))
+
+    def test_matrix_axis_opts_remove_none(self):
+        option = MatrixAxisOpts()
+        expected = {
+            "show": True,
+            "silent": False,
+        }
+        self.assertEqual(expected, remove_key_with_none_value(option.opts))
+
+    def test_matrix_body_data_opts_remove_none(self):
+        option = MatrixBodyDataOpts()
+        expected = {}
+        self.assertEqual(expected, remove_key_with_none_value(option.opts))
+
+    def test_matrix_body_or_corner_opts_remove_none(self):
+        option = MatrixBodyOrCornerOpts()
+        expected = {"silent": False}
+        self.assertEqual(expected, remove_key_with_none_value(option.opts))
+
+    def test_matrix_background_style_opts_remove_none(self):
+        option = MatrixBackgroundStyleOpts()
+        expected = {
+            "borderColor": "#ccc",
+            "borderWidth": 1,
+            "borderType": "solid",
+            "borderRadius": 0,
+            "borderCap": "butt",
+            "borderJoin": "bevel",
+            "borderMiterLimit": 10,
+            "shadowOffsetX": 0,
+            "shadowOffsetY": 0,
+            "opacity": 1,
+        }
+        self.assertEqual(expected, remove_key_with_none_value(option.opts))
+
+    def test_matrix_opts_remove_none(self):
+        option = MatrixOpts()
+        expected = {"zlevel": 0, "z": 2}
+        self.assertEqual(expected, remove_key_with_none_value(option.opts))
+
+    def test_thumbnail_window_style_opts_remove_none(self):
+        option = ThumbnailWindowStyleOpts()
+        expected = {
+            "color": "#9ea0a5",
+            "borderColor": "#b7b9be",
+            "borderWidth": 1,
+            "borderType": "solid",
+            "borderDashOffset": 0,
+            "borderCap": "butt",
+            "borderJoin": "bevel",
+            "borderMiterLimit": 10,
+            "shadowOffsetX": 0,
+            "shadowOffsetY": 0,
+            "opacity": 0.3,
+        }
+        self.assertEqual(expected, remove_key_with_none_value(option.opts))
+
+    def test_thumbnail_opts_remove_none(self):
+        option = ThumbnailOpts()
+        expected = {
+            "show": True,
+            "zlevel": 0,
+            "z": 2,
+        }
         self.assertEqual(expected, remove_key_with_none_value(option.opts))

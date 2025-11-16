@@ -46,8 +46,16 @@ class TestMapChart(unittest.TestCase):
         )
         options = json.loads(c.dump_options())
         expected = {
-            "label": {"show": False, "margin": 8, "valueAnimation": False},
-            "itemStyle": {"borderColor": "white", "areaColor": "red"},
+            "label": {
+                "show": False,
+                "richInheritPlainLabel": True,
+                "margin": 8,
+                "valueAnimation": False,
+            },
+            "itemStyle": {
+                "borderColor": "white",
+                "areaColor": "red",
+            },
         }
         self.assertEqual(expected, options["series"][0]["emphasis"])
 

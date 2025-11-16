@@ -16,13 +16,6 @@ class Chart(Base):
             temp_opts.update(**init_opts)
             init_opts = temp_opts
         super().__init__(init_opts=init_opts, render_opts=render_opts)
-        # Change to Echarts V5 default color list
-        self.colors = (
-            "#5470c6 #91cc75 #fac858 #ee6666 #73c0de #3ba272 #fc8452 #9a60b4 " "#ea7ccc"
-        ).split()
-        self.default_color_n = len(self.colors)
-        if init_opts.opts.get("theme") == ThemeType.WHITE:
-            self.options.update(color=self.colors)
         self.options.update(
             series=[],
             legend=[{"data": [], "selected": dict()}],
@@ -112,12 +105,10 @@ class Chart(Base):
 
     def _append_color(self, color: Optional[str]):
         if color:
-            # 这是一个bug
-            # 添加轴（执行add_yaxis操作）的顺序与新添加的color值（设置color属性）未一一对应，正好颠倒
-            self.colors.insert(-self.default_color_n, color)
-            # self.colors = [color] + self.colors
-            if self.theme == ThemeType.WHITE:
-                self.options.update(color=self.colors)
+            if self.options.get("color"):
+                self.options.get("color").append(color)
+            else:
+                self.options.update(color=[color])
 
     def set_global_opts(
         self,
@@ -132,11 +123,14 @@ class Chart(Base):
         datazoom_opts: types.DataZoom = None,
         graphic_opts: types.Graphic = None,
         axispointer_opts: types.AxisPointer = None,
+        matrix_opts: types.Matrix = None,
+        thumbnail_opts: types.Thumbnail = None,
     ):
         if tooltip_opts is None:
             tooltip_opts = opts.TooltipOpts(
                 formatter=ToolTipFormatterType.get(self._chart_type, None)
             )
+
         self.options.update(
             title=title_opts,
             toolbox=toolbox_opts,
@@ -145,6 +139,8 @@ class Chart(Base):
             dataZoom=datazoom_opts,
             graphic=graphic_opts,
             axisPointer=axispointer_opts,
+            matrix=matrix_opts,
+            thumbnail=thumbnail_opts,
         )
 
         if brush_opts is not None:
@@ -253,8 +249,13 @@ class RectChart(Chart):
             )
         self.options.get("series").extend(chart.options.get("series"))
         # to merge colors of chart
-        for c in chart.colors[: len(chart.colors) - self.default_color_n]:
-            self.colors.insert(len(self.colors) - self.default_color_n, c)
+        chart_colors = chart.options.get("color")
+        if self.options.get("color") is None:
+            if chart_colors:
+                self.options.update(color=chart_colors)
+        else:
+            if chart_colors:
+                self.options.get("color").extend(chart_colors)
         return self
 
 

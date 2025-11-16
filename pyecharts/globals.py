@@ -34,6 +34,7 @@ class _ChartType:
     BAR: str = "bar"
     BAR3D: str = "bar3D"
     BOXPLOT: str = "boxplot"
+    CHORD: str = "chord"
     EFFECT_SCATTER: str = "effectScatter"
     FUNNEL: str = "funnel"
     FLOWGL: str = "flowGL"
@@ -67,6 +68,13 @@ class _ChartType:
     TREEMAP: str = "treemap"
     WORDCLOUD: str = "wordCloud"
     CUSTOM: str = "custom"
+    # below chart types are Echarts 6 new custom chart
+    VIOLIN: str = "violin"
+    STAGE: str = "stage"
+    DOUGHNUT: str = "segmentedDoughnut"
+    CONTOUR: str = "contour"
+    BAR_RANGE: str = "barRange"
+    LINE_RANGE: str = "lineRange"
 
 
 ToolTipFormatterType = {
@@ -133,7 +141,7 @@ class _NotebookType:
 
 
 class _OnlineHost:
-    DEFAULT_HOST = "https://assets.pyecharts.org/assets/v5/"
+    DEFAULT_HOST = "https://assets.pyecharts.org/assets/v6/"
     NOTEBOOK_HOST = "http://localhost:8888/nbextensions/assets/"
 
 

@@ -166,6 +166,60 @@ class RenderOpts(BasicOpts):
         }
 
 
+class TooltipOpts(BasicOpts):
+    def __init__(
+        self,
+        is_show: bool = True,
+        trigger: str = "item",
+        trigger_on: str = "mousemove|click",
+        axis_pointer_type: str = "line",
+        is_show_content: bool = True,
+        is_always_show_content: bool = False,
+        show_delay: Numeric = 0,
+        hide_delay: Numeric = 100,
+        is_enterable: bool = False,
+        is_confine: bool = False,
+        is_append_to_body: bool = False,
+        transition_duration: Numeric = 0.4,
+        is_display_transition: bool = True,
+        position: Union[str, Sequence, JSFunc] = None,
+        formatter: Optional[JSFunc] = None,
+        value_formatter: Optional[JSFunc] = None,
+        background_color: Optional[str] = None,
+        border_color: Optional[str] = None,
+        border_width: Numeric = 0,
+        padding: Union[Numeric, Sequence[Numeric]] = 5,
+        textstyle_opts: Optional[TextStyleOpts] = TextStyleOpts(font_size=14),
+        extra_css_text: Optional[str] = None,
+        order: str = "seriesAsc",
+    ):
+        self.opts: dict = {
+            "show": is_show,
+            "trigger": trigger,
+            "triggerOn": trigger_on,
+            "axisPointer": {"type": axis_pointer_type},
+            "showContent": is_show_content,
+            "alwaysShowContent": is_always_show_content,
+            "showDelay": show_delay,
+            "hideDelay": hide_delay,
+            "enterable": is_enterable,
+            "confine": is_confine,
+            "appendToBody": is_append_to_body,
+            "transitionDuration": transition_duration,
+            "displayTransition": is_display_transition,
+            "position": position,
+            "formatter": formatter,
+            "valueFormatter": value_formatter,
+            "textStyle": textstyle_opts,
+            "backgroundColor": background_color,
+            "borderColor": border_color,
+            "borderWidth": border_width,
+            "padding": padding,
+            "extraCssText": extra_css_text,
+            "order": order,
+        }
+
+
 class ToolBoxFeatureSaveAsImageOpts(BasicOpts):
     def __init__(
         self,
@@ -371,6 +425,18 @@ class ToolboxOpts(BasicOpts):
         pos_top: Optional[str] = None,
         pos_bottom: Optional[str] = None,
         feature: Union[ToolBoxFeatureOpts, dict] = ToolBoxFeatureOpts(),
+        z_level: Optional[Numeric] = None,
+        z: Optional[Numeric] = None,
+        width: Optional[str] = None,
+        height: Optional[str] = None,
+        coordinate_system: Optional[str] = None,
+        coordinate_system_usage: Optional[str] = None,
+        coord: Optional[Union[Sequence, Numeric, str]] = None,
+        calendar_index: Optional[Numeric] = None,
+        calendar_id: Optional[Numeric] = None,
+        matrix_index: Optional[Numeric] = None,
+        matrix_id: Optional[Numeric] = None,
+        tooltip_opts: Union[TooltipOpts, dict, None] = None,
     ):
         self.opts: dict = {
             "show": is_show,
@@ -382,6 +448,18 @@ class ToolboxOpts(BasicOpts):
             "top": pos_top,
             "bottom": pos_bottom,
             "feature": feature,
+            "zlevel": z_level,
+            "z": z,
+            "width": width,
+            "height": height,
+            "coordinateSystem": coordinate_system,
+            "coordinateSystemUsage": coordinate_system_usage,
+            "coord": coord,
+            "calendarIndex": calendar_index,
+            "calendarId": calendar_id,
+            "matrixIndex": matrix_index,
+            "matrixId": matrix_id,
+            "tooltip": tooltip_opts,
         }
 
 
@@ -445,10 +523,17 @@ class TitleOpts(BasicOpts):
         subtitle: Optional[str] = None,
         subtitle_link: Optional[str] = None,
         subtitle_target: Optional[str] = "blank",
-        pos_left: Optional[str] = None,
-        pos_right: Optional[str] = None,
-        pos_top: Optional[str] = None,
-        pos_bottom: Optional[str] = None,
+        pos_left: Union[str, Numeric] = None,
+        pos_right: Union[str, Numeric] = None,
+        pos_top: Union[str, Numeric] = None,
+        pos_bottom: Union[str, Numeric] = None,
+        coordinate_system: Optional[str] = None,
+        coordinate_system_usage: Optional[str] = None,
+        coord: Optional[Union[Sequence, Numeric, str]] = None,
+        calendar_index: Optional[Numeric] = None,
+        calendar_id: Optional[Numeric] = None,
+        matrix_index: Optional[Numeric] = None,
+        matrix_id: Optional[Numeric] = None,
         padding: Union[Sequence, Numeric] = 5,
         item_gap: Numeric = 10,
         text_align: str = "auto",
@@ -470,6 +555,13 @@ class TitleOpts(BasicOpts):
                 "right": pos_right,
                 "top": pos_top,
                 "bottom": pos_bottom,
+                "coordinateSystem": coordinate_system,
+                "coordinateSystemUsage": coordinate_system_usage,
+                "coord": coord,
+                "calendarIndex": calendar_index,
+                "calendarId": calendar_id,
+                "matrixIndex": matrix_index,
+                "matrixId": matrix_id,
                 "padding": padding,
                 "itemGap": item_gap,
                 "textAlign": text_align,
@@ -506,15 +598,24 @@ class DataZoomOpts(BasicOpts):
         is_zoom_lock: bool = False,
         throttle: Optional[int] = None,
         range_mode: Optional[Sequence] = None,
-        pos_left: Optional[str] = None,
-        pos_right: Optional[str] = None,
-        pos_top: Optional[str] = None,
-        pos_bottom: Optional[str] = None,
+        pos_left: Union[Numeric, str] = None,
+        pos_right: Union[Numeric, str] = None,
+        pos_top: Union[Numeric, str] = None,
+        pos_bottom: Union[Numeric, str] = None,
+        width: Union[Numeric, str] = None,
+        height: Union[Numeric, str] = None,
         filter_mode: str = "filter",
         is_zoom_on_mouse_wheel: bool = True,
         is_move_on_mouse_move: bool = True,
         is_move_on_mouse_wheel: bool = True,
         is_prevent_default_mouse_move: bool = True,
+        coordinate_system: Optional[str] = None,
+        coordinate_system_usage: Optional[str] = None,
+        coord: Optional[Union[Sequence, Numeric, str]] = None,
+        calendar_index: Optional[Numeric] = None,
+        calendar_id: Optional[Numeric] = None,
+        matrix_index: Optional[Numeric] = None,
+        matrix_id: Optional[Numeric] = None,
     ):
         self.opts: dict = {
             "show": is_show,
@@ -543,6 +644,13 @@ class DataZoomOpts(BasicOpts):
             "top": pos_top,
             "bottom": pos_bottom,
             "filterMode": filter_mode,
+            "coordinateSystem": coordinate_system,
+            "coordinateSystemUsage": coordinate_system_usage,
+            "coord": coord,
+            "calendarIndex": calendar_index,
+            "calendarId": calendar_id,
+            "matrixIndex": matrix_index,
+            "matrixId": matrix_id,
         }
 
         # inside have some different configurations.
@@ -553,6 +661,20 @@ class DataZoomOpts(BasicOpts):
                 "moveOnMouseMove": is_move_on_mouse_move,
                 "moveOnMouseWheel": is_move_on_mouse_wheel,
                 "preventDefaultMouseMove": is_prevent_default_mouse_move,
+            })
+
+        # slider have some different configurations.
+        if type_ == "slider":
+            self.opts.update({
+                "coordinateSystem": coordinate_system,
+                "coordinateSystemUsage": coordinate_system_usage,
+                "coord": coord,
+                "calendarIndex": calendar_index,
+                "calendarId": calendar_id,
+                "matrixIndex": matrix_index,
+                "matrixId": matrix_id,
+                "width": width,
+                "height": height,
             })
 
 
@@ -567,6 +689,15 @@ class LegendOpts(BasicOpts):
         pos_right: Union[str, Numeric, None] = None,
         pos_top: Union[str, Numeric, None] = None,
         pos_bottom: Union[str, Numeric, None] = None,
+        width: Union[str, Numeric, None] = None,
+        height: Union[str, Numeric, None] = None,
+        coordinate_system: Optional[str] = None,
+        coordinate_system_usage: Optional[str] = None,
+        coord: Optional[Union[Sequence, Numeric, str]] = None,
+        calendar_index: Optional[Numeric] = None,
+        calendar_id: Optional[Numeric] = None,
+        matrix_index: Optional[Numeric] = None,
+        matrix_id: Optional[Numeric] = None,
         orient: Optional[str] = None,
         align: Optional[str] = None,
         padding: int = 5,
@@ -591,9 +722,11 @@ class LegendOpts(BasicOpts):
         is_page_animation: Optional[bool] = None,
         page_animation_duration_update: int = 800,
         selector: Union[bool, Sequence] = False,
+        selector_label: Union[LabelOpts, dict, None] = None,
         selector_position: str = "auto",
         selector_item_gap: int = 7,
         selector_button_gap: int = 10,
+        is_trigger_event: bool = False,
     ):
         self.opts: dict = {
             "type": type_,
@@ -604,6 +737,15 @@ class LegendOpts(BasicOpts):
             "right": pos_right,
             "top": pos_top,
             "bottom": pos_bottom,
+            "width": width,
+            "height": height,
+            "coordinateSystem": coordinate_system,
+            "coordinateSystemUsage": coordinate_system_usage,
+            "coord": coord,
+            "calendarIndex": calendar_index,
+            "calendarId": calendar_id,
+            "matrixIndex": matrix_index,
+            "matrixId": matrix_id,
             "orient": orient,
             "align": align,
             "padding": padding,
@@ -628,9 +770,11 @@ class LegendOpts(BasicOpts):
             "animation": is_page_animation,
             "animationDurationUpdate": page_animation_duration_update,
             "selector": selector,
+            "selectorLabel": selector_label,
             "selectorPosition": selector_position,
             "selectorItemGap": selector_item_gap,
             "selectorButtonGap": selector_button_gap,
+            "triggerEvent": is_trigger_event,
         }
 
 
@@ -647,10 +791,10 @@ class VisualMapOpts(BasicOpts):
         range_size: Optional[Sequence[int]] = None,
         range_opacity: Union[Numeric, Sequence[Numeric]] = None,
         orient: str = "vertical",
-        pos_left: Optional[str] = None,
-        pos_right: Optional[str] = None,
-        pos_top: Optional[str] = None,
-        pos_bottom: Optional[str] = None,
+        pos_left: Union[str, Numeric] = None,
+        pos_right: Union[str, Numeric] = None,
+        pos_top: Union[str, Numeric] = None,
+        pos_bottom: Union[str, Numeric] = None,
         padding: Union[int, Sequence[int]] = 5,
         split_number: int = 5,
         series_index: Union[Numeric, Sequence, None] = None,
@@ -661,12 +805,20 @@ class VisualMapOpts(BasicOpts):
         is_inverse: bool = False,
         precision: Optional[int] = None,
         pieces: Optional[Sequence] = None,
+        categories: Optional[Sequence] = None,
         out_of_range: Optional[dict] = None,
         item_width: int = 0,
         item_height: int = 0,
         background_color: Optional[str] = None,
         border_color: Optional[str] = None,
         border_width: int = 0,
+        coordinate_system: Optional[str] = None,
+        coordinate_system_usage: Optional[str] = None,
+        coord: Optional[Union[Sequence, Numeric, str]] = None,
+        calendar_index: Optional[Numeric] = None,
+        calendar_id: Optional[Numeric] = None,
+        matrix_index: Optional[Numeric] = None,
+        matrix_id: Optional[Numeric] = None,
         textstyle_opts: Union[TextStyleOpts, dict, None] = None,
     ):
         _inrange_op: dict = {}
@@ -680,6 +832,14 @@ class VisualMapOpts(BasicOpts):
             _inrange_op.update(opacity=range_opacity)
 
         _visual_typ = "piecewise" if is_piecewise else "continuous"
+        if type_ in ["piecewise", "continuous"] and (
+            range_color or range_size or range_opacity,
+        ):
+            _inrange_op.update(
+                color=range_color,
+                symbolSize=range_size,
+                opacity=range_opacity,
+            )
 
         if is_piecewise and item_width == 0 and item_height == 0:
             item_width, item_height = 20, 14
@@ -694,7 +854,7 @@ class VisualMapOpts(BasicOpts):
             "text": range_text,
             "textStyle": textstyle_opts,
             "range": range_,
-            "inRange": _inrange_op,
+            "inRange": _inrange_op if _inrange_op else None,
             "calculable": is_calculable,
             "inverse": is_inverse,
             "precision": precision,
@@ -715,61 +875,16 @@ class VisualMapOpts(BasicOpts):
             "backgroundColor": background_color,
             "borderColor": border_color,
             "borderWidth": border_width,
+            "coordinateSystem": coordinate_system,
+            "coordinateSystemUsage": coordinate_system_usage,
+            "coord": coord,
+            "calendarIndex": calendar_index,
+            "calendarId": calendar_id,
+            "matrixIndex": matrix_index,
+            "matrixId": matrix_id,
         }
         if is_piecewise:
-            self.opts.update(pieces=pieces)
-
-
-class TooltipOpts(BasicOpts):
-    def __init__(
-        self,
-        is_show: bool = True,
-        trigger: str = "item",
-        trigger_on: str = "mousemove|click",
-        axis_pointer_type: str = "line",
-        is_show_content: bool = True,
-        is_always_show_content: bool = False,
-        show_delay: Numeric = 0,
-        hide_delay: Numeric = 100,
-        is_enterable: bool = False,
-        is_confine: bool = False,
-        is_append_to_body: bool = False,
-        transition_duration: Numeric = 0.4,
-        position: Union[str, Sequence, JSFunc] = None,
-        formatter: Optional[JSFunc] = None,
-        value_formatter: Optional[JSFunc] = None,
-        background_color: Optional[str] = None,
-        border_color: Optional[str] = None,
-        border_width: Numeric = 0,
-        padding: Numeric = 5,
-        textstyle_opts: Optional[TextStyleOpts] = TextStyleOpts(font_size=14),
-        extra_css_text: Optional[str] = None,
-        order: str = "seriesAsc",
-    ):
-        self.opts: dict = {
-            "show": is_show,
-            "trigger": trigger,
-            "triggerOn": trigger_on,
-            "axisPointer": {"type": axis_pointer_type},
-            "showContent": is_show_content,
-            "alwaysShowContent": is_always_show_content,
-            "showDelay": show_delay,
-            "hideDelay": hide_delay,
-            "enterable": is_enterable,
-            "confine": is_confine,
-            "appendToBody": is_append_to_body,
-            "transitionDuration": transition_duration,
-            "position": position,
-            "formatter": formatter,
-            "valueFormatter": value_formatter,
-            "textStyle": textstyle_opts,
-            "backgroundColor": background_color,
-            "borderColor": border_color,
-            "borderWidth": border_width,
-            "padding": padding,
-            "extraCssText": extra_css_text,
-            "order": order,
-        }
+            self.opts.update(pieces=pieces, categories=categories)
 
 
 class AxisLineOpts(BasicOpts):
@@ -832,6 +947,54 @@ class AxisPointerOpts(BasicOpts):
         }
 
 
+class AxisBreakOpts(BasicOpts):
+    def __init__(
+        self,
+        start: Union[Numeric, str] = None,
+        end: Union[Numeric, str] = None,
+        gap: Union[Numeric, str] = None,
+        is_expanded: Optional[bool] = None,
+    ):
+        self.opts: dict = {
+            "start": start,
+            "end": end,
+            "gap": gap,
+            "isExpanded": is_expanded,
+        }
+
+
+class AxisBreakAreaOpts(BasicOpts):
+    def __init__(
+        self,
+        is_show: Optional[bool] = None,
+        itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
+        zigzag_amplitude: Optional[Numeric] = None,
+        zigzag_min_span: Optional[Numeric] = None,
+        zigzag_max_span: Optional[Numeric] = None,
+        zigzag_z: Optional[Numeric] = None,
+        is_expand_onclick: Optional[bool] = None,
+    ):
+        self.opts: dict = {
+            "show": is_show,
+            "itemStyle": itemstyle_opts,
+            "zigzagAmplitude": zigzag_amplitude,
+            "zigzagMinSpan": zigzag_min_span,
+            "zigzagMaxSpan": zigzag_max_span,
+            "zigzagZ": zigzag_z,
+            "expandOnClick": is_expand_onclick,
+        }
+
+
+class AxisBreakLabelLayoutOpts(BasicOpts):
+    def __init__(
+        self,
+        is_move_overlap: Optional[bool] = None,
+    ):
+        self.opts: dict = {
+            "moveOverlap": is_move_overlap,
+        }
+
+
 class AxisOpts(BasicOpts):
     def __init__(
         self,
@@ -843,16 +1006,32 @@ class AxisOpts(BasicOpts):
         name_location: str = "end",
         name_gap: Numeric = 15,
         name_rotate: Optional[Numeric] = None,
+        name_truncate_max_width: Optional[Numeric] = None,
+        name_truncate_ellipsis: Optional[str] = None,
+        is_name_move_overlap: bool = True,
         interval: Optional[Numeric] = None,
         grid_index: Optional[Numeric] = None,
+        grid_id: Optional[Numeric] = None,
         position: Optional[str] = None,
         offset: Numeric = 0,
         split_number: Numeric = 5,
         boundary_gap: Union[str, bool, None] = None,
-        min_: Union[Numeric, str, None] = None,
-        max_: Union[Numeric, str, None] = None,
+        min_: Union[Numeric, JSFunc, None] = None,
+        max_: Union[Numeric, JSFunc, None] = None,
         min_interval: Numeric = 0,
         max_interval: Optional[Numeric] = None,
+        log_base: Optional[Numeric] = None,
+        start_value: Optional[Numeric] = None,
+        is_silent: bool = False,
+        is_trigger_event: bool = False,
+        jitter: Optional[Numeric] = None,
+        is_jitter_overlap: Optional[bool] = None,
+        jitter_margin: Optional[Numeric] = None,
+        axisbreaks_opts: Sequence[Union[AxisBreakOpts, dict, None]] = None,
+        axisbreak_area_opts: Union[AxisBreakAreaOpts, dict, None] = None,
+        axisbreak_label_layout_opts: Union[
+            AxisBreakLabelLayoutOpts, dict, None,
+        ] = None,
         axisline_opts: Union[AxisLineOpts, dict, None] = None,
         axistick_opts: Union[AxisTickOpts, dict, None] = None,
         axislabel_opts: Union[LabelOpts, dict, None] = None,
@@ -872,9 +1051,15 @@ class AxisOpts(BasicOpts):
             "nameLocation": name_location,
             "nameGap": name_gap,
             "nameRotate": name_rotate,
+            "nameTruncate": {
+                "maxWidth": name_truncate_max_width,
+                "ellipsis": name_truncate_ellipsis,
+            },
+            "nameMoveOverlap": is_name_move_overlap,
             "interval": interval,
             "nameTextStyle": name_textstyle_opts,
             "gridIndex": grid_index,
+            "gridId": grid_id,
             "axisLine": axisline_opts,
             "axisTick": axistick_opts,
             "axisLabel": axislabel_opts,
@@ -888,6 +1073,16 @@ class AxisOpts(BasicOpts):
             "max": max_,
             "minInterval": min_interval,
             "maxInterval": max_interval,
+            "logBase": log_base,
+            "startValue": start_value,
+            "silent": is_silent,
+            "triggerEvent": is_trigger_event,
+            "jitter": jitter,
+            "jitterOverlap": is_jitter_overlap,
+            "jitterMargin": jitter_margin,
+            "breaks": axisbreaks_opts,
+            "breakArea": axisbreak_area_opts,
+            "breakLabelLayout": axisbreak_label_layout_opts,
             "splitLine": splitline_opts,
             "splitArea": splitarea_opts,
             "minorTick": minor_tick_opts,
@@ -896,6 +1091,26 @@ class AxisOpts(BasicOpts):
 
         if animation_opts:
             self.opts.update(**animation_opts.opts)
+
+
+class GridOuterOpts(BasicOpts):
+    def __init__(
+        self,
+        pos_left: Union[Numeric, str, None] = None,
+        pos_top: Union[Numeric, str, None] = None,
+        pos_right: Union[Numeric, str, None] = None,
+        pos_bottom: Union[Numeric, str, None] = None,
+        width: Union[Numeric, str, None] = None,
+        height: Union[Numeric, str, None] = None,
+    ):
+        self.opts: dict = {
+            "left": pos_left,
+            "top": pos_top,
+            "right": pos_right,
+            "bottom": pos_bottom,
+            "width": width,
+            "height": height,
+        }
 
 
 class GridOpts(BasicOpts):
@@ -911,6 +1126,9 @@ class GridOpts(BasicOpts):
         width: Union[Numeric, str, None] = None,
         height: Union[Numeric, str, None] = None,
         is_contain_label: bool = False,
+        outer_bounds_mode: Optional[str] = None,
+        outer_bounds_opts: Union[GridOuterOpts, dict, None] = None,
+        outer_bounds_contain: Optional[str] = None,
         background_color: str = "transparent",
         border_color: str = "#ccc",
         border_width: Numeric = 1,
@@ -919,6 +1137,13 @@ class GridOpts(BasicOpts):
         shadow_offset_x: Numeric = 0,
         shadow_offset_y: Numeric = 0,
         tooltip_opts: Union[TooltipOpts, dict, None] = None,
+        coordinate_system: Optional[str] = None,
+        coordinate_system_usage: Optional[str] = None,
+        coord: Optional[Union[Sequence, Numeric, str]] = None,
+        calendar_index: Optional[Numeric] = None,
+        calendar_id: Optional[Numeric] = None,
+        matrix_index: Optional[Numeric] = None,
+        matrix_id: Optional[Numeric] = None,
     ):
         self.opts: dict = {
             "show": is_show,
@@ -931,6 +1156,9 @@ class GridOpts(BasicOpts):
             "width": width,
             "height": height,
             "containLabel": is_contain_label,
+            "outerBoundsMode": outer_bounds_mode,
+            "outerBounds": outer_bounds_opts,
+            "outerBoundsContain": outer_bounds_contain,
             "backgroundColor": background_color,
             "borderColor": border_color,
             "borderWidth": border_width,
@@ -939,6 +1167,13 @@ class GridOpts(BasicOpts):
             "shadowOffsetX": shadow_offset_x,
             "shadowOffsetY": shadow_offset_y,
             "tooltip": tooltip_opts,
+            "coordinateSystem": coordinate_system,
+            "coordinateSystemUsage": coordinate_system_usage,
+            "coord": coord,
+            "calendarIndex": calendar_index,
+            "calendarId": calendar_id,
+            "matrixIndex": matrix_index,
+            "matrixId": matrix_id,
         }
 
 
@@ -1053,6 +1288,17 @@ class ParallelOpts(BasicOpts):
         pos_right: str = "13%",
         pos_bottom: str = "10%",
         pos_top: str = "20%",
+        z_level: Optional[Numeric] = None,
+        z: Optional[Numeric] = None,
+        width: Optional[str] = None,
+        height: Optional[str] = None,
+        coordinate_system: Optional[str] = None,
+        coordinate_system_usage: Optional[str] = None,
+        coord: Optional[Union[Sequence, Numeric, str]] = None,
+        calendar_index: Optional[Numeric] = None,
+        calendar_id: Optional[Numeric] = None,
+        matrix_index: Optional[Numeric] = None,
+        matrix_id: Optional[Numeric] = None,
         layout: Optional[str] = None,
         is_axis_expandable: bool = False,
         axis_expand_center: Optional[Numeric] = None,
@@ -1065,6 +1311,17 @@ class ParallelOpts(BasicOpts):
             "right": pos_right,
             "bottom": pos_bottom,
             "top": pos_top,
+            "zlevel": z_level,
+            "z": z,
+            "width": width,
+            "height": height,
+            "coordinateSystem": coordinate_system,
+            "coordinateSystemUsage": coordinate_system_usage,
+            "coord": coord,
+            "calendarIndex": calendar_index,
+            "calendarId": calendar_id,
+            "matrixIndex": matrix_index,
+            "matrixId": matrix_id,
             "layout": layout,
             "axisExpandable": is_axis_expandable,
             "axisExpandCenter": axis_expand_center,
@@ -1539,11 +1796,11 @@ class BlurOpts(BasicOpts):
 
 class SelectOpts(BasicOpts):
     def __init__(
-            self,
-            is_disabled: Optional[bool] = None,
-            itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
-            linestyle_opts: Union[LineStyleOpts, dict, None] = None,
-            label_opts: Union[LabelOpts, dict, None] = None,
+        self,
+        is_disabled: Optional[bool] = None,
+        itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
+        linestyle_opts: Union[LineStyleOpts, dict, None] = None,
+        label_opts: Union[LabelOpts, dict, None] = None,
     ):
         self.opts: dict = {
             "disabled": is_disabled,
@@ -1568,4 +1825,274 @@ class TreeLeavesOpts(BasicOpts):
             "emphasis": emphasis_opts,
             "blur": blur_opts,
             "select": select_opts,
+        }
+
+
+class MatrixDividerLineStyleOpts(BasicOpts):
+    def __init__(
+        self,
+        color: Optional[str] = "#aaa",
+        width: Optional[Numeric] = 1,
+        type_: Optional[str] = "solid",
+        dash_offset: Optional[Numeric] = 0,
+        cap: Optional[str] = "butt",
+        join: Optional[str] = "bevel",
+        miter_limit: Optional[Numeric] = 10,
+        shadow_blur: Optional[Numeric] = None,
+        shadow_color: Optional[str] = None,
+        shadow_offset_x: Optional[Numeric] = None,
+        shadow_offset_y: Optional[Numeric] = None,
+        opacity: Optional[Numeric] = 1,
+    ):
+        self.opts: dict = {
+            "color": color,
+            "width": width,
+            "type": type_,
+            "dashOffset": dash_offset,
+            "cap": cap,
+            "join": join,
+            "miterLimit": miter_limit,
+            "shadowBlur": shadow_blur,
+            "shadowColor": shadow_color,
+            "shadowOffsetX": shadow_offset_x,
+            "shadowOffsetY": shadow_offset_y,
+            "opacity": opacity,
+        }
+
+
+class MatrixAxisDataOpts(BasicOpts):
+    def __init__(
+        self,
+        value: Union[Numeric, str] = None,
+        children: Union[dict, JSFunc, None] = None,
+        size: Optional[Numeric] = None,
+    ):
+        self.opts: dict = {
+            "value": value,
+            "children": children,
+            "size": size,
+        }
+
+
+class MatrixAxisOpts(BasicOpts):
+    def __init__(
+        self,
+        is_show: bool = True,
+        data: Union[Sequence, dict, JSFunc, None] = None,
+        label_opts: Union[LabelOpts, dict, None] = None,
+        itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
+        is_silent: bool = False,
+        cursor: Optional[str] = None,
+        z2: Optional[Numeric] = None,
+        level_size: Union[Numeric, str, None] = None,
+        levels: Optional[Sequence] = None,
+        divider_line_style_opts: Union[
+            MatrixDividerLineStyleOpts, dict, None,
+        ] = None,
+    ):
+        self.opts: dict = {
+            "show": is_show,
+            "data": data,
+            "label": label_opts,
+            "itemStyle": itemstyle_opts,
+            "silent": is_silent,
+            "cursor": cursor,
+            "z2": z2,
+            "levelSize": level_size,
+            "levels": levels,
+            "dividerLineStyle": divider_line_style_opts,
+        }
+
+
+class MatrixBodyDataOpts(BasicOpts):
+    def __init__(
+        self,
+        coord: Optional[Sequence] = None,
+        is_coord_clamp: Optional[bool] = None,
+        is_merge_cells: Optional[bool] = None,
+        value: Union[Numeric, str, None] = None,
+        label_opts: Union[LabelOpts, dict, None] = None,
+    ):
+        self.opts: dict = {
+            "coord": coord,
+            "coordClamp": is_coord_clamp,
+            "mergeCells": is_merge_cells,
+            "value": value,
+            "label": label_opts,
+        }
+
+
+class MatrixBodyOrCornerOpts(BasicOpts):
+    def __init__(
+        self,
+        data: Union[Sequence[MatrixBodyDataOpts], dict, None] = None,
+        label_opts: Union[LabelOpts, dict, None] = None,
+        itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
+        is_silent: bool = False,
+        cursor: Optional[str] = None,
+        z2: Optional[Numeric] = None,
+    ):
+        self.opts: dict = {
+            "data": data,
+            "label": label_opts,
+            "itemStyle": itemstyle_opts,
+            "silent": is_silent,
+            "cursor": cursor,
+            "z2": z2,
+        }
+
+
+class MatrixBackgroundStyleOpts(BasicOpts):
+    def __init__(
+        self,
+        color: Optional[str] = None,
+        border_color: str = "#ccc",
+        border_width: Numeric = 1,
+        border_type: str = "solid",
+        border_radius: Union[Numeric, Sequence] = 0,
+        border_cap: str = "butt",
+        border_join: str = "bevel",
+        border_miter_limit: Optional[Numeric] = 10,
+        shadow_blur: Optional[Numeric] = None,
+        shadow_color: Optional[str] = None,
+        shadow_offset_x: Numeric = 0,
+        shadow_offset_y: Numeric = 0,
+        opacity: Optional[Numeric] = 1,
+    ):
+        self.opts: dict = {
+            "color": color,
+            "borderColor": border_color,
+            "borderWidth": border_width,
+            "borderType": border_type,
+            "borderRadius": border_radius,
+            "borderCap": border_cap,
+            "borderJoin": border_join,
+            "borderMiterLimit": border_miter_limit,
+            "shadowBlur": shadow_blur,
+            "shadowColor": shadow_color,
+            "shadowOffsetX": shadow_offset_x,
+            "shadowOffsetY": shadow_offset_y,
+            "opacity": opacity,
+        }
+
+
+class MatrixOpts(BasicOpts):
+    def __init__(
+        self,
+        z_level: Numeric = 0,
+        z: Numeric = 2,
+        pos_left: Union[Numeric, str, None] = None,
+        pos_top: Union[Numeric, str, None] = None,
+        pos_right: Union[Numeric, str, None] = None,
+        pos_bottom: Union[Numeric, str, None] = None,
+        width: Union[Numeric, str, None] = None,
+        height: Union[Numeric, str, None] = None,
+        x_data: Union[MatrixAxisOpts, dict, None] = None,
+        y_data: Union[MatrixAxisOpts, dict, None] = None,
+        body_opts: Union[MatrixBodyOrCornerOpts, dict, None] = None,
+        corner_opts: Union[MatrixBodyOrCornerOpts, dict, None] = None,
+        background_style: Union[MatrixBackgroundStyleOpts, dict, None] = None,
+        border_z2: Optional[Numeric] = None,
+        tooltip_opts: TooltipOpts = None,
+    ):
+        self.opts: dict = {
+            "zlevel": z_level,
+            "z": z,
+            "left": pos_left,
+            "top": pos_top,
+            "right": pos_right,
+            "bottom": pos_bottom,
+            "width": width,
+            "height": height,
+            "x": x_data,
+            "y": y_data,
+            "body": body_opts,
+            "corner": corner_opts,
+            "backgroundStyle": background_style,
+            "borderZ2": border_z2,
+            "tooltip": tooltip_opts,
+        }
+
+
+class ThumbnailWindowStyleOpts(BasicOpts):
+    def __init__(
+        self,
+        color: Optional[str] = "#9ea0a5",
+        border_color: str = "#b7b9be",
+        border_width: Numeric = 1,
+        border_type: str = "solid",
+        border_dash_offset: Numeric = 0,
+        border_cap: str = "butt",
+        border_join: str = "bevel",
+        border_miter_limit: Optional[Numeric] = 10,
+        shadow_blur: Optional[Numeric] = None,
+        shadow_color: Optional[str] = None,
+        shadow_offset_x: Numeric = 0,
+        shadow_offset_y: Numeric = 0,
+        opacity: Optional[Numeric] = 0.3,
+    ):
+        self.opts: dict = {
+            "color": color,
+            "borderColor": border_color,
+            "borderWidth": border_width,
+            "borderType": border_type,
+            "borderDashOffset": border_dash_offset,
+            "borderCap": border_cap,
+            "borderJoin": border_join,
+            "borderMiterLimit": border_miter_limit,
+            "shadowBlur": shadow_blur,
+            "shadowColor": shadow_color,
+            "shadowOffsetX": shadow_offset_x,
+            "shadowOffsetY": shadow_offset_y,
+            "opacity": opacity,
+        }
+
+
+class ThumbnailOpts(BasicOpts):
+    def __init__(
+        self,
+        is_show: bool = True,
+        z_level: Numeric = 0,
+        z: Numeric = 2,
+        pos_left: Union[Numeric, str, None] = None,
+        pos_top: Union[Numeric, str, None] = None,
+        pos_right: Union[Numeric, str, None] = None,
+        pos_bottom: Union[Numeric, str, None] = None,
+        width: Union[Numeric, str, None] = None,
+        height: Union[Numeric, str, None] = None,
+        coordinate_system: Optional[str] = None,
+        coordinate_system_usage: Optional[str] = None,
+        coord: Optional[Union[Sequence, Numeric, str]] = None,
+        calendar_index: Optional[Numeric] = None,
+        calendar_id: Optional[Numeric] = None,
+        matrix_index: Optional[Numeric] = None,
+        matrix_id: Optional[Numeric] = None,
+        itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
+        window_style_opts: Union[
+            ThumbnailWindowStyleOpts, dict, None,
+        ] = None,
+        series_index: Optional[Numeric] = None,
+        series_id: Union[Numeric, str, None] = None,
+    ):
+        self.opts: dict = {
+            "show": is_show,
+            "zlevel": z_level,
+            "z": z,
+            "left": pos_left,
+            "top": pos_top,
+            "right": pos_right,
+            "bottom": pos_bottom,
+            "width": width,
+            "height": height,
+            "coordinateSystem": coordinate_system,
+            "coordinateSystemUsage": coordinate_system_usage,
+            "coord": coord,
+            "calendarIndex": calendar_index,
+            "calendarId": calendar_id,
+            "matrixIndex": matrix_index,
+            "matrixId": matrix_id,
+            "itemStyle": itemstyle_opts,
+            "windowStyle": window_style_opts,
+            "seriesIndex": series_index,
+            "seriesId": series_id,
         }

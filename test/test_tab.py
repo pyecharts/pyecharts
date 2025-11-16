@@ -63,10 +63,10 @@ class TestTabComponent(unittest.TestCase):
         html = tab.render_notebook().__html__()
         self.assertIn("City name", html)
 
-    def test_page_jshost_default(self):
+    def test_tab_jshost_default(self):
         bar = _create_bar()
         tab = Tab().add(bar, "bar")
-        self.assertEqual(tab.js_host, "https://assets.pyecharts.org/assets/v5/")
+        self.assertEqual(tab.js_host, "https://assets.pyecharts.org/assets/v6/")
 
     def test_tab_jshost_custom(self):
         from pyecharts.globals import CurrentConfig

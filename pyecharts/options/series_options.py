@@ -87,6 +87,7 @@ class TextStyleOpts(BasicOpts):
         width: Optional[str] = None,
         height: Optional[str] = None,
         rich: Optional[dict] = None,
+        is_rich_inherit_plain_label: bool = True,
     ):
         self.opts: dict = {
             "color": color,
@@ -107,6 +108,7 @@ class TextStyleOpts(BasicOpts):
             "width": width,
             "height": height,
             "rich": rich,
+            "richInheritPlainLabel": is_rich_inherit_plain_label,
         }
 
 
@@ -116,13 +118,17 @@ class LabelOpts(BasicOpts):
         is_show: bool = True,
         position: Optional[Union[str, Sequence]] = None,
         color: Optional[str] = None,
+        opacity: Optional[Numeric] = None,
         distance: Union[Numeric, Sequence, None] = None,
         font_size: Optional[Numeric] = None,
         font_style: Optional[str] = None,
         font_weight: Optional[str] = None,
         font_family: Optional[str] = None,
         rotate: Optional[Numeric] = None,
+        offset: Optional[Sequence[Numeric]] = None,
         margin: Optional[Numeric] = 8,
+        text_margin: Union[Numeric, Sequence, None] = None,
+        min_margin: Optional[Numeric] = None,
         interval: Union[Numeric, str, None] = None,
         horizontal_align: Optional[str] = None,
         vertical_align: Optional[str] = None,
@@ -140,18 +146,23 @@ class LabelOpts(BasicOpts):
         text_shadow_blur: Optional[Numeric] = None,
         text_shadow_offset_x: Optional[Numeric] = None,
         text_shadow_offset_y: Optional[Numeric] = None,
-        offset: Optional[Sequence[Numeric]] = None,
         overflow: Optional[str] = None,
         rich: Optional[dict] = None,
+        is_rich_inherit_plain_label: bool = True,
         is_value_animation: bool = False,
+        text_style_opts: Optional[TextStyleOpts] = None,
     ):
         self.opts: dict = {
             "show": is_show,
             "position": position,
             "color": color,
+            "opacity": opacity,
             "distance": distance,
             "rotate": rotate,
+            "offset": offset,
             "margin": margin,
+            "textMargin": text_margin,
+            "minMargin": min_margin,
             "interval": interval,
             "fontSize": font_size,
             "fontStyle": font_style,
@@ -175,18 +186,20 @@ class LabelOpts(BasicOpts):
             "textShadowOffsetY": text_shadow_offset_y,
             "overflow": overflow,
             "rich": rich,
+            "richInheritPlainLabel": is_rich_inherit_plain_label,
             "valueAnimation": is_value_animation,
+            "textStyle": text_style_opts,
         }
 
 
 class LineStyleOpts(BasicOpts):
     def __init__(
         self,
-        is_show: bool = True,
-        width: Numeric = 1,
-        opacity: Numeric = 1,
-        curve: Numeric = 0,
-        type_: str = "solid",
+        is_show: bool = False,
+        width: Optional[Numeric] = None,
+        opacity: Optional[Numeric] = None,
+        curve: Optional[Numeric] = None,
+        type_: Optional[str] = None,
         color: Union[str, Sequence, None] = None,
     ):
         self.opts: dict = {
@@ -432,8 +445,23 @@ class Lines3DEffectOpts(BasicOpts):
 
 
 class AreaStyleOpts(BasicOpts):
-    def __init__(self, opacity: Optional[Numeric] = 0, color: Optional[JSFunc] = None):
-        self.opts: dict = {"opacity": opacity, "color": color}
+    def __init__(
+        self,
+        opacity: Optional[Numeric] = 0,
+        color: Optional[JSFunc] = None,
+        shadow_blur: Optional[Numeric] = None,
+        shadow_color: Optional[str] = None,
+        shadow_offset_x: Optional[Numeric] = None,
+        shadow_offset_y: Optional[Numeric] = None,
+    ):
+        self.opts: dict = {
+            "opacity": opacity,
+            "color": color,
+            "shadowBlur": shadow_blur,
+            "shadowColor": shadow_color,
+            "shadowOffsetX": shadow_offset_x,
+            "shadowOffsetY": shadow_offset_y,
+        }
 
 
 class SplitAreaOpts(BasicOpts):
