@@ -1,3 +1,4 @@
+uv
 nose2
 codecov
 coverage
@@ -6,5 +7,6 @@ mccabe
 Pillow
 pytest
 pytest-cov
+pytest-xdist
 numpy
 pandas
