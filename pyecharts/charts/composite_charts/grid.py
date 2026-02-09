@@ -4,7 +4,6 @@ from typing import Optional
 from ... import options as opts
 from ... import types
 from ...globals import ThemeType
-from ..basic_charts.geo import GeoChartBase
 from ..basic_charts.radar import Radar
 from ..chart import Base, Chart, RectChart
 
