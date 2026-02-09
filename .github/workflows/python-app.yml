@@ -53,7 +53,7 @@ jobs:
     - name: Run unit test
       run: |
         pip install .
-        make test
+        pytest -v -n auto --cov-config=pyproject.toml --cov=./ test/
     - name: Codecov
       run: |
         codecov
