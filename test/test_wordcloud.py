@@ -57,17 +57,32 @@ class TestWordcloudChart(unittest.TestCase):
         self.assertEqual(c.theme, "white")
         self.assertEqual(c.renderer, "canvas")
 
-    @patch("pyecharts.render.engine.write_utf8_html_file")
-    def test_wordcloud_encode_image_to_base64_os_error(self, fake_writer):
-        error_path = "A" * 1000
-        c = WordCloud().add(
-            "",
-            words,
-            word_size_range=[20, 100],
-            shape="cardioid",
-            mask_image=f"{error_path}",
-        )
-        c.render()
-        _, content = fake_writer.call_args[0]
-        self.assertIn(error_path, content)
-        self.assertNotIn("data:image/", content)
+    @patch("pathlib.Path.is_file", side_effect=OSError("Simulated OS Error"))
+    def test_encode_image_to_base64_os_error(self, mock_is_file):
+        """
+        测试当 Path.is_file 抛出 OSError 时，_encode_image_to_base64 返回原始参数。
+        """
+        # 构造一个无效路径
+        invalid_path = "/invalid/path/to/image.png"
+
+        # 创建 WordCloud 实例并调用方法
+        wordcloud = WordCloud()
+        result = wordcloud._encode_image_to_base64(invalid_path)
+
+        # 验证返回值是原始路径
+        self.assertEqual(result, invalid_path)
+
+    @patch("pathlib.Path.exists", side_effect=OSError("Simulated OS Error"))
+    def test_encode_image_to_base64_os_error_on_exists(self, mock_exists):
+        """
+        测试当 Path.exists 抛出 OSError 时，_encode_image_to_base64 返回原始参数。
+        """
+        # 构造一个无效路径
+        invalid_path = "/another/invalid/path.jpg"
+
+        # 创建 WordCloud 实例并调用方法
+        wordcloud = WordCloud()
+        result = wordcloud._encode_image_to_base64(invalid_path)
+
+        # 验证返回值是原始路径
+        self.assertEqual(result, invalid_path)

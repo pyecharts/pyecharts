@@ -54,7 +54,6 @@ local_scheme = "dirty-tag"
 
 [tool.uv]
 dev-dependencies = [
-    "uv",
     "nose2",
     "codecov",
     "coverage",
