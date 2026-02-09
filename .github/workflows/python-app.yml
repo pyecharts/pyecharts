@@ -33,8 +33,9 @@ jobs:
           - python-version: "3.7"
             os: ubuntu-latest
         include: # So run those legacy versions on Intel CPUs.
-          - python-version: "3.7"
-            os: macos-12
+          # No ci env to test macos 13 with python3.7
+          #- python-version: "3.7"
+          #  os: macos-13
           - python-version: "3.7"
             os: ubuntu-22.04
     runs-on: ${{ matrix.os }}
