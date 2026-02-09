@@ -12,7 +12,7 @@ help:
 
 .PHONY: test
 test:
-	@uv run pytest -v -n auto --cov-config=pyproject.toml --cov=./ test/
+	@uv run pytest -v --cov-config=pyproject.toml --cov=./ test/
 
 .PHONY: build
 build:

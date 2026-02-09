@@ -6,8 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "pyecharts"
 description = "Python options, make charting easier"
 readme = "README.md"
-license = 'MIT'
-license-files = ['LICENSE']
+license = {text = "MIT"}
 authors = [
     {name = "chenjiandongx", email = "chenjiandongx@qq.com"},
     {name = "sunhailin-Leo", email = "shjkfld379978424@gmail.com"}
@@ -17,6 +16,7 @@ classifiers = [
     "Development Status :: 5 - Production/Stable",
     "Environment :: Console",
     "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
     "Programming Language :: Python",
     "Programming Language :: Python :: 3",
