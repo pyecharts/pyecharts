@@ -53,7 +53,7 @@ jobs:
     - name: Run unit test
       run: |
         pip install .
-        python test.py
+        make test
     - name: Codecov
       run: |
         codecov
