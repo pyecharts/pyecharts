@@ -146,6 +146,7 @@ class LabelOpts(BasicOpts):
         text_shadow_blur: Optional[Numeric] = None,
         text_shadow_offset_x: Optional[Numeric] = None,
         text_shadow_offset_y: Optional[Numeric] = None,
+        offset: Optional[Sequence[Numeric]] = None,
         overflow: Optional[str] = None,
         rich: Optional[dict] = None,
         is_rich_inherit_plain_label: bool = True,
