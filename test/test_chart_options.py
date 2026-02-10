@@ -3,6 +3,12 @@ import unittest
 from pyecharts.commons.utils import remove_key_with_none_value
 from pyecharts.options.charts_options import (
     BarBackgroundStyleOpts,
+    CustomBarRangeItemPayloadOpts,
+    CustomContourItemPayloadOpts,
+    CustomLineRangeItemPayloadOpts,
+    CustomSegmentedDoughnutItemPayloadOpts,
+    CustomStageItemPayloadOpts,
+    CustomViolinItemPayloadOpts,
     GlobeLayersOpts,
     GraphCategory,
     SunburstLevelOpts,
@@ -146,5 +152,30 @@ class TestChartOptions(unittest.TestCase):
 
     def test_sunburst_level_opts_remove_none(self):
         option = SunburstLevelOpts()
+        expected = {}
+        self.assertEqual(expected, remove_key_with_none_value(option.opts))
+
+    def test_custom_item_payload_opts_remove_none(self):
+        option = CustomBarRangeItemPayloadOpts()
+        expected = {}
+        self.assertEqual(expected, remove_key_with_none_value(option.opts))
+
+        option = CustomContourItemPayloadOpts()
+        expected = {}
+        self.assertEqual(expected, remove_key_with_none_value(option.opts))
+
+        option = CustomLineRangeItemPayloadOpts()
+        expected = {}
+        self.assertEqual(expected, remove_key_with_none_value(option.opts))
+
+        option = CustomSegmentedDoughnutItemPayloadOpts()
+        expected = {}
+        self.assertEqual(expected, remove_key_with_none_value(option.opts))
+
+        option = CustomStageItemPayloadOpts()
+        expected = {}
+        self.assertEqual(expected, remove_key_with_none_value(option.opts))
+
+        option = CustomViolinItemPayloadOpts()
         expected = {}
         self.assertEqual(expected, remove_key_with_none_value(option.opts))

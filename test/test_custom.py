@@ -3,6 +3,7 @@ from unittest.mock import patch
 
 from pyecharts.charts import Custom
 from pyecharts.commons.utils import JsCode
+from pyecharts.globals import ChartType
 
 
 class TestCustom(unittest.TestCase):
@@ -42,3 +43,32 @@ class TestCustom(unittest.TestCase):
         _, content = fake_writer.call_args[0]
         self.assertGreater(len(content), 2000)
         self.assertIn("renderItem", content)
+
+    def test_custom_echarts_x_with_error(self):
+        c = Custom()
+        try:
+            c.register_echarts_x(chart_type=ChartType.LINE)
+        except ValueError:
+            pass
+
+    @patch("pyecharts.render.engine.write_utf8_html_file")
+    def test_custom_echarts_x(self, fake_writer):
+        for chart_type in [
+            ChartType.VIOLIN,
+            ChartType.STAGE,
+            ChartType.DOUGHNUT,
+            ChartType.CONTOUR,
+            ChartType.BAR_RANGE,
+            ChartType.LINE_RANGE,
+        ]:
+            c = (
+                Custom()
+                .register_echarts_x(chart_type=chart_type)
+                .add(series_name="test", render_item=chart_type)
+            )
+            if chart_type != ChartType.DOUGHNUT:
+                c.add_xaxis(xaxis_data=["a", "b", "c"])
+            c.render()
+            _, content = fake_writer.call_args[0]
+            self.assertIn("renderItem", content)
+            self.assertIn("xAxis", content)

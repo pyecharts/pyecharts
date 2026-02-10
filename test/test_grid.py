@@ -318,7 +318,8 @@ class TestGridComponent(unittest.TestCase):
         )
 
         bar.overlap(line)
-        self.assertEqual(bar.colors[:3], ["red", "green", "blue"])
+        self.assertEqual(bar.options.get("color")[:3],
+                         ["red", "green", "blue"])
         return bar
 
     @patch("pyecharts.render.engine.write_utf8_html_file")
@@ -615,3 +616,32 @@ class TestGridComponent(unittest.TestCase):
         grid_chart.render()
         _, content = fake_writer.call_args[0]
         self.assertIn("geo", content)
+
+    @patch("pyecharts.render.engine.write_utf8_html_file")
+    def test_grid_multi_geo(self, fake_writer):
+        data_pair = [list(z) for z in zip(Faker.provinces, Faker.values())]
+
+        grid_chart = Grid(init_opts=opts.InitOpts())
+        geo_charts_len = 2
+        for i in range(geo_charts_len):
+            geo_chart = (
+                Geo()
+                .add_schema(maptype="china")
+                .add(
+                    f"geo_{i}",
+                    data_pair=data_pair,
+                    type_=ChartType.SCATTER,
+                )
+                .set_global_opts(
+                    visualmap_opts=opts.VisualMapOpts(),
+                )
+            )
+            grid_chart.add(
+                chart=geo_chart,
+                grid_opts=opts.GridOpts(),
+            )
+
+        grid_chart.render()
+        _, content = fake_writer.call_args[0]
+        self.assertIn("geo", content)
+        self.assertEqual(len(grid_chart.options.get("geo")), geo_charts_len)

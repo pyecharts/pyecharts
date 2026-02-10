@@ -49,6 +49,15 @@ class Timeline(Base):
         progress_linestyle_opts: types.LineStyle = None,
         progress_itemstyle_opts: types.ItemStyle = None,
         progress_label_opts: types.Label = None,
+        coordinate_system: types.Optional[str] = None,
+        coordinate_system_usage: types.Optional[str] = None,
+        coord: types.Optional[types.Union[
+            Sequence, types.Numeric, str]
+        ] = None,
+        calendar_index: types.Optional[types.Numeric] = None,
+        calendar_id: types.Optional[types.Numeric] = None,
+        matrix_index: types.Optional[types.Numeric] = None,
+        matrix_id: types.Optional[types.Numeric] = None,
     ):
         self.options.get("baseOption").get("timeline").update(
             {
@@ -81,6 +90,13 @@ class Timeline(Base):
                     "itemStyle": progress_itemstyle_opts,
                     "label": progress_label_opts,
                 },
+                "coordinateSystem": coordinate_system,
+                "coordinateSystemUsage": coordinate_system_usage,
+                "coord": coord,
+                "calendarIndex": calendar_index,
+                "calendarId": calendar_id,
+                "matrixIndex": matrix_index,
+                "matrixId": matrix_id,
             }
         )
         return self

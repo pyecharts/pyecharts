@@ -42,6 +42,15 @@ class Polar(Chart):
         symbol_size: types.Numeric = 4,
         stack: types.Optional[str] = None,
         center: types.Optional[types.Sequence] = None,
+        z_level: types.Numeric = 0,
+        z: types.Numeric = 2,
+        coordinate_system: types.Optional[str] = None,
+        coordinate_system_usage: types.Optional[str] = None,
+        coord: types.Union[types.Sequence, types.Numeric, str] = None,
+        calendar_index: types.Optional[types.Numeric] = None,
+        calendar_id: types.Optional[types.Numeric] = None,
+        matrix_index: types.Optional[types.Numeric] = None,
+        matrix_id: types.Optional[types.Numeric] = None,
         label_opts: types.Label = opts.LabelOpts(is_show=False),
         areastyle_opts: types.AreaStyle = opts.AreaStyleOpts(),
         effect_opts: types.Effect = opts.EffectOpts(),
@@ -50,8 +59,21 @@ class Polar(Chart):
         emphasis_opts: types.Emphasis = None,
     ):
         self._append_legend(series_name)
-        self.options.update(polar={"center": center if center else ["50%", "50%"]})
+        self.options.update(polar={
+            "center": center if center else ["50%", "50%"],
+            "zlevel": z_level,
+            "z": z,
+            "coordinateSystem": coordinate_system,
+            "coordinateSystemUsage": coordinate_system_usage,
+            "coord": coord,
+            "calendarIndex": calendar_index,
+            "calendarId": calendar_id,
+            "matrixIndex": matrix_index,
+            "matrixId": matrix_id,
+            "tooltip": tooltip_opts,
+        })
 
+        # polar with other series config
         if type_ in (ChartType.SCATTER, ChartType.LINE, ChartType.BAR):
             self.options.get("series").append(
                 {

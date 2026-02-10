@@ -146,7 +146,7 @@ class TestBarChart(unittest.TestCase):
     @patch("pyecharts.render.engine.write_utf8_html_file")
     def test_bar_colors(self, fake_writer):
         c = Bar().add_xaxis(["A", "B", "C"]).add_yaxis("series0", [1, 2, 4])
-        c.set_colors(["#AABBCC", "#BBCCDD", "#CCDDEE"] + c.colors)
+        c.set_colors(["#AABBCC", "#BBCCDD", "#CCDDEE"])
         c.render()
         _, content = fake_writer.call_args[0]
         self.assertIn("#AABBCC", content)
@@ -206,9 +206,9 @@ class TestBarChart(unittest.TestCase):
     def test_bar_default_remote_host(self, fake_writer):
         c = Bar().add_xaxis(["A", "B", "C"]).add_yaxis("series0", [1, 2, 4])
         c.render()
-        self.assertEqual(c.js_host, "https://assets.pyecharts.org/assets/v5/")
+        self.assertEqual(c.js_host, "https://assets.pyecharts.org/assets/v6/")
         _, content = fake_writer.call_args[0]
-        self.assertIn("https://assets.pyecharts.org/assets/v5/echarts.min.js", content)
+        self.assertIn("https://assets.pyecharts.org/assets/v6/echarts.min.js", content)
 
     @patch("pyecharts.render.engine.write_utf8_html_file")
     def test_bar_custom_remote_host(self, fake_writer):

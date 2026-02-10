@@ -6,5 +6,6 @@ mccabe
 Pillow
 pytest
 pytest-cov
+pytest-xdist
 numpy
 pandas

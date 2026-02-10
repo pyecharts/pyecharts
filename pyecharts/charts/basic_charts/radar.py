@@ -17,6 +17,13 @@ class Radar(Chart):
         shape: types.Optional[str] = None,
         center: types.Optional[types.Sequence] = None,
         radius: types.Optional[types.Union[types.Sequence, str]] = None,
+        coordinate_system: types.Optional[str] = None,
+        coordinate_system_usage: types.Optional[str] = None,
+        coord: types.Union[types.Sequence, types.Numeric, str] = None,
+        calendar_index: types.Optional[types.Numeric] = None,
+        calendar_id: types.Optional[types.Numeric] = None,
+        matrix_index: types.Optional[types.Numeric] = None,
+        matrix_id: types.Optional[types.Numeric] = None,
         start_angle: types.Numeric = 90,
         textstyle_opts: types.TextStyle = opts.TextStyleOpts(),
         splitline_opt: types.SplitLine = opts.SplitLineOpts(is_show=True),
@@ -31,7 +38,9 @@ class Radar(Chart):
         polar_opts: types.Polar = None,
     ):
         self.options.update(
-            radiusAxis=radiusaxis_opts, angleAxis=angleaxis_opts, polar=polar_opts
+            radiusAxis=radiusaxis_opts,
+            angleAxis=angleaxis_opts,
+            polar=polar_opts,
         )
 
         indicators = []
@@ -49,6 +58,13 @@ class Radar(Chart):
                 "shape": shape,
                 "center": center,
                 "radius": radius,
+                "coordinateSystem": coordinate_system,
+                "coordinateSystemUsage": coordinate_system_usage,
+                "coord": coord,
+                "calendarIndex": calendar_index,
+                "calendarId": calendar_id,
+                "matrixIndex": matrix_index,
+                "matrixId": matrix_id,
                 "startAngle": start_angle,
                 "name": {"textStyle": textstyle_opts},
                 "splitLine": splitline_opt,

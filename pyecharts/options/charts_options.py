@@ -18,6 +18,30 @@ from .series_options import (
 
 
 # Chart Options
+class ChordData(BasicOpts):
+    def __init__(
+        self,
+        name: Optional[str] = None,
+    ):
+        self.opts: dict = {
+            "name": name,
+        }
+
+
+class ChordLink(BasicOpts):
+    def __init__(
+        self,
+        source: Union[str, int, None] = None,
+        target: Union[str, int, None] = None,
+        value: Optional[Numeric] = None,
+    ):
+        self.opts: dict = {
+            "source": source,
+            "target": target,
+            "value": value,
+        }
+
+
 class GraphNode(BasicOpts):
     def __init__(
         self,
@@ -398,6 +422,7 @@ class GraphicTextStyleOpts(BaseGraphic):
         pos_y: Numeric = 0,
         font: Optional[str] = None,
         font_size: Optional[Numeric] = 0,
+        font_weight: Optional[str] = None,
         text_align: str = "left",
         text_vertical_align: Optional[str] = None,
         graphic_basicstyle_opts: Union[GraphicBasicStyleOpts, dict, None] = None,
@@ -408,6 +433,7 @@ class GraphicTextStyleOpts(BaseGraphic):
             "y": pos_y,
             "font": font,
             "fontSize": font_size,
+            "fontWeight": font_weight,
             "textAlign": text_align,
             "textVerticalAlign": text_vertical_align,
         }
@@ -424,7 +450,7 @@ class GraphicItem(BaseGraphic):
         self,
         id_: Optional[str] = None,
         action: str = "merge",
-        position: [Sequence, Numeric, None] = None,
+        position: Union[Sequence, Numeric, None] = None,
         rotation: Union[Numeric, JSFunc, None] = 0,
         scale: Union[Sequence, Numeric, None] = None,
         origin: Union[Numeric, Sequence, None] = None,
@@ -1595,7 +1621,7 @@ class ScatterItem(BasicOpts):
     def __init__(
         self,
         name: Union[str, Numeric] = None,
-        value: Union[str, Numeric] = None,
+        value: Union[str, Numeric, Sequence] = None,
         symbol: Optional[str] = None,
         symbol_size: Union[Sequence[Numeric], Numeric] = None,
         symbol_rotate: Optional[Numeric] = None,
@@ -1664,4 +1690,86 @@ class TreeItem(BasicOpts):
             "value": value,
             "children": children,
             "label": label_opts,
+        }
+
+
+class CustomBarRangeItemPayloadOpts(BasicOpts):
+    def __init__(
+        self,
+        bar_width: Union[Numeric, str, None] = None,
+        border_radius: Optional[Numeric] = None,
+        margin: Optional[Numeric] = None,
+    ):
+        self.opts: dict = {
+            "barWidth": bar_width,
+            "borderRadius": border_radius,
+            "margin": margin,
+        }
+
+
+class CustomContourItemPayloadOpts(BasicOpts):
+    def __init__(
+        self,
+        itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
+        linestyle_opts: Union[LineStyleOpts, dict, None] = None,
+        bandwidth: Optional[Numeric] = None,
+    ):
+        self.opts: dict = {
+            "itemStyle": itemstyle_opts,
+            "lineStyle": linestyle_opts,
+            "bandwidth": bandwidth,
+        }
+
+
+class CustomLineRangeItemPayloadOpts(BasicOpts):
+    def __init__(
+        self,
+        linestyle_opts: Union[LineStyleOpts, dict, None] = None,
+        areastyle_opts: Union[AreaStyleOpts, dict, None] = None,
+    ):
+        self.opts: dict = {
+            "areaStyle": areastyle_opts,
+            "lineStyle": linestyle_opts,
+        }
+
+
+class CustomSegmentedDoughnutItemPayloadOpts(BasicOpts):
+    def __init__(
+        self,
+        center: Optional[Sequence] = None,
+        radius: Optional[Sequence] = None,
+        segment_count: Optional[Numeric] = None,
+        label_opts: Union[LabelOpts, dict, None] = None,
+    ):
+        self.opts: dict = {
+            "center": center,
+            "radius": radius,
+            "segmentCount": segment_count,
+            "label": label_opts,
+        }
+
+
+class CustomStageItemPayloadOpts(BasicOpts):
+    def __init__(
+        self,
+        itemstyle_opts: Union[ItemStyleOpts, dict, None] = None,
+    ):
+        self.opts: dict = {
+            "itemStyle": itemstyle_opts,
+        }
+
+
+class CustomViolinItemPayloadOpts(BasicOpts):
+    def __init__(
+        self,
+        symbol_size: Optional[Numeric] = None,
+        area_opacity: Optional[Numeric] = None,
+        bandwidth_scale: Optional[Numeric] = None,
+        bin_count: Optional[Numeric] = None,
+    ):
+        self.opts: dict = {
+            "symbolSize": symbol_size,
+            "areaOpacity": area_opacity,
+            "bandWidthScale": bandwidth_scale,
+            "binCount": bin_count,
         }

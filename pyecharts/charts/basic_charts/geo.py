@@ -268,7 +268,9 @@ class Geo(GeoChartBase):
     def add_schema(
         self,
         maptype: str = "china",
+        animation: types.Union[bool, str] = None,
         is_roam: bool = True,
+        roam_trigger: types.Optional[str] = None,
         zoom: types.Optional[types.Numeric] = None,
         center: types.Optional[types.Sequence] = None,
         aspect_scale: types.Numeric = 0.75,
@@ -286,6 +288,21 @@ class Geo(GeoChartBase):
         regions_opts: types.Union[
             types.Sequence[types.GeoRegions], types.Sequence[dict]
         ] = None,
+        is_preserve_aspect: bool = False,
+        preserve_aspect_align: types.Optional[str] = None,
+        preserve_aspect_vertical_align: types.Optional[str] = None,
+        is_clip: bool = False,
+        coordinate_system: types.Optional[str] = None,
+        coordinate_system_usage: types.Optional[str] = None,
+        coord: types.Optional[types.Union[
+            types.Sequence, types.Numeric, str]
+        ] = None,
+        calendar_index: types.Optional[types.Numeric] = None,
+        calendar_id: types.Optional[types.Numeric] = None,
+        matrix_index: types.Optional[types.Numeric] = None,
+        matrix_id: types.Optional[types.Numeric] = None,
+        tooltip_opts: types.Tooltip = None,
+        select_opts: types.Select = None,
     ):
         self.js_dependencies.add(maptype)
         self._geo_json_name = maptype
@@ -302,9 +319,11 @@ class Geo(GeoChartBase):
         self.options.update(
             geo={
                 "map": maptype,
+                "animation": animation,
                 "zoom": zoom,
                 "center": center,
                 "roam": is_roam,
+                "roamTrigger": roam_trigger,
                 "aspectScale": aspect_scale,
                 "boundingCoords": bounding_coords,
                 "scaleLimit": scale_limit,
@@ -319,6 +338,19 @@ class Geo(GeoChartBase):
                     "label": emphasis_label_opts,
                 },
                 "regions": regions_opts,
+                "preserveAspect": is_preserve_aspect,
+                "preserveAspectAlign": preserve_aspect_align,
+                "preserveAspectVerticalAlign": preserve_aspect_vertical_align,
+                "clip": is_clip,
+                "coordinateSystem": coordinate_system,
+                "coordinateSystemUsage": coordinate_system_usage,
+                "coord": coord,
+                "calendarIndex": calendar_index,
+                "calendarId": calendar_id,
+                "matrixIndex": matrix_index,
+                "matrixId": matrix_id,
+                "tooltip": tooltip_opts,
+                "select": select_opts,
             }
         )
         return self

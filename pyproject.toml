@@ -1,0 +1,85 @@
+[build-system]
+requires = ["setuptools>=45", "wheel", "setuptools_scm[toml]>=6.2"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pyecharts"
+description = "Python options, make charting easier"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [
+    {name = "chenjiandongx", email = "chenjiandongx@qq.com"},
+    {name = "sunhailin-Leo", email = "shjkfld379978424@gmail.com"}
+]
+keywords = ["Echarts", "charts", "plotting-tool"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Software Development :: Libraries",
+]
+requires-python = ">=3.7"
+dependencies = [
+    "jinja2>=2.11.3",
+    "prettytable",
+    "simplejson",
+]
+dynamic = ["version"]
+
+[project.optional-dependencies]
+selenium = ["snapshot-selenium"]
+phantomjs = ["snapshot-phantomjs"]
+pyppeteer = ["snapshot-pyppeteer"]
+images = ["Pillow"]
+
+[project.urls]
+Homepage = "https://github.com/pyecharts/pyecharts"
+
+[tool.setuptools_scm]
+version_scheme = "guess-next-dev"
+local_scheme = "dirty-tag"
+
+[tool.uv]
+dev-dependencies = [
+    "nose2",
+    "codecov",
+    "coverage",
+    "flake8",
+    "mccabe",
+    "Pillow",
+    "pytest",
+    "pytest-cov",
+    "pytest-xdist",
+    "numpy",
+    "pandas",
+]
+
+[tool.coverage.run]
+omit = [
+    "pyecharts/render/templates/*",
+    "setup.py",
+    "install.py",
+    "test.py",
+    "test/*",
+]
+
+[tool.coverage.report]
+show_missing = true
+omit = [
+    "pyecharts/render/templates/*",
+    "setup.py",
+    "install.py",
+]

@@ -181,19 +181,10 @@ class TestChartClass(unittest.TestCase):
         )
         c.render()
         _, content = fake_writer.call_args[0]
-        # Old Version (Before 2.0)
-        # default_colors = (
-        #     "#c23531 #2f4554 #61a0a8 #d48265 #749f83 #ca8622 #bda29a #6e7074 "
-        #     "#546570 #c4ccd3 #f05b72 #ef5b9c #f47920 #905a3d #fab27b #2a5caa "
-        #     "#444693 #726930 #b2d235 #6d8346 #ac6767 #1d953f #6950a1 #918597"
-        # ).split()
 
         # New Version
-        default_colors = (
-            "#5470c6 #91cc75 #fac858 #ee6666 #73c0de #3ba272 #fc8452 #9a60b4 " "#ea7ccc"
-        ).split()
-        expected_result = ["#80FFA5", "#00DDFF", *default_colors]
-        self.assertEqual(c.colors, expected_result)
+        expected_result = ["#80FFA5", "#00DDFF"]
+        self.assertEqual(c.options.get("color"), expected_result)
 
     @patch("pyecharts.render.engine.write_utf8_html_file")
     def test_chart_add_dataset(self, fake_writer):

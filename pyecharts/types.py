@@ -11,6 +11,7 @@ from typing import (
 )
 
 from . import options as opts
+from .options import ThumbnailOpts
 from .options.charts_options import BaseGraphic, GlobeLayersOpts
 from .options.series_options import JsCode, JSFunc, Numeric
 
@@ -54,6 +55,7 @@ Map3DViewControl = Union[opts.Map3DViewControlOpts, dict, None]
 MarkArea = Union[opts.MarkAreaOpts, dict, None]
 MarkPoint = Union[opts.MarkPointOpts, dict, None]
 MarkLine = Union[opts.MarkLineOpts, dict, None]
+Matrix = Union[opts.MatrixOpts, dict, None]
 MinorTick = Union[opts.MinorTickOpts, dict, None]
 Label = Union[opts.LabelOpts, dict, None]
 Legend = Union[opts.LegendOpts, dict]
@@ -62,6 +64,7 @@ Lines3DEffect = Union[opts.Lines3DEffectOpts, dict, None]
 PieLabelLine = Union[opts.PieLabelLineOpts, dict, None]
 PieEmptyCircle = Union[opts.PieEmptyCircleStyle, dict, None]
 TextStyle = Union[opts.TextStyleOpts, dict, None]
+Thumbnail = Union[ThumbnailOpts, dict, None]
 TimeLineControl = Union[opts.TimelineControlStyle, dict, None]
 TimeLinkCheckPoint = Union[opts.TimelineCheckPointerStyle, dict, None]
 Title = Union[opts.TitleOpts, dict]
@@ -82,6 +85,20 @@ Calendar = Union[opts.CalendarOpts, dict, None]
 CalendarDayLabelOpts = Union[opts.CalendarDayLabelOpts, dict, None]
 CalendarMonthLabelOpts = Union[opts.CalendarMonthLabelOpts, dict, None]
 CalendarYearLabelOpts = Union[opts.CalendarYearLabelOpts, dict, None]
+
+CustomItemPayload = Union[
+    opts.CustomBarRangeItemPayloadOpts,
+    opts.CustomContourItemPayloadOpts,
+    opts.CustomLineRangeItemPayloadOpts,
+    opts.CustomSegmentedDoughnutItemPayloadOpts,
+    opts.CustomStageItemPayloadOpts,
+    opts.CustomViolinItemPayloadOpts,
+    dict,
+    None,
+]
+
+ChordData = Union[opts.ChordData, dict]
+ChordLink = Union[opts.ChordLink, dict]
 
 GraphNode = Union[opts.GraphNode, dict]
 GraphLink = Union[opts.GraphLink, dict]
