@@ -1,4 +1,3 @@
-import requests
 import unittest
 from unittest.mock import patch
 
@@ -11,19 +10,27 @@ class TestLines3DChart(unittest.TestCase):
     @patch("pyecharts.render.engine.write_utf8_html_file")
     def test_lines3d_base(self, fake_writer):
         test_main_url: str = "https://echarts.apache.org/examples"
-        data_json_url = test_main_url + "/data-gl/asset/data/flights.json"
         base_texture = test_main_url + "/data-gl/asset/world.topo.bathy.200401.jpg"
-        height_texture = test_main_url + "/data-gl/asset/bathymetry_bw_composite_4k.jpg"
+        height_texture = (
+            test_main_url + "/data-gl/asset/bathymetry_bw_composite_4k.jpg"
+        )
 
-        resp = requests.get(data_json_url).json()
-        json_routes = resp.get("routes")
-        json_airports = resp.get("airports")
+        mock_airports = [
+            ["", "", "", 116.4074, 39.9042],
+            ["", "", "", 121.4737, 31.2304],
+            ["", "", "", 113.2644, 23.1291],
+        ]
+        mock_routes = [
+            [0, 0, 1],
+            [0, 1, 2],
+            [0, 0, 2],
+        ]
 
         routes_data = []
-        for d in json_routes:
+        for d in mock_routes:
 
             def _inner_func(idx):
-                return [json_airports[idx][3], json_airports[idx][4]]
+                return [mock_airports[idx][3], mock_airports[idx][4]]
 
             routes_data.append([_inner_func(d[1]), _inner_func(d[2])])
 
