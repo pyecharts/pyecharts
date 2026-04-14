@@ -1,6 +1,7 @@
 from ..types import Optional, Sequence, Union
 from urllib.parse import urlparse
 import http.client
+import ssl
 
 
 class HTML:
@@ -65,16 +66,26 @@ class Javascript:
         return r
 
     def load_javascript_contents(self):
+        unverified_context = ssl.create_default_context()
+        unverified_context.check_hostname = False
+        unverified_context.verify_mode = ssl.CERT_NONE
+
         for lib in self.lib:
             parsed_url = urlparse(lib)
 
             host: str = str(parsed_url.hostname)
             port: int = parsed_url.port
             path: str = parsed_url.path
+            scheme: str = parsed_url.scheme
 
             resp: Optional[http.client.HTTPResponse] = None
             try:
-                conn = http.client.HTTPSConnection(host, port)
+                if scheme == "https":
+                    conn = http.client.HTTPSConnection(
+                        host, port, context=unverified_context
+                    )
+                else:
+                    conn = http.client.HTTPConnection(host, port)
                 conn.request("GET", path)
                 resp = conn.getresponse()
                 if resp.status != 200:
