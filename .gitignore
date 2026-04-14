@@ -102,3 +102,15 @@ example/*.html
 
 # mypy
 .mypy_cache/
+
+# pytest
+.pytest_cache/
+
+# virtual env
+.venv/
+
+# Harness runtime artifacts (AI-generated, not for version control)
+.harness/sprints/sprint-*-result.md
+.harness/sprints/sprint-*-qa-report.md
+.harness/sprints/sprint-*-failures.json
+.harness/vision-master.log

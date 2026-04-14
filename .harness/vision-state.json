@@ -1,0 +1,15 @@
+{
+  "project": "pyecharts",
+  "version": "2.1.0",
+  "round": 0,
+  "completed_sprints": [],
+  "current_sprint": null,
+  "vision_completion_pct": 0,
+  "completed_features": [],
+  "tech_debt": [],
+  "next_steps": [
+    "Initialize first Sprint with Harness workflow"
+  ],
+  "last_updated": "2026-04-11",
+  "score_history": []
+}
