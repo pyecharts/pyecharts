@@ -33,54 +33,53 @@
 
 ## 📣 Introduction
 
-[Apache ECharts](https://github.com/apache/echarts) is easy-to-use, highly interactive and highly performant javascript visualization library under Apache license. Since its first public release in 2013, it now dominates over 74% of Chinese web front-end market. Yet Python is an expressive language and is loved by data science community. Combining the strength of both technologies, [pyecharts](https://github.com/pyecharts/pyecharts) is born.
+[Apache ECharts](https://github.com/apache/echarts) is an easy-to-use, highly interactive, and high-performance JavaScript visualization library released under the Apache License. Since its first public release in 2013, it has come to dominate more than 74% of the Chinese web front-end visualization market. Python, meanwhile, is an expressive language loved by the data science community. By combining the strengths of both technologies, [pyecharts](https://github.com/pyecharts/pyecharts) was born.
 
-* **`pyecharts like` visualization projects**
+* **Visualization projects similar to `pyecharts`**
   * [py-vchart](https://github.com/VisActor/py-vchart)
   * [py-antv](https://github.com/sunhailin-Leo/pyantv)
 
 ## ✨ Feature highlights
 
-* Simple API, Sleek and method chaining
-* Support 30 + popular charts
-* Support data science tools: Jupyter Notebook, JupyterLab, nteract, [marimo](https://github.com/marimo-team/marimo)
-* Integrate with Flask，Django at ease
+* Simple, elegant API with method chaining
+* Supports 30+ popular chart types
+* Supports data science tools such as Jupyter Notebook, JupyterLab, nteract, and [marimo](https://github.com/marimo-team/marimo)
+* Integrates easily with Flask and Django
 * Easy to use and highly configurable
-* Detailed documentation and examples.
-* More than 400+ geomaps assets for geograpic information processing
+* Detailed documentation and examples
+* Includes more than 400 geomap assets for geographic data processing
 
 ## ⏳ Version
 
-v0.5.x is not compatible with V1, which is a completely new version, see [ISSUE#892](https://github.com/pyecharts/pyecharts/issues/892), [ISSUE#1033](https://github.com/pyecharts/). pyecharts/issues/1033).
+v0.5.x is not compatible with V1, which is a completely redesigned version. See [ISSUE#892](https://github.com/pyecharts/pyecharts/issues/892) and [ISSUE#1033](https://github.com/pyecharts/issues/1033).
 
 ### V0.5.x
 
-> Support for Python 2.7, 3.4+
+> Supports Python 2.7 and 3.4+
 
-At the discretion of the development team, version 0.5.x will no longer be maintained. Version 0.5.x code is located in the *05x* branch and documentation is located at [05x-docs.pyecharts.org](http://05x-docs.pyecharts.org).
+At the discretion of the development team, version 0.5.x is no longer maintained. The version 0.5.x code is located in the *05x* branch, and its documentation is available at [05x-docs.pyecharts.org](http://05x-docs.pyecharts.org).
 
 ### V1
 
 > Python 3.7+ only
 
-The new version series will start with v1.0.0, documented at [pyecharts.org](https://pyecharts.org); examples at [gallery.pyecharts.org](https://gallery.pyecharts.org)
+This version series starts from v1.0.0. Documentation is available at [pyecharts.org](https://pyecharts.org), and examples can be found at [gallery.pyecharts.org](https://gallery.pyecharts.org).
 
 ### V2
 
 > Python 3.7+ only
 
-The new version is based on Echarts 5.4.1+ for rendering, and the documentation and examples are in the same location as V1.
-
+This version uses ECharts 5.4.1+ as its rendering engine. Its documentation and examples are available in the same locations as V1.
 
 ## 🔰 Installation
 
-**pip install**
-```shell
+**Install with pip**
+```console
 $ pip install pyecharts
 ```
 
 **Install from source**
-```shell
+```console
 $ git clone https://github.com/pyecharts/pyecharts.git
 $ cd pyecharts
 $ pip install -r requirements.txt
@@ -109,11 +108,11 @@ bar.render()
 <img src="https://user-images.githubusercontent.com/19553554/55270272-d6ff1b80-52d7-11e9-820f-30660a068e3e.gif"  width="85%" />
 </p>
 
-#### image
+#### Image
 ```python
 from pyecharts.render import make_snapshot
 
-# needs to configure selenium
+# Selenium must be configured
 make_snapshot(bar.render(), "bar.png")
 ```
 <p align="center">
@@ -169,48 +168,47 @@ make_snapshot(bar.render(), "bar.png")
 <img src="https://user-images.githubusercontent.com/19553554/35082279-e111743c-fc53-11e7-9362-580160593715.gif" width="33%" alt="timeline"/>
 </div>
 
-For more documentation, please visit
+For more documentation, please visit:
 
 * [Chinese documentation](https://pyecharts.org/#/zh-cn/)
-* [English Documentation](https://pyecharts.org/#/en-us/)
-* [Example Documentation](https://gallery.pyecharts.org/)
+* [English documentation](https://pyecharts.org/#/en-us/)
+* [Example documentation](https://gallery.pyecharts.org/)
 
 ## ⛏ Software development
 
 ### Unit tests
 
-```shell
+```console
 $ pip install -r test/requirements.txt
 $ make
 ```
 
 ### Team development
 
-[Travis CI](https://travis-ci.org/) and [AppVeyor](https://ci.appveyor.com/) is place for continuous integration.
+[Travis CI](https://travis-ci.org/) and [AppVeyor](https://ci.appveyor.com/) are used for continuous integration.
 
 ### Coding styles
 
-[flake8](http://flake8.pycqa.org/en/latest/index.html), [Codecov](https://codecov.io/) and [pylint](https://www.pylint.org/) are used
+[flake8](http://flake8.pycqa.org/en/latest/index.html), [Codecov](https://codecov.io/), and [pylint](https://www.pylint.org/) are used.
 
 ## 😉 Author
 
-pyecharts are co-maintained by:
+pyecharts is co-maintained by:
 
 * [@chenjiandongx](https://github.com/chenjiandongx)
 * [@chfw](https://github.com/chfw)
 * [@kinegratii](https://github.com/kinegratii)
 * [@sunhailin-Leo](https://github.com/sunhailin-Leo)
 
-For more contributors, please visit [pyecharts/graphs/contributors](https://github.com/pyecharts/pyecharts/graphs/contributors)
+For more contributors, please visit [pyecharts/graphs/contributors](https://github.com/pyecharts/pyecharts/graphs/contributors).
 
 ## 💌 Donation
 
-To develop and maintain pyecharts, it took me a lot of overnights. If you think pyecharts has helped you, please consider buying me a coffee:
+Developing and maintaining pyecharts has required many late nights. If pyecharts has helped you, please consider buying me a coffee.
 
 <img src="https://user-images.githubusercontent.com/19553554/35425853-500d6b5c-0299-11e8-80a1-ebb6629b497e.png" width="19.8%" alt="Alipay">　　　<img src="https://user-images.githubusercontent.com/19553554/35425854-504e716a-0299-11e8-81fc-4a511f1c47e8.png" width="20%" alt="Wechat">
 
-
-Please also buy the other maintainer a coffee if you think their work helped you too [donation details](http://pyecharts.org/#/zh-cn/donate)
+Please also consider buying the other maintainers a coffee if their work has helped you as well: [donation details](http://pyecharts.org/#/zh-cn/donate)
 
 ## 📃 License
 
