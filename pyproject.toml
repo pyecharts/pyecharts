@@ -52,8 +52,8 @@ Homepage = "https://github.com/pyecharts/pyecharts"
 version_scheme = "guess-next-dev"
 local_scheme = "dirty-tag"
 
-[tool.uv]
-dev-dependencies = [
+[dependency-groups]
+dev = [
     "nose2",
     "codecov",
     "coverage",
