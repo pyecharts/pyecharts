@@ -51,7 +51,7 @@
 
 ## ⏳ Version
 
-v0.5.x is not compatible with V1, which is a completely redesigned version. See [ISSUE#892](https://github.com/pyecharts/pyecharts/issues/892) and [ISSUE#1033](https://github.com/pyecharts/issues/1033).
+v0.5.x is not compatible with V1, which is a completely new version, see [ISSUE#892](https://github.com/pyecharts/pyecharts/issues/892), [ISSUE#1033](https://github.com/pyecharts/pyecharts/issues/1033).
 
 ### V0.5.x
 
