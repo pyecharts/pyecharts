@@ -15,7 +15,9 @@ class Line(RectChart):
     def add_yaxis(
         self,
         series_name: str,
-        y_axis: types.Union[types.Sequence[types.Union[opts.LineItem, dict]], None] = None,
+        y_axis: types.Union[
+            types.Sequence[types.Union[opts.LineItem, dict]], None,
+        ] = None,
         *,
         is_connect_nones: bool = False,
         xaxis_index: types.Optional[types.Numeric] = None,
