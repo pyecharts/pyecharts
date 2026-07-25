@@ -1,4 +1,5 @@
 import unittest
+from unittest.mock import MagicMock, patch
 
 from pyecharts.render.display import HTML, Javascript
 
@@ -31,11 +32,9 @@ class TestDisplay(unittest.TestCase):
         self.assertIn(js_content, obj_1._repr_javascript_())
 
     def test_display_javascript_v2(self):
-        import ssl
-
-        ssl._create_default_https_context = ssl._create_unverified_context
-
-        obj = Javascript(lib=["https://assets.pyecharts.org/assets/v5/echarts.min.js"])
+        obj = Javascript(
+            lib=["https://assets.pyecharts.org/assets/v5/echarts.min.js"]
+        )
         obj.load_javascript_contents()
         self.assertIn(
             "echarts",
@@ -51,3 +50,23 @@ class TestDisplay(unittest.TestCase):
             obj_1.load_javascript_contents()
         except RuntimeError:
             pass
+
+    @patch("pyecharts.render.display.http.client.HTTPConnection")
+    def test_display_javascript_v3_http(self, mock_http_conn_cls):
+        mock_resp = MagicMock()
+        mock_resp.status = 200
+        mock_resp.read.return_value = b"var echarts = {};"
+
+        mock_conn = MagicMock()
+        mock_conn.getresponse.return_value = mock_resp
+        mock_http_conn_cls.return_value = mock_conn
+
+        url = "http://localhost:8080/assets/echarts.min.js"
+        obj = Javascript(lib=[url])
+        obj.load_javascript_contents()
+
+        mock_http_conn_cls.assert_called_once_with("localhost", 8080)
+        mock_conn.request.assert_called_once_with(
+            "GET", "/assets/echarts.min.js"
+        )
+        self.assertEqual(obj.javascript_contents[url], "var echarts = {};")
