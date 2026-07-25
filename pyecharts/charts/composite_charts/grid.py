@@ -37,8 +37,6 @@ class Grid(Base):
         if self.options is None:
             self.options = copy.deepcopy(chart.options)
             self.options.update(grid=[], title=[])
-            if self.theme != ThemeType.WHITE:
-                self.options.update(color=[])
 
             # Priority Order: Grid > Other Chart
             self.options.update(backgroundColor=self.bg_color)
