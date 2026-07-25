@@ -645,3 +645,31 @@ class TestGridComponent(unittest.TestCase):
         _, content = fake_writer.call_args[0]
         self.assertIn("geo", content)
         self.assertEqual(len(grid_chart.options.get("geo")), geo_charts_len)
+
+    @patch("pyecharts.render.engine.write_utf8_html_file")
+    def test_grid_dark_theme_preserves_series_visibility(self, fake_writer):
+        """
+        Issue #2466: Grid 使用非 white 主题时，color 不应被重置为空列表，
+        否则 ECharts 会用空 color 覆盖主题色，导致 series 元素不可见。
+        """
+        line = (
+            Line()
+            .add_xaxis([0, 1, 2, 3, 4, 5])
+            .add_yaxis("value", [0, 1, 2, 3, 4, 5])
+        )
+        grid_chart = Grid(
+            init_opts=opts.InitOpts(theme=ThemeType.DARK)
+        ).add(line, grid_opts=opts.GridOpts(pos_left="10%", pos_right="8%"))
+
+        grid_chart.render()
+        _, content = fake_writer.call_args[0]
+
+        # color 不应为空列表——空列表会覆盖主题色导致 series 不可见
+        grid_color = grid_chart.options.get("color")
+        self.assertNotEqual(
+            grid_color,
+            [],
+            "Grid 使用 DARK 主题时，options['color'] 不应被重置为空列表",
+        )
+        self.assertEqual(grid_chart.theme, ThemeType.DARK)
+        self.assertIn("value", content)
