@@ -143,3 +143,55 @@ class TestLineChart(unittest.TestCase):
             )
         )
         self.assertEqual(c.options.get("series")[0].get("data"), None)
+
+    def test_line_dataset_with_none_y_axis(self):
+        """
+        Issue #2428: y_axis=None 应明确表示使用外部 dataset，
+        series 的 data 字段应为 None。
+        """
+        source = [
+            ["product", "2012", "2013"],
+            ["Milk Tea", 56.5, 82.1],
+            ["Matcha Latte", 51.1, 51.4],
+        ]
+        c = (
+            Line()
+            .add_dataset(source=source)
+            .add_yaxis(series_name="Milk Tea", y_axis=None, series_layout_by="row")
+            .add_yaxis(series_name="Matcha Latte", y_axis=None, series_layout_by="row")
+        )
+        self.assertEqual(c.options.get("series")[0].get("data"), None)
+        self.assertEqual(c.options.get("series")[1].get("data"), None)
+
+    def test_line_multi_series_shared_dataset_via_grid(self):
+        """
+        Issue #2428: 多个 Series 共用 Grid 层面的 Dataset 时，
+        各 series 的 data 应为 None，不应因 y_axis 判断而报错。
+        """
+        source = [
+            ["product", "2012", "2013", "2014"],
+            ["Milk Tea", 56.5, 82.1, 88.7],
+            ["Matcha Latte", 51.1, 51.4, 55.1],
+            ["Cheese Cocoa", 40.1, 62.2, 69.5],
+        ]
+
+        # line1 持有 dataset，line2/line3 通过 y_axis=None 声明使用外部 dataset
+        line1 = (
+            Line()
+            .add_dataset(source=source)
+            .add_yaxis(series_name="Milk Tea", y_axis=None, series_layout_by="row")
+        )
+        line2 = (
+            Line()
+            .add_yaxis(series_name="Matcha Latte", y_axis=None, series_layout_by="row")
+        )
+        line3 = (
+            Line()
+            .add_yaxis(series_name="Cheese Cocoa", y_axis=None, series_layout_by="row")
+        )
+
+        # line1 自带 dataset，series data 应为 None
+        self.assertEqual(line1.options.get("series")[0].get("data"), None)
+        # line2/line3 无 chart 级 dataset，但 y_axis=None 仍应使 data=None
+        self.assertEqual(line2.options.get("series")[0].get("data"), None)
+        self.assertEqual(line3.options.get("series")[0].get("data"), None)

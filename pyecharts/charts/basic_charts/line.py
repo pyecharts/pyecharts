@@ -15,7 +15,9 @@ class Line(RectChart):
     def add_yaxis(
         self,
         series_name: str,
-        y_axis: types.Sequence[types.Union[opts.LineItem, dict]],
+        y_axis: types.Union[
+            types.Sequence[types.Union[opts.LineItem, dict]], None,
+        ] = None,
         *,
         is_connect_nones: bool = False,
         xaxis_index: types.Optional[types.Numeric] = None,
@@ -61,7 +63,13 @@ class Line(RectChart):
         self._append_color(color)
         self._append_legend(series_name)
 
-        if all([isinstance(d, opts.LineItem) for d in y_axis]):
+        if y_axis is None:
+            # 显式传入 None：表示使用外部 dataset（chart 级或 Grid 级均可）
+            data = None
+        elif not y_axis:
+            # 空列表：当 chart 自身设置了 dataset 时走 dataset 路径，否则保持空列表
+            data = None if self.options.get("dataset") is not None else []
+        elif all([isinstance(d, opts.LineItem) for d in y_axis]):
             data = y_axis
         else:
             # 合并 x 和 y 轴数据，避免当 X 轴的类型设置为 'value' 的时候，
@@ -74,9 +82,6 @@ class Line(RectChart):
                 ]
             except IndexError:
                 data = [list(z) for z in zip(self._xaxis_data, y_axis)]
-
-        if self.options.get("dataset") is not None and not y_axis:
-            data = None
 
         self.options.get("series").append(
             {
