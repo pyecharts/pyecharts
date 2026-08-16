@@ -4,7 +4,7 @@ from unittest.mock import patch
 
 from pyecharts.charts import Bar
 from pyecharts.options import InitOpts, RenderOpts
-from pyecharts.globals import CurrentConfig, Locale
+from pyecharts.globals import CurrentConfig, Locale, ThemeType
 from pyecharts.charts.base import Base, default
 from pyecharts.options.series_options import AnimationOpts
 
@@ -90,6 +90,16 @@ class TestBaseClass(unittest.TestCase):
 
         c1 = Base(init_opts=InitOpts(chart_id="1234567"))
         self.assertEqual(c1.get_chart_id(), "1234567")
+
+    def test_dark_theme_loads_theme_js(self):
+        c = Base(init_opts=InitOpts(theme=ThemeType.DARK))
+        content = c.render_embed()
+        self.assertIn("themes/dark.js", content)
+
+    def test_white_theme_does_not_load_theme_js(self):
+        c = Base(init_opts=InitOpts(theme=ThemeType.WHITE))
+        content = c.render_embed()
+        self.assertNotIn("themes/", content)
 
     def test_use_echarts_stat(self):
         c0 = Base().use_echarts_stat()
