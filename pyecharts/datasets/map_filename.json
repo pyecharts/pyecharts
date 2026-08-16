@@ -22,6 +22,7 @@
   "echarts-x-bar-range": ["echarts-x/bar-range/index.auto.min", "js"],
   "bmap": ["bmap.min", "js"],
   "chalk": ["themes/chalk", "js"],
+  "dark": ["themes/dark", "js"],
   "essos": ["themes/essos", "js"],
   "halloween": ["themes/halloween", "js"],
   "infographic": ["themes/infographic", "js"],

@@ -88,7 +88,7 @@ ToolTipFormatterType = {
 
 
 class _ThemeType:
-    BUILTIN_THEMES = ["light", "dark", "white"]
+    BUILTIN_THEMES = ["light", "white"]
     LIGHT = "light"
     DARK = "dark"
     WHITE = "white"
