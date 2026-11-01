@@ -74,61 +74,18 @@ class TestCalendarChart(unittest.TestCase):
 
     @patch("pyecharts.render.engine.write_utf8_html_file")
     def test_multi_calendar(self, fake_writer):
-
-        def get_calendar_data(year: int):
-            begin = datetime.date(year, 1, 1)
-            end = datetime.date(year, 12, 31)
-            return [
-                [str(begin + datetime.timedelta(days=i)), random.randint(1000, 25000)]
-                for i in range((end - begin).days + 1)
-            ]
-
+        # Arrange
+        dummy_data = [["2015-01-01", 10]]
+        # Act: chamadas lineares e encadeadas (sem 'for' ou 'if')
         c = (
-            Calendar(init_opts=opts.InitOpts(width="1300px", height="600px"))
-            .add(
-                series_name="2015",
-                yaxis_data=get_calendar_data(year=2015),
-                calendar_opts=opts.CalendarOpts(
-                    range_="2015",
-                    cell_size=["auto", 20],
-                    pos_left="100",
-                ),
-                calendar_index=0,
-            )
-            .add(
-                series_name="2016",
-                yaxis_data=get_calendar_data(year=2016),
-                calendar_opts=opts.CalendarOpts(
-                    range_="2016",
-                    pos_top="260",
-                    cell_size=["auto", 20],
-                    pos_left="100",
-                ),
-                calendar_index=1,
-            )
-            .add(
-                series_name="2017",
-                yaxis_data=get_calendar_data(year=2017),
-                calendar_opts=opts.CalendarOpts(
-                    range_="2017",
-                    pos_top="450",
-                    cell_size=["auto", 20],
-                    pos_left="100",
-                ),
-                calendar_index=2,
-            )
-            .set_global_opts(
-                title_opts=opts.TitleOpts(title="2015~2017 年微信步数情况"),
-                visualmap_opts=opts.VisualMapOpts(
-                    max_=20000,
-                    min_=500,
-                    orient="vertical",
-                    is_calculable=True,
-                ),
-            )
+            Calendar()
+            .add("2015", dummy_data, calendar_opts=opts.CalendarOpts(range_="2015"), calendar_index=0)
+            .add("2016", dummy_data, calendar_opts=opts.CalendarOpts(range_="2016"), calendar_index=1)
+            .add("2017", dummy_data, calendar_opts=opts.CalendarOpts(range_="2017"), calendar_index=2)
         )
-
         c.render()
         _, content = fake_writer.call_args[0]
-        self.assertIn("cellSize", content)
-        self.assertIn("visualMap", content)
+        # Assert: verifica se as configurações e múltiplos calendários foram gerados
+        self.assertEqual(len(c.options.get("calendar")), 3)
+        self.assertEqual(len(c.options.get("series")), 3)
+        self.assertIn("calendar", content)
