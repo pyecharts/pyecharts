@@ -5,45 +5,44 @@ from pyecharts import options as opts
 from pyecharts.charts import BMap
 from pyecharts.globals import BMapType, ChartType
 
-BAIDU_MAP_API_PREFIX = "https://api.map.baidu.com/api?v=2.0"
-FAKE_API_KEY = "fake_application_key"
-
-TEST_LOCATION = ["London"]
-TEST_VALUE = [1]
-
 
 class TestBMapChart(unittest.TestCase):
+    def setUp(self):
+        self.baidu_map_api_prefix = "https://api.map.baidu.com/api?v=2.0"
+        self.fake_api_key = "fake_application_key"
+        self.test_location = ["London"]
+        self.test_value = [1]
 
     @patch("pyecharts.render.engine.write_utf8_html_file")
     def test_bmap(self, fake_writer):
         bmap = (
             BMap()
-            .add_schema(baidu_ak=FAKE_API_KEY, center=[-0.118092, 51.509865])
+            .add_schema(baidu_ak=self.fake_api_key, center=[-0.118092, 51.509865])
             .add_coordinate("London", -0.118092, 51.509865)
             .add(
                 "bmap",
-                [list(z) for z in zip(TEST_LOCATION, TEST_VALUE)],
+                [list(z) for z in zip(self.test_location, self.test_value)],
                 label_opts=opts.LabelOpts(formatter="{b}"),
             )
         )
         bmap.render()
         content = fake_writer.call_args[0][1]
-        self.assertIn(f'src="{BAIDU_MAP_API_PREFIX}&ak={FAKE_API_KEY}"', content)
+        self.assertIn(f'src="{self.baidu_map_api_prefix}&ak={self.fake_api_key}"', content)
         self.assertIn('"coordinateSystem": "bmap"', content, "non bmap found")
 
     def test_bmap_heatmap(self):
         bmap = (
             BMap()
-            .add_schema(baidu_ak=FAKE_API_KEY, center=[-0.118092, 51.509865])
+            .add_schema(baidu_ak=self.fake_api_key, center=[-0.118092, 51.509865])
             .add_coordinate("London", -0.118092, 51.509865)
             .add(
                 "bmap",
-                [list(z) for z in zip(TEST_LOCATION, TEST_VALUE)],
+                [list(z) for z in zip(self.test_location, self.test_value)],
                 label_opts=opts.LabelOpts(formatter="{b}"),
             )
         )
         data = bmap.options.get("series")[0]["data"]
-        self.assertEqual(len(TEST_LOCATION), len(data), "número de itens de dados inválido")
+        self.assertEqual(len(self.test_location), len(data),)
         self.assertIn("name", data[0])
         self.assertIn("value", data[0])
 
@@ -51,11 +50,11 @@ class TestBMapChart(unittest.TestCase):
     def test_bmap_effect_trail_length(self, fake_writer):
         bmap = (
             BMap()
-            .add_schema(baidu_ak=FAKE_API_KEY, center=[-0.118092, 51.509865])
+            .add_schema(baidu_ak=self.fake_api_key, center=[-0.118092, 51.509865])
             .add_coordinate("London", -0.118092, 51.509865)
             .add(
                 "bmap",
-                [list(z) for z in zip(TEST_LOCATION, TEST_VALUE)],
+                [list(z) for z in zip(self.test_location, self.test_value)],
                 type_=ChartType.LINES,
                 effect_opts=opts.EffectOpts(trail_length=0.5),
                 label_opts=opts.LabelOpts(formatter="{b}"),
@@ -69,11 +68,11 @@ class TestBMapChart(unittest.TestCase):
     def test_bmap_polyline_and_large(self, fake_writer):
         bmap = (
             BMap()
-            .add_schema(baidu_ak=FAKE_API_KEY, center=[-0.118092, 51.509865])
+            .add_schema(baidu_ak=self.fake_api_key, center=[-0.118092, 51.509865])
             .add_coordinate("London", -0.118092, 51.509865)
             .add(
                 "bmap",
-                [list(z) for z in zip(TEST_LOCATION, TEST_VALUE)],
+                [list(z) for z in zip(self.test_location, self.test_value)],
                 is_polyline=True,
                 is_large=True,
                 type_=ChartType.LINES,
@@ -89,11 +88,11 @@ class TestBMapChart(unittest.TestCase):
     def test_bmap_map_control_panel(self, fake_writer):
         bmap = (
             BMap()
-            .add_schema(baidu_ak=FAKE_API_KEY, center=[-0.118092, 51.509865])
+            .add_schema(baidu_ak=self.fake_api_key, center=[-0.118092, 51.509865])
             .add_coordinate("London", -0.118092, 51.509865)
             .add(
                 "bmap",
-                [list(z) for z in zip(TEST_LOCATION, TEST_VALUE)],
+                [list(z) for z in zip(self.test_location, self.test_value)],
                 type_=ChartType.LINES,
                 label_opts=opts.LabelOpts(formatter="{b}"),
             )
@@ -121,12 +120,12 @@ class TestBMapChart(unittest.TestCase):
     def test_bmap_progressive_options(self, fake_writer):
         bmap = (
             BMap()
-            .add_schema(baidu_ak=FAKE_API_KEY, center=[-0.118092, 51.509865])
+            .add_schema(baidu_ak=self.fake_api_key, center=[-0.118092, 51.509865])
             .add_coordinate("London", -0.118092, 51.509865)
             .add(
                 "bmap",
                 type_="lines",
-                data_pair=[list(z) for z in zip(TEST_LOCATION, TEST_VALUE)],
+                data_pair=[list(z) for z in zip(self.test_location, self.test_value)],
                 label_opts=opts.LabelOpts(formatter="{b}"),
                 progressive=200,
                 progressive_threshold=500,
