@@ -67,53 +67,20 @@ class TestParallelChart(unittest.TestCase):
 
     @patch("pyecharts.render.engine.write_utf8_html_file")
     def test_parallel_base_v1(self, fake_writer):
-        data = [
-            [1, 91, 45, 125, 0.82, 34, 23, "良"],
-            [2, 65, 27, 78, 0.86, 45, 29, "良"],
-            [3, 83, 60, 84, 1.09, 73, 27, "良"],
-            [4, 109, 81, 121, 1.28, 68, 51, "轻度污染"],
-            [5, 106, 77, 114, 1.07, 55, 51, "轻度污染"],
-            [6, 109, 81, 121, 1.28, 68, 51, "轻度污染"],
-            [7, 106, 77, 114, 1.07, 55, 51, "轻度污染"],
-            [8, 89, 65, 78, 0.86, 51, 26, "良"],
-            [9, 53, 33, 47, 0.64, 50, 17, "良"],
-            [10, 80, 55, 80, 1.01, 75, 24, "良"],
-            [11, 117, 81, 124, 1.03, 45, 24, "轻度污染"],
-            [12, 99, 71, 142, 1.1, 62, 42, "良"],
-            [13, 95, 69, 130, 1.28, 74, 50, "良"],
-            [14, 116, 87, 131, 1.47, 84, 40, "轻度污染"],
+        # Arrange: 1 dado de exemplo com 2 eixos (numérico e categórico)
+        data = [[1, "A"]]
+        schema = [
+            opts.ParallelAxisOpts(dim=0, name="dim1"),
+            opts.ParallelAxisOpts(dim=1, name="dim2", type_="category", data=["A", "B"]),
         ]
-        c = (
-            Parallel()
-            .add_schema(
-                schema=[
-                    opts.ParallelAxisOpts(dim=0, name="data"),
-                    opts.ParallelAxisOpts(dim=1, name="AQI"),
-                    opts.ParallelAxisOpts(dim=2, name="PM2.5"),
-                    opts.ParallelAxisOpts(dim=3, name="PM10"),
-                    opts.ParallelAxisOpts(dim=4, name="CO"),
-                    opts.ParallelAxisOpts(dim=5, name="NO2"),
-                    opts.ParallelAxisOpts(dim=6, name="CO2"),
-                    opts.ParallelAxisOpts(
-                        dim=7,
-                        name="等级",
-                        type_="category",
-                        data=[
-                            "优",
-                            "良",
-                            "轻度污染",
-                            "中度污染",
-                            "重度污染",
-                            "严重污染",
-                        ],
-                    ),
-                ],
-                parallel_opts=opts.ParallelOpts(),
-            )
-            .add("parallel", data)
-            .set_global_opts(title_opts=opts.TitleOpts(title="Parallel-Category"))
-        )
+
+        # Act
+        c = Parallel().add_schema(schema=schema).add("parallel", data)
         c.render()
-        _, content = fake_writer.call_args[0]
+
+        # Assert
+        fake_writer.assert_called_once()
+        self.assertEqual(len(c.options.get("parallelAxis")), 2)
         self.assertEqual(c.theme, "white")
         self.assertEqual(c.renderer, "canvas")
+

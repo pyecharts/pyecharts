@@ -124,8 +124,11 @@ class TestGridComponent(unittest.TestCase):
             .add(chart=bar_3, grid_index=2, grid_opts=opts.GridOpts())
         )
         expected_idx = (1, 0, 2)
-        for idx, series in enumerate(gc.options.get("xAxis")):
-            self.assertEqual(series.get("gridIndex"), expected_idx[idx])
+        x_axis = gc.options.get("xAxis")
+        self.assertEqual(len(expected_idx), len(x_axis))
+        self.assertEqual(x_axis[0].get("gridIndex"), expected_idx[0])
+        self.assertEqual(x_axis[1].get("gridIndex"), expected_idx[1])
+        self.assertEqual(x_axis[2].get("gridIndex"), expected_idx[2])
 
         bar_1 = self._chart_for_set_grid_index()
         bar_2 = self._chart_for_set_grid_index()
@@ -137,8 +140,11 @@ class TestGridComponent(unittest.TestCase):
             .add(chart=bar_3, grid_index=1, grid_opts=opts.GridOpts())
         )
         expected_idx = (0, 2, 1)
-        for idx, series in enumerate(gc.options.get("xAxis")):
-            self.assertEqual(series.get("gridIndex"), expected_idx[idx])
+        x_axis = gc.options.get("xAxis")
+        self.assertEqual(len(expected_idx), len(x_axis))
+        self.assertEqual(x_axis[0].get("gridIndex"), expected_idx[0])
+        self.assertEqual(x_axis[1].get("gridIndex"), expected_idx[1])
+        self.assertEqual(x_axis[2].get("gridIndex"), expected_idx[2])
 
     def test_grid_set_grid_index_priority(self):
         bar_1 = self._chart_for_set_grid_index(gird_index=2)
@@ -151,8 +157,11 @@ class TestGridComponent(unittest.TestCase):
             .add(chart=bar_3, grid_index=0, grid_opts=opts.GridOpts())
         )
         expected_idx = (2, 0, 1)
-        for idx, series in enumerate(gc.options.get("xAxis")):
-            self.assertEqual(series.get("gridIndex"), expected_idx[idx])
+        x_axis = gc.options.get("xAxis")
+        self.assertEqual(len(expected_idx), len(x_axis))
+        self.assertEqual(x_axis[0].get("gridIndex"), expected_idx[0])
+        self.assertEqual(x_axis[1].get("gridIndex"), expected_idx[1])
+        self.assertEqual(x_axis[2].get("gridIndex"), expected_idx[2])
 
         bar_1 = self._chart_for_set_grid_index(gird_index=0)
         bar_2 = self._chart_for_set_grid_index(gird_index=2)

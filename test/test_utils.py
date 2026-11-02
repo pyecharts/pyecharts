@@ -72,12 +72,8 @@ class TestUtils(unittest.TestCase):
         mock_numpy_data = np.array(mock_data)
         tmp_df = pd.DataFrame({"x": mock_data})
         mock_series_data = tmp_df["x"]
-        try:
+        with self.assertRaises(ValueError):
             utils.remove_key_with_none_value({"data": mock_numpy_data})
-        except ValueError:
-            pass
 
-        try:
+        with self.assertRaises(ValueError):
             utils.remove_key_with_none_value({"data": mock_series_data})
-        except ValueError:
-            pass

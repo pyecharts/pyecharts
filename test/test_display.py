@@ -47,7 +47,5 @@ class TestDisplay(unittest.TestCase):
         obj_1 = Javascript(
             lib=["https://assets.pyecharts.org/assets/v4/echarts.min.js"]
         )
-        try:
+        with self.assertRaises(RuntimeError):
             obj_1.load_javascript_contents()
-        except RuntimeError:
-            pass

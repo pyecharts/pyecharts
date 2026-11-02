@@ -11,7 +11,7 @@ FAKE_API_KEY = "fake_application_key"
 class TestException(unittest.TestCase):
 
     def test_geo_catch_nonexistent_coord_exception(self):
-        try:
+        with self.assertRaises(NonexistentCoordinatesException) as cm:
             (
                 Geo()
                 .add_schema(maptype="china")
@@ -19,9 +19,7 @@ class TestException(unittest.TestCase):
                 .set_series_opts(label_opts=opts.LabelOpts(is_show=False))
                 .set_global_opts(visualmap_opts=opts.VisualMapOpts())
             )
-        except NonexistentCoordinatesException as err:
-            self.assertEqual(type(err), NonexistentCoordinatesException)
-            assert err.__str__() != ""
+        assert cm.exception.__str__() != ""
 
     def test_geo_ignore_nonexistent_coord_exception(self):
         (
@@ -33,7 +31,7 @@ class TestException(unittest.TestCase):
         )
 
     def test_bmap_catch_nonexistent_coord_exception(self):
-        try:
+        with self.assertRaises(NonexistentCoordinatesException):
             (
                 BMap()
                 .add_schema(baidu_ak=FAKE_API_KEY, center=[-0.118092, 51.509865])
@@ -43,11 +41,9 @@ class TestException(unittest.TestCase):
                     label_opts=opts.LabelOpts(formatter="{b}"),
                 )
             )
-        except NonexistentCoordinatesException as err:
-            self.assertEqual(type(err), NonexistentCoordinatesException)
 
     def test_amap_catch_nonexistent_coord_exception(self):
-        try:
+        with self.assertRaises(NonexistentCoordinatesException):
             (
                 AMap()
                 .add_schema(amap_ak=FAKE_API_KEY, center=[-0.118092, 51.509865])
@@ -57,11 +53,9 @@ class TestException(unittest.TestCase):
                     label_opts=opts.LabelOpts(formatter="{b}"),
                 )
             )
-        except NonexistentCoordinatesException as err:
-            self.assertEqual(type(err), NonexistentCoordinatesException)
 
     def test_lmap_catch_nonexistent_coord_exception(self):
-        try:
+        with self.assertRaises(NonexistentCoordinatesException):
             (
                 LMap()
                 .add_schema(center=[-0.118092, 51.509865])
@@ -71,11 +65,9 @@ class TestException(unittest.TestCase):
                     label_opts=opts.LabelOpts(formatter="{b}"),
                 )
             )
-        except NonexistentCoordinatesException as err:
-            self.assertEqual(type(err), NonexistentCoordinatesException)
 
     def test_gmap_catch_nonexistent_coord_exception(self):
-        try:
+        with self.assertRaises(NonexistentCoordinatesException):
             (
                 GMap()
                 .add_schema(gmap_ak=FAKE_API_KEY, center=[-0.118092, 51.509865])
@@ -85,8 +77,6 @@ class TestException(unittest.TestCase):
                     label_opts=opts.LabelOpts(formatter="{b}"),
                 )
             )
-        except NonexistentCoordinatesException as err:
-            self.assertEqual(type(err), NonexistentCoordinatesException)
 
     def test_bmap_ignore_nonexistent_coord_exception(self):
         (

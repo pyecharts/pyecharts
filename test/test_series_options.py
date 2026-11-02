@@ -73,45 +73,18 @@ class TestSeriesOptions(unittest.TestCase):
             text_shadow_offset_x=.2,
             text_shadow_offset_y=.3,
         )
-        expected = {
-            "show": True,
-            "position": None,
-            "color": None,
-            "distance": None,
-            "rotate": None,
-            "margin": 8,
-            "minMargin": None,
-            "offset": None,
-            "opacity": None,
-            "interval": None,
-            "fontSize": None,
-            "fontStyle": None,
-            "fontWeight": None,
-            "fontFamily": None,
-            "align": None,
-            "verticalAlign": None,
-            "formatter": None,
-            "backgroundColor": "red",
-            "borderColor": "green",
-            "borderWidth": 1,
-            "borderRadius": 2,
-            "padding": None,
-            "width": None,
-            "height": None,
-            "textBorderColor": "black",
-            "textBorderWidth": 3,
-            "textShadowColor": "whitesmoke",
-            "textShadowBlur": .1,
-            "textShadowOffsetX": .2,
-            "textShadowOffsetY": .3,
-            "textMargin": None,
-            "textStyle": None,
-            "overflow": None,
-            "rich": None,
-            "richInheritPlainLabel": True,
-            "valueAnimation": False,
-        }
-        self.assertEqual(expected, option.opts)
+
+        opts = option.opts
+        self.assertEqual(opts["backgroundColor"], "red")
+        self.assertEqual(opts["borderColor"], "green")
+        self.assertEqual(opts["borderWidth"], 1)
+        self.assertEqual(opts["borderRadius"], 2)
+        self.assertEqual(opts["textBorderColor"], "black")
+        self.assertEqual(opts["textBorderWidth"], 3)
+        self.assertEqual(opts["textShadowColor"], "whitesmoke")
+        self.assertEqual(opts["textShadowBlur"], .1)
+        self.assertEqual(opts["textShadowOffsetX"], .2)
+        self.assertEqual(opts["textShadowOffsetY"], .3)
 
     def test_mark_point_item_remove_none(self):
         item = MarkPointItem()

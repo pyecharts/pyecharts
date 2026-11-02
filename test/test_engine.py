@@ -53,10 +53,8 @@ class TestEngine(unittest.TestCase):
         with patch("collections.abc", side_effect=ImportError):
             import collections
 
-            try:
+            with self.assertRaises((AttributeError, AssertionError)):
                 assert collections.Iterable.__module__ == "collections"
-            except (AttributeError, AssertionError):
-                pass
 
     def test_import_iterable_old_location(self):
         with patch.dict("sys.modules", {"collections.abc": object()}):
@@ -67,14 +65,8 @@ class TestEngine(unittest.TestCase):
 
     def test_iterable_import(self):
         # 尝试从 collections.abc 导入 Iterable
-        try:
-            from collections.abc import Iterable
-            self.assertTrue(True)  # 如果成功导入，测试通过
-        except ImportError:
-            # 如果从 collections.abc 导入失败，则尝试从 collections 导入
-            try:
-                from collections import Iterable
-                self.assertTrue(True)  # 如果这里成功导入，测试通过
-            except ImportError:
-                # 如果两者都失败，则测试不通过
-                self.fail("Failed to import Iterable")
+        import collections.abc
+
+        self.assertTrue(
+            hasattr(collections.abc, "Iterable"), "Failed to import Iterable"
+        )

@@ -46,17 +46,15 @@ class TestCustom(unittest.TestCase):
 
     def test_custom_echarts_x_with_error(self):
         c = Custom()
-        try:
+        with self.assertRaises(ValueError):
             c.register_echarts_x(chart_type=ChartType.LINE)
-        except ValueError:
-            pass
 
+    
     @patch("pyecharts.render.engine.write_utf8_html_file")
     def test_custom_echarts_x(self, fake_writer):
         for chart_type in [
             ChartType.VIOLIN,
             ChartType.STAGE,
-            ChartType.DOUGHNUT,
             ChartType.CONTOUR,
             ChartType.BAR_RANGE,
             ChartType.LINE_RANGE,
@@ -66,9 +64,20 @@ class TestCustom(unittest.TestCase):
                 .register_echarts_x(chart_type=chart_type)
                 .add(series_name="test", render_item=chart_type)
             )
-            if chart_type != ChartType.DOUGHNUT:
-                c.add_xaxis(xaxis_data=["a", "b", "c"])
+            c.add_xaxis(xaxis_data=["a", "b", "c"])
             c.render()
             _, content = fake_writer.call_args[0]
             self.assertIn("renderItem", content)
             self.assertIn("xAxis", content)
+
+    @patch("pyecharts.render.engine.write_utf8_html_file")
+    def test_custom_echarts_x_doughnut(self, fake_writer):
+        c = (
+            Custom()
+            .register_echarts_x(chart_type=ChartType.DOUGHNUT)
+            .add(series_name="test", render_item=ChartType.DOUGHNUT)
+        )
+        c.render()
+        _, content = fake_writer.call_args[0]
+        self.assertIn("renderItem", content)
+        self.assertIn("xAxis", content)

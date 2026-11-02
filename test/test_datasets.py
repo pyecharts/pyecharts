@@ -51,10 +51,9 @@ class TestDatasets(unittest.TestCase):
     #         assert_in(type(err), [urllib.error.HTTPError, ConnectionRefusedError])
 
     def test_register_url_error(self):
-        try:
+        with self.assertRaises(ValueError):
             register_url("error_asset_url")
-        except ValueError as err:
-            self.assertIn(type(err), [ValueError])
+        
 
     def test_fuzzy_search_dict(self):
         fd = FuzzyDict()

@@ -166,6 +166,10 @@ class TestTimeLine(unittest.TestCase):
             type(self.tl.options.get("baseOption").get("timeline").get("graphic")[0]),
         )
 
+    def _assert_has_axis_and_color(self, option):
+        assert "xAxis" in option
+        assert "color" in option
+
     def test_page_with_multi_axis(self):
         tl = Timeline()
         for i in range(2015, 2020):
@@ -177,17 +181,28 @@ class TestTimeLine(unittest.TestCase):
             )
             tl.add(bar, "{}年".format(i))
 
-        for t in tl.options.get("options"):
-            assert "xAxis" in t
-            assert "color" in t
+        options = tl.options.get("options")
+        self.assertEqual(5, len(options))
+        self._assert_has_axis_and_color(options[0])
+        self._assert_has_axis_and_color(options[1])
+        self._assert_has_axis_and_color(options[2])
+        self._assert_has_axis_and_color(options[3])
+        self._assert_has_axis_and_color(options[4])
 
+    def _assert_has_3d_axes(self, option):
+        assert "xAxis3D" in option
+        assert "yAxis3D" in option
+        assert "zAxis3D" in option
+        
     def test_timeline_with_3d_chart(self):
         tl = Timeline()
         for i in range(2, 5):
             bar_3d = get_bar_3d_chart(i=i)
             tl.add(bar_3d, "{}".format(i))
 
-        for t in tl.options.get("options"):
-            assert "xAxis3D" in t
-            assert "yAxis3D" in t
-            assert "zAxis3D" in t
+        options = tl.options.get("options")
+        self.assertEqual(3, len(options))
+        self._assert_has_3d_axes(options[0])
+        self._assert_has_3d_axes(options[1])
+        self._assert_has_3d_axes(options[2])
+            
